@@ -1,0 +1,6 @@
+ls:
+  packages/*:
+    .ts: camelCase
+    .d.ts: camelCase
+    .spec.ts: camelCase
+    .vue: PascalCase

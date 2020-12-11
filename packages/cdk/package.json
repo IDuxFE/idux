@@ -1,0 +1,37 @@
+{
+  "name": "@idux/cdk",
+  "version": "0.0.0",
+  "description": "A UI Component Development Kit for Vue 3.x",
+  "author": "IduxFE<idux.feteam@gmail.com>",
+  "license": "MIT",
+  "scripts": {},
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "unpkg": "dist/index.min.js",
+  "typings": "dist/index.d.ts",
+  "style": "dist/theme/index.css",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue 3.x",
+    "frontend",
+    "framework",
+    "ui",
+    "cdk",
+    "component",
+    "components",
+    "development",
+    "kit"
+  ],
+  "homepage": "https://github.com/IduxFE/components#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IduxFE/components"
+  },
+  "bugs": {
+    "url": "https://github.com/IduxFE/components/issues"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}

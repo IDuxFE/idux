@@ -1,0 +1,16 @@
+{
+  "packages": ["packages/{components,cdk,pro}/*"],
+  "version": "0.0.0",
+  "command": {
+    "publish": {
+      "allowBranch": ["main", "next"],
+      "ignoreChanges": ["ignored-file", "*.md"],
+      "message": "docs(release): publish %s"
+    },
+    "bootstrap": {
+      "ignore": "",
+      "hoist": true,
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  }
+}

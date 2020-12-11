@@ -1,0 +1,109 @@
+{
+  "name": "idux",
+  "version": "0.0.0-NOT-USED",
+  "description": "A UI Component Library for Vue 3.x",
+  "private": true,
+  "scripts": {
+    "start": "gulp start:dev",
+    "cz": "git-cz",
+    "gen": "ts-node --project scripts/tsconfig.json scripts/gen/index.ts",
+    "postinstall": "lerna bootstrap",
+    "test": "jest",
+    "lint": "npm run eslint && npm run stylelint && npm run markdownlint",
+    "lint-fix": "npm run eslint-fix && npm run stylelint-fix && npm run markdownlint-fix",
+    "eslint": "eslint ./packages --ext .vue,.js,.ts",
+    "eslint-fix": "eslint --fix ./packages  --ext .vue,.js,.ts",
+    "stylelint": "stylelint \"./packages/{cdk,components}/**/*.less\" --syntax less",
+    "stylelint-fix": "stylelint --fix \"./packages/{cdk,components}/**/*.less\" --syntax less",
+    "markdownlint": "markdownlint \"./packages/{cdk,components}/**/*.md\"",
+    "markdownlint-fix": "markdownlint --fix \"./packages/{cdk,components}/**/*.md\"",
+    "ls-lint": "ls-lint"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.0",
+    "@babel/preset-typescript": "^7.12.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-angular": "^11.0.0",
+    "@ls-lint/ls-lint": "^1.9.0",
+    "@types/detect-port": "^1.3.0",
+    "@types/fs-extra": "^9.0.0",
+    "@types/gulp": "^4.0.0",
+    "@types/jest": "^26.0.0",
+    "@types/lodash": "^4.14.0",
+    "@types/marked": "^1.2.1",
+    "@types/parse5": "^5.0.3",
+    "@types/prismjs": "^1.16.2",
+    "@types/sanitize-html": "^1.27.0",
+    "@types/yaml-front-matter": "^4.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.0",
+    "@typescript-eslint/parser": "^4.8.0",
+    "@vue/babel-plugin-jsx": "^1.0.0-rc.3",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^2.0.0-beta.12",
+    "babel-jest": "^26.6.0",
+    "chalk": "^4.1.0",
+    "commitizen": "^4.2.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "detect-port": "^1.3.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-markdown": "^2.0.0-rc.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^7.1.0",
+    "fs-extra": "^9.0.0",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "husky": "^4.3.0",
+    "jest": "^26.6.0",
+    "lerna": "^3.22.0",
+    "less": "^3.12.2",
+    "lint-staged": "^10.5.0",
+    "lodash": "^4.17.0",
+    "markdownlint-cli": "^0.25.0",
+    "marked": "^1.2.5",
+    "parse5": "^6.0.1",
+    "prettier": "^2.0.0",
+    "prismjs": "^1.22.0",
+    "remark": "^13.0.0",
+    "resolve-bin": "^0.4.0",
+    "rimraf": "^3.0.0",
+    "sanitize-html": "^2.2.0",
+    "stylelint": "^13.0.0",
+    "stylelint-config-prettier": "^8.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "ts-jest": "^26.4.0",
+    "ts-node": "^9.1.0",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.0",
+    "vite": "^1.0.0-rc.13",
+    "vue": "^3.0.0",
+    "vue-jest": "^5.0.0-alpha.7",
+    "vue-router": "^4.0.1",
+    "yaml-front-matter": "^4.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "ls-lint && lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix"
+    ],
+    "*.less": [
+      "stylelint --fix"
+    ],
+    "*.md": [
+      "markdownlint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
