@@ -27,7 +27,7 @@
 - [如何为开源做贡献](https://opensource.guide/zh-cn/how-to-contribute/)
 - [第一次参与开源](https://github.com/firstcontributions/first-contributions/blob/master/translations/README.chs.md)
 
-为了能帮助你开始你的第一次尝试，我们用 [Good First Issue](https://github.com/IduxFE/components/labels/Good%20First%20Issue) 标记了一些比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
+为了能帮助你开始你的第一次尝试，我们用 [Good First Issue](https://github.com/IduxFE/components/labels/good%20first%20issue) 标记了一些比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
 
 如果你打算开始处理一个 issue，请先检查一下 issue 下面的留言以确保没有别人正在处理这个 issue。如果当前没有人在处理的话你可以留言告知其他人你将会处理这个 issue，以免别人重复劳动。
 
@@ -67,6 +67,10 @@
   - `npm run lint` 检查代码风格(tips: 使用 `npm run lint-fix` 可以修复简单格式错误)。
   - `npm run test` 运行单元测试(tips: 修改 `jest.config.js` 的 `root` 配置可以调整单元测试范围)。
   - `npm run gen name` 快速创建一个 `name` 组件(tips: 使用 `npm run gen name cdk` 将组件创建在 `cdk` 目录下)。
+
+## 代码风格
+
+我们使用了 `eslint`, `stylelint`, `markdownlint` 以及 `ls-lint` 来保证整体的代码风格一致。并且在 commit hooks 中配置了自动格式化和 lint, 只要提交通过即可。
 
 ## <a name="commit"></a> Commit 规范
 
