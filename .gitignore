@@ -1,5 +1,6 @@
 node_modules
 coverage
+junit.xml
 temp
 output
 /site/
