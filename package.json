@@ -6,7 +6,7 @@
   "scripts": {
     "start": "gulp start:dev",
     "cz": "git-cz",
-    "gen": "ts-node --project scripts/tsconfig.json scripts/gen/index.ts",
+    "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
     "postinstall": "lerna bootstrap",
     "test": "jest",
     "lint": "npm run eslint && npm run stylelint && npm run markdownlint",
