@@ -29,5 +29,5 @@
     }
   },
 
-  "exclude": ["node_modules", "output", "**/*.spec.ts"]
+  "exclude": ["node_modules", "output"]
 }
