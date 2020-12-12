@@ -99,10 +99,10 @@ describe('use${compName}.ts', () => {
 export function getDocsZhTemplate(compName: string, moduleName: string): string {
   return `---
 category: ${moduleName}
-type: 
+type:
 title: ${compName}
-subtitle: 
-cover: 
+subtitle:
+cover:
 ---
 
 
