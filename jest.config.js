@@ -29,6 +29,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   collectCoverage: true,
+  coverageReporters: ['json', 'lcov', 'text', 'cobertura'],
   coverageThreshold: {
     global: {
       branches: 85,
