@@ -1,0 +1,60 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: env
+    jobs:
+      - job: Nodes
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '12.x'
+            displayName: 'Install Node.js'
+
+  - stage: lint
+    jobs:
+      - job: Packages
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+          - script: npm run lint
+    dependsOn: env
+
+  - stage: test
+    jobs:
+      - job: Packages
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+          - script: |
+              npm run test
+              npm run codecov
+
+          - task: PublishCodeCoverageResults@1
+            displayName: 'publish code coverage results'
+            condition: succeededOrFailed()
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+              reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+              failIfCoverageEmpty: true
+
+          - task: PublishTestResults@2
+            displayName: 'publish test results'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFiles: junit.xml
+              mergeTestResults: true
+              testRunTitle: 'Jest Unit Tests'
+              failTaskOnFailedTests: true
+    dependsOn: env
