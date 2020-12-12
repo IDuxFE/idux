@@ -24,7 +24,14 @@ function getScopesRule() {
     return [2, 'always', scopes]
   }
   const { scope, type } = parsed
-  if (scope && !scopes.includes(scope) && type !== 'release' && !/cdk:.+/.test(scope) && !/component:.+/.test(scope)) {
+  if (
+    scope &&
+    !scopes.includes(scope) &&
+    type !== 'release' &&
+    !/cdk:.+/.test(scope) &&
+    !/comp:.+/.test(scope) &&
+    !/pro:.+/.test(scope)
+  ) {
     return [2, 'always', scopes]
   } else {
     return [2, 'always', []]
