@@ -8,7 +8,7 @@
     "cz": "git-cz",
     "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
     "postinstall": "lerna bootstrap",
-    "codecov": "codecov",
+    "codecov": "codecov -t",
     "test": "jest",
     "lint": "npm run eslint && npm run stylelint && npm run markdownlint",
     "lint-fix": "npm run eslint-fix && npm run stylelint-fix && npm run markdownlint-fix",

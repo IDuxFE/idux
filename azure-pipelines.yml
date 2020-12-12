@@ -38,7 +38,7 @@ stages:
               command: 'install'
           - script: |
               npm run test
-              npm run codecov
+              npm run codecov $(CODECOV_TOKEN)
 
           - task: PublishCodeCoverageResults@1
             displayName: 'publish code coverage results'
