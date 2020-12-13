@@ -1,0 +1,16 @@
+<code-box 
+  title="{{title}}" 
+  packageName="{{packageName}}" 
+  componentName="{{componentName}}" 
+  demoKey="{{demoKey}}" 
+  >
+  <template #demo>
+    <demo-{{demoKey}}></demo-{{demoKey}}>
+  </template>
+  <template #intro>
+    {{docs}}
+  </template>
+  <template #highlightCode>
+    {{highlightCode}}
+  </template>
+</code-box>

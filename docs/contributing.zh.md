@@ -77,7 +77,7 @@ title: 贡献指南
 
 我们使用了 `eslint`, `stylelint`, `markdownlint` 以及 `ls-lint` 来保证整体的代码风格一致。并且在 commit hooks 中配置了自动格式化和 lint, 只要提交通过即可。
 
-## <a name="commit"></a> Commit 规范
+## Commit 规范
 
 对于如何提交 git commit message，我们有非常精确的规则。我们希望所有的 commit message 更具可读性，这样在查看项目历史记录会变得容易，同时我们使用 commit message 生成 Changelog.
 
