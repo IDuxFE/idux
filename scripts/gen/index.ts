@@ -68,7 +68,7 @@ if (moduleName === 'components') {
 }
 
 const docsZhTemplate = getDocsZhTemplate(upperFirstComponentName, moduleName)
-writeFileSync(`${dirname}/docs/index.zh-CN.md`, docsZhTemplate)
+writeFileSync(`${dirname}/docs/index.zh.md`, docsZhTemplate)
 
 const domeTemplate = getDomeTemplate(upperFirstComponentName, moduleName)
 writeFileSync(`${dirname}/demo/basic.md`, domeTemplate)

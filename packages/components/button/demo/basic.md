@@ -1,10 +1,10 @@
 ---
 order: 0
 title:
-  zh-CN: 按钮类型
+  zh: 按钮类型
 ---
 
-## zh-CN
+## zh
 
 按钮有 5 种类型：主按钮、默认按钮、虚线按钮和链接按钮。
 
@@ -12,7 +12,7 @@ title:
 
 ```html
 <template>
-  <ix-button mode="primary">Primary Button</ix-button>
+  <ix-button mode="primary" @click="console.log($event)">Primary Button</ix-button>
   <ix-button>Default Button</ix-button>
   <ix-button mode="dashed">Dashed Button</ix-button>
   <ix-button mode="text">Text Button</ix-button>

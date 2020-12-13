@@ -124,13 +124,13 @@ export function getDomeTemplate(compName: string, moduleName: string): string {
   return `---
 order: 0
 title:
-  zh-CN: 基本
-  en-US: Basic
+  zh: 基本
+  en: Basic
 ---
 
 
 
-## zh-CN
+## zh
 
 
 
