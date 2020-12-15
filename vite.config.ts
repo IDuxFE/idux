@@ -1,7 +1,8 @@
 import { UserConfig } from 'vite'
 
 const config: UserConfig = {
-  entry: '/site/docs/index.html',
+  entry: './site/docs/index.html', // not work
+  base: './site/docs/', // not work
   resolvers: [
     {
       alias(path: string): string {

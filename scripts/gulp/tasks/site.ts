@@ -8,10 +8,10 @@ import detectPort from 'detect-port'
 
 import { generateSite } from '../site/generateSite'
 
-const markdownGlob = join(buildConfig.root, `**/+(docs|demo)/*.md`)
+const markdownGlob = join(buildConfig.packageRoot, `**/+(docs|demo)/*.md`)
 
 /** Parse demos and docs to site directory. */
-task('init:site', done => {
+task('site:init', done => {
   generateSite('init')
   done()
 })
@@ -20,7 +20,7 @@ task('init:site', done => {
  * Development app watch task,
  * to ensures the demos and docs have changes are rebuild.
  */
-task('watch:site', () => {
+task('site:watch', () => {
   // Globs accepts the Unix-style path separators only
   const globs = [markdownGlob].map(p => p.replace(/\\/g, '/'))
   watch(globs).on(
@@ -38,12 +38,12 @@ task('watch:site', () => {
   )
 })
 
-/** Run `ng serve` */
-task('serve:site', done => {
+/** Run `vite` */
+task('site:serve', done => {
   detectPort(3000).then((port: number) => {
     execNodeTask('vite', 'vite', ['--port', port === 3000 ? '3000' : '0', '--open'])(done)
   })
 })
 
 /** Init site directory, and start watch and vite */
-task('start:site', series('init:site', parallel('watch:site', 'serve:site')))
+task('site:start', series('site:init', parallel('site:watch', 'site:serve')))

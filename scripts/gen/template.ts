@@ -6,12 +6,13 @@ export function getLessTemplate(compName: string): string {
     
 .@{${compName}-prefix} {
   color: #fff;
-}`
+}
+`
 }
 
 export function getTypesTemplate(compName: string): string {
   return `export interface ${compName}Props {
-
+ // please add readonly for every prop
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -56,12 +57,12 @@ import ${compName} from '../src/${compName}.vue'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
-  let buttonMount: (
+  let ${compName}Mount: (
     options?: MountingOptions<Partial<${compName}Props>>,
   ) => VueWrapper<InstanceType<DefineComponent<${compName}Props>>>
 
   beforeEach(() => {
-    buttonMount = (options = {}) => {
+    ${compName}Mount = (options = {}) => {
       return mount<${compName}Props>(${compName}, {
         ...options,
       })
@@ -124,17 +125,15 @@ export function getDomeTemplate(compName: string, moduleName: string): string {
   return `---
 order: 0
 title:
-  zh: 基本
-  en: Basic
+  zh: 基本使用
+  en: Basic usage
 ---
-
-
 
 ## zh
 
 
 
-## en-US
+## en
 
 
   

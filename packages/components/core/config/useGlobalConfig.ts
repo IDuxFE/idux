@@ -1,15 +1,18 @@
 import { inject, shallowReactive, provide, readonly } from 'vue'
 import type { DeepReadonly } from 'vue'
-import type { ButtonConfig, GlobalConfig, GlobalConfigKey } from './types'
+import type { ButtonConfig, GlobalConfig, GlobalConfigKey, IconConfig } from './types'
 
 const button: ButtonConfig = shallowReactive({ mode: 'default', size: 'medium' })
+const icon: IconConfig = shallowReactive({})
 
 const defaultConfig: GlobalConfig = {
   button,
+  icon,
 }
 
 const globalConfigToken: Record<GlobalConfigKey, symbol> = {
   button: Symbol(),
+  icon: Symbol(),
 }
 
 /**
@@ -22,10 +25,8 @@ export function useGlobalConfig<T extends GlobalConfigKey>(
   config: Partial<GlobalConfig[T]>,
 ): GlobalConfig[T]
 export function useGlobalConfig<T extends GlobalConfigKey>(compName: T): DeepReadonly<GlobalConfig[T]>
-export function useGlobalConfig<T extends GlobalConfigKey>(
-  compName: T,
-  config?: Partial<GlobalConfig[T]>,
-): GlobalConfig[T] | DeepReadonly<GlobalConfig[T]> {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function useGlobalConfig<T extends GlobalConfigKey>(compName: T, config?: Partial<GlobalConfig[T]>) {
   const token = globalConfigToken[compName]
   const parentConfig = inject(token, defaultConfig[compName])
 

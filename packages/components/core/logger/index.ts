@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isDevMode } from '../utils/isDevMode'
-
-const prefix = '[@idux/components]:'
+import { IDUX_COMPONENTS_PREFIX } from '../constant'
+import { isDevMode } from '../utils'
 
 const logWrapper = (args: any[], log: (...args: any[]) => void) => {
   if (isDevMode) {
-    log(prefix, ...args)
+    log(IDUX_COMPONENTS_PREFIX, ...args)
   }
 }
 

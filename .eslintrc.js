@@ -20,9 +20,9 @@ module.exports = {
     },
   },
   rules: {
+    // common
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-
     'eol-last': 'error',
     'no-trailing-spaces': 'error',
     'comma-style': ['error', 'last'],
@@ -34,6 +34,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
 
+    // ts
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
@@ -48,8 +49,10 @@ module.exports = {
       },
     ],
 
-    'vue/max-attributes-per-line': 'off',
+    // vue
     'vue/html-closing-bracket-spacing': 'error',
+
+    'vue/max-attributes-per-line': 'off',
     'vue/require-default-prop': 'off',
     'vue/attribute-hyphenation': 'off',
   },
