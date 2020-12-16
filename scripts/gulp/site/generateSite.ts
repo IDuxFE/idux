@@ -12,7 +12,7 @@ import { buildConfig } from '../buildConfig'
 import { withoutSuffix } from './utils/tools'
 import { DemoInfo, DocsLanguage, Meta } from './utils/types'
 
-const { siteDir, root, docsDir } = buildConfig
+const { siteDir, packageRoot, docsDir } = buildConfig
 const siteOutputDirname = `${siteDir}/docs/src`
 
 function initDir(target: string): void {
@@ -34,12 +34,12 @@ export function generateSite(target: string, targetName?: string): void {
   const docsMetaMap: Record<string, Record<string, Meta>> = {}
 
   const filterComponentName = ['style', 'core', 'locale', 'i18n', 'version']
-  readdirSync(root).forEach(packageName => {
+  readdirSync(packageRoot).forEach(packageName => {
     if (isSyncSpecific && packageName !== target) {
       return
     }
     docsMetaMap[packageName] = {}
-    const packageDirname = join(root, packageName)
+    const packageDirname = join(packageRoot, packageName)
     readdirSync(packageDirname).forEach(componentName => {
       if (filterComponentName.includes(componentName) || (isSyncSpecific && componentName !== targetName)) {
         return

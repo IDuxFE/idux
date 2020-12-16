@@ -2,7 +2,7 @@ import { join } from 'path'
 
 export interface BuildConfig {
   version: string
-  root: string
+  packageRoot: string
   docsDir: string
   outputDir: string
   publishDir: string
@@ -11,16 +11,17 @@ export interface BuildConfig {
 }
 
 const packageRoot = join(__dirname, '../../packages')
-const output = join(__dirname, '../../output')
-const docs = join(__dirname, '../../docs')
-const site = join(__dirname, '../../site')
+
+const docsDir = join(__dirname, '../../docs')
+const siteDir = join(__dirname, '../../site')
+const outputRoot = join(__dirname, '../../output')
 
 export const buildConfig: BuildConfig = {
   version: '0.0.1',
-  root: packageRoot,
-  outputDir: join(output, 'dist'),
-  publishDir: join(output, 'publish'),
-  libDir: join(output, 'lib'),
-  docsDir: docs,
-  siteDir: site,
+  packageRoot,
+  docsDir,
+  siteDir,
+  outputDir: join(outputRoot, 'dist'),
+  publishDir: join(outputRoot, 'publish'),
+  libDir: join(outputRoot, 'lib'),
 }
