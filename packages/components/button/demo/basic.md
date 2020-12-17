@@ -12,7 +12,7 @@ title:
 
 ```html
 <template>
-  <ix-button mode="primary" @click="console.log($event)">Primary Button</ix-button>
+  <ix-button mode="primary">Primary Button</ix-button>
   <ix-button>Default Button</ix-button>
   <ix-button mode="dashed">Dashed Button</ix-button>
   <ix-button mode="text">Text Button</ix-button>

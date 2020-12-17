@@ -1,8 +1,8 @@
 ---
 category: components
-type:
+type: 通用
 title: Icon
-subtitle:
+subtitle: 图标
 cover:
 ---
 
@@ -18,11 +18,11 @@ cover:
 
 | 参数 | 说明 | 类型 | 全局配置 |
 | --- | --- | --- | --- |
-| `[name]`| 图标名称 | `string` |
-| `[rotate]` | 图标旋转角度, 为 `true` 时会循环旋转 | `boolean|number|string` | - |
-| `[iconfont]` | 图标是否来自 `iconfont` | `boolean` | - |
+| `name`| 图标名称 | `string` |
+| `rotate` | 图标旋转角度, 为 `true` 时会循环旋转 | `boolean|number|string` | - |
+| `iconfont` | 图标是否来自 `iconfont` | `boolean` | - |
 
-### [helper 函数]
+### [helper]
 
 | 方法 | 说明 | 参数 |
 | --- | --- | --- |
