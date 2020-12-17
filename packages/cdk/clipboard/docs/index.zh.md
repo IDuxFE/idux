@@ -1,5 +1,5 @@
 ---
-category: Cdk
+category: cdk
 type: 
 title: Clipboard
 subtitle: 剪贴板
