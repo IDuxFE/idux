@@ -1,9 +1,9 @@
 import { installComponent } from '@idux/components/core/utils'
-import Button from './src/Button.vue'
-import ButtonGroup from './src/ButtonGroup.vue'
+import IxButton from './src/Button.vue'
+import IxButtonGroup from './src/ButtonGroup.vue'
 
-Button.install = installComponent(Button)
-ButtonGroup.install = installComponent(ButtonGroup)
+IxButton.install = installComponent(IxButton)
+IxButtonGroup.install = installComponent(IxButtonGroup)
 
-export { Button, ButtonGroup }
+export { IxButton, IxButtonGroup }
 export type { ButtonComponent, ButtonGroupComponent } from './src/types'

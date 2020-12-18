@@ -12,11 +12,11 @@ export function getLessTemplate(compName: string): string {
 
 export function getTypesTemplate(compName: string): string {
   return `export interface ${compName}Props {
- // please add readonly for every prop
+  // please add readonly for every prop
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ${compName}Component extends ${compName}Props {}
+export interface Ix${compName}Component extends ${compName}Props {}
 `
 }
 
@@ -41,19 +41,19 @@ export default defineComponent({
 
 export function getIndexTemplate(compName: string): string {
   return `import { installComponent } from '@idux/components/core/utils'
-import ${compName} from './src/${compName}.vue'
+import Ix${compName} from './src/${compName}.vue'
 
-${compName}.install = installComponent(${compName})
+Ix${compName}.install = installComponent(Ix${compName})
 
-export { ${compName} }
-export type { ${compName}Component } from './src/types'
+export { Ix${compName} }
+export type { Ix${compName}Component } from './src/types'
 `
 }
 
 export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
-import ${compName} from '../src/${compName}.vue'
+import Ix${compName} from '../src/${compName}.vue'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
@@ -63,14 +63,14 @@ describe('${compName}.vue', () => {
 
   beforeEach(() => {
     ${compName}Mount = (options = {}) => {
-      return mount<${compName}Props>(${compName}, {
+      return mount<${compName}Props>(Ix${compName}, {
         ...options,
       })
     }
   })
 
   test('render work', () => {
-    const wrapper = buttonMount()
+    const wrapper = ${compName}Mount()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
@@ -114,9 +114,9 @@ cover:
 
 ## API
 
-| 属性 | 说明 | 类型  | 全局配置 |
-| --- | --- | --- | --- |
-| - | - | - | - |
+| 属性 | 说明 | 类型 | 默认值 |  | 全局配置 |
+| --- | --- | --- | --- | --- |
+| - | - | - | - | - |
 
 `
 }
