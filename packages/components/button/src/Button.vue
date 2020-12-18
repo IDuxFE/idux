@@ -1,7 +1,7 @@
 <template>
   <component :is="tag" class="ix-button" :class="classes" :disabled="disabled || loading">
-    <icon v-if="loading" name="loading" />
-    <icon v-else-if="icon" :name="icon" />
+    <ix-icon v-if="loading" name="loading" />
+    <ix-icon v-else-if="icon" :name="icon" />
     <slot></slot>
   </component>
 </template>
@@ -15,11 +15,11 @@ import type { ButtonGroupProps, ButtonProps, ButtonShape } from './types'
 import { computed, defineComponent, inject } from 'vue'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { buttonGroupInjectionKey } from './button'
-import { Icon } from '@idux/components/icon'
+import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
   name: 'IxButton',
-  components: { Icon },
+  components: { IxIcon },
   props: {
     mode: String as PropType<ButtonMode>,
     danger: Boolean,

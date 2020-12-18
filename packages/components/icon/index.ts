@@ -1,9 +1,9 @@
 import { installComponent } from '@idux/components/core/utils'
-import Icon from './src/Icon.vue'
+import IxIcon from './src/Icon.vue'
 
-Icon.install = installComponent(Icon)
+IxIcon.install = installComponent(IxIcon)
 
-export { Icon }
+export { IxIcon }
 export type { IconComponent, IconDefinition } from './src/types'
 export * from './src/helper'
 export * from './src/definitions'

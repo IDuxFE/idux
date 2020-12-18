@@ -84,7 +84,6 @@ describe('Icon.vue', () => {
       'https://at.alicdn.com/t/font_2269253_ogsttp6ftdp.js',
       'https://at.alicdn.com/t/font_2269256_s10i6xhg8l2.js',
     ])
-    jest.runAllTimers()
 
     const wrapper = IconMount({ props: { name: 'ix-icon-up', iconfont: true } })
     await flushPromises()
