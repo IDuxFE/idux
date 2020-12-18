@@ -20,22 +20,8 @@
       <div class="code-box-actions">
         <i @click="copyCode()">ICON</i>
         <span class="code-expand-icon" @click="changeExpanded(!expanded)">
-          <img
-            alt="expand code"
-            src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
-            :class="{
-              'code-expand-icon-show': expanded,
-              'code-expand-icon-hide': !expanded,
-            }"
-          />
-          <img
-            alt="expand code"
-            src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
-            :class="{
-              'code-expand-icon-show': !expanded,
-              'code-expand-icon-hide': expanded,
-            }"
-          />
+          <ix-icon :name="expanded ? 'left' : 'right'" />
+          <ix-icon :name="!expanded ? 'left' : 'right'" />
         </span>
       </div>
     </section>

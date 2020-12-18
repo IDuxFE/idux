@@ -1,6 +1,5 @@
 export function getLessTemplate(compName: string): string {
-  return `@import '../../style/themes/index';
-@import '../../style/mixins/index';
+  return `@import '../../style/default.less';
     
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
     
