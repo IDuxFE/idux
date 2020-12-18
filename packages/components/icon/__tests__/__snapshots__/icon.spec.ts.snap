@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon.vue render work 1`] = `"<i class=\\"ix-icon\\" role=\\"img\\" arialabel=\\"up\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 1024 1024\\" width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"up\\"><path d=\\"M265.827 617.592l224.22-224.219c12.497-12.497 32.758-12.497 45.255 0l222.871 222.871c12.496 12.496 12.496 32.758 0 45.254-12.497 12.497-32.758 12.497-45.255 0L521.725 470.306c-4.999-4.999-13.103-4.999-18.102 0L311.082 662.847c-12.497 12.497-32.758 12.497-45.255 0-12.496-12.497-12.496-32.758 0-45.255z\\"></path></svg></i>"`;
+exports[`Icon.vue render work 1`] = `"<i class=\\"ix-icon ix-icon-up\\" role=\\"img\\" arialabel=\\"up\\"><svg width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"up\\"></svg></i>"`;

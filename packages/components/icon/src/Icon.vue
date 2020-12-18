@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" ref="root" class="ix-icon" :class="{ 'ix-icon-spin': isSpin }" role="img" :ariaLabel="name">
+  <component :is="tag" ref="root" :class="classes" role="img" :ariaLabel="name">
     <slot></slot>
   </component>
 </template>
@@ -32,9 +32,8 @@ export default defineComponent({
       tag.value = attrs.onClick ? 'button' : 'i'
     })
 
-    const isSpin = computed(() => typeof props.rotate === 'boolean' && props.rotate)
-
-    return { root, tag, isSpin }
+    const classes = useClasses(props)
+    return { root, tag, classes }
   },
 })
 
@@ -76,5 +75,12 @@ function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void
   } else {
     svg.removeAttribute('style')
   }
+}
+
+const useClasses = (props: IconProps) => {
+  return computed(() => {
+    const isSpin = props.name === 'loading' || (typeof props.rotate === 'boolean' && props.rotate)
+    return ['ix-icon', props.name ? `ix-icon-${props.name}` : '', isSpin ? 'ix-icon-spin' : '']
+  })
 }
 </script>

@@ -21,5 +21,4 @@ export * from './core/config'
 export * from './core/types'
 
 export * from './button'
-export { IxIcon } from './icon'
-export type { IconComponent, IconDefinition } from './icon'
+export * from './icon'
