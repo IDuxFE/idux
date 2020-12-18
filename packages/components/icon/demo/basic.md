@@ -26,7 +26,8 @@ title:
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useGlobalConfig } from '@idux/components'
-import { addIconDefinitions, Down, fetchFromIconfont } from '@idux/components/icon'
+import { addIconDefinitions,  fetchFromIconfont } from '@idux/components'
+import { Down } from '@idux/components/icon/definitions'
 
 export default defineComponent({
   setup() {
@@ -36,7 +37,7 @@ export default defineComponent({
     // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
     const loadIconDynamically = (iconName: string) => {
       // TODO： fix with vite
-      return fetch(`packages/components/icon/src/svg/${iconName}.svg`).then(res => res.text())
+      return fetch(`packages/components/icon/svg/${iconName}.svg`).then(res => res.text())
     }
     useGlobalConfig('icon', { loadIconDynamically })
 

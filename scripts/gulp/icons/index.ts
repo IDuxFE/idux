@@ -4,17 +4,15 @@ import { join } from 'path'
 import SVGO from 'svgo'
 import { buildConfig } from '../buildConfig'
 
-const definitionTemplate = `import { IconDefinition } from '../types'
-
-export const {{definitionName}}: IconDefinition = {
+const definitionTemplate = `export const {{definitionName}} = {
   name: '{{name}}',
   svgString: '{{svgString}}',
 }
 `
 const { packageRoot } = buildConfig
 const assetsDirname = join(__dirname, 'assets')
-const outputAssetsDirname = join(packageRoot, 'components/icon/src/svg')
-const outputDefinitionsDirname = join(packageRoot, 'components/icon/src/definitions')
+const outputAssetsDirname = join(packageRoot, 'components/icon/svg')
+const outputDefinitionsDirname = join(packageRoot, 'components/icon/definitions')
 const outputDefinitionNames: string[] = []
 
 const options: SVGO.Options = {
@@ -34,7 +32,7 @@ export async function generateIcons(): Promise<void> {
   })
   await Promise.all(outputIcons)
 
-  const indexContent = outputDefinitionNames.map(item => `export * from './${item}'`).join('\n')
+  const indexContent = outputDefinitionNames.map(item => `export * from './${item}'`).join('\n') + '\n'
   writeFileSync(join(outputDefinitionsDirname, `index.ts`), indexContent, 'utf8')
 }
 

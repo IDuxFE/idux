@@ -11,7 +11,3 @@ output/
 package.json
 package-lock.json
 yarn.lock
-
-# temp icons
-packages/components/icon/src/svg
-packages/components/icon/src/definitions
