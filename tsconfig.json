@@ -4,6 +4,7 @@
     "outDir": "dist",
 
     "lib": ["ESNext", "DOM"],
+    "types": ["typings"],
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "preserve",
