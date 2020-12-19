@@ -26,7 +26,7 @@ export function generateDocs(outputDirname: string, docsMap: Record<string, Reco
     const zh = baseInfo(docsMap[name]['zh'], `docs/${name}.zh.md`)
     const template = generateTemplate(zh)
     const component = generateComponent(upperFirstCamelCase(name))
-    writeFileSync(join(docsPath, `Zh-CN.vue`), template['zh'] + component['zh'])
+    writeFileSync(join(docsPath, `Zh.vue`), template['zh'] + component['zh'])
   })
 }
 

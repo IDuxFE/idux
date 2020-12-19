@@ -109,7 +109,5 @@ export function createScriptElements(urls: string[], index = 0): void {
     }
     iconfontCache.add(currentUrl)
     document.body.appendChild(scriptElement)
-  } else {
-    createScriptElements(urls, index + 1)
   }
 }
