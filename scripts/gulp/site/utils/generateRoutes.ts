@@ -5,79 +5,27 @@ import { DocsLanguage, Meta } from './types'
 
 const templateRouter = readFileSync(resolve(__dirname, '../template/router.html'), { encoding: 'utf-8' })
 
-function generateLanguageData(
-  itemData: Meta,
-  packageName: string,
-  componentName: string,
-  language: DocsLanguage,
-  reverseMap: any,
-) {
-  const subtitle = itemData[language].subtitle || ''
-  const title = itemData[language].title
-  const type = itemData[language].type
-  const cover = itemData[language].cover
-  const experimental = itemData[language].experimental
-  const description = itemData[language].description
-  const content = {
-    label: title,
-    path: `${packageName}/${componentName}/${language}`,
-    zh: subtitle,
-    experimental: !!experimental,
-    cover,
-    description,
-  }
-  if (!reverseMap[type]) {
-    reverseMap[type] = { list: [content], language }
-  } else {
-    reverseMap[type].list.push(content)
-  }
-}
-
-function generateNav(docsMetaMap: Record<string, Record<string, Meta>>) {
-  const reverseMap = {}
-  const routes: string[] = []
-  Object.keys(docsMetaMap).forEach(packageName => {
-    Object.keys(docsMetaMap[packageName]).forEach(componentName => {
-      generateLanguageData(docsMetaMap[packageName][componentName], packageName, componentName, 'zh', reverseMap)
-      routes.push(
-        `  {path: '/${packageName}/${componentName}/zh', 'component': () => import('./${packageName}/${componentName}/Zh-CN.vue')},`,
-      )
-    })
-  })
-
-  return { reverseMap, routes: routes.join('\n') }
-}
-
 export function generateRoutes(
   outputDirname: string,
-  docsMetaMap: Record<string, Meta>,
   docsMeta: Record<string, Record<DocsLanguage, Meta>>,
+  demoMeta: Record<string, Record<string, Meta>>,
 ): void {
-  const intro = []
+  const routes: string[] = []
+  const { docs, routes: docsRoutes } = handleDocsMeta(docsMeta)
+  // writeFileSync(join(outputDirname, `docs.json`), JSON.stringify(docs, null, 2))
+  routes.push(...docsRoutes)
+
+  const { demoMap, routes: demoRoutes } = handleDemoMeta(demoMeta)
+  routes.push(...demoRoutes)
+
   const components = []
-  for (const key in docsMeta) {
-    const zhMeta = docsMeta[key]['zh']
-    intro.push({
-      path: `docs/${key}/zh`,
-      label: zhMeta.title,
-      language: 'zh',
-      order: zhMeta.order,
-      description: zhMeta.description,
-      experimental: !!zhMeta.experimental,
-    })
+  for (const name in demoMap.components) {
+    const { language, children } = demoMap.components[name]
+    components.push({ name, language, children })
   }
-  intro.sort((pre, next) => pre.order - next.order)
-  writeFileSync(join(outputDirname, `intros.json`), JSON.stringify(intro, null, 2))
-  const navData: any = generateNav(docsMetaMap)
-  const routes = navData.routes
-  for (const key in navData.reverseMap) {
-    components.push({
-      name: key,
-      language: navData.reverseMap[key].language,
-      children: navData.reverseMap[key].list.filter((item: { experimental: any }) => !item.experimental),
-      experimentalChildren: navData.reverseMap[key].list.filter((item: { experimental: any }) => item.experimental),
-    })
-  }
+
+  const cdk = demoMap.cdk
+  cdk.sort((pre, next) => pre.order - next.order)
 
   const sortMap: Record<string, number> = {
     General: 0,
@@ -98,8 +46,82 @@ export function generateRoutes(
   }
   components.sort((pre, next) => sortMap[pre.name] - sortMap[next.name])
   const fileContent = templateRouter
-    .replace(/{{intro}}/g, JSON.stringify(intro, null, 2))
+    .replace(/{{docs}}/g, JSON.stringify(docs, null, 2))
     .replace(/{{components}}/g, JSON.stringify(components, null, 2))
-    .replace(/{{routes}}/g, routes)
+    .replace(/{{cdk}}/g, JSON.stringify(cdk, null, 2))
+    .replace(/{{routes}}/g, routes.join('\n'))
   writeFileSync(join(outputDirname, `router.ts`), fileContent)
+}
+
+interface DocsItem {
+  path: string
+  title: string
+  language: DocsLanguage
+  description: string
+  order: number
+}
+
+function handleDocsMeta(docsMeta: Record<string, Record<DocsLanguage, Meta>>) {
+  const docs: DocsItem[] = []
+  const routes: string[] = []
+  for (const key in docsMeta) {
+    const { title, description, order } = docsMeta[key]['zh']
+    const path = `/docs/${key}/zh`
+    docs.push({ path, title, language: 'zh', description, order: order })
+    routes.push(`{path: '/docs/${key}/zh', 'component': () => import('./docs/${key}/Zh.vue')},`)
+  }
+  docs.sort((pre, next) => pre.order - next.order)
+
+  return { docs, routes }
+}
+
+interface DemoMap {
+  components: Record<string, { language: DocsLanguage; children: DemoItem[] }>
+  cdk: (DemoItem & DocsItem)[]
+}
+
+interface DemoItem {
+  path: string
+  title: string
+  subtitle: string
+  description: string
+  cover: string
+}
+
+function handleDemoMeta(docsMetaMap: Record<string, Record<string, Meta>>) {
+  const demoMap: DemoMap = { components: {}, cdk: [] } as DemoMap
+  const routes: string[] = []
+  Object.keys(docsMetaMap).forEach(packageName => {
+    Object.keys(docsMetaMap[packageName]).forEach(componentName => {
+      generateLanguageData(docsMetaMap[packageName][componentName], packageName, componentName, 'zh', demoMap)
+      routes.push(
+        `{path: '/${packageName}/${componentName}/zh', 'component': () => import('./${packageName}/${componentName}/Zh.vue')},`,
+      )
+    })
+  })
+
+  return { demoMap, routes }
+}
+
+function generateLanguageData(
+  itemData: Meta,
+  packageName: string,
+  componentName: string,
+  language: DocsLanguage,
+  demoMap: DemoMap,
+) {
+  const { category, type, title, subtitle = '', description, cover, order } = itemData[language]
+  const path = `/${packageName}/${componentName}/${language}`
+
+  if (category === 'components') {
+    const item = { path, title, subtitle, description, cover }
+    if (!demoMap['components'][type]) {
+      demoMap['components'][type] = { children: [item], language }
+    } else {
+      demoMap['components'][type].children.push(item)
+    }
+  } else if (category === 'cdk') {
+    const item = { path, title, subtitle, description, cover, language, order }
+    demoMap['cdk'].push(item)
+  }
 }

@@ -10,7 +10,7 @@
         <a @click="goLink()">
           {{ title }}
           <a class="edit-button" :href="editHref" target="_blank" rel="noopener noreferrer">
-            <i type="edit">ICON</i>
+            <ix-icon name="edit-fill" />
           </a>
         </a>
       </div>
@@ -18,7 +18,7 @@
         <slot name="intro"></slot>
       </div>
       <div class="code-box-actions">
-        <i @click="copyCode()">ICON</i>
+        <ix-icon name="copy-fill" @click="copyCode()" />
         <span class="code-expand-icon" @click="changeExpanded(!expanded)">
           <ix-icon :name="expanded ? 'left' : 'right'" />
           <ix-icon :name="!expanded ? 'left' : 'right'" />
@@ -36,18 +36,18 @@
 </template>
 
 <script lang="ts">
-import { computed, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useClipboard } from '@idux/cdk'
 
 interface CodeBoxProps {
-  title: string
-  type: string
-  component: string
-  demoKey: string
-  rawCode: string
+  title?: string
+  type?: string
+  component?: string
+  demoKey?: string
+  rawCode?: string
 }
 
-export default {
+export default defineComponent({
   name: 'CodeBox',
   props: {
     title: String,
@@ -61,7 +61,7 @@ export default {
 
     const codeCopied = ref(false)
     const copyCode = () => {
-      if (codeCopied.value) return
+      if (codeCopied.value || !props.rawCode) return
       copy(props.rawCode).then(successful => {
         codeCopied.value = true
         console.log('codeCopied ', successful)
@@ -80,7 +80,7 @@ export default {
 
     return { copyCode, goLink, editHref, expanded, changeExpanded }
   },
-}
+})
 </script>
 
 <style lang="less">
@@ -100,6 +100,11 @@ export default {
         height: 100%;
       }
     }
+  }
+
+  .highlight-wrapper {
+    // TODO: 暂时隐藏
+    display: none;
   }
 }
 </style>

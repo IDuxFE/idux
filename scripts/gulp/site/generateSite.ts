@@ -31,14 +31,14 @@ export function generateSite(target: string, targetName?: string): void {
   initDir(target)
 
   const isSyncSpecific = target && target !== 'init'
-  const docsMetaMap: Record<string, Record<string, Meta>> = {}
+  const demoMeta: Record<string, Record<string, Meta>> = {}
 
   const filterComponentName = ['style', 'core', 'locale', 'i18n', 'version']
   readdirSync(packageRoot).forEach(packageName => {
     if (isSyncSpecific && packageName !== target) {
       return
     }
-    docsMetaMap[packageName] = {}
+    demoMeta[packageName] = {}
     const packageDirname = join(packageRoot, packageName)
     readdirSync(packageDirname).forEach(componentName => {
       if (filterComponentName.includes(componentName) || (isSyncSpecific && componentName !== targetName)) {
@@ -71,7 +71,7 @@ export function generateSite(target: string, targetName?: string): void {
         const docsZhInfo = parseDocsMd(readFileSync(join(componentDirname, 'docs/index.zh.md')))
         const docsZh = { ...docsZhInfo, path: `${packageName}/${componentName}/docs/index.zh.md` }
         const result = { packageName, componentName, zh: docsZh, demoMap }
-        docsMetaMap[packageName][componentName] = { zh: result['zh'].meta }
+        demoMeta[packageName][componentName] = { zh: result['zh'].meta }
 
         generateDemo(join(siteOutputDirname, packageName, componentName), result)
       }
@@ -79,11 +79,11 @@ export function generateSite(target: string, targetName?: string): void {
   })
 
   if (!isSyncSpecific) {
-    initDocs(docsMetaMap)
+    initDocs(demoMeta)
   }
 }
 
-function initDocs(docsMetaMap: Record<string, Meta>): void {
+function initDocs(demoMeta: Record<string, Record<string, Meta>>): void {
   // read docs folder
   const docsMap: Record<string, Record<DocsLanguage, Buffer>> = {}
   const docsMeta: Record<string, Record<DocsLanguage, Meta>> = {}
@@ -98,5 +98,5 @@ function initDocs(docsMetaMap: Record<string, Meta>): void {
   })
 
   generateDocs(siteOutputDirname, docsMap)
-  generateRoutes(siteOutputDirname, docsMetaMap, docsMeta)
+  generateRoutes(siteOutputDirname, docsMeta, demoMeta)
 }

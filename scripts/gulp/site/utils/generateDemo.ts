@@ -25,7 +25,7 @@ export function generateDemo(outputDirname: string, context: DemoContext): void 
   const innerMap = generateExample(outputDirname, context)
   const demoTemplate = generateTemplate(context, innerMap['zh'])
   const demoComponent = generateDemoComponent(context, innerMap.imports, innerMap.components)
-  writeFileSync(join(outputDirname, `Zh-CN.vue`), demoTemplate['zh'] + demoComponent['zh'])
+  writeFileSync(join(outputDirname, `Zh.vue`), demoTemplate['zh'] + demoComponent['zh'])
 }
 
 function generateExample(outputDirname: string, context: DemoContext) {
@@ -120,7 +120,7 @@ function wrapperHeader(title: string, whenToUse: string, language: string, examp
 	</section>
 	<h2>
 		<span>${examples}</span>
-		<i class="code-box-expand-trigger" title="${expand}" @click="expandAllCode()">appstore</i>
+		<ix-icon name="overview" title="${expand}" @click="expandAllCode()" />
 	</h2>
 </section>${example}`
   } else {
