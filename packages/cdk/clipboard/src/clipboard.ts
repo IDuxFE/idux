@@ -9,9 +9,7 @@ export class Clipboard {
   }
 
   private static instance: Clipboard | null = null
-  private constructor() {
-    // private
-  }
+  private constructor() {}
 
   copy(text: string): boolean {
     const pendingCopy = this.beginCopy(text)
