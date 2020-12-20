@@ -11,6 +11,7 @@ import { parseDocsMd } from './utils/parseDocsMd'
 import { buildConfig } from '../buildConfig'
 import { withoutSuffix } from './utils/tools'
 import { DemoInfo, DocsLanguage, Meta } from './utils/types'
+import { upperFirst } from 'lodash'
 
 const { siteDir, packageRoot, docsDir } = buildConfig
 const siteOutputDirname = `${siteDir}/docs/src`
@@ -53,7 +54,8 @@ export function generateSite(target: string, targetName?: string): void {
             if (/.md$/.test(demo)) {
               const demoKey = withoutSuffix(demo)
               const demoMarkDownFile = readFileSync(join(demoDirname, demo))
-              const { meta, rawCode, highlightCode, zh: zhCn } = parseDemoMd(demoMarkDownFile)
+              const demoStandAloneFile = join(demoDirname, `${upperFirst(demoKey)}.vue`)
+              const { meta, rawCode, highlightCode, zh: zhCn } = parseDemoMd(demoMarkDownFile, demoStandAloneFile)
               const zhCnCodeBox = generateCodeBox({
                 title: meta?.title?.['zh'],
                 packageName,

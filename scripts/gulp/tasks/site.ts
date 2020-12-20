@@ -7,6 +7,7 @@ import { execNodeTask } from '../util/task-helpers'
 import detectPort from 'detect-port'
 
 import { generateSite } from '../site/generateSite'
+import { Log } from '../../utils/log'
 
 const markdownGlob = join(buildConfig.packageRoot, `**/+(docs|demo)/*.md`)
 
@@ -31,7 +32,7 @@ task('site:watch', () => {
       if (execArray && execArray[1] && execArray[2]) {
         const componentType = execArray[1]
         const componentName = execArray[2]
-        console.log(`Reload '${componentType}/${componentName}'`)
+        Log.success(`Reload '${componentType}/${componentName}'`)
         generateSite(componentType, componentName)
       }
     }, 3000),
