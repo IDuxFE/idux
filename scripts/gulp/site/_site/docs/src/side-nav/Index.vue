@@ -27,7 +27,7 @@
     <template v-if="page === 'cdk'">
       <li v-for="cdk in routerList.cdk" v-show="cdk.language === language" :key="cdk.path">
         <router-link :to="cdk.path">
-          <span>{{ cdk.label }}</span>
+          <span>{{ cdk.title }}</span>
           <span class="chinese">{{ cdk.subtitle }}</span>
         </router-link>
       </li>

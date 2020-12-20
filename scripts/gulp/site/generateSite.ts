@@ -16,7 +16,7 @@ import { upperFirst } from 'lodash'
 const { siteDir, packageRoot, docsDir } = buildConfig
 const siteOutputDirname = `${siteDir}/docs/src`
 
-function initDir(target: string): void {
+function initDir(target: string, targetName?: string): void {
   if (!target) {
     removeSync(`${siteDir}/docs`)
     copySync(join(__dirname, '_site/docs'), `${siteDir}/docs`)
@@ -24,12 +24,12 @@ function initDir(target: string): void {
     removeSync(`${siteDir}`)
     copySync(join(__dirname, '_site'), `${siteDir}`)
   } else {
-    removeSync(`${siteDir}/docs/src/${target}`)
+    removeSync(`${siteDir}/docs/src/${target}${targetName ? '/' + targetName : ''}`)
   }
 }
 
 export function generateSite(target: string, targetName?: string): void {
-  initDir(target)
+  initDir(target, targetName)
 
   const isSyncSpecific = target && target !== 'init'
   const demoMeta: Record<string, Record<string, Meta>> = {}

@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import { useClipboard } from '@idux/cdk'
+import { useClipboard } from '@idux/cdk/clipboard'
 
 interface CodeBoxProps {
   title?: string
@@ -71,7 +71,7 @@ export default defineComponent({
 
     const link = computed(() => `${props.type}-${props.component}-demo-${props.demoKey}`)
     const goLink = () => (window.location.hash = link.value)
-    const editHref = computed(() => `https://github.com/IduxFE/components/edit/master/${link.value}.md`)
+    const editHref = computed(() => `https://github.com/IduxFE/components/edit/main/packages/${link.value}.md`)
 
     const expanded = ref(false)
     const changeExpanded = (isExpanded: boolean) => {

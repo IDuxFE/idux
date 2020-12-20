@@ -48,6 +48,7 @@ module.exports = {
         },
       },
     ],
+    '@typescript-eslint/no-empty-function': 'off',
 
     // vue
     'vue/html-closing-bracket-spacing': 'error',
