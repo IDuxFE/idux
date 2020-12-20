@@ -2,6 +2,7 @@ node_modules
 coverage
 junit.xml
 temp
+dist
 output
 /site/
 
