@@ -15,9 +15,9 @@ import { buttonGroupInjectionKey } from './button'
 export default defineComponent({
   name: 'IxButtonGroup',
   props: {
-    mode: String as PropType<ButtonMode>,
-    size: String as PropType<ComponentSize>,
-    shape: String as PropType<ButtonShape>,
+    mode: { type: String as PropType<ButtonMode>, default: undefined },
+    size: { type: String as PropType<ComponentSize>, default: undefined },
+    shape: { type: String as PropType<ButtonShape>, default: undefined },
   },
   setup(props: ButtonGroupProps) {
     provide(buttonGroupInjectionKey, props)
