@@ -54,7 +54,6 @@ module.exports = {
     'vue/html-closing-bracket-spacing': 'error',
 
     'vue/max-attributes-per-line': 'off',
-    'vue/require-default-prop': 'off',
     'vue/attribute-hyphenation': 'off',
   },
 }

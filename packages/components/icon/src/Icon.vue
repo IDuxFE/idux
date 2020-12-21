@@ -15,8 +15,8 @@ import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils
 export default defineComponent({
   name: 'IxIcon',
   props: {
-    name: String,
-    rotate: [Boolean, Number, String],
+    name: { type: String, default: undefined },
+    rotate: { type: [Boolean, Number, String], default: false },
     iconfont: Boolean,
   },
   setup(props: IconProps, { attrs }: SetupContext) {

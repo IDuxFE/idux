@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
 import type { ButtonConfig } from '@idux/components/core/config'
 import type { ButtonGroupProps, ButtonProps, ButtonShape } from './types'
@@ -21,33 +21,39 @@ export default defineComponent({
   name: 'IxButton',
   components: { IxIcon },
   props: {
-    mode: String as PropType<ButtonMode>,
+    mode: { type: String as PropType<ButtonMode>, default: undefined },
     danger: Boolean,
     ghost: Boolean,
     disabled: Boolean,
     loading: Boolean,
-    size: String as PropType<ComponentSize>,
-    shape: String as PropType<ButtonShape>,
+    size: { type: String as PropType<ComponentSize>, default: undefined },
+    shape: { type: String as PropType<ButtonShape>, default: undefined },
     block: Boolean,
-    icon: String,
+    icon: { type: String, default: undefined },
   },
   setup(props: ButtonProps) {
     const groupProps = inject(buttonGroupInjectionKey, {})
     const buttonConfig = useGlobalConfig('button')
-    const classes = useClasses(props, groupProps, buttonConfig)
 
-    const tag = computed(() => (props.mode === 'link' ? 'a' : 'button'))
+    const mode = computed(() => (props.mode !== undefined ? props.mode : groupProps.mode || buttonConfig.mode))
+    const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
+
+    const classes = useClasses(props, groupProps, buttonConfig, mode)
     return { classes, tag }
   },
 })
 
-const useClasses = (props: ButtonProps, groupProps: ButtonGroupProps, config: ButtonConfig) => {
+const useClasses = (
+  props: ButtonProps,
+  groupProps: ButtonGroupProps,
+  config: ButtonConfig,
+  mode: ComputedRef<ButtonMode>,
+) => {
   return computed(() => {
-    const mode = props.mode || groupProps.mode || config.mode
-    const size = props.size || groupProps.size || config.size
-    const shape = props.shape || groupProps.shape
+    const size = props.size !== undefined ? props.size : groupProps.size || config.size
+    const shape = props.shape !== undefined ? props.shape : groupProps.shape
     return [
-      mode !== 'default' ? `ix-button-${mode}` : '',
+      mode.value !== 'default' ? `ix-button-${mode.value}` : '',
       size !== 'medium' ? `ix-button-${size}` : '',
       shape ? `ix-button-${shape}` : '',
       {
