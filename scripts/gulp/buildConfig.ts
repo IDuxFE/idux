@@ -8,6 +8,9 @@ export interface BuildConfig {
   publishDir: string
   libDir: string
   siteDir: string
+  siteIconAssetsDir: string
+  iconAssetsDir: string
+  iconDefinitionsDir: string
 }
 
 const packageRoot = join(__dirname, '../../packages')
@@ -21,7 +24,10 @@ export const buildConfig: BuildConfig = {
   packageRoot,
   docsDir,
   siteDir,
+  siteIconAssetsDir: join(siteDir, 'docs/src/assets/icon-svg'),
   outputDir: join(outputRoot, 'dist'),
   publishDir: join(outputRoot, 'publish'),
   libDir: join(outputRoot, 'lib'),
+  iconAssetsDir: join(__dirname, 'icons/assets'),
+  iconDefinitionsDir: join(packageRoot, 'components/icon/definitions'),
 }

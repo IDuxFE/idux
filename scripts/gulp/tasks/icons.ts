@@ -1,7 +1,12 @@
 import { task } from 'gulp'
-import { generateIcons } from '../icons'
+import { copyToSite, generateIcons } from '../icons'
 
-task('icons:init', async done => {
+task('icons:start', async done => {
   await generateIcons()
+  done()
+})
+
+task('icons:copy', async done => {
+  copyToSite()
   done()
 })

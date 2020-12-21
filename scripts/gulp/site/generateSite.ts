@@ -17,11 +17,7 @@ const { siteDir, packageRoot, docsDir } = buildConfig
 const siteOutputDirname = `${siteDir}/docs/src`
 
 function initDir(target: string, targetName?: string): void {
-  if (!target) {
-    removeSync(`${siteDir}/docs`)
-    copySync(join(__dirname, '_site/docs'), `${siteDir}/docs`)
-  } else if (target === 'init') {
-    removeSync(`${siteDir}`)
+  if (target === 'init') {
     copySync(join(__dirname, '_site'), `${siteDir}`)
   } else {
     removeSync(`${siteDir}/docs/src/${target}${targetName ? '/' + targetName : ''}`)

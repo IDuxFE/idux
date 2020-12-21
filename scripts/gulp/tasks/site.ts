@@ -9,7 +9,7 @@ import detectPort from 'detect-port'
 import { generateSite } from '../site/generateSite'
 import { Log } from '../../utils/log'
 
-const markdownGlob = join(buildConfig.packageRoot, `**/+(docs|demo)/*.md`)
+const siteGlob = join(buildConfig.packageRoot, `**/+(docs|demo)/*.(md|vue)`)
 
 /** Parse demos and docs to site directory. */
 task('site:init', done => {
@@ -23,7 +23,7 @@ task('site:init', done => {
  */
 task('site:watch', () => {
   // Globs accepts the Unix-style path separators only
-  const globs = [markdownGlob].map(p => p.replace(/\\/g, '/'))
+  const globs = [siteGlob].map(p => p.replace(/\\/g, '/'))
   watch(globs).on(
     'change',
     debounce(path => {
