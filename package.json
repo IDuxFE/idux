@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "gulp start:dev",
+    "icons": "gulp icons:start",
     "cz": "git-cz",
     "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
     "postinstall": "lerna bootstrap",

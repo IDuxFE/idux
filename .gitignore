@@ -15,5 +15,3 @@ output
 package-lock.json
 yarn.lock
 
-# temp icons
-scripts/gulp/icons/assets
