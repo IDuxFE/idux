@@ -11,7 +11,7 @@
 html {
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS */
-  overflow-wrap: normal; /* @15831: word-wrap has since been renamed to overflow-wrap*/
+  word-break: normal;
   -moz-tab-size: 4;
   tab-size: 4;
 }
@@ -68,8 +68,6 @@ abbr[title] {
 }
 
 a {
-  color: @blue; /* @15831: Add color */
-  text-decoration: none; /* @15831: Remove text-decoration */
   background-color: transparent; /* Remove the gray background on active links in IE 10 */
 }
 

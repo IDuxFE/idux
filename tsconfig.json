@@ -2,13 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+
+    "lib": ["ESNext", "DOM"],
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "preserve",
+
     "sourceMap": true,
     "declaration": true,
     "downlevelIteration": true,
@@ -16,23 +15,18 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "removeComments": true,
+
     "strict": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+
     "paths": {
-      "@idux": [
-        "./packages"
-      ],
-      "@idux/*": [
-        "./packages/*"
-      ]
+      "@idux": ["./packages"],
+      "@idux/*": ["./packages/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "output"
-  ]
+  "exclude": ["node_modules", "output"]
 }

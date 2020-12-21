@@ -94,6 +94,9 @@
     }
   },
   "lint-staged": {
+    "*.{js,ts,vue,json}": [
+      "prettier --write"
+    ],
     "*.{js,ts,vue}": [
       "eslint --fix"
     ],
