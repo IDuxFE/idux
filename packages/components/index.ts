@@ -21,4 +21,5 @@ export * from './core/config'
 export * from './core/types'
 
 export * from './button'
+export * from './i18n'
 export * from './icon'

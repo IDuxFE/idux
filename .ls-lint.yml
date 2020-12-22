@@ -4,3 +4,6 @@ ls:
     .d.ts: camelCase
     .spec.ts: camelCase
     .vue: PascalCase
+
+ignore:
+  - packages/components/i18n/languages
