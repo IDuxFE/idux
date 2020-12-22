@@ -2,8 +2,8 @@
   <ix-icon name="up" />
   <ix-icon name="down" rotate />
   <ix-icon name="left" rotate="90" />
-  <ix-icon name="right" rotate />
-  <ix-icon name="ix-icon-up" iconfont />
+  <ix-icon name="right" style="color: red" rotate />
+  <ix-icon name="ix-icon-up" class="icon-blue" iconfont />
   <ix-icon name="ix-icon-down" iconfont />
 </template>
 
@@ -29,3 +29,8 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="less" scoped>
+.icon-blue {
+  color: blue;
+}
+</style>
