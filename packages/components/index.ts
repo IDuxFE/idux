@@ -2,8 +2,6 @@ import type { App } from 'vue'
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 
-const version = '0.0.0'
-
 const components = [IxButton, IxButtonGroup, IxIcon]
 
 const install = (app: App): void => {
@@ -12,9 +10,11 @@ const install = (app: App): void => {
   })
 }
 
+const version = '0.0.0'
+
 export default {
-  version,
   install,
+  version,
 }
 
 export * from './core/config'

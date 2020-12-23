@@ -16,7 +16,7 @@ Idux Components
 [![CodeFactor](https://www.codefactor.io/repository/github/iduxfe/components/badge)](https://www.codefactor.io/repository/github/iduxfe/components)
 [![codecov](https://codecov.io/gh/IduxFE/components/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IduxFE/components)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://codecov.io/gh/IduxFE/components/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/IduxFE/components/blob/main/LICENSE)
 </div>
 
 ## ✨ 特性
