@@ -5,4 +5,36 @@
 .@{icon-prefix} {
   display: inline-block;
   color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  > * {
+    line-height: 1;
+  }
+
+  svg {
+    display: inline-block;
+  }
+}
+
+.@{icon-prefix}::before {
+  display: none;
+}
+
+.@{icon-prefix}-spin::before,
+.@{icon-prefix}-spin {
+  display: inline-block;
+  animation: spinCircle 1s infinite linear;
+}
+
+@keyframes spinCircle {
+  100% {
+    transform: rotate(360deg);
+  }
 }
