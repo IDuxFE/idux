@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* istanbul ignore file */
 import { IDUX_COMPONENTS_PREFIX } from '../constant'
 import { isDevMode } from '../utils'
 

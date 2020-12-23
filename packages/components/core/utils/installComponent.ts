@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import type { App, DefineComponent } from 'vue'
 
 export const installComponent = (component: DefineComponent) => {

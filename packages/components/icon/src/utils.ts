@@ -104,7 +104,7 @@ export function createScriptElements(urls: string[], index = 0): void {
     if (urls.length > index + 1) {
       scriptElement.onload = () => createScriptElements(urls, index + 1)
       scriptElement.onerror = () => {
-        Logger.warn(`The url ${currentUrl} failed to load`)
+        Logger.error(`The url ${currentUrl} failed to load`)
         createScriptElements(urls, index + 1)
       }
     }
