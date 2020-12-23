@@ -1,10 +1,12 @@
 <template>
-  <ix-icon name="up" />
-  <ix-icon name="down" rotate />
-  <ix-icon name="left" rotate="90" />
-  <ix-icon name="right" style="color: red" rotate />
-  <ix-icon name="ix-icon-up" class="icon-blue" iconfont />
-  <ix-icon name="ix-icon-down" iconfont />
+  <div class="basic-icons">
+    <ix-icon name="up" />
+    <ix-icon name="down" rotate />
+    <ix-icon name="left" rotate="90" />
+    <ix-icon name="right" style="color: red" rotate />
+    <ix-icon name="ix-icon-up" class="icon-blue" iconfont />
+    <ix-icon name="ix-icon-down" iconfont />
+  </div>
 </template>
 
 <script lang="ts">
@@ -30,7 +32,13 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-.icon-blue {
-  color: blue;
+.basic-icons {
+  .ix-icon {
+    margin-right: 6px;
+    font-size: 24px;
+  }
+  .icon-blue {
+    color: blue;
+  }
 }
 </style>
