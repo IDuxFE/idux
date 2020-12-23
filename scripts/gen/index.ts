@@ -1,4 +1,4 @@
-import { mkdirSync, pathExistsSync, writeFileSync } from 'fs-extra'
+import { mkdirSync, pathExistsSync, readFileSync, writeFileSync } from 'fs-extra'
 import { camelCase, upperFirst } from 'lodash'
 import { join } from 'path'
 import { Log } from '../utils/log'
@@ -24,51 +24,65 @@ if (!compName || !moduleNames.includes(moduleName)) {
   process.exit(1)
 }
 
-const dirname = join(__dirname, '../../packages', moduleName, compName)
+const moduleDirname = join(__dirname, '../../packages', moduleName)
+const componentDirname = join(moduleDirname, compName)
 
-if (pathExistsSync(dirname)) {
+if (pathExistsSync(componentDirname)) {
   Log.error(`${compName} component already exists, please change it\n`)
   process.exit(1)
 }
 
-mkdirSync(dirname)
-mkdirSync(`${dirname}/src`)
-mkdirSync(`${dirname}/__tests__`)
-mkdirSync(`${dirname}/docs`)
-mkdirSync(`${dirname}/demo`)
+mkdirSync(componentDirname)
+mkdirSync(`${componentDirname}/src`)
+mkdirSync(`${componentDirname}/__tests__`)
+mkdirSync(`${componentDirname}/docs`)
+mkdirSync(`${componentDirname}/demo`)
 
 const camelCaseComponentName = camelCase(compName)
 const upperFirstComponentName = upperFirst(camelCaseComponentName)
+const indexFilePath = join(moduleDirname, 'index.ts')
+const componentsLessPath = join(moduleDirname, 'components.less')
 
 if (moduleName === 'components') {
-  mkdirSync(`${dirname}/style`)
+  mkdirSync(`${componentDirname}/style`)
   const lessTemplate = getLessTemplate(compName)
-  writeFileSync(`${dirname}/style/index.less`, lessTemplate)
+  writeFileSync(`${componentDirname}/style/index.less`, lessTemplate)
 
   const typesTemplate = getTypesTemplate(upperFirstComponentName)
-  writeFileSync(`${dirname}/src/types.ts`, typesTemplate)
+  writeFileSync(`${componentDirname}/src/types.ts`, typesTemplate)
 
   const vueTemplate = getVueTemplate(upperFirstComponentName)
-  writeFileSync(`${dirname}/src/${upperFirstComponentName}.vue`, vueTemplate)
+  writeFileSync(`${componentDirname}/src/${upperFirstComponentName}.vue`, vueTemplate)
 
   const indexTemplate = getIndexTemplate(upperFirstComponentName)
-  writeFileSync(`${dirname}/index.ts`, indexTemplate)
+  writeFileSync(`${componentDirname}/index.ts`, indexTemplate)
 
   const testTemplate = getTestTemplate(upperFirstComponentName)
-  writeFileSync(`${dirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
+  writeFileSync(`${componentDirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
+
+  // 这里都是硬编码，有没有更好的实现方式？
+  let currIndexContent = readFileSync(indexFilePath, 'utf-8')
+  currIndexContent = currIndexContent
+    .replace('\n\n', `\nimport { Ix${upperFirstComponentName} } from './${compName}'\n\n`)
+    .replace(']', `, Ix${upperFirstComponentName}]`)
+  currIndexContent += `export * from './${compName}'\n`
+  writeFileSync(indexFilePath, currIndexContent)
+
+  const currLess = readFileSync(componentsLessPath, 'utf-8')
+  writeFileSync(componentsLessPath, currLess + `@import './${compName}/style/index.less';\n`)
 } else if (moduleName === 'cdk') {
   const useTemplate = getCdkUseTemplate(upperFirstComponentName)
-  writeFileSync(`${dirname}/src/use${upperFirstComponentName}.ts`, useTemplate)
+  writeFileSync(`${componentDirname}/src/use${upperFirstComponentName}.ts`, useTemplate)
 
   const indexTemplate = `export * from './src/use${upperFirstComponentName}'`
-  writeFileSync(`${dirname}/index.ts`, indexTemplate)
+  writeFileSync(`${componentDirname}/index.ts`, indexTemplate)
 
   const testTemplate = getCdkTestTemplate(upperFirstComponentName, camelCaseComponentName)
-  writeFileSync(`${dirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
+  writeFileSync(`${componentDirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
 }
 
 const docsZhTemplate = getDocsZhTemplate(upperFirstComponentName, moduleName)
-writeFileSync(`${dirname}/docs/index.zh.md`, docsZhTemplate)
+writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
 const domeTemplate = getDomeTemplate(upperFirstComponentName, moduleName)
-writeFileSync(`${dirname}/demo/basic.md`, domeTemplate)
+writeFileSync(`${componentDirname}/demo/basic.md`, domeTemplate)
