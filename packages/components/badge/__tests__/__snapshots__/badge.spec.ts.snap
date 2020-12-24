@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge.vue color work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\" style=\\"background-color: rgb(255, 0, 0);\\"><!--v-if--></sup>"`;
+
+exports[`Badge.vue count slot work 1`] = `"<span class=\\"ix-badge-wrapper\\"><sup class=\\"ix-badge ix-badge-empty ix-badge-slot-count\\"><div class=\\"count-slot\\"></div></sup></span>"`;
+
+exports[`Badge.vue count work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">10</sup>"`;
+
+exports[`Badge.vue count work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">50</sup>"`;
+
+exports[`Badge.vue dot work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;
+
+exports[`Badge.vue dot work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-dot\\"><!--v-if--></sup>"`;
+
+exports[`Badge.vue overflowCount work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">99+</sup>"`;
+
+exports[`Badge.vue overflowCount work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">999+</sup>"`;
+
+exports[`Badge.vue render work 1`] = `"<span class=\\"ix-badge-wrapper\\"><sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup></span>"`;
+
+exports[`Badge.vue showZero work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;
+
+exports[`Badge.vue showZero work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">0</sup>"`;
