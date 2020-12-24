@@ -10,7 +10,7 @@
         <a @click="goLink()">
           {{ title }}
           <a class="edit-button" :href="editHref" target="_blank" rel="noopener noreferrer">
-            <ix-icon name="edit-fill" />
+            <ix-icon name="edit" />
           </a>
         </a>
       </div>
@@ -18,7 +18,7 @@
         <slot name="intro"></slot>
       </div>
       <div class="code-box-actions">
-        <ix-icon name="copy-fill" @click="copyCode()" />
+        <ix-icon name="copy" @click="copyCode()" />
         <span class="code-expand-icon" @click="changeExpanded(!expanded)">
           <ix-icon :name="expanded ? 'left' : 'right'" />
           <ix-icon :name="!expanded ? 'left' : 'right'" />

@@ -120,7 +120,7 @@ function wrapperHeader(title: string, whenToUse: string, language: string, examp
 	</section>
 	<h2>
 		<span>${examples}</span>
-		<ix-icon name="overview" title="${expand}" @click="expandAllCode()" />
+		<ix-icon name="appstore" title="${expand}" @click="expandAllCode()" />
 	</h2>
 </section>${example}`
   } else {

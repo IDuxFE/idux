@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 1
 title:
   zh: 基本使用
   en: Basic usage
