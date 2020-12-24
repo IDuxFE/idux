@@ -10,7 +10,6 @@ const definitionTemplate = `export const {{definitionName}} = {
 }
 `
 const { iconAssetsDir, iconDefinitionsDir, siteIconAssetsDir } = buildConfig
-
 const outputDefinitionNames: string[] = []
 
 const options: SVGO.Options = {
@@ -30,7 +29,8 @@ export async function generateIcons(): Promise<void> {
   })
   await Promise.all(outputIcons)
 
-  const indexContent = outputDefinitionNames.map(item => `export * from './${item}'`).join('\n') + '\n'
+  const indexContent =
+    outputDefinitionNames.map(item => `export { ${upperFirst(item)} } from './${item}'`).join('\n') + '\n'
   writeFileSync(join(iconDefinitionsDir, `index.ts`), indexContent, 'utf8')
 }
 
