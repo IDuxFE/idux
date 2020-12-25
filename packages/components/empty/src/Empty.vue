@@ -13,12 +13,11 @@ export default defineComponent({
   name: 'IxEmpty',
   components: { IxIcon },
   props: {
-    description: String,
-    imageStyle: { type: Object as PropType<CSSProperties>, default: undefined },,
-    image: String,
+    // description: String,
+    imageStyle: { type: Object as PropType<CSSProperties>, default: undefined },
+    // image: String,
   },
   setup(props: EmptyProps) {
-
     return { props }
   },
 })
