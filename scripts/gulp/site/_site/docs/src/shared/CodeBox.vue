@@ -1,5 +1,5 @@
 <template>
-  <section :id="demoKey" class="code-box" :class="{ expand: expanded }">
+  <section :id="link" class="code-box" :class="{ expand: expanded }">
     <section class="code-box-demo">
       <div>
         <slot name="demo"></slot>
@@ -41,8 +41,8 @@ import { useClipboard } from '@idux/cdk/clipboard'
 
 interface CodeBoxProps {
   title?: string
-  type?: string
-  component?: string
+  packageName?: string
+  componentName?: string
   demoKey?: string
   rawCode?: string
 }
@@ -51,8 +51,8 @@ export default defineComponent({
   name: 'CodeBox',
   props: {
     title: String,
-    type: String,
-    component: String,
+    packageName: String,
+    componentName: String,
     demoKey: String,
     rawCode: String,
   },
@@ -69,7 +69,7 @@ export default defineComponent({
       })
     }
 
-    const link = computed(() => `${props.type}-${props.component}-demo-${props.demoKey}`)
+    const link = computed(() => `${props.packageName}-${props.componentName}-demo-${props.demoKey}`)
     const goLink = () => (window.location.hash = link.value)
     const editHref = computed(() => `https://github.com/IduxFE/components/edit/main/packages/${link.value}.md`)
 
@@ -78,7 +78,7 @@ export default defineComponent({
       expanded.value = isExpanded
     }
 
-    return { copyCode, goLink, editHref, expanded, changeExpanded }
+    return { copyCode, link, goLink, editHref, expanded, changeExpanded }
   },
 })
 </script>
