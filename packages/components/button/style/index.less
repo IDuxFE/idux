@@ -1,7 +1,115 @@
 @import '../../style/default.less';
+@import './mixin.less';
 
 @button-prefix: ~'@{idux-prefix}-button';
 
 .@{button-prefix} {
-  color: @primary-color;
+  line-height: @button-line-height;
+  .button;
+  .button-default;
+
+  > span {
+    display: inline-block;
+  }
+
+  &-primary {
+    .button-primary;
+  }
+
+  &-dashed {
+    .button-dashed;
+  }
+
+  &-text {
+    .button-text;
+  }
+
+  &-link {
+    .button-link;
+  }
+
+  &-danger {
+    .button-danger;
+  }
+
+  &-danger&-primary {
+    .button-danger-primary;
+  }
+
+  &-danger&-text {
+    .button-danger-text;
+  }
+
+  &-danger&-link {
+    .button-danger-link;
+  }
+
+  &-ghost {
+    .button-ghost;
+  }
+
+  &-ghost&-primary {
+    .button-ghost-primary;
+  }
+
+  &-ghost&-danger {
+    .button-ghost-danger;
+  }
+
+  &&-loading {
+    position: relative;
+
+    &::before {
+      display: block;
+    }
+  }
+
+  &-round {
+    .button-round(@button-prefix);
+  }
+
+  &-circle {
+    .button-circle(@button-prefix);
+  }
+
+  &-block {
+    width: 100%;
+  }
+
+  &-icon-only {
+    .icon-only(@button-prefix; @icon-prefix);
+  }
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1;
+    display: none;
+    background: @button-default-bg;
+    border-radius: inherit;
+    opacity: 0.35;
+    transition: opacity 0.2s;
+    content: '';
+    pointer-events: none;
+  }
+
+  &:focus > span,
+  &:active > span {
+    position: relative;
+  }
+
+  > .@{icon-prefix} + span,
+  > span + .@{icon-prefix} {
+    margin-left: @button-icon-margin-left;
+  }
+
+  &:empty {
+    display: inline-block;
+    width: 0;
+    visibility: hidden;
+    content: '\a0';
+  }
 }
