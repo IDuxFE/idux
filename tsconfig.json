@@ -7,7 +7,6 @@
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "preserve",
-
     "sourceMap": true,
     "declaration": true,
     "downlevelIteration": true,
@@ -15,14 +14,12 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "removeComments": true,
-
     "strict": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-
     "paths": {
       "@idux": ["./packages"],
       "@idux/*": ["./packages/*"]

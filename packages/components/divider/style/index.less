@@ -1,0 +1,78 @@
+@import '../../style/default.less';
+
+@divider-prefix: ~'@{idux-prefix}-divider';
+
+.@{divider-prefix} {
+  border-top: @border-size-sm solid @border-color;
+
+  &-horizontal {
+    width: 100%;
+    min-width: 100%;
+    margin: @margin-xl 0;
+    clear: both;
+
+    &.@{divider-prefix}-with-text {
+      position: relative;
+
+      .@{divider-prefix}-inner-text {
+        position: absolute;
+        display: inline-block;
+        padding: 0 1em;
+        font-size: @font-size-lg;
+        color: @black;
+        font-weight: @font-weight-md;
+        background: @white;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @divider-prefix-with-text: ~'@{divider-prefix}-with-text';
+
+      &.@{divider-prefix-with-text}-center {
+        .@{divider-prefix}-inner-text {
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      &.@{divider-prefix-with-text}-left {
+        .@{divider-prefix}-inner-text {
+          left: 5%;
+        }
+      }
+
+      &.@{divider-prefix-with-text}-right {
+        .@{divider-prefix}-inner-text {
+          right: 5%;
+        }
+      }
+
+      &.@{divider-prefix}-plain {
+        .@{divider-prefix}-inner-text {
+          font-size: @font-size-md;
+          font-weight: @font-weight-sm;
+        }
+      }
+    }
+  }
+
+  &-vertical {
+    top: -0.06em;
+    display: inline-block;
+    height: 0.9em;
+    vertical-align: middle;
+    border-top: 0;
+    border-left: @border-size-sm solid @border-color;
+    margin: 0 @margin-sm;
+
+    &.@{divider-prefix}-dashed {
+      border-width: 0 0 0 1px;
+    }
+  }
+
+  &-dashed {
+    border-style: dashed;
+    border-width: 1px 0 0;
+    background: none;
+  }
+}

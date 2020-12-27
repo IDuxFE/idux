@@ -12,6 +12,7 @@ import { useClipboard } from '@idux/cdk/clipboard'
 export default defineComponent({
   setup() {
     const icons = Object.keys(AllIcons)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map(key => (AllIcons as any)[key].name)
       .filter((name: string) => !name.endsWith('-twotone'))
 
