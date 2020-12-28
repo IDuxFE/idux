@@ -22,7 +22,10 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@idux": ["./packages"],
-      "@idux/*": ["./packages/*"]
+      "@idux/*": ["./packages/*"],
+      "@components/*": ["./packages/components/*"],
+      "@cdk/*": ["./packages/cdk/*"],
+      "@pro/*": ["./packages/pro/*"]
     }
   },
   "exclude": ["node_modules", "output"]

@@ -9,6 +9,15 @@ const config: UserConfig = {
         if (path.startsWith('@idux')) {
           return path.replace('@idux', '/packages')
         }
+        if (path.startsWith('@components')) {
+          return path.replace('@components', '/packages/components')
+        }
+        if (path.startsWith('@cdk')) {
+          return path.replace('@cdk', '/packages/cdk')
+        }
+        if (path.startsWith('@pro')) {
+          return path.replace('@pro', '/packages/pro')
+        }
         return path
       },
     },
