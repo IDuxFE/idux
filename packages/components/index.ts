@@ -5,8 +5,9 @@ import { IxBadge } from './badge'
 import { IxDivider } from './divider'
 import { IxImage } from './image'
 import { IxSpin } from './spin'
+import { IxSpace } from './space'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin]
+const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace]
 
 const install = (app: App): void => {
   components.forEach(component => {
@@ -30,3 +31,4 @@ export * from './badge'
 export * from './divider'
 export * from './image'
 export * from './spin'
+export * from './space'

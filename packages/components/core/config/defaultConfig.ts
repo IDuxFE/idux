@@ -6,6 +6,7 @@ import type {
   DividerConfig,
   ImageConfig,
   SpinConfig,
+  SpaceConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -37,6 +38,8 @@ const spin = shallowReactive<SpinConfig>({
   size: 'small',
 })
 
+const space = shallowReactive<SpaceConfig>({ size: 'small' })
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -44,4 +47,5 @@ export const defaultConfig: GlobalConfig = {
   divider,
   image,
   spin,
+  space,
 }
