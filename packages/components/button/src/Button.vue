@@ -2,7 +2,7 @@
   <component :is="tag" class="ix-button" :class="classes" :disabled="disabled || loading ? true : undefined">
     <ix-icon v-if="loading" name="loading" />
     <ix-icon v-else-if="icon" :name="icon" />
-    <span v-if="hasDefaultSolot"><slot></slot></span>
+    <span v-if="hasDefaultSlot"><slot></slot></span>
   </component>
 </template>
 
@@ -37,15 +37,15 @@ export default defineComponent({
 
     const mode = computed(() => props.mode ?? (groupProps.mode || buttonConfig.mode))
 
-    const hasDefaultSolot = ref(!!slots.default)
+    const hasDefaultSlot = ref(!!slots.default)
     onUpdated(() => {
-      hasDefaultSolot.value = !!slots.default
+      hasDefaultSlot.value = !!slots.default
     })
-    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSolot)
+    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
 
     const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
 
-    return { classes, tag, hasDefaultSolot }
+    return { classes, tag, hasDefaultSlot }
   },
 })
 
@@ -54,7 +54,7 @@ const useClasses = (
   groupProps: ButtonGroupProps,
   config: ButtonConfig,
   mode: ComputedRef<ButtonMode>,
-  hasDefaultSolot: Ref<boolean>,
+  hasDefaultSlot: Ref<boolean>,
 ) => {
   return computed(() => {
     const size = props.size ?? (groupProps.size || config.size)
@@ -69,7 +69,7 @@ const useClasses = (
         'ix-button-disabled': props.disabled,
         'ix-button-loading': props.loading,
         'ix-button-block': props.block,
-        'ix-button-icon-only': !hasDefaultSolot.value && (!!props.icon || props.loading),
+        'ix-button-icon-only': !hasDefaultSlot.value && (!!props.icon || props.loading),
       },
     ]
   })
