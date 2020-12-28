@@ -1,18 +1,29 @@
 import { inject, shallowReactive, provide, readonly } from 'vue'
 import type { DeepReadonly } from 'vue'
-import type { ButtonConfig, GlobalConfig, GlobalConfigKey, IconConfig } from './types'
+import type { BadgeConfig, ButtonConfig, GlobalConfig, GlobalConfigKey, IconConfig, DividerConfig } from './types'
 
-const button: ButtonConfig = shallowReactive({ mode: 'default', size: 'medium' })
-const icon: IconConfig = shallowReactive({})
+const button = shallowReactive<ButtonConfig>({ mode: 'default', size: 'medium' })
+const icon = shallowReactive<IconConfig>({})
+const badge = shallowReactive<BadgeConfig>({ showZero: false, dot: false, overflowCount: 99 })
+const divider = shallowReactive<DividerConfig>({
+  dashed: false,
+  plain: false,
+  position: 'center',
+  type: 'horizontal',
+})
 
 const defaultConfig: GlobalConfig = {
   button,
   icon,
+  badge,
+  divider,
 }
 
 const globalConfigToken: Record<GlobalConfigKey, symbol> = {
   button: Symbol(),
   icon: Symbol(),
+  badge: Symbol(),
+  divider: Symbol(),
 }
 
 /**

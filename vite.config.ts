@@ -13,6 +13,11 @@ const config: UserConfig = {
       },
     },
   ],
+  cssPreprocessOptions: {
+    less: {
+      javascriptEnabled: true,
+    },
+  },
 }
 
 export default config
