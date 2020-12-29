@@ -33,6 +33,7 @@ module.exports = {
     indent: ['error', 2, { SwitchCase: 1 }],
     'object-curly-spacing': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
+    'prettier/prettier': 'error',
 
     // ts
     '@typescript-eslint/member-delimiter-style': [
@@ -52,7 +53,7 @@ module.exports = {
 
     // vue
     'vue/html-closing-bracket-spacing': 'error',
-
+    'vue/require-default-prop': 'error',
     'vue/max-attributes-per-line': 'off',
     'vue/attribute-hyphenation': 'off',
   },

@@ -8,6 +8,8 @@ exports[`Badge.vue count work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-b
 
 exports[`Badge.vue count work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">50</sup>"`;
 
+exports[`Badge.vue count work 3`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">1-1</sup>"`;
+
 exports[`Badge.vue dot work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;
 
 exports[`Badge.vue dot work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-dot\\"><!--v-if--></sup>"`;

@@ -30,6 +30,9 @@ describe('Badge.vue', () => {
     await wrapper.setProps({ count: '50' })
     expect(badge.text()).toBe('50')
     expect(badge.html()).toMatchSnapshot()
+    await wrapper.setProps({ count: '1-1' })
+    expect(badge.text()).toBe('1-1')
+    expect(badge.html()).toMatchSnapshot()
   })
 
   // 是否显示0
