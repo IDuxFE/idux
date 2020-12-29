@@ -7,6 +7,7 @@ export interface GlobalConfig {
   icon: IconConfig
   badge: BadgeConfig
   divider: DividerConfig
+  image: ImageConfig
 }
 
 export interface ButtonConfig {
@@ -29,4 +30,9 @@ export interface DividerConfig {
   plain: boolean
   position: DividerPosition
   type: DividerType
+}
+export interface ImageConfig {
+  width: string | number
+  height: string | number
+  fallback: string
 }
