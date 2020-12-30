@@ -1,8 +1,9 @@
 <template>
   <component :is="'div'" class="ix-empty" :style="imageStyle">
-    <ix-icon v-if="!image" name="empty" />
-    <img v-else :src="image" />
-    <p>没有数据</p>
+    <ix-icon name="empty" />
+    <!-- <ix-icon v-if="!image" name="empty" />
+    <img v-else :src="image" /> -->
+    <p>没有数据222222</p>
   </component>
 </template>
 <script lang="ts">

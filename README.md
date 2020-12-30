@@ -62,6 +62,8 @@ npm run start
 
 API 设计参考了 Ant Design, 文档和 CI 工具参考了 [NG-ZORRO](https://github.com/NG-ZORRO)
 
+CDK 设计参考了 [@angular/cdk](https://github.com/angular/components)
+
 ## ☀️ 授权协议
 
 [MIT](https://github.com/IduxFE/components/blob/main/LICENSE)

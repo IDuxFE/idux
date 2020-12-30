@@ -1,24 +1,10 @@
 ---
 order: 0
 title:
-  zh: 基本使用
+  zh: 空数据
   en: Basic usage
 ---
 
 ## zh
 
-
-
-## en
-
-
-  
-## demo
-
-```html
-
-<template>
-333333333
-</template>
-```
-
+空数据组件

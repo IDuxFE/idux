@@ -1,9 +1,12 @@
-import { CSSProperties, VNodeTypes } from 'vue'
+import { CSSProperties } from 'vue'
 
 export interface EmptyProps {
-  readonly description?: string | VNodeTypes
+  // 自定义描述内容
+  readonly description?: string
+  // 图片样式
   readonly imageStyle?: CSSProperties
-  readonly image?: string | VNodeTypes
+  // 图片地址
+  readonly image?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

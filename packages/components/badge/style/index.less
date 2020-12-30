@@ -1,0 +1,54 @@
+@import '../../style/default.less';
+
+@badge-prefix: ~'@{idux-prefix}-badge';
+@badge-size: 16px;
+@badge-color: #f5222d;
+@badge-padding: 0 3px;
+@badge-dot-size: 6px;
+
+.@{badge-prefix} {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  transform: translate(50%, -50%);
+  transform-origin: 100% 0;
+  font-size: @font-size-sm;
+  color: @badge-color;
+  &-wrapper {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+  }
+  &-slot-count {
+    font-size: @font-size-base;
+  }
+  &-dot {
+    width: @badge-dot-size;
+    height: @badge-dot-size;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px #fff;
+    background-color: @badge-color;
+  }
+  &-count {
+    padding: @badge-padding;
+    min-width: @badge-size;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px #fff;
+    background-color: @badge-color;
+    color: #fff;
+  }
+  &-hide-zero {
+    display: none;
+  }
+  &-empty {
+    position: unset;
+    box-shadow: none;
+    transform: none;
+    transform-origin: unset;
+  }
+}

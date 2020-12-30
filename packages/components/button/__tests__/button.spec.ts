@@ -68,7 +68,7 @@ describe('Button.vue', () => {
     expect(wrapper.classes()).toContain('ix-button-disabled')
   })
 
-  test.only('loading work', async () => {
+  test('loading work', async () => {
     const wrapper = buttonMount({ props: { icon: 'up', loading: true } })
 
     expect(wrapper.findAll('.ix-icon').length).toEqual(1)
@@ -108,7 +108,7 @@ describe('Button.vue', () => {
     expect(wrapper.classes()).toContain('ix-button-block')
   })
 
-  test.only('icon work', async () => {
+  test('icon work', async () => {
     const wrapper = buttonMount({ props: { icon: 'up' } })
 
     expect(wrapper.find('.ix-icon-up').exists()).toBeTruthy()
@@ -116,6 +116,8 @@ describe('Button.vue', () => {
     await wrapper.setProps({ icon: 'down' })
 
     expect(wrapper.find('.ix-icon-down').exists()).toBeTruthy()
+
+    expect(wrapper.classes()).toContain('ix-button-icon-only')
   })
 
   test('slot work', async () => {

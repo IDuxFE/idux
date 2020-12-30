@@ -1,18 +1,20 @@
 ---
-order: 1
+order: 8
 title:
   zh: 按钮图标
 ---
 
 ## zh
 
-按钮支持设置图标，当 loading 状态时图标失效。
+通过设置 `icon` 给按钮设置图标。
 
 ## demo
 
 ```html
 <template>
-  <ix-button icon="up">up Button</ix-button>
-  <ix-button icon="up" loading>loading Button</ix-button>
+  <ix-button icon="search">Search</ix-button>
+  <ix-button icon="search"></ix-button>
+  <ix-button icon="download">Download</ix-button>
+  <ix-button icon="download"></ix-button>
 </template>
 ```

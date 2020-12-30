@@ -30,7 +30,7 @@ export function generateSite(target: string, targetName?: string): void {
   const isSyncSpecific = target && target !== 'init'
   const demoMeta: Record<string, Record<string, Meta>> = {}
 
-  const filterComponentName = ['style', 'core', 'locale', 'i18n', 'version']
+  const filterComponentName = ['style', 'core', 'locale', 'i18n', 'version', 'utils']
   readdirSync(packageRoot).forEach(packageName => {
     if (isSyncSpecific && packageName !== target) {
       return
