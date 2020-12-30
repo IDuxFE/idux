@@ -34,6 +34,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { ImagePreviewProps } from './types'
 import { IxIcon } from '@idux/components/icon'
+import { PropTypes } from '@idux/cdk/utils'
 const minScale = 0.2
 const initScale = 1.0
 const scaleStep = 0.1
@@ -44,10 +45,7 @@ export default defineComponent({
   name: 'IxImgPreview',
   components: { IxIcon },
   props: {
-    previewSrc: {
-      type: String,
-      default: '',
-    },
+    previewSrc: PropTypes.string.def(''),
   },
   emits: {
     close: () => {

@@ -31,39 +31,19 @@ import { ImageProps, ImageStatus } from './types'
 import ImgPreview from './ImgPreview.vue'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { toCssPixel } from '@idux/cdk/utils/convert'
+import { PropTypes, withUndefined } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxImage',
   components: { ImgPreview },
   props: {
-    src: {
-      type: String,
-      default: '',
-    },
-    width: {
-      type: [String, Number],
-      default: null,
-    },
-    height: {
-      type: [String, Number],
-      default: null,
-    },
-    preview: {
-      type: Boolean,
-      default: false,
-    },
-    fallback: {
-      type: String,
-      default: undefined,
-    },
-    alt: {
-      type: String,
-      default: '',
-    },
-    objectFit: {
-      type: String,
-      default: 'fill',
-    },
+    src: PropTypes.string.def(''),
+    width: withUndefined(PropTypes.oneOfType([String, Number])),
+    height: withUndefined(PropTypes.oneOfType([String, Number])),
+    preview: PropTypes.bool.def(false),
+    fallback: PropTypes.string,
+    alt: PropTypes.string.def(''),
+    objectFit: PropTypes.string.def('fill'),
   },
   emits: {
     statusChange: (status: string) => {

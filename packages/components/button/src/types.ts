@@ -3,13 +3,13 @@ import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
 export type ButtonShape = 'circle' | 'round'
 export interface ButtonProps {
   readonly mode?: ButtonMode
-  readonly danger: boolean
-  readonly ghost: boolean
-  readonly disabled: boolean
-  readonly loading: boolean
+  readonly danger?: boolean
+  readonly ghost?: boolean
+  readonly disabled?: boolean
+  readonly loading?: boolean
   readonly size?: ComponentSize
   readonly shape?: ButtonShape
-  readonly block: boolean
+  readonly block?: boolean
   readonly icon?: string
 }
 

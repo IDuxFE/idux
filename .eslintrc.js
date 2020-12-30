@@ -33,9 +33,9 @@ module.exports = {
     indent: ['error', 2, { SwitchCase: 1 }],
     'object-curly-spacing': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
-    'prettier/prettier': 'error',
 
     // ts
+    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
@@ -51,9 +51,13 @@ module.exports = {
     ],
     '@typescript-eslint/no-empty-function': 'off',
 
+    // prettier
+    'prettier/prettier': 'error',
+
     // vue
     'vue/html-closing-bracket-spacing': 'error',
     'vue/require-default-prop': 'error',
+    'vue/require-explicit-emits': 'error',
     'vue/max-attributes-per-line': 'off',
     'vue/attribute-hyphenation': 'off',
   },
