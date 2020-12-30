@@ -8,19 +8,21 @@
   </span>
 </template>
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, onUpdated, reactive } from 'vue'
-import { BadgeProps, SlotsExist } from './types'
+import { computed, defineComponent, onUpdated, reactive } from 'vue'
+import { isNumber, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { isNumber } from '@idux/cdk/utils'
+
+import type { ComputedRef } from 'vue'
+import type { BadgeProps, SlotsExist } from './types'
 
 export default defineComponent({
   name: 'IxBadge',
   props: {
-    count: { type: [Number, String], default: 0 },
-    showZero: { type: Boolean, default: undefined },
-    overflowCount: { type: [Number, String], default: undefined },
-    dot: { type: Boolean, default: undefined },
-    color: { type: String, default: undefined },
+    count: PropTypes.oneOfType([Number, String]).def(0),
+    showZero: PropTypes.bool,
+    overflowCount: PropTypes.oneOfType([Number, String]),
+    dot: PropTypes.bool,
+    color: PropTypes.string,
   },
   setup(props: BadgeProps, { slots }) {
     const badgeConfig = useGlobalConfig('badge')
