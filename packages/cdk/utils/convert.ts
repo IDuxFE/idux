@@ -1,4 +1,4 @@
-import { isNil, isNumber } from './typeof'
+import { isNil, isNumeric } from './typeof'
 
 export function toArray<T>(value: T | T[]): T[]
 export function toArray<T>(value: T | readonly T[]): readonly T[]
@@ -9,7 +9,7 @@ export function toArray<T>(value: T | T[]): T[] {
 export function toNumber(value: unknown): number
 export function toNumber<T>(value: unknown, fallback: T): number | T
 export function toNumber(value: unknown, fallback = 0): number {
-  return isNumber(value) ? Number(value) : fallback
+  return isNumeric(value) ? Number(value) : fallback
 }
 
 export function toBoolean(value: unknown): boolean {

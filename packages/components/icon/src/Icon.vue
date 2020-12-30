@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUpdated, ref, watch } from 'vue'
-import { isNumber, PropTypes, withUndefined } from '@idux/cdk/utils'
+import { isNumeric, PropTypes, withUndefined } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
 
@@ -71,7 +71,7 @@ async function appendChild(props: IconProps, iconConfig: IconConfig, root: Ref<H
 }
 
 function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void {
-  if (isNumber(rotate)) {
+  if (isNumeric(rotate)) {
     svg.setAttribute('style', `transform: rotate(${rotate}deg)`)
   } else {
     svg.removeAttribute('style')
