@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, onUpdated, reactive } from 'vue'
-import { isNumber, PropTypes } from '@idux/cdk/utils'
+import { isNumeric, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 
 import type { ComputedRef } from 'vue'
@@ -65,8 +65,8 @@ const useCountValue = (
   return computed(() => {
     if (!slots.count && !dot.value) {
       if (!showZero.value && +props.count === 0) return false
-      if (isNumber(props.count) && isNumber(overflowCount.value)) {
-        return +props.count > +overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
+      if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
+        return props.count > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
       }
       return props.count
     }
