@@ -42,7 +42,7 @@ export function generateSite(target: string, targetName?: string): void {
         return
       }
       const componentDirname = join(packageDirname, componentName)
-      if (statSync(componentDirname).isDirectory()) {
+      if (statSync(componentDirname).isDirectory() && readdirSync(componentDirname).length > 0) {
         const demoDirname = join(componentDirname, 'demo')
         const demoMap: Record<string, DemoInfo> = {}
         if (existsSync(demoDirname)) {
