@@ -1,23 +1,21 @@
-import { UserConfig } from 'vite'
+import { defineConfig } from 'vite'
+import vuePlugin from '@vitejs/plugin-vue'
+import path from 'path'
 
-const config: UserConfig = {
-  entry: './site/docs/index.html', // not work
-  base: './site/docs/', // not work
-  resolvers: [
+export default defineConfig({
+  root: './site/docs/',
+  plugins: [vuePlugin()],
+  alias: [
     {
-      alias(path: string): string {
-        if (path.startsWith('@idux')) {
-          return path.replace('@idux', '/packages')
-        }
-        return path
-      },
+      find: '@idux',
+      replacement: path.resolve(__dirname, 'packages'),
     },
   ],
-  cssPreprocessOptions: {
-    less: {
-      javascriptEnabled: true,
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
     },
   },
-}
-
-export default config
+})
