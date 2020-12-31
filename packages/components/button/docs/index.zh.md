@@ -73,7 +73,7 @@ cover:
 | @button-border-style | @border-style | - |
 | @button-border-size | @border-size-sm | - |
 | @button-border-radius | @border-radius-sm | - |
-| @button-disable-fade | 40% | - |
+| @button-disable-opacity | 0.4 | - |
 | @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |
 | @button-primary-color | @white | - |
 | @button-primary-bg | @primary-color | - |

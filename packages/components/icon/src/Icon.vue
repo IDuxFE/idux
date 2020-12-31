@@ -4,20 +4,21 @@
   </component>
 </template>
 <script lang="ts">
+import { computed, defineComponent, onMounted, onUpdated, ref, watch } from 'vue'
+import { isNumeric, PropTypes, withUndefined } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/core/config'
+import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
+
 import type { Ref, SetupContext } from 'vue'
 import type { IconConfig } from '@idux/components/core/config'
 import type { IconProps } from './types'
 
-import { computed, defineComponent, onMounted, onUpdated, ref, watch } from 'vue'
-import { useGlobalConfig } from '@idux/components/core/config'
-import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
-
 export default defineComponent({
   name: 'IxIcon',
   props: {
-    name: { type: String, default: undefined },
-    rotate: { type: [Boolean, Number, String], default: false },
-    iconfont: Boolean,
+    name: PropTypes.string,
+    rotate: withUndefined(PropTypes.oneOfType([Boolean, Number, String])),
+    iconfont: PropTypes.bool,
   },
   setup(props: IconProps, { attrs }: SetupContext) {
     const root = ref((null as unknown) as HTMLElement)
@@ -70,7 +71,7 @@ async function appendChild(props: IconProps, iconConfig: IconConfig, root: Ref<H
 }
 
 function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void {
-  if (typeof rotate === 'number' || typeof rotate === 'string') {
+  if (isNumeric(rotate)) {
     svg.setAttribute('style', `transform: rotate(${rotate}deg)`)
   } else {
     svg.removeAttribute('style')
