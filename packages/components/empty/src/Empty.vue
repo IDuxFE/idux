@@ -1,10 +1,11 @@
 <template>
-  <component :is="'div'" class="ix-empty" :style="imageStyle">
-    <ix-icon name="empty" />
-    <!-- <ix-icon v-if="!image" name="empty" />
-    <img v-else :src="image" /> -->
-    <p>没有数据222222</p>
-  </component>
+  <div class="ix-empty-wrapper" :style="imageStyle">
+    <span>
+      <ix-icon name="empty" /><br />
+
+      <p>没有数据</p>
+    </span>
+  </div>
 </template>
 <script lang="ts">
 import { IxIcon } from '@idux/components/icon'
