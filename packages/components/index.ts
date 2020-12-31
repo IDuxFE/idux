@@ -4,8 +4,9 @@ import { IxIcon } from './icon'
 import { IxEmpty } from './empty'
 import { IxBadge } from './badge'
 import { IxDivider } from './divider'
+import { IxImage } from './image'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxEmpty]
+const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxEmpty]
 
 const install = (app: App): void => {
   components.forEach(component => {
@@ -22,10 +23,10 @@ export default {
 
 export * from './core/config'
 export * from './core/types'
-
 export * from './button'
 export * from './i18n'
 export * from './icon'
 export * from './empty'
 export * from './badge'
 export * from './divider'
+export * from './image'

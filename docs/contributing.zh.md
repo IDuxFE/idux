@@ -82,12 +82,13 @@ title: 贡献指南
 - 文件命名：`PascalCase`
 - props
   - 命名：`camelCase`
-  - 默认值：如果是支持全局配置的 props, 则必须指定 `default: undefined`, 除了 `Boolean` 类型，其他类型都需要指定 `default`
+  - 默认值：请使用 `@idux/cdk/utils` 中的 `PropTypes`, 请注意：在没有显示的指定默认值的情况下，所有类型的默认值都为 `undefined`, 这与 vue compiler 默认的行为有所区别。
 - slots
   - 命名：`camelCase`
   - 如果与某个 props 的功能一致时，需要跟该 props 同名
 - emits
   - 命名：`camelCase`
+- 优先使用 `template`, 只有在 `template` 不便实现的功能时，才可以使用 `tsx`, 例如：需要递归渲染的场景
 - 尽可能的使用 Composition API 去完成我们的功能，包括 Demo
 
 ### typescript

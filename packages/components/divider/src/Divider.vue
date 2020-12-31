@@ -6,27 +6,20 @@
   </div>
 </template>
 <script lang="ts">
-import type { PropType } from 'vue'
-import type { DividerConfig } from '@idux/components/core/config'
-import type { DividerPosition, DividerType } from '@idux/components/core/types'
-import type { DividerProps } from './types'
-
 import { computed, defineComponent } from 'vue'
+import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
+
+import type { DividerConfig } from '@idux/components/core/config'
+import type { DividerProps } from './types'
 
 export default defineComponent({
   name: 'IxDivider',
   props: {
-    dashed: { type: Boolean, default: undefined },
-    plain: { type: Boolean, default: undefined },
-    position: {
-      type: String as PropType<DividerPosition>,
-      default: undefined,
-    },
-    type: {
-      type: String as PropType<DividerType>,
-      default: undefined,
-    },
+    dashed: PropTypes.bool,
+    plain: PropTypes.bool,
+    position: PropTypes.oneOf(['left', 'center', 'right'] as const),
+    type: PropTypes.oneOf(['horizontal', 'vertical'] as const),
   },
   setup(props: DividerProps, { slots }) {
     const dividerConfig = useGlobalConfig('divider')

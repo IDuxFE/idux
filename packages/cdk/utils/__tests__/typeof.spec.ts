@@ -1,14 +1,27 @@
-import { isNumber, isNil, isNonNil } from '../typeof'
+import { isNumeric, isNil, isNonNil } from '../typeof'
 
 describe('typeof.ts', () => {
-  test('isNumber work', async () => {
-    expect(isNumber(1)).toEqual(true)
-    expect(isNumber('1')).toEqual(true)
-    expect(isNumber('1.1')).toEqual(true)
+  test('isNumeric work', async () => {
+    expect(isNumeric(+10)).toEqual(true)
+    expect(isNumeric('+10')).toEqual(true)
+    expect(isNumeric(-10)).toEqual(true)
+    expect(isNumeric('-10')).toEqual(true)
+    expect(isNumeric('0')).toEqual(true)
+    expect(isNumeric(0xff)).toEqual(true)
+    expect(isNumeric('0xff')).toEqual(true)
+    expect(isNumeric('8e5')).toEqual(true)
+    expect(isNumeric('3.1415')).toEqual(true)
 
-    expect(isNumber('1-1')).toEqual(false)
-    expect(isNumber('')).toEqual(false)
-    expect(isNumber(NaN)).toEqual(false)
+    expect(isNumeric('-0x42')).toEqual(false)
+    expect(isNumeric('7.2acdgs')).toEqual(false)
+    expect(isNumeric('')).toEqual(false)
+    expect(isNumeric({})).toEqual(false)
+    expect(isNumeric([])).toEqual(false)
+    expect(isNumeric(NaN)).toEqual(false)
+    expect(isNumeric(null)).toEqual(false)
+    expect(isNumeric(undefined)).toEqual(false)
+    expect(isNumeric(true)).toEqual(false)
+    expect(isNumeric(Infinity)).toEqual(false)
   })
 
   test('isNil work', async () => {

@@ -8,19 +8,21 @@
   </span>
 </template>
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, onUpdated, reactive } from 'vue'
-import { BadgeProps, SlotsExist } from './types'
+import { computed, defineComponent, onUpdated, reactive } from 'vue'
+import { isNumeric, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { isNumber } from '@idux/cdk/utils'
+
+import type { ComputedRef } from 'vue'
+import type { BadgeProps, SlotsExist } from './types'
 
 export default defineComponent({
   name: 'IxBadge',
   props: {
-    count: { type: [Number, String], default: 0 },
-    showZero: { type: Boolean, default: undefined },
-    overflowCount: { type: [Number, String], default: undefined },
-    dot: { type: Boolean, default: undefined },
-    color: { type: String, default: undefined },
+    count: PropTypes.oneOfType([Number, String]).def(0),
+    showZero: PropTypes.bool,
+    overflowCount: PropTypes.oneOfType([Number, String]),
+    dot: PropTypes.bool,
+    color: PropTypes.string,
   },
   setup(props: BadgeProps, { slots }) {
     const badgeConfig = useGlobalConfig('badge')
@@ -63,8 +65,8 @@ const useCountValue = (
   return computed(() => {
     if (!slots.count && !dot.value) {
       if (!showZero.value && +props.count === 0) return false
-      if (isNumber(props.count) && isNumber(overflowCount.value)) {
-        return +props.count > +overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
+      if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
+        return props.count > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
       }
       return props.count
     }
