@@ -2,6 +2,7 @@ import type { Placement } from '@popperjs/core'
 import type { OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
+
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
@@ -166,6 +167,7 @@ export interface GlobalConfig {
   input: InputConfig
   textarea: TextareaConfig
   rate: RateConfig
+  radioGroup: RadioGroupConfig
   // Data Display
   badge: BadgeConfig
   card: CardConfig
@@ -183,4 +185,9 @@ export interface GlobalConfig {
   // --- end ---
 }
 
-export type GlobalConfigKey = keyof GlobalConfig
+export type RadioSize = 'large' | 'medium' | 'small'
+export type RadioMode = 'border' | 'fill'
+export interface RadioGroupConfig {
+  size: RadioSize
+  mode: RadioMode
+}
