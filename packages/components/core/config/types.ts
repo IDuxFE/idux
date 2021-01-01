@@ -8,6 +8,7 @@ export interface GlobalConfig {
   image: ImageConfig
   spin: SpinConfig
   space: SpaceConfig
+  card: CardConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -54,4 +55,12 @@ export interface SpinConfig {
 export type SpaceSize = 'small' | 'medium' | 'large' | number
 export interface SpaceConfig {
   size: SpaceSize
+}
+
+export type CardSize = 'large' | 'medium' | 'small'
+export interface CardConfig {
+  hoverable: boolean
+  bordered: boolean
+  loading: boolean
+  size: CardSize
 }
