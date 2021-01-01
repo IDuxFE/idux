@@ -8,6 +8,7 @@ export interface GlobalConfig {
   badge: BadgeConfig
   divider: DividerConfig
   image: ImageConfig
+  card: CardConfig
 }
 
 export interface ButtonConfig {
@@ -35,4 +36,10 @@ export interface ImageConfig {
   width: string | number
   height: string | number
   fallback: string
+}
+export interface CardConfig {
+  hoverable: boolean
+  bordered: boolean
+  loading: boolean
+  size: ComponentSize
 }
