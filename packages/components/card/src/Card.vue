@@ -10,7 +10,11 @@
         </div>
         <div v-if="isShowExtra" class="ix-card__head__extra">
           <slot name="extra">
+            <<<<<<< HEAD
             <a>{{ extra }}</a>
+            =======
+            <a @click="_onExtraClick">{{ extra }}</a>
+            >>>>>>> feat(comp:card): add card component
           </slot>
         </div>
       </div>
