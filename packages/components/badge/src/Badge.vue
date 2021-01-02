@@ -11,7 +11,7 @@
 import { computed, ComputedRef, defineComponent, onUpdated, reactive } from 'vue'
 import { BadgeProps, SlotsExist } from './types'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { isNumber } from '@idux/cdk/utils'
+import { isNumeric } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxBadge',
@@ -63,7 +63,7 @@ const useCountValue = (
   return computed(() => {
     if (!slots.count && !dot.value) {
       if (!showZero.value && +props.count === 0) return false
-      if (isNumber(props.count) && isNumber(overflowCount.value)) {
+      if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
         return +props.count > +overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
       }
       return props.count
