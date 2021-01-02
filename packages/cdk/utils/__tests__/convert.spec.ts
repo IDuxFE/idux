@@ -23,16 +23,16 @@ describe('convert.ts', () => {
     expect(toNumber(undefined, 1)).toEqual(1)
 
     expect(toNumber(null)).toEqual(0)
-    expect(toNumber(null, 1)).toEqual(1)
+    expect(toNumber('null', 1)).toEqual(1)
 
     expect(toNumber('')).toEqual(0)
-    expect(toNumber('', 1)).toEqual(1)
+    expect(toNumber('', 1)).toEqual(0)
 
     expect(toNumber('1.1')).toEqual(1.1)
     expect(toNumber('1.1', 1)).toEqual(1.1)
 
     expect(toNumber('1-1')).toEqual(0)
-    expect(toNumber('1-1', 1)).toEqual(1)
+    expect(toNumber('1-1', 2)).toEqual(2)
   })
 
   test('toBoolean work', async () => {

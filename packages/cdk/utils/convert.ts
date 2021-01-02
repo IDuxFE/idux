@@ -9,7 +9,13 @@ export function toArray<T>(value: T | T[]): T[] {
 export function toNumber(value: unknown): number
 export function toNumber<T>(value: unknown, fallback: T): number | T
 export function toNumber(value: unknown, fallback = 0): number {
-  return isNumber(value) ? Number(value) : fallback
+  if (isNumber(value)) {
+    return value
+  } else if (!isNaN(Number(value))) {
+    return Number(value)
+  } else {
+    return fallback
+  }
 }
 
 export function toBoolean(value: unknown): boolean {
