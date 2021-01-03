@@ -1,3 +1,4 @@
+import type { DefineComponent } from 'vue'
 import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
 
 export type ButtonShape = 'circle' | 'round'
@@ -13,8 +14,7 @@ export interface ButtonProps {
   readonly icon?: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ButtonComponent extends ButtonProps {}
+export type IxButtonComponent = InstanceType<DefineComponent<ButtonProps>>
 
 export interface ButtonGroupProps {
   readonly mode?: ButtonMode
@@ -22,5 +22,4 @@ export interface ButtonGroupProps {
   readonly shape?: ButtonShape
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ButtonGroupComponent extends ButtonGroupProps {}
+export type IxButtonGroupComponent = InstanceType<DefineComponent<ButtonGroupProps>>

@@ -1,11 +1,12 @@
+import type { DefineComponent } from 'vue'
+
 export interface IconProps {
   readonly name?: string
   readonly rotate?: boolean | number | string
   readonly iconfont?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconComponent extends IconProps {}
+export type IxIconComponent = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {
   name: string

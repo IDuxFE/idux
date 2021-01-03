@@ -10,12 +10,13 @@ export function getLessTemplate(compName: string): string {
 }
 
 export function getTypesTemplate(compName: string): string {
-  return `export interface ${compName}Props {
+  return `import type { DefineComponent } from 'vue'
+
+export interface ${compName}Props {
   // please add readonly for every prop
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Ix${compName}Component extends ${compName}Props {}
+export type Ix${compName}Component = InstanceType<DefineComponent<${compName}Props>>
 `
 }
 
@@ -120,7 +121,7 @@ cover:
 `
 }
 
-export function getDomeTemplate(compName: string, moduleName: string): string {
+export function getDomeTemplate(compName: string): string {
   return `---
 order: 0
 title:
@@ -139,6 +140,20 @@ title:
 ## demo
 
 \`\`\`html
+<template>
+  <ix-${compName} />
+</template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    
+  }
+})
+</script>
+<style lang="less" scoped>
+</style>
 \`\`\`
 
 `

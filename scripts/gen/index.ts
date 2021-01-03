@@ -63,9 +63,9 @@ if (moduleName === 'components') {
   // 这里都是硬编码，有没有更好的实现方式？
   let currIndexContent = readFileSync(indexFilePath, 'utf-8')
   currIndexContent = currIndexContent
-    .replace('\n\n', `\nimport { Ix${upperFirstComponentName} } from './${compName}'\n\n`)
+    .replace('\n\n', `\n\nimport { Ix${upperFirstComponentName} } from './${compName}'\n\n`)
     .replace(']', `, Ix${upperFirstComponentName}]`)
-  currIndexContent += `export * from './${compName}'\n`
+  currIndexContent += `\nexport * from './${compName}'\n`
   writeFileSync(indexFilePath, currIndexContent)
 
   const currLess = readFileSync(componentsLessPath, 'utf-8')
@@ -84,5 +84,5 @@ if (moduleName === 'components') {
 const docsZhTemplate = getDocsZhTemplate(upperFirstComponentName, moduleName)
 writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
-const domeTemplate = getDomeTemplate(upperFirstComponentName, moduleName)
+const domeTemplate = getDomeTemplate(compName)
 writeFileSync(`${componentDirname}/demo/basic.md`, domeTemplate)

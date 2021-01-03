@@ -1,3 +1,5 @@
+import type { DefineComponent } from 'vue'
+
 export interface ImageProps {
   readonly src?: string
   readonly width?: string | number
@@ -12,5 +14,4 @@ export interface ImagePreviewProps {
 }
 export type ImageStatus = 'loading' | 'loaded' | 'failed'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IxImageComponent extends ImageProps {}
+export type IxImageComponent = InstanceType<DefineComponent<ImageProps>>
