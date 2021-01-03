@@ -1,17 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/** The method checks whether the given value is a Numeric value or not and returns the corresponding boolean value. */
+
 const _toString = Object.prototype.toString
 
-export function isNumeric(value: unknown): boolean {
-  return !isNaN(parseFloat(value as string)) && isFinite(value as number)
+/** The method checks whether the given value is a Numeric value or not and returns the corresponding boolean value. */
+export function isNumeric(val: unknown): boolean {
+  return !isNaN(parseFloat(val as string)) && isFinite(val as number)
 }
 
-export function isNil(value: unknown): value is null | undefined {
-  return typeof value === 'undefined' || value === null
+export function isUndefined(val: unknown): val is undefined {
+  return typeof val === 'undefined'
 }
 
-export function isNonNil<T>(value: T): value is NonNullable<T> {
-  return typeof value !== 'undefined' && value !== null
+export function isNull(val: unknown): val is null {
+  return val === null
+}
+
+export function isNil(val: unknown): val is null | undefined {
+  return isUndefined(val) || isNull(val)
+}
+
+export function isNonNil<T>(val: T): val is NonNullable<T> {
+  return !isNil(val)
 }
 
 export function isNumber(val: unknown): val is number {
@@ -24,14 +33,6 @@ export function isBoolean(val: unknown): val is boolean {
 
 export function isString(val: unknown): val is string {
   return typeof val === 'string'
-}
-
-export function isUndefined(val: unknown): val is undefined {
-  return typeof val === 'undefined'
-}
-
-export function isNull(val: unknown): val is null {
-  return val === null
 }
 
 export function isSymbol(val: unknown): val is symbol {

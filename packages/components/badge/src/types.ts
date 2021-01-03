@@ -1,3 +1,5 @@
+import type { DefineComponent } from 'vue'
+
 export interface BadgeProps {
   // Badge显示的数字
   readonly count: number | string
@@ -15,5 +17,4 @@ export interface SlotsExist {
   count: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IxBadgeComponent extends BadgeProps {}
+export type IxBadgeComponent = InstanceType<DefineComponent<BadgeProps>>
