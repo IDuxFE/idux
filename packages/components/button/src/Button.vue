@@ -2,34 +2,35 @@
   <component :is="tag" class="ix-button" :class="classes" :disabled="disabled || loading ? true : undefined">
     <ix-icon v-if="loading" name="loading" />
     <ix-icon v-else-if="icon" :name="icon" />
-    <span v-if="hasDefaultSolot"><slot></slot></span>
+    <span v-if="hasDefaultSlot"><slot></slot></span>
   </component>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, inject, onUpdated, ref } from 'vue'
+import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { IxIcon } from '@idux/components/icon'
 import { buttonGroupInjectionKey } from './button'
 
-import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { ButtonConfig } from '@idux/components/core/config'
-import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
-import type { ButtonGroupProps, ButtonProps, ButtonShape } from './types'
+import type { ButtonMode } from '@idux/components/core/types'
+import type { ButtonGroupProps, ButtonProps } from './types'
 
 export default defineComponent({
   name: 'IxButton',
   components: { IxIcon },
   props: {
-    mode: { type: String as PropType<ButtonMode>, default: undefined },
-    danger: Boolean,
-    ghost: Boolean,
-    disabled: Boolean,
-    loading: Boolean,
-    size: { type: String as PropType<ComponentSize>, default: undefined },
-    shape: { type: String as PropType<ButtonShape>, default: undefined },
-    block: Boolean,
-    icon: { type: String, default: undefined },
+    mode: PropTypes.oneOf(['primary', 'default', 'dashed', 'text', 'link'] as const),
+    danger: PropTypes.bool,
+    ghost: PropTypes.bool,
+    disabled: PropTypes.bool,
+    loading: PropTypes.bool,
+    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
+    shape: PropTypes.oneOf(['circle', 'round'] as const),
+    block: PropTypes.bool,
+    icon: PropTypes.string,
   },
   setup(props: ButtonProps, { slots }) {
     const groupProps = inject(buttonGroupInjectionKey, {})
@@ -37,15 +38,15 @@ export default defineComponent({
 
     const mode = computed(() => props.mode ?? (groupProps.mode || buttonConfig.mode))
 
-    const hasDefaultSolot = ref(!!slots.default)
+    const hasDefaultSlot = ref(!!slots.default)
     onUpdated(() => {
-      hasDefaultSolot.value = !!slots.default
+      hasDefaultSlot.value = !!slots.default
     })
-    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSolot)
+    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
 
     const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
 
-    return { classes, tag, hasDefaultSolot }
+    return { classes, tag, hasDefaultSlot }
   },
 })
 
@@ -54,7 +55,7 @@ const useClasses = (
   groupProps: ButtonGroupProps,
   config: ButtonConfig,
   mode: ComputedRef<ButtonMode>,
-  hasDefaultSolot: Ref<boolean>,
+  hasDefaultSlot: Ref<boolean>,
 ) => {
   return computed(() => {
     const size = props.size ?? (groupProps.size || config.size)
@@ -69,7 +70,7 @@ const useClasses = (
         'ix-button-disabled': props.disabled,
         'ix-button-loading': props.loading,
         'ix-button-block': props.block,
-        'ix-button-icon-only': !hasDefaultSolot.value && (!!props.icon || props.loading),
+        'ix-button-icon-only': !hasDefaultSlot.value && (!!props.icon || props.loading),
       },
     ]
   })

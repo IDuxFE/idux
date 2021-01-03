@@ -73,18 +73,16 @@ cover:
 | @button-border-style | @border-style | - |
 | @button-border-size | @border-size-sm | - |
 | @button-border-radius | @border-radius-sm | - |
-| @button-disable-fade | 40% | - |
+| @button-disable-opacity | 0.4 | - |
 | @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |
 | @button-primary-color | @white | - |
 | @button-primary-bg | @primary-color | - |
-| @button-primary-border | color(~\`colorPalette('@{button-primary-bg}', 10) \`) | - |
 | @button-primary-text-shadow | 0 -1px 0 rgba(0, 0, 0, 0.15) | - |
 | @button-default-color | @text-color | - |
 | @button-default-bg | @component-background | - |
 | @button-default-border | @border-color | - |
 | @button-danger-color | @error-color | - |
 | @button-danger-bg | @error-color | - |
-| @button-danger-border | color(~\`colorPalette('@{button-danger-bg}', 10) \`) | - |
 | @button-ghost-color | @component-background | - |
 | @button-ghost-color | transparent | - |
 | @button-ghost-border | @component-background | - |
