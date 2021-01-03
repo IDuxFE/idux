@@ -1,19 +1,17 @@
-export interface BadgeProps {
-  // Badge显示的数字
-  readonly count: number | string
-  // 最大显示的数字
-  readonly overflowCount?: number | string
-  // 是否显示0
-  readonly showZero?: boolean
-  // 是否以点的形式显示，优先级大于以上属性
-  readonly dot?: boolean
-  readonly color?: string
+import type { DefineComponent } from 'vue'
+
+interface BadgeOriginalProps {
+  /** Badge显示的数字 */
+  count: number | string
+  /** 最大显示的数字 */
+  overflowCount?: number | string
+  /** 是否显示 0 */
+  showZero?: boolean
+  /** 是否以点的形式显示，优先级大于以上属性 */
+  dot?: boolean
+  color?: string
 }
 
-export interface SlotsExist {
-  default: boolean
-  count: boolean
-}
+export type BadgeProps = Readonly<BadgeOriginalProps>
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IxBadgeComponent extends BadgeProps {}
+export type BadgeComponent = InstanceType<DefineComponent<BadgeProps>>

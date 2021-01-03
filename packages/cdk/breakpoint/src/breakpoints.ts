@@ -1,3 +1,4 @@
+// PascalCase is being used as Breakpoints is used like an enum.
 export const Breakpoints = {
   XSmall: '(max-width: 767.99px)',
   Small: '(min-width: 768px) and (max-width: 1023.99px)',

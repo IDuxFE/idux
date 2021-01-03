@@ -1,0 +1,88 @@
+@import "../../style/default.less";
+
+.typography-mark() {
+  padding: @typography-mark-padding;
+  background-color: @typography-mark-background-color;
+}
+
+.typography-code() {
+  margin: @typography-code-margin;
+  padding: @typography-code-padding;
+  font-size: @typography-code-font-size;
+  background: @typography-code-background;
+  border: @typography-code-border;
+  border-radius: @typography-code-border-radius;
+}
+
+.typography-keyboard() {
+  margin: @typography-kbd-margin;
+  padding: @typography-kbd-padding;
+  font-size: @typography-kbd-font-size;
+  border-radius: @typography-kbd-border-radius;
+  border-width: @typography-kbd-border-width;
+  border-style: @typography-kbd-border-style;
+  border-color: @typography-kbd-border-color;
+  background: @typography-kbd-background;
+}
+
+.typography-underline() {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+
+.typography-delete() {
+  text-decoration: line-through;
+}
+
+.typography-strong() {
+  font-weight: @typography-strong-font-weight;
+}
+
+.typography-a() {
+  text-decoration: none;
+  color: @typography-a-color;
+  cursor: @typography-a-cursor;
+  outline: @typography-a-outline;
+  transition: @typography-a-transition;
+
+  &:hover,
+  &:focus {
+    color: @typography-a-color-hover-focus;
+  }
+
+  &:active {
+    color: @typography-a-color-active;
+  }
+}
+
+.typography-title(@margin-bottom,@color,@font-weight,@font-size,@line-height) {
+  margin-bottom: @margin-bottom;
+  color: @color;
+  font-weight: @font-weight;
+  font-size: @font-size;
+  line-height: @line-height;
+}
+
+.typography-title-1() {
+  .typography-title(@typography-title-margin-bottom, @typography-title-color, @typography-title-font-weight, @typography-title-1-font-size, 1.23);
+}
+
+.typography-title-2() {
+  .typography-title(@typography-title-margin-bottom, @typography-title-color, @typography-title-font-weight, @typography-title-2-font-size, 1.35);
+}
+
+.typography-title-3() {
+  .typography-title(@typography-title-margin-bottom, @typography-title-color, @typography-title-font-weight, @typography-title-3-font-size, 1.35);
+}
+
+.typography-title-4() {
+  .typography-title(@typography-title-margin-bottom, @typography-title-color, @typography-title-font-weight, @typography-title-4-font-size, 1.4);
+}
+
+.typography-title-5() {
+  .typography-title(@typography-title-margin-bottom, @typography-title-color, @typography-title-font-weight, @typography-title-5-font-size, 1.5);
+}
+
+.typography-paragraph() {
+  margin-bottom: @typography-paragraph-margin-bottom;
+}

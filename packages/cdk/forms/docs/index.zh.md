@@ -1,0 +1,428 @@
+---
+category: cdk
+type: 
+title: Reactive Forms
+subtitle: 响应式表单
+cover: 
+---
+
+参考自 [@angular/forms](https://angular.cn/guide/forms-overview)
+
+- 显示创建表单模型: `useFormGroup`, `useFormArray`, `useFormControl`
+- 易扩展的表单验证: `Validators`
+- 响应式的表单状态: `valid`, `invalid`, `validating`, `blurred`, `unblurred`
+
+## 何时使用
+
+- useFormGroup: 使用表单控件组
+- useFormArray:  使用表单控件数组
+- useFormControl:  使用单个表单控件
+- Validators: 内置的验证函数
+
+## API
+
+### useFormGroup
+
+> 构建一个的 `FormGroup` 实例。
+
+```ts
+type ControlConfig<T> =
+  | T
+  | [T, ValidatorFn | ValidatorFn[] | null]
+  | [T, ValidatorFn | ValidatorFn[] | null, AsyncValidatorFn | AsyncValidatorFn[] | null]
+  | [T, ValidatorOptions]
+
+type GroupConfig<T> = {
+  [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]>
+}
+
+export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
+  config: GroupConfig<T>,
+  validators?: ValidatorFn | ValidatorFn[] | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormGroup<T>
+export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
+  config: GroupConfig<T>,
+  validatorOptions?: ValidatorOptions | null,
+): FormGroup<T>
+```
+
+| 名称 | 说明 | 类型 | 默认值 | 备注 |
+| --- | --- | --- | --- | --- |
+| `config` | 控件组配置项 | `GroupConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `key` |
+| `validators` | 一个同步验证器函数或数组 | `ValidatorFn | ValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
+| `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn | AsyncValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
+| `validatorOptions` | 控件组验证配置项 | `ValidatorOptions` | - | - |
+
+### useFormArray
+
+> 构建一个的 `FormArray` 实例。
+
+```ts
+type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<ArrayElement<T>> | ArrayElement<T>>
+
+
+export function useFormArray<T extends any[] = any[]>(
+  config: ArrayConfig<T>,
+  validators?: ValidatorFn | ValidatorFn[] | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormArray<T>
+export function useFormArray<T extends any[] = any[]>(
+  config: ArrayConfig<T>,
+  validatorOptions?: ValidatorOptions | null,
+): FormArray<T>
+```
+
+| 名称 | 说明 | 类型 | 默认值 | 备注 |
+| --- | --- | --- | --- | --- |
+| `config` | 控件数组配置项 | `ArrayConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `index` |
+| `validators` | 一个同步验证器函数或数组 | `ValidatorFn | ValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
+| `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn | AsyncValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
+| `validatorOptions` | 控件数组验证配置项 | `ValidatorOptions` | - | - |
+
+### useFormControl
+
+> 构建一个的 `FormControl` 实例。
+
+```ts
+export function useFormControl<T = any>(
+  initValue?: T | null,
+  validator?: ValidatorFn | ValidatorFn[] | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormControl<T>
+export function useFormControl<T = any>(initValue?: T | null, options?: ValidatorOptions | null): FormControl<T>
+
+```
+
+| 名称 | 说明 | 类型 | 默认值 | 备注 |
+| --- | --- | --- | --- | --- |
+| `initValue` | 控件初始值 | `any` | `null` | - |
+| `validators` | 一个同步验证器函数或数组 | `ValidatorFn | ValidatorFn[]` | - | - |
+| `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn | AsyncValidatorFn[]` | - | - |
+| `validatorOptions` | 控件验证配置项 | `ValidatorOptions` | - | - |
+
+### Validators
+
+> 验证函数验证成功返回 `null`, 验证失败返回带有验证函数名称的 `object`.
+
+| 名称 | 说明 | 参数类型 | 默认值 | 备注 |
+| --- | --- | --- | --- | --- |
+| `required` | 验证表单控件具有非空值 | - | - | 验证失败返回 `{ required: { message: '' } }`|
+| `requiredTrue` | 验证表单控件的值为 `true` | - | - | 验证失败返回 `{ requiredTrue: { message: '', actual: value } }`|
+| `email` | 验证表单控件的值是否为 `email` | - | - | 验证失败返回 `{ email: { message: '', actual: value } }`|
+| `min()` | 验证表单控件的值大于或等于指定的数字 | `number` | - | 验证失败返回 `{ min: { message: '', min, actual: value } }`|
+| `max()` | 验证表单控件的值小于或等于指定的数字 | `number` | - | 验证失败返回 `{ max: { message: '', min, actual: value } }`|
+| `minLength()` | 验证表单控件的值的长度大于或等于指定的数字 | `number` | - | 验证失败返回 `{ minLength: { message: '', minLength, actual: value.length } }`|
+| `maxLength()` | 验证表单控件的值的长度小于或等于指定的数字 | `number` | - | 验证失败返回 `{ maxLength: { message: '', maxLength, actual: value.length } }`|
+| `pattern()` | 验证表单控件的值匹配一个正则表达式 | `string \| RegExp` | - | 验证失败返回 `{ pattern: { message: '', pattern, actual: value } }`|
+| `setMessages()` | 设置验证失败的提示信息 | `ErrorMessages` | - | 每次设置的 `messages` 会跟之前的进行合并 |
+
+### AbstractControl
+
+```ts
+export abstract class AbstractControl<T = any> {
+  constructor(validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null)
+
+  /**
+   * The ref value for the control.
+   */
+  readonly valueRef: DeepReadonly<Ref<any>>
+
+  /**
+   * The validation status of the control, there are three possible validation status values:
+   * * **valid**: This control has passed all validation checks.
+   * * **invalid**: This control has failed at least one validation check.
+   * * **validating**: This control is in the midst of conducting a validation check.
+   */
+  readonly status: DeepReadonly<Ref<ValidationStatus>>
+
+  /**
+   * An object containing any errors generated by failing validation, or null if there are no errors.
+   */
+  readonly errors: DeepReadonly<Ref<ValidationErrors | null>>
+
+  /**
+   * A control is valid when its `status` is `valid`.
+   */
+  readonly valid: ComputedRef<boolean>
+
+  /**
+   * A control is invalid when its `status` is `invalid`.
+   */
+  readonly invalid: ComputedRef<boolean>
+
+  /**
+   * A control is validating when its `status` is `validating`.
+   */
+  readonly validating: ComputedRef<boolean>
+
+  /**
+   * A control is marked `blurred` once the user has triggered a `blur` event on it.
+   */
+  readonly blurred: ComputedRef<boolean>
+
+  /**
+   * A control is `unblurred` if the user has not yet triggered a `blur` event on it.
+   */
+  readonly unblurred: ComputedRef<boolean>
+
+  /**
+   * A control is `dirty` if the user has changed the value in the UI.
+   */
+  readonly dirty: ComputedRef<boolean>
+
+  /**
+   * A control is `pristine` if the user has not yet changed the value in the UI.
+   */
+  readonly pristine: ComputedRef<boolean>
+
+  /**
+   * A collection of child controls.
+   */
+  readonly controls: Partial<Record<keyof T, AbstractControl>> | AbstractControl[] | null
+
+  /**
+   * The parent control.
+   */
+  get parent(): FormGroup<T> | FormArray<T[]> | null
+
+  /**
+   * Retrieves the top-level ancestor of this control.
+   */
+  get root(): AbstractControl<T>
+
+  /**
+   * Reports the trigger validate of the `AbstractControl`.
+   * Possible values: `'change'` | `'blur'` | `'submit'`
+   * Default value: `'change'`
+   */
+  get trigger(): TriggerType
+
+  /**
+   * Resets the control, marking it `unblurred`, and setting the value to initialization value.
+   */
+  abstract reset(): void
+
+  /**
+   * Sets a new value for the control.
+   */
+  abstract setValue(value: any, options: { dirty?: boolean }): void
+
+  /**
+   * The aggregate value of the control.
+   */
+  abstract getValue(): any
+
+  /**
+   * Marks the control as `blurred`.
+   */
+  abstract markAsBlurred(): void
+
+  /**
+   * Marks the control as `unblurred`.
+   */
+  abstract markAsUnblurred(): void
+
+  /**
+   * Marks the control as `dirty`.
+   */
+  abstract markAsDirty(): void
+
+  /**
+   * Marks the control as `pristine`.
+   */
+  abstract markAsPristine(): void
+
+  /**
+   * Running validations manually, rather than automatically.
+   */
+  abstract validate(): Promise<ValidationErrors | null>
+
+  /**
+   * Sets the new sync validator for the form control, it overwrites existing sync validators.
+   * If you want to clear all sync validators, you can pass in a null.
+   */
+  setValidator(newValidator: ValidatorFn | ValidatorFn[] | null): void
+
+  /**
+   * Sets the new async validator for the form control, it overwrites existing async validators.
+   * If you want to clear all async validators, you can pass in a null.
+   */
+  setAsyncValidator(newAsyncValidator: AsyncValidatorFn | AsyncValidatorFn[] | null): void
+
+  /**
+   * Retrieves a child control given the control's name or path.
+   *
+   * @param path A dot-delimited string or array of string/number values that define the path to the
+   * control.
+   */
+  get(path: Array<string | number> | string): AbstractControl<T> | null
+
+  /**
+   * Sets errors on a form control when running validations manually, rather than automatically.
+   */
+  setErrors(errors: ValidationErrors | null): void
+
+  /**
+   * Reports error data for the control with the given path.
+   *
+   * @param errorCode The code of the error to check
+   * @param path A list of control names that designates how to move from the current control
+   * to the control that should be queried for errors.
+   */
+  getError(errorCode: keyof ErrorMessages, path?: Array<string | number> | string): ValidationError | null
+
+  /**
+   * Reports whether the control with the given path has the error specified.
+   *
+   * @param errorCode The code of the error to check
+   * @param path A list of control names that designates how to move from the current control
+   * to the control that should be queried for errors.
+   *
+   */
+  hasError(errorCode: string, path?: Array<string | number> | string): boolean
+
+  /**
+   * @param parent Sets the parent of the control
+   */
+  setParent(parent: FormGroup<T> | FormArray<T[]>): void
+
+  /**
+   * Watch the ref value for the control.
+   *
+   * @param cb The callback when the value changes
+   * @param options Optional options of watch, the default value of `deep` is `true`
+   */
+  watchValue(cb: WatchCallback<T | null, T | null | undefined>, options?: WatchOptions): WatchStopHandle
+
+  /**
+   * Watch the status for the control.
+   *
+   * @param cb The callback when the status changes
+   * @param options Optional options of watch
+   */
+  watchStatus(cb: WatchCallback<ValidationStatus, ValidationStatus | undefined>, options?: WatchOptions): WatchStopHandle
+}
+```
+
+### FormGroup
+
+```ts
+export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
+  constructor(
+    /**
+     * A collection of child controls. The key for each child is the name under which it is registered.
+     */
+    public readonly controls: Partial<Record<keyof T, AbstractControl>>,
+    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  )
+
+  /**
+   * The ref value for the form group.
+   */
+  readonly valueRef: DeepReadonly<Ref<Partial<Record<keyof T, DeepReadonly<Ref<UnwrapRef<T>>>>>>>
+
+  /**
+   * Add a control to this form group.
+   *
+   * @param name The control name to add to the collection
+   * @param control Provides the control for the given name
+   */
+  addControl(name: keyof T, control: AbstractControl): void
+
+  /**
+   * Remove a control from this form group.
+   *
+   * @param name The control name to remove from the collection
+   */
+  removeControl(name: keyof T): void
+
+  /**
+   * Replace an existing control.
+   *
+   * @param name The control name to replace in the collection
+   * @param control Provides the control for the given name
+   */
+  setControl(name: keyof T, control: AbstractControl): void
+}
+```
+
+### FormArray
+
+```ts
+export class FormArray<T = any[]> extends AbstractControl<T> {
+  constructor(
+    /**
+     * An array of child controls. Each child control is given an index where it is registered.
+     */
+    public readonly controls: AbstractControl[],
+    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  )
+
+  /**
+   * The ref value for the form array.
+   */
+  readonly valueRef: DeepReadonly<Ref<Array<UnwrapRef<T>>>>
+
+  /**
+   * Length of the control array.
+   */
+  get length(): number
+
+  /**
+   * Get the `AbstractControl` at the given `index` in the array.
+   *
+   * @param index Index in the array to retrieve the control
+   */
+  at(index: number): AbstractControl
+
+  /**
+   * Insert a new `AbstractControl` at the end of the array.
+   *
+   * @param control Form control to be inserted
+   */
+  push(control: AbstractControl): void
+
+  /**
+   * Insert a new `AbstractControl` at the given `index` in the array.
+   *
+   * @param index Index in the array to insert the control
+   * @param control Form control to be inserted
+   */
+  insert(index: number, control: AbstractControl): void
+
+  /**
+   * Remove the control at the given `index` in the array.
+   *
+   * @param index Index in the array to remove the control
+   */
+  removeAt(index: number): void
+
+  /**
+   * Replace an existing control.
+   *
+   * @param index Index in the array to replace the control
+   * @param control The `AbstractControl` control to replace the existing control
+   */
+  setControl(index: number, control: AbstractControl): void
+}
+```
+
+### FormControl
+
+```ts
+export class FormControl<T = any> extends AbstractControl<T> {
+  constructor(
+    initValue: T | null = null,
+    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  )
+
+  /**
+   * The ref value for the control.
+   */
+  readonly valueRef!: DeepReadonly<Ref<UnwrapRef<T> | null>>
+}
+```

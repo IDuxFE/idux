@@ -53,15 +53,15 @@ title: 贡献指南
 
 ## 如何提出 Pull Request
 
-- fork 此仓库，以下所有操作均在 fork 之后的仓库上执行
-- 在 `main` 分支运行：`git remote add upstream https://github.com/IduxFE/components.git`
-- 在 `main` 分支运行: `git pull upstream main`
-- 在 `main` 分支运行: `git push origin main`
-- 切换到你要工作的 feature 分支 (例如有一个分支叫 `docs-fix`): `git checkout docs-fix`
-- 在 `docs-fix` 分支运行: `git rebase main` 或 `git rebase main -i`
-- 在 `docs-fix` 分支修改代码，使用 `git add` 添加要提交的文件后，然后 commit: 请按照 [我们的 commit 规范](#commit) 进行填写。
-- 推送代码 `git push` (如果进行了 Rebase 操作，可能需要 `-f`)
-- 在 GitHub 上发起 Pull Request 请求
+- fork 此仓库，以下所有操作均在 fork 之后的仓库上执行；
+- 在 `main` 分支运行：`git remote add upstream https://github.com/IduxFE/components.git` ；
+- 在 `main` 分支运行: `git pull upstream main` ；
+- 在 `main` 分支运行: `git push origin main` ；
+- 切换到你要工作的 feature 分支 (例如有一个分支叫 `docs-fix`): `git checkout docs-fix` ；
+- 在 `docs-fix` 分支运行: `git rebase main` 或 `git rebase main -i` ；
+- 在 `docs-fix` 分支修改代码，使用 `git add` 添加要提交的文件后，然后 commit: 请按照 [我们的 commit 规范](#commit) 进行填写；
+- 推送代码 `git push` (如果进行了 Rebase 操作，可能需要 `-f`)；
+- 在 GitHub 上发起 Pull Request 请求。
 
 ## 开发流程
 
@@ -108,7 +108,7 @@ title: 贡献指南
 ### test
 
 - 文件命名：与被测试的文件同名，同时添加 `.spec` 后缀
-- test 命名：应该时被测试的 API 或者功能的名字，简单明了即可
+- test 命名：应该是被测试的 API 或者功能的名字，简单明了即可
 - 所有 Public API 都需要有对应的测试用例
 - 尽可能的一个测试用例只用于一个 API 或功能的测试
 
@@ -164,16 +164,16 @@ fix #123
 
 必须是以下选项之一:
 
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
-- **test**: Adding missing tests or correcting existing tests
-- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
-- **revert**: Reverts a previous commit
+- **feat**: 一个新特性
+- **fix**: 一次 bug 修复
+- **docs**: 只是对文档进行修改
+- **style**: 不影响代码本身含义的代码风格修改 (white-space, formatting, missing semi-colons, etc)
+- **refactor**: 既不属于新特性又不是 bug 修改的代码修改
+- **perf**: 性能优化
+- **test**: 添加或修改测试用例
+- **build**: 修改构建工具 (example scopes: gulp, broccoli, npm)
+- **ci**: 修改自动化脚本 (example scopes: Circle, BrowserStack, SauceLabs)
+- **revert**: 回滚提交
 
 ### Scope
 

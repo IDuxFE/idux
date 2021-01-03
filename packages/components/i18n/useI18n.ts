@@ -1,19 +1,20 @@
-import { computed, ref } from 'vue'
-import type { ComputedRef, Ref } from 'vue'
-import { IDUX_COMPONENTS_PREFIX } from '../core/constant'
-import { Logger } from '../core/logger'
-import { zh_CN as defaultLocale } from './languages/zh_CN'
+import type { ComputedRef } from 'vue'
 import type { Locale, LocaleKey, LocaleType } from './types'
 
-const currentType: Ref<LocaleType> = ref('zh-CN')
+import { computed, ref } from 'vue'
+import { IDUX_COMPONENTS_PREFIX } from '@idux/components/core/constant'
+import { Logger } from '@idux/components/core/logger'
+import defaultLocale from './locales/zh-CN'
+
+const currentType = ref<LocaleType>('zh-CN')
 const localeMap: Partial<Record<LocaleType, Locale>> = { 'zh-CN': defaultLocale }
 
-export function useI18n(locale: LocaleType | Locale): void {
+export function useLocale(locale: LocaleType | Locale): void {
   if (typeof locale === 'string') {
     if (localeMap[locale]) {
       currentType.value = locale
     } else {
-      Logger.warn(`${IDUX_COMPONENTS_PREFIX} The local [${locale}] was not added, please via 'addI18n()' add it.`)
+      Logger.warn(`${IDUX_COMPONENTS_PREFIX} The local [${locale}] was not added, please via 'addLocale()' add it.`)
     }
   } else {
     const type = locale.type
@@ -22,7 +23,7 @@ export function useI18n(locale: LocaleType | Locale): void {
   }
 }
 
-export function addI18n(locale: Locale | Locale[]): void {
+export function addLocale(locale: Locale | Locale[]): void {
   const locales = Array.isArray(locale) ? locale : [locale]
   locales.forEach(item => {
     localeMap[item.type] = item
@@ -33,9 +34,9 @@ export function addI18n(locale: Locale | Locale[]): void {
  *
  * @param key optional, gets the value of current locale by key
  */
-export function getI18n<T extends LocaleKey>(key: T): ComputedRef<Locale[T]>
-export function getI18n(): ComputedRef<Locale>
-export function getI18n<T extends LocaleKey>(key?: T): ComputedRef<Locale | Locale[T]> {
+export function getLocale<T extends LocaleKey>(key: T): ComputedRef<Locale[T]>
+export function getLocale(): ComputedRef<Locale>
+export function getLocale<T extends LocaleKey>(key?: T): ComputedRef<Locale | Locale[T]> {
   return computed(() => {
     let currLocale = localeMap[currentType.value]
     /* istanbul ignore next */

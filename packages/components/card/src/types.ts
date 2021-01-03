@@ -1,4 +1,4 @@
-import type { ComponentSize } from '@idux/components/core/types'
+import type { CardSize } from '@idux/components/core/types'
 export interface CardProps {
   // please add readonly for every prop
   readonly title?: string
@@ -6,7 +6,7 @@ export interface CardProps {
   readonly hoverable: boolean
   readonly borderless: boolean
   readonly loading: boolean
-  readonly size?: ComponentSize
+  readonly size?: CardSize
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

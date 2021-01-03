@@ -1,11 +1,14 @@
-export interface IconProps {
-  readonly name?: string
-  readonly rotate?: boolean | number | string
-  readonly iconfont?: boolean
+import type { DefineComponent } from 'vue'
+
+interface IconOriginalProps {
+  name?: string
+  rotate?: boolean | number | string
+  iconfont?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconComponent extends IconProps {}
+export type IconProps = Readonly<IconOriginalProps>
+
+export type IconComponent = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {
   name: string

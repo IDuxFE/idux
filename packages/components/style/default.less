@@ -10,7 +10,7 @@
 @height-md: 32px;
 @height-lg: 36px;
 
-@line-height-md: 1.5715;
+@line-height-base: 1.5715;
 
 /* color -------------------------- */
 @primary-color: @blue;
@@ -28,7 +28,7 @@
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
 
-@button-line-height: @line-height-md;
+@button-line-height: @line-height-base;
 
 @button-height-sm: @height-sm;
 @button-height-md: @height-md;
@@ -72,3 +72,96 @@
 
 @button-text-color: @text-color;
 @button-text-hover-bg: rgba(0, 0, 0, 0.12);
+
+/* spin -------------------------- */
+@spin-tip-color: @primary-color;
+@spin-icon-color: @primary-color;
+
+@spin-font-size-sm: @font-size-sm;
+@spin-font-size-md: @font-size-md;
+@spin-font-size-lg: @font-size-lg;
+
+/* space -------------------------- */
+@space-margin-sm: @margin-sm;
+@space-margin-md: @margin-lg;
+@space-margin-lg: @margin-xl;
+
+/* empty -------------------------- */
+@empty-margin-md: @margin-md;
+@empty-line-height-md: @line-height-base;
+@empty-font-size-md: @font-size-md;
+@empty-icon-font-size-md: 64px;
+
+/* space -------------------------- */
+@result-padding: @spacing-gutter * 6 @spacing-gutter * 4;
+@result-text-align: center;
+@result-icon-margin: @margin-xl;
+@result-icon-size: @font-size-lg * 4;
+@result-title-font-size: @font-size-xl;
+@result-title-color: @black-d20;
+@result-title-line-height: 1.8;
+@result-subtitle-font-size: @font-size-sm;
+@result-subtitle-color: @black-l40;
+@result-subtitle-line-height: 1.6;
+@result-extra-margin: @margin-xl;
+@result-extra-children-margin: @margin-sm;
+@result-content-margin: @margin-xl;
+@result-content-padding: @padding-xl @spacing-gutter * 5;
+@result-content-background: @grey-l50;
+@result-success-color: @success-color;
+@result-warning-color: @warning-color;
+@result-error-color: @error-color;
+@result-info-color: @info-color;
+
+/* typography -------------------------- */
+@typography-default-color: @black;
+@typography-secondary-color: @black-l20;
+@typography-success-color: @success-color;
+@typography-warning-color: @warning-color;
+@typography-error-color: @error-color;
+@typography-disabled-color: @black-l50;
+@typography-mark-padding: 0;
+@typography-mark-background-color: @yellow-l50;
+@typography-code-margin: 0 0.2em;
+@typography-code-padding: 0.2em 0.4em 0.1em;
+@typography-code-font-size: 85%;
+@typography-code-background: @grey;
+@typography-code-border: @border-size-sm solid @grey-d30;
+@typography-code-border-radius: @border-radius-md;
+@typography-kbd-margin: 0 0.2em;
+@typography-kbd-padding: 0.15em 0.4em 0.1em;
+@typography-kbd-font-size: 90%;
+@typography-kbd-background: @grey;
+@typography-kbd-border-style: solid;
+@typography-kbd-border-color: @grey-d30;
+@typography-kbd-border-width: @border-size-sm @border-size-sm @border-size-md;
+@typography-kbd-border-radius: @border-radius-md;
+@typography-strong-font-weight: @font-weight-lg;
+@typography-a-color: @primary-color;
+@typography-a-outline: none;
+@typography-a-cursor: pointer;
+@typography-a-transition: color 0.3s;
+@typography-a-color-hover-focus: @blue-l30;
+@typography-a-color-active: @blue-d30;
+@typography-title-margin-top: 1.2em;
+@typography-title-margin-bottom: 0.5em;
+@typography-title-font-weight: @font-weight-lg;
+@typography-title-color: @black-l10;
+@typography-title-1-font-size: ceil(@font-size-base * 2.71);
+@typography-title-2-font-size: ceil(@font-size-base * 2.14);
+@typography-title-3-font-size: ceil(@font-size-base * 1.71);
+@typography-title-4-font-size: ceil(@font-size-base * 1.42);
+@typography-title-5-font-size: ceil(@font-size-base * 1.14);
+@typography-paragraph-margin-bottom: 1em;
+@typography-list-margin: 0 0 1em 0;
+@typography-list-padding: 0;
+@typography-list-item-margin: 0 0 0 20px;
+@typography-list-item-padding: 0 0 0 4px;
+@typography-ul-list-style: circle;
+@typography-sub-ul-list-style: disc;
+@typography-ol-list-style: decimal;
+/* card -------------------------- */
+@card-border-color:@border-color;
+@card-border-size:@border-size-sm;
+@card-padding-lg: @padding-lg;
+@card-padding-sm: @padding-sm;

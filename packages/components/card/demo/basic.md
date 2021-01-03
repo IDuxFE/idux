@@ -1,14 +1,25 @@
 ---
 order: 0
 title:
-  zh: 卡片组件
+  zh: 典型卡片
+  en: basic card
 ---
 
 ## zh
 
-## en
+包含标题、内容、操作区域。
+可通过设置size为default或small，控制尺寸
 
 ## demo
 
 ```html
+<template>
+  <ix-card title="default size card">
+    <template v-slot:extra>
+      <a href="#">More</a>
+    </template>
+    <p>card content</p>
+    <p>card content</p>
+  </ix-card>
+</template>
 ```

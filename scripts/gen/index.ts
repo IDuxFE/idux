@@ -65,7 +65,7 @@ if (moduleName === 'components') {
   currIndexContent = currIndexContent
     .replace('\n\n', `\nimport { Ix${upperFirstComponentName} } from './${compName}'\n\n`)
     .replace(']', `, Ix${upperFirstComponentName}]`)
-  currIndexContent += `export * from './${compName}'\n`
+  currIndexContent += `export { Ix${upperFirstComponentName} }\n`
   writeFileSync(indexFilePath, currIndexContent)
 
   const currLess = readFileSync(componentsLessPath, 'utf-8')
@@ -81,8 +81,8 @@ if (moduleName === 'components') {
   writeFileSync(`${componentDirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
 }
 
-const docsZhTemplate = getDocsZhTemplate(upperFirstComponentName, moduleName)
+const docsZhTemplate = getDocsZhTemplate(compName, moduleName, upperFirstComponentName)
 writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
-const domeTemplate = getDomeTemplate(upperFirstComponentName, moduleName)
+const domeTemplate = getDomeTemplate(compName)
 writeFileSync(`${componentDirname}/demo/basic.md`, domeTemplate)

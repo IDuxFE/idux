@@ -1,0 +1,31 @@
+@import '../../style/default.less';
+
+@empty-prefix: ~'@{idux-prefix}-empty';
+
+.@{empty-prefix} {
+  display: block;
+  text-align: center;
+  font-size: @empty-font-size-md;
+  line-height: @empty-line-height-md;
+  margin: 0 @empty-margin-md;
+
+  &-image {
+    margin-bottom: @empty-margin-md;
+
+    img {
+      height: 100%;
+    }
+
+    .@{icon-prefix} {
+      font-size: @empty-icon-font-size-md;
+    }
+  }
+
+  &-description {
+    margin: 0;
+  }
+
+  &-footer {
+    margin-top: @empty-margin-md;
+  }
+}

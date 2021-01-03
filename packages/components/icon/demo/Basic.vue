@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { addIconDefinitions, fetchFromIconfont, useGlobalConfig } from '@idux/components'
+import { useGlobalConfig } from '@idux/components'
+import { addIconDefinitions, fetchFromIconfont } from '@idux/components/icon'
 import { Up, Down } from '@idux/components/icon/definitions'
 
 export default defineComponent({
@@ -21,8 +22,7 @@ export default defineComponent({
 
     // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
     const loadIconDynamically = (iconName: string) => {
-      // TODO： fix with vite
-      return fetch(`site/docs/src/assets/icon-svg/${iconName}.svg`).then(res => res.text())
+      return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
     }
     useGlobalConfig('icon', { loadIconDynamically })
 

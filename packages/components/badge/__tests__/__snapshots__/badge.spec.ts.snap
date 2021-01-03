@@ -18,6 +18,10 @@ exports[`Badge.vue overflowCount work 1`] = `"<sup class=\\"ix-badge ix-badge-em
 
 exports[`Badge.vue overflowCount work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">999+</sup>"`;
 
+exports[`Badge.vue overflowCount work 3`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">999+</sup>"`;
+
+exports[`Badge.vue overflowCount work 4`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">1000</sup>"`;
+
 exports[`Badge.vue render work 1`] = `"<span class=\\"ix-badge-wrapper\\"><sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup></span>"`;
 
 exports[`Badge.vue showZero work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;

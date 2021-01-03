@@ -1,8 +1,8 @@
 export function getLessTemplate(compName: string): string {
   return `@import '../../style/default.less';
-    
+
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
-    
+
 .@{${compName}-prefix} {
   color: #fff;
 }
@@ -10,12 +10,14 @@ export function getLessTemplate(compName: string): string {
 }
 
 export function getTypesTemplate(compName: string): string {
-  return `export interface ${compName}Props {
-  // please add readonly for every prop
+  return `import type { DefineComponent } from 'vue'
+
+interface ${compName}OriginalProps {
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Ix${compName}Component extends ${compName}Props {}
+export type ${compName}Props = Readonly<${compName}OriginalProps>
+
+export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
 `
 }
 
@@ -45,7 +47,7 @@ import Ix${compName} from './src/${compName}.vue'
 Ix${compName}.install = installComponent(Ix${compName})
 
 export { Ix${compName} }
-export type { Ix${compName}Component } from './src/types'
+export * from './src/types'
 `
 }
 
@@ -96,11 +98,11 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsZhTemplate(compName: string, moduleName: string): string {
+export function getDocsZhTemplate(compName: string, moduleName: string, upperFirstName: string): string {
   return `---
 category: ${moduleName}
 type:
-title: ${compName}
+title: ${upperFirstName}
 subtitle:
 cover:
 ---
@@ -113,14 +115,18 @@ cover:
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |  | 全局配置 |
-| --- | --- | --- | --- | --- |
-| - | - | - | - | - |
+### ix-${compName}
+
+#### Props
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| - | - | - | - | ✅ | - |
 
 `
 }
 
-export function getDomeTemplate(compName: string, moduleName: string): string {
+export function getDomeTemplate(compName: string): string {
   return `---
 order: 0
 title:
@@ -135,10 +141,24 @@ title:
 ## en
 
 
-  
+
 ## demo
 
 \`\`\`html
+<template>
+  <ix-${compName} />
+</template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+
+  }
+})
+</script>
+<style lang="less" scoped>
+</style>
 \`\`\`
 
 `

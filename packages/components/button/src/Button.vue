@@ -7,16 +7,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onUpdated, ref } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import type { ComputedRef, Ref } from 'vue'
+import type { ButtonConfig } from '@idux/components/core/config'
+import type { ButtonMode, ButtonGroupProps, ButtonProps } from './types'
+
+import { computed, defineComponent, inject } from 'vue'
+import { hasSlot, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { IxIcon } from '@idux/components/icon'
 import { buttonGroupInjectionKey } from './button'
-
-import type { ComputedRef, Ref } from 'vue'
-import type { ButtonConfig } from '@idux/components/core/config'
-import type { ButtonMode } from '@idux/components/core/types'
-import type { ButtonGroupProps, ButtonProps } from './types'
 
 export default defineComponent({
   name: 'IxButton',
@@ -37,13 +36,9 @@ export default defineComponent({
     const buttonConfig = useGlobalConfig('button')
 
     const mode = computed(() => props.mode ?? (groupProps.mode || buttonConfig.mode))
+    const hasDefaultSlot = computed(() => hasSlot(slots))
 
-    const hasDefaultSlot = ref(!!slots.default)
-    onUpdated(() => {
-      hasDefaultSlot.value = !!slots.default
-    })
     const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
-
     const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
 
     return { classes, tag, hasDefaultSlot }

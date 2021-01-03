@@ -1,26 +1,31 @@
-import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
+import type { DefineComponent } from 'vue'
+import type { ButtonMode, ButtonSize } from '@idux/components/core/config'
 
+export type { ButtonMode, ButtonSize }
 export type ButtonShape = 'circle' | 'round'
-export interface ButtonProps {
-  readonly mode?: ButtonMode
-  readonly danger?: boolean
-  readonly ghost?: boolean
-  readonly disabled?: boolean
-  readonly loading?: boolean
-  readonly size?: ComponentSize
-  readonly shape?: ButtonShape
-  readonly block?: boolean
-  readonly icon?: string
+
+interface ButtonOriginalProps {
+  mode?: ButtonMode
+  danger?: boolean
+  ghost?: boolean
+  disabled?: boolean
+  loading?: boolean
+  size?: ButtonSize
+  shape?: ButtonShape
+  block?: boolean
+  icon?: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ButtonComponent extends ButtonProps {}
+export type ButtonProps = Readonly<ButtonOriginalProps>
 
-export interface ButtonGroupProps {
-  readonly mode?: ButtonMode
-  readonly size?: ComponentSize
-  readonly shape?: ButtonShape
+export type ButtonComponent = InstanceType<DefineComponent<ButtonProps>>
+
+interface ButtonGroupOriginalProps {
+  mode?: ButtonMode
+  size?: ButtonSize
+  shape?: ButtonShape
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ButtonGroupComponent extends ButtonGroupProps {}
+export type ButtonGroupProps = Readonly<ButtonGroupOriginalProps>
+
+export type ButtonGroupComponent = InstanceType<DefineComponent<ButtonGroupProps>>

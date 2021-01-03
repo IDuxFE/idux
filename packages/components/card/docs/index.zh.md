@@ -23,18 +23,13 @@ cover:
 
 ### `ix-card`
 
-| 属性 | 说明 | 类型 | 默认值 | 全局配置 |
-| --- | --- | --- | --- | --- |
-| `title` | 卡片标题 | `'string'|'slot'` | - | - |
-| `extra` | 右上角操作区域 | `'string'|'slot'` | - | - |
-| `footer` | 卡片底部操作区域 | `'slot'` | - | - |
-| `borderless` | 是否有边框 | `'booelan'` | `'false'` | `'false'` |
-| `hoverable` | 是否悬浮 | `'booelan'` | `'false'` | `'false'` |
-| `loading` | 当卡片内容还在加载中时，可以用 loading 展示一个占位 | `'booelan'` | `'false'` | `'false'` |
-| `size` | 设置按钮大小 | `'large'|'medium'|'small'` | `'medium'` |
+| 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `title` | 卡片标题 | `string\|slot` | - | - | - |
+| `extra` | 右上角操作区域 | `string\|slot` | - | - | - |
+| `footer` | 卡片底部操作区域 | `slot` | - | - | - |
+| `borderless` | 是否有边框 | `booelan` | `false` | `false` | - |
+| `hoverable` | 鼠标 hover 时，是否悬浮 | `booelan` | `false` | `false` | - |
+| `loading` | 当卡片内容还在加载中时，可以用 loading 展示一个占位 | `booelan` | `false` | `false` | - |
+| `size` | 设置按钮大小 | `default\|small` | `default` | - | - |
 
-### `事件`
-
-| 事件名称 | 说明 | 参数 |
-| --- | --- | --- |
-| onExtraClicked | 当extra参数为string时，用于点击extra | event |

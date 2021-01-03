@@ -1,69 +1,71 @@
 <template>
   <div class="ix-card" :class="classes">
-    <div v-if="isShowLoading" class="ix-card-loading-block"></div>
-    <div v-else class="ix-card-wraper">
-      <div class="ix-card__head">
-        <div v-if="isShowTitle" class="ix-card__head__title">
-          <slot name="title">
-            <a>{{ title }}</a>
-          </slot>
-        </div>
-        <div v-if="isShowExtra" class="ix-card__head__extra">
-          <slot name="extra">
-            <a>{{ extra }}</a>
-          </slot>
-        </div>
+    <div class="ix-card-head" v-if="isShowTitle || isShowExtra">
+      <div v-if="isShowTitle" class="ix-card-head-title">
+        <slot name="title">
+          <span>{{ title }}</span>
+        </slot>
       </div>
-      <div class="ix-card__body">
-        <slot></slot>
+      <div v-if="isShowExtra" class="ix-card-head-extra">
+        <slot name="extra">
+          <span>{{ extra }}</span>
+        </slot>
       </div>
-      <div v-if="isShowFooter" class="ix-card__footer">
-        <slot name="footer"></slot>
+    </div>
+    <ix-spin :spinning="isShowLoading" tip="加载中...">
+      <div class="ix-card-body" :class="isShowLoading ? 'ix-card-loading-block' : ''">
+        <slot v-if="hadDefaultSlot && !isShowLoading"></slot>
       </div>
+    </ix-spin>
+
+    <div v-if="isShowFooter" class="ix-card-footer">
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>
 <script lang="ts">
-import type { PropType } from 'vue'
-import type { ComponentSize } from '@idux/components/core/types'
+import { hasSlot, PropTypes } from '@idux/cdk/utils'
 import type { CardConfig } from '@idux/components/core/config/types'
 
 import { useGlobalConfig } from '@idux/components/core/config'
 import { computed, defineComponent } from 'vue'
 import { CardProps } from './types'
+import { IxSpin } from '@idux/components/spin'
 
 export default defineComponent({
   name: 'IxCard',
+  components: { IxSpin },
   props: {
-    title: { type: String, default: undefined },
-    extra: { type: String, default: undefined },
-    hoverable: Boolean,
-    borderless: Boolean,
-    loading: Boolean,
-    size: { type: String as PropType<ComponentSize>, default: undefined },
+    title: PropTypes.string,
+    extra: PropTypes.string,
+    hoverable: PropTypes.bool,
+    borderless: PropTypes.bool,
+    loading: PropTypes.bool,
+    size: PropTypes.oneOf(['default', 'small'] as const),
   },
   setup(props: CardProps, { slots }) {
     // init
     const cardConfig = useGlobalConfig('card')
     const classes = useClasses(props, cardConfig)
-    const isShowLoading = computed(() => (props.loading !== undefined ? props.loading : cardConfig.loading))
+    const isShowLoading = computed(() => props.loading ?? cardConfig.loading)
     const isShowTitle = computed(() => typeof props.title === 'string' || !!slots.title)
     const isShowExtra = computed(() => typeof props.extra === 'string' || !!slots.extra)
-    const isShowFooter = computed(() => !!slots.extra)
-    return { classes, isShowTitle, isShowExtra, isShowFooter, isShowLoading }
+    const isShowFooter = computed(() => !!slots.footer)
+    const hadDefaultSlot = computed(() => hasSlot(slots))
+    return { classes, isShowTitle, isShowExtra, isShowFooter, isShowLoading, hadDefaultSlot }
   },
 })
 
 const useClasses = (props: CardProps, cardConfig: CardConfig) => {
   return computed(() => {
-    const hoverable = props.hoverable !== undefined ? props.hoverable : cardConfig.hoverable
-    const borderless = props.borderless !== undefined ? props.borderless : cardConfig.borderless
-    const size = props.size !== undefined ? props.size : cardConfig.size
+    const hoverable = props.hoverable ?? cardConfig.hoverable
+    const borderless = props.borderless ?? cardConfig.borderless
+    const size = props.size ?? cardConfig.size
     return [
-      size !== 'medium' ? `ix-card-${size}` : '',
+      size !== 'default' ? `ix-card-${size}` : '',
       {
         'ix-card-hover': hoverable,
-        'ix-card-border': borderless,
+        'ix-card-border': !borderless,
       },
     ]
   })

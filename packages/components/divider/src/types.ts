@@ -1,6 +1,9 @@
-import type { DividerPosition, DividerType } from '@idux/components/core/types'
+import type { DefineComponent } from 'vue'
+import type { DividerPosition, DividerType } from '@idux/components/core/config'
 
-export interface DividerProps {
+export type { DividerPosition, DividerType }
+
+interface DividerOriginalProps {
   /* dashed divider */
   dashed?: boolean
   /* common text style */
@@ -11,5 +14,6 @@ export interface DividerProps {
   type?: DividerType
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IxDividerComponent extends DividerProps {}
+export type DividerProps = Readonly<DividerOriginalProps>
+
+export type DividerComponent = InstanceType<DefineComponent<DividerProps>>

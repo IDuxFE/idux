@@ -1,16 +1,41 @@
-import type { App } from 'vue'
+import type { App, Directive } from 'vue'
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxBadge } from './badge'
 import { IxDivider } from './divider'
 import { IxImage } from './image'
+import { IxSpin } from './spin'
+import { IxSpace } from './space'
+import { IxEmpty } from './empty'
+import { IxResult } from './result'
+import { IxTypography } from './typography'
 import { IxCard } from './card'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxCard]
+const components = [
+  IxButton,
+  IxButtonGroup,
+  IxIcon,
+  IxBadge,
+  IxDivider,
+  IxImage,
+  IxSpin,
+  IxSpace,
+  IxEmpty,
+  IxResult,
+  IxCard,
+]
+
+const directives: Record<string, Directive> = {
+  typography: IxTypography,
+}
 
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
+  })
+
+  Object.keys(directives).forEach(key => {
+    app.directive(key, directives[key])
   })
 }
 
@@ -21,12 +46,16 @@ export default {
   version,
 }
 
-export * from './core/config'
-export * from './core/types'
-export * from './button'
-export * from './i18n'
-export * from './icon'
-export * from './badge'
-export * from './divider'
-export * from './image'
-export * from './card'
+export { useGlobalConfig } from './core/config'
+export { useLocale, addLocale, getLocale } from './i18n'
+export { IxButton, IxButtonGroup }
+export { IxIcon }
+export { IxBadge }
+export { IxDivider }
+export { IxImage }
+export { IxSpin }
+export { IxSpace }
+export { IxEmpty }
+export { IxResult }
+export { IxTypography }
+export { IxCard }

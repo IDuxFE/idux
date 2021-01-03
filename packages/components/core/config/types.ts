@@ -1,5 +1,3 @@
-import type { ComponentSize, ButtonMode, DividerPosition, DividerType } from '../types'
-
 export type GlobalConfigKey = keyof GlobalConfig
 
 export interface GlobalConfig {
@@ -8,12 +6,17 @@ export interface GlobalConfig {
   badge: BadgeConfig
   divider: DividerConfig
   image: ImageConfig
+  spin: SpinConfig
+  space: SpaceConfig
+  result: ResultConfig
   card: CardConfig
 }
 
+export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
+export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
   mode: ButtonMode
-  size: ComponentSize
+  size: ButtonSize
 }
 
 export interface IconConfig {
@@ -26,20 +29,44 @@ export interface BadgeConfig {
   overflowCount: number | string
 }
 
+export type DividerPosition = 'left' | 'center' | 'right'
+export type DividerType = 'horizontal' | 'vertical'
 export interface DividerConfig {
   dashed: boolean
   plain: boolean
   position: DividerPosition
   type: DividerType
 }
+
 export interface ImageConfig {
   width: string | number
   height: string | number
   fallback: string
 }
+
+export type SpinTipAlignType = 'horizontal' | 'vertical'
+export type SpinSize = 'large' | 'medium' | 'small'
+export interface SpinConfig {
+  icon: string
+  tip: string
+  tipAlign: SpinTipAlignType
+  size: SpinSize
+}
+
+export type SpaceSize = 'small' | 'medium' | 'large' | number
+export interface SpaceConfig {
+  size: SpaceSize
+}
+
+export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
+export interface ResultConfig {
+  status: ResultStatus
+}
+
+export type CardSize = 'default' | 'small'
 export interface CardConfig {
   hoverable: boolean
   borderless: boolean
   loading: boolean
-  size: ComponentSize
+  size: CardSize
 }
