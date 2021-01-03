@@ -24,7 +24,7 @@ export const buildConfig: BuildConfig = {
   packageRoot,
   docsDir,
   siteDir,
-  siteIconAssetsDir: join(siteDir, 'docs/src/assets/icon-svg'),
+  siteIconAssetsDir: join(siteDir, 'docs/public/icon-svg'),
   outputDir: join(outputRoot, 'dist'),
   publishDir: join(outputRoot, 'publish'),
   libDir: join(outputRoot, 'lib'),
