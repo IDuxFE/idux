@@ -97,11 +97,11 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsZhTemplate(compName: string, moduleName: string): string {
+export function getDocsZhTemplate(compName: string, moduleName: string, upperFirstName: string): string {
   return `---
 category: ${moduleName}
 type:
-title: ${compName}
+title: ${upperFirstName}
 subtitle:
 cover:
 ---
@@ -114,9 +114,13 @@ cover:
 
 ## API
 
-| 属性 | 说明 | 类型 | 默认值 |  | 全局配置 |
-| --- | --- | --- | --- | --- |
-| - | - | - | - | - |
+### ix-${compName}
+
+#### Props
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| - | - | - | - | ✅ | - |
 
 `
 }

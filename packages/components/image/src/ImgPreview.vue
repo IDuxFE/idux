@@ -31,10 +31,12 @@
 </template>
 
 <script lang="ts">
+import type { ImagePreviewProps } from './types'
+
 import { defineComponent, ref, computed } from 'vue'
-import { ImagePreviewProps } from './types'
-import { IxIcon } from '@idux/components/icon'
 import { PropTypes } from '@idux/cdk/utils'
+import { IxIcon } from '@idux/components/icon'
+
 const minScale = 0.2
 const initScale = 1.0
 const scaleStep = 0.1
