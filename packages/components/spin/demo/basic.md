@@ -7,6 +7,8 @@ title:
 
 ## zh
 
+`ix-spin` 的基础用法。
+
 ## en
 
-## demo
+The basic usage of `ix-spin`.
