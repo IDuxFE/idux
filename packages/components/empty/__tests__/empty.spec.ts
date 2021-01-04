@@ -20,4 +20,13 @@ describe('Empty.vue', () => {
     const wrapper = EmptyMount()
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+
+  // 自定义插槽
+  test('count slot work', async () => {
+    const wrapper = EmptyMount({ slots: { count: '<div class="count-slot"></div>' } })
+    const countSlot = wrapper.find('.count-slot')
+    expect(countSlot.exists()).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

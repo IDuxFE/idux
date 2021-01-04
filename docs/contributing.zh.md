@@ -9,7 +9,7 @@ title: 贡献指南
 
 ## 行为准则
 
-我们有一份 [行为准则](https://github.com/IduxFE/components/blob/main/CODE_OF_CONDUCT.md)，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
+我们有一份 [行为准则](https://github.com/IduxFE/components/blob/main/CODE_OF_CONDUCT.md) ，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
 
 ## 透明的开发
 
@@ -44,12 +44,12 @@ title: 贡献指南
 
 **在你发送 Pull Request 之前**，请确认你是按照下面的步骤来做的：
 
-- 在项目根目录下运行了 `npm install`。
-- 如果你修复了一个 bug 或者新增了一个功能，请确保写了相应的测试，这很重要。
-- 确认所有的测试都是通过的 `npm run test`。
-- 确保你的代码通过了 lint 检查 `npm run lint`。
-- 确保你的代码在提交之前经过了正确的 [Rebase](https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request)。
-- 确保你的提交信息符合[我们的 commit 规范](#commit)。
+- 在项目根目录下运行了 `npm install` ；
+- 如果你修复了一个 bug 或者新增了一个功能，请确保写了相应的测试，这很重要；
+- 确认所有的测试都是通过的 `npm run test` ；
+- 确保你的代码通过了 lint 检查 `npm run lint` ；
+- 确保你的代码在提交之前经过了正确的 [Rebase](https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request) ；
+- 确保你的提交信息符合[我们的 commit 规范](#commit) 。
 
 ## 如何提出 Pull Request
 
@@ -59,7 +59,7 @@ title: 贡献指南
 - 在 `main` 分支运行: `git push origin main`
 - 切换到你要工作的 feature 分支 (例如有一个分支叫 `docs-fix`): `git checkout docs-fix`
 - 在 `docs-fix` 分支运行: `git rebase main` 或 `git rebase main -i`
-- 在 `docs-fix` 分支修改代码，使用 `git add` 添加要提交的文件后，然后 commit: 请按照 [我们的 commit 规范](#commit)进行填写。
+- 在 `docs-fix` 分支修改代码，使用 `git add` 添加要提交的文件后，然后 commit: 请按照 [我们的 commit 规范](#commit) 进行填写。
 - 推送代码 `git push` (如果进行了 Rebase 操作，可能需要 `-f`)
 - 在 GitHub 上发起 Pull Request 请求
 

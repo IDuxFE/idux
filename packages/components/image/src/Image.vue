@@ -26,12 +26,12 @@
   </div>
 </template>
 <script lang="ts">
+import type { ImageProps, ImageStatus } from './types'
+
 import { defineComponent, computed, ref, watchEffect, watch } from 'vue'
-import { ImageProps, ImageStatus } from './types'
-import ImgPreview from './ImgPreview.vue'
+import { PropTypes, toCssPixel, withUndefined } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { toCssPixel } from '@idux/cdk/utils/convert'
-import { PropTypes, withUndefined } from '@idux/cdk/utils'
+import ImgPreview from './ImgPreview.vue'
 
 export default defineComponent({
   name: 'IxImage',

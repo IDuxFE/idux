@@ -8,12 +8,12 @@
   </span>
 </template>
 <script lang="ts">
+import type { ComputedRef } from 'vue'
+import type { BadgeProps, SlotsExist } from './types'
+
 import { computed, defineComponent, onUpdated, reactive } from 'vue'
 import { isNumeric, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-
-import type { ComputedRef } from 'vue'
-import type { BadgeProps, SlotsExist } from './types'
 
 export default defineComponent({
   name: 'IxBadge',

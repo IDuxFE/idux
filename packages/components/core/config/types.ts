@@ -1,4 +1,4 @@
-import type { ComponentSize, ButtonMode, DividerPosition, DividerType } from '../types'
+import type { ComponentSize, ButtonMode, DividerPosition, DividerType, SpinTipAlignType } from '../types'
 
 export type GlobalConfigKey = keyof GlobalConfig
 
@@ -8,6 +8,7 @@ export interface GlobalConfig {
   badge: BadgeConfig
   divider: DividerConfig
   image: ImageConfig
+  spin: SpinConfig
 }
 
 export interface ButtonConfig {
@@ -31,8 +32,16 @@ export interface DividerConfig {
   position: DividerPosition
   type: DividerType
 }
+
 export interface ImageConfig {
   width: string | number
   height: string | number
   fallback: string
+}
+
+export interface SpinConfig {
+  icon: string
+  tip: string
+  tipAlign: SpinTipAlignType
+  size: ComponentSize
 }

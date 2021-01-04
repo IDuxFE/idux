@@ -7,16 +7,16 @@
 </template>
 
 <script lang="ts">
+import type { ComputedRef, Ref } from 'vue'
+import type { ButtonConfig } from '@idux/components/core/config'
+import type { ButtonMode } from '@idux/components/core/types'
+import type { ButtonGroupProps, ButtonProps } from './types'
+
 import { computed, defineComponent, inject, onUpdated, ref } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { IxIcon } from '@idux/components/icon'
 import { buttonGroupInjectionKey } from './button'
-
-import type { ComputedRef, Ref } from 'vue'
-import type { ButtonConfig } from '@idux/components/core/config'
-import type { ButtonMode } from '@idux/components/core/types'
-import type { ButtonGroupProps, ButtonProps } from './types'
 
 export default defineComponent({
   name: 'IxButton',
