@@ -5,7 +5,6 @@
     </ix-spin>
     <div class="operation-area">
       <ix-button mode="primary" @click="changeTipAlign()">切换提示文字排列方式</ix-button>
-      <span class="status-text">tipAlign: {{ tipAlign }}</span>
     </div>
   </div>
 </template>
@@ -38,9 +37,5 @@ export default defineComponent({
 
 .operation-area {
   margin-top: 30px;
-  .status-text {
-    margin: 10px 0;
-    display: block;
-  }
 }
 </style>

@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-与icon相关属性使用
+图标名称
 
 ## en
 
-Use of icon related attributes
+icon name
