@@ -1,16 +1,16 @@
 <template>
   <div class="ix-divider" :class="className">
-    <span v-if="$slots.default" class="ix-divider-inner-text">
+    <span v-if="withText" class="ix-divider-inner-text">
       <slot />
     </span>
   </div>
 </template>
 <script lang="ts">
-import type { Ref, SetupContext } from 'vue'
+import type { ComputedRef, SetupContext, Slots } from 'vue'
 import type { DividerConfig } from '@idux/components/core/config'
 import type { DividerProps } from './types'
 
-import { computed, defineComponent, onUpdated, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { getFirstValidNode, isValidElementNode } from '@idux/cdk/utils'
@@ -25,21 +25,21 @@ export default defineComponent({
   },
   setup(props: DividerProps, { slots }: SetupContext) {
     const dividerConfig = useGlobalConfig('divider')
-    let text = getFirstValidNode(slots.default?.())
-    const withText = ref(!!(text && isValidElementNode(text)))
-
-    onUpdated(() => {
-      text = getFirstValidNode(slots.default?.())
-      withText.value = !!(text && isValidElementNode(text))
-    })
-
+    const withText = useChildren(slots)
     const className = useClassName(props, dividerConfig, withText)
 
-    return { className }
+    return { className, withText }
   },
 })
 
-function useClassName(props: DividerProps, config: DividerConfig, withText: Ref<boolean>) {
+function useChildren(slots: Slots) {
+  return computed(() => {
+    const text = getFirstValidNode(slots.default?.())
+    return !!(text && isValidElementNode(text))
+  })
+}
+
+function useClassName(props: DividerProps, config: DividerConfig, withText: ComputedRef<boolean>) {
   return computed(() => {
     const position = props.position || config.position
     const type = props.type || config.type
