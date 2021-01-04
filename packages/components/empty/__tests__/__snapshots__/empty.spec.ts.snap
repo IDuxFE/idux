@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty.vue render work 1`] = `"<div class=\\"ix-empty\\"><span class=\\"ix-empty-main\\"><i class=\\"ix-icon ix-icon-empty ix-empty-icon\\" role=\\"img\\" arialabel=\\"empty\\"></i><p class=\\"ix-empty-descriptionValue\\">暂无数据</p><!--v-if--></span></div>"`;
