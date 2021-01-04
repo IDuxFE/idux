@@ -23,7 +23,7 @@ cover:
 |`spinning` | 是否显示加载遮罩层|`boolean`| `true` | - | - |
 | `icon`| 加载图标名称 | `string` | `loading`| ✅ | - |
 | `tip`| 加载提示文字描述 |  `string`  | `''`| ✅ | - |
-| `tipAlign`| 文字描述与加载图标的排列方式 | `vertical \| horizontal` | `vertical`| ✅ | vertical：文字排列在图标下方；horizontal： 文字排列在图标同水平方向的后方 |horizontal： 文字排列在图标同水平方向的后方)|
+| `tipAlign`| 文字描述与加载图标的排列方式 | `vertical \| horizontal` | `vertical`| ✅ | vertical：文字排列在图标下方；horizontal： 文字排列在图标同水平方向的后方 |
 
 #### slots
 
