@@ -81,7 +81,7 @@ if (moduleName === 'components') {
   writeFileSync(`${componentDirname}/__tests__/${camelCaseComponentName}.spec.ts`, testTemplate)
 }
 
-const docsZhTemplate = getDocsZhTemplate(upperFirstComponentName, moduleName)
+const docsZhTemplate = getDocsZhTemplate(compName, moduleName, upperFirstComponentName)
 writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
 const domeTemplate = getDomeTemplate(compName)
