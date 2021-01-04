@@ -32,6 +32,7 @@ export interface DividerConfig {
   position: DividerPosition
   type: DividerType
 }
+
 export interface ImageConfig {
   width: string | number
   height: string | number

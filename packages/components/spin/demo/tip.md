@@ -7,6 +7,8 @@ title:
 
 ## zh
 
+自定义提示文字。
+
 ## en
 
-## demo
+Customized tip text.

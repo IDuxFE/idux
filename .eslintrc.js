@@ -36,6 +36,7 @@ module.exports = {
 
     // ts
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
