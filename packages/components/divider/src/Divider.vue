@@ -6,14 +6,13 @@
   </div>
 </template>
 <script lang="ts">
-import type { ComputedRef, SetupContext, Slots } from 'vue'
+import type { ComputedRef, SetupContext } from 'vue'
 import type { DividerConfig } from '@idux/components/core/config'
 import type { DividerProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { hasSlot, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { getFirstValidNode, isValidElementNode } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxDivider',
@@ -25,19 +24,12 @@ export default defineComponent({
   },
   setup(props: DividerProps, { slots }: SetupContext) {
     const dividerConfig = useGlobalConfig('divider')
-    const withText = useChildren(slots)
+    const withText = computed(() => hasSlot(slots))
     const className = useClassName(props, dividerConfig, withText)
 
     return { className, withText }
   },
 })
-
-function useChildren(slots: Slots) {
-  return computed(() => {
-    const text = getFirstValidNode(slots.default?.())
-    return !!(text && isValidElementNode(text))
-  })
-}
 
 function useClassName(props: DividerProps, config: DividerConfig, withText: ComputedRef<boolean>) {
   return computed(() => {

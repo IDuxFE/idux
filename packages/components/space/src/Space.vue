@@ -18,7 +18,7 @@ import type { ComputedRef, SetupContext, VNode } from 'vue'
 import type { SpaceProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { getSlotNodes, PropTypes } from '@idux/cdk/utils'
+import { getSlotNodes, hasSlot, PropTypes } from '@idux/cdk/utils'
 import { Logger } from '@idux/components/core/logger'
 import { useGlobalConfig, SpaceConfig } from '@idux/components/core/config'
 
@@ -45,7 +45,7 @@ export default defineComponent({
   setup(props: SpaceProps, { slots }: SetupContext) {
     const spaceConfig = useGlobalConfig('space')
     const children = getSlotNodes(slots)
-    const withSlotSplit = computed(() => !!slots.split)
+    const withSlotSplit = computed(() => hasSlot(slots, 'split'))
     const spaceList = useSpaceList(props, spaceConfig, children, withSlotSplit)
 
     const className = useClassName(props)

@@ -12,9 +12,4 @@ export interface BadgeProps {
   readonly color?: string
 }
 
-export interface SlotsExist {
-  default: boolean
-  count: boolean
-}
-
 export type IxBadgeComponent = InstanceType<DefineComponent<BadgeProps>>

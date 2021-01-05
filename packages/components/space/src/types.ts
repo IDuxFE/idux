@@ -1,3 +1,4 @@
+import type { DefineComponent } from 'vue'
 import type { SpaceSize } from '@idux/components/core/types'
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
@@ -22,5 +23,4 @@ export interface SpaceProps {
   wrap?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IxSpaceComponent extends SpaceProps {}
+export type IxSpaceComponent = InstanceType<DefineComponent<SpaceProps>>
