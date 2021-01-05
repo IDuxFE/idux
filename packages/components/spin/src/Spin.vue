@@ -12,11 +12,11 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, ref, onUpdated, defineComponent } from 'vue'
-import { SpinProps } from './types'
-import { useGlobalConfig } from '@idux/components/core/config'
-import { PropTypes } from '@idux/cdk/utils'
+import type { SpinProps } from './types'
 
+import { computed, defineComponent } from 'vue'
+import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/core/config'
 import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
@@ -36,10 +36,7 @@ export default defineComponent({
     const icon$$ = computed(() => props.icon ?? spinConfig.icon)
     const tip$$ = computed(() => props.tip ?? spinConfig.tip)
 
-    const hasDefaultSlot = ref(!!slots.default)
-    onUpdated(() => {
-      hasDefaultSlot.value = !!slots.default
-    })
+    const hasDefaultSlot = computed(() => hasSlot(slots))
 
     const spinnerClassName = computed(() => {
       const size = props.size ?? spinConfig.size

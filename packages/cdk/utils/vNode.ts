@@ -2,7 +2,7 @@ import type { VNode, VNodeChild } from 'vue'
 
 import { Comment, Fragment, Slots } from 'vue'
 
-import { isUndefined } from './typeof'
+import { isNil } from './typeof'
 
 const TEMPLATE = 'template'
 
@@ -10,7 +10,7 @@ export const isFragment = (node: VNodeChild): boolean => (node as VNode).type ==
 export const isComment = (node: VNodeChild): boolean => (node as VNode).type === Comment
 export const isTemplate = (node: VNodeChild): boolean => (node as VNode).type === TEMPLATE
 
-function getChildren(node: VNode, depth: number): undefined | VNode {
+function getChildren(node: VNode, depth: number): VNode | undefined {
   if (isComment(node)) return
   if (isFragment(node) || isTemplate(node)) {
     return depth > 0 ? getFirstValidNode(node.children as VNodeChild, depth - 1) : undefined
@@ -23,9 +23,9 @@ function getChildren(node: VNode, depth: number): undefined | VNode {
  * @param nodes node to be searched
  * @param maxDepth depth to be searched, default is 3
  */
-export function getFirstValidNode(nodes?: VNodeChild, maxDepth = 3): ReturnType<typeof getChildren> {
-  if (isUndefined(nodes)) return
-  if (Array.isArray(nodes)) {
+export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
+  if (isNil(nodes)) return
+  if (Array.isArray(nodes) && nodes.length > 0) {
     return getChildren(nodes[0] as VNode, maxDepth)
   }
   return getChildren(nodes as VNode, maxDepth)
@@ -36,7 +36,7 @@ export function getFirstValidNode(nodes?: VNodeChild, maxDepth = 3): ReturnType<
  * @param node node to be determined
  */
 export function isValidElementNode(node: VNodeChild): boolean {
-  return !(isFragment(node) || isComment(node))
+  return !isNil(node) && !isFragment(node) && !isComment(node)
 }
 
 /**
@@ -45,13 +45,26 @@ export function isValidElementNode(node: VNodeChild): boolean {
  * @param key key of slots, default is 'default'
  * @param options the property of the render function
  */
-export function getSlotNodes(slots: Slots, key = 'default', options: unknown[] = []): VNode[] {
-  if (!slots[key]) return []
+export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[]): VNode[] {
+  const slot = slots[key]
+  if (!slot) return []
 
-  let vNodes = slots[key]!(options)
+  let vNodes = slot(...options)
   if (vNodes.length === 1 && isFragment(vNodes[0])) {
     vNodes = vNodes[0].dynamicChildren ?? []
   }
 
   return vNodes
+}
+
+/**
+ * checks whether a slot exists
+ * @param slots slots of the component
+ * @param key key of slots, default is 'default'
+ * @param options the property of the render function
+ */
+export function hasSlot(slots: Slots, key = 'default', ...options: unknown[]): boolean {
+  const vNodes = slots[key]?.(...options)
+  const firstValidNode = getFirstValidNode(vNodes)
+  return isValidElementNode(firstValidNode)
 }
