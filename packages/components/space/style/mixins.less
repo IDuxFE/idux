@@ -1,0 +1,70 @@
+@import '../../style/default.less';
+
+/* stylelint-disable property-no-unknown */
+@space-align: {
+  start: flex-start;
+  center: center;
+  end: flex-end;
+  baseline: baseline;
+}
+
+/* stylelint-enable property-no-unknown */
+
+.space-align-traverse(@prefix) {
+  each(@space-align, .(@value, @key) {
+    @space-item: ~'@{prefix}-@{key}';
+
+    .@{space-item} {
+      align-items: @value;
+    }
+  })
+}
+
+/* stylelint-disable property-no-unknown */
+@space-direction: {
+  horizontal: row;
+  vertical: column;
+}
+
+/* stylelint-enable property-no-unknown */
+
+.space-direction-traverse(@prefix) {
+  each(@space-direction, .(@value, @key) {
+    @space-item: ~'@{prefix}-@{key}';
+
+    .@{space-item} {
+      flex-direction: @value;
+
+      .@{prefix}-split {
+        margin: if(@key=horizontal, 0 @space-margin-sm, @space-margin-sm 0);
+      }
+
+      .space-size-traverse(@prefix, @key);
+    }
+  })
+}
+
+/* stylelint-disable property-no-unknown */
+@space-size: {
+  small: @space-margin-sm;
+  medium: @space-margin-md;
+  large: @space-margin-lg;
+}
+
+/* stylelint-enable property-no-unknown */
+
+.space-size-traverse(@prefix, @direction) {
+  each(@space-size, .(@value, @key) {
+    @space-item: ~'@{prefix}-item-@{key}';
+
+    .@{space-item} {
+      margin-right: if(@direction=horizontal, @value);
+      margin-bottom: if(@direction=vertical, @value);
+
+      &:last-child{
+        margin: 0;
+      }
+    }
+  })
+}
+

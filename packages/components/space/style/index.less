@@ -1,0 +1,20 @@
+@import '../../style/default.less';
+@import "./mixins.less";
+
+@space-prefix: ~'@{idux-prefix}-space';
+@space-item-prefix: ~'@{space-prefix}-item';
+
+.@{space-prefix} {
+  display: inline-flex;
+
+  &-wrap {
+    flex-wrap: wrap;
+
+    .@{space-item-prefix} {
+      margin-bottom: @space-margin-md;
+    }
+  }
+}
+
+.space-align-traverse(@space-prefix);
+.space-direction-traverse(@space-prefix);

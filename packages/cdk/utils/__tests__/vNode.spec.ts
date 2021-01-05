@@ -1,12 +1,16 @@
 import type { VNode, VNodeChild } from 'vue'
 
-import { Comment, Fragment, Text } from 'vue'
+import { Comment, Fragment, Slots, Text } from 'vue'
 
-import { getFirstValidNode, isValidElementNode } from '../vNode'
+import { getFirstValidNode, getSlotNodes, isValidElementNode } from '../vNode'
 
 const TEMPLATE = 'template'
 
 type FakeVNode = Partial<Pick<VNode, 'type'>> & { children?: FakeVNode[] }
+
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
 
 const vNode: FakeVNode = {
   type: Comment,
@@ -51,5 +55,20 @@ describe('vNode.ts', () => {
 
     vNode.type = Text
     expect(isValidElementNode(vNode as VNodeChild)).toBeTruthy()
+  })
+
+  test('getSlotNodes work', () => {
+    const slots: Writable<Slots> = {}
+    expect(getSlotNodes(slots)).toEqual([])
+
+    slots.default = () => [{ type: Fragment, dynamicChildren: [] as VNode[] }] as VNode[]
+    expect(getSlotNodes(slots)).toEqual([])
+
+    slots.default = () => [{ type: Fragment }] as VNode[]
+    expect(getSlotNodes(slots)).toEqual([])
+
+    const vNodes: VNode[] = [{ type: Text }] as VNode[]
+    slots.default = () => vNodes
+    expect(getSlotNodes(slots)).toEqual(vNodes)
   })
 })
