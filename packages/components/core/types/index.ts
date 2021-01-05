@@ -7,3 +7,5 @@ export type DividerPosition = 'left' | 'center' | 'right'
 export type DividerType = 'horizontal' | 'vertical'
 
 export type SpinTipAlignType = 'horizontal' | 'vertical'
+
+export type SpaceSize = 'small' | 'medium' | 'large' | number
