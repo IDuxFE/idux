@@ -36,6 +36,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+    'prefer-const': ['error', { destructuring: 'all' }],
     semi: ['error', 'never'],
 
     // ts
