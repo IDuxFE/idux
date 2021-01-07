@@ -22,13 +22,11 @@ export default {
   version,
 }
 
-export * from './core/config'
-export * from './core/types'
-export * from './button'
-export * from './i18n'
-export * from './icon'
-export * from './badge'
-export * from './divider'
-export * from './image'
-export * from './spin'
-export * from './space'
+export { useGlobalConfig } from './core/config'
+export { IxButton, IxButtonGroup }
+export { IxIcon }
+export { IxBadge }
+export { IxDivider }
+export { IxImage }
+export { IxSpin }
+export { IxSpace }
