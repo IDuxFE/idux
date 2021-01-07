@@ -10,6 +10,7 @@ export interface GlobalConfig {
   image: ImageConfig
   spin: SpinConfig
   space: SpaceConfig
+  empty: EmptyConfig
 }
 
 export interface ButtonConfig {
@@ -49,4 +50,8 @@ export interface SpinConfig {
 
 export interface SpaceConfig {
   size: SpaceSize
+}
+
+export interface EmptyConfig {
+  description: string
 }
