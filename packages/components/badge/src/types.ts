@@ -1,15 +1,17 @@
 import type { DefineComponent } from 'vue'
 
-export interface BadgeProps {
+interface BadgeOriginalProps {
   // Badge显示的数字
-  readonly count: number | string
+  count: number | string
   // 最大显示的数字
-  readonly overflowCount?: number | string
+  overflowCount?: number | string
   // 是否显示0
-  readonly showZero?: boolean
+  showZero?: boolean
   // 是否以点的形式显示，优先级大于以上属性
-  readonly dot?: boolean
-  readonly color?: string
+  dot?: boolean
+  color?: string
 }
+
+export type BadgeProps = Readonly<BadgeOriginalProps>
 
 export type IxBadgeComponent = InstanceType<DefineComponent<BadgeProps>>

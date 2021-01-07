@@ -1,8 +1,8 @@
 export function getLessTemplate(compName: string): string {
   return `@import '../../style/default.less';
-    
+
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
-    
+
 .@{${compName}-prefix} {
   color: #fff;
 }
@@ -12,9 +12,10 @@ export function getLessTemplate(compName: string): string {
 export function getTypesTemplate(compName: string): string {
   return `import type { DefineComponent } from 'vue'
 
-export interface ${compName}Props {
-  // please add readonly for every prop
+interface ${compName}OriginalProps {
 }
+
+export type ${compName}Props = Readonly<${compName}OriginalProps>
 
 export type Ix${compName}Component = InstanceType<DefineComponent<${compName}Props>>
 `
@@ -140,7 +141,7 @@ title:
 ## en
 
 
-  
+
 ## demo
 
 \`\`\`html
@@ -152,7 +153,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-    
+
   }
 })
 </script>
