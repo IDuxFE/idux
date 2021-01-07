@@ -4,7 +4,7 @@ import type { SpaceSize } from '@idux/components/core/types'
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
 
-export interface SpaceProps {
+interface SpaceOriginalProps {
   /* Alignment direction of container */
   align?: SpaceAlign
   /* Spacing direction of flex item */
@@ -22,5 +22,7 @@ export interface SpaceProps {
   /* Whether to wrap */
   wrap?: boolean
 }
+
+export type SpaceProps = Readonly<SpaceOriginalProps>
 
 export type IxSpaceComponent = InstanceType<DefineComponent<SpaceProps>>

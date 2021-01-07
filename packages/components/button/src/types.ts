@@ -2,24 +2,28 @@ import type { DefineComponent } from 'vue'
 import type { ButtonMode, ComponentSize } from '@idux/components/core/types'
 
 export type ButtonShape = 'circle' | 'round'
-export interface ButtonProps {
-  readonly mode?: ButtonMode
-  readonly danger?: boolean
-  readonly ghost?: boolean
-  readonly disabled?: boolean
-  readonly loading?: boolean
-  readonly size?: ComponentSize
-  readonly shape?: ButtonShape
-  readonly block?: boolean
-  readonly icon?: string
+interface ButtonOriginalProps {
+  mode?: ButtonMode
+  danger?: boolean
+  ghost?: boolean
+  disabled?: boolean
+  loading?: boolean
+  size?: ComponentSize
+  shape?: ButtonShape
+  block?: boolean
+  icon?: string
 }
+
+export type ButtonProps = Readonly<ButtonOriginalProps>
 
 export type IxButtonComponent = InstanceType<DefineComponent<ButtonProps>>
 
-export interface ButtonGroupProps {
-  readonly mode?: ButtonMode
-  readonly size?: ComponentSize
-  readonly shape?: ButtonShape
+interface ButtonGroupOriginalProps {
+  mode?: ButtonMode
+  size?: ComponentSize
+  shape?: ButtonShape
 }
+
+export type ButtonGroupProps = Readonly<ButtonGroupOriginalProps>
 
 export type IxButtonGroupComponent = InstanceType<DefineComponent<ButtonGroupProps>>
