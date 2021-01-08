@@ -39,7 +39,7 @@ export interface ImageConfig {
 }
 export interface CardConfig {
   hoverable: boolean
-  bordered: boolean
+  borderless: boolean
   loading: boolean
   size: ComponentSize
 }

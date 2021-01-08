@@ -28,7 +28,7 @@ cover:
 | `title` | 卡片标题 | `'string'|'slot'` | - | - |
 | `extra` | 右上角操作区域 | `'string'|'slot'` | - | - |
 | `footer` | 卡片底部操作区域 | `'slot'` | - | - |
-| `bordered` | 是否有边框 | `'booelan'` | `'true'` | `'true'` |
+| `borderless` | 是否有边框 | `'booelan'` | `'false'` | `'false'` |
 | `hoverable` | 是否悬浮 | `'booelan'` | `'false'` | `'false'` |
 | `loading` | 当卡片内容还在加载中时，可以用 loading 展示一个占位 | `'booelan'` | `'false'` | `'false'` |
 | `size` | 设置按钮大小 | `'large'|'medium'|'small'` | `'medium'` |
