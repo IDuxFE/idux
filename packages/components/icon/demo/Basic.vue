@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { addIconDefinitions, fetchFromIconfont, useGlobalConfig } from '@idux/components'
+import { useGlobalConfig } from '@idux/components'
+import { addIconDefinitions, fetchFromIconfont } from '@idux/components/icon'
 import { Up, Down } from '@idux/components/icon/definitions'
 
 export default defineComponent({

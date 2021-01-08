@@ -6,4 +6,4 @@ IxButton.install = installComponent(IxButton)
 IxButtonGroup.install = installComponent(IxButtonGroup)
 
 export { IxButton, IxButtonGroup }
-export type { IxButtonComponent, IxButtonGroupComponent } from './src/types'
+export * from './src/types'

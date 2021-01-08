@@ -10,4 +10,4 @@ interface SpinOriginalProps {
 
 export type SpinProps = Readonly<SpinOriginalProps>
 
-export type IxSpinComponent = InstanceType<DefineComponent<SpinProps>>
+export type SpinComponent = InstanceType<DefineComponent<SpinProps>>

@@ -9,14 +9,14 @@ interface ImageOriginalProps {
   alt?: string
   fit?: string
 }
-interface ImagePreviewOriginalProps {
-  previewSrc?: string
-}
 
 export type ImageProps = Readonly<ImageOriginalProps>
 
+export type ImageComponent = InstanceType<DefineComponent<ImageProps>>
+
+interface ImagePreviewOriginalProps {
+  previewSrc?: string
+}
 export type ImagePreviewProps = Readonly<ImagePreviewOriginalProps>
 
 export type ImageStatus = 'loading' | 'loaded' | 'failed'
-
-export type IxImageComponent = InstanceType<DefineComponent<ImageProps>>
