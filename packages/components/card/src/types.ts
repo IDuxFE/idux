@@ -4,7 +4,7 @@ export interface CardProps {
   readonly title?: string
   readonly extra?: string
   readonly hoverable: boolean
-  readonly bordered: boolean
+  readonly borderless: boolean
   readonly loading: boolean
   readonly size?: ComponentSize
 }

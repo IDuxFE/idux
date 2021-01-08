@@ -19,11 +19,11 @@ describe('Card.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  test('bordered word', async () => {
+  test('borderless word', async () => {
     const wrapper = CardMount()
     expect(wrapper.classes()).not.toContain('ix-card-border')
 
-    await wrapper.setProps({ border: false })
+    await wrapper.setProps({ borderless: true })
     expect(wrapper.classes()).toContain('ix-card-border')
   })
 
@@ -31,18 +31,18 @@ describe('Card.vue', () => {
     const wrapper = CardMount()
     expect(wrapper.classes()).not.toContain('ix-card-hover')
 
-    await wrapper.setProps({ hoverable: false })
+    await wrapper.setProps({ hoverable: true })
     expect(wrapper.classes()).toContain('ix-card-hover')
   })
 
-  test.only('loading work', async () => {
+  test('loading work', async () => {
     const wrapper = CardMount()
-    expect(wrapper.classes()).not.toContain('ix-card-loading-block')
-    expect(wrapper.classes()).toContain('ix-card-wraper')
+    expect(wrapper.find('.ix-card-loading-block').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-card-wraper').exists()).toBeTruthy()
 
-    await wrapper.setProps({ loadding: true })
-    expect(wrapper.classes()).toContain('ix-card-loading-block')
-    expect(wrapper.classes()).not.toContain('ix-card-wraper')
+    await wrapper.setProps({ loading: true })
+    expect(wrapper.find('.ix-card-loading-block').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-card-wraper').exists()).toBeFalsy()
   })
 
   test('size work', async () => {
@@ -76,22 +76,15 @@ describe('Card.vue', () => {
     const wrapper = CardMount()
     expect(wrapper.find('.ix-card__head__extra').exists()).toBeFalsy()
 
-    await wrapper.setProps({ title: 'More' })
+    await wrapper.setProps({ extra: 'More' })
     expect(wrapper.find('.ix-card__head__extra').text()).toEqual('More')
   })
 
   test('extraSlot work', async () => {
-    const wrapper = CardMount({ slots: { title: '<div class="extra-slot"></div>' } })
+    const wrapper = CardMount({ slots: { extra: '<div class="extra-slot"></div>' } })
     expect(wrapper.find('.extra-slot').exists()).toBeTruthy()
 
-    await wrapper.setProps({ title: 'More' })
+    await wrapper.setProps({ extra: 'More' })
     expect(wrapper.find('.ix-card__head__extra').text()).not.toEqual('More')
-  })
-
-  test('extraEmit work', () => {
-    const wrapper = CardMount({ slots: { title: '<div class="extra-slot"></div>' } })
-
-    wrapper.vm.$emit('onExtraClicked', 'test')
-    expect(wrapper.emitted().onExtraClicked).toEqual('test')
   })
 })
