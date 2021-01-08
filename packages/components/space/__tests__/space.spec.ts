@@ -1,24 +1,13 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import IxSpace from '../src/Space.vue'
 import { IxButton } from '../../button'
 import { IxDivider } from '../../divider'
-import { SpaceAlign, SpaceDirection } from '../src/types'
-import { SpaceSize } from '@idux/components'
+import { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
 import { isNil } from '@idux/cdk/utils'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },
-  template: `
-    <IxSpace :align='align' :direction='direction' :size='size' :wrap='wrap' :split='split'>
-    Space
-    <IxButton mode='primary'>Button</IxButton>
-    <IxButton>Button</IxButton>
-    <template v-slot:split v-if='showSplit'>
-      <IxDivider :type='dividerType' />
-    </template>
-    </IxSpace>
-  `,
   props: {
     align: { type: String as PropType<SpaceAlign>, default: undefined },
     direction: { type: String as PropType<SpaceDirection>, default: undefined },
@@ -26,20 +15,29 @@ const TestComponent = defineComponent({
     split: { type: String, default: undefined },
     wrap: { type: Boolean, default: undefined },
   },
-  data() {
-    return {
-      showSplit: false,
-    }
-  },
-  computed: {
-    dividerType(): SpaceDirection {
+  setup(props) {
+    const dividerType = computed(() => {
       const hashmap = {
         horizontal: 'vertical',
         vertical: 'horizontal',
       }
-      return hashmap[this.direction] as SpaceDirection
-    },
+      return hashmap[props.direction] as SpaceDirection
+    })
+    return { dividerType }
   },
+  data() {
+    return { showSplit: false }
+  },
+  template: `
+  <IxSpace :align='align' :direction='direction' :size='size' :wrap='wrap' :split='split'>
+  Space
+  <IxButton mode='primary'>Button</IxButton>
+  <IxButton>Button</IxButton>
+  <template v-slot:split v-if='showSplit'>
+    <IxDivider :type='dividerType' />
+  </template>
+  </IxSpace>
+`,
 })
 
 describe('Space.vue', () => {

@@ -23,6 +23,7 @@ export default {
 }
 
 export { useGlobalConfig } from './core/config'
+export { useLocale, addLocale, getLocale } from './i18n'
 export { IxButton, IxButtonGroup }
 export { IxIcon }
 export { IxBadge }

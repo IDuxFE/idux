@@ -4,4 +4,4 @@ import IxSpace from './src/Space.vue'
 IxSpace.install = installComponent(IxSpace)
 
 export { IxSpace }
-export type { IxSpaceComponent } from './src/types'
+export * from './src/types'

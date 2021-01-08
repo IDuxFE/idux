@@ -1,5 +1,3 @@
-import type { ComponentSize, ButtonMode, DividerPosition, DividerType, SpinTipAlignType, SpaceSize } from '../types'
-
 export type GlobalConfigKey = keyof GlobalConfig
 
 export interface GlobalConfig {
@@ -12,9 +10,11 @@ export interface GlobalConfig {
   space: SpaceConfig
 }
 
+export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
+export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
   mode: ButtonMode
-  size: ComponentSize
+  size: ButtonSize
 }
 
 export interface IconConfig {
@@ -27,6 +27,8 @@ export interface BadgeConfig {
   overflowCount: number | string
 }
 
+export type DividerPosition = 'left' | 'center' | 'right'
+export type DividerType = 'horizontal' | 'vertical'
 export interface DividerConfig {
   dashed: boolean
   plain: boolean
@@ -40,13 +42,16 @@ export interface ImageConfig {
   fallback: string
 }
 
+export type SpinTipAlignType = 'horizontal' | 'vertical'
+export type SpinSize = 'large' | 'medium' | 'small'
 export interface SpinConfig {
   icon: string
   tip: string
   tipAlign: SpinTipAlignType
-  size: ComponentSize
+  size: SpinSize
 }
 
+export type SpaceSize = 'small' | 'medium' | 'large' | number
 export interface SpaceConfig {
   size: SpaceSize
 }

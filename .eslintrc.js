@@ -23,24 +23,23 @@ module.exports = {
     // common
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'eol-last': 'error',
-    'no-trailing-spaces': 'error',
-    'comma-style': ['error', 'last'],
-    'comma-dangle': ['error', 'always-multiline'],
-    quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
-    camelcase: ['error', { properties: 'never' }],
-    semi: ['error', 'never'],
-    indent: ['error', 2, { SwitchCase: 1 }],
-    'object-curly-spacing': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
-
     // note you must disable the base rule as it can report incorrect errors
     // use '@typescript-eslint/brace-style': ['error', '1tbs']
     'brace-style': 'off',
     curly: ['error', 'all'],
+    camelcase: ['error', { properties: 'never' }],
+    'comma-style': ['error', 'last'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'eol-last': 'error',
+    indent: ['error', 2, { SwitchCase: 1 }],
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+    semi: ['error', 'never'],
 
     // ts
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/brace-style': ['error', '1tbs'],
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/member-delimiter-style': [
       'error',
@@ -56,16 +55,23 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/brace-style': ['error', '1tbs'],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
 
     // prettier
     'prettier/prettier': 'error',
 
     // vue
+    'vue/attribute-hyphenation': 'off',
     'vue/html-closing-bracket-spacing': 'error',
+    'vue/max-attributes-per-line': 'off',
     'vue/require-default-prop': 'error',
     'vue/require-explicit-emits': 'error',
-    'vue/max-attributes-per-line': 'off',
-    'vue/attribute-hyphenation': 'off',
   },
 }

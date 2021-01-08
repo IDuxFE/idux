@@ -2,9 +2,8 @@ import type { ComputedRef } from 'vue'
 import type { Locale, LocaleKey, LocaleType } from './types'
 
 import { computed, ref } from 'vue'
-
-import { IDUX_COMPONENTS_PREFIX } from '../core/constant'
-import { Logger } from '../core/logger'
+import { IDUX_COMPONENTS_PREFIX } from '@idux/components/core/constant'
+import { Logger } from '@idux/components/core/logger'
 import defaultLocale from './locales/zh-CN'
 
 const currentType = ref<LocaleType>('zh-CN')

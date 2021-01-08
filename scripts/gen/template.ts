@@ -17,7 +17,7 @@ interface ${compName}OriginalProps {
 
 export type ${compName}Props = Readonly<${compName}OriginalProps>
 
-export type Ix${compName}Component = InstanceType<DefineComponent<${compName}Props>>
+export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
 `
 }
 
@@ -47,7 +47,7 @@ import Ix${compName} from './src/${compName}.vue'
 Ix${compName}.install = installComponent(Ix${compName})
 
 export { Ix${compName} }
-export type { Ix${compName}Component } from './src/types'
+export * from './src/types'
 `
 }
 
