@@ -10,7 +10,7 @@
         </div>
         <div v-if="isShowExtra" class="ix-card__head__extra">
           <slot name="extra">
-            <a @click="_onExtraClick">{{ extra }}</a>
+            <a>{{ extra }}</a>
           </slot>
         </div>
       </div>
@@ -38,41 +38,32 @@ export default defineComponent({
     title: { type: String, default: undefined },
     extra: { type: String, default: undefined },
     hoverable: Boolean,
-    bordered: Boolean,
+    borderless: Boolean,
     loading: Boolean,
     size: { type: String as PropType<ComponentSize>, default: undefined },
   },
-  emits: {
-    onExtraClicked: () => void 0,
-  },
-  setup(props: CardProps) {
+  setup(props: CardProps, { slots }) {
     // init
     const cardConfig = useGlobalConfig('card')
     const classes = useClasses(props, cardConfig)
     const isShowLoading = computed(() => (props.loading !== undefined ? props.loading : cardConfig.loading))
-    const isShowTitle = computed(() => typeof this.title === 'string' || !!this.$slots.title)
-    const isShowExtra = computed(() => typeof this.extra === 'string' || !!this.$slots.extra)
-    const isShowFooter = computed(() => !!this.$slots.extra)
+    const isShowTitle = computed(() => typeof props.title === 'string' || !!slots.title)
+    const isShowExtra = computed(() => typeof props.extra === 'string' || !!slots.extra)
+    const isShowFooter = computed(() => !!slots.extra)
     return { classes, isShowTitle, isShowExtra, isShowFooter, isShowLoading }
-  },
-
-  methods: {
-    _onExtraClick(): void {
-      this.$emit('onExtraClicked', ...arguments)
-    },
   },
 })
 
 const useClasses = (props: CardProps, cardConfig: CardConfig) => {
   return computed(() => {
     const hoverable = props.hoverable !== undefined ? props.hoverable : cardConfig.hoverable
-    const bordered = props.bordered !== undefined ? props.bordered : cardConfig.bordered
+    const borderless = props.borderless !== undefined ? props.borderless : cardConfig.borderless
     const size = props.size !== undefined ? props.size : cardConfig.size
     return [
       size !== 'medium' ? `ix-card-${size}` : '',
       {
         'ix-card-hover': hoverable,
-        'ix-card-border': bordered,
+        'ix-card-border': borderless,
       },
     ]
   })

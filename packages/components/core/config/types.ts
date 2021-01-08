@@ -60,7 +60,7 @@ export interface SpaceConfig {
 export type CardSize = 'large' | 'medium' | 'small'
 export interface CardConfig {
   hoverable: boolean
-  bordered: boolean
+  borderless: boolean
   loading: boolean
   size: CardSize
 }
