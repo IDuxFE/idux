@@ -15,8 +15,8 @@ import { IxIcon } from '@idux/components/icon'
 import { PropTypes } from '@idux/cdk/utils'
 import { defineComponent, computed } from 'vue'
 import { EmptyProps } from './types'
-import { useGlobalConfig } from '@idux/components'
-// import { getLocale } from '@idux/components/i18n'
+import { useGlobalConfig } from '@idux/components/core/config'
+import { getLocale } from '@idux/components/i18n'
 export default defineComponent({
   name: 'IxEmpty',
   components: { IxIcon },
@@ -32,9 +32,11 @@ export default defineComponent({
 
 const useDescription = (props: EmptyProps) => {
   const emptyConfig = useGlobalConfig('empty')
-  // const emptyLocale = getLocale('empty')
+  const emptyLocale = getLocale('empty')
   return computed(() => {
-    return props.description !== undefined ? props.description : emptyConfig.description
+    return props.description !== undefined
+      ? props.description
+      : emptyConfig.description ?? emptyLocale.value.description
   })
 }
 </script>

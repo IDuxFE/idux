@@ -2,7 +2,7 @@ module.exports = {
   // u can change this option to a more specific folder for test single component or util when dev
   // for example, ['<rootDir>/packages/components/button']
   roots: ['<rootDir>'],
-  
+
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.vue$': 'vue-jest',
