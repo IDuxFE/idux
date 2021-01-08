@@ -71,19 +71,25 @@ function useSpaceList(
       }
       spaceList = children.map((child, index) => {
         const current: SpaceItem = { node: child, id: index }
-        if (split) return current
-        else if (typeof size[index] === 'number') {
+        if (split) {
+          return current
+        } else if (typeof size[index] === 'number') {
           current.style = { marginRight: `${size[index]}px` }
-        } else current.className = `ix-space-item-${size[index]}`
+        } else {
+          current.className = `ix-space-item-${size[index]}`
+        }
         return current
       })
     } else {
       spaceList = children.map((child, index) => {
         const current: SpaceItem = { node: child, id: index }
-        if (split) return current
-        else if (typeof size === 'number') {
+        if (split) {
+          return current
+        } else if (typeof size === 'number') {
           current.style = { marginRight: `${size}px` }
-        } else current.className = `ix-space-item-${size}`
+        } else {
+          current.className = `ix-space-item-${size}`
+        }
         return current
       })
     }

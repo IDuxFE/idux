@@ -11,7 +11,9 @@ export const isComment = (node: VNodeChild): boolean => (node as VNode).type ===
 export const isTemplate = (node: VNodeChild): boolean => (node as VNode).type === TEMPLATE
 
 function getChildren(node: VNode, depth: number): VNode | undefined {
-  if (isComment(node)) return
+  if (isComment(node)) {
+    return
+  }
   if (isFragment(node) || isTemplate(node)) {
     return depth > 0 ? getFirstValidNode(node.children as VNodeChild, depth - 1) : undefined
   }
@@ -24,7 +26,9 @@ function getChildren(node: VNode, depth: number): VNode | undefined {
  * @param maxDepth depth to be searched, default is 3
  */
 export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
-  if (isNil(nodes)) return
+  if (isNil(nodes)) {
+    return
+  }
   if (Array.isArray(nodes) && nodes.length > 0) {
     return getChildren(nodes[0] as VNode, maxDepth)
   }
@@ -47,7 +51,9 @@ export function isValidElementNode(node: VNodeChild): boolean {
  */
 export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[]): VNode[] {
   const slot = slots[key]
-  if (!slot) return []
+  if (!slot) {
+    return []
+  }
 
   let vNodes = slot(...options)
   if (vNodes.length === 1 && isFragment(vNodes[0])) {

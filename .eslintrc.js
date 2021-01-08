@@ -34,6 +34,11 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
 
+    // note you must disable the base rule as it can report incorrect errors
+    // use '@typescript-eslint/brace-style': ['error', '1tbs']
+    'brace-style': 'off',
+    curly: ['error', 'all'],
+
     // ts
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
@@ -51,6 +56,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/brace-style': ['error', '1tbs'],
 
     // prettier
     'prettier/prettier': 'error',

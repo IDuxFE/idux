@@ -56,7 +56,9 @@ const useCountValue = (
 ) => {
   return computed(() => {
     if (!hasCountSlot.value && !dot.value) {
-      if (!showZero.value && +props.count === 0) return false
+      if (!showZero.value && +props.count === 0) {
+        return false
+      }
       if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
         return props.count > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
       }
