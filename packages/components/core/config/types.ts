@@ -8,6 +8,7 @@ export interface GlobalConfig {
   image: ImageConfig
   spin: SpinConfig
   space: SpaceConfig
+  result: ResultConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -54,4 +55,9 @@ export interface SpinConfig {
 export type SpaceSize = 'small' | 'medium' | 'large' | number
 export interface SpaceConfig {
   size: SpaceSize
+}
+
+export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
+export interface ResultConfig {
+  status: ResultStatus
 }

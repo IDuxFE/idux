@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result.vue render work 1`] = `"<div class=\\"ix-result ix-result-info\\"><div class=\\"ix-result-icon\\"><i class=\\"ix-icon ix-icon-info-circle\\" role=\\"img\\" arialabel=\\"info-circle\\"></i></div><!--v-if--><!--v-if--><!--v-if--><!--v-if--></div>"`;
