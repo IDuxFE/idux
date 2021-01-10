@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card.vue render work 1`] = `"<div class=\\"ix-card\\"><div class=\\"ix-card-wraper\\"><div class=\\"ix-card__head\\"><!--v-if--><!--v-if--></div><div class=\\"ix-card__body\\"></div><!--v-if--></div></div>"`;

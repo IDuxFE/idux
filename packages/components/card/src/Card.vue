@@ -24,8 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import type { PropType } from 'vue'
-import type { ComponentSize } from '@idux/components/core/types'
+import { PropTypes } from '@idux/cdk/utils'
 import type { CardConfig } from '@idux/components/core/config/types'
 
 import { useGlobalConfig } from '@idux/components/core/config'
@@ -35,12 +34,12 @@ import { CardProps } from './types'
 export default defineComponent({
   name: 'IxCard',
   props: {
-    title: { type: String, default: undefined },
-    extra: { type: String, default: undefined },
-    hoverable: Boolean,
-    borderless: Boolean,
-    loading: Boolean,
-    size: { type: String as PropType<ComponentSize>, default: undefined },
+    title: PropTypes.string,
+    extra: PropTypes.string,
+    hoverable: PropTypes.bool,
+    borderless: PropTypes.bool,
+    loading: PropTypes.bool,
+    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
   },
   setup(props: CardProps, { slots }) {
     // init
