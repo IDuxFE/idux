@@ -14,7 +14,7 @@ import { ref, defineComponent, computed } from 'vue'
 
 export default defineComponent({
   setup() {
-    let tipAlignIsHorizontal = ref(true)
+    const tipAlignIsHorizontal = ref(true)
 
     const tip = ref('数据加载中，请等待')
     const tipAlign = computed(() => (tipAlignIsHorizontal.value ? 'horizontal' : 'vertical'))

@@ -3,6 +3,9 @@ import { isNil, isNumeric } from './typeof'
 export function toArray<T>(value: T | T[]): T[]
 export function toArray<T>(value: T | readonly T[]): readonly T[]
 export function toArray<T>(value: T | T[]): T[] {
+  if (isNil(value)) {
+    return []
+  }
   return Array.isArray(value) ? value : [value]
 }
 
