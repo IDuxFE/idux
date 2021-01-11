@@ -1,6 +1,6 @@
 ---
 category: components
-type: 通用
+type: 布局
 title: Divider
 subtitle: 分割线
 cover:

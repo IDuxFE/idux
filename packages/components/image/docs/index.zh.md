@@ -1,6 +1,6 @@
 ---
 category: components
-type: 通用
+type: 数据展示
 title: Image
 subtitle: 图片
 cover: 可预览的图片
