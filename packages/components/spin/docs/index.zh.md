@@ -1,6 +1,6 @@
 ---
 category: components
-type: 通用
+type: 反馈
 title: Spin
 subtitle: 加载中遮罩层
 cover:
