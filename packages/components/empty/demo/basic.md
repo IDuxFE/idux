@@ -1,10 +1,18 @@
 ---
 order: 0
 title:
-  zh: 空数据
+  zh: 基本用法
   en: Basic usage
 ---
 
 ## zh
 
-空数据组件
+简单的展示。
+
+## demo
+
+```html
+<template>
+  <ix-empty />
+</template>
+```

@@ -1,21 +1,24 @@
 <template>
   <div class="ix-empty">
-    <span class="ix-empty-main">
-      <img v-if="image" :src="image" class="ix-empty-img" />
-      <ix-icon v-else name="empty" class="ix-empty-icon" />
-      <p v-if="!$slots.default && descriptionValue" class="ix-empty-descriptionValue">{{ descriptionValue }}</p>
-      <div v-if="$slots.default">
-        <slot />
-      </div>
-    </span>
+    <div class="ix-empty-image">
+      <img v-if="image" :src="image" alt="empty image" />
+      <ix-icon v-else name="empty" />
+    </div>
+    <div v-if="description$$ || $slots.description" class="ix-empty-description">
+      <slot name="description">{{ description$$ }}</slot>
+    </div>
+    <div v-if="$slots.default" class="ix-empty-footer">
+      <slot />
+    </div>
   </div>
 </template>
 <script lang="ts">
+import type { EmptyProps } from './types'
+
 import { defineComponent, computed } from 'vue'
-import { EmptyProps } from './types'
-import { IxIcon } from '@idux/components/icon'
 import { PropTypes } from '@idux/cdk/utils'
-import { getLocale } from '@idux/components/i18n/useI18n'
+import { IxIcon } from '@idux/components/icon'
+import { getLocale } from '@idux/components/i18n'
 
 export default defineComponent({
   name: 'IxEmpty',
@@ -25,15 +28,9 @@ export default defineComponent({
     image: PropTypes.string,
   },
   setup(props: EmptyProps) {
-    const descriptionValue = useDescription(props)
-    return { descriptionValue }
+    const emptyLocale = getLocale('empty')
+    const description$$ = computed(() => props.description ?? emptyLocale.value.description)
+    return { description$$ }
   },
 })
-
-const useDescription = (props: EmptyProps) => {
-  const emptyLocale = getLocale('empty')
-  return computed(() => {
-    return props.description !== undefined ? props.description : emptyLocale.value.description
-  })
-}
 </script>

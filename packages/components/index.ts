@@ -8,7 +8,7 @@ import { IxSpin } from './spin'
 import { IxSpace } from './space'
 import { IxEmpty } from './empty'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace, IxEmpty, IxEmpty]
+const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace, IxEmpty]
 
 const install = (app: App): void => {
   components.forEach(component => {
