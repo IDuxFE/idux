@@ -3,25 +3,29 @@
 @empty-prefix: ~'@{idux-prefix}-empty';
 
 .@{empty-prefix} {
-  color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  display: block;
+  text-align: center;
+  font-size: @empty-font-size-md;
+  line-height: @empty-line-height-md;
+  margin: 0 @empty-margin-md;
 
-  &-main {
-    text-align: center;
+  &-image {
+    margin-bottom: @empty-margin-md;
+
+    img {
+      height: 100%;
+    }
+
+    .@{icon-prefix} {
+      font-size: @empty-icon-font-size-md;
+    }
   }
 
-  &-icon {
-    font-size: 60px;
+  &-description {
+    margin: 0;
   }
 
-  &-img {
-    width: 120px;
-  }
-
-  &-descriptionValue {
-    margin-top: 8px;
+  &-footer {
+    margin-top: @empty-margin-md;
   }
 }

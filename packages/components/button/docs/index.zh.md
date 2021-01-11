@@ -63,7 +63,7 @@ cover:
 | 变量名 | default 主题| 说明 |
 | --- | --- | --- |
 | @button-font-weight | @font-weight-md | - |
-| @button-line-height | @line-height-md | - |
+| @button-line-height | @line-height-base | - |
 | @button-height-sm | @height-sm | - |
 | @button-height-md | @height-md | - |
 | @button-height-lg | @height-lg | - |
