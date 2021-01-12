@@ -12,7 +12,7 @@ import type { ComputedRef } from 'vue'
 import type { BadgeProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { hasSlot, isNumeric, PropTypes } from '@idux/cdk/utils'
+import { hasSlot, isNumeric, PropTypes, toNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 
 export default defineComponent({
@@ -60,7 +60,7 @@ const useCountValue = (
         return false
       }
       if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
-        return props.count > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
+        return toNumber(props.count) > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
       }
       return props.count
     }

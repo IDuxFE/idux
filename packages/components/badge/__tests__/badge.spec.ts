@@ -57,6 +57,9 @@ describe('Badge.vue', () => {
     await wrapper.setProps({ count: '1000', overflowCount: 999 })
     expect(badge.text()).toBe('999+')
     expect(badge.html()).toMatchSnapshot()
+    await wrapper.setProps({ count: '1000', overflowCount: '999' })
+    expect(badge.text()).toBe('999+')
+    expect(badge.html()).toMatchSnapshot()
   })
 
   // 圆点徽标呈现
