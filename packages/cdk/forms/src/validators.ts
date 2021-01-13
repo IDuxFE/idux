@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import type { AsyncValidatorFn, ValidationError, ValidatorFn, Errors, ErrorMessages } from './types'
+import type { AsyncValidatorFn, ValidationError, ValidatorFn, ValidationErrors, ErrorMessages } from './types'
+import type { AbstractControl } from './controls/abstractControl'
 
 import { isArray, isFunction, isNil, isNonNil, isNumber, isNumeric, isString } from '@idux/cdk/utils'
 
@@ -26,21 +27,21 @@ export class Validators {
     Validators.messages = { ...Validators.messages, ...messages }
   }
 
-  static required(value: any): { required: ValidationError } | null {
+  static required(value: any, _: AbstractControl): { required: ValidationError } | null {
     if (isEmpty(value)) {
       return { required: Validators.getMessage('required', {}) }
     }
     return null
   }
 
-  static requiredTrue(value: any): { requiredTrue: ValidationError } | null {
+  static requiredTrue(value: any, _: AbstractControl): { requiredTrue: ValidationError } | null {
     if (value === true) {
       return null
     }
     return { requiredTrue: Validators.getMessage('requiredTrue', { actual: value }) }
   }
 
-  static email(value: any): { email: ValidationError } | null {
+  static email(value: any, _: AbstractControl): { email: ValidationError } | null {
     if (isEmpty(value) || emailRegexp.test(value)) {
       return null
     }
@@ -48,7 +49,7 @@ export class Validators {
   }
 
   static min(min: number): ValidatorFn {
-    return (value: any): { min: ValidationError } | null => {
+    return (value: any, _: AbstractControl): { min: ValidationError } | null => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) >= min) {
         return null
       }
@@ -57,7 +58,7 @@ export class Validators {
   }
 
   static max(max: number): ValidatorFn {
-    return (value: any): { max: ValidationError } | null => {
+    return (value: any, _: AbstractControl): { max: ValidationError } | null => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) <= max) {
         return null
       }
@@ -66,7 +67,7 @@ export class Validators {
   }
 
   static minLength(minLength: number): ValidatorFn {
-    return (value: any): { minLength: ValidationError } | null => {
+    return (value: any, _: AbstractControl): { minLength: ValidationError } | null => {
       if (isEmpty(value) || !hasLength(value) || value.length >= minLength) {
         return null
       }
@@ -75,7 +76,7 @@ export class Validators {
   }
 
   static maxLength(maxLength: number): ValidatorFn {
-    return (value: any): { maxLength: ValidationError } | null => {
+    return (value: any, _: AbstractControl): { maxLength: ValidationError } | null => {
       if (isEmpty(value) || !hasLength(value) || value.length <= maxLength) {
         return null
       }
@@ -103,7 +104,7 @@ export class Validators {
       regexStr = pattern.toString()
       regex = pattern
     }
-    return (value: any): { pattern: ValidationError } | null => {
+    return (value: any, _: AbstractControl): { pattern: ValidationError } | null => {
       if (isEmpty(value) || regex.test(value)) {
         return null
       }
@@ -111,7 +112,7 @@ export class Validators {
     }
   }
 
-  static nullValidator(_: any): null {
+  static nullValidator(_: any, __: AbstractControl): null {
     return null
   }
 
@@ -124,7 +125,8 @@ export class Validators {
       return null
     }
 
-    return (value: any) => mergeMessages(executeValidators<ValidatorFn>(value, presentValidators))
+    return (value: any, control: AbstractControl) =>
+      mergeMessages(executeValidators<ValidatorFn>(value, control, presentValidators))
   }
 
   static composeAsync(validators: (AsyncValidatorFn | null)[] | null): AsyncValidatorFn | null {
@@ -136,8 +138,8 @@ export class Validators {
       return null
     }
 
-    return (value: any) => {
-      const validationErrors = executeValidators<AsyncValidatorFn>(value, presentValidators)
+    return (value: any, control: AbstractControl) => {
+      const validationErrors = executeValidators<AsyncValidatorFn>(value, control, presentValidators)
       return Promise.all(validationErrors).then(mergeMessages)
     }
   }
@@ -153,18 +155,22 @@ function hasLength(val: any): boolean {
   return isNonNil(val) && isNumber(val.length)
 }
 
-type GenericValidatorFn = (value: any) => any
+type GenericValidatorFn = (value: any, _: AbstractControl) => any
 
-function executeValidators<V extends GenericValidatorFn>(value: any, validators: V[]): ReturnType<V>[] {
-  return validators.map(validator => validator(value))
+function executeValidators<V extends GenericValidatorFn>(
+  value: any,
+  control: AbstractControl,
+  validators: V[],
+): ReturnType<V>[] {
+  return validators.map(validator => validator(value, control))
 }
 
-function mergeMessages(validationErrors: (Errors | null)[]): Errors | null {
+function mergeMessages(validationErrors: (ValidationErrors | null)[]): ValidationErrors | null {
   let res: { [key: string]: any } = {}
 
   // Not using Array.reduce here due to a Chrome 80 bug
   // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-  validationErrors.forEach((errors: Errors | null) => {
+  validationErrors.forEach((errors: ValidationErrors | null) => {
     res = isNonNil(errors) ? { ...res, ...errors } : res
   })
 

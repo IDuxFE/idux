@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { AbstractControl } from './controls/abstractControl'
+
 export interface ValidationError {
   message: string
   actual?: any
   [key: string]: any
 }
 
-type ErrorMessage = string | ((info: Omit<ValidationError, 'message'>) => string)
+type ErrorMessage = string | ((err: Omit<ValidationError, 'message'>) => string)
 
 export interface ErrorMessages {
   default?: ErrorMessage
@@ -21,14 +23,14 @@ export interface ErrorMessages {
   [key: string]: ErrorMessage | undefined
 }
 
-export type Errors = { [key in keyof ErrorMessages]: ValidationError }
+export type ValidationErrors = { [key in keyof ErrorMessages]: ValidationError }
 
 export interface ValidatorFn {
-  (value: any): Errors | null
+  (value: any, control: AbstractControl): ValidationErrors | null
 }
 
 export interface AsyncValidatorFn {
-  (value: any): Promise<Errors | null>
+  (value: any, control: AbstractControl): Promise<ValidationErrors | null>
 }
 
 export type TriggerType = 'change' | 'blur' | 'submit'
@@ -39,4 +41,4 @@ export interface ValidatorOptions {
   trigger?: TriggerType
 }
 
-export type ValidStatus = 'valid' | 'invalid' | 'validating'
+export type ValidationStatus = 'valid' | 'invalid' | 'validating'

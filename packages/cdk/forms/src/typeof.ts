@@ -1,7 +1,25 @@
-import { isNonNil } from '@idux/cdk/utils'
-import { ModelType } from './constant'
-import { FormControl } from './useFormControl'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { FormArray } from './controls/formArray'
+import type { FormControl } from './controls/formControl'
+import type { FormGroup } from './controls/formGroup'
+
+import { hasOwnProperty, isArray } from '@idux/cdk/utils'
+import { AbstractControl } from './controls/abstractControl'
+
+export const isAbstractControl = (val: unknown): val is AbstractControl => {
+  return val instanceof AbstractControl
+}
+
+// Since AbstractControl be dependent on the function, `val instanceof FormArray` cannot be used here.
+export const isFormArray = (val: unknown): val is FormArray => {
+  return isAbstractControl(val) && hasOwnProperty(val, 'controls') && isArray((val as FormArray).controls)
+}
+
+// Since AbstractControl be dependent on the function, `val instanceof FormGroup` cannot be used here.
+export const isFormGroup = (val: unknown): val is FormGroup => {
+  return isAbstractControl(val) && hasOwnProperty(val, 'controls') && !isArray((val as FormGroup).controls)
+}
 
 export const isFormControl = (val: unknown): val is FormControl => {
-  return isNonNil(val) && (val as { __type: string }).__type === ModelType.Control
+  return isAbstractControl(val) && hasOwnProperty(val, '_initValue')
 }
