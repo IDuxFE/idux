@@ -16,6 +16,7 @@ import {
   isNil,
   isNonNil,
   isNumeric,
+  hasOwnProperty,
 } from '../typeof'
 
 describe('typeof.ts', () => {
@@ -153,5 +154,22 @@ describe('typeof.ts', () => {
     expect(isPromise(promise)).toEqual(true)
     expect(isPromise({})).toEqual(false)
     expect(isPromise(function () {})).toEqual(false)
+  })
+
+  test('hasOwnProperty work', () => {
+    const object1 = { prop: 1 }
+    expect(hasOwnProperty(object1, 'prop')).toEqual(true)
+    expect(hasOwnProperty(object1, 'toString')).toEqual(false)
+    expect(hasOwnProperty(object1, 'hasOwnProperty')).toEqual(false)
+
+    const object2 = new Object() as { prop: unknown; test?: unknown }
+    object2.prop = null
+    expect(hasOwnProperty(object2, 'prop')).toEqual(true)
+    object2.prop = undefined
+    expect(hasOwnProperty(object2, 'prop')).toEqual(true)
+
+    expect(hasOwnProperty(object2, 'test')).toEqual(false)
+    object2.test = undefined
+    expect(hasOwnProperty(object2, 'test')).toEqual(true)
   })
 })
