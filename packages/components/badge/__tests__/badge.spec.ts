@@ -57,12 +57,17 @@ describe('Badge.vue', () => {
     await wrapper.setProps({ count: '1000', overflowCount: 999 })
     expect(badge.text()).toBe('999+')
     expect(badge.html()).toMatchSnapshot()
+
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+
     await wrapper.setProps({ count: '1000', overflowCount: '999' })
     expect(badge.text()).toBe('999+')
     expect(badge.html()).toMatchSnapshot()
     await wrapper.setProps({ count: '1000', overflowCount: 'xxx' })
     expect(badge.text()).toBe('1000')
     expect(badge.html()).toMatchSnapshot()
+
+    expect(warn).toBeCalledTimes(2)
   })
 
   // 圆点徽标呈现
