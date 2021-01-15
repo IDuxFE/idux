@@ -61,7 +61,7 @@ async function appendChild(props: IconProps, iconConfig: IconConfig, root: Ref<H
       : await loadSVGElement(name, iconConfig.loadIconDynamically)
     if (svgElement) {
       handleRotate(svgElement, rotate)
-      root.value.appendChild(svgElement)
+      root.value?.appendChild(svgElement)
     }
   }
 }
