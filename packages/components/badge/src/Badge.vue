@@ -20,7 +20,7 @@ export default defineComponent({
   props: {
     count: PropTypes.oneOfType([Number, String]).def(0),
     showZero: PropTypes.bool,
-    overflowCount: PropTypes.oneOfType([Number, String]),
+    overflowCount: PropTypes.number,
     dot: PropTypes.bool,
     color: PropTypes.string,
   },
@@ -59,8 +59,10 @@ const useCountValue = (
       if (!showZero.value && +props.count === 0) {
         return false
       }
-      if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
-        return toNumber(props.count) > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
+      if (isNumeric(props.count)) {
+        return props.count > toNumber(overflowCount.value, Number.MAX_VALUE)
+          ? `${overflowCount.value}+`
+          : `${props.count}`
       }
       return props.count
     }
