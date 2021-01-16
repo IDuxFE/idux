@@ -69,6 +69,7 @@ export function isPromise<T = any>(val: unknown): val is Promise<T> {
   return isObject(val) && isFunction(val.then) && isFunction(val.catch)
 }
 
-export function hasOwnProperty(val: Record<string | symbol, unknown>, key: string | symbol): key is keyof typeof val {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function hasOwnProperty(val: object, key: string | symbol): key is keyof typeof val {
   return Object.prototype.hasOwnProperty.call(val, key)
 }
