@@ -14,17 +14,17 @@ describe('formControl.ts', () => {
       control.setValue('test')
       control.markAsBlurred()
 
-      expect(control.modelRef.value).toEqual('test')
+      expect(control.valueRef.value).toEqual('test')
       expect(control.blurred.value).toEqual(true)
 
       control.reset()
 
-      expect(control.modelRef.value).toBeNull()
+      expect(control.valueRef.value).toBeNull()
       expect(control.blurred.value).toEqual(false)
     })
 
     test('setValue and getValue work', () => {
-      expect(control.modelRef.value).toBeNull()
+      expect(control.valueRef.value).toBeNull()
 
       control.setValue('test')
 

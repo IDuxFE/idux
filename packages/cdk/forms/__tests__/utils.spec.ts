@@ -8,10 +8,10 @@ const notFindText = 'not find control'
 
 const getComp = () => {
   return {
-    template: `<div>{{ modelRef }}</div>`,
+    template: `<div>{{ valueRef }}</div>`,
     setup() {
-      const { modelRef } = injectControl('control') || { modelRef: notFindText }
-      return { modelRef }
+      const { valueRef } = injectControl('control') || { valueRef: notFindText }
+      return { valueRef }
     },
   }
 }
