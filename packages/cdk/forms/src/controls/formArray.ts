@@ -10,7 +10,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
   /**
    * The ref value for the form array.
    */
-  readonly modelRef: Ref<Array<UnwrapRef<T>>>
+  readonly valueRef: Ref<Array<UnwrapRef<T>>>
 
   /**
    * Length of the control array.
@@ -29,7 +29,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
   ) {
     super(validatorOrOptions, asyncValidator)
     controls.forEach(control => control.setParent(this as any))
-    this.modelRef = ref(this._calculateModelRef(controls))
+    this.valueRef = ref(this._calculateValue(controls))
 
     this._watchValid()
     this._watchStatus()
@@ -53,7 +53,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
   push(control: AbstractControl): void {
     this.controls.push(control)
     this._registerControl(control)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -67,7 +67,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
   insert(index: number, control: AbstractControl): void {
     this.controls.splice(index, 0, control)
     this._registerControl(control)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -79,7 +79,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
    */
   removeAt(index: number): void {
     this.controls.splice(index, 1)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -93,7 +93,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
   setControl(index: number, control: AbstractControl): void {
     this.controls.splice(index, 1, control)
     this._registerControl(control)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -149,7 +149,7 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
 
   private _watchValid() {
     watch(
-      [this.modelRef, this.blurred],
+      [this.valueRef, this.blurred],
       () => {
         if (this.trigger === 'change' || (this.trigger === 'blur' && this.blurred.value)) {
           this._validate()
@@ -196,8 +196,8 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
     })
   }
 
-  private _calculateModelRef(controls: AbstractControl<T>[]) {
-    return controls.map(control => control.modelRef)
+  private _calculateValue(controls: AbstractControl<T>[]) {
+    return controls.map(control => control.valueRef)
   }
 
   private _registerControl(control: AbstractControl<T>) {

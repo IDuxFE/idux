@@ -12,7 +12,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
   /**
    * The ref value for the form group.
    */
-  readonly modelRef: Ref<Partial<Record<keyof T, Ref<UnwrapRef<T>>>>>
+  readonly valueRef: Ref<Partial<Record<keyof T, Ref<UnwrapRef<T>>>>>
 
   private _statusWatchStopHandle: WatchStopHandle | null = null
   private _blurredWatchStopHandle: WatchStopHandle | null = null
@@ -24,7 +24,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
   ) {
     super(validatorOrOptions, asyncValidator)
     this._forEachChild(control => control.setParent(this as any))
-    this.modelRef = ref(this._calculateModelRef(controls)) as Ref<Partial<Record<keyof T, Ref<UnwrapRef<T>>>>>
+    this.valueRef = ref(this._calculateValue(controls)) as Ref<Partial<Record<keyof T, Ref<UnwrapRef<T>>>>>
 
     this._watchValid()
     this._watchStatus()
@@ -39,7 +39,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
    */
   addControl(name: keyof T, control: AbstractControl): void {
     this._registerControl(name, control)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -51,7 +51,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
    */
   removeControl(name: keyof T): void {
     delete this.controls[name]
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -65,7 +65,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
   setControl(name: keyof T, control: AbstractControl): void {
     delete this.controls[name]
     this._registerControl(name, control)
-    this.modelRef.value = this._calculateModelRef(this.controls)
+    this.valueRef.value = this._calculateValue(this.controls)
     this._watchStatus()
     this._watchBlurred()
   }
@@ -123,7 +123,7 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
 
   private _watchValid() {
     watch(
-      [this.modelRef, this.blurred],
+      [this.valueRef, this.blurred],
       () => {
         if (this.trigger === 'change' || (this.trigger === 'blur' && this.blurred.value)) {
           this._validate()
@@ -170,14 +170,14 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
     })
   }
 
-  private _calculateModelRef(controls: Partial<Record<keyof T, AbstractControl<T>>>) {
-    const model = {} as Partial<Record<keyof T, Ref<UnwrapRef<T>>>>
+  private _calculateValue(controls: Partial<Record<keyof T, AbstractControl<T>>>) {
+    const value = {} as Partial<Record<keyof T, Ref<UnwrapRef<T>>>>
 
     Object.keys(controls).forEach(key => {
-      model[key as keyof T] = controls[key as keyof T]!.modelRef
+      value[key as keyof T] = controls[key as keyof T]!.valueRef
     })
 
-    return model
+    return value
   }
 
   private _registerControl(name: keyof T, control: AbstractControl<T>) {

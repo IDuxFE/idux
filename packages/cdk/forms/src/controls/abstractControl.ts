@@ -24,7 +24,7 @@ export abstract class AbstractControl<T = any> {
   /**
    * The ref value for the control.
    */
-  readonly modelRef!: any
+  readonly valueRef!: any
 
   /**
    * The validation status of the control, there are three possible validation status values:

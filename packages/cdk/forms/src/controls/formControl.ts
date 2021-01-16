@@ -9,7 +9,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
   /**
    * The ref value for the control.
    */
-  readonly modelRef: Ref<UnwrapRef<T> | null>
+  readonly valueRef: Ref<UnwrapRef<T> | null>
 
   private _initValue: T | null = null
   constructor(
@@ -18,7 +18,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    this.modelRef = ref(initValue)
+    this.valueRef = ref(initValue)
     this._initValue = initValue
 
     this._watchEffect()
@@ -28,7 +28,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * Resets the form control, marking it `unblurred`, and setting the value to initialization value.
    */
   reset(): void {
-    this.modelRef.value = this._initValue as any
+    this.valueRef.value = this._initValue as any
     this.markAsUnblurred()
   }
 
@@ -38,14 +38,14 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * @param value The new value.
    */
   setValue(value: T | null): void {
-    this.modelRef.value = value as any
+    this.valueRef.value = value as any
   }
 
   /**
    * The aggregate value of the form control.
    */
   getValue(): T | null {
-    return this.modelRef.value as T
+    return this.valueRef.value as T
   }
 
   /**
@@ -70,7 +70,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   private _watchEffect() {
-    watch([this.modelRef, this.blurred], () => {
+    watch([this.valueRef, this.blurred], () => {
       if (this.trigger === 'change' || (this.trigger === 'blur' && this.blurred.value)) {
         this._validate()
       }

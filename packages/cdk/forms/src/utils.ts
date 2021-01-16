@@ -10,6 +10,6 @@ export function provideControl(control: AbstractControl): void {
 }
 
 export function injectControl(path: Array<string | number> | string): AbstractControl | null {
-  const controlParent = inject(token)
+  const controlParent = inject(token, null)
   return controlParent ? controlParent.get(path) : null
 }

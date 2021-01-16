@@ -5,7 +5,7 @@ import { AsyncValidatorFn, ValidationErrors, ValidatorFn, ValidatorOptions } fro
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  readonly modelRef: Ref<T | null> = ref(null)
+  readonly valueRef: Ref<T | null> = ref(null)
   constructor(
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
@@ -15,7 +15,7 @@ class Control<T = unknown> extends AbstractControl<T> {
   reset(): void {}
   setValue(_: T | null): void {}
   getValue(): T {
-    return this.modelRef.value as T
+    return this.valueRef.value as T
   }
   markAsBlurred(): void {}
   markAsUnblurred(): void {}
@@ -61,7 +61,7 @@ describe('abstractControl.ts', () => {
       expect(await control.validate()).toEqual({ required: { message: '' } })
 
       control.setValidator([email, minLength(5)])
-      control.modelRef.value = 'test'
+      control.valueRef.value = 'test'
 
       expect(await control.validate()).toEqual({
         email: { message: '', actual: 'test' },
@@ -141,7 +141,7 @@ describe('abstractControl.ts', () => {
       control = new Control(Validators.required, _asyncValidator)
       expect(await control.validate()).toEqual({ required: { message: '' } })
 
-      control.modelRef.value = 'test'
+      control.valueRef.value = 'test'
       control.validate()
 
       expect(control.status.value).toEqual('validating')
