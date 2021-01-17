@@ -5,33 +5,37 @@ import { AsyncValidatorFn, ValidationErrors, ValidatorFn, ValidatorOptions } fro
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  readonly valueRef: Ref<T | null> = ref(null)
+  _valueRef: Ref<T | null> = ref(null)
   constructor(
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
+
+    this._initAllStatus()
+
     this._watchEffect()
   }
   reset(): void {}
   setValue(value: T | null): void {
-    this.valueRef.value = value
+    this._valueRef.value = value
   }
   getValue(): T {
-    return this.valueRef.value as T
+    return this._valueRef.value as T
   }
   markAsBlurred(): void {}
   markAsUnblurred(): void {}
+  markAsDirty(): void {}
+  markAsPristine(): void {}
   async validate(): Promise<ValidationErrors | null> {
     return this._validate()
   }
-
   private _watchEffect() {
-    watch([this.valueRef, this.blurred], () => {
+    watch([this._valueRef, this._blurred], () => {
       this._validate()
     })
 
-    watch(this.errors, errors => {
+    watch(this._errors, errors => {
       this._status.value = errors ? 'invalid' : 'valid'
     })
   }
@@ -45,20 +49,16 @@ describe('abstractControl.ts', () => {
       control = new Control()
     })
 
-    test('init status work', () => {
+    test('init all status work', () => {
       expect(control.status.value).toEqual('valid')
+      expect(control.errors.value).toBeNull()
       expect(control.valid.value).toEqual(true)
       expect(control.invalid.value).toEqual(false)
       expect(control.validating.value).toEqual(false)
-    })
-
-    test('init errors work', () => {
-      expect(control.errors.value).toBeNull()
-    })
-
-    test('init blurred work', () => {
       expect(control.blurred.value).toEqual(false)
       expect(control.unblurred.value).toEqual(true)
+      expect(control.dirty.value).toEqual(false)
+      expect(control.pristine.value).toEqual(true)
     })
 
     test('init props work', () => {
@@ -74,7 +74,7 @@ describe('abstractControl.ts', () => {
       expect(await control.validate()).toEqual({ required: { message: '' } })
 
       control.setValidator([email, minLength(5)])
-      control.valueRef.value = 'test'
+      control.setValue('test')
 
       expect(await control.validate()).toEqual({
         email: { message: '', actual: 'test' },
@@ -215,7 +215,7 @@ describe('abstractControl.ts', () => {
       control = new Control(Validators.required, _asyncValidator)
       expect(await control.validate()).toEqual({ required: { message: '' } })
 
-      control.valueRef.value = 'test'
+      control.setValue('test')
       control.validate()
 
       expect(control.status.value).toEqual('validating')

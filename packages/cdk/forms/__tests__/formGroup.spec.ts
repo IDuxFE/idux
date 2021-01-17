@@ -104,16 +104,26 @@ describe('formGroup.ts', () => {
 
     test('markAsBlurred and markAsUnblurred work', async () => {
       group.markAsBlurred()
-
       await flushPromises()
 
       expect(group.blurred.value).toEqual(true)
 
       group.markAsUnblurred()
-
       await flushPromises()
 
       expect(group.blurred.value).toEqual(false)
+    })
+
+    test('markAsDirty and markAsPristine work', async () => {
+      group.markAsDirty()
+      await flushPromises()
+
+      expect(group.dirty.value).toEqual(true)
+
+      group.markAsPristine()
+      await flushPromises()
+
+      expect(group.dirty.value).toEqual(false)
     })
 
     test('validate work', async () => {
@@ -159,11 +169,15 @@ describe('formGroup.ts', () => {
         }),
       })
 
-      group.setValue({ control: '' })
-      await flushPromises()
-
       expect(group.invalid.value).toEqual(true)
       expect(group.hasError('required', 'control')).toEqual(true)
+      expect(group.hasError('test')).toEqual(false)
+
+      group.setValue({ control: 'test' })
+      await flushPromises()
+
+      expect(group.invalid.value).toEqual(false)
+      expect(group.hasError('required', 'control')).toEqual(false)
       expect(group.hasError('test')).toEqual(false)
 
       group.setValidator(_validator)
@@ -197,35 +211,31 @@ describe('formGroup.ts', () => {
         { trigger: 'blur', validators: _validator },
       )
 
-      group.setValue({ control: '' })
+      expect(group.invalid.value).toEqual(true)
+      expect(group.hasError('test')).toEqual(true)
+      expect(group.hasError('required', 'control')).toEqual(true)
+      expect(group.hasError('required', 'group.control')).toEqual(true)
 
-      await flushPromises()
-
-      expect(group.invalid.value).toEqual(false)
-      expect(group.hasError('test')).toEqual(false)
-      expect(group.hasError('required', 'control')).toEqual(false)
-      expect(group.hasError('required', 'group.control')).toEqual(false)
-
-      group.markAsBlurred()
+      group.setValue({ control: 'test', group: { control: 'test' } })
       await flushPromises()
 
       expect(group.invalid.value).toEqual(true)
       expect(group.hasError('test')).toEqual(true)
       expect(group.hasError('required', 'control')).toEqual(true)
-      expect(group.hasError('required', 'group.control')).toEqual(false)
+      expect(group.hasError('required', 'group.control')).toEqual(true)
 
-      group.setValue({ control: 'test' })
+      group.markAsBlurred()
       await flushPromises()
 
-      expect(group.invalid.value).toEqual(false)
+      expect(group.invalid.value).toEqual(true)
       expect(group.hasError('test')).toEqual(false)
       expect(group.hasError('required', 'control')).toEqual(false)
-      expect(group.hasError('required', 'group.control')).toEqual(false)
+      expect(group.hasError('required', 'group.control')).toEqual(true)
 
       await group.validate()
 
-      expect(group.invalid.value).toEqual(true)
-      expect(group.hasError('required', 'group.control')).toEqual(true)
+      expect(group.invalid.value).toEqual(false)
+      expect(group.hasError('required', 'group.control')).toEqual(false)
     })
 
     test('submit trigger validate work', async () => {
@@ -242,23 +252,24 @@ describe('formGroup.ts', () => {
         { trigger: 'submit', validators: _validator },
       )
 
-      group.setValue({ control: '' })
-      group.markAsBlurred()
-      await flushPromises()
-
-      expect(group.invalid.value).toEqual(false)
-      expect(group.hasError('test')).toEqual(false)
-      expect(group.hasError('required', 'control')).toEqual(false)
+      expect(group.invalid.value).toEqual(true)
+      expect(group.hasError('test')).toEqual(true)
+      expect(group.hasError('required', 'control')).toEqual(true)
       expect(group.hasError('async', 'group.control')).toEqual(false)
 
-      await group.validate()
+      await flushPromises()
+
+      expect(group.hasError('async', 'group.control')).toEqual(true)
+
+      group.setValue({ control: 'test' })
+      await flushPromises()
 
       expect(group.invalid.value).toEqual(true)
       expect(group.hasError('test')).toEqual(true)
       expect(group.hasError('required', 'control')).toEqual(true)
       expect(group.hasError('async', 'group.control')).toEqual(true)
 
-      group.setValue({ control: 'test' })
+      group.markAsBlurred()
       await flushPromises()
 
       expect(group.invalid.value).toEqual(true)
