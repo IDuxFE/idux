@@ -143,16 +143,26 @@ describe('formArray.ts', () => {
 
     test('markAsBlurred and markAsUnblurred work', async () => {
       array.markAsBlurred()
-
       await flushPromises()
 
       expect(array.blurred.value).toEqual(true)
 
       array.markAsUnblurred()
-
       await flushPromises()
 
       expect(array.blurred.value).toEqual(false)
+    })
+
+    test('markAsDirty and markAsPristine work', async () => {
+      array.markAsDirty()
+      await flushPromises()
+
+      expect(array.dirty.value).toEqual(true)
+
+      array.markAsPristine()
+      await flushPromises()
+
+      expect(array.dirty.value).toEqual(false)
     })
 
     test('validate work', async () => {
@@ -187,9 +197,6 @@ describe('formArray.ts', () => {
     test('default change work', async () => {
       array = new FormArray([newFormGroup()], { validators: _validator })
 
-      array.setValue([{ control: '1234' }])
-      await flushPromises()
-
       expect(array.invalid.value).toEqual(true)
       expect(array.hasError('test')).toEqual(true)
 
@@ -198,28 +205,37 @@ describe('formArray.ts', () => {
 
       expect(array.invalid.value).toEqual(false)
       expect(array.hasError('test')).toEqual(false)
+
+      array.setValue([{ control: '1234' }])
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('test')).toEqual(true)
     })
 
     test('blur trigger validate work', async () => {
       array = new FormArray([newFormGroup()], { trigger: 'blur', validators: _validator })
 
-      array.setValue([{ control: '1234' }])
-      await flushPromises()
-
-      expect(array.invalid.value).toEqual(false)
-      expect(array.hasError('test')).toEqual(false)
-
-      array.markAsBlurred()
-      await flushPromises()
-
       expect(array.invalid.value).toEqual(true)
       expect(array.hasError('test')).toEqual(true)
 
       array.setValue([{ control: 'test' }])
       await flushPromises()
 
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('test')).toEqual(true)
+
+      array.markAsBlurred()
+      await flushPromises()
+
       expect(array.invalid.value).toEqual(false)
       expect(array.hasError('test')).toEqual(false)
+
+      array.setValue([{ control: '1234' }])
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('test')).toEqual(true)
     })
 
     test('submit trigger validate work', async () => {
@@ -237,23 +253,17 @@ describe('formArray.ts', () => {
         { trigger: 'submit', validators: _validator },
       )
 
-      array.setValue([{ control: '' }])
-      array.markAsBlurred()
-      await flushPromises()
-
-      expect(array.invalid.value).toEqual(false)
-      expect(array.hasError('test')).toEqual(false)
-      expect(array.hasError('required', [0, 'control'])).toEqual(false)
-      expect(array.hasError('async', [0, 'group', 'control'])).toEqual(false)
-
-      await array.validate()
-
       expect(array.invalid.value).toEqual(true)
       expect(array.hasError('test')).toEqual(true)
       expect(array.hasError('required', [0, 'control'])).toEqual(true)
+      expect(array.hasError('async', [0, 'group', 'control'])).toEqual(false)
+
+      await flushPromises()
+
       expect(array.hasError('async', [0, 'group', 'control'])).toEqual(true)
 
       array.setValue([{ control: 'test' }])
+      array.markAsBlurred()
       await flushPromises()
 
       expect(array.invalid.value).toEqual(true)
@@ -265,6 +275,21 @@ describe('formArray.ts', () => {
 
       expect(array.invalid.value).toEqual(true)
       expect(array.hasError('test')).toEqual(false)
+      expect(array.hasError('required', [0, 'control'])).toEqual(false)
+      expect(array.hasError('async', [0, 'group', 'control'])).toEqual(true)
+
+      array.setValue([{ control: '1234' }])
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('test')).toEqual(false)
+      expect(array.hasError('required', [0, 'control'])).toEqual(false)
+      expect(array.hasError('async', [0, 'group', 'control'])).toEqual(true)
+
+      await array.validate()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('test')).toEqual(true)
       expect(array.hasError('required', [0, 'control'])).toEqual(false)
       expect(array.hasError('async', [0, 'group', 'control'])).toEqual(true)
     })

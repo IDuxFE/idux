@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormArray } from './controls/formArray'
-import type { FormControl } from './controls/formControl'
 import type { FormGroup } from './controls/formGroup'
+import type { FormControl } from './controls/formControl'
 
 import { hasOwnProperty, isArray } from '@idux/cdk/utils'
 import { AbstractControl } from './controls/abstractControl'
@@ -17,7 +17,7 @@ export const isFormArray = (val: unknown): val is FormArray => {
 
 // Since AbstractControl be dependent on the function, `val instanceof FormGroup` cannot be used here.
 export const isFormGroup = (val: unknown): val is FormGroup => {
-  return isAbstractControl(val) && hasOwnProperty(val, 'controls') && !isArray((val as FormGroup).controls)
+  return isAbstractControl(val) && !isFormControl(val) && !isFormArray(val)
 }
 
 export const isFormControl = (val: unknown): val is FormControl => {

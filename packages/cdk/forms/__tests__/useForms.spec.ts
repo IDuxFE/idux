@@ -4,7 +4,7 @@ import { Validators } from '../src/validators'
 
 interface BasicGroup {
   control1: string
-  control2: number
+  control2: string
   array: string[]
   group: {
     control: string
@@ -25,21 +25,23 @@ describe('useForms.ts', () => {
     })
 
     expect(group.getValue()).toEqual(basicValue)
-    expect(group.invalid.value).toEqual(false)
-    expect(group.hasError('required', 'control1')).toEqual(false)
-    expect(group.hasError('required', 'control2')).toEqual(false)
-
-    group.setValue({ control1: '' })
-    await flushPromises()
-
-    expect(group.getValue()).toEqual({ ...basicValue, control1: '' })
     expect(group.invalid.value).toEqual(true)
     expect(group.hasError('required', 'control1')).toEqual(true)
-    expect(group.hasError('required', 'control2')).toEqual(false)
+    expect(group.hasError('required', 'control2')).toEqual(true)
+
+    group.setValue({ control1: 'test', control2: 'test' })
+    await flushPromises()
+
+    expect(group.getValue()).toEqual({ ...basicValue, control1: 'test', control2: 'test' })
+    expect(group.invalid.value).toEqual(true)
+    expect(group.hasError('required', 'control1')).toEqual(false)
+    expect(group.hasError('required', 'control2')).toEqual(true)
 
     group.markAsBlurred()
     await flushPromises()
 
-    expect(group.hasError('required', 'control2')).toEqual(true)
+    expect(group.invalid.value).toEqual(false)
+    expect(group.hasError('required', 'control1')).toEqual(false)
+    expect(group.hasError('required', 'control2')).toEqual(false)
   })
 })
