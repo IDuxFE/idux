@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ComputedRef, DeepReadonly, Ref } from 'vue'
+import type { ComputedRef, DeepReadonly, Ref, WatchCallback, WatchOptions, WatchStopHandle } from 'vue'
 import type {
   AsyncValidatorFn,
   ErrorMessages,
@@ -15,7 +15,7 @@ import type {
 import type { FormGroup } from './formGroup'
 import type { FormArray } from './formArray'
 
-import { computed, readonly, ref } from 'vue'
+import { computed, watch, readonly, ref } from 'vue'
 import { hasOwnProperty, isArray, isNil, isObject } from '@idux/cdk/utils'
 import { Validators } from '../validators'
 import { isFormArray, isFormGroup } from '../typeof'
@@ -209,7 +209,6 @@ export abstract class AbstractControl<T = any> {
   }
 
   /**
-   * @description
    * Reports error data for the control with the given path.
    *
    * @param errorCode The code of the error to check
@@ -222,7 +221,6 @@ export abstract class AbstractControl<T = any> {
   }
 
   /**
-   * @description
    * Reports whether the control with the given path has the error specified.
    *
    * @param errorCode The code of the error to check
@@ -239,6 +237,29 @@ export abstract class AbstractControl<T = any> {
    */
   setParent(parent: FormGroup<T> | FormArray<T[]>): void {
     this._parent = parent
+  }
+
+  /**
+   * Watch the ref value for the control.
+   *
+   * @param cb The callback when the value changes
+   * @param options Optional options of watch, the default value of `deep` is `true`
+   */
+  watchValue(cb: WatchCallback<T, T | undefined>, options?: WatchOptions): WatchStopHandle {
+    return watch(this.valueRef, cb, { deep: true, ...options })
+  }
+
+  /**
+   * Watch the status for the control.
+   *
+   * @param cb The callback when the status changes
+   * @param options Optional options of watch
+   */
+  watchStatus(
+    cb: WatchCallback<ValidationStatus, ValidationStatus | undefined>,
+    options?: WatchOptions,
+  ): WatchStopHandle {
+    return watch(this.status, cb, options)
   }
 
   protected async _validate(): Promise<ValidationErrors | null> {

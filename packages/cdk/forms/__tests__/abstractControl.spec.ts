@@ -1,5 +1,5 @@
 import { flushPromises } from '@vue/test-utils'
-import { Ref, ref } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import { AbstractControl } from '../src/controls/abstractControl'
 import { AsyncValidatorFn, ValidationErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
@@ -11,9 +11,12 @@ class Control<T = unknown> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
+    this._watchEffect()
   }
   reset(): void {}
-  setValue(_: T | null): void {}
+  setValue(value: T | null): void {
+    this.valueRef.value = value
+  }
   getValue(): T {
     return this.valueRef.value as T
   }
@@ -21,6 +24,16 @@ class Control<T = unknown> extends AbstractControl<T> {
   markAsUnblurred(): void {}
   async validate(): Promise<ValidationErrors | null> {
     return this._validate()
+  }
+
+  private _watchEffect() {
+    watch([this.valueRef, this.blurred], () => {
+      this._validate()
+    })
+
+    watch(this.errors, errors => {
+      this._status.value = errors ? 'invalid' : 'valid'
+    })
   }
 }
 
@@ -117,6 +130,67 @@ describe('abstractControl.ts', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       parent.setParent(root as any)
       expect(control.root).toEqual(root)
+    })
+
+    test('watchValue work', async () => {
+      const log = jest.fn()
+      const stop = control.watchValue(value => log(value))
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(log).toBeCalledWith('test')
+      expect(log).toBeCalledTimes(1)
+
+      control.setValue('')
+      await flushPromises()
+
+      expect(log).toBeCalledWith('')
+      expect(log).toBeCalledTimes(2)
+
+      stop()
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(log).toBeCalledTimes(2)
+
+      control.watchValue(value => log(value), { immediate: true })
+      await flushPromises()
+
+      expect(log).toBeCalledWith('test')
+      expect(log).toBeCalledTimes(3)
+    })
+
+    test('watchStatus work', async () => {
+      const log = jest.fn()
+      const stop = control.watchStatus(value => log(value))
+
+      control.setValidator(Validators.required)
+      control.setValue('')
+      await flushPromises()
+
+      expect(log).toBeCalledWith('invalid')
+      expect(log).toBeCalledTimes(1)
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(log).toBeCalledWith('valid')
+      expect(log).toBeCalledTimes(2)
+
+      stop()
+
+      control.setValue('')
+      await flushPromises()
+
+      expect(log).toBeCalledTimes(2)
+
+      control.watchValue(value => log(value), { immediate: true })
+      await flushPromises()
+
+      expect(log).toBeCalledWith('invalid')
+      expect(log).toBeCalledTimes(3)
     })
   })
 
