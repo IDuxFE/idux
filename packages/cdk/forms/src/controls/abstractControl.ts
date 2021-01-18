@@ -134,10 +134,8 @@ export abstract class AbstractControl<T = any> {
 
   /**
    * Sets a new value for the control.
-   *
-   * @param value The new value.
    */
-  abstract setValue(value: any): void
+  abstract setValue(value: any, options: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.

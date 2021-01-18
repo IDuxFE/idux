@@ -84,10 +84,12 @@ export class FormGroup<T = Record<string, any>> extends AbstractControl<T> {
    * Sets a new value for the form group.
    *
    * @param value The new value.
+   * @param options Configuration options that emits events when the value changes.
+   * * `dirty`: Marks ar dirty, default is false.
    */
-  setValue(value: Partial<T>): void {
+  setValue(value: Partial<T>, options: { dirty?: boolean } = {}): void {
     Object.keys(value).forEach(key => {
-      this.controls[key as keyof T]!.setValue((value as any)[key])
+      this.controls[key as keyof T]!.setValue((value as any)[key], options)
     })
   }
 
