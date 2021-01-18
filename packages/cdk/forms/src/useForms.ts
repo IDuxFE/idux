@@ -17,11 +17,38 @@ type ControlConfig<T> = [
 
 export function useFormGroup<T = any>(
   controlsConfig: Partial<Record<keyof T, AbstractControl<T> | ControlConfig<T> | any>>,
+  validators?: ValidatorFn | ValidatorFn[] | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormGroup<T>
+export function useFormGroup<T = any>(
+  controlsConfig: Partial<Record<keyof T, AbstractControl<T> | ControlConfig<T> | any>>,
+  validatorOptions?: ValidatorOptions | null,
+): FormGroup<T>
+export function useFormGroup<T = any>(
+  controlsConfig: Partial<Record<keyof T, AbstractControl<T> | ControlConfig<T> | any>>,
   validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormGroup<T> {
   const controls = reduceControls(controlsConfig)
   return new FormGroup(controls, validatorOrOptions, asyncValidator)
+}
+
+export function useFormArray<T = any>(
+  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
+  validators?: ValidatorFn | ValidatorFn[] | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormArray<T>
+export function useFormArray<T = any>(
+  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
+  validatorOptions?: ValidatorOptions | null,
+): FormArray<T>
+export function useFormArray<T = any>(
+  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
+  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+): FormArray<T> {
+  const controls = controlsConfig.map(config => createControl<T>(config))
+  return new FormArray(controls, validatorOrOptions, asyncValidator)
 }
 
 export function useFormControl<T = any>(
@@ -36,15 +63,6 @@ export function useFormControl<T = any>(
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormControl<T> {
   return new FormControl(initValue, validatorOrOptions, asyncValidator)
-}
-
-export function useFormArray<T = any>(
-  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
-  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
-): FormArray<T> {
-  const controls = controlsConfig.map(config => createControl<T>(config))
-  return new FormArray(controls, validatorOrOptions, asyncValidator)
 }
 
 function reduceControls<T>(
