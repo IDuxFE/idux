@@ -110,11 +110,13 @@ export class FormArray<T = any[]> extends AbstractControl<T> {
    * Sets a new value for the form array.
    *
    * @param value The new value.
+   * @param options Configuration options that emits events when the value changes.
+   * * `dirty`: Marks ar dirty, default is false.
    */
-  setValue(value: Partial<T>[]): void {
+  setValue(value: Partial<T>[], options: { dirty?: boolean } = {}): void {
     value.forEach((item, index) => {
       if (this.at(index)) {
-        this.at(index).setValue(item)
+        this.at(index).setValue(item, options)
       }
     })
   }

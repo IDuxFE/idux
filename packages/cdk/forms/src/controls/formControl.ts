@@ -41,13 +41,17 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   /**
-   * Sets a new value for the form control, marking it `dirty`.
+   * Sets a new value for the form control.
    *
    * @param value The new value.
+   * @param options Configuration options that emits events when the value changes.
+   * * `dirty`: Marks it dirty, default is false.
    */
-  setValue(value: T | null): void {
+  setValue(value: T | null, options: { dirty?: boolean } = {}): void {
     this._valueRef.value = value as any
-    this.markAsDirty()
+    if (options.dirty) {
+      this.markAsDirty()
+    }
   }
 
   /**
