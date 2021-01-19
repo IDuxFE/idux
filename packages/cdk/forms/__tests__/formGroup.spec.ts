@@ -14,7 +14,7 @@ interface BasicGroup {
   add?: string
 }
 
-const basicValue = { control: '', array: ['', null], group: { control: null } }
+const basicValue = { control: '', array: ['', ''], group: { control: '' } }
 
 describe('formGroup.ts', () => {
   describe('basic work', () => {
@@ -23,14 +23,14 @@ describe('formGroup.ts', () => {
     beforeEach(() => {
       group = new FormGroup<BasicGroup>({
         control: new FormControl(''),
-        array: new FormArray([new FormControl(''), new FormControl()]),
+        array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
         group: new FormGroup({
-          control: new FormControl(),
+          control: new FormControl(''),
         }),
       })
     })
 
-    test('addControl work', async () => {
+    test('addControl and removeControl work', async () => {
       expect(group.getValue()).toEqual(basicValue)
 
       const control = new FormControl('')
@@ -44,18 +44,16 @@ describe('formGroup.ts', () => {
       group.addControl('add', new FormControl('test'))
 
       expect(group.getValue()).toEqual({ ...basicValue, add: '' })
-    })
 
-    test('removeControl work', async () => {
+      control.markAsUnblurred()
+      await flushPromises()
+
+      expect(group.blurred.value).toEqual(false)
+
+      group.removeControl('add')
       expect(group.getValue()).toEqual(basicValue)
 
-      const _control = group.get('control')
-      group.removeControl('control')
-      const { control, ...rest } = group.getValue()
-
-      expect(group.getValue()).toEqual(rest)
-
-      _control?.markAsBlurred()
+      control.markAsBlurred()
       await flushPromises()
       expect(group.blurred.value).toEqual(false)
     })
@@ -70,6 +68,7 @@ describe('formGroup.ts', () => {
 
       _control?.markAsBlurred()
       await flushPromises()
+
       expect(group.blurred.value).toEqual(true)
     })
 
@@ -141,8 +140,8 @@ describe('formGroup.ts', () => {
       expect(group.get('control')).toEqual(control)
       expect(group.get('array')).toEqual(array)
       expect(group.get('group')).toEqual(groupChild)
-      expect(group.get('group.control')).toEqual((groupChild as FormGroup).controls.control)
-      expect(group.get(['array', 0])).toEqual((array as FormArray).controls[0])
+      expect(group.get('group.control')).toEqual((groupChild as FormGroup<{ control: string }>).controls.control)
+      expect(group.get(['array', 0])).toEqual((array as FormArray<string[]>).controls[0])
 
       expect(group.get(undefined as never)).toBeNull()
       expect(group.get('')).toBeNull()
@@ -162,10 +161,10 @@ describe('formGroup.ts', () => {
 
     test('default change work', async () => {
       group = new FormGroup<BasicGroup>({
-        control: new FormControl(null, Validators.required),
-        array: new FormArray([new FormControl(''), new FormControl()]),
+        control: new FormControl('', Validators.required),
+        array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
         group: new FormGroup({
-          control: new FormControl(),
+          control: new FormControl(''),
         }),
       })
 
@@ -200,7 +199,7 @@ describe('formGroup.ts', () => {
       group = new FormGroup<BasicGroup>(
         {
           control: new FormControl('', Validators.required),
-          array: new FormArray([new FormControl(''), new FormControl()]),
+          array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
           group: new FormGroup({
             control: new FormControl('', {
               validators: Validators.required,
@@ -244,9 +243,9 @@ describe('formGroup.ts', () => {
       group = new FormGroup<BasicGroup>(
         {
           control: new FormControl('', Validators.required),
-          array: new FormArray([new FormControl(''), new FormControl()]),
+          array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
           group: new FormGroup({
-            control: new FormControl(null, { asyncValidators: _asyncValidator }),
+            control: new FormControl('', { asyncValidators: _asyncValidator }),
           }),
         },
         { trigger: 'submit', validators: _validator },

@@ -5,10 +5,10 @@ import { Validators } from '../src/validators'
 
 describe('formControl.ts', () => {
   describe('basic work', () => {
-    let control: FormControl
+    let control: FormControl<string>
 
     beforeEach(() => {
-      control = new FormControl()
+      control = new FormControl('')
     })
 
     test('reset work', async () => {
@@ -22,13 +22,13 @@ describe('formControl.ts', () => {
 
       control.reset()
 
-      expect(control.valueRef.value).toBeNull()
+      expect(control.valueRef.value).toEqual('')
       expect(control.blurred.value).toEqual(false)
       expect(control.dirty.value).toEqual(false)
     })
 
     test('setValue and getValue work', () => {
-      expect(control.valueRef.value).toBeNull()
+      expect(control.valueRef.value).toEqual('')
 
       control.setValue('test')
 
@@ -71,7 +71,7 @@ describe('formControl.ts', () => {
   })
 
   describe('trigger work', () => {
-    let control: FormControl
+    let control: FormControl<string>
 
     test('default change work', async () => {
       const _asyncValidator = (value: unknown) =>
@@ -96,7 +96,7 @@ describe('formControl.ts', () => {
     })
 
     test('blur trigger validate work', async () => {
-      control = new FormControl(null, { trigger: 'blur', validators: Validators.required })
+      control = new FormControl('', { trigger: 'blur', validators: Validators.required })
 
       expect(control.hasError('required')).toEqual(true)
 
@@ -117,7 +117,7 @@ describe('formControl.ts', () => {
     })
 
     test('submit trigger validate work', async () => {
-      control = new FormControl(null, { trigger: 'submit', validators: Validators.required })
+      control = new FormControl('', { trigger: 'submit', validators: Validators.required })
 
       expect(control.hasError('required')).toEqual(true)
 
