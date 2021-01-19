@@ -17,19 +17,19 @@ Built-in different styles of text.
 
 ```html
 <template>
-  <span v-typography>Ant Design (default)</span>
-  <span v-typography="'secondary'">Ant Design (secondary)</span>
-  <span v-typography="'success'">Ant Design (success)</span>
-  <span v-typography="'warning'">Ant Design (warning)</span>
-  <span v-typography="'error'">Ant Design (error)</span>
-  <span v-typography="{disabled: true}">Ant Design (disabled)</span>
-  <span v-typography><mark>Ant Design (mark)</mark></span>
-  <span v-typography><code>Ant Design (code)</code></span>
-  <span v-typography><kbd>Ant Design (keyboard)</kbd></span>
-  <span v-typography><u>Ant Design (underline)</u></span>
-  <span v-typography><del>Ant Design (delete)</del></span>
-  <span v-typography><strong>Ant Design (strong)</strong></span>
-  <span v-typography><a href="https://ng.ant.design/" target="_blank">Ant Design (link)</a></span>
+  <span v-typography>Text (default)</span>
+  <span v-typography="'secondary'">Text (secondary)</span>
+  <span v-typography="'success'">Text (success)</span>
+  <span v-typography="'warning'">Text (warning)</span>
+  <span v-typography="'error'">Text (error)</span>
+  <span v-typography="{disabled: true}">Text (disabled)</span>
+  <span v-typography><mark>Text (mark)</mark></span>
+  <span v-typography><code>Text (code)</code></span>
+  <span v-typography><kbd>Text (keyboard)</kbd></span>
+  <span v-typography><u>Text (underline)</u></span>
+  <span v-typography><del>Text (delete)</del></span>
+  <span v-typography><strong>Text (strong)</strong></span>
+  <span v-typography><a href="https://ng.ant.design/" target="_blank">Text (link)</a></span>
 </template>
 
 <style scoped>

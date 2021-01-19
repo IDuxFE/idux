@@ -17,10 +17,10 @@ Show different level of title.
 
 ```html
 <template>
-  <h1 v-typography>h1. Ant Design</h1>
-  <h2 v-typography>h2. Ant Design</h2>
-  <h3 v-typography>h3. Ant Design</h3>
-  <h4 v-typography>h4. Ant Design</h4>
-  <h5 v-typography>h5. Ant Design</h5>
+  <h1 v-typography>h1. Title</h1>
+  <h2 v-typography>h2. Title</h2>
+  <h3 v-typography>h3. Title</h3>
+  <h4 v-typography>h4. Title</h4>
+  <h5 v-typography>h5. Title</h5>
 </template>
 ```

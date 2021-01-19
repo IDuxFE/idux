@@ -18,76 +18,28 @@ Show the typography demo.
 ```html
 <template>
   <article v-typography>
-    <h1 v-typography>Introduction</h1>
+   <h1 v-typography>深圳</h1>
     <p v-typography>
-      In the process of internal desktop applications development, many different design specs and implementations would
-      be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of
-      development.
+      深圳，简称“深”，别称鹏城，是<strong>广东省副省级市、计划单列市、超大城市，国务院批复确定的中国经济特区、全国性经济中心城市和国际化城市</strong>。截至2019年末，全市下辖9个区，总面积1997.47平方千米，建成区面积927.96平方千米，常住人口1343.88万人，比上年末增加41.22万人。其中常住户籍人口494.78万人，常住非户籍人口849.10万人。
     </p>
     <p v-typography>
-      After massive project practice and summaries, Ant Design, a design language for background applications, is
-      refined by Ant UED Team, which aims to<span v-typography
-        ><strong
-          >uniform the user interface specs for internal background projects, lower the unnecessary cost of design
-          differences and implementation and liberate the resources of design and front-end development</strong
-        ></span
-      >
+      深圳地处中国华南地区、广东南部、珠江口东岸，东临大亚湾和大鹏湾，西濒珠江口和伶仃洋，南隔深圳河与香港相连，是粤港澳大湾区四大中心城市之一、国家物流枢纽、国际性综合交通枢纽、国际科技产业创新中心、中国三大全国性金融中心之一，并全力建设中国特色社会主义先行示范区、综合性国家科学中心、全球海洋中心城市。深圳水陆空铁口岸俱全，是中国拥有口岸数量最多、出入境人员最多、车流量最大的口岸城市。
     </p>
-    <h2 v-typography>Guidelines and Resources</h2>
-    <p v-typography>
-      We supply a series of design principles, practical patterns and high quality design resources (<span v-typography
-        ><code>Sketch</code></span
-      >and <span v-typography><code>Axure</code></span
-      >), to help people create their product prototypes beautifully and efficiently.
-    </p>
-    <div v-typography>
-      <ul>
-        <li><a href="/docs/spec/proximity">Principles</a></li>
-        <li><a href="/docs/pattern/navigation">Patterns</a></li>
-        <li><a href="/docs/resource/download">Resource Download</a></li>
-      </ul>
-    </div>
-    <p v-typography>
-      Press <span v-typography><kbd>Esc</kbd></span> to exist...
-    </p>
-  </article>
-  <ix-divider />
-  <article v-typography>
-    <h1 v-typography>介绍</h1>
-    <p v-typography>
-      蚂蚁的企业级产品是一个庞大且复杂的体系。这类产品不仅量级巨大且功能复杂，而且变动和并发频繁，常常需要设计与开发能够快速的做出响应。
-      同时这类产品中有存在很多类似的页面以及组件，可以通过抽象得到一些稳定且高复用性的内容。
-    </p>
-    <p v-typography>
-      随着商业化的趋势，越来越多的企业级产品对更好的用户体验有了进一步的要求。带着这样的一个终极目标，我们（蚂蚁金服体验技术部）
-      经过大量的项目实践和总结，逐步打磨出一个服务于企业级产品的设计体系 Ant Design。 基于<span v-typography
-        ><mark>『确定』和『自然』</mark></span
-      >的设计价值观，通过模块化的解决方案，降低冗余的生产成本， 让设计者专注于<span v-typography
-        ><strong>更好的用户体验</strong></span
-      >。
-    </p>
-    <h2 v-typography>设计资源</h2>
-    <p v-typography>
-      我们提供完善的设计原则、最佳实践和设计资源文件 （<span v-typography><code>Sketch</code></span> 和
-      <span v-typography><code>Axure</code></span
-      >），来帮助业务快速设计出高质 量的产品原型。
-    </p>
-    <div v-typography>
-      <ul>
-        <li>
-          <a href="/docs/spec/proximity">设计原则</a>
-        </li>
-        <li>
-          <a href="/docs/pattern/navigation">设计模式</a>
-        </li>
-        <li>
-          <a href="/docs/resource/download">设计资源</a>
-        </li>
-      </ul>
-    </div>
-    <p v-typography>
-      按 <span v-typography><kbd>Esc</kbd></span> 键退出阅读……
-    </p>
+    <h2 v-typography>
+      深圳辖区概况
+    </h2>
+    <ul>
+      <li>福田区</li>
+      <li>罗湖区</li>
+      <li>南山区</li>
+      <li>盐田区</li>
+      <li>宝安区</li>
+      <li>龙岗区</li>
+      <li>龙华区</li>
+      <li>坪山区</li>
+      <li>光明区</li>
+      <li>大鹏新区</li>
+    </ul>
   </article>
 </template>
 ```
