@@ -5,4 +5,3 @@ IxTitle.install = installComponent(IxTitle)
 
 export { IxTitle }
 export * from './src/types'
-export * from './src/utils'
