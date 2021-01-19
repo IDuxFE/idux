@@ -1,28 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { DeepReadonly, Ref, UnwrapRef } from 'vue'
+import type { Ref } from 'vue'
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors } from '../types'
 
 import { ref, watch } from 'vue'
 import { AbstractControl } from './abstractControl'
 
 export class FormControl<T = any> extends AbstractControl<T> {
-  /**
-   * The ref value for the control.
-   */
-  readonly valueRef!: DeepReadonly<Ref<UnwrapRef<T> | null>>
-
-  protected _valueRef: Ref<UnwrapRef<T> | null>
-
-  private _initValue: T | null = null
-
   constructor(
-    initValue: T | null = null,
+    private _initValue: T,
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    this._valueRef = ref(initValue)
-    this._initValue = initValue
+    this._valueRef = ref(this._initValue) as Ref<T>
 
     this._initAllStatus()
 
@@ -35,7 +25,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * and setting the value to initialization value.
    */
   reset(): void {
-    this._valueRef.value = this._initValue as any
+    this._valueRef.value = this._initValue
     this.markAsUnblurred()
     this.markAsPristine()
   }
@@ -47,7 +37,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * @param options Configuration options that emits events when the value changes.
    * * `dirty`: Marks it dirty, default is false.
    */
-  setValue(value: T | null, options: { dirty?: boolean } = {}): void {
+  setValue(value: T, options: { dirty?: boolean } = {}): void {
     this._valueRef.value = value as any
     if (options.dirty) {
       this.markAsDirty()
@@ -55,10 +45,10 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   /**
-   * The aggregate value of the form control.
+   * The aggregate value of the control.
    */
-  getValue(): T | null {
-    return this._valueRef.value as T
+  getValue(): T {
+    return this._valueRef.value
   }
 
   /**

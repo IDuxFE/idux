@@ -12,8 +12,7 @@ import type {
   ValidatorOptions,
   ValidationStatus,
 } from '../types'
-import type { FormGroup } from './formGroup'
-import type { FormArray } from './formArray'
+import type { ArrayElement, GroupControls } from './types'
 
 import { computed, watch, readonly, ref } from 'vue'
 import { hasOwnProperty, isArray, isNil, isObject } from '@idux/cdk/utils'
@@ -24,7 +23,7 @@ export abstract class AbstractControl<T = any> {
   /**
    * The ref value for the control.
    */
-  readonly valueRef!: DeepReadonly<Ref<any>>
+  readonly valueRef!: DeepReadonly<Ref<T>>
 
   /**
    * The validation status of the control, there are three possible validation status values:
@@ -77,12 +76,12 @@ export abstract class AbstractControl<T = any> {
   /**
    * A collection of child controls.
    */
-  readonly controls: Partial<Record<keyof T, AbstractControl>> | AbstractControl[] | null = null
+  readonly controls: GroupControls<T> | AbstractControl<ArrayElement<T>>[] | null = null
 
   /**
    * The parent control.
    */
-  get parent(): FormGroup<T> | FormArray<T[]> | null {
+  get parent(): AbstractControl<T> | null {
     return this._parent
   }
 
@@ -90,14 +89,13 @@ export abstract class AbstractControl<T = any> {
    * Retrieves the top-level ancestor of this control.
    */
   get root(): AbstractControl<T> {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let x = this as AbstractControl<T>
+    let root = this as AbstractControl<T>
 
-    while (x.parent) {
-      x = x.parent as AbstractControl<T>
+    while (root.parent) {
+      root = root.parent
     }
 
-    return x
+    return root
   }
 
   /**
@@ -109,7 +107,7 @@ export abstract class AbstractControl<T = any> {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
-  protected _valueRef!: Ref<any>
+  protected _valueRef!: Ref<T>
   protected _status!: Ref<ValidationStatus>
   protected _errors!: Ref<ValidationErrors | null>
   protected _blurred = ref(false)
@@ -117,7 +115,7 @@ export abstract class AbstractControl<T = any> {
 
   private _validators: ValidatorFn | null = null
   private _asyncValidators: AsyncValidatorFn | null = null
-  private _parent: FormGroup<T> | FormArray<T[]> | null = null
+  private _parent: AbstractControl<T> | null = null
   private _trigger?: TriggerType
 
   constructor(
@@ -135,12 +133,12 @@ export abstract class AbstractControl<T = any> {
   /**
    * Sets a new value for the control.
    */
-  abstract setValue(value: any, options: { dirty?: boolean }): void
+  abstract setValue(value: Partial<T>, options: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.
    */
-  abstract getValue(): any
+  abstract getValue(): T
 
   /**
    * Marks the control as `blurred`.
@@ -251,7 +249,7 @@ export abstract class AbstractControl<T = any> {
   /**
    * @param parent Sets the parent of the control
    */
-  setParent(parent: FormGroup<T> | FormArray<T[]>): void {
+  setParent(parent: AbstractControl<T>): void {
     this._parent = parent
   }
 
@@ -261,7 +259,7 @@ export abstract class AbstractControl<T = any> {
    * @param cb The callback when the value changes
    * @param options Optional options of watch, the default value of `deep` is `true`
    */
-  watchValue(cb: WatchCallback<T | null, T | null | undefined>, options?: WatchOptions): WatchStopHandle {
+  watchValue(cb: WatchCallback<T, T | undefined>, options?: WatchOptions): WatchStopHandle {
     return watch(this._valueRef, cb, { deep: true, ...options })
   }
 

@@ -26,20 +26,30 @@ cover:
 > 构建一个的 `FormGroup` 实例。
 
 ```ts
-export function useFormGroup<T = any>(
-  controlsConfig: Partial<Record<keyof T, AbstractControl<T> | ControlConfig<T> | any>>,
+type ControlConfig<T> =
+  | T
+  | [T, ValidatorFn | ValidatorFn[] | null]
+  | [T, ValidatorFn | ValidatorFn[] | null, AsyncValidatorFn | AsyncValidatorFn[] | null]
+  | [T, ValidatorOptions]
+
+type GroupConfig<T> = {
+  [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]>
+}
+
+export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
+  config: GroupConfig<T>,
   validators?: ValidatorFn | ValidatorFn[] | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormGroup<T>
-export function useFormGroup<T = any>(
-  controlsConfig: Partial<Record<keyof T, AbstractControl<T> | ControlConfig<T> | any>>,
+export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
+  config: GroupConfig<T>,
   validatorOptions?: ValidatorOptions | null,
 ): FormGroup<T>
 ```
 
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
-| `controlsConfig` | 子控件配置项 | `object` | - | 每个子控件的 `key` 就是配置项的 `key` |
+| `config` | 控件组配置项 | `GroupConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `key` |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn | ValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
 | `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn | AsyncValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
 | `validatorOptions` | 控件组验证配置项 | `ValidatorOptions` | - | - |
@@ -49,20 +59,23 @@ export function useFormGroup<T = any>(
 > 构建一个的 `FormArray` 实例。
 
 ```ts
-export function useFormArray<T = any>(
-  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
+type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<ArrayElement<T>> | ArrayElement<T>>
+
+
+export function useFormArray<T extends any[] = any[]>(
+  config: ArrayConfig<T>,
   validators?: ValidatorFn | ValidatorFn[] | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormArray<T>
-export function useFormArray<T = any>(
-  controlsConfig: Array<AbstractControl<T> | ControlConfig<T> | any>,
+export function useFormArray<T extends any[] = any[]>(
+  config: ArrayConfig<T>,
   validatorOptions?: ValidatorOptions | null,
 ): FormArray<T>
 ```
 
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
-| `controlsConfig` | 子控件配置项 | `array` | - | 每个子控件的 `key` 就是配置项的 `index` |
+| `config` | 控件数组配置项 | `ArrayConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `index` |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn | ValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
 | `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn | AsyncValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
 | `validatorOptions` | 控件数组验证配置项 | `ValidatorOptions` | - | - |

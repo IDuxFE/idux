@@ -14,19 +14,19 @@ interface BasicGroup {
 }
 
 const newFormGroup = () =>
-  new FormGroup({
+  new FormGroup<BasicGroup>({
     control: new FormControl(''),
-    array: new FormArray([new FormControl(''), new FormControl()]),
+    array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
     group: new FormGroup({
-      control: new FormControl(),
+      control: new FormControl(''),
     }),
   })
 
-const basicValue = { control: '', array: ['', null], group: { control: null } }
+const basicValue = { control: '', array: ['', ''], group: { control: '' } }
 
 describe('formArray.ts', () => {
   describe('basic work', () => {
-    let array: FormArray<BasicGroup>
+    let array: FormArray<BasicGroup[]>
 
     beforeEach(() => {
       array = new FormArray([newFormGroup()])
@@ -96,11 +96,11 @@ describe('formArray.ts', () => {
 
     test('setControl work', async () => {
       expect(array.getValue()).toEqual([basicValue])
-      const group = new FormGroup({
+      const group = new FormGroup<BasicGroup>({
         control: new FormControl('test'),
-        array: new FormArray([new FormControl(''), new FormControl()]),
+        array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
         group: new FormGroup({
-          control: new FormControl(),
+          control: new FormControl(''),
         }),
       })
       array.setControl(0, group)
@@ -188,7 +188,7 @@ describe('formArray.ts', () => {
   })
 
   describe('trigger work', () => {
-    let array: FormArray<BasicGroup>
+    let array: FormArray<BasicGroup[]>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
       return value[0].control === 'test' ? null : ({ test: { message: '' } } as ValidationErrors)
@@ -244,9 +244,9 @@ describe('formArray.ts', () => {
         [
           new FormGroup<BasicGroup>({
             control: new FormControl('', Validators.required),
-            array: new FormArray([new FormControl(''), new FormControl()]),
+            array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
             group: new FormGroup({
-              control: new FormControl(null, { asyncValidators: _asyncValidator }),
+              control: new FormControl('', { asyncValidators: _asyncValidator }),
             }),
           }),
         ],

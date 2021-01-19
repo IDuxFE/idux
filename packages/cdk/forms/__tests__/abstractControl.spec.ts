@@ -5,7 +5,7 @@ import { AsyncValidatorFn, ValidationErrors, ValidatorFn, ValidatorOptions } fro
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  _valueRef: Ref<T | null> = ref(null)
+  _valueRef: Ref<T> = ref((null as unknown) as T) as Ref<T>
   constructor(
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
@@ -17,11 +17,11 @@ class Control<T = unknown> extends AbstractControl<T> {
     this._watchEffect()
   }
   reset(): void {}
-  setValue(value: T | null): void {
+  setValue(value: T): void {
     this._valueRef.value = value
   }
   getValue(): T {
-    return this._valueRef.value as T
+    return this._valueRef.value
   }
   markAsBlurred(): void {}
   markAsUnblurred(): void {}
