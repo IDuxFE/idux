@@ -6,8 +6,10 @@ title:
 ---
 
 ## zh
+
 包含标题、内容、操作区域。
-可通过设置size为small,medium,或者large，控制尺寸
+可通过设置size为default或small，控制尺寸
+
 ## demo
 
 ```html
