@@ -90,4 +90,20 @@ describe('typography.ts', () => {
     await wrapper.setProps({ type: { disabled: false } })
     expect(wrapper.classes()).not.toContain('ix-typography-disabled')
   })
+
+  test('dev warn work', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const TestComponent = defineComponent({
+      template: `<p v-typography="'hello'">Paragraph</p>`,
+    })
+    const wrapper = mount(TestComponent, {
+      global: {
+        directives: {
+          typography: IxTypography,
+        },
+      },
+    })
+    expect(wrapper.classes()).toEqual(['ix-typography'])
+    expect(error).toBeCalled()
+  })
 })
