@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, Directive } from 'vue'
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxBadge } from './badge'
@@ -8,12 +8,21 @@ import { IxSpin } from './spin'
 import { IxSpace } from './space'
 import { IxEmpty } from './empty'
 import { IxResult } from './result'
+import { IxTypography } from './typography'
 
 const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace, IxEmpty, IxResult]
+
+const directives: Record<string, Directive> = {
+  typography: IxTypography,
+}
 
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
+  })
+
+  Object.keys(directives).forEach(key => {
+    app.directive(key, directives[key])
   })
 }
 
@@ -35,3 +44,4 @@ export { IxSpin }
 export { IxSpace }
 export { IxEmpty }
 export { IxResult }
+export { IxTypography }
