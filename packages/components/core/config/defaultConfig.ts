@@ -8,6 +8,7 @@ import type {
   SpinConfig,
   SpaceConfig,
   ResultConfig,
+  CardConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -42,6 +43,7 @@ const spin = shallowReactive<SpinConfig>({
 const space = shallowReactive<SpaceConfig>({ size: 'small' })
 
 const result = shallowReactive<ResultConfig>({ status: 'info' })
+const card = shallowReactive<CardConfig>({ hoverable: false, borderless: false, size: 'default', loading: false })
 
 export const defaultConfig: GlobalConfig = {
   button,
@@ -52,4 +54,5 @@ export const defaultConfig: GlobalConfig = {
   spin,
   space,
   result,
+  card,
 }

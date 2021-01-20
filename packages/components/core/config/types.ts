@@ -9,6 +9,7 @@ export interface GlobalConfig {
   spin: SpinConfig
   space: SpaceConfig
   result: ResultConfig
+  card: CardConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -60,4 +61,12 @@ export interface SpaceConfig {
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
   status: ResultStatus
+}
+
+export type CardSize = 'default' | 'small'
+export interface CardConfig {
+  hoverable: boolean
+  borderless: boolean
+  loading: boolean
+  size: CardSize
 }
