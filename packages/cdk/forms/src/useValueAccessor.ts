@@ -7,7 +7,7 @@ import { isDevMode } from '@idux/components/core/utils'
 import { isAbstractControl } from './typeof'
 import { injectControl } from './utils'
 
-export interface AccessorOptions {
+interface AccessorOptions {
   controlKey?: string
   valueKey?: string
 }

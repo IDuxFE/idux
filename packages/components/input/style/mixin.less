@@ -1,0 +1,289 @@
+@input-padding-vertical-sm: max(
+  (round(((@input-height-sm - @input-font-size-sm * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  0
+);
+@input-padding-vertical-md: max(
+  (round(((@input-height-md - @input-font-size-md * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  3px
+);
+@input-padding-vertical-lg: (ceil(((@input-height-lg - @input-font-size-lg * @input-line-height) / 2) * 10) / 10) -
+  @input-border-width;
+
+.input-size() {
+  &-large {
+    font-size: @input-font-size-lg;
+    .@{input-prefix}-addon,
+    .@{input-prefix}-wrapper {
+      padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
+    }
+  }
+
+  &-medium {
+    font-size: @input-font-size-md;
+    .@{input-prefix}-addon,
+    .@{input-prefix}-wrapper {
+      padding: @input-padding-vertical-md @input-padding-horizontal-md;
+    }
+  }
+
+  &-small {
+    font-size: @input-font-size-sm;
+    .@{input-prefix}-addon,
+    .@{input-prefix}-wrapper {
+      padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
+    }
+  }
+}
+
+.input-inner() {
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  outline: 0;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  .placeholder(@input-placeholder-color);
+}
+
+.input() {
+  display: inline-flex;
+  width: 100%;
+  line-height: @input-line-height;
+  background-color: @input-bg-color;
+
+  .input-size();
+
+  &-focused {
+    .@{input-prefix}-wrapper {
+      & when (@theme = default) {
+        border-color: @input-active-border-color;
+      }
+      box-shadow: @input-active-box-shadow;
+    }
+  }
+
+  &-disabled {
+    color: @input-disabled-color;
+    background-color: @input-disabled-bg-color;
+    cursor: not-allowed;
+    opacity: 1;
+
+    &:hover {
+      .@{input-prefix}-wrapper {
+        border-color: @input-border-color;
+      }
+    }
+  }
+
+  &-borderless {
+    &,
+    &:hover,
+    &-focused,
+    &-disabled {
+      .@{input-prefix}-wrapper {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-wrapper {
+    display: inline-flex;
+    width: 100%;
+    border: @input-border-width @input-border-style @input-border-color;
+    border-radius: @input-border-radius;
+    transition: all @input-transition-duration;
+
+    &:hover {
+      border-color: @input-hover-border-color;
+    }
+
+    .@{input-prefix}-inner {
+      .input-inner();
+    }
+
+    .@{input-prefix}-suffix,
+    .@{input-prefix}-prefix {
+      display: inline-flex;
+      text-align: center;
+      color: @input-placeholder-color;
+      transition: color @input-transition-duration;
+
+      &:hover {
+        color: @input-secondary-color;
+      }
+    }
+
+    .@{input-prefix}-suffix {
+      margin-left: @input-wrapper-inner-margin;
+    }
+
+    .@{input-prefix}-prefix {
+      margin-right: @input-wrapper-inner-margin;
+    }
+
+    .@{input-prefix}-clear-icon-hidden {
+      visibility: hidden;
+    }
+  }
+
+  &-addon {
+    display: inline-block;
+    text-align: center;
+    background-color: @input-addon-bg-color;
+    border: @input-border-width @input-border-style @input-border-color;
+    border-radius: @input-border-radius;
+
+    &:first-child {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child {
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  &-with-addon-after {
+    .@{input-prefix}-wrapper {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &-with-addon-before {
+    .@{input-prefix}-wrapper {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+.textarea-size() {
+  &-large {
+    font-size: @input-font-size-lg;
+    .@{textarea-prefix}-inner {
+      padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
+    }
+    .@{textarea-prefix}-suffix {
+      top: @input-padding-vertical-lg;
+      right: @input-padding-horizontal-lg;
+    }
+  }
+
+  &-medium {
+    font-size: @input-font-size-md;
+    .@{textarea-prefix}-inner {
+      padding: @input-padding-vertical-md @input-padding-horizontal-md;
+    }
+    .@{textarea-prefix}-suffix {
+      top: @input-padding-vertical-md;
+      right: @input-padding-horizontal-md;
+    }
+  }
+
+  &-small {
+    font-size: @input-font-size-sm;
+    .@{textarea-prefix}-inner {
+      padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
+    }
+    .@{textarea-prefix}-suffix {
+      top: @input-padding-vertical-sm;
+      right: @input-padding-horizontal-sm;
+    }
+  }
+}
+
+.textarea-inner() {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  outline: 0;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  .placeholder(@input-placeholder-color);
+}
+
+.textarea() {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: @input-line-height;
+
+  .@{textarea-prefix}-inner {
+    background-color: @input-bg-color;
+    border: @input-border-width @input-border-style @input-border-color;
+    border-radius: @input-border-radius;
+    transition: all @input-transition-duration, height 0s, width 0s;
+
+    .textarea-inner();
+
+    &:hover {
+      border-color: @input-hover-border-color;
+    }
+  }
+
+  .textarea-size();
+
+  &-focused {
+    .@{textarea-prefix}-inner {
+      & when (@theme = default) {
+        border-color: @input-active-border-color;
+      }
+      box-shadow: @input-active-box-shadow;
+    }
+  }
+
+  &-disabled {
+    .@{textarea-prefix}-inner {
+      color: @input-disabled-color;
+      background-color: @input-disabled-bg-color;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    &:hover {
+      .@{textarea-prefix}-inner {
+        border-color: @input-border-color;
+      }
+    }
+  }
+
+  .@{textarea-prefix}-suffix {
+    position: absolute;
+    color: @input-placeholder-color;
+    transition: color @input-transition-duration;
+
+    &:hover {
+      color: @input-secondary-color;
+    }
+  }
+
+  .@{textarea-prefix}-clear-icon-hidden {
+    visibility: hidden;
+  }
+
+  &-with-count::after {
+    display: block;
+    text-align: right;
+    color: @input-placeholder-color;
+    content: attr(data-count);
+  }
+}
+
+.textarea-autosize-measuring-base() {
+  // Having 2px top and bottom padding seems to fix a bug where Chrome gets an incorrect
+  // measurement. We just have to account for it later and subtract it off the final result.
+  padding: 2px 0 !important;
+  box-sizing: content-box !important;
+}

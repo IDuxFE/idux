@@ -8,7 +8,7 @@
 /* height -------------------------- */
 @height-sm: 24px;
 @height-md: 32px;
-@height-lg: 36px;
+@height-lg: 40px;
 
 @line-height-base: 1.5715;
 
@@ -22,8 +22,12 @@
 @body-background: @white;
 @component-background: @white;
 
+@disabled-color: fade(#000, 25%);
+@disabled-bg-color: hsv(0, 0, 95%);
+
 /* text -------------------------- */
 @text-color: @black;
+@text-secondary-color: ~`colorPalette('@{text-color}', -20) `;
 
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
@@ -160,11 +164,13 @@
 @typography-ul-list-style: circle;
 @typography-sub-ul-list-style: disc;
 @typography-ol-list-style: decimal;
+
 /* rate -------------------------- */
 @rate-icon-size: 24px;
 @rate-icon-margin: 8px;
 @rate-stroke-color: #f7ba2a;
 @rate-background-color: #c6d1de;
+
 /* checkbox -------------------------- */
 @checkbox-border-style: @border-size-sm solid @grey-d10;
 @checkbox-border-radius: @border-radius-sm;
@@ -191,3 +197,38 @@
 @checkbox-group-checkbox-margin-right: @margin-sm;
 @checkbox-label-padding: 0 @spacing-gutter;
 @checkbox-transition-duration: @transition-duration-base;
+
+/* input -------------------------- */
+@input-line-height: @line-height-base;
+
+@input-height-sm: @height-sm;
+@input-height-md: @height-md;
+@input-height-lg: @height-lg;
+
+@input-font-size-sm: @font-size-sm;
+@input-font-size-md: @font-size-sm;
+@input-font-size-lg: @font-size-md;
+
+@input-wrapper-inner-margin: @margin-xs;
+
+@input-padding-horizontal-sm: @input-padding-horizontal-md - 2px;
+@input-padding-horizontal-md: @padding-sm;
+@input-padding-horizontal-lg: @input-padding-horizontal-md + 2px;
+
+@input-border-width: @border-size-sm;
+@input-border-style: @border-style;
+@input-border-color: @border-color;
+
+@input-color: @text-color;
+@input-secondary-color: @text-secondary-color;
+@input-bg-color: @component-background;
+@input-addon-bg-color: hsv(0, 0, 95%);
+@input-placeholder-color: hsv(0, 0, 75%);
+@input-hover-border-color: ~`colorPalette('@{primary-color}', -10) `;
+@input-active-border-color: @primary-color;
+@input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 15%);
+@input-disabled-color: @disabled-color;
+@input-disabled-bg-color: @disabled-bg-color;
+
+@input-border-radius: @border-radius-md;
+@input-transition-duration: @transition-duration-base;
