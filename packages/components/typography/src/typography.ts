@@ -1,26 +1,20 @@
 import type { Directive } from 'vue'
-import type { TypographyConfig } from './types'
+import type { TypographyConfig, TypographyOptions } from './types'
 
-import { isObject, isString } from '@idux/cdk/utils'
+import { isNil, isString } from '@idux/cdk/utils'
 import { Logger } from '@idux/components/core/logger'
 
 const typography: Directive<HTMLElement, TypographyConfig> = (el, binding) => {
   const classNames: string[] = ['ix-typography']
-  const options = binding.value
+  const { value } = binding
+  const options: TypographyOptions = isString(value) || isNil(value) ? { type: value } : value
 
-  if (isString(options) && isLegality(options)) {
-    classNames.push(`ix-typography-${options}`)
+  const { type, disabled } = options
+  if (isLegality(type)) {
+    classNames.push(`ix-typography-${type}`)
   }
-
-  if (isObject(options)) {
-    const { type, disabled } = options
-    if (isLegality(type)) {
-      classNames.push(`ix-typography-${type}`)
-    }
-
-    if (disabled) {
-      classNames.push(`ix-typography-disabled`)
-    }
+  if (disabled) {
+    classNames.push('ix-typography-disabled')
   }
   el.className = classNames.join(' ')
 }
