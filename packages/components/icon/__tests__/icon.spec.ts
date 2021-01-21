@@ -115,6 +115,11 @@ describe('Icon.vue', () => {
     expect(wrapper.find('i').exists()).toBeFalsy()
     expect(wrapper.find('button').exists()).toBeTruthy()
 
+    await wrapper.setProps({ onClick: null })
+
+    expect(wrapper.find('i').exists()).toBeTruthy()
+    expect(wrapper.find('button').exists()).toBeFalsy()
+
     await wrapper.setProps({ onClick: () => void 0 })
 
     expect(wrapper.find('i').exists()).toBeFalsy()
