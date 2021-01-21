@@ -1,12 +1,18 @@
-import type { TypographyOptions, TypographyType } from '../src/types'
-
-import { defineComponent, PropType } from 'vue'
-import { mount } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
+import { ComponentOptions } from 'vue'
 import IxTypography from '../src/typography'
 
 describe('typography.ts', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let typographyMount: (options: ComponentOptions) => VueWrapper<any>
+
+  beforeEach(() => {
+    typographyMount = (options: ComponentOptions) => {
+      return mount(options, { global: { directives: { typography: IxTypography } } })
+    }
+  })
   test('render work', () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       template: `
       <article v-typography>
         <h1 v-typography>Title</h1>
@@ -25,22 +31,17 @@ describe('typography.ts', () => {
         </p>
       </article>
       `,
-    })
-    const wrapper = mount(TestComponent, { global: { directives: { typography: IxTypography } } })
+    }
+    const wrapper = typographyMount(TestComponent)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   test('type work', async () => {
-    const TestComponent = defineComponent({
-      props: {
-        type: {
-          type: String as PropType<TypographyType>,
-          default: undefined,
-        },
-      },
+    const TestComponent = {
+      props: ['type'],
       template: `<p v-typography="type">Paragraph</p>`,
-    })
-    const wrapper = mount(TestComponent, { global: { directives: { typography: IxTypography } } })
+    }
+    const wrapper = typographyMount(TestComponent)
     expect(wrapper.classes()).toEqual(['ix-typography'])
 
     await wrapper.setProps({ type: 'success' })
@@ -57,16 +58,11 @@ describe('typography.ts', () => {
   })
 
   test('option work', async () => {
-    const TestComponent = defineComponent({
-      props: {
-        type: {
-          type: Object as PropType<TypographyOptions>,
-          default: undefined,
-        },
-      },
+    const TestComponent = {
+      props: ['type'],
       template: `<p v-typography="type">Paragraph</p>`,
-    })
-    const wrapper = mount(TestComponent, { global: { directives: { typography: IxTypography } } })
+    }
+    const wrapper = typographyMount(TestComponent)
     expect(wrapper.classes()).toEqual(['ix-typography'])
 
     await wrapper.setProps({ type: {} })
@@ -93,16 +89,10 @@ describe('typography.ts', () => {
 
   test('dev warn work', () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {})
-    const TestComponent = defineComponent({
+    const TestComponent = {
       template: `<p v-typography="'hello'">Paragraph</p>`,
-    })
-    const wrapper = mount(TestComponent, {
-      global: {
-        directives: {
-          typography: IxTypography,
-        },
-      },
-    })
+    }
+    const wrapper = typographyMount(TestComponent)
     expect(wrapper.classes()).toEqual(['ix-typography'])
     expect(error).toBeCalled()
   })
