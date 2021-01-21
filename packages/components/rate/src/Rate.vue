@@ -53,7 +53,7 @@ export default defineComponent({
     const starRefs = ref([])
 
     const rateGlobalConfig = useGlobalConfig('rate')
-    const rateCount = computed(() => props.count ?? rateGlobalConfig.count)
+    const rateCount = computed(() => toNumber(props.count ?? rateGlobalConfig.count))
     const rateIcon = computed(() => props.icon ?? rateGlobalConfig.icon)
     const allowHalf = computed(() => props.allowHalf ?? rateGlobalConfig.allowHalf)
     const allowClear = computed(() => props.allowClear ?? rateGlobalConfig.allowClear)
