@@ -1,0 +1,33 @@
+@import '../../style/default.less';
+
+@rate-prefix: ~'@{idux-prefix}-rate';
+
+.@{rate-prefix} {
+  &-item {
+    display: inline-block;
+    position: relative;
+  }
+  &-iconfont-main {
+    position: relative;
+    font-size: @rate-icon-size;
+    margin-right: @rate-icon-margin;
+    vertical-align: baseline;
+  }
+  &-half {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+  &-highlight {
+    color: @rate-stroke-color;
+  }
+  &-normal {
+    color: @rate-background-color;
+  }
+  &-half-icon {
+    color: @rate-stroke-color;
+  }
+}

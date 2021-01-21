@@ -9,6 +9,7 @@ export interface GlobalConfig {
   spin: SpinConfig
   space: SpaceConfig
   result: ResultConfig
+  rate: RateConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -60,4 +61,11 @@ export interface SpaceConfig {
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
   status: ResultStatus
+}
+
+export interface RateConfig {
+  count: number
+  icon: string
+  allowHalf: boolean
+  allowClear: boolean
 }

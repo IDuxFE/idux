@@ -8,6 +8,7 @@ import type {
   SpinConfig,
   SpaceConfig,
   ResultConfig,
+  RateConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -43,6 +44,13 @@ const space = shallowReactive<SpaceConfig>({ size: 'small' })
 
 const result = shallowReactive<ResultConfig>({ status: 'info' })
 
+const rate = shallowReactive<RateConfig>({
+  count: 5,
+  icon: 'star',
+  allowHalf: false,
+  allowClear: false,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -52,4 +60,5 @@ export const defaultConfig: GlobalConfig = {
   spin,
   space,
   result,
+  rate,
 }

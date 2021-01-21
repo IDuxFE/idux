@@ -9,8 +9,21 @@ import { IxSpace } from './space'
 import { IxEmpty } from './empty'
 import { IxResult } from './result'
 import { IxTypography } from './typography'
+import { IxRate } from './rate'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace, IxEmpty, IxResult]
+const components = [
+  IxButton,
+  IxButtonGroup,
+  IxIcon,
+  IxBadge,
+  IxDivider,
+  IxImage,
+  IxSpin,
+  IxSpace,
+  IxEmpty,
+  IxResult,
+  IxRate,
+]
 
 const directives: Record<string, Directive> = {
   typography: IxTypography,
@@ -45,3 +58,4 @@ export { IxSpace }
 export { IxEmpty }
 export { IxResult }
 export { IxTypography }
+export { IxRate }
