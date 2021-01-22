@@ -7,6 +7,7 @@ import {
   getCdkUseTemplate,
   getDocsZhTemplate,
   getDomeTemplate,
+  getDomeVueTemplate,
   getIndexTemplate,
   getLessTemplate,
   getTestTemplate,
@@ -84,5 +85,8 @@ if (moduleName === 'components') {
 const docsZhTemplate = getDocsZhTemplate(compName, moduleName, upperFirstComponentName)
 writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
-const domeTemplate = getDomeTemplate(compName)
+const domeTemplate = getDomeTemplate()
 writeFileSync(`${componentDirname}/demo/basic.md`, domeTemplate)
+
+const domeVueTemplate = getDomeVueTemplate(compName)
+writeFileSync(`${componentDirname}/demo/Basic.vue`, domeVueTemplate)

@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import path from 'path'
+import { mdPlugin } from './scripts/vite/mdPlugin'
 
 export default defineConfig({
-  root: './site/docs/',
-  plugins: [vuePlugin()],
+  // hmr not work
+  // root: './site/docs',
+  plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), mdPlugin()],
   alias: [
     {
       find: '@idux',

@@ -104,7 +104,7 @@ category: ${moduleName}
 type:
 title: ${upperFirstName}
 subtitle:
-cover:
+order: 0
 ---
 
 
@@ -126,12 +126,12 @@ cover:
 `
 }
 
-export function getDomeTemplate(compName: string): string {
+export function getDomeTemplate(): string {
   return `---
-order: 0
 title:
   zh: 基本使用
   en: Basic usage
+order: 0
 ---
 
 ## zh
@@ -141,11 +141,11 @@ title:
 ## en
 
 
+`
+}
 
-## demo
-
-\`\`\`html
-<template>
+export function getDomeVueTemplate(compName: string): string {
+  return `<template>
   <ix-${compName} />
 </template>
 <script lang="ts">
@@ -159,7 +159,5 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 </style>
-\`\`\`
-
 `
 }
