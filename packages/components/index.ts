@@ -14,6 +14,7 @@ import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxBackTop } from './back-top'
 import { IxTitle } from './title'
+import { IxCard } from './card'
 
 const components = [
   IxButton,
@@ -33,6 +34,7 @@ const components = [
   IxTextarea,
   IxBackTop,
   IxTitle,
+  IxCard,
 ]
 
 const directives: Record<string, Directive> = {
@@ -73,3 +75,4 @@ export { IxCheckbox, IxCheckboxGroup }
 export { IxInput, IxTextarea }
 export { IxBackTop }
 export { IxTitle }
+export { IxCard }

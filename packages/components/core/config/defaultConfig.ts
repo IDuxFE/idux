@@ -12,6 +12,7 @@ import type {
   InputConfig,
   TextareaConfig,
   BackTopConfig,
+  CardConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -73,6 +74,13 @@ const backTop = shallowReactive<BackTopConfig>({
   visibilityHeight: 400,
 })
 
+const card = shallowReactive<CardConfig>({
+  size: 'default',
+  borderless: false,
+  hoverable: false,
+  loading: false,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -86,4 +94,5 @@ export const defaultConfig: GlobalConfig = {
   input,
   textarea,
   backTop,
+  card,
 }
