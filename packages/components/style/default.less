@@ -1,5 +1,6 @@
 @import './mixins/index.less';
 @import './variable/index.less';
+@import './motion/index.less';
 
 @theme: default;
 
@@ -241,3 +242,22 @@
 
 @input-border-radius: @border-radius-md;
 @input-transition-duration: @transition-duration-base;
+
+/* back-top -------------------------- */
+@back-top-height: @height-lg;
+@back-top-width: @height-lg;
+
+@back-top-font-size: @font-size-2xl;
+
+@back-top-border-radius: 50%;
+
+@back-top-right-gutter: 32px;
+@back-top-right-xs: (@back-top-right-gutter / 2);
+@back-top-right-sm: @back-top-right-gutter;
+@back-top-right-md: @back-top-right-gutter * 1.5;
+@back-top-right-lg: @back-top-right-gutter * 2;
+@back-top-right-xl: @back-top-right-gutter * 3;
+
+@back-top-bottom: 50px;
+
+@back-top-background-color: @primary-color;

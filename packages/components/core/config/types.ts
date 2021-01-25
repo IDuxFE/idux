@@ -12,6 +12,7 @@ export interface GlobalConfig {
   rate: RateConfig
   input: InputConfig
   textarea: TextareaConfig
+  backTop: BackTopConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -89,4 +90,9 @@ export interface TextareaConfig {
   computeCount?: (value: string) => string
   size: InputSize
   clearable: boolean
+}
+
+export interface BackTopConfig {
+  duration: number
+  visibilityHeight: number
 }

@@ -11,6 +11,7 @@ import type {
   RateConfig,
   InputConfig,
   TextareaConfig,
+  BackTopConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -67,6 +68,11 @@ const textarea = shallowReactive<TextareaConfig>({
   clearable: false,
 })
 
+const backTop = shallowReactive<BackTopConfig>({
+  duration: 450,
+  visibilityHeight: 400,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -79,4 +85,5 @@ export const defaultConfig: GlobalConfig = {
   rate,
   input,
   textarea,
+  backTop,
 }

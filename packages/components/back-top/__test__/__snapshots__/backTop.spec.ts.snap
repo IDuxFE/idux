@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BackTop.vue render work 1`] = `"<transition-stub><div class=\\"ix-back-top\\" style=\\"display: none;\\"><i class=\\"ix-icon ix-icon-vertical-align-top\\" role=\\"img\\" arialabel=\\"vertical-align-top\\"></i></div></transition-stub>"`;
