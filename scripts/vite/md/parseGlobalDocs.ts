@@ -1,5 +1,4 @@
 import remark from 'remark'
-import { sep } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
 import { generateTitle } from './generateTitle'
@@ -29,7 +28,7 @@ export default {
 const _remark = remark()
 
 export function parseGlobalDocs(id: string, raw: string): string {
-  const [filename, docsDirname] = id.split(sep).reverse()
+  const [filename, docsDirname] = id.split('/').reverse()
   const docsPath = `${docsDirname}/${filename}`
   const { __content: content, ...meta } = loadFront(raw)
   const toc = generateToc(meta as Meta, content)
