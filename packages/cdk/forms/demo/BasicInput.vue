@@ -7,6 +7,7 @@ import { defineComponent } from 'vue'
 import { injectControl } from '@idux/cdk/forms'
 
 export default defineComponent({
+  // eslint-disable-next-line vue/require-prop-types
   props: ['control'],
   setup(props) {
     const control$ = injectControl(props.control)!
