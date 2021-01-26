@@ -1,0 +1,22 @@
+@import "../variable/animation.less";
+
+.fade-motion(@className, @duration: @transition-duration-base) {
+  .ix-@{className}-enter-active,
+  .ix-@{className}-leave-active {
+    transition-property: all;
+    transition-duration: @duration;
+    transition-timing-function: linear;
+  }
+
+  .ix-@{className}-enter-to,
+  .ix-@{className}-leave-from {
+    opacity: 1;
+  }
+
+  .ix-@{className}-enter-from,
+  .ix-@{className}-leave-to {
+    opacity: 0;
+  }
+}
+
+.fade-motion(fade);

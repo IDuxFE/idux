@@ -1,0 +1,48 @@
+@import "../variable/animation.less";
+
+.zoom-motion(@className, @origin: @scale-origin-zoom-center, @scale: @scale-zoom-big, @duration: @transition-duration-base) {
+  .ix-@{className}-enter-active,
+  .ix-@{className}-leave-active {
+    transition-property: all;
+    transition-duration: @duration;
+  }
+
+  .ix-@{className}-enter-active {
+    transition-timing-function: @ease-out-circ;
+  }
+
+  .ix-@{className}-leave-active {
+    transition-timing-function: @ease-in-out-circ;
+  }
+
+  .ix-@{className}-enter-to,
+  .ix-@{className}-leave-from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ix-@{className}-enter-from,
+  .ix-@{className}-leave-to {
+    opacity: 0;
+    transform: ~"scale(@{scale})";
+  }
+
+  .ix-@{className}-leave-from,
+  .ix-@{className}-enter-from {
+    transform-origin: @origin;
+  }
+}
+
+// For Modal, Select choosen item
+.zoom-motion(zoom, @scale-origin-zoom-center, @scale-zoom-small);
+
+// For Popover, Popconfirm, Dropdown
+.zoom-motion(zoom-big);
+
+// For Tooltip
+.zoom-motion(zoom-big-fast, @scale-origin-zoom-center, @scale-zoom-big, @transition-duration-fast);
+
+.zoom-motion(zoom-up, @scale-origin-zoom-up);
+.zoom-motion(zoom-down, @scale-origin-zoom-down);
+.zoom-motion(zoom-right, @scale-origin-zoom-right);
+.zoom-motion(zoom-left, @scale-origin-zoom-left);
