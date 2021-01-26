@@ -4,7 +4,6 @@ junit.xml
 temp
 dist
 output
-/site/
 
 .vscode
 .idea
@@ -15,3 +14,6 @@ output
 package-lock.json
 yarn.lock
 
+/public/icon-svg
+/site/docs/router.ts
+/site/docs/sideNav.ts
