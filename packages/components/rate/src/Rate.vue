@@ -46,7 +46,7 @@ export default defineComponent({
     tooltips: PropTypes.array,
     allowClear: PropTypes.bool,
   },
-  emits: ['update:value'],
+  emits: ['update:value', 'change'],
   setup(props, { emit }) {
     const score = ref(props.value)
     const touchHalf = ref(false)
@@ -139,6 +139,7 @@ export default defineComponent({
 
       if (emitValue !== beforeValue) {
         emit('update:value', emitValue)
+        emit('change', emitValue)
       }
     }
 
