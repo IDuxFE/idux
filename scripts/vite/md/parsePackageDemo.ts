@@ -2,7 +2,7 @@
 import { existsSync, readFileSync } from 'fs-extra'
 import remark from 'remark'
 import { camelCase, upperFirst } from 'lodash'
-import { dirname, join, sep } from 'path'
+import { dirname, join } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
 import marked from './marked'
@@ -12,7 +12,7 @@ import { getDemoTemplate } from './template'
 
 const _remark = remark()
 export function parsePackageDemo(id: string, raw: string): string {
-  const [filename, , componentName, packageName] = id.split(sep).reverse()
+  const [filename, , componentName, packageName] = id.split('/').reverse()
   const demoName = withoutSuffix(filename)
   const { __content: content, title } = loadFront(raw)
 

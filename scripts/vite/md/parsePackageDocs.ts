@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import remark from 'remark'
-import { dirname, join, sep } from 'path'
+import { dirname, join } from 'path'
 import { existsSync, readdirSync, readFileSync } from 'fs-extra'
 import { camelCase, upperFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
@@ -19,7 +19,7 @@ interface Meta {
 const _remark = remark()
 
 export function parsePackageDocs(id: string, raw: string): string {
-  const [filename, docsDirname, componentName, moduleName] = id.split(sep).reverse()
+  const [filename, docsDirname, componentName, moduleName] = id.split('/').reverse()
   const docsPath = `${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
 
