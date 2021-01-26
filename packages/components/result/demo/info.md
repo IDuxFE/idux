@@ -12,15 +12,3 @@ title:
 ## en
 
 Show the results of processing.
-
-## demo
-
-```html
-<template>
-  <ix-result title="Your operation has been executed">
-    <template v-slot:extra>
-      <ix-button mode="primary">Go console</ix-button>
-    </template>
-  </ix-result>
-</template>
-```

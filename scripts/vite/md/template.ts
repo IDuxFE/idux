@@ -1,4 +1,4 @@
-import { upperFirst } from 'lodash'
+import { camelCase, upperFirst } from 'lodash'
 
 export const getComponentScript = (componentName: string, imports: string[], components: string[]): string => {
   return `
@@ -61,7 +61,7 @@ export const getDemoTemplate = (options: {
   code: string
 }): string => {
   const { packageName, componentName, demoName, zhTitle, enTitle, zhDescription, enDescription, code } = options
-  const demoComponentName = upperFirst(demoName)
+  const demoComponentName = upperFirst(camelCase(demoName))
   return `
 <template>
   <code-box

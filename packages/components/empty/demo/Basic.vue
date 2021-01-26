@@ -1,0 +1,3 @@
+<template>
+  <ix-empty />
+</template>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { existsSync, readFileSync } from 'fs-extra'
 import remark from 'remark'
-import { upperFirst } from 'lodash'
+import { camelCase, upperFirst } from 'lodash'
 import { dirname, join, sep } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
@@ -56,7 +56,7 @@ function parseContent(id: string, content: string, demoName: string) {
 
   let code = ''
 
-  const vueFilename = upperFirst(demoName) + '.vue'
+  const vueFilename = upperFirst(camelCase(demoName)) + '.vue'
   const vueFilepath = join(dirname(id), vueFilename)
   if (existsSync(vueFilepath)) {
     code = marked(_remark.stringify({ type: 'code', lang: 'html', value: readFileSync(vueFilepath, 'utf-8') }))
