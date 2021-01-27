@@ -1,0 +1,39 @@
+@import "../variable/animation.less";
+
+.move-motion(@className, @translateEnterFrom, @translateEnterTo, @duration: @transition-duration-base) {
+  .ix-@{className}-enter-active,
+  .ix-@{className}-leave-active {
+    transition-property: all;
+    transition-duration: @duration;
+  }
+
+  .ix-@{className}-enter-active {
+    transition-timing-function: @ease-out-circ;
+  }
+
+  .ix-@{className}-leave-active {
+    transition-timing-function: @ease-in-circ;
+  }
+
+  .ix-@{className}-enter-from,
+  .ix-@{className}-leave-to {
+    transform: @translateEnterFrom;
+    opacity: 0;
+  }
+
+  .ix-@{className}-enter-to,
+  .ix-@{className}-leave-from {
+    transform: @translateEnterTo;
+    opacity: 1;
+  }
+
+  .ix-@{className}-leave-from,
+  .ix-@{className}-enter-from {
+    transform-origin: 0 0;
+  }
+}
+
+.move-motion(move-up, @translate-move-up-enter-from, @translate-move-up-enter-to);
+.move-motion(move-down, @translate-move-down-enter-from, @translate-move-down-enter-to);
+.move-motion(move-left, @translate-move-left-enter-from, @translate-move-left-enter-to);
+.move-motion(move-right, @translate-move-right-enter-from, @translate-move-right-enter-to);
