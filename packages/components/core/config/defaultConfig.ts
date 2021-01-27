@@ -75,10 +75,9 @@ const backTop = shallowReactive<BackTopConfig>({
 })
 
 const card = shallowReactive<CardConfig>({
-  size: 'default',
+  size: 'medium',
   borderless: false,
   hoverable: false,
-  loading: false,
 })
 
 export const defaultConfig: GlobalConfig = {

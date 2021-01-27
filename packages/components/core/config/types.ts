@@ -98,7 +98,7 @@ export interface BackTopConfig {
   visibilityHeight: number
 }
 
-export type CardSize = 'default' | 'small'
+export type CardSize = 'medium' | 'small'
 export interface CardConfig {
   size: CardSize
   title: string

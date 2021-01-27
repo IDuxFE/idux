@@ -2,23 +2,18 @@
     
 @card-prefix: ~'@{idux-prefix}-card';
 @border: @card-border-size solid @card-border-color;
-.ellipsis(){
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
     
 .@{card-prefix} {
-  font-size: @font-size-sm;
+  font-size: @card-font-size-md;
   &-border{
     border: @border;
     border-top-left-radius: @border-radius-gutter;
   }
   &-hover:hover{
-    box-shadow: 0 1px 2px -2px rgba(0,0,0,.16), 0 3px 6px 0 rgba(0,0,0,.12), 0 5px 12px 4px rgba(0,0,0,.09);
+    box-shadow:@card-hover-shadow;
   }
   &-loading-block{
-    min-height: 128px;
+    min-height: @card-min-height;
   }
   &-head,&-body,&footer{
     padding: @card-padding-lg;
@@ -29,7 +24,7 @@
     &-title{
       .ellipsis();
       flex: 1;
-      font-size: @font-size-md;
+      font-size: @card-title-font-size-md;
     }
     &-extra{
       float: right;
@@ -37,22 +32,25 @@
     }
   }  
   &-body{
-    background: #fff;
+    background: @card-bg-color;
   }
   &-footer{
     border-top: @border;
+    text-align: center;
+  }
+
+  // 当size为small时
+  &-small{
+    font-size: @card-font-size-sm;
+    .@{card-prefix}-head,.@{card-prefix}-body,.@{card-prefix}-footer {
+      padding: @card-padding-sm;
+    }
+    .@{card-prefix}-head-title {
+        font-size: @card-title-font-size-sm;
+        font-weight: @card-title-font-weight-sm;
+    }
   }
 }
 
-.@{card-prefix}-small{
-  font-size: @font-size-xs;
-  .@{card-prefix}-head,.@{card-prefix}-body,.@{card-prefix}-footer{
-    padding: @card-padding-sm;
-  }
 
-  .@{card-prefix}-head-title{
-      font-size: @font-size-sm!important;
-      font-weight: @font-weight-md;
-  }
-}
 

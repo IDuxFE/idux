@@ -1,6 +1,6 @@
 <template>
   <div class="ix-card" :class="classes">
-    <div class="ix-card-head" v-if="isShowTitle || isShowExtra">
+    <div v-if="isShowTitle || isShowExtra" class="ix-card-head">
       <div v-if="isShowTitle" class="ix-card-head-title">
         <slot name="title">
           <span>{{ title }}</span>
@@ -12,9 +12,9 @@
         </slot>
       </div>
     </div>
-    <ix-spin :spinning="isShowLoading" tip="加载中...">
-      <div class="ix-card-body" :class="isShowLoading ? 'ix-card-loading-block' : ''">
-        <slot v-if="hadDefaultSlot && !isShowLoading"></slot>
+    <ix-spin :spinning="loading">
+      <div class="ix-card-body" :class="loading ? 'ix-card-loading-block' : ''">
+        <slot v-if="hadDefaultSlot && !loading"></slot>
       </div>
     </ix-spin>
 
@@ -40,19 +40,17 @@ export default defineComponent({
     extra: PropTypes.string,
     hoverable: PropTypes.bool,
     borderless: PropTypes.bool,
-    loading: PropTypes.bool,
-    size: PropTypes.oneOf(['default', 'small'] as const),
+    loading: PropTypes.bool.def(false),
+    size: PropTypes.oneOf(['medium', 'small'] as const),
   },
   setup(props: CardProps, { slots }) {
-    // init
     const cardConfig = useGlobalConfig('card')
     const classes = useClasses(props, cardConfig)
-    const isShowLoading = computed(() => props.loading ?? cardConfig.loading)
-    const isShowTitle = computed(() => typeof props.title === 'string' || !!slots.title)
-    const isShowExtra = computed(() => typeof props.extra === 'string' || !!slots.extra)
-    const isShowFooter = computed(() => !!slots.footer)
+    const isShowTitle = computed(() => props.title || hasSlot(slots, 'title'))
+    const isShowExtra = computed(() => props.extra || hasSlot(slots, 'extra'))
+    const isShowFooter = computed(() => hasSlot(slots, 'footer'))
     const hadDefaultSlot = computed(() => hasSlot(slots))
-    return { classes, isShowTitle, isShowExtra, isShowFooter, isShowLoading, hadDefaultSlot }
+    return { classes, isShowTitle, isShowExtra, isShowFooter, hadDefaultSlot }
   },
 })
 
@@ -62,7 +60,7 @@ const useClasses = (props: CardProps, cardConfig: CardConfig) => {
     const borderless = props.borderless ?? cardConfig.borderless
     const size = props.size ?? cardConfig.size
     return [
-      size !== 'default' ? `ix-card-${size}` : '',
+      size !== 'medium' ? `ix-card-${size}` : '',
       {
         'ix-card-hover': hoverable,
         'ix-card-border': !borderless,

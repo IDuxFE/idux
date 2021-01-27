@@ -6,14 +6,3 @@ title:
 ---
 
 ## zh
-只包含内容区域。
-## demo
-
-```html
-<template>
-  <ix-card>
-    <p>card content</p>
-    <p>card content</p>
-  </ix-card>
-</template>
-```

@@ -25,11 +25,17 @@ cover:
 
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `title` | 卡片标题 | `string\|slot` | - | - | - |
-| `extra` | 右上角操作区域 | `string\|slot` | - | - | - |
-| `footer` | 卡片底部操作区域 | `slot` | - | - | - |
-| `borderless` | 是否有边框 | `booelan` | `false` | `false` | - |
-| `hoverable` | 鼠标 hover 时，是否悬浮 | `booelan` | `false` | `false` | - |
-| `loading` | 当卡片内容还在加载中时，可以用 loading 展示一个占位 | `booelan` | `false` | `false` | - |
-| `size` | 设置按钮大小 | `default\|small` | `default` | - | - |
+| `title` | 卡片标题 | `string` | - | - | - |
+| `extra` | 右上角操作区域 | `string` | - | - | - |
+| `borderless` | 是否有边框 | `booelan` | `false` | ✅ | - |
+| `hoverable` | 鼠标 hover 时，是否悬浮 | `booelan` | `false` | ✅ | - |
+| `loading` | 是否加载中状态 | `booelan` | `false` | - | - |
+| `size` | 设置按钮大小 | `medium\|small` | `medium` | - | 当卡片内容还在加载中时，可以用 loading 展示一个占位 |
 
+### Slots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `title` | 自定义卡片标题内容 | - | - |
+| `extra`   | 自定义卡片右上角操作区域 | - | - |
+| `footer`   | 自定义卡片底部操作区域 | - | - |

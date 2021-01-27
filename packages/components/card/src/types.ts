@@ -10,5 +10,5 @@ interface CardOriginalProps {
 }
 
 export type CardProps = Readonly<CardOriginalProps>
-
+export type { CardSize }
 export type CardComponent = InstanceType<DefineComponent<CardProps>>

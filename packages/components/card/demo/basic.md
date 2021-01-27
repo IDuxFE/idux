@@ -8,18 +8,4 @@ title:
 ## zh
 
 包含标题、内容、操作区域。
-可通过设置size为default或small，控制尺寸
-
-## demo
-
-```html
-<template>
-  <ix-card title="default size card">
-    <template v-slot:extra>
-      <a href="#">More</a>
-    </template>
-    <p>card content</p>
-    <p>card content</p>
-  </ix-card>
-</template>
-```
+可通过设置size为medium或small，控制尺寸
