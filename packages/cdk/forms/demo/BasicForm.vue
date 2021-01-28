@@ -12,6 +12,5 @@ export default defineComponent({
   setup(props) {
     provideControl(props.control)
   },
-  template: `<form><slot /></form>`,
 })
 </script>

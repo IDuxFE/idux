@@ -1,23 +1,24 @@
 <template>
-  <input :value="control$.valueRef.value" @input="onChange" @blur="control$.markAsBlurred()" />
+  <input :value="valueAccessor.value" @input="onInput" @blur="onBlur" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { injectControl } from '@idux/cdk/forms'
+import { useValueAccessor } from '@idux/cdk/forms'
 
 export default defineComponent({
   // eslint-disable-next-line vue/require-prop-types
-  props: ['control'],
-  setup(props) {
-    const control$ = injectControl(props.control)!
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onChange = (evt: any) => {
-      control$.setValue(evt.target!.value, { dirty: true })
+  props: ['value', 'control'],
+  emits: ['update:value'],
+  setup() {
+    const valueAccessor = useValueAccessor()
+    const onInput = (evt: Event) => {
+      valueAccessor.setValue?.((evt.target as HTMLInputElement).value)
     }
-
-    return { control$, onChange }
+    const onBlur = () => {
+      valueAccessor.markAsBlurred?.()
+    }
+    return { valueAccessor, onInput, onBlur }
   },
 })
 </script>

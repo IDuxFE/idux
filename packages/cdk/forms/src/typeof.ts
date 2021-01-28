@@ -12,7 +12,7 @@ export const isAbstractControl = (val: unknown): val is AbstractControl => {
 
 // Since AbstractControl be dependent on the function, `val instanceof FormArray` cannot be used here.
 export const isFormArray = (val: unknown): val is FormArray => {
-  return isAbstractControl(val) && hasOwnProperty(val, 'controls') && isArray((val as FormArray).controls)
+  return isAbstractControl(val) && isArray((val as FormArray).controls)
 }
 
 // Since AbstractControl be dependent on the function, `val instanceof FormGroup` cannot be used here.

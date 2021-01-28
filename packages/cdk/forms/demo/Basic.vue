@@ -26,7 +26,7 @@ export default defineComponent({
     group.watchValue(value => console.log(value))
     group.watchStatus(stats => console.log(stats))
 
-    group.get('name')?.watchStatus(stats => console.log(stats))
+    group.get('name')!.watchStatus(stats => console.log(stats))
 
     return { group }
   },
