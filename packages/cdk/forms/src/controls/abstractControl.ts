@@ -133,7 +133,7 @@ export abstract class AbstractControl<T = any> {
   /**
    * Sets a new value for the control.
    */
-  abstract setValue(value: Partial<T>, options: { dirty?: boolean }): void
+  abstract setValue(value: Partial<T>, options?: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.
