@@ -10,6 +10,7 @@ import { IxEmpty } from './empty'
 import { IxResult } from './result'
 import { IxTypography } from './typography'
 import { IxRate } from './rate'
+import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 
 const components = [
   IxButton,
@@ -23,6 +24,8 @@ const components = [
   IxEmpty,
   IxResult,
   IxRate,
+  IxCheckbox,
+  IxCheckboxGroup,
 ]
 
 const directives: Record<string, Directive> = {
@@ -59,3 +62,4 @@ export { IxEmpty }
 export { IxResult }
 export { IxTypography }
 export { IxRate }
+export { IxCheckbox, IxCheckboxGroup }
