@@ -17,8 +17,9 @@ cover:
 
 #### Props
 
-除以下表格之外还支持原生 <input type="checkbox" /> 元素的所有属性。
-| 参数 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
+除以下表格之外还支持原生 `<input type="checkbox" />` 元素的所有属性。
+
+| 名称 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:checked` | 指定当前勾选框是否选中 |  `boolean`  | `false` | - | - |
 | `disabled` | 禁用状态 |`boolean`| `false` | - | - |
@@ -43,7 +44,7 @@ cover:
 #### Group Props
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |value
+| --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 指定当前勾选框是否选中 |  `boolean`  | `false` | - | - |
 | `disabled` | 子`ix-checkbox`禁用状态 | `boolean` | `false` | - |- |
 | `name` | 子`ix-checkbox` 的 name 属性 | `string` | - | - |- |
