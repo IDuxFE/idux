@@ -32,6 +32,7 @@
     "url": "https://github.com/IduxFE/components/issues"
   },
   "peerDependencies": {
+    "@popperjs/core": "^2.6.0",
     "vue": "^3.0.0"
   }
 }
