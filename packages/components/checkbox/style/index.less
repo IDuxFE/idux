@@ -35,7 +35,12 @@
     height: @checkbox-height;
     background-color: @checkbox-bg-color;
     z-index: 1;
-    transition: background-color ease .25s;
+    outline: none;
+    transition: background-color @checkbox-transition-duration;
+
+    &:hover {
+      border-color: @checkbox-border-hover-color !important;
+    }
 
     &::after {
       position: absolute;
@@ -48,7 +53,7 @@
       border-top: 0;
       border-left: 0;
       transform: rotate(45deg) scale(0) translate(-50%, -50%);
-      transition: transform .25s ease;
+      transition: transform @checkbox-transition-duration;
       opacity: 0;
       content: " ";
     }
@@ -61,6 +66,10 @@
     width: 0;
     height: 0;
     z-index: -1;
+
+    &:focus+.@{checkbox-prefix}-inner {
+      border-color: @checkbox-border-focus-color;
+    }
   }
 
   &-label {
