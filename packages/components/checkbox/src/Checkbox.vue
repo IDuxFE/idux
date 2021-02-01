@@ -8,7 +8,6 @@
     :style="$attrs.style"
   >
     <span class="ix-checkbox-input-wrapper">
-      <span class="ix-checkbox-inner" :tabindex="$attrs.tabindex"></span>
       <input
         type="checkbox"
         class="ix-checkbox-input"
@@ -21,6 +20,7 @@
         v-bind="attrs"
         @change="handleChange"
       />
+      <span class="ix-checkbox-inner" :tabindex="$attrs.tabindex"></span>
     </span>
     <span v-if="hasDefaultSlot" class="ix-checkbox-label"><slot></slot></span>
   </label>
