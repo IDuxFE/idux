@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Ref } from 'vue'
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors } from '../types'
 
-import { ref, watch } from 'vue'
+import { shallowRef, watch } from 'vue'
 import { AbstractControl } from './abstractControl'
 
 export class FormControl<T = any> extends AbstractControl<T> {
@@ -12,7 +11,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    this._valueRef = ref(this._initValue) as Ref<T>
+    this._valueRef = shallowRef(this._initValue)
 
     this._initAllStatus()
 
@@ -38,7 +37,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * * `dirty`: Marks it dirty, default is false.
    */
   setValue(value: T, options: { dirty?: boolean } = {}): void {
-    this._valueRef.value = value as any
+    this._valueRef.value = value
     if (options.dirty) {
       this.markAsDirty()
     }
