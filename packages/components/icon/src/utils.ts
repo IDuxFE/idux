@@ -90,6 +90,7 @@ function createSVGElement(svgString: string): SVGElement | null {
 function setSVGAttribute(svg: SVGElement, iconName: string): void {
   svg.setAttribute('width', '1em')
   svg.setAttribute('height', '1em')
+  svg.setAttribute('viewBox', '64 64 896 896')
   svg.setAttribute('focusable', 'false')
   svg.setAttribute('fill', 'currentColor')
   svg.setAttribute('aria-hidden', 'true')
