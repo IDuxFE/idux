@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Textarea.vue render work 1`] = `"<span class=\\"ix-textarea ix-textarea-medium\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: vertical;\\"></textarea><!--v-if--></span>"`;
+
+exports[`Textarea.vue resize and autoRows work 1`] = `"<span class=\\"ix-textarea ix-textarea-medium\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!--v-if--></span>"`;
+
+exports[`Textarea.vue resize and autoRows work 2`] = `"<span class=\\"ix-textarea ix-textarea-medium\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!--v-if--></span>"`;
+
+exports[`Textarea.vue resize and autoRows work 3`] = `"<span class=\\"ix-textarea ix-textarea-medium\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!--v-if--></span>"`;
+
+exports[`Textarea.vue resize and autoRows work 4`] = `"<span class=\\"ix-textarea ix-textarea-medium\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!--v-if--></span>"`;

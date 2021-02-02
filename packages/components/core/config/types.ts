@@ -10,6 +10,8 @@ export interface GlobalConfig {
   space: SpaceConfig
   result: ResultConfig
   rate: RateConfig
+  input: InputConfig
+  textarea: TextareaConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -68,4 +70,23 @@ export interface RateConfig {
   icon: string
   allowHalf: boolean
   allowClear: boolean
+}
+
+export type InputSize = 'small' | 'medium' | 'large'
+export interface InputConfig {
+  size: InputSize
+  clearable: boolean
+  borderless: boolean
+}
+
+export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
+export type TextareaAutoRows = { minRows: number; maxRows: number }
+export interface TextareaConfig {
+  resize: TextareaResize
+  autoRows: boolean | TextareaAutoRows
+  showCount: boolean
+  maxCount?: number | string
+  computeCount?: (value: string) => string
+  size: InputSize
+  clearable: boolean
 }

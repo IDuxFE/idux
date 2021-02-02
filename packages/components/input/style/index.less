@@ -1,0 +1,24 @@
+@import '../../style/default.less';
+@import './mixin.less';
+
+@input-prefix: ~'@{idux-prefix}-input';
+@textarea-prefix: ~'@{idux-prefix}-textarea';
+
+.@{input-prefix} {
+  .input();
+}
+
+.@{textarea-prefix} {
+  .textarea();
+}
+
+textarea.@{textarea-prefix}-autosize-measuring {
+  height: auto !important;
+  overflow: hidden !important;
+  .textarea-autosize-measuring-base();
+}
+
+textarea.@{textarea-prefix}-autosize-measuring-firefox {
+  height: 0 !important;
+  .textarea-autosize-measuring-base();
+}

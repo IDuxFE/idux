@@ -9,6 +9,8 @@ import type {
   SpaceConfig,
   ResultConfig,
   RateConfig,
+  InputConfig,
+  TextareaConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -51,6 +53,20 @@ const rate = shallowReactive<RateConfig>({
   allowClear: false,
 })
 
+const input = shallowReactive<InputConfig>({
+  size: 'medium',
+  clearable: false,
+  borderless: false,
+})
+
+const textarea = shallowReactive<TextareaConfig>({
+  resize: 'vertical',
+  autoRows: false,
+  showCount: false,
+  size: 'medium',
+  clearable: false,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -61,4 +77,6 @@ export const defaultConfig: GlobalConfig = {
   space,
   result,
   rate,
+  input,
+  textarea,
 }
