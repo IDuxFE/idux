@@ -65,10 +65,10 @@ cover:
 
 | 变量名 | default 主题| 说明 |
 | --- | --- | --- |
-|@checkbox-border-style| @border-size-sm solid @grey-d10|-|
+|@checkbox-border-style| @border-width-sm solid @grey-d10|-|
 |@checkbox-border-radius| @border-radius-sm|-|
 |@checkbox-bg-color| @white|-|
-|@checkbox-tick-border-style| @border-size-md solid @white|-|
+|@checkbox-tick-border-style| @border-width-md solid @white|-|
 |@checkbox-tick-width| 4px|-|
 |@checkbox-tick-height| 8px|-|
 |@checkbox-bg-indeterminate-color| @primary-color|-|

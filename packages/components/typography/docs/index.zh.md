@@ -43,7 +43,7 @@ type TypographyConfig = TypographyType | TypographyOptions
 | `@typography-code-margin`             | `0 0.2em`                                         | -    |
 | `@typography-code-font-size`          | 85%                                               | -    |
 | `@typography-code-background`         | `@grey`                                           | -    |
-| `@typography-code-border`             | `@border-size-sm solid @grey-d30`                 | -    |
+| `@typography-code-border`             | `@border-width-sm solid @grey-d30`                 | -    |
 | `@typography-code-border-radius`      | `@border-radius-md`                               | -    |
 | `@typography-kbd-margin`              | `0 0.2em`                                         | -    |
 | `@typography-kbd-padding`             | `0.15em 0.4em 0.1em`                              | -    |
@@ -51,7 +51,7 @@ type TypographyConfig = TypographyType | TypographyOptions
 | `@typography-kbd-background`          | `@grey`                                           | -    |
 | `@typography-kbd-border-style`        | `solid`                                           | -    |
 | `@typography-kbd-border-color`        | `@grey-d30`                                       | -    |
-| `@typography-kbd-border-width`        | `@border-size-sm @border-size-sm @border-size-md` | -    |
+| `@typography-kbd-border-width`        | `@border-width-sm @border-width-sm @border-width-md` | -    |
 | `@typography-kbd-border-radius`       | `@border-radius-ms`                               | -    |
 | `@typography-strong-font-weight`      | `@font-weight-lg`                                 | -    |
 | `@typography-a-color`                 | `@primary-color`                                  | -    |
