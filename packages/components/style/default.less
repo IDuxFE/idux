@@ -25,9 +25,11 @@
 @disabled-color: fade(#000, 25%);
 @disabled-bg-color: hsv(0, 0, 95%);
 
+@heading-color: fade(@black, 85%);
+
 /* text -------------------------- */
 @text-color: @black;
-@text-secondary-color: ~`colorPalette('@{text-color}', -20) `;
+@text-color-secondary: ~`colorPalette('@{text-color}', -20) `;
 
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
@@ -198,6 +200,10 @@
 @checkbox-label-padding: 0 @spacing-gutter;
 @checkbox-transition-duration: @transition-duration-base;
 
+/* icon -------------------------- */
+@icon-color: inherit;
+@icon-color-hover: fade(@black, 75%);
+
 /* input -------------------------- */
 @input-line-height: @line-height-base;
 
@@ -220,7 +226,7 @@
 @input-border-color: @border-color;
 
 @input-color: @text-color;
-@input-secondary-color: @text-secondary-color;
+@input-secondary-color: @text-color-secondary;
 @input-bg-color: @component-background;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);

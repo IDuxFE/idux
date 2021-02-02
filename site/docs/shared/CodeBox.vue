@@ -1,15 +1,13 @@
 <template>
-  <section :id="link" class="code-box" :class="{ expand: expanded }">
+  <section :id="id" class="code-box" :class="{ expand: expanded }">
     <section class="code-box-demo">
       <slot name="rawCode"></slot>
     </section>
     <section class="code-box-meta markdown">
       <div class="code-box-title">
-        <a @click="goLink()">
-          {{ title }}
-          <a class="edit-button" :href="editHref" target="_blank" rel="noopener noreferrer">
-            <ix-icon name="edit" />
-          </a>
+        {{ title }}
+        <a class="code-box-edit" :href="editHref" target="_blank" rel="noopener noreferrer">
+          <ix-icon name="edit" />
         </a>
       </div>
       <div class="code-box-description">
@@ -17,18 +15,12 @@
       </div>
       <div class="code-box-actions">
         <ix-icon name="copy" @click="onCopy" />
-        <span class="code-expand-icon" @click="changeExpanded(!expanded)">
-          <ix-icon :name="expanded ? 'left' : 'right'" />
-          <ix-icon :name="!expanded ? 'left' : 'right'" />
-        </span>
+        <ix-icon v-show="expanded" name="code-expand" @click="expanded = !expanded" />
+        <ix-icon v-show="!expanded" name="code-collapse" @click="expanded = !expanded" />
       </div>
     </section>
     <section class="highlight-wrapper" :class="{ 'highlight-wrapper-expand': expanded }">
-      <div class="highlight">
-        <pre class="language-vue">
-          <code><slot name="highlightCode"></slot></code>
-        </pre>
-      </div>
+      <slot name="highlightCode"></slot>
     </section>
   </section>
 </template>
@@ -47,47 +39,18 @@ export default defineComponent({
   },
   emits: ['copy'],
   setup(props, { emit }: SetupContext) {
-    const link = computed(() => `${props.packageName}-${props.componentName}-demo-${props.demoName}`)
-    const goLink = () => (window.location.hash = link.value)
+    const id = computed(() => `${props.packageName}-${props.componentName}-demo-${props.demoName}`)
+
     const editHref = computed(() => {
-      const gitLink = link.value.replace('-', '/')
+      const gitLink = `${props.packageName}/${props.componentName}/demo/${props.demoName}`
       return `https://github.com/IduxFE/components/edit/main/packages/${gitLink}.md`
     })
 
     const expanded = ref(false)
-    const changeExpanded = (isExpanded: boolean) => {
-      expanded.value = isExpanded
-    }
 
     const onCopy = () => emit('copy')
 
-    return { link, goLink, editHref, expanded, changeExpanded, onCopy }
+    return { id, editHref, expanded, onCopy }
   },
 })
 </script>
-
-<style lang="less">
-.code-box {
-  display: block;
-
-  .simulate-iframe {
-    transform: translateX(0px);
-    display: block;
-    > * {
-      display: block;
-      height: 100%;
-      overflow: auto;
-      transform: translateX(0px);
-      > * {
-        overflow: auto;
-        height: 100%;
-      }
-    }
-  }
-
-  .highlight-wrapper {
-    // TODO: 暂时隐藏
-    display: none;
-  }
-}
-</style>

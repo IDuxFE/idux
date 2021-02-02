@@ -88,7 +88,7 @@ cover:
 | @input-border-style | @border-style;| - |
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
-| @input-secondary-color | @text-secondary-color;| - |
+| @input-secondary-color | @text-color-secondary;| - |
 | @input-bg-color | @component-background;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |
