@@ -5,10 +5,7 @@ interface TitleMeta {
 }
 
 export function generateTitle(meta: TitleMeta): string {
-  return `
-<h1>
-  ${meta.title}
-  <span class="subtitle">${meta.subtitle || ''}</span>
+  return `<h1>${meta.title}<span class="subtitle">${meta.subtitle || ''}</span>
   <a 
     class="edit-button" 
     aria-label="Edit this page on Github" 

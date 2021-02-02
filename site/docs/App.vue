@@ -3,10 +3,10 @@
     <div class="page-wrapper">
       <site-header :page="page" />
       <div class="main-wrapper">
-        <div style="width: 20%">
+        <div style="width: 15%">
           <site-side-nav :page="page" />
         </div>
-        <div style="width: 80%">
+        <div style="width: 85%" class="main-container">
           <router-view></router-view>
         </div>
       </div>

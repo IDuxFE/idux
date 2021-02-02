@@ -40,10 +40,10 @@ export const getExampleTemplate = (isAlone: boolean, first: string, second?: str
   }
   return `
   <div style="display: flex;">
-    <div style="flex: 1; width: 50%; padding: 16px;">
+    <div style="flex: 1; width: 50%; padding-right: 16px">
       ${first}
     </div>
-    <div style="flex: 1; width: 50%;  padding: 16px;">
+    <div style="flex: 1; width: 50%; padding-left: 16px">
       ${second}
     </div>
   </div>

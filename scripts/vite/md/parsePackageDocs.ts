@@ -153,7 +153,7 @@ function generateHeader(title: string, description: string, language: string) {
 	</section>
 	<h2>
 		<span>${examples}</span>
-		<ix-icon name="appstore" title="${expand}" @click="expandAll()" />
+		<ix-icon name="appstore" class="code-box-expand-trigger" title="${expand}" @click="expandAll()" />
 	</h2>
 </section>
 `
