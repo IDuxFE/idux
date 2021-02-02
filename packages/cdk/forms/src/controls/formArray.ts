@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type { Ref, WatchStopHandle } from 'vue'
+import type { WatchStopHandle } from 'vue'
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors, ValidationStatus } from '../types'
 import type { ArrayElement } from './types'
 
-import { ref, watch, watchEffect } from 'vue'
+import { shallowRef, watch, watchEffect } from 'vue'
 import { AbstractControl } from './abstractControl'
 
 export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
@@ -29,8 +28,8 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    controls.forEach(control => control.setParent(this as any))
-    this._valueRef = ref(this._calculateValue()) as Ref<T>
+    controls.forEach(control => control.setParent(this as AbstractControl))
+    this._valueRef = shallowRef(this._calculateValue())
 
     this._initAllStatus()
 
@@ -161,15 +160,11 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _watchValid() {
-    watch(
-      [this._valueRef, this._blurred],
-      ([_, blurred]) => {
-        if (this.trigger === 'change' || (this.trigger === 'blur' && blurred)) {
-          this._validate()
-        }
-      },
-      { deep: true },
-    )
+    watch([this._valueRef, this._blurred], ([_, blurred]) => {
+      if (this.trigger === 'change' || (this.trigger === 'blur' && blurred)) {
+        this._validate()
+      }
+    })
   }
 
   private _watchValue() {
@@ -239,7 +234,6 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _refreshValueAndWatch() {
-    this._valueRef.value = this._calculateValue()
     this._watchValue()
     this._watchStatus()
     this._watchBlurred()
@@ -247,6 +241,6 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _registerControl(control: AbstractControl<ArrayElement<T>>) {
-    control.setParent(this as any)
+    control.setParent(this as AbstractControl)
   }
 }

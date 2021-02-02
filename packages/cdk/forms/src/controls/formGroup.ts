@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type { Ref, WatchStopHandle } from 'vue'
+import type { WatchStopHandle } from 'vue'
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors, ValidationStatus } from '../types'
+import type { GroupControls } from './types'
 
-import { ref, watch, watchEffect } from 'vue'
+import { shallowRef, watch, watchEffect } from 'vue'
 import { hasOwnProperty } from '@idux/cdk/utils'
 import { AbstractControl } from './abstractControl'
-import { GroupControls } from './types'
 
 export class FormGroup<T extends Record<string, any> = Record<string, any>> extends AbstractControl<T> {
   private _valueWatchStopHandle: WatchStopHandle | null = null
@@ -24,8 +22,8 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    this._forEachChild(control => control.setParent(this as any))
-    this._valueRef = ref(this._calculateValue()) as Ref<T>
+    this._forEachChild(control => control.setParent(this as AbstractControl))
+    this._valueRef = shallowRef(this._calculateValue())
 
     this._initAllStatus()
 
@@ -137,15 +135,11 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   }
 
   private _watchValid() {
-    watch(
-      [this._valueRef, this._blurred],
-      ([_, blurred]) => {
-        if (this.trigger === 'change' || (this.trigger === 'blur' && blurred)) {
-          this._validate()
-        }
-      },
-      { deep: true },
-    )
+    watch([this._valueRef, this._blurred], ([_, blurred]) => {
+      if (this.trigger === 'change' || (this.trigger === 'blur' && blurred)) {
+        this._validate()
+      }
+    })
   }
 
   private _watchValue() {
@@ -221,7 +215,6 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   }
 
   private _refreshValueAndWatch() {
-    this._valueRef.value = this._calculateValue()
     this._watchValue()
     this._watchStatus()
     this._watchBlurred()
@@ -233,7 +226,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
       return
     }
     this.controls[name] = control
-    control.setParent(this as any)
+    control.setParent(this as AbstractControl)
   }
 
   private _forEachChild(cb: (v: AbstractControl, k: keyof T) => void): void {
