@@ -5,6 +5,7 @@ import type { ValueAccessor } from '@idux/cdk/forms'
 import type { TextareaAutoRows } from './types'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
+import throttle from 'lodash/throttle'
 import { isFirefox } from '@idux/cdk/platform'
 import { isObject, isNumber, on, off, rAF } from '@idux/cdk/utils'
 
@@ -176,8 +177,7 @@ export function useAutoRows(
     }
   }
 
-  // TODO: throttle
-  const onResize = () => resizeToFitContent(true)
+  const onResize = throttle(() => resizeToFitContent(true), 16)
 
   onMounted(() => {
     // Remember the height which we started with in case autosizing is disabled

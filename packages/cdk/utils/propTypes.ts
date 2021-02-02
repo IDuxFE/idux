@@ -27,7 +27,7 @@ export class PropTypes extends VueTypes {
     })
   }
 
-  // see https://github.com/dwightjack/vue-types/issues/71
+  /** see https://github.com/dwightjack/vue-types/issues/71 */
   static get bool(): VueTypeValidableDef<boolean> & { default: boolean } {
     return toValidableType('bool', {
       type: Boolean,
@@ -36,8 +36,10 @@ export class PropTypes extends VueTypes {
   }
 }
 
-// withUndefined(PropTypes.oneOfType([PropTypes.bool, PropTypes.string])) is work
-// see https://github.com/dwightjack/vue-types/issues/71
+/**
+ * withUndefined(PropTypes.oneOfType([PropTypes.bool, PropTypes.string])) is work,
+ * see https://github.com/dwightjack/vue-types/issues/71
+ */
 export function withUndefined<T extends { default?: unknown }>(type: T): T {
   type.default = undefined
   return type

@@ -1,0 +1,68 @@
+@import '../../style/default.less';
+
+@title-prefix: ~'@{idux-prefix}-title';
+
+.@{title-prefix} {
+  display: flex;
+  justify-content: space-between;
+  color: @title-color;
+  background-color: @title-bg-color;
+  font-size: @title-font-size;
+  line-height: @title-line-height;
+
+  &-prefix {
+    margin-right: @title-prefix-margin;
+  }
+
+  &-main {
+    display: flex;
+    align-items: center;
+  }
+
+  &-content {
+    margin-right: @title-content-margin;
+    font-weight: @title-font-weight;
+    .ellipsis();
+  }
+
+  &-sub {
+    color: @title-sub-color;
+    .ellipsis();
+  }
+
+  &-extra {
+    display: flex;
+    align-items: center;
+
+    > * {
+      margin-left: @title-extra-margin;
+    }
+    > *:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &-extraLarge {
+    .title-size(@title-height-xl, @title-1-font-size);
+  }
+  &-large {
+    .title-size(@title-height-lg, @title-2-font-size);
+  }
+  &-medium {
+    .title-size(@title-height-md, @title-3-font-size);
+  }
+  &-small {
+    .title-size(@title-height-sm, @title-4-font-size);
+  }
+}
+
+.title-size(@height; @font-size;) {
+  @padding-vertical: max((round(((@height - @font-size * @title-line-height) / 2) * 10) / 10), 0);
+
+  height: @height;
+  padding: @padding-vertical 0;
+
+  .@{title-prefix}-content {
+    font-size: @font-size;
+  }
+}

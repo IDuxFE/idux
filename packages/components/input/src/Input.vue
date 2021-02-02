@@ -16,7 +16,7 @@
     </span>
     <span class="ix-input-wrapper">
       <span v-if="prefix || $slots.prefix" class="ix-input-prefix">
-        <slot name="prefix"><ix-icon v-if="prefix" :name="prefix" @click="onPrefixClick" /></slot>
+        <slot name="prefix"><ix-icon :name="prefix" @click="onPrefixClick" /></slot>
       </span>
       <input
         ref="inputRef"
