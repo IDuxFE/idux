@@ -29,7 +29,7 @@
 
 /* text -------------------------- */
 @text-color: @black;
-@text-color-secondary: ~`colorPalette('@{text-color}', -20) `;
+@text-secondary-color: ~`colorPalette('@{text-color}', -20) `;
 
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
@@ -51,16 +51,19 @@
 @button-icon-margin-left: @margin-xs;
 
 @button-border-style: @border-style;
-@button-border-size: @border-size-sm;
+@button-border-size: @border-width-sm;
 @button-border-radius: @border-radius-sm;
 
-@button-disable-opacity: 0.4;
-
 @button-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+
+@button-disable-color: @disabled-color;
+@button-disable-bg-color: @disabled-bg-color;
+@button-disable-border: @border-color;
 
 @button-primary-color: @white;
 @button-primary-bg: @primary-color;
 @button-primary-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+@button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
 @button-default-color: @text-color;
 @button-default-bg: @component-background;
@@ -120,27 +123,27 @@
 @result-info-color: @info-color;
 
 /* typography -------------------------- */
-@typography-default-color: @black;
-@typography-secondary-color: @black-l20;
+@typography-default-color: @text-color;
+@typography-secondary-color: @text-secondary-color;
 @typography-success-color: @success-color;
 @typography-warning-color: @warning-color;
 @typography-error-color: @error-color;
-@typography-disabled-color: @black-l50;
+@typography-disabled-color: @disabled-color;
 @typography-mark-padding: 0;
 @typography-mark-background-color: @yellow-l50;
 @typography-code-margin: 0 0.2em;
 @typography-code-padding: 0.2em 0.4em 0.1em;
 @typography-code-font-size: 85%;
 @typography-code-background: @grey;
-@typography-code-border: @border-size-sm solid @grey-d30;
+@typography-code-border: @border-width-sm @border-style @grey-d30;
 @typography-code-border-radius: @border-radius-md;
 @typography-kbd-margin: 0 0.2em;
 @typography-kbd-padding: 0.15em 0.4em 0.1em;
 @typography-kbd-font-size: 90%;
 @typography-kbd-background: @grey;
-@typography-kbd-border-style: solid;
+@typography-kbd-border-style: @border-style;
 @typography-kbd-border-color: @grey-d30;
-@typography-kbd-border-width: @border-size-sm @border-size-sm @border-size-md;
+@typography-kbd-border-width: @border-width-sm @border-width-sm @border-width-md;
 @typography-kbd-border-radius: @border-radius-md;
 @typography-strong-font-weight: @font-weight-lg;
 @typography-a-color: @primary-color;
@@ -174,10 +177,10 @@
 @rate-background-color: #c6d1de;
 
 /* checkbox -------------------------- */
-@checkbox-border-style: @border-size-sm solid @grey-d10;
+@checkbox-border-style: @border-width-sm solid @grey-d10;
 @checkbox-border-radius: @border-radius-sm;
 @checkbox-bg-color: @white;
-@checkbox-tick-border-style: @border-size-md solid @white;
+@checkbox-tick-border-style: @border-width-md solid @white;
 @checkbox-tick-width: 4px;
 @checkbox-tick-height: 8px;
 @checkbox-bg-indeterminate-color: @primary-color;
@@ -221,12 +224,12 @@
 @input-padding-horizontal-md: @padding-sm;
 @input-padding-horizontal-lg: @input-padding-horizontal-md + 2px;
 
-@input-border-width: @border-size-sm;
+@input-border-width: @border-width-sm;
 @input-border-style: @border-style;
 @input-border-color: @border-color;
 
 @input-color: @text-color;
-@input-secondary-color: @text-color-secondary;
+@input-secondary-color: @text-secondary-color;
 @input-bg-color: @component-background;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);

@@ -75,7 +75,7 @@ cover:
 | @button-padding-lg | @padding-lg | - |
 | @button-icon-margin-left | @margin-xs | - |
 | @button-border-style | @border-style | - |
-| @button-border-size | @border-size-sm | - |
+| @button-border-size | @border-width-sm | - |
 | @button-border-radius | @border-radius-sm | - |
 | @button-disable-opacity | 0.4 | - |
 | @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |

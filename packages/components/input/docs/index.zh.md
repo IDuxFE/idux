@@ -84,11 +84,11 @@ cover:
 | @input-padding-horizontal-sm | @input-padding-horizontal-md - 2px;| - |
 | @input-padding-horizontal-md | @padding-sm;| - |
 | @input-padding-horizontal-lg | @input-padding-horizontal-md + 2px;| - |
-| @input-border-width | @border-size-sm;| - |
+| @input-border-width | @border-width-sm;| - |
 | @input-border-style | @border-style;| - |
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
-| @input-secondary-color | @text-color-secondary;| - |
+| @input-secondary-color | @text-secondary-color;| - |
 | @input-bg-color | @component-background;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |
