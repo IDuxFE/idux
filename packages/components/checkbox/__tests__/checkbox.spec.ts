@@ -1,19 +1,10 @@
+import { renderWork } from '@tests'
 import { mount } from '@vue/test-utils'
 import { ref, nextTick } from 'vue'
 import IxCheckbox from '../src/Checkbox.vue'
 
 describe('Checkbox.vue', () => {
-  test('render work', () => {
-    const checked = ref(false)
-    const wrapper = mount({
-      components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked">option</ix-checkbox>`,
-      setup() {
-        return { checked }
-      },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxCheckbox)
 
   test('checked(v-model) work', async () => {
     const checked = ref(false)

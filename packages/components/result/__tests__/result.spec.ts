@@ -3,6 +3,7 @@ import { defineComponent, DefineComponent } from 'vue'
 import IxResult from '../src/Result.vue'
 import { ResultProps } from '../src/types'
 import { IxIcon } from '../../icon'
+import { renderWork } from '@tests'
 
 describe('Result.vue', () => {
   let ResultMount: (
@@ -17,10 +18,7 @@ describe('Result.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = ResultMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxResult)
 
   test('status work', async () => {
     const wrapper = ResultMount()

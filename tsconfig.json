@@ -22,7 +22,8 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@idux": ["./packages"],
-      "@idux/*": ["./packages/*"]
+      "@idux/*": ["./packages/*"],
+      "@tests": ["./tests"]
     }
   },
   "exclude": ["node_modules", "output"]

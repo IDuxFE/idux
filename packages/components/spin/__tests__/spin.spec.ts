@@ -1,3 +1,4 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
 import IxSpin from '../src/Spin.vue'
@@ -14,10 +15,7 @@ describe('Spin.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = SpinMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxSpin)
 
   test('spinning work', async () => {
     const wrapper = SpinMount({ props: { spinning: false } })

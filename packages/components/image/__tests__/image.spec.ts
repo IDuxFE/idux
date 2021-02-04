@@ -1,6 +1,7 @@
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { renderWork } from '@tests'
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
-import Image from '../src/Image.vue'
+import IxImage from '../src/Image.vue'
 import { ImageProps } from '../src/types'
 
 describe('Image.vue', () => {
@@ -10,25 +11,20 @@ describe('Image.vue', () => {
 
   beforeEach(() => {
     ImageMount = (options = {}) => {
-      return mount<ImageProps>(Image, {
+      return mount<ImageProps>(IxImage, {
         ...options,
       })
     }
   })
 
-  test('render work', async () => {
-    const wrapper = ImageMount()
-    await flushPromises()
-    await wrapper.find('img').trigger('load')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxImage)
+
   test('render src work', async () => {
     const wrapper = ImageMount({
       props: {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
     expect(wrapper.html()).toMatchSnapshot()
     await wrapper.setProps({ src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/vue.png' })
   })
@@ -39,7 +35,6 @@ describe('Image.vue', () => {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
     expect(wrapper.html()).toMatchSnapshot()
     await wrapper.setProps({ width: '200px' })
     expect(wrapper.find('img').attributes()['style']).toMatch('width: 200px')
@@ -54,7 +49,7 @@ describe('Image.vue', () => {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
+
     expect(wrapper.html()).toMatchSnapshot()
     await wrapper.setProps({ height: '200px' })
     expect(wrapper.find('img').attributes()['style']).toMatch('height: 200px')
@@ -68,7 +63,7 @@ describe('Image.vue', () => {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
+
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('img').attributes()['alt']).toEqual('demo')
   })
@@ -78,7 +73,7 @@ describe('Image.vue', () => {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
+
     expect(wrapper.html()).toMatchSnapshot()
     await wrapper.setProps({ objectFit: 'fill' })
     expect(wrapper.find('img').attributes()['style']).toMatch('fill')
@@ -93,7 +88,7 @@ describe('Image.vue', () => {
         src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
       },
     })
-    await flushPromises()
+
     expect(wrapper.html()).toMatchSnapshot()
     await wrapper.find('.ix-image-preview-is').trigger('click')
 
@@ -138,7 +133,7 @@ describe('Image.vue', () => {
       },
     })
     await wrapper.find('img').trigger('error')
-    await flushPromises()
+
     expect(wrapper.find('.ix-image-error').isVisible()).toBe(true)
   })
 })
