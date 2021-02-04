@@ -2,22 +2,21 @@ import { mount } from '@vue/test-utils'
 import CheckboxGroup from '../src/CheckboxGroup.vue'
 import Checkbox from '../src/Checkbox.vue'
 import { nextTick, Ref, ref } from 'vue'
+import { renderWork } from '@tests'
+
+const TestComponent = {
+  components: { CheckboxGroup, Checkbox },
+  template: `
+  <checkbox-group>
+    <checkbox value="option1"> option1 </checkbox>
+    <checkbox value="option2"> option2 </checkbox>
+    <checkbox value="option3"> option3 </checkbox>
+  </checkbox-group>
+  `,
+}
 
 describe('CheckboxGroup.vue and Checkbox.vue', () => {
-  test('render work', () => {
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group>
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
-      </checkbox-group>
-      `,
-    })
-    expect(wrapper.findAll('.ix-checkbox').length).toBe(3)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(TestComponent)
 
   test('value(v-model) work', async () => {
     const value = ref([]) as Ref<string[]>

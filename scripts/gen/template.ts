@@ -54,6 +54,7 @@ export * from './src/types'
 export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
+import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
 import { ${compName}Props } from '../src/types'
 
@@ -70,10 +71,7 @@ describe('${compName}.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = ${compName}Mount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(Ix${compName})
 })
 `
 }

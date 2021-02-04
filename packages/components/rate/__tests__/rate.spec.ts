@@ -1,7 +1,8 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
 
-import Rate from '../src/Rate.vue'
+import IxRate from '../src/Rate.vue'
 
 import { RateProps } from '../src/types'
 
@@ -11,7 +12,7 @@ describe('Rate.vue', () => {
 
   beforeEach(() => {
     RateMount = (options = {}) => {
-      return mount<RateProps>(Rate, {
+      return mount<RateProps>(IxRate, {
         ...options,
       })
     }
@@ -25,15 +26,7 @@ describe('Rate.vue', () => {
     }
   })
 
-  test('component render', () => {
-    const wrapper = RateMount({
-      props: {
-        value: 3,
-      },
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxRate, { props: { value: 3 } })
 
   test('init hightlight as value', () => {
     const wrapper = RateMount({
@@ -88,13 +81,13 @@ describe('Rate.vue', () => {
 
   test('touch half and allow half', async () => {
     const wrapper = mount({
-      template: `<Rate v-model:value="value" allow-half ref="testRateRef" />`,
+      template: `<IxRate v-model:value="value" allow-half ref="testRateRef" />`,
       data() {
         return {
           value: 4,
         }
       },
-      components: { Rate },
+      components: { IxRate },
     })
 
     const vm = wrapper.vm
@@ -109,13 +102,13 @@ describe('Rate.vue', () => {
 
   test('disable', async () => {
     const wrapper = mount({
-      template: `<Rate v-model:value="value" disabled ref="testRateRef" />`,
+      template: `<IxRate v-model:value="value" disabled ref="testRateRef" />`,
       data() {
         return {
           value: 4,
         }
       },
-      components: { Rate },
+      components: { IxRate },
     })
 
     const vm = wrapper.vm
@@ -130,13 +123,13 @@ describe('Rate.vue', () => {
 
   test('allow clear', async () => {
     const wrapper = mount({
-      template: `<Rate v-model:value="value" allow-clear ref="testRateRef" />`,
+      template: `<IxRate v-model:value="value" allow-clear ref="testRateRef" />`,
       data() {
         return {
           value: 2,
         }
       },
-      components: { Rate },
+      components: { IxRate },
     })
 
     await wrapper.setProps({ value: 3 })

@@ -1,3 +1,4 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent, nextTick, ref } from 'vue'
 import IxTextarea from '../src/Textarea.vue'
@@ -16,10 +17,7 @@ describe('Textarea.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = TextareaMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxTextarea)
 
   test('v-model work', async () => {
     const valueRef = ref('init value')

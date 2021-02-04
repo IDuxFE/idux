@@ -1,3 +1,4 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
 import IxEmpty from '../src/Empty.vue'
@@ -16,10 +17,7 @@ describe('Empty.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = EmptyMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxEmpty)
 
   test('image work', async () => {
     const wrapper = EmptyMount()

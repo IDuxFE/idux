@@ -1,6 +1,28 @@
+import { renderWork } from '@tests'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { ComponentOptions } from 'vue'
 import IxTypography from '../src/typography'
+
+const TestComponent = {
+  template: `
+  <article v-typography>
+    <h1 v-typography>Title</h1>
+    <p v-typography>
+      In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
+    </p>
+    <div v-typography>
+      <ul>
+        <li><a href="/docs/spec/proximity">Principles</a></li>
+        <li><a href="/docs/pattern/navigation">Patterns</a></li>
+        <li><a href="/docs/resource/download">Resource Download</a></li>
+      </ul>
+    </div>
+    <p v-typography>
+      Press <span v-typography><kbd>Esc</kbd></span> to exist...
+    </p>
+  </article>
+  `,
+}
 
 describe('typography.ts', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,30 +33,8 @@ describe('typography.ts', () => {
       return mount(options, { global: { directives: { typography: IxTypography } } })
     }
   })
-  test('render work', () => {
-    const TestComponent = {
-      template: `
-      <article v-typography>
-        <h1 v-typography>Title</h1>
-        <p v-typography>
-          In the process of internal desktop applications development, many different design specs and implementations would be involved, which might cause designers and developers difficulties and duplication and reduce the efficiency of development.
-        </p>
-        <div v-typography>
-          <ul>
-            <li><a href="/docs/spec/proximity">Principles</a></li>
-            <li><a href="/docs/pattern/navigation">Patterns</a></li>
-            <li><a href="/docs/resource/download">Resource Download</a></li>
-          </ul>
-        </div>
-        <p v-typography>
-          Press <span v-typography><kbd>Esc</kbd></span> to exist...
-        </p>
-      </article>
-      `,
-    }
-    const wrapper = typographyMount(TestComponent)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+
+  renderWork(TestComponent, { global: { directives: { typography: IxTypography } } })
 
   test('type work', async () => {
     const TestComponent = {

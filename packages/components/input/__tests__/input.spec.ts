@@ -1,3 +1,4 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent, nextTick, ref } from 'vue'
 import IxInput from '../src/Input.vue'
@@ -16,10 +17,7 @@ describe('Input.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = InputMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxInput)
 
   test('v-model work', async () => {
     const valueRef = ref('init value')

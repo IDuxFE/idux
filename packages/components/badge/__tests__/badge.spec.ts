@@ -1,6 +1,7 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
-import Badge from '../src/Badge.vue'
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { renderWork } from '@tests'
+import IxBadge from '../src/Badge.vue'
 import { BadgeProps } from '../src/types'
 
 describe('Badge.vue', () => {
@@ -10,16 +11,13 @@ describe('Badge.vue', () => {
 
   beforeEach(() => {
     BadgeMount = (options = {}) => {
-      return mount<BadgeProps>(Badge, {
+      return mount<BadgeProps>(IxBadge, {
         ...options,
       })
     }
   })
 
-  test('render work', () => {
-    const wrapper = BadgeMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxBadge)
 
   // 基本功能测试
   test('count work', async () => {
