@@ -96,4 +96,21 @@ describe('typography.ts', () => {
     expect(wrapper.classes()).toEqual(['ix-typography'])
     expect(error).toBeCalled()
   })
+
+  test('custom class', async () => {
+    const TestComponent = {
+      props: ['type'],
+      template: `
+      <p v-typography="type">Paragraph</p>
+      `,
+    }
+    const wrapper = typographyMount(TestComponent)
+    expect(wrapper.classes()).toEqual(['ix-typography'])
+
+    await wrapper.setProps({ class: 'custom-paragraph' })
+    expect(wrapper.classes()).toEqual(['custom-paragraph', 'ix-typography'])
+
+    await wrapper.setProps({ type: 'success' })
+    expect(wrapper.classes()).toEqual(['custom-paragraph', 'ix-typography', 'ix-typography-success'])
+  })
 })
