@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mount } from '@vue/test-utils'
+import { mount, DOMWrapper } from '@vue/test-utils'
 
 export const wait = (timeout?: number): Promise<unknown> => {
   return new Promise(resolve => setTimeout(resolve, timeout))
@@ -34,4 +34,8 @@ export const renderWork = (component: any, options = {}): void => {
       wrapper.unmount()
     }).not.toThrow()
   })
+}
+
+export const isShow = (wrapper: DOMWrapper<Element>): boolean => {
+  return window.getComputedStyle(wrapper.element).display !== 'none'
 }

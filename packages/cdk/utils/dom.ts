@@ -2,6 +2,8 @@
 
 const trim = (s: string) => (s || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
 
+export const raf = window.requestAnimationFrame || (cb => window.setTimeout(cb, 1000 / 60))
+
 export function on(
   el: HTMLElement | Document | Window,
   type: string,
@@ -83,5 +85,18 @@ export function removeClass(el: HTMLElement, cls: string): void {
   }
   if (!el.classList) {
     el.className = trim(curClass)
+  }
+}
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+export function isHTMLElement(el: any): boolean {
+  const div = document.createElement('div')
+
+  try {
+    div.appendChild(el.cloneNode(true))
+    return el.nodeType == 1 ? true : false
+  } catch {
+    return false
   }
 }
