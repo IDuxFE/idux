@@ -5,6 +5,7 @@ import { IxButton } from '../../button'
 import { IxDivider } from '../../divider'
 import { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
 import { isNil } from '@idux/cdk/utils'
+import { renderWork } from '@tests'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },
@@ -41,11 +42,7 @@ const TestComponent = defineComponent({
 })
 
 describe('Space.vue', () => {
-  test('render work', () => {
-    const wrapper = mount(TestComponent)
-    expect(wrapper.classes()).toContain('ix-space')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(TestComponent)
 
   test('align work', async () => {
     const wrapper = mount(TestComponent)

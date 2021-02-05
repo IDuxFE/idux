@@ -1,8 +1,9 @@
 import { useGlobalConfig } from '@idux/components/core/config'
+
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
 import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
-import Icon from '../src/Icon.vue'
+import IxIcon from '../src/Icon.vue'
 import { IconProps, IconDefinition } from '../src/types'
 
 const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }
@@ -14,7 +15,7 @@ describe('Icon.vue', () => {
 
   beforeEach(() => {
     IconMount = (options = {}) => {
-      return mount<IconProps>(Icon, {
+      return mount<IconProps>(IxIcon, {
         ...options,
       })
     }
@@ -44,8 +45,8 @@ describe('Icon.vue', () => {
     const loadIconDynamically = async (iconName: string) => `<svg data-icon="${iconName}"></svg>`
 
     const wrapper = mount({
-      components: { Icon },
-      template: `<Icon name="dynamic-up" />`,
+      components: { IxIcon },
+      template: `<IxIcon name="dynamic-up" />`,
       setup() {
         useGlobalConfig('icon', { loadIconDynamically })
       },
@@ -106,14 +107,19 @@ describe('Icon.vue', () => {
 
   test('tag work', async () => {
     const wrapper = mount({
-      components: { Icon },
-      template: `<Icon @click="onClick"/>`,
+      components: { IxIcon },
+      template: `<IxIcon @click="onClick"/>`,
       props: {
         onClick: { type: Function, default: () => void 0 },
       },
     })
     expect(wrapper.find('i').exists()).toBeFalsy()
     expect(wrapper.find('button').exists()).toBeTruthy()
+
+    await wrapper.setProps({ onClick: null })
+
+    expect(wrapper.find('i').exists()).toBeTruthy()
+    expect(wrapper.find('button').exists()).toBeFalsy()
 
     await wrapper.setProps({ onClick: () => void 0 })
 

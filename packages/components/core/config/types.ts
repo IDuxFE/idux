@@ -8,6 +8,11 @@ export interface GlobalConfig {
   image: ImageConfig
   spin: SpinConfig
   space: SpaceConfig
+  result: ResultConfig
+  rate: RateConfig
+  input: InputConfig
+  textarea: TextareaConfig
+  backTop: BackTopConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -54,4 +59,40 @@ export interface SpinConfig {
 export type SpaceSize = 'small' | 'medium' | 'large' | number
 export interface SpaceConfig {
   size: SpaceSize
+}
+
+export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
+export interface ResultConfig {
+  status: ResultStatus
+}
+
+export interface RateConfig {
+  count: number
+  icon: string
+  allowHalf: boolean
+  allowClear: boolean
+}
+
+export type InputSize = 'small' | 'medium' | 'large'
+export interface InputConfig {
+  size: InputSize
+  clearable: boolean
+  borderless: boolean
+}
+
+export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
+export type TextareaAutoRows = { minRows: number; maxRows: number }
+export interface TextareaConfig {
+  resize: TextareaResize
+  autoRows: boolean | TextareaAutoRows
+  showCount: boolean
+  maxCount?: number | string
+  computeCount?: (value: string) => string
+  size: InputSize
+  clearable: boolean
+}
+
+export interface BackTopConfig {
+  duration: number
+  visibilityHeight: number
 }

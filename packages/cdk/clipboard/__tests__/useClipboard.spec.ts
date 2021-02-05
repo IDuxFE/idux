@@ -49,12 +49,11 @@ describe('useClipboard.ts', () => {
 
   test('unmounted work', async () => {
     const wrapper = mount(getComp())
-
-    window.clearTimeout = jest.fn().mockReturnValue(true)
+    const clearTimeout = jest.spyOn(window, 'clearTimeout')
     document.execCommand = jest.fn().mockReturnValue(false)
     wrapper.vm.copy(copyText, 3)
     wrapper.unmount()
 
-    expect(window.clearTimeout).toHaveBeenCalledTimes(1)
+    expect(clearTimeout).toHaveBeenCalledTimes(1)
   })
 })

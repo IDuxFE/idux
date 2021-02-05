@@ -12,7 +12,7 @@ import type { ComputedRef } from 'vue'
 import type { BadgeProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { hasSlot, isNumeric, PropTypes } from '@idux/cdk/utils'
+import { hasSlot, isNumeric, PropTypes, toNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 
 export default defineComponent({
@@ -20,7 +20,7 @@ export default defineComponent({
   props: {
     count: PropTypes.oneOfType([Number, String]).def(0),
     showZero: PropTypes.bool,
-    overflowCount: PropTypes.oneOfType([Number, String]),
+    overflowCount: PropTypes.number,
     dot: PropTypes.bool,
     color: PropTypes.string,
   },
@@ -59,8 +59,10 @@ const useCountValue = (
       if (!showZero.value && +props.count === 0) {
         return false
       }
-      if (isNumeric(props.count) && isNumeric(overflowCount.value)) {
-        return props.count > overflowCount.value ? `${overflowCount.value}+` : `${props.count}`
+      if (isNumeric(props.count)) {
+        return props.count > toNumber(overflowCount.value, Number.MAX_VALUE)
+          ? `${overflowCount.value}+`
+          : `${props.count}`
       }
       return props.count
     }

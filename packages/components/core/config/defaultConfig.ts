@@ -7,6 +7,11 @@ import type {
   ImageConfig,
   SpinConfig,
   SpaceConfig,
+  ResultConfig,
+  RateConfig,
+  InputConfig,
+  TextareaConfig,
+  BackTopConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -40,6 +45,34 @@ const spin = shallowReactive<SpinConfig>({
 
 const space = shallowReactive<SpaceConfig>({ size: 'small' })
 
+const result = shallowReactive<ResultConfig>({ status: 'info' })
+
+const rate = shallowReactive<RateConfig>({
+  count: 5,
+  icon: 'star',
+  allowHalf: false,
+  allowClear: false,
+})
+
+const input = shallowReactive<InputConfig>({
+  size: 'medium',
+  clearable: false,
+  borderless: false,
+})
+
+const textarea = shallowReactive<TextareaConfig>({
+  resize: 'vertical',
+  autoRows: false,
+  showCount: false,
+  size: 'medium',
+  clearable: false,
+})
+
+const backTop = shallowReactive<BackTopConfig>({
+  duration: 450,
+  visibilityHeight: 400,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -48,4 +81,9 @@ export const defaultConfig: GlobalConfig = {
   image,
   spin,
   space,
+  result,
+  rate,
+  input,
+  textarea,
+  backTop,
 }

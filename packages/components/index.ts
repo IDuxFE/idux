@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, Directive } from 'vue'
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxBadge } from './badge'
@@ -7,12 +7,43 @@ import { IxImage } from './image'
 import { IxSpin } from './spin'
 import { IxSpace } from './space'
 import { IxEmpty } from './empty'
+import { IxResult } from './result'
+import { IxTypography } from './typography'
+import { IxRate } from './rate'
+import { IxCheckbox, IxCheckboxGroup } from './checkbox'
+import { IxInput, IxTextarea } from './input'
+import { IxBackTop } from './back-top'
 
-const components = [IxButton, IxButtonGroup, IxIcon, IxBadge, IxDivider, IxImage, IxSpin, IxSpace, IxEmpty]
+const components = [
+  IxButton,
+  IxButtonGroup,
+  IxIcon,
+  IxBadge,
+  IxDivider,
+  IxImage,
+  IxSpin,
+  IxSpace,
+  IxEmpty,
+  IxResult,
+  IxRate,
+  IxCheckbox,
+  IxCheckboxGroup,
+  IxInput,
+  IxTextarea,
+  IxBackTop,
+]
+
+const directives: Record<string, Directive> = {
+  typography: IxTypography,
+}
 
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
+  })
+
+  Object.keys(directives).forEach(key => {
+    app.directive(key, directives[key])
   })
 }
 
@@ -33,3 +64,9 @@ export { IxImage }
 export { IxSpin }
 export { IxSpace }
 export { IxEmpty }
+export { IxResult }
+export { IxTypography }
+export { IxRate }
+export { IxCheckbox, IxCheckboxGroup }
+export { IxInput, IxTextarea }
+export { IxBackTop }

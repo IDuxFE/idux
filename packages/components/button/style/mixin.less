@@ -2,7 +2,10 @@
 @button-danger-border: color(~`colorPalette('@{button-danger-bg}', 10) `);
 
 .button-size(@height; @font-size; @padding-horizontal; @border-radius) {
-  @padding-vertical: max(round((@height - @font-size * @button-line-height) / 2 * 10) / 10 - @button-border-size, 0);
+  @padding-vertical: max(
+    (round(((@height - @font-size * @button-line-height) / 2) * 10) / 10) - @button-border-size,
+    0
+  );
 
   height: @height;
   padding: @padding-vertical @padding-horizontal;
@@ -10,14 +13,13 @@
   border-radius: @border-radius;
 }
 
-.button-disabled(@color; @background; @border) {
+.button-disabled(@color: @button-disable-color; @background: @button-disable-bg-color; @border: @button-disable-border) {
   &[disabled] {
     &,
     &:hover,
     &:focus,
     &:active {
       .button-color(@color; @background; @border);
-      opacity: @button-disable-opacity;
       text-shadow: none;
       box-shadow: none;
     }
@@ -27,6 +29,7 @@
 .button-variant-primary(@color; @background; @border) {
   .button-color(@color; @background; @border);
   text-shadow: @button-primary-text-shadow;
+  box-shadow: @button-primary-box-shadow;
 
   &:hover {
     & when (@theme = default) {
@@ -40,7 +43,7 @@
     }
   }
 
-  .button-disabled(@color; @background; @border);
+  .button-disabled();
 }
 
 .button-variant-other(@color; @background; @border) {
@@ -57,7 +60,7 @@
       .button-color(~`colorPalette('@{button-primary-bg}', 10) `; @background; ~`colorPalette('@{button-primary-bg}', 20) `);
     }
   }
-  .button-disabled(@color; @component-background; @border);
+  .button-disabled();
 }
 
 .button-variant-ghost(@color; @border: @color) {
@@ -175,14 +178,12 @@
     background: @button-text-hover-bg;
     border-color: transparent;
   }
-
   &:active {
     color: @button-text-color;
     background: fadein(@button-text-hover-bg, 1%);
     border-color: transparent;
   }
-
-  .button-disabled(@button-text-color; @component-background; @component-background);
+  .button-disabled(@button-disable-color; transparent; transparent);
 }
 
 .button-link() {
@@ -196,7 +197,7 @@
   &:active {
     border-color: transparent;
   }
-  .button-disabled(@button-link-color; @component-background; @component-background);
+  .button-disabled(@button-disable-color; transparent; transparent);
 }
 
 .button-danger() {
@@ -212,7 +213,7 @@
       .button-color( ~`colorPalette('@{button-danger-color}', 10) `; @button-default-bg; ~`colorPalette('@{button-danger-color}', 20) `);
     }
   }
-  .button-disabled(@button-danger-color; @button-default-bg; @button-danger-border);
+  .button-disabled();
 }
 
 .button-danger-primary() {
@@ -233,7 +234,7 @@
       .button-color(~`colorPalette('@{button-danger-color}', 10) `; fadein(@button-text-hover-bg, 1%); transparent);
     }
   }
-  .button-disabled(@button-danger-color; @component-background; @component-background);
+  .button-disabled(@button-disable-color; transparent; transparent);
 }
 
 .button-danger-link() {
@@ -250,25 +251,25 @@
       .button-color(~`colorPalette('@{button-danger-color}', 10) `; transparent; transparent);
     }
   }
-  .button-disabled(@button-danger-color; @component-background; @component-background);
+  .button-disabled(@button-disable-color; transparent; transparent);
 }
 
 .button-ghost() {
   .button-color(@button-ghost-color; @button-ghost-bg; @button-ghost-border);
   .button-variant-ghost(@button-primary-border);
-  .button-disabled(@button-ghost-color; @component-background; @button-ghost-border);
+  .button-disabled();
 }
 
 .button-ghost-primary() {
   .button-color(@button-primary-border; @button-ghost-bg; @button-primary-border);
   .button-variant-ghost(@button-primary-border);
-  .button-disabled(@button-primary-border; @component-background; @button-primary-border);
+  .button-disabled();
 }
 
 .button-ghost-danger() {
   .button-color(@button-danger-color; @button-ghost-bg; @button-danger-color);
   .button-variant-ghost(@button-danger-border);
-  .button-disabled(@button-danger-color; @component-background; @button-danger-border);
+  .button-disabled();
 }
 
 .button-round(@buttonPrefix) {
@@ -297,7 +298,7 @@
   }
 }
 
-.icon-only(@buttonPrefix; @icon-prefix) {
+.button-icon-only(@buttonPrefix; @icon-prefix) {
   line-height: 1;
   font-size: @button-font-size-md + 2;
   &.@{buttonPrefix}-small {

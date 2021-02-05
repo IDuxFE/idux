@@ -1,6 +1,7 @@
 ---
-order: 11
+category: docs
 title: 贡献指南
+order: 11
 ---
 
 # 贡献指南

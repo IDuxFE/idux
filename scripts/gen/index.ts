@@ -7,6 +7,7 @@ import {
   getCdkUseTemplate,
   getDocsZhTemplate,
   getDomeTemplate,
+  getDomeVueTemplate,
   getIndexTemplate,
   getLessTemplate,
   getTestTemplate,
@@ -64,7 +65,7 @@ if (moduleName === 'components') {
   let currIndexContent = readFileSync(indexFilePath, 'utf-8')
   currIndexContent = currIndexContent
     .replace('\n\n', `\nimport { Ix${upperFirstComponentName} } from './${compName}'\n\n`)
-    .replace(']', `, Ix${upperFirstComponentName}]`)
+    .replace(']', `  Ix${upperFirstComponentName},\n]`)
   currIndexContent += `export { Ix${upperFirstComponentName} }\n`
   writeFileSync(indexFilePath, currIndexContent)
 
@@ -84,5 +85,8 @@ if (moduleName === 'components') {
 const docsZhTemplate = getDocsZhTemplate(compName, moduleName, upperFirstComponentName)
 writeFileSync(`${componentDirname}/docs/index.zh.md`, docsZhTemplate)
 
-const domeTemplate = getDomeTemplate(compName)
+const domeTemplate = getDomeTemplate()
 writeFileSync(`${componentDirname}/demo/basic.md`, domeTemplate)
+
+const domeVueTemplate = getDomeVueTemplate(compName)
+writeFileSync(`${componentDirname}/demo/Basic.vue`, domeVueTemplate)

@@ -2,6 +2,9 @@ import { toArray, toNumber, toBoolean, toCssPixel } from '../convert'
 
 describe('convert.ts', () => {
   test('toArray work', async () => {
+    expect(toArray(null)).toEqual([])
+    expect(toArray(undefined)).toEqual([])
+
     const stringValue = 'string'
     expect(toArray(stringValue)).toEqual([stringValue])
 

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { toRawType } from '@vue/shared'
+
 const _toString = Object.prototype.toString
 
 /** The method checks whether the given value is a Numeric value or not and returns the corresponding boolean value. */
@@ -69,6 +71,9 @@ export function isPromise<T = any>(val: unknown): val is Promise<T> {
   return isObject(val) && isFunction(val.then) && isFunction(val.catch)
 }
 
-export function hasOwnProperty(val: Record<string | symbol, unknown>, key: string | symbol): key is keyof typeof val {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function hasOwnProperty(val: object, key: string | symbol): key is keyof typeof val {
   return Object.prototype.hasOwnProperty.call(val, key)
 }
+
+export const isHTMLElement = (val: unknown): val is HTMLElement => toRawType(val).startsWith('HTML')

@@ -8,11 +8,3 @@ title:
 ## zh
 
 简单的展示。
-
-## demo
-
-```html
-<template>
-  <ix-empty />
-</template>
-```

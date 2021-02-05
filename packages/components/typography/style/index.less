@@ -1,0 +1,145 @@
+@import '../../style/default.less';
+@import "./mixins.less";
+
+@typography-prefix: ~'@{idux-prefix}-typography';
+
+.@{typography-prefix} {
+  // basic
+  overflow-wrap: break-word;
+  color: @typography-default-color;
+
+  // text
+  &-secondary {
+    color: @typography-secondary-color;
+  }
+
+  &-success {
+    color: @typography-success-color;
+  }
+
+  &-warning {
+    color: @typography-warning-color;
+  }
+
+  &-error {
+    color: @typography-error-color;
+  }
+
+  &-disabled {
+    color: @typography-disabled-color;
+    cursor: not-allowed;
+  }
+
+  // tag
+  mark {
+    .typography-mark();
+  }
+
+  code {
+    .typography-code();
+  }
+
+  kbd {
+    .typography-keyboard();
+  }
+
+  u {
+    .typography-underline();
+  }
+
+  del {
+    .typography-delete();
+  }
+
+  strong {
+    .typography-strong();
+  }
+
+  a {
+    .typography-a();
+  }
+
+  // paragraph
+  div&,
+  p {
+    .typography-paragraph();
+  }
+
+  // title
+  h1&,
+  h1 {
+    .typography-title-1();
+  }
+
+  h2&,
+  h2 {
+    .typography-title-2();
+  }
+
+  h3&,
+  h3 {
+    .typography-title-3();
+  }
+
+  h4&,
+  h4 {
+    .typography-title-4();
+  }
+
+  h5&,
+  h5 {
+    .typography-title-5();
+  }
+
+  h1&,
+  h2&,
+  h3&,
+  h4&,
+  h5& {
+    .@{typography-prefix} + & {
+      margin-top: @typography-title-margin-top;
+    }
+  }
+
+  div,
+  ul,
+  li,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    + h1,
+    + h2,
+    + h3,
+    + h4,
+    + h5 {
+      margin-top: @typography-title-margin-top;
+    }
+  }
+
+  // list
+  ul,
+  ol {
+    margin: @typography-list-margin;
+    padding: @typography-list-padding;
+
+    li {
+      margin: @typography-list-item-margin;
+      padding: @typography-list-item-padding;
+    }
+  }
+
+  ul {
+    list-style-type: @typography-ul-list-style;
+
+    ul {
+      list-style-type: @typography-sub-ul-list-style;
+    }
+  }
+
+  ol {
+    list-style-type: @typography-ol-list-style;
+  }
+}

@@ -1,6 +1,7 @@
 ---
-order: 11
+category: docs
 title: Contribution
+order: 11
 ---
 
 # Contribution

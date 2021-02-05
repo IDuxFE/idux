@@ -3,6 +3,7 @@ import { PropType } from 'vue'
 import ButtonGroup from '../src/ButtonGroup.vue'
 import Button from '../src/Button.vue'
 import { ButtonMode, ButtonSize, ButtonShape } from '../src/types'
+import { renderWork } from '@tests'
 
 const TestComponent = {
   components: { ButtonGroup, Button },
@@ -22,12 +23,7 @@ const TestComponent = {
 }
 
 describe('ButtonGroup.vue', () => {
-  test('render work', () => {
-    const wrapper = mount(TestComponent)
-    expect(wrapper.classes()).toContain('ix-button-group')
-    expect(wrapper.findAll('.ix-button').length).toBe(4)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(TestComponent)
 
   test('mode work', async () => {
     const wrapper = mount(TestComponent)

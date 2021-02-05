@@ -1,0 +1,24 @@
+@import "../../style/default.less";
+
+/* stylelint-disable property-no-unknown */
+@result-status: {
+  success: @result-success-color;
+  warning: @result-warning-color;
+  error: @result-error-color;
+  info: @result-info-color;
+};
+/* stylelint-enable property-no-unknown */
+
+.result-status-traverse(@prefix) {
+  .@{prefix} {
+    each(@result-status, .(@value, @key) {
+      @result-status-item: ~'@{prefix}-@{key}';
+
+      &.@{result-status-item} {
+        .@{prefix}-icon {
+          color: @value;
+        }
+      }
+    })
+  }
+}

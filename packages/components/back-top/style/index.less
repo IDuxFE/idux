@@ -1,0 +1,44 @@
+@import '../../style/default.less';
+
+@back-top-prefix: ~'@{idux-prefix}-back-top';
+
+.@{back-top-prefix} {
+  position: fixed;
+  right: @back-top-right-xl;
+  bottom: @back-top-bottom;
+  z-index: 99;
+  background-color: @back-top-background-color;
+  width: @back-top-width;
+  height: @back-top-height;
+  color: @white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: @back-top-font-size;
+  border-radius: @back-top-border-radius;
+  cursor: pointer;
+}
+
+@media screen and (min-width: @screen-lg) and (max-width: @screen-lg-max) {
+  .@{back-top-prefix} {
+    right: @back-top-right-lg;
+  }
+}
+
+@media screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+  .@{back-top-prefix} {
+    right: @back-top-right-md;
+  }
+}
+
+@media screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+  .@{back-top-prefix} {
+    right: @back-top-right-sm;
+  }
+}
+
+@media screen and (max-width: @screen-xs-max) {
+  .@{back-top-prefix} {
+    right: @back-top-right-xs;
+  }
+}

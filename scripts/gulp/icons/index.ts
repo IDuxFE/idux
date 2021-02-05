@@ -1,4 +1,4 @@
-import { copySync, ensureDirSync, readdirSync, readFileSync, removeSync, writeFileSync } from 'fs-extra'
+import { copySync, ensureDirSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'fs-extra'
 import { camelCase, upperFirst } from 'lodash'
 import { join } from 'path'
 import SVGO from 'svgo'
@@ -9,7 +9,8 @@ const definitionTemplate = `export const {{definitionName}} = {
   svgString: '{{svgString}}',
 }
 `
-const { iconAssetsDir, iconDefinitionsDir, siteIconAssetsDir } = buildConfig
+const { iconAssetsDir, iconDefinitionsDir } = buildConfig
+const { iconAssetsDir: siteIconAssetsDir } = buildConfig.site
 const outputDefinitionNames: string[] = []
 
 const options: SVGO.Options = {
@@ -59,6 +60,8 @@ function outputDefinitions(iconName: string, data: string) {
 }
 
 export function copyToSite(): void {
-  removeSync(siteIconAssetsDir)
-  copySync(iconAssetsDir, siteIconAssetsDir)
+  // 不存在的时候才 copy
+  if (!existsSync(siteIconAssetsDir)) {
+    copySync(iconAssetsDir, siteIconAssetsDir)
+  }
 }

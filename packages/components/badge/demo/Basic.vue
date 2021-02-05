@@ -12,7 +12,7 @@
       <a href="#"></a>
     </ix-badge>
 
-    <ix-badge count="1000" overflowCount="999">
+    <ix-badge count="1000" :overflowCount="999">
       <a href="#"></a>
     </ix-badge>
 

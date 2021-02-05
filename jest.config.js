@@ -1,7 +1,7 @@
 module.exports = {
   // u can change this option to a more specific folder for test single component or util when dev
   // for example, ['<rootDir>/packages/components/button']
-  roots: ['<rootDir>'],
+  roots: ['<rootDir>/packages'],
 
   testEnvironment: 'jsdom',
   transform: {
@@ -26,6 +26,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '^@idux(.*)$': '<rootDir>/packages$1',
+    '^@tests(.*)$': '<rootDir>/tests$1',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   collectCoverage: true,
@@ -38,5 +39,6 @@ module.exports = {
       statements: 85,
     },
   },
+  coveragePathIgnorePatterns: ['/node_modules/', '<rootDir>/tests'],
   reporters: ['default', 'jest-junit'],
 }

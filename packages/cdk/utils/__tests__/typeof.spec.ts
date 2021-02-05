@@ -17,6 +17,7 @@ import {
   isNonNil,
   isNumeric,
   hasOwnProperty,
+  isHTMLElement,
 } from '../typeof'
 
 describe('typeof.ts', () => {
@@ -171,5 +172,14 @@ describe('typeof.ts', () => {
     expect(hasOwnProperty(object2, 'test')).toEqual(false)
     object2.test = undefined
     expect(hasOwnProperty(object2, 'test')).toEqual(true)
+  })
+
+  test('isHTMLElement work', () => {
+    const div = document.createElement('div')
+    expect(isHTMLElement(div)).toBeTruthy()
+    expect(isHTMLElement(false)).toBeFalsy()
+    expect(isHTMLElement(10)).toBeFalsy()
+    expect(isHTMLElement('hello')).toBeFalsy()
+    expect(isHTMLElement({ key: 'Hello' })).toBeFalsy()
   })
 })

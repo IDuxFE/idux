@@ -1,6 +1,7 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
-import Badge from '../src/Badge.vue'
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { renderWork } from '@tests'
+import IxBadge from '../src/Badge.vue'
 import { BadgeProps } from '../src/types'
 
 describe('Badge.vue', () => {
@@ -10,16 +11,13 @@ describe('Badge.vue', () => {
 
   beforeEach(() => {
     BadgeMount = (options = {}) => {
-      return mount<BadgeProps>(Badge, {
+      return mount<BadgeProps>(IxBadge, {
         ...options,
       })
     }
   })
 
-  test('render work', () => {
-    const wrapper = BadgeMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxBadge)
 
   // 基本功能测试
   test('count work', async () => {
@@ -57,6 +55,17 @@ describe('Badge.vue', () => {
     await wrapper.setProps({ count: '1000', overflowCount: 999 })
     expect(badge.text()).toBe('999+')
     expect(badge.html()).toMatchSnapshot()
+
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+
+    await wrapper.setProps({ count: '1000', overflowCount: '999' })
+    expect(badge.text()).toBe('999+')
+    expect(badge.html()).toMatchSnapshot()
+    await wrapper.setProps({ count: '1000', overflowCount: 'xxx' })
+    expect(badge.text()).toBe('1000')
+    expect(badge.html()).toMatchSnapshot()
+
+    expect(warn).toBeCalledTimes(2)
   })
 
   // 圆点徽标呈现

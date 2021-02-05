@@ -54,6 +54,7 @@ export * from './src/types'
 export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
+import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
 import { ${compName}Props } from '../src/types'
 
@@ -70,10 +71,7 @@ describe('${compName}.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = ${compName}Mount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(Ix${compName})
 })
 `
 }
@@ -104,7 +102,7 @@ category: ${moduleName}
 type:
 title: ${upperFirstName}
 subtitle:
-cover:
+order: 0
 ---
 
 
@@ -126,12 +124,12 @@ cover:
 `
 }
 
-export function getDomeTemplate(compName: string): string {
+export function getDomeTemplate(): string {
   return `---
-order: 0
 title:
   zh: 基本使用
   en: Basic usage
+order: 0
 ---
 
 ## zh
@@ -141,11 +139,11 @@ title:
 ## en
 
 
+`
+}
 
-## demo
-
-\`\`\`html
-<template>
+export function getDomeVueTemplate(compName: string): string {
+  return `<template>
   <ix-${compName} />
 </template>
 <script lang="ts">
@@ -159,7 +157,5 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 </style>
-\`\`\`
-
 `
 }

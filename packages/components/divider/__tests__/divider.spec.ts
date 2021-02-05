@@ -1,3 +1,4 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
 import IxDivider from '../src/Divider.vue'
@@ -16,10 +17,7 @@ describe('Divider.vue', () => {
     }
   })
 
-  test('render work', () => {
-    const wrapper = DividerMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxDivider)
 
   test('type work', async () => {
     const wrapper = DividerMount()

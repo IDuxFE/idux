@@ -1,28 +1,26 @@
+import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
-import Button from '../src/Button.vue'
+import IxButton from '../src/Button.vue'
 import { ButtonProps } from '../src/types'
 
 describe('Button.vue', () => {
-  let buttonMount: (
+  let ButtonMount: (
     options?: MountingOptions<Partial<ButtonProps>>,
   ) => VueWrapper<InstanceType<DefineComponent<ButtonProps>>>
 
   beforeEach(() => {
-    buttonMount = (options = {}) => {
-      return mount<ButtonProps>(Button, {
+    ButtonMount = (options = {}) => {
+      return mount<ButtonProps>(IxButton, {
         ...options,
       })
     }
   })
 
-  test('render work', () => {
-    const wrapper = buttonMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork(IxButton)
 
   test('mode work', async () => {
-    const wrapper = buttonMount({ props: { mode: 'primary' } })
+    const wrapper = ButtonMount({ props: { mode: 'primary' } })
 
     expect(wrapper.classes()).toContain('ix-button-primary')
     expect(wrapper.element.tagName).toEqual('BUTTON')
@@ -39,7 +37,7 @@ describe('Button.vue', () => {
   })
 
   test('danger work', async () => {
-    const wrapper = buttonMount()
+    const wrapper = ButtonMount()
 
     expect(wrapper.classes()).not.toContain('ix-button-danger')
 
@@ -49,7 +47,7 @@ describe('Button.vue', () => {
   })
 
   test('ghost work', async () => {
-    const wrapper = buttonMount()
+    const wrapper = ButtonMount()
 
     expect(wrapper.classes()).not.toContain('ix-button-ghost')
 
@@ -59,7 +57,7 @@ describe('Button.vue', () => {
   })
 
   test('disabled work', async () => {
-    const wrapper = buttonMount({ props: { mode: 'primary' } })
+    const wrapper = ButtonMount({ props: { mode: 'primary' } })
 
     expect(wrapper.classes()).not.toContain('ix-button-disabled')
 
@@ -69,7 +67,7 @@ describe('Button.vue', () => {
   })
 
   test('loading work', async () => {
-    const wrapper = buttonMount({ props: { icon: 'up', loading: true } })
+    const wrapper = ButtonMount({ props: { icon: 'up', loading: true } })
 
     expect(wrapper.findAll('.ix-icon').length).toEqual(1)
     expect(wrapper.find('.ix-icon-loading').exists()).toBeTruthy()
@@ -77,7 +75,7 @@ describe('Button.vue', () => {
   })
 
   test('size work', async () => {
-    const wrapper = buttonMount({ props: { size: 'large' } })
+    const wrapper = ButtonMount({ props: { size: 'large' } })
 
     expect(wrapper.classes()).toContain('ix-button-large')
 
@@ -88,7 +86,7 @@ describe('Button.vue', () => {
   })
 
   test('shape work', async () => {
-    const wrapper = buttonMount({ props: { shape: 'circle' } })
+    const wrapper = ButtonMount({ props: { shape: 'circle' } })
 
     expect(wrapper.classes()).toContain('ix-button-circle')
 
@@ -99,7 +97,7 @@ describe('Button.vue', () => {
   })
 
   test('block work', async () => {
-    const wrapper = buttonMount()
+    const wrapper = ButtonMount()
 
     expect(wrapper.classes()).not.toContain('ix-button-block')
 
@@ -109,7 +107,7 @@ describe('Button.vue', () => {
   })
 
   test('icon work', async () => {
-    const wrapper = buttonMount({ props: { icon: 'up' } })
+    const wrapper = ButtonMount({ props: { icon: 'up' } })
 
     expect(wrapper.find('.ix-icon-up').exists()).toBeTruthy()
 
@@ -122,7 +120,7 @@ describe('Button.vue', () => {
 
   test('slot work', async () => {
     const text = 'Button'
-    const wrapper = buttonMount({
+    const wrapper = ButtonMount({
       slots: {
         default: text,
       },

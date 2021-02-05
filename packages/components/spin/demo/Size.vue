@@ -35,7 +35,7 @@ export default defineComponent({
 
 .operation-area {
   margin-top: 30px;
-  /deep/.ix-button {
+  .ix-button {
     margin-right: 4px;
   }
 }
