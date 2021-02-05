@@ -1,8 +1,8 @@
 import type { OverlayOptions, OverlayTrigger } from '@idux/cdk/overlay'
 
-import { defineComponent, onMounted, onUpdated, PropType, unref } from 'vue'
+import { onMounted, onUpdated, PropType, unref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components'
+import { IxButton } from '@idux/components/button'
 import { useOverlay } from '../src/useOverlay'
 
 const defaultOverlayOptions: OverlayOptions = {
@@ -33,7 +33,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('visible work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, visibility, show, hide } = useOverlay(
           options,
@@ -52,7 +52,7 @@ describe('useOverlay.ts', () => {
       <button id="immediate" @click="handleClick">Immediate Toggle</button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
     expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
 
@@ -72,7 +72,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('component trigger work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents } = useOverlay({
@@ -89,7 +89,7 @@ describe('useOverlay.ts', () => {
       <ix-button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</ix-button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
     await wrapper.get('#trigger').trigger('click')
     expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
@@ -99,7 +99,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('destroy work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, destroy } = useOverlay({
           ...options,
@@ -111,7 +111,6 @@ describe('useOverlay.ts', () => {
 
         const handleClick = () => {
           destroy()
-          console.log('destroy')
         }
 
         return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick }
@@ -121,16 +120,16 @@ describe('useOverlay.ts', () => {
       <button id="destroy" @click="handleClick">Destroy</button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
 
-    const log = jest.spyOn(console, 'log')
     await wrapper.get('#destroy').trigger('click')
-    expect(log).toBeCalled()
+
+    // TODO expect
   })
 
   test('update work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update } = useOverlay(options)
@@ -148,7 +147,7 @@ describe('useOverlay.ts', () => {
       <button id="update" @click="handleClick">Update</button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
 
     await wrapper.get('#trigger').trigger('click')
@@ -165,7 +164,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('trigger work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       components: { IxButton },
       props: {
         trigger: {
@@ -173,7 +172,7 @@ describe('useOverlay.ts', () => {
           default: 'click',
         },
       },
-      setup(props) {
+      setup(props: { trigger: OverlayTrigger }) {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update } = useOverlay({
           ...options,
           showDelay: 0,
@@ -193,7 +192,7 @@ describe('useOverlay.ts', () => {
       <button id="trigger" ref="triggerRef" @focus='triggerEvents.onFocus' @blur='triggerEvents.onBlur' @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave' @click="triggerEvents.onClick">Trigger</button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
 
     const wrapper = mount(TestComponent)
     await wrapper.get('#trigger').trigger('click')
@@ -219,7 +218,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('hover overlay work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents } = useOverlay({
@@ -239,7 +238,7 @@ describe('useOverlay.ts', () => {
       <button id="trigger" ref="triggerRef" @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave'>Trigger</button>
       <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
     await wrapper.get('#overlay').trigger('mouseenter')
     expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
@@ -249,7 +248,7 @@ describe('useOverlay.ts', () => {
   })
 
   test('arrow work', async () => {
-    const TestComponent = defineComponent({
+    const TestComponent = {
       components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, arrowRef } = useOverlay({
@@ -268,7 +267,7 @@ describe('useOverlay.ts', () => {
         <div ref="arrowRef" id='arrow'></div>
       </div>
       `,
-    })
+    }
     const wrapper = mount(TestComponent)
     await wrapper.get('#trigger').trigger('click')
     expect(wrapper.get('#arrow')).toBeDefined()

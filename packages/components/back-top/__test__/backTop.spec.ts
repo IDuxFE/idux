@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
+import IxBackTop from '../src/BackTop.vue'
+import { renderWork, waitRAF, isShow, wait, scrollTarget } from '@tests'
 import { nextTick } from 'vue'
-import BackTop from '../src/BackTop.vue'
-import { renderWork, waitRAF, isShow, wait } from '@tests'
 
 const mockFn = jest.fn()
 const warn = jest.spyOn(console, 'warn').mockImplementation()
@@ -9,9 +9,7 @@ const warn = jest.spyOn(console, 'warn').mockImplementation()
 const backTopMount = (template: string, options = {}) =>
   mount(
     {
-      components: {
-        BackTop,
-      },
+      components: { IxBackTop },
       template,
       ...options,
     },
@@ -19,14 +17,14 @@ const backTopMount = (template: string, options = {}) =>
   )
 
 describe('BackTop.vue', () => {
-  renderWork(BackTop)
+  renderWork(IxBackTop)
 
   test('scroll work', async () => {
     const wrapper = backTopMount(
       `
       <div class="ix-back-top-test" style="height: 300px; overflow: auto;">
         <div style="height: 1000px;">
-          <back-top :duration="100" :visibilityHeight="200" target=".ix-back-top-test"></back-top>
+          <ix-back-top :duration="100" :visibilityHeight="200" target=".ix-back-top-test" />
         </div>
       </div>
     `,
@@ -39,13 +37,13 @@ describe('BackTop.vue', () => {
 
     expect(isShow(wrapper.find('.ix-back-top'))).toBe(false)
 
-    wrapper.element.scrollTop = 600
-    await wrapper.trigger('scroll')
-    await wait(1000)
+    await scrollTarget(600, wrapper.element)
+
     expect(isShow(wrapper.find('.ix-back-top'))).toBe(true)
 
     await wrapper.find('.ix-back-top').trigger('click')
-    await wait(1000)
+    await wait(200)
+
     expect(wrapper.element.scrollTop).toBe(0)
 
     wrapper.unmount()
@@ -56,7 +54,7 @@ describe('BackTop.vue', () => {
     const wrapper = backTopMount(
       `
       <div style="height: 1000px;">
-        <back-top :target="target"></back-top>
+        <ix-back-top :target="target" />
       </div>
     `,
       {
@@ -70,39 +68,32 @@ describe('BackTop.vue', () => {
 
     expect(isShow(wrapper.find('.ix-back-top'))).toBe(false)
 
-    document.documentElement.scrollTop = 600
-    window.dispatchEvent(new Event('scroll'))
-
-    await wait(1000)
+    await scrollTarget(600, document.documentElement)
 
     expect(isShow(wrapper.find('.ix-back-top'))).toBe(true)
   })
 
   test('props work: target does not exist', async () => {
-    mount(BackTop, {
-      props: {
-        target: '#ix-back-top-test',
-      },
-    })
+    mount(IxBackTop, { props: { target: '#ix-back-top-test' } })
 
     await nextTick()
+
     expect(warn).toBeCalled()
   })
 
   test('props work: target is the default value', async () => {
     window.scrollTo = mockFn
+
     const wrapper = backTopMount(`
       <div style="height: 1000px; overflow: auto;">
-        <back-top></back-top>
+        <ix-back-top />
       </div>
     `)
 
-    document.documentElement.scrollTop = 600
-    window.dispatchEvent(new Event('scroll'))
-    await wait(1000)
+    await scrollTarget(600, window)
     await wrapper.find('.ix-back-top').trigger('click')
-
     await waitRAF()
+
     expect(mockFn).toBeCalled()
   })
 })

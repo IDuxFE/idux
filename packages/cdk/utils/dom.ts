@@ -1,28 +1,38 @@
-/* istanbul ignore file */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-const trim = (s: string) => (s || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
+type ElType = HTMLElement | Document | Window
 
-export const raf = window.requestAnimationFrame || (cb => window.setTimeout(cb, 1000 / 60))
-
+export function on<K extends keyof HTMLElementEventMap>(
+  el: ElType,
+  type: K,
+  listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  options?: boolean | AddEventListenerOptions,
+): void
 export function on(
-  el: HTMLElement | Document | Window,
+  el: ElType,
   type: string,
   listener: EventListenerOrEventListenerObject,
-  options?: boolean | EventListenerOptions | undefined,
+  options?: boolean | AddEventListenerOptions,
 ): void {
   if (el && type && listener) {
-    el.addEventListener(type, listener, options ?? true)
+    el.addEventListener(type, listener, options)
   }
 }
 
+export function off<K extends keyof HTMLElementEventMap>(
+  el: ElType,
+  type: K,
+  listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  options?: boolean | EventListenerOptions,
+): void
 export function off(
-  el: HTMLElement | Document | Window,
+  el: ElType,
   type: string,
   listener: EventListenerOrEventListenerObject,
-  options?: boolean | EventListenerOptions | undefined,
+  options?: boolean | EventListenerOptions,
 ): void {
   if (el && type && listener) {
-    el.removeEventListener(type, listener, options ?? true)
+    el.removeEventListener(type, listener, options)
   }
 }
 
@@ -30,73 +40,30 @@ export function hasClass(el: HTMLElement, cls: string): boolean {
   if (!el || !cls) {
     return false
   }
-  if (cls.indexOf(' ') !== -1) {
-    throw new Error('className should not contain space.')
-  }
-  if (el.classList) {
-    return el.classList.contains(cls)
-  } else {
-    return ` ${el.className} `.indexOf(` ${cls} `) > -1
-  }
+  return cls
+    .split(' ')
+    .filter(item => item)
+    .every(item => el.classList.contains(item))
 }
 
 export function addClass(el: HTMLElement, cls: string): void {
-  if (!el) {
+  if (!el || !cls) {
     return
   }
-  let curClass = el.className
-  const classes = (cls || '').split(' ')
-
-  for (let i = 0, j = classes.length; i < j; i++) {
-    const clsName = classes[i]
-    if (!clsName) {
-      continue
-    }
-
-    if (el.classList) {
-      el.classList.add(clsName)
-    } else if (!hasClass(el, clsName)) {
-      curClass += ' ' + clsName
-    }
-  }
-  if (!el.classList) {
-    el.className = curClass
-  }
+  cls
+    .split(' ')
+    .filter(item => item)
+    .forEach(item => el.classList.add(item))
 }
 
 export function removeClass(el: HTMLElement, cls: string): void {
   if (!el || !cls) {
     return
   }
-  const classes = cls.split(' ')
-  let curClass = ` ${el.className} `
-
-  for (let i = 0, j = classes.length; i < j; i++) {
-    const clsName = classes[i]
-    if (!clsName) {
-      continue
-    }
-
-    if (el.classList) {
-      el.classList.remove(clsName)
-    } else if (hasClass(el, clsName)) {
-      curClass = curClass.replace(` ${clsName} `, ' ')
-    }
-  }
-  if (!el.classList) {
-    el.className = trim(curClass)
-  }
+  cls
+    .split(' ')
+    .filter(item => item)
+    .forEach(item => el.classList.remove(item))
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-export function isHTMLElement(el: any): boolean {
-  const div = document.createElement('div')
-
-  try {
-    div.appendChild(el.cloneNode(true))
-    return el.nodeType == 1 ? true : false
-  } catch {
-    return false
-  }
-}
+export const rAF = requestAnimationFrame || (cb => setTimeout(cb, 1000 / 60))

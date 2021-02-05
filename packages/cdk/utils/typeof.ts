@@ -76,4 +76,4 @@ export function hasOwnProperty(val: object, key: string | symbol): key is keyof 
   return Object.prototype.hasOwnProperty.call(val, key)
 }
 
-export const isHTMLElement = (val: unknown): boolean => toRawType(val).startsWith('HTML')
+export const isHTMLElement = (val: unknown): val is HTMLElement => toRawType(val).startsWith('HTML')
