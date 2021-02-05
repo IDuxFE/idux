@@ -6,7 +6,7 @@ import type { TextareaAutoRows } from './types'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
 import { isFirefox } from '@idux/cdk/platform'
-import { isObject, isNumber, on, off } from '@idux/cdk/utils'
+import { isObject, isNumber, on, off, rAF } from '@idux/cdk/utils'
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return isObject(value) && isNumber(value.minRows) && isNumber(value.maxRows)
@@ -81,13 +81,7 @@ export function useAutoRows(
     textarea.classList.remove(measuringClass)
     textarea.placeholder = placeholderText
 
-    nextTick(() => {
-      if (typeof requestAnimationFrame !== 'undefined') {
-        requestAnimationFrame(() => scrollToCaretPosition(textarea))
-      } else {
-        setTimeout(() => scrollToCaretPosition(textarea))
-      }
-    })
+    nextTick(() => rAF(() => scrollToCaretPosition(textarea)))
 
     previousValue = value
     previousMinRows = minRows

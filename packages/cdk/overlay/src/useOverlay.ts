@@ -11,9 +11,9 @@ import type {
   TriggerElement,
 } from './types'
 
-import { ComponentPublicInstance, computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
-import { isHTMLElement, uniqueId } from '@idux/cdk/utils'
+import { isHTMLElement, off, on, uniqueId } from '@idux/cdk/utils'
 
 import { usePopperOptions } from './usePopperOptions'
 
@@ -46,10 +46,10 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     if (!unrefTrigger) {
       return
     }
-    const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : (unrefTrigger as ComponentPublicInstance).$el
+    const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
     popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
     popperInstance.update()
-    window.addEventListener('scroll', globalScroll)
+    on(window, 'scroll', globalScroll)
   }
 
   const _toggle = (visible: boolean) => {
@@ -57,8 +57,14 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
   }
 
   const _clearTimer = () => {
-    window.clearTimeout(showTimer as number)
-    window.clearTimeout(hideTimer as number)
+    if (showTimer) {
+      clearTimeout(showTimer)
+      showTimer = null
+    }
+    if (hideTimer) {
+      clearTimeout(hideTimer)
+      hideTimer = null
+    }
   }
 
   const show = (immediate?: boolean): void => {
@@ -66,7 +72,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     if (immediate || state.showDelay === 0) {
       _toggle(true)
     } else {
-      showTimer = window.setTimeout(() => {
+      showTimer = setTimeout(() => {
         _toggle(true)
       }, state.showDelay)
     }
@@ -77,7 +83,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     if (immediate || state.hideDelay === 0) {
       _toggle(false)
     } else {
-      hideTimer = window.setTimeout(() => {
+      hideTimer = setTimeout(() => {
         _toggle(false)
       }, state.hideDelay)
     }
@@ -89,7 +95,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     }
     popperInstance.destroy()
     popperInstance = null
-    window.removeEventListener('scroll', globalScroll)
+    off(window, 'scroll', globalScroll)
   }
 
   const update = (options: Partial<OverlayOptions>): void => {
@@ -153,7 +159,10 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
 
   const onOverlayMouseEnter = () => {
     if (state.allowEnter && state.trigger !== 'click') {
-      clearTimeout(hideTimer as number)
+      if (hideTimer) {
+        clearTimeout(hideTimer)
+        hideTimer = null
+      }
     }
   }
 

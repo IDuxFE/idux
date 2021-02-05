@@ -39,9 +39,7 @@ export function getLocale(): ComputedRef<Locale>
 export function getLocale<T extends LocaleKey>(key?: T): ComputedRef<Locale | Locale[T]> {
   return computed(() => {
     let currLocale = localeMap[currentType.value]
-    /* istanbul ignore next */
     if (!currLocale) {
-      /* istanbul ignore next */
       currLocale = defaultLocale
     }
     return key ? currLocale[key] : currLocale

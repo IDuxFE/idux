@@ -11,17 +11,31 @@ export const waitRAF = (): Promise<unknown> => {
   return new Promise(resolve => requestAnimationFrame(resolve))
 }
 
-export const resize = (width = window.innerWidth, height = window.innerHeight): Promise<unknown> => {
-  ;(window as any).innerWidth = width
-  ;(window as any).innerHeight = height
-  window.dispatchEvent(new Event('resize'))
-  return wait(100)
+export const resizeTarget = (
+  width?: number,
+  height?: number,
+  target: Window | Element = window,
+  timeout = 200,
+): Promise<unknown> => {
+  if (target === window) {
+    ;(target as any).innerWidth = width || target.innerWidth
+    ;(target as any).innerHeight = height || target.innerHeight
+  } else {
+    ;(target as any).clientWidth = width || (target as any).clientWidth
+    ;(target as any).clientHeight = height || (target as any).clientHeight
+  }
+  target.dispatchEvent(new Event('resize'))
+  return wait(timeout)
 }
 
-export const scroll = (y: number): Promise<unknown> => {
-  ;(window as any).pageYOffset = y
-  window.dispatchEvent(new Event('scroll'))
-  return wait(100)
+export const scrollTarget = (y: number, target: Window | Element = window, timeout = 200): Promise<unknown> => {
+  if (target === window) {
+    ;(target as any).pageYOffset = y
+  } else {
+    ;(target as any).scrollTop = y
+  }
+  target.dispatchEvent(new Event('scroll'))
+  return wait(timeout)
 }
 
 export const renderWork = (component: any, options = {}): void => {

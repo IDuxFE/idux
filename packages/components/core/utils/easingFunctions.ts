@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 /**
  * origin: https://github.com/bameyrick/js-easing-functions/blob/master/src/index.ts
  *
