@@ -112,5 +112,16 @@ describe('typography.ts', () => {
 
     await wrapper.setProps({ type: 'success' })
     expect(wrapper.classes()).toEqual(['custom-paragraph', 'ix-typography', 'ix-typography-success'])
+
+    await wrapper.setProps({ type: { type: 'success', disabled: true } })
+    expect(wrapper.classes()).toEqual([
+      'custom-paragraph',
+      'ix-typography',
+      'ix-typography-success',
+      'ix-typography-disabled',
+    ])
+
+    await wrapper.setProps({ type: undefined })
+    expect(wrapper.classes()).toEqual(['custom-paragraph', 'ix-typography'])
   })
 })
