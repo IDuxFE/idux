@@ -5,7 +5,7 @@ import { isNil, isString } from '@idux/cdk/utils'
 import { Logger } from '@idux/components/core/logger'
 
 const typography: Directive<HTMLElement, TypographyConfig> = (el, binding) => {
-  const classNames: string[] = ['ix-typography']
+  const classNames: string[] = [...Array.from(el.classList), 'ix-typography']
   const { value } = binding
   const options: TypographyOptions = isString(value) || isNil(value) ? { type: value } : value
 
