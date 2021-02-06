@@ -20,7 +20,7 @@ cover:
 | `Small` | `≥ 768px && < 1024px` |
 | `Medium` | `≥ 1024px && < 1280px` |
 | `Large` | `≥ 1280px && < 1720px` |
-| `Medium` | `≥ 1720px` |
+| `XLarge` | `≥ 1720px` |
 
 ### isMatchedBreakpoint
 
