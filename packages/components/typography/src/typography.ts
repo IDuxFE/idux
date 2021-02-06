@@ -1,48 +1,31 @@
 import type { Directive } from 'vue'
 import type { TypographyConfig, TypographyOptions } from './types'
 
-import { isNonNil, isObject } from '@idux/cdk/utils'
+import { isObject, addClass, removeClass } from '@idux/cdk/utils'
 import { Logger } from '@idux/components/core/logger'
 
-const typography: Directive<HTMLElement, TypographyConfig> = {
-  created(el, binding) {
-    const classNames: string[] = [el.className, 'ix-typography']
-    const { value } = binding
-    const options: TypographyOptions = isObject(value) ? value : { type: value }
-    const { type, disabled } = options
-    if (isLegality(type)) {
-      classNames.push(`ix-typography-${type}`)
-    }
-    if (disabled) {
-      classNames.push('ix-typography-disabled')
-    }
-    el.className = classNames.join(' ')
-  },
-  updated(el, binding) {
-    const classNames = new Set([...Array.from(el.classList), 'ix-typography'])
-    const { oldValue, value } = binding
+const typography: Directive<HTMLElement, TypographyConfig> = (el, binding) => {
+  const className: string[] = ['ix-typography']
+  const { value, oldValue } = binding
 
-    const { type: oldType, disabled: oldDisabled }: TypographyOptions = isObject(oldValue)
-      ? oldValue
-      : { type: oldValue ?? undefined }
+  const oldOptions: TypographyOptions = isObject(oldValue) ? oldValue : { type: oldValue ?? undefined }
+  const newOptions: TypographyOptions = isObject(value) ? value : { type: value }
 
-    if (isLegality(oldType)) {
-      classNames.delete(`ix-typography-${oldType}`)
-    }
-    if (isNonNil(oldDisabled)) {
-      classNames.delete('ix-typography-disabled')
-    }
+  if (isLegality(oldOptions.type)) {
+    removeClass(el, `ix-typography-${oldOptions.type}`)
+  }
+  if (oldOptions.disabled) {
+    removeClass(el, 'ix-typography-disabled')
+  }
 
-    const { type, disabled }: TypographyOptions = isObject(value) ? value : { type: value }
-    if (isLegality(type)) {
-      classNames.add(`ix-typography-${type}`)
-    }
-    if (disabled) {
-      classNames.add('ix-typography-disabled')
-    }
+  if (isLegality(newOptions.type)) {
+    className.push(`ix-typography-${newOptions.type}`)
+  }
+  if (newOptions.disabled) {
+    className.push('ix-typography-disabled')
+  }
 
-    el.className = Array.from(classNames).join(' ')
-  },
+  addClass(el, className.join(' '))
 }
 
 export default typography
