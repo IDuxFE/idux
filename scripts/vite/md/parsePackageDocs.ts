@@ -115,7 +115,7 @@ function wrapperDocsTemplate(toc: string, header: string, examples: string, api:
   <article>
   ${toc}
   ${header}
-  <section class="markdown example-wrapper">${examples}</section>
+  <section class="example-wrapper">${examples}</section>
   <section class="markdown api-wrapper">${api}</section>
   </article>
 </template>  

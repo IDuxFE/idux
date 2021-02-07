@@ -10,6 +10,7 @@
 @height-sm: 24px;
 @height-md: 32px;
 @height-lg: 40px;
+@height-xl: 48px;
 
 @line-height-base: 1.5715;
 
@@ -29,8 +30,8 @@
 @heading-color: fade(@black, 85%);
 
 /* text -------------------------- */
-@text-color: @black;
-@text-secondary-color: ~`colorPalette('@{text-color}', -20) `;
+@text-color: fade(@black, 85%);
+@text-secondary-color: fade(@black, 45%);
 
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
@@ -155,13 +156,13 @@
 @typography-a-color-active: @blue-d30;
 @typography-title-margin-top: 1.2em;
 @typography-title-margin-bottom: 0.5em;
-@typography-title-font-weight: @font-weight-lg;
+@typography-title-font-weight: @font-weight-xl;
 @typography-title-color: @black-l10;
-@typography-title-1-font-size: ceil(@font-size-base * 2.71);
-@typography-title-2-font-size: ceil(@font-size-base * 2.14);
-@typography-title-3-font-size: ceil(@font-size-base * 1.71);
-@typography-title-4-font-size: ceil(@font-size-base * 1.42);
-@typography-title-5-font-size: ceil(@font-size-base * 1.14);
+@typography-title-1-font-size: @font-size-2xl;
+@typography-title-2-font-size: @font-size-xl;
+@typography-title-3-font-size: @font-size-lg;
+@typography-title-4-font-size: @font-size-md;
+@typography-title-5-font-size: @font-size-sm;
 @typography-paragraph-margin-bottom: 1em;
 @typography-list-margin: 0 0 1em 0;
 @typography-list-padding: 0;
@@ -261,3 +262,26 @@
 @back-top-bottom: 50px;
 
 @back-top-background-color: @primary-color;
+
+/* title -------------------------- */
+@title-font-weight: @font-weight-xl;
+@title-font-size: @font-size-md;
+@title-1-font-size: @font-size-2xl;
+@title-2-font-size: @font-size-xl;
+@title-3-font-size: @font-size-lg;
+@title-4-font-size: @font-size-md;
+
+@title-height-xl: @height-xl;
+@title-height-lg: @height-xl;
+@title-height-md: @height-lg;
+@title-height-sm: @height-md;
+
+@title-line-height: 1;
+
+@title-color: @black-l10;
+@title-sub-color: @text-secondary-color;
+@title-bg-color: @component-background;
+
+@title-prefix-margin: @margin-md;
+@title-content-margin: @margin-md;
+@title-extra-margin: @margin-sm;
