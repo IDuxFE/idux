@@ -21,13 +21,13 @@
     "components",
     "pro"
   ],
-  "homepage": "https://github.com/IduxFE/components#readme",
+  "homepage": "https://github.com/IduxFE/idux#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IduxFE/components"
+    "url": "https://github.com/IduxFE/idux"
   },
   "bugs": {
-    "url": "https://github.com/IduxFE/components/issues"
+    "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
     "@idux/cdk": "^0.0.0",

@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-- [ ] I have searched the [issues](https://github.com/IduxFE/components/issues) of this repository and believe that this is not a duplicate.
+- [ ] I have searched the [issues](https://github.com/IduxFE/idux/issues) of this repository and believe that this is not a duplicate.
 
 ### What problem does this feature solve?
 <!-- 这个功能解决了什么问题？ -->

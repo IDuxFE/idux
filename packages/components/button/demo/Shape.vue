@@ -3,11 +3,11 @@
   <ix-button icon="download" shape="circle"></ix-button>
   <ix-button mode="dashed" icon="download" shape="circle"></ix-button>
   <ix-button mode="text" shape="circle">T</ix-button>
-  <ix-button mode="link" shape="circle" href="https://github.com/IduxFE/components" target="_blank">A</ix-button>
+  <ix-button mode="link" shape="circle" href="https://github.com/IduxFE/idux" target="_blank">A</ix-button>
   <br />
   <ix-button mode="primary" icon="download" shape="round"></ix-button>
   <ix-button icon="search" shape="round"></ix-button>
   <ix-button mode="dashed" icon="download" shape="round">Download</ix-button>
   <ix-button mode="text" shape="round">Text</ix-button>
-  <ix-button mode="link" shape="round" href="https://github.com/IduxFE/components" target="_blank">A</ix-button>
+  <ix-button mode="link" shape="round" href="https://github.com/IduxFE/idux" target="_blank">A</ix-button>
 </template>
