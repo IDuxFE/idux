@@ -43,7 +43,7 @@ export default defineComponent({
 
     const editHref = computed(() => {
       const gitLink = `${props.packageName}/${props.componentName}/demo/${props.demoName}`
-      return `https://github.com/IduxFE/components/edit/main/packages/${gitLink}.md`
+      return `https://github.com/IduxFE/idux/edit/main/packages/${gitLink}.md`
     })
 
     const expanded = ref(false)

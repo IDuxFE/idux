@@ -23,13 +23,13 @@
     "development",
     "kit"
   ],
-  "homepage": "https://github.com/IduxFE/components#readme",
+  "homepage": "https://github.com/IduxFE/idux#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IduxFE/components"
+    "url": "https://github.com/IduxFE/idux"
   },
   "bugs": {
-    "url": "https://github.com/IduxFE/components/issues"
+    "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.6.0",
