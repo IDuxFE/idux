@@ -82,4 +82,18 @@ describe('typography.ts', () => {
     await wrapper2.setProps({ class: 'custom' })
     expect(wrapper.classes()).toEqual(['custom', 'ix-typography'])
   })
+
+  test('directive position work', () => {
+    const wrapper = mount(
+      {
+        template: `
+      <div v-typography class='custom-class1' id='directive1'>Directive1</div>
+      <div class='custom-class2' v-typography id='directive2'>Directive2</div>
+      `,
+      },
+      { global: { directives: { typography: IxTypography } } },
+    )
+    expect(wrapper.get('#directive1').classes()).toEqual(['custom-class1', 'ix-typography'])
+    expect(wrapper.get('#directive2').classes()).toEqual(['custom-class2', 'ix-typography'])
+  })
 })
