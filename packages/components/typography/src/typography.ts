@@ -25,7 +25,7 @@ const typography: Directive<HTMLElement, TypographyConfig> = (el, binding) => {
     className.push('ix-typography-disabled')
   }
 
-  addClass(el, className.join(' '))
+  addClass(el, className)
 }
 
 export default typography

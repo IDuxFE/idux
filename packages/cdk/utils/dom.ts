@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { isString } from './typeof'
+
 type ElType = HTMLElement | Document | Window
 
 export function on<K extends keyof HTMLElementEventMap>(
@@ -36,34 +38,21 @@ export function off(
   }
 }
 
-export function hasClass(el: HTMLElement, cls: string): boolean {
-  if (!el || !cls) {
+export function hasClass(el: HTMLElement, className: string): boolean {
+  if (!className) {
     return false
   }
-  return cls
-    .split(' ')
-    .filter(item => item)
-    .every(item => el.classList.contains(item))
+  return el.classList.contains(className)
 }
 
-export function addClass(el: HTMLElement, cls: string): void {
-  if (!el || !cls) {
-    return
-  }
-  cls
-    .split(' ')
-    .filter(item => item)
-    .forEach(item => el.classList.add(item))
+export function addClass(el: HTMLElement, className: string | string[]): void {
+  const cls: string[] = isString(className) ? [className] : className
+  el.classList.add(...cls)
 }
 
-export function removeClass(el: HTMLElement, cls: string): void {
-  if (!el || !cls) {
-    return
-  }
-  cls
-    .split(' ')
-    .filter(item => item)
-    .forEach(item => el.classList.remove(item))
+export function removeClass(el: HTMLElement, className: string | string[]): void {
+  const cls: string[] = isString(className) ? [className] : className
+  el.classList.remove(...cls)
 }
 
 export const rAF = requestAnimationFrame || (cb => setTimeout(cb, 1000 / 60))
