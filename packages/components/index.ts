@@ -14,6 +14,7 @@ import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxBackTop } from './back-top'
 import { IxTitle } from './title'
+import { IxTimeline, IxTimelineItem } from './timeline'
 
 const components = [
   IxButton,
@@ -33,6 +34,8 @@ const components = [
   IxTextarea,
   IxBackTop,
   IxTitle,
+  IxTimeline, 
+  IxTimelineItem
 ]
 
 const directives: Record<string, Directive> = {
@@ -73,3 +76,4 @@ export { IxCheckbox, IxCheckboxGroup }
 export { IxInput, IxTextarea }
 export { IxBackTop }
 export { IxTitle }
+export { IxTimeline, IxTimelineItem }
