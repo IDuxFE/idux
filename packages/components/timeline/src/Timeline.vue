@@ -1,12 +1,13 @@
 <script lang="ts">
 import { VNode } from 'vue'
-import type { TimelineMode } from './types'
+import type { TimelineMode, TimelineItemMode } from './types'
 
 import { defineComponent, h, cloneVNode } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import IxTimelineItem from './TimelineItem.vue'
 
+const timelinePrefixCls = 'ix-timeline'
 const itemPrefixCls = 'ix-timeline-item'
 
 export default defineComponent({
@@ -29,15 +30,17 @@ export default defineComponent({
       ? h(IxTimelineItem, {}, { default: () => pendingNode, dot: () => pendingDotNode })
       : null
 
-    const itemPositionArr: string[] = []
+    const itemPositionArr: TimelineItemMode[] = []
     const timelineItems = this.$props.reverse
       ? [penddingItem, ...defaultSlots.reverse()]
       : [...defaultSlots, penddingItem]
-    const nonNullItems = timelineItems.filter(item => !!item)
+    const nonNullItems = timelineItems.filter(item => !!item) as VNode[]
     const itemsLength = nonNullItems.length
+
     const items = nonNullItems.map((item, index) => {
       let pendingCls = ''
-      const position = getItemPosition(item as VNode, index, this.$props.mode)
+      const position = getItemPosition(item, index, this.$props.mode)
+      const positionCls = `${itemPrefixCls}--${position}`
       const lastCls = index === itemsLength - 1 ? `${itemPrefixCls}--last` : ''
 
       itemPositionArr.push(position)
@@ -51,8 +54,8 @@ export default defineComponent({
         }
       }
 
-      return cloneVNode(item as VNode, {
-        class: `${itemPrefixCls}--${position} ${pendingCls} ${lastCls}`,
+      return cloneVNode(item, {
+        class: `${positionCls} ${pendingCls} ${lastCls}`,
       })
     })
 
@@ -61,20 +64,18 @@ export default defineComponent({
     return h(
       'ul',
       {
-        class: `ix-timeline ix-timeline--${realMode} ${this.$props.reverse ? 'ix-timeline--reverse' : ''}`,
+        class: `${timelinePrefixCls} ${timelinePrefixCls}--${realMode} ${
+          this.$props.reverse ? `${timelinePrefixCls}--reverse` : ''
+        }`,
       },
       items,
     )
   },
 })
 
-const getItemPosition = (vnode: VNode, index: number, mode: TimelineMode): string => {
-  if (!vnode) {
-    return ''
-  }
-
+const getItemPosition = (vnode: VNode, index: number, mode: TimelineMode): TimelineItemMode => {
   const propsPosition = vnode.props?.position
-  let position = ''
+  let position: TimelineItemMode
 
   if (propsPosition) {
     position = propsPosition
@@ -91,21 +92,22 @@ const getItemPosition = (vnode: VNode, index: number, mode: TimelineMode): strin
       break
 
     case 'alternate':
-      position = `${index % 2 ? 'left' : 'right'}`
+      position = index % 2 ? 'left' : 'right'
   }
 
   return position
 }
 
-const getRealMode = (itemPositionArr: string[]) => {
-  return itemPositionArr.reduce((result, position) => {
-    if (!result) {
+const getRealMode = (itemPositionArr: TimelineItemMode[]): TimelineMode => {
+  return itemPositionArr.reduce((result: TimelineMode, position, index) => {
+    if (!index) {
       result = position
-    } else if (result !== position) {
+    }
+    if (result !== position) {
       result = 'alternate'
     }
 
     return result
-  }, '')
+  }, 'right')
 }
 </script>
