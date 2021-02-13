@@ -9,8 +9,8 @@
   <ix-timeline :pending="true">
     <ix-timeline-item>0</ix-timeline-item>
     <ix-timeline-item>1</ix-timeline-item>
-    <template v-slot:pendingDot>
-      <ix-icon name='frown'/>
+    <template #pendingDot>
+      <ix-icon name="frown" />
     </template>
   </ix-timeline>
 </template>
@@ -18,10 +18,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup() {
-
-  }
+  setup() {},
 })
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

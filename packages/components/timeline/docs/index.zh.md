@@ -36,7 +36,7 @@ cover:
 
 ### ix-timeline-item
 
-#### Props
+#### item Props
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -44,9 +44,8 @@ cover:
 | `dot` | 时间轴点 | `string` | `undefined` | - |- |
 | `position` | 时间节点内容的位置 | `left\|right` | `undefined` | - |- |
 
-#### Slots
+#### item Slots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `dot` | 时间轴点 | - | 优先级比props高 |
-

@@ -15,10 +15,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup() {
-
-  }
+  setup() {},
 })
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

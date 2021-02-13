@@ -34,8 +34,8 @@ const components = [
   IxTextarea,
   IxBackTop,
   IxTitle,
-  IxTimeline, 
-  IxTimelineItem
+  IxTimeline,
+  IxTimelineItem,
 ]
 
 const directives: Record<string, Directive> = {
