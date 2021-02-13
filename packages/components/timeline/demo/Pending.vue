@@ -21,17 +21,14 @@
   <ix-timeline>
     <ix-timeline-item>0</ix-timeline-item>
     <ix-timeline-item>1</ix-timeline-item>
-    <template v-slot:pending>slots</template>
+    <template #pending>slots</template>
   </ix-timeline>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup() {
-
-  }
+  setup() {},
 })
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

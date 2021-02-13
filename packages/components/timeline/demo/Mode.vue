@@ -7,7 +7,7 @@
     <ix-timeline-item>3</ix-timeline-item>
   </ix-timeline>
 
-  <p>mode: alternate </p>
+  <p>mode: alternate</p>
   <ix-timeline :pending="true" mode="alternate">
     <ix-timeline-item>0</ix-timeline-item>
     <ix-timeline-item>1</ix-timeline-item>
@@ -27,10 +27,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup() {
-
-  }
+  setup() {},
 })
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

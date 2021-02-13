@@ -1,5 +1,5 @@
 import { installComponent } from '@idux/components/core/utils'
-import IxTimeline from './src/Timeline.vue';
+import IxTimeline from './src/Timeline.vue'
 import IxTimelineItem from './src/TimelineItem.vue'
 
 IxTimeline.install = installComponent(IxTimeline)
