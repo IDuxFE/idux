@@ -14,6 +14,7 @@ export function mdPlugin(): Plugin {
       if (id.endsWith('.md')) {
         return parseMd(id, raw)
       }
+      return
     },
     async handleHotUpdate(ctx) {
       if (ctx.file.endsWith('.md')) {
