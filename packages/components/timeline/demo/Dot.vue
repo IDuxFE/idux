@@ -7,7 +7,12 @@
       </template>
     </ix-timeline-item>
     <ix-timeline-item>1</ix-timeline-item>
-    <ix-timeline-item>2</ix-timeline-item>
+    <ix-timeline-item>
+      2
+      <template #dot>
+        <ix-icon name="clock-circle-filled" />
+      </template>
+    </ix-timeline-item>
     <ix-timeline-item>3</ix-timeline-item>
   </ix-timeline>
 </template>

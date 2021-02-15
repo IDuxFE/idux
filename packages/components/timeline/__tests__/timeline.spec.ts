@@ -93,11 +93,13 @@ describe('Timeline.vue', () => {
     await wrapper.setProps({ pending: true })
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
     expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item--pending')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item--pending-dot')
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ pending: pendingText })
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
     expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item--pending')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item--pending-dot')
     expect(wrapper.findAll('.ix-timeline-item')[4].text()).toBe(pendingText)
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -114,6 +116,7 @@ describe('Timeline.vue', () => {
     reverseWrapper.findAll('.ix-timeline-item').forEach((item, index) => {
       if (index === 0) {
         expect(item.classes()).toContain('ix-timeline-item--pending')
+        expect(item.classes()).toContain('ix-timeline-item--pending-dot')
       } else {
         expect(item.text()).toBe((4 - index).toString())
       }
@@ -133,6 +136,7 @@ describe('Timeline.vue', () => {
 
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
     expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item--pending')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item--pending-dot')
     expect(wrapper.findAll('.ix-timeline-item')[4].text()).toBe(pendingSlotText)
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -153,6 +157,7 @@ describe('Timeline.vue', () => {
     reverseWrapper.findAll('.ix-timeline-item').forEach((item, index) => {
       if (index === 0) {
         expect(item.classes()).toContain('ix-timeline-item--pending')
+        expect(item.classes()).toContain('ix-timeline-item--pending-dot')
       } else {
         expect(item.text()).toBe((4 - index).toString())
       }
