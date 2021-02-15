@@ -26,9 +26,15 @@ export default defineComponent({
     const pendingNode = pendingSlots || this.$props.pending
     const pendingDotNode = pendingDotSlots || this.$props.pendingDot || h(IxIcon, { name: 'loading' })
 
-    const penddingItem = pendingNode
-      ? h(IxTimelineItem, {}, { default: () => pendingNode, dot: () => pendingDotNode })
-      : null
+    let penddingItem
+
+    if (pendingNode) {
+      penddingItem = h(
+        IxTimelineItem,
+        { class: `${itemPrefixCls}--pending-dot` },
+        { default: () => pendingNode, dot: () => pendingDotNode },
+      )
+    }
 
     const itemPositionArr: TimelineItemMode[] = []
     const timelineItems = this.$props.reverse
