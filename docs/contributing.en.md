@@ -115,7 +115,6 @@ We have very precise rules for how to submit a git commit message. We hope that 
 
 This project uses `@commitlint` as the commit lint tool, and uses [`@commitlint/config-angular`](https://www.npmjs.com/package/@commitlint/config-angular) as the basic rule, please Use any of the following methods to submit your commit.
 
-- Use `npm run cz` or `yarn cz` to submit;
 - Install `npm install -g commitizen` globally, then use `cz` to submit;
 - Use `git commit -a` to submit, please note that the message meets our requirements.
 

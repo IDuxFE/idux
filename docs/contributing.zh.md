@@ -125,7 +125,6 @@ order: 11
 
 本项目使用了 `@commitlint` 作为 commit lint 工具，并使用 [`@commitlint/config-angular`](https://www.npmjs.com/package/@commitlint/config-angular)作为基础规则，请使用下面任意一种方式提交你的 commit.
 
-- 使用 `npm run cz` 或 `yarn cz` 提交
 - 全局安装 `npm install -g commitizen`，然后使用 `cz` 提交
 - 使用 `git commit -a` 提交，请注意 message 符合我们的要求
 
