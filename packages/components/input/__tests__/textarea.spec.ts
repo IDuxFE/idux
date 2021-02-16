@@ -43,20 +43,17 @@ describe('Textarea.vue', () => {
     expect(textarea.element.value).toBe('valueRef change')
 
     textarea.element.value = '使用拼音'
-    textarea.trigger('compositionstart')
-    await nextTick()
+    await textarea.trigger('compositionstart')
 
     expect(wrapper.emitted()).toHaveProperty('compositionStart')
     expect(valueRef.value).toBe('valueRef change')
 
-    textarea.trigger('input')
-    await nextTick()
+    await textarea.trigger('input')
 
     expect(wrapper.emitted()).toHaveProperty('input')
     expect(valueRef.value).toBe('valueRef change')
 
-    textarea.trigger('compositionend')
-    await nextTick()
+    await textarea.trigger('compositionend')
 
     expect(wrapper.emitted()).toHaveProperty('compositionEnd')
     expect(valueRef.value).toBe('使用拼音')
