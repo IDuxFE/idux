@@ -1,3 +1,6 @@
+import type { Placement } from '@popperjs/core'
+import type { OverlayTrigger } from '@idux/cdk/overlay'
+
 // General
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
@@ -91,6 +94,16 @@ export interface StatisticConfig {
   formatter: NumFormatter
 }
 
+export interface TooltipConfig {
+  placement: Placement
+  trigger: OverlayTrigger
+  showDelay: number
+  hideDelay: number
+  destroyOnHide: boolean
+  autoAdjust: boolean
+}
+
+
 // Feedback
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
@@ -132,6 +145,7 @@ export interface GlobalConfig {
   card: CardConfig
   image: ImageConfig
   statistic: StatisticConfig
+  tooltip: TooltipConfig
   // Feedback
   result: ResultConfig
   spin: SpinConfig

@@ -50,7 +50,7 @@ describe('useOverlay.ts', () => {
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="immediate" @click="handleClick">Immediate Toggle</button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -87,7 +87,7 @@ describe('useOverlay.ts', () => {
       },
       template: `
       <ix-button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</ix-button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -118,7 +118,7 @@ describe('useOverlay.ts', () => {
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="destroy" @click="handleClick">Destroy</button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -147,7 +147,7 @@ describe('useOverlay.ts', () => {
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="update" @click="handleClick">Update</button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -191,8 +191,8 @@ describe('useOverlay.ts', () => {
         return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
-      <button id="trigger" ref="triggerRef" @focus='triggerEvents.onFocus' @blur='triggerEvents.onBlur' @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave' @click="triggerEvents.onClick">Trigger</button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <button id="trigger" ref="triggerRef" @focus='triggerEvents.onFocus' @blur='triggerEvents.onBlur' @mouseenter='triggerEvents.onMouseenter' @mouseleave='triggerEvents.onMouseleave' @click="triggerEvents.onClick">Trigger</button>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
 
@@ -238,8 +238,8 @@ describe('useOverlay.ts', () => {
         return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
-      <button id="trigger" ref="triggerRef" @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave'>Trigger</button>
-      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <button id="trigger" ref="triggerRef" @mouseenter='triggerEvents.onMouseenter' @mouseleave='triggerEvents.onMouseleave'>Trigger</button>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -266,7 +266,7 @@ describe('useOverlay.ts', () => {
       },
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay
+      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay
         <div ref="arrowRef" id='arrow'></div>
       </div>
       `,

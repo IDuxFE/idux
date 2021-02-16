@@ -7,8 +7,8 @@
         v-typography
         v-click-outside="hide"
         class="overlay"
-        @mouseenter="overlayEvents.onMouseEnter"
-        @mouseleave="overlayEvents.onMouseLeave"
+        @mouseenter="overlayEvents.onMouseenter"
+        @mouseleave="overlayEvents.onMouseleave"
       >
         <h1 v-typography>深圳</h1>
         <p v-typography>

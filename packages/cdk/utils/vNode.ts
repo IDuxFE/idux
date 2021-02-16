@@ -26,7 +26,7 @@ function getChildren(node: VNode, depth: number): VNode | undefined {
  * @param maxDepth depth to be searched, default is 3
  */
 export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
-  if (isNil(nodes)) {
+  if (isNil(nodes) || (Array.isArray(nodes) && !nodes.length)) {
     return
   }
   if (Array.isArray(nodes) && nodes.length > 0) {
