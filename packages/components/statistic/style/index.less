@@ -1,0 +1,39 @@
+@import '../../style/default.less';
+
+@statistic-prefix: ~'@{idux-prefix}-statistic';
+
+.@{statistic-prefix} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: @statistic-color;
+  font-size: @statistic-font-size-sm;
+  line-height: @statistic-line-height;
+  list-style: none;
+
+  &-title {
+    margin-bottom: @statistic-title-margin;
+    color: @statistic-color;
+    font-size: @statistic-font-size-sm;
+  }
+
+  &-content {
+    color: @statistic-color;
+    font-size: @statistic-font-size-xl;
+
+    &-prefix {
+      margin-right: @statistic-prefix-margin;
+    }
+
+    &-value {
+      &-decimal {
+        font-size: @statistic-font-size-md;
+      }
+    }
+
+    &-suffix {
+      margin-left: @statistic-suffix-margin;
+      font-size: @statistic-font-size-md;
+    }
+  }
+}

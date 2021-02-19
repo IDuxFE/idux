@@ -32,17 +32,6 @@
   </ix-portal>
 </template>
 
-<style lang="less">
-.overlay {
-  width: 300px;
-  height: 600px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.6);
-  overflow: auto;
-}
-</style>
-
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IxButton } from '@idux/components'
@@ -70,3 +59,13 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="less">
+.overlay {
+  width: 300px;
+  height: 600px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.6);
+  overflow: auto;
+}
+</style>
