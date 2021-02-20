@@ -1,11 +1,10 @@
 ---
-order: 0
+order: 3
 title:
-  zh: 典型卡片
-  en: basic card
+  zh: 预加载的卡片
+  en: loading card
 ---
 
 ## zh
 
-包含标题、内容、操作区域。
-可通过设置size为small,medium，控制尺寸
+据读入前会有loading的样式

@@ -29,8 +29,8 @@ cover:
 | `extra` | 右上角操作区域 | `string` | - | - | - |
 | `borderless` | 是否有边框 | `booelan` | `false` | ✅ | - |
 | `hoverable` | 鼠标 hover 时，是否悬浮 | `booelan` | `false` | ✅ | - |
-| `loading` | 是否加载中状态 | `booelan` | `false` | - | - |
-| `size` | 设置按钮大小 | `medium\|small` | `medium` | - | 当卡片内容还在加载中时，可以用 loading 展示一个占位 |
+| `loading` | 是否加载中状态 | `booelan` | `false` | - | 当卡片内容还在加载中时，可以用 loading 展示一个占位 |
+| `size` | 设置按钮大小 | `medium\|small` | `medium` | ✅ | - |
 
 ### Slots
 

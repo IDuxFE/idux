@@ -14,7 +14,7 @@
     </div>
     <ix-spin :spinning="loading">
       <div class="ix-card-body" :class="loading ? 'ix-card-loading-block' : ''">
-        <slot v-if="hadDefaultSlot && !loading"></slot>
+        <slot></slot>
       </div>
     </ix-spin>
 
@@ -49,8 +49,7 @@ export default defineComponent({
     const isShowTitle = computed(() => props.title || hasSlot(slots, 'title'))
     const isShowExtra = computed(() => props.extra || hasSlot(slots, 'extra'))
     const isShowFooter = computed(() => hasSlot(slots, 'footer'))
-    const hadDefaultSlot = computed(() => hasSlot(slots))
-    return { classes, isShowTitle, isShowExtra, isShowFooter, hadDefaultSlot }
+    return { classes, isShowTitle, isShowExtra, isShowFooter }
   },
 })
 

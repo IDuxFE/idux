@@ -101,9 +101,6 @@ export interface BackTopConfig {
 export type CardSize = 'medium' | 'small'
 export interface CardConfig {
   size: CardSize
-  title: string
-  extra: string
   borderless: boolean
   hoverable: boolean
-  loading: boolean
 }

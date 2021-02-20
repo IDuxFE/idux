@@ -3,8 +3,8 @@ import type { CardSize } from '@idux/components/core/config'
 interface CardOriginalProps {
   title?: string
   extra?: string
-  hoverable: boolean
-  borderless: boolean
+  hoverable?: boolean
+  borderless?: boolean
   loading: boolean
   size?: CardSize
 }
