@@ -13,6 +13,7 @@ export interface GlobalConfig {
   input: InputConfig
   textarea: TextareaConfig
   backTop: BackTopConfig
+  card: CardConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -95,4 +96,11 @@ export interface TextareaConfig {
 export interface BackTopConfig {
   duration: number
   visibilityHeight: number
+}
+
+export type CardSize = 'medium' | 'small'
+export interface CardConfig {
+  size: CardSize
+  borderless: boolean
+  hoverable: boolean
 }
