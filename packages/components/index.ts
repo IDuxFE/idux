@@ -15,6 +15,7 @@ import { IxInput, IxTextarea } from './input'
 import { IxBackTop } from './back-top'
 import { IxTitle } from './title'
 import { IxCard } from './card'
+import { IxTimeline, IxTimelineItem } from './timeline'
 
 const components = [
   IxButton,
@@ -35,6 +36,8 @@ const components = [
   IxBackTop,
   IxTitle,
   IxCard,
+  IxTimeline,
+  IxTimelineItem,
 ]
 
 const directives: Record<string, Directive> = {
@@ -76,3 +79,4 @@ export { IxInput, IxTextarea }
 export { IxBackTop }
 export { IxTitle }
 export { IxCard }
+export { IxTimeline, IxTimelineItem }

@@ -8,3 +8,6 @@ declare type Nullable<T> = T | null
 
 declare function setTimeout(handler: TimerHandler, timeout?: number, ...arguments: any[]): number
 declare function clearTimeout(handle?: number): void
+
+declare type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never
+
