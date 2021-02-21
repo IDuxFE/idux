@@ -56,3 +56,31 @@ export function removeClass(el: HTMLElement, className: string | string[]): void
 }
 
 export const rAF = requestAnimationFrame || (cb => setTimeout(cb, 1000 / 60))
+
+export function throttleRAF<T extends (...args: any[]) => void>(
+  fn: T,
+): {
+  (...args: Parameters<T>): void
+  cancel(): void
+} {
+  let id: number | null = null
+
+  const frameCb = (...args: Parameters<T>) => {
+    id = null
+    fn(...args)
+  }
+
+  const requestCb = (...args: Parameters<T>): void => {
+    if (id === null) {
+      id = rAF(() => frameCb(...args))
+    }
+  }
+
+  requestCb.cancel = () => {
+    if (id !== null) {
+      ;(cancelAnimationFrame || clearTimeout)(id)
+    }
+  }
+
+  return requestCb
+}
