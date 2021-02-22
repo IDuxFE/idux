@@ -13,9 +13,11 @@ import type {
   TextareaConfig,
   BackTopConfig,
   CardConfig,
+  StatisticConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
+import { numFormatter } from './numFormatter'
 
 const button = shallowReactive<ButtonConfig>({ mode: 'default', size: 'medium' })
 
@@ -80,6 +82,11 @@ const card = shallowReactive<CardConfig>({
   hoverable: false,
 })
 
+const statistic = shallowReactive<StatisticConfig>({
+  precision: 0,
+  formatter: numFormatter,
+})
+
 export const defaultConfig: GlobalConfig = {
   button,
   icon,
@@ -94,4 +101,5 @@ export const defaultConfig: GlobalConfig = {
   textarea,
   backTop,
   card,
+  statistic,
 }

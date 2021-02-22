@@ -14,6 +14,7 @@ export interface GlobalConfig {
   textarea: TextareaConfig
   backTop: BackTopConfig
   card: CardConfig
+  statistic: StatisticConfig
 }
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -104,3 +105,19 @@ export interface CardConfig {
   borderless: boolean
   hoverable: boolean
 }
+
+export interface StatisticConfig {
+  precision: number
+  formatter: NumFormatter
+}
+
+export interface NumFormatted {
+  value: string
+
+  /** 格式化后的整数部分 */
+  int: string
+
+  /** 格式化后的小数部分，带小数点 */
+  decimal: string
+}
+export type NumFormatter = (value: string | number, precision: number) => NumFormatted
