@@ -278,6 +278,7 @@
 @switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 @switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
 @switch-disable-opacity: 0.4;
+
 /* radio -------------------------------- */
 @radio-theme-color: @primary-color;
 @radio-font-size: @font-size-lg;
@@ -334,6 +335,73 @@
 @radio-button-padding-vertical-base: 0px;
 @radio-button-font-weight-base: @font-weight-base;
 @radio-button-line-height-base: @height-sm;
+
+/* select -------------------------- */
+@option-height: @height-md;
+@option-margin-left: @margin-md;
+@option-padding: @padding-sm;
+@option-color: @text-color;
+@option-font-weight: @font-weight-md;
+@option-font-size: @font-size-md;
+@option-transition: background @transition-duration-base @ease-in-out;
+
+@option-disabled-color: @disabled-color;
+@option-active-bg-color: @grey-l50;
+@option-selected-color: @primary-color;
+@option-selected-bg-color: tint(@primary-color, 90%);
+@option-selected-font-weight: @font-weight-xl;
+
+@option-container-zindex: @zindex-l4-3;
+@option-container-padding: @padding-sm 0;
+@option-container-bg-color: @background-color-component;
+@option-container-border-radius: @border-radius-sm;
+@option-container-box-shadow: @shadow-bottom-md;
+@option-container-empty-color: @option-disabled-color;
+@option-container-group-border-top: @border-width-sm @border-style @border-color;
+
+@select-selector-font-size: @font-size-md;
+@select-selector-bg-color: @input-bg-color;
+@select-selector-border-width: @input-border-width;
+@select-selector-border-style: @input-border-style;
+@select-selector-border-color: @input-border-color;
+@select-selector-border-radius: @input-border-radius;
+@select-selector-transition: @input-transition;
+
+@select-selector-hover-border-color: @input-hover-border-color;
+@select-selector-active-border-color: @input-active-border-color;
+@select-selector-active-box-shadow: @input-active-box-shadow;
+
+@select-selector-disabled-color: @input-disabled-color;
+@select-selector-disabled-bg-color: @input-disabled-bg-color;
+
+@select-placeholder-color: @input-placeholder-color;
+@select-icon-color: @select-placeholder-color;
+@select-icon-bg-color: @select-selector-bg-color;
+@select-icon-hover-color: @input-secondary-color;
+@select-icon-font-size: @font-size-sm;
+@select-icon-margin-right: @margin-sm;
+@select-icon-transition: @select-selector-transition;
+
+@select-height-lg: @input-height-lg;
+@select-height-md: @input-height-md;
+@select-height-sm: @input-height-sm;
+@select-padding-horizontal-lg: @input-padding-horizontal-lg;
+@select-padding-horizontal-md: @input-padding-horizontal-md;
+@select-padding-horizontal-sm: @input-padding-horizontal-sm;
+@select-font-size-lg: @input-font-size-lg;
+@select-font-size-md: @input-font-size-md;
+@select-font-size-sm: @input-font-size-sm;
+
+@select-multiple-padding: @input-padding-vertical-md;
+@select-multiple-item-padding: 0 @padding-xs;
+@select-multiple-item-bg-color: @background-color-base;
+@select-multiple-item-disabled-color: @input-disabled-color;
+@select-multiple-item-disabled-border-color: @select-selector-border-color;
+@select-multiple-item-border-width: @border-width-sm;
+@select-multiple-item-border: @select-multiple-item-border-width @border-style @border-color-split;
+@select-multiple-item-border-radius: @select-selector-border-radius;
+@select-multiple-item-label-margin-left: @margin-xs;
+@select-multiple-item-remove-icon-font-size: @font-size-xs;
 
 // Data Display
 

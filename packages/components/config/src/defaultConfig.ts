@@ -19,6 +19,7 @@ import type {
   GlobalConfig,
   TooltipConfig,
   PopoverConfig,
+  SelectConfig,
   RadioGroupConfig,
 } from './types'
 
@@ -69,6 +70,15 @@ const rate = shallowReactive<RateConfig>({
 const radioGroup: RadioGroupConfig = shallowReactive({
   size: 'medium',
   mode: 'border',
+})
+
+const select = shallowReactive<SelectConfig>({
+  borderless: false,
+  clearable: false,
+  labelKey: 'label',
+  searchable: false,
+  size: 'medium',
+  valueKey: 'value',
 })
 
 // --------------------- Data Display ---------------------
@@ -154,6 +164,7 @@ export const defaultConfig: GlobalConfig = {
   textarea,
   rate,
   radioGroup,
+  select,
   // Data Display
   badge,
   card,

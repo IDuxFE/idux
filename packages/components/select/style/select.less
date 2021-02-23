@@ -1,0 +1,116 @@
+@select-prefix: ~'@{idux-prefix}-select';
+
+// ix-select
+.@{select-prefix} {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  // ix-select-selector
+  &-selector {
+    position: relative;
+    display: flex;
+    background-color: @select-selector-bg-color;
+    border: @select-selector-border-width @select-selector-border-style @select-selector-border-color;
+    border-radius: @select-selector-border-radius;
+    transition: @select-selector-transition;
+    cursor: pointer;
+  }
+
+  &:hover:not(&-disabled) &-selector {
+    border-color: @select-selector-hover-border-color;
+  }
+
+  &-active:not(&-disabled):not(&-borderless) &-selector {
+    & when (@theme = default) {
+      border-color: @select-selector-active-border-color;
+    }
+    box-shadow: @select-selector-active-box-shadow;
+  }
+
+  &-disabled &-selector {
+    color: @select-selector-disabled-color;
+    background-color: @select-selector-disabled-bg-color;
+    cursor: not-allowed;
+
+    .@{select-prefix}-input-inner {
+      cursor: not-allowed;
+    }
+  }
+
+  &-borderless &-selector {
+    .borderless();
+  }
+
+  &-searchable &-selector {
+    cursor: text;
+
+    .@{select-prefix}-input-inner {
+      cursor: auto;
+    }
+  }
+
+  // ix-select-input
+  &-input {
+    &-inner {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      appearance: none;
+
+      cursor: pointer;
+    }
+  }
+
+  // ix-select-item
+  &-item {
+    flex: 1;
+    user-select: none;
+    .ellipsis();
+  }
+
+  // ix-select-placeholder
+  &-placeholder {
+    flex: 1;
+    overflow: hidden;
+    color: @select-placeholder-color;
+    transition: @select-selector-transition;
+    .ellipsis();
+  }
+
+  // ix-select-suffix
+  .select-icon() {
+    position: absolute;
+    top: 50%;
+    margin-top: -(@select-icon-font-size / 2);
+    right: @select-icon-margin-right;
+    line-height: 1;
+    font-size: @select-icon-font-size;
+    color: @select-icon-color;
+    transition: @select-icon-transition;
+  }
+
+  &-suffix {
+    .select-icon();
+    pointer-events: none;
+  }
+
+  // ix-select-clear
+  &-clear {
+    .select-icon();
+    z-index: 1;
+    opacity: 0;
+    background-color: @select-icon-bg-color;
+
+    &:hover {
+      color: @select-icon-hover-color;
+    }
+
+    .@{select-prefix}:hover & {
+      opacity: 1;
+    }
+  }
+}

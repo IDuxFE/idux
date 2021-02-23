@@ -1,0 +1,70 @@
+@option-prefix: ~'@{idux-prefix}-option';
+
+.option-item(@font-size,@text-color) {
+  display: block;
+  position: relative;
+  height: @option-height;
+  padding: @option-padding;
+  font-size: @font-size;
+  font-weight: @option-font-weight;
+  color: @text-color;
+  transition: @option-transition;
+  cursor: pointer;
+}
+
+// ix-option
+.@{option-prefix} {
+  .option-item(@option-font-size, @option-color);
+
+  &-disabled {
+    color: @option-disabled-color;
+    cursor: not-allowed;
+  }
+
+  &-active:not(&-disabled) {
+    background-color: @option-active-bg-color;
+  }
+
+  &-selected:not(&-disabled) {
+    color: @option-selected-color;
+    background-color: @option-selected-bg-color;
+    font-weight: @option-selected-font-weight;
+  }
+
+  &-checkbox {
+    margin-left: @option-margin-left;
+  }
+
+  &-label {
+    margin-left: @option-margin-left;
+    .ellipsis();
+  }
+
+  // ix-option-container
+  &-container {
+    z-index: @option-container-zindex;
+    padding: @option-container-padding;
+    background-color: @option-container-bg-color;
+    border-radius: @option-container-border-radius;
+    box-shadow: @option-container-box-shadow;
+    overflow: auto;
+
+    &-empty {
+      color: @option-container-empty-color;
+    }
+
+    .@{option-prefix}-group:not(:first-child) {
+      border-top: @option-container-group-border-top;
+    }
+  }
+
+  // ix-option-group
+  &-group {
+    .option-item(@option-font-size - 2px, @option-disabled-color);
+
+    &-label {
+      margin-left: @option-margin-left;
+      .ellipsis();
+    }
+  }
+}
