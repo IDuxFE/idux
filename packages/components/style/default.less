@@ -33,6 +33,7 @@
 @text-color: fade(@black, 85%);
 @text-secondary-color: fade(@black, 45%);
 
+// General
 /* button -------------------------- */
 @button-font-weight: @font-weight-md;
 
@@ -84,45 +85,32 @@
 @button-text-color: @text-color;
 @button-text-hover-bg: rgba(0, 0, 0, 0.12);
 
-/* spin -------------------------- */
-@spin-tip-color: @primary-color;
-@spin-icon-color: @primary-color;
+/* icon -------------------------- */
+@icon-color: inherit;
+@icon-color-hover: fade(@black, 75%);
 
-@spin-font-size-sm: @font-size-sm;
-@spin-font-size-md: @font-size-md;
-@spin-font-size-lg: @font-size-lg;
+/* title -------------------------- */
+@title-font-weight: @font-weight-xl;
+@title-font-size: @font-size-md;
+@title-1-font-size: @font-size-2xl;
+@title-2-font-size: @font-size-xl;
+@title-3-font-size: @font-size-lg;
+@title-4-font-size: @font-size-md;
 
-/* space -------------------------- */
-@space-margin-sm: @margin-sm;
-@space-margin-md: @margin-lg;
-@space-margin-lg: @margin-xl;
+@title-height-xl: @height-xl;
+@title-height-lg: @height-xl;
+@title-height-md: @height-lg;
+@title-height-sm: @height-md;
 
-/* empty -------------------------- */
-@empty-margin-md: @margin-md;
-@empty-line-height-md: @line-height-base;
-@empty-font-size-md: @font-size-md;
-@empty-icon-font-size-md: 64px;
+@title-line-height: 1;
 
-/* space -------------------------- */
-@result-padding: @spacing-gutter * 6 @spacing-gutter * 4;
-@result-text-align: center;
-@result-icon-margin: @margin-xl;
-@result-icon-size: @font-size-lg * 4;
-@result-title-font-size: @font-size-xl;
-@result-title-color: @black-d20;
-@result-title-line-height: 1.8;
-@result-subtitle-font-size: @font-size-sm;
-@result-subtitle-color: @black-l40;
-@result-subtitle-line-height: 1.6;
-@result-extra-margin: @margin-xl;
-@result-extra-children-margin: @margin-sm;
-@result-content-margin: @margin-xl;
-@result-content-padding: @padding-xl @spacing-gutter * 5;
-@result-content-background: @grey-l50;
-@result-success-color: @success-color;
-@result-warning-color: @warning-color;
-@result-error-color: @error-color;
-@result-info-color: @info-color;
+@title-color: @black-l10;
+@title-sub-color: @text-secondary-color;
+@title-bg-color: @component-background;
+
+@title-prefix-margin: @margin-md;
+@title-content-margin: @margin-md;
+@title-extra-margin: @margin-sm;
 
 /* typography -------------------------- */
 @typography-default-color: @text-color;
@@ -172,11 +160,18 @@
 @typography-sub-ul-list-style: disc;
 @typography-ol-list-style: decimal;
 
-/* rate -------------------------- */
-@rate-icon-size: 24px;
-@rate-icon-margin: 8px;
-@rate-stroke-color: #f7ba2a;
-@rate-background-color: #c6d1de;
+// Layout
+
+/* divider -------------------------- */
+
+/* space -------------------------- */
+@space-margin-sm: @margin-sm;
+@space-margin-md: @margin-lg;
+@space-margin-lg: @margin-xl;
+
+// Navigation
+
+// Data Entry
 
 /* checkbox -------------------------- */
 @checkbox-border-style: @border-width-sm solid @grey-d10;
@@ -204,10 +199,6 @@
 @checkbox-group-checkbox-margin-right: @margin-sm;
 @checkbox-label-padding: 0 @spacing-gutter;
 @checkbox-transition-duration: @transition-duration-base;
-
-/* icon -------------------------- */
-@icon-color: inherit;
-@icon-color-hover: fade(@black, 75%);
 
 /* input -------------------------- */
 @input-line-height: @line-height-base;
@@ -244,61 +235,50 @@
 @input-border-radius: @border-radius-md;
 @input-transition-duration: @transition-duration-base;
 
-/* back-top -------------------------- */
-@back-top-height: @height-lg;
-@back-top-width: @height-lg;
+/* rate -------------------------- */
+@rate-icon-size: 24px;
+@rate-icon-margin: 8px;
+@rate-stroke-color: #f7ba2a;
+@rate-background-color: #c6d1de;
 
-@back-top-font-size: @font-size-2xl;
+// Data Display
 
-@back-top-border-radius: 50%;
-
-@back-top-right-gutter: 32px;
-@back-top-right-xs: (@back-top-right-gutter / 2);
-@back-top-right-sm: @back-top-right-gutter;
-@back-top-right-md: @back-top-right-gutter * 1.5;
-@back-top-right-lg: @back-top-right-gutter * 2;
-@back-top-right-xl: @back-top-right-gutter * 3;
-
-@back-top-bottom: 50px;
-
-@back-top-background-color: @primary-color;
-
-/* title -------------------------- */
-@title-font-weight: @font-weight-xl;
-@title-font-size: @font-size-md;
-@title-1-font-size: @font-size-2xl;
-@title-2-font-size: @font-size-xl;
-@title-3-font-size: @font-size-lg;
-@title-4-font-size: @font-size-md;
-
-@title-height-xl: @height-xl;
-@title-height-lg: @height-xl;
-@title-height-md: @height-lg;
-@title-height-sm: @height-md;
-
-@title-line-height: 1;
-
-@title-color: @black-l10;
-@title-sub-color: @text-secondary-color;
-@title-bg-color: @component-background;
-
-@title-prefix-margin: @margin-md;
-@title-content-margin: @margin-md;
-@title-extra-margin: @margin-sm;
+/* badge -------------------------- */
 
 /* card -------------------------- */
-@card-border-color:@border-color; 
-@card-border-size:@border-width-sm; 
-@card-font-size-md:@font-size-sm; 
-@card-font-size-sm:@font-size-xs; 
-@card-title-font-size-md:@font-size-md; 
-@card-title-font-size-sm:@font-size-sm; 
-@card-title-font-weight-sm:@font-weight-md; 
-@card-hover-shadow:@shadow-bottom-sm; 
-@card-padding-lg: @padding-lg; 
+@card-border-color: @border-color;
+@card-border-size: @border-width-sm;
+@card-font-size-md: @font-size-sm;
+@card-font-size-sm: @font-size-xs;
+@card-title-font-size-md: @font-size-md;
+@card-title-font-size-sm: @font-size-sm;
+@card-title-font-weight-sm: @font-weight-md;
+@card-hover-shadow: @shadow-bottom-sm;
+@card-padding-lg: @padding-lg;
 @card-padding-sm: @padding-sm;
 @card-min-height: 128px;
 @card-bg-color: #fff;
+
+/* empty -------------------------- */
+@empty-margin-md: @margin-md;
+@empty-line-height-md: @line-height-base;
+@empty-font-size-md: @font-size-md;
+@empty-icon-font-size-md: 64px;
+
+/* image -------------------------- */
+
+/* statistic -------------------------- */
+@statistic-font-size-sm: @font-size-sm;
+@statistic-font-size-md: @font-size-sm;
+@statistic-font-size-lg: @font-size-lg;
+@statistic-font-size-xl: @font-size-xl;
+
+@statistic-line-height: @line-height-base;
+@statistic-color: @black;
+
+@statistic-title-margin: @space-margin-lg;
+@statistic-prefix-margin: @margin-xs;
+@statistic-suffix-margin: @margin-xs;
 
 /* timeline -------------------------- */
 @timeline-size: @font-size-base;
@@ -319,15 +299,56 @@
 @timeline-line-border: @border-width-md solid #e8e8e8;
 @timeline-reverse-pending-dot-line-top: 14px;
 
-/* statistic -------------------------- */
-@statistic-font-size-sm: @font-size-sm;
-@statistic-font-size-md: @font-size-sm;
-@statistic-font-size-lg: @font-size-lg;
-@statistic-font-size-xl: @font-size-xl;
+// Feedback
 
-@statistic-line-height: @line-height-base;
-@statistic-color: @black;
+/* result -------------------------- */
+@result-padding: @spacing-gutter * 6 @spacing-gutter * 4;
+@result-text-align: center;
+@result-icon-margin: @margin-xl;
+@result-icon-size: @font-size-lg * 4;
+@result-title-font-size: @font-size-xl;
+@result-title-color: @black-d20;
+@result-title-line-height: 1.8;
+@result-subtitle-font-size: @font-size-sm;
+@result-subtitle-color: @black-l40;
+@result-subtitle-line-height: 1.6;
+@result-extra-margin: @margin-xl;
+@result-extra-children-margin: @margin-sm;
+@result-content-margin: @margin-xl;
+@result-content-padding: @padding-xl @spacing-gutter * 5;
+@result-content-background: @grey-l50;
+@result-success-color: @success-color;
+@result-warning-color: @warning-color;
+@result-error-color: @error-color;
+@result-info-color: @info-color;
 
-@statistic-title-margin: @space-margin-lg;
-@statistic-prefix-margin: @margin-xs;
-@statistic-suffix-margin: @margin-xs;
+/* spin -------------------------- */
+@spin-tip-color: @primary-color;
+@spin-icon-color: @primary-color;
+
+@spin-font-size-sm: @font-size-sm;
+@spin-font-size-md: @font-size-md;
+@spin-font-size-lg: @font-size-lg;
+
+// Other
+
+/* back-top -------------------------- */
+@back-top-height: @height-lg;
+@back-top-width: @height-lg;
+
+@back-top-font-size: @font-size-2xl;
+
+@back-top-border-radius: 50%;
+
+@back-top-right-gutter: 32px;
+@back-top-right-xs: (@back-top-right-gutter / 2);
+@back-top-right-sm: @back-top-right-gutter;
+@back-top-right-md: @back-top-right-gutter * 1.5;
+@back-top-right-lg: @back-top-right-gutter * 2;
+@back-top-right-xl: @back-top-right-gutter * 3;
+
+@back-top-bottom: 50px;
+
+@back-top-background-color: @primary-color;
+
+// --- end ---

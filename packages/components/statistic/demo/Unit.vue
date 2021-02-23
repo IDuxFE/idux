@@ -41,13 +41,13 @@ export default defineComponent({
 <style lang="less" scoped>
 .statistic-demo-unit {
   .unit-up {
-    /deep/ .ix-statistic-content {
-      color: #cf1322;
+    :deep(.ix-statistic-content) {
+      color: red;
     }
   }
   .unit-down {
-    /deep/ .ix-statistic-content {
-      color: #3f8600;
+    :deep(.ix-statistic-content) {
+      color: green;
     }
   }
 }
