@@ -4,7 +4,7 @@ export function getLessTemplate(compName: string): string {
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
 
 .@{${compName}-prefix} {
-  color: #fff;
+  
 }
 `
 }
@@ -121,6 +121,17 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
+#### Slots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| - | - | - | - |
+
+#### Emits
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| - | - | - | - |
 `
 }
 

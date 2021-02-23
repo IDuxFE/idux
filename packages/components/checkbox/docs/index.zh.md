@@ -31,7 +31,7 @@ cover:
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-|`defalut` | 文本区域 | - | - |
+|`default` | 文本区域 | - | - |
 
 #### Emits
 
@@ -53,7 +53,7 @@ cover:
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-|`defalut` | `ix-checkbox`区域 | - | - |
+|`default` | `ix-checkbox`区域 | - | - |
 
 #### Group Emits
 

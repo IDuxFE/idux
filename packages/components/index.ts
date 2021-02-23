@@ -1,49 +1,74 @@
 import type { App, Directive } from 'vue'
+
+// General
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
-import { IxBadge } from './badge'
-import { IxDivider } from './divider'
-import { IxImage } from './image'
-import { IxSpin } from './spin'
-import { IxSpace } from './space'
-import { IxEmpty } from './empty'
-import { IxResult } from './result'
+import { IxTitle } from './title'
 import { IxTypography } from './typography'
-import { IxRate } from './rate'
+// Layout
+import { IxDivider } from './divider'
+import { IxSpace } from './space'
+// Navigation
+// Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
-import { IxBackTop } from './back-top'
-import { IxTitle } from './title'
+import { IxRate } from './rate'
+// Data Display
+import { IxBadge } from './badge'
 import { IxCard } from './card'
-import { IxTimeline, IxTimelineItem } from './timeline'
+import { IxEmpty } from './empty'
+import { IxImage } from './image'
 import { IxStatistic } from './statistic'
+import { IxTimeline, IxTimelineItem } from './timeline'
+// Feedback
+import { IxResult } from './result'
+import { IxSpin } from './spin'
+// Other
+import { IxBackTop } from './back-top'
+// --- import end ---
 
 const components = [
+  // General
   IxButton,
   IxButtonGroup,
   IxIcon,
-  IxBadge,
+  IxTitle,
+  // Layout
   IxDivider,
-  IxImage,
-  IxSpin,
   IxSpace,
-  IxEmpty,
-  IxResult,
-  IxRate,
+  // Navigation
+  // Data Entry
   IxCheckbox,
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
-  IxBackTop,
-  IxTitle,
+  IxRate,
+  // Data Display
+  IxBadge,
   IxCard,
+  IxEmpty,
+  IxImage,
+  IxStatistic,
   IxTimeline,
   IxTimelineItem,
-  IxStatistic,
+  // Feedback
+  IxResult,
+  IxSpin,
+  // Other
+  IxBackTop,
+  // --- components end ---
 ]
 
 const directives: Record<string, Directive> = {
+  // General
   typography: IxTypography,
+  // Layout
+  // Navigation
+  // Data Entry
+  // Data Display
+  // Feedback
+  // Other
+  // --- directives end ---
 }
 
 const install = (app: App): void => {
@@ -65,21 +90,35 @@ export default {
 
 export { useGlobalConfig } from './core/config'
 export { useLocale, addLocale, getLocale } from './i18n'
-export { IxButton, IxButtonGroup }
-export { IxIcon }
-export { IxBadge }
-export { IxDivider }
-export { IxImage }
-export { IxSpin }
-export { IxSpace }
-export { IxEmpty }
-export { IxResult }
-export { IxTypography }
-export { IxRate }
-export { IxCheckbox, IxCheckboxGroup }
-export { IxInput, IxTextarea }
-export { IxBackTop }
-export { IxTitle }
-export { IxCard }
-export { IxTimeline, IxTimelineItem }
-export { IxStatistic }
+export {
+  // General
+  IxButton,
+  IxButtonGroup,
+  IxIcon,
+  IxTitle,
+  IxTypography,
+  // Layout
+  IxDivider,
+  IxSpace,
+  // Navigation
+  // Data Entry
+  IxCheckbox,
+  IxCheckboxGroup,
+  IxInput,
+  IxTextarea,
+  IxRate,
+  // Data Display
+  IxBadge,
+  IxCard,
+  IxEmpty,
+  IxImage,
+  IxStatistic,
+  IxTimeline,
+  IxTimelineItem,
+  // Feedback
+  IxResult,
+  IxSpin,
+  // Other
+  IxBackTop,
+  // --- export end ---
+}
