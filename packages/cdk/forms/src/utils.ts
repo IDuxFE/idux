@@ -2,6 +2,10 @@ import type { InjectionKey } from 'vue'
 import type { AbstractControl } from './controls/abstractControl'
 
 import { inject, provide } from 'vue'
+import { object } from 'vue-types'
+import { PropTypes, withUndefined } from '@idux/cdk/utils'
+
+export const ControlPropType = withUndefined(PropTypes.oneOfType([PropTypes.string, object<AbstractControl>()]))
 
 const token: InjectionKey<AbstractControl> = Symbol()
 
