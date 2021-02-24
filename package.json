@@ -7,6 +7,7 @@
     "start": "gulp start:dev",
     "icons": "gulp icons:start",
     "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
+    "build:site": "vite build",
     "postinstall": "lerna bootstrap",
     "test": "jest",
     "lint": "npm run ls-lint && npm run eslint && npm run stylelint && npm run markdownlint",

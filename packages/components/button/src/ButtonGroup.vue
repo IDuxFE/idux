@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent, provide } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
-import { buttonGroupInjectionKey } from './button'
+import { buttonToken } from './utils'
 
 import type { ButtonGroupProps } from './types'
 
@@ -19,7 +19,7 @@ export default defineComponent({
     shape: PropTypes.oneOf(['circle', 'round'] as const),
   },
   setup(props: ButtonGroupProps) {
-    provide(buttonGroupInjectionKey, props)
+    provide(buttonToken, props)
   },
 })
 </script>
