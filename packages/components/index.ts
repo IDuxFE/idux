@@ -9,6 +9,7 @@ import { IxTypography } from './typography'
 import { IxDivider } from './divider'
 import { IxSpace } from './space'
 // Navigation
+import { IxAffix } from './affix'
 // Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
@@ -37,6 +38,7 @@ const components = [
   IxDivider,
   IxSpace,
   // Navigation
+  IxAffix,
   // Data Entry
   IxCheckbox,
   IxCheckboxGroup,
@@ -101,6 +103,7 @@ export {
   IxDivider,
   IxSpace,
   // Navigation
+  IxAffix,
   // Data Entry
   IxCheckbox,
   IxCheckboxGroup,

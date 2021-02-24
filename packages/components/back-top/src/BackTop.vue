@@ -15,10 +15,9 @@ import type { BackTopProps } from './types'
 import { defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { IxIcon } from '@idux/components/icon'
-import { PropTypes, withUndefined, isString, isHTMLElement, on, off, rAF } from '@idux/cdk/utils'
-import { easeInOutQuad } from '@idux/components/core/utils'
+import { PropTypes, withUndefined, on, off, rAF } from '@idux/cdk/utils'
+import { easeInOutQuad, getTarget } from '@idux/components/core/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { Logger } from '@idux/components/core/logger'
 
 export default defineComponent({
   name: 'IxBackTop',
@@ -63,24 +62,6 @@ export default defineComponent({
     }
   },
 })
-
-const getTarget = (target: HTMLElement | string | undefined) => {
-  if (isHTMLElement(target)) {
-    return target
-  }
-
-  if (isString(target)) {
-    const container = document.querySelector<HTMLElement>(target)
-
-    if (container) {
-      return container
-    } else {
-      Logger.warn(`target does not exist: ${target}, default value are already used: window.`)
-    }
-  }
-
-  return window
-}
 
 const getCurrentScrollTop = (currTarget: Window | HTMLElement) => {
   if (currTarget === window) {
