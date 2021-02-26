@@ -1,0 +1,149 @@
+pullRequest:
+  preview:
+    replay: |
+      This [preview](https://preview-{number}-idux.surge.sh/) will be available after the AzureCI is passed.
+issue:
+  invalid:
+    mark: idux-issue-helper
+    labels: Invalid
+    replay: |
+      Hello @{user}, your issue has been closed because it does not conform to our issue requirements.
+      Please use the issue template to create an issue, thank you!
+
+
+      你好 @{user}，为了能够进行高效沟通，我们对 issue 有一定的格式要求，你的 issue 因为不符合要求而被自动关闭。
+      你可以通过 issue 模板来创建 issue 以方便我们定位错误。谢谢配合！
+  translate:
+    mark: idux-issue-helper:zh
+    replay: |
+      Translation of this issue:
+      ---
+      ## {title}
+
+      {body}
+  labeled:
+    - labels:
+        - Need Reproduce
+      extraLabel: Need More Info
+      replay: |
+        Hello @{user}. Please provide a online reproduction by forking this link https://stackblitz.com/edit/idux-start or a minimal GitHub repository.
+        Issues labeled by `Need Reproduce` will be closed if no activities in 7 days.
+
+        你好 @{user}, 我们需要你提供一个在线的重现实例以便于我们帮你排查问题。你可以通过点击 [此处](https://stackblitz.com/edit/idux-start) 创建一个 stackblitz 或者提供一个最小化的 GitHub 仓库
+        被标记为 `Need Reproduce` 的 issue 7 天内未跟进将会被自动关闭。
+        ![](https://gw.alipayobjects.com/zos/antfincdn/y9kwg7DVCd/reproduce.gif)
+    - labels:
+        - Help Wanted
+      replay: |
+        Hello @{user}. We totally like your proposal/feedback, welcome to [send us a Pull Request](https://help.github.com/en/articles/creating-a-pull-request) for it. Please fill the [Pull Request Template](https://github.com/IduxFE/idux/blob/master/.github/pull_request_template.md) here, provide documentation/test cases if needed and make sure CI passed, we will review it soon. Appreciate it advance and we are looking forward to your contribution!
+
+        你好 @{user}, 我们完全同意你的提议/反馈，欢迎直接在此仓库 [创建一个 Pull Request](https://help.github.com/en/articles/creating-a-pull-request) 来解决这个问题。请务必填写 Pull Request 内的[预设模板](https://github.com/IduxFE/idux/blob/master/.github/pull_request_template.md)，提供改动所需相应的测试用例、文档等，并确保 CI 通过，我们会尽快进行 Review，提前感谢和期待您的贡献！
+        ![](https://user-images.githubusercontent.com/507615/62342668-4735dc00-b51a-11e9-92a7-d46fbb1cc0c7.gif)
+    - labels:
+        - Upgrade Dependencies
+      replay: |
+        Hello @{user}.
+        - If you use npm, please try `rm -rf node_modules && npm install` to upgrade all your dependencies.
+        - If you use yarn, you may need `yarn upgrade`.
+
+        <img src="https://cloud.githubusercontent.com/assets/465125/26667345/4bcc8f10-46d7-11e7-8c72-32a0c68ea7ca.jpg" width="500" height="300">
+    - labels:
+        - Usage
+        - Question
+      replay: |
+        Hello @{user}, we use GitHub issues to trace bugs or discuss plans of Idux. So, please don't ask usage questions here.
+        You can try to ask questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/idux) or [Segment Fault](https://segmentfault.com/t/idux), then apply tag `idux` to your question.
+
+        你好 @{user}，Idux Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。
+        你可以试着在 [Stack Overflow](http://stackoverflow.com/questions/tagged/idux) 或者 [Segment Fault](https://segmentfault.com/t/idux) 中提问（记得添加 `idux` 标签）。
+  owner:
+    cdk:
+      def: danranVm
+      Breakpoint: danranVm
+      Clipboard: danranVm
+      DragDrop: danranVm
+      Forms: danranVm
+      Overlay: LaamGinghong
+      Platform: danranVm
+      Portal: LaamGinghong
+      Resize: danranVm
+      Scrolling: danranVm
+      Subject: LaamGinghong
+      Utils: danranVm
+
+    comp:
+      def: danranVm
+      Button: danranVm
+      Icon: danranVm
+      Title: danranVm
+      Typography: LaamGinghong
+
+      Divider: LaamGinghong
+      Grid: zymoplastic
+      Layout: danranVm
+      Space: LaamGinghong
+
+      Affix: jackson-yyy
+      Breadcrumb: mrliusu
+      Dropdown: danranVm
+      Menu: danranVm
+      PageHeader: danranVm
+      Pagination: zymoplastic
+      Steps: ShannyShanny
+
+      AutoComplete: danranVm
+      Cascader: danranVm
+      Checkbox: liuzaijiang
+      DatePicker: danranVm
+      Form: danranVm
+      Input: danranVm
+      InputNumber: danranVm
+      Mentions: danranVm
+      Radio: lwh2015
+      Rate: CocaColf
+      Select: danranVm
+      Slider: imguolao
+      Switch: jiayinkong
+      TimePicker: danranVm
+      Transfer: danranVm
+      TreeSelect: danranVm
+      Upload: danranVm
+
+      Avatar: StevieTaylor
+      Badge: KnorienChang
+      Calendar: danranVm
+      Card: CruellyJoHn
+      Carousel: danranVm
+      Collapse: Usualminds
+      Comment: danranVm
+      Descriptions: danranVm
+      Empty: qikong333
+      Image: lwh2015
+      List: rhinonan
+      Popover: LaamGinghong
+      Statistic: clfeng
+      Table: danranVm
+      Tabs: LaamGinghong
+      Tag: Gilbert5210
+      Timeline: sjia0307
+      Tooltip: LaamGinghong
+      Tree: danranVm
+
+      Alert: FAKER-A
+      Drawer: danranVm
+      Message: manchixue
+      Modal: danranVm
+      Notification: danranVm
+      Popconfirm: danranVm
+      Progress: hangboss1761
+      Result: LaamGinghong
+      Skeleton: Pupils-web
+      Spin: liuzaijiang
+
+      Anchor: danranVm
+      BackTop: danranVm
+      Core: danranVm
+
+    pro:
+      def: danranVm
+    def: danranVm
