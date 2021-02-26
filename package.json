@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "gulp start:dev",
-    "build": "vite build",
+    "build": "gulp build",
     "icons": "gulp icons:start",
     "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
     "postinstall": "lerna bootstrap",
