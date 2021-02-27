@@ -28,6 +28,10 @@ export interface SpaceConfig {
   size: SpaceSize
 }
 
+export interface RowConfig {
+  wrap: boolean
+}
+
 // Navigation
 
 // Data Entry
@@ -134,6 +138,7 @@ export interface GlobalConfig {
   // Layout
   divider: DividerConfig
   space: SpaceConfig
+  row: RowConfig
   // Navigation
   // Data Entry
   input: InputConfig

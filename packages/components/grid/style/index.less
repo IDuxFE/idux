@@ -1,0 +1,81 @@
+@import '../../style/default.less';
+
+@row-prefix: ~'@{idux-prefix}-row';
+@col-prefix: ~'@{idux-prefix}-col';
+
+@import './mixin.less';
+
+
+.@{row-prefix} {
+  display: flex;
+  flex-flow: row wrap;
+
+  &::before,
+  &::after {
+    display: flex;
+  }
+
+  &-no-wrap {
+    flex-wrap: nowrap;
+  }
+
+  &-start {
+    justify-content: flex-start;
+  }
+  &-center {
+    justify-content: center;
+  }
+  &-end {
+    justify-content: flex-end;
+  }
+  &-space-between {
+    justify-content: space-between;
+  }
+  &-space-around {
+    justify-content: space-around;
+  }
+
+  &-top {
+    align-items: flex-start;
+  }
+  &-middle {
+    align-items: center;
+  }
+  &-bottom {
+    align-items: flex-end;
+  }
+}
+
+
+.@{col-prefix} {
+  position: relative;
+  max-width: 100%;
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
+
+  &-no-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.make-grid();
+
+.make-grid(-xs);
+
+@media (min-width: @screen-sm-min) {
+  .make-grid(-sm);
+}
+
+@media (min-width: @screen-md-min) {
+  .make-grid(-md);
+}
+
+@media (min-width: @screen-lg-min) {
+  .make-grid(-lg);
+}
+
+@media (min-width: @screen-xl-min) {
+  .make-grid(-xl);
+}
+
+

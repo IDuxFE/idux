@@ -1,0 +1,53 @@
+.loop-grid-columns(@index, @class) when (@index > 0) {
+  .@{col-prefix} {
+    &@{class}-span-@{index} {
+      display: block;
+      flex: 0 0 percentage((@index / @grid-columns));
+      max-width: percentage((@index / @grid-columns));
+    }
+    &@{class}-push-@{index} {
+      left: percentage((@index / @grid-columns));
+    }
+    &@{class}-pull-@{index} {
+      right: percentage((@index / @grid-columns));
+    }
+    &@{class}-offset-@{index} {
+      margin-left: percentage((@index / @grid-columns));
+    }
+    &@{class}-order-@{index} {
+      order: @index;
+    }
+  }
+
+  .loop-grid-columns((@index - 1), @class);
+}
+
+.loop-grid-columns(@index, @class) when (@index = 0) {
+  .@{col-prefix} {
+    &@{class}-span-@{index} {
+      display: none;
+    }
+    &-push-@{index} {
+      left: auto;
+    }
+    &-pull-@{index} {
+      right: auto;
+    }
+    &@{class}-push-@{index} {
+      left: auto;
+    }
+    &@{class}-pull-@{index} {
+      right: auto;
+    }
+    &@{class}-offset-@{index} {
+      margin-left: 0;
+    }
+    &@{class}-order-@{index} {
+      order: 0;
+    }
+  }
+}
+
+.make-grid(@class: ~'') {
+  .loop-grid-columns(@grid-columns, @class);
+}
