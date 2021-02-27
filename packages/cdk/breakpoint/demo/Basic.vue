@@ -11,9 +11,9 @@ import { Breakpoints, isMatchedBreakpoint, observeBreakpoint } from '@idux/cdk/b
 
 export default defineComponent({
   setup() {
-    const { Small, Large } = Breakpoints
-    const isSmallScreen = isMatchedBreakpoint(Small)
-    const layoutChanges = observeBreakpoint([Small, Large])
+    const { sm, lg } = Breakpoints
+    const isSmallScreen = isMatchedBreakpoint(sm)
+    const layoutChanges = observeBreakpoint([sm, lg])
     watchEffect(() => {
       console.log('breakpoints', layoutChanges.value.breakpoints)
       console.log('matches', layoutChanges.value.matches)

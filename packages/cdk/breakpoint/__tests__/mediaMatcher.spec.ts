@@ -3,17 +3,17 @@ import { matchMedia } from '../src/mediaMatcher'
 
 describe('matchMedia.ts', () => {
   test('matchMedia work', () => {
-    expect(matchMedia(Breakpoints.Small).matches).toBeFalsy()
+    expect(matchMedia(Breakpoints.sm).matches).toBeFalsy()
   })
 
   test('createEmptyStyleRule work', () => {
     const createElementSyn = jest.spyOn(document, 'createElement').mockReturnValue(document.createElement('style'))
 
-    matchMedia(Breakpoints.Small)
+    matchMedia(Breakpoints.sm)
     expect(createElementSyn).toBeCalledTimes(1)
 
-    matchMedia(Breakpoints.Small)
-    matchMedia(Breakpoints.Large)
+    matchMedia(Breakpoints.sm)
+    matchMedia(Breakpoints.lg)
     expect(createElementSyn).toBeCalledTimes(1)
   })
 })

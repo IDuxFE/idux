@@ -7,15 +7,15 @@ describe('observe.ts', () => {
   })
 
   test('isMatchedBreakpoint work', () => {
-    expect(isMatchedBreakpoint(Breakpoints.Large)).toBeFalsy()
+    expect(isMatchedBreakpoint(Breakpoints.lg)).toBeFalsy()
     expect(isMatchedBreakpoint('all')).toBeTruthy()
-    expect(isMatchedBreakpoint([Breakpoints.Large, 'all'])).toBeTruthy()
+    expect(isMatchedBreakpoint([Breakpoints.lg, 'all'])).toBeTruthy()
   })
 
   test('observeBreakpoint work', () => {
-    const largeBreakpoint = observeBreakpoint(Breakpoints.Large)
+    const largeBreakpoint = observeBreakpoint(Breakpoints.lg)
     expect(largeBreakpoint.value.matches).toBeFalsy()
-    expect(largeBreakpoint.value.breakpoints[Breakpoints.Large]).toBeFalsy()
+    expect(largeBreakpoint.value.breakpoints[Breakpoints.lg]).toBeFalsy()
 
     const allBreakpoint = observeBreakpoint(['all'])
     expect(allBreakpoint.value.matches).toBeTruthy()
