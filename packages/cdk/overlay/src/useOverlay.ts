@@ -26,19 +26,12 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
   let showTimer: Nullable<number> = null
   let hideTimer: Nullable<number> = null
 
+  let triggerFocus = false
+
   const state = reactive(options)
   const popperOptions = usePopperOptions(options, { arrow: arrowRef })
 
-  const overlayVisibility = (visible: boolean): HTMLElement | null => {
-    const overlayElement = overlayRef.value
-    if (overlayElement) {
-      overlayElement.style.display = visible ? 'block' : 'none'
-    }
-    return overlayElement
-  }
-
-  const initialize = (): void => {
-    const overlayElement = overlayVisibility(visibility.value)
+  const initialize = () => {
     if (!visibility.value) {
       return
     }
@@ -47,6 +40,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
       return
     }
     const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
+    const overlayElement = overlayRef.value
     popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
     popperInstance.update()
     on(window, 'scroll', globalScroll)
@@ -105,7 +99,6 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
   const visibility = computed<boolean>(() => !state.disabled && !!state.visible)
 
   const onVisibilityChange = (visible: boolean) => {
-    overlayVisibility(visible)
     if (!visible) {
       // improve performance
       destroy()
@@ -119,7 +112,11 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     e.stopPropagation()
     switch (e.type) {
       case 'click': {
-        visibility.value ? hide() : show()
+        if (triggerFocus) {
+          triggerFocus = false
+        } else {
+          visibility.value && state.trigger === 'click' ? hide() : show()
+        }
         break
       }
       case 'mouseenter': {
@@ -131,10 +128,12 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
         break
       }
       case 'focus': {
+        triggerFocus = true
         show()
         break
       }
       case 'blur': {
+        triggerFocus = false
         hide()
         break
       }
@@ -145,8 +144,8 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     return computed<OverlayTriggerEvents>(() => {
       const triggerToEvents: Record<OverlayTrigger, Array<keyof OverlayTriggerEvents>> = {
         click: ['onClick'],
-        focus: ['onFocus', 'onBlur'],
-        hover: ['onMouseEnter', 'onMouseLeave'],
+        focus: ['onClick', 'onFocus', 'onBlur'],
+        hover: ['onClick', 'onMouseEnter', 'onMouseLeave'],
       }
       return triggerToEvents[state.trigger].reduce((obj, key) => {
         obj[key] = overlayEventHandler

@@ -10,9 +10,16 @@
   >
   <ix-button @click="handleClick">Update</ix-button>
   <teleport to="body">
-    <div ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter()" @mouseleave="overlayEvents.onMouseLeave()">
-      tooltip
-      <div ref="arrowRef"></div>
+    <div v-show="visibility" ref="overlayRef">
+      <div
+        v-if="visibility"
+        v-click-outside="hide"
+        @mouseenter="overlayEvents.onMouseEnter"
+        @mouseleave="overlayEvents.onMouseLeave"
+      >
+        tooltip
+        <div ref="arrowRef"></div>
+      </div>
     </div>
   </teleport>
 </template>
@@ -20,11 +27,23 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
+import { clickOutside } from '@idux/cdk/click-outside'
 
 export default defineComponent({
   name: 'Basic',
+  directives: { clickOutside },
   setup() {
-    const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update, arrowRef } = useOverlay({
+    const {
+      initialize,
+      overlayRef,
+      triggerRef,
+      triggerEvents,
+      overlayEvents,
+      update,
+      arrowRef,
+      visibility,
+      hide,
+    } = useOverlay({
       visible: false,
       trigger: 'click',
       placement: 'bottom',
@@ -40,7 +59,7 @@ export default defineComponent({
       update({ trigger: 'focus' })
     }
 
-    return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, arrowRef }
+    return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, arrowRef, visibility, hide }
   },
 })
 </script>

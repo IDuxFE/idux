@@ -84,3 +84,7 @@ export function throttleRAF<T extends (...args: any[]) => void>(
 
   return requestCb
 }
+
+export const stopPropagation = (e: MouseEvent): void => e.stopPropagation()
+
+export const noop = (): void => {}

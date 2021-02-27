@@ -18,7 +18,7 @@ cover:
 
 ### `useOverlay`
 
-> 创建一个浮层实例
+> 创建一个浮层实例，因为 `overlayRef` 必传，因此使用 `v-if` 时，请在外面包裹一层。
 
 ```typescript
 import type { Options, Placement } from '@popperjs/core'
