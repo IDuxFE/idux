@@ -45,7 +45,7 @@ function initRectMap() {
       bottom: 50 + containerSize.height,
       right: 50 + containerSize.width,
     },
-    'ix-affix-wrapper': {
+    'ix-affix': {
       top: 100,
       left: 100,
       bottom: 100 + affixSize.height,
@@ -56,7 +56,7 @@ function initRectMap() {
 
 async function scrollTarget(x: number, y: number, target: Window | Element = window, timeout = 200): Promise<unknown> {
   initRectMap()
-  const cls = ['ix-affix-wrapper']
+  const cls = ['ix-affix']
   target === window && cls.push('container-test')
   cls.forEach(item => {
     rectMap[item].top -= y
