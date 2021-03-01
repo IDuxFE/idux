@@ -61,9 +61,9 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     }
   }
 
-  const show = (immediate?: boolean): void => {
+  const show = (immediate = false): void => {
     _clearTimer()
-    if (immediate ?? state.showDelay === 0) {
+    if (immediate || state.showDelay === 0) {
       _toggle(true)
     } else {
       showTimer = setTimeout(() => {
@@ -72,9 +72,9 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     }
   }
 
-  const hide = (immediate?: boolean): void => {
+  const hide = (immediate = false): void => {
     _clearTimer()
-    if (immediate ?? state.hideDelay === 0) {
+    if (immediate || state.hideDelay === 0) {
       _toggle(false)
     } else {
       hideTimer = setTimeout(() => {
