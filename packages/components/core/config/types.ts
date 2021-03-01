@@ -103,7 +103,6 @@ export interface TooltipConfig {
   autoAdjust: boolean
 }
 
-
 // Feedback
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
