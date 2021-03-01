@@ -12,7 +12,7 @@ import {
   watch,
   onUpdated,
 } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { isUndefined, PropTypes } from '@idux/cdk/utils'
 import { IxPortal } from '@idux/cdk/portal'
 import { useOverlay } from '@idux/cdk/overlay'
 import { clickOutside } from '@idux/cdk/click-outside'
@@ -72,7 +72,7 @@ export default defineComponent({
     onMounted(initialize)
 
     onUpdated(() => {
-      if (props.visible !== visibility.value) {
+      if (!isUndefined(props.visible) && props.visible !== visibility.value) {
         props.visible ? show() : hide()
       }
     })
