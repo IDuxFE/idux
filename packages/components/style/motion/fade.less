@@ -1,9 +1,9 @@
-@import "../variable/animation.less";
+@import '../variable/animation.less';
 
 .fade-motion(@className, @duration: @transition-duration-base) {
   .ix-@{className}-enter-active,
   .ix-@{className}-leave-active {
-    transition-property: all;
+    transition-property: opacity;
     transition-duration: @duration;
     transition-timing-function: linear;
   }
@@ -20,3 +20,4 @@
 }
 
 .fade-motion(fade);
+.fade-motion(fade-fast, @transition-duration-fast);

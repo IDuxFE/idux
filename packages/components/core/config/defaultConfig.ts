@@ -14,6 +14,7 @@ import type {
   SpinConfig,
   BackTopConfig,
   GlobalConfig,
+  TooltipConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -79,6 +80,15 @@ const statistic = shallowReactive<StatisticConfig>({
   formatter: numFormatter,
 })
 
+const tooltip = shallowReactive<TooltipConfig>({
+  placement: 'top',
+  trigger: 'hover',
+  showDelay: 100,
+  hideDelay: 500,
+  destroyOnHide: false,
+  autoAdjust: true,
+})
+
 // --------------------- Feedback ---------------------
 const result = shallowReactive<ResultConfig>({ status: 'info' })
 
@@ -114,6 +124,7 @@ export const defaultConfig: GlobalConfig = {
   card,
   image,
   statistic,
+  tooltip,
   // Feedback
   result,
   spin,

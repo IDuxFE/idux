@@ -2,8 +2,8 @@
   <ix-button
     ref="triggerRef"
     @click="triggerEvents.onClick"
-    @mouseenter="triggerEvents.onMouseEnter"
-    @mouseleave="triggerEvents.onMouseLeave"
+    @mouseenter="triggerEvents.onMouseenter"
+    @mouseleave="triggerEvents.onMouseleave"
     @focus="triggerEvents.onFocus"
     @blur="triggerEvents.onBlur"
     >Click</ix-button
@@ -14,8 +14,8 @@
       <div
         v-if="visibility"
         v-click-outside="hide"
-        @mouseenter="overlayEvents.onMouseEnter"
-        @mouseleave="overlayEvents.onMouseLeave"
+        @mouseenter="overlayEvents.onMouseenter"
+        @mouseleave="overlayEvents.onMouseleave"
       >
         tooltip
         <div ref="arrowRef"></div>

@@ -61,7 +61,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     }
   }
 
-  const show = (immediate?: boolean): void => {
+  const show = (immediate = false): void => {
     _clearTimer()
     if (immediate || state.showDelay === 0) {
       _toggle(true)
@@ -72,7 +72,7 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     }
   }
 
-  const hide = (immediate?: boolean): void => {
+  const hide = (immediate = false): void => {
     _clearTimer()
     if (immediate || state.hideDelay === 0) {
       _toggle(false)
@@ -144,8 +144,8 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     return computed<OverlayTriggerEvents>(() => {
       const triggerToEvents: Record<OverlayTrigger, Array<keyof OverlayTriggerEvents>> = {
         click: ['onClick'],
-        focus: ['onClick', 'onFocus', 'onBlur'],
-        hover: ['onClick', 'onMouseEnter', 'onMouseLeave'],
+        focus: ['onFocus', 'onBlur'],
+        hover: ['onMouseenter', 'onMouseleave'],
       }
       return triggerToEvents[state.trigger].reduce((obj, key) => {
         obj[key] = overlayEventHandler
@@ -173,8 +173,9 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
   }
 
   const overlayEvents: OverlayPopperEvents = {
-    onMouseEnter: onOverlayMouseEnter,
-    onMouseLeave: onOverlayMouseLeave,
+    onMouseenter: onOverlayMouseEnter,
+    onMouseleave: onOverlayMouseLeave,
+    onClick: event => event.stopPropagation(),
   }
 
   const globalScroll = () => {
