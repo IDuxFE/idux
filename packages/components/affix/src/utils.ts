@@ -1,19 +1,27 @@
+import type { AffixDirection, AffixOffset } from './types'
+
 import { isHTMLElement, isUndefined, isObject, toNumber } from '@idux/cdk/utils'
 import { on, off } from '@idux/cdk/utils'
 
-import { Direction, AffixStyle, OffsetOpt } from './types'
+export type AffixStyle = {
+  position?: 'fixed' | 'absolute'
+  top?: string
+  bottom?: string
+  left?: string
+  right?: string
+}
 
-const eventList = ['scroll', 'resize']
-const direction: Direction[] = ['top', 'bottom', 'left', 'right']
+type AffixDirectionNumber = Record<AffixDirection, number>
 
-type DirectionNumber = { [key in Direction]: number }
+const events = ['scroll', 'resize'] as const
+const directions = ['top', 'bottom', 'left', 'right'] as const
 
-export function formatOffset(offset: number | string | OffsetOpt): Partial<DirectionNumber> {
+export function normalizeOffset(offset: AffixOffset): Partial<AffixDirectionNumber> {
   if (!isObject(offset)) {
     return { top: toNumber(offset) }
   }
-  const _offset: Partial<DirectionNumber> = {}
-  ;(Object.keys(offset) as Direction[]).forEach(dire => {
+  const _offset: Partial<AffixDirectionNumber> = {}
+  ;(Object.keys(offset) as AffixDirection[]).forEach(dire => {
     _offset[dire] = toNumber(offset[dire])
   })
   return _offset
@@ -21,12 +29,8 @@ export function formatOffset(offset: number | string | OffsetOpt): Partial<Direc
 
 /**
  * get target position based on container
- *
- * @export
- * @param {HTMLElement} target
- * @returns {ClientRect}
  */
-export function getTargetRect(target: HTMLElement, container: HTMLElement | Window): { [key in Direction]: number } {
+export function getTargetRect(target: HTMLElement, container: HTMLElement | Window): AffixDirectionNumber {
   const targetRect = target.getBoundingClientRect()
   const containerRect = isHTMLElement(container)
     ? container.getBoundingClientRect()
@@ -39,7 +43,7 @@ export function getTargetRect(target: HTMLElement, container: HTMLElement | Wind
   }
 }
 
-export function getTargetSize(target: HTMLElement | Window): { [key in 'width' | 'height']: number } {
+export function getTargetSize(target: HTMLElement | Window): Record<'width' | 'height', number> {
   if (target === window) {
     return {
       width: target.innerWidth,
@@ -53,50 +57,51 @@ export function getTargetSize(target: HTMLElement | Window): { [key in 'width' |
 }
 
 export function observeTarget(target: HTMLElement | Window, cb: (...args: unknown[]) => unknown): void {
-  eventList.forEach(event => {
+  events.forEach(event => {
     on(target, event, cb)
   })
 }
 
 export function removeObserveTarget(target: HTMLElement | Window, cb: (...args: unknown[]) => unknown): void {
-  eventList.forEach(event => {
+  events.forEach(event => {
     off(target, event, cb)
   })
 }
 
 export function isDireSticky(
-  dire: Direction,
-  affixRect: DirectionNumber,
-  offsetOpt: Partial<DirectionNumber>,
+  dire: AffixDirection,
+  affixRect: AffixDirectionNumber,
+  offsetOption: Partial<AffixDirectionNumber>,
 ): boolean {
-  return !isUndefined(offsetOpt[dire]) && affixRect[dire] <= offsetOpt[dire]!
+  return !isUndefined(offsetOption[dire]) && affixRect[dire] <= offsetOption[dire]!
 }
 
-export function isSticky(affixRect: DirectionNumber, offsetOpt: Partial<DirectionNumber>): boolean {
-  return direction.some(dire => isDireSticky(dire, affixRect, offsetOpt))
+export function isSticky(affixRect: AffixDirectionNumber, offsetOption: Partial<AffixDirectionNumber>): boolean {
+  return directions.some(dire => isDireSticky(dire, affixRect, offsetOption))
 }
 
 export function calcPosition(
-  affixRect: DirectionNumber,
-  offsetOpt: Partial<DirectionNumber>,
+  affixRect: AffixDirectionNumber,
+  offsetOption: Partial<AffixDirectionNumber>,
   target: Window | HTMLElement,
 ): AffixStyle {
-  let style: AffixStyle = {}
+  const style: AffixStyle = {}
 
-  if (isSticky(affixRect, offsetOpt)) {
+  if (isSticky(affixRect, offsetOption)) {
     style.position = target === window ? 'fixed' : 'absolute'
-    direction.forEach(dire => {
-      if (isDireSticky(dire, affixRect, offsetOpt)) {
-        style[dire] = `${offsetOpt[dire]! - (target === window ? 0 : affixRect[dire])}px`
+
+    const _directions: AffixDirection[] = [
+      isDireSticky('bottom', affixRect, offsetOption) ? 'bottom' : 'top',
+      isDireSticky('right', affixRect, offsetOption) ? 'right' : 'left',
+    ]
+
+    _directions.forEach(dire => {
+      if (isDireSticky(dire, affixRect, offsetOption)) {
+        style[dire] = `${offsetOption[dire]! - (target === window ? 0 : affixRect[dire])}px`
       } else {
         style[dire] = `${target === window ? affixRect[dire] : 0}px`
       }
     })
-
-    delete style[isDireSticky('bottom', affixRect, offsetOpt) ? 'top' : 'bottom']
-    delete style[isDireSticky('right', affixRect, offsetOpt) ? 'left' : 'right']
-  } else {
-    style = {}
   }
   return style
 }

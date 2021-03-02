@@ -1,32 +1,17 @@
 import type { DefineComponent } from 'vue'
 
-export type Direction = 'top' | 'bottom' | 'left' | 'right'
+export type AffixDirection = 'top' | 'bottom' | 'left' | 'right'
 
-export type OffsetOpt = {
-  [key in Direction]?: number | string
-}
+export type AffixOffset = number | string | Partial<Record<AffixDirection, number | string>>
 
-export type AffixStyle = {
-  position?: 'fixed' | 'absolute'
-  top?: string
-  bottom?: string
-  left?: string
-  right?: string
-}
-
-/**
- * props类型
- *
- * @interface AffixOriginalProps
- */
 interface AffixOriginalProps {
   /**
    * 偏移量
-   * type为number时，默认是top
-   * top和bottom、left和right同时存在时，top和left优先级较高
+   * * type 为 number 时，默认是 top
+   * * top 和 bottom、left 和 right 同时存在时，top 和 left 优先级较高
    */
-  offset: number | string | OffsetOpt
-  // 用于定位的容器，会监听容器的滚动事件
+  offset: AffixOffset
+  /** 用于定位的容器，会监听容器的滚动事件 */
   target?: string | HTMLElement | Window
 }
 

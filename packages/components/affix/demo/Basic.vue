@@ -1,6 +1,10 @@
 <template>
-  <ix-affix :offset="offset">
-    <ix-button mode="primary">basic</ix-button>
+  <ix-affix :offset="numberOffset" @change="onChange">
+    <ix-button @click="numberOffset += 20">Number Offset</ix-button>
+  </ix-affix>
+  <br />
+  <ix-affix :offset="objectOffset">
+    <ix-button>Object Offset</ix-button>
   </ix-affix>
 </template>
 
@@ -8,15 +12,14 @@
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {
-    const offset = ref(0)
-    return {
-      offset,
+    const numberOffset = ref(0)
+    const onChange = isAffix => {
+      console.log(`Basic Offset status change : ${isAffix}`)
     }
+
+    const objectOffset = ref({ top: 100, left: 100 })
+
+    return { numberOffset, onChange, objectOffset }
   },
 })
 </script>
-<style lang="less" scoped>
-:deep(.ix-affix) {
-  z-index: 100;
-}
-</style>
