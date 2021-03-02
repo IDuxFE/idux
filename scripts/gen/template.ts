@@ -96,7 +96,7 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsZhTemplate(compName: string, moduleName: string, upperFirstName: string): string {
+export function getDocsZhTemplate(compName: string, moduleName: string, upperFirstName: string, isEn = false): string {
   return `---
 category: ${moduleName}
 type:
@@ -107,7 +107,7 @@ order: 0
 
 
 
-## 何时使用
+## ${isEn ? 'When To Use' : '何时使用'}
 
 
 
@@ -117,19 +117,23 @@ order: 0
 
 #### Props
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+${
+  isEn
+    ? '| Name | Description | Type | Default | Global Config | Remark |'
+    : '| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |'
+}
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
 #### Slots
 
-| 名称 | 说明 | 参数类型 | 备注 |
+${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
 | - | - | - | - |
 
 #### Emits
 
-| 名称 | 说明 | 参数类型 | 备注 |
+${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
 | - | - | - | - |
 `

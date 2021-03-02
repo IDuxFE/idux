@@ -2,7 +2,7 @@
 name: 功能请求
 about: 为这个项目提出一个想法
 title: "[comp:]"
-labels: enhancement
+labels: ''
 assignees: ''
 
 ---
