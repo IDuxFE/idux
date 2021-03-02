@@ -2,7 +2,7 @@
 name: 报告问题
 about: 创建报告以帮助我们改进
 title: "[comp:]"
-labels: bug
+labels: ''
 assignees: ''
 
 ---
