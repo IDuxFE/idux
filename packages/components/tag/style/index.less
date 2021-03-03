@@ -1,0 +1,131 @@
+@import '../../style/default.less';
+@import '../../style/mixins/index';
+@import "../../style/dark";
+
+@tag-prefix: ~'@{idux-prefix}-tag';
+
+.@{tag-prefix} {
+  color: @tag-default-color;
+  display: inline-block;
+  padding: @tag-default-padding;
+  border: 1px solid @tag-default-border-color;
+  border-radius: @tag-border-radius;
+  background: @tag-default-background-color;
+  font-size: @tag-font-size;
+
+  & + .@{tag-prefix} {
+    margin-left: @tag-margin;
+  }
+
+  &-icon {
+    padding-right: @tag-padding;
+  }
+
+  &-close-icon {
+    color: fade(@tag-default-color, 60%);
+    padding-left: @tag-padding;
+
+    &:hover {
+      color: @tag-default-color;
+    }
+  }
+
+  &-round {
+    border-radius: @tag-round-border-radius;
+  }
+
+  // mixin to iterate over colors and create CSS class for each one
+  .make-color-classes(@i: length(@preset-colors)) when (@i > 0) {
+    .make-color-classes(@i - 1);
+
+    // list-用逗号或空格分隔的值列表。 index-一个整数，指定要返回的列表元素的位置。返回：列表中指定位置的值。
+    // 返回列表中指定位置的值。
+    @color: extract(@preset-colors, @i);
+    @lightColor: '@{color}-l50';
+    @lightBorderColor: '@{color}-l30';
+    @darkColor: @color;
+    &-@{color} {
+      color: @@darkColor;
+      background: @@lightColor;
+      border-color: @@lightBorderColor;
+
+      .@{tag-prefix}-close-icon {
+        color: fade(@@darkColor, 60%);
+
+        &:hover {
+          color: @@darkColor;
+        }
+      }
+    }
+  }
+
+  // 为了遍历处理基本状态对应的颜色
+  .make-status-color-classes(@color, @status) {
+    @lightColor: '@{color}-l50';
+    @lightBorderColor: '@{color}-l30';
+    @darkColor: @color;
+    &-@{status} {
+      color: @@darkColor;
+      background: @@lightColor;
+      border-color: @@lightBorderColor;
+
+      .@{tag-prefix}-close-icon {
+        color: fade(@@darkColor, 60%);
+
+        &:hover {
+          color: @@darkColor;
+        }
+      }
+    }
+  }
+
+  .make-color-classes();
+  .make-status-color-classes('green', success);
+  .make-status-color-classes('blue', pending);
+  .make-status-color-classes('red', error);
+  .make-status-color-classes('yellow', warning);
+
+  &-has-color {
+    color: @white;
+    border-color: transparent;
+  }
+
+  &-checkable {
+    color: @tag-default-color;
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+
+    &:not(&-checked):hover {
+      color: @primary-color;
+      .@{tag-prefix}-close-icon {
+        color: fade(@primary-color, 60%);
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+
+    &:active,
+    &-checked {
+      color: @text-color-inverse;
+
+      .@{tag-prefix}-close-icon {
+        color: fade(@text-color-inverse, 60%);
+
+        &:hover {
+          color: @text-color-inverse;
+        }
+      }
+    }
+    &-checked {
+      background-color: @primary-color;
+    }
+    &:active {
+      background-color: @blue-d10;
+    }
+  }
+
+
+}
