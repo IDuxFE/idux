@@ -1,6 +1,6 @@
 import type { DefineComponent } from 'vue'
 
-export interface TagOriginalProps {
+export interface TagProps {
   closable?: boolean
   icon: string
   color: string
@@ -9,4 +9,4 @@ export interface TagOriginalProps {
   isRound: boolean
 }
 
-export type TagComponent = InstanceType<DefineComponent<TagOriginalProps>>
+export type TagComponent = InstanceType<DefineComponent<TagProps>>

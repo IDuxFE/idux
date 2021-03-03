@@ -15,8 +15,6 @@
     <ix-tag color="admiral"> admiral </ix-tag>
     <ix-tag color="purple"> purple </ix-tag>
     <ix-tag color="magenta"> magenta </ix-tag>
-    <ix-tag color="lime"> lime </ix-tag>
-    <ix-tag color="grey"> grey </ix-tag>
   </div>
   <div>
     <p>Custom:</p>

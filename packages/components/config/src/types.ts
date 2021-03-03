@@ -13,6 +13,12 @@ export interface IconConfig {
   loadIconDynamically?: (iconName: string) => Promise<string>
 }
 
+export interface TagConfig {
+  closable: boolean
+  checkAble: boolean
+  isRound: boolean
+}
+
 // Layout
 export type DividerPosition = 'left' | 'center' | 'right'
 export type DividerType = 'horizontal' | 'vertical'
@@ -189,6 +195,7 @@ export interface GlobalConfig {
   // General
   button: ButtonConfig
   icon: IconConfig
+  tag: TagConfig
   // Layout
   divider: DividerConfig
   space: SpaceConfig

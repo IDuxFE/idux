@@ -4,15 +4,16 @@
       <slot name="icon"><ix-icon :name="icon" /></slot>
     </span>
     <span class="ix-tag-content"><slot></slot></span>
-    <ix-icon v-if="closable" name="close" class="ix-tag-close-icon" @click="onClose" />
+    <ix-icon v-if="closeAbleFlag" name="close" class="ix-tag-close-icon" @click="onClose" />
   </div>
 </template>
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { TagOriginalProps } from './types'
+import { TagProps } from './types'
 import { isPresetColor, isStatusColor } from '@idux/components/utils'
 import { PropTypes } from '@idux/cdk/utils'
+import { TagConfig, useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxTag',
@@ -26,40 +27,45 @@ export default defineComponent({
     isRound: PropTypes.bool,
   },
   emits: ['close'],
-  setup(props: TagOriginalProps, { emit }) {
-    const _isPresetColor = (): boolean => {
+  setup(props: TagProps, { emit }) {
+    const isPresetOrStatusColor = computed(() => {
       const color = props.color
-      return isPresetColor(color as string) || isStatusColor(color as string)
-    }
+      return isPresetColor(color) || isStatusColor(color)
+    })
 
-    const classes = useClasses(props, _isPresetColor())
+    const config = useGlobalConfig('tag')
+    const classes = useClasses(props, config, isPresetOrStatusColor.value)
     const onClose = (evt: MouseEvent) => emit('close', evt)
-
     const tagStyle = computed(() => {
-      const color = props.color
-      const isPresetOrStatus = isPresetColor(color) || isStatusColor(color)
-      return { backgroundColor: isPresetOrStatus ? undefined : color }
+      return { backgroundColor: isPresetOrStatusColor.value ? undefined : props.color }
+    })
+    const closeAbleFlag = computed(() => {
+      return props.closable ?? config.closable
     })
 
     return {
       classes,
       tagStyle,
       onClose,
+      closeAbleFlag,
     }
   },
 })
 
-const useClasses = (props: TagOriginalProps, isPresetColor: boolean) => {
+const useClasses = (props: TagProps, config: TagConfig, isPresetOrStatusColor: boolean) => {
   return computed(() => {
     const colorClass = `ix-tag-${props.color}`
-    const presetFlag = isPresetColor && !props.checkAble
+    const presetFlag = isPresetOrStatusColor && (!props.checkAble || !config.checkAble)
+    const checkAble = props.checkAble ?? config.checkAble
+    const isRound = props.isRound ?? config.isRound
+
     return {
       'ix-tag': true,
-      'ix-tag-round': props.isRound,
+      'ix-tag-round': isRound,
       [colorClass]: presetFlag,
       'ix-tag-has-color': props.color ? !presetFlag : false,
-      'ix-tag-checkable': props.checkAble,
-      'ix-tag-checkable-checked': props.checkAble && props.checked,
+      'ix-tag-checkable': checkAble,
+      'ix-tag-checkable-checked': checkAble && props.checked,
     }
   })
 }

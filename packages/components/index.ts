@@ -7,6 +7,7 @@ import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxTitle } from './title'
 import { IxTypography } from './typography'
+import { IxTag } from './tag'
 // import Layout
 import { IxDivider } from './divider'
 import { IxSpace } from './space'
@@ -45,6 +46,7 @@ const components = [
   IxButtonGroup,
   IxIcon,
   IxTitle,
+  IxTag,
   // components Layout
   IxDivider,
   IxSpace,

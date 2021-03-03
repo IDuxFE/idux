@@ -4,6 +4,7 @@ import type { App, Directive } from 'vue'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
 import { IxTitle } from '@idux/components/title'
+import { IxTag } from '@idux/components/tag'
 import { IxTypography } from '@idux/components/typography'
 // import Layout
 import { IxDivider } from '@idux/components/divider'
@@ -44,6 +45,7 @@ const components = [
   IxButtonGroup,
   IxIcon,
   IxTitle,
+  IxTag,
   // components Layout
   IxDivider,
   IxSpace,
