@@ -16,7 +16,7 @@
     </span>
     <span class="ix-input-wrapper">
       <span v-if="prefix || $slots.prefix" class="ix-input-prefix">
-        <slot name="prefix"><ix-icon v-if="prefix" :name="prefix" @click="onPrefixClick" /></slot>
+        <slot name="prefix"><ix-icon :name="prefix" @click="onPrefixClick" /></slot>
       </span>
       <input
         ref="inputRef"
@@ -49,9 +49,9 @@ import type { InputConfig } from '@idux/components/core/config'
 import type { InputProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
+import { ControlPropType } from '@idux/cdk/forms'
 import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
-import { FormControlPropType } from '@idux/components/core/props'
 import { useAttrs } from '@idux/components/core/utils'
 import { IxIcon } from '@idux/components/icon'
 import { useCommonBindings } from './useCommonBindings'
@@ -62,7 +62,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: PropTypes.string,
-    control: FormControlPropType,
+    control: ControlPropType,
     disabled: PropTypes.bool.def(false),
     readonly: PropTypes.bool.def(false),
     addonAfter: PropTypes.string,

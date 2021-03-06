@@ -10,15 +10,15 @@ order: 11
 
 ## 行为准则
 
-我们有一份 [行为准则](https://github.com/IduxFE/components/blob/main/CODE_OF_CONDUCT.md) ，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
+我们有一份 [行为准则](https://github.com/IduxFE/idux/blob/main/CODE_OF_CONDUCT.md) ，希望所有的贡献者都能遵守，请花时间阅读一遍全文以确保你能明白哪些是可以做的，哪些是不可以做的。
 
 ## 透明的开发
 
-我们所有的工作都会放在 [GitHub](https://github.com/IduxFE/components) 上。不管是核心团队的成员还是外部贡献者的 pull request 都需要进过同样流程的 review。
+我们所有的工作都会放在 [GitHub](https://github.com/IduxFE/idux) 上。不管是核心团队的成员还是外部贡献者的 pull request 都需要进过同样流程的 review。
 
 ## Bugs
 
-我们使用 [Issues](https://github.com/IduxFE/components/issues) 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 [issue 助手(TODO)](./) 来提 issue。 并且能使用这个 [模板(TODO)](./) 来提供重现。
+我们使用 [Issues](https://github.com/IduxFE/idux/issues) 来做 bug 追踪。 如果你想要你发现的 bug 被快速解决，最好的办法就是通过我们提供的 [issue 助手(TODO)](./) 来提 issue。 并且能使用这个 [模板(TODO)](./) 来提供重现。
 
 在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了我们的 [常见问题(TODO)](./)。
 
@@ -33,7 +33,7 @@ order: 11
 - [如何为开源做贡献](https://opensource.guide/zh-cn/how-to-contribute/)
 - [第一次参与开源](https://github.com/firstcontributions/first-contributions/blob/master/translations/README.chs.md)
 
-为了能帮助你开始你的第一次尝试，我们用 [Good First Issue](https://github.com/IduxFE/components/labels/good%20first%20issue) 标记了一些比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
+为了能帮助你开始你的第一次尝试，我们用 [Good First Issue](https://github.com/IduxFE/idux/labels/good%20first%20issue) 标记了一些比较容易修复的 bug 和小功能。这些 issue 可以很好地做为你的首次尝试。
 
 如果你打算开始处理一个 issue，请先检查一下 issue 下面的留言以确保没有别人正在处理这个 issue。如果当前没有人在处理的话你可以留言告知其他人你将会处理这个 issue，以免别人重复劳动。
 
@@ -55,7 +55,7 @@ order: 11
 ## 如何提出 Pull Request
 
 - fork 此仓库，以下所有操作均在 fork 之后的仓库上执行；
-- 在 `main` 分支运行：`git remote add upstream https://github.com/IduxFE/components.git` ；
+- 在 `main` 分支运行：`git remote add upstream https://github.com/IduxFE/idux.git` ；
 - 在 `main` 分支运行: `git pull upstream main` ；
 - 在 `main` 分支运行: `git push origin main` ；
 - 切换到你要工作的 feature 分支 (例如有一个分支叫 `docs-fix`): `git checkout docs-fix` ；
@@ -125,7 +125,6 @@ order: 11
 
 本项目使用了 `@commitlint` 作为 commit lint 工具，并使用 [`@commitlint/config-angular`](https://www.npmjs.com/package/@commitlint/config-angular)作为基础规则，请使用下面任意一种方式提交你的 commit.
 
-- 使用 `npm run cz` 或 `yarn cz` 提交
 - 全局安装 `npm install -g commitizen`，然后使用 `cz` 提交
 - 使用 `git commit -a` 提交，请注意 message 符合我们的要求
 
@@ -147,7 +146,7 @@ header 具有特殊的格式，包括 **type**, **scope** 和 **subject**, type 
 
 注脚应该包含 [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) 如果有的话.
 
-示例: ([更多示例](https://github.com/IduxFE/components/commits/main))
+示例: ([更多示例](https://github.com/IduxFE/idux/commits/main))
 
 ```vim
 docs(changelog): update change log to beta.5

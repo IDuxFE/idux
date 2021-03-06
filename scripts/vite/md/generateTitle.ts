@@ -9,7 +9,7 @@ export function generateTitle(meta: TitleMeta): string {
   <a 
     class="edit-button" 
     aria-label="Edit this page on Github" 
-    href="https://github.com/IduxFE/components/edit/main/${meta.path}" 
+    href="https://github.com/IduxFE/idux/edit/main/${meta.path}" 
     target="_blank" 
     rel="noopener noreferrer"
   >

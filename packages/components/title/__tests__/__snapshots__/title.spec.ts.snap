@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title.vue render work 1`] = `"<div class=\\"ix-title ix-title-large\\"><div class=\\"ix-title-main\\"><!--v-if--><!--v-if--><!--v-if--></div><!--v-if--></div>"`;

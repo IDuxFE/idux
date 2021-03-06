@@ -38,7 +38,7 @@ stages:
               command: 'install'
           - script: |
               npm run test
-              npm run codecov $(CODECOV_TOKEN)
+              ./node_modules/.bin/codecov -t $(CODECOV_TOKEN)
 
           - task: PublishCodeCoverageResults@1
             displayName: 'publish code coverage results'
@@ -57,4 +57,32 @@ stages:
               mergeTestResults: true
               testRunTitle: 'Jest Unit Tests'
               failTaskOnFailedTests: true
+    dependsOn: env
+
+  - stage: build
+    jobs:
+      - job: Packages
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+          - script: |
+              npm run build
+              export DEPLOY_DOMAIN=https://preview-${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER}-idux.surge.sh
+              npx surge --project ./dist --domain $DEPLOY_DOMAIN
+              echo "Deploy to $DEPLOY_DOMAIN"
+              tar czvf build.tgz dist
+            env:
+              SURGE_LOGIN: $(SURGE_LOGIN)
+              SURGE_TOKEN: $(SURGE_TOKEN)
+
+          - task: CopyFiles@2
+            inputs:
+              contents: build.tgz
+              targetFolder: $(Build.ArtifactStagingDirectory)
+            displayName: 'Copy archives to artifacts staging directory'
+          - task: PublishBuildArtifacts@1
+            inputs:
+              path: $(Build.ArtifactStagingDirectory)
+            displayName: 'Upload artifacts'
     dependsOn: env

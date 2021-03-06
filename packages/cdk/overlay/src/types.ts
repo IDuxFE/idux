@@ -8,15 +8,16 @@ export type TriggerElement = Nullable<ComponentPublicInstance | HTMLElement>
 
 export interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
-  onMouseEnter?: (event: Event) => void
-  onMouseLeave?: (event: Event) => void
+  onMouseenter?: (event: Event) => void
+  onMouseleave?: (event: Event) => void
   onFocus?: (event: Event) => void
   onBlur?: (event: Event) => void
 }
 
 export interface OverlayPopperEvents {
-  onMouseEnter: () => void
-  onMouseLeave: () => void
+  onMouseenter: () => void
+  onMouseleave: () => void
+  onClick: (event: MouseEvent) => void
 }
 
 export interface OverlayOptions {

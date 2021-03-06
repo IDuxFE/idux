@@ -43,22 +43,19 @@ describe('Input.vue', () => {
     expect(input.element.value).toBe('valueRef change')
 
     input.element.value = '使用拼音'
-    input.trigger('compositionstart')
-    await nextTick()
+    await input.trigger('compositionstart')
 
-    expect(wrapper.emitted()).toHaveProperty('compositionStart')
+    expect(wrapper.emitted()).toHaveProperty('compositionstart')
     expect(valueRef.value).toBe('valueRef change')
 
-    input.trigger('input')
-    await nextTick()
+    await input.trigger('input')
 
     expect(wrapper.emitted()).toHaveProperty('input')
     expect(valueRef.value).toBe('valueRef change')
 
-    input.trigger('compositionend')
-    await nextTick()
+    await input.trigger('compositionend')
 
-    expect(wrapper.emitted()).toHaveProperty('compositionEnd')
+    expect(wrapper.emitted()).toHaveProperty('compositionend')
     expect(valueRef.value).toBe('使用拼音')
   })
 

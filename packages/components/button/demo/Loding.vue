@@ -3,7 +3,7 @@
   <ix-button icon="search" loading>Default</ix-button>
   <ix-button mode="dashed" loading>Dashed</ix-button>
   <ix-button mode="text" loading>Text</ix-button>
-  <ix-button mode="link" loading href="https://github.com/IduxFE/components" target="_blank">Link</ix-button>
+  <ix-button mode="link" loading href="https://github.com/IduxFE/idux" target="_blank">Link</ix-button>
   <br />
   <ix-button icon="search" :loading="isLoading">Loading: {{ isLoading }}</ix-button>
   <ix-button @click="changeLoading">Change Loading</ix-button>

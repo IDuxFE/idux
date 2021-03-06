@@ -45,37 +45,37 @@ describe('useOverlay.ts', () => {
           unref(visibility) ? hide(true) : show(true)
         }
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, visibility }
       },
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="immediate" @click="handleClick">Immediate Toggle</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
 
     await wrapper.get('#trigger').trigger('click')
     await timer(1000)
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
 
     await wrapper.get('#trigger').trigger('click')
     await timer(1000)
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
 
     await wrapper.get('#immediate').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
 
     await wrapper.get('#immediate').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
   })
 
   test('component trigger work', async () => {
     const TestComponent = {
       components: { IxButton },
       setup() {
-        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents } = useOverlay({
+        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, visibility } = useOverlay({
           ...options,
           showDelay: 0,
           hideDelay: 0,
@@ -83,25 +83,25 @@ describe('useOverlay.ts', () => {
 
         onMounted(initialize)
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
       <ix-button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</ix-button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
     await wrapper.get('#trigger').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
 
     await wrapper.get('#trigger').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
   })
 
   test('destroy work', async () => {
     const TestComponent = {
       setup() {
-        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, destroy } = useOverlay({
+        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, destroy, visibility } = useOverlay({
           ...options,
           showDelay: 0,
           hideDelay: 0,
@@ -113,12 +113,12 @@ describe('useOverlay.ts', () => {
           destroy()
         }
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, visibility }
       },
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="destroy" @click="handleClick">Destroy</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
@@ -132,7 +132,9 @@ describe('useOverlay.ts', () => {
     const TestComponent = {
       components: { IxButton },
       setup() {
-        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update } = useOverlay(options)
+        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update, visibility } = useOverlay(
+          options,
+        )
 
         onMounted(initialize)
 
@@ -140,27 +142,27 @@ describe('useOverlay.ts', () => {
           update({ showDelay: 0 })
         }
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, visibility }
       },
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <button id="update" @click="handleClick">Update</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
 
     await wrapper.get('#trigger').trigger('click')
     await timer(1000)
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
 
     await wrapper.get('#trigger').trigger('click')
     await timer(1000)
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
 
     await wrapper.get('#update').trigger('click')
     await wrapper.get('#trigger').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
   })
 
   test('trigger work', async () => {
@@ -173,7 +175,7 @@ describe('useOverlay.ts', () => {
         },
       },
       setup(props: { trigger: OverlayTrigger }) {
-        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update } = useOverlay({
+        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update, visibility } = useOverlay({
           ...options,
           showDelay: 0,
           hideDelay: 0,
@@ -186,42 +188,43 @@ describe('useOverlay.ts', () => {
           update({ trigger: props.trigger })
         })
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
-      <button id="trigger" ref="triggerRef" @focus='triggerEvents.onFocus' @blur='triggerEvents.onBlur' @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave' @click="triggerEvents.onClick">Trigger</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <button id="trigger" ref="triggerRef" @focus='triggerEvents.onFocus' @blur='triggerEvents.onBlur' @mouseenter='triggerEvents.onMouseenter' @mouseleave='triggerEvents.onMouseleave' @click="triggerEvents.onClick">Trigger</button>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
 
     const wrapper = mount(TestComponent)
     await wrapper.get('#trigger').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
+
     await wrapper.get('#trigger').trigger('click')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
 
     await wrapper.get('#overlay').trigger('mouseleave')
 
     await wrapper.setProps({ trigger: 'focus' })
     await wrapper.get('#trigger').trigger('focus')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
     await wrapper.get('#trigger').trigger('focus')
 
     await wrapper.get('#trigger').trigger('blur')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
 
     await wrapper.setProps({ trigger: 'hover' })
     await wrapper.get('#trigger').trigger('mouseenter')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
     await wrapper.get('#trigger').trigger('mouseleave')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
   })
 
   test('hover overlay work', async () => {
     const TestComponent = {
       components: { IxButton },
       setup() {
-        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents } = useOverlay({
+        const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, visibility } = useOverlay({
           ...options,
           trigger: 'hover',
           visible: true,
@@ -232,19 +235,19 @@ describe('useOverlay.ts', () => {
 
         onMounted(initialize)
 
-        return { overlayRef, triggerRef, triggerEvents, overlayEvents }
+        return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
-      <button id="trigger" ref="triggerRef" @mouseenter='triggerEvents.onMouseEnter' @mouseleave='triggerEvents.onMouseLeave'>Trigger</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay</div>
+      <button id="trigger" ref="triggerRef" @mouseenter='triggerEvents.onMouseenter' @mouseleave='triggerEvents.onMouseleave'>Trigger</button>
+      <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
     const wrapper = mount(TestComponent)
     await wrapper.get('#overlay').trigger('mouseenter')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: block;')
+    expect(wrapper.get('#overlay').isVisible()).toBeTruthy()
 
     await wrapper.get('#overlay').trigger('mouseleave')
-    expect(wrapper.get('#overlay').attributes('style')).toContain('display: none;')
+    expect(wrapper.get('#overlay').isVisible()).toBeFalsy()
   })
 
   test('arrow work', async () => {
@@ -263,7 +266,7 @@ describe('useOverlay.ts', () => {
       },
       template: `
       <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
-      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseEnter" @mouseleave="overlayEvents.onMouseLeave">Overlay
+      <div id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay
         <div ref="arrowRef" id='arrow'></div>
       </div>
       `,

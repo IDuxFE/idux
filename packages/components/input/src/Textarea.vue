@@ -26,8 +26,8 @@ import type { TextareaConfig } from '@idux/components/core/config'
 import type { TextareaProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
+import { ControlPropType } from '@idux/cdk/forms'
 import { PropTypes, withUndefined } from '@idux/cdk/utils'
-import { FormControlPropType } from '@idux/components/core/props'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { useAttrs } from '@idux/components/core/utils'
 import { IxIcon } from '@idux/components/icon'
@@ -39,7 +39,7 @@ export default defineComponent({
   components: { IxIcon },
   props: {
     value: PropTypes.string,
-    control: FormControlPropType,
+    control: ControlPropType,
     disabled: PropTypes.bool.def(false),
     readonly: PropTypes.bool.def(false),
     resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical'] as const),

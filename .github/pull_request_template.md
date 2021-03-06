@@ -2,7 +2,7 @@
 
 Please check if your PR fulfills the following requirements:
 
-- [ ] The commit message follows [our guidelines](https://github.com/IduxFE/components/blob/main/docs/contributing.zh.md#commit)
+- [ ] The commit message follows [our guidelines](https://github.com/IduxFE/idux/blob/main/docs/contributing.zh.md#commit)
 - [ ] Tests for the changes have been added/updated or not needed
 - [ ] Docs and demo have been added/updated or not needed
 

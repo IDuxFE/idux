@@ -5,11 +5,10 @@
   "private": true,
   "scripts": {
     "start": "gulp start:dev",
+    "build": "gulp build",
     "icons": "gulp icons:start",
-    "cz": "git-cz",
     "gen": "ts-node --project scripts/gen/tsconfig.json scripts/gen/index.ts",
     "postinstall": "lerna bootstrap",
-    "codecov": "codecov -t",
     "test": "jest",
     "lint": "npm run ls-lint && npm run eslint && npm run stylelint && npm run markdownlint",
     "lint-fix": "npm run ls-lint && npm run eslint-fix && npm run stylelint-fix && npm run markdownlint-fix",
@@ -42,15 +41,15 @@
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "@vitejs/plugin-vue": "^1.1.0",
+    "@vitejs/plugin-vue-jsx": "^1.1.0",
     "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-beta.14",
+    "@vue/test-utils": "^2.0.0-rc.2",
     "babel-jest": "^26.6.0",
     "chalk": "^4.1.0",
     "codecov": "^3.8.0",
-    "commitizen": "^4.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "detect-port": "^1.3.0",
     "eslint": "^7.18.0",
@@ -69,7 +68,7 @@
     "lint-staged": "^10.5.0",
     "lodash": "^4.17.0",
     "markdownlint-cli": "^0.26.0",
-    "marked": "^1.2.0",
+    "marked": "^2.0.0",
     "parse5": "^6.0.0",
     "prettier": "^2.2.0",
     "prismjs": "^1.23.0",
@@ -84,7 +83,7 @@
     "ts-node": "^9.1.0",
     "tslib": "^2.1.0",
     "typescript": "^4.1.0",
-    "vite": "v2.0.0-beta.60",
+    "vite": "^2.0.0",
     "vue": "^3.0.5",
     "vue-jest": "^5.0.0-alpha.8",
     "vue-router": "^4.0.0",
@@ -117,6 +116,6 @@
     }
   },
   "engines": {
-    "node": ">11.5.0"
+    "node": ">12.0.0"
   }
 }

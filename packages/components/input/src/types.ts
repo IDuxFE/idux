@@ -1,8 +1,8 @@
 import type { DefineComponent, Ref } from 'vue'
 import type { AbstractControl } from '@idux/cdk/forms'
-import type { InputSize, TextareaAutoRows, TextareaResize } from '@idux/components/core/config'
+import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/core/config'
 
-export type { InputSize, TextareaAutoRows, TextareaResize }
+export type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize }
 
 interface InputOriginalProps {
   value?: string
@@ -36,7 +36,7 @@ interface TextareaOriginalProps {
   showCount?: boolean
   maxCount?: number | string
   computeCount?: (value: string) => string
-  size?: InputSize
+  size?: TextareaSize
   clearable?: boolean
 }
 

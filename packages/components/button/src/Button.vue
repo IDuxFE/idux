@@ -15,7 +15,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/core/config'
 import { IxIcon } from '@idux/components/icon'
-import { buttonGroupInjectionKey } from './button'
+import { buttonToken } from './utils'
 
 export default defineComponent({
   name: 'IxButton',
@@ -32,7 +32,7 @@ export default defineComponent({
     icon: PropTypes.string,
   },
   setup(props: ButtonProps, { slots }) {
-    const groupProps = inject(buttonGroupInjectionKey, {})
+    const groupProps = inject(buttonToken, {})
     const buttonConfig = useGlobalConfig('button')
 
     const mode = computed(() => props.mode ?? (groupProps.mode || buttonConfig.mode))

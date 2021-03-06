@@ -11,7 +11,7 @@
   <span v-typography><u>Text (underline)</u></span>
   <span v-typography><del>Text (delete)</del></span>
   <span v-typography><strong>Text (strong)</strong></span>
-  <span v-typography><a href="https://github.com/IduxFE/components" target="_blank">Text (link)</a></span>
+  <span v-typography><a href="https://github.com/IduxFE/idux" target="_blank">Text (link)</a></span>
 </template>
 
 <style scoped>

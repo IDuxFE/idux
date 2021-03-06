@@ -2,7 +2,7 @@
 category: cdk
 type:
 title: Overlay
-subtitle:
+subtitle: 浮层
 cover:
 ---
 
@@ -18,7 +18,7 @@ cover:
 
 ### `useOverlay`
 
-> 创建一个浮层实例
+> 创建一个浮层实例，因为 `overlayRef` 必传，因此使用 `v-if` 时，请在外面包裹一层。
 
 ```typescript
 import type { Options, Placement } from '@popperjs/core'
@@ -27,34 +27,31 @@ import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 type OverlayScrollStrategy = 'close' | 'reposition'
 type OverlayTrigger = 'click' | 'hover' | 'focus'
 type RefElement = Nullable<HTMLElement>
-type VueElement = Nullable<ComponentPublicInstance | HTMLElement>
-
-declare function useOverlay(options: OverlayOptions): OverlayInstance
+type TriggerElement = Nullable<ComponentPublicInstance | HTMLElement>
 
 interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
-  onMouseEnter?: (event: Event) => void
-  onMouseLeave?: (event: Event) => void
+  onMouseenter?: (event: Event) => void
+  onMouseleave?: (event: Event) => void
   onFocus?: (event: Event) => void
   onBlur?: (event: Event) => void
 }
 
 interface OverlayPopperEvents {
-  onMouseEnter: () => void
-  onMouseLeave: () => void
+  onMouseenter: () => void
+  onMouseleave: () => void
+  onClick: (event: MouseEvent) => void
 }
 
 interface OverlayOptions {
-  /* The class name of the overlay container. */
-  className?: string
   /**
    * Control the visibility of the overlay
    */
   visible?: boolean
   /* Scroll strategy for overlay */
-  scrollStrategy?: OverlayScrollStrategy
+  scrollStrategy: OverlayScrollStrategy
   /* Disable the overlay */
-  disable?: boolean
+  disabled?: boolean
   /**
    * The distance between the arrow and the starting point at both ends.
    *Acting when the overlay uses border-radius.
@@ -81,14 +78,14 @@ interface OverlayOptions {
   offset: [number, number]
   /**
    * The delay of hiding overlay.
-   * Send false if you don't need it.
+   * Send 0 if you don't need it.
    */
-  hideDelay: number | false
+  hideDelay: number
   /**
    * The delay of showing overlay.
-   * Send false if you don't need it.
+   * Send 0 if you don't need it.
    */
-  showDelay: number | false
+  showDelay: number
 }
 
 interface OverlayInstance {
@@ -101,12 +98,18 @@ interface OverlayInstance {
    * Show the overlay.
    * The style of the overlay container will be set to block.
    */
-  show: () => void
+  show: (immediate?: boolean) => void
   /**
    * Hide the overlay.
    * The style of the overlay container will be set to none.
    */
-  hide: () => void
+  hide: (immediate?: boolean) => void
+  /**
+   * Update overlay.
+   * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.
+   * @param options
+   */
+  update: (options: Partial<OverlayOptions>) => void
   /**
    * Destroy the overlay.
    * The life cycle of the overlay will enter beforeDestroy.
@@ -118,7 +121,7 @@ interface OverlayInstance {
    * The unique id of the overlay.
    * Provide subsequent components with markings for the specified overlay treatment.
    */
-  overlayId: string
+  id: string
   /**
    * The display status of the current overlay.
    * Control by visible and disable.
@@ -130,12 +133,6 @@ interface OverlayInstance {
    */
   overlayRef: Ref<RefElement>
   /**
-   * Update overlay.
-   * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.
-   * @param options
-   */
-  update: (options: Partial<OverlayOptions>) => void
-  /**
    * The truth DOM node of the arrow.
    * If showArrow is false, we won't return arrowRef.
    * The caller needs to bind the variable to the view.
@@ -145,11 +142,11 @@ interface OverlayInstance {
    * The truth DOM node of the trigger.
    * The caller needs to bind the variable to the view.
    */
-  triggerRef: Ref<VueElement>
+  triggerRef: Ref<TriggerElement>
   /**
    * Manually bind to the event on the trigger.
    */
-  triggerEvents: OverlayTriggerEvents
+  triggerEvents: ComputedRef<OverlayTriggerEvents>
   /**
    * Manually bind to events on the overlay.
    */

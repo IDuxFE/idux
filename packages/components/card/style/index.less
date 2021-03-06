@@ -1,0 +1,56 @@
+@import '../../style/default.less';
+    
+@card-prefix: ~'@{idux-prefix}-card';
+@border: @card-border-size @border-style @card-border-color;
+    
+.@{card-prefix} {
+  font-size: @card-font-size-md;
+  &-border{
+    border: @border;
+    border-top-left-radius: @border-radius-gutter;
+  }
+  &-hover:hover{
+    box-shadow:@card-hover-shadow;
+  }
+  &-loading-block{
+    min-height: @card-min-height;
+  }
+  &-head,&-body,&footer{
+    padding: @card-padding-lg;
+  }
+  &-head{
+    display: flex;
+    border-bottom:@border;
+    &-title{
+      .ellipsis();
+      flex: 1;
+      font-size: @card-title-font-size-md;
+    }
+    &-extra{
+      float: right;
+      margin-left: auto;
+    }
+  }  
+  &-body{
+    background: @card-bg-color;
+  }
+  &-footer{
+    border-top: @border;
+    text-align: center;
+  }
+
+  // 当size为small时
+  &-small{
+    font-size: @card-font-size-sm;
+    .@{card-prefix}-head,.@{card-prefix}-body,.@{card-prefix}-footer {
+      padding: @card-padding-sm;
+    }
+    .@{card-prefix}-head-title {
+        font-size: @card-title-font-size-sm;
+        font-weight: @card-title-font-weight-sm;
+    }
+  }
+}
+
+
+
