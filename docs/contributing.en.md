@@ -4,8 +4,6 @@ title: Contribution
 order: 11
 ---
 
-# Contribution
-
 This guide will guild you how to contribute to `@idux`. Please take a fill minutes to read this guide before you open an issue or pull request.
 
 ## Code of conduct

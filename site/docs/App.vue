@@ -1,10 +1,10 @@
 <template>
   <div class="site-root">
     <div class="page-wrapper">
-      <site-header :page="page" />
+      <layout-header :page="page" />
       <div class="main-wrapper">
         <div style="width: 15%">
-          <site-side-nav :page="page" />
+          <layout-side-nav :page="page" />
         </div>
         <div style="width: 85%" class="main-container">
           <router-view></router-view>
@@ -19,12 +19,9 @@ import { defineComponent, provide, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGlobalConfig } from '@idux/components'
 
-import SiteHeader from './shared/header/Index.vue'
-import SiteSideNav from './shared/SideNav.vue'
-
 export default defineComponent({
   name: 'App',
-  components: { SiteHeader, SiteSideNav },
+
   setup() {
     const language = ref('zh')
     provide('language', language)

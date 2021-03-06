@@ -17,6 +17,7 @@ import Navigation from './Navigation.vue'
 import GithubButton from './GithubButton.vue'
 
 export default defineComponent({
+  name: 'LayoutHeader',
   components: { Logo, Navigation, GithubButton },
   props: {
     page: { type: String, required: true },

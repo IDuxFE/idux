@@ -1,19 +1,19 @@
 <template>
-  <section :id="id" class="code-box" :class="{ expand: expanded }">
-    <section class="code-box-demo">
+  <section :id="id" class="global-code-box" :class="{ expand: expanded }">
+    <section class="global-code-box-demo">
       <slot name="rawCode"></slot>
     </section>
-    <section class="code-box-meta markdown">
-      <div class="code-box-title">
+    <section class="global-code-box-meta markdown">
+      <div class="global-code-box-title">
         {{ title }}
-        <a class="code-box-edit" :href="editHref" target="_blank" rel="noopener noreferrer">
+        <a class="global-code-box-edit" :href="editHref" target="_blank" rel="noopener noreferrer">
           <ix-icon name="edit" />
         </a>
       </div>
-      <div class="code-box-description">
+      <div class="global-code-box-description">
         <slot name="description"></slot>
       </div>
-      <div class="code-box-actions">
+      <div class="global-code-box-actions">
         <ix-icon name="copy" @click="onCopy" />
         <ix-icon v-show="expanded" name="code-expand" @click="expanded = !expanded" />
         <ix-icon v-show="!expanded" name="code-collapse" @click="expanded = !expanded" />
@@ -29,7 +29,7 @@
 import { computed, defineComponent, ref, SetupContext } from 'vue'
 
 export default defineComponent({
-  name: 'CodeBox',
+  name: 'GlobalCodeBox',
   props: {
     title: { type: String, default: '' },
     packageName: { type: String, default: '' },

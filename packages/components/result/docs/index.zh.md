@@ -45,10 +45,10 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | @result-icon-margin | @margin-xl | - |
 | @result-icon-size | @font-size-lg * 4 | - |
 | @result-title-font-size | @font-size-xl | - |
-| @result-title-color | @black-d20 | - |
+| @result-title-color | @black | - |
 | @result-title-line-height | 1.8 | - |
 | @result-subtitle-font-size | @font-size-sm | - |
-| @result-subtitle-color | @black-l40 | - |
+| @result-subtitle-color | @text-secondary-color | - |
 | @result-subtitle-line-height | 1.6 | - |
 | @result-extra-margin | @margin-xl | - |
 | @result-extra-children-margin | @margin-sm | - |

@@ -1,0 +1,42 @@
+@global-color-levels: l50, l40, l30, l20, l10, d10, d20, d30, d40;
+
+.global-color-level(@color, @i: length(@global-color-levels)) when (@i > 0) {
+  .global-color-level(@color, @i - 1);
+  @level: extract(@global-color-levels, @i);
+  @color-level: '@{color}-@{level}';
+  .global-color-@{color}-@{level} {
+    background-color: @@color-level;
+    color: @black;
+    & when (@i > 5) {
+      color: @white;
+    }
+  }
+}
+
+.global-color-classes(@i: length(@preset-colors)) when (@i > 0) {
+  .global-color-classes(@i - 1);
+  @color: extract(@preset-colors, @i);
+  .global-color-@{color} {
+    color: @white;
+    background-color: @@color;
+  }
+  .global-color-level(@color);
+}
+
+.global-color-classes();
+
+.global-color {
+  .global-color-row {
+    width: 100%;
+    display: flex;
+    margin: 16px;
+    .global-color-col {
+      position: relative;
+      flex: 1;
+      margin: 0 8px;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}
