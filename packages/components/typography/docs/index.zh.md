@@ -33,11 +33,11 @@ type TypographyConfig = TypographyType | TypographyOptions
 | 变量名                                | default 主题                                      | 说明 |
 | ------------------------------------- | ------------------------------------------------- | ---- |
 | `@typography-default-color`           | `@black`                                          | -    |
-| `@typography-secondary-color`         | `@black-l20`                                      | -    |
+| `@typography-secondary-color`         | `@text-secondary-color`                                      | -    |
 | `@typography-success-color`           | `@success-color`                                  | -    |
 | `@typography-warning-color`           | `@warning-color`                                  | -    |
 | `@typography-error-color`             | `@error-color`                                    | -    |
-| `@typography-disabled-color`          | `@black-l50`                                      | -    |
+| `@typography-disabled-color`          | `@disabled-color`                                      | -    |
 | `@typography-mark-padding`            | 0                                                 | -    |
 | `@typography-mark-background-color`   | `@yellow-l50`                                     | -    |
 | `@typography-code-margin`             | `0 0.2em`                                         | -    |
@@ -62,27 +62,27 @@ type TypographyConfig = TypographyType | TypographyOptions
 | `@typography-a-color-active`          | `@blue-d30`                                       | -    |
 | `@typography-title-margin-top`        | `1.2em`                                           | -    |
 | `@typography-title-1-margin-bottom`   | `0.5em`                                           | -    |
-| `@typography-title-1-color`           | `@black-l10`                                      | -    |
+| `@typography-title-1-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-1-font-weight`     | `@font-weight-lg`                                 | -    |
 | `@typography-title-1-font-size`       | `@font-size-base + 24`                            | -    |
 | `@typography-title-1-line-height`     | 1.23                                              | -    |
 | `@typography-title-2-margin-bottom`   | `0.5em`                                           | -    |
-| `@typography-title-2-color`           | `@black-l10`                                      | -    |
+| `@typography-title-2-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-2-font-weight`     | `@font-weight-lg`                                 | -    |
 | `@typography-title-2-font-size`       | `@font-size-2xl + 4`                              | -    |
 | `@typography-title-2-line-height`     | 1.35                                              | -    |
 | `@typography-title-3-margin-bottom`   | `0.5em`                                           | -    |
-| `@typography-title-3-color`           | `@black-l10`                                      | -    |
+| `@typography-title-3-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-3-font-weight`     | `@font-weight-lg`                                 | -    |
 | `@typography-title-3-font-size`       | `@font-size-xl + 2`                               | -    |
 | `@typography-title-3-line-height`     | 1.35                                              | -    |
 | `@typography-title-4-margin-bottom`   | `0.5em`                                           | -    |
-| `@typography-title-4-color`           | `@black-l10`                                      | -    |
+| `@typography-title-4-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-4-font-weight`     | `@font-weight-lg`                                 | -    |
 | `@typography-title-4-font-size`       | `@font-size-lg + 2`                               | -    |
 | `@typography-title-4-line-height`     | 1.4                                               | -    |
 | `@typography-title-5-margin-bottom`   | `0.5em`                                           | -    |
-| `@typography-title-5-color`           | `@black-l10`                                      | -    |
+| `@typography-title-5-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-5-font-weight`     | `@font-weight-lg`                                 | -    |
 | `@typography-title-5-font-size`       | `@font-size-md`                                   | -    |
 | `@typography-title-5-line-height`     | 1.5                                               | -    |

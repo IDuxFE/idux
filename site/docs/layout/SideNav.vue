@@ -34,6 +34,7 @@ import { defineComponent, inject } from 'vue'
 import { config } from '../sideNav'
 
 export default defineComponent({
+  name: 'LayoutSideNav',
   props: {
     page: { type: String, required: true },
   },

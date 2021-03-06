@@ -64,7 +64,7 @@ export const getDemoTemplate = (options: {
   const demoComponentName = upperFirst(camelCase(demoName))
   return `
 <template>
-  <code-box
+  <global-code-box
     packageName="${packageName}"
     componentName="${componentName}"
     demoName="${demoName}"
@@ -78,7 +78,7 @@ export const getDemoTemplate = (options: {
     </template>
     <template #rawCode><raw-demo></raw-demo></template>
     <template #highlightCode><div v-pre>${code}</div></template>
-  </code-box>
+  </global-code-box>
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'

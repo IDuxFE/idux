@@ -1,5 +1,5 @@
 @import '../../style/default.less';
-
+@import './mixin.less';
 
 @timeline-prefix: ~'@{idux-prefix}-timeline';
 @timeline-item-prefix: ~'@{idux-prefix}-timeline-item';
@@ -20,15 +20,7 @@
       border: @timeline-dot-border;
       border-radius: 50%;
 
-      .make-color-classes(@i: length(@preset-colors)) when (@i > 0) {
-        .make-color-classes(@i - 1);
-        @color: extract(@preset-colors, @i);
-        &-@{color} {
-          border-color: @color;
-          color: @color;
-        }
-      }
-      .make-color-classes();
+      .timeline-color-classes();
 
       &-custom {
         width: auto;
@@ -164,5 +156,3 @@
     }
   }
 }
-
-

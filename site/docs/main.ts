@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import IduxComponents from '@idux/components'
+import GlobalComponents from './global'
+import LayoutComponents from './layout'
+
 import App from './App.vue'
-import CodeBox from './shared/CodeBox.vue'
 
 import './index.less'
 
@@ -14,7 +16,6 @@ const router = createRouter({
 
 const app = createApp(App)
 
-app.use(router).use(IduxComponents)
-app.component(CodeBox.name, CodeBox)
+app.use(router).use(IduxComponents).use(GlobalComponents).use(LayoutComponents)
 
 app.mount('#app')
