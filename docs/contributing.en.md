@@ -64,6 +64,16 @@ The `IduxFE` team will pay attention to all Pull Requests. We will review and me
 - Push code `git push` (if Rebase operation is performed, `-f` may be required);
 - Initiate a Pull Request request on GitHub.
 
+## Development Process
+
+- clone the fork repository;
+- install dependencies with `npm i` or `yarn`;
+- commonly used commands:
+  - `npm start` Run the documentation website locally;
+  - `npm run lint` Check code style(tips: run `npm run lint-fix` Can fix simple format errors);
+  - `npm run test` Run unit tests(tips: Modify the `root` configuration of `jest.config.js` to adjust the scope of unit testing);
+  - `npm run gen` Quickly create templates through a graphical interface.
+
 ## Code format
 
 We use `eslint`, `stylelint`, `markdownlint` and `ls-lint` to ensure the overall code style is consistent. And automatic formatting and lint are configured in commit hooks, as long as the submission is passed.

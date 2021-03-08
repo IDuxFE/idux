@@ -5,7 +5,7 @@ import { textSync } from 'figlet'
 import * as chalk from 'chalk'
 import * as inquirer from 'inquirer'
 import * as ora from 'ora'
-import * as _ from 'lodash'
+import { camelCase, kebabCase, upperFirst } from 'lodash'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 
 import {
@@ -80,7 +80,7 @@ class Generate {
     spin.start('Template is being generated, please wait...\n')
     this.packageRoot = resolve(__dirname, '../', '../', 'packages', category)
 
-    const dirName = _.kebabCase(name)
+    const dirName = kebabCase(name)
     this.dirPath = resolve(this.packageRoot, dirName)
 
     if (pathExistsSync(this.dirPath)) {
@@ -114,10 +114,10 @@ class Generate {
       // todo pro
     }
 
-    const docsZhTemplate = getDocsZhTemplate(name, category, _.upperFirst(_.camelCase(name)), type)
-    const docsEnTemplate = getDocsZhTemplate(name, category, _.upperFirst(_.camelCase(name)), type, true)
+    const docsZhTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type)
+    const docsEnTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type, true)
     const demoTemplate = getDemoTemplate()
-    const demoVueTemplate = getDemoVueTemplate(_.kebabCase(name))
+    const demoVueTemplate = getDemoVueTemplate(kebabCase(name))
 
     return Promise.all([
       writeFile(resolve(this.dirPath, 'docs', 'index.zh.md'), docsZhTemplate),
@@ -129,8 +129,8 @@ class Generate {
 
   private async generateComponents(name: string) {
     await mkdir(`${this.dirPath}/style`)
-    const upperFirstName = _.upperFirst(_.camelCase(name))
-    const lessTemplate = getLessTemplate(_.kebabCase(name))
+    const upperFirstName = upperFirst(camelCase(name))
+    const lessTemplate = getLessTemplate(kebabCase(name))
     const typesTemplate = getTypesTemplate(upperFirstName)
     const vueTemplate = getVueTemplate(upperFirstName)
     const indexTemplate = getIndexTemplate(upperFirstName)
@@ -141,7 +141,7 @@ class Generate {
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
-      writeFile(`${this.dirPath}/__tests__/${_.camelCase(name)}.spec.ts`, testTemplate),
+      writeFile(`${this.dirPath}/__tests__/${camelCase(name)}.spec.ts`, testTemplate),
     ])
 
     // 这里都是硬编码，有没有更好的实现方式？
@@ -149,7 +149,7 @@ class Generate {
     currIndexContent = currIndexContent
       .replace(
         '// --- import end ---',
-        `// --- import end ---\nimport { Ix${upperFirstName} } from './${_.kebabCase(name)}'`,
+        `// --- import end ---\nimport { Ix${upperFirstName} } from './${kebabCase(name)}'`,
       )
       .replace('// --- components end ---', `// --- components end ---\n  Ix${upperFirstName},`)
       .replace('// --- export end ---', `// --- export end ---\n  Ix${upperFirstName},`)
@@ -157,20 +157,20 @@ class Generate {
     writeFile(resolve(this.packageRoot, 'index.ts'), currIndexContent)
     writeFile(
       resolve(this.packageRoot, 'components.less'),
-      curLess + `@import './${_.kebabCase(name)}/style/index.less';\n`,
+      curLess + `@import './${kebabCase(name)}/style/index.less';\n`,
     )
   }
 
   private async generateCdk(name: string) {
-    const cdkTemplate = getCdkUseTemplate(_.upperFirst(_.camelCase(name)))
-    const indexTemplate = `export * from './src/use${_.upperFirst(_.camelCase(name))}'\
+    const cdkTemplate = getCdkUseTemplate(upperFirst(camelCase(name)))
+    const indexTemplate = `export * from './src/use${upperFirst(camelCase(name))}'\
     `
-    const testTemplate = getCdkTestTemplate(_.upperFirst(_.camelCase(name)), _.camelCase(name))
+    const testTemplate = getCdkTestTemplate(upperFirst(camelCase(name)), camelCase(name))
 
     return Promise.all([
-      writeFile(resolve(this.dirPath, 'src', `use${_.upperFirst(_.camelCase(name))}.ts`), cdkTemplate),
+      writeFile(resolve(this.dirPath, 'src', `use${upperFirst(camelCase(name))}.ts`), cdkTemplate),
       writeFile(resolve(this.dirPath, 'index.ts'), indexTemplate),
-      writeFile(resolve(this.dirPath, '__tests__', `${_.upperFirst(_.camelCase(name))}.spec.ts`), testTemplate),
+      writeFile(resolve(this.dirPath, '__tests__', `${upperFirst(camelCase(name))}.spec.ts`), testTemplate),
     ])
   }
 }
