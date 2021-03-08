@@ -4,7 +4,7 @@ export function getLessTemplate(compName: string): string {
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
 
 .@{${compName}-prefix} {
-  
+
 }
 `
 }
@@ -96,10 +96,17 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsZhTemplate(compName: string, moduleName: string, upperFirstName: string, isEn = false): string {
+export function getDocsZhTemplate(
+  compName: string,
+  moduleName: string,
+  upperFirstName: string,
+  type = '',
+  isEn = false,
+): string {
+  const [enType, zhType] = type.split('_')
   return `---
 category: ${moduleName}
-type:
+type: ${isEn ? enType ?? '' : zhType}
 title: ${upperFirstName}
 subtitle:
 order: 0
@@ -139,7 +146,7 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 `
 }
 
-export function getDomeTemplate(): string {
+export function getDemoTemplate(): string {
   return `---
 title:
   zh: 基本使用
@@ -157,7 +164,7 @@ order: 0
 `
 }
 
-export function getDomeVueTemplate(compName: string): string {
+export function getDemoVueTemplate(compName: string): string {
   return `<template>
   <ix-${compName} />
 </template>

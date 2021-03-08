@@ -67,10 +67,10 @@ order: 11
 - clone fork 后的仓库
 - 安装依赖：`npm install` 或 `yarn`
 - 常用的命令：
-  - `npm start` 在本地运行文档网站(TODO)。
+  - `npm start` 在本地运行文档网站。
   - `npm run lint` 检查代码风格(tips: 使用 `npm run lint-fix` 可以修复简单格式错误)。
   - `npm run test` 运行单元测试(tips: 修改 `jest.config.js` 的 `root` 配置可以调整单元测试范围)。
-  - `npm run gen name` 快速创建一个 `name` 组件(tips: 使用 `npm run gen name cdk` 将组件创建在 `cdk` 目录下)。
+  - `npm run gen` 通过图形化界面快速创建模板。
 
 ## 代码风格
 
