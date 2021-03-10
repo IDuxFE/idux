@@ -8,6 +8,7 @@ import { IxTypography } from './typography'
 // Layout
 import { IxDivider } from './divider'
 import { IxSpace } from './space'
+import { IxRow, IxCol } from './grid'
 // Navigation
 import { IxAffix } from './affix'
 // Data Entry
@@ -38,6 +39,8 @@ const components = [
   // Layout
   IxDivider,
   IxSpace,
+  IxRow,
+  IxCol,
   // Navigation
   IxAffix,
   // Data Entry
@@ -104,6 +107,8 @@ export {
   // Layout
   IxDivider,
   IxSpace,
+  IxRow,
+  IxCol,
   // Navigation
   IxAffix,
   // Data Entry

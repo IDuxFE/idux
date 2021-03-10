@@ -3,6 +3,7 @@ import type {
   IconConfig,
   DividerConfig,
   SpaceConfig,
+  RowConfig,
   InputConfig,
   TextareaConfig,
   RateConfig,
@@ -34,6 +35,8 @@ const divider = shallowReactive<DividerConfig>({
 })
 
 const space = shallowReactive<SpaceConfig>({ size: 'small' })
+
+const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
 
@@ -114,6 +117,7 @@ export const defaultConfig: GlobalConfig = {
   // Layout
   divider,
   space,
+  row,
   // Navigation
   // Data Entry
   input,
