@@ -108,6 +108,12 @@ export interface TooltipConfig {
 }
 
 // Feedback
+export interface MessageConfig {
+  duration: number
+  maxCount: number
+  top: number
+  pauseOnHover: boolean
+}
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
   status: ResultStatus
@@ -151,6 +157,7 @@ export interface GlobalConfig {
   statistic: StatisticConfig
   tooltip: TooltipConfig
   // Feedback
+  message: MessageConfig
   result: ResultConfig
   spin: SpinConfig
   // Other

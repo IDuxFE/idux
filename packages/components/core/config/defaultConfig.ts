@@ -11,6 +11,7 @@ import type {
   CardConfig,
   ImageConfig,
   StatisticConfig,
+  MessageConfig,
   ResultConfig,
   SpinConfig,
   BackTopConfig,
@@ -93,6 +94,13 @@ const tooltip = shallowReactive<TooltipConfig>({
 })
 
 // --------------------- Feedback ---------------------
+const message = shallowReactive<MessageConfig>({
+  duration: 3000,
+  maxCount: 5,
+  top: 60,
+  pauseOnHover: true,
+})
+
 const result = shallowReactive<ResultConfig>({ status: 'info' })
 
 const spin = shallowReactive<SpinConfig>({
@@ -130,6 +138,7 @@ export const defaultConfig: GlobalConfig = {
   statistic,
   tooltip,
   // Feedback
+  message,
   result,
   spin,
   // Other
