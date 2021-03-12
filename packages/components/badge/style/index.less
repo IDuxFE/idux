@@ -1,17 +1,13 @@
 @import '../../style/default.less';
 
 @badge-prefix: ~'@{idux-prefix}-badge';
-@badge-size: 16px;
-@badge-color: #f5222d;
-@badge-padding: 0 3px;
-@badge-dot-size: 6px;
 
 .@{badge-prefix} {
   display: inline-block;
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 1;
+  z-index: @badge-zindex;
   transform: translate(50%, -50%);
   transform-origin: 100% 0;
   font-size: @font-size-sm;

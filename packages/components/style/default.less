@@ -35,6 +35,7 @@
 
 // General
 /* button -------------------------- */
+@button-zindex: @zindex-l1-1;
 @button-font-weight: @font-weight-md;
 
 @button-line-height: @line-height-base;
@@ -177,6 +178,7 @@
 // Data Entry
 
 /* checkbox -------------------------- */
+@checkbox-inner-zindex: @zindex-l1-1;
 @checkbox-border-style: @border-width-sm solid @grey-d10;
 @checkbox-border-radius: @border-radius-sm;
 @checkbox-bg-color: @white;
@@ -247,6 +249,11 @@
 // Data Display
 
 /* badge -------------------------- */
+@badge-zindex: @zindex-auto;
+@badge-size: 16px;
+@badge-color: @red;
+@badge-padding: 0 3px;
+@badge-dot-size: 6px;
 
 /* card -------------------------- */
 @card-border-color: @border-color;
@@ -269,6 +276,12 @@
 @empty-icon-font-size-md: 64px;
 
 /* image -------------------------- */
+@image-zindex: @zindex-l4-6;
+@image-mask-bg: ~'rgba(0, 0, 0, 0.45)';
+@image-tools-bg: ~'rgba(0, 0, 0, 0.1)';
+@image-height: 100%;
+@image-width: 100%;
+@image-tools-h: 46px;
 
 /* statistic -------------------------- */
 @statistic-font-size-sm: @font-size-sm;
@@ -339,6 +352,7 @@
 @result-info-color: @info-color;
 
 /* spin -------------------------- */
+@spin-zindex: @zindex-l2-base;
 @spin-tip-color: @primary-color;
 @spin-icon-color: @primary-color;
 
@@ -349,6 +363,7 @@
 // Other
 
 /* back-top -------------------------- */
+@back-top-zindex: @zindex-l2-base;
 @back-top-height: @height-lg;
 @back-top-width: @height-lg;
 
