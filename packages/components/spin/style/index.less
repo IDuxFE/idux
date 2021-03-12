@@ -9,14 +9,14 @@
   right: 0;
   bottom: 0;
   user-select: none;
-}
+};
 
 .@{spin-prefix} {
   position: relative;
 
   &-spinner {
     @spin-mask();
-    z-index: 10;
+    z-index: @spin-zindex;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,6 @@
       flex-direction: column;
       width: 100%;
       text-align: center;
-
 
       .@{spin-prefix}-spinner-tip {
         margin-top: @margin-xs;
@@ -42,7 +41,6 @@
 
     &-small {
       .@{spin-prefix}-spinner {
-
         &-icon,
         &-tip {
           font-size: @spin-font-size-sm;
@@ -52,7 +50,6 @@
 
     &-large {
       .@{spin-prefix}-spinner {
-
         &-icon,
         &-tip {
           font-size: @spin-font-size-lg;
@@ -65,7 +62,7 @@
       font-size: @spin-font-size-md;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap
+      white-space: nowrap;
     }
 
     &-icon {
@@ -76,7 +73,7 @@
 
   &-container {
     position: relative;
-    transition: opacity .5s;
+    transition: opacity 0.5s;
 
     &-blur {
       opacity: 0.5;
