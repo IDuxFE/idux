@@ -10,8 +10,11 @@ import { RotateRight } from '../definitions/rotateRight'
 import { ZoomIn } from '../definitions/zoomIn'
 import { ZoomOut } from '../definitions/zoomOut'
 import { Close } from '../definitions/close'
+import { Check } from '../definitions/check'
 import { CheckCircle } from '../definitions/checkCircle'
 import { CloseCircle } from '../definitions/closeCircle'
+import { CheckCircleFilled } from '../definitions/checkCircleFilled'
+import { CloseCircleFilled } from '../definitions/closeCircleFilled'
 import { InfoCircle } from '../definitions/infoCircle'
 import { ExclamationCircle } from '../definitions/exclamationCircle'
 import { Star } from '../definitions/star'
@@ -29,8 +32,11 @@ export const innerStaticIcons: IconDefinition[] = [
   ZoomIn,
   ZoomOut,
   Close,
+  Check,
   CheckCircle,
   CloseCircle,
+  CloseCircleFilled,
+  CheckCircleFilled,
   InfoCircle,
   ExclamationCircle,
   Star,
