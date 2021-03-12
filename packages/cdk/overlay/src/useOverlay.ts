@@ -11,7 +11,7 @@ import type {
   TriggerElement,
 } from './types'
 
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import { isHTMLElement, off, on, uniqueId } from '@idux/cdk/utils'
 
@@ -39,11 +39,13 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     if (!unrefTrigger) {
       return
     }
-    const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
-    const overlayElement = overlayRef.value
-    popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
-    popperInstance.update()
-    on(window, 'scroll', globalScroll)
+    nextTick(() => {
+      const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
+      const overlayElement = overlayRef.value
+      popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
+      popperInstance.update()
+      on(window, 'scroll', globalScroll)
+    })
   }
 
   const _toggle = (visible: boolean) => {
