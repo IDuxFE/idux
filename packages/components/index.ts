@@ -133,3 +133,4 @@ export {
   IxBackTop,
   // --- export end ---
 }
+export * from './message'
