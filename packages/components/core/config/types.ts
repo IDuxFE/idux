@@ -118,6 +118,14 @@ export interface SpinConfig {
   size: SpinSize
 }
 
+export interface DrawerConfig {
+  closable: boolean
+  mask: boolean
+  maskClosable: boolean
+  wrapClassName: string
+  keyboard: boolean
+}
+
 // Other
 
 export interface BackTopConfig {
@@ -148,6 +156,7 @@ export interface GlobalConfig {
   // Feedback
   result: ResultConfig
   spin: SpinConfig
+  drawer: DrawerConfig
   // Other
   backTop: BackTopConfig
   // --- end ---

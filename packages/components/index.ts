@@ -25,6 +25,7 @@ import { IxTooltip } from './tooltip'
 // Feedback
 import { IxResult } from './result'
 import { IxSpin } from './spin'
+import { IxDrawer } from './drawer'
 // Other
 import { IxBackTop } from './back-top'
 // --- import end ---
@@ -58,6 +59,7 @@ const components = [
   // Feedback
   IxResult,
   IxSpin,
+  IxDrawer,
   // Other
   IxBackTop,
   // --- components end ---
@@ -124,6 +126,7 @@ export {
   // Feedback
   IxResult,
   IxSpin,
+  IxDrawer,
   // Other
   IxBackTop,
   // --- export end ---

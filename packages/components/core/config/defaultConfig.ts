@@ -12,6 +12,7 @@ import type {
   StatisticConfig,
   ResultConfig,
   SpinConfig,
+  DrawerConfig,
   BackTopConfig,
   GlobalConfig,
   TooltipConfig,
@@ -99,6 +100,14 @@ const spin = shallowReactive<SpinConfig>({
   size: 'small',
 })
 
+const drawer = shallowReactive<DrawerConfig>({
+  closable: true,
+  mask: true,
+  maskClosable: true,
+  wrapClassName: '',
+  keyboard: true,
+})
+
 // --------------------- Other ---------------------
 const backTop = shallowReactive<BackTopConfig>({
   duration: 450,
@@ -128,6 +137,7 @@ export const defaultConfig: GlobalConfig = {
   // Feedback
   result,
   spin,
+  drawer,
   // Other
   backTop,
   // --- end ---
