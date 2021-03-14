@@ -30,6 +30,7 @@ import { IxProgress } from './progress'
 // Other
 import { IxBackTop } from './back-top'
 // --- import end ---
+import { IxSwitch } from './switch'
 
 const components = [
   // General
@@ -66,6 +67,7 @@ const components = [
   // Other
   IxBackTop,
   // --- components end ---
+  IxSwitch,
 ]
 
 const directives: Record<string, Directive> = {
@@ -135,5 +137,6 @@ export {
   // Other
   IxBackTop,
   // --- export end ---
+  IxSwitch,
 }
 export * from './message'

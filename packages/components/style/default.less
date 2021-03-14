@@ -381,6 +381,25 @@
 @progress-line-font-size-sm: @font-size-sm;
 @progress-circle-font-size-md: @font-size-2xl;
 
+// Switch
+@switch-close-bg-color: #ccc;
+@switch-close-border-color: transparent;
+@switch-close-loading-color: @switch-close-bg-color;
+@switch-open-bg-color: @blue;
+@switch-open-border-color: @border-color;
+@switch-open-loading-color: @switch-open-bg-color;
+@switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
+@switch-normal-height: 22px;
+@switch-normal-inner-circle-size: 18px;
+@switch-small-height: @switch-normal-height - 4;
+@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 6;
+@switch-loading-size: @font-size-sm;
+@switch-inner-font-size: @font-size-sm;
+@switch-inner-circle-bg-color: @white;
+@switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+@switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
+@switch-disable-opacity: 0.4;
+
 // Other
 
 /* back-top -------------------------- */
