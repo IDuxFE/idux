@@ -96,18 +96,18 @@ describe('Message', () => {
   })
 
   test(`should be able to custom duration`, async () => {
-    MessageService.success({ content: 'success', duration: 7000 })
-    await wait(3500)
+    MessageService.success({ content: 'success', duration: 1000 })
+    await wait(200)
     expect(getOverlayElChildren().length).toBe(1)
-    await wait(4000)
+    await wait(1200)
     expect(getOverlayElChildren().length).toBe(0)
   })
 
   test(`should be able to custom duration other config `, async () => {
-    MessageService.success({ content: 'success' }, 2000)
-    await wait(1000)
+    MessageService.success({ content: 'success' }, 1000)
+    await wait(200)
     expect(getOverlayElChildren().length).toBe(1)
-    await wait(1500)
+    await wait(1200)
     expect(getOverlayElChildren().length).toBe(0)
   })
 
@@ -150,32 +150,32 @@ describe('Message', () => {
   })
 
   test('should pauseOnHover option work with true', async () => {
-    MessageService.success({ content: 'success', pauseOnHover: true })
+    MessageService.success({ content: 'success', pauseOnHover: true }, 1000)
     await wait(animateTime)
     const contentEl = overlayContainerEL.querySelector('.ix-message-item')
     const mouseEnterEvent = new MouseEvent('mouseenter')
     if (contentEl) {
       contentEl.dispatchEvent(mouseEnterEvent)
     }
-    await wait(3500)
+    await wait(2000)
     expect(getOverlayElChildren().length).toBe(1)
     const mouseLeaveEvent = new MouseEvent('mouseleave')
     if (contentEl) {
       contentEl.dispatchEvent(mouseLeaveEvent)
     }
-    await wait(3500)
+    await wait(1200)
     expect(getOverlayElChildren().length).toBe(0)
   })
 
   test('should pauseOnHover option work with false', async () => {
-    MessageService.success({ content: 'success', pauseOnHover: false })
+    MessageService.success({ content: 'success', pauseOnHover: false }, 1000)
     await wait(animateTime)
     const contentEl = overlayContainerEL.querySelector('.ix-message-item')
     const mouseEnterEvent = new MouseEvent('mouseenter')
     if (contentEl) {
       contentEl.dispatchEvent(mouseEnterEvent)
     }
-    await wait(3500)
+    await wait(1200)
     expect(getOverlayElChildren().length).toBe(0)
   })
 
