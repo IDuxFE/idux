@@ -4,11 +4,13 @@
     role="checkbox"
     :ariaChecked="isChecked"
     :ariaDisabled="isDisabled"
+    :ariaReadOnly="isReadonly"
     :class="[classes, $attrs.class]"
     :style="$attrs.style"
   >
     <span class="ix-checkbox-input-wrapper">
       <input
+        ref="inputRef"
         type="checkbox"
         class="ix-checkbox-input"
         :name="inputName"
@@ -19,6 +21,7 @@
         :value="value"
         v-bind="attrs"
         @change="handleChange"
+        @click="handleClick"
       />
       <span class="ix-checkbox-inner" :tabindex="$attrs.tabindex"></span>
     </span>
@@ -36,6 +39,7 @@ export default defineComponent({
     checked: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])),
     disabled: PropTypes.bool.def(false),
     indeterminate: PropTypes.bool.def(false),
+    readonly: PropTypes.bool.def(false),
     trueValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]).def(true),
     falseValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]).def(false),
     value: PropTypes.string,

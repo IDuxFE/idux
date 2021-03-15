@@ -25,24 +25,49 @@ export const setup = (props: CheckboxProps, { slots }: SetupContext): CheckboxBi
 
   const isDisabled = useDisabled()
 
+  const isReadonly = useReadonly()
+
   const { checkeValue, handleChange } = useCheckValue()
 
   const isChecked = useChecked(checkeValue as Ref<CheckValue>)
 
-  const classes = useClasses(isDisabled, isChecked)
+  const classes = useClasses(isDisabled, isChecked, isReadonly)
 
   const inputName = useName()
 
   const attrs = useAttrs({ keys: ['type', 'tabindex'] })
 
+  const inputRef = ref((null as unknown) as HTMLInputElement)
+
+  const handleClick = (e: Event) => {
+    if (isReadonly.value) {
+      e.preventDefault()
+    }
+  }
+
+  const focus = () => {
+    if (!isReadonly.value) {
+      inputRef.value.focus()
+    }
+  }
+
+  const blur = () => {
+    inputRef.value.blur()
+  }
+
   return {
     isChecked,
     isDisabled,
+    isReadonly,
     hasDefaultSlot,
     handleChange,
     classes,
     inputName,
     attrs,
+    inputRef,
+    focus,
+    blur,
+    handleClick,
   }
 }
 
@@ -66,6 +91,7 @@ const useCheckValue = () => {
     if (props.checked === void 0) {
       checkeValue.value = targetCheckValue
     }
+
     emit('update:checked', targetCheckValue)
     emit('change', targetCheckValue)
     groupSubject?.dispatch((props.value ?? targetCheckValue) as string)
@@ -101,16 +127,32 @@ const useDisabled = () => {
   })
 }
 
-const useClasses = (isDisabled: ComputedRef<boolean>, isChecked: ComputedRef<boolean>) => {
+const useReadonly = () => {
+  const groupProps = inject(checkboxGroupInjectionKey, {})
+  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+  const { props } = getCurrentInstance()!
+  return computed(() => {
+    return !!(groupProps.readonly || props.readonly)
+  })
+}
+
+const useClasses = (
+  isDisabled: ComputedRef<boolean>,
+  isChecked: ComputedRef<boolean>,
+  isReadonly: ComputedRef<boolean>,
+) => {
   //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props } = getCurrentInstance()!
 
   return computed(() => {
     const disabled = isDisabled.value
     const checked = isChecked.value
+    const readonly = isReadonly.value
     const indeterminate = props.indeterminate
+
     return {
       'ix-checkbox-disabled': !!disabled,
+      'ix-checkbox-readonly': !!readonly,
       'ix-checkbox-indeterminate': !!indeterminate,
       'ix-checkbox-checked': !indeterminate && checked,
     }

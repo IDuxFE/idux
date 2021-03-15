@@ -11,4 +11,4 @@ title:
 
 ## en
 
-It is used to control the disabled state of the checkbox and is independent of checked.
+It is used to control the `disabled` state of the `ix-checkbox` and is independent of `checked`.
