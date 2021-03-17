@@ -1,3 +1,5 @@
+import type { FunctionDirective } from 'vue'
+
 export type TypographyType = 'success' | 'warning' | 'secondary' | 'error'
 
 export interface TypographyOptions {
@@ -5,4 +7,6 @@ export interface TypographyOptions {
   disabled?: boolean
 }
 
-export type TypographyConfig = TypographyType | TypographyOptions
+export type TypographyProps = TypographyType | TypographyOptions
+
+export type TypographyDirective = FunctionDirective<HTMLElement, TypographyProps>

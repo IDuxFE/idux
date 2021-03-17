@@ -6,4 +6,5 @@ IxRow.install = installComponent(IxRow)
 IxCol.install = installComponent(IxCol)
 
 export { IxRow, IxCol }
-export * from './src/types'
+
+export type { RowComponent, RowProps, RowAlign, RowJustify, ColComponent, ColProps } from './src/types'

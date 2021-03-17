@@ -6,4 +6,7 @@ IxButton.install = installComponent(IxButton)
 IxButtonGroup.install = installComponent(IxButtonGroup)
 
 export { IxButton, IxButtonGroup }
-export * from './src/types'
+
+export type { ButtonComponent, ButtonProps, ButtonShape, ButtonGroupComponent, ButtonGroupProps } from './src/types'
+
+export type { ButtonMode, ButtonSize } from '@idux/components/core/config'

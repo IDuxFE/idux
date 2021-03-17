@@ -1,6 +1,8 @@
 import type { DefineComponent } from 'vue'
 
-interface ImageOriginalProps {
+export type ImageStatus = 'loading' | 'loaded' | 'failed'
+
+export interface ImageProps {
   src?: string
   width?: string | number
   height?: string | number
@@ -10,13 +12,8 @@ interface ImageOriginalProps {
   fit?: string
 }
 
-export type ImageProps = Readonly<ImageOriginalProps>
-
 export type ImageComponent = InstanceType<DefineComponent<ImageProps>>
 
-interface ImagePreviewOriginalProps {
+export interface ImagePreviewProps {
   previewSrc?: string
 }
-export type ImagePreviewProps = Readonly<ImagePreviewOriginalProps>
-
-export type ImageStatus = 'loading' | 'loaded' | 'failed'

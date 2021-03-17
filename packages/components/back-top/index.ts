@@ -4,4 +4,5 @@ import IxBackTop from './src/BackTop.vue'
 IxBackTop.install = installComponent(IxBackTop)
 
 export { IxBackTop }
-export * from './src/types'
+
+export type { BackTopComponent, BackTopProps } from './src/types'

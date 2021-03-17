@@ -4,4 +4,5 @@ import IxAffix from './src/Affix.vue'
 IxAffix.install = installComponent(IxAffix)
 
 export { IxAffix }
-export * from './src/types'
+
+export type { AffixComponent, AffixProps, AffixOffset, AffixDirection } from './src/types'

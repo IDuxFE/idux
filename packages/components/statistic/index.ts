@@ -4,4 +4,5 @@ import IxStatistic from './src/Statistic.vue'
 IxStatistic.install = installComponent(IxStatistic)
 
 export { IxStatistic }
-export * from './src/types'
+
+export type { StatisticComponent, StatisticProps } from './src/types'

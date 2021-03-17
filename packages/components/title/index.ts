@@ -4,4 +4,5 @@ import IxTitle from './src/Title.vue'
 IxTitle.install = installComponent(IxTitle)
 
 export { IxTitle }
-export * from './src/types'
+
+export type { TitleComponent, TitleProps } from './src/types'

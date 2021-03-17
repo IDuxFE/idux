@@ -1,6 +1,6 @@
 import type { DefineComponent } from 'vue'
 
-interface BadgeOriginalProps {
+export interface BadgeProps {
   /** Badge显示的数字 */
   count: number | string
   /** 最大显示的数字 */
@@ -11,7 +11,5 @@ interface BadgeOriginalProps {
   dot?: boolean
   color?: string
 }
-
-export type BadgeProps = Readonly<BadgeOriginalProps>
 
 export type BadgeComponent = InstanceType<DefineComponent<BadgeProps>>

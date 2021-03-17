@@ -4,4 +4,7 @@ import IxDivider from './src/Divider.vue'
 IxDivider.install = installComponent(IxDivider)
 
 export { IxDivider }
-export * from './src/types'
+
+export type { DividerComponent, DividerProps } from './src/types'
+
+export type { DividerPosition, DividerType } from '@idux/components/core/config'

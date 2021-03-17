@@ -4,4 +4,5 @@ import IxResult from './src/Result.vue'
 IxResult.install = installComponent(IxResult)
 
 export { IxResult }
-export * from './src/types'
+
+export type { ResultComponent, ResultProps } from './src/types'

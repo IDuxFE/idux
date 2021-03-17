@@ -4,4 +4,7 @@ import IxCard from './src/Card.vue'
 IxCard.install = installComponent(IxCard)
 
 export { IxCard }
-export * from './src/types'
+
+export type { CardComponent, CardProps } from './src/types'
+
+export type { CardSize } from '@idux/components/core/config'

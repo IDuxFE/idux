@@ -4,4 +4,5 @@ import IxTooltip from './src/tooltip'
 IxTooltip.install = installComponent(IxTooltip)
 
 export { IxTooltip }
-export * from './src/types'
+
+export type { TooltipComponent, TooltipProps } from './src/types'
