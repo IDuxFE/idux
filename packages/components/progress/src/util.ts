@@ -1,6 +1,6 @@
 import { StringGradients, ProgressGradient } from './types'
 
-export const fullPercent = 100;
+export const fullPercent = 100
 
 export function convertPercent(percent: number | string | undefined): number {
   if (!percent || percent < 0) {

@@ -83,7 +83,7 @@ cover:
 |@checkbox-bg-disabled-color| @white|-|
 |@checkbox-bg-indeterminate-disabled-color| @grey|-|
 |@checkbox-label-disabled-color| @grey|-|
-|@checkbox-font-size| @font-size-md|-|
+|@checkbox-font-size| @font-size-lg|-|
 |@checkbox-height| 16px|-|
 |@checkbox-width| 16px|-|
 |@checkbox-group-line-height| @line-height-base|-|

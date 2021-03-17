@@ -67,9 +67,9 @@ cover:
 | @button-height-sm | @height-sm | - |
 | @button-height-md | @height-md | - |
 | @button-height-lg | @height-lg | - |
-| @button-font-size-sm | @font-size-sm | - |
-| @button-font-size-md | @font-size-sm | - |
-| @button-font-size-lg | @font-size-md | - |
+| @button-font-size-sm | @font-size-md | - |
+| @button-font-size-md | @font-size-md | - |
+| @button-font-size-lg | @font-size-lg | - |
 | @button-padding-sm | @padding-xs | - |
 | @button-padding-md | @padding-md | - |
 | @button-padding-lg | @padding-lg | - |

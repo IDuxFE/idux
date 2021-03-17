@@ -85,12 +85,6 @@ describe('Progress.vue', () => {
     expect(wrapper.classes('ix-progress-status-success')).toBe(true)
   })
 
-  test('should show success status when status=invalid and percent = 100', () => {
-    // @ts-ignore
-    const wrapper = ProgressMount({ props: { percent: 100, status: 'invalid' } })
-    expect(wrapper.classes('ix-progress-status-success')).toBe(true)
-  })
-
   test('strokeLinecap work', async () => {
     const wrapper = ProgressMount({ props: { percent: 50, strokeLinecap: 'round' } })
     expect(wrapper.classes('ix-progress-round')).toBe(true)

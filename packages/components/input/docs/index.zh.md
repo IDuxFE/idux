@@ -77,9 +77,9 @@ cover:
 | @input-height-sm | @height-sm;| - |
 | @input-height-md | @height-md;| - |
 | @input-height-lg | @height-lg;| - |
-| @input-font-size-sm | @font-size-sm;| - |
-| @input-font-size-md | @font-size-sm;| - |
-| @input-font-size-lg | @font-size-md;| - |
+| @input-font-size-sm | @font-size-md;| - |
+| @input-font-size-md | @font-size-md;| - |
+| @input-font-size-lg | @font-size-lg;| - |
 | @input-wrapper-inner-margin | @margin-xs;| - |
 | @input-padding-horizontal-sm | @input-padding-horizontal-md - 2px;| - |
 | @input-padding-horizontal-md | @padding-sm;| - |

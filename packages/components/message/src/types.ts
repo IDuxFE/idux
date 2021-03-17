@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DefineComponent } from 'vue'
 import type { VNode } from 'vue'
 
