@@ -128,6 +128,13 @@ export interface SpinConfig {
   size: SpinSize
 }
 
+export type ProgressSize = 'small' | 'medium'
+export type ProgressFormat = (percent: number, successPercent?: number) => string
+export interface ProgressConfig {
+  size: ProgressSize
+  format: ProgressFormat
+}
+
 // Other
 
 export interface BackTopConfig {
@@ -160,6 +167,7 @@ export interface GlobalConfig {
   message: MessageConfig
   result: ResultConfig
   spin: SpinConfig
+  progress: ProgressConfig
   // Other
   backTop: BackTopConfig
   // --- end ---

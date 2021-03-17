@@ -14,6 +14,7 @@ import type {
   MessageConfig,
   ResultConfig,
   SpinConfig,
+  ProgressConfig,
   BackTopConfig,
   GlobalConfig,
   TooltipConfig,
@@ -110,6 +111,11 @@ const spin = shallowReactive<SpinConfig>({
   size: 'small',
 })
 
+const progress = shallowReactive<ProgressConfig>({
+  size: 'medium',
+  format: percent => percent + '%'
+})
+
 // --------------------- Other ---------------------
 const backTop = shallowReactive<BackTopConfig>({
   duration: 450,
@@ -141,6 +147,7 @@ export const defaultConfig: GlobalConfig = {
   message,
   result,
   spin,
+  progress,
   // Other
   backTop,
   // --- end ---
