@@ -1,21 +1,19 @@
 import type { DefineComponent } from 'vue'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 
-type RowAlign = 'top' | 'middle' | 'bottom' | 'stretch'
-type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+export type RowAlign = 'top' | 'middle' | 'bottom' | 'stretch'
+export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 
 export type RowRecordGutter = Record<BreakpointKey, number>
 export type RowRecordArrGutter = [RowRecordGutter, RowRecordGutter]
 export type RowPropGutter = RowRecordGutter | number | Array<number> | RowRecordArrGutter
 
-interface RowOriginalProps {
+export interface RowProps {
   align: RowAlign
   justify: RowJustify
   gutter: RowPropGutter
   wrap: boolean
 }
-
-export type RowProps = Readonly<RowOriginalProps>
 
 export type RowComponent = InstanceType<DefineComponent<RowProps>>
 
@@ -30,7 +28,7 @@ export interface ColBreakpointConfig {
   pull?: PropValue
 }
 
-interface ColOriginalProps {
+export interface ColProps {
   span?: PropValue
   order?: PropValue
   offset?: PropValue
@@ -43,7 +41,5 @@ interface ColOriginalProps {
   xl?: PropValue | ColBreakpointConfig
   flex?: FlexValue
 }
-
-export type ColProps = Readonly<ColOriginalProps>
 
 export type ColComponent = InstanceType<DefineComponent<ColProps>>

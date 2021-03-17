@@ -4,4 +4,5 @@ import IxBadge from './src/Badge.vue'
 IxBadge.install = installComponent(IxBadge)
 
 export { IxBadge }
-export * from './src/types'
+
+export type { BadgeComponent, BadgeProps } from './src/types'

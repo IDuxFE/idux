@@ -5,4 +5,4 @@ IxRate.install = installComponent(IxRate)
 
 export { IxRate }
 
-export type { RateComponent } from './src/types'
+export type { RateComponent, RateProps } from './src/types'

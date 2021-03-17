@@ -1,26 +1,20 @@
 import type { DefineComponent } from 'vue'
 
-interface TimelineOriginalProps {
+export type TimelinePosition = 'left' | 'alternate' | 'right'
+export interface TimelineProps {
   pending?: string | boolean
   pendingDot?: string
   reverse?: boolean
   position?: TimelinePosition
 }
 
-export type TimelineProps = Readonly<TimelineOriginalProps>
-
 export type TimelineComponent = InstanceType<DefineComponent<TimelineProps>>
 
-interface TimelineItemOriginalProps {
+export type TimelineItemPosition = 'left' | 'right'
+export interface TimelineItemProps {
   color?: string
   dot?: string
   position?: TimelineItemPosition
 }
 
-export type TimelineItemProps = Readonly<TimelineItemOriginalProps>
-
 export type TimelineItemComponent = InstanceType<DefineComponent<TimelineItemProps>>
-
-export type TimelinePosition = 'left' | 'alternate' | 'right'
-
-export type TimelineItemPosition = 'left' | 'right'

@@ -2,7 +2,21 @@ import { computed, ComputedRef, inject, Ref, ref, watch, getCurrentInstance, Set
 import { isArray, hasSlot } from '@idux/cdk/utils'
 import { useAttrs } from '@idux/components/core/utils/'
 import { checkboxGroupInjectionKey, subjectInjectKey } from './checkbox'
-import type { CheckboxProps, CheckboxBindings } from './types'
+import type { CheckboxProps } from './types'
+
+interface CheckboxBindings {
+  isChecked: ComputedRef<boolean>
+  isDisabled: ComputedRef<boolean>
+  hasDefaultSlot: ComputedRef<boolean>
+  handleChange: (e: Event) => void
+  classes: ComputedRef<{
+    'ix-checkbox-disabled': boolean
+    'ix-checkbox-indeterminate': boolean
+    'ix-checkbox-checked': boolean
+  }>
+  inputName: ComputedRef<string>
+  attrs: Ref<Record<string, unknown>>
+}
 
 type CheckValue = number | string | boolean
 
@@ -46,7 +60,7 @@ const useCheckValue = () => {
   )
 
   const handleChange = (e: Event) => {
-    const targetChecked = (e.target as EventTarget).checked
+    const targetChecked = (e.target as HTMLInputElement).checked
     const targetCheckValue = targetChecked ? props.trueValue : props.falseValue
     // no value props passed
     if (props.checked === void 0) {

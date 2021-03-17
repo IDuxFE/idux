@@ -12,10 +12,8 @@ export function getLessTemplate(compName: string): string {
 export function getTypesTemplate(compName: string): string {
   return `import type { DefineComponent } from 'vue'
 
-interface ${compName}OriginalProps {
+export interface ${compName}Props {
 }
-
-export type ${compName}Props = Readonly<${compName}OriginalProps>
 
 export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
 `
@@ -47,7 +45,8 @@ import Ix${compName} from './src/${compName}.vue'
 Ix${compName}.install = installComponent(Ix${compName})
 
 export { Ix${compName} }
-export * from './src/types'
+
+export type { ${compName}Component, ${compName}Props } from './src/types'
 `
 }
 

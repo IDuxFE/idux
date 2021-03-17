@@ -4,4 +4,5 @@ import IxEmpty from './src/Empty.vue'
 IxEmpty.install = installComponent(IxEmpty)
 
 export { IxEmpty }
-export * from './src/types'
+
+export type { EmptyComponent, EmptyProps } from './src/types'

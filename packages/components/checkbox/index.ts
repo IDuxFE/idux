@@ -6,4 +6,5 @@ IxCheckbox.install = installComponent(IxCheckbox)
 IxCheckboxGroup.install = installComponent(IxCheckboxGroup)
 
 export { IxCheckbox, IxCheckboxGroup }
-export * from './src/types'
+
+export type { CheckboxComponent, CheckboxProps, CheckboxGroupComponent, CheckboxGroupProps } from './src/types'

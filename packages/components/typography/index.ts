@@ -1,4 +1,5 @@
 import IxTypography from './src/typography'
 
 export { IxTypography }
-export * from './src/types'
+
+export type { TypographyDirective, TypographyProps, TypographyOptions, TypographyType } from './src/types'

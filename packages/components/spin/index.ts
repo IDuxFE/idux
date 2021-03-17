@@ -4,4 +4,5 @@ import IxSpin from './src/Spin.vue'
 IxSpin.install = installComponent(IxSpin)
 
 export { IxSpin }
-export * from './src/types'
+
+export type { SpinComponent, SpinProps } from './src/types'

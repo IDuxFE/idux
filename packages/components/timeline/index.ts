@@ -6,4 +6,12 @@ IxTimeline.install = installComponent(IxTimeline)
 IxTimelineItem.install = installComponent(IxTimelineItem)
 
 export { IxTimeline, IxTimelineItem }
-export * from './src/types'
+
+export type {
+  TimelineComponent,
+  TimelineProps,
+  TimelinePosition,
+  TimelineItemComponent,
+  TimelineItemProps,
+  TimelineItemPosition,
+} from './src/types'

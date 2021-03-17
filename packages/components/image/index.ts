@@ -4,4 +4,5 @@ import IxImage from './src/Image.vue'
 IxImage.install = installComponent(IxImage)
 
 export { IxImage }
-export * from './src/types'
+
+export type { ImageComponent, ImageProps, ImageStatus } from './src/types'
