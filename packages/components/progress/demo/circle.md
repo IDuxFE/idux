@@ -12,4 +12,3 @@ title:
 ## en
 
 A circular progress bar.
-

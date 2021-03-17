@@ -23,28 +23,6 @@ export interface ConvertProgressSuccess extends ProgressSuccess {
   percent: number
 }
 
-interface ProgressOriginalProps {
-  type: ProgressType
-  format?: ProgressFormat
-  percent: string | number
-  status?: ProgressStatus
-  hideInfo: boolean
-  success?: ProgressSuccess
-  trailColor?: string
-  strokeColor?: string | ProgressGradient
-  strokeLinecap: ProgressStrokeLinecap
-  strokeWidth?: string | number
-  gapDegree?: string | number
-  gapPosition?: ProgressGapPositionType
-  width: string | number
-  size?: ProgressSize
-}
-
-interface ConvertProgressOriginalProps extends ProgressOriginalProps {
-  percent: number
-  success: ConvertProgressSuccess
-}
-
 export const ProgressPropTypes = {
   type: PropTypes.oneOf(['line', 'circle', 'dashboard'] as const).def('line'),
   format: PropTypes.func,
@@ -68,7 +46,26 @@ export const ConvertProgressPropTypes = {
   success: object<ConvertProgressSuccess>().def(() => ({ percent: 0 })),
 }
 
-export type ProgressProps = Readonly<ProgressOriginalProps>
-export type ConvertProgressProps = Readonly<ConvertProgressOriginalProps>
+export interface ConvertProgressProps extends ProgressProps {
+  percent: number
+  success: ConvertProgressSuccess
+}
+
+export interface ProgressProps {
+  type: ProgressType
+  format?: ProgressFormat
+  percent: string | number
+  status?: ProgressStatus
+  hideInfo: boolean
+  success?: ProgressSuccess
+  trailColor?: string
+  strokeColor?: string | ProgressGradient
+  strokeLinecap: ProgressStrokeLinecap
+  strokeWidth?: string | number
+  gapDegree?: string | number
+  gapPosition?: ProgressGapPositionType
+  width: string | number
+  size?: ProgressSize
+}
 
 export type ProgressComponent = InstanceType<DefineComponent<ProgressProps>>

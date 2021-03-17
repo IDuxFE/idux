@@ -4,9 +4,7 @@ import { convertPercent, fullPercent } from './util'
 import { isFunction } from '@idux/cdk/utils'
 import { ProgressConfig } from '@idux/components/core/config'
 
-export function useStatusClasses(
-  status: ComputedRef<ProgressStatus>,
-): ComputedRef<string> {
+export function useStatusClasses(status: ComputedRef<ProgressStatus>): ComputedRef<string> {
   const prefix = 'ix-progress'
   const statusClassMap: Record<ProgressStatus, string> = {
     normal: `${prefix}-status-normal`,
@@ -42,9 +40,7 @@ export const useInfo = (
   showExceptionIcon: ComputedRef<boolean>
 } => {
   const formatFn = props.format ?? config.format
-  const formattedText = computed(() =>
-    formatFn(props.percent, props.success.percent),
-  )
+  const formattedText = computed(() => formatFn(props.percent, props.success.percent))
 
   const showSuccessIcon = computed(
     () =>
@@ -52,9 +48,7 @@ export const useInfo = (
       (progressStatus.value === 'normal' && convertPercent(props.percent) === fullPercent),
   )
   const showExceptionIcon = computed(() => progressStatus.value === 'exception')
-  const showFormat = computed(
-    () => isFunction(props.format) || !(showSuccessIcon.value || showExceptionIcon.value),
-  )
+  const showFormat = computed(() => isFunction(props.format) || !(showSuccessIcon.value || showExceptionIcon.value))
 
   return {
     formattedText,

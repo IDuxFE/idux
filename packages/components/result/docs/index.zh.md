@@ -43,11 +43,11 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | @result-padding | @spacing-gutter *6 @spacing-gutter* 4 | - |
 | @result-text-align | `center` | - |
 | @result-icon-margin | @margin-xl | - |
-| @result-icon-size | @font-size-lg * 4 | - |
-| @result-title-font-size | @font-size-xl | - |
+| @result-icon-size | @font-size-xl * 4 | - |
+| @result-title-font-size | @font-size-2xl | - |
 | @result-title-color | @black | - |
 | @result-title-line-height | 1.8 | - |
-| @result-subtitle-font-size | @font-size-sm | - |
+| @result-subtitle-font-size | @font-size-md | - |
 | @result-subtitle-color | @text-secondary-color | - |
 | @result-subtitle-line-height | 1.6 | - |
 | @result-extra-margin | @margin-xl | - |

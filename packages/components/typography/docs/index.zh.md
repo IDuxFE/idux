@@ -69,22 +69,22 @@ type TypographyConfig = TypographyType | TypographyOptions
 | `@typography-title-2-margin-bottom`   | `0.5em`                                           | -    |
 | `@typography-title-2-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-2-font-weight`     | `@font-weight-lg`                                 | -    |
-| `@typography-title-2-font-size`       | `@font-size-2xl + 4`                              | -    |
+| `@typography-title-2-font-size`       | `@font-size-3xl + 4`                              | -    |
 | `@typography-title-2-line-height`     | 1.35                                              | -    |
 | `@typography-title-3-margin-bottom`   | `0.5em`                                           | -    |
 | `@typography-title-3-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-3-font-weight`     | `@font-weight-lg`                                 | -    |
-| `@typography-title-3-font-size`       | `@font-size-xl + 2`                               | -    |
+| `@typography-title-3-font-size`       | `@font-size-2xl + 2`                               | -    |
 | `@typography-title-3-line-height`     | 1.35                                              | -    |
 | `@typography-title-4-margin-bottom`   | `0.5em`                                           | -    |
 | `@typography-title-4-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-4-font-weight`     | `@font-weight-lg`                                 | -    |
-| `@typography-title-4-font-size`       | `@font-size-lg + 2`                               | -    |
+| `@typography-title-4-font-size`       | `@font-size-xl + 2`                               | -    |
 | `@typography-title-4-line-height`     | 1.4                                               | -    |
 | `@typography-title-5-margin-bottom`   | `0.5em`                                           | -    |
 | `@typography-title-5-color`           | `@grey-l10`                                      | -    |
 | `@typography-title-5-font-weight`     | `@font-weight-lg`                                 | -    |
-| `@typography-title-5-font-size`       | `@font-size-md`                                   | -    |
+| `@typography-title-5-font-size`       | `@font-size-lg`                                   | -    |
 | `@typography-title-5-line-height`     | 1.5                                               | -    |
 | `@typography-paragraph-margin-bottom` | `1em`                                             | -    |
 | `@typography-list-margin`             | `0 0 1em 0`                                       | -    |

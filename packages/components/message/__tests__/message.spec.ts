@@ -112,7 +112,7 @@ describe('Message', () => {
   })
 
   test(`should be able to empty content`, async () => {
-    MessageService.success(undefined as any)
+    MessageService.success('')
     await wait(animateTime)
     expect(getOverlayElChildren().length).toBe(1)
   })

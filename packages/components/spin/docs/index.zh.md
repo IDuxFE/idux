@@ -37,6 +37,6 @@ cover:
 | --- | --- | --- |
 | @spin-tip-color | @primary-color | - |
 | @spin-icon-color | @primary-color | - |
-| @spin-font-size-sm | @font-size-sm | - |
-| @spin-font-size-md | @font-size-md | - |
-| @spin-font-size-lg | @font-size-lg | - |
+| @spin-font-size-sm | @font-size-md | - |
+| @spin-font-size-md | @font-size-lg | - |
+| @spin-font-size-lg | @font-size-xl | - |

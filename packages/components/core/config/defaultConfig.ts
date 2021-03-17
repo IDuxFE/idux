@@ -113,7 +113,7 @@ const spin = shallowReactive<SpinConfig>({
 
 const progress = shallowReactive<ProgressConfig>({
   size: 'medium',
-  format: percent => percent + '%'
+  format: (percent: number) => percent + '%',
 })
 
 // --------------------- Other ---------------------

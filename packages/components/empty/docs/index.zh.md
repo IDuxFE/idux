@@ -36,5 +36,5 @@ cols: 1
 | --- | --- | --- |
 | @empty-margin-md | @margin-md | - |
 | @empty-line-height-md | @line-height-base | - |
-| @empty-font-size-md | @font-size-md | - |
+| @empty-font-size-md | @font-size-lg | - |
 | @empty-icon-font-size-md | `64px` | - |

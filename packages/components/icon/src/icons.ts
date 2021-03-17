@@ -1,4 +1,5 @@
-import { IconDefinition } from './types'
+import type { IconDefinition } from './types'
+
 import { Up } from '../definitions/up'
 import { Down } from '../definitions/down'
 import { Left } from '../definitions/left'
@@ -16,8 +17,6 @@ import { CloseCircle } from '../definitions/closeCircle'
 import { CheckCircleFilled } from '../definitions/checkCircleFilled'
 import { CloseCircleFilled } from '../definitions/closeCircleFilled'
 import { InfoCircle } from '../definitions/infoCircle'
-import { CheckCircleFilled } from '../definitions/checkCircleFilled'
-import { CloseCircleFilled } from '../definitions/closeCircleFilled'
 import { InfoCircleFilled } from '../definitions/infoCircleFilled'
 import { ExclamationCircleFilled } from '../definitions/exclamationCircleFilled'
 import { ExclamationCircle } from '../definitions/exclamationCircle'
@@ -42,8 +41,6 @@ export const innerStaticIcons: IconDefinition[] = [
   CloseCircleFilled,
   CheckCircleFilled,
   InfoCircle,
-  CheckCircleFilled,
-  CloseCircleFilled,
   InfoCircleFilled,
   ExclamationCircleFilled,
   ExclamationCircle,

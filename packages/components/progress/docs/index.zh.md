@@ -70,9 +70,9 @@ cover:
 | @progress-exception-bg | @error-color | - |
 | @progress-active-bg | @primary-color | - |
 | @progress-text-color | @text-color | - |
-| @progress-font-size-sm | @font-size-sm | - |
-| @progress-font-size-xs | @font-size-xs | - |
-| @progress-circle-font-size-normal | @font-size-xl | - |
+| @progress-line-font-size-md | @font-size-md | - |
+| @progress-line-font-size-sm | @font-size-sm | - |
+| @progress-circle-font-size-md | @font-size-2xl | - |
 | @progress-trail-bg | #f5f5f5 | - |
 | @progress-text-width | 36px | - |
 | @progress-border-radius | 100px | - |
