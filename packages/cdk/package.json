@@ -32,6 +32,7 @@
     "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
+    "@juggle/resize-observer": "^3.3.0",
     "@popperjs/core": "^2.6.0",
     "vue": "^3.0.0"
   }
