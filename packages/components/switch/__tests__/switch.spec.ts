@@ -39,10 +39,7 @@ describe('Switch.vue', () => {
 
     await wrapper.trigger('click')
 
-    await wrapper.trigger('mouseup')
-
-    expect(wrapper.emitted('update:checked')).toBeTruthy()
-    expect(wrapper.emitted('change')).toBeTruthy()
+    expect(checked.value).toBe(true)
     expect(wrapper.classes()).toContain('ix-switch-checked')
   })
 
@@ -156,7 +153,7 @@ describe('Switch.vue', () => {
 
     expect(wrapper.classes()).toContain('ix-switch-small')
 
-    await wrapper.setProps({ size: 'normal' })
+    await wrapper.setProps({ size: 'medium' })
 
     expect(wrapper.classes()).not.toContain('ix-switch-small')
   })

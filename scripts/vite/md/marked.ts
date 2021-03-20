@@ -51,7 +51,6 @@ renderer.heading = function (text, level) {
 }
 
 renderer.code = function (code: string, infoString: string, escaped: boolean) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const lang = (infoString || '').match(/\S*/)![0]
   if (this.options.highlight) {
     const out = this.options.highlight(code, lang || '')

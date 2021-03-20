@@ -2,13 +2,15 @@ import { computed, ComputedRef, inject, Ref, ref, watch, getCurrentInstance, Set
 import { isArray, hasSlot } from '@idux/cdk/utils'
 import { useAttrs } from '@idux/components/core/utils/'
 import { checkboxGroupInjectionKey, subjectInjectKey } from './checkbox'
-import type { CheckboxProps } from './types'
+import type { CheckboxBindings, CheckboxProps } from './types'
 
-interface CheckboxBindings {
+interface _CheckboxBindings extends CheckboxBindings {
   isChecked: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
+  isReadonly: ComputedRef<boolean>
   hasDefaultSlot: ComputedRef<boolean>
   handleChange: (e: Event) => void
+  handleClick: (e: Event) => void
   classes: ComputedRef<{
     'ix-checkbox-disabled': boolean
     'ix-checkbox-indeterminate': boolean
@@ -20,7 +22,7 @@ interface CheckboxBindings {
 
 type CheckValue = number | string | boolean
 
-export const setup = (props: CheckboxProps, { slots }: SetupContext): CheckboxBindings => {
+export const setup = (props: CheckboxProps, { slots }: SetupContext): _CheckboxBindings => {
   const hasDefaultSlot = computed(() => hasSlot(slots))
 
   const isDisabled = useDisabled()
@@ -72,7 +74,6 @@ export const setup = (props: CheckboxProps, { slots }: SetupContext): CheckboxBi
 }
 
 const useCheckValue = () => {
-  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props, emit } = getCurrentInstance()!
   const groupSubject = inject(subjectInjectKey, null)
   const checkeValue = ref(props.checked ?? props.falseValue)
@@ -105,7 +106,6 @@ const useCheckValue = () => {
 
 const useChecked = (checkValue: Ref<CheckValue>) => {
   const groupProps = inject(checkboxGroupInjectionKey, {})
-  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props } = getCurrentInstance()!
 
   return computed(() => {
@@ -120,7 +120,6 @@ const useChecked = (checkValue: Ref<CheckValue>) => {
 
 const useDisabled = () => {
   const groupProps = inject(checkboxGroupInjectionKey, {})
-  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props } = getCurrentInstance()!
   return computed(() => {
     return !!(groupProps.disabled || props.disabled)
@@ -129,7 +128,6 @@ const useDisabled = () => {
 
 const useReadonly = () => {
   const groupProps = inject(checkboxGroupInjectionKey, {})
-  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props } = getCurrentInstance()!
   return computed(() => {
     return !!(groupProps.readonly || props.readonly)
@@ -141,7 +139,6 @@ const useClasses = (
   isChecked: ComputedRef<boolean>,
   isReadonly: ComputedRef<boolean>,
 ) => {
-  //eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { props } = getCurrentInstance()!
 
   return computed(() => {

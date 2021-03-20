@@ -20,11 +20,11 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `checked(v-model)` | 确定切换器状态是否开启 | `boolean` | false | - | - |
+| `checked(v-model)` | 确定切换器状态是否开启 | `boolean` | `false` | - | - |
 | `checkedChildren` | 开启时切换器内部的文案 | `string` | - |  也可通过slot自定义 |
-| `disabled` | 是否禁止操作切换器 | `boolean` | false | - | - |
-| `loading` | 是否处于加载中（加载时不允许改变切换器的当前状态） | `boolean` | false | - | - |
-| `size` | 切换器的大小 | `normal\|small` | default | - | - |
+| `disabled` | 是否禁止操作切换器 | `boolean` | `false`| - | - |
+| `loading` | 是否处于加载中（加载时不允许改变切换器的当前状态） | `boolean` | `false` | - | - |
+| `size` | 切换器的大小 | `'medium'\|small` | `medium` | - | - |
 | `unCheckedChildren` | 关闭时切换器内部的文案 | `string` | - |  也可通过slot自定义 |
 
 #### Slots

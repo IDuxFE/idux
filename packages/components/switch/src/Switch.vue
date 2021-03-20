@@ -39,12 +39,12 @@ export default defineComponent({
     disabled: PropTypes.bool.def(false),
     checkedChildren: PropTypes.string.def(''),
     unCheckedChildren: PropTypes.string.def(''),
-    size: PropTypes.oneOf(['normal', 'small'] as const).def('normal'),
+    size: PropTypes.oneOf(['medium', 'small'] as const).def('medium'),
     loading: PropTypes.bool.def(false),
   },
   emits: ['change', 'update:checked'],
   setup(props: SwitchProps, { emit }) {
-    const stateChecked = ref(props.checked ?? false)
+    const stateChecked = ref(props.checked)
     const switchRef = ref<HTMLButtonElement | null>(null)
 
     const isSmallSize = computed(() => props.size === 'small')
@@ -52,21 +52,18 @@ export default defineComponent({
     watch(
       () => props.checked,
       curChecked => {
-        stateChecked.value = curChecked ?? false
+        stateChecked.value = curChecked
       },
     )
-
-    const setChecked = (checked: boolean) => {
-      stateChecked.value = !checked
-      emit('update:checked', stateChecked.value)
-    }
 
     const handleClick = () => {
       if (props.disabled || props.loading) {
         return
       }
-      setChecked(stateChecked.value)
-      emit('change', stateChecked.value)
+      const checked = !stateChecked.value
+      stateChecked.value = checked
+      emit('update:checked', checked)
+      emit('change', checked)
     }
 
     const handleMouseup = () => {

@@ -15,6 +15,7 @@ import { IxAffix } from './affix'
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxRate } from './rate'
+import { IxSwitch } from './switch'
 // Data Display
 import { IxBadge } from './badge'
 import { IxCard } from './card'
@@ -30,7 +31,6 @@ import { IxProgress } from './progress'
 // Other
 import { IxBackTop } from './back-top'
 // --- import end ---
-import { IxSwitch } from './switch'
 
 const components = [
   // General
@@ -51,6 +51,7 @@ const components = [
   IxInput,
   IxTextarea,
   IxRate,
+  IxSwitch,
   // Data Display
   IxBadge,
   IxCard,
@@ -67,7 +68,6 @@ const components = [
   // Other
   IxBackTop,
   // --- components end ---
-  IxSwitch,
 ]
 
 const directives: Record<string, Directive> = {
@@ -121,6 +121,7 @@ export {
   IxInput,
   IxTextarea,
   IxRate,
+  IxSwitch,
   // Data Display
   IxBadge,
   IxCard,
@@ -137,6 +138,5 @@ export {
   // Other
   IxBackTop,
   // --- export end ---
-  IxSwitch,
 }
 export * from './message'

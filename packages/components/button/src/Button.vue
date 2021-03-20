@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import type { ButtonConfig } from '@idux/components/core/config'
-import type { ButtonMode, ButtonGroupProps, ButtonProps } from './types'
+import type { ButtonConfig, ButtonMode } from '@idux/components/core/config'
+import type { ButtonGroupProps, ButtonProps } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
