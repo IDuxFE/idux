@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 5
 title:
   zh: CheckboxGroup 使用
   en: CheckboxGroup usage

@@ -126,6 +126,40 @@ describe('CheckboxGroup.vue and Checkbox.vue', () => {
     expect(mockFn).toBeCalledTimes(1)
   })
 
+  test('readonly work', async () => {
+    const value = ref([]) as Ref<string[]>
+    const readonly = ref(true)
+    const mockFn = jest.fn()
+    const wrapper = mount({
+      components: { CheckboxGroup, Checkbox },
+      template: `
+      <checkbox-group v-model:value="value" :readonly="readonly" @change="mockFn">
+        <checkbox value="option1"> option1 </checkbox>
+        <checkbox value="option2"> option2 </checkbox>
+        <checkbox value="option3"> option3 </checkbox>
+      </checkbox-group>
+      `,
+      setup() {
+        return { value, readonly, mockFn }
+      },
+    })
+
+    expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(3)
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    expect(value.value).toEqual([])
+    expect(mockFn).toBeCalledTimes(0)
+
+    readonly.value = false
+
+    await nextTick()
+
+    expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(0)
+
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    expect(value.value).toEqual(['option1'])
+    expect(mockFn).toBeCalledTimes(1)
+  })
+
   test('name work', async () => {
     const wrapper = mount({
       components: { CheckboxGroup, Checkbox },

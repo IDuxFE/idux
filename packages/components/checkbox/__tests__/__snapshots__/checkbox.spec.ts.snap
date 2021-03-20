@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkbox.vue render work 1`] = `"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" ariachecked=\\"false\\" ariadisabled=\\"false\\"><span class=\\"ix-checkbox-input-wrapper\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input\\" truevalue=\\"true\\" falsevalue=\\"false\\" value=\\"\\"><span class=\\"ix-checkbox-inner\\"></span></span><!--v-if--></label>"`;
+exports[`Checkbox.vue render work 1`] = `"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" ariachecked=\\"false\\" ariadisabled=\\"false\\" ariareadonly=\\"false\\"><span class=\\"ix-checkbox-input-wrapper\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input\\" truevalue=\\"true\\" falsevalue=\\"false\\" value=\\"\\"><span class=\\"ix-checkbox-inner\\"></span></span><!--v-if--></label>"`;
