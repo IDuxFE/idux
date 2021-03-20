@@ -4,4 +4,4 @@ import IxSwitch from './src/Switch.vue'
 IxSwitch.install = installComponent(IxSwitch)
 
 export { IxSwitch }
-export { SwitchComponent, SwitchProps } from './src/types'
+export type { SwitchComponent, SwitchProps } from './src/types'
