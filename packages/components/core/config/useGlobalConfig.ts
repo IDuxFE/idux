@@ -15,7 +15,6 @@ export function useGlobalConfig<T extends GlobalConfigKey>(
   compName: T,
   config?: Partial<GlobalConfig[T]>,
 ): GlobalConfig[T] {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const token = tokenMap.get(compName)!
   const parentConfig = inject(token, defaultConfig[compName])
 

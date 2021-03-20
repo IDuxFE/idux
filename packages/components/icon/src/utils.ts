@@ -48,7 +48,6 @@ export const loadIconFontSvgElement = (iconName: string): SVGElement => {
     svg = cached.svg
   } else {
     const svgString = `<svg><use xlink:href="#${iconName}"></svg>`
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     svg = createSVGElement(svgString)!
     setSVGAttribute(svg, iconName)
     iconRenderedCache.set('iconfont-' + iconName, { name: iconName, svg })

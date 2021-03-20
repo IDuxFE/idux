@@ -26,5 +26,5 @@
       "@tests": ["./tests"]
     }
   },
-  "exclude": ["node_modules", "output"]
+  "exclude": ["node_modules", "output", "dist"]
 }

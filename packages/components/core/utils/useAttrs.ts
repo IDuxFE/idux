@@ -20,7 +20,6 @@ export const useAttrs = (
   const instance = getCurrentInstance()
 
   return computed(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const attrs = instance!.proxy!.$attrs
     return Object.keys(attrs).reduce((res, key) => {
       if (!excludeKeys.includes(key) && !(listeners && listenersRegexp.test(key))) {

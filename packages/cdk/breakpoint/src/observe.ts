@@ -79,7 +79,6 @@ export function cleanObservables(): void {
 function _registerQuery(query: string): Query {
   // Only set up a new MediaQueryList if it is not already being listened for.
   if (_queries.has(query)) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return _queries.get(query)!
   }
 

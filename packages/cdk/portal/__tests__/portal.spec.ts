@@ -1,11 +1,6 @@
-import type { DefineComponent } from 'vue'
-import type { MountingOptions } from '@vue/test-utils'
-
-import type { PortalProps } from '../src/types'
-
 import { defineComponent } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 
 import IxPortal from '../src/Portal.vue'
 
@@ -23,13 +18,12 @@ const TestComponent = defineComponent({
 })
 
 describe('Portal.vue', () => {
-  let PortalMount: (
-    options?: MountingOptions<Partial<PortalProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<PortalProps>>>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let PortalMount: any
 
   beforeEach(() => {
     PortalMount = (options = { props: { target: 'ix-container' } }) => {
-      return mount<PortalProps>(TestComponent, {
+      return mount(TestComponent, {
         ...options,
       })
     }

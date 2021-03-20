@@ -10,7 +10,7 @@ export const useClipboard = (): { copy: (text: string, attempts?: number) => Pro
   const clipboard = Clipboard.getInstance()
   const pendingSet = new Set<PendingCopy>()
   let unmounted = false
-  let currentTimeout: NodeJS.Timeout | null = null
+  let currentTimeout: number | null = null
 
   onUnmounted(() => {
     if (currentTimeout !== null) {

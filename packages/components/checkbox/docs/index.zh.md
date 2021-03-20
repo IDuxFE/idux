@@ -79,8 +79,8 @@ cover:
 |@checkbox-border-radius| @border-radius-sm|-|
 |@checkbox-bg-color| @white|-|
 |@checkbox-tick-border-style| @border-width-md solid @white|-|
-|@checkbox-tick-width| (@checkbox-width / @font-size-base) * 5px|-|
-|@checkbox-tick-height| (@checkbox-height / @font-size-base) * 8px|-|
+|@checkbox-tick-width| (@checkbox-width / @font-size-base)*5px | - |
+|@checkbox-tick-height| (@checkbox-height / @font-size-base)*8px | - |
 |@checkbox-bg-indeterminate-color| @primary-color|-|
 |@checkbox-indeterminate-width| 8px|-|
 |@checkbox-indeterminate-height| 8px|-|

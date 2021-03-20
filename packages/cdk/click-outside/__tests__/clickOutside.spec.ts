@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components'
+import { IxButton } from '@idux/components/button'
 import { clickOutside } from '../src/useClickOutside'
 
 describe('useClickOutside.ts', () => {
