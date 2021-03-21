@@ -30,8 +30,11 @@ export function initSite(): void {
 
   const filterComponentName = ['style', 'core', 'i18n', 'version', 'utils']
   readdirSync(packageRoot).forEach(packageName => {
-    docsMeta[packageName] = {}
     const packageDirname = join(packageRoot, packageName)
+    if (!statSync(packageDirname).isDirectory()) {
+      return
+    }
+    docsMeta[packageName] = {}
     readdirSync(packageDirname).forEach(componentName => {
       if (filterComponentName.includes(componentName)) {
         return
