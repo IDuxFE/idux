@@ -13,6 +13,7 @@ output
 
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 /public/icon-svg
 /site/docs/router.ts
