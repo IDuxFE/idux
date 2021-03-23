@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent, onMounted, onUnmounted } from 'vue'
 import { IxButton } from '@idux/components'
 import { IxPortal } from '@idux/cdk/portal'
 import { useOverlay } from '@idux/cdk/overlay'
@@ -57,7 +57,7 @@ export default defineComponent({
 
     onMounted(initialize)
 
-    onBeforeUnmount(destroy)
+    onUnmounted(destroy)
 
     return { triggerEvents, triggerRef, overlayRef, overlayEvents, visibility, hide }
   },

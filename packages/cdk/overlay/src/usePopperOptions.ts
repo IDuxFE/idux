@@ -1,9 +1,10 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
-import type { RefElement } from './types'
+import type { OverlayElement } from './types'
 
 import { computed } from 'vue'
 import { useModifiers } from './useModifiers'
+import { isHTMLElement } from '@idux/cdk/utils'
 
 type PartialOptions = Partial<Options>
 
@@ -16,16 +17,20 @@ interface PopperProps {
 }
 
 interface PopperState {
-  arrow: Ref<RefElement>
+  arrow: Ref<OverlayElement | null>
 }
 
 export function usePopperOptions(props: PopperProps, state: PopperState): ComputedRef<PartialOptions> {
-  return computed<PartialOptions>(() => ({
-    placement: props.placement,
-    ...props.popperOptions,
-    modifiers: useModifiers(
-      { offset: props.offset, arrow: state.arrow.value, arrowOffset: props.arrowOffset, showArrow: props.showArrow },
-      props.popperOptions?.modifiers,
-    ),
-  }))
+  return computed<PartialOptions>(() => {
+    const arrowUnref = state.arrow.value
+    const arrow = isHTMLElement(arrowUnref) ? arrowUnref : arrowUnref?.$el || null
+    return {
+      placement: props.placement,
+      ...props.popperOptions,
+      modifiers: useModifiers(
+        { offset: props.offset, arrow, arrowOffset: props.arrowOffset, showArrow: props.showArrow },
+        props.popperOptions?.modifiers,
+      ),
+    }
+  })
 }
