@@ -120,9 +120,9 @@ class Generate {
     const demoVueTemplate = getDemoVueTemplate(kebabCase(name))
 
     return Promise.all([
-      writeFile(resolve(this.dirPath, 'docs', 'index.zh.md'), docsZhTemplate),
-      writeFile(resolve(this.dirPath, 'docs', 'index.en.md'), docsEnTemplate),
-      writeFile(resolve(this.dirPath, 'demo', 'basic.md'), demoTemplate),
+      writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), docsZhTemplate),
+      writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), docsEnTemplate),
+      writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), demoTemplate),
       writeFile(resolve(this.dirPath, 'demo', 'Basic.vue'), demoVueTemplate),
     ])
   }
