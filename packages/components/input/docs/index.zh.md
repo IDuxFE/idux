@@ -1,6 +1,6 @@
 ---
 category: components
-type:
+type: 数据录入
 title: Input
 subtitle: 输入框
 cover:
@@ -89,7 +89,7 @@ cover:
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
 | @input-secondary-color | @text-secondary-color;| - |
-| @input-bg-color | @component-background;| - |
+| @input-bg-color | @background-color-component;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |
 | @input-hover-border-color | ~`colorPalette('@{primary-color}', -10)`;| - |

@@ -59,6 +59,8 @@ export default defineComponent({
     const textareaRef = ref((null as unknown) as HTMLTextAreaElement)
 
     const {
+      focus,
+      blur,
       onCompositionStart,
       onCompositionEnd,
       onInput,
@@ -87,6 +89,8 @@ export default defineComponent({
     useAutoRows(textareaRef, autoRows, valueAccessor)
 
     return {
+      focus,
+      blur,
       attrs,
       textareaRef,
       classes,

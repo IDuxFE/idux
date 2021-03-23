@@ -21,11 +21,13 @@
 @warning-color: @yellow;
 @error-color: @red;
 
-@body-background: @white;
-@component-background: @white;
+@background-color-base: hsv(0, 0, 95%); // Default grey background color
+@background-color-light: hsv(0, 0, 98%); // background of header and selected item
+@background-color-body: @white;
+@background-color-component: @white;
 
-@disabled-color: fade(#000, 25%);
-@disabled-bg-color: hsv(0, 0, 95%);
+@disabled-color: fade(@black, 25%);
+@disabled-bg-color: @background-color-base;
 
 @heading-color: fade(@black, 85%);
 
@@ -70,15 +72,15 @@
 @button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
 @button-default-color: @text-color;
-@button-default-bg: @component-background;
+@button-default-bg: @background-color-component;
 @button-default-border: @border-color;
 
 @button-danger-color: @error-color;
 @button-danger-bg: @error-color;
 
-@button-ghost-color: @component-background;
+@button-ghost-color: @background-color-component;
 @button-ghost-bg: transparent;
-@button-ghost-border: @component-background;
+@button-ghost-border: @background-color-component;
 
 @button-link-color: @primary-color;
 @button-link-hover-bg: transparent;
@@ -107,7 +109,7 @@
 
 @title-color: @black;
 @title-sub-color: @text-secondary-color;
-@title-bg-color: @component-background;
+@title-bg-color: @background-color-component;
 
 @title-prefix-margin: @margin-md;
 @title-content-margin: @margin-md;
@@ -213,16 +215,24 @@
 @input-height-sm: @height-sm;
 @input-height-md: @height-md;
 @input-height-lg: @height-lg;
-
+@input-padding-horizontal-sm: @padding-sm - 2px;
+@input-padding-horizontal-md: @padding-sm;
+@input-padding-horizontal-lg: @padding-sm + 2px;
+@input-padding-vertical-sm: max(
+  (round(((@input-height-sm - @input-font-size-sm * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  0
+);
+@input-padding-vertical-md: max(
+  (round(((@input-height-md - @input-font-size-md * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  2px
+);
+@input-padding-vertical-lg: (ceil(((@input-height-lg - @input-font-size-lg * @input-line-height) / 2) * 10) / 10) -
+  @input-border-width;
 @input-font-size-sm: @font-size-md;
 @input-font-size-md: @font-size-md;
 @input-font-size-lg: @font-size-lg;
 
 @input-wrapper-inner-margin: @margin-xs;
-
-@input-padding-horizontal-sm: @input-padding-horizontal-md - 2px;
-@input-padding-horizontal-md: @padding-sm;
-@input-padding-horizontal-lg: @input-padding-horizontal-md + 2px;
 
 @input-border-width: @border-width-sm;
 @input-border-style: @border-style;
@@ -230,7 +240,7 @@
 
 @input-color: @text-color;
 @input-secondary-color: @text-secondary-color;
-@input-bg-color: @component-background;
+@input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-hover-border-color: ~`colorPalette('@{primary-color}', -10) `;
@@ -241,12 +251,32 @@
 
 @input-border-radius: @border-radius-md;
 @input-transition-duration: @transition-duration-base;
+@input-transition: all @transition-duration-base @ease-in-out;
 
 /* rate -------------------------- */
 @rate-icon-size: 24px;
 @rate-icon-margin: 8px;
 @rate-stroke-color: #f7ba2a;
 @rate-background-color: #c6d1de;
+
+/* switch -------------------------- */
+@switch-close-bg-color: #ccc;
+@switch-close-border-color: transparent;
+@switch-close-loading-color: @switch-close-bg-color;
+@switch-open-bg-color: @blue;
+@switch-open-border-color: @border-color;
+@switch-open-loading-color: @switch-open-bg-color;
+@switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
+@switch-normal-height: 22px;
+@switch-normal-inner-circle-size: 18px;
+@switch-small-height: @switch-normal-height - 4;
+@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 6;
+@switch-loading-size: @font-size-sm;
+@switch-inner-font-size: @font-size-sm;
+@switch-inner-circle-bg-color: @white;
+@switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+@switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
+@switch-disable-opacity: 0.4;
 
 // Data Display
 
@@ -274,7 +304,7 @@
 /* empty -------------------------- */
 @empty-margin-md: @margin-md;
 @empty-line-height-md: @line-height-base;
-@empty-font-size-md: @font-size-lg;
+@empty-font-size-md: @font-size-md;
 @empty-icon-font-size-md: 64px;
 
 /* image -------------------------- */
@@ -382,25 +412,6 @@
 @progress-line-font-size-md: @font-size-md;
 @progress-line-font-size-sm: @font-size-sm;
 @progress-circle-font-size-md: @font-size-2xl;
-
-// Switch
-@switch-close-bg-color: #ccc;
-@switch-close-border-color: transparent;
-@switch-close-loading-color: @switch-close-bg-color;
-@switch-open-bg-color: @blue;
-@switch-open-border-color: @border-color;
-@switch-open-loading-color: @switch-open-bg-color;
-@switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
-@switch-normal-height: 22px;
-@switch-normal-inner-circle-size: 18px;
-@switch-small-height: @switch-normal-height - 4;
-@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 6;
-@switch-loading-size: @font-size-sm;
-@switch-inner-font-size: @font-size-sm;
-@switch-inner-circle-bg-color: @white;
-@switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-@switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
-@switch-disable-opacity: 0.4;
 
 // Other
 

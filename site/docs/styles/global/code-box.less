@@ -2,10 +2,10 @@
   position: relative;
   width: 100%;
   margin: 0 0 @margin-lg;
-  background-color: @component-background;
+  background-color: @background-color-component;
   border: @border-width-sm @border-style @border-color-split;
   border-radius: @border-radius-md;
-  transition: all @transition-duration-slow;
+  transition: all @transition-duration-base;
 
   &.expand &-meta {
     border-bottom: @border-width-sm dashed @border-color-split;
@@ -47,7 +47,7 @@
     top: -@margin-lg;
     margin-left: @margin-lg;
     padding: @padding-xs @padding-sm;
-    background: @body-background;
+    background: @background-color-body;
     border-radius: @border-radius-sm @border-radius-sm 0 0;
 
     .global-code-box-edit {
@@ -97,7 +97,7 @@
       padding: 0;
       code {
         padding: @margin-sm;
-        background: @body-background;
+        background: @background-color-body;
       }
     }
   }

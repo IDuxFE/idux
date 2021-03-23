@@ -90,6 +90,8 @@ export default defineComponent({
     const inputRef = ref((null as unknown) as HTMLInputElement)
 
     const {
+      focus,
+      blur,
       onCompositionStart,
       onCompositionEnd,
       onInput,
@@ -108,6 +110,8 @@ export default defineComponent({
     const onPrefixClick = (evt: MouseEvent) => emit('prefixClick', valueAccessor.value, evt)
 
     return {
+      focus,
+      blur,
       attrs,
       inputRef,
       classes,

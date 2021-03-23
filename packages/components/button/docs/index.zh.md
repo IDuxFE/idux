@@ -83,13 +83,13 @@ cover:
 | @button-primary-bg | @primary-color | - |
 | @button-primary-text-shadow | 0 -1px 0 rgba(0, 0, 0, 0.15) | - |
 | @button-default-color | @text-color | - |
-| @button-default-bg | @component-background | - |
+| @button-default-bg | @background-color-component | - |
 | @button-default-border | @border-color | - |
 | @button-danger-color | @error-color | - |
 | @button-danger-bg | @error-color | - |
-| @button-ghost-color | @component-background | - |
+| @button-ghost-color | @background-color-component | - |
 | @button-ghost-color | transparent | - |
-| @button-ghost-border | @component-background | - |
+| @button-ghost-border | @background-color-component | - |
 | @button-link-color | @primary-color | - |
 | @button-link-hover-bg | transparent | - |
 | @button-text-color | @text-color | - |

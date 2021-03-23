@@ -18,6 +18,8 @@ export interface InputProps {
 
 export interface InputBindings {
   inputRef: Ref<HTMLInputElement>
+  focus: (options?: FocusOptions) => void
+  blur: () => void
 }
 
 export type InputComponent = InstanceType<DefineComponent<InputProps, InputBindings>>
@@ -38,6 +40,8 @@ export interface TextareaProps {
 
 export interface TextareaBindings {
   textareaRef: Ref<HTMLTextAreaElement>
+  focus: (options?: FocusOptions) => void
+  blur: () => void
 }
 
 export type TextareaComponent = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>
