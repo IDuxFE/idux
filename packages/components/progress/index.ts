@@ -4,4 +4,5 @@ import IxProgress from './src/Progress.vue'
 IxProgress.install = installComponent(IxProgress)
 
 export { IxProgress }
-export * from './src/types'
+
+export type { ProgressComponent, ProgressProps } from './src/types'

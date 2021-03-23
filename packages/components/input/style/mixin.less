@@ -1,14 +1,3 @@
-@input-padding-vertical-sm: max(
-  (round(((@input-height-sm - @input-font-size-sm * @input-line-height) / 2) * 10) / 10) - @input-border-width,
-  0
-);
-@input-padding-vertical-md: max(
-  (round(((@input-height-md - @input-font-size-md * @input-line-height) / 2) * 10) / 10) - @input-border-width,
-  3px
-);
-@input-padding-vertical-lg: (ceil(((@input-height-lg - @input-font-size-lg * @input-line-height) / 2) * 10) / 10) -
-  @input-border-width;
-
 .input-size() {
   &-large {
     font-size: @input-font-size-lg;
@@ -84,9 +73,7 @@
     &-focused,
     &-disabled {
       .@{input-prefix}-wrapper {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
+        .borderless();
       }
     }
   }
