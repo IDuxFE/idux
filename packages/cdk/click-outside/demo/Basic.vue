@@ -1,25 +1,37 @@
 <template>
-  <ix-button @click.stop="toggle">toggle</ix-button>
-  <p v-if="visible" v-click-outside="toggle" @click="log">Hello world</p>
+  <ix-button v-click-outside="one">one</ix-button>
+  <ix-button v-click-outside="two">two</ix-button>
+  <ix-button v-click-outside="three">three</ix-button>
+  <ix-button v-click-outside="four">four</ix-button>
 </template>
+
+<style scoped>
+.ix-button {
+  margin-right: 4px;
+}
+</style>
+
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
+import { MessageService } from '@idux/components'
 
 export default defineComponent({
   directives: { clickOutside },
   setup() {
-    const visible = ref(false)
-
-    const toggle = () => {
-      visible.value = !visible.value
+    const one = () => {
+      MessageService.info('one')
     }
-
-    const log = () => {
-      console.log('hello world')
+    const two = () => {
+      MessageService.info('two')
     }
-
-    return { visible, toggle, log }
+    const three = () => {
+      MessageService.info('three')
+    }
+    const four = () => {
+      MessageService.info('four')
+    }
+    return { one, two, three, four }
   },
 })
 </script>

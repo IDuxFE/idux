@@ -19,5 +19,12 @@ cover:
 #### Props
 
 ```typescript
-type ClickOutside = (...args: unknown[]) => void
+interface ClickOutsideOptions {
+  exclude: Ref<HTMLElement>[]
+  handler: ClickOutsideHandler
+}
+
+type ClickOutsideHandler = () => void
+
+type ClickOutsideBinding = ClickOutsideHandler | ClickOutsideOptions
 ```
