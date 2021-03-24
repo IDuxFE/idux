@@ -2,8 +2,7 @@
 import type { AbstractControl } from './controls/abstractControl'
 
 import { reactive, getCurrentInstance, watchEffect } from 'vue'
-import { Logger } from '@idux/components/core/logger'
-import { isDevMode } from '@idux/components/core/utils'
+import { Logger } from '@idux/cdk/utils'
 import { isAbstractControl } from './typeof'
 import { injectControl } from './utils'
 
@@ -31,7 +30,7 @@ export function useValueAccessor(options: AccessorOptions = {}): ValueAccessor {
         control = controlOrPath
       } else {
         control = injectControl(controlOrPath)
-        if (isDevMode && !control) {
+        if (!control) {
           Logger.error(`not find control by [${controlOrPath}]`)
         }
       }

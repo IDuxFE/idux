@@ -6,6 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+import { Logger } from '@idux/cdk/utils'
+
 /**
  * A pending copy-to-clipboard operation.
  *
@@ -54,9 +56,8 @@ export class PendingCopy {
           currentFocus.focus()
         }
       }
-    } catch {
-      // Discard error.
-      // Initial setting of {@code successful} will represent failure here.
+    } catch (err) {
+      Logger.error(err)
     }
 
     return successful

@@ -1,7 +1,6 @@
 import type { IconDefinition, IconRendered } from './types'
 
-import { IDUX_COMPONENTS_PREFIX } from '@idux/components/core/constant'
-import { Logger } from '@idux/components/core/logger'
+import { Logger } from '@idux/cdk/utils'
 
 export const iconDefinitions = new Map<string, IconDefinition>()
 const iconRenderedCache = new Map<string, IconRendered>()
@@ -22,23 +21,26 @@ export const clearSVGElement = (el: HTMLElement): void => {
 export const loadSVGElement = async (
   iconName: string,
   loadIconDynamically?: (iconName: string) => Promise<string>,
-): Promise<SVGElement> => {
-  let svg: SVGElement | null
+): Promise<SVGElement | null> => {
+  let svg: SVGElement | null = null
   const cached = iconRenderedCache.get(iconName)
   if (cached) {
     svg = cached.svg
   } else {
     const icon = await loadIconDefinition(iconName, loadIconDynamically)
-    svg = createSVGElement(icon.svgString)
-    if (svg) {
-      setSVGAttribute(svg, iconName)
-      iconRenderedCache.set(iconName, { name: iconName, svg })
-    } else {
-      throw new Error(`${IDUX_COMPONENTS_PREFIX} The icon [${iconName}] create failed.`)
+    if (icon) {
+      svg = createSVGElement(icon.svgString)
+      if (svg) {
+        setSVGAttribute(svg, iconName)
+        iconRenderedCache.set(iconName, { name: iconName, svg })
+        svg = svg.cloneNode(true) as SVGElement
+      } else {
+        Logger.error(`The icon [${iconName}] create failed.`)
+        return null
+      }
     }
   }
-
-  return svg.cloneNode(true) as SVGElement
+  return svg
 }
 
 export const loadIconFontSvgElement = (iconName: string): SVGElement => {
@@ -66,11 +68,11 @@ async function loadIconDefinition(iconName: string, loadIconDynamically?: (iconN
         icon = { name: iconName, svgString }
         iconDefinitions.set(iconName, icon)
       } else {
-        throw new Error(`${IDUX_COMPONENTS_PREFIX} The Dynamically loaded icon [${iconName}] is not valid.`)
+        return Logger.error(`The dynamically loaded icon [${iconName}] is invalid.`)
       }
     }
     if (!icon) {
-      throw new Error(`${IDUX_COMPONENTS_PREFIX} The icon [${iconName}] load failed.`)
+      return Logger.error(`The icon [${iconName}] load failed.`)
     }
   }
   return icon

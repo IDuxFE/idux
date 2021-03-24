@@ -1,5 +1,4 @@
-import { isString } from '@idux/cdk/utils'
-import { Logger } from '../logger'
+import { isString, Logger } from '@idux/cdk/utils'
 
 export function getTarget(target: string | HTMLElement | Window | undefined): HTMLElement | Window {
   if (isString(target)) {

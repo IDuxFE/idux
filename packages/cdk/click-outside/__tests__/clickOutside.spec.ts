@@ -1,6 +1,5 @@
 import { computed, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components/button'
 import { clickOutside } from '../src/useClickOutside'
 
 describe('useClickOutside.ts', () => {
@@ -11,7 +10,6 @@ describe('useClickOutside.ts', () => {
   })
 
   const testComponent = {
-    components: { IxButton },
     directives: { clickOutside },
     setup() {
       const status = ref(false)
@@ -37,7 +35,7 @@ describe('useClickOutside.ts', () => {
       return { update, log, globalClick }
     },
     template: `
-      <ix-button @click="update">Update</ix-button>
+      <button class='test-button' @click="update">Update</button>
       <p v-click-outside="globalClick" @click="log">Hello world</p>
     `,
   }
@@ -63,7 +61,7 @@ describe('useClickOutside.ts', () => {
     document.body.click()
     expect(warn).toBeCalled()
     expect(warn).toBeCalledTimes(1)
-    await wrapper.get('.ix-button').trigger('click')
+    await wrapper.get('.test-button').trigger('click')
     document.body.click()
     expect(error).toBeCalled()
     expect(error).toBeCalledTimes(1)
