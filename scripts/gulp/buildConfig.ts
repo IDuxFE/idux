@@ -21,5 +21,5 @@ export const buildConfig = {
   publishDir: join(outputRoot, 'publish'),
   libDir: join(outputRoot, 'lib'),
   iconAssetsDir: join(__dirname, 'icons/assets'),
-  iconDefinitionsDir: join(packageRoot, 'components/icon/definitions'),
+  iconDefinitionsDir: join(packageRoot, 'components/icon/src'),
 }

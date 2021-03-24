@@ -31,9 +31,8 @@ export async function generateIcons(): Promise<void> {
     output(iconFileContent, iconName)
   })
 
-  const indexContent =
-    outputDefinitionNames.map(item => `export { ${upperFirst(item)} } from './${item}'`).join('\n') + '\n'
-  writeFile(join(iconDefinitionsDir, `index.ts`), indexContent, 'utf8')
+  const indexContent = outputDefinitionNames.join('\n')
+  writeFile(join(iconDefinitionsDir, `definitions.ts`), indexContent, 'utf8')
 }
 
 async function output(content: string, iconName: string) {
@@ -48,7 +47,6 @@ function outputIcons(iconName: string, data: string) {
 }
 
 function outputDefinitions(iconName: string, data: string) {
-  ensureDirSync(iconDefinitionsDir)
   const _iconName = `${iconName.replace('.svg', '')}`
   const camelCaseName = camelCase(_iconName)
   const definitionName = upperFirst(camelCaseName)
@@ -56,8 +54,7 @@ function outputDefinitions(iconName: string, data: string) {
     .replace('{{definitionName}}', definitionName)
     .replace('{{name}}', _iconName)
     .replace('{{svgString}}', data)
-  writeFileSync(join(iconDefinitionsDir, `${camelCaseName}.ts`), iconDefinition, 'utf8')
-  outputDefinitionNames.push(`${camelCaseName}`)
+  outputDefinitionNames.push(iconDefinition)
 }
 
 export function copyToSite(): void {
