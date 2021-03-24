@@ -106,11 +106,11 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
         } else {
           componentsMap[type].children.push(item)
         }
-        mdPath = `../../packages/${packageName}/${componentName}/docs/index.${lang}.md`
+        mdPath = `../../packages/${packageName}/${componentName}/docs/Index.${lang}.md`
       } else if (category === 'cdk') {
         const item = { path, title, subtitle, lang, order }
         cdk.push(item)
-        mdPath = `../../packages/${packageName}/${componentName}/docs/index.${lang}.md`
+        mdPath = `../../packages/${packageName}/${componentName}/docs/Index.${lang}.md`
       }
       const route = `{path: '${path}', 'component': () => import('${mdPath}')},`
       routes.push(route)

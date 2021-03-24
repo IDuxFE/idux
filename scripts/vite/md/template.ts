@@ -1,5 +1,3 @@
-import { camelCase, upperFirst } from 'lodash'
-
 export const getComponentScript = (componentName: string, imports: string[], components: string[]): string => {
   return `
     <script lang='ts'>
@@ -61,7 +59,6 @@ export const getDemoTemplate = (options: {
   code: string
 }): string => {
   const { packageName, componentName, demoName, zhTitle, enTitle, zhDescription, enDescription, code } = options
-  const demoComponentName = upperFirst(camelCase(demoName))
   return `
 <template>
   <global-code-box
@@ -83,11 +80,11 @@ export const getDemoTemplate = (options: {
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'
 import { useClipboard } from '@idux/cdk/clipboard'
-import ${demoComponentName} from './${demoComponentName}.vue'
+import ${demoName} from './${demoName}.vue'
 
 export default defineComponent({
   name: '${packageName}-${componentName}-${demoName}',
-  components:{ 'raw-demo': ${demoComponentName} },
+  components:{ 'raw-demo': ${demoName} },
   setup() {
     const { copy } = useClipboard()
     const copied = ref(false)

@@ -1,7 +1,7 @@
 import { series, task } from 'gulp'
 import detectPort from 'detect-port'
 
-import { execNodeTask } from '../util/task-helpers'
+import { execNodeTask } from '../util/taskHelpers'
 import { initSite } from '../site'
 
 /** Parse demos and docs to site directory. */

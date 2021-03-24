@@ -4,7 +4,7 @@ import { parsePackageDocs } from './parsePackageDocs'
 
 export function parseMd(id: string, raw: string): string {
   if (id.match(/\.(zh|en)\.md$/)) {
-    if (id.match(/index\.(zh|en)\.md$/)) {
+    if (id.match(/Index\.(zh|en)\.md$/)) {
       return parsePackageDocs(id, raw)
     } else {
       return parseGlobalDocs(id, raw)

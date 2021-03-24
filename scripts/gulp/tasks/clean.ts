@@ -1,6 +1,6 @@
 import { task } from 'gulp'
 import { buildConfig } from '../buildConfig'
-import { cleanTask } from '../util/task-helpers'
+import { cleanTask } from '../util/taskHelpers'
 
 task('clean', cleanTask([buildConfig.outputDir, buildConfig.publishDir]))
 

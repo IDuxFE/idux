@@ -2,7 +2,6 @@
 import remark from 'remark'
 import { dirname, join } from 'path'
 import { existsSync, readdirSync, readFileSync } from 'fs-extra'
-import { camelCase, upperFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
 import marked from './marked'
@@ -39,7 +38,7 @@ export function parsePackageDocs(id: string, raw: string): string {
   )
 
   const docsScript = getComponentScript(
-    upperFirst(camelCase('Demo' + componentName)),
+    'Demo' + componentName,
     demoMetas.map(item => item.importStr),
     componentNames,
   )
@@ -79,7 +78,7 @@ function getDemoMetas(id: string) {
     readdirSync(demoPath).forEach(demo => {
       if (demo.endsWith('.md')) {
         const { order, title } = loadFront(readFileSync(join(demoPath, demo)))
-        const componentName = upperFirst(camelCase(withoutSuffix(demo)))
+        const componentName = withoutSuffix(demo)
         const importStr = `import ${componentName} from '../demo/${demo}'`
 
         demoMates.push({ order, title, importStr, componentName })
