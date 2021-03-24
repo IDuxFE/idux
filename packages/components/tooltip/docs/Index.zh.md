@@ -41,4 +41,4 @@ order: 0
 
 | 名称 | 说明 | 类型 |
 | --- | --- | --- |
-| `visibleChange` | 浮层显隐变化回调 | `(visible: boolean) => void` |
+| `update:visible` | 浮层显隐变化回调 | `(visible: boolean) => void` |

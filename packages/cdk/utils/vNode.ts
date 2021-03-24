@@ -57,7 +57,7 @@ export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[
 
   let vNodes = slot(...options)
   if (vNodes.length === 1 && isFragment(vNodes[0])) {
-    vNodes = vNodes[0].dynamicChildren ?? []
+    vNodes = (vNodes[0].children as VNode[]) ?? vNodes[0].dynamicChildren ?? []
   }
 
   return vNodes

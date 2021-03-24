@@ -24,6 +24,7 @@ import { IxImage } from './image'
 import { IxStatistic } from './statistic'
 import { IxTimeline, IxTimelineItem } from './timeline'
 import { IxTooltip } from './tooltip'
+import { IxPopover } from './popover'
 // Feedback
 import { IxResult } from './result'
 import { IxSpin } from './spin'
@@ -61,6 +62,7 @@ const components = [
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
+  IxPopover,
   // Feedback
   IxResult,
   IxSpin,
@@ -131,6 +133,7 @@ export {
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
+  IxPopover,
   // Feedback
   IxResult,
   IxSpin,
