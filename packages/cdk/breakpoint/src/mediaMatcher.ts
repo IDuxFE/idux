@@ -7,6 +7,7 @@
  */
 
 import { isBrowser, isWebKit } from '@idux/cdk/platform'
+import { Logger } from '@idux/cdk/utils'
 
 /** Global registry for all dynamically-created, injected media queries. */
 const mediaQueriesForWebkitCompatibility: Set<string> = new Set<string>()
@@ -34,8 +35,8 @@ function createEmptyStyleRule(query: string): void {
       ;(mediaQueryStyleNode.sheet as CSSStyleSheet).insertRule(`@media ${query} {.fx-query-test{ }}`, 0)
       mediaQueriesForWebkitCompatibility.add(query)
     }
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    Logger.error(err)
   }
 }
 

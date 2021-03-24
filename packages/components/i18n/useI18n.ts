@@ -2,8 +2,7 @@ import type { ComputedRef } from 'vue'
 import type { Locale, LocaleKey, LocaleType } from './types'
 
 import { computed, ref } from 'vue'
-import { IDUX_COMPONENTS_PREFIX } from '@idux/components/core/constant'
-import { Logger } from '@idux/components/core/logger'
+import { Logger } from '@idux/cdk/utils'
 import defaultLocale from './locales/zh-CN'
 
 const currentType = ref<LocaleType>('zh-CN')
@@ -14,7 +13,7 @@ export function useLocale(locale: LocaleType | Locale): void {
     if (localeMap[locale]) {
       currentType.value = locale
     } else {
-      Logger.warn(`${IDUX_COMPONENTS_PREFIX} The local [${locale}] was not added, please via 'addLocale()' add it.`)
+      Logger.warn(`The local [${locale}] was not added, please via 'addLocale()' add it.`)
     }
   } else {
     const type = locale.type

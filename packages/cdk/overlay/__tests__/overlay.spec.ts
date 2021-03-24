@@ -2,7 +2,6 @@ import type { OverlayOptions, OverlayTrigger } from '@idux/cdk/overlay'
 
 import { onMounted, onUpdated, PropType, unref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components/button'
 import { useOverlay } from '../src/useOverlay'
 
 const defaultOverlayOptions: OverlayOptions = {
@@ -73,7 +72,6 @@ describe('useOverlay.ts', () => {
 
   test('component trigger work', async () => {
     const TestComponent = {
-      components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, visibility } = useOverlay({
           ...options,
@@ -86,7 +84,7 @@ describe('useOverlay.ts', () => {
         return { overlayRef, triggerRef, triggerEvents, overlayEvents, visibility }
       },
       template: `
-      <ix-button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</ix-button>
+      <button id="trigger" ref="triggerRef" @click="triggerEvents.onClick">Trigger</button>
       <div v-show="visibility" id="overlay" ref="overlayRef" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">Overlay</div>
       `,
     }
@@ -130,7 +128,6 @@ describe('useOverlay.ts', () => {
 
   test('update work', async () => {
     const TestComponent = {
-      components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, update, visibility } = useOverlay(
           options,
@@ -167,7 +164,6 @@ describe('useOverlay.ts', () => {
 
   test('trigger work', async () => {
     const TestComponent = {
-      components: { IxButton },
       props: {
         trigger: {
           type: String as PropType<OverlayTrigger>,
@@ -222,7 +218,6 @@ describe('useOverlay.ts', () => {
 
   test('hover overlay work', async () => {
     const TestComponent = {
-      components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, visibility } = useOverlay({
           ...options,
@@ -252,7 +247,6 @@ describe('useOverlay.ts', () => {
 
   test('arrow work', async () => {
     const TestComponent = {
-      components: { IxButton },
       setup() {
         const { initialize, overlayRef, triggerRef, triggerEvents, overlayEvents, arrowRef } = useOverlay({
           ...options,
