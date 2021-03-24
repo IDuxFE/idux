@@ -11,4 +11,4 @@ package-lock.json
 yarn.lock
 
 # icon definitions
-packages/components/icon/definitions
+packages/components/icon/src/definitions.ts
