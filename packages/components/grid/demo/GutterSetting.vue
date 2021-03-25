@@ -22,13 +22,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup() {},
-  data() {
+  setup() {
     const colCounts: Record<string, number> = {}
-
     ;[2, 3, 4, 6, 8, 12].forEach((value, i) => {
       colCounts[i] = value
     })
+
     return {
       colCountKey: 2,
       colCounts,

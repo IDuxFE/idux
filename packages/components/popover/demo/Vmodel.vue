@@ -9,11 +9,10 @@
 
 <script lang="ts">
 import { ComputedRef, defineComponent, ref } from 'vue'
-import { IxPopover, IxButton } from '@idux/components'
 
 export default defineComponent({
   name: 'VModel',
-  components: { IxButton, IxPopover },
+
   setup() {
     const visible = ref(true)
 

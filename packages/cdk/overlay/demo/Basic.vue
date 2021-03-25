@@ -20,11 +20,8 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
-import { clickOutside } from '@idux/cdk/click-outside'
 
 export default defineComponent({
-  name: 'Basic',
-  directives: { clickOutside },
   setup() {
     const {
       initialize,

@@ -5,10 +5,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IxButton } from '@idux/components/button'
 
 export default defineComponent({
-  components: { IxButton },
   setup() {
     const disabled = ref(true)
     const changeDisabled = () => {
