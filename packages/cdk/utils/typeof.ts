@@ -45,7 +45,7 @@ export function isPlainObject(val: unknown): val is Record<any, any> {
   return _toString.call(val) === '[object Object]'
 }
 
-export function isObject(val: unknown): val is Record<any, any> {
+export function isObject<T = Record<any, any>>(val: unknown): val is T {
   return val !== null && typeof val === 'object'
 }
 
