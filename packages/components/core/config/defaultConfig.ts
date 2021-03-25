@@ -18,6 +18,7 @@ import type {
   BackTopConfig,
   GlobalConfig,
   TooltipConfig,
+  PopoverConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -89,7 +90,16 @@ const tooltip = shallowReactive<TooltipConfig>({
   placement: 'top',
   trigger: 'hover',
   showDelay: 100,
-  hideDelay: 500,
+  hideDelay: 100,
+  destroyOnHide: false,
+  autoAdjust: true,
+})
+
+const popover = shallowReactive<PopoverConfig>({
+  placement: 'top',
+  trigger: 'click',
+  showDelay: 100,
+  hideDelay: 100,
   destroyOnHide: false,
   autoAdjust: true,
 })
@@ -143,6 +153,7 @@ export const defaultConfig: GlobalConfig = {
   image,
   statistic,
   tooltip,
+  popover,
   // Feedback
   message,
   result,

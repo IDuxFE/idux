@@ -42,13 +42,13 @@ export const useOverlay = <
       return
     }
     const unrefTrigger = triggerRef.value
-    const unrefOverlay = overlayRef.value
-    if (!unrefTrigger || !unrefOverlay) {
+    if (!unrefTrigger) {
       return
     }
     nextTick(() => {
       const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
-      const overlayElement = isHTMLElement(unrefOverlay) ? unrefOverlay : unrefOverlay.$el
+      const unrefOverlay = overlayRef.value
+      const overlayElement = isHTMLElement(unrefOverlay) ? unrefOverlay : unrefOverlay?.$el
       popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
       popperInstance.update()
       on(window, 'scroll', globalScroll)
