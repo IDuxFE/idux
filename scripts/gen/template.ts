@@ -19,18 +19,34 @@ export type ${compName}Component = InstanceType<DefineComponent<${compName}Props
 `
 }
 
+export function getTsxTemplate(compName: string): string {
+  return `import type { ${compName}Props } from './types'
+
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'Ix${compName}',
+  props: {},
+  setup(props: ${compName}Props) {
+    // init
+  }
+})
+`
+}
+
 export function getVueTemplate(compName: string): string {
   return `<template>
   <div></div>
 </template>
 <script lang="ts">
+import type { ${compName}Props } from './types'
+
 import { defineComponent } from 'vue'
-import { ${compName}Props } from './types'
 
 export default defineComponent({
   name: 'Ix${compName}',
   props: {},
-  setup(props:${compName}Props) {
+  setup(props: ${compName}Props) {
     // init
   },
 })
