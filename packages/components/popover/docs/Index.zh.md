@@ -37,9 +37,3 @@ order: 0
 | 名称 | 说明 |
 | --- | --- |
 | `default` | 触发浮层的 trigger |
-
-#### Emits
-
-| 名称 | 说明 | 类型 |
-| --- | --- | --- |
-| `update:visible` | 浮层显隐变化回调 | `(visible: boolean) => void` |

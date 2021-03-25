@@ -50,7 +50,7 @@ export default defineComponent({
     destroyOnHide: PropTypes.bool,
     autoAdjust: PropTypes.bool,
   },
-  emits: ['update:visible', 'visibleChange'],
+  emits: ['update:visible'],
   setup(props: TooltipProps, { attrs, emit, slots }: SetupContext) {
     const children = useChildren(slots)
     const { clsPrefix = 'ix-tooltip' } = attrs
@@ -79,7 +79,6 @@ export default defineComponent({
 
     watch(visibility, () => {
       emit('update:visible', visibility.value)
-      emit('visibleChange', visibility.value)
     })
 
     return { children, clsPrefix, useTitle, hasTitle, beDestroyed, visibility, hide, options, ...rest }
