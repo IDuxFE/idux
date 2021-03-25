@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components/button'
 import { clickOutside } from '../src/useClickOutside'
 
 describe('useClickOutside.ts', () => {
@@ -11,7 +10,6 @@ describe('useClickOutside.ts', () => {
   })
 
   const testComponent = {
-    components: { IxButton },
     directives: { clickOutside },
     setup() {
       const log = () => {
@@ -33,11 +31,11 @@ describe('useClickOutside.ts', () => {
       return { log, warn, info, error }
     },
     template: `
-      <ix-button id="update" @click="$forceUpdate">update</ix-button>
-      <ix-button id="log" v-click-outside="log">log</ix-button>
-      <ix-button id="warn" v-click-outside="warn">warn</ix-button>
-      <ix-button id="info" v-click-outside="info">info</ix-button>
-      <ix-button id="error" v-click-outside="error">error</ix-button>
+      <button id="update" @click="$forceUpdate">update</button>
+      <button id="log" v-click-outside="log">log</button>
+      <button id="warn" v-click-outside="warn">warn</button>
+      <button id="info" v-click-outside="info">info</button>
+      <button id="error" v-click-outside="error">error</button>
     `,
   }
 
