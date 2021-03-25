@@ -36,15 +36,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted } from 'vue'
-import { IxButton } from '@idux/components'
-import { IxPortal } from '@idux/cdk/portal'
 import { useOverlay } from '@idux/cdk/overlay'
-import { clickOutside } from '@idux/cdk/click-outside'
 
 export default defineComponent({
   name: 'Portal',
-  components: { IxButton, IxPortal },
-  directives: { clickOutside },
   setup() {
     const { initialize, triggerRef, triggerEvents, overlayRef, overlayEvents, destroy, visibility, hide } = useOverlay({
       scrollStrategy: 'reposition',

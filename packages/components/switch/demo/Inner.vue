@@ -35,10 +35,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
-  components: { IxIcon },
   setup() {
     const checked = ref(true)
     const disabled = ref(true)

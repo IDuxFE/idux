@@ -1,11 +1,10 @@
 import { series, task } from 'gulp'
 
-import './tasks/clean'
 import './tasks/site'
 import './tasks/icons'
 
-task('start:dev', series('icons:copy', 'site:start'))
+task('start', series('icons:copy', 'site:init', 'site:serve'))
 
-task('start:icons', series('clean:icons', 'icons:start'))
+task('build', series('icons:copy', 'site:init', 'site:build'))
 
-task('build', series('icons:copy', 'site:build'))
+task('icons', series('icons:clean', 'icons:generate'))

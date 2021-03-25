@@ -1,0 +1,18 @@
+{
+  "name": "@idux/site",
+  "version": "0.0.0",
+  "description": "A website for @idux",
+  "private": true,
+  "author": "IduxFE<idux.feteam@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@idux/cdk": "^0.0.1",
+    "@idux/components": "^0.0.1",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0"
+  }
+}

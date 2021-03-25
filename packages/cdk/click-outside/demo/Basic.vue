@@ -5,19 +5,11 @@
   <ix-button v-click-outside="four">four</ix-button>
 </template>
 
-<style scoped>
-.ix-button {
-  margin-right: 4px;
-}
-</style>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { clickOutside } from '@idux/cdk/click-outside'
-import { MessageService } from '@idux/components'
+import { MessageService } from '@idux/components/message'
 
 export default defineComponent({
-  directives: { clickOutside },
   setup() {
     const one = () => {
       MessageService.info('one')
@@ -35,3 +27,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+.ix-button {
+  margin-right: 4px;
+}
+</style>

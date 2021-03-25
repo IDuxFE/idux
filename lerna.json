@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/{components,cdk,pro}/*"],
+  "packages": ["packages/*"],
   "version": "0.0.0",
   "command": {
     "publish": {

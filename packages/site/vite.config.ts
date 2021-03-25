@@ -3,17 +3,19 @@ import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 
-import { mdPlugin } from './scripts/vite/mdPlugin'
+import { mdPlugin } from './plugins/mdPlugin'
 
 export default defineConfig({
-  // hmr not work
-  // root: './site/docs',
   plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), mdPlugin(), vueJsxPlugin()],
   resolve: {
     alias: [
       {
-        find: '@idux',
-        replacement: path.resolve(__dirname, 'packages'),
+        find: '@idux/cdk',
+        replacement: path.resolve(__dirname, '../cdk'),
+      },
+      {
+        find: '@idux/components',
+        replacement: path.resolve(__dirname, '../components'),
       },
     ],
   },

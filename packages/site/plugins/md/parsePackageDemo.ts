@@ -5,7 +5,6 @@ import { dirname, join } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
 import marked from './marked'
-import { Log } from '../../utils/log'
 import { nonBindAble, withoutSuffix } from './utils'
 import { getDemoTemplate } from './template'
 
@@ -60,7 +59,7 @@ function parseContent(id: string, content: string, demoName: string) {
   if (existsSync(vueFilepath)) {
     code = marked(_remark.stringify({ type: 'code', lang: 'html', value: readFileSync(vueFilepath, 'utf-8') }))
   } else {
-    Log.warn(`The demo source file ${vueFilepath} not exist`)
+    console.warn(`The demo source file ${vueFilepath} not exist`)
   }
 
   return { zhDescription: nonBindAble(zh), enDescription: nonBindAble(en), code }

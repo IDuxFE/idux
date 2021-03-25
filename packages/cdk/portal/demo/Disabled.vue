@@ -7,12 +7,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IxPortal } from '@idux/cdk/portal'
-import { IxButton } from '@idux/components'
 
 export default defineComponent({
   name: 'Disabled',
-  components: { IxPortal, IxButton },
   setup() {
     const disabled = ref(false)
 
