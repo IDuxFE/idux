@@ -19,6 +19,7 @@ import {
   getDemoVueTemplate,
   getCdkUseTemplate,
   getCdkTestTemplate,
+  getTsxTemplate,
 } from './template'
 
 type AnswerType =
@@ -33,6 +34,7 @@ type AnswerType =
 interface AnswerOptions {
   category: 'cdk' | 'components' | 'pro'
   type?: AnswerType
+  useTsx?: boolean
   name: string
 }
 
@@ -60,12 +62,22 @@ const questions: QuestionCollection<AnswerOptions>[] = [
       'Other_其他',
     ],
   },
+  {
+    name: 'useTsx',
+    message: 'Do you want to use tsx?',
+    type: 'confirm',
+    default: false,
+    when(answer) {
+      return answer.category === 'components'
+    },
+  },
   { name: 'name', message: 'Please enter the name.' },
 ]
 
 class Generate {
   private packageRoot: string
   private dirPath: string
+  private useTsx = false
 
   constructor() {
     this.init()
@@ -74,8 +86,9 @@ class Generate {
   private async init() {
     console.log(chalk.greenBright(textSync('IDux Generate Tool')))
 
-    const { category, name, type } = await inquirer.prompt<AnswerOptions>(questions)
+    const { category, name, type, useTsx } = await inquirer.prompt<AnswerOptions>(questions)
 
+    this.useTsx = useTsx
     const spin = ora()
     spin.start('Template is being generated, please wait...\n')
     this.packageRoot = resolve(__dirname, '../', '../', 'packages', category)
@@ -132,6 +145,7 @@ class Generate {
     const upperFirstName = upperFirst(camelCase(name))
     const lessTemplate = getLessTemplate(kebabCase(name))
     const typesTemplate = getTypesTemplate(upperFirstName)
+    const tsxTemplate = getTsxTemplate(upperFirstName)
     const vueTemplate = getVueTemplate(upperFirstName)
     const indexTemplate = getIndexTemplate(upperFirstName)
     const testTemplate = getTestTemplate(upperFirstName)
@@ -139,7 +153,9 @@ class Generate {
     await Promise.all([
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
-      writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
+      this.useTsx
+        ? writeFile(`${this.dirPath}/src/${camelCase(name)}.tsx`, tsxTemplate)
+        : writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
       writeFile(`${this.dirPath}/__tests__/${camelCase(name)}.spec.ts`, testTemplate),
     ])
