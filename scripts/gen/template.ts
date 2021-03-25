@@ -12,7 +12,14 @@ export function getLessTemplate(compName: string): string {
 export function getTypesTemplate(compName: string): string {
   return `import type { DefineComponent } from 'vue'
 
+import { PropTypes } from '@idux/cdk/utils'
+
 export interface ${compName}Props {
+  testProp: string
+}
+
+export const ${compName}PropTypes = {
+  testProp: PropTypes.string,
 }
 
 export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
@@ -23,12 +30,14 @@ export function getTsxTemplate(compName: string): string {
   return `import type { ${compName}Props } from './types'
 
 import { defineComponent } from 'vue'
+import { ${compName}PropTypes } from './types'
 
 export default defineComponent({
   name: 'Ix${compName}',
-  props: {},
+  props: ${compName}PropTypes,
+  emits: [],
   setup(props: ${compName}Props) {
-    // init
+
   }
 })
 `
@@ -42,12 +51,14 @@ export function getVueTemplate(compName: string): string {
 import type { ${compName}Props } from './types'
 
 import { defineComponent } from 'vue'
+import { ${compName}PropTypes } from './types'
 
 export default defineComponent({
   name: 'Ix${compName}',
-  props: {},
+  props: ${compName}PropTypes,
+  emits: [],
   setup(props: ${compName}Props) {
-    // init
+    
   },
 })
 </script>
