@@ -30,7 +30,7 @@
 import { defineComponent, ref, computed, ComputedRef } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { isObject, uniqueId, toNumber } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { useInfo, useStatus, useStatusClasses } from './useCommonLogic'
 import { handleCircleGradient } from './util'
 import { ConvertProgressProps, ConvertProgressPropTypes, ProgressGapPositionType, StringGradients } from './types'

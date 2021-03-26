@@ -101,7 +101,7 @@ export default {
   version,
 }
 
-export { useGlobalConfig } from './core/config'
+export { useGlobalConfig } from './config'
 export { useLocale, addLocale, getLocale } from './i18n'
 export {
   // export General

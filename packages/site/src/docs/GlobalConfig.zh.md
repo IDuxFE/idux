@@ -16,8 +16,7 @@ order: 7
 <!-- App.vue -->
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { ButtonConfig } from '@idux/components'
-import { useGlobalConfig } from '@idux/components'
+import { ButtonConfig, useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   setup() {
@@ -46,8 +45,7 @@ export default defineComponent({
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { ButtonConfig } from '@idux/components'
-import { useGlobalConfig } from '@idux/components'
+import { ButtonConfig, useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'Home',

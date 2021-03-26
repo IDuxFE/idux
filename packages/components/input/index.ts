@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxInput from './src/Input.vue'
 import IxTextarea from './src/Textarea.vue'
 
@@ -9,4 +9,4 @@ export { IxInput, IxTextarea }
 
 export type { InputComponent, InputProps, TextareaComponent, TextareaProps } from './src/types'
 
-export type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/core/config'
+export type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/config'

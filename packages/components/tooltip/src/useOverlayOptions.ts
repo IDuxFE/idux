@@ -1,9 +1,9 @@
 import type { OverlayOptions } from '@idux/cdk/overlay'
-import type { GlobalConfigKey } from '@idux/components/core/config'
+import type { GlobalConfigKey } from '@idux/components/config'
 import type { TooltipProps } from './types'
 
 import { getCurrentInstance } from 'vue'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 export function useOverlayOptions(comp: Extract<'tooltip', GlobalConfigKey> = 'tooltip'): OverlayOptions {
   const props: TooltipProps = getCurrentInstance()!.props

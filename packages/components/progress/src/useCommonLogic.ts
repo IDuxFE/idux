@@ -2,7 +2,7 @@ import { ConvertProgressProps, ProgressStatus, progressStatus } from './types'
 import { computed, ComputedRef } from 'vue'
 import { convertPercent, fullPercent } from './util'
 import { isFunction } from '@idux/cdk/utils'
-import { ProgressConfig } from '@idux/components/core/config'
+import { ProgressConfig } from '@idux/components/config'
 
 export function useStatusClasses(status: ComputedRef<ProgressStatus>): ComputedRef<string> {
   const prefix = 'ix-progress'

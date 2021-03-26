@@ -1,6 +1,6 @@
 import { Locale } from '../types'
 /* eslint-disable camelcase */
-const en_US: Locale = {
+export const en_US: Locale = {
   type: 'en-US',
   global: {
     placeholder: 'Please select',
@@ -9,5 +9,3 @@ const en_US: Locale = {
     description: 'No Data',
   },
 }
-
-export default en_US

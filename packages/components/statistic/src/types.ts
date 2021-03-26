@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-import { NumFormatter } from '@idux/components/core/config'
+import { NumFormatter } from '@idux/components/config'
 
 export interface StatisticProps {
   formatter: NumFormatter

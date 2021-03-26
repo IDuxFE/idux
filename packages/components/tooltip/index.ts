@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxTooltip from './src/tooltip'
 
 IxTooltip.install = installComponent(IxTooltip)

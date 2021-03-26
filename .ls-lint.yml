@@ -2,6 +2,7 @@ ls:
   packages/*:
     .ts: camelCase
     .spec.ts: camelCase
+    .config.ts: camelCase
     .less: camelCase
     .vue: PascalCase
     .md: PascalCase
@@ -13,5 +14,4 @@ ls:
     .svg: kebab-case
 
 ignore:
-  - packages/components/i18n/locales
-  - packages/site/vite.config.ts
+  - packages/components/i18n/src/locales

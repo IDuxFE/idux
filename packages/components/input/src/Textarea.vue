@@ -22,14 +22,14 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { TextareaConfig } from '@idux/components/core/config'
+import type { TextareaConfig } from '@idux/components/config'
 import type { TextareaProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
 import { ControlPropType } from '@idux/cdk/forms'
 import { PropTypes, withUndefined } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
-import { useAttrs } from '@idux/components/core/utils'
+import { useGlobalConfig } from '@idux/components/config'
+import { useAttrs } from '@idux/components/utils'
 import { IxIcon } from '@idux/components/icon'
 import { useAutoRows } from './useAutoRows'
 import { useCommonBindings } from './useCommonBindings'

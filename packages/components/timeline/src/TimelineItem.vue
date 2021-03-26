@@ -12,7 +12,7 @@
 import { defineComponent, computed } from 'vue'
 import type { Slots } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import { isPresetColor } from '@idux/components/core/utils'
+import { isPresetColor } from '@idux/components/utils'
 import { TimelineItemProps } from './types'
 
 export default defineComponent({

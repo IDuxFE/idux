@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { ComponentOptions, nextTick } from 'vue'
-import { useGlobalConfig } from '../useGlobalConfig'
+import { useGlobalConfig } from '../src/useGlobalConfig'
 
 const getComp = () => {
   return {

@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-import type { ButtonMode, ButtonSize } from '@idux/components/core/config'
+import type { ButtonMode, ButtonSize } from '@idux/components/config'
 
 export type ButtonShape = 'circle' | 'round'
 

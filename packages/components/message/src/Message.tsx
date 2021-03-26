@@ -1,7 +1,7 @@
 import { defineComponent, onUnmounted, onMounted, isVNode, h, computed } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { PropTypes, isUndefined } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { MessageItemProps, MessageType, MessageId } from './types'
 
 export default defineComponent({

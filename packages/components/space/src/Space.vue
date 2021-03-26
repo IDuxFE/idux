@@ -19,7 +19,7 @@ import type { SpaceProps } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { getSlotNodes, hasSlot, Logger, PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig, SpaceConfig } from '@idux/components/core/config'
+import { useGlobalConfig, SpaceConfig } from '@idux/components/config'
 
 interface SpaceItem {
   style?: Partial<CSSStyleDeclaration>

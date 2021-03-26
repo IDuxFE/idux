@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-import type { ResultStatus } from '@idux/components/core/config'
+import type { ResultStatus } from '@idux/components/config'
 
 export interface ResultProps {
   /* the name of `ix-icon` to replace the default icon. */

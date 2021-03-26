@@ -21,7 +21,7 @@ import type { PopoverProps } from './types'
 import { computed, defineComponent } from 'vue'
 import { IxTooltip } from '@idux/components/tooltip'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxPopover',

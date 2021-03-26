@@ -6,7 +6,7 @@ import { IxDivider } from '../../divider'
 import { SpaceAlign, SpaceDirection } from '../src/types'
 import { isNil } from '@idux/cdk/utils'
 import { renderWork } from '@tests'
-import { SpaceSize } from '@idux/components/core/config'
+import { SpaceSize } from '@idux/components/config'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },

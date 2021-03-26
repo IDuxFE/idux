@@ -1,4 +1,4 @@
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { DefineComponent } from 'vue'
