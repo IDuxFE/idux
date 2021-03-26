@@ -25,8 +25,8 @@
 import { computed, defineComponent } from 'vue'
 import { StatisticProps } from './types'
 import { PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
-import type { StatisticConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
+import type { StatisticConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxStatistic',

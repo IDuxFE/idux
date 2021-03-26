@@ -2,7 +2,7 @@
   <div :class="classes" :style="rowStyle"><slot></slot></div>
 </template>
 <script lang="ts">
-import type { RowConfig } from '@idux/components/core/config'
+import type { RowConfig } from '@idux/components/config'
 import type { Ref, ComputedRef, CSSProperties } from 'vue'
 import type { RowProps } from './types'
 import type { ScreenMatch } from '@idux/cdk/breakpoint'
@@ -11,7 +11,7 @@ import { defineComponent, watchEffect, ref, computed, provide } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
 import { observeBreakpoint, Breakpoints, convertMediaToScreen } from '@idux/cdk/breakpoint'
 import { haveBreakpointGutter, normalizeGutter, gutterToken } from './gutter'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxRow',

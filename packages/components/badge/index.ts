@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxBadge from './src/Badge.vue'
 
 IxBadge.install = installComponent(IxBadge)

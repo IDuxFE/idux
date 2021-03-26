@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxAffix from './src/Affix.vue'
 
 IxAffix.install = installComponent(IxAffix)

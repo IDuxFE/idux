@@ -21,7 +21,7 @@ import { IxIcon } from '@idux/components/icon'
 import { ConvertProgressProps, ConvertProgressPropTypes } from './types'
 import { useInfo, useStatus, useStatusClasses, useSmallSize } from './useCommonLogic'
 import { isObject, toNumber } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { handleGradient } from './util'
 
 const defaultStrokeWidth = 8

@@ -1,4 +1,4 @@
-import { numFormatter } from '../numFormatter'
+import { numFormatter } from '../src/numFormatter'
 describe('format.ts', () => {
   test('numFormatter function work', () => {
     const formatValue1 = numFormatter(112893.116, 2)

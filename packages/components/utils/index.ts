@@ -1,0 +1,5 @@
+export * from './src/colors'
+export * from './src/easingFunctions'
+export * from './src/installComponent'
+export * from './src/propsHandler'
+export * from './src/useAttrs'

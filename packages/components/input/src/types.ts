@@ -1,6 +1,6 @@
 import type { DefineComponent, Ref } from 'vue'
 import type { AbstractControl } from '@idux/cdk/forms'
-import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/core/config'
+import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/config'
 
 export interface InputProps {
   value?: string

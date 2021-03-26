@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxStatistic from './src/Statistic.vue'
 
 IxStatistic.install = installComponent(IxStatistic)

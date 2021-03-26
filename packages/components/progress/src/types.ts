@@ -1,7 +1,7 @@
 import type { DefineComponent } from 'vue'
 import { object } from 'vue-types'
 import { PropTypes } from '@idux/cdk/utils'
-import { ProgressSize } from '@idux/components/core/config/types'
+import { ProgressSize } from '@idux/components/config/types'
 
 export const progressStatus = ['normal', 'success', 'exception', 'active'] as const
 

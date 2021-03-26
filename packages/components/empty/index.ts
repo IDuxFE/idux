@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxEmpty from './src/Empty.vue'
 
 IxEmpty.install = installComponent(IxEmpty)

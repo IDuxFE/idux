@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-import type { SpaceSize } from '@idux/components/core/config'
+import type { SpaceSize } from '@idux/components/config'
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'

@@ -1,4 +1,4 @@
-import { installComponent } from '@idux/components/core/utils'
+import { installComponent } from '@idux/components/utils'
 import IxSwitch from './src/Switch.vue'
 
 IxSwitch.install = installComponent(IxSwitch)

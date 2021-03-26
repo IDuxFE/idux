@@ -1,6 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { InputConfig, TextareaConfig } from '@idux/components/core/config'
+import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { InputProps, TextareaProps } from './types'
 
 import { computed, getCurrentInstance, onMounted, ref, watchEffect } from 'vue'

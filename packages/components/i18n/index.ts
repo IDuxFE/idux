@@ -1,2 +1,3 @@
-export * from './types'
-export * from './useI18n'
+export * from './src/locales'
+export * from './src/types'
+export * from './src/useI18n'

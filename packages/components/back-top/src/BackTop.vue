@@ -16,8 +16,8 @@ import { defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { IxIcon } from '@idux/components/icon'
 import { PropTypes, withUndefined, on, off, rAF } from '@idux/cdk/utils'
-import { easeInOutQuad, getTarget } from '@idux/components/core/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { easeInOutQuad, getTarget } from '@idux/components/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxBackTop',

@@ -16,7 +16,7 @@ import type { SpinProps } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({

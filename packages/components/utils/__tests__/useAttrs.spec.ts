@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { ComponentOptions, watchEffect } from 'vue'
-import { useAttrs } from '../useAttrs'
+import { useAttrs } from '../src/useAttrs'
 
 const getChildComp = (excludeOptions?: { keys?: string[]; listeners?: boolean }): ComponentOptions => {
   return {

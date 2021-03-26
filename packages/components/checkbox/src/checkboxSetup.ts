@@ -1,6 +1,6 @@
 import { computed, ComputedRef, inject, Ref, ref, watch, getCurrentInstance, SetupContext } from 'vue'
 import { isArray, hasSlot } from '@idux/cdk/utils'
-import { useAttrs } from '@idux/components/core/utils/'
+import { useAttrs } from '@idux/components/utils/'
 import { checkboxGroupInjectionKey, subjectInjectKey } from './checkbox'
 import type { CheckboxBindings, CheckboxProps } from './types'
 

@@ -66,7 +66,7 @@ export default defineComponent({
 }
 
 export function getIndexTemplate(compName: string): string {
-  return `import { installComponent } from '@idux/components/core/utils'
+  return `import { installComponent } from '@idux/components/utils'
 import Ix${compName} from './src/${compName}.vue'
 
 Ix${compName}.install = installComponent(Ix${compName})

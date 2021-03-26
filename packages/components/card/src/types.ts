@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-import type { CardSize } from '@idux/components/core/config'
+import type { CardSize } from '@idux/components/config'
 
 export interface CardProps {
   title?: string

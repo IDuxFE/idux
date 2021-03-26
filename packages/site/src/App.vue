@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, provide, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'App',
