@@ -1,7 +1,7 @@
 import type { DefineComponent } from 'vue'
-import { NumFormatter } from '@idux/components/core/config'
+import { NumFormatter } from '@idux/components/config'
 
-interface StatisticOriginalProps {
+export interface StatisticProps {
   formatter: NumFormatter
   precision: number
   prefix: string
@@ -9,7 +9,5 @@ interface StatisticOriginalProps {
   title: string
   value: string | number
 }
-
-export type StatisticProps = Readonly<StatisticOriginalProps>
 
 export type StatisticComponent = InstanceType<DefineComponent<StatisticProps>>

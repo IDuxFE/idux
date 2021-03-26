@@ -1,6 +1,4 @@
-import { computed, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { IxButton } from '@idux/components'
 import { clickOutside } from '../src/useClickOutside'
 
 describe('useClickOutside.ts', () => {
@@ -8,65 +6,65 @@ describe('useClickOutside.ts', () => {
     jest.spyOn(console, 'log').mockClear()
     jest.spyOn(console, 'warn').mockClear()
     jest.spyOn(console, 'error').mockClear()
+    jest.spyOn(console, 'info').mockClear()
   })
 
   const testComponent = {
-    components: { IxButton },
     directives: { clickOutside },
     setup() {
-      const status = ref(false)
-
-      const update = () => {
-        status.value = !status.value
-      }
-
       const log = () => {
-        console.log('hello world')
+        console.log('log')
       }
 
       const warn = () => {
-        console.warn('hello world')
+        console.warn('warn')
+      }
+
+      const info = () => {
+        console.info('info')
       }
 
       const error = () => {
-        console.error('hello world')
+        console.error('error')
       }
 
-      const globalClick = computed(() => (status.value ? error : warn))
-
-      return { update, log, globalClick }
+      return { log, warn, info, error }
     },
     template: `
-      <ix-button @click="update">Update</ix-button>
-      <p v-click-outside="globalClick" @click="log">Hello world</p>
+      <button id="update" @click="$forceUpdate">update</button>
+      <button id="log" v-click-outside="log">log</button>
+      <button id="warn" v-click-outside="warn">warn</button>
+      <button id="info" v-click-outside="info">info</button>
+      <button id="error" v-click-outside="error">error</button>
     `,
   }
 
-  test('mount work', async () => {
+  test('directive work', async () => {
     const wrapper = mount(testComponent)
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     const log = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const info = jest.spyOn(console, 'info').mockImplementation(() => {})
+
     document.body.click()
-    expect(warn).toBeCalled()
-    expect(warn).toBeCalledTimes(1)
-    await wrapper.get('p').trigger('click')
     expect(log).toBeCalled()
     expect(log).toBeCalledTimes(1)
-    expect(warn).toBeCalledTimes(1)
-    wrapper.unmount()
-  })
-
-  test('update work', async () => {
-    const wrapper = mount(testComponent)
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
-    document.body.click()
     expect(warn).toBeCalled()
     expect(warn).toBeCalledTimes(1)
-    await wrapper.get('.ix-button').trigger('click')
-    document.body.click()
     expect(error).toBeCalled()
     expect(error).toBeCalledTimes(1)
+    expect(info).toBeCalled()
+    expect(info).toBeCalledTimes(1)
+
+    await wrapper.get('#update').trigger('click')
+    expect(log).toBeCalled()
+    expect(log).toBeCalledTimes(1)
+    expect(warn).toBeCalled()
     expect(warn).toBeCalledTimes(1)
+    expect(error).toBeCalled()
+    expect(error).toBeCalledTimes(1)
+    expect(info).toBeCalled()
+    expect(info).toBeCalledTimes(1)
+    wrapper.unmount()
   })
 })

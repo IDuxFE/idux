@@ -11,7 +11,7 @@ import type { AffixStyle } from './utils'
 
 import { defineComponent, computed, watch, ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { PropTypes, throttleRAF, withUndefined } from '@idux/cdk/utils'
-import { getTarget } from '@idux/components/core/utils'
+import { getTarget } from '@idux/components/utils'
 import {
   getTargetRect,
   getTargetSize,

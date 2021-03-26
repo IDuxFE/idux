@@ -1,10 +1,8 @@
 import type { DefineComponent, Ref } from 'vue'
 import type { AbstractControl } from '@idux/cdk/forms'
-import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/core/config'
+import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/config'
 
-export type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize }
-
-interface InputOriginalProps {
+export interface InputProps {
   value?: string
   control?: string | AbstractControl
   disabled: boolean
@@ -18,15 +16,15 @@ interface InputOriginalProps {
   borderless?: boolean
 }
 
-export type InputProps = Readonly<InputOriginalProps>
-
 export interface InputBindings {
   inputRef: Ref<HTMLInputElement>
+  focus: (options?: FocusOptions) => void
+  blur: () => void
 }
 
 export type InputComponent = InstanceType<DefineComponent<InputProps, InputBindings>>
 
-interface TextareaOriginalProps {
+export interface TextareaProps {
   value?: string
   control?: string | AbstractControl
   disabled: boolean
@@ -40,10 +38,10 @@ interface TextareaOriginalProps {
   clearable?: boolean
 }
 
-export type TextareaProps = Readonly<TextareaOriginalProps>
-
 export interface TextareaBindings {
   textareaRef: Ref<HTMLTextAreaElement>
+  focus: (options?: FocusOptions) => void
+  blur: () => void
 }
 
 export type TextareaComponent = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>

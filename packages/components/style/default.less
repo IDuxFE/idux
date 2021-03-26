@@ -21,11 +21,13 @@
 @warning-color: @yellow;
 @error-color: @red;
 
-@body-background: @white;
-@component-background: @white;
+@background-color-base: hsv(0, 0, 95%); // Default grey background color
+@background-color-light: hsv(0, 0, 98%); // background of header and selected item
+@background-color-body: @white;
+@background-color-component: @white;
 
-@disabled-color: fade(#000, 25%);
-@disabled-bg-color: hsv(0, 0, 95%);
+@disabled-color: fade(@black, 25%);
+@disabled-bg-color: @background-color-base;
 
 @heading-color: fade(@black, 85%);
 
@@ -35,6 +37,7 @@
 
 // General
 /* button -------------------------- */
+@button-zindex: @zindex-l1-1;
 @button-font-weight: @font-weight-md;
 
 @button-line-height: @line-height-base;
@@ -43,9 +46,9 @@
 @button-height-md: @height-md;
 @button-height-lg: @height-lg;
 
-@button-font-size-sm: @font-size-sm;
-@button-font-size-md: @font-size-sm;
-@button-font-size-lg: @font-size-md;
+@button-font-size-sm: @font-size-md;
+@button-font-size-md: @font-size-md;
+@button-font-size-lg: @font-size-lg;
 
 @button-padding-sm: @padding-sm;
 @button-padding-md: @padding-md;
@@ -69,15 +72,15 @@
 @button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
 @button-default-color: @text-color;
-@button-default-bg: @component-background;
+@button-default-bg: @background-color-component;
 @button-default-border: @border-color;
 
 @button-danger-color: @error-color;
 @button-danger-bg: @error-color;
 
-@button-ghost-color: @component-background;
+@button-ghost-color: @background-color-component;
 @button-ghost-bg: transparent;
-@button-ghost-border: @component-background;
+@button-ghost-border: @background-color-component;
 
 @button-link-color: @primary-color;
 @button-link-hover-bg: transparent;
@@ -91,11 +94,11 @@
 
 /* title -------------------------- */
 @title-font-weight: @font-weight-xl;
-@title-font-size: @font-size-md;
-@title-1-font-size: @font-size-2xl;
-@title-2-font-size: @font-size-xl;
-@title-3-font-size: @font-size-lg;
-@title-4-font-size: @font-size-md;
+@title-font-size: @font-size-lg;
+@title-1-font-size: @font-size-3xl;
+@title-2-font-size: @font-size-2xl;
+@title-3-font-size: @font-size-xl;
+@title-4-font-size: @font-size-lg;
 
 @title-height-xl: @height-xl;
 @title-height-lg: @height-xl;
@@ -106,7 +109,7 @@
 
 @title-color: @black;
 @title-sub-color: @text-secondary-color;
-@title-bg-color: @component-background;
+@title-bg-color: @background-color-component;
 
 @title-prefix-margin: @margin-md;
 @title-content-margin: @margin-md;
@@ -146,11 +149,11 @@
 @typography-title-margin-bottom: 0.5em;
 @typography-title-font-weight: @font-weight-xl;
 @typography-title-color: @black;
-@typography-title-1-font-size: @font-size-2xl;
-@typography-title-2-font-size: @font-size-xl;
-@typography-title-3-font-size: @font-size-lg;
-@typography-title-4-font-size: @font-size-md;
-@typography-title-5-font-size: @font-size-sm;
+@typography-title-1-font-size: @font-size-3xl;
+@typography-title-2-font-size: @font-size-2xl;
+@typography-title-3-font-size: @font-size-xl;
+@typography-title-4-font-size: @font-size-lg;
+@typography-title-5-font-size: @font-size-md;
 @typography-paragraph-margin-bottom: 1em;
 @typography-list-margin: 0 0 1em 0;
 @typography-list-padding: 0;
@@ -169,17 +172,23 @@
 @space-margin-md: @margin-lg;
 @space-margin-lg: @margin-xl;
 
+/* grid -------------------------- */
+@grid-columns: 24;
+
 // Navigation
 
 // Data Entry
 
 /* checkbox -------------------------- */
+@checkbox-inner-zindex: @zindex-l1-1;
+@checkbox-line-height: 1;
+@checkbox-border-color: @grey-d10;
 @checkbox-border-style: @border-width-sm solid @grey-d10;
 @checkbox-border-radius: @border-radius-sm;
 @checkbox-bg-color: @white;
 @checkbox-tick-border-style: @border-width-md solid @white;
-@checkbox-tick-width: 4px;
-@checkbox-tick-height: 8px;
+@checkbox-tick-width: (@checkbox-width / @font-size-base) * 5px;
+@checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
 @checkbox-bg-indeterminate-color: @primary-color;
 @checkbox-indeterminate-width: 8px;
 @checkbox-indeterminate-height: 8px;
@@ -192,7 +201,7 @@
 @checkbox-bg-disabled-color: @white;
 @checkbox-bg-indeterminate-disabled-color: @grey;
 @checkbox-label-disabled-color: @grey;
-@checkbox-font-size: @font-size-md;
+@checkbox-font-size: @font-size-lg;
 @checkbox-height: 16px;
 @checkbox-width: 16px;
 @checkbox-group-line-height: @line-height-base;
@@ -206,16 +215,24 @@
 @input-height-sm: @height-sm;
 @input-height-md: @height-md;
 @input-height-lg: @height-lg;
-
-@input-font-size-sm: @font-size-sm;
-@input-font-size-md: @font-size-sm;
-@input-font-size-lg: @font-size-md;
+@input-padding-horizontal-sm: @padding-sm - 2px;
+@input-padding-horizontal-md: @padding-sm;
+@input-padding-horizontal-lg: @padding-sm + 2px;
+@input-padding-vertical-sm: max(
+  (round(((@input-height-sm - @input-font-size-sm * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  0
+);
+@input-padding-vertical-md: max(
+  (round(((@input-height-md - @input-font-size-md * @input-line-height) / 2) * 10) / 10) - @input-border-width,
+  2px
+);
+@input-padding-vertical-lg: (ceil(((@input-height-lg - @input-font-size-lg * @input-line-height) / 2) * 10) / 10) -
+  @input-border-width;
+@input-font-size-sm: @font-size-md;
+@input-font-size-md: @font-size-md;
+@input-font-size-lg: @font-size-lg;
 
 @input-wrapper-inner-margin: @margin-xs;
-
-@input-padding-horizontal-sm: @input-padding-horizontal-md - 2px;
-@input-padding-horizontal-md: @padding-sm;
-@input-padding-horizontal-lg: @input-padding-horizontal-md + 2px;
 
 @input-border-width: @border-width-sm;
 @input-border-style: @border-style;
@@ -223,7 +240,7 @@
 
 @input-color: @text-color;
 @input-secondary-color: @text-secondary-color;
-@input-bg-color: @component-background;
+@input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-hover-border-color: ~`colorPalette('@{primary-color}', -10) `;
@@ -234,6 +251,7 @@
 
 @input-border-radius: @border-radius-md;
 @input-transition-duration: @transition-duration-base;
+@input-transition: all @transition-duration-base @ease-in-out;
 
 /* rate -------------------------- */
 @rate-icon-size: 24px;
@@ -241,17 +259,41 @@
 @rate-stroke-color: #f7ba2a;
 @rate-background-color: #c6d1de;
 
+/* switch -------------------------- */
+@switch-close-bg-color: #ccc;
+@switch-close-border-color: transparent;
+@switch-close-loading-color: @switch-close-bg-color;
+@switch-open-bg-color: @blue;
+@switch-open-border-color: @border-color;
+@switch-open-loading-color: @switch-open-bg-color;
+@switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
+@switch-normal-height: 22px;
+@switch-normal-inner-circle-size: 18px;
+@switch-small-height: @switch-normal-height - 4;
+@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 6;
+@switch-loading-size: @font-size-sm;
+@switch-inner-font-size: @font-size-sm;
+@switch-inner-circle-bg-color: @white;
+@switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+@switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
+@switch-disable-opacity: 0.4;
+
 // Data Display
 
 /* badge -------------------------- */
+@badge-zindex: @zindex-auto;
+@badge-size: 16px;
+@badge-color: @red;
+@badge-padding: 0 3px;
+@badge-dot-size: 6px;
 
 /* card -------------------------- */
 @card-border-color: @border-color;
 @card-border-size: @border-width-sm;
-@card-font-size-md: @font-size-sm;
-@card-font-size-sm: @font-size-xs;
-@card-title-font-size-md: @font-size-md;
-@card-title-font-size-sm: @font-size-sm;
+@card-font-size-md: @font-size-md;
+@card-font-size-sm: @font-size-sm;
+@card-title-font-size-md: @font-size-lg;
+@card-title-font-size-sm: @font-size-md;
 @card-title-font-weight-sm: @font-weight-md;
 @card-hover-shadow: @shadow-bottom-sm;
 @card-padding-lg: @padding-lg;
@@ -266,12 +308,18 @@
 @empty-icon-font-size-md: 64px;
 
 /* image -------------------------- */
+@image-zindex: @zindex-l4-6;
+@image-mask-bg: ~'rgba(0, 0, 0, 0.45)';
+@image-tools-bg: ~'rgba(0, 0, 0, 0.1)';
+@image-height: 100%;
+@image-width: 100%;
+@image-tools-h: 46px;
 
 /* statistic -------------------------- */
-@statistic-font-size-sm: @font-size-sm;
-@statistic-font-size-md: @font-size-sm;
-@statistic-font-size-lg: @font-size-lg;
-@statistic-font-size-xl: @font-size-xl;
+@statistic-font-size-sm: @font-size-md;
+@statistic-font-size-md: @font-size-md;
+@statistic-font-size-lg: @font-size-xl;
+@statistic-font-size-xl: @font-size-2xl;
 
 @statistic-line-height: @line-height-base;
 @statistic-color: @black;
@@ -312,17 +360,38 @@
   0 9px 28px 8px rgb(0 0 0 / 5%);
 @tooltip-arrow-size: 3px;
 
+/* popover -------------------------- */
+@popover-color: @grey-d40;
+@popover-inner-background: @white;
+@popover-inner-border-radius: @border-radius-sm;
+@popover-inner-box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+@popover-inner-content-padding: 12px 16px;
+@popover-title-min-width: 170px;
+@popover-title-min-height: 32px;
+@popover-title-padding: 5px 16px 4px;
+@popover-title-font-weight: @font-weight-lg;
+@popover-title-border-bottom: 1px solid @border-color;
+@popover-arrow-size: 3px;
+
 // Feedback
+
+/* message -------------------------- */
+@message-item-margin: @margin-lg;
+@message-item-line-height: @line-height-base;
+@message-item-icon-size: 16px;
+@message-item-icon-margin-right: @margin-sm;
+@message-item-content-min-width: 120px;
+@message-item-content-max-width: 480px;
 
 /* result -------------------------- */
 @result-padding: @spacing-gutter * 6 @spacing-gutter * 4;
 @result-text-align: center;
 @result-icon-margin: @margin-xl;
-@result-icon-size: @font-size-lg * 4;
-@result-title-font-size: @font-size-xl;
+@result-icon-size: @font-size-xl * 4;
+@result-title-font-size: @font-size-2xl;
 @result-title-color: @black;
 @result-title-line-height: 1.8;
-@result-subtitle-font-size: @font-size-sm;
+@result-subtitle-font-size: @font-size-md;
 @result-subtitle-color: @black;
 @result-subtitle-line-height: 1.6;
 @result-extra-margin: @margin-xl;
@@ -336,20 +405,35 @@
 @result-info-color: @info-color;
 
 /* spin -------------------------- */
+@spin-zindex: @zindex-l2-base;
 @spin-tip-color: @primary-color;
 @spin-icon-color: @primary-color;
 
-@spin-font-size-sm: @font-size-sm;
-@spin-font-size-md: @font-size-md;
-@spin-font-size-lg: @font-size-lg;
+@spin-font-size-sm: @font-size-md;
+@spin-font-size-md: @font-size-lg;
+@spin-font-size-lg: @font-size-xl;
+
+/* progress -------------------------- */
+@progress-normal-bg: @primary-color;
+@progress-success-bg: @success-color;
+@progress-exception-bg: @error-color;
+@progress-active-bg: @primary-color;
+@progress-trail-bg: #f5f5f5;
+@progress-text-width: 36px;
+@progress-border-radius: 100px;
+@progress-text-color: @text-color;
+@progress-line-font-size-md: @font-size-md;
+@progress-line-font-size-sm: @font-size-sm;
+@progress-circle-font-size-md: @font-size-2xl;
 
 // Other
 
 /* back-top -------------------------- */
+@back-top-zindex: @zindex-l2-base;
 @back-top-height: @height-lg;
 @back-top-width: @height-lg;
 
-@back-top-font-size: @font-size-2xl;
+@back-top-font-size: @font-size-3xl;
 
 @back-top-border-radius: 50%;
 

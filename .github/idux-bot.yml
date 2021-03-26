@@ -60,6 +60,7 @@ issue:
     cdk:
       def: danranVm
       Breakpoint: danranVm
+      ClickOutside: LaamGinghong
       Clipboard: danranVm
       DragDrop: danranVm
       Forms: danranVm
@@ -142,8 +143,8 @@ issue:
 
       Anchor: danranVm
       BackTop: danranVm
-      Core: danranVm
+      Config: danranVm
+      Utils: danranVm
 
     pro:
       def: danranVm
-    def: danranVm

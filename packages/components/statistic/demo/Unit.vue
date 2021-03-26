@@ -23,18 +23,13 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  data() {
-    return {
-      precision: 2,
-    }
-  },
-  methods: {
-    add() {
-      this.precision++
-    },
+  setup() {
+    const precision = ref(2)
+    const add = () => precision.value++
+    return { precision, add }
   },
 })
 </script>

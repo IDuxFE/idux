@@ -1,7 +1,7 @@
-import { copySync, ensureDirSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'fs-extra'
+import { copy, existsSync, readdir, readFile, writeFile } from 'fs-extra'
 import { camelCase, upperFirst } from 'lodash'
 import { join } from 'path'
-import SVGO from 'svgo'
+import { optimize, OptimizeOptions } from 'svgo'
 import { buildConfig } from '../buildConfig'
 
 const definitionTemplate = `export const {{definitionName}} = {
@@ -9,59 +9,45 @@ const definitionTemplate = `export const {{definitionName}} = {
   svgString: '{{svgString}}',
 }
 `
-const { iconAssetsDir, iconDefinitionsDir } = buildConfig
-const { iconAssetsDir: siteIconAssetsDir } = buildConfig.site
-const outputDefinitionNames: string[] = []
+const { assetsDirname, publicDirname, definitionsFilename } = buildConfig.icon
 
-const options: SVGO.Options = {
-  plugins: [{ removeAttrs: { attrs: ['fill', 'class'] } }, { sortAttrs: true }, { removeDimensions: true }],
+const options: OptimizeOptions = {
+  plugins: [
+    { name: 'removeAttrs', params: { attrs: ['fill', 'class'] } },
+    { name: 'sortAttrs' },
+    { name: 'removeDimensions' },
+  ],
 }
-
-const svgo = new SVGO(options)
 
 export async function generateIcons(): Promise<void> {
-  const iconDirname = join(iconAssetsDir)
-  const iconPaths = readdirSync(iconDirname)
+  const iconPaths = await readdir(assetsDirname)
+  const definitionPromises = iconPaths.map(async iconName => {
+    const iconContent = await readFile(join(assetsDirname, iconName), 'utf8')
+    const { data } = optimize(iconContent, options)
 
-  const outputIcons = iconPaths.map(async iconName => {
-    const iconFile = join(iconAssetsDir, iconName)
-    const iconFileContent = readFileSync(iconFile, 'utf8')
-    await output(iconFileContent, iconName)
+    await writeFile(join(assetsDirname, iconName), data, 'utf8')
+
+    return getDefinition(iconName, data)
   })
-  await Promise.all(outputIcons)
 
-  const indexContent =
-    outputDefinitionNames.map(item => `export { ${upperFirst(item)} } from './${item}'`).join('\n') + '\n'
-  writeFileSync(join(iconDefinitionsDir, `index.ts`), indexContent, 'utf8')
+  const definitions = await Promise.all(definitionPromises)
+
+  await writeFile(definitionsFilename, definitions.join('\n'), 'utf8')
 }
 
-async function output(content: string, iconName: string) {
-  const { data } = await svgo.optimize(content)
-  outputIcons(iconName, data)
-  outputDefinitions(iconName, data)
-}
-
-function outputIcons(iconName: string, data: string) {
-  ensureDirSync(iconAssetsDir)
-  writeFileSync(join(iconAssetsDir, iconName), data, 'utf8')
-}
-
-function outputDefinitions(iconName: string, data: string) {
-  ensureDirSync(iconDefinitionsDir)
+function getDefinition(iconName: string, data: string) {
   const _iconName = `${iconName.replace('.svg', '')}`
   const camelCaseName = camelCase(_iconName)
   const definitionName = upperFirst(camelCaseName)
-  const iconDefinition = definitionTemplate
+  return definitionTemplate
     .replace('{{definitionName}}', definitionName)
     .replace('{{name}}', _iconName)
     .replace('{{svgString}}', data)
-  writeFileSync(join(iconDefinitionsDir, `${camelCaseName}.ts`), iconDefinition, 'utf8')
-  outputDefinitionNames.push(`${camelCaseName}`)
 }
 
-export function copyToSite(): void {
+export async function copyToSite(): Promise<void> {
   // 不存在的时候才 copy
-  if (!existsSync(siteIconAssetsDir)) {
-    copySync(iconAssetsDir, siteIconAssetsDir)
+  if (!existsSync(publicDirname)) {
+    await copy(assetsDirname, publicDirname)
   }
 }

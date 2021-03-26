@@ -1,0 +1,119 @@
+@import '../../style/default.less';
+
+@switch-prefix: ~'@{idux-prefix}-switch';
+
+.@{switch-prefix} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+  height: @switch-normal-height;
+  border-radius: 20px;
+  border: 1px solid @switch-close-border-color;
+  background: @switch-close-bg-color;
+  transition: @switch-transition;
+  cursor: pointer;
+
+  &-loading {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    left: 100%;
+    margin-left: -17px;
+    color: @switch-close-loading-color;
+
+    svg {
+      width: @switch-loading-size;
+      height: @switch-loading-size;
+    }
+  }
+
+  &-inner {
+    padding-left: 8px;
+    padding-right: 26px;
+    color: @switch-inner-circle-bg-color;
+    font-size: @switch-inner-font-size;
+    transition: @switch-transition;
+  }
+
+  &::after {
+    position: absolute;
+    width: @switch-normal-inner-circle-size;
+    height: @switch-normal-inner-circle-size;
+    left: 100%;
+    margin-left: -20px;
+    border-radius: 50%;
+    background-color: @switch-inner-circle-bg-color;
+    content: ' ';
+    cursor: pointer;
+    box-shadow: @switch-inner-circle-shadow;
+    transition: @switch-transition;
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: @switch-focus-shadow;
+
+  }
+
+  &-checked {
+    border: 1px solid @switch-open-border-color;
+    background-color: @switch-open-bg-color;
+
+    .@{switch-prefix}-loading {
+      left: 2px;
+      margin-left: 3px;
+      color: @switch-open-loading-color;
+    }
+
+    .@{switch-prefix}-inner {
+      padding-left: 26px;
+      padding-right: 8px;
+      transition: @switch-transition;
+    }
+
+    &::after {
+      left: 2px;
+      margin-left: 0;
+      transition: @switch-transition;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    opacity: @switch-disable-opacity;
+
+    &::after {
+      cursor: not-allowed;
+    }
+  }
+
+  &-small {
+    min-width: 28px;
+    height: @switch-small-height;
+
+    .@{switch-prefix}-inner {
+      padding-left: 8px;
+      padding-right: 16px;
+      transition: @switch-transition;
+    }
+
+    &::after {
+      width: @switch-small-inner-circle-size;
+      height: @switch-small-inner-circle-size;
+      margin-left: -14px;
+    }
+  }
+
+  &-small&-checked {
+    .@{switch-prefix}-inner {
+      padding-left: 16px;
+      padding-right: 8px;
+      transition: @switch-transition;
+    }
+    &::after {
+      margin-left: 0;
+    }
+  }
+}

@@ -5,8 +5,8 @@ import { loadFront } from 'yaml-front-matter'
 
 import { buildConfig } from '../buildConfig'
 
-const { packageRoot, docsDir } = buildConfig
-const { navConfigFilename, routerFilename } = buildConfig.site
+const { packageRoot } = buildConfig
+const { docsDirname, sideNavFilename, routerFilename } = buildConfig.site
 
 export interface Meta {
   category: string
@@ -21,17 +21,25 @@ export interface Meta {
 export function initSite(): void {
   const docsMeta: Record<string, Record<string, Meta>> = { docs: {} }
 
-  readdirSync(docsDir).forEach(docs => {
-    const { __content, ...meta } = loadFront(readFileSync(join(docsDir, docs)))
+  readdirSync(docsDirname).forEach(docs => {
+    const { __content, ...meta } = loadFront(readFileSync(join(docsDirname, docs)))
     const [name, lang] = docs.split('.')
     const path = `/${'docs'}/${name}/${lang}`
     docsMeta['docs'][name] = { ...meta, lang, path } as Meta
   })
 
-  const filterComponentName = ['style', 'core', 'i18n', 'version', 'utils']
+  const filterPackageName = ['site']
+  const filterComponentName = ['node_modules', 'dist', 'style', 'config', 'i18n', 'version', 'utils']
   readdirSync(packageRoot).forEach(packageName => {
-    docsMeta[packageName] = {}
+    if (filterPackageName.includes(packageName)) {
+      return
+    }
+
     const packageDirname = join(packageRoot, packageName)
+    if (!statSync(packageDirname).isDirectory()) {
+      return
+    }
+    docsMeta[packageName] = {}
     readdirSync(packageDirname).forEach(componentName => {
       if (filterComponentName.includes(componentName)) {
         return
@@ -52,7 +60,7 @@ export function initSite(): void {
 
   const { docs, components, cdk, routes } = handleDocsMeta(docsMeta)
 
-  writeFileSync(join(navConfigFilename), getSideNavConfigTemplate(docs, components, cdk))
+  writeFileSync(join(sideNavFilename), getSideNavConfigTemplate(docs, components, cdk))
   writeFileSync(join(routerFilename), getRoutesTemplate(routes))
 }
 
@@ -95,7 +103,7 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
       if (category === 'docs') {
         const item = { path, title, subtitle, lang, order }
         docs.push(item)
-        mdPath = `../../${packageName}/${componentName}.${lang}.md`
+        mdPath = `./${packageName}/${componentName}.${lang}.md`
       } else if (category === 'components') {
         const item = { path, title, subtitle, order }
         if (!componentsMap[type]) {
@@ -103,11 +111,11 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
         } else {
           componentsMap[type].children.push(item)
         }
-        mdPath = `../../packages/${packageName}/${componentName}/docs/index.${lang}.md`
+        mdPath = `../../${packageName}/${componentName}/docs/Index.${lang}.md`
       } else if (category === 'cdk') {
         const item = { path, title, subtitle, lang, order }
         cdk.push(item)
-        mdPath = `../../packages/${packageName}/${componentName}/docs/index.${lang}.md`
+        mdPath = `../../${packageName}/${componentName}/docs/Index.${lang}.md`
       }
       const route = `{path: '${path}', 'component': () => import('${mdPath}')},`
       routes.push(route)

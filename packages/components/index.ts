@@ -1,20 +1,22 @@
 import type { App, Directive } from 'vue'
 
-// General
+// import General
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxTitle } from './title'
 import { IxTypography } from './typography'
-// Layout
+// import Layout
 import { IxDivider } from './divider'
 import { IxSpace } from './space'
-// Navigation
+import { IxRow, IxCol } from './grid'
+// import Navigation
 import { IxAffix } from './affix'
-// Data Entry
+// import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxRate } from './rate'
-// Data Display
+import { IxSwitch } from './switch'
+// import Data Display
 import { IxBadge } from './badge'
 import { IxCard } from './card'
 import { IxEmpty } from './empty'
@@ -22,32 +24,38 @@ import { IxImage } from './image'
 import { IxStatistic } from './statistic'
 import { IxTimeline, IxTimelineItem } from './timeline'
 import { IxTooltip } from './tooltip'
-// Feedback
+import { IxPopover } from './popover'
+// import Feedback
 import { IxResult } from './result'
 import { IxSpin } from './spin'
 import { IxDrawer } from './drawer'
 // Other
+import { IxProgress } from './progress'
+// import Other
 import { IxBackTop } from './back-top'
 // --- import end ---
 
 const components = [
-  // General
+  // components General
   IxButton,
   IxButtonGroup,
   IxIcon,
   IxTitle,
-  // Layout
+  // components Layout
   IxDivider,
   IxSpace,
-  // Navigation
+  IxRow,
+  IxCol,
+  // components Navigation
   IxAffix,
-  // Data Entry
+  // components Data Entry
   IxCheckbox,
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
   IxRate,
-  // Data Display
+  IxSwitch,
+  // components Data Display
   IxBadge,
   IxCard,
   IxEmpty,
@@ -56,24 +64,27 @@ const components = [
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
-  // Feedback
+  IxPopover,
+  // components Feedback
   IxResult,
   IxSpin,
   IxDrawer,
   // Other
+  IxProgress,
+  // components Other
   IxBackTop,
   // --- components end ---
 ]
 
 const directives: Record<string, Directive> = {
-  // General
+  // directives General
   typography: IxTypography,
-  // Layout
-  // Navigation
-  // Data Entry
-  // Data Display
-  // Feedback
-  // Other
+  // directives Layout
+  // directives Navigation
+  // directives Data Entry
+  // directives Data Display
+  // directives Feedback
+  // directives Other
   // --- directives end ---
 }
 
@@ -94,27 +105,30 @@ export default {
   version,
 }
 
-export { useGlobalConfig } from './core/config'
+export { useGlobalConfig } from './config'
 export { useLocale, addLocale, getLocale } from './i18n'
 export {
-  // General
+  // export General
   IxButton,
   IxButtonGroup,
   IxIcon,
   IxTitle,
   IxTypography,
-  // Layout
+  // export Layout
   IxDivider,
   IxSpace,
-  // Navigation
+  IxRow,
+  IxCol,
+  // export Navigation
   IxAffix,
-  // Data Entry
+  // export Data Entry
   IxCheckbox,
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
   IxRate,
-  // Data Display
+  IxSwitch,
+  // export Data Display
   IxBadge,
   IxCard,
   IxEmpty,
@@ -123,11 +137,15 @@ export {
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
-  // Feedback
+  IxPopover,
+  // export Feedback
   IxResult,
   IxSpin,
   IxDrawer,
   // Other
+  IxProgress,
+  // export Other
   IxBackTop,
   // --- export end ---
 }
+export * from './message'

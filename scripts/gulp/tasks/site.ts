@@ -1,26 +1,17 @@
-import { series, task } from 'gulp'
-import detectPort from 'detect-port'
+import { task } from 'gulp'
 
-import { execNodeTask } from '../util/task-helpers'
+import { execNodeTask } from './taskHelpers'
 import { initSite } from '../site'
 
-/** Parse demos and docs to site directory. */
-task('init:site', done => {
+task('site:init', done => {
   initSite()
   done()
 })
 
-/** Run `vite` */
-task('serve:site', done => {
-  detectPort(3000).then((port: number) => {
-    execNodeTask('vite', 'vite', ['--port', port === 3000 ? '3000' : '0', '--open'])(done)
-  })
+task('site:serve', done => {
+  execNodeTask('lerna', 'lerna', ['run', 'start', '--stream'])(done)
 })
 
-/** Run `vite build` */
-task('build:site', execNodeTask('vite', 'vite', ['build']))
-
-/** Init site directory, and start watch and vite */
-task('site:start', series('init:site', 'serve:site'))
-
-task('site:build', series('init:site', 'build:site'))
+task('site:build', done => {
+  execNodeTask('lerna', 'lerna', ['run', 'build', '--stream'])(done)
+})

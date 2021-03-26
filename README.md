@@ -45,10 +45,10 @@
 ```bash
 npm install
 
-npm run start
+npm start
 ```
 
-浏览器会自动打开。
+使用浏览器访问：`http://localhost:3000`
 
 ## 🤝 如何贡献
 
@@ -60,10 +60,10 @@ npm run start
 
 ## 💖 特别感谢
 
-[@angular](https://github.com/angular)
-[ant-design](https://github.com/ant-design)
-[NG-ZORRO](https://github.com/NG-ZORRO)
+- [@angular](https://github.com/angular)
+- [ant-design](https://github.com/ant-design)
+- [NG-ZORRO](https://github.com/NG-ZORRO)
 
 ## ☀️ 授权协议
 
-[MIT](https://github.com/IduxFE/idux/blob/main/LICENSE)
+[MIT](https://github.com/IduxFE/idux/blob/main/LICENSE) © 2020-present IduxFE

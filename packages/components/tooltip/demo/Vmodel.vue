@@ -9,11 +9,9 @@
 
 <script lang="ts">
 import { ComputedRef, defineComponent, ref } from 'vue'
-import { IxTooltip, IxButton } from '@idux/components'
 
 export default defineComponent({
   name: 'VModel',
-  components: { IxButton, IxTooltip },
   setup() {
     const visible = ref(true)
 

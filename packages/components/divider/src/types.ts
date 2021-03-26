@@ -1,9 +1,7 @@
 import type { DefineComponent } from 'vue'
-import type { DividerPosition, DividerType } from '@idux/components/core/config'
+import type { DividerPosition, DividerType } from '@idux/components/config'
 
-export type { DividerPosition, DividerType }
-
-interface DividerOriginalProps {
+export interface DividerProps {
   /* dashed divider */
   dashed?: boolean
   /* common text style */
@@ -13,7 +11,5 @@ interface DividerOriginalProps {
   /* horizontal divider or vertical divider */
   type?: DividerType
 }
-
-export type DividerProps = Readonly<DividerOriginalProps>
 
 export type DividerComponent = InstanceType<DefineComponent<DividerProps>>

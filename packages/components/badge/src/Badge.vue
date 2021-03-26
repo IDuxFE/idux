@@ -13,7 +13,7 @@ import type { BadgeProps } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { hasSlot, isNumeric, PropTypes, toNumber } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxBadge',

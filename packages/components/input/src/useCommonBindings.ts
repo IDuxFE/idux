@@ -1,12 +1,14 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { InputConfig, TextareaConfig } from '@idux/components/core/config'
+import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { InputProps, TextareaProps } from './types'
 
 import { computed, getCurrentInstance, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 
 interface CommonBindings {
+  focus: (options?: FocusOptions) => void
+  blur: () => void
   onCompositionStart: (evt: CompositionEvent) => void
   onCompositionEnd: (evt: CompositionEvent) => void
   onInput: (evt: Event) => void
@@ -59,6 +61,9 @@ export const useCommonBindings = (
     emit('blur', evt)
   }
 
+  const focus = (options?: FocusOptions) => elementRef.value.focus(options)
+  const blur = () => elementRef.value.blur()
+
   const onClearClick = (evt: MouseEvent) => {
     valueAccessor.setValue?.('')
     emit('afterClear', evt)
@@ -78,6 +83,8 @@ export const useCommonBindings = (
   })
 
   return {
+    focus,
+    blur,
     onCompositionStart,
     onCompositionEnd,
     onInput,

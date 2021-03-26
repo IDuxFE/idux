@@ -18,7 +18,7 @@ import {
   isNumeric,
   hasOwnProperty,
   isHTMLElement,
-} from '../typeof'
+} from '../src/typeof'
 
 describe('typeof.ts', () => {
   test('isNumeric work', async () => {

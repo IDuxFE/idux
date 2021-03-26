@@ -1,10 +1,17 @@
 ls:
   packages/*:
     .ts: camelCase
-    .d.ts: camelCase
     .spec.ts: camelCase
+    .config.ts: camelCase
+    .less: camelCase
     .vue: PascalCase
-    (.zh|.en).md: kebab-case
+    .md: PascalCase
+    .zh.md: PascalCase
+    .en.md: PascalCase
+
+  scripts:
+    .ts: camelCase
+    .svg: kebab-case
 
 ignore:
-  - packages/components/i18n/locales
+  - packages/components/i18n/src/locales

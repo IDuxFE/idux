@@ -1,7 +1,6 @@
-import type { TypographyConfig } from '../src/types'
-
 import { renderWork } from '@tests'
 import { mount, VueWrapper } from '@vue/test-utils'
+import { TypographyProps } from '../src/types'
 import IxTypography from '../src/typography'
 
 const TestComponent = {
@@ -11,7 +10,7 @@ const TestComponent = {
 
 describe('typography.ts', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let typographyMount: (props?: { type: TypographyConfig }) => VueWrapper<any>
+  let typographyMount: (props?: { type: TypographyProps }) => VueWrapper<any>
 
   beforeEach(() => {
     typographyMount = props => {

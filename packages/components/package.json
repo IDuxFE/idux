@@ -1,0 +1,37 @@
+{
+  "name": "@idux/components",
+  "version": "0.0.1",
+  "description": "A UI Component Library for Vue 3.x",
+  "author": "IduxFE<idux.feteam@gmail.com>",
+  "license": "MIT",
+  "scripts": {},
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "unpkg": "dist/index.min.js",
+  "typings": "dist/index.d.ts",
+  "style": "dist/theme/index.css",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue 3.x",
+    "frontend",
+    "framework",
+    "ui",
+    "component",
+    "components"
+  ],
+  "homepage": "https://github.com/IduxFE/idux#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IduxFE/idux"
+  },
+  "bugs": {
+    "url": "https://github.com/IduxFE/idux/issues"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@idux/cdk": "^0.0.1"
+  }
+}

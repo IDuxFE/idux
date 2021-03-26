@@ -45,14 +45,14 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
-import type { InputConfig } from '@idux/components/core/config'
+import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
 import { ControlPropType } from '@idux/cdk/forms'
 import { PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
-import { useAttrs } from '@idux/components/core/utils'
+import { useGlobalConfig } from '@idux/components/config'
+import { useAttrs } from '@idux/components/utils'
 import { IxIcon } from '@idux/components/icon'
 import { useCommonBindings } from './useCommonBindings'
 
@@ -90,6 +90,8 @@ export default defineComponent({
     const inputRef = ref((null as unknown) as HTMLInputElement)
 
     const {
+      focus,
+      blur,
       onCompositionStart,
       onCompositionEnd,
       onInput,
@@ -108,6 +110,8 @@ export default defineComponent({
     const onPrefixClick = (evt: MouseEvent) => emit('prefixClick', valueAccessor.value, evt)
 
     return {
+      focus,
+      blur,
       attrs,
       inputRef,
       classes,

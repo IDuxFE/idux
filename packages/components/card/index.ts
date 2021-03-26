@@ -1,7 +1,13 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxCard from './src/Card.vue'
 
-IxCard.install = installComponent(IxCard)
+IxCard.install = (app: App): void => {
+  app.component(IxCard.name, IxCard)
+}
 
 export { IxCard }
-export * from './src/types'
+
+export type { CardComponent, CardProps } from './src/types'
+
+export type { CardSize } from '@idux/components/config'

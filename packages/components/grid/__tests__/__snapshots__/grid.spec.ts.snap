@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`row.vue & col.vue render work 1`] = `"<div class=\\"ix-row\\"><div class=\\"ix-col ix-col-span-12\\">1</div><div class=\\"ix-col ix-col-span-12\\">1</div></div>"`;

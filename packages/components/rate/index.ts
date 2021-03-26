@@ -1,8 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxRate from './src/Rate.vue'
 
-IxRate.install = installComponent(IxRate)
+IxRate.install = (app: App): void => {
+  app.component(IxRate.name, IxRate)
+}
 
 export { IxRate }
 
-export type { RateComponent } from './src/types'
+export type { RateComponent, RateProps } from './src/types'

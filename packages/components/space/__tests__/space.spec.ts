@@ -3,9 +3,10 @@ import { computed, defineComponent, PropType } from 'vue'
 import IxSpace from '../src/Space.vue'
 import { IxButton } from '../../button'
 import { IxDivider } from '../../divider'
-import { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
+import { SpaceAlign, SpaceDirection } from '../src/types'
 import { isNil } from '@idux/cdk/utils'
 import { renderWork } from '@tests'
+import { SpaceSize } from '@idux/components/config'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },

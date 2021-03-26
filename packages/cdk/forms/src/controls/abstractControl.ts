@@ -202,7 +202,6 @@ export abstract class AbstractControl<T = any> {
     // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
     path.forEach((name: string | number) => {
       if (isFormGroup(controlToFind)) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         controlToFind = hasOwnProperty(controlToFind.controls, name as string) ? controlToFind.controls[name]! : null
       } else if (isFormArray(controlToFind)) {
         controlToFind = controlToFind.at(<number>name) || null

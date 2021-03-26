@@ -1,8 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { PropType } from 'vue'
 import ButtonGroup from '../src/ButtonGroup.vue'
 import Button from '../src/Button.vue'
-import { ButtonMode, ButtonSize, ButtonShape } from '../src/types'
 import { renderWork } from '@tests'
 
 const TestComponent = {
@@ -16,9 +14,9 @@ const TestComponent = {
   </ButtonGroup>
   `,
   props: {
-    mode: String as PropType<ButtonMode>,
-    size: String as PropType<ButtonSize>,
-    shape: String as PropType<ButtonShape>,
+    mode: String,
+    size: String,
+    shape: String,
   },
 }
 

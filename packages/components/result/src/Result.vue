@@ -21,12 +21,12 @@
 </template>
 <script lang="ts">
 import type { SetupContext } from 'vue'
-import type { ResultConfig, ResultStatus } from '@idux/components/core/config'
+import type { ResultConfig, ResultStatus } from '@idux/components/config'
 import type { ResultProps } from './types'
 
 import { computed, defineComponent, Slots } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 const defaultIconMap = new Map<ResultStatus, string>([

@@ -1,9 +1,8 @@
 import type { StrictModifiers } from '@popperjs/core'
-import type { RefElement } from './types'
 
 interface ModifierProps {
   offset: [number, number]
-  arrow?: RefElement
+  arrow: HTMLElement | null
   arrowOffset?: number
   showArrow?: boolean
 }

@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxImage from './src/Image.vue'
 
-IxImage.install = installComponent(IxImage)
+IxImage.install = (app: App): void => {
+  app.component(IxImage.name, IxImage)
+}
 
 export { IxImage }
-export * from './src/types'
+
+export type { ImageComponent, ImageProps, ImageStatus } from './src/types'

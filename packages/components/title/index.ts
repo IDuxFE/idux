@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxTitle from './src/Title.vue'
 
-IxTitle.install = installComponent(IxTitle)
+IxTitle.install = (app: App): void => {
+  app.component(IxTitle.name, IxTitle)
+}
 
 export { IxTitle }
-export * from './src/types'
+
+export type { TitleComponent, TitleProps } from './src/types'

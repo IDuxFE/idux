@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch.vue render work 1`] = `"<button class=\\"ix-switch\\" type=\\"button\\"><!--v-if--><div class=\\"ix-switch-inner\\"></div></button>"`;

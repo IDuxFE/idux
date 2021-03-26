@@ -14,11 +14,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IxButton, IxSpace } from '@idux/components'
 
 export default defineComponent({
   name: 'Size',
-  components: { IxButton, IxSpace },
   setup() {
     const size = ref('small')
     return { size }

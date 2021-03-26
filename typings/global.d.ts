@@ -10,4 +10,3 @@ declare function setTimeout(handler: TimerHandler, timeout?: number, ...argument
 declare function clearTimeout(handle?: number): void
 
 declare type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never
-

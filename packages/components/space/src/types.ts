@@ -1,11 +1,10 @@
 import type { DefineComponent } from 'vue'
-import type { SpaceSize } from '@idux/components/core/config'
+import type { SpaceSize } from '@idux/components/config'
 
-export type { SpaceSize }
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
 
-interface SpaceOriginalProps {
+export interface SpaceProps {
   /* Alignment direction of container */
   align?: SpaceAlign
   /* Spacing direction of flex item */
@@ -23,7 +22,5 @@ interface SpaceOriginalProps {
   /* Whether to wrap */
   wrap?: boolean
 }
-
-export type SpaceProps = Readonly<SpaceOriginalProps>
 
 export type SpaceComponent = InstanceType<DefineComponent<SpaceProps>>

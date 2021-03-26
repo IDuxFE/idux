@@ -12,12 +12,34 @@ export function getLessTemplate(compName: string): string {
 export function getTypesTemplate(compName: string): string {
   return `import type { DefineComponent } from 'vue'
 
-interface ${compName}OriginalProps {
+import { PropTypes } from '@idux/cdk/utils'
+
+export interface ${compName}Props {
+  testProp: string
 }
 
-export type ${compName}Props = Readonly<${compName}OriginalProps>
+export const ${compName}PropTypes = {
+  testProp: PropTypes.string,
+}
 
 export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
+`
+}
+
+export function getTsxTemplate(compName: string): string {
+  return `import type { ${compName}Props } from './types'
+
+import { defineComponent } from 'vue'
+import { ${compName}PropTypes } from './types'
+
+export default defineComponent({
+  name: 'Ix${compName}',
+  props: ${compName}PropTypes,
+  emits: [],
+  setup(props: ${compName}Props) {
+
+  }
+})
 `
 }
 
@@ -26,14 +48,17 @@ export function getVueTemplate(compName: string): string {
   <div></div>
 </template>
 <script lang="ts">
+import type { ${compName}Props } from './types'
+
 import { defineComponent } from 'vue'
-import { ${compName}Props } from './types'
+import { ${compName}PropTypes } from './types'
 
 export default defineComponent({
   name: 'Ix${compName}',
-  props: {},
-  setup(props:${compName}Props) {
-    // init
+  props: ${compName}PropTypes,
+  emits: [],
+  setup(props: ${compName}Props) {
+    
   },
 })
 </script>
@@ -41,13 +66,17 @@ export default defineComponent({
 }
 
 export function getIndexTemplate(compName: string): string {
-  return `import { installComponent } from '@idux/components/core/utils'
+  return `import type { App } from 'vue'
+
 import Ix${compName} from './src/${compName}.vue'
 
-Ix${compName}.install = installComponent(Ix${compName})
+Ix${compName}.install = (app: App): void => {
+  app.component(Ix${compName}.name, Ix${compName})
+}
 
 export { Ix${compName} }
-export * from './src/types'
+
+export type { ${compName}Component, ${compName}Props } from './src/types'
 `
 }
 

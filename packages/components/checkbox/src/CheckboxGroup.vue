@@ -16,6 +16,7 @@ export default defineComponent({
   props: {
     value: PropTypes.arrayOf(PropTypes.string),
     disabled: PropTypes.bool.def(false),
+    readonly: PropTypes.bool.def(false),
     name: PropTypes.string,
   },
   emits: ['update:value', 'change'],

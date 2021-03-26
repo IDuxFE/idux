@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxBadge from './src/Badge.vue'
 
-IxBadge.install = installComponent(IxBadge)
+IxBadge.install = (app: App): void => {
+  app.component(IxBadge.name, IxBadge)
+}
 
 export { IxBadge }
-export * from './src/types'
+
+export type { BadgeComponent, BadgeProps } from './src/types'

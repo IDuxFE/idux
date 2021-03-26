@@ -1,6 +1,6 @@
 {
   "name": "@idux/cdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A UI Component Development Kit for Vue 3.x",
   "author": "IduxFE<idux.feteam@gmail.com>",
   "license": "MIT",
@@ -32,7 +32,12 @@
     "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
-    "@popperjs/core": "^2.6.0",
     "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@juggle/resize-observer": "^3.3.0",
+    "@popperjs/core": "^2.6.0",
+    "lodash": "^4.17.0",
+    "vue-types": "^3.0.0"
   }
 }

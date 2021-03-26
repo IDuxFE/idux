@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxStatistic from './src/Statistic.vue'
 
-IxStatistic.install = installComponent(IxStatistic)
+IxStatistic.install = (app: App): void => {
+  app.component(IxStatistic.name, IxStatistic)
+}
 
 export { IxStatistic }
-export * from './src/types'
+
+export type { StatisticComponent, StatisticProps } from './src/types'

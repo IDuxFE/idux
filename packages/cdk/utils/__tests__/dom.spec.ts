@@ -1,4 +1,4 @@
-import { addClass, hasClass, off, on, removeClass } from '../dom'
+import { addClass, hasClass, off, on, removeClass } from '../src/dom'
 
 describe('dom.ts', () => {
   let testElement: HTMLDivElement
@@ -8,14 +8,16 @@ describe('dom.ts', () => {
   })
 
   test('event listener', () => {
-    const log = jest.spyOn(console, 'log').mockImplementation(() => {})
-    const listener = () => console.log('click')
+    const listener = jest.fn()
     on(testElement, 'click', listener)
     testElement.click()
-    expect(log).toBeCalled()
-    expect(log).toBeCalledTimes(1)
+
+    expect(listener).toBeCalledTimes(1)
+
     off(testElement, 'click', listener)
-    expect(log).toBeCalledTimes(1)
+    testElement.click()
+
+    expect(listener).toBeCalledTimes(1)
   })
 
   test('hasClass work', () => {

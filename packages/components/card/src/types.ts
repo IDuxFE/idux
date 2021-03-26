@@ -1,6 +1,7 @@
 import type { DefineComponent } from 'vue'
-import type { CardSize } from '@idux/components/core/config'
-interface CardOriginalProps {
+import type { CardSize } from '@idux/components/config'
+
+export interface CardProps {
   title?: string
   extra?: string
   hoverable?: boolean
@@ -9,6 +10,4 @@ interface CardOriginalProps {
   size?: CardSize
 }
 
-export type CardProps = Readonly<CardOriginalProps>
-export type { CardSize }
 export type CardComponent = InstanceType<DefineComponent<CardProps>>

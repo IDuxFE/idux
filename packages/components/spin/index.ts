@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxSpin from './src/Spin.vue'
 
-IxSpin.install = installComponent(IxSpin)
+IxSpin.install = (app: App): void => {
+  app.component(IxSpin.name, IxSpin)
+}
 
 export { IxSpin }
-export * from './src/types'
+
+export type { SpinComponent, SpinProps } from './src/types'

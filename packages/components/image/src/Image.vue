@@ -30,7 +30,7 @@ import type { ImageProps, ImageStatus } from './types'
 
 import { defineComponent, computed, ref, watchEffect, watch } from 'vue'
 import { PropTypes, toCssPixel, withUndefined } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 import ImgPreview from './ImgPreview.vue'
 
 export default defineComponent({

@@ -2,7 +2,7 @@
 
 import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { TextareaAutoRows } from './types'
+import type { TextareaAutoRows } from '@idux/components/config'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
 import throttle from 'lodash/throttle'

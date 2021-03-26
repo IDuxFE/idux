@@ -1,7 +1,11 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxAffix from './src/Affix.vue'
 
-IxAffix.install = installComponent(IxAffix)
+IxAffix.install = (app: App): void => {
+  app.component(IxAffix.name, IxAffix)
+}
 
 export { IxAffix }
-export * from './src/types'
+
+export type { AffixComponent, AffixProps, AffixOffset, AffixDirection } from './src/types'

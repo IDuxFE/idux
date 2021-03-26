@@ -1,7 +1,7 @@
 import type { DefineComponent } from 'vue'
-import type { ResultStatus } from '@idux/components/core/config'
+import type { ResultStatus } from '@idux/components/config'
 
-interface ResultOriginalProps {
+export interface ResultProps {
   /* the name of `ix-icon` to replace the default icon. */
   icon?: string
   /**
@@ -22,7 +22,5 @@ interface ResultOriginalProps {
    */
   title?: string
 }
-
-export type ResultProps = Readonly<ResultOriginalProps>
 
 export type ResultComponent = InstanceType<DefineComponent<ResultProps>>

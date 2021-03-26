@@ -1,4 +1,4 @@
-import { uniqueId } from '../uniqueId'
+import { uniqueId } from '../src/uniqueId'
 
 describe('uniqueId.ts', () => {
   test('basic', () => {

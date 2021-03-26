@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import type { Instance as PopperInstance } from '@popperjs/core'
 import type { ComputedRef } from 'vue'
 
@@ -7,20 +8,25 @@ import type {
   OverlayPopperEvents,
   OverlayTrigger,
   OverlayTriggerEvents,
-  RefElement,
-  TriggerElement,
+  OverlayElement,
 } from './types'
 
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 import { createPopper } from '@popperjs/core'
 import { isHTMLElement, off, on, uniqueId } from '@idux/cdk/utils'
 
 import { usePopperOptions } from './usePopperOptions'
 
-export const useOverlay = (options: OverlayOptions): OverlayInstance => {
-  const arrowRef = ref<RefElement>(null)
-  const triggerRef = ref<TriggerElement>(null)
-  const overlayRef = ref<RefElement>(null)
+export const useOverlay = <
+  TE extends OverlayElement = OverlayElement,
+  OE extends OverlayElement = OverlayElement,
+  AE extends OverlayElement = OverlayElement
+>(
+  options: OverlayOptions,
+): OverlayInstance<TE, OE, AE> => {
+  const triggerRef = ref<OverlayElement | null>(null)
+  const overlayRef = ref<OverlayElement | null>(null)
+  const arrowRef = ref<OverlayElement | null>(null)
   let popperInstance: Nullable<PopperInstance> = null
 
   let showTimer: Nullable<number> = null
@@ -39,11 +45,14 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     if (!unrefTrigger) {
       return
     }
-    const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
-    const overlayElement = overlayRef.value
-    popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
-    popperInstance.update()
-    on(window, 'scroll', globalScroll)
+    nextTick(() => {
+      const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
+      const unrefOverlay = overlayRef.value
+      const overlayElement = isHTMLElement(unrefOverlay) ? unrefOverlay : unrefOverlay?.$el
+      popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
+      popperInstance.update()
+      on(window, 'scroll', globalScroll)
+    })
   }
 
   const _toggle = (visible: boolean) => {
@@ -92,8 +101,13 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     off(window, 'scroll', globalScroll)
   }
 
-  const update = (options: Partial<OverlayOptions>): void => {
+  const update = (options?: Partial<OverlayOptions>): void => {
     Object.assign(state, options)
+    if (popperInstance) {
+      popperInstance.update()
+    } else {
+      initialize()
+    }
   }
 
   const visibility = computed<boolean>(() => !state.disabled && !!state.visible)
@@ -200,5 +214,5 @@ export const useOverlay = (options: OverlayOptions): OverlayInstance => {
     visibility,
     triggerEvents,
     overlayEvents,
-  }
+  } as OverlayInstance<TE, OE, AE>
 }

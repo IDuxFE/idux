@@ -30,7 +30,7 @@
 import { isArray, PropTypes, toNumber, withUndefined } from '@idux/cdk/utils'
 import { computed, defineComponent, onBeforeUpdate, ref, watchEffect } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { useGlobalConfig } from '@idux/components/core/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 const HALF = 2
 

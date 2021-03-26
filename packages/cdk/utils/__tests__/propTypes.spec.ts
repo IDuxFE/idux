@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
-import { PropTypes } from '../propTypes'
+import { PropTypes } from '../src/propTypes'
 
 describe('propTypes.ts', () => {
   test('maxLength work', async () => {
