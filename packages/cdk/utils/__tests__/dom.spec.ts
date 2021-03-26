@@ -1,4 +1,4 @@
-import { addClass, hasClass, off, on, removeClass } from '../dom'
+import { addClass, hasClass, off, on, removeClass } from '../src/dom'
 
 describe('dom.ts', () => {
   let testElement: HTMLDivElement

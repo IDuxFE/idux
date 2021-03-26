@@ -2,7 +2,7 @@ import type { VNode, VNodeChild } from 'vue'
 
 import { Comment, Fragment, Slots, Text } from 'vue'
 
-import { getFirstValidNode, getSlotNodes, isValidElementNode } from '../vNode'
+import { getFirstValidNode, getSlotNodes, isValidElementNode } from '../src/vNode'
 
 const TEMPLATE = 'template'
 

@@ -1,4 +1,4 @@
-import { PropTypes } from '../propTypes'
+import { PropTypes } from '../src/propTypes'
 
 describe('propTypes.ts', () => {
   test('maxLength work', async () => {

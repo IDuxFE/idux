@@ -1,4 +1,4 @@
-import { toArray, toNumber, toBoolean, toCssPixel } from '../convert'
+import { toArray, toNumber, toBoolean, toCssPixel } from '../src/convert'
 
 describe('convert.ts', () => {
   test('toArray work', async () => {
