@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxSpace from './src/Space.vue'
 
-IxSpace.install = installComponent(IxSpace)
+IxSpace.install = (app: App): void => {
+  app.component(IxSpace.name, IxSpace)
+}
 
 export { IxSpace }
 

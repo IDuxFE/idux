@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxBackTop from './src/BackTop.vue'
 
-IxBackTop.install = installComponent(IxBackTop)
+IxBackTop.install = (app: App): void => {
+  app.component(IxBackTop.name, IxBackTop)
+}
 
 export { IxBackTop }
 

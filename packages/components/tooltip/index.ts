@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxTooltip from './src/tooltip'
 
-IxTooltip.install = installComponent(IxTooltip)
+IxTooltip.install = (app: App): void => {
+  app.component(IxTooltip.name, IxTooltip)
+}
 
 export { IxTooltip }
 

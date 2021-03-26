@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxDivider from './src/Divider.vue'
 
-IxDivider.install = installComponent(IxDivider)
+IxDivider.install = (app: App): void => {
+  app.component(IxDivider.name, IxDivider)
+}
 
 export { IxDivider }
 

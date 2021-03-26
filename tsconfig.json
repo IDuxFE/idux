@@ -7,6 +7,7 @@
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "preserve",
+    "jsxFactory": "h",
     "sourceMap": true,
     "declaration": true,
     "downlevelIteration": true,
@@ -26,5 +27,5 @@
       "@tests": ["./tests"]
     }
   },
-  "exclude": ["node_modules", "output", "dist"]
+  "exclude": ["node_modules", "output", "dist", "__tests__"]
 }

@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxProgress from './src/Progress.vue'
 
-IxProgress.install = installComponent(IxProgress)
+IxProgress.install = (app: App): void => {
+  app.component(IxProgress.name, IxProgress)
+}
 
 export { IxProgress }
 
