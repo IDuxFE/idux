@@ -9,10 +9,12 @@ export type RowRecordArrGutter = [RowRecordGutter, RowRecordGutter]
 export type RowPropGutter = RowRecordGutter | number | Array<number> | RowRecordArrGutter
 
 export interface RowProps {
-  align: RowAlign
-  justify: RowJustify
-  gutter: RowPropGutter
-  wrap: boolean
+  align?: RowAlign
+  justify?: RowJustify
+  // TODO fix any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  gutter: RowPropGutter | any
+  wrap?: boolean
 }
 
 export type RowComponent = InstanceType<DefineComponent<RowProps>>
