@@ -1,11 +1,14 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxIcon from './src/Icon.vue'
 import { addIconDefinitions, fetchFromIconfont } from './src/helper'
 import { staticIcons } from './src/staticIcons'
 
 addIconDefinitions(staticIcons)
 
-IxIcon.install = installComponent(IxIcon)
+IxIcon.install = (app: App): void => {
+  app.component(IxIcon.name, IxIcon)
+}
 
 export { IxIcon, addIconDefinitions, fetchFromIconfont }
 

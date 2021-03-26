@@ -1,9 +1,15 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxCheckbox from './src/Checkbox.vue'
 import IxCheckboxGroup from './src/CheckboxGroup.vue'
 
-IxCheckbox.install = installComponent(IxCheckbox)
-IxCheckboxGroup.install = installComponent(IxCheckboxGroup)
+IxCheckbox.install = (app: App): void => {
+  app.component(IxCheckbox.name, IxCheckbox)
+}
+
+IxCheckboxGroup.install = (app: App): void => {
+  app.component(IxCheckboxGroup.name, IxCheckboxGroup)
+}
 
 export { IxCheckbox, IxCheckboxGroup }
 

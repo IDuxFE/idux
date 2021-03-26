@@ -1,7 +1,10 @@
-import { installComponent } from '@idux/components/utils'
+import type { App } from 'vue'
+
 import IxSwitch from './src/Switch.vue'
 
-IxSwitch.install = installComponent(IxSwitch)
+IxSwitch.install = (app: App): void => {
+  app.component(IxSwitch.name, IxSwitch)
+}
 
 export { IxSwitch }
 export type { SwitchComponent, SwitchProps } from './src/types'

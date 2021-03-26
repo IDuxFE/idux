@@ -25,7 +25,7 @@
 </template>
 <script lang="ts">
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import type { CardConfig } from '@idux/components/config/types'
+import type { CardConfig } from '@idux/components/config'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { computed, defineComponent } from 'vue'
