@@ -1,9 +1,8 @@
 ---
 category: components
-type: 通用
+type: 数据录入
 title: Radio
 subtitle: 单选框
-cover: Radio 单选框
 ---
 
 

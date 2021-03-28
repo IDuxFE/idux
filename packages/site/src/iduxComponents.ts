@@ -14,11 +14,10 @@ import { IxAffix } from '@idux/components/affix'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
+import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxSwitch } from '@idux/components/switch'
-import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
-
-// Data Display
+// import Data Display
 import { IxBadge } from '@idux/components/badge'
 import { IxCard } from '@idux/components/card'
 import { IxEmpty } from '@idux/components/empty'
@@ -53,12 +52,12 @@ const components = [
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
-  IxRate,
-  IxSwitch,
   IxRadio,
   IxRadioButton,
   IxRadioGroup,
-  // Data Display
+  IxRate,
+  IxSwitch,
+  // components Data Display
   IxBadge,
   IxCard,
   IxEmpty,

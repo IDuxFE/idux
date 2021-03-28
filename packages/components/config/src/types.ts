@@ -57,6 +57,13 @@ export interface TextareaConfig {
   clearable: boolean
 }
 
+export type RadioSize = FormSize
+export type RadioMode = 'border' | 'fill'
+export interface RadioGroupConfig {
+  size: RadioSize
+  mode: RadioMode
+}
+
 export interface RateConfig {
   count: number
   icon: string
@@ -166,8 +173,8 @@ export interface GlobalConfig {
   // Data Entry
   input: InputConfig
   textarea: TextareaConfig
-  rate: RateConfig
   radioGroup: RadioGroupConfig
+  rate: RateConfig
   // Data Display
   badge: BadgeConfig
   card: CardConfig
@@ -185,9 +192,4 @@ export interface GlobalConfig {
   // --- end ---
 }
 
-export type RadioSize = 'large' | 'medium' | 'small'
-export type RadioMode = 'border' | 'fill'
-export interface RadioGroupConfig {
-  size: RadioSize
-  mode: RadioMode
-}
+export type GlobalConfigKey = keyof GlobalConfig
