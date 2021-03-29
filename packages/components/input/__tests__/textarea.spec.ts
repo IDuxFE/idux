@@ -1,20 +1,13 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent, nextTick, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import IxTextarea from '../src/Textarea.vue'
 import { TextareaProps } from '../src/types'
 
 describe('Textarea.vue', () => {
-  let TextareaMount: (
-    options?: MountingOptions<Partial<TextareaProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<TextareaProps>>>
-
+  let TextareaMount: (options?: MountingOptions<Partial<TextareaProps>>) => VueWrapper<InstanceType<typeof IxTextarea>>
   beforeEach(() => {
-    TextareaMount = (options = {}) => {
-      return mount<TextareaProps>(IxTextarea, {
-        ...options,
-      })
-    }
+    TextareaMount = options => mount(IxTextarea, { ...options })
   })
 
   renderWork(IxTextarea)

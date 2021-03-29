@@ -1,5 +1,5 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent, defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { renderWork } from '@tests'
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
@@ -18,16 +18,10 @@ const TimelineDefaultSlots = defineComponent({
 })
 
 describe('Timeline.vue', () => {
-  let TimelineMount: (
-    options?: MountingOptions<Partial<TimelineProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<TimelineProps>>>
+  let TimelineMount: (options?: MountingOptions<Partial<TimelineProps>>) => VueWrapper<InstanceType<typeof IxTimeline>>
 
   beforeEach(() => {
-    TimelineMount = (options = {}) => {
-      return mount<TimelineProps>(IxTimeline, {
-        ...options,
-      })
-    }
+    TimelineMount = options => mount(IxTimeline, { ...options })
   })
 
   renderWork(IxTimeline)

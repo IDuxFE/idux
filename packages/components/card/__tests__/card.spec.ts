@@ -1,17 +1,12 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import IxCard from '../src/Card.vue'
 import { CardProps } from '../src/types'
 
 describe('Card.vue', () => {
-  let CardMount: (options?: MountingOptions<Partial<CardProps>>) => VueWrapper<InstanceType<DefineComponent<CardProps>>>
+  let CardMount: (options?: MountingOptions<Partial<CardProps>>) => VueWrapper<InstanceType<typeof IxCard>>
 
   beforeEach(() => {
-    CardMount = (options = {}) => {
-      return mount<CardProps>(IxCard, {
-        ...options,
-      })
-    }
+    CardMount = options => mount(IxCard, { ...options })
   })
 
   test('render work', () => {

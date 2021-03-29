@@ -1,7 +1,6 @@
 import { useGlobalConfig } from '@idux/components/config'
 
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
 import IxIcon from '../src/Icon.vue'
 import { IconProps, IconDefinition } from '../src/types'
@@ -11,14 +10,10 @@ const Down: IconDefinition = { name: 'down', svgString: '<svg></svg>' }
 const Loading: IconDefinition = { name: 'loading', svgString: '<svg></svg>' }
 
 describe('Icon.vue', () => {
-  let IconMount: (options?: MountingOptions<Partial<IconProps>>) => VueWrapper<InstanceType<DefineComponent<IconProps>>>
+  let IconMount: (options?: MountingOptions<Partial<IconProps>>) => VueWrapper<InstanceType<typeof IxIcon>>
 
   beforeEach(() => {
-    IconMount = (options = {}) => {
-      return mount<IconProps>(IxIcon, {
-        ...options,
-      })
-    }
+    IconMount = options => mount(IxIcon, { ...options })
   })
 
   test('render work', async () => {

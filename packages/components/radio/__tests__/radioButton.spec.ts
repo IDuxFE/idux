@@ -1,19 +1,15 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import IxRadioButton from '../src/RadioButton.vue'
 import { RadioButtonProps } from '../src/types'
 
-describe('RadioButton.vue', () => {
+describe.skip('RadioButton.vue', () => {
   let RadioButtonMount: (
     options?: MountingOptions<Partial<RadioButtonProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<RadioButtonProps>>>
+  ) => VueWrapper<InstanceType<typeof IxRadioButton>>
 
   beforeEach(() => {
-    RadioButtonMount = (options = {}) => {
-      return mount<RadioButtonProps>(IxRadioButton, {
-        ...options,
-      })
-    }
+    RadioButtonMount = options => mount(IxRadioButton, { ...options })
   })
 
   test('render work', () => {

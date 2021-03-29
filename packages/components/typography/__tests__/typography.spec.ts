@@ -1,16 +1,17 @@
 import { renderWork } from '@tests'
+
 import { mount, VueWrapper } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 import { TypographyProps } from '../src/types'
 import IxTypography from '../src/typography'
 
-const TestComponent = {
+const TestComponent = defineComponent({
   props: ['type'],
   template: `<p v-typography="type">Paragraph</p>`,
-}
+})
 
 describe('typography.ts', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let typographyMount: (props?: { type: TypographyProps }) => VueWrapper<any>
+  let typographyMount: (props?: { type: TypographyProps }) => VueWrapper<InstanceType<typeof TestComponent>>
 
   beforeEach(() => {
     typographyMount = props => {
