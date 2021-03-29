@@ -54,7 +54,7 @@ npm start
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/IduxFE/idux/pulls)
 
-在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/IduxFE/idux/blob/main/docs/contributing.zh.md)。如果你希望参与贡献，欢迎 [Pull Request](https://github.com/IduxFE/idux/pulls)，或给我们 [报告 Bug](https://github.com/IduxFE/idux/issues)。
+在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/IduxFE/idux/blob/main/packages/site/src/docs/Contributing.zh.md)。如果你希望参与贡献，欢迎 [Pull Request](https://github.com/IduxFE/idux/pulls)，或给我们 [报告 Bug](https://github.com/IduxFE/idux/issues)。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
