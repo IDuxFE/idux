@@ -6,6 +6,7 @@ import { PopoverProps } from '../src/types'
 
 const TestComponent = defineComponent({
   components: { IxPopover },
+  // eslint-disable-next-line vue/require-prop-types
   props: ['title', 'content', 'placement', 'visible', 'trigger', 'destroyOnHide'],
   template: `
   <ix-popover :title="title" :content="content" :placement="placement" :visible="visible" :trigger="trigger" :destroy-on-hide="destroyOnHide">

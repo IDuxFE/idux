@@ -6,6 +6,7 @@ import { TooltipProps } from '../src/types'
 
 const TestComponent = defineComponent({
   components: { IxTooltip },
+  // eslint-disable-next-line vue/require-prop-types
   props: ['title', 'placement', 'visible', 'trigger', 'destroyOnHide'],
   template: `
     <ix-tooltip :title='title' :placement='placement' :visible='visible' :trigger='trigger' :destroy-on-hide='destroyOnHide'>
