@@ -6,6 +6,7 @@ import { TypographyProps } from '../src/types'
 import IxTypography from '../src/typography'
 
 const TestComponent = defineComponent({
+  // eslint-disable-next-line vue/require-prop-types
   props: ['type'],
   template: `<p v-typography="type">Paragraph</p>`,
 })
