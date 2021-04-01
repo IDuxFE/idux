@@ -7,8 +7,8 @@ import { mdPlugin } from './plugins/mdPlugin'
 
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
-  const cdkResolve = isBuild ? '../cdk/dist' : '../cdk'
-  const componentsResolve = isBuild ? '../components/dist' : '../components'
+  const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
+  const componentsResolve = isBuild ? '../../dist/components' : '../components'
   return {
     plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), mdPlugin(), vueJsxPlugin()],
     resolve: {
@@ -23,6 +23,10 @@ export default defineConfig(({ command }) => {
           javascriptEnabled: true,
         },
       },
+    },
+    build: {
+      outDir: path.resolve(__dirname, '../../dist/site'),
+      emptyOutDir: true,
     },
   }
 })

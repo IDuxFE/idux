@@ -1,5 +1,7 @@
 import type { App, Directive } from 'vue'
 
+import { version } from './version'
+
 // import General
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
@@ -97,8 +99,6 @@ const install = (app: App): void => {
     app.directive(key, directives[key])
   })
 }
-
-const version = '0.0.0'
 
 export default {
   install,
