@@ -3,11 +3,12 @@ import { TaskFunction } from 'gulp'
 import { remove } from 'fs-extra'
 
 export function clean(glob: string | string[]): TaskFunction {
-  return async done => {
+  const clean: TaskFunction = async done => {
     const globs = Array.isArray(glob) ? glob : [glob]
     await Promise.all(globs.map(path => remove(path)))
     done()
   }
+  return clean
 }
 
 export function execTask(binPath: string, args: string[], env = {}): TaskFunction {

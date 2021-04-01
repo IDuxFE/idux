@@ -29,8 +29,7 @@ async function compile(content: string, savePath: string, min: boolean, rootPath
     .catch(err => Promise.reject(err))
 }
 
-export async function compileLess(targetDirname: string): Promise<void | void[]> {
-  const distDirname = path.join(targetDirname, 'dist')
+export async function compileLess(targetDirname: string, distDirname: string): Promise<void | void[]> {
   const promiseList = []
 
   for (const componentDirname of readdirSync(distDirname)) {

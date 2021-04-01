@@ -2,20 +2,29 @@ import { series } from 'gulp'
 import { join } from 'path'
 import { gulpConfig } from '../gulpConfig'
 import { clean } from '../taskHelpers'
-import { buildPackages, buildPackageIndex, buildStyle as _buildStyle, complete, moveDeclaration } from './gulpUtils'
+import {
+  buildPackage,
+  buildIndex,
+  buildStyle as _buildStyle,
+  moveDeclaration,
+  copyPackageFiles,
+  complete,
+  syncVersion,
+} from './gulpUtils'
 
-const { cdkDirname, componentsDirname, declarationDirname } = gulpConfig.build
+const { packageRoot, projectRoot } = gulpConfig
+const { cdkDirname, componentsDirname, distDirname } = gulpConfig.build
 
-const cdkDistDirname = join(cdkDirname, 'dist')
+const cdkDistDirname = join(distDirname, 'cdk')
 const cdkOptions = {
   targetDirname: cdkDirname,
   distDirname: cdkDistDirname,
   packageName: 'cdk',
 }
 
-export const buildCdk = series(clean(join(cdkDirname, 'dist')), buildPackages(cdkOptions), complete('Cdk'))
+export const buildCdk = series(clean(cdkDistDirname), buildPackage(cdkOptions), complete('CDK'))
 
-const componentsDistDirname = join(componentsDirname, 'dist')
+const componentsDistDirname = join(distDirname, 'components')
 const componentsOptions = {
   targetDirname: componentsDirname,
   distDirname: componentsDistDirname,
@@ -23,16 +32,23 @@ const componentsOptions = {
 }
 
 export const buildComponents = series(
-  clean([componentsDistDirname, declarationDirname]),
-  buildPackages(componentsOptions),
-  buildPackageIndex(componentsOptions),
+  clean(componentsDistDirname),
+  buildPackage(componentsOptions),
+  buildIndex(componentsOptions),
   complete('Components'),
 )
 
+const declarationDirname = join(distDirname, 'packages')
 export const buildDeclaration = series(
   moveDeclaration(declarationDirname),
   clean(declarationDirname),
   complete('Declaration'),
 )
 
-export const buildStyle = series(_buildStyle(componentsDirname), complete('Style'))
+export const buildStyle = series(_buildStyle(componentsDirname, componentsDistDirname), complete('Style'))
+
+export const buildVersion = series(
+  copyPackageFiles(distDirname, packageRoot, projectRoot),
+  syncVersion(distDirname),
+  complete('Version'),
+)

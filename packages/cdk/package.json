@@ -5,15 +5,9 @@
   "author": "IduxFE<idux.feteam@gmail.com>",
   "license": "MIT",
   "scripts": {},
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
-  "typings": "dist/index.d.ts",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
   "keywords": [
     "vue",
     "vue3",
@@ -36,11 +30,13 @@
     "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/shared": "^3.0.0"
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.0",
-    "@popperjs/core": "^2.6.0",
+    "@popperjs/core": "^2.9.0",
     "lodash": "^4.17.0",
     "vue-types": "^3.0.0"
   }

@@ -16,7 +16,9 @@ ls:
 
 ignore:
   - packages/components/i18n/src/locales
-  - packages/cdk/dist
   - packages/cdk/node_modules
-  - packages/components/dist
   - packages/components/node_modules
+  - packages/cdk/CHANGELOG.md
+  - packages/components/CHANGELOG.md
+  - packages/pro/CHANGELOG.md
+  - packages/site/CHANGELOG.md

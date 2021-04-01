@@ -8,6 +8,7 @@
     "no-descending-specificity": null
   },
   "ignoreFiles": [
+    "dist/**/*.less",
     "packages/components/style/reset.less",
     "packages/components/style/variable/color/*.less"
   ]

@@ -1,11 +1,13 @@
 import { join } from 'path'
 
-const packageRoot = join(__dirname, '../../packages')
+const projectRoot = join(__dirname, '../..')
+const packageRoot = join(projectRoot, 'packages')
 
 const componentsDirname = join(packageRoot, 'components')
 const siteDirname = join(packageRoot, 'site')
 
 export const gulpConfig = {
+  projectRoot,
   packageRoot,
   icon: {
     assetsDirname: join(__dirname, 'icons/assets'),
@@ -21,6 +23,6 @@ export const gulpConfig = {
   build: {
     cdkDirname: join(packageRoot, 'cdk'),
     componentsDirname: join(packageRoot, 'components'),
-    declarationDirname: join(packageRoot, '../dist'),
+    distDirname: join(packageRoot, '../dist'),
   },
 } as const
