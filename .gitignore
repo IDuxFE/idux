@@ -3,7 +3,6 @@ coverage
 junit.xml
 temp
 dist
-output
 
 .vscode
 .idea

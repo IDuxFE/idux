@@ -5,7 +5,6 @@
 coverage/
 publish/
 dist/
-output/
 
 package-lock.json
 yarn.lock

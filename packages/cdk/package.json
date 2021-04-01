@@ -5,11 +5,15 @@
   "author": "IduxFE<idux.feteam@gmail.com>",
   "license": "MIT",
   "scripts": {},
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "unpkg": "dist/index.min.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
   "typings": "dist/index.d.ts",
-  "style": "dist/theme/index.css",
   "keywords": [
     "vue",
     "vue3",
