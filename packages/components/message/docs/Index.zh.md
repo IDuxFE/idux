@@ -1,78 +1,58 @@
 ---
 category: components
-type:
+type: 反馈
 title: Message
 subtitle: 全局提示
 order: 0
 ---
 
-
+全局展示操作反馈信息。
 
 ## 何时使用
 
-全局展示操作反馈信息。
+- 用于提示用户的信息，例如：成功、警告和错误等。
+- 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
 ## API
 
-- MessageService.success(content, [duration])
-- MessageService.error(content, [duration])
-- MessageService.info(content, [duration])
-- MessageService.warn(content, [duration])
-- MessageService.remove([messageId])
-- MessageService.getContainer() 获取message消息容器
+### IxMessage
 
-也可以通过对象的形式传递参数
+提供了一些服务方法，使用方式和参数如下：
 
-- MessageService.success(config)
-- MessageService.error(config)
-- MessageService.info(config)
-- MessageService.warn(config)
-- MessageService.create(config)
+- IxMessage.info(content, [options])
+- IxMessage.success(content, [options])
+- IxMessage.warn(content, [options])
+- IxMessage.error(content, [options])
+- IxMessage.loading(content, [options])
 
-|参数|说明|类型|默认值|
-|--------|-----------------------------------------|---------------------|------|
-|content|提示内容|`stringconfig\|vnode`|-|
-|duration|自动关闭的延时，单位毫秒。当设置为0时不消失|`number`|3000|
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `content` | 当前提示框的内容 | `string \| VNode` | - | - | - |
+| `options` | 设置针对当前提示框的参数，见下方表格 | `MessageOptions` | - | - | - |
 
-`config`对象属性如下:
+`options` 支持的参数如下:
 
-|参数|说明|类型|默认值|
-|------------|---------------------------------------|--------------|------|
-|content|提示内容|`string\|vnode`|-|
-|duration|自动关闭的延时，单位毫秒。设置为0立即关闭|`number`|3000|
-|icon|自定义图标|`string\|vnode`|-|
-|messageId|当前提示的唯一标志|`string\|number`|-|
-|onClose|message关闭时触发的回调函数|`function`|-|
-|pauseOnHover|鼠标移上时禁止自动移除|`boolean`|true|
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `destroyOnHover` | 鼠标悬浮时自动销毁 | `boolean` | `false` | ✅ | - |
+| `duration` | 自动销毁的延时，单位毫秒 | `number` | `3000` | ✅ | 设置为 `0` 时不自动销毁 |
+| `icon` | 自定义图标 | `string \| VNode` | - | - | - |
+| `id` | 提示的唯一标识 | `string` | - | - | - |
+| `onDestroy` | 当前提示框关闭时触发的回调函数 | `(id: string) => void` | - | - | - |
 
-## 全局方法
+### 额外全局配置
 
-组件还提供全局配置和全局销毁方法
+**通过 `useGlobalConfig` 设置全局配置暂不生效**
 
-**通过`useGlobalConfig`设置全局配置暂不生效 默认配置如下**
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `maxCount` | 最大显示提示框的数量 | `number` | `5` | ✅ | 超过限制时，最早的消息会被自动关闭 |
+| `top` | 消息距离顶部的位置 | `string \| number` | `60px` | ✅ | - |
 
-```javascript
-useGlobalConfig('message', {
-  top: 100,
-  duration: 2,
-  maxCount: 3,
-  pauseOnHover: true,
-});
-```
+### 其他方法
 
-options:
+- 全局销毁：`IxMessage.destroy`
 
-|参数|说明|类型|默认值|
-|------------|----------------------------------------------|--------------|------|
-|duration|默认自动关闭延时，单位毫秒，设置为0立即关闭|`number`|3000|
-|maxCount|最大显示数, 超过限制时，最早的消息会被自动关闭|`number`|5|
-|top|消息距离顶部的位置|`string\|number`|60px|
-|pauseOnHover|鼠标移上时禁止自动移除|`boolean`|true|
-
-## MessageService.remove
-
-销毁某个消息实例的方法
-
-|参数|说明|类型|默认值|
-|------------|----------------------------------------------|--------------|------|
-|messageId|需要销毁的消息实例对应的messageId。可选参数，如果不传参数则清除所有消息。|`string\|number\|(string\|number)[]`|-|
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `id` | 需要销毁的提示框的唯一标识 | `string \| string[]` | - | - | 为空时，销毁所有提示框 |

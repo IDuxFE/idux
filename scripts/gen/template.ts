@@ -178,10 +178,11 @@ order: 0
 
 ## zh
 
-
+最简单的用法。
 
 ## en
 
+The simplest usage.
 
 `
 }
@@ -190,6 +191,7 @@ export function getDemoVueTemplate(compName: string): string {
   return `<template>
   <ix-${compName} />
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -199,6 +201,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="less" scoped>
 </style>
 `
