@@ -1,7 +1,7 @@
 ---
 category: components
 type: Feedback
-title: Drawer
+title: Mask
 subtitle:
 order: 0
 ---
@@ -12,7 +12,7 @@ order: 0
 
 ## API
 
-### ix-drawer
+### ix-mask
 
 #### Props
 

@@ -26,9 +26,10 @@ import { IxTimeline, IxTimelineItem } from './timeline'
 import { IxTooltip } from './tooltip'
 import { IxPopover } from './popover'
 // import Feedback
+import { IxMask } from './mask'
+import { IxDrawer } from './drawer'
 import { IxResult } from './result'
 import { IxSpin } from './spin'
-import { IxDrawer } from './drawer'
 // Other
 import { IxProgress } from './progress'
 // import Other
@@ -66,9 +67,10 @@ const components = [
   IxTooltip,
   IxPopover,
   // components Feedback
+  IxMask,
+  IxDrawer,
   IxResult,
   IxSpin,
-  IxDrawer,
   // Other
   IxProgress,
   // components Other
@@ -139,9 +141,10 @@ export {
   IxTooltip,
   IxPopover,
   // export Feedback
+  IxMask,
+  IxDrawer,
   IxResult,
   IxSpin,
-  IxDrawer,
   // Other
   IxProgress,
   // export Other
