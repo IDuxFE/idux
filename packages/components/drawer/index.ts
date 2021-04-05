@@ -1,7 +1,12 @@
-import { installComponent } from '@idux/components/core/utils'
+import type { App } from 'vue'
+
 import IxDrawer from './src/Drawer.vue'
 
-IxDrawer.install = installComponent(IxDrawer)
+IxDrawer.install = (app: App): void => {
+  app.component(IxDrawer.name, IxDrawer)
+}
 
 export { IxDrawer }
-export * from './src/types'
+
+export type { DrawerComponent, DrawerProps } from './src/types'
+

@@ -1,7 +1,107 @@
 @import '../../style/default.less';
+@import '../../style/motion/move.less';
+@import '../../style/variable/animation.less';
 
 @drawer-prefix: ~'@{idux-prefix}-drawer';
+@boder-line: 1px solid #ddd;
 
 .@{drawer-prefix} {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	overflow: hidden;
 	max-width: 100%;
+    max-height: 100%;
+	background-color: #fff;
+	box-shadow: -2px 0 8px rgb(0 0 0 / 15%);
+	&.left,
+	&.right {
+		height: 100%;
+		top: 0;
+	}
+	&.top,
+	&.bottom {
+		width: 100%;
+		left: 0;
+	}
+	&.left {
+		left: 0;
+	}
+	&.right {
+		right: 0;
+	}
+	&.top {
+		top: 0;
+	}
+	&.bottom {
+		bottom: 0;
+	}
+
+	&-header {
+		display: flex;
+		align-items: center;
+		padding: 12px 16px;
+		border-bottom: @boder-line;
+		& > :first-child {
+			flex: 1;
+		}
+	}
+	&-close-btn {
+		padding-left: 8px;
+		color: #80848f;
+		outline: none;
+		font-size: 16px;
+		background-color: transparent;
+	}
+	&-body {
+		flex: 1;
+		padding: 12px 24px;
+		overflow: auto;
+	}
+	&-footer {
+		padding: 12px 16px;
+		border-top: @boder-line;
+	}
+
+	// 抽屉动画-侧滑
+	.@{drawer-prefix}-fade-enter-active &,
+	.@{drawer-prefix}-fade-leave-active & { // 这里为何需要&？
+		transition: all @transition-duration-base linear;
+	}
+	.@{drawer-prefix}-fade-enter-to &,
+	.@{drawer-prefix}-fade-leave-from & {
+		transform: translateX(0);
+	}
+	.@{drawer-prefix}-fade-enter-from &,
+	.@{drawer-prefix}-fade-leave-to & {
+		&.left {
+			transform: @translate-move-left-enter-from;
+		}
+		&.right {
+			transform: @translate-move-right-enter-from;
+		}
+		&.top {
+			transform: @translate-move-up-enter-from;
+		}
+		&.bottom {
+			transform: @translate-move-down-enter-from;
+		}
+	}
+}
+
+// 整个蒙层动画-淡入淡出
+.@{drawer-prefix}-fade-enter-active,
+.@{drawer-prefix}-fade-leave-active {
+	transition: all @transition-duration-base linear;
+}
+.@{drawer-prefix}-fade-enter-from,
+.@{drawer-prefix}-fade-leave-to {
+	opacity: 0;
+	overflow: hidden;
+}
+.@{drawer-prefix}-fade-enter-to,
+.@{drawer-prefix}-fade-leave-from {
+	opacity: 1;
+	overflow: hidden;
 }

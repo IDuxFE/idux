@@ -1,7 +1,9 @@
 import type { DefineComponent } from 'vue'
 
 export type DrawerPlacement = 'top' | 'right' | 'bottom' | 'left'
-export type BeforeCloseFunc = (done: string) => void
+type Done = (cancel: boolean) => void
+
+export type BeforeCloseFunc = (done: Done) => void
 
 interface DrawerOriginalProps {
   visible?: boolean
