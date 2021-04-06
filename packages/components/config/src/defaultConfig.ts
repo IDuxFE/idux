@@ -16,6 +16,7 @@ import type {
   SpinConfig,
   ProgressConfig,
   BackTopConfig,
+  AnchorConfig,
   GlobalConfig,
   TooltipConfig,
   PopoverConfig,
@@ -137,7 +138,9 @@ const backTop = shallowReactive<BackTopConfig>({
   duration: 450,
   visibilityHeight: 400,
 })
-
+const anchor = shallowReactive<AnchorConfig>({
+  showInkInFixed: false,
+})
 // --------------------- end ---------------------
 
 export const defaultConfig: GlobalConfig = {
@@ -168,5 +171,6 @@ export const defaultConfig: GlobalConfig = {
   progress,
   // Other
   backTop,
+  anchor,
   // --- end ---
 }

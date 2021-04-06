@@ -34,6 +34,7 @@ import { IxSpin } from './spin'
 import { IxProgress } from './progress'
 // import Other
 import { IxBackTop } from './back-top'
+import { IxAnchor, IxLink } from './anchor'
 // --- import end ---
 
 const components = [
@@ -75,6 +76,8 @@ const components = [
   IxProgress,
   // components Other
   IxBackTop,
+  IxAnchor,
+  IxLink,
   // --- components end ---
 ]
 

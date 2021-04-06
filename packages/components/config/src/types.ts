@@ -158,7 +158,9 @@ export interface BackTopConfig {
   duration: number
   visibilityHeight: number
 }
-
+export interface AnchorConfig {
+  showInkInFixed: boolean
+}
 // --- end ---
 
 export interface GlobalConfig {
@@ -188,7 +190,8 @@ export interface GlobalConfig {
   spin: SpinConfig
   progress: ProgressConfig
   // Other
-  backTop: BackTopConfig
+  backTop: BackTopConfig,
+  anchor: AnchorConfig,
   // --- end ---
 }
 
