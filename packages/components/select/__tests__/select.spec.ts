@@ -131,6 +131,7 @@ describe('Select.vue', () => {
     test('autofocus work', async () => {
       selectProps = reactive({ autofocus: true })
       initSelect(selectProps)
+
       await flushPromises()
       await wait(120)
 

@@ -33,6 +33,16 @@ export interface RowConfig {
 }
 
 // Navigation
+export type MenuTheme = 'light' | 'dark'
+export interface MenuConfig {
+  indent: number
+  theme: MenuTheme
+}
+
+export interface SubMenuConfig {
+  suffix: string
+  suffixRotates: [number, number]
+}
 
 // Data Entry
 type FormSize = 'small' | 'medium' | 'large'
@@ -180,6 +190,8 @@ export interface GlobalConfig {
   space: SpaceConfig
   row: RowConfig
   // Navigation
+  menu: MenuConfig
+  subMenu: SubMenuConfig
   // Data Entry
   input: InputConfig
   textarea: TextareaConfig

@@ -21,6 +21,8 @@ import type {
   PopoverConfig,
   SelectConfig,
   RadioGroupConfig,
+  MenuConfig,
+  SubMenuConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -44,6 +46,15 @@ const space = shallowReactive<SpaceConfig>({ size: 'small' })
 const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
+const menu = shallowReactive<MenuConfig>({
+  indent: 24,
+  theme: 'light',
+})
+
+const subMenu = shallowReactive<SubMenuConfig>({
+  suffix: 'right',
+  suffixRotates: [-90, 90],
+})
 
 // --------------------- Data Entry ---------------------
 const input = shallowReactive<InputConfig>({
@@ -159,6 +170,8 @@ export const defaultConfig: GlobalConfig = {
   space,
   row,
   // Navigation
+  menu,
+  subMenu,
   // Data Entry
   input,
   textarea,

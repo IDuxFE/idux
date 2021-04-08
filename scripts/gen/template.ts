@@ -47,6 +47,7 @@ export function getVueTemplate(compName: string): string {
   return `<template>
   <div></div>
 </template>
+
 <script lang="ts">
 import type { ${compName}Props } from './types'
 

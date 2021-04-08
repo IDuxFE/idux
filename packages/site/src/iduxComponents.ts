@@ -11,6 +11,7 @@ import { IxSpace } from '@idux/components/space'
 import { IxRow, IxCol } from '@idux/components/grid'
 // import Navigation
 import { IxAffix } from '@idux/components/affix'
+import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@idux/components/menu'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
@@ -49,6 +50,11 @@ const components = [
   IxCol,
   // components Navigation
   IxAffix,
+  IxMenu,
+  IxMenuItem,
+  IxMenuItemGroup,
+  IxMenuDivider,
+  IxSubMenu,
   // components Data Entry
   IxCheckbox,
   IxCheckboxGroup,

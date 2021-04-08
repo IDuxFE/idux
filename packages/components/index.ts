@@ -13,6 +13,7 @@ import { IxSpace } from './space'
 import { IxRow, IxCol } from './grid'
 // import Navigation
 import { IxAffix } from './affix'
+import { IxMenu } from './menu'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
@@ -49,6 +50,7 @@ const components = [
   IxRow,
   IxCol,
   // components Navigation
+  IxMenu,
   IxAffix,
   // components Data Entry
   IxCheckbox,

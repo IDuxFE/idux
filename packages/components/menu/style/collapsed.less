@@ -1,0 +1,32 @@
+.@{menu-prefix} {
+  &-collapsed {
+    .@{menu-prefix}-item-icon,
+    .@{menu-prefix}-sub-title-icon {
+      margin: 0;
+      font-size: @menu-collapsed-font-size;
+      + span {
+        display: none;
+      }
+    }
+
+    .@{menu-prefix}-sub-title-suffix-icon {
+      display: none;
+    }
+
+    .@{menu-prefix}-item-group-title {
+      padding: 0 8px;
+    }
+  }
+
+  &-vertical&-collapsed,
+  &-inline&-collapsed {
+    width: @menu-collapsed-width;
+
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-sub > .@{menu-prefix}-sub-title,
+    .@{menu-prefix}-item-group .@{menu-prefix}-item,
+    .@{menu-prefix}-item-group .@{menu-prefix}-sub-title {
+      padding: 0 ~'calc(50% - @{menu-collapsed-font-size} / 2)';
+    }
+  }
+}
