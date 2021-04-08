@@ -1,5 +1,5 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent, PropType } from 'vue'
+import { PropType } from 'vue'
 import { renderWork } from '@tests'
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
@@ -25,14 +25,10 @@ const TestComponent = {
 describe('TimelineItem.vue', () => {
   let timelineItemMount: (
     options?: MountingOptions<Partial<TimelineItemProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<TimelineItemProps>>>
+  ) => VueWrapper<InstanceType<typeof IxTimelineItem>>
 
   beforeEach(() => {
-    timelineItemMount = (options = {}) => {
-      return mount<TimelineItemProps>(IxTimelineItem, {
-        ...options,
-      })
-    }
+    timelineItemMount = options => mount(IxTimelineItem, { ...options })
   })
 
   renderWork(IxTimelineItem)

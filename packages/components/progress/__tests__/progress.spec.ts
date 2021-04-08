@@ -1,19 +1,12 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import IxProgress from '../src/Progress.vue'
 import { ProgressProps } from '../src/types'
 
 describe('Progress.vue', () => {
-  let ProgressMount: (
-    options?: MountingOptions<Partial<ProgressProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<ProgressProps>>>
+  let ProgressMount: (options?: MountingOptions<Partial<ProgressProps>>) => VueWrapper<InstanceType<typeof IxProgress>>
 
   beforeEach(() => {
-    ProgressMount = (options = {}) => {
-      return mount<ProgressProps>(IxProgress, {
-        ...options,
-      })
-    }
+    ProgressMount = options => mount(IxProgress, { ...options })
   })
 
   test('render line progress work', () => {

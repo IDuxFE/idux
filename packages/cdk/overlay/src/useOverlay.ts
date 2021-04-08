@@ -27,10 +27,10 @@ export const useOverlay = <
   const triggerRef = ref<OverlayElement | null>(null)
   const overlayRef = ref<OverlayElement | null>(null)
   const arrowRef = ref<OverlayElement | null>(null)
-  let popperInstance: Nullable<PopperInstance> = null
+  let popperInstance: PopperInstance | null = null
 
-  let showTimer: Nullable<number> = null
-  let hideTimer: Nullable<number> = null
+  let showTimer: number | null = null
+  let hideTimer: number | null = null
 
   let triggerFocus = false
 

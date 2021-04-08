@@ -22,22 +22,19 @@ export const loadSVGElement = async (
   iconName: string,
   loadIconDynamically?: (iconName: string) => Promise<string>,
 ): Promise<SVGElement | null> => {
-  let svg: SVGElement | null = null
   const cached = iconRenderedCache.get(iconName)
   if (cached) {
-    svg = cached.svg
-  } else {
-    const icon = await loadIconDefinition(iconName, loadIconDynamically)
-    if (icon) {
-      svg = createSVGElement(icon.svgString)
-      if (svg) {
-        setSVGAttribute(svg, iconName)
-        iconRenderedCache.set(iconName, { name: iconName, svg })
-        svg = svg.cloneNode(true) as SVGElement
-      } else {
-        Logger.error(`The icon [${iconName}] create failed.`)
-        return null
-      }
+    return cached.svg.cloneNode(true) as SVGElement
+  }
+  let svg: SVGElement | null = null
+  const icon = await loadIconDefinition(iconName, loadIconDynamically)
+  if (icon) {
+    svg = createSVGElement(icon.svgString)
+    if (svg) {
+      setSVGAttribute(svg, iconName)
+      iconRenderedCache.set(iconName, { name: iconName, svg })
+    } else {
+      Logger.error(`The icon [${iconName}] create failed.`)
     }
   }
   return svg

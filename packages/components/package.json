@@ -5,11 +5,10 @@
   "author": "IduxFE<idux.feteam@gmail.com>",
   "license": "MIT",
   "scripts": {},
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "unpkg": "dist/index.min.js",
-  "typings": "dist/index.d.ts",
-  "style": "dist/theme/index.css",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": ".index.d.ts",
+  "style": "./index.css",
   "keywords": [
     "vue",
     "vue3",
@@ -29,9 +28,12 @@
     "url": "https://github.com/IduxFE/idux/issues"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "@vue/compiler-sfc": "^3.0.0"
   },
   "dependencies": {
-    "@idux/cdk": "^0.0.1"
+    "@idux/cdk": "^0.0.1",
+    "lodash": "^4.17.0",
+    "vue-types": "^3.0.0"
   }
 }

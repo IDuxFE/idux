@@ -1,20 +1,14 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent, nextTick, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import IxInput from '../src/Input.vue'
 import { InputProps } from '../src/types'
 
 describe('Input.vue', () => {
-  let InputMount: (
-    options?: MountingOptions<Partial<InputProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<InputProps>>>
+  let InputMount: (options?: MountingOptions<Partial<InputProps>>) => VueWrapper<InstanceType<typeof IxInput>>
 
   beforeEach(() => {
-    InputMount = (options = {}) => {
-      return mount<InputProps>(IxInput, {
-        ...options,
-      })
-    }
+    InputMount = options => mount(IxInput, { ...options })
   })
 
   renderWork(IxInput)

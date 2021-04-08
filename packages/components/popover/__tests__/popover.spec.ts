@@ -1,10 +1,12 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 import { renderWork, wait } from '@tests'
 import IxPopover from '../src/Popover.vue'
 import { PopoverProps } from '../src/types'
 
-const TestComponent = {
+const TestComponent = defineComponent({
   components: { IxPopover },
+  // eslint-disable-next-line vue/require-prop-types
   props: ['title', 'content', 'placement', 'visible', 'trigger', 'destroyOnHide'],
   template: `
   <ix-popover :title="title" :content="content" :placement="placement" :visible="visible" :trigger="trigger" :destroy-on-hide="destroyOnHide">
@@ -13,15 +15,13 @@ const TestComponent = {
     <span>Popover will show when it's clicked.</span>
   </ix-popover>
   `,
-}
+})
 
 describe('Popover.vue', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let PopoverMount: (options?: MountingOptions<PopoverProps>) => VueWrapper<any>
+  let PopoverMount: (options?: MountingOptions<PopoverProps>) => VueWrapper<InstanceType<typeof TestComponent>>
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    PopoverMount = options => mount(TestComponent as any, options)
+    PopoverMount = options => mount(TestComponent, { ...options })
   })
 
   afterEach(() => {
