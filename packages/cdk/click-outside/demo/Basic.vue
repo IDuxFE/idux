@@ -7,22 +7,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { MessageService } from '@idux/components/message'
+import { IxMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {
-    const one = () => {
-      MessageService.info('one')
-    }
-    const two = () => {
-      MessageService.info('two')
-    }
-    const three = () => {
-      MessageService.info('three')
-    }
-    const four = () => {
-      MessageService.info('four')
-    }
+    const one = () => IxMessage.info('one')
+    const two = () => IxMessage.info('two')
+    const three = () => IxMessage.info('three')
+    const four = () => IxMessage.info('four')
     return { one, two, three, four }
   },
 })
