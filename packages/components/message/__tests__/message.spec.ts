@@ -1,216 +1,178 @@
-import { MessageApiFn } from '../src/types'
-import { MessageService } from '../index'
+import IxMessage from '../src/message'
 import { h } from 'vue'
 import { wait } from '@tests'
+import { MessageType } from '../src/types'
+import { IxIcon } from '@idux/components/icon'
 
 describe('Message', () => {
-  let overlayContainerEL: HTMLElement
-  const getOverlayElChildren = () => overlayContainerEL.querySelectorAll('.ix-message-item')
-  const typeList = ['success', 'error', 'info', 'warn']
-  const animateTime = 200
+  let container: HTMLElement
+  const getMessageItems = () => container.querySelectorAll('.ix-message-item')
+  const messageTypes: MessageType[] = ['info', 'success', 'warning', 'error', 'loading']
 
   beforeAll(() => {
-    jest.setTimeout(20000)
-    const message = MessageService.success('init')
-    MessageService.remove(message.messageId)
-    if (!overlayContainerEL) {
-      overlayContainerEL = MessageService.getContainer()
-    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    IxMessage.install({} as any)
+    container = document.querySelector('.ix-message-container')!
   })
+
   beforeEach(() => {
-    MessageService.remove()
+    IxMessage.destroy()
   })
 
-  typeList.forEach(type => {
-    test(`should open a message with ${type}`, async () => {
-      const text = type
-      const api = (MessageService as never)[type] as MessageApiFn
-      api(text)
-      await wait(animateTime)
-      expect(overlayContainerEL.textContent).toContain(text)
+  messageTypes.forEach(type => {
+    test(`${type} work`, async () => {
+      const content = `This is a ${type} message`
+      const open = IxMessage[type]
+      open(content)
+      await wait(100)
+
+      expect(container.textContent).toContain(content)
+      expect(container.querySelector(`.ix-message-item-${type}`)).toBeTruthy()
     })
   })
-  test('should open a message with create', async () => {
-    const text = 'create'
-    MessageService.create({
-      content: text,
-    })
-    await wait(animateTime)
-    expect(overlayContainerEL.textContent).toContain(text)
+
+  test('open work', async () => {
+    const content = 'Open message'
+    IxMessage.open({ content, type: 'info' })
+    await wait(100)
+
+    expect(container.textContent).toContain(content)
   })
 
-  test('should be able to remove a message', async () => {
-    const ins = MessageService.success('success')
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(1)
-    await MessageService.remove(ins.messageId)
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(0)
-    expect(overlayContainerEL.textContent).toContain('')
-  })
-
-  test('should not to remove a message which is not exist', async () => {
-    const ins = MessageService.success('success')
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(1)
-    await MessageService.remove(`notExist${ins.messageId}`)
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(1)
-  })
-
-  test('should be able to remove two messages', async () => {
-    const insOne = MessageService.success('success')
-    const insTwo = MessageService.success('success')
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(2)
-    await MessageService.remove([insOne.messageId, insTwo.messageId])
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(0)
-    expect(overlayContainerEL.textContent).toContain('')
-  })
-
-  test('should be able to remove all messages', async () => {
-    for (let i = 0; i < 5; i++) {
-      MessageService.success(`success${i}`)
-    }
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(5)
-    await MessageService.remove()
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(0)
-  })
-
-  test('should be able to remove message by return function', async () => {
-    const ins = MessageService.success('success')
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(1)
-    ins.destroy()
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(0)
-  })
-
-  test('should message container create only once', async () => {
-    const containerOne = MessageService.getContainer()
-    const containerTwo = MessageService.getContainer()
-    expect(containerOne).toEqual(containerTwo)
-  })
-
-  test(`should be able to custom duration`, async () => {
-    MessageService.success({ content: 'success', duration: 1000 })
+  test(`VNode content work`, async () => {
+    const content = h('div', { class: 'custom-content' }, 'custom content')
+    IxMessage.info(content)
     await wait(200)
-    expect(getOverlayElChildren().length).toBe(1)
-    await wait(1200)
-    expect(getOverlayElChildren().length).toBe(0)
+
+    expect(container.textContent).toContain('custom content')
+    expect(document.querySelectorAll('.custom-content').length).toBe(1)
   })
 
-  test(`should be able to custom duration other config `, async () => {
-    MessageService.success({ content: 'success' }, 1000)
+  test(`icon work`, async () => {
+    const iconName = 'star'
+    const iconVNode = h(IxIcon, { name: 'star' })
+    IxMessage.info('icon name', { icon: iconName })
+    IxMessage.info('icon VNode', { icon: iconVNode })
+
+    await wait(100)
+
+    expect(document.querySelectorAll('.ix-icon-star').length).toBe(2)
+  })
+
+  test('destroy work', async () => {
+    const instance = IxMessage.info('message')
     await wait(200)
-    expect(getOverlayElChildren().length).toBe(1)
-    await wait(1200)
-    expect(getOverlayElChildren().length).toBe(0)
+
+    expect(getMessageItems().length).toBe(1)
+
+    IxMessage.destroy(`not exist id`)
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(1)
+
+    IxMessage.destroy(instance.id)
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(0)
+
+    IxMessage.info('message1')
+    IxMessage.info('message2')
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(2)
+
+    IxMessage.destroy()
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(0)
   })
 
-  test(`should be able to empty content`, async () => {
-    MessageService.success('')
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(1)
+  test('instance destroy word', async () => {
+    const instance = IxMessage.info('message')
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(1)
+
+    instance.destroy()
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(0)
   })
 
-  typeList.forEach(type => {
-    test(`should be able to custom ${type} content`, async () => {
-      const text = h('div', { class: 'custom-message-content' }, 'custom content')
-      const api = (MessageService as never)[type] as MessageApiFn
-      api({
-        content: text,
-      })
-      await wait(animateTime)
-      expect(overlayContainerEL.textContent).toContain('custom content')
-      expect(overlayContainerEL.querySelectorAll('.custom-message-content').length).toBe(1)
+  test(`duration work`, async () => {
+    IxMessage.success('message', { duration: 1000 })
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(1)
+
+    await wait(1000)
+
+    expect(getMessageItems().length).toBe(0)
+
+    IxMessage.success('message', { duration: 0 })
+
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(1)
+  })
+
+  test('destroyOnHover work', async () => {
+    IxMessage.info('message', { destroyOnHover: true, duration: 200 })
+    await wait(100)
+
+    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseenter'))
+    await wait(200)
+
+    expect(getMessageItems().length).toBe(0)
+
+    IxMessage.info('message2', { duration: 200 })
+    await wait(100)
+    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseenter'))
+    await wait(200)
+
+    expect(getMessageItems().length).toBe(1)
+
+    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseleave'))
+    await wait(250)
+
+    expect(getMessageItems().length).toBe(0)
+  })
+
+  test('id work', async () => {
+    const id1 = 'id1'
+    const id2 = 'id2'
+    IxMessage.info(`message1`, { id: id1 })
+    IxMessage.info(`message2`, { id: id1 })
+    IxMessage.info(`message3`, { id: id2 })
+
+    await wait(100)
+
+    expect(getMessageItems().length).toBe(2)
+    expect(container.textContent).not.toContain('message1')
+    expect(container.textContent).toContain('message2message3')
+
+    IxMessage.info(`message4`, { id: id2 })
+    await wait(100)
+
+    expect(container.textContent).toContain('message4')
+  })
+
+  test('onDestroy work', async () => {
+    const onDestroy = jest.fn()
+
+    IxMessage.info('message', { onDestroy })
+
+    await wait(3100)
+
+    expect(onDestroy).toBeCalledTimes(1)
+  })
+
+  test('maxCount work', async () => {
+    new Array(10).fill('message').forEach((content, index) => {
+      IxMessage.info(`${content}${index}`)
     })
-  })
+    await wait(100)
 
-  typeList.forEach(type => {
-    test(`should be able to custom ${type} icon`, async () => {
-      const icon = h('img', { class: 'custom-message-icon' })
-      const api = (MessageService as never)[type] as MessageApiFn
-      api({
-        icon,
-        content: type,
-      })
-      await wait(animateTime)
-      expect(overlayContainerEL.querySelectorAll('.custom-message-icon').length).toBe(1)
-    })
-  })
-
-  test('should have no icon', async () => {
-    MessageService.create({ content: 'create', icon: '' })
-    await wait(animateTime)
-    expect(overlayContainerEL.querySelector('.ix-icon')).toBeNull()
-  })
-
-  test('should pauseOnHover option work with true', async () => {
-    MessageService.success({ content: 'success', pauseOnHover: true }, 1000)
-    await wait(animateTime)
-    const contentEl = overlayContainerEL.querySelector('.ix-message-item')
-    const mouseEnterEvent = new MouseEvent('mouseenter')
-    if (contentEl) {
-      contentEl.dispatchEvent(mouseEnterEvent)
-    }
-    await wait(2000)
-    expect(getOverlayElChildren().length).toBe(1)
-    const mouseLeaveEvent = new MouseEvent('mouseleave')
-    if (contentEl) {
-      contentEl.dispatchEvent(mouseLeaveEvent)
-    }
-    await wait(1200)
-    expect(getOverlayElChildren().length).toBe(0)
-  })
-
-  test('should pauseOnHover option work with false', async () => {
-    MessageService.success({ content: 'success', pauseOnHover: false }, 1000)
-    await wait(animateTime)
-    const contentEl = overlayContainerEL.querySelector('.ix-message-item')
-    const mouseEnterEvent = new MouseEvent('mouseenter')
-    if (contentEl) {
-      contentEl.dispatchEvent(mouseEnterEvent)
-    }
-    await wait(1200)
-    expect(getOverlayElChildren().length).toBe(0)
-  })
-
-  test('should messageId option work', async () => {
-    const messageIdFirst = 'custom-message-1'
-    const messageIdSecond = 'custom-message-2'
-    MessageService.success({ content: 'success1', messageId: messageIdFirst })
-    MessageService.success({ content: 'success2', messageId: messageIdFirst })
-    MessageService.success({ content: 'success3', messageId: messageIdSecond })
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(2)
-    expect(overlayContainerEL.textContent).not.toContain('success1')
-    expect(overlayContainerEL.textContent).toContain('success2')
-    MessageService.success({ content: 'change-content', messageId: messageIdFirst })
-    await wait(animateTime)
-    expect(overlayContainerEL.textContent).toContain('change-content')
-  })
-
-  test('should onClose option work', async () => {
-    let onCloseCalled = false
-    MessageService.success({
-      content: 'success',
-      onClose() {
-        onCloseCalled = true
-      },
-    })
-    await wait(3500)
-    expect(onCloseCalled).toBeTruthy()
-  })
-
-  test('should maxCount config work', async () => {
-    new Array(10).fill('success').forEach((content, i) => {
-      MessageService.success(`${content}${i}`)
-    })
-    await wait(animateTime)
-    expect(getOverlayElChildren().length).toBe(5)
+    expect(getMessageItems().length).toBe(5)
   })
 })

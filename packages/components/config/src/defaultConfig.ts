@@ -116,7 +116,7 @@ const message = shallowReactive<MessageConfig>({
   duration: 3000,
   maxCount: 5,
   top: 60,
-  pauseOnHover: true,
+  destroyOnHover: false,
 })
 
 const result = shallowReactive<ResultConfig>({ status: 'info' })

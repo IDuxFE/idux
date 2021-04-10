@@ -129,7 +129,7 @@ export interface MessageConfig {
   duration: number
   maxCount: number
   top: number
-  pauseOnHover: boolean
+  destroyOnHover: boolean
 }
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
