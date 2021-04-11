@@ -117,14 +117,14 @@ export interface OverlayInstance<
    */
   triggerEvents: ComputedRef<OverlayTriggerEvents>
   /**
-   * Manually bind to events on the overlay.
-   */
-  overlayEvents: OverlayPopperEvents
-  /**
    * The truth DOM node of the overlay.
    * The caller needs to bind the variable to the view.
    */
   overlayRef: Ref<OE | null>
+  /**
+   * Manually bind to events on the overlay.
+   */
+  overlayEvents: OverlayPopperEvents
   /**
    * The truth DOM node of the arrow.
    * If showArrow is false, we won't return arrowRef.

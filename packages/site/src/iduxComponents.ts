@@ -16,6 +16,7 @@ import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
 import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
+import { IxSelect, IxOption, IxOptionGroup } from '@idux/components/select'
 import { IxSwitch } from '@idux/components/switch'
 // import Data Display
 import { IxBadge } from '@idux/components/badge'
@@ -57,6 +58,9 @@ const components = [
   IxRadioButton,
   IxRadioGroup,
   IxRate,
+  IxSelect,
+  IxOption,
+  IxOptionGroup,
   IxSwitch,
   // components Data Display
   IxBadge,

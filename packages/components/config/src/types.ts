@@ -71,6 +71,17 @@ export interface RateConfig {
   allowClear: boolean
 }
 
+export type SelectSize = FormSize
+export interface SelectConfig {
+  borderless: boolean
+  clearable: boolean
+  labelKey: string
+  searchable: boolean
+  size: SelectSize
+  suffix?: string
+  valueKey: string
+}
+
 // Data Display
 export interface BadgeConfig {
   showZero: boolean
@@ -175,6 +186,7 @@ export interface GlobalConfig {
   textarea: TextareaConfig
   radioGroup: RadioGroupConfig
   rate: RateConfig
+  select: SelectConfig
   // Data Display
   badge: BadgeConfig
   card: CardConfig
