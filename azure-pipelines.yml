@@ -69,8 +69,8 @@ stages:
           - script: |
               npm run build
               export DEPLOY_DOMAIN=https://preview-${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER}-idux.surge.sh
-              npx surge --project ./packages/site/dist --domain $DEPLOY_DOMAIN
-              tar czvf build.tgz ./packages/site/dist
+              npx surge --project ./dist/site --domain $DEPLOY_DOMAIN
+              tar czvf build.tgz ./dist/site
             env:
               SURGE_LOGIN: $(SURGE_LOGIN)
               SURGE_TOKEN: $(SURGE_TOKEN)

@@ -2,9 +2,9 @@ import type { QuestionCollection } from 'inquirer'
 
 import { resolve } from 'path'
 import { textSync } from 'figlet'
-import * as chalk from 'chalk'
-import * as inquirer from 'inquirer'
-import * as ora from 'ora'
+import chalk from 'chalk'
+import inquirer from 'inquirer'
+import ora from 'ora'
 import { camelCase, kebabCase, upperFirst } from 'lodash'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 
@@ -76,9 +76,9 @@ const questions: QuestionCollection<AnswerOptions>[] = [
 ]
 
 class Generate {
-  private packageRoot: string
+  private packageRoot!: string
   private siteRoot = resolve(__dirname, '../../packages/site')
-  private dirPath: string
+  private dirPath!: string
   private useTsx = false
 
   constructor() {
@@ -90,7 +90,7 @@ class Generate {
 
     const { category, name, type, useTsx } = await inquirer.prompt<AnswerOptions>(questions)
 
-    this.useTsx = useTsx
+    this.useTsx = !!useTsx
     const spin = ora()
     spin.start('Template is being generated, please wait...\n')
     this.packageRoot = resolve(__dirname, '../../packages', category)
@@ -121,7 +121,7 @@ class Generate {
   private generate(category: AnswerOptions['category'], name: string, type?: AnswerType) {
     switch (category) {
       case 'components':
-        this.generateComponents(name, type)
+        this.generateComponents(name, type!)
         break
       case 'cdk':
         this.generateCdk(name)

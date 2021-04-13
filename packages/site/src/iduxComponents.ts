@@ -14,6 +14,7 @@ import { IxAffix } from '@idux/components/affix'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
+import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxSwitch } from '@idux/components/switch'
 // import Data Display
@@ -31,6 +32,7 @@ import { IxDrawer } from '@idux/components/drawer'
 import { IxResult } from '@idux/components/result'
 import { IxSpin } from '@idux/components/spin'
 import { IxProgress } from '@idux/components/progress'
+import { IxMessage } from '@idux/components/message'
 // import Other
 import { IxBackTop } from '@idux/components/back-top'
 // --- import end ---
@@ -53,6 +55,9 @@ const components = [
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
+  IxRadio,
+  IxRadioButton,
+  IxRadioGroup,
   IxRate,
   IxSwitch,
   // components Data Display
@@ -88,6 +93,8 @@ const directives: Record<string, Directive> = {
   // --- directives end ---
 }
 
+const plugins = [IxMessage]
+
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
@@ -95,6 +102,10 @@ const install = (app: App): void => {
 
   Object.keys(directives).forEach(key => {
     app.directive(key, directives[key])
+  })
+
+  plugins.forEach(plugin => {
+    app.use(plugin)
   })
 }
 

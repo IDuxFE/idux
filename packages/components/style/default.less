@@ -17,6 +17,7 @@
 /* color -------------------------- */
 @primary-color: @blue;
 @info-color: @primary-color;
+@pending-color: @primary-color;
 @success-color: @green;
 @warning-color: @yellow;
 @error-color: @red;
@@ -277,6 +278,62 @@
 @switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 @switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
 @switch-disable-opacity: 0.4;
+/* radio -------------------------------- */
+@radio-theme-color: @primary-color;
+@radio-font-size: @font-size-lg;
+@radio-font-color: @grey-d40;
+@radio-button-mode-value: border, fill;
+@radio-min-width-step: 6px;
+@radio-height-step: 4px;
+@radio-padding-step: 4px;
+@radio-font-weight-step: 100;
+@radio-line-height-step: 4px;
+@radio-body-line-height: 1;
+@radio-button-size-value: small, medium, large;
+@radio-body-inner-border: @border-width-sm @border-style @grey-l50;
+@radio-body-inner-background: @white;
+@radio-body-inner-width: 14px;
+@radio-body-inner-height: 14px;
+@radio-body-inner-border-radius: @border-radius-full;
+@radio-body-inner-after-width: 6px;
+@radio-body-inner-after-height: 6px;
+@radio-body-inner-after-border-radius: @border-radius-full;
+@radio-body-inner-after-background: @white;
+@radio-body-inner-after-left: 50%;
+@radio-body-inner-after-top: 50%;
+@radio-body-inner-after-transform: translate(-50%, -50%) scale(0);
+@radio-body-inner-after-transition: transform @transition-duration-base @ease-in;
+@radio-body-inner-input-opacity: 0;
+@radio-body-inner-checked-background-color: @radio-theme-color;
+@radio-body-inner-checked-border-color: @radio-theme-color;
+@radio-body-inner-after-checked-transform: translate(-50%, -50%) scale(1);
+@radio-body-inner-hover-border-color: @radio-theme-color;
+@radio-label-padding: 0 8px;
+@radio-disabled-border-color: @grey-l10;
+@radio-disabled-background-color: @grey-l50;
+@radio-disabled-after-background-color: @grey-l30;
+@radio-disabled-label-font-color: @grey-l30;
+@radio-button-height: 28px;
+@radio-button-padding: 0 12px;
+@radio-button-min-width: 56px;
+@radio-button-background-color: @white;
+@radio-button-border-color: @grey-l10;
+@radio-button-border-style: @border-style;
+@radio-button-border-width: 1.02px 1px 1px 0;
+@radio-button-transition: color @transition-duration-slow, background @transition-duration-slow,
+  border-color @transition-duration-slow, box-shadow @transition-duration-slow, height @transition-duration-slow;
+@radio-button-font-weight: @font-weight-lg;
+@radio-button-child-border: @border-width-sm @border-style @grey-l10;
+@radio-button-first-child-border-radius: 2px 0 0 2px;
+@radio-button-last-child-border-radius: 0 2px 2px 0;
+@radio-button-fill-checked-font-color: @white;
+@radio-button-fill-checked-background-color: @white;
+@radio-button-min-width-base: 48px;
+@radio-button-height-base: @height-sm;
+@radio-button-padding-align-base: @padding-sm;
+@radio-button-padding-vertical-base: 0px;
+@radio-button-font-weight-base: @font-weight-base;
+@radio-button-line-height-base: @height-sm;
 
 // Data Display
 

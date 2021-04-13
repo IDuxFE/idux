@@ -2,6 +2,7 @@ import type { Placement } from '@popperjs/core'
 import type { OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
+
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
@@ -54,6 +55,13 @@ export interface TextareaConfig {
   computeCount?: (value: string) => string
   size: TextareaSize
   clearable: boolean
+}
+
+export type RadioSize = FormSize
+export type RadioMode = 'border' | 'fill'
+export interface RadioGroupConfig {
+  size: RadioSize
+  mode: RadioMode
 }
 
 export interface RateConfig {
@@ -121,7 +129,7 @@ export interface MessageConfig {
   duration: number
   maxCount: number
   top: number
-  pauseOnHover: boolean
+  destroyOnHover: boolean
 }
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
@@ -173,6 +181,7 @@ export interface GlobalConfig {
   // Data Entry
   input: InputConfig
   textarea: TextareaConfig
+  radioGroup: RadioGroupConfig
   rate: RateConfig
   // Data Display
   badge: BadgeConfig

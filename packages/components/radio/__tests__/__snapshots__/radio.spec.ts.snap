@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio.vue radio checked work 1`] = `"<label class=\\"ix-radio ix-radio-checked\\" role=\\"radio\\" ariachecked=\\"true\\" ariadisabled=\\"false\\"><span class=\\"ix-radio-body ix-radio-body-checked\\"><span class=\\"ix-radio-body-inner\\"><input type=\\"radio\\" name=\\"\\" ariahidden=\\"true\\" class=\\"ix-radio-body-input\\" value=\\"false\\"></span></span><span class=\\"ix-radio-label\\">A</span></label>"`;
+
+exports[`Radio.vue radio disabled work 1`] = `"<label class=\\"ix-radio ix-radio-disabled\\" role=\\"radio\\" ariachecked=\\"false\\" ariadisabled=\\"true\\"><span class=\\"ix-radio-body ix-radio-body-disabled\\"><span class=\\"ix-radio-body-inner\\"><input type=\\"radio\\" name=\\"\\" ariahidden=\\"true\\" class=\\"ix-radio-body-input\\" value=\\"false\\" disabled=\\"\\"></span></span><span class=\\"ix-radio-label\\"></span></label>"`;
+
+exports[`Radio.vue radio name work 1`] = `"<label class=\\"ix-radio\\" role=\\"radio\\" ariachecked=\\"false\\" ariadisabled=\\"false\\"><span class=\\"ix-radio-body\\"><span class=\\"ix-radio-body-inner\\"><input type=\\"radio\\" name=\\"radio\\" ariahidden=\\"true\\" class=\\"ix-radio-body-input\\" value=\\"false\\"></span></span><span class=\\"ix-radio-label\\">A</span></label>"`;
+
+exports[`Radio.vue radio value work 1`] = `"<label class=\\"ix-radio\\" role=\\"radio\\" ariachecked=\\"false\\" ariadisabled=\\"false\\"><span class=\\"ix-radio-body\\"><span class=\\"ix-radio-body-inner\\"><input type=\\"radio\\" name=\\"\\" ariahidden=\\"true\\" class=\\"ix-radio-body-input\\" value=\\"value\\"></span></span><span class=\\"ix-radio-label\\"></span></label>"`;
+
+exports[`Radio.vue render work 1`] = `"<label class=\\"ix-radio\\" role=\\"radio\\" ariachecked=\\"false\\" ariadisabled=\\"false\\"><span class=\\"ix-radio-body\\"><span class=\\"ix-radio-body-inner\\"><input type=\\"radio\\" name=\\"\\" ariahidden=\\"true\\" class=\\"ix-radio-body-input\\" value=\\"false\\"></span></span><span class=\\"ix-radio-label\\"></span></label>"`;

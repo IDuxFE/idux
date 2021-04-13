@@ -82,22 +82,15 @@ export type { ${compName}Component, ${compName}Props } from './src/types'
 
 export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
-  let ${compName}Mount: (
-    options?: MountingOptions<Partial<${compName}Props>>,
-  ) => VueWrapper<InstanceType<DefineComponent<${compName}Props>>>
+  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<InstanceType<typeof Ix${compName}>>
 
   beforeEach(() => {
-    ${compName}Mount = (options = {}) => {
-      return mount<${compName}Props>(Ix${compName}, {
-        ...options,
-      })
-    }
+    ${compName}Mount = options => mount(Ix${compName}, { ...options })
   })
 
   renderWork(Ix${compName})
@@ -185,10 +178,11 @@ order: 0
 
 ## zh
 
-
+最简单的用法。
 
 ## en
 
+The simplest usage.
 
 `
 }
@@ -197,6 +191,7 @@ export function getDemoVueTemplate(compName: string): string {
   return `<template>
   <ix-${compName} />
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -206,6 +201,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="less" scoped>
 </style>
 `
