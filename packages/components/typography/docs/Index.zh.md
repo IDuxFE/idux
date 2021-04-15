@@ -33,7 +33,7 @@ type TypographyConfig = TypographyType | TypographyOptions
 | 变量名                                | default 主题                                      | 说明 |
 | ------------------------------------- | ------------------------------------------------- | ---- |
 | `@typography-default-color`           | `@black`                                          | -    |
-| `@typography-secondary-color`         | `@text-secondary-color`                                      | -    |
+| `@typography-color-secondary`         | `@text-color-secondary`                                      | -    |
 | `@typography-success-color`           | `@success-color`                                  | -    |
 | `@typography-warning-color`           | `@warning-color`                                  | -    |
 | `@typography-error-color`             | `@error-color`                                    | -    |

@@ -87,7 +87,7 @@ subtitle: 输入框
 | @input-border-style | @border-style;| - |
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
-| @input-secondary-color | @text-secondary-color;| - |
+| @input-color-secondary | @text-color-secondary;| - |
 | @input-bg-color | @background-color-component;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |

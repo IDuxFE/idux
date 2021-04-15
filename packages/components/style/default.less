@@ -34,7 +34,7 @@
 
 /* text -------------------------- */
 @text-color: fade(@black, 85%);
-@text-secondary-color: fade(@black, 45%);
+@text-color-secondary: fade(@black, 45%);
 
 // General
 /* button -------------------------- */
@@ -109,7 +109,7 @@
 @title-line-height: 1;
 
 @title-color: @black;
-@title-sub-color: @text-secondary-color;
+@title-sub-color: @text-color-secondary;
 @title-bg-color: @background-color-component;
 
 @title-prefix-margin: @margin-md;
@@ -118,7 +118,7 @@
 
 /* typography -------------------------- */
 @typography-default-color: @text-color;
-@typography-secondary-color: @text-secondary-color;
+@typography-color-secondary: @text-color-secondary;
 @typography-success-color: @success-color;
 @typography-warning-color: @warning-color;
 @typography-error-color: @error-color;
@@ -240,7 +240,7 @@
 @input-border-color: @border-color;
 
 @input-color: @text-color;
-@input-secondary-color: @text-secondary-color;
+@input-color-secondary: @text-color-secondary;
 @input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
@@ -377,7 +377,7 @@
 @select-placeholder-color: @input-placeholder-color;
 @select-icon-color: @select-placeholder-color;
 @select-icon-bg-color: @select-selector-bg-color;
-@select-icon-hover-color: @input-secondary-color;
+@select-icon-hover-color: @input-color-secondary;
 @select-icon-font-size: @font-size-sm;
 @select-icon-margin-right: @margin-sm;
 @select-icon-transition: @select-selector-transition;
