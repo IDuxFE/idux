@@ -15,8 +15,8 @@ export interface SelectOverlay {
   triggerRef: Ref<HTMLElement | null>
   overlayRef: Ref<HTMLElement | null>
   visibility: ComputedRef<boolean>
-  show: (immediate?: boolean) => void
-  hide: (immediate?: boolean) => void
+  show: (showDelay?: number) => void
+  hide: (hideDelay?: number) => void
   overlayMinWidth: Ref<string>
   overlayMaxHeight: ComputedRef<string>
 }
@@ -284,7 +284,7 @@ export const useSelectProvider = (
   activatedValue: Ref<any>,
   selectedValue: Ref<any[]>,
   selectedOptions: Ref<OptionProps[]>,
-  hide: (immediate?: boolean) => void,
+  hide: (hideDelay?: number) => void,
   focus: () => void,
   clear: () => void,
 ): void => {

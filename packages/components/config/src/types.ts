@@ -1,5 +1,4 @@
-import type { Placement } from '@popperjs/core'
-import type { OverlayTrigger } from '@idux/cdk/overlay'
+import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
 
@@ -118,7 +117,7 @@ export interface StatisticConfig {
 }
 
 export interface TooltipConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number
@@ -127,7 +126,7 @@ export interface TooltipConfig {
 }
 
 export interface PopoverConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number

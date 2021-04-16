@@ -41,7 +41,7 @@ describe('useOverlay.ts', () => {
         onMounted(initialize)
 
         const handleClick = () => {
-          unref(visibility) ? hide(true) : show(true)
+          unref(visibility) ? hide(0) : show(0)
         }
 
         return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, visibility }

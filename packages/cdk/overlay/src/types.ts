@@ -4,6 +4,7 @@ import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 export type OverlayScrollStrategy = 'close' | 'reposition'
 export type OverlayTrigger = 'click' | 'hover' | 'focus'
 export type OverlayElement = ComponentPublicInstance | HTMLElement
+export type OverlayPlacement = Placement
 
 export interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
@@ -36,7 +37,7 @@ export interface OverlayOptions {
   /* Whether to show arrow. */
   showArrow?: boolean
   /* Alignment of floating layer. */
-  placement: Placement
+  placement: OverlayPlacement
   /**
    * The options of popper.
    * Used when ConnectOverlayOptions cannot meet the demand.
@@ -78,12 +79,12 @@ export interface OverlayInstance<
    * Show the overlay.
    * The style of the overlay container will be set to block.
    */
-  show: (immediate?: boolean) => void
+  show: (showDelay?: number) => void
   /**
    * Hide the overlay.
    * The style of the overlay container will be set to none.
    */
-  hide: (immediate?: boolean) => void
+  hide: (hideDelay?: number) => void
   /**
    * Update overlay.
    * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.

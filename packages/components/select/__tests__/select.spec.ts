@@ -1,6 +1,6 @@
 import { ComponentPublicInstance, reactive } from 'vue'
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
-
+import { wait } from '@tests'
 import IxSelect from '../src/Select.vue'
 import IxOption from '../src/Option.vue'
 import IxOptionGroup from '../src/OptionGroup.vue'
@@ -132,6 +132,7 @@ describe('Select.vue', () => {
       selectProps = reactive({ autofocus: true })
       initSelect(selectProps)
       await flushPromises()
+      await wait(120)
 
       expect(optionContainer.style.display).toBe('')
 
