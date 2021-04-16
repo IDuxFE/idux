@@ -1,6 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { Options, Placement } from '@popperjs/core'
-import type { OverlayElement } from './types'
+import type { Options } from '@popperjs/core'
+import type { OverlayElement, OverlayPlacement } from './types'
 
 import { computed } from 'vue'
 import { useModifiers } from './useModifiers'
@@ -12,7 +12,7 @@ interface PopperProps {
   arrowOffset?: number
   offset: [number, number]
   popperOptions?: PartialOptions
-  placement: Placement
+  placement: OverlayPlacement
   showArrow?: boolean
 }
 

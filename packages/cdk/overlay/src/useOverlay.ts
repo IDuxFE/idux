@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import type { Instance as PopperInstance } from '@popperjs/core'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, WatchStopHandle } from 'vue'
 
 import type {
   OverlayInstance,
@@ -11,7 +11,7 @@ import type {
   OverlayElement,
 } from './types'
 
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { createPopper } from '@popperjs/core'
 import { isHTMLElement, off, on, uniqueId } from '@idux/cdk/utils'
 
@@ -36,21 +36,31 @@ export const useOverlay = <
 
   const state = reactive(options)
   const popperOptions = usePopperOptions(options, { arrow: arrowRef })
+  let refWatchStopHandle: WatchStopHandle | null = null
 
   const initialize = () => {
-    if (!visibility.value) {
-      return
+    if (refWatchStopHandle) {
+      refWatchStopHandle()
     }
-    const unrefTrigger = triggerRef.value
-    if (!unrefTrigger) {
-      return
-    }
-    nextTick(() => {
-      const triggerElement = isHTMLElement(unrefTrigger) ? unrefTrigger : unrefTrigger.$el
-      const unrefOverlay = overlayRef.value
-      const overlayElement = isHTMLElement(unrefOverlay) ? unrefOverlay : unrefOverlay?.$el
-      popperInstance = createPopper(triggerElement, overlayElement as HTMLElement, popperOptions.value)
+
+    refWatchStopHandle = watchEffect(() => {
+      const trigger = triggerRef.value
+      const overlay = overlayRef.value
+
+      if (!trigger || !overlay) {
+        return
+      }
+
+      if (popperInstance) {
+        popperInstance.destroy()
+        off(window, 'scroll', globalScroll)
+      }
+
+      const triggerElement = isHTMLElement(trigger) ? trigger : trigger.$el
+      const overlayElement = isHTMLElement(overlay) ? overlay : overlay.$el
+      popperInstance = createPopper(triggerElement, overlayElement, popperOptions.value)
       popperInstance.update()
+
       on(window, 'scroll', globalScroll)
     })
   }
@@ -70,31 +80,36 @@ export const useOverlay = <
     }
   }
 
-  const show = (immediate = false): void => {
+  const show = (showDelay?: number): void => {
     _clearTimer()
-    if (immediate || state.showDelay === 0) {
-      _toggle(true)
-    } else {
+    const delay = showDelay ?? state.showDelay
+    if (delay > 0) {
       showTimer = setTimeout(() => {
         _toggle(true)
-      }, state.showDelay)
+      }, delay)
+    } else {
+      _toggle(true)
     }
   }
 
-  const hide = (immediate = false): void => {
+  const hide = (hideDelay?: number): void => {
     _clearTimer()
-    if (immediate || state.hideDelay === 0) {
-      _toggle(false)
-    } else {
+    const delay = hideDelay ?? state.hideDelay
+    if (delay > 0) {
       hideTimer = setTimeout(() => {
         _toggle(false)
-      }, state.hideDelay)
+      }, delay)
+    } else {
+      _toggle(false)
     }
   }
 
   const destroy = (): void => {
     if (!popperInstance) {
       return
+    }
+    if (refWatchStopHandle) {
+      refWatchStopHandle()
     }
     popperInstance.destroy()
     popperInstance = null
@@ -112,15 +127,7 @@ export const useOverlay = <
 
   const visibility = computed<boolean>(() => !state.disabled && !!state.visible)
 
-  const onVisibilityChange = (visible: boolean) => {
-    if (!visible) {
-      // improve performance
-      destroy()
-    }
-    initialize()
-  }
-
-  watch(visibility, onVisibilityChange)
+  watch(visibility, () => update())
 
   const overlayEventHandler = (e: Event): void => {
     e.stopPropagation()
@@ -197,7 +204,7 @@ export const useOverlay = <
       return
     }
     if (state.scrollStrategy === 'close') {
-      hide(true)
+      hide(0)
     }
   }
 
