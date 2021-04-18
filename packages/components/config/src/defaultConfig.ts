@@ -9,6 +9,7 @@ import type {
   RateConfig,
   BadgeConfig,
   CardConfig,
+  CollapseConfig,
   ImageConfig,
   StatisticConfig,
   MessageConfig,
@@ -90,6 +91,8 @@ const card = shallowReactive<CardConfig>({
   hoverable: false,
 })
 
+const collapse: CollapseConfig = shallowReactive<CollapseConfig>({ accordion: false })
+
 const image: ImageConfig = shallowReactive({
   width: 100,
   height: 100,
@@ -168,6 +171,7 @@ export const defaultConfig: GlobalConfig = {
   // Data Display
   badge,
   card,
+  collapse,
   image,
   statistic,
   tooltip,
