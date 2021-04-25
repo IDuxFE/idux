@@ -119,6 +119,9 @@ export const useOverlay = <
   const update = (options?: Partial<OverlayOptions>): void => {
     Object.assign(state, options)
     if (popperInstance) {
+      if (options) {
+        popperInstance.setOptions(options)
+      }
       popperInstance.update()
     } else {
       initialize()
