@@ -16,7 +16,6 @@ export const PresetColor = [
   'purple',
   'magenta',
   'lime',
-  'grey',
 ] as const
 
 export const isPresetColor = (color: string | undefined): boolean => {
