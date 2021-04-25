@@ -105,6 +105,10 @@ export interface CardConfig {
   hoverable: boolean
 }
 
+export interface CollapseConfig {
+  accordion: boolean
+}
+
 export interface ImageConfig {
   width: string | number
   height: string | number
@@ -201,6 +205,7 @@ export interface GlobalConfig {
   // Data Display
   badge: BadgeConfig
   card: CardConfig
+  collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
   tooltip: TooltipConfig
