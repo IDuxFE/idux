@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ButtonGroup.vue render work 1`] = `"<div class=\\"ix-button-group\\"><button class=\\"ix-button\\"><!--v-if--><span>default</span></button><button class=\\"ix-button ix-button-primary\\"><!--v-if--><span>primary</span></button><button class=\\"ix-button ix-button-large\\"><!--v-if--><span>large</span></button><button class=\\"ix-button ix-button-circle\\"><!--v-if--><span>circle</span></button></div>"`;
+exports[`ButtonGroup.vue render work 1`] = `
+"<div class=\\"ix-button-group\\"><button class=\\"ix-button\\">
+    <!--v-if--><span>default</span>
+  </button><button class=\\"ix-button ix-button-primary\\">
+    <!--v-if--><span>primary</span>
+  </button><button class=\\"ix-button ix-button-large\\">
+    <!--v-if--><span>large</span>
+  </button><button class=\\"ix-button ix-button-circle\\">
+    <!--v-if--><span>circle</span>
+  </button></div>"
+`;

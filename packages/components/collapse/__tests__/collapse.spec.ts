@@ -68,7 +68,7 @@ describe('Collapse.vue and CollapsePanel.vue', () => {
       components: { IxCollapse, IxCollapsePanel },
       provide: {},
       template: `
-      <ix-collapse v-model:active="active" :accordion='accordion' @change="mockFn">
+      <ix-collapse v-model:active="active" :accordion='accordion' @update:active="mockFn">
         <ix-collapse-panel name="name1"> name1 </ix-collapse-panel>
         <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
         <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
@@ -139,7 +139,7 @@ describe('Collapse.vue and CollapsePanel.vue', () => {
     const wrapper = mount({
       components: { IxCollapse, IxCollapsePanel },
       template: `
-      <ix-collapse v-model:active="active" @change="mockFn">
+      <ix-collapse v-model:active="active" @update:active="mockFn">
         <ix-collapse-panel name="name1" :disabled='disabled'> name1 </ix-collapse-panel>
         <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
         <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
@@ -190,10 +190,10 @@ describe('Collapse.vue and CollapsePanel.vue', () => {
 
     expect(wrapper.findAll('.ix-icon')[0].classes()).toContain('ix-icon')
 
-    icon.value = ['caret-right', 'caret-down']
+    icon.value = ['rotate-right', 'rotate-left']
 
     await nextTick()
 
-    expect(wrapper.findAll('.ix-icon')[0].classes()).toContain('ix-icon-caret-right')
+    expect(wrapper.findAll('.ix-icon')[0].classes()).toContain('ix-icon-rotate-right')
   })
 })

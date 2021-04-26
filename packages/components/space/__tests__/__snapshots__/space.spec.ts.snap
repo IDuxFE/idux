@@ -1,3 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Space.vue render work 1`] = `"<div class=\\"ix-space ix-space-baseline ix-space-horizontal\\"><div class=\\"ix-space-item ix-space-item-small\\"> Space </div><!--v-if--><div class=\\"ix-space-item ix-space-item-small\\"><button class=\\"ix-button ix-button-primary\\"><!--v-if--><span>Button</span></button></div><!--v-if--><div class=\\"ix-space-item ix-space-item-small\\"><button class=\\"ix-button\\"><!--v-if--><span>Button</span></button></div><!--v-if--></div>"`;
+exports[`Space.vue render work 1`] = `
+"<div class=\\"ix-space ix-space-baseline ix-space-horizontal\\">
+  <div class=\\"ix-space-item ix-space-item-small\\"> Space </div>
+  <!--v-if-->
+  <div class=\\"ix-space-item ix-space-item-small\\"><button class=\\"ix-button ix-button-primary\\">
+      <!--v-if--><span>Button</span>
+    </button></div>
+  <!--v-if-->
+  <div class=\\"ix-space-item ix-space-item-small\\"><button class=\\"ix-button\\">
+      <!--v-if--><span>Button</span>
+    </button></div>
+  <!--v-if-->
+</div>"
+`;

@@ -16,7 +16,7 @@ export default defineComponent({
     active: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
     borderless: PropTypes.bool.def(false),
   },
-  emits: ['update:active', 'change'],
+  emits: ['update:active'],
   setup(props: CollapseProps, { emit }) {
     const collapseConfig = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? collapseConfig.accordion)

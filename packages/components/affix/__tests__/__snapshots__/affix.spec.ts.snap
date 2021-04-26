@@ -1,33 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Affix.vue offset work 1`] = `"<div class=\\"ix-affix\\"><div class=\\"ix-affix-content\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 1`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 2`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 2`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 3`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 90px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 3`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 90px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 4`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 4`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 5`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: -10px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 5`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: -10px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 6`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 6`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 7`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 90px; left: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 7`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 90px; left: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 8`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 8`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 9`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: -10px; left: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 9`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: -10px; left: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 10`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 10`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue offset work 11`] = `"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: fixed; bottom: 0px; right: 0px;\\">Test Affix</div></div>"`;
+exports[`Affix.vue offset work 11`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; bottom: 0px; right: 0px;\\">Test Affix</div>
+</div>"
+`;
 
-exports[`Affix.vue render work 1`] = `"<div class=\\"ix-affix\\"><div class=\\"ix-affix-content\\"></div></div>"`;
+exports[`Affix.vue render work 1`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\"></div>
+</div>"
+`;
 
-exports[`Affix.vue target work 1`] = `"<div class=\\"container\\"><div class=\\"ix-affix\\"><div class=\\"ix-affix-content\\">Test Affix</div></div></div>"`;
+exports[`Affix.vue target work 1`] = `
+"<div class=\\"container\\">
+  <div class=\\"ix-affix\\">
+    <div class=\\"ix-affix-content\\">Test Affix</div>
+  </div>
+</div>"
+`;
 
-exports[`Affix.vue target work 2`] = `"<div class=\\"container\\"><div class=\\"ix-affix\\"><div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 0px; left: 0px;\\">Test Affix</div></div></div>"`;
+exports[`Affix.vue target work 2`] = `
+"<div class=\\"container\\">
+  <div class=\\"ix-affix\\">
+    <div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 0px; left: 0px;\\">Test Affix</div>
+  </div>
+</div>"
+`;
 
-exports[`Affix.vue target work 3`] = `"<div class=\\"container\\"><div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 50px; left: 0px;\\">Test Affix</div></div></div>"`;
+exports[`Affix.vue target work 3`] = `
+"<div class=\\"container\\">
+  <div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+    <div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 50px; left: 0px;\\">Test Affix</div>
+  </div>
+</div>"
+`;
 
-exports[`Affix.vue target work 4`] = `"<div class=\\"container\\"><div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\"><div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 100px; left: 100px;\\">Test Affix</div></div></div>"`;
+exports[`Affix.vue target work 4`] = `
+"<div class=\\"container\\">
+  <div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+    <div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 100px; left: 100px;\\">Test Affix</div>
+  </div>
+</div>"
+`;

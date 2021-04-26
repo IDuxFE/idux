@@ -1,3 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card.vue render work 1`] = `"<div class=\\"ix-card ix-card-border\\"><!--v-if--><div class=\\"ix-spin\\"><!--v-if--><div class=\\"ix-spin-container\\"><div class=\\"ix-card-body\\"></div></div></div><!--v-if--></div>"`;
+exports[`Card.vue render work 1`] = `
+"<div class=\\"ix-card ix-card-border\\">
+  <!--v-if-->
+  <div class=\\"ix-spin\\">
+    <!--v-if-->
+    <div class=\\"ix-spin-container\\">
+      <div class=\\"ix-card-body\\"></div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;

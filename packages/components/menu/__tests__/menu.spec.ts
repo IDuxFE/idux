@@ -17,12 +17,12 @@ describe('Menu.vue', () => {
           components: { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu },
           template: `
           <ix-menu>
-          <ix-menu-item cid="item1" icon="home">
+          <ix-menu-item cid="item1" icon="star">
             <a href="javascript: void(0)">Item 1</a>
           </ix-menu-item>
-          <ix-menu-item cid="item2" disabled icon="appstore"> Item 2 </ix-menu-item>
+          <ix-menu-item cid="item2" disabled icon="star"> Item 2 </ix-menu-item>
           <ix-menu-divider />
-          <ix-sub-menu cid="subMenu1" title="Sub Menu 1" icon="setting">
+          <ix-sub-menu cid="subMenu1" title="Sub Menu 1" icon="star">
             <ix-menu-item-group title="Item Group 1">
               <ix-menu-item cid="item3">Item 3</ix-menu-item>
               <ix-menu-item cid="item4">Item 4</ix-menu-item>
@@ -38,7 +38,7 @@ describe('Menu.vue', () => {
               <ix-menu-item cid="item8">Item 8</ix-menu-item>
             </ix-sub-menu>
           </ix-sub-menu>
-          <ix-sub-menu cid="subMenu4" disabled title="SubMenu 4" icon="mail">
+          <ix-sub-menu cid="subMenu4" disabled title="SubMenu 4" icon="star">
             <ix-menu-item cid="item9">Item 9</ix-menu-item>
             <ix-menu-item cid="item10">Item 10</ix-menu-item>
           </ix-sub-menu>
