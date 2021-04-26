@@ -1,9 +1,9 @@
 ---
 category: components
-type: 内容展示
+type: 数据展示
 title: Card
 subtitle: 卡片组件
-cover:
+order: 0
 ---
 
 卡片用于内容展示

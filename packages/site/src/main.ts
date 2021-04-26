@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import IduxCdk from './iduxCdk'
 import IduxComponents from './iduxComponents'
 import GlobalComponents from './global'
-import LayoutComponents from './layout'
 
 import App from './App.vue'
 
@@ -17,6 +16,6 @@ const router = createRouter({
 
 const app = createApp(App)
 
-app.use(router).use(IduxCdk).use(IduxComponents).use(GlobalComponents).use(LayoutComponents)
+app.use(router).use(IduxCdk).use(IduxComponents).use(GlobalComponents)
 
 app.mount('#app')

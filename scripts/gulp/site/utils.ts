@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs-extra'
+import { lowerFirst } from 'lodash'
 import { join } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
@@ -24,7 +25,7 @@ export function initSite(): void {
   readdirSync(docsDirname).forEach(docs => {
     const { __content, ...meta } = loadFront(readFileSync(join(docsDirname, docs)))
     const [name, lang] = docs.split('.')
-    const path = `/${'docs'}/${name}/${lang}`
+    const path = `/${'docs'}/${lowerFirst(name)}/${lang}`
     docsMeta['docs'][name] = { ...meta, lang, path } as Meta
   })
 

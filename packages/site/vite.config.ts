@@ -15,6 +15,7 @@ export default defineConfig(({ command }) => {
       alias: [
         { find: '@idux/cdk', replacement: path.resolve(__dirname, cdkResolve) },
         { find: '@idux/components', replacement: path.resolve(__dirname, componentsResolve) },
+        { find: '@idux/site', replacement: path.resolve(__dirname, './src') },
       ],
     },
     css: {
