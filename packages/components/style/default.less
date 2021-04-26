@@ -15,13 +15,6 @@
 @line-height-base: 1.5715;
 
 /* color -------------------------- */
-@primary-color: @blue;
-@info-color: @primary-color;
-@pending-color: @primary-color;
-@success-color: @green;
-@warning-color: @yellow;
-@error-color: @red;
-
 @background-color-base: hsv(0, 0, 95%); // Default grey background color
 @background-color-light: hsv(0, 0, 98%); // background of header and selected item
 @background-color-body: @white;
@@ -71,8 +64,8 @@
 @button-disable-bg-color: @disabled-bg-color;
 @button-disable-border: @border-color;
 
-@button-primary-color: @white;
-@button-primary-bg: @primary-color;
+@button-primary: @white;
+@button-primary-bg: @primary;
 @button-primary-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 @button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
@@ -80,14 +73,14 @@
 @button-default-bg: @background-color-component;
 @button-default-border: @border-color;
 
-@button-danger-color: @error-color;
-@button-danger-bg: @error-color;
+@button-danger-color: @error;
+@button-danger-bg: @error;
 
 @button-ghost-color: @background-color-component;
 @button-ghost-bg: transparent;
 @button-ghost-border: @background-color-component;
 
-@button-link-color: @primary-color;
+@button-link-color: @primary;
 @button-link-hover-bg: transparent;
 
 @button-text-color: @text-color;
@@ -123,9 +116,9 @@
 /* typography -------------------------- */
 @typography-default-color: @text-color;
 @typography-color-secondary: @text-color-secondary;
-@typography-success-color: @success-color;
-@typography-warning-color: @warning-color;
-@typography-error-color: @error-color;
+@typography-success: @success;
+@typography-warning: @warning;
+@typography-error: @error;
 @typography-disabled-color: @disabled-color;
 @typography-mark-padding: 0;
 @typography-mark-background-color: @yellow-l50;
@@ -144,7 +137,7 @@
 @typography-kbd-border-width: @border-width-sm @border-width-sm @border-width-md;
 @typography-kbd-border-radius: @border-radius-md;
 @typography-strong-font-weight: @font-weight-lg;
-@typography-a-color: @primary-color;
+@typography-a-color: @primary;
 @typography-a-outline: none;
 @typography-a-cursor: pointer;
 @typography-a-transition: color 0.3s;
@@ -184,8 +177,8 @@
 /* menu -------------------------- */
 @menu-text-color: @text-color;
 @menu-bg-color: @background-color-component;
-@menu-highlight-color: @primary-color;
-@menu-highlight-bg-color: ~`colorPalette('@{primary-color}', -50) `;
+@menu-highlight-color: @primary;
+@menu-highlight-bg-color: ~`colorPalette('@{primary}', -50) `;
 @menu-disabled-color: @disabled-color;
 @menu-disabled-bg-color: transparent;
 @menu-border-width: @border-width-sm;
@@ -235,13 +228,13 @@
 @checkbox-tick-border-style: @border-width-md solid @white;
 @checkbox-tick-width: (@checkbox-width / @font-size-base) * 5px;
 @checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
-@checkbox-bg-indeterminate-color: @primary-color;
+@checkbox-bg-indeterminate-color: @primary;
 @checkbox-indeterminate-width: 8px;
 @checkbox-indeterminate-height: 8px;
-@checkbox-border-checked-color: @primary-color;
-@checkbox-border-hover-color: @primary-color;
+@checkbox-border-checked-color: @primary;
+@checkbox-border-hover-color: @primary;
 @checkbox-border-focus-color: @blue-d30;
-@checkbox-bg-checked-color: @primary-color;
+@checkbox-bg-checked-color: @primary;
 @checkbox-border-disabled-color: @grey;
 @checkbox-tick-disabled-color: @grey;
 @checkbox-bg-disabled-color: @white;
@@ -289,8 +282,8 @@
 @input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
-@input-hover-border-color: ~`colorPalette('@{primary-color}', -10) `;
-@input-active-border-color: @primary-color;
+@input-hover-border-color: ~`colorPalette('@{primary}', -10) `;
+@input-active-border-color: @primary;
 @input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 15%);
 @input-disabled-color: @disabled-color;
 @input-disabled-bg-color: @disabled-bg-color;
@@ -325,7 +318,7 @@
 @switch-disable-opacity: 0.4;
 
 /* radio -------------------------------- */
-@radio-theme-color: @primary-color;
+@radio-theme-color: @primary;
 @radio-font-size: @font-size-lg;
 @radio-font-color: @grey-d40;
 @radio-button-mode-value: border, fill;
@@ -392,8 +385,8 @@
 
 @option-disabled-color: @disabled-color;
 @option-active-bg-color: @grey-l50;
-@option-selected-color: @primary-color;
-@option-selected-bg-color: tint(@primary-color, 90%);
+@option-selected-color: @primary;
+@option-selected-bg-color: tint(@primary, 90%);
 @option-selected-font-weight: @font-weight-xl;
 
 @option-container-zindex: @zindex-l4-3;
@@ -579,25 +572,25 @@
 @result-content-margin: @margin-xl;
 @result-content-padding: @padding-xl @spacing-gutter * 5;
 @result-content-background: @grey-l50;
-@result-success-color: @success-color;
-@result-warning-color: @warning-color;
-@result-error-color: @error-color;
-@result-info-color: @info-color;
+@result-success: @success;
+@result-warning: @warning;
+@result-error: @error;
+@result-info: @info;
 
 /* spin -------------------------- */
 @spin-zindex: @zindex-l2-base;
-@spin-tip-color: @primary-color;
-@spin-icon-color: @primary-color;
+@spin-tip-color: @primary;
+@spin-icon-color: @primary;
 
 @spin-font-size-sm: @font-size-md;
 @spin-font-size-md: @font-size-lg;
 @spin-font-size-lg: @font-size-xl;
 
 /* progress -------------------------- */
-@progress-normal-bg: @primary-color;
-@progress-success-bg: @success-color;
-@progress-exception-bg: @error-color;
-@progress-active-bg: @primary-color;
+@progress-normal-bg: @primary;
+@progress-success-bg: @success;
+@progress-exception-bg: @error;
+@progress-active-bg: @primary;
 @progress-trail-bg: #f5f5f5;
 @progress-text-width: 36px;
 @progress-border-radius: 100px;
@@ -626,6 +619,6 @@
 
 @back-top-bottom: 50px;
 
-@back-top-background-color: @primary-color;
+@back-top-background-color: @primary;
 
 // --- end ---

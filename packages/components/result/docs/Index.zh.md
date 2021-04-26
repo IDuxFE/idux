@@ -55,7 +55,7 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | @result-content-margin | @margin-xl | - |
 | @result-content-padding | @padding-xl @spacing-gutter * 5 | - |
 | @result-content-background | @grey-l50 | - |
-| @result-success-color | @green | - |
-| @result-warning-color | @yellow | - |
-| @result-error-color | @red | - |
-| @result-info-color | @blue | - |
+| @result-success | @green | - |
+| @result-warning | @yellow | - |
+| @result-error | @red | - |
+| @result-info | @blue | - |

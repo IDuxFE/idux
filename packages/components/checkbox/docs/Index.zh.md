@@ -81,13 +81,13 @@ cover:
 |@checkbox-tick-border-style| @border-width-md solid @white|-|
 |@checkbox-tick-width| (@checkbox-width / @font-size-base)*5px | - |
 |@checkbox-tick-height| (@checkbox-height / @font-size-base)*8px | - |
-|@checkbox-bg-indeterminate-color| @primary-color|-|
+|@checkbox-bg-indeterminate-color| @primary|-|
 |@checkbox-indeterminate-width| 8px|-|
 |@checkbox-indeterminate-height| 8px|-|
-|@checkbox-border-checked-color| @primary-color|-|
-|@checkbox-border-hover-color| @primary-color|-|
+|@checkbox-border-checked-color| @primary|-|
+|@checkbox-border-hover-color| @primary|-|
 |@checkbox-border-focus-color| @blue-d30|-|
-|@checkbox-bg-checked-color| @primary-color|-|
+|@checkbox-bg-checked-color| @primary|-|
 |@checkbox-border-disabled-color| @grey|-|
 |@checkbox-tick-disabled-color| @grey|-|
 |@checkbox-bg-disabled-color| @white|-|
