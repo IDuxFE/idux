@@ -232,3 +232,89 @@
 @white: #ffffff;
 
 @preset-colors: red, orange, gold, yellow, canary, prasinous, verdant, green, cyan, sky, blue, admiral, purple, magenta;
+
+/* Primary -------------------------- */
+@primary-base: @blue-base;
+@primary-l50: color(~`colorPalette('@{primary}', -50) `);
+@primary-l40: color(~`colorPalette('@{primary}', -40) `);
+@primary-l30: color(~`colorPalette('@{primary}', -30) `);
+@primary-l20: color(~`colorPalette('@{primary}', -20) `);
+@primary-l10: color(~`colorPalette('@{primary}', -10) `);
+@primary: @primary-base;
+@primary-d10: color(~`colorPalette('@{primary}', 10) `);
+@primary-d20: color(~`colorPalette('@{primary}', 20) `);
+@primary-d30: color(~`colorPalette('@{primary}', 30) `);
+@primary-d40: color(~`colorPalette('@{primary}', 40) `);
+@primary-d50: color(~`colorPalette('@{primary}', 50) `);
+
+/* Info -------------------------- */
+@info-base: @primary-base;
+@info-l50: color(~`colorPalette('@{info}', -50) `);
+@info-l40: color(~`colorPalette('@{info}', -40) `);
+@info-l30: color(~`colorPalette('@{info}', -30) `);
+@info-l20: color(~`colorPalette('@{info}', -20) `);
+@info-l10: color(~`colorPalette('@{info}', -10) `);
+@info: @info-base;
+@info-d10: color(~`colorPalette('@{info}', 10) `);
+@info-d20: color(~`colorPalette('@{info}', 20) `);
+@info-d30: color(~`colorPalette('@{info}', 30) `);
+@info-d40: color(~`colorPalette('@{info}', 40) `);
+@info-d50: color(~`colorPalette('@{info}', 50) `);
+
+/* Pending -------------------------- */
+@pending-base: @primary-base;
+@pending-l50: color(~`colorPalette('@{pending}', -50) `);
+@pending-l40: color(~`colorPalette('@{pending}', -40) `);
+@pending-l30: color(~`colorPalette('@{pending}', -30) `);
+@pending-l20: color(~`colorPalette('@{pending}', -20) `);
+@pending-l10: color(~`colorPalette('@{pending}', -10) `);
+@pending: @pending-base;
+@pending-d10: color(~`colorPalette('@{pending}', 10) `);
+@pending-d20: color(~`colorPalette('@{pending}', 20) `);
+@pending-d30: color(~`colorPalette('@{pending}', 30) `);
+@pending-d40: color(~`colorPalette('@{pending}', 40) `);
+@pending-d50: color(~`colorPalette('@{pending}', 50) `);
+
+/* Success -------------------------- */
+@success-base: @green-base;
+@success-l50: color(~`colorPalette('@{success}', -50) `);
+@success-l40: color(~`colorPalette('@{success}', -40) `);
+@success-l30: color(~`colorPalette('@{success}', -30) `);
+@success-l20: color(~`colorPalette('@{success}', -20) `);
+@success-l10: color(~`colorPalette('@{success}', -10) `);
+@success: @success-base;
+@success-d10: color(~`colorPalette('@{success}', 10) `);
+@success-d20: color(~`colorPalette('@{success}', 20) `);
+@success-d30: color(~`colorPalette('@{success}', 30) `);
+@success-d40: color(~`colorPalette('@{success}', 40) `);
+@success-d50: color(~`colorPalette('@{success}', 50) `);
+
+/* Warning -------------------------- */
+@warning-base: @yellow-base;
+@warning-l50: color(~`colorPalette('@{warning}', -50) `);
+@warning-l40: color(~`colorPalette('@{warning}', -40) `);
+@warning-l30: color(~`colorPalette('@{warning}', -30) `);
+@warning-l20: color(~`colorPalette('@{warning}', -20) `);
+@warning-l10: color(~`colorPalette('@{warning}', -10) `);
+@warning: @warning-base;
+@warning-d10: color(~`colorPalette('@{warning}', 10) `);
+@warning-d20: color(~`colorPalette('@{warning}', 20) `);
+@warning-d30: color(~`colorPalette('@{warning}', 30) `);
+@warning-d40: color(~`colorPalette('@{warning}', 40) `);
+@warning-d50: color(~`colorPalette('@{warning}', 50) `);
+
+/* Error -------------------------- */
+@error-base: @red-base;
+@error-l50: color(~`colorPalette('@{error}', -50) `);
+@error-l40: color(~`colorPalette('@{error}', -40) `);
+@error-l30: color(~`colorPalette('@{error}', -30) `);
+@error-l20: color(~`colorPalette('@{error}', -20) `);
+@error-l10: color(~`colorPalette('@{error}', -10) `);
+@error: @error-base;
+@error-d10: color(~`colorPalette('@{error}', 10) `);
+@error-d20: color(~`colorPalette('@{error}', 20) `);
+@error-d30: color(~`colorPalette('@{error}', 30) `);
+@error-d40: color(~`colorPalette('@{error}', 40) `);
+@error-d50: color(~`colorPalette('@{error}', 50) `);
+
+@status-colors: primary, info, pending, success, warning, error;

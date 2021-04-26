@@ -1,6 +1,6 @@
-.timeline-color-classes(@i: length(@preset-colors)) when (@i > 0) {
-  .timeline-color-classes(@i - 1);
-  @color: extract(@preset-colors, @i);
+.timeline-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .timeline-color-classes(@colors, @i - 1);
+  @color: extract(@colors, @i);
   &-@{color} {
     border-color: @@color;
     color: @@color;
