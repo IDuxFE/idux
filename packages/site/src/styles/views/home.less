@@ -1,0 +1,70 @@
+.home {
+  text-align: center;
+
+  &-title {
+    background: linear-gradient(@primary, @background-color-component);
+    font-size: @font-size-lg;
+    padding-top: @spacing-4xl;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    &-start {
+      margin-top: @spacing-3xl;
+      a {
+        padding: @spacing-sm @spacing-3xl;
+        border: @border-width-sm @border-style @background-color-component;
+        border-radius: @border-radius-md;
+        color: @background-color-component;
+      }
+    }
+  }
+
+  &-content {
+    position: relative;
+    width: @home-width;
+    margin: -@spacing-4xl auto 0;
+    padding: @spacing-xl;
+    background: @background-color-component;
+    border: @border-width-sm @border-style @border-color;
+    border-radius: @border-radius-md;
+
+    &-guideline-icon {
+      font-size: 32px;
+      width: @spacing-4xl;
+      height: @spacing-4xl;
+      line-height: @spacing-4xl;
+      margin: 0 auto @spacing-lg;
+      border: @border-width-sm @border-style @border-color;
+      border-radius: 50%;
+      transition: border @transition-duration-base @ease-in-out-circ;
+
+      .ix-icon {
+        transition: transform @transition-duration-base @ease-in-out-circ;
+      }
+
+      &:hover {
+        border-color: @primary;
+        .ix-icon {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    h3.ix-typography,
+    h4.ix-typography {
+      font-weight: @font-weight-md;
+    }
+
+    h3.ix-typography {
+      margin: @spacing-xl 0 @spacing-3xl;
+    }
+  }
+
+  &-badges {
+    a {
+      margin-right: @spacing-sm;
+    }
+  }
+}

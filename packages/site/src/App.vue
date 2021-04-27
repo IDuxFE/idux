@@ -1,7 +1,8 @@
 <template>
   <div class="root-wrapper">
     <layout-header />
-    <div class="main-wrapper">
+    <router-view v-if="page === 'home'"></router-view>
+    <div v-else class="main-wrapper">
       <ix-row>
         <ix-col xs="24" sm="24" md="6" lg="5" xl="4" class="main-menu">
           <layout-side-nav />
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, ref, watchEffect } from 'vue'
+import { computed, defineComponent, provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGlobalConfig } from '@idux/components/config'
 import { appContextToken, AppContext } from './context'
@@ -26,23 +27,20 @@ export default defineComponent({
   name: 'App',
   components: { LayoutHeader, LayoutSideNav },
   setup() {
+    const route = useRoute()
+    const path = computed(() => route.path)
+    const page = computed(() => {
+      const match = route.path.match(/\/(\w+)/)
+      return (match && match[1]) ?? ''
+    })
+
     const appContext: AppContext = {
       org: 'IduxFE',
       repo: 'components',
       lang: ref('zh'),
-      path: ref(''),
-      page: ref(''),
+      path,
+      page,
     }
-
-    const route = useRoute()
-    watchEffect(() => {
-      appContext.path.value = route.path
-
-      const match = route.path.match(/\/(\w+)/)
-      if (match && match[1]) {
-        appContext.page.value = match[1]
-      }
-    })
 
     provide(appContextToken, appContext)
 
@@ -52,6 +50,8 @@ export default defineComponent({
     }
 
     useGlobalConfig('icon', { loadIconDynamically })
+
+    return { page }
   },
 })
 </script>

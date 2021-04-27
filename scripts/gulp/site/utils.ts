@@ -91,12 +91,17 @@ const componentsSortMap: Record<string, number> = {
   其他: 7,
 }
 
+const defaultRoutes = [
+  `{path: '/', redirect: '/home'},`,
+  `{path: '/home', 'component': () => import('./home/Index.vue')},`,
+]
+
 function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
   const docs: DocsItem[] = []
   const components: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }> = []
   const componentsMap: Record<string, { lang: string; children: Omit<DocsItem, 'lang'>[] }> = {}
   const cdk: DocsItem[] = []
-  const routes: string[] = []
+  const routes: string[] = defaultRoutes
   for (const packageName in docsMeta) {
     for (const componentName in docsMeta[packageName]) {
       const { category, type = '', title, subtitle = '', lang, path, order = 0 } = docsMeta[packageName][componentName]

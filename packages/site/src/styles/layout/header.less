@@ -2,6 +2,7 @@
   z-index: 10;
   background: @background-color-component;
   box-shadow: @header-box-shadow;
+  transition: all @transition-duration-slow @ease-in-out-circ;
 
   &-logo {
     height: @header-height;
@@ -58,5 +59,11 @@
       border-top: @menu-item-border-bottom-width @menu-border-style @menu-highlight-color;
       border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
     }
+  }
+
+  &.home-header {
+    max-width: @home-width;
+    margin: 0 auto;
+    box-shadow: none;
   }
 }
