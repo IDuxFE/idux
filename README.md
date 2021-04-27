@@ -1,7 +1,7 @@
 # @idux
 
-`@idux` 是一套企业级中后台 UI 组件库, 基于 vue 3.x 开发。  
-全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
+`@idux` 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。  
+基于 Vue 3.x + TypeScript 开发, 全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
 
 [![Build Status](https://dev.azure.com/iduxfeteam/IduxFE/_apis/build/status/IduxFE.idux?branchName=azure-pipelines)](https://dev.azure.com/iduxfeteam/IduxFE/_build/latest?definitionId=1&branchName=azure-pipelines)
 [![CodeFactor](https://www.codefactor.io/repository/github/iduxfe/idux/badge)](https://www.codefactor.io/repository/github/iduxfe/idux)

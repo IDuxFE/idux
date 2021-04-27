@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header :class="classes">
     <ix-row>
       <ix-col xs="24" sm="24" md="6" lg="5" xl="4">
         <logo />
@@ -13,14 +13,25 @@
   </header>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import Logo from './Logo.vue'
 import SearchBox from './SearchBox.vue'
 import Navigation from './Navigation.vue'
 import GithubButton from './GithubButton.vue'
+import { appContextToken } from '../../context'
 
 export default defineComponent({
   components: { Logo, SearchBox, Navigation, GithubButton },
+  setup() {
+    const { page } = inject(appContextToken)!
+    const classes = computed(() => {
+      return {
+        header: true,
+        'home-header': page.value === 'home',
+      }
+    })
+    return { classes }
+  },
 })
 </script>
