@@ -1,8 +1,7 @@
 <template>
   <div class="root-wrapper">
     <layout-header />
-    <router-view v-if="page === 'home'"></router-view>
-    <div v-else class="main-wrapper">
+    <div v-if="!!page" class="main-wrapper">
       <ix-row>
         <ix-col xs="24" sm="24" md="6" lg="5" xl="4" class="main-menu">
           <layout-side-nav />
@@ -12,6 +11,7 @@
         </ix-col>
       </ix-row>
     </div>
+    <router-view v-else></router-view>
   </div>
 </template>
 

@@ -28,7 +28,7 @@ export default defineComponent({
     const classes = computed(() => {
       return {
         header: true,
-        'home-header': page.value === 'home',
+        'home-header': !page.value,
       }
     })
     return { classes }
