@@ -67,7 +67,7 @@ import { IxIcon } from '@idux/components/icon'
 import IxSelectItem from './SelectItem.vue'
 import IxSelectInput from './SelectInput.vue'
 import IxOptionContainer from './OptionContainer.vue'
-import { SelectPropTypes } from './types'
+import { selectPropsDef } from './types'
 import {
   useSelectClasses,
   useSelectInput,
@@ -81,7 +81,7 @@ export default defineComponent({
   name: 'IxSelect',
   components: { IxPortal, IxIcon, IxSelectItem, IxSelectInput, IxOptionContainer },
   directives: { clickOutside },
-  props: SelectPropTypes,
+  props: selectPropsDef,
   emits: [
     'update:value',
     'update:open',

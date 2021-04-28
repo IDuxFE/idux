@@ -9,7 +9,7 @@ import { computed, defineComponent } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({
-  name: 'IxSubMenuContainer',
+  name: 'IxSubMenuOverlayContent',
   props: {
     disabled: PropTypes.bool,
     mode: PropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const),

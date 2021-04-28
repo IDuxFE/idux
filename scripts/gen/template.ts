@@ -9,20 +9,20 @@ export function getLessTemplate(compName: string): string {
 `
 }
 
-export function getTypesTemplate(compName: string): string {
+export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
   return `import type { DefineComponent } from 'vue'
 
 import { PropTypes } from '@idux/cdk/utils'
 
-export interface ${compName}Props {
+export interface ${upperFirstName}Props {
   testProp: string
 }
 
-export const ${compName}PropTypes = {
+export const ${camelCaseName}PropsDef = {
   testProp: PropTypes.string,
 }
 
-export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
+export type ${upperFirstName}Component = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 

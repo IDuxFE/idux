@@ -113,7 +113,6 @@
 @title-content-margin: @margin-md;
 @title-extra-margin: @margin-sm;
 
-
 /* tag -------------------------- start */
 @text-color-inverse: @white;
 @tag-font-size: @font-size-sm;
@@ -636,19 +635,20 @@
 
 // --- end ---
 
-
 /* anchor-top -------------------------- */
 @anchor-bg: @background-color-component;
-@anchor-wraper-margin-left: -4px;
-@anchor-wraper-padding-left: 4px;
+@anchor-wrapper-margin-left: -@spacing-xs;
+@anchor-wrapper-padding-left: @spacing-xs;
 @anchor-color: @text-color;
-@anchor-border-width: 2px;
+@anchor-border-width: @border-width-md;
 @anchor-border-color: @border-color;
 
 @anchor-ink-ball-size: 8px;
 @anchor-ink-ball-radius: 50%;
 
-@anchor-link-padding: 7px 0 7px 16px;
+@anchor-link-padding: @spacing-sm 0 @spacing-sm @spacing-md;
+@anchor-link-line-height: 1;
 @anchor-link-margin-bottom: 6px;
-@anchor-link-active-color: @primary-color;
+@anchor-link-active-color: @primary;
+
 // --- end ---

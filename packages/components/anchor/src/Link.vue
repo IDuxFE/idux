@@ -4,52 +4,47 @@
   </a>
 </template>
 <script lang="ts">
+import type { LinkProps } from './types'
 import { computed, defineComponent, onMounted, onUnmounted, watch, inject } from 'vue'
-import { AnchorLinksProps, Anchor } from './types'
-import { PropTypes } from '@idux/cdk/utils'
-import { anchorToken } from './util'
+import { linkPropsDef } from './types'
+import { anchorToken } from './token'
 
 export default defineComponent({
   name: 'IxLink',
-  props: {
-    href: PropTypes.string,
-    title: PropTypes.string,
-  },
-  setup(props: AnchorLinksProps) {
+  props: linkPropsDef,
+  setup(props: LinkProps) {
     const prefix = 'ix-anchor-link'
 
-    const Anchor = inject(anchorToken) as Anchor
-    const AnchorContext = Anchor.context;
+    const { activeLink, handleScrollTo, handleLinkClick, unregisterLink, registerLink } = inject(anchorToken)!
 
     const ixLinkCls = computed(() => {
-      return [`${prefix}`, Anchor.activeLink.value === props.href ? `${prefix}-active` : '']
+      return [`${prefix}`, activeLink.value === props.href ? `${prefix}-active` : '']
     })
 
-    const goAnchor = (e: Event) => {
-      const { href, title } = props
-      AnchorContext.emit('click', e, { href, title })
-      Anchor.handleScrollTo(props.href)
+    const goAnchor = (evt: MouseEvent) => {
+      handleLinkClick(evt, props)
+      handleScrollTo(props.href)
     }
 
     watch(
       () => props.href,
       (newHref, oldHref) => {
         if (newHref !== oldHref) {
-          Anchor.unregisterLink(oldHref)
-          Anchor.registerLink(newHref)
+          unregisterLink(oldHref)
+          registerLink(newHref)
         }
       },
     )
+
     onMounted(() => {
-      Anchor.registerLink(props.href)
+      registerLink(props.href)
     })
+
     onUnmounted(() => {
-      Anchor.unregisterLink(props.href)
+      unregisterLink(props.href)
     })
-    return {
-      ixLinkCls,
-      goAnchor,
-    }
+
+    return { ixLinkCls, goAnchor }
   },
 })
 </script>

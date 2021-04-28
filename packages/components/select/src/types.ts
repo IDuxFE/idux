@@ -39,7 +39,7 @@ export interface SelectProps {
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
-export const SelectPropTypes = {
+export const selectPropsDef = {
   value: PropTypes.any,
   open: PropTypes.bool.def(false),
   autofocus: PropTypes.bool.def(false),
@@ -77,7 +77,7 @@ export interface OptionProps {
   value: any
 }
 
-export const OptionPropTypes = {
+export const optionPropsDef = {
   disabled: PropTypes.bool.def(false),
   label: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
@@ -90,7 +90,7 @@ export interface OptionGroupProps {
   label: string
 }
 
-export const OptionGroupPropTypes = {
+export const optionGroupPropsDef = {
   label: PropTypes.string.isRequired,
   options: PropTypes.array.def([]),
 }

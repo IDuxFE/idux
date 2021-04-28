@@ -17,14 +17,14 @@
 <script lang="ts">
 import { defineComponent, inject, provide } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { MenuItemGroupPropTypes } from '../types'
+import { menuItemGroupPropsDef } from '../types'
 import { menuItemGroupToken, menuToken, subMenuToken } from '../token'
 import { usePaddingLeft } from '../usePaddingLeft'
 
 export default defineComponent({
   name: 'IxMenuItemGroup',
   components: { IxIcon },
-  props: MenuItemGroupPropTypes,
+  props: menuItemGroupPropsDef,
   setup() {
     provide(menuItemGroupToken, true)
 

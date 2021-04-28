@@ -17,7 +17,7 @@ export interface MenuProps {
   theme?: MenuTheme
 }
 
-export const MenuPropTypes = {
+export const menuPropsDef = {
   collapsed: PropTypes.bool.def(false),
   disabled: PropTypes.bool.def(false),
   indent: PropTypes.number,
@@ -37,7 +37,7 @@ export interface MenuItemProps {
   title?: string
 }
 
-export const MenuItemPropTypes = {
+export const menuItemPropsDef = {
   cid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool.def(false),
   icon: PropTypes.string,
@@ -51,7 +51,7 @@ export interface MenuItemGroupProps {
   title?: string
 }
 
-export const MenuItemGroupPropTypes = {
+export const menuItemGroupPropsDef = {
   icon: PropTypes.string,
   title: PropTypes.string,
 }
@@ -67,7 +67,7 @@ export interface SubMenuProps {
   title?: string
 }
 
-export const SubMenuPropTypes = {
+export const subMenuPropsDef = {
   cid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool.def(false),
   icon: PropTypes.string,
