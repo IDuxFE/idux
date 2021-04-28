@@ -1,6 +1,7 @@
 import type {
   ButtonConfig,
   IconConfig,
+  TagConfig,
   DividerConfig,
   SpaceConfig,
   RowConfig,
@@ -33,6 +34,12 @@ import { numFormatter } from './numFormatter'
 const button = shallowReactive<ButtonConfig>({ mode: 'default', size: 'medium' })
 
 const icon = shallowReactive<IconConfig>({})
+
+const tag = shallowReactive<TagConfig>({
+  closable: false,
+  checkAble: false,
+  isRound: false,
+})
 
 // --------------------- Layout ---------------------
 const divider = shallowReactive<DividerConfig>({
@@ -168,6 +175,7 @@ export const defaultConfig: GlobalConfig = {
   // General
   button,
   icon,
+  tag,
   // Layout
   divider,
   space,
