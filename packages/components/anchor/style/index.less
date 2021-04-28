@@ -6,8 +6,8 @@
   position: relative;
   padding-left: @anchor-border-width;
   &-wrapper {
-    margin-left: @anchor-wraper-margin-left;
-    padding-left: @anchor-wraper-padding-left;
+    margin-left: @anchor-wrapper-margin-left;
+    padding-left: @anchor-wrapper-padding-left;
     overflow: auto;
     background-color: @anchor-bg;
   }
@@ -35,16 +35,16 @@
       border: @anchor-border-width solid @anchor-link-active-color;
       border-radius: @anchor-ink-ball-radius;
       transform: translateX(-50%);
-      transition: top 0.3s ease-in-out;
+      transition: top @transition-duration-base @ease-in-out;
       &.visible {
         display: inline-block;
       }
     }
   }
-  
+
   &-link {
     padding: @anchor-link-padding;
-    line-height: 1.143;
+    line-height: @anchor-link-line-height;
     position: relative;
     display: block;
     margin-bottom: @anchor-link-margin-bottom;
@@ -52,18 +52,15 @@
     color: @anchor-color;
     white-space: nowrap;
     text-overflow: ellipsis;
-    transition: all 0.3s;
+    transition: all @transition-duration-base;
     text-decoration: none;
-    
+
     &:only-child {
       margin-bottom: 0;
     }
-    
+
     &-active {
       color: @anchor-link-active-color;
     }
   }
-
-  
-
 }

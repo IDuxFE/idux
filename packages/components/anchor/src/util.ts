@@ -1,7 +1,5 @@
 import { rAF } from '@idux/cdk/utils'
 import { easeInOutCubic } from '@idux/components/utils'
-import type { Anchor } from './types'
-import { InjectionKey } from 'vue'
 
 interface ScrollToOptions {
   container?: HTMLElement | Window | Document
@@ -56,5 +54,3 @@ export function getOffsetTop(element: HTMLElement, container: HTMLElement | Wind
   }
   return rect.top
 }
-
-export const anchorToken: InjectionKey<Anchor> = Symbol()

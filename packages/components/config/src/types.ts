@@ -225,8 +225,8 @@ export interface GlobalConfig {
   spin: SpinConfig
   progress: ProgressConfig
   // Other
-  backTop: BackTopConfig,
-  anchor: AnchorConfig,
+  backTop: BackTopConfig
+  anchor: AnchorConfig
   // --- end ---
 }
 

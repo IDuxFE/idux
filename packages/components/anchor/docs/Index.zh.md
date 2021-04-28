@@ -33,7 +33,7 @@ cover:
 | `click` | click 事件的 handle | `Function(e: Event, link: Object)` |
 | `change` | 监听锚点链接改变 | `(activeLink: string) => void` |
 
-### ix-anchor-link
+### ix-link
 
 #### LinkProps
 

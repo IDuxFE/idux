@@ -71,7 +71,7 @@ describe('Anchor.vue', () => {
         default: AnchorSlots,
       },
     })
-    
+
     // expect(wrapper.element.tagName).toEqual('ix-affix')
     expect(wrapper.classes()).toContain('ix-affix')
 

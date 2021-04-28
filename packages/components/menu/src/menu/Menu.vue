@@ -9,12 +9,12 @@ import type { MenuProps } from '../types'
 
 import { computed, defineComponent, provide } from 'vue'
 import { menuToken } from '../token'
-import { MenuPropTypes } from '../types'
+import { menuPropsDef } from '../types'
 import { useClasses, useMenuCollapsed, useMenuConfig, useMenuMode, useMenuOpened, useMenuSelected } from './useMenu'
 
 export default defineComponent({
   name: 'IxMenu',
-  props: MenuPropTypes,
+  props: menuPropsDef,
   emits: ['click', 'update:selectedIds', 'update:openedIds'],
   setup(props: MenuProps) {
     const multiple = computed(() => props.multiple)

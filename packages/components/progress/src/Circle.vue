@@ -33,7 +33,7 @@ import { isObject, uniqueId, toNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useInfo, useStatus, useStatusClasses } from './useCommonLogic'
 import { handleCircleGradient } from './util'
-import { ConvertProgressProps, ConvertProgressPropTypes, ProgressGapPositionType, StringGradients } from './types'
+import { ConvertProgressProps, convertProgressPropsDef, ProgressGapPositionType, StringGradients } from './types'
 
 export interface CalcSharedProperties {
   isGradient: boolean
@@ -50,7 +50,7 @@ const defaultStrokeWidth = 6
 export default defineComponent({
   name: 'IxProgressCircle',
   components: { IxIcon },
-  props: ConvertProgressPropTypes,
+  props: convertProgressPropsDef,
   setup(props: ConvertProgressProps) {
     const progressConfig = useGlobalConfig('progress')
     const status = useStatus(props)
