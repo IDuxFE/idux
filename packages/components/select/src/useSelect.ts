@@ -25,7 +25,7 @@ export const useSelectOverlay = (props: SelectProps): SelectOverlay => {
   const options: OverlayOptions = {
     scrollStrategy: 'reposition',
     placement: 'bottom',
-    trigger: 'click',
+    trigger: 'manual',
     offset: [0, 8],
     hideDelay: 0,
     showDelay: 0,

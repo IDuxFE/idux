@@ -21,7 +21,6 @@ export default defineComponent({
   emits: ['change', 'update:value'],
   setup(props: RadioGroupProps, { emit }) {
     const change = (radioValue: modelValueType) => {
-      console.log(radioValue)
       emit('update:value', radioValue)
       emit('change', radioValue)
     }
