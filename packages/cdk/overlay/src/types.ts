@@ -2,23 +2,9 @@ import type { Options, Placement } from '@popperjs/core'
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
 export type OverlayScrollStrategy = 'close' | 'reposition'
-export type OverlayTrigger = 'click' | 'hover' | 'focus'
+export type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type OverlayElement = ComponentPublicInstance | HTMLElement
 export type OverlayPlacement = Placement
-
-export interface OverlayTriggerEvents {
-  onClick?: (event: Event) => void
-  onMouseenter?: (event: Event) => void
-  onMouseleave?: (event: Event) => void
-  onFocus?: (event: Event) => void
-  onBlur?: (event: Event) => void
-}
-
-export interface OverlayPopperEvents {
-  onMouseenter: () => void
-  onMouseleave: () => void
-  onClick: (event: MouseEvent) => void
-}
 
 export interface OverlayOptions {
   /**
@@ -114,9 +100,9 @@ export interface OverlayInstance<
    */
   triggerRef: Ref<TE | null>
   /**
-   * Manually bind to the event on the trigger.
+   * Manually bind to the evt on the trigger.
    */
-  triggerEvents: ComputedRef<OverlayTriggerEvents>
+  triggerEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the overlay.
    * The caller needs to bind the variable to the view.
@@ -125,7 +111,7 @@ export interface OverlayInstance<
   /**
    * Manually bind to events on the overlay.
    */
-  overlayEvents: OverlayPopperEvents
+  overlayEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the arrow.
    * If showArrow is false, we won't return arrowRef.

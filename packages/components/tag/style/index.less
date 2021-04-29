@@ -1,6 +1,6 @@
 @import '../../style/default.less';
 @import '../../style/mixins/index';
-@import "../../style/dark";
+// @import "../../style/dark";
 
 @tag-prefix: ~'@{idux-prefix}-tag';
 
@@ -79,7 +79,7 @@
 
     &:not(&-checked):hover {
       color: @primary;
-      
+
       .@{tag-prefix}-close-icon {
         color: fade(@primary, 60%);
 
@@ -108,6 +108,4 @@
       background-color: @blue-d10;
     }
   }
-
-
 }

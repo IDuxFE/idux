@@ -26,17 +26,17 @@ export type ${upperFirstName}Component = InstanceType<DefineComponent<${upperFir
 `
 }
 
-export function getTsxTemplate(compName: string): string {
-  return `import type { ${compName}Props } from './types'
+export function getTsxTemplate(upperFirstName: string, camelCaseName: string): string {
+  return `import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
 
   }
 })

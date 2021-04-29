@@ -41,7 +41,7 @@ export const useSubMenuOverlay = (mode: ComputedRef<MenuMode>, opened: Ref<boole
   const options: OverlayOptions = {
     scrollStrategy: 'reposition',
     placement: placement.value,
-    trigger: 'click',
+    trigger: 'manual',
     offset: [0, 4],
     hideDelay: 0,
     showDelay: 0,

@@ -84,18 +84,7 @@ export default defineComponent({
     return { children, clsPrefix, useTitle, hasTitle, beDestroyed, visibility, hide, options, ...rest }
   },
   render() {
-    const {
-      children,
-      triggerEvents,
-      clsPrefix,
-      useTitle,
-      hasTitle,
-      overlayEvents,
-      beDestroyed,
-      visibility,
-      hide,
-      options,
-    } = this
+    const { children, clsPrefix, useTitle, hasTitle, beDestroyed, visibility, hide, options } = this
     if (!children) {
       return null
     }
@@ -105,25 +94,19 @@ export default defineComponent({
 
     let trigger: VNode
     if (options.trigger === 'click') {
-      trigger = withDirectives(cloneVNode(children, { ...triggerEvents, ref: 'triggerRef' }), [
+      trigger = withDirectives(cloneVNode(children, { ref: 'triggerRef' }), [
         [resolveDirective('click-outside')!, () => hide()],
       ])
     } else {
-      trigger = cloneVNode(children, { ...triggerEvents, ref: 'triggerRef' })
+      trigger = cloneVNode(children, { ref: 'triggerRef' })
     }
+
     return (
       <>
         {trigger}
         <IxPortal target={`${clsPrefix}-container`}>
           <Transition name="ix-fade-fast">
-            <div
-              v-show={visibility}
-              class={clsPrefix}
-              ref="overlayRef"
-              onMouseenter={overlayEvents.onMouseenter}
-              onMouseleave={overlayEvents.onMouseleave}
-              onClick={overlayEvents.onClick}
-            >
+            <div v-show={visibility} class={clsPrefix} ref="overlayRef">
               {!beDestroyed && (
                 <div class={`${clsPrefix}-content`} role="tooltip">
                   {useTitle}

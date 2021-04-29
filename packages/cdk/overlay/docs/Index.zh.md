@@ -3,10 +3,7 @@ category: cdk
 type:
 title: Overlay
 subtitle: 浮层
-cover:
 ---
-
-参考自 [element-plus](https://github.com/element-plus/element-plus/tree/dev/packages/popper/src/use-popper)
 
 - 创建定位浮层：`useOverlay`
 
@@ -137,9 +134,9 @@ export interface OverlayInstance<
    */
   triggerRef: Ref<TE | null>
   /**
-   * Manually bind to the event on the trigger.
+   * Manually bind to the evt on the trigger.
    */
-  triggerEvents: ComputedRef<OverlayTriggerEvents>
+  triggerEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the overlay.
    * The caller needs to bind the variable to the view.
@@ -148,7 +145,7 @@ export interface OverlayInstance<
   /**
    * Manually bind to events on the overlay.
    */
-  overlayEvents: OverlayPopperEvents
+  overlayEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the arrow.
    * If showArrow is false, we won't return arrowRef.

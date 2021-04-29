@@ -1,5 +1,5 @@
 import { mount, VueWrapper, MountingOptions } from '@vue/test-utils'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { renderWork, wait } from '@tests'
 import IxTooltip from '../src/tooltip'
 import { TooltipProps } from '../src/types'
@@ -33,6 +33,7 @@ describe('tooltip.tsx', () => {
 
   test('title work', async () => {
     const textWrapper = tooltipMount({ props: { title: 'prompt text' } })
+    await nextTick()
     expect((document.body.querySelector('.ix-tooltip') as HTMLDivElement).style.display).toEqual('none')
     await textWrapper.get('span').trigger('mouseenter')
     await wait(100)
@@ -40,6 +41,7 @@ describe('tooltip.tsx', () => {
 
     const title = '<div id="custom-title">prompt text</div>'
     const slotWrapper = tooltipMount({ slots: { title } })
+    await nextTick()
     expect((document.body.querySelectorAll('.ix-tooltip')[1] as HTMLDivElement).style.display).toEqual('none')
     await slotWrapper.get('span').trigger('mouseenter')
     await wait(100)

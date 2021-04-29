@@ -38,10 +38,10 @@ export const getExampleTemplate = (isAlone: boolean, first: string, second?: str
   }
   return `
   <ix-row gutter="16">
-    <ix-col xl="12" span="24">
+    <ix-col lg="12" span="24">
       ${first}
     </ix-col>
-    <ix-col xl="12" span="24">
+    <ix-col lg="12" span="24">
       ${second}
     </ix-col>
   </ix-row>

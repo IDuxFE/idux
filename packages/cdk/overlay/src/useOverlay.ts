@@ -1,21 +1,12 @@
 /* eslint-disable indent */
+import type { WatchStopHandle } from 'vue'
 import type { Instance as PopperInstance } from '@popperjs/core'
-import type { ComputedRef, WatchStopHandle } from 'vue'
+import type { OverlayInstance, OverlayOptions, OverlayTrigger, OverlayElement } from './types'
 
-import type {
-  OverlayInstance,
-  OverlayOptions,
-  OverlayPopperEvents,
-  OverlayTrigger,
-  OverlayTriggerEvents,
-  OverlayElement,
-} from './types'
-
-import { computed, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, nextTick, reactive, ref, watch, watchEffect } from 'vue'
 import { createPopper } from '@popperjs/core'
-import { isHTMLElement, off, on, uniqueId } from '@idux/cdk/utils'
-
-import { usePopperOptions } from './usePopperOptions'
+import { off, on, uniqueId } from '@idux/cdk/utils'
+import { convertElement, convertPopperOptions } from './utils'
 
 export const useOverlay = <
   TE extends OverlayElement = OverlayElement,
@@ -27,38 +18,40 @@ export const useOverlay = <
   const triggerRef = ref<OverlayElement | null>(null)
   const overlayRef = ref<OverlayElement | null>(null)
   const arrowRef = ref<OverlayElement | null>(null)
+
+  const triggerElementRef = convertElement(triggerRef)
+  const overlayElementRef = convertElement(overlayRef)
+  const arrowElementRef = convertElement(arrowRef)
+
   let popperInstance: PopperInstance | null = null
 
   let showTimer: number | null = null
   let hideTimer: number | null = null
 
-  let triggerFocus = false
-
   const state = reactive(options)
-  const popperOptions = usePopperOptions(options, { arrow: arrowRef })
   let refWatchStopHandle: WatchStopHandle | null = null
-
   const initialize = () => {
     if (refWatchStopHandle) {
       refWatchStopHandle()
     }
 
     refWatchStopHandle = watchEffect(() => {
-      const trigger = triggerRef.value
-      const overlay = overlayRef.value
-
-      if (!trigger || !overlay) {
-        return
-      }
-
       if (popperInstance) {
         popperInstance.destroy()
+        popperInstance = null
         off(window, 'scroll', globalScroll)
       }
 
-      const triggerElement = isHTMLElement(trigger) ? trigger : trigger.$el
-      const overlayElement = isHTMLElement(overlay) ? overlay : overlay.$el
-      popperInstance = createPopper(triggerElement, overlayElement, popperOptions.value)
+      const triggerElement = triggerElementRef.value
+      const overlayElement = overlayElementRef.value
+      const arrowElement = arrowElementRef.value
+
+      if (!triggerElement || !overlayElement) {
+        return
+      }
+
+      const popperOptions = convertPopperOptions({ ...state, arrow: arrowElement })
+      popperInstance = createPopper(triggerElement, overlayElement, popperOptions)
       popperInstance.update()
 
       on(window, 'scroll', globalScroll)
@@ -105,15 +98,15 @@ export const useOverlay = <
   }
 
   const destroy = (): void => {
-    if (!popperInstance) {
-      return
-    }
     if (refWatchStopHandle) {
       refWatchStopHandle()
     }
-    popperInstance.destroy()
-    popperInstance = null
-    off(window, 'scroll', globalScroll)
+
+    if (popperInstance) {
+      popperInstance.destroy()
+      popperInstance = null
+      off(window, 'scroll', globalScroll)
+    }
   }
 
   const update = (options?: Partial<OverlayOptions>): void => {
@@ -124,82 +117,8 @@ export const useOverlay = <
       }
       popperInstance.update()
     } else {
-      initialize()
+      nextTick(() => initialize())
     }
-  }
-
-  const visibility = computed<boolean>(() => !state.disabled && !!state.visible)
-
-  watch(visibility, () => update())
-
-  const overlayEventHandler = (e: Event): void => {
-    e.stopPropagation()
-    switch (e.type) {
-      case 'click': {
-        if (triggerFocus) {
-          triggerFocus = false
-        } else {
-          visibility.value && state.trigger === 'click' ? hide() : show()
-        }
-        break
-      }
-      case 'mouseenter': {
-        show()
-        break
-      }
-      case 'mouseleave': {
-        hide()
-        break
-      }
-      case 'focus': {
-        triggerFocus = true
-        show()
-        break
-      }
-      case 'blur': {
-        triggerFocus = false
-        hide()
-        break
-      }
-    }
-  }
-
-  const mapTriggerEvents = (state: OverlayOptions): ComputedRef<OverlayTriggerEvents> => {
-    return computed<OverlayTriggerEvents>(() => {
-      const triggerToEvents: Record<OverlayTrigger, Array<keyof OverlayTriggerEvents>> = {
-        click: ['onClick'],
-        focus: ['onFocus', 'onBlur'],
-        hover: ['onMouseenter', 'onMouseleave'],
-      }
-      return triggerToEvents[state.trigger].reduce((obj, key) => {
-        obj[key] = overlayEventHandler
-        return obj
-      }, {} as OverlayTriggerEvents)
-    })
-  }
-
-  const triggerEvents: ComputedRef<OverlayTriggerEvents> = mapTriggerEvents(state)
-
-  const onOverlayMouseEnter = () => {
-    if (state.allowEnter && state.trigger !== 'click') {
-      if (hideTimer) {
-        clearTimeout(hideTimer)
-        hideTimer = null
-      }
-    }
-  }
-
-  const onOverlayMouseLeave = () => {
-    if (state.trigger !== 'hover') {
-      return
-    }
-    hide()
-  }
-
-  const overlayEvents: OverlayPopperEvents = {
-    onMouseenter: onOverlayMouseEnter,
-    onMouseleave: onOverlayMouseLeave,
-    onClick: event => event.stopPropagation(),
   }
 
   const globalScroll = () => {
@@ -211,18 +130,116 @@ export const useOverlay = <
     }
   }
 
+  const visibility = computed<boolean>(() => !state.disabled && !!state.visible)
+
+  watch(visibility, () => update())
+
+  const triggerEventHandler = (evt: Event): void => {
+    evt.stopPropagation()
+    switch (evt.type) {
+      case 'click':
+      case 'contextmenu': {
+        visibility.value ? hide() : show()
+        break
+      }
+      case 'mouseenter':
+      case 'focus': {
+        show()
+        break
+      }
+      case 'mouseleave':
+      case 'blur': {
+        hide()
+        break
+      }
+    }
+  }
+
+  const overlayEventHandler = (evt: Event): void => {
+    switch (evt.type) {
+      case 'click': {
+        evt.stopPropagation()
+        break
+      }
+      case 'mouseenter': {
+        if (state.allowEnter && hideTimer) {
+          clearTimeout(hideTimer)
+          hideTimer = null
+        }
+        break
+      }
+      case 'mouseleave': {
+        if (state.trigger === 'hover') {
+          hide()
+        }
+        break
+      }
+    }
+  }
+
+  const triggerToEvents: Record<OverlayTrigger, Array<keyof HTMLElementEventMap>> = {
+    click: ['click'],
+    focus: ['focus', 'blur'],
+    hover: ['mouseenter', 'mouseleave'],
+    contextmenu: ['contextmenu'],
+    manual: [],
+  }
+  const overlayEvents: Array<keyof HTMLElementEventMap> = ['mouseenter', 'mouseleave', 'click']
+
+  watch(
+    () => state.trigger,
+    (currTrigger, prevTrigger) => {
+      const triggerElement = triggerElementRef.value
+      const overlayElement = overlayElementRef.value
+      const prevTriggerEvents = triggerToEvents[prevTrigger!] || []
+      prevTriggerEvents.forEach(evtName => off(triggerElement, evtName, triggerEventHandler))
+      overlayEvents.forEach(evtName => off(overlayElement, evtName, overlayEventHandler))
+
+      if (currTrigger !== 'manual') {
+        const currTriggerEvents = triggerToEvents[currTrigger]
+        currTriggerEvents.forEach(evtName => on(triggerElement, evtName, triggerEventHandler))
+        overlayEvents.forEach(evtName => on(overlayElement, evtName, overlayEventHandler))
+      }
+    },
+  )
+
+  watch(
+    triggerElementRef,
+    (currTriggerElement, prevTriggerElement) => {
+      const currTriggerEvents = triggerToEvents[state.trigger] || []
+      currTriggerEvents.forEach(evtName => {
+        off(prevTriggerElement, evtName, triggerEventHandler)
+        on(currTriggerElement, evtName, triggerEventHandler)
+      })
+    },
+    { flush: 'post' },
+  )
+
+  watch(
+    overlayElementRef,
+    (currOverlayElement, prevOverlayElement) => {
+      if (state.trigger !== 'manual') {
+        overlayEvents.forEach(evtName => {
+          off(prevOverlayElement, evtName, overlayEventHandler)
+          on(currOverlayElement, evtName, overlayEventHandler)
+        })
+      }
+    },
+    { flush: 'post' },
+  )
+
   return {
-    arrowRef,
     triggerRef,
     overlayRef,
+    arrowRef,
     initialize,
     show,
     hide,
+    update,
     destroy,
     id: uniqueId('ix-overlay'),
-    update,
     visibility,
-    triggerEvents,
-    overlayEvents,
+    triggerEventHandler,
+    overlayEventHandler,
   } as OverlayInstance<TE, OE, AE>
 }
