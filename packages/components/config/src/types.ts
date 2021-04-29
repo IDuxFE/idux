@@ -2,10 +2,8 @@ import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
 
-export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
-  mode: ButtonMode
   size: ButtonSize
 }
 
@@ -39,6 +37,11 @@ export interface RowConfig {
 }
 
 // Navigation
+export interface DropdownConfig {
+  placement: OverlayPlacement
+  trigger: OverlayTrigger
+}
+
 export type MenuTheme = 'light' | 'dark'
 export interface MenuConfig {
   indent: number
@@ -210,6 +213,7 @@ export interface GlobalConfig {
   space: SpaceConfig
   row: RowConfig
   // Navigation
+  dropdown: DropdownConfig
   menu: MenuConfig
   subMenu: SubMenuConfig
   // Data Entry

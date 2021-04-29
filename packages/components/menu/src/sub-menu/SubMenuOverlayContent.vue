@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { PropTypes } from '@idux/cdk/utils'
+import { ɵDropdownToken } from '@idux/components/dropdown'
 
 export default defineComponent({
   name: 'IxSubMenuOverlayContent',
@@ -17,10 +18,12 @@ export default defineComponent({
   },
   emits: ['mouseOverlayChang'],
   setup(props, { emit }) {
+    const dropdownContext = inject(ɵDropdownToken, null)
     const classes = computed(() => {
       return {
         'ix-menu-vertical': true,
         'ix-menu-content': true,
+        'ix-menu-dropdown': !!dropdownContext,
         [`ix-menu-${props.theme}`]: true,
       }
     })
@@ -28,6 +31,7 @@ export default defineComponent({
     const onMouseEvent = (value: boolean) => {
       if (!props.disabled) {
         emit('mouseOverlayChang', value)
+        dropdownContext?.onMouseOverlayChang(value)
       }
     }
     return { classes, onMouseEvent }

@@ -19,8 +19,9 @@ import type { SetupContext } from 'vue'
 import type { PopoverProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { IxTooltip } from '@idux/components/tooltip'
+import { OverlayPlacementPropDef, OverlayTriggerPropDef } from '@idux/cdk/overlay'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { IxTooltip } from '@idux/components/tooltip'
 import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
@@ -29,24 +30,9 @@ export default defineComponent({
   props: {
     title: PropTypes.string,
     content: PropTypes.string.isRequired,
-    placement: PropTypes.oneOf([
-      'auto',
-      'auto-start',
-      'auto-end',
-      'top',
-      'left',
-      'bottom',
-      'right',
-      'top-start',
-      'top-end',
-      'bottom-start',
-      'right-start',
-      'right-end',
-      'left-start',
-      'left-end',
-    ] as const),
+    placement: OverlayPlacementPropDef,
     visible: PropTypes.bool,
-    trigger: PropTypes.oneOf(['click', 'focus', 'hover'] as const),
+    trigger: OverlayTriggerPropDef,
     showDelay: PropTypes.number,
     hideDelay: PropTypes.number,
     destroyOnHide: PropTypes.bool,

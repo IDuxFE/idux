@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { isUndefined, PropTypes } from '@idux/cdk/utils'
 import { IxPortal } from '@idux/cdk/portal'
-import { useOverlay } from '@idux/cdk/overlay'
+import { OverlayPlacementPropDef, OverlayTriggerPropDef, useOverlay } from '@idux/cdk/overlay'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { useOverlayOptions } from './useOverlayOptions'
 import { useChildren } from './useChildren'
@@ -26,25 +26,9 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     title: PropTypes.string,
-    placement: PropTypes.oneOf([
-      'auto',
-      'auto-start',
-      'auto-end',
-      'top',
-      'left',
-      'bottom',
-      'right',
-      'top-start',
-      'top-end',
-      'bottom-start',
-      'bottom-end',
-      'right-start',
-      'right-end',
-      'left-start',
-      'left-end',
-    ] as const),
+    placement: OverlayPlacementPropDef,
     visible: PropTypes.bool,
-    trigger: PropTypes.oneOf(['click', 'focus', 'hover'] as const),
+    trigger: OverlayTriggerPropDef,
     showDelay: PropTypes.number,
     hideDelay: PropTypes.number,
     destroyOnHide: PropTypes.bool,

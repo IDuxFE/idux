@@ -37,8 +37,6 @@ export const useOverlay = <
 
     refWatchStopHandle = watchEffect(() => {
       if (popperInstance) {
-        popperInstance.destroy()
-        popperInstance = null
         off(window, 'scroll', globalScroll)
       }
 
@@ -136,9 +134,14 @@ export const useOverlay = <
 
   const triggerEventHandler = (evt: Event): void => {
     evt.stopPropagation()
+
     switch (evt.type) {
-      case 'click':
+      case 'click': {
+        visibility.value ? hide() : show()
+        break
+      }
       case 'contextmenu': {
+        evt.preventDefault()
         visibility.value ? hide() : show()
         break
       }
@@ -169,7 +172,7 @@ export const useOverlay = <
         break
       }
       case 'mouseleave': {
-        if (state.trigger === 'hover') {
+        if (state.allowEnter && state.trigger === 'hover') {
           hide()
         }
         break
