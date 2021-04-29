@@ -43,22 +43,22 @@ export default defineComponent({
 `
 }
 
-export function getVueTemplate(compName: string): string {
+export function getVueTemplate(upperFirstName: string, camelCaseName: string): string {
   return `<template>
   <div></div>
 </template>
 
 <script lang="ts">
-import type { ${compName}Props } from './types'
+import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
     
   },
 })

@@ -148,8 +148,8 @@ class Generate {
     const upperFirstName = upperFirst(camelCaseName)
     const lessTemplate = getLessTemplate(kebabCase(name))
     const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
-    const tsxTemplate = getTsxTemplate(upperFirstName)
-    const vueTemplate = getVueTemplate(upperFirstName)
+    const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
+    const vueTemplate = getVueTemplate(upperFirstName, camelCaseName)
     const indexTemplate = getIndexTemplate(upperFirstName)
     const testTemplate = getTestTemplate(upperFirstName)
 
