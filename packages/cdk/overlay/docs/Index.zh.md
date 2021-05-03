@@ -26,8 +26,8 @@ import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
 type OverlayScrollStrategy = 'close' | 'reposition'
 type OverlayTrigger = 'click' | 'hover' | 'focus'
-type RefElement = Nullable<HTMLElement>
-type TriggerElement = Nullable<ComponentPublicInstance | HTMLElement>
+type RefElement = HTMLElement | null
+type TriggerElement = ComponentPublicInstance | HTMLElement | null
 
 interface OverlayTriggerEvents {
   onClick?: (event: Event) => void

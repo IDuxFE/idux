@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 import { flushPromises, mount } from '@vue/test-utils'
-import zh_CN from '../locales/zh-CN'
-import en_US from '../locales/en-US'
-import { addLocale, getLocale, useLocale } from '../useI18n'
+import { zh_CN, en_US } from '../src/locales'
+import { addLocale, getLocale, useLocale } from '../src/useI18n'
 
 const Comp = {
   template: `<div>{{globalLocale.placeholder}}</div>`,

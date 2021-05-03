@@ -1,20 +1,13 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import IxImage from '../src/Image.vue'
 import { ImageProps } from '../src/types'
 
 describe('Image.vue', () => {
-  let ImageMount: (
-    options?: MountingOptions<Partial<ImageProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<ImageProps>>>
+  let ImageMount: (options?: MountingOptions<Partial<ImageProps>>) => VueWrapper<InstanceType<typeof IxImage>>
 
   beforeEach(() => {
-    ImageMount = (options = {}) => {
-      return mount<ImageProps>(IxImage, {
-        ...options,
-      })
-    }
+    ImageMount = options => mount(IxImage, { ...options })
   })
 
   renderWork(IxImage)

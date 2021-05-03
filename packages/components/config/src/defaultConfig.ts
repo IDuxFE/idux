@@ -20,6 +20,7 @@ import type {
   GlobalConfig,
   TooltipConfig,
   PopoverConfig,
+  RadioGroupConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -64,6 +65,11 @@ const rate = shallowReactive<RateConfig>({
   icon: 'star',
   allowHalf: false,
   allowClear: false,
+})
+
+const radioGroup: RadioGroupConfig = shallowReactive({
+  size: 'medium',
+  mode: 'border',
 })
 
 // --------------------- Data Display ---------------------
@@ -156,6 +162,7 @@ export const defaultConfig: GlobalConfig = {
   input,
   textarea,
   rate,
+  radioGroup,
   // Data Display
   badge,
   card,

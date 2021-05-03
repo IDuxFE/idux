@@ -1,20 +1,13 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { DefineComponent } from 'vue'
 import IxDivider from '../src/Divider.vue'
 import { DividerProps } from '../src/types'
 
 describe('Divider.vue', () => {
-  let DividerMount: (
-    options?: MountingOptions<Partial<DividerProps>>,
-  ) => VueWrapper<InstanceType<DefineComponent<DividerProps>>>
+  let DividerMount: (options?: MountingOptions<Partial<DividerProps>>) => VueWrapper<InstanceType<typeof IxDivider>>
 
   beforeEach(() => {
-    DividerMount = (options = {}) => {
-      return mount<DividerProps>(IxDivider, {
-        ...options,
-      })
-    }
+    DividerMount = options => mount(IxDivider, { ...options })
   })
 
   renderWork(IxDivider)

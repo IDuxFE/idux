@@ -8,7 +8,6 @@ describe('Mask.vue', () => {
   // let MaskMount: (
   //   options?: MountingOptions<Partial<MaskProps>>,
   // ) => VueWrapper<InstanceType<DefineComponent<MaskProps>>>
-
   // beforeEach(() => {
   //   MaskMount = (options = {}) => {
   //     return mount<MaskProps>(IxMask, {
@@ -16,7 +15,5 @@ describe('Mask.vue', () => {
   //     })
   //   }
   // })
-
   // renderWork(IxMask)
-
 })

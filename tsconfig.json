@@ -2,12 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-
+    "declarationDir": "dist",
     "lib": ["ESNext", "DOM"],
     "target": "ES6",
     "moduleResolution": "node",
     "jsx": "preserve",
     "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "sourceMap": true,
     "declaration": true,
     "downlevelIteration": true,
@@ -24,8 +25,9 @@
     "paths": {
       "@idux": ["./packages"],
       "@idux/*": ["./packages/*"],
-      "@tests": ["./tests"]
+      "@tests": ["./tests"],
+      "@tests/*": ["./tests/*"]
     }
   },
-  "exclude": ["node_modules", "output", "dist", "__tests__"]
+  "exclude": ["node_modules", "dist"]
 }

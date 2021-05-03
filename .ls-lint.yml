@@ -11,7 +11,14 @@ ls:
 
   scripts:
     .ts: camelCase
+    .config.ts: camelCase
     .svg: kebab-case
 
 ignore:
   - packages/components/i18n/src/locales
+  - packages/cdk/node_modules
+  - packages/components/node_modules
+  - packages/cdk/CHANGELOG.md
+  - packages/components/CHANGELOG.md
+  - packages/pro/CHANGELOG.md
+  - packages/site/CHANGELOG.md

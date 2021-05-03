@@ -4,7 +4,8 @@ import { useAttrs } from '@idux/components/utils/'
 import { checkboxGroupInjectionKey, subjectInjectKey } from './checkbox'
 import type { CheckboxBindings, CheckboxProps } from './types'
 
-interface _CheckboxBindings extends CheckboxBindings {
+// TODO refactor
+export interface ICheckboxBindings extends CheckboxBindings {
   isChecked: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
@@ -22,7 +23,7 @@ interface _CheckboxBindings extends CheckboxBindings {
 
 type CheckValue = number | string | boolean
 
-export const setup = (props: CheckboxProps, { slots }: SetupContext): _CheckboxBindings => {
+export const setup = (props: CheckboxProps, { slots }: SetupContext): ICheckboxBindings => {
   const hasDefaultSlot = computed(() => hasSlot(slots))
 
   const isDisabled = useDisabled()

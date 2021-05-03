@@ -9,4 +9,3 @@ IxDrawer.install = (app: App): void => {
 export { IxDrawer }
 
 export type { DrawerComponent, DrawerProps } from './src/types'
-

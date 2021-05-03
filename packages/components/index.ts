@@ -1,5 +1,7 @@
 import type { App, Directive } from 'vue'
 
+import { version } from './version'
+
 // import General
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
@@ -14,6 +16,7 @@ import { IxAffix } from './affix'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
+import { IxRadio, IxRadioButton, IxRadioGroup } from './radio'
 import { IxRate } from './rate'
 import { IxSwitch } from './switch'
 // import Data Display
@@ -54,6 +57,9 @@ const components = [
   IxCheckboxGroup,
   IxInput,
   IxTextarea,
+  IxRadio,
+  IxRadioButton,
+  IxRadioGroup,
   IxRate,
   IxSwitch,
   // components Data Display
@@ -100,55 +106,7 @@ const install = (app: App): void => {
   })
 }
 
-const version = '0.0.0'
-
 export default {
   install,
   version,
 }
-
-export { useGlobalConfig } from './config'
-export { useLocale, addLocale, getLocale } from './i18n'
-export {
-  // export General
-  IxButton,
-  IxButtonGroup,
-  IxIcon,
-  IxTitle,
-  IxTypography,
-  // export Layout
-  IxDivider,
-  IxSpace,
-  IxRow,
-  IxCol,
-  // export Navigation
-  IxAffix,
-  // export Data Entry
-  IxCheckbox,
-  IxCheckboxGroup,
-  IxInput,
-  IxTextarea,
-  IxRate,
-  IxSwitch,
-  // export Data Display
-  IxBadge,
-  IxCard,
-  IxEmpty,
-  IxImage,
-  IxStatistic,
-  IxTimeline,
-  IxTimelineItem,
-  IxTooltip,
-  IxPopover,
-  // export Feedback
-  IxMask,
-  IxDrawer,
-  IxResult,
-  IxSpin,
-  // Other
-  IxProgress,
-  // export Other
-  IxBackTop,
-  // --- export end ---
-}
-export * from './message'

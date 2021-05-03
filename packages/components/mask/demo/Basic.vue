@@ -11,13 +11,12 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const visible = ref(false);
+    const visible = ref(false)
     const showMask = () => {
       visible.value = !visible.value
     }
     return { visible, showMask }
-  }
+  },
 })
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>
