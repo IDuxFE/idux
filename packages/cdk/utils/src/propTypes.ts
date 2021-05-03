@@ -1,3 +1,4 @@
+import { isVNode, VNode } from 'vue'
 import VueTypes, { toType, toValidableType, VueTypeDef, VueTypeValidableDef } from 'vue-types'
 
 // use `undefined` as the default value for each prop
@@ -33,6 +34,13 @@ export class PropTypes extends VueTypes {
       type: Boolean,
       default: undefined,
     }) as VueTypeValidableDef<boolean> & { default: boolean }
+  }
+
+  static get vNode(): VueTypeValidableDef<VNode> {
+    return toType('vNode', {
+      type: Object,
+      validator: (value: unknown) => isVNode(value),
+    }) as VueTypeValidableDef<VNode>
   }
 }
 
