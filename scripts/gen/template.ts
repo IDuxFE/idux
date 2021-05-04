@@ -9,55 +9,56 @@ export function getLessTemplate(compName: string): string {
 `
 }
 
-export function getTypesTemplate(compName: string): string {
+export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
   return `import type { DefineComponent } from 'vue'
 
 import { PropTypes } from '@idux/cdk/utils'
 
-export interface ${compName}Props {
+export interface ${upperFirstName}Props {
   testProp: string
 }
 
-export const ${compName}PropTypes = {
+export const ${camelCaseName}PropsDef = {
   testProp: PropTypes.string,
 }
 
-export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
+export type ${upperFirstName}Component = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 
-export function getTsxTemplate(compName: string): string {
-  return `import type { ${compName}Props } from './types'
+export function getTsxTemplate(upperFirstName: string, camelCaseName: string): string {
+  return `import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
 
   }
 })
 `
 }
 
-export function getVueTemplate(compName: string): string {
+export function getVueTemplate(upperFirstName: string, camelCaseName: string): string {
   return `<template>
   <div></div>
 </template>
+
 <script lang="ts">
-import type { ${compName}Props } from './types'
+import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
     
   },
 })

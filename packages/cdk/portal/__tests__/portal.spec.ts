@@ -36,7 +36,7 @@ describe('Portal.vue', () => {
 
   test('disabled work', async () => {
     const wrapper = PortalMount()
-    expect(wrapper.html()).toEqual('<!--teleport start--><!--teleport end-->')
+    expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ disabled: true })
     expect(wrapper.get('#overlay')).toBeDefined()
@@ -48,11 +48,11 @@ describe('Portal.vue', () => {
     document.body.appendChild(container)
 
     const wrapper1 = PortalMount({ props: { target: 'ix-container' } })
-    expect(wrapper1.html()).toEqual('<!--teleport start--><!--teleport end-->')
+    expect(wrapper1.html()).toMatchSnapshot()
     expect(document.body.querySelector('.ix-container')).not.toBeNull()
 
     const wrapper2 = PortalMount({ props: { target: 'ix-container' } })
-    expect(wrapper2.html()).toEqual('<!--teleport start--><!--teleport end-->')
+    expect(wrapper2.html()).toMatchSnapshot()
     expect(document.body.querySelectorAll('.ix-container').length).toEqual(1)
 
     await wrapper2.setProps({ target: container })

@@ -7,19 +7,23 @@ import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
 import { IxTitle } from './title'
 import { IxTypography } from './typography'
+import { IxTag } from './tag'
 // import Layout
 import { IxDivider } from './divider'
 import { IxSpace } from './space'
 import { IxRow, IxCol } from './grid'
 // import Navigation
 import { IxAffix } from './affix'
+import { IxMenu } from './menu'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxRadio, IxRadioButton, IxRadioGroup } from './radio'
 import { IxRate } from './rate'
+import { IxSelect, IxOption, IxOptionGroup } from './select'
 import { IxSwitch } from './switch'
 // import Data Display
+import { IxCollapse, IxCollapsePanel } from './collapse'
 import { IxBadge } from './badge'
 import { IxCard } from './card'
 import { IxEmpty } from './empty'
@@ -37,6 +41,7 @@ import { IxSpin } from './spin'
 import { IxProgress } from './progress'
 // import Other
 import { IxBackTop } from './back-top'
+import { IxAnchor, IxLink } from './anchor'
 // --- import end ---
 
 const components = [
@@ -45,12 +50,14 @@ const components = [
   IxButtonGroup,
   IxIcon,
   IxTitle,
+  IxTag,
   // components Layout
   IxDivider,
   IxSpace,
   IxRow,
   IxCol,
   // components Navigation
+  IxMenu,
   IxAffix,
   // components Data Entry
   IxCheckbox,
@@ -61,8 +68,13 @@ const components = [
   IxRadioButton,
   IxRadioGroup,
   IxRate,
+  IxSelect,
+  IxOption,
+  IxOptionGroup,
   IxSwitch,
   // components Data Display
+  IxCollapse,
+  IxCollapsePanel,
   IxBadge,
   IxCard,
   IxEmpty,
@@ -81,6 +93,8 @@ const components = [
   IxProgress,
   // components Other
   IxBackTop,
+  IxAnchor,
+  IxLink,
   // --- components end ---
 ]
 

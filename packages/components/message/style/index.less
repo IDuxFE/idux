@@ -20,19 +20,19 @@
     transition: all @transition-duration-base linear;
 
     &.@{message-move-up-animation}-enter-from {
-      transform: @translate-move-down-enter-from;
+      transform: @translate-move-down;
       opacity: 0;
     }
     &.@{message-move-up-animation}-leave-to {
-      transform: @translate-move-up-enter-from;
+      transform: @translate-move-up;
       opacity: 0;
     }
 
-    .message-icon-color(@message-item, info, @info-color);
-    .message-icon-color(@message-item, success, @success-color);
-    .message-icon-color(@message-item, warning, @warning-color);
-    .message-icon-color(@message-item, error, @error-color);
-    .message-icon-color(@message-item, loading, @info-color);
+    .message-icon-color(@message-item, info, @info);
+    .message-icon-color(@message-item, success, @success);
+    .message-icon-color(@message-item, warning, @warning);
+    .message-icon-color(@message-item, error, @error);
+    .message-icon-color(@message-item, loading, @info);
 
     &-content {
       text-align: left;

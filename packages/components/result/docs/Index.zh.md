@@ -48,14 +48,14 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | @result-title-color | @black | - |
 | @result-title-line-height | 1.8 | - |
 | @result-subtitle-font-size | @font-size-md | - |
-| @result-subtitle-color | @text-secondary-color | - |
+| @result-subtitle-color | @text-color-secondary | - |
 | @result-subtitle-line-height | 1.6 | - |
 | @result-extra-margin | @margin-xl | - |
 | @result-extra-children-margin | @margin-sm | - |
 | @result-content-margin | @margin-xl | - |
 | @result-content-padding | @padding-xl @spacing-gutter * 5 | - |
 | @result-content-background | @grey-l50 | - |
-| @result-success-color | @green | - |
-| @result-warning-color | @yellow | - |
-| @result-error-color | @red | - |
-| @result-info-color | @blue | - |
+| @result-success | @green | - |
+| @result-warning | @yellow | - |
+| @result-error | @red | - |
+| @result-info | @blue | - |

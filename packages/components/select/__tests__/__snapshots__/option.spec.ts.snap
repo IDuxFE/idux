@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option.vue render work 1`] = `
+"<div class=\\"ix-option\\">
+  <!--v-if--><span class=\\"ix-option-label\\">Tom</span>
+</div>"
+`;
+
+exports[`OptionGroup.vue render work 1`] = `"<div class=\\"ix-option-group\\" style=\\"display: none;\\"><span class=\\"ix-option-group-label\\">TomGroup</span></div>"`;

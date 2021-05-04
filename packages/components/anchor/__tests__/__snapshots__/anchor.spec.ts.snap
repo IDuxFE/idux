@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Anchor.vue affix work 1`] = `
+"<div>
+  <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+    <div class=\\"ix-anchor\\">
+      <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\" style=\\"top: 0px; display: none;\\"></span></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue render work 1`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\" style=\\"top: 0px; display: none;\\"></span></div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue render work 2`] = `
+"<div class=\\"ix-anchor-target\\">
+  <div id=\\"demo\\" style=\\"height: 20px;\\"></div>
+  <div id=\\"API\\" style=\\"height: 20px;\\"></div>
+  <div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+    <div class=\\"ix-affix-content\\" style=\\"position: absolute; top: 0px; left: 0px;\\">
+      <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+        <div class=\\"ix-anchor\\">
+          <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball visible\\" style=\\"top: 0px; display: none;\\"></span></div><a class=\\"ix-anchor-link ix-anchor-link-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"demo\\">demo</a><a class=\\"ix-anchor-link\\" href=\\"#API\\" data-href=\\"#API\\" title=\\"API\\">API</a><a class=\\"ix-anchor-link\\" href=\\"#noTarget\\" data-href=\\"#noTarget\\" title=\\"noTarget\\">noTarget</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

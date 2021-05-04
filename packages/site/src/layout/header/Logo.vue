@@ -1,6 +1,6 @@
 <template>
-  <a href="/" class="logo">
-    <img width="32" alt="logo" src="/logo.svg" />
-    <strong>@IDUX</strong>
-  </a>
+  <router-link to="/" class="header-logo">
+    <img alt="logo" src="/logo.svg" />
+    <strong>@idux</strong>
+  </router-link>
 </template>

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs-extra'
+import { lowerFirst } from 'lodash'
 import { join } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
@@ -24,7 +25,7 @@ export function initSite(): void {
   readdirSync(docsDirname).forEach(docs => {
     const { __content, ...meta } = loadFront(readFileSync(join(docsDirname, docs)))
     const [name, lang] = docs.split('.')
-    const path = `/${'docs'}/${name}/${lang}`
+    const path = `/${'docs'}/${lowerFirst(name)}/${lang}`
     docsMeta['docs'][name] = { ...meta, lang, path } as Meta
   })
 
@@ -90,12 +91,14 @@ const componentsSortMap: Record<string, number> = {
   其他: 7,
 }
 
+const defaultRoutes = [`{path: '/', 'component': () => import('./home/Index.vue')},`]
+
 function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
   const docs: DocsItem[] = []
   const components: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }> = []
   const componentsMap: Record<string, { lang: string; children: Omit<DocsItem, 'lang'>[] }> = {}
   const cdk: DocsItem[] = []
-  const routes: string[] = []
+  const routes: string[] = defaultRoutes
   for (const packageName in docsMeta) {
     for (const componentName in docsMeta[packageName]) {
       const { category, type = '', title, subtitle = '', lang, path, order = 0 } = docsMeta[packageName][componentName]
@@ -121,6 +124,8 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
       routes.push(route)
     }
   }
+
+  routes.push(`{path: '/:pathMatch(.*)*', redirect: '/'},`)
 
   for (const name in componentsMap) {
     const { lang, children } = componentsMap[name]

@@ -33,10 +33,10 @@ type TypographyConfig = TypographyType | TypographyOptions
 | 变量名                                | default 主题                                      | 说明 |
 | ------------------------------------- | ------------------------------------------------- | ---- |
 | `@typography-default-color`           | `@black`                                          | -    |
-| `@typography-secondary-color`         | `@text-secondary-color`                                      | -    |
-| `@typography-success-color`           | `@success-color`                                  | -    |
-| `@typography-warning-color`           | `@warning-color`                                  | -    |
-| `@typography-error-color`             | `@error-color`                                    | -    |
+| `@typography-color-secondary`         | `@text-color-secondary`                                      | -    |
+| `@typography-success`           | `@success`                                  | -    |
+| `@typography-warning`           | `@warning`                                  | -    |
+| `@typography-error`             | `@error`                                    | -    |
 | `@typography-disabled-color`          | `@disabled-color`                                      | -    |
 | `@typography-mark-padding`            | 0                                                 | -    |
 | `@typography-mark-background-color`   | `@yellow-l50`                                     | -    |
@@ -54,7 +54,7 @@ type TypographyConfig = TypographyType | TypographyOptions
 | `@typography-kbd-border-width`        | `@border-width-sm @border-width-sm @border-width-md` | -    |
 | `@typography-kbd-border-radius`       | `@border-radius-ms`                               | -    |
 | `@typography-strong-font-weight`      | `@font-weight-lg`                                 | -    |
-| `@typography-a-color`                 | `@primary-color`                                  | -    |
+| `@typography-a-color`                 | `@primary`                                  | -    |
 | `@typography-a-outline`               | `none`                                            | -    |
 | `@typography-a-cursor`                | `pointer`                                         | -    |
 | `@typography-a-transition`            | `color 0.3s`                                      | -    |

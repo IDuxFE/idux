@@ -1,5 +1,5 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { renderWork, wait } from '@tests'
 import IxPopover from '../src/Popover.vue'
 import { PopoverProps } from '../src/types'
@@ -34,6 +34,7 @@ describe('Popover.vue', () => {
 
   test('visible work', async () => {
     const wrapper = PopoverMount({ props: { title: 'Title', content: 'Content' } })
+    await nextTick()
     expect((document.body.querySelector('.ix-popover') as HTMLDivElement).style.display).toEqual('none')
     await wrapper.get('span').trigger('click')
     await wait(100)

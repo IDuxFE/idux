@@ -1,61 +1,162 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Progress.vue gapPosition work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><!--v-if--><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <!--v-if-->
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
-       a 47,47 0 1 1 0,94\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+       a 47,47 0 1 1 0,94\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
-       a 47,47 0 1 1 0,94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 0,94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
 exports[`Progress.vue gapPosition work 2`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><!--v-if--><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <!--v-if-->
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
        a 47,47 0 1 1 94,0
-       a 47,47 0 1 1 -94,0\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
+       a 47,47 0 1 1 -94,0\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
        a 47,47 0 1 1 94,0
-       a 47,47 0 1 1 -94,0\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 -94,0\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
 exports[`Progress.vue gapPosition work 3`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><!--v-if--><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <!--v-if-->
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
        a 47,47 0 1 1 -94,0
-       a 47,47 0 1 1 94,0\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
+       a 47,47 0 1 1 94,0\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
        a 47,47 0 1 1 -94,0
-       a 47,47 0 1 1 94,0\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 94,0\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
 exports[`Progress.vue render circle progress work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><!--v-if--><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <!--v-if-->
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
-       a 47,47 0 1 1 0,-94\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+       a 47,47 0 1 1 0,-94\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
-       a 47,47 0 1 1 0,-94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 0,-94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
 exports[`Progress.vue render dashboard progress work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><!--v-if--><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <!--v-if-->
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
-       a 47,47 0 1 1 0,94\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+       a 47,47 0 1 1 0,94\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
-       a 47,47 0 1 1 0,94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 0,94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
-exports[`Progress.vue render line progress work 1`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><!--v-if--><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue render line progress work 1`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <!--v-if-->
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;
 
-exports[`Progress.vue render successColor progress 1`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><div class=\\"ix-progress-success-bg\\" style=\\"height: 8px; width: 20%; background: red;\\"></div><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue render successColor progress 1`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <div class=\\"ix-progress-success-bg\\" style=\\"height: 8px; width: 20%; background: red;\\"></div>
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;
 
-exports[`Progress.vue strokeColor work 1`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><!--v-if--><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue strokeColor work 1`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <!--v-if-->
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;
 
 exports[`Progress.vue strokeColor work 2`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress-circle-gradient ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\"><defs><linearGradient id=\\"ix-progress-gradient-ix-2\\" x1=\\"100%\\" y1=\\"0%\\" x2=\\"0%\\" y2=\\"0%\\"><stop offset=\\"0%\\" stop-color=\\"#108ee9\\"></stop><stop offset=\\"100%\\" stop-color=\\"#87d068\\"></stop></linearGradient></defs><path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress-circle-gradient ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+    <defs>
+      <linearGradient id=\\"ix-progress-gradient-ix-2\\" x1=\\"100%\\" y1=\\"0%\\" x2=\\"0%\\" y2=\\"0%\\">
+        <stop offset=\\"0%\\" stop-color=\\"#108ee9\\"></stop>
+        <stop offset=\\"100%\\" stop-color=\\"#87d068\\"></stop>
+      </linearGradient>
+    </defs>
+    <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
-       a 47,47 0 1 1 0,-94\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path><path stroke=\\"url(#ix-progress-gradient-ix-2)\\" class=\\"ix-progress-circle-path\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+       a 47,47 0 1 1 0,-94\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\"></path>
+    <path stroke=\\"url(#ix-progress-gradient-ix-2)\\" class=\\"ix-progress-circle-path\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
-       a 47,47 0 1 1 0,-94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\"></path></svg><div class=\\"ix-progress-text\\">50%</div></div>"
+       a 47,47 0 1 1 0,-94\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\"></path>
+  </svg>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
 `;
 
-exports[`Progress.vue strokeColor work 3`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><!--v-if--><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue strokeColor work 3`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <!--v-if-->
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;
 
-exports[`Progress.vue strokeColor work 4`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><!--v-if--><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue strokeColor work 4`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <!--v-if-->
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%; background: red;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;
 
-exports[`Progress.vue trailColor work 1`] = `"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\"><div class=\\"ix-progress-outer\\"><div class=\\"ix-progress-inner\\"><!--v-if--><div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div></div></div><div class=\\"ix-progress-text\\">50%</div></div>"`;
+exports[`Progress.vue trailColor work 1`] = `
+"<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
+  <div class=\\"ix-progress-outer\\">
+    <div class=\\"ix-progress-inner\\">
+      <!--v-if-->
+      <div class=\\"ix-progress-bg\\" style=\\"height: 8px; width: 50%;\\"></div>
+    </div>
+  </div>
+  <div class=\\"ix-progress-text\\">50%</div>
+</div>"
+`;

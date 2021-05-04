@@ -1,3 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Statistic.vue render work 1`] = `"<div class=\\"ix-statistic\\"><!--v-if--><div class=\\"ix-statistic-content\\"><!--v-if--><span class=\\"ix-statistic-content-value\\"><span class=\\"ix-statistic-content-value-int\\"></span><!--v-if--></span><!--v-if--></div></div>"`;
+exports[`Statistic.vue render work 1`] = `
+"<div class=\\"ix-statistic\\">
+  <!--v-if-->
+  <div class=\\"ix-statistic-content\\">
+    <!--v-if--><span class=\\"ix-statistic-content-value\\"><span class=\\"ix-statistic-content-value-int\\"></span>
+    <!--v-if--></span>
+    <!--v-if-->
+  </div>
+</div>"
+`;

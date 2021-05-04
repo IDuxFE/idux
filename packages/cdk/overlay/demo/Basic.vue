@@ -1,19 +1,10 @@
 <template>
-  <ix-button
-    ref="triggerRef"
-    @click="triggerEvents.onClick"
-    @mouseenter="triggerEvents.onMouseenter"
-    @mouseleave="triggerEvents.onMouseleave"
-    @focus="triggerEvents.onFocus"
-    @blur="triggerEvents.onBlur"
-    >Click</ix-button
-  >
-  <ix-button @click="handleClick">Update</ix-button>
-  <div v-if="visibility" ref="overlayRef">
-    <div v-click-outside="hide" @mouseenter="overlayEvents.onMouseenter" @mouseleave="overlayEvents.onMouseleave">
-      tooltip
-      <div ref="arrowRef"></div>
-    </div>
+  <ix-button ref="triggerRef" v-click-outside="hide">Click</ix-button>
+  <ix-button @click="handleClick">Update Trigger</ix-button>
+
+  <div v-show="visibility" ref="overlayRef">
+    tooltip
+    <div ref="arrowRef"></div>
   </div>
 </template>
 
@@ -23,33 +14,23 @@ import { useOverlay } from '@idux/cdk/overlay'
 
 export default defineComponent({
   setup() {
-    const {
-      initialize,
-      overlayRef,
-      triggerRef,
-      triggerEvents,
-      overlayEvents,
-      update,
-      arrowRef,
-      visibility,
-      hide,
-    } = useOverlay({
+    const { initialize, overlayRef, triggerRef, update, arrowRef, visibility, hide } = useOverlay({
       visible: false,
       trigger: 'click',
       placement: 'top',
       scrollStrategy: 'reposition',
       offset: [5, 5],
-      showDelay: 100,
-      hideDelay: 1000,
+      showDelay: 0,
+      hideDelay: 100,
       allowEnter: true,
     })
     onMounted(initialize)
 
     const handleClick = () => {
-      update({ trigger: 'focus' })
+      update({ trigger: 'hover' })
     }
 
-    return { overlayRef, triggerRef, triggerEvents, overlayEvents, handleClick, arrowRef, visibility, hide }
+    return { overlayRef, triggerRef, handleClick, arrowRef, visibility, hide }
   },
 })
 </script>
