@@ -1,3 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Spin.vue render work 1`] = `"<div class=\\"ix-spin\\"><div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-small\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin ix-spin-spinner-icon\\" role=\\"img\\" arialabel=\\"loading\\"></i><!--v-if--></div><!--v-if--></div>"`;
+exports[`Spin.vue render work 1`] = `
+"<div class=\\"ix-spin\\">
+  <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-small\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin ix-spin-spinner-icon\\" role=\\"img\\" arialabel=\\"loading\\"></i>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;

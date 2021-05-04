@@ -4,6 +4,7 @@ import type { App, Directive } from 'vue'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
 import { IxTitle } from '@idux/components/title'
+import { IxTag } from '@idux/components/tag'
 import { IxTypography } from '@idux/components/typography'
 // import Layout
 import { IxDivider } from '@idux/components/divider'
@@ -11,13 +12,16 @@ import { IxSpace } from '@idux/components/space'
 import { IxRow, IxCol } from '@idux/components/grid'
 // import Navigation
 import { IxAffix } from '@idux/components/affix'
+import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@idux/components/menu'
 // import Data Entry
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
 import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
+import { IxSelect, IxOption, IxOptionGroup } from '@idux/components/select'
 import { IxSwitch } from '@idux/components/switch'
 // import Data Display
+import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxBadge } from '@idux/components/badge'
 import { IxCard } from '@idux/components/card'
 import { IxEmpty } from '@idux/components/empty'
@@ -30,8 +34,10 @@ import { IxPopover } from '@idux/components/popover'
 import { IxResult } from '@idux/components/result'
 import { IxSpin } from '@idux/components/spin'
 import { IxProgress } from '@idux/components/progress'
+import { IxMessage } from '@idux/components/message'
 // import Other
 import { IxBackTop } from '@idux/components/back-top'
+import { IxAnchor, IxLink } from '@idux/components/anchor'
 // --- import end ---
 
 const components = [
@@ -40,6 +46,7 @@ const components = [
   IxButtonGroup,
   IxIcon,
   IxTitle,
+  IxTag,
   // components Layout
   IxDivider,
   IxSpace,
@@ -47,6 +54,11 @@ const components = [
   IxCol,
   // components Navigation
   IxAffix,
+  IxMenu,
+  IxMenuItem,
+  IxMenuItemGroup,
+  IxMenuDivider,
+  IxSubMenu,
   // components Data Entry
   IxCheckbox,
   IxCheckboxGroup,
@@ -56,8 +68,13 @@ const components = [
   IxRadioButton,
   IxRadioGroup,
   IxRate,
+  IxSelect,
+  IxOption,
+  IxOptionGroup,
   IxSwitch,
   // components Data Display
+  IxCollapse,
+  IxCollapsePanel,
   IxBadge,
   IxCard,
   IxEmpty,
@@ -73,6 +90,8 @@ const components = [
   IxProgress,
   // components Other
   IxBackTop,
+  IxAnchor,
+  IxLink,
   // --- components end ---
 ]
 
@@ -88,6 +107,8 @@ const directives: Record<string, Directive> = {
   // --- directives end ---
 }
 
+const plugins = [IxMessage]
+
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
@@ -95,6 +116,10 @@ const install = (app: App): void => {
 
   Object.keys(directives).forEach(key => {
     app.directive(key, directives[key])
+  })
+
+  plugins.forEach(plugin => {
+    app.use(plugin)
   })
 }
 

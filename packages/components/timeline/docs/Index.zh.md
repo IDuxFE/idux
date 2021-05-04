@@ -1,9 +1,9 @@
 ---
 category: components
-type: 通用
+type: 数据展示
 title: Timeline
 subtitle: 时间轴
-cover:
+order: 0
 ---
 
 垂直展示的时间流信息。
@@ -33,6 +33,6 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `color` | 时间节点颜色 | `string` | `#1890ff` | - |- |
+| `color` | 时间节点颜色 | `PresetColor \| StatusColor \| string` | `primary` | - |- |
 | `dot` | 时间轴点 | `string\|v-slot:dot` | `undefined` | - |- |
 | `position` | 时间节点内容的位置 | `left\|right` | `undefined` | - |- |

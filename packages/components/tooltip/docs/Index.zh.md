@@ -1,6 +1,6 @@
 ---
 category: components
-type: 数据展示
+type: 反馈
 title: Tooltip
 subtitle: 文字提示
 order: 0
@@ -23,7 +23,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `title` | 浮层的标题 | `string \| v-slot: title` | - | - | - |
-| `placement` | 浮层的对齐方式 | `Placement` | `top` | ✅ | - |
+| `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
 | `visible` | 是否显隐 | `boolean` | - | - | - |
 | `trigger` | 浮层触发方式 | `OverlayTrigger` | `hover` | ✅ | - |
 | `showDelay` | 浮层显示延时 | `number` | 100 | ✅ | - |

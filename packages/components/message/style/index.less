@@ -3,6 +3,7 @@
 
 @message-prefix: ~'@{idux-prefix}-message';
 @message-item: ~'@{message-prefix}-item';
+
 @message-move-up-animation: move-up;
 
 .@{message-prefix} {
@@ -19,18 +20,19 @@
     transition: all @transition-duration-base linear;
 
     &.@{message-move-up-animation}-enter-from {
-      transform: @translate-move-down-enter-from;
+      transform: @translate-move-down;
       opacity: 0;
     }
     &.@{message-move-up-animation}-leave-to {
-      transform: @translate-move-up-enter-from;
+      transform: @translate-move-up;
       opacity: 0;
     }
 
-    .message-bg-color(@message-item, success, @success-color);
-    .message-bg-color(@message-item, error, @error-color);
-    .message-bg-color(@message-item, info, @info-color);
-    .message-bg-color(@message-item, warn, @warning-color);
+    .message-icon-color(@message-item, info, @info);
+    .message-icon-color(@message-item, success, @success);
+    .message-icon-color(@message-item, warning, @warning);
+    .message-icon-color(@message-item, error, @error);
+    .message-icon-color(@message-item, loading, @info);
 
     &-content {
       text-align: left;
@@ -51,7 +53,7 @@
           position: relative;
           top: 3px;
           flex-shrink: 0;
-          flex-grow:0;
+          flex-grow: 0;
           margin-right: @message-item-icon-margin-right;
           font-size: @message-item-icon-size;
           vertical-align: top;

@@ -2,22 +2,9 @@ import type { Options, Placement } from '@popperjs/core'
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
 export type OverlayScrollStrategy = 'close' | 'reposition'
-export type OverlayTrigger = 'click' | 'hover' | 'focus'
+export type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type OverlayElement = ComponentPublicInstance | HTMLElement
-
-export interface OverlayTriggerEvents {
-  onClick?: (event: Event) => void
-  onMouseenter?: (event: Event) => void
-  onMouseleave?: (event: Event) => void
-  onFocus?: (event: Event) => void
-  onBlur?: (event: Event) => void
-}
-
-export interface OverlayPopperEvents {
-  onMouseenter: () => void
-  onMouseleave: () => void
-  onClick: (event: MouseEvent) => void
-}
+export type OverlayPlacement = Placement
 
 export interface OverlayOptions {
   /**
@@ -36,7 +23,7 @@ export interface OverlayOptions {
   /* Whether to show arrow. */
   showArrow?: boolean
   /* Alignment of floating layer. */
-  placement: Placement
+  placement: OverlayPlacement
   /**
    * The options of popper.
    * Used when ConnectOverlayOptions cannot meet the demand.
@@ -78,12 +65,12 @@ export interface OverlayInstance<
    * Show the overlay.
    * The style of the overlay container will be set to block.
    */
-  show: (immediate?: boolean) => void
+  show: (showDelay?: number) => void
   /**
    * Hide the overlay.
    * The style of the overlay container will be set to none.
    */
-  hide: (immediate?: boolean) => void
+  hide: (hideDelay?: number) => void
   /**
    * Update overlay.
    * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.
@@ -113,18 +100,18 @@ export interface OverlayInstance<
    */
   triggerRef: Ref<TE | null>
   /**
-   * Manually bind to the event on the trigger.
+   * Manually bind to the evt on the trigger.
    */
-  triggerEvents: ComputedRef<OverlayTriggerEvents>
-  /**
-   * Manually bind to events on the overlay.
-   */
-  overlayEvents: OverlayPopperEvents
+  triggerEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the overlay.
    * The caller needs to bind the variable to the view.
    */
   overlayRef: Ref<OE | null>
+  /**
+   * Manually bind to events on the overlay.
+   */
+  overlayEventHandler: (evt: Event) => void
   /**
    * The truth DOM node of the arrow.
    * If showArrow is false, we won't return arrowRef.

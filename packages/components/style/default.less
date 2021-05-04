@@ -15,25 +15,23 @@
 @line-height-base: 1.5715;
 
 /* color -------------------------- */
-@primary-color: @blue;
-@info-color: @primary-color;
-@success-color: @green;
-@warning-color: @yellow;
-@error-color: @red;
-
 @background-color-base: hsv(0, 0, 95%); // Default grey background color
 @background-color-light: hsv(0, 0, 98%); // background of header and selected item
 @background-color-body: @white;
 @background-color-component: @white;
+@background-color-component-dark: #191c24;
 
 @disabled-color: fade(@black, 25%);
+@disabled-color-dark: fade(@white, 35%);
 @disabled-bg-color: @background-color-base;
 
 @heading-color: fade(@black, 85%);
 
 /* text -------------------------- */
 @text-color: fade(@black, 85%);
-@text-secondary-color: fade(@black, 45%);
+@text-color-secondary: fade(@black, 45%);
+@text-color-dark: fade(@white, 85%);
+@text-color-secondary-dark: fade(@white, 65%);
 
 // General
 /* button -------------------------- */
@@ -66,8 +64,8 @@
 @button-disable-bg-color: @disabled-bg-color;
 @button-disable-border: @border-color;
 
-@button-primary-color: @white;
-@button-primary-bg: @primary-color;
+@button-primary: @white;
+@button-primary-bg: @primary;
 @button-primary-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 @button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
@@ -75,14 +73,14 @@
 @button-default-bg: @background-color-component;
 @button-default-border: @border-color;
 
-@button-danger-color: @error-color;
-@button-danger-bg: @error-color;
+@button-danger-color: @error;
+@button-danger-bg: @error;
 
 @button-ghost-color: @background-color-component;
 @button-ghost-bg: transparent;
 @button-ghost-border: @background-color-component;
 
-@button-link-color: @primary-color;
+@button-link-color: @primary;
 @button-link-hover-bg: transparent;
 
 @button-text-color: @text-color;
@@ -108,19 +106,31 @@
 @title-line-height: 1;
 
 @title-color: @black;
-@title-sub-color: @text-secondary-color;
+@title-sub-color: @text-color-secondary;
 @title-bg-color: @background-color-component;
 
 @title-prefix-margin: @margin-md;
 @title-content-margin: @margin-md;
 @title-extra-margin: @margin-sm;
 
+/* tag -------------------------- start */
+@text-color-inverse: @white;
+@tag-font-size: @font-size-sm;
+@tag-default-color: @black;
+@tag-padding: @padding-xs;
+@tag-default-padding: 2px 8px;
+@tag-margin: @margin-sm;
+@tag-border-radius: @border-radius-md;
+@tag-round-border-radius: 20px;
+@tag-default-border-color: #d9d9d9;
+@tag-default-background-color: #fafafa;
+
 /* typography -------------------------- */
 @typography-default-color: @text-color;
-@typography-secondary-color: @text-secondary-color;
-@typography-success-color: @success-color;
-@typography-warning-color: @warning-color;
-@typography-error-color: @error-color;
+@typography-color-secondary: @text-color-secondary;
+@typography-success: @success;
+@typography-warning: @warning;
+@typography-error: @error;
 @typography-disabled-color: @disabled-color;
 @typography-mark-padding: 0;
 @typography-mark-background-color: @yellow-l50;
@@ -139,7 +149,7 @@
 @typography-kbd-border-width: @border-width-sm @border-width-sm @border-width-md;
 @typography-kbd-border-radius: @border-radius-md;
 @typography-strong-font-weight: @font-weight-lg;
-@typography-a-color: @primary-color;
+@typography-a-color: @primary;
 @typography-a-outline: none;
 @typography-a-cursor: pointer;
 @typography-a-transition: color 0.3s;
@@ -176,6 +186,47 @@
 @grid-columns: 24;
 
 // Navigation
+/* menu -------------------------- */
+@menu-text-color: @text-color;
+@menu-bg-color: @background-color-component;
+@menu-highlight-color: @primary;
+@menu-highlight-bg-color: ~`colorPalette('@{primary}', -50) `;
+@menu-disabled-color: @disabled-color;
+@menu-disabled-bg-color: transparent;
+@menu-border-width: @border-width-sm;
+@menu-border-style: @border-style;
+@menu-border-color: @border-color-split;
+@menu-font-size: @font-size-md;
+
+@menu-item-height: @height-lg;
+@menu-item-padding-left: @padding-md;
+@menu-item-padding-right: @padding-xl;
+@menu-item-margin: @margin-xs 0;
+@menu-item-icon-margin-right: @margin-sm;
+@menu-item-border-right-width: @border-width-lg;
+@menu-item-border-bottom-width: @border-width-md;
+
+@menu-item-group-text-color: @text-color-secondary;
+@menu-item-group-content-padding-left: @padding-xl;
+
+@menu-item-horizontal-padding: 0 @padding-xs;
+
+@menu-item-divider-margin: @margin-xs;
+
+@menu-sub-suffix-icon-right: 8px;
+
+@menu-overlay-zindex: @zindex-l4-3;
+@menu-overlay-min-width: 128px;
+@menu-overlay-border-radius: @border-radius-md;
+@menu-overlay-box-shadow: @shadow-bottom-md;
+
+@menu-dark-disabled-color: @disabled-color-dark;
+@menu-dark-color: @text-color-dark;
+@menu-dark-bg-color: @background-color-component-dark;
+@menu-dark-highlight-bg-color: fade(@white, 6%);
+
+@menu-collapsed-width: 64px;
+@menu-collapsed-font-size: @font-size-lg;
 
 // Data Entry
 
@@ -189,13 +240,13 @@
 @checkbox-tick-border-style: @border-width-md solid @white;
 @checkbox-tick-width: (@checkbox-width / @font-size-base) * 5px;
 @checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
-@checkbox-bg-indeterminate-color: @primary-color;
+@checkbox-bg-indeterminate-color: @primary;
 @checkbox-indeterminate-width: 8px;
 @checkbox-indeterminate-height: 8px;
-@checkbox-border-checked-color: @primary-color;
-@checkbox-border-hover-color: @primary-color;
+@checkbox-border-checked-color: @primary;
+@checkbox-border-hover-color: @primary;
 @checkbox-border-focus-color: @blue-d30;
-@checkbox-bg-checked-color: @primary-color;
+@checkbox-bg-checked-color: @primary;
 @checkbox-border-disabled-color: @grey;
 @checkbox-tick-disabled-color: @grey;
 @checkbox-bg-disabled-color: @white;
@@ -239,12 +290,12 @@
 @input-border-color: @border-color;
 
 @input-color: @text-color;
-@input-secondary-color: @text-secondary-color;
+@input-color-secondary: @text-color-secondary;
 @input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
-@input-hover-border-color: ~`colorPalette('@{primary-color}', -10) `;
-@input-active-border-color: @primary-color;
+@input-hover-border-color: ~`colorPalette('@{primary}', -10) `;
+@input-active-border-color: @primary;
 @input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 15%);
 @input-disabled-color: @disabled-color;
 @input-disabled-bg-color: @disabled-bg-color;
@@ -277,8 +328,9 @@
 @switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 @switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
 @switch-disable-opacity: 0.4;
+
 /* radio -------------------------------- */
-@radio-theme-color: @primary-color;
+@radio-theme-color: @primary;
 @radio-font-size: @font-size-lg;
 @radio-font-color: @grey-d40;
 @radio-button-mode-value: border, fill;
@@ -334,6 +386,72 @@
 @radio-button-font-weight-base: @font-weight-base;
 @radio-button-line-height-base: @height-sm;
 
+/* select -------------------------- */
+@option-height: @height-md;
+@option-margin-left: @margin-md;
+@option-padding: @padding-sm;
+@option-color: @text-color;
+@option-font-weight: @font-weight-md;
+@option-font-size: @font-size-md;
+@option-transition: background @transition-duration-base @ease-in-out;
+
+@option-disabled-color: @disabled-color;
+@option-active-bg-color: @grey-l50;
+@option-selected-color: @primary;
+@option-selected-bg-color: tint(@primary, 90%);
+@option-selected-font-weight: @font-weight-xl;
+
+@option-container-zindex: @zindex-l4-3;
+@option-container-padding: @padding-sm 0;
+@option-container-bg-color: @background-color-component;
+@option-container-border-radius: @border-radius-sm;
+@option-container-box-shadow: @shadow-bottom-md;
+@option-container-empty-color: @option-disabled-color;
+@option-container-group-border-top: @border-width-sm @border-style @border-color;
+
+@select-selector-font-size: @font-size-md;
+@select-selector-bg-color: @input-bg-color;
+@select-selector-border-width: @input-border-width;
+@select-selector-border-style: @input-border-style;
+@select-selector-border-color: @input-border-color;
+@select-selector-border-radius: @input-border-radius;
+@select-selector-transition: @input-transition;
+
+@select-selector-hover-border-color: @input-hover-border-color;
+@select-selector-active-border-color: @input-active-border-color;
+@select-selector-active-box-shadow: @input-active-box-shadow;
+
+@select-selector-disabled-color: @input-disabled-color;
+@select-selector-disabled-bg-color: @input-disabled-bg-color;
+
+@select-placeholder-color: @input-placeholder-color;
+@select-icon-color: @select-placeholder-color;
+@select-icon-bg-color: @select-selector-bg-color;
+@select-icon-hover-color: @input-color-secondary;
+@select-icon-font-size: @font-size-sm;
+@select-icon-margin-right: @margin-sm;
+@select-icon-transition: @select-selector-transition;
+
+@select-height-lg: @input-height-lg;
+@select-height-md: @input-height-md;
+@select-height-sm: @input-height-sm;
+@select-padding-horizontal-lg: @input-padding-horizontal-lg;
+@select-padding-horizontal-md: @input-padding-horizontal-md;
+@select-padding-horizontal-sm: @input-padding-horizontal-sm;
+@select-font-size-lg: @input-font-size-lg;
+@select-font-size-md: @input-font-size-md;
+@select-font-size-sm: @input-font-size-sm;
+
+@select-multiple-padding: @input-padding-vertical-md;
+@select-multiple-item-padding: 0 @padding-xs;
+@select-multiple-item-bg-color: @background-color-base;
+@select-multiple-item-disabled-color: @input-disabled-color;
+@select-multiple-item-disabled-border-color: @select-selector-border-color;
+@select-multiple-item-border-width: @border-width-sm;
+@select-multiple-item-border: @select-multiple-item-border-width @border-style @border-color-split;
+@select-multiple-item-border-radius: @select-selector-border-radius;
+@select-multiple-item-label-margin-left: @margin-xs;
+@select-multiple-item-remove-icon-font-size: @font-size-xs;
 
 // Data Display
 
@@ -357,6 +475,16 @@
 @card-padding-sm: @padding-sm;
 @card-min-height: 128px;
 @card-bg-color: #fff;
+
+/* collapse -------------------------- */
+@collapse-panel-border-style: @border-width-sm solid @border-color;
+@collapse-panel-header-bg-color: #fafafa;
+@collapse-panel-content-color: @white;
+@collapse-panel-content-padding: 15px;
+@collapse-panel-disabled-color: @disabled-color;
+@collapse-panel-disabled-bg-color: @disabled-bg-color;
+@collapse-panel-font-size: @font-size-md;
+@collapse-panel-line-hight: @height-lg;
 
 /* empty -------------------------- */
 @empty-margin-md: @margin-md;
@@ -456,25 +584,25 @@
 @result-content-margin: @margin-xl;
 @result-content-padding: @padding-xl @spacing-gutter * 5;
 @result-content-background: @grey-l50;
-@result-success-color: @success-color;
-@result-warning-color: @warning-color;
-@result-error-color: @error-color;
-@result-info-color: @info-color;
+@result-success: @success;
+@result-warning: @warning;
+@result-error: @error;
+@result-info: @info;
 
 /* spin -------------------------- */
 @spin-zindex: @zindex-l2-base;
-@spin-tip-color: @primary-color;
-@spin-icon-color: @primary-color;
+@spin-tip-color: @primary;
+@spin-icon-color: @primary;
 
 @spin-font-size-sm: @font-size-md;
 @spin-font-size-md: @font-size-lg;
 @spin-font-size-lg: @font-size-xl;
 
 /* progress -------------------------- */
-@progress-normal-bg: @primary-color;
-@progress-success-bg: @success-color;
-@progress-exception-bg: @error-color;
-@progress-active-bg: @primary-color;
+@progress-normal-bg: @primary;
+@progress-success-bg: @success;
+@progress-exception-bg: @error;
+@progress-active-bg: @primary;
 @progress-trail-bg: #f5f5f5;
 @progress-text-width: 36px;
 @progress-border-radius: 100px;
@@ -503,6 +631,24 @@
 
 @back-top-bottom: 50px;
 
-@back-top-background-color: @primary-color;
+@back-top-background-color: @primary;
+
+// --- end ---
+
+/* anchor-top -------------------------- */
+@anchor-bg: @background-color-component;
+@anchor-wrapper-margin-left: -@spacing-xs;
+@anchor-wrapper-padding-left: @spacing-xs;
+@anchor-color: @text-color;
+@anchor-border-width: @border-width-md;
+@anchor-border-color: @border-color;
+
+@anchor-ink-ball-size: 8px;
+@anchor-ink-ball-radius: 50%;
+
+@anchor-link-padding: @spacing-sm 0 @spacing-sm @spacing-md;
+@anchor-link-line-height: 1;
+@anchor-link-margin-bottom: 6px;
+@anchor-link-active-color: @primary;
 
 // --- end ---

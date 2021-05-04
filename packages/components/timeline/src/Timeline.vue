@@ -71,8 +71,8 @@ export default defineComponent({
   },
 })
 
-const getItemPosition = (vnode: VNode, index: number, position: TimelinePosition): TimelineItemPosition => {
-  const itemPosition = vnode.props?.position
+const getItemPosition = (node: VNode, index: number, position: TimelinePosition): TimelineItemPosition => {
+  const itemPosition = node.props?.position
   if (itemPosition) {
     return itemPosition
   }

@@ -1,0 +1,51 @@
+@import '../../style/default.less';
+
+@collapse-prefix: ~'@{idux-prefix}-collapse';
+
+.@{collapse-prefix} {
+  border-bottom: @collapse-panel-border-style;
+
+  &-panel-disabled {
+    color: @collapse-panel-disabled-color;
+    background-color: @collapse-panel-disabled-bg-color;
+  }
+
+  &-panel-header {
+    height: @collapse-panel-line-hight;
+    line-height: @collapse-panel-line-hight;
+    border: @collapse-panel-border-style;
+    background-color: @collapse-panel-header-bg-color;
+    cursor: pointer;
+
+    &-content {
+      padding: @collapse-panel-content-padding;
+      border-left: @collapse-panel-border-style;
+      border-right: @collapse-panel-border-style;
+
+      &-borderless{
+        border: none;
+      }
+    }
+
+    &-inactive{
+      border-bottom: none;
+    }
+
+    &-borderless{
+      border: none;
+    }
+
+    &-disabled{
+      cursor: not-allowed;
+    }
+  }
+
+  &-borderless{
+   border: none;
+  }
+
+  &-panel-icon {
+    font-size: @collapse-panel-font-size;
+    padding: @collapse-panel-content-padding;
+  }
+}

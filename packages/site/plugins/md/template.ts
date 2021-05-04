@@ -29,22 +29,22 @@ export const getComponentScript = (componentName: string, imports: string[], com
 export const getExampleTemplate = (isAlone: boolean, first: string, second?: string): string => {
   if (isAlone) {
     return `
-  <div>
-	  <div>
+  <ix-row gutter="8">
+    <ix-col span="24">
 		${first}
-	  </div>
-  </div>
+	  </ix-col>
+  </ix-row>
 `
   }
   return `
-  <div style="display: flex;">
-    <div style="flex: 1; width: 50%; padding-right: 16px">
+  <ix-row gutter="16">
+    <ix-col lg="12" span="24">
       ${first}
-    </div>
-    <div style="flex: 1; width: 50%; padding-left: 16px">
+    </ix-col>
+    <ix-col lg="12" span="24">
       ${second}
-    </div>
-  </div>
+    </ix-col>
+  </ix-row>
 `
 }
 
@@ -65,13 +65,13 @@ export const getDemoTemplate = (options: {
     packageName="${packageName}"
     componentName="${componentName}"
     demoName="${demoName}"
-    :title="language==='zh' ? '${zhTitle}' : '${enTitle}'"
+    :title="lang==='zh' ? '${zhTitle}' : '${enTitle}'"
     :copied="copied"
     @copy="onCopy"
   >
     <template #description>
-    <span v-if="language==='zh'">${zhDescription}</span>
-    <span v-if="language==='en'">${enDescription}</span>
+    <span v-if="lang==='zh'">${zhDescription}</span>
+    <span v-if="lang==='en'">${enDescription}</span>
     </template>
     <template #rawCode><raw-demo></raw-demo></template>
     <template #highlightCode><div v-pre>${code}</div></template>
@@ -80,6 +80,7 @@ export const getDemoTemplate = (options: {
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'
 import { useClipboard } from '@idux/cdk/clipboard'
+import { appContextToken } from '@idux/site/context'
 import ${demoName} from './${demoName}.vue'
 
 export default defineComponent({
@@ -98,8 +99,8 @@ export default defineComponent({
       })
     }
 
-    const language = inject('language') as Ref<string>
-    return { copied, onCopy, language }
+    const { lang } = inject(appContextToken)!
+    return { copied, onCopy, lang }
   },
 })
 </script>

@@ -1,4 +1,4 @@
-## Contributing to Idux
+## Contributing to @idux
 
 [贡献指南](https://github.com/IduxFE/idux/blob/main/packages/site/src/docs/Contributing.zh.md)
 

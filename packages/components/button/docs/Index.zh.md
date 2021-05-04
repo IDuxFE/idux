@@ -79,18 +79,18 @@ cover:
 | @button-border-radius | @border-radius-sm | - |
 | @button-disable-opacity | 0.4 | - |
 | @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |
-| @button-primary-color | @white | - |
-| @button-primary-bg | @primary-color | - |
+| @button-primary | @white | - |
+| @button-primary-bg | @primary | - |
 | @button-primary-text-shadow | 0 -1px 0 rgba(0, 0, 0, 0.15) | - |
 | @button-default-color | @text-color | - |
 | @button-default-bg | @background-color-component | - |
 | @button-default-border | @border-color | - |
-| @button-danger-color | @error-color | - |
-| @button-danger-bg | @error-color | - |
+| @button-danger-color | @error | - |
+| @button-danger-bg | @error | - |
 | @button-ghost-color | @background-color-component | - |
 | @button-ghost-color | transparent | - |
 | @button-ghost-border | @background-color-component | - |
-| @button-link-color | @primary-color | - |
+| @button-link-color | @primary | - |
 | @button-link-hover-bg | transparent | - |
 | @button-text-color | @text-color | - |
 | @button-text-hover-bg | rgba(0, 0, 0, 0.12) | - |

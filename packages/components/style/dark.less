@@ -1,0 +1,265 @@
+@import './default.less';
+
+@theme: dark;
+
+// @background-color-component: #191c24;
+
+/* Red -------------------------- */
+@red-l50: mix(color(~`colorPalette('@{red-base}', 20) `), @background-color-component, 15%);
+@red-l40: mix(color(~`colorPalette('@{red-base}', 10) `), @background-color-component, 25%);
+@red-l30: mix(@red-base, @background-color-component, 30%);
+@red-l20: mix(@red-base, @background-color-component, 45%);
+@red-l10: mix(@red-base, @background-color-component, 65%);
+@red: mix(@red-base, @background-color-component, 85%);
+@red-d10: mix(color(~`colorPalette('@{red-base}', -10) `), @background-color-component, 90%);
+@red-d20: mix(color(~`colorPalette('@{red-base}', -20) `), @background-color-component, 95%);
+@red-d30: mix(color(~`colorPalette('@{red-base}', -30) `), @background-color-component, 97%);
+@red-d40: mix(color(~`colorPalette('@{red-base}', -40) `), @background-color-component, 98%);
+@red-d50: mix(color(~`colorPalette('@{red-base}', -50) `), @background-color-component, 99%);
+
+/* Orange -------------------------- */
+@orange-l50: mix(color(~`colorPalette('@{orange-base}', 20) `), @background-color-component, 15%);
+@orange-l40: mix(color(~`colorPalette('@{orange-base}', 10) `), @background-color-component, 25%);
+@orange-l30: mix(@orange-base, @background-color-component, 30%);
+@orange-l20: mix(@orange-base, @background-color-component, 45%);
+@orange-l10: mix(@orange-base, @background-color-component, 65%);
+@orange: mix(@orange-base, @background-color-component, 85%);
+@orange-d10: mix(color(~`colorPalette('@{orange-base}', -10) `), @background-color-component, 90%);
+@orange-d20: mix(color(~`colorPalette('@{orange-base}', -20) `), @background-color-component, 95%);
+@orange-d30: mix(color(~`colorPalette('@{orange-base}', -30) `), @background-color-component, 97%);
+@orange-d40: mix(color(~`colorPalette('@{orange-base}', -40) `), @background-color-component, 98%);
+@orange-d50: mix(color(~`colorPalette('@{orange-base}', -50) `), @background-color-component, 99%);
+
+/* Gold -------------------------- */
+@gold-l50: mix(color(~`colorPalette('@{gold-base}', 20) `), @background-color-component, 15%);
+@gold-l40: mix(color(~`colorPalette('@{gold-base}', 10) `), @background-color-component, 25%);
+@gold-l30: mix(@gold-base, @background-color-component, 30%);
+@gold-l20: mix(@gold-base, @background-color-component, 45%);
+@gold-l10: mix(@gold-base, @background-color-component, 65%);
+@gold: mix(@gold-base, @background-color-component, 85%);
+@gold-d10: mix(color(~`colorPalette('@{gold-base}', -10) `), @background-color-component, 90%);
+@gold-d20: mix(color(~`colorPalette('@{gold-base}', -20) `), @background-color-component, 95%);
+@gold-d30: mix(color(~`colorPalette('@{gold-base}', -30) `), @background-color-component, 97%);
+@gold-d40: mix(color(~`colorPalette('@{gold-base}', -40) `), @background-color-component, 98%);
+@gold-d50: mix(color(~`colorPalette('@{gold-base}', -50) `), @background-color-component, 99%);
+
+/* Yellow -------------------------- */
+@yellow-l50: mix(color(~`colorPalette('@{yellow-base}', 20) `), @background-color-component, 15%);
+@yellow-l40: mix(color(~`colorPalette('@{yellow-base}', 10) `), @background-color-component, 25%);
+@yellow-l30: mix(@yellow-base, @background-color-component, 30%);
+@yellow-l20: mix(@yellow-base, @background-color-component, 45%);
+@yellow-l10: mix(@yellow-base, @background-color-component, 65%);
+@yellow: mix(@yellow-base, @background-color-component, 85%);
+@yellow-d10: mix(color(~`colorPalette('@{yellow-base}', -10) `), @background-color-component, 90%);
+@yellow-d20: mix(color(~`colorPalette('@{yellow-base}', -20) `), @background-color-component, 95%);
+@yellow-d30: mix(color(~`colorPalette('@{yellow-base}', -30) `), @background-color-component, 97%);
+@yellow-d40: mix(color(~`colorPalette('@{yellow-base}', -40) `), @background-color-component, 98%);
+@yellow-d50: mix(color(~`colorPalette('@{yellow-base}', -50) `), @background-color-component, 99%);
+
+/* Canary -------------------------- */
+@canary-l50: mix(color(~`colorPalette('@{canary-base}', 20) `), @background-color-component, 15%);
+@canary-l40: mix(color(~`colorPalette('@{canary-base}', 10) `), @background-color-component, 25%);
+@canary-l30: mix(@canary-base, @background-color-component, 30%);
+@canary-l20: mix(@canary-base, @background-color-component, 45%);
+@canary-l10: mix(@canary-base, @background-color-component, 65%);
+@canary: mix(@canary-base, @background-color-component, 85%);
+@canary-d10: mix(color(~`colorPalette('@{canary-base}', -10) `), @background-color-component, 90%);
+@canary-d20: mix(color(~`colorPalette('@{canary-base}', -20) `), @background-color-component, 95%);
+@canary-d30: mix(color(~`colorPalette('@{canary-base}', -30) `), @background-color-component, 97%);
+@canary-d40: mix(color(~`colorPalette('@{canary-base}', -40) `), @background-color-component, 98%);
+@canary-d50: mix(color(~`colorPalette('@{canary-base}', -50) `), @background-color-component, 99%);
+
+/* Prasinous -------------------------- */
+@prasinous-l50: mix(color(~`colorPalette('@{prasinous-base}', 20) `), @background-color-component, 15%);
+@prasinous-l40: mix(color(~`colorPalette('@{prasinous-base}', 10) `), @background-color-component, 25%);
+@prasinous-l30: mix(@prasinous-base, @background-color-component, 30%);
+@prasinous-l20: mix(@prasinous-base, @background-color-component, 45%);
+@prasinous-l10: mix(@prasinous-base, @background-color-component, 65%);
+@prasinous: mix(@prasinous-base, @background-color-component, 85%);
+@prasinous-d10: mix(color(~`colorPalette('@{prasinous-base}', -10) `), @background-color-component, 90%);
+@prasinous-d20: mix(color(~`colorPalette('@{prasinous-base}', -20) `), @background-color-component, 95%);
+@prasinous-d30: mix(color(~`colorPalette('@{prasinous-base}', -30) `), @background-color-component, 97%);
+@prasinous-d40: mix(color(~`colorPalette('@{prasinous-base}', -40) `), @background-color-component, 98%);
+@prasinous-d50: mix(color(~`colorPalette('@{prasinous-base}', -50) `), @background-color-component, 99%);
+
+/* Verdant -------------------------- */
+@verdant-l50: mix(color(~`colorPalette('@{verdant-base}', 20) `), @background-color-component, 15%);
+@verdant-l40: mix(color(~`colorPalette('@{verdant-base}', 10) `), @background-color-component, 25%);
+@verdant-l30: mix(@verdant-base, @background-color-component, 30%);
+@verdant-l20: mix(@verdant-base, @background-color-component, 45%);
+@verdant-l10: mix(@verdant-base, @background-color-component, 65%);
+@verdant: mix(@verdant-base, @background-color-component, 85%);
+@verdant-d10: mix(color(~`colorPalette('@{verdant-base}', -10) `), @background-color-component, 90%);
+@verdant-d20: mix(color(~`colorPalette('@{verdant-base}', -20) `), @background-color-component, 95%);
+@verdant-d30: mix(color(~`colorPalette('@{verdant-base}', -30) `), @background-color-component, 97%);
+@verdant-d40: mix(color(~`colorPalette('@{verdant-base}', -40) `), @background-color-component, 98%);
+@verdant-d50: mix(color(~`colorPalette('@{verdant-base}', -50) `), @background-color-component, 99%);
+
+/* Green -------------------------- */
+@green-l50: mix(color(~`colorPalette('@{green-base}', 20) `), @background-color-component, 15%);
+@green-l40: mix(color(~`colorPalette('@{green-base}', 10) `), @background-color-component, 25%);
+@green-l30: mix(@green-base, @background-color-component, 30%);
+@green-l20: mix(@green-base, @background-color-component, 45%);
+@green-l10: mix(@green-base, @background-color-component, 65%);
+@green: mix(@green-base, @background-color-component, 85%);
+@green-d10: mix(color(~`colorPalette('@{green-base}', -10) `), @background-color-component, 90%);
+@green-d20: mix(color(~`colorPalette('@{green-base}', -20) `), @background-color-component, 95%);
+@green-d30: mix(color(~`colorPalette('@{green-base}', -30) `), @background-color-component, 97%);
+@green-d40: mix(color(~`colorPalette('@{green-base}', -40) `), @background-color-component, 98%);
+@green-d50: mix(color(~`colorPalette('@{green-base}', -50) `), @background-color-component, 99%);
+
+/* Cyan -------------------------- */
+@cyan-l50: mix(color(~`colorPalette('@{cyan-base}', 20) `), @background-color-component, 15%);
+@cyan-l40: mix(color(~`colorPalette('@{cyan-base}', 10) `), @background-color-component, 25%);
+@cyan-l30: mix(@cyan-base, @background-color-component, 30%);
+@cyan-l20: mix(@cyan-base, @background-color-component, 45%);
+@cyan-l10: mix(@cyan-base, @background-color-component, 65%);
+@cyan: mix(@cyan-base, @background-color-component, 85%);
+@cyan-d10: mix(color(~`colorPalette('@{cyan-base}', -10) `), @background-color-component, 90%);
+@cyan-d20: mix(color(~`colorPalette('@{cyan-base}', -20) `), @background-color-component, 95%);
+@cyan-d30: mix(color(~`colorPalette('@{cyan-base}', -30) `), @background-color-component, 97%);
+@cyan-d40: mix(color(~`colorPalette('@{cyan-base}', -40) `), @background-color-component, 98%);
+@cyan-d50: mix(color(~`colorPalette('@{cyan-base}', -50) `), @background-color-component, 99%);
+
+/* Sky -------------------------- */
+@sky-l50: mix(color(~`colorPalette('@{sky-base}', 20) `), @background-color-component, 15%);
+@sky-l40: mix(color(~`colorPalette('@{sky-base}', 10) `), @background-color-component, 25%);
+@sky-l30: mix(@sky-base, @background-color-component, 30%);
+@sky-l20: mix(@sky-base, @background-color-component, 45%);
+@sky-l10: mix(@sky-base, @background-color-component, 65%);
+@sky: mix(@sky-base, @background-color-component, 85%);
+@sky-d10: mix(color(~`colorPalette('@{sky-base}', -10) `), @background-color-component, 90%);
+@sky-d20: mix(color(~`colorPalette('@{sky-base}', -20) `), @background-color-component, 95%);
+@sky-d30: mix(color(~`colorPalette('@{sky-base}', -30) `), @background-color-component, 97%);
+@sky-d40: mix(color(~`colorPalette('@{sky-base}', -40) `), @background-color-component, 98%);
+@sky-d50: mix(color(~`colorPalette('@{sky-base}', -50) `), @background-color-component, 99%);
+
+/* Blue -------------------------- */
+@blue-l50: mix(color(~`colorPalette('@{blue-base}', 20) `), @background-color-component, 15%);
+@blue-l40: mix(color(~`colorPalette('@{blue-base}', 10) `), @background-color-component, 25%);
+@blue-l30: mix(@blue-base, @background-color-component, 30%);
+@blue-l20: mix(@blue-base, @background-color-component, 45%);
+@blue-l10: mix(@blue-base, @background-color-component, 65%);
+@blue: mix(@blue-base, @background-color-component, 85%);
+@blue-d10: mix(color(~`colorPalette('@{blue-base}', -10) `), @background-color-component, 90%);
+@blue-d20: mix(color(~`colorPalette('@{blue-base}', -20) `), @background-color-component, 95%);
+@blue-d30: mix(color(~`colorPalette('@{blue-base}', -30) `), @background-color-component, 97%);
+@blue-d40: mix(color(~`colorPalette('@{blue-base}', -40) `), @background-color-component, 98%);
+@blue-d50: mix(color(~`colorPalette('@{blue-base}', -50) `), @background-color-component, 99%);
+
+/* Admiral -------------------------- */
+@admiral-l50: mix(color(~`colorPalette('@{admiral-base}', 20) `), @background-color-component, 15%);
+@admiral-l40: mix(color(~`colorPalette('@{admiral-base}', 10) `), @background-color-component, 25%);
+@admiral-l30: mix(@admiral-base, @background-color-component, 30%);
+@admiral-l20: mix(@admiral-base, @background-color-component, 45%);
+@admiral-l10: mix(@admiral-base, @background-color-component, 65%);
+@admiral: mix(@admiral-base, @background-color-component, 85%);
+@admiral-d10: mix(color(~`colorPalette('@{admiral-base}', -10) `), @background-color-component, 90%);
+@admiral-d20: mix(color(~`colorPalette('@{admiral-base}', -20) `), @background-color-component, 95%);
+@admiral-d30: mix(color(~`colorPalette('@{admiral-base}', -30) `), @background-color-component, 97%);
+@admiral-d40: mix(color(~`colorPalette('@{admiral-base}', -40) `), @background-color-component, 98%);
+@admiral-d50: mix(color(~`colorPalette('@{admiral-base}', -50) `), @background-color-component, 99%);
+
+/* Purple -------------------------- */
+@purple-l50: mix(color(~`colorPalette('@{purple-base}', 20) `), @background-color-component, 15%);
+@purple-l40: mix(color(~`colorPalette('@{purple-base}', 10) `), @background-color-component, 25%);
+@purple-l30: mix(@purple-base, @background-color-component, 30%);
+@purple-l20: mix(@purple-base, @background-color-component, 45%);
+@purple-l10: mix(@purple-base, @background-color-component, 65%);
+@purple: mix(@purple-base, @background-color-component, 85%);
+@purple-d10: mix(color(~`colorPalette('@{purple-base}', -10) `), @background-color-component, 90%);
+@purple-d20: mix(color(~`colorPalette('@{purple-base}', -20) `), @background-color-component, 95%);
+@purple-d30: mix(color(~`colorPalette('@{purple-base}', -30) `), @background-color-component, 97%);
+@purple-d40: mix(color(~`colorPalette('@{purple-base}', -40) `), @background-color-component, 98%);
+@purple-d50: mix(color(~`colorPalette('@{purple-base}', -50) `), @background-color-component, 99%);
+
+/* Magenta -------------------------- */
+@magenta-l50: mix(color(~`colorPalette('@{magenta-base}', 20) `), @background-color-component, 15%);
+@magenta-l40: mix(color(~`colorPalette('@{magenta-base}', 10) `), @background-color-component, 25%);
+@magenta-l30: mix(@magenta-base, @background-color-component, 30%);
+@magenta-l20: mix(@magenta-base, @background-color-component, 45%);
+@magenta-l10: mix(@magenta-base, @background-color-component, 65%);
+@magenta: mix(@magenta-base, @background-color-component, 85%);
+@magenta-d10: mix(color(~`colorPalette('@{magenta-base}', -10) `), @background-color-component, 90%);
+@magenta-d20: mix(color(~`colorPalette('@{magenta-base}', -20) `), @background-color-component, 95%);
+@magenta-d30: mix(color(~`colorPalette('@{magenta-base}', -30) `), @background-color-component, 97%);
+@magenta-d40: mix(color(~`colorPalette('@{magenta-base}', -40) `), @background-color-component, 98%);
+@magenta-d50: mix(color(~`colorPalette('@{magenta-base}', -50) `), @background-color-component, 99%);
+
+/* Primary -------------------------- */
+@primary-l50: mix(color(~`colorPalette('@{primary-base}', 20) `), @background-color-component, 15%);
+@primary-l40: mix(color(~`colorPalette('@{primary-base}', 10) `), @background-color-component, 25%);
+@primary-l30: mix(@primary-base, @background-color-component, 30%);
+@primary-l20: mix(@primary-base, @background-color-component, 45%);
+@primary-l10: mix(@primary-base, @background-color-component, 65%);
+@primary: mix(@primary-base, @background-color-component, 85%);
+@primary-d10: mix(color(~`colorPalette('@{primary-base}', -10) `), @background-color-component, 90%);
+@primary-d20: mix(color(~`colorPalette('@{primary-base}', -20) `), @background-color-component, 95%);
+@primary-d30: mix(color(~`colorPalette('@{primary-base}', -30) `), @background-color-component, 97%);
+@primary-d40: mix(color(~`colorPalette('@{primary-base}', -40) `), @background-color-component, 98%);
+@primary-d50: mix(color(~`colorPalette('@{primary-base}', -50) `), @background-color-component, 99%);
+
+/* Info -------------------------- */
+@info-l50: mix(color(~`colorPalette('@{info-base}', 20) `), @background-color-component, 15%);
+@info-l40: mix(color(~`colorPalette('@{info-base}', 10) `), @background-color-component, 25%);
+@info-l30: mix(@info-base, @background-color-component, 30%);
+@info-l20: mix(@info-base, @background-color-component, 45%);
+@info-l10: mix(@info-base, @background-color-component, 65%);
+@info: mix(@info-base, @background-color-component, 85%);
+@info-d10: mix(color(~`colorPalette('@{info-base}', -10) `), @background-color-component, 90%);
+@info-d20: mix(color(~`colorPalette('@{info-base}', -20) `), @background-color-component, 95%);
+@info-d30: mix(color(~`colorPalette('@{info-base}', -30) `), @background-color-component, 97%);
+@info-d40: mix(color(~`colorPalette('@{info-base}', -40) `), @background-color-component, 98%);
+@info-d50: mix(color(~`colorPalette('@{info-base}', -50) `), @background-color-component, 99%);
+
+/* Pending -------------------------- */
+@pending-l50: mix(color(~`colorPalette('@{pending-base}', 20) `), @background-color-component, 15%);
+@pending-l40: mix(color(~`colorPalette('@{pending-base}', 10) `), @background-color-component, 25%);
+@pending-l30: mix(@pending-base, @background-color-component, 30%);
+@pending-l20: mix(@pending-base, @background-color-component, 45%);
+@pending-l10: mix(@pending-base, @background-color-component, 65%);
+@pending: mix(@pending-base, @background-color-component, 85%);
+@pending-d10: mix(color(~`colorPalette('@{pending-base}', -10) `), @background-color-component, 90%);
+@pending-d20: mix(color(~`colorPalette('@{pending-base}', -20) `), @background-color-component, 95%);
+@pending-d30: mix(color(~`colorPalette('@{pending-base}', -30) `), @background-color-component, 97%);
+@pending-d40: mix(color(~`colorPalette('@{pending-base}', -40) `), @background-color-component, 98%);
+@pending-d50: mix(color(~`colorPalette('@{pending-base}', -50) `), @background-color-component, 99%);
+
+/* Success -------------------------- */
+@success-l50: mix(color(~`colorPalette('@{success-base}', 20) `), @background-color-component, 15%);
+@success-l40: mix(color(~`colorPalette('@{success-base}', 10) `), @background-color-component, 25%);
+@success-l30: mix(@success-base, @background-color-component, 30%);
+@success-l20: mix(@success-base, @background-color-component, 45%);
+@success-l10: mix(@success-base, @background-color-component, 65%);
+@success: mix(@success-base, @background-color-component, 85%);
+@success-d10: mix(color(~`colorPalette('@{success-base}', -10) `), @background-color-component, 90%);
+@success-d20: mix(color(~`colorPalette('@{success-base}', -20) `), @background-color-component, 95%);
+@success-d30: mix(color(~`colorPalette('@{success-base}', -30) `), @background-color-component, 97%);
+@success-d40: mix(color(~`colorPalette('@{success-base}', -40) `), @background-color-component, 98%);
+@success-d50: mix(color(~`colorPalette('@{success-base}', -50) `), @background-color-component, 99%);
+
+/* Warning -------------------------- */
+@warning-l50: mix(color(~`colorPalette('@{warning-base}', 20) `), @background-color-component, 15%);
+@warning-l40: mix(color(~`colorPalette('@{warning-base}', 10) `), @background-color-component, 25%);
+@warning-l30: mix(@warning-base, @background-color-component, 30%);
+@warning-l20: mix(@warning-base, @background-color-component, 45%);
+@warning-l10: mix(@warning-base, @background-color-component, 65%);
+@warning: mix(@warning-base, @background-color-component, 85%);
+@warning-d10: mix(color(~`colorPalette('@{warning-base}', -10) `), @background-color-component, 90%);
+@warning-d20: mix(color(~`colorPalette('@{warning-base}', -20) `), @background-color-component, 95%);
+@warning-d30: mix(color(~`colorPalette('@{warning-base}', -30) `), @background-color-component, 97%);
+@warning-d40: mix(color(~`colorPalette('@{warning-base}', -40) `), @background-color-component, 98%);
+@warning-d50: mix(color(~`colorPalette('@{warning-base}', -50) `), @background-color-component, 99%);
+
+/* Error -------------------------- */
+@error-l50: mix(color(~`colorPalette('@{error-base}', 20) `), @background-color-component, 15%);
+@error-l40: mix(color(~`colorPalette('@{error-base}', 10) `), @background-color-component, 25%);
+@error-l30: mix(@error-base, @background-color-component, 30%);
+@error-l20: mix(@error-base, @background-color-component, 45%);
+@error-l10: mix(@error-base, @background-color-component, 65%);
+@error: mix(@error-base, @background-color-component, 85%);
+@error-d10: mix(color(~`colorPalette('@{error-base}', -10) `), @background-color-component, 90%);
+@error-d20: mix(color(~`colorPalette('@{error-base}', -20) `), @background-color-component, 95%);
+@error-d30: mix(color(~`colorPalette('@{error-base}', -30) `), @background-color-component, 97%);
+@error-d40: mix(color(~`colorPalette('@{error-base}', -40) `), @background-color-component, 98%);
+@error-d50: mix(color(~`colorPalette('@{error-base}', -50) `), @background-color-component, 99%);

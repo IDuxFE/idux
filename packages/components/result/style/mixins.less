@@ -1,11 +1,11 @@
-@import "../../style/default.less";
+@import '../../style/default.less';
 
 /* stylelint-disable property-no-unknown */
 @result-status: {
-  success: @result-success-color;
-  warning: @result-warning-color;
-  error: @result-error-color;
-  info: @result-info-color;
+  success: @result-success;
+  warning: @result-warning;
+  error: @result-error;
+  info: @result-info;
 };
 /* stylelint-enable property-no-unknown */
 
@@ -19,6 +19,6 @@
           color: @value;
         }
       }
-    })
+    });
   }
 }

@@ -1,5 +1,4 @@
-import type { Placement } from '@popperjs/core'
-import type { OverlayTrigger } from '@idux/cdk/overlay'
+import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
 
@@ -12,6 +11,12 @@ export interface ButtonConfig {
 
 export interface IconConfig {
   loadIconDynamically?: (iconName: string) => Promise<string>
+}
+
+export interface TagConfig {
+  closable: boolean
+  checkAble: boolean
+  isRound: boolean
 }
 
 // Layout
@@ -34,6 +39,16 @@ export interface RowConfig {
 }
 
 // Navigation
+export type MenuTheme = 'light' | 'dark'
+export interface MenuConfig {
+  indent: number
+  theme: MenuTheme
+}
+
+export interface SubMenuConfig {
+  suffix: string
+  suffixRotates: [number, number]
+}
 
 // Data Entry
 type FormSize = 'small' | 'medium' | 'large'
@@ -71,6 +86,17 @@ export interface RateConfig {
   allowClear: boolean
 }
 
+export type SelectSize = FormSize
+export interface SelectConfig {
+  borderless: boolean
+  clearable: boolean
+  labelKey: string
+  searchable: boolean
+  size: SelectSize
+  suffix?: string
+  valueKey: string
+}
+
 // Data Display
 export interface BadgeConfig {
   showZero: boolean
@@ -83,6 +109,10 @@ export interface CardConfig {
   size: CardSize
   borderless: boolean
   hoverable: boolean
+}
+
+export interface CollapseConfig {
+  accordion: boolean
 }
 
 export interface ImageConfig {
@@ -107,7 +137,7 @@ export interface StatisticConfig {
 }
 
 export interface TooltipConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number
@@ -116,7 +146,7 @@ export interface TooltipConfig {
 }
 
 export interface PopoverConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number
@@ -129,7 +159,7 @@ export interface MessageConfig {
   duration: number
   maxCount: number
   top: number
-  pauseOnHover: boolean
+  destroyOnHover: boolean
 }
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 export interface ResultConfig {
@@ -166,26 +196,33 @@ export interface BackTopConfig {
   duration: number
   visibilityHeight: number
 }
-
+export interface AnchorConfig {
+  showInkInFixed: boolean
+}
 // --- end ---
 
 export interface GlobalConfig {
   // General
   button: ButtonConfig
   icon: IconConfig
+  tag: TagConfig
   // Layout
   divider: DividerConfig
   space: SpaceConfig
   row: RowConfig
   // Navigation
+  menu: MenuConfig
+  subMenu: SubMenuConfig
   // Data Entry
   input: InputConfig
   textarea: TextareaConfig
   radioGroup: RadioGroupConfig
   rate: RateConfig
+  select: SelectConfig
   // Data Display
   badge: BadgeConfig
   card: CardConfig
+  collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
   tooltip: TooltipConfig
@@ -198,6 +235,7 @@ export interface GlobalConfig {
   progress: ProgressConfig
   // Other
   backTop: BackTopConfig
+  anchor: AnchorConfig
   // --- end ---
 }
 

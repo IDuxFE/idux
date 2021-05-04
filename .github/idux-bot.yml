@@ -51,7 +51,7 @@ issue:
         - Usage
         - Question
       replay: |
-        Hello @{user}, we use GitHub issues to trace bugs or discuss plans of Idux. So, please don't ask usage questions here.
+        Hello @{user}, we use GitHub issues to trace bugs or discuss plans of @idux. So, please don't ask usage questions here.
         You can try to ask questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/idux) or [Segment Fault](https://segmentfault.com/t/idux), then apply tag `idux` to your question.
 
         你好 @{user}，Idux Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。

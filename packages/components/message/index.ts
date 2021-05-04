@@ -1,2 +1,5 @@
-export * from './src/publicApi'
-export * from './src/types'
+import IxMessage from './src/message'
+
+export { IxMessage }
+
+export type { MessageOptions, MessageType, MessageItemInstance } from './src/types'

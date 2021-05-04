@@ -54,8 +54,8 @@ export const sortGradient = (gradients: StringGradients): SortGradientResult[] =
  */
 export const handleGradient = (strokeColor: ProgressGradient): string => {
   const {
-    from = '#3366ff', // @primary-color
-    to = '#3366ff', // @primary-color
+    from = '#3366ff', // @primary
+    to = '#3366ff', // @primary
     direction = 'to right',
     ...rest
   } = strokeColor

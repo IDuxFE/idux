@@ -87,12 +87,12 @@ subtitle: 输入框
 | @input-border-style | @border-style;| - |
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
-| @input-secondary-color | @text-secondary-color;| - |
+| @input-color-secondary | @text-color-secondary;| - |
 | @input-bg-color | @background-color-component;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |
-| @input-hover-border-color | ~`colorPalette('@{primary-color}', -10)`;| - |
-| @input-active-border-color | @primary-color;| - |
+| @input-hover-border-color | ~`colorPalette('@{primary}', -10)`;| - |
+| @input-active-border-color | @primary;| - |
 | @input-active-box-shadow | 0 0 0 2px fade(@input-active-border-color, 15%);| - |
 | @input-disabled-color | @disabled-color;| - |
 | @input-disabled-bg-color | @disabled-bg-color;| - |

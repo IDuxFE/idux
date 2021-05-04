@@ -1,6 +1,6 @@
 ---
 category: components
-type:
+type: 数据录入
 title: Switch
 subtitle: 开关切换器
 order: 0

@@ -23,7 +23,7 @@ export interface ConvertProgressSuccess extends ProgressSuccess {
   percent: number
 }
 
-export const ProgressPropTypes = {
+export const progressPropsDef = {
   type: PropTypes.oneOf(['line', 'circle', 'dashboard'] as const).def('line'),
   format: PropTypes.func,
   percent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(0),
@@ -40,8 +40,8 @@ export const ProgressPropTypes = {
   size: PropTypes.oneOf(['small', 'medium'] as const),
 }
 
-export const ConvertProgressPropTypes = {
-  ...ProgressPropTypes,
+export const convertProgressPropsDef = {
+  ...progressPropsDef,
   percent: PropTypes.number.def(0),
   success: object<ConvertProgressSuccess>().def(() => ({ percent: 0 })),
 }

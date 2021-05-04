@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag.vue render work 1`] = `
+"<div class=\\"ix-tag\\">
+  <!--v-if--><span class=\\"ix-tag-content\\"></span>
+  <!--v-if-->
+</div>"
+`;

@@ -144,11 +144,12 @@ class Generate {
 
   private async generateComponents(name: string, type: AnswerType) {
     await mkdir(`${this.dirPath}/style`)
-    const upperFirstName = upperFirst(camelCase(name))
+    const camelCaseName = camelCase(name)
+    const upperFirstName = upperFirst(camelCaseName)
     const lessTemplate = getLessTemplate(kebabCase(name))
-    const typesTemplate = getTypesTemplate(upperFirstName)
-    const tsxTemplate = getTsxTemplate(upperFirstName)
-    const vueTemplate = getVueTemplate(upperFirstName)
+    const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
+    const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
+    const vueTemplate = getVueTemplate(upperFirstName, camelCaseName)
     const indexTemplate = getIndexTemplate(upperFirstName)
     const testTemplate = getTestTemplate(upperFirstName)
 
@@ -156,10 +157,10 @@ class Generate {
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       this.useTsx
-        ? writeFile(`${this.dirPath}/src/${camelCase(name)}.tsx`, tsxTemplate)
+        ? writeFile(`${this.dirPath}/src/${camelCaseName}.tsx`, tsxTemplate)
         : writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
-      writeFile(`${this.dirPath}/__tests__/${camelCase(name)}.spec.ts`, testTemplate),
+      writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),
     ])
 
     const [typeEn] = type.split('_')

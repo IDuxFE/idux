@@ -1,6 +1,6 @@
 ---
 category: components
-type: 数据展示
+type: 反馈
 title: Popover
 subtitle: 气泡卡片
 order: 0
@@ -24,7 +24,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `title` | 浮层的标题 | `string \| v-slot: title` | - | - | - |
 | `content` | 浮层内容 | `string \| v-slot: content` | - | - | 必传 |
-| `placement` | 浮层的对齐方式 | `Placement` | `top` | ✅ | - |
+| `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
 | `visibile` | 是否显隐 | `boolean` | - | - | - |
 | `trigger` | 浮层触发方式 | `OverlayTrigger` | `click` | ✅ | - |
 | `showDelay` | 浮层显示延时 | `number` | 100 | ✅ | - |
