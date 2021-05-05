@@ -3,7 +3,7 @@ import { ref, nextTick, watch, onMounted } from 'vue'
 import type { Ref, SetupContext } from 'vue'
 import { on } from '@idux/cdk/utils'
 
-export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HTMLElement>) {
+export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HTMLElement>): Object {
   const maskVisible = ref(false)
   const closed = ref(false)
 	const rendered = ref(false)
@@ -52,6 +52,13 @@ export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HT
     }
   }
 
+  function handlekeyboard (e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.stopPropagation()
+      handleClose()
+    }
+  }
+
 	watch(() => props.visible, val => {
     if (val) {
       closed.value = false
@@ -77,7 +84,7 @@ export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HT
       open()
     }
 		if (props.keyboard) {
-			on(document, 'keydown', handleClose)
+			on(document, 'keydown', handlekeyboard)
 		}
   })
 	return {

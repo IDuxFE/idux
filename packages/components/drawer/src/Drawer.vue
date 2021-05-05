@@ -79,7 +79,6 @@ export default defineComponent({
     })
     return {
       ...useModal(props, ctx as SetupContext, drawerRef),
-      ...props,
       slots: ctx.slots,
       drawerStyle,
     }

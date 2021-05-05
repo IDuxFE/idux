@@ -1,7 +1,9 @@
 <template>
   <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" title="抽屉标题">
-    <p>抽屉内容</p>
+  <ix-drawer v-model:visible="visible">
+    <p>没有标题的抽屉内容</p>
+    <p>没有标题的抽屉内容</p>
+    <p>没有标题的抽屉内容</p>
   </ix-drawer>
 </template>
 <script lang="ts">
