@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List.vue render work 1`] = `
+"<div class=\\"ix-list ix-list-medium ix-list-border\\">
+  <!--v-if-->
+  <div class=\\"ix-spin\\">
+    <!--v-if-->
+    <div class=\\"ix-spin-container\\">
+      <div>
+        <div class=\\"ix-list-item\\">
+          <div class=\\"ix-list-item-title\\"></div>
+          <div class=\\"ix-list-item-content\\">default</div>
+          <div class=\\"ix-list-item-extra\\"></div>
+        </div>
+        <div class=\\"ix-list-item\\">
+          <div class=\\"ix-list-item-title\\"></div>
+          <div class=\\"ix-list-item-content\\">default</div>
+          <div class=\\"ix-list-item-extra\\"></div>
+        </div>
+        <div class=\\"ix-list-item\\">
+          <div class=\\"ix-list-item-title\\"></div>
+          <div class=\\"ix-list-item-content\\">default</div>
+          <div class=\\"ix-list-item-extra\\"></div>
+        </div>
+        <div class=\\"ix-list-item\\">
+          <div class=\\"ix-list-item-title\\"></div>
+          <div class=\\"ix-list-item-content\\">default</div>
+          <div class=\\"ix-list-item-extra\\"></div>
+        </div>
+      </div>
+      <div class=\\"ix-list-empty\\" style=\\"display: none;\\">
+        <div class=\\"ix-empty\\">
+          <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" arialabel=\\"empty\\"></i></div>
+          <div class=\\"ix-empty-description\\">暂无数据</div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;

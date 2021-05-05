@@ -26,6 +26,7 @@ import { IxSwitch } from './switch'
 // import Data Display
 import { IxCollapse, IxCollapsePanel } from './collapse'
 import { IxSteps, IxStep } from './steps'
+import { IxList, IxListItem } from './list'
 import { IxBadge } from './badge'
 import { IxCard } from './card'
 import { IxEmpty } from './empty'
@@ -82,6 +83,8 @@ const components = [
   IxCollapsePanel,
   IxSteps,
   IxStep,
+  IxList,
+  IxListItem,
   IxBadge,
   IxCard,
   IxEmpty,

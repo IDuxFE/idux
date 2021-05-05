@@ -114,6 +114,12 @@ export interface CardConfig {
   hoverable: boolean
 }
 
+export type ListSize = 'small' | 'medium' | 'large'
+export interface ListConfig {
+  size: ListSize
+  borderless: boolean
+}
+
 export interface CollapseConfig {
   accordion: boolean
 }
@@ -225,6 +231,7 @@ export interface GlobalConfig {
   // Data Display
   badge: BadgeConfig
   card: CardConfig
+  list: ListConfig
   collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
