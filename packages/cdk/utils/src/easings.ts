@@ -9,20 +9,26 @@
  * `initialValue` and `amountOfChange` are the starting and ending values.
  */
 
-/* @ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955); */
-export function easeInOutQuad(elapsed: number, initialValue: number, amountOfChange: number, duration: number): number {
+export type EasingFn = (elapsed: number, initialValue: number, amountOfChange: number, duration: number) => number
+
+export const easeInOutQuad: EasingFn = (
+  elapsed: number,
+  initialValue: number,
+  amountOfChange: number,
+  duration: number,
+) => {
   if ((elapsed /= duration / 2) < 1) {
     return (amountOfChange / 2) * elapsed * elapsed + initialValue
   }
   return (-amountOfChange / 2) * (--elapsed * (elapsed - 2) - 1) + initialValue
 }
 
-export function easeInOutCubic(
+export const easeInOutCubic: EasingFn = (
   elapsed: number,
   initialValue: number,
   amountOfChange: number,
   duration: number,
-): number {
+) => {
   if ((elapsed /= duration / 2) < 1) {
     return (amountOfChange / 2) * elapsed * elapsed * elapsed + initialValue
   }

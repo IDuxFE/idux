@@ -11,15 +11,16 @@
   </component>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, watch, ref, nextTick, provide, Ref } from 'vue'
+import type { Ref } from 'vue'
 import type { AnchorProps, LinkProps } from './types'
-import { anchorPropsDef } from './types'
-import { on, off } from '@idux/cdk/utils'
-import { getOffsetTop, scrollTo, getCurrentScrollTop } from './util'
+
+import { computed, defineComponent, onMounted, onUnmounted, watch, ref, nextTick, provide } from 'vue'
+import { on, off, scrollToTop, getOffset } from '@idux/cdk/utils'
 import { getTarget } from '@idux/components/utils'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
 import { anchorToken } from './token'
+import { anchorPropsDef } from './types'
 
 export default defineComponent({
   name: 'IxAnchor',
@@ -47,12 +48,13 @@ export default defineComponent({
       if (!target) {
         return
       }
-      const scrollTop = getCurrentScrollTop(container.value)
-      const offsetTop = getOffsetTop(target, container.value)
-      const y = scrollTop + offsetTop - elOffsetTop.value
+
+      const { top } = getOffset(target, container.value)
+
       animating.value = true
-      scrollTo(y, {
-        container: container.value,
+      scrollToTop({
+        amountOfChange: top - elOffsetTop.value,
+        target: container.value,
         callback() {
           animating.value = false
           updateInk()
@@ -195,7 +197,7 @@ const useCurrentAnchor = (links: Ref<string[]>, container: HTMLElement | Window,
   links.value.forEach(link => {
     const target = document.getElementById(link.split('#')[1])
     if (target) {
-      const top = getOffsetTop(target, container)
+      const { top } = getOffset(target, container)
       if (top < offsetTop + 5 && (!maxSection || maxSection.top < top)) {
         maxSection = { link, top }
       }
