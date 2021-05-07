@@ -26,6 +26,7 @@ import type {
   RadioGroupConfig,
   MenuConfig,
   SubMenuConfig,
+  StepsConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -164,6 +165,10 @@ const progress = shallowReactive<ProgressConfig>({
   format: (percent: number) => percent + '%',
 })
 
+const steps = shallowReactive<StepsConfig>({
+  size: 'medium',
+})
+
 // --------------------- Other ---------------------
 const backTop = shallowReactive<BackTopConfig>({
   duration: 450,
@@ -205,6 +210,7 @@ export const defaultConfig: GlobalConfig = {
   result,
   spin,
   progress,
+  steps,
   // Other
   backTop,
   anchor,

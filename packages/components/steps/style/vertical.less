@@ -1,0 +1,42 @@
+.@{steps-prefix}-vertical {
+  display: block;
+  .@{step-prefix} {  
+    position: relative;
+    display: block;
+    flex: none;
+    padding-left: 0 !important;
+    &:not(:last-child) {
+      .@{step-prefix}-tail {
+        position: absolute;
+        top: 0;
+        left: (@height-md / 2);
+        height: 100%;
+        padding: (@height-md + @spacing-gutter) 0 (@spacing-gutter);
+        &::after {
+          display: inline-block;
+          content: "";
+          width: @step-tail-height !important;
+          height: 100% !important;
+          background: @grey;
+        }
+      }
+    }
+    .@{step-prefix}-title:after {
+      display: none !important;
+    }
+    .@{step-prefix}-content {
+      min-height: @step-content-min-height;
+      .@{step-prefix}-description {
+        margin-bottom: @margin-md;
+      }
+    }
+  }
+  &.@{steps-prefix}-small {  
+    .@{step-prefix}:not(:last-child) {
+      .@{step-prefix}-tail {
+        left: (@height-sm / 2);
+        padding: (@height-sm + @spacing-gutter) 0 (@spacing-gutter) !important;
+      }
+    }
+  }
+}
