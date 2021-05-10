@@ -33,6 +33,7 @@ type AnswerType =
 
 interface AnswerOptions {
   category: 'cdk' | 'components' | 'pro'
+  isPrivate?: boolean
   type?: AnswerType
   useTsx?: boolean
   name: string
@@ -47,11 +48,20 @@ const questions: QuestionCollection<AnswerOptions>[] = [
     default: 'components',
   },
   {
+    name: 'isPrivate',
+    message: 'Whether or not a private component?',
+    type: 'confirm',
+    default: false,
+    when(answer) {
+      return answer.category === 'components'
+    },
+  },
+  {
     name: 'type',
     message: 'Please select the type you want to generate.',
     type: 'list',
     when(answer) {
-      return answer.category === 'components'
+      return answer.category === 'components' && !answer.isPrivate
     },
     choices: [
       'General_通用',
@@ -80,6 +90,7 @@ class Generate {
   private siteRoot = resolve(__dirname, '../../packages/site')
   private dirPath!: string
   private useTsx = false
+  private isPrivate = false
 
   constructor() {
     this.init()
@@ -88,15 +99,23 @@ class Generate {
   private async init() {
     console.log(chalk.greenBright(textSync('IDux Generate Tool')))
 
-    const { category, name, type, useTsx } = await inquirer.prompt<AnswerOptions>(questions)
+    const { category, name, type, useTsx, isPrivate } = await inquirer.prompt<AnswerOptions>(questions)
 
     this.useTsx = !!useTsx
+    this.isPrivate = !!isPrivate
+
     const spin = ora()
     spin.start('Template is being generated, please wait...\n')
     this.packageRoot = resolve(__dirname, '../../packages', category)
 
     const dirName = kebabCase(name)
-    this.dirPath = resolve(this.packageRoot, dirName)
+    const dirPath = resolve(this.packageRoot, isPrivate ? 'private' : '')
+
+    if (!pathExistsSync(dirPath)) {
+      await mkdir(dirPath)
+    }
+
+    this.dirPath = resolve(dirPath, dirName)
 
     if (pathExistsSync(this.dirPath)) {
       spin.fail(chalk.redBright(`${name} is already exists in ${category}, please change it!`))
@@ -110,12 +129,13 @@ class Generate {
 
   private async createDir() {
     await mkdir(this.dirPath)
-    return Promise.all([
+    const tasks = [
       mkdir(`${this.dirPath}/src`),
       mkdir(`${this.dirPath}/__tests__`),
-      mkdir(`${this.dirPath}/docs`),
-      mkdir(`${this.dirPath}/demo`),
-    ])
+      !this.isPrivate && mkdir(`${this.dirPath}/docs`),
+      !this.isPrivate && mkdir(`${this.dirPath}/demo`),
+    ]
+    return Promise.all(tasks.filter(item => item) as Promise<void>[])
   }
 
   private generate(category: AnswerOptions['category'], name: string, type?: AnswerType) {
@@ -127,6 +147,10 @@ class Generate {
         this.generateCdk(name)
         break
       // todo pro
+    }
+
+    if (this.isPrivate) {
+      return Promise.resolve()
     }
 
     const docsZhTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type)
@@ -162,6 +186,10 @@ class Generate {
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
       writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),
     ])
+
+    if (this.isPrivate) {
+      return
+    }
 
     const [typeEn] = type.split('_')
 
@@ -205,7 +233,7 @@ class Generate {
     return Promise.all([
       writeFile(resolve(this.dirPath, 'src', `use${upperFirst(camelCase(name))}.ts`), cdkTemplate),
       writeFile(resolve(this.dirPath, 'index.ts'), indexTemplate),
-      writeFile(resolve(this.dirPath, '__tests__', `${upperFirst(camelCase(name))}.spec.ts`), testTemplate),
+      writeFile(resolve(this.dirPath, '__tests__', `${camelCase(name)}.spec.ts`), testTemplate),
     ])
   }
 }
