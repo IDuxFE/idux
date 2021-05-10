@@ -1,6 +1,6 @@
 import type { DefineComponent } from 'vue'
 import type { VueTypeDef } from 'vue-types'
-import type { OverlayOptions } from '@idux/cdk/overlay/src/types'
+import type { OverlayOptions } from '@idux/cdk/overlay'
 
 import { PropTypes } from '@idux/cdk/utils'
 

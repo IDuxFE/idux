@@ -1,5 +1,5 @@
 import type { ComputedRef } from 'vue'
-import type { OverlayOptions, OverlayPlacement } from '@idux/cdk/overlay/src/types'
+import type { OverlayOptions, OverlayPlacement } from '@idux/cdk/overlay'
 import type { OverlayProps } from './types'
 
 import { getCurrentInstance, watch } from 'vue'
