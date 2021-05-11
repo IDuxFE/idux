@@ -31,7 +31,7 @@ export default defineComponent({
     const backTopConfig = useGlobalConfig('backTop')
     const eventType = 'scroll'
     const visible = ref(false)
-    const container = ref<Window | HTMLElement>((null as unknown) as HTMLElement)
+    const container = ref<Window | HTMLElement>(null as unknown as HTMLElement)
     const duration = computed(() => props.duration ?? backTopConfig.duration)
 
     const handleScroll = () => {

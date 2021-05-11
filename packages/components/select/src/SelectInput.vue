@@ -34,8 +34,8 @@ export default defineComponent({
   emits: ['compositionstart', 'compositionend', 'input', 'change', 'focus', 'blur'],
   setup(props, { emit }) {
     const inputWidth = ref('')
-    const inputRef = ref((null as unknown) as HTMLInputElement)
-    const mirrorRef = ref((null as unknown) as HTMLInputElement)
+    const inputRef = ref(null as unknown as HTMLInputElement)
+    const mirrorRef = ref(null as unknown as HTMLInputElement)
 
     const syncMirrorWidth = () => {
       if (props.showMirror) {

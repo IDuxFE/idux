@@ -46,7 +46,7 @@ export class PendingCopy {
     try {
       // Older browsers could throw if copy is not supported.
       if (textarea) {
-        const currentFocus = (document.activeElement as unknown) as HTMLOrSVGElement | null
+        const currentFocus = document.activeElement as unknown as HTMLOrSVGElement | null
 
         textarea.select()
         textarea.setSelectionRange(0, textarea.value.length)

@@ -56,7 +56,7 @@ export default defineComponent({
   setup(props: TextareaProps) {
     const attrs = useAttrs()
     const textareaConfig = useGlobalConfig('textarea')
-    const textareaRef = ref((null as unknown) as HTMLTextAreaElement)
+    const textareaRef = ref(null as unknown as HTMLTextAreaElement)
 
     const {
       focus,

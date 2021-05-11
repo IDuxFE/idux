@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxStep from '../src/Step.tsx'
 import IxSteps from '../src/Steps.tsx'
-import { nextTick, Ref, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const TestComponent = {
   components: { IxSteps, IxStep },
@@ -19,7 +19,7 @@ describe('Steps.vue', () => {
   renderWork(TestComponent)
 
   test('active work', async () => {
-    const active = ref(1) as Ref<number>
+    const active = ref(1)
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -44,8 +44,8 @@ describe('Steps.vue', () => {
   })
 
   test('direction work', async () => {
-    const active = ref(1) as Ref<number>
-    const direction = ref('vertical') as Ref<string>
+    const active = ref(1)
+    const direction = ref('vertical')
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -64,8 +64,8 @@ describe('Steps.vue', () => {
   })
 
   test('placement work', async () => {
-    const active = ref(1) as Ref<number>
-    const placement = ref('vertical') as Ref<string>
+    const active = ref(1)
+    const placement = ref('vertical')
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -84,8 +84,8 @@ describe('Steps.vue', () => {
   })
 
   test('percent work', async () => {
-    const active = ref(1) as Ref<number>
-    const percent = ref(25) as Ref<number>
+    const active = ref(1)
+    const percent = ref(25)
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -118,8 +118,8 @@ describe('Steps.vue', () => {
   })
 
   test('progressDot work', async () => {
-    const active = ref(1) as Ref<number>
-    const progressDot = ref(true) as Ref<boolean>
+    const active = ref(1)
+    const progressDot = ref(true)
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -138,7 +138,7 @@ describe('Steps.vue', () => {
   })
 
   test('progressDot work(slot)', async () => {
-    const active = ref(1) as Ref<number>
+    const active = ref(1)
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -160,8 +160,8 @@ describe('Steps.vue', () => {
   })
 
   test('size work', async () => {
-    const active = ref(1) as Ref<number>
-    const size = ref('small') as Ref<string>
+    const active = ref(1)
+    const size = ref('small')
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -180,8 +180,8 @@ describe('Steps.vue', () => {
   })
 
   test('steps(status) work', async () => {
-    const active = ref(1) as Ref<number>
-    const status = ref('error') as Ref<string>
+    const active = ref(1)
+    const status = ref('error')
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
@@ -200,12 +200,12 @@ describe('Steps.vue', () => {
   })
 
   test('icon work', async () => {
-    const active = ref(1) as Ref<number>
+    const active = ref(1)
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `
       <IxSteps :active="active">
-        <ix-step status="finish" title="Login" icon="user"></ix-step>
+        <ix-step status="finish" title="Login" icon="up"></ix-step>
         <ix-step status="finish" title="Verification" icon="verified"></ix-step>
         <ix-step status="process" title="Pay" icon="loading"></ix-step>
         <ix-step status="wait" title="Done" icon="smile"></ix-step>
@@ -216,14 +216,14 @@ describe('Steps.vue', () => {
       },
     })
 
-    expect(wrapper.find('.ix-icon-user').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
     expect(wrapper.find('.ix-icon-verified').exists()).toBe(true)
     expect(wrapper.find('.ix-icon-loading').exists()).toBe(true)
     expect(wrapper.find('.ix-icon-smile').exists()).toBe(true)
   })
 
   test('title subTitle description work', async () => {
-    const active = ref(1) as Ref<number>
+    const active = ref(1)
     const title = 'Finish'
     const subTitle = '20:20:01'
     const description = 'This is a description'
@@ -245,8 +245,8 @@ describe('Steps.vue', () => {
   })
 
   test('step(status) work', async () => {
-    const active = ref(1) as Ref<number>
-    const status = ref('error') as Ref<string>
+    const active = ref(1)
+    const status = ref('error')
     const wrapper = mount({
       components: { IxSteps, IxStep },
       template: `

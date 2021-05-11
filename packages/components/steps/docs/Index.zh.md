@@ -1,9 +1,8 @@
 ---
 category: components
-type: 数据展示
-title: step
+type: 导航
+title: Steps
 subtitle: 步骤条
-cover:
 ---
 
 

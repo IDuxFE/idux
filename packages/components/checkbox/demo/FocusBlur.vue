@@ -16,7 +16,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {
     const checked = ref(false)
-    const checkboxRef = ref((null as unknown) as HTMLInputElement)
+    const checkboxRef = ref(null as unknown as HTMLInputElement)
 
     const changeFocus = () => {
       checkboxRef.value.focus()

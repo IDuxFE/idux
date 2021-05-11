@@ -21,7 +21,7 @@ export default defineComponent({
     iconfont: PropTypes.bool,
   },
   setup(props: IconProps, { attrs }: SetupContext) {
-    const root = ref((null as unknown) as HTMLElement)
+    const root = ref(null as unknown as HTMLElement)
     const iconConfig = useGlobalConfig('icon')
     onMounted(() => appendChild(props, iconConfig, root))
 

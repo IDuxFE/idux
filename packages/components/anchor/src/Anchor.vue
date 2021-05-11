@@ -30,7 +30,7 @@ export default defineComponent({
   setup(props: AnchorProps, { emit }) {
     const eventType = 'scroll'
     const tag = computed(() => (props.affix ? 'ix-affix' : 'div'))
-    const container = ref<Window | HTMLElement>((null as unknown) as HTMLElement)
+    const container = ref<Window | HTMLElement>(null as unknown as HTMLElement)
 
     const anchorConfig = useGlobalConfig('anchor')
     const inkInFixedVisible = computed(() => props.showInkInFixed ?? anchorConfig.showInkInFixed)
