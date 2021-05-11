@@ -13,4 +13,4 @@ export interface SwitchBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
-export type SwitchComponent = InstanceType<DefineComponent<SwitchProps, SwitchBindings>>
+export type SwitchInstance = InstanceType<DefineComponent<SwitchProps, SwitchBindings>>

@@ -23,4 +23,4 @@ export interface SpaceProps {
   wrap?: boolean
 }
 
-export type SpaceComponent = InstanceType<DefineComponent<SpaceProps>>
+export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

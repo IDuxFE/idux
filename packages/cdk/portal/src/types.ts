@@ -1,6 +1,6 @@
 import type { DefineComponent } from 'vue'
 
-interface PortalOriginalProps {
+export interface PortalProps {
   /**
    * Whether disable transporting to target place.
    */
@@ -14,5 +14,4 @@ interface PortalOriginalProps {
   target: string | HTMLElement
 }
 
-export type PortalProps = Readonly<PortalOriginalProps>
-export type PortalComponent = InstanceType<DefineComponent<PortalProps>>
+export type PortalInstance = InstanceType<DefineComponent<PortalProps>>

@@ -22,7 +22,7 @@ export interface InputBindings {
   blur: () => void
 }
 
-export type InputComponent = InstanceType<DefineComponent<InputProps, InputBindings>>
+export type InputInstance = InstanceType<DefineComponent<InputProps, InputBindings>>
 
 export interface TextareaProps {
   value?: string
@@ -44,4 +44,4 @@ export interface TextareaBindings {
   blur: () => void
 }
 
-export type TextareaComponent = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>
+export type TextareaInstance = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>

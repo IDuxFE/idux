@@ -17,7 +17,7 @@ export interface RowProps {
   wrap?: boolean
 }
 
-export type RowComponent = InstanceType<DefineComponent<RowProps>>
+export type RowInstance = InstanceType<DefineComponent<RowProps>>
 
 type PropValue = number | string
 
@@ -44,4 +44,4 @@ export interface ColProps {
   flex?: FlexValue
 }
 
-export type ColComponent = InstanceType<DefineComponent<ColProps>>
+export type ColInstance = InstanceType<DefineComponent<ColProps>>

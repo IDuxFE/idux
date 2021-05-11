@@ -68,4 +68,4 @@ export interface ProgressProps {
   size?: ProgressSize
 }
 
-export type ProgressComponent = InstanceType<DefineComponent<ProgressProps>>
+export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>

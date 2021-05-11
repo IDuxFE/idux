@@ -15,4 +15,4 @@ export interface AffixProps {
   target?: string | HTMLElement | Window
 }
 
-export type AffixComponent = InstanceType<DefineComponent<AffixProps>>
+export type AffixInstance = InstanceType<DefineComponent<AffixProps>>

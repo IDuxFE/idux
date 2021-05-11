@@ -9,4 +9,4 @@ export interface TagProps {
   isRound: boolean
 }
 
-export type TagComponent = InstanceType<DefineComponent<TagProps>>
+export type TagInstance = InstanceType<DefineComponent<TagProps>>

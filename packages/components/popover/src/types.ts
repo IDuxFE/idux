@@ -8,4 +8,4 @@ export interface PopoverProps extends TooltipProps {
   content: string
 }
 
-export type PopoverComponent = InstanceType<DefineComponent<PopoverProps>>
+export type PopoverInstance = InstanceType<DefineComponent<PopoverProps>>

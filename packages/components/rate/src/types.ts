@@ -10,4 +10,4 @@ export interface RateProps {
   allowClear?: boolean
 }
 
-export type RateComponent = InstanceType<DefineComponent<RateProps>>
+export type RateInstance = InstanceType<DefineComponent<RateProps>>

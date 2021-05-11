@@ -8,4 +8,4 @@ export interface SpinProps {
   size?: 'large' | 'medium' | 'small'
 }
 
-export type SpinComponent = InstanceType<DefineComponent<SpinProps>>
+export type SpinInstance = InstanceType<DefineComponent<SpinProps>>

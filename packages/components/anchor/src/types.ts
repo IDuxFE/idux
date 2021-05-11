@@ -22,7 +22,7 @@ export const anchorPropsDef = {
   targetOffset: PropTypes.number,
 }
 
-export type AnchorComponent = InstanceType<DefineComponent<AnchorProps>>
+export type AnchorInstance = InstanceType<DefineComponent<AnchorProps>>
 
 export interface LinkProps {
   /** 锚点链接 */
@@ -36,4 +36,4 @@ export const linkPropsDef = {
   title: PropTypes.string,
 }
 
-export type LinkComponent = InstanceType<DefineComponent<LinkProps>>
+export type LinkInstance = InstanceType<DefineComponent<LinkProps>>

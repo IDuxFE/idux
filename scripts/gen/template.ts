@@ -22,7 +22,7 @@ export const ${camelCaseName}PropsDef = {
   testProp: PropTypes.string,
 }
 
-export type ${upperFirstName}Component = InstanceType<DefineComponent<${upperFirstName}Props>>
+export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 

@@ -69,7 +69,7 @@ export interface SelectBindings {
   focus: (options?: FocusOptions) => void
 }
 
-export type SelectComponent = InstanceType<DefineComponent<SelectProps, SelectBindings>>
+export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
 export interface OptionProps {
   disabled: boolean
@@ -83,7 +83,7 @@ export const optionPropsDef = {
   value: PropTypes.any.isRequired,
 }
 
-export type OptionComponent = InstanceType<DefineComponent<OptionProps>>
+export type OptionInstance = InstanceType<DefineComponent<OptionProps>>
 
 export interface OptionGroupProps {
   disabled: boolean
@@ -95,6 +95,6 @@ export const optionGroupPropsDef = {
   options: PropTypes.array.def([]),
 }
 
-export type OptionGroupComponent = InstanceType<DefineComponent<OptionGroupProps>>
+export type OptionGroupInstance = InstanceType<DefineComponent<OptionGroupProps>>
 
 export type SelectFilterFn = (searchValue: string, option: OptionProps) => boolean
