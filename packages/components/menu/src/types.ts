@@ -8,10 +8,10 @@ export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 
 export interface MenuProps {
   collapsed: boolean
-  disabled: boolean
   indent?: number
   mode: MenuMode
   multiple: boolean
+  selectable?: boolean
   selectedIds: Array<string | number>
   openedIds: Array<string | number>
   theme?: MenuTheme
@@ -19,10 +19,10 @@ export interface MenuProps {
 
 export const menuPropsDef = {
   collapsed: PropTypes.bool.def(false),
-  disabled: PropTypes.bool.def(false),
   indent: PropTypes.number,
   mode: PropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const).def('vertical'),
   multiple: PropTypes.bool.def(false),
+  selectable: PropTypes.bool,
   selectedIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).def(() => []),
   openedIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).def(() => []),
   theme: PropTypes.oneOf(['light', 'dark'] as const),
@@ -73,8 +73,10 @@ export const subMenuPropsDef = {
   icon: PropTypes.string,
   overlayClass: PropTypes.string,
   suffix: PropTypes.string,
-  suffixRotates: (PropTypes.array as unknown) as VueTypeDef<[number, number]>,
+  suffixRotates: (PropTypes.arrayOf(PropTypes.number) as unknown) as VueTypeDef<[number, number]>,
   title: PropTypes.string,
 }
 
 export type SubMenuComponent = InstanceType<DefineComponent<SubMenuProps>>
+
+export const arr: Array<string | number> = [1, '2']

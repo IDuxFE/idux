@@ -1,5 +1,5 @@
 <template>
-  <ix-button ref="triggerRef" v-click-outside="hide">Click</ix-button>
+  <ix-button ref="triggerRef" v-click-outside="() => hide()">Click</ix-button>
   <ix-button @click="handleClick">Update Trigger</ix-button>
 
   <div v-show="visibility" ref="overlayRef">

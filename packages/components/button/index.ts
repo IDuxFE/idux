@@ -13,6 +13,13 @@ IxButtonGroup.install = (app: App): void => {
 
 export { IxButton, IxButtonGroup }
 
-export type { ButtonComponent, ButtonProps, ButtonShape, ButtonGroupComponent, ButtonGroupProps } from './src/types'
+export type {
+  ButtonComponent,
+  ButtonProps,
+  ButtonMode,
+  ButtonShape,
+  ButtonGroupComponent,
+  ButtonGroupProps,
+} from './src/types'
 
-export type { ButtonMode, ButtonSize } from '@idux/components/config'
+export type { ButtonSize } from '@idux/components/config'

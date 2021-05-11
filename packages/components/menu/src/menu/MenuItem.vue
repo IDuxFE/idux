@@ -45,8 +45,12 @@ export default defineComponent({
         evt.preventDefault()
         evt.stopPropagation()
       } else {
-        menuContext.menuItemClick(cid.value, props)
-        subMenuContext?.menuItemClick(cid.value, props)
+        menuContext.menuItemClick(evt, cid.value, props)
+        if (subMenuContext) {
+          subMenuContext?.menuItemClick(evt, cid.value, props)
+        } else {
+          menuContext.childMenuItemClick()
+        }
       }
     }
 

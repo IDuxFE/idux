@@ -23,6 +23,7 @@ import {
   ExclamationCircle,
   Star,
   VerticalAlignTop,
+  Ellipsis,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -48,4 +49,5 @@ export const staticIcons: IconDefinition[] = [
   ExclamationCircle,
   Star,
   VerticalAlignTop,
+  Ellipsis,
 ]

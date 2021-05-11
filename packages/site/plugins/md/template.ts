@@ -26,8 +26,8 @@ export const getComponentScript = (componentName: string, imports: string[], com
     `
 }
 
-export const getExampleTemplate = (isAlone: boolean, first: string, second?: string): string => {
-  if (isAlone) {
+export const getExampleTemplate = (single: boolean, first: string, second?: string): string => {
+  if (single) {
     return `
   <ix-row gutter="8">
     <ix-col span="24">

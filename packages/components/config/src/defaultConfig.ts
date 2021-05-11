@@ -27,13 +27,14 @@ import type {
   MenuConfig,
   SubMenuConfig,
   StepsConfig,
+  DropdownConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
 import { numFormatter } from './numFormatter'
 
 // --------------------- General ---------------------
-const button = shallowReactive<ButtonConfig>({ mode: 'default', size: 'medium' })
+const button = shallowReactive<ButtonConfig>({ size: 'medium' })
 
 const icon = shallowReactive<IconConfig>({})
 
@@ -56,6 +57,11 @@ const space = shallowReactive<SpaceConfig>({ size: 'small' })
 const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
+const dropdown = shallowReactive<DropdownConfig>({
+  placement: 'bottom-start',
+  trigger: 'hover',
+})
+
 const menu = shallowReactive<MenuConfig>({
   indent: 24,
   theme: 'light',
@@ -189,6 +195,7 @@ export const defaultConfig: GlobalConfig = {
   space,
   row,
   // Navigation
+  dropdown,
   menu,
   subMenu,
   // Data Entry

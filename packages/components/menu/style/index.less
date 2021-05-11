@@ -2,12 +2,14 @@
 @import './menu.less';
 @import './dark.less';
 @import './collapsed.less';
+@import './dropdown.less';
 
 @menu-prefix: ~'@{idux-prefix}-menu';
 
 .@{menu-prefix} {
   &-vertical,
   &-inline {
+    padding: 0.02px 0;
     border-right: @menu-border-width @menu-border-style @menu-border-color;
 
     .@{menu-prefix}-item,
