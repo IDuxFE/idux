@@ -1,11 +1,6 @@
 <template>
-  <ix-button ref="triggerRef" v-click-outside="() => hide()">Click</ix-button>
-  <ix-button @click="handleClick">Update Trigger</ix-button>
-
-  <div v-show="visibility" ref="overlayRef">
-    tooltip
-    <div ref="arrowRef"></div>
-  </div>
+  <div ref="triggerRef" class="trigger">Trigger Element</div>
+  <div v-if="visibility" ref="overlayRef" class="overlay">Overlay Element</div>
 </template>
 
 <script lang="ts">
@@ -14,23 +9,25 @@ import { useOverlay } from '@idux/cdk/overlay'
 
 export default defineComponent({
   setup() {
-    const { initialize, overlayRef, triggerRef, update, arrowRef, visibility, hide } = useOverlay({
-      visible: false,
-      trigger: 'click',
-      placement: 'top',
-      scrollStrategy: 'reposition',
-      offset: [5, 5],
-      showDelay: 0,
-      hideDelay: 100,
-      allowEnter: true,
-    })
+    const { initialize, overlayRef, triggerRef, visibility } = useOverlay()
+
     onMounted(initialize)
 
-    const handleClick = () => {
-      update({ trigger: 'hover' })
-    }
-
-    return { overlayRef, triggerRef, handleClick, arrowRef, visibility, hide }
+    return { overlayRef, triggerRef, visibility }
   },
 })
 </script>
+
+<style lang="less" scoped>
+.trigger {
+  background: pink;
+  height: 200px;
+}
+
+.overlay {
+  width: 100px;
+  height: 100px;
+  background: purple;
+  color: #fff;
+}
+</style>
