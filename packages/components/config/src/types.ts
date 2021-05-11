@@ -182,6 +182,13 @@ export interface ProgressConfig {
   format: ProgressFormat
 }
 
+// Steps
+
+export type StepsSize = 'medium' | 'small'
+export interface StepsConfig {
+  size: StepsSize
+}
+
 // Other
 
 export interface BackTopConfig {
@@ -219,6 +226,7 @@ export interface GlobalConfig {
   statistic: StatisticConfig
   tooltip: TooltipConfig
   popover: PopoverConfig
+  steps: StepsConfig
   // Feedback
   message: MessageConfig
   result: ResultConfig

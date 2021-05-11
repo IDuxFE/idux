@@ -1,0 +1,142 @@
+@import '../../style/default.less';
+
+
+@steps-prefix: ~'@{idux-prefix}-steps';
+@step-prefix: ~'@{idux-prefix}-step';
+
+.@{steps-prefix} {
+  display: flex;
+  padding: @spacing-gutter;
+}
+
+.@{step-prefix} {
+  display: inline-block;
+  flex: 1;
+  font-size: @font-size-md;
+  &:last-child {
+    flex: none
+  }
+  &:not(:first-child) {
+    padding-left: @padding-md;
+  } 
+  &:not(:last-child) {
+    .@{step-prefix}-title:after {
+      position: absolute;
+      display: block;
+      left: 100%;
+      width: @step-tail-width;
+      height: @step-tail-height;
+      background: @grey;
+      content: "";
+    }
+  }
+  &-head {
+    position: relative;
+    display: inline-block;
+    width: @height-md;
+    height: @height-md;
+    border-radius: 50%;
+    border: 1px solid @grey;
+    text-align: center;
+    color: @grey;
+    &-icon, &-text {
+     line-height: @height-md;
+    }
+  }  
+  &-content {
+    display: inline-block;
+    margin-left: @spacing-gutter;    
+    width: calc(100% - @height-md - @spacing-gutter);
+    overflow: hidden;
+    color: @grey;
+    .@{step-prefix}-title {
+      display: inline-block;
+      position: relative;
+      line-height: @height-md;
+      padding-right: @padding-md;
+      &::after {
+        top: (@height-md / 2);
+      }
+      .@{step-prefix}-subtitle {
+        margin-left: @spacing-gutter;
+      }
+    }
+    .@{step-prefix}-description {
+      font-size: @font-size-sm;
+    }
+  }
+  &-head, &-content {
+    vertical-align: top;
+  }
+  &-can-click {
+    cursor: pointer;
+  }
+  &-custom {
+    .@{step-prefix}-head {
+      border: none;
+      background: none !important;
+      .@{step-prefix}-head-icon {
+        font-size: @step-custom-icon-width;
+      }
+    }   
+  }
+  
+  &-finish {
+    .@{step-prefix}-title:after, .@{step-prefix}-tail:after {
+      background: @step-highlight-color !important;
+    }
+    .@{step-prefix}-title .@{step-prefix}-subtitle {
+      color: @grey;
+    }
+  }
+  &-process {
+    .@{step-prefix}-head {
+      background: @step-highlight-color;
+      &-text {
+        color: @white;
+      }
+      &-dot {
+        position: relative;
+        top: @step-dot-active-offset;
+        width: @step-dot-width-active !important;
+        height: @step-dot-width-active !important;
+      }
+    }
+    .@{step-prefix}-description  {
+      color: @title-color;
+    }
+  }
+  
+  &-finish, &-process {
+    .@{step-prefix}-head {
+      border-color: @step-highlight-color;
+      &-icon {
+        color: @step-highlight-color;
+      }
+      &-dot {
+        background: @step-highlight-color !important;
+      }
+    }
+    .@{step-prefix}-title {
+      color: @title-color;
+    }
+  }
+  &-error {
+    .@{step-prefix}-head {
+      border-color: @red;
+      background: none;
+      &-icon {
+        color: @red;
+      }
+    }
+    .@{step-prefix}-title, .@{step-prefix}-description {
+      color: @red;
+    }
+  } 
+}
+
+@import './vertical.less';
+@import './labelPlacement.less';
+@import './dot.less';
+@import './percentCircle.less';
+@import './small.less';
