@@ -19,12 +19,17 @@
         color: @background-color-component;
       }
     }
+
+    img {
+      width: 100%;
+      max-width: @home-width - 100px;
+    }
   }
 
   &-content {
     position: relative;
-    width: @home-width;
-    margin: -@spacing-4xl auto 0;
+    max-width: @home-width;
+    margin: -@spacing-2xl auto 0;
     padding: @spacing-xl;
     background: @background-color-component;
     border: @border-width-sm @border-style @border-color;
