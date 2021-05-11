@@ -30,4 +30,4 @@ export interface TooltipProps {
   autoAdjust?: boolean
 }
 
-export type TooltipComponent = InstanceType<DefineComponent<TooltipProps>>
+export type TooltipInstance = InstanceType<DefineComponent<TooltipProps>>

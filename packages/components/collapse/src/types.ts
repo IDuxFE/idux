@@ -19,8 +19,8 @@ export const collapseInjectionKey: InjectionKey<CollapseProps> = Symbol()
 
 export type CollapseProps = Readonly<CollapseOriginalProps>
 
-export type CollapseComponent = InstanceType<DefineComponent<CollapseProps>>
+export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
 export type CollapsePanelProps = Readonly<CollapsePanelOriginalProps>
 
-export type CollapsePanelComponent = InstanceType<DefineComponent<CollapsePanelProps>>
+export type CollapsePanelInstance = InstanceType<DefineComponent<CollapsePanelProps>>

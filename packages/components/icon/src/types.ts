@@ -8,7 +8,7 @@ interface IconOriginalProps {
 
 export type IconProps = Readonly<IconOriginalProps>
 
-export type IconComponent = InstanceType<DefineComponent<IconProps>>
+export type IconInstance = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {
   name: string

@@ -10,4 +10,4 @@ export interface StatisticProps {
   value: string | number
 }
 
-export type StatisticComponent = InstanceType<DefineComponent<StatisticProps>>
+export type StatisticInstance = InstanceType<DefineComponent<StatisticProps>>

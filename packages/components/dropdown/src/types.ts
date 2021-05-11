@@ -22,7 +22,7 @@ export const dropdownPropsDef = {
   trigger: OverlayTriggerPropDef,
 }
 
-export type DropdownComponent = InstanceType<DefineComponent<DropdownProps>>
+export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>
 
 export interface DropdownButtonProps extends DropdownProps {
   icon: string
@@ -33,4 +33,4 @@ export const dropdownButtonPropsDef = {
   icon: PropTypes.string.def('ellipsis'),
 }
 
-export type DropdownButtonComponent = InstanceType<DefineComponent<DropdownButtonProps>>
+export type DropdownButtonInstance = InstanceType<DefineComponent<DropdownButtonProps>>

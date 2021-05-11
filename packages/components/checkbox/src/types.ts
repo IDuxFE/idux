@@ -16,7 +16,7 @@ export interface CheckboxBindings {
   blur: () => void
 }
 
-export type CheckboxComponent = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
+export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export interface CheckboxGroupProps {
   value?: string[]
@@ -25,4 +25,4 @@ export interface CheckboxGroupProps {
   name?: string
 }
 
-export type CheckboxGroupComponent = InstanceType<DefineComponent<CheckboxGroupProps>>
+export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>

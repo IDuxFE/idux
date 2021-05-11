@@ -16,7 +16,7 @@ export interface ButtonProps {
   icon?: string
 }
 
-export type ButtonComponent = InstanceType<DefineComponent<ButtonProps>>
+export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export interface ButtonGroupProps {
   mode?: ButtonMode
@@ -24,4 +24,4 @@ export interface ButtonGroupProps {
   shape?: ButtonShape
 }
 
-export type ButtonGroupComponent = InstanceType<DefineComponent<ButtonGroupProps>>
+export type ButtonGroupInstance = InstanceType<DefineComponent<ButtonGroupProps>>

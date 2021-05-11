@@ -28,7 +28,7 @@ export const menuPropsDef = {
   theme: PropTypes.oneOf(['light', 'dark'] as const),
 }
 
-export type MenuComponent = InstanceType<DefineComponent<MenuProps>>
+export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export interface MenuItemProps {
   cid?: string | number
@@ -44,7 +44,7 @@ export const menuItemPropsDef = {
   title: PropTypes.string,
 }
 
-export type MenuItemComponent = InstanceType<DefineComponent<MenuItemProps>>
+export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export interface MenuItemGroupProps {
   icon?: string
@@ -56,7 +56,7 @@ export const menuItemGroupPropsDef = {
   title: PropTypes.string,
 }
 
-export type MenuItemGroupComponent = InstanceType<DefineComponent<MenuItemGroupProps>>
+export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
 
 export interface SubMenuProps {
   cid?: string | number
@@ -77,6 +77,6 @@ export const subMenuPropsDef = {
   title: PropTypes.string,
 }
 
-export type SubMenuComponent = InstanceType<DefineComponent<SubMenuProps>>
+export type SubMenuInstance = InstanceType<DefineComponent<SubMenuProps>>
 
 export const arr: Array<string | number> = [1, '2']
