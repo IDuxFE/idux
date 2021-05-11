@@ -1,5 +1,4 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import { renderWork } from '@tests'
 import IxDropdown from '../src/Dropdown.vue'
 import { DropdownProps } from '../src/types'
 
@@ -10,5 +9,14 @@ describe('Dropdown.vue', () => {
     DropdownMount = options => mount(IxDropdown, { ...options })
   })
 
-  renderWork(IxDropdown)
+  test('render work', () => {
+    const wrapper = DropdownMount({})
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(() => {
+      wrapper.vm.$forceUpdate()
+      wrapper.unmount()
+    }).not.toThrow()
+  })
 })

@@ -75,7 +75,7 @@ export interface OverlayOptions {
 export interface OverlayInstance<
   TE extends OverlayElement = OverlayElement,
   OE extends OverlayElement = OverlayElement,
-  AE extends OverlayElement = OverlayElement
+  AE extends OverlayElement = OverlayElement,
 > {
   /**
    * Initialize the overlay.

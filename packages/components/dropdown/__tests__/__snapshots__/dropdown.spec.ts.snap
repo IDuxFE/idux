@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown.vue render work 1`] = `
+"<a class=\\"ix-dropdown\\">
+  <!--v-if-->
+  <ix-portal target=\\"ix-dropdown-container\\">
+    <transition-stub>
+      <div class=\\"\\" style=\\"display: none; position: absolute; left: 0px; top: 0px; margin: 0px;\\"></div>
+    </transition-stub>
+  </ix-portal>
+</a>"
+`;

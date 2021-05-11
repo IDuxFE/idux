@@ -4,6 +4,7 @@ import { PropTypes } from '@idux/cdk/utils'
 import { stepsToken } from './token'
 import { defineComponent, inject, computed, watchEffect, ref } from 'vue'
 import { isNumber } from '@idux/cdk/utils'
+import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
   name: 'IxStep',
@@ -24,9 +25,9 @@ export default defineComponent({
     let leftDeg = ref()
     let rightDeg = ref()
     const slotIcon = slots.icon?.(),
-          title = props.title || slots.title?.(),
-          subTitle = props.subTitle || slots.subTitle?.(),
-          description = props.description || slots.description?.();
+      title = props.title || slots.title?.(),
+      subTitle = props.subTitle || slots.subTitle?.(),
+      description = props.description || slots.description?.()
 
     const curStatus = computed(() => {
       if (props.status) {
@@ -58,8 +59,8 @@ export default defineComponent({
       return {
         [`ix-step-${curStatus.value!}`]: true,
         'ix-step-custom': slotIcon || iconName.value,
-        'ix-step-can-click':canClick.value,
-        'ix-step-disabled': props.disabled
+        'ix-step-can-click': canClick.value,
+        'ix-step-disabled': props.disabled,
       }
     })
 
@@ -81,45 +82,46 @@ export default defineComponent({
     }
 
     const renderHeadNode = () => {
-
-      let headNode;
+      let headNode
 
       if (canShowPercent.value) {
         headNode = (
           <>
-          <div class="ix-step-head-percent">
-            <div class="ix-step-head-percent-right">
-              <div class="ix-step-head-percent-circle" style={'transform: rotate(' + rightDeg.value + 'deg)'}></div>
+            <div class="ix-step-head-percent">
+              <div class="ix-step-head-percent-right">
+                <div class="ix-step-head-percent-circle" style={'transform: rotate(' + rightDeg.value + 'deg)'}></div>
+              </div>
+              <div class="ix-step-head-percent-left">
+                <div class="ix-step-head-percent-circle" style={'transform: rotate(' + leftDeg.value + 'deg)'}></div>
+              </div>
             </div>
-            <div class="ix-step-head-percent-left">
-              <div class="ix-step-head-percent-circle" style={'transform: rotate(' + leftDeg.value + 'deg)'}></div>
-            </div>
-          </div>
-          <span class="ix-step-head-text">{props.index + 1}</span>
+            <span class="ix-step-head-text">{props.index + 1}</span>
           </>
         )
       } else if (progressDotSlot) {
-        headNode = progressDotSlot({ index: props.index, status: curStatus.value, title, subTitle, description,  prefixCls: 'ix-step' })
+        headNode = progressDotSlot({
+          index: props.index,
+          status: curStatus.value,
+          title,
+          subTitle,
+          description,
+          prefixCls: 'ix-step',
+        })
       } else if (isDot.value) {
-        headNode = (<span class="ix-step-head-dot"></span>)
+        headNode = <span class="ix-step-head-dot"></span>
       } else if (slotIcon) {
-        headNode = (
-          <span class="ix-step-head-icon">
-            {slotIcon}
-          </span>
-        )
+        headNode = <span class="ix-step-head-icon">{slotIcon}</span>
       } else if (iconName.value) {
-        headNode = (<ix-icon class="ix-step-head-icon" name={iconName.value} />)
+        headNode = <IxIcon class="ix-step-head-icon" name={iconName.value} />
       } else if (isFinish.value) {
-        headNode = (<ix-icon class="ix-step-head-icon" name="check" />)
+        headNode = <IxIcon class="ix-step-head-icon" name="check" />
       } else if (isError.value) {
-        headNode = (<ix-icon class="ix-step-head-icon" name="close" />)
-      } 
-      else {
-        headNode = (<span class="ix-step-head-text">{props.index + 1}</span>)
+        headNode = <IxIcon class="ix-step-head-icon" name="close" />
+      } else {
+        headNode = <span class="ix-step-head-text">{props.index + 1}</span>
       }
 
-      return headNode;
+      return headNode
     }
 
     return {
@@ -128,37 +130,26 @@ export default defineComponent({
       description,
       stepClass,
       emitChange,
-      renderHeadNode
+      renderHeadNode,
     }
   },
   render() {
-    const { stepClass, 
-            title,
-            subTitle,
-            description,
-            emitChange, 
-            renderHeadNode } = this;
+    const { stepClass, title, subTitle, description, emitChange, renderHeadNode } = this
 
     return (
       <div class="ix-step" class={stepClass} onclick={emitChange}>
         <div class="ix-step-tail"></div>
-        <div class="ix-step-head">
-          {renderHeadNode()}
-        </div>
+        <div class="ix-step-head">{renderHeadNode()}</div>
         <div class="ix-step-content">
           <div class="ix-step-title">
-            { title }
-            <span class="ix-step-subtitle">
-               { subTitle }
-            </span>
+            {title}
+            <span class="ix-step-subtitle">{subTitle}</span>
           </div>
-          <div class="ix-step-description">
-            { description }
-          </div>
+          <div class="ix-step-description">{description}</div>
         </div>
       </div>
-     )
-  }
+    )
+  },
 })
 
 function usePercent(percent: number | undefined, isActive: boolean, isError: boolean) {
@@ -173,7 +164,7 @@ function usePercent(percent: number | undefined, isActive: boolean, isError: boo
   let rightDeg = baseDeg
 
   let curDeg = Math.round((percent! / 100) * 360)
-  
+
   if (curDeg + baseDeg > maxDeg) {
     // 超过50%
     rightDeg = maxDeg
@@ -188,4 +179,3 @@ function usePercent(percent: number | undefined, isActive: boolean, isError: boo
     rightDeg,
   }
 }
-              

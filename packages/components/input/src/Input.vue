@@ -87,7 +87,7 @@ export default defineComponent({
   setup(props: InputProps, { emit }) {
     const attrs = useAttrs()
     const inputConfig = useGlobalConfig('input')
-    const inputRef = ref((null as unknown) as HTMLInputElement)
+    const inputRef = ref(null as unknown as HTMLInputElement)
 
     const {
       focus,

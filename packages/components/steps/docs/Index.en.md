@@ -1,9 +1,8 @@
 ---
 category: components
-type: Data Display
+type: Navigation
 title: Steps
 subtitle:
-order: 0
 ---
 
 

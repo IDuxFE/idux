@@ -5,7 +5,7 @@ import { AsyncValidatorFn, ValidationErrors, ValidatorFn, ValidatorOptions } fro
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  _valueRef: Ref<T> = ref((null as unknown) as T) as Ref<T>
+  _valueRef: Ref<T> = ref(null as unknown as T) as Ref<T>
   constructor(
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,

@@ -40,7 +40,7 @@ export const setup = (props: CheckboxProps, { slots }: SetupContext): ICheckboxB
 
   const attrs = useAttrs({ keys: ['type', 'tabindex'] })
 
-  const inputRef = ref((null as unknown) as HTMLInputElement)
+  const inputRef = ref(null as unknown as HTMLInputElement)
 
   const handleClick = (e: Event) => {
     if (isReadonly.value) {

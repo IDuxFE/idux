@@ -73,7 +73,7 @@ export const subMenuPropsDef = {
   icon: PropTypes.string,
   overlayClass: PropTypes.string,
   suffix: PropTypes.string,
-  suffixRotates: (PropTypes.arrayOf(PropTypes.number) as unknown) as VueTypeDef<[number, number]>,
+  suffixRotates: PropTypes.arrayOf(PropTypes.number) as unknown as VueTypeDef<[number, number]>,
   title: PropTypes.string,
 }
 

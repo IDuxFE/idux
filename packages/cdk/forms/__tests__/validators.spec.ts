@@ -3,7 +3,7 @@ import { AsyncValidatorFn, ErrorMessages, ValidationErrors, ValidatorFn } from '
 import { Validators } from '../src/validators'
 
 describe('validators.ts', () => {
-  const control = (null as unknown) as AbstractControl
+  const control = null as unknown as AbstractControl
 
   test('required work', () => {
     const required = Validators.required

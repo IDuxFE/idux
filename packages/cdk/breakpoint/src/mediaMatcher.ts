@@ -42,12 +42,12 @@ function createEmptyStyleRule(query: string): void {
 
 /** No-op matchMedia replacement for non-browser platforms. */
 function noopMatchMedia(query: string): MediaQueryList {
-  return ({
+  return {
     matches: query === 'all' || query === '',
     media: query,
     addEventListener: () => {},
     removeEventListener: () => {},
-  } as unknown) as MediaQueryList
+  } as unknown as MediaQueryList
 }
 
 /**  matchMedia is bound to the window scope intentionally as it is an illegal invocation to call it from a different scope. */
