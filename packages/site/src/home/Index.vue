@@ -12,7 +12,7 @@
     <div class="home-content">
       <h3 v-typography>{{ locale.moreText }}</h3>
       <ix-row>
-        <ix-col v-for="guideline in locale.guidelines" :key="guideline.name" xs="24" md="12" xl="8">
+        <ix-col v-for="guideline in locale.guidelines" :key="guideline.name" xs="24" sm="12" md="8">
           <div class="home-content-guideline-icon">
             <router-link :to="guideline.path">
               <ix-icon :name="guideline.icon" />

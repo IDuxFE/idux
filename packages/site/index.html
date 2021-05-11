@@ -1,13 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@idux</title>
-</head>
-<body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://api.github.com">
+    <link rel="preconnect" href="https://vars.hotjar.com">
+    <link rel="preconnect" href="https://script.hotjar.com">
+    <link rel="preload" href="https://script.hotjar.com/font-hotjar_5.65042d.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@IDUX - A UI Component Library for Vue 3.x</title>
+
+    <meta name="keywords" content="vue, vue3, component, components, ui-components, ui-component-library, typescript, open source, idux, iduxFE, 组件, 组件库, UI 框架">
+    <meta name="author" content="IduxFE Team">
+    <meta name="description" content="An enterprise-class UI component library, easy to use and make developing more effective.">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@idux">
+    <meta name="twitter:creator" content="@idux">
+    <meta name="twitter:title" content="@IDUX - A UI Component Library for Vue 3.x">
+    <meta name="twitter:description" content="An enterprise-class UI component library, easy to use and make developing more effective.">
+    <!-- <meta name="twitter:image" content="https://idux.site/imgs/preview.png"> -->
+
+    <meta property="og:url" content="https://idux.site">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@IDUX - A UI Component Library for Vue 3.x">
+    <meta property="og:site_name" content="@IDUX - A UI Component Library for Vue 3.x">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="An enterprise-class UI component library, easy to use and make developing more effective.">
+    <!-- <meta property="og:image" content="https://idux.site/imgs/preview.png">
+    <meta property="og:image:secure_url" content="https://idux.site/imgs/preview.png"> -->
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+
+    <!-- TODO: PWA
+    <meta name="theme-color" content="#1890ff">
+    <link rel="icon shortcut" type="image/svg+xml" href="/logo.svg">
+    <link rel="apple-touch-icon" href="/icons/120.png">
+    <link rel="manifest" href="/manifest.json"> 
+    -->
+
+    <!-- Hotjar Tracking Code for idux.site -->
+    <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:2394596,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-150TJFGX9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-150TJFGX9N');
+    </script>
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      ;(function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&')
+            })
+            .join('?')
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
+        }
+      })(window.location)
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+    
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
