@@ -1,156 +1,83 @@
 ---
 category: cdk
-type:
+type: 
 title: Overlay
 subtitle: 浮层
+order: 0
 ---
 
-- 创建定位浮层：`useOverlay`
+用于创建定位浮层，内部封装浮层显隐事件。
 
 ## 何时使用
 
-- `useOverlay`：创建定位浮层
+需要浮层定位到指定元素时使用。
 
 ## API
 
 ### `useOverlay`
 
-> 创建一个浮层实例，因为 `overlayRef` 必传，因此使用 `v-if` 时，请在外面包裹一层。
+#### `OverlayOptions`
+
+| 名称             | 类型                    | 默认值   | 备注                                                |
+| ---------------- | ----------------------- | -------- | --------------------------------------------------- |
+| `visible`        | `boolean`               | `false`  | 浮层默认展示状态                                    |
+| `scrollStrategy` | `OverlayScrollStrategy` | `none`   | 浮层滚动策略                                        |
+| `disabled`       | `boolean`               | `false`  | -                                                   |
+| `placement`      | `OverlayPlacement`      | `top`    | 浮层定位位置                                        |
+| `trigger`        | `OverlayTrigger`        | `manual` | 浮层触发显示方式                                    |
+| `allowEnter`     | `boolean`               | `false`  | 是否允许鼠标进入浮层，尽在 `trigger = hover` 时生效 |
+| `autoAdjust`     | `boolean`               | `true`   | 空间不足时是否重新定位                              |
+| `offset`         | `[number, number]`      | `[0, 0]` | 浮层水平、垂直偏移量                                |
+| `hideDelay`      | `number`                | 0        | 浮层隐藏延时                                        |
+| `showDelay`      | `number`                | 0        | 浮层显示延时
+
+#### `OverlayInstance`
+
+| 名称            | 类型                                          | 备注                       |
+| --------------- | --------------------------------------------- | -------------------------- |
+| `initialize`    | `() => void`                                  | 浮层初始化函数             |
+| `show`          | `(showDelay?: number) => void`                | 展示浮层                   |
+| `hide`          | `(hideDelay? :number) => void`                | 隐藏浮层                   |
+| `update`        | `(options?: Partial<OverlayOptions>) => void` | 更新浮层                   |
+| `destroy`       | `() => void`                                  | 销毁浮层，终止浮层自动事件 |
+| `visibility`    | `ComputedRef<boolean>`                        | 当前浮层展示状态           |
+| `placement`     | `ComputedRef<OverlayPlacement>`               | 当前浮层的真实位置         |
+| `triggerRef`    | `Ref<OverlayElement | null>`                  | 浮层触发元素               |
+| `triggerEvents` | `ComputedRef<OverlayTriggerEvents>`           | 浮层触发元素绑定事件       |
+| `overlayRef`    | `Ref<OverlayElement | null>`                  | 浮层元素                   |
+| `overlayEvents` | `OverlayPopperEvents`                         | 浮层元素绑定事件           |
 
 ```typescript
-import type { Options, Placement } from '@popperjs/core'
-import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 
-export type OverlayScrollStrategy = 'close' | 'reposition'
-export type OverlayTrigger = 'click' | 'hover' | 'focus'
-export type OverlayElement = ComponentPublicInstance | HTMLElement
-export type OverlayPlacement = Placement
+type OverlayScrollStrategy = 'none' | 'close' | 'reposition'
+type OverlayPlacement =
+  | 'topStart'
+  | 'top'
+  | 'topEnd'
+  | 'rightStart'
+  | 'right'
+  | 'rightEnd'
+  | 'bottomStart'
+  | 'bottom'
+  | 'bottomEnd'
+  | 'leftStart'
+  | 'left'
+  | 'leftEnd'
+type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
+type OverlayElement = ComponentPublicInstance | HTMLElement
 
-export interface OverlayTriggerEvents {
+interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
   onMouseenter?: (event: Event) => void
   onMouseleave?: (event: Event) => void
   onFocus?: (event: Event) => void
   onBlur?: (event: Event) => void
+  onContextmenu?: (event: Event) => void
 }
 
-export interface OverlayPopperEvents {
+interface OverlayPopperEvents {
   onMouseenter: () => void
   onMouseleave: () => void
-  onClick: (event: MouseEvent) => void
-}
-
-export interface OverlayOptions {
-  /**
-   * Control the visibility of the overlay
-   */
-  visible?: boolean
-  /* Scroll strategy for overlay */
-  scrollStrategy: OverlayScrollStrategy
-  /* Disable the overlay */
-  disabled?: boolean
-  /**
-   * The distance between the arrow and the starting point at both ends.
-   *Acting when the overlay uses border-radius.
-   */
-  arrowOffset?: number
-  /* Whether to show arrow. */
-  showArrow?: boolean
-  /* Alignment of floating layer. */
-  placement: OverlayPlacement
-  /**
-   * The options of popper.
-   * Used when ConnectOverlayOptions cannot meet the demand.
-   * Priority is higher than ConnectOverlayOptions.
-   */
-  popperOptions?: Partial<Options>
-  /* Trigger method. */
-  trigger: OverlayTrigger
-  /* Whether to allow the mouse to enter the overlay. */
-  allowEnter?: boolean
-  /**
-   * Overlay offset.
-   * [Horizontal axis offset, vertical axis offset]
-   */
-  offset: [number, number]
-  /**
-   * The delay of hiding overlay.
-   * Send 0 if you don't need it.
-   */
-  hideDelay: number
-  /**
-   * The delay of showing overlay.
-   * Send 0 if you don't need it.
-   */
-  showDelay: number
-}
-
-export interface OverlayInstance<
-  TE extends OverlayElement = OverlayElement,
-  OE extends OverlayElement = OverlayElement,
-  AE extends OverlayElement = OverlayElement
-> {
-  /**
-   * Initialize the overlay.
-   * The life cycle of the overlay will enter mounted.
-   */
-  initialize: () => void
-  /**
-   * Show the overlay.
-   * The style of the overlay container will be set to block.
-   */
-  show: (showDelay?: number) => void
-  /**
-   * Hide the overlay.
-   * The style of the overlay container will be set to none.
-   */
-  hide: (hideDelay?: number) => void
-  /**
-   * Update overlay.
-   * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.
-   * @param options
-   */
-  update: (options?: Partial<OverlayOptions>) => void
-  /**
-   * Destroy the overlay.
-   * The life cycle of the overlay will enter beforeDestroy.
-   * To show the overlay again, please recreate.
-   */
-  destroy: () => void
-  /**
-   * TODO
-   * The unique id of the overlay.
-   * Provide subsequent components with markings for the specified overlay treatment.
-   */
-  id: string
-  /**
-   * The display status of the current overlay.
-   * Control by visible and disable.
-   */
-  visibility: ComputedRef<boolean>
-  /**
-   * The truth DOM node of the trigger.
-   * The caller needs to bind the variable to the view.
-   */
-  triggerRef: Ref<TE | null>
-  /**
-   * Manually bind to the evt on the trigger.
-   */
-  triggerEventHandler: (evt: Event) => void
-  /**
-   * The truth DOM node of the overlay.
-   * The caller needs to bind the variable to the view.
-   */
-  overlayRef: Ref<OE | null>
-  /**
-   * Manually bind to events on the overlay.
-   */
-  overlayEventHandler: (evt: Event) => void
-  /**
-   * The truth DOM node of the arrow.
-   * If showArrow is false, we won't return arrowRef.
-   * The caller needs to bind the variable to the view.
-   */
-  arrowRef?: Ref<AE | null>
 }
 ```

@@ -54,6 +54,7 @@
     "chalk": "^4.1.0",
     "codecov": "^3.8.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dom-align": "^1.12.1",
     "esbuild": "^0.11.0",
     "eslint": "^7.23.0",
     "eslint-plugin-prettier": "^3.3.0",
