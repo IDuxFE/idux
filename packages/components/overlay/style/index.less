@@ -3,5 +3,35 @@
 @overlay-prefix: ~'@{idux-prefix}-overlay';
 
 .@{overlay-prefix} {
+  &-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+  }
 
+
+  &[placement^='top'] .@{overlay-prefix}-arrow {
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &[placement^='bottom'] .@{overlay-prefix}-arrow {
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-135deg);
+  }
+
+  &[placement^='left'] .@{overlay-prefix}-arrow {
+    right: -3px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  &[placement^='right'] .@{overlay-prefix}-arrow {
+    left: -3px;
+    top: 50%;
+    transform: translateY(-50%) rotate(135deg);
+  }
 }

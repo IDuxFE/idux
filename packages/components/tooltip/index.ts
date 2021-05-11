@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import IxTooltip from './src/tooltip'
+import IxTooltip from './src/Tooltip.vue'
 
 IxTooltip.install = (app: App): void => {
   app.component(IxTooltip.name, IxTooltip)

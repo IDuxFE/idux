@@ -1,6 +1,8 @@
 import type { DefineComponent } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
+import { PropTypes } from '@idux/cdk/utils'
+
 export interface TooltipProps {
   /**
    * title of popover
@@ -30,4 +32,28 @@ export interface TooltipProps {
   autoAdjust?: boolean
 }
 
-export type TooltipInstance = InstanceType<DefineComponent<TooltipProps>>
+export const tooltipPropsDef = {
+  title: PropTypes.string,
+  placement: PropTypes.oneOf([
+    'topStart',
+    'top',
+    'topEnd',
+    'rightStart',
+    'right',
+    'rightEnd',
+    'bottomStart',
+    'bottom',
+    'bottomEnd',
+    'leftStart',
+    'left',
+    'leftEnd',
+  ] as const),
+  visible: PropTypes.bool,
+  trigger: PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const),
+  hideDelay: PropTypes.number,
+  showDelay: PropTypes.number,
+  destroyOnHide: PropTypes.bool,
+  autoAdjust: PropTypes.bool,
+}
+
+export type TooltipComponent = InstanceType<DefineComponent<TooltipProps>>

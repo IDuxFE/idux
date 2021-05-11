@@ -11,4 +11,5 @@ order: 0
 
 ## en
 
-The simplest use.
+The simplest usage.
+

@@ -24,11 +24,14 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
   let visibleTimer: number | null = null
   let visibilityWatchHandler: WatchStopHandle
   let placementWatchHandler: WatchStopHandle
+  let skipEvent = true
 
   const triggerRef: Ref = ref<TE | null>(null)
   const overlayRef: Ref = ref<OE | null>(null)
 
-  const visibility = computed(() => !state.disabled && state.visible)
+  const visibility = computed(() => {
+    return !state.disabled && state.visible
+  })
 
   const placement = computed(() => state.placement)
 
@@ -133,6 +136,10 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
     event.stopPropagation()
     switch (event.type) {
       case 'mouseenter':
+        if (visibleTimer) {
+          clearTimeout(visibleTimer)
+          visibleTimer = null
+        }
         show()
         break
       case 'mouseleave':
@@ -187,6 +194,10 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
    * @private
    */
   const globalScroll = throttle((event: Event) => {
+    if (skipEvent) {
+      skipEvent = false
+      return
+    }
     if (!visibility.value) {
       return
     }
@@ -196,6 +207,7 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
     if (state.scrollStrategy === 'none') {
       return
     } else if (state.scrollStrategy === 'close') {
+      // todo prevent first event
       hide(0)
     } else {
       const triggerElement = convertElement(triggerRef).value

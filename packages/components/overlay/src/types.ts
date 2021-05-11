@@ -15,14 +15,14 @@ export interface OverlayProps extends OverlayOptions {
    */
   arrowOffset?: number
   /**
-   * The class name of arrow.
-   */
-  arrowClassName?: string
-  /**
    * Shows whether to turn on transition animation while hiding.
    * Please pass an empty string if you don't need it.
    */
   visibleTransition?: string
+  /**
+   * whether destroy when popover is hidden
+   */
+  destroyOnHide?: boolean
 }
 
 export const overlayPropsDef = {
@@ -50,9 +50,9 @@ export const overlayPropsDef = {
   hideDelay: PropTypes.number,
   showDelay: PropTypes.number,
   showArrow: PropTypes.bool.def(true),
-  arrowOffset: PropTypes.number.def(4),
-  arrowClassName: PropTypes.string,
+  arrowOffset: PropTypes.number.def(0),
   visibleTransition: PropTypes.string.def('ix-fade-fast'),
+  destroyOnHide: PropTypes.bool,
 }
 
 export type OverlayComponent = InstanceType<DefineComponent<OverlayProps>>

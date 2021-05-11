@@ -24,6 +24,7 @@ import { IxRate } from './rate'
 import { IxSelect, IxOption, IxOptionGroup } from './select'
 import { IxSwitch } from './switch'
 // import Data Display
+import { IxTooltip } from './tooltip'
 import { IxCollapse, IxCollapsePanel } from './collapse'
 import { IxSteps, IxStep } from './steps'
 import { IxBadge } from './badge'
@@ -32,8 +33,6 @@ import { IxEmpty } from './empty'
 import { IxImage } from './image'
 import { IxStatistic } from './statistic'
 import { IxTimeline, IxTimelineItem } from './timeline'
-import { IxTooltip } from './tooltip'
-import { IxPopover } from './popover'
 // import Feedback
 import { IxResult } from './result'
 import { IxSpin } from './spin'
@@ -78,6 +77,7 @@ const components = [
   IxOptionGroup,
   IxSwitch,
   // components Data Display
+  IxTooltip,
   IxCollapse,
   IxCollapsePanel,
   IxSteps,
@@ -89,8 +89,6 @@ const components = [
   IxStatistic,
   IxTimeline,
   IxTimelineItem,
-  IxTooltip,
-  IxPopover,
   // components Feedback
   IxResult,
   IxSpin,

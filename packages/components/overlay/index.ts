@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import IxOverlay from './src/Overlay.vue'
+import IxOverlay from './src/overlay'
 
 IxOverlay.install = (app: App): void => {
   app.component(IxOverlay.name, IxOverlay)

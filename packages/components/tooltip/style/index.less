@@ -3,6 +3,8 @@
 @tooltip-prefix: ~'@{idux-prefix}-tooltip';
 
 .@{tooltip-prefix} {
+  position: absolute;
+
   &-content {
     max-width: @tooltip-content-max-width;
     font-size: @tooltip-content-font-size;
@@ -16,45 +18,7 @@
   }
 
   &-arrow {
-    &-inner {
-      width: 0;
-      height: 0;
-      border-width: @tooltip-arrow-size;
-      display: inline-block;
-      border-style: solid;
-      border-color: transparent @tooltip-content-background @tooltip-content-background transparent;
-    }
-  }
-
-  &[data-popper-placement^='top'] .@{tooltip-prefix}-arrow {
-    bottom: -6px;
-
-    & > .@{tooltip-prefix}-arrow-inner {
-      transform: rotate(45deg);
-    }
-  }
-
-  &[data-popper-placement^='bottom'] .@{tooltip-prefix}-arrow {
-    top: -11px;
-
-    & > .@{tooltip-prefix}-arrow-inner {
-      transform: rotate(-135deg);
-    }
-  }
-
-  &[data-popper-placement^='left'] .@{tooltip-prefix}-arrow {
-    right: -3px;
-
-    & > .@{tooltip-prefix}-arrow-inner {
-      transform: rotate(-45deg);
-    }
-  }
-
-  &[data-popper-placement^='right'] .@{tooltip-prefix}-arrow {
-    left: -3px;
-
-    & > .@{tooltip-prefix}-arrow-inner {
-      transform: rotate(135deg);
-    }
+    border-width: @tooltip-arrow-size;
+    border-color: transparent @tooltip-content-background @tooltip-content-background transparent;
   }
 }
