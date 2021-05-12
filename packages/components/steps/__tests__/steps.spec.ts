@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxStep from '../src/Step.tsx'
-import IxSteps from '../src/Steps.tsx'
+import IxSteps from '../src/Steps'
+import IxStep from '../src/Step'
 import { nextTick, ref } from 'vue'
 
 const TestComponent = {

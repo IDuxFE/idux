@@ -1,6 +1,7 @@
 import type { App } from 'vue'
-import IxStep from './src/Step.tsx'
-import IxSteps from './src/Steps.tsx'
+
+import IxSteps from './src/Steps'
+import IxStep from './src/Step'
 
 IxSteps.install = (app: App): void => {
   app.component(IxSteps.name, IxSteps)
@@ -12,4 +13,4 @@ IxStep.install = (app: App): void => {
 
 export { IxSteps, IxStep }
 
-export type { StepsProps, StepProps } from './src/types'
+export type { StepsInstance, StepsProps, StepInstance, StepProps } from './src/types'

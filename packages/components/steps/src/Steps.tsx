@@ -1,68 +1,55 @@
-import type { SetupContext } from 'vue'
 import type { StepsProps } from './types'
-import { stepsToken } from './token'
-import { defineComponent, provide, computed  } from 'vue'
-import { PropTypes, getSlotNodes } from '@idux/cdk/utils'
+
+import { computed, defineComponent, provide, ref, watch } from 'vue'
+import { getSlotNodes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { stepsToken } from './token'
+import { stepsPropsDef } from './types'
 
 export default defineComponent({
   name: 'IxSteps',
-  props: {
-    active: PropTypes.number.def(0),
-    direction: PropTypes.oneOf(['horizontal', 'vertical'] as const).def('horizontal'),
-    placement: PropTypes.oneOf(['horizontal', 'vertical'] as const).def('horizontal'),
-    percent: {
-      type: Number,
-      validator: function(value: number) {
-        return value <= 100 && value >= 0
-      }
-    },
-    progressDot: PropTypes.bool.def(false),
-    size: PropTypes.oneOf(['medium', 'small'] as const).def('medium'),
-    status: PropTypes.oneOf(['wait', 'process', 'finish', 'error'] as const).def('process'), // 当前步骤的状态
-  },
-  setup(props: StepsProps, {slots}: SetupContext) {
+  props: stepsPropsDef,
+  emits: ['update:active'],
+  setup(props: StepsProps, { slots, emit, attrs }) {
+    const progressDot = slots.progressDot
+    const currActive = ref(props.active)
+    watch(
+      () => props.active,
+      value => (currActive.value = value),
+    )
+    const changeActive = (index: number) => {
+      currActive.value = index
+      emit('update:active', index)
+    }
 
-    const progressDotSlot = slots.progressDot;
-    
-    provide(stepsToken, { stepsProps: props, progressDotSlot })
+    provide(stepsToken, { props, currActive, changeActive, progressDot })
 
-    const stepsConfig = useGlobalConfig('steps')
+    const config = useGlobalConfig('steps')
 
-    const size = computed(() => props.size ?? stepsConfig.size)
-    
-    const stepsSlot = getSlotNodes(slots)
-
-    const stepsClass = computed(() => {
+    const classes = computed(() => {
+      const size = props.size ?? config.size
       return {
         'ix-steps': true,
-        ['ix-steps-' + props.direction]: true,
-        [`ix-steps-${size.value!}`]: true,
+        [`ix-steps-${props.direction}`]: true,
+        [`ix-steps-${size}`]: true,
         'ix-steps-vertical-placement': props.placement === 'vertical',
         'ix-steps-vertical': props.direction === 'vertical',
-        'ix-steps-dot': props.progressDot || progressDotSlot,
+        'ix-steps-dot': props.progressDot || !!progressDot,
       }
     })
 
-    return {
-      stepsClass,
-    }
+    return { classes }
   },
-  render() { 
-    const { stepsClass } = this
-    const stepsSlot = getSlotNodes(this.$slots)
-    const emitChange = (active: number) => {
-      this.$emit('change', active)
-    }
+  render() {
+    const { classes, $slots } = this
+    const children = getSlotNodes($slots)
     return (
-         <div class={stepsClass}>
-           {stepsSlot.map((item, index) => {
-             item.props = item.props??{}
-             item.props.index = index
-             item.props.onStepClick = emitChange
-             return item
-           })}
-         </div>
+      <div class={classes}>
+        {children.map((item, index) => {
+          item.props!.index = index
+          return item
+        })}
+      </div>
     )
-  }
+  },
 })

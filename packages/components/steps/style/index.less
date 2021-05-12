@@ -1,6 +1,5 @@
 @import '../../style/default.less';
 
-
 @steps-prefix: ~'@{idux-prefix}-steps';
 @step-prefix: ~'@{idux-prefix}-step';
 
@@ -13,12 +12,13 @@
   display: inline-block;
   flex: 1;
   font-size: @font-size-md;
+
   &:last-child {
-    flex: none
+    flex: none;
   }
   &:not(:first-child) {
     padding-left: @padding-md;
-  } 
+  }
   &:not(:last-child) {
     .@{step-prefix}-title:after {
       position: absolute;
@@ -27,7 +27,7 @@
       width: @step-tail-width;
       height: @step-tail-height;
       background: @grey;
-      content: "";
+      content: '';
     }
   }
   &-head {
@@ -39,13 +39,14 @@
     border: 1px solid @grey;
     text-align: center;
     color: @grey;
-    &-icon, &-text {
-     line-height: @height-md;
+    &-icon,
+    &-text {
+      line-height: @height-md;
     }
-  }  
+  }
   &-content {
     display: inline-block;
-    margin-left: @spacing-gutter;    
+    margin-left: @spacing-gutter;
     width: calc(100% - @height-md - @spacing-gutter);
     overflow: hidden;
     color: @grey;
@@ -65,10 +66,11 @@
       font-size: @font-size-sm;
     }
   }
-  &-head, &-content {
+  &-head,
+  &-content {
     vertical-align: top;
   }
-  &-can-click {
+  &-clickable {
     cursor: pointer;
   }
   &-custom {
@@ -78,11 +80,12 @@
       .@{step-prefix}-head-icon {
         font-size: @step-custom-icon-width;
       }
-    }   
+    }
   }
-  
+
   &-finish {
-    .@{step-prefix}-title:after, .@{step-prefix}-tail:after {
+    .@{step-prefix}-title:after,
+    .@{step-prefix}-tail:after {
       background: @step-highlight-color !important;
     }
     .@{step-prefix}-title .@{step-prefix}-subtitle {
@@ -102,12 +105,13 @@
         height: @step-dot-width-active !important;
       }
     }
-    .@{step-prefix}-description  {
+    .@{step-prefix}-description {
       color: @title-color;
     }
   }
-  
-  &-finish, &-process {
+
+  &-finish,
+  &-process {
     .@{step-prefix}-head {
       border-color: @step-highlight-color;
       &-icon {
@@ -129,10 +133,15 @@
         color: @red;
       }
     }
-    .@{step-prefix}-title, .@{step-prefix}-description {
+    .@{step-prefix}-title,
+    .@{step-prefix}-description {
       color: @red;
     }
-  } 
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+  }
 }
 
 @import './vertical.less';
