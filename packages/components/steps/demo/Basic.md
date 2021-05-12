@@ -10,3 +10,5 @@ order: 0
 简单的步骤条。
 
 ## en
+
+The most basic step bar.

@@ -3,6 +3,7 @@ category: components
 type: Navigation
 title: Steps
 subtitle:
+single: true
 ---
 
 

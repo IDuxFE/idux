@@ -10,3 +10,5 @@ order: 4
 简单的竖直方向的步骤条。
 
 ## en
+
+A simple step bar in the vertical direction.
