@@ -7,4 +7,4 @@ IxSwitch.install = (app: App): void => {
 }
 
 export { IxSwitch }
-export type { SwitchComponent, SwitchProps } from './src/types'
+export type { SwitchInstance, SwitchProps } from './src/types'

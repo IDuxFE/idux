@@ -13,6 +13,6 @@ IxDropdownButton.install = (app: App): void => {
 
 export { IxDropdown, IxDropdownButton }
 
-export type { DropdownComponent, DropdownProps, DropdownButtonComponent, DropdownButtonProps } from './src/types'
+export type { DropdownInstance, DropdownProps, DropdownButtonInstance, DropdownButtonProps } from './src/types'
 
 export { dropdownToken as ɵDropdownToken } from './src/token'

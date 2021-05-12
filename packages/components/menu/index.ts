@@ -29,12 +29,12 @@ IxSubMenu.install = (app: App): void => {
 export { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu }
 
 export type {
-  MenuComponent,
+  MenuInstance,
   MenuProps,
-  MenuItemComponent,
+  MenuItemInstance,
   MenuItemProps,
-  MenuItemGroupComponent,
+  MenuItemGroupInstance,
   MenuItemGroupProps,
-  SubMenuComponent,
+  SubMenuInstance,
   SubMenuProps,
 } from './src/types'

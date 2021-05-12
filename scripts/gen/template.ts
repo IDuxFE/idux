@@ -77,7 +77,7 @@ Ix${compName}.install = (app: App): void => {
 
 export { Ix${compName} }
 
-export type { ${compName}Component, ${compName}Props } from './src/types'
+export type { ${compName}Instance, ${compName}Props } from './src/types'
 `
 }
 

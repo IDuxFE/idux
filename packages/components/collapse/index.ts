@@ -12,4 +12,4 @@ IxCollapsePanel.install = (app: App): void => {
 
 export { IxCollapse, IxCollapsePanel }
 
-export type { CollapseProps, CollapseComponent, CollapsePanelProps, CollapsePanelComponent } from './src/types'
+export type { CollapseProps, CollapseInstance, CollapsePanelProps, CollapsePanelInstance } from './src/types'

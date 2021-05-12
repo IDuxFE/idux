@@ -9,4 +9,4 @@ IxLink.install = (app: App): void => {
   app.component(IxLink.name, IxLink)
 }
 export { IxAnchor, IxLink }
-export type { AnchorComponent, AnchorProps, AnchorLinkComponent, AnchorLinksProps } from './src/types'
+export type { AnchorInstance, AnchorProps, AnchorLinkInstance, AnchorLinksProps } from './src/types'

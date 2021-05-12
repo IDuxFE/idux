@@ -7,4 +7,4 @@ IxTag.install = (app: App): void => {
 
 export { IxTag }
 
-export type { TagComponent, TagProps } from './src/types'
+export type { TagInstance, TagProps } from './src/types'

@@ -8,4 +8,4 @@ IxRate.install = (app: App): void => {
 
 export { IxRate }
 
-export type { RateComponent, RateProps } from './src/types'
+export type { RateInstance, RateProps } from './src/types'

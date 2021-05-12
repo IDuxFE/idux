@@ -7,4 +7,5 @@ IxPopover.install = (app: App): void => {
 }
 
 export { IxPopover }
-export * from './src/types'
+
+export type { PopoverInstance, PopoverProps } from './src/types'
