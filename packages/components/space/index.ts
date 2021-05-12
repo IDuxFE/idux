@@ -8,6 +8,6 @@ IxSpace.install = (app: App): void => {
 
 export { IxSpace }
 
-export type { SpaceComponent, SpaceProps, SpaceAlign, SpaceDirection } from './src/types'
+export type { SpaceInstance, SpaceProps, SpaceAlign, SpaceDirection } from './src/types'
 
 export type { SpaceSize } from '@idux/components/config'

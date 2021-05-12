@@ -8,6 +8,6 @@ IxDivider.install = (app: App): void => {
 
 export { IxDivider }
 
-export type { DividerComponent, DividerProps } from './src/types'
+export type { DividerInstance, DividerProps } from './src/types'
 
 export type { DividerPosition, DividerType } from '@idux/components/config'

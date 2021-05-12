@@ -8,4 +8,4 @@ IxTitle.install = (app: App): void => {
 
 export { IxTitle }
 
-export type { TitleComponent, TitleProps } from './src/types'
+export type { TitleInstance, TitleProps } from './src/types'

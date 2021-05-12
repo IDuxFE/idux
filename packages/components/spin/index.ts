@@ -8,4 +8,4 @@ IxSpin.install = (app: App): void => {
 
 export { IxSpin }
 
-export type { SpinComponent, SpinProps } from './src/types'
+export type { SpinInstance, SpinProps } from './src/types'

@@ -14,11 +14,11 @@ IxButtonGroup.install = (app: App): void => {
 export { IxButton, IxButtonGroup }
 
 export type {
-  ButtonComponent,
+  ButtonInstance,
   ButtonProps,
   ButtonMode,
   ButtonShape,
-  ButtonGroupComponent,
+  ButtonGroupInstance,
   ButtonGroupProps,
 } from './src/types'
 
