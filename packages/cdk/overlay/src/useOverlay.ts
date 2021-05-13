@@ -50,6 +50,7 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
   }
 
   function show(showDelay = state.showDelay): void {
+    console.log(showDelay)
     toggle(true, showDelay)
   }
 
