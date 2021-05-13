@@ -19,7 +19,18 @@ const defaultOptions: Required<OverlayOptions> = {
 }
 
 export function useDefaultOptions(options: OverlayOptions): Required<OverlayOptions> {
-  return Object.assign({}, defaultOptions, options)
+  return {
+    visible: options.visible ?? defaultOptions.visible,
+    scrollStrategy: options.scrollStrategy ?? defaultOptions.scrollStrategy,
+    disabled: options.disabled ?? defaultOptions.disabled,
+    placement: options.placement ?? defaultOptions.placement,
+    trigger: options.trigger ?? defaultOptions.trigger,
+    allowEnter: options.allowEnter ?? defaultOptions.allowEnter,
+    autoAdjust: options.autoAdjust ?? defaultOptions.autoAdjust,
+    offset: options.offset ?? defaultOptions.offset,
+    hideDelay: options.hideDelay ?? defaultOptions.hideDelay,
+    showDelay: options.showDelay ?? defaultOptions.showDelay,
+  }
 }
 
 export function convertElement(elementRef: Ref<OverlayElement | null>): ComputedRef<HTMLElement> {
