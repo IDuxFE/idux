@@ -19,8 +19,8 @@ export type OverlayPlacement =
 export type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type OverlayElement = ComponentPublicInstance | HTMLElement
 
-export const OverlayScrollStrategyDef = PropTypes.oneOf(['none', 'close', 'reposition'] as const)
-export const OverlayPlacementDef = PropTypes.oneOf([
+export const overlayScrollStrategyDef = PropTypes.oneOf(['none', 'close', 'reposition'] as const)
+export const overlayPlacementDef = PropTypes.oneOf([
   'topStart',
   'top',
   'topEnd',
@@ -34,7 +34,7 @@ export const OverlayPlacementDef = PropTypes.oneOf([
   'left',
   'leftEnd',
 ] as const)
-export const OverlayTriggerDef = PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const)
+export const overlayTriggerDef = PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const)
 
 export interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
