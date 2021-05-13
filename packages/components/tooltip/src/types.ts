@@ -2,6 +2,7 @@ import type { DefineComponent } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 import { PropTypes } from '@idux/cdk/utils'
+import { overlayPlacementDef, overlayTriggerDef } from '@idux/cdk/overlay'
 
 export interface TooltipProps {
   /**
@@ -34,22 +35,9 @@ export interface TooltipProps {
 
 export const tooltipPropsDef = {
   title: PropTypes.string,
-  placement: PropTypes.oneOf([
-    'topStart',
-    'top',
-    'topEnd',
-    'rightStart',
-    'right',
-    'rightEnd',
-    'bottomStart',
-    'bottom',
-    'bottomEnd',
-    'leftStart',
-    'left',
-    'leftEnd',
-  ] as const),
+  placement: overlayPlacementDef,
   visible: PropTypes.bool,
-  trigger: PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const),
+  trigger: overlayTriggerDef,
   hideDelay: PropTypes.number,
   showDelay: PropTypes.number,
   destroyOnHide: PropTypes.bool,

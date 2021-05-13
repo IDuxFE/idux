@@ -1,5 +1,11 @@
 <template>
-  <ix-overlay clsPrefix="ix-tooltip" :visible="visibility" allow-enter v-bind="config" scroll-strategy="close">
+  <ix-overlay
+    v-model:visible="visibility"
+    clsPrefix="ix-tooltip"
+    allow-enter
+    v-bind="config"
+    scroll-strategy="reposition"
+  >
     <template #trigger>
       <slot />
     </template>
@@ -39,7 +45,7 @@ export default defineComponent({
     })
     const visibility = computed({
       get() {
-        return props.visible
+        return props.visible!
       },
       set(visible: boolean) {
         emit('update:visible', visible)
