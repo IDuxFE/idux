@@ -10,3 +10,5 @@ export type {
   OverlayTriggerEvents,
   OverlayPopperEvents,
 } from './src/types'
+
+export { OverlayPlacementDef, OverlayTriggerDef, OverlayScrollStrategyDef } from './src/types'

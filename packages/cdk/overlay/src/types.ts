@@ -1,5 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
+import { PropTypes } from '@idux/cdk/utils'
+
 export type OverlayScrollStrategy = 'none' | 'close' | 'reposition'
 export type OverlayPlacement =
   | 'topStart'
@@ -16,6 +18,23 @@ export type OverlayPlacement =
   | 'leftEnd'
 export type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type OverlayElement = ComponentPublicInstance | HTMLElement
+
+export const OverlayScrollStrategyDef = PropTypes.oneOf(['none', 'close', 'reposition'] as const)
+export const OverlayPlacementDef = PropTypes.oneOf([
+  'topStart',
+  'top',
+  'topEnd',
+  'rightStart',
+  'right',
+  'rightEnd',
+  'bottomStart',
+  'bottom',
+  'bottomEnd',
+  'leftStart',
+  'left',
+  'leftEnd',
+] as const)
+export const OverlayTriggerDef = PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const)
 
 export interface OverlayTriggerEvents {
   onClick?: (event: Event) => void
