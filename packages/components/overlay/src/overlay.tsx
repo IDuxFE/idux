@@ -12,6 +12,7 @@ import { overlayPropsDef } from './types'
 export default defineComponent({
   name: 'IxOverlay',
   components: { IxPortal },
+  inheritAttrs: false,
   props: overlayPropsDef,
   emits: ['update:visible', 'update:placement'],
   setup(props: OverlayProps, { slots, attrs }: SetupContext) {
