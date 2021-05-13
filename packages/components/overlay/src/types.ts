@@ -24,6 +24,10 @@ export interface OverlayProps extends OverlayOptions {
    * whether destroy when popover is hidden
    */
   destroyOnHide?: boolean
+  /**
+   * The class name prefix of overlay.
+   */
+  clsPrefix?: string
 }
 
 export const overlayPropsDef = {
@@ -41,6 +45,7 @@ export const overlayPropsDef = {
   arrowOffset: PropTypes.number.def(0),
   visibleTransition: PropTypes.string.def('ix-fade-fast'),
   destroyOnHide: PropTypes.bool,
+  clsPrefix: PropTypes.string.def('ix-overlay'),
 }
 
 export type OverlayComponent = InstanceType<DefineComponent<OverlayProps>>

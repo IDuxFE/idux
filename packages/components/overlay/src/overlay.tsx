@@ -15,13 +15,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: overlayPropsDef,
   emits: ['update:visible', 'update:placement'],
-  setup(props: OverlayProps, { slots, attrs }: SetupContext) {
-    const { clsPrefix } = attrs
-
-    if (!clsPrefix) {
-      Logger.warn('Your overlay may need class name prefix.')
-    }
-
+  setup(props: OverlayProps, { slots }: SetupContext) {
     if (!hasSlot(slots, 'trigger')) {
       Logger.error('The component must contain trigger slot.')
     }
@@ -45,6 +39,8 @@ export default defineComponent({
 
     useWatcher(visibility, placement, update)
 
+    const legalRender = computed<boolean>(() => hasSlot(slots, 'trigger') && hasSlot(slots, 'overlay'))
+
     const arrowStyle = computed(() => {
       if (!props.arrowOffset) {
         return {}
@@ -55,7 +51,7 @@ export default defineComponent({
       return { top: `${props.arrowOffset}px` }
     })
 
-    return { overlayRef, overlayEvents, triggerRef, triggerEvents, visibility, arrowStyle, clsPrefix, placement }
+    return { legalRender, overlayRef, overlayEvents, triggerRef, triggerEvents, visibility, arrowStyle, placement }
   },
   render() {
     const {
@@ -69,7 +65,12 @@ export default defineComponent({
       clsPrefix,
       placement,
       destroyOnHide,
+      legalRender,
     } = this
+
+    if (!legalRender) {
+      return null
+    }
 
     const trigger = cloneVNode(getFirstValidNode(getSlotNodes($slots, 'trigger'))!, {
       ...triggerEvents,

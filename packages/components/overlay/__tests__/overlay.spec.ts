@@ -1,6 +1,6 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxOverlay from '../src/Overlay.vue'
+import IxOverlay from '../src/overlay'
 import { OverlayProps } from '../src/types'
 
 describe('Overlay.vue', () => {
@@ -11,4 +11,10 @@ describe('Overlay.vue', () => {
   })
 
   renderWork(IxOverlay)
+
+  test('no slots', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    OverlayMount()
+    expect(error).toBeCalled()
+  })
 })
