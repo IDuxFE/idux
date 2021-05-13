@@ -3,6 +3,7 @@ import type { VueTypeDef } from 'vue-types'
 import type { OverlayOptions } from '@idux/cdk/overlay'
 
 import { PropTypes } from '@idux/cdk/utils'
+import { overlayTriggerDef, overlayPlacementDef, overlayScrollStrategyDef } from '@idux/cdk/overlay'
 
 export interface OverlayProps extends OverlayOptions {
   /**
@@ -27,23 +28,10 @@ export interface OverlayProps extends OverlayOptions {
 
 export const overlayPropsDef = {
   visible: PropTypes.bool,
-  scrollStrategy: PropTypes.oneOf(['none', 'close', 'reposition'] as const),
+  scrollStrategy: overlayScrollStrategyDef,
   disabled: PropTypes.bool,
-  placement: PropTypes.oneOf([
-    'topStart',
-    'top',
-    'topEnd',
-    'rightStart',
-    'right',
-    'rightEnd',
-    'bottomStart',
-    'bottom',
-    'bottomEnd',
-    'leftStart',
-    'left',
-    'leftEnd',
-  ] as const),
-  trigger: PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const),
+  placement: overlayPlacementDef,
+  trigger: overlayTriggerDef,
   allowEnter: PropTypes.bool,
   autoAdjust: PropTypes.bool,
   offset: (PropTypes.array as unknown) as VueTypeDef<[number, number]>,
