@@ -36,7 +36,7 @@ export interface TooltipProps {
 export const tooltipPropsDef = {
   title: PropTypes.string,
   placement: overlayPlacementDef,
-  visible: PropTypes.bool,
+  visible: PropTypes.bool.def(false),
   trigger: overlayTriggerDef,
   hideDelay: PropTypes.number,
   showDelay: PropTypes.number,

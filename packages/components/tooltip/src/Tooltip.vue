@@ -1,11 +1,5 @@
 <template>
-  <ix-overlay
-    v-model:visible="visibility"
-    clsPrefix="ix-tooltip"
-    allow-enter
-    v-bind="config"
-    scroll-strategy="reposition"
-  >
+  <ix-overlay v-model:visible="visibility" clsPrefix="ix-tooltip" allow-enter v-bind="config" scroll-strategy="close">
     <template #trigger>
       <slot />
     </template>
