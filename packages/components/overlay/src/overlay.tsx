@@ -1,7 +1,7 @@
 import type { SetupContext } from 'vue'
 import type { OverlayProps } from './types'
 
-import { cloneVNode, computed, defineComponent, Fragment, KeepAlive, onMounted, Transition } from 'vue'
+import { cloneVNode, computed, defineComponent, onMounted, Transition } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
 import { IxPortal } from '@idux/cdk/portal' // todo remove to components
 import { getSlotNodes, getFirstValidNode, hasSlot, Logger } from '@idux/cdk/utils'
@@ -79,15 +79,13 @@ export default defineComponent({
 
     const overlay = getFirstValidNode(getSlotNodes($slots, 'overlay'))
 
-    const Container = destroyOnHide ? Fragment : KeepAlive
-
     return (
       <>
         {trigger}
         <IxPortal target={`${clsPrefix}-container`}>
-          <Container>
-            <Transition name={visibleTransition}>
-              {visibility && (
+          <Transition name={visibleTransition}>
+            {destroyOnHide ? (
+              visibility && (
                 <div
                   class={[clsPrefix, 'ix-overlay']}
                   ref="overlayRef"
@@ -99,9 +97,22 @@ export default defineComponent({
                   {showArrow && <div style={arrowStyle} class={['ix-overlay-arrow', `${clsPrefix}-arrow`]} />}
                   <div class={`${clsPrefix}-content`}>{overlay}</div>
                 </div>
-              )}
-            </Transition>
-          </Container>
+              )
+            ) : (
+              <div
+                class={[clsPrefix, 'ix-overlay']}
+                ref="overlayRef"
+                v-show={visibility}
+                /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                // @ts-ignore
+                placement={placement}
+                {...overlayEvents}
+              >
+                {showArrow && <div style={arrowStyle} class={['ix-overlay-arrow', `${clsPrefix}-arrow`]} />}
+                <div class={`${clsPrefix}-content`}>{overlay}</div>
+              </div>
+            )}
+          </Transition>
         </IxPortal>
       </>
     )

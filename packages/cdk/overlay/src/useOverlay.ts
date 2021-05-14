@@ -8,7 +8,7 @@ import type {
   OverlayTriggerEvents,
 } from './types'
 
-import { computed, getCurrentInstance, onUnmounted, reactive, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onUnmounted, reactive, ref, watch } from 'vue'
 import domAlign from 'dom-align'
 import throttle from 'lodash/throttle'
 import { off, on } from '@idux/cdk/utils'
@@ -45,12 +45,10 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
     if (!triggerElement || !overlayElement) {
       return
     }
-
     initOverlay(overlayElement, triggerElement)
   }
 
   function show(showDelay = state.showDelay): void {
-    console.log(showDelay)
     toggle(true, showDelay)
   }
 
@@ -181,7 +179,9 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
    * @private
    */
   function watchVisibility(): void {
-    visibilityWatchHandler = watch(visibility, initialize, { flush: 'post' })
+    visibilityWatchHandler = watch(visibility, () => {
+      nextTick(initialize)
+    })
   }
 
   /**
@@ -230,7 +230,7 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
    * @private
    */
   function watchPlacement() {
-    placementWatchHandler = watch(() => state.placement, initialize, { flush: 'pre' })
+    placementWatchHandler = watch(() => state.placement, initialize, { flush: 'post' })
   }
 
   watchVisibility()

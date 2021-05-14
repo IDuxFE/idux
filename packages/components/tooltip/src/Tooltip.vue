@@ -1,5 +1,5 @@
 <template>
-  <ix-overlay v-model:visible="visibility" clsPrefix="ix-tooltip" allow-enter v-bind="config" scroll-strategy="close">
+  <ix-overlay v-model:visible="visibility" clsPrefix="ix-tooltip" allow-enter v-bind="config" scroll-strategy="none">
     <template #trigger>
       <slot />
     </template>
@@ -29,6 +29,7 @@ export default defineComponent({
     const config = computed<TooltipConfig>(() => {
       const config = useGlobalConfig('tooltip')
       return {
+        // todo offset
         placement: props.placement ?? config.placement,
         trigger: props.trigger ?? config.trigger,
         showDelay: props.showDelay ?? config.showDelay,
