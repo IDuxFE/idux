@@ -49,7 +49,7 @@ export function isObject<T = Record<any, any>>(val: unknown): val is T {
   return val !== null && typeof val === 'object'
 }
 
-export function isFunction(val: unknown): val is typeof Function {
+export function isFunction(val: unknown): val is (...args: any[]) => any {
   return _toString.call(val) === '[object Function]'
 }
 

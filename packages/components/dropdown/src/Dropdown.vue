@@ -23,13 +23,14 @@ import type { DropdownProps } from './types'
 
 import { defineComponent } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
+import { IxPortal } from '@idux/cdk/portal'
 import { IxIcon } from '@idux/components/icon'
 import { dropdownPropsDef } from './types'
 import { useDropdownConfig, useDropdownOpenState, useDropdownOverlay } from './useDropdown'
 
 export default defineComponent({
   name: 'IxDropdown',
-  directives: { clickOutside, IxIcon },
+  directives: { clickOutside, IxPortal, IxIcon },
   props: dropdownPropsDef,
   emits: ['update:visible'],
   setup(props: DropdownProps) {

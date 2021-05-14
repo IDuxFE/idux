@@ -1,5 +1,4 @@
-import { isObject, rAF } from '@idux/cdk/utils'
-import { isNil } from 'lodash'
+import { isNil, isObject, rAF } from '@idux/cdk/utils'
 import { easeInOutCubic, EasingFn } from './easings'
 
 export interface ScrollOptions {
