@@ -1,7 +1,7 @@
 import type { DefineComponent } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
-import { OverlayPlacementPropDef, OverlayTriggerPropDef } from '@idux/cdk/overlay'
+import { overlayPlacementDef, overlayTriggerDef } from '@idux/cdk/overlay'
 import { PropTypes } from '@idux/cdk/utils'
 
 export interface DropdownProps {
@@ -18,8 +18,8 @@ export const dropdownPropsDef = {
   disabled: PropTypes.bool.def(false),
   icon: PropTypes.string,
   overlayClass: PropTypes.string,
-  placement: OverlayPlacementPropDef,
-  trigger: OverlayTriggerPropDef,
+  placement: overlayPlacementDef,
+  trigger: overlayTriggerDef,
 }
 
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>
