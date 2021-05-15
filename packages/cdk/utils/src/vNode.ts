@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { VNode, VNodeChild } from 'vue'
 
-import { Comment, Fragment, Slots } from 'vue'
+import { Comment, Fragment, Slots, Text } from 'vue'
 
 import { isNil } from './typeof'
 
 const TEMPLATE = 'template'
 
-export const isFragment = (node: VNodeChild): boolean => (node as VNode).type === Fragment
 export const isComment = (node: VNodeChild): boolean => (node as VNode).type === Comment
+export const isFragment = (node: VNodeChild): boolean => (node as VNode).type === Fragment
 export const isTemplate = (node: VNodeChild): boolean => (node as VNode).type === TEMPLATE
+export const isText = (node: VNodeChild): boolean => (node as VNode).type === Text
 
 function getChildren(node: VNode, depth: number): VNode | undefined {
   if (isComment(node)) {
@@ -73,4 +75,32 @@ export function hasSlot(slots: Slots, key = 'default', ...options: unknown[]): b
   const vNodes = slots[key]?.(...options)
   const firstValidNode = getFirstValidNode(vNodes)
   return isValidElementNode(firstValidNode)
+}
+
+export function isEmptyElement(node: VNodeChild): boolean {
+  return (
+    isComment(node) ||
+    (isFragment(node) && (node as any).children.length === 0) ||
+    (isText(node) && (node as any).children.trim() === '')
+  )
+}
+
+export function filterEmptyNode(nodes: VNodeChild): VNode[] {
+  if (isNil(nodes) || (Array.isArray(nodes) && !nodes.length)) {
+    return []
+  }
+
+  const result: VNode[] = []
+
+  ;(nodes as VNode[]).forEach(node => {
+    if (Array.isArray(node)) {
+      result.push(...node)
+    } else if (isFragment(node)) {
+      result.push(...(node as any).children)
+    } else {
+      result.push(node)
+    }
+  })
+
+  return result.filter(c => !isEmptyElement(c))
 }
