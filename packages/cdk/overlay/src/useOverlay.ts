@@ -180,7 +180,7 @@ export const useOverlay = <TE extends OverlayElement = OverlayElement, OE extend
    */
   function watchVisibility(): void {
     visibilityWatchHandler = watch(visibility, () => {
-      nextTick(initialize)
+      nextTick(initialize) // Compatible with v-show
     })
   }
 

@@ -1,12 +1,9 @@
-import type { SetupContext } from 'vue'
-import type { OverlayProps } from './types'
-
-import { cloneVNode, computed, defineComponent, onMounted, Transition } from 'vue'
+import { cloneVNode, defineComponent, onMounted, Transition } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
 import { IxPortal } from '@idux/cdk/portal' // todo remove to components
-import { getSlotNodes, getFirstValidNode, hasSlot, Logger } from '@idux/cdk/utils'
+import { getSlotNodes, getFirstValidNode } from '@idux/cdk/utils'
 
-import { getOverlayOptions, useWatcher } from './utils'
+import { getOverlayOptions, useArrowStyle, useLogger, useRenderValid, useWatcher } from './utils'
 import { overlayPropsDef } from './types'
 
 export default defineComponent({
@@ -15,14 +12,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: overlayPropsDef,
   emits: ['update:visible', 'update:placement'],
-  setup(props: OverlayProps, { slots }: SetupContext) {
-    if (!hasSlot(slots, 'trigger')) {
-      Logger.error('The component must contain trigger slot.')
-    }
-
-    if (!hasSlot(slots, 'overlay')) {
-      Logger.error('The component must contain overlay slot.')
-    }
+  setup() {
+    useLogger()
 
     const {
       initialize,
@@ -39,19 +30,20 @@ export default defineComponent({
 
     useWatcher(visibility, placement, update)
 
-    const legalRender = computed<boolean>(() => hasSlot(slots, 'trigger') && hasSlot(slots, 'overlay'))
+    const renderValid = useRenderValid()
 
-    const arrowStyle = computed(() => {
-      if (!props.arrowOffset) {
-        return {}
-      }
-      if (placement.value.startsWith('top') || placement.value.startsWith('bottom')) {
-        return { left: `${props.arrowOffset}px` }
-      }
-      return { top: `${props.arrowOffset}px` }
-    })
+    const arrowStyle = useArrowStyle(placement)
 
-    return { legalRender, overlayRef, overlayEvents, triggerRef, triggerEvents, visibility, arrowStyle, placement }
+    return {
+      renderValid,
+      overlayRef,
+      overlayEvents,
+      triggerRef,
+      triggerEvents,
+      visibility,
+      arrowStyle,
+      placement,
+    }
   },
   render() {
     const {
@@ -65,10 +57,10 @@ export default defineComponent({
       clsPrefix,
       placement,
       destroyOnHide,
-      legalRender,
+      renderValid,
     } = this
 
-    if (!legalRender) {
+    if (!renderValid) {
       return null
     }
 
