@@ -36,7 +36,6 @@ export function useVisibility(): ComputedRef<boolean> {
 
 export function useOffset(config: ComputedRef<TooltipConfig>): ComputedRef<[number, number]> {
   return computed(() => {
-    console.log(config.value)
     if (config.value.placement.startsWith('top')) {
       return [0, -5]
     } else if (config.value.placement.startsWith('bottom')) {
