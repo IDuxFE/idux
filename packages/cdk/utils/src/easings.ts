@@ -17,6 +17,9 @@ export const easeInOutQuad: EasingFn = (
   amountOfChange: number,
   duration: number,
 ) => {
+  if (duration <= 0) {
+    return amountOfChange
+  }
   if ((elapsed /= duration / 2) < 1) {
     return (amountOfChange / 2) * elapsed * elapsed + initialValue
   }
@@ -29,6 +32,9 @@ export const easeInOutCubic: EasingFn = (
   amountOfChange: number,
   duration: number,
 ) => {
+  if (duration <= 0) {
+    return amountOfChange
+  }
   if ((elapsed /= duration / 2) < 1) {
     return (amountOfChange / 2) * elapsed * elapsed * elapsed + initialValue
   }
