@@ -7,4 +7,6 @@ declare type RequiredKeys<T> = keyof Omit<T, OptionalKeys<T>>
 declare type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never
 
 declare function setTimeout(handler: TimerHandler, timeout?: number, ...arguments: any[]): number
-declare function clearTimeout(handle?: number): void
+declare function clearTimeout(timeoutId?: number): void
+declare function setInterval(handler: TimerHandler, timeout?: number, ...arguments: any[]): number
+declare function clearInterval(intervalId?: number): void
