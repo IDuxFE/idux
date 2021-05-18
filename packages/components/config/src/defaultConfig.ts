@@ -28,6 +28,7 @@ import type {
   SubMenuConfig,
   StepsConfig,
   DropdownConfig,
+  ListConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -115,6 +116,11 @@ const card = shallowReactive<CardConfig>({
   size: 'medium',
   borderless: false,
   hoverable: false,
+})
+
+const list = shallowReactive<ListConfig>({
+  size: 'medium',
+  borderless: true,
 })
 
 const collapse: CollapseConfig = shallowReactive<CollapseConfig>({ accordion: false })
@@ -207,6 +213,7 @@ export const defaultConfig: GlobalConfig = {
   // Data Display
   badge,
   card,
+  list,
   collapse,
   image,
   statistic,

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem.vue render work 1`] = `
+"<div class=\\"ix-list-item\\">
+  <div class=\\"ix-list-item-title\\"></div>
+  <div class=\\"ix-list-item-content\\"></div>
+  <div class=\\"ix-list-item-extra\\"></div>
+</div>"
+`;
