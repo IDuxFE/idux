@@ -35,6 +35,7 @@ cover:
 
 | 变量名 | default 主题| 说明 |
 | --- | --- | --- |
+| @spin-zindex | @zindex-l2-base | - |
 | @spin-tip-color | @primary | - |
 | @spin-icon-color | @primary | - |
 | @spin-font-size-sm | @font-size-md | - |
