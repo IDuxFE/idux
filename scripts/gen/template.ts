@@ -85,10 +85,10 @@ export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
-import { ${compName}Props } from '../src/types'
+import { ${compName}Instance, ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
-  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<InstanceType<typeof Ix${compName}>>
+  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
 
   beforeEach(() => {
     ${compName}Mount = options => mount(Ix${compName}, { ...options })

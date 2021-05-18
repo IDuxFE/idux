@@ -42,7 +42,7 @@ export const ListPropTypes = {
   grid: object<ListGridProps>(),
 }
 
-export type ListComponent = InstanceType<DefineComponent<ListProps>>
+export type ListInstance = InstanceType<DefineComponent<ListProps>>
 
 export interface ListItemProps {
   title?: string
@@ -56,7 +56,7 @@ export const ListItemPropTypes = {
   extra: PropTypes.string,
 }
 
-export type ListItemComponent = InstanceType<DefineComponent<ListItemProps>>
+export type ListItemInstance = InstanceType<DefineComponent<ListItemProps>>
 
 export interface ListWrap {
   gutter?: RowPropGutter

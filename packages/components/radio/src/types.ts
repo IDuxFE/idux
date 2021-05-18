@@ -24,9 +24,9 @@ export interface RadioGroupConfig extends RadioGroupProps {
   radioGroupSize: string
 }
 
-export type IxRadioInstance = InstanceType<DefineComponent<RadioProps>>
-export type IxRadioButtonInstance = InstanceType<DefineComponent<RadioButtonProps>>
-export type IxRadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
+export type RadioInstance = InstanceType<DefineComponent<RadioProps>>
+export type RadioButtonInstance = InstanceType<DefineComponent<RadioButtonProps>>
+export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
 
 export interface radioModeConfig {
   isGroup: ComputedRef

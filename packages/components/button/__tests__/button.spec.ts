@@ -1,13 +1,13 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import IxButton from '../src/Button.vue'
-import { ButtonProps } from '../src/types'
+import { ButtonInstance, ButtonProps } from '../src/types'
 
 describe('Button.vue', () => {
-  let ButtonMount: (options?: MountingOptions<Partial<ButtonProps>>) => VueWrapper<InstanceType<typeof IxButton>>
+  let ButtonMount: (options?: MountingOptions<Partial<ButtonProps>>) => VueWrapper<ButtonInstance>
 
   beforeEach(() => {
-    ButtonMount = options => mount(IxButton, { ...options })
+    ButtonMount = options => mount<ButtonInstance>(IxButton, { ...options })
   })
 
   renderWork(IxButton)

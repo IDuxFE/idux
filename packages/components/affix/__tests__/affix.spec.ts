@@ -2,7 +2,7 @@ import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 import { wait, renderWork } from '@tests'
 import IxAffix from '../src/Affix.vue'
-import { AffixOffset, AffixProps } from '../src/types'
+import { AffixInstance, AffixOffset, AffixProps } from '../src/types'
 
 interface Offset {
   top: number
@@ -55,10 +55,10 @@ async function scrollTarget(x: number, y: number, target: Window | Element = win
 }
 
 describe('Affix.vue', () => {
-  let AffixMount: (options?: MountingOptions<Partial<AffixProps>>) => VueWrapper<InstanceType<typeof IxAffix>>
+  let AffixMount: (options?: MountingOptions<Partial<AffixProps>>) => VueWrapper<AffixInstance>
 
   beforeEach(() => {
-    AffixMount = options => mount(IxAffix, { ...options })
+    AffixMount = options => mount<AffixInstance>(IxAffix, { ...options })
 
     initRectMap()
 

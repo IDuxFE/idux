@@ -1,15 +1,15 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { defineComponent } from 'vue'
 import IxResult from '../src/Result.vue'
-import { ResultProps } from '../src/types'
+import { ResultInstance, ResultProps } from '../src/types'
 import { IxIcon } from '../../icon'
 import { renderWork } from '@tests'
 
 describe('Result.vue', () => {
-  let ResultMount: (options?: MountingOptions<Partial<ResultProps>>) => VueWrapper<InstanceType<typeof IxResult>>
+  let ResultMount: (options?: MountingOptions<Partial<ResultProps>>) => VueWrapper<ResultInstance>
 
   beforeEach(() => {
-    ResultMount = options => mount(IxResult, { ...options })
+    ResultMount = options => mount<ResultInstance>(IxResult, { ...options })
   })
 
   renderWork(IxResult)

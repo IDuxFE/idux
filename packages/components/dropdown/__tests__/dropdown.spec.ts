@@ -1,12 +1,12 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import IxDropdown from '../src/Dropdown.vue'
-import { DropdownProps } from '../src/types'
+import { DropdownInstance, DropdownProps } from '../src/types'
 
 describe('Dropdown.vue', () => {
-  let DropdownMount: (options?: MountingOptions<Partial<DropdownProps>>) => VueWrapper<InstanceType<typeof IxDropdown>>
+  let DropdownMount: (options?: MountingOptions<Partial<DropdownProps>>) => VueWrapper<DropdownInstance>
 
   beforeEach(() => {
-    DropdownMount = options => mount(IxDropdown, { ...options })
+    DropdownMount = options => mount<DropdownInstance>(IxDropdown, { ...options })
   })
 
   test('render work', () => {
