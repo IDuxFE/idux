@@ -12,4 +12,4 @@ IxListItem.install = (app: App): void => {
 
 export { IxList, IxListItem }
 
-export type { ListComponent, ListProps, ListItemComponent, ListItemProps } from './src/types'
+export type { ListInstance, ListProps, ListItemInstance, ListItemProps } from './src/types'

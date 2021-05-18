@@ -2,16 +2,16 @@ import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 
 import IxRate from '../src/Rate.vue'
-import { RateProps } from '../src/types'
+import { RateInstance, RateProps } from '../src/types'
 
 describe('Rate.vue', () => {
-  let RateMount: (options?: MountingOptions<Partial<RateProps>>) => VueWrapper<InstanceType<typeof IxRate>>
-  let findNormalIcon: (wrapper: VueWrapper<InstanceType<typeof IxRate>>) => number
+  let RateMount: (options?: MountingOptions<Partial<RateProps>>) => VueWrapper<RateInstance>
+  let findNormalIcon: (wrapper: VueWrapper<RateInstance>) => number
 
   beforeEach(() => {
-    RateMount = options => mount(IxRate, { ...options })
+    RateMount = options => mount<RateInstance>(IxRate, { ...options })
 
-    findNormalIcon = (wrapper: VueWrapper<InstanceType<typeof IxRate>>): number => {
+    findNormalIcon = (wrapper: VueWrapper<RateInstance>): number => {
       const res = wrapper.findAll('.ix-rate-iconfont-main').filter(item => {
         return item.classes().includes('ix-rate-normal')
       })

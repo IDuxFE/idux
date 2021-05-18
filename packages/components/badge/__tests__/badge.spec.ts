@@ -1,13 +1,13 @@
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxBadge from '../src/Badge.vue'
-import { BadgeProps } from '../src/types'
+import { BadgeInstance, BadgeProps } from '../src/types'
 
 describe('Badge.vue', () => {
-  let BadgeMount: (options?: MountingOptions<Partial<BadgeProps>>) => VueWrapper<InstanceType<typeof IxBadge>>
+  let BadgeMount: (options?: MountingOptions<Partial<BadgeProps>>) => VueWrapper<BadgeInstance>
 
   beforeEach(() => {
-    BadgeMount = options => mount(IxBadge, { ...options })
+    BadgeMount = options => mount<BadgeInstance>(IxBadge, { ...options })
   })
 
   renderWork(IxBadge)
