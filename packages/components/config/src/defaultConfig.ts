@@ -187,7 +187,8 @@ const backTop = shallowReactive<BackTopConfig>({
   visibilityHeight: 400,
 })
 const anchor = shallowReactive<AnchorConfig>({
-  showInkInFixed: false,
+  bounds: 5,
+  hideLinkBall: false,
 })
 // --------------------- end ---------------------
 

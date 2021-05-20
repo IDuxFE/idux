@@ -1,7 +1,7 @@
 import type { VirtualListProps } from '../types'
 
+import { reactive } from 'vue'
 import { isFunction } from '@idux/cdk/utils'
-import { reactive } from '@vue/reactivity'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useItemKey = (props: VirtualListProps, item: Record<string, any>): string | number => {

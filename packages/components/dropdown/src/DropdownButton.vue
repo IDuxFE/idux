@@ -33,7 +33,8 @@ import { useDropdownConfig, useDropdownOpenState, useDropdownOverlay } from './u
 
 export default defineComponent({
   name: 'IxDropdownButton',
-  directives: { clickOutside, IxPortal, IxIcon, IxButton, IxButtonGroup },
+  components: { IxPortal, IxIcon, IxButton, IxButtonGroup },
+  directives: { clickOutside },
   props: dropdownButtonPropsDef,
   emits: ['update:visible'],
   setup(props: DropdownButtonProps) {

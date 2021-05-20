@@ -13,13 +13,13 @@ export const virtualItemPropsDef = {
 
 export interface VirtualFillerProps {
   /** Virtual filler height. Should be `count * itemMinHeight` */
-  scrollHeight: number
+  scrollHeight?: number
   /** Set offset of visible items. Should be the top of start item position */
   offset?: number
 }
 
 export const virtualFillerPropsDef = {
-  scrollHeight: PropTypes.number.isRequired,
+  scrollHeight: PropTypes.number,
   offset: PropTypes.number,
 }
 

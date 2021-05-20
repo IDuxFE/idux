@@ -206,9 +206,9 @@ describe('Steps.vue', () => {
       template: `
       <IxSteps :active="active">
         <ix-step status="finish" title="Login" icon="up"></ix-step>
-        <ix-step status="finish" title="Verification" icon="verified"></ix-step>
-        <ix-step status="process" title="Pay" icon="loading"></ix-step>
-        <ix-step status="wait" title="Done" icon="smile"></ix-step>
+        <ix-step status="finish" title="Verification" icon="down"></ix-step>
+        <ix-step status="process" title="Pay" icon="left"></ix-step>
+        <ix-step status="wait" title="Done" icon="right"></ix-step>
       </IxSteps>
       `,
       setup() {
@@ -217,9 +217,9 @@ describe('Steps.vue', () => {
     })
 
     expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-verified').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-loading').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-smile').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-left').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-right').exists()).toBe(true)
   })
 
   test('title subTitle description work', async () => {

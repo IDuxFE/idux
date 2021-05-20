@@ -36,8 +36,8 @@ const useStyles = (props: VirtualFillerProps) => {
       flexDirection: 'column',
     }
 
-    const { offset, scrollHeight } = props
-    if (!isNil(offset)) {
+    const { offset, scrollHeight = 0 } = props
+    if (!isNil(offset) && !isNil(scrollHeight)) {
       outer = { height: `${scrollHeight}px`, position: 'relative', overflow: 'hidden' }
 
       inner = {
