@@ -47,6 +47,7 @@ cover:
 | `shape` | 设置按钮形状 | `circle\|round` | - | - |- |
 | `block` | 将按钮宽度调整为自适应其父元素的宽度 | `boolean` | - | - |- |
 | `icon` | 设置图标类型 | `string` | - | - | `loading` 为 `true` 时无效 |
+| `type` | 原生 `button` 的 `type` 属性 | `string` | `button` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
 
 ### `ix-button-group`
 

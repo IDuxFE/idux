@@ -5,19 +5,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
-import { buttonToken } from './utils'
-
 import type { ButtonGroupProps } from './types'
+
+import { defineComponent, provide } from 'vue'
+import { buttonGroupPropsDef } from './types'
+import { buttonToken } from './utils'
 
 export default defineComponent({
   name: 'IxButtonGroup',
-  props: {
-    mode: PropTypes.oneOf(['primary', 'default', 'dashed', 'text', 'link'] as const),
-    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-    shape: PropTypes.oneOf(['circle', 'round'] as const),
-  },
+  props: buttonGroupPropsDef,
   setup(props: ButtonGroupProps) {
     provide(buttonToken, props)
   },
