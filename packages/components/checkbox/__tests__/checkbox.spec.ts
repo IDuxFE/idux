@@ -3,14 +3,14 @@ import { mount } from '@vue/test-utils'
 import { ref, nextTick } from 'vue'
 import IxCheckbox from '../src/Checkbox.vue'
 
-describe.skip('Checkbox.vue', () => {
+describe('Checkbox.vue', () => {
   renderWork(IxCheckbox)
 
   test('checked(v-model) work', async () => {
     const checked = ref(false)
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" />`,
       setup() {
         return { checked }
       },
@@ -23,7 +23,7 @@ describe.skip('Checkbox.vue', () => {
     await nextTick()
     expect(wrapper.find('.ix-checkbox-checked').exists()).toBe(true)
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(false)
 
     expect(checked.value).toBe(false)
     expect(wrapper.find('.ix-checkbox-checked').exists()).toBe(false)
@@ -32,12 +32,12 @@ describe.skip('Checkbox.vue', () => {
   test('no checked(v-model) work', async () => {
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox>option</ix-checkbox>`,
+      template: `<ix-checkbox />`,
     })
 
     expect(wrapper.find('.ix-checkbox-checked').exists()).toBe(false)
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(true)
 
     expect(wrapper.find('.ix-checkbox-checked').exists()).toBe(true)
   })
@@ -46,13 +46,13 @@ describe.skip('Checkbox.vue', () => {
     const checked = ref('yes')
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" trueValue="yes" falseValue="no">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" trueValue="yes" falseValue="no" />`,
       setup() {
         return { checked }
       },
     })
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(false)
 
     expect(checked.value).toBe('no')
   })
@@ -63,7 +63,7 @@ describe.skip('Checkbox.vue', () => {
     const mockFn = jest.fn()
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" :disabled="disabled" @change="mockFn">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" :disabled="disabled" @change="mockFn" />`,
       setup() {
         return { checked, disabled, mockFn }
       },
@@ -71,7 +71,7 @@ describe.skip('Checkbox.vue', () => {
 
     expect(wrapper.classes()).toContain('ix-checkbox-disabled')
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(true)
 
     expect(wrapper.classes()).toContain('ix-checkbox-disabled')
     expect(checked.value).toBe(true)
@@ -83,7 +83,7 @@ describe.skip('Checkbox.vue', () => {
 
     expect(wrapper.classes()).not.toContain('ix-checkbox-disabled')
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(false)
 
     expect(checked.value).toBe(false)
     expect(mockFn).toBeCalledTimes(1)
@@ -95,7 +95,7 @@ describe.skip('Checkbox.vue', () => {
     const mockFn = jest.fn()
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" :readonly="readonly" @change="mockFn">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" :readonly="readonly" @change="mockFn" />`,
       setup() {
         return { checked, readonly, mockFn }
       },
@@ -103,7 +103,10 @@ describe.skip('Checkbox.vue', () => {
 
     expect(wrapper.classes()).toContain('ix-checkbox-readonly')
 
-    await wrapper.trigger('click')
+    // Readonly is not a native property of the checkbox.
+    // It prevents the default behavior in click when implementing, so change will not be triggered.
+    // Therefore, change event is not simulated here.
+    await wrapper.find('input').trigger('click')
 
     expect(wrapper.classes()).toContain('ix-checkbox-readonly')
     expect(checked.value).toBe(true)
@@ -115,7 +118,7 @@ describe.skip('Checkbox.vue', () => {
 
     expect(wrapper.classes()).not.toContain('ix-checkbox-readonly')
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(false)
     expect(checked.value).toBe(false)
     expect(mockFn).toBeCalledTimes(1)
   })
@@ -125,7 +128,7 @@ describe.skip('Checkbox.vue', () => {
     const indeterminate = ref(true)
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" :indeterminate="indeterminate">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" :indeterminate="indeterminate" />`,
       setup() {
         return { checked, indeterminate }
       },
@@ -147,7 +150,7 @@ describe.skip('Checkbox.vue', () => {
     const mockFn = jest.fn()
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" @change="mockFn">option</ix-checkbox>`,
+      template: `<ix-checkbox v-model:checked="checked" @change="mockFn" />`,
       setup() {
         return { checked, mockFn }
       },
@@ -155,7 +158,7 @@ describe.skip('Checkbox.vue', () => {
 
     expect(mockFn).toBeCalledTimes(0)
 
-    await wrapper.trigger('click')
+    await wrapper.find('input').setValue(false)
 
     expect(mockFn).toBeCalledTimes(1)
   })
@@ -163,11 +166,11 @@ describe.skip('Checkbox.vue', () => {
   test('original checkbox attributes work', async () => {
     const wrapper = mount({
       components: { IxCheckbox },
-      template: `<ix-checkbox name="checkboxName" value="checkboxValue" tabindex="1" class="checkox" style="color: red;">option</ix-checkbox>`,
+      template: `<ix-checkbox name="checkboxName" value="checkboxValue" tabindex="1" class="checkox" style="color: red;" />`,
     })
 
     const checkboxWrapper = wrapper.find('.ix-checkbox')
-    const originalInput = wrapper.find("input[type='checkbox']")
+    const originalInput = wrapper.find('input')
     const input = wrapper.find('.ix-checkbox-inner')
 
     expect(checkboxWrapper.classes()).toContain('checkox')
