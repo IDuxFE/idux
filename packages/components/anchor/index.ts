@@ -1,12 +1,12 @@
 import type { App } from 'vue'
 import IxAnchor from './src/Anchor.vue'
-import IxLink from './src/Link.vue'
+import IxAnchorLink from './src/AnchorLink.vue'
 
 IxAnchor.install = (app: App): void => {
   app.component(IxAnchor.name, IxAnchor)
 }
-IxLink.install = (app: App): void => {
-  app.component(IxLink.name, IxLink)
+IxAnchorLink.install = (app: App): void => {
+  app.component(IxAnchorLink.name, IxAnchorLink)
 }
-export { IxAnchor, IxLink }
-export type { AnchorInstance, AnchorProps, AnchorLinkInstance, AnchorLinksProps } from './src/types'
+export { IxAnchor, IxAnchorLink }
+export type { AnchorInstance, AnchorProps, AnchorLinkInstance, AnchorLinkProps } from './src/types'

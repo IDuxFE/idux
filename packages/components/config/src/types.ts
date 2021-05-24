@@ -205,7 +205,8 @@ export interface BackTopConfig {
   visibilityHeight: number
 }
 export interface AnchorConfig {
-  showInkInFixed: boolean
+  bounds: number
+  hideLinkBall: boolean
 }
 // --- end ---
 

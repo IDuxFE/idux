@@ -5,17 +5,20 @@
 .@{anchor-prefix} {
   position: relative;
   padding-left: @anchor-border-width;
+
   &-wrapper {
     margin-left: @anchor-wrapper-margin-left;
     padding-left: @anchor-wrapper-padding-left;
     overflow: auto;
     background-color: @anchor-bg;
   }
+
   &-ink {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
+
     &::before {
       position: relative;
       display: block;
@@ -25,6 +28,7 @@
       background-color: @anchor-border-color;
       content: ' ';
     }
+
     &-ball {
       position: absolute;
       left: 50%;
@@ -36,31 +40,43 @@
       border-radius: @anchor-ink-ball-radius;
       transform: translateX(-50%);
       transition: top @transition-duration-base @ease-in-out;
-      &.visible {
+
+      &-visible {
         display: inline-block;
       }
     }
   }
 
+  &-fixed &-ink &-ink-ball {
+    display: none;
+  }
+
   &-link {
     padding: @anchor-link-padding;
     line-height: @anchor-link-line-height;
-    position: relative;
-    display: block;
-    margin-bottom: @anchor-link-margin-bottom;
-    overflow: hidden;
-    color: @anchor-color;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    transition: all @transition-duration-base;
-    text-decoration: none;
 
-    &:only-child {
-      margin-bottom: 0;
-    }
+    &-title {
+      .ellipsis();
 
-    &-active {
-      color: @anchor-link-active-color;
+      position: relative;
+      display: block;
+      margin-bottom: @anchor-link-margin-bottom;
+      color: @anchor-color;
+      text-decoration: none;
+      transition: all @transition-duration-base;
+
+      &-active {
+        color: @anchor-link-active-color;
+      }
+
+      &:only-child {
+        margin-bottom: 0;
+      }
     }
+  }
+
+  &-link &-link {
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }

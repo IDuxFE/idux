@@ -1,16 +1,13 @@
 <template>
   <ix-anchor :affix="false">
-    <ix-link href="#何时使用" title="何时使用" />
-    <ix-link href="#api" title="api">
-      <ix-link href="#ix-anchor" title="ix-anchor" />
-      <ix-link href="#props" title="ix-anchor-link Props" />
-    </ix-link>
+    <ix-anchor-link href="#components-anchor-demo-Basic" title="Basic demo" />
+    <ix-anchor-link href="#components-anchor-demo-Static" title="Static demo" />
+    <ix-anchor-link href="#ix-anchor" title="Anchor">
+      <ix-anchor-link href="#anchorprops" title="Anchor Props" />
+      <ix-anchor-link href="#anchoremits" title="Anchor Emits" />
+    </ix-anchor-link>
+    <ix-anchor-link href="#ix-anchor-link" title="Link">
+      <ix-anchor-link href="#anchorlinkprops" title="Link Props" />
+    </ix-anchor-link>
   </ix-anchor>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  setup() {},
-})
-</script>
-<style lang="less" scoped></style>

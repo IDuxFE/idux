@@ -40,7 +40,7 @@ import { IxProgress } from '@idux/components/progress'
 import { IxMessage } from '@idux/components/message'
 // import Other
 import { IxBackTop } from '@idux/components/back-top'
-import { IxAnchor, IxLink } from '@idux/components/anchor'
+import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 // --- import end ---
 
 const components = [
@@ -100,7 +100,7 @@ const components = [
   // components Other
   IxBackTop,
   IxAnchor,
-  IxLink,
+  IxAnchorLink,
   // --- components end ---
 ]
 
