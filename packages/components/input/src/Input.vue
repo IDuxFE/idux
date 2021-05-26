@@ -49,7 +49,7 @@ import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
-import { ControlPropType } from '@idux/cdk/forms'
+import { controlPropTypeDef } from '@idux/cdk/forms'
 import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useAttrs } from '@idux/components/utils'
@@ -62,7 +62,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: PropTypes.string,
-    control: ControlPropType,
+    control: controlPropTypeDef,
     disabled: PropTypes.bool.def(false),
     readonly: PropTypes.bool.def(false),
     addonAfter: PropTypes.string,

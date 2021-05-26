@@ -2,7 +2,7 @@ import { flushPromises } from '@vue/test-utils'
 import { FormArray } from '../src/controls/formArray'
 import { FormControl } from '../src/controls/formControl'
 import { FormGroup } from '../src/controls/formGroup'
-import { ValidationErrors } from '../src/types'
+import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
 interface BasicGroup {
@@ -128,20 +128,21 @@ describe('formGroup.ts', () => {
     test('validate work', async () => {
       expect(await group.validate()).toBeNull()
 
-      const _validator = (_: unknown) => ({ test: { message: '' } } as ValidationErrors)
+      const _validator = (_: unknown) => ({ test: { message: null } } as ValidateErrors)
 
       group.setValidator(_validator)
 
-      expect(await group.validate()).toEqual({ test: { message: '' } })
+      expect(await group.validate()).toEqual({ test: { message: null } })
     })
 
     test('get work', async () => {
-      const { control, array, group: groupChild } = group.controls
+      const { control, array, group: groupChild } = group.controls.value
       expect(group.get('control')).toEqual(control)
       expect(group.get('array')).toEqual(array)
       expect(group.get('group')).toEqual(groupChild)
-      expect(group.get('group.control')).toEqual((groupChild as FormGroup<{ control: string }>).controls.control)
-      expect(group.get(['array', 0])).toEqual((array as FormArray<string[]>).controls[0])
+      expect(group.get('group.control')).toEqual((groupChild as FormGroup<{ control: string }>).controls.value.control)
+      expect(group.get(['array', 0])).toEqual((array as FormArray<string[]>).controls.value[0])
+      expect(group.get('array')!.get(0)).toEqual((array as FormArray<string[]>).controls.value[0])
 
       expect(group.get(undefined as never)).toBeNull()
       expect(group.get('')).toBeNull()
@@ -156,7 +157,7 @@ describe('formGroup.ts', () => {
     let group: FormGroup<BasicGroup>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
-      return value.control === 'test' ? null : ({ test: { message: '' } } as ValidationErrors)
+      return value.control === 'test' ? null : ({ test: { message: null } } as ValidateErrors)
     }
 
     test('default change work', async () => {
@@ -238,7 +239,7 @@ describe('formGroup.ts', () => {
     })
 
     test('submit trigger validate work', async () => {
-      const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidationErrors)
+      const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
 
       group = new FormGroup<BasicGroup>(
         {

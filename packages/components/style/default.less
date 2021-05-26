@@ -301,7 +301,7 @@
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-hover-border-color: ~`colorPalette('@{primary}', -10) `;
 @input-active-border-color: @primary;
-@input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 15%);
+@input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 20%);
 @input-disabled-color: @disabled-color;
 @input-disabled-bg-color: @disabled-bg-color;
 
@@ -415,6 +415,7 @@
 @option-container-group-border-top: @border-width-sm @border-style @border-color;
 
 @select-selector-font-size: @font-size-md;
+@select-selector-color: @text-color;
 @select-selector-bg-color: @input-bg-color;
 @select-selector-border-width: @input-border-width;
 @select-selector-border-style: @input-border-style;
@@ -494,7 +495,6 @@
 @list-padding-sm: @padding-sm;
 @list-min-height: 128px;
 @list-bg-color: #fff;
-
 
 /* collapse -------------------------- */
 @collapse-panel-border-style: @border-width-sm solid @border-color;

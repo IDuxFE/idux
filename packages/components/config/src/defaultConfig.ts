@@ -29,6 +29,7 @@ import type {
   StepsConfig,
   DropdownConfig,
   ListConfig,
+  FormConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -74,6 +75,13 @@ const subMenu = shallowReactive<SubMenuConfig>({
 })
 
 // --------------------- Data Entry ---------------------
+const form = shallowReactive<FormConfig>({
+  colonless: false,
+  labelAlign: 'right',
+  layout: 'horizontal',
+  size: 'medium',
+})
+
 const input = shallowReactive<InputConfig>({
   size: 'medium',
   clearable: false,
@@ -206,6 +214,7 @@ export const defaultConfig: GlobalConfig = {
   menu,
   subMenu,
   // Data Entry
+  form,
   input,
   textarea,
   rate,

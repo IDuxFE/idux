@@ -59,7 +59,7 @@ export function useFormArray<T extends any[] = any[]>(
 }
 
 export function useFormControl<T = any>(
-  initValue: T,
+  initValue?: T,
   validator?: ValidatorFn | ValidatorFn[] | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormControl<T>

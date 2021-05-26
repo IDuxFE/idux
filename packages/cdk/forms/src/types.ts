@@ -2,35 +2,29 @@
 
 import { AbstractControl } from './controls/abstractControl'
 
-export interface ValidationError {
-  message: string
+export interface ValidateError {
+  /**
+   * There are two types of validation message:
+   * * **string**: a simple string.
+   * * **Record<string, string>**: you can return an object whose key is locale id, when you need for i18n.
+   */
+  message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | null
   actual?: any
   [key: string]: any
 }
 
-type ErrorMessage = string | ((err: Omit<ValidationError, 'message'>) => string)
+export type ValidateErrors = Record<string, ValidateError>
 
-export interface ErrorMessages {
-  default?: ErrorMessage
-  required?: ErrorMessage
-  requiredTrue?: ErrorMessage
-  email?: ErrorMessage
-  min?: ErrorMessage
-  max?: ErrorMessage
-  minLength?: ErrorMessage
-  maxLength?: ErrorMessage
-  pattern?: ErrorMessage
-  [key: string]: ErrorMessage | undefined
-}
+export type ValidateMessageFn = (err: Omit<ValidateError, 'message'>) => string
 
-export type ValidationErrors = { [key in keyof ErrorMessages]: ValidationError }
+export type ValidateMessages = Record<string, string | ValidateMessageFn | Record<string, string | ValidateMessageFn>>
 
 export interface ValidatorFn {
-  (value: any, control: AbstractControl): ValidationErrors | null
+  (value: any, control: AbstractControl): ValidateErrors | null
 }
 
 export interface AsyncValidatorFn {
-  (value: any, control: AbstractControl): Promise<ValidationErrors | null>
+  (value: any, control: AbstractControl): Promise<ValidateErrors | null>
 }
 
 export type TriggerType = 'change' | 'blur' | 'submit'
@@ -41,4 +35,4 @@ export interface ValidatorOptions {
   trigger?: TriggerType
 }
 
-export type ValidationStatus = 'valid' | 'invalid' | 'validating'
+export type ValidateStatus = 'valid' | 'invalid' | 'validating'

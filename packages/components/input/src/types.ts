@@ -4,7 +4,7 @@ import type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '
 
 export interface InputProps {
   value?: string
-  control?: string | AbstractControl
+  control?: string | number | AbstractControl
   disabled: boolean
   readonly: boolean
   addonAfter?: string
@@ -26,7 +26,7 @@ export type InputInstance = InstanceType<DefineComponent<InputProps, InputBindin
 
 export interface TextareaProps {
   value?: string
-  control?: string | AbstractControl
+  control?: string | number | AbstractControl
   disabled: boolean
   readonly: boolean
   resize?: TextareaResize

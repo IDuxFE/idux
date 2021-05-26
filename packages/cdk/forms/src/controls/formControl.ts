@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors } from '../types'
+import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidateErrors } from '../types'
 
 import { shallowRef, watch } from 'vue'
 import { AbstractControl } from './abstractControl'
 
 export class FormControl<T = any> extends AbstractControl<T> {
   constructor(
-    private _initValue: T,
+    private _initValue?: T,
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
-    this._valueRef = shallowRef(this._initValue)
+    this._valueRef = shallowRef(this._initValue!)
 
     this._initAllStatus()
 
@@ -24,7 +24,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
    * and setting the value to initialization value.
    */
   reset(): void {
-    this._valueRef.value = this._initValue
+    this._valueRef.value = this._initValue!
     this.markAsUnblurred()
     this.markAsPristine()
   }
@@ -81,7 +81,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
   /**
    * Running validations manually, rather than automatically.
    */
-  async validate(): Promise<ValidationErrors | null> {
+  async validate(): Promise<ValidateErrors | null> {
     return this._validate()
   }
 

@@ -2,7 +2,7 @@ import { flushPromises } from '@vue/test-utils'
 import { FormArray } from '../src/controls/formArray'
 import { FormControl } from '../src/controls/formControl'
 import { FormGroup } from '../src/controls/formGroup'
-import { ValidationErrors } from '../src/types'
+import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
 interface BasicGroup {
@@ -35,12 +35,12 @@ describe('formArray.ts', () => {
     test('push work', async () => {
       const group = newFormGroup()
 
-      expect(array.length).toEqual(1)
+      expect(array.length.value).toEqual(1)
       expect(array.getValue()).toEqual([basicValue])
 
       array.push(group)
 
-      expect(array.length).toEqual(2)
+      expect(array.length.value).toEqual(2)
       expect(array.at(0)).not.toEqual(group)
       expect(array.at(1)).toEqual(group)
       expect(array.getValue()).toEqual([basicValue, basicValue])
@@ -55,18 +55,18 @@ describe('formArray.ts', () => {
       const group1 = newFormGroup()
       const group2 = newFormGroup()
 
-      expect(array.length).toEqual(1)
+      expect(array.length.value).toEqual(1)
       expect(array.getValue()).toEqual([basicValue])
 
       array.insert(0, group1)
 
-      expect(array.length).toEqual(2)
+      expect(array.length.value).toEqual(2)
       expect(array.at(0)).toEqual(group1)
       expect(array.getValue()).toEqual([basicValue, basicValue])
 
       array.insert(0, group2)
 
-      expect(array.length).toEqual(3)
+      expect(array.length.value).toEqual(3)
       expect(array.at(0)).toEqual(group2)
       expect(array.getValue()).toEqual([basicValue, basicValue, basicValue])
 
@@ -76,17 +76,17 @@ describe('formArray.ts', () => {
     })
 
     test('removeAt work', async () => {
-      expect(array.length).toEqual(1)
+      expect(array.length.value).toEqual(1)
       expect(array.getValue()).toEqual([basicValue])
 
       array.removeAt(1)
 
-      expect(array.length).toEqual(1)
+      expect(array.length.value).toEqual(1)
       expect(array.getValue()).toEqual([basicValue])
 
       const group = array.at(0)
       array.removeAt(0)
-      expect(array.length).toEqual(0)
+      expect(array.length.value).toEqual(0)
       expect(array.getValue()).toEqual([])
 
       group.markAsBlurred()
@@ -168,15 +168,15 @@ describe('formArray.ts', () => {
     test('validate work', async () => {
       expect(await array.validate()).toBeNull()
 
-      const _validator = (_: unknown) => ({ test: { message: '' } } as ValidationErrors)
+      const _validator = (_: unknown) => ({ test: { message: null } } as ValidateErrors)
 
       array.setValidator(_validator)
 
-      expect(await array.validate()).toEqual({ test: { message: '' } })
+      expect(await array.validate()).toEqual({ test: { message: null } })
     })
 
     test('get work', async () => {
-      const [group] = array.controls
+      const [group] = array.controls.value
 
       expect(array.get('0')).toEqual(group)
       expect(array.get([0])).toEqual(group)
@@ -191,7 +191,7 @@ describe('formArray.ts', () => {
     let array: FormArray<BasicGroup[]>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
-      return value[0].control === 'test' ? null : ({ test: { message: '' } } as ValidationErrors)
+      return value[0].control === 'test' ? null : ({ test: { message: null } } as ValidateErrors)
     }
 
     test('default change work', async () => {
@@ -239,7 +239,7 @@ describe('formArray.ts', () => {
     })
 
     test('submit trigger validate work', async () => {
-      const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidationErrors)
+      const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
       array = new FormArray(
         [
           new FormGroup<BasicGroup>({

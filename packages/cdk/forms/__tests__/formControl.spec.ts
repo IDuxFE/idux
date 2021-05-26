@@ -1,6 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 import { FormControl } from '../src/controls/formControl'
-import { ValidationErrors } from '../src/types'
+import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
 describe('formControl.ts', () => {
@@ -66,7 +66,7 @@ describe('formControl.ts', () => {
 
       control.setValidator(Validators.required)
 
-      expect(await control.validate()).toEqual({ required: { message: '' } })
+      expect(await control.validate()).toEqual({ required: { message: null } })
     })
   })
 
@@ -75,7 +75,7 @@ describe('formControl.ts', () => {
 
     test('default change work', async () => {
       const _asyncValidator = (value: unknown) =>
-        Promise.resolve(value === 'test' ? null : ({ async: { message: 'async' } } as ValidationErrors))
+        Promise.resolve(value === 'test' ? null : ({ async: { message: 'async' } } as ValidateErrors))
 
       control = new FormControl('test', { validators: Validators.required, asyncValidators: _asyncValidator })
 

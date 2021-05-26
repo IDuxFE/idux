@@ -9,6 +9,7 @@ import App from './App.vue'
 import './index.less'
 
 import { routes } from './router'
+
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior: (to, _, savedPosition) => {

@@ -100,28 +100,6 @@ describe('Icon.vue', () => {
     expect(wrapper.find('svg').attributes()['style']).toEqual('transform: rotate(180deg)')
   })
 
-  test('tag work', async () => {
-    const wrapper = mount({
-      components: { IxIcon },
-      template: `<IxIcon @click="onClick"/>`,
-      props: {
-        onClick: { type: Function, default: () => void 0 },
-      },
-    })
-    expect(wrapper.find('i').exists()).toBeFalsy()
-    expect(wrapper.find('button').exists()).toBeTruthy()
-
-    await wrapper.setProps({ onClick: null })
-
-    expect(wrapper.find('i').exists()).toBeTruthy()
-    expect(wrapper.find('button').exists()).toBeFalsy()
-
-    await wrapper.setProps({ onClick: () => void 0 })
-
-    expect(wrapper.find('i').exists()).toBeFalsy()
-    expect(wrapper.find('button').exists()).toBeTruthy()
-  })
-
   test('slot work', async () => {
     const wrapper = IconMount({
       slots: {

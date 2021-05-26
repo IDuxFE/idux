@@ -17,6 +17,7 @@ import { IxAffix } from './affix'
 import { IxDropdown, IxDropdownButton } from './dropdown'
 import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from './menu'
 // import Data Entry
+import { IxForm, IxFormItem, IxFormWrapper } from './form'
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxRadio, IxRadioButton, IxRadioGroup } from './radio'
@@ -66,6 +67,9 @@ const components = [
   IxMenuDivider,
   IxSubMenu,
   // components Data Entry
+  IxForm,
+  IxFormItem,
+  IxFormWrapper,
   IxCheckbox,
   IxCheckboxGroup,
   IxInput,

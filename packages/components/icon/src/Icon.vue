@@ -1,14 +1,14 @@
 <template>
-  <component :is="tag" ref="root" :class="classes" role="img" :ariaLabel="name">
+  <i ref="root" :class="classes" role="img" :ariaLabel="name">
     <slot></slot>
-  </component>
+  </i>
 </template>
 <script lang="ts">
-import type { Ref, SetupContext } from 'vue'
+import type { Ref } from 'vue'
 import type { IconConfig } from '@idux/components/config'
 import type { IconProps } from './types'
 
-import { computed, defineComponent, onMounted, onUpdated, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { isNumeric, PropTypes, withUndefined } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
@@ -16,11 +16,11 @@ import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils
 export default defineComponent({
   name: 'IxIcon',
   props: {
+    iconfont: PropTypes.bool.def(false),
     name: PropTypes.string,
     rotate: withUndefined(PropTypes.oneOfType([Boolean, Number, String])),
-    iconfont: PropTypes.bool,
   },
-  setup(props: IconProps, { attrs }: SetupContext) {
+  setup(props: IconProps) {
     const root = ref(null as unknown as HTMLElement)
     const iconConfig = useGlobalConfig('icon')
     onMounted(() => appendChild(props, iconConfig, root))
@@ -28,13 +28,8 @@ export default defineComponent({
     watchName(props, iconConfig, root)
     watchRotate(props, root)
 
-    const tag = ref(attrs.onClick ? 'button' : 'i')
-    onUpdated(() => {
-      tag.value = attrs.onClick ? 'button' : 'i'
-    })
-
     const classes = useClasses(props)
-    return { root, tag, classes }
+    return { root, classes }
   },
 })
 
@@ -80,8 +75,13 @@ function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void
 
 const useClasses = (props: IconProps) => {
   return computed(() => {
-    const isSpin = props.name === 'loading' || (typeof props.rotate === 'boolean' && props.rotate)
-    return ['ix-icon', props.name ? `ix-icon-${props.name}` : '', isSpin ? 'ix-icon-spin' : '']
+    const { name, rotate } = props
+    const isSpin = name === 'loading' || (typeof rotate === 'boolean' && rotate)
+    return {
+      'ix-icon': true,
+      [`ix-icon-${name}`]: !!name,
+      'ix-icon-spin': isSpin,
+    }
   })
 }
 </script>
