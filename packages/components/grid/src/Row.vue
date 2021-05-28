@@ -8,19 +8,14 @@ import type { RowProps } from './types'
 import type { ScreenMatch } from '@idux/cdk/breakpoint'
 
 import { defineComponent, watchEffect, ref, computed, provide } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
 import { observeBreakpoint, Breakpoints, convertMediaToScreen } from '@idux/cdk/breakpoint'
-import { haveBreakpointGutter, normalizeGutter, gutterToken } from './gutter'
 import { useGlobalConfig } from '@idux/components/config'
+import { haveBreakpointGutter, normalizeGutter, gutterToken } from './gutter'
+import { rowPropsDef } from './types'
 
 export default defineComponent({
   name: 'IxRow',
-  props: {
-    align: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch'] as const),
-    justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between'] as const),
-    gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string, PropTypes.array]).def(0),
-    warp: PropTypes.bool,
-  },
+  props: rowPropsDef,
   setup(props: RowProps) {
     const rowConfig = useGlobalConfig('row')
 
@@ -40,10 +35,7 @@ export default defineComponent({
 
     provide(gutterToken, gutter)
 
-    return {
-      classes,
-      rowStyle,
-    }
+    return { classes, rowStyle }
   },
 })
 
@@ -61,7 +53,7 @@ function useClasses(props: RowProps, config: RowConfig) {
     const row = 'ix-row'
     return {
       [row]: true,
-      [`${row}-no-wrap`]: (props.wrap ?? config.wrap) === false,
+      [`${row}-no-wrap`]: !(props.wrap ?? config.wrap),
       [`${row}-${props.justify}`]: props.justify,
       [`${row}-${props.align}`]: props.align,
     }

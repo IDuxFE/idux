@@ -3,6 +3,22 @@
   margin: 8px 12px 8px 0;
 }
 
+// grid
+[id^='components-grid-demo-'] {
+  .ix-row:not(.gutter-row) {
+    .ix-col {
+      background: @primary;
+      color: @white;
+      text-align: center;
+      padding: @spacing-sm;
+    }
+
+    .ix-col:nth-child(even) {
+      background: @primary-l10;
+    }
+  }
+}
+
 // select
 [id^='components-select-demo-'] .ix-select {
   margin-bottom: 16px;
