@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     align: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch'] as const),
     justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between'] as const),
-    gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
+    gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string, PropTypes.array]).def(0),
     warp: PropTypes.bool,
   },
   setup(props: RowProps) {

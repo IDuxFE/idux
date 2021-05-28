@@ -6,7 +6,7 @@ export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-be
 
 export type RowRecordGutter = Record<BreakpointKey, number>
 export type RowRecordArrGutter = [RowRecordGutter, RowRecordGutter]
-export type RowPropGutter = RowRecordGutter | number | Array<number> | RowRecordArrGutter
+export type RowPropGutter = RowRecordGutter | string | number | Array<number> | RowRecordArrGutter
 
 export interface RowProps {
   align?: RowAlign
