@@ -8,14 +8,14 @@ const TestComponent = {
   components: { CheckboxGroup, Checkbox },
   template: `
   <checkbox-group>
-    <checkbox value="option1"> option1 </checkbox>
-    <checkbox value="option2"> option2 </checkbox>
-    <checkbox value="option3"> option3 </checkbox>
+    <checkbox value="option1" />
+    <checkbox value="option2" />
+    <checkbox value="option3" />
   </checkbox-group>
   `,
 }
 
-describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
+describe('CheckboxGroup.vue and Checkbox.vue', () => {
   renderWork(TestComponent)
 
   test('value(v-model) work', async () => {
@@ -24,9 +24,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group v-model:value="value">
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
@@ -42,8 +42,7 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
 
     expect(wrapper.findAllComponents({ name: 'IxCheckbox' })[0].classes()).toContain('ix-checkbox-checked')
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
-
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(false)
     expect(value.value).toEqual([])
   })
 
@@ -52,9 +51,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group>
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
@@ -64,7 +63,7 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
 
     expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(true)
 
     expect(wrapper.findAllComponents({ name: 'IxCheckbox' })[0].classes()).toContain('ix-checkbox-checked')
   })
@@ -75,9 +74,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group @change="mockFn">
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
@@ -87,7 +86,7 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
 
     expect(mockFn).toBeCalledTimes(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(true)
 
     expect(mockFn).toBeCalledTimes(1)
   })
@@ -100,9 +99,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group v-model:value="value" :disabled="disabled" @change="mockFn">
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
@@ -111,7 +110,8 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
     })
 
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(3)
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
     expect(value.value).toEqual([])
     expect(mockFn).toBeCalledTimes(0)
 
@@ -121,7 +121,8 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
 
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
     expect(value.value).toEqual(['option1'])
     expect(mockFn).toBeCalledTimes(1)
   })
@@ -134,9 +135,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group v-model:value="value" :readonly="readonly" @change="mockFn">
-        <checkbox value="option1"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
@@ -145,7 +146,10 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
     })
 
     expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(3)
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    // Readonly is not a native property of the checkbox.
+    // It prevents the default behavior in click when implementing, so change will not be triggered.
+    // Therefore, change event is not simulated here.
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
     expect(value.value).toEqual([])
     expect(mockFn).toBeCalledTimes(0)
 
@@ -155,7 +159,8 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
 
     expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
+    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
     expect(value.value).toEqual(['option1'])
     expect(mockFn).toBeCalledTimes(1)
   })
@@ -165,9 +170,9 @@ describe.skip('CheckboxGroup.vue and Checkbox.vue', () => {
       components: { CheckboxGroup, Checkbox },
       template: `
       <checkbox-group name="group">
-        <checkbox value="option1" name="child"> option1 </checkbox>
-        <checkbox value="option2"> option2 </checkbox>
-        <checkbox value="option3"> option3 </checkbox>
+        <checkbox value="option1" name="child" />
+        <checkbox value="option2" />
+        <checkbox value="option3" />
       </checkbox-group>
       `,
       setup() {
