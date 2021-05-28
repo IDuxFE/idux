@@ -54,7 +54,17 @@ export interface SubMenuConfig {
 }
 
 // Data Entry
-type FormSize = 'small' | 'medium' | 'large'
+export type FormLabelAlign = 'left' | 'right'
+export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormSize = 'small' | 'medium' | 'large'
+
+export interface FormConfig {
+  colonless: boolean
+  labelAlign: FormLabelAlign
+  layout: FormLayout
+  size: FormSize
+}
+
 export type InputSize = FormSize
 export interface InputConfig {
   size: InputSize
@@ -224,6 +234,7 @@ export interface GlobalConfig {
   menu: MenuConfig
   subMenu: SubMenuConfig
   // Data Entry
+  form: FormConfig
   input: InputConfig
   textarea: TextareaConfig
   radioGroup: RadioGroupConfig

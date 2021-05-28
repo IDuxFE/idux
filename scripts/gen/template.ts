@@ -91,7 +91,7 @@ describe('${compName}.vue', () => {
   let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
 
   beforeEach(() => {
-    ${compName}Mount = options => mount(Ix${compName}, { ...options })
+    ${compName}Mount = options => mount<${compName}Instance>(Ix${compName}, { ...options })
   })
 
   renderWork(Ix${compName})

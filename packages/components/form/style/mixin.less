@@ -1,0 +1,52 @@
+.form-vertical-layout-label() {
+  & when (@form-vertical-label-margin > 0) {
+    margin: @form-vertical-label-margin;
+  }
+  padding: @form-vertical-label-padding;
+  line-height: @line-height-base;
+  white-space: initial;
+  text-align: left;
+
+  > label {
+    margin: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.form-vertical-layout() {
+  .@{form-prefix}-item .@{form-prefix}-item-label {
+    .form-vertical-layout-label();
+  }
+  .@{form-prefix} {
+    .@{form-prefix}-item {
+      flex-wrap: wrap;
+      .@{form-prefix}-item-label,
+      .@{form-prefix}-item-control {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.form-size(@form-height) {
+  .@{form-item-prefix}-label > label {
+    height: @form-height;
+  }
+
+  .@{form-item-prefix}-control-input {
+    min-height: @form-height;
+  }
+}
+
+.form-message-extra-distance(@num) when (@num >= 0) {
+  padding-top: floor(@num);
+}
+
+.form-message-extra-distance(@num) when (@num < 0) {
+  margin-top: ceil(@num);
+  margin-bottom: ceil(@num);
+}

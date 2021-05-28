@@ -24,6 +24,7 @@ import {
   Star,
   VerticalAlignTop,
   Ellipsis,
+  QuestionCircle,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -37,12 +38,12 @@ export const staticIcons: IconDefinition[] = [
   RotateRight,
   ZoomIn,
   ZoomOut,
-  Close,
   Check,
   CheckCircle,
+  CheckCircleFilled,
+  Close,
   CloseCircle,
   CloseCircleFilled,
-  CheckCircleFilled,
   InfoCircle,
   InfoCircleFilled,
   ExclamationCircleFilled,
@@ -50,4 +51,5 @@ export const staticIcons: IconDefinition[] = [
   Star,
   VerticalAlignTop,
   Ellipsis,
+  QuestionCircle,
 ]

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DefineComponent } from 'vue'
-import { AbstractControl, ControlPropType } from '@idux/cdk/forms'
+import { AbstractControl, controlPropTypeDef } from '@idux/cdk/forms'
 
 import { PropTypes } from '@idux/cdk/utils'
 
@@ -14,7 +14,7 @@ export interface SelectOption {
 
 export interface SelectProps {
   value?: any
-  control?: string | AbstractControl
+  control?: string | number | AbstractControl
   open: boolean
   autofocus: boolean
   borderless?: boolean
@@ -46,7 +46,7 @@ export const selectPropsDef = {
   borderless: PropTypes.bool,
   clearable: PropTypes.bool,
   compareWith: PropTypes.func.def(defaultCompareWith),
-  control: ControlPropType,
+  control: controlPropTypeDef,
   disabled: PropTypes.bool.def(false),
   overlayClass: PropTypes.string,
   empty: PropTypes.string,

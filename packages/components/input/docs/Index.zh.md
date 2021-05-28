@@ -23,7 +23,7 @@ subtitle: 输入框
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | - |
-| `control` | 控件控制器 | `string\|AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `addonAfter` | 设置后置标签 | `string\|v-slot:addonAfter` | - | - | - |
@@ -51,7 +51,7 @@ subtitle: 输入框
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | - |
-| `control` | 控件控制器 | `string | AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `resize` | 缩放方向 | `none\|both\|horizontal\|vertical` | `vertical` | ✅ | 启用 `autoRows` 的时，仅 `none\|horizontal` 有效 |

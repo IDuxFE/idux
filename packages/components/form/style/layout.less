@@ -1,0 +1,76 @@
+.@{form-prefix}-horizontal {
+  .@{form-item-prefix}-label {
+    flex-grow: 0;
+  }
+  .@{form-item-prefix}-control {
+    flex: 1 1 0;
+  }
+}
+
+.@{form-prefix}-inline {
+  display: flex;
+  flex-wrap: wrap;
+
+  .@{form-prefix}-item {
+    flex: none;
+    flex-wrap: nowrap;
+    margin-right: 16px;
+    margin-bottom: 0;
+
+    &-has-message {
+      margin-bottom: @form-item-margin-bottom;
+    }
+
+    > .@{form-item-prefix}-label,
+    > .@{form-item-prefix}-control {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    > .@{form-item-prefix}-label {
+      flex: none;
+    }
+  }
+}
+
+.@{form-prefix}-vertical {
+  .@{form-item-prefix} {
+    flex-direction: column;
+
+    &-label > label {
+      height: auto;
+    }
+  }
+}
+
+.@{form-prefix}-vertical .@{form-item-prefix}-label,
+    // when labelCol is 24, it is a vertical form
+  .@{idux-prefix}-col-24.@{form-item-prefix}-label,
+  .@{idux-prefix}-col-xl-24.@{form-item-prefix}-label {
+  .form-vertical-layout-label();
+}
+
+@media (max-width: @screen-xs-max) {
+  .form-vertical-layout();
+  .@{idux-prefix}-col-xs-24.@{form-item-prefix}-label {
+    .form-vertical-layout-label();
+  }
+}
+
+@media (max-width: @screen-sm-max) {
+  .@{idux-prefix}-col-sm-24.@{form-item-prefix}-label {
+    .form-vertical-layout-label();
+  }
+}
+
+@media (max-width: @screen-md-max) {
+  .@{idux-prefix}-col-md-24.@{form-item-prefix}-label {
+    .form-vertical-layout-label();
+  }
+}
+
+@media (max-width: @screen-lg-max) {
+  .@{idux-prefix}-col-lg-24.@{form-item-prefix}-label {
+    .form-vertical-layout-label();
+  }
+}

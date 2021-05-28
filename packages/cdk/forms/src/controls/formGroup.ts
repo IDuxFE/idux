@@ -1,27 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { WatchStopHandle } from 'vue'
-import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors, ValidationStatus } from '../types'
+import type { Ref } from 'vue'
+import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidateErrors, ValidateStatus } from '../types'
 import type { GroupControls } from './types'
 
-import { shallowRef, watch, watchEffect } from 'vue'
+import { shallowReadonly, shallowRef, toRaw, watch, watchEffect } from 'vue'
 import { hasOwnProperty } from '@idux/cdk/utils'
 import { AbstractControl } from './abstractControl'
 
 export class FormGroup<T extends Record<string, any> = Record<string, any>> extends AbstractControl<T> {
-  private _valueWatchStopHandle: WatchStopHandle | null = null
-  private _statusWatchStopHandle: WatchStopHandle | null = null
-  private _blurredWatchStopHandle: WatchStopHandle | null = null
-  private _dirtyWatchStopHandle: WatchStopHandle | null = null
+  readonly controls!: Readonly<Ref<GroupControls<T>>>
+
+  private _controls: Ref<GroupControls<T>>
 
   constructor(
     /**
      * A collection of child controls. The key for each child is the name under which it is registered.
      */
-    public readonly controls: GroupControls<T>,
+    controls: GroupControls<T>,
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
+    this._controls = shallowRef(controls)
+    ;(this as any).controls = shallowReadonly((this as any)._controls)
     this._forEachChild(control => control.setParent(this as AbstractControl))
     this._valueRef = shallowRef(this._calculateValue())
 
@@ -41,8 +42,13 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param control Provides the control for the given name
    */
   addControl<K extends OptionalKeys<T>>(name: K, control: AbstractControl<T[K]>): void {
-    this._registerControl(name, control)
-    this._refreshValueAndWatch()
+    control.setParent(this as AbstractControl)
+    const controls = toRaw(this._controls.value)
+    if (hasOwnProperty(controls, name as string)) {
+      return
+    }
+    controls[name] = control
+    this._controls.value = { ...controls }
   }
 
   /**
@@ -51,8 +57,9 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param name The control name to remove from the collection
    */
   removeControl<K extends OptionalKeys<T>>(name: K): void {
-    delete this.controls[name]
-    this._refreshValueAndWatch()
+    const controls = toRaw(this._controls.value)
+    delete controls[name]
+    this._controls.value = { ...controls }
   }
 
   /**
@@ -62,9 +69,10 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param control Provides the control for the given name
    */
   setControl<K extends keyof T>(name: K, control: AbstractControl<T[K]>): void {
-    delete this.controls[name]
-    this._registerControl(name, control)
-    this._refreshValueAndWatch()
+    control.setParent(this as AbstractControl)
+    const controls = toRaw(this._controls.value)
+    controls[name] = control
+    this._controls.value = { ...controls }
   }
 
   /**
@@ -83,7 +91,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    */
   setValue(value: Partial<T>, options: { dirty?: boolean } = {}): void {
     Object.keys(value).forEach(key => {
-      this.controls[key as keyof T]!.setValue((value as any)[key], options)
+      this._controls.value[key as keyof T]!.setValue((value as any)[key], options)
     })
   }
 
@@ -129,7 +137,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   /**
    * Running validations manually, rather than automatically.
    */
-  async validate(): Promise<ValidationErrors | null> {
+  async validate(): Promise<ValidateErrors | null> {
     this._forEachChild(control => control.validate())
     return this._validate()
   }
@@ -143,23 +151,18 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   }
 
   private _watchValue() {
-    if (this._valueWatchStopHandle) {
-      this._valueWatchStopHandle()
-    }
-    this._valueWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       this._valueRef.value = this._calculateValue()
     })
   }
 
   private _watchStatus() {
-    if (this._statusWatchStopHandle) {
-      this._statusWatchStopHandle()
-    }
-    this._statusWatchStopHandle = watchEffect(() => {
-      let status: ValidationStatus = this._errors.value ? 'invalid' : 'valid'
+    watchEffect(() => {
+      let status: ValidateStatus = this._errors.value ? 'invalid' : 'valid'
       if (status === 'valid') {
-        for (const key in this.controls) {
-          const controlStatus = this.controls[key]!.status.value
+        const controls = this._controls.value
+        for (const key in controls) {
+          const controlStatus = controls[key]!.status.value
           if (controlStatus === 'invalid') {
             status = 'invalid'
             break
@@ -173,13 +176,11 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   }
 
   private _watchBlurred() {
-    if (this._blurredWatchStopHandle) {
-      this._blurredWatchStopHandle()
-    }
-    this._blurredWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       let blurred = false
-      for (const key in this.controls) {
-        if (this.controls[key]!.blurred.value) {
+      const controls = this._controls.value
+      for (const key in controls) {
+        if (controls[key]!.blurred.value) {
           blurred = true
           break
         }
@@ -189,13 +190,11 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
   }
 
   private _watchDirty() {
-    if (this._dirtyWatchStopHandle) {
-      this._dirtyWatchStopHandle()
-    }
-    this._dirtyWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       let dirty = false
-      for (const key in this.controls) {
-        if (this.controls[key]!.dirty.value) {
+      const controls = this._controls.value
+      for (const key in controls) {
+        if (controls[key]!.dirty.value) {
           dirty = true
           break
         }
@@ -206,30 +205,16 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
 
   private _calculateValue() {
     const value = {} as T
-
-    Object.keys(this.controls).forEach(key => {
-      value[key as keyof T] = this.controls[key as keyof T]!.getValue()
+    const controls = this._controls.value
+    Object.keys(controls).forEach(key => {
+      value[key as keyof T] = controls[key as keyof T]!.getValue()
     })
 
     return value
   }
 
-  private _refreshValueAndWatch() {
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
-  }
-
-  private _registerControl<K extends keyof T>(name: K, control: AbstractControl<T[K]>) {
-    if (hasOwnProperty(this.controls, name as string)) {
-      return
-    }
-    this.controls[name] = control
-    control.setParent(this as AbstractControl)
-  }
-
   private _forEachChild(cb: (v: AbstractControl, k: keyof T) => void): void {
-    Object.keys(this.controls).forEach(key => cb(this.controls[key as keyof T]!, key as keyof T))
+    const controls = this._controls.value
+    Object.keys(controls).forEach(key => cb(controls[key as keyof T]!, key as keyof T))
   }
 }

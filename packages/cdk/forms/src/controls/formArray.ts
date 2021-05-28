@@ -1,34 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { WatchStopHandle } from 'vue'
-import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidationErrors, ValidationStatus } from '../types'
+import type { ComputedRef, Ref } from 'vue'
+import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions, ValidateErrors, ValidateStatus } from '../types'
 import type { ArrayElement } from './types'
 
-import { shallowRef, watch, watchEffect } from 'vue'
+import { computed, shallowReadonly, shallowRef, toRaw, watch, watchEffect } from 'vue'
 import { AbstractControl } from './abstractControl'
 
 export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   /**
    * Length of the control array.
    */
-  get length(): number {
-    return this.controls.length
-  }
+  readonly length: ComputedRef<number>
 
-  private _valueWatchStopHandle: WatchStopHandle | null = null
-  private _statusWatchStopHandle: WatchStopHandle | null = null
-  private _blurredWatchStopHandle: WatchStopHandle | null = null
-  private _dirtyWatchStopHandle: WatchStopHandle | null = null
+  readonly controls!: Readonly<Ref<AbstractControl<ArrayElement<T>>[]>>
+
+  private _controls: Ref<AbstractControl<ArrayElement<T>>[]>
 
   constructor(
     /**
      * An array of child controls. Each child control is given an index where it is registered.
      */
-    public readonly controls: AbstractControl<ArrayElement<T>>[],
+    controls: AbstractControl<ArrayElement<T>>[],
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(validatorOrOptions, asyncValidator)
     controls.forEach(control => control.setParent(this as AbstractControl))
+    this._controls = shallowRef(controls)
+    ;(this as any).controls = shallowReadonly((this as any)._controls)
+    this.length = computed(() => this._controls.value.length)
     this._valueRef = shallowRef(this._calculateValue())
 
     this._initAllStatus()
@@ -46,7 +46,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param index Index in the array to retrieve the control
    */
   at(index: number): AbstractControl<ArrayElement<T>> {
-    return this.controls[index]
+    return this._controls.value[index]
   }
 
   /**
@@ -55,9 +55,9 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param control Form control to be inserted
    */
   push(control: AbstractControl<ArrayElement<T>>): void {
-    this.controls.push(control)
-    this._registerControl(control)
-    this._refreshValueAndWatch()
+    control.setParent(this as AbstractControl)
+    const controls = toRaw(this._controls.value)
+    this._controls.value = [...controls, control]
   }
 
   /**
@@ -67,9 +67,10 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param control Form control to be inserted
    */
   insert(index: number, control: AbstractControl<ArrayElement<T>>): void {
-    this.controls.splice(index, 0, control)
-    this._registerControl(control)
-    this._refreshValueAndWatch()
+    control.setParent(this as AbstractControl)
+    const controls = toRaw(this._controls.value)
+    controls.splice(index, 0, control)
+    this._controls.value = [...controls]
   }
 
   /**
@@ -78,8 +79,9 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param index Index in the array to remove the control
    */
   removeAt(index: number): void {
-    this.controls.splice(index, 1)
-    this._refreshValueAndWatch()
+    const controls = toRaw(this._controls.value)
+    controls.splice(index, 1)
+    this._controls.value = [...controls]
   }
 
   /**
@@ -89,16 +91,17 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param control The `AbstractControl` control to replace the existing control
    */
   setControl(index: number, control: AbstractControl<ArrayElement<T>>): void {
-    this.controls.splice(index, 1, control)
-    this._registerControl(control)
-    this._refreshValueAndWatch()
+    control.setParent(this as AbstractControl)
+    const controls = toRaw(this._controls.value)
+    controls.splice(index, 1, control)
+    this._controls.value = [...controls]
   }
 
   /**
-   * Resets all controls of the form array.
+   * Resets all _controls.value of the form array.
    */
   reset(): void {
-    this.controls.forEach(control => control.reset())
+    this._controls.value.forEach(control => control.reset())
   }
 
   /**
@@ -120,42 +123,42 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * The aggregate value of the form array.
    */
   getValue(): T {
-    return this.controls.map(control => control.getValue()) as T
+    return this._controls.value.map(control => control.getValue()) as T
   }
 
   /**
    * Marks all controls of the form array as `blurred`.
    */
   markAsBlurred(): void {
-    this.controls.forEach(control => control.markAsBlurred())
+    this._controls.value.forEach(control => control.markAsBlurred())
   }
 
   /**
    * Marks all controls of the form array as `unblurred`.
    */
   markAsUnblurred(): void {
-    this.controls.forEach(control => control.markAsUnblurred())
+    this._controls.value.forEach(control => control.markAsUnblurred())
   }
 
   /**
    * Marks all controls of the form array as `dirty`.
    */
   markAsDirty(): void {
-    this.controls.forEach(control => control.markAsDirty())
+    this._controls.value.forEach(control => control.markAsDirty())
   }
 
   /**
    * Marks all controls of the form array as `pristine`.
    */
   markAsPristine(): void {
-    this.controls.forEach(control => control.markAsPristine())
+    this._controls.value.forEach(control => control.markAsPristine())
   }
 
   /**
    * Running validations manually, rather than automatically.
    */
-  async validate(): Promise<ValidationErrors | null> {
-    this.controls.forEach(control => control.validate())
+  async validate(): Promise<ValidateErrors | null> {
+    this._controls.value.forEach(control => control.validate())
     return this._validate()
   }
 
@@ -168,22 +171,17 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _watchValue() {
-    if (this._valueWatchStopHandle) {
-      this._valueWatchStopHandle()
-    }
-    this._valueWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       this._valueRef.value = this._calculateValue()
     })
   }
 
   private _watchStatus() {
-    if (this._statusWatchStopHandle) {
-      this._statusWatchStopHandle()
-    }
-    this._statusWatchStopHandle = watchEffect(() => {
-      let status: ValidationStatus = this._errors.value ? 'invalid' : 'valid'
+    watchEffect(() => {
+      let status: ValidateStatus = this._errors.value ? 'invalid' : 'valid'
       if (status === 'valid') {
-        for (const control of this.controls) {
+        const controls = this._controls.value
+        for (const control of controls) {
           const controlStatus = control.status.value
           if (controlStatus === 'invalid') {
             status = 'invalid'
@@ -198,12 +196,10 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _watchBlurred() {
-    if (this._blurredWatchStopHandle) {
-      this._blurredWatchStopHandle()
-    }
-    this._blurredWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       let blurred = false
-      for (const control of this.controls) {
+      const controls = this._controls.value
+      for (const control of controls) {
         if (control.blurred.value) {
           blurred = true
           break
@@ -214,12 +210,10 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _watchDirty() {
-    if (this._dirtyWatchStopHandle) {
-      this._dirtyWatchStopHandle()
-    }
-    this._dirtyWatchStopHandle = watchEffect(() => {
+    watchEffect(() => {
       let dirty = false
-      for (const control of this.controls) {
+      const controls = this._controls.value
+      for (const control of controls) {
         if (control.dirty.value) {
           dirty = true
           break
@@ -230,17 +224,6 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   }
 
   private _calculateValue() {
-    return this.controls.map(control => control.getValue()) as T
-  }
-
-  private _refreshValueAndWatch() {
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
-  }
-
-  private _registerControl(control: AbstractControl<ArrayElement<T>>) {
-    control.setParent(this as AbstractControl)
+    return this._controls.value.map(control => control.getValue()) as T
   }
 }
