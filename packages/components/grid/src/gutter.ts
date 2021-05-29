@@ -33,7 +33,7 @@ export const normalizeGutter = (propGutter: RowPropGutter, screens: Ref<ScreenMa
         return false
       })
     } else {
-      results[index] = gutter || 0
+      results[index] = isNaN(Number(gutter)) ? 0 : Number(gutter)
     }
   })
   return results
