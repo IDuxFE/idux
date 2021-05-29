@@ -22,6 +22,7 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         less: {
           javascriptEnabled: true,
+          additionalData: `@import '@idux/components/style/variable/index.less';`,
         },
       },
     },

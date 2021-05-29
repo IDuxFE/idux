@@ -1,47 +1,80 @@
 import type { DefineComponent } from 'vue'
+import type { VueTypeValidableDef } from 'vue-types'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 
-export type RowAlign = 'top' | 'middle' | 'bottom' | 'stretch'
-export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+import { PropTypes } from '@idux/cdk/utils'
 
-export type RowRecordGutter = Record<BreakpointKey, number>
-export type RowRecordArrGutter = [RowRecordGutter, RowRecordGutter]
-export type RowPropGutter = RowRecordGutter | string | number | Array<number> | RowRecordArrGutter
+export type RowAlign = 'top' | 'middle' | 'bottom'
+export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+export type RowGutterRecord = Record<BreakpointKey, number>
+export type RowGutter = number | string | Array<number> | RowGutterRecord | [RowGutterRecord, RowGutterRecord]
 
 export interface RowProps {
   align?: RowAlign
   justify?: RowJustify
-  // TODO fix any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  gutter: RowPropGutter | any
+  gutter: RowGutter
   wrap?: boolean
+}
+
+export const rowPropsDef = {
+  align: PropTypes.oneOf(['top', 'middle', 'bottom'] as const),
+  justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between'] as const),
+  gutter: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array, PropTypes.object]).def(
+    0,
+  ) as VueTypeValidableDef<RowGutter> & { default: 0 },
+  wrap: PropTypes.bool,
 }
 
 export type RowInstance = InstanceType<DefineComponent<RowProps>>
 
-type PropValue = number | string
-
-export type FlexValue = PropValue
 export interface ColBreakpointConfig {
-  span?: PropValue
-  order?: PropValue
-  offset?: PropValue
-  push?: PropValue
-  pull?: PropValue
+  span?: number | string
+  order?: number | string
+  offset?: number | string
+  push?: number | string
+  pull?: number | string
 }
 
 export interface ColProps {
-  span?: PropValue
-  order?: PropValue
-  offset?: PropValue
-  push?: PropValue
-  pull?: PropValue
-  xs?: PropValue | ColBreakpointConfig
-  sm?: PropValue | ColBreakpointConfig
-  md?: PropValue | ColBreakpointConfig
-  lg?: PropValue | ColBreakpointConfig
-  xl?: PropValue | ColBreakpointConfig
-  flex?: FlexValue
+  flex?: number | string
+  span?: number | string
+  offset?: number | string
+  order?: number | string
+  push?: number | string
+  pull?: number | string
+  xs?: number | string | ColBreakpointConfig
+  sm?: number | string | ColBreakpointConfig
+  md?: number | string | ColBreakpointConfig
+  lg?: number | string | ColBreakpointConfig
+  xl?: number | string | ColBreakpointConfig
+}
+
+const breakpointConfig = PropTypes.oneOfType([
+  PropTypes.number,
+  PropTypes.string,
+  PropTypes.shape({
+    span: PropTypes.number,
+    offset: PropTypes.number,
+    order: PropTypes.number,
+    push: PropTypes.number,
+    pull: PropTypes.number,
+  }).loose,
+])
+
+const singleProp = PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+
+export const colPropsDef = {
+  flex: singleProp,
+  span: singleProp,
+  order: singleProp,
+  offset: singleProp,
+  push: singleProp,
+  pull: singleProp,
+  xs: breakpointConfig,
+  sm: breakpointConfig,
+  md: breakpointConfig,
+  lg: breakpointConfig,
+  xl: breakpointConfig,
 }
 
 export type ColInstance = InstanceType<DefineComponent<ColProps>>
