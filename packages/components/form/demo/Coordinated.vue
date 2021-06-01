@@ -45,12 +45,15 @@ export default defineComponent({
 
     methodControl.watchValue(value => {
       if (value === 'mobilePhone') {
-        contactControl.setValidator([required, mobilePhoneValidator])
+        subscribeControl.disable()
         subscribeControl.setValue(false)
+        contactControl.setValidator([required, mobilePhoneValidator])
       } else {
-        contactControl.setValidator([required, email])
+        subscribeControl.enable()
         subscribeControl.setValue(true)
+        contactControl.setValidator([required, email])
       }
+
       contactControl.reset()
     })
 

@@ -1,5 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { AbstractControl } from './controls/abstractControl'
+import type { AbstractControl, ControlPathType } from './controls'
 
 import { inject, provide } from 'vue'
 import { object } from 'vue-types'
@@ -15,7 +15,7 @@ export function provideControl(control: AbstractControl): void {
   provide(controlToken, control)
 }
 
-export function injectControl(path?: Array<string | number> | string | number): AbstractControl | null {
+export function injectControl(path?: ControlPathType): AbstractControl | null {
   const control = inject(controlToken, null)
   if (!control) {
     return null

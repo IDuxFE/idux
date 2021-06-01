@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { AbstractControl } from './controls/abstractControl'
+import { AbstractControl } from './controls'
 
 export interface ValidateError {
   /**
@@ -33,6 +33,7 @@ export interface ValidatorOptions {
   validators?: ValidatorFn | ValidatorFn[] | null
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
   trigger?: TriggerType
+  disabled?: boolean
 }
 
 export type ValidateStatus = 'valid' | 'invalid' | 'validating'

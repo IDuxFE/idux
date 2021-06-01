@@ -28,7 +28,6 @@
         </ix-col>
         <ix-col span="8">
           <ix-form-item control="zip" label="Zip Code">
-            <!-- TODO ix-input-number -->
             <ix-input></ix-input>
           </ix-form-item>
         </ix-col>
@@ -67,7 +66,7 @@ export default defineComponent({
     const addressGroup = useFormGroup<Address>({
       city: ['', required],
       street: ['', required],
-      zip: undefined,
+      zip: [undefined],
     })
 
     const formGroup = useFormGroup({

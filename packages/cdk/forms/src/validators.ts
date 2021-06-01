@@ -9,7 +9,7 @@ import type {
   ValidateMessages,
   ValidateMessageFn,
 } from './types'
-import type { AbstractControl } from './controls/abstractControl'
+import type { AbstractControl } from './controls'
 
 import { isArray, isFunction, isNil, isNonNil, isNumber, isNumeric, isString } from '@idux/cdk/utils'
 

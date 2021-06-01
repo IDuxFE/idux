@@ -1,6 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 import { Ref, ref, watch } from 'vue'
-import { AbstractControl } from '../src/controls/abstractControl'
+import { AbstractControl } from '../src/controls'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
 
@@ -10,26 +10,24 @@ class Control<T = unknown> extends AbstractControl<T> {
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
-    super(validatorOrOptions, asyncValidator)
-
-    this._initAllStatus()
+    super(null, validatorOrOptions, asyncValidator)
 
     this._watchEffect()
   }
-  reset(): void {}
+
   setValue(value: T): void {
     this._valueRef.value = value
   }
   getValue(): T {
     return this._valueRef.value
   }
-  markAsBlurred(): void {}
-  markAsUnblurred(): void {}
-  markAsDirty(): void {}
-  markAsPristine(): void {}
-  async validate(): Promise<ValidateErrors | null> {
-    return this._validate()
+
+  protected _forEachControls(): void {}
+
+  protected _calculateInitValue(): T {
+    return undefined as unknown as T
   }
+
   private _watchEffect() {
     watch([this._valueRef, this._blurred], () => {
       this._validate()
@@ -55,6 +53,7 @@ describe('abstractControl.ts', () => {
       expect(control.valid.value).toEqual(true)
       expect(control.invalid.value).toEqual(false)
       expect(control.validating.value).toEqual(false)
+      expect(control.disabled.value).toEqual(false)
       expect(control.blurred.value).toEqual(false)
       expect(control.unblurred.value).toEqual(true)
       expect(control.dirty.value).toEqual(false)

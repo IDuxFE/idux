@@ -6,7 +6,7 @@
         v-show="showItem"
         :key="item.value"
         :removeable="multiple && !item.isMax"
-        :disabled="disabled || item.disabled"
+        :disabled="disabled$$ || item.disabled"
         :label="item.label"
         @delete="onItemDelete(item)"
       >
@@ -17,7 +17,7 @@
         ref="selectInput"
         :value="inputValue"
         :autofocus="autofocus"
-        :disabled="disabled"
+        :disabled="disabled$$"
         :open="open"
         :showInput="multiple || searchable || inputable"
         :showMirror="multiple"
@@ -35,7 +35,7 @@
     <div v-if="suffix || $slots.suffix || !multiple" class="ix-select-suffix">
       <slot name="suffix"><ix-icon :name="suffixIcon" /></slot>
     </div>
-    <div v-if="clearable && !disabled && selectedItems.length" class="ix-select-clear" @click.stop="onClear">
+    <div v-if="clearable && !disabled$$ && selectedItems.length" class="ix-select-clear" @click.stop="onClear">
       <ix-icon name="close-circle" />
     </div>
     <ix-portal target="ix-select-container">
@@ -101,8 +101,15 @@ export default defineComponent({
 
     const { visibility, show, hide, ...overlayBindings } = useSelectOverlay(props)
     const normalOptions = useSelectOptions(props, config)
-    const { inputValue, activatedValue, selectedValue, isActive, ...accessorBindings } = useSelectValueAccessor(props)
-    const classes = useSelectClasses(props, config, visibility, isActive)
+    const {
+      disabled: disabled$$,
+      inputValue,
+      activatedValue,
+      selectedValue,
+      isActive,
+      ...accessorBindings
+    } = useSelectValueAccessor(props)
+    const classes = useSelectClasses(props, config, visibility, isActive, disabled$$)
     const { selectInput, focus, blur, clear } = useSelectInput()
     useSelectProvider(props, inputValue, activatedValue, selectedValue, selectedOptions, hide, focus, clear)
 
@@ -121,7 +128,7 @@ export default defineComponent({
     const onClickOutside = () => hide()
 
     const onClick = () => {
-      if (props.disabled) {
+      if (disabled$$.value) {
         return
       }
       if (props.multiple) {
@@ -155,6 +162,7 @@ export default defineComponent({
     })
 
     return {
+      disabled$$,
       focus,
       blur,
       onClickOutside,
