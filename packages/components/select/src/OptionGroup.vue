@@ -11,7 +11,7 @@
 import { computed, defineComponent, inject, nextTick, onUnmounted, provide, ref, watch } from 'vue'
 import IxOption from './Option.vue'
 import { optionGroupPropsDef } from './types'
-import { visibleChangeToken } from './utils'
+import { visibleChangeToken } from './token'
 
 export default defineComponent({
   name: 'IxOptionGroup',

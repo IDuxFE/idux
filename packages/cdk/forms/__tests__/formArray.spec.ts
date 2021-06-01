@@ -1,7 +1,5 @@
 import { flushPromises } from '@vue/test-utils'
-import { FormArray } from '../src/controls/formArray'
-import { FormControl } from '../src/controls/formControl'
-import { FormGroup } from '../src/controls/formGroup'
+import { FormArray, FormControl, FormGroup } from '../src/controls'
 import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
@@ -16,7 +14,7 @@ interface BasicGroup {
 const newFormGroup = () =>
   new FormGroup<BasicGroup>({
     control: new FormControl(''),
-    array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
+    array: new FormArray([new FormControl(''), new FormControl('')]),
     group: new FormGroup({
       control: new FormControl(''),
     }),
@@ -98,7 +96,7 @@ describe('formArray.ts', () => {
       expect(array.getValue()).toEqual([basicValue])
       const group = new FormGroup<BasicGroup>({
         control: new FormControl('test'),
-        array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
+        array: new FormArray([new FormControl(''), new FormControl('')]),
         group: new FormGroup({
           control: new FormControl(''),
         }),
@@ -242,9 +240,9 @@ describe('formArray.ts', () => {
       const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
       array = new FormArray(
         [
-          new FormGroup<BasicGroup>({
+          new FormGroup({
             control: new FormControl('', Validators.required),
-            array: new FormArray<string[]>([new FormControl(''), new FormControl('')]),
+            array: new FormArray([new FormControl(''), new FormControl('')]),
             group: new FormGroup({
               control: new FormControl('', { asyncValidators: _asyncValidator }),
             }),
@@ -292,6 +290,63 @@ describe('formArray.ts', () => {
       expect(array.hasError('test')).toEqual(true)
       expect(array.hasError('required', [0, 'control'])).toEqual(false)
       expect(array.hasError('async', [0, 'group', 'control'])).toEqual(true)
+    })
+  })
+
+  describe('disabled work', () => {
+    let array: FormArray<BasicGroup[]>
+
+    test('default disabled work', async () => {
+      array = new FormArray(
+        [
+          new FormGroup({
+            control: new FormControl('', Validators.required),
+            array: new FormArray([new FormControl(''), new FormControl('')]),
+            group: new FormGroup({
+              control: new FormControl(''),
+            }),
+          }),
+        ],
+        { disabled: true },
+      )
+
+      await flushPromises()
+
+      expect(array.disabled.value).toEqual(true)
+      expect(array.status.value).toEqual('valid')
+      expect(array.get('0')!.disabled.value).toEqual(true)
+      expect(array.get('0')!.status.value).toEqual('valid')
+    })
+
+    test('disable and enable work', async () => {
+      array = new FormArray(
+        [
+          new FormGroup({
+            control: new FormControl('', Validators.required),
+            array: new FormArray([new FormControl(''), new FormControl('')]),
+            group: new FormGroup({
+              control: new FormControl(''),
+            }),
+          }),
+        ],
+        { disabled: true },
+      )
+
+      array.enable()
+      await flushPromises()
+
+      expect(array.disabled.value).toEqual(false)
+      expect(array.status.value).toEqual('invalid')
+      expect(array.get('0')!.disabled.value).toEqual(false)
+      expect(array.get('0')!.status.value).toEqual('invalid')
+
+      array.disable()
+      await flushPromises()
+
+      expect(array.disabled.value).toEqual(true)
+      expect(array.status.value).toEqual('valid')
+      expect(array.get('0')!.disabled.value).toEqual(true)
+      expect(array.get('0')!.status.value).toEqual('valid')
     })
   })
 })

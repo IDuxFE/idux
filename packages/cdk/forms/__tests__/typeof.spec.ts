@@ -1,6 +1,4 @@
-import { FormArray } from '../src/controls/formArray'
-import { FormControl } from '../src/controls/formControl'
-import { FormGroup } from '../src/controls/formGroup'
+import { FormArray, FormControl, FormGroup } from '../src/controls'
 import { isAbstractControl, isFormArray, isFormControl, isFormGroup } from '../src/typeof'
 import { useFormArray, useFormControl, useFormGroup } from '../src/useForms'
 

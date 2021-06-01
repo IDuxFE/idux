@@ -206,7 +206,8 @@ export abstract class AbstractControl<T = any> {
   /**
    * Sets a new value for the control.
    */
-  abstract setValue(value: any, options: { dirty?: boolean }): void
+  abstract setValue(value: T, options?: { dirty?: boolean }): void
+  abstract setValue(value: Partial<T>, options?: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.
@@ -256,8 +257,8 @@ export abstract class AbstractControl<T = any> {
    * @param path A dot-delimited string or array of string/number values that define the path to the
    * control.
    */
-  get(path: Array<string | number> | string): AbstractControl<T> | null
-
+  get<K extends keyof T>(path: K): AbstractControl<T[K]> | null
+  get<TK = any>(path: ControlPathType): AbstractControl<TK> | null
   /**
    * Sets errors on a form control when running validations manually, rather than automatically.
    */
@@ -270,7 +271,7 @@ export abstract class AbstractControl<T = any> {
    * @param path A list of control names that designates how to move from the current control
    * to the control that should be queried for errors.
    */
-  getError(errorCode: string, path?: Array<string | number> | string): ValidateError | null
+  getError(errorCode: string, path?: ControlPathType): ValidateError | null
 
   /**
    * Reports whether the control with the given path has the error specified.
@@ -280,7 +281,7 @@ export abstract class AbstractControl<T = any> {
    * to the control that should be queried for errors.
    *
    */
-  hasError(errorCode: string, path?: Array<string | number> | string): boolean
+  hasError(errorCode: string, path?: ControlPathType): boolean
 
   /**
    * @param parent Sets the parent of the control

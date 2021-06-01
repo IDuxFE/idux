@@ -19,7 +19,7 @@ import { PropTypes } from '@idux/cdk/utils'
 import { IxEmpty } from '@idux/components/empty'
 import IxOptionGroup from './OptionGroup.vue'
 import IxOption from './Option.vue'
-import { visibleChangeToken } from './utils'
+import { visibleChangeToken } from './token'
 
 export default defineComponent({
   name: 'IxOptionContainer',

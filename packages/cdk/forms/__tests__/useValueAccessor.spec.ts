@@ -1,7 +1,6 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { ComponentOptions, ref, Ref } from 'vue'
-import { AbstractControl } from '../src/controls/abstractControl'
-import { FormControl } from '../src/controls/formControl'
+import { AbstractControl, FormControl } from '../src/controls'
 import { useFormControl, useFormGroup } from '../src/useForms'
 import { useValueAccessor } from '../src/useValueAccessor'
 import { provideControl } from '../src/utils'

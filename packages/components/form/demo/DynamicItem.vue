@@ -31,7 +31,8 @@ export default defineComponent({
     const formGroup = useFormGroup<any>({
       array: useFormArray([]),
     })
-    const arrayControl = formGroup.get('array') as FormArray
+
+    const arrayControl = formGroup.get('array') as FormArray<string[]>
 
     let id = 0
     const addGroupItem = () => {

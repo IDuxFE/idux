@@ -1,4 +1,4 @@
-import { AbstractControl } from '../src/controls/abstractControl'
+import { AbstractControl } from '../src/controls'
 import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from '../src/types'
 import { Validators } from '../src/validators'
 

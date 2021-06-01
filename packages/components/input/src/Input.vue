@@ -22,7 +22,7 @@
         ref="inputRef"
         v-bind="attrs"
         class="ix-input-inner"
-        :disabled="disabled"
+        :disabled="disabled$$"
         :readonly="readonly"
         @compositionstart="onCompositionStart"
         @compositionend="onCompositionEnd"
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
@@ -90,6 +90,7 @@ export default defineComponent({
     const inputRef = ref(null as unknown as HTMLInputElement)
 
     const {
+      disabled: disabled$$,
       focus,
       blur,
       onCompositionStart,
@@ -104,12 +105,13 @@ export default defineComponent({
       valueAccessor,
     } = useCommonBindings(props, inputConfig, inputRef)
 
-    const classes = useClasses(props, inputConfig, isFocused)
+    const classes = useClasses(props, inputConfig, isFocused, disabled$$)
 
     const onSuffixClick = (evt: MouseEvent) => emit('suffixClick', valueAccessor.value, evt)
     const onPrefixClick = (evt: MouseEvent) => emit('prefixClick', valueAccessor.value, evt)
 
     return {
+      disabled$$,
       focus,
       blur,
       attrs,
@@ -129,12 +131,12 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: InputProps, config: InputConfig, isFocused: Ref<boolean>) {
+function useClasses(props: InputProps, config: InputConfig, isFocused: Ref<boolean>, disabled: ComputedRef<boolean>) {
   return computed(() => {
     const sizeClass = `ix-input-${props.size ?? config.size}`
     return {
       [sizeClass]: true,
-      'ix-input-disabled': props.disabled,
+      'ix-input-disabled': disabled.value,
       'ix-input-borderless': props.borderless ?? config.borderless,
       'ix-input-focused': isFocused.value,
     }
