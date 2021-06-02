@@ -1,5 +1,5 @@
 import type { CSSProperties, ComponentPublicInstance, ComputedRef, Ref } from 'vue'
-import type { ItemRender, VirtualFillerInstance, VirtualListProps, VirtualScrollBarInstance } from './types'
+import type { VirtualItemRenderFn, VirtualFillerInstance, VirtualListProps, VirtualScrollBarInstance } from './types'
 
 import { ref, defineComponent, computed } from 'vue'
 import Item from './item'
@@ -132,7 +132,7 @@ const useChildren = (
   startIndex: number,
   endIndex: number,
   setItemRef: (item: Record<string, unknown>, element: HTMLElement) => void,
-  itemRender: ItemRender,
+  itemRender: VirtualItemRenderFn,
 ) => {
   return data.slice(startIndex, endIndex + 1).map((item, index) => {
     const key = useItemKey(props, item)

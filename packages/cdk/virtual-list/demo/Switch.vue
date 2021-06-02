@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, h, ref } from 'vue'
-import { VirtualListInstance, ItemRender } from '@idux/cdk/virtual-list'
+import { VirtualListInstance, VirtualItemRenderFn } from '@idux/cdk/virtual-list'
 
 const getData = (length: number, key = 'id') => {
   const data: { id: string }[] = []
@@ -49,7 +49,7 @@ export default defineComponent({
     const data = computed(() => getData(dataLength.value))
     const height = ref(200)
     const switchItemRender = ref(false)
-    const itemRender = computed<ItemRender>(() => {
+    const itemRender = computed<VirtualItemRenderFn>(() => {
       if (switchItemRender.value) {
         return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.id}`])
       } else {

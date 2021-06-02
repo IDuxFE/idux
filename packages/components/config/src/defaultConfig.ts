@@ -30,6 +30,7 @@ import type {
   DropdownConfig,
   ListConfig,
   FormConfig,
+  PaginationConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -72,6 +73,18 @@ const menu = shallowReactive<MenuConfig>({
 const subMenu = shallowReactive<SubMenuConfig>({
   suffix: 'right',
   suffixRotates: [-90, 90],
+})
+
+const pagination = shallowReactive<PaginationConfig>({
+  lessJumper: false,
+  pageSize: 10,
+  pageSizes: [10, 20, 50, 100],
+  showQuickJumper: false,
+  showSizeChanger: false,
+  showTitle: true,
+  showTotal: true,
+  simple: false,
+  size: 'medium',
 })
 
 // --------------------- Data Entry ---------------------
@@ -213,6 +226,7 @@ export const defaultConfig: GlobalConfig = {
   dropdown,
   menu,
   subMenu,
+  pagination,
   // Data Entry
   form,
   input,

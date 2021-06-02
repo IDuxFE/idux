@@ -38,7 +38,7 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `mode` | 设置按钮种类 | `primary\|default\|dashed\|text\|link` | `default` | ✅ |- |
+| `mode` | 设置按钮种类 | `primary\|default\|dashed\|text\|link` | `default` | - |- |
 | `danger` | 设置危险状态 | `boolean` | - | - |- |
 | `ghost` | 设置幽灵状态 | `boolean` | - | - |- |
 | `disabled` | 设置禁用状态 | `boolean` | - | - |- |

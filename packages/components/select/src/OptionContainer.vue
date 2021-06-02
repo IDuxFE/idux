@@ -25,7 +25,7 @@ export default defineComponent({
   name: 'IxOptionContainer',
   components: { IxOptionGroup, IxOption, IxEmpty },
   props: {
-    options: PropTypes.array.def([]),
+    options: PropTypes.array.def(() => []),
     empty: PropTypes.string,
   },
   setup() {

@@ -190,7 +190,6 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
       if (valueList.length !== 0 || selectedValue.value.length !== 0) {
         selectedValue.value = valueList
         updateVariable()
-        emit('change', value)
       }
     },
   )
@@ -201,6 +200,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
       const _value = props.multiple ? value : value[0]
       if (valueAccessor.value !== _value) {
         valueAccessor.setValue?.(_value)
+        emit('change', _value)
       }
     },
   )

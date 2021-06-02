@@ -45,7 +45,7 @@ export interface VirtualScrollBarBindings {
 
 export type VirtualScrollBarInstance = InstanceType<DefineComponent<VirtualScrollBarProps, VirtualScrollBarBindings>>
 
-export type ItemRender<T = Record<string, unknown>> = (option: { item: T; index: number }) => VNodeTypes
+export type VirtualItemRenderFn<T = Record<string, unknown>> = (option: { item: T; index: number }) => VNodeTypes
 
 export interface VirtualListProps<T = Record<string, unknown>> {
   component: string | Component
@@ -55,7 +55,7 @@ export interface VirtualListProps<T = Record<string, unknown>> {
   height: number
   itemHeight: number
   itemKey: string | ((item: T) => string | number)
-  itemRender?: ItemRender
+  itemRender?: VirtualItemRenderFn
   /** Set `false` will always use real scroll instead of virtual one */
   virtual: boolean
 }

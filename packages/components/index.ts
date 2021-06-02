@@ -13,6 +13,7 @@ import { IxDivider } from './divider'
 import { IxSpace } from './space'
 import { IxRow, IxCol } from './grid'
 // import Navigation
+import { IxPagination } from './pagination'
 import { IxAffix } from './affix'
 import { IxDropdown, IxDropdownButton } from './dropdown'
 import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from './menu'
@@ -58,6 +59,7 @@ const components = [
   IxRow,
   IxCol,
   // components Navigation
+  IxPagination,
   IxAffix,
   IxDropdown,
   IxDropdownButton,
