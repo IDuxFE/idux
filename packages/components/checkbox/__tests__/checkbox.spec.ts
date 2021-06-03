@@ -92,14 +92,18 @@ describe('Checkbox.vue', () => {
   test('readonly work', async () => {
     const checked = ref(true)
     const readonly = ref(true)
-    const mockFn = jest.fn()
-    const wrapper = mount({
-      components: { IxCheckbox },
-      template: `<ix-checkbox v-model:checked="checked" :readonly="readonly" @change="mockFn" />`,
-      setup() {
-        return { checked, readonly, mockFn }
+    const focusFn = jest.fn()
+    const changeFn = jest.fn()
+    const wrapper = mount(
+      {
+        components: { IxCheckbox },
+        template: `<ix-checkbox v-model:checked="checked" :readonly="readonly" @change="changeFn" @focus="focusFn" />`,
+        setup() {
+          return { checked, readonly, changeFn, focusFn }
+        },
       },
-    })
+      { attachTo: 'body' },
+    )
 
     expect(wrapper.classes()).toContain('ix-checkbox-readonly')
 
@@ -110,7 +114,10 @@ describe('Checkbox.vue', () => {
 
     expect(wrapper.classes()).toContain('ix-checkbox-readonly')
     expect(checked.value).toBe(true)
-    expect(mockFn).toBeCalledTimes(0)
+    expect(changeFn).toBeCalledTimes(0)
+
+    await wrapper.getComponent(IxCheckbox).vm.focus()
+    expect(focusFn).toBeCalledTimes(0)
 
     readonly.value = false
 
@@ -120,7 +127,10 @@ describe('Checkbox.vue', () => {
 
     await wrapper.find('input').setValue(false)
     expect(checked.value).toBe(false)
-    expect(mockFn).toBeCalledTimes(1)
+    expect(changeFn).toBeCalledTimes(1)
+
+    await wrapper.getComponent(IxCheckbox).vm.focus()
+    expect(focusFn).toBeCalledTimes(1)
   })
 
   test('indeterminate work', async () => {
@@ -185,5 +195,29 @@ describe('Checkbox.vue', () => {
     expect(originalInput.attributes()['style']).not.toEqual('color: red;')
 
     expect(input.attributes()['tabindex']).toEqual('1')
+  })
+
+  test('focus & blur method work', async () => {
+    const focusFn = jest.fn()
+    const blurFn = jest.fn()
+    const wrapper = mount(
+      {
+        components: { IxCheckbox },
+        attachTo: '.ix-checkbox',
+        template: `<ix-checkbox ref="component" @focus="focusFn" @blur="blurFn" />`,
+        setup() {
+          return { focusFn, blurFn }
+        },
+      },
+      { attachTo: 'body' },
+    )
+
+    await wrapper.getComponent(IxCheckbox).vm.focus()
+
+    expect(focusFn).toBeCalledTimes(1)
+
+    await wrapper.getComponent(IxCheckbox).vm.blur()
+
+    expect(blurFn).toBeCalledTimes(1)
   })
 })
