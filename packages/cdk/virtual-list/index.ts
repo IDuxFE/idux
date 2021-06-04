@@ -5,7 +5,7 @@ export { IxVirtualList }
 export type {
   VirtualListInstance,
   VirtualListProps,
-  ItemRender,
+  VirtualItemRenderFn,
   ScrollToAlign,
   ScrollToOptions,
   ScrollToFn,

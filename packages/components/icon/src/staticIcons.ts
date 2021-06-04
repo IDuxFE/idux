@@ -25,6 +25,8 @@ import {
   VerticalAlignTop,
   Ellipsis,
   QuestionCircle,
+  DoubleLeft,
+  DoubleRight,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -32,6 +34,8 @@ export const staticIcons: IconDefinition[] = [
   Down,
   Left,
   Right,
+  DoubleLeft,
+  DoubleRight,
   Loading,
   Empty,
   RotateLeft,

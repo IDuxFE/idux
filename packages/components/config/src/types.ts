@@ -1,3 +1,4 @@
+import type { VNodeTypes } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
@@ -51,6 +52,32 @@ export interface MenuConfig {
 export interface SubMenuConfig {
   suffix: string
   suffixRotates: [number, number]
+}
+
+export type PaginationSize = 'small' | 'medium'
+export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
+export interface PaginationItemRenderOptions {
+  index: number
+  type: PaginationItemType
+  active: boolean
+  disabled: boolean
+  original: VNodeTypes
+}
+export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
+export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
+
+export interface PaginationConfig {
+  itemRender?: PaginationItemRenderFn
+  lessJumper: boolean
+  pageSize: number
+  pageSizes: number[]
+  showQuickJumper: boolean
+  showSizeChanger: boolean
+  showTitle: boolean
+  showTotal: boolean
+  simple: boolean
+  size: PaginationSize
+  totalRender?: PaginationTotalRenderFn
 }
 
 // Data Entry
@@ -233,6 +260,7 @@ export interface GlobalConfig {
   dropdown: DropdownConfig
   menu: MenuConfig
   subMenu: SubMenuConfig
+  pagination: PaginationConfig
   // Data Entry
   form: FormConfig
   input: InputConfig

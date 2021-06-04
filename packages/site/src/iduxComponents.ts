@@ -11,6 +11,7 @@ import { IxDivider } from '@idux/components/divider'
 import { IxSpace } from '@idux/components/space'
 import { IxRow, IxCol } from '@idux/components/grid'
 // import Navigation
+import { IxPagination } from '@idux/components/pagination'
 import { IxAffix } from '@idux/components/affix'
 import { IxDropdown, IxDropdownButton } from '@idux/components/dropdown'
 import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@idux/components/menu'
@@ -57,6 +58,7 @@ const components = [
   IxRow,
   IxCol,
   // components Navigation
+  IxPagination,
   IxAffix,
   IxDropdown,
   IxDropdownButton,
