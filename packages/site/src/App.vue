@@ -18,7 +18,6 @@
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGlobalConfig } from '@idux/components/config'
 import { appContextToken, AppContext } from './context'
 import LayoutHeader from './layout/header/Index.vue'
 import LayoutSideNav from './layout/SideNav.vue'
@@ -43,13 +42,6 @@ export default defineComponent({
     }
 
     provide(appContextToken, appContext)
-
-    // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
-    const loadIconDynamically = (iconName: string) => {
-      return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
-    }
-
-    useGlobalConfig('icon', { loadIconDynamically })
 
     return { page }
   },
