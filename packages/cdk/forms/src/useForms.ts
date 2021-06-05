@@ -1,23 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions } from './types'
-import type { AbstractControl } from './controls/abstractControl'
-import type { ArrayElement, GroupControls } from './controls/types'
+import type { AbstractControl, ArrayElement, GroupControls } from './controls'
 
-import { isArray } from '@idux/cdk/utils'
-import { FormGroup } from './controls/formGroup'
-import { FormControl } from './controls/formControl'
-import { FormArray } from './controls/formArray'
+import { FormArray, FormControl, FormGroup } from './controls'
 import { isAbstractControl } from './typeof'
+import { isArray } from '@idux/cdk/utils'
 
 type ControlConfig<T> =
-  | T
-  | [T, ValidatorFn | ValidatorFn[] | null]
-  | [T, ValidatorFn | ValidatorFn[] | null, AsyncValidatorFn | AsyncValidatorFn[] | null]
+  | [T]
+  | [T, ValidatorFn | ValidatorFn[]]
+  | [T, ValidatorFn | ValidatorFn[], AsyncValidatorFn | AsyncValidatorFn[]]
   | [T, ValidatorOptions]
+  | T
 
 type GroupConfig<T> = {
-  [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]>
+  [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]> | FormGroup<T[K]>
 }
 
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
@@ -59,7 +57,7 @@ export function useFormArray<T extends any[] = any[]>(
 }
 
 export function useFormControl<T = any>(
-  initValue: T,
+  initValue?: T,
   validator?: ValidatorFn | ValidatorFn[] | null,
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
 ): FormControl<T>
@@ -87,6 +85,6 @@ function createControl<T>(config: AbstractControl<T> | ControlConfig<T>): Abstra
     const [initValue, validatorOrOptions, asyncValidator] = config
     return new FormControl(initValue, validatorOrOptions, asyncValidator)
   } else {
-    return new FormControl(config)
+    return new FormControl(config as T)
   }
 }

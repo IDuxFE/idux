@@ -7,4 +7,4 @@ export interface EmptyProps {
   image?: string
 }
 
-export type EmptyComponent = InstanceType<DefineComponent<EmptyProps>>
+export type EmptyInstance = InstanceType<DefineComponent<EmptyProps>>

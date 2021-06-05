@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu.vue render work 1`] = `
+"<ul class=\\"ix-menu ix-menu-light ix-menu-vertical\\">
+  <li class=\\"ix-menu-item\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" arialabel=\\"star\\"></i></span><span><a href=\\"javascript: void(0)\\">Item 1</a></span></li>
+  <li class=\\"ix-menu-item ix-menu-item-disabled\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" arialabel=\\"star\\"></i></span><span> Item 2 </span></li>
+  <li class=\\"ix-menu-divider\\"></li>
+  <li class=\\"ix-menu-sub ix-menu-sub-vertical\\">
+    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" arialabel=\\"star\\"></i></span><span>Sub Menu 1</span><span class=\\"ix-menu-sub-title-suffix-icon\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" arialabel=\\"right\\"></i></span></div>
+    <!--teleport start-->
+    <!--teleport end-->
+  </li>
+  <li class=\\"ix-menu-sub ix-menu-sub-disabled ix-menu-sub-vertical\\">
+    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" arialabel=\\"star\\"></i></span><span>SubMenu 4</span><span class=\\"ix-menu-sub-title-suffix-icon\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" arialabel=\\"right\\"></i></span></div>
+    <!--teleport start-->
+    <!--teleport end-->
+  </li>
+</ul>"
+`;

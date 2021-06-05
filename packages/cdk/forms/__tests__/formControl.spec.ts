@@ -1,6 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
-import { FormControl } from '../src/controls/formControl'
-import { ValidationErrors } from '../src/types'
+import { FormControl } from '../src/controls'
+import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
 describe('formControl.ts', () => {
@@ -66,7 +66,7 @@ describe('formControl.ts', () => {
 
       control.setValidator(Validators.required)
 
-      expect(await control.validate()).toEqual({ required: { message: '' } })
+      expect(await control.validate()).toEqual({ required: { message: null } })
     })
   })
 
@@ -75,7 +75,7 @@ describe('formControl.ts', () => {
 
     test('default change work', async () => {
       const _asyncValidator = (value: unknown) =>
-        Promise.resolve(value === 'test' ? null : ({ async: { message: 'async' } } as ValidationErrors))
+        Promise.resolve(value === 'test' ? null : ({ async: { message: 'async' } } as ValidateErrors))
 
       control = new FormControl('test', { validators: Validators.required, asyncValidators: _asyncValidator })
 
@@ -133,6 +133,36 @@ describe('formControl.ts', () => {
 
       await control.validate()
 
+      expect(control.hasError('required')).toEqual(false)
+    })
+  })
+
+  describe('disabled work', () => {
+    let control: FormControl<string>
+
+    test('default disabled work', async () => {
+      control = new FormControl('', { validators: Validators.required, disabled: true })
+
+      expect(control.disabled.value).toEqual(true)
+      expect(control.status.value).toEqual('valid')
+      expect(control.hasError('required')).toEqual(false)
+    })
+
+    test('disable and enable work', async () => {
+      control = new FormControl('', { validators: Validators.required, disabled: true })
+
+      control.enable()
+      await flushPromises()
+
+      expect(control.disabled.value).toEqual(false)
+      expect(control.status.value).toEqual('invalid')
+      expect(control.hasError('required')).toEqual(true)
+
+      control.disable()
+      await flushPromises()
+
+      expect(control.disabled.value).toEqual(true)
+      expect(control.status.value).toEqual('valid')
       expect(control.hasError('required')).toEqual(false)
     })
   })

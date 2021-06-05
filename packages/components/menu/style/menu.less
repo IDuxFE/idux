@@ -1,0 +1,124 @@
+.@{menu-prefix} {
+  color: @menu-text-color;
+  background-color: @menu-bg-color;
+  transition: background-color @transition-duration-slow, width @transition-duration-slow;
+
+  a {
+    color: @menu-text-color;
+    text-decoration: none;
+  }
+
+  &-item-group {
+    &-title {
+      height: @menu-item-height;
+      line-height: @menu-item-height;
+      padding-left: @menu-item-padding-left;
+      padding-right: @menu-item-padding-right;
+      color: @menu-item-group-text-color;
+      font-size: @menu-font-size;
+      .ellipsis();
+
+      &-icon {
+        margin-right: @menu-item-icon-margin-right;
+      }
+    }
+
+    & > &-content {
+      .@{menu-prefix}-item,
+      .@{menu-prefix}-sub-title {
+        padding-left: @menu-item-group-content-padding-left;
+      }
+    }
+  }
+}
+
+.@{menu-prefix}-item,
+.@{menu-prefix}-sub-title {
+  position: relative;
+  height: @menu-item-height;
+  line-height: @menu-item-height;
+  padding-left: @menu-item-padding-left;
+  padding-right: @menu-item-padding-right;
+  cursor: pointer;
+  transition: background @transition-duration-slow;
+  .ellipsis();
+
+  &:hover {
+    color: @menu-highlight-color;
+    a {
+      color: @menu-highlight-color;
+    }
+  }
+
+  a::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    content: '';
+  }
+
+  &:hover,
+  &:active {
+    background-color: @menu-highlight-bg-color;
+  }
+
+  &-icon {
+    margin-right: @menu-item-icon-margin-right;
+  }
+}
+
+.@{menu-prefix}-sub {
+  &-title-suffix-icon {
+    position: absolute;
+    right: @menu-sub-suffix-icon-right;
+  }
+}
+
+.@{menu-prefix}-container {
+  .@{menu-prefix}-content {
+    z-index: @menu-overlay-zindex;
+    min-width: @menu-overlay-min-width;
+    background-color: @menu-bg-color;
+    border-radius: @menu-overlay-border-radius;
+    box-shadow: @menu-overlay-box-shadow;
+    transition: background-color @transition-duration-slow, width @transition-duration-slow;
+
+    a {
+      color: @menu-text-color;
+      text-decoration: none;
+    }
+
+    .@{menu-prefix}-item::after {
+      border-right: 0;
+    }
+  }
+}
+
+.@{menu-prefix},
+.@{menu-prefix}-container {
+  .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+  .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-title {
+    color: @menu-highlight-color;
+    a {
+      color: @menu-highlight-color;
+    }
+  }
+
+  .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+  .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title {
+    color: @menu-disabled-color;
+    background-color: @menu-disabled-bg-color;
+    cursor: not-allowed;
+    &:hover,
+    &:active {
+      background-color: @menu-disabled-bg-color;
+    }
+    a {
+      color: @menu-disabled-color;
+      cursor: not-allowed;
+    }
+  }
+}

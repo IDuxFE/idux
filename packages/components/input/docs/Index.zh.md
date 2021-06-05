@@ -23,7 +23,7 @@ subtitle: 输入框
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | - |
-| `control` | 控件控制器 | `string\|AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `addonAfter` | 设置后置标签 | `string\|v-slot:addonAfter` | - | - | - |
@@ -51,7 +51,7 @@ subtitle: 输入框
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | - |
-| `control` | 控件控制器 | `string | AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `resize` | 缩放方向 | `none\|both\|horizontal\|vertical` | `vertical` | ✅ | 启用 `autoRows` 的时，仅 `none\|horizontal` 有效 |
@@ -87,12 +87,12 @@ subtitle: 输入框
 | @input-border-style | @border-style;| - |
 | @input-border-color | @border-color;| - |
 | @input-color | @text-color;| - |
-| @input-secondary-color | @text-secondary-color;| - |
+| @input-color-secondary | @text-color-secondary;| - |
 | @input-bg-color | @background-color-component;| - |
 | @input-addon-bg-color | hsv(0, 0, 95%);| - |
 | @input-placeholder-color | hsv(0, 0, 75%);| - |
-| @input-hover-border-color | ~`colorPalette('@{primary-color}', -10)`;| - |
-| @input-active-border-color | @primary-color;| - |
+| @input-hover-border-color | ~`colorPalette('@{primary}', -10)`;| - |
+| @input-active-border-color | @primary;| - |
 | @input-active-box-shadow | 0 0 0 2px fade(@input-active-border-color, 15%);| - |
 | @input-disabled-color | @disabled-color;| - |
 | @input-disabled-bg-color | @disabled-bg-color;| - |

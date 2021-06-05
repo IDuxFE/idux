@@ -1,0 +1,117 @@
+.@{form-item-prefix} {
+  // === invalid ===
+  &-invalid {
+    .@{form-item-prefix}-message {
+      color: @form-item-invalid-color;
+    }
+
+    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
+      color: @form-item-invalid-color;
+    }
+
+    // === input ===
+    .@{idux-prefix}-input:not(.@{idux-prefix}-input-disabled) {
+      .@{idux-prefix}-input-wrapper {
+        border-color: @form-item-invalid-color;
+
+        &:hover {
+          border-color: @form-item-invalid-color;
+        }
+
+        .@{idux-prefix}-input-suffix,
+        .@{idux-prefix}-input-prefix {
+          color: @form-item-invalid-color;
+          &:hover {
+            color: @form-item-invalid-color;
+          }
+        }
+      }
+
+      &.@{idux-prefix}-input-focused .@{idux-prefix}-input-wrapper {
+        border-color: @form-item-invalid-color;
+        box-shadow: @form-invalid-box-shadow;
+      }
+
+      .@{idux-prefix}-input-addon {
+        color: @form-item-invalid-color;
+        border-color: @form-item-invalid-color;
+
+        .@{idux-prefix}-select {
+          &:hover .@{idux-prefix}-select-selector,
+          .@{idux-prefix}-select-selector {
+            border-color: transparent;
+          }
+
+          &.@{idux-prefix}-select-active .@{idux-prefix}-select-selector {
+            border-color: transparent;
+            // todo remove
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    // select
+    .@{idux-prefix}-select:not(.@{idux-prefix}-select-disabled) {
+      &:hover .@{idux-prefix}-select-selector,
+      .@{idux-prefix}-select-selector {
+        border-color: @form-item-invalid-color;
+      }
+
+      &.@{idux-prefix}-select-active .@{idux-prefix}-select-selector {
+        border-color: @form-item-invalid-color;
+        box-shadow: @form-invalid-box-shadow;
+      }
+    }
+  }
+
+  // === Validating ===
+  &-validating {
+    .@{form-item-prefix}-message {
+      color: @form-item-validating-color;
+    }
+
+    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
+      display: inline-block;
+      color: @form-item-validating-color;
+    }
+  }
+
+  // === valid ===
+  &-valid {
+    .@{form-item-prefix}-message {
+      color: @form-item-valid-color;
+    }
+
+    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
+      color: @form-item-valid-color;
+    }
+  }
+
+  &-has-feedback {
+    .@{form-item-prefix}-status-icon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      z-index: 1;
+      width: @input-height-md;
+      height: 20px;
+      margin-top: -10px;
+      font-size: @input-font-size-md;
+      line-height: 20px;
+      text-align: center;
+      visibility: visible;
+      animation: zoomIn 0.3s @ease-out-back;
+      pointer-events: none;
+    }
+
+    // input
+    .@{idux-prefix}-input-wrapper {
+      padding-right: 24px;
+
+      .@{idux-prefix}-input-suffix {
+        padding-right: 18px;
+      }
+    }
+  }
+}

@@ -3,7 +3,8 @@
 .zoom-motion(@className, @origin: @scale-origin-zoom-center, @scale: @scale-zoom-big, @duration: @transition-duration-base) {
   .ix-@{className}-enter-active,
   .ix-@{className}-leave-active {
-    transition-property: all;
+    transform-origin: @origin;
+    transition-property: opacity, transform;
     transition-duration: @duration;
   }
 
@@ -15,31 +16,20 @@
     transition-timing-function: @ease-in-out-circ;
   }
 
-  .ix-@{className}-enter-to,
-  .ix-@{className}-leave-from {
-    opacity: 1;
-    transform: scale(1);
-  }
-
   .ix-@{className}-enter-from,
   .ix-@{className}-leave-to {
     opacity: 0;
     transform: ~"scale(@{scale})";
   }
-
-  .ix-@{className}-leave-from,
-  .ix-@{className}-enter-from {
-    transform-origin: @origin;
-  }
 }
 
-// For Modal, Select choosen item
+// Modal, Select choose item
 .zoom-motion(zoom, @scale-origin-zoom-center, @scale-zoom-small);
 
-// For Popover, Popconfirm, Dropdown
+// Popover, Popconfirm, Dropdown
 .zoom-motion(zoom-big);
 
-// For Tooltip
+// Tooltip
 .zoom-motion(zoom-big-fast, @scale-origin-zoom-center, @scale-zoom-big, @transition-duration-fast);
 
 .zoom-motion(zoom-up, @scale-origin-zoom-up);

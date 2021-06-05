@@ -9,55 +9,56 @@ export function getLessTemplate(compName: string): string {
 `
 }
 
-export function getTypesTemplate(compName: string): string {
+export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
   return `import type { DefineComponent } from 'vue'
 
 import { PropTypes } from '@idux/cdk/utils'
 
-export interface ${compName}Props {
+export interface ${upperFirstName}Props {
   testProp: string
 }
 
-export const ${compName}PropTypes = {
+export const ${camelCaseName}PropsDef = {
   testProp: PropTypes.string,
 }
 
-export type ${compName}Component = InstanceType<DefineComponent<${compName}Props>>
+export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 
-export function getTsxTemplate(compName: string): string {
-  return `import type { ${compName}Props } from './types'
+export function getTsxTemplate(upperFirstName: string, camelCaseName: string): string {
+  return `import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
 
   }
 })
 `
 }
 
-export function getVueTemplate(compName: string): string {
+export function getVueTemplate(upperFirstName: string, camelCaseName: string): string {
   return `<template>
   <div></div>
 </template>
+
 <script lang="ts">
-import type { ${compName}Props } from './types'
+import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${compName}PropTypes } from './types'
+import { ${camelCaseName}PropsDef } from './types'
 
 export default defineComponent({
-  name: 'Ix${compName}',
-  props: ${compName}PropTypes,
+  name: 'Ix${upperFirstName}',
+  props: ${camelCaseName}PropsDef,
   emits: [],
-  setup(props: ${compName}Props) {
+  setup(props: ${upperFirstName}Props) {
     
   },
 })
@@ -76,7 +77,7 @@ Ix${compName}.install = (app: App): void => {
 
 export { Ix${compName} }
 
-export type { ${compName}Component, ${compName}Props } from './src/types'
+export type { ${compName}Instance, ${compName}Props } from './src/types'
 `
 }
 
@@ -84,13 +85,13 @@ export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
-import { ${compName}Props } from '../src/types'
+import { ${compName}Instance, ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
-  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<InstanceType<typeof Ix${compName}>>
+  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
 
   beforeEach(() => {
-    ${compName}Mount = options => mount(Ix${compName}, { ...options })
+    ${compName}Mount = options => mount<${compName}Instance>(Ix${compName}, { ...options })
   })
 
   renderWork(Ix${compName})

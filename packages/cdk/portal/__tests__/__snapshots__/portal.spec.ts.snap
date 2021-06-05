@@ -1,3 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Portal.vue render work 1`] = `"<!--teleport start--><!--teleport end-->"`;
+exports[`Portal.vue disabled work 1`] = `
+"<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Portal.vue render work 1`] = `
+"<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Portal.vue target work 1`] = `
+"<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Portal.vue target work 2`] = `
+"<!--teleport start-->
+<!--teleport end-->"
+`;

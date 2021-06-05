@@ -1,22 +1,18 @@
-import type { DefineComponent, Ref } from 'vue'
+import type { DefineComponent } from 'vue'
+
+export type CheckValue = string | number | boolean
 
 export interface CheckboxProps {
-  checked?: string | number | boolean
-  disabled?: boolean
-  indeterminate?: boolean
-  readonly?: boolean
-  trueValue?: string | number | boolean
-  falseValue?: string | number | boolean
+  checked?: CheckValue
+  disabled: boolean
+  indeterminate: boolean
+  readonly: boolean
+  trueValue: CheckValue
+  falseValue: CheckValue
   value?: string
 }
 
-export interface CheckboxBindings {
-  inputRef: Ref<HTMLInputElement>
-  focus: () => void
-  blur: () => void
-}
-
-export type CheckboxComponent = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
+export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps>>
 
 export interface CheckboxGroupProps {
   value?: string[]
@@ -25,4 +21,4 @@ export interface CheckboxGroupProps {
   name?: string
 }
 
-export type CheckboxGroupComponent = InstanceType<DefineComponent<CheckboxGroupProps>>
+export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>

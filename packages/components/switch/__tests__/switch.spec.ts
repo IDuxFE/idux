@@ -2,13 +2,13 @@ import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 import { renderWork } from '@tests'
 import IxSwitch from '../src/Switch.vue'
-import { SwitchProps } from '../src/types'
+import { SwitchInstance, SwitchProps } from '../src/types'
 
 describe('Switch.vue', () => {
-  let SwitchMount: (options?: MountingOptions<Partial<SwitchProps>>) => VueWrapper<InstanceType<typeof IxSwitch>>
+  let SwitchMount: (options?: MountingOptions<Partial<SwitchProps>>) => VueWrapper<SwitchInstance>
 
   beforeEach(() => {
-    SwitchMount = options => mount(IxSwitch, { ...options })
+    SwitchMount = options => mount<SwitchInstance>(IxSwitch, { ...options })
   })
 
   renderWork(IxSwitch)

@@ -1,11 +1,10 @@
-import { mount } from '@vue/test-utils'
 import { computed, defineComponent, PropType } from 'vue'
-import IxSpace from '../src/Space.vue'
-import { IxButton } from '../../button'
-import { IxDivider } from '../../divider'
-import { SpaceAlign, SpaceDirection } from '../src/types'
-import { isNil } from '@idux/cdk/utils'
+import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
+import { IxButton } from '@idux/components/button'
+import { IxDivider } from '@idux/components/divider'
+import IxSpace from '../src/space'
+import { SpaceAlign, SpaceDirection } from '../src/types'
 import { SpaceSize } from '@idux/components/config'
 
 const TestComponent = defineComponent({
@@ -35,7 +34,7 @@ const TestComponent = defineComponent({
   Space
   <IxButton mode='primary'>Button</IxButton>
   <IxButton>Button</IxButton>
-  <template v-slot:split v-if='showSplit'>
+  <template #split v-if='showSplit'>
     <IxDivider :type='dividerType' />
   </template>
   </IxSpace>
@@ -98,84 +97,57 @@ describe('Space.vue', () => {
   test('split work', async () => {
     const wrapper = mount(TestComponent)
     expect(wrapper.find('.ix-divider').exists()).toBeFalsy()
-    expect(wrapper.find('.ix-space-split').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-space-split-small').exists()).toBeFalsy()
 
     await wrapper.setData({ showSplit: true })
     expect(wrapper.find('.ix-divider').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-space-split').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-space-split-small').exists()).toBeTruthy()
 
     await wrapper.setProps({ split: '/' })
     expect(wrapper.find('.ix-divider').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-space-split').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-space-split-small').exists()).toBeTruthy()
 
     await wrapper.setData({ showSplit: false })
     expect(wrapper.find('.ix-divider').exists()).toBeFalsy()
-    expect(wrapper.find('.ix-space-split').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-space-split-small').exists()).toBeTruthy()
   })
 
   test('size work', async () => {
     const wrapper = mount(TestComponent)
-    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(3)
+    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(2)
     expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
     expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
 
     await wrapper.setProps({ size: 'small' })
-    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(3)
+    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(2)
     expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
     expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
 
     await wrapper.setProps({ size: 'medium' })
     expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(3)
+    expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(2)
     expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
 
     await wrapper.setProps({ size: 'large' })
     expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
     expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-large').length).toEqual(3)
+    expect(wrapper.findAll('.ix-space-item-large').length).toEqual(2)
 
     await wrapper.setProps({ size: 20 })
     expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
     expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
     expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
-    expect(
-      wrapper.findAll('.ix-space-item').every(item => item.attributes('style') === 'margin-right: 20px;'),
-    ).toBeTruthy()
+    expect(wrapper.findAll('.ix-space-item')[0].attributes('style')).toEqual('margin-right: 20px;')
+    expect(wrapper.findAll('.ix-space-item')[1].attributes('style')).toEqual('margin-right: 20px;')
+    expect(wrapper.findAll('.ix-space-item')[2].attributes('style')).toEqual(undefined)
 
-    await wrapper.setProps({ split: '/' })
-    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item').every(item => isNil(item.attributes('style')))).toBeTruthy()
-
-    await wrapper.setProps({ split: undefined, size: ['small', 'medium'] })
+    await wrapper.setProps({ size: ['small', 'medium'] })
     expect(wrapper.findAll('.ix-space-item-small').length).toEqual(1)
     expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(1)
     expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
 
-    const size = new Map([
-      [0, 20],
-      [1, 10],
-    ])
-    await wrapper.setProps({ size: Array.from(size.values()) })
-    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
-    expect(
-      wrapper.findAll('.ix-space-item').reduce((pre, cur, index) => {
-        return pre && cur.attributes('style') === `margin-right: ${size.get(index)}px;`
-      }, true),
-    )
-
-    await wrapper.setProps({ split: '/' })
-    expect(wrapper.findAll('.ix-space-item-small').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-medium').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item-large').length).toEqual(0)
-    expect(wrapper.findAll('.ix-space-item').every(item => isNil(item.attributes('style')))).toBeTruthy()
-
-    size.set(2, 30)
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
-    await wrapper.setProps({ split: undefined, size: Array.from(size.values()) })
+    await wrapper.setProps({ size: [0, 1, 2] })
     expect(warn).toBeCalled()
   })
 })

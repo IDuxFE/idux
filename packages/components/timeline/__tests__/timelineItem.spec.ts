@@ -3,7 +3,7 @@ import { PropType } from 'vue'
 import { renderWork } from '@tests'
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
-import type { TimelineItemProps } from '../src/types'
+import type { TimelineItemInstance, TimelineItemProps } from '../src/types'
 import type { TimelinePosition, TimelineItemPosition } from '../src/types'
 
 const TestComponent = {
@@ -23,12 +23,10 @@ const TestComponent = {
 }
 
 describe('TimelineItem.vue', () => {
-  let timelineItemMount: (
-    options?: MountingOptions<Partial<TimelineItemProps>>,
-  ) => VueWrapper<InstanceType<typeof IxTimelineItem>>
+  let timelineItemMount: (options?: MountingOptions<Partial<TimelineItemProps>>) => VueWrapper<TimelineItemInstance>
 
   beforeEach(() => {
-    timelineItemMount = options => mount(IxTimelineItem, { ...options })
+    timelineItemMount = options => mount<TimelineItemInstance>(IxTimelineItem, { ...options })
   })
 
   renderWork(IxTimelineItem)

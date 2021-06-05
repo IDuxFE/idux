@@ -1,3 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input.vue render work 1`] = `"<span class=\\"ix-input ix-input-medium\\"><!--v-if--><span class=\\"ix-input-wrapper\\"><!--v-if--><input class=\\"ix-input-inner\\"><!--v-if--><!--v-if--></span><!--v-if--></span>"`;
+exports[`Input.vue render work 1`] = `
+"<span class=\\"ix-input ix-input-medium\\"><!--v-if--><span class=\\"ix-input-wrapper\\"><!--v-if--><input class=\\"ix-input-inner\\"><!--v-if--><!--v-if--></span>
+<!--v-if--></span>"
+`;

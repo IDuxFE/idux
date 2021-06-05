@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapse.vue and CollapsePanel.vue render work 1`] = `
+"<div class=\\"ix-collapse\\">
+  <div class=\\"ix-collapse-panel\\">
+    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" arialabel=\\"right\\"></i></div>
+    <transition-stub>
+      <div style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-header-content\\"> name1 </div>
+      </div>
+    </transition-stub>
+  </div>
+  <div class=\\"ix-collapse-panel\\">
+    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" arialabel=\\"right\\"></i></div>
+    <transition-stub>
+      <div style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-header-content\\"> name2 </div>
+      </div>
+    </transition-stub>
+  </div>
+  <div class=\\"ix-collapse-panel\\">
+    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" arialabel=\\"right\\"></i></div>
+    <transition-stub>
+      <div style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-header-content\\"> name3 </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;

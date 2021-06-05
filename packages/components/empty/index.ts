@@ -8,4 +8,4 @@ IxEmpty.install = (app: App): void => {
 
 export { IxEmpty }
 
-export type { EmptyComponent, EmptyProps } from './src/types'
+export type { EmptyInstance, EmptyProps } from './src/types'

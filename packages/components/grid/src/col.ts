@@ -1,11 +1,11 @@
-import type { ColProps, FlexValue, ColBreakpointConfig } from './types'
+import type { ColProps, ColBreakpointConfig } from './types'
 
 import { isNumber, isString, isUndefined } from '@idux/cdk/utils'
 import { BreakpointKeys } from '@idux/cdk/breakpoint'
 
 const attrKeys = ['span', 'order', 'offset', 'push', 'pull'] as const
 
-export const parseFlex = (flex: FlexValue): string => {
+export const parseFlex = (flex: number | string): string => {
   if (isNumber(flex)) {
     return `${flex} ${flex} auto`
   }

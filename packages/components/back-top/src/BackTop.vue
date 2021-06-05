@@ -9,14 +9,13 @@
 </template>
 
 <script lang="ts">
-import type { SetupContext } from 'vue'
 import type { BackTopProps } from './types'
 
-import { defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
+import { computed, defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { IxIcon } from '@idux/components/icon'
-import { PropTypes, withUndefined, on, off, rAF } from '@idux/cdk/utils'
-import { easeInOutQuad, getTarget } from '@idux/components/utils'
+import { PropTypes, withUndefined, on, off, scrollToTop, getScroll } from '@idux/cdk/utils'
+import { getTarget } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
@@ -28,17 +27,19 @@ export default defineComponent({
     visibilityHeight: PropTypes.number,
   },
   emits: ['click'],
-  setup(props: BackTopProps, { emit }: SetupContext) {
+  setup(props: BackTopProps, { emit }) {
     const backTopConfig = useGlobalConfig('backTop')
     const eventType = 'scroll'
     const visible = ref(false)
-    const container = ref<Window | HTMLElement>((null as unknown) as HTMLElement)
+    const container = ref<Window | HTMLElement>(null as unknown as HTMLElement)
+    const duration = computed(() => props.duration ?? backTopConfig.duration)
 
     const handleScroll = () => {
-      visible.value = getCurrentScrollTop(container.value) >= (props.visibilityHeight ?? backTopConfig.visibilityHeight)
+      const { scrollTop } = getScroll(container.value)
+      visible.value = scrollTop >= (props.visibilityHeight ?? backTopConfig.visibilityHeight)
     }
     const handleClick = (event: MouseEvent) => {
-      scrollToTop(0, props.duration ?? backTopConfig.duration, container.value)
+      scrollToTop({ top: 0, duration: duration.value, target: container.value })
       emit('click', event)
     }
 
@@ -62,35 +63,4 @@ export default defineComponent({
     }
   },
 })
-
-const getCurrentScrollTop = (currTarget: Window | HTMLElement) => {
-  if (currTarget === window) {
-    return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop
-  }
-
-  return (currTarget as HTMLElement).scrollTop
-}
-
-const scrollToTop = (y: number, duration: number, container: HTMLElement | Window) => {
-  const scrollTop = getCurrentScrollTop(container)
-  const startTime = Date.now()
-  const change = y - scrollTop
-
-  const frameFunc = () => {
-    const time = Date.now() - startTime
-    const nextScrollTop = easeInOutQuad(time > duration ? duration : time, scrollTop, change, duration)
-
-    if (container === window) {
-      container.scrollTo(window.pageXOffset, nextScrollTop)
-    } else {
-      ;(container as HTMLElement).scrollTop = nextScrollTop
-    }
-
-    if (time < duration) {
-      rAF(frameFunc)
-    }
-  }
-
-  rAF(frameFunc)
-}
 </script>

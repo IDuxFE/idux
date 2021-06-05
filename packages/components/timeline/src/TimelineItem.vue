@@ -9,22 +9,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ComputedRef } from 'vue'
 import type { Slots } from 'vue'
 import { hasSlot, PropTypes } from '@idux/cdk/utils'
-import { isPresetColor } from '@idux/components/utils'
+import { isPresetColor, isStatusColor } from '@idux/components/utils'
 import { TimelineItemProps } from './types'
 
 export default defineComponent({
   name: 'IxTimelineItem',
   props: {
-    color: PropTypes.string.def('blue'),
+    color: PropTypes.string.def('primary'),
     dot: PropTypes.string,
     position: PropTypes.oneOf(['left', 'right'] as const),
   },
   setup(props, { slots }) {
-    const dotStyle = useStyle(props)
-    const dotClass = useClasses(props, slots)
+    const isPresetOrStatus = computed(() => isPresetColor(props.color) || isStatusColor(props.color))
+
+    const dotStyle = useStyle(props, isPresetOrStatus)
+    const dotClass = useClasses(props, slots, isPresetOrStatus)
 
     return {
       dotStyle,
@@ -33,22 +35,22 @@ export default defineComponent({
   },
 })
 
-const useClasses = (props: TimelineItemProps, slots: Slots) => {
-  const hasCustomDot = computed(() => hasSlot(slots, 'dot') || !!props.dot)
-
-  return computed(() => ({
-    'ix-timeline-item-dot': true,
-    'ix-timeline-item-dot-custom': hasCustomDot.value,
-    [`ix-timeline-item-dot-${props.color}`]: isPresetColor(props.color as string),
-  }))
+const useClasses = (props: TimelineItemProps, slots: Slots, isPresetOrStatus: ComputedRef<boolean>) => {
+  return computed(() => {
+    const hasCustomDot = hasSlot(slots, 'dot') || !!props.dot
+    return {
+      'ix-timeline-item-dot': true,
+      'ix-timeline-item-dot-custom': hasCustomDot,
+      [`ix-timeline-item-dot-${props.color}`]: isPresetOrStatus.value,
+    }
+  })
 }
 
-const useStyle = (props: TimelineItemProps) => {
+const useStyle = (props: TimelineItemProps, isPresetOrStatus: ComputedRef<boolean>) => {
   return computed(() => {
-    if (isPresetColor(props.color as string)) {
+    if (isPresetOrStatus.value) {
       return {}
     }
-
     return {
       color: props.color,
       'border-color': props.color,

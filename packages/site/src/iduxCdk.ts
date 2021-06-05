@@ -1,10 +1,11 @@
 import type { App, Directive } from 'vue'
 
 import { IxPortal } from '@idux/cdk/portal'
+import { IxVirtualList } from '@idux/cdk/virtual-list'
 
 import { clickOutside } from '@idux/cdk/click-outside'
 
-const components = [IxPortal]
+const components = [IxPortal, IxVirtualList]
 
 const directives: Record<string, Directive> = {
   clickOutside,

@@ -87,7 +87,6 @@ order: 11
   - 如果与某个 props 的功能一致时，需要跟该 props 同名
 - emits
   - 命名：`camelCase`
-- 优先使用 `template`, 只有在 `template` 不便实现的功能时，才可以使用 `tsx`, 例如：需要递归渲染的场景
 - 尽可能的使用 Composition API 去完成我们的功能，包括 Demo
 
 ### typescript

@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { isUndefined, PropTypes } from '@idux/cdk/utils'
 import { IxPortal } from '@idux/cdk/portal'
-import { useOverlay } from '@idux/cdk/overlay'
+import { OverlayPlacementPropDef, OverlayTriggerPropDef, useOverlay } from '@idux/cdk/overlay'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { useOverlayOptions } from './useOverlayOptions'
 import { useChildren } from './useChildren'
@@ -26,25 +26,9 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     title: PropTypes.string,
-    placement: PropTypes.oneOf([
-      'auto',
-      'auto-start',
-      'auto-end',
-      'top',
-      'left',
-      'bottom',
-      'right',
-      'top-start',
-      'top-end',
-      'bottom-start',
-      'bottom-end',
-      'right-start',
-      'right-end',
-      'left-start',
-      'left-end',
-    ] as const),
+    placement: OverlayPlacementPropDef,
     visible: PropTypes.bool,
-    trigger: PropTypes.oneOf(['click', 'focus', 'hover'] as const),
+    trigger: OverlayTriggerPropDef,
     showDelay: PropTypes.number,
     hideDelay: PropTypes.number,
     destroyOnHide: PropTypes.bool,
@@ -84,18 +68,7 @@ export default defineComponent({
     return { children, clsPrefix, useTitle, hasTitle, beDestroyed, visibility, hide, options, ...rest }
   },
   render() {
-    const {
-      children,
-      triggerEvents,
-      clsPrefix,
-      useTitle,
-      hasTitle,
-      overlayEvents,
-      beDestroyed,
-      visibility,
-      hide,
-      options,
-    } = this
+    const { children, clsPrefix, useTitle, hasTitle, beDestroyed, visibility, hide, options } = this
     if (!children) {
       return null
     }
@@ -105,25 +78,19 @@ export default defineComponent({
 
     let trigger: VNode
     if (options.trigger === 'click') {
-      trigger = withDirectives(cloneVNode(children, { ...triggerEvents, ref: 'triggerRef' }), [
+      trigger = withDirectives(cloneVNode(children, { ref: 'triggerRef' }), [
         [resolveDirective('click-outside')!, () => hide()],
       ])
     } else {
-      trigger = cloneVNode(children, { ...triggerEvents, ref: 'triggerRef' })
+      trigger = cloneVNode(children, { ref: 'triggerRef' })
     }
+
     return (
       <>
         {trigger}
         <IxPortal target={`${clsPrefix}-container`}>
           <Transition name="ix-fade-fast">
-            <div
-              v-show={visibility}
-              class={clsPrefix}
-              ref="overlayRef"
-              onMouseenter={overlayEvents.onMouseenter}
-              onMouseleave={overlayEvents.onMouseleave}
-              onClick={overlayEvents.onClick}
-            >
+            <div v-show={visibility} class={clsPrefix} ref="overlayRef">
               {!beDestroyed && (
                 <div class={`${clsPrefix}-content`} role="tooltip">
                   {useTitle}

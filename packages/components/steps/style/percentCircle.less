@@ -1,0 +1,45 @@
+.@{step-prefix} {     
+  &-head {
+
+    // 圆环进度条
+    &-percent {
+        position: absolute;
+        width: (@height-md + @step-percent-gutter);
+        height:(@height-md + @step-percent-gutter);
+        left: -(@step-percent-gutter / 2 + 1);
+        top: -(@step-percent-gutter / 2 + 1);
+        &-left, &-right {
+          position: absolute;
+          top: 0;
+          width: ((@height-md + @step-percent-gutter) / 2);
+          height: (@height-md + @step-percent-gutter);
+          overflow: hidden;
+          .@{step-prefix}-head-percent-circle {
+            width: (@height-md + @step-percent-gutter);
+            height: (@height-md + @step-percent-gutter);
+            border: @step-percent-width solid @step-highlight-color;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            transform: rotate(45deg);
+          }
+        }
+        &-left {
+          left: 0;
+          .@{step-prefix}-head-percent-circle {
+            border-bottom: @step-percent-width solid @step-percent-bg;
+            border-left: @step-percent-width solid @step-percent-bg;
+            left: 0;
+          }
+        }
+        &-right {
+          right: 0;
+          .@{step-prefix}-head-percent-circle {
+            border-top: @step-percent-width solid @step-percent-bg;
+            border-right: @step-percent-width solid @step-percent-bg;
+            right: 0;
+          }
+        }
+    }
+  }
+}

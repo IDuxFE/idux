@@ -87,7 +87,6 @@ We use `eslint`, `stylelint`, `markdownlint` and `ls-lint` to ensure the overall
   - If it is consistent with the function of a props, it needs to have the same name as the props.
 - emits
   - name: `camelCase`
-- Use `template` first, `tsx` can only be used when the function of `template` is inconvenient to implement, for example: scenes that require recursive rendering.
 - Use Composition API as much as possible to complete our functions, including Demo.
 
 ### typescript

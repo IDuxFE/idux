@@ -1,17 +1,21 @@
-import type { Placement } from '@popperjs/core'
-import type { OverlayTrigger } from '@idux/cdk/overlay'
+import type { VNodeTypes } from 'vue'
+import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
 
-export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
-  mode: ButtonMode
   size: ButtonSize
 }
 
 export interface IconConfig {
   loadIconDynamically?: (iconName: string) => Promise<string>
+}
+
+export interface TagConfig {
+  closable: boolean
+  checkAble: boolean
+  isRound: boolean
 }
 
 // Layout
@@ -34,9 +38,60 @@ export interface RowConfig {
 }
 
 // Navigation
+export interface DropdownConfig {
+  placement: OverlayPlacement
+  trigger: OverlayTrigger
+}
+
+export type MenuTheme = 'light' | 'dark'
+export interface MenuConfig {
+  indent: number
+  theme: MenuTheme
+}
+
+export interface SubMenuConfig {
+  suffix: string
+  suffixRotates: [number, number]
+}
+
+export type PaginationSize = 'small' | 'medium'
+export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
+export interface PaginationItemRenderOptions {
+  index: number
+  type: PaginationItemType
+  active: boolean
+  disabled: boolean
+  original: VNodeTypes
+}
+export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
+export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
+
+export interface PaginationConfig {
+  itemRender?: PaginationItemRenderFn
+  lessJumper: boolean
+  pageSize: number
+  pageSizes: number[]
+  showQuickJumper: boolean
+  showSizeChanger: boolean
+  showTitle: boolean
+  showTotal: boolean
+  simple: boolean
+  size: PaginationSize
+  totalRender?: PaginationTotalRenderFn
+}
 
 // Data Entry
-type FormSize = 'small' | 'medium' | 'large'
+export type FormLabelAlign = 'left' | 'right'
+export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormSize = 'small' | 'medium' | 'large'
+
+export interface FormConfig {
+  colonless: boolean
+  labelAlign: FormLabelAlign
+  layout: FormLayout
+  size: FormSize
+}
+
 export type InputSize = FormSize
 export interface InputConfig {
   size: InputSize
@@ -71,6 +126,17 @@ export interface RateConfig {
   allowClear: boolean
 }
 
+export type SelectSize = FormSize
+export interface SelectConfig {
+  borderless: boolean
+  clearable: boolean
+  labelKey: string
+  searchable: boolean
+  size: SelectSize
+  suffix?: string
+  valueKey: string
+}
+
 // Data Display
 export interface BadgeConfig {
   showZero: boolean
@@ -83,6 +149,16 @@ export interface CardConfig {
   size: CardSize
   borderless: boolean
   hoverable: boolean
+}
+
+export type ListSize = 'small' | 'medium' | 'large'
+export interface ListConfig {
+  size: ListSize
+  borderless: boolean
+}
+
+export interface CollapseConfig {
+  accordion: boolean
 }
 
 export interface ImageConfig {
@@ -107,7 +183,7 @@ export interface StatisticConfig {
 }
 
 export interface TooltipConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number
@@ -116,7 +192,7 @@ export interface TooltipConfig {
 }
 
 export interface PopoverConfig {
-  placement: Placement
+  placement: OverlayPlacement
   trigger: OverlayTrigger
   showDelay: number
   hideDelay: number
@@ -160,36 +236,56 @@ export interface ProgressConfig {
   format: ProgressFormat
 }
 
+// Steps
+
+export type StepsSize = 'medium' | 'small'
+export interface StepsConfig {
+  size: StepsSize
+}
+
 // Other
 
 export interface BackTopConfig {
   duration: number
   visibilityHeight: number
 }
-
+export interface AnchorConfig {
+  bounds: number
+  hideLinkBall: boolean
+}
 // --- end ---
 
 export interface GlobalConfig {
   // General
   button: ButtonConfig
   icon: IconConfig
+  tag: TagConfig
   // Layout
   divider: DividerConfig
   space: SpaceConfig
   row: RowConfig
   // Navigation
+  dropdown: DropdownConfig
+  menu: MenuConfig
+  subMenu: SubMenuConfig
+  pagination: PaginationConfig
   // Data Entry
+  form: FormConfig
   input: InputConfig
   textarea: TextareaConfig
   radioGroup: RadioGroupConfig
   rate: RateConfig
+  select: SelectConfig
   // Data Display
   badge: BadgeConfig
   card: CardConfig
+  list: ListConfig
+  collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
   tooltip: TooltipConfig
   popover: PopoverConfig
+  steps: StepsConfig
   // Feedback
   message: MessageConfig
   result: ResultConfig
@@ -198,6 +294,7 @@ export interface GlobalConfig {
   progress: ProgressConfig
   // Other
   backTop: BackTopConfig
+  anchor: AnchorConfig
   // --- end ---
 }
 

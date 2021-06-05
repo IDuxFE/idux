@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Anchor.vue register and unregister work 1`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\"></span></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
+          <!--v-if-->
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=\\"test-target\\">
+  <div id=\\"demo\\" style=\\"height:100px;\\">Demo</div>
+  <div id=\\"api\\">
+    <div style=\\"height:100px;\\">API</div>
+    <div id=\\"props\\" style=\\"height:100px;\\">Props</div>
+    <div id=\\"emits\\" style=\\"height:100px;\\">Emits</div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue register and unregister work 2`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=\\"test-target\\">
+  <div id=\\"demo\\" style=\\"height:100px;\\">Demo</div>
+  <div id=\\"api\\">
+    <div style=\\"height:100px;\\">API</div>
+    <div id=\\"props\\" style=\\"height:100px;\\">Props</div>
+    <div id=\\"emits\\" style=\\"height:100px;\\">Emits</div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue register and unregister work 3`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits2\\" data-href=\\"emits2\\" title=\\"Emits\\">Emits</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=\\"test-target\\">
+  <div id=\\"demo\\" style=\\"height:100px;\\">Demo</div>
+  <div id=\\"api\\">
+    <div style=\\"height:100px;\\">API</div>
+    <div id=\\"props\\" style=\\"height:100px;\\">Props</div>
+    <div id=\\"emits\\" style=\\"height:100px;\\">Emits</div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue register and unregister work 4`] = `
+"<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
+  <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
+          <!--v-if-->
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=\\"test-target\\">
+  <div id=\\"demo\\" style=\\"height:100px;\\">Demo</div>
+  <div id=\\"api\\">
+    <div style=\\"height:100px;\\">API</div>
+    <div id=\\"props\\" style=\\"height:100px;\\">Props</div>
+    <div id=\\"emits\\" style=\\"height:100px;\\">Emits</div>
+  </div>
+</div>"
+`;
+
+exports[`Anchor.vue render work 1`] = `
+"<div class=\\"ix-affix\\">
+  <div class=\\"ix-affix-content\\">
+    <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
+      <div class=\\"ix-anchor\\">
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\"></span></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"demo\\">demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#API\\" data-href=\\"#API\\" title=\\"API\\">API</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Props\\" data-href=\\"#Props\\" title=\\"Props\\">Props</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Emits\\" data-href=\\"#Emits\\" title=\\"Emits\\">Emits</a></div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

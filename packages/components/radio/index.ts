@@ -18,10 +18,10 @@ IxRadioButton.install = (app: App): void => {
 
 export { IxRadio, IxRadioButton, IxRadioGroup }
 export type {
-  IxRadioComponent,
+  RadioInstance,
   RadioProps,
-  IxRadioButtonComponent,
+  RadioButtonInstance,
   RadioButtonProps,
-  IxRadioGroupComponent,
+  RadioGroupInstance,
   RadioGroupProps,
 } from './src/types'

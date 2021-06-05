@@ -8,4 +8,4 @@ IxAffix.install = (app: App): void => {
 
 export { IxAffix }
 
-export type { AffixComponent, AffixProps, AffixOffset, AffixDirection } from './src/types'
+export type { AffixInstance, AffixProps, AffixOffset, AffixDirection } from './src/types'

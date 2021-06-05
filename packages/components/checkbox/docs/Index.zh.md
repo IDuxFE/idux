@@ -72,31 +72,34 @@ cover:
 
 ### 主题变量
 
-|@checkbox-inner-zindex| @zindex-l1-1|-|
-|@checkbox-line-height| 1|-|
-|@checkbox-border-color| @grey-d10|-|
-|@checkbox-border-style| @border-width-sm solid @grey-d10|-|
-|@checkbox-border-radius| @border-radius-sm|-|
-|@checkbox-bg-color| @white|-|
-|@checkbox-tick-border-style| @border-width-md solid @white|-|
-|@checkbox-tick-width| (@checkbox-width / @font-size-base)*5px | - |
-|@checkbox-tick-height| (@checkbox-height / @font-size-base)*8px | - |
-|@checkbox-bg-indeterminate-color| @primary-color|-|
-|@checkbox-indeterminate-width| 8px|-|
-|@checkbox-indeterminate-height| 8px|-|
-|@checkbox-border-checked-color| @primary-color|-|
-|@checkbox-border-hover-color| @primary-color|-|
-|@checkbox-border-focus-color| @blue-d30|-|
-|@checkbox-bg-checked-color| @primary-color|-|
-|@checkbox-border-disabled-color| @grey|-|
-|@checkbox-tick-disabled-color| @grey|-|
-|@checkbox-bg-disabled-color| @white|-|
-|@checkbox-bg-indeterminate-disabled-color| @grey|-|
-|@checkbox-label-disabled-color| @grey|-|
-|@checkbox-font-size| @font-size-lg|-|
-|@checkbox-height| 16px|-|
-|@checkbox-width| 16px|-|
-|@checkbox-group-line-height| @line-height-base|-|
-|@checkbox-group-checkbox-margin-right| @margin-sm|-|
-|@checkbox-label-padding| 0 @spacing-gutter|-|
-|@checkbox-transition-duration| @transition-duration-base|-|
+| 变量名 | default 主题| 说明 |
+| --- | --- | --- |
+@checkbox-inner-zindex| @zindex-l1-1 | - |
+@checkbox-line-height| 1 | - |
+@checkbox-border-color| @grey-d10 | - |
+@checkbox-border-style| @border-width-sm solid @grey-d10 | - |
+@checkbox-border-radius| @border-radius-sm | - |
+@checkbox-bg-color| @white | - |
+@checkbox-tick-border-style| @border-width-md solid @white | - |
+@checkbox-tick-width| (@checkbox-width / @font-size-base) * 5px | - |
+@checkbox-tick-height| (@checkbox-height / @font-size-base) * 8px | - |
+@checkbox-bg-indeterminate-color| @primary | - |
+@checkbox-indeterminate-width| 8px | - |
+@checkbox-indeterminate-height| 2px | - |
+@checkbox-indeterminate-tick-color| @white | - |
+@checkbox-border-checked-color| @primary | - |
+@checkbox-border-hover-color| @primary-l10 | - |
+@checkbox-border-focus-color| @primary-d10 | - |
+@checkbox-bg-checked-color| @primary | - |
+@checkbox-border-disabled-color| @grey | - |
+@checkbox-tick-disabled-color| @grey | - |
+@checkbox-bg-disabled-color| @grey-l20 | - |
+@checkbox-bg-indeterminate-disabled-color| @grey | - |
+@checkbox-label-disabled-color| @grey | - |
+@checkbox-font-size| @font-size-lg | - |
+@checkbox-height| 16px | - |
+@checkbox-width| 16px | - |
+@checkbox-group-line-height| @line-height-base | - |
+@checkbox-group-checkbox-margin-right| @margin-sm | - |
+@checkbox-label-padding| 0 @padding-xl 0 @padding-xs | - |
+@checkbox-transition-duration| @transition-duration-base | - |

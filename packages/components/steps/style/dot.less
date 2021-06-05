@@ -1,0 +1,72 @@
+.@{steps-prefix}-dot {  
+  .@{step-prefix} {
+    position: relative;
+    overflow: visible;
+    padding-left: 0 !important;
+    font-size: 0;    
+  }    
+  .@{step-prefix}:not(:last-child) {
+    .@{step-prefix}-tail {
+      position: absolute;
+      top: (@step-dot-width / 2 - @step-dot-tail-width / 2);
+      width: 100%;
+      left: (@step-dot-head-width /2 + @step-dot-width / 2);
+      padding: 0 (@step-dot-width * 2) 0 (@step-dot-width);
+      &::after {
+        display: inline-block;
+        width: 100%;
+        height: @step-dot-tail-width;
+        background: @grey;
+        content: "";
+      }
+    }
+  }
+  .@{step-prefix}-head {
+    display: block;
+    width: @step-dot-head-width;
+    height: auto;
+    background: none;
+    border: none;
+    &-dot {
+      display: inline-block;
+      width: @step-dot-width;
+      height: @step-dot-width;
+      border-radius: 50%;
+      background: @grey;
+    }
+  }
+  .@{step-prefix}-content {
+    display: block;
+    font-size: @font-size-md;
+    margin-left: 0;
+    .@{step-prefix}-title:after {
+      display: none;
+    }
+  }
+  &.@{steps-prefix}-vertical {
+    .@{step-prefix}:not(:last-child) {
+      .@{step-prefix}-tail {
+        top: @step-dot-width;
+        left: (@step-dot-width / 2 - @step-dot-tail-width / 2);
+        width: @step-dot-tail-width !important;
+        padding: (@step-dot-vertical-gutter + @spacing-gutter) 0 @spacing-gutter !important; 
+      }
+    }
+    .@{step-prefix}-process {
+      .@{step-prefix}-head {
+        // 激活点的圆圈比一般的大了2个px，向左移动1px是
+        &-dot {
+          left: @step-dot-active-offset;
+        }
+      }
+    }
+    .@{step-prefix}-head {
+      float: left;
+      width: auto;
+      margin-top: @step-dot-vertical-gutter;
+    }
+    .@{step-prefix}-content {
+      margin-left: (@margin-md + @step-dot-width);
+    }
+  }
+}

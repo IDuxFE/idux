@@ -1,6 +1,8 @@
 import type { DefineComponent } from 'vue'
 import type { SpaceSize } from '@idux/components/config'
 
+import { PropTypes } from '@idux/cdk/utils'
+
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
 
@@ -23,4 +25,17 @@ export interface SpaceProps {
   wrap?: boolean
 }
 
-export type SpaceComponent = InstanceType<DefineComponent<SpaceProps>>
+const spaceSizePropType = PropTypes.oneOf(['small', 'medium', 'large'] as const)
+
+export const spacePropsDef = {
+  align: PropTypes.oneOf(['start', 'center', 'end', 'baseline'] as const).def('baseline'),
+  direction: PropTypes.oneOf(['vertical', 'horizontal'] as const).def('horizontal'),
+  size: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.oneOfType([spaceSizePropType, PropTypes.number])),
+    PropTypes.oneOfType([spaceSizePropType, PropTypes.number]),
+  ]),
+  split: PropTypes.string,
+  wrap: PropTypes.bool,
+}
+
+export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

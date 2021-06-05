@@ -8,7 +8,7 @@ export interface TimelineProps {
   position?: TimelinePosition
 }
 
-export type TimelineComponent = InstanceType<DefineComponent<TimelineProps>>
+export type TimelineInstance = InstanceType<DefineComponent<TimelineProps>>
 
 export type TimelineItemPosition = 'left' | 'right'
 export interface TimelineItemProps {
@@ -17,4 +17,4 @@ export interface TimelineItemProps {
   position?: TimelineItemPosition
 }
 
-export type TimelineItemComponent = InstanceType<DefineComponent<TimelineItemProps>>
+export type TimelineItemInstance = InstanceType<DefineComponent<TimelineItemProps>>

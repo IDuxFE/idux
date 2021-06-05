@@ -23,6 +23,5 @@ export default defineComponent({
 .content {
   text-align: center;
   padding: 30px;
-  background: #6e8ef1;
 }
 </style>

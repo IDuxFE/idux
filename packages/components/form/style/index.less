@@ -1,0 +1,123 @@
+@import '../../style/default.less';
+@import './mixin.less';
+@import './status.less';
+@import './layout.less';
+
+@form-prefix: ~'@{idux-prefix}-form';
+@form-item-prefix: ~'@{idux-prefix}-form-item';
+
+@form-item-valid-color: @success;
+@form-item-invalid-color: @error;
+@form-item-validating-color: @pending;
+@form-item-margin-bottom: 24px;
+@form-vertical-label-margin: 0;
+@form-vertical-label-padding: 0 0 8px;
+@form-font-height: ceil(@font-size-md * @line-height-base);
+@label-required-color: @red-l10;
+@label-color: @heading-color;
+@form-warning-input-bg: @background-color-component;
+@form-item-label-font-size: @font-size-md;
+@form-item-label-height: @input-height-md;
+@form-item-label-colon-margin-right: 8px;
+@form-item-label-colon-margin-left: 2px;
+@form-error-input-bg: @background-color-component;
+
+@form-invalid-box-shadow: 0 0 0 2px fade(@form-item-invalid-color, 20%);
+
+.@{form-prefix} {
+  &-small {
+    .form-size(@input-height-sm);
+  }
+  &-medium {
+    .form-size(@input-height-md);
+  }
+  &-large {
+    .form-size(@input-height-lg);
+  }
+}
+
+.@{form-item-prefix} {
+  margin-bottom: @form-item-margin-bottom;
+  vertical-align: top;
+
+  &-has-message {
+    margin-bottom: 0;
+  }
+
+  &-label {
+    display: inline-block;
+    flex-grow: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: middle;
+
+    &-left {
+      text-align: left;
+    }
+
+    > label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      color: @label-color;
+      font-size: @form-item-label-font-size;
+
+      &::after {
+        position: relative;
+        top: -0.5px;
+        margin: 0 @form-item-label-colon-margin-right 0 @form-item-label-colon-margin-left;
+        content: ':';
+      }
+    }
+
+    &-colonless > label::after {
+      content: ' ';
+    }
+
+    &-required > label::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: @label-required-color;
+      font-size: @form-item-label-font-size;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+      content: '*';
+    }
+
+    &-tooltip {
+      color: @text-color-secondary;
+      cursor: help;
+      writing-mode: horizontal-tb;
+      margin-inline-start: @margin-xs;
+    }
+  }
+
+  &-control {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &-input {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &-content {
+        flex: auto;
+        max-width: 100%;
+      }
+    }
+  }
+
+  &-message,
+  &-extra {
+    clear: both;
+    min-height: @form-item-margin-bottom;
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    transition: color 0.3s @ease-out; // sync input color transition
+    .form-message-extra-distance((@form-item-margin-bottom - @form-font-height) / 2);
+  }
+}

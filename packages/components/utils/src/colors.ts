@@ -1,6 +1,4 @@
-import { isUndefined } from '@idux/cdk/utils'
-
-export const PresetColor = [
+export const presetColor = [
   'red',
   'orange',
   'gold',
@@ -15,12 +13,18 @@ export const PresetColor = [
   'admiral',
   'purple',
   'magenta',
-  'lime',
-  'grey',
 ] as const
 
+export type PresetColor = ElementOf<typeof presetColor>
+
 export const isPresetColor = (color: string | undefined): boolean => {
-  return !isUndefined(color) && (PresetColor as readonly string[]).includes(color)
+  return presetColor.includes(color as PresetColor)
 }
 
-export type PresetColorType = ElementOf<typeof PresetColor>
+export const statusColor = ['primary', 'info', 'pending', 'success', 'warning', 'error'] as const
+
+export type StatusColor = ElementOf<typeof statusColor>
+
+export const isStatusColor = (color: string | undefined): boolean => {
+  return statusColor.includes(color as StatusColor)
+}

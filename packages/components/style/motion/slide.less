@@ -1,9 +1,10 @@
 @import '../variable/animation.less';
 
-.slide-motion(@className, @origin, @scaleEnterFrom, @scaleEnterTo, @duration: @transition-duration-base) {
+.slide-motion(@className, @origin, @scale, @duration: @transition-duration-base) {
   .ix-@{className}-enter-active,
   .ix-@{className}-leave-active {
-    transition-property: all;
+		transform-origin: @origin;
+    transition-property: transform, opacity;
     transition-duration: @duration;
   }
 
@@ -17,23 +18,12 @@
 
   .ix-@{className}-enter-from,
   .ix-@{className}-leave-to {
-    transform: @scaleEnterFrom;
+    transform: @scale;
     opacity: 0;
-  }
-
-  .ix-@{className}-enter-to,
-  .ix-@{className}-leave-from {
-    transform: @scaleEnterTo;
-    opacity: 1;
-  }
-
-  .ix-@{className}-leave-from,
-  .ix-@{className}-enter-from {
-    transform-origin: @origin;
   }
 }
 
-.slide-motion(slide-up, @scale-origin-slide-up, @scale-slide-up-enter-from, @scale-slide-up-enter-To);
-.slide-motion(slide-down, @scale-origin-slide-down, @scale-slide-down-enter-from, @scale-slide-down-enter-To);
-.slide-motion(slide-left, @scale-origin-slide-left, @scale-slide-left-enter-from, @scale-slide-left-enter-To);
-.slide-motion(slide-right, @scale-origin-slide-right, @scale-slide-right-enter-from, @scale-slide-right-enter-To);
+.slide-motion(slide-up, @scale-origin-slide-up, @scale-slide-up);
+.slide-motion(slide-down, @scale-origin-slide-down, @scale-slide-down);
+.slide-motion(slide-left, @scale-origin-slide-left, @scale-slide-left);
+.slide-motion(slide-right, @scale-origin-slide-right, @scale-slide-right);

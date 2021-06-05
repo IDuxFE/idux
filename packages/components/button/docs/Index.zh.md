@@ -38,7 +38,7 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `mode` | 设置按钮种类 | `primary\|default\|dashed\|text\|link` | `default` | ✅ |- |
+| `mode` | 设置按钮种类 | `primary\|default\|dashed\|text\|link` | `default` | - |- |
 | `danger` | 设置危险状态 | `boolean` | - | - |- |
 | `ghost` | 设置幽灵状态 | `boolean` | - | - |- |
 | `disabled` | 设置禁用状态 | `boolean` | - | - |- |
@@ -47,6 +47,7 @@ cover:
 | `shape` | 设置按钮形状 | `circle\|round` | - | - |- |
 | `block` | 将按钮宽度调整为自适应其父元素的宽度 | `boolean` | - | - |- |
 | `icon` | 设置图标类型 | `string` | - | - | `loading` 为 `true` 时无效 |
+| `type` | 原生 `button` 的 `type` 属性 | `string` | `button` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
 
 ### `ix-button-group`
 
@@ -79,18 +80,18 @@ cover:
 | @button-border-radius | @border-radius-sm | - |
 | @button-disable-opacity | 0.4 | - |
 | @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |
-| @button-primary-color | @white | - |
-| @button-primary-bg | @primary-color | - |
+| @button-primary | @white | - |
+| @button-primary-bg | @primary | - |
 | @button-primary-text-shadow | 0 -1px 0 rgba(0, 0, 0, 0.15) | - |
 | @button-default-color | @text-color | - |
 | @button-default-bg | @background-color-component | - |
 | @button-default-border | @border-color | - |
-| @button-danger-color | @error-color | - |
-| @button-danger-bg | @error-color | - |
+| @button-danger-color | @error | - |
+| @button-danger-bg | @error | - |
 | @button-ghost-color | @background-color-component | - |
 | @button-ghost-color | transparent | - |
 | @button-ghost-border | @background-color-component | - |
-| @button-link-color | @primary-color | - |
+| @button-link-color | @primary | - |
 | @button-link-hover-bg | transparent | - |
 | @button-text-color | @text-color | - |
 | @button-text-hover-bg | rgba(0, 0, 0, 0.12) | - |

@@ -1,6 +1,7 @@
 import type {
   ButtonConfig,
   IconConfig,
+  TagConfig,
   DividerConfig,
   SpaceConfig,
   RowConfig,
@@ -9,6 +10,7 @@ import type {
   RateConfig,
   BadgeConfig,
   CardConfig,
+  CollapseConfig,
   ImageConfig,
   StatisticConfig,
   MessageConfig,
@@ -17,19 +19,34 @@ import type {
   DrawerConfig,
   ProgressConfig,
   BackTopConfig,
+  AnchorConfig,
   GlobalConfig,
   TooltipConfig,
   PopoverConfig,
+  SelectConfig,
   RadioGroupConfig,
+  MenuConfig,
+  SubMenuConfig,
+  StepsConfig,
+  DropdownConfig,
+  ListConfig,
+  FormConfig,
+  PaginationConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
 import { numFormatter } from './numFormatter'
 
 // --------------------- General ---------------------
-const button = shallowReactive<ButtonConfig>({ mode: 'default', size: 'medium' })
+const button = shallowReactive<ButtonConfig>({ size: 'medium' })
 
 const icon = shallowReactive<IconConfig>({})
+
+const tag = shallowReactive<TagConfig>({
+  closable: false,
+  checkAble: false,
+  isRound: false,
+})
 
 // --------------------- Layout ---------------------
 const divider = shallowReactive<DividerConfig>({
@@ -44,8 +61,41 @@ const space = shallowReactive<SpaceConfig>({ size: 'small' })
 const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
+const dropdown = shallowReactive<DropdownConfig>({
+  placement: 'bottom-start',
+  trigger: 'hover',
+})
+
+const menu = shallowReactive<MenuConfig>({
+  indent: 24,
+  theme: 'light',
+})
+
+const subMenu = shallowReactive<SubMenuConfig>({
+  suffix: 'right',
+  suffixRotates: [-90, 90],
+})
+
+const pagination = shallowReactive<PaginationConfig>({
+  lessJumper: false,
+  pageSize: 10,
+  pageSizes: [10, 20, 50, 100],
+  showQuickJumper: false,
+  showSizeChanger: false,
+  showTitle: true,
+  showTotal: true,
+  simple: false,
+  size: 'medium',
+})
 
 // --------------------- Data Entry ---------------------
+const form = shallowReactive<FormConfig>({
+  colonless: false,
+  labelAlign: 'right',
+  layout: 'horizontal',
+  size: 'medium',
+})
+
 const input = shallowReactive<InputConfig>({
   size: 'medium',
   clearable: false,
@@ -72,6 +122,15 @@ const radioGroup: RadioGroupConfig = shallowReactive({
   mode: 'border',
 })
 
+const select = shallowReactive<SelectConfig>({
+  borderless: false,
+  clearable: false,
+  labelKey: 'label',
+  searchable: false,
+  size: 'medium',
+  valueKey: 'value',
+})
+
 // --------------------- Data Display ---------------------
 const badge = shallowReactive<BadgeConfig>({ showZero: false, dot: false, overflowCount: 99 })
 
@@ -80,6 +139,13 @@ const card = shallowReactive<CardConfig>({
   borderless: false,
   hoverable: false,
 })
+
+const list = shallowReactive<ListConfig>({
+  size: 'medium',
+  borderless: true,
+})
+
+const collapse: CollapseConfig = shallowReactive<CollapseConfig>({ accordion: false })
 
 const image: ImageConfig = shallowReactive({
   width: 100,
@@ -141,31 +207,47 @@ const progress = shallowReactive<ProgressConfig>({
   format: (percent: number) => percent + '%',
 })
 
+const steps = shallowReactive<StepsConfig>({
+  size: 'medium',
+})
+
 // --------------------- Other ---------------------
 const backTop = shallowReactive<BackTopConfig>({
   duration: 450,
   visibilityHeight: 400,
 })
-
+const anchor = shallowReactive<AnchorConfig>({
+  bounds: 5,
+  hideLinkBall: false,
+})
 // --------------------- end ---------------------
 
 export const defaultConfig: GlobalConfig = {
   // General
   button,
   icon,
+  tag,
   // Layout
   divider,
   space,
   row,
   // Navigation
+  dropdown,
+  menu,
+  subMenu,
+  pagination,
   // Data Entry
+  form,
   input,
   textarea,
   rate,
   radioGroup,
+  select,
   // Data Display
   badge,
   card,
+  list,
+  collapse,
   image,
   statistic,
   tooltip,
@@ -176,7 +258,9 @@ export const defaultConfig: GlobalConfig = {
   spin,
   drawer,
   progress,
+  steps,
   // Other
   backTop,
+  anchor,
   // --- end ---
 }

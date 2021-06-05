@@ -1,0 +1,42 @@
+.@{steps-prefix}-vertical-placement {   
+  .@{step-prefix} {
+    position: relative;
+    overflow: visible;
+    padding-left: 0 !important;
+    &:not(:last-child) {
+      .@{step-prefix}-tail {
+        position: absolute;
+        top: (@height-md / 2);
+        height: @step-tail-height;
+        width: 100%;
+        padding-left: (@height-md + @margin-md * 2);
+        &::after {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          height: @step-tail-height;
+          background: @grey;
+          content: "";
+        }
+      }
+    }
+    .@{step-prefix}-head { 
+      margin: 0 @margin-md;
+    }
+    .@{step-prefix}-content {
+        display: block;
+      .@{step-prefix}-title:after {
+        display: none !important;
+      }
+    }
+  }
+  &.@{steps-prefix}-small {
+    .@{step-prefix}:not(:last-child) {
+      .@{step-prefix}-tail {
+        top: (@height-sm / 2);
+        padding-left: (@height-sm + @margin-md * 2);
+      }
+    }
+  }
+    
+}

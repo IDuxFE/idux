@@ -6,7 +6,7 @@
   center: center;
   end: flex-end;
   baseline: baseline;
-}
+};
 
 /* stylelint-enable property-no-unknown */
 
@@ -17,14 +17,14 @@
     .@{space-item} {
       align-items: @value;
     }
-  })
+  });
 }
 
 /* stylelint-disable property-no-unknown */
 @space-direction: {
   horizontal: row;
   vertical: column;
-}
+};
 
 /* stylelint-enable property-no-unknown */
 
@@ -35,13 +35,9 @@
     .@{space-item} {
       flex-direction: @value;
 
-      .@{prefix}-split {
-        margin: if(@key=horizontal, 0 @space-margin-sm, @space-margin-sm 0);
-      }
-
       .space-size-traverse(@prefix, @key);
     }
-  })
+  });
 }
 
 /* stylelint-disable property-no-unknown */
@@ -49,22 +45,29 @@
   small: @space-margin-sm;
   medium: @space-margin-md;
   large: @space-margin-lg;
-}
+};
 
 /* stylelint-enable property-no-unknown */
 
 .space-size-traverse(@prefix, @direction) {
   each(@space-size, .(@value, @key) {
     @space-item: ~'@{prefix}-item-@{key}';
+    @split-item:  ~'@{prefix}-split-@{key}';
 
-    .@{space-item} {
-      margin-right: if(@direction=horizontal, @value);
-      margin-bottom: if(@direction=vertical, @value);
-
-      &:last-child{
-        margin: 0;
-      }
+    .@{space-item} when (@direction = horizontal) {
+      margin-right:@value
     }
-  })
-}
 
+    .@{split-item} when (@direction = horizontal) {
+      margin-right:@value
+    }
+
+    .@{space-item} when (@direction = vertical) {
+      margin-bottom:@value
+    }
+
+    .@{split-item} when (@direction = vertical) {
+      margin-bottom:@value
+    }
+  });
+}

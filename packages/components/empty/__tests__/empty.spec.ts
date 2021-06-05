@@ -2,13 +2,13 @@ import { renderWork } from '@tests'
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 
 import IxEmpty from '../src/Empty.vue'
-import { EmptyProps } from '../src/types'
+import { EmptyInstance, EmptyProps } from '../src/types'
 
 describe('Empty.vue', () => {
-  let EmptyMount: (options?: MountingOptions<Partial<EmptyProps>>) => VueWrapper<InstanceType<typeof IxEmpty>>
+  let EmptyMount: (options?: MountingOptions<Partial<EmptyProps>>) => VueWrapper<EmptyInstance>
 
   beforeEach(() => {
-    EmptyMount = options => mount(IxEmpty, { ...options })
+    EmptyMount = options => mount<EmptyInstance>(IxEmpty, { ...options })
   })
 
   renderWork(IxEmpty)

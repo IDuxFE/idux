@@ -8,4 +8,4 @@ export interface TitleProps {
   prefix?: string
 }
 
-export type TitleComponent = InstanceType<DefineComponent<TitleProps>>
+export type TitleInstance = InstanceType<DefineComponent<TitleProps>>

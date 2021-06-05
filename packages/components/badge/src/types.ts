@@ -12,4 +12,4 @@ export interface BadgeProps {
   color?: string
 }
 
-export type BadgeComponent = InstanceType<DefineComponent<BadgeProps>>
+export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>

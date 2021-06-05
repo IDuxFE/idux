@@ -10,4 +10,4 @@ export interface CardProps {
   size?: CardSize
 }
 
-export type CardComponent = InstanceType<DefineComponent<CardProps>>
+export type CardInstance = InstanceType<DefineComponent<CardProps>>

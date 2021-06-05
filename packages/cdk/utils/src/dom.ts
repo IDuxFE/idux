@@ -5,15 +5,21 @@ import { isString } from './typeof'
 type ElType = HTMLElement | Document | Window
 
 export function on<K extends keyof HTMLElementEventMap>(
-  el: ElType,
-  type: K,
-  listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  el: ElType | undefined,
+  type: K | undefined,
+  listener: ((this: HTMLElement, ev: HTMLElementEventMap[K]) => any) | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void
 export function on(
-  el: ElType,
-  type: string,
-  listener: EventListenerOrEventListenerObject,
+  el: ElType | undefined,
+  type: string | undefined,
+  listener: EventListenerOrEventListenerObject | undefined,
+  options?: boolean | AddEventListenerOptions,
+): void
+export function on(
+  el: ElType | undefined,
+  type: string | undefined,
+  listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void {
   if (el && type && listener) {
@@ -22,15 +28,21 @@ export function on(
 }
 
 export function off<K extends keyof HTMLElementEventMap>(
-  el: ElType,
-  type: K,
-  listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  el: ElType | undefined,
+  type: K | undefined,
+  listener: ((this: HTMLElement, ev: HTMLElementEventMap[K]) => any) | undefined,
   options?: boolean | EventListenerOptions,
 ): void
 export function off(
-  el: ElType,
-  type: string,
-  listener: EventListenerOrEventListenerObject,
+  el: ElType | undefined,
+  type: string | undefined,
+  listener: EventListenerOrEventListenerObject | undefined,
+  options?: boolean | EventListenerOptions,
+): void
+export function off(
+  el: ElType | undefined,
+  type: string | undefined,
+  listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | EventListenerOptions,
 ): void {
   if (el && type && listener) {
@@ -42,7 +54,15 @@ type ResizeListener = (entry: ResizeObserverEntry) => void
 
 const resizeMap = new Map<Element, { listeners: ResizeListener[]; ro: ResizeObserver }>()
 
-export function onResize(el: Element, listener: ResizeListener, options?: ResizeObserverOptions): void {
+export function onResize(
+  el: Element | undefined,
+  listener: ResizeListener | undefined,
+  options?: ResizeObserverOptions,
+): void {
+  if (!el || !listener) {
+    return
+  }
+
   if (resizeMap.has(el)) {
     resizeMap.get(el)!.listeners.push(listener)
   } else {
@@ -55,8 +75,8 @@ export function onResize(el: Element, listener: ResizeListener, options?: Resize
   }
 }
 
-export function offResize(el: Element, listener: ResizeListener): void {
-  if (!resizeMap.has(el)) {
+export function offResize(el: Element | undefined, listener: ResizeListener | undefined): void {
+  if (!el || !listener || !resizeMap.has(el)) {
     return
   }
 
@@ -89,6 +109,8 @@ export function removeClass(el: HTMLElement, className: string | string[]): void
 }
 
 export const rAF = requestAnimationFrame || (cb => setTimeout(cb, 1000 / 60))
+
+export const cancelRAF = cancelAnimationFrame || clearTimeout
 
 export function throttleRAF<T extends (...args: any[]) => void>(
   fn: T,

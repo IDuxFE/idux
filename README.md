@@ -1,23 +1,13 @@
-<p align="center">
-  <a href="https://github.com/IduxFE/idux">
-    <img src="">
-  </a>
-</p>
+# @idux
 
-<h1 align="center">
-@Idux
-</h1>
-
-<div align="center">
-一套企业级中后台 UI 组件库, 基于 vue 3.x 开发。<br />
-全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
+`@idux` 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。  
+基于 Vue 3.x + TypeScript 开发, 全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
 
 [![Build Status](https://dev.azure.com/iduxfeteam/IduxFE/_apis/build/status/IduxFE.idux?branchName=azure-pipelines)](https://dev.azure.com/iduxfeteam/IduxFE/_build/latest?definitionId=1&branchName=azure-pipelines)
 [![CodeFactor](https://www.codefactor.io/repository/github/iduxfe/idux/badge)](https://www.codefactor.io/repository/github/iduxfe/idux)
 [![codecov](https://codecov.io/gh/IduxFE/idux/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IduxFE/idux)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/IduxFE/idux/blob/main/LICENSE)
-</div>
 
 ## ✨ 特性
 

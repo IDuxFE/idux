@@ -8,4 +8,4 @@ IxBadge.install = (app: App): void => {
 
 export { IxBadge }
 
-export type { BadgeComponent, BadgeProps } from './src/types'
+export type { BadgeInstance, BadgeProps } from './src/types'

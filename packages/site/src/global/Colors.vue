@@ -14,10 +14,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject } from 'vue'
+import { defineComponent } from 'vue'
 import { useClipboard } from '@idux/cdk/clipboard'
 
-const levels = ['l50', 'l40', 'l30', 'l20', 'l10', '', 'd10', 'd20', 'd30', 'd40']
+const levels = ['l50', 'l40', 'l30', 'l20', 'l10', '', 'd10', 'd20', 'd30', 'd40', 'd50']
 
 const colors = [
   {
@@ -89,10 +89,8 @@ const colors = [
 export default defineComponent({
   name: 'GlobalColors',
   setup() {
-    const language = inject('language')
-
     const { copy } = useClipboard()
-    return { language, colors, levels, copy }
+    return { colors, levels, copy }
   },
 })
 </script>
