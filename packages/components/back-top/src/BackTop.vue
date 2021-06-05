@@ -11,7 +11,7 @@
 <script lang="ts">
 import type { BackTopProps } from './types'
 
-import { computed, defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { IxIcon } from '@idux/components/icon'
 import { PropTypes, withUndefined, on, off, scrollToTop, getScroll } from '@idux/cdk/utils'
@@ -31,7 +31,7 @@ export default defineComponent({
     const backTopConfig = useGlobalConfig('backTop')
     const eventType = 'scroll'
     const visible = ref(false)
-    const container = ref<Window | HTMLElement>(null as unknown as HTMLElement)
+    const container = ref<Window | HTMLElement>((null as unknown) as HTMLElement)
     const duration = computed(() => props.duration ?? backTopConfig.duration)
 
     const handleScroll = () => {
@@ -53,7 +53,7 @@ export default defineComponent({
       })
     })
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
       off(container.value, eventType, throttledScrollHandler)
     })
 

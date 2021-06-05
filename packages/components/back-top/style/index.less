@@ -10,13 +10,22 @@
   background-color: @back-top-background-color;
   width: @back-top-width;
   height: @back-top-height;
-  color: @white;
+  color: @back-top-color;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: @back-top-font-size;
   border-radius: @back-top-border-radius;
+  border: @back-top-border-width @back-top-border-style  @back-top-border-color;
   cursor: pointer;
+
+  &:hover {
+    color: @back-top-color-hover;
+  }
+
+  &:active {
+    color: @back-top-color-active;
+  }
 }
 
 @media screen and (min-width: @screen-lg) and (max-width: @screen-lg-max) {
