@@ -6,7 +6,6 @@ import { DrawerProps } from '../src/types'
 
 const TestComponent = defineComponent({
   components: { IxDrawer },
-  // eslint-disable-next-line vue/require-prop-types
   props: [
     'visible',
     'title',
@@ -61,6 +60,8 @@ describe('Drawer.vue', () => {
     })
   })
 
+  renderWork(IxDrawer, { props: { visible: true, title: drawerTitle } })
+
   test('visible work', async () => {
     const wrapper = DrawerMount({ props: { visible: false, title: drawerTitle } })
     maskContainer = await getMaskContainer()
@@ -69,8 +70,6 @@ describe('Drawer.vue', () => {
     maskContainer = await getMaskContainer()
     expect(maskContainer.style.display).toEqual('')
   })
-
-  renderWork(IxDrawer, { props: { visible: true, title: drawerTitle } })
 
   test('title slot work', async () => {
     const titleProps = 'title props'

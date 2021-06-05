@@ -1,7 +1,7 @@
 <template>
   <div>
     <ix-button @click="showMask">打开蒙层</ix-button>
-    <ix-mask v-show="visible" :mask="true">
+    <ix-mask v-show="visible" :mask="true" @click="showMask">
       <p>蒙层遮罩内容</p>
     </ix-mask>
   </div>
