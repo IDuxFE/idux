@@ -3,17 +3,17 @@ import { useGlobalConfig } from '@idux/components/config'
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
 import IxIcon from '../src/Icon.vue'
-import { IconProps, IconDefinition } from '../src/types'
+import { IconProps, IconDefinition, IconInstance } from '../src/types'
 
 const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }
 const Down: IconDefinition = { name: 'down', svgString: '<svg></svg>' }
 const Loading: IconDefinition = { name: 'loading', svgString: '<svg></svg>' }
 
 describe('Icon.vue', () => {
-  let IconMount: (options?: MountingOptions<Partial<IconProps>>) => VueWrapper<InstanceType<typeof IxIcon>>
+  let IconMount: (options?: MountingOptions<Partial<IconProps>>) => VueWrapper<IconInstance>
 
   beforeEach(() => {
-    IconMount = options => mount(IxIcon, { ...options })
+    IconMount = options => mount<IconInstance>(IxIcon, { ...options })
   })
 
   test('render work', async () => {
@@ -98,28 +98,6 @@ describe('Icon.vue', () => {
 
     expect(wrapper.classes()).toContain('ix-icon-spin')
     expect(wrapper.find('svg').attributes()['style']).toEqual('transform: rotate(180deg)')
-  })
-
-  test('tag work', async () => {
-    const wrapper = mount({
-      components: { IxIcon },
-      template: `<IxIcon @click="onClick"/>`,
-      props: {
-        onClick: { type: Function, default: () => void 0 },
-      },
-    })
-    expect(wrapper.find('i').exists()).toBeFalsy()
-    expect(wrapper.find('button').exists()).toBeTruthy()
-
-    await wrapper.setProps({ onClick: null })
-
-    expect(wrapper.find('i').exists()).toBeTruthy()
-    expect(wrapper.find('button').exists()).toBeFalsy()
-
-    await wrapper.setProps({ onClick: () => void 0 })
-
-    expect(wrapper.find('i').exists()).toBeFalsy()
-    expect(wrapper.find('button').exists()).toBeTruthy()
   })
 
   test('slot work', async () => {

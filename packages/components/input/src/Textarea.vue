@@ -5,7 +5,7 @@
       v-bind="attrs"
       class="ix-textarea-inner"
       :style="{ resize: resize$$ }"
-      :disabled="disabled"
+      :disabled="disabled$$"
       :readonly="readonly"
       @compositionstart="onCompositionStart"
       @compositionend="onCompositionEnd"
@@ -20,13 +20,13 @@
   </span>
 </template>
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
 import type { TextareaProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
-import { ControlPropType } from '@idux/cdk/forms'
+import { controlPropTypeDef } from '@idux/cdk/forms'
 import { PropTypes, withUndefined } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useAttrs } from '@idux/components/utils'
@@ -39,7 +39,7 @@ export default defineComponent({
   components: { IxIcon },
   props: {
     value: PropTypes.string,
-    control: ControlPropType,
+    control: controlPropTypeDef,
     disabled: PropTypes.bool.def(false),
     readonly: PropTypes.bool.def(false),
     resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical'] as const),
@@ -56,9 +56,10 @@ export default defineComponent({
   setup(props: TextareaProps) {
     const attrs = useAttrs()
     const textareaConfig = useGlobalConfig('textarea')
-    const textareaRef = ref((null as unknown) as HTMLTextAreaElement)
+    const textareaRef = ref(null as unknown as HTMLTextAreaElement)
 
     const {
+      disabled: disabled$$,
       focus,
       blur,
       onCompositionStart,
@@ -73,7 +74,7 @@ export default defineComponent({
       valueAccessor,
     } = useCommonBindings(props, textareaConfig, textareaRef)
 
-    const classes = useClasses(props, textareaConfig, isFocused)
+    const classes = useClasses(props, textareaConfig, isFocused, disabled$$)
     const dataCount = useDataCount(props, textareaConfig, valueAccessor)
     const resize$$ = computed(() => {
       const autoRows = props.autoRows ?? textareaConfig.autoRows
@@ -89,6 +90,7 @@ export default defineComponent({
     useAutoRows(textareaRef, autoRows, valueAccessor)
 
     return {
+      disabled$$,
       focus,
       blur,
       attrs,
@@ -108,12 +110,17 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: TextareaProps, config: TextareaConfig, isFocused: Ref<boolean>) {
+function useClasses(
+  props: TextareaProps,
+  config: TextareaConfig,
+  isFocused: Ref<boolean>,
+  disabled: ComputedRef<boolean>,
+) {
   return computed(() => {
     const sizeClass = `ix-textarea-${props.size ?? config.size}`
     return {
       [sizeClass]: true,
-      'ix-textarea-disabled': props.disabled,
+      'ix-textarea-disabled': disabled.value,
       'ix-textarea-focused': isFocused.value,
       'ix-textarea-with-count': props.showCount ?? config.showCount,
     }

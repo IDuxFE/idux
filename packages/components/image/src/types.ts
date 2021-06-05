@@ -12,7 +12,7 @@ export interface ImageProps {
   fit?: string
 }
 
-export type ImageComponent = InstanceType<DefineComponent<ImageProps>>
+export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
 export interface ImagePreviewProps {
   previewSrc?: string

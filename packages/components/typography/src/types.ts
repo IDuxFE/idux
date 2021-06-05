@@ -9,4 +9,4 @@ export interface TypographyOptions {
 
 export type TypographyProps = TypographyType | TypographyOptions
 
-export type TypographyDirective = FunctionDirective<HTMLElement, TypographyProps>
+export type TypographyInstance = FunctionDirective<HTMLElement, TypographyProps>

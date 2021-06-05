@@ -19,10 +19,10 @@ IxOptionGroup.install = (app: App): void => {
 export { IxSelect, IxOption, IxOptionGroup }
 
 export type {
-  SelectComponent,
+  SelectInstance,
   SelectProps,
-  OptionComponent,
+  OptionInstance,
   OptionProps,
-  OptionGroupComponent,
+  OptionGroupInstance,
   OptionGroupProps,
 } from './src/types'

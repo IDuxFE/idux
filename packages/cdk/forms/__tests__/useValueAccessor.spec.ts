@@ -1,7 +1,6 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { ComponentOptions, ref, Ref } from 'vue'
-import { AbstractControl } from '../src/controls/abstractControl'
-import { FormControl } from '../src/controls/formControl'
+import { AbstractControl, FormControl } from '../src/controls'
 import { useFormControl, useFormGroup } from '../src/useForms'
 import { useValueAccessor } from '../src/useValueAccessor'
 import { provideControl } from '../src/utils'
@@ -33,7 +32,7 @@ const getApp = (
   options: {
     group: AbstractControl
     valueRef?: Ref<string>
-    control?: string | AbstractControl
+    control?: string | number | AbstractControl
   },
 ) => {
   return mount({
@@ -131,13 +130,13 @@ describe('useValueAccessor.ts', () => {
 
     const input = wrapper.find('input')
 
-    expect(input.element.value).toEqual('')
+    expect(input.element.value).toEqual('valueRef')
 
     await input.setValue('input change')
     await input.trigger('blur')
 
     expect(group.getValue()).toEqual({ control: 'control' })
     expect(group.blurred.value).toEqual(false)
-    expect(valueRef.value).toEqual('valueRef')
+    expect(valueRef.value).toEqual('input change')
   })
 })

@@ -1,11 +1,10 @@
+import type { VNodeTypes } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
 // General
 
-export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
-  mode: ButtonMode
   size: ButtonSize
 }
 
@@ -39,6 +38,11 @@ export interface RowConfig {
 }
 
 // Navigation
+export interface DropdownConfig {
+  placement: OverlayPlacement
+  trigger: OverlayTrigger
+}
+
 export type MenuTheme = 'light' | 'dark'
 export interface MenuConfig {
   indent: number
@@ -50,8 +54,44 @@ export interface SubMenuConfig {
   suffixRotates: [number, number]
 }
 
+export type PaginationSize = 'small' | 'medium'
+export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
+export interface PaginationItemRenderOptions {
+  index: number
+  type: PaginationItemType
+  active: boolean
+  disabled: boolean
+  original: VNodeTypes
+}
+export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
+export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
+
+export interface PaginationConfig {
+  itemRender?: PaginationItemRenderFn
+  lessJumper: boolean
+  pageSize: number
+  pageSizes: number[]
+  showQuickJumper: boolean
+  showSizeChanger: boolean
+  showTitle: boolean
+  showTotal: boolean
+  simple: boolean
+  size: PaginationSize
+  totalRender?: PaginationTotalRenderFn
+}
+
 // Data Entry
-type FormSize = 'small' | 'medium' | 'large'
+export type FormLabelAlign = 'left' | 'right'
+export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormSize = 'small' | 'medium' | 'large'
+
+export interface FormConfig {
+  colonless: boolean
+  labelAlign: FormLabelAlign
+  layout: FormLayout
+  size: FormSize
+}
+
 export type InputSize = FormSize
 export interface InputConfig {
   size: InputSize
@@ -109,6 +149,12 @@ export interface CardConfig {
   size: CardSize
   borderless: boolean
   hoverable: boolean
+}
+
+export type ListSize = 'small' | 'medium' | 'large'
+export interface ListConfig {
+  size: ListSize
+  borderless: boolean
 }
 
 export interface CollapseConfig {
@@ -190,6 +236,13 @@ export interface ProgressConfig {
   format: ProgressFormat
 }
 
+// Steps
+
+export type StepsSize = 'medium' | 'small'
+export interface StepsConfig {
+  size: StepsSize
+}
+
 // Other
 
 export interface BackTopConfig {
@@ -197,7 +250,8 @@ export interface BackTopConfig {
   visibilityHeight: number
 }
 export interface AnchorConfig {
-  showInkInFixed: boolean
+  bounds: number
+  hideLinkBall: boolean
 }
 // --- end ---
 
@@ -211,9 +265,12 @@ export interface GlobalConfig {
   space: SpaceConfig
   row: RowConfig
   // Navigation
+  dropdown: DropdownConfig
   menu: MenuConfig
   subMenu: SubMenuConfig
+  pagination: PaginationConfig
   // Data Entry
+  form: FormConfig
   input: InputConfig
   textarea: TextareaConfig
   radioGroup: RadioGroupConfig
@@ -222,11 +279,13 @@ export interface GlobalConfig {
   // Data Display
   badge: BadgeConfig
   card: CardConfig
+  list: ListConfig
   collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
   tooltip: TooltipConfig
   popover: PopoverConfig
+  steps: StepsConfig
   // Feedback
   message: MessageConfig
   result: ResultConfig

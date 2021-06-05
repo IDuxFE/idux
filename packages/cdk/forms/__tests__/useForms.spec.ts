@@ -18,7 +18,7 @@ describe('useForms.ts', () => {
     const group = useFormGroup<BasicGroup>({
       control1: ['', Validators.required],
       control2: [undefined, { trigger: 'blur', validators: Validators.required }],
-      array: useFormArray<(string | number)[]>(['', 1]),
+      array: useFormArray(['', 1]),
       group: useFormGroup({ control: '' }),
     })
 

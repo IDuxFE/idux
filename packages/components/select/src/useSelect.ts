@@ -9,7 +9,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, wat
 import { useOverlay } from '@idux/cdk/overlay'
 import { offResize, onResize, toArray } from '@idux/cdk/utils'
 import { useValueAccessor } from '@idux/cdk/forms'
-import { selectToken } from './utils'
+import { selectToken } from './token'
 
 export interface SelectOverlay {
   triggerRef: Ref<HTMLElement | null>
@@ -107,6 +107,7 @@ export const useSelectOptions = (props: SelectProps, config: SelectConfig): Comp
 }
 
 export interface SelectValueAccessor {
+  disabled: ComputedRef<boolean>
   inputValue: Ref<string>
   activatedValue: Ref<any>
   selectedValue: Ref<any[]>
@@ -125,6 +126,7 @@ export interface SelectValueAccessor {
 export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor => {
   const { emit } = getCurrentInstance()!
   const valueAccessor = useValueAccessor()
+  const disabled = computed(() => valueAccessor.disabled)
   const inputValue = ref('')
   const selectedValue = ref<any[]>(toArray(valueAccessor.value))
   const activatedValue = ref(null) as Ref<any>
@@ -188,7 +190,6 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
       if (valueList.length !== 0 || selectedValue.value.length !== 0) {
         selectedValue.value = valueList
         updateVariable()
-        emit('change', value)
       }
     },
   )
@@ -199,6 +200,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
       const _value = props.multiple ? value : value[0]
       if (valueAccessor.value !== _value) {
         valueAccessor.setValue?.(_value)
+        emit('change', _value)
       }
     },
   )
@@ -208,6 +210,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
   })
 
   return {
+    disabled,
     inputValue,
     activatedValue,
     selectedValue,
@@ -229,15 +232,16 @@ export const useSelectClasses = (
   config: SelectConfig,
   visibility: Ref<boolean>,
   isActive: Ref<boolean>,
+  disabled: ComputedRef<boolean>,
 ): ComputedRef<Record<string, boolean>> => {
   return computed(() => {
     const multiple = props.multiple
-    const disabled = props.disabled
     const borderless = props.borderless ?? config.borderless
     const clearable = props.clearable ?? config.clearable
     const searchable = props.searchable ?? config.searchable
     const size = props.size ?? config.size
     const suffix = props.suffix ?? config.suffix
+    const _disabled = disabled.value
     return {
       'ix-select': true,
       'ix-select-single': !multiple,
@@ -245,9 +249,9 @@ export const useSelectClasses = (
       'ix-select-opened': visibility.value,
       'ix-select-active': isActive.value,
       'ix-select-borderless': borderless,
-      'ix-select-disabled': disabled,
-      'ix-select-clearable': !disabled && clearable,
-      'ix-select-searchable': !disabled && (searchable || multiple),
+      'ix-select-disabled': _disabled,
+      'ix-select-clearable': !_disabled && clearable,
+      'ix-select-searchable': !_disabled && (searchable || multiple),
       'ix-select-show-suffix': !!suffix || !multiple,
       [`ix-select-${size}`]: true,
     }

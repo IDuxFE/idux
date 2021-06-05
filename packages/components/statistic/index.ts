@@ -8,4 +8,4 @@ IxStatistic.install = (app: App): void => {
 
 export { IxStatistic }
 
-export type { StatisticComponent, StatisticProps } from './src/types'
+export type { StatisticInstance, StatisticProps } from './src/types'

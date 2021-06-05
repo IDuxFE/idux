@@ -12,4 +12,4 @@ export interface DividerProps {
   type?: DividerType
 }
 
-export type DividerComponent = InstanceType<DefineComponent<DividerProps>>
+export type DividerInstance = InstanceType<DefineComponent<DividerProps>>

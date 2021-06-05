@@ -1,14 +1,12 @@
 import type { DefineComponent } from 'vue'
 
-interface IconOriginalProps {
+export interface IconProps {
+  iconfont: boolean
   name?: string
   rotate?: boolean | number | string
-  iconfont?: boolean
 }
 
-export type IconProps = Readonly<IconOriginalProps>
-
-export type IconComponent = InstanceType<DefineComponent<IconProps>>
+export type IconInstance = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {
   name: string

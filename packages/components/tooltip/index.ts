@@ -8,4 +8,4 @@ IxTooltip.install = (app: App): void => {
 
 export { IxTooltip }
 
-export type { TooltipComponent, TooltipProps } from './src/types'
+export type { TooltipInstance, TooltipProps } from './src/types'

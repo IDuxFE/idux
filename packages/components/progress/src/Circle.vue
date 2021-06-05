@@ -153,9 +153,7 @@ function usePathString(calcSharedProperties: ComputedRef<CalcSharedProperties>):
   })
 }
 
-function useTrailPathStyle(
-  calcSharedProperties: ComputedRef<CalcSharedProperties>,
-): ComputedRef<{
+function useTrailPathStyle(calcSharedProperties: ComputedRef<CalcSharedProperties>): ComputedRef<{
   strokeDasharray: string
   strokeDashoffset: string
   transition: string

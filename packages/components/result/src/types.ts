@@ -23,4 +23,4 @@ export interface ResultProps {
   title?: string
 }
 
-export type ResultComponent = InstanceType<DefineComponent<ResultProps>>
+export type ResultInstance = InstanceType<DefineComponent<ResultProps>>

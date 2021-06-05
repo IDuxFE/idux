@@ -8,4 +8,4 @@ IxBackTop.install = (app: App): void => {
 
 export { IxBackTop }
 
-export type { BackTopComponent, BackTopProps } from './src/types'
+export type { BackTopInstance, BackTopProps } from './src/types'

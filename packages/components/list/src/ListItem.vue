@@ -1,0 +1,61 @@
+<template>
+  <list-item-wrap :grid="gird">
+    <div class="ix-list-item-title">
+      <slot name="title">{{ title }}</slot>
+    </div>
+    <div class="ix-list-item-content">
+      <slot>{{ content }}</slot>
+    </div>
+    <div class="ix-list-item-extra">
+      <slot name="extra">{{ extra }}</slot>
+    </div>
+  </list-item-wrap>
+</template>
+<script lang="ts">
+import type { ListGridProps } from './types'
+
+import { ComputedRef, defineComponent, inject } from 'vue'
+import { ListItemPropTypes } from './types'
+import ListItemWrap from './ListItemWrap.vue'
+
+export default defineComponent({
+  name: 'IxListItem',
+  components: {
+    ListItemWrap,
+  },
+  props: ListItemPropTypes,
+  emits: [],
+  setup() {
+    const listGrid = inject<ComputedRef<ListGridProps> | undefined>('listGrid', void 0)
+    const gird = listGrid?.value && useGrid(listGrid?.value)
+    return {
+      gird,
+    }
+  },
+})
+
+const getGrid = <T, K extends keyof T>(grid: T, dim: K) => {
+  const v = grid[dim]
+  if (typeof v === 'number') {
+    return Math.floor(24 / v)
+  }
+
+  return undefined
+}
+
+const useGrid = (grid: ListGridProps) => {
+  const defaultSpan = getGrid(grid, 'column')
+  const xsSpan = getGrid(grid, 'xs')
+  const smSpan = getGrid(grid, 'sm')
+  const mdSpan = getGrid(grid, 'md')
+  const lgSpan = getGrid(grid, 'lg')
+  const xlSpan = getGrid(grid, 'xl')
+  return {
+    xs: xsSpan || defaultSpan,
+    sm: smSpan || defaultSpan,
+    md: mdSpan || defaultSpan,
+    ld: lgSpan || defaultSpan,
+    xl: xlSpan || defaultSpan,
+  }
+}
+</script>

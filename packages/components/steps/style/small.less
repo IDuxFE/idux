@@ -1,0 +1,42 @@
+.@{steps-prefix}-small {   
+  font-size: @font-size-sm;
+  .@{step-prefix}:not(:first-child) {
+    padding-left: 0;
+  }
+  .@{step-prefix}-head {
+    width: @height-sm;
+    height: @height-sm;
+    &-icon, &-text {
+      line-height: @height-sm;
+    }
+    &-percent {
+      width: (@height-sm + @step-percent-gutter);
+      height:(@height-sm + @step-percent-gutter);
+      &-left, &-right {
+        width: ((@height-sm + @step-percent-gutter) / 2);
+        height: (@height-sm + @step-percent-gutter);
+        .@{step-prefix}-head-percent-circle {
+          width: (@height-sm + @step-percent-gutter);
+          height: (@height-sm + @step-percent-gutter);
+        }
+      }
+    }
+  }    
+  .@{step-prefix}-title {
+    line-height: @height-sm;
+    padding-right: @padding-sm;
+    &::after {
+      top: (@height-sm / 2);
+    }
+  }
+  .@{step-prefix}-description {
+      font-size: @font-size-xs;
+  }
+  .@{step-prefix}-custom {
+    .@{step-prefix}-head {
+        .@{step-prefix}-head-icon {
+          font-size: @step-custom-icon-width-small;
+        }
+      }  
+  }
+}

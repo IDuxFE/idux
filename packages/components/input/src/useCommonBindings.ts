@@ -7,6 +7,7 @@ import { computed, getCurrentInstance, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 
 interface CommonBindings {
+  disabled: ComputedRef<boolean>
   focus: (options?: FocusOptions) => void
   blur: () => void
   onCompositionStart: (evt: CompositionEvent) => void
@@ -28,6 +29,7 @@ export const useCommonBindings = (
 ): CommonBindings => {
   const { emit } = getCurrentInstance()!
   const valueAccessor = useValueAccessor()
+  const disabled = computed(() => valueAccessor.disabled)
 
   const isComposing = ref(false)
   const onCompositionStart = (evt: CompositionEvent) => {
@@ -70,7 +72,7 @@ export const useCommonBindings = (
   }
 
   const isClearable = computed(() => props.clearable ?? config.clearable)
-  const clearHidden = computed(() => props.disabled || props.readonly || !valueAccessor.value)
+  const clearHidden = computed(() => disabled.value || props.readonly || !valueAccessor.value)
 
   onMounted(() => {
     watchEffect(() => {
@@ -83,6 +85,7 @@ export const useCommonBindings = (
   })
 
   return {
+    disabled,
     focus,
     blur,
     onCompositionStart,

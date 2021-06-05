@@ -13,9 +13,12 @@ import { IxDivider } from './divider'
 import { IxSpace } from './space'
 import { IxRow, IxCol } from './grid'
 // import Navigation
+import { IxPagination } from './pagination'
 import { IxAffix } from './affix'
-import { IxMenu } from './menu'
+import { IxDropdown, IxDropdownButton } from './dropdown'
+import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from './menu'
 // import Data Entry
+import { IxForm, IxFormItem, IxFormWrapper } from './form'
 import { IxCheckbox, IxCheckboxGroup } from './checkbox'
 import { IxInput, IxTextarea } from './input'
 import { IxRadio, IxRadioButton, IxRadioGroup } from './radio'
@@ -24,6 +27,8 @@ import { IxSelect, IxOption, IxOptionGroup } from './select'
 import { IxSwitch } from './switch'
 // import Data Display
 import { IxCollapse, IxCollapsePanel } from './collapse'
+import { IxSteps, IxStep } from './steps'
+import { IxList, IxListItem } from './list'
 import { IxBadge } from './badge'
 import { IxCard } from './card'
 import { IxEmpty } from './empty'
@@ -41,7 +46,7 @@ import { IxSpin } from './spin'
 import { IxProgress } from './progress'
 // import Other
 import { IxBackTop } from './back-top'
-import { IxAnchor, IxLink } from './anchor'
+import { IxAnchor, IxAnchorLink } from './anchor'
 // --- import end ---
 
 const components = [
@@ -57,9 +62,19 @@ const components = [
   IxRow,
   IxCol,
   // components Navigation
-  IxMenu,
+  IxPagination,
   IxAffix,
+  IxDropdown,
+  IxDropdownButton,
+  IxMenu,
+  IxMenuItem,
+  IxMenuItemGroup,
+  IxMenuDivider,
+  IxSubMenu,
   // components Data Entry
+  IxForm,
+  IxFormItem,
+  IxFormWrapper,
   IxCheckbox,
   IxCheckboxGroup,
   IxInput,
@@ -75,6 +90,10 @@ const components = [
   // components Data Display
   IxCollapse,
   IxCollapsePanel,
+  IxSteps,
+  IxStep,
+  IxList,
+  IxListItem,
   IxBadge,
   IxCard,
   IxEmpty,
@@ -94,7 +113,7 @@ const components = [
   // components Other
   IxBackTop,
   IxAnchor,
-  IxLink,
+  IxAnchorLink,
   // --- components end ---
 ]
 

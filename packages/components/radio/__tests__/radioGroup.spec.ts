@@ -3,15 +3,13 @@ import { ref } from 'vue'
 import IxRadio from '../src/Radio.vue'
 import IxRadioButton from '../src/RadioButton.vue'
 import IxRadioGroup from '../src/RadioGroup.vue'
-import { RadioGroupProps } from '../src/types'
+import { RadioGroupInstance, RadioGroupProps } from '../src/types'
 
 describe.skip('RadioGroup.vue', () => {
-  let RadioGroupMount: (
-    options?: MountingOptions<Partial<RadioGroupProps>>,
-  ) => VueWrapper<InstanceType<typeof IxRadioGroup>>
+  let RadioGroupMount: (options?: MountingOptions<Partial<RadioGroupProps>>) => VueWrapper<RadioGroupInstance>
 
   beforeEach(() => {
-    RadioGroupMount = options => mount(IxRadioGroup, { ...options })
+    RadioGroupMount = options => mount<RadioGroupInstance>(IxRadioGroup, { ...options })
   })
   test('render work', () => {
     const wrapper = RadioGroupMount()

@@ -15,7 +15,7 @@ import { computed, defineComponent, inject, nextTick, onUnmounted, watch } from 
 import { isFunction } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { optionPropsDef } from './types'
-import { selectToken, visibleChangeToken } from './utils'
+import { selectToken, visibleChangeToken } from './token'
 
 const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => {
   return option.label.toLowerCase().includes(value.toLowerCase())

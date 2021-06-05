@@ -6,4 +6,4 @@ export interface BackTopProps {
   visibilityHeight?: number
 }
 
-export type BackTopComponent = InstanceType<DefineComponent<BackTopProps>>
+export type BackTopInstance = InstanceType<DefineComponent<BackTopProps>>

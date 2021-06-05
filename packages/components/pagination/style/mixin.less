@@ -1,0 +1,20 @@
+.pagination-size(@height, @width, @margin) {
+  .@{pagination-prefix}-item,
+  .@{pagination-prefix}-total,
+  .@{pagination-prefix}-sizes,
+  .@{pagination-prefix}-jumper {
+    height: @height;
+    line-height: @height;
+  }
+
+  .@{pagination-prefix}-item,
+  .@{pagination-prefix}-jumper {
+    .@{idux-prefix}-input {
+      width: @width;
+    }
+  }
+
+  .@{pagination-prefix}-item {
+    margin-right: @margin;
+  }
+}

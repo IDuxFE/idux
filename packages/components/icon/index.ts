@@ -12,6 +12,6 @@ IxIcon.install = (app: App): void => {
 
 export { IxIcon, addIconDefinitions, fetchFromIconfont }
 
-export type { IconComponent, IconProps, IconDefinition } from './src/types'
+export type { IconInstance, IconProps, IconDefinition } from './src/types'
 
 export * from './src/definitions'

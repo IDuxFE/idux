@@ -5,7 +5,7 @@ export function mdPlugin(): Plugin {
   let vuePlugin: Plugin
 
   return {
-    name: 'vite:md',
+    name: 'idux:md',
     enforce: 'pre',
     configResolved(config) {
       vuePlugin = config.plugins.find(p => p.name === 'vite:vue')!

@@ -45,11 +45,7 @@ export default defineComponent({
     alt: PropTypes.string.def(''),
     objectFit: PropTypes.string.def('fill'),
   },
-  emits: {
-    statusChange: (status: string) => {
-      return !!status
-    },
-  },
+  emits: ['statusChange'],
   setup(props: ImageProps, { emit }) {
     const isShowPreview = ref(false)
     const imageConfig = useGlobalConfig('image')

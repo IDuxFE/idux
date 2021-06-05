@@ -8,4 +8,4 @@ IxImage.install = (app: App): void => {
 
 export { IxImage }
 
-export type { ImageComponent, ImageProps, ImageStatus } from './src/types'
+export type { ImageInstance, ImageProps, ImageStatus } from './src/types'

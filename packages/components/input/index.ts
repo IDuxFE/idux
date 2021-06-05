@@ -13,6 +13,6 @@ IxTextarea.install = (app: App): void => {
 
 export { IxInput, IxTextarea }
 
-export type { InputComponent, InputProps, TextareaComponent, TextareaProps } from './src/types'
+export type { InputInstance, InputProps, TextareaInstance, TextareaProps } from './src/types'
 
 export type { InputSize, TextareaSize, TextareaAutoRows, TextareaResize } from '@idux/components/config'

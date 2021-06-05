@@ -6,6 +6,27 @@ export type OverlayTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manu
 export type OverlayElement = ComponentPublicInstance | HTMLElement
 export type OverlayPlacement = Placement
 
+import { PropTypes } from '@idux/cdk/utils'
+
+export const OverlayTriggerPropDef = PropTypes.oneOf(['click', 'hover', 'focus', 'contextmenu', 'manual'] as const)
+export const OverlayPlacementPropDef = PropTypes.oneOf([
+  'auto',
+  'auto-start',
+  'auto-end',
+  'top',
+  'left',
+  'bottom',
+  'right',
+  'top-start',
+  'top-end',
+  'bottom-start',
+  'bottom-end',
+  'right-start',
+  'right-end',
+  'left-start',
+  'left-end',
+] as const)
+
 export interface OverlayOptions {
   /**
    * Control the visibility of the overlay
@@ -54,7 +75,7 @@ export interface OverlayOptions {
 export interface OverlayInstance<
   TE extends OverlayElement = OverlayElement,
   OE extends OverlayElement = OverlayElement,
-  AE extends OverlayElement = OverlayElement
+  AE extends OverlayElement = OverlayElement,
 > {
   /**
    * Initialize the overlay.

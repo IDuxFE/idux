@@ -186,6 +186,10 @@
 @grid-columns: 24;
 
 // Navigation
+/* dropdown -------------------------- */
+@dropdown-menu-item-height: @height-md;
+@dropdown-menu-item-margin: 0;
+
 /* menu -------------------------- */
 @menu-text-color: @text-color;
 @menu-bg-color: @background-color-component;
@@ -228,6 +232,21 @@
 @menu-collapsed-width: 64px;
 @menu-collapsed-font-size: @font-size-lg;
 
+/* pagination -------------------------- */
+@pagination-font-size: @font-size-md;
+@pagination-item-icon-font-size: @font-size-sm;
+@pagination-item-height-md: @height-md;
+@pagination-item-height-sm: @height-sm;
+@pagination-item-margin-right-md: @spacing-sm;
+@pagination-item-margin-right-sm: 0;
+@pagination-item-input-width-md: 48px;
+@pagination-item-input-width-sm: 40px;
+
+@pagination-item-active-color: @button-primary;
+@pagination-item-active-bg-color: @button-primary-bg;
+@pagination-item-disabled-color: @button-disable-color;
+@pagination-item-disabled-bg-color: @button-disable-bg-color;
+
 // Data Entry
 
 /* checkbox -------------------------- */
@@ -242,14 +261,15 @@
 @checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
 @checkbox-bg-indeterminate-color: @primary;
 @checkbox-indeterminate-width: 8px;
-@checkbox-indeterminate-height: 8px;
+@checkbox-indeterminate-height: 2px;
+@checkbox-indeterminate-tick-color: @white;
 @checkbox-border-checked-color: @primary;
-@checkbox-border-hover-color: @primary;
-@checkbox-border-focus-color: @blue-d30;
+@checkbox-border-hover-color: @primary-l10;
+@checkbox-border-focus-color: @primary-d10;
 @checkbox-bg-checked-color: @primary;
 @checkbox-border-disabled-color: @grey;
 @checkbox-tick-disabled-color: @grey;
-@checkbox-bg-disabled-color: @white;
+@checkbox-bg-disabled-color: @grey-l20;
 @checkbox-bg-indeterminate-disabled-color: @grey;
 @checkbox-label-disabled-color: @grey;
 @checkbox-font-size: @font-size-lg;
@@ -257,7 +277,7 @@
 @checkbox-width: 16px;
 @checkbox-group-line-height: @line-height-base;
 @checkbox-group-checkbox-margin-right: @margin-sm;
-@checkbox-label-padding: 0 @spacing-gutter;
+@checkbox-label-padding: 0 @padding-xl 0 @padding-xs;
 @checkbox-transition-duration: @transition-duration-base;
 
 /* input -------------------------- */
@@ -296,7 +316,7 @@
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-hover-border-color: ~`colorPalette('@{primary}', -10) `;
 @input-active-border-color: @primary;
-@input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 15%);
+@input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 20%);
 @input-disabled-color: @disabled-color;
 @input-disabled-bg-color: @disabled-bg-color;
 
@@ -410,6 +430,7 @@
 @option-container-group-border-top: @border-width-sm @border-style @border-color;
 
 @select-selector-font-size: @font-size-md;
+@select-selector-color: @text-color;
 @select-selector-bg-color: @input-bg-color;
 @select-selector-border-width: @input-border-width;
 @select-selector-border-style: @input-border-style;
@@ -429,7 +450,7 @@
 @select-icon-bg-color: @select-selector-bg-color;
 @select-icon-hover-color: @input-color-secondary;
 @select-icon-font-size: @font-size-sm;
-@select-icon-margin-right: @margin-sm;
+@select-icon-margin-right: @margin-xs;
 @select-icon-transition: @select-selector-transition;
 
 @select-height-lg: @input-height-lg;
@@ -475,6 +496,20 @@
 @card-padding-sm: @padding-sm;
 @card-min-height: 128px;
 @card-bg-color: #fff;
+
+/* list -------------------------- */
+@list-border-color: @border-color;
+@list-border-size: @border-width-sm;
+@list-font-size-md: @font-size-md;
+@list-font-size-sm: @font-size-sm;
+@list-title-font-size-md: @font-size-lg;
+@list-title-font-size-sm: @font-size-md;
+@list-title-font-weight-sm: @font-weight-md;
+@list-hover-shadow: @shadow-bottom-sm;
+@list-padding-lg: @padding-lg;
+@list-padding-sm: @padding-sm;
+@list-min-height: 128px;
+@list-bg-color: #fff;
 
 /* collapse -------------------------- */
 @collapse-panel-border-style: @border-width-sm solid @border-color;
@@ -650,5 +685,22 @@
 @anchor-link-line-height: 1;
 @anchor-link-margin-bottom: 6px;
 @anchor-link-active-color: @primary;
+
+/* Steps -------------------------- */
+@step-highlight-color: @primary;
+@step-tail-width: 9999px;
+@step-tail-height: 1px;
+@step-custom-icon-width: 24px;
+@step-custom-icon-width-small: 20px;
+@step-content-min-height: 48px;
+@step-dot-width: 8px;
+@step-dot-width-active: 10px;
+@step-dot-head-width: 60px;
+@step-dot-active-offset: -1px;
+@step-dot-tail-width: 2px;
+@step-dot-vertical-gutter: 6px;
+@step-percent-gutter: 8px;
+@step-percent-width: 2px;
+@step-percent-bg: #dfdfdf;
 
 // --- end ---

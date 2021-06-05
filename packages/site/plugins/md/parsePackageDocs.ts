@@ -22,14 +22,14 @@ export function parsePackageDocs(id: string, raw: string): string {
   const docsPath = `${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
 
-  const { __content: content, alone = false, ...meta } = loadFront(raw)
+  const { __content: content, single = false, ...meta } = loadFront(raw)
 
   const title = generateTitle({ ...(meta as Meta), path: docsPath })
   const { description, api } = parseContent(content)
   const demoMetas = getDemoMetas(id)
   const componentNames = demoMetas.map(item => item.componentName)
 
-  const examples = generateExample(alone, componentNames)
+  const examples = generateExample(single, componentNames)
   const docsTemplate = wrapperDocsTemplate(
     generateToc(demoMetas, language, moduleName, componentName),
     generateHeader(title, description, language),
@@ -91,11 +91,11 @@ function getDemoMetas(id: string) {
   return demoMates
 }
 
-function generateExample(isAlone: boolean, components: string[]) {
+function generateExample(single: boolean, components: string[]) {
   let firstZhPart = ''
   let secondZhPart = ''
   components.forEach((item, index) => {
-    if (isAlone) {
+    if (single) {
       firstZhPart += `<${item} />`
     } else {
       if (index % 2 === 0) {
@@ -105,7 +105,7 @@ function generateExample(isAlone: boolean, components: string[]) {
       }
     }
   })
-  return getExampleTemplate(isAlone, firstZhPart, secondZhPart)
+  return getExampleTemplate(single, firstZhPart, secondZhPart)
 }
 
 function wrapperDocsTemplate(toc: string, header: string, examples: string, api: string): string {

@@ -23,6 +23,7 @@ export const useClasses = (
   props: MenuProps,
   theme: ComputedRef<string>,
   mode: ComputedRef<MenuMode>,
+  isDropdown: boolean,
 ): ComputedRef<Record<string, boolean>> => {
   return computed(() => {
     return {
@@ -30,6 +31,7 @@ export const useClasses = (
       [`ix-menu-${theme.value}`]: true,
       [`ix-menu-${mode.value}`]: true,
       'ix-menu-collapsed': props.collapsed,
+      'ix-menu-dropdown': isDropdown,
     }
   })
 }
@@ -47,9 +49,10 @@ export const useMenuMode = (props: MenuProps): ComputedRef<MenuMode> => {
 export interface UseMenuSelected {
   selectedIds: Ref<(string | number)[]>
   menuItemClick: MenuItemClickFn
+  childMenuItemClick: () => void
 }
 
-export const useMenuSelected = (props: MenuProps): UseMenuSelected => {
+export const useMenuSelected = (props: MenuProps, setOpenState?: (open: boolean) => void): UseMenuSelected => {
   const { emit } = getCurrentInstance()!
   const selectedIds = ref(props.selectedIds)
   watch(selectedIds, ids => emit('update:selectedIds', ids))
@@ -58,10 +61,12 @@ export const useMenuSelected = (props: MenuProps): UseMenuSelected => {
     value => (selectedIds.value = value),
   )
 
-  const menuItemClick = (cid: string | number, item: MenuItemProps) => {
-    emit('click', { cid, item })
+  const menuItemClick = (evt: Event, cid: string | number, item: MenuItemProps) => {
+    emit('click', { evt, cid, item })
 
-    if (!props.disabled) {
+    // dropdown 默认为 false, 其他情况默认为 true
+    const selectable = props.selectable ?? !setOpenState
+    if (selectable) {
       const rawSelectedIds = toRaw(selectedIds.value)
       const selectedIndex = rawSelectedIds.indexOf(cid)
       if (props.multiple) {
@@ -78,7 +83,12 @@ export const useMenuSelected = (props: MenuProps): UseMenuSelected => {
       }
     }
   }
-  return { selectedIds, menuItemClick }
+
+  const childMenuItemClick = () => {
+    setOpenState?.(false)
+  }
+
+  return { selectedIds, menuItemClick, childMenuItemClick }
 }
 
 export interface UseMenuOpened {

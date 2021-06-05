@@ -14,10 +14,10 @@ IxTimelineItem.install = (app: App): void => {
 export { IxTimeline, IxTimelineItem }
 
 export type {
-  TimelineComponent,
+  TimelineInstance,
   TimelineProps,
   TimelinePosition,
-  TimelineItemComponent,
+  TimelineItemInstance,
   TimelineItemProps,
   TimelineItemPosition,
 } from './src/types'

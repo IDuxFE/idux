@@ -22,7 +22,7 @@ export const ${camelCaseName}PropsDef = {
   testProp: PropTypes.string,
 }
 
-export type ${upperFirstName}Component = InstanceType<DefineComponent<${upperFirstName}Props>>
+export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 
@@ -77,7 +77,7 @@ Ix${compName}.install = (app: App): void => {
 
 export { Ix${compName} }
 
-export type { ${compName}Component, ${compName}Props } from './src/types'
+export type { ${compName}Instance, ${compName}Props } from './src/types'
 `
 }
 
@@ -85,13 +85,13 @@ export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}.vue'
-import { ${compName}Props } from '../src/types'
+import { ${compName}Instance, ${compName}Props } from '../src/types'
 
 describe('${compName}.vue', () => {
-  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<InstanceType<typeof Ix${compName}>>
+  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
 
   beforeEach(() => {
-    ${compName}Mount = options => mount(Ix${compName}, { ...options })
+    ${compName}Mount = options => mount<${compName}Instance>(Ix${compName}, { ...options })
   })
 
   renderWork(Ix${compName})

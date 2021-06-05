@@ -20,7 +20,7 @@
     <ix-sub-menu-inline-content v-if="mode === 'inline'" :mode="mode" :opened="opened">
       <slot />
     </ix-sub-menu-inline-content>
-    <ix-portal v-else target="ix-menu-overlay-container">
+    <ix-portal v-else target="ix-menu-container">
       <transition>
         <ix-sub-menu-overlay-content
           v-show="visibility"
@@ -65,7 +65,7 @@ export default defineComponent({
   components: { IxSubMenuTitle, IxSubMenuInlineContent, IxSubMenuOverlayContent, IxPortal },
   props: subMenuPropsDef,
   emits: ['click'],
-  setup(props: SubMenuProps) {
+  setup(props: SubMenuProps, { emit }) {
     const { uid } = getCurrentInstance()!
     const cid = computed(() => props.cid ?? uid)
 
@@ -102,8 +102,11 @@ export default defineComponent({
     const paddingLeft = usePaddingLeft(mode, menuContext.indent, level, menuItemGroupContext)
     const { triggerRef, overlayRef, visibility, overlayWidth } = useSubMenuOverlay(mode, opened)
 
-    const onTitleClick = () => {
-      setOpen(!opened.value)
+    const onTitleClick = (evt: Event) => {
+      if (!props.disabled) {
+        setOpen(!opened.value)
+        emit('click', { evt, cid: cid.value })
+      }
     }
 
     const onMouseOverlayChang = (value: boolean) => {

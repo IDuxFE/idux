@@ -8,4 +8,4 @@ IxResult.install = (app: App): void => {
 
 export { IxResult }
 
-export type { ResultComponent, ResultProps } from './src/types'
+export type { ResultInstance, ResultProps } from './src/types'

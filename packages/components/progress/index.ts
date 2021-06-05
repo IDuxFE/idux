@@ -8,4 +8,4 @@ IxProgress.install = (app: App): void => {
 
 export { IxProgress }
 
-export type { ProgressComponent, ProgressProps } from './src/types'
+export type { ProgressInstance, ProgressProps } from './src/types'

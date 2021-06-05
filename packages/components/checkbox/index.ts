@@ -13,4 +13,4 @@ IxCheckboxGroup.install = (app: App): void => {
 
 export { IxCheckbox, IxCheckboxGroup }
 
-export type { CheckboxComponent, CheckboxProps, CheckboxGroupComponent, CheckboxGroupProps } from './src/types'
+export type { CheckboxInstance, CheckboxProps, CheckboxGroupInstance, CheckboxGroupProps } from './src/types'
