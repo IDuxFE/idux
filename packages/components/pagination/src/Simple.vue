@@ -27,21 +27,19 @@
 </template>
 
 <script lang="ts">
-import type { PaginationSimpleProps } from './types'
-
 import { defineComponent, ref, watchEffect } from 'vue'
 import { toNumber } from '@idux/cdk/utils'
 import { PaginationItemType } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
 import IxPaginationItem from './item'
-import { paginationSimplePropsDef } from './types'
+import { paginationSimpleProps } from './types'
 
 export default defineComponent({
   name: 'IxPaginationSimple',
   components: { IxPaginationItem, IxInput },
-  props: paginationSimplePropsDef,
+  props: paginationSimpleProps,
   emits: ['pageIndexChange'],
-  setup(props: PaginationSimpleProps, { emit }) {
+  setup(props, { emit }) {
     const lastIndex = ref(0)
     const isFirstIndex = ref(false)
     const isLastIndex = ref(false)

@@ -1,12 +1,12 @@
 import { defineComponent, cloneVNode } from 'vue'
-import { virtualItemPropsDef } from './types'
+import { virtualItemProps } from './types'
 
 export default defineComponent({
   name: 'IxVirtualItem',
-  props: virtualItemPropsDef,
+  props: virtualItemProps,
   render() {
     const { setRef, $slots } = this
     const children = $slots.default?.()
-    return children?.length ? cloneVNode(children[0], { ref: setRef }) : null
+    return children?.length ? cloneVNode(children[0], { ref: setRef as any }) : null
   },
 })

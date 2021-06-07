@@ -1,43 +1,35 @@
 import type { Component, DefineComponent, VNodeTypes } from 'vue'
-import type { VueTypeDef } from 'vue-types'
 
-import { PropTypes } from '@idux/cdk/utils'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface VirtualItemProps {
-  setRef: (element: HTMLElement) => void
+export const virtualItemProps = {
+  setRef: IxPropTypes.func<(element: HTMLElement) => void>().def(() => {}),
 }
 
-export const virtualItemPropsDef = {
-  setRef: PropTypes.func.def(() => {}),
-}
+export type VirtualItemProps = IxExtractPropTypes<typeof virtualItemProps>
 
-export interface VirtualFillerProps {
+export const virtualFillerProps = {
   /** Virtual filler height. Should be `count * itemMinHeight` */
-  scrollHeight?: number
+  scrollHeight: IxPropTypes.number,
   /** Set offset of visible items. Should be the top of start item position */
-  offset?: number
+  offset: IxPropTypes.number,
+  onResize: IxPropTypes.func<() => void>().isRequired,
 }
 
-export const virtualFillerPropsDef = {
-  scrollHeight: PropTypes.number,
-  offset: PropTypes.number,
-}
+export type VirtualFillerProps = IxExtractPropTypes<typeof virtualFillerProps>
 
 export type VirtualFillerInstance = InstanceType<DefineComponent<VirtualFillerProps>>
 
-export interface VirtualScrollBarProps {
-  count: number
-  height: number
-  scrollHeight: number
-  scrollTop: number
+export const virtualScrollBarProps = {
+  count: IxPropTypes.number.isRequired,
+  height: IxPropTypes.number.isRequired,
+  scrollHeight: IxPropTypes.number.def(0),
+  scrollTop: IxPropTypes.number.isRequired,
+  onScroll: IxPropTypes.func<(scrollTop: number) => void>().isRequired,
+  onScrollStateChange: IxPropTypes.func<(dragging: boolean) => void>().isRequired,
 }
 
-export const virtualScrollBarPropsDef = {
-  count: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  scrollHeight: PropTypes.number.isRequired,
-  scrollTop: PropTypes.number.isRequired,
-}
+export type VirtualScrollBarProps = IxExtractPropTypes<typeof virtualScrollBarProps>
 
 export interface VirtualScrollBarBindings {
   delayHidden: () => void
@@ -45,41 +37,21 @@ export interface VirtualScrollBarBindings {
 
 export type VirtualScrollBarInstance = InstanceType<DefineComponent<VirtualScrollBarProps, VirtualScrollBarBindings>>
 
-export type VirtualItemRenderFn<T = Record<string, unknown>> = (option: { item: T; index: number }) => VNodeTypes
+export type VirtualItemRenderFn<T = unknown> = (option: { item: T; index: number }) => VNodeTypes
 
-export interface VirtualListProps<T = Record<string, unknown>> {
-  component: string | Component
-  data: T[]
-  /** If not match virtual scroll condition, Set List use height of container. */
-  fullHeight: boolean
-  height: number
-  itemHeight: number
-  itemKey: string | ((item: T) => string | number)
-  itemRender?: VirtualItemRenderFn
-  /** Set `false` will always use real scroll instead of virtual one */
-  virtual: boolean
+export const virtualListProps = {
+  component: IxPropTypes.oneOfType([String, IxPropTypes.object<Component>()]).def('div'),
+  data: IxPropTypes.array().def(() => []),
+  fullHeight: IxPropTypes.bool.def(true),
+  height: IxPropTypes.number.def(0),
+  itemHeight: IxPropTypes.number.def(0),
+  itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => string | number>()]).isRequired,
+  itemRender: IxPropTypes.func<VirtualItemRenderFn>(),
+  virtual: IxPropTypes.bool.def(true),
+  onScroll: IxPropTypes.func<(evt: Event) => void>(),
 }
 
-export const virtualListPropsDef = {
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).def('div') as VueTypeDef<string | Component> & {
-    required: true
-  },
-  data: PropTypes.array.def(() => []) as VueTypeDef<Record<string, unknown>[]> & { required: true },
-  fullHeight: PropTypes.bool.def(true),
-  height: PropTypes.number.def(0),
-  itemHeight: PropTypes.number.def(0),
-  itemKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired as VueTypeDef<
-    string | ((item: Record<string, unknown>) => string | number)
-  > & { required: true },
-  itemRender: PropTypes.func,
-  virtual: PropTypes.bool.def(true),
-}
-
-export interface VirtualListBindings {
-  scrollTo: ScrollToFn
-}
-
-export type VirtualListInstance = InstanceType<DefineComponent<VirtualListProps, VirtualListBindings>>
+export type VirtualListProps = IxExtractPropTypes<typeof virtualListProps>
 
 export type ScrollToAlign = 'top' | 'bottom' | 'auto'
 
@@ -96,3 +68,9 @@ export type ScrollToOptions =
     }
 
 export type ScrollToFn = (option?: number | ScrollToOptions) => void
+
+export interface VirtualListBindings {
+  scrollTo: ScrollToFn
+}
+
+export type VirtualListInstance = InstanceType<DefineComponent<VirtualListProps, VirtualListBindings>>

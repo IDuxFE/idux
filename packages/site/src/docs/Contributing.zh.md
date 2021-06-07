@@ -81,7 +81,7 @@ order: 11
 - 文件命名：`PascalCase`
 - props
   - 命名：`camelCase`
-  - 默认值：请使用 `@idux/cdk/utils` 中的 `PropTypes`, 请注意：在没有显示的指定默认值的情况下，所有类型的默认值都为 `undefined`, 这与 vue compiler 默认的行为有所区别。
+  - 默认值：请使用 `@idux/cdk/utils` 中的 `IxPropTypes`, 请注意：在没有显示的指定默认值的情况下，所有类型的默认值都为 `undefined`, 这与 vue compiler 默认的行为有所区别。
 - slots
   - 命名：`camelCase`
   - 如果与某个 props 的功能一致时，需要跟该 props 同名

@@ -11,12 +11,12 @@ import { defineComponent, watchEffect, ref, computed, provide } from 'vue'
 import { observeBreakpoint, Breakpoints, convertMediaToScreen } from '@idux/cdk/breakpoint'
 import { useGlobalConfig } from '@idux/components/config'
 import { haveBreakpointGutter, normalizeGutter, gutterToken } from './gutter'
-import { rowPropsDef } from './types'
+import { rowProps } from './types'
 
 export default defineComponent({
   name: 'IxRow',
-  props: rowPropsDef,
-  setup(props: RowProps) {
+  props: rowProps,
+  setup(props) {
     const rowConfig = useGlobalConfig('row')
 
     const screens = ref<ScreenMatch>({

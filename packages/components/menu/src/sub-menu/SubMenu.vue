@@ -49,7 +49,7 @@ import IxSubMenuTitle from './SubMenuTitle.vue'
 import IxSubMenuInlineContent from './SubMenuInlineContent.vue'
 import IxSubMenuOverlayContent from './SubMenuOverlayContent.vue'
 
-import { subMenuPropsDef } from '../types'
+import { subMenuProps } from '../types'
 import { menuItemGroupToken, menuToken, subMenuToken } from '../token'
 import { usePaddingLeft } from '../usePaddingLeft'
 import {
@@ -63,7 +63,7 @@ import {
 export default defineComponent({
   name: 'IxSubMenu',
   components: { IxSubMenuTitle, IxSubMenuInlineContent, IxSubMenuOverlayContent, IxPortal },
-  props: subMenuPropsDef,
+  props: subMenuProps,
   emits: ['click'],
   setup(props: SubMenuProps, { emit }) {
     const { uid } = getCurrentInstance()!

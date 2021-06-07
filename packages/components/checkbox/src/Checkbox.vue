@@ -32,24 +32,17 @@
 import type { CheckboxProps, CheckValue } from './types'
 
 import { defineComponent, computed, ComputedRef, inject, Ref, ref, watch, getCurrentInstance } from 'vue'
-import { PropTypes, withUndefined, isArray, hasSlot } from '@idux/cdk/utils'
+import { isArray, hasSlot } from '@idux/cdk/utils'
 import { useAttrs } from '@idux/components/utils/'
 import { checkboxGroupInjectionKey, subjectInjectKey } from './checkbox'
+import { checkboxProps } from './types'
 
 export default defineComponent({
   name: 'IxCheckbox',
   inheritAttrs: false,
-  props: {
-    checked: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])),
-    disabled: PropTypes.bool.def(false),
-    indeterminate: PropTypes.bool.def(false),
-    readonly: PropTypes.bool.def(false),
-    trueValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]).def(true),
-    falseValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]).def(false),
-    value: PropTypes.string,
-  },
+  props: checkboxProps,
   emits: ['update:checked', 'change'],
-  setup(props: CheckboxProps, { slots, emit }) {
+  setup(props, { slots, emit }) {
     const groupSubject = inject(subjectInjectKey, null)
     const checkeValue = ref(props.checked ?? props.falseValue)
 

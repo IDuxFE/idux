@@ -14,7 +14,7 @@ import type { OptionProps, SelectFilterFn } from './types'
 import { computed, defineComponent, inject, nextTick, onUnmounted, watch } from 'vue'
 import { isFunction } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
-import { optionPropsDef } from './types'
+import { optionProps } from './types'
 import { selectToken, visibleChangeToken } from './token'
 
 const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => {
@@ -24,8 +24,8 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => 
 export default defineComponent({
   name: 'IxOption',
   components: { IxCheckbox },
-  props: optionPropsDef,
-  setup(props: OptionProps) {
+  props: optionProps,
+  setup(props) {
     const {
       selectProps,
       inputValue,

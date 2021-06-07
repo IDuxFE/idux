@@ -8,26 +8,21 @@
   </div>
 </template>
 <script lang="ts">
+import type { TagConfig } from '@idux/components/config'
+import type { TagProps } from './types'
+
 import { computed, defineComponent } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { TagProps } from './types'
+import { useGlobalConfig } from '@idux/components/config'
 import { isPresetColor, isStatusColor } from '@idux/components/utils'
-import { PropTypes } from '@idux/cdk/utils'
-import { TagConfig, useGlobalConfig } from '@idux/components/config'
+import { tagProps } from './types'
 
 export default defineComponent({
   name: 'IxTag',
   components: { IxIcon },
-  props: {
-    closable: PropTypes.bool,
-    icon: PropTypes.string,
-    color: PropTypes.string,
-    checked: PropTypes.bool,
-    checkAble: PropTypes.bool,
-    isRound: PropTypes.bool,
-  },
+  props: tagProps,
   emits: ['close'],
-  setup(props: TagProps, { emit }) {
+  setup(props, { emit }) {
     const isPresetOrStatusColor = computed(() => {
       const color = props.color
       return isPresetColor(color) || isStatusColor(color)

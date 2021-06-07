@@ -15,8 +15,8 @@
     <ix-col :span="4"> col-4 </ix-col>
   </ix-row>
 
-  <ix-divider position="left" dashed>Justify right</ix-divider>
-  <ix-row justify="right">
+  <ix-divider position="left" dashed>Justify end</ix-divider>
+  <ix-row justify="end">
     <ix-col :span="4"> col-4 </ix-col>
     <ix-col :span="4"> col-4 </ix-col>
     <ix-col :span="4"> col-4 </ix-col>

@@ -49,30 +49,18 @@ import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
-import { controlPropTypeDef } from '@idux/cdk/forms'
-import { PropTypes } from '@idux/cdk/utils'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { useAttrs } from '@idux/components/utils'
 import { IxIcon } from '@idux/components/icon'
+import { inputProps } from './types'
 import { useCommonBindings } from './useCommonBindings'
 
 export default defineComponent({
   name: 'IxInput',
   components: { IxIcon },
   inheritAttrs: false,
-  props: {
-    value: PropTypes.string,
-    control: controlPropTypeDef,
-    disabled: PropTypes.bool.def(false),
-    readonly: PropTypes.bool.def(false),
-    addonAfter: PropTypes.string,
-    addonBefore: PropTypes.string,
-    suffix: PropTypes.string,
-    prefix: PropTypes.string,
-    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-    clearable: PropTypes.bool,
-    borderless: PropTypes.bool,
-  },
+  props: inputProps,
   emits: [
     'update:value',
     'compositionStart',
@@ -84,7 +72,7 @@ export default defineComponent({
     'prefixClick',
     'afterClear',
   ],
-  setup(props: InputProps, { emit }) {
+  setup(props, { emit }) {
     const attrs = useAttrs()
     const inputConfig = useGlobalConfig('input')
     const inputRef = ref(null as unknown as HTMLInputElement)

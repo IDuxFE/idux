@@ -1,19 +1,19 @@
 import type { MessageType } from './types'
 
 import { computed, defineComponent, isVNode, onMounted, onUnmounted, onUpdated } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
   name: 'IxMessageItem',
   props: {
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.vNode]).def(''),
-    duration: PropTypes.number,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.vNode]),
-    id: PropTypes.string.isRequired,
-    destroyOnHover: PropTypes.bool,
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'error', 'loading'] as const).isRequired,
+    content: IxPropTypes.oneOfType([String, IxPropTypes.vNode]).def(''),
+    duration: IxPropTypes.number,
+    icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+    id: IxPropTypes.string.isRequired,
+    destroyOnHover: IxPropTypes.bool,
+    type: IxPropTypes.oneOf<MessageType>(['info', 'success', 'warning', 'error', 'loading']).isRequired,
   },
   emits: ['destroy'],
   setup(props, { emit }) {

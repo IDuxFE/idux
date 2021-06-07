@@ -3,69 +3,47 @@ import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/config'
 import type { ColProps } from '@idux/components/grid'
 
-import { controlPropTypeDef } from '@idux/cdk/forms'
-import { PropTypes, withUndefined } from '@idux/cdk/utils'
-import { object } from 'vue-types'
+import { controlProp } from '@idux/cdk/forms'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export type ColType = string | number | ColProps
-const colPropTypeDef = withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.number, object<ColProps>()]))
+const colProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<ColProps>()])
 
-export interface FormProps {
-  colonless?: boolean
-  control?: string | number | AbstractControl
-  controlCol?: ColType
-  hasFeedback: boolean
-  labelAlign?: FormLabelAlign
-  labelCol?: ColType
-  layout?: FormLayout
-  size?: FormSize
+export const formProps = {
+  colonless: IxPropTypes.bool,
+  control: controlProp,
+  controlCol: colProp,
+  hasFeedback: IxPropTypes.bool.def(false),
+  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['left', 'right']),
+  labelCol: colProp,
+  layout: IxPropTypes.oneOf<FormLayout>(['horizontal', 'vertical', 'inline']),
+  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
 }
 
-export const formPropsDef = {
-  colonless: PropTypes.bool,
-  control: controlPropTypeDef,
-  controlCol: colPropTypeDef,
-  hasFeedback: PropTypes.bool.def(false),
-  labelAlign: PropTypes.oneOf(['left', 'right'] as const),
-  labelCol: colPropTypeDef,
-  layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'] as const),
-  size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-}
+export type FormProps = IxExtractPropTypes<typeof formProps>
 
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
+
 export type FormMessageFn = (control: AbstractControl | null) => string
-export type FormStatusMessage = Partial<Record<ValidateStatus, string | FormMessageFn>>
+export type FormMessage = Partial<Record<ValidateStatus, string | FormMessageFn>>
 
-export interface FormItemProps {
-  colonless?: boolean
-  control?: string | number | AbstractControl
-  controlCol?: ColType
-  extra?: string
-  hasFeedback?: boolean
-  label?: string
-  labelAlign?: FormLabelAlign
-  labelCol?: ColType
-  labelFor?: string
-  labelTooltip?: string
-  required: boolean
-  message?: string | FormMessageFn | FormStatusMessage
-  status?: ValidateStatus
+export const formItemProps = {
+  colonless: IxPropTypes.bool,
+  control: controlProp,
+  controlCol: colProp,
+  extra: IxPropTypes.string,
+  hasFeedback: IxPropTypes.bool,
+  label: IxPropTypes.string,
+  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['left', 'right']),
+  labelCol: colProp,
+  labelFor: IxPropTypes.string,
+  labelTooltip: IxPropTypes.string,
+  required: IxPropTypes.bool.def(false),
+  message: IxPropTypes.oneOfType([String, IxPropTypes.func<FormMessageFn>(), IxPropTypes.object<FormMessage>()]),
+  status: IxPropTypes.oneOf<ValidateStatus>(['valid', 'invalid', 'validating']),
 }
 
-export const formItemPropsDef = {
-  colonless: PropTypes.bool,
-  control: controlPropTypeDef,
-  controlCol: colPropTypeDef,
-  extra: PropTypes.string,
-  hasFeedback: PropTypes.bool,
-  label: PropTypes.string,
-  labelAlign: PropTypes.oneOf(['left', 'right'] as const),
-  labelCol: colPropTypeDef,
-  labelFor: PropTypes.string,
-  labelTooltip: PropTypes.string,
-  required: PropTypes.bool.def(false),
-  status: PropTypes.oneOf(['valid', 'invalid', 'validating'] as const),
-  message: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.func, object<FormStatusMessage>()])),
-}
+export type FormItemProps = IxExtractPropTypes<typeof formItemProps>
 
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
+
+export type ColType = string | number | ColProps

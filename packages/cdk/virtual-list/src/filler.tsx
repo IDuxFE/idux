@@ -4,13 +4,12 @@ import type { VirtualFillerProps } from './types'
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { isNil, offResize, onResize } from '@idux/cdk/utils'
-import { virtualFillerPropsDef } from './types'
+import { virtualFillerProps } from './types'
 
 export default defineComponent({
   name: 'IxVirtualFiller',
-  props: virtualFillerPropsDef,
-  emits: ['resize'],
-  setup(props: VirtualFillerProps, { emit }) {
+  props: virtualFillerProps,
+  setup(props, { emit }) {
     const styles = useStyles(props)
     const { innerRef } = useInnerResize(emit)
     return { styles, innerRef }

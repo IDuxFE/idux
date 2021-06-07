@@ -57,7 +57,7 @@
 </template>
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { OptionProps, SelectProps } from './types'
+import type { OptionProps } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
@@ -67,7 +67,7 @@ import { IxIcon } from '@idux/components/icon'
 import IxSelectItem from './SelectItem.vue'
 import IxSelectInput from './SelectInput.vue'
 import IxOptionContainer from './OptionContainer.vue'
-import { selectPropsDef } from './types'
+import { selectProps } from './types'
 import {
   useSelectClasses,
   useSelectInput,
@@ -81,7 +81,7 @@ export default defineComponent({
   name: 'IxSelect',
   components: { IxPortal, IxIcon, IxSelectItem, IxSelectInput, IxOptionContainer },
   directives: { clickOutside },
-  props: selectPropsDef,
+  props: selectProps,
   emits: [
     'update:value',
     'update:open',
@@ -95,7 +95,7 @@ export default defineComponent({
     'input',
     'inputChange',
   ],
-  setup(props: SelectProps, { emit }) {
+  setup(props, { emit }) {
     const config = useGlobalConfig('select')
     const selectedOptions = ref<OptionProps[]>([])
 

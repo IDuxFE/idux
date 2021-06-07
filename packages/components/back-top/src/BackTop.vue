@@ -9,25 +9,20 @@
 </template>
 
 <script lang="ts">
-import type { BackTopProps } from './types'
-
 import { computed, defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
 import throttle from 'lodash/throttle'
 import { IxIcon } from '@idux/components/icon'
-import { PropTypes, withUndefined, on, off, scrollToTop, getScroll } from '@idux/cdk/utils'
+import { on, off, scrollToTop, getScroll } from '@idux/cdk/utils'
 import { getTarget } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { backTopProps } from './types'
 
 export default defineComponent({
   name: 'IxBackTop',
   components: { IxIcon },
-  props: {
-    target: withUndefined(PropTypes.oneOfType([PropTypes.string, HTMLElement])),
-    duration: PropTypes.number,
-    visibilityHeight: PropTypes.number,
-  },
+  props: backTopProps,
   emits: ['click'],
-  setup(props: BackTopProps, { emit }) {
+  setup(props, { emit }) {
     const backTopConfig = useGlobalConfig('backTop')
     const eventType = 'scroll'
     const visible = ref(false)

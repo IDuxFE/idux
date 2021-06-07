@@ -17,12 +17,12 @@ import { computed, defineComponent, getCurrentInstance, inject, watch } from 'vu
 import { IxIcon } from '@idux/components/icon'
 import { usePaddingLeft } from '../usePaddingLeft'
 import { menuItemGroupToken, menuToken, subMenuToken } from '../token'
-import { menuItemPropsDef } from '../types'
+import { menuItemProps } from '../types'
 
 export default defineComponent({
   name: 'IxMenuItem',
   components: { IxIcon },
-  props: menuItemPropsDef,
+  props: menuItemProps,
   setup(props: MenuItemProps) {
     const { uid } = getCurrentInstance()!
     const cid = computed(() => props.cid ?? uid)

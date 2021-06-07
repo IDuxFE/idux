@@ -19,22 +19,20 @@
 </template>
 
 <script lang="ts">
-import type { DropdownProps } from './types'
-
 import { defineComponent } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { IxPortal } from '@idux/cdk/portal'
 import { IxIcon } from '@idux/components/icon'
-import { dropdownPropsDef } from './types'
+import { dropdownProps } from './types'
 import { useDropdownConfig, useDropdownOpenState, useDropdownOverlay } from './useDropdown'
 
 export default defineComponent({
   name: 'IxDropdown',
   components: { IxPortal, IxIcon },
   directives: { clickOutside },
-  props: dropdownPropsDef,
+  props: dropdownProps,
   emits: ['update:visible'],
-  setup(props: DropdownProps) {
+  setup(props) {
     const { placement, trigger } = useDropdownConfig(props)
     const { openState, onMouseOverlayChang } = useDropdownOpenState(trigger)
     const { triggerRef, overlayRef, visibility, onClickOutside } = useDropdownOverlay(

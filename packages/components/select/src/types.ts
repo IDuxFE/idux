@@ -1,68 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DefineComponent } from 'vue'
-import { AbstractControl, controlPropTypeDef } from '@idux/cdk/forms'
 
-import { PropTypes } from '@idux/cdk/utils'
-
-export interface SelectOption {
-  label?: string
-  value?: any
-  disabled?: boolean
-  groupLabel?: string
-  [key: string]: any
-}
-
-export interface SelectProps {
-  value?: any
-  control?: string | number | AbstractControl
-  open: boolean
-  autofocus: boolean
-  borderless?: boolean
-  clearable?: boolean
-  compareWith: (o1: any, o2: any) => boolean
-  disabled: boolean
-  empty?: string
-  filterOption: boolean | SelectFilterFn
-  inputable?: boolean
-  labelKey?: string
-  maxLabelCount: number
-  multiple: boolean
-  multipleLimit: number
-  overlayClass?: string
-  options: SelectOption[]
-  placeholder?: string
-  searchable?: boolean
-  size?: 'large' | 'medium' | 'small'
-  suffix: string
-  valueKey?: string
-}
+import { controlProp } from '@idux/cdk/forms'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { FormSize } from '@idux/components/config'
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
-export const selectPropsDef = {
-  value: PropTypes.any,
-  open: PropTypes.bool.def(false),
-  autofocus: PropTypes.bool.def(false),
-  borderless: PropTypes.bool,
-  clearable: PropTypes.bool,
-  compareWith: PropTypes.func.def(defaultCompareWith),
-  control: controlPropTypeDef,
-  disabled: PropTypes.bool.def(false),
-  overlayClass: PropTypes.string,
-  empty: PropTypes.string,
-  filterOption: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]).def(true),
-  inputable: PropTypes.bool,
-  maxLabelCount: PropTypes.number.def(Number.MAX_SAFE_INTEGER),
-  multiple: PropTypes.bool.def(false),
-  multipleLimit: PropTypes.number.def(Number.MAX_SAFE_INTEGER),
-  labelKey: PropTypes.string,
-  options: PropTypes.array as any,
-  placeholder: PropTypes.string,
-  searchable: PropTypes.bool,
-  size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-  suffix: PropTypes.string,
-  valueKey: PropTypes.string,
+export const selectProps = {
+  value: IxPropTypes.any,
+  open: IxPropTypes.bool.def(false),
+  autofocus: IxPropTypes.bool.def(false),
+  borderless: IxPropTypes.bool,
+  clearable: IxPropTypes.bool,
+  compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareWith),
+  control: controlProp,
+  disabled: IxPropTypes.bool.def(false),
+  overlayClass: IxPropTypes.string,
+  empty: IxPropTypes.string,
+  filterOption: IxPropTypes.oneOfType([IxPropTypes.func<SelectFilterFn>(), Boolean]).def(true),
+  inputable: IxPropTypes.bool,
+  maxLabelCount: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
+  multiple: IxPropTypes.bool.def(false),
+  multipleLimit: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
+  labelKey: IxPropTypes.string,
+  options: IxPropTypes.array<SelectOption[]>(),
+  placeholder: IxPropTypes.string,
+  searchable: IxPropTypes.bool,
+  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  suffix: IxPropTypes.string,
+  valueKey: IxPropTypes.string,
 }
+
+export type SelectProps = IxExtractPropTypes<typeof selectProps>
 
 export interface SelectBindings {
   blur: () => void
@@ -71,30 +41,31 @@ export interface SelectBindings {
 
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export interface OptionProps {
-  disabled: boolean
-  label: string
-  value: any
+export const optionProps = {
+  disabled: IxPropTypes.bool.def(false),
+  label: IxPropTypes.string.isRequired,
+  value: IxPropTypes.any.isRequired,
 }
 
-export const optionPropsDef = {
-  disabled: PropTypes.bool.def(false),
-  label: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired,
-}
+export type OptionProps = IxExtractPropTypes<typeof optionProps>
 
 export type OptionInstance = InstanceType<DefineComponent<OptionProps>>
 
-export interface OptionGroupProps {
-  disabled: boolean
-  label: string
+export const optionGroupProps = {
+  label: IxPropTypes.string.isRequired,
+  options: IxPropTypes.array<SelectOption>().def(() => []),
 }
 
-export const optionGroupPropsDef = {
-  label: PropTypes.string.isRequired,
-  options: PropTypes.array.def([]),
-}
+export type OptionGroupProps = IxExtractPropTypes<typeof optionGroupProps>
 
 export type OptionGroupInstance = InstanceType<DefineComponent<OptionGroupProps>>
+
+export interface SelectOption {
+  label?: string
+  value?: any
+  disabled?: boolean
+  groupLabel?: string
+  [key: string]: any
+}
 
 export type SelectFilterFn = (searchValue: string, option: OptionProps) => boolean

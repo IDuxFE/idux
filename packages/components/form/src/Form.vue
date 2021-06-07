@@ -12,13 +12,13 @@ import { computed, ComputedRef, defineComponent, provide, toRef, watchEffect } f
 import { provideControl, useValueControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 import { formToken } from './token'
-import { formPropsDef } from './types'
+import { formProps } from './types'
 
 export default defineComponent({
   name: 'IxForm',
-  props: formPropsDef,
+  props: formProps,
 
-  setup(props: FormProps) {
+  setup(props) {
     const control = useValueControl()
     watchEffect(() => provideControl(control.value!))
 

@@ -7,19 +7,17 @@
 </template>
 
 <script lang="ts">
-import type { PaginationJumperProps } from './types'
-
 import { defineComponent } from 'vue'
 import { toNumber } from '@idux/cdk/utils'
 import { IxInput } from '@idux/components/input'
-import { paginationJumperPropsDef } from './types'
+import { paginationJumperProps } from './types'
 
 export default defineComponent({
   name: 'IxPaginationJumper',
   components: { IxInput },
-  props: paginationJumperPropsDef,
+  props: paginationJumperProps,
   emits: ['pageIndexChange'],
-  setup(props: PaginationJumperProps, { emit }) {
+  setup(props, { emit }) {
     const jumpToIndex = (evt: KeyboardEvent) => {
       const target = evt.target as HTMLInputElement
       const index = Math.floor(toNumber(target.value, props.pageIndex))

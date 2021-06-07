@@ -4,13 +4,12 @@ import type { VirtualScrollBarProps } from './types'
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import throttle from 'lodash/throttle'
 import { on, off, rAF, cancelRAF } from '@idux/cdk/utils'
-import { virtualScrollBarPropsDef } from './types'
+import { virtualScrollBarProps } from './types'
 
 export default defineComponent({
   name: 'IxVirtualScrollBar',
-  props: virtualScrollBarPropsDef,
-  emits: ['scroll', 'scrollStateChange'],
-  setup(props: VirtualScrollBarProps, { emit }) {
+  props: virtualScrollBarProps,
+  setup(props, { emit }) {
     const { visible, delayHidden } = useVisible(props)
 
     const thumbHight = useThumbHight(props)
@@ -19,7 +18,7 @@ export default defineComponent({
     const thumbTop = useThumbTop(props, enableScrollRange, enableHeightRange)
 
     const { scrollbarRef, thumbRef, dragging } = useEvents(
-      emit,
+      props,
       delayHidden,
       enableScrollRange,
       enableHeightRange,
@@ -108,17 +107,15 @@ const useThumbTop = (
   })
 }
 
-type EmitType = (event: 'scroll' | 'scrollStateChange', ...args: unknown[]) => void
-
 const useEvents = (
-  emit: EmitType,
+  props: VirtualScrollBarProps,
   delayHidden: () => void,
   enableScrollRange: ComputedRef<number>,
   enableHeightRange: ComputedRef<number>,
   thumbTop: ComputedRef<number>,
 ) => {
   const dragging = ref(false)
-  watch(dragging, value => emit('scrollStateChange', value))
+  watch(dragging, value => props.onScrollStateChange(value))
 
   let pageY = 0
   let startTop = 0
@@ -176,7 +173,7 @@ const useEvents = (
       const ptg = enableHeightRange.value ? newTop / enableHeightRange.value : 0
       const newScrollTop = Math.ceil(ptg * enableScrollRange.value)
 
-      rafId = rAF(() => emit('scroll', newScrollTop))
+      rafId = rAF(() => props.onScroll(newScrollTop))
     }
   }
 

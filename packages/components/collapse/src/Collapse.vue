@@ -5,19 +5,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, provide, watch, computed, ref } from 'vue'
-import { CollapseProps, collapseInjectionKey } from './types'
-import { PropTypes, toArray } from '@idux/cdk/utils'
+import { toArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { collapseToken } from './token'
+import { collapseProps } from './types'
 
 export default defineComponent({
   name: 'IxCollapse',
-  props: {
-    accordion: PropTypes.bool,
-    active: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
-    borderless: PropTypes.bool.def(false),
-  },
+  props: collapseProps,
   emits: ['update:active'],
-  setup(props: CollapseProps, { emit }) {
+  setup(props, { emit }) {
     const collapseConfig = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? collapseConfig.accordion)
     const activeNames = ref<string[]>(toArray(props.active) as [])
@@ -52,7 +49,7 @@ export default defineComponent({
       emitCommonEvents(activeNames.value)
     }
 
-    provide(collapseInjectionKey, { props, handleChange })
+    provide(collapseToken, { props, handleChange })
   },
 })
 </script>

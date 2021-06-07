@@ -26,27 +26,21 @@
   </div>
 </template>
 <script lang="ts">
+import type { ImageConfig } from '@idux/components/config'
 import type { ImageProps, ImageStatus } from './types'
 
 import { defineComponent, computed, ref, watchEffect, watch } from 'vue'
-import { PropTypes, toCssPixel, withUndefined } from '@idux/cdk/utils'
+import { toCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import ImgPreview from './ImgPreview.vue'
+import { imageProps } from './types'
 
 export default defineComponent({
   name: 'IxImage',
   components: { ImgPreview },
-  props: {
-    src: PropTypes.string.def(''),
-    width: withUndefined(PropTypes.oneOfType([String, Number])),
-    height: withUndefined(PropTypes.oneOfType([String, Number])),
-    preview: PropTypes.bool.def(false),
-    fallback: PropTypes.string,
-    alt: PropTypes.string.def(''),
-    objectFit: PropTypes.string.def('fill'),
-  },
+  props: imageProps,
   emits: ['statusChange'],
-  setup(props: ImageProps, { emit }) {
+  setup(props, { emit }) {
     const isShowPreview = ref(false)
     const imageConfig = useGlobalConfig('image')
     const imageWidth = computedSize(props, imageConfig, 'width')
@@ -87,7 +81,8 @@ export default defineComponent({
     }
   },
 })
-const computedSize = (props: ImageProps, imageConfig: ImageProps, type: 'width' | 'height') => {
+
+const computedSize = (props: ImageProps, imageConfig: ImageConfig, type: 'width' | 'height') => {
   return computed(() => {
     const size = props[type] ?? imageConfig[type]
     return toCssPixel(size)

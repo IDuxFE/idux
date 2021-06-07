@@ -1,5 +1,4 @@
 import type { SetupContext, VNode } from 'vue'
-import type { TooltipProps } from './types'
 
 import {
   cloneVNode,
@@ -12,30 +11,22 @@ import {
   watch,
   onUpdated,
 } from 'vue'
-import { isUndefined, PropTypes } from '@idux/cdk/utils'
+import { isUndefined } from '@idux/cdk/utils'
 import { IxPortal } from '@idux/cdk/portal'
-import { OverlayPlacementPropDef, OverlayTriggerPropDef, useOverlay } from '@idux/cdk/overlay'
+import { useOverlay } from '@idux/cdk/overlay'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { useOverlayOptions } from './useOverlayOptions'
 import { useChildren } from './useChildren'
+import { tooltipProps } from './types'
 
 export default defineComponent({
   name: 'IxTooltip',
   components: { IxPortal },
   directives: { clickOutside },
   inheritAttrs: false,
-  props: {
-    title: PropTypes.string,
-    placement: OverlayPlacementPropDef,
-    visible: PropTypes.bool,
-    trigger: OverlayTriggerPropDef,
-    showDelay: PropTypes.number,
-    hideDelay: PropTypes.number,
-    destroyOnHide: PropTypes.bool,
-    autoAdjust: PropTypes.bool,
-  },
+  props: tooltipProps,
   emits: ['update:visible'],
-  setup(props: TooltipProps, { attrs, emit, slots }: SetupContext) {
+  setup(props, { attrs, emit, slots }: SetupContext) {
     const children = useChildren(slots)
     const { clsPrefix = 'ix-tooltip' } = attrs
     const options = useOverlayOptions()

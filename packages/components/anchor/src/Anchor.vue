@@ -11,21 +11,21 @@
   </component>
 </template>
 <script lang="ts">
-import type { AnchorProps, AnchorLinkProps } from './types'
+import type { AnchorLinkProps } from './types'
 
 import { computed, defineComponent, provide, ref } from 'vue'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
 import { anchorToken } from './token'
-import { anchorPropsDef } from './types'
+import { anchorProps } from './types'
 import { useInkBall, useLinks, useScroll } from './useAnchor'
 
 export default defineComponent({
   name: 'IxAnchor',
   components: { IxAffix },
-  props: anchorPropsDef,
+  props: anchorProps,
   emits: ['change', 'click'],
-  setup(props: AnchorProps, { emit }) {
+  setup(props, { emit }) {
     const tag = computed(() => (props.affix ? 'ix-affix' : 'div'))
 
     const config = useGlobalConfig('anchor')

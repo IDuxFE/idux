@@ -37,21 +37,19 @@
 </template>
 
 <script lang="ts">
-import type { FormItemProps } from './types'
-
 import { computed, defineComponent, inject } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxTooltip } from '@idux/components/tooltip'
-import { formItemPropsDef } from './types'
+import { formItemProps } from './types'
 import { useFormItemClasses, useFormItemColConfig, useFormItemControl, useFormItemLabelClasses } from './useFormItem'
 import { formToken } from './token'
 
 export default defineComponent({
   name: 'IxFormItem',
   components: { IxCol, IxRow, IxTooltip, IxIcon },
-  props: formItemPropsDef,
-  setup(props: FormItemProps) {
+  props: formItemProps,
+  setup(props) {
     const formContext = inject(formToken)
     const { control: control$$, errors, status, message: message$$, statusIcon } = useFormItemControl(props)
     const hasFeedback$$ = computed(() => props.hasFeedback ?? !!formContext?.hasFeedback.value)

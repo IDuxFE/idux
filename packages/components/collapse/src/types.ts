@@ -1,26 +1,25 @@
-import type { DefineComponent, InjectionKey } from 'vue'
+import type { DefineComponent } from 'vue'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export type ActiveKeyType = string | Array<string>
-
-interface CollapseOriginalProps {
-  accordion?: boolean
-  active?: ActiveKeyType
-  borderless?: boolean
+export const collapseProps = {
+  accordion: IxPropTypes.bool,
+  active: IxPropTypes.oneOfType([String, IxPropTypes.arrayOf(String)]).def([]),
+  borderless: IxPropTypes.bool.def(false),
 }
 
-interface CollapsePanelOriginalProps {
-  title?: string
-  name: string
-  disabled: boolean
-  icon?: string[]
-}
-
-export const collapseInjectionKey: InjectionKey<CollapseProps> = Symbol()
-
-export type CollapseProps = Readonly<CollapseOriginalProps>
+export type CollapseProps = IxExtractPropTypes<typeof collapseProps>
 
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
-export type CollapsePanelProps = Readonly<CollapsePanelOriginalProps>
+export const collapsePanelProps = {
+  name: IxPropTypes.string.isRequired,
+  title: IxPropTypes.string,
+  disabled: IxPropTypes.bool.def(false),
+  icon: IxPropTypes.arrayOf(String),
+}
+
+export type CollapsePanelProps = IxExtractPropTypes<typeof collapsePanelProps>
 
 export type CollapsePanelInstance = InstanceType<DefineComponent<CollapsePanelProps>>
+
+export type ActiveKeyType = string | Array<string>

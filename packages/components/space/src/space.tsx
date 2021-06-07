@@ -5,11 +5,11 @@ import type { SpaceDirection, SpaceProps } from './types'
 import { defineComponent, computed } from 'vue'
 import { filterEmptyNode, getSlotNodes, Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { spacePropsDef } from './types'
+import { spaceProps } from './types'
 
 export default defineComponent({
   name: 'IxSpace',
-  props: spacePropsDef,
+  props: spaceProps,
   setup(props) {
     const config = useGlobalConfig('space')
     const classes = useClasses(props)

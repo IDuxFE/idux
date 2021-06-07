@@ -1,36 +1,26 @@
 import type { DefineComponent } from 'vue'
-import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 
-import { OverlayPlacementPropDef, OverlayTriggerPropDef } from '@idux/cdk/overlay'
-import { PropTypes } from '@idux/cdk/utils'
+import { overlayPlacementProp, overlayTriggerProp } from '@idux/cdk/overlay'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface DropdownProps {
-  visible: boolean
-  disabled: boolean
-  icon?: string
-  overlayClass?: string
-  placement?: OverlayPlacement
-  trigger?: OverlayTrigger
+export const dropdownProps = {
+  visible: IxPropTypes.bool.def(false),
+  disabled: IxPropTypes.bool.def(false),
+  icon: IxPropTypes.string,
+  overlayClass: IxPropTypes.string,
+  placement: overlayPlacementProp,
+  trigger: overlayTriggerProp,
 }
 
-export const dropdownPropsDef = {
-  visible: PropTypes.bool.def(false),
-  disabled: PropTypes.bool.def(false),
-  icon: PropTypes.string,
-  overlayClass: PropTypes.string,
-  placement: OverlayPlacementPropDef,
-  trigger: OverlayTriggerPropDef,
-}
+export type DropdownProps = IxExtractPropTypes<typeof dropdownProps>
 
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>
 
-export interface DropdownButtonProps extends DropdownProps {
-  icon: string
+export const dropdownButtonProps = {
+  ...dropdownProps,
+  icon: IxPropTypes.string.def('ellipsis'),
 }
 
-export const dropdownButtonPropsDef = {
-  ...dropdownPropsDef,
-  icon: PropTypes.string.def('ellipsis'),
-}
+export type DropdownButtonProps = IxExtractPropTypes<typeof dropdownButtonProps>
 
 export type DropdownButtonInstance = InstanceType<DefineComponent<DropdownButtonProps>>

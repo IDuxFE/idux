@@ -4,26 +4,20 @@
   </div>
 </template>
 <script lang="ts">
-import { PropTypes } from '@idux/cdk/utils'
 import { defineComponent, provide, reactive, toRefs } from 'vue'
-import { RadioGroupProps, modelValueType } from './types'
+import { radioGroupProps } from './types'
 import { radioGroupKey } from './radio'
 
 export default defineComponent({
   name: 'IxRadioGroup',
-  props: {
-    value: PropTypes.oneOfType([String, Number, Boolean]),
-    size: PropTypes.oneOf(['large', 'medium', 'small']).def('medium'),
-    mode: PropTypes.oneOf(['fill', 'border']).def('border'),
-    disabled: PropTypes.bool.def(false),
-    color: PropTypes.string.def('#00b27a'),
-  },
+  props: radioGroupProps,
   emits: ['change', 'update:value'],
-  setup(props: RadioGroupProps, { emit }) {
-    const change = (radioValue: modelValueType) => {
+  setup(props, { emit }) {
+    const change = (radioValue: string | number | boolean) => {
       emit('update:value', radioValue)
       emit('change', radioValue)
     }
+
     provide(radioGroupKey, reactive({ ...toRefs(props), change }))
   },
 })

@@ -1,20 +1,28 @@
 import type { DefineComponent } from 'vue'
 
-export type TimelinePosition = 'left' | 'alternate' | 'right'
-export interface TimelineProps {
-  pending?: string | boolean
-  pendingDot?: string
-  reverse?: boolean
-  position?: TimelinePosition
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+
+export const timelineProps = {
+  pending: IxPropTypes.oneOfType([String, Boolean]).def(false),
+  pendingDot: IxPropTypes.string,
+  reverse: IxPropTypes.bool.def(false),
+  position: IxPropTypes.oneOf<TimelinePosition>(['left', 'alternate', 'right']).def('right'),
 }
+
+export type TimelineProps = IxExtractPropTypes<typeof timelineProps>
 
 export type TimelineInstance = InstanceType<DefineComponent<TimelineProps>>
 
 export type TimelineItemPosition = 'left' | 'right'
-export interface TimelineItemProps {
-  color?: string
-  dot?: string
-  position?: TimelineItemPosition
+
+export const timelineItemProps = {
+  color: IxPropTypes.string.def('primary'),
+  dot: IxPropTypes.string,
+  position: IxPropTypes.oneOf<TimelineItemPosition>(['left', 'right']),
 }
 
+export type TimelineItemProps = IxExtractPropTypes<typeof timelineItemProps>
+
 export type TimelineItemInstance = InstanceType<DefineComponent<TimelineItemProps>>
+
+export type TimelinePosition = 'left' | 'alternate' | 'right'

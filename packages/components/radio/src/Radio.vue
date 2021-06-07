@@ -38,20 +38,15 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import { RadioProps, modelValueType } from './types'
-import { PropTypes } from '@idux/cdk/utils'
+import { radioProps } from './types'
+
 import { getRadioAttrs, radioMode } from './radio'
 
 export default defineComponent({
   name: 'IxRadio',
-  props: {
-    value: PropTypes.oneOfType([String, Number, Boolean]),
-    disabled: PropTypes.bool.def(false),
-    name: PropTypes.string.def(''),
-    checked: PropTypes.bool.def(false),
-  },
+  props: radioProps,
   emits: ['change', 'update:checked'],
-  setup(props: RadioProps, { emit }) {
+  setup(props, { emit }) {
     const { isGroup, radioGroup } = radioMode()
     const { isDisabled } = getRadioAttrs(props, isGroup, radioGroup)
     const radioRef = ref<HTMLInputElement>()
@@ -61,7 +56,7 @@ export default defineComponent({
       },
       set(value) {
         if (isGroup.value) {
-          radioGroup.change(props.value as modelValueType)
+          radioGroup.change(props.value!)
         } else {
           emit('update:checked', value)
         }

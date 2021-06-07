@@ -30,21 +30,15 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { RadioButtonProps, modelValueType } from './types'
-import { getRadioAttrs, radioMode } from './radio'
-import { PropTypes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { radioButtonProps } from './types'
+import { getRadioAttrs, radioMode } from './radio'
 
 export default defineComponent({
   name: 'IxRadioButton',
-  props: {
-    value: PropTypes.oneOfType([String, Number, Boolean]),
-    disabled: PropTypes.bool.def(false),
-    name: PropTypes.string.def(''),
-    checked: PropTypes.bool.def(false),
-  },
+  props: radioButtonProps,
   emits: ['change', 'update:checked'],
-  setup(props: RadioButtonProps, { emit }) {
+  setup(props, { emit }) {
     const { isGroup, radioGroup } = radioMode()
     const { isDisabled } = getRadioAttrs(props, isGroup, radioGroup)
     const isChecked = computed<boolean>(() => {
@@ -55,7 +49,7 @@ export default defineComponent({
       emit('change', isChecked)
       emit('update:checked', isChecked)
 
-      isGroup.value && radioGroup.change(props.value as modelValueType)
+      isGroup.value && radioGroup.change(props.value!)
     }
     const radioGroupConfig = useGlobalConfig('radioGroup')
     const size = computed(() => {

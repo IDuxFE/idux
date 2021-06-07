@@ -24,26 +24,20 @@
   </div>
 </template>
 <script lang="ts">
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
 import type { CardConfig } from '@idux/components/config'
+import type { CardProps } from './types'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { computed, defineComponent } from 'vue'
-import { CardProps } from './types'
+import { hasSlot } from '@idux/cdk/utils'
 import { IxSpin } from '@idux/components/spin'
+import { cardProps } from './types'
 
 export default defineComponent({
   name: 'IxCard',
   components: { IxSpin },
-  props: {
-    title: PropTypes.string,
-    extra: PropTypes.string,
-    hoverable: PropTypes.bool,
-    borderless: PropTypes.bool,
-    loading: PropTypes.bool.def(false),
-    size: PropTypes.oneOf(['medium', 'small'] as const),
-  },
-  setup(props: CardProps, { slots }) {
+  props: cardProps,
+  setup(props, { slots }) {
     const cardConfig = useGlobalConfig('card')
     const classes = useClasses(props, cardConfig)
     const isShowTitle = computed(() => props.title || hasSlot(slots, 'title'))

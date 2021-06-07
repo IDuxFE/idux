@@ -5,13 +5,13 @@ import { defineComponent, inject, computed } from 'vue'
 import { hasSlot, isBoolean, isNil } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { StepsContext, stepsToken } from './token'
-import { stepPropsDef } from './types'
+import { stepProps } from './types'
 
 export default defineComponent({
   name: 'IxStep',
-  props: stepPropsDef,
+  props: stepProps,
   emits: ['change'],
-  setup(props: StepProps, { slots }) {
+  setup(props, { slots }) {
     // stepsContext must exist
     const stepsContext = inject(stepsToken)!
     const { isActive, onClick } = useRegister(stepsContext, props)
@@ -43,7 +43,14 @@ export default defineComponent({
     if (canShowPercent) {
       headContent = renderHeadPercent(deg, index)
     } else if (progressDot) {
-      headContent = renderHeadProcessDot(progressDot, index, status, title, subTitle, description)
+      headContent = renderHeadProcessDot(
+        progressDot,
+        index,
+        status,
+        title as string,
+        subTitle as string,
+        description as string,
+      )
     } else {
       const _icon = renderHeadIcon($slots.icon, icon, status)
       headContent = _icon ?? <span class="ix-step-head-text">{index + 1}</span>

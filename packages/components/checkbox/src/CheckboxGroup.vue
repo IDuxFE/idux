@@ -6,21 +6,20 @@
 
 <script lang="ts">
 import { defineComponent, provide, watch } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { checkboxGroupInjectionKey, subjectInjectKey, SubjectType } from './checkbox'
-import type { CheckboxGroupProps } from './types'
 import { Subject } from '@idux/cdk/subject'
 
 export default defineComponent({
   name: 'IxCheckboxGroup',
   props: {
-    value: PropTypes.arrayOf(PropTypes.string),
-    disabled: PropTypes.bool.def(false),
-    readonly: PropTypes.bool.def(false),
-    name: PropTypes.string,
+    value: IxPropTypes.arrayOf(String),
+    disabled: IxPropTypes.bool.def(false),
+    readonly: IxPropTypes.bool.def(false),
+    name: IxPropTypes.string,
   },
   emits: ['update:value', 'change'],
-  setup(props: CheckboxGroupProps, { emit }) {
+  setup(props, { emit }) {
     provide(checkboxGroupInjectionKey, props)
 
     const subject = new Subject<SubjectType>()

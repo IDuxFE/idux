@@ -1,10 +1,9 @@
 import type { VNodeTypes } from 'vue'
 import type { PaginationItemRenderFn, PaginationItemType } from '@idux/components/config'
-import type { PaginationItemProps } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { IxButton } from '@idux/components/button'
-import { paginationItemPropsDef } from './types'
+import { paginationItemProps } from './types'
 
 const iconMap = {
   prev: 'left',
@@ -17,9 +16,9 @@ const iconMap = {
 export default defineComponent({
   name: 'IxPaginationItem',
   components: { IxButton },
-  props: paginationItemPropsDef,
+  props: paginationItemProps,
   emits: ['itemClick'],
-  setup(props: PaginationItemProps, { emit }) {
+  setup(props, { emit }) {
     const classes = computed(() => {
       return {
         'ix-pagination-item': true,
@@ -61,8 +60,8 @@ export default defineComponent({
 })
 
 const getChildren = (
-  itemRender: PaginationItemRenderFn,
-  index: number,
+  itemRender: PaginationItemRenderFn | undefined,
+  index: number | undefined,
   type: PaginationItemType,
   active: boolean,
   disabled: boolean,

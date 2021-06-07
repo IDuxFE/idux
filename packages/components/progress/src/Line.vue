@@ -18,7 +18,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { ConvertProgressProps, convertProgressPropsDef } from './types'
+import { convertProgressProps } from './types'
 import { useInfo, useStatus, useStatusClasses, useSmallSize } from './useCommonLogic'
 import { isObject, toNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -30,8 +30,8 @@ const defaultSmallStrokeWidth = 6
 export default defineComponent({
   name: 'IxProgressLine',
   components: { IxIcon },
-  props: convertProgressPropsDef,
-  setup(props: ConvertProgressProps) {
+  props: convertProgressProps,
+  setup(props) {
     const progressConfig = useGlobalConfig('progress')
     const isSmallSize = useSmallSize(props, progressConfig)
     const strokeWidth = computed(() =>
