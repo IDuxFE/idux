@@ -47,8 +47,8 @@ single: true
 | --- | --- | --- | --- | --- | --- |
 | `cid` | 唯一标识 | `sting \| number` | `uid` | - | 如果需要切换 `mode` 或者 `collapsed`, 请手动指定 `cid` |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 菜单图标| `string \| v-slot:icon` | - | - |
-| `title` | 菜单标题 | `string \| v-slot:default`  | - | - |
+| `icon` | 菜单图标| `string \| #icon` | - | - |
+| `title` | 菜单标题 | `string \| #default`  | - | - |
 
 ### ix-sub-menu
 
@@ -58,11 +58,11 @@ single: true
 | --- | --- | --- | --- | --- | --- |
 | `cid` | 唯一标识 | `sting \| number` | `uid` | - | 如果需要切换 `mode` 或者 `collapsed`, 请手动指定 `cid` |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 菜单图标| `string \| v-slot:icon` | - | - | - |
+| `icon` | 菜单图标| `string \| #icon` | - | - | - |
 | `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
 | `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
 | `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
-| `title` | 菜单标题 | `string \| v-slot:title`  | - | - |
+| `title` | 菜单标题 | `string \| #title`  | - | - |
 
 #### SubMenuEmits
 
@@ -76,8 +76,8 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `icon` | 菜单图标| `string \| v-slot:icon` | - | - |
-| `title` | 菜单标题 | `string \| v-slot:title`  | - | - |
+| `icon` | 菜单图标| `string \| #icon` | - | - |
+| `title` | 菜单标题 | `string \| #title`  | - | - |
 
 ### ix-menu-divider
 

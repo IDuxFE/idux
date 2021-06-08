@@ -6,7 +6,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export const portalProps = {
   disabled: IxPropTypes.bool,
   target: IxPropTypes.oneOfType([String, HTMLElement]).isRequired,
-  show: IxPropTypes.bool.def(true),
+  load: IxPropTypes.bool.def(true),
 }
 
 export type PortalProps = IxInnerPropTypes<typeof portalProps>

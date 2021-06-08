@@ -49,13 +49,12 @@ describe('Portal', () => {
     expect(container.querySelector('#content')).not.toBeNull()
   })
 
-  test('show work', async () => {
-    const wrapper = PortalMount({ props: { target: 'show-container', show: false } })
-    const container = document.body.querySelector('.show-container')!
-    expect(container.querySelector('#content')).toBeNull()
+  test('load work', async () => {
+    const wrapper = PortalMount({ props: { target: 'test-container', load: false } })
+    expect(document.body.querySelector('.test-container')).toBeNull()
 
-    await wrapper.setProps({ show: true })
+    await wrapper.setProps({ load: true })
 
-    expect(container.querySelector('#content')).not.toBeNull()
+    expect(document.body.querySelector('.test-container')).not.toBeNull()
   })
 })

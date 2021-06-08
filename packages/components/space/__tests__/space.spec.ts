@@ -88,6 +88,9 @@ describe('Space', () => {
 
   test('wrap work', async () => {
     const wrapper = mount(TestComponent)
+    expect(wrapper.classes()).toContain('ix-space-wrap')
+
+    await wrapper.setProps({ wrap: false })
     expect(wrapper.classes()).not.toContain('ix-space-wrap')
 
     await wrapper.setProps({ wrap: true })

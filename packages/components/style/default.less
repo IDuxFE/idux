@@ -25,6 +25,8 @@
 @disabled-color-dark: fade(@white, 35%);
 @disabled-bg-color: @background-color-base;
 
+@mask-bg-color: fade(@black, 40%);
+
 @heading-color: fade(@black, 85%);
 
 /* text -------------------------- */
@@ -123,8 +125,11 @@
 @header-sub-font-size: @font-size-lg;
 @header-sub-font-size-sm: @font-size-md;
 
-@header-extra-margin-left: @spacing-sm;
+@header-extra-color: @text-color-secondary;
+@header-extra-padding: 0 @spacing-xs;
 @header-extra-active-icon-color: @header-title-color;
+@header-extra-font-size: @font-size-lg;
+@header-extra-font-size-sm: @font-size-md;
 
 @header-description-color: @text-color;
 @header-description-font-size: @font-size-md;
@@ -619,6 +624,35 @@
 @message-item-icon-margin-right: @spacing-sm;
 @message-item-content-min-width: 120px;
 @message-item-content-max-width: 480px;
+
+/* modal -------------------------- */
+@modal-top: 128px;
+@modal-spacing: @spacing-lg;
+@modal-max-width: calc(100vw - 32px);
+@modal-max-width-screen-sm: calc(100vw - 16px);
+@modal-margin-screen-sm: @spacing-sm auto;
+
+@modal-content-bg: @background-color-component;
+@modal-content-border-radius: @border-radius-sm;
+@modal-content-box-shadow: @shadow-bottom-md;
+@modal-content-padding: 0 @modal-spacing;
+
+@modal-body-font-size: @font-size-md;
+@modal-body-line-height: @line-height-base;
+@modal-body-padding-bottom: @modal-spacing;
+@modal-body-title-font-size: @font-size-lg;
+@modal-body-title-font-weight: @font-weight-xl;
+@modal-body-title-margin-bottom: @spacing-sm;
+@modal-body-icon-font-size: 48px;
+@modal-body-icon-margin: 0 @modal-spacing;
+@modal-body-confirm-color: @warning;
+@modal-body-info-color: @info;
+@modal-body-success-color: @success;
+@modal-body-warning-color: @warning;
+@modal-body-error-color: @error;
+
+@modal-footer-padding-bottom: @modal-spacing;
+@modal-footer-button-margin-left: @spacing-sm;
 
 /* result -------------------------- */
 @result-padding: @spacing-gutter * 6 @spacing-gutter * 4;

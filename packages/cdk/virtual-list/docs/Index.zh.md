@@ -27,7 +27,7 @@ single: true
 | `height` | 列表的高度 | `number` | `0` | - | 设置为大于 0 时才可以启用虚拟滚动 |
 | `itemHeight` | 列表项的高度 | `number` | `0` | - | 设置为大于 0 时才可以启用虚拟滚动 |
 | `itemKey` | 列表项的唯一标识 | `string \| number \| (item) => string \| number` | - | - | 必须设置 |
-| `itemRender` | 列表项的渲染函数 | `(option: { item: T; index: number }) => VNodeTypes \| v-slot:item={item, index}` | - | - | 必须设置或者提供 `item` 插槽 |
+| `itemRender` | 列表项的渲染函数 | `(option: { item: T; index: number }) => VNodeTypes \| #item={item, index}` | - | - | 必须设置或者提供 `item` 插槽 |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `true` | - | - |
 
 #### Emits

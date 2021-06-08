@@ -1,0 +1,129 @@
+@import '../../style/default.less';
+
+@modal-prefix: ~'@{idux-prefix}-modal';
+
+.@{modal-prefix} {
+  .mask();
+
+  position: relative;
+  top: @modal-top;
+  width: auto;
+  max-width: @modal-max-width;
+  margin: 0 auto;
+
+  &-sentinel {
+    width: 0;
+    height: 0;
+    overflow: 'hidden';
+    outline: 'none';
+  }
+
+  &-content {
+    position: relative;
+    pointer-events: auto;
+    background-color: @modal-content-bg;
+    border-radius: @modal-content-border-radius;
+    box-shadow: @modal-content-box-shadow;
+    padding: @modal-content-padding;
+  }
+
+  &-body {
+    font-size: @modal-body-font-size;
+    line-height: @modal-body-line-height;
+    padding-bottom: @modal-body-padding-bottom;
+    word-wrap: break-word;
+
+    &-title {
+      font-size: @modal-body-title-font-size;
+      font-weight: @modal-body-title-font-weight;
+      margin-bottom: @modal-body-title-margin-bottom;
+    }
+
+    &-content {
+      width: 100%;
+    }
+
+    &-confirm,
+    &-info,
+    &-success,
+    &-warning,
+    &-error {
+      display: flex;
+      padding-top: 0;
+    }
+
+    &-icon {
+      line-height: 1;
+      font-size: @modal-body-icon-font-size;
+      margin: @modal-body-icon-margin;
+    }
+
+    &-confirm {
+      .@{modal-prefix}-body-icon {
+        color: @modal-body-confirm-color;
+      }
+    }
+
+    &-info {
+      .@{modal-prefix}-body-icon {
+        color: @modal-body-info-color;
+      }
+    }
+    &-success {
+      .@{modal-prefix}-body-icon {
+        color: @modal-body-success-color;
+      }
+    }
+    &-warning {
+      .@{modal-prefix}-body-icon {
+        color: @modal-body-warning-color;
+      }
+    }
+    &-error {
+      .@{modal-prefix}-body-icon {
+        color: @modal-body-error-color;
+      }
+    }
+  }
+
+  &-footer {
+    text-align: right;
+    padding-bottom: @modal-footer-padding-bottom;
+
+    .@{idux-prefix}-button + .@{idux-prefix}-button {
+      margin-left: @modal-footer-button-margin-left;
+    }
+  }
+
+  &-centered {
+    text-align: center;
+
+    &::before {
+      display: inline-block;
+      width: 0;
+      height: 100%;
+      vertical-align: middle;
+      content: '';
+    }
+
+    .@{modal-prefix} {
+      top: 0;
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+}
+
+@media (max-width: @screen-sm-max) {
+  .@{modal-prefix} {
+    max-width: @modal-max-width-screen-sm;
+    margin: @modal-margin-screen-sm;
+  }
+
+  .@{modal-prefix}-centered {
+    .@{modal-prefix} {
+      flex: 1;
+    }
+  }
+}

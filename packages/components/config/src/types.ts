@@ -41,6 +41,7 @@ export interface DividerConfig {
 
 export interface SpaceConfig {
   size: SpaceSize
+  wrap: boolean
 }
 
 export interface RowConfig {
@@ -193,6 +194,17 @@ export interface MessageConfig {
   destroyOnHover: boolean
 }
 
+export interface ModalConfig {
+  centered: boolean
+  closable: boolean
+  closeIcon: string
+  closeOnEsc: boolean
+  mask: boolean
+  maskClosable: boolean
+  width: string | number
+  zIndex?: number
+}
+
 export interface ResultConfig {
   status: ResultStatus
 }
@@ -260,6 +272,7 @@ export interface GlobalConfig {
   steps: StepsConfig
   // Feedback
   message: MessageConfig
+  modal: ModalConfig
   result: ResultConfig
   spin: SpinConfig
   progress: ProgressConfig

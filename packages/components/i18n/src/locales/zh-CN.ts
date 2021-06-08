@@ -2,8 +2,16 @@ import { Locale } from '../types'
 /* eslint-disable camelcase */
 export const zh_CN: Locale = {
   type: 'zh-CN',
+  empty: {
+    description: '暂无数据',
+  },
   global: {
     placeholder: '请选择',
+  },
+  modal: {
+    cancelText: '取消',
+    okText: '确定',
+    justOkText: '知道了',
   },
   pagination: {
     itemsPerPage: '条/页',
@@ -15,8 +23,5 @@ export const zh_CN: Locale = {
     next5: '向后 5 页',
     totalPrefix: '共',
     totalSuffix: '条',
-  },
-  empty: {
-    description: '暂无数据',
   },
 }

@@ -1,6 +1,7 @@
+import type { Slot } from 'vue'
 import type { HeaderProps } from './types'
 
-import { computed, createTextVNode, defineComponent, Slot } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { callEmit, toArray } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
@@ -10,7 +11,6 @@ export default defineComponent({
   props: headerProps,
   setup(props) {
     const classes = useClasses(props)
-
     const extras = computed(() => toArray(props.extra))
 
     const onPrefixClick = (evt: MouseEvent) => callEmit(props.onPrefixClick, evt)
@@ -66,7 +66,7 @@ const renderChild = (titleSlot: Slot | undefined, title: string | undefined, cla
   if (!titleSlot && !title) {
     return null
   }
-  const child = titleSlot ? titleSlot() : createTextVNode(title)
+  const child = titleSlot ? titleSlot() : title
   return <span class={className}>{child}</span>
 }
 
@@ -78,8 +78,15 @@ const renderExtra = (
   if (!extraSlot && extras.length === 0) {
     return null
   }
-  const child = extraSlot
-    ? extraSlot()
-    : extras.map((icon, index) => <IxIcon key={icon + index} name={icon} onClick={evt => onExtraClick(evt, icon)} />)
+  const child = extraSlot ? extraSlot() : renderExtraIcons(extras, onExtraClick)
   return <div class="ix-header-extra">{child}</div>
+}
+
+const renderExtraIcons = (extras: string[], onExtraClick: (evt: MouseEvent, name: string) => void) => {
+  return extras.map((icon, index) => {
+    if (!icon) {
+      return null
+    }
+    return <IxIcon key={icon + index} name={icon} onClick={evt => onExtraClick(evt, icon)} />
+  })
 }

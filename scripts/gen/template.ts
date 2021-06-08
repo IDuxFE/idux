@@ -76,7 +76,7 @@ export type { ${compName}Instance, ${compName}PublicProps as ${compName}Props } 
 export function getTestTemplate(compName: string, useTsx: boolean): string {
   return `import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import Ix${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
+import ${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}', () => {
@@ -107,7 +107,7 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsZhTemplate(
+export function getDocsTemplate(
   compName: string,
   moduleName: string,
   upperFirstName: string,
@@ -129,7 +129,7 @@ order: 0
 
 ### ix-${compName}
 
-#### Props
+#### ${upperFirstName}Props
 
 ${
   isEn
@@ -145,11 +145,6 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 | --- | --- | --- | --- |
 | - | - | - | - |
 
-#### Emits
-
-${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
-| --- | --- | --- | --- |
-| - | - | - | - |
 `
 }
 

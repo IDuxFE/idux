@@ -25,7 +25,7 @@ single: true
 | `v-model:pageIndex` | 当前页数 | `number` | `1` | - | - |
 | `v-model:pageSize` | 每页条数 | `number` | `10` | ✅ | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `itemRender` | 自定义页码的结构 | `PaginationItemRenderFn \| v-slot:item` | - | ✅ | - |
+| `itemRender` | 自定义页码的结构 | `PaginationItemRenderFn \| #item` | - | ✅ | - |
 | `pageSizes` | 指定每页可以显示多少条 | `number[]` | `[10, 20, 50, 100]` | ✅ | - |
 | `showQuickJumper` | 是否可以快速跳转至某页 | `boolean` | `false` | ✅ | - |
 | `showSizeChanger` | 是否是否可以改变 `pageSize` | `boolean` | `false` | ✅ | - |
@@ -34,7 +34,7 @@ single: true
 | `simple` | 显示为简单分页 | `boolean` | `false` | ✅ | - |
 | `size` | 分页组件大小 | `middle \| small` | `middle` | ✅ | - |
 | `total` | 数据总数 | `number` | `0` | - | - |
-| `totalRender` | 自定义数据总数内容 | `PaginationTotalRenderFn \| v-slot:total` | - | ✅ | - |
+| `totalRender` | 自定义数据总数内容 | `PaginationTotalRenderFn \| #total` | - | ✅ | - |
 
 #### Slots
 

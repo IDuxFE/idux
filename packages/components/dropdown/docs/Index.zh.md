@@ -25,7 +25,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:visible` | 菜单是否显示 | `boolean` | `false` | - | - |
 | `disabled` | 菜单是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 右侧的 icon | `string \| v-slot:icon` | - | - | `ix-dropdown-button` 的默认值为 `ellipsis` |
+| `icon` | 右侧的 icon | `string \| #icon` | - | - | `ix-dropdown-button` 的默认值为 `ellipsis` |
 | `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
 | `placement` | 悬浮层的对齐方式 | `OverlayPlacement` | `bottom-start` | ✅ | - |
 | `trigger` | 悬浮层触发方式 | `OverlayTrigger` | `hover` | ✅ | - |

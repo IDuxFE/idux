@@ -22,6 +22,14 @@
     "ls-lint": "ls-lint"
   },
   "license": "MIT",
+  "dependencies": {
+    "@juggle/resize-observer": "^3.3.0",
+    "@popperjs/core": "^2.9.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0",
+    "vue-types": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.0",
