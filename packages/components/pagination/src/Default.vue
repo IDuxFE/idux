@@ -39,7 +39,7 @@ import { computed, defineComponent } from 'vue'
 import { PaginationItemType } from '@idux/components/config'
 import IxPaginationSizes from './Sizes.vue'
 import IxPaginationJumper from './Jumper.vue'
-import IxPaginationItem from './item'
+import IxPaginationItem from './Item'
 
 const indexDiffMap = {
   next: 1,

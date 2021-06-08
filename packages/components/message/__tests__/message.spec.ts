@@ -1,4 +1,4 @@
-import IxMessage from '../src/message'
+import IxMessage from '../src/Message'
 import { h } from 'vue'
 import { wait } from '@tests'
 import { MessageType } from '../src/types'

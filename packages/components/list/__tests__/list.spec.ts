@@ -80,7 +80,7 @@ describe('List.vue', () => {
     expect(wrapper.find('.ix-list-loadMore').exists()).toBeFalsy()
     await wrapper.setProps({
       loadMore: '123',
-      handleLoadMore: async function (done: any) {
+      handleLoadMore: async function (done: jest.DoneCallback) {
         await sleep(1000)
         done()
       },

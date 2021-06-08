@@ -31,7 +31,7 @@ import { defineComponent, ref, watchEffect } from 'vue'
 import { toNumber } from '@idux/cdk/utils'
 import { PaginationItemType } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
-import IxPaginationItem from './item'
+import IxPaginationItem from './Item'
 import { paginationSimpleProps } from './types'
 
 export default defineComponent({

@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import IxPagination from './src/pagination'
+import IxPagination from './src/Pagination'
 
 IxPagination.install = (app: App): void => {
   app.component(IxPagination.name, IxPagination)

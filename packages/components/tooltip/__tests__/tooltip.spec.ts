@@ -1,7 +1,7 @@
 import { mount, VueWrapper, MountingOptions } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 import { renderWork, wait } from '@tests'
-import IxTooltip from '../src/tooltip'
+import IxTooltip from '../src/Tooltip'
 import { TooltipProps } from '../src/types'
 
 const TestComponent = defineComponent({

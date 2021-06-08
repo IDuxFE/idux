@@ -44,16 +44,13 @@ export function getVueTemplate(upperFirstName: string, camelCaseName: string): s
 </template>
 
 <script lang="ts">
-import type { ${upperFirstName}Props } from './types'
-
 import { defineComponent } from 'vue'
 import { ${camelCaseName}Props } from './types'
 
 export default defineComponent({
   name: 'Ix${upperFirstName}',
   props: ${camelCaseName}Props,
-  emits: [],
-  setup(props: ${upperFirstName}Props) {
+  setup(props) {
     
   },
 })
@@ -61,10 +58,10 @@ export default defineComponent({
 `
 }
 
-export function getIndexTemplate(compName: string): string {
+export function getIndexTemplate(compName: string, useTsx: boolean): string {
   return `import type { App } from 'vue'
 
-import Ix${compName} from './src/${compName}.vue'
+import Ix${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
 
 Ix${compName}.install = (app: App): void => {
   app.component(Ix${compName}.name, Ix${compName})
@@ -76,13 +73,13 @@ export type { ${compName}Instance, ${compName}Props } from './src/types'
 `
 }
 
-export function getTestTemplate(compName: string): string {
+export function getTestTemplate(compName: string, useTsx: boolean): string {
   return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import Ix${compName} from '../src/${compName}.vue'
+import Ix${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
 import { ${compName}Instance, ${compName}Props } from '../src/types'
 
-describe('${compName}.vue', () => {
+describe('${compName}.${useTsx ? 'tsx' : 'vue'}', () => {
   let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
 
   beforeEach(() => {
@@ -129,10 +126,6 @@ title: ${upperFirstName}
 subtitle:
 order: 0
 ---
-
-
-
-## ${isEn ? 'When To Use' : '何时使用'}
 
 
 

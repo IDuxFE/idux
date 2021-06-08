@@ -4,7 +4,7 @@ import type { PaginationProps } from './types'
 import { computed, defineComponent, ref, watch } from 'vue'
 import { getLocale } from '@idux/components/i18n'
 import { PaginationConfig, PaginationSize, useGlobalConfig } from '@idux/components/config'
-import IxPaginationTotal from './total'
+import IxPaginationTotal from './Total'
 import IxPaginationDefault from './Default.vue'
 import IxPaginationSimple from './Simple.vue'
 import { paginationProps } from './types'
@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'IxPagination',
   props: paginationProps,
   emits: ['update:pageIndex', 'update:pageSize'],
-  setup(props: PaginationProps, { slots, emit }) {
+  setup(props, { slots, emit }) {
     const locale = getLocale('pagination')
     const config = useGlobalConfig('pagination')
 
