@@ -37,7 +37,6 @@ export default defineComponent({
   name: 'IxTextarea',
   components: { IxIcon },
   props: textareaProps,
-  emits: ['update:value', 'compositionStart', 'compositionEnd', 'input', 'focus', 'blur', 'afterClear'],
   setup(props) {
     const attrs = useAttrs()
     const textareaConfig = useGlobalConfig('textarea')

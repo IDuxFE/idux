@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AbstractControl } from './controls'
 
-import { reactive, getCurrentInstance, watchEffect, computed, ComputedRef } from 'vue'
+import { reactive, getCurrentInstance, computed, ComputedRef, watch, toRef, WatchStopHandle } from 'vue'
 import { isNil, Logger } from '@idux/cdk/utils'
 import { isAbstractControl } from './typeof'
 import { injectControl, injectControlOrPath } from './utils'
 
-export function useValueControl(controlKey = 'control'): ComputedRef<AbstractControl | null> {
+export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<AbstractControl<T> | null> {
   const { props } = getCurrentInstance()!
   const controlOrPath = injectControlOrPath()
   return computed(() => {
@@ -32,41 +32,49 @@ export interface AccessorOptions {
   disabledKey?: string
 }
 
-export interface ValueAccessor {
-  value: any
-  setValue: (value: any) => void
+export interface ValueAccessor<T = any> {
+  value: T
+  setValue: (value: T) => void
   markAsBlurred: () => void
   disabled: boolean
 }
 
-export function useValueAccessor(options: AccessorOptions = {}): ValueAccessor {
+export function useValueAccessor<T = any>(options: AccessorOptions = {}): ValueAccessor<T> {
   const { controlKey, valueKey = 'value', disabledKey = 'disabled' } = options
   const accessor = reactive<ValueAccessor>({} as ValueAccessor)
   const { props, emit } = getCurrentInstance()!
 
   const control = useValueControl(controlKey)
+  let valueWatchStop: WatchStopHandle | null = null
 
-  watchEffect(() => {
-    const currControl = control.value
-    if (currControl) {
-      accessor.value = currControl.valueRef
-      accessor.setValue = (value: any) => currControl.setValue(value, { dirty: true })
-      accessor.markAsBlurred = () => currControl.markAsBlurred()
-      accessor.disabled = currControl.disabled as unknown as boolean
-    } else {
-      accessor.setValue = value => {
-        accessor.value = value
-        emit(`update:${valueKey}`, value)
+  watch(
+    control,
+    currControl => {
+      if (currControl) {
+        accessor.value = currControl.valueRef
+        accessor.setValue = value => currControl.setValue(value, { dirty: true })
+        accessor.markAsBlurred = () => currControl.markAsBlurred()
+        accessor.disabled = currControl.disabled as unknown as boolean
+        if (valueWatchStop) {
+          valueWatchStop()
+          valueWatchStop = null
+        }
+      } else {
+        accessor.value = toRef(props, valueKey)
+        accessor.setValue = value => (accessor.value = value)
+        accessor.markAsBlurred = () => {}
+        accessor.disabled = toRef(props, disabledKey) as unknown as boolean
+        if (valueWatchStop) {
+          valueWatchStop()
+        }
+        valueWatchStop = watch(
+          () => accessor.value,
+          value => emit(`update:${valueKey}`, value),
+        )
       }
-      accessor.markAsBlurred = () => {}
-    }
-  })
+    },
+    { immediate: true },
+  )
 
-  watchEffect(() => {
-    if (!control.value) {
-      accessor.value = props[valueKey]
-      accessor.disabled = props[disabledKey] as boolean
-    }
-  })
   return accessor
 }

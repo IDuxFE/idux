@@ -54,36 +54,43 @@ describe('Input.vue', () => {
   })
 
   test('disabled work', async () => {
-    const wrapper = InputMount({ props: { disabled: true } })
+    const onFocus = jest.fn()
+    const onBlur = jest.fn()
+
+    const wrapper = InputMount({ props: { disabled: true, onFocus, onBlur } })
     await wrapper.find('input').trigger('focus')
 
     expect(wrapper.classes()).toContain('ix-input-disabled')
     expect(wrapper.classes()).not.toContain('ix-input-focused')
-    expect(wrapper.emitted()).not.toHaveProperty('focus')
+    expect(onFocus).not.toBeCalled()
 
     await wrapper.find('input').trigger('blur')
 
-    expect(wrapper.emitted()).not.toHaveProperty('blur')
+    expect(onBlur).not.toBeCalled()
 
     await wrapper.setProps({ disabled: false })
     await wrapper.find('input').trigger('focus')
 
     expect(wrapper.classes()).not.toContain('ix-input-disabled')
     expect(wrapper.classes()).toContain('ix-input-focused')
-    expect(wrapper.emitted()).toHaveProperty('focus')
+    expect(onFocus).toBeCalled()
 
     await wrapper.find('input').trigger('blur')
 
-    expect(wrapper.emitted()).toHaveProperty('blur')
+    expect(onBlur).toBeCalled()
   })
 
   test('readonly work', async () => {
-    const wrapper = InputMount({ props: { readonly: true } })
+    const onFocus = jest.fn()
+    const onBlur = jest.fn()
+    const wrapper = InputMount({ props: { readonly: true, onFocus, onBlur } })
     await wrapper.find('input').trigger('focus')
+
+    expect(onFocus).toBeCalled()
+
     await wrapper.find('input').trigger('blur')
 
-    expect(wrapper.emitted()).toHaveProperty('focus')
-    expect(wrapper.emitted()).toHaveProperty('blur')
+    expect(onBlur).toBeCalled()
   })
 
   test('addonAfter and addonBefore work', async () => {
@@ -140,12 +147,6 @@ describe('Input.vue', () => {
     expect(suffix.find('.ix-icon-up').exists()).toBe(true)
     expect(prefix.find('.ix-icon-down').exists()).toBe(true)
 
-    await suffix.find('.ix-icon-up').trigger('click')
-    await prefix.find('.ix-icon-down').trigger('click')
-
-    expect(wrapper.emitted()).toHaveProperty('suffixClick')
-    expect(wrapper.emitted()).toHaveProperty('prefixClick')
-
     await wrapper.setProps({ suffix: 'left' })
 
     expect(suffix.find('.ix-icon-left').exists()).toBe(true)
@@ -192,14 +193,15 @@ describe('Input.vue', () => {
   })
 
   test('clearable work', async () => {
-    const wrapper = InputMount({ props: { clearable: true } })
+    const onClear = jest.fn()
+    const wrapper = InputMount({ props: { clearable: true, onClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
     expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-close-circle').trigger('click')
 
-    expect(wrapper.emitted()).toHaveProperty('afterClear')
+    expect(onClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 

@@ -33,14 +33,7 @@ subtitle: 输入框
 | `size` | 设置大小 | `large\|medium\|small` | `medium` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `borderless` | 是否显示边框 | `boolean` | `false` | ✅ | - |
-
-#### InputEmits
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `suffixClick` | 后缀图标被点击 | `(value:string, evt: MouseEvent) => void` | - |
-| `prefixClick` | 前缀图标被点击 | `(value:string, evt: MouseEvent) => void` | - |
-| `afterClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - |
+| `onAfterClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 
 ### ix-textarea
 
@@ -61,12 +54,7 @@ subtitle: 输入框
 | `computeCount` | 自定义计算字符数的函数 | `(v: string) => string` | - | ✅ | 优先级高于 `maxCount` |
 | `size` | 设置大小 | `large\|medium\|small` | `medium` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
-
-#### TextareaEmits
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `afterClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - |
+| `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 
 ### 主题变量
 

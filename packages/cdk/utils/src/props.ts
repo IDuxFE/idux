@@ -160,4 +160,22 @@ export class IxPropTypes {
       validator: (value: number) => value >= min && value <= max,
     })
   }
+
+  static emit<T extends (...args: any[]) => any>(): VueTypeDef<T | T[]> {
+    return oneOfType([func<T>(), array<T>()])
+  }
+}
+
+export function callEmit<T extends (...args: any[]) => any>(
+  funcs: T[] | T | undefined,
+  ...args: Parameters<T>
+): ReturnType<T> | void {
+  if (!funcs) {
+    return
+  }
+  if (Array.isArray(funcs)) {
+    funcs.forEach(fn => fn(...args))
+  } else {
+    return funcs(...args)
+  }
 }
