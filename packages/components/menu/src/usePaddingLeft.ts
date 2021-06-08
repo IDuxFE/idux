@@ -8,10 +8,10 @@ export const usePaddingLeft = (
   indent: ComputedRef<number>,
   level: number,
   grouped: boolean,
-): ComputedRef<string | null> => {
+): ComputedRef<string | undefined> => {
   return computed(() => {
     if (mode.value !== 'inline') {
-      return null
+      return undefined
     }
     const groupedLeft = grouped ? 8 : 0
     return `${indent.value * level + groupedLeft}px`

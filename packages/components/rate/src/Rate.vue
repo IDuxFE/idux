@@ -27,25 +27,18 @@
 </template>
 
 <script lang="ts">
-import { isArray, PropTypes, toNumber, withUndefined } from '@idux/cdk/utils'
 import { computed, defineComponent, onBeforeUpdate, ref, watchEffect } from 'vue'
+import { isArray, toNumber } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { useGlobalConfig } from '@idux/components/config'
+import { rateProps } from './types'
 
 const HALF = 2
 
 export default defineComponent({
   name: 'IxRate',
   components: { IxIcon },
-  props: {
-    value: PropTypes.oneOfType([Number, String]).def(0),
-    count: withUndefined(PropTypes.oneOfType([Number, String])),
-    icon: PropTypes.string,
-    allowHalf: PropTypes.bool,
-    disabled: PropTypes.bool,
-    tooltips: PropTypes.array,
-    allowClear: PropTypes.bool,
-  },
+  props: rateProps,
   emits: ['update:value', 'change'],
   setup(props, { emit }) {
     const score = ref(props.value)

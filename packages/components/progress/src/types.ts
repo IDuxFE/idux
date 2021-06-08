@@ -1,9 +1,30 @@
 import type { DefineComponent } from 'vue'
-import { object } from 'vue-types'
-import { PropTypes } from '@idux/cdk/utils'
+
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 import { ProgressSize } from '@idux/components/config'
 
 export const progressStatus = ['normal', 'success', 'exception', 'active'] as const
+
+export const progressProps = {
+  type: IxPropTypes.oneOf<ProgressType>(['line', 'circle', 'dashboard']).def('line'),
+  format: IxPropTypes.func<ProgressFormat>(),
+  percent: IxPropTypes.oneOfType([String, Number]).def(0),
+  status: IxPropTypes.oneOf<ProgressStatus>(['normal', 'success', 'exception', 'active']),
+  hideInfo: IxPropTypes.bool.def(false),
+  success: IxPropTypes.object<ProgressSuccess>(),
+  trailColor: IxPropTypes.string,
+  strokeColor: IxPropTypes.oneOfType([String, IxPropTypes.object<ProgressGradient>()]),
+  strokeLinecap: IxPropTypes.oneOf<ProgressStrokeLinecap>(['round', 'square']).def('round'),
+  strokeWidth: IxPropTypes.oneOfType([String, Number]),
+  gapDegree: IxPropTypes.oneOfType([String, Number]),
+  gapPosition: IxPropTypes.oneOf<ProgressGapPositionType>(['top', 'bottom', 'left', 'right']),
+  width: IxPropTypes.oneOfType([String, Number]).def(132),
+  size: IxPropTypes.oneOf<ProgressSize>(['small', 'medium']),
+}
+
+export type ProgressProps = IxExtractPropTypes<typeof progressProps>
+
+export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>
 
 export type ProgressType = 'line' | 'circle' | 'dashboard'
 export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
@@ -23,49 +44,10 @@ export interface ConvertProgressSuccess extends ProgressSuccess {
   percent: number
 }
 
-export const progressPropsDef = {
-  type: PropTypes.oneOf(['line', 'circle', 'dashboard'] as const).def('line'),
-  format: PropTypes.func,
-  percent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(0),
-  status: PropTypes.oneOf(progressStatus),
-  hideInfo: PropTypes.bool.def(false),
-  success: object<ProgressSuccess>(),
-  trailColor: PropTypes.string,
-  strokeColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  strokeLinecap: PropTypes.oneOf(['round', 'square'] as const).def('round'),
-  strokeWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  gapDegree: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  gapPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right'] as const),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(132),
-  size: PropTypes.oneOf(['small', 'medium'] as const),
+export const convertProgressProps = {
+  ...progressProps,
+  success: IxPropTypes.object<ConvertProgressSuccess>().def(() => ({ percent: 0 })),
+  percent: IxPropTypes.number.def(0),
 }
 
-export const convertProgressPropsDef = {
-  ...progressPropsDef,
-  percent: PropTypes.number.def(0),
-  success: object<ConvertProgressSuccess>().def(() => ({ percent: 0 })),
-}
-
-export interface ConvertProgressProps extends ProgressProps {
-  percent: number
-  success: ConvertProgressSuccess
-}
-
-export interface ProgressProps {
-  type: ProgressType
-  format?: ProgressFormat
-  percent: string | number
-  status?: ProgressStatus
-  hideInfo: boolean
-  success?: ProgressSuccess
-  trailColor?: string
-  strokeColor?: string | ProgressGradient
-  strokeLinecap: ProgressStrokeLinecap
-  strokeWidth?: string | number
-  gapDegree?: string | number
-  gapPosition?: ProgressGapPositionType
-  width: string | number
-  size?: ProgressSize
-}
-
-export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>
+export type ConvertProgressProps = IxExtractPropTypes<typeof convertProgressProps>

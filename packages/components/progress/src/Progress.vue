@@ -5,15 +5,15 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { ProgressProps, progressPropsDef } from './types'
+import { progressProps } from './types'
 import Line from './Line.vue'
 import Circle from './Circle.vue'
 import { convertPercent } from './util'
 
 export default defineComponent({
   name: 'IxProgress',
-  props: progressPropsDef,
-  setup(props: ProgressProps) {
+  props: progressProps,
+  setup(props) {
     const percent = computed(() => convertPercent(props.percent))
     const successPercent = computed(() => convertPercent(props.success?.percent))
     const tag = computed(() => (props.type === 'line' ? Line : Circle))

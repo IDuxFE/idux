@@ -14,23 +14,19 @@
 <script lang="ts">
 import type { ListGridProps } from './types'
 
-import { ComputedRef, defineComponent, inject } from 'vue'
-import { ListItemPropTypes } from './types'
+import { defineComponent, inject } from 'vue'
 import ListItemWrap from './ListItemWrap.vue'
+import { listToken } from './token'
+import { listItemProps } from './types'
 
 export default defineComponent({
   name: 'IxListItem',
-  components: {
-    ListItemWrap,
-  },
-  props: ListItemPropTypes,
-  emits: [],
+  components: { ListItemWrap },
+  props: listItemProps,
   setup() {
-    const listGrid = inject<ComputedRef<ListGridProps> | undefined>('listGrid', void 0)
+    const listGrid = inject(listToken, null)
     const gird = listGrid?.value && useGrid(listGrid?.value)
-    return {
-      gird,
-    }
+    return { gird }
   },
 })
 

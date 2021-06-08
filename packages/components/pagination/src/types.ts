@@ -7,155 +7,106 @@ import type {
 } from '@idux/components/config'
 import type { PaginationLocale } from '@idux/components/i18n'
 
-import { object } from 'vue-types'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface PaginationProps {
-  pageIndex: number
-  pageSize?: number
-  disabled: boolean
-  itemRender?: PaginationItemRenderFn
-  pageSizes?: number[]
-  showQuickJumper?: boolean
-  showSizeChanger?: boolean
-  showTitle?: boolean
-  showTotal?: boolean
-  simple?: boolean
-  size?: PaginationSize
-  total: number
-  totalRender?: PaginationTotalRenderFn
+export const paginationProps = {
+  pageIndex: IxPropTypes.number.def(1),
+  pageSize: IxPropTypes.number,
+  disabled: IxPropTypes.bool.def(false),
+  itemRender: IxPropTypes.func<PaginationItemRenderFn>(),
+  pageSizes: IxPropTypes.arrayOf(Number),
+  showQuickJumper: IxPropTypes.bool,
+  showSizeChanger: IxPropTypes.bool,
+  showTitle: IxPropTypes.bool,
+  showTotal: IxPropTypes.bool,
+  simple: IxPropTypes.bool,
+  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']),
+  total: IxPropTypes.number.def(0),
+  totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 }
 
-export const paginationPropsDef = {
-  pageIndex: PropTypes.number.def(1),
-  pageSize: PropTypes.number,
-  disabled: PropTypes.bool.def(false),
-  itemRender: PropTypes.func,
-  pageSizes: PropTypes.arrayOf(PropTypes.number),
-  showQuickJumper: PropTypes.bool,
-  showSizeChanger: PropTypes.bool,
-  showTitle: PropTypes.bool,
-  showTotal: PropTypes.bool,
-  simple: PropTypes.bool,
-  size: PropTypes.oneOf(['medium', 'small'] as const),
-  total: PropTypes.number.def(0),
-  totalRender: PropTypes.func,
-}
+export type PaginationProps = IxExtractPropTypes<typeof paginationProps>
 
 export type PaginationInstance = InstanceType<DefineComponent<PaginationProps>>
 
-export interface PaginationDefaultProps {
-  disabled: boolean
-  itemRender?: PaginationItemRenderFn
-  locale: PaginationLocale
-  pageIndex: number
-  pageSize: number
-  pageSizes: number[]
-  showQuickJumper: boolean
-  showSizeChanger?: boolean
-  showTitle: boolean
-  size: PaginationSize
-  total: number
+export const paginationDefaultProps = {
+  disabled: IxPropTypes.bool.isRequired,
+  itemRender: IxPropTypes.func<PaginationItemRenderFn>(),
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  pageIndex: IxPropTypes.number.isRequired,
+  pageSize: IxPropTypes.number.isRequired,
+  pageSizes: IxPropTypes.arrayOf(Number).isRequired,
+  showQuickJumper: IxPropTypes.bool.isRequired,
+  showSizeChanger: IxPropTypes.bool.isRequired,
+  showTitle: IxPropTypes.bool.isRequired,
+  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
+  total: IxPropTypes.number.def(0),
 }
 
-export const paginationDefaultPropsDef = {
-  disabled: PropTypes.bool.isRequired,
-  itemRender: PropTypes.func,
-  locale: object<PaginationLocale>().isRequired,
-  pageIndex: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  showQuickJumper: PropTypes.bool.isRequired,
-  showSizeChanger: PropTypes.bool.isRequired,
-  showTitle: PropTypes.bool.isRequired,
-  size: PropTypes.oneOf(['medium', 'small'] as const).isRequired,
-  total: PropTypes.number.def(0),
+export type PaginationDefaultProps = IxExtractPropTypes<typeof paginationDefaultProps>
+
+export type PaginationDefaultInstance = InstanceType<DefineComponent<PaginationDefaultProps>>
+
+export const paginationSimpleProps = {
+  disabled: IxPropTypes.bool.isRequired,
+  itemRender: IxPropTypes.func<PaginationItemRenderFn>(),
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  pageIndex: IxPropTypes.number.isRequired,
+  pageSize: IxPropTypes.number.isRequired,
+  showTitle: IxPropTypes.bool.isRequired,
+  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
+  total: IxPropTypes.number.def(0),
 }
 
-export interface PaginationSimpleProps {
-  disabled: boolean
-  itemRender?: PaginationItemRenderFn
-  locale: PaginationLocale
-  pageIndex: number
-  pageSize: number
-  showTitle: boolean
-  size: PaginationSize
-  total: number
+export type PaginationSimpleProps = IxExtractPropTypes<typeof paginationSimpleProps>
+
+export type PaginationSimpleInstance = InstanceType<DefineComponent<PaginationSimpleProps>>
+
+export const paginationItemProps = {
+  active: IxPropTypes.bool.def(false),
+  disabled: IxPropTypes.bool.def(false),
+  index: IxPropTypes.number,
+  itemRender: IxPropTypes.func<PaginationItemRenderFn>(),
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  showTitle: IxPropTypes.bool.isRequired,
+  type: IxPropTypes.oneOf<PaginationItemType>(['page', 'prev', 'next', 'prev5', 'next5']).isRequired,
 }
 
-export const paginationSimplePropsDef = {
-  disabled: PropTypes.bool.isRequired,
-  itemRender: PropTypes.func,
-  locale: object<PaginationLocale>().isRequired,
-  pageIndex: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  showTitle: PropTypes.bool.isRequired,
-  size: PropTypes.oneOf(['medium', 'small'] as const).isRequired,
-  total: PropTypes.number.def(0),
+export type PaginationItemProps = IxExtractPropTypes<typeof paginationItemProps>
+
+export type PaginationItemInstance = InstanceType<DefineComponent<PaginationItemProps>>
+
+export const paginationJumperProps = {
+  disabled: IxPropTypes.bool.isRequired,
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  pageIndex: IxPropTypes.number.isRequired,
+  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
 }
 
-export interface PaginationItemProps {
-  active: boolean
-  disabled: boolean
-  index?: number
-  itemRender?: PaginationItemRenderFn
-  locale: PaginationLocale
-  showTitle: boolean
-  type: PaginationItemType
+export type PaginationJumperProps = IxExtractPropTypes<typeof paginationJumperProps>
+
+export type PaginationJumperInstance = InstanceType<DefineComponent<PaginationJumperProps>>
+
+export const paginationSizesProps = {
+  disabled: IxPropTypes.bool.isRequired,
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  pageSize: IxPropTypes.number.isRequired,
+  pageSizes: IxPropTypes.arrayOf(Number).isRequired,
+  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
 }
 
-export const paginationItemPropsDef = {
-  active: PropTypes.bool.def(false),
-  disabled: PropTypes.bool.def(false),
-  index: PropTypes.number,
-  itemRender: PropTypes.func,
-  locale: object<PaginationLocale>().isRequired,
-  showTitle: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf(['page', 'prev', 'next', 'prev5', 'next5'] as const).isRequired,
+export type PaginationSizesProps = IxExtractPropTypes<typeof paginationSizesProps>
+
+export type PaginationSizesInstance = InstanceType<DefineComponent<PaginationSizesProps>>
+
+export const paginationTotalProps = {
+  locale: IxPropTypes.object<PaginationLocale>().isRequired,
+  pageIndex: IxPropTypes.number.isRequired,
+  pageSize: IxPropTypes.number.isRequired,
+  total: IxPropTypes.number.isRequired,
+  totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 }
 
-export interface PaginationJumperProps {
-  disabled: boolean
-  locale: PaginationLocale
-  pageIndex: number
-  size: PaginationSize
-}
+export type PaginationTotalProps = IxExtractPropTypes<typeof paginationTotalProps>
 
-export const paginationJumperPropsDef = {
-  disabled: PropTypes.bool.isRequired,
-  locale: object<PaginationLocale>().isRequired,
-  pageIndex: PropTypes.number.isRequired,
-  size: PropTypes.oneOf(['medium', 'small'] as const).isRequired,
-}
-
-export interface PaginationSizesProps {
-  disabled: boolean
-  locale: PaginationLocale
-  pageSize: number
-  pageSizes: number[]
-  size: PaginationSize
-}
-
-export const paginationSizesDef = {
-  disabled: PropTypes.bool.isRequired,
-  locale: object<PaginationLocale>().isRequired,
-  pageSize: PropTypes.number.isRequired,
-  pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  size: PropTypes.oneOf(['medium', 'small'] as const).isRequired,
-}
-
-export interface PaginationTotalProps {
-  locale: PaginationLocale
-  pageIndex: number
-  pageSize: number
-  total: number
-  totalRender?: PaginationTotalRenderFn
-}
-
-export const paginationTotalDef = {
-  locale: object<PaginationLocale>().isRequired,
-  pageIndex: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  totalRender: PropTypes.func,
-}
+export type PaginationTotalInstance = InstanceType<DefineComponent<PaginationTotalProps>>

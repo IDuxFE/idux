@@ -1,5 +1,5 @@
 <template>
-  <li class="ix-menu-item-group" @click="onClick">
+  <li class="ix-menu-item-group">
     <div class="ix-menu-item-group-title" :style="{ paddingLeft }">
       <span v-if="icon || $slots.icon" class="ix-menu-item-group-title-icon">
         <slot name="icon"><ix-icon :name="icon" /></slot>
@@ -17,14 +17,14 @@
 <script lang="ts">
 import { defineComponent, inject, provide } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { menuItemGroupPropsDef } from '../types'
+import { menuItemGroupProps } from '../types'
 import { menuItemGroupToken, menuToken, subMenuToken } from '../token'
 import { usePaddingLeft } from '../usePaddingLeft'
 
 export default defineComponent({
   name: 'IxMenuItemGroup',
   components: { IxIcon },
-  props: menuItemGroupPropsDef,
+  props: menuItemGroupProps,
   setup() {
     provide(menuItemGroupToken, true)
 

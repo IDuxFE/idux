@@ -1,3 +1,4 @@
+import type { MenuTheme } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 import type { MenuItemProps, MenuMode } from './types'
 
@@ -21,7 +22,7 @@ export interface MenuContext {
   multiple: ComputedRef<boolean>
   mode: ComputedRef<MenuMode>
   indent: ComputedRef<number>
-  theme: ComputedRef<string>
+  theme: ComputedRef<MenuTheme>
   selectedIds: Ref<Array<string | number>>
   openedIds: Ref<Array<string | number>>
   menuItemClick: MenuItemClickFn

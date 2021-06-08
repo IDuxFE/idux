@@ -13,4 +13,4 @@ IxCol.install = (app: App): void => {
 
 export { IxRow, IxCol }
 
-export type { RowInstance, RowProps, RowAlign, RowJustify, ColInstance, ColProps } from './src/types'
+export type { RowInstance, RowProps, RowGutter, RowAlign, RowJustify, ColInstance, ColProps } from './src/types'

@@ -6,15 +6,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 
 export default defineComponent({
   name: 'IxSubMenuOverlayContent',
   props: {
-    disabled: PropTypes.bool,
-    mode: PropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const),
-    theme: PropTypes.oneOf(['light', 'dark'] as const),
+    disabled: IxPropTypes.bool,
+    mode: IxPropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const),
+    theme: IxPropTypes.oneOf(['light', 'dark'] as const),
   },
   emits: ['mouseOverlayChang'],
   setup(props, { emit }) {

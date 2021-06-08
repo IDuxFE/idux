@@ -2,12 +2,9 @@ import type { ComputedRef, InjectionKey } from 'vue'
 import type { AbstractControl, ControlPathType } from './controls'
 
 import { inject, provide } from 'vue'
-import { object } from 'vue-types'
-import { isNil, PropTypes, withUndefined } from '@idux/cdk/utils'
+import { isNil, IxPropTypes } from '@idux/cdk/utils'
 
-export const controlPropTypeDef = withUndefined(
-  PropTypes.oneOfType([PropTypes.string, PropTypes.number, object<AbstractControl>()]),
-)
+export const controlProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<AbstractControl>()])
 
 const controlToken: InjectionKey<AbstractControl> = Symbol('controlToken')
 

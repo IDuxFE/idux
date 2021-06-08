@@ -5,7 +5,7 @@ import { ref, defineComponent, computed } from 'vue'
 import Item from './item'
 import Filler from './filler'
 import ScrollBar from './scrollBar'
-import { virtualListPropsDef } from './types'
+import { virtualListProps } from './types'
 import { useEvents } from './utils/useEvents'
 import { useItemKey, useItems } from './utils/useItem'
 import { useScrollBar } from './utils/useScrollBar'
@@ -13,9 +13,8 @@ import { useScrollTo } from './utils/useScrollTo'
 
 export default defineComponent({
   name: 'IxVirtualList',
-  props: virtualListPropsDef,
-  emits: ['scroll'],
-  setup(props: VirtualListProps, { emit }) {
+  props: virtualListProps,
+  setup(props) {
     const useVirtual = computed(() => props.virtual && props.height > 0 && props.itemHeight > 0)
     const scrollBarRef = ref<VirtualScrollBarInstance>()
     const { componentRef, componentElement } = useComponentRef()
@@ -41,7 +40,7 @@ export default defineComponent({
         syncScrollTop(newScrollTop)
       }
       // Trigger origin onScroll
-      emit('scroll', evt)
+      props.onScroll?.(evt)
     }
 
     const scrollTo = useScrollTo(props, scrollBarRef, componentElement, heights, collectHeight, syncScrollTop)
@@ -70,7 +69,7 @@ export default defineComponent({
     const CompTag = this.component as any
     const { start, end, scrollHeight, offset } = this.scrollState
     const itemRender = $slots.item ?? this.itemRender
-    const children = useChildren($props, data, start, end, this.setItemInstance, itemRender)
+    const children = useChildren($props, data, start, end, this.setItemInstance, itemRender!)
     return (
       <div class="ix-virtual-list" style={{ position: 'relative' }}>
         <CompTag
@@ -128,10 +127,10 @@ const useComponentStyle = (props: VirtualListProps, useVirtual: ComputedRef<bool
 
 const useChildren = (
   props: VirtualListProps,
-  data: Record<string, unknown>[],
+  data: unknown[],
   startIndex: number,
   endIndex: number,
-  setItemRef: (item: Record<string, unknown>, element: HTMLElement) => void,
+  setItemRef: (item: unknown, element: HTMLElement) => void,
   itemRender: VirtualItemRenderFn,
 ) => {
   return data.slice(startIndex, endIndex + 1).map((item, index) => {

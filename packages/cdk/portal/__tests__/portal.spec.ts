@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { mount } from '@vue/test-utils'
 
 import IxPortal from '../src/Portal.vue'
@@ -7,8 +7,8 @@ import IxPortal from '../src/Portal.vue'
 const TestComponent = defineComponent({
   components: { IxPortal },
   props: {
-    disabled: PropTypes.bool,
-    target: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]).isRequired,
+    disabled: IxPropTypes.bool,
+    target: IxPropTypes.oneOfType([String, HTMLElement]).isRequired,
   },
   template: `
   <ix-portal :disabled='disabled' :target='target'>

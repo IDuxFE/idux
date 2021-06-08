@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { PaginationDefaultProps, paginationDefaultPropsDef } from './types'
+import { PaginationDefaultProps, paginationDefaultProps } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { PaginationItemType } from '@idux/components/config'
@@ -51,10 +51,9 @@ const indexDiffMap = {
 export default defineComponent({
   name: 'IxPaginationDefault',
   components: { IxPaginationItem, IxPaginationSizes, IxPaginationJumper },
-  props: paginationDefaultPropsDef,
-
+  props: paginationDefaultProps,
   emits: ['pageIndexChange', 'pageSizeChange'],
-  setup(props: PaginationDefaultProps, { emit }) {
+  setup(props, { emit }) {
     const onPageIndexChange = (index: number) => emit('pageIndexChange', index)
     const onPageSizeChange = (size: number) => emit('pageSizeChange', size)
     const onItemClick = ({ type, index }: { type: PaginationItemType; index: number }) => {

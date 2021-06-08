@@ -10,13 +10,13 @@
 <script lang="ts">
 import { computed, defineComponent, inject, nextTick, onUnmounted, provide, ref, watch } from 'vue'
 import IxOption from './Option.vue'
-import { optionGroupPropsDef } from './types'
+import { optionGroupProps } from './types'
 import { visibleChangeToken } from './token'
 
 export default defineComponent({
   name: 'IxOptionGroup',
   components: { IxOption },
-  props: optionGroupPropsDef,
+  props: optionGroupProps,
   setup() {
     const showItemCount = ref(0)
     const visible = computed(() => showItemCount.value > 0)

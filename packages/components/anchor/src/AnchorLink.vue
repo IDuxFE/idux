@@ -7,16 +7,14 @@
   </div>
 </template>
 <script lang="ts">
-import type { AnchorLinkProps } from './types'
-
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
-import { linkPropsDef } from './types'
+import { linkProps } from './types'
 import { anchorToken } from './token'
 
 export default defineComponent({
   name: 'IxAnchorLink',
-  props: linkPropsDef,
-  setup(props: AnchorLinkProps) {
+  props: linkProps,
+  setup(props) {
     const { activeLink, handleLinkClick, unregisterLink, registerLink } = inject(anchorToken)!
     const isActive = computed(() => activeLink.value === props.href)
     const classes = computed(() => {

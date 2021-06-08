@@ -12,31 +12,26 @@ export function getLessTemplate(compName: string): string {
 export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
   return `import type { DefineComponent } from 'vue'
 
-import { PropTypes } from '@idux/cdk/utils'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface ${upperFirstName}Props {
-  testProp: string
+export const ${camelCaseName}Props = {
+  
 }
 
-export const ${camelCaseName}PropsDef = {
-  testProp: PropTypes.string,
-}
+export type ${upperFirstName}Props = IxExtractPropTypes<typeof ${camelCaseName}Props>
 
 export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
 
 export function getTsxTemplate(upperFirstName: string, camelCaseName: string): string {
-  return `import type { ${upperFirstName}Props } from './types'
-
-import { defineComponent } from 'vue'
-import { ${camelCaseName}PropsDef } from './types'
+  return `import { defineComponent } from 'vue'
+import { ${camelCaseName}Props } from './types'
 
 export default defineComponent({
   name: 'Ix${upperFirstName}',
-  props: ${camelCaseName}PropsDef,
-  emits: [],
-  setup(props: ${upperFirstName}Props) {
+  props: ${camelCaseName}Props,
+  setup(props) {
 
   }
 })
@@ -52,11 +47,11 @@ export function getVueTemplate(upperFirstName: string, camelCaseName: string): s
 import type { ${upperFirstName}Props } from './types'
 
 import { defineComponent } from 'vue'
-import { ${camelCaseName}PropsDef } from './types'
+import { ${camelCaseName}Props } from './types'
 
 export default defineComponent({
   name: 'Ix${upperFirstName}',
-  props: ${camelCaseName}PropsDef,
+  props: ${camelCaseName}Props,
   emits: [],
   setup(props: ${upperFirstName}Props) {
     

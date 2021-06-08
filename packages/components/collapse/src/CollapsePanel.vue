@@ -21,23 +21,16 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
-import { CollapsePanelProps, collapseInjectionKey } from './types'
-import { PropTypes } from '@idux/cdk/utils'
-import { useCollapseClasses } from './useCollpase'
+import { collapseToken } from './token'
+import { collapsePanelProps } from './types'
 import IxCollapsePanelHeader from './CollapsePanelHeader.vue'
 
 export default defineComponent({
   name: 'IxCollapsePanel',
   components: { IxCollapsePanelHeader },
-  props: {
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    disabled: PropTypes.bool.def(false),
-    icon: PropTypes.arrayOf(PropTypes.string),
-  },
-
-  setup(props: CollapsePanelProps) {
-    const collapse = inject(collapseInjectionKey, {})
+  props: collapsePanelProps,
+  setup(props) {
+    const collapse = inject(collapseToken)!
     const icons = computed(() => props.icon ?? ['right', 'down'])
 
     const isActive = computed(() => {
@@ -48,7 +41,14 @@ export default defineComponent({
       return collapse.props.borderless
     })
 
-    const classes = useCollapseClasses(props, borderless, isActive)
+    const classes = computed(() => {
+      const disabled = props.disabled
+      return {
+        'ix-collapse-panel-disabled': disabled,
+        'ix-collapse-panel-active': isActive.value,
+        'ix-collapse-panel-borderless': borderless.value,
+      }
+    })
 
     const headerClick = () => {
       const { disabled, name } = props

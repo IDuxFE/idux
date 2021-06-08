@@ -9,18 +9,15 @@ import type { IconConfig } from '@idux/components/config'
 import type { IconProps } from './types'
 
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
-import { isNumeric, PropTypes, withUndefined } from '@idux/cdk/utils'
+import { isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
+import { iconProps } from './types'
 
 export default defineComponent({
   name: 'IxIcon',
-  props: {
-    iconfont: PropTypes.bool.def(false),
-    name: PropTypes.string,
-    rotate: withUndefined(PropTypes.oneOfType([Boolean, Number, String])),
-  },
-  setup(props: IconProps) {
+  props: iconProps,
+  setup(props) {
     const root = ref(null as unknown as HTMLElement)
     const iconConfig = useGlobalConfig('icon')
     onMounted(() => appendChild(props, iconConfig, root))

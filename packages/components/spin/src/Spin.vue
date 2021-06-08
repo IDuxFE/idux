@@ -12,25 +12,17 @@
   </div>
 </template>
 <script lang="ts">
-import type { SpinProps } from './types'
-
 import { computed, defineComponent } from 'vue'
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { spinProps } from './types'
 
 export default defineComponent({
   name: 'IxSpin',
   components: { IxIcon },
-  props: {
-    spinning: PropTypes.bool.def(true),
-    icon: PropTypes.string,
-    tip: PropTypes.string,
-    tipAlign: PropTypes.oneOf(['horizontal', 'vertical'] as const),
-    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-  },
-
-  setup(props: SpinProps, { slots }) {
+  props: spinProps,
+  setup(props, { slots }) {
     const spinConfig = useGlobalConfig('spin')
 
     const icon$$ = computed(() => props.icon ?? spinConfig.icon)

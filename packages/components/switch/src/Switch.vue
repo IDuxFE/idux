@@ -26,24 +26,16 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
-import { SwitchProps } from './types'
-import { PropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
+import { switchProps } from './types'
 
 export default defineComponent({
   name: 'IxSwitch',
   components: { IxIcon },
   inheritAttrs: false,
-  props: {
-    checked: PropTypes.bool.def(false),
-    disabled: PropTypes.bool.def(false),
-    checkedChildren: PropTypes.string.def(''),
-    unCheckedChildren: PropTypes.string.def(''),
-    size: PropTypes.oneOf(['medium', 'small'] as const).def('medium'),
-    loading: PropTypes.bool.def(false),
-  },
+  props: switchProps,
   emits: ['change', 'update:checked'],
-  setup(props: SwitchProps, { emit }) {
+  setup(props, { emit }) {
     const stateChecked = ref(props.checked)
     const switchRef = ref<HTMLButtonElement | null>(null)
 

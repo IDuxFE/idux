@@ -6,18 +6,16 @@
 </template>
 
 <script lang="ts">
-import type { PaginationSizesProps } from './types'
-
 import { computed, defineComponent } from 'vue'
 import { IxSelect } from '@idux/components/select'
-import { paginationSizesDef } from './types'
+import { paginationSizesProps } from './types'
 
 export default defineComponent({
   name: 'IxPaginationSizes',
   components: { IxSelect },
-  props: paginationSizesDef,
+  props: paginationSizesProps,
   emits: ['pageSizeChange'],
-  setup(props: PaginationSizesProps, { emit }) {
+  setup(props, { emit }) {
     const sizeOptions = computed(() => {
       const { pageSizes, locale } = props
       return pageSizes.map(size => {

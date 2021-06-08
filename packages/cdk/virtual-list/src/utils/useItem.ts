@@ -3,16 +3,17 @@ import type { VirtualListProps } from '../types'
 import { reactive } from 'vue'
 import { isFunction } from '@idux/cdk/utils'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useItemKey = (props: VirtualListProps, item: Record<string, any>): string | number => {
+export const useItemKey = (props: VirtualListProps, item: unknown): string | number => {
   const itemKey = props.itemKey
   if (isFunction(itemKey)) {
     return itemKey(item)
   }
-  return item[itemKey]
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (item as any)[itemKey]
 }
 
-export type SetItemInstanceFn = (item: Record<string, unknown>, instance: HTMLElement) => void
+export type SetItemInstanceFn = (item: unknown, instance: HTMLElement) => void
 
 export interface UseItems {
   heights: Record<string, number>
@@ -46,7 +47,7 @@ export const useItems = (props: VirtualListProps): UseItems => {
     })
   }
 
-  const setItemInstance = (item: Record<string, unknown>, instance: HTMLElement) => {
+  const setItemInstance = (item: unknown, instance: HTMLElement) => {
     const key = useItemKey(props, item)
 
     if (instance) {

@@ -10,12 +10,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IxCol } from '@idux/components/grid'
-import { ListItemWrapPropTypes } from './types'
+import { listItemWrapProps } from './types'
 
 export default defineComponent({
-  components: {
-    IxCol,
-  },
-  props: ListItemWrapPropTypes,
+  components: { IxCol },
+  props: listItemWrapProps,
 })
 </script>

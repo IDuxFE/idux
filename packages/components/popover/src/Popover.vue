@@ -15,31 +15,18 @@
 </template>
 
 <script lang="ts">
-import type { SetupContext } from 'vue'
-import type { PopoverProps } from './types'
-
 import { computed, defineComponent } from 'vue'
-import { OverlayPlacementPropDef, OverlayTriggerPropDef } from '@idux/cdk/overlay'
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { hasSlot } from '@idux/cdk/utils'
 import { IxTooltip } from '@idux/components/tooltip'
 import { useGlobalConfig } from '@idux/components/config'
+import { popoverProps } from './types'
 
 export default defineComponent({
   name: 'IxPopover',
   components: { IxTooltip },
-  props: {
-    title: PropTypes.string,
-    content: PropTypes.string.isRequired,
-    placement: OverlayPlacementPropDef,
-    visible: PropTypes.bool,
-    trigger: OverlayTriggerPropDef,
-    showDelay: PropTypes.number,
-    hideDelay: PropTypes.number,
-    destroyOnHide: PropTypes.bool,
-    autoAdjust: PropTypes.bool,
-  },
+  props: popoverProps,
   emits: ['update:visible'],
-  setup(props: PopoverProps, { emit, slots }: SetupContext) {
+  setup(props, { emit, slots }) {
     const options = computed(() => {
       const config = useGlobalConfig('popover')
       return {

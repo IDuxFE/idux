@@ -1,49 +1,34 @@
 import type { DefineComponent } from 'vue'
 import type { ButtonSize } from '@idux/components/config'
 
-import { PropTypes } from '@idux/cdk/utils'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonShape = 'circle' | 'round'
 
-export interface ButtonProps {
-  mode?: ButtonMode
-  danger?: boolean
-  ghost?: boolean
-  disabled?: boolean
-  loading?: boolean
-  size?: ButtonSize
-  shape?: ButtonShape
-  block?: boolean
-  icon?: string
-  type: string
+export const buttonProps = {
+  mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
+  danger: IxPropTypes.bool,
+  ghost: IxPropTypes.bool,
+  disabled: IxPropTypes.bool,
+  loading: IxPropTypes.bool,
+  size: IxPropTypes.oneOf<ButtonSize>(['large', 'medium', 'small']),
+  shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
+  block: IxPropTypes.bool,
+  icon: IxPropTypes.string,
+  type: IxPropTypes.string.def('button'),
 }
 
-export const buttonPropsDef = {
-  mode: PropTypes.oneOf(['primary', 'default', 'dashed', 'text', 'link'] as const),
-  danger: PropTypes.bool,
-  ghost: PropTypes.bool,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-  shape: PropTypes.oneOf(['circle', 'round'] as const),
-  block: PropTypes.bool,
-  icon: PropTypes.string,
-  type: PropTypes.string.def('button'),
-}
+export type ButtonProps = IxExtractPropTypes<typeof buttonProps>
 
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
-export interface ButtonGroupProps {
-  mode?: ButtonMode
-  size?: ButtonSize
-  shape?: ButtonShape
+export const buttonGroupProps = {
+  mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
+  size: IxPropTypes.oneOf<ButtonSize>(['large', 'medium', 'small']),
+  shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
 }
 
-export const buttonGroupPropsDef = {
-  mode: PropTypes.oneOf(['primary', 'default', 'dashed', 'text', 'link'] as const),
-  size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-  shape: PropTypes.oneOf(['circle', 'round'] as const),
-}
+export type ButtonGroupProps = IxExtractPropTypes<typeof buttonGroupProps>
 
 export type ButtonGroupInstance = InstanceType<DefineComponent<ButtonGroupProps>>

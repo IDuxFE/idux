@@ -1,15 +1,14 @@
 import type { DefineComponent } from 'vue'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface BadgeProps {
-  /** Badge显示的数字 */
-  count: number | string
-  /** 最大显示的数字 */
-  overflowCount?: number | string
-  /** 是否显示 0 */
-  showZero?: boolean
-  /** 是否以点的形式显示，优先级大于以上属性 */
-  dot?: boolean
-  color?: string
+export const backTopProps = {
+  count: IxPropTypes.oneOfType([Number, String]).def(0),
+  showZero: IxPropTypes.bool,
+  overflowCount: IxPropTypes.number,
+  dot: IxPropTypes.bool,
+  color: IxPropTypes.string,
 }
+
+export type BadgeProps = IxExtractPropTypes<typeof backTopProps>
 
 export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>

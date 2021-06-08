@@ -81,7 +81,7 @@ We use `eslint`, `stylelint`, `markdownlint` and `ls-lint` to ensure the overall
 - filename: `PascalCase`
 - props
   - name: `camelCase`
-  - default: Please use the `PropTypes` in `@idux/cdk/utils`, please note: when there is no specified default value displayed, the default value of all types is `undefined`, which is different from the default behavior of vue compiler the difference.
+  - default: Please use the `IxPropTypes` in `@idux/cdk/utils`, please note: when there is no specified default value displayed, the default value of all types is `undefined`, which is different from the default behavior of vue compiler the difference.
 - slots
   - name: `camcelCase`
   - If it is consistent with the function of a props, it needs to have the same name as the props.

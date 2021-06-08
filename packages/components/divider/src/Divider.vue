@@ -6,23 +6,19 @@
   </div>
 </template>
 <script lang="ts">
-import type { ComputedRef, SetupContext } from 'vue'
+import type { ComputedRef } from 'vue'
 import type { DividerConfig } from '@idux/components/config'
 import type { DividerProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { dividerProps } from './types'
 
 export default defineComponent({
   name: 'IxDivider',
-  props: {
-    dashed: PropTypes.bool,
-    plain: PropTypes.bool,
-    position: PropTypes.oneOf(['left', 'center', 'right'] as const),
-    type: PropTypes.oneOf(['horizontal', 'vertical'] as const),
-  },
-  setup(props: DividerProps, { slots }: SetupContext) {
+  props: dividerProps,
+  setup(props, { slots }) {
     const dividerConfig = useGlobalConfig('divider')
     const withText = computed(() => hasSlot(slots))
     const className = useClassName(props, dividerConfig, withText)

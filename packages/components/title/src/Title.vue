@@ -22,24 +22,19 @@
 import type { TitleProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { PropTypes, toArray, withUndefined } from '@idux/cdk/utils'
+import { toArray } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
+import { titleProps } from './types'
 
 export default defineComponent({
   name: 'IxTitle',
   components: { IxIcon },
-  props: {
-    title: PropTypes.string,
-    subTitle: PropTypes.string,
-    extra: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])),
-    size: PropTypes.oneOf(['extraLarge', 'large', 'medium', 'small'] as const).def('large'),
-    prefix: PropTypes.string,
-  },
+  props: titleProps,
   emits: ['prefixClick', 'extraClick'],
-  setup(props: TitleProps, { emit }) {
+  setup(props, { emit }) {
     const classes = useClasses(props)
 
-    const extras = computed(() => toArray(props.extra))
+    const extras = computed(() => toArray(props.extra!))
 
     const onPrefixClick = (evt: MouseEvent) => emit('prefixClick', evt)
     const onExtraClick = (name: string, evt: MouseEvent) => emit('extraClick', name, evt)
