@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 2
 title:
   zh: 禁止传送
   en: Disabled

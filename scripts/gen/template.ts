@@ -74,17 +74,13 @@ export type { ${compName}Instance, ${compName}Props } from './src/types'
 }
 
 export function getTestTemplate(compName: string, useTsx: boolean): string {
-  return `import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+  return `import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
 import { ${compName}Instance, ${compName}Props } from '../src/types'
 
 describe('${compName}.${useTsx ? 'tsx' : 'vue'}', () => {
-  let ${compName}Mount: (options?: MountingOptions<Partial<${compName}Props>>) => VueWrapper<${compName}Instance>
-
-  beforeEach(() => {
-    ${compName}Mount = options => mount<${compName}Instance>(Ix${compName}, { ...options })
-  })
+  const ${compName}Mount =  (options?: MountingOptions<Partial<${compName}Props>>) => mount<${compName}Instance>(Ix${compName}, { ...options })
 
   renderWork(Ix${compName})
 })
