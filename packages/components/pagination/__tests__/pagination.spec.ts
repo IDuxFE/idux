@@ -1,6 +1,6 @@
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxPagination from '../src/pagination'
+import IxPagination from '../src/Pagination'
 import { PaginationInstance, PaginationProps } from '../src/types'
 import { h, ref } from 'vue'
 import { PaginationItemRenderOptions } from '@idux/components/config'

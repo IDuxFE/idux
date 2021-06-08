@@ -24,7 +24,7 @@ export const selectProps = {
   multiple: IxPropTypes.bool.def(false),
   multipleLimit: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
   labelKey: IxPropTypes.string,
-  options: IxPropTypes.array<SelectOption[]>(),
+  options: IxPropTypes.array<SelectOption>(),
   placeholder: IxPropTypes.string,
   searchable: IxPropTypes.bool,
   size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),

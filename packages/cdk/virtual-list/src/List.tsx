@@ -2,9 +2,9 @@ import type { CSSProperties, ComponentPublicInstance, ComputedRef, Ref } from 'v
 import type { VirtualItemRenderFn, VirtualFillerInstance, VirtualListProps, VirtualScrollBarInstance } from './types'
 
 import { ref, defineComponent, computed } from 'vue'
-import Item from './item'
-import Filler from './filler'
-import ScrollBar from './scrollBar'
+import Item from './Item'
+import Filler from './Filler'
+import ScrollBar from './ScrollBar'
 import { virtualListProps } from './types'
 import { useEvents } from './utils/useEvents'
 import { useItemKey, useItems } from './utils/useItem'

@@ -1,6 +1,7 @@
 ls:
   packages/*:
     .ts: camelCase
+    .tsx: PascalCase
     .spec.ts: camelCase
     .config.ts: camelCase
     .less: camelCase

@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import IxVirtualList from '../src/list'
-import { ItemRender, VirtualListInstance, VirtualListProps } from '../src/types'
+import IxVirtualList from '../src/List'
+import { VirtualItemRenderFn, VirtualListInstance, VirtualListProps } from '../src/types'
 
 const getData = (length: number, key = 'id') => {
   const data: { id: string }[] = []
@@ -156,8 +156,9 @@ describe('list.ts', () => {
     })
 
     test('itemRender work', async () => {
-      const itemRender: ItemRender = ({ item, index }) => {
-        return h('span', { class: 'virtual-item' }, [`${item.id} - ${index}`])
+      const itemRender: VirtualItemRenderFn = ({ item, index }) => {
+        const { id } = item as { id: string }
+        return h('span', { class: 'virtual-item' }, [`${id} - ${index}`])
       }
       const wrapper = VirtualListMount({
         props: { data: getData(20), ...defaultProps, itemRender },

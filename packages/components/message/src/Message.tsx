@@ -7,7 +7,7 @@ import { useContainer } from '@idux/cdk/portal'
 import { toCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useMessage } from './useMessage'
-import IxMessageItem from './messageItem'
+import IxMessageItem from './MessageItem'
 
 let instance: ComponentPublicInstance<{}, UseMessage>
 
