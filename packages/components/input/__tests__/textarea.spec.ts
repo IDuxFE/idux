@@ -53,36 +53,42 @@ describe('Textarea.vue', () => {
   })
 
   test('disabled work', async () => {
-    const wrapper = TextareaMount({ props: { disabled: true } })
+    const onFocus = jest.fn()
+    const onBlur = jest.fn()
+    const wrapper = TextareaMount({ props: { disabled: true, onFocus, onBlur } })
     await wrapper.find('textarea').trigger('focus')
 
     expect(wrapper.classes()).toContain('ix-textarea-disabled')
     expect(wrapper.classes()).not.toContain('ix-textarea-focused')
-    expect(wrapper.emitted()).not.toHaveProperty('focus')
+    expect(onFocus).not.toBeCalled()
 
     await wrapper.find('textarea').trigger('blur')
 
-    expect(wrapper.emitted()).not.toHaveProperty('blur')
+    expect(onBlur).not.toBeCalled()
 
     await wrapper.setProps({ disabled: false })
     await wrapper.find('textarea').trigger('focus')
 
     expect(wrapper.classes()).not.toContain('ix-textarea-disabled')
     expect(wrapper.classes()).toContain('ix-textarea-focused')
-    expect(wrapper.emitted()).toHaveProperty('focus')
+    expect(onFocus).toBeCalled()
 
     await wrapper.find('textarea').trigger('blur')
 
-    expect(wrapper.emitted()).toHaveProperty('blur')
+    expect(onBlur).toBeCalled()
   })
 
   test('readonly work', async () => {
-    const wrapper = TextareaMount({ props: { readonly: true } })
+    const onFocus = jest.fn()
+    const onBlur = jest.fn()
+    const wrapper = TextareaMount({ props: { readonly: true, onFocus, onBlur } })
     await wrapper.find('textarea').trigger('focus')
+
+    expect(onFocus).toBeCalled()
+
     await wrapper.find('textarea').trigger('blur')
 
-    expect(wrapper.emitted()).toHaveProperty('focus')
-    expect(wrapper.emitted()).toHaveProperty('blur')
+    expect(onBlur).toBeCalled()
   })
 
   test('size work', async () => {
@@ -98,14 +104,15 @@ describe('Textarea.vue', () => {
   })
 
   test('clearable work', async () => {
-    const wrapper = TextareaMount({ props: { clearable: true } })
+    const onClear = jest.fn()
+    const wrapper = TextareaMount({ props: { clearable: true, onClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
     expect(wrapper.find('.ix-textarea-clear-icon-hidden').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-close-circle').trigger('click')
 
-    expect(wrapper.emitted()).toHaveProperty('afterClear')
+    expect(onClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 

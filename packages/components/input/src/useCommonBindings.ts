@@ -3,8 +3,9 @@ import type { ValueAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { InputProps, TextareaProps } from './types'
 
-import { computed, getCurrentInstance, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
+import { callEmit } from '@idux/cdk/utils'
 
 interface CommonBindings {
   disabled: ComputedRef<boolean>
@@ -27,21 +28,20 @@ export const useCommonBindings = (
   config: InputConfig | TextareaConfig,
   elementRef: Ref<HTMLInputElement | HTMLTextAreaElement>,
 ): CommonBindings => {
-  const { emit } = getCurrentInstance()!
   const valueAccessor = useValueAccessor()
   const disabled = computed(() => valueAccessor.disabled)
 
   const isComposing = ref(false)
   const onCompositionStart = (evt: CompositionEvent) => {
     isComposing.value = true
-    emit('compositionStart', evt)
+    callEmit(props.onCompositionStart, evt)
   }
   const onCompositionEnd = (evt: CompositionEvent) => {
+    callEmit(props.onCompositionEnd, evt)
     if (isComposing.value) {
       isComposing.value = false
       onInput(evt)
     }
-    emit('compositionEnd', evt)
   }
   const onInput = (evt: Event) => {
     if (isComposing.value) {
@@ -49,18 +49,18 @@ export const useCommonBindings = (
     }
     const { value } = evt.target as HTMLInputElement
     valueAccessor.setValue?.(value)
-    emit('input', evt)
+    callEmit(props.onInput, evt)
   }
 
   const isFocused = ref(false)
   const onFocus = (evt: FocusEvent) => {
     isFocused.value = true
-    emit('focus', evt)
+    callEmit(props.onFocus, evt)
   }
   const onBlur = (evt: FocusEvent) => {
     valueAccessor.markAsBlurred?.()
     isFocused.value = false
-    emit('blur', evt)
+    callEmit(props.onBlur, evt)
   }
 
   const focus = (options?: FocusOptions) => elementRef.value.focus(options)
@@ -68,7 +68,7 @@ export const useCommonBindings = (
 
   const onClearClick = (evt: MouseEvent) => {
     valueAccessor.setValue?.('')
-    emit('afterClear', evt)
+    callEmit(props.onAfterClear, evt)
   }
 
   const isClearable = computed(() => props.clearable ?? config.clearable)
