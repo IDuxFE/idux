@@ -1,4 +1,4 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 import { renderWork, wait } from '@tests'
 import IxPopover from '../src/Popover.vue'
@@ -18,12 +18,7 @@ const TestComponent = defineComponent({
 })
 
 describe('Popover.vue', () => {
-  let PopoverMount: (options?: MountingOptions<PopoverProps>) => VueWrapper<InstanceType<typeof TestComponent>>
-
-  beforeEach(() => {
-    PopoverMount = options => mount(TestComponent, { ...options })
-  })
-
+  const PopoverMount = (options?: MountingOptions<PopoverProps>) => mount(TestComponent, { ...options })
   afterEach(() => {
     document.body.querySelectorAll('.ix-popover').forEach(value => {
       value.remove()

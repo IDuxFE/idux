@@ -1,15 +1,11 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxForm from '../src/Form.vue'
-import { FormInstance, FormProps } from '../src/types'
+import { FormProps } from '../src/types'
 
 describe.skip('Form.vue', () => {
-  let FormMount: (options?: MountingOptions<Partial<FormProps>>) => VueWrapper<FormInstance>
-
-  beforeEach(() => {
-    FormMount = options => mount<FormInstance>(IxForm, { ...options })
-    console.log(FormMount)
-  })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const FormMount = (options?: MountingOptions<Partial<FormProps>>) => mount(IxForm, { ...options })
 
   renderWork(IxForm)
 })

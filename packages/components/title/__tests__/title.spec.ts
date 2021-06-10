@@ -1,14 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxTitle from '../src/Title.vue'
-import { TitleInstance, TitleProps } from '../src/types'
+import IxTitle from '../src/Title'
+import { TitleProps } from '../src/types'
 
-describe('Title.vue', () => {
-  let TitleMount: (options?: MountingOptions<Partial<TitleProps>>) => VueWrapper<TitleInstance>
-
-  beforeEach(() => {
-    TitleMount = options => mount<TitleInstance>(IxTitle, { ...options })
-  })
+describe('Title.tsx', () => {
+  const TitleMount = (options?: MountingOptions<Partial<TitleProps>>) => mount(IxTitle, { ...options })
 
   renderWork(IxTitle)
 

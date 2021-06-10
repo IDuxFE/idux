@@ -1,15 +1,11 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { ref } from 'vue'
 import IxRadioButton from '../src/RadioButton.vue'
-import { RadioButtonInstance, RadioButtonProps } from '../src/types'
+import { RadioButtonProps } from '../src/types'
 
 describe.skip('RadioButton.vue', () => {
-  let RadioButtonMount: (options?: MountingOptions<Partial<RadioButtonProps>>) => VueWrapper<RadioButtonInstance>
-
-  beforeEach(() => {
-    RadioButtonMount = options => mount<RadioButtonInstance>(IxRadioButton, { ...options })
-  })
-
+  const RadioButtonMount = (options?: MountingOptions<Partial<RadioButtonProps>>) =>
+    mount(IxRadioButton, { ...options })
   test('render work', () => {
     const wrapper = RadioButtonMount()
     expect(wrapper.html()).toMatchSnapshot()
