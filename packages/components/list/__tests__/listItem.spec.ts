@@ -1,14 +1,10 @@
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import IxListItem from '../src/ListItem.vue'
-import { ListItemInstance, ListItemProps } from '../src/types'
+import { ListItemProps } from '../src/types'
 
 describe('ListItem.vue', () => {
-  let ListItemMount: (options?: MountingOptions<Partial<ListItemProps>>) => VueWrapper<ListItemInstance>
-
-  beforeEach(() => {
-    ListItemMount = options => mount<ListItemInstance>(IxListItem, { ...options })
-  })
+  const ListItemMount = (options?: MountingOptions<Partial<ListItemProps>>) => mount(IxListItem, { ...options })
 
   renderWork(IxListItem)
 

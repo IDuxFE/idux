@@ -1,15 +1,11 @@
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 import IxInput from '../src/Input.vue'
-import { InputInstance, InputProps } from '../src/types'
+import { InputProps } from '../src/types'
 
 describe('Input.vue', () => {
-  let InputMount: (options?: MountingOptions<Partial<InputProps>>) => VueWrapper<InputInstance>
-
-  beforeEach(() => {
-    InputMount = options => mount<InputInstance>(IxInput, { ...options })
-  })
+  const InputMount = (options?: MountingOptions<Partial<InputProps>>) => mount(IxInput, { ...options })
 
   renderWork(IxInput)
 
@@ -193,15 +189,15 @@ describe('Input.vue', () => {
   })
 
   test('clearable work', async () => {
-    const onClear = jest.fn()
-    const wrapper = InputMount({ props: { clearable: true, onClear } })
+    const onAfterClear = jest.fn()
+    const wrapper = InputMount({ props: { clearable: true, onAfterClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
     expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-close-circle').trigger('click')
 
-    expect(onClear).toBeCalled()
+    expect(onAfterClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 

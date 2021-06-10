@@ -1,15 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxStatistic from '../src/Statistic.vue'
-import { StatisticInstance, StatisticProps } from '../src/types'
+import { StatisticProps } from '../src/types'
 
 describe('Statistic.vue', () => {
-  let StatisticMount: (options?: MountingOptions<Partial<StatisticProps>>) => VueWrapper<StatisticInstance>
-
-  beforeEach(() => {
-    StatisticMount = options => mount<StatisticInstance>(IxStatistic, { ...options })
-  })
-
+  const StatisticMount = (options?: MountingOptions<Partial<StatisticProps>>) => mount(IxStatistic, { ...options })
   renderWork(IxStatistic, {
     value: 112893.116,
   })

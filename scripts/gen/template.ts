@@ -80,7 +80,7 @@ import Ix${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
 import { ${compName}Instance, ${compName}Props } from '../src/types'
 
 describe('${compName}.${useTsx ? 'tsx' : 'vue'}', () => {
-  const ${compName}Mount =  (options?: MountingOptions<Partial<${compName}Props>>) => mount<${compName}Instance>(Ix${compName}, { ...options })
+  const ${compName}Mount = (options?: MountingOptions<Partial<${compName}Props>>) => mount(Ix${compName}, { ...options })
 
   renderWork(Ix${compName})
 })

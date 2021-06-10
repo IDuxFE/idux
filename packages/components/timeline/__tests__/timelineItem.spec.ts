@@ -1,10 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { PropType } from 'vue'
 import { renderWork } from '@tests'
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
-import type { TimelineItemInstance, TimelineItemProps } from '../src/types'
-import type { TimelinePosition, TimelineItemPosition } from '../src/types'
+import { TimelineItemProps } from '../src/types'
+import { TimelinePosition, TimelineItemPosition } from '../src/types'
 
 const TestComponent = {
   components: { IxTimeline, IxTimelineItem },
@@ -23,12 +23,8 @@ const TestComponent = {
 }
 
 describe('TimelineItem.vue', () => {
-  let timelineItemMount: (options?: MountingOptions<Partial<TimelineItemProps>>) => VueWrapper<TimelineItemInstance>
-
-  beforeEach(() => {
-    timelineItemMount = options => mount<TimelineItemInstance>(IxTimelineItem, { ...options })
-  })
-
+  const timelineItemMount = (options?: MountingOptions<Partial<TimelineItemProps>>) =>
+    mount(IxTimelineItem, { ...options })
   renderWork(IxTimelineItem)
 
   test('color work', async () => {

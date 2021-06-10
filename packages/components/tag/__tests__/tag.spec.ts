@@ -1,14 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxTag from '../src/Tag.vue'
-import { TagInstance, TagProps } from '../src/types'
+import { TagProps } from '../src/types'
 
 describe('Tag.vue', () => {
-  let TagMount: (options?: MountingOptions<Partial<TagProps>>) => VueWrapper<TagInstance>
-
-  beforeEach(() => {
-    TagMount = options => mount<TagInstance>(IxTag, { ...options })
-  })
+  const TagMount = (options?: MountingOptions<Partial<TagProps>>) => mount(IxTag, { ...options })
 
   renderWork(IxTag)
 

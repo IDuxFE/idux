@@ -1,14 +1,11 @@
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 import IxTextarea from '../src/Textarea.vue'
-import { TextareaInstance, TextareaProps } from '../src/types'
+import { TextareaProps } from '../src/types'
 
 describe('Textarea.vue', () => {
-  let TextareaMount: (options?: MountingOptions<Partial<TextareaProps>>) => VueWrapper<TextareaInstance>
-  beforeEach(() => {
-    TextareaMount = options => mount<TextareaInstance>(IxTextarea, { ...options })
-  })
+  const TextareaMount = (options?: MountingOptions<Partial<TextareaProps>>) => mount(IxTextarea, { ...options })
 
   renderWork(IxTextarea)
 
@@ -104,15 +101,15 @@ describe('Textarea.vue', () => {
   })
 
   test('clearable work', async () => {
-    const onClear = jest.fn()
-    const wrapper = TextareaMount({ props: { clearable: true, onClear } })
+    const onAfterClear = jest.fn()
+    const wrapper = TextareaMount({ props: { clearable: true, onAfterClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
     expect(wrapper.find('.ix-textarea-clear-icon-hidden').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-close-circle').trigger('click')
 
-    expect(onClear).toBeCalled()
+    expect(onAfterClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 

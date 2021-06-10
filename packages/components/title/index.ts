@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import IxTitle from './src/Title.vue'
+import IxTitle from './src/Title'
 
 IxTitle.install = (app: App): void => {
   app.component(IxTitle.name, IxTitle)

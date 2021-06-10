@@ -1,6 +1,6 @@
 import { renderWork } from '@tests'
 
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
 import { TypographyProps } from '../src/types'
 import IxTypography from '../src/typography'
@@ -12,13 +12,8 @@ const TestComponent = defineComponent({
 })
 
 describe('typography.ts', () => {
-  let typographyMount: (props?: { type: TypographyProps }) => VueWrapper<InstanceType<typeof TestComponent>>
-
-  beforeEach(() => {
-    typographyMount = props => {
-      return mount(TestComponent, { global: { directives: { typography: IxTypography } }, props })
-    }
-  })
+  const typographyMount = (props?: { type: TypographyProps }) =>
+    mount(TestComponent, { global: { directives: { typography: IxTypography } }, props })
 
   renderWork(TestComponent, { global: { directives: { typography: IxTypography } } })
 

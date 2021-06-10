@@ -1,14 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { ref } from 'vue'
 import IxRadio from '../src/Radio.vue'
-import { RadioInstance, RadioProps } from '../src/types'
+import { RadioProps } from '../src/types'
 
 describe.skip('Radio.vue', () => {
-  let RadioMount: (options?: MountingOptions<Partial<RadioProps>>) => VueWrapper<RadioInstance>
-
-  beforeEach(() => {
-    RadioMount = options => mount<RadioInstance>(IxRadio, { ...options })
-  })
+  const RadioMount = (options?: MountingOptions<Partial<RadioProps>>) => mount(IxRadio, { ...options })
 
   test('render work', () => {
     const wrapper = RadioMount()
