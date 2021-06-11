@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import IxIcon from './src/Icon.vue'
+import IxIcon from './src/Icon'
 import { addIconDefinitions, fetchFromIconfont } from './src/helper'
 import { staticIcons } from './src/staticIcons'
 

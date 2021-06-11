@@ -3,7 +3,7 @@ import type { App, Directive } from 'vue'
 // import General
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
-import { IxTitle } from '@idux/components/title'
+import { IxHeader } from '@idux/components/header'
 import { IxTag } from '@idux/components/tag'
 import { IxTypography } from '@idux/components/typography'
 // import Layout
@@ -50,7 +50,7 @@ const components = [
   IxButton,
   IxButtonGroup,
   IxIcon,
-  IxTitle,
+  IxHeader,
   IxTag,
   // components Layout
   IxDivider,

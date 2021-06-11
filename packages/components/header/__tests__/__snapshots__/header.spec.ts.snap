@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header.tsx render work 1`] = `
+"<div class=\\"ix-header ix-header-large\\">
+  <div class=\\"ix-header-main\\">
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  </div>
+  <!---->
+  <!---->
+</div>"
+`;

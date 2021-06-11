@@ -1,9 +1,3 @@
-<template>
-  <i ref="root" :class="classes" role="img" :ariaLabel="name">
-    <slot></slot>
-  </i>
-</template>
-<script lang="ts">
 import type { Ref } from 'vue'
 import type { IconConfig } from '@idux/components/config'
 import type { IconProps } from './types'
@@ -27,6 +21,17 @@ export default defineComponent({
 
     const classes = useClasses(props)
     return { root, classes }
+  },
+  render() {
+    if (this.name) {
+      return <i ref="root" class={this.classes} role="img" aria-label={this.name}></i>
+    } else {
+      return (
+        <i ref="root" class={this.classes} role="img">
+          {this.$slots.default?.()}
+        </i>
+      )
+    }
   },
 })
 
@@ -81,4 +86,3 @@ const useClasses = (props: IconProps) => {
     }
   })
 }
-</script>
