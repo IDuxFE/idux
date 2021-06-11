@@ -91,27 +91,44 @@
 @icon-color-hover: fade(@black, 75%);
 
 /* title -------------------------- */
-@title-font-weight: @font-weight-xl;
-@title-font-size: @font-size-lg;
-@title-1-font-size: @font-size-3xl;
-@title-2-font-size: @font-size-2xl;
-@title-3-font-size: @font-size-xl;
-@title-4-font-size: @font-size-lg;
+@header-line-height: 1;
+@header-height-xl: @height-xl;
+@header-height-lg: @height-xl;
+@header-height-md: @height-lg;
+@header-height-sm: @height-md;
+@header-color: @text-color;
+@header-bg-color: @background-color-component;
+@header-transition: color @transition-duration-base @ease-in-out;
 
-@title-height-xl: @height-xl;
-@title-height-lg: @height-xl;
-@title-height-md: @height-lg;
-@title-height-sm: @height-md;
+@header-bar-width: @spacing-xs;
+@header-bar-height: 100%;
+@header-bar-margin-right: @spacing-sm;
+@header-bar-bg-color: @primary;
 
-@title-line-height: 1;
+@header-prefix-margin-right: @spacing-sm;
+@header-prefix-padding-right: @spacing-sm;
+@header-prefix-border-right: @border-width-sm @border-style @border-color;
+@header-prefix-font-size: @font-size-lg;
+@header-prefix-active-color: @primary;
 
-@title-color: @black;
-@title-sub-color: @text-color-secondary;
-@title-bg-color: @background-color-component;
+@header-title-color: @black;
+@header-title-font-weight: @font-weight-xl;
+@header-title-margin-right: @spacing-md;
+@header-title-font-size-xl: @font-size-3xl;
+@header-title-font-size-lg: @font-size-2xl;
+@header-title-font-size-md: @font-size-xl;
+@header-title-font-size-sm: @font-size-lg;
 
-@title-prefix-margin: @margin-md;
-@title-content-margin: @margin-md;
-@title-extra-margin: @margin-sm;
+@header-sub-color: @text-color-secondary;
+@header-sub-font-size: @font-size-lg;
+@header-sub-font-size-sm: @font-size-md;
+
+@header-extra-margin-left: @spacing-sm;
+@header-extra-active-icon-color: @header-title-color;
+
+@header-description-color: @text-color;
+@header-description-font-size: @font-size-md;
+@header-description-line-height: @line-height-base;
 
 /* tag -------------------------- start */
 @text-color-inverse: @white;
@@ -119,7 +136,7 @@
 @tag-default-color: @black;
 @tag-padding: @padding-xs;
 @tag-default-padding: 2px 8px;
-@tag-margin: @margin-sm;
+@tag-margin: @spacing-sm;
 @tag-border-radius: @border-radius-md;
 @tag-round-border-radius: 20px;
 @tag-default-border-color: #d9d9d9;
@@ -178,7 +195,7 @@
 /* divider -------------------------- */
 
 /* space -------------------------- */
-@space-margin-sm: @margin-sm;
+@space-margin-sm: @spacing-sm;
 @space-margin-md: @margin-lg;
 @space-margin-lg: @margin-xl;
 
@@ -206,7 +223,7 @@
 @menu-item-padding-left: @padding-md;
 @menu-item-padding-right: @padding-xl;
 @menu-item-margin: @margin-xs 0;
-@menu-item-icon-margin-right: @margin-sm;
+@menu-item-icon-margin-right: @spacing-sm;
 @menu-item-border-right-width: @border-width-lg;
 @menu-item-border-bottom-width: @border-width-md;
 
@@ -276,7 +293,7 @@
 @checkbox-height: 16px;
 @checkbox-width: 16px;
 @checkbox-group-line-height: @line-height-base;
-@checkbox-group-checkbox-margin-right: @margin-sm;
+@checkbox-group-checkbox-margin-right: @spacing-sm;
 @checkbox-label-padding: 0 @padding-xl 0 @padding-xs;
 @checkbox-transition-duration: @transition-duration-base;
 
@@ -408,7 +425,7 @@
 
 /* select -------------------------- */
 @option-height: @height-md;
-@option-margin-left: @margin-md;
+@option-margin-left: @spacing-md;
 @option-padding: @padding-sm;
 @option-color: @text-color;
 @option-font-weight: @font-weight-md;
@@ -522,7 +539,7 @@
 @collapse-panel-line-hight: @height-lg;
 
 /* empty -------------------------- */
-@empty-margin-md: @margin-md;
+@empty-margin-md: @spacing-md;
 @empty-line-height-md: @line-height-base;
 @empty-font-size-md: @font-size-md;
 @empty-icon-font-size-md: 64px;
@@ -599,7 +616,7 @@
 @message-item-margin: @margin-lg;
 @message-item-line-height: @line-height-base;
 @message-item-icon-size: 16px;
-@message-item-icon-margin-right: @margin-sm;
+@message-item-icon-margin-right: @spacing-sm;
 @message-item-content-min-width: 120px;
 @message-item-content-max-width: 480px;
 
@@ -615,7 +632,7 @@
 @result-subtitle-color: @black;
 @result-subtitle-line-height: 1.6;
 @result-extra-margin: @margin-xl;
-@result-extra-children-margin: @margin-sm;
+@result-extra-children-margin: @spacing-sm;
 @result-content-margin: @margin-xl;
 @result-content-padding: @padding-xl @spacing-gutter * 5;
 @result-content-background: @grey-l50;

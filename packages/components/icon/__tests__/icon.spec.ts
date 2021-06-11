@@ -2,7 +2,7 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
 import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
-import IxIcon from '../src/Icon.vue'
+import IxIcon from '../src/Icon'
 import { IconProps, IconDefinition } from '../src/types'
 
 const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }

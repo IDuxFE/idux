@@ -1,0 +1,110 @@
+@import '../../style/default.less';
+
+@header-prefix: ~'@{idux-prefix}-header';
+
+.@{header-prefix} {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: @header-color;
+  background-color: @header-bg-color;
+  line-height: @header-line-height;
+  transition: @header-transition;
+
+  &-main {
+    display: flex;
+    align-items: center;
+  }
+
+  &-bar {
+    width: @header-bar-width;
+    height: @header-bar-height;
+    margin-right: @header-bar-margin-right;
+    background-color: @header-bar-bg-color;
+  }
+
+  &-prefix {
+    margin-right: @header-prefix-margin-right;
+    padding-right: @header-prefix-padding-right;
+    border-right: @header-prefix-border-right;
+    font-size: @header-prefix-font-size;
+    cursor: pointer;
+
+    :hover {
+      color: @header-prefix-active-color;
+    }
+  }
+
+  &-title {
+    color: @header-title-color;
+    margin-right: @header-title-margin-right;
+    font-weight: @header-title-font-weight;
+    .ellipsis();
+  }
+
+  &-sub-title {
+    color: @header-sub-color;
+    font-size: @header-sub-font-size;
+    .ellipsis();
+  }
+
+  &-extra {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    > .@{idux-prefix}-icon:hover {
+      color: @header-extra-active-icon-color;
+    }
+
+    > * {
+      margin-left: @header-extra-margin-left;
+    }
+
+    > *:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &-description {
+    width: 100%;
+    color: @header-description-color;
+    font-size: @header-description-font-size;
+    line-height: @header-description-line-height;
+  }
+
+  &-extraLarge {
+    .header-size(@header-height-xl, @header-title-font-size-xl);
+  }
+  &-large {
+    .header-size(@header-height-lg, @header-title-font-size-lg);
+  }
+  &-medium {
+    .header-size(@header-height-md, @header-title-font-size-md);
+  }
+  &-small {
+    .header-size(@header-height-sm, @header-title-font-size-sm);
+
+    .@{header-prefix}-sub-title {
+      font-size: @header-sub-font-size-sm;
+    }
+  }
+}
+
+.header-size(@height; @font-size;) {
+  @padding-vertical: max((round(((@height - @font-size * @header-line-height) / 2) * 10) / 10), 0);
+
+  .@{header-prefix}-main {
+    height: @height;
+    padding: @padding-vertical 0;
+  }
+
+  // .@{header-prefix}-bar {
+  //   height: @font-size;
+  // }
+
+  .@{header-prefix}-title {
+    font-size: @font-size;
+  }
+}

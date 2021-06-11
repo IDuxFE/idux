@@ -1,10 +1,10 @@
 <template>
-  <ix-title extra="setting" @extraClick="onExtraClick"> Title </ix-title>
-  <ix-title :extra="extras" @extraClick="onExtraClick"> Title </ix-title>
-  <ix-title>
+  <ix-header extra="setting" @extraClick="onExtraClick"> Title </ix-header>
+  <ix-header :extra="extras" @extraClick="onExtraClick"> Title </ix-header>
+  <ix-header>
     Title
     <template #extra> <ix-button mode="link" @click="onExtraClick($event, 'more')">More</ix-button> </template>
-  </ix-title>
+  </ix-header>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

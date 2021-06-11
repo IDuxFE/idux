@@ -2,6 +2,6 @@
 
 exports[`BackTop.vue render work 1`] = `
 "<transition-stub>
-  <div class=\\"ix-back-top\\" style=\\"display: none;\\"><i class=\\"ix-icon ix-icon-vertical-align-top\\" role=\\"img\\" arialabel=\\"vertical-align-top\\"></i></div>
+  <div class=\\"ix-back-top\\" style=\\"display: none;\\"><i class=\\"ix-icon ix-icon-vertical-align-top\\" role=\\"img\\" aria-label=\\"vertical-align-top\\"></i></div>
 </transition-stub>"
 `;

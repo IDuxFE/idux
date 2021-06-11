@@ -2,7 +2,7 @@
 title:
   zh: 操作区域
   en: Extra area
-order: 1
+order: 2
 ---
 
 ## zh

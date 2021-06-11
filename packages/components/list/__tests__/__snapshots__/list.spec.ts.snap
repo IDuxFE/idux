@@ -30,7 +30,7 @@ exports[`List.vue render work 1`] = `
       </div>
       <div class=\\"ix-list-empty\\" style=\\"display: none;\\">
         <div class=\\"ix-empty\\">
-          <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" arialabel=\\"empty\\"></i></div>
+          <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" aria-label=\\"empty\\"></i></div>
           <div class=\\"ix-empty-description\\">暂无数据</div>
           <!--v-if-->
         </div>

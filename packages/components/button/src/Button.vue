@@ -36,6 +36,7 @@ export default defineComponent({
 
     const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
     const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
+
     return { classes, tag, hasDefaultSlot }
   },
 })

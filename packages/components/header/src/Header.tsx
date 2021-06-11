@@ -1,13 +1,13 @@
-import type { TitleProps } from './types'
+import type { HeaderProps } from './types'
 
 import { computed, createTextVNode, defineComponent, Slot } from 'vue'
 import { callEmit, toArray } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { titleProps } from './types'
+import { headerProps } from './types'
 
 export default defineComponent({
-  name: 'IxTitle',
-  props: titleProps,
+  name: 'IxHeader',
+  props: headerProps,
   setup(props) {
     const classes = useClasses(props)
 
@@ -20,28 +20,32 @@ export default defineComponent({
   },
 
   render() {
+    const bar = this.showBar ? <span class="ix-header-bar"></span> : null
     const prefix = renderPrefix(this.$slots.prefix, this.prefix, this.onPrefixClick)
-    const content = renderTitle(this.$slots.default, this.title, 'ix-title-content')
-    const subTitle = renderTitle(this.$slots.subTitle, this.subTitle, 'ix-title-sub')
+    const title = renderChild(this.$slots.default, this.title, 'ix-header-title')
+    const subTitle = renderChild(this.$slots.subTitle, this.subTitle, 'ix-header-sub-title')
     const extra = renderExtra(this.$slots.extra, this.extras, this.onExtraClick)
+    const description = renderChild(this.$slots.description, this.description, 'ix-header-description')
     return (
       <div class={this.classes}>
-        <div class="ix-title-main">
+        <div class="ix-header-main">
+          {bar}
           {prefix}
-          {content}
+          {title}
           {subTitle}
         </div>
         {extra}
+        {description}
       </div>
     )
   },
 })
 
-const useClasses = (props: TitleProps) => {
+const useClasses = (props: HeaderProps) => {
   return computed(() => {
     return {
-      'ix-title': true,
-      [`ix-title-${props.size}`]: true,
+      'ix-header': true,
+      [`ix-header-${props.size}`]: true,
     }
   })
 }
@@ -55,10 +59,10 @@ const renderPrefix = (
     return null
   }
   const child = prefixSlot ? prefixSlot() : <IxIcon name={prefix} onClick={onPrefixClick} />
-  return <span class="ix-title-prefix">{child}</span>
+  return <span class="ix-header-prefix">{child}</span>
 }
 
-const renderTitle = (titleSlot: Slot | undefined, title: string | undefined, className: string) => {
+const renderChild = (titleSlot: Slot | undefined, title: string | undefined, className: string) => {
   if (!titleSlot && !title) {
     return null
   }
@@ -77,5 +81,5 @@ const renderExtra = (
   const child = extraSlot
     ? extraSlot()
     : extras.map((icon, index) => <IxIcon key={icon + index} name={icon} onClick={evt => onExtraClick(evt, icon)} />)
-  return <div class="ix-title-extra">{child}</div>
+  return <div class="ix-header-extra">{child}</div>
 }
