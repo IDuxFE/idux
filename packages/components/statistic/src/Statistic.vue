@@ -22,23 +22,17 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { StatisticProps } from './types'
-import { PropTypes } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
 import type { StatisticConfig } from '@idux/components/config'
+import type { StatisticProps } from './types'
+
+import { computed, defineComponent } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
+import { statisticProps } from './types'
 
 export default defineComponent({
   name: 'IxStatistic',
-  props: {
-    formatter: PropTypes.func,
-    precision: PropTypes.number,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string,
-    title: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(''),
-  },
-  setup(props: StatisticProps) {
+  props: statisticProps,
+  setup(props) {
     const statisticConfig = useGlobalConfig('statistic')
     const formatedValue = useFomat(props, statisticConfig)
 

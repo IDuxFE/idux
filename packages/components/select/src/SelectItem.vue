@@ -11,15 +11,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IxIcon } from '@idux/components/icon'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxSelectItem',
   components: { IxIcon },
   props: {
-    removeable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    label: PropTypes.string,
+    removeable: IxPropTypes.bool,
+    disabled: IxPropTypes.bool,
+    label: IxPropTypes.string,
   },
   emits: ['delete'],
 })

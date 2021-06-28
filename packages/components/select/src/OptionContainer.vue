@@ -14,8 +14,10 @@
 </template>
 
 <script lang="ts">
+import type { SelectOption } from './types'
+
 import { computed, defineComponent, provide, ref } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { IxEmpty } from '@idux/components/empty'
 import IxOptionGroup from './OptionGroup.vue'
 import IxOption from './Option.vue'
@@ -25,8 +27,8 @@ export default defineComponent({
   name: 'IxOptionContainer',
   components: { IxOptionGroup, IxOption, IxEmpty },
   props: {
-    options: PropTypes.array.def(() => []),
-    empty: PropTypes.string,
+    options: IxPropTypes.array<SelectOption>().def(() => []),
+    empty: IxPropTypes.string,
   },
   setup() {
     const showItemCount = ref(0)

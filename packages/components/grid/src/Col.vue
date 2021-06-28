@@ -9,12 +9,12 @@ import type { GutterType } from './gutter'
 import { inject, defineComponent, computed } from 'vue'
 import { getAllBreakpointCls, getSingleSizeCls, parseFlex } from './col'
 import { gutterToken } from './gutter'
-import { colPropsDef } from './types'
+import { colProps } from './types'
 
 export default defineComponent({
   name: 'IxCol',
-  props: colPropsDef,
-  setup(props: ColProps) {
+  props: colProps,
+  setup(props) {
     const gutter = inject(gutterToken)
 
     const classes = useClasses(props)

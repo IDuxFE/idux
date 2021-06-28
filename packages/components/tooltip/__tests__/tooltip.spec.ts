@@ -1,7 +1,7 @@
-import { mount, VueWrapper, MountingOptions } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 import { renderWork, wait } from '@tests'
-import IxTooltip from '../src/tooltip'
+import IxTooltip from '../src/Tooltip'
 import { TooltipProps } from '../src/types'
 
 const TestComponent = defineComponent({
@@ -17,12 +17,7 @@ const TestComponent = defineComponent({
 })
 
 describe('tooltip.tsx', () => {
-  let tooltipMount: (options?: MountingOptions<TooltipProps>) => VueWrapper<InstanceType<typeof TestComponent>>
-
-  beforeEach(() => {
-    tooltipMount = options => mount(TestComponent, { ...options })
-  })
-
+  const tooltipMount = (options?: MountingOptions<TooltipProps>) => mount(TestComponent, { ...options })
   afterEach(() => {
     document.body.querySelectorAll('.ix-tooltip').forEach(value => {
       value.remove()

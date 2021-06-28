@@ -5,7 +5,7 @@ import { version } from './version'
 // import General
 import { IxButton, IxButtonGroup } from './button'
 import { IxIcon } from './icon'
-import { IxTitle } from './title'
+import { IxHeader } from './header'
 import { IxTypography } from './typography'
 import { IxTag } from './tag'
 // import Layout
@@ -53,7 +53,7 @@ const components = [
   IxButton,
   IxButtonGroup,
   IxIcon,
-  IxTitle,
+  IxHeader,
   IxTag,
   // components Layout
   IxDivider,

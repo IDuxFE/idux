@@ -86,7 +86,7 @@ export const useSelectOptions = (props: SelectProps, config: SelectConfig): Comp
     const options: SelectOption[] = []
     const groupMap = new Map<string, SelectOption>()
     originalOptions.forEach(option => {
-      const item = { label: option[labelKey], value: option[valueKey], disabled: option.disabled }
+      const item: SelectOption = { label: option[labelKey], value: option[valueKey], disabled: option.disabled }
       const groupLabel = option.groupLabel
       if (groupLabel) {
         if (groupMap.has(groupLabel)) {

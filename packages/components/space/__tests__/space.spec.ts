@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import { IxButton } from '@idux/components/button'
 import { IxDivider } from '@idux/components/divider'
-import IxSpace from '../src/space'
+import IxSpace from '../src/Space'
 import { SpaceAlign, SpaceDirection } from '../src/types'
 import { SpaceSize } from '@idux/components/config'
 

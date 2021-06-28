@@ -1,16 +1,12 @@
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxPagination from '../src/pagination'
-import { PaginationInstance, PaginationProps } from '../src/types'
+import IxPagination from '../src/Pagination'
+import { PaginationProps } from '../src/types'
 import { h, ref } from 'vue'
 import { PaginationItemRenderOptions } from '@idux/components/config'
 
 describe('Pagination.vue', () => {
-  let PaginationMount: (options?: MountingOptions<Partial<PaginationProps>>) => VueWrapper<PaginationInstance>
-
-  beforeEach(() => {
-    PaginationMount = options => mount<PaginationInstance>(IxPagination, { ...options })
-  })
+  const PaginationMount = (options?: MountingOptions<Partial<PaginationProps>>) => mount(IxPagination, { ...options })
 
   renderWork(IxPagination)
 

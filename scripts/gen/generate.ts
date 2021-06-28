@@ -78,7 +78,7 @@ const questions: QuestionCollection<AnswerOptions>[] = [
     name: 'useTsx',
     message: 'Do you want to use tsx?',
     type: 'confirm',
-    default: false,
+    default: true,
     when(answer) {
       return answer.category === 'components'
     },
@@ -174,14 +174,14 @@ class Generate {
     const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
     const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
     const vueTemplate = getVueTemplate(upperFirstName, camelCaseName)
-    const indexTemplate = getIndexTemplate(upperFirstName)
-    const testTemplate = getTestTemplate(upperFirstName)
+    const indexTemplate = getIndexTemplate(upperFirstName, this.useTsx)
+    const testTemplate = getTestTemplate(upperFirstName, this.useTsx)
 
     await Promise.all([
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       this.useTsx
-        ? writeFile(`${this.dirPath}/src/${camelCaseName}.tsx`, tsxTemplate)
+        ? writeFile(`${this.dirPath}/src/${upperFirstName}.tsx`, tsxTemplate)
         : writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
       writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),

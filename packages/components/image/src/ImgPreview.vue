@@ -31,11 +31,9 @@
 </template>
 
 <script lang="ts">
-import type { ImagePreviewProps } from './types'
-
 import { defineComponent, ref, computed } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
+import { imagePreviewProps } from './types'
 
 const minScale = 0.2
 const initScale = 1.0
@@ -46,15 +44,13 @@ const rotateStep = 90
 export default defineComponent({
   name: 'IxImgPreview',
   components: { IxIcon },
-  props: {
-    previewSrc: PropTypes.string.def(''),
-  },
+  props: imagePreviewProps,
   emits: {
     close: () => {
       return true
     },
   },
-  setup(props: ImagePreviewProps, { emit }) {
+  setup(props, { emit }) {
     const scale = ref(initScale)
     const rotate = ref(initRotate)
     const transform = computed(() => `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`)

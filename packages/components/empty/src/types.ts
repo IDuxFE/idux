@@ -1,10 +1,12 @@
 import type { DefineComponent } from 'vue'
 
-export interface EmptyProps {
-  /** 自定义描述内容 */
-  description?: string
-  /** 图片地址 */
-  image?: string
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+
+export const emptyProps = {
+  description: IxPropTypes.string,
+  image: IxPropTypes.string,
 }
+
+export type EmptyProps = IxExtractPropTypes<typeof emptyProps>
 
 export type EmptyInstance = InstanceType<DefineComponent<EmptyProps>>

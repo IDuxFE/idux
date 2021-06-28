@@ -3,21 +3,16 @@ import type { VNode } from 'vue'
 import type { TimelinePosition, TimelineItemPosition, TimelineProps } from './types'
 
 import { defineComponent, h, cloneVNode } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import IxTimelineItem from './TimelineItem.vue'
+import { timelineProps } from './types'
 
 const timelinePrefixCls = 'ix-timeline'
 const itemPrefixCls = 'ix-timeline-item'
 
 export default defineComponent({
   name: 'IxTimeline',
-  props: {
-    pending: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).def(false),
-    pendingDot: PropTypes.string,
-    reverse: PropTypes.bool.def(false),
-    position: PropTypes.oneOf(['left', 'alternate', 'right'] as const).def('right'),
-  },
+  props: timelineProps,
   render() {
     const pendingSlots = this.$slots?.pending?.()
     const pendingDotSlots = this.$slots?.pendingDot?.()

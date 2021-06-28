@@ -27,12 +27,13 @@
 import type { ListProps } from './types'
 
 import { computed, defineComponent, ref, provide } from 'vue'
-import { ListPropTypes } from './types'
 import { IxSpin } from '@idux/components/spin'
 import { IxButton } from '@idux/components/button'
 import { IxEmpty } from '@idux/components/empty'
 import { ListConfig, useGlobalConfig } from '@idux/components/config'
 import ListWrap from './ListWrap.vue'
+import { listProps } from './types'
+import { listToken } from './token'
 
 export default defineComponent({
   name: 'IxList',
@@ -42,11 +43,11 @@ export default defineComponent({
     IxButton,
     IxEmpty,
   },
-  props: ListPropTypes,
+  props: listProps,
   emits: ['loadMore'],
   setup(props: ListProps, { slots, emit }) {
     provide(
-      'listGrid',
+      listToken,
       computed(() => props.grid),
     )
 

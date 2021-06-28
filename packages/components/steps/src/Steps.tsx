@@ -1,16 +1,14 @@
-import type { StepsProps } from './types'
-
 import { computed, defineComponent, provide, ref, watch } from 'vue'
 import { getSlotNodes } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { stepsToken } from './token'
-import { stepsPropsDef } from './types'
+import { stepsProps } from './types'
 
 export default defineComponent({
   name: 'IxSteps',
-  props: stepsPropsDef,
+  props: stepsProps,
   emits: ['update:active'],
-  setup(props: StepsProps, { slots, emit, attrs }) {
+  setup(props, { slots, emit, attrs }) {
     const progressDot = slots.progressDot
     const currActive = ref(props.active)
     watch(

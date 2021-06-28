@@ -21,21 +21,21 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
   name: 'IxSubMenuTitle',
   components: { IxIcon },
   props: {
-    opened: PropTypes.bool,
-    disabled: PropTypes.bool,
-    icon: PropTypes.string,
-    mode: PropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const),
-    paddingLeft: PropTypes.string,
-    suffix: PropTypes.string,
-    suffixRotates: PropTypes.arrayOf(PropTypes.number),
-    title: PropTypes.string,
+    opened: IxPropTypes.bool,
+    disabled: IxPropTypes.bool,
+    icon: IxPropTypes.string,
+    mode: IxPropTypes.oneOf(['vertical', 'horizontal', 'inline'] as const),
+    paddingLeft: IxPropTypes.string,
+    suffix: IxPropTypes.string,
+    suffixRotates: IxPropTypes.arrayOf(Number),
+    title: IxPropTypes.string,
   },
   emits: ['click', 'mouseOverlayChang'],
   setup(props, { emit }) {

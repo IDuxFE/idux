@@ -8,19 +8,15 @@ import { OptionProps, SelectProps } from '../src/types'
 
 describe('Select.vue', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let SelectMount: (options: any) => VueWrapper<ComponentPublicInstance>
-
-  beforeEach(() => {
-    SelectMount = (options = {}) => {
-      return mount(
-        {
-          components: { IxSelect, IxOption, IxOptionGroup },
-          ...options,
-        },
-        { attachTo: 'body' },
-      )
-    }
-  })
+  const SelectMount = (options = {}) => {
+    return mount(
+      {
+        components: { IxSelect, IxOption, IxOptionGroup },
+        ...options,
+      },
+      { attachTo: 'body' },
+    )
+  }
 
   describe('single template work', () => {
     let selectProps: Partial<SelectProps>

@@ -24,7 +24,7 @@ export default defineComponent({
           'In sunt exercitation pariatur irure aliqua proident cillum velit laboris veniam. Pariatur ullamco est consequat ad nisi reprehenderit culpa magna id elit ut veniam.',
       })
     }
-    const handleLoadMore = (done: any) => {
+    const handleLoadMore = (done: () => void) => {
       setTimeout(() => {
         listData.push({
           title: new Date().getTime(),

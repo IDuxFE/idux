@@ -1,41 +1,21 @@
 import type { DefineComponent } from 'vue'
 import type { SpaceSize } from '@idux/components/config'
 
-import { PropTypes } from '@idux/cdk/utils'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+
+const spaceSizeProp = IxPropTypes.oneOf<SpaceSize>(['small', 'medium', 'large'])
+
+export const spaceProps = {
+  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']).def('baseline'),
+  direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']).def('horizontal'),
+  size: IxPropTypes.oneOfType([spaceSizeProp, Number, IxPropTypes.array<SpaceSize>()]),
+  split: IxPropTypes.string,
+  wrap: IxPropTypes.bool,
+}
+
+export type SpaceProps = IxExtractPropTypes<typeof spaceProps>
+
+export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
-
-export interface SpaceProps {
-  /* Alignment direction of container */
-  align?: SpaceAlign
-  /* Spacing direction of flex item */
-  direction?: SpaceDirection
-  /**
-   * Spacing size.
-   * You can also pass in an array to customize the size of each spacing。
-   */
-  size?: SpaceSize | SpaceSize[]
-  /**
-   * Delimiter.
-   * You can also pass in a slot to customize the delimiter.
-   */
-  split?: string
-  /* Whether to wrap */
-  wrap?: boolean
-}
-
-const spaceSizePropType = PropTypes.oneOf(['small', 'medium', 'large'] as const)
-
-export const spacePropsDef = {
-  align: PropTypes.oneOf(['start', 'center', 'end', 'baseline'] as const).def('baseline'),
-  direction: PropTypes.oneOf(['vertical', 'horizontal'] as const).def('horizontal'),
-  size: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.oneOfType([spaceSizePropType, PropTypes.number])),
-    PropTypes.oneOfType([spaceSizePropType, PropTypes.number]),
-  ]),
-  split: PropTypes.string,
-  wrap: PropTypes.bool,
-}
-
-export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

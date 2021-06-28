@@ -57,7 +57,7 @@ export interface SubMenuConfig {
 export type PaginationSize = 'small' | 'medium'
 export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
 export interface PaginationItemRenderOptions {
-  index: number
+  index?: number
   type: PaginationItemType
   active: boolean
   disabled: boolean

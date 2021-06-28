@@ -1,7 +1,7 @@
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
-import IxVirtualList from '../src/list'
-import { ItemRender, VirtualListInstance, VirtualListProps } from '../src/types'
+import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import IxVirtualList from '../src/List'
+import { VirtualItemRenderFn, VirtualListProps } from '../src/types'
 
 const getData = (length: number, key = 'id') => {
   const data: { id: string }[] = []
@@ -24,7 +24,8 @@ const defaultItemSlot = `
 `
 
 describe('list.ts', () => {
-  let VirtualListMount: (options?: MountingOptions<Partial<VirtualListProps>>) => VueWrapper<VirtualListInstance>
+  const VirtualListMount = (options?: MountingOptions<Partial<VirtualListProps>>) =>
+    mount(IxVirtualList, { ...options })
 
   beforeAll(() => {
     jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 200)
@@ -32,10 +33,6 @@ describe('list.ts', () => {
 
   afterAll(() => {
     jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
-  })
-
-  beforeEach(() => {
-    VirtualListMount = options => mount<VirtualListInstance>(IxVirtualList, { ...options })
   })
 
   describe('basic work', () => {
@@ -156,8 +153,9 @@ describe('list.ts', () => {
     })
 
     test('itemRender work', async () => {
-      const itemRender: ItemRender = ({ item, index }) => {
-        return h('span', { class: 'virtual-item' }, [`${item.id} - ${index}`])
+      const itemRender: VirtualItemRenderFn = ({ item, index }) => {
+        const { id } = item as { id: string }
+        return h('span', { class: 'virtual-item' }, [`${id} - ${index}`])
       }
       const wrapper = VirtualListMount({
         props: { data: getData(20), ...defaultProps, itemRender },

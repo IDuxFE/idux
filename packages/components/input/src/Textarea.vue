@@ -23,11 +23,10 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
-import type { TextareaProps } from './types'
+import { textareaProps, TextareaProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
-import { controlPropTypeDef } from '@idux/cdk/forms'
-import { PropTypes, withUndefined } from '@idux/cdk/utils'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { useAttrs } from '@idux/components/utils'
 import { IxIcon } from '@idux/components/icon'
@@ -37,23 +36,8 @@ import { useCommonBindings } from './useCommonBindings'
 export default defineComponent({
   name: 'IxTextarea',
   components: { IxIcon },
-  props: {
-    value: PropTypes.string,
-    control: controlPropTypeDef,
-    disabled: PropTypes.bool.def(false),
-    readonly: PropTypes.bool.def(false),
-    resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical'] as const),
-    autoRows: withUndefined(
-      PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({ minRows: PropTypes.number, maxRows: PropTypes.number })]),
-    ),
-    showCount: PropTypes.bool,
-    maxCount: withUndefined(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-    computeCount: PropTypes.func,
-    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-    clearable: PropTypes.bool,
-  },
-  emits: ['update:value', 'compositionStart', 'compositionEnd', 'input', 'focus', 'blur', 'afterClear'],
-  setup(props: TextareaProps) {
+  props: textareaProps,
+  setup(props) {
     const attrs = useAttrs()
     const textareaConfig = useGlobalConfig('textarea')
     const textareaRef = ref(null as unknown as HTMLTextAreaElement)

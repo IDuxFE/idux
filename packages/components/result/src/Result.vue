@@ -25,9 +25,10 @@ import type { ResultConfig, ResultStatus } from '@idux/components/config'
 import type { ResultProps } from './types'
 
 import { computed, defineComponent, Slots } from 'vue'
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { resultProps } from './types'
 
 const defaultIconMap = new Map<ResultStatus, string>([
   ['success', 'check-circle'],
@@ -39,13 +40,8 @@ const defaultIconMap = new Map<ResultStatus, string>([
 export default defineComponent({
   name: 'IxResult',
   components: { IxIcon },
-  props: {
-    icon: PropTypes.string,
-    status: PropTypes.oneOf(['success', 'error', 'info', 'warning'] as const),
-    subtitle: PropTypes.string,
-    title: PropTypes.string,
-  },
-  setup(props: ResultProps, { slots }: SetupContext) {
+  props: resultProps,
+  setup(props, { slots }: SetupContext) {
     const resultConfig = useGlobalConfig('result')
     const className = useClassName(props, resultConfig)
     const hasTitle = useSlot(slots, 'title')

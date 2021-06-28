@@ -1,4 +1,4 @@
-import IxVirtualList from './src/list'
+import IxVirtualList from './src/List'
 
 export { IxVirtualList }
 

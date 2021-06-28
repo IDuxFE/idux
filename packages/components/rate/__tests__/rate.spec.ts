@@ -5,12 +5,10 @@ import IxRate from '../src/Rate.vue'
 import { RateInstance, RateProps } from '../src/types'
 
 describe('Rate.vue', () => {
-  let RateMount: (options?: MountingOptions<Partial<RateProps>>) => VueWrapper<RateInstance>
+  const RateMount = (options?: MountingOptions<Partial<RateProps>>) => mount(IxRate, { ...options })
   let findNormalIcon: (wrapper: VueWrapper<RateInstance>) => number
 
   beforeEach(() => {
-    RateMount = options => mount<RateInstance>(IxRate, { ...options })
-
     findNormalIcon = (wrapper: VueWrapper<RateInstance>): number => {
       const res = wrapper.findAll('.ix-rate-iconfont-main').filter(item => {
         return item.classes().includes('ix-rate-normal')

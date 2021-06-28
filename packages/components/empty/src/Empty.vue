@@ -13,21 +13,16 @@
   </div>
 </template>
 <script lang="ts">
-import type { EmptyProps } from './types'
-
 import { defineComponent, computed } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { getLocale } from '@idux/components/i18n'
+import { emptyProps } from './types'
 
 export default defineComponent({
   name: 'IxEmpty',
   components: { IxIcon },
-  props: {
-    description: PropTypes.string,
-    image: PropTypes.string,
-  },
-  setup(props: EmptyProps) {
+  props: emptyProps,
+  setup(props) {
     const emptyLocale = getLocale('empty')
     const description$$ = computed(() => props.description ?? emptyLocale.value.description)
     return { description$$ }

@@ -28,6 +28,7 @@ import { FormArray, useFormArray, useFormControl, useFormGroup } from '@idux/cdk
 
 export default defineComponent({
   setup() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formGroup = useFormGroup<any>({
       array: useFormArray([]),
     })

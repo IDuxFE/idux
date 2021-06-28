@@ -5,16 +5,14 @@
 </template>
 
 <script lang="ts">
-import type { ButtonGroupProps } from './types'
-
 import { defineComponent, provide } from 'vue'
-import { buttonGroupPropsDef } from './types'
-import { buttonToken } from './utils'
+import { buttonGroupProps } from './types'
+import { buttonToken } from './token'
 
 export default defineComponent({
   name: 'IxButtonGroup',
-  props: buttonGroupPropsDef,
-  setup(props: ButtonGroupProps) {
+  props: buttonGroupProps,
+  setup(props) {
     provide(buttonToken, props)
   },
 })

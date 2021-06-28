@@ -16,7 +16,7 @@
     </span>
     <span class="ix-input-wrapper">
       <span v-if="prefix || $slots.prefix" class="ix-input-prefix">
-        <slot name="prefix"><ix-icon :name="prefix" @click="onPrefixClick" /></slot>
+        <slot name="prefix"><ix-icon :name="prefix" /></slot>
       </span>
       <input
         ref="inputRef"
@@ -34,7 +34,7 @@
         <ix-icon :class="{ 'ix-input-clear-icon-hidden': clearHidden }" name="close-circle" @click="onClearClick" />
       </span>
       <span v-if="suffix || $slots.suffix" class="ix-input-suffix">
-        <slot name="suffix"><ix-icon :name="suffix" @click="onSuffixClick" /></slot>
+        <slot name="suffix"><ix-icon :name="suffix" /></slot>
       </span>
     </span>
     <span v-if="addonAfter || $slots.addonAfter" class="ix-input-addon">
@@ -49,42 +49,19 @@ import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
 import { computed, defineComponent, ref } from 'vue'
-import { controlPropTypeDef } from '@idux/cdk/forms'
-import { PropTypes } from '@idux/cdk/utils'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { useAttrs } from '@idux/components/utils'
 import { IxIcon } from '@idux/components/icon'
+import { inputProps } from './types'
 import { useCommonBindings } from './useCommonBindings'
 
 export default defineComponent({
   name: 'IxInput',
   components: { IxIcon },
   inheritAttrs: false,
-  props: {
-    value: PropTypes.string,
-    control: controlPropTypeDef,
-    disabled: PropTypes.bool.def(false),
-    readonly: PropTypes.bool.def(false),
-    addonAfter: PropTypes.string,
-    addonBefore: PropTypes.string,
-    suffix: PropTypes.string,
-    prefix: PropTypes.string,
-    size: PropTypes.oneOf(['large', 'medium', 'small'] as const),
-    clearable: PropTypes.bool,
-    borderless: PropTypes.bool,
-  },
-  emits: [
-    'update:value',
-    'compositionStart',
-    'compositionEnd',
-    'input',
-    'focus',
-    'blur',
-    'suffixClick',
-    'prefixClick',
-    'afterClear',
-  ],
-  setup(props: InputProps, { emit }) {
+  props: inputProps,
+  setup(props) {
     const attrs = useAttrs()
     const inputConfig = useGlobalConfig('input')
     const inputRef = ref(null as unknown as HTMLInputElement)
@@ -102,13 +79,9 @@ export default defineComponent({
       isClearable,
       clearHidden,
       isFocused,
-      valueAccessor,
     } = useCommonBindings(props, inputConfig, inputRef)
 
     const classes = useClasses(props, inputConfig, isFocused, disabled$$)
-
-    const onSuffixClick = (evt: MouseEvent) => emit('suffixClick', valueAccessor.value, evt)
-    const onPrefixClick = (evt: MouseEvent) => emit('prefixClick', valueAccessor.value, evt)
 
     return {
       disabled$$,
@@ -125,8 +98,6 @@ export default defineComponent({
       onClearClick,
       isClearable,
       clearHidden,
-      onSuffixClick,
-      onPrefixClick,
     }
   },
 })

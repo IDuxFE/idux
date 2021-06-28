@@ -1,14 +1,10 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import IxOption from '../src/Option.vue'
 import IxOptionGroup from '../src/OptionGroup.vue'
-import { OptionProps, OptionGroupProps, OptionInstance, OptionGroupInstance } from '../src/types'
+import { OptionProps, OptionGroupProps } from '../src/types'
 
 describe('Option.vue', () => {
-  let OptionMount: (options?: MountingOptions<Partial<OptionProps>>) => VueWrapper<OptionInstance>
-
-  beforeEach(() => {
-    OptionMount = options => mount<OptionInstance>(IxOption, { ...options })
-  })
+  const OptionMount = (options?: MountingOptions<Partial<OptionProps>>) => mount(IxOption, { ...options })
 
   afterEach(() => {
     jest.spyOn(console, 'warn').mockClear()
@@ -28,11 +24,8 @@ describe('Option.vue', () => {
 })
 
 describe('OptionGroup.vue', () => {
-  let OptionGroupMount: (options?: MountingOptions<Partial<OptionGroupProps>>) => VueWrapper<OptionGroupInstance>
-
-  beforeEach(() => {
-    OptionGroupMount = options => mount<OptionGroupInstance>(IxOptionGroup, { ...options })
-  })
+  const OptionGroupMount = (options?: MountingOptions<Partial<OptionGroupProps>>) =>
+    mount(IxOptionGroup, { ...options })
 
   afterEach(() => {
     jest.spyOn(console, 'warn').mockClear()

@@ -1,61 +1,61 @@
-import { defineComponent } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
-import { mount } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 
-import IxPortal from '../src/Portal.vue'
-
-const TestComponent = defineComponent({
-  components: { IxPortal },
-  props: {
-    disabled: PropTypes.bool,
-    target: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]).isRequired,
-  },
-  template: `
-  <ix-portal :disabled='disabled' :target='target'>
-    <div id='overlay'>overlay</div>
-  </ix-portal>
-  `,
-})
+import IxPortal from '../src/Portal'
+import { PortalInstance, PortalProps } from '../src/types'
 
 describe('Portal.vue', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let PortalMount: any
+  const PortalMount = (options?: MountingOptions<Partial<PortalProps>>) =>
+    mount<PortalInstance>(IxPortal, {
+      slots: { default: `<div id='content'>content</div>` },
+      ...options,
+      attachTo: 'body',
+    })
 
-  beforeEach(() => {
-    PortalMount = (options = { props: { target: 'ix-container' } }) => {
-      return mount(TestComponent, {
-        ...options,
-      })
-    }
+  afterEach(() => {
+    document.body.childNodes.forEach(node => node.remove())
   })
 
   test('render work', () => {
-    const wrapper = PortalMount()
-    expect(wrapper.html()).toMatchSnapshot()
+    const wrapper = PortalMount({ props: { target: 'render-container' } })
+    expect(document.body.querySelector('.render-container')!.querySelector('#content')).toBeDefined()
+
+    expect(() => {
+      wrapper.vm.$forceUpdate()
+      wrapper.unmount()
+    }).not.toThrow()
   })
 
   test('disabled work', async () => {
-    const wrapper = PortalMount()
-    expect(wrapper.html()).toMatchSnapshot()
+    const wrapper = PortalMount({ props: { target: 'disabled-container', disabled: true } })
+    const container = document.body.querySelector('.disabled-container')!
+    expect(container.querySelector('#content')).toBeNull()
 
-    await wrapper.setProps({ disabled: true })
-    expect(wrapper.get('#overlay')).toBeDefined()
+    await wrapper.setProps({ disabled: false })
+
+    expect(container.querySelector('#content')).not.toBeNull()
   })
 
   test('target work', async () => {
+    const wrapper = PortalMount({ props: { target: 'target-container1' } })
+    const container1 = document.body.querySelector('.target-container1')!
+    expect(container1.querySelector('#content')).not.toBeNull()
+
     const container = document.createElement('div')
-    container.classList.add('test-container')
+    container.classList.add('target-container2')
     document.body.appendChild(container)
 
-    const wrapper1 = PortalMount({ props: { target: 'ix-container' } })
-    expect(wrapper1.html()).toMatchSnapshot()
-    expect(document.body.querySelector('.ix-container')).not.toBeNull()
+    await wrapper.setProps({ target: container })
+    expect(container1.querySelector('#content')).toBeNull()
+    expect(container.querySelector('#content')).not.toBeNull()
+  })
 
-    const wrapper2 = PortalMount({ props: { target: 'ix-container' } })
-    expect(wrapper2.html()).toMatchSnapshot()
-    expect(document.body.querySelectorAll('.ix-container').length).toEqual(1)
+  test('show work', async () => {
+    const wrapper = PortalMount({ props: { target: 'show-container', show: false } })
+    const container = document.body.querySelector('.show-container')!
+    expect(container.querySelector('#content')).toBeNull()
 
-    await wrapper2.setProps({ target: container })
-    expect(container.hasChildNodes()).toBeTruthy()
+    await wrapper.setProps({ show: true })
+
+    expect(container.querySelector('#content')).not.toBeNull()
   })
 })

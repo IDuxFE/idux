@@ -33,8 +33,8 @@ export function addLocale(locale: Locale | Locale[]): void {
  *
  * @param key optional, gets the value of current locale by key
  */
-export function getLocale<T extends LocaleKey>(key: T): ComputedRef<Locale[T]>
 export function getLocale(): ComputedRef<Locale>
+export function getLocale<T extends LocaleKey>(key: T): ComputedRef<Locale[T]>
 export function getLocale<T extends LocaleKey>(key?: T): ComputedRef<Locale | Locale[T]> {
   return computed(() => {
     let currLocale = localeMap[currentType.value]

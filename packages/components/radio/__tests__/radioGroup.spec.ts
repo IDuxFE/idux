@@ -1,16 +1,12 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import { ref } from 'vue'
 import IxRadio from '../src/Radio.vue'
 import IxRadioButton from '../src/RadioButton.vue'
 import IxRadioGroup from '../src/RadioGroup.vue'
-import { RadioGroupInstance, RadioGroupProps } from '../src/types'
+import { RadioGroupProps } from '../src/types'
 
 describe.skip('RadioGroup.vue', () => {
-  let RadioGroupMount: (options?: MountingOptions<Partial<RadioGroupProps>>) => VueWrapper<RadioGroupInstance>
-
-  beforeEach(() => {
-    RadioGroupMount = options => mount<RadioGroupInstance>(IxRadioGroup, { ...options })
-  })
+  const RadioGroupMount = (options?: MountingOptions<Partial<RadioGroupProps>>) => mount(IxRadioGroup, { ...options })
   test('render work', () => {
     const wrapper = RadioGroupMount()
     expect(wrapper.html()).toMatchSnapshot()

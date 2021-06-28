@@ -4,11 +4,11 @@
 
 <script lang="ts">
 import { defineComponent, watchEffect } from 'vue'
-import { controlPropTypeDef, provideControl, useValueControl } from '@idux/cdk/forms'
+import { controlProp, provideControl, useValueControl } from '@idux/cdk/forms'
 
 export default defineComponent({
   name: 'IxFormWrapper',
-  props: { control: controlPropTypeDef },
+  props: { control: controlProp },
 
   setup() {
     const control = useValueControl()

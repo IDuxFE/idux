@@ -3,10 +3,10 @@
 exports[`Pagination.vue render work 1`] = `
 "<ul class=\\"ix-pagination ix-pagination-medium\\">
   <li class=\\"ix-pagination-total\\">共 0 条</li>
-  <li class=\\"ix-pagination-item\\" title=\\"上一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" arialabel=\\"left\\"></i>
+  <li class=\\"ix-pagination-item\\" title=\\"上一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i>
       <!--v-if-->
     </button></li>
-  <li class=\\"ix-pagination-item\\" title=\\"下一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" arialabel=\\"right\\"></i>
+  <li class=\\"ix-pagination-item\\" title=\\"下一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i>
       <!--v-if-->
     </button></li>
   <!--v-if-->

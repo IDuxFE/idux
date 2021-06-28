@@ -9,19 +9,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ComputedRef } from 'vue'
 import type { Slots } from 'vue'
-import { hasSlot, PropTypes } from '@idux/cdk/utils'
+import type { TimelineItemProps } from './types'
+
+import { defineComponent, computed, ComputedRef } from 'vue'
+
+import { hasSlot } from '@idux/cdk/utils'
 import { isPresetColor, isStatusColor } from '@idux/components/utils'
-import { TimelineItemProps } from './types'
+import { timelineItemProps } from './types'
 
 export default defineComponent({
   name: 'IxTimelineItem',
-  props: {
-    color: PropTypes.string.def('primary'),
-    dot: PropTypes.string,
-    position: PropTypes.oneOf(['left', 'right'] as const),
-  },
+  props: timelineItemProps,
   setup(props, { slots }) {
     const isPresetOrStatus = computed(() => isPresetColor(props.color) || isStatusColor(props.color))
 

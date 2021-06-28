@@ -7,7 +7,7 @@
       autocomplete="off"
       :autofocus="autofocus"
       :disabled="disabled"
-      :style="{ opacity: showInput ? null : 0 }"
+      :style="{ opacity: showInput ? undefined : 0 }"
       @input="onInput"
       @compositionstart="onCompositionStart"
       @compositionend="onCompositionEnd"
@@ -19,17 +19,17 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from 'vue'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxSelectInput',
   props: {
-    value: PropTypes.any,
-    autofocus: PropTypes.bool,
-    disabled: PropTypes.bool,
-    open: PropTypes.bool,
-    showInput: PropTypes.bool,
-    showMirror: PropTypes.bool,
+    value: IxPropTypes.any,
+    autofocus: IxPropTypes.bool,
+    disabled: IxPropTypes.bool,
+    open: IxPropTypes.bool,
+    showInput: IxPropTypes.bool,
+    showMirror: IxPropTypes.bool,
   },
   emits: ['compositionstart', 'compositionend', 'input', 'change', 'focus', 'blur'],
   setup(props, { emit }) {

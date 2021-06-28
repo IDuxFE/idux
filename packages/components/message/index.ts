@@ -1,4 +1,4 @@
-import IxMessage from './src/message'
+import IxMessage from './src/Message'
 
 export { IxMessage }
 

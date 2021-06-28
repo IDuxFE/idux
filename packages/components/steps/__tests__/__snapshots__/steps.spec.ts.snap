@@ -4,7 +4,7 @@ exports[`Steps.vue render work 1`] = `
 "<div class=\\"ix-steps ix-steps-horizontal ix-steps-medium\\">
   <div class=\\"ix-step ix-step-finish\\">
     <div class=\\"ix-step-tail\\"></div>
-    <div class=\\"ix-step-head\\"><i class=\\"ix-icon ix-icon-check ix-step-head-icon\\" role=\\"img\\" arialabel=\\"check\\"></i></div>
+    <div class=\\"ix-step-head\\"><i class=\\"ix-icon ix-icon-check ix-step-head-icon\\" role=\\"img\\" aria-label=\\"check\\"></i></div>
     <div class=\\"ix-step-content\\">
       <div class=\\"ix-step-title\\">Finish<span class=\\"ix-step-subtitle\\">20:20:01</span></div>
       <div class=\\"ix-step-description\\">This is a description.</div>

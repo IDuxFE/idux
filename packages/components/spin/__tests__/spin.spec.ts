@@ -1,15 +1,10 @@
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { mount, MountingOptions } from '@vue/test-utils'
 import IxSpin from '../src/Spin.vue'
-import { SpinInstance, SpinProps } from '../src/types'
+import { SpinProps } from '../src/types'
 
 describe('Spin.vue', () => {
-  let SpinMount: (options?: MountingOptions<Partial<SpinProps>>) => VueWrapper<SpinInstance>
-
-  beforeEach(() => {
-    SpinMount = options => mount<SpinInstance>(IxSpin, { ...options })
-  })
-
+  const SpinMount = (options?: MountingOptions<Partial<SpinProps>>) => mount(IxSpin, { ...options })
   renderWork(IxSpin)
 
   test('spinning work', async () => {

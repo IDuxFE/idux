@@ -1,12 +1,16 @@
 import type { DefineComponent } from 'vue'
 
-export interface TagProps {
-  closable?: boolean
-  icon: string
-  color: string
-  checked: boolean
-  checkAble: boolean
-  isRound: boolean
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+
+export const tagProps = {
+  closable: IxPropTypes.bool,
+  icon: IxPropTypes.string,
+  color: IxPropTypes.string,
+  checked: IxPropTypes.bool,
+  checkAble: IxPropTypes.bool,
+  isRound: IxPropTypes.bool,
 }
+
+export type TagProps = IxExtractPropTypes<typeof tagProps>
 
 export type TagInstance = InstanceType<DefineComponent<TagProps>>

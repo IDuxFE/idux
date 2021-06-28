@@ -12,19 +12,14 @@ import type { ComputedRef } from 'vue'
 import type { BadgeProps } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { hasSlot, isNumeric, PropTypes, toNumber } from '@idux/cdk/utils'
+import { hasSlot, isNumeric, toNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { backTopProps } from './types'
 
 export default defineComponent({
   name: 'IxBadge',
-  props: {
-    count: PropTypes.oneOfType([Number, String]).def(0),
-    showZero: PropTypes.bool,
-    overflowCount: PropTypes.number,
-    dot: PropTypes.bool,
-    color: PropTypes.string,
-  },
-  setup(props: BadgeProps, { slots }) {
+  props: backTopProps,
+  setup(props, { slots }) {
     const badgeConfig = useGlobalConfig('badge')
 
     const showZero = computed(() => props.showZero ?? badgeConfig.showZero)

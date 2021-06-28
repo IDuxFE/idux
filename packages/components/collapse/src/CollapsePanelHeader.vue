@@ -15,23 +15,22 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
-import { CollapsePanelProps, collapseInjectionKey } from './types'
-import { PropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { useCollapseHeaderClasses } from './useCollpase'
+import { collapseToken } from './token'
 
 export default defineComponent({
   name: 'IxCollapsePanelHeader',
   components: { IxIcon },
   props: {
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string,
-    disabled: PropTypes.bool,
-    icons: PropTypes.string,
+    name: IxPropTypes.string.isRequired,
+    title: IxPropTypes.string,
+    disabled: IxPropTypes.bool,
+    icons: IxPropTypes.string,
   },
   emits: ['click'],
-  setup(props: CollapsePanelProps) {
-    const collapse = inject(collapseInjectionKey, {})
+  setup(props) {
+    const collapse = inject(collapseToken)!
 
     const isActive = computed(() => {
       return collapse.props.active.indexOf(props.name) > -1
@@ -41,7 +40,15 @@ export default defineComponent({
       return collapse.props.borderless
     })
 
-    const headerClasses = useCollapseHeaderClasses(props, borderless, isActive)
+    const headerClasses = computed(() => {
+      const disabled = props.disabled
+
+      return {
+        'ix-collapse-panel-header-disabled': disabled,
+        'ix-collapse-panel-header-inactive': !isActive.value,
+        'ix-collapse-panel-header-borderless': borderless.value,
+      }
+    })
 
     return {
       borderless,

@@ -1,10 +1,13 @@
 import type { DefineComponent } from 'vue'
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export interface IconProps {
-  iconfont: boolean
-  name?: string
-  rotate?: boolean | number | string
+export const iconProps = {
+  iconfont: IxPropTypes.bool.def(false),
+  name: IxPropTypes.string,
+  rotate: IxPropTypes.oneOfType([Boolean, Number, String]),
 }
+
+export type IconProps = IxExtractPropTypes<typeof iconProps>
 
 export type IconInstance = InstanceType<DefineComponent<IconProps>>
 
