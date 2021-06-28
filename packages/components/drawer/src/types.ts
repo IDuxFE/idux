@@ -2,9 +2,7 @@ import type { DefineComponent } from 'vue'
 
 import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
-export type DrawerPlacement = 'top' | 'right' | 'bottom' | 'left'
 type Done = (cancel: boolean) => void
-
 export type BeforeCloseFunc = (done: Done) => void
 
 export const drawerProps = {
