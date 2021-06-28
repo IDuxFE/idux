@@ -1,27 +1,27 @@
 import type { DefineComponent } from 'vue'
 
-export type DrawerPlacement = 'top' | 'right' | 'bottom' | 'left'
-type Done = (cancel: boolean) => void
+import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
+type Done = (cancel: boolean) => void
 export type BeforeCloseFunc = (done: Done) => void
 
-interface DrawerOriginalProps {
-  visible?: boolean
-  title?: string
-  footer?: string
-  closable?: boolean
-  placement?: DrawerPlacement
-  width?: number | string
-  height?: number | string
-  offset?: number | string
-  mask?: boolean
-  maskClosable?: boolean
-  wrapClassName?: string
-  destroyOnHide?: boolean
-  keyboard?: boolean
-  beforeClose?: BeforeCloseFunc
+export const drawerProps = {
+  visible: IxPropTypes.bool,
+  title: IxPropTypes.string,
+  footer: IxPropTypes.string,
+  closable: IxPropTypes.bool.def(true),
+  placement: IxPropTypes.oneOf(['top', 'right', 'bottom', 'left'] as const).def('right'),
+  width: IxPropTypes.oneOfType([Number, String]),
+  height: IxPropTypes.oneOfType([Number, String]),
+  offset: IxPropTypes.oneOfType([Number, String]).def(0),
+  mask: IxPropTypes.bool.def(true),
+  maskClosable: IxPropTypes.bool.def(true),
+  wrapClassName: String,
+  destroyOnHide: IxPropTypes.bool.def(false),
+  keyboard: IxPropTypes.bool.def(true),
+  beforeClose: IxPropTypes.func<BeforeCloseFunc>(),
 }
 
-export type DrawerProps = Readonly<DrawerOriginalProps>
+export type DrawerProps = IxExtractPropTypes<typeof drawerProps>
 
-export type DrawerComponent = InstanceType<DefineComponent<DrawerProps>>
+export type DrawerInstance = InstanceType<DefineComponent<DrawerProps>>

@@ -5,11 +5,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { MaskProps, MaskPropTypes } from './types'
+import { maskProps, MaskProps } from './types'
 
 export default defineComponent({
   name: 'IxMask',
-  props: MaskPropTypes,
+  props: maskProps,
   emits: ['click'],
   setup(props: MaskProps, { emit }) {
     const ixMaskClass = computed(() => {
