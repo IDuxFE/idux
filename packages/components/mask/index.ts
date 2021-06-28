@@ -8,4 +8,4 @@ IxMask.install = (app: App): void => {
 
 export { IxMask }
 
-export type { MaskComponent, MaskProps } from './src/types'
+export type { MaskInstance, MaskProps } from './src/types'

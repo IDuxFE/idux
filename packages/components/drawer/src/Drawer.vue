@@ -33,8 +33,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import type { SetupContext } from 'vue'
-import { DrawerProps } from './types'
-import { PropTypes } from '@idux/cdk/utils'
+import { drawerProps, DrawerProps } from './types'
 import { IxPortal } from '@idux/cdk/portal'
 import { IxIcon } from '@idux/components/icon'
 import { IxMask } from '@idux/components/mask'
@@ -43,22 +42,7 @@ import useModal from './useModal'
 export default defineComponent({
   name: 'IxDrawer',
   components: { IxPortal, IxIcon, IxMask },
-  props: {
-    visible: PropTypes.bool,
-    title: PropTypes.string,
-    footer: PropTypes.string,
-    closable: PropTypes.bool.def(true),
-    placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left'] as const).def('right'),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(0),
-    mask: PropTypes.bool.def(true),
-    maskClosable: PropTypes.bool.def(true),
-    wrapClassName: PropTypes.string,
-    destroyOnHide: PropTypes.bool.def(false),
-    keyboard: PropTypes.bool.def(true),
-    beforeClose: PropTypes.func,
-  },
+  props: drawerProps,
   emits: ['open', 'opened', 'close', 'closed', 'update:visible'],
   setup(props: DrawerProps, ctx) {
     const drawerRef = ref<HTMLElement>(null)
