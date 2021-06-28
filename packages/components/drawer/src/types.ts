@@ -16,7 +16,7 @@ export const drawerProps = {
   offset: IxPropTypes.oneOfType([Number, String]).def(0),
   mask: IxPropTypes.bool.def(true),
   maskClosable: IxPropTypes.bool.def(true),
-  wrapClassName: String,
+  wrapClassName: IxPropTypes.string,
   destroyOnHide: IxPropTypes.bool.def(false),
   keyboard: IxPropTypes.bool.def(true),
   beforeClose: IxPropTypes.func<BeforeCloseFunc>(),

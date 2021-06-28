@@ -68,7 +68,6 @@ export default function (props: DrawerProps, ctx: SetupContext, targetRef: Ref<H
         closed.value = false
         open()
         rendered.value = true // enables lazy rendering
-        // ctx.emit(OPEN_EVENT)
         nextTick(() => {
           if (targetRef.value) {
             targetRef.value.scrollTop = 0

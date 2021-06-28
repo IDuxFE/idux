@@ -7,8 +7,8 @@ order: 0
 
 ## zh
 
-最简单的用法。
+基本用法
 
 ## en
 
-The simplest usage.
+The basic usage.
