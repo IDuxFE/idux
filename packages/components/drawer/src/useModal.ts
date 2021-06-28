@@ -3,12 +3,12 @@ import { ref, nextTick, watch, onMounted } from 'vue'
 import type { Ref, SetupContext } from 'vue'
 import { on } from '@idux/cdk/utils'
 
-export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HTMLElement>) {
+export default function (props: DrawerProps, ctx: SetupContext, targetRef: Ref<HTMLElement>): Record<string, unknown> {
   const maskVisible = ref(false)
   const closed = ref(false)
-	const rendered = ref(false)
+  const rendered = ref(false)
 
-	function afterEnter() {
+  function afterEnter() {
     ctx.emit('opened')
   }
 
@@ -24,7 +24,7 @@ export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HT
     ctx.emit('close')
   }
 
-	function open() {
+  function open() {
     maskVisible.value = true
   }
 
@@ -32,13 +32,15 @@ export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HT
     maskVisible.value = false
   }
 
-	function hide(shouldCancel: boolean) {
-    if (shouldCancel) return
+  function hide(shouldCancel: boolean) {
+    if (shouldCancel) {
+      return
+    }
     closed.value = true
     maskVisible.value = false
   }
 
-	function handleClose() {
+  function handleClose() {
     if (props.beforeClose) {
       props.beforeClose(hide)
     } else {
@@ -46,48 +48,58 @@ export default function(props: DrawerProps, ctx: SetupContext, targetRef: Ref<HT
     }
   }
 
-	function onModalClick() {
+  function onModalClick() {
     if (props.maskClosable) {
       handleClose()
     }
   }
 
-	watch(() => props.visible, val => {
-    if (val) {
-      closed.value = false
-      open()
-      rendered.value = true // enables lazy rendering
-      // ctx.emit(OPEN_EVENT)
-      nextTick(() => {
-        if (targetRef.value) {
-          targetRef.value.scrollTop = 0
-        }
-      })
-    } else {
-      if (maskVisible.value) {
-        close()
-      }
+  function handlekeyboard(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.stopPropagation()
+      handleClose()
     }
-  })
+  }
 
-	onMounted(() => {
+  watch(
+    () => props.visible,
+    val => {
+      if (val) {
+        closed.value = false
+        open()
+        rendered.value = true // enables lazy rendering
+        // ctx.emit(OPEN_EVENT)
+        nextTick(() => {
+          if (targetRef.value) {
+            targetRef.value.scrollTop = 0
+          }
+        })
+      } else {
+        if (maskVisible.value) {
+          close()
+        }
+      }
+    },
+  )
+
+  onMounted(() => {
     if (props.visible) {
       maskVisible.value = true
       rendered.value = true // enables lazy rendering
       open()
     }
-		if (props.keyboard) {
-			on(document, 'keydown', handleClose)
-		}
+    if (props.keyboard) {
+      on(document, 'keydown', handlekeyboard)
+    }
   })
-	return {
-		maskVisible,
-		closed,
-		rendered,
-		afterEnter,
+  return {
+    maskVisible,
+    closed,
+    rendered,
+    afterEnter,
     afterLeave,
     beforeLeave,
-		handleClose,
-		onModalClick
-	}
+    handleClose,
+    onModalClick,
+  }
 }
