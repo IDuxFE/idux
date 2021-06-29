@@ -1,10 +1,4 @@
-import type { App } from 'vue'
-
 import IxCard from './src/Card.vue'
-
-IxCard.install = (app: App): void => {
-  app.component(IxCard.name, IxCard)
-}
 
 export { IxCard }
 

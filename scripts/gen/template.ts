@@ -59,13 +59,7 @@ export default defineComponent({
 }
 
 export function getIndexTemplate(compName: string, useTsx: boolean): string {
-  return `import type { App } from 'vue'
-
-import Ix${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
-
-Ix${compName}.install = (app: App): void => {
-  app.component(Ix${compName}.name, Ix${compName})
-}
+  return `import Ix${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
 
 export { Ix${compName} }
 

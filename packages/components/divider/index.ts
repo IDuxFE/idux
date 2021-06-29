@@ -1,10 +1,4 @@
-import type { App } from 'vue'
-
 import IxDivider from './src/Divider.vue'
-
-IxDivider.install = (app: App): void => {
-  app.component(IxDivider.name, IxDivider)
-}
 
 export { IxDivider }
 

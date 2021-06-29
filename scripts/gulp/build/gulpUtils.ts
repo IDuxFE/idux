@@ -2,6 +2,7 @@ import { readdir, statSync, copy, copyFile, readJSON, writeFile } from 'fs-extra
 import { TaskFunction } from 'gulp'
 import { join } from 'path'
 import { rollup, OutputOptions } from 'rollup'
+// import { Extractor, ExtractorConfig, ExtractorResult } from '@microsoft/api-extractor'
 import { compileLess } from './less'
 import { getRollupOptions } from './rollup.config'
 
@@ -22,6 +23,20 @@ interface Options {
   packageName: string
 }
 
+const writePackageJson = (distDirname: string, packageName: string, compName: string) => {
+  return writeFile(
+    join(distDirname, compName, 'package.json'),
+    `{
+  "name": "@idux/${packageName}/${compName}",
+  "main": "index.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
+  "sideEffects": false
+}
+`,
+  )
+}
+
 // rollup 打包, 逐个组件
 export const buildPackage = (options: Options): TaskFunction => {
   const { targetDirname, distDirname, packageName } = options
@@ -34,7 +49,8 @@ export const buildPackage = (options: Options): TaskFunction => {
     const outputs = components.map(async compName => {
       const { output, ...inputOptions } = getRollupOptions({ targetDirname, distDirname, packageName, compName })
       const bundle = await rollup(inputOptions)
-      return await bundle.write(output as OutputOptions)
+      await bundle.write(output as OutputOptions)
+      return writePackageJson(distDirname, packageName, compName)
     })
 
     await Promise.all(outputs)
@@ -55,6 +71,64 @@ export const buildIndex = (options: Options): TaskFunction => {
   return buildIndex
 }
 
+/**
+ * TODO: Merge declaration files
+ * Error: The expression contains an import() type, which is not yet supported by API Extractor
+ * See: https://github.com/microsoft/rushstack/issues/2140, https://github.com/microsoft/rushstack/issues/1050
+ */
+
+// const apiExtractor = `{
+//   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+//   "mainEntryPointFilePath": "./index.d.ts",
+//   "dtsRollup": {
+//     "enabled": true,
+//     "publicTrimmedFilePath": "./index.d.ts"
+//   },
+//   "apiReport": {
+//     "enabled": false
+//   },
+//   "docModel": {
+//     "enabled": false
+//   }
+// }`
+
+// // api-extractor 整理 .d.ts 文件
+// const apiExtractorGenerate = async (dirname: string) => {
+//   const extractorFileName = 'api-extractor.json'
+//   const extractorDirname = join(dirname, extractorFileName)
+//   await writeFile(extractorDirname, apiExtractor)
+
+//   const apiExtractorJsonPath = join(extractorDirname)
+//   const extractorConfig: ExtractorConfig = await ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
+
+//   await remove(extractorDirname)
+
+//   const isExist: boolean = await pathExists(extractorConfig.mainEntryPointFilePath)
+
+//   if (!isExist) {
+//     console.error(`API Extractor not find ${dirname} index.d.ts`)
+//     return
+//   }
+
+//   const extractorResult: ExtractorResult = await Extractor.invoke(extractorConfig, { localBuild: true })
+
+//   if (extractorResult.succeeded) {
+//     // 删除多余的文件
+//     const distFiles: string[] = await readdir(dirname)
+//     distFiles.forEach(async file => {
+//       if (!file.includes('index')) {
+//         await remove(join(dirname, file))
+//       }
+//     })
+//     console.log('API Extractor completed successfully')
+//   } else {
+//     console.error(
+//       `API Extractor completed with ${extractorResult.errorCount} errors` +
+//         ` and ${extractorResult.warningCount} warnings`,
+//     )
+//   }
+// }
+
 export const moveDeclaration = (declarationDirname: string): TaskFunction => {
   const moveDeclaration: TaskFunction = async done => {
     const declarations = await readdir(declarationDirname)
@@ -67,6 +141,9 @@ export const moveDeclaration = (declarationDirname: string): TaskFunction => {
           components.map(async componentName => {
             const srcDirname = join(packageDirname, componentName)
             const destDirname = join(declarationDirname, '..', packageName, componentName)
+            // if (statSync(srcDirname).isDirectory()) {
+            //   await apiExtractorGenerate(srcDirname)
+            // }
             return await copy(srcDirname, destDirname)
           }),
         )
@@ -113,6 +190,8 @@ export const syncVersion = (distDirname: string): TaskFunction => {
         const { version } = await readJSON(join(distDirname, packageName, 'package.json'))
         const versionString = `export const version = '${version}'`
         await writeFile(join(distDirname, packageName, 'version/index.js'), versionString)
+        const versionDeclarationString = `export declare const version = '${version}'`
+        await writeFile(join(distDirname, packageName, 'version/index.d.ts'), versionDeclarationString)
       })
     done()
   }

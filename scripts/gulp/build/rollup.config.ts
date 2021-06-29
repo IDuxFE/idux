@@ -16,7 +16,7 @@ interface Options {
 }
 
 export const getRollupOptions = (options: Options): RollupOptions => {
-  const { targetDirname, distDirname, packageName, compName = '' } = options
+  const { targetDirname, distDirname, compName = '' } = options
 
   const input = join(targetDirname, compName, 'index.ts')
   const outputFile = join(distDirname, compName, 'index.js')
@@ -42,15 +42,7 @@ export const getRollupOptions = (options: Options): RollupOptions => {
     output: {
       format: 'es',
       file: outputFile,
-      paths(id) {
-        const pathReg = new RegExp(`^@idux/${packageName}`)
-        if (pathReg.test(id)) {
-          return id.replace(`@idux/${packageName}`, '..')
-        }
-        return id
-      },
     },
-
     external(id) {
       return externalDeps.some(k => new RegExp('^' + k).test(id))
     },
