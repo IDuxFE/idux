@@ -45,7 +45,11 @@ export const buildDeclaration = series(
   complete('Declaration'),
 )
 
-export const buildStyle = series(_buildStyle(componentsDirname, componentsDistDirname), complete('Style'))
+export const buildStyle = series(
+  _buildStyle(cdkDirname, cdkDistDirname, true),
+  _buildStyle(componentsDirname, componentsDistDirname, false),
+  complete('Style'),
+)
 
 export const buildVersion = series(
   copyPackageFiles(distDirname, packageRoot, projectRoot),

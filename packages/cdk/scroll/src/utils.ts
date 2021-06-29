@@ -1,5 +1,6 @@
-import { isNil, isObject, rAF } from '@idux/cdk/utils'
-import { easeInOutCubic, EasingFn } from './easings'
+import type { EasingFn } from '@idux/cdk/utils'
+
+import { easeInOutCubic, isNil, isObject, rAF } from '@idux/cdk/utils'
 
 export interface ScrollOptions {
   scrollTop?: number
@@ -43,29 +44,6 @@ export function getScroll(target: Element | Window): Required<ScrollOptions> {
     const { scrollTop, scrollLeft } = target as Element
     return { scrollTop, scrollLeft }
   }
-}
-
-/** get position of `el` against `target` */
-export const getOffset = (el: HTMLElement, target: HTMLElement | Window): { top: number; left: number } => {
-  if (!el || !el.getClientRects().length) {
-    return { top: 0, left: 0 }
-  }
-
-  let { width, height, top, left } = el.getBoundingClientRect()
-
-  if (width || height) {
-    if (target === window) {
-      const doc = el.ownerDocument.documentElement
-      top = top - doc.clientTop
-      left = left - doc.clientLeft
-    } else {
-      const targetRect = (target as HTMLElement).getBoundingClientRect()
-      top = top - targetRect.top
-      left = left - targetRect.left
-    }
-  }
-
-  return { top, left }
 }
 
 export interface ScrollToTopOptions {

@@ -78,9 +78,9 @@ export const moveDeclaration = (declarationDirname: string): TaskFunction => {
   return moveDeclaration
 }
 
-export const buildStyle = (targetDirname: string, distDirname: string): TaskFunction => {
+export const buildStyle = (targetDirname: string, distDirname: string, isCdk: boolean): TaskFunction => {
   const buildStyle: TaskFunction = async done => {
-    await compileLess(targetDirname, distDirname)
+    await compileLess(targetDirname, distDirname, isCdk)
     done()
     console.log(`Style built successfully`)
   }
