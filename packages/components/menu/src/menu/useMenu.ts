@@ -1,6 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { MenuTheme } from '@idux/components/config'
-import type { MenuItemProps, MenuMode, MenuProps } from '../types'
+import type { MenuItemProps, MenuMode, MenuProps, MenuTheme } from '../types'
 import type { MenuItemClickFn, SetChildOpenStateFn } from '../token'
 
 import { computed, getCurrentInstance, ref, toRaw, watch } from 'vue'

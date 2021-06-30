@@ -3,6 +3,8 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export type RadioMode = 'border' | 'fill'
+
 export const radioProps = {
   value: IxPropTypes.oneOfType([String, Number, Boolean]),
   disabled: IxPropTypes.bool.def(false),

@@ -8,8 +8,11 @@ import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
+import type { RadioMode } from '@idux/components/radio'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
+import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
+import type { StepsSize } from '@idux/components/steps'
 
 // General
 
@@ -99,10 +102,8 @@ export interface TextareaConfig {
   clearable: boolean
 }
 
-export type RadioSize = FormSize
-export type RadioMode = 'border' | 'fill'
 export interface RadioGroupConfig {
-  size: RadioSize
+  size: FormSize
   mode: RadioMode
 }
 
@@ -113,13 +114,12 @@ export interface RateConfig {
   allowClear: boolean
 }
 
-export type SelectSize = FormSize
 export interface SelectConfig {
   borderless: boolean
   clearable: boolean
   labelKey: string
   searchable: boolean
-  size: SelectSize
+  size: FormSize
   suffix?: string
   valueKey: string
 }
@@ -197,8 +197,6 @@ export interface ResultConfig {
   status: ResultStatus
 }
 
-export type SpinTipAlignType = 'horizontal' | 'vertical'
-export type SpinSize = 'large' | 'medium' | 'small'
 export interface SpinConfig {
   icon: string
   tip: string
@@ -213,7 +211,6 @@ export interface ProgressConfig {
 
 // Steps
 
-export type StepsSize = 'medium' | 'small'
 export interface StepsConfig {
   size: StepsSize
 }

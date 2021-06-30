@@ -13,5 +13,6 @@ export type {
   StepsPublicProps as StepsProps,
   StepInstance,
   StepPublicProps as StepProps,
+  StepsSize,
   StepStatus,
 } from './src/types'

@@ -4,6 +4,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type StepStatus = 'wait' | 'process' | 'finish' | 'error'
+export type StepsSize = 'medium' | 'small'
 
 export const stepsProps = {
   active: IxPropTypes.number.def(0),

@@ -1,9 +1,10 @@
 import type { ComputedRef, VNodeTypes } from 'vue'
+import type { PaginationConfig } from '@idux/components/config'
 import type { PaginationInnerProps, PaginationSize } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
 import { getLocale } from '@idux/components/i18n'
-import { PaginationConfig, useGlobalConfig } from '@idux/components/config'
+import { useGlobalConfig } from '@idux/components/config'
 import IxPaginationTotal from './Total'
 import IxPaginationDefault from './Default.vue'
 import IxPaginationSimple from './Simple.vue'

@@ -1,11 +1,11 @@
+import type { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
+
 import { computed, defineComponent, PropType } from 'vue'
 import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import { IxButton } from '@idux/components/button'
 import { IxDivider } from '@idux/components/divider'
 import IxSpace from '../src/Space'
-import { SpaceAlign, SpaceDirection } from '../src/types'
-import { SpaceSize } from '@idux/components/config'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },
@@ -22,7 +22,7 @@ const TestComponent = defineComponent({
         horizontal: 'vertical',
         vertical: 'horizontal',
       }
-      return hashmap[props.direction] as SpaceDirection
+      return hashmap[props.direction!] as SpaceDirection
     })
     return { dividerType }
   },

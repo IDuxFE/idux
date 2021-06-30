@@ -17,4 +17,5 @@ export type {
   RadioButtonPublicProps as RadioButtonProps,
   RadioGroupInstance,
   RadioGroupPublicProps as RadioGroupProps,
+  RadioMode,
 } from './src/types'
