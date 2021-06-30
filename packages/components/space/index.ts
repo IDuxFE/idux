@@ -1,10 +1,4 @@
-import type { App } from 'vue'
-
 import IxSpace from './src/Space'
-
-IxSpace.install = (app: App): void => {
-  app.component(IxSpace.name, IxSpace)
-}
 
 export { IxSpace }
 

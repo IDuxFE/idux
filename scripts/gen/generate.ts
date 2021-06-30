@@ -202,7 +202,7 @@ class Generate {
     const currIndexPath = resolve(this.packageRoot, 'index.ts')
     let currIndexContent = await readFile(currIndexPath, 'utf-8')
     currIndexContent = currIndexContent
-      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from './${kebabCase(name)}'`)
+      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`)
       .replace(componentsRegx, `${componentsRegx}\n  Ix${upperFirstName},`)
       .replace(exportRegx, `${exportRegx}\n  Ix${upperFirstName},`)
     writeFile(currIndexPath, currIndexContent)

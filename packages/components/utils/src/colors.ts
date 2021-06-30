@@ -1,3 +1,5 @@
+export type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never
+
 export const presetColor = [
   'red',
   'orange',
