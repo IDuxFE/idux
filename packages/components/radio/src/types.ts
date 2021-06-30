@@ -1,6 +1,7 @@
-import { ComputedRef, DefineComponent } from 'vue'
+import type { ComputedRef, DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const radioProps = {
   value: IxPropTypes.oneOfType([String, Number, Boolean]),
@@ -9,8 +10,9 @@ export const radioProps = {
   checked: IxPropTypes.bool.def(false),
 }
 
-export type RadioProps = IxExtractPropTypes<typeof radioProps>
-
+export type RadioProps = IxInnerPropTypes<typeof radioProps>
+export type RadioPublicProps = IxPublicPropTypes<typeof radioProps>
+export type RadioComponent = DefineComponent<HTMLAttributes & typeof radioProps>
 export type RadioInstance = InstanceType<DefineComponent<RadioProps>>
 
 export const radioButtonProps = {
@@ -20,8 +22,9 @@ export const radioButtonProps = {
   checked: IxPropTypes.bool.def(false),
 }
 
-export type RadioButtonProps = IxExtractPropTypes<typeof radioButtonProps>
-
+export type RadioButtonProps = IxInnerPropTypes<typeof radioButtonProps>
+export type RadioButtonPublicProps = IxPublicPropTypes<typeof radioButtonProps>
+export type RadioButtonComponent = DefineComponent<HTMLAttributes & typeof radioButtonProps>
 export type RadioButtonInstance = InstanceType<DefineComponent<RadioButtonProps>>
 
 export const radioGroupProps = {
@@ -32,8 +35,9 @@ export const radioGroupProps = {
   color: IxPropTypes.string.def('#00b27a'),
 }
 
-export type RadioGroupProps = IxExtractPropTypes<typeof radioGroupProps>
-
+export type RadioGroupProps = IxInnerPropTypes<typeof radioGroupProps>
+export type RadioGroupPublicProps = IxPublicPropTypes<typeof radioGroupProps>
+export type RadioGroupComponent = DefineComponent<HTMLAttributes & typeof radioGroupProps>
 export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
 
 export interface radioModeConfig {

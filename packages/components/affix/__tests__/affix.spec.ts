@@ -54,7 +54,7 @@ async function scrollTarget(x: number, y: number, target: Window | Element = win
   return wait(timeout)
 }
 
-describe('Affix.vue', () => {
+describe('Affix', () => {
   const AffixMount = (options?: MountingOptions<Partial<AffixProps>>) => mount(IxAffix, { ...options })
 
   beforeEach(() => {

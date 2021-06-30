@@ -1,6 +1,7 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tagProps = {
   closable: IxPropTypes.bool,
@@ -11,6 +12,7 @@ export const tagProps = {
   isRound: IxPropTypes.bool,
 }
 
-export type TagProps = IxExtractPropTypes<typeof tagProps>
-
+export type TagProps = IxInnerPropTypes<typeof tagProps>
+export type TagPublicProps = IxPublicPropTypes<typeof tagProps>
+export type TagComponent = DefineComponent<HTMLAttributes & typeof tagProps>
 export type TagInstance = InstanceType<DefineComponent<TagProps>>

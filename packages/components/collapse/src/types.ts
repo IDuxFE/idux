@@ -1,5 +1,9 @@
-import type { DefineComponent } from 'vue'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type ActiveKeyType = string | Array<string>
 
 export const collapseProps = {
   accordion: IxPropTypes.bool,
@@ -7,8 +11,9 @@ export const collapseProps = {
   borderless: IxPropTypes.bool.def(false),
 }
 
-export type CollapseProps = IxExtractPropTypes<typeof collapseProps>
-
+export type CollapseProps = IxInnerPropTypes<typeof collapseProps>
+export type CollapsePublicProps = IxPublicPropTypes<typeof collapseProps>
+export type CollapseComponent = DefineComponent<HTMLAttributes & typeof collapseProps>
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
 export const collapsePanelProps = {
@@ -18,8 +23,7 @@ export const collapsePanelProps = {
   icon: IxPropTypes.arrayOf(String),
 }
 
-export type CollapsePanelProps = IxExtractPropTypes<typeof collapsePanelProps>
-
+export type CollapsePanelProps = IxInnerPropTypes<typeof collapsePanelProps>
+export type CollapsePanelPublicProps = IxPublicPropTypes<typeof collapsePanelProps>
+export type CollapsePanelComponent = DefineComponent<HTMLAttributes & typeof collapsePanelProps>
 export type CollapsePanelInstance = InstanceType<DefineComponent<CollapsePanelProps>>
-
-export type ActiveKeyType = string | Array<string>

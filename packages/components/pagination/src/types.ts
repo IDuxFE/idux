@@ -1,13 +1,20 @@
-import type { DefineComponent } from 'vue'
-import type {
-  PaginationItemRenderFn,
-  PaginationItemType,
-  PaginationSize,
-  PaginationTotalRenderFn,
-} from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+import type { IxPublicPropTypes, IxInnerPropTypes } from '@idux/cdk/utils'
 import type { PaginationLocale } from '@idux/components/i18n'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type PaginationSize = 'small' | 'medium'
+export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
+export interface PaginationItemRenderOptions {
+  index?: number
+  type: PaginationItemType
+  active: boolean
+  disabled: boolean
+  original: VNodeTypes
+}
+export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
+export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
 
 export const paginationProps = {
   pageIndex: IxPropTypes.number.def(1),
@@ -25,8 +32,9 @@ export const paginationProps = {
   totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 }
 
-export type PaginationProps = IxExtractPropTypes<typeof paginationProps>
-
+export type PaginationProps = IxPublicPropTypes<typeof paginationProps>
+export type PaginationInnerProps = IxInnerPropTypes<typeof paginationProps>
+export type PaginationComponent = DefineComponent<HTMLAttributes & PaginationInnerProps>
 export type PaginationInstance = InstanceType<DefineComponent<PaginationProps>>
 
 export const paginationDefaultProps = {
@@ -43,9 +51,7 @@ export const paginationDefaultProps = {
   total: IxPropTypes.number.def(0),
 }
 
-export type PaginationDefaultProps = IxExtractPropTypes<typeof paginationDefaultProps>
-
-export type PaginationDefaultInstance = InstanceType<DefineComponent<PaginationDefaultProps>>
+export type PaginationDefaultInnerProps = IxInnerPropTypes<typeof paginationDefaultProps>
 
 export const paginationSimpleProps = {
   disabled: IxPropTypes.bool.isRequired,
@@ -58,9 +64,7 @@ export const paginationSimpleProps = {
   total: IxPropTypes.number.def(0),
 }
 
-export type PaginationSimpleProps = IxExtractPropTypes<typeof paginationSimpleProps>
-
-export type PaginationSimpleInstance = InstanceType<DefineComponent<PaginationSimpleProps>>
+export type PaginationSimpleInnerProps = IxInnerPropTypes<typeof paginationSimpleProps>
 
 export const paginationItemProps = {
   active: IxPropTypes.bool.def(false),
@@ -72,9 +76,7 @@ export const paginationItemProps = {
   type: IxPropTypes.oneOf<PaginationItemType>(['page', 'prev', 'next', 'prev5', 'next5']).isRequired,
 }
 
-export type PaginationItemProps = IxExtractPropTypes<typeof paginationItemProps>
-
-export type PaginationItemInstance = InstanceType<DefineComponent<PaginationItemProps>>
+export type PaginationItemInnerProps = IxInnerPropTypes<typeof paginationItemProps>
 
 export const paginationJumperProps = {
   disabled: IxPropTypes.bool.isRequired,
@@ -83,9 +85,7 @@ export const paginationJumperProps = {
   size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
 }
 
-export type PaginationJumperProps = IxExtractPropTypes<typeof paginationJumperProps>
-
-export type PaginationJumperInstance = InstanceType<DefineComponent<PaginationJumperProps>>
+export type PaginationJumperInnerProps = IxInnerPropTypes<typeof paginationJumperProps>
 
 export const paginationSizesProps = {
   disabled: IxPropTypes.bool.isRequired,
@@ -95,9 +95,7 @@ export const paginationSizesProps = {
   size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']).isRequired,
 }
 
-export type PaginationSizesProps = IxExtractPropTypes<typeof paginationSizesProps>
-
-export type PaginationSizesInstance = InstanceType<DefineComponent<PaginationSizesProps>>
+export type PaginationSizesInnerProps = IxInnerPropTypes<typeof paginationSizesProps>
 
 export const paginationTotalProps = {
   locale: IxPropTypes.object<PaginationLocale>().isRequired,
@@ -107,6 +105,4 @@ export const paginationTotalProps = {
   totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 }
 
-export type PaginationTotalProps = IxExtractPropTypes<typeof paginationTotalProps>
-
-export type PaginationTotalInstance = InstanceType<DefineComponent<PaginationTotalProps>>
+export type PaginationTotalInnerProps = IxInnerPropTypes<typeof paginationTotalProps>

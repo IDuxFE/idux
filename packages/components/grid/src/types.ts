@@ -1,7 +1,9 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export type RowAlign = 'top' | 'middle' | 'bottom'
 export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
@@ -20,8 +22,9 @@ export const rowProps = {
   wrap: IxPropTypes.bool,
 }
 
-export type RowProps = IxExtractPropTypes<typeof rowProps>
-
+export type RowProps = IxInnerPropTypes<typeof rowProps>
+export type RowPublicProps = IxPublicPropTypes<typeof rowProps>
+export type RowComponent = DefineComponent<HTMLAttributes & typeof rowProps>
 export type RowInstance = InstanceType<DefineComponent<RowProps>>
 
 export interface ColBreakpointConfig {
@@ -60,6 +63,7 @@ export const colProps = {
   xl: breakpointConfig,
 }
 
-export type ColProps = IxExtractPropTypes<typeof colProps>
-
+export type ColProps = IxInnerPropTypes<typeof colProps>
+export type ColPublicProps = IxPublicPropTypes<typeof colProps>
+export type ColComponent = DefineComponent<HTMLAttributes & typeof colProps>
 export type ColInstance = InstanceType<DefineComponent<ColProps>>

@@ -1,10 +1,12 @@
-import type { DefineComponent } from 'vue'
-import type { ButtonSize } from '@idux/components/config'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes } from 'vue'
+import type { IxPublicPropTypes, IxInnerPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonShape = 'circle' | 'round'
+export type ButtonSize = 'large' | 'medium' | 'small'
+export type ButtonType = 'button' | 'submit' | 'reset'
 
 export const buttonProps = {
   mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
@@ -16,11 +18,12 @@ export const buttonProps = {
   shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
   block: IxPropTypes.bool,
   icon: IxPropTypes.string,
-  type: IxPropTypes.string.def('button'),
+  type: IxPropTypes.oneOf<ButtonType>(['button', 'submit', 'reset']).def('button'),
 }
 
-export type ButtonProps = IxExtractPropTypes<typeof buttonProps>
-
+export type ButtonProps = IxInnerPropTypes<typeof buttonProps>
+export type ButtonPublicProps = IxPublicPropTypes<typeof buttonProps>
+export type ButtonComponent = DefineComponent<(ButtonHTMLAttributes | AnchorHTMLAttributes) & typeof buttonProps>
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
@@ -29,6 +32,7 @@ export const buttonGroupProps = {
   shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
 }
 
-export type ButtonGroupProps = IxExtractPropTypes<typeof buttonGroupProps>
-
+export type ButtonGroupProps = IxInnerPropTypes<typeof buttonGroupProps>
+export type ButtonGroupPublicProps = IxPublicPropTypes<typeof buttonGroupProps>
+export type ButtonGroupComponent = DefineComponent<HTMLAttributes & typeof buttonGroupProps>
 export type ButtonGroupInstance = InstanceType<DefineComponent<ButtonGroupProps>>

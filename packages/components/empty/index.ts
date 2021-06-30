@@ -1,5 +1,9 @@
-import IxEmpty from './src/Empty.vue'
+import type { EmptyComponent } from './src/types'
+
+import Empty from './src/Empty.vue'
+
+const IxEmpty = Empty as unknown as EmptyComponent
 
 export { IxEmpty }
 
-export type { EmptyInstance, EmptyProps } from './src/types'
+export type { EmptyInstance, EmptyPublicProps as EmptyProps } from './src/types'

@@ -4,7 +4,7 @@ import { nextTick, ref } from 'vue'
 import IxTextarea from '../src/Textarea.vue'
 import { TextareaProps } from '../src/types'
 
-describe('Textarea.vue', () => {
+describe('Textarea', () => {
   const TextareaMount = (options?: MountingOptions<Partial<TextareaProps>>) => mount(IxTextarea, { ...options })
 
   renderWork(IxTextarea)

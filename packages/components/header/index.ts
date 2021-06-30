@@ -1,5 +1,9 @@
-import IxHeader from './src/Header'
+import type { HeaderComponent } from './src/types'
+
+import Header from './src/Header'
+
+const IxHeader = Header as unknown as HeaderComponent
 
 export { IxHeader }
 
-export type { HeaderInstance, HeaderProps } from './src/types'
+export type { HeaderInstance, HeaderPublicProps as HeaderProps } from './src/types'

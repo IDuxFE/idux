@@ -1,8 +1,19 @@
-import type { DefineComponent } from 'vue'
-import type { ListSize } from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { RowProps, RowGutter } from '@idux/components/grid'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type ListSize = 'small' | 'medium' | 'large'
+export type ListLayout = 'horizontal' | 'vertical'
+export interface ListGridProps extends RowProps {
+  column?: number
+  xs?: number
+  sm?: number
+  md?: number
+  lg?: number
+  xl?: number
+}
 
 export const listProps = {
   header: IxPropTypes.string,
@@ -16,8 +27,9 @@ export const listProps = {
   grid: IxPropTypes.object<ListGridProps>(),
 }
 
-export type ListProps = IxExtractPropTypes<typeof listProps>
-
+export type ListProps = IxInnerPropTypes<typeof listProps>
+export type ListPublicProps = IxPublicPropTypes<typeof listProps>
+export type ListComponent = DefineComponent<HTMLAttributes & typeof listProps>
 export type ListInstance = InstanceType<DefineComponent<ListProps>>
 
 export const listItemProps = {
@@ -26,8 +38,9 @@ export const listItemProps = {
   extra: IxPropTypes.string,
 }
 
-export type ListItemProps = IxExtractPropTypes<typeof listItemProps>
-
+export type ListItemProps = IxInnerPropTypes<typeof listItemProps>
+export type ListItemPublicProps = IxPublicPropTypes<typeof listItemProps>
+export type ListItemComponent = DefineComponent<HTMLAttributes & typeof listItemProps>
 export type ListItemInstance = InstanceType<DefineComponent<ListItemProps>>
 
 export const listWrapProps = {
@@ -35,25 +48,12 @@ export const listWrapProps = {
   isUseGrid: IxPropTypes.bool,
 }
 
-export type ListWrapProps = IxExtractPropTypes<typeof listWrapProps>
-
+export type ListWrapProps = IxInnerPropTypes<typeof listWrapProps>
 export type ListWarpInstance = InstanceType<DefineComponent<ListWrapProps>>
 
 export const listItemWrapProps = {
   grid: IxPropTypes.object<ListGridProps>(),
 }
 
-export type ListItemWrapProps = IxExtractPropTypes<typeof listItemWrapProps>
-
+export type ListItemWrapProps = IxInnerPropTypes<typeof listItemWrapProps>
 export type ListItemWrapInstance = InstanceType<DefineComponent<ListItemWrapProps>>
-
-export type ListLayout = 'horizontal' | 'vertical'
-
-export interface ListGridProps extends RowProps {
-  column?: number
-  xs?: number
-  sm?: number
-  md?: number
-  lg?: number
-  xl?: number
-}

@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { ref, nextTick } from 'vue'
 import IxCheckbox from '../src/Checkbox.vue'
 
-describe('Checkbox.vue', () => {
+describe('Checkbox', () => {
   renderWork(IxCheckbox)
 
   test('checked(v-model) work', async () => {

@@ -1,9 +1,18 @@
-import type { VNodeTypes } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
+import type { ButtonSize } from '@idux/components/button'
+import type { CardSize } from '@idux/components/card'
+import type { DividerPosition, DividerType } from '@idux/components/divider'
+import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
+import type { TextareaResize, TextareaAutoRows } from '@idux/components/input'
+import type { ListSize } from '@idux/components/list'
+import type { MenuTheme } from '@idux/components/menu'
+import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
+import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
+import type { ResultStatus } from '@idux/components/result'
+import type { SpaceSize } from '@idux/components/space'
 
 // General
 
-export type ButtonSize = 'large' | 'medium' | 'small'
 export interface ButtonConfig {
   size: ButtonSize
 }
@@ -19,8 +28,7 @@ export interface TagConfig {
 }
 
 // Layout
-export type DividerPosition = 'left' | 'center' | 'right'
-export type DividerType = 'horizontal' | 'vertical'
+
 export interface DividerConfig {
   dashed: boolean
   plain: boolean
@@ -28,7 +36,6 @@ export interface DividerConfig {
   type: DividerType
 }
 
-export type SpaceSize = 'small' | 'medium' | 'large' | number
 export interface SpaceConfig {
   size: SpaceSize
 }
@@ -43,7 +50,6 @@ export interface DropdownConfig {
   trigger: OverlayTrigger
 }
 
-export type MenuTheme = 'light' | 'dark'
 export interface MenuConfig {
   indent: number
   theme: MenuTheme
@@ -53,18 +59,6 @@ export interface SubMenuConfig {
   suffix: string
   suffixRotates: [number, number]
 }
-
-export type PaginationSize = 'small' | 'medium'
-export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
-export interface PaginationItemRenderOptions {
-  index?: number
-  type: PaginationItemType
-  active: boolean
-  disabled: boolean
-  original: VNodeTypes
-}
-export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
-export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
 
 export interface PaginationConfig {
   itemRender?: PaginationItemRenderFn
@@ -81,9 +75,6 @@ export interface PaginationConfig {
 }
 
 // Data Entry
-export type FormLabelAlign = 'left' | 'right'
-export type FormLayout = 'horizontal' | 'vertical' | `inline`
-export type FormSize = 'small' | 'medium' | 'large'
 
 export interface FormConfig {
   colonless: boolean
@@ -92,23 +83,19 @@ export interface FormConfig {
   size: FormSize
 }
 
-export type InputSize = FormSize
 export interface InputConfig {
-  size: InputSize
+  size: FormSize
   clearable: boolean
   borderless: boolean
 }
 
-export type TextareaSize = FormSize
-export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
-export type TextareaAutoRows = { minRows: number; maxRows: number }
 export interface TextareaConfig {
   resize: TextareaResize
   autoRows: boolean | TextareaAutoRows
   showCount: boolean
   maxCount?: number | string
   computeCount?: (value: string) => string
-  size: TextareaSize
+  size: FormSize
   clearable: boolean
 }
 
@@ -144,14 +131,12 @@ export interface BadgeConfig {
   overflowCount: number | string
 }
 
-export type CardSize = 'medium' | 'small'
 export interface CardConfig {
   size: CardSize
   borderless: boolean
   hoverable: boolean
 }
 
-export type ListSize = 'small' | 'medium' | 'large'
 export interface ListConfig {
   size: ListSize
   borderless: boolean
@@ -207,7 +192,7 @@ export interface MessageConfig {
   top: number
   destroyOnHover: boolean
 }
-export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
+
 export interface ResultConfig {
   status: ResultStatus
 }
@@ -221,8 +206,6 @@ export interface SpinConfig {
   size: SpinSize
 }
 
-export type ProgressSize = 'small' | 'medium'
-export type ProgressFormat = (percent: number, successPercent?: number) => string
 export interface ProgressConfig {
   size: ProgressSize
   format: ProgressFormat

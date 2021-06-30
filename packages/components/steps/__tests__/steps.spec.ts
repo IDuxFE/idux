@@ -15,7 +15,7 @@ const TestComponent = {
   `,
 }
 
-describe('Steps.vue', () => {
+describe('Steps', () => {
   renderWork(TestComponent)
 
   test('active work', async () => {

@@ -1,6 +1,7 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const backTopProps = {
   target: IxPropTypes.oneOfType([String, HTMLElement]),
@@ -8,6 +9,7 @@ export const backTopProps = {
   visibilityHeight: IxPropTypes.number,
 }
 
-export type BackTopProps = IxExtractPropTypes<typeof backTopProps>
-
+export type BackTopProps = IxInnerPropTypes<typeof backTopProps>
+export type BackTopPublicProps = IxPublicPropTypes<typeof backTopProps>
+export type BackTopComponent = DefineComponent<HTMLAttributes & typeof backTopProps>
 export type BackTopInstance = InstanceType<DefineComponent<BackTopProps>>

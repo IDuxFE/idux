@@ -4,7 +4,7 @@ import { nextTick, ref } from 'vue'
 import IxInput from '../src/Input.vue'
 import { InputProps } from '../src/types'
 
-describe('Input.vue', () => {
+describe('Input', () => {
   const InputMount = (options?: MountingOptions<Partial<InputProps>>) => mount(IxInput, { ...options })
 
   renderWork(IxInput)

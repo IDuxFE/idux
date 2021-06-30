@@ -5,7 +5,7 @@ import IxMenuItemGroup from '../src/menu/MenuItemGroup.vue'
 import IxMenuDivider from '../src/menu/MenuDivider.vue'
 import IxSubMenu from '../src/sub-menu/SubMenu.vue'
 
-describe('Menu.vue', () => {
+describe('Menu', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const MenuMount = (options = {}) => {
     return mount(

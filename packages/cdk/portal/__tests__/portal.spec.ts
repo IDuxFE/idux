@@ -1,13 +1,13 @@
 import { mount, MountingOptions } from '@vue/test-utils'
 
 import IxPortal from '../src/Portal'
-import { PortalInstance, PortalProps } from '../src/types'
+import { PortalProps } from '../src/types'
 
-describe('Portal.vue', () => {
+describe('Portal', () => {
   const PortalMount = (options?: MountingOptions<Partial<PortalProps>>) =>
-    mount<PortalInstance>(IxPortal, {
+    mount(IxPortal, {
       slots: { default: `<div id='content'>content</div>` },
-      ...options,
+      ...(options as MountingOptions<PortalProps>),
       attachTo: 'body',
     })
 

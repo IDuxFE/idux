@@ -1,5 +1,9 @@
-import IxResult from './src/Result.vue'
+import type { ResultComponent } from './src/types'
+
+import Result from './src/Result.vue'
+
+const IxResult = Result as unknown as ResultComponent
 
 export { IxResult }
 
-export type { ResultInstance, ResultProps } from './src/types'
+export type { ResultInstance, ResultPublicProps as ResultProps, ResultStatus } from './src/types'

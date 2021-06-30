@@ -3,7 +3,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxSpin from '../src/Spin.vue'
 import { SpinProps } from '../src/types'
 
-describe('Spin.vue', () => {
+describe('Spin', () => {
   const SpinMount = (options?: MountingOptions<Partial<SpinProps>>) => mount(IxSpin, { ...options })
   renderWork(IxSpin)
 

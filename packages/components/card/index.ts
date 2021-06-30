@@ -1,7 +1,9 @@
-import IxCard from './src/Card.vue'
+import type { CardComponent } from './src/types'
+
+import Card from './src/Card.vue'
+
+const IxCard = Card as unknown as CardComponent
 
 export { IxCard }
 
-export type { CardInstance, CardProps } from './src/types'
-
-export type { CardSize } from '@idux/components/config'
+export type { CardInstance, CardPublicProps as CardProps, CardSize } from './src/types'

@@ -1,5 +1,5 @@
 import type { VNodeTypes } from 'vue'
-import type { PaginationItemRenderFn, PaginationItemType } from '@idux/components/config'
+import type { PaginationItemRenderFn, PaginationItemType } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { IxButton } from '@idux/components/button'

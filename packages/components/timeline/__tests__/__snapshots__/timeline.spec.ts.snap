@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Timeline.vue pending slot work 1`] = `
+exports[`Timeline pending slot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -30,7 +30,7 @@ exports[`Timeline.vue pending slot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending slot work 2`] = `
+exports[`Timeline pending slot work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -62,7 +62,7 @@ exports[`Timeline.vue pending slot work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending slot work 3`] = `
+exports[`Timeline pending slot work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\">
   <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -92,7 +92,7 @@ exports[`Timeline.vue pending slot work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending work 1`] = `
+exports[`Timeline pending work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -117,7 +117,7 @@ exports[`Timeline.vue pending work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending work 2`] = `
+exports[`Timeline pending work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -147,7 +147,7 @@ exports[`Timeline.vue pending work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending work 3`] = `
+exports[`Timeline pending work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -179,7 +179,7 @@ exports[`Timeline.vue pending work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pending work 4`] = `
+exports[`Timeline pending work 4`] = `
 "<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\">
   <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -209,7 +209,7 @@ exports[`Timeline.vue pending work 4`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pendingDot slot work 1`] = `
+exports[`Timeline pendingDot slot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -239,7 +239,7 @@ exports[`Timeline.vue pendingDot slot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pendingDot slot work 2`] = `
+exports[`Timeline pendingDot slot work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -269,7 +269,7 @@ exports[`Timeline.vue pendingDot slot work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pendingDot work 1`] = `
+exports[`Timeline pendingDot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -299,7 +299,7 @@ exports[`Timeline.vue pendingDot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue pendingDot work 2`] = `
+exports[`Timeline pendingDot work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -329,7 +329,7 @@ exports[`Timeline.vue pendingDot work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue position work 1`] = `
+exports[`Timeline position work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -354,7 +354,7 @@ exports[`Timeline.vue position work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue position work 2`] = `
+exports[`Timeline position work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-left\\">
   <li class=\\"ix-timeline-item ix-timeline-item-left\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -379,7 +379,7 @@ exports[`Timeline.vue position work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue position work 3`] = `
+exports[`Timeline position work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-alternate\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -404,9 +404,9 @@ exports[`Timeline.vue position work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-right\\"></ul>"`;
+exports[`Timeline render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-right\\"></ul>"`;
 
-exports[`Timeline.vue reverse work 1`] = `
+exports[`Timeline reverse work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-right\\">
   <li class=\\"ix-timeline-item ix-timeline-item-right\\">
     <div class=\\"ix-timeline-item-line\\"></div>
@@ -431,4 +431,4 @@ exports[`Timeline.vue reverse work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline.vue reverse work 2`] = `"<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\"></ul>"`;
+exports[`Timeline reverse work 2`] = `"<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\"></ul>"`;

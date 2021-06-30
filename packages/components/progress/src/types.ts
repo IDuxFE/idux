@@ -1,7 +1,26 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
-import { ProgressSize } from '@idux/components/config'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type ProgressSize = 'small' | 'medium'
+export type ProgressFormat = (percent: number, successPercent?: number) => string
+export type ProgressType = 'line' | 'circle' | 'dashboard'
+export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
+export type ProgressStatus = 'normal' | 'success' | 'exception' | 'active'
+export type ProgressStrokeLinecap = 'round' | 'square'
+export type StringGradients = { [percentage: string]: string }
+export type FromToGradients = { from: string; to: string }
+export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients)
+
+export interface ProgressSuccess {
+  percent?: number | string
+  strokeColor?: string
+}
+
+export interface ConvertProgressSuccess extends ProgressSuccess {
+  percent: number
+}
 
 export const progressStatus = ['normal', 'success', 'exception', 'active'] as const
 
@@ -22,27 +41,10 @@ export const progressProps = {
   size: IxPropTypes.oneOf<ProgressSize>(['small', 'medium']),
 }
 
-export type ProgressProps = IxExtractPropTypes<typeof progressProps>
-
+export type ProgressProps = IxInnerPropTypes<typeof progressProps>
+export type ProgressPublicProps = IxPublicPropTypes<typeof progressProps>
+export type ProgressComponent = DefineComponent<HTMLAttributes & typeof progressProps>
 export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>
-
-export type ProgressType = 'line' | 'circle' | 'dashboard'
-export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
-export type ProgressStatus = 'normal' | 'success' | 'exception' | 'active'
-export type ProgressStrokeLinecap = 'round' | 'square'
-export type StringGradients = { [percentage: string]: string }
-export type FromToGradients = { from: string; to: string }
-export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients)
-export type ProgressFormat = (percent?: number, successPercent?: number) => string
-
-export interface ProgressSuccess {
-  percent?: number | string
-  strokeColor?: string
-}
-
-export interface ConvertProgressSuccess extends ProgressSuccess {
-  percent: number
-}
 
 export const convertProgressProps = {
   ...progressProps,
@@ -50,4 +52,4 @@ export const convertProgressProps = {
   percent: IxPropTypes.number.def(0),
 }
 
-export type ConvertProgressProps = IxExtractPropTypes<typeof convertProgressProps>
+export type ConvertProgressProps = IxPublicPropTypes<typeof convertProgressProps>

@@ -1,7 +1,10 @@
-import type { DefineComponent } from 'vue'
-import type { MenuTheme } from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type MenuMode = 'vertical' | 'horizontal' | 'inline'
+export type MenuTheme = 'light' | 'dark'
 
 export const menuProps = {
   collapsed: IxPropTypes.bool.def(false),
@@ -14,8 +17,9 @@ export const menuProps = {
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
 }
 
-export type MenuProps = IxExtractPropTypes<typeof menuProps>
-
+export type MenuProps = IxInnerPropTypes<typeof menuProps>
+export type MenuPublicProps = IxPublicPropTypes<typeof menuProps>
+export type MenuComponent = DefineComponent<HTMLAttributes & typeof menuProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export const menuItemProps = {
@@ -25,8 +29,9 @@ export const menuItemProps = {
   title: IxPropTypes.string,
 }
 
-export type MenuItemProps = IxExtractPropTypes<typeof menuItemProps>
-
+export type MenuItemProps = IxInnerPropTypes<typeof menuItemProps>
+export type MenuItemPublicProps = IxPublicPropTypes<typeof menuItemProps>
+export type MenuItemComponent = DefineComponent<HTMLAttributes & typeof menuItemProps>
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export const menuItemGroupProps = {
@@ -34,9 +39,17 @@ export const menuItemGroupProps = {
   title: IxPropTypes.string,
 }
 
-export type MenuItemGroupProps = IxExtractPropTypes<typeof menuItemGroupProps>
-
+export type MenuItemGroupProps = IxInnerPropTypes<typeof menuItemGroupProps>
+export type MenuItemGroupPublicProps = IxPublicPropTypes<typeof menuItemGroupProps>
+export type MenuItemGroupComponent = DefineComponent<HTMLAttributes & typeof menuItemGroupProps>
 export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
+
+export const menuDividerProps = {}
+
+export type MenuDividerProps = IxInnerPropTypes<typeof menuDividerProps>
+export type MenuDividerPublicProps = IxPublicPropTypes<typeof menuDividerProps>
+export type MenuDividerComponent = DefineComponent<HTMLAttributes & typeof menuDividerProps>
+export type MenuDividerInstance = InstanceType<DefineComponent<MenuDividerProps>>
 
 export const subMenuProps = {
   cid: IxPropTypes.oneOfType([String, Number]),
@@ -48,8 +61,7 @@ export const subMenuProps = {
   title: IxPropTypes.string,
 }
 
-export type SubMenuProps = IxExtractPropTypes<typeof subMenuProps>
-
+export type SubMenuProps = IxInnerPropTypes<typeof subMenuProps>
+export type SubMenuPublicProps = IxPublicPropTypes<typeof subMenuProps>
+export type SubMenuComponent = DefineComponent<HTMLAttributes & typeof subMenuProps>
 export type SubMenuInstance = InstanceType<DefineComponent<SubMenuProps>>
-
-export type MenuMode = 'vertical' | 'horizontal' | 'inline'

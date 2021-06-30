@@ -1,14 +1,20 @@
-import IxRadio from './src/Radio.vue'
-import IxRadioButton from './src/RadioButton.vue'
+import type { RadioComponent, RadioButtonComponent, RadioGroupComponent } from './src/types'
 
-import IxRadioGroup from './src/RadioGroup.vue'
+import Radio from './src/Radio.vue'
+import RadioButton from './src/RadioButton.vue'
+import RadioGroup from './src/RadioGroup.vue'
+
+const IxRadio = Radio as unknown as RadioComponent
+const IxRadioButton = RadioButton as unknown as RadioButtonComponent
+const IxRadioGroup = RadioGroup as unknown as RadioGroupComponent
 
 export { IxRadio, IxRadioButton, IxRadioGroup }
+
 export type {
   RadioInstance,
-  RadioProps,
+  RadioPublicProps as RadioProps,
   RadioButtonInstance,
-  RadioButtonProps,
+  RadioButtonPublicProps as RadioButtonProps,
   RadioGroupInstance,
-  RadioGroupProps,
+  RadioGroupPublicProps as RadioGroupProps,
 } from './src/types'

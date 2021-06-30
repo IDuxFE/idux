@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rate.vue render work 1`] = `
+exports[`Rate render work 1`] = `
 "<div class=\\"ix-rate-wrap\\">
   <div class=\\"ix-rate-item\\" style=\\"cursor: pointer;\\">
     <div class=\\"ix-rate-full\\"><i class=\\"ix-icon ix-icon-star ix-rate-iconfont-main ix-rate-highlight\\" role=\\"img\\" aria-label=\\"star\\"></i></div>
