@@ -17,7 +17,7 @@ const TestComponent = defineComponent({
   `,
 })
 
-describe('Popover.vue', () => {
+describe('Popover', () => {
   const PopoverMount = (options?: MountingOptions<PopoverProps>) => mount(TestComponent, { ...options })
   afterEach(() => {
     document.body.querySelectorAll('.ix-popover').forEach(value => {

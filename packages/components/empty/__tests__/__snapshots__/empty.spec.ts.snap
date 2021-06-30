@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Empty.vue render work 1`] = `
+exports[`Empty render work 1`] = `
 "<div class=\\"ix-empty\\">
   <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" aria-label=\\"empty\\"></i></div>
   <div class=\\"ix-empty-description\\">暂无数据</div>

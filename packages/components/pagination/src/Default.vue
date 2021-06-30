@@ -11,8 +11,7 @@
     :size="size"
     :type="item.type"
     @itemClick="onItemClick"
-  >
-  </ix-pagination-item>
+  ></ix-pagination-item>
   <ix-pagination-sizes
     v-if="showSizeChanger"
     :disabled="disabled"
@@ -33,13 +32,13 @@
 </template>
 
 <script lang="ts">
-import { PaginationDefaultProps, paginationDefaultProps } from './types'
+import type { PaginationDefaultInnerProps, PaginationItemType } from './types'
 
 import { computed, defineComponent } from 'vue'
-import { PaginationItemType } from '@idux/components/config'
 import IxPaginationSizes from './Sizes.vue'
 import IxPaginationJumper from './Jumper.vue'
 import IxPaginationItem from './Item'
+import { paginationDefaultProps } from './types'
 
 const indexDiffMap = {
   next: 1,
@@ -115,7 +114,7 @@ const getItems = (pageIndex: number, lastIndex: number) => {
   return [prevItem, ...items, nextItem]
 }
 
-const useItems = (props: PaginationDefaultProps) => {
+const useItems = (props: PaginationDefaultInnerProps) => {
   return computed(() => {
     const { pageIndex, pageSize, total } = props
     const lastIndex = Math.ceil(total / pageSize)

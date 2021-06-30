@@ -4,7 +4,7 @@ import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import IxRate from '../src/Rate.vue'
 import { RateInstance, RateProps } from '../src/types'
 
-describe('Rate.vue', () => {
+describe('Rate', () => {
   const RateMount = (options?: MountingOptions<Partial<RateProps>>) => mount(IxRate, { ...options })
   let findNormalIcon: (wrapper: VueWrapper<RateInstance>) => number
 

@@ -3,7 +3,7 @@ import { renderWork } from '@tests'
 import IxHeader from '../src/Header'
 import { HeaderProps } from '../src/types'
 
-describe('Header.tsx', () => {
+describe('Header', () => {
   const HeaderMount = (options?: MountingOptions<Partial<HeaderProps>>) => mount(IxHeader, { ...options })
 
   renderWork(IxHeader)

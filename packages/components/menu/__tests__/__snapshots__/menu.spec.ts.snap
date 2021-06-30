@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu.vue render work 1`] = `
+exports[`Menu render work 1`] = `
 "<ul class=\\"ix-menu ix-menu-light ix-menu-vertical\\">
   <li class=\\"ix-menu-item\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" aria-label=\\"star\\"></i></span><span><a href=\\"javascript: void(0)\\">Item 1</a></span></li>
   <li class=\\"ix-menu-item ix-menu-item-disabled\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" aria-label=\\"star\\"></i></span><span> Item 2 </span></li>

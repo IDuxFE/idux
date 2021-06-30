@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Popover.vue render work 1`] = `"<!---->"`;
+exports[`Popover render work 1`] = `"<!---->"`;

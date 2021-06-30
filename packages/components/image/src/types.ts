@@ -1,6 +1,9 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type ImageStatus = 'loading' | 'loaded' | 'failed'
 
 export const imageProps = {
   src: IxPropTypes.string.def(''),
@@ -12,16 +15,16 @@ export const imageProps = {
   objectFit: IxPropTypes.string.def('fill'),
 }
 
-export type ImageProps = IxExtractPropTypes<typeof imageProps>
-
+export type ImageProps = IxInnerPropTypes<typeof imageProps>
+export type ImagePublicProps = IxPublicPropTypes<typeof imageProps>
+export type ImageComponent = DefineComponent<HTMLAttributes & typeof imageProps>
 export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
 export const imagePreviewProps = {
   previewSrc: IxPropTypes.string.def(''),
 }
 
-export type ImagePreviewProps = IxExtractPropTypes<typeof imagePreviewProps>
-
+export type ImagePreviewProps = IxInnerPropTypes<typeof imagePreviewProps>
+export type ImagePreviewPublicProps = IxPublicPropTypes<typeof imagePreviewProps>
+export type ImagePreviewComponent = DefineComponent<HTMLAttributes & typeof imagePreviewProps>
 export type ImagePreviewInstance = InstanceType<DefineComponent<ImagePreviewProps>>
-
-export type ImageStatus = 'loading' | 'loaded' | 'failed'

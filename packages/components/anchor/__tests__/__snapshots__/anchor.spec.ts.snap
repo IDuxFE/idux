@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Anchor.vue register and unregister work 1`] = `
+exports[`Anchor register and unregister work 1`] = `
 "<div class=\\"ix-affix\\">
   <div class=\\"ix-affix-content\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
@@ -25,7 +25,7 @@ exports[`Anchor.vue register and unregister work 1`] = `
 </div>"
 `;
 
-exports[`Anchor.vue register and unregister work 2`] = `
+exports[`Anchor register and unregister work 2`] = `
 "<div class=\\"ix-affix\\">
   <div class=\\"ix-affix-content\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
@@ -50,7 +50,7 @@ exports[`Anchor.vue register and unregister work 2`] = `
 </div>"
 `;
 
-exports[`Anchor.vue register and unregister work 3`] = `
+exports[`Anchor register and unregister work 3`] = `
 "<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
   <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
@@ -75,7 +75,7 @@ exports[`Anchor.vue register and unregister work 3`] = `
 </div>"
 `;
 
-exports[`Anchor.vue register and unregister work 4`] = `
+exports[`Anchor register and unregister work 4`] = `
 "<div class=\\"ix-affix\\" style=\\"position: relative; width: 0px; height: 0px;\\">
   <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px;\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
@@ -100,7 +100,7 @@ exports[`Anchor.vue register and unregister work 4`] = `
 </div>"
 `;
 
-exports[`Anchor.vue render work 1`] = `
+exports[`Anchor render work 1`] = `
 "<div class=\\"ix-affix\\">
   <div class=\\"ix-affix-content\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">

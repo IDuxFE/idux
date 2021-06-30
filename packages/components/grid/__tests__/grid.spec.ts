@@ -28,7 +28,7 @@ const componentFactory = (config = {}) =>
     config,
   )
 
-describe('row.vue & col.vue', () => {
+describe('Row & Col', () => {
   renderWork(componentFactory())
 
   // 下面的单测依赖 breakpoint 中断点的有效性, 目前由于断点观测会失败, 所以暂时注释掉(resizeTarget 也无效)

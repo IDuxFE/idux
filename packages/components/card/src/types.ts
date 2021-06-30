@@ -1,7 +1,9 @@
-import type { DefineComponent } from 'vue'
-import type { CardSize } from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type CardSize = 'medium' | 'small'
 
 export const cardProps = {
   title: IxPropTypes.string,
@@ -12,6 +14,7 @@ export const cardProps = {
   size: IxPropTypes.oneOf<CardSize>(['medium', 'small']),
 }
 
-export type CardProps = IxExtractPropTypes<typeof cardProps>
-
+export type CardProps = IxInnerPropTypes<typeof cardProps>
+export type CardPublicProps = IxPublicPropTypes<typeof cardProps>
+export type CardComponent = DefineComponent<HTMLAttributes & typeof cardProps>
 export type CardInstance = InstanceType<DefineComponent<CardProps>>

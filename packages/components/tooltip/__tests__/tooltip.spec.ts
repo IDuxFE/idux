@@ -16,7 +16,7 @@ const TestComponent = defineComponent({
   `,
 })
 
-describe('tooltip.tsx', () => {
+describe('tooltip', () => {
   const tooltipMount = (options?: MountingOptions<TooltipProps>) => mount(TestComponent, { ...options })
   afterEach(() => {
     document.body.querySelectorAll('.ix-tooltip').forEach(value => {

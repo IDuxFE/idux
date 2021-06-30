@@ -2,7 +2,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxCard from '../src/Card.vue'
 import { CardProps } from '../src/types'
 
-describe('Card.vue', () => {
+describe('Card', () => {
   const CardMount = (options?: MountingOptions<Partial<CardProps>>) => mount(IxCard, { ...options })
 
   test('render work', () => {

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import ButtonGroup from '../src/ButtonGroup.vue'
-import Button from '../src/Button.vue'
+import ButtonGroup from '../src/ButtonGroup'
+import Button from '../src/Button'
 import { renderWork } from '@tests'
 
 const TestComponent = {
@@ -20,7 +20,7 @@ const TestComponent = {
   },
 }
 
-describe('ButtonGroup.vue', () => {
+describe('ButtonGroup', () => {
   renderWork(TestComponent)
 
   test('mode work', async () => {

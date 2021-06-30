@@ -1,4 +1,9 @@
-import IxSwitch from './src/Switch.vue'
+import type { SwitchComponent } from './src/types'
+
+import Switch from './src/Switch.vue'
+
+const IxSwitch = Switch as unknown as SwitchComponent
 
 export { IxSwitch }
-export type { SwitchInstance, SwitchProps } from './src/types'
+
+export type { SwitchInstance, SwitchPublicProps as SwitchProps } from './src/types'

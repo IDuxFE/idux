@@ -1,20 +1,6 @@
-<template>
-  <component
-    :is="tag"
-    :class="classes"
-    :disabled="disabled || loading ? true : undefined"
-    :type="tag === 'button' ? type : undefined"
-  >
-    <ix-icon v-if="loading" name="loading" />
-    <ix-icon v-else-if="icon" :name="icon" />
-    <span v-if="hasDefaultSlot"><slot></slot></span>
-  </component>
-</template>
-
-<script lang="ts">
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, Ref, Slots, VNodeTypes } from 'vue'
 import type { ButtonConfig } from '@idux/components/config'
-import type { ButtonGroupProps, ButtonProps, ButtonMode } from './types'
+import type { ButtonGroupProps, ButtonMode, ButtonProps } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { hasSlot } from '@idux/cdk/utils'
@@ -25,7 +11,6 @@ import { buttonToken } from './token'
 
 export default defineComponent({
   name: 'IxButton',
-  components: { IxIcon },
   props: buttonProps,
   setup(props, { slots }) {
     const groupProps = inject(buttonToken, {})
@@ -35,9 +20,22 @@ export default defineComponent({
     const hasDefaultSlot = computed(() => hasSlot(slots))
 
     const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
-    const tag = computed(() => (mode.value === 'link' ? 'a' : 'button'))
 
-    return { classes, tag, hasDefaultSlot }
+    return { classes }
+  },
+
+  render() {
+    const { classes } = this
+    const child = renderChild(this.$slots, this.loading, this.icon)
+    if (this.mode === 'link') {
+      return <a class={classes}>{child}</a>
+    } else {
+      return (
+        <button class={classes} disabled={this.disabled || this.loading} type={this.type}>
+          {child}
+        </button>
+      )
+    }
   },
 })
 
@@ -55,7 +53,7 @@ const useClasses = (
       'ix-button': true,
       'ix-button-danger': props.danger,
       'ix-button-ghost': props.ghost,
-      'ix-button-disabled': props.disabled,
+      'ix-button-disabled': props.disabled || props.loading,
       'ix-button-loading': props.loading,
       'ix-button-block': props.block,
       'ix-button-icon-only': !hasDefaultSlot.value && (!!props.icon || props.loading),
@@ -65,4 +63,18 @@ const useClasses = (
     }
   })
 }
-</script>
+
+const renderChild = (slots: Slots, loading: boolean | undefined, icon: string | undefined) => {
+  const child: VNodeTypes[] = []
+  if (loading) {
+    child.push(<IxIcon name="loading"></IxIcon>)
+  } else if (slots.icon) {
+    child.push(slots.icon())
+  } else if (icon) {
+    child.push(<IxIcon name={icon}></IxIcon>)
+  }
+  if (slots.default) {
+    child.push(<span>{slots.default()}</span>)
+  }
+  return child
+}

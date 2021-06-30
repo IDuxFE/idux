@@ -1,9 +1,9 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions } from '@vue/test-utils'
-import IxButton from '../src/Button.vue'
+import IxButton from '../src/Button'
 import { ButtonProps } from '../src/types'
 
-describe('Button.vue', () => {
+describe('Button', () => {
   const ButtonMount = (options?: MountingOptions<Partial<ButtonProps>>) => mount(IxButton, { ...options })
 
   renderWork(IxButton)

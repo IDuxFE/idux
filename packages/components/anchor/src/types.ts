@@ -1,5 +1,7 @@
-import type { DefineComponent } from 'vue'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const anchorProps = {
   affix: IxPropTypes.bool.def(true),
@@ -10,8 +12,9 @@ export const anchorProps = {
   targetOffset: IxPropTypes.number,
 }
 
-export type AnchorProps = IxExtractPropTypes<typeof anchorProps>
-
+export type AnchorProps = IxInnerPropTypes<typeof anchorProps>
+export type AnchorPublicProps = IxPublicPropTypes<typeof anchorProps>
+export type AnchorComponent = DefineComponent<HTMLAttributes & typeof anchorProps>
 export type AnchorInstance = InstanceType<DefineComponent<AnchorProps>>
 
 export const linkProps = {
@@ -19,6 +22,7 @@ export const linkProps = {
   title: IxPropTypes.string,
 }
 
-export type AnchorLinkProps = IxExtractPropTypes<typeof linkProps>
-
+export type AnchorLinkProps = IxInnerPropTypes<typeof linkProps>
+export type AnchorLinkPublicProps = IxPublicPropTypes<typeof linkProps>
+export type AnchorLinkComponent = DefineComponent<HTMLAttributes & typeof linkProps>
 export type AnchorLinkInstance = InstanceType<DefineComponent<AnchorLinkProps>>

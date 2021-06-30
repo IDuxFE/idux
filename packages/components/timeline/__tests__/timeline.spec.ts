@@ -17,7 +17,7 @@ const TimelineDefaultSlots = defineComponent({
   },
 })
 
-describe('Timeline.vue', () => {
+describe('Timeline', () => {
   const TimelineMount = (options?: MountingOptions<Partial<TimelineProps>>) => mount(IxTimeline, { ...options })
 
   renderWork(IxTimeline)

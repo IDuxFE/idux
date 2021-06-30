@@ -1,7 +1,8 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { overlayPlacementProp, overlayTriggerProp } from '@idux/cdk/overlay'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const popoverProps = {
   title: IxPropTypes.string,
@@ -15,6 +16,7 @@ export const popoverProps = {
   autoAdjust: IxPropTypes.bool,
 }
 
-export type PopoverProps = IxExtractPropTypes<typeof popoverProps>
-
+export type PopoverProps = IxInnerPropTypes<typeof popoverProps>
+export type PopoverPublicProps = IxPublicPropTypes<typeof popoverProps>
+export type PopoverComponent = DefineComponent<HTMLAttributes & typeof popoverProps>
 export type PopoverInstance = InstanceType<DefineComponent<PopoverProps>>

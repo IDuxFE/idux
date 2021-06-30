@@ -14,7 +14,7 @@ const CombineComponent = {
   </ix-collapse>
   `,
 }
-describe('Collapse.vue and CollapsePanel.vue', () => {
+describe('Collapse.vue and CollapsePanel', () => {
   renderWork(CombineComponent)
 
   test('active(v-model) work', async () => {

@@ -41,7 +41,7 @@ const TestComponent = defineComponent({
 `,
 })
 
-describe('Space.vue', () => {
+describe('Space', () => {
   renderWork(TestComponent)
 
   test('align work', async () => {

@@ -1,7 +1,8 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
+import { IxPropTypes } from '@idux/cdk/utils'
 import { overlayPlacementProp, overlayTriggerProp } from '@idux/cdk/overlay'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
 export const dropdownProps = {
   visible: IxPropTypes.bool.def(false),
@@ -12,8 +13,9 @@ export const dropdownProps = {
   trigger: overlayTriggerProp,
 }
 
-export type DropdownProps = IxExtractPropTypes<typeof dropdownProps>
-
+export type DropdownProps = IxInnerPropTypes<typeof dropdownProps>
+export type DropdownPublicProps = IxPublicPropTypes<typeof dropdownProps>
+export type DropdownComponent = DefineComponent<AnchorHTMLAttributes & typeof dropdownProps>
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>
 
 export const dropdownButtonProps = {
@@ -21,6 +23,7 @@ export const dropdownButtonProps = {
   icon: IxPropTypes.string.def('ellipsis'),
 }
 
-export type DropdownButtonProps = IxExtractPropTypes<typeof dropdownButtonProps>
-
+export type DropdownButtonProps = IxInnerPropTypes<typeof dropdownButtonProps>
+export type DropdownButtonPublicProps = IxPublicPropTypes<typeof dropdownButtonProps>
+export type DropdownButtonComponent = DefineComponent<ButtonHTMLAttributes & typeof dropdownButtonProps>
 export type DropdownButtonInstance = InstanceType<DefineComponent<DropdownButtonProps>>

@@ -22,7 +22,7 @@ const TestComponent = {
   },
 }
 
-describe('TimelineItem.vue', () => {
+describe('TimelineItem', () => {
   const timelineItemMount = (options?: MountingOptions<Partial<TimelineItemProps>>) =>
     mount(IxTimelineItem, { ...options })
   renderWork(IxTimelineItem)

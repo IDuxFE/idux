@@ -3,7 +3,7 @@ import IxOption from '../src/Option.vue'
 import IxOptionGroup from '../src/OptionGroup.vue'
 import { OptionProps, OptionGroupProps } from '../src/types'
 
-describe('Option.vue', () => {
+describe('Option', () => {
   const OptionMount = (options?: MountingOptions<Partial<OptionProps>>) => mount(IxOption, { ...options })
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe('Option.vue', () => {
   })
 })
 
-describe('OptionGroup.vue', () => {
+describe('OptionGroup', () => {
   const OptionGroupMount = (options?: MountingOptions<Partial<OptionGroupProps>>) =>
     mount(IxOptionGroup, { ...options })
 

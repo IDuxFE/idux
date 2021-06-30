@@ -1,14 +1,22 @@
-import IxSelect from './src/Select.vue'
-import IxOption from './src/Option.vue'
-import IxOptionGroup from './src/OptionGroup.vue'
+import type { SelectComponent, OptionComponent, OptionGroupComponent } from './src/types'
+
+import Select from './src/Select.vue'
+import Option from './src/Option.vue'
+import OptionGroup from './src/OptionGroup.vue'
+
+const IxSelect = Select as unknown as SelectComponent
+const IxOption = Option as unknown as OptionComponent
+const IxOptionGroup = OptionGroup as unknown as OptionGroupComponent
 
 export { IxSelect, IxOption, IxOptionGroup }
 
 export type {
   SelectInstance,
-  SelectProps,
+  SelectPublicProps as SelectProps,
   OptionInstance,
-  OptionProps,
+  OptionPublicProps as OptionProps,
   OptionGroupInstance,
-  OptionGroupProps,
+  OptionGroupPublicProps as OptionGroupProps,
+  SelectOption,
+  SelectFilterFn,
 } from './src/types'

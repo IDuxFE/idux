@@ -10,16 +10,18 @@ export function getLessTemplate(compName: string): string {
 }
 
 export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
-  return `import type { DefineComponent } from 'vue'
+  return `import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const ${camelCaseName}Props = {
   
 }
 
-export type ${upperFirstName}Props = IxExtractPropTypes<typeof ${camelCaseName}Props>
-
+export type ${upperFirstName}Props = IxInnerPropTypes<typeof ${camelCaseName}Props>
+export type ${upperFirstName}PublicProps = IxPublicPropTypes<typeof ${camelCaseName}Props>
+export type ${upperFirstName}Component = DefineComponent<HTMLAttributes & typeof ${camelCaseName}Prop>
 export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
@@ -59,11 +61,15 @@ export default defineComponent({
 }
 
 export function getIndexTemplate(compName: string, useTsx: boolean): string {
-  return `import Ix${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
+  return `import type { ${compName}Component } from './src/types'
+
+import ${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
+
+const Ix${compName} = ${compName} as unknown as ${compName}Component
 
 export { Ix${compName} }
 
-export type { ${compName}Instance, ${compName}Props } from './src/types'
+export type { ${compName}Instance, ${compName}PublicProps as ${compName}Props } from './src/types'
 `
 }
 
@@ -71,10 +77,10 @@ export function getTestTemplate(compName: string, useTsx: boolean): string {
   return `import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import Ix${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
-import { ${compName}Instance, ${compName}Props } from '../src/types'
+import { ${compName}Props } from '../src/types'
 
-describe('${compName}.${useTsx ? 'tsx' : 'vue'}', () => {
-  const ${compName}Mount = (options?: MountingOptions<Partial<${compName}Props>>) => mount(Ix${compName}, { ...options })
+describe('${compName}', () => {
+  const ${compName}Mount = (options?: MountingOptions<Partial<${compName}Props>>) => mount(Ix${compName}, { ...(options as MountingOptions<${compName}Props>)})
 
   renderWork(Ix${compName})
 })

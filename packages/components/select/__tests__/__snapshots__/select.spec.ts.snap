@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Select.vue multiple template work render work 1`] = `
+exports[`Select multiple template work render work 1`] = `
 "<div class=\\"ix-select ix-select-multiple ix-select-searchable ix-select-medium\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-input\\"><input class=\\"ix-select-input-inner\\" autocomplete=\\"off\\"><span class=\\"ix-select-input-mirror\\" aria-hidden=\\"true\\"></span></div>
@@ -13,7 +13,7 @@ exports[`Select.vue multiple template work render work 1`] = `
 </div>"
 `;
 
-exports[`Select.vue render options work group options work 1`] = `
+exports[`Select render options work group options work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-item\\"><span class=\\"ix-select-item-label\\">Tom0</span>
@@ -33,7 +33,7 @@ exports[`Select.vue render options work group options work 1`] = `
 </div>"
 `;
 
-exports[`Select.vue render options work render work 1`] = `
+exports[`Select render options work render work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-input\\"><input class=\\"ix-select-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">
@@ -48,7 +48,7 @@ exports[`Select.vue render options work render work 1`] = `
 </div>"
 `;
 
-exports[`Select.vue single template work group options work 1`] = `
+exports[`Select single template work group options work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-item\\"><span class=\\"ix-select-item-label\\">Tom0</span>
@@ -68,7 +68,7 @@ exports[`Select.vue single template work group options work 1`] = `
 </div>"
 `;
 
-exports[`Select.vue single template work render work 1`] = `
+exports[`Select single template work render work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-input\\"><input class=\\"ix-select-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">

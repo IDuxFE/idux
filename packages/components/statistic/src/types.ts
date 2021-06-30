@@ -1,7 +1,8 @@
-import type { DefineComponent } from 'vue'
-import { NumFormatter } from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+import { NumFormatter } from '@idux/components/config'
 
 export const statisticProps = {
   formatter: IxPropTypes.func<NumFormatter>(),
@@ -12,6 +13,7 @@ export const statisticProps = {
   value: IxPropTypes.oneOfType([String, Number]).def(''),
 }
 
-export type StatisticProps = IxExtractPropTypes<typeof statisticProps>
-
+export type StatisticProps = IxInnerPropTypes<typeof statisticProps>
+export type StatisticPublicProps = IxPublicPropTypes<typeof statisticProps>
+export type StatisticComponent = DefineComponent<HTMLAttributes & typeof statisticProps>
 export type StatisticInstance = InstanceType<DefineComponent<StatisticProps>>

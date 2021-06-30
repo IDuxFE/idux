@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Progress.vue gapPosition work 1`] = `
+exports[`Progress gapPosition work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
@@ -14,7 +14,7 @@ exports[`Progress.vue gapPosition work 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue gapPosition work 2`] = `
+exports[`Progress gapPosition work 2`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
@@ -28,7 +28,7 @@ exports[`Progress.vue gapPosition work 2`] = `
 </div>"
 `;
 
-exports[`Progress.vue gapPosition work 3`] = `
+exports[`Progress gapPosition work 3`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
@@ -42,7 +42,7 @@ exports[`Progress.vue gapPosition work 3`] = `
 </div>"
 `;
 
-exports[`Progress.vue render circle progress work 1`] = `
+exports[`Progress render circle progress work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
@@ -56,7 +56,7 @@ exports[`Progress.vue render circle progress work 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue render dashboard progress work 1`] = `
+exports[`Progress render dashboard progress work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
@@ -70,7 +70,7 @@ exports[`Progress.vue render dashboard progress work 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue render line progress work 1`] = `
+exports[`Progress render line progress work 1`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">
@@ -82,7 +82,7 @@ exports[`Progress.vue render line progress work 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue render successColor progress 1`] = `
+exports[`Progress render successColor progress 1`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">
@@ -94,7 +94,7 @@ exports[`Progress.vue render successColor progress 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue strokeColor work 1`] = `
+exports[`Progress strokeColor work 1`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">
@@ -106,7 +106,7 @@ exports[`Progress.vue strokeColor work 1`] = `
 </div>"
 `;
 
-exports[`Progress.vue strokeColor work 2`] = `
+exports[`Progress strokeColor work 2`] = `
 "<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress-circle-gradient ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <defs>
       <linearGradient id=\\"ix-progress-gradient-ix-2\\" x1=\\"100%\\" y1=\\"0%\\" x2=\\"0%\\" y2=\\"0%\\">
@@ -125,7 +125,7 @@ exports[`Progress.vue strokeColor work 2`] = `
 </div>"
 `;
 
-exports[`Progress.vue strokeColor work 3`] = `
+exports[`Progress strokeColor work 3`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">
@@ -137,7 +137,7 @@ exports[`Progress.vue strokeColor work 3`] = `
 </div>"
 `;
 
-exports[`Progress.vue strokeColor work 4`] = `
+exports[`Progress strokeColor work 4`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">
@@ -149,7 +149,7 @@ exports[`Progress.vue strokeColor work 4`] = `
 </div>"
 `;
 
-exports[`Progress.vue trailColor work 1`] = `
+exports[`Progress trailColor work 1`] = `
 "<div class=\\"ix-progress-line ix-progress-status-normal ix-progress-show-info ix-progress-round ix-progress\\">
   <div class=\\"ix-progress-outer\\">
     <div class=\\"ix-progress-inner\\">

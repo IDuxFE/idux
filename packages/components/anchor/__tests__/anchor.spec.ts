@@ -27,7 +27,7 @@ const TestComponent = defineComponent({
   `,
 })
 
-describe('Anchor.vue', () => {
+describe('Anchor', () => {
   renderWork({
     components: { IxAnchor, IxAnchorLink },
     template: `

@@ -3,7 +3,7 @@ import { renderWork } from '@tests'
 import IxBadge from '../src/Badge.vue'
 import { BadgeProps } from '../src/types'
 
-describe('Badge.vue', () => {
+describe('Badge', () => {
   const BadgeMount = (options?: MountingOptions<Partial<BadgeProps>>) => mount(IxBadge, { ...options })
 
   renderWork(IxBadge)

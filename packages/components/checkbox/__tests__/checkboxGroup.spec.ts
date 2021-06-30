@@ -15,7 +15,7 @@ const TestComponent = {
   `,
 }
 
-describe('CheckboxGroup.vue and Checkbox.vue', () => {
+describe('CheckboxGroup.vue and Checkbox', () => {
   renderWork(TestComponent)
 
   test('value(v-model) work', async () => {

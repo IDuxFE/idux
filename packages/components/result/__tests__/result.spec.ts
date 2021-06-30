@@ -5,7 +5,7 @@ import { ResultProps } from '../src/types'
 import { IxIcon } from '../../icon'
 import { renderWork } from '@tests'
 
-describe('Result.vue', () => {
+describe('Result', () => {
   const ResultMount = (options?: MountingOptions<Partial<ResultProps>>) => mount(IxResult, { ...options })
 
   renderWork(IxResult)
