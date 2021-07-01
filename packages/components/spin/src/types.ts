@@ -3,6 +3,9 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export type SpinTipAlignType = 'horizontal' | 'vertical'
+export type SpinSize = 'large' | 'medium' | 'small'
+
 export const spinProps = {
   spinning: IxPropTypes.bool.def(true),
   icon: IxPropTypes.string,

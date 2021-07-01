@@ -1,6 +1,5 @@
-import type { MenuTheme } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
-import type { MenuItemProps, MenuMode } from './types'
+import type { MenuItemProps, MenuMode, MenuTheme } from './types'
 
 export interface MenuItem {
   cid: ComputedRef<string | number>

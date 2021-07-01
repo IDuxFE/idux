@@ -1,6 +1,5 @@
 import type { VNode, CSSProperties } from 'vue'
-import type { SpaceSize } from '@idux/components/config'
-import type { SpaceDirection, SpaceProps } from './types'
+import type { SpaceDirection, SpaceProps, SpaceSize } from './types'
 
 import { defineComponent, computed } from 'vue'
 import { filterEmptyNode, getSlotNodes, Logger } from '@idux/cdk/utils'
