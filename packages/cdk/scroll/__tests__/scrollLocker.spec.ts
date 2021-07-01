@@ -17,11 +17,11 @@ describe('scrollLocker.ts', () => {
   it('lock and unLock work', () => {
     scrollLocker.lock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
   })
 
   it('blockClassName work', () => {
@@ -31,32 +31,32 @@ describe('scrollLocker.ts', () => {
     scrollLocker.lock()
     scrollLocker1.lock()
 
-    expect(document.body.classList.contains(defaultBlockClassName)).toBeTruthy()
-    expect(document.body.classList.contains(testClassName)).toBeTruthy()
+    expect(document.documentElement.classList.contains(defaultBlockClassName)).toBeTruthy()
+    expect(document.documentElement.classList.contains(testClassName)).toBeTruthy()
 
     scrollLocker.unLock()
 
-    expect(document.body.classList.contains(defaultBlockClassName)).toBeFalsy
-    expect(document.body.classList.contains(testClassName)).toBeTruthy()
+    expect(document.documentElement.classList.contains(defaultBlockClassName)).toBeFalsy
+    expect(document.documentElement.classList.contains(testClassName)).toBeTruthy()
 
     scrollLocker1.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
   })
 
   it('multiple lock and unLock work', () => {
     scrollLocker.lock()
     scrollLocker.lock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
 
     scrollLocker.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
   })
 
   it('multiple instance work', () => {
@@ -67,19 +67,19 @@ describe('scrollLocker.ts', () => {
     scrollLocker1.lock()
     scrollLocker2.lock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker.unLock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker1.unLock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker2.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
   })
 
   it('multiple instance with different container work', () => {
@@ -95,22 +95,22 @@ describe('scrollLocker.ts', () => {
     scrollLocker1.lock()
     scrollLocker2.lock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
     expect(testDivElement.className).toBe(defaultBlockClassName)
 
     scrollLocker.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
     expect(testDivElement.className).toBe(defaultBlockClassName)
 
     scrollLocker1.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
     expect(testDivElement.className).toBe(defaultBlockClassName)
 
     scrollLocker2.unLock()
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
     expect(testDivElement.className).toBe('')
 
     jest.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockClear()
@@ -125,11 +125,11 @@ describe('scrollLocker.ts', () => {
 
     scrollLocker.lock()
 
-    expect(document.body.className).toBe(defaultBlockClassName)
+    expect(document.documentElement.className).toBe(defaultBlockClassName)
 
     scrollLocker.reLock({ container: testDivElement })
 
-    expect(document.body.className).toBe('')
+    expect(document.documentElement.className).toBe('')
 
     expect(testDivElement.className).toBe(defaultBlockClassName)
 

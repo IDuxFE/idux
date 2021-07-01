@@ -24,7 +24,7 @@ export class ScrollLocker {
   constructor(private options: ScrollLockerOptions = {}) {}
 
   getContainer(): HTMLElement {
-    return this.options.container ?? document.body
+    return this.options.container ?? document.documentElement
   }
 
   lock(): void {
