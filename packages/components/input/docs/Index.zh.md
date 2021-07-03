@@ -26,10 +26,10 @@ subtitle: 输入框
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 当存在 `control` 时, 控件将由 `AbstractControl` 完全控制，此时 `value` 会失效 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
-| `addonAfter` | 设置后置标签 | `string\|v-slot:addonAfter` | - | - | - |
-| `addonBefore` | 设置前置标签 | `string\|v-slot:addonBefore` | - | - | - |
-| `suffix` | 设置后缀图标 | `string\|v-slot:suffix` | - | - | - |
-| `prefix` | 设置前缀图标 | `string\|v-slot:prefix` | - | - | - |
+| `addonAfter` | 设置后置标签 | `string\|#addonAfter` | - | - | - |
+| `addonBefore` | 设置前置标签 | `string\|#addonBefore` | - | - | - |
+| `suffix` | 设置后缀图标 | `string\|#suffix` | - | - | - |
+| `prefix` | 设置前缀图标 | `string\|#prefix` | - | - | - |
 | `size` | 设置大小 | `large\|medium\|small` | `medium` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `borderless` | 是否显示边框 | `boolean` | `false` | ✅ | - |

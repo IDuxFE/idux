@@ -53,17 +53,15 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    color: @header-extra-color;
+    font-size: @header-extra-font-size;
+
+    > .@{idux-prefix}-icon {
+      padding: @header-extra-padding;
+    }
 
     > .@{idux-prefix}-icon:hover {
       color: @header-extra-active-icon-color;
-    }
-
-    > * {
-      margin-left: @header-extra-margin-left;
-    }
-
-    > *:first-child {
-      margin-left: 0;
     }
   }
 
@@ -89,6 +87,10 @@
     .@{header-prefix}-sub-title {
       font-size: @header-sub-font-size-sm;
     }
+
+    .@{header-prefix}-extra {
+      font-size: @header-extra-font-size-sm;
+    }
   }
 }
 
@@ -99,10 +101,6 @@
     height: @height;
     padding: @padding-vertical 0;
   }
-
-  // .@{header-prefix}-bar {
-  //   height: @font-size;
-  // }
 
   .@{header-prefix}-title {
     font-size: @font-size;

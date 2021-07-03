@@ -9,10 +9,10 @@ export interface ScrollOptions {
 
 /**
  *  set the position of the scroll
- * @param target target element
  * @param options If it is number, it means scrollTop
+ * @param target target element
  */
-export function setScroll(target: Element | Window, options: number | ScrollOptions): void {
+export function setScroll(options: number | ScrollOptions, target: Element | Window = window): void {
   const { scrollTop, scrollLeft }: ScrollOptions = isObject(options) ? options : { scrollTop: options }
   if (target === window) {
     if (scrollTop) {
@@ -34,7 +34,7 @@ export function setScroll(target: Element | Window, options: number | ScrollOpti
 }
 
 /** get the position of the scroll */
-export function getScroll(target: Element | Window): Required<ScrollOptions> {
+export function getScroll(target: Element | Window = window): Required<ScrollOptions> {
   if (target === window) {
     return {
       scrollTop: target.pageYOffset || document.documentElement.scrollTop,

@@ -9,3 +9,7 @@ const warn = (...args: any[]): void => logWrapper(args, console.warn)
 const error = (...args: any[]): void => logWrapper(args, console.error)
 
 export const Logger = { info, warn, error }
+
+export const throwError = (location: string, message: string): never => {
+  throw new Error(`[@idux/${location}]: ${message}`)
+}

@@ -68,9 +68,9 @@ describe('Result', () => {
             <li>2</li>
           </ul>
         </template>
-        <template v-slot:title>${title}</template>
-        <template v-slot:subtitle>${subtitle}</template>
-        <template v-slot:extra>${extra}</template>
+        <template #title>${title}</template>
+        <template #subtitle>${subtitle}</template>
+        <template #extra>${extra}</template>
       </IxResult>
       `,
     })

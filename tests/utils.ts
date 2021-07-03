@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mount, DOMWrapper } from '@vue/test-utils'
+import { mount, DOMWrapper, MountingOptions } from '@vue/test-utils'
 
 export const wait = (timeout?: number): Promise<unknown> => {
   return new Promise(resolve => setTimeout(resolve, timeout))
@@ -38,7 +38,7 @@ export const scrollTarget = (y: number, target: Window | Element = window, timeo
   return wait(timeout)
 }
 
-export const renderWork = (component: any, options = {}): void => {
+export const renderWork = <T = any>(component: any, options?: MountingOptions<Partial<T>>): void => {
   test('render work', () => {
     const wrapper = mount(component, { ...options })
     expect(wrapper.html()).toMatchSnapshot()

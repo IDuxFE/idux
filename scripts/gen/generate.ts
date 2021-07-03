@@ -13,7 +13,7 @@ import {
   getLessTemplate,
   getTestTemplate,
   getTypesTemplate,
-  getDocsZhTemplate,
+  getDocsTemplate,
   getVueTemplate,
   getDemoTemplate,
   getDemoVueTemplate,
@@ -153,8 +153,8 @@ class Generate {
       return Promise.resolve()
     }
 
-    const docsZhTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type)
-    const docsEnTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type, true)
+    const docsZhTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type)
+    const docsEnTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type, true)
     const demoTemplate = getDemoTemplate()
     const demoVueTemplate = getDemoVueTemplate(kebabCase(name))
 

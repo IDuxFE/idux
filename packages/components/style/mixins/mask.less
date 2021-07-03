@@ -1,0 +1,19 @@
+@import 'box';
+
+.mask(@z-index-mask: @zindex-l4-base, @z-index-wrapper: @zindex-l4-base, @bg-color: @mask-bg-color) {
+  pointer-events: none;
+
+  &-mask {
+    .box(fixed);
+    z-index: @z-index-mask;
+    height: 100%;
+    background-color: @bg-color;
+  }
+
+  &-wrapper {
+    .box(fixed);
+    z-index: @z-index-wrapper;
+    overflow: auto;
+    outline: 0;
+  }
+}

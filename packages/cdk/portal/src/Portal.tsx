@@ -1,4 +1,4 @@
-import { computed, defineComponent, Teleport } from 'vue'
+import { computed, defineComponent, ref, Teleport, watch } from 'vue'
 import { portalProps } from './types'
 import { useContainer } from './useContainer'
 
@@ -6,12 +6,21 @@ export default defineComponent({
   name: 'IxPortal',
   props: portalProps,
   setup(props) {
-    const to = computed(() => useContainer(props.target))
+    const loaded = ref(props.load)
+    watch(
+      () => props.load,
+      load => {
+        if (!loaded.value) {
+          loaded.value = load
+        }
+      },
+    )
+    const to = computed(() => loaded.value && useContainer(props.target))
     return { to }
   },
   render() {
-    const { show, to, disabled, $slots } = this
-    if (!show) {
+    const { to, disabled, $slots } = this
+    if (!to) {
       return null
     }
 

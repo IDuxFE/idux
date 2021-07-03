@@ -21,7 +21,7 @@ cols: 1
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `description` | 自定义描述内容 | `string \| v-slot:description` | — | — | — |
+| `description` | 自定义描述内容 | `string \| #description` | — | — | — |
 | `image` | 设置自定义图片地址 | `string` | — | — | — |
 
 #### Slots

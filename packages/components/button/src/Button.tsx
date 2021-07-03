@@ -16,18 +16,18 @@ export default defineComponent({
     const groupProps = inject(buttonToken, {})
     const buttonConfig = useGlobalConfig('button')
 
-    const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
+    const mode$$ = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const hasDefaultSlot = computed(() => hasSlot(slots))
 
-    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
+    const classes = useClasses(props, groupProps, buttonConfig, mode$$, hasDefaultSlot)
 
-    return { classes }
+    return { classes, mode$$ }
   },
 
   render() {
-    const { classes } = this
+    const { classes, mode$$ } = this
     const child = renderChild(this.$slots, this.loading, this.icon)
-    if (this.mode === 'link') {
+    if (mode$$ === 'link') {
       return <a class={classes}>{child}</a>
     } else {
       return (
