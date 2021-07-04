@@ -95,11 +95,11 @@
 }
 
 .header-size(@height; @font-size;) {
-  @padding-vertical: max((round(((@height - @font-size * @header-line-height) / 2) * 10) / 10), 0);
+  @spacing-vertical: max((round(((@height - @font-size * @header-line-height) / 2) * 10) / 10), 0);
 
   .@{header-prefix}-main {
     height: @height;
-    padding: @padding-vertical 0;
+    padding: @spacing-vertical 0;
   }
 
   .@{header-prefix}-title {

@@ -100,6 +100,6 @@ cover:
 @checkbox-height| 16px | - |
 @checkbox-width| 16px | - |
 @checkbox-group-line-height| @line-height-base | - |
-@checkbox-group-checkbox-margin-right| @margin-sm | - |
-@checkbox-label-padding| 0 @padding-xl 0 @padding-xs | - |
+@checkbox-group-checkbox-margin-right| @spacing-sm | - |
+@checkbox-label-padding| 0 @spacing-xl 0 @spacing-xs | - |
 @checkbox-transition-duration| @transition-duration-base | - |

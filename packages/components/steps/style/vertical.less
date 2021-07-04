@@ -1,6 +1,6 @@
 .@{steps-prefix}-vertical {
   display: block;
-  .@{step-prefix} {  
+  .@{step-prefix} {
     position: relative;
     display: block;
     flex: none;
@@ -14,7 +14,7 @@
         padding: (@height-md + @spacing-gutter) 0 (@spacing-gutter);
         &::after {
           display: inline-block;
-          content: "";
+          content: '';
           width: @step-tail-height !important;
           height: 100% !important;
           background: @grey;
@@ -27,11 +27,11 @@
     .@{step-prefix}-content {
       min-height: @step-content-min-height;
       .@{step-prefix}-description {
-        margin-bottom: @margin-md;
+        margin-bottom: @spacing-md;
       }
     }
   }
-  &.@{steps-prefix}-small {  
+  &.@{steps-prefix}-small {
     .@{step-prefix}:not(:last-child) {
       .@{step-prefix}-tail {
         left: (@height-sm / 2);

@@ -71,10 +71,10 @@ cover:
 | @button-font-size-sm | @font-size-md | - |
 | @button-font-size-md | @font-size-md | - |
 | @button-font-size-lg | @font-size-lg | - |
-| @button-padding-sm | @padding-xs | - |
-| @button-padding-md | @padding-md | - |
-| @button-padding-lg | @padding-lg | - |
-| @button-icon-margin-left | @margin-xs | - |
+| @button-padding-sm | @spacing-xs | - |
+| @button-padding-md | @spacing-md | - |
+| @button-padding-lg | @spacing-lg | - |
+| @button-icon-margin-left | @spacing-xs | - |
 | @button-border-style | @border-style | - |
 | @button-border-size | @border-width-sm | - |
 | @button-border-radius | @border-radius-sm | - |

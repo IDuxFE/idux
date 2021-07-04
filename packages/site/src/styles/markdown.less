@@ -8,26 +8,26 @@
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-  margin: @margin-sm 0;
+  margin: @spacing-sm 0;
   color: @heading-color;
   font-family: Avenir, @font-family, sans-serif;
 }
 
 .markdown h1 {
-  margin-bottom: @margin-lg;
+  margin-bottom: @spacing-lg;
   font-size: @font-size-3xl;
   .subtitle {
-    margin-left: @margin-md;
+    margin-left: @spacing-md;
   }
 }
 
 .markdown h2 {
-  margin-bottom: @margin-md;
+  margin-bottom: @spacing-md;
   font-size: @font-size-2xl;
 }
 
 .markdown h3 {
-  margin-bottom: @margin-md;
+  margin-bottom: @spacing-md;
   font-size: @font-size-xl;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .markdown .anchor {
-  margin-left: @margin-sm;
+  margin-left: @spacing-sm;
   opacity: 0;
   transition: opacity @transition-duration-base;
 }
@@ -62,18 +62,18 @@
 .markdown hr {
   clear: both;
   height: 1px;
-  margin: (@margin-xl * 2) 0;
+  margin: (@spacing-xl * 2) 0;
   background: @border-color-split;
   border: 0;
 }
 
 .markdown p,
 .markdown pre {
-  margin: @margin-md 0;
+  margin: @spacing-md 0;
 }
 
 .markdown ul > li {
-  margin-left: @margin-xl;
+  margin-left: @spacing-xl;
   list-style-type: circle;
 
   &:empty {
@@ -82,19 +82,19 @@
 }
 
 .markdown ol > li {
-  margin-left: @margin-xl;
+  margin-left: @spacing-xl;
   list-style-type: decimal;
 }
 
 .markdown ul > li > p,
 .markdown ol > li > p {
-  margin: @margin-xs 0;
+  margin: @spacing-xs 0;
 }
 
 .markdown pre,
 .markdown code {
   margin: 0;
-  padding: (@padding-sm / 4) @padding-xs;
+  padding: (@spacing-sm / 4) @spacing-xs;
   overflow: auto;
   color: @text-color;
   background: @markdown-code-bg;
@@ -109,7 +109,7 @@
 
 .markdown > table {
   width: 100%;
-  margin: @margin-sm 0 @margin-lg;
+  margin: @spacing-sm 0 @spacing-lg;
   empty-cells: show;
   border: @border-width-sm @border-style @border-color-split;
   border-collapse: collapse;
@@ -125,14 +125,14 @@
 
 .markdown > table th,
 .markdown > table td {
-  padding: @padding-sm @padding-md;
+  padding: @spacing-sm @spacing-md;
   text-align: left;
   border: @border-width-sm @border-style @border-color-split;
 }
 
 .markdown blockquote {
-  margin: @margin-lg 0;
-  padding-left: @padding-md;
+  margin: @spacing-lg 0;
+  padding-left: @spacing-md;
   color: rgba(0, 0, 0, 0.45);
   font-size: @font-size-md - 1px;
   border-left: @border-width-lg @border-style @border-color-split;
@@ -144,7 +144,7 @@
 
 .markdown a.edit-button {
   display: inline-block;
-  margin-left: @margin-sm;
+  margin-left: @spacing-sm;
   text-decoration: none;
 
   .ix-icon {

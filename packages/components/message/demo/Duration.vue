@@ -1,33 +1,28 @@
 <template>
-  <ix-button @click="open">Duration 10s</ix-button>
-  <ix-button @click="open2">Duration 0</ix-button>
-  <ix-button @click="manuallyDestroy">Manually destroy</ix-button>
+  <ix-space>
+    <ix-button @click="open">Duration 10s</ix-button>
+    <ix-button @click="open2">Duration 0</ix-button>
+    <ix-button @click="manuallyDestroy">Manually destroy</ix-button>
+  </ix-space>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IxMessage } from '@idux/components/message'
-import { MessageItemInstance } from '../src/types'
+import { useMessage, MessageRef } from '@idux/components/message'
 
 export default defineComponent({
   setup() {
-    const open = () => {
-      IxMessage.info('The message will disappear in 10 seconds', { duration: 10000 })
+    const message = useMessage()
+    const open = () => message.info('The message will disappear in 10 seconds', { duration: 10000 })
+
+    let instance: MessageRef | null = null
+    const open2 = () => {
+      instance = message.info(`The message will not be destroyed automatically`, { duration: 0 })
     }
 
-    let instance: MessageItemInstance | null = null
-    const open2 = () => {
-      instance = IxMessage.info(`The message is open disappear in 10 seconds`, { duration: 0 })
-    }
     const manuallyDestroy = () => instance?.destroy()
 
     return { open, open2, manuallyDestroy }
   },
 })
 </script>
-
-<style lang="less" scoped>
-.ix-button {
-  margin-right: 8px;
-}
-</style>

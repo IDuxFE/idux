@@ -1,45 +1,39 @@
 <template>
-  <ix-button @click="open">Click count</ix-button>
-  <ix-button @click="customizeOpen">Customized count</ix-button>
-  <br />
-  <ix-button @click="removeAll">Destroy all message</ix-button>
-  <ix-button @click="removeCustomized">Destroy customized count message</ix-button>
+  <ix-space>
+    <ix-button @click="open">Click count</ix-button>
+    <ix-button @click="customizeOpen">Customized count</ix-button>
+    <ix-button @click="destroyAll">Destroy all message</ix-button>
+    <ix-button @click="destroyCustomized">Destroy customized count message</ix-button>
+  </ix-space>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IxMessage } from '@idux/components/message'
+import { useMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {
+    const { info, destroyAll, destroy } = useMessage()
     let count = 0
     let messageId: string
     const open = () => {
       const content = `click count: ${count++}`
       if (!messageId) {
-        const instance = IxMessage.info(content)
+        const instance = info(content)
         messageId = instance.id
       } else {
-        IxMessage.info(content, { id: messageId })
+        info(content, { id: messageId })
       }
     }
 
     let countCustomized = 0
     const customizedId = 'ix-message-key-only'
     const customizeOpen = () => {
-      IxMessage.info(`click count: ${countCustomized++}`, { id: customizedId })
+      info(`click count: ${countCustomized++}`, { id: customizedId })
     }
+    const destroyCustomized = () => destroy(customizedId)
 
-    const removeAll = () => IxMessage.destroy()
-    const removeCustomized = () => IxMessage.destroy(customizedId)
-
-    return { open, customizeOpen, removeAll, removeCustomized }
+    return { open, customizeOpen, destroyAll, destroyCustomized }
   },
 })
 </script>
-
-<style lang="less" scoped>
-.ix-button {
-  margin: 0 8px 8px 0;
-}
-</style>

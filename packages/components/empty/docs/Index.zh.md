@@ -34,7 +34,7 @@ cols: 1
 
 | 变量名 | default 主题| 说明 |
 | --- | --- | --- |
-| @empty-margin-md | @margin-md | - |
+| @empty-margin-md | @spacing-md | - |
 | @empty-line-height-md | @line-height-base | - |
 | @empty-font-size-md | @font-size-lg | - |
 | @empty-icon-font-size-md | `64px` | - |

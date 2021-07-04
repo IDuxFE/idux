@@ -1,9 +1,5 @@
-.message-icon-color (@baseCls, @type, @color) {
-  &.@{baseCls}-@{type} {
-    .@{baseCls}-custom-content {
-      .ix-icon {
-        color: @color;
-      }
-    }
+.message-icon-color (@type, @color) {
+  &.@{message-prefix}-@{type} .@{icon-prefix} {
+    color: @color;
   }
 }

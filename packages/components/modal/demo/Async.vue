@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, h, ref } from 'vue'
-import { useModal } from '../src/useModal'
+import { useModal } from '@idux/components/modal'
 
 export default defineComponent({
   setup() {

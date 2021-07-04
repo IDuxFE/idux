@@ -1,4 +1,4 @@
-import type { App, Directive } from 'vue'
+import type { App, DefineComponent, Directive, Plugin } from 'vue'
 
 // import General
 import { IxButton, IxButtonGroup } from '@idux/components/button'
@@ -36,17 +36,18 @@ import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
 import { IxPopover } from '@idux/components/popover'
 // import Feedback
-import { IxModal, IxModalProvider } from '@idux/components/modal'
 import { IxResult } from '@idux/components/result'
 import { IxSpin } from '@idux/components/spin'
 import { IxProgress } from '@idux/components/progress'
-import { IxMessage } from '@idux/components/message'
+import { IxMessage, IxMessageProvider } from '@idux/components/message'
+import { IxModal, IxModalProvider } from '@idux/components/modal'
+
 // import Other
 import { IxBackTop } from '@idux/components/back-top'
 import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 // --- import end ---
 
-const components = [
+const components: DefineComponent[] = [
   // components General
   IxButton,
   IxButtonGroup,
@@ -101,11 +102,14 @@ const components = [
   IxTooltip,
   IxPopover,
   // components Feedback
-  IxModal,
-  IxModalProvider,
+
   IxResult,
   IxSpin,
   IxProgress,
+  IxMessage,
+  IxMessageProvider,
+  IxModal,
+  IxModalProvider,
   // components Other
   IxBackTop,
   IxAnchor,
@@ -125,7 +129,7 @@ const directives: Record<string, Directive> = {
   // --- directives end ---
 }
 
-const plugins = [IxMessage]
+const plugins: Plugin[] = []
 
 const install = (app: App): void => {
   components.forEach(component => {

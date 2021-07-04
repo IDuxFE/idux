@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message render work 1`] = `
+"<div class=\\"ix-message ix-message-info\\">
+  <div class=\\"ix-message-content\\"><i class=\\"ix-icon ix-icon-info-circle\\" role=\\"img\\" aria-label=\\"info-circle\\"></i><span class=\\"ix-message-content-text\\">This is a message</span></div>
+</div>"
+`;

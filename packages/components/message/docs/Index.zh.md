@@ -8,51 +8,92 @@ order: 0
 
 全局展示操作反馈信息。
 
-## 何时使用
-
 - 用于提示用户的信息，例如：成功、警告和错误等。
 - 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 
 ## API
 
-### IxMessage
+### ix-message
 
-提供了一些服务方法，使用方式和参数如下：
-
-- IxMessage.info(content, [options])
-- IxMessage.success(content, [options])
-- IxMessage.warn(content, [options])
-- IxMessage.error(content, [options])
-- IxMessage.loading(content, [options])
+#### MessageProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `content` | 当前提示框的内容 | `string \| VNode` | - | - | - |
-| `options` | 设置针对当前提示框的参数，见下方表格 | `MessageOptions` | - | - | - |
-
-`options` 支持的参数如下:
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
+| `v-model:visible` | 是否可见 | `boolean` | `false` | - | - |
 | `destroyOnHover` | 鼠标悬浮时自动销毁 | `boolean` | `false` | ✅ | - |
-| `duration` | 自动销毁的延时，单位毫秒 | `number` | `3000` | ✅ | 设置为 `0` 时不自动销毁 |
-| `icon` | 自定义图标 | `string \| VNode` | - | - | - |
-| `id` | 提示的唯一标识 | `string` | - | - | - |
-| `onDestroy` | 当前提示框关闭时触发的回调函数 | `(id: string) => void` | - | - | - |
+| `duration` | 自动销毁的延时，单位毫秒 | `number` | - | - | 传入 `0` 表示不自动销毁 |
+| `icon` | 自定义图标 | `string \| VNode` | - | ✅ | - |
+| `type` | 提示类型 | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`  | `info` | - | - |
 
-### 额外全局配置
+### ix-message-provider
 
-**通过 `useGlobalConfig` 设置全局配置暂不生效**
+如果你想通过 `useMessage` 来创建对话框，则你需要把组件包裹在 `ix-message-provider` 内部，因为这样才不会丢失应用的上下文信息。
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `maxCount` | 最大显示提示框的数量 | `number` | `5` | ✅ | 超过限制时，最早的消息会被自动关闭 |
-| `top` | 消息距离顶部的位置 | `string \| number` | `60px` | ✅ | - |
-
-### 其他方法
-
-- 全局销毁：`IxMessage.destroy`
+#### MessageProviderProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `id` | 需要销毁的提示框的唯一标识 | `string \| string[]` | - | - | 为空时，销毁所有提示框 |
+| `maxCount` | 同一时间可展示的最大提示数量 | `number` | `5` | ✅ | - |
+| `top` | 消息距离顶部的位置 | `number \| string` | `15%` | ✅ | - |
+
+```html
+<!-- App.vue -->
+<ix-dialog-provider>
+  <MyComponent />
+</ix-dialog-provider>
+
+<!-- MyComponent.vue -->
+<template>
+  <ix-button @click="openMessage">Open</ix-button>
+</template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from '@idux/components/message'
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    const openMessage = ()=> message.open('This is a message')
+    return { openMessage }
+  },
+})
+</script>
+```
+
+### useMessage
+
+可以使用 `useMessage` 来快速创建和管理对话框。
+
+```ts
+export const useMessage: () => MessageProviderRef;
+
+export interface MessageProviderRef {
+  // 打开对话框
+ open: (options: MessageOptions) => MessageRef
+  info: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  success: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  warning: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  error: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  loading: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  // 更新指定 id 的对话框的配置信息
+  update: (id: string, options: MessageOptions) => void
+  // 销毁指定 id 的对话框
+  destroy: (id: string | string[]) => void
+  // 销毁所有对话框
+  destroyAll: () => void
+}
+
+export interface MessageOptions extends MessageProps {
+  id?: string
+  // 对话框的内容
+  content?: string | VNode
+}
+
+export interface MessageRef {
+  // 对话框的唯一标识
+  id: string
+  // 更新当前配置信息
+  update: (options: Partial<MessageOptions>) => void
+  // 销毁当前对话框
+  destroy: () => void
+}
+```

@@ -67,9 +67,9 @@ subtitle: 输入框
 | @input-font-size-sm | @font-size-md;| - |
 | @input-font-size-md | @font-size-md;| - |
 | @input-font-size-lg | @font-size-lg;| - |
-| @input-wrapper-inner-margin | @margin-xs;| - |
+| @input-wrapper-inner-margin | @spacing-xs;| - |
 | @input-padding-horizontal-sm | @input-padding-horizontal-md - 2px;| - |
-| @input-padding-horizontal-md | @padding-sm;| - |
+| @input-padding-horizontal-md | @spacing-sm;| - |
 | @input-padding-horizontal-lg | @input-padding-horizontal-md + 2px;| - |
 | @input-border-width | @border-width-sm;| - |
 | @input-border-style | @border-style;| - |

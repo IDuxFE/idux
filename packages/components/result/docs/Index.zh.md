@@ -42,7 +42,7 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | --- | --- | --- |
 | @result-padding | @spacing-gutter *6 @spacing-gutter* 4 | - |
 | @result-text-align | `center` | - |
-| @result-icon-margin | @margin-xl | - |
+| @result-icon-margin | @spacing-xl | - |
 | @result-icon-size | @font-size-xl * 4 | - |
 | @result-title-font-size | @font-size-2xl | - |
 | @result-title-color | @black | - |
@@ -50,10 +50,10 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | @result-subtitle-font-size | @font-size-md | - |
 | @result-subtitle-color | @text-color-secondary | - |
 | @result-subtitle-line-height | 1.6 | - |
-| @result-extra-margin | @margin-xl | - |
-| @result-extra-children-margin | @margin-sm | - |
-| @result-content-margin | @margin-xl | - |
-| @result-content-padding | @padding-xl @spacing-gutter * 5 | - |
+| @result-extra-margin | @spacing-xl | - |
+| @result-extra-children-margin | @spacing-sm | - |
+| @result-content-margin | @spacing-xl | - |
+| @result-content-padding | @spacing-xl @spacing-gutter * 5 | - |
 | @result-content-background | @grey-l50 | - |
 | @result-success | @green | - |
 | @result-warning | @yellow | - |

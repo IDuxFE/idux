@@ -1,3 +1,4 @@
+import type { VNode } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
@@ -6,6 +7,7 @@ import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form
 import type { TextareaResize, TextareaAutoRows } from '@idux/components/input'
 import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
+import type { MessageType } from '@idux/components/message'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
 import type { RadioMode } from '@idux/components/radio'
@@ -188,10 +190,11 @@ export interface PopoverConfig {
 
 // Feedback
 export interface MessageConfig {
-  duration: number
-  maxCount: number
-  top: number
   destroyOnHover: boolean
+  duration: number
+  icon?: Partial<Record<MessageType, string | VNode>>
+  maxCount: number
+  top?: number | string
 }
 
 export interface ModalConfig {

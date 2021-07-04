@@ -1,53 +1,105 @@
-import type { App, ComponentPublicInstance } from 'vue'
-import type { MessageItemInstance, MessageOptions, MessageType } from './types'
-import type { UseMessage } from './useMessage'
+import type { MessageProps } from './types'
 
-import { computed, createApp, h, TransitionGroup, VNode } from 'vue'
-import { useContainer } from '@idux/cdk/portal'
-import { toCssPixel } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
-import { useMessage } from './useMessage'
-import IxMessageItem from './MessageItem'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+import { callEmit, isString } from '@idux/cdk/utils'
+import { MessageConfig, useGlobalConfig } from '@idux/components/config'
+import { IxIcon } from '@idux/components/icon'
+import { messageProps } from './types'
 
-let instance: ComponentPublicInstance<{}, UseMessage>
+const defaultIconTypes = {
+  success: 'check-circle',
+  error: 'close-circle',
+  info: 'info-circle',
+  warning: 'exclamation-circle',
+  loading: 'loading',
+} as const
 
-const install = (_: App): void => {
-  if (!instance) {
-    const container = useContainer('ix-message-container')
-    instance = createApp({
-      setup() {
-        // TODO fix
-        const config = useGlobalConfig('message')
-        const maxCount = computed(() => config.maxCount)
-        const style = computed(() => ({ top: toCssPixel(config.top) }))
-        const { messages, add, destroy } = useMessage(maxCount)
-        return { messages, add, destroy, style }
-      },
-      render() {
-        const messages = this.messages.map((message: MessageOptions) => {
-          return <IxMessageItem key={message.id} {...message} onDestroy={this.destroy} />
-        })
+export default defineComponent({
+  name: 'IxMessage',
+  props: messageProps,
+  setup(props) {
+    const config = useGlobalConfig('message')
 
-        return (
-          <TransitionGroup tag="div" name="move-up" class="ix-message" style={this.style}>
-            {messages}
-          </TransitionGroup>
-        )
-      },
-    }).mount(container) as ComponentPublicInstance<{}, UseMessage>
-  }
-}
+    const classes = computed(() => {
+      const clsPrefix = 'ix-message'
+      return [clsPrefix, `${clsPrefix}-${props.type}`]
+    })
 
-const open = (option: MessageOptions & { content: string | VNode; type: MessageType }): MessageItemInstance => {
-  const id = instance.add(option)
-  return { id, destroy: () => instance.destroy(id) }
-}
+    const icon$$ = computed(() => {
+      const { icon, type } = props
+      return icon ?? config.icon?.[type] ?? defaultIconTypes[type]
+    })
 
-const destroy = (id?: string | string[]) => instance.destroy(id)
+    const { visible$$, onMouseEnter, onMouseLeave } = useEvents(props, config)
 
-const messageTypes: MessageType[] = ['info', 'success', 'warning', 'error', 'loading']
-const [info, success, warning, error, loading] = messageTypes.map(type => {
-  return (content: string | VNode, options?: MessageOptions) => open({ ...options, content, type })
+    return { classes, icon$$, visible$$, onMouseEnter, onMouseLeave }
+  },
+
+  render() {
+    const { visible$$, classes, icon$$, onMouseEnter, onMouseLeave } = this
+    const iconNode = isString(icon$$) ? <IxIcon name={icon$$}></IxIcon> : icon$$
+    return (
+      <div v-show={visible$$} class={classes} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
+        <div class="ix-message-content">
+          {iconNode}
+          <span class="ix-message-content-text">{this.$slots.default?.()}</span>
+        </div>
+      </div>
+    )
+  },
 })
 
-export default { install, open, destroy, info, success, warning, error, loading }
+const useEvents = (props: MessageProps, config: MessageConfig) => {
+  const duration = computed(() => props.duration ?? config.duration)
+  const destroyOnHover = computed(() => props.destroyOnHover ?? config.destroyOnHover)
+  const autoClose = computed(() => duration.value > 0)
+
+  const visible$$ = ref(props.visible)
+  watch(
+    () => props.visible,
+    visible => (visible$$.value = visible),
+  )
+
+  let timer: number | null = null
+
+  const startTimer = () => {
+    timer = setTimeout(() => destroy(), duration.value)
+  }
+
+  const clearTimer = () => {
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+  }
+
+  const destroy = () => {
+    clearTimer()
+    visible$$.value = false
+    callEmit(props['onUpdate:visible'], false)
+  }
+
+  const onMouseEnter = () => {
+    if (autoClose.value && !destroyOnHover.value) {
+      clearTimer()
+    }
+  }
+  const onMouseLeave = () => {
+    if (autoClose.value && !destroyOnHover.value) {
+      startTimer()
+    }
+  }
+
+  onMounted(() => {
+    watchEffect(() => {
+      clearTimer()
+      if (visible$$.value && autoClose.value) {
+        startTimer()
+      }
+    })
+  })
+
+  onBeforeUnmount(() => clearTimer())
+
+  return { visible$$, onMouseEnter, onMouseLeave }
+}

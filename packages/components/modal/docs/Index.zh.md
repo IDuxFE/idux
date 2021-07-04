@@ -70,7 +70,7 @@ export interface ModalButtonProps extends ButtonProps {
 
 ### ix-modal-provider
 
-如果你想通过 `useModel` 来创建对话框，则你需要把组件包裹在 `ix-modal-provider` 内部，因为这样才不会丢失应用的上下文信息。
+如果你想通过 `useModal` 来创建对话框，则你需要把组件包裹在 `ix-modal-provider` 内部，因为这样才不会丢失应用的上下文信息。
 
 ```html
 <!-- App.vue -->
@@ -95,7 +95,7 @@ export default defineComponent({
 </script>
 ```
 
-### useModel
+### useModal
 
 可以使用 `useModal` 来快速创建和管理对话框，需要注意以下几点。
 
@@ -121,7 +121,7 @@ export interface ModalProviderRef {
   destroyAll: () => void
 }
 
-export interface ModalOptions extends ModelProps {
+export interface ModalOptions extends ModalProps {
   id?: string
   // 对话框的内容
   content?: string | VNode
