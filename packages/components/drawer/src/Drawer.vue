@@ -4,7 +4,7 @@
       <ix-mask v-show="maskVisible" :mask="mask" :mask-class="wrapClassName" @click="onModalClick">
         <div ref="drawerRef" :class="['ix-drawer', placement]" :style="drawerStyle" @click.stop>
           <header v-if="title || slots.title" class="ix-drawer-header">
-            <slot v-if="title || slots.title" name="title">
+            <slot name="title">
               <span role="heading" :title="title">
                 {{ title }}
               </span>
@@ -13,11 +13,9 @@
               <ix-icon class="ix-icon-close" name="close" />
             </button>
           </header>
-          <template v-if="rendered">
-            <section class="ix-drawer-body">
-              <slot></slot>
-            </section>
-          </template>
+          <section v-if="rendered" class="ix-drawer-body">
+            <slot></slot>
+          </section>
           <footer v-if="footer || slots.footer" class="ix-drawer-footer">
             <slot name="footer">
               <span role="footer" :title="footer">
