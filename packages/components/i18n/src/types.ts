@@ -1,5 +1,15 @@
+export interface EmptyLocale {
+  description: string
+}
+
 export interface GlobalLocale {
   placeholder: string
+}
+
+export interface ModalLocale {
+  cancelText: string
+  okText: string
+  justOkText: string
 }
 
 export interface PaginationLocale {
@@ -14,15 +24,12 @@ export interface PaginationLocale {
   totalSuffix: string
 }
 
-export interface EmptyLocale {
-  description: string
-}
-
 export interface Locale {
   type: LocaleType
-  global: GlobalLocale
-  pagination: PaginationLocale
   empty: EmptyLocale
+  global: GlobalLocale
+  modal: ModalLocale
+  pagination: PaginationLocale
 }
 
 export type LocaleKey = keyof Locale

@@ -41,7 +41,7 @@ async function sleep(time: number) {
   })
 }
 
-describe('List.vue', () => {
+describe('List', () => {
   renderWork(TestComponent)
 
   test('size', async () => {

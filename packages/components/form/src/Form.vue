@@ -5,8 +5,7 @@
 </template>
 
 <script lang="ts">
-import type { FormLayout, FormSize } from '@idux/components/config'
-import type { FormProps } from './types'
+import type { FormProps, FormLayout, FormSize } from './types'
 
 import { computed, ComputedRef, defineComponent, provide, toRef, watchEffect } from 'vue'
 import { provideControl, useValueControl } from '@idux/cdk/forms'

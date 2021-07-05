@@ -1,9 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
 
 import { controlProp } from '@idux/cdk/forms'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
-import { FormSize } from '@idux/components/config'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export interface SelectOption {
+  label?: string
+  value?: any
+  disabled?: boolean
+  groupLabel?: string
+  [key: string]: any
+}
+export type SelectFilterFn = (searchValue: string, option: OptionProps) => boolean
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
@@ -32,13 +42,14 @@ export const selectProps = {
   valueKey: IxPropTypes.string,
 }
 
-export type SelectProps = IxExtractPropTypes<typeof selectProps>
-
+export type SelectProps = IxInnerPropTypes<typeof selectProps>
+export type SelectPublicProps = IxPublicPropTypes<typeof selectProps>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
 }
 
+export type SelectComponent = DefineComponent<HTMLAttributes & typeof selectProps, SelectBindings>
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
 export const optionProps = {
@@ -47,8 +58,9 @@ export const optionProps = {
   value: IxPropTypes.any.isRequired,
 }
 
-export type OptionProps = IxExtractPropTypes<typeof optionProps>
-
+export type OptionProps = IxInnerPropTypes<typeof optionProps>
+export type OptionPublicProps = IxPublicPropTypes<typeof optionProps>
+export type OptionComponent = DefineComponent<HTMLAttributes & typeof optionProps>
 export type OptionInstance = InstanceType<DefineComponent<OptionProps>>
 
 export const optionGroupProps = {
@@ -56,16 +68,7 @@ export const optionGroupProps = {
   options: IxPropTypes.array<SelectOption>().def(() => []),
 }
 
-export type OptionGroupProps = IxExtractPropTypes<typeof optionGroupProps>
-
+export type OptionGroupProps = IxInnerPropTypes<typeof optionGroupProps>
+export type OptionGroupPublicProps = IxPublicPropTypes<typeof optionGroupProps>
+export type OptionGroupComponent = DefineComponent<HTMLAttributes & typeof optionGroupProps>
 export type OptionGroupInstance = InstanceType<DefineComponent<OptionGroupProps>>
-
-export interface SelectOption {
-  label?: string
-  value?: any
-  disabled?: boolean
-  groupLabel?: string
-  [key: string]: any
-}
-
-export type SelectFilterFn = (searchValue: string, option: OptionProps) => boolean

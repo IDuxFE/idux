@@ -19,11 +19,17 @@ import {
   toType,
 } from 'vue-types'
 
-type RequiredKeys<T> = {
+type PublicRequiredKeys<T> = {
+  [K in keyof T]: T[K] extends { required: true } ? K : never
+}[keyof T]
+
+type PublicOptionalKeys<T> = Exclude<keyof T, PublicRequiredKeys<T>>
+
+type InnerRequiredKeys<T> = {
   [K in keyof T]: T[K] extends { required: true } | { default: any } ? K : never
 }[keyof T]
 
-type OptionalKeys<T> = Exclude<keyof T, RequiredKeys<T>>
+type InnerOptionalKeys<T> = Exclude<keyof T, InnerRequiredKeys<T>>
 
 type InferPropType<T> = T extends null
   ? any // null & true would fail to infer
@@ -40,8 +46,13 @@ type InferPropType<T> = T extends null
   : T
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type IxExtractPropTypes<O> = O extends object
-  ? { [K in RequiredKeys<O>]: InferPropType<O[K]> } & { [K in OptionalKeys<O>]?: InferPropType<O[K]> }
+export type IxPublicPropTypes<O> = O extends object
+  ? { [K in PublicRequiredKeys<O>]: InferPropType<O[K]> } & { [K in PublicOptionalKeys<O>]?: InferPropType<O[K]> }
+  : { [K in string]: any }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type IxInnerPropTypes<O> = O extends object
+  ? { [K in InnerRequiredKeys<O>]: InferPropType<O[K]> } & { [K in InnerOptionalKeys<O>]?: InferPropType<O[K]> }
   : { [K in string]: any }
 
 export class IxPropTypes {

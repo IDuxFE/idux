@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { HeaderComponent } from './src/types'
 
-import IxHeader from './src/Header'
+import Header from './src/Header'
 
-IxHeader.install = (app: App): void => {
-  app.component(IxHeader.name, IxHeader)
-}
+const IxHeader = Header as unknown as HeaderComponent
 
 export { IxHeader }
 
-export type { HeaderInstance, HeaderProps } from './src/types'
+export type { HeaderInstance, HeaderPublicProps as HeaderProps } from './src/types'

@@ -14,6 +14,10 @@ import { computed, shallowReadonly, shallowRef, ref, toRaw, watch, watchEffect }
 import { hasOwnProperty, isArray, isNil, isObject } from '@idux/cdk/utils'
 import { Validators } from './validators'
 
+type IsNullable<T, K> = undefined extends T ? K : never
+
+type OptionalKeys<T> = { [K in keyof T]-?: IsNullable<T[K], K> }[keyof T]
+
 function isOptions(val?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null): val is ValidatorOptions {
   return isObject(val) && !isArray(val)
 }

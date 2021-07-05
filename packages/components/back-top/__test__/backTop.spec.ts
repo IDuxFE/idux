@@ -16,7 +16,7 @@ const backTopMount = (template: string, options = {}) =>
     { attachTo: document.body },
   )
 
-describe('BackTop.vue', () => {
+describe('BackTop', () => {
   renderWork(IxBackTop)
 
   test('scroll work', async () => {

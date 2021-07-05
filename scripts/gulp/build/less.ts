@@ -29,7 +29,7 @@ async function compile(content: string, savePath: string, min: boolean, rootPath
     .catch(err => Promise.reject(err))
 }
 
-export async function compileLess(targetDirname: string, distDirname: string): Promise<void | void[]> {
+export async function compileLess(targetDirname: string, distDirname: string, isCdk: boolean): Promise<void | void[]> {
   const promiseList = []
 
   for (const componentDirname of readdirSync(distDirname)) {
@@ -49,20 +49,23 @@ export async function compileLess(targetDirname: string, distDirname: string): P
     }
   }
 
-  // Copy concentrated less files.
-  await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
-  await copyFile(`${targetDirname}/components.less`, `${distDirname}/components.less`)
-  await copyFile(`${targetDirname}/index.less`, `${distDirname}/index.less`)
+  if (!isCdk) {
+    // Copy concentrated less files.
+    await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
+    await copyFile(`${targetDirname}/components.less`, `${distDirname}/components.less`)
+    await copyFile(`${targetDirname}/index.less`, `${distDirname}/index.less`)
 
-  // Compile concentrated less file to CSS file.
-  const lessContent = `@import "${path.posix.join(distDirname, 'index.less')}";`
-  promiseList.push(compile(lessContent, path.join(distDirname, 'index.css'), false))
-  promiseList.push(compile(lessContent, path.join(distDirname, 'index.min.css'), true))
+    // Compile concentrated less file to CSS file.
+    const lessContent = `@import "${path.posix.join(distDirname, 'index.less')}";`
+    promiseList.push(compile(lessContent, path.join(distDirname, 'index.css'), false))
+    promiseList.push(compile(lessContent, path.join(distDirname, 'index.min.css'), true))
 
-  // Compile css file that doesn't have component-specific styles.
-  const baseLessPath = path.join(targetDirname, 'style', 'base.less')
-  const baseLess = await readFile(baseLessPath, { encoding: 'utf8' })
-  promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.css'), false, baseLessPath))
-  promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.min.css'), true, baseLessPath))
+    // Compile css file that doesn't have component-specific styles.
+    const baseLessPath = path.join(targetDirname, 'style', 'base.less')
+    const baseLess = await readFile(baseLessPath, { encoding: 'utf8' })
+    promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.css'), false, baseLessPath))
+    promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.min.css'), true, baseLessPath))
+  }
+
   return Promise.all(promiseList).catch(e => console.log(e))
 }

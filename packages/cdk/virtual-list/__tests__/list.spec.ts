@@ -15,7 +15,7 @@ const defaultProps = {
   height: 200,
   itemHeight: 20,
   itemKey: 'id',
-}
+} as const
 
 const defaultItemSlot = `
 <template #item="{ item, index }">
@@ -24,8 +24,11 @@ const defaultItemSlot = `
 `
 
 describe('list.ts', () => {
-  const VirtualListMount = (options?: MountingOptions<Partial<VirtualListProps>>) =>
-    mount(IxVirtualList, { ...options })
+  const VirtualListMount = (options?: MountingOptions<Partial<VirtualListProps>>) => {
+    const { props, ...rest } = options || {}
+    const mergedOptions = { props: { ...defaultProps, ...props }, ...rest } as MountingOptions<VirtualListProps>
+    return mount(IxVirtualList, mergedOptions)
+  }
 
   beforeAll(() => {
     jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 200)
@@ -38,7 +41,7 @@ describe('list.ts', () => {
   describe('basic work', () => {
     test('render work', () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(20), ...defaultProps },
+        props: { data: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
@@ -52,7 +55,7 @@ describe('list.ts', () => {
 
     test('component work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(20), ...defaultProps },
+        props: { data: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
@@ -70,7 +73,7 @@ describe('list.ts', () => {
 
     test('data work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(5), ...defaultProps },
+        props: { data: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
@@ -87,7 +90,7 @@ describe('list.ts', () => {
 
     test('fullHeight work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(5), ...defaultProps },
+        props: { data: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
@@ -104,7 +107,7 @@ describe('list.ts', () => {
 
     test('height work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(5), ...defaultProps },
+        props: { data: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
@@ -124,7 +127,7 @@ describe('list.ts', () => {
 
     test('itemHeight work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(5), ...defaultProps },
+        props: { data: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
@@ -141,7 +144,7 @@ describe('list.ts', () => {
 
     test('itemKey work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(20), ...defaultProps },
+        props: { data: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
@@ -158,7 +161,7 @@ describe('list.ts', () => {
         return h('span', { class: 'virtual-item' }, [`${id} - ${index}`])
       }
       const wrapper = VirtualListMount({
-        props: { data: getData(20), ...defaultProps, itemRender },
+        props: { data: getData(20), itemRender },
       })
 
       expect(wrapper.html()).toMatchSnapshot()
@@ -166,7 +169,7 @@ describe('list.ts', () => {
 
     test('virtual work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(20), ...defaultProps, virtual: false },
+        props: { data: getData(20), virtual: false },
         slots: { item: defaultItemSlot },
       })
 
@@ -205,7 +208,7 @@ describe('list.ts', () => {
 
     test('scrollTo work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(40), ...defaultProps },
+        props: { data: getData(40) },
         slots: { item: defaultItemSlot },
       })
       expect(wrapper.find('.ix-virtual-list-holder').element.scrollTop).toEqual(0)
@@ -250,14 +253,14 @@ describe('list.ts', () => {
 
     test('moving work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(100), ...defaultProps },
+        props: { data: getData(100) },
         slots: { item: defaultItemSlot },
       })
 
       wrapper.find('.ix-virtual-scrollbar-thumb').trigger('mousedown', { pageY: 0 })
 
       const mouseMoveEvent = new Event('mousemove') as MouseEvent
-      mouseMoveEvent.pageY = 10
+      ;(mouseMoveEvent as any).pageY = 10
       window.dispatchEvent(mouseMoveEvent)
       await flushPromises()
 
@@ -274,7 +277,7 @@ describe('list.ts', () => {
     test('onScroll work', async () => {
       const onScroll = jest.fn()
       const wrapper = VirtualListMount({
-        props: { data: getData(100), ...defaultProps },
+        props: { data: getData(100) },
         slots: { item: defaultItemSlot },
         attrs: { onScroll },
       })
@@ -288,7 +291,7 @@ describe('list.ts', () => {
   describe('touch work', () => {
     test('moving work', async () => {
       const wrapper = VirtualListMount({
-        props: { data: getData(100), ...defaultProps },
+        props: { data: getData(100) },
         slots: { item: defaultItemSlot },
       })
 

@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { AffixComponent } from './src/types'
 
-import IxAffix from './src/Affix.vue'
+import Affix from './src/Affix.vue'
 
-IxAffix.install = (app: App): void => {
-  app.component(IxAffix.name, IxAffix)
-}
+const IxAffix = Affix as unknown as AffixComponent
 
 export { IxAffix }
 
-export type { AffixInstance, AffixProps, AffixOffset, AffixDirection } from './src/types'
+export type { AffixInstance, AffixPublicProps as AffixProps, AffixOffset, AffixDirection } from './src/types'

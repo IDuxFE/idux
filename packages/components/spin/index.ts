@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { SpinComponent } from './src/types'
 
-import IxSpin from './src/Spin.vue'
+import Spin from './src/Spin.vue'
 
-IxSpin.install = (app: App): void => {
-  app.component(IxSpin.name, IxSpin)
-}
+const IxSpin = Spin as unknown as SpinComponent
 
 export { IxSpin }
 
-export type { SpinInstance, SpinProps } from './src/types'
+export type { SpinInstance, SpinPublicProps as SpinProps, SpinTipAlignType, SpinSize } from './src/types'

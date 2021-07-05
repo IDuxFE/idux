@@ -6,7 +6,7 @@ import IxOption from '../src/Option.vue'
 import IxOptionGroup from '../src/OptionGroup.vue'
 import { OptionProps, SelectProps } from '../src/types'
 
-describe('Select.vue', () => {
+describe('Select', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const SelectMount = (options = {}) => {
     return mount(

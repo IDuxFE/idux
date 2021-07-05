@@ -1,23 +1,17 @@
-import type { App } from 'vue'
+import type { TimelineComponent, TimelineItemComponent } from './src/types'
 
-import IxTimeline from './src/Timeline.vue'
-import IxTimelineItem from './src/TimelineItem.vue'
+import Timeline from './src/Timeline.vue'
+import TimelineItem from './src/TimelineItem.vue'
 
-IxTimeline.install = (app: App): void => {
-  app.component(IxTimeline.name, IxTimeline)
-}
-
-IxTimelineItem.install = (app: App): void => {
-  app.component(IxTimelineItem.name, IxTimelineItem)
-}
+const IxTimeline = Timeline as unknown as TimelineComponent
+const IxTimelineItem = TimelineItem as unknown as TimelineItemComponent
 
 export { IxTimeline, IxTimelineItem }
 
 export type {
   TimelineInstance,
-  TimelineProps,
-  TimelinePosition,
+  TimelinePublicProps as TimelineProps,
   TimelineItemInstance,
-  TimelineItemProps,
+  TimelineItemPublicProps as TimelineItemProps,
   TimelineItemPosition,
 } from './src/types'

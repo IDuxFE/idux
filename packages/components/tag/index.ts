@@ -1,10 +1,9 @@
-import type { App } from 'vue'
-import IxTag from './src/Tag.vue'
+import type { TagComponent } from './src/types'
 
-IxTag.install = (app: App): void => {
-  app.component(IxTag.name, IxTag)
-}
+import Tag from './src/Tag.vue'
+
+const IxTag = Tag as unknown as TagComponent
 
 export { IxTag }
 
-export type { TagInstance, TagProps } from './src/types'
+export type { TagInstance, TagPublicProps as TagProps } from './src/types'

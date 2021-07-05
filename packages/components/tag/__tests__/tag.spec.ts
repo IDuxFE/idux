@@ -3,7 +3,7 @@ import { renderWork } from '@tests'
 import IxTag from '../src/Tag.vue'
 import { TagProps } from '../src/types'
 
-describe('Tag.vue', () => {
+describe('Tag', () => {
   const TagMount = (options?: MountingOptions<Partial<TagProps>>) => mount(IxTag, { ...options })
 
   renderWork(IxTag)

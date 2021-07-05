@@ -47,13 +47,13 @@ single: true
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
 | `controlCol` | 配置表单控件的布局，同 `<ix-col>` 组件，设置 `span` `offset` 的值 | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
-| `extra` | 额外的提示信息 | `string \| v-slot:extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
+| `extra` | 额外的提示信息 | `string \| #extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `hasFeedback` | 是否展示校验状态图标 | `boolean` | `false` | - | - |
-| `label` | `label` 标签的文本| `string \| v-slot:label` | - | - | - |
+| `label` | `label` 标签的文本| `string \| #label` | - | - | - |
 | `labelAlign` | `label` 标签文本对齐方式 | `left \| right` | - | - | - |
 | `labelCol` | `label` 标签布局，同 `<ix-col>` 组件，设置 `span` `offset` 的值  | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
 | `labelFor` | `label` 标签的 `for` 属性 | `string` | - | - | - |
-| `labelTooltip` | 配置提示信息 | `sting \| v-slot:tooltip` | - | - | - |
+| `labelTooltip` | 配置提示信息 | `sting \| #tooltip` | - | - | - |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |
 | `message` | 手动指定表单项的校验提示 | `string \| FormMessageFn \| FormStatusMessage` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
 | `status` | 手动指定表单项的校验状态 | `valid \| invalid \| validating` | - | - | - |

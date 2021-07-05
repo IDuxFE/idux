@@ -3,7 +3,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxListItem from '../src/ListItem.vue'
 import { ListItemProps } from '../src/types'
 
-describe('ListItem.vue', () => {
+describe('ListItem', () => {
   const ListItemMount = (options?: MountingOptions<Partial<ListItemProps>>) => mount(IxListItem, { ...options })
 
   renderWork(IxListItem)

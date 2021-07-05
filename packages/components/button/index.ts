@@ -1,25 +1,19 @@
-import type { App } from 'vue'
+import type { ButtonComponent, ButtonGroupComponent } from './src/types'
 
-import IxButton from './src/Button.vue'
-import IxButtonGroup from './src/ButtonGroup.vue'
+import Button from './src/Button'
+import ButtonGroup from './src/ButtonGroup'
 
-IxButton.install = (app: App): void => {
-  app.component(IxButton.name, IxButton)
-}
-
-IxButtonGroup.install = (app: App): void => {
-  app.component(IxButtonGroup.name, IxButtonGroup)
-}
+const IxButton = Button as unknown as ButtonComponent
+const IxButtonGroup = ButtonGroup as ButtonGroupComponent
 
 export { IxButton, IxButtonGroup }
 
 export type {
   ButtonInstance,
-  ButtonProps,
+  ButtonPublicProps as ButtonProps,
   ButtonMode,
   ButtonShape,
+  ButtonSize,
   ButtonGroupInstance,
-  ButtonGroupProps,
+  ButtonGroupPublicProps as ButtonGroupProps,
 } from './src/types'
-
-export type { ButtonSize } from '@idux/components/config'

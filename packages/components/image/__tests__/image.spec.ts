@@ -3,7 +3,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxImage from '../src/Image.vue'
 import { ImageProps } from '../src/types'
 
-describe('Image.vue', () => {
+describe('Image', () => {
   const ImageMount = (options?: MountingOptions<Partial<ImageProps>>) => mount(IxImage, { ...options })
 
   renderWork(IxImage)

@@ -3,7 +3,7 @@ import { renderWork } from '@tests'
 import IxStatistic from '../src/Statistic.vue'
 import { StatisticProps } from '../src/types'
 
-describe('Statistic.vue', () => {
+describe('Statistic', () => {
   const StatisticMount = (options?: MountingOptions<Partial<StatisticProps>>) => mount(IxStatistic, { ...options })
   renderWork(IxStatistic, {
     value: 112893.116,

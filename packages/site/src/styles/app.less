@@ -15,5 +15,32 @@
 
 .main-content {
   position: relative;
-  padding: 0 @spacing-4xl @spacing-2xl @spacing-4xl;
+  padding: 0 @spacing-4xl @spacing-2xl;
+}
+
+@media (max-width: @screen-lg-max) {
+  .main-content {
+    padding-left: @spacing-3xl;
+    padding-right: @spacing-3xl;
+  }
+}
+
+@media (max-width: @screen-md-max) {
+  .main-content {
+    padding-left: @spacing-2xl;
+    padding-right: @spacing-2xl;
+  }
+}
+
+@media (max-width: @screen-sm-max) {
+  .main-content {
+    padding-left: @spacing-xl;
+    padding-right: @spacing-xl;
+  }
+}
+@media (max-width: @screen-xs-max) {
+  .main-content {
+    padding-left: @spacing-lg;
+    padding-right: @spacing-lg;
+  }
 }

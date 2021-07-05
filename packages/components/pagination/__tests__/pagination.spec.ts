@@ -4,8 +4,9 @@ import IxPagination from '../src/Pagination'
 import { PaginationProps } from '../src/types'
 import { h, ref } from 'vue'
 import { PaginationItemRenderOptions } from '@idux/components/config'
+import { IxButton } from '@idux/components/button'
 
-describe('Pagination.vue', () => {
+describe('Pagination', () => {
   const PaginationMount = (options?: MountingOptions<Partial<PaginationProps>>) => mount(IxPagination, { ...options })
 
   renderWork(IxPagination)
@@ -206,7 +207,7 @@ describe('Pagination.vue', () => {
       const { type, original } = options
       if (type === 'prev' || type === 'next') {
         const text = type === 'prev' ? 'Previous' : 'Next'
-        return h('ix-button', { mode: 'text', size: 'small' }, { default: () => text })
+        return h(IxButton, { mode: 'text', size: 'small' }, { default: () => text })
       }
       return original
     }
@@ -224,8 +225,8 @@ describe('Pagination.vue', () => {
       props: { total: 50 },
       slots: {
         item: `<template #item="{ type, original }">
-          <ix-button v-if="type === 'prev'" mode="text" size="small">Previous</ix-button>
-          <ix-button v-else-if="type === 'next'" mode="text" size="small">Next</ix-button>
+          <button v-if="type === 'prev'">Previous</button>
+          <button v-else-if="type === 'next'">Next</button>
           <component :is="original" v-else />
         </template>`,
       },

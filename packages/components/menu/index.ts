@@ -1,40 +1,36 @@
-import type { App } from 'vue'
+import type {
+  MenuComponent,
+  MenuItemComponent,
+  MenuItemGroupComponent,
+  MenuDividerComponent,
+  SubMenuComponent,
+} from './src/types'
 
-import IxMenu from './src/menu/Menu.vue'
-import IxMenuItem from './src/menu/MenuItem.vue'
-import IxMenuItemGroup from './src/menu/MenuItemGroup.vue'
-import IxMenuDivider from './src/menu/MenuDivider.vue'
-import IxSubMenu from './src/sub-menu/SubMenu.vue'
+import Menu from './src/menu/Menu.vue'
+import MenuItem from './src/menu/MenuItem.vue'
+import MenuItemGroup from './src/menu/MenuItemGroup.vue'
+import MenuDivider from './src/menu/MenuDivider.vue'
+import SubMenu from './src/sub-menu/SubMenu.vue'
 
-IxMenu.install = (app: App): void => {
-  app.component(IxMenu.name, IxMenu)
-}
-
-IxMenuItem.install = (app: App): void => {
-  app.component(IxMenuItem.name, IxMenuItem)
-}
-
-IxMenuItemGroup.install = (app: App): void => {
-  app.component(IxMenuItemGroup.name, IxMenuItemGroup)
-}
-
-IxMenuDivider.install = (app: App): void => {
-  app.component(IxMenuDivider.name, IxMenuDivider)
-}
-
-IxSubMenu.install = (app: App): void => {
-  app.component(IxSubMenu.name, IxSubMenu)
-}
+const IxMenu = Menu as unknown as MenuComponent
+const IxMenuItem = MenuItem as unknown as MenuItemComponent
+const IxMenuItemGroup = MenuItemGroup as unknown as MenuItemGroupComponent
+const IxMenuDivider = MenuDivider as MenuDividerComponent
+const IxSubMenu = SubMenu as unknown as SubMenuComponent
 
 export { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu }
 
 export type {
   MenuInstance,
-  MenuProps,
+  MenuPublicProps as MenuProps,
   MenuItemInstance,
-  MenuItemProps,
+  MenuItemPublicProps as MenuItemProps,
   MenuItemGroupInstance,
-  MenuItemGroupProps,
+  MenuItemGroupPublicProps as MenuItemGroupProps,
+  MenuDividerInstance,
+  MenuDividerPublicProps as MenuDividerProps,
   SubMenuInstance,
-  SubMenuProps,
+  SubMenuPublicProps as SubMenuProps,
+  MenuMode,
+  MenuTheme,
 } from './src/types'

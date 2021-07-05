@@ -1,21 +1,25 @@
-import type { App } from 'vue'
+import type { FormComponent, FormItemComponent, FormWrapperComponent } from './src/types'
 
-import IxForm from './src/Form.vue'
-import IxFormItem from './src/FormItem.vue'
-import IxFormWrapper from './src/FormWrapper.vue'
+import Form from './src/Form.vue'
+import FormItem from './src/FormItem.vue'
+import FormWrapper from './src/FormWrapper.vue'
 
-IxForm.install = (app: App): void => {
-  app.component(IxForm.name, IxForm)
-}
-
-IxFormItem.install = (app: App): void => {
-  app.component(IxFormItem.name, IxFormItem)
-}
-
-IxFormWrapper.install = (app: App): void => {
-  app.component(IxFormWrapper.name, IxFormWrapper)
-}
+const IxForm = Form as unknown as FormComponent
+const IxFormItem = FormItem as unknown as FormItemComponent
+const IxFormWrapper = FormWrapper as unknown as FormWrapperComponent
 
 export { IxForm, IxFormItem, IxFormWrapper }
 
-export type { FormInstance, FormProps, FormItemInstance, FormItemProps } from './src/types'
+export type {
+  FormInstance,
+  FormPublicProps as FormProps,
+  FormItemInstance,
+  FormItemPublicProps as FormItemProps,
+  FormWrapperInstance,
+  FormWrapperPublicProps as FormWrapperProps,
+  FormLabelAlign,
+  FormLayout,
+  FormSize,
+  FormMessageFn,
+  FormMessage,
+} from './src/types'

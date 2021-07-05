@@ -7,8 +7,7 @@
     :size="size"
     type="prev"
     @itemClick="onItemClick"
-  >
-  </ix-pagination-item>
+  ></ix-pagination-item>
   <li class="ix-pagination-item">
     <ix-input :disabled="disabled" :size="size" :value="pageIndex.toString()" @keydown.enter="jumpToIndex" />
     <span class="ix-pagination-item-slash">/</span>
@@ -22,14 +21,14 @@
     :size="size"
     type="next"
     @itemClick="onItemClick"
-  >
-  </ix-pagination-item>
+  ></ix-pagination-item>
 </template>
 
 <script lang="ts">
+import type { PaginationItemType } from './types'
+
 import { defineComponent, ref, watchEffect } from 'vue'
 import { toNumber } from '@idux/cdk/utils'
-import { PaginationItemType } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
 import IxPaginationItem from './Item'
 import { paginationSimpleProps } from './types'

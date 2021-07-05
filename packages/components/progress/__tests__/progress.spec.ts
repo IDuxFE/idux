@@ -2,7 +2,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxProgress from '../src/Progress.vue'
 import { ProgressProps } from '../src/types'
 
-describe('Progress.vue', () => {
+describe('Progress', () => {
   const ProgressMount = (options?: MountingOptions<Partial<ProgressProps>>) => mount(IxProgress, { ...options })
 
   test('render line progress work', () => {

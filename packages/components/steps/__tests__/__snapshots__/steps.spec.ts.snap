@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Steps.vue render work 1`] = `
+exports[`Steps render work 1`] = `
 "<div class=\\"ix-steps ix-steps-horizontal ix-steps-medium\\">
   <div class=\\"ix-step ix-step-finish\\">
     <div class=\\"ix-step-tail\\"></div>

@@ -26,8 +26,8 @@ cover:
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 类型，可选 `line` `circle` `dashboard` | `string` | `line` | - | - |
-| `format` | 内容的函数模板，支持插槽 | `function(percent, successPercent) \| v-slot:format="percent, successPercent"`| percent => percent + '%' | ✅ | - |
-| `percent` | 百分比 | `function(percent, successPercent) \| v-slot:format="percent, successPercent"`| percent => percent + '%' | - | - |
+| `format` | 内容的函数模板，支持插槽 | `function(percent, successPercent) \| #format="percent, successPercent"`| percent => percent + '%' | ✅ | - |
+| `percent` | 百分比 | `function(percent, successPercent) \| #format="percent, successPercent"`| percent => percent + '%' | - | - |
 | `percent` | 百分比 | `number` | 0  | - | - |
 | `status` | 状态，可选：`success` `exception` `normal` `active`(仅限line) | `string` | - | - | - |
 | `hideInfo` | 是否显示进度数值或状态图标 | `boolean` | `false` | - | - |

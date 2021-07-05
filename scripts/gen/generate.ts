@@ -13,7 +13,7 @@ import {
   getLessTemplate,
   getTestTemplate,
   getTypesTemplate,
-  getDocsZhTemplate,
+  getDocsTemplate,
   getVueTemplate,
   getDemoTemplate,
   getDemoVueTemplate,
@@ -153,8 +153,8 @@ class Generate {
       return Promise.resolve()
     }
 
-    const docsZhTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type)
-    const docsEnTemplate = getDocsZhTemplate(name, category, upperFirst(camelCase(name)), type, true)
+    const docsZhTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type)
+    const docsEnTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type, true)
     const demoTemplate = getDemoTemplate()
     const demoVueTemplate = getDemoVueTemplate(kebabCase(name))
 
@@ -202,7 +202,7 @@ class Generate {
     const currIndexPath = resolve(this.packageRoot, 'index.ts')
     let currIndexContent = await readFile(currIndexPath, 'utf-8')
     currIndexContent = currIndexContent
-      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from './${kebabCase(name)}'`)
+      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`)
       .replace(componentsRegx, `${componentsRegx}\n  Ix${upperFirstName},`)
       .replace(exportRegx, `${exportRegx}\n  Ix${upperFirstName},`)
     writeFile(currIndexPath, currIndexContent)

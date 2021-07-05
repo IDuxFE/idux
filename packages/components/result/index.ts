@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { ResultComponent } from './src/types'
 
-import IxResult from './src/Result.vue'
+import Result from './src/Result.vue'
 
-IxResult.install = (app: App): void => {
-  app.component(IxResult.name, IxResult)
-}
+const IxResult = Result as unknown as ResultComponent
 
 export { IxResult }
 
-export type { ResultInstance, ResultProps } from './src/types'
+export type { ResultInstance, ResultPublicProps as ResultProps, ResultStatus } from './src/types'

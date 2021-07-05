@@ -1,9 +1,13 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, InputHTMLAttributes, TextareaHTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import type { FormSize, TextareaAutoRows, TextareaResize } from '@idux/components/config'
+import type { FormSize } from '@idux/components/form'
 
 import { controlProp } from '@idux/cdk/forms'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
+export type TextareaAutoRows = { minRows: number; maxRows: number }
 
 const commonProps = {
   value: IxPropTypes.string,
@@ -32,13 +36,13 @@ export const inputProps = {
   borderless: IxPropTypes.bool,
 }
 
-export type InputProps = IxExtractPropTypes<typeof inputProps>
-
+export type InputProps = IxInnerPropTypes<typeof inputProps>
+export type InputPublicProps = IxPublicPropTypes<typeof inputProps>
 export interface InputBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
-
+export type InputComponent = DefineComponent<InputHTMLAttributes & typeof inputProps, InputBindings>
 export type InputInstance = InstanceType<DefineComponent<InputProps, InputBindings>>
 
 export const textareaProps = {
@@ -50,11 +54,12 @@ export const textareaProps = {
   computeCount: IxPropTypes.func<(value: string) => string>(),
 }
 
-export type TextareaProps = IxExtractPropTypes<typeof textareaProps>
-
+export type TextareaProps = IxInnerPropTypes<typeof textareaProps>
+export type TextareaPublicProps = IxPublicPropTypes<typeof textareaProps>
 export interface TextareaBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
 
+export type TextareaComponent = DefineComponent<TextareaHTMLAttributes & typeof textareaProps, TextareaBindings>
 export type TextareaInstance = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>

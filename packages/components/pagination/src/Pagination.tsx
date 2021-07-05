@@ -1,9 +1,10 @@
 import type { ComputedRef, VNodeTypes } from 'vue'
-import type { PaginationProps } from './types'
+import type { PaginationConfig } from '@idux/components/config'
+import type { PaginationInnerProps, PaginationSize } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
 import { getLocale } from '@idux/components/i18n'
-import { PaginationConfig, PaginationSize, useGlobalConfig } from '@idux/components/config'
+import { useGlobalConfig } from '@idux/components/config'
 import IxPaginationTotal from './Total'
 import IxPaginationDefault from './Default.vue'
 import IxPaginationSimple from './Simple.vue'
@@ -101,7 +102,7 @@ export default defineComponent({
   },
 })
 
-const useClasses = (props: PaginationProps, simple: ComputedRef<boolean>, size: ComputedRef<PaginationSize>) => {
+const useClasses = (props: PaginationInnerProps, simple: ComputedRef<boolean>, size: ComputedRef<PaginationSize>) => {
   return computed(() => {
     return {
       'ix-pagination': true,
@@ -123,7 +124,7 @@ const validatePageIndex = (index: number, lastIndex: number) => {
 }
 
 const useActive = (
-  props: PaginationProps,
+  props: PaginationInnerProps,
   config: PaginationConfig,
   emit: (event: 'update:pageIndex' | 'update:pageSize', ...args: number[]) => void,
 ) => {

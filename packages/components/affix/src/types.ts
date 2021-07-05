@@ -1,6 +1,7 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export type AffixDirection = 'top' | 'bottom' | 'left' | 'right'
 export type AffixOffset = number | string | Partial<Record<AffixDirection, number | string>>
@@ -11,6 +12,7 @@ export const affixProps = {
   onChange: IxPropTypes.func<(value: boolean) => void>(),
 }
 
-export type AffixProps = IxExtractPropTypes<typeof affixProps>
-
+export type AffixProps = IxInnerPropTypes<typeof affixProps>
+export type AffixPublicProps = IxPublicPropTypes<typeof affixProps>
+export type AffixComponent = DefineComponent<HTMLAttributes & typeof affixProps>
 export type AffixInstance = InstanceType<DefineComponent<AffixProps>>

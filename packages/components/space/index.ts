@@ -1,13 +1,9 @@
-import type { App } from 'vue'
+import type { SpaceComponent } from './src/types'
 
-import IxSpace from './src/Space'
+import Space from './src/Space'
 
-IxSpace.install = (app: App): void => {
-  app.component(IxSpace.name, IxSpace)
-}
+const IxSpace = Space as unknown as SpaceComponent
 
 export { IxSpace }
 
-export type { SpaceInstance, SpaceProps, SpaceAlign, SpaceDirection } from './src/types'
-
-export type { SpaceSize } from '@idux/components/config'
+export type { SpaceInstance, SpacePublicProps as SpaceProps, SpaceAlign, SpaceDirection, SpaceSize } from './src/types'

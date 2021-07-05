@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { TooltipComponent } from './src/types'
 
-import IxTooltip from './src/Tooltip'
+import Tooltip from './src/Tooltip'
 
-IxTooltip.install = (app: App): void => {
-  app.component(IxTooltip.name, IxTooltip)
-}
+const IxTooltip = Tooltip as unknown as TooltipComponent
 
 export { IxTooltip }
 
-export type { TooltipInstance, TooltipProps } from './src/types'
+export type { TooltipInstance, TooltipPublicProps as TooltipProps } from './src/types'

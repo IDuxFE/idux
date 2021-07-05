@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { BackTopComponent } from './src/types'
 
-import IxBackTop from './src/BackTop.vue'
+import BackTop from './src/BackTop.vue'
 
-IxBackTop.install = (app: App): void => {
-  app.component(IxBackTop.name, IxBackTop)
-}
+const IxBackTop = BackTop as unknown as BackTopComponent
 
 export { IxBackTop }
 
-export type { BackTopInstance, BackTopProps } from './src/types'
+export type { BackTopInstance, BackTopPublicProps as BackTopProps } from './src/types'

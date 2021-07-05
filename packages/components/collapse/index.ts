@@ -1,15 +1,16 @@
-import type { App } from 'vue'
+import type { CollapseComponent, CollapsePanelComponent } from './src/types'
 
-import IxCollapse from './src/Collapse.vue'
-import IxCollapsePanel from './src/CollapsePanel.vue'
+import Collapse from './src/Collapse.vue'
+import CollapsePanel from './src/CollapsePanel.vue'
 
-IxCollapse.install = (app: App): void => {
-  app.component(IxCollapse.name, IxCollapse)
-}
-IxCollapsePanel.install = (app: App): void => {
-  app.component(IxCollapsePanel.name, IxCollapsePanel)
-}
+const IxCollapse = Collapse as unknown as CollapseComponent
+const IxCollapsePanel = CollapsePanel as unknown as CollapsePanelComponent
 
 export { IxCollapse, IxCollapsePanel }
 
-export type { CollapseProps, CollapseInstance, CollapsePanelProps, CollapsePanelInstance } from './src/types'
+export type {
+  CollapseInstance,
+  CollapsePublicProps as CollapseProps,
+  CollapsePanelProps,
+  CollapsePanelPublicProps as CollapsePanelInstance,
+} from './src/types'

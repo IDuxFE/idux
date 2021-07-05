@@ -4,7 +4,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxEmpty from '../src/Empty.vue'
 import { EmptyProps } from '../src/types'
 
-describe('Empty.vue', () => {
+describe('Empty', () => {
   const EmptyMount = (options?: MountingOptions<Partial<EmptyProps>>) => mount(IxEmpty, { ...options })
   renderWork(IxEmpty)
 

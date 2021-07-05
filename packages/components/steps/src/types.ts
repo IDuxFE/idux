@@ -1,6 +1,10 @@
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type StepStatus = 'wait' | 'process' | 'finish' | 'error'
+export type StepsSize = 'medium' | 'small'
 
 export const stepsProps = {
   active: IxPropTypes.number.def(0),
@@ -13,8 +17,9 @@ export const stepsProps = {
   status: IxPropTypes.oneOf<StepStatus>(['wait', 'process', 'finish', 'error']).def('process'),
 }
 
-export type StepsProps = IxExtractPropTypes<typeof stepsProps>
-
+export type StepsProps = IxInnerPropTypes<typeof stepsProps>
+export type StepsPublicProps = IxPublicPropTypes<typeof stepsProps>
+export type StepsComponent = DefineComponent<HTMLAttributes & typeof stepsProps>
 export type StepsInstance = InstanceType<DefineComponent<StepsProps>>
 
 export const stepProps = {
@@ -27,8 +32,7 @@ export const stepProps = {
   status: IxPropTypes.oneOf<StepStatus>(['wait', 'process', 'finish', 'error']),
 }
 
-export type StepProps = IxExtractPropTypes<typeof stepProps>
-
+export type StepProps = IxInnerPropTypes<typeof stepProps>
+export type StepPublicProps = IxPublicPropTypes<typeof stepProps>
+export type StepComponent = DefineComponent<HTMLAttributes & typeof stepProps>
 export type StepInstance = InstanceType<DefineComponent<StepProps>>
-
-export type StepStatus = 'wait' | 'process' | 'finish' | 'error'

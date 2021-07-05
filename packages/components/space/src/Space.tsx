@@ -1,10 +1,9 @@
 import type { VNode, CSSProperties } from 'vue'
-import type { SpaceSize } from '@idux/components/config'
-import type { SpaceDirection, SpaceProps } from './types'
+import type { SpaceDirection, SpaceProps, SpaceSize } from './types'
 
 import { defineComponent, computed } from 'vue'
 import { filterEmptyNode, getSlotNodes, Logger } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
+import { SpaceConfig, useGlobalConfig } from '@idux/components/config'
 import { spaceProps } from './types'
 
 export default defineComponent({
@@ -12,7 +11,7 @@ export default defineComponent({
   props: spaceProps,
   setup(props) {
     const config = useGlobalConfig('space')
-    const classes = useClasses(props)
+    const classes = useClasses(props, config)
     const size$$ = computed(() => props.size ?? config.size)
 
     return { classes, size$$ }
@@ -45,11 +44,11 @@ export default defineComponent({
   },
 })
 
-const useClasses = (props: SpaceProps) => {
+const useClasses = (props: SpaceProps, config: SpaceConfig) => {
   return computed(() => {
     return {
       'ix-space': true,
-      'ix-space-wrap': props.wrap,
+      'ix-space-wrap': props.wrap ?? config.wrap,
       [`ix-space-${props.align}`]: true,
       [`ix-space-${props.direction}`]: true,
     }

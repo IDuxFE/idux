@@ -1,11 +1,17 @@
-import type { App } from 'vue'
+import type { PaginationComponent } from './src/types'
 
-import IxPagination from './src/Pagination'
+import Pagination from './src/Pagination'
 
-IxPagination.install = (app: App): void => {
-  app.component(IxPagination.name, IxPagination)
-}
+const IxPagination = Pagination as unknown as PaginationComponent
 
 export { IxPagination }
 
-export type { PaginationInstance, PaginationProps } from './src/types'
+export type {
+  PaginationInstance,
+  PaginationProps,
+  PaginationSize,
+  PaginationItemType,
+  PaginationItemRenderOptions,
+  PaginationItemRenderFn,
+  PaginationTotalRenderFn,
+} from './src/types'

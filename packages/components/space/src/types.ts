@@ -1,7 +1,11 @@
-import type { DefineComponent } from 'vue'
-import type { SpaceSize } from '@idux/components/config'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
+export type SpaceDirection = 'vertical' | 'horizontal'
+export type SpaceSize = 'small' | 'medium' | 'large' | number
 
 const spaceSizeProp = IxPropTypes.oneOf<SpaceSize>(['small', 'medium', 'large'])
 
@@ -13,9 +17,7 @@ export const spaceProps = {
   wrap: IxPropTypes.bool,
 }
 
-export type SpaceProps = IxExtractPropTypes<typeof spaceProps>
-
+export type SpaceProps = IxInnerPropTypes<typeof spaceProps>
+export type SpacePublicProps = IxPublicPropTypes<typeof spaceProps>
+export type SpaceComponent = DefineComponent<HTMLAttributes & typeof spaceProps>
 export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>
-
-export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
-export type SpaceDirection = 'vertical' | 'horizontal'

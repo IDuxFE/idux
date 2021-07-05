@@ -1,5 +1,7 @@
-import type { DefineComponent } from 'vue'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const backTopProps = {
   count: IxPropTypes.oneOfType([Number, String]).def(0),
@@ -9,6 +11,7 @@ export const backTopProps = {
   color: IxPropTypes.string,
 }
 
-export type BadgeProps = IxExtractPropTypes<typeof backTopProps>
-
+export type BadgeProps = IxInnerPropTypes<typeof backTopProps>
+export type BadgePublicProps = IxPublicPropTypes<typeof backTopProps>
+export type BadgeComponent = DefineComponent<HTMLAttributes & typeof backTopProps>
 export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>

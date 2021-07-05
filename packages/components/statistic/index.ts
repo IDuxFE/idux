@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { StatisticComponent } from './src/types'
 
-import IxStatistic from './src/Statistic.vue'
+import Statistic from './src/Statistic.vue'
 
-IxStatistic.install = (app: App): void => {
-  app.component(IxStatistic.name, IxStatistic)
-}
+const IxStatistic = Statistic as unknown as StatisticComponent
 
 export { IxStatistic }
 
-export type { StatisticInstance, StatisticProps } from './src/types'
+export type { StatisticInstance, StatisticPublicProps as StatisticProps } from './src/types'

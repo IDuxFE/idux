@@ -26,7 +26,7 @@ order: 0
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `compareWith` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
-| `empty` | 自定义当下拉列表为空时显示的内容 | `string \| v-slot:empty` | - | - | - |
+| `empty` | 自定义当下拉列表为空时显示的内容 | `string \| #empty` | - | - | - |
 | `filterOption` | 根据搜索的文本进行筛选 | `boolean \| (searchValue: string, option: OptionProps) => boolean` | `true` | - | 为 `true` 时使用 `defaultFilterFn`, 如果使用远程搜索，应该设置为 `false` |
 | `inputable` | 允许输入模式 | `boolean` | `false` | - | `Todo` |
 | `labelKey` | 标签的 key | `string` | `label` | ✅ | 仅在使用 `options` 时有效 |
@@ -38,7 +38,7 @@ order: 0
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean` | `false` | ✅ | - |
 | `size` | 设置选择器大小 | `large \| medium \| small` | `medium` | ✅ | - |
-| `suffix` | 设置后缀图标 | `string \| v-slot:suffix` | - | ✅ | 单选默认为 `down` |
+| `suffix` | 设置后缀图标 | `string \| #suffix` | - | ✅ | 单选默认为 `down` |
 
 ```ts
 export interface SelectOption {

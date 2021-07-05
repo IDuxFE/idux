@@ -32,6 +32,7 @@ import type {
   ListConfig,
   FormConfig,
   PaginationConfig,
+  ModalConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -56,7 +57,7 @@ const divider = shallowReactive<DividerConfig>({
   type: 'horizontal',
 })
 
-const space = shallowReactive<SpaceConfig>({ size: 'small' })
+const space = shallowReactive<SpaceConfig>({ size: 'small', wrap: true })
 
 const row = shallowReactive<RowConfig>({ wrap: true })
 
@@ -185,6 +186,16 @@ const message = shallowReactive<MessageConfig>({
   destroyOnHover: false,
 })
 
+const modal = shallowReactive<ModalConfig>({
+  centered: false,
+  closable: true,
+  closeIcon: 'close',
+  closeOnEsc: true,
+  mask: true,
+  maskClosable: true,
+  width: 520,
+})
+
 const result = shallowReactive<ResultConfig>({ status: 'info' })
 
 const spin = shallowReactive<SpinConfig>({
@@ -254,6 +265,7 @@ export const defaultConfig: GlobalConfig = {
   popover,
   // Feedback
   message,
+  modal,
   result,
   spin,
   drawer,

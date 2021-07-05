@@ -1,10 +1,14 @@
-import IxVirtualList from './src/List'
+import type { VirtualListComponent } from './src/types'
+
+import VirtualList from './src/List'
+
+const IxVirtualList = VirtualList as unknown as VirtualListComponent
 
 export { IxVirtualList }
 
 export type {
   VirtualListInstance,
-  VirtualListProps,
+  VirtualListPublicProps as VirtualListProps,
   VirtualItemRenderFn,
   ScrollToAlign,
   ScrollToOptions,

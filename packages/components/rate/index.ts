@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { RateComponent } from './src/types'
 
-import IxRate from './src/Rate.vue'
+import Rate from './src/Rate.vue'
 
-IxRate.install = (app: App): void => {
-  app.component(IxRate.name, IxRate)
-}
+const IxRate = Rate as unknown as RateComponent
 
 export { IxRate }
 
-export type { RateInstance, RateProps } from './src/types'
+export type { RateInstance, RatePublicProps as RateProps } from './src/types'

@@ -1,10 +1,9 @@
-import type { App } from 'vue'
+import type { SwitchComponent } from './src/types'
 
-import IxSwitch from './src/Switch.vue'
+import Switch from './src/Switch.vue'
 
-IxSwitch.install = (app: App): void => {
-  app.component(IxSwitch.name, IxSwitch)
-}
+const IxSwitch = Switch as unknown as SwitchComponent
 
 export { IxSwitch }
-export type { SwitchInstance, SwitchProps } from './src/types'
+
+export type { SwitchInstance, SwitchPublicProps as SwitchProps } from './src/types'

@@ -22,8 +22,8 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `title` | 浮层的标题 | `string \| v-slot: title` | - | - | - |
-| `content` | 浮层内容 | `string \| v-slot: content` | - | - | 必传 |
+| `title` | 浮层的标题 | `string \| #title` | - | - | - |
+| `content` | 浮层内容 | `string \| #content` | - | - | 必传 |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
 | `visibile` | 是否显隐 | `boolean` | - | - | - |
 | `trigger` | 浮层触发方式 | `OverlayTrigger` | `click` | ✅ | - |

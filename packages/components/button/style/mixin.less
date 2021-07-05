@@ -14,7 +14,7 @@
 }
 
 .button-disabled(@color: @button-disable-color; @background: @button-disable-bg-color; @border: @button-disable-border) {
-  &[disabled] {
+  &.@{button-prefix}-disabled {
     &,
     &:hover,
     &:focus,
@@ -129,19 +129,14 @@
   &:focus {
     outline: 0;
   }
-  &:not([disabled]):hover {
+  &:hover {
     text-decoration: none;
   }
-  &:not([disabled]):active {
+  &:active {
     outline: 0;
     box-shadow: none;
   }
-  &[disabled] {
-    cursor: not-allowed;
-    > * {
-      pointer-events: none;
-    }
-  }
+
   &-small {
     .button-size(@button-height-sm; @button-font-size-sm;  @button-padding-sm;@button-border-radius);
   }

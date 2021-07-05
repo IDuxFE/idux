@@ -1,16 +1,16 @@
-import type { App } from 'vue'
+import type { CheckboxComponent, CheckboxGroupComponent } from './src/types'
 
-import IxCheckbox from './src/Checkbox.vue'
-import IxCheckboxGroup from './src/CheckboxGroup.vue'
+import Checkbox from './src/Checkbox.vue'
+import CheckboxGroup from './src/CheckboxGroup.vue'
 
-IxCheckbox.install = (app: App): void => {
-  app.component(IxCheckbox.name, IxCheckbox)
-}
-
-IxCheckboxGroup.install = (app: App): void => {
-  app.component(IxCheckboxGroup.name, IxCheckboxGroup)
-}
+const IxCheckbox = Checkbox as unknown as CheckboxComponent
+const IxCheckboxGroup = CheckboxGroup as unknown as CheckboxGroupComponent
 
 export { IxCheckbox, IxCheckboxGroup }
 
-export type { CheckboxInstance, CheckboxProps, CheckboxGroupInstance, CheckboxGroupProps } from './src/types'
+export type {
+  CheckboxInstance,
+  CheckboxPublicProps as CheckboxProps,
+  CheckboxGroupInstance,
+  CheckboxGroupPublicProps as CheckboxGroupProps,
+} from './src/types'

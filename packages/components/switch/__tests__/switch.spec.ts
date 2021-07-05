@@ -4,7 +4,7 @@ import { renderWork } from '@tests'
 import IxSwitch from '../src/Switch.vue'
 import { SwitchProps } from '../src/types'
 
-describe('Switch.vue', () => {
+describe('Switch', () => {
   const SwitchMount = (options?: MountingOptions<Partial<SwitchProps>>) => mount(IxSwitch, { ...options })
 
   renderWork(IxSwitch)

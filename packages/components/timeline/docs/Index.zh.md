@@ -22,8 +22,8 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `pending` | 设置幽灵节点 | `boolean\|string\|v-slot:pending` | `false` | - |- |
-| `pendingDot` | 幽灵节点存在时的时间轴点 | `string\|v-slot:pendingDot` | `undefined` | - |- |
+| `pending` | 设置幽灵节点 | `boolean\|string\|#pending` | `false` | - |- |
+| `pendingDot` | 幽灵节点存在时的时间轴点 | `string\|#pendingDot` | `undefined` | - |- |
 | `reverse` | 时间节点是否倒叙 | `boolean` | `false` | - |- |
 | `position` | 时间轴和内容的相对位置 | `left\|alternate\|right` | `right` | - |- |
 
@@ -34,5 +34,5 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `color` | 时间节点颜色 | `PresetColor \| StatusColor \| string` | `primary` | - |- |
-| `dot` | 时间轴点 | `string\|v-slot:dot` | `undefined` | - |- |
+| `dot` | 时间轴点 | `string\|#dot` | `undefined` | - |- |
 | `position` | 时间节点内容的位置 | `left\|right` | `undefined` | - |- |

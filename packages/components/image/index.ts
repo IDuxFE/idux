@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { ImageComponent } from './src/types'
 
-import IxImage from './src/Image.vue'
+import Image from './src/Image.vue'
 
-IxImage.install = (app: App): void => {
-  app.component(IxImage.name, IxImage)
-}
+const IxImage = Image as unknown as ImageComponent
 
 export { IxImage }
 
-export type { ImageInstance, ImageProps, ImageStatus } from './src/types'
+export type { ImageInstance, ImagePublicProps as ImageProps, ImageStatus } from './src/types'

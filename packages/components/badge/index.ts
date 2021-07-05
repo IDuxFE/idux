@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { BadgeComponent } from './src/types'
 
-import IxBadge from './src/Badge.vue'
+import Badge from './src/Badge.vue'
 
-IxBadge.install = (app: App): void => {
-  app.component(IxBadge.name, IxBadge)
-}
+const IxBadge = Badge as unknown as BadgeComponent
 
 export { IxBadge }
 
-export type { BadgeInstance, BadgeProps } from './src/types'
+export type { BadgeInstance, BadgePublicProps as BadgeProps } from './src/types'

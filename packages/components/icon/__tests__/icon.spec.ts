@@ -9,7 +9,7 @@ const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }
 const Down: IconDefinition = { name: 'down', svgString: '<svg></svg>' }
 const Loading: IconDefinition = { name: 'loading', svgString: '<svg></svg>' }
 
-describe('Icon.vue', () => {
+describe('Icon', () => {
   const IconMount = (options?: MountingOptions<Partial<IconProps>>) => mount(IxIcon, { ...options })
   test('render work', async () => {
     addIconDefinitions([Up])

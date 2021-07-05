@@ -5,7 +5,7 @@ import { ResultProps } from '../src/types'
 import { IxIcon } from '../../icon'
 import { renderWork } from '@tests'
 
-describe('Result.vue', () => {
+describe('Result', () => {
   const ResultMount = (options?: MountingOptions<Partial<ResultProps>>) => mount(IxResult, { ...options })
 
   renderWork(IxResult)
@@ -68,9 +68,9 @@ describe('Result.vue', () => {
             <li>2</li>
           </ul>
         </template>
-        <template v-slot:title>${title}</template>
-        <template v-slot:subtitle>${subtitle}</template>
-        <template v-slot:extra>${extra}</template>
+        <template #title>${title}</template>
+        <template #subtitle>${subtitle}</template>
+        <template #extra>${extra}</template>
       </IxResult>
       `,
     })

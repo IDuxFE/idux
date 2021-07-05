@@ -22,7 +22,7 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `title` | 浮层的标题 | `string \| v-slot: title` | - | - | - |
+| `title` | 浮层的标题 | `string \| #title` | - | - | - |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
 | `visible` | 是否显隐 | `boolean` | - | - | - |
 | `trigger` | 浮层触发方式 | `OverlayTrigger` | `hover` | ✅ | - |

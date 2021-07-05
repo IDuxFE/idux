@@ -1,16 +1,19 @@
-import type { App } from 'vue'
+import type { RowComponent, ColComponent } from './src/types'
 
-import IxRow from './src/Row.vue'
-import IxCol from './src/Col.vue'
+import Row from './src/Row.vue'
+import Col from './src/Col.vue'
 
-IxRow.install = (app: App): void => {
-  app.component(IxRow.name, IxRow)
-}
-
-IxCol.install = (app: App): void => {
-  app.component(IxCol.name, IxCol)
-}
+const IxRow = Row as unknown as RowComponent
+const IxCol = Col as unknown as ColComponent
 
 export { IxRow, IxCol }
 
-export type { RowInstance, RowProps, RowGutter, RowAlign, RowJustify, ColInstance, ColProps } from './src/types'
+export type {
+  RowInstance,
+  RowPublicProps as RowProps,
+  ColInstance,
+  ColPublicProps as ColProps,
+  RowGutter,
+  RowAlign,
+  RowJustify,
+} from './src/types'

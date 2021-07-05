@@ -1,5 +1,9 @@
-import type { DefineComponent } from 'vue'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
+import { IxPropTypes } from '@idux/cdk/utils'
+
+export type CheckValue = string | number | boolean
 
 export const checkboxProps = {
   checked: IxPropTypes.oneOfType([String, Number, Boolean]),
@@ -11,8 +15,9 @@ export const checkboxProps = {
   value: IxPropTypes.string,
 }
 
-export type CheckboxProps = IxExtractPropTypes<typeof checkboxProps>
-
+export type CheckboxProps = IxInnerPropTypes<typeof checkboxProps>
+export type CheckboxPublicProps = IxPublicPropTypes<typeof checkboxProps>
+export type CheckboxComponent = DefineComponent<LabelHTMLAttributes & typeof checkboxProps>
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps>>
 
 export const checkboxGroupProps = {
@@ -22,8 +27,7 @@ export const checkboxGroupProps = {
   name: IxPropTypes.string,
 }
 
-export type CheckboxGroupProps = IxExtractPropTypes<typeof checkboxGroupProps>
-
+export type CheckboxGroupProps = IxInnerPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupPublicProps = IxPublicPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupComponent = DefineComponent<HTMLAttributes & typeof checkboxGroupProps>
 export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>
-
-export type CheckValue = string | number | boolean

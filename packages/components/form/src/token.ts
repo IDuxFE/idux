@@ -1,6 +1,5 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
-import type { FormLabelAlign } from '@idux/components/config'
-import type { ColType, FormItemProps } from './types'
+import type { ColType, FormItemProps, FormLabelAlign } from './types'
 
 export interface FormContext {
   colonless: ComputedRef<boolean>

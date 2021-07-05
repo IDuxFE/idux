@@ -2,7 +2,8 @@ import type { ComputedRef, Ref } from 'vue'
 import type { AnchorProps } from './types'
 
 import { computed, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
-import { getOffset, off, on, scrollToTop } from '@idux/cdk/utils'
+import { scrollToTop } from '@idux/cdk/scroll'
+import { getOffset, off, on } from '@idux/cdk/utils'
 import { getTarget } from '@idux/components/utils'
 
 export interface UseLinks {

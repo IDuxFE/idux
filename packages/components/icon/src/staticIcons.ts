@@ -27,6 +27,7 @@ import {
   QuestionCircle,
   DoubleLeft,
   DoubleRight,
+  QuestionCircleFilled,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -47,13 +48,14 @@ export const staticIcons: IconDefinition[] = [
   CheckCircleFilled,
   Close,
   CloseCircle,
-  CloseCircleFilled,
+  CloseCircleFilled, // modal
   InfoCircle,
-  InfoCircleFilled,
-  ExclamationCircleFilled,
+  InfoCircleFilled, // modal
   ExclamationCircle,
+  ExclamationCircleFilled, // modal
   Star,
   VerticalAlignTop,
   Ellipsis,
   QuestionCircle,
+  QuestionCircleFilled, // modal
 ]

@@ -1,13 +1,13 @@
 import { mount, MountingOptions } from '@vue/test-utils'
 
 import IxPortal from '../src/Portal'
-import { PortalInstance, PortalProps } from '../src/types'
+import { PortalProps } from '../src/types'
 
-describe('Portal.vue', () => {
+describe('Portal', () => {
   const PortalMount = (options?: MountingOptions<Partial<PortalProps>>) =>
-    mount<PortalInstance>(IxPortal, {
+    mount(IxPortal, {
       slots: { default: `<div id='content'>content</div>` },
-      ...options,
+      ...(options as MountingOptions<PortalProps>),
       attachTo: 'body',
     })
 
@@ -49,13 +49,12 @@ describe('Portal.vue', () => {
     expect(container.querySelector('#content')).not.toBeNull()
   })
 
-  test('show work', async () => {
-    const wrapper = PortalMount({ props: { target: 'show-container', show: false } })
-    const container = document.body.querySelector('.show-container')!
-    expect(container.querySelector('#content')).toBeNull()
+  test('load work', async () => {
+    const wrapper = PortalMount({ props: { target: 'test-container', load: false } })
+    expect(document.body.querySelector('.test-container')).toBeNull()
 
-    await wrapper.setProps({ show: true })
+    await wrapper.setProps({ load: true })
 
-    expect(container.querySelector('#content')).not.toBeNull()
+    expect(document.body.querySelector('.test-container')).not.toBeNull()
   })
 })

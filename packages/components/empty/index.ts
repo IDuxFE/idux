@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { EmptyComponent } from './src/types'
 
-import IxEmpty from './src/Empty.vue'
+import Empty from './src/Empty.vue'
 
-IxEmpty.install = (app: App): void => {
-  app.component(IxEmpty.name, IxEmpty)
-}
+const IxEmpty = Empty as unknown as EmptyComponent
 
 export { IxEmpty }
 
-export type { EmptyInstance, EmptyProps } from './src/types'
+export type { EmptyInstance, EmptyPublicProps as EmptyProps } from './src/types'

@@ -1,11 +1,9 @@
-import type { App } from 'vue'
+import type { PopoverComponent } from './src/types'
 
-import IxPopover from './src/Popover.vue'
+import Popover from './src/Popover.vue'
 
-IxPopover.install = (app: App): void => {
-  app.component(IxPopover.name, IxPopover)
-}
+const IxPopover = Popover as unknown as PopoverComponent
 
 export { IxPopover }
 
-export type { PopoverInstance, PopoverProps } from './src/types'
+export type { PopoverInstance, PopoverPublicProps as PopoverProps } from './src/types'

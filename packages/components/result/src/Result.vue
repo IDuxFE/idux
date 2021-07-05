@@ -21,8 +21,8 @@
 </template>
 <script lang="ts">
 import type { SetupContext } from 'vue'
-import type { ResultConfig, ResultStatus } from '@idux/components/config'
-import type { ResultProps } from './types'
+import type { ResultConfig } from '@idux/components/config'
+import type { ResultProps, ResultStatus } from './types'
 
 import { computed, defineComponent, Slots } from 'vue'
 import { hasSlot } from '@idux/cdk/utils'

@@ -1,16 +1,18 @@
-import type { App } from 'vue'
+import type { StepsComponent, StepComponent } from './src/types'
 
-import IxSteps from './src/Steps'
-import IxStep from './src/Step'
+import Steps from './src/Steps'
+import Step from './src/Step'
 
-IxSteps.install = (app: App): void => {
-  app.component(IxSteps.name, IxSteps)
-}
-
-IxStep.install = (app: App): void => {
-  app.component(IxStep.name, IxStep)
-}
+const IxSteps = Steps as unknown as StepsComponent
+const IxStep = Step as unknown as StepComponent
 
 export { IxSteps, IxStep }
 
-export type { StepsInstance, StepsProps, StepInstance, StepProps } from './src/types'
+export type {
+  StepsInstance,
+  StepsPublicProps as StepsProps,
+  StepInstance,
+  StepPublicProps as StepProps,
+  StepsSize,
+  StepStatus,
+} from './src/types'

@@ -1,5 +1,7 @@
-import type { DefineComponent } from 'vue'
-import { IxExtractPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const rateProps = {
   value: IxPropTypes.oneOfType([Number, String]).def(0),
@@ -11,6 +13,7 @@ export const rateProps = {
   allowClear: IxPropTypes.bool,
 }
 
-export type RateProps = IxExtractPropTypes<typeof rateProps>
-
+export type RateProps = IxInnerPropTypes<typeof rateProps>
+export type RatePublicProps = IxPublicPropTypes<typeof rateProps>
+export type RateComponent = DefineComponent<HTMLAttributes & typeof rateProps>
 export type RateInstance = InstanceType<DefineComponent<RateProps>>

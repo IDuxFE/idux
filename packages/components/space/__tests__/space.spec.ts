@@ -1,11 +1,11 @@
+import type { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
+
 import { computed, defineComponent, PropType } from 'vue'
 import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import { IxButton } from '@idux/components/button'
 import { IxDivider } from '@idux/components/divider'
 import IxSpace from '../src/Space'
-import { SpaceAlign, SpaceDirection } from '../src/types'
-import { SpaceSize } from '@idux/components/config'
 
 const TestComponent = defineComponent({
   components: { IxSpace, IxButton, IxDivider },
@@ -22,7 +22,7 @@ const TestComponent = defineComponent({
         horizontal: 'vertical',
         vertical: 'horizontal',
       }
-      return hashmap[props.direction] as SpaceDirection
+      return hashmap[props.direction!] as SpaceDirection
     })
     return { dividerType }
   },
@@ -41,7 +41,7 @@ const TestComponent = defineComponent({
 `,
 })
 
-describe('Space.vue', () => {
+describe('Space', () => {
   renderWork(TestComponent)
 
   test('align work', async () => {
@@ -88,6 +88,9 @@ describe('Space.vue', () => {
 
   test('wrap work', async () => {
     const wrapper = mount(TestComponent)
+    expect(wrapper.classes()).toContain('ix-space-wrap')
+
+    await wrapper.setProps({ wrap: false })
     expect(wrapper.classes()).not.toContain('ix-space-wrap')
 
     await wrapper.setProps({ wrap: true })

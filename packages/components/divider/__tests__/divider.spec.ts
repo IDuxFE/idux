@@ -3,7 +3,7 @@ import { mount, MountingOptions } from '@vue/test-utils'
 import IxDivider from '../src/Divider.vue'
 import { DividerProps } from '../src/types'
 
-describe('Divider.vue', () => {
+describe('Divider', () => {
   const DividerMount = (options?: MountingOptions<Partial<DividerProps>>) => mount(IxDivider, { ...options })
   renderWork(IxDivider)
 

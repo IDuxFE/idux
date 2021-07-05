@@ -1,4 +1,4 @@
-@import "../variable/animation.less";
+@import '../variable/animation.less';
 
 .zoom-motion(@className, @origin: @scale-origin-zoom-center, @scale: @scale-zoom-big, @duration: @transition-duration-base) {
   .ix-@{className}-enter-active,
@@ -19,7 +19,7 @@
   .ix-@{className}-enter-from,
   .ix-@{className}-leave-to {
     opacity: 0;
-    transform: ~"scale(@{scale})";
+    transform: ~'scale(@{scale})';
   }
 }
 

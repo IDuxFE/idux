@@ -1,5 +1,5 @@
 import type { VNodeTypes } from 'vue'
-import type { PaginationItemRenderFn, PaginationItemType } from '@idux/components/config'
+import type { PaginationItemRenderFn, PaginationItemType } from './types'
 
 import { computed, defineComponent } from 'vue'
 import { IxButton } from '@idux/components/button'
@@ -15,7 +15,6 @@ const iconMap = {
 
 export default defineComponent({
   name: 'IxPaginationItem',
-  components: { IxButton },
   props: paginationItemProps,
   emits: ['itemClick'],
   setup(props, { emit }) {
@@ -71,8 +70,8 @@ const getChildren = (
   if (type === 'prev5' || type === 'next5') {
     original = (
       <span class="ix-pagination-item-jumper">
-        <ix-button mode="text" icon={icon} disabled={disabled} size="small" shape="circle" />
-        <ix-button
+        <IxButton mode="text" icon={icon} disabled={disabled} size="small" shape="circle" />
+        <IxButton
           class="ix-pagination-item-ellipsis"
           mode="text"
           icon="ellipsis"
@@ -84,9 +83,9 @@ const getChildren = (
     )
   } else {
     original = (
-      <ix-button mode="text" icon={icon} disabled={disabled} size="small" shape="circle">
+      <IxButton mode="text" icon={icon} disabled={disabled} size="small" shape="circle">
         {index}
-      </ix-button>
+      </IxButton>
     )
   }
 
