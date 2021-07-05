@@ -47,7 +47,7 @@ import { IxBackTop } from '@idux/components/back-top'
 import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 // --- import end ---
 
-const components: DefineComponent[] = [
+const components: DefineComponent<any, any, any, any, any, any, any, any, any, any>[] = [
   // components General
   IxButton,
   IxButtonGroup,
