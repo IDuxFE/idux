@@ -1,19 +1,21 @@
 <template>
   <ix-modal-provider ref="modalProviderRef">
-    <div class="root-wrapper">
-      <layout-header />
-      <div v-if="!!page" class="main-wrapper">
-        <ix-row>
-          <ix-col xs="0" sm="8" md="6" lg="5" xl="4" class="main-menu">
-            <layout-side-nav />
-          </ix-col>
-          <ix-col xs="24" sm="16" md="18" lg="19" xl="20" class="main-content">
-            <router-view></router-view>
-          </ix-col>
-        </ix-row>
+    <ix-message-provider>
+      <div class="root-wrapper">
+        <layout-header />
+        <div v-if="!!page" class="main-wrapper">
+          <ix-row>
+            <ix-col xs="0" sm="8" md="6" lg="5" xl="4" class="main-menu">
+              <layout-side-nav />
+            </ix-col>
+            <ix-col xs="24" sm="16" md="18" lg="19" xl="20" class="main-content">
+              <router-view></router-view>
+            </ix-col>
+          </ix-row>
+        </div>
+        <router-view v-else></router-view>
       </div>
-      <router-view v-else></router-view>
-    </div>
+    </ix-message-provider>
   </ix-modal-provider>
 </template>
 

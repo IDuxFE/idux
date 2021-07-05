@@ -179,10 +179,9 @@ const popover = shallowReactive<PopoverConfig>({
 
 // --------------------- Feedback ---------------------
 const message = shallowReactive<MessageConfig>({
+  destroyOnHover: false,
   duration: 3000,
   maxCount: 5,
-  top: 60,
-  destroyOnHover: false,
 })
 
 const modal = shallowReactive<ModalConfig>({

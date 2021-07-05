@@ -1,16 +1,18 @@
 ---
 title: 
-  zh: 手动更新内容和销毁
-  en: Manually update content and destroy
+  zh: 更新和销毁
+  en: Update and destroy
 order: 5
 ---
 
 ## zh
 
-通过 `id` 手动更新内容、关闭。
-更新内容后，自动关闭的定时器会重新计时。
+通过 `id` 手动更新内容、销毁。
+
+注意：更新 `duration` 后，自动销毁的定时器会重新计时。
 
 ## en
 
 Manually update content and close it with `id`.
-When the content is updated, the timer that is automatically turned off is re-timed.
+
+Note: After updating `duration`, the automatically destroyed timer will re-time.

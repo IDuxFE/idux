@@ -1,178 +1,123 @@
-import IxMessage from '../src/Message'
+import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { renderWork, wait } from '@tests'
+import Message from '../src/Message'
+import { MessageProps } from '../src/types'
 import { h } from 'vue'
-import { wait } from '@tests'
-import { MessageType } from '../src/types'
 import { IxIcon } from '@idux/components/icon'
 
 describe('Message', () => {
-  let container: HTMLElement
-  const getMessageItems = () => container.querySelectorAll('.ix-message-item')
-  const messageTypes: MessageType[] = ['info', 'success', 'warning', 'error', 'loading']
+  const content = 'This is a message'
+  const MessageMount = (options?: MountingOptions<Partial<MessageProps>>) => {
+    const { props, slots, ...rest } = options || {}
+    const _options = {
+      props: { visible: true, duration: 99, ...props },
+      slots: { default: () => content, ...slots },
+      attachTo: 'body',
+      ...rest,
+    } as MountingOptions<MessageProps>
+    return mount(Message, _options)
+  }
 
-  beforeAll(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    IxMessage.install({} as any)
-    container = document.querySelector('.ix-message-container')!
+  renderWork<MessageProps>(Message, {
+    props: { visible: true },
+    slots: { default: () => content },
+    attachTo: 'body',
   })
 
-  beforeEach(() => {
-    IxMessage.destroy()
-  })
+  test('visible work', async () => {
+    const onUpdateVisible = jest.fn()
+    const wrapper = MessageMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
+    await flushPromises()
 
-  messageTypes.forEach(type => {
-    test(`${type} work`, async () => {
-      const content = `This is a ${type} message`
-      const open = IxMessage[type]
-      open(content)
-      await wait(100)
+    expect(wrapper.isVisible()).toBe(false)
 
-      expect(container.textContent).toContain(content)
-      expect(container.querySelector(`.ix-message-item-${type}`)).toBeTruthy()
-    })
-  })
+    await wrapper.setProps({ visible: true })
 
-  test('open work', async () => {
-    const content = 'Open message'
-    IxMessage.open({ content, type: 'info' })
-    await wait(100)
-
-    expect(container.textContent).toContain(content)
-  })
-
-  test(`VNode content work`, async () => {
-    const content = h('div', { class: 'custom-content' }, 'custom content')
-    IxMessage.info(content)
-    await wait(200)
-
-    expect(container.textContent).toContain('custom content')
-    expect(document.querySelectorAll('.custom-content').length).toBe(1)
-  })
-
-  test(`icon work`, async () => {
-    const iconName = 'star'
-    const iconVNode = h(IxIcon, { name: 'star' })
-    IxMessage.info('icon name', { icon: iconName })
-    IxMessage.info('icon VNode', { icon: iconVNode })
+    expect(wrapper.isVisible()).toBe(true)
 
     await wait(100)
 
-    expect(document.querySelectorAll('.ix-icon-star').length).toBe(2)
-  })
-
-  test('destroy work', async () => {
-    const instance = IxMessage.info('message')
-    await wait(200)
-
-    expect(getMessageItems().length).toBe(1)
-
-    IxMessage.destroy(`not exist id`)
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(1)
-
-    IxMessage.destroy(instance.id)
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(0)
-
-    IxMessage.info('message1')
-    IxMessage.info('message2')
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(2)
-
-    IxMessage.destroy()
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(0)
-  })
-
-  test('instance destroy word', async () => {
-    const instance = IxMessage.info('message')
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(1)
-
-    instance.destroy()
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(0)
-  })
-
-  test(`duration work`, async () => {
-    IxMessage.success('message', { duration: 1000 })
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(1)
-
-    await wait(1000)
-
-    expect(getMessageItems().length).toBe(0)
-
-    IxMessage.success('message', { duration: 0 })
-
-    await wait(100)
-
-    expect(getMessageItems().length).toBe(1)
+    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test('destroyOnHover work', async () => {
-    IxMessage.info('message', { destroyOnHover: true, duration: 200 })
+    const wrapper = MessageMount()
+    await flushPromises()
+    await wrapper.trigger('mouseenter')
     await wait(100)
 
-    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseenter'))
-    await wait(200)
+    expect(wrapper.isVisible()).toBe(true)
 
-    expect(getMessageItems().length).toBe(0)
-
-    IxMessage.info('message2', { duration: 200 })
+    await wrapper.trigger('mouseleave')
     await wait(100)
-    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseenter'))
-    await wait(200)
 
-    expect(getMessageItems().length).toBe(1)
+    expect(wrapper.isVisible()).toBe(false)
 
-    container.querySelector('.ix-message-item')!.dispatchEvent(new MouseEvent('mouseleave'))
-    await wait(250)
+    await wrapper.setProps({ visible: true, destroyOnHover: true })
 
-    expect(getMessageItems().length).toBe(0)
+    await wrapper.trigger('mouseenter')
+    await wait(100)
+
+    expect(wrapper.isVisible()).toBe(false)
   })
 
-  test('id work', async () => {
-    const id1 = 'id1'
-    const id2 = 'id2'
-    IxMessage.info(`message1`, { id: id1 })
-    IxMessage.info(`message2`, { id: id1 })
-    IxMessage.info(`message3`, { id: id2 })
+  test(`duration work`, async () => {
+    const wrapper = MessageMount()
+    await flushPromises()
+    await wait(100)
+
+    expect(wrapper.isVisible()).toBe(false)
+
+    await wrapper.setProps({ visible: false })
+    await wrapper.setProps({ visible: true, duration: 199 })
+
+    expect(wrapper.isVisible()).toBe(true)
 
     await wait(100)
 
-    expect(getMessageItems().length).toBe(2)
-    expect(container.textContent).not.toContain('message1')
-    expect(container.textContent).toContain('message2message3')
+    expect(wrapper.isVisible()).toBe(true)
 
-    IxMessage.info(`message4`, { id: id2 })
     await wait(100)
 
-    expect(container.textContent).toContain('message4')
+    expect(wrapper.isVisible()).toBe(false)
+
+    await wrapper.setProps({ visible: false })
+    await wrapper.setProps({ visible: true, duration: 98 })
+    await wait(50)
+    await wrapper.setProps({ duration: 99 })
+    await wait(50)
+
+    expect(wrapper.isVisible()).toBe(true)
+
+    await wait(50)
+
+    expect(wrapper.isVisible()).toBe(false)
   })
 
-  test('onDestroy work', async () => {
-    const onDestroy = jest.fn()
+  test('icon work', async () => {
+    const wrapper = MessageMount({ props: { icon: 'up' } })
+    await flushPromises()
 
-    IxMessage.info('message', { onDestroy })
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
 
-    await wait(3100)
+    await wrapper.setProps({ icon: 'down' })
 
-    expect(onDestroy).toBeCalledTimes(1)
+    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
+
+    await wrapper.setProps({ icon: h(IxIcon, { name: 'up' }) })
+
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
   })
 
-  test('maxCount work', async () => {
-    new Array(10).fill('message').forEach((content, index) => {
-      IxMessage.info(`${content}${index}`)
-    })
-    await wait(100)
+  test('type work', async () => {
+    const wrapper = MessageMount()
+    await flushPromises()
 
-    expect(getMessageItems().length).toBe(5)
+    expect(wrapper.classes()).toContain('ix-message-info')
+
+    await wrapper.setProps({ type: 'success' })
+
+    expect(wrapper.classes()).toContain('ix-message-success')
   })
 })

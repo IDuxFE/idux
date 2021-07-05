@@ -1,14 +1,14 @@
 @button-primary-border: color(~`colorPalette('@{button-primary-bg}', 10) `);
 @button-danger-border: color(~`colorPalette('@{button-danger-bg}', 10) `);
 
-.button-size(@height; @font-size; @padding-horizontal; @border-radius) {
-  @padding-vertical: max(
+.button-size(@height; @font-size; @spacing-horizontal; @border-radius) {
+  @spacing-vertical: max(
     (round(((@height - @font-size * @button-line-height) / 2) * 10) / 10) - @button-border-size,
     0
   );
 
   height: @height;
-  padding: @padding-vertical @padding-horizontal;
+  padding: @spacing-vertical @spacing-horizontal;
   font-size: @font-size;
   border-radius: @border-radius;
 }

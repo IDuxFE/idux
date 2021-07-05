@@ -4,13 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IxMessage } from '@idux/components/message'
+import { useMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {
-    const onDestroy = () => IxMessage.success('Message destroyed')
-    const open = () => IxMessage.info('Message opened', { onDestroy })
-
+    const { info, success } = useMessage()
+    const onDestroy = () => success('Message destroyed')
+    const open = () => info('Message opened', { onDestroy })
     return { open }
   },
 })
