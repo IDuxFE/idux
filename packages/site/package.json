@@ -1,10 +1,10 @@
 {
   "name": "@idux/site",
   "version": "0.0.0",
-  "description": "A website for @idux",
   "private": true,
-  "author": "IduxFE<idux.feteam@gmail.com>",
+  "description": "A website for @idux",
   "license": "MIT",
+  "author": "IduxFE<idux.feteam@gmail.com>",
   "scripts": {
     "start": "vite",
     "build": "vite build"

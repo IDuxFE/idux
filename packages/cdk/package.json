@@ -2,12 +2,6 @@
   "name": "@idux/cdk",
   "version": "0.0.1",
   "description": "A UI Component Development Kit for Vue 3.x",
-  "author": "IduxFE<idux.feteam@gmail.com>",
-  "license": "MIT",
-  "scripts": {},
-  "main": "./index.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
   "keywords": [
     "vue",
     "vue3",
@@ -22,22 +16,28 @@
     "kit"
   ],
   "homepage": "https://github.com/IduxFE/idux#readme",
+  "bugs": {
+    "url": "https://github.com/IduxFE/idux/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/IduxFE/idux"
   },
-  "bugs": {
-    "url": "https://github.com/IduxFE/idux/issues"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/shared": "^3.0.0"
-  },
+  "license": "MIT",
+  "author": "IduxFE<idux.feteam@gmail.com>",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "scripts": {},
   "dependencies": {
     "@juggle/resize-observer": "^3.3.0",
     "@popperjs/core": "^2.9.0",
     "lodash": "^4.17.0",
     "vue-types": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/shared": "^3.0.0",
+    "vue": "^3.0.0"
   }
 }
