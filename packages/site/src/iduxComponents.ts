@@ -47,7 +47,7 @@ import { IxBackTop } from '@idux/components/back-top'
 import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 // --- import end ---
 
-const components: DefineComponent<any, any, any, any, any, any, any, any, any, any>[] = [
+const components = [
   // components General
   IxButton,
   IxButtonGroup,
@@ -115,7 +115,7 @@ const components: DefineComponent<any, any, any, any, any, any, any, any, any, a
   IxAnchor,
   IxAnchorLink,
   // --- components end ---
-]
+] as DefineComponent[]
 
 const directives: Record<string, Directive> = {
   // directives General
