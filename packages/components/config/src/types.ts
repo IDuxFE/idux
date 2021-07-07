@@ -10,7 +10,6 @@ import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
-import type { RadioMode } from '@idux/components/radio'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
@@ -105,9 +104,8 @@ export interface TextareaConfig {
   clearable: boolean
 }
 
-export interface RadioGroupConfig {
+export interface RadioConfig {
   size: FormSize
-  mode: RadioMode
 }
 
 export interface RateConfig {
@@ -260,7 +258,7 @@ export interface GlobalConfig {
   form: FormConfig
   input: InputConfig
   textarea: TextareaConfig
-  radioGroup: RadioGroupConfig
+  radio: RadioConfig
   rate: RateConfig
   select: SelectConfig
   // Data Display

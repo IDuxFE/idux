@@ -1,6 +1,5 @@
 <template>
   <ix-button @click="open">Customized content</ix-button>
-  <ix-message visible>this is message</ix-message>
 </template>
 
 <script lang="ts">

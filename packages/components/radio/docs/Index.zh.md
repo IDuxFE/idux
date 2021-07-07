@@ -5,42 +5,53 @@ title: Radio
 subtitle: 单选框
 ---
 
-
-
-## 何时使用
-
-- 1.用于在多个备选项中选中单个状态。
-- 2.和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。
+- 用于在多个备选项中选中单个状态。
+- 和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。
 
 ## API
 
-### `ix-radio`|`ix-radio-button`
+### ix-radio
 
-| 属性 | 说明 | 类型 | 默认值 | 全局配置 |
-| --- | --- | --- | --- | --- |
-| v-model:checked | 是否选中 | `boolean` | `false` | - |
-| value | 设置 `value`，与 `ix-radio-group` 配合使用| `any`| - | - |
-| disabled | 设定 `disable` 状态 | `boolean` | `false` | - |
-| name | 原生的`name`属性 | `any` | - | - |
+#### RadioProps
 
-### `ix-radio-group`
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `v-model:checked` | 是否选中 | `boolean` | `false` | - | - |
+| `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |
+| `buttoned` | 是否以按钮显示 | `boolean` | `false` | - | - |
+| `disabled` | 是否为禁用状态 | `boolean` | `false` | - | - |
+| `label` | 单选框的文本 | `string \| #default` | `false` | - | - |
+| `mode` | 按钮类型 | `'default' \| 'primary'`| `'default'` | - | 仅 `buttoned` 为 `true` 时生效  |
+| `size` | 按钮大小 | `'large' \| 'medium' \| 'small'`| `'medium'` | ✅ | 仅 `buttoned` 为 `true` 时生效 |
+| `value` | 设置单选框的值，与 `ix-radio-group` 配合使用 | `any`| - | - | - |
+| `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
+| `onChange` | 选中状态发生变化后的回调 | `(checked: boolean) => void`| - | - | - |
+| `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 
-| 属性 | 说明 | 类型 | 默认值 | 全局配置 |
-| --- | --- | --- | --- | --- |
-| v-model:value | 指定选中的 `ix-radio` 的 value 值 | `any` | - | - |
-| size | 大小，只对按钮样式生效 | `string` | `medium` | `medium` |
-| mode | 按钮样式的填充模式 | `string` | `border` | `border` |
-| disabled | 设定 `disable` 状态 | `boolean` | `false` |
-| color | 按钮样式的填充颜色 | `string` | `#00b27a` | `#00b27a` |
+#### RadioMethods
 
-### `Radio Event`
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `blur` | 移除焦点 | `(options?: FocusOptions) => void` | - |
+| `focus` | 获取焦点 | - | - |
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 绑定值变化时触发的事件 | `isChecked` |
+### ix-radio-group
 
-### `Radio Group Event`
+#### RadioGroupProps
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| change | 绑定值变化时触发的事件 | 选中的 Radio value 值 |
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `v-model:value` | 当前选中的值 | `any` | - | - | - |
+| `buttoned` | 设置单选框组内 `ix-radio` 的 `buttoned` | `boolean` | - | - | - |
+| `disabled` | 设置单选框组内 `ix-radio` 的 `disabled` | `boolean` | - | - | - |
+| `name` | 设置单选框组内的 `ix-radio` 的原生 `name` 属性 | `string` | - | - | - |
+| `mode` | 设置单选框组内 `ix-radio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
+| `options` | 以配置形式设置子元素 | `RadioOptions[]`| - | - | - |
+| `size` | 设置单选框组内 `ix-radio` 的 `size` | `'large' \| 'medium' \| 'small'`| - | - | - |
+| `onChange` | 选中值发生变化后的回调 | `(value: any) => void`| - | - | - |
+
+#### RadioGroupSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `default` | 设置单选框组的 `ix-radio` | - | - |

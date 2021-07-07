@@ -19,7 +19,7 @@ import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@
 import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
-import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
+import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxSelect, IxOption, IxOptionGroup } from '@idux/components/select'
 import { IxSwitch } from '@idux/components/switch'
@@ -47,7 +47,7 @@ import { IxBackTop } from '@idux/components/back-top'
 import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 // --- import end ---
 
-const components: DefineComponent[] = [
+const components = [
   // components General
   IxButton,
   IxButtonGroup,
@@ -78,7 +78,6 @@ const components: DefineComponent[] = [
   IxInput,
   IxTextarea,
   IxRadio,
-  IxRadioButton,
   IxRadioGroup,
   IxRate,
   IxSelect,
@@ -115,7 +114,7 @@ const components: DefineComponent[] = [
   IxAnchor,
   IxAnchorLink,
   // --- components end ---
-]
+] as DefineComponent[]
 
 const directives: Record<string, Directive> = {
   // directives General

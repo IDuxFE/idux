@@ -1,21 +1,14 @@
 <template>
-  <ix-radio v-model:checked="radio" :name="name" value="a" @change="onChange">a</ix-radio>
+  <ix-radio v-model:checked="checked">Checked: {{ checked }}</ix-radio>
 </template>
-<script>
+
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup() {
-    const radio = ref(false)
-    const onChange = value => {
-      console.log(value)
-    }
-    const name = ref('name')
-
-    return {
-      radio,
-      onChange,
-      name,
-    }
+    const checked = ref(false)
+    return { checked }
   },
 })
 </script>

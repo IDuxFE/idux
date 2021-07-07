@@ -1,70 +1,109 @@
-import { mount, MountingOptions } from '@vue/test-utils'
-import { ref } from 'vue'
-import IxRadio from '../src/Radio.vue'
+import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { renderWork } from '@tests'
+import Radio from '../src/Radio'
 import { RadioProps } from '../src/types'
 
-describe.skip('Radio.vue', () => {
-  const RadioMount = (options?: MountingOptions<Partial<RadioProps>>) => mount(IxRadio, { ...options })
+describe('Radio', () => {
+  const RadioMount = (options?: MountingOptions<Partial<RadioProps>>) => mount(Radio, { ...options })
 
-  test('render work', () => {
-    const wrapper = RadioMount()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+  renderWork<RadioProps>(Radio, { slots: { default: () => 'Radio' } })
 
-  test('radio checked work', async () => {
-    const checked = ref(false)
-    const wrapper = mount({
-      components: { IxRadio },
-      template: `<ix-radio v-model:checked="checked">A</ix-radio>`,
-      setup() {
-        return { checked }
-      },
-    })
-    expect(wrapper.classes()).toContain('ix-radio')
-    await wrapper.findAllComponents({ name: 'IxRadio' })[0].trigger('click')
+  test('checked work', async () => {
+    const wrapper = RadioMount({ props: { checked: true } })
+
     expect(wrapper.classes()).toContain('ix-radio-checked')
-    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ checked: false })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-checked')
   })
 
-  test('radio name work', async () => {
-    const checked = ref(false)
-    const name = ref('name')
-    const wrapper = mount({
-      components: { IxRadio },
-      template: `<ix-radio v-model:checked="checked" :name="name">A</ix-radio>`,
-      setup() {
-        return { checked, name }
-      },
-    })
-    const input = wrapper.find('input')
-    expect(input.attributes()['name']).toEqual('name')
-    await wrapper.setProps({
-      name: 'radio',
-    })
-    expect(input.attributes()['name']).toEqual('radio')
-    expect(wrapper.html()).toMatchSnapshot()
+  test('onUpdate:checked work', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = RadioMount({ props: { 'onUpdate:checked': onUpdate } })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-checked')
+
+    await wrapper.find('input').setValue(true)
+
+    expect(wrapper.classes()).toContain('ix-radio-checked')
+    expect(onUpdate).toBeCalledWith(true)
   })
 
-  test('radio value work', async () => {
-    const wrapper = RadioMount({
-      props: {
-        value: 'value',
-      },
-    })
-    const input = wrapper.find('input')
-    expect(input.attributes()['value']).toEqual('value')
-    expect(wrapper.html()).toMatchSnapshot()
+  // TODO fix
+  test.skip('autofocus work', async () => {
+    const onFocus = jest.fn()
+    RadioMount({ props: { autofocus: true, onFocus } })
+    await flushPromises()
+
+    expect(onFocus).toBeCalled()
   })
 
-  test('radio disabled work', async () => {
-    const wrapper = RadioMount({
-      props: {
-        disabled: false,
-      },
-    })
-    expect(wrapper.classes()).not.toContain('ix-radio-disabled')
-    await wrapper.setProps({ disabled: true })
+  test('buttoned work', async () => {
+    const wrapper = RadioMount({ props: { buttoned: true } })
+
+    expect(wrapper.classes()).toContain('ix-radio-button')
+
+    await wrapper.setProps({ buttoned: false })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-button')
+  })
+
+  test('disabled work', async () => {
+    const wrapper = RadioMount({ props: { disabled: true } })
+
     expect(wrapper.classes()).toContain('ix-radio-disabled')
-    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ disabled: false })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-disabled')
+  })
+
+  test('label work', async () => {
+    let label = 'radio'
+    const wrapper = RadioMount({ props: { label } })
+
+    expect(wrapper.find('.ix-radio-label').text()).toBe(label)
+
+    label = 'radio2'
+    await wrapper.setProps({ label })
+
+    expect(wrapper.find('.ix-radio-label').text()).toBe(label)
+  })
+
+  test('default slot work', async () => {
+    const label = 'radio'
+    const defaultSlot = 'radio slot'
+    const wrapper = RadioMount({ props: { label }, slots: { default: () => defaultSlot } })
+
+    expect(wrapper.find('.ix-radio-label').text()).toBe(defaultSlot)
+  })
+
+  test('mode work', async () => {
+    const wrapper = RadioMount({ props: { buttoned: true, mode: 'primary' } })
+
+    expect(wrapper.classes()).toContain('ix-radio-primary')
+
+    await wrapper.setProps({ mode: 'default' })
+
+    expect(wrapper.classes()).toContain('ix-radio-default')
+
+    await wrapper.setProps({ buttoned: false, mode: 'primary' })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-primary')
+  })
+
+  test('size work', async () => {
+    const wrapper = RadioMount({ props: { buttoned: true, size: 'large' } })
+
+    expect(wrapper.classes()).toContain('ix-radio-large')
+
+    await wrapper.setProps({ size: 'small' })
+
+    expect(wrapper.classes()).toContain('ix-radio-small')
+
+    await wrapper.setProps({ buttoned: false, size: 'large' })
+
+    expect(wrapper.classes()).not.toContain('ix-radio-large')
   })
 })
