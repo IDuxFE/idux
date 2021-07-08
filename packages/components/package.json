@@ -2,13 +2,6 @@
   "name": "@idux/components",
   "version": "0.0.1",
   "description": "A UI Component Library for Vue 3.x",
-  "author": "IduxFE<idux.feteam@gmail.com>",
-  "license": "MIT",
-  "scripts": {},
-  "main": "./index.js",
-  "module": "./index.js",
-  "typings": ".index.d.ts",
-  "style": "./index.css",
   "keywords": [
     "vue",
     "vue3",
@@ -20,20 +13,27 @@
     "components"
   ],
   "homepage": "https://github.com/IduxFE/idux#readme",
+  "bugs": {
+    "url": "https://github.com/IduxFE/idux/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/IduxFE/idux"
   },
-  "bugs": {
-    "url": "https://github.com/IduxFE/idux/issues"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0",
-    "@vue/compiler-sfc": "^3.0.0"
-  },
+  "license": "MIT",
+  "author": "IduxFE<idux.feteam@gmail.com>",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": ".index.d.ts",
+  "style": "./index.css",
+  "scripts": {},
   "dependencies": {
     "@idux/cdk": "^0.0.1",
     "lodash": "^4.17.0",
     "vue-types": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@vue/compiler-sfc": "^3.0.0",
+    "vue": "^3.0.0"
   }
 }
