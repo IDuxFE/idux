@@ -9,6 +9,8 @@ export type AffixStyle = {
   bottom?: string
   left?: string
   right?: string
+  width?: string
+  height?: string
 }
 
 type AffixDirectionNumber = Record<AffixDirection, number>

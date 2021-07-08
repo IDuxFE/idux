@@ -6,7 +6,9 @@
         <div v-if="!!page" class="main-wrapper">
           <ix-row>
             <ix-col xs="0" sm="8" md="6" lg="5" xl="4" class="main-menu">
-              <layout-side-nav />
+              <ix-affix>
+                <layout-side-nav />
+              </ix-affix>
             </ix-col>
             <ix-col xs="24" sm="16" md="18" lg="19" xl="20" class="main-content">
               <router-view></router-view>

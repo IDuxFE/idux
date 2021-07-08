@@ -1,6 +1,6 @@
 import type { AffixComponent } from './src/types'
 
-import Affix from './src/Affix.vue'
+import Affix from './src/Affix'
 
 const IxAffix = Affix as unknown as AffixComponent
 

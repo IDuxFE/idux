@@ -1,11 +1,4 @@
-<template>
-  <div ref="affixRef" :style="wrapperStyle" class="ix-affix">
-    <div ref="contentRef" class="ix-affix-content" :style="affixStyle">
-      <slot></slot>
-    </div>
-  </div>
-</template>
-<script lang="ts">
+
 import type { CSSProperties } from 'vue'
 import type { AffixStyle } from './utils'
 
@@ -15,12 +8,12 @@ import { getTarget } from '@idux/components/utils'
 import { affixProps } from './types'
 import {
   getTargetRect,
-  getTargetSize,
   calcPosition,
   normalizeOffset,
   isSticky,
   observeTarget,
   removeObserveTarget,
+  getTargetSize,
 } from './utils'
 
 export default defineComponent({
@@ -28,7 +21,9 @@ export default defineComponent({
   props: affixProps,
   setup(props) {
     const affixStyle = ref<AffixStyle>({} as AffixStyle)
-    const wrapperStyle = ref({} as CSSProperties)
+    const wrapperStyle = ref({
+      position: 'relative',
+    } as CSSProperties)
 
     const targetRef = ref<Window | HTMLElement | null>(null)
     const affixRef = ref<HTMLElement | null>(null)
@@ -48,11 +43,18 @@ export default defineComponent({
       const affixRect = getTargetRect(affixRef.value, targetRef.value)
       isStickyRef.value = isSticky(affixRect, offset.value)
       affixStyle.value = calcPosition(affixRect, offset.value, targetRef.value)
+      if (isStickyRef.value && contentRef.value) {
+        const { width, height } = getTargetSize(contentRef.value)
+        affixStyle.value = {
+          ...affixStyle.value,
+          width: `${width}px`,
+          height: `${height}px`,
+        }
+      }
     }
 
     onMounted(() => {
       nextTick(() => {
-        initWrapper()
         initContainer()
         measure()
       })
@@ -73,18 +75,6 @@ export default defineComponent({
       },
     )
 
-    function initWrapper() {
-      if (!contentRef.value) {
-        return
-      }
-      const { width, height } = getTargetSize(contentRef.value)
-      wrapperStyle.value = {
-        position: 'relative',
-        width: `${width}px`,
-        height: `${height}px`,
-      }
-    }
-
     function initContainer() {
       targetRef.value = getTarget(props.target)
       observeTarget(targetRef.value, throttleMeasure)
@@ -97,5 +87,14 @@ export default defineComponent({
       wrapperStyle,
     }
   },
+  render () {
+    return (
+      <div ref="affixRef" style={this.wrapperStyle} class="ix-affix">
+        <div ref="contentRef" class="ix-affix-content" style={this.affixStyle}>
+          {this.$slots.default?.()}
+        </div>
+      </div>
+    )
+  }
 })
-</script>
+
