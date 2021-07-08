@@ -6,24 +6,6 @@
 @form-prefix: ~'@{idux-prefix}-form';
 @form-item-prefix: ~'@{idux-prefix}-form-item';
 
-@form-item-valid-color: @success;
-@form-item-invalid-color: @error;
-@form-item-validating-color: @pending;
-@form-item-margin-bottom: 24px;
-@form-vertical-label-margin: 0;
-@form-vertical-label-padding: 0 0 8px;
-@form-font-height: ceil(@font-size-md * @line-height-base);
-@label-required-color: @red-l10;
-@label-color: @heading-color;
-@form-warning-input-bg: @background-color-component;
-@form-item-label-font-size: @font-size-md;
-@form-item-label-height: @input-height-md;
-@form-item-label-colon-margin-right: 8px;
-@form-item-label-colon-margin-left: 2px;
-@form-error-input-bg: @background-color-component;
-
-@form-invalid-box-shadow: 0 0 0 2px fade(@form-item-invalid-color, 20%);
-
 .@{form-prefix} {
   &-small {
     .form-size(@input-height-sm);

@@ -2,9 +2,9 @@
   <ix-form class="demo-form" :layout="layout">
     <ix-form-item label="Form Layout">
       <ix-radio-group v-model:value="layout">
-        <ix-radio-button value="horizontal">Horizontal</ix-radio-button>
-        <ix-radio-button value="vertical">Vertical</ix-radio-button>
-        <ix-radio-button value="inline">Inline</ix-radio-button>
+        <ix-radio value="horizontal" buttoned>Horizontal</ix-radio>
+        <ix-radio value="vertical" buttoned>Vertical</ix-radio>
+        <ix-radio value="inline" buttoned>Inline</ix-radio>
       </ix-radio-group>
     </ix-form-item>
     <ix-form-item label="Field A">

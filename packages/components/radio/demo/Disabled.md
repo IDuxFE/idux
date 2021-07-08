@@ -1,10 +1,14 @@
 ---
-order: 0
+order: 1
 title:
-  zh: 不可用
-  en: Disabled usage
+  zh: 禁用
+  en: Disabled
 ---
 
 ## zh
 
-`ix-radio` 不可用。
+通过设置 `disabled` 来禁用单选框。
+
+## en
+
+Disable the radio button by setting `disabled`.

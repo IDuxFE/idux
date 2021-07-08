@@ -23,7 +23,7 @@ import type {
   TooltipConfig,
   PopoverConfig,
   SelectConfig,
-  RadioGroupConfig,
+  RadioConfig,
   MenuConfig,
   SubMenuConfig,
   StepsConfig,
@@ -117,9 +117,8 @@ const rate = shallowReactive<RateConfig>({
   allowClear: false,
 })
 
-const radioGroup: RadioGroupConfig = shallowReactive({
+const radio: RadioConfig = shallowReactive({
   size: 'medium',
-  mode: 'border',
 })
 
 const select = shallowReactive<SelectConfig>({
@@ -242,7 +241,7 @@ export const defaultConfig: GlobalConfig = {
   input,
   textarea,
   rate,
-  radioGroup,
+  radio,
   select,
   // Data Display
   badge,
