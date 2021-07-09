@@ -1,9 +1,8 @@
-import { mount, MountingOptions } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
+import { mount, VueWrapper } from '@vue/test-utils'
+import { ComponentPublicInstance, nextTick, reactive, UnwrapRef } from 'vue'
 import { wait, renderWork } from '@tests'
-import IxAffix from '../src/Affix.vue'
-import { AffixOffset, AffixProps } from '../src/types'
-
+import IxAffix from '../src/Affix'
+import { AffixProps } from '../src/types'
 interface Offset {
   top: number
   right: number
@@ -12,6 +11,16 @@ interface Offset {
 }
 
 let rectMap = {} as { container: Offset; 'ix-affix': Offset }
+
+function isPositionCorrect(wrapper: VueWrapper<ComponentPublicInstance>, style: Record<string, string> = {}) {
+  const affixStyle = (wrapper.find('.ix-affix-content').element as HTMLElement).style as unknown as Record<
+    string,
+    string
+  >
+
+  const attrsToCheck: string[] = ['position', 'top', 'bottom', 'left', 'right']
+  return attrsToCheck.every(attr => affixStyle[attr] === style[attr] || (!affixStyle[attr] && !style[attr]))
+}
 
 const affixSize = {
   width: 100,
@@ -55,7 +64,32 @@ async function scrollTarget(x: number, y: number, target: Window | Element = win
 }
 
 describe('Affix', () => {
-  const AffixMount = (options?: MountingOptions<Partial<AffixProps>>) => mount(IxAffix, { ...options })
+  let wrapper: VueWrapper<ComponentPublicInstance>
+
+  async function initWrapper(
+    props: UnwrapRef<Partial<AffixProps>>,
+    listeners: Record<string, (...args: unknown[]) => unknown> = {},
+  ) {
+    wrapper = mount(
+      {
+        components: { IxAffix },
+        template: `
+          <div class="container">
+            <ix-affix v-bind="props"
+              v-on="listeners"
+              >Test Affix</ix-affix>
+          </div>
+        `,
+        setup() {
+          return {
+            props,
+            listeners,
+          }
+        },
+      },
+      { attachTo: 'body' },
+    )
+  }
 
   beforeEach(() => {
     initRectMap()
@@ -71,81 +105,79 @@ describe('Affix', () => {
   renderWork(IxAffix)
 
   test('offset work', async () => {
-    const wrapper = AffixMount({ props: { offset: 0 }, slots: { default: 'Test Affix' } })
+    const props = reactive<Partial<AffixProps>>({})
+    initWrapper(props)
 
     await nextTick()
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, {})).toBe(true)
 
     await scrollTarget(10, 10)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, {})).toBe(true)
 
     await scrollTarget(10, 100)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '0px', left: '90px' })).toBe(true)
 
     await scrollTarget(100, 100)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '0px', left: '0px' })).toBe(true)
 
     await scrollTarget(110, 110)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '0px', left: '-10px' })).toBe(true)
 
-    wrapper.setProps({ offset: { left: 0 } })
+    props.offset = { left: 0 }
 
     await scrollTarget(10, 10)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, {})).toBe(true)
 
     await scrollTarget(100, 10)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '90px', left: '0px' })).toBe(true)
 
     await scrollTarget(100, 100)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '0px', left: '0px' })).toBe(true)
 
     await scrollTarget(110, 110)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '-10px', left: '0px' })).toBe(true)
 
-    wrapper.setProps({ offset: { top: 0, left: 0 } })
+    props.offset = { top: 0, left: 0 }
+
     await scrollTarget(110, 110)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', top: '0px', left: '0px' })).toBe(true)
 
-    wrapper.setProps({ offset: { bottom: 0, right: 0 } })
+    props.offset = { bottom: 0, right: 0 }
+
     await scrollTarget(-window.innerWidth + affixSize.width + 100, -window.innerHeight + affixSize.height + 100)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(isPositionCorrect(wrapper, { position: 'fixed', bottom: '0px', right: '0px' })).toBe(true)
   })
 
   test('target work', async () => {
-    const offset = ref<AffixOffset>(50)
-    const target = ref<HTMLElement | undefined>(undefined)
-    const wrapper = mount(
-      {
-        components: { IxAffix },
-        template: `<div class="container"><ix-affix :offset="offset" :target="target">Test Affix</ix-affix></div>`,
-        setup() {
-          return { offset, target }
-        },
-      },
-      {
-        attachTo: document.body,
-      },
-    )
-
-    expect(wrapper.html()).toMatchSnapshot()
-
-    target.value = document.querySelector('.container') as HTMLElement
+    const props = reactive<Partial<AffixProps>>({
+      offset: 50,
+    })
+    initWrapper(props)
     await nextTick()
-    expect(wrapper.html()).toMatchSnapshot()
 
-    await scrollTarget(50, 50, target.value)
-    expect(wrapper.html()).toMatchSnapshot()
+    const target = document.querySelector('.container') as HTMLElement
 
-    offset.value = { top: 50, left: 50 }
+    expect(isPositionCorrect(wrapper, {})).toBe(true)
 
-    await scrollTarget(100, 100, target.value)
-    expect(wrapper.html()).toMatchSnapshot()
+    props.target = target
+    await nextTick()
+    expect(isPositionCorrect(wrapper, { position: 'absolute', top: '0px', left: '0px' })).toBe(true)
+
+    await scrollTarget(50, 50, target)
+    expect(isPositionCorrect(wrapper, { position: 'absolute', top: '50px', left: '0px' })).toBe(true)
+
+    props.offset = { top: 50, left: 50 }
+
+    await scrollTarget(100, 100, target)
+    expect(isPositionCorrect(wrapper, { position: 'absolute', top: '100px', left: '100px' })).toBe(true)
   })
 
-  test('emit work', async () => {
+  test('onChange work', async () => {
     const onChange = jest.fn()
-
-    const wrapper = AffixMount({ props: { offset: 0 }, attrs: { onChange }, slots: { default: 'Test Affix' } })
+    const props = reactive<Partial<AffixProps>>({
+      onChange,
+    })
+    initWrapper(props)
 
     await nextTick()
     expect(onChange).not.toBeCalled()
@@ -156,7 +188,7 @@ describe('Affix', () => {
     await scrollTarget(0, 0)
     expect(onChange).toBeCalledWith(false)
 
-    wrapper.setProps({ offset: 100 })
+    props.offset = 100
     await nextTick()
     expect(onChange).toBeCalledWith(true)
   })
