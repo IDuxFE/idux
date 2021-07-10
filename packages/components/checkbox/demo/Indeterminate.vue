@@ -1,13 +1,9 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checkAll" :indeterminate="indeterminate" @change="onCheckAllChange">
+    <ix-checkbox v-model:checked="checkAll" :indeterminate="indeterminate" :onChange="onCheckAllChange">
       CheckAll
     </ix-checkbox>
-    <ix-checkbox-group v-model:value="value">
-      <ix-checkbox value="option1"> option1 </ix-checkbox>
-      <ix-checkbox value="option2"> option2 </ix-checkbox>
-      <ix-checkbox value="option3"> option3 </ix-checkbox>
-    </ix-checkbox-group>
+    <ix-checkbox-group v-model:value="value" :options="options" />
   </div>
 </template>
 
@@ -21,6 +17,11 @@ export default defineComponent({
     const indeterminate = ref(true)
 
     const value = ref(['option1', 'option2'])
+    const options = [
+      { label: 'option1', value: 'option1' },
+      { label: 'option2', value: 'option2' },
+      { label: 'option3', value: 'option3' },
+    ]
 
     watch(
       () => value.value,
@@ -41,6 +42,7 @@ export default defineComponent({
       indeterminate,
       onCheckAllChange,
       value,
+      options,
     }
   },
 })

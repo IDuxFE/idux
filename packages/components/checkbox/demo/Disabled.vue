@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checked" :disabled="disabled" @change="onChange"> option </ix-checkbox>
+    <ix-checkbox v-model:checked="checked" :disabled="disabled" label="option" />
     <div class="operation-area">
       <ix-button mode="primary" @click="changeChecked()">checked: {{ checked }}</ix-button>
       <ix-button mode="primary" @click="changeDisabled()">disabled: {{ disabled }}</ix-button>
@@ -24,16 +24,11 @@ export default defineComponent({
       disabled.value = !disabled.value
     }
 
-    const onChange = () => {
-      console.log('onChange')
-    }
-
     return {
       checked,
       disabled,
       changeChecked,
       changeDisabled,
-      onChange,
     }
   },
 })

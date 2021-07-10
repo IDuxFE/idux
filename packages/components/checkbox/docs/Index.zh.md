@@ -21,12 +21,17 @@ cover:
 
 | 名称 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:checked` | 指定当前勾选框是否选中 |  `boolean`  | `false` | - | - |
-| `disabled` | 禁用状态 |`boolean`| `false` | - | - |
-| `readonly` | 只读状态 |`boolean`| `false` | - | - |
+| `v-model:checked` | 指定当前勾选框是否选中 |  `boolean \| string \| number`  | `false` | - | - |
+| `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |
+| `disabled` | 禁用状态 |`boolean`| - | - | - |
+| `label` | 勾选框的文本 | `string \| #default` | - | - | - |
 | `indeterminate` | 是否处于不确定状态 | `boolean` | `false`| - | 当值为true时，按钮样式处于半选状态，且不受checked影响 |
-| `trueValue` | 勾选框选中时返回的值 |  `string \| number`  | `true`| - | - |
-| `falseValue` | 勾选框不选中时返回的值 | `string \| number` | `false`| - | - |
+| `trueValue` | 勾选框选中时返回的值 |  `boolean \| string \| number`  | `true`| - | - |
+| `falseValue` | 勾选框不选中时返回的值 | `boolean \| string \| number` | `false`| - | - |
+| `value` | 设置勾选框的值，与 `ix-checkbox-group` 配合使用 | `any`| - | - | - |
+| `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
+| `onChange` | 选中状态发生变化后的回调 | `(checked: boolean \| string \| number) => void`| - | - | - |
+| `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 
 #### Slots
 
@@ -34,11 +39,12 @@ cover:
 | --- | --- | --- | --- |
 |`default` | 文本区域 | - | - |
 
-#### Emits
+#### Methods
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `change` | 点击勾选框时触发 | `Function(checkValue:boolean \| string \| number)` | - |
+| `focus` | 获取焦点 | - | - |
+| `blur` | 移除焦点 | - | - |
 
 ### `ix-checkbox-group`
 
@@ -46,29 +52,17 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 指定当前勾选框是否选中 |  `boolean`  | `false` | - | - |
+| `v-model:value` | 指定当前勾选框是否选中 |  `Array<string \| number>`  | `[]` | - | - |
 | `disabled` | 子`ix-checkbox`禁用状态 | `boolean` | `false` | - |- |
-| `readonly` | 子`ix-checkbox`只读状态 | `boolean` | `false` | - |- |
 | `name` | 子`ix-checkbox` 的 name 属性 | `string` | - | - |- |
+| `options` | 以配置形式设置子元素 | `CheckboxOptions[]`| - | - | - |
+| `onChange` | 选中值发生变化后的回调 | `(value: Array<string \| number>) => void`| - | - | - |
 
 #### Group Slots
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 |`default` | `ix-checkbox`区域 | - | - |
-
-#### Group Emits
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `change` | `value`变化时的回调函数 | `Function(checkValue:string[])` | - |
-
-#### Methods
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `focus` | 获取焦点 | - | - |
-| `blur` | 移除焦点 | - | - |
 
 ### 主题变量
 

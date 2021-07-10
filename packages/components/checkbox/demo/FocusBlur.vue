@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <ix-checkbox ref="checkboxRef" v-model:checked="checked"> option </ix-checkbox>
+      <ix-checkbox ref="checkboxRef" v-model:checked="checked" label="option" />
     </div>
     <div class="operation-area">
       <ix-button mode="primary" @click="changeFocus()">changeFocus</ix-button>
