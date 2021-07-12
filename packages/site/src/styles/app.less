@@ -15,29 +15,32 @@
 
 .main-content {
   position: relative;
-  padding: 0 @spacing-4xl @spacing-2xl;
+  padding-bottom: @spacing-2xl;
+  padding-left: @spacing-4xl;
+  padding-right: (@spacing-4xl / 2) + @spacing-sm + @toc-width;
 }
 
 @media (max-width: @screen-lg-max) {
   .main-content {
     padding-left: @spacing-3xl;
-    padding-right: @spacing-3xl;
+    padding-right: (@spacing-3xl / 2) + @spacing-sm + @toc-width;
   }
 }
 
 @media (max-width: @screen-md-max) {
   .main-content {
     padding-left: @spacing-2xl;
-    padding-right: @spacing-2xl;
+    padding-right: (@spacing-2xl / 2) + @spacing-sm + @toc-width;
   }
 }
 
 @media (max-width: @screen-sm-max) {
   .main-content {
     padding-left: @spacing-xl;
-    padding-right: @spacing-xl;
+    padding-right: (@spacing-xl / 2) + @spacing-sm + @toc-width;
   }
 }
+
 @media (max-width: @screen-xs-max) {
   .main-content {
     padding-left: @spacing-lg;

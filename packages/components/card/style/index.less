@@ -4,6 +4,7 @@
 
 .@{card-prefix} {
   position: relative;
+  color: @card-color;
   background: @card-bg-color;
   border: @card-border-width @card-border-style @card-border-color;
   border-radius: @card-border-radius;
@@ -97,12 +98,9 @@
   &-has-grid:not(&-loading) &-body {
     margin: -@card-border-width 0 0 -@card-border-width;
     padding: 0;
-    .clearfix();
   }
 
   &-grid {
-    float: left;
-    width: @card-grid-width;
     padding: @card-padding-md;
     box-shadow: @card-border-width 0 0 0 @card-border-color, 0 @card-border-width 0 0 @card-border-color,
       @card-border-width @card-border-width 0 0 @card-border-color, @card-border-width 0 0 0 @card-border-color inset,

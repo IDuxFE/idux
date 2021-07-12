@@ -1,4 +1,3 @@
-
 import type { CSSProperties } from 'vue'
 import type { AffixStyle } from './utils'
 
@@ -21,9 +20,7 @@ export default defineComponent({
   props: affixProps,
   setup(props) {
     const affixStyle = ref<AffixStyle>({} as AffixStyle)
-    const wrapperStyle = ref({
-      position: 'relative',
-    } as CSSProperties)
+    const wrapperStyle = ref({} as CSSProperties)
 
     const targetRef = ref<Window | HTMLElement | null>(null)
     const affixRef = ref<HTMLElement | null>(null)
@@ -87,7 +84,7 @@ export default defineComponent({
       wrapperStyle,
     }
   },
-  render () {
+  render() {
     return (
       <div ref="affixRef" style={this.wrapperStyle} class="ix-affix">
         <div ref="contentRef" class="ix-affix-content" style={this.affixStyle}>
@@ -95,6 +92,5 @@ export default defineComponent({
         </div>
       </div>
     )
-  }
+  },
 })
-

@@ -122,23 +122,16 @@ function wrapperDocsTemplate(toc: string, header: string, examples: string, api:
 }
 
 function generateToc(demoMetas: any[], language: string, module: string, component: string) {
-  const links = []
-  demoMetas.forEach(meta => {
-    // TODO link
-    links.push(
-      `<a href="#${module}-${component}-demo-${meta.componentName}" title="${meta.title[language]}">${meta.title[language]}</a>`,
-    )
-  })
+  const links = demoMetas.map(
+    meta =>
+      `<ix-anchor-link href="#${module}-${component}-demo-${meta.componentName}" title="${meta.title[language]}"></ix-anchor-link>`,
+  )
 
-  // TODO link
-  links.push(`<a href="#api" title="API"></a>`)
+  links.push(`<ix-anchor-link href="#api" title="API"></ix-anchor-link>`)
 
-  // TODO affix,anchor
-  return `<a class="toc-wrapper">
-  <a @click="goLink($event)">
-    ${links.join('  ')}
-  </a>
-</a>`
+  return `<ix-anchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
+  ${links.join('  ')}
+</ix-anchor>`
 }
 
 function generateHeader(title: string, description: string, language: string) {

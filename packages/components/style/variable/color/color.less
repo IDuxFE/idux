@@ -1,7 +1,7 @@
 @import 'colorPalette';
 
 /* Red -------------------------- */
-@red-base: #e64545;
+@red-base: #e65050;
 @red-l50: color(~`colorPalette('@{red}', -50) `);
 @red-l40: color(~`colorPalette('@{red}', -40) `);
 @red-l30: color(~`colorPalette('@{red}', -30) `);
@@ -141,7 +141,7 @@
 @sky-d50: color(~`colorPalette('@{sky}', 50) `);
 
 /* Blue -------------------------- */
-@blue-base: #4974f5;
+@blue-base: #567df5;
 @blue-l50: color(~`colorPalette('@{blue}', -50) `);
 @blue-l40: color(~`colorPalette('@{blue}', -40) `);
 @blue-l30: color(~`colorPalette('@{blue}', -30) `);
@@ -155,7 +155,7 @@
 @blue-d50: color(~`colorPalette('@{blue}', 50) `);
 
 /* Admiral -------------------------- */
-@admiral-base: #4545e6;
+@admiral-base: #7373e6;
 @admiral-l50: color(~`colorPalette('@{admiral}', -50) `);
 @admiral-l40: color(~`colorPalette('@{admiral}', -40) `);
 @admiral-l30: color(~`colorPalette('@{admiral}', -30) `);
@@ -169,7 +169,7 @@
 @admiral-d50: color(~`colorPalette('@{admiral}', 50) `);
 
 /* Purple -------------------------- */
-@purple-base: #9545e6;
+@purple-base: #a667e6;
 @purple-l50: color(~`colorPalette('@{purple}', -50) `);
 @purple-l40: color(~`colorPalette('@{purple}', -40) `);
 @purple-l30: color(~`colorPalette('@{purple}', -30) `);
@@ -183,7 +183,7 @@
 @purple-d50: color(~`colorPalette('@{purple}', 50) `);
 
 /* Magenta -------------------------- */
-@magenta-base: #eb4688;
+@magenta-base: #eb528f;
 @magenta-l50: color(~`colorPalette('@{magenta}', -50) `);
 @magenta-l40: color(~`colorPalette('@{magenta}', -40) `);
 @magenta-l30: color(~`colorPalette('@{magenta}', -30) `);
@@ -318,3 +318,24 @@
 @error-d50: color(~`colorPalette('@{error}', 50) `);
 
 @status-colors: primary, info, pending, success, warning, error;
+
+/* color -------------------------- */
+@background-color-base: hsv(0, 0, 95%); // Default grey background color
+@background-color-light: hsv(0, 0, 98%); // background of header and selected item
+@background-color-body: @white;
+@background-color-component: @white;
+@background-color-component-dark: #191c24;
+
+@disabled-color: fade(@black, 25%);
+@disabled-color-dark: fade(@white, 35%);
+@disabled-bg-color: @background-color-base;
+
+@mask-bg-color: fade(@black, 40%);
+
+@heading-color: @black;
+
+/* text -------------------------- */
+@text-color: fade(@black, 85%);
+@text-color-secondary: fade(@black, 45%);
+@text-color-dark: fade(@white, 85%);
+@text-color-secondary-dark: fade(@white, 65%);

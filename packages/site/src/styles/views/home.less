@@ -1,75 +1,179 @@
 .home {
   text-align: center;
+  background-color: @grey-l50;
 
-  &-title {
-    background: linear-gradient(@primary, @background-color-component);
-    font-size: @font-size-lg;
-    padding-top: @spacing-4xl;
+  &-banner {
+    position: relative;
+    width: 100%;
+    height: 814px;
+    display: flex;
+    align-items: center;
+    background-image: url('/icons/home-bg.svg');
+    background-size: cover;
 
-    h1 {
-      font-size: 32px;
-    }
+    &-content {
+      flex: 1;
+      h1 {
+        font-size: 100px;
+        margin-bottom: @spacing-xl;
+        color: #043bef;
+      }
 
-    &-start {
-      margin-top: @spacing-3xl;
-      a {
-        padding: @spacing-sm @spacing-3xl;
-        border: @border-width-sm @border-style @background-color-component;
-        border-radius: @border-radius-md;
-        color: @background-color-component;
+      &-description {
+        font-size: 32px;
+        margin-bottom: @spacing-4xl;
+      }
+
+      &-start {
+        display: inline-block;
+        width: 256px;
+        height: 64px;
+        line-height: 64px;
+        border-radius: 32px;
+        font-size: @font-size-2xl;
+        color: @white;
+        background-color: #10ce08;
+        text-decoration: none;
+        transition: all @transition-duration-base;
+
+        &:hover {
+          color: @white;
+          background-color: @success;
+        }
       }
     }
 
-    img {
-      width: 100%;
-      max-width: @home-width - 100px;
-    }
+    // background: linear-gradient(@primary, @background-color-component);
   }
 
   &-content {
     position: relative;
     max-width: @home-width;
-    margin: -@spacing-2xl auto 0;
-    padding: @spacing-xl;
-    background: @background-color-component;
-    border: @border-width-sm @border-style @border-color;
-    border-radius: @border-radius-md;
+    margin: auto;
+    padding: @spacing-3xl 0;
+    background: transparent;
 
-    &-guideline-icon {
-      font-size: 32px;
-      width: @spacing-4xl;
-      height: @spacing-4xl;
-      line-height: @spacing-4xl;
-      margin: 0 auto @spacing-lg;
-      border: @border-width-sm @border-style @border-color;
-      border-radius: 50%;
-      transition: border @transition-duration-base @ease-in-out-circ;
+    &-guideline {
+      text-decoration: none;
+    }
 
-      .ix-icon {
-        transition: transform @transition-duration-base @ease-in-out-circ;
+    &-card {
+      height: 100%;
+      .ix-card-body {
+        padding: @spacing-2xl;
       }
 
-      &:hover {
-        border-color: @primary;
-        .ix-icon {
-          transform: scale(1.2);
+      h2 {
+        margin-top: @spacing-lg;
+      }
+    }
+
+    .ix-card-grid {
+      height: 300px;
+    }
+  }
+}
+
+@media (max-width: @screen-lg-max) {
+  .home {
+    &-banner {
+      height: 700px;
+
+      &-content {
+        h1 {
+          font-size: 90px;
+        }
+
+        &-description {
+          font-size: 28px;
+        }
+
+        &-start {
+          width: 224px;
+          height: 56px;
+          line-height: 56px;
+          border-radius: 28px;
         }
       }
     }
+  }
+}
 
-    h3.ix-typography,
-    h4.ix-typography {
-      font-weight: @font-weight-md;
-    }
+@media (max-width: @screen-md-max) {
+  .home {
+    &-banner {
+      height: 600px;
 
-    h3.ix-typography {
-      margin: @spacing-xl 0 @spacing-3xl;
+      &-content {
+        h1 {
+          font-size: 80px;
+        }
+
+        &-description {
+          font-size: 24px;
+        }
+
+        &-start {
+          width: 196px;
+          height: 48px;
+          line-height: 48px;
+          border-radius: 24px;
+        }
+      }
     }
   }
+}
 
-  &-badges {
-    a {
-      margin-right: @spacing-sm;
+@media (max-width: @screen-sm-max) {
+  .home {
+    &-banner {
+      height: 500px;
+
+      &-content {
+        h1 {
+          font-size: 70px;
+        }
+
+        &-description {
+          font-size: 20px;
+          margin-bottom: @spacing-3xl;
+        }
+
+        &-start {
+          width: 160px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 20px;
+          font-size: @font-size-xl;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .home {
+    &-banner {
+      height: 400px;
+
+      &-content {
+        h1 {
+          font-size: 60px;
+        }
+
+        &-description {
+          font-size: 16px;
+          margin-bottom: @spacing-2xl;
+        }
+
+        &-start {
+          width: 128px;
+          height: 32px;
+          line-height: 32px;
+          border-radius: 16px;
+          font-size: @font-size-lg;
+        }
+      }
     }
   }
 }

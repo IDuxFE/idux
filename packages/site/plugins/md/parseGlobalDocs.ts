@@ -59,10 +59,11 @@ function generateToc(meta: Meta, content: string): string {
     if (child.type === 'heading' && child.depth === 2) {
       const text = child.children[0].value
       const lowerText = text.toLowerCase().replace(/ /g, '-').replace(/\./g, '-').replace(/\?/g, '')
-      links += `<a href="#${lowerText}" title="${text}"></a>`
+      links += `<ix-anchor-link href="#${lowerText}" title="${text}"></ix-anchor-link>`
     }
   })
 
-  // TODO affix,anchor
-  return `<a class="toc-affix"><a @click="goLink($event)">${links}</a></a>`
+  return `<ix-anchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
+  ${links}
+</ix-anchor>`
 }
