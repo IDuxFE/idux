@@ -1,19 +1,24 @@
 <template>
   <ix-header extra="setting" @extraClick="onExtraClick"> Title </ix-header>
-  <ix-header :extra="extras" @extraClick="onExtraClick"> Title </ix-header>
+  <ix-header :extra="extraNode" @extraClick="onExtraClick"> Title </ix-header>
   <ix-header>
     Title
-    <template #extra> <ix-button mode="link" @click="onExtraClick($event, 'more')">More</ix-button> </template>
+    <template #extra>
+      <ix-icon name="setting" @extraClick="onExtraClick"></ix-icon>
+      <ix-icon name="menu" @extraClick="onExtraClick"></ix-icon>
+      <ix-button mode="link" @click="onExtraClick($event)">More</ix-button>
+    </template>
   </ix-header>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { IxIcon } from '@idux/components/icon'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {
-    const extras = ['setting', 'menu']
-    const onExtraClick = (evt: MouseEvent, name: string) => console.log(evt, name)
-    return { extras, onExtraClick }
+    const extraNode = h(IxIcon, { name: 'menu' })
+    const onExtraClick = (evt: MouseEvent) => console.log(evt)
+    return { extraNode, onExtraClick }
   },
 })
 </script>

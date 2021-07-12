@@ -1,5 +1,7 @@
 import { mount, MountingOptions } from '@vue/test-utils'
+import { h } from 'vue'
 import { renderWork } from '@tests'
+import { IxIcon } from '@idux/components/icon'
 import IxHeader from '../src/Header'
 import { HeaderProps } from '../src/types'
 
@@ -20,9 +22,9 @@ describe('Header', () => {
 
     expect(onExtraClick).toBeCalledTimes(1)
 
-    await wrapper.setProps({ extra: ['up', 'down'] })
+    const extra = h(IxIcon, { name: 'down' })
+    await wrapper.setProps({ extra })
 
-    expect(wrapper.findAll('.ix-icon').length).toBe(2)
     expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-down').trigger('click')

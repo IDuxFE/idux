@@ -10,8 +10,8 @@ export default defineComponent({
     const closable = computed(() => props.closable ?? config.closable)
     const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
 
-    const onClose = async (evt: Event, name: string) => {
-      if (closable.value && closeIcon.value && closeIcon.value === name) {
+    const onClose = async (evt: Event) => {
+      if (closable.value) {
         close(evt)
       }
     }
@@ -20,27 +20,32 @@ export default defineComponent({
       closable,
       closeIcon,
       onClose,
+      closeIconSlot: toRef(slots, 'closeIcon'),
       header: toRef(props, 'header'),
       headerSlot: toRef(slots, 'header'),
     }
   },
 
   render() {
-    const { headerSlot, closable, closeIcon, onClose, header } = this
+    const { headerSlot, closable, closeIcon, onClose, closeIconSlot, header } = this
 
     if (headerSlot) {
       return headerSlot({ closable, closeIcon, onClose })
     }
 
-    if (!header && !closable) {
+    if (!header && !closable && !closeIconSlot) {
       return null
     }
 
     const headerProps = isString(header) ? { title: header } : header || {}
+
+    if (closeIconSlot) {
+      const slots = { extra: () => closeIconSlot({ onClose }) }
+      return <IxHeader {...headerProps} v-slots={slots}></IxHeader>
+    }
+
     if (closable) {
-      const extras = toArray(headerProps.extra)
-      extras.push(closeIcon)
-      headerProps.extra = extras
+      headerProps.extra = headerProps.extra ?? closeIcon
 
       const onExtraClick = toArray(headerProps.onExtraClick)
       onExtraClick.push(onClose)
