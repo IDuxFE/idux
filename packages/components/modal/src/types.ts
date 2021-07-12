@@ -28,7 +28,7 @@ export const modalProps = {
   cancelText: IxPropTypes.string,
   centered: IxPropTypes.bool,
   closable: IxPropTypes.bool,
-  closeIcon: IxPropTypes.string,
+  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
   containerClassName: IxPropTypes.string,
   destroyOnHide: IxPropTypes.bool,

@@ -27,7 +27,7 @@ order: 0
 | `cancelText` | 取消按钮的文本 | `string` | `取消` | - | - |
 | `centered` | 垂直居中展示 | `boolean` | `false` | ✅ | - |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
-| `closeIcon` | 自定义关闭图标 | `string` | `close` | ✅ | - |
+| `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon='{onClose}'` | `close` | ✅ | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `containerClassName` | 浮层容器类名 | `string` | - | - | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |

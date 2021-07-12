@@ -4,7 +4,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const headerProps = {
-  extra: IxPropTypes.oneOfType([String, IxPropTypes.arrayOf(String)]),
+  extra: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   description: IxPropTypes.string,
   prefix: IxPropTypes.string,
   size: IxPropTypes.oneOf(['extraLarge', 'large', 'medium', 'small'] as const).def('large'),
@@ -13,7 +13,7 @@ export const headerProps = {
   title: IxPropTypes.string,
 
   // events
-  onExtraClick: IxPropTypes.emit<(evt: MouseEvent, name: string) => void>(),
+  onExtraClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
   onPrefixClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
 

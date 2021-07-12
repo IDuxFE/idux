@@ -1,8 +1,8 @@
-import type { Slot } from 'vue'
+import type { Slot, VNode, VNodeTypes } from 'vue'
 import type { HeaderProps } from './types'
 
-import { computed, defineComponent } from 'vue'
-import { callEmit, toArray } from '@idux/cdk/utils'
+import { computed, defineComponent, h, isVNode } from 'vue'
+import { callEmit } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
 
@@ -11,12 +11,11 @@ export default defineComponent({
   props: headerProps,
   setup(props) {
     const classes = useClasses(props)
-    const extras = computed(() => toArray(props.extra))
 
     const onPrefixClick = (evt: MouseEvent) => callEmit(props.onPrefixClick, evt)
-    const onExtraClick = (evt: MouseEvent, name: string) => callEmit(props.onExtraClick, evt, name)
+    const onExtraClick = (evt: MouseEvent) => callEmit(props.onExtraClick, evt)
 
-    return { classes, extras, onPrefixClick, onExtraClick }
+    return { classes, onPrefixClick, onExtraClick }
   },
 
   render() {
@@ -24,7 +23,7 @@ export default defineComponent({
     const prefix = renderPrefix(this.$slots.prefix, this.prefix, this.onPrefixClick)
     const title = renderChild(this.$slots.default, this.title, 'ix-header-title')
     const subTitle = renderChild(this.$slots.subTitle, this.subTitle, 'ix-header-sub-title')
-    const extra = renderExtra(this.$slots.extra, this.extras, this.onExtraClick)
+    const extra = renderExtra(this.$slots.extra, this.extra, this.onExtraClick)
     const description = renderChild(this.$slots.description, this.description, 'ix-header-description')
     return (
       <div class={this.classes}>
@@ -72,21 +71,22 @@ const renderChild = (titleSlot: Slot | undefined, title: string | undefined, cla
 
 const renderExtra = (
   extraSlot: Slot | undefined,
-  extras: string[],
-  onExtraClick: (evt: MouseEvent, name: string) => void,
+  extra: string | VNode | undefined,
+  onExtraClick: (evt: MouseEvent) => void,
 ) => {
-  if (!extraSlot && extras.length === 0) {
+  if (!extraSlot && !extra) {
     return null
   }
-  const child = extraSlot ? extraSlot() : renderExtraIcons(extras, onExtraClick)
-  return <div class="ix-header-extra">{child}</div>
-}
 
-const renderExtraIcons = (extras: string[], onExtraClick: (evt: MouseEvent, name: string) => void) => {
-  return extras.map((icon, index) => {
-    if (!icon) {
-      return null
-    }
-    return <IxIcon key={icon + index} name={icon} onClick={evt => onExtraClick(evt, icon)} />
-  })
+  let child: VNodeTypes
+
+  if (extraSlot) {
+    child = extraSlot()
+  } else if (isVNode(extra)) {
+    child = h(extra, { onClick: onExtraClick })
+  } else {
+    child = <IxIcon name={extra} onClick={onExtraClick} />
+  }
+
+  return <div class="ix-header-extra">{child}</div>
 }

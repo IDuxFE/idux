@@ -96,13 +96,36 @@ describe('Modal', () => {
   })
 
   test('closeIcon work', async () => {
-    const wrapper = ModalMount({ props: { closeIcon: 'up' } })
+    const onClose = jest.fn()
+    const wrapper = ModalMount({ props: { closeIcon: 'up', onClose } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
     expect(modalWrapper.find('.ix-icon-close').exists()).toBe(false)
     expect(modalWrapper.find('.ix-icon-up').exists()).toBe(true)
 
-    await wrapper.setProps({ closeIcon: 'close' })
+    await modalWrapper.find('.ix-icon-up').trigger('click')
+
+    expect(onClose).toBeCalledTimes(1)
+
+    const closeIcon = h(IxIcon, { name: 'close' })
+    await wrapper.setProps({ closeIcon })
+
+    expect(modalWrapper.find('.ix-icon-close').exists()).toBe(true)
+    expect(modalWrapper.find('.ix-icon-up').exists()).toBe(false)
+
+    await modalWrapper.find('.ix-icon-close').trigger('click')
+
+    expect(onClose).toBeCalledTimes(2)
+  })
+
+  test('closeIcon slot work', async () => {
+    const wrapper = ModalMount({
+      props: { closeIcon: 'up' },
+      slots: {
+        closeIcon: () => h(IxIcon, { name: 'close' }),
+      },
+    })
+    const modalWrapper = wrapper.getComponent(ModalWrapper)
 
     expect(modalWrapper.find('.ix-icon-close').exists()).toBe(true)
     expect(modalWrapper.find('.ix-icon-up').exists()).toBe(false)
