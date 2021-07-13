@@ -260,6 +260,7 @@ describe('list.ts', () => {
       wrapper.find('.ix-virtual-scrollbar-thumb').trigger('mousedown', { pageY: 0 })
 
       const mouseMoveEvent = new Event('mousemove') as MouseEvent
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ;(mouseMoveEvent as any).pageY = 10
       window.dispatchEvent(mouseMoveEvent)
       await flushPromises()

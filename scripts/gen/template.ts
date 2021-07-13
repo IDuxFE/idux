@@ -21,7 +21,7 @@ export const ${camelCaseName}Props = {
 
 export type ${upperFirstName}Props = IxInnerPropTypes<typeof ${camelCaseName}Props>
 export type ${upperFirstName}PublicProps = IxPublicPropTypes<typeof ${camelCaseName}Props>
-export type ${upperFirstName}Component = DefineComponent<HTMLAttributes & typeof ${camelCaseName}Prop>
+export type ${upperFirstName}Component = DefineComponent<HTMLAttributes & typeof ${camelCaseName}Props>
 export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }
@@ -80,9 +80,11 @@ import ${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}', () => {
-  const ${compName}Mount = (options?: MountingOptions<Partial<${compName}Props>>) => mount(Ix${compName}, { ...(options as MountingOptions<${compName}Props>)})
+  const ${compName}Mount = (options?: MountingOptions<Partial<${compName}Props>>) => mount(${compName}, { ...(options as MountingOptions<${compName}Props>)})
 
-  renderWork(Ix${compName})
+  renderWork<${compName}Props>(${compName},{
+    props: { },
+  })
 })
 `
 }
@@ -139,7 +141,13 @@ ${
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
+#### ${upperFirstName}Slots
+
+${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
+| --- | --- | --- | --- |
+| - | - | - | - |
+
+#### ${upperFirstName}Methods
 
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |

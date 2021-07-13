@@ -1,29 +1,11 @@
 <template>
   <div style="display: flex; justify-content: space-around">
-    <ix-image
-      objectFit="fill"
-      :width="null"
-      class="demo"
-      src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg"
-      alt="demo"
-    />
-    <ix-image
-      objectFit="contain"
-      class="demo"
-      src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg"
-    />
-    <ix-image
-      objectFit="contain"
-      class="demo"
-      src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg"
-    />
-    <ix-image objectFit="cover" class="demo" src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg" />
-    <ix-image objectFit="none" class="demo" src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg" />
-    <ix-image
-      objectFit="scale-down"
-      class="demo"
-      src="https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg"
-    />
+    <ix-image objectFit="fill" :width="null" class="demo" src="https://idux.site/logo.svg" alt="demo" />
+    <ix-image objectFit="contain" class="demo" src="https://idux.site/logo.svg" />
+    <ix-image objectFit="contain" class="demo" src="https://idux.site/logo.svg" />
+    <ix-image objectFit="cover" class="demo" src="https://idux.site/logo.svg" />
+    <ix-image objectFit="none" class="demo" src="https://idux.site/logo.svg" />
+    <ix-image objectFit="scale-down" class="demo" src="https://idux.site/logo.svg" />
   </div>
 </template>
 

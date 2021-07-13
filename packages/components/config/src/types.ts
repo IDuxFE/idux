@@ -14,6 +14,8 @@ import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
 import type { StepsSize } from '@idux/components/steps'
+import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
+import { BreakpointKey } from '@idux/cdk/breakpoint'
 
 // General
 
@@ -126,6 +128,13 @@ export interface SelectConfig {
 }
 
 // Data Display
+export interface AvatarConfig {
+  gap: number
+  icon: string | VNode
+  shape: AvatarShape
+  size: AvatarSize | Partial<Record<BreakpointKey, number>>
+}
+
 export interface BadgeConfig {
   showZero: boolean
   dot: boolean
@@ -262,6 +271,7 @@ export interface GlobalConfig {
   rate: RateConfig
   select: SelectConfig
   // Data Display
+  avatar: AvatarConfig
   badge: BadgeConfig
   card: CardConfig
   list: ListConfig

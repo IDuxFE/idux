@@ -28,6 +28,7 @@ import {
   DoubleLeft,
   DoubleRight,
   QuestionCircleFilled,
+  User,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -58,4 +59,5 @@ export const staticIcons: IconDefinition[] = [
   Ellipsis,
   QuestionCircle,
   QuestionCircleFilled, // modal
+  User, // Avatar
 ]

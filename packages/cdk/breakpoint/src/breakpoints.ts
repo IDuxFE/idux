@@ -1,4 +1,6 @@
 import invert from 'lodash/invert'
+import { computed, ComputedRef } from 'vue'
+import { observeBreakpoint } from './observe'
 
 type KeyFromValue<V, T extends Record<PropertyKey, PropertyKey>> = {
   [K in keyof T]: V extends T[K] ? K : never
@@ -31,4 +33,9 @@ export const convertMediaToScreen = (medias: Record<keyof typeof mediaScreenMap,
   const keys = Object.keys(medias) as Array<keyof typeof mediaScreenMap>
   keys.forEach(media => (result[mediaScreenMap[media]] = medias[media]))
   return result
+}
+
+export function useBreakpoints(breakpoints: Record<BreakpointKey, string> = Breakpoints): ComputedRef<ScreenMatch> {
+  const observes = observeBreakpoint(Object.values(breakpoints))
+  return computed(() => convertMediaToScreen(observes.value.breakpoints))
 }
