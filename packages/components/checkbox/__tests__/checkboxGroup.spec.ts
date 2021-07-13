@@ -1,182 +1,102 @@
-import { mount } from '@vue/test-utils'
-import CheckboxGroup from '../src/CheckboxGroup.vue'
-import Checkbox from '../src/Checkbox.vue'
-import { nextTick, Ref, ref } from 'vue'
+import { mount, MountingOptions } from '@vue/test-utils'
+import CheckboxGroup from '../src/CheckboxGroup'
 import { renderWork } from '@tests'
-
-const TestComponent = {
-  components: { CheckboxGroup, Checkbox },
-  template: `
-  <checkbox-group>
-    <checkbox value="option1" />
-    <checkbox value="option2" />
-    <checkbox value="option3" />
-  </checkbox-group>
-  `,
-}
+import { CheckboxGroupProps } from '../src/types'
 
 describe('CheckboxGroup.vue and Checkbox', () => {
-  renderWork(TestComponent)
+  const defaultOptions = [
+    { label: 'option1', value: 'option1' },
+    { label: 'option2', value: 'option2' },
+    { label: 'option3', value: 'option3' },
+  ]
 
-  test('value(v-model) work', async () => {
-    const value = ref([]) as Ref<string[]>
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group v-model:value="value">
-        <checkbox value="option1" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return { value }
-      },
-    })
+  const CheckboxGroupMount = (groupOptions?: MountingOptions<Partial<CheckboxGroupProps>>) => {
+    const { props, ...rest } = groupOptions || {}
+    return mount(CheckboxGroup, { props: { options: defaultOptions, ...props }, ...rest })
+  }
 
-    expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(0)
+  renderWork<CheckboxGroupProps>(CheckboxGroup, { props: { options: defaultOptions } })
 
-    value.value = ['option1']
+  test('v-model:value work', async () => {
+    const wrapper = CheckboxGroupMount({ props: { value: ['option1'] } })
 
-    await nextTick()
+    expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(1)
 
-    expect(wrapper.findAllComponents({ name: 'IxCheckbox' })[0].classes()).toContain('ix-checkbox-checked')
+    await wrapper.setProps({ value: [] })
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(false)
-    expect(value.value).toEqual([])
+    expect(wrapper.findAll('.ix-checkbox')[0].classes()).not.toContain('ix-checkbox-checked')
+
+    await wrapper.findAll('input')[0].setValue(true)
+    expect(wrapper.emitted()['update:value'].slice(-1)[0]).toEqual([['option1']])
   })
 
-  test('no value(v-model) work', async () => {
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group>
-        <checkbox value="option1" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return {}
-      },
-    })
-
-    expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(0)
-
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(true)
-
-    expect(wrapper.findAllComponents({ name: 'IxCheckbox' })[0].classes()).toContain('ix-checkbox-checked')
-  })
-
-  test('change event work', async () => {
+  test('onChange work', async () => {
     const mockFn = jest.fn()
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group @change="mockFn">
-        <checkbox value="option1" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return { mockFn }
-      },
-    })
+    const wrapper = CheckboxGroupMount({ props: { onChange: mockFn } })
 
     expect(mockFn).toBeCalledTimes(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').setValue(true)
+    await wrapper.findAll('input')[0].setValue(true)
 
     expect(mockFn).toBeCalledTimes(1)
   })
 
   test('disabled work', async () => {
-    const value = ref([]) as Ref<string[]>
-    const disabled = ref(true)
     const mockFn = jest.fn()
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group v-model:value="value" :disabled="disabled" @change="mockFn">
-        <checkbox value="option1" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return { value, disabled, mockFn }
+    const wrapper = CheckboxGroupMount({
+      props: {
+        value: ['option1'],
+        disabled: true,
+        onChange: mockFn,
       },
     })
 
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(3)
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
-    expect(value.value).toEqual([])
+
+    await wrapper.findAll('input')[0].setValue(true)
     expect(mockFn).toBeCalledTimes(0)
+    expect(wrapper.emitted()).not.toHaveProperty('update:value')
 
-    disabled.value = false
-
-    await nextTick()
+    await wrapper.setProps({ disabled: false })
 
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(0)
 
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
-    expect(value.value).toEqual(['option1'])
+    await wrapper.findAll('input')[0].setValue(false)
+
     expect(mockFn).toBeCalledTimes(1)
+    expect(wrapper.emitted()['update:value'].slice(-1)[0]).toEqual([[]])
   })
 
-  test('readonly work', async () => {
-    const value = ref([]) as Ref<string[]>
-    const readonly = ref(true)
-    const mockFn = jest.fn()
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group v-model:value="value" :readonly="readonly" @change="mockFn">
-        <checkbox value="option1" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return { value, readonly, mockFn }
-      },
-    })
+  test('options work', async () => {
+    let options = [
+      { label: 'option1', value: 'option1' },
+      { label: 'option2', value: 'option2' },
+    ]
+    const wrapper = CheckboxGroupMount({ props: { options } })
 
-    expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(3)
-    // Readonly is not a native property of the checkbox.
-    // It prevents the default behavior in click when implementing, so change will not be triggered.
-    // Therefore, change event is not simulated here.
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
-    expect(value.value).toEqual([])
-    expect(mockFn).toBeCalledTimes(0)
+    expect(wrapper.findAll('.ix-checkbox').length).toBe(2)
 
-    readonly.value = false
+    options = [
+      { label: 'option1', value: 'option1' },
+      { label: 'option2', value: 'option2' },
+      { label: 'option3', value: 'option3' },
+    ]
 
-    await nextTick()
+    await wrapper.setProps({ options })
 
-    expect(wrapper.findAll('.ix-checkbox-readonly').length).toBe(0)
-
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('click')
-    await wrapper.findAllComponents({ name: 'IxCheckbox' })[0].find('input').trigger('change')
-    expect(value.value).toEqual(['option1'])
-    expect(mockFn).toBeCalledTimes(1)
+    expect(wrapper.findAll('.ix-checkbox').length).toBe(3)
   })
 
   test('name work', async () => {
-    const wrapper = mount({
-      components: { CheckboxGroup, Checkbox },
-      template: `
-      <checkbox-group name="group">
-        <checkbox value="option1" name="child" />
-        <checkbox value="option2" />
-        <checkbox value="option3" />
-      </checkbox-group>
-      `,
-      setup() {
-        return {}
+    const options = [
+      { label: 'option1', value: 'option1', name: 'child' },
+      { label: 'option2', value: 'option2' },
+      { label: 'option3', value: 'option3' },
+    ]
+    const wrapper = CheckboxGroupMount({
+      props: {
+        name: 'group',
+        options,
       },
     })
 

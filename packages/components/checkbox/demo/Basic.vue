@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checked"> option </ix-checkbox>
+    <ix-checkbox v-model:checked="checked" label="option" />
   </div>
 </template>
 
@@ -9,8 +9,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const checked = ref(true)
-
+    const checked = ref(false)
     return {
       checked,
     }
