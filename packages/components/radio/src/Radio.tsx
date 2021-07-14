@@ -93,8 +93,8 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       callEmit(props.onChange, checked)
       if (checked) {
         const value = props.value
-        valueAccessor.setValue(value)
         callEmit(groupProps.onChange, value)
+        valueAccessor.setValue(value)
       }
     }
   } else {

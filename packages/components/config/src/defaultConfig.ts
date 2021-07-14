@@ -32,6 +32,7 @@ import type {
   FormConfig,
   PaginationConfig,
   ModalConfig,
+  AvatarConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -131,6 +132,13 @@ const select = shallowReactive<SelectConfig>({
 })
 
 // --------------------- Data Display ---------------------
+const avatar = shallowReactive<AvatarConfig>({
+  gap: 4,
+  icon: 'user',
+  shape: 'circle',
+  size: 'medium',
+})
+
 const badge = shallowReactive<BadgeConfig>({ showZero: false, dot: false, overflowCount: 99 })
 
 const card = shallowReactive<CardConfig>({
@@ -244,6 +252,7 @@ export const defaultConfig: GlobalConfig = {
   radio,
   select,
   // Data Display
+  avatar,
   badge,
   card,
   list,
