@@ -28,7 +28,7 @@ import { IxAvatar } from '@idux/components/avatar'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxSteps, IxStep } from '@idux/components/steps'
 import { IxBadge } from '@idux/components/badge'
-import { IxCard } from '@idux/components/card'
+import { IxCard, IxCardGrid } from '@idux/components/card'
 import { IxList, IxListItem } from '@idux/components/list'
 import { IxEmpty } from '@idux/components/empty'
 import { IxImage } from '@idux/components/image'
@@ -95,6 +95,7 @@ const components = [
   IxList,
   IxListItem,
   IxCard,
+  IxCardGrid,
   IxEmpty,
   IxImage,
   IxStatistic,

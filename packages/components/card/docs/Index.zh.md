@@ -2,40 +2,53 @@
 category: components
 type: 数据展示
 title: Card
-subtitle: 卡片组件
+subtitle: 卡片
 order: 0
+single: true
 ---
 
-卡片用于内容展示
-
-## 何时使用
-
-卡片组件
-
-- 支持设置卡片大小
-- 支持设置卡片边框的显示
-- 支持title自定义
-- 支持卡片右上角操作区域自定义
-- 支持卡片loading状态
-- 支持卡片悬浮效果
+最基础的卡片容器，可承载文字、列表、图片、段落，常用于后台概览页面。
 
 ## API
 
-### `ix-card`
+### ix-card
+
+#### CardProps
 
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `title` | 卡片标题 | `string` | - | - | - |
-| `extra` | 右上角操作区域 | `string` | - | - | - |
-| `borderless` | 是否有边框 | `booelan` | `false` | ✅ | - |
-| `hoverable` | 鼠标 hover 时，是否悬浮 | `booelan` | `false` | ✅ | - |
-| `loading` | 是否加载中状态 | `booelan` | `false` | - | 当卡片内容还在加载中时，可以用 loading 展示一个占位 |
-| `size` | 设置按钮大小 | `medium\|small` | `medium` | ✅ | - |
+| `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
+| `cover` | 卡片封面图片 | `sting \| CardCover \| #cover` | - | - | - |
+| `header` | 对话框标题 | `sting \| HeaderProps \| #header` | - | - | - |
+| `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | `false` | ✅ | - |
+| `loading` | 是否加载中状态 | `boolean` | `false` | - | 当卡片内容还在加载中时，显示占位图 |
+| `size` | 设置按钮大小 | `'medium' \| 'small'` | `'medium'` | ✅ | - |
+| `footer` | 自定义底部按钮 | `CardButtonProps[] \| #footer` | - | - | - |
 
-### Slots
+```ts
+export interface CardCover {
+  // 图片法显示时的替代文本
+  alt: string
+  // 图片的资源地址
+  src: string
+  // 图片的响应式资源地址
+  srcset: string
+}
 
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `title` | 自定义卡片标题内容 | - | - |
-| `extra`   | 自定义卡片右上角操作区域 | - | - |
-| `footer`   | 自定义卡片底部操作区域 | - | - |
+export interface CardButtonProps extends ButtonProps {
+  // 按钮的文本
+  text?: string
+  // 是否显示该按钮, 默认为 true
+  visible?: boolean
+  // 按钮点击回调
+  onClick?: (evt: Event) => void
+}
+```
+
+### ix-card-grid
+
+#### CardGridProps
+
+| 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | - | - | 未设置时，会使用父组件的 `hoverable` |

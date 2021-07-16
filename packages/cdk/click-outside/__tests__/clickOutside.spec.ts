@@ -65,6 +65,5 @@ describe('useClickOutside.ts', () => {
     expect(error).toBeCalledTimes(1)
     expect(info).toBeCalled()
     expect(info).toBeCalledTimes(1)
-    wrapper.unmount()
   })
 })

@@ -1,14 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card render work 1`] = `
-"<div class=\\"ix-card ix-card-border\\">
-  <!--v-if-->
-  <div class=\\"ix-spin\\">
-    <!--v-if-->
-    <div class=\\"ix-spin-container\\">
-      <div class=\\"ix-card-body\\"></div>
-    </div>
+"<div class=\\"ix-card ix-card-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"ix-card-body\\">
+    <p>Some Content</p>
   </div>
-  <!--v-if-->
+  <!---->
 </div>"
 `;

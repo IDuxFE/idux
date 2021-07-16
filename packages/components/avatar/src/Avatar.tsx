@@ -1,4 +1,4 @@
-import type { ComputedRef, CSSProperties, Slot, VNode, VNodeTypes } from 'vue'
+import type { ComputedRef, CSSProperties, Ref, Slot, VNode, VNodeTypes } from 'vue'
 import type { AvatarProps, AvatarSize } from './types'
 
 import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
@@ -29,7 +29,7 @@ export default defineComponent({
 
     const { avatarRef, textRef, size, avatarStyle, textStyle } = useSize(props, config)
 
-    const classes = useClasses(props, config, size)
+    const classes = useClasses(props, config, size, showText, showIcon)
 
     const handleError = (evt: Event) => {
       const result = callEmit(props.onError, evt)
@@ -73,13 +73,15 @@ const useClasses = (
   props: AvatarProps,
   config: AvatarConfig,
   size: ComputedRef<AvatarSize | Partial<Record<BreakpointKey, number>>>,
+  showText: Ref<boolean>,
+  showIcon: Ref<boolean>,
 ) => {
   return computed(() => {
     const shape = props.shape ?? config.shape
     const sizeValue = size.value
     return {
       'ix-avatar': true,
-      'ix-avatar-image': !!props.src,
+      'ix-avatar-image': !!props.src && !showText.value && !showIcon.value,
       [`ix-avatar-${shape}`]: true,
       [`ix-avatar-${sizeValue}`]: isString(sizeValue),
     }

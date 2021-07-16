@@ -1,10 +1,14 @@
 ---
-order: 2
+order: 5
 title:
-  zh: 支持更多的内容配置
+  zh: 更多配置
   en: More options
 ---
 
 ## zh
 
-一种支持标题，底部操作栏的卡片。
+支持多种配置组合的卡片。
+
+## en
+
+A Card that supports combine more options.
