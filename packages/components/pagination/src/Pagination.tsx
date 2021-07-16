@@ -1,108 +1,54 @@
-import type { ComputedRef, VNodeTypes } from 'vue'
+import { ComputedRef, Slots, VNodeTypes } from 'vue'
 import type { PaginationConfig } from '@idux/components/config'
-import type { PaginationInnerProps, PaginationSize } from './types'
+import type { PaginationProps, PaginationSize } from './types'
 
-import { computed, defineComponent, ref, watch } from 'vue'
-import { getLocale } from '@idux/components/i18n'
+import { computed, defineComponent, provide, ref, watch } from 'vue'
+import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import IxPaginationTotal from './Total'
-import IxPaginationDefault from './Default.vue'
-import IxPaginationSimple from './Simple.vue'
+import { getLocale } from '@idux/components/i18n'
+import Total from './Total'
+import Default from './Default'
+import Simple from './Simple'
 import { paginationProps } from './types'
+import { paginationToken } from './token'
 
 export default defineComponent({
   name: 'IxPagination',
   props: paginationProps,
-  emits: ['update:pageIndex', 'update:pageSize'],
-  setup(props, { slots, emit }) {
-    const locale = getLocale('pagination')
+  setup(props, { slots }) {
     const config = useGlobalConfig('pagination')
+    useProvider(props, slots, config)
 
-    const itemRender$$ = computed(() => slots.item ?? props.itemRender ?? config.itemRender)
-    const pageSizes$$ = computed(() => props.pageSizes ?? config.pageSizes)
-    const showQuickJumper$$ = computed(() => props.showQuickJumper ?? config.showQuickJumper)
-    const showSizeChanger$$ = computed(() => props.showSizeChanger ?? config.showSizeChanger)
-    const showTitle$$ = computed(() => props.showTitle ?? config.showTitle)
     const showTotal$$ = computed(() => props.showTotal ?? config.showTotal)
     const simple$$ = computed(() => props.simple ?? config.simple)
     const size$$ = computed(() => props.size ?? config.size)
-    const totalRender$$ = computed(() => slots.total ?? props.totalRender ?? config.totalRender)
-
     const classes = useClasses(props, simple$$, size$$)
-    const { activeIndex, activeSize, onPageIndexChange, onPageSizeChange } = useActive(props, config, emit)
 
     return {
       classes,
-      activeIndex,
-      activeSize,
-      locale,
-      itemRender$$,
-      pageSizes$$,
-      showQuickJumper$$,
-      showSizeChanger$$,
-      showTitle$$,
       showTotal$$,
       simple$$,
       size$$,
-      totalRender$$,
-      onPageIndexChange,
-      onPageSizeChange,
     }
   },
 
   render() {
     const child: VNodeTypes[] = []
     if (this.showTotal$$) {
-      child.push(
-        <IxPaginationTotal
-          locale={this.locale}
-          pageIndex={this.activeIndex}
-          pageSize={this.activeSize}
-          total={this.total}
-          totalRender={this.totalRender$$}
-        />,
-      )
+      child.push(<Total />)
     }
 
     if (this.simple$$) {
-      child.push(
-        <IxPaginationSimple
-          disabled={this.disabled}
-          itemRender={this.itemRender$$}
-          locale={this.locale}
-          pageIndex={this.activeIndex}
-          pageSize={this.activeSize}
-          showTitle={this.showTitle$$}
-          size={this.size$$}
-          total={this.total}
-          onPageIndexChange={this.onPageIndexChange}
-        />,
-      )
+      child.push(<Simple />)
     } else {
-      child.push(
-        <IxPaginationDefault
-          disabled={this.disabled}
-          itemRender={this.itemRender$$}
-          locale={this.locale}
-          pageIndex={this.activeIndex}
-          pageSize={this.activeSize}
-          pageSizes={this.pageSizes$$}
-          showQuickJumper={this.showQuickJumper$$}
-          showSizeChanger={this.showSizeChanger$$}
-          showTitle={this.showTitle$$}
-          size={this.size$$}
-          total={this.total}
-          onPageIndexChange={this.onPageIndexChange}
-          onPageSizeChange={this.onPageSizeChange}
-        />,
-      )
+      child.push(<Default />)
     }
 
     return <ul class={this.classes}>{child}</ul>
   },
 })
 
-const useClasses = (props: PaginationInnerProps, simple: ComputedRef<boolean>, size: ComputedRef<PaginationSize>) => {
+const useClasses = (props: PaginationProps, simple: ComputedRef<boolean>, size: ComputedRef<PaginationSize>) => {
   return computed(() => {
     return {
       'ix-pagination': true,
@@ -123,11 +69,8 @@ const validatePageIndex = (index: number, lastIndex: number) => {
   }
 }
 
-const useActive = (
-  props: PaginationInnerProps,
-  config: PaginationConfig,
-  emit: (event: 'update:pageIndex' | 'update:pageSize', ...args: number[]) => void,
-) => {
+const useProvider = (props: PaginationProps, slots: Slots, config: PaginationConfig) => {
+  const locale = getLocale('pagination')
   const pagesize = computed(() => props.pageSize ?? config.pageSize)
   const activeSize = ref(pagesize.value)
   const activeIndex = ref(props.pageIndex)
@@ -137,13 +80,13 @@ const useActive = (
     const validIndex = validatePageIndex(index, lastIndex.value)
     if (validIndex !== activeIndex.value) {
       activeIndex.value = validIndex
-      emit('update:pageIndex', validIndex)
+      callEmit(props['onUpdate:pageIndex'], validIndex)
     }
   }
 
   const onPageSizeChange = (size: number) => {
     activeSize.value = size
-    emit('update:pageSize', size)
+    callEmit(props['onUpdate:pageSize'], size)
   }
 
   watch(pagesize, size => (activeSize.value = size))
@@ -163,5 +106,14 @@ const useActive = (
     { immediate: true },
   )
 
-  return { activeSize, activeIndex, onPageIndexChange, onPageSizeChange }
+  provide(paginationToken, {
+    props,
+    slots,
+    config,
+    locale,
+    activeIndex,
+    activeSize,
+    onPageIndexChange,
+    onPageSizeChange,
+  })
 }

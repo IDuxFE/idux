@@ -8,7 +8,7 @@ export { IxPagination }
 
 export type {
   PaginationInstance,
-  PaginationProps,
+  PaginationPublicProps as PaginationProps,
   PaginationSize,
   PaginationItemType,
   PaginationItemRenderOptions,

@@ -1,0 +1,43 @@
+import { computed, defineComponent, inject, toRef } from 'vue'
+import { IxSelect } from '@idux/components/select'
+import { paginationToken } from './token'
+
+export default defineComponent({
+  setup() {
+    const { props, config, locale, activeSize, onPageSizeChange } = inject(paginationToken)!
+
+    const size = computed(() => props.size ?? config.size)
+    const pageSizes = computed(() => props.pageSizes ?? config.pageSizes)
+
+    const sizeOptions = computed(() => {
+      return pageSizes.value.map(size => {
+        return {
+          value: size,
+          label: `${size} ${locale.value.itemsPerPage}`,
+        }
+      })
+    })
+
+    return {
+      sizeOptions,
+      onPageSizeChange,
+      size,
+      activeSize,
+      disabled: toRef(props, 'disabled'),
+    }
+  },
+
+  render() {
+    return (
+      <li class="ix-pagination-sizes">
+        <IxSelect
+          disabled={this.disabled}
+          options={this.sizeOptions}
+          size={this.size}
+          value={this.activeSize}
+          onChange={this.onPageSizeChange}
+        ></IxSelect>
+      </li>
+    )
+  },
+})
