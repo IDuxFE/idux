@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardGrid hoverable work 1`] = `
+"<div class=\\"ix-card ix-card-has-grid ix-card-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"ix-card-body\\">
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`CardGrid hoverable2 work 1`] = `
+"<div class=\\"ix-card ix-card-has-grid ix-card-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"ix-card-body\\">
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+    <div class=\\"ix-card-grid ix-card-grid-hoverable\\">Content</div>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`CardGrid render work 1`] = `
+"<div class=\\"ix-card ix-card-has-grid ix-card-medium\\">
+  <!---->
+  <!---->
+  <div class=\\"ix-card-body\\">
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+    <div class=\\"ix-card-grid\\">Content</div>
+  </div>
+  <!---->
+</div>"
+`;

@@ -1,56 +1,142 @@
 @import '../../style/default.less';
-    
+
 @card-prefix: ~'@{idux-prefix}-card';
-@border: @card-border-size @border-style @card-border-color;
-    
+
 .@{card-prefix} {
-  font-size: @card-font-size-md;
-  &-border{
-    border: @border;
-    border-top-left-radius: @border-radius-gutter;
-  }
-  &-hover:hover{
-    box-shadow:@card-hover-shadow;
-  }
-  &-loading-block{
-    min-height: @card-min-height;
-  }
-  &-head,&-body,&footer{
-    padding: @card-padding-lg;
-  }
-  &-head{
-    display: flex;
-    border-bottom:@border;
-    &-title{
-      .ellipsis();
-      flex: 1;
-      font-size: @card-title-font-size-md;
-    }
-    &-extra{
-      float: right;
-      margin-left: auto;
-    }
-  }  
-  &-body{
-    background: @card-bg-color;
-  }
-  &-footer{
-    border-top: @border;
-    text-align: center;
+  position: relative;
+  background: @card-bg-color;
+  border: @card-border-width @card-border-style @card-border-color;
+  border-radius: @card-border-radius;
+
+  &-borderless {
+    border: none;
   }
 
-  // 当size为small时
-  &-small{
-    font-size: @card-font-size-sm;
-    .@{card-prefix}-head,.@{card-prefix}-body,.@{card-prefix}-footer {
-      padding: @card-padding-sm;
+  &-hoverable {
+    cursor: pointer;
+    transition: all @card-transition-duration;
+
+    &:hover {
+      border-color: @card-border-color-hover;
+      box-shadow: @card-box-shadow;
     }
-    .@{card-prefix}-head-title {
-        font-size: @card-title-font-size-sm;
-        font-weight: @card-title-font-weight-sm;
+  }
+
+  &-small {
+    .card-size(@card-padding-sm);
+  }
+
+  &-medium {
+    .card-size(@card-padding-md);
+  }
+
+  &-large {
+    .card-size(@card-padding-lg);
+  }
+
+  &-cover {
+    > * {
+      display: block;
+      width: 100%;
+    }
+
+    img {
+      border-radius: @card-border-radius @card-border-radius 0 0;
+    }
+  }
+
+  &:not(&-borderless) &-cover {
+    margin-top: -@card-border-width;
+    margin-right: -@card-border-width;
+    margin-left: -@card-border-width;
+  }
+
+  > .@{idux-prefix}-header {
+    border-bottom: @card-border-width @card-border-style @card-border-color;
+  }
+
+  &-footer {
+    border-top: @card-border-width @card-border-style @card-border-color;
+    display: flex;
+
+    > li {
+      flex: 1;
+
+      > .@{idux-prefix}-button {
+        border: none;
+        width: 100%;
+      }
+
+      &:not(:last-child) {
+        border-right: @card-border-width @card-border-style @card-border-color;
+      }
+    }
+  }
+
+  &-loading {
+    overflow: hidden;
+  }
+
+  &-loading &-body {
+    user-select: none;
+  }
+
+  &-loading-col {
+    padding: 0 @card-loading-spacing;
+  }
+
+  &-loading-block {
+    height: @card-loading-height;
+    margin: @card-loading-spacing 0;
+    background: linear-gradient(90deg, @card-gradient-min, @card-gradient-max, @card-gradient-min);
+    background-size: @card-loading-bg-size @card-loading-bg-size;
+    border-radius: @card-border-radius;
+    animation: card-loading @card-loading-transition-duration ease infinite;
+  }
+
+  &-has-grid:not(&-loading) &-body {
+    margin: -@card-border-width 0 0 -@card-border-width;
+    padding: 0;
+    .clearfix();
+  }
+
+  &-grid {
+    float: left;
+    width: @card-grid-width;
+    padding: @card-padding-md;
+    box-shadow: @card-border-width 0 0 0 @card-border-color, 0 @card-border-width 0 0 @card-border-color,
+      @card-border-width @card-border-width 0 0 @card-border-color, @card-border-width 0 0 0 @card-border-color inset,
+      0 @card-border-width 0 0 @card-border-color inset;
+
+    &-hoverable {
+      transition: all @card-transition-duration;
+      &:hover {
+        box-shadow: @card-box-shadow;
+      }
     }
   }
 }
 
+@keyframes card-loading {
+  0%,
+  100% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
 
+.card-size(@card-padding) {
+  > .@{idux-prefix}-header {
+    padding: (@card-padding / 2) @card-padding 0;
+  }
 
+  .@{card-prefix}-body {
+    padding: @card-padding;
+  }
+
+  .@{card-prefix}-footer {
+    padding: (@card-padding / 4);
+  }
+}

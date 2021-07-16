@@ -36,6 +36,10 @@
     }
   }
 
+  .@{idux-prefix}-avatar {
+    margin-right: @header-avatar-margin-right;
+  }
+
   &-title {
     color: @header-title-color;
     margin-right: @header-title-margin-right;
@@ -46,6 +50,7 @@
   &-sub-title {
     color: @header-sub-color;
     font-size: @header-sub-font-size;
+    align-self: flex-end;
     .ellipsis();
   }
 
@@ -104,5 +109,9 @@
 
   .@{header-prefix}-title {
     font-size: @font-size;
+  }
+
+  .@{header-prefix}-description {
+    margin-bottom: @spacing-vertical;
   }
 }

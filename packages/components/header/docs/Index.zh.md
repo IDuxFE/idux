@@ -14,11 +14,12 @@ order: 0
 
 ### ix-header
 
-#### Props
+#### HeaderProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `extra` | 右侧操作区域 | `string \| string[] \| #extra` | - | - | - |
+| `avatar` | 自定义头像 | `string \| AvatarProps \| #avatar` | - | - | 传入 `string` 时，为头像的图标  |
+| `extra` | 右侧操作区域 | `string \| VNode \| #extra` | - | - | - |
 | `description` | 标题下方说明文字 | `string \| #description` | - | - | - |
 | `prefix` | 标题前缀图标 | `string \| #prefix` | - | - | - |
 | `size` | 标题大小 | `extraLarge \| large \| medium \| small` | `large` | - | 分别对应 `h1 \| h2 \| h3 \| h4` |

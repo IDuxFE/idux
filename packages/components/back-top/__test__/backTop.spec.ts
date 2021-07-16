@@ -3,7 +3,6 @@ import IxBackTop from '../src/BackTop.vue'
 import { renderWork, waitRAF, isShow, wait, scrollTarget } from '@tests'
 import { nextTick } from 'vue'
 
-const mockFn = jest.fn()
 const warn = jest.spyOn(console, 'warn').mockImplementation()
 
 const backTopMount = (template: string, options = {}) =>
@@ -28,11 +27,6 @@ describe('BackTop', () => {
         </div>
       </div>
     `,
-      {
-        beforeUnmount() {
-          mockFn()
-        },
-      },
     )
 
     expect(isShow(wrapper.find('.ix-back-top'))).toBe(false)
@@ -45,9 +39,6 @@ describe('BackTop', () => {
     await wait(200)
 
     expect(wrapper.element.scrollTop).toBe(0)
-
-    wrapper.unmount()
-    expect(mockFn).toBeCalled()
   })
 
   test('props work: target is a HTMLElement', async () => {
@@ -82,6 +73,7 @@ describe('BackTop', () => {
   })
 
   test('props work: target is the default value', async () => {
+    const mockFn = jest.fn()
     window.scrollTo = mockFn
 
     const wrapper = backTopMount(`

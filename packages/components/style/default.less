@@ -113,9 +113,11 @@
 @header-prefix-font-size: @font-size-lg;
 @header-prefix-active-color: @primary;
 
+@header-avatar-margin-right: @spacing-lg;
+
 @header-title-color: @black;
 @header-title-font-weight: @font-weight-xl;
-@header-title-margin-right: @spacing-md;
+@header-title-margin-right: @spacing-lg;
 @header-title-font-size-xl: @font-size-3xl;
 @header-title-font-size-lg: @font-size-2xl;
 @header-title-font-size-md: @font-size-xl;
@@ -571,18 +573,26 @@
 @badge-dot-size: 6px;
 
 /* card -------------------------- */
-@card-border-color: @border-color;
-@card-border-size: @border-width-sm;
-@card-font-size-md: @font-size-md;
-@card-font-size-sm: @font-size-sm;
-@card-title-font-size-md: @font-size-lg;
-@card-title-font-size-sm: @font-size-md;
-@card-title-font-weight-sm: @font-weight-md;
-@card-hover-shadow: @shadow-bottom-sm;
-@card-padding-lg: @spacing-lg;
-@card-padding-sm: @spacing-sm;
-@card-min-height: 128px;
-@card-bg-color: #fff;
+@card-padding-md: @spacing-lg;
+@card-padding-sm: @spacing-md;
+@card-padding-lg: @spacing-xl;
+@card-bg-color: @background-color-component;
+@card-border-width: @border-width-sm;
+@card-border-style: @border-style;
+@card-border-color: @border-color-split;
+@card-border-color-hover: transparent;
+@card-border-radius: @border-radius-sm;
+@card-box-shadow: @shadow-bottom-sm;
+@card-gradient-min: fade(@grey, 20%);
+@card-gradient-max: fade(@grey, 60%);
+@card-transition-duration: @transition-duration-base;
+
+@card-loading-spacing: @spacing-xs;
+@card-loading-height: @font-size-md;
+@card-loading-bg-size: 600%;
+@card-loading-transition-duration: 2s;
+
+@card-grid-width: 25%;
 
 /* list -------------------------- */
 @list-border-color: @border-color;

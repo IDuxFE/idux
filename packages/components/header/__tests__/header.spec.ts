@@ -4,11 +4,32 @@ import { renderWork } from '@tests'
 import { IxIcon } from '@idux/components/icon'
 import IxHeader from '../src/Header'
 import { HeaderProps } from '../src/types'
+import { IxAvatar } from '@idux/components/avatar'
 
 describe('Header', () => {
   const HeaderMount = (options?: MountingOptions<Partial<HeaderProps>>) => mount(IxHeader, { ...options })
 
   renderWork(IxHeader)
+
+  test('avatar work', async () => {
+    const wrapper = HeaderMount({ props: { avatar: 'user' } })
+
+    expect(wrapper.find('.ix-avatar').find('.ix-icon-user').exists()).toBe(true)
+
+    const avatarText = 'avatar'
+    await wrapper.setProps({ avatar: { text: avatarText } })
+
+    expect(wrapper.find('.ix-avatar').find('.ix-avatar-text').text()).toBe(avatarText)
+  })
+
+  test('avatar slot work', async () => {
+    const wrapper = HeaderMount({
+      props: { avatar: 'user' },
+      slots: { avatar: () => h(IxAvatar, { icon: 'up' }) },
+    })
+
+    expect(wrapper.find('.ix-avatar').find('.ix-icon-up').exists()).toBe(true)
+  })
 
   test('extra work', async () => {
     const onExtraClick = jest.fn()

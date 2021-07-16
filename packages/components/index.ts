@@ -21,7 +21,7 @@ import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@
 import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxInput, IxTextarea } from '@idux/components/input'
-import { IxRadio, IxRadioButton, IxRadioGroup } from '@idux/components/radio'
+import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxSelect, IxOption, IxOptionGroup } from '@idux/components/select'
 import { IxSwitch } from '@idux/components/switch'
@@ -79,7 +79,6 @@ const components = [
   IxInput,
   IxTextarea,
   IxRadio,
-  IxRadioButton,
   IxRadioGroup,
   IxRate,
   IxSelect,

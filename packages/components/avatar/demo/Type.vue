@@ -1,6 +1,6 @@
 <template>
   <ix-space>
-    <ix-avatar src="https://idux.site/logo.svg" />
+    <ix-avatar src="/images/avatar/0.png" />
     <ix-avatar text="USER" />
     <ix-avatar>U</ix-avatar>
     <ix-avatar />
