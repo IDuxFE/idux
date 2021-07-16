@@ -20,6 +20,7 @@
 
     .@{idux-prefix}-icon {
       font-size: @pagination-item-icon-font-size;
+      vertical-align: 0;
     }
 
     &-slash {
@@ -59,6 +60,12 @@
     }
   }
 
+  &-item:not(&-item-active) {
+    .@{idux-prefix}-button:hover:not(.@{idux-prefix}-button-disabled) {
+      background-color: @pagination-item-hover-bg-color;
+    }
+  }
+
   &-total {
     margin-right: @pagination-item-margin-right-md;
   }
@@ -76,5 +83,10 @@
   &-small {
     vertical-align: top;
     .pagination-size(@pagination-item-height-sm, @pagination-item-input-width-sm, @pagination-item-margin-right-sm);
+    .@{idux-prefix}-button {
+      min-width: @pagination-item-spacing-sm;
+      height: @pagination-item-spacing-sm;
+      line-height: @pagination-item-spacing-sm;
+    }
   }
 }

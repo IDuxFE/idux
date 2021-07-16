@@ -2,10 +2,15 @@
 
 exports[`Pagination render work 1`] = `
 "<ul class=\\"ix-pagination ix-pagination-medium\\">
-  <li class=\\"ix-pagination-total\\">共 0 条</li>
-  <li class=\\"ix-pagination-item\\" title=\\"上一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i><span><!----></span></button></li>
-  <li class=\\"ix-pagination-item\\" title=\\"下一页\\" size=\\"medium\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i><span><!----></span></button></li>
-  <!--v-if-->
-  <!--v-if-->
+  <li class=\\"ix-pagination-total\\">共 50 条</li>
+  <li class=\\"ix-pagination-item\\" title=\\"上一页\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button></li>
+  <li class=\\"ix-pagination-item ix-pagination-item-active\\" title=\\"1\\"><button class=\\"ix-button ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><span>1</span></button></li>
+  <li class=\\"ix-pagination-item\\" title=\\"2\\"><button class=\\"ix-button ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><span>2</span></button></li>
+  <li class=\\"ix-pagination-item\\" title=\\"3\\"><button class=\\"ix-button ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><span>3</span></button></li>
+  <li class=\\"ix-pagination-item\\" title=\\"4\\"><button class=\\"ix-button ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><span>4</span></button></li>
+  <li class=\\"ix-pagination-item\\" title=\\"5\\"><button class=\\"ix-button ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><span>5</span></button></li>
+  <li class=\\"ix-pagination-item\\" title=\\"下一页\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-small ix-button-circle\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button></li>
+  <!---->
+  <!---->
 </ul>"
 `;

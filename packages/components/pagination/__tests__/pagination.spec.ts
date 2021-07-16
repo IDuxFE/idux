@@ -1,24 +1,19 @@
+import { h } from 'vue'
 import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
+import { IxButton } from '@idux/components/button'
 import IxPagination from '../src/Pagination'
 import { PaginationProps, PaginationItemRenderOptions } from '../src/types'
-import { h, ref } from 'vue'
-import { IxButton } from '@idux/components/button'
+import Sizes from '../src/Sizes'
 
-describe.skip('Pagination', () => {
+describe('Pagination', () => {
   const PaginationMount = (options?: MountingOptions<Partial<PaginationProps>>) => mount(IxPagination, { ...options })
 
-  renderWork(IxPagination)
+  renderWork<PaginationProps>(IxPagination, { props: { total: 50 } })
 
   test('v-model:pageIndex work', async () => {
-    const pageIndex = ref(1)
-    const wrapper = mount({
-      components: { IxPagination },
-      template: `<ix-pagination v-model:pageIndex="pageIndex" :total="50" />`,
-      setup() {
-        return { pageIndex }
-      },
-    })
+    const onUpdatePageIndex = jest.fn()
+    const wrapper = PaginationMount({ props: { total: 50, pageIndex: 1, 'onUpdate:pageIndex': onUpdatePageIndex } })
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('1')
 
@@ -26,49 +21,39 @@ describe.skip('Pagination', () => {
     await items[4].trigger('click')
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('4')
-    expect(pageIndex.value).toEqual(4)
+    expect(onUpdatePageIndex).toBeCalledWith(4)
 
-    pageIndex.value = 3
-    await flushPromises()
+    await wrapper.setProps({ pageIndex: 3 })
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('3')
 
-    pageIndex.value = 6
-    await flushPromises()
+    // max index is: 50 / 10 = 5
+    await wrapper.setProps({ pageIndex: 6 })
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('5')
   })
 
   test('v-model:pageSize and showSizeChanger work', async () => {
-    const pageSize = ref(10)
-    const wrapper = mount(
-      {
-        components: { IxPagination },
-        template: `<ix-pagination v-model:pageSize="pageSize" :total="50" showSizeChanger />`,
-        setup() {
-          return { pageSize }
-        },
-      },
-      { attachTo: 'body' },
-    )
+    const onUpdatePageSize = jest.fn()
+    const wrapper = PaginationMount({
+      props: { total: 50, pageSize: 10, showSizeChanger: true, 'onUpdate:pageSize': onUpdatePageSize },
+    })
 
     expect(wrapper.findAll('.ix-pagination-item').length).toEqual(7)
 
-    pageSize.value = 5
-    await flushPromises()
+    await wrapper.setProps({ pageSize: 5 })
 
     expect(wrapper.findAll('.ix-pagination-item').length).toEqual(9)
 
-    pageSize.value = 20
-    await flushPromises()
+    await wrapper.setProps({ pageSize: 20 })
 
     expect(wrapper.findAll('.ix-pagination-item').length).toEqual(5)
 
-    wrapper.findComponent({ name: 'IxPaginationSizes' }).vm.onPageSizeChange(50)
+    wrapper.findComponent(Sizes).vm.onPageSizeChange(50)
     await flushPromises()
 
     expect(wrapper.findAll('.ix-pagination-item').length).toEqual(3)
-    expect(pageSize.value).toEqual(50)
+    expect(onUpdatePageSize).toBeCalledWith(50)
   })
 
   test('disabled work', async () => {
@@ -134,35 +119,34 @@ describe.skip('Pagination', () => {
   })
 
   test('simple work', async () => {
-    const wrapper = PaginationMount({ props: { total: 50, simple: true } })
+    const onUpdatePageIndex = jest.fn()
+    const wrapper = PaginationMount({ props: { total: 50, simple: true, 'onUpdate:pageIndex': onUpdatePageIndex } })
 
     expect(wrapper.find('.ix-pagination-item-slash').exists()).toBeTruthy()
 
     await wrapper.find('.ix-input-inner').setValue('3')
     await wrapper.find('.ix-input-inner').trigger('keydown', { key: 'enter' })
 
-    expect(wrapper.vm.activeIndex).toEqual(3)
+    expect(onUpdatePageIndex).toBeCalledWith(3)
 
     await wrapper.find('.ix-input-inner').setValue('6')
     await wrapper.find('.ix-input-inner').trigger('keydown', { key: 'enter' })
 
-    expect(wrapper.vm.activeIndex).toEqual(5)
+    expect(onUpdatePageIndex).toBeCalledWith(5)
 
     await wrapper.find('.ix-input-inner').setValue('asdasd')
     await wrapper.find('.ix-input-inner').trigger('keydown', { key: 'enter' })
 
-    expect(wrapper.vm.activeIndex).toEqual(5)
+    expect(onUpdatePageIndex).toBeCalledWith(5)
 
     const [prev, , next] = wrapper.findAll('.ix-pagination-item')
     await prev.trigger('click')
-    await flushPromises()
 
-    expect(wrapper.vm.activeIndex).toEqual(4)
+    expect(onUpdatePageIndex).toBeCalledWith(4)
 
     await next.trigger('click')
-    await flushPromises()
 
-    expect(wrapper.vm.activeIndex).toEqual(5)
+    expect(onUpdatePageIndex).toBeCalledWith(5)
   })
 
   test('size work', async () => {
@@ -223,11 +207,15 @@ describe.skip('Pagination', () => {
     const wrapper = PaginationMount({
       props: { total: 50 },
       slots: {
-        item: `<template #item="{ type, original }">
-          <button v-if="type === 'prev'">Previous</button>
-          <button v-else-if="type === 'next'">Next</button>
-          <component :is="original" v-else />
-        </template>`,
+        item: ({ type, original }) => {
+          if (type === 'prev') {
+            return h('button', 'Previous')
+          } else if (type === 'next') {
+            return h('button', 'Next')
+          } else {
+            return original
+          }
+        },
       },
     })
 
@@ -252,9 +240,7 @@ describe.skip('Pagination', () => {
     const wrapper = PaginationMount({
       props: { total: 50 },
       slots: {
-        total: `<template #total="{ total, range }">
-          <span>{{ range[0] }}-{{ range[1] }} of {{ total }} items</span>
-        </template>`,
+        total: ({ total, range }) => `${range[0]}-${range[1]} of ${total} items`,
       },
     })
 

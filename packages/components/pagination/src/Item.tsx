@@ -1,9 +1,11 @@
 import type { VNodeTypes } from 'vue'
 import type { PaginationItemRenderFn, PaginationItemType } from './types'
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
+import { isNil } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { paginationItemProps } from './types'
+import { paginationToken } from './token'
 
 const iconMap = {
   prev: 'left',
@@ -13,52 +15,71 @@ const iconMap = {
   page: '',
 } as const
 
+const indexDiffMap = {
+  next: 1,
+  prev: -1,
+  prev5: -5,
+  next5: 5,
+} as const
+
 export default defineComponent({
-  name: 'IxPaginationItem',
   props: paginationItemProps,
-  emits: ['itemClick'],
-  setup(props, { emit }) {
+  setup(props) {
+    const { props: paginationProps, slots, config, locale, activeIndex, onPageIndexChange } = inject(paginationToken)!
+
+    const isActive = computed(() => activeIndex.value === props.index)
+    const isDisabled = computed(() => props.disabled || paginationProps.disabled)
+    const showTitle = computed(() => paginationProps.showTitle ?? config.showTitle)
+    const itemRender = computed(() => slots.item ?? paginationProps.itemRender ?? config.itemRender)
+
     const classes = computed(() => {
       return {
         'ix-pagination-item': true,
-        'ix-pagination-item-active': props.active,
+        'ix-pagination-item-active': isActive.value,
       }
     })
 
     const title = computed(() => {
-      if (!props.showTitle) {
+      if (!showTitle.value) {
         return undefined
       }
-      const { locale, type, index } = props
-      const { prev, next, prev5, next5 } = locale
-      const titles = { prev, next, prev5, next5, page: `${index}` }
-      return titles[type]
+
+      const { type, index } = props
+      if (type === 'page') {
+        return index!.toString()
+      }
+
+      return locale.value[type]
     })
 
     const onClick = () => {
-      if (props.disabled) {
+      if (isDisabled.value) {
         return
       }
       const { type, index } = props
-      emit('itemClick', { type, index })
+      let newIndex: number
+      if (type === 'page') {
+        newIndex = index!
+      } else {
+        newIndex = activeIndex.value + indexDiffMap[type]
+      }
+      onPageIndexChange(newIndex)
     }
 
-    return { classes, title, onClick }
+    return { classes, title, isActive, isDisabled, onClick, itemRender }
   },
 
   render() {
-    const { classes, title, onClick, index, type, active, disabled } = this
-    const itemRender = this.$slots.item ?? this.itemRender
-    const children = getChildren(itemRender, index, type, active, disabled)
+    const child = getChild(this.itemRender, this.index, this.type, this.isActive, this.isDisabled)
     return (
-      <li class={classes} title={title} onClick={onClick}>
-        {children}
+      <li class={this.classes} title={this.title} onClick={this.onClick}>
+        {child}
       </li>
     )
   },
 })
 
-const getChildren = (
+const getChild = (
   itemRender: PaginationItemRenderFn | undefined,
   index: number | undefined,
   type: PaginationItemType,
@@ -67,26 +88,22 @@ const getChildren = (
 ) => {
   let original: VNodeTypes
   const icon = iconMap[type]
+  const commonButtonProps = { mode: 'text', size: 'small', shape: 'circle' } as const
   if (type === 'prev5' || type === 'next5') {
     original = (
       <span class="ix-pagination-item-jumper">
-        <IxButton mode="text" icon={icon} disabled={disabled} size="small" shape="circle" />
-        <IxButton
-          class="ix-pagination-item-ellipsis"
-          mode="text"
-          icon="ellipsis"
-          disabled={disabled}
-          size="small"
-          shape="circle"
-        />
+        <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
+        <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
       </span>
     )
-  } else {
+  } else if (!isNil(index)) {
     original = (
-      <IxButton mode="text" icon={icon} disabled={disabled} size="small" shape="circle">
+      <IxButton {...commonButtonProps} icon={icon} disabled={disabled}>
         {index}
       </IxButton>
     )
+  } else {
+    original = <IxButton {...commonButtonProps} icon={icon} disabled={disabled}></IxButton>
   }
 
   return itemRender ? itemRender({ index, type, active, disabled, original }) : original
