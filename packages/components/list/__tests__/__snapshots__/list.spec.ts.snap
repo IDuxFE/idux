@@ -4,7 +4,7 @@ exports[`List render work 1`] = `
 "<div class=\\"ix-list ix-list-medium ix-list-border\\">
   <!--v-if-->
   <div class=\\"ix-spin\\">
-    <!--v-if-->
+    <!---->
     <div class=\\"ix-spin-container\\">
       <div>
         <div class=\\"ix-list-item\\">
