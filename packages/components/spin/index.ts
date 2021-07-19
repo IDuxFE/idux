@@ -1,6 +1,6 @@
 import type { SpinComponent } from './src/types'
 
-import Spin from './src/Spin.vue'
+import Spin from './src/Spin'
 
 const IxSpin = Spin as unknown as SpinComponent
 
