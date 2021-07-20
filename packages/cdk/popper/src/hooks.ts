@@ -12,7 +12,7 @@ import type {
 import { computed, reactive, ref, watch } from 'vue'
 import { camelCase, kebabCase } from 'lodash'
 import { isUndefined } from '@idux/cdk/utils'
-import { mapTriggerEvents } from '@idux/cdk/popper/src/utils'
+import { mapTriggerEvents } from './utils'
 
 export type PopperState = Required<Omit<PopperOptions, 'placement'> & { placement: Placement }>
 
