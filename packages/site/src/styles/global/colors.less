@@ -1,4 +1,4 @@
-@global-color-levels: l50, l40, l30, l20, l10, d10, d20, d30, d40, d50;
+@global-color-levels: l50, l40, l30, l20, l10, d10, d20, d30, d40;
 
 .global-color-level(@color, @i: length(@global-color-levels)) when (@i > 0) {
   .global-color-level(@color, @i - 1);
@@ -31,11 +31,11 @@
 }
 .global-color-level(grey);
 
-.global-color-lime {
+.global-color-graphite {
   color: @white;
-  background-color: @lime;
+  background-color: @graphite;
 }
-.global-color-level(lime);
+.global-color-level(graphite);
 
 .global-color {
   .global-color-row {

@@ -1,6 +1,6 @@
 // https://github.com/ant-design/ant-design
 /* stylelint-disable no-duplicate-selectors */
-//@import "bezierEasing";
+@import "bezierEasing";
 @import "tinyColor";
 
 // We create a very complex algorithm which take the place of original tint/shade color system
@@ -46,8 +46,8 @@
     if (isLight && i === lightColorCount && saturation > 0.1) {
       saturation = 0.1;
     }
-    if (saturation < 0.04) {
-      saturation = 0.04;
+    if (saturation < 0.06) {
+      saturation = 0.06;
     }
     return Number(saturation.toFixed(2));
   };

@@ -6,6 +6,7 @@ export const presetColor = [
   'gold',
   'yellow',
   'canary',
+  'lime',
   'prasinous',
   'verdant',
   'green',
