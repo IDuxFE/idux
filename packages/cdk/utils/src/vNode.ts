@@ -69,12 +69,9 @@ export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[
  * checks whether a slot exists
  * @param slots slots of the component
  * @param key key of slots, default is 'default'
- * @param options the property of the render function
  */
-export function hasSlot(slots: Slots, key = 'default', ...options: unknown[]): boolean {
-  const vNodes = slots[key]?.(...options)
-  const firstValidNode = getFirstValidNode(vNodes)
-  return isValidElementNode(firstValidNode)
+export function hasSlot(slots: Slots, key = 'default'): boolean {
+  return !isNil(slots[key])
 }
 
 export function isEmptyElement(node: VNodeChild): boolean {
