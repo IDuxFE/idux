@@ -8,15 +8,19 @@
     height: @header-height;
     line-height: @header-height;
     padding-left: @spacing-3xl;
-    font-size: @font-size-xl;
+    text-align: center;
     text-decoration: none;
 
     img {
       position: relative;
-      top: 8px;
-      width: 32px;
-      height: 32px;
+      top: 16px;
+      width: 48px;
+      height: 48px;
       margin-right: @spacing-lg;
+    }
+
+    h2 {
+      display: inline-block;
     }
   }
 
@@ -26,10 +30,6 @@
 
     > * {
       margin-right: @spacing-lg;
-
-      &:last-child {
-        margin-right: @spacing-2xl;
-      }
     }
   }
 
@@ -44,26 +44,57 @@
   }
 
   &-menu {
+    &,
+    &-sub {
+      text-align: center;
+    }
+
     &.ix-menu-horizontal {
       border-bottom: none;
-    }
 
-    & > .ix-menu-item {
-      height: @header-height;
-      line-height: @header-height - @menu-item-border-bottom-width * 2;
-      border-top: @menu-item-border-bottom-width @menu-border-style transparent;
-    }
+      & > .ix-menu-sub,
+      & > .ix-menu-sub .ix-menu-sub-title,
+      & > .ix-menu-item {
+        height: @header-height;
+        line-height: @header-height - @menu-item-border-bottom-width * 2;
+        border-top: @menu-item-border-bottom-width @menu-border-style transparent;
+      }
 
-    & > .ix-menu-item:hover,
-    & > .ix-menu-item-selected {
-      border-top: @menu-item-border-bottom-width @menu-border-style @menu-highlight-color;
-      border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
+      & > .ix-menu-sub:hover,
+      & > .ix-menu-sub-opened,
+      & > .ix-menu-sub-selected,
+      & > .ix-menu-item:hover,
+      & > .ix-menu-item-selected {
+        border-top: @menu-item-border-bottom-width @menu-border-style @menu-highlight-color;
+        border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
+      }
     }
+  }
+
+  .ix-dropdown {
+    padding: @spacing-sm;
+    font-size: @font-size-lg;
+    color: @text-color;
   }
 
   &.home-header {
     max-width: @home-width;
     margin: 0 auto;
     box-shadow: none;
+  }
+}
+
+@media (max-width: @screen-sm-max) {
+  .header {
+    &-search-box {
+      padding-left: @spacing-sm;
+      .ix-input {
+        max-width: 140px;
+      }
+    }
+
+    &-row {
+      text-align: center;
+    }
   }
 }

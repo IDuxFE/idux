@@ -2,20 +2,32 @@
   <ix-modal-provider ref="modalProviderRef">
     <ix-message-provider>
       <div class="root-wrapper">
-        <layout-header />
-        <div v-if="!!page" class="main-wrapper">
+        <layout-header></layout-header>
+        <div v-if="page !== 'home'" class="main-wrapper">
           <ix-row>
-            <ix-col xs="0" sm="8" md="6" lg="5" xl="4" class="main-menu">
+            <ix-col xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
               <ix-affix>
-                <layout-side-nav />
+                <layout-side-nav></layout-side-nav>
               </ix-affix>
             </ix-col>
-            <ix-col xs="24" sm="16" md="18" lg="19" xl="20" class="main-content">
+            <ix-col xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
               <router-view></router-view>
+            </ix-col>
+            <ix-col
+              xs="24"
+              :sm="{ span: 17, offset: 7 }"
+              :md="{ span: 18, offset: 6 }"
+              :lg="{ span: 19, offset: 5 }"
+              :xl="{ span: 20, offset: 4 }"
+            >
+              <layout-footer></layout-footer>
             </ix-col>
           </ix-row>
         </div>
-        <router-view v-else></router-view>
+        <template v-else>
+          <router-view></router-view>
+          <layout-footer></layout-footer>
+        </template>
       </div>
     </ix-message-provider>
   </ix-modal-provider>
@@ -24,14 +36,16 @@
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useBreakpoints } from '@idux/cdk/breakpoint'
 import { ModalProviderInstance } from '@idux/components/modal'
 import { appContextToken, AppContext } from './context'
 import LayoutHeader from './layout/header/Index.vue'
 import LayoutSideNav from './layout/SideNav.vue'
+import LayoutFooter from './layout/footer/Index.vue'
 
 export default defineComponent({
   name: 'App',
-  components: { LayoutHeader, LayoutSideNav },
+  components: { LayoutHeader, LayoutSideNav, LayoutFooter },
   setup() {
     const modalProviderRef = ref<ModalProviderInstance>()
     const router = useRouter()
@@ -41,8 +55,10 @@ export default defineComponent({
     const path = computed(() => route.path)
     const page = computed(() => {
       const match = route.path.match(/\/(\w+)/)
-      return (match && match[1]) ?? ''
+      return match?.[1] ?? 'home'
     })
+
+    const screens = useBreakpoints()
 
     const appContext: AppContext = {
       org: 'IduxFE',
@@ -50,6 +66,7 @@ export default defineComponent({
       lang: ref('zh'),
       path,
       page,
+      screens,
     }
 
     provide(appContextToken, appContext)

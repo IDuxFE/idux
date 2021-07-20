@@ -7,6 +7,7 @@ import { computed, defineComponent, isVNode, provide, ref } from 'vue'
 import { isString } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
+import { IxRow } from '@idux/components/grid'
 import { IxHeader } from '@idux/components/header'
 import { cardToken } from './token'
 import { cardProps } from './types'
@@ -21,12 +22,12 @@ export default defineComponent({
     const { hasGrid } = useChildren(hoverable)
     const classes = useClasses(props, config, hoverable, size$$, hasGrid)
 
-    return { classes, size$$ }
+    return { classes, size$$, hasGrid }
   },
   render() {
     const cover = renderCover(this.$slots.cover, this.cover)
     const header = renderHeader(this.$slots.header, this.header, this.size$$)
-    const body = renderBody(this.$slots.default, this.loading)
+    const body = renderBody(this.$slots.default, this.loading, this.hasGrid)
     const footer = renderFooter(this.$slots.footer, this.footer)
 
     return (
@@ -106,20 +107,24 @@ const listOfLoading = [
   ['ix-col-span-8', 'ix-col-span-6', 'ix-col-span-8'],
 ]
 
-const renderBody = (defaultSlot: Slot | undefined, loading: boolean) => {
+const renderLoading = () => {
+  const loadingChild = listOfLoading.map(items => {
+    const cols = items.map(col => (
+      <div class={`ix-col ${col} ix-card-loading-col`}>
+        <div class="ix-card-loading-block"></div>
+      </div>
+    ))
+    return <div class="ix-row">{cols}</div>
+  })
+  return <div class="ix-card-loading">{loadingChild}</div>
+}
+
+const renderBody = (defaultSlot: Slot | undefined, loading: boolean, hasGrid: boolean) => {
   let child: VNodeTypes | undefined
   if (loading) {
-    const loadingChild = listOfLoading.map(items => {
-      const cols = items.map(col => (
-        <div class={`ix-col ${col} ix-card-loading-col`}>
-          <div class="ix-card-loading-block"></div>
-        </div>
-      ))
-      return <div class="ix-row">{cols}</div>
-    })
-    child = <div class="ix-card-loading">{loadingChild}</div>
-  } else {
-    child = defaultSlot?.()
+    child = renderLoading()
+  } else if (defaultSlot) {
+    child = hasGrid ? <IxRow>{defaultSlot()}</IxRow> : defaultSlot()
   }
   return child ? <div class="ix-card-body">{child}</div> : null
 }

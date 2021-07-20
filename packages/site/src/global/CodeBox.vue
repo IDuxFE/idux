@@ -54,3 +54,111 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="less">
+.global-code-box {
+  position: relative;
+  width: 100%;
+  margin: 0 0 @spacing-lg;
+  background-color: @background-color-component;
+  border: @border-width-sm @border-style @border-color-split;
+  border-radius: @border-radius-md;
+  transition: all @transition-duration-base;
+
+  &.expand &-meta {
+    border-bottom: @border-width-sm dashed @border-color-split;
+    border-radius: 0;
+  }
+
+  &-demo {
+    padding: @spacing-xl;
+    border-bottom: @border-width-sm @border-style @border-color-split;
+  }
+
+  &-meta {
+    &.markdown {
+      position: relative;
+      border-radius: 0 0 @border-radius-md @border-radius-md;
+
+      pre {
+        margin: @spacing-xs 0;
+        padding: @spacing-xs @spacing-sm;
+      }
+
+      pre code {
+        margin: 0;
+      }
+
+      blockquote {
+        margin: 0;
+      }
+
+      h4,
+      section& p {
+        margin: 0;
+      }
+    }
+  }
+
+  &-title {
+    position: absolute;
+    top: -@spacing-lg;
+    margin-left: @spacing-lg;
+    padding: @spacing-xs @spacing-sm;
+    background: @background-color-body;
+    border-radius: @border-radius-sm @border-radius-sm 0 0;
+
+    .global-code-box-edit {
+      color: @text-color;
+      padding-right: @spacing-xs;
+
+      .ix-icon {
+        color: @text-color-secondary;
+        &:hover {
+          color: @primary;
+        }
+      }
+    }
+  }
+
+  &-description {
+    padding: @spacing-lg @spacing-xl @spacing-md;
+  }
+
+  &-actions {
+    padding: @spacing-sm;
+    text-align: center;
+    border-top: @border-width-sm dashed @border-color-split;
+
+    .ix-icon {
+      margin: 0 @spacing-xs;
+      color: @text-color-secondary;
+      opacity: 0.7;
+      &:hover {
+        color: @primary;
+        opacity: 1;
+      }
+    }
+  }
+
+  .highlight-wrapper {
+    display: none;
+    overflow: auto;
+    border-radius: 0 0 @border-radius-md @border-radius-md;
+
+    &-expand {
+      display: block;
+    }
+
+    pre {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &-expand-trigger {
+    margin-left: @spacing-md;
+    font-size: @font-size-xl;
+  }
+}
+</style>

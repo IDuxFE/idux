@@ -1,32 +1,31 @@
 export const homeLocales = {
   zh: {
-    subTitle: '一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验',
-    start: '开始使用',
+    description: '企业级产品组件，创造高效愉悦的工作体验',
+    start: '开 始 使 用',
     moreText: '更多指引',
     guidelines: [
       {
         name: '基础组件',
-        icon: 'appstore',
+        icon: '/icons/component-base.svg',
         path: '/components/button/zh',
         description: '一个基于 Vue 3.x 的基础组件库',
       },
       {
-        name: '开发套件',
-        icon: 'appstore',
-        path: '/cdk/breakpoint/zh',
-        description: '一个基于 Vue 3.x 的组件开发套件',
-      },
-      {
         name: '高级组件',
-        icon: 'appstore',
+        icon: '/icons/component-pro.svg',
         path: '/',
         description: '规划中...',
+      },
+      {
+        name: '开发套件',
+        icon: '/icons/component-cdk.svg',
+        path: '/cdk/breakpoint/zh',
+        description: '一个基于 Vue 3.x 的组件开发套件',
       },
     ],
   },
   en: {
-    subTitle:
-      'An enterprise-level middle and back-end UI component library, dedicated to providing an efficient and pleasant development experience',
+    description: 'Enterprise-level product components to create an efficient and pleasant work experience',
     start: 'Get Started',
     moreText: 'More Guidelines',
     guidelines: [

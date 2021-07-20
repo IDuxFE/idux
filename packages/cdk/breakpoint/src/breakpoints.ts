@@ -35,7 +35,11 @@ export const convertMediaToScreen = (medias: Record<keyof typeof mediaScreenMap,
   return result
 }
 
-export function useBreakpoints(breakpoints: Record<BreakpointKey, string> = Breakpoints): ComputedRef<ScreenMatch> {
+export function useBreakpoints(): ComputedRef<Record<BreakpointKey, boolean>>
+export function useBreakpoints(breakpoints: Partial<Record<BreakpointKey, string>>): ComputedRef<ScreenMatch>
+export function useBreakpoints(
+  breakpoints: Partial<Record<BreakpointKey, string>> = Breakpoints,
+): ComputedRef<ScreenMatch> {
   const observes = observeBreakpoint(Object.values(breakpoints))
   return computed(() => convertMediaToScreen(observes.value.breakpoints))
 }

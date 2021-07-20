@@ -1,4 +1,5 @@
 import { computed, defineComponent, inject, onBeforeUnmount } from 'vue'
+import { IxCol } from '@idux/components/grid'
 import { cardToken } from './token'
 
 import { cardGridProps } from './types'
@@ -21,6 +22,6 @@ export default defineComponent({
     return { classes }
   },
   render() {
-    return <div class={this.classes}>{this.$slots.default?.()}</div>
+    return <IxCol class={this.classes}>{this.$slots.default?.()}</IxCol>
   },
 })
