@@ -4,7 +4,7 @@
       <tr>
         <td></td>
         <td>
-          <ix-popover title="Title" placement="top-start" content="Content">
+          <ix-popover title="Title" placement="topStart" content="Content">
             <ix-button>TL</ix-button>
           </ix-popover>
         </td>
@@ -14,7 +14,7 @@
           </ix-popover>
         </td>
         <td>
-          <ix-popover title="Title" placement="top-end" content="Content">
+          <ix-popover title="Title" placement="topEnd" content="Content">
             <ix-button>TR</ix-button>
           </ix-popover>
         </td>
@@ -22,7 +22,7 @@
       </tr>
       <tr>
         <td>
-          <ix-popover placement="left-start" title="Title" content="Content">
+          <ix-popover placement="leftStart" title="Title" content="Content">
             <ix-button>LT</ix-button>
           </ix-popover>
         </td>
@@ -30,7 +30,7 @@
         <td></td>
         <td></td>
         <td>
-          <ix-popover placement="right-start" title="Title" content="Content">
+          <ix-popover placement="rightStart" title="Title" content="Content">
             <ix-button>RT</ix-button>
           </ix-popover>
         </td>
@@ -52,7 +52,7 @@
       </tr>
       <tr>
         <td>
-          <ix-popover placement="left-end" title="Title" content="Content">
+          <ix-popover placement="leftEnd" title="Title" content="Content">
             <ix-button>LB</ix-button>
           </ix-popover>
         </td>
@@ -60,7 +60,7 @@
         <td></td>
         <td></td>
         <td>
-          <ix-popover placement="right-end" title="Title" content="Content">
+          <ix-popover placement="rightEnd" title="Title" content="Content">
             <ix-button>RB</ix-button>
           </ix-popover>
         </td>
@@ -68,7 +68,7 @@
       <tr>
         <td></td>
         <td>
-          <ix-popover title="Title" placement="bottom-start" content="Content">
+          <ix-popover title="Title" placement="bottomStart" content="Content">
             <ix-button>BL</ix-button>
           </ix-popover>
         </td>
@@ -78,7 +78,7 @@
           </ix-popover>
         </td>
         <td>
-          <ix-popover title="Title" placement="bottom-end" content="Content">
+          <ix-popover title="Title" placement="bottomEnd" content="Content">
             <ix-button>BR</ix-button>
           </ix-popover>
         </td>

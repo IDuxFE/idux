@@ -17,7 +17,7 @@ export function convertElement(elementRef: Ref<PopperElement | null>): HTMLEleme
 
 export function convertPopperOptions(
   state: PopperState,
-  options: { visibility: ComputedRef<boolean>; hide(): void },
+  options: { visibility: ComputedRef<boolean>; hide(): void; arrow: HTMLElement | null },
 ): OptionsGeneric<Partial<Modifier<any, any>>> {
   const { placement, offset, scrollStrategy } = state
 
@@ -56,7 +56,8 @@ export function convertPopperOptions(
           resize: true,
         },
       },
-    ],
+      options.arrow && { name: 'arrow', options: { element: options.arrow, padding: 5 } },
+    ].filter(Boolean) as Partial<Modifier<any, any>>[],
   }
 }
 
@@ -64,7 +65,7 @@ export function initPopper(
   state: PopperState,
   trigger: HTMLElement,
   popper: HTMLElement,
-  options: { visibility: ComputedRef<boolean>; hide(): void },
+  options: { visibility: ComputedRef<boolean>; hide(): void; arrow: HTMLElement | null },
 ): Instance {
   const popperOptions = convertPopperOptions(state, options)
   return createPopper(trigger, popper, popperOptions)

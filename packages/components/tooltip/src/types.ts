@@ -1,18 +1,19 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { overlayPlacementProp, overlayTriggerProp } from '@idux/cdk/overlay'
+import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private/overlay'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tooltipProps = {
   title: IxPropTypes.string,
-  placement: overlayPlacementProp,
-  visible: IxPropTypes.bool,
-  trigger: overlayTriggerProp,
-  showDelay: IxPropTypes.number,
+  placement: overlayPlacementDef,
+  visible: IxPropTypes.bool.def(false),
+  trigger: overlayTriggerDef,
   hideDelay: IxPropTypes.number,
+  showDelay: IxPropTypes.number,
   destroyOnHide: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
+  'onUpdate:visible': IxPropTypes.func<(visible: boolean) => void>().def(() => {}),
 }
 
 export type TooltipProps = IxInnerPropTypes<typeof tooltipProps>

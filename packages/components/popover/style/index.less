@@ -3,67 +3,40 @@
 @popover-prefix: ~'@{idux-prefix}-popover';
 
 .@{popover-prefix} {
-  &-inner {
-    background-color: @popover-inner-background;
-    background-clip: padding-box;
-    border-radius: @popover-inner-border-radius;
-    box-shadow: @popover-inner-box-shadow;
+  position: absolute;
+  pointer-events: all;
 
-    &-content {
-      padding: @popover-inner-content-padding;
-      color: @popover-color;
-    }
+  &-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  &-content {
+    color: @popover-color;
+    min-width: @popover-min-width;
+    background-color: @popover-background;
+    background-clip: padding-box;
+    border-radius: @popover-border-radius;
+    box-shadow: @popover-box-shadow;
+  }
+
+  &-arrow-inner {
+    border-width: @popover-arrow-size;
+    border-color: transparent @popover-background @popover-background transparent;
   }
 
   &-title {
-    min-width: @popover-title-min-width;
     min-height: @popover-title-min-height;
     padding: @popover-title-padding;
-    color: @popover-color;
-    font-weight: @popover-title-font-weight;
     border-bottom: @popover-title-border-bottom;
+    font-weight: @popover-title-font-weight;
   }
 
-  &-arrow {
-    &-inner {
-      width: 0;
-      height: 0;
-      border-width: @popover-arrow-size;
-      display: inline-block;
-      border-style: solid;
-      border-color: transparent @popover-inner-background @popover-inner-background transparent;
-    }
-  }
-
-  &[data-popper-placement^='top'] .@{popover-prefix}-arrow {
-    bottom: -6px;
-
-    & > .@{popover-prefix}-arrow-inner {
-      transform: rotate(45deg);
-    }
-  }
-
-  &[data-popper-placement^='bottom'] .@{popover-prefix}-arrow {
-    top: -11px;
-
-    & > .@{popover-prefix}-arrow-inner {
-      transform: rotate(-135deg);
-    }
-  }
-
-  &[data-popper-placement^='left'] .@{popover-prefix}-arrow {
-    right: -3px;
-
-    & > .@{popover-prefix}-arrow-inner {
-      transform: rotate(-45deg);
-    }
-  }
-
-  &[data-popper-placement^='right'] .@{popover-prefix}-arrow {
-    left: -3px;
-
-    & > .@{popover-prefix}-arrow-inner {
-      transform: rotate(135deg);
-    }
+  &-inner-content {
+    padding: @popover-inner-content-padding;
   }
 }
