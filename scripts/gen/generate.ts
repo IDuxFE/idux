@@ -109,7 +109,7 @@ class Generate {
     this.packageRoot = resolve(__dirname, '../../packages', category)
 
     const dirName = kebabCase(name)
-    const dirPath = resolve(this.packageRoot, isPrivate ? 'private' : '')
+    const dirPath = resolve(this.packageRoot, isPrivate ? '_private' : '')
 
     if (!pathExistsSync(dirPath)) {
       await mkdir(dirPath)
