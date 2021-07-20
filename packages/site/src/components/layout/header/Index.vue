@@ -23,12 +23,11 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
-
+import { appContextToken } from '../../../context'
 import Logo from './Logo.vue'
 import SearchBox from './SearchBox.vue'
 import Navigation from './Navigation.vue'
 import GithubButton from './GithubButton.vue'
-import { appContextToken } from '../../context'
 
 export default defineComponent({
   components: { Logo, SearchBox, Navigation, GithubButton },

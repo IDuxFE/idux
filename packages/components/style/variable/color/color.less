@@ -1,7 +1,26 @@
 @import 'colorPalette';
 
+/* base -------------------------- */
+@red-base: #bf3939;
+@orange-base: #cc5429;
+@gold-base: #d96f04;
+@yellow-base: #d99204;
+@canary-base: #d9ad00;
+@lime-base: #a1d913;
+@prasinous-base: #6ca608;
+@verdant-base: #47991f;
+@green-base: #1f9940;
+@cyan-base: #1f9999;
+@sky-base: #1f80cc;
+@blue-base: #365fd9;
+@admiral-base: #5757d9;
+@purple-base: #8a47cc;
+@magenta-base: #bf396f;
+
+@preset-colors: red, orange, gold, yellow, canary, lime, prasinous, verdant, green, cyan, sky, blue, admiral, purple,
+  magenta;
+
 /* Red -------------------------- */
-@red-base: #e65050;
 @red-l50: color(~`colorPalette('@{red}', -50) `);
 @red-l40: color(~`colorPalette('@{red}', -40) `);
 @red-l30: color(~`colorPalette('@{red}', -30) `);
@@ -12,10 +31,8 @@
 @red-d20: color(~`colorPalette('@{red}', 20) `);
 @red-d30: color(~`colorPalette('@{red}', 30) `);
 @red-d40: color(~`colorPalette('@{red}', 40) `);
-@red-d50: color(~`colorPalette('@{red}', 50) `);
 
 /* Orange -------------------------- */
-@orange-base: #f26430;
 @orange-l50: color(~`colorPalette('@{orange}', -50) `);
 @orange-l40: color(~`colorPalette('@{orange}', -40) `);
 @orange-l30: color(~`colorPalette('@{orange}', -30) `);
@@ -26,10 +43,8 @@
 @orange-d20: color(~`colorPalette('@{orange}', 20) `);
 @orange-d30: color(~`colorPalette('@{orange}', 30) `);
 @orange-d40: color(~`colorPalette('@{orange}', 40) `);
-@orange-d50: color(~`colorPalette('@{orange}', 50) `);
 
 /* Gold -------------------------- */
-@gold-base: #fa830c;
 @gold-l50: color(~`colorPalette('@{gold}', -50) `);
 @gold-l40: color(~`colorPalette('@{gold}', -40) `);
 @gold-l30: color(~`colorPalette('@{gold}', -30) `);
@@ -40,10 +55,8 @@
 @gold-d20: color(~`colorPalette('@{gold}', 20) `);
 @gold-d30: color(~`colorPalette('@{gold}', 30) `);
 @gold-d40: color(~`colorPalette('@{gold}', 40) `);
-@gold-d50: color(~`colorPalette('@{gold}', 50) `);
 
 /* Yellow -------------------------- */
-@yellow-base: #fcad0d;
 @yellow-l50: color(~`colorPalette('@{yellow}', -50) `);
 @yellow-l40: color(~`colorPalette('@{yellow}', -40) `);
 @yellow-l30: color(~`colorPalette('@{yellow}', -30) `);
@@ -54,10 +67,8 @@
 @yellow-d20: color(~`colorPalette('@{yellow}', 20) `);
 @yellow-d30: color(~`colorPalette('@{yellow}', 30) `);
 @yellow-d40: color(~`colorPalette('@{yellow}', 40) `);
-@yellow-d50: color(~`colorPalette('@{yellow}', 50) `);
 
 /* Canary -------------------------- */
-@canary-base: #fcd200;
 @canary-l50: color(~`colorPalette('@{canary}', -50) `);
 @canary-l40: color(~`colorPalette('@{canary}', -40) `);
 @canary-l30: color(~`colorPalette('@{canary}', -30) `);
@@ -68,10 +79,20 @@
 @canary-d20: color(~`colorPalette('@{canary}', 20) `);
 @canary-d30: color(~`colorPalette('@{canary}', 30) `);
 @canary-d40: color(~`colorPalette('@{canary}', 40) `);
-@canary-d50: color(~`colorPalette('@{canary}', 50) `);
+
+/* Lime -------------------------- */
+@lime-l50: color(~`colorPalette('@{lime}', -50) `);
+@lime-l40: color(~`colorPalette('@{lime}', -40) `);
+@lime-l30: color(~`colorPalette('@{lime}', -30) `);
+@lime-l20: color(~`colorPalette('@{lime}', -20) `);
+@lime-l10: color(~`colorPalette('@{lime}', -10) `);
+@lime: @lime-base;
+@lime-d10: color(~`colorPalette('@{lime}', 10) `);
+@lime-d20: color(~`colorPalette('@{lime}', 20) `);
+@lime-d30: color(~`colorPalette('@{lime}', 30) `);
+@lime-d40: color(~`colorPalette('@{lime}', 40) `);
 
 /* Prasinous -------------------------- */
-@prasinous-base: #90cc29;
 @prasinous-l50: color(~`colorPalette('@{prasinous}', -50) `);
 @prasinous-l40: color(~`colorPalette('@{prasinous}', -40) `);
 @prasinous-l30: color(~`colorPalette('@{prasinous}', -30) `);
@@ -82,10 +103,8 @@
 @prasinous-d20: color(~`colorPalette('@{prasinous}', 20) `);
 @prasinous-d30: color(~`colorPalette('@{prasinous}', 30) `);
 @prasinous-d40: color(~`colorPalette('@{prasinous}', 40) `);
-@prasinous-d50: color(~`colorPalette('@{prasinous}', 50) `);
 
 /* Verdant -------------------------- */
-@verdant-base: #59b32d;
 @verdant-l50: color(~`colorPalette('@{verdant}', -50) `);
 @verdant-l40: color(~`colorPalette('@{verdant}', -40) `);
 @verdant-l30: color(~`colorPalette('@{verdant}', -30) `);
@@ -96,10 +115,8 @@
 @verdant-d20: color(~`colorPalette('@{verdant}', 20) `);
 @verdant-d30: color(~`colorPalette('@{verdant}', 30) `);
 @verdant-d40: color(~`colorPalette('@{verdant}', 40) `);
-@verdant-d50: color(~`colorPalette('@{verdant}', 50) `);
 
 /* Green -------------------------- */
-@green-base: #2db350;
 @green-l50: color(~`colorPalette('@{green}', -50) `);
 @green-l40: color(~`colorPalette('@{green}', -40) `);
 @green-l30: color(~`colorPalette('@{green}', -30) `);
@@ -110,10 +127,8 @@
 @green-d20: color(~`colorPalette('@{green}', 20) `);
 @green-d30: color(~`colorPalette('@{green}', 30) `);
 @green-d40: color(~`colorPalette('@{green}', 40) `);
-@green-d50: color(~`colorPalette('@{green}', 50) `);
 
 /* Cyan -------------------------- */
-@cyan-base: #2db3b2;
 @cyan-l50: color(~`colorPalette('@{cyan}', -50) `);
 @cyan-l40: color(~`colorPalette('@{cyan}', -40) `);
 @cyan-l30: color(~`colorPalette('@{cyan}', -30) `);
@@ -124,10 +139,8 @@
 @cyan-d20: color(~`colorPalette('@{cyan}', 20) `);
 @cyan-d30: color(~`colorPalette('@{cyan}', 30) `);
 @cyan-d40: color(~`colorPalette('@{cyan}', 40) `);
-@cyan-d50: color(~`colorPalette('@{cyan}', 50) `);
 
 /* Sky -------------------------- */
-@sky-base: #3da5f5;
 @sky-l50: color(~`colorPalette('@{sky}', -50) `);
 @sky-l40: color(~`colorPalette('@{sky}', -40) `);
 @sky-l30: color(~`colorPalette('@{sky}', -30) `);
@@ -138,10 +151,8 @@
 @sky-d20: color(~`colorPalette('@{sky}', 20) `);
 @sky-d30: color(~`colorPalette('@{sky}', 30) `);
 @sky-d40: color(~`colorPalette('@{sky}', 40) `);
-@sky-d50: color(~`colorPalette('@{sky}', 50) `);
 
 /* Blue -------------------------- */
-@blue-base: #567df5;
 @blue-l50: color(~`colorPalette('@{blue}', -50) `);
 @blue-l40: color(~`colorPalette('@{blue}', -40) `);
 @blue-l30: color(~`colorPalette('@{blue}', -30) `);
@@ -152,10 +163,8 @@
 @blue-d20: color(~`colorPalette('@{blue}', 20) `);
 @blue-d30: color(~`colorPalette('@{blue}', 30) `);
 @blue-d40: color(~`colorPalette('@{blue}', 40) `);
-@blue-d50: color(~`colorPalette('@{blue}', 50) `);
 
 /* Admiral -------------------------- */
-@admiral-base: #7373e6;
 @admiral-l50: color(~`colorPalette('@{admiral}', -50) `);
 @admiral-l40: color(~`colorPalette('@{admiral}', -40) `);
 @admiral-l30: color(~`colorPalette('@{admiral}', -30) `);
@@ -166,10 +175,8 @@
 @admiral-d20: color(~`colorPalette('@{admiral}', 20) `);
 @admiral-d30: color(~`colorPalette('@{admiral}', 30) `);
 @admiral-d40: color(~`colorPalette('@{admiral}', 40) `);
-@admiral-d50: color(~`colorPalette('@{admiral}', 50) `);
 
 /* Purple -------------------------- */
-@purple-base: #a667e6;
 @purple-l50: color(~`colorPalette('@{purple}', -50) `);
 @purple-l40: color(~`colorPalette('@{purple}', -40) `);
 @purple-l30: color(~`colorPalette('@{purple}', -30) `);
@@ -180,10 +187,8 @@
 @purple-d20: color(~`colorPalette('@{purple}', 20) `);
 @purple-d30: color(~`colorPalette('@{purple}', 30) `);
 @purple-d40: color(~`colorPalette('@{purple}', 40) `);
-@purple-d50: color(~`colorPalette('@{purple}', 50) `);
 
 /* Magenta -------------------------- */
-@magenta-base: #eb528f;
 @magenta-l50: color(~`colorPalette('@{magenta}', -50) `);
 @magenta-l40: color(~`colorPalette('@{magenta}', -40) `);
 @magenta-l30: color(~`colorPalette('@{magenta}', -30) `);
@@ -194,44 +199,39 @@
 @magenta-d20: color(~`colorPalette('@{magenta}', 20) `);
 @magenta-d30: color(~`colorPalette('@{magenta}', 30) `);
 @magenta-d40: color(~`colorPalette('@{magenta}', 40) `);
-@magenta-d50: color(~`colorPalette('@{magenta}', 50) `);
 
-/* Lime -------------------------- */
-@lime-base: #8591a6;
-@lime-l50: #f7f9fc;
-@lime-l40: #ebeff5;
-@lime-l30: #dde2eb;
-@lime-l20: #c5cedb;
-@lime-l10: #adb8cb;
-@lime: @lime-base;
-@lime-d10: #69768c;
-@lime-d20: #505c73;
-@lime-d30: #3a4459;
-@lime-d40: #262f40;
-@lime-d50: #1f2533;
+/* Graphite  -------------------------- */
+@graphite-base: #69768c;
+@graphite-l50: #ebeff5;
+@graphite-l40: #dde2eb;
+@graphite-l30: #c5cedb;
+@graphite-l20: #adb8cb;
+@graphite-l10: #8591a6;
+@graphite: @graphite-base;
+@graphite-d10: #505c73;
+@graphite-d20: #3a4459;
+@graphite-d30: #262f40;
+@graphite-d40: #1f2533;
 
 /* Grey -------------------------- */
 // TODO use https://github.com/scttcper/tinycolor
-@grey-base: #cccccc;
-@grey-l50: #f9f9f9;
-@grey-l40: #f6f6f6;
-@grey-l30: #f3f3f3;
-@grey-l20: #eeeeee;
-@grey-l10: #dddddd;
+@grey-base: #a3a3a3;
+@grey-l50: #fafafa;
+@grey-l40: #f5f5f5;
+@grey-l30: #eeeeee;
+@grey-l20: #e0e0e0;
+@grey-l10: #c2c2c2;
 @grey: @grey-base;
-@grey-d10: #bbbbbb;
-@grey-d20: #aaaaaa;
-@grey-d30: #999999;
-@grey-d40: #666666;
-@grey-d50: #333333;
+@grey-d10: #7a7a7a;
+@grey-d20: #5c5c5c;
+@grey-d30: #3d3d3d;
+@grey-d40: #1f1f1f;
 
 /* Black -------------------------- */
 @black: #000000;
 
 /* white -------------------------- */
 @white: #ffffff;
-
-@preset-colors: red, orange, gold, yellow, canary, prasinous, verdant, green, cyan, sky, blue, admiral, purple, magenta;
 
 /* Primary -------------------------- */
 @primary-base: @blue-base;
@@ -245,7 +245,6 @@
 @primary-d20: color(~`colorPalette('@{primary}', 20) `);
 @primary-d30: color(~`colorPalette('@{primary}', 30) `);
 @primary-d40: color(~`colorPalette('@{primary}', 40) `);
-@primary-d50: color(~`colorPalette('@{primary}', 50) `);
 
 /* Info -------------------------- */
 @info-base: @primary-base;
@@ -259,7 +258,6 @@
 @info-d20: color(~`colorPalette('@{info}', 20) `);
 @info-d30: color(~`colorPalette('@{info}', 30) `);
 @info-d40: color(~`colorPalette('@{info}', 40) `);
-@info-d50: color(~`colorPalette('@{info}', 50) `);
 
 /* Pending -------------------------- */
 @pending-base: @primary-base;
@@ -273,7 +271,6 @@
 @pending-d20: color(~`colorPalette('@{pending}', 20) `);
 @pending-d30: color(~`colorPalette('@{pending}', 30) `);
 @pending-d40: color(~`colorPalette('@{pending}', 40) `);
-@pending-d50: color(~`colorPalette('@{pending}', 50) `);
 
 /* Success -------------------------- */
 @success-base: @green-base;
@@ -287,7 +284,6 @@
 @success-d20: color(~`colorPalette('@{success}', 20) `);
 @success-d30: color(~`colorPalette('@{success}', 30) `);
 @success-d40: color(~`colorPalette('@{success}', 40) `);
-@success-d50: color(~`colorPalette('@{success}', 50) `);
 
 /* Warning -------------------------- */
 @warning-base: @yellow-base;
@@ -301,7 +297,6 @@
 @warning-d20: color(~`colorPalette('@{warning}', 20) `);
 @warning-d30: color(~`colorPalette('@{warning}', 30) `);
 @warning-d40: color(~`colorPalette('@{warning}', 40) `);
-@warning-d50: color(~`colorPalette('@{warning}', 50) `);
 
 /* Error -------------------------- */
 @error-base: @red-base;
@@ -315,7 +310,6 @@
 @error-d20: color(~`colorPalette('@{error}', 20) `);
 @error-d30: color(~`colorPalette('@{error}', 30) `);
 @error-d40: color(~`colorPalette('@{error}', 40) `);
-@error-d50: color(~`colorPalette('@{error}', 50) `);
 
 @status-colors: primary, info, pending, success, warning, error;
 

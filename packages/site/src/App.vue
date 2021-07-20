@@ -39,9 +39,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { useBreakpoints } from '@idux/cdk/breakpoint'
 import { ModalProviderInstance } from '@idux/components/modal'
 import { appContextToken, AppContext } from './context'
-import LayoutHeader from './layout/header/Index.vue'
-import LayoutSideNav from './layout/SideNav.vue'
-import LayoutFooter from './layout/footer/Index.vue'
+import LayoutHeader from './components/layout/header/Index.vue'
+import LayoutSideNav from './components/layout/SideNav.vue'
+import LayoutFooter from './components/layout/footer/Index.vue'
 
 export default defineComponent({
   name: 'App',

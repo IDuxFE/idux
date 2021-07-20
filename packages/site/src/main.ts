@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { createGlobalConfig } from '@idux/components/config'
 import IduxCdk from './iduxCdk'
 import IduxComponents from './iduxComponents'
-import GlobalComponents from './global'
+import GlobalComponents from './components/global'
 
 import App from './App.vue'
 

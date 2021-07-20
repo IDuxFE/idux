@@ -17,7 +17,7 @@
 import { defineComponent } from 'vue'
 import { useClipboard } from '@idux/cdk/clipboard'
 
-const levels = ['l50', 'l40', 'l30', 'l20', 'l10', '', 'd10', 'd20', 'd30', 'd40', 'd50']
+const levels = ['l50', 'l40', 'l30', 'l20', 'l10', '', 'd10', 'd20', 'd30', 'd40']
 
 const colors = [
   {
@@ -39,6 +39,10 @@ const colors = [
   {
     name: 'canary',
     english: 'Canary',
+  },
+  {
+    name: 'lime',
+    english: 'Lime',
   },
   {
     name: 'prasinous',
@@ -77,8 +81,8 @@ const colors = [
     english: 'Magenta',
   },
   {
-    name: 'lime',
-    english: 'Lime',
+    name: 'graphite',
+    english: 'Graphite',
   },
   {
     name: 'grey',
@@ -94,60 +98,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="less">
-@global-color-levels: l50, l40, l30, l20, l10, d10, d20, d30, d40, d50;
-
-.global-color-level(@color, @i: length(@global-color-levels)) when (@i > 0) {
-  .global-color-level(@color, @i - 1);
-  @level: extract(@global-color-levels, @i);
-  @color-level: '@{color}-@{level}';
-  .global-color-@{color}-@{level} {
-    background-color: @@color-level;
-    color: @black;
-    & when (@i > 5) {
-      color: @white;
-    }
-  }
-}
-
-.global-color-classes(@i: length(@preset-colors)) when (@i > 0) {
-  .global-color-classes(@i - 1);
-  @color: extract(@preset-colors, @i);
-  .global-color-@{color} {
-    color: @white;
-    background-color: @@color;
-  }
-  .global-color-level(@color);
-}
-
-.global-color-classes();
-
-.global-color-grey {
-  color: @white;
-  background-color: @grey;
-}
-.global-color-level(grey);
-
-.global-color-lime {
-  color: @white;
-  background-color: @lime;
-}
-.global-color-level(lime);
-
-.global-color {
-  .global-color-row {
-    width: 100%;
-    display: flex;
-    margin: 16px;
-    .global-color-col {
-      position: relative;
-      flex: 1;
-      margin: 0 8px;
-      padding: 8px;
-      text-align: center;
-      cursor: pointer;
-    }
-  }
-}
-</style>
