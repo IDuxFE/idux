@@ -6,7 +6,6 @@ import type { PopperState } from './hooks'
 import { createPopper } from '@popperjs/core'
 import { throttle } from 'lodash'
 import { isHTMLElement } from '@idux/cdk/utils'
-import { watch } from 'vue'
 
 export function convertElement(elementRef: Ref<PopperElement | null>): HTMLElement | null {
   const element = elementRef.value
@@ -20,16 +19,10 @@ export function convertPopperOptions(
   state: PopperState,
   options: { visibility: ComputedRef<boolean>; hide(): void },
 ): OptionsGeneric<Partial<Modifier<any, any>>> {
-  let scrollTimes = 0
-
   const { placement, offset, scrollStrategy } = state
 
-  watch(
-    () => state.scrollStrategy,
-    () => {
-      scrollTimes = 0
-    },
-  )
+  let scrollTimes = 0
+  const lastScrollStrategy = scrollStrategy
 
   const fn = throttle(() => {
     if (scrollStrategy !== 'close') {
@@ -37,6 +30,9 @@ export function convertPopperOptions(
     }
     if (!options.visibility.value) {
       return
+    }
+    if (lastScrollStrategy !== state.scrollStrategy) {
+      scrollTimes = 0
     }
     if (scrollTimes < 1) {
       scrollTimes++
