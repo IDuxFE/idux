@@ -1,8 +1,8 @@
 import { renderWork, scrollTarget, wait } from '@tests'
 import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
-import IxAnchor from '../src/Anchor.vue'
-import IxAnchorLink from '../src/AnchorLink.vue'
+import IxAnchor from '../src/Anchor'
+import IxAnchorLink from '../src/AnchorLink'
 
 const TestComponent = defineComponent({
   components: { IxAnchor, IxAnchorLink },

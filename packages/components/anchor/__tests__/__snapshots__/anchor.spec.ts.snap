@@ -6,10 +6,14 @@ exports[`Anchor register and unregister work 1`] = `
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
         <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\"></span></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
+          <!---->
+        </div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
           <!--v-if-->
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a>
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -31,10 +35,16 @@ exports[`Anchor register and unregister work 2`] = `
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
         <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
+          <!---->
+        </div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a></div>
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a>
+            <!---->
+          </div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a>
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -56,10 +66,16 @@ exports[`Anchor register and unregister work 3`] = `
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
         <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
+          <!---->
+        </div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a></div>
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits2\\" data-href=\\"emits2\\" title=\\"Emits\\">Emits</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#props\\" data-href=\\"#props\\" title=\\"Props\\">Props</a>
+            <!---->
+          </div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits2\\" data-href=\\"emits2\\" title=\\"Emits\\">Emits</a>
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -81,10 +97,14 @@ exports[`Anchor register and unregister work 4`] = `
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
         <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
+          <!---->
+        </div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#api\\" data-href=\\"#api\\" title=\\"API\\">API</a>
           <!--v-if-->
-          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a></div>
+          <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"emits1\\" data-href=\\"emits1\\" title=\\"Emits\\">Emits</a>
+            <!---->
+          </div>
         </div>
       </div>
     </div>
@@ -106,10 +126,18 @@ exports[`Anchor render work 1`] = `
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
         <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball\\"></span></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"demo\\">demo</a></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#API\\" data-href=\\"#API\\" title=\\"API\\">API</a></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Props\\" data-href=\\"#Props\\" title=\\"Props\\">Props</a></div>
-        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Emits\\" data-href=\\"#Emits\\" title=\\"Emits\\">Emits</a></div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"demo\\">demo</a>
+          <!---->
+        </div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#API\\" data-href=\\"#API\\" title=\\"API\\">API</a>
+          <!---->
+        </div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Props\\" data-href=\\"#Props\\" title=\\"Props\\">Props</a>
+          <!---->
+        </div>
+        <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title\\" href=\\"#Emits\\" data-href=\\"#Emits\\" title=\\"Emits\\">Emits</a>
+          <!---->
+        </div>
       </div>
     </div>
   </div>

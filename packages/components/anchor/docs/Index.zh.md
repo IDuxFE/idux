@@ -3,12 +3,9 @@ category: components
 type: 其他
 title: Anchor
 subtitle: 锚点
-cover:
 ---
 
 用于跳转到页面指定位置。
-
-## 何时使用
 
 - 需要展现当前页面上可供跳转的锚点链接，以及快速在锚点之间跳转。
 
@@ -26,13 +23,8 @@ cover:
 | `offsetTop` | 距离窗口顶部达到指定偏移量后触发 | `number` | - | - | - |
 | `target` | 指定滚动的容器 | `string \| HTMLElement` | `window` | - | - |
 | `targetOffset` | 锚点滚动偏移量，默认与 offsetTop 相同 | `number` | - | - | - |
-
-#### AnchorEmits
-
-| 名称 | 说明 | 参数  |
-| --- | --- | --- |
-| `click` | 点击 `ix-anchor-link` 的回调事件 | `Function(e: Event, link: AnchorLinkProps)` |
-| `change` | 锚点改变的回调 | `(activeLink: string) => void` |
+| `onChange` | 锚点改变的回调 | `(activeLink: string) => void` | - | - | - |
+| `onClick` | 点击 `ix-anchor-link` 的回调事件 | `(evt: MouseEvent, link: AnchorLinkProps) => void` | - | - | - |
 
 ### ix-anchor-link
 

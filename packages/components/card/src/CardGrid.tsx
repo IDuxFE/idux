@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, onBeforeUnmount } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { IxCol } from '@idux/components/grid'
 import { cardToken } from './token'
 
@@ -8,9 +8,7 @@ export default defineComponent({
   name: 'IxCardGrid',
   props: cardGridProps,
   setup(props) {
-    const { hoverable, registerGrid, unregisterGrid } = inject(cardToken)!
-    registerGrid()
-    onBeforeUnmount(() => unregisterGrid())
+    const { hoverable } = inject(cardToken)!
 
     const classes = computed(() => {
       return {

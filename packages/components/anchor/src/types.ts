@@ -8,8 +8,12 @@ export const anchorProps = {
   bounds: IxPropTypes.number,
   hideLinkBall: IxPropTypes.bool,
   offsetTop: IxPropTypes.number,
-  target: IxPropTypes.oneOfType([String, HTMLElement, Window]),
+  target: IxPropTypes.oneOfType([String, HTMLElement]),
   targetOffset: IxPropTypes.number,
+
+  // events
+  onChange: IxPropTypes.emit<(activeLink: string) => void>(),
+  onClick: IxPropTypes.emit<(evt: MouseEvent, link: AnchorLinkProps) => void>(),
 }
 
 export type AnchorProps = IxInnerPropTypes<typeof anchorProps>

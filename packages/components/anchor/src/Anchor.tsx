@@ -1,23 +1,58 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { AnchorProps } from './types'
+import type { Ref } from 'vue'
+import type { AnchorConfig } from '@idux/components/config'
+import type { AnchorLinkProps, AnchorProps } from './types'
 
-import { computed, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 import { scrollToTop } from '@idux/cdk/scroll'
-import { getOffset, off, on } from '@idux/cdk/utils'
+import { callEmit, getOffset, off, on } from '@idux/cdk/utils'
+import { IxAffix } from '@idux/components/affix'
+import { useGlobalConfig } from '@idux/components/config'
 import { getTarget } from '@idux/components/utils'
+import { anchorToken } from './token'
+import { anchorProps } from './types'
 
-export interface UseLinks {
-  links: Ref<string[]>
-  activeLink: Ref<string | undefined>
-  registerLink: (link: string) => void
-  unregisterLink: (link: string) => void
-  setActiveLink: (link: string) => void
-}
+export default defineComponent({
+  name: 'IxAnchor',
+  props: anchorProps,
+  setup(props, { slots }) {
+    const config = useGlobalConfig('anchor')
+    const hideLinkBall = computed(() => props.hideLinkBall ?? config.hideLinkBall)
+    const wrapperStyle = computed(() => {
+      const { offsetTop } = props
+      return { maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh' }
+    })
 
-export const useLinks = (emit: (event: 'change' | 'click', ...args: unknown[]) => void): UseLinks => {
+    const { activeLink } = useLinks(props, config)
+    const { anchorRef, inkBallClasses, inkBallTop } = useInkBall(activeLink)
+
+    return () => {
+      const linkBall = hideLinkBall.value ? null : (
+        <span class={inkBallClasses.value} style={{ top: inkBallTop.value }} />
+      )
+
+      const anchorNode = (
+        <div class="ix-anchor-wrapper" style={wrapperStyle.value}>
+          <div class="ix-anchor" ref={anchorRef}>
+            <div class="ix-anchor-ink">{linkBall}</div>
+            {slots.default?.()}
+          </div>
+        </div>
+      )
+
+      if (!props.affix) {
+        return anchorNode
+      }
+      return (
+        <IxAffix target={props.target} offset={props.offsetTop}>
+          {anchorNode}
+        </IxAffix>
+      )
+    }
+  },
+})
+
+const useLinks = (props: AnchorProps, config: AnchorConfig) => {
   const links = ref<string[]>([])
-  const activeLink = ref<string>()
-
   const registerLink = (link: string) => {
     if (!links.value.includes(link)) {
       links.value.push(link)
@@ -31,31 +66,29 @@ export const useLinks = (emit: (event: 'change' | 'click', ...args: unknown[]) =
     }
   }
 
+  const activeLink = ref<string>()
+
   const setActiveLink = (link: string) => {
     if (activeLink.value !== link) {
       activeLink.value = link
-      emit('change', link)
+      callEmit(props.onChange, link)
     }
   }
 
-  return {
-    links,
-    activeLink,
-    registerLink,
-    unregisterLink,
-    setActiveLink,
+  const { scrollTo } = useScroll(props, config, links, setActiveLink)
+
+  const handleLinkClick = (evt: MouseEvent, linkProps: AnchorLinkProps) => {
+    callEmit(props.onClick, evt, linkProps)
+    scrollTo(linkProps.href)
   }
+
+  provide(anchorToken, { registerLink, unregisterLink, activeLink, handleLinkClick })
+
+  return { activeLink }
 }
 
-export interface UseLnkBall {
-  inkBallClasses: ComputedRef<Record<string, boolean>>
-  inkBallTop: Ref<string | undefined>
-}
-
-export const useInkBall = (
-  anchorRef: Ref<HTMLDivElement | undefined>,
-  activeLink: Ref<string | undefined>,
-): UseLnkBall => {
+const useInkBall = (activeLink: Ref<string | undefined>) => {
+  const anchorRef = ref<HTMLDivElement>()
   const inkBallClasses = computed(() => {
     return {
       'ix-anchor-ink-ball': true,
@@ -77,6 +110,7 @@ export const useInkBall = (
   })
 
   return {
+    anchorRef,
     inkBallClasses,
     inkBallTop,
   }
@@ -92,31 +126,32 @@ const getTargetTop = (link: string, container: HTMLElement | Window): number | n
 }
 
 const getCurrentAnchor = (
-  links: Ref<string[]>,
+  links: string[],
   container: HTMLElement | Window,
   offsetTop: number,
   bounds: number,
 ): string => {
-  let maxSection: { link: string; top: number } | null = null
-
-  links.value.forEach(link => {
-    const top = getTargetTop(link, container)
-    if (top !== null) {
-      if (top < offsetTop + bounds && (!maxSection || maxSection.top < top)) {
-        maxSection = { link, top }
+  const maxSection = links.reduce(
+    (curr, link) => {
+      const top = getTargetTop(link, container)
+      if (top !== null && top < offsetTop + bounds && curr.top < top) {
+        return { link, top }
       }
-    }
-  })
+      return curr
+    },
+    { link: '', top: Number.MIN_SAFE_INTEGER },
+  )
 
-  return maxSection ? maxSection!.link : ''
+  return maxSection.link
 }
 
-export const useScroll = (
+const useScroll = (
   props: AnchorProps,
+  config: AnchorConfig,
   links: Ref<string[]>,
-  bounds: ComputedRef<number>,
   setActiveLink: (link: string) => void,
 ): { scrollTo: (link: string) => void } => {
+  const bounds = computed(() => props.bounds ?? config.bounds)
   const container = ref<Window | HTMLElement>()
   const eventType = 'scroll'
   let animating = false
@@ -128,7 +163,7 @@ export const useScroll = (
     if (animating) {
       return
     }
-    const currLink = getCurrentAnchor(links, container.value!, targetOffset.value, bounds.value)
+    const currLink = getCurrentAnchor(links.value, container.value!, targetOffset.value, bounds.value)
     setActiveLink(currLink)
   }
 
