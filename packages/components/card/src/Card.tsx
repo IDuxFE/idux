@@ -1,4 +1,4 @@
-import type { ComputedRef, Slot, VNode, VNodeTypes } from 'vue'
+import type { ComputedRef, Slot, Slots, VNode, VNodeTypes } from 'vue'
 import type { HeaderProps } from '@idux/components/header'
 import type { CardConfig } from '@idux/components/config'
 import type { CardButtonProps, CardCover, CardProps, CardSize } from './types'
@@ -15,11 +15,11 @@ import { cardProps } from './types'
 export default defineComponent({
   name: 'IxCard',
   props: cardProps,
-  setup(props) {
+  setup(props, { slots }) {
     const config = useGlobalConfig('card')
     const hoverable = computed(() => props.hoverable ?? config.hoverable)
     const size$$ = computed(() => props.size ?? config.size)
-    const { hasGrid } = useChildren(hoverable)
+    const { hasGrid } = useChildren(slots, hoverable)
     const classes = useClasses(props, config, hoverable, size$$, hasGrid)
 
     return { classes, size$$, hasGrid }
@@ -62,14 +62,13 @@ const useClasses = (
   })
 }
 
-const useChildren = (hoverable: ComputedRef<boolean>) => {
-  const gridCount = ref(0)
-  const hasGrid = computed(() => gridCount.value > 0)
+const useChildren = (slots: Slots, hoverable: ComputedRef<boolean>) => {
+  const hasGrid = computed(() => {
+    const children = slots.default?.() || []
+    return children.some(node => node.type && (node.type as any).name === 'IxCardGrid')
+  })
 
-  const registerGrid = () => gridCount.value++
-  const unregisterGrid = () => gridCount.value--
-
-  provide(cardToken, { hoverable, registerGrid, unregisterGrid })
+  provide(cardToken, { hoverable })
 
   return { hasGrid }
 }

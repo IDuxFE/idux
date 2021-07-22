@@ -2,9 +2,9 @@ import type { InjectionKey, Ref } from 'vue'
 import type { AnchorLinkProps } from './types'
 
 export interface AnchorContext {
-  activeLink: Ref<string | undefined>
   registerLink: (link: string) => void
   unregisterLink: (link: string) => void
+  activeLink: Ref<string | undefined>
   handleLinkClick: (evt: MouseEvent, link: AnchorLinkProps) => void
 }
 
