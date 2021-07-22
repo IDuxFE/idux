@@ -47,6 +47,13 @@ export default defineComponent({
           width: `${width}px`,
           height: `${height}px`,
         }
+        wrapperStyle.value = {
+          width: `${width}px`,
+          height: `${height}px`,
+        }
+        if (targetRef.value !== window) {
+          wrapperStyle.value.position = 'relative'
+        }
       }
     }
 
