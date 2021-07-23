@@ -82,7 +82,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     if (!popperInstance) {
       initialize()
     } else {
-      popperInstance.setOptions(convertPopperOptions(state, { visibility, hide }))
+      popperInstance.setOptions(convertPopperOptions(state, { visibility, hide, arrow: arrowRef.value }))
     }
   }
 
