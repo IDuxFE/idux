@@ -5,10 +5,10 @@ import type { OverlayProps } from './types'
 import { cloneVNode, defineComponent, onMounted, ref, resolveDirective, Transition, withDirectives } from 'vue'
 import { IxPortal } from '@idux/cdk/portal'
 import { clickOutside } from '@idux/cdk/click-outside'
-import { convertElement } from '@idux/cdk/popper/src/utils'
 import { getFirstValidNode, getSlotNodes } from '@idux/cdk/utils'
 import { useLogger, useOverlay, useRenderValid, useWatcher } from './hooks'
 import { overlayProps } from './types'
+import { convertElement } from './utils'
 
 export default defineComponent({
   name: 'IxOverlay',
