@@ -2,7 +2,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
-import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private/overlay'
+import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
 
 export const popoverProps = {
   title: IxPropTypes.string,

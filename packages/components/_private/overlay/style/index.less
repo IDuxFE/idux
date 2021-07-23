@@ -3,13 +3,11 @@
 @overlay-prefix: ~'@{idux-prefix}-overlay';
 
 .@{overlay-prefix} {
-  &-arrow {
-    .@{overlay-prefix}-arrow-inner{
+  &-arrow-inner {
       width: 0;
       height: 0;
       display: inline-block;
       border-style: solid;
-    }
   }
 
   &[data-popper-placement^='top'] .@{overlay-prefix}-arrow {

@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { getFirstValidNode, getSlotNodes } from '@idux/cdk/utils'
-import { IxOverlay } from '@idux/components/_private/overlay'
+import { IxOverlay } from '@idux/components/_private'
 import { tooltipProps } from './types'
 import { useConfig, useVisibility } from './hooks'
 
