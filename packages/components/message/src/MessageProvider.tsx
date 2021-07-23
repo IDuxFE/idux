@@ -11,39 +11,38 @@ export default defineComponent({
   name: 'IxMessageProvider',
   inheritAttrs: false,
   props: messageProviderProps,
-  setup(props) {
+  setup(props, { expose, slots, attrs }) {
     const config = useGlobalConfig('message')
-
     const style = computed(() => ({ top: toCssPixel(props.top ?? config.top) }))
-
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { messages, loadContainer, apis } = useMessageApis(maxCount)
 
     provide(messageProviderToken, apis)
+    expose(apis)
 
-    return { style, messages, loadContainer, ...apis }
-  },
+    return () => {
+      const child = messages.value.map(item => {
+        // The default value for `visible` is true
+        const { id, content, visible = true, onDestroy, ...rest } = item
+        const update = { 'onUpdate:visible': (visible: boolean) => !visible && apis.destroy(id!) }
+        return (
+          <Message {...rest} {...update} key={id} visible={visible}>
+            {content}
+          </Message>
+        )
+      })
 
-  render() {
-    return (
-      <>
-        {this.$slots.default?.()}
-        <IxPortal target="ix-message-container" load={this.loadContainer}>
-          <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={this.style} {...this.$attrs}>
-            {this.messages.map(item => {
-              // The default value for `visible` is true
-              const { id, content, visible = true, onDestroy, ...rest } = item
-              const update = { 'onUpdate:visible': (visible: boolean) => !visible && this.destroy(id!) }
-              return (
-                <Message {...rest} {...update} key={id} visible={visible}>
-                  {content}
-                </Message>
-              )
-            })}
-          </TransitionGroup>
-        </IxPortal>
-      </>
-    )
+      return (
+        <>
+          {slots.default?.()}
+          <IxPortal target="ix-message-container" load={loadContainer.value}>
+            <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={style.value} {...attrs}>
+              {child}
+            </TransitionGroup>
+          </IxPortal>
+        </>
+      )
+    }
   },
 })
 

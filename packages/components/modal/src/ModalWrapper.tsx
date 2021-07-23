@@ -1,19 +1,19 @@
 import { ComputedRef, onBeforeUnmount, onMounted, Ref, watch } from 'vue'
 
-import { computed, defineComponent, inject, ref, toRef, Transition } from 'vue'
+import { computed, defineComponent, inject, ref, Transition } from 'vue'
 import { callEmit, getOffset, isFunction, toCssPixel } from '@idux/cdk/utils'
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
-import { modalInnerToken, modalToken } from './token'
+import { modalToken, MODAL_TOKEN } from './token'
 import { ModalConfig } from '@idux/components/config'
 import { ModalProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup() {
-    const { props, config, visible, animatedVisible } = inject(modalInnerToken)!
-    const { close } = inject(modalToken)!
+  setup(_, { attrs }) {
+    const { props, config, visible, animatedVisible } = inject(modalToken)!
+    const { close } = inject(MODAL_TOKEN)!
     const { centered, width, mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
 
     const classes = useClasses(props, centered)
@@ -34,118 +34,52 @@ export default defineComponent({
       sentinelEndRef,
     )
 
-    let lastOutSideActiveElement: HTMLElement | null = null
-    const onEnter = () => {
-      const wrapperElement = wrapperRef.value!
-      const activeElement = document.activeElement
-      if (!wrapperElement.contains(activeElement)) {
-        lastOutSideActiveElement = activeElement as HTMLElement
-      }
-
-      // first show modal
-      if (!modalTransformOrigin.value && lastOutSideActiveElement) {
-        const modalElement = modalRef.value!
-        const previouslyDOMRect = lastOutSideActiveElement.getBoundingClientRect()
-        const lastPosition = getOffset(lastOutSideActiveElement)
-        const x = lastPosition.left + previouslyDOMRect.width / 2
-        const y = lastPosition.top + previouslyDOMRect.height / 2
-        modalTransformOrigin.value = `${x - modalElement.offsetLeft}px ${y - modalElement.offsetTop}px`
-      }
-    }
-
-    const onAfterEnter = () => {
-      const wrapperElement = wrapperRef.value!
-      const activeElement = document.activeElement
-      if (!wrapperElement.contains(activeElement)) {
-        wrapperElement.focus()
-      }
-
-      callEmit(props.onAfterOpen)
-    }
-
-    const onAfterLeave = () => {
-      if (lastOutSideActiveElement && isFunction(lastOutSideActiveElement.focus)) {
-        const wrapperElement = wrapperRef.value!
-        const activeElement = document.activeElement
-
-        if (
-          !activeElement ||
-          activeElement === document.body ||
-          activeElement === wrapperElement ||
-          wrapperElement.contains(activeElement)
-        ) {
-          lastOutSideActiveElement.focus()
-        }
-      }
-
-      callEmit(props.onAfterClose)
-
-      animatedVisible.value = false
-    }
+    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(
+      props,
+      wrapperRef,
+      modalTransformOrigin,
+      modalRef,
+      animatedVisible,
+    )
 
     onMounted(() => {
       watchVisibleChange(wrapperRef, sentinelStartRef, props, mask)
     })
 
-    return {
-      classes,
-      zIndex,
-      modalStyle,
-      animatedVisible,
-      visible,
-      destroyOnHide: toRef(props, 'destroyOnHide'),
-      wrapperRef,
-      modalRef,
-      sentinelStartRef,
-      sentinelEndRef,
-      onModalMousedown,
-      onModalMouseup,
-      onWrapperClick,
-      onWrapperKeydown,
-      onEnter,
-      onAfterEnter,
-      onAfterLeave,
-    }
-  },
-  render() {
-    return (
-      <div
-        v-show={this.animatedVisible}
-        ref="wrapperRef"
-        class={this.classes}
-        tabindex={-1}
-        style={{ zIndex: this.zIndex }}
-        onClick={this.onWrapperClick}
-        onKeydown={this.onWrapperKeydown}
-      >
-        <Transition
-          name="ix-zoom"
-          appear
-          onEnter={this.onEnter}
-          onAfterEnter={this.onAfterEnter}
-          onAfterLeave={this.onAfterLeave}
+    return () => {
+      return (
+        <div
+          v-show={animatedVisible.value}
+          ref={wrapperRef}
+          class={classes.value}
+          tabindex={-1}
+          style={{ zIndex: zIndex.value }}
+          onClick={onWrapperClick}
+          onKeydown={onWrapperKeydown}
         >
-          <div
-            v-show={this.visible}
-            ref="modalRef"
-            role="document"
-            class="ix-modal"
-            style={this.modalStyle}
-            onMousedown={this.onModalMousedown}
-            onMouseup={this.onModalMouseup}
-            {...this.$attrs}
-          >
-            <div ref="sentinelStartRef" tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
-            <div class="ix-modal-content">
-              <ModalHeader></ModalHeader>
-              <ModalBody></ModalBody>
-              <ModalFooter></ModalFooter>
+          <Transition name="ix-zoom" appear onEnter={onEnter} onAfterEnter={onAfterEnter} onAfterLeave={onAfterLeave}>
+            <div
+              v-show={visible.value}
+              ref={modalRef}
+              role="document"
+              class="ix-modal"
+              style={modalStyle.value}
+              onMousedown={onModalMousedown}
+              onMouseup={onModalMouseup}
+              {...attrs}
+            >
+              <div ref={sentinelStartRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
+              <div class="ix-modal-content">
+                <ModalHeader></ModalHeader>
+                <ModalBody></ModalBody>
+                <ModalFooter></ModalFooter>
+              </div>
+              <div ref={sentinelEndRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
             </div>
-            <div ref="sentinelEndRef" tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
-          </div>
-        </Transition>
-      </div>
-    )
+          </Transition>
+        </div>
+      )
+    }
   },
 })
 
@@ -257,4 +191,62 @@ const useEvent = (
   })
 
   return { onModalMousedown, onModalMouseup, onWrapperClick, onWrapperKeydown }
+}
+
+const useEvents = (
+  props: ModalProps,
+  wrapperRef: Ref<HTMLDivElement | undefined>,
+  modalTransformOrigin: Ref<string | undefined>,
+  modalRef: Ref<HTMLDivElement | undefined>,
+  animatedVisible: Ref<boolean>,
+) => {
+  let lastOutSideActiveElement: HTMLElement | null = null
+  const onEnter = () => {
+    const wrapperElement = wrapperRef.value!
+    const activeElement = document.activeElement
+    if (!wrapperElement.contains(activeElement)) {
+      lastOutSideActiveElement = activeElement as HTMLElement
+    }
+
+    // first show modal
+    if (!modalTransformOrigin.value && lastOutSideActiveElement) {
+      const modalElement = modalRef.value!
+      const previouslyDOMRect = lastOutSideActiveElement.getBoundingClientRect()
+      const lastPosition = getOffset(lastOutSideActiveElement)
+      const x = lastPosition.left + previouslyDOMRect.width / 2
+      const y = lastPosition.top + previouslyDOMRect.height / 2
+      modalTransformOrigin.value = `${x - modalElement.offsetLeft}px ${y - modalElement.offsetTop}px`
+    }
+  }
+
+  const onAfterEnter = () => {
+    const wrapperElement = wrapperRef.value!
+    const activeElement = document.activeElement
+    if (!wrapperElement.contains(activeElement)) {
+      wrapperElement.focus()
+    }
+
+    callEmit(props.onAfterOpen)
+  }
+
+  const onAfterLeave = () => {
+    if (lastOutSideActiveElement && isFunction(lastOutSideActiveElement.focus)) {
+      const wrapperElement = wrapperRef.value!
+      const activeElement = document.activeElement
+
+      if (
+        !activeElement ||
+        activeElement === document.body ||
+        activeElement === wrapperElement ||
+        wrapperElement.contains(activeElement)
+      ) {
+        lastOutSideActiveElement.focus()
+      }
+    }
+
+    callEmit(props.onAfterClose)
+
+    animatedVisible.value = false
+  }
+  return { onEnter, onAfterEnter, onAfterLeave }
 }

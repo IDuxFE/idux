@@ -1,12 +1,13 @@
 import type { Slot, VNode, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, inject, toRef } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { isString } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { modalInnerToken } from './token'
+import { modalToken } from './token'
 
 // staticIcons.ts
-const iconMap = {
+const defaultIconTypes = {
+  default: '',
   confirm: 'question-circle-filled',
   info: 'info-circle-filled',
   success: 'check-circle-filled',
@@ -16,38 +17,30 @@ const iconMap = {
 
 export default defineComponent({
   setup() {
-    const { props, slots } = inject(modalInnerToken)!
+    const { props, slots, config } = inject(modalToken)!
     const isDefault = computed(() => props.type === 'default')
-    const icon = computed(() => {
+    const iconName = computed(() => {
       const { icon, type } = props
-      return icon ?? iconMap[type as keyof typeof iconMap]
+      return icon ?? config.icon?.[type] ?? defaultIconTypes[type]
     })
 
-    return {
-      slots,
-      isDefault,
-      icon,
-      type: toRef(props, 'type'),
-      title: toRef(props, 'title'),
-    }
-  },
-
-  render() {
-    if (this.isDefault) {
-      return <div class="ix-modal-body">{this.slots.default?.()}</div>
-    }
-    const classes = `ix-modal-body ix-modal-body-${this.type}`
-    const icon = renderIcon(this.slots.icon, this.icon)
-    const title = renderTitle(this.slots.title, this.title)
-    return (
-      <div class={classes}>
-        {icon}
-        <div class="ix-modal-body-content">
-          {title}
-          {this.slots.default?.()}
+    return () => {
+      if (isDefault.value) {
+        return <div class="ix-modal-body">{slots.default?.()}</div>
+      }
+      const classes = `ix-modal-body ix-modal-body-${props.type}`
+      const icon = renderIcon(slots.icon, iconName.value)
+      const title = renderTitle(slots.title, props.title)
+      return (
+        <div class={classes}>
+          {icon}
+          <div class="ix-modal-body-content">
+            {title}
+            {slots.default?.()}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   },
 })
 

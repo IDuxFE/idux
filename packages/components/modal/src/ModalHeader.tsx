@@ -1,12 +1,12 @@
 import { computed, defineComponent, inject, toRef } from 'vue'
 import { isString, toArray } from '@idux/cdk/utils'
 import { IxHeader } from '@idux/components/header'
-import { modalInnerToken, modalToken } from './token'
+import { modalToken, MODAL_TOKEN } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, slots, config } = inject(modalInnerToken)!
-    const { close } = inject(modalToken)!
+    const { props, slots, config } = inject(modalToken)!
+    const { close } = inject(MODAL_TOKEN)!
     const closable = computed(() => props.closable ?? config.closable)
     const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
 
