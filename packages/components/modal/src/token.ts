@@ -12,8 +12,8 @@ export interface ModalContext {
   okLoading: Ref<boolean>
 }
 
-export const modalInnerToken: InjectionKey<ModalContext> = Symbol('modalInnerToken')
+export const modalToken: InjectionKey<ModalContext> = Symbol('modalToken')
 export const modalProviderToken: InjectionKey<ModalProviderRef> = Symbol('modalProviderToken')
 
 // public token
-export const modalToken: InjectionKey<ModalBindings & { props: ModalProps }> = Symbol('modalToken')
+export const MODAL_TOKEN: InjectionKey<ModalBindings & { props: ModalProps }> = Symbol('MODAL_TOKEN')

@@ -1,4 +1,5 @@
 @import '../../style/default.less';
+@import '../../style/motion/slide.less';
 
 @collapse-prefix: ~'@{idux-prefix}-collapse';
 
@@ -22,26 +23,26 @@
       border-left: @collapse-panel-border-style;
       border-right: @collapse-panel-border-style;
 
-      &-borderless{
+      &-borderless {
         border: none;
       }
     }
 
-    &-inactive{
+    &-inactive {
       border-bottom: none;
     }
 
-    &-borderless{
+    &-borderless {
       border: none;
     }
 
-    &-disabled{
+    &-disabled {
       cursor: not-allowed;
     }
   }
 
-  &-borderless{
-   border: none;
+  &-borderless {
+    border: none;
   }
 
   &-panel-icon {

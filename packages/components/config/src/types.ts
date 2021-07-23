@@ -16,6 +16,7 @@ import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
 import type { StepsSize } from '@idux/components/steps'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import { BreakpointKey } from '@idux/cdk/breakpoint'
+import { ModalType } from '@idux/components/modal'
 
 // General
 
@@ -209,6 +210,7 @@ export interface ModalConfig {
   closable: boolean
   closeIcon: string
   closeOnEsc: boolean
+  icon?: Partial<Record<ModalType, string | VNode>>
   mask: boolean
   maskClosable: boolean
   width: string | number

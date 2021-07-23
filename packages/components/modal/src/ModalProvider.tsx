@@ -7,32 +7,35 @@ import { modalProviderToken } from './token'
 
 export default defineComponent({
   name: 'IxModalProvider',
-  setup() {
+  setup(_, { expose, slots }) {
     const { modalRefMap, setModalRef } = useModalRef()
     const { modals, apis } = useModalApis(modalRefMap)
     provide(modalProviderToken, apis)
-    return { modals, setModalRef, ...apis }
-  },
-  render() {
-    return (
-      <>
-        {this.$slots.default?.()}
-        {this.modals.map(item => {
-          // The default value for `visible` and `destroyOnHide` is true
-          const { id, content, visible = true, destroyOnHide = true, ...rest } = item
-          return (
-            <Modal
-              {...rest}
-              visible={visible}
-              onAfterClose={() => destroyOnHide && this.destroy(id!)}
-              ref={(instance: any) => this.setModalRef(id!, instance)}
-            >
-              {content}
-            </Modal>
-          )
-        })}
-      </>
-    )
+    expose(apis)
+
+    return () => {
+      const child = modals.value.map(item => {
+        // The default value for `visible` and `destroyOnHide` is true
+        const { id, content, visible = true, destroyOnHide = true, ...rest } = item
+        return (
+          <Modal
+            {...rest}
+            visible={visible}
+            onAfterClose={() => destroyOnHide && apis.destroy(id!)}
+            ref={(instance: any) => setModalRef(id!, instance)}
+          >
+            {content}
+          </Modal>
+        )
+      })
+
+      return (
+        <>
+          {slots.default?.()}
+          {child}
+        </>
+      )
+    }
   },
 })
 

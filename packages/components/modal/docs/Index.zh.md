@@ -33,7 +33,7 @@ order: 0
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
 | `footer` | 自定义底部按钮 | `ModalButtonProps[] \| VNode \| #footer` | - | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `null` 则不显示 |
 | `header` | 对话框标题 | `sting \| HeaderProps \| #header` | - | - | - |
-| `icon` | 自定义图标 | `string \| VNode \| #icon` | - | - | 当 `type` 不为 `default` 时有效 |
+| `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |

@@ -1,15 +1,24 @@
 @import '../../style/default.less';
+@import '../../style/mixins/box.less';
+@import '../../style/motion/zoom.less';
+@import '../../_private/mask/style/index.less';
 
 @modal-prefix: ~'@{idux-prefix}-modal';
 
 .@{modal-prefix} {
-  .mask();
-
   position: relative;
   top: @modal-top;
   width: auto;
   max-width: @modal-max-width;
   margin: 0 auto;
+  pointer-events: none;
+
+  &-wrapper {
+    .box(fixed);
+    z-index: @zindex-l4-base;
+    overflow: auto;
+    outline: 0;
+  }
 
   &-sentinel {
     width: 0;

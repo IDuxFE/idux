@@ -6,6 +6,7 @@ import { MessageConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { messageProps } from './types'
 
+// staticIcons.ts
 const defaultIconTypes = {
   success: 'check-circle',
   error: 'close-circle',
@@ -17,7 +18,7 @@ const defaultIconTypes = {
 export default defineComponent({
   name: 'IxMessage',
   props: messageProps,
-  setup(props) {
+  setup(props, { slots }) {
     const config = useGlobalConfig('message')
 
     const classes = computed(() => {
@@ -25,27 +26,24 @@ export default defineComponent({
       return [clsPrefix, `${clsPrefix}-${props.type}`]
     })
 
-    const icon$$ = computed(() => {
+    const icon = computed(() => {
       const { icon, type } = props
       return icon ?? config.icon?.[type] ?? defaultIconTypes[type]
     })
 
-    const { visible$$, onMouseEnter, onMouseLeave } = useEvents(props, config)
+    const { visible, onMouseEnter, onMouseLeave } = useEvents(props, config)
 
-    return { classes, icon$$, visible$$, onMouseEnter, onMouseLeave }
-  },
-
-  render() {
-    const { visible$$, classes, icon$$, onMouseEnter, onMouseLeave } = this
-    const iconNode = isString(icon$$) ? <IxIcon name={icon$$}></IxIcon> : icon$$
-    return (
-      <div v-show={visible$$} class={classes} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
-        <div class="ix-message-content">
-          {iconNode}
-          <span class="ix-message-content-text">{this.$slots.default?.()}</span>
+    return () => {
+      const iconNode = isString(icon.value) ? <IxIcon name={icon.value}></IxIcon> : icon.value
+      return (
+        <div v-show={visible.value} class={classes.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
+          <div class="ix-message-content">
+            {iconNode}
+            <span class="ix-message-content-text">{slots.default?.()}</span>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   },
 })
 
@@ -54,10 +52,10 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
   const destroyOnHover = computed(() => props.destroyOnHover ?? config.destroyOnHover)
   const autoClose = computed(() => duration.value > 0)
 
-  const visible$$ = ref(props.visible)
+  const visible = ref(props.visible)
   watch(
     () => props.visible,
-    visible => (visible$$.value = visible),
+    value => (visible.value = value),
   )
 
   let timer: number | null = null
@@ -75,7 +73,7 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
 
   const destroy = () => {
     clearTimer()
-    visible$$.value = false
+    visible.value = false
     callEmit(props['onUpdate:visible'], false)
   }
 
@@ -93,7 +91,7 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
   onMounted(() => {
     watchEffect(() => {
       clearTimer()
-      if (visible$$.value && autoClose.value) {
+      if (visible.value && autoClose.value) {
         startTimer()
       }
     })
@@ -101,5 +99,5 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
 
   onBeforeUnmount(() => clearTimer())
 
-  return { visible$$, onMouseEnter, onMouseLeave }
+  return { visible, onMouseEnter, onMouseLeave }
 }
