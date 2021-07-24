@@ -14,7 +14,7 @@ export const popoverProps = {
   hideDelay: IxPropTypes.number,
   destroyOnHide: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
-  'onUpdate:visible': IxPropTypes.func<(visible: boolean) => void>().def(() => {}),
+  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
 }
 
 export type PopoverProps = IxInnerPropTypes<typeof popoverProps>

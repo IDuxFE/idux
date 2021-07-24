@@ -12,7 +12,6 @@ import { convertElement } from './utils'
 
 export default defineComponent({
   name: 'IxOverlay',
-  components: { IxPortal },
   directives: { clickOutside },
   props: overlayProps,
   setup(props) {

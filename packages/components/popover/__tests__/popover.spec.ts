@@ -1,5 +1,5 @@
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'
-import type { PopoverPublicProps } from '../src/types'
+import type { PopoverProps } from '../src/types'
 
 import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
@@ -7,10 +7,9 @@ import IxPopover from '../src/Popover'
 
 describe('Popover', () => {
   const popoverWrapper: (
-    options?: MountingOptions<Partial<PopoverPublicProps>>,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-  ) => VueWrapper<InstanceType<typeof IxPopover>> = (options = {}) => mount(IxPopover, { ...options })
+    options?: MountingOptions<Partial<PopoverProps>>,
+  ) => VueWrapper<InstanceType<typeof IxPopover>> = (options = {}) =>
+    mount(IxPopover, { ...options } as MountingOptions<PopoverProps>)
 
   beforeEach(() => {
     jest.spyOn(console, 'warn').mockImplementation(() => {})

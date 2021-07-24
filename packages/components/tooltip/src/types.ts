@@ -13,7 +13,7 @@ export const tooltipProps = {
   showDelay: IxPropTypes.number,
   destroyOnHide: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
-  'onUpdate:visible': IxPropTypes.func<(visible: boolean) => void>().def(() => {}),
+  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
 }
 
 export type TooltipProps = IxInnerPropTypes<typeof tooltipProps>

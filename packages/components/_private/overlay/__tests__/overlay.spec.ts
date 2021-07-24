@@ -6,10 +6,10 @@ import { renderWork } from '@tests'
 import IxOverlay from '../src/Overlay'
 
 describe('Overlay', () => {
-  let OverlayMount: (options?: MountingOptions<Partial<OverlayProps>>) => VueWrapper<InstanceType<typeof IxOverlay>>
+  const OverlayMount: (options?: MountingOptions<Partial<OverlayProps>>) => VueWrapper<InstanceType<typeof IxOverlay>> =
+    (options = {}) => mount(IxOverlay, { ...options })
 
   beforeEach(() => {
-    OverlayMount = options => mount(IxOverlay, { ...options })
     jest.spyOn(console, 'warn').mockImplementation(() => {})
   })
 

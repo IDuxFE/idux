@@ -4,6 +4,7 @@ import type { PopoverProps } from './types'
 
 import { computed, getCurrentInstance } from 'vue'
 import { useGlobalConfig } from '@idux/components/config'
+import { callEmit } from '@idux/cdk/utils'
 
 export function useConfig(): ComputedRef<PopoverConfig> {
   const config = useGlobalConfig('popover')
@@ -29,7 +30,7 @@ export function useVisibility(): WritableComputedRef<boolean> {
       return props.visible
     },
     set(value: boolean) {
-      props['onUpdate:visible'](value)
+      callEmit(props['onUpdate:visible'], value)
     },
   })
 }

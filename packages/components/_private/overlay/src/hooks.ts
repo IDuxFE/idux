@@ -3,7 +3,7 @@ import type { PopperInstance, PopperOptions, PopperPlacement } from '@idux/cdk/p
 import type { OverlayProps } from './types'
 
 import { computed, getCurrentInstance, watch } from 'vue'
-import { hasSlot, Logger } from '@idux/cdk/utils'
+import { callEmit, hasSlot, Logger } from '@idux/cdk/utils'
 import { usePopper } from '@idux/cdk/popper'
 import { getPopperOptions } from './utils'
 
@@ -35,11 +35,11 @@ export function useWatcher(
   const props = getCurrentInstance()!.props as OverlayProps
 
   watch(visibility, value => {
-    props['onUpdate:visible'](value)
+    callEmit(props['onUpdate:visible'], value)
   })
 
   watch(placement, value => {
-    props['onUpdate:placement'](value)
+    callEmit(props['onUpdate:placement'], value)
   })
 
   watch([() => props.visible, () => props.placement], ([visible, placement]) => {
