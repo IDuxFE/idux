@@ -15,6 +15,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
 
   const triggerRef = useElement<TE>()
   const popperRef = useElement<PE>()
+  const arrowRef = useElement<HTMLElement>()
 
   const [visibility, visibilityWatcher] = useVisibility(state, forceUpdate)
   const [placement, placementWatcher] = usePlacement(state, forceUpdate)
@@ -40,6 +41,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     isInitialized = true
     const triggerElement = convertElement(triggerRef)
     const popperElement = convertElement(popperRef)
+    const arrowElement = convertElement(arrowRef)
 
     if (!triggerElement || !popperElement) {
       return
@@ -47,7 +49,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     if (!visibility.value) {
       return
     }
-    popperInstance = initPopper(state, triggerElement, popperElement, { visibility, hide })
+    popperInstance = initPopper(state, triggerElement, popperElement, { visibility, hide, arrow: arrowElement })
     popperInstance.update()
   }
 
@@ -80,7 +82,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     if (!popperInstance) {
       initialize()
     } else {
-      popperInstance.setOptions(convertPopperOptions(state, { visibility, hide }))
+      popperInstance.setOptions(convertPopperOptions(state, { visibility, hide, arrow: arrowRef.value }))
     }
   }
 
@@ -92,6 +94,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     popperRef,
     triggerEvents,
     popperEvents,
+    arrowRef,
     initialize,
     show,
     hide,

@@ -1,0 +1,45 @@
+@import '../../../style/default.less';
+@import "../../../style/motion/fade.less";
+
+@overlay-prefix: ~'@{idux-prefix}-overlay';
+
+.@{overlay-prefix} {
+  &-arrow-inner {
+      width: 0;
+      height: 0;
+      display: inline-block;
+      border-style: solid;
+  }
+
+  &[data-popper-placement^='top'] .@{overlay-prefix}-arrow {
+    bottom: -6px;
+
+    & > .@{overlay-prefix}-arrow-inner {
+      transform: rotate(45deg);
+    }
+  }
+
+  &[data-popper-placement^='bottom'] .@{overlay-prefix}-arrow {
+    top: -11px;
+
+    & > .@{overlay-prefix}-arrow-inner {
+      transform: rotate(-135deg);
+    }
+  }
+
+  &[data-popper-placement^='left'] .@{overlay-prefix}-arrow {
+    right: -3px;
+
+    & > .@{overlay-prefix}-arrow-inner {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &[data-popper-placement^='right'] .@{overlay-prefix}-arrow {
+    left: -3px;
+
+    & > .@{overlay-prefix}-arrow-inner {
+      transform: rotate(135deg);
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import type { VNode } from 'vue'
 import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
+import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
@@ -179,8 +180,8 @@ export interface StatisticConfig {
 }
 
 export interface TooltipConfig {
-  placement: OverlayPlacement
-  trigger: OverlayTrigger
+  placement: PopperPlacement
+  trigger: PopperTrigger
   showDelay: number
   hideDelay: number
   destroyOnHide: boolean
@@ -188,8 +189,8 @@ export interface TooltipConfig {
 }
 
 export interface PopoverConfig {
-  placement: OverlayPlacement
-  trigger: OverlayTrigger
+  placement: PopperPlacement
+  trigger: PopperTrigger
   showDelay: number
   hideDelay: number
   destroyOnHide: boolean

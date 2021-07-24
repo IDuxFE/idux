@@ -1,63 +1,28 @@
-import { mount, MountingOptions } from '@vue/test-utils'
-import { defineComponent, nextTick } from 'vue'
-import { renderWork, wait } from '@tests'
+import type { MountingOptions, VueWrapper } from '@vue/test-utils'
+import type { TooltipPublicProps } from '../src/types'
+
+import { mount } from '@vue/test-utils'
+import { renderWork } from '@tests'
 import IxTooltip from '../src/Tooltip'
-import { TooltipProps } from '../src/types'
 
-const TestComponent = defineComponent({
-  components: { IxTooltip },
-  // eslint-disable-next-line vue/require-prop-types
-  props: ['title', 'placement', 'visible', 'trigger', 'destroyOnHide'],
-  template: `
-    <ix-tooltip :title='title' :placement='placement' :visible='visible' :trigger='trigger' :destroy-on-hide='destroyOnHide'>
-      <template v-if='!!$slots.title' #title><slot name='title'/></template>
-      <span>Tooltip will show when it's hovered.</span>
-    </ix-tooltip>
-  `,
-})
+describe('Tooltip', () => {
+  const tooltipWrapper: (
+    options?: MountingOptions<Partial<TooltipPublicProps>>,
+  ) => VueWrapper<InstanceType<typeof IxTooltip>> = (options = {}) => mount(IxTooltip, { ...options })
 
-describe('tooltip', () => {
-  const tooltipMount = (options?: MountingOptions<TooltipProps>) => mount(TestComponent, { ...options })
-  afterEach(() => {
-    document.body.querySelectorAll('.ix-tooltip').forEach(value => {
-      value.remove()
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+
+  renderWork(IxTooltip, { props: { title: 'Title' }, slots: { default: () => '<span>Trigger</span>' } })
+
+  test('visible work', async () => {
+    const wrapper = tooltipWrapper({
+      props: { title: 'Title', destroyOnHide: true, visible: false },
+      slots: { default: () => '<span id="trigger">Trigger</span>' },
     })
+    expect(!!document.querySelector('.ix-overlay')).toBeFalsy()
+    await wrapper.setProps({ visible: true })
+    expect(!!document.querySelector('.ix-overlay')).toBeTruthy()
   })
-
-  renderWork(IxTooltip)
-
-  test('title work', async () => {
-    const textWrapper = tooltipMount({ props: { title: 'prompt text' } })
-    await nextTick()
-    expect((document.body.querySelector('.ix-tooltip') as HTMLDivElement).style.display).toEqual('none')
-    await textWrapper.get('span').trigger('mouseenter')
-    await wait(100)
-    expect((document.body.querySelector('.ix-tooltip') as HTMLDivElement).style.display).toEqual('')
-
-    const title = '<div id="custom-title">prompt text</div>'
-    const slotWrapper = tooltipMount({ slots: { title } })
-    await nextTick()
-    expect((document.body.querySelectorAll('.ix-tooltip')[1] as HTMLDivElement).style.display).toEqual('none')
-    await slotWrapper.get('span').trigger('mouseenter')
-    await wait(100)
-    expect((document.body.querySelectorAll('.ix-tooltip')[1] as HTMLDivElement).style.display).toEqual('')
-  })
-
-  test('destroyOnHide work', async () => {
-    const wrapper = tooltipMount({ props: { destroyOnHide: true, title: 'prompt text' } })
-    expect(document.body.querySelector('.ix-tooltip')!.querySelector('.ix-tooltip-content')).toBeNull()
-    await wrapper.get('span').trigger('mouseenter')
-    await wait(100)
-    expect(document.body.querySelector('.ix-tooltip')!.querySelector('.ix-tooltip-content')).toBeDefined()
-    await wrapper.get('span').trigger('mouseleave')
-    await wait(500)
-    expect(document.body.querySelector('.ix-tooltip')!.querySelector('.ix-tooltip-content')).toBeNull()
-  })
-
-  test('without title', () => {
-    tooltipMount()
-    expect(document.body.querySelector('.ix-tooltip')).toBeNull()
-  })
-
-  // todo global click test
 })

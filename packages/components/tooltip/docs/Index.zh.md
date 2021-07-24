@@ -1,6 +1,6 @@
 ---
 category: components
-type: 反馈
+type: 数据展示
 title: Tooltip
 subtitle: 文字提示
 order: 0

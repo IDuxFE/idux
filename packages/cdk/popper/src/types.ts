@@ -121,6 +121,12 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * Manually bind to events on the popper.   */
   popperEvents: ComputedRef<PopperEvents>
   /**
+   * The truth DOM node of the arrow.
+   * If showArrow is false, we won't return arrowRef.
+   * The caller needs to bind the variable to the view.
+   */
+  arrowRef: Ref<HTMLElement | null>
+  /**
    * @deprecated
    * popper has been initialized
    * for test only

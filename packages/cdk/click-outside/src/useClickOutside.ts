@@ -1,9 +1,9 @@
-import type { ObjectDirective, Ref } from 'vue'
+import type { ObjectDirective } from 'vue'
 
 import { isFunction, isObject, noop, on } from '@idux/cdk/utils'
 
 interface ClickOutsideOptions {
-  exclude: Ref<HTMLElement>[]
+  exclude: HTMLElement[]
   handler: ClickOutsideHandler
 }
 
@@ -22,6 +22,7 @@ on(document, 'click', event => {
   documentHandlerMap.forEach(({ exclude, handler }, el) => {
     const target = event.target as Node
     const isContain = el.contains(target)
+
     const isTargetExclude =
       exclude.length && (exclude.some(item => item.contains(target)) || exclude.includes(target as HTMLElement))
     const isSelf = target === el
@@ -39,7 +40,7 @@ function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   if (isFunction(binding)) {
     handler = binding as ClickOutsideHandler
   } else if (isObject<ClickOutsideOptions>(binding)) {
-    exclude.push(...binding.exclude.map(el => el.value))
+    exclude.push(...binding.exclude)
     handler = binding.handler
   }
 
