@@ -2,7 +2,7 @@
   <div>
     <ix-switch v-model:checked="checked1" :loading="loading"></ix-switch>
   </div>
-  <div>
+  <div class="mt-5">
     <ix-switch v-model:checked="checked2" :loading="loading"></ix-switch>
   </div>
 </template>

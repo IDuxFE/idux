@@ -8,7 +8,7 @@ order: 0
 ## zh
 
 * 默认disabled为false
-* disabled为true，则switch不可点，状态不会发生变化，不会向外界触发事件
+* disabled为true，则switch不可点，不会向外界触发事件
 * disabled为false，则switch正常可操作
 
 ## en

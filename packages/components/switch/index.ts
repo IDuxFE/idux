@@ -1,6 +1,6 @@
 import type { SwitchComponent } from './src/types'
 
-import Switch from './src/Switch.vue'
+import Switch from './src/Switch'
 
 const IxSwitch = Switch as unknown as SwitchComponent
 

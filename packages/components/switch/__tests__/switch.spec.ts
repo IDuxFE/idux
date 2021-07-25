@@ -1,7 +1,7 @@
 import { mount, MountingOptions } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 import { renderWork } from '@tests'
-import IxSwitch from '../src/Switch.vue'
+import IxSwitch from '../src/Switch'
 import { SwitchProps } from '../src/types'
 
 describe('Switch', () => {
@@ -31,6 +31,18 @@ describe('Switch', () => {
 
     expect(checked.value).toBe(true)
     expect(wrapper.classes()).toContain('ix-switch-checked')
+  })
+
+  test('onUpdate:checked work', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = SwitchMount({ props: { checked: false, 'onUpdate:checked': onUpdate } })
+
+    expect(wrapper.classes()).not.toContain('ix-switch-checked')
+
+    await wrapper.setProps({ checked: true })
+
+    expect(wrapper.classes()).toContain('ix-switch-checked')
+    expect(onUpdate).toBeCalledWith(true)
   })
 
   test('checkedChildren and unCheckedChildren props work', async () => {
@@ -95,47 +107,27 @@ describe('Switch', () => {
 
     await wrapper.trigger('click')
 
-    await wrapper.trigger('mouseup')
-
-    expect(wrapper.emitted()).not.toHaveProperty('change')
-    expect(wrapper.emitted()).not.toHaveProperty('update:checked')
     expect(wrapper.classes()).toContain('ix-switch-disabled')
 
     await wrapper.setProps({ disabled: false })
 
     await wrapper.trigger('click')
 
-    await wrapper.trigger('mouseup')
-
-    expect(wrapper.emitted()).toHaveProperty('change')
-    expect(wrapper.emitted()).toHaveProperty('update:checked')
     expect(wrapper.classes()).not.toContain('ix-switch-disabled')
   })
 
   test('loading work', async () => {
     const wrapper = SwitchMount({ props: { loading: true } })
 
-    expect(wrapper.find('.ix-switch-loading').exists()).toBeTruthy()
-    expect(wrapper.classes()).toContain('ix-switch-disabled')
+    expect(wrapper.find('.ix-switch-loading-icon').exists()).toBeTruthy()
+    expect(wrapper.classes()).toContain('ix-switch-loading')
 
     await wrapper.trigger('click')
-
-    await wrapper.trigger('mouseup')
-
-    expect(wrapper.emitted()).not.toHaveProperty('change')
-    expect(wrapper.emitted()).not.toHaveProperty('update:checked')
 
     await wrapper.setProps({ loading: false })
 
-    expect(wrapper.find('.ix-switch-loading').exists()).toBeFalsy()
-    expect(wrapper.classes()).not.toContain('ix-switch-disabled')
-
-    await wrapper.trigger('click')
-
-    await wrapper.trigger('mouseup')
-
-    expect(wrapper.emitted()).toHaveProperty('change')
-    expect(wrapper.emitted()).toHaveProperty('update:checked')
+    expect(wrapper.find('.ix-switch-loading-icon').exists()).toBeFalsy()
+    expect(wrapper.classes()).not.toContain('ix-switch-loading')
   })
 
   test('size work', async () => {

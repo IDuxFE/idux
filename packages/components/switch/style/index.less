@@ -14,18 +14,18 @@
   transition: @switch-transition;
   cursor: pointer;
 
-  &-loading {
+  &-loading-icon {
     display: flex;
     align-items: center;
     position: absolute;
     z-index: 2;
     left: 100%;
     margin-left: -17px;
-    color: @switch-close-loading-color;
+    color: @switch-close-loading-icon-color;
 
     svg {
-      width: @switch-loading-size;
-      height: @switch-loading-size;
+      width: @switch-loading-icon-size;
+      height: @switch-loading-icon-size;
     }
   }
 
@@ -61,10 +61,10 @@
     border: 1px solid @switch-open-border-color;
     background-color: @switch-open-bg-color;
 
-    .@{switch-prefix}-loading {
+    .@{switch-prefix}-loading-icon {
       left: 2px;
       margin-left: 3px;
-      color: @switch-open-loading-color;
+      color: @switch-open-loading-icon-color;
     }
 
     .@{switch-prefix}-inner {
@@ -80,18 +80,35 @@
     }
   }
 
-  &-disabled {
+  &-disabled,
+  &-loading {
     cursor: not-allowed;
-    opacity: @switch-disable-opacity;
+    
+    &:focus {
+      box-shadow: none;
+    }
 
     &::after {
       cursor: not-allowed;
     }
   }
 
+  &-disabled {
+    opacity: @switch-disable-opacity;
+  }
+
   &-small {
     min-width: 28px;
     height: @switch-small-height;
+
+    .@{switch-prefix}-loading-icon {
+      margin-left: -12px;
+
+      svg {
+        width: @switch-loading-icon-size-sm;
+        height: @switch-loading-icon-size-sm;
+      }
+    }
 
     .@{switch-prefix}-inner {
       padding-left: 8px;
@@ -107,11 +124,17 @@
   }
 
   &-small&-checked {
+    .@{switch-prefix}-loading-icon {
+      left: 2px;
+      margin-left: 2px;
+    }
+
     .@{switch-prefix}-inner {
       padding-left: 16px;
       padding-right: 8px;
       transition: @switch-transition;
     }
+    
     &::after {
       margin-left: 0;
     }
