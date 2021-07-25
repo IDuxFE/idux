@@ -3,7 +3,7 @@ import type { ObjectDirective } from 'vue'
 import { isFunction, isObject, noop, on } from '@idux/cdk/utils'
 
 interface ClickOutsideOptions {
-  exclude: HTMLElement[]
+  exclude: (HTMLElement | null)[]
   handler: ClickOutsideHandler
 }
 
@@ -40,7 +40,7 @@ function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   if (isFunction(binding)) {
     handler = binding as ClickOutsideHandler
   } else if (isObject<ClickOutsideOptions>(binding)) {
-    exclude.push(...binding.exclude)
+    exclude.push(...(binding.exclude.filter(Boolean) as HTMLElement[]))
     handler = binding.handler
   }
 
