@@ -2,7 +2,7 @@ import type { Slots } from 'vue'
 import type { PopperElement } from '@idux/cdk/popper'
 import type { OverlayProps } from './types'
 
-import { cloneVNode, defineComponent, onMounted, ref, resolveDirective, Transition, withDirectives } from 'vue'
+import { cloneVNode, defineComponent, onMounted, ref, Transition, withDirectives } from 'vue'
 import { IxPortal } from '@idux/cdk/portal'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { getFirstValidNode, getSlotNodes } from '@idux/cdk/utils'
@@ -12,9 +12,8 @@ import { convertElement } from './utils'
 
 export default defineComponent({
   name: 'IxOverlay',
-  directives: { clickOutside },
   props: overlayProps,
-  setup(props) {
+  setup(props, { slots }) {
     useLogger()
 
     const {
@@ -35,52 +34,35 @@ export default defineComponent({
 
     useWatcher(visibility, placement, update)
 
-    return { arrowRef, popperRef, popperEvents, triggerRef, triggerEvents, visibility, hide, renderValid }
-  },
-  render() {
-    const {
-      renderValid,
-      $props,
-      $slots,
-      triggerEvents,
-      popperRef,
-      clsPrefix,
-      visibleTransition,
-      destroyOnHide,
-      visibility,
-      popperEvents,
-      showArrow,
-      hide,
-    } = this
+    return () => {
+      if (!renderValid.value) {
+        return null
+      }
 
-    if (!renderValid) {
-      return null
+      const trigger = getTrigger(props, slots, { ref: triggerRef, ...triggerEvents.value }, hide, popperRef.value)
+      const overlay = getFirstValidNode(getSlotNodes(slots, 'overlay'))
+
+      const content = (
+        <div ref={popperRef} class={[props.clsPrefix, 'ix-overlay']} {...popperEvents.value}>
+          {props.showArrow && (
+            <div ref={arrowRef} class={['ix-overlay-arrow', `${props.clsPrefix}-arrow`]}>
+              <div class={['ix-overlay-arrow-inner', `${props.clsPrefix}-arrow-inner`]} />
+            </div>
+          )}
+          <div class={`${props.clsPrefix}-content`}>{overlay}</div>
+        </div>
+      )
+      return (
+        <>
+          {trigger}
+          <IxPortal target={`${props.clsPrefix}-container`} load={visibility.value}>
+            <Transition name={props.visibleTransition}>
+              {props.destroyOnHide ? visibility.value && content : <div v-show={visibility.value}>{content}</div>}
+            </Transition>
+          </IxPortal>
+        </>
+      )
     }
-
-    const trigger = getTrigger($props, $slots, { ref: 'triggerRef', ...triggerEvents }, hide, popperRef)
-    const overlay = getFirstValidNode(getSlotNodes($slots, 'overlay'))!
-
-    const content = (
-      <div ref="popperRef" class={[clsPrefix, 'ix-overlay']} {...popperEvents}>
-        {showArrow && (
-          <div ref="arrowRef" class={['ix-overlay-arrow', `${clsPrefix}-arrow`]}>
-            <div class={['ix-overlay-arrow-inner', `${clsPrefix}-arrow-inner`]} />
-          </div>
-        )}
-        <div class={`${clsPrefix}-content`}>{overlay}</div>
-      </div>
-    )
-
-    return (
-      <>
-        {trigger}
-        <IxPortal target={`${clsPrefix}-container`}>
-          <Transition name={visibleTransition}>
-            {destroyOnHide ? visibility && content : <div v-show={visibility}>{content}</div>}
-          </Transition>
-        </IxPortal>
-      </>
-    )
   },
 })
 
@@ -96,7 +78,7 @@ function getTrigger(
   if (props.trigger === 'click') {
     return withDirectives(element, [
       [
-        resolveDirective('click-outside')!,
+        clickOutside,
         {
           exclude: [overlayElement],
           handler: () => hide(),

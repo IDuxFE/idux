@@ -2,6 +2,5 @@
 
 exports[`Popover render work 1`] = `
 "&lt;span&gt;Trigger&lt;/span&gt;
-<!--teleport start-->
-<!--teleport end-->"
+<!---->"
 `;

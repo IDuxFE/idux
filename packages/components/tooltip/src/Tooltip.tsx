@@ -6,7 +6,6 @@ import { useConfig, useVisibility } from './hooks'
 
 export default defineComponent({
   name: 'IxTooltip',
-  components: { IxOverlay },
   props: tooltipProps,
   setup(props, { slots }) {
     const config = useConfig()

@@ -6,7 +6,6 @@ import { useConfig, useVisibility } from './hooks'
 
 export default defineComponent({
   name: 'IxPopover',
-  components: { IxOverlay },
   props: popoverProps,
   setup(props, { slots }) {
     const config = useConfig()
