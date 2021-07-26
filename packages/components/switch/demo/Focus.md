@@ -9,6 +9,7 @@ order: 0
 
 * 外部调用focus()，switch会获得焦点
 * 外部调用blur()，switch会失去焦点
+* autofocus，一打开页面即自动获得焦点
 
 ## en
 

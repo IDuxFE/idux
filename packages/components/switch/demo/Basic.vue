@@ -1,6 +1,6 @@
 <template>
-  <ix-switch v-model:checked="checked" @update:checked="updateChecked"></ix-switch>
-  <div class="mt-5">父组件的checked: {{ checked }}</div>
+  <ix-switch v-model:checked="checked" @change="updateChecked"></ix-switch>
+  <div class="mt-5">checked: {{ checked }}</div>
   <ix-button class="mt-5" @click="changeChecked">父组件触发改变</ix-button>
 </template>
 <script lang="ts">

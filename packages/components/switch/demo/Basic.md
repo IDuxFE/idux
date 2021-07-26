@@ -9,7 +9,7 @@ order: 0
 
 * 通过v-model:checked进行双向数据绑定
 * 父组件改变checked的状态，子组件监听到checked的变化，作出相应改变
-* 子组件通过click改变checked的状态，向外触发change、click事件
+* 子组件通过click事件改变checked的状态，向外emit触发change事件
 
 ## en
 

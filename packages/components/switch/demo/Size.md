@@ -7,6 +7,6 @@ order: 0
 
 ## zh
 
-size有两种，默认为normal，小尺寸为small
+size有两种，默认为medium，小尺寸为small
 
 ## en

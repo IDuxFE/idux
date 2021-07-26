@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Switch render work 1`] = `
-"<button class=\\"ix-switch\\" type=\\"button\\">
-  <!--v-if-->
+"<button type=\\"button\\" class=\\"ix-switch\\">
+  <!---->
   <div class=\\"ix-switch-inner\\"></div>
 </button>"
 `;
