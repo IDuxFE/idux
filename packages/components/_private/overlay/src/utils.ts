@@ -1,4 +1,3 @@
-import type { Ref } from 'vue'
 import type { PopperElement, PopperOptions } from '@idux/cdk/popper'
 import type { OverlayProps } from './types'
 
@@ -19,8 +18,7 @@ export function getPopperOptions(props: OverlayProps): PopperOptions {
   }
 }
 
-export function convertElement(elementRef: Ref<PopperElement | null>): HTMLElement | null {
-  const element = elementRef.value
+export function convertElement(element: PopperElement | null): HTMLElement | null {
   if (!element) {
     return null
   }

@@ -35,7 +35,7 @@ export const overlayProps = {
   showDelay: IxPropTypes.number,
   showArrow: IxPropTypes.bool.def(true),
   arrowOffset: IxPropTypes.number.def(0),
-  visibleTransition: IxPropTypes.string.def('ix-fade-fast'),
+  transitionName: IxPropTypes.string.def('ix-fade-fast'),
   destroyOnHide: IxPropTypes.bool,
   clsPrefix: IxPropTypes.string.def('ix-overlay'),
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
