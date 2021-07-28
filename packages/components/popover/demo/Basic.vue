@@ -1,5 +1,5 @@
 <template>
-  <ix-popover content="Content" title="Title">
-    <span>Click me</span>
+  <ix-popover title="Title" content="Content">
+    <span>Hover</span>
   </ix-popover>
 </template>

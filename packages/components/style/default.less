@@ -2,6 +2,10 @@
 
 @theme: default;
 
+// Private
+@mask-bg-color: fade(@black, 40%);
+@overlay-arrow-size: 6px;
+
 // General
 /* button -------------------------- */
 @button-zindex: @zindex-l1-1;
@@ -635,30 +639,31 @@
 @timeline-reverse-pending-dot-line-top: 14px;
 
 /* tooltip -------------------------- */
-@tooltip-content-max-width: 250px;
-@tooltip-content-font-size: 14px;
-@tooltip-content-color: @white;
-@tooltip-content-background: rgba(0, 0, 0, 0.75);
-@tooltip-content-min-width: 30px;
-@tooltip-content-min-height: 32px;
-@tooltip-content-padding: @spacing-gutter - 2 @spacing-sm;
-@tooltip-content-border-radius: @border-radius-sm;
-@tooltip-content-box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%),
-  0 9px 28px 8px rgb(0 0 0 / 5%);
-@tooltip-arrow-size: 3px;
+@tooltip-zindex: @zindex-l4-5;
+@tooltip-font-size: @font-size-md;
+@tooltip-color: @white;
+@tooltip-background-color: @grey-d30;
+@tooltip-border-radius: @border-radius-sm;
+@tooltip-box-shadow: @shadow-bottom-md;
+@tooltip-title-max-width: 256px;
+@tooltip-title-min-width: 24px;
+@tooltip-title-min-height: @height-md;
+@tooltip-title-padding: @spacing-sm - 2 @spacing-sm;
 
 /* popover -------------------------- */
-@popover-color: @grey-d40;
-@popover-background: @white;
+@popover-zindex: @zindex-l4-2;
+@popover-font-size: @font-size-md;
+
+@popover-color: @text-color;
+@popover-background-color: @background-color-component;
 @popover-border-radius: @border-radius-sm;
-@popover-box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
-@popover-min-width: 170px;
-@popover-title-min-height: 32px;
-@popover-title-padding: 5px 16px 4px;
+@popover-box-shadow: @shadow-bottom-md;
 @popover-title-font-weight: @font-weight-lg;
-@popover-title-border-bottom: 1px solid @border-color;
-@popover-inner-content-padding: 12px 16px;
-@popover-arrow-size: 3px;
+@popover-title-min-width: 192px;
+@popover-title-min-height: @height-md;
+@popover-title-padding: @spacing-xs + @border-width-sm @spacing-lg @spacing-xs;
+@popover-title-border-bottom: @border-width-sm @border-style @border-color;
+@popover-content-padding: @spacing-md @spacing-lg;
 
 // Feedback
 

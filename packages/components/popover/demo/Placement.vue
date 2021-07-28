@@ -1,99 +1,54 @@
 <template>
-  <table>
-    <tbody>
-      <tr>
-        <td></td>
-        <td>
-          <ix-popover title="Title" placement="topStart" content="Content">
-            <ix-button>TL</ix-button>
-          </ix-popover>
-        </td>
-        <td>
-          <ix-popover title="Title" placement="top" content="Content">
-            <ix-button>Top</ix-button>
-          </ix-popover>
-        </td>
-        <td>
-          <ix-popover title="Title" placement="topEnd" content="Content">
-            <ix-button>TR</ix-button>
-          </ix-popover>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>
-          <ix-popover placement="leftStart" title="Title" content="Content">
-            <ix-button>LT</ix-button>
-          </ix-popover>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <ix-popover placement="rightStart" title="Title" content="Content">
-            <ix-button>RT</ix-button>
-          </ix-popover>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <ix-popover placement="left" title="Title" content="Content">
-            <ix-button>Left</ix-button>
-          </ix-popover>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <ix-popover placement="right" title="Title" content="Content">
-            <ix-button>Right</ix-button>
-          </ix-popover>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <ix-popover placement="leftEnd" title="Title" content="Content">
-            <ix-button>LB</ix-button>
-          </ix-popover>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <ix-popover placement="rightEnd" title="Title" content="Content">
-            <ix-button>RB</ix-button>
-          </ix-popover>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <ix-popover title="Title" placement="bottomStart" content="Content">
-            <ix-button>BL</ix-button>
-          </ix-popover>
-        </td>
-        <td>
-          <ix-popover title="Title" placement="bottom" content="Content">
-            <ix-button>Bottom</ix-button>
-          </ix-popover>
-        </td>
-        <td>
-          <ix-popover title="Title" placement="bottomEnd" content="Content">
-            <ix-button>BR</ix-button>
-          </ix-popover>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div style="margin-left: 60px">
+    <ix-popover title="Title" content="Content..." placement="topStart">
+      <ix-button>TS</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="top">
+      <ix-button>Top</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="topEnd">
+      <ix-button>TE</ix-button>
+    </ix-popover>
+  </div>
+  <div style="float: left; width: 60px">
+    <ix-popover title="Title" content="Content..." placement="leftStart">
+      <ix-button>LS</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="left">
+      <ix-button>Left</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="leftEnd">
+      <ix-button>LE</ix-button>
+    </ix-popover>
+  </div>
+  <div style="margin-left: 270px; width: 60px">
+    <ix-popover title="Title" content="Content..." placement="rightStart">
+      <ix-button>RS</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="right">
+      <ix-button>Right</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="rightEnd">
+      <ix-button>RE</ix-button>
+    </ix-popover>
+  </div>
+  <div style="margin-left: 60px; clear: both">
+    <ix-popover title="Title" content="Content..." placement="bottomStart">
+      <ix-button>BS</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="bottom">
+      <ix-button>Bottom</ix-button>
+    </ix-popover>
+    <ix-popover title="Title" content="Content..." placement="bottomEnd">
+      <ix-button>BE</ix-button>
+    </ix-popover>
+  </div>
 </template>
 
 <style scoped lang="less">
 .ix-button {
   width: 80px;
-}
-
-p {
-  max-width: 50px;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 </style>

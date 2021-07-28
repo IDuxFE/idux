@@ -1,32 +1,74 @@
-import type { MountingOptions, VueWrapper } from '@vue/test-utils'
+import type { MountingOptions } from '@vue/test-utils'
 import type { PopoverProps } from '../src/types'
 
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 import IxPopover from '../src/Popover'
 
 describe('Popover', () => {
-  const popoverWrapper: (
-    options?: MountingOptions<Partial<PopoverProps>>,
-  ) => VueWrapper<InstanceType<typeof IxPopover>> = (options = {}) =>
-    mount(IxPopover, { ...options } as MountingOptions<PopoverProps>)
+  const PopoverWrapper = (options?: MountingOptions<Partial<PopoverProps>>) => mount(IxPopover, { ...options })
+  const slots = { default: () => h('div', { id: 'trigger' }, 'trigger') }
 
-  beforeEach(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {})
+  afterEach(() => {
+    document.querySelector('.ix-popover-container')!.innerHTML = ''
   })
 
-  renderWork(IxPopover, {
-    props: { content: 'Content', title: 'Title' },
-    slots: { default: () => '<span>Trigger</span>' },
+  renderWork<PopoverProps>(IxPopover, {
+    props: { visible: true, title: 'Title', content: 'Content' },
+    slots,
   })
 
-  test('visible work', async () => {
-    const wrapper = popoverWrapper({
-      props: { content: 'Content', title: 'Title', destroyOnHide: true, visible: false },
-      slots: { default: () => '<span id="trigger">Trigger</span>' },
+  test('title work', async () => {
+    const wrapper = PopoverWrapper({
+      props: { visible: true, title: 'Title' },
+      slots,
     })
-    expect(!!document.querySelector('.ix-overlay')).toBeFalsy()
-    await wrapper.setProps({ visible: true })
-    expect(!!document.querySelector('.ix-overlay')).toBeTruthy()
+
+    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title')
+
+    await wrapper.setProps({ title: 'Title 2' })
+
+    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title 2')
+  })
+
+  test('title slot work', async () => {
+    PopoverWrapper({
+      props: { visible: true, title: 'Title' },
+      slots: { ...slots, title: () => h('div', 'Title slot') },
+    })
+
+    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title slot')
+  })
+
+  test('content work', async () => {
+    const wrapper = PopoverWrapper({
+      props: { visible: true, content: 'Content' },
+      slots,
+    })
+
+    expect(document.querySelector('.ix-popover-content')!.textContent).toBe('Content')
+
+    await wrapper.setProps({ content: 'Content 2' })
+
+    expect(document.querySelector('.ix-popover-content')!.textContent).toBe('Content 2')
+  })
+
+  test('title slot work', async () => {
+    PopoverWrapper({
+      props: { visible: true, content: 'Content' },
+      slots: { ...slots, content: () => h('div', 'Content slot') },
+    })
+
+    expect(document.querySelector('.ix-popover-content')!.textContent).toBe('Content slot')
+  })
+
+  test('empty content work', async () => {
+    PopoverWrapper({
+      props: { visible: true },
+      slots,
+    })
+
+    expect(document.querySelector('.ix-popover')).toBeNull()
   })
 })

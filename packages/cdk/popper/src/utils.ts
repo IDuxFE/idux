@@ -1,143 +1,39 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { Instance, Modifier, OptionsGeneric } from '@popperjs/core'
-import type { PopperElement, PopperTriggerEvents } from './types'
-import type { PopperState } from './hooks'
+import type { Ref } from 'vue'
+import type { Options, Placement } from '@popperjs/core'
+import type { PopperElement, PopperPlacement } from './types'
 
-import { createPopper } from '@popperjs/core'
-import { throttle } from 'lodash'
+import { unref } from 'vue'
+import { camelCase, kebabCase } from 'lodash'
 import { isHTMLElement } from '@idux/cdk/utils'
+import { BaseOptions, ExtraOptions } from './hooks'
 
-export function convertElement(elementRef: Ref<PopperElement | null>): HTMLElement | null {
-  const element = elementRef.value
+export function convertElement(elementRef: Ref<PopperElement | null> | PopperElement | null): HTMLElement | null {
+  const element = unref(elementRef)
   if (!element) {
     return null
   }
   return isHTMLElement(element) ? element : element.$el
 }
 
-export function convertPopperOptions(
-  state: PopperState,
-  options: { visibility: ComputedRef<boolean>; hide(): void; arrow: HTMLElement | null },
-): OptionsGeneric<Partial<Modifier<any, any>>> {
-  const { placement, offset, scrollStrategy } = state
-
-  let scrollTimes = 0
-  const lastScrollStrategy = scrollStrategy
-
-  const fn = throttle(() => {
-    if (scrollStrategy !== 'close') {
-      return
-    }
-    if (!options.visibility.value) {
-      return
-    }
-    if (lastScrollStrategy !== state.scrollStrategy) {
-      scrollTimes = 0
-    }
-    if (scrollTimes < 1) {
-      scrollTimes++
-      return
-    }
-    options.hide()
-  }, 300)
-
+export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOptions): Options {
+  const { placement, strategy, onFirstUpdate, modifiers, offset, autoAdjust } = baseOptions
+  const { arrowElement, updatePlacement } = extraOptions
   return {
-    placement,
-    strategy: 'fixed',
+    placement: kebabCase(placement) as Placement,
+    strategy,
+    onFirstUpdate,
     modifiers: [
       { name: 'offset', options: { offset } },
-      { name: 'preventOverflow', options: { padding: { top: 2, bottom: 2, left: 5, right: 5 } } },
-      { name: 'flip', options: { padding: 5 } },
+      { name: 'flip', enabled: autoAdjust, options: { padding: 4 } },
+      { name: 'arrow', enabled: !!arrowElement, options: { element: arrowElement, padding: 4 } },
       {
-        name: 'eventListeners',
-        fn,
-        options: {
-          scroll: scrollStrategy !== 'none',
-          resize: true,
-        },
+        name: 'IDUX_updatePlacement',
+        enabled: true,
+        phase: 'beforeWrite',
+        requires: ['computeStyles'],
+        fn: ({ state }) => updatePlacement(camelCase(state.placement) as PopperPlacement),
       },
-      options.arrow && { name: 'arrow', options: { element: options.arrow, padding: 5 } },
-    ].filter(Boolean) as Partial<Modifier<any, any>>[],
+      ...modifiers,
+    ],
   }
-}
-
-export function initPopper(
-  state: PopperState,
-  trigger: HTMLElement,
-  popper: HTMLElement,
-  options: { visibility: ComputedRef<boolean>; hide(): void; arrow: HTMLElement | null },
-): Instance {
-  const popperOptions = convertPopperOptions(state, options)
-  return createPopper(trigger, popper, popperOptions)
-}
-
-export function toggle(
-  visible: boolean,
-  delay: number,
-  state: PopperState,
-  setTimer: (fn: () => void, delay: number) => void,
-): void {
-  const action = () => {
-    state.visible = visible
-  }
-  if (!delay) {
-    action()
-  } else {
-    setTimer(action, delay)
-  }
-}
-
-export function mapTriggerEvents(
-  events: (keyof PopperTriggerEvents)[],
-  state: PopperState,
-  visibility: ComputedRef<boolean>,
-  timer: Ref<NodeJS.Timer | null>,
-  action: { show(): void; hide(): void },
-): PopperTriggerEvents {
-  let triggerFocus = false
-
-  function triggerEventsHandler(event: Event): void {
-    switch (event.type) {
-      case 'click': {
-        if (triggerFocus) {
-          triggerFocus = false
-        } else {
-          visibility.value && state.trigger === 'click' ? action.hide() : action.show()
-        }
-        break
-      }
-      case 'focus': {
-        triggerFocus = true
-        action.show()
-        break
-      }
-      case 'blur': {
-        triggerFocus = false
-        action.hide()
-        break
-      }
-      case 'contextmenu': {
-        event.preventDefault()
-        action.show()
-        break
-      }
-      case 'mouseenter': {
-        if (timer.value) {
-          clearTimeout(timer.value)
-          timer.value = null
-        }
-        action.show()
-        break
-      }
-      case 'mouseleave': {
-        action.hide()
-        break
-      }
-    }
-  }
-
-  return events.reduce((obj, event) => {
-    obj[event] = triggerEventsHandler
-    return obj
-  }, {} as PopperTriggerEvents)
 }

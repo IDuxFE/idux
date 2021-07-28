@@ -58,7 +58,7 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
     value => (visible.value = value),
   )
 
-  let timer: number | null = null
+  let timer: NodeJS.Timer | null = null
 
   const startTimer = () => {
     timer = setTimeout(() => destroy(), duration.value)

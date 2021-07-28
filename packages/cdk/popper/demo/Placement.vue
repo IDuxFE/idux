@@ -1,8 +1,10 @@
 <template>
   <ix-button ref="triggerRef" v-bind="triggerEvents">Hover</ix-button>
   <ix-portal target="ix-overlay">
-    <div v-if="visibility" ref="popperRef" v-bind="popperEvents" class="overlay">Overlay Element</div>
+    <div v-if="visibility" ref="popperRef" v-bind="popperEvents" class="popper">Popper Element</div>
   </ix-portal>
+  <br />
+  <br />
   <ix-radio-group v-model:value="placement">
     <ix-radio value="topStart">top start</ix-radio>
     <ix-radio value="top">top</ix-radio>
@@ -22,7 +24,7 @@
 <script lang="ts">
 import type { PopperPlacement } from '@idux/cdk/popper'
 
-import { defineComponent, onMounted, ref, watch } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { usePopper } from '@idux/cdk/popper'
 import { IxPortal } from '@idux/cdk/portal'
 import { IxButton } from '@idux/components/button'
@@ -32,29 +34,33 @@ export default defineComponent({
   name: 'Placement',
   components: { IxButton, IxRadio, IxRadioGroup, IxPortal },
   setup() {
-    const placement = ref<PopperPlacement>('topStart')
+    const placement = ref<PopperPlacement>('top')
 
-    const { initialize, update, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper({
-      trigger: 'hover',
-      placement: placement.value,
-      visible: false,
-    })
+    const { initialize, destroy, update, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper()
 
-    onMounted(initialize)
+    onMounted(() => initialize())
+    onBeforeUnmount(() => destroy())
 
     watch(placement, () => {
       update({ placement: placement.value })
     })
+
     return { placement, popperRef, popperEvents, triggerRef, triggerEvents, visibility }
   },
 })
 </script>
 
 <style lang="less" scoped>
-.overlay {
-  position: absolute;
-  width: 200px;
-  height: 300px;
-  background: pink;
+.popper {
+  padding: 8px;
+  color: @white;
+  background: @purple;
+}
+
+.ix-radio-group {
+  max-width: 400px;
+}
+.ix-radio {
+  width: 120px;
 }
 </style>

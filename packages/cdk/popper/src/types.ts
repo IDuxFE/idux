@@ -1,6 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
+import type { Modifier, PositioningStrategy, State } from '@popperjs/core'
 
-export type PopperScrollStrategy = 'close' | 'reposition' | 'none'
+export type PopperPositioningStrategy = PositioningStrategy
 export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type PopperElement = ComponentPublicInstance | HTMLElement
 export type PopperPlacement =
@@ -27,42 +28,60 @@ export interface PopperTriggerEvents {
 }
 
 export interface PopperEvents {
-  onMouseenter(): void
-  onMouseleave(): void
+  onMouseenter?(event: Event): void
+  onMouseleave?(event: Event): void
 }
 
 export interface PopperOptions {
   /**
-   * Control the visibility of the popper
+   * Whether to allow the mouse to enter the popper
+   * * default is `true`
    */
-  visible?: boolean
-  /* Scroll strategy for popper */
-  scrollStrategy?: PopperScrollStrategy
-  /* Disable the popper */
-  disabled?: boolean
-  /* Alignment of popper */
-  placement?: PopperPlacement
-  /* Trigger method. */
-  trigger?: PopperTrigger
-  /* Whether to allow the mouse to enter the popper. */
   allowEnter?: boolean
-  /* Whether auto adjust when space is not enough. */
+  /**
+   * Whether auto adjust when space is not enough
+   * * default is `true`
+   */
   autoAdjust?: boolean
   /**
+   * Disable the popper
+   * * default is `false`
+   */
+  disabled?: boolean
+  /**
    * Popper offset.
-   * [Horizontal axis offset, vertical axis offset]
+   * * [Horizontal axis offset, vertical axis offset]
+   * * default is `[0, 0]`
    */
   offset?: [number, number]
   /**
-   * The delay of hiding popper.
-   * Send 0 if you don't need it.
+   * Alignment of popper
+   * * default is `top`
+   */
+  placement?: PopperPlacement
+  /**
+   * Trigger method
+   * * default is `hover`
+   */
+  trigger?: PopperTrigger
+  /**
+   * Control the visibility of the popper
+   * * default is `false`
+   */
+  visible?: boolean
+  /**
+   * The delay of hiding popper, Send 0 if you don't need it
+   * * default is `0`
    */
   hideDelay?: number
   /**
-   * The delay of showing popper.
-   * Send 0 if you don't need it.
+   * The delay of showing popper, Send 0 if you don't need it
+   * * default is `0`
    */
   showDelay?: number
+  strategy?: PopperPositioningStrategy
+  modifiers?: Array<Partial<Modifier<unknown, unknown>>>
+  onFirstUpdate?: (state: Partial<State>) => void
 }
 
 export interface PopperInstance<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement> {
@@ -83,11 +102,12 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
   hide(hideDelay?: number): void
   /**
    * Update popper.
-   * If the popper has not been initialized, the popper will be initialized first, otherwise the popper will be update directly.
-   * To avoid performance issues, the update function does not update the view directly.
-   * If you want to update the view immediately, you can force the update by calling the function returned by the update function.
    */
-  update(options?: Partial<PopperOptions>): () => void
+  update(options: Partial<PopperOptions>): void
+  /**
+   * Force update popper
+   */
+  forceUpdate(): void
   /**
    * Destroy the popper.
    * The life cycle of the popper will enter beforeDestroy.
@@ -118,18 +138,12 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    */
   popperRef: Ref<PE | null>
   /**
-   * Manually bind to events on the popper.   */
+   * Manually bind to events on the popper.
+   */
   popperEvents: ComputedRef<PopperEvents>
   /**
    * The truth DOM node of the arrow.
-   * If showArrow is false, we won't return arrowRef.
    * The caller needs to bind the variable to the view.
    */
   arrowRef: Ref<HTMLElement | null>
-  /**
-   * @deprecated
-   * popper has been initialized
-   * for test only
-   */
-  isInitialized: boolean
 }

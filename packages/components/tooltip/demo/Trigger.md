@@ -1,14 +1,14 @@
 ---
 title:
-  zh: 三种触发方式
-  en: Three ways to trigger
-order: 1
+  zh: 触发方式
+  en: Trigger type
+order: 2
 ---
 
 ## zh
 
-鼠标移入、聚焦、点击。
+支持多种触发方式：`hover`, `focus`, `click`, `contextmenu`, `manual`。
 
 ## en
 
-Mouse in, focus, click.
+Support multiple trigger type: `hover`, `focus`, `click`, `contextmenu`, `manual`.

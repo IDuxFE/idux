@@ -1,11 +1,10 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { PopperPlacement, PopperScrollStrategy, PopperTrigger } from '@idux/cdk/popper'
+import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export const overlayScrollStrategyDef = IxPropTypes.oneOf<PopperScrollStrategy>(['close', 'reposition', 'none'])
 export const overlayPlacementDef = IxPropTypes.oneOf<PopperPlacement>([
   'topStart',
   'top',
@@ -24,20 +23,18 @@ export const overlayTriggerDef = IxPropTypes.oneOf<PopperTrigger>(['click', 'hov
 
 export const overlayProps = {
   visible: IxPropTypes.bool,
-  scrollStrategy: overlayScrollStrategyDef,
-  disabled: IxPropTypes.bool,
-  placement: overlayPlacementDef,
-  trigger: overlayTriggerDef,
   allowEnter: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
-  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  destroyOnHide: IxPropTypes.bool,
+  disabled: IxPropTypes.bool,
   hideDelay: IxPropTypes.number,
+  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  placement: overlayPlacementDef,
   showDelay: IxPropTypes.number,
   showArrow: IxPropTypes.bool.def(true),
-  arrowOffset: IxPropTypes.number.def(0),
-  transitionName: IxPropTypes.string.def('ix-fade-fast'),
-  destroyOnHide: IxPropTypes.bool,
-  clsPrefix: IxPropTypes.string.def('ix-overlay'),
+  target: IxPropTypes.oneOfType([String, HTMLElement]).def('ix-overlay-container'),
+  transitionName: IxPropTypes.string,
+  trigger: overlayTriggerDef,
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   'onUpdate:placement': IxPropTypes.emit<(placement: PopperPlacement) => void>(),
 }

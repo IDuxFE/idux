@@ -11,4 +11,4 @@ order: 3
 
 ## en
 
-Overlay is destroyed on hide.
+Tooltip is destroyed on hide.

@@ -19,14 +19,9 @@ interface DocumentHandlerOptions {
 const documentHandlerMap = new Map<HTMLElement, DocumentHandlerOptions>()
 
 on(document, 'click', event => {
-  documentHandlerMap.forEach(({ exclude, handler }, el) => {
+  documentHandlerMap.forEach(({ exclude, handler }) => {
     const target = event.target as Node
-    const isContain = el.contains(target)
-
-    const isTargetExclude =
-      exclude.length && (exclude.some(item => item.contains(target)) || exclude.includes(target as HTMLElement))
-    const isSelf = target === el
-    if (isContain || isTargetExclude || isSelf) {
+    if (exclude.some(item => item === target || item.contains(target))) {
       return
     }
     handler(event)
@@ -36,10 +31,9 @@ on(document, 'click', event => {
 function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   const exclude: HTMLElement[] = [el]
   let handler: ClickOutsideHandler = noop
-
   if (isFunction(binding)) {
-    handler = binding as ClickOutsideHandler
-  } else if (isObject<ClickOutsideOptions>(binding)) {
+    handler = binding
+  } else if (isObject(binding)) {
     exclude.push(...(binding.exclude.filter(Boolean) as HTMLElement[]))
     handler = binding.handler
   }
@@ -47,18 +41,14 @@ function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   documentHandlerMap.set(el, { exclude, handler })
 }
 
-function useClickOutside(): ObjectDirective<HTMLElement, ClickOutsideBinding> {
-  return {
-    mounted(el, binding) {
-      createHandler(el, binding.value)
-    },
-    updated(el, binding) {
-      createHandler(el, binding.value)
-    },
-    unmounted(el) {
-      documentHandlerMap.delete(el)
-    },
-  }
+export const clickOutside: ObjectDirective<HTMLElement, ClickOutsideBinding> = {
+  mounted(el, binding) {
+    createHandler(el, binding.value)
+  },
+  updated(el, binding) {
+    createHandler(el, binding.value)
+  },
+  unmounted(el) {
+    documentHandlerMap.delete(el)
+  },
 }
-
-export const clickOutside = useClickOutside()
