@@ -168,6 +168,7 @@ const statistic = shallowReactive<StatisticConfig>({
 
 const tooltip = shallowReactive<TooltipConfig>({
   placement: 'top',
+  target: 'ix-tooltip-container',
   trigger: 'hover',
   showDelay: 100,
   hideDelay: 100,
@@ -177,7 +178,8 @@ const tooltip = shallowReactive<TooltipConfig>({
 
 const popover = shallowReactive<PopoverConfig>({
   placement: 'top',
-  trigger: 'click',
+  target: 'ix-popover-container',
+  trigger: 'hover',
   showDelay: 100,
   hideDelay: 100,
   destroyOnHide: false,

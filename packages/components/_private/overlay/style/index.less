@@ -1,45 +1,71 @@
 @import '../../../style/default.less';
-@import "../../../style/motion/fade.less";
 
 @overlay-prefix: ~'@{idux-prefix}-overlay';
 
 .@{overlay-prefix} {
-  &-arrow-inner {
-      width: 0;
-      height: 0;
-      display: inline-block;
+  &-arrow {
+    width: @overlay-arrow-size * 2;
+    height: @overlay-arrow-size * 2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      border-color: transparent;
       border-style: solid;
-  }
-
-  &[data-popper-placement^='top'] .@{overlay-prefix}-arrow {
-    bottom: -6px;
-
-    & > .@{overlay-prefix}-arrow-inner {
-      transform: rotate(45deg);
     }
   }
 
-  &[data-popper-placement^='bottom'] .@{overlay-prefix}-arrow {
-    top: -11px;
+  &[data-popper-placement^='top'] {
+    .@{overlay-prefix}-arrow {
+      bottom: 0;
 
-    & > .@{overlay-prefix}-arrow-inner {
-      transform: rotate(-135deg);
+      &::before {
+        bottom: -@overlay-arrow-size + 1px;
+        left: 0;
+        border-width: @overlay-arrow-size @overlay-arrow-size 0;
+        border-top-color: initial;
+        transform-origin: center top;
+      }
     }
   }
 
-  &[data-popper-placement^='left'] .@{overlay-prefix}-arrow {
-    right: -3px;
+  &[data-popper-placement^='bottom'] {
+    .@{overlay-prefix}-arrow {
+      top: 0;
 
-    & > .@{overlay-prefix}-arrow-inner {
-      transform: rotate(-45deg);
+      &::before {
+        top: -@overlay-arrow-size + 1px;
+        left: 0;
+        border-width: 0 @overlay-arrow-size @overlay-arrow-size;
+        border-bottom-color: initial;
+        transform-origin: center bottom;
+      }
     }
   }
 
-  &[data-popper-placement^='right'] .@{overlay-prefix}-arrow {
-    left: -3px;
+  &[data-popper-placement^='left'] {
+    .@{overlay-prefix}-arrow {
+      right: 0;
 
-    & > .@{overlay-prefix}-arrow-inner {
-      transform: rotate(135deg);
+      &::before {
+        border-width: @overlay-arrow-size 0 @overlay-arrow-size @overlay-arrow-size;
+        border-left-color: initial;
+        right: -@overlay-arrow-size + 1px;
+        transform-origin: center left;
+      }
+    }
+  }
+
+  &[data-popper-placement^='right'] {
+    .@{overlay-prefix}-arrow {
+      left: 0;
+
+      &::before {
+        left: -@overlay-arrow-size + 1px;
+        border-width: @overlay-arrow-size @overlay-arrow-size @overlay-arrow-size 0;
+        border-right-color: initial;
+        transform-origin: center right;
+      }
     }
   }
 }

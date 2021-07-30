@@ -1,18 +1,23 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
+import { portalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
+import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
+
 export const tooltipProps = {
-  title: IxPropTypes.string,
-  placement: overlayPlacementDef,
   visible: IxPropTypes.bool.def(false),
-  trigger: overlayTriggerDef,
-  hideDelay: IxPropTypes.number,
-  showDelay: IxPropTypes.number,
-  destroyOnHide: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
+  destroyOnHide: IxPropTypes.bool,
+  hideDelay: IxPropTypes.number,
+  placement: overlayPlacementDef,
+  showDelay: IxPropTypes.number,
+  target: portalTargetDef,
+  title: IxPropTypes.string,
+  trigger: overlayTriggerDef,
+
+  // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
 }
 

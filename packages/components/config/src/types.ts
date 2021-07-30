@@ -181,6 +181,7 @@ export interface StatisticConfig {
 
 export interface TooltipConfig {
   placement: PopperPlacement
+  target: string | HTMLElement
   trigger: PopperTrigger
   showDelay: number
   hideDelay: number
@@ -190,6 +191,7 @@ export interface TooltipConfig {
 
 export interface PopoverConfig {
   placement: PopperPlacement
+  target: string | HTMLElement
   trigger: PopperTrigger
   showDelay: number
   hideDelay: number

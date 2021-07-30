@@ -1,25 +1,27 @@
 @import '../../style/default.less';
-@import "../../_private/overlay/style/index.less";
+@import '../../style/motion/fade.less';
+@import '../../_private/overlay/style/index.less';
 
 @tooltip-prefix: ~'@{idux-prefix}-tooltip';
 
 .@{tooltip-prefix} {
-  &-content {
-    max-width: @tooltip-content-max-width;
-    font-size: @tooltip-content-font-size;
-    color: @tooltip-content-color;
-    min-width: @tooltip-content-min-width;
-    min-height: @tooltip-content-min-height;
-    padding: @tooltip-content-padding;
-    background-color: @tooltip-content-background;
-    border-radius: @tooltip-content-border-radius;
-    box-shadow: @tooltip-content-box-shadow;
+  z-index: @tooltip-zindex;
+  font-size: @tooltip-font-size;
+  color: @tooltip-color;
+  background-color: @tooltip-background-color;
+  border-radius: @tooltip-border-radius;
+  box-shadow: @tooltip-box-shadow;
+
+  &-title {
+    position: relative;
+    max-width: @tooltip-title-max-width;
+    min-width: @tooltip-title-min-width;
+    min-height: @tooltip-title-min-height;
+    padding: @tooltip-title-padding;
+    z-index: 1;
   }
 
-  &-arrow {
-    &-inner {
-      border-width: @tooltip-arrow-size;
-      border-color: transparent @tooltip-content-background @tooltip-content-background transparent;
-    }
+  .@{idux-prefix}-overlay-arrow {
+    color: @tooltip-background-color;
   }
 }

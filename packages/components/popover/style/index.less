@@ -1,43 +1,31 @@
 @import '../../style/default.less';
-@import "../../_private/overlay/style/index.less";
+@import '../../_private/overlay/style/index.less';
 
 @popover-prefix: ~'@{idux-prefix}-popover';
 
 .@{popover-prefix} {
-  position: absolute;
-  pointer-events: all;
-
-  &-container {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-  }
-
-  &-content {
-    color: @popover-color;
-    min-width: @popover-min-width;
-    background-color: @popover-background;
-    background-clip: padding-box;
-    border-radius: @popover-border-radius;
-    box-shadow: @popover-box-shadow;
-  }
-
-  &-arrow-inner {
-    border-width: @popover-arrow-size;
-    border-color: transparent @popover-background @popover-background transparent;
-  }
+  z-index: @popover-zindex;
+  font-size: @popover-font-size;
+  color: @popover-color;
+  background-color: @popover-background-color;
+  border-radius: @popover-border-radius;
+  box-shadow: @popover-box-shadow;
 
   &-title {
+    position: relative;
+    font-weight: @popover-title-font-weight;
+    min-width: @popover-title-min-width;
     min-height: @popover-title-min-height;
     padding: @popover-title-padding;
     border-bottom: @popover-title-border-bottom;
-    font-weight: @popover-title-font-weight;
+    z-index: 1;
   }
 
-  &-inner-content {
-    padding: @popover-inner-content-padding;
+  &-content {
+    padding: @popover-content-padding;
+  }
+
+  .@{idux-prefix}-overlay-arrow {
+    color: @popover-background-color;
   }
 }

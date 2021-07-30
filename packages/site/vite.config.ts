@@ -11,7 +11,12 @@ export default defineConfig(({ command }) => {
   const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
   const componentsResolve = isBuild ? '../../dist/components' : '../components'
   return {
-    plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), mdPlugin(), transformIndexPlugin(), vueJsxPlugin()],
+    plugins: [
+      vuePlugin({ include: [/\.vue$/, /\.md$/] }),
+      mdPlugin(),
+      transformIndexPlugin(),
+      vueJsxPlugin({ enableObjectSlots: false }),
+    ],
     resolve: {
       alias: [
         { find: '@idux/cdk', replacement: path.resolve(__dirname, cdkResolve) },

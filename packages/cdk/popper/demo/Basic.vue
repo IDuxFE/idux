@@ -1,31 +1,28 @@
 <template>
-  <div ref="triggerRef" class="trigger">Trigger Element</div>
-  <div v-if="visibility" ref="popperRef" class="popper">Overlay Element</div>
+  <ix-button ref="triggerRef" v-bind="triggerEvents">Hover</ix-button>
+  <div v-if="visibility" ref="popperRef" class="popper" v-bind="popperEvents">Popper Element</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { usePopper } from '@idux/cdk/popper'
+import { IxButton } from '@idux/components/button'
 
 export default defineComponent({
+  components: { IxButton },
   setup() {
-    const { initialize, popperRef, triggerRef, visibility } = usePopper()
-    onMounted(initialize)
-
-    return { popperRef, triggerRef, visibility }
+    const { initialize, destroy, popperRef, popperEvents, triggerRef, triggerEvents, visibility } = usePopper()
+    onMounted(() => initialize())
+    onBeforeUnmount(() => destroy())
+    return { popperRef, popperEvents, triggerRef, triggerEvents, visibility }
   },
 })
 </script>
 
 <style lang="less" scoped>
-.trigger {
-  background: pink;
-  height: 200px;
-}
 .popper {
-  width: 100px;
-  height: 100px;
-  background: purple;
-  color: #fff;
+  padding: 8px;
+  color: @white;
+  background: @purple;
 }
 </style>

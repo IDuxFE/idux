@@ -2,17 +2,14 @@ import type { ComputedRef, WritableComputedRef } from 'vue'
 import type { TooltipConfig } from '@idux/components/config'
 import type { TooltipProps } from './types'
 
-import { computed, getCurrentInstance } from 'vue'
-import { useGlobalConfig } from '@idux/components/config'
+import { computed } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 
-export function useConfig(): ComputedRef<TooltipConfig> {
-  const config = useGlobalConfig('tooltip')
-  const props = getCurrentInstance()!.props as TooltipProps
-
+export function useConfigProps(props: TooltipProps, config: TooltipConfig): ComputedRef<TooltipConfig> {
   return computed(() => {
     return {
       placement: props.placement ?? config.placement,
+      target: props.target ?? config.target,
       trigger: props.trigger ?? config.trigger,
       showDelay: props.showDelay ?? config.showDelay,
       hideDelay: props.hideDelay ?? config.hideDelay,
@@ -22,12 +19,10 @@ export function useConfig(): ComputedRef<TooltipConfig> {
   })
 }
 
-export function useVisibility(): WritableComputedRef<boolean> {
-  const props = getCurrentInstance()!.props as TooltipProps
-
+export function useVisibility(props: TooltipProps): WritableComputedRef<boolean> {
   return computed({
     get() {
-      return !!props.visible
+      return props.visible
     },
     set(value) {
       callEmit(props['onUpdate:visible'], value)

@@ -21,7 +21,7 @@ export const getRollupOptions = (options: Options): RollupOptions => {
   const input = join(targetDirname, compName, 'index.ts')
   const outputFile = join(distDirname, compName, 'index.js')
 
-  const plugins = [nodeResolve(), vuePlugin(), vueJsxPlugin()]
+  const plugins = [nodeResolve(), vuePlugin(), vueJsxPlugin({ enableObjectSlots: false })]
 
   if (compName) {
     plugins.push(esbuildPlugin())

@@ -1,133 +1,175 @@
-import type { ComputedRef, Ref, WatchStopHandle } from 'vue'
-import type { Placement } from '@popperjs/core'
-import type {
-  PopperElement,
-  PopperEvents,
-  PopperOptions,
-  PopperPlacement,
-  PopperTrigger,
-  PopperTriggerEvents,
-} from './types'
+import type { ComputedRef, Ref } from 'vue'
+import type { PopperElement, PopperEvents, PopperOptions, PopperPlacement, PopperTriggerEvents } from './types'
 
-import { computed, reactive, ref, watch } from 'vue'
-import { camelCase, kebabCase } from 'lodash'
-import { isUndefined } from '@idux/cdk/utils'
-import { mapTriggerEvents } from './utils'
+import { computed, reactive, ref } from 'vue'
+import { noop } from '@idux/cdk/utils'
+import { convertElement } from './utils'
 
-export type PopperState = Required<Omit<PopperOptions, 'placement'> & { placement: Placement }>
-
-export function useState(options: PopperOptions): PopperState {
-  const state = reactive<Required<Omit<PopperOptions, 'placement'> & { placement: Placement }>>({
-    visible: true,
-    scrollStrategy: 'reposition',
-    disabled: false,
-    placement: 'top',
-    trigger: 'manual',
-    allowEnter: false,
-    autoAdjust: true,
-    offset: [0, 0],
-    hideDelay: 0,
-    showDelay: 0,
-  })
-
-  watch(
-    () => state.placement,
-    value => {
-      state.placement = kebabCase(value) as Placement
-    },
-  )
-
-  for (const [key, value] of Object.entries(options)) {
-    if (isUndefined(value)) {
-      continue
-    }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    state[key] = value
-  }
-
-  return state
-}
-
-export function useVisibility(state: PopperState, action: () => void): [ComputedRef<boolean>, WatchStopHandle] {
-  const visibility = computed(() => !state.disabled && state.visible)
-
-  const watcher = watch(
-    visibility,
-    value => {
-      if (value) {
-        action()
-      }
-    },
-    { flush: 'post' },
-  )
-
-  return [visibility, watcher]
-}
-
-export function usePlacement(state: PopperState, action: () => void): [ComputedRef<PopperPlacement>, WatchStopHandle] {
-  const placement = computed(() => camelCase(state.placement) as PopperPlacement)
-
-  const watcher = watch(
-    placement,
-    () => {
-      action()
-    },
-    { flush: 'post' },
-  )
-
-  return [placement, watcher]
-}
-
-export function useElement<T extends PopperElement>(): Ref<T | null> {
+export function useElement<T>(): Ref<T | null> {
   const element: Ref<T | null> = ref(null)
   return element
 }
 
-export function useTimer(): [Ref<NodeJS.Timer | null>, (fn: () => void, delay: number) => void] {
-  const timer = ref<NodeJS.Timer | null>(null)
+export function useState(options: PopperOptions): Required<PopperOptions> {
+  const {
+    allowEnter = true,
+    autoAdjust = true,
+    disabled = false,
+    offset = [0, 0],
+    placement = 'top',
+    trigger = 'hover',
+    visible = false,
+    hideDelay = 0,
+    showDelay = 0,
+    strategy = 'absolute',
+    modifiers = [],
+    onFirstUpdate = noop,
+  } = options
 
-  const setTimer = (fn: () => void, delay: number) => {
-    timer.value = setTimeout(fn, delay)
+  return reactive({
+    allowEnter,
+    autoAdjust,
+    disabled,
+    offset,
+    placement,
+    trigger,
+    visible,
+    hideDelay,
+    showDelay,
+    strategy,
+    modifiers,
+    onFirstUpdate,
+  })
+}
+
+export type BaseOptions = Pick<
+  Required<PopperOptions>,
+  'placement' | 'strategy' | 'onFirstUpdate' | 'modifiers' | 'offset' | 'autoAdjust'
+>
+
+export function useBaseOptions(state: Required<PopperOptions>): ComputedRef<BaseOptions> {
+  return computed(() => {
+    const { placement, strategy, onFirstUpdate, modifiers, offset, autoAdjust } = state
+    return { placement, strategy, onFirstUpdate, modifiers, offset, autoAdjust }
+  })
+}
+
+export interface ExtraOptions {
+  arrowElement: HTMLElement | null
+  updatePlacement: (value: PopperPlacement) => void
+}
+
+export function useExtraOptions(
+  state: Required<PopperOptions>,
+  arrowRef: Ref<PopperElement | null>,
+): {
+  extraOptions: ComputedRef<ExtraOptions>
+  visibility: ComputedRef<boolean>
+  placement: ComputedRef<PopperPlacement>
+} {
+  const visibility = computed(() => !state.disabled && state.visible)
+  const _placement = ref(state.placement)
+  const updatePlacement = (value: PopperPlacement) => {
+    _placement.value = value
+  }
+  const placement = computed(() => _placement.value)
+
+  const extraOptions = computed(() => ({ arrowElement: convertElement(arrowRef), updatePlacement }))
+
+  return { extraOptions, visibility, placement }
+}
+
+export function useTimer(): { setTimer: (action: () => void, delay: number) => void; clearTimer: () => void } {
+  let timer: NodeJS.Timer | null = null
+
+  const setTimer = (action: () => void, delay: number) => {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(action, delay)
   }
 
-  return [timer, setTimer]
+  const clearTimer = () => {
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+  }
+
+  return { setTimer, clearTimer }
 }
 
 export function useTriggerEvents(
-  state: PopperState,
-  visibility: ComputedRef<boolean>,
-  timer: Ref<NodeJS.Timer | null>,
-  action: { show(): void; hide(): void },
+  baseOptions: Required<PopperOptions>,
+  eventOptions: { visibility: ComputedRef<boolean>; show(): void; hide(): void; clearTimer(): void },
 ): ComputedRef<PopperTriggerEvents> {
-  const triggerEventsMap: Record<PopperTrigger, (keyof PopperTriggerEvents)[]> = {
-    click: ['onClick'],
-    focus: ['onFocus', 'onBlur'],
-    hover: ['onMouseenter', 'onMouseleave'],
-    contextmenu: ['onContextmenu'],
-    manual: [],
+  const { visibility, show, hide, clearTimer } = eventOptions
+
+  const onMouseenter = () => {
+    clearTimer()
+    show()
   }
-  return computed(() => mapTriggerEvents(triggerEventsMap[state.trigger], state, visibility, timer, action))
+
+  const onMouseleave = () => {
+    hide()
+  }
+
+  const onFocus = () => {
+    show()
+  }
+
+  const onBlur = () => {
+    hide()
+  }
+
+  const onClick = () => {
+    const { trigger } = baseOptions
+    if (trigger === 'click') {
+      visibility.value ? hide() : show()
+    } else if (trigger === 'contextmenu') {
+      visibility.value && hide()
+    }
+  }
+
+  const onContextmenu = (evt: Event) => {
+    evt.preventDefault()
+    show()
+  }
+
+  const eventsMap = {
+    hover: { onMouseenter, onMouseleave },
+    focus: { onFocus, onBlur },
+    click: { onClick },
+    contextmenu: { onClick, onContextmenu },
+    manual: {},
+  }
+
+  return computed(() => eventsMap[baseOptions.trigger])
 }
 
 export function usePopperEvents(
-  state: PopperState,
-  timer: Ref<NodeJS.Timer | null>,
-  hide: () => void,
+  baseOptions: Required<PopperOptions>,
+  eventOptions: { hide(): void; clearTimer(): void },
 ): ComputedRef<PopperEvents> {
+  const { hide, clearTimer } = eventOptions
+
   const onMouseenter = () => {
-    if (state.trigger === 'hover' && state.allowEnter && timer.value) {
-      clearTimeout(timer.value)
-      timer.value = null
+    if (baseOptions.allowEnter) {
+      clearTimer()
     }
   }
 
   const onMouseleave = () => {
-    if (state.trigger !== 'hover') {
-      return
-    }
     hide()
   }
 
-  return computed(() => ({ onMouseenter, onMouseleave }))
+  const eventsMap = {
+    click: {},
+    focus: {},
+    hover: { onMouseenter, onMouseleave },
+    contextmenu: {},
+    manual: {},
+  }
+
+  return computed(() => eventsMap[baseOptions.trigger])
 }

@@ -1,28 +1,78 @@
-import type { MountingOptions, VueWrapper } from '@vue/test-utils'
-import type { TooltipPublicProps } from '../src/types'
+import type { MountingOptions } from '@vue/test-utils'
+import type { TooltipProps } from '../src/types'
 
 import { mount } from '@vue/test-utils'
-import { renderWork } from '@tests'
+import { isElementVisible, renderWork, wait } from '@tests'
 import IxTooltip from '../src/Tooltip'
+import { h } from 'vue'
 
 describe('Tooltip', () => {
-  const tooltipWrapper: (
-    options?: MountingOptions<Partial<TooltipPublicProps>>,
-  ) => VueWrapper<InstanceType<typeof IxTooltip>> = (options = {}) => mount(IxTooltip, { ...options })
+  const TooltipWrapper = (options?: MountingOptions<Partial<TooltipProps>>) => mount(IxTooltip, { ...options })
+  const slots = { default: () => h('div', { id: 'trigger' }, 'trigger') }
 
-  beforeEach(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {})
+  afterEach(() => {
+    document.querySelector('.ix-tooltip-container')!.innerHTML = ''
   })
 
-  renderWork(IxTooltip, { props: { title: 'Title' }, slots: { default: () => '<span>Trigger</span>' } })
+  renderWork<TooltipProps>(IxTooltip, {
+    props: { title: 'Title', visible: true },
+    slots,
+  })
 
   test('visible work', async () => {
-    const wrapper = tooltipWrapper({
-      props: { title: 'Title', destroyOnHide: true, visible: false },
-      slots: { default: () => '<span id="trigger">Trigger</span>' },
+    const onUpdateVisible = jest.fn()
+    const wrapper = TooltipWrapper({
+      props: { visible: true, 'onUpdate:visible': onUpdateVisible, title: 'Title' },
+      slots,
     })
-    expect(!!document.querySelector('.ix-overlay')).toBeFalsy()
-    await wrapper.setProps({ visible: true })
-    expect(!!document.querySelector('.ix-overlay')).toBeTruthy()
+
+    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
+
+    await wrapper.setProps({ visible: false })
+
+    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(false)
+
+    await wrapper.find('#trigger').trigger('mouseenter')
+    await wait(100)
+
+    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
+    expect(onUpdateVisible).toBeCalledWith(true)
+
+    await wrapper.find('#trigger').trigger('mouseleave')
+    await wait(100)
+
+    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
+  })
+
+  test('title work', async () => {
+    const wrapper = TooltipWrapper({
+      props: { visible: true, title: 'Title' },
+      slots,
+    })
+
+    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title')
+
+    await wrapper.setProps({ title: 'Title 2' })
+
+    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title 2')
+  })
+
+  test('title slot work', async () => {
+    TooltipWrapper({
+      props: { visible: true, title: 'Title' },
+      slots: { ...slots, title: () => h('div', 'Title slot') },
+    })
+
+    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title slot')
+  })
+
+  test('empty content work', async () => {
+    TooltipWrapper({
+      props: { visible: true },
+      slots,
+    })
+
+    expect(document.querySelector('.ix-tooltip')).toBeNull()
   })
 })

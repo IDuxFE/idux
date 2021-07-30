@@ -2,75 +2,71 @@ import type { Instance } from '@popperjs/core'
 import type { PopperOptions, PopperInstance, PopperElement } from './types'
 
 import { watch } from 'vue'
-import { useElement, usePlacement, usePopperEvents, useState, useTimer, useTriggerEvents, useVisibility } from './hooks'
-import { convertElement, convertPopperOptions, initPopper, toggle } from './utils'
+import { createPopper } from '@popperjs/core'
+import { isEqual } from 'lodash'
+import {
+  useState,
+  useBaseOptions,
+  useExtraOptions,
+  useElement,
+  usePopperEvents,
+  useTimer,
+  useTriggerEvents,
+} from './hooks'
+import { convertElement, convertOptions } from './utils'
 
 export function usePopper<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement>(
   options: PopperOptions = {},
 ): PopperInstance<TE, PE> {
   let popperInstance: Instance | null = null
-  let isInitialized = false
-
-  const state = useState(options)
 
   const triggerRef = useElement<TE>()
   const popperRef = useElement<PE>()
   const arrowRef = useElement<HTMLElement>()
 
-  const [visibility, visibilityWatcher] = useVisibility(state, forceUpdate)
-  const [placement, placementWatcher] = usePlacement(state, forceUpdate)
-  const [timer, setTimer] = useTimer()
+  const state = useState(options)
+  const baseOptions = useBaseOptions(state)
+  const { extraOptions, visibility, placement } = useExtraOptions(state, arrowRef)
 
-  const triggerEvents = useTriggerEvents(state, visibility, timer, { show, hide })
-  const popperEvents = usePopperEvents(state, timer, hide)
+  const { setTimer, clearTimer } = useTimer()
+  const triggerEvents = useTriggerEvents(state, { visibility, show, hide, clearTimer })
+  const popperEvents = usePopperEvents(state, { hide, clearTimer })
 
-  watch(
-    popperRef,
-    value => {
-      if (!isInitialized || !popperInstance || value) {
-        return
-      }
-      popperInstance.destroy()
-      popperInstance = null
-      isInitialized = false
-    },
-    { flush: 'post' },
-  )
-
-  function initialize(): void {
-    isInitialized = true
-    const triggerElement = convertElement(triggerRef)
-    const popperElement = convertElement(popperRef)
-    const arrowElement = convertElement(arrowRef)
-
-    if (!triggerElement || !popperElement) {
-      return
+  function toggle(visible: boolean, delay: number): void {
+    const action = () => {
+      state.visible = visible
     }
-    if (!visibility.value) {
-      return
+    if (delay > 0) {
+      setTimer(action, delay)
+    } else {
+      action()
     }
-    popperInstance = initPopper(state, triggerElement, popperElement, { visibility, hide, arrow: arrowElement })
-    popperInstance.update()
   }
 
   function show(delay = state.showDelay): void {
-    toggle(true, delay, state, setTimer)
+    toggle(true, delay)
   }
 
   function hide(delay = state.hideDelay): void {
-    toggle(false, delay, state, setTimer)
+    toggle(false, delay)
   }
 
-  function update(options: Partial<PopperOptions> = {}): () => void {
-    Object.assign(state, options)
+  function update(options: Partial<PopperOptions>): void {
+    Object.entries(options).forEach(([key, value]) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (value !== undefined && !isEqual(value, (state as any)[key])) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(state as any)[key] = value
+      }
+    })
+  }
 
-    return forceUpdate
+  function forceUpdate(): void {
+    popperInstance?.forceUpdate()
   }
 
   function destroy(): void {
-    visibilityWatcher()
-    placementWatcher()
-    isInitialized = false
+    clearTimer()
     if (!popperInstance) {
       return
     }
@@ -78,27 +74,46 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     popperInstance = null
   }
 
-  function forceUpdate(): void {
-    if (!popperInstance) {
-      initialize()
-    } else {
-      popperInstance.setOptions(convertPopperOptions(state, { visibility, hide, arrow: arrowRef.value }))
-    }
+  function initialize(): void {
+    watch(
+      [triggerRef, popperRef],
+      ([trigger, popper]) => {
+        const triggerElement = convertElement(trigger)
+        const popperElement = convertElement(popper)
+        if (!triggerElement || !popperElement) {
+          return
+        }
+        destroy()
+        const options = convertOptions(baseOptions.value, extraOptions.value)
+        popperInstance = createPopper(triggerElement, popperElement, options)
+      },
+      { immediate: true },
+    )
   }
 
+  watch(visibility, value => {
+    if (value) {
+      popperInstance?.update()
+    }
+  })
+
+  watch([baseOptions, extraOptions], ([currBaseOptions, currExtraOptions]) => {
+    popperInstance?.setOptions(convertOptions(currBaseOptions, currExtraOptions))
+  })
+
   return {
-    isInitialized,
     visibility,
     placement,
     triggerRef,
-    popperRef,
     triggerEvents,
+    popperRef,
     popperEvents,
     arrowRef,
     initialize,
     show,
     hide,
     update,
+    forceUpdate,
     destroy,
   }
 }
