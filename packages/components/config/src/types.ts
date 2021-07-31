@@ -93,19 +93,21 @@ export interface FormConfig {
 }
 
 export interface InputConfig {
-  size: FormSize
-  clearable: boolean
   borderless: boolean
+  clearable: boolean
+  clearIcon: string
+  size: FormSize
 }
 
 export interface TextareaConfig {
-  resize: TextareaResize
   autoRows: boolean | TextareaAutoRows
-  showCount: boolean
-  maxCount?: number | string
-  computeCount?: (value: string) => string
-  size: FormSize
   clearable: boolean
+  clearIcon: string
+  computeCount?: (value: string) => string
+  maxCount?: number | string
+  resize: TextareaResize
+  size: FormSize
+  showCount: boolean
 }
 
 export interface RadioConfig {

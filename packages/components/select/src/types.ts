@@ -3,7 +3,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 
-import { controlProp } from '@idux/cdk/forms'
+import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export interface SelectOption {
@@ -24,7 +24,7 @@ export const selectProps = {
   borderless: IxPropTypes.bool,
   clearable: IxPropTypes.bool,
   compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareWith),
-  control: controlProp,
+  control: controlPropDef,
   disabled: IxPropTypes.bool.def(false),
   overlayClass: IxPropTypes.string,
   empty: IxPropTypes.string,

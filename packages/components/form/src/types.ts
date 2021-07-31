@@ -3,7 +3,7 @@ import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { ColProps } from '@idux/components/grid'
 
-import { controlProp } from '@idux/cdk/forms'
+import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type FormLabelAlign = 'left' | 'right'
@@ -17,7 +17,7 @@ const colProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<ColPro
 
 export const formProps = {
   colonless: IxPropTypes.bool,
-  control: controlProp,
+  control: controlPropDef,
   controlCol: colProp,
   hasFeedback: IxPropTypes.bool.def(false),
   labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['left', 'right']),
@@ -33,7 +33,7 @@ export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
 export const formItemProps = {
   colonless: IxPropTypes.bool,
-  control: controlProp,
+  control: controlPropDef,
   controlCol: colProp,
   extra: IxPropTypes.string,
   hasFeedback: IxPropTypes.bool,
@@ -53,7 +53,7 @@ export type FormItemComponent = DefineComponent<HTMLAttributes & typeof formItem
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
-  control: controlProp,
+  control: controlPropDef,
 }
 
 export type FormWrapperProps = IxInnerPropTypes<typeof formWrapperProps>

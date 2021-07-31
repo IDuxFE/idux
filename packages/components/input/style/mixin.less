@@ -139,16 +139,16 @@
       }
     }
 
-    .@{input-prefix}-suffix {
-      margin-left: @input-wrapper-inner-margin;
-    }
-
     .@{input-prefix}-prefix {
       margin-right: @input-wrapper-inner-margin;
     }
 
-    .@{input-prefix}-clear-icon-hidden {
-      visibility: hidden;
+    .@{input-prefix}-suffix {
+      margin-left: @input-wrapper-inner-margin;
+
+      &-hidden {
+        visibility: hidden;
+      }
     }
   }
 
@@ -310,10 +310,10 @@
     &:hover {
       color: @input-color-secondary;
     }
-  }
 
-  .@{textarea-prefix}-clear-icon-hidden {
-    visibility: hidden;
+    &-hidden {
+      visibility: hidden;
+    }
   }
 
   &-with-count::after {

@@ -3,7 +3,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 
 import { IxPropTypes } from '@idux/cdk/utils'
-import { controlProp } from '@idux/cdk/forms'
+import { controlPropDef } from '@idux/cdk/forms'
 
 export type RadioMode = 'default' | 'primary'
 export type RadioOptions = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>
@@ -12,7 +12,7 @@ export const radioProps = {
   autofocus: IxPropTypes.bool.def(false),
   buttoned: IxPropTypes.bool,
   checked: IxPropTypes.bool.def(false),
-  control: controlProp,
+  control: controlPropDef,
   disabled: IxPropTypes.bool,
   label: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
@@ -38,7 +38,7 @@ export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindin
 export const radioGroupProps = {
   buttoned: IxPropTypes.bool,
   disabled: IxPropTypes.bool.def(false),
-  control: controlProp,
+  control: controlPropDef,
   name: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
   options: IxPropTypes.array<RadioOptions>(),

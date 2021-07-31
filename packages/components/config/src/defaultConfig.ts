@@ -98,17 +98,19 @@ const form = shallowReactive<FormConfig>({
 })
 
 const input = shallowReactive<InputConfig>({
-  size: 'medium',
-  clearable: false,
   borderless: false,
+  clearable: false,
+  clearIcon: 'close-circle',
+  size: 'medium',
 })
 
 const textarea = shallowReactive<TextareaConfig>({
-  resize: 'vertical',
   autoRows: false,
+  clearable: false,
+  clearIcon: 'close-circle',
+  resize: 'vertical',
   showCount: false,
   size: 'medium',
-  clearable: false,
 })
 
 const rate = shallowReactive<RateConfig>({
