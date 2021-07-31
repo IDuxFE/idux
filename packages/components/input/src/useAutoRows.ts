@@ -14,7 +14,7 @@ const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
 }
 
 export function useAutoRows(
-  textareaRef: Ref<HTMLTextAreaElement>,
+  textareaRef: Ref<HTMLTextAreaElement | undefined>,
   autoRows: ComputedRef<boolean | TextareaAutoRows>,
   valueAccessor: ValueAccessor,
 ): void {
@@ -56,7 +56,7 @@ export function useAutoRows(
       return
     }
 
-    const textarea = textareaRef.value
+    const textarea = textareaRef.value!
     const value = textarea.value
 
     // Only resize if the value or minRows have changed since these calculations can be expensive.
@@ -101,7 +101,7 @@ export function useAutoRows(
     }
 
     // Use a clone element because we have to override some styles.
-    const textarea = textareaRef.value
+    const textarea = textareaRef.value!
     const textareaClone = textarea.cloneNode(false) as HTMLTextAreaElement
     textareaClone.rows = 1
 
@@ -137,7 +137,7 @@ export function useAutoRows(
     const minHeight = minRows && cachedLineHeight ? `${minRows * cachedLineHeight + textareaBoxHeight}px` : null
 
     if (minHeight) {
-      textareaRef.value.style.minHeight = minHeight
+      textareaRef.value!.style.minHeight = minHeight
     }
   }
 
@@ -146,7 +146,7 @@ export function useAutoRows(
     const maxHeight = maxRows && cachedLineHeight ? `${maxRows * cachedLineHeight + textareaBoxHeight}px` : null
 
     if (maxHeight) {
-      textareaRef.value.style.maxHeight = maxHeight
+      textareaRef.value!.style.maxHeight = maxHeight
     }
   }
 
@@ -173,7 +173,7 @@ export function useAutoRows(
     // Do not try to change the textarea, if the initialHeight has not been determined yet
     // This might potentially remove styles when reset() is called before ngAfterViewInit
     if (initialHeight !== undefined) {
-      textareaRef.value.style.height = initialHeight
+      textareaRef.value!.style.height = initialHeight
     }
   }
 
@@ -181,7 +181,7 @@ export function useAutoRows(
 
   onMounted(() => {
     // Remember the height which we started with in case autosizing is disabled
-    initialHeight = textareaRef.value.style.height
+    initialHeight = textareaRef.value!.style.height
 
     watchEffect(() => {
       const _autoRows = autoRows.value

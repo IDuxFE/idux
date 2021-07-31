@@ -1,14 +1,14 @@
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
-import { controlProp } from '@idux/cdk/forms'
+import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type CheckValue = string | number | boolean
 export type CheckboxOptions = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
 
 export const checkboxProps = {
-  control: controlProp,
+  control: controlPropDef,
   autofocus: IxPropTypes.bool.def(false),
   checked: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
   disabled: IxPropTypes.bool,
@@ -35,7 +35,7 @@ export type CheckboxComponent = DefineComponent<LabelHTMLAttributes & typeof che
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
-  control: controlProp,
+  control: controlPropDef,
   value: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
   disabled: IxPropTypes.bool.def(false),
   name: IxPropTypes.string,

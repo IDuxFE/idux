@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { AbstractControl } from './controls'
+import type { AbstractControl, ControlPathType } from './controls'
 
 import { reactive, getCurrentInstance, computed, ComputedRef, watch, toRef, WatchStopHandle } from 'vue'
-import { isNil, Logger } from '@idux/cdk/utils'
+import { isNil, isUndefined, Logger } from '@idux/cdk/utils'
 import { isAbstractControl } from './typeof'
 import { injectControl, injectControlOrPath } from './utils'
 
@@ -11,12 +11,14 @@ export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<Ab
   const controlOrPath = injectControlOrPath()
   return computed(() => {
     let control: AbstractControl | null = null
-    const _controlOrPath = (props[controlKey] ?? controlOrPath?.value) as AbstractControl | string | number | undefined
+    // Only when `props[controlKey]` is `undefined`, will it find out if the parent component is injected with `path`
+    // So you can disable it by setting `props[controlKey]` to `null`
+    const _controlOrPath = isUndefined(props[controlKey]) ? controlOrPath?.value : props[controlKey]
     if (!isNil(_controlOrPath)) {
       if (isAbstractControl(_controlOrPath)) {
         control = _controlOrPath
       } else {
-        control = injectControl(_controlOrPath)
+        control = injectControl(_controlOrPath as ControlPathType)
         if (!control) {
           Logger.error(`not find control by [${_controlOrPath}]`)
         }

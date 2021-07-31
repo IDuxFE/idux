@@ -1,7 +1,7 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
-import IxInput from '../src/Input.vue'
+import IxInput from '../src/Input'
 import { InputProps } from '../src/types'
 
 describe('Input', () => {
@@ -189,27 +189,27 @@ describe('Input', () => {
   })
 
   test('clearable work', async () => {
-    const onAfterClear = jest.fn()
-    const wrapper = InputMount({ props: { clearable: true, onAfterClear } })
+    const onClear = jest.fn()
+    const wrapper = InputMount({ props: { clearable: true, onClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
-    expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(true)
+    expect(wrapper.find('.ix-input-suffix-hidden').exists()).toBe(true)
 
     await wrapper.find('.ix-icon-close-circle').trigger('click')
 
-    expect(onAfterClear).toBeCalled()
+    expect(onClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 
-    expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(false)
+    expect(wrapper.find('.ix-input-suffix-hidden').exists()).toBe(false)
 
     await wrapper.setProps({ disabled: true })
 
-    expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(true)
+    expect(wrapper.find('.ix-input-suffix-hidden').exists()).toBe(true)
 
     await wrapper.setProps({ disabled: false, readonly: true })
 
-    expect(wrapper.find('.ix-input-clear-icon-hidden').exists()).toBe(true)
+    expect(wrapper.find('.ix-input-suffix-hidden').exists()).toBe(true)
 
     await wrapper.setProps({ clearable: false })
 

@@ -4,7 +4,11 @@ import type { AbstractControl, ControlPathType } from './controls'
 import { inject, provide } from 'vue'
 import { isNil, IxPropTypes } from '@idux/cdk/utils'
 
-export const controlProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<AbstractControl>()])
+export const controlPropDef = IxPropTypes.oneOfType<string | number | AbstractControl | null>([
+  String,
+  Number,
+  IxPropTypes.object<AbstractControl>(),
+])
 
 const controlToken: InjectionKey<AbstractControl> = Symbol('controlToken')
 

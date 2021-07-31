@@ -26,7 +26,7 @@ single: true
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 配置 `ix-form-item` 的 `colon` 默认值 | `boolean` | `false` | ✅ | - |
-| `control` | 表单的控制器 | `string \| number \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
+| `control` | 表单的控制器 | `string \| number \| AbstractControl \| null` | - | - | 通常是配合 `useFormGroup` 使用 |
 | `controlCol` | 配置 `ix-form-item` 的 `controlCol` 默认值 | `string \| number \| ColProps` | - | - | - |
 | `hasFeedback` | 配置 `ix-form-item` 的 `hasFeedback` 默认值 | `boolean` | `false` | - | - |
 | `labelAlign` | 配置 `ix-form-item` 的 `labelAlign` 默认值 | `left \| right` | `right` | ✅ | - |
@@ -45,7 +45,7 @@ single: true
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
-| `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
+| `control` | 表单控件的控制器 | `string \| number \| AbstractControl \| null` | - | - | 当仅包含一个输入控件时，输入控件的 `control` 可以省略，如果包含了多个输入控件，请务必手动指定每个输入控件的 `control`, 参考注册表单的 [Phone Number](#components-form-demo-Register) |
 | `controlCol` | 配置表单控件的布局，同 `<ix-col>` 组件，设置 `span` `offset` 的值 | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
 | `extra` | 额外的提示信息 | `string \| #extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `hasFeedback` | 是否展示校验状态图标 | `boolean` | `false` | - | - |
@@ -66,4 +66,4 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
+| `control` | 表单控件的控制器 | `string \| number \| AbstractControl \| null` | - | - | - |

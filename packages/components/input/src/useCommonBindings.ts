@@ -7,96 +7,110 @@ import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 
-interface CommonBindings {
-  disabled: ComputedRef<boolean>
+export interface CommonBindings<T extends HTMLInputElement | HTMLTextAreaElement> {
+  elementRef: Ref<T | undefined>
+  valueAccessor: ValueAccessor
+
+  isDisabled: ComputedRef<boolean>
+  clearIcon: ComputedRef<string>
+  clearHidden: ComputedRef<boolean>
+  isClearable: ComputedRef<boolean>
+  isFocused: Ref<boolean>
+
   focus: (options?: FocusOptions) => void
   blur: () => void
-  onCompositionStart: (evt: CompositionEvent) => void
-  onCompositionEnd: (evt: CompositionEvent) => void
-  onInput: (evt: Event) => void
-  onFocus: (evt: FocusEvent) => void
-  onBlur: (evt: FocusEvent) => void
-  onClearClick: (evt: MouseEvent) => void
-  isClearable: ComputedRef<boolean>
-  clearHidden: ComputedRef<boolean>
-  isFocused: Ref<boolean>
-  valueAccessor: ValueAccessor
+
+  handlerInput: (evt: Event) => void
+  handlerCompositionStart: (evt: CompositionEvent) => void
+  handlerCompositionEnd: (evt: CompositionEvent) => void
+  handlerFocus: (evt: FocusEvent) => void
+  handlerBlur: (evt: FocusEvent) => void
+  handlerClear: (evt: MouseEvent) => void
 }
 
-export const useCommonBindings = (
+export function useCommonBindings(props: InputProps, config: InputConfig): CommonBindings<HTMLInputElement>
+export function useCommonBindings(props: TextareaProps, config: TextareaConfig): CommonBindings<HTMLTextAreaElement>
+export function useCommonBindings(
   props: InputProps | TextareaProps,
   config: InputConfig | TextareaConfig,
-  elementRef: Ref<HTMLInputElement | HTMLTextAreaElement>,
-): CommonBindings => {
+): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
+  const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()
   const valueAccessor = useValueAccessor()
-  const disabled = computed(() => valueAccessor.disabled)
-
-  const isComposing = ref(false)
-  const onCompositionStart = (evt: CompositionEvent) => {
-    isComposing.value = true
-    callEmit(props.onCompositionStart, evt)
-  }
-  const onCompositionEnd = (evt: CompositionEvent) => {
-    callEmit(props.onCompositionEnd, evt)
-    if (isComposing.value) {
-      isComposing.value = false
-      onInput(evt)
-    }
-  }
-  const onInput = (evt: Event) => {
-    if (isComposing.value) {
-      return
-    }
-    const { value } = evt.target as HTMLInputElement
-    valueAccessor.setValue?.(value)
-    callEmit(props.onInput, evt)
-  }
-
-  const isFocused = ref(false)
-  const onFocus = (evt: FocusEvent) => {
-    isFocused.value = true
-    callEmit(props.onFocus, evt)
-  }
-  const onBlur = (evt: FocusEvent) => {
-    valueAccessor.markAsBlurred?.()
-    isFocused.value = false
-    callEmit(props.onBlur, evt)
-  }
-
-  const focus = (options?: FocusOptions) => elementRef.value.focus(options)
-  const blur = () => elementRef.value.blur()
-
-  const onClearClick = (evt: MouseEvent) => {
-    valueAccessor.setValue?.('')
-    callEmit(props.onAfterClear, evt)
-  }
-
-  const isClearable = computed(() => props.clearable ?? config.clearable)
-  const clearHidden = computed(() => disabled.value || props.readonly || !valueAccessor.value)
 
   onMounted(() => {
     watchEffect(() => {
       const value = valueAccessor.value ?? ''
-      const element = elementRef.value
+      const element = elementRef.value!
       if (element.value !== value) {
         element.value = value
       }
     })
   })
 
+  const isDisabled = computed(() => valueAccessor.disabled)
+  const isClearable = computed(() => props.clearable ?? config.clearable)
+  const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
+  const clearHidden = computed(() => isDisabled.value || props.readonly || !valueAccessor.value)
+
+  const focus = (options?: FocusOptions) => elementRef.value?.focus(options)
+  const blur = () => elementRef.value?.blur()
+
+  const isComposing = ref(false)
+  const handlerInput = (evt: Event) => {
+    if (isComposing.value) {
+      return
+    }
+    const { value } = evt.target as HTMLInputElement
+    callEmit(props.onInput, evt)
+    valueAccessor.setValue?.(value)
+  }
+
+  const handlerCompositionStart = (evt: CompositionEvent) => {
+    isComposing.value = true
+    callEmit(props.onCompositionStart, evt)
+  }
+  const handlerCompositionEnd = (evt: CompositionEvent) => {
+    callEmit(props.onCompositionEnd, evt)
+    if (isComposing.value) {
+      isComposing.value = false
+      handlerInput(evt)
+    }
+  }
+
+  const isFocused = ref(false)
+  const handlerFocus = (evt: FocusEvent) => {
+    isFocused.value = true
+    callEmit(props.onFocus, evt)
+  }
+  const handlerBlur = (evt: FocusEvent) => {
+    isFocused.value = false
+    callEmit(props.onBlur, evt)
+    valueAccessor.markAsBlurred?.()
+  }
+
+  const handlerClear = (evt: MouseEvent) => {
+    callEmit(props.onClear, evt)
+    valueAccessor.setValue?.('')
+  }
+
   return {
-    disabled,
+    elementRef,
+    valueAccessor,
+
+    isDisabled,
+    clearIcon,
+    clearHidden,
+    isClearable,
+    isFocused,
+
     focus,
     blur,
-    onCompositionStart,
-    onCompositionEnd,
-    onInput,
-    onFocus,
-    onBlur,
-    onClearClick,
-    isClearable,
-    clearHidden,
-    isFocused,
-    valueAccessor,
+
+    handlerInput,
+    handlerCompositionStart,
+    handlerCompositionEnd,
+    handlerFocus,
+    handlerBlur,
+    handlerClear,
   }
 }

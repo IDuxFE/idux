@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input render work 1`] = `
-"<span class=\\"ix-input ix-input-medium\\"><!--v-if--><span class=\\"ix-input-wrapper\\"><!--v-if--><input class=\\"ix-input-inner\\"><!--v-if--><!--v-if--></span>
-<!--v-if--></span>"
+"<span class=\\"ix-input ix-input-medium\\"><!----><span class=\\"ix-input-wrapper\\"><!----><input class=\\"ix-input-inner\\"><!----></span>
+<!----></span>"
 `;

@@ -8,6 +8,7 @@ const listenersRegexp = /^on[A-Z]/
 /**
  * Get attributes of current component
  *
+ * @deprecated use attrs instead of useAttrs see `/input/src/Input.tsx`
  * @param excludeOptions
  * * `keys`: keys to be excluded
  * * `listeners`: listeners to be excluded
