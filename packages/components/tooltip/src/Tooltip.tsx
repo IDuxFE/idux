@@ -22,7 +22,6 @@ export default defineComponent({
         v-slots={{ default: slots.default, content: () => renderTitle(props, slots) }}
         class="ix-tooltip"
         transitionName="ix-fade-fast"
-        allowEnter
         {...configProps.value}
         offset={defaultOffset}
       />

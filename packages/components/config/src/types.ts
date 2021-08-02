@@ -182,23 +182,21 @@ export interface StatisticConfig {
 }
 
 export interface TooltipConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
   placement: PopperPlacement
   target: string | HTMLElement
   trigger: PopperTrigger
-  showDelay: number
-  hideDelay: number
-  destroyOnHide: boolean
-  autoAdjust: boolean
 }
 
 export interface PopoverConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
   placement: PopperPlacement
   target: string | HTMLElement
   trigger: PopperTrigger
-  showDelay: number
-  hideDelay: number
-  destroyOnHide: boolean
-  autoAdjust: boolean
 }
 
 // Feedback

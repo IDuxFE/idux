@@ -23,7 +23,6 @@ export default defineComponent({
         v-slots={{ default: slots.default, content: () => renderContent(props, slots) }}
         class="ix-popover"
         transitionName="ix-fade"
-        allowEnter
         {...configProps.value}
         offset={defaultOffset}
       />

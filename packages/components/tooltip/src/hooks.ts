@@ -8,13 +8,12 @@ import { callEmit } from '@idux/cdk/utils'
 export function useConfigProps(props: TooltipProps, config: TooltipConfig): ComputedRef<TooltipConfig> {
   return computed(() => {
     return {
+      autoAdjust: props.autoAdjust ?? config.autoAdjust,
+      delay: props.delay ?? config.delay,
+      destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
       placement: props.placement ?? config.placement,
       target: props.target ?? config.target,
       trigger: props.trigger ?? config.trigger,
-      showDelay: props.showDelay ?? config.showDelay,
-      hideDelay: props.hideDelay ?? config.hideDelay,
-      destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
-      autoAdjust: props.autoAdjust ?? config.autoAdjust,
     }
   })
 }

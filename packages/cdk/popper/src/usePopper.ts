@@ -1,17 +1,19 @@
 import type { Instance } from '@popperjs/core'
 import type { PopperOptions, PopperInstance, PopperElement } from './types'
 
-import { watch } from 'vue'
+import { watch, WatchStopHandle } from 'vue'
 import { createPopper } from '@popperjs/core'
 import { isEqual } from 'lodash'
 import {
   useState,
   useBaseOptions,
-  useExtraOptions,
   useElement,
+  usePlacement,
   usePopperEvents,
   useTimer,
   useTriggerEvents,
+  useVisibility,
+  useDelay,
 } from './hooks'
 import { convertElement, convertOptions } from './utils'
 
@@ -26,13 +28,17 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
 
   const state = useState(options)
   const baseOptions = useBaseOptions(state)
-  const { extraOptions, visibility, placement } = useExtraOptions(state, arrowRef)
+  const visibility = useVisibility(state)
+  const { placement, updatePlacement } = usePlacement(state)
+  const delay = useDelay(state)
 
   const { setTimer, clearTimer } = useTimer()
-  const triggerEvents = useTriggerEvents(state, { visibility, show, hide, clearTimer })
-  const popperEvents = usePopperEvents(state, { hide, clearTimer })
+  const triggerEvents = useTriggerEvents(state, { visibility, show, hide })
+  const popperEvents = usePopperEvents(state, { show, hide })
 
   function toggle(visible: boolean, delay: number): void {
+    clearTimer()
+
     const action = () => {
       state.visible = visible
     }
@@ -43,12 +49,12 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     }
   }
 
-  function show(delay = state.showDelay): void {
-    toggle(true, delay)
+  function show(showDelay = delay.value.show): void {
+    toggle(true, showDelay)
   }
 
-  function hide(delay = state.hideDelay): void {
-    toggle(false, delay)
+  function hide(hideDelay = delay.value.hide): void {
+    toggle(false, hideDelay)
   }
 
   function update(options: Partial<PopperOptions>): void {
@@ -74,8 +80,14 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     popperInstance = null
   }
 
+  let initWatchStop: WatchStopHandle | null = null
+
   function initialize(): void {
-    watch(
+    if (initWatchStop) {
+      initWatchStop()
+    }
+
+    initWatchStop = watch(
       [triggerRef, popperRef],
       ([trigger, popper]) => {
         const triggerElement = convertElement(trigger)
@@ -84,7 +96,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
           return
         }
         destroy()
-        const options = convertOptions(baseOptions.value, extraOptions.value)
+        const options = convertOptions(baseOptions.value, { arrowElement: convertElement(arrowRef), updatePlacement })
         popperInstance = createPopper(triggerElement, popperElement, options)
       },
       { immediate: true },
@@ -97,8 +109,10 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     }
   })
 
-  watch([baseOptions, extraOptions], ([currBaseOptions, currExtraOptions]) => {
-    popperInstance?.setOptions(convertOptions(currBaseOptions, currExtraOptions))
+  watch([baseOptions, arrowRef], ([currBaseOptions, arrowElement]) => {
+    popperInstance?.setOptions(
+      convertOptions(currBaseOptions, { arrowElement: convertElement(arrowElement), updatePlacement }),
+    )
   })
 
   return {

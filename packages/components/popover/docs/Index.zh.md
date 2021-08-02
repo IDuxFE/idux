@@ -24,9 +24,3 @@ order: 0
 | `title` | 浮层的标题 | `string \| #title` | - | - | - |
 
 更多属性请参考 [Tooltip](/components/tooltip/zh#tooltipprops).
-
-#### PopoverSlots
-
-| 名称 | 说明 |
-| --- | --- |
-| `default` | 触发浮层的 trigger |

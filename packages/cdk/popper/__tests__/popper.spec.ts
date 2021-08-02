@@ -21,20 +21,21 @@ describe('usePopper', () => {
 
   describe('options', () => {
     test('allowEnter work', async () => {
-      const wrapper = PopperTestMount({ allowEnter: true, hideDelay: 100 })
+      const wrapper = PopperTestMount({ allowEnter: true, delay: 50 })
       await flushPromises()
       await wrapper.find('#trigger').trigger('mouseenter')
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(true)
 
       await wrapper.find('#trigger').trigger('mouseleave')
       await wrapper.find('#overlay').trigger('mouseenter')
-      await wait(100)
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(true)
 
       await wrapper.find('#overlay').trigger('mouseleave')
-      await wait(100)
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(false)
 
@@ -42,12 +43,13 @@ describe('usePopper', () => {
       wrapper.vm.update({ allowEnter: false })
       await flushPromises()
       await wrapper.find('#trigger').trigger('mouseenter')
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(true)
 
       await wrapper.find('#trigger').trigger('mouseleave')
       await wrapper.find('#overlay').trigger('mouseenter')
-      await wait(100)
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(false)
     })
@@ -176,28 +178,41 @@ describe('usePopper', () => {
       expect(wrapper.find('#overlay').exists()).toBe(false)
     })
 
-    test('hideDelay work', async () => {
-      const wrapper = PopperTestMount({ visible: true, hideDelay: 100 })
-      await wrapper.find('#trigger').trigger('mouseleave')
+    test('delay work', async () => {
+      const wrapper = PopperTestMount({ delay: 50 })
       await flushPromises()
 
-      expect(wrapper.find('#overlay').exists()).toBe(true)
-
-      await wait(100)
-
-      expect(wrapper.find('#overlay').exists()).toBe(false)
-    })
-
-    test('showDelay work', async () => {
-      const wrapper = PopperTestMount({ trigger: 'hover', showDelay: 100 })
       await wrapper.find('#trigger').trigger('mouseenter')
-      await flushPromises()
+      await wait(50)
+
+      expect(wrapper.find('#overlay').exists()).toBe(true)
+
+      await wrapper.find('#trigger').trigger('mouseleave')
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(false)
 
-      await wait(100)
+      wrapper.vm.update({ delay: [100, 120] })
+      await flushPromises()
+      await wrapper.find('#trigger').trigger('mouseenter')
+      await wait(50)
+
+      expect(wrapper.find('#overlay').exists()).toBe(false)
+
+      await wait(50)
 
       expect(wrapper.find('#overlay').exists()).toBe(true)
+
+      await wrapper.find('#trigger').trigger('mouseleave')
+      await wait(50)
+
+      expect(wrapper.find('#overlay').exists()).toBe(true)
+
+      await wait(50)
+      expect(wrapper.find('#overlay').exists()).toBe(true)
+
+      await wait(20)
+      expect(wrapper.find('#overlay').exists()).toBe(false)
     })
   })
 

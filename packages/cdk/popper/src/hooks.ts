@@ -1,26 +1,26 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { PopperElement, PopperEvents, PopperOptions, PopperPlacement, PopperTriggerEvents } from './types'
+import type { PopperEvents, PopperOptions, PopperPlacement, PopperTriggerEvents } from './types'
 
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { noop } from '@idux/cdk/utils'
-import { convertElement } from './utils'
 
 export function useElement<T>(): Ref<T | null> {
   const element: Ref<T | null> = ref(null)
   return element
 }
 
+const defaultDelay = 0
+
 export function useState(options: PopperOptions): Required<PopperOptions> {
   const {
     allowEnter = true,
     autoAdjust = true,
+    delay = defaultDelay,
     disabled = false,
     offset = [0, 0],
     placement = 'top',
     trigger = 'hover',
     visible = false,
-    hideDelay = 0,
-    showDelay = 0,
     strategy = 'absolute',
     modifiers = [],
     onFirstUpdate = noop,
@@ -29,13 +29,12 @@ export function useState(options: PopperOptions): Required<PopperOptions> {
   return reactive({
     allowEnter,
     autoAdjust,
+    delay,
     disabled,
     offset,
     placement,
     trigger,
     visible,
-    hideDelay,
-    showDelay,
     strategy,
     modifiers,
     onFirstUpdate,
@@ -54,29 +53,37 @@ export function useBaseOptions(state: Required<PopperOptions>): ComputedRef<Base
   })
 }
 
-export interface ExtraOptions {
-  arrowElement: HTMLElement | null
-  updatePlacement: (value: PopperPlacement) => void
+export function useVisibility(state: Required<PopperOptions>): ComputedRef<boolean> {
+  return computed(() => !state.disabled && state.visible)
 }
 
-export function useExtraOptions(
-  state: Required<PopperOptions>,
-  arrowRef: Ref<PopperElement | null>,
-): {
-  extraOptions: ComputedRef<ExtraOptions>
-  visibility: ComputedRef<boolean>
+export function usePlacement(state: Required<PopperOptions>): {
   placement: ComputedRef<PopperPlacement>
+  updatePlacement: (value: PopperPlacement) => void
 } {
-  const visibility = computed(() => !state.disabled && state.visible)
   const _placement = ref(state.placement)
+
   const updatePlacement = (value: PopperPlacement) => {
     _placement.value = value
   }
+
+  watch(() => state.placement, updatePlacement)
+
   const placement = computed(() => _placement.value)
 
-  const extraOptions = computed(() => ({ arrowElement: convertElement(arrowRef), updatePlacement }))
+  return { placement, updatePlacement }
+}
 
-  return { extraOptions, visibility, placement }
+export function useDelay(state: Required<PopperOptions>): ComputedRef<{ show: number; hide: number }> {
+  const covertDelay = (delay: number | [number | null, number | null]) => {
+    if (Array.isArray(delay)) {
+      const [show, hide] = delay
+      return { show: show ?? defaultDelay, hide: hide ?? defaultDelay }
+    }
+    return { show: delay, hide: delay }
+  }
+
+  return computed(() => covertDelay(state.delay))
 }
 
 export function useTimer(): { setTimer: (action: () => void, delay: number) => void; clearTimer: () => void } {
@@ -101,26 +108,14 @@ export function useTimer(): { setTimer: (action: () => void, delay: number) => v
 
 export function useTriggerEvents(
   baseOptions: Required<PopperOptions>,
-  eventOptions: { visibility: ComputedRef<boolean>; show(): void; hide(): void; clearTimer(): void },
+  eventOptions: { visibility: ComputedRef<boolean>; show(): void; hide(): void },
 ): ComputedRef<PopperTriggerEvents> {
-  const { visibility, show, hide, clearTimer } = eventOptions
+  const { visibility, show, hide } = eventOptions
 
-  const onMouseenter = () => {
-    clearTimer()
-    show()
-  }
-
-  const onMouseleave = () => {
-    hide()
-  }
-
-  const onFocus = () => {
-    show()
-  }
-
-  const onBlur = () => {
-    hide()
-  }
+  const onMouseenter = () => show()
+  const onMouseleave = () => hide()
+  const onFocus = () => show()
+  const onBlur = () => hide()
 
   const onClick = () => {
     const { trigger } = baseOptions
@@ -149,27 +144,22 @@ export function useTriggerEvents(
 
 export function usePopperEvents(
   baseOptions: Required<PopperOptions>,
-  eventOptions: { hide(): void; clearTimer(): void },
+  eventOptions: { show(): void; hide(): void },
 ): ComputedRef<PopperEvents> {
-  const { hide, clearTimer } = eventOptions
+  const { show, hide } = eventOptions
 
-  const onMouseenter = () => {
-    if (baseOptions.allowEnter) {
-      clearTimer()
-    }
-  }
+  const onMouseenter = () => show()
+  const onMouseleave = () => hide()
 
-  const onMouseleave = () => {
-    hide()
-  }
+  const noop = {}
 
   const eventsMap = {
-    click: {},
-    focus: {},
+    click: noop,
+    focus: noop,
     hover: { onMouseenter, onMouseleave },
-    contextmenu: {},
-    manual: {},
+    contextmenu: noop,
+    manual: noop,
   }
 
-  return computed(() => eventsMap[baseOptions.trigger])
+  return computed(() => (baseOptions.allowEnter ? eventsMap[baseOptions.trigger] : noop))
 }

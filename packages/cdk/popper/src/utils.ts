@@ -1,11 +1,11 @@
 import type { Ref } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
+import type { BaseOptions } from './hooks'
 import type { PopperElement, PopperPlacement } from './types'
 
 import { unref } from 'vue'
 import { camelCase, kebabCase } from 'lodash'
 import { isHTMLElement } from '@idux/cdk/utils'
-import { BaseOptions, ExtraOptions } from './hooks'
 
 export function convertElement(elementRef: Ref<PopperElement | null> | PopperElement | null): HTMLElement | null {
   const element = unref(elementRef)
@@ -13,6 +13,11 @@ export function convertElement(elementRef: Ref<PopperElement | null> | PopperEle
     return null
   }
   return isHTMLElement(element) ? element : element.$el
+}
+
+export interface ExtraOptions {
+  arrowElement: HTMLElement | null
+  updatePlacement: (value: PopperPlacement) => void
 }
 
 export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOptions): Options {

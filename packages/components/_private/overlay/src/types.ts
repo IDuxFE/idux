@@ -20,11 +20,16 @@ export const overlayPlacementDef = IxPropTypes.oneOf<PopperPlacement>([
   'leftEnd',
 ])
 export const overlayTriggerDef = IxPropTypes.oneOf<PopperTrigger>(['click', 'hover', 'focus', 'contextmenu', 'manual'])
+export const overlayDelayDef = IxPropTypes.oneOfType<number | [number | null, number | null]>([
+  Number,
+  IxPropTypes.array() as unknown as VueTypeDef<[number | null, number | null]>,
+])
 
 export const overlayProps = {
   visible: IxPropTypes.bool,
   allowEnter: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
+  delay: overlayDelayDef,
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
   hideDelay: IxPropTypes.number,
