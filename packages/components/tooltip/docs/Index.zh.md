@@ -22,9 +22,8 @@ order: 0
 | `v-model:visible` | 是否显隐 | `boolean` | - | - | - |
 | `autoAdjust` | 浮层被遮挡时自动调整位置 | `boolean` | `true` | ✅ | - |
 | `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
-| `hideDelay` | 浮层隐藏延时 | `number` | `100` | ✅ | - |
+| `delay` | 浮层显示隐藏延时 | `number \| [number, number]` | `100` | ✅ | - |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
-| `showDelay` | 浮层显示延时 | `number` | `100` | ✅ | - |
 | `target` | 浮层容器节点 | `string \| HTMLElement` | `ix-tooltip-container` | ✅ | 为 `string` 时，会在 `document.body` 中创建一个 `div` |
 | `title` | 浮层的标题 | `string \| #title` | - | - | - |
 | `trigger` | 浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |

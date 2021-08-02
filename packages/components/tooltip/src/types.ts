@@ -12,7 +12,6 @@ export const tooltipProps = {
   destroyOnHide: IxPropTypes.bool,
   delay: overlayDelayDef,
   placement: overlayPlacementDef,
-  showDelay: IxPropTypes.number,
   target: portalTargetDef,
   title: IxPropTypes.string,
   trigger: overlayTriggerDef,
