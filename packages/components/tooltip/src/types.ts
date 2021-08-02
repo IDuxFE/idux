@@ -4,13 +4,13 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import { portalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
-import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
+import { overlayPlacementDef, overlayTriggerDef, overlayDelayDef } from '@idux/components/_private'
 
 export const tooltipProps = {
   visible: IxPropTypes.bool.def(false),
   autoAdjust: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool,
-  hideDelay: IxPropTypes.number,
+  delay: overlayDelayDef,
   placement: overlayPlacementDef,
   showDelay: IxPropTypes.number,
   target: portalTargetDef,

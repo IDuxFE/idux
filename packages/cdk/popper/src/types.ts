@@ -44,6 +44,16 @@ export interface PopperOptions {
    */
   autoAdjust?: boolean
   /**
+   * Delay in ms once a trigger event is fired before a tippy shows or hides
+   *
+   * @example
+   * * 0: disable delay, it is default value
+   * * 100: show and hide delay are 100ms
+   * * [100, 200]: show delay is 100ms, hide delay is 200ms
+   * * [100, null]: show delay is 100ms, hide delay is the default
+   */
+  delay?: number | [number | null, number | null]
+  /**
    * Disable the popper
    * * default is `false`
    */
@@ -69,16 +79,7 @@ export interface PopperOptions {
    * * default is `false`
    */
   visible?: boolean
-  /**
-   * The delay of hiding popper, Send 0 if you don't need it
-   * * default is `0`
-   */
-  hideDelay?: number
-  /**
-   * The delay of showing popper, Send 0 if you don't need it
-   * * default is `0`
-   */
-  showDelay?: number
+
   strategy?: PopperPositioningStrategy
   modifiers?: Array<Partial<Modifier<unknown, unknown>>>
   onFirstUpdate?: (state: Partial<State>) => void
@@ -94,12 +95,12 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * Show the popper.
    * The style of the popper container will be set to block.
    */
-  show(showDelay?: number): void
+  show(delay?: number): void
   /**
    * Hide the popper.
    * The style of the popper container will be set to none.
    */
-  hide(hideDelay?: number): void
+  hide(delay?: number): void
   /**
    * Update popper.
    */

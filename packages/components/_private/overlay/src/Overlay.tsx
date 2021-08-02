@@ -79,17 +79,10 @@ export default defineComponent({
 })
 
 function usePopperOptions(props: OverlayProps) {
-  return computed(() => ({
-    visible: props.visible,
-    disabled: props.disabled,
-    placement: props.placement,
-    trigger: props.trigger,
-    allowEnter: props.allowEnter,
-    autoAdjust: props.autoAdjust,
-    offset: props.offset,
-    hideDelay: props.hideDelay,
-    showDelay: props.showDelay,
-  }))
+  return computed(() => {
+    const { visible, allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
+    return { visible, allowEnter, autoAdjust, delay, disabled, offset, placement, trigger }
+  })
 }
 
 function renderContent(
