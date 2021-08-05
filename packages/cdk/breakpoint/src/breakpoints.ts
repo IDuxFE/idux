@@ -1,18 +1,4 @@
-import invert from 'lodash/invert'
-import { computed, ComputedRef } from 'vue'
-import { observeBreakpoint } from './observe'
-
-type KeyFromValue<V, T extends Record<PropertyKey, PropertyKey>> = {
-  [K in keyof T]: V extends T[K] ? K : never
-}[keyof T]
-
-type Invert<T extends Record<PropertyKey, PropertyKey>> = {
-  [V in T[keyof T]]: KeyFromValue<V, T>
-}
-
-export const BreakpointKeys = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-
-export const Breakpoints = {
+export const BREAKPOINTS = {
   xs: '(max-width: 767.99px)',
   sm: '(min-width: 768px) and (max-width: 1023.99px)',
   md: '(min-width: 1024px) and (max-width: 1279.99px)',
@@ -20,26 +6,6 @@ export const Breakpoints = {
   xl: '(min-width: 1720px)',
 } as const
 
-export type BreakpointKey = keyof typeof Breakpoints
+export const BREAKPOINTS_KEYS = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
-export type ScreenMatch = Partial<Record<BreakpointKey, boolean>>
-
-// { '(max-width: 767.99px)': 'xs' }
-const mediaScreenMap = invert(Breakpoints) as Invert<typeof Breakpoints>
-
-/** { '(min-width: 768px) and (max-width: 1023.99px)': true } => { sm: true } */
-export const convertMediaToScreen = (medias: Record<keyof typeof mediaScreenMap, boolean>): ScreenMatch => {
-  const result: ScreenMatch = {}
-  const keys = Object.keys(medias) as Array<keyof typeof mediaScreenMap>
-  keys.forEach(media => (result[mediaScreenMap[media]] = medias[media]))
-  return result
-}
-
-export function useBreakpoints(): ComputedRef<Record<BreakpointKey, boolean>>
-export function useBreakpoints(breakpoints: Partial<Record<BreakpointKey, string>>): ComputedRef<ScreenMatch>
-export function useBreakpoints(
-  breakpoints: Partial<Record<BreakpointKey, string>> = Breakpoints,
-): ComputedRef<ScreenMatch> {
-  const observes = observeBreakpoint(Object.values(breakpoints))
-  return computed(() => convertMediaToScreen(observes.value.breakpoints))
-}
+export type BreakpointKey = typeof BREAKPOINTS_KEYS[number]

@@ -1,11 +1,13 @@
 import type { ComputedRef, CSSProperties, Ref, Slot, VNode, VNodeTypes } from 'vue'
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
+import type { AvatarConfig } from '@idux/components/config'
 import type { AvatarProps, AvatarSize } from './types'
 
 import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
 
-import { BreakpointKey, useBreakpoints } from '@idux/cdk/breakpoint'
+import { useScreens } from '@idux/cdk/breakpoint'
 import { callEmit, hasSlot, isNumber, isObject, isString, offResize, onResize, toCssPixel } from '@idux/cdk/utils'
-import { AvatarConfig, useGlobalConfig } from '@idux/components/config'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { avatarProps } from './types'
 
@@ -91,7 +93,7 @@ const useClasses = (
 const useSizeStyle = (
   size: ComputedRef<AvatarSize | Partial<Record<BreakpointKey, number>>>,
 ): ComputedRef<CSSProperties> => {
-  const screens = useBreakpoints()
+  const screens = useScreens()
   return computed(() => {
     let currSize: number | undefined
 
@@ -99,8 +101,7 @@ const useSizeStyle = (
     if (isNumber(sizeValue)) {
       currSize = sizeValue
     } else if (isObject(sizeValue)) {
-      const screensValue = screens.value
-      const currBreakpoint = (Object.keys(screensValue) as BreakpointKey[]).find(key => screensValue[key])!
+      const currBreakpoint = (Object.keys(screens) as BreakpointKey[]).find(key => screens[key])!
       currSize = sizeValue[currBreakpoint]
     }
 

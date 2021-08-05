@@ -1,19 +1,19 @@
-import { Breakpoints } from '../src/breakpoints'
+import { BREAKPOINTS } from '../src/breakpoints'
 import { matchMedia } from '../src/mediaMatcher'
 
 describe('matchMedia.ts', () => {
   test('matchMedia work', () => {
-    expect(matchMedia(Breakpoints.sm).matches).toBeFalsy()
+    expect(matchMedia(BREAKPOINTS.sm).matches).toBeFalsy()
   })
 
   test('createEmptyStyleRule work', () => {
     const createElementSyn = jest.spyOn(document, 'createElement').mockReturnValue(document.createElement('style'))
 
-    matchMedia(Breakpoints.sm)
+    matchMedia(BREAKPOINTS.sm)
     expect(createElementSyn).toBeCalledTimes(1)
 
-    matchMedia(Breakpoints.sm)
-    matchMedia(Breakpoints.lg)
+    matchMedia(BREAKPOINTS.sm)
+    matchMedia(BREAKPOINTS.lg)
     expect(createElementSyn).toBeCalledTimes(1)
   })
 })

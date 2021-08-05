@@ -1,6 +1,6 @@
 import { renderWork } from '@tests'
-import IxRow from '../src/Row.vue'
-import IxCol from '../src/Col.vue'
+import IxRow from '../src/Row'
+import IxCol from '../src/Col'
 
 const componentFactory = (config = {}) =>
   Object.assign(

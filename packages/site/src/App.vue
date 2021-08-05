@@ -36,7 +36,7 @@
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useBreakpoints } from '@idux/cdk/breakpoint'
+import { useScreens } from '@idux/cdk/breakpoint'
 import { ModalProviderInstance } from '@idux/components/modal'
 import { appContextToken, AppContext } from './context'
 import LayoutHeader from './components/layout/header/Index.vue'
@@ -58,7 +58,7 @@ export default defineComponent({
       return match?.[1] ?? 'home'
     })
 
-    const screens = useBreakpoints()
+    const screens = useScreens()
 
     const appContext: AppContext = {
       org: 'IduxFE',
