@@ -49,6 +49,8 @@ export interface CardButtonProps extends ButtonProps {
 
 #### CardGridProps
 
+> 除以下表格之外还支持 `IxCol` 组件的[所有属性](/components/grid/zh#ColProps)。
+
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | - | - | 未设置时，会使用父组件的 `hoverable` |

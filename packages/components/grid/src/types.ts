@@ -1,6 +1,5 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 
 import { IxPropTypes } from '@idux/cdk/utils'

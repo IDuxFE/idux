@@ -39,8 +39,8 @@ export default defineComponent({
         'home-header': page.value === 'home',
       }
     })
-    const isXs = computed(() => screens.value.xs)
-    const isSm = computed(() => screens.value.sm)
+    const isXs = computed(() => screens.xs)
+    const isSm = computed(() => screens.sm)
     return { classes, isXs, isSm }
   },
 })

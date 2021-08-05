@@ -9,7 +9,7 @@ export interface AppContext {
   lang: Ref<'zh' | 'en'>
   path: ComputedRef<string>
   page: ComputedRef<string>
-  screens: ComputedRef<Record<BreakpointKey, boolean>>
+  screens: Record<BreakpointKey, boolean>
 }
 
 export const appContextToken: InjectionKey<AppContext> = Symbol('appContextToken')

@@ -1,7 +1,7 @@
 import type { RowComponent, ColComponent } from './src/types'
 
-import Row from './src/Row.vue'
-import Col from './src/Col.vue'
+import Row from './src/Row'
+import Col from './src/Col'
 
 const IxRow = Row as unknown as RowComponent
 const IxCol = Col as unknown as ColComponent

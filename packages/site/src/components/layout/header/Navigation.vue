@@ -39,8 +39,8 @@ export default defineComponent({
   setup() {
     const { lang, page, screens, org, repo } = inject(appContextToken)!
     const selectedIds = computed(() => [page.value])
-    const isXs = computed(() => screens.value.xs)
-    const isSm = computed(() => screens.value.sm)
+    const isXs = computed(() => screens.xs)
+    const isSm = computed(() => screens.sm)
 
     const githubUrl = computed(() => `https://github.com/${org}/${repo}`)
     return { lang, selectedIds, page, isXs, isSm, githubUrl }
