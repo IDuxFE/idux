@@ -4,8 +4,9 @@ import type { RowGutter, RowProps } from './types'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 
 import { defineComponent, computed, provide } from 'vue'
+import { isObject, isArray, isUndefined } from 'lodash-es'
 import { BREAKPOINTS_KEYS, useScreens } from '@idux/cdk/breakpoint'
-import { isObject, isArray, isUndefined, toNumber } from '@idux/cdk/utils'
+import { convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { rowToken } from './token'
 import { rowProps } from './types'
@@ -79,7 +80,7 @@ function normalizeGutter(propGutter: RowGutter, screens: Record<BreakpointKey, b
         return false
       })
     } else {
-      results[index] = toNumber(gutter)
+      results[index] = convertNumber(gutter)
     }
   })
   return results

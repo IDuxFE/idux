@@ -2,7 +2,7 @@ import type { ComputedRef, Ref } from 'vue'
 import type { VirtualFillerInstance, VirtualListProps, VirtualScrollBarInstance } from '../types'
 
 import { computed, ref } from 'vue'
-import { isFunction } from '@idux/cdk/utils'
+import { isFunction } from 'lodash-es'
 import { useItemKey } from './useItem'
 
 export interface ScrollBarState {
@@ -96,7 +96,7 @@ const useScrollState = (
 const useOriginScroll = (isScrollAtTop: Ref<boolean>, isScrollAtBottom: Ref<boolean>): OriginScroll => {
   // Do lock for a wheel when scrolling
   let lock = false
-  let lockTimeout: number
+  let lockTimeout: NodeJS.Timeout
   const lockScroll = () => {
     clearTimeout(lockTimeout)
     lock = true

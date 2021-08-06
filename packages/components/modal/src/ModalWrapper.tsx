@@ -1,7 +1,8 @@
 import { ComputedRef, onBeforeUnmount, onMounted, Ref, watch } from 'vue'
 
 import { computed, defineComponent, inject, ref, Transition } from 'vue'
-import { callEmit, getOffset, isFunction, toCssPixel } from '@idux/cdk/utils'
+import { isFunction } from 'lodash-es'
+import { callEmit, getOffset, convertCssPixel } from '@idux/cdk/utils'
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
@@ -88,7 +89,7 @@ const useConfig = (props: ModalProps, config: ModalConfig) => {
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
-  const width = computed(() => toCssPixel(props.width ?? config.width))
+  const width = computed(() => convertCssPixel(props.width ?? config.width))
   const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
   return { centered, width, mask, maskClosable, closeOnEsc, zIndex }
@@ -141,7 +142,7 @@ const useEvent = (
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   sentinelEndRef: Ref<HTMLDivElement | undefined>,
 ) => {
-  let timeId: number | null = null
+  let timeId: NodeJS.Timeout | null = null
   let mouseDown = false
   const onModalMousedown = () => {
     if (timeId) {

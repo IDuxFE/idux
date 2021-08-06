@@ -2,8 +2,7 @@
 import type { VNode, VNodeChild } from 'vue'
 
 import { Comment, Fragment, Slots, Text } from 'vue'
-
-import { isNil } from './typeof'
+import { isNil } from 'lodash-es'
 
 const TEMPLATE = 'template'
 

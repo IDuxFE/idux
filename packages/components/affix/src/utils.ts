@@ -1,7 +1,7 @@
 import type { AffixDirection, AffixOffset } from './types'
 
-import { isHTMLElement, isUndefined, isObject, toNumber } from '@idux/cdk/utils'
-import { on, off } from '@idux/cdk/utils'
+import { isUndefined, isObject } from 'lodash-es'
+import { convertNumber, isHTMLElement, on, off } from '@idux/cdk/utils'
 
 export type AffixStyle = {
   position?: 'fixed' | 'absolute'
@@ -20,11 +20,11 @@ const directions = ['top', 'bottom', 'left', 'right'] as const
 
 export function normalizeOffset(offset: AffixOffset): Partial<AffixDirectionNumber> {
   if (!isObject(offset)) {
-    return { top: toNumber(offset) }
+    return { top: convertNumber(offset) }
   }
   const _offset: Partial<AffixDirectionNumber> = {}
   ;(Object.keys(offset) as AffixDirection[]).forEach(dire => {
-    _offset[dire] = toNumber(offset[dire])
+    _offset[dire] = convertNumber(offset[dire])
   })
   return _offset
 }

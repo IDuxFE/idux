@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUpdate, ref, watchEffect } from 'vue'
-import { isArray, toNumber } from '@idux/cdk/utils'
+import { convertNumber } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { useGlobalConfig } from '@idux/components/config'
 import { rateProps } from './types'
@@ -46,7 +46,7 @@ export default defineComponent({
     const starRefs = ref([])
 
     const rateGlobalConfig = useGlobalConfig('rate')
-    const rateCount = computed(() => toNumber(props.count ?? rateGlobalConfig.count))
+    const rateCount = computed(() => convertNumber(props.count ?? rateGlobalConfig.count))
     const rateIcon = computed(() => props.icon ?? rateGlobalConfig.icon)
     const allowHalf = computed(() => props.allowHalf ?? rateGlobalConfig.allowHalf)
     const allowClear = computed(() => props.allowClear ?? rateGlobalConfig.allowClear)
@@ -56,7 +56,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      const value = toNumber(props.value)
+      const value = convertNumber(props.value)
       score.value = value
       touchHalf.value = value !== Math.floor(value)
     })
@@ -70,7 +70,7 @@ export default defineComponent({
     }
 
     function getTooltip(index: number) {
-      if (!props.tooltips || !isArray(props.tooltips)) {
+      if (!props.tooltips || !Array.isArray(props.tooltips)) {
         return
       }
 
@@ -106,7 +106,7 @@ export default defineComponent({
         return
       }
 
-      const value = toNumber(props.value)
+      const value = convertNumber(props.value)
 
       if (allowHalf.value) {
         touchHalf.value = value !== Math.floor(value)
@@ -121,8 +121,8 @@ export default defineComponent({
 
       let clearValue = false
       let emitValue = 0
-      const beforeValue = toNumber(props.value)
-      const currentScore = toNumber(score.value)
+      const beforeValue = convertNumber(props.value)
+      const currentScore = convertNumber(score.value)
 
       if (allowClear.value) {
         clearValue = beforeValue === currentScore

@@ -11,7 +11,8 @@ import type {
 } from './types'
 import type { AbstractControl } from './controls'
 
-import { isArray, isFunction, isNil, isNonNil, isNumber, isNumeric, isString } from '@idux/cdk/utils'
+import { isArray, isFunction, isNil, isNumber, isString } from 'lodash-es'
+import { isNumeric } from '@idux/cdk/utils'
 
 /** See [this commit](https://github.com/angular/angular.js/commit/f3f5cf72e) for more details. */
 const emailRegexp =
@@ -128,7 +129,7 @@ export class Validators {
     if (!validators) {
       return null
     }
-    const presentValidators: ValidatorFn[] = validators.filter(isNonNil)
+    const presentValidators: ValidatorFn[] = validators.filter(isFunction)
     if (presentValidators.length == 0) {
       return null
     }
@@ -141,7 +142,7 @@ export class Validators {
     if (!validators) {
       return null
     }
-    const presentValidators: AsyncValidatorFn[] = validators.filter(isNonNil)
+    const presentValidators: AsyncValidatorFn[] = validators.filter(isFunction)
     if (presentValidators.length == 0) {
       return null
     }
@@ -160,7 +161,7 @@ function isEmpty(val: any): boolean {
 
 /** checks whether variable has length props */
 function hasLength(val: any): boolean {
-  return isNonNil(val) && isNumber(val.length)
+  return !isNil(val) && isNumber(val.length)
 }
 
 type GenericValidatorFn = (value: any, _: AbstractControl) => any
@@ -179,7 +180,7 @@ function mergeMessages(validateErrors: (ValidateErrors | null)[]): ValidateError
   // Not using Array.reduce here due to a Chrome 80 bug
   // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
   validateErrors.forEach((errors: ValidateErrors | null) => {
-    res = isNonNil(errors) ? { ...res, ...errors } : res
+    res = isNil(errors) ? res : { ...res, ...errors }
   })
 
   return Object.keys(res).length === 0 ? null : res

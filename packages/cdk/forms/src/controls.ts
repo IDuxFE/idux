@@ -11,7 +11,8 @@ import type {
 } from './types'
 
 import { computed, shallowReadonly, shallowRef, ref, toRaw, watch, watchEffect } from 'vue'
-import { hasOwnProperty, isArray, isNil, isObject } from '@idux/cdk/utils'
+import { isArray, isNil, isObject } from 'lodash-es'
+import { hasOwnProperty } from '@idux/cdk/utils'
 import { Validators } from './validators'
 
 type IsNullable<T, K> = undefined extends T ? K : never
@@ -317,7 +318,8 @@ export abstract class AbstractControl<T = any> {
     path.forEach((name: string | number) => {
       if (controlToFind instanceof FormGroup) {
         const controls = controlToFind.controls.value
-        controlToFind = hasOwnProperty(controls, name as string) ? controls[name] : null
+        // eslint-disable-next-line no-prototype-builtins
+        controlToFind = controls.hasOwnProperty(name) ? controls[name] : null
       } else if (controlToFind instanceof FormArray) {
         controlToFind = controlToFind.at(<number>name) || null
       } else {
@@ -581,11 +583,11 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param control Provides the control for the given name
    */
   addControl<K extends OptionalKeys<T>>(name: K, control: AbstractControl<T[K]>): void {
-    control.setParent(this)
     const controls = toRaw(this._controls.value)
     if (hasOwnProperty(controls, name as string)) {
       return
     }
+    control.setParent(this)
     controls[name] = control
     this._controls.value = { ...controls }
   }

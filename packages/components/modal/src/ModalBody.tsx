@@ -1,7 +1,7 @@
 import type { Slot, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
-import { isString } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
 import { IxIcon } from '@idux/components/icon'
 import { modalToken } from './token'
 

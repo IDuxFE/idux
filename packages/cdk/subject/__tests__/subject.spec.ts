@@ -1,4 +1,4 @@
-import { isObject } from '@idux/cdk/utils'
+import { isObject } from 'lodash-es'
 import { Subject } from '../src/subject'
 
 describe('subject.ts', () => {

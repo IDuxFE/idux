@@ -1,7 +1,8 @@
 import type { MessageProps } from './types'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
-import { callEmit, isString } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
+import { callEmit } from '@idux/cdk/utils'
 import { MessageConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { messageProps } from './types'

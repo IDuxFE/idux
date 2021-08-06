@@ -1,4 +1,4 @@
-import { isString } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
 
 const containerHashmap: Record<string, HTMLElement> = {}
 

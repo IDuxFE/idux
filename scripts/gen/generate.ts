@@ -5,7 +5,7 @@ import { textSync } from 'figlet'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import ora from 'ora'
-import { camelCase, kebabCase, upperFirst } from 'lodash'
+import { camelCase, kebabCase, upperFirst } from 'lodash-es'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 
 import {

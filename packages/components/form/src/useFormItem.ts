@@ -5,8 +5,8 @@ import type { FormItemProps, FormMessageFn } from './types'
 import type { FormContext } from './token'
 
 import { computed } from 'vue'
+import { isFunction, isNumber, isString } from 'lodash-es'
 import { useValueControl, provideControlOrPath } from '@idux/cdk/forms'
-import { isFunction, isNumber, isString } from '@idux/cdk/utils'
 import { getLocale, LocaleType } from '@idux/components/i18n'
 
 export const useFormItemClasses = (

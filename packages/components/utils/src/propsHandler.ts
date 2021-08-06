@@ -1,4 +1,5 @@
-import { isString, Logger } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
+import { Logger } from '@idux/cdk/utils'
 
 export function getTarget(target: string | HTMLElement | Window | undefined): HTMLElement | Window {
   if (isString(target)) {

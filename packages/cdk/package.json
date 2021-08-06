@@ -30,9 +30,8 @@
   "typings": "./index.d.ts",
   "scripts": {},
   "dependencies": {
-    "@juggle/resize-observer": "^3.3.0",
-    "@popperjs/core": "^2.9.0",
-    "lodash": "^4.17.0",
+    "@popperjs/core": "^2.9.3",
+    "lodash-es": "^4.17.21",
     "vue-types": "^3.0.0"
   },
   "peerDependencies": {

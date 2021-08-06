@@ -1,7 +1,7 @@
 import { MessageOptions, messageProviderProps, MessageRef } from './types'
 
 import { defineComponent, ref, provide, TransitionGroup, computed, ComputedRef, VNode } from 'vue'
-import { callEmit, toArray, toCssPixel, uniqueId } from '@idux/cdk/utils'
+import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import Message from './Message'
 import { messageProviderToken } from './token'
@@ -13,7 +13,7 @@ export default defineComponent({
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
     const config = useGlobalConfig('message')
-    const style = computed(() => ({ top: toCssPixel(props.top ?? config.top) }))
+    const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { messages, loadContainer, apis } = useMessageApis(maxCount)
 
@@ -78,7 +78,7 @@ const useMessage = (maxCount: ComputedRef<number>) => {
   }
 
   const destroy = (id: string | string[]) => {
-    const ids = toArray(id)
+    const ids = convertArray(id)
     ids.forEach(id => {
       const currIndex = getCurrIndex(id)
       if (currIndex !== -1) {

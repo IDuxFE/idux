@@ -2,7 +2,7 @@ import type { VNodeTypes } from 'vue'
 import type { PaginationItemRenderFn, PaginationItemType } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
-import { isNil } from '@idux/cdk/utils'
+import { isNil } from 'lodash-es'
 import { IxButton } from '@idux/components/button'
 import { paginationItemProps } from './types'
 import { paginationToken } from './token'

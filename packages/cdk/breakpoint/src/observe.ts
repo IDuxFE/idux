@@ -2,7 +2,8 @@ import type { DeepReadonly, Ref } from 'vue'
 import type { BreakpointKey } from './breakpoints'
 
 import { onBeforeUnmount, reactive, readonly, ref, watchEffect } from 'vue'
-import { toArray } from '@idux/cdk/utils'
+import { invert } from 'lodash-es'
+import { convertArray } from '@idux/cdk/utils'
 import { BREAKPOINTS } from './breakpoints'
 import { matchMedia } from './mediaMatcher'
 
@@ -25,6 +26,7 @@ interface Query {
 
 /**  A map of all media queries currently being listened for. */
 const _queries = new Map<string, Query>()
+const defaultMediaScreen = invert(BREAKPOINTS)
 
 /**
  * @param value One or more media queries to check.
@@ -33,7 +35,8 @@ const _queries = new Map<string, Query>()
 export function useBreakpoints(value: string | string[]): DeepReadonly<BreakpointState> {
   const state = reactive<BreakpointState>({ matches: false, medias: {} })
   const queries = splitQueries(value).map(query => _registerQuery(query))
-  const stopWatch = watchEffect(() => {
+
+  watchEffect(() => {
     let matches = false
     queries.forEach(query => {
       const currMatches = query.matches.value
@@ -44,8 +47,12 @@ export function useBreakpoints(value: string | string[]): DeepReadonly<Breakpoin
   })
 
   onBeforeUnmount(() => {
-    stopWatch()
-    queries.filter(query => --query.watcher > 0).forEach(query => query.destroy())
+    queries
+      .filter(query => !defaultMediaScreen[query.media] && --query.watcher === 0)
+      .forEach(query => {
+        query.destroy()
+        _queries.delete(query.media)
+      })
   })
 
   return readonly(state)
@@ -54,13 +61,12 @@ export function useBreakpoints(value: string | string[]): DeepReadonly<Breakpoin
 export function useBreakpointsMatch<T extends string>(value: Record<T, string>): DeepReadonly<Record<T, boolean>> {
   const match = reactive({} as Record<string, boolean>)
   const breakpointState = useBreakpoints(Object.values(value))
-  const stopWatch = watchEffect(() => {
+
+  watchEffect(() => {
     Object.entries(value).forEach(([key, value]) => {
       match[key as T] = breakpointState.medias[value as string]
     })
   })
-
-  onBeforeUnmount(() => stopWatch())
 
   return readonly(match) as DeepReadonly<Record<T, boolean>>
 }
@@ -108,7 +114,7 @@ function _registerQuery(query: string): Query {
  * Split each query string into separate query strings if two queries are provided as comma separated.
  */
 function splitQueries(queries: string | string[]): string[] {
-  return toArray(queries)
+  return convertArray(queries)
     .map((query: string) => query.split(','))
     .reduce((a1: string[], a2: string[]) => a1.concat(a2))
     .map(query => query.trim())

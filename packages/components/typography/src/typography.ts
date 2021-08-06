@@ -1,7 +1,8 @@
 import type { FunctionDirective } from 'vue'
 import type { TypographyProps, TypographyOptions } from './types'
 
-import { addClass, isObject, Logger, removeClass } from '@idux/cdk/utils'
+import { isObject } from 'lodash-es'
+import { addClass, Logger, removeClass } from '@idux/cdk/utils'
 
 const typography: FunctionDirective<HTMLElement, TypographyProps> = (el, binding) => {
   const className: string[] = ['ix-typography']

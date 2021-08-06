@@ -2,8 +2,8 @@ import type { CSSProperties } from 'vue'
 import type { VirtualFillerProps } from './types'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
-import throttle from 'lodash/throttle'
-import { isNil, offResize, onResize } from '@idux/cdk/utils'
+import { isNil, throttle } from 'lodash-es'
+import { offResize, onResize } from '@idux/cdk/utils'
 import { virtualFillerProps } from './types'
 
 export default defineComponent({

@@ -1,6 +1,7 @@
 import type { EasingFn } from '@idux/cdk/utils'
 
-import { easeInOutCubic, isNil, isObject, rAF } from '@idux/cdk/utils'
+import { isNil, isObject } from 'lodash-es'
+import { easeInOutCubic, rAF } from '@idux/cdk/utils'
 
 export interface ScrollOptions {
   scrollTop?: number

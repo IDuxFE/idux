@@ -5,9 +5,9 @@ import type { ValueAccessor } from '@idux/cdk/forms'
 import type { TextareaAutoRows } from './types'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
-import throttle from 'lodash/throttle'
+import { isObject, isNumber, throttle } from 'lodash-es'
 import { isFirefox } from '@idux/cdk/platform'
-import { isObject, isNumber, on, off, rAF } from '@idux/cdk/utils'
+import { on, off, rAF } from '@idux/cdk/utils'
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return isObject(value) && isNumber(value.minRows) && isNumber(value.maxRows)

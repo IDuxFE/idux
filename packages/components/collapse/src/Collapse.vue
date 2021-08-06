@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, provide, watch, computed, ref } from 'vue'
-import { toArray } from '@idux/cdk/utils'
+import { convertArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { collapseToken } from './token'
 import { collapseProps } from './types'
@@ -17,12 +17,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const collapseConfig = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? collapseConfig.accordion)
-    const activeNames = ref<string[]>(toArray(props.active) as [])
+    const activeNames = ref<string[]>(convertArray(props.active))
 
     watch(
       () => props.active,
       value => {
-        activeNames.value = toArray(value) as []
+        activeNames.value = convertArray(value) as []
       },
     )
 

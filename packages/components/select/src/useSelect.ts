@@ -7,7 +7,7 @@ import type { OptionProps, SelectOption, SelectProps } from './types'
 
 import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
-import { offResize, onResize, toArray } from '@idux/cdk/utils'
+import { offResize, onResize, convertArray } from '@idux/cdk/utils'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { selectToken } from './token'
 
@@ -128,7 +128,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
   const valueAccessor = useValueAccessor()
   const disabled = computed(() => valueAccessor.disabled)
   const inputValue = ref('')
-  const selectedValue = ref<any[]>(toArray(valueAccessor.value))
+  const selectedValue = ref<any[]>(convertArray(valueAccessor.value))
   const activatedValue = ref(null) as Ref<any>
 
   const isComposing = ref(false)
@@ -186,7 +186,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
   watch(
     () => valueAccessor.value,
     value => {
-      const valueList = toArray(value)
+      const valueList = convertArray(value)
       if (valueList.length !== 0 || selectedValue.value.length !== 0) {
         selectedValue.value = valueList
         updateVariable()

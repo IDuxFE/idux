@@ -30,7 +30,7 @@ import type { ImageConfig } from '@idux/components/config'
 import type { ImageProps, ImageStatus } from './types'
 
 import { defineComponent, computed, ref, watchEffect, watch } from 'vue'
-import { toCssPixel } from '@idux/cdk/utils'
+import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import ImgPreview from './ImgPreview.vue'
 import { imageProps } from './types'
@@ -85,7 +85,7 @@ export default defineComponent({
 const computedSize = (props: ImageProps, imageConfig: ImageConfig, type: 'width' | 'height') => {
   return computed(() => {
     const size = props[type] ?? imageConfig[type]
-    return toCssPixel(size)
+    return convertCssPixel(size)
   })
 }
 </script>

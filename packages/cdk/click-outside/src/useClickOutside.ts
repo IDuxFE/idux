@@ -1,6 +1,7 @@
 import type { ObjectDirective } from 'vue'
 
-import { isFunction, isObject, noop, on } from '@idux/cdk/utils'
+import { isFunction, isObject } from 'lodash-es'
+import { noop, on } from '@idux/cdk/utils'
 
 interface ClickOutsideOptions {
   exclude: (HTMLElement | null)[]
