@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
-import throttle from 'lodash/throttle'
+import { throttle } from 'lodash-es'
 import { scrollToTop, getScroll } from '@idux/cdk/scroll'
 import { on, off } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'

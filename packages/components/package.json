@@ -28,12 +28,11 @@
   "style": "./index.css",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^0.0.1",
-    "lodash": "^4.17.0",
-    "vue-types": "^3.0.0"
+    "@idux/cdk": "^0.0.1"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/shared": "^3.0.0",
     "vue": "^3.0.0"
   }
 }

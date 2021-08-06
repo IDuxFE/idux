@@ -4,7 +4,7 @@ import type { BaseOptions } from './hooks'
 import type { PopperElement, PopperPlacement } from './types'
 
 import { unref } from 'vue'
-import { camelCase, kebabCase } from 'lodash'
+import { camelCase, kebabCase } from 'lodash-es'
 import { isHTMLElement } from '@idux/cdk/utils'
 
 export function convertElement(elementRef: Ref<PopperElement | null> | PopperElement | null): HTMLElement | null {

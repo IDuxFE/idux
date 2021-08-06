@@ -4,9 +4,9 @@ import type { AvatarConfig } from '@idux/components/config'
 import type { AvatarProps, AvatarSize } from './types'
 
 import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
-
+import { isNumber, isObject, isString } from 'lodash-es'
 import { useScreens } from '@idux/cdk/breakpoint'
-import { callEmit, hasSlot, isNumber, isObject, isString, offResize, onResize, toCssPixel } from '@idux/cdk/utils'
+import { callEmit, hasSlot, offResize, onResize, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { avatarProps } from './types'
@@ -113,12 +113,12 @@ const getSizeStyle = (size: number | undefined) => {
   if (!size) {
     return {}
   }
-  const sizePixel = toCssPixel(size)
+  const sizePixel = convertCssPixel(size)
   return {
     width: sizePixel,
     height: sizePixel,
     lineHeight: sizePixel,
-    fontSize: toCssPixel(size / 2),
+    fontSize: convertCssPixel(size / 2),
   }
 }
 

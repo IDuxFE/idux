@@ -3,7 +3,7 @@ import type { PopperOptions, PopperInstance, PopperElement } from './types'
 
 import { watch, WatchStopHandle } from 'vue'
 import { createPopper } from '@popperjs/core'
-import { isEqual } from 'lodash'
+import { isEqual } from 'lodash-es'
 import {
   useState,
   useBaseOptions,

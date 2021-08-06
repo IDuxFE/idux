@@ -2,7 +2,8 @@
 import type { AbstractControl, ControlPathType } from './controls'
 
 import { reactive, getCurrentInstance, computed, ComputedRef, watch, toRef, WatchStopHandle } from 'vue'
-import { isNil, isUndefined, Logger } from '@idux/cdk/utils'
+import { isNil, isUndefined } from 'lodash-es'
+import { Logger } from '@idux/cdk/utils'
 import { isAbstractControl } from './typeof'
 import { injectControl, injectControlOrPath } from './utils'
 

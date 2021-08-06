@@ -1,63 +1,63 @@
-import { toArray, toNumber, toBoolean, toCssPixel } from '../src/convert'
+import { convertArray, convertNumber, convertBoolean, convertCssPixel } from '../src/convert'
 
 describe('convert.ts', () => {
-  test('toArray work', async () => {
-    expect(toArray(null)).toEqual([])
-    expect(toArray(undefined)).toEqual([])
+  test('convertArray work', async () => {
+    expect(convertArray(null)).toEqual([])
+    expect(convertArray(undefined)).toEqual([])
 
     const stringValue = 'string'
-    expect(toArray(stringValue)).toEqual([stringValue])
+    expect(convertArray(stringValue)).toEqual([stringValue])
 
     const numberValue = 0
-    expect(toArray(numberValue)).toEqual([numberValue])
+    expect(convertArray(numberValue)).toEqual([numberValue])
 
     const arrayValue = [1, '2', null]
-    expect(toArray(arrayValue)).toEqual(arrayValue)
+    expect(convertArray(arrayValue)).toEqual(arrayValue)
   })
 
-  test('toNumber work', async () => {
-    expect(toNumber(100)).toEqual(100)
-    expect(toNumber(100, 1)).toEqual(100)
+  test('convertNumber work', async () => {
+    expect(convertNumber(100)).toEqual(100)
+    expect(convertNumber(100, 1)).toEqual(100)
 
-    expect(toNumber('0')).toEqual(0)
-    expect(toNumber('0', 1)).toEqual(0)
+    expect(convertNumber('0')).toEqual(0)
+    expect(convertNumber('0', 1)).toEqual(0)
 
-    expect(toNumber(undefined)).toEqual(0)
-    expect(toNumber(undefined, 1)).toEqual(1)
+    expect(convertNumber(undefined)).toEqual(0)
+    expect(convertNumber(undefined, 1)).toEqual(1)
 
-    expect(toNumber(null)).toEqual(0)
-    expect(toNumber(null, 1)).toEqual(1)
+    expect(convertNumber(null)).toEqual(0)
+    expect(convertNumber(null, 1)).toEqual(1)
 
-    expect(toNumber('')).toEqual(0)
-    expect(toNumber('', 1)).toEqual(1)
+    expect(convertNumber('')).toEqual(0)
+    expect(convertNumber('', 1)).toEqual(1)
 
-    expect(toNumber('1.1')).toEqual(1.1)
-    expect(toNumber('1.1', 1)).toEqual(1.1)
+    expect(convertNumber('1.1')).toEqual(1.1)
+    expect(convertNumber('1.1', 1)).toEqual(1.1)
 
-    expect(toNumber('1-1')).toEqual(0)
-    expect(toNumber('1-1', 1)).toEqual(1)
+    expect(convertNumber('1-1')).toEqual(0)
+    expect(convertNumber('1-1', 1)).toEqual(1)
   })
 
-  test('toBoolean work', async () => {
-    expect(toBoolean(undefined)).toEqual(false)
-    expect(toBoolean(null)).toEqual(false)
-    expect(toBoolean(0)).toEqual(false)
-    expect(toBoolean('')).toEqual(false)
-    expect(toBoolean('false')).toEqual(false)
-    expect(toBoolean(false)).toEqual(false)
+  test('convertBoolean work', async () => {
+    expect(convertBoolean(undefined)).toEqual(false)
+    expect(convertBoolean(null)).toEqual(false)
+    expect(convertBoolean(0)).toEqual(false)
+    expect(convertBoolean('')).toEqual(false)
+    expect(convertBoolean('false')).toEqual(false)
+    expect(convertBoolean(false)).toEqual(false)
 
-    expect(toBoolean('0')).toEqual(true)
-    expect(toBoolean(1)).toEqual(true)
-    expect(toBoolean(true)).toEqual(true)
-    expect(toBoolean('true')).toEqual(true)
+    expect(convertBoolean('0')).toEqual(true)
+    expect(convertBoolean(1)).toEqual(true)
+    expect(convertBoolean(true)).toEqual(true)
+    expect(convertBoolean('true')).toEqual(true)
   })
 
-  test('toCssPixel work', async () => {
-    expect(toCssPixel(1)).toEqual('1px')
-    expect(toCssPixel('1px')).toEqual('1px')
-    expect(toCssPixel('1em')).toEqual('1em')
+  test('convertCssPixel work', async () => {
+    expect(convertCssPixel(1)).toEqual('1px')
+    expect(convertCssPixel('1px')).toEqual('1px')
+    expect(convertCssPixel('1em')).toEqual('1em')
 
-    expect(toCssPixel(undefined)).toEqual('')
-    expect(toCssPixel(null)).toEqual('')
+    expect(convertCssPixel(undefined)).toEqual('')
+    expect(convertCssPixel(null)).toEqual('')
   })
 })

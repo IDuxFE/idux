@@ -10,8 +10,7 @@
     },
     "bootstrap": {
       "ignore": "",
-      "hoist": true,
-      "npmClientArgs": ["--no-package-lock"]
+      "hoist": true
     }
   }
 }

@@ -12,7 +12,7 @@
 import type { OptionProps, SelectFilterFn } from './types'
 
 import { computed, defineComponent, inject, nextTick, onUnmounted, watch } from 'vue'
-import { isFunction } from '@idux/cdk/utils'
+import { isFunction } from 'lodash-es'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { optionProps } from './types'
 import { selectToken, visibleChangeToken } from './token'

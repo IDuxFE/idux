@@ -1,7 +1,7 @@
 import type { VirtualListProps } from '../types'
 
 import { reactive } from 'vue'
-import { isFunction } from '@idux/cdk/utils'
+import { isFunction } from 'lodash-es'
 
 export const useItemKey = (props: VirtualListProps, item: unknown): string | number => {
   const itemKey = props.itemKey

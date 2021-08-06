@@ -17,11 +17,12 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
+import { isObject } from 'lodash-es'
+import { convertNumber } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { convertProgressProps } from './types'
 import { useInfo, useStatus, useStatusClasses, useSmallSize } from './useCommonLogic'
-import { isObject, toNumber } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
 import { handleGradient } from './util'
 
 const defaultStrokeWidth = 8
@@ -35,7 +36,7 @@ export default defineComponent({
     const progressConfig = useGlobalConfig('progress')
     const isSmallSize = useSmallSize(props, progressConfig)
     const strokeWidth = computed(() =>
-      toNumber(props.strokeWidth ?? (isSmallSize.value ? defaultSmallStrokeWidth : defaultStrokeWidth)),
+      convertNumber(props.strokeWidth ?? (isSmallSize.value ? defaultSmallStrokeWidth : defaultStrokeWidth)),
     )
     const progressStatus = useStatus(props)
     const statusClass = useStatusClasses(progressStatus)

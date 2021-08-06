@@ -28,9 +28,10 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, ComputedRef } from 'vue'
-import { IxIcon } from '@idux/components/icon'
-import { isObject, uniqueId, toNumber } from '@idux/cdk/utils'
+import { isObject } from 'lodash-es'
+import { uniqueId, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { IxIcon } from '@idux/components/icon'
 import { useInfo, useStatus, useStatusClasses } from './useCommonLogic'
 import { handleCircleGradient } from './util'
 import { ConvertProgressProps, convertProgressProps, ProgressGapPositionType, StringGradients } from './types'
@@ -55,7 +56,7 @@ export default defineComponent({
     const progressConfig = useGlobalConfig('progress')
     const status = useStatus(props)
     const { formattedText, showSuccessIcon, showExceptionIcon, showFormat } = useInfo(props, progressConfig, status)
-    const strokeWidth = computed(() => toNumber(props.strokeWidth, defaultStrokeWidth))
+    const strokeWidth = computed(() => convertNumber(props.strokeWidth, defaultStrokeWidth))
     const isGradient = computed(() => isObject(props.strokeColor))
     const statusClass = useStatusClasses(status)
     const linearGradientId = ref(`ix-progress-gradient-${uniqueId()}`)
@@ -69,7 +70,7 @@ export default defineComponent({
         radius,
         gapPosition: props.gapPosition ?? (isCircle ? 'top' : 'bottom'),
         len: Math.PI * 2 * radius,
-        gapDegree: toNumber(props.gapDegree ?? (isCircle ? 0 : 75)),
+        gapDegree: convertNumber(props.gapDegree ?? (isCircle ? 0 : 75)),
       }
     })
     const circleGradient = computed(() => {
@@ -96,7 +97,7 @@ export default defineComponent({
     const circleStyle = computed(() => ({
       width: `${props.width}px`,
       height: `${props.width}px`,
-      fontSize: `${toNumber(props.width) * 0.15 + 6}px`,
+      fontSize: `${convertNumber(props.width) * 0.15 + 6}px`,
     }))
 
     return {

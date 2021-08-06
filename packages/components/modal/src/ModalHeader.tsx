@@ -1,5 +1,6 @@
 import { computed, defineComponent, inject, toRef } from 'vue'
-import { isString, toArray } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
+import { convertArray } from '@idux/cdk/utils'
 import { IxHeader } from '@idux/components/header'
 import { modalToken, MODAL_TOKEN } from './token'
 
@@ -47,7 +48,7 @@ export default defineComponent({
     if (closable) {
       headerProps.extra = headerProps.extra ?? closeIcon
 
-      const onExtraClick = toArray(headerProps.onExtraClick)
+      const onExtraClick = convertArray(headerProps.onExtraClick)
       onExtraClick.push(onClose)
       headerProps.onExtraClick = onExtraClick
     }

@@ -2,7 +2,7 @@ import type { ComputedRef, CSSProperties, Ref } from 'vue'
 import type { VirtualScrollBarProps } from './types'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import throttle from 'lodash/throttle'
+import { throttle } from 'lodash-es'
 import { on, off, rAF, cancelRAF } from '@idux/cdk/utils'
 import { virtualScrollBarProps } from './types'
 
@@ -48,7 +48,7 @@ const getPageY = (evt: MouseEvent | TouchEvent) => {
 
 const useVisible = (props: VirtualScrollBarProps) => {
   const _visible = ref(false)
-  let visibleTimeout: number
+  let visibleTimeout: NodeJS.Timeout
 
   const delayHidden = throttle(() => {
     clearTimeout(visibleTimeout)

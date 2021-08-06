@@ -1,4 +1,4 @@
-import { addClass, removeClass, toCssPixel } from '@idux/cdk/utils'
+import { addClass, removeClass, convertCssPixel } from '@idux/cdk/utils'
 import { getScroll, setScroll } from './utils'
 
 export interface ScrollLockerOptions {
@@ -46,8 +46,8 @@ export class ScrollLocker {
     this.cacheScroll = getScroll(container)
     this.cacheStyle = { top: container.style.top, left: container.style.left }
 
-    container.style.top = toCssPixel(-this.cacheScroll.scrollTop)
-    container.style.left = toCssPixel(-this.cacheScroll.scrollLeft)
+    container.style.top = convertCssPixel(-this.cacheScroll.scrollTop)
+    container.style.left = convertCssPixel(-this.cacheScroll.scrollLeft)
 
     const blockClassName = this.getBlockClassName()
     addClass(container, blockClassName)

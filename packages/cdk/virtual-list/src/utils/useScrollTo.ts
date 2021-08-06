@@ -1,7 +1,8 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { ScrollToOptions, ScrollToFn, VirtualListProps, VirtualScrollBarInstance } from '../types'
 
-import { cancelRAF, isNil, rAF } from '@idux/cdk/utils'
+import { isNil } from 'lodash-es'
+import { cancelRAF, rAF } from '@idux/cdk/utils'
 import { useItemKey } from './useItem'
 
 export const useScrollTo = (

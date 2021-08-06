@@ -1,7 +1,7 @@
 import type { ModalInstance, ModalOptions, ModalRef } from './types'
 
 import { defineComponent, ref, provide } from 'vue'
-import { callEmit, noop, toArray, uniqueId } from '@idux/cdk/utils'
+import { callEmit, noop, convertArray, uniqueId } from '@idux/cdk/utils'
 import Modal from './Modal'
 import { modalProviderToken } from './token'
 
@@ -91,7 +91,7 @@ const useModal = () => {
   }
 
   const destroy = (id: string | string[]) => {
-    const ids = toArray(id)
+    const ids = convertArray(id)
     ids.forEach(id => {
       const currIndex = getCurrIndex(id)
       if (currIndex !== -1) {

@@ -2,7 +2,8 @@ import type { ComputedRef, InjectionKey } from 'vue'
 import type { AbstractControl, ControlPathType } from './controls'
 
 import { inject, provide } from 'vue'
-import { isNil, IxPropTypes } from '@idux/cdk/utils'
+import { isNil } from 'lodash-es'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const controlPropDef = IxPropTypes.oneOfType<string | number | AbstractControl | null>([
   String,
@@ -25,12 +26,15 @@ export function injectControl(path?: ControlPathType): AbstractControl | null {
   return isNil(path) ? control : control.get(path)
 }
 
-const controlOrPathToken: InjectionKey<ComputedRef<AbstractControl | string | number>> = Symbol('controlOrPathToken')
+const controlOrPathToken: InjectionKey<ComputedRef<AbstractControl | string | null | number>> =
+  Symbol('controlOrPathToken')
 
-export function provideControlOrPath(controlOrPath: ComputedRef<AbstractControl | string | number | undefined>): void {
+export function provideControlOrPath(
+  controlOrPath: ComputedRef<AbstractControl | string | number | null | undefined>,
+): void {
   provide(controlOrPathToken, controlOrPath)
 }
 
-export function injectControlOrPath(): ComputedRef<AbstractControl | string | number | undefined> | null {
+export function injectControlOrPath(): ComputedRef<AbstractControl | string | number | null | undefined> | null {
   return inject(controlOrPathToken, null)
 }

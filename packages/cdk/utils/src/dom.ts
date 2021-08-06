@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ResizeObserver } from '@juggle/resize-observer'
-import { isString } from './typeof'
+import { isString } from 'lodash-es'
 
 type ElType = HTMLElement | Document | Window
 
@@ -139,7 +138,5 @@ export function throttleRAF<T extends (...args: any[]) => void>(
 
   return requestCb
 }
-
-export const stopPropagation = (e: MouseEvent): void => e.stopPropagation()
 
 export const noop = (): void => {}

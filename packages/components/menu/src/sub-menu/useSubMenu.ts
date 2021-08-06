@@ -4,7 +4,7 @@ import type { MenuMode, SubMenuProps } from '../types'
 import type { MenuContext, SubMenuContext, SetChildSelectStateFn, SetChildOpenStateFn } from '../token'
 
 import { computed, onMounted, onUnmounted, ref, toRaw, watch } from 'vue'
-import debounce from 'lodash/debounce'
+import { debounce } from 'lodash-es'
 import { useOverlay } from '@idux/cdk/overlay'
 
 export const useSubMenuClasses = (

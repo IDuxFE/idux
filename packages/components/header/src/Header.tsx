@@ -3,7 +3,8 @@ import type { AvatarProps } from '@idux/components/avatar'
 import type { HeaderProps } from './types'
 
 import { computed, defineComponent, h, isVNode } from 'vue'
-import { callEmit, getOffset, isString, offResize, onResize, toCssPixel } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
+import { callEmit, getOffset, offResize, onResize, convertCssPixel } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
@@ -140,7 +141,7 @@ function useDescriptionPaddingLeft() {
     if (!mainElement || !titleElement) {
       left = '0px'
     } else {
-      left = toCssPixel(getOffset(titleElement, mainElement).left)
+      left = convertCssPixel(getOffset(titleElement, mainElement).left)
     }
     paddingLeft.value = left
   }

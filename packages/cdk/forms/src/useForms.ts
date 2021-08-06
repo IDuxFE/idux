@@ -3,9 +3,9 @@
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions } from './types'
 import type { AbstractControl, ArrayElement, GroupControls } from './controls'
 
+import { isArray } from 'lodash-es'
 import { FormArray, FormControl, FormGroup } from './controls'
 import { isAbstractControl } from './typeof'
-import { isArray } from '@idux/cdk/utils'
 
 type ControlConfig<T> =
   | [T]
