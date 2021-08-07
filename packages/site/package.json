@@ -4,7 +4,7 @@
   "private": true,
   "description": "A website for @idux",
   "license": "MIT",
-  "author": "IduxFE<idux.feteam@gmail.com>",
+  "author": "IDuxFE<idux.feteam@gmail.com>",
   "scripts": {
     "start": "vite",
     "build": "vite build"

@@ -24,7 +24,7 @@ export const footerLocales = {
         {
           icon: '',
           title: '报告 Bug',
-          link: 'https://github.com/IduxFE/idux/issues',
+          link: 'https://github.com/IDuxFE/idux/issues',
           description: '',
         },
       ],
@@ -36,13 +36,13 @@ export const footerLocales = {
         {
           icon: '',
           title: 'Github',
-          link: 'https://github.com/IduxFE/idux',
+          link: 'https://github.com/IDuxFE/idux',
           description: '',
         },
         {
           icon: '',
           title: '讨论区',
-          link: 'https://github.com/IduxFE/idux/discussions',
+          link: 'https://github.com/IDuxFE/idux/discussions',
           description: '',
         },
         {
@@ -75,7 +75,7 @@ export const footerLocales = {
         {
           icon: '',
           title: 'Bug Report',
-          link: 'https://github.com/IduxFE/idux/issues',
+          link: 'https://github.com/IDuxFE/idux/issues',
           description: '',
         },
       ],
@@ -87,13 +87,13 @@ export const footerLocales = {
         {
           icon: '',
           title: 'Github',
-          link: 'https://github.com/IduxFE/idux',
+          link: 'https://github.com/IDuxFE/idux',
           description: '',
         },
         {
           icon: '',
           title: 'Discussions',
-          link: 'https://github.com/IduxFE/idux/discussions',
+          link: 'https://github.com/IDuxFE/idux/discussions',
           description: '',
         },
         {

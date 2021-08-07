@@ -9,11 +9,11 @@ title: 介绍
 
 <p class="home-badges">
 
-[![Build Status](https://dev.azure.com/iduxfeteam/IduxFE/_apis/build/status/IduxFE.idux?branchName=azure-pipelines)](https://dev.azure.com/iduxfeteam/IduxFE/_build/latest?definitionId=1&branchName=azure-pipelines)
+[![Build Status](https://dev.azure.com/iduxfeteam/IDuxFE/_apis/build/status/IDuxFE.idux?branchName=azure-pipelines)](https://dev.azure.com/iduxfeteam/IDuxFE/_build/latest?definitionId=1&branchName=azure-pipelines)
 [![CodeFactor](https://www.codefactor.io/repository/github/iduxfe/idux/badge)](https://www.codefactor.io/repository/github/iduxfe/idux)
-[![codecov](https://codecov.io/gh/IduxFE/idux/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IduxFE/idux)
+[![codecov](https://codecov.io/gh/IDuxFE/idux/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IDuxFE/idux)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/IduxFE/idux/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/IDuxFE/idux/blob/main/LICENSE)
 
 </p>
 
@@ -50,9 +50,9 @@ npm start
 
 ## 🤝 如何贡献
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/IduxFE/idux/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/IDuxFE/idux/pulls)
 
-在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/IduxFE/idux/blob/main/packages/site/src/docs/Contributing.zh.md)。如果你希望参与贡献，欢迎 [Pull Request](https://github.com/IduxFE/idux/pulls)，或给我们 [报告 Bug](https://github.com/IduxFE/idux/issues)。
+在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/IDuxFE/idux/blob/main/packages/site/src/docs/Contributing.zh.md)。如果你希望参与贡献，欢迎 [Pull Request](https://github.com/IDuxFE/idux/pulls)，或给我们 [报告 Bug](https://github.com/IDuxFE/idux/issues)。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
@@ -64,4 +64,4 @@ npm start
 
 ## ☀️ 授权协议
 
-[MIT](https://github.com/IduxFE/idux/blob/main/LICENSE) © 2020-present IduxFE
+[MIT](https://github.com/IDuxFE/idux/blob/main/LICENSE) © 2020-present IDuxFE

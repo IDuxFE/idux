@@ -6,7 +6,7 @@
       </FooterCol>
     </section>
     <section class="footer-bottom">
-      <div>Made with ❤ by IduxFE team</div>
+      <div>Made with ❤ by IDuxFE team</div>
     </section>
   </footer>
 </template>

@@ -35,9 +35,9 @@ issue:
     - labels:
         - Help Wanted
       replay: |
-        Hello @{user}. We totally like your proposal/feedback, welcome to [send us a Pull Request](https://help.github.com/en/articles/creating-a-pull-request) for it. Please fill the [Pull Request Template](https://github.com/IduxFE/idux/blob/master/.github/pull_request_template.md) here, provide documentation/test cases if needed and make sure CI passed, we will review it soon. Appreciate it advance and we are looking forward to your contribution!
+        Hello @{user}. We totally like your proposal/feedback, welcome to [send us a Pull Request](https://help.github.com/en/articles/creating-a-pull-request) for it. Please fill the [Pull Request Template](https://github.com/IDuxFE/idux/blob/master/.github/pull_request_template.md) here, provide documentation/test cases if needed and make sure CI passed, we will review it soon. Appreciate it advance and we are looking forward to your contribution!
 
-        你好 @{user}, 我们完全同意你的提议/反馈，欢迎直接在此仓库 [创建一个 Pull Request](https://help.github.com/en/articles/creating-a-pull-request) 来解决这个问题。请务必填写 Pull Request 内的[预设模板](https://github.com/IduxFE/idux/blob/master/.github/pull_request_template.md)，提供改动所需相应的测试用例、文档等，并确保 CI 通过，我们会尽快进行 Review，提前感谢和期待您的贡献！
+        你好 @{user}, 我们完全同意你的提议/反馈，欢迎直接在此仓库 [创建一个 Pull Request](https://help.github.com/en/articles/creating-a-pull-request) 来解决这个问题。请务必填写 Pull Request 内的[预设模板](https://github.com/IDuxFE/idux/blob/master/.github/pull_request_template.md)，提供改动所需相应的测试用例、文档等，并确保 CI 通过，我们会尽快进行 Review，提前感谢和期待您的贡献！
         ![](https://user-images.githubusercontent.com/507615/62342668-4735dc00-b51a-11e9-92a7-d46fbb1cc0c7.gif)
     - labels:
         - Upgrade Dependencies
@@ -54,7 +54,7 @@ issue:
         Hello @{user}, we use GitHub issues to trace bugs or discuss plans of @idux. So, please don't ask usage questions here.
         You can try to ask questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/idux) or [Segment Fault](https://segmentfault.com/t/idux), then apply tag `idux` to your question.
 
-        你好 @{user}，Idux Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。
+        你好 @{user}，IDux Issue 板块是用于 bug 反馈与需求讨论的地方，请勿询问如何使用的问题。
         你可以试着在 [Stack Overflow](http://stackoverflow.com/questions/tagged/idux) 或者 [Segment Fault](https://segmentfault.com/t/idux) 中提问（记得添加 `idux` 标签）。
   owner:
     cdk:
