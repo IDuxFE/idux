@@ -13,24 +13,24 @@
     "components",
     "pro"
   ],
-  "homepage": "https://github.com/IduxFE/idux#readme",
+  "homepage": "https://github.com/IDuxFE/idux#readme",
   "bugs": {
-    "url": "https://github.com/IduxFE/idux/issues"
+    "url": "https://github.com/IDuxFE/idux/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IduxFE/idux"
+    "url": "https://github.com/IDuxFE/idux"
   },
   "license": "MIT",
-  "author": "IduxFE<idux.feteam@gmail.com>",
+  "author": "IDuxFE<idux.feteam@gmail.com>",
   "main": "./index.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
   "style": "./index.css",
   "scripts": {},
   "peerDependencies": {
-    "@idux/cdk": "^0.0.0",
-    "@idux/components": "^0.0.0",
+    "@idux/cdk": "^0.1.0",
+    "@idux/components": "^0.1.0",
     "vue": "^3.0.0"
   }
 }

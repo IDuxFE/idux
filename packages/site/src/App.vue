@@ -61,7 +61,7 @@ export default defineComponent({
     const screens = useScreens()
 
     const appContext: AppContext = {
-      org: 'IduxFE',
+      org: 'IDuxFE',
       repo: 'components',
       lang: ref('zh'),
       path,

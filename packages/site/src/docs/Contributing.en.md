@@ -8,15 +8,15 @@ This guide will guild you how to contribute to `@idux`. Please take a fill minut
 
 ## Code of conduct
 
-We have a [code of conduct](https://github.com/IduxFE/idux/blob/main/CODE_OF_CONDUCT.md). I hope that all contributors can comply. Please take the time to read the full text to make sure you understand what can and cannot be done.
+We have a [code of conduct](https://github.com/IDuxFE/idux/blob/main/CODE_OF_CONDUCT.md). I hope that all contributors can comply. Please take the time to read the full text to make sure you understand what can and cannot be done.
 
 ## Fair development
 
-All our work will be on [GitHub](https://github.com/IduxFE/idux). Pull requests from the core team members and external contributors need to go through the same review process.
+All our work will be on [GitHub](https://github.com/IDuxFE/idux). Pull requests from the core team members and external contributors need to go through the same review process.
 
 ## Bugs
 
-We use [Issues](https://github.com/IduxFE/idux/issues) to track bugs. If you want the bug you find to be resolved quickly, the best way is to raise an issue through the [issue assistant(TODO)](./) we provide, and use the [template(TODO)](./) to provide reproduction.
+We use [Issues](https://github.com/IDuxFE/idux/issues) to track bugs. If you want the bug you find to be resolved quickly, the best way is to raise an issue through the [issue assistant(TODO)](./) we provide, and use the [template(TODO)](./) to provide reproduction.
 
 Before you report a bug, please make sure you have searched the existing issue and read our [question(TODO)](./).
 
@@ -31,7 +31,7 @@ If you are not sure how to submit a Pull Request on GitHub, you can read the fol
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 - [First Contributions](https://github.com/firstcontributions/first-contributions)
 
-To help you start your first attempt, we use [Good First Issue](https://github.com/IduxFE/idux/labels/good%20first%20issue) to mark some bugs and small ones that are easier to fix. These issues can serve well as your first attempt.
+To help you start your first attempt, we use [Good First Issue](https://github.com/IDuxFE/idux/labels/good%20first%20issue) to mark some bugs and small ones that are easier to fix. These issues can serve well as your first attempt.
 
 If you plan to start working on an issue, please check the comments under issue first to make sure that no one else is working on the issue. If no one is currently working on it, you can leave a message to inform others that you will deal with this issue to avoid duplication of work by others.
 
@@ -39,7 +39,7 @@ If someone left a message saying that this issue will be dealt with but there is
 
 ## Contribute code
 
-The `IduxFE` team will pay attention to all Pull Requests. We will review and merge your code. We may also ask you to make some changes or tell you why we cannot accept such changes.
+The `IDuxFE` team will pay attention to all Pull Requests. We will review and merge your code. We may also ask you to make some changes or tell you why we cannot accept such changes.
 
 **Before you send the Pull Request** , please make sure you follow the steps below:
 
@@ -53,7 +53,7 @@ The `IduxFE` team will pay attention to all Pull Requests. We will review and me
 ## How to make a Pull Request
 
 - Fork this repository, all the following operations are performed on the repository after fork;
-- Run in the `main` branch: `git remote add upstream https://github.com/IduxFE/idux.git`;
+- Run in the `main` branch: `git remote add upstream https://github.com/IDuxFE/idux.git`;
 - Run in the `main` branch: `git pull upstream main`;
 - Run in the `main` branch: `git push origin main`;
 - Switch to the feature branch you want to work on (for example, there is a branch called `docs-fix`): `git checkout docs-fix`;
@@ -143,7 +143,7 @@ Any line of the submitted message cannot exceed 100 characters! Make sure that t
 
 The footnote should include [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/) if any.
 
-Example: ([More examples](https://github.com/IduxFE/idux/commits/main)).
+Example: ([More examples](https://github.com/IDuxFE/idux/commits/main)).
 
 ```vim
 docs(changelog): update change log to beta.5

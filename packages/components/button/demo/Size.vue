@@ -7,7 +7,7 @@
   <ix-button :size="size">Default</ix-button>
   <ix-button mode="dashed" :size="size">Dashed</ix-button>
   <ix-button mode="text" :size="size">Text</ix-button>
-  <ix-button mode="link" :size="size" href="https://github.com/IduxFE/idux" target="_blank">Link</ix-button>
+  <ix-button mode="link" :size="size" href="https://github.com/IDuxFE/idux" target="_blank">Link</ix-button>
 </template>
 
 <script lang="ts">

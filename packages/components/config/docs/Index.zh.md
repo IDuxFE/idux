@@ -95,6 +95,6 @@ export function useGlobalConfig<T extends GlobalConfigKey>(compName: T, config: 
 
 #### 查看所有可用的全局配置项
 
-[`GlobalConfig`](https://github.com/IduxFE/idux/blob/master/packages/components/core/config/types.ts) 接口提供的类型定义信息能够帮助你找到所有支持全局配置项的组件和属性。
+[`GlobalConfig`](https://github.com/IDuxFE/idux/blob/master/packages/components/core/config/types.ts) 接口提供的类型定义信息能够帮助你找到所有支持全局配置项的组件和属性。
 
 另外，每个组件的文档都会指出哪些属性可以通过全局配置项的方式指定。

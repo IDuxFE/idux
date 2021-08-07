@@ -12,16 +12,16 @@
     "component",
     "components"
   ],
-  "homepage": "https://github.com/IduxFE/idux#readme",
+  "homepage": "https://github.com/IDuxFE/idux#readme",
   "bugs": {
-    "url": "https://github.com/IduxFE/idux/issues"
+    "url": "https://github.com/IDuxFE/idux/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IduxFE/idux"
+    "url": "https://github.com/IDuxFE/idux"
   },
   "license": "MIT",
-  "author": "IduxFE<idux.feteam@gmail.com>",
+  "author": "IDuxFE<idux.feteam@gmail.com>",
   "main": "./index.js",
   "module": "./index.js",
   "typings": ".index.d.ts",
