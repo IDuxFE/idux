@@ -133,12 +133,11 @@
     text-decoration: none;
   }
   &:active {
-    outline: 0;
     box-shadow: none;
   }
 
   &-small {
-    .button-size(@button-height-sm; @button-font-size-sm;  @button-padding-sm;@button-border-radius);
+    .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius);
   }
   &-large {
     .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius);
@@ -205,7 +204,7 @@
   &:focus,
   &:active {
     & when (@theme = default) {
-      .button-color( ~`colorPalette('@{button-danger-color}', 10) `; @button-default-bg; ~`colorPalette('@{button-danger-color}', 20) `);
+      .button-color(~`colorPalette('@{button-danger-color}', 10) `; @button-default-bg; ~`colorPalette('@{button-danger-color}', 20) `);
     }
   }
   .button-disabled();
