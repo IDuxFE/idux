@@ -11,7 +11,7 @@ import type {
 } from './types'
 
 import { computed, shallowReadonly, shallowRef, ref, toRaw, watch, watchEffect } from 'vue'
-import { isArray, isNil, isObject } from 'lodash-es'
+import { isArray, isNil, isPlainObject } from 'lodash-es'
 import { hasOwnProperty } from '@idux/cdk/utils'
 import { Validators } from './validators'
 
@@ -20,7 +20,7 @@ type IsNullable<T, K> = undefined extends T ? K : never
 type OptionalKeys<T> = { [K in keyof T]-?: IsNullable<T[K], K> }[keyof T]
 
 function isOptions(val?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null): val is ValidatorOptions {
-  return isObject(val) && !isArray(val)
+  return isPlainObject(val)
 }
 
 function toValidator(validator?: ValidatorFn | ValidatorFn[] | null): ValidatorFn | null {

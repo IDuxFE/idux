@@ -12,4 +12,3 @@ order: 0
 ## en
 
 The simplest usage.
-

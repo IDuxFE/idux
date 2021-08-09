@@ -2,8 +2,9 @@
 category: components
 type: 数据展示
 title: Table
-subtitle:
+subtitle: 表格
 order: 0
+single: true
 ---
 
 
@@ -23,7 +24,7 @@ order: 0
 | `expandable` | 配置展开属性 | `[TableExpandable](#TableExpandable)` | - | - | - |
 | `extra` | 表格扩展配置 | `[TableExtra](#TableExtra)` | - | - | 可以用于管理列的显隐、排序 |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
-| `pagination` | 配置分页器 | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
+| `pagination` | 配置分页器 | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record, index: number) => string` | - | - | - |
 | `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `id` | ✅ | - |
 | `selectable` | 列表项是否可选择 | `[TableSelectable](#TableSelectable)` | - | - | - |

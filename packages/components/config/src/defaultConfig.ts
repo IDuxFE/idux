@@ -33,6 +33,7 @@ import type {
   PaginationConfig,
   ModalConfig,
   AvatarConfig,
+  TableConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -168,6 +169,21 @@ const statistic = shallowReactive<StatisticConfig>({
   formatter: numFormatter,
 })
 
+const table = shallowReactive<TableConfig>({
+  borderless: true,
+  rowKey: 'id',
+  size: 'medium',
+
+  extra: { icon: 'ellipsis' },
+  pagination: { position: 'bottomEnd' },
+
+  columnBase: {
+    align: 'start',
+    sortable: { directions: ['ascend', 'descend', null], showTooltip: true },
+  },
+  columnExpandable: { icon: ['plus', 'minus'] },
+})
+
 const tooltip = shallowReactive<TooltipConfig>({
   autoAdjust: true,
   delay: 100,
@@ -261,6 +277,7 @@ export const defaultConfig: GlobalConfig = {
   collapse,
   image,
   statistic,
+  table,
   tooltip,
   popover,
   // Feedback

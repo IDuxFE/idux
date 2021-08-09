@@ -2,7 +2,7 @@ import type { VNode, VNodeChild } from 'vue'
 
 import { Comment, Fragment, Slots, Text } from 'vue'
 
-import { getFirstValidNode, getSlotNodes, isValidElementNode } from '../src/vNode'
+import { getFirstValidNode, getSlotNodes } from '../src/vNode'
 
 const TEMPLATE = 'template'
 
@@ -44,17 +44,6 @@ describe('vNode.ts', () => {
     expect(getFirstValidNode(vNode as VNodeChild, 0)).toEqual(vNode)
     expect(getFirstValidNode(arrayValue as VNodeChild, 1)).toEqual(vNode)
     expect(getFirstValidNode(vNode as VNodeChild, 1)).toEqual(vNode)
-  })
-
-  test('isValidElementNode work', async () => {
-    vNode.type = Comment
-    expect(isValidElementNode(vNode as VNodeChild)).toBeFalsy()
-
-    vNode.type = Fragment
-    expect(isValidElementNode(vNode as VNodeChild)).toBeFalsy()
-
-    vNode.type = Text
-    expect(isValidElementNode(vNode as VNodeChild)).toBeTruthy()
   })
 
   test('getSlotNodes work', () => {

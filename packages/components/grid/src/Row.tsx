@@ -1,7 +1,7 @@
 import type { RowConfig } from '@idux/components/config'
 import type { ComputedRef, CSSProperties } from 'vue'
 import type { RowGutter, RowProps } from './types'
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
+import type { Screens } from '@idux/cdk/breakpoint'
 
 import { defineComponent, computed, provide } from 'vue'
 import { isObject, isArray, isUndefined } from 'lodash-es'
@@ -66,7 +66,7 @@ function useStyle(gutter: ComputedRef<[number, number]>) {
 }
 
 // gutter: RowGutter => [0, 0]
-function normalizeGutter(propGutter: RowGutter, screens: Record<BreakpointKey, boolean>) {
+function normalizeGutter(propGutter: RowGutter, screens: Screens) {
   const results: [number, number] = [0, 0]
 
   const normalizedGutters = isArray(propGutter) ? propGutter : [propGutter, 0]
