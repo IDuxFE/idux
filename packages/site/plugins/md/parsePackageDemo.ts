@@ -14,7 +14,7 @@ export function parsePackageDemo(id: string, raw: string): string {
   const demoName = withoutSuffix(filename)
   const { __content: content, title } = loadFront(raw)
 
-  const { zhDescription, enDescription, code } = parseContent(id, content, demoName)
+  const { zhDescription, enDescription, codeHtml, code } = parseContent(id, content, demoName)
 
   return getDemoTemplate({
     packageName,
@@ -24,6 +24,7 @@ export function parsePackageDemo(id: string, raw: string): string {
     enTitle: title.en,
     zhDescription,
     enDescription,
+    codeHtml,
     code,
   })
 }
@@ -53,14 +54,16 @@ function parseContent(id: string, content: string, demoName: string) {
   })
 
   let code = ''
+  let codeHtml = ''
 
   const vueFilename = demoName + '.vue'
   const vueFilepath = join(dirname(id), vueFilename)
   if (existsSync(vueFilepath)) {
-    code = marked(_remark.stringify({ type: 'code', lang: 'html', value: readFileSync(vueFilepath, 'utf-8') }))
+    code = readFileSync(vueFilepath, 'utf-8')
+    codeHtml = marked(_remark.stringify({ type: 'code', lang: 'html', value: code }))
   } else {
     console.warn(`The demo source file ${vueFilepath} not exist`)
   }
 
-  return { zhDescription: nonBindAble(zh), enDescription: nonBindAble(en), code }
+  return { zhDescription: nonBindAble(zh), enDescription: nonBindAble(en), codeHtml, code }
 }
