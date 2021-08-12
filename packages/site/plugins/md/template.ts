@@ -56,30 +56,30 @@ export const getDemoTemplate = (options: {
   enTitle: string
   zhDescription: string
   enDescription: string
+  codeHtml: string
   code: string
 }): string => {
-  const { packageName, componentName, demoName, zhTitle, enTitle, zhDescription, enDescription, code } = options
+  const { packageName, componentName, demoName, zhTitle, enTitle, zhDescription, enDescription, codeHtml, code } =
+    options
   return `
 <template>
   <global-code-box
     packageName="${packageName}"
     componentName="${componentName}"
     demoName="${demoName}"
+    code="${encodeURIComponent(code)}"
     :title="lang==='zh' ? '${zhTitle}' : '${enTitle}'"
-    :copied="copied"
-    @copy="onCopy"
   >
     <template #description>
     <span v-if="lang==='zh'">${zhDescription}</span>
     <span v-if="lang==='en'">${enDescription}</span>
     </template>
     <template #rawCode><raw-demo></raw-demo></template>
-    <template #highlightCode><div v-pre>${code}</div></template>
+    <template #highlightCode><div v-pre>${codeHtml}</div></template>
   </global-code-box>
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'
-import { useClipboard } from '@idux/cdk/clipboard'
 import { appContextToken } from '@idux/site/context'
 import ${demoName} from './${demoName}.vue'
 
@@ -87,20 +87,8 @@ export default defineComponent({
   name: '${packageName}-${componentName}-${demoName}',
   components:{ 'raw-demo': ${demoName} },
   setup() {
-    const { copy } = useClipboard()
-    const copied = ref(false)
-    const onCopy = () => {
-      if (copied.value) { return }
-      // TODO 
-      copy('copied').then(successful => {
-        copied.value = true
-        console.log('copied ', successful)
-        setTimeout(() => (copied.value = false), 1000)
-      })
-    }
-
     const { lang } = inject(appContextToken)!
-    return { copied, onCopy, lang }
+    return { lang }
   },
 })
 </script>

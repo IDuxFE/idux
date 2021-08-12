@@ -26,7 +26,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, SetupContext } from 'vue'
+import { computed, defineComponent, ref, inject } from 'vue'
+import { useClipboard } from '@idux/cdk/clipboard'
+import { throttle } from 'lodash-es'
+import { useMessage } from '@idux/components/message'
+import { appContextToken } from '../../context'
 
 export default defineComponent({
   name: 'GlobalCodeBox',
@@ -36,9 +40,11 @@ export default defineComponent({
     componentName: { type: String, default: '' },
     demoName: { type: String, default: '' },
     copied: { type: Boolean, default: false },
+    code: { type: String, default: '' },
   },
-  emits: ['copy'],
-  setup(props, { emit }: SetupContext) {
+  setup(props) {
+    const { lang } = inject(appContextToken)!
+
     const id = computed(() => `${props.packageName}-${props.componentName}-demo-${props.demoName}`)
 
     const editHref = computed(() => {
@@ -48,7 +54,14 @@ export default defineComponent({
 
     const expanded = ref(false)
 
-    const onCopy = () => emit('copy')
+    const { copy } = useClipboard()
+    const { success } = useMessage()
+
+    const onCopy = throttle(() => {
+      copy(decodeURIComponent(props.code)).then(() => {
+        success(lang.value === 'zh' ? '复制成功' : 'copy succeeded')
+      })
+    }, 300)
 
     return { id, editHref, expanded, onCopy }
   },
@@ -134,6 +147,7 @@ export default defineComponent({
       margin: 0 @spacing-xs;
       color: @text-color-secondary;
       opacity: 0.7;
+      cursor: pointer;
       &:hover {
         color: @primary;
         opacity: 1;
