@@ -7,8 +7,6 @@ order: 0
 single: true
 ---
 
-
-
 ## API
 
 ### ix-table
@@ -36,17 +34,13 @@ single: true
 
 #### TableColumn
 
+表格列的配置描述，`T` 为 `dataSource` 的数据类型。
+
 ```ts
 export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
 ```
 
 #### TableColumnCommon
-
-```ts
-export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
-```
-
-#### TableColumnBase
 
 列配置的公用属性。
 
@@ -56,53 +50,95 @@ export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandabl
 | `align` | 文本对齐方式 | `'start' \| 'right' \| 'end'` | `'start'` | ✅ | - |
 | `colSpan` | 计算列的 `colSpan` | `(record: T, index: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |
 | `fixed` | 是否固定 | `'start' \| 'end'` | - | - | - |
+| `responsive` | 响应式 breakpoint 配置列表 | `BreakpointKey[]` | - | - | - |
 | `rowSpan` | 计算列的 `rowSpan` | `(record: T, index: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |
 | `titleColSpan` | 设置表头的 `colSpan` | - | - | - | 为 `0` 时，不渲染 |
 | `width` | 列宽度 | `string \| number` | - | - | - |
 
-```ts
-export interface TablePagination extends PaginationProps {
-  position: 'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
-}
+#### TableColumnBase
 
-export interface TableTags {
-  table?: VNodeTypes
-  head?: {
-    thead?: VNodeTypes
-    tr?: VNodeTypes
-    th?: VNodeTypes
-  }
-  body?: {
-    tbody?: VNodeTypes
-    tr?: VNodeTypes
-    td?: VNodeTypes
-  }
-}
-```
-
-#### TableSlots
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `footer` | 表格尾部 | - | - |
-| `header` | 表格头部 | - | - |
-| `summary` | 表格总结栏 | - | - |
-
-#### TableExpandable
+普通列配置的属性，继承 `TableColumnCommon` 。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `enabled` |  设置是否允许行展开 | `(record, index) => boolean` | - | - | - |
-| `fixed` |  列是否固定 | `'left' \| 'right'` | - | - | - |
-| `icon` | 展开按钮图标 | `[string, string] \| (options:TableExpandIconRenderOptions)=> VNodeTypes  \| #expandIcon="TableExpandIconRenderOptions"` | - | - | - |
+| `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
+| `customRender` | 自定义列内容 | `string \| TableColumnRenderFn<any, T>` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customTitle` | 自定义列头 | `string \| TableColumnTitleFn` | - | - | 类型为 `string` 时，对应插槽名 |
+| `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
+| `editable` | 是否可编辑 | `boolean` | `false` | - | - |
+| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 不支持和排序筛选一起使用 |
+| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
+| `sortable` | 是否可排序 | `[TableColumnSortable](#TableColumnSortable)` | - | - | - |
+| `title` | 列头的文本 | `string` | - | - | - |
+
+```ts
+export interface TableColumnRenderOption<V = any, T = unknown> {
+  value: V
+  record: T
+  index: number
+}
+export type TableColumnRenderFn<V = any, T = unknown> = (options: TableColumnRenderOption<V, T>) => VNodeTypes
+export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
+```
+
+#### TableColumnExpandable
+
+可展开列配置的属性，继承 `TableColumnCommon`
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
+| `customExpand` | 自定义展开内容 | `string \| TableColumnExpandableExpandFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customIcon` | 自定义展开图标 | `string \| TableColumnExpandableIconFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
+| `enabled` |  设置是否允许行展开 | `(record:T, index: number) => boolean` | - | - | - |
+| `icon` | 展开按钮图标 | `[string, string]` | `['plus', 'minus']` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
-| `index` | 自定义展开按钮的列顺序 | `number` | `0` | - | `< 0` 时不展示 |
-| `rowKeys` | 展开行的 `key` | `(string | number)[]` | - | - | - |
-| `render` | 展开内容的渲染函数 | `(options:TableExpandRenderOptions)=> VNodeTypes \| #expandRender="TableExpandRenderOptions"` | - | - | - |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
-| `width` | 列宽度 | `string \| number` | - | - | - |
-| `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys, expendedRecords) => void` | - | - | - |
-| `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded:boolean, record) => void` | - | - | - |
+| `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string | number)[]) => void` | - | - | - |
+| `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |
+
+```ts
+export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; index: number }) => VNodeTypes
+export type TableColumnExpandableIconFn<T = unknown> = (options: {
+  expanded: boolean
+  record: T
+  onExpand: () => void
+}) => VNodeTypes
+```
+
+#### TableColumnSelectable
+
+可选择列配置的属性，继承 `TableColumnCommon`
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 列类型 | `'selectable'` | - | - | `type` 设置为 `selectable`,即为选择列 |
+| `enabled` |  设置是否允许行选择 | `(record: T, index: number) => boolean` | - | - | - |
+| `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
+| `options` | 自定义列头选择项 | `boolean \| TableSelectableSelection[]` | `false` | - | 为 `false` 时，不显示，为 `true` 时，显示默认的选择项 |
+| `trigger` | 不通过 `type`，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
+| `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string | number)[]) => void` | - | - | - |
+| `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected: boolean, record: T) => void` | - | - | - |
+| `onSelectAll` | 选择所有行时触发 | `(selectedRowKeys: (string | number)[]) => void` | - | - | - |
+| `onSelectInvert` | 反选时触发 | `(selectedRowKeys: (string | number)[]) => void` | - | - | - |
+| `onSelectNone` | 清空选择时触发 | `() => void` | - | - | - |
+
+```ts
+export interface TableColumnSelectableOption {
+  key: string | number
+  text: string
+  onClick: (selectedRowKeys: (string | number)[]) => void
+}
+```
+
+#### TableColumnSortable
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `directions` | 支持的排序方式 | `Array<'ascend' \| 'descend' \| null>` | `['ascend', 'descend', null]` | ✅ | - |
+| `order` | 筛选菜单可见状态变化时调用 | `'ascend' \| 'descend' \| null` | - | - | - |
+| `showTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `true` | ✅ | - |
+| `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
 
 #### TableExtra
 
@@ -114,32 +150,17 @@ export interface TableTags {
 | `options` | 扩展菜单选项 | `TableExtraOption[]` | - | - | - |
 | `onDropDownVisibleChange` | 筛选菜单可见状态变化时调用 | `(visible) => void` | - | - | - |
 
-#### TableSelectable
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `enabled` |  设置是否允许行选择 | `(record, index) => boolean` | - | - | - |
-| `fixed` |  列是否固定 | `'left' \| 'right'` | - | - | - |
-| `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
-| `rowKeys` | 已选择行的 `key` | `(string \| number)[]` | - | - | - |
-| `selections` | 自定义列头选择项 | `boolean \| TableSelectableSelection[]` | `false` | - | 为 `true` 时，显示默认的选择项 |
-| `trigger` | 不通过 `type`，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
-| `width` | 列宽度 | `string \| number` | - | - | - |
-| `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys, selectedRecords) => void` | - | - | - |
-| `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected:boolean, record) => void` | - | - | - |
-| `onSelectAll` | 选择所有行时触发 | `(selectedRowKeys) => void` | - | - | - |
-| `onSelectInvert` | 反选时触发 | `(selectedRowKeys) => void` | - | - | - |
-| `onSelectNone` | 清空选择时触发 | `() => void` | - | - | - |
+#### TablePagination
 
 ```ts
-export interface TableSelectableSelection {
-  key: string | number
-  text: string
-  onClick: (selectedRowKeys: (string | number)[]) => void
+export interface TablePagination extends PaginationProps {
+  position: TablePaginationPosition
 }
+export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
+
 ```
 
-#### TableScrollable
+#### TableScroll
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -147,38 +168,10 @@ export interface TableSelectableSelection {
 | `x` |  设置横向滚动，也可用于指定滚动区域的宽 | `string \| number \| boolean` | - | - | 可以设置为像素值，百分比， `max-content` 和 `true` |
 | `y` |  设置纵向滚动，也可用于指定滚动区域的高 | `string \| number` | - | - | 可以设置为像素值 |
 
-### ix-table-column
+#### TableSlots
 
-#### TableColumnProps
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `align` | 文本对齐方式 | `'left' \| 'right' \| 'center'` | `'left'` | ✅ | - |
-| `colSpan` | 列合并 | `number` | - | - | 设置为 `0` 时，不渲染 |
-| `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
-| `editable` | 是否可编辑 | `boolean` | `false` | - | - |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 不支持和排序筛选一起使用 |
-| `fixed` | 是否固定 | `'left' \| 'right'` | - | - | - |
-| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
-| `render` | 自定义 `render` | `(options: TableColumnRenderOptions): VNode | object \| #render="TableColumnRenderOptions"` | - | - | 返回 object 时，可以返回行/列合并的对象。 |
-| `responsive` | 响应式 breakpoint 配置列表 | `BreakpointKey[]` | - | - | - |
-| `sortable` | 是否可排序 | `[TableColumnSortable](#TableColumnSortable)` | - | - | - |
-| `title` | 列头文本 | `string \| #title` | - | - | - |
-| `width` | 列宽度 | `string \| number` | - | - | - |
-
-#### TableColumnSortable
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `directions` | 支持的排序方式 | `Array<'ascend' | 'descend'>` | `['ascend', 'descend']` | ✅ | - |
-| `order` | 筛选菜单可见状态变化时调用 | `'ascend' \| 'descend'` | - | - | - |
-| `showTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `true` | ✅ | - |
-| `onSort` | 本地模式下，排序的运行函数 | `(curr, next) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
-
-### ix-table-column-group
-
-#### TableColumnGroupProps
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `title` | 列头文本 | `string \| #title` | - | - | - |
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `footer` | 表格尾部 | - | - |
+| `header` | 表格头部 | - | - |
+| `summary` | 表格总结栏 | - | - |

@@ -48,6 +48,7 @@ export interface TableColumnCommon<T = unknown> {
   align?: TableColumnAlign
   colSpan?: (record: T, index: number) => number
   fixed?: TableColumnFixed
+  responsive?: BreakpointKey[]
   rowSpan?: (record: T, index: number) => number
   titleColSpan?: number
   width?: string | number
@@ -58,7 +59,6 @@ export interface TableColumnBase<T = unknown> extends TableColumnCommon<T> {
   editable?: boolean
   ellipsis?: boolean
   key?: string | number
-  responsive?: BreakpointKey[]
   sortable?: TableColumnSortable<T>
   title?: string
 
@@ -78,18 +78,17 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
 export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T> {
   type: 'expandable'
+  customExpand?: string | TableColumnExpandableExpandFn<T>
+  customIcon?: string | TableColumnExpandableIconFn<T>
 
   enabled?: (record: T, index: number) => boolean
+  // remove ?
   icon?: [string, string]
   indent?: number
-  responsive?: BreakpointKey[]
   trigger?: 'click' | 'dblclick'
 
   onChange?: (expendedRowKeys: (string | number)[]) => void
   onExpand?: (expanded: boolean, record: T) => void
-
-  customExpand?: string | TableColumnExpandableExpandFn<T>
-  customIcon?: string | TableColumnExpandableIconFn<T>
 }
 
 export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; index: number }) => VNodeTypes
@@ -104,8 +103,8 @@ export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T>
 
   enabled?: (record: T, index: number) => boolean
   multiple?: boolean
-  options?: TableColumnSelectableOption[]
-  responsive?: BreakpointKey[]
+  options?: boolean | TableColumnSelectableOption[]
+
   trigger?: 'click' | 'dblclick'
 
   onChange?: (selectedRowKeys: (string | number)[]) => void
@@ -113,8 +112,6 @@ export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T>
   onSelectAll?: (selectedRowKeys: (string | number)[]) => void
   onSelectInvert?: (selectedRowKeys: (string | number)[]) => void
   onSelectNone?: () => void
-
-  customTitle?: string | TableColumnTitleFn
 }
 
 export interface TableColumnSelectableOption {
