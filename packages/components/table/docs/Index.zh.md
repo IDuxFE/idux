@@ -17,22 +17,48 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
+| `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
-| `columns` | 表格列的配置描述 | `[ColumnProps](#ColumnProps)[]` | - | - | - |
+| `columns` | 表格列的配置描述 | `[TableColumn](#TableColumn)[]` | - | - | - |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `expandable` | 配置展开属性 | `[TableExpandable](#TableExpandable)` | - | - | - |
 | `extra` | 表格扩展配置 | `[TableExtra](#TableExtra)` | - | - | 可以用于管理列的显隐、排序 |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器 | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record, index: number) => string` | - | - | - |
 | `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `id` | ✅ | - |
-| `selectable` | 列表项是否可选择 | `[TableSelectable](#TableSelectable)` | - | - | - |
-| `scrollable` | 表格是否可滚动，也可以指定滚动区域的宽、高 | `[TableScrollable](#TableScrollable)` | - | - | - |
+| `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高 | `[TableScrollable](#TableScrollable)` | - | - | - |
 | `size` | 表格大小 | `'large' \| 'medium' \| 'small'` | `medium` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
 | `tags` | 覆盖默认的表格元素 | `TableTags` | - | - | - |
+
+#### TableColumn
+
+```ts
+export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
+```
+
+#### TableColumnCommon
+
+```ts
+export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
+```
+
+#### TableColumnBase
+
+列配置的公用属性。
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `additional` | 列的扩展属性 | `object` | - | 可以用于设置列的 `class`, `style` 或者其他属性 |
+| `align` | 文本对齐方式 | `'start' \| 'right' \| 'end'` | `'start'` | ✅ | - |
+| `colSpan` | 计算列的 `colSpan` | `(record: T, index: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |
+| `fixed` | 是否固定 | `'start' \| 'end'` | - | - | - |
+| `rowSpan` | 计算列的 `rowSpan` | `(record: T, index: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |
+| `titleColSpan` | 设置表头的 `colSpan` | - | - | - | 为 `0` 时，不渲染 |
+| `width` | 列宽度 | `string \| number` | - | - | - |
 
 ```ts
 export interface TablePagination extends PaginationProps {

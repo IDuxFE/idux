@@ -47,8 +47,8 @@ export interface TableColumnCommon<T = unknown> {
   }
   align?: TableColumnAlign
   colSpan?: (record: T, index: number) => number
-  rowSpan?: (record: T, index: number) => number
   fixed?: TableColumnFixed
+  rowSpan?: (record: T, index: number) => number
   titleColSpan?: number
   width?: string | number
 }
