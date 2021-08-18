@@ -28,7 +28,7 @@ export default defineComponent({
       const HeadColTag = headColTag.value as any
       return (
         <HeadColTag {...mergedProps} {...additional}>
-          <span class="ix-table-th-content">{children}</span>
+          {children}
         </HeadColTag>
       )
     }
@@ -37,11 +37,12 @@ export default defineComponent({
 
 function useClasses(props: TableHeadColProps) {
   return computed(() => {
-    const { align, ellipsis } = props
+    const { align, ellipsis, hasChildren } = props
     const prefixCls = 'ix-table-th'
     return {
       [prefixCls]: true,
-      [`${prefixCls}-align-${align}`]: true,
+      [`${prefixCls}-align-${align}`]: !hasChildren,
+      [`${prefixCls}-align-center`]: hasChildren,
       [`${prefixCls}-ellipsis`]: ellipsis,
     }
   })

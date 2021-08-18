@@ -185,6 +185,7 @@ export const tableHeadColProps = {
   colStart: IxPropTypes.number,
   colEnd: IxPropTypes.number,
   ellipsis: IxPropTypes.bool,
+  hasChildren: IxPropTypes.bool,
   title: IxPropTypes.string,
 
   customTitle: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnTitleFn>()]),
