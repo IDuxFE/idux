@@ -1,0 +1,16 @@
+.table-size(@size, @padding-vertical, @padding-horizontal, @font-size) {
+  .@{table-prefix}-@{size} {
+    font-size: @font-size;
+
+    .@{table-prefix}-thead > .@{table-prefix}-tr > .@{table-prefix}-th,
+    .@{table-prefix}-tbody > .@{table-prefix}-tr > .@{table-prefix}-td {
+      padding: @padding-vertical @padding-horizontal;
+    }
+
+    // TODO: Nest Table
+  }
+}
+
+.table-size(~'large', @table-padding-vertical, @table-padding-horizontal, @table-font-size);
+.table-size(~'medium', @table-padding-vertical-md, @table-padding-horizontal-md, @table-font-size-md);
+.table-size(~'small', @table-padding-vertical-sm, @table-padding-horizontal-sm, @table-font-size-sm);
