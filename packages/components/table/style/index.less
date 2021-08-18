@@ -6,49 +6,30 @@
 
 @table-prefix: ~'@{idux-prefix}-table';
 
-@table-bg: @background-color-component;
-@table-header-bg: @background-color-light;
-@table-header-color: @heading-color;
-@table-header-sort-bg: @background-color-base;
-@table-body-sort-bg: #fafafa;
-@table-row-hover-bg: @background-color-light;
-@table-selected-row-color: inherit;
-@table-selected-row-bg: @primary-l50;
-@table-body-selected-sort-bg: @table-selected-row-bg;
-@table-selected-row-hover-bg: darken(@table-selected-row-bg, 2%);
-@table-expanded-row-bg: #fbfbfb;
-@table-padding-vertical: 16px;
-@table-padding-horizontal: 16px;
-@table-padding-vertical-md: (@table-padding-vertical * 3 / 4);
-@table-padding-horizontal-md: (@table-padding-horizontal / 2);
-@table-padding-vertical-sm: (@table-padding-vertical / 2);
-@table-padding-horizontal-sm: (@table-padding-horizontal / 2);
-@table-border-color: @border-color-split;
-@table-border-radius-base: @border-radius-sm;
-@table-footer-bg: @background-color-light;
-@table-footer-color: @heading-color;
-@table-header-bg-sm: @table-header-bg;
-@table-font-size: @font-size-md;
-@table-font-size-md: @table-font-size;
-@table-font-size-sm: @table-font-size;
-@table-header-cell-split-color: rgba(0, 0, 0, 0.06);
-// Sorter
-// Legacy: `table-header-sort-active-bg` is used for hover not real active
-@table-header-sort-active-bg: rgba(0, 0, 0, 0.04);
-// Filter
-@table-header-filter-active-bg: rgba(0, 0, 0, 0.04);
-@table-filter-btns-bg: inherit;
-@table-filter-dropdown-bg: @background-color-component;
-@table-expand-icon-bg: @background-color-component;
-@table-selection-column-width: 32px;
-// Sticky
-@table-sticky-scroll-bar-bg: fade(#000, 35%);
-@table-sticky-scroll-bar-radius: 4px;
+@table-padding-vertical-lg: @spacing-lg;
+@table-padding-horizontal-lg: @spacing-lg;
+@table-padding-vertical-md: @spacing-md;
+@table-padding-horizontal-md: @spacing-md;
+@table-padding-vertical-sm: @spacing-sm;
+@table-padding-horizontal-sm: @spacing-sm;
 
-@table-header-icon-color: #bfbfbf;
-@table-header-icon-color-hover: darken(@table-header-icon-color, 10%);
-@table-sticky-zindex: 3;
-@table-sticky-scroll-bar-active-bg: fade(@table-sticky-scroll-bar-bg, 80%);
+@table-font-size-lg: @font-size-md;
+@table-font-size-md: @font-size-md;
+@table-font-size-sm: @font-size-sm;
+
+@table-border-width: @border-width-sm;
+@table-border-style: @border-style;
+@table-border-color: @border-color-split;
+
+@table-background: @background-color-component;
+@table-head-background: @background-color-light;
+@table-head-color: @heading-color;
+@table-head-split-color: rgba(0, 0, 0, 0.06);
+@table-head-font-weight: @font-weight-lg;
+
+@table-body-hover-background: @background-color-light;
+
+@table-pagination-margin: @spacing-lg 0;
 
 .@{table-prefix} {
   max-width: 100%;
@@ -56,14 +37,11 @@
 
   &-main {
     position: relative;
-    background: @table-bg;
-    border-radius: @table-border-radius-base;
+    background: @table-background;
   }
 
   table {
     width: 100%;
-    text-align: left;
-    border-radius: @table-border-radius-base @table-border-radius-base 0 0;
     border-collapse: separate;
     border-spacing: 0;
   }
@@ -102,26 +80,19 @@
 
   &-thead > &-tr > &-th {
     position: relative;
-    color: @table-header-color;
-    font-weight: 500;
-    text-align: left;
-    background: @table-header-bg;
-    border-bottom: @border-width-sm @border-style @table-border-color;
-    transition: background 0.3s ease;
+    color: @table-head-color;
+    background: @table-head-background;
+    font-weight: @table-head-font-weight;
+    border-bottom: @table-border-width @table-border-style @table-border-color;
 
-    &[colspan]:not([colspan='1']) {
-      text-align: center;
-    }
-
-    &:not(:last-child):not(.@{table-prefix}-th-expand):not([colspan])::before {
+    &:not(:last-child)::before {
       position: absolute;
       top: 50%;
       right: 0;
       width: 1px;
-      height: 1.6em;
-      background-color: @table-header-cell-split-color;
+      height: 60%;
+      background-color: @table-head-split-color;
       transform: translateY(-50%);
-      transition: background-color 0.3s;
       content: '';
     }
   }
@@ -133,7 +104,7 @@
   }
 
   &-tbody > &-tr > &-td {
-    border-bottom: @border-width-sm @border-style @table-border-color;
+    border-bottom: @table-border-width @table-border-style @table-border-color;
     transition: background 0.3s;
 
     // TODO: Nest Table
@@ -142,17 +113,16 @@
   &-tbody > &-tr {
     &:hover {
       > .@{table-prefix}-td {
-        background: @table-row-hover-bg;
+        background: @table-body-hover-background;
       }
     }
     // TODO: selected
   }
 
   &-pagination {
-    margin: 16px 0;
     display: flex;
     flex-wrap: wrap;
-    row-gap: @padding-xs;
+    margin: @table-pagination-margin;
 
     > * {
       flex: none;
