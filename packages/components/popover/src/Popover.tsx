@@ -2,9 +2,9 @@ import type { Slots, VNode } from 'vue'
 import type { PopoverProps } from './types'
 
 import { defineComponent } from 'vue'
-import { IxOverlay } from '@idux/components/_private'
+import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { ɵUseConfigProps, ɵUseVisibility } from '@idux/components/tooltip'
+import { ɵUseConfigProps } from '@idux/components/tooltip'
 import { popoverProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]

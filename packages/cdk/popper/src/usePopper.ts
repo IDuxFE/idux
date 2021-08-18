@@ -105,6 +105,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
 
   watch(visibility, value => {
     if (value) {
+      clearTimer()
       popperInstance?.update()
     }
   })

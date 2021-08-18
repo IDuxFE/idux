@@ -15,8 +15,8 @@ export function useGetRowKey(props: TableProps, config: TableConfig): ComputedRe
       return (record: unknown) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const key = (record as any)[rowKey]
-        if (process.env.NODE_ENV !== 'production' && key === undefined) {
-          Logger.warn('Each record in table should have a unique `key` prop.')
+        if (__DEV__ && key === undefined) {
+          Logger.warn('components/table', 'Each record in table should have a unique `key` prop.')
         }
         return key
       }

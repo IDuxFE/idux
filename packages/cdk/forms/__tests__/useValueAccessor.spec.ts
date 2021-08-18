@@ -123,10 +123,10 @@ describe('useValueAccessor.ts', () => {
   })
 
   test('not find control work', async () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     const wrapper = getApp(getInputComponent(), { group, control: 'not find', valueRef })
 
-    expect(error).toBeCalled()
+    expect(warn).toBeCalled()
 
     const input = wrapper.find('input')
 

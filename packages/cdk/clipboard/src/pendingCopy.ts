@@ -57,7 +57,7 @@ export class PendingCopy {
         }
       }
     } catch (err) {
-      Logger.error(err)
+      Logger.error('cdk/clipboard', err)
     }
 
     return successful

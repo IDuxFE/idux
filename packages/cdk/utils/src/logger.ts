@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const logWrapper = (args: any[], log: (...args: any[]) => void) => {
-  log('[@idux]', ...args)
+const logWrapper = (location: string, args: any[], log: (...args: any[]) => void) => {
+  log(`[@idux/${location}]:`, ...args)
 }
 
-const info = (...args: any[]): void => logWrapper(args, console.log)
-const warn = (...args: any[]): void => logWrapper(args, console.warn)
-const error = (...args: any[]): void => logWrapper(args, console.error)
+const info = (location: string, ...args: any[]): void => logWrapper(location, args, console.log)
+const warn = (location: string, ...args: any[]): void => logWrapper(location, args, console.warn)
+const error = (location: string, ...args: any[]): void => logWrapper(location, args, console.error)
 
 export const Logger = { info, warn, error }
 

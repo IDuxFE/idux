@@ -41,6 +41,6 @@ function isLegality(type?: string): boolean {
     return true
   }
 
-  Logger.error(`${type} is not includes in ${types}.`)
+  __DEV__ && Logger.warn('components/typography', `${type} is not includes in ${types}.`)
   return false
 }

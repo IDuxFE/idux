@@ -35,7 +35,7 @@ export const loadSVGElement = async (
       setSVGAttribute(svg, iconName)
       iconRenderedCache.set(iconName, { name: iconName, svg })
     } else {
-      Logger.error(`The icon [${iconName}] create failed.`)
+      __DEV__ && Logger.warn('components/icon', `The icon [${iconName}] create failed.`)
     }
   }
   return svg
@@ -66,13 +66,14 @@ async function loadIconDefinition(iconName: string, loadIconDynamically?: (iconN
         icon = { name: iconName, svgString }
         iconDefinitions.set(iconName, icon)
       } else {
-        return Logger.error(`The dynamically loaded icon [${iconName}] is invalid.`)
+        __DEV__ && Logger.warn('components/icon', `The dynamically loaded icon [${iconName}] is invalid.`)
+        return
       }
-    }
-    if (!icon) {
-      return Logger.error(`The icon [${iconName}] load failed.`)
+    } else {
+      __DEV__ && Logger.warn('components/icon', `The icon [${iconName}] load failed.`)
     }
   }
+
   return icon
 }
 
@@ -105,7 +106,7 @@ export function createScriptElements(urls: string[], index = 0): void {
     if (urls.length > index + 1) {
       scriptElement.onload = () => createScriptElements(urls, index + 1)
       scriptElement.onerror = () => {
-        Logger.error(`The url ${currentUrl} failed to load`)
+        Logger.error('components/icon', `The url ${currentUrl} failed to load`)
         createScriptElements(urls, index + 1)
       }
     }

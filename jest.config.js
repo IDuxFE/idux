@@ -24,9 +24,13 @@ module.exports = {
       },
     ],
   },
+  globals: {
+    __DEV__: true,
+  },
   moduleNameMapper: {
     '^@idux(.*)$': '<rootDir>/packages$1',
     '^@tests(.*)$': '<rootDir>/tests$1',
+    '^lodash-es$': 'lodash',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   collectCoverage: true,

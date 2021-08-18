@@ -13,7 +13,7 @@ export function useLocale(locale: LocaleType | Locale): void {
     if (localeMap[locale]) {
       currentType.value = locale
     } else {
-      Logger.warn(`The local [${locale}] was not added, please via 'addLocale()' add it.`)
+      __DEV__ && Logger.warn('components/i18n', `The local [${locale}] was not added, please via 'addLocale()' add it.`)
     }
   } else {
     const type = locale.type
