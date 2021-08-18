@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { VNode, VNodeChild } from 'vue'
+import { isVNode, VNode, VNodeChild } from 'vue'
 
 import { Comment, Fragment, Slots, Text } from 'vue'
-import { isNil } from 'lodash-es'
+import { isNil, isNumber, isString } from 'lodash-es'
+import { convertArray } from './convert'
 
 const TEMPLATE = 'template'
 
@@ -37,14 +38,6 @@ export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | unde
 }
 
 /**
- * determine whether an element is valid (not fragment not comment)
- * @param node node to be determined
- */
-export function isValidElementNode(node: VNodeChild): boolean {
-  return !isNil(node) && !isFragment(node) && !isComment(node)
-}
-
-/**
  * get all child node (Whatever dynamic or not)
  * @param slots slots of the component
  * @param key key of slots, default is 'default'
@@ -73,8 +66,9 @@ export function hasSlot(slots: Slots, key = 'default'): boolean {
   return !isNil(slots[key])
 }
 
-export function isEmptyElement(node: VNodeChild): boolean {
+export function isEmptyNode(node: VNodeChild): boolean {
   return (
+    isNil(node) ||
     isComment(node) ||
     (isFragment(node) && (node as any).children.length === 0) ||
     (isText(node) && (node as any).children.trim() === '')
@@ -88,15 +82,35 @@ export function filterEmptyNode(nodes: VNodeChild): VNode[] {
 
   const result: VNode[] = []
 
-  ;(nodes as VNode[]).forEach(node => {
+  convertArray(nodes).forEach(node => {
     if (Array.isArray(node)) {
-      result.push(...node)
+      result.push(...(node as VNode[]))
     } else if (isFragment(node)) {
       result.push(...(node as any).children)
     } else {
-      result.push(node)
+      result.push(node as VNode)
     }
   })
 
-  return result.filter(c => !isEmptyElement(c))
+  return result.filter(c => !isEmptyNode(c))
+}
+
+export function flattenNode(nodes: VNodeChild, filterEmpty = true): VNode[] {
+  const result: VNode[] = []
+  convertArray(nodes).forEach(node => {
+    if (Array.isArray(node)) {
+      result.push(...flattenNode(node, filterEmpty))
+    } else if (node && isFragment(node)) {
+      if (isFragment(node)) {
+        result.push(...flattenNode((node as any).children, filterEmpty))
+      } else if (isVNode(node)) {
+        if (!filterEmpty || !isEmptyNode(node)) {
+          result.push(node)
+        }
+      } else if (!filterEmpty || isNumber(node) || (isString(node) && node.length > 0)) {
+        result.push(node as unknown as VNode)
+      }
+    }
+  })
+  return result
 }

@@ -71,8 +71,10 @@ export function useBreakpointsMatch<T extends string>(value: Record<T, string>):
   return readonly(match) as DeepReadonly<Record<T, boolean>>
 }
 
-let cachedScreens: DeepReadonly<Record<BreakpointKey, boolean>> | null = null
-export function useScreens(): DeepReadonly<Record<BreakpointKey, boolean>> {
+export type Screens = DeepReadonly<Record<BreakpointKey, boolean>>
+
+let cachedScreens: Screens | null = null
+export function useScreens(): Screens {
   if (!cachedScreens) {
     cachedScreens = useBreakpointsMatch(BREAKPOINTS)
   }

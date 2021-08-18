@@ -16,8 +16,14 @@ import type { SpaceSize } from '@idux/components/space'
 import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
 import type { StepsSize } from '@idux/components/steps'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
-import { BreakpointKey } from '@idux/cdk/breakpoint'
-import { ModalType } from '@idux/components/modal'
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
+import type { ModalType } from '@idux/components/modal'
+import type {
+  TableColumnAlign,
+  TableColumnSortOrder,
+  TablePaginationPosition,
+  TableSize,
+} from '@idux/components/table/src/types'
 
 // General
 
@@ -181,6 +187,27 @@ export interface StatisticConfig {
   formatter: NumFormatter
 }
 
+export interface TableConfig {
+  borderless: boolean
+  rowKey: string
+  size: TableSize
+
+  extra: { icon: string }
+  pagination: { position: TablePaginationPosition } & Partial<PaginationConfig>
+
+  columnBase: TableColumnBaseConfig
+  columnExpandable: TableColumnExpandableConfig
+}
+
+export interface TableColumnBaseConfig {
+  align: TableColumnAlign
+  sortable: { directions: TableColumnSortOrder[]; showTooltip: boolean }
+}
+
+export interface TableColumnExpandableConfig {
+  icon: [string, string]
+}
+
 export interface TooltipConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
@@ -283,6 +310,7 @@ export interface GlobalConfig {
   collapse: CollapseConfig
   image: ImageConfig
   statistic: StatisticConfig
+  table: TableConfig
   tooltip: TooltipConfig
   popover: PopoverConfig
   steps: StepsConfig

@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue'
 import type { GlobalConfig, GlobalConfigKey } from './types'
 
-import { inject, shallowReactive, shallowReadonly, provide } from 'vue'
+import { inject, provide, shallowReactive, shallowReadonly } from 'vue'
 import { defaultConfig } from './defaultConfig'
 
 const tokens: [GlobalConfigKey, symbol][] = Object.keys(defaultConfig).map(key => [key as GlobalConfigKey, Symbol(key)])
