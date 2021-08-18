@@ -1,6 +1,6 @@
 {
   "name": "@idux/components",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A UI Component Library for Vue 3.x",
   "keywords": [
     "vue",
@@ -28,7 +28,7 @@
   "style": "./index.css",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^0.1.0"
+    "@idux/cdk": "^0.2.0"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0",

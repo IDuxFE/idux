@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/IDuxFE/idux/compare/v0.1.0...v0.2.0) (2021-08-18)
+
+
+### Features
+
+* **comp:table:** add table component ([#408](https://github.com/IDuxFE/idux/issues/408)) ([858b0c2](https://github.com/IDuxFE/idux/commit/858b0c27daa5b8c9c1e8dca61333599e07ec8e88)), closes [#400](https://github.com/IDuxFE/idux/issues/400) [#406](https://github.com/IDuxFE/idux/issues/406) [#407](https://github.com/IDuxFE/idux/issues/407)
+* site add code copy function ([#404](https://github.com/IDuxFE/idux/issues/404)) ([da57bb3](https://github.com/IDuxFE/idux/commit/da57bb357986dcfbfc569aba6a4516d4d1fc3122))
+
+
+
+
+
 # 0.1.0 (2021-08-07)
 
 
