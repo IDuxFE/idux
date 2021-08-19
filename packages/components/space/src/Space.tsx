@@ -65,8 +65,8 @@ interface SpaceItem {
 const useChildren = (children: VNode[], size: SpaceSize | SpaceSize[], direction: SpaceDirection) => {
   const lastIndex = children.length - 1
   const sizes = Array.isArray(size) ? size : Array(lastIndex).fill(size)
-  if (lastIndex !== sizes.length) {
-    Logger.warn('The number of split elements is inconsistent with the length of the size array')
+  if (__DEV__ && lastIndex !== sizes.length) {
+    Logger.warn('components/space', 'The number of split elements is inconsistent with the length of the size array')
   }
   return children.map((child, index) => {
     const currNode: SpaceItem = { node: child, itemClass: ['ix-space-item'] }

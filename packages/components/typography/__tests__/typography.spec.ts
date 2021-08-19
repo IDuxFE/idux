@@ -60,12 +60,12 @@ describe('typography.ts', () => {
   })
 
   test('dev warn work', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const wrapper = typographyMount({ type: 'hello' })
     expect(wrapper.classes()).toEqual(['ix-typography'])
-    expect(error).toBeCalled()
+    expect(warn).toBeCalled()
   })
 
   test('custom class work', async () => {

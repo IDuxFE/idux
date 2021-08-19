@@ -55,6 +55,7 @@
     "@commitlint/config-angular": "^12.1.0",
     "@ls-lint/ls-lint": "^1.9.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-replace": "^3.0.0",
     "@types/figlet": "^1.5.0",
     "@types/fs-extra": "^9.0.0",
     "@types/gulp": "^4.0.0",

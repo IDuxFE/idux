@@ -20,8 +20,9 @@ export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<Ab
         control = _controlOrPath
       } else {
         control = injectControl(_controlOrPath as ControlPathType)
-        if (!control) {
-          Logger.error(`not find control by [${_controlOrPath}]`)
+
+        if (__DEV__ && !control) {
+          Logger.warn('cdk/forms', `not find control by [${_controlOrPath}]`)
         }
       }
     }

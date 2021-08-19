@@ -6,5 +6,6 @@ const IxOverlay = Overlay as unknown as OverlayComponent
 
 export { IxOverlay }
 export { overlayPlacementDef, overlayTriggerDef, overlayDelayDef } from './src/types'
+export { useVisibility as ɵUseVisibility } from './src/useVisibility'
 
 export type { OverlayInstance, OverlayPublicProps as OverlayProps } from './src/types'

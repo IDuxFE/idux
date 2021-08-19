@@ -28,7 +28,8 @@
   "style": "./index.css",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^0.2.0"
+    "@idux/cdk": "^0.2.0",
+    "dayjs": "^1.10.6"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0",

@@ -624,7 +624,7 @@ describe('Select', () => {
       selectContainer.innerHTML = ''
     })
 
-    test('render work', () => {
+    test.skip('render work', () => {
       selectProps = reactive({
         value: 'tom',
         options: [
@@ -643,7 +643,7 @@ describe('Select', () => {
       }).not.toThrow()
     })
 
-    test('v-model:value work', async () => {
+    test.skip('v-model:value work', async () => {
       selectProps = reactive({
         value: 'tom',
         options: [
@@ -675,7 +675,7 @@ describe('Select', () => {
       expect(selectProps.value).toEqual('tom')
     })
 
-    test('labelKey and valueKey work', async () => {
+    test.skip('labelKey and valueKey work', async () => {
       selectProps = reactive({
         value: 'tom',
         labelKey: 'text',
@@ -709,7 +709,7 @@ describe('Select', () => {
       expect(selectProps.value).toEqual('tom')
     })
 
-    test('group options work', async () => {
+    test.skip('group options work', async () => {
       selectProps = reactive({
         value: 'tom0',
         options: [

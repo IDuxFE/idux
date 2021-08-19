@@ -36,7 +36,7 @@ function createEmptyStyleRule(query: string): void {
       mediaQueriesForWebkitCompatibility.add(query)
     }
   } catch (err) {
-    Logger.error(err)
+    Logger.error('cdk/breakpoint', err)
   }
 }
 

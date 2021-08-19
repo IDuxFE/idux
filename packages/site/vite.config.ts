@@ -24,6 +24,9 @@ export default defineConfig(({ command }) => {
         { find: '@idux/site', replacement: path.resolve(__dirname, './src') },
       ],
     },
+    define: {
+      __DEV__: !isBuild,
+    },
     css: {
       preprocessorOptions: {
         less: {

@@ -55,7 +55,7 @@ export default defineComponent({
     return () => {
       const triggerNode = getFirstValidNode(slots.default?.())
       if (!triggerNode) {
-        Logger.error('Trigger must is single rooted node')
+        __DEV__ && Logger.warn('components/overlay', 'Trigger must is single rooted node')
         return null
       }
       const contentNode = slots.content?.()
@@ -118,7 +118,7 @@ function renderTrigger(
   handler: () => void,
 ) {
   const element = cloneVNode(triggerNode, extraProps, true)
-  if (props.trigger === 'click' || props.trigger === 'contextmenu') {
+  if (props.clickOutside) {
     return withDirectives(element, [[clickOutside, { exclude: [convertElement(popperRef)], handler }]])
   }
   return element

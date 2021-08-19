@@ -1,7 +1,7 @@
 import type { VNode } from 'vue'
 import type { TablePagination } from '../types'
 
-import { kebabCase } from 'lodash'
+import { kebabCase } from 'lodash-es'
 import { IxPagination } from '@idux/components/pagination'
 
 export function renderPagination(

@@ -1,12 +1,22 @@
 import { join } from 'path'
 import { RollupOptions } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import { esbuildPlugin } from './esbuildPlugin'
 import typescript from 'rollup-plugin-typescript2'
 
-const externalDeps = ['vue', '@vue', '@idux', '@juggle/resize-observer', '@popperjs/core', 'lodash', 'vue-types']
+const externalDeps = [
+  'vue',
+  '@vue',
+  '@idux',
+  '@juggle/resize-observer',
+  '@popperjs/core',
+  'dayjs',
+  'lodash-es',
+  'vue-types',
+]
 
 interface Options {
   targetDirname: string
@@ -21,7 +31,12 @@ export const getRollupOptions = (options: Options): RollupOptions => {
   const input = join(targetDirname, compName, 'index.ts')
   const outputFile = join(distDirname, compName, 'index.js')
 
-  const plugins = [nodeResolve(), vuePlugin(), vueJsxPlugin({ enableObjectSlots: false })]
+  const plugins = [
+    nodeResolve(),
+    replace({ __DEV__: "process.env.NODE_ENV !== 'production'", preventAssignment: true }),
+    vuePlugin(),
+    vueJsxPlugin({ enableObjectSlots: false }),
+  ]
 
   if (compName) {
     plugins.push(esbuildPlugin())

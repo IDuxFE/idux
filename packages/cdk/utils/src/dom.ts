@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ResizeObserver } from '@juggle/resize-observer'
 import { isString } from 'lodash-es'
 
 type ElType = HTMLElement | Document | Window

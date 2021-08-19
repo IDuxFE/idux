@@ -7,7 +7,8 @@ export function getTarget(target: string | HTMLElement | Window | undefined): HT
     if (targetDom) {
       return targetDom
     } else {
-      Logger.warn(`target does not exist: ${target}, default value are already used: window.`)
+      __DEV__ &&
+        Logger.warn('components/utils', `target does not exist: ${target}, default value are already used: window.`)
       return window
     }
   }

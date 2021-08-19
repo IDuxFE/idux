@@ -89,8 +89,8 @@ describe('Overlay', () => {
   })
 
   test('no slots work', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     OverlayMount()
-    expect(error).toBeCalled()
+    expect(warn).toBeCalled()
   })
 })

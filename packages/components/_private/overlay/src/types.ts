@@ -29,6 +29,7 @@ export const overlayProps = {
   visible: IxPropTypes.bool,
   allowEnter: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
+  clickOutside: IxPropTypes.bool,
   delay: overlayDelayDef,
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool,

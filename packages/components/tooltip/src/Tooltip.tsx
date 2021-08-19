@@ -2,9 +2,9 @@ import type { Slots } from 'vue'
 import type { TooltipProps } from './types'
 
 import { defineComponent } from 'vue'
-import { IxOverlay } from '@idux/components/_private'
+import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { useConfigProps, useVisibility } from './hooks'
+import { useConfigProps } from './useConfigProps'
 import { tooltipProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
@@ -15,7 +15,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const config = useGlobalConfig('tooltip')
     const configProps = useConfigProps(props, config)
-    const visibility = useVisibility(props)
+    const visibility = ɵUseVisibility(props)
     return () => (
       <IxOverlay
         v-model={[visibility.value, 'visible']}
