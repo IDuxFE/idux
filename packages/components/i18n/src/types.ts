@@ -24,12 +24,31 @@ export interface PaginationLocale {
   totalSuffix: string
 }
 
+export interface TableLocale {
+  expand: string
+  collapse: string
+  filterTitle: string
+  filterConfirm: string
+  filterReset: string
+  filterEmptyText: string
+  selectAll: string
+  selectInvert: string
+  selectNone: string
+  selectCurrentAll: string
+  selectCurrentInvert: string
+  sortTitle: string
+  sortDesc: string
+  sortAsc: string
+  sortCancel: string
+}
+
 export interface Locale {
   type: LocaleType
   empty: EmptyLocale
   global: GlobalLocale
   modal: ModalLocale
   pagination: PaginationLocale
+  table: TableLocale
 }
 
 export type LocaleKey = keyof Locale

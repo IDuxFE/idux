@@ -3,7 +3,7 @@
 .slide-motion(@className, @origin, @scale, @duration: @transition-duration-base) {
   .ix-@{className}-enter-active,
   .ix-@{className}-leave-active {
-		transform-origin: @origin;
+    transform-origin: @origin;
     transition-property: transform, opacity;
     transition-duration: @duration;
   }

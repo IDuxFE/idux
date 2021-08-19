@@ -1,10 +1,11 @@
-import type { TableColumnBaseMerged, TableColumnExpandableMerged } from '../../composables/useColumns'
+import type { TableColumnMergedBaseExtra } from '../../composables/useColumns'
 
 import { defineComponent, inject } from 'vue'
 import { tableToken } from '../../token'
 import { tableHeadRowProps } from '../../types'
 import HeadCol from './HeadCol'
-import HeadColExpand from './HeadColExpand'
+import HeadColExpandable from './HeadColExpandable'
+import HeadColSelectable from './HeadColSelectable'
 
 export default defineComponent({
   props: tableHeadRowProps,
@@ -12,12 +13,14 @@ export default defineComponent({
     const { headRowTag } = inject(tableToken)!
 
     return () => {
-      const children = props.cols
-        .filter(column => column.titleColSpan !== 0 && (column as TableColumnBaseMerged).titleRowSpan !== 0)
+      const children = props.columns
+        .filter(column => column.titleColSpan !== 0 && (column as TableColumnMergedBaseExtra).titleRowSpan !== 0)
         .map((column, index) => {
           if ('type' in column) {
             if (column.type === 'expandable') {
-              return renderExpandCol(column)
+              return <HeadColExpandable></HeadColExpandable>
+            } else if (column.type === 'selectable') {
+              return <HeadColSelectable></HeadColSelectable>
             }
             return null
           }
@@ -30,7 +33,7 @@ export default defineComponent({
   },
 })
 
-function renderCol(column: TableColumnBaseMerged, index: number) {
+function renderCol(column: TableColumnMergedBaseExtra, index: number) {
   const {
     titleColSpan: colSpan,
     titleRowSpan: rowSpan,
@@ -45,9 +48,4 @@ function renderCol(column: TableColumnBaseMerged, index: number) {
   } = column
   const colProps = { colSpan, rowSpan, additional, align, colStart, colEnd, ellipsis, title, customTitle, key, index }
   return <HeadCol {...colProps}></HeadCol>
-}
-
-function renderExpandCol(column: TableColumnExpandableMerged) {
-  const { additional } = column
-  return <HeadColExpand additional={additional}></HeadColExpand>
 }

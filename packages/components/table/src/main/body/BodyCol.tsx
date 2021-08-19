@@ -1,4 +1,4 @@
-import type { Slots, VNodeTypes } from 'vue'
+import type { ComputedRef, Slots } from 'vue'
 import type { TableBodyColProps } from '../../types'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -14,12 +14,12 @@ export default defineComponent({
     const { bodyColTag, slots } = inject(tableToken)!
     const classes = useClasses(props)
     const dataValue = useDataValue(props)
+
     return () => {
-      const children = renderChildren(props, slots, dataValue.value)
+      const children = renderChildren(props, slots, dataValue)
       const { ellipsis, colSpan, rowSpan, additional } = props
-      const title = getColTitle(children, dataValue.value, ellipsis)
       const mergedProps = {
-        title,
+        title: getColTitle(ellipsis, children, dataValue.value),
         colSpan: colSpan === 1 ? undefined : colSpan,
         rowSpan: rowSpan === 1 ? undefined : rowSpan,
         class: classes.value,
@@ -64,14 +64,13 @@ function useDataValue(props: TableBodyColProps) {
   })
 }
 
-function renderChildren(props: TableBodyColProps, slots: Slots, value: VNodeTypes) {
-  let children = value
+function renderChildren(props: TableBodyColProps, slots: Slots, dataValue: ComputedRef<any>) {
+  let value = dataValue.value
   const { record, customRender, index } = props
   if (isFunction(customRender)) {
-    children = customRender({ value, record, index })
+    return customRender({ value, record, index })
   } else if (isString(customRender) && slots[customRender]) {
-    children = slots[customRender]!({ value, record, index })
+    return slots[customRender]!({ value, record, index })
   }
-
-  return children
+  return value
 }

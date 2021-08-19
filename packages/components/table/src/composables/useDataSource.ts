@@ -1,22 +1,23 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { TableProps, TableBodyRowProps, TablePagination } from '../types'
+import type { Key, TableProps, TablePagination } from '../types'
 import type { GetRowKey } from './useGetRowKey'
 
 import { computed } from 'vue'
 
-export interface DataSourceContext {
-  filteredData: ComputedRef<unknown[]>
-  flattedDataSource: ComputedRef<Omit<TableBodyRowProps, 'index'>[]>
-}
-
 export function useDataSource(
   props: TableProps,
   getRowKey: ComputedRef<GetRowKey>,
-  expandedRowKeys: Ref<(string | number)[]>,
+  expandedRowKeys: Ref<Key[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
+  const mergedData = computed(() => props.dataSource.map(record => covertMergeData(record, getRowKey.value)))
+  const mergedMap = computed(() => {
+    const map = new Map<Key, MergedData>()
+    covertDataMap(mergedData.value, map)
+    return map
+  })
   // TODO
-  const filteredData = computed(() => props.dataSource)
+  const filteredData = computed(() => mergedData.value)
   // TODO
   const sortedData = computed(() => filteredData.value)
   const paginatedData = computed(() => {
@@ -29,29 +30,73 @@ export function useDataSource(
       return sortedData.value.slice(startIndex, startIndex + pageSize)
     }
   })
-  const flattedDataSource = computed(() => {
-    const getKey = getRowKey.value
-    const expandedKeys = expandedRowKeys.value
-    if (expandedKeys.length > 0) {
-      const records: Omit<TableBodyRowProps, 'index'>[] = []
-      paginatedData.value.forEach(record => records.push(...flattenRecord(record, 0, expandedKeys, getKey)))
-      return records
-    }
-    return paginatedData.value.map(record => ({ record, expanded: false, level: 0, rowKey: getKey(record) }))
+  const paginatedMap = computed(() => {
+    const map = new Map<Key, MergedData>()
+    covertDataMap(paginatedData.value, map)
+    return map
   })
 
-  return { filteredData, flattedDataSource }
+  const flattedData = computed(() => {
+    const expandedKeys = expandedRowKeys.value
+    if (expandedKeys.length > 0) {
+      const data: FlattedData[] = []
+      paginatedData.value.forEach(item => data.push(...flattenData(item, 0, expandedKeys)))
+      return data
+    }
+    return paginatedData.value.map(item => ({ ...item, expanded: false, level: 0 }))
+  })
+
+  return { filteredData, flattedData, mergedMap, paginatedMap }
 }
 
-// TODO: filter and sort
-function flattenRecord(record: unknown, level: number, expandedRowKeys: (string | number)[], getRowKey: GetRowKey) {
+export interface DataSourceContext {
+  filteredData: ComputedRef<MergedData[]>
+  flattedData: ComputedRef<FlattedData[]>
+  mergedMap: ComputedRef<Map<Key, MergedData>>
+  paginatedMap: ComputedRef<Map<Key, MergedData>>
+}
+
+export interface MergedData {
+  children?: MergedData[]
+  parentKey?: Key
+  record: unknown
+  rowKey: Key
+}
+
+export interface FlattedData extends MergedData {
+  expanded: boolean
+  level: number
+}
+
+function covertMergeData(record: unknown, getRowKey: GetRowKey, parentKey?: Key) {
   const rowKey = getRowKey(record)
-  const expanded = expandedRowKeys.includes(rowKey)
-  const result = [{ record, expanded, level, rowKey }]
+  const result: MergedData = { record, rowKey, parentKey }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const children = (record as any).children as any[]
-  if (expanded && children) {
-    children.forEach(subRecord => result.push(...flattenRecord(subRecord, level + 1, expandedRowKeys, getRowKey)))
+  if (children) {
+    result.children = children.map(subRecord => covertMergeData(subRecord, getRowKey, rowKey))
   }
+  return result
+}
+
+function covertDataMap(mergedData: MergedData[], map: Map<Key, MergedData>) {
+  mergedData.forEach(item => {
+    const { rowKey, children } = item
+    map.set(rowKey, item)
+    if (children) {
+      covertDataMap(children, map)
+    }
+  })
+}
+
+function flattenData(data: MergedData, level: number, expandedRowKeys: Key[]) {
+  const { children, parentKey, record, rowKey } = data
+  const expanded = expandedRowKeys.includes(rowKey)
+  const result: FlattedData[] = [{ children, parentKey, record, rowKey, level, expanded }]
+
+  if (expanded && children) {
+    children.forEach(subRecord => result.push(...flattenData(subRecord, level + 1, expandedRowKeys)))
+  }
+
   return result
 }

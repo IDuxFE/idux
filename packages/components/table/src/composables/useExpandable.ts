@@ -1,28 +1,22 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { TableColumnExpandable, TableProps } from '../types'
-import type { TableColumnExpandableMerged, TableColumnFlatted } from './useColumns'
+import type { Key, TableProps } from '../types'
+import type { TableColumnMergedExpandable, TableColumnMerged } from './useColumns'
 
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 
-export interface ExpandableContext {
-  expandable: ComputedRef<TableColumnExpandable | undefined>
-  expandedRowKeys: Ref<(string | number)[]>
-  handleExpandChange: (key: string | number, record: unknown) => void
-}
-
-export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnFlatted[]>): ExpandableContext {
+export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnMerged[]>): ExpandableContext {
   const expandable = computed(() =>
     flattedColumns.value.find(column => 'type' in column && column.type === 'expandable'),
-  ) as ComputedRef<TableColumnExpandableMerged>
+  ) as ComputedRef<TableColumnMergedExpandable | undefined>
 
-  const noop: (string | number)[] = []
-  const expandedRowKeys = ref(noop)
-  watchEffect(() => {
-    expandedRowKeys.value = props.expandedRowKeys || noop
-  })
+  const expandedRowKeys = ref(props.expandedRowKeys)
+  watch(
+    () => props.expandedRowKeys,
+    value => (expandedRowKeys.value = value),
+  )
 
-  const handleExpandChange = (key: string | number, record: unknown) => {
+  const handleExpandChange = (key: Key, record: unknown) => {
     const { onChange, onExpand } = expandable.value || {}
     const index = expandedRowKeys.value.indexOf(key)
     const expanded = index >= 0
@@ -37,4 +31,10 @@ export function useExpandable(props: TableProps, flattedColumns: ComputedRef<Tab
   }
 
   return { expandable, expandedRowKeys, handleExpandChange }
+}
+
+export interface ExpandableContext {
+  expandable: ComputedRef<TableColumnMergedExpandable | undefined>
+  expandedRowKeys: Ref<Key[]>
+  handleExpandChange: (key: Key, record: unknown) => void
 }

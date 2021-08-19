@@ -1,12 +1,12 @@
 import type { ComputedRef } from 'vue'
 import type { TableConfig } from '@idux/components/config'
-import type { TableProps } from '../types'
+import type { Key, TableProps } from '../types'
 
 import { computed } from 'vue'
 import { isString } from 'lodash-es'
 import { Logger } from '@idux/cdk/utils'
 
-export type GetRowKey = (record: unknown) => string | number
+export type GetRowKey = (record: unknown) => Key
 
 export function useGetRowKey(props: TableProps, config: TableConfig): ComputedRef<GetRowKey> {
   return computed(() => {
