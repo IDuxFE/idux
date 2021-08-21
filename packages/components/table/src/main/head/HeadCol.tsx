@@ -17,9 +17,8 @@ export default defineComponent({
     return () => {
       const { title, ellipsis, colSpan, rowSpan, additional } = props
       const children = renderChildren(props, slots)
-      const _title = getColTitle(children!, title, ellipsis)
       const mergedProps = {
-        title: _title,
+        title: getColTitle(ellipsis, children!, title),
         colSpan: colSpan === 1 ? undefined : colSpan,
         rowSpan: rowSpan === 1 ? undefined : rowSpan,
         class: classes.value,

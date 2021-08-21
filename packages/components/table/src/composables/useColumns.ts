@@ -2,6 +2,7 @@ import type { ComputedRef } from 'vue'
 import type { Screens } from '@idux/cdk/breakpoint'
 import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
 import type {
+  Key,
   TableColumn,
   TableColumnAlign,
   TableColumnBase,
@@ -20,43 +21,51 @@ export function useColumns(props: TableProps, config: TableConfig): ColumnsConte
   const baseColumns = computed(() =>
     filterAndCovertColumns(props.columns, screens, config.columnBase, config.columnExpandable),
   )
-  const mergedColumns = computed(() =>
-    mergeColumns(baseColumns.value, screens, config.columnBase, config.columnExpandable),
-  )
+
   const flattedColumns = computed(() =>
     flattenColumns(baseColumns.value, screens, config.columnBase, config.columnExpandable),
   )
 
-  return { mergedColumns, flattedColumns }
+  const mergedRows = computed(() =>
+    mergeColumns(baseColumns.value, screens, config.columnBase, config.columnExpandable),
+  )
+
+  return { flattedColumns, mergedRows }
 }
 
 export interface ColumnsContext {
-  mergedColumns: ComputedRef<TableColumnMerged[][]>
-  flattedColumns: ComputedRef<TableColumnFlatted[]>
+  flattedColumns: ComputedRef<TableColumnMerged[]>
+  mergedRows: ComputedRef<TableColumnMergedExtra[][]>
 }
-export interface TableColumnBaseFlatted extends TableColumnBase {
+
+export type TableColumnMerged = TableColumnMergedBase | TableColumnMergedExpandable | TableColumnMergedSelectable
+export type TableColumnMergedExtra =
+  | TableColumnMergedBaseExtra
+  | TableColumnMergedExpandable
+  | TableColumnMergedSelectable
+export interface TableColumnMergedBase extends TableColumnBase {
   align: TableColumnAlign
+  key: Key
 }
-export interface TableColumnBaseMerged extends TableColumnBaseFlatted {
+export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
   colStart: number
   colEnd: number
   hasChildren: boolean
   titleColSpan: number
   titleRowSpan?: number
 }
-export interface TableColumnExpandableMerged extends TableColumnExpandable {
+export interface TableColumnMergedExpandable extends TableColumnExpandable {
   align: TableColumnAlign
-  key: string | number
+  key: Key
   icon: [string, string]
   titleColSpan: number
 }
-export interface TableColumnSelectableMerged extends TableColumnSelectable {
+export interface TableColumnMergedSelectable extends TableColumnSelectable {
   align: TableColumnAlign
-  key: string | number
+  key: Key
+  multiple: boolean
   titleColSpan: number
 }
-export type TableColumnMerged = TableColumnBaseMerged | TableColumnExpandableMerged | TableColumnSelectableMerged
-export type TableColumnFlatted = TableColumnBaseFlatted | TableColumnExpandableMerged | TableColumnSelectableMerged
 
 function mergeColumns(
   rootColumns: TableColumn[],
@@ -64,7 +73,7 @@ function mergeColumns(
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
 ) {
-  const rows: TableColumnMerged[][] = []
+  const rows: TableColumnMergedExtra[][] = []
 
   function calculateColSpans(columns: TableColumn[], colIndex: number, rowIndex: number) {
     rows[rowIndex] ??= []
@@ -73,7 +82,7 @@ function mergeColumns(
     const titleColSpans = columns.map(column => {
       let titleColSpan = column.titleColSpan ?? 1
       if ('type' in column) {
-        rows[rowIndex].push(column as TableColumnExpandableMerged | TableColumnSelectableMerged)
+        rows[rowIndex].push(column as TableColumnMergedExpandable | TableColumnMergedSelectable)
         return titleColSpan
       }
 
@@ -89,7 +98,7 @@ function mergeColumns(
 
       const colEnd = colStart + titleColSpan - 1
       rows[rowIndex].push(
-        Object.assign(column, { titleColSpan, colStart, colEnd, hasChildren }) as TableColumnBaseMerged,
+        Object.assign(column, { titleColSpan, colStart, colEnd, hasChildren }) as TableColumnMergedBaseExtra,
       )
 
       colStart += titleColSpan
@@ -115,12 +124,12 @@ function mergeColumns(
 }
 
 function flattenColumns(
-  columns: TableColumnFlatted[],
+  columns: TableColumnMerged[],
   screens: Screens,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
 ) {
-  const result: TableColumnFlatted[] = []
+  const result: TableColumnMerged[] = []
   columns.forEach(column => {
     if ('children' in column) {
       const children = filterAndCovertColumns(column.children!, screens, baseConfig, expandableConfig)
@@ -136,7 +145,7 @@ function filterAndCovertColumns(
   screens: Screens,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
-): TableColumnFlatted[] {
+): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => screens[key]))
     .map(column => covertColumn(column, baseConfig, expandableConfig))
@@ -146,7 +155,7 @@ function covertColumn(
   column: TableColumn,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
-): TableColumnFlatted {
+): TableColumnMerged {
   const { align = baseConfig.align } = column
 
   if ('type' in column) {
@@ -154,7 +163,9 @@ function covertColumn(
       const icon = column.icon ?? expandableConfig.icon
       return { ...column, key: column.type, icon, align }
     } else {
-      return { ...column, key: column.type, align }
+      // The default value for `multiple` is true
+      const multiple = column.multiple ?? true
+      return { ...column, key: column.type, align, multiple }
     }
   } else {
     let { key, dataKey, sortable } = column

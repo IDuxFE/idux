@@ -1,12 +1,13 @@
 import type { VNode } from 'vue'
 import type { TablePagination } from '../types'
+import type { MergedData } from '../composables/useDataSource'
 
 import { kebabCase } from 'lodash-es'
 import { IxPagination } from '@idux/components/pagination'
 
 export function renderPagination(
   mergedPagination: TablePagination | null,
-  filteredData: unknown[],
+  filteredData: MergedData[],
 ): [VNode | null, VNode | null] {
   let top: VNode | null = null
   let bottom: VNode | null = null

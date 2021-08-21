@@ -4,10 +4,10 @@ import HeadRow from './HeadRow'
 
 export default defineComponent({
   setup() {
-    const { mergedColumns, headTag } = inject(tableToken)!
+    const { mergedRows, headTag } = inject(tableToken)!
 
     return () => {
-      const children = mergedColumns.value.map((cols, index) => <HeadRow key={index} cols={cols} />)
+      const children = mergedRows.value.map((columns, index) => <HeadRow key={index} columns={columns} />)
       const HeadTag = headTag.value as any
       return <HeadTag class="ix-table-thead">{children}</HeadTag>
     }

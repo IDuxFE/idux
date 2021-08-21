@@ -26,20 +26,12 @@ export default defineComponent({
       handleBlur,
       handleMouseup,
       focus,
-      blur
+      blur,
     }
   },
   render() {
-    const {
-      loading,
-      checkedChildren,
-      unCheckedChildren,
-      isChecked,
-      classes,
-      handleClick,
-      handleBlur,
-      handleMouseup
-    } = this
+    const { loading, checkedChildren, unCheckedChildren, isChecked, classes, handleClick, handleBlur, handleMouseup } =
+      this
     const checkedChild = this.$slots.checkedChildren ? this.$slots.checkedChildren() : checkedChildren
     const unCheckedChild = this.$slots.unCheckedChildren ? this.$slots.unCheckedChildren() : unCheckedChildren
     return (
@@ -51,13 +43,15 @@ export default defineComponent({
         onMouseup={handleMouseup}
         onBlur={handleBlur}
       >
-        {loading && <div class="ix-switch-loading-icon"><IxIcon name="loading" /></div>}
-        <div class="ix-switch-inner">
-          {isChecked ? checkedChild : unCheckedChild}
-        </div>
+        {loading && (
+          <div class="ix-switch-loading-icon">
+            <IxIcon name="loading" />
+          </div>
+        )}
+        <div class="ix-switch-inner">{isChecked ? checkedChild : unCheckedChild}</div>
       </button>
     )
-  }
+  },
 })
 
 const useSwitch = (props: SwitchProps, blur: () => void) => {
@@ -92,7 +86,7 @@ const useClasses = (
   props: SwitchProps,
   isChecked: ComputedRef<boolean>,
   isDisabled: ComputedRef<boolean>,
-  isSmallSize: ComputedRef<boolean>
+  isSmallSize: ComputedRef<boolean>,
 ) => {
   return computed(() => {
     return {
@@ -100,7 +94,7 @@ const useClasses = (
       'ix-switch-loading': props.loading,
       'ix-switch-checked': isChecked.value,
       'ix-switch-disabled': isDisabled.value,
-      'ix-switch-small': isSmallSize.value
+      'ix-switch-small': isSmallSize.value,
     }
   })
 }

@@ -25,16 +25,18 @@ interface Data {
   age: number
   address: string
   tags: string[]
+  children?: Data[]
 }
 
 const columns: TableColumn<Data>[] = [
+  { type: 'selectable', onChange: console.log, disabled: record => !!record.children },
+  { type: 'expandable' },
   {
     title: 'Name',
     dataKey: 'name',
     customRender: 'nameRender',
     customTitle: 'nameTitle',
   },
-  { type: 'expandable', customExpand: 'customExpand' },
   {
     title: 'Age',
     dataKey: 'age',
@@ -64,12 +66,27 @@ const columns: TableColumn<Data>[] = [
 ]
 const data: Data[] = []
 for (let index = 0; index < 100; index++) {
+  let children: Data[] | undefined
+  if (index % 3 !== 0) {
+    children = []
+    for (let j = 0; j < 3; j++) {
+      children.push({
+        id: `${index}-${j}`,
+        name: `name ${index}-${j}`,
+        age: index,
+        address: `New York No. ${index}-${j} Lake Park`,
+        tags: [],
+      })
+    }
+  }
+
   data.push({
     id: `${index}`,
     name: `name ${index}`,
     age: index,
     address: `New York No. ${index} Lake Park`,
     tags: ['nice', 'developer'],
+    children,
   })
 }
 </script>

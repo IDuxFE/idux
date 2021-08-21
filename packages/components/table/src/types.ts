@@ -5,7 +5,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
-import type { TableColumnMerged } from './composables/useColumns'
+import type { TableColumnMergedExtra } from './composables/useColumns'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -14,13 +14,13 @@ export const tableProps = {
   columns: IxPropTypes.array<TableColumn>().isRequired,
   dataSource: IxPropTypes.array().isRequired,
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
-  expandedRowKeys: IxPropTypes.array<string | number>(),
+  expandedRowKeys: IxPropTypes.array<Key>().def(() => []),
   extra: IxPropTypes.object<TableExtra>(),
   headless: IxPropTypes.bool,
   pagination: IxPropTypes.object<TablePagination | null>(),
   rowClassName: IxPropTypes.func<(record: unknown, index: number) => string>(),
   rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
-  selectedRowKeys: IxPropTypes.array<string | number>(),
+  selectedRowKeys: IxPropTypes.array<Key>().def(() => []),
   scroll: IxPropTypes.object<TableScroll>(),
   size: IxPropTypes.oneOf<TableSize>(['large', 'medium', 'small']),
   spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<SpinProps>()]),
@@ -28,8 +28,8 @@ export const tableProps = {
   tags: IxPropTypes.object<TableTags>(),
 
   // events
-  'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: (string | number)[]) => void>(),
-  'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: (string | number)[]) => void>(),
+  'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
+  'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
 }
 
 export type TableProps = IxInnerPropTypes<typeof tableProps>
@@ -51,14 +51,14 @@ export interface TableColumnCommon<T = unknown> {
   responsive?: BreakpointKey[]
   rowSpan?: (record: T, index: number) => number
   titleColSpan?: number
-  width?: string | number
+  width?: Key
 }
 
 export interface TableColumnBase<T = unknown> extends TableColumnCommon<T> {
-  dataKey?: string | number | (string | number)[]
+  dataKey?: Key | Key[]
   editable?: boolean
   ellipsis?: boolean
-  key?: string | number
+  key?: Key
   sortable?: TableColumnSortable<T>
   title?: string
 
@@ -81,13 +81,13 @@ export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T>
   customExpand?: string | TableColumnExpandableExpandFn<T>
   customIcon?: string | TableColumnExpandableIconFn<T>
 
-  enabled?: (record: T, index: number) => boolean
+  disabled?: (record: T, index: number) => boolean
   // remove ?
   icon?: [string, string]
   indent?: number
   trigger?: 'click' | 'dblclick'
 
-  onChange?: (expendedRowKeys: (string | number)[]) => void
+  onChange?: (expendedRowKeys: Key[]) => void
   onExpand?: (expanded: boolean, record: T) => void
 }
 
@@ -101,23 +101,23 @@ export type TableColumnExpandableIconFn<T = unknown> = (options: {
 export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T> {
   type: 'selectable'
 
-  enabled?: (record: T, index: number) => boolean
+  disabled?: (record: T) => boolean
   multiple?: boolean
   options?: boolean | TableColumnSelectableOption[]
 
   trigger?: 'click' | 'dblclick'
 
-  onChange?: (selectedRowKeys: (string | number)[]) => void
+  onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void
   onSelect?: (selected: boolean, record: T) => void
-  onSelectAll?: (selectedRowKeys: (string | number)[]) => void
-  onSelectInvert?: (selectedRowKeys: (string | number)[]) => void
+  onSelectAll?: (selectedRowKeys: Key[]) => void
+  onSelectInvert?: (selectedRowKeys: Key[]) => void
   onSelectNone?: () => void
 }
 
 export interface TableColumnSelectableOption {
-  key: string | number
+  key: Key
   text: string
-  onClick: (selectedRowKeys: (string | number)[]) => void
+  onClick: (selectedRowKeys: Key[]) => void
 }
 
 export interface TableExtra {
@@ -136,8 +136,8 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 
 export interface TableScroll {
   toTopOnChange?: boolean
-  x?: string | number | boolean
-  y?: string | number
+  x?: Key | boolean
+  y?: Key
 }
 
 export type TableSize = 'large' | 'medium' | 'small'
@@ -165,22 +165,20 @@ export interface TableColumnSortable<T = unknown> {
   onSort: (curr: T, next: T) => number
 }
 
-/** private components */
-export const tableCommonColProps = {
-  additional: IxPropTypes.object(),
-  align: IxPropTypes.oneOf<TableColumnAlign>(['start', 'center', 'end']),
-  colSpan: IxPropTypes.number,
-  rowSpan: IxPropTypes.number,
-}
+export type Key = string | number
 
+/** private components */
 export const tableHeadRowProps = {
-  cols: IxPropTypes.array<TableColumnMerged>().isRequired,
+  columns: IxPropTypes.array<TableColumnMergedExtra>().isRequired,
 }
 
 export type TableHeadRowProps = IxInnerPropTypes<typeof tableHeadRowProps>
 
 export const tableHeadColProps = {
-  ...tableCommonColProps,
+  additional: IxPropTypes.object(),
+  align: IxPropTypes.oneOf<TableColumnAlign>(['start', 'center', 'end']),
+  colSpan: IxPropTypes.number,
+  rowSpan: IxPropTypes.number,
 
   colStart: IxPropTypes.number,
   colEnd: IxPropTypes.number,
@@ -193,12 +191,6 @@ export const tableHeadColProps = {
 
 export type TableHeadColProps = IxInnerPropTypes<typeof tableHeadColProps>
 
-export const tableHeadColExpandProps = {
-  ...tableCommonColProps,
-}
-
-export type TableHeadColExpandProps = IxInnerPropTypes<typeof tableHeadColExpandProps>
-
 export const tableBodyRowProps = {
   expanded: IxPropTypes.bool.isRequired,
   index: IxPropTypes.number.isRequired,
@@ -210,9 +202,12 @@ export const tableBodyRowProps = {
 export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
 
 export const tableBodyColProps = {
-  ...tableCommonColProps,
+  additional: IxPropTypes.object(),
+  align: IxPropTypes.oneOf<TableColumnAlign>(['start', 'center', 'end']),
+  colSpan: IxPropTypes.number,
+  rowSpan: IxPropTypes.number,
 
-  dataKey: IxPropTypes.oneOfType([String, Number, IxPropTypes.array<string | number>()]),
+  dataKey: IxPropTypes.oneOfType([String, Number, IxPropTypes.array<Key>()]),
   ellipsis: IxPropTypes.bool,
   index: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
@@ -222,15 +217,24 @@ export const tableBodyColProps = {
 
 export type TableBodyColProps = IxInnerPropTypes<typeof tableBodyColProps>
 
-export const tableBodyColExpandProps = {
-  ...tableCommonColProps,
+export const tableBodyColExpandableProps = {
+  colSpan: IxPropTypes.number,
+  rowSpan: IxPropTypes.number,
+  disabled: IxPropTypes.bool.isRequired,
   expanded: IxPropTypes.bool.isRequired,
-  icon: IxPropTypes.arrayOf(String).isRequired,
   index: IxPropTypes.number.isRequired,
   handleExpend: IxPropTypes.func<() => void>().isRequired,
   record: IxPropTypes.any.isRequired,
-
-  customIcon: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnExpandableIconFn>()]),
 }
 
-export type TableBodyColExpandProps = IxInnerPropTypes<typeof tableBodyColExpandProps>
+export type TableBodyColExpandableProps = IxInnerPropTypes<typeof tableBodyColExpandableProps>
+
+export const tableBodyColSelectableProps = {
+  colSpan: IxPropTypes.number,
+  disabled: IxPropTypes.bool.isRequired,
+  rowSpan: IxPropTypes.number,
+  rowKey: IxPropTypes.oneOfType([String, Number]).isRequired,
+  handleSelect: IxPropTypes.func<() => void>().isRequired,
+}
+
+export type TableBodyColSelectableProps = IxInnerPropTypes<typeof tableBodyColSelectableProps>

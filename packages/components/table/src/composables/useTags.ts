@@ -3,16 +3,6 @@ import type { TableProps } from '../types'
 
 import { computed } from '@vue/runtime-dom'
 
-export interface TagsContext {
-  tableTag: ComputedRef<VNodeTypes>
-  headTag: ComputedRef<VNodeTypes>
-  headRowTag: ComputedRef<VNodeTypes>
-  headColTag: ComputedRef<VNodeTypes>
-  bodyTag: ComputedRef<VNodeTypes>
-  bodyRowTag: ComputedRef<VNodeTypes>
-  bodyColTag: ComputedRef<VNodeTypes>
-}
-
 export function useTags(props: TableProps): TagsContext {
   return {
     tableTag: computed(() => props.tags?.table ?? 'table'),
@@ -23,4 +13,14 @@ export function useTags(props: TableProps): TagsContext {
     bodyRowTag: computed(() => props.tags?.bodyRow ?? 'tr'),
     bodyColTag: computed(() => props.tags?.bodyCol ?? 'td'),
   }
+}
+
+export interface TagsContext {
+  tableTag: ComputedRef<VNodeTypes>
+  headTag: ComputedRef<VNodeTypes>
+  headRowTag: ComputedRef<VNodeTypes>
+  headColTag: ComputedRef<VNodeTypes>
+  bodyTag: ComputedRef<VNodeTypes>
+  bodyRowTag: ComputedRef<VNodeTypes>
+  bodyColTag: ComputedRef<VNodeTypes>
 }
