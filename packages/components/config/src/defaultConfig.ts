@@ -32,6 +32,7 @@ import type {
   FormConfig,
   PaginationConfig,
   ModalConfig,
+  DrawerConfig,
   AvatarConfig,
   TableConfig,
 } from './types'
@@ -219,6 +220,13 @@ const modal = shallowReactive<ModalConfig>({
   width: 520,
 })
 
+const drawer = shallowReactive<DrawerConfig>({
+  closable: true,
+  closeOnEsc: true,
+  mask: true,
+  maskClosable: true,
+})
+
 const result = shallowReactive<ResultConfig>({ status: 'info' })
 
 const spin = shallowReactive<SpinConfig>({
@@ -283,6 +291,7 @@ export const defaultConfig: GlobalConfig = {
   // Feedback
   message,
   modal,
+  drawer,
   result,
   spin,
   progress,
