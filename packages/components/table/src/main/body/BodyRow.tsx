@@ -34,6 +34,7 @@ export default defineComponent({
     const classes = useClasses(props, tableProps)
     const { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
       props,
+      tableProps,
       expandable,
       handleExpandChange,
       selectable,
@@ -82,33 +83,16 @@ function useClasses(props: TableBodyRowProps, tableProps: TableProps) {
   return classes
 }
 
-function useExpandDisabled(
-  props: TableBodyRowProps,
-  mergedColumn: ComputedRef<TableColumnMergedExpandable | undefined>,
-) {
-  return computed(() => {
-    const column = mergedColumn.value
-    if (!column) {
-      return true
-    }
-    const { disabled, customExpand } = column
-    const { record, index } = props
-    if (disabled?.(record, index)) {
-      return true
-    }
-    return !(customExpand || record.children?.length > 0)
-  })
-}
-
 function useEvents(
   props: TableBodyRowProps,
+  tableProps: TableProps,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   handleExpandChange: (key: Key, record: unknown) => void,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   handleSelectChange: (key: Key, record: unknown) => void,
   currentPageRowKeys: ComputedRef<{ enabledRowKeys: Key[]; disabledRowKeys: Key[] }>,
 ) {
-  const expendDisabled = useExpandDisabled(props, expandable)
+  const expendDisabled = useExpandDisabled(props, tableProps, expandable)
   const expendTrigger = computed(() => expandable.value?.trigger)
   const handleExpend = () => {
     const { rowKey, record } = props
@@ -148,6 +132,25 @@ function useEvents(
   })
 
   return { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents }
+}
+
+function useExpandDisabled(
+  props: TableBodyRowProps,
+  tableProps: TableProps,
+  expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
+) {
+  return computed(() => {
+    const column = expandable.value
+    if (!column) {
+      return true
+    }
+    const { disabled, customExpand } = column
+    const { record, index } = props
+    if (disabled?.(record, index)) {
+      return true
+    }
+    return !(customExpand || record[column.childrenKey]?.length > 0)
+  })
 }
 
 function renderChildren(

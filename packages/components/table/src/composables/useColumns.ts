@@ -56,6 +56,7 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
 }
 export interface TableColumnMergedExpandable extends TableColumnExpandable {
   align: TableColumnAlign
+  childrenKey: string
   key: Key
   icon: [string, string]
   titleColSpan: number
@@ -160,8 +161,8 @@ function covertColumn(
 
   if ('type' in column) {
     if (column.type === 'expandable') {
-      const icon = column.icon ?? expandableConfig.icon
-      return { ...column, key: column.type, icon, align }
+      const { childrenKey = 'children', icon = expandableConfig.icon } = column
+      return { ...column, key: column.type, align, childrenKey, icon }
     } else {
       // The default value for `multiple` is true
       const multiple = column.multiple ?? true
