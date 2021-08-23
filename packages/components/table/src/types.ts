@@ -11,6 +11,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tableProps = {
   borderless: IxPropTypes.bool,
+
   columns: IxPropTypes.array<TableColumn>().isRequired,
   dataSource: IxPropTypes.array().isRequired,
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
@@ -78,6 +79,7 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
 export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T> {
   type: 'expandable'
+  childrenKey?: string
   customExpand?: string | TableColumnExpandableExpandFn<T>
   customIcon?: string | TableColumnExpandableIconFn<T>
 

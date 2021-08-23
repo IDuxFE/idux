@@ -1,5 +1,6 @@
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 import type { Key, TableProps, TablePagination } from '../types'
+import type { ExpandableContext } from './useExpandable'
 import type { GetRowKey } from './useGetRowKey'
 
 import { computed } from 'vue'
@@ -7,10 +8,12 @@ import { computed } from 'vue'
 export function useDataSource(
   props: TableProps,
   getRowKey: ComputedRef<GetRowKey>,
-  expandedRowKeys: Ref<Key[]>,
+  { expandable, expandedRowKeys }: ExpandableContext,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
-  const mergedData = computed(() => props.dataSource.map(record => covertMergeData(record, getRowKey.value)))
+  const mergedData = computed(() =>
+    props.dataSource.map(record => covertMergeData(record, getRowKey.value, expandable.value?.childrenKey)),
+  )
   const mergedMap = computed(() => {
     const map = new Map<Key, MergedData>()
     covertDataMap(mergedData.value, map)
@@ -68,13 +71,13 @@ export interface FlattedData extends MergedData {
   level: number
 }
 
-function covertMergeData(record: unknown, getRowKey: GetRowKey, parentKey?: Key) {
+function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey?: string, parentKey?: Key) {
   const rowKey = getRowKey(record)
   const result: MergedData = { record, rowKey, parentKey }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const children = (record as any).children as any[]
-  if (children) {
-    result.children = children.map(subRecord => covertMergeData(subRecord, getRowKey, rowKey))
+
+  const subData = childrenKey ? ((record as Record<string, unknown>)[childrenKey] as unknown[]) : false
+  if (subData) {
+    result.children = subData.map(subRecord => covertMergeData(subRecord, getRowKey, childrenKey, rowKey))
   }
   return result
 }

@@ -32,22 +32,9 @@ renderer.link = function (href: string, title: string, text: string) {
 }
 
 renderer.heading = function (text, level) {
-  const lowerText = text.toLowerCase().replace(/ /g, '-').replace(/\./g, '-').replace(/\?/g, '')
-  const isMarkedLabel = level === 3 && text.indexOf('ix-') === 0
-  const isDirective = text[0] === '[' && text[text.length - 1] === ']'
-  const isComponent = isMarkedLabel && !isDirective
-  const isService = text.indexOf('Ix') === 0 && text.indexOf('Service') > -1
-  const head = `<h${level} id="${lowerText}"><span>${text}</span>`
-  const link = `<a onclick="window.location.hash = '${lowerText}'" class="anchor">#</a></h${level}>`
-  if (isComponent) {
-    return head + `<label class="api-type-label component">component</label>` + link
-  } else if (isDirective) {
-    return head + `<label class="api-type-label directive">directive</label>` + link
-  } else if (isService) {
-    return head + `<label class="api-type-label service">service</label>` + link
-  } else {
-    return head + link
-  }
+  const head = `<h${level} id="${text}"><span>${text}</span>`
+  const link = `<a onclick="window.location.hash = '${text}'" class="anchor">#</a></h${level}>`
+  return head + link
 }
 
 renderer.code = function (code: string, infoString: string, escaped: boolean) {

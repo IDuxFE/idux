@@ -26,7 +26,7 @@ export default defineComponent({
     const columnsContext = useColumns(props, config)
     const { mergedPagination } = usePagination(props, config)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
-    const dataContext = useDataSource(props, getRowKey, expandableContext.expandedRowKeys, mergedPagination)
+    const dataContext = useDataSource(props, getRowKey, expandableContext, mergedPagination)
     const selectableContext = useSelectable(props, columnsContext.flattedColumns, dataContext)
 
     provide(tableToken, {
