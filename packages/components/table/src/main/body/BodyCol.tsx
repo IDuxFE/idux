@@ -1,4 +1,4 @@
-import type { ComputedRef, Slots } from 'vue'
+import type { ComputedRef, Slots, StyleValue } from 'vue'
 import type { TableBodyColProps } from '../../types'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -11,8 +11,7 @@ import { getColTitle } from '../../utils'
 export default defineComponent({
   props: tableBodyColProps,
   setup(props) {
-    const { bodyColTag, slots } = inject(tableToken)!
-    const classes = useClasses(props)
+    const { slots, bodyColTag } = inject(tableToken)!
     const dataValue = useDataValue(props)
 
     return () => {
@@ -22,7 +21,6 @@ export default defineComponent({
         title: getColTitle(ellipsis, children, dataValue.value),
         colSpan: colSpan === 1 ? undefined : colSpan,
         rowSpan: rowSpan === 1 ? undefined : rowSpan,
-        class: classes.value,
       }
 
       const BodyColTag = bodyColTag.value as any
@@ -34,18 +32,6 @@ export default defineComponent({
     }
   },
 })
-
-function useClasses(props: TableBodyColProps) {
-  return computed(() => {
-    const { align, ellipsis } = props
-    const prefixCls = 'ix-table-td'
-    return {
-      [prefixCls]: true,
-      [`${prefixCls}-align-${align}`]: true,
-      [`${prefixCls}-ellipsis`]: ellipsis,
-    }
-  })
-}
 
 function useDataValue(props: TableBodyColProps) {
   return computed(() => {
