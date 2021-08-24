@@ -2,6 +2,7 @@ import type { App, DefineComponent, Directive, Plugin } from 'vue'
 
 // import General
 import { IxButton, IxButtonGroup } from '@idux/components/button'
+import { createGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxHeader } from '@idux/components/header'
 import { IxTag } from '@idux/components/tag'
@@ -133,7 +134,16 @@ const directives: Record<string, Directive> = {
   // --- directives end ---
 }
 
-const plugins: Plugin[] = []
+// 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
+const loadIconDynamically = (iconName: string) => {
+  return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
+}
+
+const globalConfig = createGlobalConfig({
+  icon: { loadIconDynamically },
+})
+
+const plugins: Plugin[] = [globalConfig]
 
 const install = (app: App): void => {
   components.forEach(component => {

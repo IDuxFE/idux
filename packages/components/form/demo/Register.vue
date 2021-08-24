@@ -111,7 +111,7 @@ export default defineComponent({
       if (formGroup.valid.value) {
         console.log('register', formGroup.getValue())
       } else {
-        formGroup.markAsBlurred()
+        formGroup.markAsDirty()
       }
     }
 

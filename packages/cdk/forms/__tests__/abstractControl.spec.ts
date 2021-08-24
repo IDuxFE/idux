@@ -29,7 +29,7 @@ class Control<T = unknown> extends AbstractControl<T> {
   }
 
   private _watchEffect() {
-    watch([this._valueRef, this._blurred], () => {
+    watch([this._valueRef], () => {
       this._validate()
     })
 

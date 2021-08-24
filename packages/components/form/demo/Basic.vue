@@ -46,7 +46,7 @@ export default defineComponent({
       if (formGroup.valid.value) {
         console.log('login', formGroup.getValue())
       } else {
-        formGroup.markAsBlurred()
+        formGroup.markAsDirty()
       }
     }
 
