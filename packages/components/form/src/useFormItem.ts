@@ -9,11 +9,11 @@ import { isFunction, isNumber, isString } from 'lodash-es'
 import { useValueControl, provideControlOrPath } from '@idux/cdk/forms'
 import { getLocale, LocaleType } from '@idux/components/i18n'
 
-export const useFormItemClasses = (
+export function useFormItemClasses(
   hasFeedback: ComputedRef<boolean>,
   status: ComputedRef<ValidateStatus | null>,
   message: ComputedRef<string | null>,
-): ComputedRef<Record<string, boolean>> => {
+): ComputedRef<Record<string, boolean>> {
   return computed(() => {
     const statusValue = status.value
     return {
@@ -25,10 +25,10 @@ export const useFormItemClasses = (
   })
 }
 
-export const useFormItemLabelClasses = (
+export function useFormItemLabelClasses(
   props: FormItemProps,
   formContext: FormContext | undefined,
-): ComputedRef<Record<string, boolean>> => {
+): ComputedRef<Record<string, boolean>> {
   return computed(() => {
     const labelAlign = props.labelAlign ?? formContext?.labelAlign.value
     return {
@@ -40,7 +40,7 @@ export const useFormItemLabelClasses = (
   })
 }
 
-const normalizeColConfig = (col: string | number | ColProps | undefined) => {
+function normalizeColConfig(col: string | number | ColProps | undefined) {
   return isNumber(col) || isString(col) ? { span: col } : col
 }
 
@@ -49,79 +49,11 @@ export interface UseFormItemColConfig {
   controlColConfig: ComputedRef<ColProps | undefined>
 }
 
-export const useFormItemColConfig = (
-  props: FormItemProps,
-  formContext: FormContext | undefined,
-): UseFormItemColConfig => {
+export function useFormItemColConfig(props: FormItemProps, formContext: FormContext | undefined): UseFormItemColConfig {
   return {
     labelColConfig: computed(() => normalizeColConfig(props.labelCol ?? formContext?.labelCol.value)),
     controlColConfig: computed(() => normalizeColConfig(props.controlCol ?? formContext?.controlCol.value)),
   }
-}
-
-const useStatus = (props: FormItemProps, control: ComputedRef<AbstractControl | null>) => {
-  return computed(() => {
-    if (props.status !== undefined) {
-      return props.status
-    }
-    const currControl = control.value
-    if (!currControl) {
-      return null
-    }
-    if (currControl.blurred.value || currControl.dirty.value) {
-      return currControl.status.value
-    }
-    return null
-  })
-}
-
-const getMessageByError = (error: ValidateErrors | null | undefined, localeType: LocaleType) => {
-  if (!error) {
-    return null
-  }
-
-  for (const key in error) {
-    const { message, ...rest } = error[key]
-    if (message) {
-      if (isString(message)) {
-        return message
-      }
-
-      if (isFunction(message)) {
-        return message(rest)
-      }
-
-      const currMessage = message[localeType]
-      if (isString(currMessage)) {
-        return currMessage
-      }
-      return currMessage(rest)
-    }
-  }
-
-  return null
-}
-
-const useMessage = (
-  control: ComputedRef<AbstractControl | null>,
-  status: ComputedRef<ValidateStatus | null>,
-  messages: ComputedRef<Partial<Record<ValidateStatus, string | FormMessageFn>>>,
-  errors: ComputedRef<ValidateErrors | null | undefined>,
-) => {
-  const locale = getLocale()
-  return computed(() => {
-    const currStatus = status.value
-    if (!currStatus) {
-      return null
-    }
-
-    const currMessage = messages.value[currStatus]
-    if (currMessage) {
-      return isString(currMessage) ? currMessage : currMessage(control.value)
-    }
-
-    return getMessageByError(errors.value, locale.value.type)
-  })
 }
 
 export interface UseFormItemControl {
@@ -160,4 +92,73 @@ export const useFormItemControl = (props: FormItemProps): UseFormItemControl => 
   })
 
   return { control, errors, status, message, statusIcon }
+}
+
+function useStatus(props: FormItemProps, control: ComputedRef<AbstractControl | null>) {
+  return computed(() => {
+    if (props.status !== undefined) {
+      return props.status
+    }
+    const currControl = control.value
+    if (!currControl) {
+      return null
+    }
+    if (currControl.manualValidated.value) {
+      return currControl.status.value
+    }
+    const { trigger, dirty, blurred } = currControl
+    if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
+      return currControl.status.value
+    }
+    return null
+  })
+}
+
+function useMessage(
+  control: ComputedRef<AbstractControl | null>,
+  status: ComputedRef<ValidateStatus | null>,
+  messages: ComputedRef<Partial<Record<ValidateStatus, string | FormMessageFn>>>,
+  errors: ComputedRef<ValidateErrors | null | undefined>,
+) {
+  const locale = getLocale()
+  return computed(() => {
+    const currStatus = status.value
+    if (!currStatus) {
+      return null
+    }
+
+    const currMessage = messages.value[currStatus]
+    if (currMessage) {
+      return isString(currMessage) ? currMessage : currMessage(control.value)
+    }
+
+    return getMessageByError(errors.value, locale.value.type)
+  })
+}
+
+function getMessageByError(error: ValidateErrors | null | undefined, localeType: LocaleType) {
+  if (!error) {
+    return null
+  }
+
+  for (const key in error) {
+    const { message, ...rest } = error[key]
+    if (message) {
+      if (isString(message)) {
+        return message
+      }
+
+      if (isFunction(message)) {
+        return message(rest)
+      }
+
+      const currMessage = message[localeType]
+      if (isString(currMessage)) {
+        return currMessage
+      }
+      return currMessage(rest)
+    }
+  }
+
+  return null
 }

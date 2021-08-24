@@ -74,7 +74,7 @@ export default defineComponent({
       if (formGroup.valid.value) {
         console.log('submit', formGroup.getValue())
       } else {
-        formGroup.markAsBlurred()
+        formGroup.markAsDirty()
       }
     }
 

@@ -232,6 +232,11 @@ describe('formArray.ts', () => {
       array.setValue([{ control: '1234' }])
       await flushPromises()
 
+      expect(array.invalid.value).toEqual(false)
+
+      array.markAsBlurred()
+      await flushPromises()
+
       expect(array.invalid.value).toEqual(true)
       expect(array.hasError('test')).toEqual(true)
     })

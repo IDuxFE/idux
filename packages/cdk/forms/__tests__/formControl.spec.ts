@@ -113,6 +113,11 @@ describe('formControl.ts', () => {
       control.setValue('')
       await flushPromises()
 
+      expect(control.hasError('required')).toEqual(false)
+
+      control.markAsBlurred()
+      await flushPromises()
+
       expect(control.hasError('required')).toEqual(true)
     })
 
