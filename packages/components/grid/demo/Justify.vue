@@ -1,41 +1,41 @@
 <template>
-  <ix-divider position="left" dashed>Justify start</ix-divider>
-  <ix-row justify="start">
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Justify start</IxDivider>
+  <IxRow justify="start">
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Justify center</ix-divider>
-  <ix-row justify="center">
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Justify center</IxDivider>
+  <IxRow justify="center">
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Justify end</ix-divider>
-  <ix-row justify="end">
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Justify end</IxDivider>
+  <IxRow justify="end">
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Justify space-between</ix-divider>
-  <ix-row justify="space-between">
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Justify space-between</IxDivider>
+  <IxRow justify="space-between">
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Justify space-around</ix-divider>
-  <ix-row justify="space-around">
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-    <ix-col :span="4"> col-4 </ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Justify space-around</IxDivider>
+  <IxRow justify="space-around">
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+    <IxCol :span="4"> col-4 </IxCol>
+  </IxRow>
 </template>

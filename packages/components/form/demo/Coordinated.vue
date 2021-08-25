@@ -1,21 +1,21 @@
 <template>
-  <ix-form class="demo-form" :control="formGroup" labelCol="6">
-    <ix-form-item control="method" label="Method" required message="Please select your contact method!">
-      <ix-select>
-        <ix-option label="E-mail" value="email"></ix-option>
-        <ix-option label="MobilePhone" value="mobilePhone"></ix-option>
-      </ix-select>
-    </ix-form-item>
-    <ix-form-item control="contact" label="Contact" required :message="getContactMessage">
-      <ix-input></ix-input>
-    </ix-form-item>
-    <ix-form-item control="subscribe" :controlCol="{ offset: 6 }">
-      <ix-checkbox>Subscribe notifications</ix-checkbox>
-    </ix-form-item>
-    <ix-form-item :controlCol="{ offset: 6 }">
-      <ix-button mode="primary" @click="onSubmit">Submit</ix-button>
-    </ix-form-item>
-  </ix-form>
+  <IxForm class="demo-form" :control="formGroup" labelCol="6">
+    <IxFormItem control="method" label="Method" required message="Please select your contact method!">
+      <IxSelect>
+        <IxSelectOption label="E-mail" value="email"></IxSelectOption>
+        <IxSelectOption label="MobilePhone" value="mobilePhone"></IxSelectOption>
+      </IxSelect>
+    </IxFormItem>
+    <IxFormItem control="contact" label="Contact" required :message="getContactMessage">
+      <IxInput></IxInput>
+    </IxFormItem>
+    <IxFormItem control="subscribe" :controlCol="{ offset: 6 }">
+      <IxCheckbox>Subscribe notifications</IxCheckbox>
+    </IxFormItem>
+    <IxFormItem :controlCol="{ offset: 6 }">
+      <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
+    </IxFormItem>
+  </IxForm>
 </template>
 
 <script lang="ts">

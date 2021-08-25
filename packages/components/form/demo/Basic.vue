@@ -1,31 +1,31 @@
 <template>
-  <ix-form class="demo-form" :control="formGroup">
-    <ix-form-item control="username" message="Please input your username!">
-      <ix-input prefix="user"></ix-input>
-    </ix-form-item>
-    <ix-form-item control="password" message="Please input your password, its length is 6-18!">
-      <ix-input prefix="lock" :type="passwordVisible ? 'text' : 'password'">
+  <IxForm class="demo-form" :control="formGroup">
+    <IxFormItem control="username" message="Please input your username!">
+      <IxInput prefix="user"></IxInput>
+    </IxFormItem>
+    <IxFormItem control="password" message="Please input your password, its length is 6-18!">
+      <IxInput prefix="lock" :type="passwordVisible ? 'text' : 'password'">
         <template #suffix>
-          <ix-icon :name="passwordVisible ? 'eye-invisible' : 'eye'" @click="passwordVisible = !passwordVisible">
-          </ix-icon>
+          <IxIcon :name="passwordVisible ? 'eye-invisible' : 'eye'" @click="passwordVisible = !passwordVisible">
+          </IxIcon>
         </template>
-      </ix-input>
-    </ix-form-item>
-    <ix-form-item control="remember">
-      <ix-checkbox>Remember me</ix-checkbox>
-    </ix-form-item>
-    <ix-form-item>
-      <ix-button mode="primary" block @click="login">Login</ix-button>
-    </ix-form-item>
-    <ix-row>
-      <ix-col span="12">
+      </IxInput>
+    </IxFormItem>
+    <IxFormItem control="remember">
+      <IxCheckbox>Remember me</IxCheckbox>
+    </IxFormItem>
+    <IxFormItem>
+      <IxButton mode="primary" block @click="login">Login</IxButton>
+    </IxFormItem>
+    <IxRow>
+      <IxCol span="12">
         <a>Forgot password</a>
-      </ix-col>
-      <ix-col span="12" class="text-right">
+      </IxCol>
+      <IxCol span="12" class="text-right">
         <a>Register now!</a>
-      </ix-col>
-    </ix-row>
-  </ix-form>
+      </IxCol>
+    </IxRow>
+  </IxForm>
 </template>
 
 <script lang="ts">

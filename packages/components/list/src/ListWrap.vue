@@ -1,5 +1,5 @@
 <template>
-  <ix-row v-if="isUseGrid" :gutter="gutter"><slot /></ix-row>
+  <IxRow v-if="isUseGrid" :gutter="gutter"><slot /></IxRow>
   <div v-else><slot /></div>
 </template>
 

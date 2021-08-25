@@ -1,3 +1,3 @@
 <template>
-  <ix-input borderless placeholder="borderless box" />
+  <IxInput borderless placeholder="borderless box" />
 </template>

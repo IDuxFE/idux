@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
-import type { InputProps, TextareaProps } from './types'
+import type { CommonProps } from './types'
 
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
@@ -28,10 +28,8 @@ export interface CommonBindings<T extends HTMLInputElement | HTMLTextAreaElement
   handlerClear: (evt: MouseEvent) => void
 }
 
-export function useCommonBindings(props: InputProps, config: InputConfig): CommonBindings<HTMLInputElement>
-export function useCommonBindings(props: TextareaProps, config: TextareaConfig): CommonBindings<HTMLTextAreaElement>
 export function useCommonBindings(
-  props: InputProps | TextareaProps,
+  props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
   const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()

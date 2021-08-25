@@ -1,22 +1,22 @@
 <template>
-  <ix-space>
-    <ix-button @click="visible = !visible">Change visible</ix-button>
-    <ix-button mode="primary" @click="openModal">Open modal</ix-button>
-  </ix-space>
-  <ix-modal v-model:visible="visible" type="confirm" :footer="null" title="This is title">
+  <IxSpace>
+    <IxButton @click="visible = !visible">Change visible</IxButton>
+    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
+  </IxSpace>
+  <IxModal v-model:visible="visible" type="confirm" :footer="null" title="This is title">
     <MyComponent></MyComponent>
-  </ix-modal>
+  </IxModal>
 </template>
 
 <script lang="ts">
 import { defineComponent, h, inject, ref } from 'vue'
 import { IxButton } from '@idux/components/button'
-import { modalToken, useModal } from '@idux/components/modal'
+import { MODAL_TOKEN, useModal } from '@idux/components/modal'
 
 const MyComponent = {
   props: {},
   setup() {
-    const { props, cancel, ok } = inject(modalToken)!
+    const { props, cancel, ok } = inject(MODAL_TOKEN)!
 
     const content = h('p', { style: { marginBottom: '16px' } }, { default: () => `modal title is: ${props.title}` })
 

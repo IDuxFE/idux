@@ -1,11 +1,11 @@
 <template>
-  <ix-list :grid="{ gutter: [30, 20], column: 3, xs: 2, sm: 3, md: 4, lg: 5, xl: 3 }">
-    <ix-list-item v-for="item in listData" :key="item.title">
-      <ix-card :title="item.title">
+  <IxList :grid="{ gutter: [30, 20], column: 3, xs: 2, sm: 3, md: 4, lg: 5, xl: 3 }">
+    <IxList-item v-for="item in listData" :key="item.title">
+      <IxCard :title="item.title">
         <p>{{ item.content }}</p>
-      </ix-card>
-    </ix-list-item>
-  </ix-list>
+      </IxCard>
+    </IxList-item>
+  </IxList>
 </template>
 
 <script lang="ts">

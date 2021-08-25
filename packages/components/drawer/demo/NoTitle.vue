@@ -1,10 +1,10 @@
 <template>
-  <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" :on-close="onClose">
+  <IxButton @click="showDrawer"> Click me </IxButton>
+  <IxDrawer v-model:visible="visible" :on-close="onClose">
     <p>没有标题的抽屉内容</p>
     <p>没有标题的抽屉内容</p>
     <p>没有标题的抽屉内容</p>
-  </ix-drawer>
+  </IxDrawer>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

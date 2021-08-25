@@ -29,22 +29,22 @@ export const getComponentScript = (componentName: string, imports: string[], com
 export const getExampleTemplate = (single: boolean, first: string, second?: string): string => {
   if (single) {
     return `
-  <ix-row gutter="8">
-    <ix-col span="24">
+  <IxRow gutter="8">
+    <IxCol span="24">
 		${first}
-	  </ix-col>
-  </ix-row>
+	  </IxCol>
+  </IxRow>
 `
   }
   return `
-  <ix-row gutter="16">
-    <ix-col lg="12" span="24">
+  <IxRow gutter="16">
+    <IxCol lg="12" span="24">
       ${first}
-    </ix-col>
-    <ix-col lg="12" span="24">
+    </IxCol>
+    <IxCol lg="12" span="24">
       ${second}
-    </ix-col>
-  </ix-row>
+    </IxCol>
+  </IxRow>
 `
 }
 

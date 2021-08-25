@@ -1,7 +1,7 @@
 <template>
-  <ix-select v-model:value="singleValue" :compareWith="compareFn">
-    <ix-option v-for="option in options" :key="option.value" :label="option.label" :value="option" />
-  </ix-select>
+  <IxSelect v-model:value="singleValue" :compareWith="compareFn">
+    <IxSelectOption v-for="option in options" :key="option.value" :label="option.label" :value="option" />
+  </IxSelect>
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'

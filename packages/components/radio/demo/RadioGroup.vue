@@ -1,10 +1,10 @@
 <template>
-  <ix-radio-group v-model:value="value" @Change="onChang">
-    <ix-radio value="a">A</ix-radio>
-    <ix-radio value="b">B</ix-radio>
-    <ix-radio value="c">C</ix-radio>
-    <ix-radio value="d">D</ix-radio>
-  </ix-radio-group>
+  <IxRadioGroup v-model:value="value" @Change="onChang">
+    <IxRadio value="a">A</IxRadio>
+    <IxRadio value="b">B</IxRadio>
+    <IxRadio value="c">C</IxRadio>
+    <IxRadio value="d">D</IxRadio>
+  </IxRadioGroup>
 </template>
 
 <script lang="ts">

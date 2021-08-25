@@ -1,10 +1,10 @@
 <template>
   <div :class="classes" :style="tagStyle">
     <span v-if="icon || $slots.icon" class="ix-tag-icon">
-      <slot name="icon"><ix-icon :name="icon" /></slot>
+      <slot name="icon"><IxIcon :name="icon" /></slot>
     </span>
     <span class="ix-tag-content"><slot></slot></span>
-    <ix-icon v-if="closeAbleFlag" name="close" class="ix-tag-close-icon" @click="onClose" />
+    <IxIcon v-if="closeAbleFlag" name="close" class="ix-tag-close-icon" @click="onClose" />
   </div>
 </template>
 <script lang="ts">

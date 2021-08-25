@@ -1,21 +1,21 @@
 <template>
-  <ix-space>
-    <ix-tooltip title="prompt text">
-      <ix-button>Hover</ix-button>
-    </ix-tooltip>
-    <ix-tooltip title="prompt text" trigger="focus">
-      <ix-button>Focus</ix-button>
-    </ix-tooltip>
-    <ix-tooltip title="prompt text" trigger="click">
-      <ix-button>Click</ix-button>
-    </ix-tooltip>
-    <ix-tooltip title="prompt text" trigger="contextmenu">
-      <ix-button>Context Menu</ix-button>
-    </ix-tooltip>
-    <ix-tooltip title="prompt text" trigger="manual" :visible="visible">
-      <ix-button @click="visible = !visible">Manual</ix-button>
-    </ix-tooltip>
-  </ix-space>
+  <IxSpace>
+    <IxTooltip title="prompt text">
+      <IxButton>Hover</IxButton>
+    </IxTooltip>
+    <IxTooltip title="prompt text" trigger="focus">
+      <IxButton>Focus</IxButton>
+    </IxTooltip>
+    <IxTooltip title="prompt text" trigger="click">
+      <IxButton>Click</IxButton>
+    </IxTooltip>
+    <IxTooltip title="prompt text" trigger="contextmenu">
+      <IxButton>Context Menu</IxButton>
+    </IxTooltip>
+    <IxTooltip title="prompt text" trigger="manual" :visible="visible">
+      <IxButton @click="visible = !visible">Manual</IxButton>
+    </IxTooltip>
+  </IxSpace>
 </template>
 
 <script lang="ts">

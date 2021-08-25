@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ix-checkbox-group v-model:value="value" :options="options" />
+    <IxCheckboxGroup v-model:value="value" :options="options" />
   </div>
 </template>
 

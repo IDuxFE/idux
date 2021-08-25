@@ -1,12 +1,12 @@
 <template>
-  <ix-space>
-    <ix-button @click="onOpen">Open</ix-button>
-    <ix-button @click="onConfirm">Confirm</ix-button>
-    <ix-button @click="onInfo">Info</ix-button>
-    <ix-button @click="onSuccess">Success</ix-button>
-    <ix-button @click="onWarning">Warning</ix-button>
-    <ix-button @click="onError">Error</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="onOpen">Open</IxButton>
+    <IxButton @click="onConfirm">Confirm</IxButton>
+    <IxButton @click="onInfo">Info</IxButton>
+    <IxButton @click="onSuccess">Success</IxButton>
+    <IxButton @click="onWarning">Warning</IxButton>
+    <IxButton @click="onError">Error</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

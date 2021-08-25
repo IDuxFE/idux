@@ -1,21 +1,15 @@
 <template>
-  <ix-form class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
-    <ix-form-item control="email" label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
-      <ix-input id="email"></ix-input>
-    </ix-form-item>
-    <ix-form-item
-      control="password"
-      label="Password"
-      labelFor="password"
-      required
-      message="Please input your password!"
-    >
-      <ix-input id="password" type="password"> </ix-input>
-    </ix-form-item>
-    <ix-form-item control="confirmPassword" label="Confirm Password" labelFor="confirmPassword" required>
-      <ix-input id="confirmPassword" type="password"> </ix-input>
-    </ix-form-item>
-    <ix-form-item
+  <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
+    <IxFormItem control="email" label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
+      <IxInput id="email"></IxInput>
+    </IxFormItem>
+    <IxFormItem control="password" label="Password" labelFor="password" required message="Please input your password!">
+      <IxInput id="password" type="password"> </IxInput>
+    </IxFormItem>
+    <IxFormItem control="confirmPassword" label="Confirm Password" labelFor="confirmPassword" required>
+      <IxInput id="confirmPassword" type="password"> </IxInput>
+    </IxFormItem>
+    <IxFormItem
       control="nickname"
       label="Nickname"
       labelFor="nickname"
@@ -23,28 +17,28 @@
       required
       message="Please input your nickname!"
     >
-      <ix-input id="nickname"> </ix-input>
-    </ix-form-item>
-    <ix-form-item
+      <IxInput id="nickname"> </IxInput>
+    </IxFormItem>
+    <IxFormItem
       control="phoneNumber"
       label="Phone Number"
       labelFor="phoneNumber"
       required
       message="Please input your phone number!"
     >
-      <ix-input id="phoneNumber" control="phoneNumber">
+      <IxInput id="phoneNumber" control="phoneNumber">
         <template #addonBefore>
-          <ix-select control="phoneNumberPrefix" style="width: 70px">
-            <ix-option label="+86" value="+86"></ix-option>
-            <ix-option label="+87" value="+87"></ix-option>
-          </ix-select>
+          <IxSelect control="phoneNumberPrefix" style="width: 70px">
+            <IxSelectOption label="+86" value="+86"></IxSelectOption>
+            <IxSelectOption label="+87" value="+87"></IxSelectOption>
+          </IxSelect>
         </template>
-      </ix-input>
-    </ix-form-item>
-    <ix-form-item control="website" label="Website" labelFor="website">
-      <ix-input id="website"> </ix-input>
-    </ix-form-item>
-    <ix-form-item
+      </IxInput>
+    </IxFormItem>
+    <IxFormItem control="website" label="Website" labelFor="website">
+      <IxInput id="website"> </IxInput>
+    </IxFormItem>
+    <IxFormItem
       control="captcha"
       label="Captcha"
       labelFor="captcha"
@@ -52,22 +46,22 @@
       message="Please input the captcha you got!"
       extra="We must make sure that your are a human."
     >
-      <ix-row gutter="8">
-        <ix-col span="12">
-          <ix-input id="captcha"> </ix-input>
-        </ix-col>
-        <ix-col span="12">
-          <ix-button @click="getCaptcha">Get captcha</ix-button>
-        </ix-col>
-      </ix-row>
-    </ix-form-item>
-    <ix-form-item control="agree" :controlCol="noLabelControlCol">
-      <ix-checkbox>I have read the <a>agreement</a> </ix-checkbox>
-    </ix-form-item>
-    <ix-form-item :controlCol="noLabelControlCol">
-      <ix-button mode="primary" @click="register">Register</ix-button>
-    </ix-form-item>
-  </ix-form>
+      <IxRow gutter="8">
+        <IxCol span="12">
+          <IxInput id="captcha"> </IxInput>
+        </IxCol>
+        <IxCol span="12">
+          <IxButton @click="getCaptcha">Get captcha</IxButton>
+        </IxCol>
+      </IxRow>
+    </IxFormItem>
+    <IxFormItem control="agree" :controlCol="noLabelControlCol">
+      <IxCheckbox>I have read the <a>agreement</a> </IxCheckbox>
+    </IxFormItem>
+    <IxFormItem :controlCol="noLabelControlCol">
+      <IxButton mode="primary" @click="register">Register</IxButton>
+    </IxFormItem>
+  </IxForm>
 </template>
 
 <script lang="ts">

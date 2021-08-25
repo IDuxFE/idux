@@ -1,12 +1,12 @@
 <template>
   <div>
-    <ix-progress type="circle" :percent="75" :format="percent => `${percent} Days`" />
-    <ix-progress type="circle" :percent="100" :format="() => 'Done'" />
-    <ix-progress type="circle" :percent="75">
+    <IxProgress type="circle" :percent="75" :format="percent => `${percent} Days`" />
+    <IxProgress type="circle" :percent="100" :format="() => 'Done'" />
+    <IxProgress type="circle" :percent="75">
       <template #format="{ percent }">
         <span style="color: red">{{ percent }}</span>
       </template>
-    </ix-progress>
+    </IxProgress>
   </div>
 </template>
 <style scoped>

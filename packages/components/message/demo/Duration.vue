@@ -1,9 +1,9 @@
 <template>
-  <ix-space>
-    <ix-button @click="open">Duration 10s</ix-button>
-    <ix-button @click="open2">Duration 0</ix-button>
-    <ix-button @click="manuallyDestroy">Manually destroy</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="open">Duration 10s</IxButton>
+    <IxButton @click="open2">Duration 0</IxButton>
+    <IxButton @click="manuallyDestroy">Manually destroy</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

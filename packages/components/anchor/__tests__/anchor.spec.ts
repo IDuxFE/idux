@@ -9,13 +9,13 @@ const TestComponent = defineComponent({
   // eslint-disable-next-line vue/require-prop-types
   props: ['target', 'hidePropsLink', 'emitsHref'],
   template: `
-  <ix-anchor :target="target" >
-    <ix-anchor-link href="#demo" title="Demo" />
-    <ix-anchor-link href="#api" title="API" >
-      <ix-anchor-link v-if="!hidePropsLink" href="#props" title="Props"/>
-      <ix-anchor-link :href="emitsHref || '#emits'" title="Emits" />
-    </ix-anchor-link>
-  </ix-anchor>
+  <IxAnchor :target="target" >
+    <IxAnchorLink href="#demo" title="Demo" />
+    <IxAnchorLink href="#api" title="API" >
+      <IxAnchorLink v-if="!hidePropsLink" href="#props" title="Props"/>
+      <IxAnchorLink :href="emitsHref || '#emits'" title="Emits" />
+    </IxAnchorLink>
+  </IxAnchor>
   <div class="test-target">
     <div id="demo" style="height: 100px;">Demo</div>
     <div id="api">
@@ -31,12 +31,12 @@ describe('Anchor', () => {
   renderWork({
     components: { IxAnchor, IxAnchorLink },
     template: `
-    <ix-anchor>
-      <ix-anchor-link href="#demo" title="demo" />
-      <ix-anchor-link href="#API" title="API" />
-      <ix-anchor-link href="#Props" title="Props"/>
-      <ix-anchor-link href="#Emits" title="Emits" />
-    </ix-anchor>
+    <IxAnchor>
+      <IxAnchorLink href="#demo" title="demo" />
+      <IxAnchorLink href="#API" title="API" />
+      <IxAnchorLink href="#Props" title="Props"/>
+      <IxAnchorLink href="#Emits" title="Emits" />
+    </IxAnchor>
     `,
   })
 

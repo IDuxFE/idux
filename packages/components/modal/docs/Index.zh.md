@@ -80,7 +80,7 @@ export interface ModalButtonProps extends ButtonProps {
 
 <!-- MyComponent.vue -->
 <template>
-  <ix-button @click="openModal">Open</ix-button>
+  <IxButton @click="openModal">Open</IxButton>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -154,9 +154,9 @@ export const modalToken: InjectionKey<ModalBindings & { props: ModalProps }>;
 ```html
 <!-- App.vue -->
 <template>
-  <ix-modal-provider ref="modalProviderRef">
+  <IxModalProvider ref="modalProviderRef">
      <router-view></router-view>
-  </ix-modal-provider>
+  </IxModalProvider>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

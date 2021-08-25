@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checked" :disabled="disabled" label="option" />
+    <IxCheckbox v-model:checked="checked" :disabled="disabled" label="option" />
     <div class="operation-area">
-      <ix-button mode="primary" @click="changeChecked()">checked: {{ checked }}</ix-button>
-      <ix-button mode="primary" @click="changeDisabled()">disabled: {{ disabled }}</ix-button>
+      <IxButton mode="primary" @click="changeChecked()">checked: {{ checked }}</IxButton>
+      <IxButton mode="primary" @click="changeDisabled()">disabled: {{ disabled }}</IxButton>
     </div>
   </div>
 </template>

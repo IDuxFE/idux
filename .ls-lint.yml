@@ -16,10 +16,9 @@ ls:
     .svg: kebab-case
 
 ignore:
-  - packages/components/i18n/src/locales
-  - packages/cdk/node_modules
-  - packages/components/node_modules
   - packages/cdk/CHANGELOG.md
   - packages/components/CHANGELOG.md
   - packages/pro/CHANGELOG.md
   - packages/site/CHANGELOG.md
+  - packages/components/i18n/src/locales
+  - packages/site/components.d.ts

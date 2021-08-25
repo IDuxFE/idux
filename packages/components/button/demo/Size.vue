@@ -1,13 +1,13 @@
 <template>
-  <ix-button @click="changeSize('large')">Large</ix-button>
-  <ix-button @click="changeSize('medium')">Medium</ix-button>
-  <ix-button @click="changeSize('small')">Small</ix-button>
+  <IxButton @click="changeSize('large')">Large</IxButton>
+  <IxButton @click="changeSize('medium')">Medium</IxButton>
+  <IxButton @click="changeSize('small')">Small</IxButton>
   <br />
-  <ix-button mode="primary" :size="size">Primary</ix-button>
-  <ix-button :size="size">Default</ix-button>
-  <ix-button mode="dashed" :size="size">Dashed</ix-button>
-  <ix-button mode="text" :size="size">Text</ix-button>
-  <ix-button mode="link" :size="size" href="https://github.com/IDuxFE/idux" target="_blank">Link</ix-button>
+  <IxButton mode="primary" :size="size">Primary</IxButton>
+  <IxButton :size="size">Default</IxButton>
+  <IxButton mode="dashed" :size="size">Dashed</IxButton>
+  <IxButton mode="text" :size="size">Text</IxButton>
+  <IxButton mode="link" :size="size" href="https://github.com/IDuxFE/idux" target="_blank">Link</IxButton>
 </template>
 
 <script lang="ts">

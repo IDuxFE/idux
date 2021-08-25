@@ -1,7 +1,7 @@
 <template>
-  <ix-radio :disabled="disabled">a</ix-radio>
-  <ix-radio checked :disabled="disabled">b</ix-radio>
-  <ix-button @click="toggle">Toggle</ix-button>
+  <IxRadio :disabled="disabled">a</IxRadio>
+  <IxRadio checked :disabled="disabled">b</IxRadio>
+  <IxButton @click="toggle">Toggle</IxButton>
 </template>
 
 <script lang="ts">

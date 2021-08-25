@@ -2,7 +2,7 @@
   <div class="ix-result" :class="className">
     <div class="ix-result-icon">
       <slot name="icon">
-        <ix-icon :name="currentIcon"></ix-icon>
+        <IxIcon :name="currentIcon"></IxIcon>
       </slot>
     </div>
     <div v-if="hasTitle || !!title" class="ix-result-title">

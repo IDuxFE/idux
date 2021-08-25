@@ -1,14 +1,14 @@
 <template>
-  <ix-header extra="setting" @extraClick="onExtraClick"> Title </ix-header>
-  <ix-header :extra="extraNode" @extraClick="onExtraClick"> Title </ix-header>
-  <ix-header>
+  <IxHeader extra="setting" @extraClick="onExtraClick"> Title </IxHeader>
+  <IxHeader :extra="extraNode" @extraClick="onExtraClick"> Title </IxHeader>
+  <IxHeader>
     Title
     <template #extra>
-      <ix-icon name="setting" @extraClick="onExtraClick"></ix-icon>
-      <ix-icon name="menu" @extraClick="onExtraClick"></ix-icon>
-      <ix-button mode="link" @click="onExtraClick($event)">More</ix-button>
+      <IxIcon name="setting" @extraClick="onExtraClick"></IxIcon>
+      <IxIcon name="menu" @extraClick="onExtraClick"></IxIcon>
+      <IxButton mode="link" @click="onExtraClick($event)">More</IxButton>
     </template>
-  </ix-header>
+  </IxHeader>
 </template>
 <script lang="ts">
 import { IxIcon } from '@idux/components/icon'

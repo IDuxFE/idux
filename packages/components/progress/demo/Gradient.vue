@@ -1,13 +1,13 @@
 <template>
   <div>
-    <ix-progress
+    <IxProgress
       :stroke-color="{
         '0%': '#108ee9',
         '100%': '#87d068',
       }"
       :percent="99.9"
     />
-    <ix-progress
+    <IxProgress
       :stroke-color="{
         from: '#108ee9',
         to: '#87d068',
@@ -15,7 +15,7 @@
       :percent="99.9"
       status="active"
     />
-    <ix-progress
+    <IxProgress
       type="circle"
       :stroke-color="{
         '0%': '#108ee9',
@@ -23,7 +23,7 @@
       }"
       :percent="90"
     />
-    <ix-progress
+    <IxProgress
       type="circle"
       :stroke-color="{
         '0%': '#108ee9',

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ix-spin :tip="tip" :tipAlign="tipAlign">
+    <IxSpin :tip="tip" :tipAlign="tipAlign">
       <div class="content">content</div>
-    </ix-spin>
+    </IxSpin>
     <div class="operation-area">
-      <ix-button mode="primary" @click="changeTipAlign()">切换提示文字排列方式</ix-button>
+      <IxButton mode="primary" @click="changeTipAlign()">切换提示文字排列方式</IxButton>
     </div>
   </div>
 </template>

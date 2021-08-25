@@ -1,5 +1,3 @@
 <template>
-  <ix-input clearable placeholder="clearable input" />
-  <br /><br />
-  <ix-textarea clearable placeholder="clearable textarea" />
+  <IxInput clearable placeholder="clearable input" />
 </template>

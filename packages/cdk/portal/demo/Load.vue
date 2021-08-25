@@ -1,8 +1,8 @@
 <template>
-  <ix-portal target="ix-container" :load="load">
+  <IxPortal target="ix-container" :load="load">
     <div>Portal</div>
-  </ix-portal>
-  <ix-button @click="load = !load">Load</ix-button>
+  </IxPortal>
+  <IxButton @click="load = !load">Load</IxButton>
 </template>
 
 <script lang="ts">

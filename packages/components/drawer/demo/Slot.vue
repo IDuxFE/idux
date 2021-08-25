@@ -1,17 +1,17 @@
 <template>
-  <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" title="抽屉标题" width="50%">
+  <IxButton @click="showDrawer"> Click me </IxButton>
+  <IxDrawer v-model:visible="visible" title="抽屉标题" width="50%">
     <template #title>
       <p>slot自定义标题</p>
     </template>
     <p v-for="i in 100" :key="i">{{ i }}</p>
     <template #footer>
       <div class="footer-btn-wrap">
-        <ix-button class="footer-btn" mode="primary" size="small">编辑</ix-button>
-        <ix-button class="footer-btn" size="small">删除</ix-button>
+        <IxButton class="footer-btn" mode="primary" size="small">编辑</IxButton>
+        <IxButton class="footer-btn" size="small">删除</IxButton>
       </div>
     </template>
-  </ix-drawer>
+  </IxDrawer>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

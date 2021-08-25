@@ -2,9 +2,9 @@
   <div v-if="!grid" class="ix-list-item">
     <slot></slot>
   </div>
-  <ix-col v-else :xs="grid.xs" :sm="grid.sm" :md="grid.md" :lg="grid.lg" :xl="grid.xl">
+  <IxCol v-else :xs="grid.xs" :sm="grid.sm" :md="grid.md" :lg="grid.lg" :xl="grid.xl">
     <slot></slot>
-  </ix-col>
+  </IxCol>
 </template>
 
 <script lang="ts">

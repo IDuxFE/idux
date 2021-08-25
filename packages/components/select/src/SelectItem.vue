@@ -4,7 +4,7 @@
       <slot> {{ label }} </slot>
     </span>
     <span v-if="removeable && !disabled" class="ix-select-item-remove" @click.stop="$emit('delete')">
-      <ix-icon name="close" />
+      <IxIcon name="close" />
     </span>
   </div>
 </template>
@@ -14,7 +14,6 @@ import { IxIcon } from '@idux/components/icon'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({
-  name: 'IxSelectItem',
   components: { IxIcon },
   props: {
     removeable: IxPropTypes.bool,

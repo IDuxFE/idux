@@ -1,5 +1,5 @@
 <template>
-  <ix-tooltip title="prompt text" destroyOnHide>
+  <IxTooltip title="prompt text" destroyOnHide>
     <span>Tooltip will show when it's hovered.</span>
-  </ix-tooltip>
+  </IxTooltip>
 </template>

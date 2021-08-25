@@ -1,13 +1,13 @@
 <template>
-  <ix-dropdown icon="down">
+  <IxDropdown icon="down">
     Hover me
     <template #overlay>
-      <ix-menu>
-        <ix-menu-item> Item 1 </ix-menu-item>
-        <ix-menu-item> Item 2 </ix-menu-item>
-        <ix-menu-divider />
-        <ix-menu-item disabled> Item 3 </ix-menu-item>
-      </ix-menu>
+      <IxMenu>
+        <IxMenuItem> Item 1 </IxMenuItem>
+        <IxMenuItem> Item 2 </IxMenuItem>
+        <IxMenuDivider />
+        <IxMenuItem disabled> Item 3 </IxMenuItem>
+      </IxMenu>
     </template>
-  </ix-dropdown>
+  </IxDropdown>
 </template>

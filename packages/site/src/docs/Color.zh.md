@@ -6,4 +6,4 @@ order: 10
 
 ### 基础色板
 
-<global-colors />
+<GlobalColors />

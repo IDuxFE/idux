@@ -1,24 +1,24 @@
 <template>
-  <ix-switch v-model:checked="loading"></ix-switch>
+  <IxSwitch v-model:checked="loading"></IxSwitch>
   <br />
-  <ix-row>
-    <ix-col xs="24" sm="8">
-      <ix-card :loading="loading" :header="{ title: 'Card title', extra: 'setting' }">
+  <IxRow>
+    <IxCol xs="24" sm="8">
+      <IxCard :loading="loading" :header="{ title: 'Card title', extra: 'setting' }">
         <p>Card content</p>
         <p>Card content</p>
         <p>Card content</p>
-      </ix-card>
-    </ix-col>
-    <ix-col xs="24" sm="8">
-      <ix-card :loading="loading" :footer="footer">
-        <ix-header
+      </IxCard>
+    </IxCol>
+    <IxCol xs="24" sm="8">
+      <IxCard :loading="loading" :footer="footer">
+        <IxHeader
           :avatar="{ src: '/images/avatar/2.png' }"
           title="Card title"
           description="This is the description"
-        ></ix-header>
-      </ix-card>
-    </ix-col>
-  </ix-row>
+        ></IxHeader>
+      </IxCard>
+    </IxCol>
+  </IxRow>
 </template>
 
 <script lang="ts">

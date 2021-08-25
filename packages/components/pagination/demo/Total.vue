@@ -1,13 +1,13 @@
 <template>
-  <ix-pagination :pageIndex="1" :total="500" :showTotal="false" />
+  <IxPagination :pageIndex="1" :total="500" :showTotal="false" />
   <br />
-  <ix-pagination :pageIndex="1" :total="500" :totalRender="totalRender" />
+  <IxPagination :pageIndex="1" :total="500" :totalRender="totalRender" />
   <br />
-  <ix-pagination :pageIndex="1" :total="500">
+  <IxPagination :pageIndex="1" :total="500">
     <template #total="{ total, range }">
       <span>{{ range[0] }}-{{ range[1] }} of {{ total }} items</span>
     </template>
-  </ix-pagination>
+  </IxPagination>
 </template>
 
 <script lang="ts">

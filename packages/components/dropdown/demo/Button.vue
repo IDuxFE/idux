@@ -1,28 +1,28 @@
 <template>
-  <ix-space>
-    <ix-dropdown-button @click="onClick">
+  <IxSpace>
+    <IxDropdownButton @click="onClick">
       Dropdown
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown-button>
-    <ix-dropdown-button icon="setting" @click="onClick">
+    </IxDropdownButton>
+    <IxDropdownButton icon="setting" @click="onClick">
       Dropdown
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown-button>
-  </ix-space>
+    </IxDropdownButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

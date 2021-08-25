@@ -1,11 +1,11 @@
 <template>
-  <ix-space>
-    <ix-button @click="info('Info message')">Info</ix-button>
-    <ix-button @click="success('Success message')">Success</ix-button>
-    <ix-button @click="warning('Warning message')">Warning</ix-button>
-    <ix-button @click="error('Error message')">Error</ix-button>
-    <ix-button @click="loading('Loading message')">Loading</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="info('Info message')">Info</IxButton>
+    <IxButton @click="success('Success message')">Success</IxButton>
+    <IxButton @click="warning('Warning message')">Warning</IxButton>
+    <IxButton @click="error('Error message')">Error</IxButton>
+    <IxButton @click="loading('Loading message')">Loading</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

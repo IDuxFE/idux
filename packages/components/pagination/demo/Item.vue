@@ -1,13 +1,13 @@
 <template>
-  <ix-pagination :pageIndex="1" :total="500" :itemRender="itemRender" />
+  <IxPagination :pageIndex="1" :total="500" :itemRender="itemRender" />
   <br />
-  <ix-pagination :pageIndex="1" :total="500">
+  <IxPagination :pageIndex="1" :total="500">
     <template #item="{ type, original }">
-      <ix-button v-if="type === 'prev'" mode="text" size="small">Previous</ix-button>
-      <ix-button v-else-if="type === 'next'" mode="text" size="small">Next</ix-button>
+      <IxButton v-if="type === 'prev'" mode="text" size="small">Previous</IxButton>
+      <IxButton v-else-if="type === 'next'" mode="text" size="small">Next</IxButton>
       <component :is="original" v-else />
     </template>
-  </ix-pagination>
+  </IxPagination>
 </template>
 
 <script lang="ts">

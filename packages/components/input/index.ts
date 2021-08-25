@@ -1,18 +1,12 @@
-import type { InputComponent, TextareaComponent } from './src/types'
+import type { InputComponent } from './src/types'
 
 import Input from './src/Input'
-import Textarea from './src/Textarea'
 
 const IxInput = Input as unknown as InputComponent
-const IxTextarea = Textarea as unknown as TextareaComponent
 
-export { IxInput, IxTextarea }
+export { IxInput }
 
-export type {
-  InputInstance,
-  InputPublicProps as InputProps,
-  TextareaInstance,
-  TextareaPublicProps as TextareaProps,
-  TextareaAutoRows,
-  TextareaResize,
-} from './src/types'
+export type { InputInstance, InputPublicProps as InputProps } from './src/types'
+
+export { commonProps as ɵCommonProps } from './src/types'
+export { useCommonBindings as ɵUseCommonBindings } from './src/useCommonBindings'

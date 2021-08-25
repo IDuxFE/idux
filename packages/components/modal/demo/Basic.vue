@@ -1,10 +1,10 @@
 <template>
-  <ix-button mode="primary" @click="visible = !visible">Change visible</ix-button>
-  <ix-modal v-model:visible="visible" header="This is header">
+  <IxButton mode="primary" @click="visible = !visible">Change visible</IxButton>
+  <IxModal v-model:visible="visible" header="This is header">
     <p>Some contents...</p>
     <p>Some contents...</p>
     <p>Some contents...</p>
-  </ix-modal>
+  </IxModal>
 </template>
 
 <script lang="ts">

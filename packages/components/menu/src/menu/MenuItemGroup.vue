@@ -2,7 +2,7 @@
   <li class="ix-menu-item-group">
     <div class="ix-menu-item-group-title" :style="{ paddingLeft }">
       <span v-if="icon || $slots.icon" class="ix-menu-item-group-title-icon">
-        <slot name="icon"><ix-icon :name="icon" /></slot>
+        <slot name="icon"><IxIcon :name="icon" /></slot>
       </span>
       <span>
         <slot name="title">{{ title }}</slot>
@@ -18,7 +18,7 @@
 import { defineComponent, inject, provide } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { menuItemGroupProps } from '../types'
-import { menuItemGroupToken, menuToken, subMenuToken } from '../token'
+import { menuItemGroupToken, menuToken, menuSubToken } from '../token'
 import { usePaddingLeft } from '../usePaddingLeft'
 
 export default defineComponent({
@@ -30,9 +30,9 @@ export default defineComponent({
 
     // menuContext must exist
     const menuContext = inject(menuToken, null)!
-    const subMenuContext = inject(subMenuToken, null)
+    const menuSubContext = inject(menuSubToken, null)
 
-    const level = subMenuContext ? subMenuContext.level + 1 : 1
+    const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(menuContext.mode, menuContext.indent, level, false)
 
     return { paddingLeft }

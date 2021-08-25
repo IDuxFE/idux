@@ -1,15 +1,15 @@
 <template>
-  <ix-radio-group v-model:value="value">
-    <ix-space direction="vertical">
-      <ix-radio value="a">Option A</ix-radio>
-      <ix-radio value="b">Option B</ix-radio>
-      <ix-radio value="c">Option C</ix-radio>
-      <ix-radio value="d">
+  <IxRadioGroup v-model:value="value">
+    <IxSpace direction="vertical">
+      <IxRadio value="a">SelectOption A</IxRadio>
+      <IxRadio value="b">SelectOption B</IxRadio>
+      <IxRadio value="c">SelectOption C</IxRadio>
+      <IxRadio value="d">
         More...
-        <ix-input v-if="value === 'd'" v-model:value="moreValue" style="width: 100px; margin-left: 16px"></ix-input>
-      </ix-radio>
-    </ix-space>
-  </ix-radio-group>
+        <IxInput v-if="value === 'd'" v-model:value="moreValue" style="width: 100px; margin-left: 16px"></IxInput>
+      </IxRadio>
+    </IxSpace>
+  </IxRadioGroup>
 </template>
 
 <script lang="ts">

@@ -1,9 +1,9 @@
 <template>
-  <ix-radio-group v-model:value="value" :options="options" name="city"></ix-radio-group>
+  <IxRadioGroup v-model:value="value" :options="options" name="city"></IxRadioGroup>
   <br /><br />
-  <ix-radio-group v-model:value="value2" :options="options" name="city" buttoned></ix-radio-group>
+  <IxRadioGroup v-model:value="value2" :options="options" name="city" buttoned></IxRadioGroup>
   <br /><br />
-  <ix-radio-group v-model:value="value3" :options="options" name="city" buttoned mode="primary"></ix-radio-group>
+  <IxRadioGroup v-model:value="value3" :options="options" name="city" buttoned mode="primary"></IxRadioGroup>
 </template>
 
 <script lang="ts">

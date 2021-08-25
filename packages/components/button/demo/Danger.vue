@@ -1,7 +1,7 @@
 <template>
-  <ix-button mode="primary" danger>Primary</ix-button>
-  <ix-button danger>Default</ix-button>
-  <ix-button mode="dashed" danger>Dashed</ix-button>
-  <ix-button mode="text" danger>Text</ix-button>
-  <ix-button mode="link" danger href="https://github.com/IDuxFE/idux" target="_blank">Link</ix-button>
+  <IxButton mode="primary" danger>Primary</IxButton>
+  <IxButton danger>Default</IxButton>
+  <IxButton mode="dashed" danger>Dashed</IxButton>
+  <IxButton mode="text" danger>Text</IxButton>
+  <IxButton mode="link" danger href="https://github.com/IDuxFE/idux" target="_blank">Link</IxButton>
 </template>

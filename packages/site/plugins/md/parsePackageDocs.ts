@@ -124,14 +124,14 @@ function wrapperDocsTemplate(toc: string, header: string, examples: string, api:
 function generateToc(demoMetas: any[], language: string, module: string, component: string) {
   const links = demoMetas.map(
     meta =>
-      `<ix-anchor-link href="#${module}-${component}-demo-${meta.componentName}" title="${meta.title[language]}"></ix-anchor-link>`,
+      `<IxAnchorLink href="#${module}-${component}-demo-${meta.componentName}" title="${meta.title[language]}"></IxAnchorLink>`,
   )
 
-  links.push(`<ix-anchor-link href="#api" title="API"></ix-anchor-link>`)
+  links.push(`<IxAnchorLink href="#api" title="API"></IxAnchorLink>`)
 
-  return `<ix-anchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
+  return `<IxAnchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
   ${links.join('  ')}
-</ix-anchor>`
+</IxAnchor>`
 }
 
 function generateHeader(title: string, description: string, language: string) {
@@ -145,7 +145,7 @@ function generateHeader(title: string, description: string, language: string) {
 	</section>
 	<h2>
 		<span>${examples}</span>
-		<ix-icon name="appstore" class="code-box-expand-trigger" title="${expand}" @click="expandAll()" />
+		<IxIcon name="appstore" class="code-box-expand-trigger" title="${expand}" @click="expandAll()" />
 	</h2>
 </section>
 `

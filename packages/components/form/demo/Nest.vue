@@ -1,42 +1,42 @@
 <template>
-  <ix-form :control="formGroup" :labelCol="8">
+  <IxForm :control="formGroup" :labelCol="8">
     <h4 v-typography>Name</h4>
-    <ix-row>
-      <ix-col span="8">
-        <ix-form-item control="name.firstName" label="First Name" required>
-          <ix-input></ix-input>
-        </ix-form-item>
-      </ix-col>
-      <ix-col span="8">
-        <ix-form-item control="name.lastName" label="Last Name" required>
-          <ix-input></ix-input>
-        </ix-form-item>
-      </ix-col>
-    </ix-row>
+    <IxRow>
+      <IxCol span="8">
+        <IxFormItem control="name.firstName" label="First Name" required>
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+      <IxCol span="8">
+        <IxFormItem control="name.lastName" label="Last Name" required>
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+    </IxRow>
     <h4 v-typography>Address</h4>
-    <ix-form-wrapper control="address">
-      <ix-row>
-        <ix-col span="8">
-          <ix-form-item control="city" label="City" required>
-            <ix-input></ix-input>
-          </ix-form-item>
-        </ix-col>
-        <ix-col span="8">
-          <ix-form-item control="street" label="Street" required>
-            <ix-input></ix-input>
-          </ix-form-item>
-        </ix-col>
-        <ix-col span="8">
-          <ix-form-item control="zip" label="Zip Code">
-            <ix-input></ix-input>
-          </ix-form-item>
-        </ix-col>
-      </ix-row>
-      <ix-form-item>
-        <ix-button mode="primary" @click="onSubmit">Submit</ix-button>
-      </ix-form-item>
-    </ix-form-wrapper>
-  </ix-form>
+    <IxFormWrapper control="address">
+      <IxRow>
+        <IxCol span="8">
+          <IxFormItem control="city" label="City" required>
+            <IxInput></IxInput>
+          </IxFormItem>
+        </IxCol>
+        <IxCol span="8">
+          <IxFormItem control="street" label="Street" required>
+            <IxInput></IxInput>
+          </IxFormItem>
+        </IxCol>
+        <IxCol span="8">
+          <IxFormItem control="zip" label="Zip Code">
+            <IxInput></IxInput>
+          </IxFormItem>
+        </IxCol>
+      </IxRow>
+      <IxFormItem>
+        <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
+      </IxFormItem>
+    </IxFormWrapper>
+  </IxForm>
 </template>
 
 <script lang="ts">

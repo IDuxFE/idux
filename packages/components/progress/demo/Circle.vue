@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ix-progress type="circle" :percent="75" />
-    <ix-progress type="circle" :percent="70" status="exception" />
-    <ix-progress type="circle" :percent="100" />
+    <IxProgress type="circle" :percent="75" />
+    <IxProgress type="circle" :percent="70" status="exception" />
+    <IxProgress type="circle" :percent="100" />
   </div>
 </template>
 <style scoped>

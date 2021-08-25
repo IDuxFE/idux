@@ -1,31 +1,31 @@
 <template>
-  <ix-divider position="left" dashed>Horizontal</ix-divider>
-  <ix-row class="gutter-row" :gutter="16">
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Horizontal</IxDivider>
+  <IxRow class="gutter-row" :gutter="16">
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Responsive</ix-divider>
-  <ix-row class="gutter-row" :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Responsive</IxDivider>
+  <IxRow class="gutter-row" :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Vertical</ix-divider>
-  <ix-row class="gutter-row" :gutter="[8, 16]">
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-    <ix-col :span="6"><div class="inner-box">col-6</div></ix-col>
-  </ix-row>
+  <IxDivider position="left" dashed>Vertical</IxDivider>
+  <IxRow class="gutter-row" :gutter="[8, 16]">
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+    <IxCol :span="6"><div class="inner-box">col-6</div></IxCol>
+  </IxRow>
 </template>
 
 <style lang="less" scoped>

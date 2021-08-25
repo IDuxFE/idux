@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ix-tag color="red" icon="alipay" closable checkAble :checked="checked" @click="onChangeChecked" @close="onClose"
-      >测试可选</ix-tag
+    <IxTag color="red" icon="alipay" closable checkAble :checked="checked" @click="onChangeChecked" @close="onClose"
+      >测试可选</IxTag
     >
   </div>
 </template>

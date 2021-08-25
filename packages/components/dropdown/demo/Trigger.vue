@@ -1,53 +1,53 @@
 <template>
-  <ix-space>
-    <ix-dropdown>
+  <IxSpace>
+    <IxDropdown>
       Hover me
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-divider type="vertical" />
-    <ix-dropdown trigger="click">
+    </IxDropdown>
+    <IxDivider type="vertical" />
+    <IxDropdown trigger="click">
       Click me
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-divider type="vertical" />
-    <ix-dropdown trigger="contextmenu">
+    </IxDropdown>
+    <IxDivider type="vertical" />
+    <IxDropdown trigger="contextmenu">
       Right click me
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-  </ix-space>
+    </IxDropdown>
+  </IxSpace>
   <br /><br />
-  <ix-dropdown :visible="visible" trigger="manual">
-    <ix-switch v-model:checked="visible"></ix-switch>
+  <IxDropdown :visible="visible" trigger="manual">
+    <IxSwitch v-model:checked="visible"></IxSwitch>
     <template #overlay>
-      <ix-menu>
-        <ix-menu-item> Item 1 </ix-menu-item>
-        <ix-menu-item> Item 2 </ix-menu-item>
-        <ix-menu-divider />
-        <ix-menu-item disabled> Item 3 </ix-menu-item>
-      </ix-menu>
+      <IxMenu>
+        <IxMenuItem> Item 1 </IxMenuItem>
+        <IxMenuItem> Item 2 </IxMenuItem>
+        <IxMenuDivider />
+        <IxMenuItem disabled> Item 3 </IxMenuItem>
+      </IxMenu>
     </template>
-  </ix-dropdown>
+  </IxDropdown>
 </template>
 
 <script lang="ts">

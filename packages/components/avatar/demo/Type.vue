@@ -1,12 +1,12 @@
 <template>
-  <ix-space>
-    <ix-avatar src="/images/avatar/0.png" />
-    <ix-avatar text="USER" />
-    <ix-avatar>U</ix-avatar>
-    <ix-avatar />
-    <ix-avatar text="USER" class="type-avatar" />
-    <ix-avatar class="type-avatar" />
-  </ix-space>
+  <IxSpace>
+    <IxAvatar src="/images/avatar/0.png" />
+    <IxAvatar text="USER" />
+    <IxAvatar>U</IxAvatar>
+    <IxAvatar />
+    <IxAvatar text="USER" class="type-avatar" />
+    <IxAvatar class="type-avatar" />
+  </IxSpace>
 </template>
 
 <style lang="less" scoped>

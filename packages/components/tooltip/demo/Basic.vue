@@ -1,5 +1,5 @@
 <template>
-  <ix-tooltip title="prompt text">
+  <IxTooltip title="prompt text">
     <span>Tooltip will show when it's hovered.</span>
-  </ix-tooltip>
+  </IxTooltip>
 </template>

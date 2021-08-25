@@ -1,11 +1,11 @@
 <template>
   <div>
     <div>
-      <ix-checkbox ref="checkboxRef" v-model:checked="checked" label="option" />
+      <IxCheckbox ref="checkboxRef" v-model:checked="checked" label="option" />
     </div>
     <div class="operation-area">
-      <ix-button mode="primary" @click="changeFocus()">changeFocus</ix-button>
-      <ix-button mode="primary" @click="changeBlur()">changeBlur</ix-button>
+      <IxButton mode="primary" @click="changeFocus()">changeFocus</IxButton>
+      <IxButton mode="primary" @click="changeBlur()">changeBlur</IxButton>
     </div>
   </div>
 </template>

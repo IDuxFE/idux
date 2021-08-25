@@ -1,6 +1,6 @@
 <template>
-  <ix-header showBar size="extraLarge"> Title </ix-header>
-  <ix-header showBar> Title </ix-header>
-  <ix-header showBar size="medium"> Title </ix-header>
-  <ix-header showBar size="small"> Title </ix-header>
+  <IxHeader showBar size="extraLarge"> Title </IxHeader>
+  <IxHeader showBar> Title </IxHeader>
+  <IxHeader showBar size="medium"> Title </IxHeader>
+  <IxHeader showBar size="small"> Title </IxHeader>
 </template>

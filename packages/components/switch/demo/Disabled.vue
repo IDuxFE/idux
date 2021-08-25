@@ -1,7 +1,7 @@
 <template>
-  <ix-switch :disabled="disabled"></ix-switch>
+  <IxSwitch :disabled="disabled"></IxSwitch>
   <div class="mt-5">disabled: {{ disabled }}</div>
-  <ix-button class="mt-5" @click="changeDisabled">change disabled</ix-button>
+  <IxButton class="mt-5" @click="changeDisabled">change disabled</IxButton>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

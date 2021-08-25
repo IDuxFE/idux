@@ -1,7 +1,7 @@
 <template>
-  <ix-radio-group v-model:value="value" :options="options"></ix-radio-group>
+  <IxRadioGroup v-model:value="value" :options="options"></IxRadioGroup>
   <br /><br />
-  <ix-radio-group v-model:value="value" :options="options" buttoned></ix-radio-group>
+  <IxRadioGroup v-model:value="value" :options="options" buttoned></IxRadioGroup>
 </template>
 
 <script lang="ts">

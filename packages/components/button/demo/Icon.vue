@@ -1,6 +1,6 @@
 <template>
-  <ix-button icon="search">Search</ix-button>
-  <ix-button icon="search"></ix-button>
-  <ix-button icon="download">Download</ix-button>
-  <ix-button icon="download"></ix-button>
+  <IxButton icon="search">Search</IxButton>
+  <IxButton icon="search"></IxButton>
+  <IxButton icon="download">Download</IxButton>
+  <IxButton icon="download"></IxButton>
 </template>

@@ -1,9 +1,9 @@
 <template>
-  <ix-input v-model:value="valueRef" placeholder="Basic usage" />
+  <IxInput v-model:value="valueRef" placeholder="Basic usage" />
   <br /><br />
-  <ix-input :value="valueRef" disabled placeholder="Disabled" />
+  <IxInput :value="valueRef" disabled placeholder="Disabled" />
   <br /><br />
-  <ix-input :value="valueRef" readonly placeholder="Readonly" />
+  <IxInput :value="valueRef" readonly placeholder="Readonly" />
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'

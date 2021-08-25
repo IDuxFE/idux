@@ -1,7 +1,7 @@
 <template>
-  <ix-space>
-    <ix-button mode="primary" @click="openModal">Open modal</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

@@ -24,7 +24,7 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:openedIds` | 当前展开的 `ix-sub-menu` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
+| `v-model:openedIds` | 当前展开的 `ix-menu-sub` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
 | `v-model:selectedIds` | 当前选中的 `ix-menu-item` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24px` | ✅ | 仅支持 `inline` 模式 |
@@ -50,9 +50,9 @@ single: true
 | `icon` | 菜单图标| `string \| #icon` | - | - |
 | `title` | 菜单标题 | `string \| #default`  | - | - |
 
-### ix-sub-menu
+### ix-menu-sub
 
-#### SubMenuProps
+#### MenuSubProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ single: true
 | `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
 | `title` | 菜单标题 | `string \| #title`  | - | - |
 
-#### SubMenuEmits
+#### MenuSubEmits
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

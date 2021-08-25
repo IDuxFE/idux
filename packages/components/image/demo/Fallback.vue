@@ -1,5 +1,5 @@
 <template>
-  <ix-image src="" :preview="true" width="200px" height="200px" :fallback="fallback" />
+  <IxImage src="" :preview="true" width="200px" height="200px" :fallback="fallback" />
 </template>
 <script>
 import { defineComponent, ref } from 'vue'

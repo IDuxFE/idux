@@ -1,5 +1,5 @@
 <template>
-  <ix-header :avatar="{ src: '/images/avatar/1.png' }"> Title </ix-header>
-  <ix-header :avatar="{ text: 'USER' }"> Title </ix-header>
-  <ix-header avatar="user" size="medium"> Title </ix-header>
+  <IxHeader :avatar="{ src: '/images/avatar/1.png' }"> Title </IxHeader>
+  <IxHeader :avatar="{ text: 'USER' }"> Title </IxHeader>
+  <IxHeader avatar="user" size="medium"> Title </IxHeader>
 </template>

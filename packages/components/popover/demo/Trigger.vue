@@ -1,21 +1,21 @@
 <template>
-  <ix-space>
-    <ix-popover title="Title" content="Content...">
-      <ix-button>Hover</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." trigger="focus">
-      <ix-button>Focus</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." trigger="click">
-      <ix-button>Click</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." trigger="contextmenu">
-      <ix-button>Context Menu</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." trigger="manual" :visible="visible">
-      <ix-button @click="visible = !visible">Manual</ix-button>
-    </ix-popover>
-  </ix-space>
+  <IxSpace>
+    <IxPopover title="Title" content="Content...">
+      <IxButton>Hover</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." trigger="focus">
+      <IxButton>Focus</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." trigger="click">
+      <IxButton>Click</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." trigger="contextmenu">
+      <IxButton>Context Menu</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." trigger="manual" :visible="visible">
+      <IxButton @click="visible = !visible">Manual</IxButton>
+    </IxPopover>
+  </IxSpace>
 </template>
 
 <script lang="ts">

@@ -1,25 +1,25 @@
 <template>
-  <ix-form class="demo-form" :control="formGroup" labelCol="6">
-    <ix-form-item>
-      <ix-space>
-        <ix-button icon="plus" @click="addGroupItem()">Group Field</ix-button>
-        <ix-button icon="plus" @click="addArrayItem()">Array Field</ix-button>
-        <ix-button mode="primary" @click="onSubmit">Submit</ix-button>
-      </ix-space>
-    </ix-form-item>
+  <IxForm class="demo-form" :control="formGroup" labelCol="6">
+    <IxFormItem>
+      <IxSpace>
+        <IxButton icon="plus" @click="addGroupItem()">Group Field</IxButton>
+        <IxButton icon="plus" @click="addArrayItem()">Array Field</IxButton>
+        <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
+      </IxSpace>
+    </IxFormItem>
     <template v-for="(control, key) in formGroup.controls.value" :key="control.id">
-      <ix-form-item v-if="key !== 'array'" :control="control" :label="key">
-        <ix-input></ix-input>
-        <ix-icon name="minus-circle" @click="removeGroupItem(key)"></ix-icon>
-      </ix-form-item>
+      <IxFormItem v-if="key !== 'array'" :control="control" :label="key">
+        <IxInput></IxInput>
+        <IxIcon name="minus-circle" @click="removeGroupItem(key)"></IxIcon>
+      </IxFormItem>
     </template>
     <template v-for="(control, index) in arrayControl.controls.value" :key="control.id">
-      <ix-form-item :control="control" :label="'Array-' + control.id">
-        <ix-input></ix-input>
-        <ix-icon name="minus-circle" @click="removeArrayItem(index)"></ix-icon>
-      </ix-form-item>
+      <IxFormItem :control="control" :label="'Array-' + control.id">
+        <IxInput></IxInput>
+        <IxIcon name="minus-circle" @click="removeArrayItem(index)"></IxIcon>
+      </IxFormItem>
     </template>
-  </ix-form>
+  </IxForm>
 </template>
 
 <script lang="ts">

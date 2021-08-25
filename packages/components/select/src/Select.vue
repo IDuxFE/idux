@@ -1,7 +1,7 @@
 <template>
   <div ref="triggerRef" v-click-outside="onClickOutside" :class="classes" @click="onClick">
     <div class="ix-select-selector" @keydown="onKeyDown">
-      <ix-select-item
+      <SelectItem
         v-for="item in selectedItems"
         v-show="showItem"
         :key="item.value"
@@ -12,8 +12,8 @@
       >
         <slot v-if="item.isMax" name="customMaxLabel" :option="item"></slot>
         <slot v-else name="customLabel" :option="item"></slot>
-      </ix-select-item>
-      <ix-select-input
+      </SelectItem>
+      <SelectInput
         ref="selectInput"
         :value="inputValue"
         :autofocus="autofocus"
@@ -33,14 +33,14 @@
       </div>
     </div>
     <div v-if="suffix || $slots.suffix || !multiple" class="ix-select-suffix">
-      <slot name="suffix"><ix-icon :name="suffixIcon" /></slot>
+      <slot name="suffix"><IxIcon :name="suffixIcon" /></slot>
     </div>
     <div v-if="clearable && !disabled$$ && selectedItems.length" class="ix-select-clear" @click.stop="onClear">
-      <ix-icon name="close-circle" />
+      <IxIcon name="close-circle" />
     </div>
-    <ix-portal target="ix-select-container">
+    <IxPortal target="ix-select-container">
       <transition>
-        <ix-option-container
+        <SelectOptionContainer
           v-show="visibility"
           ref="overlayRef"
           :class="overlayClass"
@@ -50,23 +50,23 @@
         >
           <slot />
           <template #empty><slot name="empty" /></template>
-        </ix-option-container>
+        </SelectOptionContainer>
       </transition>
-    </ix-portal>
+    </IxPortal>
   </div>
 </template>
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { OptionProps } from './types'
+import type { SelectOptionProps } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { IxPortal } from '@idux/cdk/portal'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import IxSelectItem from './SelectItem.vue'
-import IxSelectInput from './SelectInput.vue'
-import IxOptionContainer from './OptionContainer.vue'
+import SelectItem from './SelectItem.vue'
+import SelectInput from './SelectInput.vue'
+import SelectOptionContainer from './SelectOptionContainer.vue'
 import { selectProps } from './types'
 import {
   useSelectClasses,
@@ -79,7 +79,7 @@ import {
 
 export default defineComponent({
   name: 'IxSelect',
-  components: { IxPortal, IxIcon, IxSelectItem, IxSelectInput, IxOptionContainer },
+  components: { IxPortal, IxIcon, SelectItem, SelectInput, SelectOptionContainer },
   directives: { clickOutside },
   props: selectProps,
   emits: [
@@ -97,7 +97,7 @@ export default defineComponent({
   ],
   setup(props, { emit }) {
     const config = useGlobalConfig('select')
-    const selectedOptions = ref<OptionProps[]>([])
+    const selectedOptions = ref<SelectOptionProps[]>([])
 
     const { visibility, show, hide, ...overlayBindings } = useSelectOverlay(props)
     const normalOptions = useSelectOptions(props, config)
@@ -116,7 +116,7 @@ export default defineComponent({
     const selectedItems = computed(() => {
       const maxLabelCount = props.maxLabelCount
       const options = selectedOptions.value
-      const items: Array<OptionProps & { isMax?: boolean }> = options.slice(0, maxLabelCount)
+      const items: Array<SelectOptionProps & { isMax?: boolean }> = options.slice(0, maxLabelCount)
       if (options.length > maxLabelCount) {
         const label = `+ ${options.length - maxLabelCount} ...`
         const value = options.slice(maxLabelCount)

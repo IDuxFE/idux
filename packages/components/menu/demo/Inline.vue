@@ -1,26 +1,26 @@
 <template>
-  <ix-menu style="width: 256px" mode="inline">
-    <ix-menu-item icon="home"><a>Item 1</a></ix-menu-item>
-    <ix-menu-item icon="mail"> Item 2 </ix-menu-item>
-    <ix-menu-item disabled icon="appstore"> Item 3 </ix-menu-item>
-    <ix-sub-menu title="Sub Menu 1" icon="setting">
-      <ix-menu-item-group title="Item Group 1">
-        <ix-menu-item>Item 4</ix-menu-item>
-        <ix-menu-item>Item 5</ix-menu-item>
-      </ix-menu-item-group>
-      <ix-sub-menu>
+  <IxMenu style="width: 256px" mode="inline">
+    <IxMenuItem icon="home"><a>Item 1</a></IxMenuItem>
+    <IxMenuItem icon="mail"> Item 2 </IxMenuItem>
+    <IxMenuItem disabled icon="appstore"> Item 3 </IxMenuItem>
+    <IxMenuSub title="Sub Menu 1" icon="setting">
+      <IxMenuItemGroup title="Item Group 1">
+        <IxMenuItem>Item 4</IxMenuItem>
+        <IxMenuItem>Item 5</IxMenuItem>
+      </IxMenuItemGroup>
+      <IxMenuSub>
         <template #title><span>Sub Menu 2</span></template>
-        <ix-menu-item>Item 6</ix-menu-item>
-        <ix-menu-item>Item 7</ix-menu-item>
-      </ix-sub-menu>
-      <ix-sub-menu title="Sub Menu 3">
-        <ix-menu-item>Item 8</ix-menu-item>
-        <ix-menu-item>Item 9</ix-menu-item>
-      </ix-sub-menu>
-    </ix-sub-menu>
-    <ix-sub-menu disabled title="SubMenu 4" icon="github">
-      <ix-menu-item>Item 10</ix-menu-item>
-      <ix-menu-item>Item 11</ix-menu-item>
-    </ix-sub-menu>
-  </ix-menu>
+        <IxMenuItem>Item 6</IxMenuItem>
+        <IxMenuItem>Item 7</IxMenuItem>
+      </IxMenuSub>
+      <IxMenuSub title="Sub Menu 3">
+        <IxMenuItem>Item 8</IxMenuItem>
+        <IxMenuItem>Item 9</IxMenuItem>
+      </IxMenuSub>
+    </IxMenuSub>
+    <IxMenuSub disabled title="MenuSub 4" icon="github">
+      <IxMenuItem>Item 10</IxMenuItem>
+      <IxMenuItem>Item 11</IxMenuItem>
+    </IxMenuSub>
+  </IxMenu>
 </template>

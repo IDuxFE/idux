@@ -1,25 +1,25 @@
 <template>
   <div class="statistic-demo-unit">
-    <ix-statistic title="Feedback" :value="1128">
+    <IxStatistic title="Feedback" :value="1128">
       <template #suffix>
-        <ix-icon name="like" />
+        <IxIcon name="like" />
       </template>
-    </ix-statistic>
-    <ix-statistic title="Unmerged" :value="93" class="demo-class">
+    </IxStatistic>
+    <IxStatistic title="Unmerged" :value="93" class="demo-class">
       <template #suffix>
         <span> / 100</span>
       </template>
-    </ix-statistic>
-    <ix-statistic title="Feedback" :value="11.28" :precision="2" suffix="%" class="unit-up">
+    </IxStatistic>
+    <IxStatistic title="Feedback" :value="11.28" :precision="2" suffix="%" class="unit-up">
       <template #prefix>
-        <ix-icon name="arrow-up" />
+        <IxIcon name="arrow-up" />
       </template>
-    </ix-statistic>
-    <ix-statistic title="Idle" :value="9.3" :precision="2" suffix="%" class="unit-down">
+    </IxStatistic>
+    <IxStatistic title="Idle" :value="9.3" :precision="2" suffix="%" class="unit-down">
       <template #prefix>
-        <ix-icon name="arrow-down" />
+        <IxIcon name="arrow-down" />
       </template>
-    </ix-statistic>
+    </IxStatistic>
   </div>
 </template>
 <script lang="ts">

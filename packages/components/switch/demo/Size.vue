@@ -1,7 +1,7 @@
 <template>
   <div>small size:</div>
-  <ix-switch size="small" checked-children="开" un-checked-children="关"></ix-switch>
-  <ix-switch
+  <IxSwitch size="small" checked-children="开" un-checked-children="关"></IxSwitch>
+  <IxSwitch
     v-model:checked="checked"
     class="mt-5"
     size="small"
@@ -9,11 +9,11 @@
     un-checked-children="关"
     disabled
     :loading="loading"
-  ></ix-switch>
-  <ix-switch v-model:checked="checked2" class="mt-5" size="small" :loading="loading"></ix-switch>
+  ></IxSwitch>
+  <IxSwitch v-model:checked="checked2" class="mt-5" size="small" :loading="loading"></IxSwitch>
   <div class="mt-5">normal size:</div>
-  <ix-switch size="medium"></ix-switch>
-  <ix-switch v-model:checked="checked" class="mt-5" size="medium" :loading="loading"></ix-switch>
+  <IxSwitch size="medium"></IxSwitch>
+  <IxSwitch v-model:checked="checked" class="mt-5" size="medium" :loading="loading"></IxSwitch>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

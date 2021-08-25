@@ -22,7 +22,6 @@ import { defineComponent, onMounted, ref, watch } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({
-  name: 'IxSelectInput',
   props: {
     value: IxPropTypes.any,
     autofocus: IxPropTypes.bool,

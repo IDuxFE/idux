@@ -23,7 +23,7 @@ describe('BackTop', () => {
       `
       <div class="ix-back-top-test" style="height: 300px; overflow: auto;">
         <div style="height: 1000px;">
-          <ix-back-top :duration="100" :visibilityHeight="200" target=".ix-back-top-test" />
+          <IxBackTop :duration="100" :visibilityHeight="200" target=".ix-back-top-test" />
         </div>
       </div>
     `,
@@ -45,7 +45,7 @@ describe('BackTop', () => {
     const wrapper = backTopMount(
       `
       <div style="height: 1000px;">
-        <ix-back-top :target="target" />
+        <IxBackTop :target="target" />
       </div>
     `,
       {
@@ -78,7 +78,7 @@ describe('BackTop', () => {
 
     const wrapper = backTopMount(`
       <div style="height: 1000px; overflow: auto;">
-        <ix-back-top />
+        <IxBackTop />
       </div>
     `)
 

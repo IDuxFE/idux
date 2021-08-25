@@ -1,75 +1,75 @@
 <template>
-  <ix-space>
-    <ix-dropdown placement="bottom-start">
-      <ix-button>bottom-start</ix-button>
+  <IxSpace>
+    <IxDropdown placement="bottom-start">
+      <IxButton>bottom-start</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-dropdown placement="bottom">
-      <ix-button>bottom</ix-button>
+    </IxDropdown>
+    <IxDropdown placement="bottom">
+      <IxButton>bottom</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-dropdown placement="bottom-end">
-      <ix-button>bottom-end</ix-button>
+    </IxDropdown>
+    <IxDropdown placement="bottom-end">
+      <IxButton>bottom-end</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-  </ix-space>
+    </IxDropdown>
+  </IxSpace>
   <br /><br />
-  <ix-space>
-    <ix-dropdown placement="top-start">
-      <ix-button>top-start</ix-button>
+  <IxSpace>
+    <IxDropdown placement="top-start">
+      <IxButton>top-start</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-dropdown placement="top">
-      <ix-button>top</ix-button>
+    </IxDropdown>
+    <IxDropdown placement="top">
+      <IxButton>top</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-    <ix-dropdown placement="top-end">
-      <ix-button>top-end</ix-button>
+    </IxDropdown>
+    <IxDropdown placement="top-end">
+      <IxButton>top-end</IxButton>
       <template #overlay>
-        <ix-menu>
-          <ix-menu-item> Item 1 </ix-menu-item>
-          <ix-menu-item> Item 2 </ix-menu-item>
-          <ix-menu-divider />
-          <ix-menu-item disabled> Item 3 </ix-menu-item>
-        </ix-menu>
+        <IxMenu>
+          <IxMenuItem> Item 1 </IxMenuItem>
+          <IxMenuItem> Item 2 </IxMenuItem>
+          <IxMenuDivider />
+          <IxMenuItem disabled> Item 3 </IxMenuItem>
+        </IxMenu>
       </template>
-    </ix-dropdown>
-  </ix-space>
+    </IxDropdown>
+  </IxSpace>
 </template>
 
 <style lang="less" scoped>

@@ -7,7 +7,7 @@ import { modalProviderToken } from './token'
 export const useModal = (): ModalProviderRef => {
   const modalProviderRef = inject(modalProviderToken, null)
   if (modalProviderRef === null) {
-    return throwError('components/modal', '<ix-modal-provider> not found.')
+    return throwError('components/modal', '<IxModalProvider> not found.')
   }
   return modalProviderRef
 }

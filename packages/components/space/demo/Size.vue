@@ -1,9 +1,9 @@
 <template>
-  <ix-space :size="size">
+  <IxSpace :size="size">
     Space
-    <ix-button>Button</ix-button>
-    <ix-button mode="primary">Button</ix-button>
-  </ix-space>
+    <IxButton>Button</IxButton>
+    <IxButton mode="primary">Button</IxButton>
+  </IxSpace>
   <br />
   <select v-model="size">
     <option value="small">small</option>

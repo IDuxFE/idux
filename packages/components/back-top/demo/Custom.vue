@@ -6,7 +6,7 @@
       <div>Scroll down to see the bottom-right button.</div>
       <div>Scroll down to see the bottom-right button.</div>
       <div>Scroll down to see the bottom-right button.</div>
-      <ix-back-top style="bottom: 100px; border-radius: 4px" :duration="200" :target="target"> UP </ix-back-top>
+      <IxBackTop style="bottom: 100px; border-radius: 4px" :duration="200" :target="target"> UP </IxBackTop>
     </div>
   </div>
 </template>

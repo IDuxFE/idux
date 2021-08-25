@@ -1,6 +1,6 @@
 <template>
-  <ix-button ref="triggerRef" v-click-outside="() => hide()">Click</ix-button>
-  <ix-button @click="handleClick">Update Trigger</ix-button>
+  <IxButton ref="triggerRef" v-click-outside="() => hide()">Click</IxButton>
+  <IxButton @click="handleClick">Update Trigger</IxButton>
 
   <div v-show="visibility" ref="overlayRef">
     tooltip

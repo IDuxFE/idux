@@ -1,58 +1,52 @@
 <template>
-  <ix-row :gutter="8">
-    <ix-col :span="6">
-      <ix-select v-model:value="singleValue" placeholder="choose Tom or Jerry">
-        <ix-option label="Tom" value="tom" />
-        <ix-option label="Jerry" value="jerry" />
-        <ix-option label="Speike" value="speike" disabled />
-      </ix-select>
-    </ix-col>
-    <ix-col :span="6">
-      <ix-select v-model:value="singleValue" disabled>
-        <ix-option label="Tom" value="tom" />
-        <ix-option label="Jerry" value="jerry" />
-        <ix-option label="Speike" value="speike" disabled />
-      </ix-select>
-    </ix-col>
-    <ix-col :span="6">
-      <ix-select v-model:value="singleValue" clearable>
-        <ix-option label="Tom" value="tom" />
-        <ix-option label="Jerry" value="jerry" />
-        <ix-option label="Speike" value="speike" disabled />
-      </ix-select>
-    </ix-col>
-    <ix-col :span="6">
-      <ix-select v-model:value="singleValue" searchable>
-        <ix-option label="Tom" value="tom" />
-        <ix-option label="Jerry" value="jerry" />
-        <ix-option label="Speike" value="speike" disabled />
-      </ix-select>
-    </ix-col>
-    <ix-col :span="8">
-      <ix-select v-model:value="multipleValue" multiple disabled placeholder="Choose">
-        <ix-option
+  <IxRow :gutter="8">
+    <IxCol :span="6">
+      <IxSelect v-model:value="singleValue" placeholder="choose Tom or Jerry">
+        <IxSelectOption label="Tom" value="tom" />
+        <IxSelectOption label="Jerry" value="jerry" />
+        <IxSelectOption label="Speike" value="speike" disabled />
+      </IxSelect>
+    </IxCol>
+    <IxCol :span="6">
+      <IxSelect v-model:value="singleValue" disabled>
+        <IxSelectOption label="Tom" value="tom" />
+        <IxSelectOption label="Jerry" value="jerry" />
+        <IxSelectOption label="Speike" value="speike" disabled />
+      </IxSelect>
+    </IxCol>
+    <IxCol :span="6">
+      <IxSelect v-model:value="singleValue" clearable>
+        <IxSelectOption label="Tom" value="tom" />
+        <IxSelectOption label="Jerry" value="jerry" />
+        <IxSelectOption label="Speike" value="speike" disabled />
+      </IxSelect>
+    </IxCol>
+    <IxCol :span="6">
+      <IxSelect v-model:value="singleValue" searchable>
+        <IxSelectOption label="Tom" value="tom" />
+        <IxSelectOption label="Jerry" value="jerry" />
+        <IxSelectOption label="Speike" value="speike" disabled />
+      </IxSelect>
+    </IxCol>
+    <IxCol :span="8">
+      <IxSelect v-model:value="multipleValue" multiple disabled placeholder="Choose">
+        <IxSelectOption
           v-for="option in multipleOptions"
           :key="option.value"
           :label="option.label"
           :value="option.value"
           :disabled="option.disabled"
         />
-      </ix-select>
-    </ix-col>
-    <ix-col :span="8">
-      <ix-select v-model:value="multipleValue" :options="multipleOptions" multiple clearable> </ix-select>
-    </ix-col>
-    <ix-col :span="8">
-      <ix-select
-        v-model:value="multipleValue"
-        :options="multipleOptions"
-        multiple
-        :multipleLimit="5"
-        :maxLabelCount="3"
-      >
-      </ix-select>
-    </ix-col>
-  </ix-row>
+      </IxSelect>
+    </IxCol>
+    <IxCol :span="8">
+      <IxSelect v-model:value="multipleValue" :options="multipleOptions" multiple clearable> </IxSelect>
+    </IxCol>
+    <IxCol :span="8">
+      <IxSelect v-model:value="multipleValue" :options="multipleOptions" multiple :multipleLimit="5" :maxLabelCount="3">
+      </IxSelect>
+    </IxCol>
+  </IxRow>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

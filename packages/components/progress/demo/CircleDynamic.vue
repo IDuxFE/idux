@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ix-progress :percent="defaultPercent" />
-    <ix-progress :percent="defaultPercent" type="circle" />
-    <ix-button-group>
-      <ix-button icon="minus" @click="decline" />
-      <ix-button icon="plus" @click="increase" />
-    </ix-button-group>
+    <IxProgress :percent="defaultPercent" />
+    <IxProgress :percent="defaultPercent" type="circle" />
+    <IxButton-group>
+      <IxButton icon="minus" @click="decline" />
+      <IxButton icon="plus" @click="increase" />
+    </IxButton-group>
   </div>
 </template>
 <script lang="ts">

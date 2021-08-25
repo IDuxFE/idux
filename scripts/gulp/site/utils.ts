@@ -91,7 +91,7 @@ const componentsSortMap: Record<string, number> = {
   其他: 7,
 }
 
-const defaultRoutes = [`{path: '/', 'component': () => import('./components/views/home/Index.vue')},`]
+const defaultRoutes = [`{path: '/', 'component': () => import('./components/views/home/Home.vue')},`]
 
 function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
   const docs: DocsItem[] = []

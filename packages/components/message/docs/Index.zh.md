@@ -44,7 +44,7 @@ order: 0
 
 <!-- MyComponent.vue -->
 <template>
-  <ix-button @click="openMessage">Open</ix-button>
+  <IxButton @click="openMessage">Open</IxButton>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

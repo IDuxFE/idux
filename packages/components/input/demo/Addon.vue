@@ -1,25 +1,25 @@
 <template>
-  <ix-input v-model:value="value" :addonBefore="addonBefore" :addonAfter="addonAfter" />
+  <IxInput v-model:value="value" :addonBefore="addonBefore" :addonAfter="addonAfter" />
   <br /><br />
-  <ix-input v-model:value="value">
+  <IxInput v-model:value="value">
     <template #addonBefore>
-      <ix-select v-model:value="addonBefore" style="width: 80px">
-        <ix-option label="https://" value="https"></ix-option>
-        <ix-option label="http://" value="http"></ix-option>
-      </ix-select>
+      <IxSelect v-model:value="addonBefore" style="width: 80px">
+        <IxSelectOption label="https://" value="https"></IxSelectOption>
+        <IxSelectOption label="http://" value="http"></IxSelectOption>
+      </IxSelect>
     </template>
     <template #addonAfter>
-      <ix-select v-model:value="addonAfter" style="width: 60px">
-        <ix-option label=".com" value="com"></ix-option>
-        <ix-option label=".cn" value="cn"></ix-option>
-      </ix-select>
+      <IxSelect v-model:value="addonAfter" style="width: 60px">
+        <IxSelectOption label=".com" value="com"></IxSelectOption>
+        <IxSelectOption label=".cn" value="cn"></IxSelectOption>
+      </IxSelect>
     </template>
-  </ix-input>
+  </IxInput>
   <br /><br />
-  <ix-input v-model:value="value">
-    <template #addonBefore><ix-icon name="user" /></template>
-    <template #addonAfter><ix-icon name="setting" /></template>
-  </ix-input>
+  <IxInput v-model:value="value">
+    <template #addonBefore><IxIcon name="user" /></template>
+    <template #addonAfter><IxIcon name="setting" /></template>
+  </IxInput>
 </template>
 
 <script lang="ts">

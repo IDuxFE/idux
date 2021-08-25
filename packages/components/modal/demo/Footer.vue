@@ -1,15 +1,15 @@
 <template>
-  <ix-space>
-    <ix-button @click="visible = !visible">Change visible</ix-button>
-    <ix-button mode="primary" @click="openModal">Open modal</ix-button>
-  </ix-space>
-  <ix-modal v-model:visible="visible" type="confirm" title="Customize footer via slot">
+  <IxSpace>
+    <IxButton @click="visible = !visible">Change visible</IxButton>
+    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
+  </IxSpace>
+  <IxModal v-model:visible="visible" type="confirm" title="Customize footer via slot">
     <template #footer="{ cancel, ok }">
-      <ix-button @click="cancel">My Cancel</ix-button>
-      <ix-button mode="primary" @click="ok">My Ok</ix-button>
+      <IxButton @click="cancel">My Cancel</IxButton>
+      <IxButton mode="primary" @click="ok">My Ok</IxButton>
     </template>
     <p>Some contents...</p>
-  </ix-modal>
+  </IxModal>
 </template>
 
 <script lang="ts">

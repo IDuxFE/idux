@@ -1,0 +1,20 @@
+@import '../../style/default.less';
+@import '../../style/mixins/placeholder.less';
+@import './mixin.less';
+
+@textarea-prefix: ~'@{idux-prefix}-textarea';
+
+.@{textarea-prefix} {
+  .textarea();
+}
+
+textarea.@{textarea-prefix}-autosize-measuring {
+  height: auto !important;
+  overflow: hidden !important;
+  .textarea-autosize-measuring-base();
+}
+
+textarea.@{textarea-prefix}-autosize-measuring-firefox {
+  height: 0 !important;
+  .textarea-autosize-measuring-base();
+}

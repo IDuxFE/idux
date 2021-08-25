@@ -1,8 +1,8 @@
 <template>
-  <ix-card
+  <IxCard
     hoverable
     cover="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
     :header="{ title: 'Europe Street beat', description: 'www.instagram.com' }"
   >
-  </ix-card>
+  </IxCard>
 </template>

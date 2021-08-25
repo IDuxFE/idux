@@ -1,14 +1,14 @@
 <template>
   <div class="icon-selector">
-    <ix-button @click="changeIconType('outlined')">Outlined</ix-button>
-    <ix-button @click="changeIconType('filled')">Filled</ix-button>
-    <ix-button @click="changeIconType('twotone')">Two Tone</ix-button>
-    <ix-input v-model:value="searchValue" suffix="search" placeholder="在此搜索图标，点击图标可复制代码" />
+    <IxButton @click="changeIconType('outlined')">Outlined</IxButton>
+    <IxButton @click="changeIconType('filled')">Filled</IxButton>
+    <IxButton @click="changeIconType('twotone')">Two Tone</IxButton>
+    <IxInput v-model:value="searchValue" suffix="search" placeholder="在此搜索图标，点击图标可复制代码" />
   </div>
   <br />
   <div class="icon-box">
     <div v-for="icon in icons" :key="icon" class="icon-box-item" @click="onCopy($event, icon)">
-      <ix-icon :name="icon" />
+      <IxIcon :name="icon" />
       <br />
       <span> {{ icon }} </span>
     </div>
@@ -57,7 +57,7 @@ export default defineComponent({
     const { copy } = useClipboard()
     const onCopy = (evt: MouseEvent, name: string) => {
       const target = evt.target as HTMLElement
-      const text = `<ix-icon name="${name}" />`
+      const text = `<IxIcon name="${name}" />`
 
       copy(text).then(successful => {
         if (successful) {

@@ -1,31 +1,31 @@
 <template>
   <div class="badge-demo">
-    <ix-badge count="1000"></ix-badge>
+    <IxBadge count="1000"></IxBadge>
 
-    <ix-badge>
+    <IxBadge>
       <template #count>
-        <ix-icon name="clock-circle"></ix-icon>
+        <IxIcon name="clock-circle"></IxIcon>
       </template>
-    </ix-badge>
+    </IxBadge>
 
-    <ix-badge count="100" color="#00f">
+    <IxBadge count="100" color="#00f">
       <a href="#"></a>
-    </ix-badge>
+    </IxBadge>
 
-    <ix-badge count="1000" :overflowCount="999">
+    <IxBadge count="1000" :overflowCount="999">
       <a href="#"></a>
-    </ix-badge>
+    </IxBadge>
 
-    <ix-badge dot>
+    <IxBadge dot>
       <a href="#"></a>
-    </ix-badge>
+    </IxBadge>
 
-    <ix-badge>
+    <IxBadge>
       <a href="#"></a>
       <template #count>
-        <ix-icon name="clock-circle"></ix-icon>
+        <IxIcon name="clock-circle"></IxIcon>
       </template>
-    </ix-badge>
+    </IxBadge>
   </div>
 </template>
 

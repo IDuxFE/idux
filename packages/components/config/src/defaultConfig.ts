@@ -25,8 +25,8 @@ import type {
   SelectConfig,
   RadioConfig,
   MenuConfig,
-  SubMenuConfig,
-  StepsConfig,
+  MenuSubConfig,
+  StepperConfig,
   DropdownConfig,
   ListConfig,
   FormConfig,
@@ -74,7 +74,7 @@ const menu = shallowReactive<MenuConfig>({
   theme: 'light',
 })
 
-const subMenu = shallowReactive<SubMenuConfig>({
+const menuSub = shallowReactive<MenuSubConfig>({
   suffix: 'right',
   suffixRotates: [-90, 90],
 })
@@ -241,7 +241,7 @@ const progress = shallowReactive<ProgressConfig>({
   format: (percent: number) => percent + '%',
 })
 
-const steps = shallowReactive<StepsConfig>({
+const stepper = shallowReactive<StepperConfig>({
   size: 'medium',
 })
 
@@ -268,7 +268,7 @@ export const defaultConfig: GlobalConfig = {
   // Navigation
   dropdown,
   menu,
-  subMenu,
+  menuSub,
   pagination,
   // Data Entry
   form,
@@ -295,7 +295,7 @@ export const defaultConfig: GlobalConfig = {
   result,
   spin,
   progress,
-  steps,
+  stepper,
   // Other
   backTop,
   anchor,
