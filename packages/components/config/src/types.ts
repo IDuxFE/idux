@@ -247,6 +247,15 @@ export interface ModalConfig {
   zIndex?: number
 }
 
+export interface DrawerConfig {
+  closable: boolean
+  closeOnEsc: boolean
+  mask: boolean
+  maskClosable: boolean
+  zIndex?: number
+  containerClassName?: string
+}
+
 export interface ResultConfig {
   status: ResultStatus
 }
@@ -317,6 +326,7 @@ export interface GlobalConfig {
   // Feedback
   message: MessageConfig
   modal: ModalConfig
+  drawer: DrawerConfig
   result: ResultConfig
   spin: SpinConfig
   progress: ProgressConfig
