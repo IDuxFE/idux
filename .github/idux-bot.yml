@@ -90,7 +90,7 @@ issue:
       Menu: danranVm
       PageHeader: danranVm
       Pagination: zymoplastic
-      Steps: ShannyShanny
+      Stepper: ShannyShanny
 
       AutoComplete: danranVm
       Cascader: danranVm

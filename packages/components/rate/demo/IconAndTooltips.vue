@@ -1,5 +1,5 @@
 <template>
-  <ix-rate v-model:value="value" :icon="icon" :tooltips="tooltip" />
+  <IxRate v-model:value="value" :icon="icon" :tooltips="tooltip" />
 </template>
 <script>
 import { defineComponent, ref } from 'vue'

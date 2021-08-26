@@ -9,8 +9,8 @@
     <div v-if="!hideInfo" class="ix-progress-text">
       <slot>
         <template v-if="showFormat">{{ formattedText }}</template>
-        <ix-icon v-else-if="showSuccessIcon" class="ix-progress-success-icon" name="check-circle-filled" />
-        <ix-icon v-else-if="showExceptionIcon" class="ix-progress-exception-icon" name="close-circle-filled" />
+        <IxIcon v-else-if="showSuccessIcon" class="ix-progress-success-icon" name="check-circle-filled" />
+        <IxIcon v-else-if="showExceptionIcon" class="ix-progress-exception-icon" name="close-circle-filled" />
       </slot>
     </div>
   </div>

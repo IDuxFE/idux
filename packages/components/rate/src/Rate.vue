@@ -16,11 +16,11 @@
       @click="handleClick(item, $event)"
     >
       <div class="ix-rate-full">
-        <ix-icon :name="rateIcon" class="ix-rate-iconfont-main" :class="getIconClass(item)" />
+        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main" :class="getIconClass(item)" />
       </div>
 
       <div v-if="showDecimalIcon(item)" class="ix-rate-half">
-        <ix-icon :name="rateIcon" class="ix-rate-iconfont-main ix-rate-half-icon" />
+        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main ix-rate-half-icon" />
       </div>
     </div>
   </div>

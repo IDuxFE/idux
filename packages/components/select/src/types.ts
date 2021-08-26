@@ -13,7 +13,7 @@ export interface SelectOption {
   groupLabel?: string
   [key: string]: any
 }
-export type SelectFilterFn = (searchValue: string, option: OptionProps) => boolean
+export type SelectFilterFn = (searchValue: string, selectOption: SelectOptionProps) => boolean
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
@@ -52,23 +52,23 @@ export interface SelectBindings {
 export type SelectComponent = DefineComponent<HTMLAttributes & typeof selectProps, SelectBindings>
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export const optionProps = {
+export const selectOptionProps = {
   disabled: IxPropTypes.bool.def(false),
   label: IxPropTypes.string.isRequired,
   value: IxPropTypes.any.isRequired,
 }
 
-export type OptionProps = IxInnerPropTypes<typeof optionProps>
-export type OptionPublicProps = IxPublicPropTypes<typeof optionProps>
-export type OptionComponent = DefineComponent<HTMLAttributes & typeof optionProps>
-export type OptionInstance = InstanceType<DefineComponent<OptionProps>>
+export type SelectOptionProps = IxInnerPropTypes<typeof selectOptionProps>
+export type SelectOptionPublicProps = IxPublicPropTypes<typeof selectOptionProps>
+export type SelectOptionComponent = DefineComponent<HTMLAttributes & typeof selectOptionProps>
+export type SelectOptionInstance = InstanceType<DefineComponent<SelectOptionProps>>
 
-export const optionGroupProps = {
+export const selectOptionGroupProps = {
   label: IxPropTypes.string.isRequired,
   options: IxPropTypes.array<SelectOption>().def(() => []),
 }
 
-export type OptionGroupProps = IxInnerPropTypes<typeof optionGroupProps>
-export type OptionGroupPublicProps = IxPublicPropTypes<typeof optionGroupProps>
-export type OptionGroupComponent = DefineComponent<HTMLAttributes & typeof optionGroupProps>
-export type OptionGroupInstance = InstanceType<DefineComponent<OptionGroupProps>>
+export type SelectOptionGroupProps = IxInnerPropTypes<typeof selectOptionGroupProps>
+export type SelectOptionGroupPublicProps = IxPublicPropTypes<typeof selectOptionGroupProps>
+export type SelectOptionGroupComponent = DefineComponent<HTMLAttributes & typeof selectOptionGroupProps>
+export type SelectOptionGroupInstance = InstanceType<DefineComponent<SelectOptionGroupProps>>

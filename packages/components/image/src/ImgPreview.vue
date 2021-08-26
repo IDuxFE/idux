@@ -4,23 +4,23 @@
     <div class="ix-image-preview-tools">
       <ul class="ix-preview-tools">
         <li class="ix-tools-item ix-rotate-left" @click="rotateEvent(-1)">
-          <ix-icon name="rotate-left" />
+          <IxIcon name="rotate-left" />
         </li>
         <li class="ix-tools-item ix-rotate-right" @click="rotateEvent(1)">
-          <ix-icon name="rotate-right" />
+          <IxIcon name="rotate-right" />
         </li>
         <li class="ix-tools-item ix-zoom-in" @click="zoomEvent(1)">
-          <ix-icon name="zoom-in" />
+          <IxIcon name="zoom-in" />
         </li>
         <li
           class="ix-tools-item ix-zoom-out"
           :class="isZoomOutDisabled ? 'ix-tools-item-disabled' : ''"
           @click="zoomEvent(-1)"
         >
-          <ix-icon name="zoom-out" />
+          <IxIcon name="zoom-out" />
         </li>
         <li class="ix-tools-item ix-close" @click="close">
-          <ix-icon name="close" />
+          <IxIcon name="close" />
         </li>
       </ul>
     </div>

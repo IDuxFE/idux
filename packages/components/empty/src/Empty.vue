@@ -2,7 +2,7 @@
   <div class="ix-empty">
     <div class="ix-empty-image">
       <img v-if="image" :src="image" alt="empty image" />
-      <ix-icon v-else name="empty" />
+      <IxIcon v-else name="empty" />
     </div>
     <div v-if="description$$ || $slots.description" class="ix-empty-description">
       <slot name="description">{{ description$$ }}</slot>

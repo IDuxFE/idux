@@ -1,10 +1,10 @@
 <template>
-  <ix-switch ref="focusSwitchRef" @focus="onFocus" @blur="onBlur"></ix-switch>
-  <ix-button class="mt-5 flex-cloumn" @click="focus">点击以获得焦点</ix-button>
-  <ix-button class="mt-5 flex-cloumn" @click="blur">点击以失去焦点</ix-button>
+  <IxSwitch ref="focusSwitchRef" @focus="onFocus" @blur="onBlur"></IxSwitch>
+  <IxButton class="mt-5 flex-cloumn" @click="focus">点击以获得焦点</IxButton>
+  <IxButton class="mt-5 flex-cloumn" @click="blur">点击以失去焦点</IxButton>
   <div class="mt-5">
     <span>自动获得焦点：</span>
-    <ix-switch v-model:checked="checked" autofocus></ix-switch>
+    <IxSwitch v-model:checked="checked" autofocus></IxSwitch>
   </div>
 </template>
 <script lang="ts">

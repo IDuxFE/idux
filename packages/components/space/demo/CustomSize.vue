@@ -1,9 +1,9 @@
 <template>
-  <ix-space :size="size">
+  <IxSpace :size="size">
     Space
-    <ix-button mode="primary">Button</ix-button>
-    <ix-button>Button</ix-button>
-  </ix-space>
+    <IxButton mode="primary">Button</IxButton>
+    <IxButton>Button</IxButton>
+  </IxSpace>
   <br />
   <input v-model="num" type="number" />
 </template>

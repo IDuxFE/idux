@@ -1,7 +1,7 @@
 <template>
-  <ix-list header="Header" footer="Footer" :borderless="false">
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+  <IxList header="Header" footer="Footer" :borderless="false">
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
 </template>
 
 <script lang="ts">

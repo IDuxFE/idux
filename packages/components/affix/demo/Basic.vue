@@ -1,11 +1,11 @@
 <template>
-  <ix-affix :offset="numberOffset" @change="onChange">
-    <ix-button @click="numberOffset += 20">Number Offset</ix-button>
-  </ix-affix>
+  <IxAffix :offset="numberOffset" @change="onChange">
+    <IxButton @click="numberOffset += 20">Number Offset</IxButton>
+  </IxAffix>
   <br />
-  <ix-affix :offset="objectOffset">
-    <ix-button>Object Offset</ix-button>
-  </ix-affix>
+  <IxAffix :offset="objectOffset">
+    <IxButton>Object Offset</IxButton>
+  </IxAffix>
 </template>
 
 <script>

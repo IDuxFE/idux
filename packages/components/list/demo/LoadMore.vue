@@ -1,5 +1,5 @@
 <template>
-  <ix-list
+  <IxList
     header="Header"
     footer="Footer"
     :borderless="false"
@@ -7,8 +7,8 @@
     loadMore="加载更多"
     @loadMore="handleLoadMore"
   >
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
 </template>
 
 <script lang="ts">

@@ -13,5 +13,6 @@ yarn.lock
 packages/components/icon/src/definitions.ts
 
 # site generate
+packages/site/components.d.ts
 packages/site/src/router.ts
 packages/site/src/sideNav.ts

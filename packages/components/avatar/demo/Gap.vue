@@ -1,12 +1,12 @@
 <template>
-  <ix-space>
+  <IxSpace>
     <!-- TODO input-number -->
-    <label>Gap: <ix-input v-model:value="gap" style="width: 120px" /></label>
-    <ix-button @click="change">Change Text</ix-button>
-  </ix-space>
+    <label>Gap: <IxInput v-model:value="gap" style="width: 120px" /></label>
+    <IxButton @click="change">Change Text</IxButton>
+  </IxSpace>
   <br />
 
-  <ix-avatar size="large" :gap="gap" :text="text" :style="{ backgroundColor }" />
+  <IxAvatar size="large" :gap="gap" :text="text" :style="{ backgroundColor }" />
 </template>
 
 <script lang="ts">

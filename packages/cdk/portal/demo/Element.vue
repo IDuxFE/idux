@@ -1,7 +1,7 @@
 <template>
-  <ix-portal :target="container">
+  <IxPortal :target="container">
     <div>Portal</div>
-  </ix-portal>
+  </IxPortal>
 </template>
 
 <script lang="ts">

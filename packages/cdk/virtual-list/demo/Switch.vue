@@ -1,33 +1,32 @@
 <template>
-  <ix-virtual-list :data="data" :height="height" itemKey="id" :itemHeight="20" :itemRender="itemRender">
-  </ix-virtual-list>
+  <IxVirtualList :data="data" :height="height" itemKey="id" :itemHeight="20" :itemRender="itemRender"> </IxVirtualList>
 
-  <ix-space>
+  <IxSpace>
     DataLength:
-    <ix-radio-group v-model:value="dataLength">
-      <ix-radio :value="0">0</ix-radio>
-      <ix-radio :value="5">5</ix-radio>
-      <ix-radio :value="20">20</ix-radio>
-      <ix-radio :value="100">100</ix-radio>
-    </ix-radio-group>
-  </ix-space>
+    <IxRadioGroup v-model:value="dataLength">
+      <IxRadio :value="0">0</IxRadio>
+      <IxRadio :value="5">5</IxRadio>
+      <IxRadio :value="20">20</IxRadio>
+      <IxRadio :value="100">100</IxRadio>
+    </IxRadioGroup>
+  </IxSpace>
   <br />
-  <ix-space>
+  <IxSpace>
     Height:
-    <ix-radio-group v-model:value="height">
-      <ix-radio :value="0">0</ix-radio>
-      <ix-radio :value="100">100</ix-radio>
-      <ix-radio :value="200">200</ix-radio>
-    </ix-radio-group>
-  </ix-space>
+    <IxRadioGroup v-model:value="height">
+      <IxRadio :value="0">0</IxRadio>
+      <IxRadio :value="100">100</IxRadio>
+      <IxRadio :value="200">200</IxRadio>
+    </IxRadioGroup>
+  </IxSpace>
   <br />
-  <ix-space>
+  <IxSpace>
     ItemRender:
-    <ix-radio-group v-model:value="switchItemRender">
-      <ix-radio :value="true">ID</ix-radio>
-      <ix-radio :value="false">Index</ix-radio>
-    </ix-radio-group>
-  </ix-space>
+    <IxRadioGroup v-model:value="switchItemRender">
+      <IxRadio :value="true">ID</IxRadio>
+      <IxRadio :value="false">Index</IxRadio>
+    </IxRadioGroup>
+  </IxSpace>
 </template>
 
 <script lang="ts">

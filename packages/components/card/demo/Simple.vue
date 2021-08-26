@@ -1,7 +1,7 @@
 <template>
-  <ix-card>
+  <IxCard>
     <p>Card content</p>
     <p>Card content</p>
     <p>Card content</p>
-  </ix-card>
+  </IxCard>
 </template>

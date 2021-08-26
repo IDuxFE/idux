@@ -46,12 +46,12 @@ single: true
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl \| null` | - | - | 当仅包含一个输入控件时，输入控件的 `control` 可以省略，如果包含了多个输入控件，请务必手动指定每个输入控件的 `control`, 参考注册表单的 [Phone Number](#components-form-demo-Register) |
-| `controlCol` | 配置表单控件的布局，同 `<ix-col>` 组件，设置 `span` `offset` 的值 | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
+| `controlCol` | 配置表单控件的布局，同 `<IxCol>` 组件，设置 `span` `offset` 的值 | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
 | `extra` | 额外的提示信息 | `string \| #extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `hasFeedback` | 是否展示校验状态图标 | `boolean` | `false` | - | - |
 | `label` | `label` 标签的文本| `string \| #label` | - | - | - |
 | `labelAlign` | `label` 标签文本对齐方式 | `left \| right` | - | - | - |
-| `labelCol` | `label` 标签布局，同 `<ix-col>` 组件，设置 `span` `offset` 的值  | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
+| `labelCol` | `label` 标签布局，同 `<IxCol>` 组件，设置 `span` `offset` 的值  | `string \| number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `ix-col` 的 `span` 配置 |
 | `labelFor` | `label` 标签的 `for` 属性 | `string` | - | - | - |
 | `labelTooltip` | 配置提示信息 | `sting \| #tooltip` | - | - | - |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |

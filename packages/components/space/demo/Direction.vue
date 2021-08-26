@@ -1,7 +1,7 @@
 <template>
-  <ix-space direction="vertical">
+  <IxSpace direction="vertical">
     Space
-    <ix-button mode="primary">Button</ix-button>
-    <ix-button>Button</ix-button>
-  </ix-space>
+    <IxButton mode="primary">Button</IxButton>
+    <IxButton>Button</IxButton>
+  </IxSpace>
 </template>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ix-spin :icon="icon">
+    <IxSpin :icon="icon">
       <div class="content">content</div>
-    </ix-spin>
+    </IxSpin>
   </div>
 </template>
 

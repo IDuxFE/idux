@@ -1,16 +1,16 @@
 <template>
   <h3 style="margin: 16px 0">Large</h3>
-  <ix-list header="Header" footer="Footer" :borderless="false" size="large">
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+  <IxList header="Header" footer="Footer" :borderless="false" size="large">
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
   <h3 style="margin: 16px 0">Medium (default)</h3>
-  <ix-list header="Header" footer="Footer" :borderless="false" size="medium">
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+  <IxList header="Header" footer="Footer" :borderless="false" size="medium">
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
   <h3 style="margin: 16px 0">Small</h3>
-  <ix-list header="Header" footer="Footer" :borderless="false" size="small">
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+  <IxList header="Header" footer="Footer" :borderless="false" size="small">
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
 </template>
 
 <script lang="ts">

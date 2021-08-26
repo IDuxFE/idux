@@ -1,9 +1,9 @@
 <template>
   <div class="button-ghost-demo">
-    <ix-button mode="primary" ghost>Primary</ix-button>
-    <ix-button ghost>Default</ix-button>
-    <ix-button mode="dashed" ghost>Dashed</ix-button>
-    <ix-button danger ghost>Danger</ix-button>
+    <IxButton mode="primary" ghost>Primary</IxButton>
+    <IxButton ghost>Default</IxButton>
+    <IxButton mode="dashed" ghost>Dashed</IxButton>
+    <IxButton danger ghost>Danger</IxButton>
   </div>
 </template>
 

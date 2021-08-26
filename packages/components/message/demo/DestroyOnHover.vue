@@ -1,8 +1,8 @@
 <template>
-  <ix-space>
-    <ix-button @click="open">Don't destroy on hover</ix-button>
-    <ix-button @click="open2">Destroy on hover</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="open">Don't destroy on hover</IxButton>
+    <IxButton @click="open2">Destroy on hover</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

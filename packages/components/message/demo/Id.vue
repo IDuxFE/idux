@@ -1,10 +1,10 @@
 <template>
-  <ix-space>
-    <ix-button @click="open">Click count</ix-button>
-    <ix-button @click="customizeOpen">Customized count</ix-button>
-    <ix-button @click="destroyAll">Destroy all message</ix-button>
-    <ix-button @click="destroyCustomized">Destroy customized count message</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="open">Click count</IxButton>
+    <IxButton @click="customizeOpen">Customized count</IxButton>
+    <IxButton @click="destroyAll">Destroy all message</IxButton>
+    <IxButton @click="destroyCustomized">Destroy customized count message</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

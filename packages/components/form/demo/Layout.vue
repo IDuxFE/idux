@@ -1,22 +1,22 @@
 <template>
-  <ix-form class="demo-form" :layout="layout">
-    <ix-form-item label="Form Layout">
-      <ix-radio-group v-model:value="layout">
-        <ix-radio value="horizontal" buttoned>Horizontal</ix-radio>
-        <ix-radio value="vertical" buttoned>Vertical</ix-radio>
-        <ix-radio value="inline" buttoned>Inline</ix-radio>
-      </ix-radio-group>
-    </ix-form-item>
-    <ix-form-item label="Field A">
-      <ix-input></ix-input>
-    </ix-form-item>
-    <ix-form-item label="Field B">
-      <ix-input></ix-input>
-    </ix-form-item>
-    <ix-form-item>
-      <ix-button mode="primary">Submit</ix-button>
-    </ix-form-item>
-  </ix-form>
+  <IxForm class="demo-form" :layout="layout">
+    <IxFormItem label="Form Layout">
+      <IxRadioGroup v-model:value="layout">
+        <IxRadio value="horizontal" buttoned>Horizontal</IxRadio>
+        <IxRadio value="vertical" buttoned>Vertical</IxRadio>
+        <IxRadio value="inline" buttoned>Inline</IxRadio>
+      </IxRadioGroup>
+    </IxFormItem>
+    <IxFormItem label="Field A">
+      <IxInput></IxInput>
+    </IxFormItem>
+    <IxFormItem label="Field B">
+      <IxInput></IxInput>
+    </IxFormItem>
+    <IxFormItem>
+      <IxButton mode="primary">Submit</IxButton>
+    </IxFormItem>
+  </IxForm>
 </template>
 
 <script lang="ts">

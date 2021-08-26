@@ -1,11 +1,11 @@
 <template>
-  <ix-space>
-    <ix-button @click="visible = !visible">Change visible</ix-button>
-    <ix-button mode="primary" @click="openModal">Open modal</ix-button>
-  </ix-space>
-  <ix-modal v-model:visible="visible" header="This is title" :style="{ top: '200px' }" :width="400">
+  <IxSpace>
+    <IxButton @click="visible = !visible">Change visible</IxButton>
+    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
+  </IxSpace>
+  <IxModal v-model:visible="visible" header="This is title" :style="{ top: '200px' }" :width="400">
     <p>Some contents...</p>
-  </ix-modal>
+  </IxModal>
 </template>
 
 <script lang="ts">

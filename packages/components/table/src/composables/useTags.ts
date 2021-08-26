@@ -1,7 +1,7 @@
 import type { ComputedRef, VNodeTypes } from 'vue'
 import type { TableProps } from '../types'
 
-import { computed } from '@vue/runtime-dom'
+import { computed } from 'vue'
 
 export function useTags(props: TableProps): TagsContext {
   return {

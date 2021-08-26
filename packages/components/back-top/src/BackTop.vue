@@ -2,7 +2,7 @@
   <transition name="ix-fade">
     <div v-show="visible" class="ix-back-top" @click.stop="handleClick">
       <slot>
-        <ix-icon name="vertical-align-top" />
+        <IxIcon name="vertical-align-top" />
       </slot>
     </div>
   </transition>

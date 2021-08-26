@@ -27,7 +27,7 @@ order: 0
 | `compareWith` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `string \| #empty` | - | - | - |
-| `filterOption` | 根据搜索的文本进行筛选 | `boolean \| (searchValue: string, option: OptionProps) => boolean` | `true` | - | 为 `true` 时使用 `defaultFilterFn`, 如果使用远程搜索，应该设置为 `false` |
+| `filterOption` | 根据搜索的文本进行筛选 | `boolean \| (searchValue: string, option: SelectOptionProps) => boolean` | `true` | - | 为 `true` 时使用 `defaultFilterFn`, 如果使用远程搜索，应该设置为 `false` |
 | `inputable` | 允许输入模式 | `boolean` | `false` | - | `Todo` |
 | `labelKey` | 标签的 key | `string` | `label` | ✅ | 仅在使用 `options` 时有效 |
 | `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |
@@ -49,7 +49,7 @@ export interface SelectOption {
   [key: string]: any
 }
 
-const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => {
+const defaultFilterFn: SelectFilterFn = (value: string, option: SelectOptionProps) => {
   return option.label.toLowerCase().includes(value.toLowerCase())
 }
 ```
@@ -59,9 +59,9 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 选项内容 | - | - |
-|  `customLabel` | 自定义选中的标签 | `option: OptionProps` | - |
-|  `customMaxLabel` | 自定义超出最多显示多少个标签的内容 | `option: OptionProps` | - |
-|  `dropdownExtra` | 自定义下拉菜单的扩展内容 | `option: OptionProps` | `Todo` |
+|  `customLabel` | 自定义选中的标签 | `option: SelectOptionProps` | - |
+|  `customMaxLabel` | 自定义超出最多显示多少个标签的内容 | `option: SelectOptionProps` | - |
+|  `dropdownExtra` | 自定义下拉菜单的扩展内容 | `option: SelectOptionProps` | `Todo` |
 
 #### SelectEmits
 
@@ -76,7 +76,7 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => 
 
 ### ix-option
 
-#### OptionProps
+#### SelectOptionProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => 
 
 ### ix-option-group
 
-#### OptionGroupProps
+#### SelectOptionGroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -103,5 +103,5 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: OptionProps) => 
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
-|  `default` | Option 内容 | - | - |
+|  `default` | SelectOption 内容 | - | - |
 |  `label` | 分组名 | - | - |

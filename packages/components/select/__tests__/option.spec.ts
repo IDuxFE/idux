@@ -1,10 +1,10 @@
 import { mount, MountingOptions } from '@vue/test-utils'
-import IxOption from '../src/Option.vue'
-import IxOptionGroup from '../src/OptionGroup.vue'
-import { OptionProps, OptionGroupProps } from '../src/types'
+import SelectOption from '../src/SelectOption.vue'
+import SelectOptionGroup from '../src/SelectOptionGroup.vue'
+import { SelectOptionProps, SelectOptionGroupProps } from '../src/types'
 
-describe('Option', () => {
-  const OptionMount = (options?: MountingOptions<Partial<OptionProps>>) => mount(IxOption, { ...options })
+describe('SelectOption', () => {
+  const OptionMount = (options?: MountingOptions<Partial<SelectOptionProps>>) => mount(SelectOption, { ...options })
 
   afterEach(() => {
     jest.spyOn(console, 'warn').mockClear()
@@ -23,9 +23,9 @@ describe('Option', () => {
   })
 })
 
-describe('OptionGroup', () => {
-  const OptionGroupMount = (options?: MountingOptions<Partial<OptionGroupProps>>) =>
-    mount(IxOptionGroup, { ...options })
+describe('SelectOptionGroup', () => {
+  const OptionGroupMount = (options?: MountingOptions<Partial<SelectOptionGroupProps>>) =>
+    mount(SelectOptionGroup, { ...options })
 
   afterEach(() => {
     jest.spyOn(console, 'warn').mockClear()

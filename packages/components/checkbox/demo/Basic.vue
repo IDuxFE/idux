@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checked" label="option" />
+    <IxCheckbox v-model:checked="checked" label="option" />
   </div>
 </template>
 

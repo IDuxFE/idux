@@ -1,6 +1,6 @@
 <template>
   <div class="ix-collapse-panel" :class="classes">
-    <ix-collapse-panel-header
+    <CollapsePanelHeader
       :name="name"
       :title="title"
       :disabled="disabled"
@@ -23,11 +23,11 @@
 import { computed, defineComponent, inject } from 'vue'
 import { collapseToken } from './token'
 import { collapsePanelProps } from './types'
-import IxCollapsePanelHeader from './CollapsePanelHeader.vue'
+import CollapsePanelHeader from './CollapsePanelHeader.vue'
 
 export default defineComponent({
   name: 'IxCollapsePanel',
-  components: { IxCollapsePanelHeader },
+  components: { CollapsePanelHeader },
   props: collapsePanelProps,
   setup(props) {
     const collapse = inject(collapseToken)!

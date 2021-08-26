@@ -1,9 +1,9 @@
 <template>
-  <ix-space>
-    <ix-button @click="visible = !visible">Change visible</ix-button>
-    <ix-button mode="primary" @click="openModal">Open modal</ix-button>
-  </ix-space>
-  <ix-modal
+  <IxSpace>
+    <IxButton @click="visible = !visible">Change visible</IxButton>
+    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
+  </IxSpace>
+  <IxModal
     v-model:visible="visible"
     type="confirm"
     title="Are you sure ?"
@@ -13,7 +13,7 @@
     :okButton="okButton"
   >
     <p>Some contents...</p>
-  </ix-modal>
+  </IxModal>
 </template>
 
 <script lang="ts">

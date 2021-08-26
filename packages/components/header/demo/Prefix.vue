@@ -1,9 +1,9 @@
 <template>
-  <ix-header prefix="arrow-left" @prefixClick="onPrefixClick"> Title </ix-header>
-  <ix-header>
+  <IxHeader prefix="arrow-left" @prefixClick="onPrefixClick"> Title </IxHeader>
+  <IxHeader>
     Title
-    <template #prefix> <ix-icon name="caret-left" @click="onPrefixClick" /> </template>
-  </ix-header>
+    <template #prefix> <IxIcon name="caret-left" @click="onPrefixClick" /> </template>
+  </IxHeader>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

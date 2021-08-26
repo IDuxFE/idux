@@ -1,8 +1,8 @@
 <template>
-  <ix-select v-model:value="singleValue" :options="options" multiple :multipleLimit="5" :maxLabelCount="3">
-    <template #customLabel="{ option }"><ix-icon :name="option.value" />{{ option.label }}</template>
+  <IxSelect v-model:value="singleValue" :options="options" multiple :multipleLimit="5" :maxLabelCount="3">
+    <template #customLabel="{ option }"><IxIcon :name="option.value" />{{ option.label }}</template>
     <template #customMaxLabel="{ option }">and {{ option.value.length }} more selected</template>
-  </ix-select>
+  </IxSelect>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

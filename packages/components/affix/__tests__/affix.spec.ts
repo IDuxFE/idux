@@ -75,9 +75,9 @@ describe('Affix', () => {
         components: { IxAffix },
         template: `
           <div class="container">
-            <ix-affix v-bind="props"
+            <IxAffix v-bind="props"
               v-on="listeners"
-              >Test Affix</ix-affix>
+              >Test Affix</IxAffix>
           </div>
         `,
         setup() {

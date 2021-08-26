@@ -1,12 +1,12 @@
 <template>
-  <ix-button mode="primary" icon="search" loading>Primary</ix-button>
-  <ix-button icon="search" loading>Default</ix-button>
-  <ix-button mode="dashed" loading>Dashed</ix-button>
-  <ix-button mode="text" loading>Text</ix-button>
-  <ix-button mode="link" loading href="https://github.com/IDuxFE/idux" target="_blank">Link</ix-button>
+  <IxButton mode="primary" icon="search" loading>Primary</IxButton>
+  <IxButton icon="search" loading>Default</IxButton>
+  <IxButton mode="dashed" loading>Dashed</IxButton>
+  <IxButton mode="text" loading>Text</IxButton>
+  <IxButton mode="link" loading href="https://github.com/IDuxFE/idux" target="_blank">Link</IxButton>
   <br />
-  <ix-button icon="search" :loading="isLoading">Loading: {{ isLoading }}</ix-button>
-  <ix-button @click="changeLoading">Change Loading</ix-button>
+  <IxButton icon="search" :loading="isLoading">Loading: {{ isLoading }}</IxButton>
+  <IxButton @click="changeLoading">Change Loading</IxButton>
 </template>
 
 <script lang="ts">

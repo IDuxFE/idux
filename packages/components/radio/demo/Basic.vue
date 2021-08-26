@@ -1,5 +1,5 @@
 <template>
-  <ix-radio v-model:checked="checked">Checked: {{ checked }}</ix-radio>
+  <IxRadio v-model:checked="checked">Checked: {{ checked }}</IxRadio>
 </template>
 
 <script lang="ts">

@@ -6,13 +6,13 @@ export interface MenuItem {
   selected: Ref<boolean>
 }
 
-export interface SubMenu {
+export interface MenuSub {
   cid: ComputedRef<string | number>
   selected: Ref<boolean>
   opened: Ref<boolean>
 }
 
-export type MenuRegisterFn = (item: MenuItem | SubMenu, isSubMenu: boolean) => void
+export type MenuRegisterFn = (item: MenuItem | MenuSub, isMenuSub: boolean) => void
 export type MenuItemClickFn = (evt: Event, cid: string | number, item: MenuItemProps) => void
 export type SetChildOpenStateFn = (cid: string | number, opened: boolean) => void
 export type SetChildSelectStateFn = (cid: string | number, selected: boolean) => void
@@ -31,13 +31,13 @@ export interface MenuContext {
 
 export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')
 
-export interface SubMenuContext {
+export interface MenuSubContext {
   level: number
   menuItemClick: MenuItemClickFn
   setChildOpenState: SetChildOpenStateFn
   setChildSelectState: SetChildSelectStateFn
 }
 
-export const subMenuToken: InjectionKey<SubMenuContext> = Symbol('subMenuToken')
+export const menuSubToken: InjectionKey<MenuSubContext> = Symbol('menuSubToken')
 
 export const menuItemGroupToken: InjectionKey<boolean> = Symbol('menuItemGroupToken')

@@ -1,7 +1,7 @@
 <template>
   <div class="ix-collapse-panel-header" :class="headerClasses" @click="$emit('click')">
     <slot name="icon">
-      <ix-icon class="ix-collapse-panel-icon" :name="icons"></ix-icon>
+      <IxIcon class="ix-collapse-panel-icon" :name="icons"></IxIcon>
     </slot>
 
     <slot
@@ -20,7 +20,6 @@ import { IxIcon } from '@idux/components/icon'
 import { collapseToken } from './token'
 
 export default defineComponent({
-  name: 'IxCollapsePanelHeader',
   components: { IxIcon },
   props: {
     name: IxPropTypes.string.isRequired,

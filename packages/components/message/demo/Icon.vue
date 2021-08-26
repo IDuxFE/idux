@@ -1,8 +1,8 @@
 <template>
-  <ix-space>
-    <ix-button @click="open">Customized icon name</ix-button>
-    <ix-button @click="openVNode">Customized icon VNode</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="open">Customized icon name</IxButton>
+    <IxButton @click="openVNode">Customized icon VNode</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <ix-select v-model:value="singleValue" :options="options" labelKey="text" valueKey="id"> </ix-select>
+  <IxSelect v-model:value="singleValue" :options="options" labelKey="text" valueKey="id"> </IxSelect>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

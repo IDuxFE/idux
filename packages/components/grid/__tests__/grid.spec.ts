@@ -7,10 +7,10 @@ const componentFactory = (config = {}) =>
     {
       components: { IxRow, IxCol },
       template: `
-    <ix-row v-bind="rowProps">
-      <ix-col v-bind="colProps">1</ix-col>
-      <ix-col v-bind="colProps">1</ix-col>
-    </ix-row>
+    <IxRow v-bind="rowProps">
+      <IxCol v-bind="colProps">1</IxCol>
+      <IxCol v-bind="colProps">1</IxCol>
+    </IxRow>
   `,
       props: {
         rowProps: {

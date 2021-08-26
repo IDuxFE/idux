@@ -1,16 +1,16 @@
 <template>
-  <ix-radio-group v-model:value="placement">
-    <ix-radio value="left">left</ix-radio>
-    <ix-radio value="right">right</ix-radio>
-    <ix-radio value="top">top</ix-radio>
-    <ix-radio value="bottom">bottom</ix-radio>
-  </ix-radio-group>
-  <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" title="抽屉标题" :placement="placement">
+  <IxRadioGroup v-model:value="placement">
+    <IxRadio value="left">left</IxRadio>
+    <IxRadio value="right">right</IxRadio>
+    <IxRadio value="top">top</IxRadio>
+    <IxRadio value="bottom">bottom</IxRadio>
+  </IxRadioGroup>
+  <IxButton @click="showDrawer"> Click me </IxButton>
+  <IxDrawer v-model:visible="visible" title="抽屉标题" :placement="placement">
     <p>上下左右多方向打开抽屉内容</p>
     <p>上下左右多方向打开抽屉内容</p>
     <p>上下左右多方向打开抽屉内容</p>
-  </ix-drawer>
+  </IxDrawer>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

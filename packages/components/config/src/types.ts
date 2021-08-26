@@ -14,7 +14,7 @@ import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
-import type { StepsSize } from '@idux/components/steps'
+import type { StepperSize } from '@idux/components/stepper'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { ModalType } from '@idux/components/modal'
@@ -70,7 +70,7 @@ export interface MenuConfig {
   theme: MenuTheme
 }
 
-export interface SubMenuConfig {
+export interface MenuSubConfig {
   suffix: string
   suffixRotates: [number, number]
 }
@@ -272,10 +272,10 @@ export interface ProgressConfig {
   format: ProgressFormat
 }
 
-// Steps
+// Stepper
 
-export interface StepsConfig {
-  size: StepsSize
+export interface StepperConfig {
+  size: StepperSize
 }
 
 // Other
@@ -302,7 +302,7 @@ export interface GlobalConfig {
   // Navigation
   dropdown: DropdownConfig
   menu: MenuConfig
-  subMenu: SubMenuConfig
+  menuSub: MenuSubConfig
   pagination: PaginationConfig
   // Data Entry
   form: FormConfig
@@ -322,7 +322,7 @@ export interface GlobalConfig {
   table: TableConfig
   tooltip: TooltipConfig
   popover: PopoverConfig
-  steps: StepsConfig
+  stepper: StepperConfig
   // Feedback
   message: MessageConfig
   modal: ModalConfig

@@ -13,7 +13,7 @@ export function generateTitle(meta: TitleMeta): string {
     target="_blank" 
     rel="noopener noreferrer"
   >
-    <ix-icon name="edit" />
+    <IxIcon name="edit" />
   </a>
 </h1>
 `

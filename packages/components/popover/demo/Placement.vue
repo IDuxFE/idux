@@ -1,47 +1,47 @@
 <template>
   <div style="margin-left: 60px">
-    <ix-popover title="Title" content="Content..." placement="topStart">
-      <ix-button>TS</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="top">
-      <ix-button>Top</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="topEnd">
-      <ix-button>TE</ix-button>
-    </ix-popover>
+    <IxPopover title="Title" content="Content..." placement="topStart">
+      <IxButton>TS</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="top">
+      <IxButton>Top</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="topEnd">
+      <IxButton>TE</IxButton>
+    </IxPopover>
   </div>
   <div style="float: left; width: 60px">
-    <ix-popover title="Title" content="Content..." placement="leftStart">
-      <ix-button>LS</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="left">
-      <ix-button>Left</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="leftEnd">
-      <ix-button>LE</ix-button>
-    </ix-popover>
+    <IxPopover title="Title" content="Content..." placement="leftStart">
+      <IxButton>LS</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="left">
+      <IxButton>Left</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="leftEnd">
+      <IxButton>LE</IxButton>
+    </IxPopover>
   </div>
   <div style="margin-left: 270px; width: 60px">
-    <ix-popover title="Title" content="Content..." placement="rightStart">
-      <ix-button>RS</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="right">
-      <ix-button>Right</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="rightEnd">
-      <ix-button>RE</ix-button>
-    </ix-popover>
+    <IxPopover title="Title" content="Content..." placement="rightStart">
+      <IxButton>RS</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="right">
+      <IxButton>Right</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="rightEnd">
+      <IxButton>RE</IxButton>
+    </IxPopover>
   </div>
   <div style="margin-left: 60px; clear: both">
-    <ix-popover title="Title" content="Content..." placement="bottomStart">
-      <ix-button>BS</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="bottom">
-      <ix-button>Bottom</ix-button>
-    </ix-popover>
-    <ix-popover title="Title" content="Content..." placement="bottomEnd">
-      <ix-button>BE</ix-button>
-    </ix-popover>
+    <IxPopover title="Title" content="Content..." placement="bottomStart">
+      <IxButton>BS</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="bottom">
+      <IxButton>Bottom</IxButton>
+    </IxPopover>
+    <IxPopover title="Title" content="Content..." placement="bottomEnd">
+      <IxButton>BE</IxButton>
+    </IxPopover>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-  <ix-result status="warning" title="There are some problems with your operation.">
+  <IxResult status="warning" title="There are some problems with your operation.">
     <template #extra>
-      <ix-button mode="primary">Go console</ix-button>
+      <IxButton mode="primary">Go console</IxButton>
     </template>
-  </ix-result>
+  </IxResult>
 </template>

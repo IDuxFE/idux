@@ -1,51 +1,51 @@
 <template>
-  <ix-divider position="left" dashed>Align top</ix-divider>
-  <ix-row justify="center" align="top">
-    <ix-col :span="4">
+  <IxDivider position="left" dashed>Align top</IxDivider>
+  <IxRow justify="center" align="top">
+    <IxCol :span="4">
       <div class="height-80">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-40">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-100">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-60">col-4</div>
-    </ix-col>
-  </ix-row>
+    </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Align middle</ix-divider>
-  <ix-row justify="space-around" align="middle">
-    <ix-col :span="4">
+  <IxDivider position="left" dashed>Align middle</IxDivider>
+  <IxRow justify="space-around" align="middle">
+    <IxCol :span="4">
       <div class="height-80">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-40">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-100">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-60">col-4</div>
-    </ix-col>
-  </ix-row>
+    </IxCol>
+  </IxRow>
 
-  <ix-divider position="left" dashed>Align bottom</ix-divider>
-  <ix-row justify="space-between" align="bottom">
-    <ix-col :span="4">
+  <IxDivider position="left" dashed>Align bottom</IxDivider>
+  <IxRow justify="space-between" align="bottom">
+    <IxCol :span="4">
       <div class="height-80">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-40">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-100">col-4</div>
-    </ix-col>
-    <ix-col :span="4">
+    </IxCol>
+    <IxCol :span="4">
       <div class="height-60">col-4</div>
-    </ix-col>
-  </ix-row>
+    </IxCol>
+  </IxRow>
 </template>
 
 <style lang="less" scoped>

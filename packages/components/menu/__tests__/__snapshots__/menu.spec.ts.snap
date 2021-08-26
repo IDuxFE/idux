@@ -11,7 +11,7 @@ exports[`Menu render work 1`] = `
     <!--teleport end-->
   </li>
   <li class=\\"ix-menu-sub ix-menu-sub-disabled ix-menu-sub-vertical\\">
-    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" aria-label=\\"star\\"></i></span><span>SubMenu 4</span><span class=\\"ix-menu-sub-title-suffix-icon\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-star\\" role=\\"img\\" aria-label=\\"star\\"></i></span><span>MenuSub 4</span><span class=\\"ix-menu-sub-title-suffix-icon\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
     <!--teleport start-->
     <!--teleport end-->
   </li>

@@ -1,9 +1,9 @@
 <template>
-  <ix-list :loading="loading" header="Header" footer="Footer">
-    <ix-list-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
-  </ix-list>
+  <IxList :loading="loading" header="Header" footer="Footer">
+    <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
+  </IxList>
 
-  <ix-button @click="toggleLoading">切换加载状态</ix-button>
+  <IxButton @click="toggleLoading">切换加载状态</IxButton>
 </template>
 
 <script lang="ts">

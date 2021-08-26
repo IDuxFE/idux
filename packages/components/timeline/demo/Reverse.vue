@@ -1,12 +1,12 @@
 <template>
-  <ix-timeline :pending="true" :reverse="reverse">
-    <ix-timeline-item key="0">New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item key="1">Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item key="2">Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item key="3">Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline :pending="true" :reverse="reverse">
+    <IxTimelineItem key="0">New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem key="1">Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem key="2">Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem key="3">Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 
-  <ix-button mode="primary" @click="changeReverse">Toggle reverse</ix-button>
+  <IxButton mode="primary" @click="changeReverse">Toggle reverse</IxButton>
 </template>
 
 <script lang="ts">

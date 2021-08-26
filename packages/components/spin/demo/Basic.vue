@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ix-spin :spinning="spinning">
+    <IxSpin :spinning="spinning">
       <div class="content">content</div>
-    </ix-spin>
+    </IxSpin>
     <div class="operation-area">
-      <ix-button mode="primary" @click="changeSpinning()">切换状态</ix-button>
+      <IxButton mode="primary" @click="changeSpinning()">切换状态</IxButton>
       <span class="status-text">spinning: {{ spinning }}</span>
     </div>
   </div>

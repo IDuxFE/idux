@@ -51,7 +51,7 @@ export type MenuDividerPublicProps = IxPublicPropTypes<typeof menuDividerProps>
 export type MenuDividerComponent = DefineComponent<HTMLAttributes & typeof menuDividerProps>
 export type MenuDividerInstance = InstanceType<DefineComponent<MenuDividerProps>>
 
-export const subMenuProps = {
+export const menuSubProps = {
   cid: IxPropTypes.oneOfType([String, Number]),
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
@@ -61,7 +61,7 @@ export const subMenuProps = {
   title: IxPropTypes.string,
 }
 
-export type SubMenuProps = IxInnerPropTypes<typeof subMenuProps>
-export type SubMenuPublicProps = IxPublicPropTypes<typeof subMenuProps>
-export type SubMenuComponent = DefineComponent<HTMLAttributes & typeof subMenuProps>
-export type SubMenuInstance = InstanceType<DefineComponent<SubMenuProps>>
+export type MenuSubProps = IxInnerPropTypes<typeof menuSubProps>
+export type MenuSubPublicProps = IxPublicPropTypes<typeof menuSubProps>
+export type MenuSubComponent = DefineComponent<HTMLAttributes & typeof menuSubProps>
+export type MenuSubInstance = InstanceType<DefineComponent<MenuSubProps>>

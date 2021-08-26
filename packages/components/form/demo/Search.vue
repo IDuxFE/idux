@@ -1,22 +1,22 @@
 <template>
-  <ix-form class="demo-form" :control="formGroup" labelCol="8">
-    <ix-row gutter="24">
-      <ix-col v-for="index in controlLength" :key="index" span="8">
-        <ix-form-item v-show="showMore || index < 7" :control="'field' + index" :label="'Field ' + index">
-          <ix-input></ix-input>
-        </ix-form-item>
-      </ix-col>
-    </ix-row>
-    <ix-row>
-      <ix-col span="24" class="text-right">
-        <ix-space>
-          <ix-button mode="primary" @click="onSearch">Search</ix-button>
-          <ix-button @click="onClear">Clear</ix-button>
-          <ix-button mode="link" :icon="showMore ? 'up' : 'down'" @click="showMore = !showMore">Collapse</ix-button>
-        </ix-space>
-      </ix-col>
-    </ix-row>
-  </ix-form>
+  <IxForm class="demo-form" :control="formGroup" labelCol="8">
+    <IxRow gutter="24">
+      <IxCol v-for="index in controlLength" :key="index" span="8">
+        <IxFormItem v-show="showMore || index < 7" :control="'field' + index" :label="'Field ' + index">
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+    </IxRow>
+    <IxRow>
+      <IxCol span="24" class="text-right">
+        <IxSpace>
+          <IxButton mode="primary" @click="onSearch">Search</IxButton>
+          <IxButton @click="onClear">Clear</IxButton>
+          <IxButton mode="link" :icon="showMore ? 'up' : 'down'" @click="showMore = !showMore">Collapse</IxButton>
+        </IxSpace>
+      </IxCol>
+    </IxRow>
+  </IxForm>
 </template>
 
 <script lang="ts">

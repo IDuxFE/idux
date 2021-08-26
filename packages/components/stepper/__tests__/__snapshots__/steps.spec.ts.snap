@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stepper render work 1`] = `
+"<div class=\\"ix-stepper ix-stepper-horizontal ix-stepper-medium\\">
+  <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"></i></span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Finish<span class=\\"ix-stepper-item-subtitle\\">20:20:01</span></div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-process\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-text\\">2</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">In Progress<span class=\\"ix-stepper-item-subtitle\\"><!----></span></div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-wait\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-text\\">3</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Waiting<span class=\\"ix-stepper-item-subtitle\\"><!----></span></div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+</div>"
+`;

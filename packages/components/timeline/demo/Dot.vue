@@ -1,13 +1,13 @@
 <template>
-  <ix-timeline :pending="true">
-    <ix-timeline-item>
+  <IxTimeline :pending="true">
+    <IxTimelineItem>
       New issue in 2021-02-08
       <template #dot>
-        <ix-icon name="clock-circle" />
+        <IxIcon name="clock-circle" />
       </template>
-    </ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+    </IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 </template>

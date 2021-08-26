@@ -1,30 +1,26 @@
 <template>
-  <ix-space>
-    <ix-button ref="hoverTriggerRef" v-bind="hoverTriggerEvents">Hover</ix-button>
-    <ix-button ref="focusTriggerRef" v-bind="focusTriggerEvents">Focus</ix-button>
-    <ix-button ref="clickTriggerRef" v-bind="clickTriggerEvents">Click</ix-button>
-    <ix-button ref="contextmenuTriggerRef" v-bind="contextmenuTriggerEvents">Contextmenu</ix-button>
-    <ix-button ref="manualTriggerRef" @click="manualUpdate({ visible: !manualVisibility })">Manual</ix-button>
-  </ix-space>
-  <ix-portal target="ix-popper">
+  <IxSpace>
+    <IxButton ref="hoverTriggerRef" v-bind="hoverTriggerEvents">Hover</IxButton>
+    <IxButton ref="focusTriggerRef" v-bind="focusTriggerEvents">Focus</IxButton>
+    <IxButton ref="clickTriggerRef" v-bind="clickTriggerEvents">Click</IxButton>
+    <IxButton ref="contextmenuTriggerRef" v-bind="contextmenuTriggerEvents">Contextmenu</IxButton>
+    <IxButton ref="manualTriggerRef" @click="manualUpdate({ visible: !manualVisibility })">Manual</IxButton>
+  </IxSpace>
+  <IxPortal target="ix-popper">
     <div v-if="hoverVisibility" ref="hoverPopperRef" class="popper popper-hover" v-bind="hoverPopperEvents">Hover</div>
     <div v-if="focusVisibility" ref="focusPopperRef" class="popper popper-focus">Focus</div>
     <div v-if="clickVisibility" ref="clickPopperRef" class="popper popper-click">Click</div>
     <div v-if="contextmenuVisibility" ref="contextmenuPopperRef" class="popper popper-contextmenu">Contextmenu</div>
     <div v-if="manualVisibility" ref="manualPopperRef" class="popper popper-manual">Manual</div>
-  </ix-portal>
+  </IxPortal>
 </template>
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { usePopper } from '@idux/cdk/popper'
-import { IxPortal } from '@idux/cdk/portal'
-import { IxButton } from '@idux/components/button'
-import { IxSpace } from '@idux/components/space'
 
 export default defineComponent({
   name: 'Trigger',
-  components: { IxSpace, IxButton, IxPortal },
   setup() {
     const hoverPopper = usePopper({ delay: 100 })
     const focusPopper = usePopper({ trigger: 'focus' })

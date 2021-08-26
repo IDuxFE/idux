@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ix-switch v-model:checked="checked1" :loading="loading"></ix-switch>
+    <IxSwitch v-model:checked="checked1" :loading="loading"></IxSwitch>
   </div>
   <div class="mt-5">
-    <ix-switch v-model:checked="checked2" :loading="loading"></ix-switch>
+    <IxSwitch v-model:checked="checked2" :loading="loading"></IxSwitch>
   </div>
 </template>
 <script lang="ts">

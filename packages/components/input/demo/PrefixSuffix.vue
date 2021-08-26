@@ -1,14 +1,14 @@
 <template>
-  <ix-input prefix="user" suffix="info-circle" placeholder="Prefix and suffix" />
+  <IxInput prefix="user" suffix="info-circle" placeholder="Prefix and suffix" />
   <br /><br />
-  <ix-input placeholder="Prefix and suffix">
+  <IxInput placeholder="Prefix and suffix">
     <template #prefix><span>￥</span></template>
     <template #suffix><span>RMB</span></template>
-  </ix-input>
+  </IxInput>
   <br /><br />
-  <ix-input placeholder="Password input" :type="showPassword ? 'text' : 'password'">
-    <template #suffix><ix-icon :name="showPassword ? 'eye-invisible' : 'eye'" @click="onSuffixClick" /></template>
-  </ix-input>
+  <IxInput placeholder="Password input" :type="showPassword ? 'text' : 'password'">
+    <template #suffix><IxIcon :name="showPassword ? 'eye-invisible' : 'eye'" @click="onSuffixClick" /></template>
+  </IxInput>
 </template>
 
 <script lang="ts">

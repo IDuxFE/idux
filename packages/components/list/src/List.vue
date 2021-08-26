@@ -3,21 +3,21 @@
     <div v-if="isShowHeader" class="ix-list-header">
       <slot name="header"> {{ header }} </slot>
     </div>
-    <ix-spin :spinning="loading">
+    <IxSpin :spinning="loading">
       <list-wrap :isUseGrid="isUseGrid" :gutter="grid?.gutter">
         <slot></slot>
       </list-wrap>
       <div v-show="isShowEmpty" class="ix-list-empty">
         <slot name="empty">
-          <ix-empty :description="empty"></ix-empty>
+          <IxEmpty :description="empty"></IxEmpty>
         </slot>
       </div>
       <div v-if="isShowLoadMore" class="ix-list-loadMore">
         <slot name="loadMore">
-          <ix-button :loading="loadMoreLoading" @click="handleLoadMoreClick">{{ loadMore }}</ix-button>
+          <IxButton :loading="loadMoreLoading" @click="handleLoadMoreClick">{{ loadMore }}</IxButton>
         </slot>
       </div>
-    </ix-spin>
+    </IxSpin>
     <div v-if="isShowFooter" class="ix-list-footer">
       <slot name="footer"> {{ footer }} </slot>
     </div>

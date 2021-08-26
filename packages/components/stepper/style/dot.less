@@ -1,0 +1,72 @@
+.@{stepper-prefix}-dot {
+  .@{stepper-item-prefix} {
+    position: relative;
+    overflow: visible;
+    padding-left: 0 !important;
+    font-size: 0;
+  }
+  .@{stepper-item-prefix}:not(:last-child) {
+    .@{stepper-item-prefix}-tail {
+      position: absolute;
+      top: (@stepper-item-dot-width / 2 - @stepper-item-dot-tail-width / 2);
+      width: 100%;
+      left: (@stepper-item-dot-head-width / 2 + @stepper-item-dot-width / 2);
+      padding: 0 (@stepper-item-dot-width * 2) 0 (@stepper-item-dot-width);
+      &::after {
+        display: inline-block;
+        width: 100%;
+        height: @stepper-item-dot-tail-width;
+        background: @grey;
+        content: '';
+      }
+    }
+  }
+  .@{stepper-item-prefix}-head {
+    display: block;
+    width: @stepper-item-dot-head-width;
+    height: auto;
+    background: none;
+    border: none;
+    &-dot {
+      display: inline-block;
+      width: @stepper-item-dot-width;
+      height: @stepper-item-dot-width;
+      border-radius: 50%;
+      background: @grey;
+    }
+  }
+  .@{stepper-item-prefix}-content {
+    display: block;
+    font-size: @font-size-md;
+    margin-left: 0;
+    .@{stepper-item-prefix}-title:after {
+      display: none;
+    }
+  }
+  &.@{stepper-prefix}-vertical {
+    .@{stepper-item-prefix}:not(:last-child) {
+      .@{stepper-item-prefix}-tail {
+        top: @stepper-item-dot-width;
+        left: (@stepper-item-dot-width / 2 - @stepper-item-dot-tail-width / 2);
+        width: @stepper-item-dot-tail-width !important;
+        padding: (@stepper-item-dot-vertical-gutter + @spacing-gutter) 0 @spacing-gutter !important;
+      }
+    }
+    .@{stepper-item-prefix}-process {
+      .@{stepper-item-prefix}-head {
+        // 激活点的圆圈比一般的大了2个px，向左移动1px是
+        &-dot {
+          left: @stepper-item-dot-active-offset;
+        }
+      }
+    }
+    .@{stepper-item-prefix}-head {
+      float: left;
+      width: auto;
+      margin-top: @stepper-item-dot-vertical-gutter;
+    }
+    .@{stepper-item-prefix}-content {
+      margin-left: (@spacing-md + @stepper-item-dot-width);
+    }
+  }
+}

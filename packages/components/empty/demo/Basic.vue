@@ -1,3 +1,3 @@
 <template>
-  <ix-empty />
+  <IxEmpty />
 </template>

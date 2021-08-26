@@ -1,36 +1,36 @@
 <template>
   <div>
     <p>Presets:</p>
-    <ix-tag color="red"> red </ix-tag>
-    <ix-tag color="orange"> orange </ix-tag>
-    <ix-tag color="gold"> gold </ix-tag>
-    <ix-tag color="yellow"> yellow </ix-tag>
-    <ix-tag color="canary"> canary </ix-tag>
-    <ix-tag color="prasinous"> prasinous </ix-tag>
-    <ix-tag color="verdant"> verdant </ix-tag>
-    <ix-tag color="green"> green </ix-tag>
-    <ix-tag color="cyan"> cyan </ix-tag>
-    <ix-tag color="sky"> sky </ix-tag>
-    <ix-tag color="blue"> blue </ix-tag>
-    <ix-tag color="admiral"> admiral </ix-tag>
-    <ix-tag color="purple"> purple </ix-tag>
-    <ix-tag color="magenta"> magenta </ix-tag>
+    <IxTag color="red"> red </IxTag>
+    <IxTag color="orange"> orange </IxTag>
+    <IxTag color="gold"> gold </IxTag>
+    <IxTag color="yellow"> yellow </IxTag>
+    <IxTag color="canary"> canary </IxTag>
+    <IxTag color="prasinous"> prasinous </IxTag>
+    <IxTag color="verdant"> verdant </IxTag>
+    <IxTag color="green"> green </IxTag>
+    <IxTag color="cyan"> cyan </IxTag>
+    <IxTag color="sky"> sky </IxTag>
+    <IxTag color="blue"> blue </IxTag>
+    <IxTag color="admiral"> admiral </IxTag>
+    <IxTag color="purple"> purple </IxTag>
+    <IxTag color="magenta"> magenta </IxTag>
   </div>
   <div>
     <p>Custom:</p>
-    <ix-tag color="#2db7f5"> #2db7f5 </ix-tag>
-    <ix-tag color="#87d068"> #87d068 </ix-tag>
-    <ix-tag color="#f50"> #f50 </ix-tag>
-    <ix-tag color="#108ee9"> #108ee9 </ix-tag>
-    <ix-tag color="#abcfcf"> #abcfcf </ix-tag>
+    <IxTag color="#2db7f5"> #2db7f5 </IxTag>
+    <IxTag color="#87d068"> #87d068 </IxTag>
+    <IxTag color="#f50"> #f50 </IxTag>
+    <IxTag color="#108ee9"> #108ee9 </IxTag>
+    <IxTag color="#abcfcf"> #abcfcf </IxTag>
   </div>
 
   <div>
     <p>StatusColorTypes:</p>
-    <ix-tag color="success"> success </ix-tag>
-    <ix-tag color="pending"> pending </ix-tag>
-    <ix-tag color="error"> error </ix-tag>
-    <ix-tag color="warning"> warning </ix-tag>
+    <IxTag color="success"> success </IxTag>
+    <IxTag color="pending"> pending </IxTag>
+    <IxTag color="error"> error </IxTag>
+    <IxTag color="warning"> warning </IxTag>
   </div>
 </template>
 

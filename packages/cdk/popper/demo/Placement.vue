@@ -1,24 +1,24 @@
 <template>
-  <ix-button ref="triggerRef" v-bind="triggerEvents">Hover</ix-button>
-  <ix-portal target="ix-overlay">
+  <IxButton ref="triggerRef" v-bind="triggerEvents">Hover</IxButton>
+  <IxPortal target="ix-overlay">
     <div v-if="visibility" ref="popperRef" v-bind="popperEvents" class="popper">Popper Element</div>
-  </ix-portal>
+  </IxPortal>
   <br />
   <br />
-  <ix-radio-group v-model:value="placement">
-    <ix-radio value="topStart">top start</ix-radio>
-    <ix-radio value="top">top</ix-radio>
-    <ix-radio value="topEnd">top end</ix-radio>
-    <ix-radio value="rightStart">right start</ix-radio>
-    <ix-radio value="right">right</ix-radio>
-    <ix-radio value="rightEnd">right end</ix-radio>
-    <ix-radio value="bottomStart">bottom start</ix-radio>
-    <ix-radio value="bottom">bottom</ix-radio>
-    <ix-radio value="bottomEnd">bottom end</ix-radio>
-    <ix-radio value="leftStart">left start</ix-radio>
-    <ix-radio value="left">left</ix-radio>
-    <ix-radio value="leftEnd">left end</ix-radio>
-  </ix-radio-group>
+  <IxRadioGroup v-model:value="placement">
+    <IxRadio value="topStart">top start</IxRadio>
+    <IxRadio value="top">top</IxRadio>
+    <IxRadio value="topEnd">top end</IxRadio>
+    <IxRadio value="rightStart">right start</IxRadio>
+    <IxRadio value="right">right</IxRadio>
+    <IxRadio value="rightEnd">right end</IxRadio>
+    <IxRadio value="bottomStart">bottom start</IxRadio>
+    <IxRadio value="bottom">bottom</IxRadio>
+    <IxRadio value="bottomEnd">bottom end</IxRadio>
+    <IxRadio value="leftStart">left start</IxRadio>
+    <IxRadio value="left">left</IxRadio>
+    <IxRadio value="leftEnd">left end</IxRadio>
+  </IxRadioGroup>
 </template>
 
 <script lang="ts">
@@ -26,13 +26,8 @@ import type { PopperPlacement } from '@idux/cdk/popper'
 
 import { defineComponent, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { usePopper } from '@idux/cdk/popper'
-import { IxPortal } from '@idux/cdk/portal'
-import { IxButton } from '@idux/components/button'
-import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 
 export default defineComponent({
-  name: 'Placement',
-  components: { IxButton, IxRadio, IxRadioGroup, IxPortal },
   setup() {
     const placement = ref<PopperPlacement>('top')
 

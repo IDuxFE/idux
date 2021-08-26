@@ -7,11 +7,11 @@ import IxCollapsePanel from '../src/CollapsePanel.vue'
 const CombineComponent = {
   components: { IxCollapse, IxCollapsePanel },
   template: `
-  <ix-collapse>
-    <ix-collapse-panel name="name1"> name1 </ix-collapse-panel>
-    <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
-    <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
-  </ix-collapse>
+  <IxCollapse>
+    <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
+    <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
+    <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
+  </IxCollapse>
   `,
 }
 describe('Collapse.vue and CollapsePanel', () => {
@@ -22,11 +22,11 @@ describe('Collapse.vue and CollapsePanel', () => {
     const wrapper = mount({
       components: { IxCollapse, IxCollapsePanel },
       template: `
-      <ix-collapse v-model:active="active">
-        <ix-collapse-panel name="name1"> name1 </ix-collapse-panel>
-        <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
-        <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
-      </ix-collapse>
+      <IxCollapse v-model:active="active">
+        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
+        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
+        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
+      </IxCollapse>
       `,
       setup() {
         return { active }
@@ -68,11 +68,11 @@ describe('Collapse.vue and CollapsePanel', () => {
       components: { IxCollapse, IxCollapsePanel },
       provide: {},
       template: `
-      <ix-collapse v-model:active="active" :accordion='accordion' @update:active="mockFn">
-        <ix-collapse-panel name="name1"> name1 </ix-collapse-panel>
-        <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
-        <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
-      </ix-collapse>
+      <IxCollapse v-model:active="active" :accordion='accordion' @update:active="mockFn">
+        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
+        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
+        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
+      </IxCollapse>
       `,
       setup() {
         return { active, accordion, mockFn }
@@ -111,11 +111,11 @@ describe('Collapse.vue and CollapsePanel', () => {
     const wrapper = mount({
       components: { IxCollapse, IxCollapsePanel },
       template: `
-      <ix-collapse v-model:active="active" :borderless='borderless'>
-        <ix-collapse-panel name="name1"> name1 </ix-collapse-panel>
-        <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
-        <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
-      </ix-collapse>
+      <IxCollapse v-model:active="active" :borderless='borderless'>
+        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
+        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
+        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
+      </IxCollapse>
       `,
       setup() {
         return { active, borderless }
@@ -139,11 +139,11 @@ describe('Collapse.vue and CollapsePanel', () => {
     const wrapper = mount({
       components: { IxCollapse, IxCollapsePanel },
       template: `
-      <ix-collapse v-model:active="active" @update:active="mockFn">
-        <ix-collapse-panel name="name1" :disabled='disabled'> name1 </ix-collapse-panel>
-        <ix-collapse-panel name="name2"> name2 </ix-collapse-panel>
-        <ix-collapse-panel name="name3"> name3 </ix-collapse-panel>
-      </ix-collapse>
+      <IxCollapse v-model:active="active" @update:active="mockFn">
+        <IxCollapsePanel name="name1" :disabled='disabled'> name1 </IxCollapsePanel>
+        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
+        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
+      </IxCollapse>
       `,
       setup() {
         return { active, disabled, mockFn }
@@ -177,11 +177,11 @@ describe('Collapse.vue and CollapsePanel', () => {
     const wrapper = mount({
       components: { IxCollapse, IxCollapsePanel },
       template: `
-      <ix-collapse v-model:active="active">
-        <ix-collapse-panel name="name1" :icon=icon> name1 </ix-collapse-panel>
-        <ix-collapse-panel name="name2" :icon=icon> name2 </ix-collapse-panel>
-        <ix-collapse-panel name="name3" :icon=icon> name3 </ix-collapse-panel>
-      </ix-collapse>
+      <IxCollapse v-model:active="active">
+        <IxCollapsePanel name="name1" :icon=icon> name1 </IxCollapsePanel>
+        <IxCollapsePanel name="name2" :icon=icon> name2 </IxCollapsePanel>
+        <IxCollapsePanel name="name3" :icon=icon> name3 </IxCollapsePanel>
+      </IxCollapse>
       `,
       setup() {
         return { active, icon }

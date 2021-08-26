@@ -1,31 +1,31 @@
 <template>
-  <ix-space>
+  <IxSpace>
     <span>isMatched: </span>
-    <ix-checkbox disabled :checked="isXs">XS</ix-checkbox>
-    <ix-checkbox disabled :checked="isSmOrLg">SM or LG</ix-checkbox>
-  </ix-space>
+    <IxCheckbox disabled :checked="isXs">XS</IxCheckbox>
+    <IxCheckbox disabled :checked="isSmOrLg">SM or LG</IxCheckbox>
+  </IxSpace>
   <br />
-  <ix-space>
+  <IxSpace>
     <span>useBreakpoints: </span>
-    <ix-checkbox disabled :checked="breakpointsState.matches">1024 ~ 1366</ix-checkbox>
-  </ix-space>
+    <IxCheckbox disabled :checked="breakpointsState.matches">1024 ~ 1366</IxCheckbox>
+  </IxSpace>
   <br />
-  <ix-space>
+  <IxSpace>
     <span>useBreakpointsMatch: </span>
-    <ix-checkbox disabled :checked="matchState.xs">XS</ix-checkbox>
-    <ix-checkbox disabled :checked="matchState.sm">SM</ix-checkbox>
-    <ix-checkbox disabled :checked="matchState.md">1024 ~ 1366</ix-checkbox>
-    <ix-checkbox disabled :checked="matchState.all">All</ix-checkbox>
-  </ix-space>
+    <IxCheckbox disabled :checked="matchState.xs">XS</IxCheckbox>
+    <IxCheckbox disabled :checked="matchState.sm">SM</IxCheckbox>
+    <IxCheckbox disabled :checked="matchState.md">1024 ~ 1366</IxCheckbox>
+    <IxCheckbox disabled :checked="matchState.all">All</IxCheckbox>
+  </IxSpace>
   <br />
-  <ix-space>
+  <IxSpace>
     <span>screens: </span>
-    <ix-checkbox disabled :checked="screens.xs">XS</ix-checkbox>
-    <ix-checkbox disabled :checked="screens.sm">SM</ix-checkbox>
-    <ix-checkbox disabled :checked="screens.md">MD</ix-checkbox>
-    <ix-checkbox disabled :checked="screens.lg">LG</ix-checkbox>
-    <ix-checkbox disabled :checked="screens.xl">XL</ix-checkbox>
-  </ix-space>
+    <IxCheckbox disabled :checked="screens.xs">XS</IxCheckbox>
+    <IxCheckbox disabled :checked="screens.sm">SM</IxCheckbox>
+    <IxCheckbox disabled :checked="screens.md">MD</IxCheckbox>
+    <IxCheckbox disabled :checked="screens.lg">LG</IxCheckbox>
+    <IxCheckbox disabled :checked="screens.xl">XL</IxCheckbox>
+  </IxSpace>
 </template>
 
 <script lang="ts">

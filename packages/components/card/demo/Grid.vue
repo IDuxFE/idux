@@ -1,11 +1,11 @@
 <template>
-  <ix-card header="Card title" hoverable style="max-width: 600px">
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-    <ix-card-grid span="6">Content</ix-card-grid>
-  </ix-card>
+  <IxCard header="Card title" hoverable style="max-width: 600px">
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+    <IxCardGrid span="6">Content</IxCardGrid>
+  </IxCard>
 </template>

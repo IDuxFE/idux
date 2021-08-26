@@ -1,5 +1,5 @@
 <template>
-  <ix-button @click="onCopy">Copy</ix-button>
+  <IxButton @click="onCopy">Copy</IxButton>
 </template>
 
 <script lang="ts">

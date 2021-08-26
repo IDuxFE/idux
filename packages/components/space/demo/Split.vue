@@ -1,7 +1,7 @@
 <template>
-  <ix-space split="/">
+  <IxSpace split="/">
     <a href="">link</a>
     <a href="">link</a>
     <a href="">link</a>
-  </ix-space>
+  </IxSpace>
 </template>

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <ix-spin :tip="tip" :size="size">
+    <IxSpin :tip="tip" :size="size">
       <div class="content">content</div>
-    </ix-spin>
+    </IxSpin>
     <div class="operation-area">
-      <ix-button mode="primary" @click="size = 'small'">small</ix-button>
-      <ix-button mode="primary" @click="size = 'medium'">medium</ix-button>
-      <ix-button mode="primary" @click="size = 'large'">large</ix-button>
+      <IxButton mode="primary" @click="size = 'small'">small</IxButton>
+      <IxButton mode="primary" @click="size = 'medium'">medium</IxButton>
+      <IxButton mode="primary" @click="size = 'large'">large</IxButton>
     </div>
   </div>
 </template>

@@ -16,20 +16,21 @@ import { IxRow, IxCol } from '@idux/components/grid'
 import { IxPagination } from '@idux/components/pagination'
 import { IxAffix } from '@idux/components/affix'
 import { IxDropdown, IxDropdownButton } from '@idux/components/dropdown'
-import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxSubMenu } from '@idux/components/menu'
+import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub } from '@idux/components/menu'
 // import Data Entry
 import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
-import { IxInput, IxTextarea } from '@idux/components/input'
+import { IxInput } from '@idux/components/input'
 import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
-import { IxSelect, IxOption, IxOptionGroup } from '@idux/components/select'
+import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/select'
 import { IxSwitch } from '@idux/components/switch'
+import { IxTextarea } from '@idux/components/textarea'
 // import Data Display
 import { IxTable } from '@idux/components/table'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
-import { IxSteps, IxStep } from '@idux/components/steps'
+import { IxStepper, IxStepperItem } from '@idux/components/stepper'
 import { IxList, IxListItem } from '@idux/components/list'
 import { IxBadge } from '@idux/components/badge'
 import { IxCard } from '@idux/components/card'
@@ -71,7 +72,7 @@ const components = [
   IxMenuItem,
   IxMenuItemGroup,
   IxMenuDivider,
-  IxSubMenu,
+  IxMenuSub,
   // components Data Entry
   IxForm,
   IxFormItem,
@@ -84,16 +85,16 @@ const components = [
   IxRadioGroup,
   IxRate,
   IxSelect,
-  IxOption,
-  IxOptionGroup,
+  IxSelectOption,
+  IxSelectOptionGroup,
   IxSwitch,
   // components Data Display
   IxTable,
   IxAvatar,
   IxCollapse,
   IxCollapsePanel,
-  IxSteps,
-  IxStep,
+  IxStepper,
+  IxStepperItem,
   IxList,
   IxListItem,
   IxBadge,

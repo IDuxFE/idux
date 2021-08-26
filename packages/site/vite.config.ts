@@ -1,10 +1,12 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
-import path from 'path'
+import ViteComponents from 'vite-plugin-components'
 
 import { mdPlugin } from './plugins/mdPlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
+import { IduxResolver } from './iduxResolver'
 
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
@@ -13,9 +15,14 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [
       vuePlugin({ include: [/\.vue$/, /\.md$/] }),
-      mdPlugin(),
-      transformIndexPlugin(),
       vueJsxPlugin({ enableObjectSlots: false }),
+      mdPlugin(),
+      ViteComponents({
+        customLoaderMatcher: id => id.endsWith('.md'),
+        globalComponentsDeclaration: true,
+        customComponentResolvers: [IduxResolver({ importStyle: 'less' })],
+      }),
+      transformIndexPlugin(),
     ],
     resolve: {
       alias: [

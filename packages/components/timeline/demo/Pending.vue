@@ -1,28 +1,28 @@
 <template>
   <p>通过设置pending为true来展示幽灵节点</p>
-  <ix-timeline :pending="true">
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline :pending="true">
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 
   <p>通过设置pending为字符串来展示幽灵节点</p>
-  <ix-timeline pending="Recoding...">
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline pending="Recoding...">
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 
   <p>通过设置插槽pending来展示幽灵节点</p>
-  <ix-timeline>
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
+  <IxTimeline>
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
     <template #pending>Recoding...</template>
-  </ix-timeline>
+  </IxTimeline>
 </template>
 
 <style lang="less" scoped>

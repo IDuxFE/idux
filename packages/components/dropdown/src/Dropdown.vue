@@ -1,8 +1,8 @@
 <template>
   <a ref="triggerRef" v-click-outside="onClickOutside" class="ix-dropdown">
     <slot />
-    <slot name="icon"><ix-icon v-if="icon" :name="icon" /></slot>
-    <ix-portal target="ix-dropdown-container">
+    <slot name="icon"><IxIcon v-if="icon" :name="icon" /></slot>
+    <IxPortal target="ix-dropdown-container">
       <transition>
         <div
           v-show="visibility"
@@ -14,7 +14,7 @@
           <slot name="overlay" />
         </div>
       </transition>
-    </ix-portal>
+    </IxPortal>
   </a>
 </template>
 

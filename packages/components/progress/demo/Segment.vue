@@ -1,14 +1,14 @@
 <template>
   <div>
-    <ix-tooltip title="3 done / 3 in progress / 4 to do">
-      <ix-progress :percent="60" :success="{ percent: 30 }" />
-    </ix-tooltip>
-    <ix-tooltip title="3 done / 3 in progress / 4 to do">
-      <ix-progress :percent="60" :success="{ percent: 30 }" type="circle" />
-    </ix-tooltip>
-    <ix-tooltip title="3 done / 3 in progress / 4 to do">
-      <ix-progress :percent="60" :success="{ percent: 30, strokeColor: 'red' }" type="dashboard" />
-    </ix-tooltip>
+    <IxTooltip title="3 done / 3 in progress / 4 to do">
+      <IxProgress :percent="60" :success="{ percent: 30 }" />
+    </IxTooltip>
+    <IxTooltip title="3 done / 3 in progress / 4 to do">
+      <IxProgress :percent="60" :success="{ percent: 30 }" type="circle" />
+    </IxTooltip>
+    <IxTooltip title="3 done / 3 in progress / 4 to do">
+      <IxProgress :percent="60" :success="{ percent: 30, strokeColor: 'red' }" type="dashboard" />
+    </IxTooltip>
   </div>
 </template>
 <style scoped>

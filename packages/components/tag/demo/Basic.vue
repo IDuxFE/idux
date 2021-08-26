@@ -1,11 +1,11 @@
 <template>
-  <ix-tag> Tag </ix-tag>
-  <ix-tag icon="alipay">tag has icon</ix-tag>
-  <ix-tag icon="bug" isRound> isRound </ix-tag>
-  <ix-tag closable @close="onClose"> tag close </ix-tag>
+  <IxTag> Tag </IxTag>
+  <IxTag icon="alipay">tag has icon</IxTag>
+  <IxTag icon="bug" isRound> isRound </IxTag>
+  <IxTag closable @close="onClose"> tag close </IxTag>
 
-  <!--  <ix-tag v-show="hide" icon="alipay" closable @close="onClose">测试</ix-tag>-->
-  <!--  <ix-tag v-show="hide" color="red" icon="alipay" closable @close="onClose">测试</ix-tag>-->
+  <!--  <IxTag v-show="hide" icon="alipay" closable @close="onClose">测试</IxTag>-->
+  <!--  <IxTag v-show="hide" color="red" icon="alipay" closable @close="onClose">测试</IxTag>-->
 </template>
 
 <script lang="ts">

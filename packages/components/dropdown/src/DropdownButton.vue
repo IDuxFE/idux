@@ -1,10 +1,10 @@
 <template>
-  <ix-button-group v-click-outside="onClickOutside" class="ix-dropdown">
-    <ix-button><slot /></ix-button>
-    <ix-button ref="triggerRef">
-      <slot name="icon"><ix-icon :name="icon" /></slot>
-    </ix-button>
-    <ix-portal target="ix-dropdown-container">
+  <IxButtonGroup v-click-outside="onClickOutside" class="ix-dropdown">
+    <IxButton><slot /></IxButton>
+    <IxButton ref="triggerRef">
+      <slot name="icon"><IxIcon :name="icon" /></slot>
+    </IxButton>
+    <IxPortal target="ix-dropdown-container">
       <transition>
         <div
           v-show="visibility"
@@ -16,8 +16,8 @@
           <slot name="overlay" />
         </div>
       </transition>
-    </ix-portal>
-  </ix-button-group>
+    </IxPortal>
+  </IxButtonGroup>
 </template>
 
 <script lang="ts">

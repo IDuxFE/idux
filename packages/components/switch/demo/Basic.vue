@@ -1,7 +1,7 @@
 <template>
-  <ix-switch v-model:checked="checked" @change="updateChecked"></ix-switch>
+  <IxSwitch v-model:checked="checked" @change="updateChecked"></IxSwitch>
   <div class="mt-5">checked: {{ checked }}</div>
-  <ix-button class="mt-5" @click="changeChecked">父组件触发改变</ix-button>
+  <IxButton class="mt-5" @click="changeChecked">父组件触发改变</IxButton>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

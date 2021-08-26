@@ -1,4 +1,4 @@
-import type { DefineComponent, InputHTMLAttributes, TextareaHTMLAttributes } from 'vue'
+import type { DefineComponent, InputHTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import type { FormSize } from '@idux/components/form'
@@ -9,7 +9,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
 export type TextareaAutoRows = { minRows: number; maxRows: number }
 
-const commonProps = {
+export const commonProps = {
   value: IxPropTypes.string,
   control: controlPropDef,
   clearable: IxPropTypes.bool,
@@ -28,6 +28,8 @@ const commonProps = {
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
+export type CommonProps = IxInnerPropTypes<typeof commonProps>
+
 export const inputProps = {
   ...commonProps,
   addonAfter: IxPropTypes.string,
@@ -45,18 +47,3 @@ export interface InputBindings {
 }
 export type InputComponent = DefineComponent<InputHTMLAttributes & typeof inputProps, InputBindings>
 export type InputInstance = InstanceType<DefineComponent<InputProps, InputBindings>>
-
-export const textareaProps = {
-  ...commonProps,
-  autoRows: IxPropTypes.oneOfType([Boolean, IxPropTypes.shape<TextareaAutoRows>({ minRows: Number, maxRows: Number })]),
-  computeCount: IxPropTypes.func<(value: string) => string>(),
-  maxCount: IxPropTypes.oneOfType([Number, String]),
-  resize: IxPropTypes.oneOf<TextareaResize>(['none', 'both', 'horizontal', 'vertical']),
-  showCount: IxPropTypes.bool,
-}
-
-export type TextareaProps = IxInnerPropTypes<typeof textareaProps>
-export type TextareaPublicProps = IxPublicPropTypes<typeof textareaProps>
-export type TextareaBindings = InputBindings
-export type TextareaComponent = DefineComponent<TextareaHTMLAttributes & typeof textareaProps, TextareaBindings>
-export type TextareaInstance = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>

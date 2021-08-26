@@ -1,8 +1,8 @@
 <template>
-  <ix-result status="success" title="Successfully watch the website." subtitle="Welcome again">
+  <IxResult status="success" title="Successfully watch the website." subtitle="Welcome again">
     <template #extra>
-      <ix-button mode="primary">Go console</ix-button>
-      <ix-button>Buy Again</ix-button>
+      <IxButton mode="primary">Go console</IxButton>
+      <IxButton>Buy Again</IxButton>
     </template>
-  </ix-result>
+  </IxResult>
 </template>

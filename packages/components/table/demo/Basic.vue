@@ -1,7 +1,7 @@
 <template>
-  <ix-table :columns="columns" :dataSource="data">
+  <IxTable :columns="columns" :dataSource="data">
     <template #nameTitle="{ title }">
-      <ix-icon name="star"></ix-icon>
+      <IxIcon name="star"></IxIcon>
       <span> {{ title }}</span>
     </template>
     <template #nameRender="{ value }">
@@ -10,7 +10,7 @@
     <template #customExpand="{ record }">
       <p>{{ record.name }}</p>
     </template>
-  </ix-table>
+  </IxTable>
 </template>
 
 <script lang="ts" setup>

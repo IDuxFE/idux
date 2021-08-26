@@ -1,27 +1,27 @@
 <template>
   <p>内容在时间轴右边 position: right</p>
-  <ix-timeline :pending="true">
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline :pending="true">
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 
   <p>内容在时间轴两侧轮流出现 position: alternate</p>
-  <ix-timeline :pending="true" position="alternate">
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline :pending="true" position="alternate">
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 
   <p>内容在时间轴左边 position: left</p>
-  <ix-timeline :pending="true" position="left">
-    <ix-timeline-item>New issue in 2021-02-08</ix-timeline-item>
-    <ix-timeline-item>Create IxTimeline in 2021-02-10</ix-timeline-item>
-    <ix-timeline-item>Update component documentation in 2021-02-12</ix-timeline-item>
-    <ix-timeline-item>Write test cases in 2021-02-14</ix-timeline-item>
-  </ix-timeline>
+  <IxTimeline :pending="true" position="left">
+    <IxTimelineItem>New issue in 2021-02-08</IxTimelineItem>
+    <IxTimelineItem>Create IxTimeline in 2021-02-10</IxTimelineItem>
+    <IxTimelineItem>Update component documentation in 2021-02-12</IxTimelineItem>
+    <IxTimelineItem>Write test cases in 2021-02-14</IxTimelineItem>
+  </IxTimeline>
 </template>
 
 <style lang="less" scoped>

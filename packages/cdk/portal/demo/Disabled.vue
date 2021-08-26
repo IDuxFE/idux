@@ -1,8 +1,8 @@
 <template>
-  <ix-portal target="ix-container" :disabled="disabled">
+  <IxPortal target="ix-container" :disabled="disabled">
     <div>Portal</div>
-  </ix-portal>
-  <ix-button @click="handleDisable">Disabled</ix-button>
+  </IxPortal>
+  <IxButton @click="handleDisable">Disabled</IxButton>
 </template>
 
 <script lang="ts">

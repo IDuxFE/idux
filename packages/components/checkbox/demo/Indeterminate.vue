@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ix-checkbox v-model:checked="checkAll" :indeterminate="indeterminate" :onChange="onCheckAllChange">
+    <IxCheckbox v-model:checked="checkAll" :indeterminate="indeterminate" :onChange="onCheckAllChange">
       CheckAll
-    </ix-checkbox>
-    <ix-checkbox-group v-model:value="value" :options="options" />
+    </IxCheckbox>
+    <IxCheckboxGroup v-model:value="value" :options="options" />
   </div>
 </template>
 

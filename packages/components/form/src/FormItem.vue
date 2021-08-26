@@ -1,6 +1,6 @@
 <template>
-  <ix-row :class="itemClasses">
-    <ix-col
+  <IxRow :class="itemClasses">
+    <IxCol
       v-if="label || $slots.label || labelTooltip || $slots.labelTooltip"
       v-bind="labelColConfig"
       :class="labelClasses"
@@ -9,20 +9,20 @@
         <slot name="label">{{ label }}</slot>
         <span v-if="labelTooltip || $slots.labelTooltip" class="ix-form-item-label-tooltip">
           <slot name="tooltip">
-            <ix-tooltip :title="labelTooltip">
-              <ix-icon name="question-circle" />
-            </ix-tooltip>
+            <IxTooltip :title="labelTooltip">
+              <IxIcon name="question-circle" />
+            </IxTooltip>
           </slot>
         </span>
       </label>
-    </ix-col>
-    <ix-col v-bind="controlColConfig" class="ix-form-item-control">
+    </IxCol>
+    <IxCol v-bind="controlColConfig" class="ix-form-item-control">
       <div class="ix-form-item-control-input">
         <div class="ix-form-item-control-input-content">
           <slot></slot>
         </div>
         <span v-if="hasFeedback$$ && statusIcon" class="ix-form-item-status-icon">
-          <ix-icon :name="statusIcon" />
+          <IxIcon :name="statusIcon" />
         </span>
       </div>
 
@@ -32,8 +32,8 @@
       <div v-if="extra || $slots.extra" class="ix-form-item-extra">
         <slot name="extra">{{ extra }}</slot>
       </div>
-    </ix-col>
-  </ix-row>
+    </IxCol>
+  </IxRow>
 </template>
 
 <script lang="ts">

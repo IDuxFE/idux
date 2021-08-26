@@ -1,8 +1,8 @@
 <template>
-  <ix-card hoverable :cover="cover" :header="header" :footer="footer">
+  <IxCard hoverable :cover="cover" :header="header" :footer="footer">
     <p>Card content</p>
     <p>Card content</p>
-  </ix-card>
+  </IxCard>
 </template>
 
 <script lang="ts">

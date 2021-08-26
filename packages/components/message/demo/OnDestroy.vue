@@ -1,5 +1,5 @@
 <template>
-  <ix-button @click="open">Open message</ix-button>
+  <IxButton @click="open">Open message</IxButton>
 </template>
 
 <script lang="ts">

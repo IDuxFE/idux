@@ -1,8 +1,8 @@
 <template>
-  <ix-space>
+  <IxSpace>
     Space
-    <ix-button mode="primary">Button</ix-button>
-    <ix-button>Button</ix-button>
-    <ix-button danger>Button</ix-button>
-  </ix-space>
+    <IxButton mode="primary">Button</IxButton>
+    <IxButton>Button</IxButton>
+    <IxButton danger>Button</IxButton>
+  </IxSpace>
 </template>

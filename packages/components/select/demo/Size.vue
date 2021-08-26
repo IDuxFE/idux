@@ -1,24 +1,24 @@
 <template>
-  <ix-row :gutter="8">
-    <ix-col :span="12">
-      <ix-select v-model:value="singleValue" :options="options" size="large"> </ix-select>
-    </ix-col>
-    <ix-col :span="12">
-      <ix-select v-model:value="multipleValue" :options="options" multiple size="large"> </ix-select>
-    </ix-col>
-    <ix-col :span="12">
-      <ix-select v-model:value="singleValue" :options="options"> </ix-select>
-    </ix-col>
-    <ix-col :span="12">
-      <ix-select v-model:value="multipleValue" :options="options" multiple> </ix-select>
-    </ix-col>
-    <ix-col :span="12">
-      <ix-select v-model:value="singleValue" :options="options" size="small"> </ix-select>
-    </ix-col>
-    <ix-col :span="12">
-      <ix-select v-model:value="multipleValue" :options="options" multiple size="small"> </ix-select>
-    </ix-col>
-  </ix-row>
+  <IxRow :gutter="8">
+    <IxCol :span="12">
+      <IxSelect v-model:value="singleValue" :options="options" size="large"> </IxSelect>
+    </IxCol>
+    <IxCol :span="12">
+      <IxSelect v-model:value="multipleValue" :options="options" multiple size="large"> </IxSelect>
+    </IxCol>
+    <IxCol :span="12">
+      <IxSelect v-model:value="singleValue" :options="options"> </IxSelect>
+    </IxCol>
+    <IxCol :span="12">
+      <IxSelect v-model:value="multipleValue" :options="options" multiple> </IxSelect>
+    </IxCol>
+    <IxCol :span="12">
+      <IxSelect v-model:value="singleValue" :options="options" size="small"> </IxSelect>
+    </IxCol>
+    <IxCol :span="12">
+      <IxSelect v-model:value="multipleValue" :options="options" multiple size="small"> </IxSelect>
+    </IxCol>
+  </IxRow>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

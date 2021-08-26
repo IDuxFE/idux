@@ -1,8 +1,8 @@
 <template>
-  <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" title="抽屉标题" width="800px" height="90%" offset="5%">
+  <IxButton @click="showDrawer"> Click me </IxButton>
+  <IxDrawer v-model:visible="visible" title="抽屉标题" width="800px" height="90%" offset="5%">
     <p>抽屉内容</p>
-  </ix-drawer>
+  </IxDrawer>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

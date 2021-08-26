@@ -1,11 +1,11 @@
 <template>
   <div class="basic-icons">
-    <ix-icon name="up" />
-    <ix-icon name="down" rotate />
-    <ix-icon name="left" rotate="90" />
-    <ix-icon name="right" style="color: red" rotate />
-    <ix-icon name="ix-icon-up" class="icon-blue" iconfont />
-    <ix-icon name="ix-icon-down" iconfont />
+    <IxIcon name="up" />
+    <IxIcon name="down" rotate />
+    <IxIcon name="left" rotate="90" />
+    <IxIcon name="right" style="color: red" rotate />
+    <IxIcon name="ix-icon-up" class="icon-blue" iconfont />
+    <IxIcon name="ix-icon-down" iconfont />
   </div>
 </template>
 

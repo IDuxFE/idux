@@ -13,7 +13,7 @@ describe('Switch', () => {
     const checked = ref(true)
     const wrapper = mount({
       components: { IxSwitch },
-      template: `<ix-switch v-model:checked="checked"></ix-switch>`,
+      template: `<IxSwitch v-model:checked="checked"></IxSwitch>`,
       setup() {
         return { checked }
       },

@@ -13,7 +13,7 @@ describe('Input', () => {
     const valueRef = ref('init value')
     const wrapper = mount({
       components: { IxInput },
-      template: `<ix-input v-model:value="valueRef" />`,
+      template: `<IxInput v-model:value="valueRef" />`,
       setup() {
         return { valueRef }
       },

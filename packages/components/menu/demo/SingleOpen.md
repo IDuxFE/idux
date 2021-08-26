@@ -11,4 +11,4 @@ order: 3
 
 ## en
 
-Only expand the current sub-menu and collapse all other sub-menus.
+Only expand the current menu-sub and collapse all other menu-subs.

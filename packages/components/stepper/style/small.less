@@ -1,0 +1,44 @@
+.@{stepper-prefix}-small {
+  font-size: @font-size-sm;
+  .@{stepper-item-prefix}:not(:first-child) {
+    padding-left: 0;
+  }
+  .@{stepper-item-prefix}-head {
+    width: @height-sm;
+    height: @height-sm;
+    &-icon,
+    &-text {
+      line-height: @height-sm;
+    }
+    &-percent {
+      width: (@height-sm + @stepper-item-percent-gutter);
+      height: (@height-sm + @stepper-item-percent-gutter);
+      &-left,
+      &-right {
+        width: ((@height-sm + @stepper-item-percent-gutter) / 2);
+        height: (@height-sm + @stepper-item-percent-gutter);
+        .@{stepper-item-prefix}-head-percent-circle {
+          width: (@height-sm + @stepper-item-percent-gutter);
+          height: (@height-sm + @stepper-item-percent-gutter);
+        }
+      }
+    }
+  }
+  .@{stepper-item-prefix}-title {
+    line-height: @height-sm;
+    padding-right: @spacing-sm;
+    &::after {
+      top: (@height-sm / 2);
+    }
+  }
+  .@{stepper-item-prefix}-description {
+    font-size: @font-size-xs;
+  }
+  .@{stepper-item-prefix}-custom {
+    .@{stepper-item-prefix}-head {
+      .@{stepper-item-prefix}-head-icon {
+        font-size: @stepper-item-custom-icon-width-small;
+      }
+    }
+  }
+}

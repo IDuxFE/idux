@@ -1,16 +1,16 @@
 <template>
-  <ix-collapse v-model:active="active">
-    <ix-collapse-panel name="1" title="Francis Bacon's saying" :icon="icon">
+  <IxCollapse v-model:active="active">
+    <IxCollapsePanel name="1" title="Francis Bacon's saying" :icon="icon">
       <p>A wise man will make more opportunities than he finds.</p>
-    </ix-collapse-panel>
-    <ix-collapse-panel name="2" title="Francis Bacon's saying" :icon="icon">
+    </IxCollapsePanel>
+    <IxCollapsePanel name="2" title="Francis Bacon's saying" :icon="icon">
       If a man will begin with certainties, he shall end in doubts; but if he will be content to begin with doubts, he
       shall end in certainties.
-    </ix-collapse-panel>
-    <ix-collapse-panel name="3" title="Francis Bacon's saying" :icon="icon">
+    </IxCollapsePanel>
+    <IxCollapsePanel name="3" title="Francis Bacon's saying" :icon="icon">
       A wise man will make more opportunities than he finds.
-    </ix-collapse-panel>
-  </ix-collapse>
+    </IxCollapsePanel>
+  </IxCollapse>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

@@ -1,17 +1,17 @@
 import { ComponentPublicInstance, reactive } from 'vue'
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import { wait } from '@tests'
-import IxSelect from '../src/Select.vue'
-import IxOption from '../src/Option.vue'
-import IxOptionGroup from '../src/OptionGroup.vue'
-import { OptionProps, SelectProps } from '../src/types'
+import Select from '../src/Select.vue'
+import SelectOption from '../src/SelectOption.vue'
+import SelectOptionGroup from '../src/SelectOptionGroup.vue'
+import { SelectOptionProps, SelectProps } from '../src/types'
 
 describe('Select', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const SelectMount = (options = {}) => {
     return mount(
       {
-        components: { IxSelect, IxOption, IxOptionGroup },
+        components: { IxSelect: Select, IxSelectOption: SelectOption, IxSelectOptionGroup: SelectOptionGroup },
         ...options,
       },
       { attachTo: 'body' },
@@ -29,7 +29,7 @@ describe('Select', () => {
     const initSelect = (props: Partial<SelectProps>, slots?: string) => {
       selectWrapper = SelectMount({
         template: `
-        <ix-select
+        <IxSelect
           v-model:value="props.value"
           v-model:open="props.open"
           :autofocus="props.autofocus"
@@ -46,11 +46,11 @@ describe('Select', () => {
           :size="props.size"
           :suffix="props.suffix"
         >
-          <ix-option label="Tom" value="tom" />
-          <ix-option label="Jerry" value="jerry" />
-          <ix-option label="Speike" value="speike" /> 
+          <IxSelectOption label="Tom" value="tom" />
+          <IxSelectOption label="Jerry" value="jerry" />
+          <IxSelectOption label="Speike" value="speike" /> 
           ${slots || ''}
-        </ix-select>
+        </IxSelect>
         `,
         setup() {
           return { props }
@@ -306,7 +306,7 @@ describe('Select', () => {
     })
 
     test('filterOption work', async () => {
-      const filterOption = (searchValue: string, option: OptionProps) => searchValue === option.value
+      const filterOption = (searchValue: string, option: SelectOptionProps) => searchValue === option.value
       selectProps = reactive({ searchable: true, filterOption })
       initSelect(selectProps)
       const input = selectWrapper.find('input')
@@ -334,7 +334,7 @@ describe('Select', () => {
     test('empty work', async () => {
       selectProps = reactive({ empty: 'empty' })
       selectWrapper = SelectMount({
-        template: `<ix-select :empty="selectProps.empty"></ix-select>`,
+        template: `<IxSelect :empty="selectProps.empty"></IxSelect>`,
         setup() {
           return { selectProps }
         },
@@ -349,7 +349,7 @@ describe('Select', () => {
       const emptySlot = '<template #empty>emptySlot</template>'
       selectProps = reactive({ empty: 'empty' })
       selectWrapper = SelectMount({
-        template: `<ix-select :empty="selectProps.empty">${emptySlot}</ix-select>`,
+        template: `<IxSelect :empty="selectProps.empty">${emptySlot}</IxSelect>`,
         setup() {
           return { selectProps }
         },
@@ -404,20 +404,20 @@ describe('Select', () => {
       selectProps = reactive({ value: 'tom0' })
       selectWrapper = SelectMount({
         template: `
-        <ix-select v-model:value="props.value"  >
-          <ix-option-group label="Tom">
-            <ix-option label="Tom0" value="tom0" />
-            <ix-option label="Tom1" value="tom1" />
-          </ix-option-group>  
-          <ix-option-group label="Jerry">
-            <ix-option label="Jerry0" value="jerry0" />
-            <ix-option label="Jerry1" value="jerry1" />
-          </ix-option-group>
-          <ix-option-group label="Speike">
-            <ix-option label="Speike0" value="speike0" />
-            <ix-option label="Speike1" value="speike1" />
-          </ix-option-group>
-        </ix-select>
+        <IxSelect v-model:value="props.value"  >
+          <IxSelectOption-group label="Tom">
+            <IxSelectOption label="Tom0" value="tom0" />
+            <IxSelectOption label="Tom1" value="tom1" />
+          </IxSelectOption-group>  
+          <IxSelectOption-group label="Jerry">
+            <IxSelectOption label="Jerry0" value="jerry0" />
+            <IxSelectOption label="Jerry1" value="jerry1" />
+          </IxSelectOption-group>
+          <IxSelectOption-group label="Speike">
+            <IxSelectOption label="Speike0" value="speike0" />
+            <IxSelectOption label="Speike1" value="speike1" />
+          </IxSelectOption-group>
+        </IxSelect>
         `,
         setup() {
           return { props: selectProps }
@@ -439,17 +439,17 @@ describe('Select', () => {
     const initSelect = (props: Partial<SelectProps>, slots?: string) => {
       selectWrapper = SelectMount({
         template: `
-        <ix-select
+        <IxSelect
           multiple
           v-model:value="props.value"
           :maxLabelCount="props.maxLabelCount"
           :multipleLimit="props.multipleLimit"
         >
-          <ix-option label="Tom" value="tom" />
-          <ix-option label="Jerry" value="jerry" />
-          <ix-option label="Speike" value="speike" />
+          <IxSelectOption label="Tom" value="tom" />
+          <IxSelectOption label="Jerry" value="jerry" />
+          <IxSelectOption label="Speike" value="speike" />
           ${slots || ''}
-        </ix-select>
+        </IxSelect>
         `,
         setup() {
           return { props }
@@ -603,13 +603,13 @@ describe('Select', () => {
     const initSelect = (props: Partial<SelectProps>) => {
       selectWrapper = SelectMount({
         template: `
-        <ix-select
+        <IxSelect
           v-model:value="props.value"
           :options="props.options"
           :labelKey="props.labelKey"
           :valueKey="props.valueKey"
         >
-        </ix-select>
+        </IxSelect>
         `,
         setup() {
           return { props }

@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="background">
-      <ix-affix target=".container" :offset="{ top: 0, left: 0 }">
-        <ix-button mode="primary">Custom target container</ix-button>
-      </ix-affix>
+      <IxAffix target=".container" :offset="{ top: 0, left: 0 }">
+        <IxButton mode="primary">Custom target container</IxButton>
+      </IxAffix>
     </div>
   </div>
 </template>

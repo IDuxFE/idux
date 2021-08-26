@@ -1,7 +1,7 @@
 <template>
   <div class="ix-spin">
     <div v-if="spinning" class="ix-spin-spinner" :class="spinnerClassName">
-      <ix-icon :name="icon$$" class="ix-spin-spinner-icon" rotate></ix-icon>
+      <IxIcon :name="icon$$" class="ix-spin-spinner-icon" rotate></IxIcon>
       <div v-if="tip$$" class="ix-spin-spinner-tip">
         {{ tip$$ }}
       </div>

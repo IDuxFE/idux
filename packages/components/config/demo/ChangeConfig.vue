@@ -1,11 +1,11 @@
 <template>
   <p>Default size of button: {{ config.size }}</p>
   <br />
-  <ix-space>
-    <ix-button @click="changeConfig({ size: 'small' })">Small</ix-button>
-    <ix-button @click="changeConfig({ size: 'medium' })">Medium</ix-button>
-    <ix-button @click="changeConfig({ size: 'large' })">Large</ix-button>
-  </ix-space>
+  <IxSpace>
+    <IxButton @click="changeConfig({ size: 'small' })">Small</IxButton>
+    <IxButton @click="changeConfig({ size: 'medium' })">Medium</IxButton>
+    <IxButton @click="changeConfig({ size: 'large' })">Large</IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts">

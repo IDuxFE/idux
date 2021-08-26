@@ -3,7 +3,7 @@ import type { ComputedRef, Ref } from 'vue'
 import type { OverlayOptions } from '@idux/cdk/overlay'
 import type { SelectConfig } from '@idux/components/config'
 import type IxSelectInput from './SelectInput.vue'
-import type { OptionProps, SelectOption, SelectProps } from './types'
+import type { SelectOptionProps, SelectOption, SelectProps } from './types'
 
 import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue'
 import { useOverlay } from '@idux/cdk/overlay'
@@ -115,7 +115,7 @@ export interface SelectValueAccessor {
   showPlaceholder: Ref<boolean>
   isActive: Ref<boolean>
   onClear: (evt: MouseEvent) => void
-  onItemDelete: (item: OptionProps) => void
+  onItemDelete: (item: SelectOptionProps) => void
   onCompositionStart: (evt: CompositionEvent) => void
   onCompositionEnd: (evt: CompositionEvent) => void
   onInputValueChange: (value: string) => void
@@ -147,7 +147,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
     emit('clear', evt)
   }
 
-  const onItemDelete = (item: OptionProps) => {
+  const onItemDelete = (item: SelectOptionProps) => {
     selectedValue.value = selectedValue.value.filter(value => !props.compareWith(item.value, value))
   }
 
@@ -287,7 +287,7 @@ export const useSelectProvider = (
   inputValue: Ref<string>,
   activatedValue: Ref<any>,
   selectedValue: Ref<any[]>,
-  selectedOptions: Ref<OptionProps[]>,
+  selectedOptions: Ref<SelectOptionProps[]>,
   hide: (hideDelay?: number) => void,
   focus: () => void,
   clear: () => void,
@@ -317,7 +317,7 @@ export const useSelectProvider = (
     }
   }
 
-  const selectOptionHandler = (selected: boolean, option: OptionProps) => {
+  const selectOptionHandler = (selected: boolean, option: SelectOptionProps) => {
     let currentSelectedOptions = selectedOptions.value
     const targetIndex = currentSelectedOptions.findIndex(item => props.compareWith(item.value, option.value))
     if (!props.multiple) {

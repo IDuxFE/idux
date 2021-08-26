@@ -1,14 +1,14 @@
 <template>
-  <ix-button @click="showDrawer"> Click me </ix-button>
-  <ix-drawer v-model:visible="visible" title="父级抽屉标题" width="50%">
+  <IxButton @click="showDrawer"> Click me </IxButton>
+  <IxDrawer v-model:visible="visible" title="父级抽屉标题" width="50%">
     <p>父级抽屉内容</p>
-    <ix-button @click="showChildrenDrawer"> 打开子抽屉 </ix-button>
-    <ix-drawer v-model:visible="chilrenVisible" title="子级抽屉标题">
+    <IxButton @click="showChildrenDrawer"> 打开子抽屉 </IxButton>
+    <IxDrawer v-model:visible="chilrenVisible" title="子级抽屉标题">
       <p>子级抽屉内容</p>
       <p>子级抽屉内容</p>
       <p>子级抽屉内容</p>
-    </ix-drawer>
-  </ix-drawer>
+    </IxDrawer>
+  </IxDrawer>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

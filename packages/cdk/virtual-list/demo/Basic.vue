@@ -1,6 +1,6 @@
 <template>
   <div class="list-wrapper">
-    <ix-virtual-list
+    <IxVirtualList
       ref="listRef"
       component="ul"
       :data="data"
@@ -12,16 +12,16 @@
       <template #item="{ item, index }">
         <span class="virtual-item" @click="onItemClick(item.id)">{{ item.id }} - {{ index }}</span>
       </template>
-    </ix-virtual-list>
+    </IxVirtualList>
 
-    <ix-space>
-      <ix-button @click="scrollTo(100)"> Scroll To 100px </ix-button>
-      <ix-button @click="scrollTo({ key: 'id-50', align: 'top' })"> Scroll To id-50(top) </ix-button>
-      <ix-button @click="scrollTo({ index: 40, align: 'top' })"> Scroll To 40(top) </ix-button>
-      <ix-button @click="scrollTo({ index: 40, align: 'bottom' })"> Scroll To 40(bottom) </ix-button>
-      <ix-button @click="scrollTo({ index: 40, align: 'auto' })"> Scroll To 40(auto) </ix-button>
-      <ix-button @click="scrollTo({ index: 40, align: 'top', offset: 15 })"> Scroll To 40(top) + 15 offset </ix-button>
-    </ix-space>
+    <IxSpace>
+      <IxButton @click="scrollTo(100)"> Scroll To 100px </IxButton>
+      <IxButton @click="scrollTo({ key: 'id-50', align: 'top' })"> Scroll To id-50(top) </IxButton>
+      <IxButton @click="scrollTo({ index: 40, align: 'top' })"> Scroll To 40(top) </IxButton>
+      <IxButton @click="scrollTo({ index: 40, align: 'bottom' })"> Scroll To 40(bottom) </IxButton>
+      <IxButton @click="scrollTo({ index: 40, align: 'auto' })"> Scroll To 40(auto) </IxButton>
+      <IxButton @click="scrollTo({ index: 40, align: 'top', offset: 15 })"> Scroll To 40(top) + 15 offset </IxButton>
+    </IxSpace>
   </div>
 </template>
 
