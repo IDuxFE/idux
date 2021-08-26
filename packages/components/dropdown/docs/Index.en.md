@@ -10,21 +10,15 @@ order: 0
 
 ## API
 
-### ix-dropdown
+### IxDropdown
 
-#### Props
+#### DropdownProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### DropdownSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

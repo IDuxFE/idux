@@ -5,7 +5,7 @@ import { textSync } from 'figlet'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import ora from 'ora'
-import { camelCase, kebabCase, upperFirst } from 'lodash-es'
+import { camelCase, kebabCase, upperFirst } from 'lodash'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 
 import {
@@ -87,7 +87,6 @@ const questions: QuestionCollection<AnswerOptions>[] = [
 
 class Generate {
   private packageRoot!: string
-  private siteRoot = resolve(__dirname, '../../packages/site')
   private dirPath!: string
   private useTsx = false
   private isPrivate = false
@@ -153,10 +152,11 @@ class Generate {
       return Promise.resolve()
     }
 
-    const docsZhTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type)
-    const docsEnTemplate = getDocsTemplate(name, category, upperFirst(camelCase(name)), type, true)
+    const compName = upperFirst(camelCase(name))
+    const docsZhTemplate = getDocsTemplate(category, compName, type)
+    const docsEnTemplate = getDocsTemplate(category, compName, type, true)
     const demoTemplate = getDemoTemplate()
-    const demoVueTemplate = getDemoVueTemplate(kebabCase(name))
+    const demoVueTemplate = getDemoVueTemplate(compName)
 
     return Promise.all([
       writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), docsZhTemplate),
@@ -206,13 +206,6 @@ class Generate {
       .replace(componentsRegx, `${componentsRegx}\n  Ix${upperFirstName},`)
       .replace(exportRegx, `${exportRegx}\n  Ix${upperFirstName},`)
     writeFile(currIndexPath, currIndexContent)
-
-    const currSiteComponentsPath = resolve(this.siteRoot, 'src/iduxComponents.ts')
-    let currSiteComponentsContent = await readFile(currSiteComponentsPath, 'utf-8')
-    currSiteComponentsContent = currSiteComponentsContent
-      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`)
-      .replace(componentsRegx, `${componentsRegx}\n  Ix${upperFirstName},`)
-    writeFile(currSiteComponentsPath, currSiteComponentsContent)
 
     const currLessPath = resolve(this.packageRoot, 'components.less')
     let curLessContent = await readFile(currLessPath, 'utf-8')

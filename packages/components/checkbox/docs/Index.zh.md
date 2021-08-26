@@ -13,9 +13,9 @@ cover:
 
 ## API
 
-### `ix-checkbox`
+### IxCheckbox
 
-#### Props
+#### CheckboxProps
 
 除以下表格之外还支持原生 `<input type="checkbox" />` 元素的所有属性。
 
@@ -28,41 +28,41 @@ cover:
 | `indeterminate` | 是否处于不确定状态 | `boolean` | `false`| - | 当值为true时，按钮样式处于半选状态，且不受checked影响 |
 | `trueValue` | 勾选框选中时返回的值 |  `boolean \| string \| number`  | `true`| - | - |
 | `falseValue` | 勾选框不选中时返回的值 | `boolean \| string \| number` | `false`| - | - |
-| `value` | 设置勾选框的值，与 `ix-checkbox-group` 配合使用 | `any`| - | - | - |
+| `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | - |
 | `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onChange` | 选中状态发生变化后的回调 | `(checked: boolean \| string \| number) => void`| - | - | - |
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 
-#### Slots
+#### CheckboxSlots
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 |`default` | 文本区域 | - | - |
 
-#### Methods
+#### CheckboxMethods
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `focus` | 获取焦点 | - | - |
 | `blur` | 移除焦点 | - | - |
 
-### `ix-checkbox-group`
+### IxCheckboxGroup
 
-#### Group Props
+#### GroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 指定当前勾选框是否选中 |  `Array<string \| number>`  | `[]` | - | - |
-| `disabled` | 子`ix-checkbox`禁用状态 | `boolean` | `false` | - |- |
-| `name` | 子`ix-checkbox` 的 name 属性 | `string` | - | - |- |
+| `disabled` | 子`IxCheckbox`禁用状态 | `boolean` | `false` | - |- |
+| `name` | 子`IxCheckbox` 的 name 属性 | `string` | - | - |- |
 | `options` | 以配置形式设置子元素 | `CheckboxOptions[]`| - | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: Array<string \| number>) => void`| - | - | - |
 
-#### Group Slots
+#### GroupSlots
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-|`default` | `ix-checkbox`区域 | - | - |
+|`default` | `IxCheckbox`区域 | - | - |
 
 ### 主题变量
 

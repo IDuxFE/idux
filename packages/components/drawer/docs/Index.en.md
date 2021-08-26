@@ -10,7 +10,7 @@ order: 0
 
 ## API
 
-### ix-drawer
+### IxDrawer
 
 #### DrawerProps
 
@@ -18,7 +18,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
+#### DrawerSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

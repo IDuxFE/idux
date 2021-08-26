@@ -12,21 +12,21 @@ order: 0
 
 ## API
 
-### ix-virtual-list
+### IxVirtualList
 
-#### Props
+#### VirtualListProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
+#### VirtualListSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |
 | - | - | - | - |
 
-#### Emits
+#### VirtualListEmits
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

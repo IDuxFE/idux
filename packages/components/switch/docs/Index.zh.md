@@ -14,7 +14,7 @@ order: 0
 
 ## API
 
-### ix-switch
+### IxSwitch
 
 #### Props
 

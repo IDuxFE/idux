@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-用来控制`ix-checkbox`是否聚焦
+用来控制`IxCheckbox`是否聚焦
 
 ## en
 
-It is used to control whether the `ix-checkbox` is focused
+It is used to control whether the `IxCheckbox` is focused

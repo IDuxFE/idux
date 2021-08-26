@@ -13,7 +13,7 @@ order: 0
 
 ## API
 
-### ix-tooltip
+### IxTooltip
 
 #### TooltipProps
 

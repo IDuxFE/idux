@@ -16,9 +16,9 @@ order: 0
 
 ## API
 
-### ix-timeline
+### IxTimeline
 
-#### Props
+#### TimelineProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -27,9 +27,9 @@ order: 0
 | `reverse` | 时间节点是否倒叙 | `boolean` | `false` | - |- |
 | `position` | 时间轴和内容的相对位置 | `left\|alternate\|right` | `right` | - |- |
 
-### ix-timeline-item
+### IxTimelineItem
 
-#### item Props
+#### TimelineItemProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

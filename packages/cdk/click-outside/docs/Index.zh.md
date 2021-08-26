@@ -14,9 +14,9 @@ cover:
 
 ## API
 
-### `v-click-outside`
+### ClickOutside
 
-#### Props
+#### ClickOutsideOptions
 
 ```typescript
 interface ClickOutsideOptions {

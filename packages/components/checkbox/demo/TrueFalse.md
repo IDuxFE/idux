@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-控制`ix-checkbox`是否选中的返回值。
+控制`IxCheckbox`是否选中的返回值。
 
 ## en
 
-The return value that controls whether the `ix-checkbox` is selected.
+The return value that controls whether the `IxCheckbox` is selected.

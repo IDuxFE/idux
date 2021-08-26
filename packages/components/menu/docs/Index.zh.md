@@ -18,14 +18,14 @@ single: true
 
 ## API
 
-### ix-menu
+### IxMenu
 
 #### MenuProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:openedIds` | 当前展开的 `ix-menu-sub` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
-| `v-model:selectedIds` | 当前选中的 `ix-menu-item` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
+| `v-model:openedIds` | 当前展开的 `IxMenuSub` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
+| `v-model:selectedIds` | 当前选中的 `IxMenuItem` 的 `cid` 数组 | `Array<string \| number>` | `[]` | - | - |
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24px` | ✅ | 仅支持 `inline` 模式 |
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `vertical \| horizontal \| inline` | `vertical` | - | - |
@@ -37,9 +37,9 @@ single: true
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `click` | 点击 `ix-menu-item` 后的回调 | `{ evt: Event, cid: string \| number, item: MenuItemProps }` | - |
+| `click` | 点击 `IxMenuItem` 后的回调 | `{ evt: Event, cid: string \| number, item: MenuItemProps }` | - |
 
-### ix-menu-item
+### IxMenuItem
 
 #### MenuItemProps
 
@@ -50,7 +50,7 @@ single: true
 | `icon` | 菜单图标| `string \| #icon` | - | - |
 | `title` | 菜单标题 | `string \| #default`  | - | - |
 
-### ix-menu-sub
+### IxMenuSub
 
 #### MenuSubProps
 
@@ -70,7 +70,7 @@ single: true
 | --- | --- | --- | --- |
 | `click` | 点击子菜单标题后的回调 | `{ evt: Event, cid: string \| number }` | - |
 
-### ix-menu-group
+### IxMenuGroup
 
 #### MenuGroupProps
 
@@ -79,6 +79,6 @@ single: true
 | `icon` | 菜单图标| `string \| #icon` | - | - |
 | `title` | 菜单标题 | `string \| #title`  | - | - |
 
-### ix-menu-divider
+### IxMenuDivider
 
 菜单分割线。

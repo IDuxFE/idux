@@ -15,7 +15,7 @@ cover:
 
 ## API
 
-### `ix-divider`
+### IxDivider
 
 #### Props
 

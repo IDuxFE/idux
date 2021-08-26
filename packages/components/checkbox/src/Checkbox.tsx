@@ -5,7 +5,7 @@ import type { CheckboxGroupContext } from './token'
 import { defineComponent, ref, computed, inject } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
-import { useAttrs } from '@idux/components/utils/'
+import { useAttrs } from '@idux/components/utils'
 import { checkboxGroupToken } from './token'
 import { checkboxProps } from './types'
 

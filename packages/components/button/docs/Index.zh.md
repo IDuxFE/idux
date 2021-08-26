@@ -25,7 +25,7 @@ cover:
 
 ## API
 
-### `ix-button`
+### IxButton
 
 #### Props
 
@@ -45,7 +45,7 @@ cover:
 | `icon` | 设置图标类型 | `string \| #icon` | - | - | `loading` 为 `true` 时无效 |
 | `type` | 原生 `button` 的 `type` 属性 | `button \| submit \| reset` | `button` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
 
-### `ix-button-group`
+### IxButtonGroup
 
 #### GroupProps
 

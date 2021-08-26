@@ -12,9 +12,9 @@ order: 0
 
 ## API
 
-### ix-List
+### IxList
 
-#### Props
+#### ListProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ order: 0
 | `grid.ld` | gird 布局在 ld分辨率下的所占格数 | `number` | - | - | 同IxCol的ld |
 | `grid.xl` | gird 布局在 xl分辨率下的所占格数 | `number` | - | - | 同IxCol的xl |
 
-#### Slots
+#### ListSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
@@ -44,9 +44,9 @@ order: 0
 | loadMore | 加载更多 | - | - |
 | empty | 空状态 | - | - |
 
-### ix-List-Item
+### IxListItem
 
-#### ix-List-Item Props
+#### ListItemProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ order: 0
 | `content` | 列表项内容 | `string \| slot` | - | - | - |
 | `extra` | 列表项额外项 | `string \| slot` | - | - | - |
 
-#### ix-List-Item Slots
+#### ListItemSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

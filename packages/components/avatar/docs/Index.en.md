@@ -10,7 +10,7 @@ order: 0
 
 ## API
 
-### ix-avatar
+### IxAvatar
 
 #### AvatarProps
 
@@ -18,7 +18,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
+#### AvatarSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

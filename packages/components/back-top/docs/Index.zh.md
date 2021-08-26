@@ -15,7 +15,7 @@ cover:
 
 ## API
 
-### `ix-back-top`
+### IxBackTop
 
 #### Props
 

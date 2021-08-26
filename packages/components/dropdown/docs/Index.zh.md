@@ -15,23 +15,23 @@ order: 0
 
 ## API
 
-### ix-dropdown ix-dropdown-button
+### IxDropdown IxDropdownButton
 
-#### Props
+#### DropdownProps
 
-> `ix-dropdown-button`，除以下表格之外还支持 `ix-button-group` 的[所有属性](/components/button/zh#groupprops)。
+> `IxDropdownButton`，除以下表格之外还支持 `IxButtonGroup` 的[所有属性](/components/button/zh#groupprops)。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:visible` | 菜单是否显示 | `boolean` | `false` | - | - |
 | `disabled` | 菜单是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 右侧的 icon | `string \| #icon` | - | - | `ix-dropdown-button` 的默认值为 `ellipsis` |
+| `icon` | 右侧的 icon | `string \| #icon` | - | - | `IxDropdownButton` 的默认值为 `ellipsis` |
 | `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
 | `placement` | 悬浮层的对齐方式 | `OverlayPlacement` | `bottom-start` | ✅ | - |
 | `trigger` | 悬浮层触发方式 | `OverlayTrigger` | `hover` | ✅ | - |
 
-#### Slots
+#### DropdownSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `overlay` | 悬浮菜单, 传入一个 `ix-menu` 组件 | - | - |
+| `overlay` | 悬浮菜单, 传入一个 `IxMenu` 组件 | - | - |

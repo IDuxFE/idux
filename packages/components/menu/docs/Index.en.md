@@ -13,21 +13,15 @@ single: true
 
 ## API
 
-### ix-menu
+### IxMenu
 
-#### Props
+#### MenuProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### MenuSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

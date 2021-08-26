@@ -14,9 +14,9 @@ cover:
 
 ## API
 
-### `ix-result`
+### IxResult
 
-#### Props
+#### ResultProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -29,7 +29,7 @@ cover:
 type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 ```
 
-#### Slots
+#### ResultSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

@@ -1,5 +1,5 @@
 export function getLessTemplate(compName: string): string {
-  return `@import '../../style/default.less';
+  return `@import '../../style/themes/default.less';
 
 @${compName}-prefix: ~'@{idux-prefix}-${compName}';
 
@@ -109,18 +109,12 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsTemplate(
-  compName: string,
-  moduleName: string,
-  upperFirstName: string,
-  type = '',
-  isEn = false,
-): string {
+export function getDocsTemplate(moduleName: string, compName: string, type = '', isEn = false): string {
   const [enType, zhType] = type.split('_')
   return `---
 category: ${moduleName}
 type: ${isEn ? enType ?? '' : zhType}
-title: ${upperFirstName}
+title: ${compName}
 subtitle:
 order: 0
 ---
@@ -129,9 +123,9 @@ order: 0
 
 ## API
 
-### ix-${compName}
+### Ix${compName}
 
-#### ${upperFirstName}Props
+#### ${compName}Props
 
 ${
   isEn
@@ -141,13 +135,13 @@ ${
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### ${upperFirstName}Slots
+#### ${compName}Slots
 
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
 | - | - | - | - |
 
-#### ${upperFirstName}Methods
+#### ${compName}Methods
 
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
@@ -177,7 +171,7 @@ The simplest usage.
 
 export function getDemoVueTemplate(compName: string): string {
   return `<template>
-  <ix-${compName} />
+  <Ix${compName}></Ix${compName}>
 </template>
 
 <script lang="ts">

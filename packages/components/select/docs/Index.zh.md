@@ -14,7 +14,9 @@ order: 0
 
 ## API
 
-### ix-select
+### IxSelect
+
+#### SelectProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -34,7 +36,7 @@ order: 0
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
 | `overlayClassName` | 下拉菜单的 className 属性 | `string` | - | - | - |
-| `options` | 选项列表，可以取代 `ix-option` | `SelectOption[]` | - | - | - |
+| `options` | 选项列表，可以取代 `IxSelectOption` | `SelectOption[]` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean` | `false` | ✅ | - |
 | `size` | 设置选择器大小 | `large \| medium \| small` | `medium` | ✅ | - |
@@ -74,7 +76,7 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: SelectOptionProp
 | `scrollToBottom` | 下拉列表滚动到底部的回调 | `() => void` | `Todo` |
 | `inputChange` | 输入框文本发生改变 | `(inputValue: string) => void` | - |
 
-### ix-option
+### IxSelectOption
 
 #### SelectOptionProps
 
@@ -84,13 +86,13 @@ const defaultFilterFn: SelectFilterFn = (value: string, option: SelectOptionProp
 | `label` | 显示的文本 | `string` | - | - | 必填项，同时也是被选中后文本框显示的内容 |
 | `value` | option 的值 | `any` | - | - | - |
 
-#### OptionSlots
+#### SelectOptionSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 显示的文本 | - | - |
 
-### ix-option-group
+### IxSelectOptionGroup
 
 #### SelectOptionGroupProps
 

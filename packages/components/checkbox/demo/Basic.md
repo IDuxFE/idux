@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-`ix-checkbox` 的基础用法。
+`IxCheckbox` 的基础用法。
 
 ## en
 
-The basic usage of `ix-checkbox`.
+The basic usage of `IxCheckbox`.

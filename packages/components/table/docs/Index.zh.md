@@ -9,7 +9,7 @@ single: true
 
 ## API
 
-### ix-table
+### IxTable
 
 #### TableProps
 

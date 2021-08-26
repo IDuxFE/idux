@@ -15,7 +15,7 @@ order: 0
 
 ## API
 
-### ix-drawer
+### IxDrawer
 
 #### DrawerProps
 
@@ -38,7 +38,7 @@ order: 0
 | `onAfterOpen`  | Drawer 打开抽屉后的回调 | `() => void`
 | `onAfterClose` | Drawer 关闭抽屉后的回调 | `() => void`
 
-#### Slots
+#### DrawerSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ order: 0
 | `title`   | Drawer 标题区的内容 | - | `slot`形式优先级高于`prop`
 | `footer`  | Drawer 底部区的内容 | - | `slot`形式优先级高于`prop`
 
-#### Methods
+#### DrawerMethods
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

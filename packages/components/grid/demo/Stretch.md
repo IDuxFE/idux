@@ -7,8 +7,8 @@ order: 4
 
 ## zh
 
-`ix-col` 提供 `flex` 属性以支持填充。
+`IxCol` 提供 `flex` 属性以支持填充。
 
 ## en
 
-`ix-col` provides `flex` prop to support fill rest.
+`IxCol` provides `flex` prop to support fill rest.

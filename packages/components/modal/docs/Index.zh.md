@@ -6,17 +6,17 @@ subtitle: 对话框
 order: 0
 ---
 
-需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 `ix-modal` 在当前页面正中打开一个浮层，承载相应的操作。
+需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 `IxModal` 在当前页面正中打开一个浮层，承载相应的操作。
 
 另外当需要一个简洁的确认框询问用户时，可以使用精心封装好的 `useModal` 等方法。
 
-推荐使用封装好的组件 (`Component`) 作为 `ix-modal` 的默认插槽，或 `useModal` 的 `content` 参数，这样 `Component` 内的逻辑可以完全隔离、并且可以做到随时复用。
+推荐使用封装好的组件 (`Component`) 作为 `IxModal` 的默认插槽，或 `useModal` 的 `content` 参数，这样 `Component` 内的逻辑可以完全隔离、并且可以做到随时复用。
 
-在 `Component` 中可以注入 `modalToken`, 以获取对话框组件的属性和方法，用于控制对话框的行为。
+在 `Component` 中可以注入 `MODAL_TOKEN`, 以获取对话框组件的属性和方法，用于控制对话框的行为。
 
 ## API
 
-### ix-modal
+### IxModal
 
 #### ModalProps
 
@@ -68,15 +68,15 @@ export interface ModalButtonProps extends ButtonProps {
 | `cancel` | 手动触发当前取消按钮 | `(evt?: Event \| unknown) => Promise<void>` | - | - | `evt` 参数将传给 `onCancel` 回调 |
 | `ok` | 手动触发当前确定按钮 | `(evt?: Event \| unknown) => Promise<void>` | - | - | `evt` 参数将传给 `onOk` 回调 |
 
-### ix-modal-provider
+### IxModalProvider
 
-如果你想通过 `useModal` 来创建对话框，则你需要把组件包裹在 `ix-modal-provider` 内部，因为这样才不会丢失应用的上下文信息。
+如果你想通过 `useModal` 来创建对话框，则你需要把组件包裹在 `IxModalProvider` 内部，因为这样才不会丢失应用的上下文信息。
 
 ```html
 <!-- App.vue -->
-<ix-dialog-provider>
+<IxModalProvider>
   <MyComponent />
-</ix-dialog-provider>
+</IxModalProvider>
 
 <!-- MyComponent.vue -->
 <template>

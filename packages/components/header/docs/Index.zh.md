@@ -12,7 +12,7 @@ order: 0
 
 ## API
 
-### ix-header
+### IxHeader
 
 #### HeaderProps
 

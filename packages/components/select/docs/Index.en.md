@@ -14,21 +14,15 @@ A dropdown menu for the user to select, which replaces the native `<select>` ele
 
 ## API
 
-### ix-select
+### IxSelect
 
-#### Props
+#### SelectProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### SelectSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

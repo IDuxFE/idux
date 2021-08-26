@@ -15,7 +15,7 @@ cover:
 
 ## API
 
-### `ix-typography`
+### IxTypography
 
 ```typescript
 type TypographyType = 'success' | 'warning' | 'error' | 'secondary'

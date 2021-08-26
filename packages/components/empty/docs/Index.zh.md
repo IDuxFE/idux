@@ -15,7 +15,7 @@ cols: 1
 
 ## API
 
-### `ix-empty`
+### IxEmpty
 
 #### Props
 

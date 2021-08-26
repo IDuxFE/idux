@@ -15,9 +15,9 @@ single: true
 
 ## API
 
-### ix-virtual-list
+### IxVirtualList
 
-#### Props
+#### VirtualListProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -30,13 +30,13 @@ single: true
 | `itemRender` | 列表项的渲染函数 | `(option: { item: T; index: number }) => VNodeTypes \| #item={item, index}` | - | - | 必须设置或者提供 `item` 插槽 |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `true` | - | - |
 
-#### Emits
+#### VirtualListEmits
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `scroll` | 滚动事件 | `(evt: Event) => void` | - |
 
-#### Method
+#### VirtualListMethods
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

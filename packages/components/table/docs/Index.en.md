@@ -10,7 +10,7 @@ order: 0
 
 ## API
 
-### ix-table
+### IxTable
 
 #### TableProps
 

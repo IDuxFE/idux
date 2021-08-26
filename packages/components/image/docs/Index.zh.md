@@ -15,7 +15,9 @@ cover: 可预览的图片
 
 ## API
 
-### `ix-image`
+### IxImage
+
+#### ImageProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -27,7 +29,7 @@ cover: 可预览的图片
 | `alt` | 图像描述 | `string` | - | - | - |
 | `objectFit` | 确定图片如何适应容器框 | `string` | - | - | 同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)  |
 
-### Emits
+#### ImageEmits
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
