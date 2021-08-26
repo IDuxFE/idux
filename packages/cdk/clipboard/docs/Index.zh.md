@@ -16,7 +16,7 @@ cover:
 
 ## API
 
-### `useClipboard`
+### useClipboard
 
 ```ts
 export const useClipboard: () => { copy: (text: string, attempts?: number) => Promise<boolean> }

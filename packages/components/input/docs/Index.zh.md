@@ -14,7 +14,7 @@ subtitle: 输入框
 
 ## API
 
-### ix-input
+### IxInput
 
 #### InputProps
 

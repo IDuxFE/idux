@@ -10,7 +10,7 @@ order: 0
 
 ## API
 
-### ix-popper
+### IxPopper
 
 #### PopperProps
 
@@ -18,7 +18,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
+#### PopperSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

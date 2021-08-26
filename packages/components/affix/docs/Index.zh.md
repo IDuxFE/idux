@@ -14,22 +14,22 @@ cover:
 
 ## API
 
-### ix-affix
+### IxAffix
 
-#### Props
+#### AffixProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | ---  | --- | --- |
 | `offset` | 距离容器顶部的偏移量，到达时会触发affix | `number \| { top:number. bottom:number, left:number, right:number}` | `0` | - | - |
 | `target` | 用于定位的容器，会监听容器的滚动事件，用函数返回 | `string \| HTMLElement \| window` | `window` | - | - |
 
-#### Slots
+#### AffixSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  --- | --- | --- | --- |
 | `default` | 自定义显示内容 | - | - |
 
-#### Emits
+#### AffixEmits
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

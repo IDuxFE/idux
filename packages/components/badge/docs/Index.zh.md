@@ -18,7 +18,7 @@ cover:
 
 ## API
 
-### `ix-badge`
+### IxBadge
 
 #### Props
 

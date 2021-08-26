@@ -15,9 +15,9 @@ order: 0
 
 ## API
 
-### `ix-statistic`
+### IxStatistic
 
-#### Props
+#### StatisticProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ order: 0
 | `title`            | 数值的标题       | string \| v-slot                | -      |||
 | `value`            | 数值内容         | string \| number                | -      |||
 
-### Slots
+### StatisticSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

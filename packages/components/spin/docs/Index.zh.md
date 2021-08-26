@@ -13,9 +13,9 @@ cover:
 
 ## API
 
-### `ix-spin`
+### IxSpin
 
-#### props
+#### SpinProps
 
 | 参数 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ cover:
 | `tip`| 加载提示文字描述 |  `string`  | `''`| ✅ | - |
 | `tipAlign`| 文字描述与加载图标的排列方式 | `vertical \| horizontal` | `vertical`| ✅ | vertical：文字排列在图标下方；horizontal： 文字排列在图标同水平方向的后方 |
 
-#### slots
+#### SpinSlots
 
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

@@ -7,8 +7,8 @@ order: 8
 
 ## zh
 
-设置 `ix-stepper` 的 `clickable`，步骤条变为可点击状态。
+设置 `IxStepper` 的 `clickable`，步骤条变为可点击状态。
 
 ## en
 
-Via setting `clickable` of `ix-stepper`, the steps becomes clickable.
+Via setting `clickable` of `IxStepper`, the steps becomes clickable.

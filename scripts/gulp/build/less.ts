@@ -1,4 +1,4 @@
-import { copy, copyFile, pathExists, readdirSync, readFile, writeFile } from 'fs-extra'
+import { copy, copyFile, pathExists, readdirSync, readFile, remove, writeFile } from 'fs-extra'
 import less from 'less'
 import path from 'path'
 
@@ -29,6 +29,14 @@ async function compile(content: string, savePath: string, min: boolean, rootPath
     .catch(err => Promise.reject(err))
 }
 
+function compileIndex(content: string, saveDirname: string) {
+  return [
+    writeFile(`${saveDirname}/index.js`, content),
+    writeFile(`${saveDirname}/css.js`, content.replace(/\.less/g, '.css')),
+    remove(`${saveDirname}/index.ts`),
+  ]
+}
+
 export async function compileLess(targetDirname: string, distDirname: string, isCdk: boolean): Promise<void | void[]> {
   const promiseList = []
 
@@ -49,35 +57,40 @@ export async function compileLess(targetDirname: string, distDirname: string, is
     const styleDirname = `${targetDirname}/${componentDirname}/style`
     const outputDirname = `${distDirname}/${componentDirname}/style`
 
-    // Compile less files to CSS and delete the indexPath.
-    const indexPath = `${styleDirname}/index.less`
-    if (await pathExists(indexPath)) {
+    // Compile less files to CSS
+    const lessPath = `${styleDirname}/index.less`
+    if (await pathExists(lessPath)) {
       // Copy style files for each component.
       await copy(styleDirname, outputDirname)
+      const lessContent = await readFile(lessPath, { encoding: 'utf8' })
 
-      const componentLess = await readFile(indexPath, { encoding: 'utf8' })
+      promiseList.push(compile(lessContent, path.join(outputDirname, `index.css`), false, lessPath))
+      promiseList.push(compile(lessContent, path.join(outputDirname, `index.min.css`), true, lessPath))
 
-      promiseList.push(compile(componentLess, path.join(outputDirname, `index.css`), false, indexPath))
-      promiseList.push(compile(componentLess, path.join(outputDirname, `index.min.css`), true, indexPath))
+      const indexPath = `${styleDirname}/index.ts`
+      const indexContent = await readFile(indexPath, { encoding: 'utf8' })
+      promiseList.push(...compileIndex(indexContent, outputDirname))
     }
   }
 
   if (!isCdk) {
-    // Copy concentrated less files.
+    // Compile concentrated less file to CSS file.
     await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
     await copyFile(`${targetDirname}/components.less`, `${distDirname}/components.less`)
     await copyFile(`${targetDirname}/index.less`, `${distDirname}/index.less`)
-
-    // Compile concentrated less file to CSS file.
-    const lessContent = `@import "${path.posix.join(distDirname, 'index.less')}";`
-    promiseList.push(compile(lessContent, path.join(distDirname, 'index.css'), false))
-    promiseList.push(compile(lessContent, path.join(distDirname, 'index.min.css'), true))
+    const entryContent = `@import "${path.posix.join(distDirname, 'index.less')}";`
+    promiseList.push(compile(entryContent, path.join(distDirname, 'index.css'), false))
+    promiseList.push(compile(entryContent, path.join(distDirname, 'index.min.css'), true))
 
     // Compile css file that doesn't have component-specific styles.
-    const baseLessPath = path.join(targetDirname, 'style', 'base.less')
-    const baseLess = await readFile(baseLessPath, { encoding: 'utf8' })
-    promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.css'), false, baseLessPath))
-    promiseList.push(compile(baseLess, path.join(distDirname, 'style', 'base.min.css'), true, baseLessPath))
+    const lessPath = path.join(targetDirname, 'style', 'index.less')
+    const lessContent = await readFile(lessPath, { encoding: 'utf8' })
+    promiseList.push(compile(lessContent, path.join(distDirname, 'style', 'index.css'), false, lessPath))
+    promiseList.push(compile(lessContent, path.join(distDirname, 'style', 'index.min.css'), true, lessPath))
+
+    const indexPath = path.join(targetDirname, 'style', 'index.ts')
+    const indexContent = await readFile(indexPath, { encoding: 'utf8' })
+    promiseList.push(...compileIndex(indexContent, path.join(distDirname, 'style')))
   }
 
   return Promise.all(promiseList).catch(e => console.log(e))

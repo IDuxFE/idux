@@ -23,7 +23,7 @@ export function IduxResolver(options: IduxResolverOptions = {}): ComponentResolv
       const packageName = isCdk ? 'cdk' : 'components'
       const dirname = getDirname(kebabCaseName)
       const path = `@idux/${packageName}/${dirname}`
-      const sideEffects = isCdk || !importStyle ? undefined : `${path}/style/index.${importStyle}`
+      const sideEffects = isCdk || !importStyle ? undefined : `${path}/style/${importStyle === 'css' ? 'css' : 'index'}`
 
       return { importName: name, path, sideEffects }
     }

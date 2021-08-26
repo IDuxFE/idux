@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-通过 `customLabel` 插槽自定义 `ix-select` 回填的标签。
+通过 `customLabel` 插槽自定义 `IxSelect` 回填的标签。
 
 ## en
 
-Custom the label of `ix-select` via the  `customLabel` slot.
+Custom the label of `IxSelect` via the  `customLabel` slot.

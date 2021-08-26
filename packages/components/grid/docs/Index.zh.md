@@ -13,7 +13,7 @@ single: true
 
 ## API
 
-### ix-row
+### IxRow
 
 #### RowProps
 
@@ -24,7 +24,7 @@ single: true
 | `gutter` | 栅格间隔, 支持配置数字, 对象和数组 | `number \| object \| array` | `0` | - | 对象结构形如 `{ xs: 8, sm: 16 }`, 数组结构同时设置 `[水平间距, 垂直间距]` 形如 `[8, 8]` 或 `[{ xs: 8 }, { xs: 8}]` |
 | `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | - |
 
-### ix-col
+### IxCol
 
 #### ColProps
 

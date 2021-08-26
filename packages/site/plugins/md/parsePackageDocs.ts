@@ -127,7 +127,7 @@ function generateToc(demoMetas: any[], language: string, module: string, compone
       `<IxAnchorLink href="#${module}-${component}-demo-${meta.componentName}" title="${meta.title[language]}"></IxAnchorLink>`,
   )
 
-  links.push(`<IxAnchorLink href="#api" title="API"></IxAnchorLink>`)
+  links.push(`<IxAnchorLink href="#API" title="API"></IxAnchorLink>`)
 
   return `<IxAnchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
   ${links.join('  ')}

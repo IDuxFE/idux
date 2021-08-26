@@ -11,7 +11,7 @@ single: true
 
 ## API
 
-### ix-card
+### IxCard
 
 #### CardProps
 
@@ -45,7 +45,7 @@ export interface CardButtonProps extends ButtonProps {
 }
 ```
 
-### ix-card-grid
+### IxCardGrid
 
 #### CardGridProps
 

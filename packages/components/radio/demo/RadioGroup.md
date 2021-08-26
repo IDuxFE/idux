@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-一组互斥的 `ix-radio` 配合使用。
+一组互斥的 `IxRadio` 配合使用。
 
 ## en
 
-A group of `nz-radio` components.
+A group of `IxRadio` components.

@@ -15,9 +15,9 @@ order: 0
 
 ## API
 
-### `ix-collapse`
+### IxCollapse
 
-#### Props
+#### CollapseProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -25,13 +25,13 @@ order: 0
 | `active(v-model)` | 当前激活面板对应的 name | `string[] \| string` | - | - |- |
 | `borderless` | 是否显示边框 | `boolean` | `true` | - |- |
 
-#### Slots
+#### CollapseSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `default` | 面板内容 | - | - | - |
 
-### `ix-collapse-panel`
+### IxCollapsePanel
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

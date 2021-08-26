@@ -16,9 +16,9 @@ single: true
 
 ## API
 
-### ix-stepper
+### IxStepper
 
-#### StepsProps
+#### StepperProps
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | ---| --- | --- | --- | --- | --- |
@@ -31,9 +31,9 @@ single: true
 `size` | 指定步骤条节点的大小 | `medium\| small` | `medium` | ✅ | - |
 `status` | 指定步骤条节点的状态 | `wait \| process \| finish \| error` | `process` | - | - |
 
-### ix-stepper-item
+### IxStepperItem
 
-#### StepProps
+#### StepperItemProps
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | ---| --- | --- | --- | --- | --- |

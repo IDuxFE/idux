@@ -12,21 +12,15 @@ order: 0
 
 ## API
 
-### ix-List
+### IxList
 
-#### Props
+#### ListProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### ListSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

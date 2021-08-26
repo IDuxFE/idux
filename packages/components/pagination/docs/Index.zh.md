@@ -14,9 +14,9 @@ single: true
 
 ## API
 
-### ix-pagination
+### IxPagination
 
-#### Props
+#### PaginationProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

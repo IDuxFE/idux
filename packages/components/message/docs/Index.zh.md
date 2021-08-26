@@ -13,7 +13,7 @@ order: 0
 
 ## API
 
-### ix-message
+### IxMessage
 
 #### MessageProps
 
@@ -25,9 +25,9 @@ order: 0
 | `icon` | 自定义图标 | `string \| VNode` | - | ✅ | - |
 | `type` | 提示类型 | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`  | `info` | - | - |
 
-### ix-message-provider
+### IxMessageProvider
 
-如果你想通过 `useMessage` 来创建对话框，则你需要把组件包裹在 `ix-message-provider` 内部，因为这样才不会丢失应用的上下文信息。
+如果你想通过 `useMessage` 来创建对话框，则你需要把组件包裹在 `IxMessageProvider` 内部，因为这样才不会丢失应用的上下文信息。
 
 #### MessageProviderProps
 
@@ -38,9 +38,9 @@ order: 0
 
 ```html
 <!-- App.vue -->
-<ix-dialog-provider>
+<IxMessageProvider>
   <MyComponent />
-</ix-dialog-provider>
+</IxMessageProvider>
 
 <!-- MyComponent.vue -->
 <template>

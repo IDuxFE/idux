@@ -12,21 +12,15 @@ order: 0
 
 ## API
 
-### ix-form
+### IxForm
 
-#### Props
+#### FormProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### FormSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

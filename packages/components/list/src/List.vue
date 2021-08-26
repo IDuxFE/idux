@@ -27,10 +27,11 @@
 import type { ListProps } from './types'
 
 import { computed, defineComponent, ref, provide } from 'vue'
-import { IxSpin } from '@idux/components/spin'
+
 import { IxButton } from '@idux/components/button'
-import { IxEmpty } from '@idux/components/empty'
 import { ListConfig, useGlobalConfig } from '@idux/components/config'
+import { IxEmpty } from '@idux/components/empty'
+import { IxSpin } from '@idux/components/spin'
 import ListWrap from './ListWrap.vue'
 import { listProps } from './types'
 import { listToken } from './token'

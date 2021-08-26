@@ -17,9 +17,9 @@ cover:
 
 ## API
 
-### ix-progress
+### IxProgress
 
-#### Props
+#### ProgressProps
 
 各类型通用的属性
 

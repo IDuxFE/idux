@@ -12,21 +12,15 @@ order: 0
 
 ## API
 
-### ix-collapse
+### IxCollapse
 
-#### Props
+#### CollapseProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### Slots
-
-| Name | Description | Parameter Type | Remark |
-| --- | --- | --- | --- |
-| - | - | - | - |
-
-#### Emits
+#### CollapseSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |
