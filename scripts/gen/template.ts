@@ -9,6 +9,12 @@ export function getLessTemplate(compName: string): string {
 `
 }
 
+export function getStyleIndexTemplate(): string {
+  return `import '../../style/index.less'
+import './index.less'
+`
+}
+
 export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
   return `import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'

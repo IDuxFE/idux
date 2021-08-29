@@ -11,6 +11,7 @@ import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 import {
   getIndexTemplate,
   getLessTemplate,
+  getStyleIndexTemplate,
   getTestTemplate,
   getTypesTemplate,
   getDocsTemplate,
@@ -171,6 +172,7 @@ class Generate {
     const camelCaseName = camelCase(name)
     const upperFirstName = upperFirst(camelCaseName)
     const lessTemplate = getLessTemplate(kebabCase(name))
+    const styleIndexTemplate = getStyleIndexTemplate()
     const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
     const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
     const vueTemplate = getVueTemplate(upperFirstName, camelCaseName)
@@ -179,6 +181,7 @@ class Generate {
 
     await Promise.all([
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
+      writeFile(`${this.dirPath}/style/index.ts`, styleIndexTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       this.useTsx
         ? writeFile(`${this.dirPath}/src/${upperFirstName}.tsx`, tsxTemplate)
