@@ -31,6 +31,7 @@ import {
   User,
   Minus,
   Plus,
+  Menu,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [
@@ -64,4 +65,5 @@ export const staticIcons: IconDefinition[] = [
   User, // Avatar
   Plus, // Table
   Minus, // Table
+  Menu, // layout
 ]
