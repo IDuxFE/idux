@@ -22,7 +22,6 @@ export default defineComponent({
     const {
       props: tableProps,
       slots,
-      flattedColumns,
       expandable,
       handleExpandChange,
       selectable,
@@ -34,7 +33,6 @@ export default defineComponent({
     const classes = useClasses(props, tableProps)
     const { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
       props,
-      tableProps,
       expandable,
       handleExpandChange,
       selectable,
@@ -43,14 +41,7 @@ export default defineComponent({
     )
 
     return () => {
-      const children = renderChildren(
-        props,
-        flattedColumns.value,
-        expendDisabled,
-        handleExpend,
-        selectDisabled,
-        handleSelect,
-      )
+      const children = renderChildren(props, expendDisabled, handleExpend, selectDisabled, handleSelect)
 
       const BodyRowTag = bodyRowTag.value as any
       const nodes = [
@@ -85,14 +76,13 @@ function useClasses(props: TableBodyRowProps, tableProps: TableProps) {
 
 function useEvents(
   props: TableBodyRowProps,
-  tableProps: TableProps,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   handleExpandChange: (key: Key, record: unknown) => void,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   handleSelectChange: (key: Key, record: unknown) => void,
   currentPageRowKeys: ComputedRef<{ enabledRowKeys: Key[]; disabledRowKeys: Key[] }>,
 ) {
-  const expendDisabled = useExpandDisabled(props, tableProps, expandable)
+  const expendDisabled = useExpandDisabled(props, expandable)
   const expendTrigger = computed(() => expandable.value?.trigger)
   const handleExpend = () => {
     const { rowKey, record } = props
@@ -134,11 +124,7 @@ function useEvents(
   return { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents }
 }
 
-function useExpandDisabled(
-  props: TableBodyRowProps,
-  tableProps: TableProps,
-  expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
-) {
+function useExpandDisabled(props: TableBodyRowProps, expandable: ComputedRef<TableColumnMergedExpandable | undefined>) {
   return computed(() => {
     const column = expandable.value
     if (!column) {
@@ -155,28 +141,25 @@ function useExpandDisabled(
 
 function renderChildren(
   props: TableBodyRowProps,
-  flattedColumns: TableColumnMerged[],
   expendDisabled: ComputedRef<boolean>,
   handleExpend: () => void,
   selectDisabled: ComputedRef<boolean>,
   handleSelect: () => void,
 ) {
   const children: VNodeTypes[] = []
-  const { record, index } = props
-  flattedColumns.forEach((column, colIndex) => {
+  const { columns, index, record } = props
+  columns.forEach(column => {
     const colSpan = column.colSpan?.(record, index)
     const rowSpan = column.rowSpan?.(record, index)
     if (colSpan === 0 || rowSpan === 0) {
       return
     }
-    if ('type' in column) {
-      if (column.type === 'expandable') {
-        children.push(renderExpandCol(props, colSpan, rowSpan, expendDisabled.value, handleExpend))
-      } else {
-        children.push(renderSelectCol(props, colSpan, rowSpan, selectDisabled.value, handleSelect))
-      }
+    if (column.type === 'expandable') {
+      children.push(renderExpandCol(props, colSpan, rowSpan, expendDisabled.value, handleExpend))
+    } else if (column.type === 'selectable') {
+      children.push(renderSelectCol(props, colSpan, rowSpan, selectDisabled.value, handleSelect))
     } else {
-      children.push(renderCol(props, column, colIndex, colSpan, rowSpan))
+      children.push(renderCol(props, column, colSpan, rowSpan))
     }
   })
   return children
@@ -185,13 +168,17 @@ function renderChildren(
 function renderCol(
   props: TableBodyRowProps,
   column: TableColumnMergedBase,
-  defaultKey: number,
   colSpan: number | undefined,
   rowSpan: number | undefined,
 ) {
   const { index, record } = props
-  const { key = defaultKey, additional, align, dataKey, ellipsis, customRender } = column
-  const colProps = { index, record, key, colSpan, rowSpan, additional, align, dataKey, ellipsis, customRender }
+  const colProps = {
+    ...column,
+    index,
+    record,
+    colSpan,
+    rowSpan,
+  }
   return <BodyCol {...colProps}></BodyCol>
 }
 
