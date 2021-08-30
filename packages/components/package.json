@@ -32,8 +32,6 @@
     "dayjs": "^1.10.6"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/shared": "^3.0.0",
     "vue": "^3.0.0"
   }
 }
