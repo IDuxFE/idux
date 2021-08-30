@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/IDuxFE/idux/compare/v0.2.0...v0.3.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* **cdk:forms,comp:form:** setting trigger not work ([#415](https://github.com/IDuxFE/idux/issues/415)) ([b0104c5](https://github.com/IDuxFE/idux/commit/b0104c5f95a11525c0b41d57d0c80166469167ea))
+* **comp:tootip, popover:** rebuild useVisibility and test ([#409](https://github.com/IDuxFE/idux/issues/409)) ([f3fcd9f](https://github.com/IDuxFE/idux/commit/f3fcd9f927269af5bf0f3a0709b4ca2efb7f27c2))
+
+
+### Features
+
+* **comp:table:** support fixed columns ([#419](https://github.com/IDuxFE/idux/issues/419)) ([b082e00](https://github.com/IDuxFE/idux/commit/b082e00cf3a367f0c8a15364814346c73b835a7f))
+
+
+
+
+
 # [0.2.0](https://github.com/IDuxFE/idux/compare/v0.1.0...v0.2.0) (2021-08-18)
 
 

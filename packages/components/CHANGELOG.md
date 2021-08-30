@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/IDuxFE/idux/compare/v0.2.0...v0.3.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* **cdk:forms,comp:form:** setting trigger not work ([#415](https://github.com/IDuxFE/idux/issues/415)) ([b0104c5](https://github.com/IDuxFE/idux/commit/b0104c5f95a11525c0b41d57d0c80166469167ea))
+* **comp:tootip, popover:** rebuild useVisibility and test ([#409](https://github.com/IDuxFE/idux/issues/409)) ([f3fcd9f](https://github.com/IDuxFE/idux/commit/f3fcd9f927269af5bf0f3a0709b4ca2efb7f27c2))
+
+
+### Features
+
+* **comp:drawer:** add drawer component ([#414](https://github.com/IDuxFE/idux/issues/414)) ([9487bc9](https://github.com/IDuxFE/idux/commit/9487bc9c1e9e6648d599eb4c29223389480b32dc))
+* **comp:table:** support childrenKey in expandable ([#413](https://github.com/IDuxFE/idux/issues/413)) ([67cb7ad](https://github.com/IDuxFE/idux/commit/67cb7ad47232c0a3085193bc5725ecbd1d198427)), closes [#410](https://github.com/IDuxFE/idux/issues/410)
+* **comp:table:** support fixed columns ([#419](https://github.com/IDuxFE/idux/issues/419)) ([b082e00](https://github.com/IDuxFE/idux/commit/b082e00cf3a367f0c8a15364814346c73b835a7f))
+* **comp:table:** support selectable ([#412](https://github.com/IDuxFE/idux/issues/412)) ([d5c039e](https://github.com/IDuxFE/idux/commit/d5c039eabbcfe4e40f016307a31dcc9f1d593474))
+
+
+
+
+
 # [0.2.0](https://github.com/IDuxFE/idux/compare/v0.1.0...v0.2.0) (2021-08-18)
 
 
