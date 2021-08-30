@@ -2,6 +2,7 @@ import type { App, Directive, Plugin } from 'vue'
 
 import { clickOutside } from '@idux/cdk/click-outside'
 import { IxTypography } from '@idux/components/typography'
+import '@idux/components/typography/style'
 import { createGlobalConfig } from '@idux/components/config'
 
 const directives: Record<string, Directive> = {
