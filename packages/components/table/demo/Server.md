@@ -1,8 +1,8 @@
 ---
 title:
-  zh: 可展开
-  en: Expandable
-order: 2
+  zh: 远程加载数据
+  en: Ajax
+order: 4
 ---
 
 ## zh

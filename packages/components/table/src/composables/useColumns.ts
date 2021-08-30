@@ -191,7 +191,7 @@ function mergeRows(mergedColumns: TableColumnMerged[], scrollBarColumn: TableCol
   const rowCount = rows.length
   rows.forEach((columns, rowIndex) => {
     columns.forEach(col => {
-      if ('hasChildren' in col && col.hasChildren) {
+      if (!col.hasChildren) {
         col.titleRowSpan = rowCount - rowIndex
       }
     })

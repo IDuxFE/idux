@@ -18,26 +18,18 @@ export default defineComponent({
       })
     })
 
-    return {
-      sizeOptions,
-      onPageSizeChange,
-      size,
-      activeSize,
-      disabled: toRef(props, 'disabled'),
+    return () => {
+      return (
+        <li class="ix-pagination-sizes">
+          <IxSelect
+            disabled={props.disabled}
+            options={sizeOptions.value}
+            size={size.value}
+            value={activeSize.value}
+            onChange={onPageSizeChange}
+          />
+        </li>
+      )
     }
-  },
-
-  render() {
-    return (
-      <li class="ix-pagination-sizes">
-        <IxSelect
-          disabled={this.disabled}
-          options={this.sizeOptions}
-          size={this.size}
-          value={this.activeSize}
-          onChange={this.onPageSizeChange}
-        ></IxSelect>
-      </li>
-    )
   },
 })

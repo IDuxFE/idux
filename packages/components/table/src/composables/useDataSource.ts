@@ -25,12 +25,17 @@ export function useDataSource(
   const sortedData = computed(() => filteredData.value)
   const paginatedData = computed(() => {
     const pagination = mergedPagination.value
-    if (pagination === null) {
-      return sortedData.value
+    const data = sortedData.value
+    if (pagination === null || pagination.total) {
+      return data
     } else {
+      const { total } = pagination
+      if (total && data.length < total) {
+        return data
+      }
       const pageSize = pagination.pageSize!
       const startIndex = (pagination.pageIndex! - 1) * pageSize
-      return sortedData.value.slice(startIndex, startIndex + pageSize)
+      return data.slice(startIndex, startIndex + pageSize)
     }
   })
   const paginatedMap = computed(() => {

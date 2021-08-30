@@ -1,5 +1,4 @@
 import type { VNodeTypes } from 'vue'
-import type { PaginationItemRenderFn, PaginationItemType } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isNil } from 'lodash-es'
@@ -66,45 +65,38 @@ export default defineComponent({
       onPageIndexChange(newIndex)
     }
 
-    return { classes, title, isActive, isDisabled, onClick, itemRender }
-  },
+    return () => {
+      const { index, type } = props
+      const disabled = isDisabled.value
+      const active = isActive.value
+      const _itemRender = itemRender.value
+      let original: VNodeTypes
+      const icon = iconMap[type]
+      const commonButtonProps = { mode: 'text', size: 'small', shape: 'circle' } as const
+      if (props.type === 'prev5' || type === 'next5') {
+        original = (
+          <span class="ix-pagination-item-jumper">
+            <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
+            <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
+          </span>
+        )
+      } else if (!isNil(index)) {
+        original = (
+          <IxButton {...commonButtonProps} icon={icon} disabled={disabled}>
+            {index}
+          </IxButton>
+        )
+      } else {
+        original = <IxButton {...commonButtonProps} icon={icon} disabled={disabled}></IxButton>
+      }
 
-  render() {
-    const child = getChild(this.itemRender, this.index, this.type, this.isActive, this.isDisabled)
-    return (
-      <li class={this.classes} title={this.title} onClick={this.onClick}>
-        {child}
-      </li>
-    )
+      const children = _itemRender ? _itemRender({ index, type, active, disabled, original }) : original
+
+      return (
+        <li class={classes.value} title={title.value} onClick={onClick}>
+          {children}
+        </li>
+      )
+    }
   },
 })
-
-const getChild = (
-  itemRender: PaginationItemRenderFn | undefined,
-  index: number | undefined,
-  type: PaginationItemType,
-  active: boolean,
-  disabled: boolean,
-) => {
-  let original: VNodeTypes
-  const icon = iconMap[type]
-  const commonButtonProps = { mode: 'text', size: 'small', shape: 'circle' } as const
-  if (type === 'prev5' || type === 'next5') {
-    original = (
-      <span class="ix-pagination-item-jumper">
-        <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-        <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
-      </span>
-    )
-  } else if (!isNil(index)) {
-    original = (
-      <IxButton {...commonButtonProps} icon={icon} disabled={disabled}>
-        {index}
-      </IxButton>
-    )
-  } else {
-    original = <IxButton {...commonButtonProps} icon={icon} disabled={disabled}></IxButton>
-  }
-
-  return itemRender ? itemRender({ index, type, active, disabled, original }) : original
-}
