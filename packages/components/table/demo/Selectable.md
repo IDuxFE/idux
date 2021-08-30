@@ -1,7 +1,7 @@
 ---
 title:
-  zh: 可展开
-  en: Expandable
+  zh: 可选择
+  en: Selectable
 order: 1
 ---
 

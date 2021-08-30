@@ -33,3 +33,4 @@ single: true
 | `size` | 分页组件大小 | `middle \| small` | `middle` | ✅ | - |
 | `total` | 数据总数 | `number` | `0` | - | - |
 | `totalRender` | 自定义数据总数内容和当前数据顺 | `PaginationTotalRenderFn \| #total='{ total: number; range: [number, number] }'` | - | ✅ | - |
+| `onChange` | `pageIndex` 或者 `pageSize` 发生改变时的回调 | `(pageIndex: number, pageSize: number) => void` | - | ✅ | - |

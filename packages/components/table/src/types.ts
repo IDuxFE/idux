@@ -133,7 +133,7 @@ export interface TableExtra {
 }
 
 export interface TablePagination extends PaginationProps {
-  position: TablePaginationPosition
+  position?: TablePaginationPosition
 }
 
 export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'

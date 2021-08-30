@@ -14,20 +14,17 @@ export default defineComponent({
     const showQuickJumper = computed(() => props.showQuickJumper ?? config.showQuickJumper)
     const showSizeChanger = computed(() => props.showSizeChanger ?? config.showSizeChanger)
 
-    return { items, showSizeChanger, showQuickJumper }
-  },
-  render() {
-    const items = this.items.map(item => <Item key={item.type + '-' + item.index} {...item} />)
-    const sizes = this.showSizeChanger ? <Sizes /> : null
-    const jumper = this.showQuickJumper ? <Jumper /> : null
-
-    return (
-      <>
-        {items}
-        {sizes}
-        {jumper}
-      </>
-    )
+    return () => {
+      return (
+        <>
+          {items.value.map(item => (
+            <Item key={item.type + '-' + item.index} {...item} />
+          ))}
+          {showSizeChanger.value ? <Sizes /> : null}
+          {showQuickJumper.value ? <Jumper /> : null}
+        </>
+      )
+    }
   },
 })
 

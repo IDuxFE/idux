@@ -2,11 +2,10 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
-import ViteComponents from 'vite-plugin-components'
+import ViteComponents, { IduxResolver } from 'vite-plugin-components'
 
 import { mdPlugin } from './plugins/mdPlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
-import { IduxResolver } from './iduxResolver'
 
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
