@@ -20,9 +20,9 @@ export default defineComponent({
 function useClasses(expandable: ComputedRef<TableColumnMergedExpandable | undefined>) {
   return computed(() => {
     const { align } = expandable.value!
-    const prefixCls = 'ix-table-th'
+    const prefixCls = 'ix-table'
     return {
-      [prefixCls]: true,
+      [`${prefixCls}-cell`]: true,
       [`${prefixCls}-align-${align}`]: true,
       [`${prefixCls}-expandable`]: true,
     }

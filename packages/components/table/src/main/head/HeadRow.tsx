@@ -29,7 +29,7 @@ export default defineComponent({
         })
 
       const HeadRowTag = headRowTag.value as any
-      return <HeadRowTag class="ix-table-tr">{children}</HeadRowTag>
+      return <HeadRowTag>{children}</HeadRowTag>
     }
   },
 })
@@ -44,6 +44,7 @@ function renderCol(column: TableColumnMergedBaseExtra) {
     colEnd,
     ellipsis,
     fixed,
+    hasChildren,
     title,
     customTitle,
     key,
@@ -57,6 +58,7 @@ function renderCol(column: TableColumnMergedBaseExtra) {
     colEnd,
     ellipsis,
     fixed,
+    hasChildren,
     title,
     customTitle,
     key,

@@ -49,7 +49,7 @@ export interface ScrollContext {
 }
 
 export interface ScrollOptions {
-  target?: HTMLDivElement
+  currentTarget?: HTMLDivElement
   scrollLeft?: number
 }
 
@@ -102,20 +102,20 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
     }
   }
 
-  const handleScroll = ({ target, scrollLeft }: ScrollOptions) => {
-    const mergedScrollLeft = scrollLeft ?? target!.scrollLeft
+  const handleScroll = ({ currentTarget, scrollLeft }: ScrollOptions) => {
+    const mergedScrollLeft = scrollLeft ?? currentTarget!.scrollLeft
 
     const lockedTarget = lockedScrollTargetRef.value
-    if (!lockedTarget || lockedTarget === target) {
-      lockScrollTarget(target)
+    if (!lockedTarget || lockedTarget === currentTarget) {
+      lockScrollTarget(currentTarget)
       forceScroll(mergedScrollLeft, scrollHeadRef.value)
       forceScroll(mergedScrollLeft, scrollBodyRef.value)
       forceScroll(mergedScrollLeft, scrollFootRef.value)
       changeStickyScrollLeft(mergedScrollLeft)
     }
 
-    if (target) {
-      const { scrollWidth, clientWidth } = target
+    if (currentTarget) {
+      const { scrollWidth, clientWidth } = currentTarget
       pingedStart.value = mergedScrollLeft > 0
       pingedEnd.value = mergedScrollLeft < scrollWidth - clientWidth
     }

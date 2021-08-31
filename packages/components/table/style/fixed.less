@@ -1,0 +1,47 @@
+.@{table-prefix} {
+  &-fix {
+    &-start,
+    &-end {
+      z-index: 2;
+      td& {
+        background: @table-background;
+      }
+    }
+  }
+
+  &-fix-start-first::after,
+  &-fix-start-last::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -1px;
+    width: 30px;
+    transform: translate(100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+  }
+
+  &-ping-start &-fix-start-first::after,
+  &-ping-start &-fix-start-last::after {
+    box-shadow: inset 10px 0 8px -8px #00000026;
+  }
+
+  &-fix-end-first::after,
+  &-fix-end-last::after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translate(-100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+  }
+
+  &-ping-end &-fix-end-first::after,
+  &-ping-end &-fix-end-last::after {
+    box-shadow: inset -10px 0 8px -8px #00000026;
+  }
+}

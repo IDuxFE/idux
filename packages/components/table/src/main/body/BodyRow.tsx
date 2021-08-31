@@ -61,17 +61,15 @@ export default defineComponent({
 
 function useClasses(props: TableBodyRowProps, tableProps: TableProps) {
   const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.index))
-  const classes = computed(() => {
-    const prefixCls = 'ix-table-tr'
+  return computed(() => {
+    const prefixCls = 'ix-table'
     const computeRowClassName = rowClassName.value
     const { level } = props
     return {
-      [prefixCls]: true,
-      [computeRowClassName as string]: !!computeRowClassName,
       [`${prefixCls}-level-${level}`]: level > 0,
+      [computeRowClassName as string]: !!computeRowClassName,
     }
   })
-  return classes
 }
 
 function useEvents(

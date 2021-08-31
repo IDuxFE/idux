@@ -14,7 +14,7 @@ export default defineComponent({
     useScrollEvents(scrollHeadRef, handleScroll)
 
     const isMaxContent = computed(() => scrollX.value === 'max-content')
-    const hasData = computed(() => flattedData.value.length === 0)
+    const hasData = computed(() => flattedData.value.length > 0)
     const classes = computed(() => {
       return {
         'ix-table-fixed-holder': true,
@@ -32,7 +32,7 @@ export default defineComponent({
     })
 
     const tableStyle = computed<StyleValue>(() => {
-      const visibility = hasData.value || !columnWidths.value.length ? 'hidden' : undefined
+      const visibility = hasData.value && !columnWidths.value.length ? 'hidden' : undefined
       return {
         tableLayout: 'fixed',
         visibility,
@@ -40,7 +40,7 @@ export default defineComponent({
     })
 
     return () => {
-      const children = hasData.value && !isMaxContent.value ? <ColGroup /> : null
+      const children = hasData.value && !isMaxContent.value ? <ColGroup ixFixedHolder /> : null
       return (
         <div class={classes.value} style={style.value} ref={scrollHeadRef}>
           <table style={tableStyle.value}>
@@ -60,8 +60,7 @@ function useScrollEvents(
   const onWheel = (evt: WheelEvent) => {
     const { currentTarget, deltaX } = evt
     if (deltaX) {
-      const target = currentTarget as HTMLDivElement
-      handleScroll({ target, scrollLeft: target.scrollLeft + deltaX })
+      handleScroll({ currentTarget, scrollLeft: currentTarget.scrollLeft + deltaX })
       evt.preventDefault()
     }
   }
