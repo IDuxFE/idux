@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/IDuxFE/idux/compare/v0.3.0...v0.3.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **comp:table:** fix fixed column style ([#424](https://github.com/IDuxFE/idux/issues/424)) ([3dcfb1d](https://github.com/IDuxFE/idux/commit/3dcfb1d477d4e7c0042257cc6f9cebb9adf62a71))
+
+
+
+
+
 # [0.3.0](https://github.com/IDuxFE/idux/compare/v0.2.0...v0.3.0) (2021-08-30)
 
 
