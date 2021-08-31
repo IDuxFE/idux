@@ -1,4 +1,6 @@
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, StyleValue, watch, watchEffect } from 'vue'
+import type { StyleValue } from 'vue'
+
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
 import { getScrollBarSize } from '@idux/cdk/scroll'
 import { getOffset, off, on } from '@idux/cdk/utils'
 import { tableToken } from '../token'
@@ -87,7 +89,7 @@ export default defineComponent({
         left = clientWidth - barWidth
       }
       const scrollLeft = (left / clientWidth) * (scrollWidth + 2)
-      handleScroll({ scrollLeft })
+      handleScroll(evt, scrollLeft)
     }
 
     const handleContainerScroll = () => {

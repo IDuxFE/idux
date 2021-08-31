@@ -11,10 +11,10 @@
 
 <script lang="ts" setup>
 import { TableColumn } from '@idux/components/table'
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 
 interface Data {
-  id: number
+  key: number
   name: string
   age: number
   address: string
@@ -47,27 +47,27 @@ const columns: TableColumn<Data>[] = [
 
 const data: Data[] = [
   {
-    id: 1,
+    key: 1,
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
     description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
   },
   {
-    id: 2,
+    key: 2,
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
     description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
   },
   {
-    id: 3,
+    key: 3,
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park',
   },
   {
-    id: 4,
+    key: 4,
     name: 'Disabled User',
     age: 99,
     address: 'Sidney No. 1 Lake Park',

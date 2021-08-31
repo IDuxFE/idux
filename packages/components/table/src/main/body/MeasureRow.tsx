@@ -1,16 +1,15 @@
 import { defineComponent, inject } from 'vue'
-
 import { tableBodyToken, tableToken } from '../../token'
 import MeasureCell from './MeasureCell'
 
 export default defineComponent({
   setup() {
     const { flattedColumns } = inject(tableToken)!
-    const { onCellResize } = inject(tableBodyToken)!
+    const { changeColumnWidth } = inject(tableBodyToken)!
     return () => {
       const children = flattedColumns.value.map(column => {
         const { key } = column
-        const cellProps = { key, cellKey: key, onCellResize }
+        const cellProps = { key, cellKey: key, changeColumnWidth }
         return <MeasureCell {...cellProps}></MeasureCell>
       })
       return (

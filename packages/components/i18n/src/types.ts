@@ -34,8 +34,8 @@ export interface TableLocale {
   selectAll: string
   selectInvert: string
   selectNone: string
-  selectCurrentAll: string
-  selectCurrentInvert: string
+  selectPageAll: string
+  selectPageInvert: string
   sortTitle: string
   sortDesc: string
   sortAsc: string

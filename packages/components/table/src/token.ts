@@ -1,5 +1,6 @@
-import type { ComputedRef, InjectionKey, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 import type { TableConfig } from '@idux/components/config'
+import type { TableLocale } from '@idux/components/i18n'
 import type { ColumnsContext } from './composables/useColumns'
 import type { DataSourceContext } from './composables/useDataSource'
 import type { ExpandableContext } from './composables/useExpandable'
@@ -23,6 +24,7 @@ export interface TableContext
   props: TableProps
   slots: Slots
   config: TableConfig
+  locale: ComputedRef<TableLocale>
   getRowKey: ComputedRef<GetRowKey>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
@@ -33,7 +35,8 @@ export const tableToken: InjectionKey<TableContext> = Symbol('tableToken')
 export const TABLE_TOKEN: InjectionKey<TableContext> = Symbol('TABLE_TOKEN')
 
 export interface TableBodyContext {
-  onCellResize: (key: Key, width: number) => void
+  mainTableWidth: Ref<number>
+  changeColumnWidth: (key: Key, width: number) => void
 }
 
 export const tableBodyToken: InjectionKey<TableBodyContext> = Symbol('tableBodyToken')

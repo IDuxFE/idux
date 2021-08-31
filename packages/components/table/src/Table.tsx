@@ -3,6 +3,7 @@ import type { SpinProps } from '@idux/components/spin'
 import { defineComponent, provide } from 'vue'
 import { isBoolean } from 'lodash-es'
 import { useGlobalConfig } from '@idux/components/config'
+import { getLocale } from '@idux/components/i18n'
 import { IxSpin } from '@idux/components/spin'
 import { useTags } from './composables/useTags'
 import { useColumns } from './composables/useColumns'
@@ -26,6 +27,7 @@ export default defineComponent({
   props: tableProps,
   setup(props, { slots }) {
     const config = useGlobalConfig('table')
+    const locale = getLocale('table')
     const tags = useTags(props)
     const getRowKey = useGetRowKey(props, config)
     const stickyContext = useSticky(props)
@@ -35,12 +37,13 @@ export default defineComponent({
     const { mergedPagination } = usePagination(props, config)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
     const dataContext = useDataSource(props, getRowKey, expandableContext, mergedPagination)
-    const selectableContext = useSelectable(props, columnsContext.flattedColumns, dataContext)
+    const selectableContext = useSelectable(props, locale, columnsContext.flattedColumns, dataContext)
 
     const context = {
       props,
       slots,
       config,
+      locale,
       ...tags,
       getRowKey,
       ...columnsContext,

@@ -7,6 +7,9 @@ order: 0
 single: true
 ---
 
+- 当有大量结构化的数据需要展现时；
+- 当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。
+
 ## API
 
 ### IxTable
@@ -25,7 +28,7 @@ single: true
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record: T, index: number) => string` | - | - | - |
-| `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `id` | ✅ | - |
+| `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | ✅ | - |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
 | `size` | 表格大小 | `'large' \| 'medium' \| 'small'` | `medium` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |

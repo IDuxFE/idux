@@ -1,8 +1,10 @@
-import { StickyContext } from './useSticky'
-import { computed, onBeforeUnmount, ComputedRef, Ref, ref } from 'vue'
-import { TableProps } from '../types'
-import { convertCssPixel } from '@idux/cdk/utils'
+import type { ComputedRef, Ref } from 'vue'
+import type { StickyContext } from './useSticky'
+import type { TableProps } from '../types'
+
+import { computed, onBeforeUnmount, ref } from 'vue'
 import { getScrollBarSize } from '@idux/cdk/scroll'
+import { convertCssPixel } from '@idux/cdk/utils'
 
 export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: StickyContext): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
@@ -37,7 +39,7 @@ export interface ScrollContext {
   scrollHeadRef: Ref<HTMLDivElement | undefined>
   scrollBodyRef: Ref<HTMLDivElement | undefined>
   scrollFootRef: Ref<HTMLDivElement | undefined>
-  handleScroll: (options: ScrollOptions) => void
+  handleScroll: (evt?: Event, scrollLeft?: number) => void
   pingedStart: Ref<boolean>
   pingedEnd: Ref<boolean>
   scrollX: ComputedRef<string>
@@ -70,7 +72,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
   const pingedStart = ref(false)
   const pingedEnd = ref(false)
 
-  const lockedScrollTargetRef = ref<HTMLDivElement>()
+  const lockedScrollTargetRef = ref<HTMLElement>()
 
   let timeout: NodeJS.Timeout | undefined
 
@@ -81,7 +83,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
     }
   }
 
-  const lockScrollTarget = (target: HTMLDivElement | undefined) => {
+  const lockScrollTarget = (target: HTMLElement | undefined) => {
     lockedScrollTargetRef.value = target
     clearTimer()
 
@@ -93,7 +95,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
 
   onBeforeUnmount(() => clearTimer())
 
-  const forceScroll = (scrollLeft: number, target: HTMLDivElement | undefined) => {
+  const forceScroll = (scrollLeft: number, target: HTMLElement | undefined) => {
     if (!target) {
       return
     }
@@ -102,7 +104,8 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
     }
   }
 
-  const handleScroll = ({ currentTarget, scrollLeft }: ScrollOptions) => {
+  const handleScroll = (evt?: Event, scrollLeft?: number) => {
+    const currentTarget = evt?.currentTarget as HTMLElement | undefined
     const mergedScrollLeft = scrollLeft ?? currentTarget!.scrollLeft
 
     const lockedTarget = lockedScrollTargetRef.value

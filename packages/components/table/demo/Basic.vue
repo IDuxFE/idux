@@ -17,7 +17,7 @@ import { IxTag } from '@idux/components/tag'
 import '@idux/components/tag/style'
 
 interface Data {
-  id: number
+  key: number
   name: string
   age: number
   address: string
@@ -60,9 +60,9 @@ const columns: TableColumn<Data>[] = [
 const data: Data[] = []
 for (let index = 0; index < 100; index++) {
   data.push({
-    id: index,
+    key: index,
     name: `Edrward ${index}`,
-    age: 32,
+    age: 18 + index,
     address: `London Park no. ${index}`,
     tags: ['nice', 'developer'],
   })
