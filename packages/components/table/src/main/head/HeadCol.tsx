@@ -11,7 +11,7 @@ import { convertCssPixel } from '@idux/cdk/utils'
 export default defineComponent({
   props: tableHeadColProps,
   setup(props) {
-    const { slots, columnOffsets, fixedColumnKeys, isSticky, headColTag } = inject(tableToken)!
+    const { slots, columnOffsetsWithScrollBar, fixedColumnKeys, isSticky, headColTag } = inject(tableToken)!
 
     const isFixedFirstStartKey = computed(() => fixedColumnKeys.value.firstStartKey === props.cellKey)
     const isFixedLastStartKey = computed(() => fixedColumnKeys.value.lastStartKey === props.cellKey)
@@ -20,7 +20,7 @@ export default defineComponent({
 
     const fixedOffset = computed(() => {
       const { fixed } = props
-      const { starts, ends } = columnOffsets.value
+      const { starts, ends } = columnOffsetsWithScrollBar.value
       if (fixed === 'start') {
         return starts[props.colStart]
       }
@@ -32,9 +32,9 @@ export default defineComponent({
 
     const classes = computed(() => {
       const { align, ellipsis, hasChildren, fixed } = props
-      const prefixCls = 'ix-table-th'
+      const prefixCls = 'ix-table'
       return {
-        [prefixCls]: true,
+        [`${prefixCls}-cell`]: true,
         [`${prefixCls}-align-${align}`]: !hasChildren && align,
         [`${prefixCls}-align-center`]: hasChildren,
         [`${prefixCls}-ellipsis`]: ellipsis,

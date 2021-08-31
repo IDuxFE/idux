@@ -39,9 +39,9 @@ function useClasses(
   return computed(() => {
     const { align } = expandable.value!
     const { expanded } = props
-    const prefixCls = 'ix-table-td'
+    const prefixCls = 'ix-table'
     return {
-      [prefixCls]: true,
+      [`${prefixCls}-cell`]: true,
       [`${prefixCls}-align-${align}`]: true,
       [`${prefixCls}-expanded`]: expanded,
     }

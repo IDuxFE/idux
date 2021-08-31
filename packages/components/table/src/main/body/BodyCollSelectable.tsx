@@ -39,9 +39,9 @@ export default defineComponent({
 function useClasses(selectable: ComputedRef<TableColumnMergedSelectable | undefined>, selected: ComputedRef<boolean>) {
   return computed(() => {
     const { align } = selectable.value!
-    const prefixCls = 'ix-table-td'
+    const prefixCls = 'ix-table'
     return {
-      [prefixCls]: true,
+      [`${prefixCls}-cell`]: true,
       [`${prefixCls}-align-${align}`]: true,
       [`${prefixCls}-selected`]: selected.value,
     }

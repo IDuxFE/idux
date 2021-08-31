@@ -24,25 +24,31 @@ export function useColumns(
 ): ColumnsContext {
   const screens = useScreens()
   const mergedColumns = computed(() => mergeColumns(props.columns, screens, config.columnBase, config.columnExpandable))
-  const flattedColumns = computed(() => flatColumns(mergedColumns.value))
+  const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
+    mergedColumns,
+    scrollBarSizeOnFixedHolder,
+  )
   const hasEllipsis = computed(() => flattedColumns.value.some(column => (column as TableColumnBase).ellipsis))
   const hasFixed = computed(() => flattedColumns.value.some(column => column.fixed))
 
-  const { columnWidths, setColumnWidth } = useColumnWidths(flattedColumns)
-  const columnOffsets = useColumnOffsets(columnWidths)
+  const { columnWidths, columnWidthsWithScrollBar, setColumnWidth } = useColumnWidths(flattedColumns, scrollBarColumn)
+  const { columnOffsets, columnOffsetsWithScrollBar } = useColumnOffsets(columnWidths, columnWidthsWithScrollBar)
 
-  const scrollBarColumn = useScrollBarColumn(flattedColumns, scrollBarSizeOnFixedHolder)
   const mergedRows = computed(() => mergeRows(mergedColumns.value, scrollBarColumn.value))
   const fixedColumnKeys = useFixedColumnKeys(flattedColumns, scrollBarColumn)
 
   return {
     flattedColumns,
+    scrollBarColumn,
+    flattedColumnsWithScrollBar,
     hasEllipsis,
     hasFixed,
     columnWidths,
+    columnWidthsWithScrollBar,
     setColumnWidth,
     columnOffsets,
-    scrollBarColumn,
+    columnOffsetsWithScrollBar,
+
     mergedRows,
     fixedColumnKeys,
   }
@@ -50,12 +56,15 @@ export function useColumns(
 
 export interface ColumnsContext {
   flattedColumns: ComputedRef<TableColumnMerged[]>
+  scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>
+  flattedColumnsWithScrollBar: ComputedRef<(TableColumnMergedBase | TableColumnScrollBar)[]>
   hasEllipsis: ComputedRef<boolean>
   hasFixed: ComputedRef<boolean>
   columnWidths: ComputedRef<number[]>
+  columnWidthsWithScrollBar: ComputedRef<number[]>
   setColumnWidth: (key: Key, width: number) => void
   columnOffsets: ComputedRef<{ starts: number[]; ends: number[] }>
-  scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>
+  columnOffsetsWithScrollBar: ComputedRef<{ starts: number[]; ends: number[] }>
   mergedRows: ComputedRef<TableColumnMergedExtra[][]>
   fixedColumnKeys: ComputedRef<{
     firstStartKey: Key | undefined
@@ -200,6 +209,39 @@ function mergeRows(mergedColumns: TableColumnMerged[], scrollBarColumn: TableCol
   return rows
 }
 
+function useFlattedColumns(
+  mergedColumns: ComputedRef<TableColumnMerged[]>,
+  scrollBarSizeOnFixedHolder: ComputedRef<number>,
+) {
+  const flattedColumns = computed(() => flatColumns(mergedColumns.value))
+
+  const scrollBarColumn = computed<TableColumnScrollBar | undefined>(() => {
+    const scrollBarSize = scrollBarSizeOnFixedHolder.value
+    if (scrollBarSize === 0) {
+      return undefined
+    }
+    const columns = flattedColumns.value
+    const lastColumn = columns[columns.length - 1]
+    return {
+      key: 'scroll-bar',
+      type: 'scroll-bar',
+      fixed: lastColumn && lastColumn.fixed,
+      width: scrollBarSize,
+    }
+  })
+
+  const flattedColumnsWithScrollBar = computed(() => {
+    const columns = flattedColumns.value
+    if (columns.length === 0) {
+      return columns
+    }
+    const scrollBar = scrollBarColumn.value
+    return scrollBar ? [...columns, scrollBar] : columns
+  })
+
+  return { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar }
+}
+
 function flatColumns(columns: TableColumnMerged[]) {
   const result: TableColumnMerged[] = []
   columns.forEach(column => {
@@ -217,7 +259,10 @@ function flatColumns(columns: TableColumnMerged[]) {
   return result
 }
 
-function useColumnWidths(flattedColumns: ComputedRef<TableColumnMerged[]>) {
+function useColumnWidths(
+  flattedColumns: ComputedRef<TableColumnMerged[]>,
+  scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>,
+) {
   const widthMap = reactive<Record<Key, number>>({})
   const widthString = ref<string>()
 
@@ -235,59 +280,52 @@ function useColumnWidths(flattedColumns: ComputedRef<TableColumnMerged[]>) {
     return _widthString ? _widthString.split('-').map(Number) : []
   })
 
+  const columnWidthsWithScrollBar = computed(() => {
+    const widths = columnWidths.value
+    if (widths.length === 0) {
+      return widths
+    }
+    const scrollBar = scrollBarColumn.value
+    return scrollBar ? [...widths, scrollBar.width] : widths
+  })
+
   const setColumnWidth = (key: Key, width: number) => {
     nextTick(() => (widthMap[key] = width))
   }
 
-  return { columnWidths, setColumnWidth }
+  return { columnWidths, columnWidthsWithScrollBar, setColumnWidth }
 }
 
-function useColumnOffsets(columnWidths: ComputedRef<number[]>) {
-  return computed(() => {
-    const widths = columnWidths.value
-    const count = widths.length
-    const startOffsets: number[] = []
-    const endOffsets: number[] = []
+function useColumnOffsets(columnWidths: ComputedRef<number[]>, columnWidthsWithScrollBar: ComputedRef<number[]>) {
+  const columnOffsets = computed(() => calculateOffsets(columnWidths.value))
+  const columnOffsetsWithScrollBar = computed(() => calculateOffsets(columnWidthsWithScrollBar.value))
 
-    let startOffset = 0
-    let endOffset = 0
-
-    for (let start = 0; start < count; start++) {
-      // Start offset
-      startOffsets[start] = startOffset
-      startOffset += widths[start] || 0
-
-      // End offset
-      const end = count - start - 1
-      endOffsets[end] = endOffset
-      endOffset += widths[end] || 0
-    }
-
-    return {
-      starts: startOffsets,
-      ends: endOffsets,
-    }
-  })
+  return { columnOffsets, columnOffsetsWithScrollBar }
 }
 
-function useScrollBarColumn(
-  flattedColumns: ComputedRef<TableColumnMerged[]>,
-  scrollBarSizeOnFixedHolder: ComputedRef<number>,
-) {
-  return computed<TableColumnScrollBar | undefined>(() => {
-    const scrollBarSize = scrollBarSizeOnFixedHolder.value
-    if (scrollBarSize === 0) {
-      return undefined
-    }
-    const columns = flattedColumns.value
-    const lastColumn = columns[columns.length - 1]
-    return {
-      key: 'scroll-bar',
-      type: 'scroll-bar',
-      fixed: lastColumn && lastColumn.fixed,
-      width: scrollBarSize,
-    }
-  })
+function calculateOffsets(widths: number[]) {
+  const count = widths.length
+  const startOffsets: number[] = []
+  const endOffsets: number[] = []
+
+  let startOffset = 0
+  let endOffset = 0
+
+  for (let start = 0; start < count; start++) {
+    // Start offset
+    startOffsets[start] = startOffset
+    startOffset += widths[start] || 0
+
+    // End offset
+    const end = count - start - 1
+    endOffsets[end] = endOffset
+    endOffset += widths[end] || 0
+  }
+
+  return {
+    starts: startOffsets,
+    ends: endOffsets,
+  }
 }
 
 function useFixedColumnKeys(
@@ -295,6 +333,7 @@ function useFixedColumnKeys(
   scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>,
 ) {
   return computed(() => {
+    // TODO rtl
     let firstStartKey: Key | undefined
     let lastStartKey: Key | undefined
     let firstEndKey: Key | undefined
@@ -304,16 +343,10 @@ function useFixedColumnKeys(
     columns.forEach(column => {
       const { fixed, key } = column
       if (fixed === 'start') {
-        if (!firstStartKey) {
-          firstStartKey = key
-        } else {
-          lastStartKey = key
-        }
+        lastStartKey = key
       } else if (fixed === 'end') {
         if (!firstEndKey) {
           firstEndKey = key
-        } else {
-          lastEndKey = key
         }
       }
     })

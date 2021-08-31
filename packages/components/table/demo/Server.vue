@@ -1,12 +1,5 @@
 <template>
-  <IxTable
-    :columns="columns"
-    :dataSource="dataSource"
-    :rowKey="getRowKey"
-    :pagination="pagination"
-    :scroll="scroll"
-    :spin="loading"
-  >
+  <IxTable :columns="columns" :dataSource="dataSource" :rowKey="getRowKey" :pagination="pagination" :spin="loading">
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>
@@ -19,7 +12,7 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
 import axios from 'axios'
-import { TableColumn, TablePagination, TableScroll } from '@idux/components/table'
+import { TableColumn, TablePagination } from '@idux/components/table'
 
 interface RandomUser {
   gender: string
@@ -65,8 +58,6 @@ const pagination = reactive<TablePagination>({
   showSizeChanger: true,
   onChange: (index, size) => fetchData(index, size),
 })
-
-const scroll: TableScroll = { x: 'max-content' }
 
 const loading = ref(false)
 

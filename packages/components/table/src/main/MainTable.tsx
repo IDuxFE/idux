@@ -52,9 +52,9 @@ export default defineComponent({
     provide(tableBodyToken, { onCellResize })
 
     const triggerScroll = () => {
-      const target = scrollBodyRef.value
-      if (target) {
-        handleScroll({ target })
+      const currentTarget = scrollBodyRef.value
+      if (currentTarget) {
+        handleScroll({ currentTarget })
       }
     }
 
@@ -120,7 +120,7 @@ export default defineComponent({
       return {
         tableLayout: tableLayout.value,
         width: scrollX.value,
-        minWidth: '100%',
+        minWidth: scrollY.value ? '100%' : undefined,
       }
     })
 
@@ -130,12 +130,12 @@ export default defineComponent({
 
       if (scrollVertical.value || isSticky.value) {
         const tableHead = props.headless ? null : (
-          <FixedHolder class="ix-table-head">
+          <FixedHolder>
             <Head></Head>
           </FixedHolder>
         )
         const tableBody = (
-          <div ref={scrollBodyRef} class="ix-table-body" style={contentStyle.value}>
+          <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               <Body></Body>
@@ -150,7 +150,7 @@ export default defineComponent({
         children = [tableHead, tableBody, tableFoot, sticky]
       } else {
         children = (
-          <div class="ix-table-content">
+          <div ref={scrollBodyRef} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               {props.headless ? null : <Head></Head>}

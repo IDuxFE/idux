@@ -76,7 +76,7 @@ const columns: TableColumn<Data>[] = [
     key: 'Column 7',
   },
   {
-    title: 'Column 1',
+    title: 'Column 8',
     dataKey: 'address',
     key: 'Column 8',
   },

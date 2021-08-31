@@ -1,4 +1,4 @@
-import type { ComputedRef, Slots, StyleValue } from 'vue'
+import type { ComputedRef, Slots } from 'vue'
 import type { TableBodyColProps } from '../../types'
 
 import { computed, defineComponent, inject } from 'vue'

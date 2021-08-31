@@ -1,12 +1,14 @@
-import { computed, defineComponent, inject, StyleValue, VNodeTypes } from 'vue'
+import type { StyleValue, VNodeTypes } from 'vue'
+import type { Key } from '../../types'
+
+import { computed, defineComponent, inject } from 'vue'
 import { isString } from 'lodash-es'
+import { convertCssPixel } from '@idux/cdk/utils'
 import { IxEmpty } from '@idux/components/empty'
 import { tableToken } from '../../token'
 import BodyRow from './BodyRow'
 import BodyRowSingle from './BodyRowSingle'
 import MeasureRow from './MeasureRow'
-import { convertCssPixel } from '@idux/cdk/utils'
-import { Key } from '../../types'
 
 export default defineComponent({
   setup() {
@@ -27,9 +29,9 @@ export default defineComponent({
     const bodyColumns = computed(() => {
       return flattedColumns.value.map((column, index) => {
         const { key, fixed, align, ellipsis, additional, colSpan, rowSpan, customRender, dataKey, type } = column
-        const prefixCls = 'ix-table-td'
+        const prefixCls = 'ix-table'
         let classes: Record<string, boolean | string | undefined> = {
-          [prefixCls]: true,
+          [`${prefixCls}-cell`]: true,
           [`${prefixCls}-align-${align}`]: align,
           [`${prefixCls}-ellipsis`]: ellipsis,
         }
@@ -70,7 +72,7 @@ export default defineComponent({
 
       const BodyTag = bodyTag.value as any
       return (
-        <BodyTag class="ix-table-tbody">
+        <BodyTag>
           {showMeasure.value ? <MeasureRow></MeasureRow> : null}
           {children}
         </BodyTag>

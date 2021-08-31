@@ -6,22 +6,20 @@ import { defineComponent, inject } from 'vue'
 import { tableToken } from '../token'
 
 export default defineComponent({
-  setup() {
-    const { flattedColumns, columnWidths, scrollBarColumn } = inject(tableToken)!
+  props: { ixFixedHolder: Boolean },
+  setup(props) {
+    const { flattedColumns, flattedColumnsWithScrollBar, columnWidths, columnWidthsWithScrollBar } = inject(tableToken)!
     return () => {
-      const columns = flattedColumns.value
-      const widths = columnWidths.value
+      const { ixFixedHolder } = props
+      const columns = ixFixedHolder ? flattedColumnsWithScrollBar.value : flattedColumns.value
+      const widths = ixFixedHolder ? columnWidthsWithScrollBar.value : columnWidths.value
 
       let children: VNodeTypes[] | undefined
-
       if (widths.length) {
-        children = widths.map((width, index) => renderCol(columns[index], width))
-        if (children.length && scrollBarColumn.value) {
-          children.push(renderCol(scrollBarColumn.value as TableColumnMerged))
-        }
+        children = widths.map((width, index) => renderCol(columns[index] as TableColumnMerged, width))
       } else {
         if (columns.some(column => !!column.width || 'type' in column)) {
-          children = columns.map(column => renderCol(column))
+          children = columns.map(column => renderCol(column as TableColumnMerged))
         }
       }
       return <colgroup>{children}</colgroup>
