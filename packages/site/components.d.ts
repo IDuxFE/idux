@@ -24,7 +24,6 @@ declare module 'vue' {
     IxDivider: typeof import('@idux/components/divider')['IxDivider']
     IxDrawer: typeof import('@idux/components/drawer')['IxDrawer']
     IxDropdown: typeof import('@idux/components/dropdown')['IxDropdown']
-    IxDropdownButton: typeof import('@idux/components/dropdown')['IxDropdownButton']
     IxEmpty: typeof import('@idux/components/empty')['IxEmpty']
     IxForm: typeof import('@idux/components/form')['IxForm']
     IxFormItem: typeof import('@idux/components/form')['IxFormItem']

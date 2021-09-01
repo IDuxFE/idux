@@ -8,27 +8,27 @@ order: 0
 
 通过鼠标悬浮或点击，弹出一组操作菜单。
 
-## 何时使用
-
-- 一组命令合集，根据菜单的 `cid` 来执行不同的操作
-- 页面上操作命令过多，用于收纳操作元素。
+- 一组命令合集，可在列表中进行选择，并执行相应的命令
+- 页面上操作命令过多，用于收纳操作元素
+- Select 用于选择，而 Dropdown 是命令集合
 
 ## API
 
-### IxDropdown IxDropdownButton
+### IxDropdown
 
 #### DropdownProps
-
-> `IxDropdownButton`，除以下表格之外还支持 `IxButtonGroup` 的[所有属性](/components/button/zh#groupprops)。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:visible` | 菜单是否显示 | `boolean` | `false` | - | - |
+| `autoAdjust` | 悬浮层被遮挡时自动调整位置 | `boolean` | `true` | ✅ | - |
+| `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
 | `disabled` | 菜单是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 右侧的 icon | `string \| #icon` | - | - | `IxDropdownButton` 的默认值为 `ellipsis` |
-| `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
-| `placement` | 悬浮层的对齐方式 | `OverlayPlacement` | `bottom-start` | ✅ | - |
-| `trigger` | 悬浮层触发方式 | `OverlayTrigger` | `hover` | ✅ | - |
+| `offset` | 悬浮层位置偏移量 | `[number, number]` | `[0,8]` | ✅ | - |
+| `placement` | 悬浮层的对齐方式 | `PopperPlacement` | `bottomStart` | ✅ | - |
+| `showArrow` | 是否显示箭头 | `boolean` | `false` | ✅ | - |
+| `target` | 浮层容器节点 | `string \| HTMLElement` | `ix-dropdown-container` | ✅ | 为 `string` 时，会在 `document.body` 中创建一个 `div` |
+| `trigger` | 悬浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |
 
 #### DropdownSlots
 
