@@ -65,7 +65,12 @@ const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
 const dropdown = shallowReactive<DropdownConfig>({
-  placement: 'bottom-start',
+  autoAdjust: true,
+  destroyOnHide: false,
+  offset: [0, 8],
+  placement: 'bottomStart',
+  showArrow: false,
+  target: 'ix-dropdown-container',
   trigger: 'hover',
 })
 

@@ -1,6 +1,6 @@
 import { renderWork } from '@tests'
 import { mount, MountingOptions } from '@vue/test-utils'
-import IxSpin from '../src/Spin.vue'
+import IxSpin from '../src/Spin'
 import { SpinProps } from '../src/types'
 
 describe('Spin', () => {

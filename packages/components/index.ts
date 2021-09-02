@@ -15,7 +15,7 @@ import { IxRow, IxCol } from '@idux/components/grid'
 // import Navigation
 import { IxPagination } from '@idux/components/pagination'
 import { IxAffix } from '@idux/components/affix'
-import { IxDropdown, IxDropdownButton } from '@idux/components/dropdown'
+import { IxDropdown } from '@idux/components/dropdown'
 import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub } from '@idux/components/menu'
 // import Data Entry
 import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
@@ -67,7 +67,6 @@ const components = [
   IxPagination,
   IxAffix,
   IxDropdown,
-  IxDropdownButton,
   IxMenu,
   IxMenuItem,
   IxMenuItemGroup,

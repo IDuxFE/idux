@@ -1,6 +1,6 @@
 <template>
-  <IxDropdown icon="down">
-    Hover me
+  <IxDropdown>
+    <a class="ix-dropdown-trigger">Hover me <IxIcon name="down"></IxIcon></a>
     <template #overlay>
       <IxMenu>
         <IxMenuItem> Item 1 </IxMenuItem>

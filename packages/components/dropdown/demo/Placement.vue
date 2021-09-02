@@ -1,7 +1,7 @@
 <template>
   <IxSpace>
-    <IxDropdown placement="bottom-start">
-      <IxButton>bottom-start</IxButton>
+    <IxDropdown placement="bottomStart">
+      <IxButton>BS</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -12,7 +12,7 @@
       </template>
     </IxDropdown>
     <IxDropdown placement="bottom">
-      <IxButton>bottom</IxButton>
+      <IxButton>Bottom</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -22,8 +22,8 @@
         </IxMenu>
       </template>
     </IxDropdown>
-    <IxDropdown placement="bottom-end">
-      <IxButton>bottom-end</IxButton>
+    <IxDropdown placement="bottomEnd">
+      <IxButton>BE</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -34,10 +34,10 @@
       </template>
     </IxDropdown>
   </IxSpace>
-  <br /><br />
+  <br />
   <IxSpace>
-    <IxDropdown placement="top-start">
-      <IxButton>top-start</IxButton>
+    <IxDropdown placement="topStart">
+      <IxButton>TS</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -48,7 +48,7 @@
       </template>
     </IxDropdown>
     <IxDropdown placement="top">
-      <IxButton>top</IxButton>
+      <IxButton>Top</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -58,8 +58,8 @@
         </IxMenu>
       </template>
     </IxDropdown>
-    <IxDropdown placement="top-end">
-      <IxButton>top-end</IxButton>
+    <IxDropdown placement="topEnd">
+      <IxButton>TE</IxButton>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -74,6 +74,6 @@
 
 <style lang="less" scoped>
 .ix-button {
-  width: 120px;
+  width: 80px;
 }
 </style>
