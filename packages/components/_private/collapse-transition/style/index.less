@@ -1,0 +1,12 @@
+@import '../../../style/themes/default.less';
+
+@collapse-transition-prefix: ~'@{idux-prefix}-collapse-transition';
+
+.@{collapse-transition-prefix} {
+  &-enter-active,
+  &-leave-active {
+    overflow: hidden;
+    transition: height @transition-duration-base @ease-in-out, width @transition-duration-base @ease-in-out,
+      opacity @transition-duration-base @ease-in-out;
+  }
+}

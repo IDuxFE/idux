@@ -22,13 +22,9 @@ describe('Tooltip', () => {
   test('visible work', async () => {
     const onUpdateVisible = jest.fn()
     const wrapper = TooltipWrapper({
-      props: { visible: true, 'onUpdate:visible': onUpdateVisible, title: 'Title' },
+      props: { visible: false, 'onUpdate:visible': onUpdateVisible, title: 'Title' },
       slots,
     })
-
-    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
-
-    await wrapper.setProps({ visible: false })
 
     expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(false)
 

@@ -1,41 +1,34 @@
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
-import type { MenuItemProps, MenuMode, MenuTheme } from './types'
-
-export interface MenuItem {
-  cid: ComputedRef<string | number>
-  selected: Ref<boolean>
-}
-
-export interface MenuSub {
-  cid: ComputedRef<string | number>
-  selected: Ref<boolean>
-  opened: Ref<boolean>
-}
-
-export type MenuRegisterFn = (item: MenuItem | MenuSub, isMenuSub: boolean) => void
-export type MenuItemClickFn = (evt: Event, cid: string | number, item: MenuItemProps) => void
-export type SetChildOpenStateFn = (cid: string | number, opened: boolean) => void
-export type SetChildSelectStateFn = (cid: string | number, selected: boolean) => void
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { MenuSubConfig } from '@idux/components/config'
+import type { MenuMode, MenuSubProps, MenuTheme } from './types'
 
 export interface MenuContext {
-  multiple: ComputedRef<boolean>
-  mode: ComputedRef<MenuMode>
+  expandedKeys: Ref<Array<string | number>>
+  handleExpand: (key: string | number, expanded: boolean) => void
+  selectedKeys: Ref<Array<string | number>>
+  handleItemClick: (key: string | number) => void
   indent: ComputedRef<number>
+  mode: ComputedRef<MenuMode>
+  multiple: ComputedRef<boolean>
   theme: ComputedRef<MenuTheme>
-  selectedIds: Ref<Array<string | number>>
-  openedIds: Ref<Array<string | number>>
-  menuItemClick: MenuItemClickFn
-  childMenuItemClick: () => void
-  setChildOpenState: SetChildOpenStateFn
 }
 
 export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')
 
 export interface MenuSubContext {
+  props: MenuSubProps
+  slots: Slots
+  config: MenuSubConfig
+  isExpanded: ComputedRef<boolean>
+  changeExpanded: (expanded: boolean) => void
+  handleExpand: (key: string | number, expanded: boolean) => void
+  handleMouseEvent: (hover: boolean) => void
+  handleSelect: (key: string | number, selected: boolean) => void
+  handleItemClick: () => void
   level: number
-  menuItemClick: MenuItemClickFn
-  setChildOpenState: SetChildOpenStateFn
-  setChildSelectState: SetChildSelectStateFn
+  mode: ComputedRef<MenuMode>
+  paddingLeft: ComputedRef<string | undefined>
+  theme: ComputedRef<MenuTheme>
 }
 
 export const menuSubToken: InjectionKey<MenuSubContext> = Symbol('menuSubToken')

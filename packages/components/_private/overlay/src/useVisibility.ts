@@ -3,6 +3,9 @@ import { ref, watch, WritableComputedRef } from 'vue'
 import { computed } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 
+/**
+ * @deprecated Please use `useMergedProp` instead
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useVisibility(props: Record<any, any>, key = 'visible'): WritableComputedRef<boolean> {
   const visible = ref<boolean>(props[key])

@@ -17,17 +17,11 @@ export default defineComponent({
     const configProps = useConfigProps(props, config)
     const visibility = ɵUseVisibility(props)
 
-    const onMouseOverlayChang = (open: boolean) => {
-      if (configProps.value.target === 'hover') {
-        visibility.value = open
-      }
+    const changeVisible = (visible: boolean) => {
+      visibility.value = visible
     }
 
-    const setMenuOpenState = (open: boolean) => {
-      visibility.value = open
-    }
-
-    provide(dropdownToken, { setMenuOpenState, onMouseOverlayChang })
+    provide(dropdownToken, { changeVisible })
 
     return () => {
       return (
@@ -36,6 +30,7 @@ export default defineComponent({
           v-slots={{ default: slots.default, content: slots.overlay }}
           class="ix-dropdown"
           delay={defaultDelay}
+          disabled={props.disabled}
           transitionName="ix-fade"
           {...configProps.value}
         />

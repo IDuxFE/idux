@@ -35,9 +35,10 @@ export default defineComponent({
       placement,
       initialize,
       update,
+      show,
       hide,
       destroy,
-    } = usePopper(popperOptions.value)
+    } = usePopper({ ...popperOptions.value, visible: props.visible })
 
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
@@ -45,11 +46,16 @@ export default defineComponent({
     watch(visibility, value => callEmit(props['onUpdate:visible'], value))
     watch(placement, value => callEmit(props['onUpdate:placement'], value))
     watch(popperOptions, options => update(options))
+    watch(
+      () => props.visible,
+      visible => (visible ? show() : hide()),
+    )
 
     const onAfterLeave = () => {
       if (props.destroyOnHide) {
         destroy()
       }
+      callEmit(props.onAfterLeave)
     }
 
     return () => {
@@ -80,8 +86,8 @@ export default defineComponent({
 
 function usePopperOptions(props: OverlayProps) {
   return computed(() => {
-    const { visible, allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
-    return { visible, allowEnter, autoAdjust, delay, disabled, offset, placement, trigger }
+    const { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
+    return { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger }
   })
 }
 

@@ -39,8 +39,11 @@ export const overlayProps = {
   target: IxPropTypes.oneOfType([String, HTMLElement]).def('ix-overlay-container'),
   transitionName: IxPropTypes.string,
   trigger: overlayTriggerDef,
+
+  // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   'onUpdate:placement': IxPropTypes.emit<(placement: PopperPlacement) => void>(),
+  onAfterLeave: IxPropTypes.emit<() => void>(),
 }
 
 export type OverlayProps = IxInnerPropTypes<typeof overlayProps>

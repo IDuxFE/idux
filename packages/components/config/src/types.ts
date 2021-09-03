@@ -70,11 +70,13 @@ export interface DropdownConfig {
 }
 
 export interface MenuConfig {
+  collapsedWidth: string | number
   indent: number
   theme: MenuTheme
 }
 
 export interface MenuSubConfig {
+  offset: [number, number]
   suffix: string
   suffixRotates: [number, number]
 }

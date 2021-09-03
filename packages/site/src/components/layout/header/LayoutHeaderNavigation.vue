@@ -1,21 +1,21 @@
 <template>
   <IxMenu class="header-menu" :selectedIds="selectedIds">
-    <IxMenuItem cid="home">
+    <IxMenuItem key="home">
       <router-link :to="'/'">
         <span>{{ lang == 'zh' ? '首页' : 'Home' }}</span>
       </router-link>
     </IxMenuItem>
-    <IxMenuItem cid="docs">
+    <IxMenuItem key="docs">
       <router-link :to="'/docs/introduce/' + lang">
         <span>{{ lang == 'zh' ? '文档' : 'Docs' }}</span>
       </router-link>
     </IxMenuItem>
-    <IxMenuItem cid="components">
+    <IxMenuItem key="components">
       <router-link :to="'/components/button/' + lang">
         <span>{{ lang == 'zh' ? '基础组件' : 'Components' }}</span>
       </router-link>
     </IxMenuItem>
-    <IxMenuItem cid="cdk">
+    <IxMenuItem key="cdk">
       <router-link :to="'/cdk/breakpoint/' + lang">
         <span>{{ lang == 'zh' ? '开发套件' : 'CDK' }}</span>
       </router-link>
