@@ -12,7 +12,7 @@ import type {
   TableProps,
 } from '../types'
 
-import { computed, nextTick, reactive, ref, watchEffect } from 'vue'
+import { computed, reactive, ref, watchEffect } from 'vue'
 import { isNil } from 'lodash-es'
 import { useScreens } from '@idux/cdk/breakpoint'
 import { convertArray } from '@idux/cdk/utils'
@@ -28,57 +28,53 @@ export function useColumns(
     mergedColumns,
     scrollBarSizeOnFixedHolder,
   )
+  const fixedColumnKeys = useFixedColumnKeys(flattedColumnsWithScrollBar)
   const hasEllipsis = computed(() => flattedColumns.value.some(column => (column as TableColumnBase).ellipsis))
   const hasFixed = computed(() => flattedColumns.value.some(column => column.fixed))
 
-  const { columnWidths, columnWidthsWithScrollBar, setColumnWidth } = useColumnWidths(flattedColumns, scrollBarColumn)
+  const { columnWidths, columnWidthsWithScrollBar, changeColumnWidth } = useColumnWidths(
+    flattedColumns,
+    scrollBarColumn,
+  )
   const { columnOffsets, columnOffsetsWithScrollBar } = useColumnOffsets(columnWidths, columnWidthsWithScrollBar)
 
   const mergedRows = computed(() => mergeRows(mergedColumns.value, scrollBarColumn.value))
-  const fixedColumnKeys = useFixedColumnKeys(flattedColumns, scrollBarColumn)
 
   return {
     flattedColumns,
     scrollBarColumn,
     flattedColumnsWithScrollBar,
+    fixedColumnKeys,
     hasEllipsis,
     hasFixed,
     columnWidths,
     columnWidthsWithScrollBar,
-    setColumnWidth,
+    changeColumnWidth,
     columnOffsets,
     columnOffsetsWithScrollBar,
-
     mergedRows,
-    fixedColumnKeys,
   }
 }
 
 export interface ColumnsContext {
   flattedColumns: ComputedRef<TableColumnMerged[]>
   scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>
-  flattedColumnsWithScrollBar: ComputedRef<(TableColumnMergedBase | TableColumnScrollBar)[]>
+  flattedColumnsWithScrollBar: ComputedRef<(TableColumnMerged | TableColumnScrollBar)[]>
+  fixedColumnKeys: ComputedRef<{
+    lastStartKey: Key | undefined
+    firstEndKey: Key | undefined
+  }>
   hasEllipsis: ComputedRef<boolean>
   hasFixed: ComputedRef<boolean>
   columnWidths: ComputedRef<number[]>
   columnWidthsWithScrollBar: ComputedRef<number[]>
-  setColumnWidth: (key: Key, width: number) => void
+  changeColumnWidth: (key: Key, width: number | false) => void
   columnOffsets: ComputedRef<{ starts: number[]; ends: number[] }>
   columnOffsetsWithScrollBar: ComputedRef<{ starts: number[]; ends: number[] }>
   mergedRows: ComputedRef<TableColumnMergedExtra[][]>
-  fixedColumnKeys: ComputedRef<{
-    firstStartKey: Key | undefined
-    lastStartKey: Key | undefined
-    firstEndKey: Key | undefined
-    lastEndKey: Key | undefined
-  }>
 }
 
-export type TableColumnMerged =
-  | TableColumnMergedBase
-  | TableColumnMergedExpandable
-  | TableColumnMergedSelectable
-  | TableColumnMergedScrollBar
+export type TableColumnMerged = TableColumnMergedBase | TableColumnMergedExpandable | TableColumnMergedSelectable
 export type TableColumnMergedExtra =
   | TableColumnMergedBaseExtra
   | TableColumnMergedExpandable
@@ -111,7 +107,7 @@ export interface TableColumnMergedSelectable extends TableColumnSelectable, Tabl
 }
 
 export interface TableColumnScrollBar {
-  key: 'scroll-bar'
+  key: string
   type: 'scroll-bar'
   fixed: TableColumnFixed | undefined
   width: number
@@ -128,7 +124,9 @@ function mergeColumns(
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => screens[key]))
-    .map((column, index) => covertColumn(column, screens, baseConfig, expandableConfig, `${parentKey}-${index}`))
+    .map((column, index) =>
+      covertColumn(column, screens, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${index}`),
+    )
 }
 
 function covertColumn(
@@ -141,13 +139,14 @@ function covertColumn(
   const { align = baseConfig.align } = column
 
   if ('type' in column) {
+    const key = `IDUX_TABLE_KEY_${column.type}`
     if (column.type === 'expandable') {
       const { childrenKey = 'children', icon = expandableConfig.icon } = column
-      return { ...column, key: column.type, align, childrenKey, icon }
+      return { ...column, key, align, childrenKey, icon }
     } else {
       // The default value for `multiple` is true
       const multiple = column.multiple ?? true
-      return { ...column, key: column.type, align, multiple }
+      return { ...column, key, align, multiple }
     }
   } else {
     const { key, dataKey, sortable, children } = column
@@ -161,52 +160,6 @@ function covertColumn(
     }
     return newColumn
   }
-}
-
-function mergeRows(mergedColumns: TableColumnMerged[], scrollBarColumn: TableColumnScrollBar | undefined) {
-  const rows: TableColumnMergedExtra[][] = []
-
-  function calculateColSpans(columns: TableColumnMerged[], colIndex: number, rowIndex: number) {
-    rows[rowIndex] ??= []
-
-    let colStart = colIndex
-    const titleColSpans = columns.map(column => {
-      let titleColSpan = column.titleColSpan ?? 1
-
-      let hasChildren = false
-      const subColumns = column.children as TableColumnMerged[] | undefined
-      if (subColumns?.length) {
-        hasChildren = true
-        const subColumnSpans = calculateColSpans(subColumns, colStart, rowIndex + 1)
-        if (isNil(column.titleColSpan)) {
-          titleColSpan = subColumnSpans.reduce((total, count) => total + count)
-        }
-      }
-
-      const colEnd = colStart + titleColSpan - 1
-      rows[rowIndex].push({ ...column, titleColSpan, colStart, colEnd, hasChildren })
-
-      colStart += titleColSpan
-
-      return titleColSpan
-    })
-
-    return titleColSpans
-  }
-
-  const rootColumns = scrollBarColumn ? [...mergedColumns, scrollBarColumn as TableColumnMerged] : mergedColumns
-  calculateColSpans(rootColumns, 0, 0)
-
-  const rowCount = rows.length
-  rows.forEach((columns, rowIndex) => {
-    columns.forEach(col => {
-      if (!col.hasChildren) {
-        col.titleRowSpan = rowCount - rowIndex
-      }
-    })
-  })
-
-  return rows
 }
 
 function useFlattedColumns(
@@ -223,7 +176,7 @@ function useFlattedColumns(
     const columns = flattedColumns.value
     const lastColumn = columns[columns.length - 1]
     return {
-      key: 'scroll-bar',
+      key: 'IDUX_TABLE_KEY_scroll-bar',
       type: 'scroll-bar',
       fixed: lastColumn && lastColumn.fixed,
       width: scrollBarSize,
@@ -259,6 +212,25 @@ function flatColumns(columns: TableColumnMerged[]) {
   return result
 }
 
+function useFixedColumnKeys(flattedColumnsWithScrollBar: ComputedRef<(TableColumnMerged | TableColumnScrollBar)[]>) {
+  return computed(() => {
+    let lastStartKey: Key | undefined
+    let firstEndKey: Key | undefined
+    flattedColumnsWithScrollBar.value.forEach(column => {
+      const { fixed, key } = column
+      if (fixed === 'start') {
+        lastStartKey = key
+      } else if (fixed === 'end') {
+        if (!firstEndKey) {
+          firstEndKey = key
+        }
+      }
+    })
+
+    return { lastStartKey, firstEndKey }
+  })
+}
+
 function useColumnWidths(
   flattedColumns: ComputedRef<TableColumnMerged[]>,
   scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>,
@@ -270,6 +242,7 @@ function useColumnWidths(
     const keys = Object.keys(widthMap)
     const columns = flattedColumns.value
     if (keys.length !== columns.length) {
+      widthString.value = undefined
       return
     }
     widthString.value = columns.map(column => widthMap[column.key]).join('-')
@@ -289,17 +262,20 @@ function useColumnWidths(
     return scrollBar ? [...widths, scrollBar.width] : widths
   })
 
-  const setColumnWidth = (key: Key, width: number) => {
-    nextTick(() => (widthMap[key] = width))
+  const changeColumnWidth = (key: Key, width: number | false) => {
+    if (width === false) {
+      delete widthMap[key]
+    } else {
+      widthMap[key] = width
+    }
   }
 
-  return { columnWidths, columnWidthsWithScrollBar, setColumnWidth }
+  return { columnWidths, columnWidthsWithScrollBar, changeColumnWidth }
 }
 
 function useColumnOffsets(columnWidths: ComputedRef<number[]>, columnWidthsWithScrollBar: ComputedRef<number[]>) {
   const columnOffsets = computed(() => calculateOffsets(columnWidths.value))
   const columnOffsetsWithScrollBar = computed(() => calculateOffsets(columnWidthsWithScrollBar.value))
-
   return { columnOffsets, columnOffsetsWithScrollBar }
 }
 
@@ -328,29 +304,50 @@ function calculateOffsets(widths: number[]) {
   }
 }
 
-function useFixedColumnKeys(
-  flattedColumns: ComputedRef<TableColumnMerged[]>,
-  scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>,
-) {
-  return computed(() => {
-    // TODO rtl
-    let firstStartKey: Key | undefined
-    let lastStartKey: Key | undefined
-    let firstEndKey: Key | undefined
-    let lastEndKey: Key | undefined
-    const barColumn = scrollBarColumn.value
-    const columns = barColumn ? [...flattedColumns.value, barColumn] : flattedColumns.value
-    columns.forEach(column => {
-      const { fixed, key } = column
-      if (fixed === 'start') {
-        lastStartKey = key
-      } else if (fixed === 'end') {
-        if (!firstEndKey) {
-          firstEndKey = key
+function mergeRows(mergedColumns: TableColumnMerged[], scrollBarColumn: TableColumnScrollBar | undefined) {
+  const rows: TableColumnMergedExtra[][] = []
+
+  function calculateColSpans(columns: TableColumnMerged[], colIndex: number, rowIndex: number) {
+    rows[rowIndex] ??= []
+
+    let colStart = colIndex
+    const titleColSpans = columns.map(column => {
+      let titleColSpan = (column as TableColumnMergedBase).titleColSpan ?? 1
+
+      let hasChildren = false
+      const subColumns = (column as TableColumnMergedBase).children as TableColumnMerged[] | undefined
+      if (subColumns?.length) {
+        hasChildren = true
+        const subColumnSpans = calculateColSpans(subColumns, colStart, rowIndex + 1)
+        if (isNil((column as TableColumnMergedBase).titleColSpan)) {
+          titleColSpan = subColumnSpans.reduce((total, count) => total + count)
         }
       }
+
+      const colEnd = colStart + titleColSpan - 1
+      rows[rowIndex].push({ ...column, titleColSpan, colStart, colEnd, hasChildren } as TableColumnMergedExtra)
+
+      colStart += titleColSpan
+
+      return titleColSpan
     })
 
-    return { firstStartKey, lastStartKey, firstEndKey, lastEndKey }
+    return titleColSpans
+  }
+
+  const rootColumns = scrollBarColumn
+    ? [...mergedColumns, scrollBarColumn as unknown as TableColumnMerged]
+    : mergedColumns
+  calculateColSpans(rootColumns, 0, 0)
+
+  const rowCount = rows.length
+  rows.forEach((columns, rowIndex) => {
+    columns.forEach(col => {
+      if (!col.hasChildren) {
+        col.titleRowSpan = rowCount - rowIndex
+      }
+    })
   })
+
+  return rows
 }

@@ -179,7 +179,7 @@ const statistic = shallowReactive<StatisticConfig>({
 
 const table = shallowReactive<TableConfig>({
   borderless: true,
-  rowKey: 'id',
+  rowKey: 'key',
   size: 'medium',
 
   extra: { icon: 'ellipsis' },

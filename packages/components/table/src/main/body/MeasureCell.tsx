@@ -9,16 +9,19 @@ export default defineComponent({
 
     const handleResize = (evt: ResizeObserverEntry) => {
       const { offsetWidth } = evt.target as HTMLTableCellElement
-      props.onCellResize(props.cellKey, offsetWidth)
+      props.changeColumnWidth(props.cellKey, offsetWidth)
     }
 
     onMounted(() => {
       const element = cellRef.value!
-      props.onCellResize(props.cellKey, element.offsetWidth)
+      props.changeColumnWidth(props.cellKey, element.offsetWidth)
       onResize(element, handleResize)
     })
 
-    onBeforeUnmount(() => offResize(cellRef.value, handleResize))
+    onBeforeUnmount(() => {
+      props.changeColumnWidth(props.cellKey, false)
+      offResize(cellRef.value, handleResize)
+    })
 
     return () => (
       <td ref={cellRef} style={{ padding: 0, border: 0, height: 0 }}>

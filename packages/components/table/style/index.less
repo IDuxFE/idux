@@ -104,7 +104,7 @@
     // TODO: Nest Table
   }
 
-  tbody > tr {
+  tr {
     &:hover {
       > td {
         background: @table-body-hover-background;
@@ -158,6 +158,30 @@
 
     &-end {
       justify-content: flex-end;
+    }
+  }
+
+  //--------- Selectable ---------
+  & &-col-selectable {
+    width: 40px;
+  }
+
+  & &-col-selectable&-selectable-with-options {
+    width: 60px;
+  }
+
+  & &-cell-selectable {
+    & > .@{idux-prefix}-dropdown-trigger {
+      margin-left: 4px;
+    }
+  }
+
+  & &-row-selected {
+    & > td {
+      background: @primary-l50;
+    }
+    &:hover > td {
+      background: darken(@primary-l50, 2%);
     }
   }
 }

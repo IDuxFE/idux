@@ -1,35 +1,56 @@
-import type { VNodeTypes } from 'vue'
+import type { ComputedRef, VNodeTypes } from 'vue'
 import type { TableColumnMerged } from '../composables/useColumns'
+import type { TableColumnSelectableOption } from '../types'
 
+import { computed, defineComponent, inject } from 'vue'
 import { convertCssPixel } from '@idux/cdk/utils'
-import { defineComponent, inject } from 'vue'
 import { tableToken } from '../token'
 
 export default defineComponent({
   props: { ixFixedHolder: Boolean },
   setup(props) {
-    const { flattedColumns, flattedColumnsWithScrollBar, columnWidths, columnWidthsWithScrollBar } = inject(tableToken)!
+    const {
+      flattedColumns,
+      flattedColumnsWithScrollBar,
+      columnWidths,
+      columnWidthsWithScrollBar,
+      mergedSelectableOptions,
+    } = inject(tableToken)!
+    const isRender = computed(() => flattedColumns.value.some(column => !!column.width || 'type' in column))
     return () => {
       const { ixFixedHolder } = props
-      const columns = ixFixedHolder ? flattedColumnsWithScrollBar.value : flattedColumns.value
-      const widths = ixFixedHolder ? columnWidthsWithScrollBar.value : columnWidths.value
 
       let children: VNodeTypes[] | undefined
-      if (widths.length) {
-        children = widths.map((width, index) => renderCol(columns[index] as TableColumnMerged, width))
-      } else {
-        if (columns.some(column => !!column.width || 'type' in column)) {
-          children = columns.map(column => renderCol(column as TableColumnMerged))
-        }
+      if (ixFixedHolder) {
+        const widths = columnWidthsWithScrollBar.value
+        children = flattedColumnsWithScrollBar.value.map((column, index) =>
+          renderCol(mergedSelectableOptions, column as TableColumnMerged, widths[index]),
+        )
+      } else if (isRender.value) {
+        const widths = columnWidths.value
+        children = flattedColumns.value.map((column, index) =>
+          renderCol(mergedSelectableOptions, column, widths[index]),
+        )
       }
       return <colgroup>{children}</colgroup>
     }
   },
 })
 
-function renderCol(column: TableColumnMerged, width?: number) {
-  const className = 'type' in column ? `ix-table-col-${column.type}` : undefined
-  const _width = width ?? column.width
-  const style = _width ? { width: convertCssPixel(_width) } : undefined
+function renderCol(
+  mergedSelectableOptions: ComputedRef<TableColumnSelectableOption[] | undefined>,
+  column: TableColumnMerged,
+  width?: number,
+) {
+  let className: string | undefined
+  if ('type' in column) {
+    const type = column.type
+    className = `ix-table-col-${type}`
+    if (type === 'selectable' && mergedSelectableOptions.value) {
+      className += ' ix-table-selectable-with-options'
+    }
+  }
+  const mergedWidth = width ?? column.width
+  const style = mergedWidth ? { width: convertCssPixel(mergedWidth) } : undefined
   return <col key={column.key} class={className} style={style}></col>
 }

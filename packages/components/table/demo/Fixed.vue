@@ -13,7 +13,7 @@
 import { TableColumn, TableScroll } from '@idux/components/table'
 
 interface Data {
-  id: number
+  key: number
   name: string
   age: number
   address: string
@@ -92,7 +92,7 @@ const columns: TableColumn<Data>[] = [
 const data: Data[] = []
 for (let i = 0; i < 100; i++) {
   data.push({
-    id: i,
+    key: i,
     name: `Edrward ${i}`,
     age: 32,
     address: `London Park no. ${i}`,

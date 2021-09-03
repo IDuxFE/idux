@@ -1,20 +1,13 @@
 import type { ComputedRef, Slots, VNodeTypes } from 'vue'
-import type { Key, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
-import type {
-  TableColumnMergedBase,
-  TableColumnMergedExpandable,
-  TableColumnMerged,
-  TableColumnMergedSelectable,
-} from '../../composables/useColumns'
+import type { Key, TableBodyCellProps, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
+import type { TableColumnMergedExpandable, TableColumnMergedSelectable } from '../../composables/useColumns'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
 import { tableToken } from '../../token'
 import { tableBodyRowProps } from '../../types'
-import BodyCol from './BodyCol'
+import BodyCell from './BodyCell'
 import BodyRowSingle from './BodyRowSingle'
-import BodyColExpandable from './BodyColExpandable'
-import BodyCollSelectable from './BodyCollSelectable'
 
 export default defineComponent({
   props: tableBodyRowProps,
@@ -25,12 +18,13 @@ export default defineComponent({
       expandable,
       handleExpandChange,
       selectable,
+      selectedRowKeys,
+      indeterminateRowKeys,
       handleSelectChange,
       currentPageRowKeys,
       bodyRowTag,
     } = inject(tableToken)!
 
-    const classes = useClasses(props, tableProps)
     const { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
       props,
       expandable,
@@ -40,8 +34,20 @@ export default defineComponent({
       currentPageRowKeys,
     )
 
+    const isSelected = computed(() => selectedRowKeys.value.includes(props.rowKey))
+    const isIndeterminate = computed(() => indeterminateRowKeys.value.includes(props.rowKey))
+
+    const classes = useClasses(props, tableProps, isSelected)
     return () => {
-      const children = renderChildren(props, expendDisabled, handleExpend, selectDisabled, handleSelect)
+      const children = renderChildren(
+        props,
+        expendDisabled,
+        handleExpend,
+        isSelected,
+        isIndeterminate,
+        selectDisabled,
+        handleSelect,
+      )
 
       const BodyRowTag = bodyRowTag.value as any
       const nodes = [
@@ -51,7 +57,7 @@ export default defineComponent({
       ]
 
       if (props.expanded) {
-        const expandedContext = renderExpandedContext(expandable.value, props, slots)
+        const expandedContext = renderExpandedContext(props, slots, expandable.value)
         expandedContext && nodes.push(expandedContext)
       }
       return nodes
@@ -59,14 +65,16 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: TableBodyRowProps, tableProps: TableProps) {
+function useClasses(props: TableBodyRowProps, tableProps: TableProps, isSelected: ComputedRef<boolean>) {
   const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.index))
   return computed(() => {
-    const prefixCls = 'ix-table'
+    const prefixCls = 'ix-table-row'
+    const { level, expanded } = props
     const computeRowClassName = rowClassName.value
-    const { level } = props
     return {
       [`${prefixCls}-level-${level}`]: level > 0,
+      [`${prefixCls}-selected`]: isSelected.value,
+      [`${prefixCls}-expanded`]: expanded,
       [computeRowClassName as string]: !!computeRowClassName,
     }
   })
@@ -141,6 +149,8 @@ function renderChildren(
   props: TableBodyRowProps,
   expendDisabled: ComputedRef<boolean>,
   handleExpend: () => void,
+  isSelected: ComputedRef<boolean>,
+  isIndeterminate: ComputedRef<boolean>,
   selectDisabled: ComputedRef<boolean>,
   handleSelect: () => void,
 ) {
@@ -152,48 +162,31 @@ function renderChildren(
     if (colSpan === 0 || rowSpan === 0) {
       return
     }
-    if (column.type === 'expandable') {
-      children.push(renderExpandCol(props, colSpan, rowSpan, expendDisabled.value, handleExpend))
-    } else if (column.type === 'selectable') {
-      children.push(renderSelectCol(props, colSpan, rowSpan, selectDisabled.value, handleSelect))
-    } else {
-      children.push(renderCol(props, column, colSpan, rowSpan))
+    const { type, ...rest } = column
+    const colProps: any = {
+      colSpan: colSpan === 1 ? undefined : colSpan,
+      rowSpan: rowSpan === 1 ? undefined : colSpan,
+      index,
+      record,
+      type,
     }
+    if (type === 'expandable') {
+      colProps.expanded = props.expanded
+      colProps.disabled = expendDisabled.value
+      colProps.handleExpend = handleExpend
+    } else if (type === 'selectable') {
+      colProps.selected = isSelected.value
+      colProps.indeterminate = isIndeterminate.value
+      colProps.disabled = selectDisabled.value
+      colProps.handleSelect = handleSelect
+    }
+    children.push(<BodyCell {...rest} {...colProps}></BodyCell>)
   })
+
   return children
 }
 
-function renderCol(
-  props: TableBodyRowProps,
-  column: TableColumnMergedBase,
-  colSpan: number | undefined,
-  rowSpan: number | undefined,
-) {
-  const { index, record } = props
-  const colProps = {
-    ...column,
-    index,
-    record,
-    colSpan,
-    rowSpan,
-  }
-  return <BodyCol {...colProps}></BodyCol>
-}
-
-function renderExpandCol(
-  props: TableBodyRowProps,
-  colSpan: number | undefined,
-  rowSpan: number | undefined,
-  disabled: boolean,
-  handleExpend: () => void,
-) {
-  const { index, expanded, record, rowKey } = props
-  const key = `${rowKey}-EXPAND`
-  const colProps = { index, expanded, key, record, colSpan, rowSpan, handleExpend, disabled }
-  return <BodyColExpandable {...colProps}></BodyColExpandable>
-}
-
-function renderExpandedContext(expandable: TableColumnExpandable | undefined, props: TableBodyRowProps, slots: Slots) {
+function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
   const { customExpand } = expandable || {}
   const { record, index } = props
   let expandedContext: VNodeTypes | null = null
@@ -203,17 +196,4 @@ function renderExpandedContext(expandable: TableColumnExpandable | undefined, pr
     expandedContext = slots[customExpand]!({ record, index })
   }
   return expandedContext ? <BodyRowSingle>{expandedContext}</BodyRowSingle> : null
-}
-
-function renderSelectCol(
-  props: TableBodyRowProps,
-  colSpan: number | undefined,
-  rowSpan: number | undefined,
-  disabled: boolean,
-  handleSelect: () => void,
-) {
-  const { rowKey } = props
-  const key = `${rowKey}-SELECT`
-  const colProps = { key, colSpan, rowSpan, rowKey, disabled, handleSelect }
-  return <BodyCollSelectable {...colProps}></BodyCollSelectable>
 }

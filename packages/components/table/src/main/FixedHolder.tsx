@@ -1,5 +1,4 @@
 import type { Ref, StyleValue } from 'vue'
-import type { ScrollOptions } from '../composables/useScroll'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 import { off, on } from '@idux/cdk/utils'
@@ -55,16 +54,18 @@ export default defineComponent({
 
 function useScrollEvents(
   scrollHeadRef: Ref<HTMLDivElement | undefined>,
-  handleScroll: (options: ScrollOptions) => void,
+  handleScroll: (evt?: Event, scrollLeft?: number) => void,
 ) {
   const onWheel = (evt: WheelEvent) => {
-    const { currentTarget, deltaX } = evt
+    const deltaX = evt.deltaX
+    const currentTarget = evt.currentTarget as HTMLDivElement
     if (deltaX) {
-      handleScroll({ currentTarget, scrollLeft: currentTarget.scrollLeft + deltaX })
+      const scrollLeft = currentTarget.scrollLeft + deltaX
+      handleScroll(evt, scrollLeft)
       evt.preventDefault()
     }
   }
 
-  onMounted(() => on(scrollHeadRef.value, 'wheel', onWheel))
+  onMounted(() => on(scrollHeadRef.value, 'wheel', onWheel, { passive: true }))
   onBeforeUnmount(() => off(scrollHeadRef.value, 'wheel', onWheel))
 }

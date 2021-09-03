@@ -4,7 +4,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup() {
     return () => {
-      return <tfoot class="ix-table-tfoot"></tfoot>
+      return <tfoot></tfoot>
     }
   },
 })

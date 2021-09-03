@@ -1,30 +1,22 @@
-import {
-  computed,
-  defineComponent,
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  provide,
-  ref,
-  StyleValue,
-  VNodeTypes,
-  watch,
-} from 'vue'
+import type { StyleValue, VNodeTypes } from 'vue'
+
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
+import { isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
 import { tableBodyToken, tableToken } from '../token'
-import { Key } from '../types'
 import ColGroup from './ColGroup'
 import Head from './head/Head'
 import Body from './body/Body'
 import Foot from './tfoot/Foot'
-import { isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
+import { Key } from '../types'
 
 export default defineComponent({
   setup() {
     const {
       props,
       config,
+      changeColumnWidth,
       isSticky,
       scrollBodyRef,
       handleScroll,
@@ -35,7 +27,6 @@ export default defineComponent({
       scrollHorizontal,
       scrollVertical,
       hasFixed,
-      setColumnWidth,
       tableLayout,
       tableTag,
     } = inject(tableToken)!
@@ -43,18 +34,18 @@ export default defineComponent({
     const mainTableRef = ref<HTMLDivElement>()
     const mainTableWidth = ref(0)
 
-    const onCellResize = (key: Key, width: number) => {
+    const _changeColumnWidth = (key: Key, width: number | false) => {
       if (isVisibleElement(mainTableRef.value)) {
-        setColumnWidth(key, width)
+        changeColumnWidth(key, width)
       }
     }
 
-    provide(tableBodyToken, { onCellResize })
+    provide(tableBodyToken, { mainTableWidth, changeColumnWidth: _changeColumnWidth })
 
     const triggerScroll = () => {
       const currentTarget = scrollBodyRef.value
       if (currentTarget) {
-        handleScroll({ currentTarget })
+        handleScroll({ currentTarget } as unknown as Event)
       }
     }
 
@@ -75,18 +66,14 @@ export default defineComponent({
         }
       })
 
-      const element = mainTableRef.value!
-      watch(
-        scrollHorizontal,
-        value => {
-          if (value) {
-            onResize(element, handleWrapperResize)
-          } else {
-            offResize(element, handleWrapperResize)
-          }
-        },
-        { immediate: true },
-      )
+      watchEffect(() => {
+        const element = mainTableRef.value
+        if (scrollHorizontal.value) {
+          onResize(element, handleWrapperResize)
+        } else {
+          offResize(element, handleWrapperResize)
+        }
+      })
     })
 
     onBeforeUnmount(() => offResize(mainTableRef.value, handleWrapperResize))

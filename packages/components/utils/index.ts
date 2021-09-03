@@ -1,5 +1,4 @@
 export * from './src/colors'
 export * from './src/propsHandler'
-export * from './src/useAttrs'
 export * from './src/useKey'
 export * from './src/useMergedProp'

@@ -50,9 +50,9 @@ export interface TableColumnCommon<T = unknown> {
   }
   align?: TableColumnAlign
   colSpan?: (record: T, index: number) => number
+  rowSpan?: (record: T, index: number) => number
   fixed?: TableColumnFixed
   responsive?: BreakpointKey[]
-  rowSpan?: (record: T, index: number) => number
   titleColSpan?: number
   width?: string | number
 }
@@ -64,9 +64,7 @@ export interface TableColumnBase<T = unknown> extends TableColumnCommon<T> {
   key?: Key
   sortable?: TableColumnSortable<T>
   title?: string
-
-  children?: TableColumnBase<T>[]
-
+  children?: TableColumn<T>[]
   customRender?: string | TableColumnRenderFn<any, T>
   customTitle?: string | TableColumnTitleFn
 }
@@ -107,7 +105,7 @@ export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T>
 
   disabled?: (record: T) => boolean
   multiple?: boolean
-  options?: boolean | TableColumnSelectableOption[]
+  options?: ('all' | 'invert' | 'none' | 'pageInvert' | TableColumnSelectableOption)[]
 
   trigger?: 'click' | 'dblclick'
 
@@ -116,12 +114,13 @@ export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T>
   onSelectAll?: (selectedRowKeys: Key[]) => void
   onSelectInvert?: (selectedRowKeys: Key[]) => void
   onSelectNone?: () => void
+  onSelectPageInvert?: (selectedRowKeys: Key[]) => void
 }
 
 export interface TableColumnSelectableOption {
   key: Key
-  text: string
-  onClick: (selectedRowKeys: Key[]) => void
+  label: string
+  onClick: (currentPageRowKeys: Key[]) => void
 }
 
 export interface TableExtra {
@@ -185,26 +184,18 @@ export const tableHeadRowProps = {
 
 export type TableHeadRowProps = IxInnerPropTypes<typeof tableHeadRowProps>
 
-export const tableHeadColProps = {
+export const tableHeadCellProps = {
   additional: IxPropTypes.object(),
-  align: IxPropTypes.oneOf<TableColumnAlign>(['start', 'center', 'end']),
-  cellKey: IxPropTypes.oneOfType([String, Number]).isRequired,
-  colSpan: IxPropTypes.number,
-  rowSpan: IxPropTypes.number,
-  colStart: IxPropTypes.number.isRequired,
-  colEnd: IxPropTypes.number.isRequired,
   ellipsis: IxPropTypes.bool,
-  fixed: IxPropTypes.oneOf<TableColumnFixed>(['start', 'end']),
-  hasChildren: IxPropTypes.bool,
   title: IxPropTypes.string,
-
   customTitle: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnTitleFn>()]),
+  type: IxPropTypes.oneOf(['expandable', 'selectable', 'scroll-bar'] as const),
 }
 
-export type TableHeadColProps = IxInnerPropTypes<typeof tableHeadColProps>
+export type TableHeadCellProps = IxInnerPropTypes<typeof tableHeadCellProps>
 
 export const tableBodyRowProps = {
-  columns: IxPropTypes.array(),
+  columns: IxPropTypes.array<TableColumnMerged>().isRequired,
   expanded: IxPropTypes.bool.isRequired,
   index: IxPropTypes.number.isRequired,
   level: IxPropTypes.number.isRequired,
@@ -214,51 +205,30 @@ export const tableBodyRowProps = {
 
 export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
 
-export const tableBodyColProps = {
+export const tableBodyCellProps = {
   additional: IxPropTypes.object(),
-  colSpan: IxPropTypes.number,
-  rowSpan: IxPropTypes.number,
   dataKey: IxPropTypes.oneOfType([String, Number, IxPropTypes.array<Key>()]),
   ellipsis: IxPropTypes.bool,
   index: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
-
   customRender: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnRenderFn>()]),
+
+  type: IxPropTypes.oneOf(['expandable', 'selectable'] as const),
+  disabled: IxPropTypes.bool,
+
+  expanded: IxPropTypes.bool,
+  handleExpend: IxPropTypes.func<() => void>(),
+
+  selected: IxPropTypes.bool,
+  indeterminate: IxPropTypes.bool,
+  handleSelect: IxPropTypes.func<() => void>(),
 }
 
-export type TableBodyColProps = IxInnerPropTypes<typeof tableBodyColProps>
-
-export const tableBodyColExpandableProps = {
-  colSpan: IxPropTypes.number,
-  rowSpan: IxPropTypes.number,
-  disabled: IxPropTypes.bool.isRequired,
-  expanded: IxPropTypes.bool.isRequired,
-  index: IxPropTypes.number.isRequired,
-  handleExpend: IxPropTypes.func<() => void>().isRequired,
-  record: IxPropTypes.any.isRequired,
-}
-
-export type TableBodyColExpandableProps = IxInnerPropTypes<typeof tableBodyColExpandableProps>
-
-export const tableBodyColSelectableProps = {
-  colSpan: IxPropTypes.number,
-  disabled: IxPropTypes.bool.isRequired,
-  rowSpan: IxPropTypes.number,
-  rowKey: IxPropTypes.oneOfType([String, Number]).isRequired,
-  handleSelect: IxPropTypes.func<() => void>().isRequired,
-}
-
-export type TableBodyColSelectableProps = IxInnerPropTypes<typeof tableBodyColSelectableProps>
+export type TableBodyCellProps = IxInnerPropTypes<typeof tableBodyCellProps>
 
 export const tableMeasureCellProps = {
   cellKey: IxPropTypes.oneOfType([String, Number]).isRequired,
-  onCellResize: IxPropTypes.func<(key: Key, width: number) => void>().isRequired,
+  changeColumnWidth: IxPropTypes.func<(key: Key, width: number | false) => void>().isRequired,
 }
 
 export type TableMeasureCellProps = IxInnerPropTypes<typeof tableMeasureCellProps>
-
-export const tableColGroupProps = {
-  columns: IxPropTypes.array<TableColumnMerged>().isRequired,
-}
-
-export type TableColGroupProps = IxInnerPropTypes<typeof tableColGroupProps>

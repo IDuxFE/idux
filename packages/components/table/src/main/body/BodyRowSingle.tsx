@@ -10,9 +10,7 @@ export default defineComponent({
       const BodyColTag = bodyColTag.value as any
       return (
         <BodyRowTag>
-          <BodyColTag class="ix-table-cell" colSpan={columnCount.value}>
-            {slots.default?.()}
-          </BodyColTag>
+          <BodyColTag colSpan={columnCount.value}>{slots.default?.()}</BodyColTag>
         </BodyRowTag>
       )
     }

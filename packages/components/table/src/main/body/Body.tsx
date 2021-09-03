@@ -1,4 +1,5 @@
-import type { StyleValue, VNodeTypes } from 'vue'
+import type { ComputedRef, StyleValue, VNodeTypes } from 'vue'
+import type { TableColumnMerged } from '../../composables/useColumns'
 import type { Key } from '../../types'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -26,26 +27,7 @@ export default defineComponent({
     } = inject(tableToken)!
 
     const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
-    const bodyColumns = computed(() => {
-      return flattedColumns.value.map((column, index) => {
-        const { key, fixed, align, ellipsis, additional, colSpan, rowSpan, customRender, dataKey, type } = column
-        const prefixCls = 'ix-table'
-        let classes: Record<string, boolean | string | undefined> = {
-          [`${prefixCls}-cell`]: true,
-          [`${prefixCls}-align-${align}`]: align,
-          [`${prefixCls}-ellipsis`]: ellipsis,
-        }
-        let style: StyleValue | undefined
-        if (fixed) {
-          classes = {
-            ...classes,
-            ...getFixedClasses(prefixCls, fixedColumnKeys.value, fixed, key, isSticky.value),
-          }
-          style = getFixedStyle(columnOffsets.value, fixed, index)
-        }
-        return { key, class: classes, style, additional, colSpan, rowSpan, customRender, ellipsis, dataKey, type }
-      })
-    })
+    const bodyColumns = useBodyColumns(flattedColumns, fixedColumnKeys, columnOffsets, isSticky)
 
     return () => {
       let children: VNodeTypes[] = []
@@ -81,36 +63,47 @@ export default defineComponent({
   },
 })
 
-function getFixedClasses(
-  prefixCls: string,
-  fixedColumnKeys: { firstStartKey?: Key; lastStartKey?: Key; firstEndKey?: Key; lastEndKey?: Key },
-  fixed: 'start' | 'end',
-  key: Key,
-  isSticky: boolean,
+function useBodyColumns(
+  flattedColumns: ComputedRef<TableColumnMerged[]>,
+  fixedColumnKeys: ComputedRef<{
+    lastStartKey: Key | undefined
+    firstEndKey: Key | undefined
+  }>,
+  columnOffsets: ComputedRef<{
+    starts: number[]
+    ends: number[]
+  }>,
+  isSticky: ComputedRef<boolean>,
 ) {
-  const { firstStartKey, lastStartKey, firstEndKey, lastEndKey } = fixedColumnKeys
-  return {
-    [`${prefixCls}-fix-start`]: fixed === 'start',
-    [`${prefixCls}-fix-start-first`]: firstStartKey === key,
-    [`${prefixCls}-fix-start-last`]: lastStartKey === key,
-    [`${prefixCls}-fix-end`]: fixed === 'end',
-    [`${prefixCls}-fix-end-first`]: firstEndKey === key,
-    [`${prefixCls}-fix-end-last`]: lastEndKey === key,
-    [`${prefixCls}-fix-sticky`]: isSticky,
-  }
-}
-
-function getFixedStyle(
-  columnOffsets: { starts: number[]; ends: number[] },
-  fixed: 'start' | 'end',
-  index: number,
-): StyleValue {
-  const { starts, ends } = columnOffsets
-  const offsets = fixed === 'start' ? starts : ends
-  const fixedOffset = convertCssPixel(offsets[index])
-  return {
-    position: 'sticky',
-    left: fixed === 'start' ? fixedOffset : undefined,
-    right: fixed === 'end' ? fixedOffset : undefined,
-  }
+  return computed(() =>
+    flattedColumns.value.map((column, index) => {
+      const { key, fixed, align, ellipsis, additional, colSpan, rowSpan, customRender, dataKey, type } = column
+      const prefixCls = 'ix-table'
+      let classes: Record<string, boolean | string | undefined> = {
+        [`${prefixCls}-align-${align}`]: align,
+        [`${prefixCls}-ellipsis`]: ellipsis,
+      }
+      let style: StyleValue | undefined
+      if (fixed) {
+        const { lastStartKey, firstEndKey } = fixedColumnKeys.value
+        classes = {
+          ...classes,
+          [`${prefixCls}-fix-start`]: fixed === 'start',
+          [`${prefixCls}-fix-start-last`]: lastStartKey === key,
+          [`${prefixCls}-fix-end`]: fixed === 'end',
+          [`${prefixCls}-fix-end-first`]: firstEndKey === key,
+          [`${prefixCls}-fix-sticky`]: isSticky.value,
+        }
+        const { starts, ends } = columnOffsets.value
+        const offsets = fixed === 'start' ? starts : ends
+        const fixedOffset = convertCssPixel(offsets[index])
+        style = {
+          position: 'sticky',
+          left: fixed === 'start' ? fixedOffset : undefined,
+          right: fixed === 'end' ? fixedOffset : undefined,
+        }
+      }
+      return { key, class: classes, style, additional, colSpan, rowSpan, customRender, ellipsis, dataKey, type }
+    }),
+  )
 }
