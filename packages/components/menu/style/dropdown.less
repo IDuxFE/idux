@@ -5,7 +5,6 @@
     background-color: @menu-bg-color;
     border-radius: @menu-overlay-border-radius;
     box-shadow: @menu-overlay-box-shadow;
-    transition: background-color @transition-duration-slow, width @transition-duration-slow;
 
     &.@{menu-prefix}-vertical,
     &.@{menu-prefix}-inline {
@@ -23,7 +22,7 @@
       .@{menu-prefix}-item,
       .@{menu-prefix}-sub {
         &:hover,
-        &-opened,
+        &-expanded,
         &-selected {
           border-color: transparent;
         }

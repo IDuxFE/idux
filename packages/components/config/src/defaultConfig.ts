@@ -75,11 +75,13 @@ const dropdown = shallowReactive<DropdownConfig>({
 })
 
 const menu = shallowReactive<MenuConfig>({
+  collapsedWidth: 64,
   indent: 24,
   theme: 'light',
 })
 
 const menuSub = shallowReactive<MenuSubConfig>({
+  offset: [0, 8],
   suffix: 'right',
   suffixRotates: [-90, 90],
 })

@@ -1,5 +1,7 @@
 @import '../../style/themes/default.less';
+@import '../../style/motion/fade.less';
 @import '../../style/mixins/ellipsis.less';
+@import '../../_private/collapse-transition/style/index.less';
 @import './menu.less';
 @import './dark.less';
 @import './collapsed.less';
@@ -8,8 +10,11 @@
 @menu-prefix: ~'@{idux-prefix}-menu';
 
 .@{menu-prefix} {
+  transition: background @transition-duration-base, width @transition-duration-base;
+
   &-vertical,
   &-inline {
+    width: 100%;
     padding: 0.02px 0;
     border-right: @menu-border-width @menu-border-style @menu-border-color;
 
@@ -28,7 +33,7 @@
         content: '';
         transform: scaleY(0);
         opacity: 0;
-        transition: transform @transition-duration-base @ease-out, opacity @transition-duration-base @ease-out;
+        transition: transform @transition-duration-base @ease-in-out, opacity @transition-duration-base @ease-in-out;
       }
       &-selected {
         &::after {
@@ -46,7 +51,7 @@
 
   &-vertical,
   &-horizontal {
-    .@{menu-prefix}-sub-opened {
+    .@{menu-prefix}-sub-expanded {
       color: @menu-highlight-color;
       .@{menu-prefix}-sub-title a {
         color: @menu-highlight-color;
@@ -64,10 +69,10 @@
       vertical-align: bottom;
       margin: 0 @menu-item-padding-left;
       border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
-      transition: border @transition-duration-base @ease-out;
+      transition: border @transition-duration-base @ease-in-out;
 
       &:hover,
-      &-opened,
+      &-expanded,
       &-selected {
         border-color: @menu-highlight-color;
       }
