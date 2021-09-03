@@ -1,14 +1,18 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { HeaderProps } from '@idux/components/header'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type ActiveKeyType = string | Array<string>
-
 export const collapseProps = {
+  expandedKeys: IxPropTypes.array<string | number>().def(() => []),
   accordion: IxPropTypes.bool,
-  active: IxPropTypes.oneOfType([String, IxPropTypes.arrayOf(String)]).def([]),
-  borderless: IxPropTypes.bool.def(false),
+  borderless: IxPropTypes.bool,
+  expandIcon: IxPropTypes.string,
+  ghost: IxPropTypes.bool,
+
+  // events
+  'onUpdate:expandedKeys': IxPropTypes.emit<(activeKeys: (string | number)[]) => void>(),
 }
 
 export type CollapseProps = IxInnerPropTypes<typeof collapseProps>
@@ -17,10 +21,8 @@ export type CollapseComponent = DefineComponent<HTMLAttributes & typeof collapse
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
 export const collapsePanelProps = {
-  name: IxPropTypes.string.isRequired,
-  title: IxPropTypes.string,
   disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.arrayOf(String),
+  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
 }
 
 export type CollapsePanelProps = IxInnerPropTypes<typeof collapsePanelProps>

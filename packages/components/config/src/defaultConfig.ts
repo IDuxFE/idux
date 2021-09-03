@@ -163,7 +163,12 @@ const list = shallowReactive<ListConfig>({
   borderless: true,
 })
 
-const collapse: CollapseConfig = shallowReactive<CollapseConfig>({ accordion: false })
+const collapse: CollapseConfig = shallowReactive<CollapseConfig>({
+  accordion: false,
+  borderless: false,
+  expandIcon: 'right',
+  ghost: false,
+})
 
 const image: ImageConfig = shallowReactive({
   width: 100,

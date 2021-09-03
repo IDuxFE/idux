@@ -8,6 +8,7 @@ export type HeaderSize = 'xLarge' | 'large' | 'medium' | 'small'
 
 export const headerProps = {
   avatar: IxPropTypes.oneOfType([String, IxPropTypes.object<AvatarProps>()]),
+  disabled: IxPropTypes.bool.def(false),
   prefix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   size: IxPropTypes.oneOf<HeaderSize>(['xLarge', 'large', 'medium', 'small']).def('large'),
   showBar: IxPropTypes.bool.def(false),

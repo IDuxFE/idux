@@ -1,52 +1,85 @@
 @import '../../style/themes/default.less';
-@import '../../style/motion/slide.less';
+@import '../../_private/collapse-transition/style/index.less';
 
 @collapse-prefix: ~'@{idux-prefix}-collapse';
+@collapse-panel-prefix: ~'@{idux-prefix}-collapse-panel';
 
 .@{collapse-prefix} {
-  border-bottom: @collapse-panel-border-style;
-
-  &-panel-disabled {
-    color: @collapse-panel-disabled-color;
-    background-color: @collapse-panel-disabled-bg-color;
-  }
-
-  &-panel-header {
-    height: @collapse-panel-line-hight;
-    line-height: @collapse-panel-line-hight;
-    border: @collapse-panel-border-style;
-    background-color: @collapse-panel-header-bg-color;
-    cursor: pointer;
-
-    &-content {
-      padding: @collapse-panel-content-padding;
-      border-left: @collapse-panel-border-style;
-      border-right: @collapse-panel-border-style;
-
-      &-borderless {
-        border: none;
-      }
-    }
-
-    &-inactive {
-      border-bottom: none;
-    }
-
-    &-borderless {
-      border: none;
-    }
-
-    &-disabled {
-      cursor: not-allowed;
-    }
-  }
+  line-height: @collapse-line-height;
+  font-size: @font-size-md;
+  color: @collapse-color;
+  background-color: @grey-l50;
+  border: @collapse-border;
+  border-bottom: 0;
+  border-radius: @collapse-border-radius;
 
   &-borderless {
-    border: none;
+    border: 0;
+    .@{collapse-panel-prefix}-content {
+      border-top: 0;
+      background-color: transparent;
+    }
   }
 
-  &-panel-icon {
-    font-size: @collapse-panel-font-size;
-    padding: @collapse-panel-content-padding;
+  &-ghost {
+    border: 0;
+    background-color: transparent;
+
+    .@{collapse-panel-prefix} {
+      border-bottom: 0;
+
+      .@{idux-prefix}-header {
+        background-color: transparent;
+      }
+
+      &-content {
+        border-top: 0;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &-borderless,
+  &-ghost {
+    .@{collapse-panel-prefix}-content-box {
+      padding-top: @collapse-panel-content-padding-top-compact;
+    }
+  }
+
+  .@{collapse-panel-prefix}:last-child {
+    border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
+  }
+}
+
+.@{collapse-panel-prefix} {
+  border-bottom: @collapse-border;
+  background-color: @collapse-panel-content-background-color;
+
+  .@{idux-prefix}-header {
+    padding: @collapse-panel-header-padding;
+    background-color: @collapse-background-color;
+    cursor: pointer;
+
+    &-prefix {
+      font-size: @collapse-panel-header-prefix-font-size;
+      border-right: none;
+    }
+
+    &-title {
+      font-size: @collapse-panel-header-font-size;
+      font-weight: @collapse-panel-header-font-weight;
+    }
+  }
+
+  &-content {
+    border-top: @collapse-border;
+
+    &-box {
+      padding: @collapse-panel-content-padding;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
   }
 }

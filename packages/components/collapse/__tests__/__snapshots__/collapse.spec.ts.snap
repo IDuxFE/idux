@@ -1,28 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Collapse.vue and CollapsePanel render work 1`] = `
+exports[`Collapse panel work header work 1`] = `
 "<div class=\\"ix-collapse\\">
   <div class=\\"ix-collapse-panel\\">
-    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+    <div class=\\"ix-header ix-header-medium\\">
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+        <!----><span class=\\"ix-header-title\\">header 0</span>
+        <!---->
+        <!---->
+      </div>
+      <!---->
+    </div>
     <transition-stub>
-      <div style=\\"display: none;\\">
-        <div class=\\"ix-collapse-panel-header-content\\"> name1 </div>
+      <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-content-box\\">
+          <!---->
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Collapse panel work header work 2`] = `
+"<div class=\\"ix-collapse\\">
+  <div class=\\"ix-collapse-panel\\">
+    <div class=\\"ix-header ix-header-medium\\">
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"64 64 896 896\\" width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" fill=\\"currentColor\\" aria-hidden=\\"true\\" data-icon=\\"right\\" style=\\"transform: rotate(0deg)\\">
+              <path d=\\"M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z\\"></path>
+            </svg></i></div>
+        <!----><span class=\\"ix-header-title\\">hello header</span>
+        <!---->
+        <div class=\\"ix-header-suffix\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"64 64 896 896\\" width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" fill=\\"currentColor\\" aria-hidden=\\"true\\" data-icon=\\"left\\">
+              <path d=\\"M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z\\"></path>
+            </svg></i></div>
+      </div>
+      <!---->
+    </div>
+    <transition-stub>
+      <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-content-box\\">
+          <!---->
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+</div>"
+`;
+
+exports[`Collapse render work 1`] = `
+"<div class=\\"ix-collapse\\">
+  <div class=\\"ix-collapse-panel\\">
+    <div class=\\"ix-header ix-header-medium\\">
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+        <!----><span class=\\"ix-header-title\\">header 0</span>
+        <!---->
+        <!---->
+      </div>
+      <!---->
+    </div>
+    <transition-stub>
+      <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-content-box\\">
+          <!---->
+        </div>
+      </div>
+    </transition-stub>
+  </div>
+  <div class=\\"ix-collapse-panel ix-collapse-panel-expanded\\">
+    <div class=\\"ix-header ix-header-medium\\">
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+        <!----><span class=\\"ix-header-title\\">header 1</span>
+        <!---->
+        <!---->
+      </div>
+      <!---->
+    </div>
+    <transition-stub>
+      <div class=\\"ix-collapse-panel-content\\">
+        <div class=\\"ix-collapse-panel-content-box\\">
+          <!---->
+        </div>
       </div>
     </transition-stub>
   </div>
   <div class=\\"ix-collapse-panel\\">
-    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
-    <transition-stub>
-      <div style=\\"display: none;\\">
-        <div class=\\"ix-collapse-panel-header-content\\"> name2 </div>
+    <div class=\\"ix-header ix-header-medium\\">
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+        <!----><span class=\\"ix-header-title\\">header 2</span>
+        <!---->
+        <!---->
       </div>
-    </transition-stub>
-  </div>
-  <div class=\\"ix-collapse-panel\\">
-    <div class=\\"ix-collapse-panel-header ix-collapse-panel-header-inactive\\"><i class=\\"ix-icon ix-icon-right ix-collapse-panel-icon\\" role=\\"img\\" aria-label=\\"right\\"></i></div>
+      <!---->
+    </div>
     <transition-stub>
-      <div style=\\"display: none;\\">
-        <div class=\\"ix-collapse-panel-header-content\\"> name3 </div>
+      <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
+        <div class=\\"ix-collapse-panel-content-box\\">
+          <!---->
+        </div>
       </div>
     </transition-stub>
   </div>
