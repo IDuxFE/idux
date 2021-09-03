@@ -30,11 +30,11 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const rootMenuSubIds = ['sub1', 'sub2', 'sub3']
+    const rootMenuSubKeys = ['sub1', 'sub2', 'sub3']
     const expandedKeys = ref<string[]>([])
     const onExpandedChange = (keys: string[]) => {
       const lastExpandedKey = keys.find(key => !expandedKeys.value.includes(key))
-      if (rootMenuSubIds.indexOf(lastExpandedKey!) === -1) {
+      if (rootMenuSubKeys.indexOf(lastExpandedKey!) === -1) {
         expandedKeys.value = keys
       } else {
         expandedKeys.value = lastExpandedKey ? [lastExpandedKey] : []

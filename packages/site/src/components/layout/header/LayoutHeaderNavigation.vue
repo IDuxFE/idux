@@ -1,5 +1,5 @@
 <template>
-  <IxMenu class="header-menu" :selectedIds="selectedIds">
+  <IxMenu class="header-menu" :selectedKeys="selectedKeys">
     <IxMenuItem key="home">
       <router-link :to="'/'">
         <span>{{ lang == 'zh' ? '首页' : 'Home' }}</span>
@@ -38,12 +38,12 @@ import { appContextToken } from '../../../context'
 export default defineComponent({
   setup() {
     const { lang, page, screens, org, repo } = inject(appContextToken)!
-    const selectedIds = computed(() => [page.value])
+    const selectedKeys = computed(() => [page.value])
     const isXs = computed(() => screens.xs)
     const isSm = computed(() => screens.sm)
 
     const githubUrl = computed(() => `https://github.com/${org}/${repo}`)
-    return { lang, selectedIds, page, isXs, isSm, githubUrl }
+    return { lang, selectedKeys, isXs, isSm, githubUrl }
   },
 })
 </script>

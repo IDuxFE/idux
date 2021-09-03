@@ -41,7 +41,7 @@ export type ControlPathType = string | number | Array<string | number>
 
 let controlId = 0
 export abstract class AbstractControl<T = any> {
-  readonly id: number = controlId++
+  readonly uid: number = controlId++
   /**
    * A collection of child controls.
    */

@@ -12,6 +12,7 @@ export interface CardCover {
   srcset: string
 }
 export interface CardButtonProps extends ButtonProps {
+  key?: string | number
   // 按钮的文本
   text?: string
   // 是否显示该按钮, 默认为 true

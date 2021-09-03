@@ -679,11 +679,11 @@ describe('Select', () => {
       selectProps = reactive({
         value: 'tom',
         labelKey: 'text',
-        valueKey: 'id',
+        valueKey: 'key',
         options: [
-          { text: 'Tom', id: 'tom' },
-          { text: 'Jerry', id: 'jerry' },
-          { text: 'Speike', id: 'speike', disabled: true },
+          { text: 'Tom', key: 'tom' },
+          { text: 'Jerry', key: 'jerry' },
+          { text: 'Speike', key: 'speike', disabled: true },
         ],
       })
       initSelect(selectProps)

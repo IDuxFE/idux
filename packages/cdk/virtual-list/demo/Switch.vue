@@ -1,5 +1,5 @@
 <template>
-  <IxVirtualList :data="data" :height="height" itemKey="id" :itemHeight="20" :itemRender="itemRender"> </IxVirtualList>
+  <IxVirtualList :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender"> </IxVirtualList>
 
   <IxSpace>
     DataLength:
@@ -23,7 +23,7 @@
   <IxSpace>
     ItemRender:
     <IxRadioGroup v-model:value="switchItemRender">
-      <IxRadio :value="true">ID</IxRadio>
+      <IxRadio :value="true">Key</IxRadio>
       <IxRadio :value="false">Index</IxRadio>
     </IxRadioGroup>
   </IxSpace>
@@ -33,10 +33,10 @@
 import { computed, defineComponent, h, ref } from 'vue'
 import { VirtualListInstance, VirtualItemRenderFn } from '@idux/cdk/virtual-list'
 
-const getData = (length: number, key = 'id') => {
-  const data: { id: string }[] = []
+const getData = (length: number, key = 'key') => {
+  const data: { key: string }[] = []
   for (let index = 0; index < length; index++) {
-    data.push({ id: `${key}-${index}` })
+    data.push({ key: `${key}-${index}` })
   }
   return data
 }
@@ -50,7 +50,7 @@ export default defineComponent({
     const switchItemRender = ref(false)
     const itemRender = computed<VirtualItemRenderFn>(() => {
       if (switchItemRender.value) {
-        return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.id}`])
+        return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.key}`])
       } else {
         return ({ index }) => h('span', { style: { height: '20px', paddingLeft: '8px' } }, [`index-${index}`])
       }

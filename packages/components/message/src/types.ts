@@ -6,12 +6,12 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
 export interface MessageOptions extends MessagePublicProps {
-  id?: string
+  key?: string
   content?: string | VNode
   onDestroy?: () => void
 }
 export interface MessageRef {
-  id: string
+  key: string
   update: (options: MessageOptions) => void
   destroy: () => void
 }
@@ -43,8 +43,8 @@ export interface MessageProviderRef {
   warning: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   error: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   loading: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  update: (id: string, options: MessageOptions) => void
-  destroy: (id: string | string[]) => void
+  update: (key: string, options: MessageOptions) => void
+  destroy: (key: string | string[]) => void
   destroyAll: () => void
 }
 
