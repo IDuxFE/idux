@@ -1,5 +1,5 @@
 <template>
-  <IxSelect v-model:value="singleValue" :options="options" labelKey="text" valueKey="id"> </IxSelect>
+  <IxSelect v-model:value="singleValue" :options="options" labelKey="text" valueKey="key"> </IxSelect>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -9,9 +9,9 @@ export default defineComponent({
     const singleValue = ref('tom')
 
     const options = [
-      { text: 'Tom', id: 'tom' },
-      { text: 'Jerry', id: 'jerry' },
-      { text: 'Speike', id: 'speike', disabled: true },
+      { text: 'Tom', key: 'tom' },
+      { text: 'Jerry', key: 'jerry' },
+      { text: 'Speike', key: 'speike', disabled: true },
     ]
 
     return { singleValue, options }

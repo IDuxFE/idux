@@ -15,23 +15,23 @@ export default defineComponent({
   setup() {
     const { info, destroyAll, destroy } = useMessage()
     let count = 0
-    let messageId: string
+    let messageKey: string
     const open = () => {
       const content = `click count: ${count++}`
-      if (!messageId) {
+      if (!messageKey) {
         const instance = info(content)
-        messageId = instance.id
+        messageKey = instance.key
       } else {
-        info(content, { id: messageId })
+        info(content, { key: messageKey })
       }
     }
 
     let countCustomized = 0
-    const customizedId = 'ix-message-key-only'
+    const customizedKey = 'ix-message-key-only'
     const customizeOpen = () => {
-      info(`click count: ${countCustomized++}`, { id: customizedId })
+      info(`click count: ${countCustomized++}`, { key: customizedKey })
     }
-    const destroyCustomized = () => destroy(customizedId)
+    const destroyCustomized = () => destroy(customizedKey)
 
     return { open, customizeOpen, destroyAll, destroyCustomized }
   },

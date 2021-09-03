@@ -50,6 +50,7 @@ order: 0
 
 ```ts
 export interface ModalButtonProps extends ButtonProps {
+  key?: string | number
   // 按钮的文本
   text?: string
   // 是否显示该按钮, 默认为 true
@@ -113,25 +114,25 @@ export interface ModalProviderRef {
   success: (options: Omit<ModalOptions, 'type'>) => ModalRef
   warning: (options: Omit<ModalOptions, 'type'>) => ModalRef
   error: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  // 更新指定 id 的对话框的配置信息
-  update: (id: string, options: ModalOptions) => void
-  // 销毁指定 id 的对话框
-  destroy: (id: string | string[]) => void
+  // 更新指定 key 的对话框的配置信息
+  update: (key: string, options: ModalOptions) => void
+  // 销毁指定 key 的对话框
+  destroy: (key: string | string[]) => void
   // 销毁所有对话框
   destroyAll: () => void
 }
 
 export interface ModalOptions extends ModalProps {
-  id?: string
+  key?: string
   // 对话框的内容
   content?: string | VNode
   // 对话框销毁后的回调
-  onDestroy?: (id: string) => void
+  onDestroy?: (key: string) => void
 }
 
 export interface ModalRef extends ModalBindings {
   // 对话框的唯一标识
-  id: string
+  key: string
   // 更新当前配置信息
   update: (options: Partial<ModalOptions>) => void
   // 销毁当前对话框

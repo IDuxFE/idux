@@ -3,10 +3,10 @@ import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
 import IxVirtualList from '../src/List'
 import { VirtualItemRenderFn, VirtualListProps } from '../src/types'
 
-const getData = (length: number, key = 'id') => {
-  const data: { id: string }[] = []
+const getData = (length: number, key = 'key') => {
+  const data: { key: string }[] = []
   for (let index = 0; index < length; index++) {
-    data.push({ id: `${key}-${index}` })
+    data.push({ key: `${key}-${index}` })
   }
   return data
 }
@@ -14,12 +14,12 @@ const getData = (length: number, key = 'id') => {
 const defaultProps = {
   height: 200,
   itemHeight: 20,
-  itemKey: 'id',
+  itemKey: 'key',
 } as const
 
 const defaultItemSlot = `
 <template #item="{ item, index }">
-  <span class="virtual-item" style="height: 20px;">{{ item.id }} - {{ index }}</span>
+  <span class="virtual-item" style="height: 20px;">{{ item.key }} - {{ index }}</span>
 </template>
 `
 
@@ -148,7 +148,7 @@ describe('list.ts', () => {
         slots: { item: defaultItemSlot },
       })
 
-      wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`id-${index} - ${index}`))
+      wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
 
       await wrapper.setProps({ data: getData(20, 'key'), itemKey: 'key' })
 
@@ -157,8 +157,8 @@ describe('list.ts', () => {
 
     test('itemRender work', async () => {
       const itemRender: VirtualItemRenderFn = ({ item, index }) => {
-        const { id } = item as { id: string }
-        return h('span', { class: 'virtual-item' }, [`${id} - ${index}`])
+        const { key } = item as { key: string }
+        return h('span', { class: 'virtual-item' }, [`${key} - ${index}`])
       }
       const wrapper = VirtualListMount({
         props: { data: getData(20), itemRender },
@@ -230,12 +230,12 @@ describe('list.ts', () => {
 
       expect(wrapper.find('.ix-virtual-list-holder').element.scrollTop).toEqual(220)
 
-      wrapper.vm.scrollTo({ key: 'id-20', align: 'top' })
+      wrapper.vm.scrollTo({ key: 'key-20', align: 'top' })
       jest.runAllTimers()
 
       expect(wrapper.find('.ix-virtual-list-holder').element.scrollTop).toEqual(400)
 
-      wrapper.vm.scrollTo({ key: 'id-20', align: 'top', offset: 20 })
+      wrapper.vm.scrollTo({ key: 'key-20', align: 'top', offset: 20 })
       jest.runAllTimers()
 
       expect(wrapper.find('.ix-virtual-list-holder').element.scrollTop).toEqual(380)

@@ -7,14 +7,14 @@
         <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
       </IxSpace>
     </IxFormItem>
-    <template v-for="(control, key) in formGroup.controls.value" :key="control.id">
+    <template v-for="(control, key) in formGroup.controls.value" :key="control.uid">
       <IxFormItem v-if="key !== 'array'" :control="control" :label="key">
         <IxInput></IxInput>
         <IxIcon name="minus-circle" @click="removeGroupItem(key)"></IxIcon>
       </IxFormItem>
     </template>
-    <template v-for="(control, index) in arrayControl.controls.value" :key="control.id">
-      <IxFormItem :control="control" :label="'Array-' + control.id">
+    <template v-for="(control, index) in arrayControl.controls.value" :key="control.uid">
+      <IxFormItem :control="control" :label="'Array-' + control.uid">
         <IxInput></IxInput>
         <IxIcon name="minus-circle" @click="removeArrayItem(index)"></IxIcon>
       </IxFormItem>
@@ -35,9 +35,9 @@ export default defineComponent({
 
     const arrayControl = formGroup.get('array') as FormArray<string[]>
 
-    let id = 0
+    let uid = 0
     const addGroupItem = () => {
-      const itemKey = `Group-${id++}`
+      const itemKey = `Group-${uid++}`
       formGroup.addControl(itemKey, useFormControl())
     }
 

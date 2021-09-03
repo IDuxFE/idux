@@ -16,13 +16,14 @@ export default defineComponent({
     return () => {
       const child = modals.value.map(item => {
         // The default value for `visible` and `destroyOnHide` is true
-        const { id, content, visible = true, destroyOnHide = true, ...rest } = item
+        const { key, content, visible = true, destroyOnHide = true, ...rest } = item
         return (
           <Modal
             {...rest}
+            key={key}
             visible={visible}
-            onAfterClose={() => destroyOnHide && apis.destroy(id!)}
-            ref={(instance: any) => setModalRef(id!, instance)}
+            onAfterClose={() => destroyOnHide && apis.destroy(key!)}
+            ref={(instance: any) => setModalRef(key!, instance)}
           >
             {content}
           </Modal>
@@ -41,8 +42,8 @@ export default defineComponent({
 
 const useModalRef = () => {
   const modalRefMap = new Map<string, ModalRef>()
-  const setModalRef = (id: string, instance: ModalInstance | null) => {
-    const ref = modalRefMap.get(id)
+  const setModalRef = (key: string, instance: ModalInstance | null) => {
+    const ref = modalRefMap.get(key)
     if (instance) {
       if (ref && !ref.open) {
         ref.open = instance.open
@@ -52,7 +53,7 @@ const useModalRef = () => {
       }
     } else {
       if (ref) {
-        modalRefMap.delete(id)
+        modalRefMap.delete(key)
         ref.open = noop
         ref.close = noop as any
         ref.cancel = noop as any
@@ -66,37 +67,37 @@ const useModalRef = () => {
 const useModal = () => {
   const modals = ref<ModalOptions[]>([])
 
-  const getCurrIndex = (id: string) => {
-    return modals.value.findIndex(message => message.id === id)
+  const getCurrIndex = (key: string) => {
+    return modals.value.findIndex(message => message.key === key)
   }
 
   const add = (item: ModalOptions) => {
-    const currIndex = item.id ? getCurrIndex(item.id) : -1
+    const currIndex = item.key ? getCurrIndex(item.key) : -1
     if (currIndex !== -1) {
       modals.value.splice(currIndex, 1, item)
-      return item.id!
+      return item.key!
     }
 
-    const id = item.id ?? uniqueId('ix-modal')
-    modals.value.push({ ...item, id })
-    return id
+    const key = item.key ?? uniqueId('ix-modal')
+    modals.value.push({ ...item, key })
+    return key
   }
 
-  const update = (id: string, item: ModalOptions) => {
-    const currIndex = getCurrIndex(id)
+  const update = (key: string, item: ModalOptions) => {
+    const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
       const newItem = { ...modals.value[currIndex], ...item }
       modals.value.splice(currIndex, 1, newItem)
     }
   }
 
-  const destroy = (id: string | string[]) => {
-    const ids = convertArray(id)
-    ids.forEach(id => {
-      const currIndex = getCurrIndex(id)
+  const destroy = (key: string | string[]) => {
+    const keys = convertArray(key)
+    keys.forEach(key => {
+      const currIndex = getCurrIndex(key)
       if (currIndex !== -1) {
         const item = modals.value.splice(currIndex, 1)
-        callEmit(item[0].onDestroy, id)
+        callEmit(item[0].onDestroy, key)
       }
     })
   }
@@ -112,13 +113,13 @@ const useModalApis = (modalRefMap: Map<string, ModalRef>) => {
   const { modals, add, update, destroy, destroyAll } = useModal()
 
   const open = (options: ModalOptions): ModalRef => {
-    const id = add(options)
+    const key = add(options)
     const ref = {
-      id,
-      update: (options: ModalOptions) => update(id, options),
-      destroy: () => destroy(id),
+      key,
+      update: (options: ModalOptions) => update(key, options),
+      destroy: () => destroy(key),
     } as ModalRef
-    modalRefMap.set(id, ref)
+    modalRefMap.set(key, ref)
     return ref
   }
 

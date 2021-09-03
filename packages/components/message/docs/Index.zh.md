@@ -68,29 +68,29 @@ export const useMessage: () => MessageProviderRef;
 
 export interface MessageProviderRef {
   // 打开对话框
- open: (options: MessageOptions) => MessageRef
+  open: (options: MessageOptions) => MessageRef
   info: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   success: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   warning: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   error: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   loading: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  // 更新指定 id 的对话框的配置信息
-  update: (id: string, options: MessageOptions) => void
-  // 销毁指定 id 的对话框
-  destroy: (id: string | string[]) => void
+  // 更新指定 key 的对话框的配置信息
+  update: (key: string, options: MessageOptions) => void
+  // 销毁指定 key 的对话框
+  destroy: (key: string | string[]) => void
   // 销毁所有对话框
   destroyAll: () => void
 }
 
 export interface MessageOptions extends MessageProps {
-  id?: string
+  key?: string
   // 对话框的内容
   content?: string | VNode
 }
 
 export interface MessageRef {
   // 对话框的唯一标识
-  id: string
+  key: string
   // 更新当前配置信息
   update: (options: Partial<MessageOptions>) => void
   // 销毁当前对话框

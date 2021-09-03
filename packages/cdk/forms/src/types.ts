@@ -6,7 +6,7 @@ export interface ValidateError {
   /**
    * There are two types of validation message:
    * * **string**: a simple string.
-   * * **Record<string, string>**: you can return an object whose key is locale id, when you need for i18n.
+   * * **Record<string, string>**: you can return an object whose key is locale key, when you need for i18n.
    */
   message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | null
   actual?: any
