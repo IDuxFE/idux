@@ -14,6 +14,8 @@
   transition: @header-transition;
 
   &-main {
+    position: relative;
+    width: 100%;
     display: flex;
     align-items: center;
   }
@@ -55,7 +57,9 @@
     .ellipsis();
   }
 
-  &-extra {
+  &-suffix {
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -78,7 +82,7 @@
     line-height: @header-description-line-height;
   }
 
-  &-extraLarge {
+  &-xLarge {
     .header-size(@header-height-xl, @header-title-font-size-xl);
   }
   &-large {
@@ -94,7 +98,7 @@
       font-size: @header-sub-font-size-sm;
     }
 
-    .@{header-prefix}-extra {
+    .@{header-prefix}-suffix {
       font-size: @header-extra-font-size-sm;
     }
   }
@@ -110,9 +114,5 @@
 
   .@{header-prefix}-title {
     font-size: @font-size;
-  }
-
-  .@{header-prefix}-description {
-    margin-bottom: @spacing-vertical;
   }
 }

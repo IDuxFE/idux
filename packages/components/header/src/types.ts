@@ -4,21 +4,20 @@ import type { AvatarProps } from '@idux/components/avatar'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type HeaderSize = 'extraLarge' | 'large' | 'medium' | 'small'
+export type HeaderSize = 'xLarge' | 'large' | 'medium' | 'small'
 
 export const headerProps = {
   avatar: IxPropTypes.oneOfType([String, IxPropTypes.object<AvatarProps>()]),
-  extra: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  description: IxPropTypes.string,
   prefix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  size: IxPropTypes.oneOf<HeaderSize>(['extraLarge', 'large', 'medium', 'small']).def('large'),
+  size: IxPropTypes.oneOf<HeaderSize>(['xLarge', 'large', 'medium', 'small']).def('large'),
   showBar: IxPropTypes.bool.def(false),
   subTitle: IxPropTypes.string,
+  suffix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   title: IxPropTypes.string,
 
   // events
-  onExtraClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
   onPrefixClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
+  onSuffixClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
 
 export type HeaderProps = IxInnerPropTypes<typeof headerProps>
