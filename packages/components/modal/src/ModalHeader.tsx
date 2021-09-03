@@ -38,19 +38,19 @@ export default defineComponent({
       return null
     }
 
-    const headerProps = isString(header) ? { title: header } : header || {}
+    const headerProps = isString(header) ? { title: header } : { ...header }
 
     if (closeIconSlot) {
-      const slots = { extra: () => closeIconSlot({ onClose }) }
+      const slots = { suffix: () => closeIconSlot({ onClose }) }
       return <IxHeader {...headerProps} v-slots={slots}></IxHeader>
     }
 
     if (closable) {
-      headerProps.extra = headerProps.extra ?? closeIcon
+      headerProps.suffix = headerProps.suffix ?? closeIcon
 
-      const onExtraClick = convertArray(headerProps.onExtraClick)
-      onExtraClick.push(onClose)
-      headerProps.onExtraClick = onExtraClick
+      const onSuffixClick = convertArray(headerProps.onSuffixClick)
+      onSuffixClick.push(onClose)
+      headerProps.onSuffixClick = onSuffixClick
     }
 
     return <IxHeader {...headerProps}></IxHeader>

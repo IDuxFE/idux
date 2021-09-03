@@ -3,7 +3,7 @@
   <br />
   <IxRow>
     <IxCol xs="24" sm="8">
-      <IxCard :loading="loading" :header="{ title: 'Card title', extra: 'setting' }">
+      <IxCard :loading="loading" :header="{ title: 'Card title', suffix: 'setting' }">
         <p>Card content</p>
         <p>Card content</p>
         <p>Card content</p>
@@ -11,11 +11,11 @@
     </IxCol>
     <IxCol xs="24" sm="8">
       <IxCard :loading="loading" :footer="footer">
-        <IxHeader
-          :avatar="{ src: '/images/avatar/2.png' }"
-          title="Card title"
-          description="This is the description"
-        ></IxHeader>
+        <IxHeader :avatar="{ src: '/images/avatar/2.png' }" title="Card title">
+          <template #description>
+            <p>This is the description</p>
+          </template>
+        </IxHeader>
       </IxCard>
     </IxCol>
   </IxRow>
