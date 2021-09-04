@@ -8,7 +8,7 @@ export interface ValidateError {
    * * **string**: a simple string.
    * * **Record<string, string>**: you can return an object whose key is locale key, when you need for i18n.
    */
-  message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | null
+  message?: ValidateMessage
   actual?: any
   [key: string]: any
 }
@@ -16,22 +16,22 @@ export interface ValidateError {
 export type ValidateErrors = Record<string, ValidateError>
 
 export type ValidateMessageFn = (err: Omit<ValidateError, 'message'>) => string
-
-export type ValidateMessages = Record<string, string | ValidateMessageFn | Record<string, string | ValidateMessageFn>>
+export type ValidateMessage = string | ValidateMessageFn | Record<string, string | ValidateMessageFn>
+export type ValidateMessages = Record<string, ValidateMessage>
 
 export interface ValidatorFn {
-  (value: any, control: AbstractControl): ValidateErrors | null
+  (value: any, control: AbstractControl): ValidateErrors | undefined
 }
 
 export interface AsyncValidatorFn {
-  (value: any, control: AbstractControl): Promise<ValidateErrors | null>
+  (value: any, control: AbstractControl): Promise<ValidateErrors | undefined>
 }
 
 export type TriggerType = 'change' | 'blur' | 'submit'
 
 export interface ValidatorOptions {
-  validators?: ValidatorFn | ValidatorFn[] | null
-  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
+  validators?: ValidatorFn | ValidatorFn[]
+  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
   trigger?: TriggerType
   disabled?: boolean
 }

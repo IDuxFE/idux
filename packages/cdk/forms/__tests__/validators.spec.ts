@@ -3,17 +3,17 @@ import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from 
 import { Validators } from '../src/validators'
 
 describe('validators.ts', () => {
-  const control = null as unknown as AbstractControl
+  const control = undefined as unknown as AbstractControl
 
   test('required work', () => {
     const required = Validators.required
 
-    expect(required(0, control)).toBeNull()
-    expect(required('value', control)).toBeNull()
-    expect(required([1, 2], control)).toBeNull()
+    expect(required(0, control)).toBeUndefined()
+    expect(required('value', control)).toBeUndefined()
+    expect(required([1, 2], control)).toBeUndefined()
 
-    const errorMessage = { required: { message: null } }
-    expect(required(null, control)).toEqual(errorMessage)
+    const errorMessage = { required: { message: undefined } }
+    expect(required(undefined, control)).toEqual(errorMessage)
     expect(required(undefined, control)).toEqual(errorMessage)
     expect(required('', control)).toEqual(errorMessage)
     expect(required([], control)).toEqual(errorMessage)
@@ -22,10 +22,10 @@ describe('validators.ts', () => {
   test('requiredTrue work', () => {
     const requiredTrue = Validators.requiredTrue
 
-    expect(requiredTrue(true, control)).toBeNull()
+    expect(requiredTrue(true, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ requiredTrue: { message: null, actual } })
-    expect(requiredTrue(null, control)).toEqual(errorMessage(null))
+    const errorMessage = (actual: unknown) => ({ requiredTrue: { message: undefined, actual } })
+    expect(requiredTrue(undefined, control)).toEqual(errorMessage(undefined))
     expect(requiredTrue(undefined, control)).toEqual(errorMessage(undefined))
     expect(requiredTrue('', control)).toEqual(errorMessage(''))
     expect(requiredTrue([], control)).toEqual(errorMessage([]))
@@ -36,11 +36,11 @@ describe('validators.ts', () => {
   test('email work', () => {
     const email = Validators.email
 
-    expect(email('', control)).toBeNull()
-    expect(email(null, control)).toBeNull()
-    expect(email('test@gmail.com', control)).toBeNull()
+    expect(email('', control)).toBeUndefined()
+    expect(email(undefined, control)).toBeUndefined()
+    expect(email('test@gmail.com', control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ email: { message: null, actual } })
+    const errorMessage = (actual: unknown) => ({ email: { message: undefined, actual } })
     expect(email({}, control)).toEqual(errorMessage({}))
     expect(email('test', control)).toEqual(errorMessage('test'))
   })
@@ -48,14 +48,14 @@ describe('validators.ts', () => {
   test('min work', () => {
     const minOne = Validators.min(1)
 
-    expect(minOne('', control)).toBeNull()
-    expect(minOne(null, control)).toBeNull()
-    expect(minOne('test', control)).toBeNull()
-    expect(minOne('1', control)).toBeNull()
-    expect(minOne(1, control)).toBeNull()
-    expect(minOne(2, control)).toBeNull()
+    expect(minOne('', control)).toBeUndefined()
+    expect(minOne(undefined, control)).toBeUndefined()
+    expect(minOne('test', control)).toBeUndefined()
+    expect(minOne('1', control)).toBeUndefined()
+    expect(minOne(1, control)).toBeUndefined()
+    expect(minOne(2, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ min: { message: null, min: 1, actual } })
+    const errorMessage = (actual: unknown) => ({ min: { message: undefined, min: 1, actual } })
     expect(minOne(0, control)).toEqual(errorMessage(0))
     expect(minOne('0', control)).toEqual(errorMessage('0'))
   })
@@ -63,14 +63,14 @@ describe('validators.ts', () => {
   test('max work', () => {
     const maxOne = Validators.max(1)
 
-    expect(maxOne('', control)).toBeNull()
-    expect(maxOne(null, control)).toBeNull()
-    expect(maxOne('test', control)).toBeNull()
-    expect(maxOne('1', control)).toBeNull()
-    expect(maxOne(1, control)).toBeNull()
-    expect(maxOne(0, control)).toBeNull()
+    expect(maxOne('', control)).toBeUndefined()
+    expect(maxOne(undefined, control)).toBeUndefined()
+    expect(maxOne('test', control)).toBeUndefined()
+    expect(maxOne('1', control)).toBeUndefined()
+    expect(maxOne(1, control)).toBeUndefined()
+    expect(maxOne(0, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ max: { message: null, max: 1, actual } })
+    const errorMessage = (actual: unknown) => ({ max: { message: undefined, max: 1, actual } })
     expect(maxOne(2, control)).toEqual(errorMessage(2))
     expect(maxOne('2', control)).toEqual(errorMessage('2'))
   })
@@ -78,16 +78,16 @@ describe('validators.ts', () => {
   test('minLength work', () => {
     const minLengthTwo = Validators.minLength(2)
 
-    expect(minLengthTwo('', control)).toBeNull()
-    expect(minLengthTwo(null, control)).toBeNull()
-    expect(minLengthTwo(1, control)).toBeNull()
-    expect(minLengthTwo('te', control)).toBeNull()
-    expect(minLengthTwo('test', control)).toBeNull()
-    expect(minLengthTwo([], control)).toBeNull()
-    expect(minLengthTwo([1, 2], control)).toBeNull()
-    expect(minLengthTwo([1, 2, 3], control)).toBeNull()
+    expect(minLengthTwo('', control)).toBeUndefined()
+    expect(minLengthTwo(undefined, control)).toBeUndefined()
+    expect(minLengthTwo(1, control)).toBeUndefined()
+    expect(minLengthTwo('te', control)).toBeUndefined()
+    expect(minLengthTwo('test', control)).toBeUndefined()
+    expect(minLengthTwo([], control)).toBeUndefined()
+    expect(minLengthTwo([1, 2], control)).toBeUndefined()
+    expect(minLengthTwo([1, 2, 3], control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ minLength: { message: null, minLength: 2, actual } })
+    const errorMessage = (actual: unknown) => ({ minLength: { message: undefined, minLength: 2, actual } })
     expect(minLengthTwo('t', control)).toEqual(errorMessage(1))
     expect(minLengthTwo([1], control)).toEqual(errorMessage(1))
   })
@@ -95,30 +95,30 @@ describe('validators.ts', () => {
   test('maxLength work', () => {
     const maxLengthTwo = Validators.maxLength(2)
 
-    expect(maxLengthTwo('', control)).toBeNull()
-    expect(maxLengthTwo(1, control)).toBeNull()
-    expect(maxLengthTwo(null, control)).toBeNull()
-    expect(maxLengthTwo('te', control)).toBeNull()
-    expect(maxLengthTwo('t', control)).toBeNull()
-    expect(maxLengthTwo([], control)).toBeNull()
-    expect(maxLengthTwo([1, 2], control)).toBeNull()
-    expect(maxLengthTwo([1], control)).toBeNull()
+    expect(maxLengthTwo('', control)).toBeUndefined()
+    expect(maxLengthTwo(1, control)).toBeUndefined()
+    expect(maxLengthTwo(undefined, control)).toBeUndefined()
+    expect(maxLengthTwo('te', control)).toBeUndefined()
+    expect(maxLengthTwo('t', control)).toBeUndefined()
+    expect(maxLengthTwo([], control)).toBeUndefined()
+    expect(maxLengthTwo([1, 2], control)).toBeUndefined()
+    expect(maxLengthTwo([1], control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({ maxLength: { message: null, maxLength: 2, actual } })
+    const errorMessage = (actual: unknown) => ({ maxLength: { message: undefined, maxLength: 2, actual } })
     expect(maxLengthTwo('test', control)).toEqual(errorMessage(4))
     expect(maxLengthTwo([1, 2, 3], control)).toEqual(errorMessage(3))
   })
 
   test('pattern work', () => {
-    expect(Validators.pattern(null!)('test', control)).toBeNull()
+    expect(Validators.pattern(undefined!)('test', control)).toBeUndefined()
 
     let stringPattern = Validators.pattern('[a-zA-Z]+')
 
-    expect(stringPattern('', control)).toBeNull()
-    expect(stringPattern(null, control)).toBeNull()
-    expect(stringPattern('test', control)).toBeNull()
+    expect(stringPattern('', control)).toBeUndefined()
+    expect(stringPattern(undefined, control)).toBeUndefined()
+    expect(stringPattern('test', control)).toBeUndefined()
 
-    let errorMessage = (actual: unknown) => ({ pattern: { message: null, pattern: '^[a-zA-Z]+$', actual } })
+    let errorMessage = (actual: unknown) => ({ pattern: { message: undefined, pattern: '^[a-zA-Z]+$', actual } })
     expect(stringPattern('test1', control)).toEqual(errorMessage('test1'))
     expect(stringPattern(1, control)).toEqual(errorMessage(1))
 
@@ -128,19 +128,19 @@ describe('validators.ts', () => {
 
     const regExpPattern = Validators.pattern(new RegExp('[a-zA-Z]+'))
 
-    expect(regExpPattern('', control)).toBeNull()
-    expect(regExpPattern(null, control)).toBeNull()
-    expect(regExpPattern('test', control)).toBeNull()
-    expect(regExpPattern('test1', control)).toBeNull()
+    expect(regExpPattern('', control)).toBeUndefined()
+    expect(regExpPattern(undefined, control)).toBeUndefined()
+    expect(regExpPattern('test', control)).toBeUndefined()
+    expect(regExpPattern('test1', control)).toBeUndefined()
 
-    errorMessage = (actual: unknown) => ({ pattern: { message: null, pattern: '/[a-zA-Z]+/', actual } })
+    errorMessage = (actual: unknown) => ({ pattern: { message: undefined, pattern: '/[a-zA-Z]+/', actual } })
     expect(regExpPattern(1, control)).toEqual(errorMessage(1))
 
     const regExpPattern2 = Validators.pattern(new RegExp('^[a-zA-Z]+$'))
 
-    expect(regExpPattern2('test', control)).toBeNull()
+    expect(regExpPattern2('test', control)).toBeUndefined()
 
-    errorMessage = (actual: unknown) => ({ pattern: { message: null, pattern: '/^[a-zA-Z]+$/', actual } })
+    errorMessage = (actual: unknown) => ({ pattern: { message: undefined, pattern: '/^[a-zA-Z]+$/', actual } })
     expect(regExpPattern2('test1', control)).toEqual(errorMessage('test1'))
     expect(regExpPattern2(1, control)).toEqual(errorMessage(1))
   })
@@ -155,16 +155,16 @@ describe('validators.ts', () => {
     const message2 = { message: 2 }
     const { compose, nullValidator, required } = Validators
 
-    expect(compose(null)).toBeNull()
-    expect(compose([])).toBe(null)
-    expect(compose([nullValidator, nullValidator])!('test', control)).toBeNull()
+    expect(compose(undefined)).toBeUndefined()
+    expect(compose([])).toBeUndefined()
+    expect(compose([nullValidator, nullValidator])!('test', control)).toBeUndefined()
 
     expect(compose([_validator('a', message1), _validator('b', message2)])!('test', control)).toEqual({
       a: message1,
       b: message2,
     })
     expect(compose([_validator('a', message1), _validator('a', message2)])!('test', control)).toEqual({ a: message2 })
-    expect(compose([null, nullValidator, required])!('', control)).toEqual({ required: { message: null } })
+    expect(compose([undefined, nullValidator, required])!('', control)).toEqual({ required: { message: undefined } })
   })
 
   test('composeAsync work', async () => {
@@ -177,8 +177,8 @@ describe('validators.ts', () => {
     const message2 = { message: 2 }
     const composeAsync = Validators.composeAsync
 
-    expect(composeAsync(null)).toBe(null)
-    expect(composeAsync([])).toBe(null)
+    expect(composeAsync(undefined)).toBeUndefined()
+    expect(composeAsync([])).toBeUndefined()
 
     let errors = await composeAsync([_asyncValidator('a', message1), _asyncValidator('b', message2)])!('test', control)
 
@@ -187,7 +187,7 @@ describe('validators.ts', () => {
     errors = await composeAsync([_asyncValidator('a', message1), _asyncValidator('a', message2)])!('test', control)
     expect(errors).toEqual({ a: message2 })
 
-    errors = await composeAsync([null, _asyncValidator('a', message1)])!('test', control)
+    errors = await composeAsync([undefined, _asyncValidator('a', message1)])!('test', control)
     expect(errors).toEqual({ a: message1 })
   })
 

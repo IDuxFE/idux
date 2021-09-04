@@ -1,16 +1,16 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
     <IxFormItem control="email" label="E-mail" required>
-      <IxInput></IxInput>
+      <IxInput control="email"></IxInput>
     </IxFormItem>
     <IxFormItem control="password" label="Password" required>
-      <IxInput type="password"> </IxInput>
+      <IxInput control="password" type="password"> </IxInput>
     </IxFormItem>
     <IxFormItem control="confirmPassword" label="Confirm Password" required>
-      <IxInput type="password"> </IxInput>
+      <IxInput control="confirmPassword" type="password"> </IxInput>
     </IxFormItem>
     <IxFormItem control="nickname" label="Nickname" labelTooltip="What do you want other to call you" required>
-      <IxInput> </IxInput>
+      <IxInput control="nickname"> </IxInput>
     </IxFormItem>
     <IxFormItem control="phoneNumber" label="Phone Number" required>
       <IxInput control="phoneNumber">
@@ -23,12 +23,12 @@
       </IxInput>
     </IxFormItem>
     <IxFormItem control="website" label="Website">
-      <IxInput> </IxInput>
+      <IxInput control="website"> </IxInput>
     </IxFormItem>
     <IxFormItem control="captcha" label="Captcha" required extra="We must make sure that your are a human.">
       <IxRow gutter="8">
         <IxCol span="12">
-          <IxInput> </IxInput>
+          <IxInput control="captcha"> </IxInput>
         </IxCol>
         <IxCol span="12">
           <IxButton @click="getCaptcha">Get captcha</IxButton>
@@ -36,7 +36,7 @@
       </IxRow>
     </IxFormItem>
     <IxFormItem control="agree" :controlCol="noLabelControlCol">
-      <IxCheckbox>I have read the <a>agreement</a> </IxCheckbox>
+      <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="noLabelControlCol">
       <IxButton mode="primary" @click="register">Register</IxButton>
@@ -74,18 +74,18 @@ Validators.setMessages({
   },
 })
 
-const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | null => {
+const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value) {
     return { passwordRequired: Validators.getError('passwordRequired') }
   } else if (value !== control.root.get('password')?.getValue()) {
     return { passwordConfirm: Validators.getError('passwordConfirm') }
   }
-  return null
+  return undefined
 }
 
-const mobilePhoneValidator = (value: string): ValidateErrors | null => {
+const mobilePhoneValidator = (value: string): ValidateErrors | undefined => {
   if (!value || /(^1\d{10}$)/.test(value)) {
-    return null
+    return undefined
   }
   return { mobilePhone: Validators.getError('mobilePhone') }
 }
@@ -102,11 +102,11 @@ export default defineComponent({
       email: ['', [required, email]],
       password: ['', [required, minLength(12), maxLength(16)]],
       confirmPassword: ['', [required, confirmPasswordValidator]],
-      nickname: ['', required],
-      phoneNumberPrefix: ['+86', required],
+      nickname: ['', [required]],
+      phoneNumberPrefix: ['+86', [required]],
       phoneNumber: ['', [required, mobilePhoneValidator]],
-      website: [],
-      captcha: ['', required],
+      website: ['', [required]],
+      captcha: ['', [required]],
       agree: [false],
     })
 

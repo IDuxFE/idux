@@ -12,63 +12,43 @@ import { radioProps } from './types'
 export default defineComponent({
   name: 'IxRadio',
   props: radioProps,
-  setup(props) {
+  setup(props, { attrs, expose, slots }) {
     const radioGroup = inject(radioGroupToken, null)
-    const name = computed(() => radioGroup?.props.name)
+    const mergedName = computed(() => (attrs.name as string) ?? radioGroup?.props.name)
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
     const { isChecked, isDisabled, handleChange, handleBlur, handleFocus } = useRadio(props, radioGroup)
     const classes = useClasses(props, radioGroup?.props, isButtoned, isChecked, isDisabled)
     const { inputRef, focus, blur } = useElement()
-    return {
-      classes,
-      isButtoned,
-      isChecked,
-      isDisabled,
-      name,
-      handleChange,
-      handleBlur,
-      handleFocus,
-      inputRef,
-      focus,
-      blur,
+
+    expose({ focus, blur })
+
+    return () => {
+      const { autofocus, value, label } = props
+      const labelNode = slots.default?.() ?? label
+      const labelWrapper = labelNode ? <span class="ix-radio-label">{labelNode}</span> : undefined
+      return (
+        <label class={classes.value} role="radio" aria-checked={isChecked.value} aria-disabled={isDisabled.value}>
+          <span class="ix-radio-input">
+            <input
+              ref={inputRef}
+              type="radio"
+              class="ix-radio-input-inner"
+              aria-hidden
+              autofocus={autofocus}
+              checked={isChecked.value}
+              disabled={isDisabled.value}
+              name={mergedName.value}
+              value={value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+            ></input>
+            {isButtoned.value ? null : <span class="ix-radio-input-box"></span>}
+          </span>
+          {labelWrapper}
+        </label>
+      )
     }
-  },
-  render() {
-    const {
-      classes,
-      autofocus,
-      isButtoned,
-      isChecked,
-      isDisabled,
-      name,
-      value,
-      handleChange,
-      handleBlur,
-      handleFocus,
-    } = this
-    const child = this.$slots.default ? this.$slots.default() : this.label
-    return (
-      <label class={classes} role="radio" aria-checked={isChecked} aria-disabled={isDisabled}>
-        <span class="ix-radio-input">
-          <input
-            ref="inputRef"
-            type="radio"
-            class="ix-radio-input-inner"
-            aria-hidden
-            autofocus={autofocus}
-            checked={isChecked}
-            disabled={isDisabled}
-            name={name}
-            value={value}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          ></input>
-          {isButtoned ? null : <span class="ix-radio-input-box"></span>}
-        </span>
-        <span class="ix-radio-label">{child}</span>
-      </label>
-    )
   },
 })
 
@@ -81,12 +61,12 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
   const handleFocus = (evt: FocusEvent) => callEmit(props.onFocus, evt)
 
   if (radioGroup) {
-    const { valueAccessor, props: groupProps } = radioGroup
-    isChecked = computed(() => valueAccessor.value === props.value)
-    isDisabled = computed(() => props.disabled ?? valueAccessor.disabled)
+    const { accessor, props: groupProps } = radioGroup
+    isChecked = computed(() => accessor.value === props.value)
+    isDisabled = computed(() => props.disabled ?? accessor.disabled)
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
-      valueAccessor.markAsBlurred()
+      accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
@@ -94,21 +74,21 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       if (checked) {
         const value = props.value
         callEmit(groupProps.onChange, value)
-        valueAccessor.setValue(value)
+        accessor.setValue(value)
       }
     }
   } else {
-    const valueAccessor = useValueAccessor<boolean>({ valueKey: 'checked' })
-    isChecked = computed(() => valueAccessor.value)
-    isDisabled = computed(() => valueAccessor.disabled)
+    const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
+    isChecked = computed(() => accessor.value)
+    isDisabled = computed(() => accessor.disabled)
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
-      valueAccessor.markAsBlurred()
+      accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
       callEmit(props.onChange, checked)
-      valueAccessor.setValue(checked)
+      accessor.setValue(checked)
     }
   }
 

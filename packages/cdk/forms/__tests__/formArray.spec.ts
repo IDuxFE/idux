@@ -164,13 +164,13 @@ describe('formArray.ts', () => {
     })
 
     test('validate work', async () => {
-      expect(await array.validate()).toBeNull()
+      expect(await array.validate()).toBeUndefined()
 
-      const _validator = (_: unknown) => ({ test: { message: null } } as ValidateErrors)
+      const _validator = (_: unknown) => ({ test: {} } as ValidateErrors)
 
       array.setValidator(_validator)
 
-      expect(await array.validate()).toEqual({ test: { message: null } })
+      expect(await array.validate()).toEqual({ test: {} })
     })
 
     test('get work', async () => {
@@ -179,9 +179,9 @@ describe('formArray.ts', () => {
       expect(array.get('0')).toEqual(group)
       expect(array.get([0])).toEqual(group)
 
-      expect(array.get(undefined as never)).toBeNull()
-      expect(array.get('1')).toBeNull()
-      expect(array.get([1])).toBeNull()
+      expect(array.get(undefined as never)).toBeUndefined()
+      expect(array.get('1')).toBeUndefined()
+      expect(array.get([1])).toBeUndefined()
     })
   })
 
@@ -189,7 +189,7 @@ describe('formArray.ts', () => {
     let array: FormArray<BasicGroup[]>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
-      return value[0].control === 'test' ? null : ({ test: { message: null } } as ValidateErrors)
+      return value[0].control === 'test' ? undefined : ({ test: {} } as ValidateErrors)
     }
 
     test('default change work', async () => {

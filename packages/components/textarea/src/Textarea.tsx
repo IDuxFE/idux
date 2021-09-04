@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref, Slot } from 'vue'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
 import type { TextareaProps } from './types'
 
@@ -18,7 +18,7 @@ export default defineComponent({
 
     const {
       elementRef,
-      valueAccessor,
+      accessor,
 
       isDisabled,
       clearIcon,
@@ -40,7 +40,7 @@ export default defineComponent({
     expose({ focus, blur })
 
     const classes = useClasses(props, config, isFocused, isDisabled)
-    const dataCount = useDataCount(props, config, valueAccessor)
+    const dataCount = useDataCount(props, config, accessor)
     const autoRows = computed(() => props.autoRows ?? config.autoRows)
     const resize = computed(() => {
       let resize = props.resize ?? config.resize
@@ -52,7 +52,7 @@ export default defineComponent({
     })
     const textareaStyle = computed(() => ({ resize: resize.value }))
 
-    useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, valueAccessor)
+    useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
 
     return () => {
       const suffix = renderSuffix(isClearable.value, slots.clearIcon, clearIcon.value, clearHidden.value, handlerClear)
@@ -97,14 +97,14 @@ function useClasses(
   })
 }
 
-function useDataCount(props: TextareaProps, config: TextareaConfig, valueAccessor: ValueAccessor) {
+function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: FormAccessor) {
   return computed(() => {
     const showCount = props.showCount ?? config.showCount
     const computeCount = props.computeCount ?? config.computeCount
     const maxCount = props.maxCount ?? config.maxCount
     let dataCount = ''
     if (showCount) {
-      const value = valueAccessor.value ?? ''
+      const value = accessor.value ?? ''
       dataCount = value.length
       if (computeCount) {
         dataCount = computeCount(value)

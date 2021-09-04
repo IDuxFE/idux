@@ -5,12 +5,12 @@ import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from 
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  _valueRef: Ref<T> = ref(null as unknown as T) as Ref<T>
+  _valueRef: Ref<T> = ref() as Ref<T>
   constructor(
-    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
-    super(null, validatorOrOptions, asyncValidator)
+    super(undefined, validatorOrOptions, asyncValidator)
 
     this._watchEffect()
   }
@@ -49,7 +49,7 @@ describe('abstractControl.ts', () => {
 
     test('init all status work', () => {
       expect(control.status.value).toEqual('valid')
-      expect(control.errors.value).toBeNull()
+      expect(control.errors.value).toBeUndefined()
       expect(control.valid.value).toEqual(true)
       expect(control.invalid.value).toEqual(false)
       expect(control.validating.value).toEqual(false)
@@ -61,7 +61,7 @@ describe('abstractControl.ts', () => {
     })
 
     test('init props work', () => {
-      expect(control.parent).toBeNull()
+      expect(control.parent).toBeUndefined()
       expect(control.root).toEqual(control)
       expect(control.trigger).toEqual('change')
     })
@@ -70,14 +70,14 @@ describe('abstractControl.ts', () => {
       const { required, minLength, email } = Validators
       control.setValidator(required)
 
-      expect(await control.validate()).toEqual({ required: { message: null } })
+      expect(await control.validate()).toEqual({ required: { message: undefined } })
 
       control.setValidator([email, minLength(5)])
       control.setValue('test')
 
       expect(await control.validate()).toEqual({
-        email: { message: null, actual: 'test' },
-        minLength: { message: null, minLength: 5, actual: 4 },
+        email: { message: undefined, actual: 'test' },
+        minLength: { message: undefined, minLength: 5, actual: 4 },
       })
     })
 
@@ -100,17 +100,17 @@ describe('abstractControl.ts', () => {
     })
 
     test('setErrors, getError and hasError work', () => {
-      expect(control.errors.value).toBeNull()
-      expect(control.getError('required')).toBeNull()
+      expect(control.errors.value).toBeUndefined()
+      expect(control.getError('required')).toBeUndefined()
       expect(control.hasError('required')).toEqual(false)
 
-      const errors = { required: { message: null } }
+      const errors = { required: {} }
       control.setErrors(errors)
 
       expect(control.errors.value).toEqual(errors)
 
       expect(control.getError('required')).toEqual(errors.required)
-      expect(control.getError('max')).toBeNull()
+      expect(control.getError('max')).toBeUndefined()
 
       expect(control.hasError('required')).toEqual(true)
       expect(control.hasError('max')).toEqual(false)
@@ -199,7 +199,7 @@ describe('abstractControl.ts', () => {
     test('options work', async () => {
       control = new Control({ validators: Validators.required })
 
-      expect(await control.validate()).toEqual({ required: { message: null } })
+      expect(await control.validate()).toEqual({ required: { message: undefined } })
 
       expect(control.trigger).toEqual('change')
 
@@ -212,7 +212,7 @@ describe('abstractControl.ts', () => {
       const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
 
       control = new Control(Validators.required, _asyncValidator)
-      expect(await control.validate()).toEqual({ required: { message: null } })
+      expect(await control.validate()).toEqual({ required: { message: undefined } })
 
       control.setValue('test')
       control.validate()

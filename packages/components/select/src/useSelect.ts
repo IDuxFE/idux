@@ -125,10 +125,10 @@ export interface SelectValueAccessor {
 
 export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor => {
   const { emit } = getCurrentInstance()!
-  const valueAccessor = useValueAccessor()
-  const disabled = computed(() => valueAccessor.disabled)
+  const { accessor } = useValueAccessor()
+  const disabled = computed(() => accessor.disabled)
   const inputValue = ref('')
-  const selectedValue = ref<any[]>(convertArray(valueAccessor.value))
+  const selectedValue = ref<any[]>(convertArray(accessor.value))
   const activatedValue = ref(null) as Ref<any>
 
   const isComposing = ref(false)
@@ -178,13 +178,13 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
     emit('focus', evt)
   }
   const onBlur = (evt: Event) => {
-    valueAccessor.markAsBlurred?.()
+    accessor.markAsBlurred?.()
     isActive.value = false
     emit('blur', evt)
   }
 
   watch(
-    () => valueAccessor.value,
+    () => accessor.value,
     value => {
       const valueList = convertArray(value)
       if (valueList.length !== 0 || selectedValue.value.length !== 0) {
@@ -198,8 +198,8 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
     () => selectedValue.value,
     value => {
       const _value = props.multiple ? value : value[0]
-      if (valueAccessor.value !== _value) {
-        valueAccessor.setValue?.(_value)
+      if (accessor.value !== _value) {
+        accessor.setValue?.(_value)
         emit('change', _value)
       }
     },

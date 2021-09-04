@@ -4,12 +4,12 @@
     <IxRow>
       <IxCol span="8">
         <IxFormItem control="name.firstName" label="First Name" required>
-          <IxInput></IxInput>
+          <IxInput control="name.firstName"></IxInput>
         </IxFormItem>
       </IxCol>
       <IxCol span="8">
         <IxFormItem control="name.lastName" label="Last Name" required>
-          <IxInput></IxInput>
+          <IxInput control="name.lastName"></IxInput>
         </IxFormItem>
       </IxCol>
     </IxRow>
@@ -18,17 +18,17 @@
       <IxRow>
         <IxCol span="8">
           <IxFormItem control="city" label="City" required>
-            <IxInput></IxInput>
+            <IxInput control="city"></IxInput>
           </IxFormItem>
         </IxCol>
         <IxCol span="8">
           <IxFormItem control="street" label="Street" required>
-            <IxInput></IxInput>
+            <IxInput control="street"></IxInput>
           </IxFormItem>
         </IxCol>
         <IxCol span="8">
           <IxFormItem control="zip" label="Zip Code">
-            <IxInput></IxInput>
+            <IxInput control="zip"></IxInput>
           </IxFormItem>
         </IxCol>
       </IxRow>

@@ -1,20 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ComputedRef, WatchStopHandle } from 'vue'
 import type { AbstractControl, ControlPathType } from './controls'
 
-import { reactive, getCurrentInstance, computed, ComputedRef, watch, toRef, WatchStopHandle } from 'vue'
-import { isNil, isUndefined } from 'lodash-es'
+import { getCurrentInstance, computed, reactive, toRef, watch } from 'vue'
+import { isNil } from 'lodash-es'
 import { Logger } from '@idux/cdk/utils'
 import { isAbstractControl } from './typeof'
-import { injectControl, injectControlOrPath } from './utils'
+import { injectControl } from './utils'
 
-export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<AbstractControl<T> | null> {
+export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<AbstractControl<T> | undefined> {
   const { props } = getCurrentInstance()!
-  const controlOrPath = injectControlOrPath()
+
   return computed(() => {
-    let control: AbstractControl | null = null
-    // Only when `props[controlKey]` is `undefined`, will it find out if the parent component is injected with `path`
-    // So you can disable it by setting `props[controlKey]` to `null`
-    const _controlOrPath = isUndefined(props[controlKey]) ? controlOrPath?.value : props[controlKey]
+    let control: AbstractControl | undefined
+    const _controlOrPath = props[controlKey]
     if (!isNil(_controlOrPath)) {
       if (isAbstractControl(_controlOrPath)) {
         control = _controlOrPath
@@ -30,26 +29,28 @@ export function useValueControl<T = any>(controlKey = 'control'): ComputedRef<Ab
   })
 }
 
-export interface AccessorOptions {
+export interface FormAccessorOptions {
   controlKey?: string
   valueKey?: string
   disabledKey?: string
 }
 
-export interface ValueAccessor<T = any> {
+export interface FormAccessor<T = any> {
   value: T
   setValue: (value: T) => void
   markAsBlurred: () => void
   disabled: boolean
 }
 
-export function useValueAccessor<T = any>(options: AccessorOptions = {}): ValueAccessor<T> {
+export function useValueAccessor<T = any>(
+  options: FormAccessorOptions = {},
+): { control: ComputedRef<AbstractControl<T> | undefined>; accessor: FormAccessor<T> } {
   const { controlKey, valueKey = 'value', disabledKey = 'disabled' } = options
-  const accessor = reactive<ValueAccessor>({} as ValueAccessor)
+  const accessor = reactive<FormAccessor>({} as FormAccessor)
   const { props, emit } = getCurrentInstance()!
 
   const control = useValueControl(controlKey)
-  let valueWatchStop: WatchStopHandle | null = null
+  let valueWatchStop: WatchStopHandle | undefined
 
   watch(
     control,
@@ -61,7 +62,7 @@ export function useValueAccessor<T = any>(options: AccessorOptions = {}): ValueA
         accessor.disabled = currControl.disabled as unknown as boolean
         if (valueWatchStop) {
           valueWatchStop()
-          valueWatchStop = null
+          valueWatchStop = undefined
         }
       } else {
         accessor.value = toRef(props, valueKey)
@@ -80,5 +81,5 @@ export function useValueAccessor<T = any>(options: AccessorOptions = {}): ValueA
     { immediate: true },
   )
 
-  return accessor
+  return { control, accessor }
 }

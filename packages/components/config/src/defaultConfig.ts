@@ -101,7 +101,7 @@ const pagination = shallowReactive<PaginationConfig>({
 // --------------------- Data Entry ---------------------
 const form = shallowReactive<FormConfig>({
   colonless: false,
-  labelAlign: 'right',
+  labelAlign: 'end',
   layout: 'horizontal',
   size: 'medium',
 })

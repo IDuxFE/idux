@@ -1,6 +1,6 @@
 import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxForm from '../src/Form.vue'
+import IxForm from '../src/Form'
 import { FormProps } from '../src/types'
 
 describe.skip('Form.vue', () => {

@@ -101,7 +101,7 @@ export default defineComponent({
 可以使用 `useModal` 来快速创建和管理对话框，需要注意以下几点。
 
 - `visible` 默认为 `true`
-- `destroyOnHide` 默认为 `true`, 并且销毁的不仅是子元素，而是组件实例, 会触发 `onDestroy` 回调
+- `destroyOnHide` 为 `true`时，销毁的不仅是子元素，而是组件实例, 会触发 `onDestroy` 回调
 
 ```ts
 export const useModal: () => ModalProviderRef;

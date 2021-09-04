@@ -3,7 +3,6 @@
 import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions } from './types'
 import type { AbstractControl, ArrayElement, GroupControls } from './controls'
 
-import { isArray } from 'lodash-es'
 import { FormArray, FormControl, FormGroup } from './controls'
 import { isAbstractControl } from './typeof'
 
@@ -12,7 +11,6 @@ type ControlConfig<T> =
   | [T, ValidatorFn | ValidatorFn[]]
   | [T, ValidatorFn | ValidatorFn[], AsyncValidatorFn | AsyncValidatorFn[]]
   | [T, ValidatorOptions]
-  | T
 
 type GroupConfig<T> = {
   [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]> | FormGroup<T[K]>
@@ -20,37 +18,37 @@ type GroupConfig<T> = {
 
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
-  validators?: ValidatorFn | ValidatorFn[] | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validators?: ValidatorFn | ValidatorFn[],
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormGroup<T>
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
-  validatorOptions?: ValidatorOptions | null,
+  validatorOptions?: ValidatorOptions,
 ): FormGroup<T>
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
-  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormGroup<T> {
   const controls = reduceControls(config)
   return new FormGroup(controls, validatorOrOptions, asyncValidator)
 }
 
-type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<ArrayElement<T>> | ArrayElement<T>>
+type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<ArrayElement<T>>>
 
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
-  validators?: ValidatorFn | ValidatorFn[] | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validators?: ValidatorFn | ValidatorFn[],
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormArray<T>
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
-  validatorOptions?: ValidatorOptions | null,
+  validatorOptions?: ValidatorOptions,
 ): FormArray<T>
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
-  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormArray<T> {
   const controls = config.map(item => createControl(item))
   return new FormArray(controls, validatorOrOptions, asyncValidator)
@@ -58,14 +56,14 @@ export function useFormArray<T extends any[] = any[]>(
 
 export function useFormControl<T = any>(
   initValue?: T,
-  validator?: ValidatorFn | ValidatorFn[] | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validator?: ValidatorFn | ValidatorFn[],
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormControl<T>
-export function useFormControl<T = any>(initValue: T, options?: ValidatorOptions | null): FormControl<T>
+export function useFormControl<T = any>(initValue: T, options?: ValidatorOptions): FormControl<T>
 export function useFormControl<T = any>(
   initValue: T,
-  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions | null,
-  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormControl<T> {
   return new FormControl(initValue, validatorOrOptions, asyncValidator)
 }
@@ -81,10 +79,8 @@ function reduceControls<T>(config: GroupConfig<T>): GroupControls<T> {
 function createControl<T>(config: AbstractControl<T> | ControlConfig<T>): AbstractControl<T> {
   if (isAbstractControl(config)) {
     return config
-  } else if (isArray(config)) {
-    const [initValue, validatorOrOptions, asyncValidator] = config
-    return new FormControl(initValue, validatorOrOptions, asyncValidator)
   } else {
-    return new FormControl(config as T)
+    const [initValue, validatorOrOptions, asyncValidator] = config as ControlConfig<T>
+    return new FormControl(initValue, validatorOrOptions, asyncValidator)
   }
 }

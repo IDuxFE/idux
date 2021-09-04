@@ -58,21 +58,22 @@ const useSwitch = (props: SwitchProps, blur: () => void) => {
   let handleClick: (evt: Event) => void
   let handleBlur: (evt: FocusEvent) => void
   let handleMouseup: (evt: Event) => void
-  const valueAccessor = useValueAccessor<boolean>({ valueKey: 'checked' })
-  const isChecked = computed(() => valueAccessor.value)
-  const isDisabled = computed(() => props.disabled ?? valueAccessor.disabled)
+  const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
+
+  const isChecked = computed(() => accessor.value)
+  const isDisabled = computed(() => props.disabled ?? accessor.disabled)
 
   handleClick = () => {
     if (isDisabled.value || props.loading) {
       return
     }
     callEmit(props.onChange, !isChecked.value)
-    valueAccessor.setValue(!isChecked.value)
+    accessor.setValue(!isChecked.value)
   }
 
   handleBlur = (evt: FocusEvent) => {
     callEmit(props.onBlur, evt)
-    valueAccessor.markAsBlurred()
+    accessor.markAsBlurred()
   }
 
   handleMouseup = () => {

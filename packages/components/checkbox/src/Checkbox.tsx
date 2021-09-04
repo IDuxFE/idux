@@ -14,7 +14,7 @@ export default defineComponent({
   inheritAttrs: false,
   setup(props, { attrs, expose, slots }) {
     const checkboxGroup = inject(checkboxGroupToken, null)
-    const name = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
+    const mergedName = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
     const { isChecked, isDisabled, handleChange, handleBlur, handleFocus } = useCheckbox(props, checkboxGroup)
     const classes = useClasses(props, isChecked, isDisabled)
     const { inputRef, focus, blur } = useElement()
@@ -41,7 +41,7 @@ export default defineComponent({
               aria-hidden
               {...restAttrs}
               autofocus={props.autofocus}
-              name={name.value}
+              name={mergedName.value}
               value={props.value}
               checked={isChecked.value}
               disabled={isDisabled.value}
@@ -67,20 +67,20 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
   const handleFocus = (evt: FocusEvent) => callEmit(props.onFocus, evt)
 
   if (checkboxGroup) {
-    const { valueAccessor, props: groupProps } = checkboxGroup
-    isChecked = computed(() => valueAccessor.value?.includes(props.value ?? props.trueValue))
-    isDisabled = computed(() => props.disabled ?? valueAccessor.disabled)
+    const { props: groupProps, accessor } = checkboxGroup
+    isChecked = computed(() => accessor.value?.includes(props.value ?? props.trueValue))
+    isDisabled = computed(() => props.disabled ?? accessor.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
-      valueAccessor.markAsBlurred()
+      accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
       const checkValue = checked ? props.trueValue : props.falseValue
       const value = props.value
-      const groupCheckedValue = [...valueAccessor.value]
-      const checkValueIndex = valueAccessor.value.indexOf(value)
+      const groupCheckedValue = [...accessor.value]
+      const checkValueIndex = accessor.value.indexOf(value)
       if (checkValueIndex === -1) {
         groupCheckedValue.push(value)
       } else {
@@ -89,22 +89,22 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       callEmit(props.onChange, checkValue)
 
       callEmit(groupProps.onChange, groupCheckedValue)
-      valueAccessor.setValue(groupCheckedValue)
+      accessor.setValue(groupCheckedValue)
     }
   } else {
-    const valueAccessor = useValueAccessor<CheckValue>({ valueKey: 'checked' })
-    isChecked = computed(() => valueAccessor.value === props.trueValue)
-    isDisabled = computed(() => valueAccessor.disabled)
+    const { accessor } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
+    isChecked = computed(() => accessor.value === props.trueValue)
+    isDisabled = computed(() => accessor.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
-      valueAccessor.markAsBlurred()
+      accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
       const checkValue = checked ? props.trueValue : props.falseValue
       callEmit(props.onChange, checkValue)
-      valueAccessor.setValue(checkValue)
+      accessor.setValue(checkValue)
     }
   }
 

@@ -7,12 +7,15 @@ import { radioGroupToken } from './token'
 export default defineComponent({
   name: 'IxRadioGroup',
   props: radioGroupProps,
-  setup(props) {
-    const valueAccessor = useValueAccessor()
-    provide(radioGroupToken, { props, valueAccessor })
-  },
-  render() {
-    const child = this.options ? this.options.map(option => <Radio {...option}></Radio>) : this.$slots.default?.()
-    return <div class="ix-radio-group">{child}</div>
+  setup(props, { slots }) {
+    const { accessor } = useValueAccessor()
+
+    provide(radioGroupToken, { props, accessor })
+
+    return () => {
+      const { options } = props
+      const children = options ? options.map(option => <Radio {...option}></Radio>) : slots.default?.()
+      return <div class="ix-radio-group">{children}</div>
+    }
   },
 })

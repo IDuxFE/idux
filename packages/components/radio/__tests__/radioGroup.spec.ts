@@ -17,7 +17,7 @@ describe('RadioGroup', () => {
     return mount(RadioGroup, { props: { options: defaultOptions, ...props }, ...rest })
   }
 
-  renderWork<RadioGroupProps>(Radio, { props: { options: defaultOptions } })
+  renderWork<RadioGroupProps>(Radio, { props: { label: 'Test', options: defaultOptions } })
 
   test('value work', async () => {
     const wrapper = RadioGroupMount({ props: { value: 'a' } })
