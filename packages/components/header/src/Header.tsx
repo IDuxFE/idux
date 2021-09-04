@@ -21,17 +21,17 @@ export default defineComponent({
   props: headerProps,
   setup(props, { slots }) {
     const classes = useClasses(props)
+
     const avatarSize = computed(() => avatarSizeTransformMap[props.size])
 
-    const onPrefixClick = (evt: MouseEvent) => callEmit(props.onPrefixClick, evt)
-    const onSuffixClick = (evt: MouseEvent) => callEmit(props.onSuffixClick, evt)
+    const onPrefixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onPrefixClick, evt)
+    const onSuffixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onSuffixClick, evt)
 
     return () => {
-      const { showBar, prefix, suffix, avatar, title, subTitle } = props
+      const { prefix, suffix, avatar, title, subTitle } = props
       return (
         <div class={classes.value}>
-          <div class="ix-header-main">
-            {showBar ? <span class="ix-header-bar"></span> : null}
+          <div class="ix-header-content">
             {renderIcon(slots.prefix, prefix, onPrefixClick, 'ix-header-prefix')}
             {renderAvatar(slots.avatar, avatar, avatarSize)}
             {renderTitle(slots.default, title, 'ix-header-title')}
@@ -49,6 +49,8 @@ const useClasses = (props: HeaderProps) => {
   return computed(() => {
     return {
       'ix-header': true,
+      'ix-header-bar': props.showBar,
+      'ix-header-disabled': props.disabled,
       [`ix-header-${props.size}`]: true,
     }
   })

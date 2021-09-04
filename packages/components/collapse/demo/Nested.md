@@ -1,7 +1,7 @@
 ---
 title:
-  zh: 面板嵌套
-  en: nested panel
+  zh: 嵌套面板
+  en: Nested panel
 order: 2
 ---
 

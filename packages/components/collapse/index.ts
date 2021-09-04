@@ -1,7 +1,7 @@
 import type { CollapseComponent, CollapsePanelComponent } from './src/types'
 
-import Collapse from './src/Collapse.vue'
-import CollapsePanel from './src/CollapsePanel.vue'
+import Collapse from './src/Collapse'
+import CollapsePanel from './src/CollapsePanel'
 
 const IxCollapse = Collapse as unknown as CollapseComponent
 const IxCollapsePanel = CollapsePanel as unknown as CollapsePanelComponent

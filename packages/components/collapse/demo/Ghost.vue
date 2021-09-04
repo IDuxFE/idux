@@ -1,5 +1,5 @@
 <template>
-  <IxCollapse v-model:expandedKeys="expandedKeys">
+  <IxCollapse ghost>
     <IxCollapsePanel key="1" header="Francis Bacon's saying">
       <span>Some books should be tasted, some devoured, but only a few should be chewed and digested thoroughly.</span>
     </IxCollapsePanel>
@@ -14,8 +14,3 @@
     </IxCollapsePanel>
   </IxCollapse>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const expandedKeys = ref(['1'])
-</script>

@@ -1,199 +1,186 @@
-import { mount } from '@vue/test-utils'
-import { Ref, ref, nextTick } from 'vue'
+import { h, reactive } from 'vue'
+import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxCollapse from '../src/Collapse.vue'
-import IxCollapsePanel from '../src/CollapsePanel.vue'
+import { IxIcon } from '@idux/components/icon'
+import Collapse from '../src/Collapse'
+import CollapsePanel from '../src/CollapsePanel'
+import { CollapseProps } from '../src/types'
 
-const CombineComponent = {
-  components: { IxCollapse, IxCollapsePanel },
-  template: `
-  <IxCollapse>
-    <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
-    <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
-    <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
-  </IxCollapse>
-  `,
-}
-describe('Collapse.vue and CollapsePanel', () => {
-  renderWork(CombineComponent)
+const defaultPanels = [
+  h(CollapsePanel, { key: 0, header: 'header 0' }),
+  h(CollapsePanel, { key: 1, header: 'header 1' }),
+  h(CollapsePanel, { key: 2, header: 'header 2' }),
+]
 
-  test('active(v-model) work', async () => {
-    const active = ref([]) as Ref<string[]>
-    const wrapper = mount({
-      components: { IxCollapse, IxCollapsePanel },
-      template: `
-      <IxCollapse v-model:active="active">
-        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
-        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
-        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
-      </IxCollapse>
-      `,
-      setup() {
-        return { active }
-      },
-    })
-
-    expect(wrapper.findAll('.ix-collapse-panel').length).toBe(3)
-    expect(wrapper.findAll('.ix-collapse-panel-active').length).toBe(0)
-
-    active.value = ['name1']
-
-    await nextTick()
-
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).toContain('ix-collapse-panel-active')
-    expect(active.value).toEqual(['name1'])
-
-    await wrapper.findAll('.ix-collapse-panel-header')[0].trigger('click')
-
-    await nextTick()
-
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).not.toContain(
-      'ix-collapse-panel-active',
-    )
-    expect(active.value).toEqual([])
-
-    await wrapper.findAll('.ix-collapse-panel-header')[0].trigger('click')
-    await nextTick()
-
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).toContain('ix-collapse-panel-active')
-    expect(active.value).toEqual(['name1'])
+describe('Collapse', () => {
+  renderWork(Collapse, {
+    props: { expandedKeys: [1] },
+    slots: { default: () => defaultPanels },
   })
 
-  test('accordion work', async () => {
-    const active = ref('')
-    const accordion = ref(true)
-    const mockFn = jest.fn()
+  describe('basic work', () => {
+    const CollapseMount = (options?: MountingOptions<Partial<CollapseProps>>) => {
+      const { slots, ...rest } = options || {}
+      const mergedOptions = {
+        slots: { default: () => defaultPanels, ...slots },
+        ...rest,
+      } as MountingOptions<CollapseProps>
+      return mount(Collapse, mergedOptions)
+    }
 
-    const wrapper = mount({
-      components: { IxCollapse, IxCollapsePanel },
-      provide: {},
-      template: `
-      <IxCollapse v-model:active="active" :accordion='accordion' @update:active="mockFn">
-        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
-        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
-        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
-      </IxCollapse>
-      `,
-      setup() {
-        return { active, accordion, mockFn }
-      },
+    test('v-model:expandedKeys work', async () => {
+      const onUpdateExpandedKeys = jest.fn()
+      const wrapper = CollapseMount({
+        props: {
+          expandedKeys: [0],
+          'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        },
+      })
+
+      expect(wrapper.findAll('.ix-collapse-panel').length).toBe(3)
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
+
+      await wrapper.setProps({ expandedKeys: [0, 1] })
+
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(2)
+
+      await wrapper.findAll('.ix-header')[0].trigger('click')
+
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
+      expect(onUpdateExpandedKeys).toBeCalledWith([1])
+
+      await wrapper.findAll('.ix-header')[0].trigger('click')
+
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(2)
+      expect(onUpdateExpandedKeys).toBeCalledWith([1, 0])
     })
 
-    expect(wrapper.findAll('.ix-collapse-panel').length).toBe(3)
-    expect(active.value).toEqual('')
-    expect(mockFn).toBeCalledTimes(0)
+    test('accordion work', async () => {
+      const onUpdateExpandedKeys = jest.fn()
+      const wrapper = CollapseMount({
+        props: {
+          accordion: true,
+          expandedKeys: [0],
+          'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        },
+      })
 
-    active.value = 'name1'
+      await wrapper.findAll('.ix-header')[1].trigger('click')
 
-    await nextTick()
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
+      expect(onUpdateExpandedKeys).toBeCalledWith([1])
 
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).toContain('ix-collapse-panel-active')
-    expect(active.value).toEqual('name1')
+      await wrapper.findAll('.ix-header')[0].trigger('click')
 
-    await wrapper.findAll('.ix-collapse-panel-header')[1].trigger('click')
+      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
+      expect(onUpdateExpandedKeys).toBeCalledWith([0])
+    })
 
-    expect(mockFn).toBeCalledTimes(1)
-    expect(active.value).toEqual(['name2'])
+    test('borderless work', async () => {
+      const wrapper = CollapseMount({
+        props: {
+          borderless: true,
+        },
+      })
 
-    await wrapper.findAll('.ix-collapse-panel-header')[2].trigger('click')
+      expect(wrapper.find('.ix-collapse-borderless').exists()).toBeTruthy()
 
-    expect(mockFn).toBeCalledTimes(2)
-    expect(active.value).toEqual(['name3'])
+      await wrapper.setProps({ borderless: false })
 
-    await wrapper.findAll('.ix-collapse-panel-header')[2].trigger('click')
+      expect(wrapper.find('.ix-collapse-borderless').exists()).toBeFalsy()
+    })
 
-    expect(mockFn).toBeCalledTimes(3)
+    test('expandIcon work', async () => {
+      const wrapper = CollapseMount({
+        props: {
+          expandIcon: 'left',
+        },
+      })
+
+      expect(wrapper.find('.ix-icon-left').exists()).toBeTruthy()
+
+      await wrapper.setProps({ expandIcon: 'right' })
+
+      expect(wrapper.find('.ix-icon-left').exists()).toBeFalsy()
+      expect(wrapper.find('.ix-icon-right').exists()).toBeTruthy()
+    })
+
+    test('expandIcon slot work', async () => {
+      const wrapper = CollapseMount({
+        props: {
+          expandIcon: 'left',
+        },
+        slots: {
+          expandIcon: ({ key, expanded }: { key: number; expanded: boolean }) =>
+            key === 2 ? undefined : h(IxIcon, { name: 'up', rotate: expanded ? 90 : 0 }),
+        },
+      })
+
+      expect(wrapper.findAll('.ix-icon-up').length).toBe(2)
+    })
+
+    test('ghost work', async () => {
+      const wrapper = CollapseMount({
+        props: {
+          ghost: true,
+        },
+      })
+
+      expect(wrapper.find('.ix-collapse-ghost').exists()).toBeTruthy()
+
+      await wrapper.setProps({ ghost: false })
+
+      expect(wrapper.find('.ix-collapse-ghost').exists()).toBeFalsy()
+    })
   })
 
-  test('borderless work', async () => {
-    const borderless = ref(true)
-    const active = ref([])
-    const wrapper = mount({
-      components: { IxCollapse, IxCollapsePanel },
-      template: `
-      <IxCollapse v-model:active="active" :borderless='borderless'>
-        <IxCollapsePanel name="name1"> name1 </IxCollapsePanel>
-        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
-        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
-      </IxCollapse>
-      `,
-      setup() {
-        return { active, borderless }
-      },
+  describe('panel work', () => {
+    test('disabled work', async () => {
+      const onUpdateExpandedKeys = jest.fn()
+      // TODO remove reactive
+      const panelProps = reactive({ key: 0, header: 'header 0', disabled: true })
+      const wrapper = mount(Collapse, {
+        props: { 'onUpdate:expandedKeys': onUpdateExpandedKeys },
+        slots: {
+          default: () => [h(CollapsePanel, panelProps)],
+        },
+      })
+
+      expect(wrapper.find('.ix-collapse-panel-disabled').exists()).toBeTruthy()
+
+      await wrapper.findAll('.ix-header')[0].trigger('click')
+
+      expect(onUpdateExpandedKeys).not.toBeCalled()
+
+      panelProps.disabled = false
+
+      await flushPromises()
+
+      expect(wrapper.find('.ix-collapse-panel-disabled').exists()).toBeFalsy()
+
+      await wrapper.findAll('.ix-header')[0].trigger('click')
+
+      expect(onUpdateExpandedKeys).toBeCalledWith([0])
     })
 
-    expect(wrapper.findAllComponents({ name: 'IxCollapse' })[0].classes()).toContain('ix-collapse-borderless')
+    test('header work', async () => {
+      const onUpdateExpandedKeys = jest.fn()
+      // TODO remove reactive
+      const panelProps = reactive({ key: 0, header: 'header 0' })
+      const wrapper = mount(Collapse, {
+        props: { 'onUpdate:expandedKeys': onUpdateExpandedKeys },
+        slots: {
+          default: () => [h(CollapsePanel, panelProps)],
+        },
+      })
 
-    borderless.value = false
+      expect(wrapper.html()).toMatchSnapshot()
 
-    await nextTick()
+      panelProps.header = { title: 'hello header', suffix: 'left' } as any
 
-    expect(wrapper.findAllComponents({ name: 'IxCollapse' })[0].classes()).not.toContain('ix-collapse-borderless')
-  })
+      await flushPromises()
 
-  test('collapse panel disabled work', async () => {
-    const active = ref([]) as Ref<string[]>
-    const disabled = ref(true)
-    const mockFn = jest.fn()
-
-    const wrapper = mount({
-      components: { IxCollapse, IxCollapsePanel },
-      template: `
-      <IxCollapse v-model:active="active" @update:active="mockFn">
-        <IxCollapsePanel name="name1" :disabled='disabled'> name1 </IxCollapsePanel>
-        <IxCollapsePanel name="name2"> name2 </IxCollapsePanel>
-        <IxCollapsePanel name="name3"> name3 </IxCollapsePanel>
-      </IxCollapse>
-      `,
-      setup() {
-        return { active, disabled, mockFn }
-      },
+      expect(wrapper.html()).toMatchSnapshot()
     })
-
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).toContain('ix-collapse-panel-disabled')
-    expect(mockFn).toBeCalledTimes(0)
-
-    await wrapper.findAll('.ix-collapse-panel-header')[0].trigger('click')
-
-    expect(mockFn).toBeCalledTimes(0)
-
-    disabled.value = false
-
-    await nextTick()
-
-    expect(wrapper.findAllComponents({ name: 'IxCollapsePanel' })[0].classes()).not.toContain(
-      'ix-collapse-panel-disabled',
-    )
-
-    await wrapper.findAll('.ix-collapse-panel-header')[0].trigger('click')
-
-    expect(mockFn).toBeCalledTimes(1)
-  })
-
-  test('collapse panel icon work', async () => {
-    const active = ref([]) as Ref<string[]>
-    const icon = ref([]) as Ref<string[]>
-
-    const wrapper = mount({
-      components: { IxCollapse, IxCollapsePanel },
-      template: `
-      <IxCollapse v-model:active="active">
-        <IxCollapsePanel name="name1" :icon=icon> name1 </IxCollapsePanel>
-        <IxCollapsePanel name="name2" :icon=icon> name2 </IxCollapsePanel>
-        <IxCollapsePanel name="name3" :icon=icon> name3 </IxCollapsePanel>
-      </IxCollapse>
-      `,
-      setup() {
-        return { active, icon }
-      },
-    })
-
-    expect(wrapper.findAll('.ix-icon')[0].classes()).toContain('ix-icon')
-
-    icon.value = ['rotate-right', 'rotate-left']
-
-    await nextTick()
-
-    expect(wrapper.findAll('.ix-icon')[0].classes()).toContain('ix-icon-rotate-right')
   })
 })

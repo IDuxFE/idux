@@ -19,6 +19,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `avatar` | 自定义头像 | `string \| AvatarProps \| #avatar` | - | - | 传入 `string` 时，为头像的图标  |
+| `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `prefix` | 标题前缀图标 | `string \| VNode \| #prefix` | - | - | - |
 | `size` | 标题大小 | `xLarge \| large \| medium \| small` | `large` | - | 分别对应 `h1 \| h2 \| h3 \| h4` |
 | `showBar` | 是否显示标题前的竖条 | `boolean` | `false` | - | - |

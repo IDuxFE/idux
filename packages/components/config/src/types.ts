@@ -170,6 +170,9 @@ export interface ListConfig {
 
 export interface CollapseConfig {
   accordion: boolean
+  borderless: boolean
+  expandIcon: string
+  ghost: boolean
 }
 
 export interface ImageConfig {

@@ -23,10 +23,10 @@ export default defineComponent({
     return () => {
       const child = messages.value.map(item => {
         // The default value for `visible` is true
-        const { content, visible = true, onDestroy, ...rest } = item
+        const { key, content, visible = true, onDestroy, ...rest } = item
         const update = { 'onUpdate:visible': (visible: boolean) => !visible && apis.destroy(key!) }
         return (
-          <Message {...rest} {...update} visible={visible}>
+          <Message key={key} {...rest} {...update} visible={visible}>
             {content}
           </Message>
         )
