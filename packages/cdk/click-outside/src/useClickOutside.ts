@@ -3,7 +3,7 @@ import type { ObjectDirective } from 'vue'
 import { isFunction, isObject } from 'lodash-es'
 import { noop, on } from '@idux/cdk/utils'
 
-interface ClickOutsideOptions {
+export interface ClickOutsideOptions {
   exclude: (HTMLElement | null)[]
   handler: ClickOutsideHandler
 }

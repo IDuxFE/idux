@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
+import { ComputedRef, Ref, shallowRef, VNode } from 'vue'
 import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
 import type { OverlayProps } from './types'
 
@@ -13,7 +13,7 @@ import {
   watch,
   withDirectives,
 } from 'vue'
-import { clickOutside } from '@idux/cdk/click-outside'
+import { clickOutside, ClickOutsideOptions } from '@idux/cdk/click-outside'
 import { usePopper, convertElement } from '@idux/cdk/popper'
 import { IxPortal } from '@idux/cdk/portal'
 import { callEmit, getFirstValidNode, Logger } from '@idux/cdk/utils'
@@ -39,6 +39,11 @@ export default defineComponent({
       destroy,
     } = usePopper(popperOptions.value)
 
+    const clickOutsideOptions = shallowRef<ClickOutsideOptions>({
+      exclude: [convertElement(popperRef.value)],
+      handler: () => hide(),
+    })
+
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
 
@@ -62,7 +67,12 @@ export default defineComponent({
       if (!getFirstValidNode(contentNode)) {
         return triggerNode
       }
-      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, popperRef, hide)
+      const trigger = renderTrigger(
+        props,
+        triggerNode,
+        { ref: triggerRef, ...triggerEvents.value },
+        clickOutsideOptions.value,
+      )
       const content = renderContent(props, visibility, contentNode!, arrowRef, popperRef, popperEvents, attrs)
       return (
         <>
@@ -114,12 +124,11 @@ function renderTrigger(
   props: OverlayProps,
   triggerNode: VNode,
   extraProps: Record<string, unknown>,
-  popperRef: Ref<PopperElement | null>,
-  handler: () => void,
+  clickOutsideOptions: ClickOutsideOptions,
 ) {
   const element = cloneVNode(triggerNode, extraProps, true)
   if (props.clickOutside) {
-    return withDirectives(element, [[clickOutside, { exclude: [convertElement(popperRef)], handler }]])
+    return withDirectives(element, [[clickOutside, clickOutsideOptions]])
   }
   return element
 }
