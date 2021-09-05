@@ -53,7 +53,7 @@ describe('Card', () => {
     const wrapper = CardMount({ props: { header } })
     expect(wrapper.find('.ix-header').text()).toBe(header)
 
-    await wrapper.setProps({ header: { title: header, extra: 'up' } })
+    await wrapper.setProps({ header: { title: header, suffix: 'up' } })
 
     expect(wrapper.find('.ix-header').text()).toBe(header)
     expect(wrapper.find('.ix-icon-up').exists()).toBe(true)

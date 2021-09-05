@@ -23,10 +23,10 @@ export default defineComponent({
     return () => {
       const child = messages.value.map(item => {
         // The default value for `visible` is true
-        const { id, content, visible = true, onDestroy, ...rest } = item
-        const update = { 'onUpdate:visible': (visible: boolean) => !visible && apis.destroy(id!) }
+        const { key, content, visible = true, onDestroy, ...rest } = item
+        const update = { 'onUpdate:visible': (visible: boolean) => !visible && apis.destroy(key!) }
         return (
-          <Message {...rest} {...update} key={id} visible={visible}>
+          <Message key={key} {...rest} {...update} visible={visible}>
             {content}
           </Message>
         )
@@ -49,38 +49,38 @@ export default defineComponent({
 const useMessage = (maxCount: ComputedRef<number>) => {
   const messages = ref<MessageOptions[]>([])
 
-  const getCurrIndex = (id: string) => {
-    return messages.value.findIndex(message => message.id === id)
+  const getCurrIndex = (key: string) => {
+    return messages.value.findIndex(message => message.key === key)
   }
 
   const add = (item: MessageOptions) => {
-    const currIndex = item.id ? getCurrIndex(item.id) : -1
+    const currIndex = item.key ? getCurrIndex(item.key) : -1
     if (currIndex !== -1) {
       messages.value.splice(currIndex, 1, item)
-      return item.id!
+      return item.key!
     }
 
     if (messages.value.length >= maxCount.value) {
       messages.value = messages.value.slice(-maxCount.value + 1)
     }
 
-    const id = item.id ?? uniqueId('ix-message')
-    messages.value.push({ ...item, id })
-    return id
+    const key = item.key ?? uniqueId('ix-message')
+    messages.value.push({ ...item, key })
+    return key
   }
 
-  const update = (id: string, item: MessageOptions) => {
-    const currIndex = getCurrIndex(id)
+  const update = (key: string, item: MessageOptions) => {
+    const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
       const newItem = { ...messages.value[currIndex], ...item }
       messages.value.splice(currIndex, 1, newItem)
     }
   }
 
-  const destroy = (id: string | string[]) => {
-    const ids = convertArray(id)
-    ids.forEach(id => {
-      const currIndex = getCurrIndex(id)
+  const destroy = (key: string | string[]) => {
+    const keys = convertArray(key)
+    keys.forEach(key => {
+      const currIndex = getCurrIndex(key)
       if (currIndex !== -1) {
         const item = messages.value.splice(currIndex, 1)
         callEmit(item[0].onDestroy)
@@ -100,11 +100,11 @@ const useMessageApis = (maxCount: ComputedRef<number>) => {
   const loadContainer = ref(false)
 
   const open = (options: MessageOptions): MessageRef => {
-    const id = add(options)
+    const key = add(options)
     const ref = {
-      id,
-      update: (options: MessageOptions) => update(id, options),
-      destroy: () => destroy(id),
+      key,
+      update: (options: MessageOptions) => update(key, options),
+      destroy: () => destroy(key),
     }
     if (!loadContainer.value) {
       loadContainer.value = true

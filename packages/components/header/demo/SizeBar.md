@@ -2,7 +2,7 @@
 title:
   zh: 大小和竖条
   en: Size and bar
-order: 1
+order: 4
 ---
 
 ## zh
@@ -13,6 +13,6 @@ order: 1
 
 ## en
 
-There are 4 types of titles: `extraLarge`, `large`, `medium` and `small`. The default is `large`.
+There are 4 types of titles: `xLarge`, `large`, `medium` and `small`. The default is `large`.
 
 You can display a vertical bar by setting `showBar` to avoid monotonous title.

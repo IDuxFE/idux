@@ -1,11 +1,10 @@
 import type { VNode } from 'vue'
-import type { OverlayPlacement, OverlayTrigger } from '@idux/cdk/overlay'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
-import type { TextareaResize, TextareaAutoRows } from '@idux/components/input'
+import type { TextareaResize, TextareaAutoRows } from '@idux/components/textarea'
 import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
@@ -61,16 +60,23 @@ export interface RowConfig {
 
 // Navigation
 export interface DropdownConfig {
-  placement: OverlayPlacement
-  trigger: OverlayTrigger
+  autoAdjust: boolean
+  destroyOnHide: boolean
+  offset: [number, number]
+  placement: PopperPlacement
+  showArrow: boolean
+  target: string | HTMLElement
+  trigger: PopperTrigger
 }
 
 export interface MenuConfig {
+  collapsedWidth: string | number
   indent: number
   theme: MenuTheme
 }
 
 export interface MenuSubConfig {
+  offset: [number, number]
   suffix: string
   suffixRotates: [number, number]
 }
@@ -164,6 +170,9 @@ export interface ListConfig {
 
 export interface CollapseConfig {
   accordion: boolean
+  borderless: boolean
+  expandIcon: string
+  ghost: boolean
 }
 
 export interface ImageConfig {

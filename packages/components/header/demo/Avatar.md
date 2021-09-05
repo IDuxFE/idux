@@ -2,7 +2,7 @@
 title:
   zh: 头像
   en: Avatar
-order: 4
+order: 3
 ---
 
 ## zh

@@ -1,5 +1,5 @@
 <template>
-  <IxAffix :offset="numberOffset" @change="onChange">
+  <IxAffix :offset="numberOffset" @Change="onChange">
     <IxButton @click="numberOffset += 20">Number Offset</IxButton>
   </IxAffix>
   <br />
@@ -8,12 +8,12 @@
   </IxAffix>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {
     const numberOffset = ref(0)
-    const onChange = isAffix => {
+    const onChange = (isAffix: boolean) => {
       console.log(`Basic Offset status change : ${isAffix}`)
     }
 

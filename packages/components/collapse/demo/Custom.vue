@@ -1,32 +1,37 @@
 <template>
-  <IxCollapse v-model:active="active">
-    <IxCollapsePanel name="1" title="Francis Bacon's saying" :icon="icon">
-      <p>A wise man will make more opportunities than he finds.</p>
+  <IxCollapse expandIcon="caret-right" class="demo-collapse">
+    <IxCollapsePanel key="1" header="Francis Bacon's saying" class="demo-collapse-panel">
+      <span>A wise man will make more opportunities than he finds.</span>
     </IxCollapsePanel>
-    <IxCollapsePanel name="2" title="Francis Bacon's saying" :icon="icon">
+    <IxCollapsePanel key="2" header="Francis Bacon's saying" class="demo-collapse-panel">
       If a man will begin with certainties, he shall end in doubts; but if he will be content to begin with doubts, he
       shall end in certainties.
     </IxCollapsePanel>
-    <IxCollapsePanel name="3" title="Francis Bacon's saying" :icon="icon">
+    <IxCollapsePanel key="3" header="Francis Bacon's saying" class="demo-collapse-panel">
+      A wise man will make more opportunities than he finds.
+    </IxCollapsePanel>
+  </IxCollapse>
+
+  <IxCollapse>
+    <template #expandIcon="{ key, expanded }">
+      <IxIcon v-if="key !== '3'" name="right" :rotate="expanded ? 90 : 0"></IxIcon>
+    </template>
+    <IxCollapsePanel key="1" header="Francis Bacon's saying">
+      <span>A wise man will make more opportunities than he finds.</span>
+    </IxCollapsePanel>
+    <IxCollapsePanel key="2" header="Francis Bacon's saying">
+      If a man will begin with certainties, he shall end in doubts; but if he will be content to begin with doubts, he
+      shall end in certainties.
+    </IxCollapsePanel>
+    <IxCollapsePanel key="3" header="Francis Bacon's saying">
       A wise man will make more opportunities than he finds.
     </IxCollapsePanel>
   </IxCollapse>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const active = ref('2')
-    const icon = ref(['caret-right', 'caret-down'])
-    const onChange = v => {
-      console.log(v)
-    }
-    return {
-      active,
-      onChange,
-      icon,
-    }
-  },
-})
-</script>
+<style lang="less" scoped>
+.demo-collapse .demo-collapse-panel {
+  background: @grey-l40;
+  margin-bottom: @spacing-lg;
+}
+</style>

@@ -7,17 +7,18 @@ import { HeaderProps } from '@idux/components/header'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
 export interface ModalButtonProps extends ButtonProps {
+  key?: string | number
   text?: string | VNode
   visible?: boolean
   onClick?: (evt: Event) => void
 }
 export interface ModalOptions extends ModalPublicProps {
-  id?: string
+  key?: string
   content?: string | VNode
-  onDestroy?: (id: string) => void
+  onDestroy?: (key: string) => void
 }
 export interface ModalRef extends ModalBindings {
-  id: string
+  key: string
   update: (options: ModalOptions) => void
   destroy: () => void
 }
@@ -71,8 +72,8 @@ export interface ModalProviderRef {
   success: (options: Omit<ModalOptions, 'type'>) => ModalRef
   warning: (options: Omit<ModalOptions, 'type'>) => ModalRef
   error: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  update: (id: string, options: ModalOptions) => void
-  destroy: (id: string | string[]) => void
+  update: (key: string, options: ModalOptions) => void
+  destroy: (key: string | string[]) => void
   destroyAll: () => void
 }
 export type ModalProviderComponent = DefineComponent<null, ModalProviderRef>

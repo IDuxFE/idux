@@ -33,6 +33,7 @@ export const paginationProps = {
   // events
   'onUpdate:pageIndex': IxPropTypes.emit<(pageIndex: number) => void>(),
   'onUpdate:pageSize': IxPropTypes.emit<(pageSize: number) => void>(),
+  onChange: IxPropTypes.emit<(pageIndex: number, pageSize: number) => void>(),
 }
 
 export type PaginationProps = IxInnerPropTypes<typeof paginationProps>

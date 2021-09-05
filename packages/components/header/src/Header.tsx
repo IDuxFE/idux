@@ -1,16 +1,16 @@
-import { onBeforeUnmount, onMounted, ref, Slot, VNode, VNodeTypes, watch } from 'vue'
+import type { ComputedRef, Slot, VNode } from 'vue'
 import type { AvatarProps } from '@idux/components/avatar'
 import type { HeaderProps } from './types'
 
 import { computed, defineComponent, h, isVNode } from 'vue'
 import { isString } from 'lodash-es'
-import { callEmit, getOffset, offResize, onResize, convertCssPixel } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
 
 const avatarSizeTransformMap = {
-  extraLarge: 'medium',
+  xLarge: 'medium',
   large: 'medium',
   medium: 'small',
   small: 'small',
@@ -19,38 +19,29 @@ const avatarSizeTransformMap = {
 export default defineComponent({
   name: 'IxHeader',
   props: headerProps,
-  setup(props) {
+  setup(props, { slots }) {
     const classes = useClasses(props)
+
     const avatarSize = computed(() => avatarSizeTransformMap[props.size])
-    const { mainRef, titleRef, paddingLeft } = useDescriptionPaddingLeft()
 
-    const onPrefixClick = (evt: MouseEvent) => callEmit(props.onPrefixClick, evt)
-    const onExtraClick = (evt: MouseEvent) => callEmit(props.onExtraClick, evt)
+    const onPrefixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onPrefixClick, evt)
+    const onSuffixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onSuffixClick, evt)
 
-    return { classes, avatarSize, mainRef, titleRef, paddingLeft, onPrefixClick, onExtraClick }
-  },
-
-  render() {
-    const bar = this.showBar ? <span class="ix-header-bar"></span> : null
-    const prefix = renderIcon(this.$slots.prefix, this.prefix, this.onPrefixClick, 'ix-header-prefix')
-    const extra = renderIcon(this.$slots.extra, this.extra, this.onExtraClick, 'ix-header-extra')
-    const avatar = renderAvatar(this.$slots.avatar, this.avatar, this.avatarSize)
-    const title = renderTitle(this.$slots.default, this.title)
-    const subTitle = renderSubTitle(this.$slots.subTitle, this.subTitle)
-    const description = renderDescription(this.$slots.description, this.description, this.paddingLeft)
-    return (
-      <div class={this.classes}>
-        <div ref="mainRef" class="ix-header-main">
-          {bar}
-          {prefix}
-          {avatar}
-          {title}
-          {subTitle}
+    return () => {
+      const { prefix, suffix, avatar, title, subTitle } = props
+      return (
+        <div class={classes.value}>
+          <div class="ix-header-content">
+            {renderIcon(slots.prefix, prefix, onPrefixClick, 'ix-header-prefix')}
+            {renderAvatar(slots.avatar, avatar, avatarSize)}
+            {renderTitle(slots.default, title, 'ix-header-title')}
+            {renderTitle(slots.subTitle, subTitle, 'ix-header-sub-title')}
+            {renderIcon(slots.suffix, suffix, onSuffixClick, 'ix-header-suffix')}
+          </div>
+          {slots.description ? <div class="ix-header-description">{slots.description()}</div> : null}
         </div>
-        {extra}
-        {description}
-      </div>
-    )
+      )
+    }
   },
 })
 
@@ -58,6 +49,8 @@ const useClasses = (props: HeaderProps) => {
   return computed(() => {
     return {
       'ix-header': true,
+      'ix-header-bar': props.showBar,
+      'ix-header-disabled': props.disabled,
       [`ix-header-${props.size}`]: true,
     }
   })
@@ -72,93 +65,36 @@ const renderIcon = (
   if (!slot && !icon) {
     return null
   }
+  const iconNode = slot ? (
+    slot()
+  ) : isVNode(icon) ? (
+    h(icon as VNode, { onClick })
+  ) : (
+    <IxIcon name={icon} onClick={onClick} />
+  )
+  return <div class={wrapperClassName}>{iconNode}</div>
+}
 
-  let child: VNodeTypes
-
-  if (slot) {
-    child = slot()
-  } else if (isVNode(icon)) {
-    child = h(icon, { onClick: onClick })
-  } else {
-    child = <IxIcon name={icon} onClick={onClick} />
+const renderTitle = (slot: Slot | undefined, title: string | undefined, wrapperClassName: string) => {
+  if (!slot && !title) {
+    return null
   }
-
-  return <div class={wrapperClassName}>{child}</div>
+  return <span class={wrapperClassName}>{slot?.() ?? title}</span>
 }
 
 const renderAvatar = (
-  avatarSlot: Slot | undefined,
+  slot: Slot | undefined,
   avatar: string | AvatarProps | undefined,
-  size: 'medium' | 'small',
+  size: ComputedRef<'medium' | 'small'>,
 ) => {
-  if (avatarSlot) {
-    return avatarSlot()
+  if (slot) {
+    return slot()
   }
-  if (avatar) {
-    const avatarProps = isString(avatar) ? { icon: avatar } : avatar
-    return <IxAvatar size={size} {...avatarProps}></IxAvatar>
-  }
-  return null
-}
 
-const renderTitle = (titleSlot: Slot | undefined, title: string | undefined) => {
-  if (!titleSlot && !title) {
+  if (!avatar) {
     return null
   }
-  return (
-    <span ref="titleRef" class="ix-header-title">
-      {titleSlot ? titleSlot() : title}
-    </span>
-  )
-}
 
-const renderSubTitle = (slot: Slot | undefined, childText: string | undefined) => {
-  if (!slot && !childText) {
-    return null
-  }
-  return <span class="ix-header-sub-title">{slot ? slot() : childText}</span>
-}
-
-const renderDescription = (slot: Slot | undefined, childText: string | undefined, paddingLeft: string | number) => {
-  if (!slot && !childText) {
-    return null
-  }
-  return (
-    <span class="ix-header-description" style={{ paddingLeft }}>
-      {slot ? slot() : childText}
-    </span>
-  )
-}
-function useDescriptionPaddingLeft() {
-  const mainRef = ref<HTMLDivElement>()
-  const titleRef = ref<HTMLSpanElement>()
-  const paddingLeft = ref('0px')
-
-  const calcPaddingLeft = () => {
-    const mainElement = mainRef.value
-    const titleElement = titleRef.value
-    let left: string | number
-    if (!mainElement || !titleElement) {
-      left = '0px'
-    } else {
-      left = convertCssPixel(getOffset(titleElement, mainElement).left)
-    }
-    paddingLeft.value = left
-  }
-
-  onMounted(() => {
-    watch(
-      titleRef,
-      (newEl, oldEl) => {
-        offResize(oldEl, calcPaddingLeft)
-        onResize(newEl, calcPaddingLeft)
-        calcPaddingLeft()
-      },
-      { immediate: true },
-    )
-  })
-
-  onBeforeUnmount(() => offResize(titleRef.value, calcPaddingLeft))
-
-  return { mainRef, titleRef, paddingLeft }
+  const avatarProps = isString(avatar) ? { icon: avatar } : avatar
+  return <IxAvatar size={size.value} {...avatarProps}></IxAvatar>
 }

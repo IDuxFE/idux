@@ -6,17 +6,17 @@
       :data="data"
       :height="200"
       :itemHeight="20"
-      itemKey="id"
+      itemKey="key"
       @scroll="onScroll"
     >
       <template #item="{ item, index }">
-        <span class="virtual-item" @click="onItemClick(item.id)">{{ item.id }} - {{ index }}</span>
+        <span class="virtual-item" @click="onItemClick(item.key)">{{ item.key }} - {{ index }}</span>
       </template>
     </IxVirtualList>
 
     <IxSpace>
       <IxButton @click="scrollTo(100)"> Scroll To 100px </IxButton>
-      <IxButton @click="scrollTo({ key: 'id-50', align: 'top' })"> Scroll To id-50(top) </IxButton>
+      <IxButton @click="scrollTo({ key: 'key-50', align: 'top' })"> Scroll To key-50(top) </IxButton>
       <IxButton @click="scrollTo({ index: 40, align: 'top' })"> Scroll To 40(top) </IxButton>
       <IxButton @click="scrollTo({ index: 40, align: 'bottom' })"> Scroll To 40(bottom) </IxButton>
       <IxButton @click="scrollTo({ index: 40, align: 'auto' })"> Scroll To 40(auto) </IxButton>
@@ -32,17 +32,17 @@ import { VirtualListInstance, ScrollToOptions } from '@idux/cdk/virtual-list'
 export default defineComponent({
   setup() {
     const listRef = ref<VirtualListInstance>()
-    const data: { id: string }[] = []
+    const data: { key: string }[] = []
     for (let index = 0; index < 1000; index++) {
-      data.push({ id: `id-${index}` })
+      data.push({ key: `key-${index}` })
     }
 
     const onScroll = (evt: Event) => {
       console.log('scroll:', evt.currentTarget!.scrollTop)
     }
 
-    const onItemClick = (id: string) => {
-      console.log('click:', id)
+    const onItemClick = (key: string) => {
+      console.log('click:', key)
     }
 
     const scrollTo = (value: number | ScrollToOptions) => listRef.value?.scrollTo(value)

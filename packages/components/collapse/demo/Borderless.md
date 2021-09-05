@@ -1,7 +1,7 @@
 ---
 title:
-  zh: 简洁风格
-  en: borderless
+  zh: 无边框
+  en: Borderless
 order: 3
 ---
 

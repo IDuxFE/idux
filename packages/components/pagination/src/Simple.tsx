@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, ref, toRef, watchEffect } from 'vue'
+import { computed, defineComponent, inject, ref, watchEffect } from 'vue'
 import { IxInput } from '@idux/components/input'
 import Item from './Item'
 import { paginationToken } from './token'
@@ -21,32 +21,23 @@ export default defineComponent({
 
     const jumpToIndex = useJumpToIndex(false)
 
-    return {
-      size,
-      disabled: toRef(props, 'disabled'),
-      activeIndex,
-      lastIndex,
-      isFirstIndex,
-      isLastIndex,
-      jumpToIndex,
+    return () => {
+      return (
+        <>
+          <Item disabled={isFirstIndex.value} type="prev" />
+          <li class="ix-pagination-item">
+            <IxInput
+              disabled={props.disabled}
+              size={size.value}
+              value={activeIndex.value.toString()}
+              onKeydown={jumpToIndex}
+            />
+            <span class="ix-pagination-item-slash">/</span>
+            <span>{lastIndex.value}</span>
+          </li>
+          <Item disabled={isLastIndex.value} type="next" />
+        </>
+      )
     }
-  },
-  render() {
-    return (
-      <>
-        <Item disabled={this.isFirstIndex} type="prev" />
-        <li class="ix-pagination-item">
-          <IxInput
-            disabled={this.disabled}
-            size={this.size}
-            value={this.activeIndex.toString()}
-            onKeydown={this.jumpToIndex}
-          />
-          <span class="ix-pagination-item-slash">/</span>
-          <span>{this.lastIndex}</span>
-        </li>
-        <Item disabled={this.isLastIndex} type="next" />
-      </>
-    )
   },
 })

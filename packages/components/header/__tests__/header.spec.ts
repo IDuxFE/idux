@@ -31,50 +31,8 @@ describe('Header', () => {
     expect(wrapper.find('.ix-avatar').find('.ix-icon-up').exists()).toBe(true)
   })
 
-  test('extra work', async () => {
-    const onExtraClick = jest.fn()
-    const wrapper = HeaderMount({
-      props: { extra: 'up', onExtraClick },
-    })
-
-    expect(wrapper.find('.ix-header-extra').exists()).toBe(true)
-
-    await wrapper.find('.ix-icon-up').trigger('click')
-
-    expect(onExtraClick).toBeCalledTimes(1)
-
-    const extra = h(IxIcon, { name: 'down' })
-    await wrapper.setProps({ extra })
-
-    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
-
-    await wrapper.find('.ix-icon-down').trigger('click')
-
-    expect(onExtraClick).toBeCalledTimes(2)
-  })
-
-  test('extra slot work', async () => {
-    const wrapper = HeaderMount({
-      props: { extra: 'up' },
-      slots: { extra: '<span class="test-slot-extra">extra</span>' },
-    })
-
-    expect(wrapper.find('.ix-icon-up').exists()).toBe(false)
-    expect(wrapper.find('.test-slot-extra').exists()).toBe(true)
-  })
-
-  test('description work', async () => {
-    const wrapper = HeaderMount({ props: { description: 'description' } })
-
-    expect(wrapper.find('.ix-header-description').text()).toBe('description')
-
-    await wrapper.setProps({ description: 'change description' })
-
-    expect(wrapper.find('.ix-header-description').text()).toBe('change description')
-  })
-
   test('description slot work', async () => {
-    const wrapper = HeaderMount({ props: { description: 'description' }, slots: { description: 'slot description' } })
+    const wrapper = HeaderMount({ slots: { description: 'slot description' } })
 
     expect(wrapper.find('.ix-header-description').text()).toBe('slot description')
   })
@@ -110,10 +68,42 @@ describe('Header', () => {
     expect(wrapper.find('.test-slot-prefix').exists()).toBe(true)
   })
 
-  test('size work', async () => {
-    const wrapper = HeaderMount({ props: { size: 'extraLarge', title: 'title' } })
+  test('suffix work', async () => {
+    const onSuffixClick = jest.fn()
+    const wrapper = HeaderMount({
+      props: { suffix: 'up', onSuffixClick },
+    })
 
-    expect(wrapper.classes()).toContain('ix-header-extraLarge')
+    expect(wrapper.find('.ix-header-suffix').exists()).toBe(true)
+
+    await wrapper.find('.ix-icon-up').trigger('click')
+
+    expect(onSuffixClick).toBeCalledTimes(1)
+
+    const suffix = h(IxIcon, { name: 'down' })
+    await wrapper.setProps({ suffix })
+
+    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
+
+    await wrapper.find('.ix-icon-down').trigger('click')
+
+    expect(onSuffixClick).toBeCalledTimes(2)
+  })
+
+  test('suffix slot work', async () => {
+    const wrapper = HeaderMount({
+      props: { suffix: 'up' },
+      slots: { suffix: '<span class="test-slot-suffix">suffix</span>' },
+    })
+
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(false)
+    expect(wrapper.find('.test-slot-suffix').exists()).toBe(true)
+  })
+
+  test('size work', async () => {
+    const wrapper = HeaderMount({ props: { size: 'xLarge', title: 'title' } })
+
+    expect(wrapper.classes()).toContain('ix-header-xLarge')
 
     await wrapper.setProps({ size: undefined })
 

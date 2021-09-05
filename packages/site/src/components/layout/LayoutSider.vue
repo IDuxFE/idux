@@ -1,7 +1,7 @@
 <template>
-  <IxMenu class="side-nav" mode="inline" :indent="48" :selectedIds="selectedIds">
+  <IxMenu class="side-nav" mode="inline" :indent="48" :selectedKeys="selectedKeys">
     <template v-if="page === 'docs'">
-      <IxMenuItem v-for="docs in config.docs" v-show="docs.lang === lang" :key="docs.path" :cid="docs.path">
+      <IxMenuItem v-for="docs in config.docs" v-show="docs.lang === lang" :key="docs.path">
         <router-link :to="docs.path">
           <span>{{ docs.title }}</span>
         </router-link>
@@ -12,9 +12,9 @@
         v-for="group in config.components"
         v-show="group.lang === lang"
         :key="group.name"
-        :title="group.name"
+        :label="group.name"
       >
-        <IxMenuItem v-for="component in group.children" :key="component.path" :cid="component.path">
+        <IxMenuItem v-for="component in group.children" :key="component.path">
           <router-link :to="component.path">
             <IxSpace>
               <span>{{ component.title }}</span>
@@ -25,7 +25,7 @@
       </IxMenuItemGroup>
     </template>
     <template v-if="page === 'cdk'">
-      <IxMenuItem v-for="cdk in config.cdk" v-show="cdk.lang === lang" :key="cdk.path" :cid="cdk.path">
+      <IxMenuItem v-for="cdk in config.cdk" v-show="cdk.lang === lang" :key="cdk.path">
         <router-link :to="cdk.path">
           <IxSpace>
             <span>{{ cdk.title }}</span>
@@ -45,8 +45,8 @@ import { config } from '../../sideNav'
 export default defineComponent({
   setup() {
     const { lang, page, path } = inject(appContextToken)!
-    const selectedIds = computed(() => [path.value])
-    return { lang, page, selectedIds, config }
+    const selectedKeys = computed(() => [path.value])
+    return { lang, page, selectedKeys, config }
   },
 })
 </script>

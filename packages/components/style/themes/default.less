@@ -64,19 +64,20 @@
 @icon-color-hover: fade(@black, 75%);
 
 /* title -------------------------- */
-@header-line-height: 1;
+@header-line-height: @line-height-base;
 @header-height-xl: @height-xl;
 @header-height-lg: @height-xl;
 @header-height-md: @height-lg;
 @header-height-sm: @height-md;
+@header-font-size: @font-size-md;
 @header-color: @text-color;
-@header-bg-color: @background-color-component;
+@header-background-color: @background-color-component;
+@header-disabled-color: @disabled-color;
 @header-transition: color @transition-duration-base @ease-in-out;
 
 @header-bar-width: @spacing-xs;
-@header-bar-height: 100%;
-@header-bar-margin-right: @spacing-sm;
-@header-bar-bg-color: @primary;
+@header-bar-margin: @spacing-sm 0;
+@header-bar-background-color: @primary;
 
 @header-prefix-margin-right: @spacing-sm;
 @header-prefix-padding-right: @spacing-sm;
@@ -94,19 +95,15 @@
 @header-title-font-size-md: @font-size-xl;
 @header-title-font-size-sm: @font-size-lg;
 
-@header-sub-color: @text-color-secondary;
-@header-sub-font-size: @font-size-lg;
-@header-sub-font-size-sm: @font-size-md;
+@header-sub-title-color: @text-color-secondary;
 
-@header-extra-color: @text-color-secondary;
-@header-extra-padding: 0 @spacing-xs;
-@header-extra-active-icon-color: @header-title-color;
-@header-extra-font-size: @font-size-lg;
-@header-extra-font-size-sm: @font-size-md;
+@header-suffix-color: @text-color-secondary;
+@header-suffix-padding: 0 @spacing-xs;
+@header-suffix-active-icon-color: @header-title-color;
+@header-suffix-font-size: @font-size-lg;
+@header-suffix-font-size-sm: @font-size-md;
 
 @header-description-color: @text-color;
-@header-description-font-size: @font-size-md;
-@header-description-line-height: @line-height-base;
 
 /* tag -------------------------- start */
 @text-color-inverse: @white;
@@ -191,6 +188,7 @@
 /* dropdown -------------------------- */
 @dropdown-menu-item-height: @height-md;
 @dropdown-menu-item-margin: 0;
+@dropdown-background-color: @menu-bg-color;
 
 /* menu -------------------------- */
 @menu-text-color: @text-color;
@@ -231,7 +229,6 @@
 @menu-dark-bg-color: @background-color-component-dark;
 @menu-dark-highlight-bg-color: fade(@white, 6%);
 
-@menu-collapsed-width: 64px;
 @menu-collapsed-font-size: @font-size-lg;
 
 /* pagination -------------------------- */
@@ -590,14 +587,21 @@
 @list-bg-color: #fff;
 
 /* collapse -------------------------- */
-@collapse-panel-border-style: @border-width-sm solid @border-color;
-@collapse-panel-header-bg-color: #fafafa;
-@collapse-panel-content-color: @white;
-@collapse-panel-content-padding: 15px;
-@collapse-panel-disabled-color: @disabled-color;
-@collapse-panel-disabled-bg-color: @disabled-bg-color;
-@collapse-panel-font-size: @font-size-md;
-@collapse-panel-line-hight: @height-lg;
+@collapse-line-height: @line-height-base;
+@collapse-font-size: @font-size-md;
+@collapse-color: @text-color;
+@collapse-background-color: @grey-l50;
+@collapse-border: @border-width-sm @border-style @border-color;
+@collapse-border-radius: @border-radius-sm;
+
+@collapse-panel-header-padding: 2px @spacing-lg;
+@collapse-panel-header-prefix-font-size: @font-size-sm;
+@collapse-panel-header-font-size: @font-size-md;
+@collapse-panel-header-font-weight: @font-weight-md;
+
+@collapse-panel-content-background-color: @background-color-component;
+@collapse-panel-content-padding: @spacing-lg;
+@collapse-panel-content-padding-top-compact: @spacing-xs;
 
 /* empty -------------------------- */
 @empty-margin-md: @spacing-md;

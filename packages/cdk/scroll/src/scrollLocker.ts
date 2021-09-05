@@ -10,8 +10,6 @@ let locks: { id: number; options: ScrollLockerOptions }[] = []
 
 const defaultBlockClassName = 'ix-cdk-scroll-block'
 
-let uuid = 0
-
 const hasSomeLock = (currOptions: ScrollLockerOptions) => {
   return locks.some(
     ({ options }) =>
@@ -19,8 +17,9 @@ const hasSomeLock = (currOptions: ScrollLockerOptions) => {
   )
 }
 
+let uuid = 0
 export class ScrollLocker {
-  private id = uuid++
+  private uid = uuid++
   private cacheStyle = { top: '0px', left: '0px' }
   private cacheScroll = { scrollTop: 0, scrollLeft: 0 }
 
@@ -38,7 +37,7 @@ export class ScrollLocker {
 
     // If same container effect, return
     if (hasSomeLock(this.options)) {
-      locks.push({ id: this.id, options: this.options })
+      locks.push({ id: this.uid, options: this.options })
       return
     }
     const container = this.getContainer()
@@ -52,7 +51,7 @@ export class ScrollLocker {
     const blockClassName = this.getBlockClassName()
     addClass(container, blockClassName)
 
-    locks.push({ id: this.id, options: this.options })
+    locks.push({ id: this.uid, options: this.options })
   }
 
   unLock(): void {
@@ -61,7 +60,7 @@ export class ScrollLocker {
       return
     }
 
-    locks = locks.filter(({ id }) => id !== this.id)
+    locks = locks.filter(({ id }) => id !== this.uid)
     if (hasSomeLock(currLock.options)) {
       return
     }
@@ -92,7 +91,7 @@ export class ScrollLocker {
   }
 
   private getCurrLock() {
-    return locks.find(({ id }) => id === this.id)
+    return locks.find(({ id }) => id === this.uid)
   }
 
   private getBlockClassName() {

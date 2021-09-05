@@ -1,14 +1,14 @@
 ---
 title:
-  zh: 面板图标
-  en: collapse panel icon
-order: 2
+  zh: 自定义面板
+  en: Customize panel
+order: 5
 ---
 
 ## zh
 
-自定义面板图标
+自定义各个面板的背景色、边距和图标。
 
 ## en
 
-Custom `collapse panel` icon.
+Customize the background, margin styles and icon for each panel.

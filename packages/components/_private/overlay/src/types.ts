@@ -33,16 +33,17 @@ export const overlayProps = {
   delay: overlayDelayDef,
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
-  hideDelay: IxPropTypes.number,
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   placement: overlayPlacementDef,
-  showDelay: IxPropTypes.number,
   showArrow: IxPropTypes.bool.def(true),
   target: IxPropTypes.oneOfType([String, HTMLElement]).def('ix-overlay-container'),
   transitionName: IxPropTypes.string,
   trigger: overlayTriggerDef,
+
+  // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   'onUpdate:placement': IxPropTypes.emit<(placement: PopperPlacement) => void>(),
+  onAfterLeave: IxPropTypes.emit<() => void>(),
 }
 
 export type OverlayProps = IxInnerPropTypes<typeof overlayProps>

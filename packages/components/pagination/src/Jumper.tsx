@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, toRef } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { IxInput } from '@idux/components/input'
 import { paginationToken } from './token'
 import { useJumpToIndex } from './utils'
@@ -9,22 +9,16 @@ export default defineComponent({
     const size = computed(() => props.size ?? config.size)
     const jumpToIndex = useJumpToIndex(true)
 
-    return {
-      disabled: toRef(props, 'disabled'),
-      size,
-      locale,
-      jumpToIndex,
+    return () => {
+      const { disabled } = props
+      const { jumpTo, page } = locale.value
+      return (
+        <li class="ix-pagination-jumper">
+          {jumpTo}
+          <IxInput disabled={disabled} size={size.value} onKeydown={jumpToIndex} />
+          {page}
+        </li>
+      )
     }
-  },
-
-  render() {
-    const { jumpTo, page } = this.locale
-    return (
-      <li class="ix-pagination-jumper">
-        {jumpTo}
-        <IxInput disabled={this.disabled} size={this.size} onKeydown={this.jumpToIndex} />
-        {page}
-      </li>
-    )
   },
 })

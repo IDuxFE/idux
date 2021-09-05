@@ -1,4 +1,4 @@
-import { ComputedRef, Slots, VNodeTypes } from 'vue'
+import type { ComputedRef, Slots } from 'vue'
 import type { PaginationConfig } from '@idux/components/config'
 import type { PaginationProps, PaginationSize } from './types'
 
@@ -19,32 +19,19 @@ export default defineComponent({
     const config = useGlobalConfig('pagination')
     useProvider(props, slots, config)
 
-    const showTotal$$ = computed(() => props.showTotal ?? config.showTotal)
-    const simple$$ = computed(() => props.simple ?? config.simple)
-    const size$$ = computed(() => props.size ?? config.size)
-    const classes = useClasses(props, simple$$, size$$)
+    const showTotal = computed(() => props.showTotal ?? config.showTotal)
+    const simple = computed(() => props.simple ?? config.simple)
+    const size = computed(() => props.size ?? config.size)
+    const classes = useClasses(props, simple, size)
 
-    return {
-      classes,
-      showTotal$$,
-      simple$$,
-      size$$,
+    return () => {
+      return (
+        <ul class={classes.value}>
+          {showTotal.value ? <Total /> : null}
+          {simple.value ? <Simple /> : <Default />}
+        </ul>
+      )
     }
-  },
-
-  render() {
-    const child: VNodeTypes[] = []
-    if (this.showTotal$$) {
-      child.push(<Total />)
-    }
-
-    if (this.simple$$) {
-      child.push(<Simple />)
-    } else {
-      child.push(<Default />)
-    }
-
-    return <ul class={this.classes}>{child}</ul>
   },
 })
 
@@ -81,12 +68,14 @@ const useProvider = (props: PaginationProps, slots: Slots, config: PaginationCon
     if (validIndex !== activeIndex.value) {
       activeIndex.value = validIndex
       callEmit(props['onUpdate:pageIndex'], validIndex)
+      callEmit(props.onChange, validIndex, activeSize.value)
     }
   }
 
   const onPageSizeChange = (size: number) => {
     activeSize.value = size
     callEmit(props['onUpdate:pageSize'], size)
+    callEmit(props.onChange, activeIndex.value, size)
   }
 
   watch(pagesize, size => (activeSize.value = size))

@@ -28,29 +28,29 @@
 
   <div :style="{ marginTop: '16px', width: mode !== 'horizontal' ? '256px' : null }">
     <IxMenu :mode="mode" :theme="theme" :collapsed="collapsed">
-      <IxMenuItem cid="item1" icon="home"><a>Item 1</a></IxMenuItem>
-      <IxMenuItem cid="item2" icon="mail"> Item 2 </IxMenuItem>
-      <IxMenuItem cid="item3" disabled icon="appstore"> Item 3 </IxMenuItem>
+      <IxMenuItem key="item1" icon="home"><a>Item 1</a></IxMenuItem>
+      <IxMenuItem key="item2" icon="mail"> Item 2 </IxMenuItem>
+      <IxMenuItem key="item3" disabled icon="appstore"> Item 3 </IxMenuItem>
       <IxMenuDivider />
-      <IxMenuSub cid="menuSub1" title="Sub Menu 1" icon="setting">
-        <IxMenuItemGroup title="Item Group 1">
-          <IxMenuItem cid="item4">Item 4</IxMenuItem>
-          <IxMenuItem cid="item5">Item 5</IxMenuItem>
+      <IxMenuSub key="menuSub1" label="Sub Menu 1" icon="setting">
+        <IxMenuItemGroup label="Item Group 1">
+          <IxMenuItem key="item4">Item 4</IxMenuItem>
+          <IxMenuItem key="item5">Item 5</IxMenuItem>
         </IxMenuItemGroup>
         <IxMenuDivider />
-        <IxMenuSub cid="menuSub2">
-          <template #title><span>Sub Menu 2</span></template>
-          <IxMenuItem cid="item6">Item 6</IxMenuItem>
-          <IxMenuItem cid="item7">Item 7</IxMenuItem>
+        <IxMenuSub key="menuSub2">
+          <template #label><span>Sub Menu 2</span></template>
+          <IxMenuItem key="item6">Item 6</IxMenuItem>
+          <IxMenuItem key="item7">Item 7</IxMenuItem>
         </IxMenuSub>
-        <IxMenuSub cid="menuSub3" title="Sub Menu 3">
-          <IxMenuItem cid="item8">Item 8</IxMenuItem>
-          <IxMenuItem cid="item9">Item 9</IxMenuItem>
+        <IxMenuSub key="menuSub3" label="Sub Menu 3">
+          <IxMenuItem key="item8">Item 8</IxMenuItem>
+          <IxMenuItem key="item9">Item 9</IxMenuItem>
         </IxMenuSub>
       </IxMenuSub>
-      <IxMenuSub cid="menuSub4" disabled title="MenuSub 4" icon="github">
-        <IxMenuItem cid="item10">Item 10</IxMenuItem>
-        <IxMenuItem cid="item11">Item 11</IxMenuItem>
+      <IxMenuSub key="menuSub4" disabled label="MenuSub 4" icon="github">
+        <IxMenuItem key="item10">Item 10</IxMenuItem>
+        <IxMenuItem key="item11">Item 11</IxMenuItem>
       </IxMenuSub>
     </IxMenu>
   </div>

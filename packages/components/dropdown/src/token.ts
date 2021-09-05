@@ -1,8 +1,7 @@
 import { InjectionKey } from 'vue'
 
 export interface DropdownContext {
-  setMenuOpenState: (opened: boolean) => void
-  onMouseOverlayChang: (open: boolean) => void
+  changeVisible: (visible: boolean) => void
 }
 
 export const dropdownToken: InjectionKey<DropdownContext> = Symbol('dropdownToken')

@@ -5,7 +5,6 @@ import type { CheckboxGroupContext } from './token'
 import { defineComponent, ref, computed, inject } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
-import { useAttrs } from '@idux/components/utils'
 import { checkboxGroupToken } from './token'
 import { checkboxProps } from './types'
 
@@ -13,72 +12,49 @@ export default defineComponent({
   name: 'IxCheckbox',
   props: checkboxProps,
   inheritAttrs: false,
-  setup(props) {
+  setup(props, { attrs, expose, slots }) {
     const checkboxGroup = inject(checkboxGroupToken, null)
-    const attrs = useAttrs({ keys: ['type', 'tabindex'] })
-    const name = computed(() => (attrs.value.name as string) ?? checkboxGroup?.props.name)
+    const name = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
     const { isChecked, isDisabled, handleChange, handleBlur, handleFocus } = useCheckbox(props, checkboxGroup)
     const classes = useClasses(props, isChecked, isDisabled)
     const { inputRef, focus, blur } = useElement()
 
-    return {
-      classes,
-      attrs,
-      name,
-      isChecked,
-      isDisabled,
-      handleChange,
-      handleBlur,
-      handleFocus,
-      inputRef,
-      focus,
-      blur,
+    expose({ focus, blur })
+
+    return () => {
+      const child = slots.default ? slots.default() : props.label
+      const labelNode = child ? <span class="ix-checkbox-label">{child}</span> : undefined
+      const { class: className, style, type, tabindex, ...restAttrs } = attrs
+      return (
+        <label
+          class={[classes.value, className]}
+          style={style as StyleValue}
+          role="checkbox"
+          aria-checked={isChecked.value}
+          aria-disabled={isDisabled.value}
+        >
+          <span class="ix-checkbox-input-wrapper">
+            <input
+              ref={inputRef}
+              type="checkbox"
+              class="ix-checkbox-input"
+              aria-hidden
+              {...restAttrs}
+              autofocus={props.autofocus}
+              name={name.value}
+              value={props.value}
+              checked={isChecked.value}
+              disabled={isDisabled.value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+            />
+            <span class="ix-checkbox-inner" tabindex={tabindex as number} />
+          </span>
+          {labelNode}
+        </label>
+      )
     }
-  },
-  render() {
-    const {
-      autofocus,
-      classes,
-      isChecked,
-      isDisabled,
-      attrs,
-      $attrs,
-      name,
-      value,
-      handleChange,
-      handleBlur,
-      handleFocus,
-    } = this
-    const child = this.$slots.default ? this.$slots.default() : this.label
-    return (
-      <label
-        class={[classes, $attrs.class]}
-        role="checkbox"
-        aria-checked={isChecked}
-        aria-disabled={isDisabled}
-        style={$attrs.style as StyleValue}
-      >
-        <span class="ix-checkbox-input-wrapper">
-          <input
-            ref="inputRef"
-            type="checkbox"
-            class="ix-checkbox-input"
-            aria-hidden
-            {...attrs}
-            autofocus={autofocus}
-            name={name}
-            value={value}
-            checked={isChecked}
-            disabled={isDisabled}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-          />
-          <span class="ix-checkbox-inner" tabindex={$attrs.tabindex as number | string} />
-        </span>
-        <span class="ix-checkbox-label">{child}</span>
-      </label>
-    )
   },
 })
 

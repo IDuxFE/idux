@@ -1,7 +1,7 @@
 <template>
   <IxSpace>
     <IxDropdown>
-      Hover me
+      <a class="ix-dropdown-trigger">Hover me</a>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -13,7 +13,7 @@
     </IxDropdown>
     <IxDivider type="vertical" />
     <IxDropdown trigger="click">
-      Click me
+      <a class="ix-dropdown-trigger">Click me</a>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -25,7 +25,7 @@
     </IxDropdown>
     <IxDivider type="vertical" />
     <IxDropdown trigger="contextmenu">
-      Right click me
+      <a class="ix-dropdown-trigger">Right click me</a>
       <template #overlay>
         <IxMenu>
           <IxMenuItem> Item 1 </IxMenuItem>
@@ -36,7 +36,7 @@
       </template>
     </IxDropdown>
   </IxSpace>
-  <br /><br />
+  <br />
   <IxDropdown :visible="visible" trigger="manual">
     <IxSwitch v-model:checked="visible"></IxSwitch>
     <template #overlay>

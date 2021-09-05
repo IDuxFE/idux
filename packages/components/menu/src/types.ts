@@ -1,4 +1,5 @@
 import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { VueTypeDef } from 'vue-types'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -7,14 +8,20 @@ export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 
 export const menuProps = {
+  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
+  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
   collapsed: IxPropTypes.bool.def(false),
+  collapsedWidth: IxPropTypes.oneOfType([String, Number]),
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
   selectable: IxPropTypes.bool,
-  selectedIds: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
-  openedIds: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
+
+  // events
+  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: (string | number)[]) => void>(),
+  'onUpdate:selectedKeys': IxPropTypes.emit<(selectedKeys: (string | number)[]) => void>(),
+  onItemClick: IxPropTypes.emit<(key: string | number) => void>(),
 }
 
 export type MenuProps = IxInnerPropTypes<typeof menuProps>
@@ -23,10 +30,9 @@ export type MenuComponent = DefineComponent<HTMLAttributes & typeof menuProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export const menuItemProps = {
-  cid: IxPropTypes.oneOfType([String, Number]),
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
-  title: IxPropTypes.string,
+  label: IxPropTypes.string,
 }
 
 export type MenuItemProps = IxInnerPropTypes<typeof menuItemProps>
@@ -36,7 +42,7 @@ export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export const menuItemGroupProps = {
   icon: IxPropTypes.string,
-  title: IxPropTypes.string,
+  label: IxPropTypes.string,
 }
 
 export type MenuItemGroupProps = IxInnerPropTypes<typeof menuItemGroupProps>
@@ -52,13 +58,13 @@ export type MenuDividerComponent = DefineComponent<HTMLAttributes & typeof menuD
 export type MenuDividerInstance = InstanceType<DefineComponent<MenuDividerProps>>
 
 export const menuSubProps = {
-  cid: IxPropTypes.oneOfType([String, Number]),
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
-  overlayClass: IxPropTypes.string,
+  label: IxPropTypes.string,
+  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  overlayClassName: IxPropTypes.string,
   suffix: IxPropTypes.string,
   suffixRotates: IxPropTypes.arrayOf(Number),
-  title: IxPropTypes.string,
 }
 
 export type MenuSubProps = IxInnerPropTypes<typeof menuSubProps>

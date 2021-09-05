@@ -1,6 +1,6 @@
 {
   "name": "@idux/cdk",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "A UI Component Development Kit for Vue 3.x",
   "keywords": [
     "vue",
@@ -36,8 +36,6 @@
     "vue-types": "^3.0.0"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/shared": "^3.0.0",
     "vue": "^3.0.0"
   }
 }

@@ -90,7 +90,7 @@ describe('MessageProvider', () => {
       expect(document.querySelector('.ix-message-content-text')!.textContent).toBe(content)
 
       content = 'This is a message 2 '
-      wrapper.vm.update(messageRef.id, { content })
+      wrapper.vm.update(messageRef.key, { content })
       await flushPromises()
 
       expect(document.querySelector('.ix-message-content-text')!.textContent).toBe(content)
@@ -105,7 +105,7 @@ describe('MessageProvider', () => {
 
       expect(document.querySelectorAll('.ix-message').length).toBe(1)
 
-      wrapper.vm.destroy(messageRef.id)
+      wrapper.vm.destroy(messageRef.key)
       await flushPromises()
 
       expect(document.querySelectorAll('.ix-message').length).toBe(0)

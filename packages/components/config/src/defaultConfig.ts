@@ -65,16 +65,23 @@ const row = shallowReactive<RowConfig>({ wrap: true })
 
 // --------------------- Navigation ---------------------
 const dropdown = shallowReactive<DropdownConfig>({
-  placement: 'bottom-start',
+  autoAdjust: true,
+  destroyOnHide: false,
+  offset: [0, 8],
+  placement: 'bottomStart',
+  showArrow: false,
+  target: 'ix-dropdown-container',
   trigger: 'hover',
 })
 
 const menu = shallowReactive<MenuConfig>({
+  collapsedWidth: 64,
   indent: 24,
   theme: 'light',
 })
 
 const menuSub = shallowReactive<MenuSubConfig>({
+  offset: [0, 8],
   suffix: 'right',
   suffixRotates: [-90, 90],
 })
@@ -156,7 +163,12 @@ const list = shallowReactive<ListConfig>({
   borderless: true,
 })
 
-const collapse: CollapseConfig = shallowReactive<CollapseConfig>({ accordion: false })
+const collapse: CollapseConfig = shallowReactive<CollapseConfig>({
+  accordion: false,
+  borderless: false,
+  expandIcon: 'right',
+  ghost: false,
+})
 
 const image: ImageConfig = shallowReactive({
   width: 100,
@@ -172,7 +184,7 @@ const statistic = shallowReactive<StatisticConfig>({
 
 const table = shallowReactive<TableConfig>({
   borderless: true,
-  rowKey: 'id',
+  rowKey: 'key',
   size: 'medium',
 
   extra: { icon: 'ellipsis' },

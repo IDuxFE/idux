@@ -99,7 +99,7 @@ describe('ModalProvider', () => {
       expect(document.querySelector('.ix-modal-body')!.textContent).toBe(content)
 
       header = 'This is header2'
-      wrapper.vm.update(modalRef.id, { header })
+      wrapper.vm.update(modalRef.key, { header })
       await flushPromises()
 
       expect(document.querySelector('.ix-header-title')!.textContent).toBe(header)
@@ -113,7 +113,7 @@ describe('ModalProvider', () => {
 
       expect(document.querySelectorAll('.ix-modal-wrapper').length).toBe(1)
 
-      wrapper.vm.destroy(modalRef.id)
+      wrapper.vm.destroy(modalRef.key)
       await flushPromises()
 
       expect(document.querySelectorAll('.ix-modal-wrapper').length).toBe(0)

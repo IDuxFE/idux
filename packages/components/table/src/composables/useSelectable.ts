@@ -1,13 +1,16 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { Key, TableProps } from '../types'
+import type { TableLocale } from '@idux/components/i18n'
+import type { Key, TableColumnSelectableOption, TableProps } from '../types'
 import type { TableColumnMergedSelectable, TableColumnMerged } from './useColumns'
 import type { DataSourceContext, MergedData } from './useDataSource'
 
 import { computed, unref, ref, watch } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
+import { isString } from 'lodash-es'
 
 export function useSelectable(
   props: TableProps,
+  locale: ComputedRef<TableLocale>,
   flattedColumns: ComputedRef<TableColumnMerged[]>,
   { mergedMap, paginatedMap }: DataSourceContext,
 ): SelectableContext {
@@ -41,18 +44,18 @@ export function useSelectable(
     const { disabledRowKeys } = currentPageRowKeys.value
     const dataMap = mergedMap.value
     selectedKeys.forEach(key => {
-      const { parentKey } = dataMap.get(key)!
+      const { parentKey } = dataMap.get(key) || {}
       if (parentKey) {
-        let parent = dataMap.get(parentKey)!
-        if (!selectedKeys.includes(parent.rowKey)) {
+        let parent = dataMap.get(parentKey)
+        if (parent && !selectedKeys.includes(parent.rowKey)) {
           if (!disabledRowKeys.includes(parentKey)) {
             indeterminateKeySet.add(parentKey)
           }
-          while (parent.parentKey) {
+          while (parent?.parentKey) {
             if (!disabledRowKeys.includes(parent.parentKey)) {
               indeterminateKeySet.add(parent.parentKey)
             }
-            parent = dataMap.get(parent.parentKey)!
+            parent = dataMap.get(parent.parentKey)
           }
         }
       }
@@ -86,16 +89,31 @@ export function useSelectable(
   // 当前页是否部分被选中
   const currentPageSomeSelected = computed(() => !currentPageAllSelected.value && countCurrentPageSelected.value > 0)
 
+  const emitChange = (tempRowKeys: Key[]) => {
+    selectedRowKeys.value = tempRowKeys
+    const dataMap = mergedMap.value
+    const { onChange } = selectable.value || {}
+    if (onChange) {
+      const selectedRecords: unknown[] = []
+      tempRowKeys.forEach(key => {
+        const currData = dataMap.get(key)
+        currData && selectedRecords.push(currData.record)
+      })
+      callEmit(onChange, tempRowKeys, selectedRecords)
+    }
+    callEmit(props['onUpdate:selectedRowKeys'], tempRowKeys)
+  }
+
   const handleSelectChange = (key: Key, record: unknown) => {
     const dataMap = mergedMap.value
     const { disabledRowKeys } = currentPageRowKeys.value
-    const { multiple, onChange, onSelect } = selectable.value || {}
+    const { multiple, onSelect } = selectable.value || {}
     let tempRowKeys = unref(selectedRowKeys)
     const index = tempRowKeys.indexOf(key)
     const selected = index >= 0
 
     if (multiple) {
-      const currData = dataMap.get(key)!
+      const currData = dataMap.get(key)
       const childrenKeys = getChildrenKeys(currData, disabledRowKeys)
       if (selected) {
         tempRowKeys.splice(index, 1)
@@ -112,19 +130,12 @@ export function useSelectable(
         tempRowKeys.push(key)
       }
     }
-    selectedRowKeys.value = tempRowKeys
+
+    emitChange(tempRowKeys)
     callEmit(onSelect, selected, record)
-    callEmit(
-      onChange,
-      tempRowKeys,
-      tempRowKeys.map(key => dataMap.get(key)!.record),
-    )
-    callEmit(props['onUpdate:selectedRowKeys'], tempRowKeys)
   }
 
   const handleHeadSelectChange = () => {
-    const dataMap = mergedMap.value
-    const { onChange } = selectable.value || {}
     const { enabledRowKeys } = currentPageRowKeys.value
     const tempRowKeySet = new Set(unref(selectedRowKeys))
     if (currentPageAllSelected.value) {
@@ -132,15 +143,98 @@ export function useSelectable(
     } else {
       enabledRowKeys.forEach(key => tempRowKeySet.add(key))
     }
-    const tempRowKeys = [...tempRowKeySet]
-    selectedRowKeys.value = tempRowKeys
-    callEmit(
-      onChange,
-      tempRowKeys,
-      tempRowKeys.map(key => dataMap.get(key)!.record),
-    )
-    callEmit(props['onUpdate:selectedRowKeys'], tempRowKeys)
+    emitChange([...tempRowKeySet])
   }
+
+  const handleSelectAll = () => {
+    const { disabled, onSelectAll } = selectable.value || {}
+    const tempRowKeys: Key[] = []
+    mergedMap.value.forEach((currData, key) => {
+      if (!disabled?.(currData.record)) {
+        tempRowKeys.push(key)
+      }
+    })
+    emitChange(tempRowKeys)
+    callEmit(onSelectAll, tempRowKeys)
+  }
+
+  const handleSelectInvert = () => {
+    const { disabled, onSelectInvert } = selectable.value || {}
+    const tempRowKeys = unref(selectedRowKeys)
+
+    mergedMap.value.forEach((currData, key) => {
+      if (disabled?.(currData.record)) {
+        return
+      }
+      const index = tempRowKeys.indexOf(key)
+      if (index >= 0) {
+        tempRowKeys.splice(index, 1)
+      } else {
+        tempRowKeys.push(key)
+      }
+    })
+    emitChange(tempRowKeys)
+    callEmit(onSelectInvert, tempRowKeys)
+  }
+
+  const handleSelectNone = () => {
+    const { onSelectNone } = selectable.value || {}
+    emitChange([])
+    callEmit(onSelectNone)
+  }
+
+  const handleSelectPageInvert = () => {
+    const { disabled, onSelectPageInvert } = selectable.value || {}
+    const tempRowKeys: Key[] = []
+    const currSelectedRowKeys = selectedRowKeys.value
+    paginatedMap.value.forEach((currData, key) => {
+      if (disabled?.(currData.record) || currSelectedRowKeys.includes(key)) {
+        return
+      }
+      tempRowKeys.push(key)
+    })
+    emitChange(tempRowKeys)
+    callEmit(onSelectPageInvert, tempRowKeys)
+  }
+
+  const handleSelectOptionClick = (callback?: (pageRowKeys: Key[]) => void) => {
+    const { disabled } = selectable.value || {}
+    const tempRowKeys: Key[] = []
+    paginatedMap.value.forEach((currData, key) => {
+      if (disabled?.(currData.record)) {
+        return
+      }
+      tempRowKeys.push(key)
+    })
+    callEmit(callback, tempRowKeys)
+  }
+
+  const mergedSelectableOptions = computed(() => {
+    const { options } = selectable.value || {}
+    if (!options || options.length === 0) {
+      return
+    }
+    const { selectAll, selectInvert, selectNone, selectPageInvert } = locale.value
+    return options.map(option => {
+      if (isString(option)) {
+        const key = `IDUX_TABLE_KEY-selectable-${option}`
+        if (option === 'all') {
+          return { key, label: selectAll, onClick: handleSelectAll }
+        }
+        if (option === 'invert') {
+          return { key, label: selectInvert, onClick: handleSelectInvert }
+        }
+        if (option === 'none') {
+          return { key, label: selectNone, onClick: handleSelectNone }
+        }
+        if (option === 'pageInvert') {
+          return { key, label: selectPageInvert, onClick: handleSelectPageInvert }
+        }
+      }
+      const onClick = () => handleSelectOptionClick(option.onClick)
+      return { ...option, onClick }
+    })
+  })
 
   return {
     selectable,
@@ -151,6 +245,7 @@ export function useSelectable(
     currentPageSomeSelected,
     handleSelectChange,
     handleHeadSelectChange,
+    mergedSelectableOptions,
   }
 }
 
@@ -166,11 +261,16 @@ export interface SelectableContext {
   currentPageSomeSelected: ComputedRef<boolean>
   handleSelectChange: (key: Key, record: unknown) => void
   handleHeadSelectChange: () => void
+  mergedSelectableOptions: ComputedRef<TableColumnMergedSelectableOption[] | undefined>
 }
 
-function getChildrenKeys(currData: MergedData, disabledRowKeys: Key[]) {
+export interface TableColumnMergedSelectableOption extends TableColumnSelectableOption {
+  onClick: () => void
+}
+
+function getChildrenKeys(currData: MergedData | undefined, disabledRowKeys: Key[]) {
   const keys: Key[] = []
-  const { children } = currData
+  const { children } = currData || {}
   children &&
     children.forEach(item => {
       const { rowKey } = item
@@ -182,28 +282,28 @@ function getChildrenKeys(currData: MergedData, disabledRowKeys: Key[]) {
   return keys
 }
 
-function getParentKeys(dataMap: Map<Key, MergedData>, currData: MergedData, disabledRowKeys: Key[]) {
+function getParentKeys(dataMap: Map<Key, MergedData>, currData: MergedData | undefined, disabledRowKeys: Key[]) {
   const keys: Key[] = []
-  while (currData.parentKey) {
+  while (currData?.parentKey) {
     const { parentKey } = currData
     if (!disabledRowKeys.includes(currData.parentKey)) {
       keys.push(parentKey)
     }
-    currData = dataMap.get(parentKey)!
+    currData = dataMap.get(parentKey)
   }
   return keys
 }
 
 function setParentSelected(
   dataMap: Map<Key, MergedData>,
-  currData: MergedData,
+  currData: MergedData | undefined,
   tempRowKeys: Key[],
   disabledRowKeys: Key[],
 ) {
   let parentSelected = true
-  while (parentSelected && currData.parentKey) {
-    const parent = dataMap.get(currData.parentKey)!
-    if (!disabledRowKeys.includes(currData.parentKey)) {
+  while (parentSelected && currData?.parentKey) {
+    const parent = dataMap.get(currData.parentKey)
+    if (parent && !disabledRowKeys.includes(currData.parentKey)) {
       parentSelected = parent.children!.every(
         item => disabledRowKeys.includes(item.rowKey) || tempRowKeys.includes(item.rowKey),
       )
