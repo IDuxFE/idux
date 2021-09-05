@@ -1,0 +1,77 @@
+@import '../../style/themes/default.less';
+
+@layout-prefix: ~'@{idux-prefix}-layout';
+
+.@{layout-prefix} {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 'header header header'
+                         'sider-left content sider-right'
+                         'footer footer footer';
+    grid-area: content;
+
+    &-header {
+        position: relative;
+        grid-area: header;
+        &.bordered {
+            border-bottom: @layout-header-border;
+        }
+    }
+
+    &-content {
+        position: relative;
+        grid-area: content;
+    }
+
+    &-footer {
+        position: relative;
+        grid-area: footer;
+        &.bordered {
+            border-top: @layout-footer-border;
+        }
+    }
+            
+    &-sider {
+        position: relative;
+        grid-area: sider-left;
+        transition: width @transition-duration-base;
+        z-index: @zindex-l1-1;
+        &.bordered {
+            border-right: @layout-sider-border;
+        }
+        &.right {
+            grid-area: sider-right;
+            &.bordered {
+                border-right: none;
+                border-left: @layout-sider-border;
+            }
+            .@{layout-prefix}-sider-trigger {
+                position: absolute;
+                top: 50%;
+                right: 100%;
+                transform: translate(0, -50%);
+            }
+        }
+        &.bordered.collapsed-width-zero {
+            border: none;
+        }
+        &-children {
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        &-trigger {
+            position: absolute;
+            cursor: pointer;
+            top: 50%;
+            right: 0;
+            transform: translate(100%, -50%);
+        }
+    }
+
+    &.sider-out {
+        grid-template-areas: 'sider-left header sider-right'
+                             'sider-left content sider-right'
+                             'sider-left footer sider-right';
+    }
+}

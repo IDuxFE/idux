@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout render work 1`] = `
+"<section class=\\"ix-layout\\">
+  <header class=\\"ix-layout-header bordered\\" style=\\"height: 80px; line-height: 80px;\\">header</header>
+  <aside class=\\"ix-layout-sider bordered\\" style=\\"width: 272px;\\">
+    <div class=\\"ix-layout-sider-children\\">sider</div>
+    <!---->
+  </aside>
+  <main class=\\"ix-layout-content\\">content</main>
+  <footer class=\\"ix-layout-footer bordered\\" style=\\"height: 80px; line-height: 80px;\\">footer</footer>
+</section>"
+`;

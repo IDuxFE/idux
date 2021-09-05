@@ -4,6 +4,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     GlobalCodeBox: typeof import('./src/components/global/GlobalCodeBox.vue')['default']
+    GlobalCodeBox: typeof import('./src/components/global/GlobalCodeBox.vue')['default']
     GlobalColors: typeof import('./src/components/global/GlobalColors.vue')['default']
     Home: typeof import('./src/components/views/home/Home.vue')['default']
     IxAffix: typeof import('@idux/components/affix')['IxAffix']
@@ -32,6 +33,11 @@ declare module 'vue' {
     IxIcon: typeof import('@idux/components/icon')['IxIcon']
     IxImage: typeof import('@idux/components/image')['IxImage']
     IxInput: typeof import('@idux/components/input')['IxInput']
+    IxLayout: typeof import('@idux/components/layout')['IxLayout']
+    IxLayoutContent: typeof import('@idux/components/layout')['IxLayoutContent']
+    IxLayoutFooter: typeof import('@idux/components/layout')['IxLayoutFooter']
+    IxLayoutHeader: typeof import('@idux/components/layout')['IxLayoutHeader']
+    IxLayoutSider: typeof import('@idux/components/layout')['IxLayoutSider']
     IxList: typeof import('@idux/components/list')['IxList']
     IxListItem: typeof import('@idux/components/list')['IxListItem']
     IxMenu: typeof import('@idux/components/menu')['IxMenu']
