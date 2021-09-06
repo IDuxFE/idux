@@ -2,7 +2,7 @@
 title:
   zh: 固定头和列
   en: Fix header and columns
-order: 3
+order: 50
 ---
 
 ## zh

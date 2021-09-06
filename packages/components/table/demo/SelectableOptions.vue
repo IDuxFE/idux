@@ -22,7 +22,7 @@ const selectedRowKeys = ref<(string | number)[]>([])
 const columns: TableColumn<Data>[] = [
   {
     type: 'selectable',
-    disabled: record => record.key % 5 === 0,
+    disabled: record => record.key % 10 === 9,
     options: [
       'all',
       'invert',
@@ -32,14 +32,14 @@ const columns: TableColumn<Data>[] = [
         key: 'odd',
         label: 'Select Odd Row',
         onClick: currentPageRowKeys => {
-          selectedRowKeys.value = currentPageRowKeys.filter((_, index) => index % 2 !== 0)
+          selectedRowKeys.value = currentPageRowKeys.filter((_, index) => index % 2 === 0)
         },
       },
       {
         key: 'even',
         label: 'Select Even Row',
         onClick: currentPageRowKeys => {
-          selectedRowKeys.value = currentPageRowKeys.filter((_, index) => index % 2 === 0)
+          selectedRowKeys.value = currentPageRowKeys.filter((_, index) => index % 2 !== 0)
         },
       },
     ],

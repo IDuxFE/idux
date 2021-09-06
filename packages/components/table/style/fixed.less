@@ -22,11 +22,6 @@
     pointer-events: none;
   }
 
-  &-ping-start &-fix-start-first::after,
-  &-ping-start &-fix-start-last::after {
-    box-shadow: inset 10px 0 8px -8px #00000026;
-  }
-
   &-fix-end-first::after,
   &-fix-end-last::after {
     position: absolute;
@@ -40,8 +35,17 @@
     pointer-events: none;
   }
 
+  &-ping-start &-fix-start-first::after,
+  &-ping-start &-fix-start-last::after {
+    box-shadow: inset 10px 0 8px -8px #00000026;
+  }
+
   &-ping-end &-fix-end-first::after,
   &-ping-end &-fix-end-last::after {
     box-shadow: inset -10px 0 8px -8px #00000026;
+  }
+
+  &-ping-start &-fix-start-last::before {
+    background-color: transparent !important;
   }
 }

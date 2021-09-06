@@ -3,9 +3,6 @@
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>
-    <template #action>
-      <a>action</a>
-    </template>
   </IxTable>
 </template>
 

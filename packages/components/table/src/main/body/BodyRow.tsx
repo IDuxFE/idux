@@ -157,15 +157,16 @@ function renderChildren(
   const children: VNodeTypes[] = []
   const { columns, index, record } = props
   columns.forEach(column => {
-    const colSpan = column.colSpan?.(record, index)
-    const rowSpan = column.rowSpan?.(record, index)
+    const { type, colSpan: getColSpan, rowSpan: getRowSpan, ...rest } = column
+    const colSpan = getColSpan?.(record, index)
+    const rowSpan = getRowSpan?.(record, index)
     if (colSpan === 0 || rowSpan === 0) {
       return
     }
-    const { type, ...rest } = column
+
     const colProps: any = {
       colSpan: colSpan === 1 ? undefined : colSpan,
-      rowSpan: rowSpan === 1 ? undefined : colSpan,
+      rowSpan: rowSpan === 1 ? undefined : rowSpan,
       index,
       record,
       type,
