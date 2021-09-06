@@ -1,22 +1,29 @@
-import { watch } from 'vue'
-import type { LayoutSiderProps, CollapseType } from './types'
+import type { ComputedRef } from 'vue'
+import type { LayoutSiderProps, LayoutSiderCollapseType } from './types'
 
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { layoutSiderProps } from './types'
 import { BREAKPOINTS, useBreakpoints } from '@idux/cdk/breakpoint'
 import { callEmit, hasSlot } from '@idux/cdk/utils'
-import { IxIcon } from '@idux/components/icon'
+import Trigger from './Trigger'
 import { isUndefined } from 'lodash-es'
 
 export default defineComponent({
   name: 'IxLayoutHeader',
   props: layoutSiderProps,
   setup(props, { slots }) {
-    const isDefinedBreakPoint = !isUndefined(props.breakpoint)
-    const isDefinedCollapsed = !isUndefined(props.collapsed)
-    const collapsible = isDefinedBreakPoint || isDefinedCollapsed
+    const isDefinedBreakPoint =  computed(()=>{
+      return !isUndefined(props.breakpoint)
+    })
+    const isDefinedCollapsed = computed(()=>{
+      return !isUndefined(props.collapsed)
+    })
 
-    const hasTriggerSlot =  !!props.trigger || hasSlot(slots, 'trigger')
+    const collapsible = computed(()=>{
+      return isDefinedBreakPoint.value || isDefinedCollapsed.value
+    })
+
+    const hasTriggerSlot =  hasSlot(slots, 'trigger')
     const { isCollapsed, handleClick} = useCollapsed(props, isDefinedBreakPoint, isDefinedCollapsed, hasTriggerSlot)
 
     const style = computed(() => {
@@ -28,17 +35,14 @@ export default defineComponent({
     const classes = computed(() => {
         return {
             'ix-layout-sider': true,
-            'bordered': !props.borderless,
-            'right': props.direction === 'right',
-            'collapsed': collapsible && isCollapsed.value,
-            'collapsed-width-zero': collapsible && isCollapsed.value && props.collapsedWidth === 0
+            'ix-layout-sider-end': props.placement === 'end',
+            'ix-layout-sider-collapsed': collapsible.value && isCollapsed.value,
         }
     })
 
     return () => {
-      const trigger = collapsible && (
-        props.trigger ? props.trigger :
-        slots.trigger ? slots.trigger() : <IxIcon class="ix-layout-sider-trigger" name="menu" onClick={handleClick} />
+      const trigger = collapsible.value && (
+        slots.trigger ? slots.trigger() : <Trigger collapsed={isCollapsed.value} onClick={handleClick} />
       )
       return (
         <aside class={classes.value} style={style.value}>
@@ -52,21 +56,25 @@ export default defineComponent({
   }
 })
 
-const useCollapsed = (props: LayoutSiderProps, isDefinedBreakPoint: boolean, isDefinedCollapsed: boolean, hasTriggerSlot:boolean) => {
+const useCollapsed = (
+  props: LayoutSiderProps, 
+  isDefinedBreakPoint: ComputedRef<boolean>, 
+  isDefinedCollapsed: ComputedRef<boolean>, 
+  hasTriggerSlot:boolean
+) => {
   let isCollapsed = ref(false)
   let handleClick = () => {}
 
-  if(isDefinedBreakPoint || isDefinedCollapsed) {
+  if(isDefinedBreakPoint.value || isDefinedCollapsed.value) {
     isCollapsed = ref(props.collapsed ?? false)
 
-    const changeCollapsed = (collapsed: boolean, type: CollapseType) => {
+    const changeCollapsed = (collapsed: boolean, type: LayoutSiderCollapseType) => {
       isCollapsed.value = collapsed
       callEmit(props['onUpdate:collapsed'], collapsed)
       callEmit(props.onCollapse, collapsed, type)
-      type === 'breakpoint' && callEmit(props.onBreakpoint, collapsed)
     }
 
-    if(isDefinedBreakPoint) {
+    if(isDefinedBreakPoint.value) {
         const matchBreakpointsMaxWidth = props.breakpoint && BREAKPOINTS[props.breakpoint]?.match(/\(max-width.*\)/)?.[0]
         const breakpointsState = matchBreakpointsMaxWidth && useBreakpoints(matchBreakpointsMaxWidth)
 
@@ -77,7 +85,7 @@ const useCollapsed = (props: LayoutSiderProps, isDefinedBreakPoint: boolean, isD
           },
           {
             // When breakpoint and collapsed exist at the same time, the collapsed value takes precedence
-            immediate: !isDefinedCollapsed
+            immediate: !isDefinedCollapsed.value
           }
         )
       }
@@ -86,7 +94,7 @@ const useCollapsed = (props: LayoutSiderProps, isDefinedBreakPoint: boolean, isD
         changeCollapsed(!isCollapsed.value, 'trigger')
       }
 
-      if(hasTriggerSlot && isDefinedCollapsed) {
+      if(hasTriggerSlot && isDefinedCollapsed.value) {
         watch(
           () => props.collapsed,
           value => {

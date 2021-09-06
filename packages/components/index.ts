@@ -9,7 +9,7 @@ import { IxHeader } from '@idux/components/header'
 import { IxTypography } from '@idux/components/typography'
 import { IxTag } from '@idux/components/tag'
 // import Layout
-import { IxLayout, IxLayoutHeader } from '@idux/components/layout'
+import { IxLayout, IxLayoutHeader, IxLayoutSider, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
 import { IxDivider } from '@idux/components/divider'
 import { IxSpace } from '@idux/components/space'
 import { IxRow, IxCol } from '@idux/components/grid'
@@ -62,6 +62,9 @@ const components = [
   // components Layout
   IxLayout,
   IxLayoutHeader,
+  IxLayoutSider,
+  IxLayoutContent,
+  IxLayoutFooter,
   IxDivider,
   IxSpace,
   IxRow,

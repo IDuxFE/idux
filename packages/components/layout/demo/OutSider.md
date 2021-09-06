@@ -1,7 +1,7 @@
 ---
 title:
-  zh: SiderOut
-  en: SiderOut
+  zh: outSider
+  en: outSider
 order: 1
 ---
 

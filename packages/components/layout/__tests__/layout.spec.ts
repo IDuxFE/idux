@@ -32,56 +32,26 @@ describe('Layout', () => {
       return mount(Layout, mergedOptions)
     }
 
-    test('siderOut work', async () => {
+    test('outSider work', async () => {
       const wrapper = LayoutMount({
         props: {
-          siderOut: true,
+          outSider: true,
         },
       })
 
-      expect(wrapper.classes()).toContain('sider-out')
-    })
-
-    test('Layout-(header sider footer) borderless work', async () => {
-      const wrapper = LayoutMount({
-        slots: {
-          default: () => [
-            h(LayoutHeader, { borderless: true }, { default: () => 'header' }),
-            h(LayoutSider, { borderless: true }, { default: () => 'sider' }),
-            h(LayoutFooter, { borderless: true }, { default: () => 'footer' }),
-          ],
-        },
-      })
-
-      expect(wrapper.find('.ix-layout-header').classes()).not.toContain('bordered')
-      expect(wrapper.find('.ix-layout-sider').classes()).not.toContain('bordered')
-      expect(wrapper.find('.ix-layout-footer').classes()).not.toContain('bordered')
-    })
-
-    test('Layout-(header footer) height work', async () => {
-      const wrapper = LayoutMount({
-        slots: {
-          default: () => [
-            h(LayoutHeader, { height: 100 }, { default: () => 'header' }),
-            h(LayoutFooter, { height: 100 }, { default: () => 'footer' }),
-          ],
-        },
-      })
-
-      expect(wrapper.find('.ix-layout-header').attributes()['style']).toEqual('height: 100px; line-height: 100px;')
-      expect(wrapper.find('.ix-layout-footer').attributes()['style']).toEqual('height: 100px; line-height: 100px;')
+      expect(wrapper.classes()).toContain('ix-layout-out-sider')
     })
   })
 
   describe('LayoutSider', () => {
-    test('direction work', async () => {
+    test('placement work', async () => {
       const wrapper = mount(Layout, {
         slots: {
-          default: () => [h(LayoutSider, { direction: 'right' }, { default: () => 'sider' })],
+          default: () => [h(LayoutSider, { placement: 'end' }, { default: () => 'sider' })],
         },
       })
 
-      expect(wrapper.find('.ix-layout-sider').classes()).toContain('right')
+      expect(wrapper.find('.ix-layout-sider').classes()).toContain('ix-layout-sider-end')
     })
 
     test('width work', async () => {
@@ -115,34 +85,27 @@ describe('Layout', () => {
       })
       const siderWrapper = wrapper.find('.ix-layout-sider')
 
-      expect(siderWrapper.classes()).toContain('collapsed')
-      expect(siderWrapper.classes()).toContain('collapsed-width-zero')
+      expect(siderWrapper.classes()).toContain('ix-layout-sider-collapsed')
       expect(siderWrapper.attributes()['style']).toEqual('width: 0px;')
       expect(wrapper.find('.ix-layout-sider-trigger').exists()).toBeTruthy()
 
       await wrapper.find('.ix-layout-sider-trigger').trigger('click')
       expect(onCollapse).toBeCalledTimes(2)
-      expect(siderWrapper.classes()).not.toContain('collapsed')
-      expect(siderWrapper.classes()).not.toContain('collapsed-width-zero')
+      expect(siderWrapper.classes()).not.toContain('ix-layout-sider-collapsed')
     })
 
-    test('trigger props work', async () => {
+    test('no trigger work', async () => {
       const wrapper = mount(Layout, {
         slots: {
           default: () => [
-            h(
-              LayoutSider,
-              {
-                trigger: h('div', { class: 'vnodeTrigger' }, 'triggerDiv'),
-                collapsed: true,
-              },
-              { default: () => 'sider' },
-            ),
+            h(LayoutSider, null, {
+              default: () => 'sider',
+            }),
           ],
         },
       })
 
-      expect(wrapper.find('.vnodeTrigger').exists()).toBeTruthy()
+      expect(wrapper.find('.ix-layout-sider').classes()).not.toContain('ix-layout-sider-trigger')
     })
 
     test('trigger slot work', async () => {
@@ -164,29 +127,6 @@ describe('Layout', () => {
       })
 
       expect(wrapper.find('.slotTrigger').exists()).toBeTruthy()
-    })
-
-    test('trigger slot and props exit the same time', async () => {
-      const wrapper = mount(Layout, {
-        slots: {
-          default: () => [
-            h(
-              LayoutSider,
-              {
-                trigger: h('div', { class: 'vnodeTrigger' }, 'triggerDiv'),
-                collapsed: true,
-              },
-              {
-                default: () => 'sider',
-                trigger: () => h('div', { class: 'slotTrigger' }, 'triggerDiv'),
-              },
-            ),
-          ],
-        },
-      })
-
-      expect(wrapper.find('.vnodeTrigger').exists()).toBeTruthy()
-      expect(wrapper.find('.slotTrigger').exists()).toBeFalsy()
     })
   })
 })

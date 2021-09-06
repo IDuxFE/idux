@@ -2,12 +2,12 @@
 
 exports[`Layout render work 1`] = `
 "<section class=\\"ix-layout\\">
-  <header class=\\"ix-layout-header bordered\\" style=\\"height: 80px; line-height: 80px;\\">header</header>
-  <aside class=\\"ix-layout-sider bordered\\" style=\\"width: 272px;\\">
+  <header class=\\"ix-layout-header\\">header</header>
+  <aside class=\\"ix-layout-sider\\" style=\\"width: 200px;\\">
     <div class=\\"ix-layout-sider-children\\">sider</div>
     <!---->
   </aside>
   <main class=\\"ix-layout-content\\">content</main>
-  <footer class=\\"ix-layout-footer bordered\\" style=\\"height: 80px; line-height: 80px;\\">footer</footer>
+  <footer class=\\"ix-layout-footer\\">footer</footer>
 </section>"
 `;

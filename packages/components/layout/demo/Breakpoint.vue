@@ -1,7 +1,7 @@
 <template>
   <IxLayout>
     <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider breakpoint="md" :onCollapse="onCollapse" :onBreakpoint="onBreakpoint"> </IxLayoutSider>
+    <IxLayoutSider breakpoint="md" :onCollapse="onCollapse"> </IxLayoutSider>
     <IxLayoutContent> content </IxLayoutContent>
     <IxLayoutFooter>footer</IxLayoutFooter>
   </IxLayout>
@@ -16,14 +16,10 @@ export default defineComponent({
     const onCollapse = (collapsed: boolean, type: 'trigger' | 'breakpoint') => {
       console.log('onCollapse', collapsed, type)
     }
-    const onBreakpoint = (collapsed: boolean) => {
-      console.log('onBreakpoint', collapsed)
-    }
 
     return {
       collapsed,
       onCollapse,
-      onBreakpoint,
     }
   },
 })

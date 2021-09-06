@@ -11,6 +11,7 @@ declare module 'vue' {
     IxAnchorLink: typeof import('@idux/components/anchor')['IxAnchorLink']
     IxButton: typeof import('@idux/components/button')['IxButton']
     IxButtonGroup: typeof import('@idux/components/button')['IxButtonGroup']
+    IxCard: typeof import('@idux/components/card')['IxCard']
     IxCol: typeof import('@idux/components/grid')['IxCol']
     IxDropdown: typeof import('@idux/components/dropdown')['IxDropdown']
     IxIcon: typeof import('@idux/components/icon')['IxIcon']
