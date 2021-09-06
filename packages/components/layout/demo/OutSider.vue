@@ -1,7 +1,7 @@
 <template>
-  <IxLayout>
+  <IxLayout outSider>
     <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider direction="right">sider</IxLayoutSider>
+    <IxLayoutSider>sider</IxLayoutSider>
     <IxLayoutContent>content</IxLayoutContent>
     <IxLayoutFooter>footer</IxLayoutFooter>
   </IxLayout>

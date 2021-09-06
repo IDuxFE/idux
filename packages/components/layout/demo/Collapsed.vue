@@ -1,7 +1,7 @@
 <template>
   <IxLayout>
     <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider v-model:collapsed="collapsed">sider</IxLayoutSider>
+    <IxLayoutSider v-model:collapsed="collapsed" :show-trigger="true">sider</IxLayoutSider>
     <IxLayoutContent> collapsed: {{ collapsed }} </IxLayoutContent>
     <IxLayoutFooter>footer</IxLayoutFooter>
   </IxLayout>

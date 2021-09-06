@@ -1,7 +1,7 @@
 <template>
   <IxLayout>
     <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider v-model:collapsed="collapsed">
+    <IxLayoutSider v-model:collapsed="collapsed" :show-trigger="true">
       <template #trigger>
         <div class="trigger" @click="onClick">trigger</div>
       </template>

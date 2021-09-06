@@ -2,7 +2,7 @@
 title:
   zh: Trigger
   en: Trigger
-order: 6
+order: 5
 ---
 
 ## zh
