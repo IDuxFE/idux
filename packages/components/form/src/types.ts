@@ -6,11 +6,10 @@ import type { ColProps } from '@idux/components/grid'
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type FormLabelAlign = 'left' | 'right'
+export type FormLabelAlign = 'start' | 'end'
 export type FormLayout = 'horizontal' | 'vertical' | `inline`
 export type FormSize = 'small' | 'medium' | 'large'
-export type FormMessageFn = (control: AbstractControl | null) => string
-export type FormMessage = Partial<Record<ValidateStatus, string | FormMessageFn>>
+export type FormMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
 export type ColType = string | number | ColProps
 
 const colProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<ColProps>()])
@@ -20,7 +19,7 @@ export const formProps = {
   control: controlPropDef,
   controlCol: colProp,
   hasFeedback: IxPropTypes.bool.def(false),
-  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['left', 'right']),
+  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
   labelCol: colProp,
   layout: IxPropTypes.oneOf<FormLayout>(['horizontal', 'vertical', 'inline']),
   size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
@@ -38,12 +37,16 @@ export const formItemProps = {
   extra: IxPropTypes.string,
   hasFeedback: IxPropTypes.bool,
   label: IxPropTypes.string,
-  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['left', 'right']),
+  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
   labelCol: colProp,
   labelFor: IxPropTypes.string,
   labelTooltip: IxPropTypes.string,
   required: IxPropTypes.bool.def(false),
-  message: IxPropTypes.oneOfType([String, IxPropTypes.func<FormMessageFn>(), IxPropTypes.object<FormMessage>()]),
+  message: IxPropTypes.oneOfType([
+    String,
+    IxPropTypes.func<(control: AbstractControl) => string>(),
+    IxPropTypes.object<FormMessage>(),
+  ]),
   status: IxPropTypes.oneOf<ValidateStatus>(['valid', 'invalid', 'validating']),
 }
 

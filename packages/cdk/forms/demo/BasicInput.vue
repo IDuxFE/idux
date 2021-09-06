@@ -1,5 +1,5 @@
 <template>
-  <input :value="valueAccessor.value" @input="onInput" @blur="onBlur" />
+  <input :value="accessor.value" @input="onInput" @blur="onBlur" />
 </template>
 
 <script lang="ts">
@@ -11,14 +11,14 @@ export default defineComponent({
   props: ['value', 'control'],
   emits: ['update:value'],
   setup() {
-    const valueAccessor = useValueAccessor()
+    const { accessor } = useValueAccessor()
     const onInput = (evt: Event) => {
-      valueAccessor.setValue?.((evt.target as HTMLInputElement).value)
+      accessor.setValue?.((evt.target as HTMLInputElement).value)
     }
     const onBlur = () => {
-      valueAccessor.markAsBlurred?.()
+      accessor.markAsBlurred?.()
     }
-    return { valueAccessor, onInput, onBlur }
+    return { accessor, onInput, onBlur }
   },
 })
 </script>

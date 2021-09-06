@@ -26,8 +26,8 @@ export class Validators {
   }
 
   static getError(key: string, errorContext: Omit<ValidateError, 'message'> = {}): ValidateError {
-    let message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | null = null
-    const validMessage = Validators.messages[key] || Validators.messages.default || null
+    let message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | undefined = undefined
+    const validMessage = Validators.messages[key] || Validators.messages.default || undefined
     if (isFunction(validMessage)) {
       message = validMessage(errorContext)
     } else {
@@ -36,58 +36,58 @@ export class Validators {
     return { ...errorContext, message }
   }
 
-  static required(value: any, _: AbstractControl): { required: ValidateError } | null {
+  static required(value: any, _: AbstractControl): { required: ValidateError } | undefined {
     if (isEmpty(value)) {
       return { required: Validators.getError('required') }
     }
-    return null
+    return undefined
   }
 
-  static requiredTrue(value: any, _: AbstractControl): { requiredTrue: ValidateError } | null {
+  static requiredTrue(value: any, _: AbstractControl): { requiredTrue: ValidateError } | undefined {
     if (value === true) {
-      return null
+      return undefined
     }
     return { requiredTrue: Validators.getError('requiredTrue', { actual: value }) }
   }
 
-  static email(value: any, _: AbstractControl): { email: ValidateError } | null {
+  static email(value: any, _: AbstractControl): { email: ValidateError } | undefined {
     if (isEmpty(value) || emailRegexp.test(value)) {
-      return null
+      return undefined
     }
     return { email: Validators.getError('email', { actual: value }) }
   }
 
   static min(min: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { min: ValidateError } | null => {
+    return (value: any, _: AbstractControl): { min: ValidateError } | undefined => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) >= min) {
-        return null
+        return undefined
       }
       return { min: Validators.getError('min', { min, actual: value }) }
     }
   }
 
   static max(max: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { max: ValidateError } | null => {
+    return (value: any, _: AbstractControl): { max: ValidateError } | undefined => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) <= max) {
-        return null
+        return undefined
       }
       return { max: Validators.getError('max', { max, actual: value }) }
     }
   }
 
   static minLength(minLength: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { minLength: ValidateError } | null => {
+    return (value: any, _: AbstractControl): { minLength: ValidateError } | undefined => {
       if (isEmpty(value) || !hasLength(value) || value.length >= minLength) {
-        return null
+        return undefined
       }
       return { minLength: Validators.getError('minLength', { minLength, actual: value.length }) }
     }
   }
 
   static maxLength(maxLength: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { maxLength: ValidateError } | null => {
+    return (value: any, _: AbstractControl): { maxLength: ValidateError } | undefined => {
       if (isEmpty(value) || !hasLength(value) || value.length <= maxLength) {
-        return null
+        return undefined
       }
       return { maxLength: Validators.getError('maxLength', { maxLength, actual: value.length }) }
     }
@@ -113,38 +113,38 @@ export class Validators {
       regexStr = pattern.toString()
       regex = pattern
     }
-    return (value: any, _: AbstractControl): { pattern: ValidateError } | null => {
+    return (value: any, _: AbstractControl): { pattern: ValidateError } | undefined => {
       if (isEmpty(value) || regex.test(value)) {
-        return null
+        return undefined
       }
       return { pattern: Validators.getError('pattern', { pattern: regexStr, actual: value }) }
     }
   }
 
-  static nullValidator(_: any, __: AbstractControl): null {
-    return null
+  static nullValidator(_: any, __: AbstractControl): undefined {
+    return undefined
   }
 
-  static compose(validators: (ValidatorFn | null | undefined)[] | null): ValidatorFn | null {
+  static compose(validators?: (ValidatorFn | undefined)[]): ValidatorFn | undefined {
     if (!validators) {
-      return null
+      return undefined
     }
     const presentValidators: ValidatorFn[] = validators.filter(isFunction)
     if (presentValidators.length == 0) {
-      return null
+      return undefined
     }
 
     return (value: any, control: AbstractControl) =>
       mergeMessages(executeValidators<ValidatorFn>(value, control, presentValidators))
   }
 
-  static composeAsync(validators: (AsyncValidatorFn | null)[] | null): AsyncValidatorFn | null {
+  static composeAsync(validators?: (AsyncValidatorFn | undefined)[]): AsyncValidatorFn | undefined {
     if (!validators) {
-      return null
+      return undefined
     }
     const presentValidators: AsyncValidatorFn[] = validators.filter(isFunction)
     if (presentValidators.length == 0) {
-      return null
+      return undefined
     }
 
     return (value: any, control: AbstractControl) => {
@@ -174,14 +174,14 @@ function executeValidators<V extends GenericValidatorFn>(
   return validators.map(validator => validator(value, control))
 }
 
-function mergeMessages(validateErrors: (ValidateErrors | null)[]): ValidateErrors | null {
+function mergeMessages(validateErrors: (ValidateErrors | undefined)[]): ValidateErrors | undefined {
   let res: { [key: string]: any } = {}
 
   // Not using Array.reduce here due to a Chrome 80 bug
   // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-  validateErrors.forEach((errors: ValidateErrors | null) => {
+  validateErrors.forEach((errors: ValidateErrors | undefined) => {
     res = isNil(errors) ? res : { ...res, ...errors }
   })
 
-  return Object.keys(res).length === 0 ? null : res
+  return Object.keys(res).length === 0 ? undefined : res
 }

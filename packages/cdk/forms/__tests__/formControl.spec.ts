@@ -62,11 +62,11 @@ describe('formControl.ts', () => {
     })
 
     test('validate work', async () => {
-      expect(await control.validate()).toBeNull()
+      expect(await control.validate()).toBeUndefined()
 
       control.setValidator(Validators.required)
 
-      expect(await control.validate()).toEqual({ required: { message: null } })
+      expect(await control.validate()).toEqual({ required: { message: undefined } })
     })
   })
 
@@ -75,7 +75,7 @@ describe('formControl.ts', () => {
 
     test('default change work', async () => {
       const _asyncValidator = (value: unknown) =>
-        Promise.resolve(value === 'test' ? null : ({ async: { message: 'async' } } as ValidateErrors))
+        Promise.resolve(value === 'test' ? undefined : ({ async: { message: 'async' } } as ValidateErrors))
 
       control = new FormControl('test', { validators: Validators.required, asyncValidators: _asyncValidator })
 

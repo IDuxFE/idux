@@ -1,16 +1,16 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" labelCol="6">
     <IxFormItem control="method" label="Method" required message="Please select your contact method!">
-      <IxSelect>
+      <IxSelect control="method">
         <IxSelectOption label="E-mail" value="email"></IxSelectOption>
         <IxSelectOption label="MobilePhone" value="mobilePhone"></IxSelectOption>
       </IxSelect>
     </IxFormItem>
     <IxFormItem control="contact" label="Contact" required :message="getContactMessage">
-      <IxInput></IxInput>
+      <IxInput control="contact"></IxInput>
     </IxFormItem>
     <IxFormItem control="subscribe" :controlCol="{ offset: 6 }">
-      <IxCheckbox>Subscribe notifications</IxCheckbox>
+      <IxCheckbox control="subscribe">Subscribe notifications</IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="{ offset: 6 }">
       <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
@@ -24,7 +24,7 @@ import { AbstractControl, useFormGroup, Validators } from '@idux/cdk/forms'
 
 const mobilePhoneValidator = (value: string) => {
   if (!value || /(^1\d{10}$)/.test(value)) {
-    return null
+    return undefined
   }
   return { mobilePhone: { message: 'Mobile phone number is not valid!' } }
 }
@@ -65,7 +65,7 @@ export default defineComponent({
         return 'The input is not valid email!'
       }
       if (control.hasError('mobilePhone')) {
-        return control.getError('mobilePhone')!.message
+        return control.getError('mobilePhone')!.message as string
       }
       return ''
     }

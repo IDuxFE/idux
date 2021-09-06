@@ -124,13 +124,13 @@ describe('formGroup.ts', () => {
     })
 
     test('validate work', async () => {
-      expect(await group.validate()).toBeNull()
+      expect(await group.validate()).toBeUndefined()
 
-      const _validator = (_: unknown) => ({ test: { message: null } } as ValidateErrors)
+      const _validator = (_: unknown) => ({ test: {} })
 
       group.setValidator(_validator)
 
-      expect(await group.validate()).toEqual({ test: { message: null } })
+      expect(await group.validate()).toEqual({ test: {} })
     })
 
     test('get work', async () => {
@@ -142,12 +142,12 @@ describe('formGroup.ts', () => {
       expect(group.get(['array', 0])).toEqual((array as FormArray<string[]>).controls.value[0])
       expect(group.get('array')!.get(0)).toEqual((array as FormArray<string[]>).controls.value[0])
 
-      expect(group.get(undefined as never)).toBeNull()
-      expect(group.get('')).toBeNull()
-      expect(group.get([])).toBeNull()
-      expect(group.get('add')).toBeNull()
-      expect(group.get(['array', 2])).toBeNull()
-      expect(group.get('group.control.test')).toBeNull()
+      expect(group.get(undefined as never)).toBeUndefined()
+      expect(group.get('')).toBeUndefined()
+      expect(group.get([])).toBeUndefined()
+      expect(group.get('add')).toBeUndefined()
+      expect(group.get(['array', 2])).toBeUndefined()
+      expect(group.get('group.control.test')).toBeUndefined()
     })
   })
 
@@ -155,7 +155,7 @@ describe('formGroup.ts', () => {
     let group: FormGroup<BasicGroup>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
-      return value.control === 'test' ? null : ({ test: { message: null } } as ValidateErrors)
+      return value.control === 'test' ? undefined : { test: {} }
     }
 
     test('default change work', async () => {

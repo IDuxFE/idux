@@ -15,8 +15,8 @@ export default defineComponent({
 
     return () => {
       const child = modals.value.map(item => {
-        // The default value for `visible` and `destroyOnHide` is true
-        const { key, content, visible = true, destroyOnHide = true, ...rest } = item
+        // The default value for `visible`
+        const { key, content, visible = true, destroyOnHide, ...rest } = item
         return (
           <Modal
             {...rest}

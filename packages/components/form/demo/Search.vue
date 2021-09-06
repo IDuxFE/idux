@@ -3,7 +3,7 @@
     <IxRow gutter="24">
       <IxCol v-for="index in controlLength" :key="index" span="8">
         <IxFormItem v-show="showMore || index < 7" :control="'field' + index" :label="'Field ' + index">
-          <IxInput></IxInput>
+          <IxInput :control="'field' + index"></IxInput>
         </IxFormItem>
       </IxCol>
     </IxRow>

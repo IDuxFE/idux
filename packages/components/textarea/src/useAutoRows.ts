@@ -1,7 +1,7 @@
 // https://github.com/angular/components/blob/master/src/cdk/text-field/autosize.ts
 
 import type { ComputedRef, Ref } from 'vue'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaAutoRows } from './types'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
@@ -16,7 +16,7 @@ const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
 export function useAutoRows(
   textareaRef: Ref<HTMLTextAreaElement | undefined>,
   autoRows: ComputedRef<boolean | TextareaAutoRows>,
-  valueAccessor: ValueAccessor,
+  accessor: FormAccessor,
 ): void {
   let enabled = false
   let minRows: number | null = null
@@ -198,7 +198,7 @@ export function useAutoRows(
     })
 
     watch(
-      () => valueAccessor.value,
+      () => accessor.value,
       () => resizeToFitContent(),
     )
 

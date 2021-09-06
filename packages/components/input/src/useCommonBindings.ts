@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { CommonProps } from './types'
 
@@ -9,7 +9,7 @@ import { callEmit } from '@idux/cdk/utils'
 
 export interface CommonBindings<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
-  valueAccessor: ValueAccessor
+  accessor: FormAccessor
 
   isDisabled: ComputedRef<boolean>
   clearIcon: ComputedRef<string>
@@ -33,11 +33,11 @@ export function useCommonBindings(
   config: InputConfig | TextareaConfig,
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
   const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()
-  const valueAccessor = useValueAccessor()
+  const { accessor } = useValueAccessor()
 
   onMounted(() => {
     watchEffect(() => {
-      const value = valueAccessor.value ?? ''
+      const value = accessor.value ?? ''
       const element = elementRef.value!
       if (element.value !== value) {
         element.value = value
@@ -45,10 +45,10 @@ export function useCommonBindings(
     })
   })
 
-  const isDisabled = computed(() => valueAccessor.disabled)
+  const isDisabled = computed(() => accessor.disabled)
   const isClearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-  const clearHidden = computed(() => isDisabled.value || props.readonly || !valueAccessor.value)
+  const clearHidden = computed(() => isDisabled.value || props.readonly || !accessor.value)
 
   const focus = (options?: FocusOptions) => elementRef.value?.focus(options)
   const blur = () => elementRef.value?.blur()
@@ -60,7 +60,7 @@ export function useCommonBindings(
     }
     const { value } = evt.target as HTMLInputElement
     callEmit(props.onInput, evt)
-    valueAccessor.setValue?.(value)
+    accessor.setValue?.(value)
   }
 
   const handlerCompositionStart = (evt: CompositionEvent) => {
@@ -83,18 +83,17 @@ export function useCommonBindings(
   const handlerBlur = (evt: FocusEvent) => {
     isFocused.value = false
     callEmit(props.onBlur, evt)
-    valueAccessor.markAsBlurred?.()
+    accessor.markAsBlurred?.()
   }
 
   const handlerClear = (evt: MouseEvent) => {
     callEmit(props.onClear, evt)
-    valueAccessor.setValue?.('')
+    accessor.setValue?.('')
   }
 
   return {
     elementRef,
-    valueAccessor,
-
+    accessor,
     isDisabled,
     clearIcon,
     clearHidden,

@@ -8,8 +8,8 @@ export default defineComponent({
   name: 'IxCheckboxGroup',
   props: checkboxGroupProps,
   setup(props, { slots }) {
-    const valueAccessor = useValueAccessor()
-    provide(checkboxGroupToken, { props, valueAccessor })
+    const { accessor } = useValueAccessor()
+    provide(checkboxGroupToken, { props, accessor })
 
     return () => {
       const child = props.options ? props.options.map(option => <Checkbox {...option} />) : slots.default?.()

@@ -1,5 +1,6 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
-import type { ColType, FormItemProps, FormLabelAlign } from './types'
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { ColType, FormLabelAlign } from './types'
 
 export interface FormContext {
   colonless: ComputedRef<boolean>
@@ -11,4 +12,7 @@ export interface FormContext {
 
 export const formToken: InjectionKey<FormContext> = Symbol('formToken')
 
-export const formItemToken: InjectionKey<FormItemProps> = Symbol('formItemToken')
+export interface FormItemContext {
+  registerControl: (control: ComputedRef<AbstractControl | undefined>) => void
+  unregisterControl: (control: ComputedRef<AbstractControl | undefined>) => void
+}

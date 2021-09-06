@@ -1,13 +1,13 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
     <IxFormItem control="email" label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
-      <IxInput id="email"></IxInput>
+      <IxInput id="email" control="email"></IxInput>
     </IxFormItem>
     <IxFormItem control="password" label="Password" labelFor="password" required message="Please input your password!">
-      <IxInput id="password" type="password"> </IxInput>
+      <IxInput id="password" control="password" type="password"> </IxInput>
     </IxFormItem>
     <IxFormItem control="confirmPassword" label="Confirm Password" labelFor="confirmPassword" required>
-      <IxInput id="confirmPassword" type="password"> </IxInput>
+      <IxInput id="confirmPassword" control="confirmPassword" type="password"> </IxInput>
     </IxFormItem>
     <IxFormItem
       control="nickname"
@@ -17,7 +17,7 @@
       required
       message="Please input your nickname!"
     >
-      <IxInput id="nickname"> </IxInput>
+      <IxInput id="nickname" control="nickname"> </IxInput>
     </IxFormItem>
     <IxFormItem
       control="phoneNumber"
@@ -36,7 +36,7 @@
       </IxInput>
     </IxFormItem>
     <IxFormItem control="website" label="Website" labelFor="website">
-      <IxInput id="website"> </IxInput>
+      <IxInput id="website" control="website"> </IxInput>
     </IxFormItem>
     <IxFormItem
       control="captcha"
@@ -48,7 +48,7 @@
     >
       <IxRow gutter="8">
         <IxCol span="12">
-          <IxInput id="captcha"> </IxInput>
+          <IxInput id="captcha" control="captcha"> </IxInput>
         </IxCol>
         <IxCol span="12">
           <IxButton @click="getCaptcha">Get captcha</IxButton>
@@ -56,7 +56,7 @@
       </IxRow>
     </IxFormItem>
     <IxFormItem control="agree" :controlCol="noLabelControlCol">
-      <IxCheckbox>I have read the <a>agreement</a> </IxCheckbox>
+      <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="noLabelControlCol">
       <IxButton mode="primary" @click="register">Register</IxButton>
@@ -68,13 +68,13 @@
 import { defineComponent } from 'vue'
 import { AbstractControl, useFormGroup, ValidateErrors, Validators } from '@idux/cdk/forms'
 
-const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | null => {
+const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value) {
     return { required: { message: 'Please confirm your password!' } }
   } else if (value !== control.root.get('password')?.getValue()) {
     return { confirm: { message: 'Two passwords that you enter is inconsistent!' } }
   }
-  return null
+  return undefined
 }
 
 export default defineComponent({
@@ -92,7 +92,7 @@ export default defineComponent({
       nickname: ['', required],
       phoneNumberPrefix: ['+86', required],
       phoneNumber: ['', required],
-      website: [],
+      website: [''],
       captcha: ['', required],
       agree: [false],
     })

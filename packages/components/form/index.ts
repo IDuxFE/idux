@@ -1,8 +1,8 @@
 import type { FormComponent, FormItemComponent, FormWrapperComponent } from './src/types'
 
-import Form from './src/Form.vue'
-import FormItem from './src/FormItem.vue'
-import FormWrapper from './src/FormWrapper.vue'
+import Form from './src/Form'
+import FormItem from './src/FormItem'
+import FormWrapper from './src/FormWrapper'
 
 const IxForm = Form as unknown as FormComponent
 const IxFormItem = FormItem as unknown as FormItemComponent
@@ -20,6 +20,5 @@ export type {
   FormLabelAlign,
   FormLayout,
   FormSize,
-  FormMessageFn,
   FormMessage,
 } from './src/types'

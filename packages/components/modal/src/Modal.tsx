@@ -20,7 +20,7 @@ export default defineComponent({
     const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, updateVisible)
 
     provide(modalToken, { props, slots, config, visible, animatedVisible, cancelLoading, okLoading })
-    provide(MODAL_TOKEN, { props, open, close, cancel, ok })
+    provide(MODAL_TOKEN, { open, close, cancel, ok })
 
     expose({ open, close, cancel, ok })
 
