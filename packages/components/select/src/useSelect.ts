@@ -9,6 +9,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, wat
 import { useOverlay } from '@idux/cdk/overlay'
 import { offResize, onResize, convertArray } from '@idux/cdk/utils'
 import { useValueAccessor } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
 import { selectToken } from './token'
 
 export interface SelectOverlay {
@@ -126,6 +127,7 @@ export interface SelectValueAccessor {
 export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor => {
   const { emit } = getCurrentInstance()!
   const { accessor } = useValueAccessor()
+  useFormItemRegister()
   const disabled = computed(() => accessor.disabled)
   const inputValue = ref('')
   const selectedValue = ref<any[]>(convertArray(accessor.value))

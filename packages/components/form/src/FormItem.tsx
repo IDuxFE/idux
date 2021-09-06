@@ -1,18 +1,25 @@
-import type { ComputedRef, Slots } from 'vue'
-import type { AbstractControl, ValidateStatus, ValidateErrors } from '@idux/cdk/forms'
+import type { ComputedRef, Slots, WatchStopHandle } from 'vue'
+import {
+  AbstractControl,
+  ValidateStatus,
+  ValidateErrors,
+  isAbstractControl,
+  injectControl,
+  ControlPathType,
+} from '@idux/cdk/forms'
 import type { ColProps } from '@idux/components/grid'
 import type { Locale } from '@idux/components/i18n'
 import type { FormItemProps, FormLabelAlign } from './types'
 
-import { computed, defineComponent, inject } from 'vue'
-import { isFunction, isNumber, isString } from 'lodash-es'
-import { useValueControl } from '@idux/cdk/forms'
+import { computed, defineComponent, inject, provide, ref, watchEffect } from 'vue'
+import { isFunction, isNil, isNumber, isString } from 'lodash-es'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
 import { getLocale } from '@idux/components/i18n'
 import { IxTooltip } from '@idux/components/tooltip'
-import { formToken } from './token'
+import { formToken, FORM_ITEM_TOKEN } from './token'
 import { formItemProps } from './types'
+import { Logger } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxFormItem',
@@ -136,6 +143,43 @@ function normalizeColConfig(col: string | number | ColProps | undefined) {
   return isNumber(col) || isString(col) ? { span: col } : col
 }
 
+function useControl(props: FormItemProps) {
+  const firstChildControl = ref<string | AbstractControl>()
+  let firstChildKey: string | number | undefined
+  let firstChildWatchStop: WatchStopHandle | undefined
+  const registerControl = (key: string | number, controlOrPath: ComputedRef<string | AbstractControl | undefined>) => {
+    if (!firstChildWatchStop) {
+      firstChildKey = key
+      firstChildWatchStop = watchEffect(() => (firstChildControl.value = controlOrPath.value))
+    }
+  }
+
+  const unregisterControl = (key: string | number) => {
+    if (key === firstChildKey) {
+      firstChildWatchStop?.()
+      firstChildControl.value = undefined
+    }
+  }
+
+  provide(FORM_ITEM_TOKEN, { registerControl, unregisterControl })
+
+  return computed(() => {
+    let control: AbstractControl | undefined
+    const _controlOrPath = props.control ?? firstChildControl.value
+    if (!isNil(_controlOrPath)) {
+      if (isAbstractControl(_controlOrPath)) {
+        control = _controlOrPath
+      } else {
+        control = injectControl(_controlOrPath as ControlPathType)
+        if (__DEV__ && !control) {
+          Logger.warn('components/form', `not find control by [${_controlOrPath}]`)
+        }
+      }
+    }
+    return control
+  })
+}
+
 const iconTypeMap = {
   invalid: 'close-circle-filled',
   validating: 'loading',
@@ -143,7 +187,7 @@ const iconTypeMap = {
 } as const
 
 function useControlStatus(props: FormItemProps) {
-  const control = useValueControl()
+  const control = useControl(props)
 
   const status = useStatus(props, control)
   const message = useMessage(props, control, status)

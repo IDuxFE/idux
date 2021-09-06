@@ -3,12 +3,12 @@
     <h4 v-typography>Name</h4>
     <IxRow>
       <IxCol span="8">
-        <IxFormItem control="name.firstName" label="First Name" required>
+        <IxFormItem label="First Name" required>
           <IxInput control="name.firstName"></IxInput>
         </IxFormItem>
       </IxCol>
       <IxCol span="8">
-        <IxFormItem control="name.lastName" label="Last Name" required>
+        <IxFormItem label="Last Name" required>
           <IxInput control="name.lastName"></IxInput>
         </IxFormItem>
       </IxCol>
@@ -17,17 +17,17 @@
     <IxFormWrapper control="address">
       <IxRow>
         <IxCol span="8">
-          <IxFormItem control="city" label="City" required>
+          <IxFormItem label="City" required>
             <IxInput control="city"></IxInput>
           </IxFormItem>
         </IxCol>
         <IxCol span="8">
-          <IxFormItem control="street" label="Street" required>
+          <IxFormItem label="Street" required>
             <IxInput control="street"></IxInput>
           </IxFormItem>
         </IxCol>
         <IxCol span="8">
-          <IxFormItem control="zip" label="Zip Code">
+          <IxFormItem label="Zip Code">
             <IxInput control="zip"></IxInput>
           </IxFormItem>
         </IxCol>

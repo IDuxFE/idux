@@ -9,7 +9,7 @@ import { IxHeader } from '@idux/components/header'
 import { IxTypography } from '@idux/components/typography'
 import { IxTag } from '@idux/components/tag'
 // import Layout
-import { IxLayout, IxLayoutHeader } from '@idux/components/layout'
+import { IxLayout, IxLayoutHeader, IxLayoutSider, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
 import { IxDivider } from '@idux/components/divider'
 import { IxSpace } from '@idux/components/space'
 import { IxRow, IxCol } from '@idux/components/grid'
@@ -43,7 +43,8 @@ import { IxTooltip } from '@idux/components/tooltip'
 import { IxPopover } from '@idux/components/popover'
 // import Feedback
 import { IxDrawer } from '@idux/components/drawer'
-import { IxModal } from '@idux/components/modal'
+import { IxMessage, IxMessageProvider } from '@idux/components/message'
+import { IxModal, IxModalProvider } from '@idux/components/modal'
 import { IxResult } from '@idux/components/result'
 import { IxSpin } from '@idux/components/spin'
 import { IxProgress } from '@idux/components/progress'
@@ -62,6 +63,9 @@ const components = [
   // components Layout
   IxLayout,
   IxLayoutHeader,
+  IxLayoutSider,
+  IxLayoutContent,
+  IxLayoutFooter,
   IxDivider,
   IxSpace,
   IxRow,
@@ -110,7 +114,10 @@ const components = [
   IxPopover,
   // components Feedback
   IxDrawer,
+  IxMessage,
+  IxMessageProvider,
   IxModal,
+  IxModalProvider,
   IxResult,
   IxSpin,
   IxProgress,

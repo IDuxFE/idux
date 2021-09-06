@@ -2,6 +2,7 @@ import { computed, defineComponent, ref, ComputedRef, onMounted } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { useFormItemRegister } from '@idux/components/form'
 import { SwitchProps, switchProps } from './types'
 
 export default defineComponent({
@@ -59,7 +60,7 @@ const useSwitch = (props: SwitchProps, blur: () => void) => {
   let handleBlur: (evt: FocusEvent) => void
   let handleMouseup: (evt: Event) => void
   const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
-
+  useFormItemRegister()
   const isChecked = computed(() => accessor.value)
   const isDisabled = computed(() => props.disabled ?? accessor.disabled)
 

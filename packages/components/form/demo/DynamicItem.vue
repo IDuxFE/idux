@@ -8,13 +8,13 @@
       </IxSpace>
     </IxFormItem>
     <template v-for="(control, key) in formGroup.controls.value" :key="control.uid">
-      <IxFormItem v-if="key !== 'array'" :control="control" :label="key">
+      <IxFormItem v-if="key !== 'array'" :label="key">
         <IxInput :control="control"></IxInput>
         <IxIcon name="minus-circle" @click="removeGroupItem(key)"></IxIcon>
       </IxFormItem>
     </template>
     <template v-for="(control, index) in arrayControl.controls.value" :key="control.uid">
-      <IxFormItem :control="control" :label="'Array-' + control.uid">
+      <IxFormItem :label="'Array-' + control.uid">
         <IxInput :control="control"></IxInput>
         <IxIcon name="minus-circle" @click="removeArrayItem(index)"></IxIcon>
       </IxFormItem>
