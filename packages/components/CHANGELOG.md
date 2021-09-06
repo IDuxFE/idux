@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/IDuxFE/idux/compare/v0.3.1...v0.4.0) (2021-09-06)
+
+
+### Features
+
+* add layout comp ([#432](https://github.com/IDuxFE/idux/issues/432)) ([95e649c](https://github.com/IDuxFE/idux/commit/95e649ce2ad7cfc7c0551f8bc0a5ea0f12f63e95))
+* **comp: form:** support default control ([#436](https://github.com/IDuxFE/idux/issues/436)) ([9fb64f6](https://github.com/IDuxFE/idux/commit/9fb64f6c6f0ac9cc21585a5471c0976eb9246baa))
+* **comp:menu:** rebuild with tsx ([#428](https://github.com/IDuxFE/idux/issues/428)) ([c34d893](https://github.com/IDuxFE/idux/commit/c34d8933ae907a28826c9b4a60fd2dae9b7d1b57))
+* **comp:table:** selectable support options ([#426](https://github.com/IDuxFE/idux/issues/426)) ([85d2d61](https://github.com/IDuxFE/idux/commit/85d2d61e236994d925a21426f5a967b15de19a20))
+
+
+
+
+
 ## [0.3.1](https://github.com/IDuxFE/idux/compare/v0.3.0...v0.3.1) (2021-08-31)
 
 
