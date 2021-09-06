@@ -23,7 +23,7 @@ export interface FormItemContext {
 export const FORM_ITEM_TOKEN: InjectionKey<FormItemContext> = Symbol('FORM_ITEM_TOKEN')
 
 export function useFormItemRegister(controlKey = 'control'): void {
-  const context = inject(FORM_ITEM_TOKEN)
+  const context = inject(FORM_ITEM_TOKEN, null)
   if (context) {
     const key = useKey()
     const { props } = getCurrentInstance()!

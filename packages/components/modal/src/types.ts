@@ -32,7 +32,7 @@ export const modalProps = {
   closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
   containerClassName: IxPropTypes.string,
-  destroyOnHide: IxPropTypes.bool,
+  destroyOnHide: IxPropTypes.bool.def(false),
   footer: IxPropTypes.oneOfType<ModalButtonProps[] | VNode | null>([IxPropTypes.array(), IxPropTypes.vNode]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),

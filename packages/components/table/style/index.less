@@ -82,7 +82,7 @@
       top: 50%;
       right: 0;
       width: 1px;
-      height: 60%;
+      height: 1.6em;
       background-color: @table-head-split-color;
       transform: translateY(-50%);
       content: '';
@@ -93,6 +93,10 @@
     &[colspan] {
       border-bottom: 0;
     }
+  }
+
+  thead > tr > th[colspan]:not([colspan='1']) {
+    text-align: center;
   }
 
   td {
@@ -110,7 +114,6 @@
         background: @table-body-hover-background;
       }
     }
-    // TODO: selected
   }
 
   &-align {
@@ -137,6 +140,10 @@
     position: relative;
     z-index: 1;
     flex: 1;
+  }
+
+  &-cell-scroll-bar {
+    box-shadow: 0 1px 0 1px @table-head-background;
   }
 
   &-pagination {
