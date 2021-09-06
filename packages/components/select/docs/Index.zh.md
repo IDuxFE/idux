@@ -21,7 +21,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `mode` 为 `multiple` 或 `tags` 时，`value` 为数组 |
-| `control` | 控件控制器 | `string \| number \| AbstractControl \| null` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | `false` | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |

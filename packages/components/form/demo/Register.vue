@@ -1,16 +1,15 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
-    <IxFormItem control="email" label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
+    <IxFormItem label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
       <IxInput id="email" control="email"></IxInput>
     </IxFormItem>
-    <IxFormItem control="password" label="Password" labelFor="password" required message="Please input your password!">
+    <IxFormItem label="Password" labelFor="password" required message="Please input your password!">
       <IxInput id="password" control="password" type="password"> </IxInput>
     </IxFormItem>
-    <IxFormItem control="confirmPassword" label="Confirm Password" labelFor="confirmPassword" required>
+    <IxFormItem label="Confirm Password" labelFor="confirmPassword" required>
       <IxInput id="confirmPassword" control="confirmPassword" type="password"> </IxInput>
     </IxFormItem>
     <IxFormItem
-      control="nickname"
       label="Nickname"
       labelFor="nickname"
       labelTooltip="What do you want other to call you"
@@ -35,11 +34,10 @@
         </template>
       </IxInput>
     </IxFormItem>
-    <IxFormItem control="website" label="Website" labelFor="website">
+    <IxFormItem label="Website" labelFor="website">
       <IxInput id="website" control="website"> </IxInput>
     </IxFormItem>
     <IxFormItem
-      control="captcha"
       label="Captcha"
       labelFor="captcha"
       required

@@ -6,6 +6,7 @@ import type { CommonProps } from './types'
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { useFormItemRegister } from '@idux/components/form'
 
 export interface CommonBindings<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
@@ -34,6 +35,7 @@ export function useCommonBindings(
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
   const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()
   const { accessor } = useValueAccessor()
+  useFormItemRegister()
 
   onMounted(() => {
     watchEffect(() => {

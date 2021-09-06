@@ -1,9 +1,9 @@
 <template>
   <IxForm class="demo-form" :control="formGroup">
-    <IxFormItem control="username" message="Please input your username!">
+    <IxFormItem message="Please input your username!">
       <IxInput control="username" prefix="user"></IxInput>
     </IxFormItem>
-    <IxFormItem control="password" message="Please input your password, its length is 6-18!">
+    <IxFormItem message="Please input your password, its length is 6-18!">
       <IxInput control="password" prefix="lock" :type="passwordVisible ? 'text' : 'password'">
         <template #suffix>
           <IxIcon :name="passwordVisible ? 'eye-invisible' : 'eye'" @click="passwordVisible = !passwordVisible">
@@ -11,7 +11,7 @@
         </template>
       </IxInput>
     </IxFormItem>
-    <IxFormItem control="remember">
+    <IxFormItem>
       <IxCheckbox control="remember">Remember me</IxCheckbox>
     </IxFormItem>
     <IxFormItem>

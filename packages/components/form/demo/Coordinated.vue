@@ -1,15 +1,15 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" labelCol="6">
-    <IxFormItem control="method" label="Method" required message="Please select your contact method!">
+    <IxFormItem label="Method" required message="Please select your contact method!">
       <IxSelect control="method">
         <IxSelectOption label="E-mail" value="email"></IxSelectOption>
         <IxSelectOption label="MobilePhone" value="mobilePhone"></IxSelectOption>
       </IxSelect>
     </IxFormItem>
-    <IxFormItem control="contact" label="Contact" required :message="getContactMessage">
+    <IxFormItem label="Contact" required :message="getContactMessage">
       <IxInput control="contact"></IxInput>
     </IxFormItem>
-    <IxFormItem control="subscribe" :controlCol="{ offset: 6 }">
+    <IxFormItem :controlCol="{ offset: 6 }">
       <IxCheckbox control="subscribe">Subscribe notifications</IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="{ offset: 6 }">

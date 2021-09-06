@@ -4,6 +4,7 @@ import type { CheckboxGroupContext } from './token'
 
 import { defineComponent, ref, computed, inject } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
 import { callEmit } from '@idux/cdk/utils'
 import { checkboxGroupToken } from './token'
 import { checkboxProps } from './types'
@@ -93,6 +94,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
     }
   } else {
     const { accessor } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
+    useFormItemRegister()
     isChecked = computed(() => accessor.value === props.trueValue)
     isDisabled = computed(() => accessor.disabled)
 

@@ -6,6 +6,7 @@ import { computed, defineComponent, inject, ref } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormItemRegister } from '@idux/components/form'
 import { radioGroupToken } from './token'
 import { radioProps } from './types'
 
@@ -79,6 +80,7 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
     }
   } else {
     const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
+    useFormItemRegister()
     isChecked = computed(() => accessor.value)
     isDisabled = computed(() => accessor.disabled)
     handleBlur = (evt: FocusEvent) => {

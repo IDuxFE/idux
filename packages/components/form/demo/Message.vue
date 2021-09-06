@@ -1,15 +1,15 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
-    <IxFormItem control="email" label="E-mail" required>
+    <IxFormItem label="E-mail" required>
       <IxInput control="email"></IxInput>
     </IxFormItem>
-    <IxFormItem control="password" label="Password" required>
+    <IxFormItem label="Password" required>
       <IxInput control="password" type="password"> </IxInput>
     </IxFormItem>
-    <IxFormItem control="confirmPassword" label="Confirm Password" required>
+    <IxFormItem label="Confirm Password" required>
       <IxInput control="confirmPassword" type="password"> </IxInput>
     </IxFormItem>
-    <IxFormItem control="nickname" label="Nickname" labelTooltip="What do you want other to call you" required>
+    <IxFormItem label="Nickname" labelTooltip="What do you want other to call you" required>
       <IxInput control="nickname"> </IxInput>
     </IxFormItem>
     <IxFormItem control="phoneNumber" label="Phone Number" required>
@@ -22,10 +22,10 @@
         </template>
       </IxInput>
     </IxFormItem>
-    <IxFormItem control="website" label="Website">
+    <IxFormItem label="Website">
       <IxInput control="website"> </IxInput>
     </IxFormItem>
-    <IxFormItem control="captcha" label="Captcha" required extra="We must make sure that your are a human.">
+    <IxFormItem label="Captcha" required extra="We must make sure that your are a human.">
       <IxRow gutter="8">
         <IxCol span="12">
           <IxInput control="captcha"> </IxInput>
@@ -35,7 +35,7 @@
         </IxCol>
       </IxRow>
     </IxFormItem>
-    <IxFormItem control="agree" :controlCol="noLabelControlCol">
+    <IxFormItem :controlCol="noLabelControlCol">
       <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="noLabelControlCol">
