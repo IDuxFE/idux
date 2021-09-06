@@ -1,9 +1,9 @@
 <template>
   <IxLayout>
-    <IxLayoutHeader borderless>header</IxLayoutHeader>
-    <IxLayoutSider borderless>sider</IxLayoutSider>
-    <IxLayoutContent> content </IxLayoutContent>
-    <IxLayoutFooter borderless>footer</IxLayoutFooter>
+    <IxLayoutHeader>header</IxLayoutHeader>
+    <IxLayoutSider placement="end">sider</IxLayoutSider>
+    <IxLayoutContent>content</IxLayoutContent>
+    <IxLayoutFooter>footer</IxLayoutFooter>
   </IxLayout>
 </template>
 

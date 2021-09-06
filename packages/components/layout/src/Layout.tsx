@@ -8,7 +8,7 @@ export default defineComponent({
     const classes = computed(()=>{
       return {
           'ix-layout': true,
-          'sider-out': props.siderOut
+          'ix-layout-out-sider': props.outSider
       }
     })
     return ()=>{
