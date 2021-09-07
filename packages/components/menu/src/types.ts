@@ -21,7 +21,7 @@ export const menuProps = {
   // events
   'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: (string | number)[]) => void>(),
   'onUpdate:selectedKeys': IxPropTypes.emit<(selectedKeys: (string | number)[]) => void>(),
-  onItemClick: IxPropTypes.emit<(key: string | number) => void>(),
+  onItemClick: IxPropTypes.emit<(key: string | number, evt: Event) => void>(),
 }
 
 export type MenuProps = IxInnerPropTypes<typeof menuProps>

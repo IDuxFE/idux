@@ -94,7 +94,6 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
 }
 export interface TableColumnMergedExpandable extends TableColumnExpandable, TableColumnMergedBaseExtra {
   align: TableColumnAlign
-  childrenKey: string
   key: Key
   icon: [string, string]
   titleColSpan: number
@@ -141,8 +140,8 @@ function covertColumn(
   if ('type' in column) {
     const key = `IDUX_TABLE_KEY_${column.type}`
     if (column.type === 'expandable') {
-      const { childrenKey = 'children', icon = expandableConfig.icon } = column
-      return { ...column, key, align, childrenKey, icon }
+      const { icon = expandableConfig.icon } = column
+      return { ...column, key, align, icon }
     } else {
       // The default value for `multiple` is true
       const multiple = column.multiple ?? true

@@ -36,7 +36,6 @@ export const zh_CN: Locale = {
     selectNone: '清空所有',
     selectPageAll: '全选当页',
     selectPageInvert: '反选当页',
-    sortTitle: '排序',
     sortDesc: '点击降序',
     sortAsc: '点击升序',
     sortCancel: '取消排序',

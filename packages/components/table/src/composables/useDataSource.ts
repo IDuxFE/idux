@@ -1,19 +1,22 @@
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { Key, TableProps, TablePagination } from '../types'
-import type { ExpandableContext } from './useExpandable'
 import type { GetRowKey } from './useGetRowKey'
+import type { ActiveSortable } from './useSortable'
 
 import { computed } from 'vue'
 
 export function useDataSource(
   props: TableProps,
   getRowKey: ComputedRef<GetRowKey>,
-  { expandable, expandedRowKeys }: ExpandableContext,
+  activeSortable: ActiveSortable,
+  expandedRowKeys: Ref<Key[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
-  const mergedData = computed(() =>
-    props.dataSource.map(record => covertMergeData(record, getRowKey.value, expandable.value?.childrenKey)),
-  )
+  const mergedData = computed(() => {
+    const { dataSource, childrenKey } = props
+    return dataSource.map(record => covertMergeData(record, getRowKey.value, childrenKey))
+  })
+
   const mergedMap = computed(() => {
     const map = new Map<Key, MergedData>()
     covertDataMap(mergedData.value, map)
@@ -21,8 +24,16 @@ export function useDataSource(
   })
   // TODO
   const filteredData = computed(() => mergedData.value)
-  // TODO
-  const sortedData = computed(() => filteredData.value)
+  const sortedData = computed(() => {
+    const { sorter, orderBy } = activeSortable
+    if (sorter && orderBy) {
+      const oderFlag = orderBy === 'ascend' ? 1 : -1
+      const tempData = filteredData.value.slice()
+      return tempData.sort((curr, next) => oderFlag * sorter(curr.record, next.record))
+    } else {
+      return filteredData.value
+    }
+  })
   const paginatedData = computed(() => {
     const pagination = mergedPagination.value
     const data = sortedData.value
@@ -76,11 +87,11 @@ export interface FlattedData extends MergedData {
   level: number
 }
 
-function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey?: string, parentKey?: Key) {
+function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: Key) {
   const rowKey = getRowKey(record)
   const result: MergedData = { record, rowKey, parentKey }
 
-  const subData = childrenKey ? ((record as Record<string, unknown>)[childrenKey] as unknown[]) : false
+  const subData = (record as Record<string, unknown>)[childrenKey] as unknown[]
   if (subData) {
     result.children = subData.map(subRecord => covertMergeData(subRecord, getRowKey, childrenKey, rowKey))
   }

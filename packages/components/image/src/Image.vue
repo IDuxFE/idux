@@ -6,7 +6,7 @@
       :src="src"
       :style="{ width: imageWidth, height: imageHeight, objectFit: objectFit }"
       :alt="alt"
-      @color-error="onError"
+      @error="onError"
       @load="onLoaded"
       @click="onClick"
     />

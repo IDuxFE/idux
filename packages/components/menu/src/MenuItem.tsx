@@ -30,9 +30,9 @@ export default defineComponent({
       return { paddingLeft: paddingLeft.value }
     })
 
-    const onClick = () => {
+    const onClick = (evt: Event) => {
       if (!props.disabled) {
-        handleItemClick(key)
+        handleItemClick(key, evt)
         menuSubContext?.handleItemClick()
       }
     }

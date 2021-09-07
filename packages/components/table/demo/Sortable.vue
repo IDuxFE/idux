@@ -1,43 +1,46 @@
 <template>
-  <IxTable v-model:expandedRowKeys="expandedRowKeys" :columns="columns" :dataSource="data" :pagination="null">
+  <IxTable :columns="columns" :dataSource="data" :pagination="null">
     <template #name="{ value }">
       <a>{{ value }}</a>
-    </template>
-    <template #expand="{ record }">
-      <span> {{ record.description }}</span>
     </template>
   </IxTable>
 </template>
 
 <script lang="ts" setup>
 import { TableColumn } from '@idux/components/table'
-import { ref } from 'vue'
 
 interface Data {
   key: number
   name: string
   age: number
+  grade: number
   address: string
-  description?: string
 }
 
-const expandedRowKeys = ref([1])
-
 const columns: TableColumn<Data>[] = [
-  {
-    type: 'expandable',
-    disabled: record => !record.description,
-    onChange: expendedRowKeys => console.log(expendedRowKeys),
-    customExpand: 'expand',
-  },
   {
     title: 'Name',
     dataKey: 'name',
     customRender: 'name',
+    sortable: {
+      orders: ['descend'],
+      sorter: (curr, next) => curr.name.length - next.name.length,
+    },
   },
   {
     title: 'Age',
     dataKey: 'age',
+    sortable: {
+      sorter: (curr, next) => curr.age - next.age,
+    },
+  },
+  {
+    title: 'Grade',
+    dataKey: 'grade',
+    sortable: {
+      orders: ['ascend', 'descend', 'ascend'],
+      sorter: (curr, next) => curr.grade - next.grade,
+    },
   },
   {
     title: 'Address',
@@ -49,29 +52,30 @@ const data: Data[] = [
   {
     key: 1,
     name: 'John Brown',
-    age: 32,
+    age: 18,
+    grade: 1,
     address: 'New York No. 1 Lake Park',
-    description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
   },
   {
     key: 2,
     name: 'Jim Green',
-    age: 42,
+    age: 20,
+    grade: 3,
     address: 'London No. 1 Lake Park',
-    description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
   },
   {
     key: 3,
     name: 'Joe Black',
-    age: 32,
+    age: 19,
+    grade: 2,
     address: 'Sidney No. 1 Lake Park',
   },
   {
     key: 4,
     name: 'Disabled User',
-    age: 99,
+    age: 21,
+    grade: 2,
     address: 'Sidney No. 1 Lake Park',
-    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
   },
 ]
 </script>

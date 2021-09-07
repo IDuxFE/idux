@@ -210,7 +210,7 @@ export interface TableConfig {
 
 export interface TableColumnBaseConfig {
   align: TableColumnAlign
-  sortable: { directions: TableColumnSortOrder[]; showTooltip: boolean }
+  sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
 }
 
 export interface TableColumnExpandableConfig {

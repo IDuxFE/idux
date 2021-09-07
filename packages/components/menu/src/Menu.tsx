@@ -86,8 +86,8 @@ function useExpanded(props: MenuProps) {
 function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null) {
   const selectedKeys = useMergedProp(props, 'selectedKeys')
 
-  const handleItemClick = (key: string | number) => {
-    callEmit(props.onItemClick, key)
+  const handleItemClick = (key: string | number, evt: Event) => {
+    callEmit(props.onItemClick, key, evt)
     dropdownContext?.changeVisible?.(false)
     // dropdown 默认为 false, 其他情况默认为 true
     const selectable = props.selectable ?? !dropdownContext

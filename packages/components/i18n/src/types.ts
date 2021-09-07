@@ -36,7 +36,6 @@ export interface TableLocale {
   selectNone: string
   selectPageAll: string
   selectPageInvert: string
-  sortTitle: string
   sortDesc: string
   sortAsc: string
   sortCancel: string
