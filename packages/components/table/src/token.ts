@@ -7,6 +7,7 @@ import type { ExpandableContext } from './composables/useExpandable'
 import type { GetRowKey } from './composables/useGetRowKey'
 import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
+import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
 import type { PaginationContext } from './composables/usePagination'
 import type { TagsContext } from './composables/useTags'
@@ -19,6 +20,7 @@ export interface TableContext
     PaginationContext,
     ScrollContext,
     SelectableContext,
+    SortableContext,
     StickyContext,
     TagsContext {
   props: TableProps

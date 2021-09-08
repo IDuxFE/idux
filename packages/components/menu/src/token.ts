@@ -6,7 +6,7 @@ export interface MenuContext {
   expandedKeys: Ref<Array<string | number>>
   handleExpand: (key: string | number, expanded: boolean) => void
   selectedKeys: Ref<Array<string | number>>
-  handleItemClick: (key: string | number) => void
+  handleItemClick: (key: string | number, evt: Event) => void
   indent: ComputedRef<number>
   mode: ComputedRef<MenuMode>
   multiple: ComputedRef<boolean>

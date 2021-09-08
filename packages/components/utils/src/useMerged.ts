@@ -23,3 +23,22 @@ export function useMergedProp<T, K extends keyof T>(props: T, key: K): WritableC
     },
   })
 }
+
+export function useMergedState<T, K extends keyof T>(state: T, key: K): WritableComputedRef<T[K]> {
+  const tempProp = ref(state[key]) as Ref<T[K]>
+  watch(
+    () => state[key],
+    value => (tempProp.value = value),
+  )
+
+  return computed({
+    get() {
+      return tempProp.value
+    },
+    set(value) {
+      if (value !== tempProp.value) {
+        tempProp.value = value
+      }
+    },
+  })
+}

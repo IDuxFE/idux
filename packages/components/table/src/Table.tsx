@@ -21,6 +21,7 @@ import { renderHeader } from './other/Header'
 import { renderFooter } from './other/Footer'
 import { tableToken, TABLE_TOKEN } from './token'
 import { tableProps } from './types'
+import { useSortable } from './composables/useSortable'
 
 export default defineComponent({
   name: 'IxTable',
@@ -33,10 +34,17 @@ export default defineComponent({
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, stickyContext)
     const columnsContext = useColumns(props, config, scrollContext.scrollBarSizeOnFixedHolder)
+    const sortableContext = useSortable(columnsContext.flattedColumns)
     const tableLayout = useTableLayout(props, columnsContext, scrollContext, stickyContext.isSticky)
     const { mergedPagination } = usePagination(props, config)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
-    const dataContext = useDataSource(props, getRowKey, expandableContext, mergedPagination)
+    const dataContext = useDataSource(
+      props,
+      getRowKey,
+      sortableContext.activeSortable,
+      expandableContext.expandedRowKeys,
+      mergedPagination,
+    )
     const selectableContext = useSelectable(props, locale, columnsContext.flattedColumns, dataContext)
 
     const context = {
@@ -48,6 +56,7 @@ export default defineComponent({
       getRowKey,
       ...columnsContext,
       ...scrollContext,
+      ...sortableContext,
       ...stickyContext,
       tableLayout,
       mergedPagination,

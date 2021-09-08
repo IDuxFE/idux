@@ -1,5 +1,6 @@
 import type { ComputedRef, StyleValue, VNodeTypes } from 'vue'
 import type { TableColumnMerged } from '../../composables/useColumns'
+import type { ActiveSortable } from '../../composables/useSortable'
 import type { Key } from '../../types'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -23,11 +24,12 @@ export default defineComponent({
       scrollHorizontal,
       scrollVertical,
       isSticky,
+      activeSortable,
       bodyTag,
     } = inject(tableToken)!
 
     const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
-    const bodyColumns = useBodyColumns(flattedColumns, fixedColumnKeys, columnOffsets, isSticky)
+    const bodyColumns = useBodyColumns(flattedColumns, activeSortable, fixedColumnKeys, columnOffsets, isSticky)
 
     return () => {
       let children: VNodeTypes[] = []
@@ -65,6 +67,7 @@ export default defineComponent({
 
 function useBodyColumns(
   flattedColumns: ComputedRef<TableColumnMerged[]>,
+  activeSortable: ActiveSortable,
   fixedColumnKeys: ComputedRef<{
     lastStartKey: Key | undefined
     firstEndKey: Key | undefined
@@ -79,9 +82,10 @@ function useBodyColumns(
     flattedColumns.value.map((column, index) => {
       const { key, fixed, align, ellipsis, additional, colSpan, rowSpan, customRender, dataKey, type } = column
       const prefixCls = 'ix-table'
-      let classes: Record<string, boolean | string | undefined> = {
-        [`${prefixCls}-align-${align}`]: align,
-        [`${prefixCls}-ellipsis`]: ellipsis,
+      let classes: Record<string, boolean> = {
+        [`${prefixCls}-cell-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
+        [`${prefixCls}-align-${align}`]: !!align,
+        [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
       let style: StyleValue | undefined
       if (fixed) {

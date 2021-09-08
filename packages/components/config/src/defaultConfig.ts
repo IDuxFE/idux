@@ -192,7 +192,7 @@ const table = shallowReactive<TableConfig>({
 
   columnBase: {
     align: 'start',
-    sortable: { directions: ['ascend', 'descend', null], showTooltip: true },
+    sortable: { nextTooltip: false, orders: ['ascend', 'descend'] },
   },
   columnExpandable: { icon: ['plus', 'minus'] },
 })

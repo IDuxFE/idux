@@ -19,7 +19,6 @@ export type {
   TableColumnExpandableIconFn,
   TableColumnSelectable,
   TableColumnSelectableOption,
-  TableExtra,
   TablePagination,
   TablePaginationPosition,
   TableScroll,
@@ -27,6 +26,6 @@ export type {
   TableTags,
   TableColumnAlign,
   TableColumnFixed,
-  TableColumnSortOrder,
   TableColumnSortable,
+  TableColumnSortOrder,
 } from './src/types'

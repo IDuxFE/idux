@@ -12,11 +12,11 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tableProps = {
   borderless: IxPropTypes.bool,
+  childrenKey: IxPropTypes.string.def('children'),
   columns: IxPropTypes.array<TableColumn<any>>().def(() => []),
   dataSource: IxPropTypes.array().def(() => []),
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
   expandedRowKeys: IxPropTypes.array<Key>().def(() => []),
-  extra: IxPropTypes.object<TableExtra>(),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   headless: IxPropTypes.bool,
   pagination: IxPropTypes.object<TablePagination | null>(),
@@ -79,7 +79,6 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
 export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T> {
   type: 'expandable'
-  childrenKey?: string
   customExpand?: string | TableColumnExpandableExpandFn<T>
   customIcon?: string | TableColumnExpandableIconFn<T>
 
@@ -123,14 +122,6 @@ export interface TableColumnSelectableOption {
   onClick: (currentPageRowKeys: Key[]) => void
 }
 
-export interface TableExtra {
-  dropdown?: (options: unknown) => VNodeTypes
-  dropdownVisible?: boolean
-  icon?: string
-  options: unknown[]
-  onDropDownVisibleChange: (visible: boolean) => void
-}
-
 export interface TablePagination extends PaginationProps {
   position?: TablePaginationPosition
 }
@@ -159,13 +150,14 @@ export type TableColumnAlign = 'start' | 'center' | 'end'
 
 export type TableColumnFixed = 'start' | 'end'
 
-export type TableColumnSortOrder = 'ascend' | 'descend' | null
+export type TableColumnSortOrder = 'ascend' | 'descend'
 
 export interface TableColumnSortable<T = unknown> {
-  directions?: TableColumnSortOrder[]
-  order?: TableColumnSortOrder
-  showTooltip?: boolean
-  onSort: (curr: T, next: T) => number
+  nextTooltip?: boolean
+  orderBy?: TableColumnSortOrder
+  orders?: TableColumnSortOrder[]
+  sorter?: (curr: T, next: T) => number
+  onChange?: (currOrderBy?: TableColumnSortOrder) => void
 }
 
 export interface TableSticky {
@@ -185,11 +177,7 @@ export const tableHeadRowProps = {
 export type TableHeadRowProps = IxInnerPropTypes<typeof tableHeadRowProps>
 
 export const tableHeadCellProps = {
-  additional: IxPropTypes.object(),
-  ellipsis: IxPropTypes.bool,
-  title: IxPropTypes.string,
-  customTitle: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnTitleFn>()]),
-  type: IxPropTypes.oneOf(['expandable', 'selectable', 'scroll-bar'] as const),
+  column: IxPropTypes.object<TableColumnMerged>().isRequired,
 }
 
 export type TableHeadCellProps = IxInnerPropTypes<typeof tableHeadCellProps>

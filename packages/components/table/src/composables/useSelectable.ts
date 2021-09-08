@@ -217,7 +217,7 @@ export function useSelectable(
     const { selectAll, selectInvert, selectNone, selectPageInvert } = locale.value
     return options.map(option => {
       if (isString(option)) {
-        const key = `IDUX_TABLE_KEY-selectable-${option}`
+        const key = `IDUX_TABLE_KEY_selectable-${option}`
         if (option === 'all') {
           return { key, label: selectAll, onClick: handleSelectAll }
         }

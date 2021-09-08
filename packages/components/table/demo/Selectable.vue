@@ -7,9 +7,8 @@
       <IxRadio value="dblclick">DblClick</IxRadio>
     </IxRadioGroup>
   </IxSpace>
-
   <br />
-  <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data">
+  <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data" :pagination="null">
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>

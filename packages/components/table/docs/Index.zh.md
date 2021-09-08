@@ -21,10 +21,10 @@ single: true
 | `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
+| `childrenKey` | 指定树形结构的列名 | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `extra` | 表格扩展配置, 参见[TableExtra](#TableExtra) | `TableExtra` | - | - | 可以用于管理列的显隐、排序 |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record: T, index: number) => string` | - | - | - |
@@ -91,7 +91,6 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
-| `childrenKey` | 指定树形结构的列名 | `string` | `children` | - | - |
 | `customExpand` | 自定义展开内容 | `string \| TableColumnExpandableExpandFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customIcon` | 自定义展开图标 | `string \| TableColumnExpandableIconFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
 | `enabled` |  设置是否允许行展开 | `(record:T, index: number) => boolean` | - | - | - |
@@ -139,20 +138,11 @@ export interface TableColumnSelectableOption {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `directions` | 支持的排序方式 | `Array<'ascend' \| 'descend' \| null>` | `['ascend', 'descend', null]` | ✅ | - |
-| `order` | 筛选菜单可见状态变化时调用 | `'ascend' \| 'descend' \| null` | - | - | - |
-| `showTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `true` | ✅ | - |
+| `nextTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `false` | ✅ | - |
+| `orderBy` | 当前排序规则 | `'ascend' \| 'descend'` | - | - | - |
+| `orders` | 支持的排序方式 | `Array<'ascend' \| 'descend'>` | `['ascend', 'descend']` | ✅ | - |
 | `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
-
-#### TableExtra
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `dropdown` | 自定义扩展菜单 | `(options: TableExtraDropdownOptions) => VNode \| #extraDropdown="TableExtraDropdownOptions"` | - | - | - |
-| `dropdownVisible` | 扩展菜单是否可见 | `boolean` | `false` | - | - |
-| `icon` |  图标 | `string \| #extraIcon` | `'ellipsis'` | ✅ | - |
-| `options` | 扩展菜单选项 | `TableExtraOption[]` | - | - | - |
-| `onDropDownVisibleChange` | 筛选菜单可见状态变化时调用 | `(visible) => void` | - | - | - |
+| `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于服务端排序 |
 
 #### TablePagination
 

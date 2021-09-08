@@ -28,6 +28,7 @@
 @table-head-background: @background-color-light;
 @table-head-color: @color-black;
 @table-head-split-color: rgba(0, 0, 0, 0.06);
+@table-head-icon-color: @color-black;
 @table-head-font-weight: @font-weight-lg;
 
 @table-body-hover-background: @background-color-light;
@@ -168,7 +169,7 @@
     }
   }
 
-  //--------- Selectable ---------
+  // --------- Selectable ---------
   & &-col-selectable {
     width: 40px;
   }
@@ -189,6 +190,45 @@
     }
     &:hover > td {
       background: darken(@color-primary-l50, 2%);
+    }
+  }
+
+  // --------- Sortable ---------
+  &-cell-sortable {
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: @table-body-hover-background;
+    }
+  }
+
+  & th&-cell-sorted,
+  & td&-cell-sorted {
+    background: @table-body-hover-background;
+  }
+
+  &-sortable {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    justify-content: space-between;
+
+    &-trigger {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      color: @table-head-icon-color;
+      font-size: 10px;
+      transition: color 0.3s;
+
+      &-active {
+        color: @color-primary;
+      }
+
+      .@{idux-prefix}-icon + .@{idux-prefix}-icon {
+        margin-top: -0.2em;
+      }
     }
   }
 }

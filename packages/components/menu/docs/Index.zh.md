@@ -31,7 +31,7 @@ single: true
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
 | `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
 | `theme` | 主题颜色 | `light` | `light \| dark` | ✅ | - |
-| `onItemClick` | 点击 `IxMenuItem` 后的回调 | `(option: { key: string \| number; item: MenuItemProps }, evt: Event) => void` | ✅ | - |
+| `onItemClick` | 点击 `IxMenuItem` 后的回调 | `(key: string \| number, evt: Event) => void` | ✅ | - |
 
 ### IxMenuItem
 
@@ -56,7 +56,7 @@ single: true
 | `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
 | `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
 | `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
-| `label` | 菜单文本 | `string \| #title`  | - | - |
+| `label` | 菜单文本 | `string \| #label`  | - | - |
 
 ### IxMenuGroup
 
@@ -65,7 +65,7 @@ single: true
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `icon` | 菜单图标| `string \| #icon` | - | - |
-| `label` | 菜单文本 | `string \| #title`  | - | - |
+| `label` | 菜单文本 | `string \| #label`  | - | - |
 
 ### IxMenuDivider
 

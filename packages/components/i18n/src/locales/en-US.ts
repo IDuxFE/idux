@@ -36,7 +36,6 @@ export const en_US: Locale = {
     selectNone: 'Clear all data',
     selectPageAll: 'Select current page',
     selectPageInvert: 'Invert current page',
-    sortTitle: 'Sort',
     sortDesc: 'Click to sort descending',
     sortAsc: 'Click to sort ascending',
     sortCancel: 'Click to cancel sorting',
