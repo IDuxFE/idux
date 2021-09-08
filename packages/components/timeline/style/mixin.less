@@ -1,8 +1,9 @@
 .timeline-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
   .timeline-color-classes(@colors, @i - 1);
   @color: extract(@colors, @i);
+  @color-name: 'color-@{color}';
   &-@{color} {
-    border-color: @@color;
-    color: @@color;
+    border-color: @@color-name;
+    color: @@color-name;
   }
 }

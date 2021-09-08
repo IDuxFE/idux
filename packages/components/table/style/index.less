@@ -26,7 +26,7 @@
 @table-background: @background-color-component;
 @table-border-radius: @border-radius-sm;
 @table-head-background: @background-color-light;
-@table-head-color: @heading-color;
+@table-head-color: @color-black;
 @table-head-split-color: rgba(0, 0, 0, 0.06);
 @table-head-font-weight: @font-weight-lg;
 
@@ -185,10 +185,10 @@
 
   & &-row-selected {
     & > td {
-      background: @primary-l50;
+      background: @color-primary-l50;
     }
     &:hover > td {
-      background: darken(@primary-l50, 2%);
+      background: darken(@color-primary-l50, 2%);
     }
   }
 }

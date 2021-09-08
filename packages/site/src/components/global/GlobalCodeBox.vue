@@ -127,7 +127,7 @@ export default defineComponent({
       .ix-icon {
         color: @text-color-secondary;
         &:hover {
-          color: @primary;
+          color: @color-primary;
         }
       }
     }
@@ -148,7 +148,7 @@ export default defineComponent({
       opacity: 0.7;
       cursor: pointer;
       &:hover {
-        color: @primary;
+        color: @color-primary;
         opacity: 1;
       }
     }

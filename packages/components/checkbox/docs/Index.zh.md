@@ -70,26 +70,26 @@ cover:
 | --- | --- | --- |
 @checkbox-inner-zindex| @zindex-l1-1 | - |
 @checkbox-line-height| 1 | - |
-@checkbox-border-color| @grey-d10 | - |
-@checkbox-border-style| @border-width-sm solid @grey-d10 | - |
+@checkbox-border-color| @color-grey-d10 | - |
+@checkbox-border-style| @border-width-sm solid @color-grey-d10 | - |
 @checkbox-border-radius| @border-radius-sm | - |
-@checkbox-bg-color| @white | - |
-@checkbox-tick-border-style| @border-width-md solid @white | - |
+@checkbox-bg-color| @color-white | - |
+@checkbox-tick-border-style| @border-width-md solid @color-white | - |
 @checkbox-tick-width| (@checkbox-width / @font-size-base) * 5px | - |
 @checkbox-tick-height| (@checkbox-height / @font-size-base) * 8px | - |
-@checkbox-bg-indeterminate-color| @primary | - |
+@checkbox-bg-indeterminate-color| @color-primary | - |
 @checkbox-indeterminate-width| 8px | - |
 @checkbox-indeterminate-height| 2px | - |
-@checkbox-indeterminate-tick-color| @white | - |
-@checkbox-border-checked-color| @primary | - |
-@checkbox-border-hover-color| @primary-l10 | - |
-@checkbox-border-focus-color| @primary-d10 | - |
-@checkbox-bg-checked-color| @primary | - |
-@checkbox-border-disabled-color| @grey | - |
-@checkbox-tick-disabled-color| @grey | - |
-@checkbox-bg-disabled-color| @grey-l20 | - |
-@checkbox-bg-indeterminate-disabled-color| @grey | - |
-@checkbox-label-disabled-color| @grey | - |
+@checkbox-indeterminate-tick-color| @color-white | - |
+@checkbox-border-checked-color| @color-primary | - |
+@checkbox-border-hover-color| @color-primary-l10 | - |
+@checkbox-border-focus-color| @color-primary-d10 | - |
+@checkbox-bg-checked-color| @color-primary | - |
+@checkbox-border-disabled-color| @color-grey | - |
+@checkbox-tick-disabled-color| @color-grey | - |
+@checkbox-bg-disabled-color| @color-grey-l20 | - |
+@checkbox-bg-indeterminate-disabled-color| @color-grey | - |
+@checkbox-label-disabled-color| @color-grey | - |
 @checkbox-font-size| @font-size-lg | - |
 @checkbox-height| 16px | - |
 @checkbox-width| 16px | - |

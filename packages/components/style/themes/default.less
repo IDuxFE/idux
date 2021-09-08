@@ -3,7 +3,7 @@
 @theme: default;
 
 // Private
-@mask-bg-color: fade(@black, 40%);
+@mask-bg-color: fade(@color-black, 40%);
 @overlay-arrow-size: 6px;
 
 // General
@@ -37,8 +37,8 @@
 @button-disable-bg-color: @disabled-bg-color;
 @button-disable-border: @border-color;
 
-@button-primary: @white;
-@button-primary-bg: @primary;
+@button-primary: @color-white;
+@button-primary-bg: @color-primary;
 @button-primary-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 @button-primary-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 
@@ -46,14 +46,14 @@
 @button-default-bg: @background-color-component;
 @button-default-border: @border-color;
 
-@button-danger-color: @error;
-@button-danger-bg: @error;
+@button-danger-color: @color-error;
+@button-danger-bg: @color-error;
 
 @button-ghost-color: @background-color-component;
 @button-ghost-bg: transparent;
 @button-ghost-border: @background-color-component;
 
-@button-link-color: @primary;
+@button-link-color: @color-primary;
 @button-link-hover-bg: transparent;
 
 @button-text-color: @text-color;
@@ -61,7 +61,7 @@
 
 /* icon -------------------------- */
 @icon-color: inherit;
-@icon-color-hover: fade(@black, 75%);
+@icon-color-hover: fade(@color-black, 75%);
 
 /* title -------------------------- */
 @header-line-height: @line-height-base;
@@ -77,17 +77,17 @@
 
 @header-bar-width: @spacing-xs;
 @header-bar-margin: @spacing-sm 0;
-@header-bar-background-color: @primary;
+@header-bar-background-color: @color-primary;
 
 @header-prefix-margin-right: @spacing-sm;
 @header-prefix-padding-right: @spacing-sm;
 @header-prefix-border-right: @border-width-sm @border-style @border-color;
 @header-prefix-font-size: @font-size-lg;
-@header-prefix-active-color: @primary;
+@header-prefix-active-color: @color-primary;
 
 @header-avatar-margin-right: @spacing-lg;
 
-@header-title-color: @black;
+@header-title-color: @color-black;
 @header-title-font-weight: @font-weight-xl;
 @header-title-margin-right: @spacing-lg;
 @header-title-font-size-xl: @font-size-3xl;
@@ -106,9 +106,9 @@
 @header-description-color: @text-color;
 
 /* tag -------------------------- start */
-@text-color-inverse: @white;
+@text-color-inverse: @color-white;
 @tag-font-size: @font-size-sm;
-@tag-default-color: @black;
+@tag-default-color: @color-black;
 @tag-padding: @spacing-xs;
 @tag-default-padding: 2px 8px;
 @tag-margin: @spacing-sm;
@@ -120,37 +120,37 @@
 /* typography -------------------------- */
 @typography-default-color: @text-color;
 @typography-color-secondary: @text-color-secondary;
-@typography-success: @success;
-@typography-warning: @warning;
-@typography-error: @error;
+@typography-success: @color-success;
+@typography-warning: @color-warning;
+@typography-error: @color-error;
 @typography-disabled-color: @disabled-color;
 @typography-mark-padding: 0;
-@typography-mark-background-color: @yellow-l50;
+@typography-mark-background-color: @color-yellow-l50;
 @typography-code-margin: 0 0.2em;
 @typography-code-padding: 0.2em 0.4em 0.1em;
 @typography-code-font-size: 85%;
-@typography-code-background: @grey;
-@typography-code-border: @border-width-sm @border-style @grey-d30;
+@typography-code-background: @color-grey;
+@typography-code-border: @border-width-sm @border-style @color-grey-d30;
 @typography-code-border-radius: @border-radius-md;
 @typography-kbd-margin: 0 0.2em;
 @typography-kbd-padding: 0.15em 0.4em 0.1em;
 @typography-kbd-font-size: 90%;
-@typography-kbd-background: @grey;
+@typography-kbd-background: @color-grey;
 @typography-kbd-border-style: @border-style;
-@typography-kbd-border-color: @grey-d30;
+@typography-kbd-border-color: @color-grey-d30;
 @typography-kbd-border-width: @border-width-sm @border-width-sm @border-width-md;
 @typography-kbd-border-radius: @border-radius-md;
 @typography-strong-font-weight: @font-weight-lg;
-@typography-a-color: @primary;
+@typography-a-color: @color-primary;
 @typography-a-outline: none;
 @typography-a-cursor: pointer;
 @typography-a-transition: color 0.3s;
-@typography-a-color-hover-focus: @blue-l30;
-@typography-a-color-active: @blue-d30;
+@typography-a-color-hover-focus: @color-blue-l30;
+@typography-a-color-active: @color-blue-d30;
 @typography-title-margin-top: 1.2em;
 @typography-title-margin-bottom: 0.5em;
 @typography-title-font-weight: @font-weight-xl;
-@typography-title-color: @black;
+@typography-title-color: @color-black;
 @typography-title-1-font-size: @font-size-3xl;
 @typography-title-2-font-size: @font-size-2xl;
 @typography-title-3-font-size: @font-size-xl;
@@ -170,8 +170,8 @@
 /* layout -------------------------- */
 @layout-header-height: 64px;
 @layout-footer-height: 64px;
-@layout-sider-trigger-bg-color: @grey-l10;
-@layout-sider-trigger-bg-hover-color: @grey; 
+@layout-sider-trigger-bg-color: @color-grey-l10;
+@layout-sider-trigger-bg-hover-color: @color-grey;
 
 /* divider -------------------------- */
 
@@ -192,8 +192,8 @@
 /* menu -------------------------- */
 @menu-text-color: @text-color;
 @menu-bg-color: @background-color-component;
-@menu-highlight-color: @primary;
-@menu-highlight-bg-color: ~`colorPalette('@{primary}', -50) `;
+@menu-highlight-color: @color-primary;
+@menu-highlight-bg-color: ~`colorPalette('@{color-primary}', -50) `;
 @menu-disabled-color: @disabled-color;
 @menu-disabled-bg-color: transparent;
 @menu-border-width: @border-width-sm;
@@ -226,7 +226,7 @@
 @menu-dark-disabled-color: @disabled-color-dark;
 @menu-dark-color: @text-color-dark;
 @menu-dark-bg-color: @background-color-component-dark;
-@menu-dark-highlight-bg-color: fade(@white, 6%);
+@menu-dark-highlight-bg-color: fade(@color-white, 6%);
 
 @menu-collapsed-font-size: @font-size-lg;
 
@@ -288,9 +288,9 @@
 @form-color-secondary: @text-color-secondary;
 @form-bg-color: @background-color-component;
 @form-placeholder-color: hsv(0, 0, 75%);
-@form-hover-color: @primary-l10;
-@form-active-color: @primary;
-@form-focus-color: @primary-d10;
+@form-hover-color: @color-primary-l10;
+@form-active-color: @color-primary;
+@form-focus-color: @color-primary-d10;
 @form-disabled-color: @disabled-color;
 @form-disabled-bg-color: @disabled-bg-color;
 
@@ -301,15 +301,15 @@
 
 /** form common variable end */
 
-@form-item-valid-color: @success;
-@form-item-invalid-color: @error;
-@form-item-validating-color: @pending;
+@form-item-valid-color: @color-success;
+@form-item-invalid-color: @color-error;
+@form-item-validating-color: @color-pending;
 @form-item-margin-bottom: 24px;
 @form-vertical-label-margin: 0;
 @form-vertical-label-padding: 0 0 8px;
 @form-font-height: ceil(@font-size-md * @line-height-base);
-@label-required-color: @red-l10;
-@label-color: @heading-color;
+@label-required-color: @color-red-l10;
+@label-color: @color-black;
 @form-warning-input-bg: @background-color-component;
 @form-item-label-font-size: @font-size-md;
 @form-item-label-height: @form-height-md;
@@ -322,26 +322,26 @@
 /* checkbox -------------------------- */
 @checkbox-inner-zindex: @zindex-l1-1;
 @checkbox-line-height: 1;
-@checkbox-border-color: @grey-d10;
-@checkbox-border-style: @border-width-sm solid @grey-d10;
+@checkbox-border-color: @color-grey-d10;
+@checkbox-border-style: @border-width-sm solid @color-grey-d10;
 @checkbox-border-radius: @border-radius-sm;
-@checkbox-bg-color: @white;
-@checkbox-tick-border-style: @border-width-md solid @white;
+@checkbox-bg-color: @color-white;
+@checkbox-tick-border-style: @border-width-md solid @color-white;
 @checkbox-tick-width: (@checkbox-width / @font-size-base) * 5px;
 @checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
-@checkbox-bg-indeterminate-color: @primary;
+@checkbox-bg-indeterminate-color: @color-primary;
 @checkbox-indeterminate-width: 8px;
 @checkbox-indeterminate-height: 2px;
-@checkbox-indeterminate-tick-color: @white;
-@checkbox-border-checked-color: @primary;
-@checkbox-border-hover-color: @primary-l10;
-@checkbox-border-focus-color: @primary-d10;
-@checkbox-bg-checked-color: @primary;
-@checkbox-border-disabled-color: @grey;
-@checkbox-tick-disabled-color: @grey;
-@checkbox-bg-disabled-color: @grey-l20;
-@checkbox-bg-indeterminate-disabled-color: @grey;
-@checkbox-label-disabled-color: @grey;
+@checkbox-indeterminate-tick-color: @color-white;
+@checkbox-border-checked-color: @color-primary;
+@checkbox-border-hover-color: @color-primary-l10;
+@checkbox-border-focus-color: @color-primary-d10;
+@checkbox-bg-checked-color: @color-primary;
+@checkbox-border-disabled-color: @color-grey;
+@checkbox-tick-disabled-color: @color-grey;
+@checkbox-bg-disabled-color: @color-grey-l20;
+@checkbox-bg-indeterminate-disabled-color: @color-grey;
+@checkbox-label-disabled-color: @color-grey;
 @checkbox-font-size: @font-size-lg;
 @checkbox-height: 16px;
 @checkbox-width: 16px;
@@ -384,8 +384,8 @@
 @input-bg-color: @background-color-component;
 @input-addon-bg-color: hsv(0, 0, 95%);
 @input-placeholder-color: hsv(0, 0, 75%);
-@input-hover-border-color: ~`colorPalette('@{primary}', -10) `;
-@input-active-border-color: @primary;
+@input-hover-border-color: ~`colorPalette('@{color-primary}', -10) `;
+@input-active-border-color: @color-primary;
 @input-active-box-shadow: 0 0 0 2px fade(@input-active-border-color, 20%);
 @input-disabled-color: @disabled-color;
 @input-disabled-bg-color: @disabled-bg-color;
@@ -404,7 +404,7 @@
 @switch-close-bg-color: #ccc;
 @switch-close-border-color: transparent;
 @switch-close-loading-icon-color: @switch-close-bg-color;
-@switch-open-bg-color: @blue;
+@switch-open-bg-color: @color-blue;
 @switch-open-border-color: @border-color;
 @switch-open-loading-icon-color: @switch-open-bg-color;
 @switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
@@ -415,9 +415,9 @@
 @switch-loading-icon-size: @font-size-sm;
 @switch-loading-icon-size-sm: @font-size-sm - 4;
 @switch-inner-font-size: @font-size-sm;
-@switch-inner-circle-bg-color: @white;
+@switch-inner-circle-bg-color: @color-white;
 @switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-@switch-focus-shadow: 0 0 0 2px fade(@blue, 20%);
+@switch-focus-shadow: 0 0 0 2px fade(@color-blue, 20%);
 @switch-disable-opacity: 0.4;
 
 /* radio -------------------------------- */
@@ -470,9 +470,9 @@
 @option-transition: background @transition-duration-base @ease-in-out;
 
 @option-disabled-color: @disabled-color;
-@option-active-bg-color: @grey-l50;
-@option-selected-color: @primary;
-@option-selected-bg-color: tint(@primary, 90%);
+@option-active-bg-color: @color-grey-l50;
+@option-selected-color: @color-primary;
+@option-selected-bg-color: tint(@color-primary, 90%);
 @option-selected-font-weight: @font-weight-xl;
 
 @option-container-zindex: @zindex-l4-3;
@@ -536,15 +536,15 @@
 @avatar-font-size-sm: @font-size-lg;
 @avatar-font-size-md: @font-size-xl;
 @avatar-font-size-lg: @font-size-2xl;
-@avatar-color: @white;
-@avatar-bg-color: @grey;
+@avatar-color: @color-white;
+@avatar-bg-color: @color-grey;
 @avatar-border-radius-circle: @border-radius-full;
 @avatar-border-radius-square: @border-radius-sm;
 
 /* badge -------------------------- */
 @badge-zindex: @zindex-auto;
 @badge-size: 16px;
-@badge-color: @red;
+@badge-color: @color-red;
 @badge-padding: 0 3px;
 @badge-dot-size: 6px;
 
@@ -560,8 +560,8 @@
 @card-border-color-hover: transparent;
 @card-border-radius: @border-radius-sm;
 @card-box-shadow: @shadow-bottom-sm;
-@card-gradient-min: fade(@grey, 20%);
-@card-gradient-max: fade(@grey, 60%);
+@card-gradient-min: fade(@color-grey, 20%);
+@card-gradient-max: fade(@color-grey, 60%);
 @card-transition-duration: @transition-duration-base;
 
 @card-loading-spacing: @spacing-xs;
@@ -589,7 +589,7 @@
 @collapse-line-height: @line-height-base;
 @collapse-font-size: @font-size-md;
 @collapse-color: @text-color;
-@collapse-background-color: @grey-l50;
+@collapse-background-color: @color-grey-l50;
 @collapse-border: @border-width-sm @border-style @border-color;
 @collapse-border-radius: @border-radius-sm;
 
@@ -623,7 +623,7 @@
 @statistic-font-size-xl: @font-size-2xl;
 
 @statistic-line-height: @line-height-base;
-@statistic-color: @black;
+@statistic-color: @color-black;
 
 @statistic-title-margin: @space-margin-lg;
 @statistic-prefix-margin: @spacing-xs;
@@ -651,8 +651,8 @@
 /* tooltip -------------------------- */
 @tooltip-zindex: @zindex-l4-5;
 @tooltip-font-size: @font-size-md;
-@tooltip-color: @white;
-@tooltip-background-color: @grey-d30;
+@tooltip-color: @color-white;
+@tooltip-background-color: @color-grey-d30;
 @tooltip-border-radius: @border-radius-sm;
 @tooltip-box-shadow: @shadow-bottom-md;
 @tooltip-title-max-width: 256px;
@@ -717,11 +717,11 @@
 @modal-body-title-margin-bottom: @spacing-sm;
 @modal-body-icon-font-size: 48px;
 @modal-body-icon-margin: 0 @modal-spacing;
-@modal-body-confirm-color: @warning;
-@modal-body-info-color: @info;
-@modal-body-success-color: @success;
-@modal-body-warning-color: @warning;
-@modal-body-error-color: @error;
+@modal-body-confirm-color: @color-warning;
+@modal-body-info-color: @color-info;
+@modal-body-success-color: @color-success;
+@modal-body-warning-color: @color-warning;
+@modal-body-error-color: @color-error;
 
 @modal-footer-padding-bottom: @modal-spacing;
 @modal-footer-button-margin-left: @spacing-sm;
@@ -732,35 +732,35 @@
 @result-icon-margin: @spacing-xl;
 @result-icon-size: @font-size-xl * 4;
 @result-title-font-size: @font-size-2xl;
-@result-title-color: @black;
+@result-title-color: @color-black;
 @result-title-line-height: 1.8;
 @result-subtitle-font-size: @font-size-md;
-@result-subtitle-color: @black;
+@result-subtitle-color: @color-black;
 @result-subtitle-line-height: 1.6;
 @result-extra-margin: @spacing-xl;
 @result-extra-children-margin: @spacing-sm;
 @result-content-margin: @spacing-xl;
 @result-content-padding: @spacing-xl @spacing-gutter * 5;
-@result-content-background: @grey-l50;
-@result-success: @success;
-@result-warning: @warning;
-@result-error: @error;
-@result-info: @info;
+@result-content-background: @color-grey-l50;
+@result-success: @color-success;
+@result-warning: @color-warning;
+@result-error: @color-error;
+@result-info: @color-info;
 
 /* spin -------------------------- */
 @spin-zindex: @zindex-l2-base;
-@spin-tip-color: @primary;
-@spin-icon-color: @primary;
+@spin-tip-color: @color-primary;
+@spin-icon-color: @color-primary;
 
 @spin-font-size-sm: @font-size-md;
 @spin-font-size-md: @font-size-lg;
 @spin-font-size-lg: @font-size-xl;
 
 /* progress -------------------------- */
-@progress-normal-bg: @primary;
-@progress-success-bg: @success;
-@progress-exception-bg: @error;
-@progress-active-bg: @primary;
+@progress-normal-bg: @color-primary;
+@progress-success-bg: @color-success;
+@progress-exception-bg: @color-error;
+@progress-active-bg: @color-primary;
 @progress-trail-bg: #f5f5f5;
 @progress-text-width: 36px;
 @progress-border-radius: 100px;
@@ -789,7 +789,7 @@
 
 @back-top-bottom: 50px;
 
-@back-top-background-color: @primary;
+@back-top-background-color: @color-primary;
 
 // --- end ---
 
@@ -807,10 +807,10 @@
 @anchor-link-padding: @spacing-sm 0 @spacing-sm @spacing-md;
 @anchor-link-line-height: 1;
 @anchor-link-margin-bottom: 6px;
-@anchor-link-active-color: @primary;
+@anchor-link-active-color: @color-primary;
 
 /* Stepper -------------------------- */
-@stepper-item-highlight-color: @primary;
+@stepper-item-highlight-color: @color-primary;
 @stepper-item-tail-width: 9999px;
 @stepper-item-tail-height: 1px;
 @stepper-item-custom-icon-width: 24px;

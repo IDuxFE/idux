@@ -29,8 +29,8 @@ const colors = [
     english: 'Orange',
   },
   {
-    name: 'gold',
-    english: 'Gold',
+    name: 'brown',
+    english: 'Brown',
   },
   {
     name: 'yellow',
@@ -41,36 +41,32 @@ const colors = [
     english: 'Canary',
   },
   {
-    name: 'lime',
-    english: 'Lime',
-  },
-  {
-    name: 'prasinous',
-    english: 'Prasinous',
-  },
-  {
-    name: 'verdant',
-    english: 'Verdant',
+    name: 'bud',
+    english: 'Bud',
   },
   {
     name: 'green',
     english: 'Green',
   },
   {
+    name: 'turquoise',
+    english: 'Turquoise',
+  },
+  {
     name: 'cyan',
     english: 'Cyan',
   },
   {
-    name: 'sky',
-    english: 'Sky',
+    name: 'glacier',
+    english: 'Glacier',
   },
   {
     name: 'blue',
     english: 'Blue',
   },
   {
-    name: 'admiral',
-    english: 'Admiral',
+    name: 'indigo',
+    english: 'Indigo',
   },
   {
     name: 'purple',

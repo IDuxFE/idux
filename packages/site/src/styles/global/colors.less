@@ -3,12 +3,12 @@
 .global-color-level(@color, @i: length(@global-color-levels)) when (@i > 0) {
   .global-color-level(@color, @i - 1);
   @level: extract(@global-color-levels, @i);
-  @color-level: '@{color}-@{level}';
+  @color-name: 'color-@{color}-@{level}';
   .global-color-@{color}-@{level} {
-    background-color: @@color-level;
-    color: @black;
+    background-color: @@color-name;
+    color: @color-black;
     & when (@i > 5) {
-      color: @white;
+      color: @color-white;
     }
   }
 }
@@ -16,9 +16,10 @@
 .global-color-classes(@i: length(@preset-colors)) when (@i > 0) {
   .global-color-classes(@i - 1);
   @color: extract(@preset-colors, @i);
+  @color-name: 'color-@{color}';
   .global-color-@{color} {
-    color: @white;
-    background-color: @@color;
+    color: @color-white;
+    background-color: @@color-name;
   }
   .global-color-level(@color);
 }
@@ -26,14 +27,14 @@
 .global-color-classes();
 
 .global-color-grey {
-  color: @white;
-  background-color: @grey;
+  color: @color-white;
+  background-color: @color-grey;
 }
 .global-color-level(grey);
 
 .global-color-graphite {
-  color: @white;
-  background-color: @graphite;
+  color: @color-white;
+  background-color: @color-graphite;
 }
 .global-color-level(graphite);
 

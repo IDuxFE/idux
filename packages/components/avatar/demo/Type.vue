@@ -11,7 +11,7 @@
 
 <style lang="less" scoped>
 .type-avatar {
-  color: @red;
-  background-color: @gold-l30;
+  color: @color-red;
+  background-color: @color-brown-l30;
 }
 </style>
