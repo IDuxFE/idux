@@ -31,7 +31,7 @@
 
 <style lang="less" scoped>
 .demo-collapse .demo-collapse-panel {
-  background: @grey-l40;
+  background: @color-grey-l40;
   margin-bottom: @spacing-lg;
 }
 </style>

@@ -30,13 +30,13 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .ix-layout {
-  background-color: @blue;
+  background-color: @color-blue;
   &-footer,
   &-header {
-    background-color: @blue-l20;
+    background-color: @color-blue-l20;
   }
   &-sider {
-    background-color: @blue-l10;
+    background-color: @color-blue-l10;
   }
   &-content {
     height: 200px;

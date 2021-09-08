@@ -3,18 +3,25 @@
     <p>Presets:</p>
     <IxTag color="red"> red </IxTag>
     <IxTag color="orange"> orange </IxTag>
-    <IxTag color="gold"> gold </IxTag>
+    <IxTag color="brown"> brown </IxTag>
     <IxTag color="yellow"> yellow </IxTag>
     <IxTag color="canary"> canary </IxTag>
-    <IxTag color="prasinous"> prasinous </IxTag>
-    <IxTag color="verdant"> verdant </IxTag>
+    <IxTag color="bud"> bud </IxTag>
     <IxTag color="green"> green </IxTag>
+    <IxTag color="turquoise"> turquoise </IxTag>
     <IxTag color="cyan"> cyan </IxTag>
-    <IxTag color="sky"> sky </IxTag>
+    <IxTag color="glacier"> glacier </IxTag>
     <IxTag color="blue"> blue </IxTag>
-    <IxTag color="admiral"> admiral </IxTag>
+    <IxTag color="indigo"> indigo </IxTag>
     <IxTag color="purple"> purple </IxTag>
     <IxTag color="magenta"> magenta </IxTag>
+  </div>
+  <div>
+    <p>StatusColorTypes:</p>
+    <IxTag color="success"> success </IxTag>
+    <IxTag color="pending"> pending </IxTag>
+    <IxTag color="error"> error </IxTag>
+    <IxTag color="warning"> warning </IxTag>
   </div>
   <div>
     <p>Custom:</p>
@@ -23,14 +30,6 @@
     <IxTag color="#f50"> #f50 </IxTag>
     <IxTag color="#108ee9"> #108ee9 </IxTag>
     <IxTag color="#abcfcf"> #abcfcf </IxTag>
-  </div>
-
-  <div>
-    <p>StatusColorTypes:</p>
-    <IxTag color="success"> success </IxTag>
-    <IxTag color="pending"> pending </IxTag>
-    <IxTag color="error"> error </IxTag>
-    <IxTag color="warning"> warning </IxTag>
   </div>
 </template>
 

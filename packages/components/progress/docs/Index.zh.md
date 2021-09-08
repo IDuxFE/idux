@@ -65,10 +65,10 @@ cover:
 
 | 变量名 | default 主题| 说明 |
 | --- | --- | --- |
-| @progress-normal-bg | @primary | - |
-| @progress-success-bg | @success | - |
-| @progress-exception-bg | @error | - |
-| @progress-active-bg | @primary | - |
+| @progress-normal-bg | @color-primary | - |
+| @progress-success-bg | @color-success | - |
+| @progress-exception-bg | @color-error | - |
+| @progress-active-bg | @color-primary | - |
 | @progress-text-color | @text-color | - |
 | @progress-line-font-size-md | @font-size-md | - |
 | @progress-line-font-size-sm | @font-size-sm | - |

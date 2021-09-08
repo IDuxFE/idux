@@ -39,9 +39,9 @@
     // list-用逗号或空格分隔的值列表。 index-一个整数，指定要返回的列表元素的位置。返回：列表中指定位置的值。
     // 返回列表中指定位置的值。
     @color: extract(@colors, @i);
-    @lightColor: '@{color}-l50';
-    @lightBorderColor: '@{color}-l30';
-    @darkColor: @color;
+    @lightColor: 'color-@{color}-l50';
+    @lightBorderColor: 'color-@{color}-l30';
+    @darkColor: 'color-@{color}';
     &-@{color} {
       color: @@darkColor;
       background: @@lightColor;
@@ -61,7 +61,7 @@
   .make-color-classes(@status-colors);
 
   &-has-color {
-    color: @white;
+    color: @color-white;
     border-color: transparent;
   }
 
@@ -76,13 +76,13 @@
     }
 
     &:not(&-checked):hover {
-      color: @primary;
+      color: @color-primary;
 
       .@{tag-prefix}-close-icon {
-        color: fade(@primary, 60%);
+        color: fade(@color-primary, 60%);
 
         &:hover {
-          color: @primary;
+          color: @color-primary;
         }
       }
     }
@@ -100,10 +100,10 @@
       }
     }
     &-checked {
-      background-color: @primary;
+      background-color: @color-primary;
     }
     &:active {
-      background-color: @blue-d10;
+      background-color: @color-blue-d10;
     }
   }
 }
