@@ -2,7 +2,7 @@ import type { ComponentPublicInstance, Ref } from 'vue'
 
 import { unref } from 'vue'
 import { isNil } from 'lodash-es'
-import { isNumeric } from './typeof'
+import { isHTMLElement, isNumeric } from './typeof'
 
 export function convertArray<T>(value: T | undefined | null | Array<T | undefined | null>): T[]
 export function convertArray<T>(value: T | readonly T[]): readonly T[]
@@ -31,11 +31,11 @@ export function convertCssPixel(value: unknown): string {
 }
 
 export function convertElement<T extends ComponentPublicInstance, E extends HTMLElement>(
-  elementRef: Ref<T | E | null | undefined> | T | E | null | undefined,
+  elementOrInstanceRef: Ref<T | E | null | undefined> | T | E | null | undefined,
 ): HTMLElement | undefined {
-  const element = unref(elementRef)
-  if (!element) {
+  const elementOrInstance = unref(elementOrInstanceRef)
+  if (!elementOrInstance) {
     return undefined
   }
-  return '$el' in element ? element.$el : element
+  return isHTMLElement(elementOrInstance) ? elementOrInstance : elementOrInstance.$el
 }

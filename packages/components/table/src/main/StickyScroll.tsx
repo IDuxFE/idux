@@ -2,12 +2,12 @@ import type { StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
 import { getScrollBarSize } from '@idux/cdk/scroll'
-import { getOffset, off, on } from '@idux/cdk/utils'
-import { tableToken } from '../token'
+import { convertElement, getOffset, off, on } from '@idux/cdk/utils'
+import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
   setup() {
-    const { scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(tableToken)!
+    const { scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(TABLE_TOKEN)!
 
     const isShow = ref(false)
     const isActive = ref(false)
@@ -22,7 +22,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      const scrollBodyElement = scrollBodyRef.value
+      const scrollBodyElement = convertElement(scrollBodyRef)
       if (!scrollBodyElement) {
         return
       }
@@ -93,7 +93,7 @@ export default defineComponent({
     }
 
     const handleContainerScroll = () => {
-      const scrollBodyElement = scrollBodyRef.value!
+      const scrollBodyElement = convertElement(scrollBodyRef)!
       const offsetTop = getOffset(scrollBodyElement).top
       const offsetBottom = offsetTop + scrollBodyElement.offsetHeight
       const { container, offsetScroll } = mergedSticky.value

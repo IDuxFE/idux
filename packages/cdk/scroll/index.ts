@@ -12,6 +12,7 @@ export { IxVirtualScroll }
 export type {
   VirtualScrollInstance,
   VirtualScrollPublicProps as VirtualScrollProps,
+  VirtualContentRenderFn,
   VirtualItemRenderFn,
   VirtualScrollToAlign,
   VirtualScrollToOptions,

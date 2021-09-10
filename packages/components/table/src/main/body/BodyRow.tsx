@@ -1,10 +1,14 @@
 import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 import type { Key, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
-import type { TableColumnMergedExpandable, TableColumnMergedSelectable } from '../../composables/useColumns'
+import type {
+  TableColumnMerged,
+  TableColumnMergedExpandable,
+  TableColumnMergedSelectable,
+} from '../../composables/useColumns'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
-import { tableToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 import { tableBodyRowProps } from '../../types'
 import BodyCell from './BodyCell'
 import BodyRowSingle from './BodyRowSingle'
@@ -15,6 +19,7 @@ export default defineComponent({
     const {
       props: tableProps,
       slots,
+      flattedColumns,
       expandable,
       handleExpandChange,
       selectable,
@@ -23,7 +28,7 @@ export default defineComponent({
       handleSelectChange,
       currentPageRowKeys,
       bodyRowTag,
-    } = inject(tableToken)!
+    } = inject(TABLE_TOKEN)!
 
     const { expendDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
       props,
@@ -42,6 +47,7 @@ export default defineComponent({
     return () => {
       const children = renderChildren(
         props,
+        flattedColumns,
         expendDisabled,
         handleExpend,
         isSelected,
@@ -67,7 +73,7 @@ export default defineComponent({
 })
 
 function useClasses(props: TableBodyRowProps, tableProps: TableProps, isSelected: ComputedRef<boolean>) {
-  const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.index))
+  const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.rowIndex))
   return computed(() => {
     const prefixCls = 'ix-table-row'
     const { level, expanded } = props
@@ -143,8 +149,8 @@ function useExpandDisabled(
       return true
     }
     const { disabled, customExpand } = column
-    const { record, index } = props
-    if (disabled?.(record, index)) {
+    const { record, rowIndex } = props
+    if (disabled?.(record, rowIndex)) {
       return true
     }
     return !(customExpand || record[tableProps.childrenKey]?.length > 0)
@@ -153,6 +159,7 @@ function useExpandDisabled(
 
 function renderChildren(
   props: TableBodyRowProps,
+  flattedColumns: ComputedRef<TableColumnMerged[]>,
   expendDisabled: ComputedRef<boolean>,
   handleExpend: () => void,
   isSelected: ComputedRef<boolean>,
@@ -161,11 +168,11 @@ function renderChildren(
   handleSelect: () => void,
 ) {
   const children: VNodeTypes[] = []
-  const { columns, index, record } = props
-  columns.forEach(column => {
-    const { type, colSpan: getColSpan, rowSpan: getRowSpan, ...rest } = column
-    const colSpan = getColSpan?.(record, index)
-    const rowSpan = getRowSpan?.(record, index)
+  const { rowIndex, record } = props
+  flattedColumns.value.forEach((column, colIndex) => {
+    const { type, colSpan: getColSpan, rowSpan: getRowSpan, key } = column
+    const colSpan = getColSpan?.(record, rowIndex)
+    const rowSpan = getRowSpan?.(record, rowIndex)
     if (colSpan === 0 || rowSpan === 0) {
       return
     }
@@ -173,9 +180,11 @@ function renderChildren(
     const colProps: any = {
       colSpan: colSpan === 1 ? undefined : colSpan,
       rowSpan: rowSpan === 1 ? undefined : rowSpan,
-      index,
+      rowIndex,
+      colIndex,
       record,
-      type,
+      column,
+      key,
     }
     if (type === 'expandable') {
       colProps.expanded = props.expanded
@@ -187,7 +196,7 @@ function renderChildren(
       colProps.disabled = selectDisabled.value
       colProps.handleSelect = handleSelect
     }
-    children.push(<BodyCell {...rest} {...colProps}></BodyCell>)
+    children.push(<BodyCell {...colProps}></BodyCell>)
   })
 
   return children
@@ -195,12 +204,12 @@ function renderChildren(
 
 function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
   const { customExpand } = expandable || {}
-  const { record, index } = props
+  const { record, rowIndex } = props
   let expandedContext: VNodeTypes | null = null
   if (isFunction(customExpand)) {
-    expandedContext = customExpand({ record, index })
+    expandedContext = customExpand({ record, rowIndex })
   } else if (isString(customExpand) && slots[customExpand]) {
-    expandedContext = slots[customExpand]!({ record, index })
+    expandedContext = slots[customExpand]!({ record, rowIndex })
   }
   return expandedContext ? <BodyRowSingle>{expandedContext}</BodyRowSingle> : null
 }

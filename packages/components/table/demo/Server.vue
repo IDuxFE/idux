@@ -53,23 +53,23 @@ const getRowKey = (record: RandomUser) => record.login.uuid
 
 const pagination = reactive<TablePagination>({
   showSizeChanger: true,
-  onChange: (index, size) => fetchData(index, size),
+  onChange: (pageIndex, pageSize) => fetchData(pageIndex, pageSize),
 })
 
 const loading = ref(false)
 
-const fetchData = async (index: number, size: number) => {
+const fetchData = async (pageIndex: number, pageSize: number) => {
   loading.value = true
 
-  const params = { page: index, results: size }
+  const params = { page: pageIndex, results: pageSize }
   const { data } = await axios.get('https://randomuser.me/api', { params })
 
   loading.value = false
 
   dataSource.value = data.results
 
-  pagination.pageIndex = index
-  pagination.pageSize = size
+  pagination.pageIndex = pageIndex
+  pagination.pageSize = pageSize
   pagination.total = 200 // mock the total data here
 }
 

@@ -1,15 +1,19 @@
 import type { StyleValue, VNodeTypes } from 'vue'
+import type { VirtualContentRenderFn, VirtualItemRenderFn } from '@idux/cdk/scroll'
+import type { FlattedData } from '../composables/useDataSource'
+import type { Key } from '../types'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
-import { isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
-import { tableBodyToken, tableToken } from '../token'
+import { IxVirtualScroll } from '@idux/cdk/scroll'
+import { convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
+import { tableBodyToken, TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 import Head from './head/Head'
 import Body from './body/Body'
+import BodyRow from './body/BodyRow'
 import Foot from './tfoot/Foot'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
-import { Key } from '../types'
 
 export default defineComponent({
   setup() {
@@ -17,6 +21,7 @@ export default defineComponent({
       props,
       config,
       changeColumnWidth,
+      flattedData,
       isSticky,
       scrollBodyRef,
       handleScroll,
@@ -29,7 +34,7 @@ export default defineComponent({
       hasFixed,
       tableLayout,
       tableTag,
-    } = inject(tableToken)!
+    } = inject(TABLE_TOKEN)!
 
     const mainTableRef = ref<HTMLDivElement>()
     const mainTableWidth = ref(0)
@@ -43,7 +48,7 @@ export default defineComponent({
     provide(tableBodyToken, { mainTableWidth, changeColumnWidth: _changeColumnWidth })
 
     const triggerScroll = () => {
-      const currentTarget = scrollBodyRef.value
+      const currentTarget = convertElement(scrollBodyRef)
       if (currentTarget) {
         handleScroll({ currentTarget } as unknown as Event)
       }
@@ -98,7 +103,7 @@ export default defineComponent({
       const x = scrollX.value
       const y = scrollY.value
       const overflowX = x ? 'auto' : undefined
-      const overflowY = y ? 'scroll' : x ? 'hidden' : undefined
+      const overflowY = props.useVirtual ? 'hidden' : y ? 'scroll' : x ? 'hidden' : undefined
       const maxHeight = y
       return { overflowX, overflowY, maxHeight }
     })
@@ -107,7 +112,7 @@ export default defineComponent({
       return {
         tableLayout: tableLayout.value,
         width: scrollX.value,
-        minWidth: scrollY.value ? '100%' : undefined,
+        minWidth: scrollX.value ? '100%' : undefined,
       }
     })
 
@@ -121,15 +126,48 @@ export default defineComponent({
             <Head></Head>
           </FixedHolder>
         )
-        const tableBody = (
-          <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
-            <TableTag style={tableStyle.value}>
-              <ColGroup></ColGroup>
-              <Body></Body>
-              <Foot></Foot>
-            </TableTag>
-          </div>
-        )
+
+        let tableBody: VNodeTypes
+        if (props.useVirtual) {
+          const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) => {
+            const { expanded, level, record, rowKey } = item
+            const rowProps = { key: rowKey, expanded, level, record, rowIndex: index, rowKey }
+            return <BodyRow {...rowProps} />
+          }
+          const contentRender: VirtualContentRenderFn = children => {
+            return (
+              <TableTag style={tableStyle.value}>
+                <ColGroup></ColGroup>
+                <Body>{children}</Body>
+                <Foot></Foot>
+              </TableTag>
+            )
+          }
+          tableBody = (
+            <IxVirtualScroll
+              ref={scrollBodyRef}
+              style={contentStyle.value}
+              data={flattedData.value}
+              height={props.scroll?.y}
+              itemHeight={44}
+              itemKey="rowKey"
+              itemRender={itemRender}
+              contentRender={contentRender}
+              onScroll={handleScroll}
+            />
+          )
+        } else {
+          tableBody = (
+            <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
+              <TableTag style={tableStyle.value}>
+                <ColGroup></ColGroup>
+                <Body></Body>
+                <Foot></Foot>
+              </TableTag>
+            </div>
+          )
+        }
+
         // TODO
         const tableFoot = null
         const sticky = isSticky.value ? <StickyScroll></StickyScroll> : null
@@ -137,7 +175,7 @@ export default defineComponent({
         children = [tableHead, tableBody, tableFoot, sticky]
       } else {
         children = (
-          <div ref={scrollBodyRef} onScroll={handleScroll}>
+          <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               {props.headless ? null : <Head></Head>}

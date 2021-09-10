@@ -13,15 +13,15 @@ import { useSelectable } from './composables/useSelectable'
 import { useGetRowKey } from './composables/useGetRowKey'
 import { useDataSource } from './composables/useDataSource'
 import { useScroll } from './composables/useScroll'
-import { useTableLayout } from './composables/useTableLayout'
+import { useSortable } from './composables/useSortable'
 import { useSticky } from './composables/useSticky'
+import { useTableLayout } from './composables/useTableLayout'
 import MainTable from './main/MainTable'
 import { renderPagination } from './other/Pagination'
 import { renderHeader } from './other/Header'
 import { renderFooter } from './other/Footer'
-import { tableToken, TABLE_TOKEN } from './token'
+import { TABLE_TOKEN } from './token'
 import { tableProps } from './types'
-import { useSortable } from './composables/useSortable'
 
 export default defineComponent({
   name: 'IxTable',
@@ -65,7 +65,6 @@ export default defineComponent({
       ...selectableContext,
     }
 
-    provide(tableToken, context)
     provide(TABLE_TOKEN, context)
 
     return () => {

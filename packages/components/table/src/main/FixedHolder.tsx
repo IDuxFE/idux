@@ -2,13 +2,13 @@ import type { Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 import { off, on } from '@idux/cdk/utils'
-import { tableToken } from '../token'
+import { TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 
 export default defineComponent({
   setup(_, { slots }) {
     const { scrollHeadRef, handleScroll, scrollX, flattedData, isSticky, mergedSticky, columnWidths } =
-      inject(tableToken)!
+      inject(TABLE_TOKEN)!
 
     useScrollEvents(scrollHeadRef, handleScroll)
 

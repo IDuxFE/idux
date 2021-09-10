@@ -78,15 +78,18 @@ export default defineComponent({
     onMounted(() => onResize(contentRef.value, onContentResize))
     onBeforeUnmount(() => offResize(contentRef.value, onContentResize))
 
-    return () => (
-      <div ref={holderRef} class="ix-virtual-scroll-holder" style={style.value} onScroll={onScroll}>
-        <div ref={fillerRef} class="ix-virtual-scroll-filler" style={fillerStyle.value}>
-          <div ref={contentRef} class="ix-virtual-scroll-content" style={contentStyle.value}>
-            {slots.default!()}
+    return () => {
+      const children = props.contentRender ? props.contentRender(slots.default!()) : slots.default!()
+      return (
+        <div ref={holderRef} class="ix-virtual-scroll-holder" style={style.value} onScroll={onScroll}>
+          <div ref={fillerRef} class="ix-virtual-scroll-filler" style={fillerStyle.value}>
+            <div ref={contentRef} class="ix-virtual-scroll-content" style={contentStyle.value}>
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   },
 })
 

@@ -4,7 +4,7 @@ import type { TableProps } from '../types'
 
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { getScrollBarSize } from '@idux/cdk/scroll'
-import { convertCssPixel } from '@idux/cdk/utils'
+import { convertCssPixel, convertElement } from '@idux/cdk/utils'
 
 export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: StickyContext): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
@@ -14,7 +14,7 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
   const scrollY = computed(() => convertCssPixel(props.scroll?.y))
   const scrollHorizontal = computed(() => !!scrollX.value)
   const scrollVertical = computed(() => !!scrollY.value)
-  const scrollBarSize = computed(() => getScrollBarSize(scrollBodyRef.value))
+  const scrollBarSize = computed(() => (props.useVirtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
   const scrollBarSizeOnFixedHolder = computed(() =>
     isSticky.value ? 0 : scrollVertical.value ? scrollBarSize.value : 0,
   )
@@ -61,7 +61,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
   const scrollFootRef = ref<HTMLDivElement>()
 
   const changeStickyScrollLeft = (scrollLeft: number) => {
-    const scrollBodyElement = scrollBodyRef.value
+    const scrollBodyElement = convertElement(scrollBodyRef)
     if (!scrollBodyElement) {
       return
     }
@@ -112,7 +112,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
     if (!lockedTarget || lockedTarget === currentTarget) {
       lockScrollTarget(currentTarget)
       forceScroll(mergedScrollLeft, scrollHeadRef.value)
-      forceScroll(mergedScrollLeft, scrollBodyRef.value)
+      forceScroll(mergedScrollLeft, convertElement(scrollBodyRef))
       forceScroll(mergedScrollLeft, scrollFootRef.value)
       changeStickyScrollLeft(mergedScrollLeft)
     }

@@ -31,8 +31,6 @@ export interface TableContext
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
 
-export const tableToken: InjectionKey<TableContext> = Symbol('tableToken')
-
 // public token
 export const TABLE_TOKEN: InjectionKey<TableContext> = Symbol('TABLE_TOKEN')
 

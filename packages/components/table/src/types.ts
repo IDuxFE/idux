@@ -20,7 +20,7 @@ export const tableProps = {
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   headless: IxPropTypes.bool,
   pagination: IxPropTypes.object<TablePagination | null>(),
-  rowClassName: IxPropTypes.func<(record: unknown, index: number) => string>(),
+  rowClassName: IxPropTypes.func<(record: unknown, rowIndex: number) => string>(),
   rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
   selectedRowKeys: IxPropTypes.array<Key>().def(() => []),
   scroll: IxPropTypes.object<TableScroll>(),
@@ -29,6 +29,7 @@ export const tableProps = {
   sticky: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TableSticky>()]),
   tableLayout: IxPropTypes.oneOf(['auto', 'fixed'] as const),
   tags: IxPropTypes.object<TableTags>(),
+  useVirtual: IxPropTypes.bool.def(false),
 
   // events
   'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
@@ -49,8 +50,8 @@ export interface TableColumnCommon<T = unknown> {
     [key: string]: unknown
   }
   align?: TableColumnAlign
-  colSpan?: (record: T, index: number) => number
-  rowSpan?: (record: T, index: number) => number
+  colSpan?: (record: T, rowIndex: number) => number
+  rowSpan?: (record: T, rowIndex: number) => number
   fixed?: TableColumnFixed
   responsive?: BreakpointKey[]
   titleColSpan?: number
@@ -72,7 +73,7 @@ export interface TableColumnBase<T = unknown> extends TableColumnCommon<T> {
 export interface TableColumnRenderOption<V = any, T = unknown> {
   value: V
   record: T
-  index: number
+  rowIndex: number
 }
 export type TableColumnRenderFn<V = any, T = unknown> = (options: TableColumnRenderOption<V, T>) => VNodeTypes
 export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
@@ -82,7 +83,7 @@ export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T>
   customExpand?: string | TableColumnExpandableExpandFn<T>
   customIcon?: string | TableColumnExpandableIconFn<T>
 
-  disabled?: (record: T, index: number) => boolean
+  disabled?: (record: T, rowIndex: number) => boolean
   // remove ?
   icon?: [string, string]
   indent?: number
@@ -92,7 +93,7 @@ export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T>
   onExpand?: (expanded: boolean, record: T) => void
 }
 
-export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; index: number }) => VNodeTypes
+export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; rowIndex: number }) => VNodeTypes
 export type TableColumnExpandableIconFn<T = unknown> = (options: {
   expanded: boolean
   record: T
@@ -183,9 +184,8 @@ export const tableHeadCellProps = {
 export type TableHeadCellProps = IxInnerPropTypes<typeof tableHeadCellProps>
 
 export const tableBodyRowProps = {
-  columns: IxPropTypes.array<TableColumnMerged>().isRequired,
   expanded: IxPropTypes.bool.isRequired,
-  index: IxPropTypes.number.isRequired,
+  rowIndex: IxPropTypes.number.isRequired,
   level: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
   rowKey: IxPropTypes.oneOfType([String, Number]).isRequired,
@@ -194,19 +194,13 @@ export const tableBodyRowProps = {
 export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
 
 export const tableBodyCellProps = {
-  additional: IxPropTypes.object(),
-  dataKey: IxPropTypes.oneOfType([String, Number, IxPropTypes.array<Key>()]),
-  ellipsis: IxPropTypes.bool,
-  index: IxPropTypes.number.isRequired,
+  column: IxPropTypes.object<TableColumnMerged>().isRequired,
+  colIndex: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
-  customRender: IxPropTypes.oneOfType([String, IxPropTypes.func<TableColumnRenderFn>()]),
-
-  type: IxPropTypes.oneOf(['expandable', 'selectable'] as const),
+  rowIndex: IxPropTypes.number.isRequired,
   disabled: IxPropTypes.bool,
-
   expanded: IxPropTypes.bool,
   handleExpend: IxPropTypes.func<() => void>(),
-
   selected: IxPropTypes.bool,
   indeterminate: IxPropTypes.bool,
   handleSelect: IxPropTypes.func<() => void>(),

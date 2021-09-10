@@ -5,7 +5,7 @@ import type { TableColumnTitleFn } from '../../types'
 import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
 import { convertCssPixel } from '@idux/cdk/utils'
-import { tableToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 import { tableHeadCellProps } from '../../types'
 import { getColTitle } from '../../utils'
 import HeadCellSelectable from './HeadCellSelectable'
@@ -20,7 +20,7 @@ export default defineComponent({
   props: tableHeadCellProps,
   setup(props) {
     const { slots, fixedColumnKeys, columnOffsetsWithScrollBar, isSticky, activeSortable, handleSort, headColTag } =
-      inject(tableToken)!
+      inject(TABLE_TOKEN)!
     const key = computed(() => props.column.key)
     const isSorted = computed(() => activeSortable.key === key.value && !!activeSortable.orderBy)
     const activeSortOrderBy = computed(() => (isSorted.value ? activeSortable.orderBy : undefined))

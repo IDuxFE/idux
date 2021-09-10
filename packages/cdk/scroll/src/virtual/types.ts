@@ -1,4 +1,4 @@
-import type { Component, DefineComponent, HTMLAttributes, VNode, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -10,11 +10,7 @@ export const virtualListProps = {
   itemHeight: IxPropTypes.number.def(0),
   itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => string | number>()]).isRequired,
   itemRender: IxPropTypes.func<VirtualItemRenderFn>(),
-  tag: IxPropTypes.oneOfType<string | VNode | Component>([
-    String,
-    IxPropTypes.vNode,
-    IxPropTypes.object<Component>(),
-  ]).def('div'),
+  contentRender: IxPropTypes.func<VirtualContentRenderFn>(),
   onScroll: IxPropTypes.func<(evt: Event) => void>(),
 }
 
@@ -39,4 +35,6 @@ export type VirtualScrollToOptions =
       offset?: number
     }
 export type VirtualScrollToFn = (option?: number | VirtualScrollToOptions) => void
-export type VirtualItemRenderFn<T = unknown> = (option: { item: T; index: number }) => VNodeTypes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type VirtualItemRenderFn<T = any> = (option: { item: T; index: number }) => VNodeTypes
+export type VirtualContentRenderFn = (children: VNodeTypes[]) => VNodeTypes

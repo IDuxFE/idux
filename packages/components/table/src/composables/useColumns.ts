@@ -123,8 +123,8 @@ function mergeColumns(
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => screens[key]))
-    .map((column, index) =>
-      covertColumn(column, screens, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${index}`),
+    .map((column, colIndex) =>
+      covertColumn(column, screens, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${colIndex}`),
     )
 }
 
