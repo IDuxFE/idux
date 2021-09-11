@@ -18,7 +18,7 @@ export function useTableLayout(
     if (scrollVertical.value && hasFixed.value) {
       return scrollX.value === 'max-content' ? 'auto' : 'fixed'
     }
-    if (scrollHorizontal.value || isSticky.value || hasEllipsis.value) {
+    if (scrollHorizontal.value || isSticky.value || hasEllipsis.value || props.useVirtual) {
       return 'fixed'
     }
     return 'auto'

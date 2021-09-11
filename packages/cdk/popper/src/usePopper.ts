@@ -4,6 +4,7 @@ import type { PopperOptions, PopperInstance, PopperElement } from './types'
 import { watch, WatchStopHandle } from 'vue'
 import { createPopper } from '@popperjs/core'
 import { isEqual } from 'lodash-es'
+import { convertElement } from '@idux/cdk/utils'
 import {
   useState,
   useBaseOptions,
@@ -15,7 +16,7 @@ import {
   useVisibility,
   useDelay,
 } from './hooks'
-import { convertElement, convertOptions } from './utils'
+import { convertOptions } from './utils'
 
 export function usePopper<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement>(
   options: PopperOptions = {},

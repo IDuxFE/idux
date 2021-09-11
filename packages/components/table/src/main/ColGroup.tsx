@@ -4,7 +4,7 @@ import type { TableColumnSelectableOption } from '../types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { convertCssPixel } from '@idux/cdk/utils'
-import { tableToken } from '../token'
+import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
   props: { ixFixedHolder: Boolean },
@@ -15,7 +15,7 @@ export default defineComponent({
       columnWidths,
       columnWidthsWithScrollBar,
       mergedSelectableOptions,
-    } = inject(tableToken)!
+    } = inject(TABLE_TOKEN)!
     const isRender = computed(() => flattedColumns.value.some(column => !!column.width || 'type' in column))
     return () => {
       const { ixFixedHolder } = props
@@ -23,13 +23,13 @@ export default defineComponent({
       let children: VNodeTypes[] | undefined
       if (ixFixedHolder) {
         const widths = columnWidthsWithScrollBar.value
-        children = flattedColumnsWithScrollBar.value.map((column, index) =>
-          renderCol(mergedSelectableOptions, column as TableColumnMerged, widths[index]),
+        children = flattedColumnsWithScrollBar.value.map((column, colIndex) =>
+          renderCol(mergedSelectableOptions, column as TableColumnMerged, widths[colIndex]),
         )
       } else if (isRender.value) {
         const widths = columnWidths.value
-        children = flattedColumns.value.map((column, index) =>
-          renderCol(mergedSelectableOptions, column, widths[index]),
+        children = flattedColumns.value.map((column, colIndex) =>
+          renderCol(mergedSelectableOptions, column, widths[colIndex]),
         )
       }
       return <colgroup>{children}</colgroup>

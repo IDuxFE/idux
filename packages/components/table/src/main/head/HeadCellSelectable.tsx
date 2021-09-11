@@ -5,7 +5,7 @@ import { IxCheckbox } from '@idux/components/checkbox'
 import { IxDropdown } from '@idux/components/dropdown'
 import { IxIcon } from '@idux/components/icon'
 import { IxMenu, IxMenuItem } from '@idux/components/menu'
-import { tableToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   setup() {
@@ -17,7 +17,7 @@ export default defineComponent({
       currentPageSomeSelected,
       handleHeadSelectChange,
       mergedSelectableOptions,
-    } = inject(tableToken)!
+    } = inject(TABLE_TOKEN)!
 
     const disabled = computed(() => {
       const dataCount = paginatedMap.value.size

@@ -14,9 +14,9 @@ import {
   withDirectives,
 } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
-import { usePopper, convertElement } from '@idux/cdk/popper'
+import { usePopper } from '@idux/cdk/popper'
 import { IxPortal } from '@idux/cdk/portal'
-import { callEmit, getFirstValidNode, Logger } from '@idux/cdk/utils'
+import { callEmit, convertElement, getFirstValidNode, Logger } from '@idux/cdk/utils'
 import { overlayProps } from './types'
 
 export default defineComponent({

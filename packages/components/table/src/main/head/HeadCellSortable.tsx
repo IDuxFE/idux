@@ -3,12 +3,12 @@ import { IxIcon } from '@idux/components/icon'
 import { TableLocale } from '@idux/components/i18n'
 import { TableColumnSortOrder } from '@idux/components/table'
 import { IxTooltip } from '@idux/components/tooltip'
-import { tableToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   props: ['activeOrderBy', 'sortable'],
   setup(props, { slots }) {
-    const { locale } = inject(tableToken)!
+    const { locale } = inject(TABLE_TOKEN)!
 
     return () => {
       const { activeOrderBy, sortable } = props

@@ -1,9 +1,9 @@
 import { computed, defineComponent, inject } from 'vue'
-import { tableToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const { flattedColumns, bodyRowTag, bodyColTag } = inject(tableToken)!
+    const { flattedColumns, bodyRowTag, bodyColTag } = inject(TABLE_TOKEN)!
     const columnCount = computed(() => flattedColumns.value.length)
     return () => {
       const BodyRowTag = bodyRowTag.value as any
