@@ -1,0 +1,36 @@
+.@{table-prefix}-container:not(.@{table-prefix}-borderless) {
+  > .@{table-prefix}-content {
+    border-left: @table-border-width @table-border-style @table-border-color;
+
+    table {
+      border-top: @table-border-width @table-border-style @table-border-color;
+
+      > thead > tr > th,
+      > tbody > tr > td,
+      > tfoot > tr > th,
+      > tfoot > tr > td {
+        border-right: @table-border-width @table-border-style @table-border-color;
+      }
+
+      > thead {
+        > tr:not(:last-child) > th {
+          border-bottom: @table-border-width @table-border-style @table-border-color;
+        }
+
+        > tr > th {
+          &::before {
+            background-color: transparent;
+          }
+        }
+      }
+
+      > thead > tr,
+      > tbody > tr,
+      > tfoot > tr {
+        > .@{table-prefix}-fix-end-first::after {
+          border-right: @table-border-width @table-border-style @table-border-color;
+        }
+      }
+    }
+  }
+}
