@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/IDuxFE/idux/compare/v0.4.0...v0.5.0) (2021-09-11)
+
+
+### Features
+
+* **comp: style:** reset colors ([#440](https://github.com/IDuxFE/idux/issues/440)) ([74aeb8d](https://github.com/IDuxFE/idux/commit/74aeb8d6510c8d13d37488803f8d444ff8fc0dbb))
+* **comp: table:** support border ([#444](https://github.com/IDuxFE/idux/issues/444)) ([f5d0bcc](https://github.com/IDuxFE/idux/commit/f5d0bcc1844926421273d3251ef174de7148938a))
+* **comp: table:** support virtual scroll ([#443](https://github.com/IDuxFE/idux/issues/443)) ([2597e32](https://github.com/IDuxFE/idux/commit/2597e323bfa0a3e33051afac097eeac884c175a8))
+* **comp:table:** support sortable ([#441](https://github.com/IDuxFE/idux/issues/441)) ([59e5859](https://github.com/IDuxFE/idux/commit/59e585923bf9aa614536eb0e9ee3e7a94563f146))
+
+
+
+
+
 # [0.4.0](https://github.com/IDuxFE/idux/compare/v0.3.1...v0.4.0) (2021-09-06)
 
 
