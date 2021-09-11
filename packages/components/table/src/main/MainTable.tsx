@@ -158,7 +158,7 @@ export default defineComponent({
           )
         } else {
           tableBody = (
-            <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
+            <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
@@ -175,7 +175,7 @@ export default defineComponent({
         children = [tableHead, tableBody, tableFoot, sticky]
       } else {
         children = (
-          <div ref={scrollBodyRef} style={contentStyle.value} onScroll={handleScroll}>
+          <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               {props.headless ? null : <Head></Head>}
