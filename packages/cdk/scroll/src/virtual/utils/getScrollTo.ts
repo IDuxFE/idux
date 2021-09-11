@@ -1,24 +1,25 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { ScrollToOptions, ScrollToFn, VirtualListProps, VirtualScrollBarInstance } from '../types'
+import type { VirtualScrollProps, VirtualScrollToOptions, VirtualScrollToFn } from '../types'
+import type { GetKey } from '../composables/useGetKey'
+import type { ScrollContext } from '../composables/useScroll'
 
 import { isNil } from 'lodash-es'
 import { cancelRAF, rAF } from '@idux/cdk/utils'
-import { useItemKey } from './useItem'
 
-export const useScrollTo = (
-  props: VirtualListProps,
-  scrollBarRef: Ref<VirtualScrollBarInstance | undefined>,
-  componentElement: ComputedRef<HTMLElement | undefined>,
+export function getScrollTo(
+  props: VirtualScrollProps,
+  holderRef: Ref<HTMLElement | undefined>,
+  getKey: ComputedRef<GetKey>,
   heights: Record<string, number>,
   collectHeight: () => void,
-  syncScrollTop: (newTop: number) => void,
-): ScrollToFn => {
+  { hideScrollBar, syncScrollTop }: ScrollContext,
+): VirtualScrollToFn {
   let refId: number
 
-  return (option?: number | ScrollToOptions) => {
+  return (option?: number | VirtualScrollToOptions) => {
     // When not argument provided, we think dev may want to show the scrollbar
     if (isNil(option)) {
-      scrollBarRef.value?.delayHidden()
+      hideScrollBar()
       return
     }
 
@@ -34,16 +35,17 @@ export const useScrollTo = (
       if ('index' in option) {
         index = option.index
       } else {
-        index = data.findIndex(item => useItemKey(props, item) === option.key)
+        index = data.findIndex(item => getKey.value(item) === option.key)
       }
 
       // We will retry 3 times in case dynamic height shaking
       const syncScroll = (times: number, targetAlign?: 'top' | 'bottom') => {
-        if (times < 0 || !componentElement.value) {
+        const holderElement = holderRef.value
+        if (times < 0 || !holderElement) {
           return
         }
 
-        const height = componentElement.value.clientHeight
+        const height = holderElement.clientHeight
         let needCollectHeight = false
         let newTargetAlign = targetAlign
 
@@ -56,8 +58,8 @@ export const useScrollTo = (
           let itemTop = 0
           let itemBottom = 0
 
-          for (let i = 0; i <= index; i += 1) {
-            const itemKey = useItemKey(props, data[i])
+          for (let i = 0; i <= index; i++) {
+            const itemKey = getKey.value(data[i])
             itemTop = stackTop
             const cacheHeight = heights[itemKey]
             itemBottom = itemTop + (isNil(cacheHeight) ? itemHeight! : cacheHeight)
@@ -81,7 +83,7 @@ export const useScrollTo = (
               break
 
             default: {
-              const { scrollTop } = componentElement.value
+              const { scrollTop } = holderElement
               const scrollBottom = scrollTop + height
               if (itemTop < scrollTop) {
                 newTargetAlign = 'top'
@@ -91,7 +93,7 @@ export const useScrollTo = (
             }
           }
 
-          if (targetTop !== null && targetTop !== componentElement.value.scrollTop) {
+          if (targetTop !== null && targetTop !== holderElement.scrollTop) {
             syncScrollTop(targetTop)
           }
         }

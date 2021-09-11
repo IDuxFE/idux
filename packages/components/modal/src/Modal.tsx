@@ -1,6 +1,6 @@
 import { computed, defineComponent, onBeforeUnmount, provide, ref, watch, watchEffect } from 'vue'
 import { IxPortal } from '@idux/cdk/portal'
-import { ScrollLocker } from '@idux/cdk/scroll'
+import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise } from '@idux/cdk/utils'
 import { IxMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
@@ -60,17 +60,17 @@ const useVisible = (props: ModalProps) => {
     callEmit(props['onUpdate:visible'], value)
   }
 
-  const scrollLocker = new ScrollLocker()
+  const scrollStrategy = new BlockScrollStrategy()
 
   watchEffect(() => {
     if (animatedVisible.value) {
-      scrollLocker.lock()
+      scrollStrategy.enable()
     } else {
-      scrollLocker.unLock()
+      scrollStrategy.disable()
     }
   })
 
-  onBeforeUnmount(() => scrollLocker.unLock())
+  onBeforeUnmount(() => scrollStrategy.disable())
 
   return { updateVisible, visible, animatedVisible }
 }

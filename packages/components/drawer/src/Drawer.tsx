@@ -1,6 +1,6 @@
 import { computed, defineComponent, provide, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import { IxPortal } from '@idux/cdk/portal'
-import { ScrollLocker } from '@idux/cdk/scroll'
+import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxMask } from '@idux/components/_private'
@@ -58,23 +58,22 @@ const useVisible = (props: DrawerProps) => {
     callEmit(props['onUpdate:visible'], value)
   }
 
-  const scrollLocker = new ScrollLocker()
+  const scrollStrategy = new BlockScrollStrategy()
 
   watchEffect(() => {
     if (animatedVisible.value) {
-      scrollLocker.lock()
+      scrollStrategy.enable()
     } else {
-      scrollLocker.unLock()
+      scrollStrategy.disable()
     }
   })
 
-  onBeforeUnmount(() => scrollLocker.unLock())
+  onBeforeUnmount(() => scrollStrategy.disable())
 
   return { updateVisible, visible, animatedVisible }
 }
 
 const useTrigger = (props: DrawerProps, updateVisible: (value: boolean) => void) => {
-  
   const open = () => updateVisible(true)
 
   const close = async (evt?: Event | unknown) => {
@@ -85,5 +84,5 @@ const useTrigger = (props: DrawerProps, updateVisible: (value: boolean) => void)
     updateVisible(false)
   }
 
-  return { open, close}
+  return { open, close }
 }

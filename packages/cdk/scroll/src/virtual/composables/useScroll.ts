@@ -1,12 +1,12 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { VirtualFillerInstance, VirtualListProps, VirtualScrollBarInstance } from '../types'
+import type { VirtualScrollProps } from '../types'
 
-import { computed, ref } from 'vue'
-import { isFunction } from 'lodash-es'
-import { useItemKey } from './useItem'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { isFunction, throttle } from 'lodash-es'
+import { GetKey } from './useGetKey'
 
 export interface ScrollBarState {
-  scrollHeight?: number
+  scrollHeight: number
   start: number
   end: number
   offset?: number
@@ -15,20 +15,22 @@ export interface ScrollBarState {
 export type OriginScroll = (deltaY: number, smoothOffset?: boolean) => boolean
 export type SyncScrollTop = (newTop: number | ((prev: number) => number)) => void
 
-export interface UseScrollBar {
-  scrollBarRef: Ref<VirtualScrollBarInstance | undefined>
+export interface ScrollContext {
   scrollTop: Ref<number>
   scrollMoving: Ref<boolean>
   scrollState: ComputedRef<ScrollBarState>
   originScroll: OriginScroll
   syncScrollTop: SyncScrollTop
   setScrollMoving: (value: boolean) => void
+  scrollBarVisible: ComputedRef<boolean>
+  hideScrollBar: () => void
 }
 
 const useScrollState = (
-  props: VirtualListProps,
+  props: VirtualScrollProps,
+  fillerRef: Ref<HTMLElement | undefined>,
   useVirtual: ComputedRef<boolean>,
-  fillerRef: Ref<VirtualFillerInstance | undefined>,
+  getKey: ComputedRef<GetKey>,
   heights: Record<string, number>,
   scrollTop: Ref<number>,
 ): ComputedRef<ScrollBarState> => {
@@ -38,9 +40,8 @@ const useScrollState = (
 
     // Always use virtual scroll bar in avoid shaking
     if (!useVirtual.value || dataLength === 0 || itemHeight * data.length <= height) {
-      const scrollHeight = !useVirtual.value ? undefined : fillerRef.value?.offsetHeight || 0
       return {
-        scrollHeight,
+        scrollHeight: useVirtual.value ? fillerRef.value?.offsetHeight ?? 0 : 0,
         start: 0,
         end: dataLength - 1,
         offset: undefined,
@@ -52,9 +53,10 @@ const useScrollState = (
     let startOffset: number | undefined
     let endIndex: number | undefined
 
+    const getKeyFn = getKey.value
     for (let index = 0; index < dataLength; index += 1) {
       const item = data[index]
-      const key = useItemKey(props, item)
+      const key = getKeyFn(item)
       const cacheHeight = heights[key]
       const currentItemBottom = itemTop + (cacheHeight === undefined ? itemHeight! : cacheHeight)
 
@@ -130,17 +132,17 @@ const keepInRange = (maxScrollHeight: number, newScrollTop: number) => {
   return newTop
 }
 
-export const useScrollBar = (
-  props: VirtualListProps,
-  scrollBarRef: Ref<VirtualScrollBarInstance | undefined>,
-  componentElement: ComputedRef<HTMLElement | undefined>,
-  fillerRef: Ref<VirtualFillerInstance | undefined>,
+export function useScroll(
+  props: VirtualScrollProps,
+  holderRef: Ref<HTMLElement | undefined>,
+  fillerRef: Ref<HTMLElement | undefined>,
   useVirtual: ComputedRef<boolean>,
+  getKey: ComputedRef<GetKey>,
   heights: Record<string, number>,
-): UseScrollBar => {
+): ScrollContext {
   const scrollTop = ref(0)
   const scrollMoving = ref(false)
-  const scrollState = useScrollState(props, useVirtual, fillerRef, heights, scrollTop)
+  const scrollState = useScrollState(props, fillerRef, useVirtual, getKey, heights, scrollTop)
   const maxScrollHeight = computed(() => {
     const scrollHeight = scrollState.value.scrollHeight
     return scrollHeight ? scrollHeight - props.height : NaN
@@ -153,8 +155,9 @@ export const useScrollBar = (
   const syncScrollTop = (newTop: number | ((prev: number) => number)) => {
     const value = isFunction(newTop) ? newTop(scrollTop.value) : newTop
     const alignedTop = keepInRange(maxScrollHeight.value, value)
-    if (componentElement.value) {
-      componentElement.value.scrollTop = alignedTop
+    const holderElement = holderRef.value
+    if (holderElement) {
+      holderElement.scrollTop = alignedTop
     }
     scrollTop.value = alignedTop
   }
@@ -163,13 +166,41 @@ export const useScrollBar = (
     scrollMoving.value = value
   }
 
+  const { scrollBarVisible, hideScrollBar } = useVisible(props, scrollState, scrollTop)
+
   return {
-    scrollBarRef,
     scrollTop,
     scrollMoving,
     scrollState,
     originScroll,
     syncScrollTop,
     setScrollMoving,
+    scrollBarVisible,
+    hideScrollBar,
   }
+}
+
+function useVisible(props: VirtualScrollProps, scrollState: ComputedRef<ScrollBarState>, scrollTop: Ref<number>) {
+  const _visible = ref(false)
+  let visibleTimeout: NodeJS.Timeout
+
+  const hideScrollBar = throttle(() => {
+    clearTimeout(visibleTimeout)
+    _visible.value = true
+    visibleTimeout = setTimeout(() => (_visible.value = false), 1200)
+  }, 300)
+
+  watch(scrollTop, hideScrollBar, { flush: 'post' })
+
+  const scrollBarVisible = computed(() => {
+    const { scrollHeight = 0 } = scrollState.value
+    if (props.height >= scrollHeight) {
+      return false
+    }
+    return _visible.value
+  })
+
+  onBeforeUnmount(() => clearTimeout(visibleTimeout))
+
+  return { scrollBarVisible, hideScrollBar }
 }

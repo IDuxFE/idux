@@ -1,42 +1,37 @@
-import type { ComputedRef, CSSProperties, Ref } from 'vue'
-import type { VirtualScrollBarProps } from './types'
+import type { ComputedRef, Ref, StyleValue } from 'vue'
 
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { throttle } from 'lodash-es'
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { on, off, rAF, cancelRAF } from '@idux/cdk/utils'
-import { virtualScrollBarProps } from './types'
+import { virtualScrollToken } from './token'
+import { VirtualScrollProps } from './types'
+import { ScrollBarState, SyncScrollTop } from './composables/useScroll'
 
 export default defineComponent({
-  name: 'IxVirtualScrollBar',
-  props: virtualScrollBarProps,
-  setup(props, { emit }) {
-    const { visible, delayHidden } = useVisible(props)
+  setup() {
+    const { props, scrollState, scrollTop, hideScrollBar, syncScrollTop, setScrollMoving, scrollBarVisible } =
+      inject(virtualScrollToken)!
 
     const thumbHight = useThumbHight(props)
-    const enableScrollRange = useEnableScrollRange(props)
+    const enableScrollRange = useEnableScrollRange(props, scrollState)
     const enableHeightRange = useEnableHeightRange(props, thumbHight)
-    const thumbTop = useThumbTop(props, enableScrollRange, enableHeightRange)
+    const thumbTop = useThumbTop(scrollTop, enableScrollRange, enableHeightRange)
 
-    const { scrollbarRef, thumbRef, dragging } = useEvents(
-      props,
-      delayHidden,
+    const { scrollBarRef, thumbRef, dragging } = useEvents(
       enableScrollRange,
       enableHeightRange,
       thumbTop,
+      setScrollMoving,
+      hideScrollBar,
+      syncScrollTop,
     )
 
-    const scrollbarStyle = useScrollbarStyle(visible)
+    const style = useStyle(scrollBarVisible)
     const thumbClass = useThumbClass(dragging)
     const thumbStyle = useThumbStyle(thumbHight, thumbTop)
 
-    return { scrollbarRef, scrollbarStyle, thumbRef, thumbClass, thumbStyle, delayHidden }
-  },
-
-  render() {
-    const { scrollbarStyle, thumbClass, thumbStyle } = this
-    return (
-      <div ref="scrollbarRef" class="ix-virtual-scrollbar" style={scrollbarStyle}>
-        <div ref="thumbRef" class={thumbClass} style={thumbStyle} />
+    return () => (
+      <div ref={scrollBarRef} class="ix-virtual-scroll-bar" style={style.value}>
+        <div ref={thumbRef} class={thumbClass.value} style={thumbStyle.value} />
       </div>
     )
   },
@@ -46,80 +41,54 @@ const getPageY = (evt: MouseEvent | TouchEvent) => {
   return 'touches' in evt ? evt.touches[0].pageY : evt.pageY
 }
 
-const useVisible = (props: VirtualScrollBarProps) => {
-  const _visible = ref(false)
-  let visibleTimeout: NodeJS.Timeout
-
-  const delayHidden = throttle(() => {
-    clearTimeout(visibleTimeout)
-    _visible.value = true
-    visibleTimeout = setTimeout(() => (_visible.value = false), 1200)
-  }, 300)
-
-  watch(() => props.scrollTop, delayHidden, { flush: 'post' })
-
-  const visible = computed(() => {
-    const { height, scrollHeight } = props
-    if (height >= scrollHeight) {
-      return false
-    }
-    return _visible.value
-  })
-
-  onBeforeUnmount(() => {
-    clearTimeout(visibleTimeout)
-  })
-
-  return { visible, delayHidden }
-}
-
 const minHight = 20
-const useThumbHight = (props: VirtualScrollBarProps) => {
+const useThumbHight = (props: VirtualScrollProps) => {
   return computed(() => {
-    const { height, count } = props
-    let baseHeight = (height / count) * 10
+    const { height, data } = props
+    let baseHeight = (height / data.length) * 10
     baseHeight = Math.max(baseHeight, minHight)
     baseHeight = Math.min(baseHeight, height / 2)
     return Math.floor(baseHeight)
   })
 }
 
-const useEnableScrollRange = (props: VirtualScrollBarProps) => {
-  return computed(() => props.scrollHeight - props.height || 0)
+const useEnableScrollRange = (props: VirtualScrollProps, scrollState: ComputedRef<ScrollBarState>) => {
+  return computed(() => scrollState.value.scrollHeight - props.height)
 }
 
-const useEnableHeightRange = (props: VirtualScrollBarProps, thumbHight: ComputedRef<number>) => {
+const useEnableHeightRange = (props: VirtualScrollProps, thumbHight: ComputedRef<number>) => {
   return computed(() => props.height - thumbHight.value || 0)
 }
 
 const useThumbTop = (
-  props: VirtualScrollBarProps,
+  scrollTop: Ref<number>,
   enableScrollRange: ComputedRef<number>,
   enableHeightRange: ComputedRef<number>,
 ) => {
   return computed(() => {
-    const scrollTop = props.scrollTop
-    if (scrollTop === 0 || enableScrollRange.value === 0) {
+    const _scrollTop = scrollTop.value
+    if (_scrollTop === 0 || enableScrollRange.value === 0) {
       return 0
     }
-    const ptg = scrollTop / enableScrollRange.value
+    const ptg = _scrollTop / enableScrollRange.value
     return ptg * enableHeightRange.value
   })
 }
 
 const useEvents = (
-  props: VirtualScrollBarProps,
-  delayHidden: () => void,
   enableScrollRange: ComputedRef<number>,
   enableHeightRange: ComputedRef<number>,
   thumbTop: ComputedRef<number>,
+  setScrollMoving: (value: boolean) => void,
+  hideScrollBar: () => void,
+  syncScrollTop: SyncScrollTop,
 ) => {
   const dragging = ref(false)
-  watch(dragging, value => props.onScrollStateChange(value))
+  watch(dragging, value => setScrollMoving(value))
 
   let pageY = 0
   let startTop = 0
-  const scrollbarRef = ref<HTMLDivElement>()
+  const scrollBarRef = ref<HTMLElement>()
   const thumbRef = ref<HTMLDivElement>()
   let rafId: number
 
@@ -131,8 +100,6 @@ const useEvents = (
     evt.stopPropagation()
     evt.preventDefault()
   }
-
-  const onScrollbarMouseMove = () => delayHidden()
 
   const patchEvents = () => {
     on(window, 'mousemove', onMouseMove)
@@ -149,7 +116,7 @@ const useEvents = (
     off(thumbRef.value, 'touchmove', onMouseMove)
     off(thumbRef.value, 'touchend', onMouseUp)
 
-    off(scrollbarRef.value!, 'touchstart', onScrollbarTouchStart)
+    off(scrollBarRef.value!, 'touchstart', onScrollbarTouchStart)
     off(thumbRef.value, 'touchstart', onMouseDown)
 
     cancelRAF(rafId)
@@ -173,7 +140,7 @@ const useEvents = (
       const ptg = enableHeightRange.value ? newTop / enableHeightRange.value : 0
       const newScrollTop = Math.ceil(ptg * enableScrollRange.value)
 
-      rafId = rAF(() => props.onScroll(newScrollTop))
+      rafId = rAF(() => syncScrollTop(newScrollTop))
     }
   }
 
@@ -183,27 +150,27 @@ const useEvents = (
   }
 
   onMounted(() => {
-    on(scrollbarRef.value, 'touchstart', onScrollbarTouchStart)
+    on(scrollBarRef.value, 'touchstart', onScrollbarTouchStart)
     on(thumbRef.value, 'touchstart', onMouseDown)
 
-    on(scrollbarRef.value, 'mousedown', onScrollbarMouseDown)
-    on(scrollbarRef.value, 'mousemove', onScrollbarMouseMove)
+    on(scrollBarRef.value, 'mousedown', onScrollbarMouseDown)
+    on(scrollBarRef.value, 'mousemove', hideScrollBar)
     on(thumbRef.value, 'mousedown', onMouseDown)
   })
 
   onBeforeUnmount(() => {
     removeEvents()
 
-    off(scrollbarRef.value, 'mousedown', onScrollbarMouseDown)
-    off(scrollbarRef.value, 'mousemove', onScrollbarMouseMove)
+    off(scrollBarRef.value, 'mousedown', onScrollbarMouseDown)
+    off(scrollBarRef.value, 'mousemove', hideScrollBar)
     off(thumbRef.value, 'mousedown', onMouseDown)
   })
 
-  return { scrollbarRef, thumbRef, dragging }
+  return { scrollBarRef, thumbRef, dragging }
 }
 
-const useScrollbarStyle = (visible: ComputedRef<boolean>) => {
-  return computed<CSSProperties>(() => {
+const useStyle = (visible: ComputedRef<boolean>) => {
+  return computed<StyleValue>(() => {
     return {
       width: '8px',
       top: 0,
@@ -218,14 +185,14 @@ const useScrollbarStyle = (visible: ComputedRef<boolean>) => {
 const useThumbClass = (dragging: Ref<boolean>) => {
   return computed(() => {
     return {
-      'ix-virtual-scrollbar-thumb': true,
-      'ix-virtual-scrollbar-thumb-moving': dragging.value,
+      'ix-virtual-scroll-thumb': true,
+      'ix-virtual-scroll-thumb-moving': dragging.value,
     }
   })
 }
 
 const useThumbStyle = (thumbHight: ComputedRef<number>, thumbTop: ComputedRef<number>) => {
-  return computed<CSSProperties>(() => {
+  return computed<StyleValue>(() => {
     return {
       width: '100%',
       height: thumbHight.value + 'px',
