@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { OriginScroll } from './useScrollBar'
+import type { OriginScroll } from '../composables/useScroll'
 
 import { onBeforeUnmount, onMounted, watch } from 'vue'
 import { isFirefox } from '@idux/cdk/platform'
@@ -61,15 +61,15 @@ const useFrameWheel = (inVirtual: Ref<boolean>, originScroll: OriginScroll, onWh
 
 const SMOOTH_PTG = 14 / 15
 function useMobileTouchMove(
+  holderRef: Ref<HTMLElement | undefined>,
   inVirtual: Ref<boolean>,
-  componentElement: ComputedRef<HTMLElement | undefined>,
   callback: (offsetY: number, smoothOffset?: boolean) => boolean,
 ): void {
   let touched = false
   let touchY = 0
 
   // Smooth scroll
-  let intervalId: number
+  let intervalId: NodeJS.Timer
 
   const cleanUpEvents = (element: HTMLElement) => {
     off(element, 'touchmove', onTouchMove)
@@ -119,7 +119,7 @@ function useMobileTouchMove(
 
   onMounted(() => {
     watch(
-      [componentElement, inVirtual],
+      [holderRef, inVirtual],
       ([currElement, currInVirtual], [prevElement]) => {
         off(prevElement, 'touchstart', onTouchStart)
         cleanUpEvents(prevElement!)
@@ -134,7 +134,7 @@ function useMobileTouchMove(
 }
 
 export const useEvents = (
-  componentElement: ComputedRef<HTMLElement | undefined>,
+  holderRef: Ref<HTMLElement | undefined>,
   useVirtual: ComputedRef<boolean>,
   syncScrollTop: (newTop: number | ((prev: number) => number)) => void,
   originScroll: OriginScroll,
@@ -148,7 +148,7 @@ export const useEvents = (
   })
 
   // Mobile touch move
-  useMobileTouchMove(useVirtual, componentElement, (deltaY, smoothOffset) => {
+  useMobileTouchMove(holderRef, useVirtual, (deltaY, smoothOffset) => {
     if (originScroll(deltaY, smoothOffset)) {
       return false
     }
@@ -172,7 +172,7 @@ export const useEvents = (
 
   onMounted(() => {
     watch(
-      componentElement,
+      holderRef,
       (currElement, prevElement) => {
         removeEventListener(prevElement)
         on(currElement, 'wheel', onWheel)
@@ -184,7 +184,5 @@ export const useEvents = (
     )
   })
 
-  onBeforeUnmount(() => {
-    removeEventListener(componentElement.value)
-  })
+  onBeforeUnmount(() => removeEventListener(holderRef.value))
 }

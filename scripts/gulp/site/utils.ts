@@ -30,7 +30,7 @@ export function initSite(): void {
   })
 
   const filterPackageName = ['site']
-  const filterComponentName = ['node_modules', 'style', 'i18n', 'version', 'utils', 'scroll', '_private']
+  const filterComponentName = ['node_modules', 'style', 'i18n', 'version', 'utils', '_private']
   readdirSync(packageRoot).forEach(packageName => {
     if (filterPackageName.includes(packageName)) {
       return

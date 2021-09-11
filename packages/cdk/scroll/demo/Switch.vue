@@ -1,5 +1,6 @@
 <template>
-  <IxVirtualList :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender"> </IxVirtualList>
+  <IxVirtualScroll :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
+  </IxVirtualScroll>
 
   <IxSpace>
     DataLength:
@@ -31,7 +32,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, h, ref } from 'vue'
-import { VirtualListInstance, VirtualItemRenderFn } from '@idux/cdk/virtual-list'
+import { VirtualScrollInstance, VirtualItemRenderFn } from '@idux/cdk/scroll'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []
@@ -43,7 +44,7 @@ const getData = (length: number, key = 'key') => {
 
 export default defineComponent({
   setup() {
-    const listRef = ref<VirtualListInstance>()
+    const listRef = ref<VirtualScrollInstance>()
     const dataLength = ref(20)
     const data = computed(() => getData(dataLength.value))
     const height = ref(200)
@@ -62,7 +63,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.ix-virtual-list {
+.ix-virtual-scroll {
   border: 1px solid red;
   margin-bottom: 8px;
 }

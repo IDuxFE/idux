@@ -1,3 +1,6 @@
+import type { ComponentPublicInstance, Ref } from 'vue'
+
+import { unref } from 'vue'
 import { isNil } from 'lodash-es'
 import { isNumeric } from './typeof'
 
@@ -25,4 +28,14 @@ export function convertCssPixel(value: unknown): string {
     return ''
   }
   return typeof value === 'string' ? value : `${value}px`
+}
+
+export function convertElement<T extends ComponentPublicInstance, E extends HTMLElement>(
+  elementRef: Ref<T | E | null | undefined> | T | E | null | undefined,
+): HTMLElement | undefined {
+  const element = unref(elementRef)
+  if (!element) {
+    return undefined
+  }
+  return '$el' in element ? element.$el : element
 }
