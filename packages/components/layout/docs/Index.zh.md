@@ -18,7 +18,7 @@ Content：内容部分，自带默认样式，其下可嵌套任何元素，只�
 
 Footer：底部布局，自带默认样式，其下可嵌套任何元素，只能放在 Layout 中。
 
-由于整体采用了css grid布局，容器的整体布局设置为：
+整体采用了css grid布局，容器的整体布局设置为：
 
 ``` css
 grid-template-areas:  
@@ -26,8 +26,6 @@ grid-template-areas:
  "sider-start content sider-end"
  "footer footer footer";
 ```
-
-所以整体组件的排列顺序与flex布局时的结构不太一样
 
 ## API
 

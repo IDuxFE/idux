@@ -38,9 +38,5 @@ export default defineComponent({
   &-content {
     height: 200px;
   }
-  .trigger {
-    position: absolute;
-    left: -50px;
-  }
 }
 </style>
