@@ -32,6 +32,7 @@ export default defineComponent({
 .content {
   text-align: center;
   padding: 30px;
+  background-color: #ddd;
 }
 
 .operation-area {

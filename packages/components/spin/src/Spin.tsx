@@ -73,7 +73,9 @@ const renderSpinner = (
   const tipNode = renderTip(tip)
   return (
     <div class={spinnerClassName}>
-      {iconNode}
+      <div class="ix-spin-spinner-icon">
+        {iconNode}
+      </div>
       {tipNode}
     </div>
   )
