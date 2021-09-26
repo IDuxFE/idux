@@ -12,7 +12,7 @@ export default defineComponent({
     const { close } = inject(DRAWER_TOKEN)!
 
     const placement = computed(() => props.placement ?? 'right')
-    const classes = computed(() => `ix-drawer ${placement.value}`)
+    const classes = computed(() => `ix-drawer ix-drawer-${placement.value}`)
     const isHorizontal = computed(() => placement.value === 'right' || placement.value === 'left')
     const drawerStyle = computed(() => {
       const width = props.width || (isHorizontal.value ? '30%' : '100%') // 不传值时水平方向宽度默认30%
