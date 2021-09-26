@@ -1,7 +1,6 @@
 import type { IconDefinition, IconRendered } from './types'
 
 import { Logger } from '@idux/cdk/utils'
-import { createVNode } from 'vue'
 
 export const iconDefinitions = new Map<string, IconDefinition>()
 const iconRenderedCache = new Map<string, IconRendered>()
@@ -82,7 +81,6 @@ function validSVGString(svgString: string): boolean {
 }
 
 function createSVGElement(svgString: string): SVGElement | null {
-  createVNode('svt')
   const div = document.createElement('div')
   div.innerHTML = svgString
   return div.querySelector('svg')
