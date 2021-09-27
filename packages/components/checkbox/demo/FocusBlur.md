@@ -1,8 +1,8 @@
 ---
-order: 6
+order: 8
 title:
-  zh: focus & blur 基本使用
-  en: focus & blur usage
+  zh: 聚焦& 失去焦点
+  en: focus & blur
 ---
 
 ## zh

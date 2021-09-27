@@ -1,4 +1,4 @@
-import { defineComponent, provide } from 'vue'
+import { defineComponent, computed, provide } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { useFormItemRegister } from '@idux/components/form'
 import Checkbox from './Checkbox'
@@ -12,10 +12,15 @@ export default defineComponent({
     const { accessor } = useValueAccessor()
     useFormItemRegister()
     provide(checkboxGroupToken, { props, accessor })
-
+    const classes = computed(() => {
+      return {
+        'ix-checkbox-group': true,
+        'ix-checkbox-group-no-gap': props.gap === 0,
+      }
+    })
     return () => {
       const child = props.options ? props.options.map(option => <Checkbox {...option} />) : slots.default?.()
-      return <div class="ix-checkbox-group">{child}</div>
+      return <div class={classes.value}>{child}</div>
     }
   },
 })

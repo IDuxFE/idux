@@ -6,3 +6,10 @@
 .square(@size) {
   .size(@size; @size);
 }
+
+.component-size(@component-height, @component-border-width, @component-font-size, @component-padding-horizontal) {
+  height: @component-height;
+  line-height: @component-height - @component-border-width * 2;
+  font-size: @component-font-size;
+  padding: 0 @component-padding-horizontal;
+}

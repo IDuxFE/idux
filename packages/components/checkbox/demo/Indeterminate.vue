@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <IxSpace direction="vertical">
     <IxCheckbox v-model:checked="checkAll" :indeterminate="indeterminate" :onChange="onCheckAllChange">
-      CheckAll
+      全选
     </IxCheckbox>
     <IxCheckboxGroup v-model:value="value" :options="options" />
-  </div>
+  </IxSpace>
 </template>
 
 <script lang="ts">
@@ -18,9 +18,9 @@ export default defineComponent({
 
     const value = ref(['option1', 'option2'])
     const options = [
-      { label: 'option1', value: 'option1' },
-      { label: 'option2', value: 'option2' },
-      { label: 'option3', value: 'option3' },
+      { label: '选项一', value: 'option1' },
+      { label: '选项二', value: 'option2' },
+      { label: '选项三', value: 'option3' },
     ]
 
     watch(
@@ -47,4 +47,3 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="less" scoped></style>

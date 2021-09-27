@@ -1,8 +1,8 @@
 ---
-order: 2
+order: 3
 title:
-  zh: Disabled 基本使用
-  en: Disabled usage
+  zh: 禁用状态
+  en: Disabled
 ---
 
 ## zh

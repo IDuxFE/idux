@@ -1,5 +1,6 @@
 import type {
   ButtonConfig,
+  CheckboxConfig,
   IconConfig,
   TagConfig,
   DividerConfig,
@@ -42,6 +43,8 @@ import { numFormatter } from './numFormatter'
 
 // --------------------- General ---------------------
 const button = shallowReactive<ButtonConfig>({ size: 'medium' })
+
+const checkbox: CheckboxConfig = { size: 'medium' }
 
 const icon = shallowReactive<IconConfig>({})
 
@@ -283,6 +286,7 @@ export const defaultConfig: GlobalConfig = {
   menuSub,
   pagination,
   // Data Entry
+  checkbox,
   form,
   input,
   textarea,

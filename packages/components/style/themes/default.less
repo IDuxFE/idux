@@ -320,35 +320,51 @@
 @form-invalid-box-shadow: 0 0 0 2px fade(@form-item-invalid-color, 20%);
 
 /* checkbox -------------------------- */
+@checkbox-checked-color: @color-primary;
+@checkbox-hover-color: @color-primary-l10;
+@checkbox-focus-color: @color-primary-d10;
+@checkbox-disabled-color: @color-graphite-l10;
+
+
+@checkbox-border-color: @color-graphite-l20;
+@checkbox-bg-color: @color-white;
+@checkbox-indeterminate-tick-color: @color-white;
+
+@checkbox-disabled-border-color: @color-graphite-l20;
+@checkbox-disabled-bg-color: @color-graphite-l40;
+@checkbox-disabled-checked-bg-color: @color-graphite-l40;
+@checkbox-disabled-checked-border-color: @color-graphite-l20;
+
+@checkbox-button-disabled-bg-color: @color-graphite-l50;
+@checkbox-button-disabled-border-color: @color-graphite-l30;
+@checkbox-button-checked-bg-color: @color-white;
+
 @checkbox-inner-zindex: @zindex-l1-1;
 @checkbox-line-height: 1;
-@checkbox-border-color: @color-grey-d10;
-@checkbox-border-style: @border-width-sm solid @color-grey-d10;
+@checkbox-border-width: @border-width-sm;
+@checkbox-border-style: @checkbox-border-width solid @checkbox-border-color;
 @checkbox-border-radius: @border-radius-sm;
-@checkbox-bg-color: @color-white;
-@checkbox-tick-border-style: @border-width-md solid @color-white;
+@checkbox-tick-border-style: @border-width-md solid @color-white; 
 @checkbox-tick-width: (@checkbox-width / @font-size-base) * 5px;
-@checkbox-tick-height: (@checkbox-height / @font-size-base) * 8px;
-@checkbox-bg-indeterminate-color: @color-primary;
+@checkbox-tick-height: (@checkbox-height / @font-size-base) * 9px;
 @checkbox-indeterminate-width: 8px;
 @checkbox-indeterminate-height: 2px;
-@checkbox-indeterminate-tick-color: @color-white;
-@checkbox-border-checked-color: @color-primary;
-@checkbox-border-hover-color: @color-primary-l10;
-@checkbox-border-focus-color: @color-primary-d10;
-@checkbox-bg-checked-color: @color-primary;
-@checkbox-border-disabled-color: @color-grey;
-@checkbox-tick-disabled-color: @color-grey;
-@checkbox-bg-disabled-color: @color-grey-l20;
-@checkbox-bg-indeterminate-disabled-color: @color-grey;
-@checkbox-label-disabled-color: @color-grey;
-@checkbox-font-size: @font-size-lg;
-@checkbox-height: 16px;
-@checkbox-width: 16px;
+@checkbox-font-size: @font-size-md;
+@checkbox-height: 14px;
+@checkbox-width: 14px;
 @checkbox-group-line-height: @line-height-base;
-@checkbox-group-checkbox-margin-right: @spacing-sm;
-@checkbox-label-padding: 0 @spacing-xl 0 @spacing-xs;
-@checkbox-transition-duration: @transition-duration-base;
+@checkbox-label-padding: 0 @spacing-sm 0 @spacing-sm;
+
+@checkbox-button-height-sm: @height-sm;
+@checkbox-button-font-size-sm: @font-size-sm;
+@checkbox-button-padding-horizontal-sm: @padding-sm;
+@checkbox-button-height-md: @height-md;
+@checkbox-button-font-size-md: @font-size-md;
+@checkbox-button-padding-horizontal-md: @padding-md;
+
+@checkbox-transition-duration: @form-transition-duration;
+@checkbox-transition-function: @form-transition-function;
+@checkbox-transition: all @checkbox-transition-duration @checkbox-transition-function;
 
 /* input -------------------------- */
 @input-line-height: @line-height-base;

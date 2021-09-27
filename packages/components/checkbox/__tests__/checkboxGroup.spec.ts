@@ -103,4 +103,35 @@ describe('CheckboxGroup.vue and Checkbox', () => {
     expect(wrapper.findAll('input[name=group]').length).toBe(2)
     expect(wrapper.findAll('input[name=child]').length).toBe(1)
   })
+
+  test('buttoned work', async () => {
+    const wrapper = CheckboxGroupMount({
+      props: {
+        buttoned: true,
+      },
+    })
+
+    expect(wrapper.findAll('.ix-checkbox-button').length).toBe(3)
+  })
+
+  test('size work', async () => {
+    const wrapper = CheckboxGroupMount({
+      props: {
+        buttoned: true,
+        size: 'small',
+      },
+    })
+
+    expect(wrapper.findAll('.ix-checkbox-button-small').length).toBe(3)
+  })
+
+  test('gap work', async () => {
+    const wrapper = CheckboxGroupMount()
+
+    expect(wrapper.classes()).toContain('ix-checkbox-group-no-gap')
+
+    await wrapper.setProps({ gap: 20 })
+
+    expect(wrapper.findAll('.ix-checkbox')[0].attributes()['style']).toEqual('margin-right: 20px;')
+  })
 })

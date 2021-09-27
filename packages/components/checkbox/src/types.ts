@@ -6,17 +6,20 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export type CheckValue = string | number | boolean
 export type CheckboxOptions = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
+export type CheckboxSize = 'medium' | 'small'
 
 export const checkboxProps = {
   control: controlPropDef,
   autofocus: IxPropTypes.bool.def(false),
   checked: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
+  buttoned: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
   indeterminate: IxPropTypes.bool.def(false),
   label: IxPropTypes.string,
   trueValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(true),
   falseValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
   value: IxPropTypes.string,
+  size: IxPropTypes.oneOf<CheckboxSize>(['medium', 'small']),
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: CheckValue) => void>(),
@@ -36,10 +39,13 @@ export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, Check
 
 export const checkboxGroupProps = {
   control: controlPropDef,
+  buttoned: IxPropTypes.bool.def(false).def(false),
   value: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
   disabled: IxPropTypes.bool.def(false),
   name: IxPropTypes.string,
   options: IxPropTypes.array<CheckboxOptions>(),
+  size: IxPropTypes.oneOf<CheckboxSize>(['medium', 'small']).def('medium'),
+  gap: IxPropTypes.number.def(0),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: Array<string | number>) => void>(),

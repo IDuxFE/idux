@@ -2,6 +2,7 @@ import type { VNode } from 'vue'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
+import type { CheckboxSize } from '@idux/components/checkbox'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { TextareaResize, TextareaAutoRows } from '@idux/components/textarea'
@@ -96,6 +97,9 @@ export interface PaginationConfig {
 }
 
 // Data Entry
+export interface CheckboxConfig {
+  size: CheckboxSize
+}
 
 export interface FormConfig {
   colonless: boolean
@@ -314,6 +318,7 @@ export interface GlobalConfig {
   menuSub: MenuSubConfig
   pagination: PaginationConfig
   // Data Entry
+  checkbox: CheckboxConfig
   form: FormConfig
   input: InputConfig
   textarea: TextareaConfig

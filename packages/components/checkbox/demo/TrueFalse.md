@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh: trueValue 和 falseValue 使用
-  en: trueValue and falseValue usage
+  zh: 选中值 & 不选中值
+  en: trueValue & falseValue
 ---
 
 ## zh
