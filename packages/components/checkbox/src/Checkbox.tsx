@@ -11,8 +11,8 @@ import { checkboxProps } from './types'
 
 export default defineComponent({
   name: 'IxCheckbox',
-  props: checkboxProps,
   inheritAttrs: false,
+  props: checkboxProps,
   setup(props, { attrs, expose, slots }) {
     const checkboxGroup = inject(checkboxGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)

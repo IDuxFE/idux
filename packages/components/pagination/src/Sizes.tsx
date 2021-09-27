@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, toRef } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { IxSelect } from '@idux/components/select'
 import { paginationToken } from './token'
 

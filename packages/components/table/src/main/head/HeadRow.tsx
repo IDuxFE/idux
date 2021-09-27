@@ -12,6 +12,7 @@ export default defineComponent({
       const children = props.columns
         .filter(column => column.titleColSpan !== 0)
         .map(column => <HeadCell key={column.key} column={column}></HeadCell>)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const HeadRowTag = headRowTag.value as any
       return <HeadRowTag>{children}</HeadRowTag>
     }

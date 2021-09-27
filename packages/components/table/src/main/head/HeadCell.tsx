@@ -95,7 +95,7 @@ export default defineComponent({
           }
         }
       }
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const HeadColTag = headColTag.value as any
       return (
         <HeadColTag {...cellProps.value} title={_title} {...additional} onClick={onClick}>

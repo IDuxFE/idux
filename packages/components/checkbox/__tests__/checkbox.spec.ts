@@ -1,10 +1,11 @@
 import { renderWork } from '@tests'
-import { mount, MountingOptions } from '@vue/test-utils'
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import Checkbox from '../src/Checkbox'
-import { CheckboxProps } from '../src/types'
+import { CheckboxInstance, CheckboxProps } from '../src/types'
 
 describe('Checkbox', () => {
-  const CheckboxMount = (options?: MountingOptions<Partial<CheckboxProps>>) => mount(Checkbox, { ...options })
+  const CheckboxMount = (options?: MountingOptions<Partial<CheckboxProps>>) =>
+    mount(Checkbox, { ...options }) as VueWrapper<CheckboxInstance>
 
   renderWork<CheckboxProps>(Checkbox)
 

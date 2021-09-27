@@ -5,7 +5,6 @@ import { convertCssPixel } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { drawerToken, DRAWER_TOKEN } from './token'
 
-
 export default defineComponent({
   setup() {
     const { props, slots } = inject(drawerToken)!
@@ -29,18 +28,15 @@ export default defineComponent({
       const titleElement = renderTitle(slots.title, props.title, props.closable, close)
       const footerElement = renderFooter(slots.footer, props.footer)
       return (
-        <div class={classes.value} style={ drawerStyle.value }>
+        <div class={classes.value} style={drawerStyle.value}>
           {titleElement}
-          <section class="ix-drawer-body">
-            {slots.default?.()}
-          </section>
+          <section class="ix-drawer-body">{slots.default?.()}</section>
           {footerElement}
         </div>
       )
     }
   },
 })
-
 
 const renderTitle = (
   titleSlot: Slot | undefined,
@@ -65,7 +61,7 @@ const renderIcon = (closable: boolean | undefined, close: (evt: Event) => void) 
     return null
   }
   return (
-    <button class="ix-drawer-close-btn" type="button" onClick={ close }>
+    <button class="ix-drawer-close-btn" type="button" onClick={close}>
       <IxIcon class="ix-icon-close" name="close"></IxIcon>
     </button>
   )
@@ -76,9 +72,5 @@ const renderFooter = (footerSlot: Slot | undefined, footer: string | undefined) 
     return null
   }
   const child = footerSlot ? footerSlot() : <span title={footer}>{footer}</span>
-  return (
-    <footer class="ix-drawer-footer">
-      {child}
-    </footer>
-  )
+  return <footer class="ix-drawer-footer">{child}</footer>
 }

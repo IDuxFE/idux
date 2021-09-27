@@ -6,11 +6,7 @@ export default defineComponent({
   props: layoutHeaderProps,
   setup(props, { slots }) {
     return () => {
-        return (
-            <header class="ix-layout-header">
-                {slots.default?.()}
-            </header>
-        )
+      return <header class="ix-layout-header">{slots.default?.()}</header>
     }
-  }
+  },
 })

@@ -1,11 +1,11 @@
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { renderWork, wait } from '@tests'
 import MessageProvider from '../src/MessageProvider'
-import { MessageProviderProps } from '../src/types'
+import { MessageProviderInstance, MessageProviderProps } from '../src/types'
 
 describe('MessageProvider', () => {
   const MessageProviderMount = (options?: MountingOptions<MessageProviderProps>) => {
-    return mount(MessageProvider, { ...options })
+    return mount(MessageProvider, { ...options }) as VueWrapper<MessageProviderInstance>
   }
 
   let content = 'This is a message'

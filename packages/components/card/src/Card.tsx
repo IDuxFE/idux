@@ -65,6 +65,7 @@ const useClasses = (
 const useChildren = (slots: Slots, hoverable: ComputedRef<boolean>) => {
   const hasGrid = computed(() => {
     const children = slots.default?.() || []
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return children.some(node => node.type && (node.type as any).name === 'IxCardGrid')
   })
 

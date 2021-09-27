@@ -39,7 +39,7 @@ export default defineComponent({
   },
 })
 
-export function useConfigProps(props: DropdownProps, config: DropdownConfig) {
+function useConfigProps(props: DropdownProps, config: DropdownConfig) {
   return computed(() => {
     const trigger = props.trigger ?? config.trigger
     return {

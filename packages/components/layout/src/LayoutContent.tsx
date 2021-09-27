@@ -5,12 +5,8 @@ export default defineComponent({
   name: 'IxLayoutContent',
   props: layoutContentProps,
   setup(props, { slots }) {
-    return ()=>{
-      return (
-        <main class="ix-layout-content">
-            { slots.default?.() }
-        </main>
-      )
+    return () => {
+      return <main class="ix-layout-content">{slots.default?.()}</main>
     }
-  }
+  },
 })

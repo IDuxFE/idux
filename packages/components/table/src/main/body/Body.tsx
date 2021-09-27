@@ -23,7 +23,7 @@ export default defineComponent({
     const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
 
     return () => {
-      let children: VNodeTypes[] = []
+      const children: VNodeTypes[] = []
       if (tableSlots.alert) {
         const alertNode = tableSlots.alert()
         children.push(<BodyRowSingle>{alertNode}</BodyRowSingle>)
@@ -47,7 +47,7 @@ export default defineComponent({
           </BodyRowSingle>,
         )
       }
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyTag = bodyTag.value as any
       return (
         <BodyTag>

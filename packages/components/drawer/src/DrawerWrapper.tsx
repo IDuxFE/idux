@@ -10,7 +10,7 @@ import { DrawerProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  setup() {
     const { props, config, animatedVisible } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
     const { mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
@@ -19,46 +19,32 @@ export default defineComponent({
 
     const drawerTransition = computed(() => {
       const drawerTransitionMap = {
-        'left': 'ix-move-left',
-        'right': 'ix-move-right',
-        'top': 'ix-move-up',
-        'bottom': 'ix-move-down',
+        left: 'ix-move-left',
+        right: 'ix-move-right',
+        top: 'ix-move-up',
+        bottom: 'ix-move-down',
       }
-      return drawerTransitionMap[placement.value];
+      return drawerTransitionMap[placement.value]
     })
 
     const classes = useClasses(props)
 
     const wrapperRef = ref<HTMLDivElement>()
 
-    const { onWrapperClick, onWrapperKeydown } = useEvent(
-      close,
-      mask,
-      maskClosable,
-      closeOnEsc
-    )
+    const { onWrapperClick, onWrapperKeydown } = useEvent(close, mask, maskClosable, closeOnEsc)
 
-    const { onAfterEnter, onAfterLeave } = useEvents(
-      props,
-      wrapperRef,
-      animatedVisible,
-    )
+    const { onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible)
 
     return () => {
       return (
-        <Transition 
-          name={drawerTransition.value}
-          appear
-          onAfterEnter={onAfterEnter}
-          onAfterLeave={onAfterLeave}
-        >
+        <Transition name={drawerTransition.value} appear onAfterEnter={onAfterEnter} onAfterLeave={onAfterLeave}>
           <div
             v-show={animatedVisible.value}
             ref={wrapperRef}
             class={classes.value}
             style={{ zIndex: zIndex.value }}
-            onClick={ onWrapperClick }
-            onKeydown={ onWrapperKeydown }
+            onClick={onWrapperClick}
+            onKeydown={onWrapperKeydown}
           >
             <DrawerBody></DrawerBody>
           </div>
@@ -87,9 +73,8 @@ const useEvent = (
   close: (evt: Event) => void,
   mask: ComputedRef<boolean>,
   maskClosable: ComputedRef<boolean>,
-  closeOnEsc: ComputedRef<boolean>
+  closeOnEsc: ComputedRef<boolean>,
 ) => {
-
   const onWrapperClick = (evt: MouseEvent) => {
     if (evt.target === evt.currentTarget && mask.value && maskClosable.value) {
       close(evt)
@@ -107,12 +92,7 @@ const useEvent = (
   return { onWrapperClick, onWrapperKeydown }
 }
 
-const useEvents = (
-  props: DrawerProps,
-  wrapperRef: Ref<HTMLDivElement | undefined>,
-  animatedVisible: Ref<boolean>,
-) => {
-
+const useEvents = (props: DrawerProps, wrapperRef: Ref<HTMLDivElement | undefined>, animatedVisible: Ref<boolean>) => {
   const onAfterEnter = () => {
     const wrapperElement = wrapperRef.value!
     wrapperElement.focus()

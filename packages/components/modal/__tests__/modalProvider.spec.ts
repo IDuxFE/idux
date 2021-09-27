@@ -1,13 +1,14 @@
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { isElementVisible, renderWork } from '@tests'
 import ModalProvider from '../src/ModalProvider'
+import { ModalProviderInstance } from '../src/types'
 
 describe('ModalProvider', () => {
   const ModalProviderMount = (options?: MountingOptions<Record<string, never>>) => {
     return mount(ModalProvider, {
       ...options,
-    })
+    }) as VueWrapper<ModalProviderInstance>
   }
 
   const wrapper = ModalProviderMount()
