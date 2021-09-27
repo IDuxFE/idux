@@ -122,7 +122,7 @@ function useDeg(parentProps: StepperProps, status: ComputedRef<StepperStatus>) {
     let left = baseDeg
     let right = baseDeg
 
-    let curDeg = Math.round((percent! / 100) * 360)
+    const curDeg = Math.round((percent! / 100) * 360)
 
     if (curDeg + baseDeg > maxDeg) {
       // 超过50%

@@ -72,7 +72,7 @@ export default defineComponent({
         children = renderChildren(props, slots, text)
         title = getColTitle(ellipsis, children, text)
       }
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyColTag = bodyColTag.value as any
       return (
         <BodyColTag {...cellProps.value} title={title} {...additional}>

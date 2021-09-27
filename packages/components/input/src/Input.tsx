@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, Slot, Slots, VNodeTypes } from 'vue'
+import type { ComputedRef, Ref, Slot, Slots, StyleValue, VNodeTypes } from 'vue'
 import type { InputConfig } from '@idux/components/config'
 import type { InputProps } from './types'
 
@@ -45,7 +45,7 @@ export default defineComponent({
       const suffix = renderSuffix(props, slots, isClearable.value, clearIcon.value, clearHidden.value, handlerClear)
       const { class: className, style, ...rest } = attrs
       return (
-        <span class={normalizeClass([classes.value, className])} style={style as any}>
+        <span class={normalizeClass([classes.value, className])} style={style as StyleValue}>
           {addonBefore}
           <span class="ix-input-wrapper">
             {prefix}

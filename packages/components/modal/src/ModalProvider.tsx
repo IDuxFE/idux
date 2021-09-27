@@ -23,6 +23,7 @@ export default defineComponent({
             key={key}
             visible={visible}
             onAfterClose={() => destroyOnHide && apis.destroy(key!)}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ref={(instance: any) => setModalRef(key!, instance)}
           >
             {content}
@@ -55,9 +56,9 @@ const useModalRef = () => {
       if (ref) {
         modalRefMap.delete(key)
         ref.open = noop
-        ref.close = noop as any
-        ref.cancel = noop as any
-        ref.ok = noop as any
+        ref.close = noop as (evt?: unknown) => Promise<void>
+        ref.cancel = noop as (evt?: unknown) => Promise<void>
+        ref.ok = noop as (evt?: unknown) => Promise<void>
       }
     }
   }

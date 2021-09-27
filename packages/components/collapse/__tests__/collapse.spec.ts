@@ -175,7 +175,7 @@ describe('Collapse', () => {
       })
 
       expect(wrapper.html()).toMatchSnapshot()
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       panelProps.header = { title: 'hello header', suffix: 'left' } as any
 
       await flushPromises()

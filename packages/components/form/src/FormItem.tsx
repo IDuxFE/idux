@@ -50,6 +50,7 @@ export default defineComponent({
 function renderLabel(
   props: FormItemProps,
   slots: Slots,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   classes: ComputedRef<Record<string, any>>,
   labelColConfig: ComputedRef<ColProps | undefined>,
 ) {

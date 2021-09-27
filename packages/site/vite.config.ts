@@ -1,5 +1,6 @@
-import path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import eslintPlugin from 'vite-plugin-eslint'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
@@ -14,6 +15,14 @@ export default defineConfig(({ command }) => {
   const componentsResolve = isBuild ? '../../dist/components' : '../components'
   return {
     plugins: [
+      eslintPlugin({
+        fix: true,
+        include: [
+          resolve(__dirname, '../**/*.ts'),
+          resolve(__dirname, '../**/*.tsx'),
+          resolve(__dirname, '../**/*.vue'),
+        ],
+      }),
       vuePlugin({ include: [/\.vue$/, /\.md$/] }),
       vueJsxPlugin({ enableObjectSlots: false }),
       mdPlugin(),
@@ -36,9 +45,9 @@ export default defineConfig(({ command }) => {
     ],
     resolve: {
       alias: [
-        { find: '@idux/cdk', replacement: path.resolve(__dirname, cdkResolve) },
-        { find: '@idux/components', replacement: path.resolve(__dirname, componentsResolve) },
-        { find: '@idux/site', replacement: path.resolve(__dirname, './src') },
+        { find: '@idux/cdk', replacement: resolve(__dirname, cdkResolve) },
+        { find: '@idux/components', replacement: resolve(__dirname, componentsResolve) },
+        { find: '@idux/site', replacement: resolve(__dirname, './src') },
       ],
     },
     define: {
@@ -53,7 +62,7 @@ export default defineConfig(({ command }) => {
       },
     },
     build: {
-      outDir: path.resolve(__dirname, '../../dist/site'),
+      outDir: resolve(__dirname, '../../dist/site'),
       emptyOutDir: true,
     },
   }

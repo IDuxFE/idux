@@ -117,6 +117,7 @@ export default defineComponent({
     })
 
     return () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const TableTag = tableTag.value as any
       let children: VNodeTypes
 

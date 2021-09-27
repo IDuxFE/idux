@@ -8,6 +8,7 @@ export default defineComponent({
 
     return () => {
       const children = mergedRows.value.map((columns, rowIndex) => <HeadRow key={rowIndex} columns={columns} />)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const HeadTag = headTag.value as any
       return <HeadTag>{children}</HeadTag>
     }

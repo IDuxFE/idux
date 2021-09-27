@@ -1,10 +1,10 @@
 import { createTextVNode, h, VNode } from 'vue'
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import { isElementVisible, renderWork } from '@tests'
 import { IxButton } from '@idux/components/button'
 import Modal from '../src/Modal'
 import ModalWrapper from '../src/ModalWrapper'
-import { ModalButtonProps, ModalProps } from '../src/types'
+import { ModalInstance, ModalButtonProps, ModalProps } from '../src/types'
 import { HeaderProps, IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
 
@@ -18,7 +18,7 @@ describe('Modal', () => {
       attachTo: 'body',
       ...rest,
     } as MountingOptions<ModalProps>
-    return mount(Modal, _options)
+    return mount(Modal, _options) as VueWrapper<ModalInstance>
   }
 
   afterEach(() => {

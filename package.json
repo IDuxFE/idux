@@ -14,8 +14,8 @@
     "test": "jest",
     "lint": "npm run ls-lint && npm run eslint && npm run stylelint && npm run markdownlint",
     "lint-fix": "npm run ls-lint && npm run eslint-fix && npm run stylelint-fix && npm run markdownlint-fix",
-    "eslint": "eslint ./packages --ext .vue,.js,.ts",
-    "eslint-fix": "eslint --fix ./packages  --ext .vue,.js,.ts",
+    "eslint": "eslint ./packages --ext .vue,.js,.ts,.tsx",
+    "eslint-fix": "eslint --fix ./packages  --ext .vue,.js,.ts,.tsx",
     "stylelint": "stylelint \"./packages/components/**/*.less\" --syntax less",
     "stylelint-fix": "stylelint --fix \"./packages/components/**/*.less\" --syntax less",
     "markdownlint": "markdownlint \"./packages/{cdk,components,pro}/**/*.md\"",
@@ -29,10 +29,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,vue,json}": [
+    "*.{js,ts,tsx,vue,json}": [
       "prettier --write"
     ],
-    "*.{js,ts,vue}": [
+    "*.{js,ts,tsx,vue}": [
       "eslint --fix"
     ],
     "*.less": [
@@ -85,7 +85,7 @@
     "@vue/compiler-sfc": "^3.2.6",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-rc.12",
+    "@vue/test-utils": "2.0.0-rc.14",
     "babel-jest": "^27.0.6",
     "chalk": "^4.1.2",
     "codecov": "^3.8.3",
@@ -126,7 +126,8 @@
     "typescript": "^4.3.5",
     "unplugin-vue-components": "^0.15.0",
     "vite": "^2.5.1",
-    "vue3-jest": "^27.0.0-alpha.1",
+    "vite-plugin-eslint": "^1.3.0",
+    "vue3-jest": "^27.0.0-alpha.2",
     "yaml-front-matter": "^4.1.1"
   },
   "engines": {

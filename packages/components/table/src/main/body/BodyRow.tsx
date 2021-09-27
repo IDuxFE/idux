@@ -55,7 +55,7 @@ export default defineComponent({
         selectDisabled,
         handleSelect,
       )
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyRowTag = bodyRowTag.value as any
       const nodes = [
         <BodyRowTag class={classes.value} {...clickEvents.value}>
@@ -176,7 +176,7 @@ function renderChildren(
     if (colSpan === 0 || rowSpan === 0) {
       return
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const colProps: any = {
       colSpan: colSpan === 1 ? undefined : colSpan,
       rowSpan: rowSpan === 1 ? undefined : rowSpan,

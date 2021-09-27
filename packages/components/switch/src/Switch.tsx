@@ -56,15 +56,12 @@ export default defineComponent({
 })
 
 const useSwitch = (props: SwitchProps, blur: () => void) => {
-  let handleClick: (evt: Event) => void
-  let handleBlur: (evt: FocusEvent) => void
-  let handleMouseup: (evt: Event) => void
   const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
   useFormItemRegister()
   const isChecked = computed(() => accessor.value)
   const isDisabled = computed(() => props.disabled ?? accessor.disabled)
 
-  handleClick = () => {
+  const handleClick = () => {
     if (isDisabled.value || props.loading) {
       return
     }
@@ -72,12 +69,12 @@ const useSwitch = (props: SwitchProps, blur: () => void) => {
     accessor.setValue(!isChecked.value)
   }
 
-  handleBlur = (evt: FocusEvent) => {
+  const handleBlur = (evt: FocusEvent) => {
     callEmit(props.onBlur, evt)
     accessor.markAsBlurred()
   }
 
-  handleMouseup = () => {
+  const handleMouseup = () => {
     blur()
   }
 

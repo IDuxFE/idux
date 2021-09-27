@@ -5,18 +5,14 @@ export default defineComponent({
   name: 'IxLayout',
   props: layoutProps,
   setup(props, { slots }) {
-    const classes = computed(()=>{
+    const classes = computed(() => {
       return {
-          'ix-layout': true,
-          'ix-layout-out-sider': props.outSider
+        'ix-layout': true,
+        'ix-layout-out-sider': props.outSider,
       }
     })
-    return ()=>{
-      return (
-        <section class={classes.value}>
-            { slots.default?.() }
-        </section>
-      )
+    return () => {
+      return <section class={classes.value}>{slots.default?.()}</section>
     }
-  }
+  },
 })

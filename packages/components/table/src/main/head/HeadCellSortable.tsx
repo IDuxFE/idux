@@ -6,6 +6,7 @@ import { IxTooltip } from '@idux/components/tooltip'
 import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
+  // eslint-disable-next-line vue/require-prop-types
   props: ['activeOrderBy', 'sortable'],
   setup(props, { slots }) {
     const { locale } = inject(TABLE_TOKEN)!

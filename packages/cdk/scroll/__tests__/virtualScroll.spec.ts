@@ -1,7 +1,7 @@
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 import VirtualScroll from '../src/virtual/VirtualScroll'
-import { VirtualItemRenderFn, VirtualScrollProps } from '../src/virtual/types'
+import { VirtualScrollInstance, VirtualItemRenderFn, VirtualScrollProps } from '../src/virtual/types'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []
@@ -27,7 +27,7 @@ describe('VirtualScroll', () => {
   const VirtualScrollMount = (options?: MountingOptions<Partial<VirtualScrollProps>>) => {
     const { props, ...rest } = options || {}
     const mergedOptions = { props: { ...defaultProps, ...props }, ...rest } as MountingOptions<VirtualScrollProps>
-    return mount(VirtualScroll, mergedOptions)
+    return mount(VirtualScroll, mergedOptions) as VueWrapper<VirtualScrollInstance>
   }
 
   beforeAll(() => {

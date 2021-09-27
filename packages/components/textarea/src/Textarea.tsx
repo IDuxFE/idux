@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, Slot } from 'vue'
+import type { ComputedRef, Ref, Slot, StyleValue } from 'vue'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
 import type { TextareaProps } from './types'
@@ -43,7 +43,7 @@ export default defineComponent({
     const dataCount = useDataCount(props, config, accessor)
     const autoRows = computed(() => props.autoRows ?? config.autoRows)
     const resize = computed(() => {
-      let resize = props.resize ?? config.resize
+      const resize = props.resize ?? config.resize
       if (autoRows.value) {
         return resize === 'horizontal' ? 'horizontal' : 'none'
       } else {
@@ -58,7 +58,11 @@ export default defineComponent({
       const suffix = renderSuffix(isClearable.value, slots.clearIcon, clearIcon.value, clearHidden.value, handlerClear)
       const { class: className, style, ...rest } = attrs
       return (
-        <span class={normalizeClass([classes.value, className])} style={style as any} data-count={dataCount.value}>
+        <span
+          class={normalizeClass([classes.value, className])}
+          style={style as StyleValue}
+          data-count={dataCount.value}
+        >
           <textarea
             {...rest}
             ref={elementRef}
