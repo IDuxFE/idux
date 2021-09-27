@@ -12,6 +12,8 @@ export function getLessTemplate(compName: string): string {
 export function getStyleIndexTemplate(): string {
   return `import '../../style/index.less'
 import './index.less'
+
+// style dependencies
 `
 }
 

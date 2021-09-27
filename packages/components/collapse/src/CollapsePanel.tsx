@@ -50,7 +50,7 @@ export default defineComponent({
       return (
         <div class={classes.value}>
           {headerNode}
-          <IxCollapseTransition>
+          <IxCollapseTransition appear>
             <div v-show={expanded} class="ix-collapse-panel-content">
               <div class="ix-collapse-panel-content-box">{slots.default?.()}</div>
             </div>

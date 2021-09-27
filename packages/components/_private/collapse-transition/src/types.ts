@@ -13,8 +13,11 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type CollapseTransitionMode = 'height' | 'width'
 
 export const collapseTransitionProps = {
+  appear: IxPropTypes.bool.def(false),
   name: IxPropTypes.string.def('ix-collapse-transition'),
   mode: IxPropTypes.oneOf<CollapseTransitionMode>(['height', 'width']).def('height'),
+  onAfterEnter: IxPropTypes.emit(),
+  onAfterLeave: IxPropTypes.emit(),
 }
 
 export type CollapseTransitionProps = IxInnerPropTypes<typeof collapseTransitionProps>

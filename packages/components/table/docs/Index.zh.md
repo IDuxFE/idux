@@ -21,14 +21,14 @@ single: true
 | `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
-| `childrenKey` | 指定树形结构的列名 | `string` | `children` | - | - |
+| `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record: T, rowIndex: number) => string` | - | - | - |
-| `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | ✅ | - |
+| `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | - | - |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
 | `size` | 表格大小 | `'large' \| 'medium' \| 'small'` | `medium` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
@@ -93,7 +93,7 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 | `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
 | `customExpand` | 自定义展开内容 | `string \| TableColumnExpandableExpandFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customIcon` | 自定义展开图标 | `string \| TableColumnExpandableIconFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
-| `enabled` |  设置是否允许行展开 | `(record:T, rowIndex: number) => boolean` | - | - | - |
+| `disabled` |  设置是否允许行展开 | `(record:T, rowIndex: number) => boolean` | - | - | - |
 | `icon` | 展开按钮图标 | `[string, string]` | `['plus', 'minus']` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
@@ -116,10 +116,10 @@ export type TableColumnExpandableIconFn<T = unknown> = (options: {
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'selectable'` | - | - | `type` 设置为 `selectable`,即为选择列 |
-| `enabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |
+| `disabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
 | `options` | 自定义列头选择项 | `boolean \| TableSelectableSelection[]` | `false` | - | 为 `false` 时，不显示，为 `true` 时，显示默认的选择项 |
-| `trigger` | 不通过 `type`，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
+| `trigger` | 不通过点击选择框，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string \| number)[], selectedRecords: T[]) => void` | - | - | - |
 | `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected: boolean, record: T) => void` | - | - | - |
 | `onSelectAll` | 点击全选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | - |

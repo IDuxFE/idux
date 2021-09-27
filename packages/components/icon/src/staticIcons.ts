@@ -9,6 +9,8 @@ import type { IconDefinition } from './types'
 
 import {
   Calendar,
+  CaretDown,
+  CaretUp,
   Check,
   CheckCircle,
   CheckCircleFilled,
@@ -47,7 +49,9 @@ export const staticIcons: IconDefinition[] = [
   Up,
   Down,
   Left,
-  Right,
+  Right, // Tree
+  CaretDown, // Table
+  CaretUp, // Table
   DoubleLeft,
   DoubleRight,
   Loading,

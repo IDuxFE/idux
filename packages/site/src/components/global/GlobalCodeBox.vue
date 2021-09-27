@@ -120,7 +120,7 @@ export default defineComponent({
     top: -@spacing-lg;
     margin-left: @spacing-lg;
     padding: @spacing-xs @spacing-sm;
-    background: @background-color-body;
+    background: @color-white;
     border-radius: @border-radius-sm @border-radius-sm 0 0;
 
     .global-code-box-edit {

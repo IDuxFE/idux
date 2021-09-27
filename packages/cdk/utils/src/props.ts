@@ -199,3 +199,7 @@ export function callEmit<T extends (...args: any[]) => any>(
     return funcs(...args)
   }
 }
+
+export type VKey = string | number | symbol
+
+export const vKeyPropDef = IxPropTypes.oneOf([String, Number, Symbol])

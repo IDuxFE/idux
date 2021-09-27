@@ -1,7 +1,9 @@
-import { copy, existsSync, readdir, readFile, writeFile } from 'fs-extra'
-import { camelCase, upperFirst } from 'lodash'
 import { join } from 'path'
-import { optimize, OptimizeOptions } from 'svgo'
+
+import { copy, existsSync, readFile, readdir, writeFile } from 'fs-extra'
+import { camelCase, upperFirst } from 'lodash'
+import { OptimizeOptions, optimize } from 'svgo'
+
 import { gulpConfig } from '../gulpConfig'
 
 const definitionTemplate = `export const {{definitionName}} = {

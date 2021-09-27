@@ -1,4 +1,5 @@
-import { series, TaskFunction } from 'gulp'
+import { TaskFunction, series } from 'gulp'
+
 import { gulpConfig } from '../gulpConfig'
 import { clean } from '../taskHelpers'
 import { copyToSite, generateIcons } from './utils'

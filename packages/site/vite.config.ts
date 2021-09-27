@@ -5,7 +5,6 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import { IduxResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import eslintPlugin from 'vite-plugin-eslint'
 
 import { mdPlugin } from './plugins/mdPlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
@@ -14,14 +13,9 @@ export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
   const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
   const componentsResolve = isBuild ? '../../dist/components' : '../components'
-  const esLint = eslintPlugin({
-    fix: true,
-    include: [resolve(__dirname, '../**/*.ts'), resolve(__dirname, '../**/*.tsx'), resolve(__dirname, '../**/*.vue')],
-  })
 
   return {
     plugins: [
-      isBuild ? esLint : undefined,
       vuePlugin({ include: [/\.vue$/, /\.md$/] }),
       vueJsxPlugin({ enableObjectSlots: false }),
       mdPlugin(),

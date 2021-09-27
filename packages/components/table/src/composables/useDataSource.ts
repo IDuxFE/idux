@@ -21,7 +21,8 @@ export function useDataSource(
 ): DataSourceContext {
   const mergedData = computed(() => {
     const { dataSource, childrenKey } = props
-    return dataSource.map(record => covertMergeData(record, getRowKey.value, childrenKey))
+    const getKey = getRowKey.value
+    return dataSource.map(record => covertMergeData(record, getKey, childrenKey))
   })
 
   const mergedMap = computed(() => {
@@ -115,6 +116,8 @@ function covertDataMap(mergedData: MergedData[], map: Map<Key, MergedData>) {
   })
 }
 
+// TODO: performance optimization
+// when virtual scrolling is enabled, this do not need to traverse all nodes
 function flatData(data: MergedData, level: number, expandedRowKeys: Key[]) {
   const { children, parentKey, record, rowKey } = data
   const expanded = expandedRowKeys.includes(rowKey)
