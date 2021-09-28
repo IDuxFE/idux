@@ -1,8 +1,8 @@
 ---
-order: 4
+order: 7
 title:
-  zh: indeterminate 使用
-  en: indeterminate usage
+  zh: 半选状态
+  en: indeterminate
 ---
 
 ## zh

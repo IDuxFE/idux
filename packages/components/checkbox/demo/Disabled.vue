@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <IxCheckbox v-model:checked="checked" :disabled="disabled" label="option" />
-    <div class="operation-area">
-      <IxButton mode="primary" @click="changeChecked()">checked: {{ checked }}</IxButton>
-      <IxButton mode="primary" @click="changeDisabled()">disabled: {{ disabled }}</IxButton>
-    </div>
+  <IxCheckbox v-model:checked="checked" :disabled="disabled" label="选项" />
+  <IxCheckbox v-model:checked="checked" :disabled="disabled" buttoned label="选项" />
+  <div class="operation-area">
+    <IxButton @click="changeChecked()">改变勾选状态: {{ checked }}</IxButton>
+    <IxButton @click="changeDisabled()">改变禁用状态: {{ disabled }}</IxButton>
   </div>
 </template>
 

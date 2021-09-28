@@ -4,8 +4,8 @@
       <IxCheckbox ref="checkboxRef" v-model:checked="checked" label="option" />
     </div>
     <div class="operation-area">
-      <IxButton mode="primary" @click="changeFocus()">changeFocus</IxButton>
-      <IxButton mode="primary" @click="changeBlur()">changeBlur</IxButton>
+      <IxButton @click="changeFocus()">changeFocus</IxButton>
+      <IxButton @click="changeBlur()">changeBlur</IxButton>
     </div>
   </div>
 </template>

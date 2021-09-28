@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <IxCheckbox v-model:checked="checked" label="option" />
-  </div>
+  <IxCheckbox v-model:checked="checked" label="选项" />
 </template>
 
 <script lang="ts">
@@ -16,4 +14,3 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="less" scoped></style>

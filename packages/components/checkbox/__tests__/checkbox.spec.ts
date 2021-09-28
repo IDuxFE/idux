@@ -70,6 +70,30 @@ describe('Checkbox', () => {
     expect(wrapper.emitted()['update:checked'].slice(-1)[0]).toEqual(['no'])
   })
 
+  test('buttoned work', async () => {
+    const wrapper = CheckboxMount({
+      props: {
+        buttoned: true,
+      },
+    })
+
+    expect(wrapper.classes()).toContain('ix-checkbox-button')
+  })
+
+  test('size work', async () => {
+    const wrapper = CheckboxMount({
+      props: {
+        size: 'small',
+      },
+    })
+
+    expect(wrapper.classes()).not.toContain('ix-checkbox-button-small')
+
+    await wrapper.setProps({ buttoned: true })
+
+    expect(wrapper.classes()).toContain('ix-checkbox-button-small')
+  })
+
   test('disabled work', async () => {
     const mockFn = jest.fn()
     const wrapper = CheckboxMount({
@@ -147,7 +171,7 @@ describe('Checkbox', () => {
     expect(originalInput.attributes()['name']).toEqual('checkboxName')
     expect(originalInput.attributes()['value']).toEqual('checkboxValue')
     expect(originalInput.classes()).not.toContain('test-checkox')
-    expect(originalInput.attributes()['style']).not.toEqual('color: red;')
+    expect(originalInput.attributes()['style']).not.toEqual('color: red')
 
     expect(input.attributes()['tabindex']).toEqual('1')
   })

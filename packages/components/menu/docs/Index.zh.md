@@ -58,9 +58,9 @@ single: true
 | `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
 | `label` | 菜单文本 | `string \| #label`  | - | - |
 
-### IxMenuGroup
+### IxMenuItemGroup
 
-#### MenuGroupProps
+#### MenuItemGroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

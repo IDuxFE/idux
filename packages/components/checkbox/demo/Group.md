@@ -1,14 +1,14 @@
 ---
-order: 5
+order: 4
 title:
-  zh: CheckboxGroup 使用
-  en: CheckboxGroup usage
+  zh: 复选框组
+  en: CheckboxGroup
 ---
 
 ## zh
 
-`IxCheckboxGroup` 基本使用，分别可以使用option属性和插槽的方式来渲染checkbox
+`IxCheckboxGroup` 基本使用，分别可以使用`options`属性和插槽的方式来渲染checkbox
 
 ## en
 
-The basic usage of `IxCheckboxGroup`, you can use the option property and slot to render the checkbox, respectively
+The basic usage of `IxCheckboxGroup`, you can use the `options` property and slot to render the checkbox, respectively
