@@ -27,7 +27,7 @@ single: true
 `direction` | 指定步骤条的方向 | `horizontal \| vertical` | `horizontal` | - | - |
 `placement` | 指定步骤条节点附带的标签放置的位置 | `horizontal \| vertical` | `horizontal` | -| - |
 `percent` | 当前活跃节点的进度 | `number` | 0 | - | 取值是0-100 |
-`progressDot` | 指定步骤条是否为点状步骤条| `boolean \| #progressDot` | `false` | - | 使用slot的话，会传入当前节点对象{index, status, title, subTitle,description, prefixCls} |
+`progressDot` | 指定步骤条是否为点状步骤条| `boolean \| #progressDot` | `false` | - | 使用slot的话，会传入当前节点对象{index, status} |
 `size` | 指定步骤条节点的大小 | `medium\| small` | `medium` | ✅ | - |
 `status` | 指定步骤条节点的状态 | `wait \| process \| finish \| error` | `process` | - | - |
 
