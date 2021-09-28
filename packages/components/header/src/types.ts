@@ -23,5 +23,5 @@ export const headerProps = {
 
 export type HeaderProps = IxInnerPropTypes<typeof headerProps>
 export type HeaderPublicProps = IxPublicPropTypes<typeof headerProps>
-export type HeaderComponent = DefineComponent<HTMLAttributes & typeof headerProps>
+export type HeaderComponent = DefineComponent<Omit<HTMLAttributes, keyof HeaderPublicProps> & HeaderPublicProps>
 export type HeaderInstance = InstanceType<DefineComponent<HeaderProps>>

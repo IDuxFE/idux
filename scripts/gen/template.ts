@@ -27,7 +27,7 @@ export const ${camelCaseName}Props = {
 
 export type ${upperFirstName}Props = IxInnerPropTypes<typeof ${camelCaseName}Props>
 export type ${upperFirstName}PublicProps = IxPublicPropTypes<typeof ${camelCaseName}Props>
-export type ${upperFirstName}Component = DefineComponent<HTMLAttributes & typeof ${camelCaseName}Props>
+export type ${upperFirstName}Component = DefineComponent<Omit<HTMLAttributes, keyof ${upperFirstName}PublicProps> & ${upperFirstName}PublicProps>
 export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `
 }

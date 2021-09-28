@@ -17,7 +17,7 @@ export const collapseProps = {
 
 export type CollapseProps = IxInnerPropTypes<typeof collapseProps>
 export type CollapsePublicProps = IxPublicPropTypes<typeof collapseProps>
-export type CollapseComponent = DefineComponent<HTMLAttributes & typeof collapseProps>
+export type CollapseComponent = DefineComponent<Omit<HTMLAttributes, keyof CollapsePublicProps> & CollapsePublicProps>
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
 export const collapsePanelProps = {
@@ -27,5 +27,7 @@ export const collapsePanelProps = {
 
 export type CollapsePanelProps = IxInnerPropTypes<typeof collapsePanelProps>
 export type CollapsePanelPublicProps = IxPublicPropTypes<typeof collapsePanelProps>
-export type CollapsePanelComponent = DefineComponent<HTMLAttributes & typeof collapsePanelProps>
+export type CollapsePanelComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof CollapsePanelPublicProps> & CollapsePanelPublicProps
+>
 export type CollapsePanelInstance = InstanceType<DefineComponent<CollapsePanelProps>>

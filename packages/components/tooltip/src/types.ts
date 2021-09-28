@@ -22,5 +22,5 @@ export const tooltipProps = {
 
 export type TooltipProps = IxInnerPropTypes<typeof tooltipProps>
 export type TooltipPublicProps = IxPublicPropTypes<typeof tooltipProps>
-export type TooltipComponent = DefineComponent<HTMLAttributes & typeof tooltipProps>
+export type TooltipComponent = DefineComponent<Omit<HTMLAttributes, keyof TooltipPublicProps> & TooltipPublicProps>
 export type TooltipInstance = InstanceType<DefineComponent<TooltipProps>>

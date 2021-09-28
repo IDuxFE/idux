@@ -27,7 +27,7 @@ export const formProps = {
 
 export type FormProps = IxInnerPropTypes<typeof formProps>
 export type FormPublicProps = IxPublicPropTypes<typeof formProps>
-export type FormComponent = DefineComponent<HTMLAttributes & typeof formProps>
+export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
 export const formItemProps = {
@@ -52,7 +52,7 @@ export const formItemProps = {
 
 export type FormItemProps = IxInnerPropTypes<typeof formItemProps>
 export type FormItemPublicProps = IxPublicPropTypes<typeof formItemProps>
-export type FormItemComponent = DefineComponent<HTMLAttributes & typeof formItemProps>
+export type FormItemComponent = DefineComponent<Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps>
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
@@ -61,5 +61,5 @@ export const formWrapperProps = {
 
 export type FormWrapperProps = IxInnerPropTypes<typeof formWrapperProps>
 export type FormWrapperPublicProps = IxPublicPropTypes<typeof formWrapperProps>
-export type FormWrapperComponent = DefineComponent<typeof formWrapperProps>
+export type FormWrapperComponent = DefineComponent<FormWrapperPublicProps>
 export type FormWrapperInstance = InstanceType<DefineComponent<FormItemProps>>

@@ -48,5 +48,5 @@ export const overlayProps = {
 
 export type OverlayProps = IxInnerPropTypes<typeof overlayProps>
 export type OverlayPublicProps = IxPublicPropTypes<typeof overlayProps>
-export type OverlayComponent = DefineComponent<HTMLAttributes & typeof overlayProps>
+export type OverlayComponent = DefineComponent<Omit<HTMLAttributes, keyof OverlayPublicProps> & OverlayPublicProps>
 export type OverlayInstance = InstanceType<DefineComponent<OverlayProps>>

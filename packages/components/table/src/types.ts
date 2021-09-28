@@ -38,7 +38,7 @@ export const tableProps = {
 
 export type TableProps = IxInnerPropTypes<typeof tableProps>
 export type TablePublicProps = IxPublicPropTypes<typeof tableProps>
-export type TableComponent = DefineComponent<HTMLAttributes & typeof tableProps>
+export type TableComponent = DefineComponent<Omit<HTMLAttributes, keyof TablePublicProps> & TablePublicProps>
 export type TableInstance = InstanceType<DefineComponent<TableProps>>
 
 export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>

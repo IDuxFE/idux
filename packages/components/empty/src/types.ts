@@ -10,5 +10,5 @@ export const emptyProps = {
 
 export type EmptyProps = IxInnerPropTypes<typeof emptyProps>
 export type EmptyPublicProps = IxPublicPropTypes<typeof emptyProps>
-export type EmptyComponent = DefineComponent<HTMLAttributes & typeof emptyProps>
+export type EmptyComponent = DefineComponent<Omit<HTMLAttributes, keyof EmptyPublicProps> & EmptyPublicProps>
 export type EmptyInstance = InstanceType<DefineComponent<EmptyProps>>

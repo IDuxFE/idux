@@ -32,7 +32,10 @@ export interface RadioBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
 }
-export type RadioComponent = DefineComponent<LabelHTMLAttributes & typeof radioProps, RadioBindings>
+export type RadioComponent = DefineComponent<
+  Omit<LabelHTMLAttributes, keyof RadioPublicProps> & RadioPublicProps,
+  RadioBindings
+>
 export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindings>>
 
 export const radioGroupProps = {
@@ -54,5 +57,7 @@ export const radioGroupProps = {
 
 export type RadioGroupProps = IxInnerPropTypes<typeof radioGroupProps>
 export type RadioGroupPublicProps = IxPublicPropTypes<typeof radioGroupProps>
-export type RadioGroupComponent = DefineComponent<HTMLAttributes & typeof radioGroupProps>
+export type RadioGroupComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
+>
 export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>

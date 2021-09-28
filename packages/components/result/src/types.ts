@@ -14,5 +14,5 @@ export const resultProps = {
 
 export type ResultProps = IxInnerPropTypes<typeof resultProps>
 export type ResultPublicProps = IxPublicPropTypes<typeof resultProps>
-export type ResultComponent = DefineComponent<HTMLAttributes & typeof resultProps>
+export type ResultComponent = DefineComponent<Omit<HTMLAttributes, keyof ResultPublicProps> & ResultPublicProps>
 export type ResultInstance = InstanceType<DefineComponent<ResultProps>>

@@ -12,5 +12,7 @@ export const collapseTransitionProps = {
 
 export type CollapseTransitionProps = IxInnerPropTypes<typeof collapseTransitionProps>
 export type CollapseTransitionPublicProps = IxPublicPropTypes<typeof collapseTransitionProps>
-export type CollapseTransitionComponent = DefineComponent<HTMLAttributes & typeof collapseTransitionProps>
+export type CollapseTransitionComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof CollapseTransitionPublicProps> & CollapseTransitionPublicProps
+>
 export type CollapseTransitionInstance = InstanceType<DefineComponent<CollapseTransitionProps>>

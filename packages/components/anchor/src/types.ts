@@ -18,7 +18,7 @@ export const anchorProps = {
 
 export type AnchorProps = IxInnerPropTypes<typeof anchorProps>
 export type AnchorPublicProps = IxPublicPropTypes<typeof anchorProps>
-export type AnchorComponent = DefineComponent<HTMLAttributes & typeof anchorProps>
+export type AnchorComponent = DefineComponent<Omit<HTMLAttributes, keyof AnchorPublicProps> & AnchorPublicProps>
 export type AnchorInstance = InstanceType<DefineComponent<AnchorProps>>
 
 export const linkProps = {
@@ -28,5 +28,7 @@ export const linkProps = {
 
 export type AnchorLinkProps = IxInnerPropTypes<typeof linkProps>
 export type AnchorLinkPublicProps = IxPublicPropTypes<typeof linkProps>
-export type AnchorLinkComponent = DefineComponent<HTMLAttributes & typeof linkProps>
+export type AnchorLinkComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof AnchorLinkPublicProps> & AnchorLinkPublicProps
+>
 export type AnchorLinkInstance = InstanceType<DefineComponent<AnchorLinkProps>>

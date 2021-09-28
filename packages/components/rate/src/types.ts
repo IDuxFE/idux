@@ -15,5 +15,5 @@ export const rateProps = {
 
 export type RateProps = IxInnerPropTypes<typeof rateProps>
 export type RatePublicProps = IxPublicPropTypes<typeof rateProps>
-export type RateComponent = DefineComponent<HTMLAttributes & typeof rateProps>
+export type RateComponent = DefineComponent<Omit<HTMLAttributes, keyof RatePublicProps> & RatePublicProps>
 export type RateInstance = InstanceType<DefineComponent<RateProps>>

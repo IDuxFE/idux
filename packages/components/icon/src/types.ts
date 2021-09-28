@@ -11,7 +11,7 @@ export const iconProps = {
 
 export type IconProps = IxInnerPropTypes<typeof iconProps>
 export type IconPublicProps = IxPublicPropTypes<typeof iconProps>
-export type IconComponent = DefineComponent<HTMLAttributes & typeof iconProps>
+export type IconComponent = DefineComponent<Omit<HTMLAttributes, keyof IconPublicProps> & IconPublicProps>
 export type IconInstance = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {

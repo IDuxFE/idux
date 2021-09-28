@@ -13,5 +13,5 @@ export const backTopProps = {
 
 export type BadgeProps = IxInnerPropTypes<typeof backTopProps>
 export type BadgePublicProps = IxPublicPropTypes<typeof backTopProps>
-export type BadgeComponent = DefineComponent<HTMLAttributes & typeof backTopProps>
+export type BadgeComponent = DefineComponent<Omit<HTMLAttributes, keyof BadgePublicProps> & BadgePublicProps>
 export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>
