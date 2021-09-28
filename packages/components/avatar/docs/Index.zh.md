@@ -24,4 +24,4 @@ order: 0
 | `src` | 图片类头像的资源地址 | `string` | - | - | - |
 | `srcset` | 设置图片类头像响应式资源地址 | `string` | - | - | - |
 | `text` | 设置自定义文本 | `string \| #default` | - | - | 优先级高于 `icon`，如果设置了 `src`, 则作为图片加载失败的 fallback 行为 |
-| `onError` | 图片加载失败的事件 | `(evt: Event) => unknown` | - | - | 返回 false 会关闭组件默认的 fallback 行为 |
+| `onError` | 图片加载失败的事件 | `(evt: Event) => boolean \| void` | - | - | 返回 false 会关闭组件默认的 fallback 行为 |

@@ -11,5 +11,5 @@ export const backTopProps = {
 
 export type BackTopProps = IxInnerPropTypes<typeof backTopProps>
 export type BackTopPublicProps = IxPublicPropTypes<typeof backTopProps>
-export type BackTopComponent = DefineComponent<HTMLAttributes & typeof backTopProps>
+export type BackTopComponent = DefineComponent<Omit<HTMLAttributes, keyof BackTopPublicProps> & BackTopPublicProps>
 export type BackTopInstance = InstanceType<DefineComponent<BackTopProps>>

@@ -23,5 +23,5 @@ export const dropdownProps = {
 
 export type DropdownProps = IxInnerPropTypes<typeof dropdownProps>
 export type DropdownPublicProps = IxPublicPropTypes<typeof dropdownProps>
-export type DropdownComponent = DefineComponent<HTMLAttributes & typeof dropdownProps>
+export type DropdownComponent = DefineComponent<Omit<HTMLAttributes, keyof DropdownPublicProps> & DropdownPublicProps>
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>

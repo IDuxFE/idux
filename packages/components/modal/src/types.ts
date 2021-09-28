@@ -62,7 +62,10 @@ export interface ModalBindings {
   ok: (evt?: Event | unknown) => Promise<void>
 }
 export type ModalPublicProps = IxPublicPropTypes<typeof modalProps>
-export type ModalComponent = DefineComponent<HTMLAttributes & typeof modalProps, ModalBindings>
+export type ModalComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ModalPublicProps> & ModalPublicProps,
+  ModalBindings
+>
 export type ModalInstance = InstanceType<DefineComponent<ModalProps, ModalBindings>>
 
 export interface ModalProviderRef {

@@ -14,5 +14,5 @@ export const tagProps = {
 
 export type TagProps = IxInnerPropTypes<typeof tagProps>
 export type TagPublicProps = IxPublicPropTypes<typeof tagProps>
-export type TagComponent = DefineComponent<HTMLAttributes & typeof tagProps>
+export type TagComponent = DefineComponent<Omit<HTMLAttributes, keyof TagPublicProps> & TagPublicProps>
 export type TagInstance = InstanceType<DefineComponent<TagProps>>

@@ -16,5 +16,5 @@ export const spinProps = {
 
 export type SpinProps = IxInnerPropTypes<typeof spinProps>
 export type SpinPublicProps = IxPublicPropTypes<typeof spinProps>
-export type SpinComponent = DefineComponent<HTMLAttributes & typeof spinProps>
+export type SpinComponent = DefineComponent<Omit<HTMLAttributes, keyof SpinPublicProps> & SpinPublicProps>
 export type SpinInstance = InstanceType<DefineComponent<SpinProps>>

@@ -14,7 +14,7 @@ export const timelineProps = {
 
 export type TimelineProps = IxInnerPropTypes<typeof timelineProps>
 export type TimelinePublicProps = IxPublicPropTypes<typeof timelineProps>
-export type TimelineComponent = DefineComponent<HTMLAttributes & typeof timelineProps>
+export type TimelineComponent = DefineComponent<Omit<HTMLAttributes, keyof TimelinePublicProps> & TimelinePublicProps>
 export type TimelineInstance = InstanceType<DefineComponent<TimelineProps>>
 
 export type TimelineItemPosition = 'left' | 'right'
@@ -27,5 +27,7 @@ export const timelineItemProps = {
 
 export type TimelineItemProps = IxInnerPropTypes<typeof timelineItemProps>
 export type TimelineItemPublicProps = IxPublicPropTypes<typeof timelineItemProps>
-export type TimelineItemComponent = DefineComponent<HTMLAttributes & typeof timelineItemProps>
+export type TimelineItemComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof TimelineItemPublicProps> & TimelineItemPublicProps
+>
 export type TimelineItemInstance = InstanceType<DefineComponent<TimelineItemProps>>

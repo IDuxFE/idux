@@ -23,7 +23,7 @@ export const rowProps = {
 
 export type RowProps = IxInnerPropTypes<typeof rowProps>
 export type RowPublicProps = IxPublicPropTypes<typeof rowProps>
-export type RowComponent = DefineComponent<HTMLAttributes & typeof rowProps>
+export type RowComponent = DefineComponent<Omit<HTMLAttributes, keyof RowPublicProps> & RowPublicProps>
 export type RowInstance = InstanceType<DefineComponent<RowProps>>
 
 export interface ColBreakpointConfig {
@@ -64,5 +64,5 @@ export const colProps = {
 
 export type ColProps = IxInnerPropTypes<typeof colProps>
 export type ColPublicProps = IxPublicPropTypes<typeof colProps>
-export type ColComponent = DefineComponent<HTMLAttributes & typeof colProps>
+export type ColComponent = DefineComponent<Omit<HTMLAttributes, keyof ColPublicProps> & ColPublicProps>
 export type ColInstance = InstanceType<DefineComponent<ColProps>>

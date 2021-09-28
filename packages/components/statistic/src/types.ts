@@ -15,5 +15,7 @@ export const statisticProps = {
 
 export type StatisticProps = IxInnerPropTypes<typeof statisticProps>
 export type StatisticPublicProps = IxPublicPropTypes<typeof statisticProps>
-export type StatisticComponent = DefineComponent<HTMLAttributes & typeof statisticProps>
+export type StatisticComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof StatisticPublicProps> & StatisticPublicProps
+>
 export type StatisticInstance = InstanceType<DefineComponent<StatisticProps>>

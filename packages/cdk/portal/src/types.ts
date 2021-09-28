@@ -13,5 +13,5 @@ export const portalProps = {
 
 export type PortalProps = IxInnerPropTypes<typeof portalProps>
 export type PortalPublicProps = IxPublicPropTypes<typeof portalProps>
-export type PortalComponent = DefineComponent<typeof portalProps>
+export type PortalComponent = DefineComponent<PortalPublicProps>
 export type PortalInstance = InstanceType<DefineComponent<PortalProps>>

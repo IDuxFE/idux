@@ -19,5 +19,5 @@ export const spaceProps = {
 
 export type SpaceProps = IxInnerPropTypes<typeof spaceProps>
 export type SpacePublicProps = IxPublicPropTypes<typeof spaceProps>
-export type SpaceComponent = DefineComponent<HTMLAttributes & typeof spaceProps>
+export type SpaceComponent = DefineComponent<Omit<HTMLAttributes, keyof SpacePublicProps> & SpacePublicProps>
 export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

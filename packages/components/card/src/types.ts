@@ -33,7 +33,7 @@ export const cardProps = {
 
 export type CardProps = IxInnerPropTypes<typeof cardProps>
 export type CardPublicProps = IxPublicPropTypes<typeof cardProps>
-export type CardComponent = DefineComponent<HTMLAttributes & typeof cardProps>
+export type CardComponent = DefineComponent<Omit<HTMLAttributes, keyof CardPublicProps> & CardPublicProps>
 export type CardInstance = InstanceType<DefineComponent<CardProps>>
 
 export const cardGridProps = {
@@ -42,5 +42,5 @@ export const cardGridProps = {
 
 export type CardGridProps = IxInnerPropTypes<typeof cardGridProps>
 export type CardGridPublicProps = IxPublicPropTypes<typeof cardGridProps>
-export type CardGridComponent = DefineComponent<HTMLAttributes & typeof cardGridProps>
+export type CardGridComponent = DefineComponent<Omit<HTMLAttributes, keyof CardGridPublicProps> & CardGridPublicProps>
 export type CardGridInstance = InstanceType<DefineComponent<CardGridProps>>

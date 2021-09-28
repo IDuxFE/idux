@@ -25,10 +25,10 @@ export const avatarProps = {
   text: IxPropTypes.string,
 
   // events
-  onError: IxPropTypes.emit<(evt: Event) => unknown>(),
+  onError: IxPropTypes.emit<(evt: Event) => boolean | void>(),
 }
 
 export type AvatarProps = IxInnerPropTypes<typeof avatarProps>
 export type AvatarPublicProps = IxPublicPropTypes<typeof avatarProps>
-export type AvatarComponent = DefineComponent<HTMLAttributes & typeof avatarProps>
+export type AvatarComponent = DefineComponent<Omit<HTMLAttributes, keyof AvatarPublicProps> & AvatarPublicProps>
 export type AvatarInstance = InstanceType<DefineComponent<AvatarProps>>

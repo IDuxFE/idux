@@ -26,5 +26,8 @@ export interface SwitchBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
-export type SwitchComponent = DefineComponent<HTMLAttributes & typeof switchProps, SwitchBindings>
+export type SwitchComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof SwitchPublicProps> & SwitchPublicProps,
+  SwitchBindings
+>
 export type SwitchInstance = InstanceType<DefineComponent<SwitchProps, SwitchBindings>>

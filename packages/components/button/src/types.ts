@@ -23,7 +23,9 @@ export const buttonProps = {
 
 export type ButtonProps = IxInnerPropTypes<typeof buttonProps>
 export type ButtonPublicProps = IxPublicPropTypes<typeof buttonProps>
-export type ButtonComponent = DefineComponent<(ButtonHTMLAttributes | AnchorHTMLAttributes) & typeof buttonProps>
+export type ButtonComponent = DefineComponent<
+  Omit<ButtonHTMLAttributes | AnchorHTMLAttributes, keyof ButtonPublicProps> & ButtonPublicProps
+>
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
@@ -34,5 +36,7 @@ export const buttonGroupProps = {
 
 export type ButtonGroupProps = IxInnerPropTypes<typeof buttonGroupProps>
 export type ButtonGroupPublicProps = IxPublicPropTypes<typeof buttonGroupProps>
-export type ButtonGroupComponent = DefineComponent<HTMLAttributes & typeof buttonGroupProps>
+export type ButtonGroupComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ButtonGroupPublicProps> & ButtonGroupPublicProps
+>
 export type ButtonGroupInstance = InstanceType<DefineComponent<ButtonGroupProps>>

@@ -33,5 +33,8 @@ export interface DrawerBindings {
 
 export type DrawerProps = IxInnerPropTypes<typeof drawerProps>
 export type DrawerPublicProps = IxPublicPropTypes<typeof drawerProps>
-export type DrawerComponent = DefineComponent<HTMLAttributes & typeof drawerProps, DrawerBindings>
+export type DrawerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof DrawerPublicProps> & DrawerPublicProps,
+  DrawerBindings
+>
 export type DrawerInstance = InstanceType<DefineComponent<DrawerProps, DrawerBindings>>

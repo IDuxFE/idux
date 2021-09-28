@@ -29,7 +29,7 @@ export const messageProps = {
 
 export type MessageProps = IxInnerPropTypes<typeof messageProps>
 export type MessagePublicProps = IxPublicPropTypes<typeof messageProps>
-export type MessageComponent = DefineComponent<HTMLAttributes & typeof messageProps>
+export type MessageComponent = DefineComponent<Omit<HTMLAttributes, keyof MessagePublicProps> & MessagePublicProps>
 export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 
 export const messageProviderProps = {
@@ -50,5 +50,5 @@ export interface MessageProviderRef {
 
 export type MessageProviderProps = IxInnerPropTypes<typeof messageProviderProps>
 export type MessageProviderPublicProps = IxPublicPropTypes<typeof messageProviderProps>
-export type MessageProviderComponent = DefineComponent<typeof messageProviderProps, MessageProviderRef>
+export type MessageProviderComponent = DefineComponent<MessageProviderPublicProps, MessageProviderRef>
 export type MessageProviderInstance = InstanceType<DefineComponent<MessageProviderProps, MessageProviderRef>>

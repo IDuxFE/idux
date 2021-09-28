@@ -14,5 +14,5 @@ export const affixProps = {
 
 export type AffixProps = IxInnerPropTypes<typeof affixProps>
 export type AffixPublicProps = IxPublicPropTypes<typeof affixProps>
-export type AffixComponent = DefineComponent<HTMLAttributes & typeof affixProps>
+export type AffixComponent = DefineComponent<Omit<HTMLAttributes, keyof AffixPublicProps> & AffixPublicProps>
 export type AffixInstance = InstanceType<DefineComponent<AffixProps>>

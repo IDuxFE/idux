@@ -21,7 +21,7 @@ export const stepperProps = {
 
 export type StepperProps = IxInnerPropTypes<typeof stepperProps>
 export type StepperPublicProps = IxPublicPropTypes<typeof stepperProps>
-export type StepperComponent = DefineComponent<HTMLAttributes & typeof stepperProps>
+export type StepperComponent = DefineComponent<Omit<HTMLAttributes, keyof StepperPublicProps> & StepperPublicProps>
 export type StepperInstance = InstanceType<DefineComponent<StepperProps>>
 
 export const stepperItemProps = {
@@ -36,5 +36,7 @@ export const stepperItemProps = {
 
 export type StepperItemProps = IxInnerPropTypes<typeof stepperItemProps>
 export type StepperItemPublicProps = IxPublicPropTypes<typeof stepperItemProps>
-export type StepperItemComponent = DefineComponent<HTMLAttributes & typeof stepperItemProps>
+export type StepperItemComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof StepperItemPublicProps> & StepperItemPublicProps
+>
 export type StepperItemInstance = InstanceType<DefineComponent<StepperItemProps>>

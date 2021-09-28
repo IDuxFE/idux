@@ -49,7 +49,10 @@ export interface SelectBindings {
   focus: (options?: FocusOptions) => void
 }
 
-export type SelectComponent = DefineComponent<HTMLAttributes & typeof selectProps, SelectBindings>
+export type SelectComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof SelectPublicProps> & SelectPublicProps,
+  SelectBindings
+>
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
 export const selectOptionProps = {
@@ -60,7 +63,9 @@ export const selectOptionProps = {
 
 export type SelectOptionProps = IxInnerPropTypes<typeof selectOptionProps>
 export type SelectOptionPublicProps = IxPublicPropTypes<typeof selectOptionProps>
-export type SelectOptionComponent = DefineComponent<HTMLAttributes & typeof selectOptionProps>
+export type SelectOptionComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
+>
 export type SelectOptionInstance = InstanceType<DefineComponent<SelectOptionProps>>
 
 export const selectOptionGroupProps = {
@@ -70,5 +75,7 @@ export const selectOptionGroupProps = {
 
 export type SelectOptionGroupProps = IxInnerPropTypes<typeof selectOptionGroupProps>
 export type SelectOptionGroupPublicProps = IxPublicPropTypes<typeof selectOptionGroupProps>
-export type SelectOptionGroupComponent = DefineComponent<HTMLAttributes & typeof selectOptionGroupProps>
+export type SelectOptionGroupComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof SelectOptionGroupPublicProps> & SelectOptionGroupPublicProps
+>
 export type SelectOptionGroupInstance = InstanceType<DefineComponent<SelectOptionGroupProps>>

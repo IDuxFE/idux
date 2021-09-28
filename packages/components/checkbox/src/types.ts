@@ -31,7 +31,10 @@ export interface CheckboxBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
 }
-export type CheckboxComponent = DefineComponent<LabelHTMLAttributes & typeof checkboxProps, CheckboxBindings>
+export type CheckboxComponent = DefineComponent<
+  Omit<LabelHTMLAttributes, keyof CheckboxPublicProps> & CheckboxPublicProps,
+  CheckboxBindings
+>
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
@@ -48,5 +51,7 @@ export const checkboxGroupProps = {
 
 export type CheckboxGroupProps = IxInnerPropTypes<typeof checkboxGroupProps>
 export type CheckboxGroupPublicProps = IxPublicPropTypes<typeof checkboxGroupProps>
-export type CheckboxGroupComponent = DefineComponent<HTMLAttributes & typeof checkboxGroupProps>
+export type CheckboxGroupComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
+>
 export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>

@@ -12,5 +12,5 @@ export const maskProps = {
 
 export type MaskProps = IxInnerPropTypes<typeof maskProps>
 export type MaskPublicProps = IxPublicPropTypes<typeof maskProps>
-export type MaskComponent = DefineComponent<HTMLAttributes & typeof maskProps>
+export type MaskComponent = DefineComponent<Omit<HTMLAttributes, keyof MaskPublicProps> & MaskPublicProps>
 export type MaskInstance = InstanceType<DefineComponent<MaskProps>>

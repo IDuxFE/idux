@@ -38,7 +38,9 @@ export const paginationProps = {
 
 export type PaginationProps = IxInnerPropTypes<typeof paginationProps>
 export type PaginationPublicProps = IxPublicPropTypes<typeof paginationProps>
-export type PaginationComponent = DefineComponent<HTMLAttributes & typeof paginationProps>
+export type PaginationComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof PaginationPublicProps> & PaginationPublicProps
+>
 export type PaginationInstance = InstanceType<DefineComponent<PaginationProps>>
 
 export const paginationItemProps = {

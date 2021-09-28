@@ -45,5 +45,8 @@ export interface InputBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
-export type InputComponent = DefineComponent<InputHTMLAttributes & typeof inputProps, InputBindings>
+export type InputComponent = DefineComponent<
+  Omit<InputHTMLAttributes, keyof InputPublicProps> & InputPublicProps,
+  InputBindings
+>
 export type InputInstance = InstanceType<DefineComponent<InputProps, InputBindings>>

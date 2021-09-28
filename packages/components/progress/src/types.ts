@@ -43,7 +43,7 @@ export const progressProps = {
 
 export type ProgressProps = IxInnerPropTypes<typeof progressProps>
 export type ProgressPublicProps = IxPublicPropTypes<typeof progressProps>
-export type ProgressComponent = DefineComponent<HTMLAttributes & typeof progressProps>
+export type ProgressComponent = DefineComponent<Omit<HTMLAttributes, keyof ProgressPublicProps> & ProgressPublicProps>
 export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>
 
 export const convertProgressProps = {

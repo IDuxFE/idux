@@ -19,7 +19,10 @@ export type VirtualScrollPublicProps = IxPublicPropTypes<typeof virtualListProps
 export interface VirtualScrollBindings {
   scrollTo: VirtualScrollToFn
 }
-export type VirtualScrollComponent = DefineComponent<HTMLAttributes & typeof virtualListProps, VirtualScrollBindings>
+export type VirtualScrollComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof VirtualScrollPublicProps> & VirtualScrollPublicProps,
+  VirtualScrollBindings
+>
 export type VirtualScrollInstance = InstanceType<DefineComponent<VirtualScrollProps, VirtualScrollBindings>>
 
 export type VirtualScrollToAlign = 'top' | 'bottom' | 'auto'

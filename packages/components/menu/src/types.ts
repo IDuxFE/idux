@@ -26,7 +26,7 @@ export const menuProps = {
 
 export type MenuProps = IxInnerPropTypes<typeof menuProps>
 export type MenuPublicProps = IxPublicPropTypes<typeof menuProps>
-export type MenuComponent = DefineComponent<HTMLAttributes & typeof menuProps>
+export type MenuComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuPublicProps> & MenuPublicProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export const menuItemProps = {
@@ -37,7 +37,7 @@ export const menuItemProps = {
 
 export type MenuItemProps = IxInnerPropTypes<typeof menuItemProps>
 export type MenuItemPublicProps = IxPublicPropTypes<typeof menuItemProps>
-export type MenuItemComponent = DefineComponent<HTMLAttributes & typeof menuItemProps>
+export type MenuItemComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuItemPublicProps> & MenuItemPublicProps>
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export const menuItemGroupProps = {
@@ -47,14 +47,18 @@ export const menuItemGroupProps = {
 
 export type MenuItemGroupProps = IxInnerPropTypes<typeof menuItemGroupProps>
 export type MenuItemGroupPublicProps = IxPublicPropTypes<typeof menuItemGroupProps>
-export type MenuItemGroupComponent = DefineComponent<HTMLAttributes & typeof menuItemGroupProps>
+export type MenuItemGroupComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof MenuItemGroupPublicProps> & MenuItemGroupPublicProps
+>
 export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
 
 export const menuDividerProps = {}
 
 export type MenuDividerProps = IxInnerPropTypes<typeof menuDividerProps>
 export type MenuDividerPublicProps = IxPublicPropTypes<typeof menuDividerProps>
-export type MenuDividerComponent = DefineComponent<HTMLAttributes & typeof menuDividerProps>
+export type MenuDividerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof MenuDividerPublicProps> & MenuDividerPublicProps
+>
 export type MenuDividerInstance = InstanceType<DefineComponent<MenuDividerProps>>
 
 export const menuSubProps = {
@@ -69,5 +73,5 @@ export const menuSubProps = {
 
 export type MenuSubProps = IxInnerPropTypes<typeof menuSubProps>
 export type MenuSubPublicProps = IxPublicPropTypes<typeof menuSubProps>
-export type MenuSubComponent = DefineComponent<HTMLAttributes & typeof menuSubProps>
+export type MenuSubComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
 export type MenuSubInstance = InstanceType<DefineComponent<MenuSubProps>>

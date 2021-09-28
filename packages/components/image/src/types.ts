@@ -17,7 +17,7 @@ export const imageProps = {
 
 export type ImageProps = IxInnerPropTypes<typeof imageProps>
 export type ImagePublicProps = IxPublicPropTypes<typeof imageProps>
-export type ImageComponent = DefineComponent<HTMLAttributes & typeof imageProps>
+export type ImageComponent = DefineComponent<Omit<HTMLAttributes, keyof ImagePublicProps> & ImagePublicProps>
 export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
 export const imagePreviewProps = {
@@ -26,5 +26,7 @@ export const imagePreviewProps = {
 
 export type ImagePreviewProps = IxInnerPropTypes<typeof imagePreviewProps>
 export type ImagePreviewPublicProps = IxPublicPropTypes<typeof imagePreviewProps>
-export type ImagePreviewComponent = DefineComponent<HTMLAttributes & typeof imagePreviewProps>
+export type ImagePreviewComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ImagePreviewPublicProps> & ImagePreviewPublicProps
+>
 export type ImagePreviewInstance = InstanceType<DefineComponent<ImagePreviewProps>>

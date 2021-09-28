@@ -19,7 +19,10 @@ export interface TextareaBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
-export type TextareaComponent = DefineComponent<TextareaHTMLAttributes & typeof textareaProps, TextareaBindings>
+export type TextareaComponent = DefineComponent<
+  Omit<TextareaHTMLAttributes, keyof TextareaPublicProps> & TextareaPublicProps,
+  TextareaBindings
+>
 export type TextareaInstance = InstanceType<DefineComponent<TextareaProps, TextareaBindings>>
 
 export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'

@@ -29,7 +29,7 @@ export const listProps = {
 
 export type ListProps = IxInnerPropTypes<typeof listProps>
 export type ListPublicProps = IxPublicPropTypes<typeof listProps>
-export type ListComponent = DefineComponent<HTMLAttributes & typeof listProps>
+export type ListComponent = DefineComponent<Omit<HTMLAttributes, keyof ListPublicProps> & ListPublicProps>
 export type ListInstance = InstanceType<DefineComponent<ListProps>>
 
 export const listItemProps = {
@@ -40,7 +40,7 @@ export const listItemProps = {
 
 export type ListItemProps = IxInnerPropTypes<typeof listItemProps>
 export type ListItemPublicProps = IxPublicPropTypes<typeof listItemProps>
-export type ListItemComponent = DefineComponent<HTMLAttributes & typeof listItemProps>
+export type ListItemComponent = DefineComponent<Omit<HTMLAttributes, keyof ListItemPublicProps> & ListItemPublicProps>
 export type ListItemInstance = InstanceType<DefineComponent<ListItemProps>>
 
 export const listWrapProps = {

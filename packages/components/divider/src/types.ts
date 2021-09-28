@@ -15,5 +15,5 @@ export const dividerProps = {
 
 export type DividerProps = IxInnerPropTypes<typeof dividerProps>
 export type DividerPublicProps = IxPublicPropTypes<typeof dividerProps>
-export type DividerComponent = DefineComponent<HTMLAttributes & typeof dividerProps>
+export type DividerComponent = DefineComponent<Omit<HTMLAttributes, keyof DividerPublicProps> & DividerPublicProps>
 export type DividerInstance = InstanceType<DefineComponent<DividerProps>>
