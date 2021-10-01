@@ -1,11 +1,22 @@
 <template>
+  <IxRadioGroup v-model:value="placement">
+    <IxRadio value="start">start</IxRadio>
+    <IxRadio value="end">end</IxRadio>
+  </IxRadioGroup>
+  <IxDivider />
   <IxLayout>
     <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider placement="end">sider</IxLayoutSider>
+    <IxLayoutSider :placement="placement">sider</IxLayoutSider>
     <IxLayoutContent>content</IxLayoutContent>
     <IxLayoutFooter>footer</IxLayoutFooter>
   </IxLayout>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const placement = ref('start')
+</script>
 
 <style lang="less" scoped>
 .ix-layout {

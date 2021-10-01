@@ -3,7 +3,7 @@
     <IxLayoutHeader>header</IxLayoutHeader>
     <IxLayoutSider v-model:collapsed="collapsed" :show-trigger="true">
       <template #trigger>
-        <div class="trigger" @click="onClick">trigger</div>
+        <IxButton class="trigger" :icon="iconName" shape="circle" @click="onClick"></IxButton>
       </template>
     </IxLayoutSider>
     <IxLayoutContent> collapsed: {{ collapsed }} </IxLayoutContent>
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 
 export default defineComponent({
   setup() {
@@ -20,7 +20,11 @@ export default defineComponent({
     const onClick = () => {
       collapsed.value = !collapsed.value
     }
+    const iconName = computed(() => {
+      return collapsed.value ? 'right' : 'left'
+    })
     return {
+      iconName,
       collapsed,
       onClick,
     }
@@ -44,7 +48,7 @@ export default defineComponent({
   .trigger {
     position: absolute;
     top: 50%;
-    right: -50px;
+    right: -15px;
   }
 }
 </style>

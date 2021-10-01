@@ -1,6 +1,6 @@
 ---
 title:
-  zh: Breakpoint
+  zh: 响应式
   en: Breakpoint
 order: 4
 ---
