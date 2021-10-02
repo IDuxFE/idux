@@ -9,6 +9,7 @@
     "build": "gulp build --gulpfile ./scripts/gulp/gulpfile.ts",
     "icons": "gulp icons --gulpfile ./scripts/gulp/gulpfile.ts",
     "gen": "ts-node scripts/gen/generate.ts",
+    "prepare": "husky install",
     "postinstall": "lerna bootstrap",
     "version": "lerna version --conventional-commits",
     "test": "jest",
@@ -21,12 +22,6 @@
     "markdownlint": "markdownlint \"./packages/{cdk,components,pro}/**/*.md\"",
     "markdownlint-fix": "markdownlint --fix \"./packages/{cdk,components,pro}/**/*.md\"",
     "ls-lint": "ls-lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "ls-lint && lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,json}": [
@@ -97,7 +92,7 @@
     "figlet": "^1.5.2",
     "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
-    "husky": "^4.3.0",
+    "husky": "^7.0.2",
     "inquirer": "^8.1.2",
     "jest": "^27.0.6",
     "jest-junit": "^12.2.0",
