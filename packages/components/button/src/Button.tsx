@@ -46,20 +46,21 @@ const useClasses = (
   mode: ComputedRef<ButtonMode>,
   hasDefaultSlot: Ref<boolean>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const size = props.size ?? (groupProps.size || config.size)
     const shape = props.shape ?? groupProps.shape
     return {
-      'ix-button': true,
-      'ix-button-danger': props.danger,
-      'ix-button-ghost': props.ghost,
-      'ix-button-disabled': props.disabled || props.loading,
-      'ix-button-loading': props.loading,
-      'ix-button-block': props.block,
-      'ix-button-icon-only': !hasDefaultSlot.value && (!!props.icon || props.loading),
-      [`ix-button-${mode.value}`]: mode.value !== 'default',
-      [`ix-button-${size}`]: size !== 'medium',
-      [`ix-button-${shape}`]: !!shape,
+      [`${prefixCls}-button`]: true,
+      [`${prefixCls}-button-danger`]: props.danger,
+      [`${prefixCls}-button-ghost`]: props.ghost,
+      [`${prefixCls}-button-disabled`]: props.disabled || props.loading,
+      [`${prefixCls}-button-loading`]: props.loading,
+      [`${prefixCls}-button-block`]: props.block,
+      [`${prefixCls}-button-icon-only`]: !hasDefaultSlot.value && (!!props.icon || props.loading),
+      [`${prefixCls}-button-${mode.value}`]: mode.value !== 'default',
+      [`${prefixCls}-button-${size}`]: size !== 'medium',
+      [`${prefixCls}-button-${shape}`]: !!shape,
     }
   })
 }

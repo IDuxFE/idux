@@ -1,12 +1,12 @@
 <template>
   <list-item-wrap :grid="gird">
-    <div class="ix-list-item-title">
+    <div :class="`${prefixCls}-list-item-title`">
       <slot name="title">{{ title }}</slot>
     </div>
-    <div class="ix-list-item-content">
+    <div :class="`${prefixCls}-list-item-content`">
       <slot>{{ content }}</slot>
     </div>
-    <div class="ix-list-item-extra">
+    <div :class="`${prefixCls}-list-item-extra`">
       <slot name="extra">{{ extra }}</slot>
     </div>
   </list-item-wrap>
@@ -15,6 +15,7 @@
 import type { ListGridProps } from './types'
 
 import { defineComponent, inject } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import ListItemWrap from './ListItemWrap.vue'
 import { listToken } from './token'
 import { listItemProps } from './types'
@@ -24,9 +25,10 @@ export default defineComponent({
   components: { ListItemWrap },
   props: listItemProps,
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const listGrid = inject(listToken, null)
     const gird = listGrid?.value && useGrid(listGrid?.value)
-    return { gird }
+    return { prefixCls, gird }
   },
 })
 

@@ -1,4 +1,5 @@
 import { computed, defineComponent, provide, ref } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { useGetKey } from './composables/useGetKey'
 import { useItemHeights } from './composables/useItemHeights'
 import { useScroll } from './composables/useScroll'
@@ -13,6 +14,8 @@ export default defineComponent({
   name: 'IxVirtualScroll',
   props: virtualListProps,
   setup(props, { expose, slots }) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const useVirtual = computed(() => props.height > 0 && props.itemHeight > 0)
     const getKey = useGetKey(props)
     const { heights, collectHeights, setItemElement } = useItemHeights(getKey)
@@ -52,7 +55,7 @@ export default defineComponent({
       })
 
       return (
-        <div class="ix-virtual-scroll" style={{ position: 'relative' }}>
+        <div class={`${prefixCls}-virtual-scroll`} style={{ position: 'relative' }}>
           <VirtualHolder>{children}</VirtualHolder>
           {useVirtual.value && <VirtualScrollBar />}
         </div>

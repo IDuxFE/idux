@@ -5,6 +5,7 @@ import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, wat
 import { isNil, throttle } from 'lodash-es'
 import { isFirefox } from '@idux/cdk/platform'
 import { callEmit, cancelRAF, off, offResize, on, onResize, rAF } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { virtualScrollToken } from './token'
 
 export default defineComponent({
@@ -21,6 +22,7 @@ export default defineComponent({
       syncScrollTop,
       originScroll,
     } = inject(virtualScrollToken)!
+    const { prefixCls } = useGlobalConfig('common')
 
     const style = computed<StyleValue | undefined>(() => {
       const { height, fullHeight } = props
@@ -81,9 +83,9 @@ export default defineComponent({
     return () => {
       const children = props.contentRender ? props.contentRender(slots.default!()) : slots.default!()
       return (
-        <div ref={holderRef} class="ix-virtual-scroll-holder" style={style.value} onScroll={onScroll}>
-          <div ref={fillerRef} class="ix-virtual-scroll-filler" style={fillerStyle.value}>
-            <div ref={contentRef} class="ix-virtual-scroll-content" style={contentStyle.value}>
+        <div ref={holderRef} class={`${prefixCls}-virtual-scroll-holder`} style={style.value} onScroll={onScroll}>
+          <div ref={fillerRef} class={`${prefixCls}-virtual-scroll-filler`} style={fillerStyle.value}>
+            <div ref={contentRef} class={`${prefixCls}-virtual-scroll-content`} style={contentStyle.value}>
               {children}
             </div>
           </div>

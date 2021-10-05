@@ -21,9 +21,10 @@ export default defineComponent({
   props: messageProps,
   setup(props, { slots }) {
     const config = useGlobalConfig('message')
+    const { prefixCls } = useGlobalConfig('common')
 
     const classes = computed(() => {
-      const clsPrefix = 'ix-message'
+      const clsPrefix = [`${prefixCls}-message`]
       return [clsPrefix, `${clsPrefix}-${props.type}`]
     })
 
@@ -38,9 +39,9 @@ export default defineComponent({
       const iconNode = isString(icon.value) ? <IxIcon name={icon.value}></IxIcon> : icon.value
       return (
         <div v-show={visible.value} class={classes.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
-          <div class="ix-message-content">
+          <div class={`${prefixCls}-message-content`}>
             {iconNode}
-            <span class="ix-message-content-text">{slots.default?.()}</span>
+            <span class={`${prefixCls}-message-content-text`}>{slots.default?.()}</span>
           </div>
         </div>
       )

@@ -1,7 +1,7 @@
 <template>
-  <span class="ix-badge-wrapper">
+  <span :class="`${prefixCls}-badge-wrapper`">
     <slot />
-    <sup class="ix-badge" :class="classes" :style="styles">
+    <sup :class="classes" :style="styles">
       <slot v-if="hasCountSlot" name="count" />
       <template v-else-if="countValue">{{ countValue }}</template>
     </sup>
@@ -20,6 +20,7 @@ export default defineComponent({
   name: 'IxBadge',
   props: backTopProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const badgeConfig = useGlobalConfig('badge')
 
     const showZero = computed(() => props.showZero ?? badgeConfig.showZero)
@@ -34,6 +35,7 @@ export default defineComponent({
     const countValue = useCountValue(props, hasCountSlot, showZero, dot, overflowCount)
 
     return {
+      prefixCls,
       classes,
       styles,
       countValue,
@@ -85,13 +87,15 @@ const useClasses = (
   showZero: ComputedRef<boolean>,
   dot: ComputedRef<boolean>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-badge-empty': !hasDefaultSlot.value,
-      'ix-badge-slot-count': hasCountSlot.value,
-      'ix-badge-dot': !hasCountSlot.value && dot.value,
-      'ix-badge-count': !hasCountSlot.value && !dot.value,
-      'ix-badge-hide-zero': !hasCountSlot.value && !dot.value && !showZero.value && +props.count === 0,
+      [`${prefixCls}-badge`]: true,
+      [`${prefixCls}-badge-empty`]: !hasDefaultSlot.value,
+      [`${prefixCls}-badge-slot-count`]: hasCountSlot.value,
+      [`${prefixCls}-badge-dot`]: !hasCountSlot.value && dot.value,
+      [`${prefixCls}-badge-count`]: !hasCountSlot.value && !dot.value,
+      [`${prefixCls}-badge-hide-zero`]: !hasCountSlot.value && !dot.value && !showZero.value && +props.count === 0,
     }
   })
 }

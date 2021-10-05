@@ -45,12 +45,13 @@ export default defineComponent({
 })
 
 const useClasses = (props: SpaceProps, config: SpaceConfig) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-space': true,
-      'ix-space-wrap': props.wrap ?? config.wrap,
-      [`ix-space-${props.align}`]: true,
-      [`ix-space-${props.direction}`]: true,
+      [`${prefixCls}-space`]: true,
+      [`${prefixCls}-space-wrap`]: props.wrap ?? config.wrap,
+      [`${prefixCls}-space-${props.align}`]: true,
+      [`${prefixCls}-space-${props.direction}`]: true,
     }
   })
 }
@@ -63,13 +64,14 @@ interface SpaceItem {
 }
 
 const useChildren = (children: VNode[], size: SpaceSize | SpaceSize[], direction: SpaceDirection) => {
+  const { prefixCls } = useGlobalConfig('common')
   const lastIndex = children.length - 1
   const sizes = Array.isArray(size) ? size : Array(lastIndex).fill(size)
   if (__DEV__ && lastIndex !== sizes.length) {
     Logger.warn('components/space', 'The number of split elements is inconsistent with the length of the size array')
   }
   return children.map((child, index) => {
-    const currNode: SpaceItem = { node: child, itemClass: ['ix-space-item'] }
+    const currNode: SpaceItem = { node: child, itemClass: [`${prefixCls}-space-item`] }
     const currSize = sizes[index]
 
     if (!currSize) {
@@ -80,8 +82,8 @@ const useChildren = (children: VNode[], size: SpaceSize | SpaceSize[], direction
       const marginDirection = direction === 'vertical' ? 'marginBottom' : 'marginRight'
       currNode.style = { [marginDirection]: `${currSize}px` }
     } else {
-      currNode.itemClass.push(`ix-space-item-${currSize}`)
-      currNode.splitClass = `ix-space-split-${currSize}`
+      currNode.itemClass.push(`${prefixCls}-space-item-${currSize}`)
+      currNode.splitClass = `${prefixCls}-space-split-${currSize}`
     }
 
     return currNode

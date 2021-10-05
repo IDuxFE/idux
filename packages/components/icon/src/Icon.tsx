@@ -76,13 +76,14 @@ function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void
 }
 
 const useClasses = (props: IconProps) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const { name, rotate } = props
     const isSpin = name === 'loading' || (typeof rotate === 'boolean' && rotate)
     return {
-      'ix-icon': true,
-      [`ix-icon-${name}`]: !!name,
-      'ix-icon-spin': isSpin,
+      [`${prefixCls}-icon`]: true,
+      [`${prefixCls}-icon-${name}`]: !!name,
+      [`${prefixCls}-icon-spin`]: isSpin,
     }
   })
 }

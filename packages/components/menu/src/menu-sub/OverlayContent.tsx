@@ -1,18 +1,20 @@
 import { computed, defineComponent, inject } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 import { menuSubToken } from '../token'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const { props, slots, mode, theme, handleMouseEvent } = inject(menuSubToken)!
     const dropdownContext = inject(ɵDropdownToken, null)
 
     const classes = computed(() => {
       return {
-        'ix-menu-content': true,
-        'ix-menu-vertical': true,
-        [`ix-menu-${theme.value}`]: true,
-        'ix-menu-dropdown': !!dropdownContext,
+        [`${prefixCls}-menu-content`]: true,
+        [`${prefixCls}-menu-vertical`]: true,
+        [`${prefixCls}-menu-${theme.value}`]: true,
+        [`${prefixCls}-menu-dropdown`]: !!dropdownContext,
       }
     })
 

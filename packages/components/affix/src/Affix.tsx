@@ -3,6 +3,7 @@ import type { AffixStyle } from './utils'
 
 import { defineComponent, computed, watch, ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { throttleRAF } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { getTarget } from '@idux/components/utils'
 import { affixProps } from './types'
 import {
@@ -92,9 +93,11 @@ export default defineComponent({
     }
   },
   render() {
+    const { prefixCls } = useGlobalConfig('common')
+
     return (
-      <div ref="affixRef" style={this.wrapperStyle} class="ix-affix">
-        <div ref="contentRef" class="ix-affix-content" style={this.affixStyle}>
+      <div ref="affixRef" style={this.wrapperStyle} class={`${prefixCls}-affix`}>
+        <div ref="contentRef" class={`${prefixCls}-affix-content`} style={this.affixStyle}>
           {this.$slots.default?.()}
         </div>
       </div>

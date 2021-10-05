@@ -13,6 +13,7 @@ import type { FormItemProps, FormLabelAlign } from './types'
 
 import { computed, defineComponent, inject, provide, ref, watchEffect } from 'vue'
 import { isFunction, isNil, isNumber, isString } from 'lodash-es'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
 import { getLocale } from '@idux/components/i18n'
@@ -54,6 +55,7 @@ function renderLabel(
   classes: ComputedRef<Record<string, any>>,
   labelColConfig: ComputedRef<ColProps | undefined>,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   const { label, labelFor, labelTooltip } = props
   const { label: labelSlot, labelTooltip: labelTooltipSlot } = slots
   if (!(label || labelSlot || labelTooltip || labelTooltipSlot)) {
@@ -66,7 +68,9 @@ function renderLabel(
       <IxIcon name="question-circle" />
     </IxTooltip>
   ) : undefined
-  const tooltipWrapper = tooltipNode ? <span class="ix-form-item-label-tooltip">{tooltipNode}</span> : undefined
+  const tooltipWrapper = tooltipNode ? (
+    <span class={`${prefixCls}-form-item-label-tooltip`}>{tooltipNode}</span>
+  ) : undefined
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
       <label for={labelFor}>
@@ -85,21 +89,22 @@ function renderControl(
   statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   const { extra } = props
   const { extra: extraSlot } = slots
   const statusNode =
     hasFeedback.value && statusIcon.value ? (
-      <span class="ix-form-item-status-icon">
+      <span class={`${prefixCls}-form-item-status-icon`}>
         <IxIcon name={statusIcon.value} />
       </span>
     ) : undefined
-  const messageNode = message.value ? <div class="ix-form-item-message">{message.value}</div> : undefined
+  const messageNode = message.value ? <div class={`${prefixCls}-form-item-message`}>{message.value}</div> : undefined
   const extraNode = extraSlot?.() ?? extra
-  const extraWrapper = extraNode ? <div class="ix-form-item-extra">{extraNode}</div> : undefined
+  const extraWrapper = extraNode ? <div class={`${prefixCls}-form-item-extra`}>{extraNode}</div> : undefined
   return (
-    <IxCol class="ix-form-item-control" {...controlColConfig.value}>
-      <div class="ix-form-item-control-input">
-        <div class="ix-form-item-control-input-content">{slots.default?.()}</div>
+    <IxCol class={`${prefixCls}-form-item-control`} {...controlColConfig.value}>
+      <div class={`${prefixCls}-form-item-control-input`}>
+        <div class={`${prefixCls}-form-item-control-input-content`}>{slots.default?.()}</div>
         {statusNode}
       </div>
       {messageNode}
@@ -113,13 +118,14 @@ function useClasses(
   status: ComputedRef<ValidateStatus | undefined>,
   message: ComputedRef<string | undefined>,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const currStatus = status.value
     return {
-      'ix-form-item': true,
-      'ix-form-item-has-feedback': hasFeedback.value && currStatus,
-      'ix-form-item-has-message': message.value,
-      [`ix-form-item-${currStatus}`]: currStatus,
+      [`${prefixCls}-form-item`]: true,
+      [`${prefixCls}-form-item-has-feedback`]: hasFeedback.value && currStatus,
+      [`${prefixCls}-form-item-has-message`]: message.value,
+      [`${prefixCls}-form-item-${currStatus}`]: currStatus,
     }
   })
 }
@@ -129,13 +135,14 @@ function useLabelClasses(
   colonlessRef: ComputedRef<boolean> | undefined,
   labelAlignRef: ComputedRef<FormLabelAlign> | undefined,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const { colonless = colonlessRef?.value, labelAlign = labelAlignRef?.value, required } = props
     return {
-      'ix-form-item-label': true,
-      'ix-form-item-label-colonless': colonless,
-      'ix-form-item-label-required': required,
-      'ix-form-item-label-start': labelAlign === 'start',
+      [`${prefixCls}-form-item-label`]: true,
+      [`${prefixCls}-form-item-label-colonless`]: colonless,
+      [`${prefixCls}-form-item-label-required`]: required,
+      [`${prefixCls}-form-item-label-start`]: labelAlign === 'start',
     }
   })
 }

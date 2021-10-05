@@ -1,9 +1,9 @@
 <template>
   <div v-show="visible" :class="classes" @mouseenter="onMouseEnter" @click.stop="onClick">
-    <span v-if="showCheckbox" class="ix-option-checkbox">
+    <span v-if="showCheckbox" :class="`${prefixCls}-option-checkbox`">
       <IxCheckbox :checked="selected" :disabled="disabled" readonly />
     </span>
-    <span class="ix-option-label">
+    <span :class="`${prefixCls}-option-label`">
       <slot>{{ label }}</slot>
     </span>
   </div>
@@ -13,6 +13,7 @@ import type { SelectOptionProps, SelectFilterFn } from './types'
 
 import { computed, defineComponent, inject, nextTick, onUnmounted, watch } from 'vue'
 import { isFunction } from 'lodash-es'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { selectOptionProps } from './types'
 import { selectToken, visibleChangeToken } from './token'
@@ -26,6 +27,8 @@ export default defineComponent({
   components: { IxCheckbox },
   props: selectOptionProps,
   setup(props) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const {
       selectProps,
       inputValue,
@@ -55,10 +58,10 @@ export default defineComponent({
     const classes = computed(() => {
       const _disabled = props.disabled
       return {
-        'ix-option': true,
-        'ix-option-disabled': _disabled,
-        'ix-option-active': !_disabled && active.value,
-        'ix-option-selected': !_disabled && selected.value,
+        [`${prefixCls}-option`]: true,
+        [`${prefixCls}-option-disabled`]: _disabled,
+        [`${prefixCls}-option-active`]: !_disabled && active.value,
+        [`${prefixCls}-option-selected`]: !_disabled && selected.value,
       }
     })
 
@@ -84,7 +87,7 @@ export default defineComponent({
       }
     })
 
-    return { visible, classes, showCheckbox, selected, onMouseEnter, onClick }
+    return { prefixCls, visible, classes, showCheckbox, selected, onMouseEnter, onClick }
   },
 })
 </script>

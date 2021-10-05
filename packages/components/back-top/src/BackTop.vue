@@ -1,6 +1,6 @@
 <template>
-  <transition name="ix-fade">
-    <div v-show="visible" class="ix-back-top" @click.stop="handleClick">
+  <transition :name="`${prefixCls}-fade`">
+    <div v-show="visible" :class="`${prefixCls}-back-top`" @click.stop="handleClick">
       <slot>
         <IxIcon name="vertical-align-top" />
       </slot>
@@ -24,6 +24,7 @@ export default defineComponent({
   props: backTopProps,
   emits: ['click'],
   setup(props, { emit }) {
+    const { prefixCls } = useGlobalConfig('common')
     const backTopConfig = useGlobalConfig('backTop')
     const eventType = 'scroll'
     const visible = ref(false)
@@ -54,6 +55,7 @@ export default defineComponent({
     })
 
     return {
+      prefixCls,
       visible,
       handleClick,
     }

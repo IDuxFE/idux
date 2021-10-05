@@ -5,6 +5,7 @@ import type { HeaderProps } from './types'
 import { computed, defineComponent, h, isVNode } from 'vue'
 import { isString } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
@@ -20,6 +21,7 @@ export default defineComponent({
   name: 'IxHeader',
   props: headerProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const classes = useClasses(props)
 
     const avatarSize = computed(() => avatarSizeTransformMap[props.size])
@@ -31,14 +33,14 @@ export default defineComponent({
       const { prefix, suffix, avatar, title, subTitle } = props
       return (
         <div class={classes.value}>
-          <div class="ix-header-content">
-            {renderIcon(slots.prefix, prefix, onPrefixClick, 'ix-header-prefix')}
+          <div class={`${prefixCls}-header-content`}>
+            {renderIcon(slots.prefix, prefix, onPrefixClick, `${prefixCls}-header-prefix`)}
             {renderAvatar(slots.avatar, avatar, avatarSize)}
-            {renderTitle(slots.default, title, 'ix-header-title')}
-            {renderTitle(slots.subTitle, subTitle, 'ix-header-sub-title')}
-            {renderIcon(slots.suffix, suffix, onSuffixClick, 'ix-header-suffix')}
+            {renderTitle(slots.default, title, `${prefixCls}-header-title`)}
+            {renderTitle(slots.subTitle, subTitle, `${prefixCls}-header-sub-title`)}
+            {renderIcon(slots.suffix, suffix, onSuffixClick, `${prefixCls}-header-suffix`)}
           </div>
-          {slots.description ? <div class="ix-header-description">{slots.description()}</div> : null}
+          {slots.description ? <div class={`${prefixCls}-header-description`}>{slots.description()}</div> : null}
         </div>
       )
     }
@@ -46,12 +48,13 @@ export default defineComponent({
 })
 
 const useClasses = (props: HeaderProps) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-header': true,
-      'ix-header-bar': props.showBar,
-      'ix-header-disabled': props.disabled,
-      [`ix-header-${props.size}`]: true,
+      [`${prefixCls}-header`]: true,
+      [`${prefixCls}-header-bar`]: props.showBar,
+      [`${prefixCls}-header-disabled`]: props.disabled,
+      [`${prefixCls}-header-${props.size}`]: true,
     }
   })
 }

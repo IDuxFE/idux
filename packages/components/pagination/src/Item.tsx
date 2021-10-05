@@ -2,6 +2,7 @@ import type { VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isNil } from 'lodash-es'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxButton } from '@idux/components/button'
 import { paginationItemProps } from './types'
 import { paginationToken } from './token'
@@ -24,6 +25,8 @@ const indexDiffMap = {
 export default defineComponent({
   props: paginationItemProps,
   setup(props) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const { props: paginationProps, slots, config, locale, activeIndex, onPageIndexChange } = inject(paginationToken)!
 
     const isActive = computed(() => activeIndex.value === props.index)
@@ -33,8 +36,8 @@ export default defineComponent({
 
     const classes = computed(() => {
       return {
-        'ix-pagination-item': true,
-        'ix-pagination-item-active': isActive.value,
+        [`${prefixCls}-pagination-item`]: true,
+        [`${prefixCls}-pagination-item-active`]: isActive.value,
       }
     })
 
@@ -75,9 +78,13 @@ export default defineComponent({
       const commonButtonProps = { mode: 'text', size: 'small', shape: 'circle' } as const
       if (props.type === 'prev5' || type === 'next5') {
         original = (
-          <span class="ix-pagination-item-jumper">
+          <span class={`${prefixCls}-pagination-item-jumper`}>
             <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-            <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
+            <IxButton
+              {...commonButtonProps}
+              class={`${prefixCls}-pagination-item-ellipsis" icon="ellipsis`}
+              disabled={disabled}
+            />
           </span>
         )
       } else if (!isNil(index)) {

@@ -5,6 +5,7 @@ import type { TableColumnTitleFn } from '../../types'
 import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
 import { convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { TABLE_TOKEN } from '../../token'
 import { tableHeadCellProps } from '../../types'
 import { getColTitle } from '../../utils'
@@ -19,6 +20,7 @@ type HeadColumn = TableColumnMergedExtra & {
 export default defineComponent({
   props: tableHeadCellProps,
   setup(props) {
+    const { prefixCls: compPrefixCls } = useGlobalConfig('common')
     const { slots, fixedColumnKeys, columnOffsetsWithScrollBar, isSticky, activeSortable, handleSort, headColTag } =
       inject(TABLE_TOKEN)!
     const key = computed(() => props.column.key)
@@ -35,7 +37,7 @@ export default defineComponent({
       const { type, align, hasChildren, fixed, key, colStart, colEnd, sortable, titleColSpan, titleRowSpan } =
         props.column as HeadColumn
 
-      const prefixCls = 'ix-table'
+      const prefixCls = [`${compPrefixCls}-table`]
       let classes: Record<string, boolean | undefined> = {
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-sortable`]: !!sortable,
@@ -85,7 +87,7 @@ export default defineComponent({
         children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
         if (ellipsis || sortable) {
-          children = <span class="ix-table-cell-title">{children}</span>
+          children = <span class={`${compPrefixCls}-table-cell-title`}>{children}</span>
           if (sortable) {
             children = (
               <HeadCellSortable activeOrderBy={activeSortOrderBy.value} sortable={sortable}>

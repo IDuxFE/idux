@@ -2,10 +2,11 @@ import { ConvertProgressProps, ProgressStatus, progressStatus } from './types'
 import { computed, ComputedRef } from 'vue'
 import { convertPercent, fullPercent } from './util'
 import { isFunction } from 'lodash-es'
-import { ProgressConfig } from '@idux/components/config'
+import { ProgressConfig, useGlobalConfig } from '@idux/components/config'
 
 export function useStatusClasses(status: ComputedRef<ProgressStatus>): ComputedRef<string> {
-  const prefix = 'ix-progress'
+  const { prefixCls: compPrefixCls } = useGlobalConfig('common')
+  const prefix = `${compPrefixCls}-progress`
   const statusClassMap: Record<ProgressStatus, string> = {
     normal: `${prefix}-status-normal`,
     exception: `${prefix}-status-exception`,

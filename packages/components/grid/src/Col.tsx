@@ -5,6 +5,7 @@ import { inject, defineComponent, computed } from 'vue'
 import { isNumber, isString, isUndefined } from 'lodash-es'
 import { isNumeric } from '@idux/cdk/utils'
 import { BREAKPOINTS_KEYS } from '@idux/cdk/breakpoint'
+import { useGlobalConfig } from '@idux/components/config'
 import { rowToken } from './token'
 import { colProps } from './types'
 
@@ -12,9 +13,11 @@ export default defineComponent({
   name: 'IxCol',
   props: colProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const { gutter } = inject(rowToken)!
 
-    const classes = useClasses(props)
+    const classes = useClasses(prefixCls, props)
     const style = useStyle(props, gutter)
 
     return () => (
@@ -25,7 +28,7 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: ColProps) {
+function useClasses(prefixCls: string, props: ColProps) {
   return computed(() => generateAllCls(props))
 }
 
@@ -54,7 +57,8 @@ function useStyle(props: ColProps, gutter: ComputedRef<[number, number]>) {
 const attrKeys = ['span', 'order', 'offset', 'push', 'pull'] as const
 
 function generateAllCls(props: ColProps) {
-  const clsPrefix = 'ix-col'
+  const { prefixCls } = useGlobalConfig('common')
+  const clsPrefix = `${prefixCls}-col`
   const clsMap = new Map<string, boolean>([[clsPrefix, true]])
 
   const generateSizeCls = (sizeConfig: ColBreakpointConfig, size?: string) => {

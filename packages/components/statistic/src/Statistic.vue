@@ -1,21 +1,23 @@
 <template>
-  <div class="ix-statistic">
-    <div v-if="title || $slots.title" class="ix-statistic-title">
+  <div :class="`${prefixCls}-statistic`">
+    <div v-if="title || $slots.title" :class="`${prefixCls}-statistic-title`">
       <slot name="title">{{ title }}</slot>
     </div>
-    <div class="ix-statistic-content">
-      <span v-if="prefix || $slots.prefix" class="ix-statistic-content-prefix">
+    <div :class="`${prefixCls}-statistic-content`">
+      <span v-if="prefix || $slots.prefix" :class="`${prefixCls}-statistic-content-prefix`">
         <slot name="prefix">{{ prefix }}</slot>
       </span>
-      <span class="ix-statistic-content-value">
+      <span :class="`${prefixCls}-statistic-content-value`">
         <slot>
-          <span class="ix-statistic-content-value-int">{{ formatedValue.int || formatedValue.value }}</span>
-          <span v-if="formatedValue.decimal" class="ix-statistic-content-value-decimal">
+          <span :class="`${prefixCls}-statistic-content-value-int`">{{
+            formatedValue.int || formatedValue.value
+          }}</span>
+          <span v-if="formatedValue.decimal" :class="`${prefixCls}-statistic-content-value-decimal`">
             {{ formatedValue.decimal }}
           </span>
         </slot>
       </span>
-      <span v-if="suffix || $slots.suffix" class="ix-statistic-content-suffix">
+      <span v-if="suffix || $slots.suffix" :class="`${prefixCls}-statistic-content-suffix`">
         <slot name="suffix">{{ suffix }}</slot>
       </span>
     </div>
@@ -33,10 +35,12 @@ export default defineComponent({
   name: 'IxStatistic',
   props: statisticProps,
   setup(props) {
+    const { prefixCls } = useGlobalConfig('common')
     const statisticConfig = useGlobalConfig('statistic')
     const formatedValue = useFomat(props, statisticConfig)
 
     return {
+      prefixCls,
       formatedValue,
     }
   },

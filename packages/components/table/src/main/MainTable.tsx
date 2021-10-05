@@ -6,6 +6,7 @@ import type { Key } from '../types'
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 import { IxVirtualScroll } from '@idux/cdk/scroll'
 import { convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { tableBodyToken, TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 import Head from './head/Head'
@@ -17,6 +18,7 @@ import StickyScroll from './StickyScroll'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const {
       props,
       config,
@@ -84,7 +86,8 @@ export default defineComponent({
     onBeforeUnmount(() => offResize(mainTableRef.value, handleWrapperResize))
 
     const classes = computed(() => {
-      const prefixCls = 'ix-table'
+      const { prefixCls: compPrefixCls } = useGlobalConfig('common')
+      const prefixCls = [`${compPrefixCls}-table`]
       const { borderless = config.borderless, size = config.size } = props
       return {
         [`${prefixCls}-container`]: true,
@@ -159,7 +162,12 @@ export default defineComponent({
           )
         } else {
           tableBody = (
-            <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
+            <div
+              ref={scrollBodyRef}
+              class={`${prefixCls}-table-content`}
+              style={contentStyle.value}
+              onScroll={handleScroll}
+            >
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
@@ -176,7 +184,12 @@ export default defineComponent({
         children = [tableHead, tableBody, tableFoot, sticky]
       } else {
         children = (
-          <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
+          <div
+            ref={scrollBodyRef}
+            class={`${prefixCls}-table-content`}
+            style={contentStyle.value}
+            onScroll={handleScroll}
+          >
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               {props.headless ? null : <Head></Head>}

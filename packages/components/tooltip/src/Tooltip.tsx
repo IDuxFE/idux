@@ -14,14 +14,16 @@ export default defineComponent({
   props: tooltipProps,
   setup(props, { slots }) {
     const config = useGlobalConfig('tooltip')
+    const { prefixCls } = useGlobalConfig('common')
+
     const configProps = useConfigProps(props, config)
     const visibility = ɵUseVisibility(props)
     return () => (
       <IxOverlay
         v-model={[visibility.value, 'visible']}
         v-slots={{ default: slots.default, content: () => renderTitle(props, slots) }}
-        class="ix-tooltip"
-        transitionName="ix-fade-fast"
+        class={`${prefixCls}-tooltip`}
+        transitionName={`${prefixCls}-fade-fast`}
         {...configProps.value}
         offset={defaultOffset}
       />
@@ -33,5 +35,6 @@ const renderTitle = (props: TooltipProps, slots: Slots) => {
   if (!(slots.title || props.title)) {
     return null
   }
-  return <div class="ix-tooltip-title">{slots.title?.() ?? props.title}</div>
+  const { prefixCls } = useGlobalConfig('common')
+  return <div class={`${prefixCls}-tooltip-title`}>{slots.title?.() ?? props.title}</div>
 }

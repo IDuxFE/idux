@@ -1,16 +1,20 @@
 <template>
-  <div class="ix-progress-line" :class="lineClasses">
-    <div class="ix-progress-outer">
-      <div class="ix-progress-inner">
-        <div v-if="success.percent" class="ix-progress-success-bg" :style="successStyle"></div>
-        <div class="ix-progress-bg" :style="bgStyle"></div>
+  <div :class="lineClasses">
+    <div :class="`${prefixCls}-progress-outer`">
+      <div :class="`${prefixCls}-progress-inner`">
+        <div v-if="success.percent" :class="`${prefixCls}-progress-success-bg`" :style="successStyle"></div>
+        <div :class="`${prefixCls}-progress-bg`" :style="bgStyle"></div>
       </div>
     </div>
-    <div v-if="!hideInfo" class="ix-progress-text">
+    <div v-if="!hideInfo" :class="`${prefixCls}-progress-text`">
       <slot>
         <template v-if="showFormat">{{ formattedText }}</template>
-        <IxIcon v-else-if="showSuccessIcon" class="ix-progress-success-icon" name="check-circle-filled" />
-        <IxIcon v-else-if="showExceptionIcon" class="ix-progress-exception-icon" name="close-circle-filled" />
+        <IxIcon v-else-if="showSuccessIcon" :class="`${prefixCls}-progress-success-icon`" name="check-circle-filled" />
+        <IxIcon
+          v-else-if="showExceptionIcon"
+          :class="`${prefixCls}-progress-exception-icon`"
+          name="close-circle-filled"
+        />
       </slot>
     </div>
   </div>
@@ -33,6 +37,7 @@ export default defineComponent({
   components: { IxIcon },
   props: convertProgressProps,
   setup(props) {
+    const { prefixCls } = useGlobalConfig('common')
     const progressConfig = useGlobalConfig('progress')
     const isSmallSize = useSmallSize(props, progressConfig)
     const strokeWidth = computed(() =>
@@ -48,10 +53,11 @@ export default defineComponent({
 
     const lineClasses = computed(() => {
       return [
+        `${prefixCls}-progress-line`,
         statusClass.value,
-        props.hideInfo ? '' : 'ix-progress-show-info',
-        props.strokeLinecap === 'round' ? 'ix-progress-round' : '',
-        isSmallSize.value ? 'ix-progress-small' : '',
+        props.hideInfo ? '' : `${prefixCls}-progress-show-info`,
+        props.strokeLinecap === 'round' ? `${prefixCls}-progress-round` : '',
+        isSmallSize.value ? `${prefixCls}-progress-small` : '',
       ]
     })
     const successStyle = computed(() => ({
@@ -66,6 +72,7 @@ export default defineComponent({
     }))
 
     return {
+      prefixCls,
       lineClasses,
       successStyle,
       bgStyle,

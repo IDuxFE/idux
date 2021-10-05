@@ -2,6 +2,7 @@ import { computed, defineComponent, ref, ComputedRef, onMounted } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { SwitchProps, switchProps } from './types'
 
@@ -31,6 +32,7 @@ export default defineComponent({
     }
   },
   render() {
+    const { prefixCls } = useGlobalConfig('common')
     const { loading, checkedChildren, unCheckedChildren, isChecked, classes, handleClick, handleBlur, handleMouseup } =
       this
     const checkedChild = this.$slots.checkedChildren ? this.$slots.checkedChildren() : checkedChildren
@@ -45,11 +47,11 @@ export default defineComponent({
         onBlur={handleBlur}
       >
         {loading && (
-          <div class="ix-switch-loading-icon">
+          <div class={`${prefixCls}-switch-loading-icon`}>
             <IxIcon name="loading" />
           </div>
         )}
-        <div class="ix-switch-inner">{isChecked ? checkedChild : unCheckedChild}</div>
+        <div class={`${prefixCls}-switch-inner`}>{isChecked ? checkedChild : unCheckedChild}</div>
       </button>
     )
   },
@@ -87,13 +89,14 @@ const useClasses = (
   isDisabled: ComputedRef<boolean>,
   isSmallSize: ComputedRef<boolean>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-switch': true,
-      'ix-switch-loading': props.loading,
-      'ix-switch-checked': isChecked.value,
-      'ix-switch-disabled': isDisabled.value,
-      'ix-switch-small': isSmallSize.value,
+      [`${prefixCls}-switch`]: true,
+      [`${prefixCls}-switch-loading`]: props.loading,
+      [`${prefixCls}-switch-checked`]: isChecked.value,
+      [`${prefixCls}-switch-disabled`]: isDisabled.value,
+      [`${prefixCls}-switch-small`]: isSmallSize.value,
     }
   })
 }

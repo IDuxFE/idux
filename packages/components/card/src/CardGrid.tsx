@@ -1,4 +1,5 @@
 import { computed, defineComponent, inject } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCol } from '@idux/components/grid'
 import { cardToken } from './token'
 
@@ -9,11 +10,11 @@ export default defineComponent({
   props: cardGridProps,
   setup(props) {
     const { hoverable } = inject(cardToken)!
-
+    const { prefixCls } = useGlobalConfig('common')
     const classes = computed(() => {
       return {
-        'ix-card-grid': true,
-        'ix-card-grid-hoverable': props.hoverable ?? hoverable.value,
+        [`${prefixCls}-card-grid`]: true,
+        [`${prefixCls}-card-grid-hoverable`]: props.hoverable ?? hoverable.value,
       }
     })
 

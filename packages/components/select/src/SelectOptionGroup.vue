@@ -1,6 +1,6 @@
 <template>
-  <div v-show="visible" class="ix-option-group">
-    <span class="ix-option-group-label">
+  <div v-show="visible" :class="`${prefixCls}-option-group`">
+    <span :class="`${prefixCls}-option-group-label`">
       <slot name="label">{{ label }}</slot>
     </span>
   </div>
@@ -9,6 +9,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject, nextTick, onUnmounted, provide, ref, watch } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import SelectOption from './SelectOption.vue'
 import { selectOptionGroupProps } from './types'
 import { visibleChangeToken } from './token'
@@ -18,6 +19,7 @@ export default defineComponent({
   components: { SelectOption },
   props: selectOptionGroupProps,
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const showItemCount = ref(0)
     const visible = computed(() => showItemCount.value > 0)
 
@@ -38,7 +40,7 @@ export default defineComponent({
       }
     })
 
-    return { visible }
+    return { prefixCls, visible }
   },
 })
 </script>

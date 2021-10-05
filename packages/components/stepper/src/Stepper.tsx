@@ -29,16 +29,17 @@ export default defineComponent({
 })
 
 function useClasses(props: StepperProps, slots: Slots, config: StepperConfig) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const { direction, size = config.size, placement, progressDot } = props
 
     return {
-      'ix-stepper': true,
-      [`ix-stepper-${direction}`]: true,
-      [`ix-stepper-${size}`]: true,
-      'ix-stepper-vertical-placement': placement === 'vertical',
-      'ix-stepper-vertical': direction === 'vertical',
-      'ix-stepper-dot': progressDot || hasSlot(slots, 'progressDot'),
+      [`${prefixCls}-stepper`]: true,
+      [`${prefixCls}-stepper-${direction}`]: true,
+      [`${prefixCls}-stepper-${size}`]: true,
+      [`${prefixCls}-stepper-vertical-placement`]: placement === 'vertical',
+      [`${prefixCls}-stepper-vertical`]: direction === 'vertical',
+      [`${prefixCls}-stepper-dot`]: progressDot || hasSlot(slots, 'progressDot'),
     }
   })
 }

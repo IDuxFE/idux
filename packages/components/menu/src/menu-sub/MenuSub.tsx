@@ -25,6 +25,7 @@ export default defineComponent({
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('menuSub')
     const key = useKey()
     const level = menuSubContext ? menuSubContext.level + 1 : 1
@@ -75,7 +76,7 @@ export default defineComponent({
           <IxOverlay
             visible={isExpanded.value}
             v-slots={{ default: trigger, content: content }}
-            class="ix-menu-sub-overlay"
+            class={`${prefixCls}-menu-sub-overlay`}
             autoAdjust
             destroyOnHide={false}
             delay={defaultDelay}
@@ -83,8 +84,8 @@ export default defineComponent({
             offset={offset.value}
             placement={placement.value}
             showArrow={false}
-            target="ix-menu-container"
-            transitionName="ix-fade"
+            target={`${prefixCls}-menu-container`}
+            transitionName={`${prefixCls}-fade`}
             trigger="manual"
           />
         )
@@ -100,13 +101,14 @@ function useClasses(
   isExpanded: Ref<boolean>,
   isSelected: Ref<boolean>,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-menu-sub': true,
-      'ix-menu-sub-disabled': props.disabled,
-      'ix-menu-sub-expanded': isExpanded.value,
-      'ix-menu-sub-selected': isSelected.value,
-      [`ix-menu-sub-${mode.value}`]: true,
+      [`${prefixCls}-menu-sub`]: true,
+      [`${prefixCls}-menu-sub-disabled`]: props.disabled,
+      [`${prefixCls}-menu-sub-expanded`]: isExpanded.value,
+      [`${prefixCls}-menu-sub-selected`]: isSelected.value,
+      [`${prefixCls}-menu-sub-${mode.value}`]: true,
     }
   })
 }

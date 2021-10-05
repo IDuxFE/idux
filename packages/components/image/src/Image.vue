@@ -1,8 +1,8 @@
 <template>
-  <div class="ix-image">
+  <div :class="`${prefixCls}-image`">
     <img
       v-if="imageStatus !== 'failed'"
-      :class="['ix-image-img', preview ? 'ix-image-preview-is' : '']"
+      :class="[`${prefixCls}-image-img`, preview ? `${prefixCls}-image-preview-is` : '']"
       :src="src"
       :style="{ width: imageWidth, height: imageHeight, objectFit: objectFit }"
       :alt="alt"
@@ -12,7 +12,7 @@
     />
     <div
       v-else-if="imageStatus === 'failed'"
-      class="ix-image-error"
+      :class="`${prefixCls}-image-error`"
       :style="{
         width: imageWidth,
         height: imageHeight,
@@ -42,6 +42,7 @@ export default defineComponent({
   emits: ['statusChange'],
   setup(props, { emit }) {
     const isShowPreview = ref(false)
+    const { prefixCls } = useGlobalConfig('common')
     const imageConfig = useGlobalConfig('image')
     const imageWidth = computedSize(props, imageConfig, 'width')
     const imageHeight = computedSize(props, imageConfig, 'height')
@@ -69,6 +70,7 @@ export default defineComponent({
       },
     )
     return {
+      prefixCls,
       imageWidth,
       imageHeight,
       onLoaded,

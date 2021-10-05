@@ -1,27 +1,26 @@
 <template>
-  <div class="ix-progress-circle" :style="circleStyle" :class="circleClasses">
+  <div :style="circleStyle" :class="circleClasses">
     <svg viewBox="0 0 100 100">
       <defs v-if="isGradient">
         <linearGradient :id="linearGradientId" x1="100%" y1="0%" x2="0%" y2="0%">
           <stop v-for="(v, idx) in circleGradient" :key="idx" :offset="v.offset" :stop-color="v.color"></stop>
         </linearGradient>
       </defs>
-      <path class="ix-progress-circle-trail" v-bind="trailPathAttr" :style="trailPathStyle"></path>
+      <path :class="`${prefixCls}-progress-circle-trail`" v-bind="trailPathAttr" :style="trailPathStyle"></path>
       <path
         v-for="(p, idx) in strokePath"
         :key="idx"
         :stroke="p.stroke"
-        class="ix-progress-circle-path"
         :class="p.strokeClasses"
         v-bind="strokePathAttr"
         :style="p.strokePathStyle"
       ></path>
     </svg>
-    <div v-if="!hideInfo" class="ix-progress-text">
+    <div v-if="!hideInfo" :class="`${prefixCls}-progress-text`">
       <slot>
         <template v-if="showFormat">{{ formattedText }}</template>
-        <IxIcon v-else-if="showSuccessIcon" class="ix-progress-success-icon" name="check" />
-        <IxIcon v-else-if="showExceptionIcon" class="ix-progress-exception-icon" name="close" />
+        <IxIcon v-else-if="showSuccessIcon" :class="`${prefixCls}-progress-success-icon`" name="check" />
+        <IxIcon v-else-if="showExceptionIcon" :class="`${prefixCls}-progress-exception-icon`" name="close" />
       </slot>
     </div>
   </div>
@@ -53,13 +52,14 @@ export default defineComponent({
   components: { IxIcon },
   props: convertProgressProps,
   setup(props) {
+    const { prefixCls } = useGlobalConfig('common')
     const progressConfig = useGlobalConfig('progress')
     const status = useStatus(props)
     const { formattedText, showSuccessIcon, showExceptionIcon, showFormat } = useInfo(props, progressConfig, status)
     const strokeWidth = computed(() => convertNumber(props.strokeWidth, defaultStrokeWidth))
     const isGradient = computed(() => isObject(props.strokeColor))
     const statusClass = useStatusClasses(status)
-    const linearGradientId = ref(`ix-progress-gradient-${uniqueId()}`)
+    const linearGradientId = ref(`${prefixCls}-progress-gradient-${uniqueId()}`)
     const calcSharedProperties = computed<CalcSharedProperties>(() => {
       const isCircle = props.type === 'circle'
       const radius = 50 - strokeWidth.value / 2
@@ -93,7 +93,11 @@ export default defineComponent({
       'stroke-width': props.percent ? strokeWidth.value : 0,
       d: pathString.value,
     }))
-    const circleClasses = computed(() => [statusClass.value, isGradient.value ? 'ix-progress-circle-gradient' : ''])
+    const circleClasses = computed(() => [
+      [`${prefixCls}-progress-circle`],
+      statusClass.value,
+      isGradient.value ? `${prefixCls}-progress-circle-gradient` : '',
+    ])
     const circleStyle = computed(() => ({
       width: `${props.width}px`,
       height: `${props.width}px`,
@@ -101,6 +105,7 @@ export default defineComponent({
     }))
 
     return {
+      prefixCls,
       calcSharedProperties,
       formattedText,
       showFormat,
@@ -170,6 +175,7 @@ function useTrailPathStyle(calcSharedProperties: ComputedRef<CalcSharedPropertie
 }
 
 function useCirclePath(calcSharedProperties: ComputedRef<CalcSharedProperties>, props: ConvertProgressProps) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const { gapDegree, len, isGradient, linearGradientId } = calcSharedProperties.value
     const strokeProgress = props.success.percent > 0 ? [props.success.percent, props.percent] : [props.percent]
@@ -181,8 +187,9 @@ function useCirclePath(calcSharedProperties: ComputedRef<CalcSharedProperties>, 
         return {
           stroke: isGradient && !hasSuccessPercent ? `url(#${linearGradientId})` : null,
           strokeClasses: [
-            !isGradient && hasSuccessPercent ? 'ix-progress-circle-success' : '',
-            isGradient ? '' : 'ix-progress-circle-bg',
+            [`${prefixCls}-progress-circle-path`],
+            !isGradient && hasSuccessPercent ? `${prefixCls}-progress-circle-success` : '',
+            isGradient ? '' : `${prefixCls}-progress-circle-bg`,
           ],
           strokePathStyle: {
             stroke: !isGradient ? (hasSuccessPercent ? successColor : (props.strokeColor as string)) : null,

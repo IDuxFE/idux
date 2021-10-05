@@ -8,6 +8,7 @@ export default defineComponent({
   name: 'IxForm',
   props: formProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const control = useValueControl()
     watchEffect(() => provideControl(control.value!))
 
@@ -27,9 +28,9 @@ export default defineComponent({
 
     const classes = computed(() => {
       return {
-        'ix-form': true,
-        [`ix-form-${layout.value}`]: true,
-        [`ix-form-${size.value}`]: true,
+        [`${prefixCls}-form`]: true,
+        [`${prefixCls}-form-${layout.value}`]: true,
+        [`${prefixCls}-form-${size.value}`]: true,
       }
     })
 

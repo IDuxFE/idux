@@ -1,5 +1,5 @@
 <template>
-  <div class="ix-rate-wrap">
+  <div :class="`${prefixCls}-rate-wrap`">
     <div
       v-for="(item, index) in rateCount"
       :key="index"
@@ -8,19 +8,19 @@
           if (el) starRefs[index] = el
         }
       "
-      class="ix-rate-item"
+      :class="`${prefixCls}-rate-item`"
       :title="getTooltip(index)"
       :style="{ cursor: disabled ? 'auto' : 'pointer' }"
       @mousemove="handleMouseEnter(item, $event)"
       @mouseleave="handleMouseLeave(item)"
       @click="handleClick(item, $event)"
     >
-      <div class="ix-rate-full">
-        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main" :class="getIconClass(item)" />
+      <div :class="`${prefixCls}-rate-full`">
+        <IxIcon :name="rateIcon" :class="getIconClass(item)" />
       </div>
 
-      <div v-if="showDecimalIcon(item)" class="ix-rate-half">
-        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main ix-rate-half-icon" />
+      <div v-if="showDecimalIcon(item)" :class="`${prefixCls}-rate-half`">
+        <IxIcon :name="rateIcon" :class="`${prefixCls}-rate-iconfont-main ${prefixCls}-rate-half-icon`" />
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@ export default defineComponent({
     const touchHalf = ref(false)
     const starRefs = ref([])
 
+    const { prefixCls } = useGlobalConfig('common')
     const rateGlobalConfig = useGlobalConfig('rate')
     const rateCount = computed(() => convertNumber(props.count ?? rateGlobalConfig.count))
     const rateIcon = computed(() => props.icon ?? rateGlobalConfig.icon)
@@ -62,7 +63,10 @@ export default defineComponent({
     })
 
     function getIconClass(item: number) {
-      return item <= score.value ? 'ix-rate-highlight' : 'ix-rate-normal'
+      return [
+        `${prefixCls}-rate-iconfont-main`,
+        item <= score.value ? `${prefixCls}-rate-highlight` : `${prefixCls}-rate-normal`,
+      ]
     }
 
     function showDecimalIcon(item: number) {
@@ -137,6 +141,7 @@ export default defineComponent({
     }
 
     return {
+      prefixCls,
       rateCount,
       rateIcon,
       getTooltip,

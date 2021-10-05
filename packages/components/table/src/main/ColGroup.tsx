@@ -4,6 +4,7 @@ import type { TableColumnSelectableOption } from '../types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
@@ -42,12 +43,13 @@ function renderCol(
   column: TableColumnMerged,
   width?: number,
 ) {
+  const { prefixCls } = useGlobalConfig('common')
   let className: string | undefined
   if ('type' in column) {
     const type = column.type
-    className = `ix-table-col-${type}`
+    className = `${prefixCls}-table-col-${type}`
     if (type === 'selectable' && mergedSelectableOptions.value) {
-      className += ' ix-table-selectable-with-options'
+      className += ` ${prefixCls}-table-selectable-with-options`
     }
   }
   const mergedWidth = width ?? column.width

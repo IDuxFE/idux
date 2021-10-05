@@ -27,6 +27,7 @@ export default defineComponent({
   name: 'IxTable',
   props: tableProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('table')
     const locale = getLocale('table')
     const tags = useTags(props)
@@ -74,7 +75,7 @@ export default defineComponent({
       const children = [header, paginationTop, <MainTable />, paginationBottom, footer]
       const spinProps = covertSpinProps(props.spin)
       const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
-      return <div class="ix-table">{spinWrapper}</div>
+      return <div class={`${prefixCls}-table`}>{spinWrapper}</div>
     }
   },
 })

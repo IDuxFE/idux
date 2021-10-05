@@ -1,11 +1,11 @@
 <template>
-  <div class="ix-option-container">
+  <div :class="`${prefixCls}-option-container`">
     <template v-for="option in options" :key="option.value">
       <SelectOptionGroup v-if="option.children" :label="option.label" :options="option.children" />
       <SelectOption v-else :disabled="option.disabled" :label="option.label" :value="option.value" />
     </template>
     <slot v-if="!options.length" />
-    <div v-show="isEmpty" class="ix-option-container-empty">
+    <div v-show="isEmpty" :class="`${prefixCls}-option-container-empty`">
       <slot name="empty">
         <IxEmpty :description="empty" />
       </slot>
@@ -16,6 +16,7 @@
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxEmpty } from '@idux/components/empty'
 import SelectOption from './SelectOption.vue'
 import SelectOptionGroup from './SelectOptionGroup.vue'
@@ -28,6 +29,7 @@ export default defineComponent({
     empty: IxPropTypes.string,
   },
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const showItemCount = ref(0)
     const isEmpty = computed(() => showItemCount.value === 0)
 
@@ -40,7 +42,7 @@ export default defineComponent({
     }
     provide(visibleChangeToken, visibleChange)
 
-    return { isEmpty }
+    return { prefixCls, isEmpty }
   },
 })
 </script>

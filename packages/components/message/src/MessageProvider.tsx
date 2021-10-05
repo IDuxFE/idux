@@ -13,6 +13,8 @@ export default defineComponent({
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
     const config = useGlobalConfig('message')
+    const { prefixCls } = useGlobalConfig('common')
+
     const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { messages, loadContainer, apis } = useMessageApis(maxCount)
@@ -35,8 +37,14 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <IxPortal target="ix-message-container" load={loadContainer.value}>
-            <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={style.value} {...attrs}>
+          <IxPortal target={`${prefixCls}-message-container`} load={loadContainer.value}>
+            <TransitionGroup
+              tag="div"
+              name={`${prefixCls}-move-up`}
+              class={`${prefixCls}-message-wrapper`}
+              style={style.value}
+              {...attrs}
+            >
               {child}
             </TransitionGroup>
           </IxPortal>
@@ -47,6 +55,7 @@ export default defineComponent({
 })
 
 const useMessage = (maxCount: ComputedRef<number>) => {
+  const { prefixCls } = useGlobalConfig('common')
   const messages = ref<MessageOptions[]>([])
 
   const getCurrIndex = (key: string) => {
@@ -64,7 +73,7 @@ const useMessage = (maxCount: ComputedRef<number>) => {
       messages.value = messages.value.slice(-maxCount.value + 1)
     }
 
-    const key = item.key ?? uniqueId('ix-message')
+    const key = item.key ?? uniqueId(`${prefixCls}-message`)
     messages.value.push({ ...item, key })
     return key
   }

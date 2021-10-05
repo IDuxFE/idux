@@ -9,6 +9,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, wat
 import { useOverlay } from '@idux/cdk/overlay'
 import { offResize, onResize, convertArray } from '@idux/cdk/utils'
 import { useValueAccessor } from '@idux/cdk/forms'
+import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { selectToken } from './token'
 
@@ -236,6 +237,7 @@ export const useSelectClasses = (
   isActive: Ref<boolean>,
   disabled: ComputedRef<boolean>,
 ): ComputedRef<Record<string, boolean>> => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const multiple = props.multiple
     const borderless = props.borderless ?? config.borderless
@@ -245,17 +247,17 @@ export const useSelectClasses = (
     const suffix = props.suffix ?? config.suffix
     const _disabled = disabled.value
     return {
-      'ix-select': true,
-      'ix-select-single': !multiple,
-      'ix-select-multiple': multiple,
-      'ix-select-opened': visibility.value,
-      'ix-select-active': isActive.value,
-      'ix-select-borderless': borderless,
-      'ix-select-disabled': _disabled,
-      'ix-select-clearable': !_disabled && clearable,
-      'ix-select-searchable': !_disabled && (searchable || multiple),
-      'ix-select-show-suffix': !!suffix || !multiple,
-      [`ix-select-${size}`]: true,
+      [`${prefixCls}-select`]: true,
+      [`${prefixCls}-select-single`]: !multiple,
+      [`${prefixCls}-select-multiple`]: multiple,
+      [`${prefixCls}-select-opened`]: visibility.value,
+      [`${prefixCls}-select-active`]: isActive.value,
+      [`${prefixCls}-select-borderless`]: borderless,
+      [`${prefixCls}-select-disabled`]: _disabled,
+      [`${prefixCls}-select-clearable`]: !_disabled && clearable,
+      [`${prefixCls}-select-searchable`]: !_disabled && (searchable || multiple),
+      [`${prefixCls}-select-show-suffix`]: !!suffix || !multiple,
+      [`${prefixCls}-select-${size}`]: true,
     }
   })
 }

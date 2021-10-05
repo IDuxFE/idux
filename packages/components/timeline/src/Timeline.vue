@@ -3,17 +3,16 @@ import type { VNode } from 'vue'
 import type { TimelinePosition, TimelineItemPosition, TimelineProps } from './types'
 
 import { defineComponent, h, cloneVNode } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import IxTimelineItem from './TimelineItem.vue'
 import { timelineProps } from './types'
-
-const timelinePrefixCls = 'ix-timeline'
-const itemPrefixCls = 'ix-timeline-item'
 
 export default defineComponent({
   name: 'IxTimeline',
   props: timelineProps,
   render() {
+    const { prefixCls } = useGlobalConfig('common')
     const pendingSlots = this.$slots?.pending?.()
     const pendingDotSlots = this.$slots?.pendingDot?.()
     const defaultSlots = this.$slots?.default?.() || []
@@ -26,7 +25,7 @@ export default defineComponent({
     if (pendingNode) {
       penddingItem = h(
         IxTimelineItem,
-        { class: `${itemPrefixCls}-pending-dot` },
+        { class: `${prefixCls}-timeline-item-pending-dot` },
         { default: () => pendingNode, dot: () => pendingDotNode },
       )
     }
@@ -92,13 +91,14 @@ const getRealPosition = (itemPositionArr: TimelineItemPosition[]): TimelinePosit
 }
 
 const useClasses = (itemPositionArr: TimelineItemPosition[], props: TimelineProps): string => {
+  const { prefixCls } = useGlobalConfig('common')
   const realPosition = getRealPosition(itemPositionArr)
-  const positionCls = `${timelinePrefixCls}-${realPosition}`
+  const positionCls = `${prefixCls}-timeline-${realPosition}`
 
-  let cls = `${timelinePrefixCls} ${positionCls}`
+  let cls = `${prefixCls}-timeline ${positionCls}`
 
   if (props.reverse) {
-    cls += ` ${timelinePrefixCls}-reverse`
+    cls += ` ${prefixCls}-timeline-reverse`
   }
 
   return cls
@@ -117,14 +117,15 @@ const useItemClasses = ({
   itemsLength: number
   props: TimelineProps
 }): string => {
-  let cls = `${itemPrefixCls}-${position}`
+  const { prefixCls } = useGlobalConfig('common')
+  let cls = `${prefixCls}-timeline-item-${position}`
 
   if (hasPendingNode) {
     const isReversePending = props.reverse && index === 0
     const isPending = !props.reverse && index === itemsLength - 2
 
     if (isReversePending || isPending) {
-      cls += ` ${itemPrefixCls}-pending`
+      cls += ` ${prefixCls}-timeline-item-pending`
     }
   }
 

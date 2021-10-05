@@ -2,16 +2,18 @@ import type { Slot } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 import { convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { drawerToken, DRAWER_TOKEN } from './token'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const { props, slots } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
 
     const placement = computed(() => props.placement ?? 'right')
-    const classes = computed(() => `ix-drawer ix-drawer-${placement.value}`)
+    const classes = computed(() => `${prefixCls}-drawer ${prefixCls}-drawer-${placement.value}`)
     const isHorizontal = computed(() => placement.value === 'right' || placement.value === 'left')
     const drawerStyle = computed(() => {
       const width = props.width || (isHorizontal.value ? '30%' : '100%') // 不传值时水平方向宽度默认30%
@@ -30,7 +32,7 @@ export default defineComponent({
       return (
         <div class={classes.value} style={drawerStyle.value}>
           {titleElement}
-          <section class="ix-drawer-body">{slots.default?.()}</section>
+          <section class={`${prefixCls}-drawer-body`}>{slots.default?.()}</section>
           {footerElement}
         </div>
       )
@@ -47,9 +49,10 @@ const renderTitle = (
   if (!titleSlot && !title) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const child = titleSlot ? titleSlot() : <span title={title}>{title}</span>
   return (
-    <header class="ix-drawer-header">
+    <header class={`${prefixCls}-drawer-header`}>
       {child}
       {renderIcon(closable, close)}
     </header>
@@ -60,9 +63,10 @@ const renderIcon = (closable: boolean | undefined, close: (evt: Event) => void) 
   if (!closable) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   return (
-    <button class="ix-drawer-close-btn" type="button" onClick={close}>
-      <IxIcon class="ix-icon-close" name="close"></IxIcon>
+    <button class={`${prefixCls}-drawer-close-btn" type="button`} onClick={close}>
+      <IxIcon class={`${prefixCls}-icon-close" name="close`}></IxIcon>
     </button>
   )
 }
@@ -71,6 +75,7 @@ const renderFooter = (footerSlot: Slot | undefined, footer: string | undefined) 
   if (!footerSlot && !footer) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const child = footerSlot ? footerSlot() : <span title={footer}>{footer}</span>
-  return <footer class="ix-drawer-footer">{child}</footer>
+  return <footer class={`${prefixCls}-drawer-footer`}>{child}</footer>
 }

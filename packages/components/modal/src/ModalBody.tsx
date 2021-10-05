@@ -2,6 +2,7 @@ import type { Slot, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isString } from 'lodash-es'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { modalToken } from './token'
 
@@ -17,6 +18,7 @@ const defaultIconTypes = {
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const { props, slots, config } = inject(modalToken)!
     const isDefault = computed(() => props.type === 'default')
     const iconName = computed(() => {
@@ -26,15 +28,15 @@ export default defineComponent({
 
     return () => {
       if (isDefault.value) {
-        return <div class="ix-modal-body">{slots.default?.()}</div>
+        return <div class={`${prefixCls}-modal-body`}>{slots.default?.()}</div>
       }
-      const classes = `ix-modal-body ix-modal-body-${props.type}`
+      const classes = `${prefixCls}-modal-body ${prefixCls}-modal-body-${props.type}`
       const icon = renderIcon(slots.icon, iconName.value)
       const title = renderTitle(slots.title, props.title)
       return (
         <div class={classes}>
           {icon}
-          <div class="ix-modal-body-content">
+          <div class={`${prefixCls}-modal-body-content`}>
             {title}
             {slots.default?.()}
           </div>
@@ -48,19 +50,21 @@ const renderIcon = (iconSlot: Slot | undefined, icon: string | VNode | undefined
   if (!iconSlot && !icon) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   let child: VNodeTypes
   if (iconSlot) {
     child = iconSlot()
   } else {
     child = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon!
   }
-  return <div class="ix-modal-body-icon">{child}</div>
+  return <div class={`${prefixCls}-modal-body-icon`}>{child}</div>
 }
 
 const renderTitle = (titleSlot: Slot | undefined, title: string | VNode | undefined) => {
   if (!titleSlot && !title) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const child = titleSlot ? titleSlot() : title
-  return <div class="ix-modal-body-title">{child}</div>
+  return <div class={`${prefixCls}-modal-body-title`}>{child}</div>
 }

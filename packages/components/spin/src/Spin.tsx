@@ -28,10 +28,11 @@ export default defineComponent({
     }
   },
   render() {
+    const { prefixCls } = useGlobalConfig('common')
     const { spinning, spinnerClassName, containerClassName, icon$$, tip$$, $slots } = this
 
     return (
-      <div class="ix-spin">
+      <div class={`${prefixCls}-spin`}>
         {renderSpinner(spinning, spinnerClassName, icon$$, $slots.icon, tip$$)}
         {renderContent($slots.default, containerClassName)}
       </div>
@@ -40,17 +41,22 @@ export default defineComponent({
 })
 
 const useClasses = (props: SpinProps, config: SpinConfig, hasDefaultSlot: ComputedRef<boolean>) => {
+  const { prefixCls } = useGlobalConfig('common')
   const spinnerClassName = computed(() => {
     const size = props.size ?? config.size
     const tipAlign = props.tipAlign ?? config.tipAlign
-    return ['ix-spin-spinner', `ix-spin-spinner-tip-${tipAlign}`, size !== 'medium' ? `ix-spin-spinner-${size}` : '']
+    return [
+      `${prefixCls}-spin-spinner`,
+      `${prefixCls}-spin-spinner-tip-${tipAlign}`,
+      size !== 'medium' ? `${prefixCls}-spin-spinner-${size}` : '',
+    ]
   })
 
   const containerClassName = computed(() => {
     if (!hasDefaultSlot.value) {
       return []
     }
-    return ['ix-spin-container', props.spinning ? 'ix-spin-container-blur' : '']
+    return [`${prefixCls}-spin-container`, props.spinning ? `${prefixCls}-spin-container-blur` : '']
   })
 
   return {
@@ -69,11 +75,12 @@ const renderSpinner = (
   if (!spinning) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const iconNode = iconSlot ? iconSlot() : <IxIcon name={icon} />
   const tipNode = renderTip(tip)
   return (
     <div class={spinnerClassName}>
-      <div class="ix-spin-spinner-icon">{iconNode}</div>
+      <div class={`${prefixCls}-spin-spinner-icon`}>{iconNode}</div>
       {tipNode}
     </div>
   )
@@ -83,8 +90,9 @@ const renderTip = (tip: string | undefined) => {
   if (!tip) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
 
-  return <div class="ix-spin-spinner-tip">{tip}</div>
+  return <div class={`${prefixCls}-spin-spinner-tip`}>{tip}</div>
 }
 
 const renderContent = (defaultSlot: Slot | undefined, containerClassName: string[]) => {

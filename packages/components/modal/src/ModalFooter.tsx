@@ -2,12 +2,15 @@ import type { ComputedRef, Ref, VNodeTypes } from 'vue'
 import type { ModalButtonProps } from './types'
 
 import { computed, defineComponent, inject, isVNode } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { ButtonProps, IxButton } from '@idux/components/button'
 import { getLocale } from '@idux/components/i18n'
 import { modalToken, MODAL_TOKEN } from './token'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
+
     const { props, slots, cancelLoading, okLoading } = inject(modalToken)!
     const { cancel, ok } = inject(MODAL_TOKEN)!
     const locale = getLocale('modal')
@@ -49,7 +52,7 @@ export default defineComponent({
         )
       }
 
-      return <div class="ix-modal-footer">{childNode}</div>
+      return <div class={`${prefixCls}-modal-footer`}>{childNode}</div>
     }
   },
 })

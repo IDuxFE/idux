@@ -15,6 +15,7 @@ export default defineComponent({
   name: 'IxAvatar',
   props: avatarProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('avatar')
 
     const showText = ref(false)
@@ -44,10 +45,11 @@ export default defineComponent({
       }
     }
 
-    return { avatarRef, textRef, showText, showIcon, icon$$, classes, avatarStyle, textStyle, handleError }
+    return { prefixCls, avatarRef, textRef, showText, showIcon, icon$$, classes, avatarStyle, textStyle, handleError }
   },
 
   render() {
+    const { prefixCls } = this
     let child: VNodeTypes
 
     if (this.showIcon) {
@@ -55,7 +57,7 @@ export default defineComponent({
     } else if (this.showText) {
       const textChild = this.$slots.default?.() ?? this.text
       child = (
-        <span ref="textRef" class="ix-avatar-text" style={this.textStyle}>
+        <span ref="textRef" class={`${prefixCls}-avatar-text`} style={this.textStyle}>
           {textChild}
         </span>
       )
@@ -78,14 +80,15 @@ const useClasses = (
   showText: Ref<boolean>,
   showIcon: Ref<boolean>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const shape = props.shape ?? config.shape
     const sizeValue = size.value
     return {
-      'ix-avatar': true,
-      'ix-avatar-image': !!props.src && !showText.value && !showIcon.value,
-      [`ix-avatar-${shape}`]: true,
-      [`ix-avatar-${sizeValue}`]: isString(sizeValue),
+      [`${prefixCls}-avatar`]: true,
+      [`${prefixCls}-avatar-image`]: !!props.src && !showText.value && !showIcon.value,
+      [`${prefixCls}-avatar-${shape}`]: true,
+      [`${prefixCls}-avatar-${sizeValue}`]: isString(sizeValue),
     }
   })
 }

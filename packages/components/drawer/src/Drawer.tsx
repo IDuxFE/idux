@@ -13,6 +13,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: drawerProps,
   setup(props, { slots, expose, attrs }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('drawer')
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
@@ -30,7 +31,7 @@ export default defineComponent({
       }
 
       return (
-        <IxPortal target="ix-modal-container" load={visible.value}>
+        <IxPortal target={`${prefixCls}-modal-container`} load={visible.value}>
           <IxMask mask={mask.value} visible={visible.value} zIndex={zIndex.value}></IxMask>
           <DrawerWrapper {...attrs}></DrawerWrapper>
         </IxPortal>

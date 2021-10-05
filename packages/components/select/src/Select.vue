@@ -1,6 +1,6 @@
 <template>
   <div ref="triggerRef" v-click-outside="onClickOutside" :class="classes" @click="onClick">
-    <div class="ix-select-selector" @keydown="onKeyDown">
+    <div :class="`${prefixCls}-select-selector`" @keydown="onKeyDown">
       <SelectItem
         v-for="item in selectedItems"
         v-show="showItem"
@@ -28,17 +28,21 @@
         @focus="onFocus"
         @blur="onBlur"
       />
-      <div v-if="showPlaceholder" class="ix-select-placeholder">
+      <div v-if="showPlaceholder" :class="`${prefixCls}-select-placeholder`">
         <slot name="placeholder">{{ placeholder }}</slot>
       </div>
     </div>
-    <div v-if="suffix || $slots.suffix || !multiple" class="ix-select-suffix">
+    <div v-if="suffix || $slots.suffix || !multiple" :class="`${prefixCls}-select-suffix`">
       <slot name="suffix"><IxIcon :name="suffixIcon" /></slot>
     </div>
-    <div v-if="clearable && !disabled$$ && selectedItems.length" class="ix-select-clear" @click.stop="onClear">
+    <div
+      v-if="clearable && !disabled$$ && selectedItems.length"
+      :class="`${prefixCls}-select-clear`"
+      @click.stop="onClear"
+    >
       <IxIcon name="close-circle" />
     </div>
-    <IxPortal target="ix-select-container">
+    <IxPortal :target="`${prefixCls}-select-container`">
       <transition>
         <SelectOptionContainer
           v-show="visibility"
@@ -96,6 +100,7 @@ export default defineComponent({
     'inputChange',
   ],
   setup(props, { emit }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('select')
     const selectedOptions = ref<SelectOptionProps[]>([])
 
@@ -162,6 +167,7 @@ export default defineComponent({
     })
 
     return {
+      prefixCls,
       disabled$$,
       focus,
       blur,

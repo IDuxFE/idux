@@ -16,13 +16,14 @@ export default defineComponent({
   name: 'IxPagination',
   props: paginationProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('pagination')
     useProvider(props, slots, config)
 
     const showTotal = computed(() => props.showTotal ?? config.showTotal)
     const simple = computed(() => props.simple ?? config.simple)
     const size = computed(() => props.size ?? config.size)
-    const classes = useClasses(props, simple, size)
+    const classes = useClasses(prefixCls, props, simple, size)
 
     return () => {
       return (
@@ -35,13 +36,18 @@ export default defineComponent({
   },
 })
 
-const useClasses = (props: PaginationProps, simple: ComputedRef<boolean>, size: ComputedRef<PaginationSize>) => {
+const useClasses = (
+  prefixCls: string,
+  props: PaginationProps,
+  simple: ComputedRef<boolean>,
+  size: ComputedRef<PaginationSize>,
+) => {
   return computed(() => {
     return {
-      'ix-pagination': true,
-      'ix-pagination-disabled': props.disabled,
-      'ix-pagination-simple': simple.value,
-      [`ix-pagination-${size.value}`]: true,
+      [`${prefixCls}-pagination`]: true,
+      [`${prefixCls}-pagination-disabled`]: props.disabled,
+      [`${prefixCls}-pagination-simple`]: simple.value,
+      [`${prefixCls}-pagination-${size.value}`]: true,
     }
   })
 }

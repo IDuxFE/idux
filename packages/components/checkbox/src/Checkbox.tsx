@@ -15,6 +15,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: checkboxProps,
   setup(props, { attrs, expose, slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('checkbox')
 
     const checkboxGroup = inject(checkboxGroupToken, null)
@@ -32,7 +33,7 @@ export default defineComponent({
 
     return () => {
       const child = slots.default ? slots.default() : props.label
-      const labelNode = child ? <span class="ix-checkbox-label">{child}</span> : undefined
+      const labelNode = child ? <span class={`${prefixCls}-checkbox-label`}>{child}</span> : undefined
       const { class: className, type, tabindex, ...restAttrs } = attrs
 
       return (
@@ -43,11 +44,11 @@ export default defineComponent({
           aria-checked={isChecked.value}
           aria-disabled={isDisabled.value}
         >
-          <span class="ix-checkbox-input-wrapper">
+          <span class={`${prefixCls}-checkbox-input-wrapper`}>
             <input
               ref={inputRef}
               type="checkbox"
-              class="ix-checkbox-input"
+              class={`${prefixCls}-checkbox-input`}
               aria-hidden
               {...restAttrs}
               autofocus={props.autofocus}
@@ -59,10 +60,12 @@ export default defineComponent({
               onBlur={handleBlur}
               onFocus={handleFocus}
             />
-            {isButtoned.value ? null : <span class="ix-checkbox-inner" tabindex={tabindex as number} />}
+            {isButtoned.value ? null : <span class={`${prefixCls}-checkbox-inner`} tabindex={tabindex as number} />}
           </span>
           {labelNode}
-          {isButtoned.value ? <span class="ix-checkbox-button-inner" tabindex={tabindex as number} /> : null}
+          {isButtoned.value ? (
+            <span class={`${prefixCls}-checkbox-button-inner`} tabindex={tabindex as number} />
+          ) : null}
         </label>
       )
     }
@@ -137,6 +140,7 @@ const useClasses = (
   isButtoned: ComputedRef<boolean>,
   size: ComputedRef<CheckboxSize>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const disabled = isDisabled.value
     const checked = isChecked.value
@@ -146,13 +150,13 @@ const useClasses = (
     const buttonSize = size.value
 
     return {
-      'ix-checkbox': true,
-      'ix-checkbox-button': !!buttoned,
-      'ix-checkbox-disabled': !!disabled,
-      'ix-checkbox-focused': !!focused,
-      'ix-checkbox-indeterminate': !!indeterminate,
-      'ix-checkbox-checked': !indeterminate && checked,
-      [`ix-checkbox-button-${buttonSize}`]: !!buttoned,
+      [`${prefixCls}-checkbox`]: true,
+      [`${prefixCls}-checkbox-button`]: !!buttoned,
+      [`${prefixCls}-checkbox-disabled`]: !!disabled,
+      [`${prefixCls}-checkbox-focused`]: !!focused,
+      [`${prefixCls}-checkbox-indeterminate`]: !!indeterminate,
+      [`${prefixCls}-checkbox-checked`]: !indeterminate && checked,
+      [`${prefixCls}-checkbox-button-${buttonSize}`]: !!buttoned,
     }
   })
 }

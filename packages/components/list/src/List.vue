@@ -1,24 +1,24 @@
 <template>
-  <div class="ix-list" :class="classes">
-    <div v-if="isShowHeader" class="ix-list-header">
+  <div :class="classes">
+    <div v-if="isShowHeader" :class="`${prefixCls}-list-header`">
       <slot name="header"> {{ header }} </slot>
     </div>
     <IxSpin :spinning="loading">
       <list-wrap :isUseGrid="isUseGrid" :gutter="grid?.gutter">
         <slot></slot>
       </list-wrap>
-      <div v-show="isShowEmpty" class="ix-list-empty">
+      <div v-show="isShowEmpty" :class="`${prefixCls}-list-empty`">
         <slot name="empty">
           <IxEmpty :description="empty"></IxEmpty>
         </slot>
       </div>
-      <div v-if="isShowLoadMore" class="ix-list-loadMore">
+      <div v-if="isShowLoadMore" :class="`${prefixCls}-list-loadMore`">
         <slot name="loadMore">
           <IxButton :loading="loadMoreLoading" @click="handleLoadMoreClick">{{ loadMore }}</IxButton>
         </slot>
       </div>
     </IxSpin>
-    <div v-if="isShowFooter" class="ix-list-footer">
+    <div v-if="isShowFooter" :class="`${prefixCls}-list-footer`">
       <slot name="footer"> {{ footer }} </slot>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default defineComponent({
     const isShowLoadMore = computed(() => slots.loadMore || props.loadMore)
     const isShowHeader = computed(() => slots.header || props.header)
     const isShowFooter = computed(() => slots.footer || props.footer)
+    const { prefixCls } = useGlobalConfig('common')
     const listConfig = useGlobalConfig('list')
     const classes = useClasses(props, listConfig)
 
@@ -70,6 +71,7 @@ export default defineComponent({
     }
 
     return {
+      prefixCls,
       isUseGrid,
       isShowEmpty,
       isShowLoadMore,
@@ -83,15 +85,17 @@ export default defineComponent({
 })
 
 const useClasses = (props: ListProps, listConfig: ListConfig) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const borderless = props.borderless ?? listConfig.borderless
     const size = props.size ?? listConfig.size ?? 'medium'
     const split = props.split
     return [
-      `ix-list-${size}`,
-      split ? 'ix-list-split' : '',
+      `${prefixCls}-list`,
+      `${prefixCls}-list-${size}`,
+      split ? `${prefixCls}-list-split` : '',
       {
-        'ix-list-border': !borderless,
+        [`${prefixCls}-list-border`]: !borderless,
       },
     ]
   })

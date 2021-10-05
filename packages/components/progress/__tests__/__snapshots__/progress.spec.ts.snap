@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Progress gapPosition work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
@@ -15,7 +15,7 @@ exports[`Progress gapPosition work 1`] = `
 `;
 
 exports[`Progress gapPosition work 2`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
        a 47,47 0 1 1 94,0
@@ -29,7 +29,7 @@ exports[`Progress gapPosition work 2`] = `
 `;
 
 exports[`Progress gapPosition work 3`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
        a 47,47 0 1 1 -94,0
@@ -43,7 +43,7 @@ exports[`Progress gapPosition work 3`] = `
 `;
 
 exports[`Progress render circle progress work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
@@ -57,7 +57,7 @@ exports[`Progress render circle progress work 1`] = `
 `;
 
 exports[`Progress render dashboard progress work 1`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <!--v-if-->
     <path class=\\"ix-progress-circle-trail\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
@@ -107,7 +107,7 @@ exports[`Progress strokeColor work 1`] = `
 `;
 
 exports[`Progress strokeColor work 2`] = `
-"<div class=\\"ix-progress-circle ix-progress-status-normal ix-progress-circle-gradient ix-progress\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
+"<div style=\\"width: 132px; height: 132px; font-size: 25.8px;\\" class=\\"ix-progress-circle ix-progress-status-normal ix-progress-circle-gradient ix-progress\\"><svg viewBox=\\"0 0 100 100\\">
     <defs>
       <linearGradient id=\\"ix-progress-gradient-ix-2\\" x1=\\"100%\\" y1=\\"0%\\" x2=\\"0%\\" y2=\\"0%\\">
         <stop offset=\\"0%\\" stop-color=\\"#108ee9\\"></stop>

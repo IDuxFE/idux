@@ -3,10 +3,12 @@ import type { StyleValue } from 'vue'
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
 import { getScrollBarSize } from '@idux/cdk/scroll'
 import { convertElement, getOffset, off, on } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const { scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(TABLE_TOKEN)!
 
     const isShow = ref(false)
@@ -44,8 +46,8 @@ export default defineComponent({
 
     const scrollBarClasses = computed(() => {
       return {
-        'ix-table-sticky-scroll-bar': true,
-        'ix-table-sticky-scroll-bar-active': isActive.value,
+        [`${prefixCls}-table-sticky-scroll-bar`]: true,
+        [`${prefixCls}-table-sticky-scroll-bar-active`]: isActive.value,
       }
     })
 
@@ -143,7 +145,7 @@ export default defineComponent({
       }
 
       return (
-        <div class="ix-table-sticky-scroll" style={style.value}>
+        <div class={`${prefixCls}-table-sticky-scroll`} style={style.value}>
           <div class={scrollBarClasses.value} style={scrollBarStyle.value} onMousedown={handleMouseDown} />
         </div>
       )

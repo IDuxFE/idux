@@ -48,16 +48,17 @@ const useClasses = (
   size: ComputedRef<CardSize>,
   hasGrid: ComputedRef<boolean>,
 ) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const borderless = props.borderless ?? cardConfig.borderless
     const hasGridValue = hasGrid.value
     return {
-      'ix-card': true,
-      'ix-card-borderless': borderless,
-      'ix-card-hoverable': !hasGridValue && hoverable.value,
-      'ix-card-loading': props.loading,
-      'ix-card-has-grid': hasGridValue,
-      [`ix-card-${size.value}`]: true,
+      [`${prefixCls}-card`]: true,
+      [`${prefixCls}-card-borderless`]: borderless,
+      [`${prefixCls}-card-hoverable`]: !hasGridValue && hoverable.value,
+      [`${prefixCls}-card-loading`]: props.loading,
+      [`${prefixCls}-card-has-grid`]: hasGridValue,
+      [`${prefixCls}-card-${size.value}`]: true,
     }
   })
 }
@@ -75,14 +76,16 @@ const useChildren = (slots: Slots, hoverable: ComputedRef<boolean>) => {
 }
 
 const renderCover = (coverSlot: Slot | undefined, cover: string | CardCover | undefined) => {
+  const { prefixCls } = useGlobalConfig('common')
   let child: VNodeTypes | undefined
+
   if (coverSlot) {
     child = coverSlot()
   } else if (cover) {
     const imgProps = isString(cover) ? { src: cover } : cover
     child = <img {...imgProps} />
   }
-  return child ? <div class="ix-card-cover">{child}</div> : null
+  return child ? <div class={`${prefixCls}-card-cover`}>{child}</div> : null
 }
 
 const renderHeader = (headerSlot: Slot | undefined, header: string | HeaderProps | undefined, size: CardSize) => {
@@ -99,41 +102,44 @@ const renderHeader = (headerSlot: Slot | undefined, header: string | HeaderProps
 }
 
 const listOfLoading = [
-  ['ix-col-span-22'],
-  ['ix-col-span-8', 'ix-col-span-15'],
-  ['ix-col-span-6', 'ix-col-span-18'],
-  ['ix-col-span-13', 'ix-col-span-9'],
-  ['ix-col-span-4', 'ix-col-span-3', 'ix-col-span-16'],
-  ['ix-col-span-8', 'ix-col-span-6', 'ix-col-span-8'],
+  ['col-span-22'],
+  ['col-span-8', 'col-span-15'],
+  ['col-span-6', 'col-span-18'],
+  ['col-span-13', 'col-span-9'],
+  ['col-span-4', 'col-span-3', 'col-span-16'],
+  ['col-span-8', 'col-span-6', 'col-span-8'],
 ]
 
 const renderLoading = () => {
+  const { prefixCls } = useGlobalConfig('common')
   const loadingChild = listOfLoading.map(items => {
     const cols = items.map(col => (
-      <div class={`ix-col ${col} ix-card-loading-col`}>
-        <div class="ix-card-loading-block"></div>
+      <div class={`${prefixCls}-col ${prefixCls}-${col} ${prefixCls}-card-loading-col`}>
+        <div class={`${prefixCls}-card-loading-block`}></div>
       </div>
     ))
-    return <div class="ix-row">{cols}</div>
+    return <div class={`${prefixCls}-row`}>{cols}</div>
   })
-  return <div class="ix-card-loading">{loadingChild}</div>
+  return <div class={`${prefixCls}-card-loading`}>{loadingChild}</div>
 }
 
 const renderBody = (defaultSlot: Slot | undefined, loading: boolean, hasGrid: boolean) => {
+  const { prefixCls } = useGlobalConfig('common')
   let child: VNodeTypes | undefined
+
   if (loading) {
     child = renderLoading()
   } else if (defaultSlot) {
     child = hasGrid ? <IxRow>{defaultSlot()}</IxRow> : defaultSlot()
   }
-  return child ? <div class="ix-card-body">{child}</div> : null
+  return child ? <div class={`${prefixCls}-card-body`}>{child}</div> : null
 }
 
 const renderFooter = (footerSlot: Slot | undefined, footer: Array<CardButtonProps | VNode> | undefined) => {
   if (!footerSlot && !footer) {
     return null
   }
-
+  const { prefixCls } = useGlobalConfig('common')
   let child: VNodeTypes
   if (footerSlot) {
     child = footerSlot()
@@ -151,5 +157,5 @@ const renderFooter = (footerSlot: Slot | undefined, footer: Array<CardButtonProp
     })
   }
 
-  return <ul class="ix-card-footer">{child}</ul>
+  return <ul class={`${prefixCls}-card-footer`}>{child}</ul>
 }

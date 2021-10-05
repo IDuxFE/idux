@@ -13,6 +13,7 @@ export default defineComponent({
   props: inputProps,
   setup(props, { slots, expose, attrs }) {
     const config = useGlobalConfig('input')
+    const { prefixCls } = useGlobalConfig('common')
 
     const {
       elementRef,
@@ -47,12 +48,12 @@ export default defineComponent({
       return (
         <span class={normalizeClass([classes.value, className])} style={style as StyleValue}>
           {addonBefore}
-          <span class="ix-input-wrapper">
+          <span class={`${prefixCls}-input-wrapper`}>
             {prefix}
             <input
               {...rest}
               ref={elementRef}
-              class="ix-input-inner"
+              class={`${prefixCls}-input-inner`}
               disabled={isDisabled.value}
               readonly={props.readonly}
               onInput={handlerInput}
@@ -78,15 +79,16 @@ function useClasses(
   disabled: ComputedRef<boolean>,
 ) {
   return computed(() => {
-    const sizeClass = `ix-input-${props.size ?? config.size}`
+    const { prefixCls } = useGlobalConfig('common')
+    const sizeClass = `${prefixCls}-input-${props.size ?? config.size}`
     return {
-      'ix-input': true,
+      [`${prefixCls}-input`]: true,
       [sizeClass]: true,
-      'ix-input-disabled': disabled.value,
-      'ix-input-borderless': props.borderless ?? config.borderless,
-      'ix-input-focused': isFocused.value,
-      'ix-input-with-addon-after': props.addonAfter || slots.addonAfter,
-      'ix-input-with-addon-before': props.addonBefore || slots.addonBefore,
+      [`${prefixCls}-input-disabled`]: disabled.value,
+      [`${prefixCls}-input-borderless`]: props.borderless ?? config.borderless,
+      [`${prefixCls}-input-focused`]: isFocused.value,
+      [`${prefixCls}-input-with-addon-after`]: props.addonAfter || slots.addonAfter,
+      [`${prefixCls}-input-with-addon-before`]: props.addonBefore || slots.addonBefore,
     }
   })
 }
@@ -95,16 +97,18 @@ function renderAddon(addonSlot: Slot | undefined, addon: string | undefined) {
   if (!(addonSlot || addon)) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const child = addonSlot ? addonSlot() : addon
-  return <span class="ix-input-addon">{child}</span>
+  return <span class={`${prefixCls}-input-addon`}>{child}</span>
 }
 
 function renderPrefix(prefixSlot: Slot | undefined, icon: string | undefined) {
   if (!(prefixSlot || icon)) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
   const child = prefixSlot ? prefixSlot() : <IxIcon name={icon}></IxIcon>
-  return <span class="ix-input-prefix">{child}</span>
+  return <span class={`${prefixCls}-input-prefix`}>{child}</span>
 }
 
 function renderSuffix(
@@ -119,8 +123,10 @@ function renderSuffix(
     return null
   }
 
+  const { prefixCls } = useGlobalConfig('common')
+
   if (isClearable && !(slots.suffix || props.suffix)) {
-    const classes = { 'ix-input-suffix': true, 'ix-input-suffix-hidden': clearHidden }
+    const classes = { [`${prefixCls}-input-suffix`]: true, [`${prefixCls}-input-suffix-hidden`]: clearHidden }
     const child = slots.clearIcon?.({ handlerClear }) ?? <IxIcon name={clearIcon} onClick={handlerClear}></IxIcon>
     return <span class={classes}>{child}</span>
   }
@@ -132,5 +138,5 @@ function renderSuffix(
     child = slots.suffix?.() ?? <IxIcon name={props.suffix}></IxIcon>
   }
 
-  return <span class="ix-input-suffix">{child}</span>
+  return <span class={`${prefixCls}-input-suffix`}>{child}</span>
 }

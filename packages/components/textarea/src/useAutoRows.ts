@@ -8,6 +8,7 @@ import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
 import { isObject, isNumber, throttle } from 'lodash-es'
 import { isFirefox } from '@idux/cdk/platform'
 import { on, off, rAF } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return isObject(value) && isNumber(value.minRows) && isNumber(value.maxRows)
@@ -18,6 +19,7 @@ export function useAutoRows(
   autoRows: ComputedRef<boolean | TextareaAutoRows>,
   accessor: FormAccessor,
 ): void {
+  const { prefixCls } = useGlobalConfig('common')
   let enabled = false
   let minRows: number | null = null
   let maxRows: number | null = null
@@ -33,7 +35,9 @@ export function useAutoRows(
   const textareaBoxHeight = 10
 
   /** Class that should be applied to the textarea while it's being measured. */
-  const measuringClass = isFirefox ? 'ix-textarea-autosize-measuring-firefox' : 'ix-textarea-autosize-measuring'
+  const measuringClass = isFirefox
+    ? `${prefixCls}-textarea-autosize-measuring-firefox`
+    : `${prefixCls}-textarea-autosize-measuring`
 
   let isDestroyed = false
 

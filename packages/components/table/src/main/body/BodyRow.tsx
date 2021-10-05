@@ -7,6 +7,7 @@ import type {
 } from '../../composables/useColumns'
 
 import { computed, defineComponent, inject } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { isFunction, isString } from 'lodash-es'
 import { TABLE_TOKEN } from '../../token'
 import { tableBodyRowProps } from '../../types'
@@ -74,8 +75,9 @@ export default defineComponent({
 
 function useClasses(props: TableBodyRowProps, tableProps: TableProps, isSelected: ComputedRef<boolean>) {
   const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.rowIndex))
+  const { prefixCls: compPrefixCls } = useGlobalConfig('common')
   return computed(() => {
-    const prefixCls = 'ix-table-row'
+    const prefixCls = [`${compPrefixCls}-table-row`]
     const { level, expanded } = props
     const computeRowClassName = rowClassName.value
     return {

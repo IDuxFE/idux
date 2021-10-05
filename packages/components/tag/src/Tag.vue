@@ -1,10 +1,10 @@
 <template>
   <div :class="classes" :style="tagStyle">
-    <span v-if="icon || $slots.icon" class="ix-tag-icon">
+    <span v-if="icon || $slots.icon" :class="`${prefixCls}-tag-icon`">
       <slot name="icon"><IxIcon :name="icon" /></slot>
     </span>
-    <span class="ix-tag-content"><slot></slot></span>
-    <IxIcon v-if="closeAbleFlag" name="close" class="ix-tag-close-icon" @click="onClose" />
+    <span :class="`${prefixCls}-tag-content`"><slot></slot></span>
+    <IxIcon v-if="closeAbleFlag" name="close" :class="`${prefixCls}-tag-close-icon`" @click="onClose" />
   </div>
 </template>
 <script lang="ts">
@@ -28,6 +28,7 @@ export default defineComponent({
       return isPresetColor(color) || isStatusColor(color)
     })
 
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('tag')
     const classes = useClasses(props, config, isPresetOrStatusColor.value)
     const onClose = (evt: MouseEvent) => emit('close', evt)
@@ -39,6 +40,7 @@ export default defineComponent({
     })
 
     return {
+      prefixCls,
       classes,
       tagStyle,
       onClose,
@@ -48,19 +50,20 @@ export default defineComponent({
 })
 
 const useClasses = (props: TagProps, config: TagConfig, isPresetOrStatusColor: boolean) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
-    const colorClass = `ix-tag-${props.color}`
+    const colorClass = `${prefixCls}-tag-${props.color}`
     const presetFlag = isPresetOrStatusColor && (!props.checkAble || !config.checkAble)
     const checkAble = props.checkAble ?? config.checkAble
     const isRound = props.isRound ?? config.isRound
 
     return {
-      'ix-tag': true,
-      'ix-tag-round': isRound,
+      [`${prefixCls}-tag`]: true,
+      [`${prefixCls}-tag-round`]: isRound,
       [colorClass]: presetFlag,
-      'ix-tag-has-color': props.color ? !presetFlag : false,
-      'ix-tag-checkable': checkAble,
-      'ix-tag-checkable-checked': checkAble && props.checked,
+      [`${prefixCls}-tag-has-color`]: props.color ? !presetFlag : false,
+      [`${prefixCls}-tag-checkable`]: checkAble,
+      [`${prefixCls}-tag-checkable-checked`]: checkAble && props.checked,
     }
   })
 }

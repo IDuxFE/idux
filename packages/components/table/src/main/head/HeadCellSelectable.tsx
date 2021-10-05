@@ -1,6 +1,7 @@
 import type { VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxDropdown } from '@idux/components/dropdown'
 import { IxIcon } from '@idux/components/icon'
@@ -9,6 +10,8 @@ import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
+
     const {
       paginatedMap,
       selectable,
@@ -36,7 +39,7 @@ export default defineComponent({
       children.push(<IxCheckbox {...checkboxProps}></IxCheckbox>)
       const options = mergedSelectableOptions.value
       if (options) {
-        const trigger = <IxIcon name="down" class="ix-dropdown-trigger"></IxIcon>
+        const trigger = <IxIcon name="down" class={`${prefixCls}-dropdown-trigger`}></IxIcon>
         const content = (
           <IxMenu>
             {options.map(option => (

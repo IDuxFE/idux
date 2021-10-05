@@ -2,6 +2,7 @@ import type { Ref } from 'vue'
 import type { MenuItemProps } from './types'
 
 import { computed, defineComponent, inject, watch } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
 import { menuItemGroupToken, menuToken, menuSubToken } from './token'
@@ -12,6 +13,8 @@ export default defineComponent({
   name: 'IxMenuItem',
   props: menuItemProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const key = useKey()
 
     // menuContext must exist
@@ -41,7 +44,7 @@ export default defineComponent({
       const { icon, label } = props
 
       const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
-      const iconWrapper = iconNode ? <span class="ix-menu-item-icon">{iconNode}</span> : undefined
+      const iconWrapper = iconNode ? <span class={`${prefixCls}-menu-item-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.default?.() ?? label}</span>
 
@@ -56,11 +59,12 @@ export default defineComponent({
 })
 
 const useClasses = (props: MenuItemProps, selected: Ref<boolean>) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-menu-item': true,
-      'ix-menu-item-disabled': props.disabled,
-      'ix-menu-item-selected': selected.value,
+      [`${prefixCls}-menu-item`]: true,
+      [`${prefixCls}-menu-item-disabled`]: props.disabled,
+      [`${prefixCls}-menu-item-selected`]: selected.value,
     }
   })
 }

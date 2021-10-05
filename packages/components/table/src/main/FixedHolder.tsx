@@ -2,11 +2,13 @@ import type { Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 import { off, on } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 
 export default defineComponent({
   setup(_, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const { scrollHeadRef, handleScroll, scrollX, flattedData, isSticky, mergedSticky, columnWidths } =
       inject(TABLE_TOKEN)!
 
@@ -16,8 +18,8 @@ export default defineComponent({
     const hasData = computed(() => flattedData.value.length > 0)
     const classes = computed(() => {
       return {
-        'ix-table-fixed-holder': true,
-        'ix-table-sticky-holder': isSticky.value,
+        [`${prefixCls}-table-fixed-holder`]: true,
+        [`${prefixCls}-table-sticky-holder`]: isSticky.value,
       }
     })
     const style = computed<StyleValue>(() => {

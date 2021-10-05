@@ -14,6 +14,8 @@ export default defineComponent({
   name: 'IxRadio',
   props: radioProps,
   setup(props, { attrs, expose, slots }) {
+    const { prefixCls } = useGlobalConfig('common')
+
     const radioGroup = inject(radioGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? radioGroup?.props.name)
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
@@ -26,14 +28,14 @@ export default defineComponent({
     return () => {
       const { autofocus, value, label } = props
       const labelNode = slots.default?.() ?? label
-      const labelWrapper = labelNode ? <span class="ix-radio-label">{labelNode}</span> : undefined
+      const labelWrapper = labelNode ? <span class={`${prefixCls}-radio-label`}>{labelNode}</span> : undefined
       return (
         <label class={classes.value} role="radio" aria-checked={isChecked.value} aria-disabled={isDisabled.value}>
-          <span class="ix-radio-input">
+          <span class={`${prefixCls}-radio-input`}>
             <input
               ref={inputRef}
               type="radio"
-              class="ix-radio-input-inner"
+              class={`${prefixCls}-radio-input-inner`}
               aria-hidden
               autofocus={autofocus}
               checked={isChecked.value}
@@ -44,7 +46,7 @@ export default defineComponent({
               onBlur={handleBlur}
               onFocus={handleFocus}
             ></input>
-            {isButtoned.value ? null : <span class="ix-radio-input-box"></span>}
+            {isButtoned.value ? null : <span class={`${prefixCls}-radio-input-box`}></span>}
           </span>
           {labelWrapper}
         </label>
@@ -105,17 +107,18 @@ const useClasses = (
   isDisabled: ComputedRef<boolean>,
 ) => {
   const config = useGlobalConfig('radio')
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const isButton = isButtoned.value
     const mode = props.mode ?? groupProps?.mode ?? 'default'
     const size = props.size ?? groupProps?.size ?? config.size
     return {
-      'ix-radio': true,
-      'ix-radio-button': isButton,
-      'ix-radio-checked': isChecked.value,
-      'ix-radio-disabled': isDisabled.value,
-      [`ix-radio-${mode}`]: isButton,
-      [`ix-radio-${size}`]: isButton,
+      [`${prefixCls}-radio`]: true,
+      [`${prefixCls}-radio-button`]: isButton,
+      [`${prefixCls}-radio-checked`]: isChecked.value,
+      [`${prefixCls}-radio-disabled`]: isDisabled.value,
+      [`${prefixCls}-radio-${mode}`]: isButton,
+      [`${prefixCls}-radio-${size}`]: isButton,
     }
   })
 }

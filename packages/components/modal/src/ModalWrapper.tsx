@@ -3,6 +3,7 @@ import { ComputedRef, onBeforeUnmount, onMounted, Ref, watch } from 'vue'
 import { computed, defineComponent, inject, ref, Transition } from 'vue'
 import { isFunction } from 'lodash-es'
 import { callEmit, getOffset, convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
@@ -13,6 +14,7 @@ import { ModalProps } from './types'
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
+    const { prefixCls } = useGlobalConfig('common')
     const { props, config, visible, animatedVisible } = inject(modalToken)!
     const { close } = inject(MODAL_TOKEN)!
     const { centered, width, mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
@@ -58,24 +60,30 @@ export default defineComponent({
           onClick={onWrapperClick}
           onKeydown={onWrapperKeydown}
         >
-          <Transition name="ix-zoom" appear onEnter={onEnter} onAfterEnter={onAfterEnter} onAfterLeave={onAfterLeave}>
+          <Transition
+            name={`${prefixCls}-zoom`}
+            appear
+            onEnter={onEnter}
+            onAfterEnter={onAfterEnter}
+            onAfterLeave={onAfterLeave}
+          >
             <div
               v-show={visible.value}
               ref={modalRef}
               role="document"
-              class="ix-modal"
+              class={`${prefixCls}-modal`}
               style={modalStyle.value}
               onMousedown={onModalMousedown}
               onMouseup={onModalMouseup}
               {...attrs}
             >
-              <div ref={sentinelStartRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
-              <div class="ix-modal-content">
+              <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-modal-sentinel" aria-hidden="true`}></div>
+              <div class={`${prefixCls}-modal-content`}>
                 <ModalHeader></ModalHeader>
                 <ModalBody></ModalBody>
                 <ModalFooter></ModalFooter>
               </div>
-              <div ref={sentinelEndRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
+              <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-modal-sentinel" aria-hidden="true`}></div>
             </div>
           </Transition>
         </div>
@@ -96,11 +104,12 @@ const useConfig = (props: ModalProps, config: ModalConfig) => {
 }
 
 const useClasses = (props: ModalProps, centered: ComputedRef<boolean>) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const containerClassName = props.containerClassName
     return {
-      'ix-modal-wrapper': true,
-      'ix-modal-centered': centered.value,
+      [`${prefixCls}-modal-wrapper`]: true,
+      [`${prefixCls}-modal-centered`]: centered.value,
       [containerClassName || '']: containerClassName,
     }
   })

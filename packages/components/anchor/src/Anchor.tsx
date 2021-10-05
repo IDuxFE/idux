@@ -15,6 +15,7 @@ export default defineComponent({
   name: 'IxAnchor',
   props: anchorProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('anchor')
     const hideLinkBall = computed(() => props.hideLinkBall ?? config.hideLinkBall)
     const wrapperStyle = computed(() => {
@@ -31,9 +32,9 @@ export default defineComponent({
       )
 
       const anchorNode = (
-        <div class="ix-anchor-wrapper" style={wrapperStyle.value}>
-          <div class="ix-anchor" ref={anchorRef}>
-            <div class="ix-anchor-ink">{linkBall}</div>
+        <div class={`${prefixCls}-anchor-wrapper`} style={wrapperStyle.value}>
+          <div class={`${prefixCls}-anchor`} ref={anchorRef}>
+            <div class={`${prefixCls}-anchor-ink`}>{linkBall}</div>
             {slots.default?.()}
           </div>
         </div>
@@ -88,11 +89,12 @@ const useLinks = (props: AnchorProps, config: AnchorConfig) => {
 }
 
 const useInkBall = (activeLink: Ref<string | undefined>) => {
+  const { prefixCls } = useGlobalConfig('common')
   const anchorRef = ref<HTMLDivElement>()
   const inkBallClasses = computed(() => {
     return {
-      'ix-anchor-ink-ball': true,
-      'ix-anchor-ink-ball-visible': !!activeLink.value,
+      [`${prefixCls}-anchor-ink-ball`]: true,
+      [`${prefixCls}-anchor-ink-ball-visible`]: !!activeLink.value,
     }
   })
 

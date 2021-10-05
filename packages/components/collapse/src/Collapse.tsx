@@ -8,6 +8,7 @@ export default defineComponent({
   name: 'IxCollapse',
   props: collapseProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? config.accordion)
     const borderless = computed(() => props.borderless ?? config.borderless)
@@ -32,9 +33,9 @@ export default defineComponent({
 
     const classes = computed(() => {
       return {
-        'ix-collapse': true,
-        'ix-collapse-borderless': borderless.value,
-        'ix-collapse-ghost': ghost.value,
+        [`${prefixCls}-collapse`]: true,
+        [`${prefixCls}-collapse-borderless`]: borderless.value,
+        [`${prefixCls}-collapse-ghost`]: ghost.value,
       }
     })
 

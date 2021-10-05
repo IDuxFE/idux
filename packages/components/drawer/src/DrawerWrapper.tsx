@@ -19,10 +19,10 @@ export default defineComponent({
 
     const drawerTransition = computed(() => {
       const drawerTransitionMap = {
-        left: 'ix-move-left',
-        right: 'ix-move-right',
-        top: 'ix-move-up',
-        bottom: 'ix-move-down',
+        left: [`${prefixCls}-move-left`],
+        right: [`${prefixCls}-move-right`],
+        top: [`${prefixCls}-move-up`],
+        bottom: [`${prefixCls}-move-down`],
       }
       return drawerTransitionMap[placement.value]
     })
@@ -65,7 +65,7 @@ const useConfig = (props: DrawerProps, config: DrawerConfig) => {
 
 const useClasses = (props: DrawerProps) => {
   return computed(() => {
-    return ['ix-drawer-wrapper', props.containerClassName]
+    return [[`${prefixCls}-drawer-wrapper`], props.containerClassName]
   })
 }
 

@@ -32,8 +32,9 @@ export default defineComponent({
 })
 
 function useClasses(props: RowProps, config: RowConfig) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
-    const row = 'ix-row'
+    const row = `${prefixCls}-row`
     return {
       [row]: true,
       [`${row}-no-wrap`]: !(props.wrap ?? config.wrap),

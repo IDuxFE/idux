@@ -2,12 +2,14 @@ import type { ComputedRef, Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { on, off, rAF, cancelRAF } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { virtualScrollToken } from './token'
 import { VirtualScrollProps } from './types'
 import { ScrollBarState, SyncScrollTop } from './composables/useScroll'
 
 export default defineComponent({
   setup() {
+    const { prefixCls } = useGlobalConfig('common')
     const { props, scrollState, scrollTop, hideScrollBar, syncScrollTop, setScrollMoving, scrollBarVisible } =
       inject(virtualScrollToken)!
 
@@ -30,7 +32,7 @@ export default defineComponent({
     const thumbStyle = useThumbStyle(thumbHight, thumbTop)
 
     return () => (
-      <div ref={scrollBarRef} class="ix-virtual-scroll-bar" style={style.value}>
+      <div ref={scrollBarRef} class={`${prefixCls}-virtual-scroll-bar`} style={style.value}>
         <div ref={thumbRef} class={thumbClass.value} style={thumbStyle.value} />
       </div>
     )
@@ -183,10 +185,11 @@ const useStyle = (visible: ComputedRef<boolean>) => {
 }
 
 const useThumbClass = (dragging: Ref<boolean>) => {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     return {
-      'ix-virtual-scroll-thumb': true,
-      'ix-virtual-scroll-thumb-moving': dragging.value,
+      [`${prefixCls}-virtual-scroll-thumb`]: true,
+      [`${prefixCls}-virtual-scroll-thumb-moving`]: dragging.value,
     }
   })
 }

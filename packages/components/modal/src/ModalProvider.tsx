@@ -2,6 +2,7 @@ import type { ModalInstance, ModalOptions, ModalRef } from './types'
 
 import { defineComponent, ref, provide } from 'vue'
 import { callEmit, noop, convertArray, uniqueId } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import Modal from './Modal'
 import { modalProviderToken } from './token'
 
@@ -66,6 +67,7 @@ const useModalRef = () => {
 }
 
 const useModal = () => {
+  const { prefixCls } = useGlobalConfig('common')
   const modals = ref<ModalOptions[]>([])
 
   const getCurrIndex = (key: string) => {
@@ -79,7 +81,7 @@ const useModal = () => {
       return item.key!
     }
 
-    const key = item.key ?? uniqueId('ix-modal')
+    const key = item.key ?? uniqueId(`${prefixCls}-modal`)
     modals.value.push({ ...item, key })
     return key
   }

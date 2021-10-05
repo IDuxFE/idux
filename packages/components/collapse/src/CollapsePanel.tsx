@@ -3,6 +3,7 @@ import type { CollapsePanelProps } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
 import { isString } from 'lodash-es'
+import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
 import { IxCollapseTransition } from '@idux/components/_private'
 import { IxHeader } from '@idux/components/header'
@@ -15,15 +16,16 @@ export default defineComponent({
   name: 'IxCollapsePanel',
   props: collapsePanelProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const { slots: collapseSlots, expandedKeys, expandIcon, handleExpand } = inject(collapseToken)!
 
     const key = useKey()
     const isExpanded = computed(() => expandedKeys.value.includes(key))
     const classes = computed(() => {
       return {
-        'ix-collapse-panel': true,
-        'ix-collapse-panel-disabled': props.disabled,
-        'ix-collapse-panel-expanded': isExpanded.value,
+        [`${prefixCls}-collapse-panel`]: true,
+        [`${prefixCls}-collapse-panel-disabled`]: props.disabled,
+        [`${prefixCls}-collapse-panel-expanded`]: isExpanded.value,
       }
     })
 
@@ -41,8 +43,8 @@ export default defineComponent({
         <div class={classes.value}>
           {headerNode}
           <IxCollapseTransition>
-            <div v-show={expanded} class="ix-collapse-panel-content">
-              <div class="ix-collapse-panel-content-box">{slots.default?.()}</div>
+            <div v-show={expanded} class={`${prefixCls}-collapse-panel-content`}>
+              <div class={`${prefixCls}-collapse-panel-content-box`}>{slots.default?.()}</div>
             </div>
           </IxCollapseTransition>
         </div>

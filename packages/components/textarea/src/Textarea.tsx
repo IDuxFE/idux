@@ -55,6 +55,7 @@ export default defineComponent({
     useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
 
     return () => {
+      const { prefixCls } = useGlobalConfig('common')
       const suffix = renderSuffix(isClearable.value, slots.clearIcon, clearIcon.value, clearHidden.value, handlerClear)
       const { class: className, style, ...rest } = attrs
       return (
@@ -66,7 +67,7 @@ export default defineComponent({
           <textarea
             {...rest}
             ref={elementRef}
-            class="ix-textarea-inner"
+            class={`${prefixCls}-textarea-inner`}
             style={textareaStyle.value}
             disabled={isDisabled.value}
             readonly={props.readonly}
@@ -90,13 +91,14 @@ function useClasses(
   disabled: ComputedRef<boolean>,
 ) {
   return computed(() => {
-    const sizeClass = `ix-textarea-${props.size ?? config.size}`
+    const { prefixCls } = useGlobalConfig('common')
+    const sizeClass = `${prefixCls}-textarea-${props.size ?? config.size}`
     return {
-      'ix-textarea': true,
+      [`${prefixCls}-textarea`]: true,
       [sizeClass]: true,
-      'ix-textarea-disabled': disabled.value,
-      'ix-textarea-focused': isFocused.value,
-      'ix-textarea-with-count': props.showCount ?? config.showCount,
+      [`${prefixCls}-textarea-disabled`]: disabled.value,
+      [`${prefixCls}-textarea-focused`]: isFocused.value,
+      [`${prefixCls}-textarea-with-count`]: props.showCount ?? config.showCount,
     }
   })
 }
@@ -130,8 +132,8 @@ function renderSuffix(
   if (!isClearable) {
     return null
   }
-
-  const classes = { 'ix-textarea-suffix': true, 'ix-textarea-suffix-hidden': clearHidden }
+  const { prefixCls } = useGlobalConfig('common')
+  const classes = { [`${prefixCls}-textarea-suffix`]: true, [`${prefixCls}-textarea-suffix-hidden`]: clearHidden }
   const child = clearIconSlot?.({ handlerClear }) ?? <IxIcon name={clearIcon} onClick={handlerClear}></IxIcon>
   return <span class={classes}>{child}</span>
 }

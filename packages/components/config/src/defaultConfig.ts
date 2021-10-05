@@ -1,4 +1,5 @@
 import type {
+  CommonConfig,
   ButtonConfig,
   CheckboxConfig,
   IconConfig,
@@ -41,10 +42,15 @@ import type {
 import { shallowReactive } from 'vue'
 import { numFormatter } from './numFormatter'
 
+// --------------------- Common ---------------------
+const common = shallowReactive<CommonConfig>({
+  prefixCls: 'ix',
+})
+
 // --------------------- General ---------------------
 const button = shallowReactive<ButtonConfig>({ size: 'medium' })
 
-const checkbox: CheckboxConfig = { size: 'medium' }
+const checkbox = shallowReactive<CheckboxConfig>({ size: 'medium' })
 
 const icon = shallowReactive<IconConfig>({})
 
@@ -272,6 +278,7 @@ const anchor = shallowReactive<AnchorConfig>({
 // --------------------- end ---------------------
 
 export const defaultConfig: GlobalConfig = {
+  common,
   // General
   button,
   icon,

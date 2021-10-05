@@ -13,6 +13,7 @@ export default defineComponent({
   name: 'IxDropdown',
   props: dropdownProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('dropdown')
     const configProps = useConfigProps(props, config)
     const visibility = ɵUseVisibility(props)
@@ -28,10 +29,10 @@ export default defineComponent({
         <IxOverlay
           v-model={[visibility.value, 'visible']}
           v-slots={{ default: slots.default, content: slots.overlay }}
-          class="ix-dropdown"
+          class={`${prefixCls}-dropdown`}
           delay={defaultDelay}
           disabled={props.disabled}
-          transitionName="ix-fade"
+          transitionName={`${prefixCls}-fade`}
           {...configProps.value}
         />
       )

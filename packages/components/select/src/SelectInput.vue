@@ -1,8 +1,8 @@
 <template>
-  <div class="ix-select-input" :style="{ width: inputWidth }">
+  <div :class="`${prefixCls}-select-input`" :style="{ width: inputWidth }">
     <input
       ref="inputRef"
-      class="ix-select-input-inner"
+      :class="`${prefixCls}-select-input-inner`"
       :value="value"
       autocomplete="off"
       :autofocus="autofocus"
@@ -14,12 +14,13 @@
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     />
-    <span v-if="showMirror" ref="mirrorRef" class="ix-select-input-mirror" aria-hidden="true"></span>
+    <span v-if="showMirror" ref="mirrorRef" :class="`${prefixCls}-select-input-mirror`" aria-hidden="true"></span>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   props: {
@@ -32,6 +33,7 @@ export default defineComponent({
   },
   emits: ['compositionstart', 'compositionend', 'input', 'change', 'focus', 'blur'],
   setup(props, { emit }) {
+    const { prefixCls } = useGlobalConfig('common')
     const inputWidth = ref('')
     const inputRef = ref(null as unknown as HTMLInputElement)
     const mirrorRef = ref(null as unknown as HTMLInputElement)
@@ -96,7 +98,18 @@ export default defineComponent({
       syncMirrorWidth()
     })
 
-    return { inputWidth, inputRef, mirrorRef, onCompositionStart, onCompositionEnd, onInput, focus, blur, clear }
+    return {
+      prefixCls,
+      inputWidth,
+      inputRef,
+      mirrorRef,
+      onCompositionStart,
+      onCompositionEnd,
+      onInput,
+      focus,
+      blur,
+      clear,
+    }
   },
 })
 </script>

@@ -13,6 +13,7 @@ export default defineComponent({
   name: 'IxPopover',
   props: popoverProps,
   setup(props, { slots }) {
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('popover')
     const configProps = ɵUseConfigProps(props, config)
     const visibility = ɵUseVisibility(props)
@@ -20,9 +21,9 @@ export default defineComponent({
     return () => (
       <IxOverlay
         v-model={[visibility.value, 'visible']}
-        v-slots={{ default: slots.default, content: () => renderContent(props, slots) }}
-        class="ix-popover"
-        transitionName="ix-fade"
+        v-slots={{ default: slots.default, content: () => renderContent(prefixCls, props, slots) }}
+        class={`${prefixCls}-popover`}
+        transitionName={`${prefixCls}-fade`}
         {...configProps.value}
         offset={defaultOffset}
       />
@@ -30,18 +31,18 @@ export default defineComponent({
   },
 })
 
-const renderContent = (props: PopoverProps, slots: Slots) => {
+const renderContent = (prefixCls: string, props: PopoverProps, slots: Slots) => {
   if (!(slots.title || props.title || slots.content || props.content)) {
     return null
   }
 
   const child: VNode[] = []
   if (slots.title || props.title) {
-    child.push(<div class="ix-popover-title">{slots.title?.() ?? props.title}</div>)
+    child.push(<div class={`${prefixCls}-popover-title`}>{slots.title?.() ?? props.title}</div>)
   }
 
   if (slots.content || props.content) {
-    child.push(<div class="ix-popover-content">{slots.content?.() ?? props.content}</div>)
+    child.push(<div class={`${prefixCls}-popover-content`}>{slots.content?.() ?? props.content}</div>)
   }
 
   return child

@@ -1,20 +1,20 @@
 <template>
-  <div class="ix-result" :class="className">
-    <div class="ix-result-icon">
+  <div :class="className">
+    <div :class="`${prefixCls}-result-icon`">
       <slot name="icon">
         <IxIcon :name="currentIcon"></IxIcon>
       </slot>
     </div>
-    <div v-if="hasTitle || !!title" class="ix-result-title">
+    <div v-if="hasTitle || !!title" :class="`${prefixCls}-result-title`">
       <slot name="title">{{ title }}</slot>
     </div>
-    <div v-if="hasSubtitle || !!subtitle" class="ix-result-subtitle">
+    <div v-if="hasSubtitle || !!subtitle" :class="`${prefixCls}-result-subtitle`">
       <slot name="subtitle">{{ subtitle }}</slot>
     </div>
-    <div v-if="hasExtra" class="ix-result-extra">
+    <div v-if="hasExtra" :class="`${prefixCls}-result-extra`">
       <slot name="extra" />
     </div>
-    <div v-if="hasContent" class="ix-result-content">
+    <div v-if="hasContent" :class="`${prefixCls}-result-content`">
       <slot />
     </div>
   </div>
@@ -42,6 +42,7 @@ export default defineComponent({
   components: { IxIcon },
   props: resultProps,
   setup(props, { slots }: SetupContext) {
+    const { prefixCls } = useGlobalConfig('common')
     const resultConfig = useGlobalConfig('result')
     const className = useClassName(props, resultConfig)
     const hasTitle = useSlot(slots, 'title')
@@ -50,15 +51,16 @@ export default defineComponent({
     const hasContent = useSlot(slots)
     const currentIcon = useIcon(props, resultConfig)
 
-    return { className, hasTitle, hasSubtitle, hasExtra, hasContent, currentIcon }
+    return { prefixCls, className, hasTitle, hasSubtitle, hasExtra, hasContent, currentIcon }
   },
 })
 
 function useClassName(props: ResultProps, config: ResultConfig) {
+  const { prefixCls } = useGlobalConfig('common')
   return computed(() => {
     const status = props.status ?? config.status
 
-    return [`ix-result-${status}`]
+    return [`${prefixCls}-result`, `${prefixCls}-result-${status}`]
   })
 }
 

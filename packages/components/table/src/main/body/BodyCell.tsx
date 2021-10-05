@@ -9,6 +9,7 @@ import type { TableBodyCellProps } from '../../types'
 import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
 import { convertArray, convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 import { IxRadio } from '@idux/components/radio'
@@ -23,13 +24,15 @@ type BodyColumn = TableColumnMergedExtra & {
 export default defineComponent({
   props: tableBodyCellProps,
   setup(props) {
+    const { prefixCls: compPrefixCls } = useGlobalConfig('common')
+
     const { slots, activeSortable, fixedColumnKeys, columnOffsets, isSticky, expandable, selectable, bodyColTag } =
       inject(TABLE_TOKEN)!
     const dataValue = useDataValue(props)
 
     const cellProps = computed(() => {
       const { key, fixed, align, ellipsis } = props.column as BodyColumn
-      const prefixCls = 'ix-table'
+      const prefixCls = [`${compPrefixCls}-table`]
       let classes: Record<string, boolean> = {
         [`${prefixCls}-cell-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
         [`${prefixCls}-align-${align}`]: !!align,

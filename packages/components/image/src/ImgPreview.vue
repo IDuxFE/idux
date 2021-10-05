@@ -1,30 +1,33 @@
 <template>
-  <div class="ix-image-preview">
-    <div class="ix-image-preview-mask"></div>
-    <div class="ix-image-preview-tools">
-      <ul class="ix-preview-tools">
-        <li class="ix-tools-item ix-rotate-left" @click="rotateEvent(-1)">
+  <div :class="`${prefixCls}-image-preview`">
+    <div :class="`${prefixCls}-image-preview-mask`"></div>
+    <div :class="`${prefixCls}-image-preview-tools`">
+      <ul :class="`${prefixCls}-preview-tools`">
+        <li :class="`${prefixCls}-tools-item ${prefixCls}-rotate-left`" @click="rotateEvent(-1)">
           <IxIcon name="rotate-left" />
         </li>
-        <li class="ix-tools-item ix-rotate-right" @click="rotateEvent(1)">
+        <li :class="`${prefixCls}-tools-item ${prefixCls}-rotate-right`" @click="rotateEvent(1)">
           <IxIcon name="rotate-right" />
         </li>
-        <li class="ix-tools-item ix-zoom-in" @click="zoomEvent(1)">
+        <li :class="`${prefixCls}-tools-item ${prefixCls}-zoom-in`" @click="zoomEvent(1)">
           <IxIcon name="zoom-in" />
         </li>
         <li
-          class="ix-tools-item ix-zoom-out"
-          :class="isZoomOutDisabled ? 'ix-tools-item-disabled' : ''"
+          :class="[
+            `${prefixCls}-tools-item`,
+            `${prefixCls}-zoom-out`,
+            isZoomOutDisabled ? `${prefixCls}-tools-item-disabled` : '',
+          ]"
           @click="zoomEvent(-1)"
         >
           <IxIcon name="zoom-out" />
         </li>
-        <li class="ix-tools-item ix-close" @click="close">
+        <li :class="`${prefixCls}-tools-item ${prefixCls}-close`" @click="close">
           <IxIcon name="close" />
         </li>
       </ul>
     </div>
-    <div class="ix-image-preview-img">
+    <div :class="`${prefixCls}-image-preview-img`">
       <img :src="previewSrc" alt="" :style="{ transform: transform }" />
     </div>
   </div>
@@ -32,6 +35,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { imagePreviewProps } from './types'
 
@@ -51,6 +55,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const { prefixCls } = useGlobalConfig('common')
     const scale = ref(initScale)
     const rotate = ref(initRotate)
     const transform = computed(() => `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`)
@@ -68,6 +73,7 @@ export default defineComponent({
     }
 
     return {
+      prefixCls,
       close,
       scale,
       rotate,

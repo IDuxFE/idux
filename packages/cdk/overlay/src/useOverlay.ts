@@ -240,7 +240,7 @@ export const useOverlay = <
     hide,
     update,
     destroy,
-    id: uniqueId('ix-overlay'),
+    id: uniqueId(`ix-overlay`),
     visibility,
     triggerEventHandler,
     overlayEventHandler,

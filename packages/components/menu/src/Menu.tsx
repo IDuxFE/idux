@@ -18,6 +18,7 @@ export default defineComponent({
     const { expandedKeys, handleExpand } = useExpanded(props)
     const { selectedKeys, handleItemClick } = useSelected(props, dropdownContext)
 
+    const { prefixCls } = useGlobalConfig('common')
     const config = useGlobalConfig('menu')
     const indent = computed(() => props.indent ?? config.indent)
     const mode = useMenuMode(props)
@@ -35,7 +36,7 @@ export default defineComponent({
       theme,
     })
 
-    const classes = useClasses(props, theme, mode, !!dropdownContext)
+    const classes = useClasses(prefixCls, props, theme, mode, !!dropdownContext)
     const style = computed(() => {
       if (!props.collapsed || mode.value === 'horizontal') {
         return undefined
@@ -119,14 +120,20 @@ function useMenuMode(props: MenuProps) {
   })
 }
 
-function useClasses(props: MenuProps, theme: ComputedRef<string>, mode: ComputedRef<MenuMode>, isDropdown: boolean) {
+function useClasses(
+  prefixCls: string,
+  props: MenuProps,
+  theme: ComputedRef<string>,
+  mode: ComputedRef<MenuMode>,
+  isDropdown: boolean,
+) {
   return computed(() => {
     return {
-      'ix-menu': true,
-      [`ix-menu-${theme.value}`]: true,
-      [`ix-menu-${mode.value}`]: true,
-      'ix-menu-collapsed': props.collapsed,
-      'ix-menu-dropdown': isDropdown,
+      [`${prefixCls}-menu`]: true,
+      [`${prefixCls}-menu-${theme.value}`]: true,
+      [`${prefixCls}-menu-${mode.value}`]: true,
+      [`${prefixCls}-menu-collapsed`]: props.collapsed,
+      [`${prefixCls}-menu-dropdown`]: isDropdown,
     }
   })
 }

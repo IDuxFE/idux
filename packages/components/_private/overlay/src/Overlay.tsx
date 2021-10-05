@@ -1,5 +1,6 @@
 import type { ComputedRef, Ref, VNode } from 'vue'
 import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
+import { useGlobalConfig } from '@idux/components/config'
 import type { OverlayProps } from './types'
 
 import {
@@ -103,11 +104,12 @@ function renderContent(
   if (props.destroyOnHide && !visibility.value) {
     return null
   }
+  const { prefixCls } = useGlobalConfig('common')
 
-  const arrow = props.showArrow ? <div ref={arrowRef} class="ix-overlay-arrow"></div> : null
+  const arrow = props.showArrow ? <div ref={arrowRef} class={`${prefixCls}-overlay-arrow`}></div> : null
 
   const overlay = (
-    <div ref={popperRef} class="ix-overlay" {...popperEvents.value} {...attrs}>
+    <div ref={popperRef} class={`${prefixCls}-overlay`} {...popperEvents.value} {...attrs}>
       {contentNode}
       {arrow}
     </div>
