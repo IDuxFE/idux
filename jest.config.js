@@ -1,7 +1,7 @@
 module.exports = {
   // u can change this option to a more specific folder for test single component or util when dev
   // for example, ['<rootDir>/packages/components/button']
-  roots: ['<rootDir>/packages/'],
+  roots: ['<rootDir>/packages'],
 
   testEnvironment: 'jsdom',
   transform: {
@@ -31,6 +31,7 @@ module.exports = {
     '^@idux(.*)$': '<rootDir>/packages$1',
     '^@tests(.*)$': '<rootDir>/tests$1',
     '^lodash-es$': 'lodash',
+    '^dayjs/esm$': 'dayjs',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   collectCoverage: true,
