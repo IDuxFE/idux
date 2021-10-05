@@ -36,6 +36,8 @@ import type {
   DrawerConfig,
   AvatarConfig,
   TableConfig,
+  TimePickerConfig,
+  TimeRangePickerConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
@@ -143,6 +145,23 @@ const select = shallowReactive<SelectConfig>({
   searchable: false,
   size: 'medium',
   valueKey: 'value',
+})
+
+const timePicker = shallowReactive<TimePickerConfig>({
+  borderless: false,
+  clearable: true,
+  clearIcon: 'close-circle',
+  size: 'medium',
+  suffix: 'clock-circle',
+})
+
+const timeRangePicker = shallowReactive<TimeRangePickerConfig>({
+  borderless: false,
+  clearable: true,
+  clearIcon: 'close-circle',
+  size: 'medium',
+  suffix: 'clock-circle',
+  separator: '~',
 })
 
 // --------------------- Data Display ---------------------
@@ -293,6 +312,8 @@ export const defaultConfig: GlobalConfig = {
   rate,
   radio,
   select,
+  timePicker,
+  timeRangePicker,
   // Data Display
   avatar,
   badge,

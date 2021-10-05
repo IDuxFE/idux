@@ -11,11 +11,13 @@ import {
   RotateRight,
   ZoomIn,
   ZoomOut,
+  Calendar,
   Close,
   Check,
   CheckCircle,
   CloseCircle,
   CloseCircleFilled,
+  ClockCircle,
   CheckCircleFilled,
   InfoCircle,
   InfoCircleFilled,
@@ -47,12 +49,14 @@ export const staticIcons: IconDefinition[] = [
   RotateRight,
   ZoomIn,
   ZoomOut,
+  Calendar, // time-picker
   Check,
   CheckCircle,
   CheckCircleFilled,
   Close,
   CloseCircle,
   CloseCircleFilled, // modal
+  ClockCircle, // time-picker
   InfoCircle,
   InfoCircleFilled, // modal
   ExclamationCircle,

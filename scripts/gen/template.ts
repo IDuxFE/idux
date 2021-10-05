@@ -180,17 +180,12 @@ export function getDemoVueTemplate(compName: string): string {
   <Ix${compName}></Ix${compName}>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-
-  }
-})
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 </style>
 `
 }
