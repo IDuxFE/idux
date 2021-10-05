@@ -1,73 +1,51 @@
 <template>
-  <section>
-    <div class="title">disable options</div>
-    <div>
-      <time-picker
-        v-model:value="time"
-        format="hh:mm:ss a"
-        :hide-disabled-options="hideDisabledOptions"
-        :disabled-hours="disabledHours"
-        :disabled-minutes="disabledMinutes"
-        :disabled-seconds="disabledSeconds"
-      />
-      <ix-button @click="hideDisabledOptions = true">hide disabled options</ix-button>
-    </div>
+  <div class="title">disable options</div>
+  <IxSpace>
+    <IxTimePicker
+      v-model:value="time"
+      format="hh:mm:ss a"
+      :hide-disabled-options="hideDisabledOptions"
+      :disabled-hours="disabledHours"
+      :disabled-minutes="disabledMinutes"
+      :disabled-seconds="disabledSeconds"
+    />
+    <IxButton @click="hideDisabledOptions = true">hide disabled options</IxButton>
+  </IxSpace>
 
-    <div class="title">disabled</div>
-    <div>
-      <time-picker v-model:value="time" :disabled="disabled" />
-      <ix-button @click="disabled = !disabled">change disable</ix-button>
-    </div>
+  <div class="title">disabled</div>
+  <IxSpace>
+    <IxTimePicker v-model:value="time" :disabled="disabled" />
+    <IxButton @click="disabled = !disabled">change disable</IxButton>
+  </IxSpace>
 
-    <div class="title">readonly</div>
-    <div>
-      <time-picker v-model:value="time" :readonly="readonly" />
-      <ix-button @click="readonly = !readonly">change readonly</ix-button>
-    </div>
-  </section>
+  <div class="title">readonly</div>
+  <IxSpace>
+    <IxTimePicker v-model:value="time" :readonly="readonly" />
+    <IxButton @click="readonly = !readonly">change readonly</IxButton>
+  </IxSpace>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import TimePicker from '../src/TimePicker'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    TimePicker,
-  },
-  setup() {
-    const time = ref()
-    const disabled = ref(true)
-    const readonly = ref(true)
-    const hideDisabledOptions = ref(false)
+const time = ref()
+const disabled = ref(true)
+const readonly = ref(true)
+const hideDisabledOptions = ref(false)
 
-    function disabledHours(selectedAmPm: string) {
-      return selectedAmPm === 'am' ? [1, 2, 3] : []
-    }
-
-    function disabledMinutes(selectedHour: number, selectedAmPm: string) {
-      return selectedAmPm === 'pm' && selectedHour === 12 ? [1, 2, 3] : []
-    }
-
-    function disabledSeconds(selectedHour: number, selectedMinute: number, selectedAmPm: string) {
-      return selectedAmPm === 'pm' && selectedHour === 12 && selectedMinute === 0 ? [1, 2, 3] : []
-    }
-
-    return {
-      time,
-      disabled,
-      readonly,
-      hideDisabledOptions,
-      disabledHours,
-      disabledMinutes,
-      disabledSeconds,
-    }
-  },
-})
-</script>
-<style lang="less" scoped>
-.ix-time-picker {
-  margin: 0 10px 10px 0;
+function disabledHours(selectedAmPm: string) {
+  return selectedAmPm === 'am' ? [1, 2, 3] : []
 }
+
+function disabledMinutes(selectedHour: number, selectedAmPm: string) {
+  return selectedAmPm === 'pm' && selectedHour === 12 ? [1, 2, 3] : []
+}
+
+function disabledSeconds(selectedHour: number, selectedMinute: number, selectedAmPm: string) {
+  return selectedAmPm === 'pm' && selectedHour === 12 && selectedMinute === 0 ? [1, 2, 3] : []
+}
+</script>
+
+<style scoped lang="less">
 .title {
   padding: 10px 0;
 }
