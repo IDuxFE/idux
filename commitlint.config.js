@@ -1,7 +1,9 @@
 'use strict'
-const message = process.env['HUSKY_GIT_PARAMS']
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const fs = require('fs')
+const path = require('path')
+const message = path.resolve(__dirname, '.git/COMMIT_EDITMSG')
 
 const scopes = ['release', 'packaging', 'scripts', 'changelog', 'cdk:*', 'comp:*', 'pro:*']
 
