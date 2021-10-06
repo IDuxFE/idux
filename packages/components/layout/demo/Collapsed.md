@@ -1,6 +1,6 @@
 ---
 title:
-  zh: Collapsed
+  zh: 折叠状态
   en: Collapsed
 order: 5
 ---

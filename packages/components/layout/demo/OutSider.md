@@ -1,6 +1,6 @@
 ---
 title:
-  zh: OutSider
+  zh: 左右布局
   en: OutSider
 order: 1
 ---
