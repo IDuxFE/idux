@@ -1,14 +1,14 @@
 ---
 title:
-  zh: loading的使用
+  zh: 加载状态
   en: Loading usage
-order: 0
+order: 2
 ---
 
 ## zh
 
-* 处于loading的switch会置灰不可操作
+处于`loading`的`Switch`会置灰不可操作
 
 ## en
 
-* The loading switch will be grayed out and inoperable.
+The loading switch will be grayed out and inoperable.

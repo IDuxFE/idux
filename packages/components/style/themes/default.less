@@ -417,24 +417,30 @@
 @rate-background-color: #c6d1de;
 
 /* switch -------------------------- */
-@switch-close-bg-color: #ccc;
-@switch-close-border-color: transparent;
+@switch-close-bg-color: @color-graphite-l10;
 @switch-close-loading-icon-color: @switch-close-bg-color;
-@switch-open-bg-color: @color-blue;
-@switch-open-border-color: @border-color;
-@switch-open-loading-icon-color: @switch-open-bg-color;
+@switch-open-bg-color: @color-primary;
+@switch-open-loading-icon-color: @color-primary;
 @switch-transition: all @transition-duration-slow cubic-bezier(0.35, 0, 0.25, 1);
-@switch-normal-height: 22px;
-@switch-normal-inner-circle-size: 18px;
-@switch-small-height: @switch-normal-height - 4;
-@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 6;
+@switch-normal-height: 24px;
+@switch-normal-inner-circle-size: 20px;
+@switch-small-height: @switch-normal-height - 8;
+@switch-small-inner-circle-size: @switch-normal-inner-circle-size - 8;
+@switch-normal-offset: ( @switch-normal-height + @switch-normal-inner-circle-size ) / 2;
+@switch-small-offset: ( @switch-small-height + @switch-small-inner-circle-size ) / 2;
+@switch-normal-text-padding: 0 8px 0 26px;
+@switch-normal-checked-text-padding: 0 28px 0 8px;
+@switch-small-text-padding: 0 8px 0 16px;
+@switch-small-checked-text-padding: 0 16px 0 8px;
+@switch-normal-loading-icon-offset: @switch-normal-offset + 3px;
+@switch-small-loading-icon-offset: @switch-small-offset + 2px;
 @switch-loading-icon-size: @font-size-sm;
 @switch-loading-icon-size-sm: @font-size-sm - 4;
 @switch-inner-font-size: @font-size-sm;
 @switch-inner-circle-bg-color: @color-white;
 @switch-inner-circle-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-@switch-focus-shadow: 0 0 0 2px fade(@color-blue, 20%);
-@switch-disable-opacity: 0.4;
+@switch-focus-shadow: 0 0 0 2px fade(@color-primary, 20%);
+@switch-disable-opacity: 0.5;
 
 /* radio -------------------------------- */
 @radio-line-height: @form-line-height;

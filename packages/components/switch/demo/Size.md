@@ -1,12 +1,14 @@
 ---
 title:
-  zh: size的使用
+  zh: 尺寸
   en: Size usage
-order: 0
+order: 3
 ---
 
 ## zh
 
-size有两种，默认为medium，小尺寸为small
+`Switch`共有两种尺寸`medium`和`small`，默认为`medium`
 
 ## en
+
+`Switch` has two sizes, `medium` and `small`, and the default is `medium`

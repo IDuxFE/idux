@@ -1,7 +1,8 @@
 <template>
-  <IxSwitch :disabled="disabled"></IxSwitch>
-  <div class="mt-5">disabled: {{ disabled }}</div>
-  <IxButton class="mt-5" @click="changeDisabled">change disabled</IxButton>
+  <IxSpace direction="vertical" :size="20">
+    <IxSwitch :disabled="disabled"></IxSwitch>
+    <IxButton @click="changeDisabled">Change Disabled</IxButton>
+  </IxSpace>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -20,8 +21,3 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="less" scoped>
-.mt-5 {
-  margin-top: 5px;
-}
-</style>
