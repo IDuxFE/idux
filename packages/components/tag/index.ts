@@ -1,6 +1,6 @@
 import type { TagComponent } from './src/types'
 
-import Tag from './src/Tag.vue'
+import Tag from './src/Tag'
 
 const IxTag = Tag as unknown as TagComponent
 

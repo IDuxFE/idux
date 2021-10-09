@@ -1,6 +1,6 @@
 import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import IxTag from '../src/Tag.vue'
+import IxTag from '../src/Tag'
 import { TagProps } from '../src/types'
 
 describe('Tag', () => {
@@ -39,13 +39,13 @@ describe('Tag', () => {
   })
 
   test('checked', async () => {
-    const wrapper = TagMount({ props: { checkAble: true, checked: true } })
+    const wrapper = TagMount({ props: { checkable: true, checked: true } })
 
     expect(wrapper.find('.ix-tag-checkable-checked'))
   })
 
-  test('checkAble false', async () => {
-    const wrapper = TagMount({ props: { checkAble: false, checked: true } })
+  test('checkable false', async () => {
+    const wrapper = TagMount({ props: { checkable: false, checked: true } })
 
     expect(wrapper.classes()).not.toContain('ix-tag-checkable-checked')
   })
@@ -57,7 +57,7 @@ describe('Tag', () => {
   })
 
   test('icon slot word', () => {
-    const wrapper = TagMount({ props: { icon: 'up' }, slots: { icon: 'slot tag icon' } })
+    const wrapper = TagMount({ slots: { icon: 'slot tag icon' } })
 
     expect(wrapper.find('.ix-tag-icon').text()).toBe('slot tag icon')
   })

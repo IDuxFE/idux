@@ -3,13 +3,17 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export type TagShape = 'round' | 'rect' | 'round-rect'
+
 export const tagProps = {
   closable: IxPropTypes.bool,
   icon: IxPropTypes.string,
   color: IxPropTypes.string,
   checked: IxPropTypes.bool,
-  checkAble: IxPropTypes.bool,
-  isRound: IxPropTypes.bool,
+  checkable: IxPropTypes.bool,
+  shape: IxPropTypes.oneOf<TagShape>(['round', 'rect', 'round-rect']),
+
+  onClose: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
 
 export type TagProps = IxInnerPropTypes<typeof tagProps>

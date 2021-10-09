@@ -7,7 +7,6 @@
   display: inline-block;
   padding: @tag-default-padding;
   border: 1px solid @tag-default-border-color;
-  border-radius: @tag-border-radius;
   background: @tag-default-background-color;
   font-size: @tag-font-size;
 
@@ -22,6 +21,7 @@
   &-close-icon {
     color: fade(@tag-default-color, 60%);
     padding-left: @tag-padding;
+    cursor: pointer;
 
     &:hover {
       color: @tag-default-color;
@@ -30,6 +30,12 @@
 
   &-round {
     border-radius: @tag-round-border-radius;
+  }
+  &-rect {
+    border-radius: 0;
+  }
+  &-round-rect {
+    border-radius: @tag-border-radius;
   }
 
   // mixin to iterate over colors and create CSS class for each one

@@ -55,9 +55,8 @@ const checkbox: CheckboxConfig = { size: 'medium' }
 const icon = shallowReactive<IconConfig>({})
 
 const tag = shallowReactive<TagConfig>({
-  closable: false,
-  checkAble: false,
-  isRound: false,
+  checkable: false,
+  shape: 'round-rect',
 })
 
 // --------------------- Layout ---------------------
