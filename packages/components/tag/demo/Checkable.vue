@@ -1,6 +1,6 @@
 <template>
   <div>
-    <IxTag color="red" icon="alipay" closable checkAble :checked="checked" @click="onChangeChecked" @close="onClose"
+    <IxTag color="red" icon="alipay" closable checkable :checked="checked" :onClose="onClose" @click="onChangeChecked"
       >测试可选</IxTag
     >
   </div>
@@ -18,7 +18,7 @@ export default defineComponent({
     }
     const checked = ref(false)
     const onChangeChecked = () => {
-      console.log('close-success')
+      console.log('change-success')
       checked.value = !checked.value
     }
     return { hide, onClose, checked, onChangeChecked }

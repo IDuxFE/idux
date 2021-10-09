@@ -24,6 +24,7 @@ import type {
   TablePaginationPosition,
   TableSize,
 } from '@idux/components/table/src/types'
+import { TagShape } from '@idux/components/tag/src/types'
 
 // General
 
@@ -36,9 +37,8 @@ export interface IconConfig {
 }
 
 export interface TagConfig {
-  closable: boolean
-  checkAble: boolean
-  isRound: boolean
+  checkable: boolean
+  shape: TagShape
 }
 
 // Layout

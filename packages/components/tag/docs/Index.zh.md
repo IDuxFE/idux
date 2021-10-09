@@ -21,21 +21,15 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| closable | 标签是否可以关闭 | Boolean | false | ✅ | - |
-| color | 标签颜色 | String | '#000' | - | red, orange, gold, yellow, canary, prasinous, verdant, green, cyan, sky, blue, admiral, purple, magenta,lime, grey |
+| closable | 标签是否可以关闭 | Boolean | `false` | - | - |
+| color | 标签颜色 | String | `#000` | - | `red, orange, gold, yellow, canary, prasinous, verdant, green, cyan, sky, blue, admiral, purple, magenta,lime, grey` |
 | icon | 标签左侧图标 | string | - | - | - |
-| checked | 标签选中状态 | Boolean | false | - | - |
-| checkAble | 标签是否可选的状态 | Boolean | false | ✅ | - |
-| isRound | 是否圓角形狀 | Boolean | false | ✅ | - |
+| checked | 标签选中状态 | Boolean | `false` | - | - |
+| checkable | 标签是否可选的状态 | Boolean | `false` | ✅ | - |
+| shape | 设置按钮形状 | `round \| rect \| round-rect`  | `round-rect` | ✅ | - |
+| onClose | 关闭时的回调 | `(e: MouseEvent) => void`  | - | - | - |
 
 [comment]: <> (| level | 数字等级&#40;正整数&#41;,这个可以优先级放后 | Number | - | ✅ | - |)
-
-#### TagEmits
-
-| 事件名称 | 说明                 | 回调函数          |
-| -------- | -------------------- | ----------------- |
-| close    | 关闭时的回调         | (e) => void       |
-| change   | 点击标签时触发的回调 | (checked) => void |
 
 #### TagSlots
 

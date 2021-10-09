@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tag render work 1`] = `
-"<div class=\\"ix-tag\\">
-  <!--v-if--><span class=\\"ix-tag-content\\"></span>
-  <!--v-if-->
+"<div class=\\"ix-tag ix-tag-round-rect\\">
+  <!----><span class=\\"ix-tag-content\\"><!----></span>
+  <!---->
 </div>"
 `;
