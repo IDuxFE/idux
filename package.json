@@ -5,7 +5,7 @@
   "description": "A UI Component Library for Vue 3.x",
   "license": "MIT",
   "scripts": {
-    "start": "gulp start --gulpfile ./scripts/gulp/gulpfile.ts",
+    "start": "gulp start --cwd ./packages/site --gulpfile ./scripts/gulp/gulpfile.ts",
     "build": "gulp build --gulpfile ./scripts/gulp/gulpfile.ts",
     "icons": "gulp icons --gulpfile ./scripts/gulp/gulpfile.ts",
     "gen": "ts-node scripts/gen/generate.ts",
