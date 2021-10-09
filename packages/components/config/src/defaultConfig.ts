@@ -44,7 +44,7 @@ import { shallowReactive } from 'vue'
 import { numFormatter } from './numFormatter'
 
 // --------------------- General ---------------------
-const button = shallowReactive<ButtonConfig>({ size: 'medium' })
+const button = shallowReactive<ButtonConfig>({ size: 'md' })
 
 const checkbox: CheckboxConfig = { size: 'medium' }
 

@@ -1,7 +1,10 @@
 <template>
-  <IxButton @click="changeSize('large')">Large</IxButton>
-  <IxButton @click="changeSize('medium')">Medium</IxButton>
-  <IxButton @click="changeSize('small')">Small</IxButton>
+  <IxRadioGroup v-model:value="size">
+    <IxRadio value="sm">Small</IxRadio>
+    <IxRadio value="md">Medium</IxRadio>
+    <IxRadio value="lg">Large</IxRadio>
+  </IxRadioGroup>
+
   <br />
   <IxButton mode="primary" :size="size">Primary</IxButton>
   <IxButton :size="size">Default</IxButton>
@@ -10,16 +13,10 @@
   <IxButton mode="link" :size="size" href="https://github.com/IDuxFE/idux" target="_blank">Link</IxButton>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ButtonSize } from '@idux/components/button'
 
-export default defineComponent({
-  setup() {
-    const size = ref('large')
-    const changeSize = (value: string) => {
-      size.value = value
-    }
-    return { size, changeSize }
-  },
-})
+import { ref } from 'vue'
+
+const size = ref<ButtonSize>('lg')
 </script>
