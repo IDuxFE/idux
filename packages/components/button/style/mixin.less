@@ -123,7 +123,7 @@
   transition: all 0.3s @ease-in-out;
   user-select: none;
   touch-action: manipulation;
-  .button-size(@button-height-md; @button-font-size-md; @button-padding-md; @button-border-radius);
+
   &,
   &:active,
   &:focus {
@@ -138,6 +138,9 @@
 
   &-small {
     .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius);
+  }
+  &-medium {
+    .button-size(@button-height-md; @button-font-size-md; @button-padding-md; @button-border-radius);
   }
   &-large {
     .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius);

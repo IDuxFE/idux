@@ -16,23 +16,19 @@ export default defineComponent({
     const groupProps = inject(buttonToken, {})
     const buttonConfig = useGlobalConfig('button')
 
-    const mode$$ = computed(() => props.mode ?? groupProps.mode ?? 'default')
+    const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const hasDefaultSlot = computed(() => hasSlot(slots))
 
-    const classes = useClasses(props, groupProps, buttonConfig, mode$$, hasDefaultSlot)
+    const classes = useClasses(props, groupProps, buttonConfig, mode, hasDefaultSlot)
 
-    return { classes, mode$$ }
-  },
-
-  render() {
-    const { classes, mode$$ } = this
-    const child = renderChild(this.$slots, this.loading, this.icon)
-    if (mode$$ === 'link') {
-      return <a class={classes}>{child}</a>
-    } else {
+    return () => {
+      const children = renderChildren(props, slots)
+      if (mode.value === 'link') {
+        return <a class={classes.value}>{children}</a>
+      }
       return (
-        <button class={classes} disabled={this.disabled || this.loading} type={this.type}>
-          {child}
+        <button class={classes.value} disabled={props.disabled || props.loading} type={props.type}>
+          {children}
         </button>
       )
     }
@@ -58,23 +54,23 @@ const useClasses = (
       'ix-button-block': props.block,
       'ix-button-icon-only': !hasDefaultSlot.value && (!!props.icon || props.loading),
       [`ix-button-${mode.value}`]: mode.value !== 'default',
-      [`ix-button-${size}`]: size !== 'medium',
+      [`ix-button-${size}`]: true,
       [`ix-button-${shape}`]: !!shape,
     }
   })
 }
 
-const renderChild = (slots: Slots, loading: boolean | undefined, icon: string | undefined) => {
-  const child: VNodeTypes[] = []
-  if (loading) {
-    child.push(<IxIcon name="loading"></IxIcon>)
+function renderChildren(props: ButtonProps, slots: Slots) {
+  const children: VNodeTypes[] = []
+  if (props.loading) {
+    children.push(<IxIcon name="loading"></IxIcon>)
   } else if (slots.icon) {
-    child.push(slots.icon())
-  } else if (icon) {
-    child.push(<IxIcon name={icon}></IxIcon>)
+    children.push(slots.icon())
+  } else if (props.icon) {
+    children.push(<IxIcon name={props.icon}></IxIcon>)
   }
   if (slots.default) {
-    child.push(<span>{slots.default()}</span>)
+    children.push(<span>{slots.default()}</span>)
   }
-  return child
+  return children
 }
