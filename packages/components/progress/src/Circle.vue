@@ -27,14 +27,17 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, ComputedRef } from 'vue'
+import { ComputedRef, computed, defineComponent, ref } from 'vue'
+
 import { isObject } from 'lodash-es'
-import { uniqueId, convertNumber } from '@idux/cdk/utils'
+
+import { convertNumber, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+
+import { ConvertProgressProps, ProgressGapPositionType, StringGradients, convertProgressProps } from './types'
 import { useInfo, useStatus, useStatusClasses } from './useCommonLogic'
 import { handleCircleGradient } from './util'
-import { ConvertProgressProps, convertProgressProps, ProgressGapPositionType, StringGradients } from './types'
 
 export interface CalcSharedProperties {
   isGradient: boolean

@@ -30,6 +30,7 @@
 
 <script lang="ts">
 import { defineComponent, watchEffect } from 'vue'
+
 import { BREAKPOINTS, isMatched, useBreakpoints, useBreakpointsMatch, useScreens } from '@idux/cdk/breakpoint'
 
 export default defineComponent({

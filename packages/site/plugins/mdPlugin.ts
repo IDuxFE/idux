@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite'
+
 import { parseMd } from './md'
 
 export function mdPlugin(): Plugin {

@@ -1,18 +1,29 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } from 'vue'
+
 import type {
   AsyncValidatorFn,
-  ValidateErrors,
   TriggerType,
   ValidateError,
+  ValidateErrors,
+  ValidateStatus,
   ValidatorFn,
   ValidatorOptions,
-  ValidateStatus,
 } from './types'
+import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } from 'vue'
 
-import { computed, shallowRef, ref, toRaw, watch, watchEffect } from 'vue'
+import { computed, ref, shallowRef, toRaw, watch, watchEffect } from 'vue'
+
 import { isArray, isNil, isPlainObject } from 'lodash-es'
+
 import { hasOwnProperty } from '@idux/cdk/utils'
+
 import { Validators } from './validators'
 
 type IsNullable<T, K> = undefined extends T ? K : never

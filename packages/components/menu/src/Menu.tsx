@@ -1,14 +1,23 @@
-import type { ComputedRef } from 'vue'
-import type { ɵDropdownContext } from '@idux/components/dropdown'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { MenuMode, MenuProps } from './types'
+import type { ɵDropdownContext } from '@idux/components/dropdown'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, inject, provide, watch } from 'vue'
+
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
+import { useMergedProp } from '@idux/components/utils'
+
 import { menuToken } from './token'
 import { menuProps } from './types'
-import { useMergedProp } from '@idux/components/utils'
 
 export default defineComponent({
   name: 'IxMenu',

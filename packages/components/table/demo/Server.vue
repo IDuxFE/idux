@@ -8,7 +8,9 @@
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
+
 import axios from 'axios'
+
 import { TableColumn, TablePagination } from '@idux/components/table'
 
 interface RandomUser {

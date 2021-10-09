@@ -1,10 +1,19 @@
-import type { Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { MenuItemProps } from './types'
+import type { Ref } from 'vue'
 
 import { computed, defineComponent, inject, watch } from 'vue'
+
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
-import { menuItemGroupToken, menuToken, menuSubToken } from './token'
+
+import { menuItemGroupToken, menuSubToken, menuToken } from './token'
 import { menuItemProps } from './types'
 import { usePaddingLeft } from './usePaddingLeft'
 

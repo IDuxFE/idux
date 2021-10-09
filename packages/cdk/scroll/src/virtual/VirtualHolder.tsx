@@ -1,10 +1,20 @@
-import type { ComputedRef, Ref, StyleValue } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { OriginScroll } from './composables/useScroll'
+import type { ComputedRef, Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
 import { isNil, throttle } from 'lodash-es'
+
 import { isFirefox } from '@idux/cdk/platform'
 import { callEmit, cancelRAF, off, offResize, on, onResize, rAF } from '@idux/cdk/utils'
+
 import { virtualScrollToken } from './token'
 
 export default defineComponent({

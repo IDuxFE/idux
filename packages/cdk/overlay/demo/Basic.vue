@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
+
 import { useOverlay } from '@idux/cdk/overlay'
 
 export default defineComponent({

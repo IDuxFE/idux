@@ -1,15 +1,25 @@
-import type { ComputedRef, Slots, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { CollapsePanelProps } from './types'
+import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { isString } from 'lodash-es'
-import { useKey } from '@idux/components/utils'
+
+import { getFirstValidNode } from '@idux/cdk/utils'
 import { IxCollapseTransition } from '@idux/components/_private'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
+import { useKey } from '@idux/components/utils'
+
 import { collapseToken } from './token'
 import { collapsePanelProps } from './types'
-import { getFirstValidNode } from '@idux/cdk/utils'
 
 export default defineComponent({
   name: 'IxCollapsePanel',

@@ -1,7 +1,6 @@
 import marked from 'marked'
 import { parseFragment, serialize } from 'parse5'
-import { languages, highlight } from 'prismjs'
-
+import { highlight, languages } from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 loadLanguages(['ts', 'typescript', 'bash', 'vim'])
 

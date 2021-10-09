@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 import { RadioOptions } from '@idux/components/radio'
 
 export default defineComponent({

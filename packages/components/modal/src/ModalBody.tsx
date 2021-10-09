@@ -1,8 +1,18 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Slot, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { isString } from 'lodash-es'
+
 import { IxIcon } from '@idux/components/icon'
+
 import { modalToken } from './token'
 
 // staticIcons.ts

@@ -1,4 +1,5 @@
 import { flushPromises } from '@vue/test-utils'
+
 import { FormArray, FormControl, FormGroup } from '../src/controls'
 import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'

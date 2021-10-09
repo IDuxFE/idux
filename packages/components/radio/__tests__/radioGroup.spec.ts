@@ -1,9 +1,11 @@
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+import { h } from 'vue'
+
 import { renderWork } from '@tests'
+
 import Radio from '../src/Radio'
 import RadioGroup from '../src/RadioGroup'
 import { RadioGroupProps } from '../src/types'
-import { h } from 'vue'
 
 describe('RadioGroup', () => {
   const defaultOptions = [

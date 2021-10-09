@@ -1,26 +1,27 @@
 import type { QuestionCollection } from 'inquirer'
 
 import { resolve } from 'path'
-import { textSync } from 'figlet'
+
 import chalk from 'chalk'
-import inquirer from 'inquirer'
-import ora from 'ora'
-import { camelCase, kebabCase, upperFirst } from 'lodash'
+import { textSync } from 'figlet'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
+import inquirer from 'inquirer'
+import { camelCase, kebabCase, upperFirst } from 'lodash'
+import ora from 'ora'
 
 import {
+  getCdkTestTemplate,
+  getCdkUseTemplate,
+  getDemoTemplate,
+  getDemoVueTemplate,
+  getDocsTemplate,
   getIndexTemplate,
   getLessTemplate,
   getStyleIndexTemplate,
   getTestTemplate,
-  getTypesTemplate,
-  getDocsTemplate,
-  getVueTemplate,
-  getDemoTemplate,
-  getDemoVueTemplate,
-  getCdkUseTemplate,
-  getCdkTestTemplate,
   getTsxTemplate,
+  getTypesTemplate,
+  getVueTemplate,
 } from './template'
 
 type AnswerType =

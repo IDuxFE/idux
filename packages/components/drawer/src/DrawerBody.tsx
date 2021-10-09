@@ -1,9 +1,18 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Slot } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { convertCssPixel } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { drawerToken, DRAWER_TOKEN } from './token'
+
+import { DRAWER_TOKEN, drawerToken } from './token'
 
 export default defineComponent({
   setup() {

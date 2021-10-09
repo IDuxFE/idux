@@ -19,6 +19,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from 'vue'
+
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export default defineComponent({

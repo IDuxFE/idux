@@ -8,6 +8,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 import { useModal } from '@idux/components/modal'
 
 export default defineComponent({

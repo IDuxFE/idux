@@ -35,10 +35,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
+
 import { useRoute, useRouter } from 'vue-router'
+
 import { useScreens } from '@idux/cdk/breakpoint'
 import { ModalProviderInstance } from '@idux/components/modal'
-import { appContextToken, AppContext } from './context'
+
+import { AppContext, appContextToken } from './context'
 
 export default defineComponent({
   name: 'App',

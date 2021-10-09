@@ -1,8 +1,16 @@
-import type { ComputedRef } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { Key, TableColumnSortOrder, TableColumnSortable } from '../types'
 import type { TableColumnMerged } from './useColumns'
-import type { Key, TableColumnSortable, TableColumnSortOrder } from '../types'
+import type { ComputedRef } from 'vue'
 
 import { computed, reactive, watchEffect } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
 
 export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): SortableContext {

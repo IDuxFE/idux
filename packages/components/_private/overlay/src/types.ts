@@ -1,7 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 

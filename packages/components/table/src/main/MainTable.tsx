@@ -1,19 +1,28 @@
-import type { StyleValue, VNodeTypes } from 'vue'
-import type { VirtualContentRenderFn, VirtualItemRenderFn } from '@idux/cdk/scroll'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { FlattedData } from '../composables/useDataSource'
 import type { Key } from '../types'
+import type { VirtualContentRenderFn, VirtualItemRenderFn } from '@idux/cdk/scroll'
+import type { StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
+
 import { IxVirtualScroll } from '@idux/cdk/scroll'
 import { convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
-import { tableBodyToken, TABLE_TOKEN } from '../token'
+
+import { TABLE_TOKEN, tableBodyToken } from '../token'
 import ColGroup from './ColGroup'
-import Head from './head/Head'
-import Body from './body/Body'
-import BodyRow from './body/BodyRow'
-import Foot from './tfoot/Foot'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
+import Body from './body/Body'
+import BodyRow from './body/BodyRow'
+import Head from './head/Head'
+import Foot from './tfoot/Foot'
 
 export default defineComponent({
   setup() {

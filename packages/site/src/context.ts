@@ -1,5 +1,6 @@
-import { BreakpointKey } from '@idux/cdk/breakpoint'
 import { ComputedRef, InjectionKey, Ref } from 'vue'
+
+import { BreakpointKey } from '@idux/cdk/breakpoint'
 
 export const isDevMode = process.env.NODE_ENV !== 'production'
 

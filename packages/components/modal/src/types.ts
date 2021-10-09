@@ -1,6 +1,13 @@
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
+import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 import { HeaderProps } from '@idux/components/header'
@@ -79,5 +86,5 @@ export interface ModalProviderRef {
   destroy: (key: string | string[]) => void
   destroyAll: () => void
 }
-export type ModalProviderComponent = DefineComponent<null, ModalProviderRef>
-export type ModalProviderInstance = InstanceType<DefineComponent<null, ModalProviderRef>>
+export type ModalProviderComponent = DefineComponent<HTMLAttributes, ModalProviderRef>
+export type ModalProviderInstance = InstanceType<DefineComponent<HTMLAttributes, ModalProviderRef>>

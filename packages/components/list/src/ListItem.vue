@@ -15,6 +15,7 @@
 import type { ListGridProps } from './types'
 
 import { defineComponent, inject } from 'vue'
+
 import ListItemWrap from './ListItemWrap.vue'
 import { listToken } from './token'
 import { listItemProps } from './types'

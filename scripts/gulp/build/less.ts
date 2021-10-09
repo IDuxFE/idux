@@ -1,7 +1,7 @@
-import { copy, copyFile, pathExists, readdirSync, readFile, remove, writeFile } from 'fs-extra'
-import less from 'less'
 import path from 'path'
 
+import { copy, copyFile, pathExists, readFile, readdirSync, remove, writeFile } from 'fs-extra'
+import less from 'less'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import LessPluginCleanCSS from 'less-plugin-clean-css'

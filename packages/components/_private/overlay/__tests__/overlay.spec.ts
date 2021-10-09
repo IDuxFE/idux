@@ -1,9 +1,11 @@
-import type { MountingOptions } from '@vue/test-utils'
 import type { OverlayProps } from '../src/types'
+import type { MountingOptions } from '@vue/test-utils'
 
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
+
 import { isElementVisible, renderWork } from '@tests'
+
 import Overlay from '../src/Overlay'
 
 describe('Overlay', () => {

@@ -24,7 +24,8 @@
 <script lang="ts">
 import type { PopperPlacement } from '@idux/cdk/popper'
 
-import { defineComponent, onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
 import { usePopper } from '@idux/cdk/popper'
 
 export default defineComponent({

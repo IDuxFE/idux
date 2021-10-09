@@ -11,9 +11,12 @@
 </template>
 
 <script lang="ts" setup>
-import { TableColumn, TableColumnRenderOption } from '@idux/components/table'
 import { h } from 'vue'
+
+import { TableColumn, TableColumnRenderOption } from '@idux/components/table'
 import { IxTag } from '@idux/components/tag'
+
+// eslint-disable-next-line import/no-unassigned-import
 import '@idux/components/tag/style'
 
 interface Data {

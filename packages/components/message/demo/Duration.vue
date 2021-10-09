@@ -8,7 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useMessage, MessageRef } from '@idux/components/message'
+
+import { MessageRef, useMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {

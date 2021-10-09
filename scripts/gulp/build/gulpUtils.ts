@@ -1,7 +1,9 @@
-import { readdir, statSync, copy, copyFile, readJSON, writeFile } from 'fs-extra'
-import { TaskFunction } from 'gulp'
 import { join } from 'path'
-import { rollup, OutputOptions } from 'rollup'
+
+import { copy, copyFile, readJSON, readdir, statSync, writeFile } from 'fs-extra'
+import { TaskFunction } from 'gulp'
+import { OutputOptions, rollup } from 'rollup'
+
 // import { Extractor, ExtractorConfig, ExtractorResult } from '@microsoft/api-extractor'
 import { compileLess } from './less'
 import { getRollupOptions } from './rollup.config'

@@ -60,12 +60,14 @@
 import type { SelectOptionProps } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
+
 import { clickOutside } from '@idux/cdk/click-outside'
 import { IxPortal } from '@idux/cdk/portal'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import SelectItem from './SelectItem.vue'
+
 import SelectInput from './SelectInput.vue'
+import SelectItem from './SelectItem.vue'
 import SelectOptionContainer from './SelectOptionContainer.vue'
 import { selectProps } from './types'
 import {

@@ -32,7 +32,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, h, ref } from 'vue'
-import { VirtualScrollInstance, VirtualItemRenderFn } from '@idux/cdk/scroll'
+
+import { VirtualItemRenderFn, VirtualScrollInstance } from '@idux/cdk/scroll'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []

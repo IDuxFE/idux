@@ -1,10 +1,13 @@
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
 import { IxButton } from '@idux/components/button'
+
 import IxPagination from '../src/Pagination'
-import { PaginationProps, PaginationItemRenderOptions } from '../src/types'
 import Sizes from '../src/Sizes'
+import { PaginationItemRenderOptions, PaginationProps } from '../src/types'
 
 describe.skip('Pagination', () => {
   const PaginationMount = (options?: MountingOptions<Partial<PaginationProps>>) => mount(IxPagination, { ...options })

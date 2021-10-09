@@ -1,8 +1,10 @@
-import { onBeforeUnmount, onMounted } from 'vue'
 import { flushPromises, mount } from '@vue/test-utils'
+import { onBeforeUnmount, onMounted } from 'vue'
+
 import { wait } from '@tests'
-import { usePopper } from '../src/usePopper'
+
 import { PopperOptions } from '../src/types'
+import { usePopper } from '../src/usePopper'
 
 describe('usePopper', () => {
   const PopperTestMount = (options?: PopperOptions) =>

@@ -1,5 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 import { Ref, ref, watch } from 'vue'
+
 import { AbstractControl } from '../src/controls'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'

@@ -1,4 +1,5 @@
-import { mount, flushPromises } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
+
 import { createGlobalConfig, useGlobalConfig } from '../src/globalConfig'
 
 const ChildComponent = {

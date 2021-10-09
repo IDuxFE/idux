@@ -1,5 +1,7 @@
+import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+
 import Checkbox from '../src/Checkbox'
 import { CheckboxInstance, CheckboxProps } from '../src/types'
 

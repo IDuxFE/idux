@@ -1,9 +1,18 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { defineComponent, provide } from 'vue'
+
 import { useValueAccessor } from '@idux/cdk/forms'
 import { useFormItemRegister } from '@idux/components/form'
+
 import Radio from './Radio'
-import { radioGroupProps } from './types'
 import { radioGroupToken } from './token'
+import { radioGroupProps } from './types'
 
 export default defineComponent({
   name: 'IxRadioGroup',

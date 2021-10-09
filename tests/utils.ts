@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mount, DOMWrapper, MountingOptions } from '@vue/test-utils'
+import { DOMWrapper, MountingOptions, mount } from '@vue/test-utils'
 
 export const wait = (timeout?: number): Promise<unknown> => {
   return new Promise(resolve => setTimeout(resolve, timeout))

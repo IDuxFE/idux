@@ -1,11 +1,17 @@
-import { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { computed, defineComponent, inject, ref, Transition } from 'vue'
+import { ComputedRef, Ref, Transition, computed, defineComponent, inject, ref } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
+import { DrawerConfig } from '@idux/components/config'
 
 import DrawerBody from './DrawerBody'
-import { drawerToken, DRAWER_TOKEN } from './token'
-import { DrawerConfig } from '@idux/components/config'
+import { DRAWER_TOKEN, drawerToken } from './token'
 import { DrawerProps } from './types'
 
 export default defineComponent({

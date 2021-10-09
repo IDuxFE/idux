@@ -1,5 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, inject } from 'vue'
+
 import { IxInput } from '@idux/components/input'
+
 import { paginationToken } from './token'
 import { useJumpToIndex } from './utils'
 

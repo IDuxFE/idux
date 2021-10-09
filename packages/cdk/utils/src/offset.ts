@@ -1,4 +1,10 @@
-/** get position of `el` against `target` */
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 export const getOffset = (el: HTMLElement, target: HTMLElement | Window = window): { top: number; left: number } => {
   if (!el || !el.getClientRects().length) {
     return { top: 0, left: 0 }

@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+
 import { usePopper } from '@idux/cdk/popper'
 
 export default defineComponent({

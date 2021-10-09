@@ -1,7 +1,9 @@
 import { flushPromises, mount } from '@vue/test-utils'
+
+import { renderWork } from '@tests'
+
 import List from '../src/List.vue'
 import ListItem from '../src/ListItem.vue'
-import { renderWork } from '@tests'
 
 const TestComponent = {
   components: { List, ListItem },

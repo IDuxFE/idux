@@ -8,12 +8,14 @@
   </span>
 </template>
 <script lang="ts">
-import type { ComputedRef } from 'vue'
 import type { BadgeProps } from './types'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent } from 'vue'
-import { hasSlot, isNumeric, convertNumber } from '@idux/cdk/utils'
+
+import { convertNumber, hasSlot, isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+
 import { backTopProps } from './types'
 
 export default defineComponent({

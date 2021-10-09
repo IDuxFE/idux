@@ -1,9 +1,17 @@
-import type { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { CommonProps } from './types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
-import type { CommonProps } from './types'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, onMounted, ref, watchEffect } from 'vue'
+
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useFormItemRegister } from '@idux/components/form'

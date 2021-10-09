@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, h, inject, ref } from 'vue'
+
 import { IxButton } from '@idux/components/button'
 import { MODAL_TOKEN, useModal } from '@idux/components/modal'
 

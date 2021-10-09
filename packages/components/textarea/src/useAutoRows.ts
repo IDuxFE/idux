@@ -1,13 +1,20 @@
-// https://github.com/angular/components/blob/master/src/cdk/text-field/autosize.ts
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import type { ComputedRef, Ref } from 'vue'
-import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaAutoRows } from './types'
+import type { FormAccessor } from '@idux/cdk/forms'
+import type { ComputedRef, Ref } from 'vue'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
-import { isObject, isNumber, throttle } from 'lodash-es'
+
+import { isNumber, isObject, throttle } from 'lodash-es'
+
 import { isFirefox } from '@idux/cdk/platform'
-import { on, off, rAF } from '@idux/cdk/utils'
+import { off, on, rAF } from '@idux/cdk/utils'
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return isObject(value) && isNumber(value.minRows) && isNumber(value.maxRows)
@@ -39,6 +46,7 @@ export function useAutoRows(
 
   /**
    * Resize the textarea to fit its content.
+   *
    * @param force Whether to force a height recalculation.
    * By default the height will be recalculated only if the value changed since the last call.
    */

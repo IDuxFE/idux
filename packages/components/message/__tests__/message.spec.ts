@@ -1,9 +1,12 @@
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+import { h } from 'vue'
+
 import { renderWork, wait } from '@tests'
+
+import { IxIcon } from '@idux/components/icon'
+
 import Message from '../src/Message'
 import { MessageProps } from '../src/types'
-import { h } from 'vue'
-import { IxIcon } from '@idux/components/icon'
 
 describe('Message', () => {
   const content = 'This is a message'

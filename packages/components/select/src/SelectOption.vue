@@ -9,13 +9,16 @@
   </div>
 </template>
 <script lang="ts">
-import type { SelectOptionProps, SelectFilterFn } from './types'
+import type { SelectFilterFn, SelectOptionProps } from './types'
 
 import { computed, defineComponent, inject, nextTick, onUnmounted, watch } from 'vue'
+
 import { isFunction } from 'lodash-es'
+
 import { IxCheckbox } from '@idux/components/checkbox'
-import { selectOptionProps } from './types'
+
 import { selectToken, visibleChangeToken } from './token'
+import { selectOptionProps } from './types'
 
 const defaultFilterFn: SelectFilterFn = (value: string, option: SelectOptionProps) => {
   return option.label.toLowerCase().includes(value.toLowerCase())

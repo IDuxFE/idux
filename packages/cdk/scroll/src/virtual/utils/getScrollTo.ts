@@ -1,9 +1,17 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { VirtualScrollProps, VirtualScrollToOptions, VirtualScrollToFn } from '../types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { GetKey } from '../composables/useGetKey'
 import type { ScrollContext } from '../composables/useScroll'
+import type { VirtualScrollProps, VirtualScrollToFn, VirtualScrollToOptions } from '../types'
+import type { ComputedRef, Ref } from 'vue'
 
 import { isNil } from 'lodash-es'
+
 import { cancelRAF, rAF } from '@idux/cdk/utils'
 
 export function getScrollTo(

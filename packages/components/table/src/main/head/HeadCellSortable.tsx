@@ -1,8 +1,17 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { defineComponent, inject } from 'vue'
-import { IxIcon } from '@idux/components/icon'
+
 import { TableLocale } from '@idux/components/i18n'
+import { IxIcon } from '@idux/components/icon'
 import { TableColumnSortOrder } from '@idux/components/table'
 import { IxTooltip } from '@idux/components/tooltip'
+
 import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({

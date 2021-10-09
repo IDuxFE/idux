@@ -1,7 +1,15 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { PaginationItemType, PaginationProps } from './types'
 import type { Ref } from 'vue'
-import type { PaginationProps, PaginationItemType } from './types'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import Item from './Item'
 import Jumper from './Jumper'
 import Sizes from './Sizes'

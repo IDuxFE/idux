@@ -1,6 +1,15 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, provide, toRef, watchEffect } from 'vue'
+
 import { provideControl, useValueControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
+
 import { formToken } from './token'
 import { formProps } from './types'
 

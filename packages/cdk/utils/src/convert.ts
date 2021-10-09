@@ -1,7 +1,16 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ComponentPublicInstance, Ref } from 'vue'
 
 import { unref } from 'vue'
+
 import { isNil } from 'lodash-es'
+
 import { isHTMLElement, isNumeric } from './typeof'
 
 export function convertArray<T>(value: T | undefined | null | Array<T | undefined | null>): T[]

@@ -5,7 +5,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { IxRow } from '@idux/components/grid'
+
 import { listWrapProps } from './types'
 
 export default defineComponent({

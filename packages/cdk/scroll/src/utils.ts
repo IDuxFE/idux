@@ -1,6 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { EasingFn } from '@idux/cdk/utils'
 
 import { isNil, isObject, isUndefined } from 'lodash-es'
+
 import { easeInOutCubic, rAF } from '@idux/cdk/utils'
 
 export interface ScrollOptions {
@@ -10,6 +18,7 @@ export interface ScrollOptions {
 
 /**
  *  set the position of the scroll
+ *
  * @param options If it is number, it means scrollTop
  * @param target target element
  */

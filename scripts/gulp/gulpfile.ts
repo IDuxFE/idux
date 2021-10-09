@@ -2,7 +2,7 @@ import { series, task } from 'gulp'
 
 import { buildCdk, buildComponents, buildDeclaration, buildStyle, buildVersion } from './build'
 import { iconsGenerate } from './icons'
-import { siteStart, siteBuild } from './site'
+import { siteBuild, siteStart } from './site'
 
 task('start', series(siteStart))
 

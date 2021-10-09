@@ -10,8 +10,9 @@
 </template>
 
 <script lang="ts" setup>
-import { TableColumn } from '@idux/components/table'
 import { ref } from 'vue'
+
+import { TableColumn } from '@idux/components/table'
 
 interface Data {
   key: number

@@ -1,6 +1,8 @@
-import { renderWork, scrollTarget, wait } from '@tests'
 import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
+
+import { renderWork, scrollTarget, wait } from '@tests'
+
 import IxAnchor from '../src/Anchor'
 import IxAnchorLink from '../src/AnchorLink'
 

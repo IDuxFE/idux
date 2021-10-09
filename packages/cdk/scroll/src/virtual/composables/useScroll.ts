@@ -1,8 +1,17 @@
-import type { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { VirtualScrollProps } from '../types'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
+
 import { isFunction, throttle } from 'lodash-es'
+
 import { GetKey } from './useGetKey'
 
 export interface ScrollBarState {

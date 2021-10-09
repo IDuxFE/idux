@@ -1,25 +1,35 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { SpinProps } from '@idux/components/spin'
 
 import { defineComponent, provide } from 'vue'
+
 import { isBoolean } from 'lodash-es'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 import { IxSpin } from '@idux/components/spin'
-import { useTags } from './composables/useTags'
+
 import { useColumns } from './composables/useColumns'
-import { usePagination } from './composables/usePagination'
-import { useExpandable } from './composables/useExpandable'
-import { useSelectable } from './composables/useSelectable'
-import { useGetRowKey } from './composables/useGetRowKey'
 import { useDataSource } from './composables/useDataSource'
+import { useExpandable } from './composables/useExpandable'
+import { useGetRowKey } from './composables/useGetRowKey'
+import { usePagination } from './composables/usePagination'
 import { useScroll } from './composables/useScroll'
+import { useSelectable } from './composables/useSelectable'
 import { useSortable } from './composables/useSortable'
 import { useSticky } from './composables/useSticky'
 import { useTableLayout } from './composables/useTableLayout'
+import { useTags } from './composables/useTags'
 import MainTable from './main/MainTable'
-import { renderPagination } from './other/Pagination'
-import { renderHeader } from './other/Header'
 import { renderFooter } from './other/Footer'
+import { renderHeader } from './other/Header'
+import { renderPagination } from './other/Pagination'
 import { TABLE_TOKEN } from './token'
 import { tableProps } from './types'
 

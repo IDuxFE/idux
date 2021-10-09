@@ -1,6 +1,8 @@
+import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+
 import { isElementVisible, renderWork } from '@tests'
+
 import ModalProvider from '../src/ModalProvider'
 import { ModalProviderInstance } from '../src/types'
 

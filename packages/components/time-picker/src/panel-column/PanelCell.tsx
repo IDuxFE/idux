@@ -1,5 +1,14 @@
-import { defineComponent, computed } from 'vue'
-import { isNumeric, callEmit } from '@idux/cdk/utils'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import { computed, defineComponent } from 'vue'
+
+import { callEmit, isNumeric } from '@idux/cdk/utils'
+
 import { panelCellProps } from '../types'
 
 export default defineComponent({

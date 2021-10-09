@@ -41,7 +41,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useFormGroup, Validators } from '@idux/cdk/forms'
+
+import { Validators, useFormGroup } from '@idux/cdk/forms'
 
 interface Name {
   firstName: string

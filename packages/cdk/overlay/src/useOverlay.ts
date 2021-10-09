@@ -1,11 +1,20 @@
-/* eslint-disable indent */
-import type { WatchStopHandle } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { OverlayElement, OverlayInstance, OverlayOptions, OverlayTrigger } from './types'
 import type { Instance as PopperInstance } from '@popperjs/core'
-import type { OverlayInstance, OverlayOptions, OverlayTrigger, OverlayElement } from './types'
+import type { WatchStopHandle } from 'vue'
 
 import { computed, nextTick, reactive, ref, watch, watchEffect } from 'vue'
+
 import { createPopper } from '@popperjs/core'
+
 import { off, on, uniqueId } from '@idux/cdk/utils'
+
 import { convertElement, convertPopperOptions } from './utils'
 
 export const useOverlay = <
@@ -13,7 +22,9 @@ export const useOverlay = <
   OE extends OverlayElement = OverlayElement,
   AE extends OverlayElement = OverlayElement,
 >(
+  // eslint-disable-next-line indent
   options: OverlayOptions,
+  // eslint-disable-next-line indent
 ): OverlayInstance<TE, OE, AE> => {
   const triggerRef = ref<OverlayElement | null>(null)
   const overlayRef = ref<OverlayElement | null>(null)

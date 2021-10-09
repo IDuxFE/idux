@@ -1,18 +1,27 @@
-import type { CSSProperties } from 'vue'
-import type { AffixStyle } from './utils'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, computed, watch, ref, onMounted, nextTick, onUnmounted } from 'vue'
+import type { AffixStyle } from './utils'
+import type { CSSProperties } from 'vue'
+
+import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+
 import { throttleRAF } from '@idux/cdk/utils'
 import { getTarget } from '@idux/components/utils'
+
 import { affixProps } from './types'
 import {
-  getTargetRect,
   calcPosition,
-  normalizeOffset,
+  getTargetRect,
+  getTargetSize,
   isSticky,
+  normalizeOffset,
   observeTarget,
   removeObserveTarget,
-  getTargetSize,
 } from './utils'
 
 export default defineComponent({

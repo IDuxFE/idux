@@ -1,10 +1,13 @@
 import type { SpaceAlign, SpaceDirection, SpaceSize } from '../src/types'
 
-import { computed, defineComponent, PropType } from 'vue'
 import { mount } from '@vue/test-utils'
+import { PropType, computed, defineComponent } from 'vue'
+
 import { renderWork } from '@tests'
+
 import { IxButton } from '@idux/components/button'
 import { IxDivider } from '@idux/components/divider'
+
 import IxSpace from '../src/Space'
 
 const TestComponent = defineComponent({

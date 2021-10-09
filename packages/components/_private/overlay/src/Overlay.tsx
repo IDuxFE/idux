@@ -1,22 +1,31 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
-import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { OverlayProps } from './types'
+import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
+import type { ComputedRef, Ref, VNode } from 'vue'
 
 import {
+  Transition,
   cloneVNode,
   computed,
   defineComponent,
-  onMounted,
   onBeforeUnmount,
-  Transition,
+  onMounted,
   vShow,
   watch,
   withDirectives,
 } from 'vue'
+
 import { clickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
 import { IxPortal } from '@idux/cdk/portal'
-import { callEmit, convertElement, getFirstValidNode, Logger } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+
 import { overlayProps } from './types'
 
 export default defineComponent({

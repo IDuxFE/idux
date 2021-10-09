@@ -1,13 +1,23 @@
-import type { RowConfig } from '@idux/components/config'
-import type { ComputedRef, CSSProperties } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { RowGutter, RowProps } from './types'
 import type { Screens } from '@idux/cdk/breakpoint'
+import type { RowConfig } from '@idux/components/config'
+import type { CSSProperties, ComputedRef } from 'vue'
 
-import { defineComponent, computed, provide } from 'vue'
-import { isObject, isArray, isUndefined } from 'lodash-es'
+import { computed, defineComponent, provide } from 'vue'
+
+import { isArray, isObject, isUndefined } from 'lodash-es'
+
 import { BREAKPOINTS_KEYS, useScreens } from '@idux/cdk/breakpoint'
 import { convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+
 import { rowToken } from './token'
 import { rowProps } from './types'
 

@@ -1,6 +1,10 @@
 /**
- * Describes a strategy that will be used by an popper to handle scroll events while it is open.
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
+
 export interface ScrollStrategy {
   /** Enable this scroll strategy. */
   enable: () => void

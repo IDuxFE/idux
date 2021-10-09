@@ -1,10 +1,19 @@
-import type { ComputedRef, Ref, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ModalButtonProps } from './types'
+import type { ComputedRef, Ref, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, isVNode } from 'vue'
+
 import { ButtonProps, IxButton } from '@idux/components/button'
 import { getLocale } from '@idux/components/i18n'
-import { modalToken, MODAL_TOKEN } from './token'
+
+import { MODAL_TOKEN, modalToken } from './token'
 
 export default defineComponent({
   setup() {

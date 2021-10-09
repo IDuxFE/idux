@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { provideControl } from '@idux/cdk/forms'
 
 export default defineComponent({

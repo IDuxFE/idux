@@ -1,11 +1,19 @@
-import { MessageOptions, messageProviderProps, MessageRef } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, ref, provide, TransitionGroup, computed, ComputedRef, VNode } from 'vue'
+import { ComputedRef, TransitionGroup, VNode, computed, defineComponent, provide, ref } from 'vue'
+
+import { IxPortal } from '@idux/cdk/portal'
 import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+
 import Message from './Message'
 import { messageProviderToken } from './token'
-import { IxPortal } from '@idux/cdk/portal'
+import { MessageOptions, MessageRef, messageProviderProps } from './types'
 
 export default defineComponent({
   name: 'IxMessageProvider',

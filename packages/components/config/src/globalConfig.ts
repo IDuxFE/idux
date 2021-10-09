@@ -1,7 +1,15 @@
-import type { App, Plugin } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { GlobalConfig, GlobalConfigKey } from './types'
+import type { App, Plugin } from 'vue'
 
 import { inject, provide, shallowReactive, shallowReadonly } from 'vue'
+
 import { defaultConfig } from './defaultConfig'
 
 const tokens: [GlobalConfigKey, symbol][] = Object.keys(defaultConfig).map(key => [key as GlobalConfigKey, Symbol(key)])

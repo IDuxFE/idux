@@ -15,6 +15,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { useClipboard } from '@idux/cdk/clipboard'
 
 const levels = ['l50', 'l40', 'l30', 'l20', 'l10', '', 'd10', 'd20', 'd30', 'd40']

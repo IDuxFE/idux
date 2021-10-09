@@ -1,9 +1,11 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
+
+import { renderWork } from '@tests'
+
+import { IxIcon } from '../../icon'
 import IxResult from '../src/Result.vue'
 import { ResultProps } from '../src/types'
-import { IxIcon } from '../../icon'
-import { renderWork } from '@tests'
 
 describe('Result', () => {
   const ResultMount = (options?: MountingOptions<Partial<ResultProps>>) => mount(IxResult, { ...options })

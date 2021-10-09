@@ -1,8 +1,18 @@
-import { ConvertProgressProps, ProgressStatus, progressStatus } from './types'
-import { computed, ComputedRef } from 'vue'
-import { convertPercent, fullPercent } from './util'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import { ComputedRef, computed } from 'vue'
+
 import { isFunction } from 'lodash-es'
+
 import { ProgressConfig } from '@idux/components/config'
+
+import { ConvertProgressProps, ProgressStatus, progressStatus } from './types'
+import { convertPercent, fullPercent } from './util'
 
 export function useStatusClasses(status: ComputedRef<ProgressStatus>): ComputedRef<string> {
   const prefix = 'ix-progress'

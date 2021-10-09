@@ -1,8 +1,16 @@
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
-import type { AbstractControl } from '@idux/cdk/forms'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ColType, FormLabelAlign } from './types'
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 import { computed, getCurrentInstance, inject, onBeforeUnmount } from 'vue'
+
 import { useKey } from '@idux/components/utils'
 
 export interface FormContext {

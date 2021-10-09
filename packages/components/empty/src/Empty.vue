@@ -13,9 +13,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { IxIcon } from '@idux/components/icon'
+import { computed, defineComponent } from 'vue'
+
 import { getLocale } from '@idux/components/i18n'
+import { IxIcon } from '@idux/components/icon'
+
 import { emptyProps } from './types'
 
 export default defineComponent({

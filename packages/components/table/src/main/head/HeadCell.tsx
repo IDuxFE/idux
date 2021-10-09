@@ -1,10 +1,20 @@
-import type { Slots, StyleValue, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { TableColumnMergedExtra } from '../../composables/useColumns'
 import type { TableColumnTitleFn } from '../../types'
+import type { Slots, StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { isFunction, isString } from 'lodash-es'
+
 import { convertCssPixel } from '@idux/cdk/utils'
+
 import { TABLE_TOKEN } from '../../token'
 import { tableHeadCellProps } from '../../types'
 import { getColTitle } from '../../utils'

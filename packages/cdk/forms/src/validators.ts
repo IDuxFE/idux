@@ -1,17 +1,25 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
+import type { AbstractControl } from './controls'
 import type {
   AsyncValidatorFn,
   ValidateError,
-  ValidatorFn,
   ValidateErrors,
-  ValidateMessages,
   ValidateMessageFn,
+  ValidateMessages,
+  ValidatorFn,
 } from './types'
-import type { AbstractControl } from './controls'
 
 import { isArray, isFunction, isNil, isNumber, isString } from 'lodash-es'
+
 import { isNumeric } from '@idux/cdk/utils'
 
 /** See [this commit](https://github.com/angular/angular.js/commit/f3f5cf72e) for more details. */

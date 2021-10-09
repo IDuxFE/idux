@@ -1,9 +1,18 @@
-import type { ComputedRef, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { TableColumnMerged } from '../composables/useColumns'
 import type { TableColumnSelectableOption } from '../types'
+import type { ComputedRef, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { convertCssPixel } from '@idux/cdk/utils'
+
 import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({

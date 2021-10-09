@@ -26,12 +26,14 @@
   </div>
 </template>
 <script lang="ts">
-import type { ImageConfig } from '@idux/components/config'
 import type { ImageProps, ImageStatus } from './types'
+import type { ImageConfig } from '@idux/components/config'
 
-import { defineComponent, computed, ref, watchEffect, watch } from 'vue'
+import { computed, defineComponent, ref, watch, watchEffect } from 'vue'
+
 import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+
 import ImgPreview from './ImgPreview.vue'
 import { imageProps } from './types'
 

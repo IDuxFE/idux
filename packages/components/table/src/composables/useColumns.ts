@@ -1,6 +1,10 @@
-import type { ComputedRef } from 'vue'
-import type { Screens } from '@idux/cdk/breakpoint'
-import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type {
   Key,
   TableColumn,
@@ -11,9 +15,14 @@ import type {
   TableColumnSelectable,
   TableProps,
 } from '../types'
+import type { Screens } from '@idux/cdk/breakpoint'
+import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
+import type { ComputedRef } from 'vue'
 
 import { computed, reactive, ref, watchEffect } from 'vue'
+
 import { isNil } from 'lodash-es'
+
 import { useScreens } from '@idux/cdk/breakpoint'
 import { convertArray } from '@idux/cdk/utils'
 

@@ -1,10 +1,19 @@
-import type { ComputedRef, Ref, Slot, Slots, StyleValue, VNodeTypes } from 'vue'
-import type { InputConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { InputProps } from './types'
+import type { InputConfig } from '@idux/components/config'
+import type { ComputedRef, Ref, Slot, Slots, StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, normalizeClass } from 'vue'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+
 import { inputProps } from './types'
 import { useCommonBindings } from './useCommonBindings'
 

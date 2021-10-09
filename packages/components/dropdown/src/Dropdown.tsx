@@ -1,11 +1,20 @@
-import type { DropdownConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { DropdownProps } from './types'
+import type { DropdownConfig } from '@idux/components/config'
 
 import { computed, defineComponent, provide } from 'vue'
+
 import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { dropdownProps } from './types'
+
 import { dropdownToken } from './token'
+import { dropdownProps } from './types'
 
 const defaultDelay: [number, number] = [0, 100]
 

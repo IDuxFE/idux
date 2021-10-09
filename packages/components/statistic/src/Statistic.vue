@@ -22,11 +22,13 @@
   </div>
 </template>
 <script lang="ts">
-import type { StatisticConfig } from '@idux/components/config'
 import type { StatisticProps } from './types'
+import type { StatisticConfig } from '@idux/components/config'
 
 import { computed, defineComponent } from 'vue'
+
 import { useGlobalConfig } from '@idux/components/config'
+
 import { statisticProps } from './types'
 
 export default defineComponent({

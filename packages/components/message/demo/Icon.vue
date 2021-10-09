@@ -7,8 +7,9 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useMessage } from '@idux/components/message'
+
 import { IxIcon } from '@idux/components/icon'
+import { useMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {

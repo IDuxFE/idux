@@ -1,7 +1,8 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import SelectOption from '../src/SelectOption.vue'
 import SelectOptionGroup from '../src/SelectOptionGroup.vue'
-import { SelectOptionProps, SelectOptionGroupProps } from '../src/types'
+import { SelectOptionGroupProps, SelectOptionProps } from '../src/types'
 
 describe('SelectOption', () => {
   const OptionMount = (options?: MountingOptions<Partial<SelectOptionProps>>) => mount(SelectOption, { ...options })

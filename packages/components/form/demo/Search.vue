@@ -20,8 +20,9 @@
 </template>
 
 <script lang="ts">
-import { useFormControl, useFormGroup } from '@idux/cdk/forms'
 import { defineComponent, ref } from 'vue'
+
+import { useFormControl, useFormGroup } from '@idux/cdk/forms'
 
 export default defineComponent({
   setup() {

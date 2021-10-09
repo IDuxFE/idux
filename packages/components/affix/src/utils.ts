@@ -1,7 +1,15 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { AffixDirection, AffixOffset } from './types'
 
-import { isUndefined, isObject } from 'lodash-es'
-import { convertNumber, isHTMLElement, on, off } from '@idux/cdk/utils'
+import { isObject, isUndefined } from 'lodash-es'
+
+import { convertNumber, isHTMLElement, off, on } from '@idux/cdk/utils'
 
 export type AffixStyle = {
   position?: 'fixed' | 'absolute'

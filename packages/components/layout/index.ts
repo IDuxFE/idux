@@ -1,16 +1,23 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type {
   LayoutComponent,
-  LayoutHeaderComponent,
-  LayoutSiderComponent,
   LayoutContentComponent,
   LayoutFooterComponent,
+  LayoutHeaderComponent,
+  LayoutSiderComponent,
 } from './src/types'
 
 import Layout from './src/Layout'
-import LayoutHeader from './src/LayoutHeader'
 import LayoutContent from './src/LayoutContent'
-import LayoutSider from './src/LayoutSider'
 import LayoutFooter from './src/LayoutFooter'
+import LayoutHeader from './src/LayoutHeader'
+import LayoutSider from './src/LayoutSider'
 
 const IxLayout = Layout as unknown as LayoutComponent
 const IxLayoutHeader = LayoutHeader as unknown as LayoutHeaderComponent

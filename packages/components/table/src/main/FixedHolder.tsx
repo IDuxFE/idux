@@ -1,7 +1,16 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
+
 import { off, on } from '@idux/cdk/utils'
+
 import { TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 

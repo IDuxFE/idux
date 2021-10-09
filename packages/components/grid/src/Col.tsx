@@ -1,10 +1,20 @@
-import type { ComputedRef, CSSProperties } from 'vue'
-import type { ColProps, ColBreakpointConfig } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { inject, defineComponent, computed } from 'vue'
+import type { ColBreakpointConfig, ColProps } from './types'
+import type { CSSProperties, ComputedRef } from 'vue'
+
+import { computed, defineComponent, inject } from 'vue'
+
 import { isNumber, isString, isUndefined } from 'lodash-es'
-import { isNumeric } from '@idux/cdk/utils'
+
 import { BREAKPOINTS_KEYS } from '@idux/cdk/breakpoint'
+import { isNumeric } from '@idux/cdk/utils'
+
 import { rowToken } from './token'
 import { colProps } from './types'
 

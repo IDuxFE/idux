@@ -1,9 +1,10 @@
 import type { App, Directive, Plugin } from 'vue'
 
 import { clickOutside } from '@idux/cdk/click-outside'
-import { IxTypography } from '@idux/components/typography'
-import '@idux/components/typography/style'
 import { createGlobalConfig } from '@idux/components/config'
+import { IxTypography } from '@idux/components/typography'
+// eslint-disable-next-line import/no-unassigned-import
+import '@idux/components/typography/style'
 
 const directives: Record<string, Directive> = {
   clickOutside,

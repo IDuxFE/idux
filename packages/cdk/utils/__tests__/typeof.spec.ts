@@ -1,4 +1,4 @@
-import { isPromise, isNumeric, hasOwnProperty, isHTMLElement } from '../src/typeof'
+import { hasOwnProperty, isHTMLElement, isNumeric, isPromise } from '../src/typeof'
 
 describe('typeof.ts', () => {
   test('isNumeric work', async () => {

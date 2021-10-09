@@ -1,4 +1,12 @@
-import { computed, defineComponent, ref, Teleport, watch } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import { Teleport, computed, defineComponent, ref, watch } from 'vue'
+
 import { portalProps } from './types'
 import { useContainer } from './useContainer'
 

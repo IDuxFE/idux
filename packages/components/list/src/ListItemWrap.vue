@@ -9,7 +9,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { IxCol } from '@idux/components/grid'
+
 import { listItemWrapProps } from './types'
 
 export default defineComponent({

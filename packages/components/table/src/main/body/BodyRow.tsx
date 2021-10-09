@@ -1,13 +1,22 @@
-import type { ComputedRef, Slots, VNodeTypes } from 'vue'
-import type { Key, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type {
   TableColumnMerged,
   TableColumnMergedExpandable,
   TableColumnMergedSelectable,
 } from '../../composables/useColumns'
+import type { Key, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
+import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { isFunction, isString } from 'lodash-es'
+
 import { TABLE_TOKEN } from '../../token'
 import { tableBodyRowProps } from '../../types'
 import BodyCell from './BodyCell'

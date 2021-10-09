@@ -1,8 +1,17 @@
-import type { ComputedRef } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Locale, LocaleKey, LocaleType } from './types'
+import type { ComputedRef } from 'vue'
 
 import { computed, ref } from 'vue'
+
 import { Logger } from '@idux/cdk/utils'
+
 import { zh_CN as defaultLocale } from './locales'
 
 const currentType = ref<LocaleType>('zh-CN')

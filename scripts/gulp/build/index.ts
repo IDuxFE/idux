@@ -1,14 +1,16 @@
-import { series } from 'gulp'
 import { join } from 'path'
+
+import { series } from 'gulp'
+
 import { gulpConfig } from '../gulpConfig'
 import { clean } from '../taskHelpers'
 import {
-  buildPackage,
-  buildIndex,
   buildStyle as _buildStyle,
-  moveDeclaration,
-  copyPackageFiles,
+  buildIndex,
+  buildPackage,
   complete,
+  copyPackageFiles,
+  moveDeclaration,
   syncVersion,
 } from './gulpUtils'
 

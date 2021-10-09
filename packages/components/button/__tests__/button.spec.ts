@@ -1,5 +1,7 @@
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { mount, MountingOptions } from '@vue/test-utils'
+
 import IxButton from '../src/Button'
 import { ButtonProps } from '../src/types'
 

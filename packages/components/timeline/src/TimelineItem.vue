@@ -9,13 +9,14 @@
 </template>
 
 <script lang="ts">
-import type { Slots } from 'vue'
 import type { TimelineItemProps } from './types'
+import type { Slots } from 'vue'
 
-import { defineComponent, computed, ComputedRef } from 'vue'
+import { ComputedRef, computed, defineComponent } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
 import { isPresetColor, isStatusColor } from '@idux/components/utils'
+
 import { timelineItemProps } from './types'
 
 export default defineComponent({

@@ -1,10 +1,11 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 import { PropType } from 'vue'
+
 import { renderWork } from '@tests'
+
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
-import { TimelineItemProps } from '../src/types'
-import { TimelinePosition, TimelineItemPosition } from '../src/types'
+import { TimelineItemPosition, TimelineItemProps, TimelinePosition } from '../src/types'
 
 const TestComponent = {
   components: { IxTimeline, IxTimelineItem },

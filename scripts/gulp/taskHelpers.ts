@@ -1,7 +1,7 @@
-import { spawn, SpawnOptions } from 'child_process'
-import { TaskFunction } from 'gulp'
-import { remove } from 'fs-extra'
+import { SpawnOptions, spawn } from 'child_process'
 
+import { remove } from 'fs-extra'
+import { TaskFunction } from 'gulp'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import resolveBin from 'resolve-bin'

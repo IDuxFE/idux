@@ -1,5 +1,12 @@
-import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Modifier, PositioningStrategy, State } from '@popperjs/core'
+import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
 export type PopperPositioningStrategy = PositioningStrategy
 export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'

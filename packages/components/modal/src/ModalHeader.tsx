@@ -1,8 +1,18 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, inject, toRef } from 'vue'
+
 import { isString } from 'lodash-es'
+
 import { convertArray } from '@idux/cdk/utils'
 import { IxHeader } from '@idux/components/header'
-import { modalToken, MODAL_TOKEN } from './token'
+
+import { MODAL_TOKEN, modalToken } from './token'
 
 export default defineComponent({
   setup() {

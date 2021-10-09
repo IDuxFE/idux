@@ -64,7 +64,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { AbstractControl, useFormGroup, ValidateErrors, Validators } from '@idux/cdk/forms'
+
+import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
 
 const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value) {

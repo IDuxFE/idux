@@ -1,12 +1,22 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { LayoutSiderCollapseType, LayoutSiderProps } from './types'
 import type { ComputedRef } from 'vue'
-import type { LayoutSiderProps, LayoutSiderCollapseType } from './types'
 
 import { computed, defineComponent, ref, watch } from 'vue'
-import { layoutSiderProps } from './types'
+
+import { isUndefined } from 'lodash-es'
+
 import { BREAKPOINTS, useBreakpoints } from '@idux/cdk/breakpoint'
 import { callEmit, hasSlot } from '@idux/cdk/utils'
+
 import Trigger from './Trigger'
-import { isUndefined } from 'lodash-es'
+import { layoutSiderProps } from './types'
 
 export default defineComponent({
   name: 'IxLayoutHeader',

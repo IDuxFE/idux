@@ -1,7 +1,15 @@
-import type { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { OriginScroll } from '../composables/useScroll'
+import type { ComputedRef, Ref } from 'vue'
 
 import { onBeforeUnmount, onMounted, watch } from 'vue'
+
 import { isFirefox } from '@idux/cdk/platform'
 import { cancelRAF, off, on, rAF } from '@idux/cdk/utils'
 

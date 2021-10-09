@@ -26,10 +26,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, inject } from 'vue'
-import { useClipboard } from '@idux/cdk/clipboard'
+import { computed, defineComponent, inject, ref } from 'vue'
+
 import { throttle } from 'lodash-es'
+
+import { useClipboard } from '@idux/cdk/clipboard'
 import { useMessage } from '@idux/components/message'
+
 import { appContextToken } from '../../context'
 
 export default defineComponent({

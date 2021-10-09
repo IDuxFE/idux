@@ -1,5 +1,7 @@
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { mount, MountingOptions } from '@vue/test-utils'
+
 import IxImage from '../src/Image.vue'
 import { ImageProps } from '../src/types'
 

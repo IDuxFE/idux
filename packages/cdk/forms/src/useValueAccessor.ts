@@ -1,10 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ComputedRef, WatchStopHandle } from 'vue'
-import type { AbstractControl, ControlPathType } from './controls'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { getCurrentInstance, computed, reactive, toRef, watch } from 'vue'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { AbstractControl, ControlPathType } from './controls'
+import type { ComputedRef, WatchStopHandle } from 'vue'
+
+import { computed, getCurrentInstance, reactive, toRef, watch } from 'vue'
+
 import { isNil } from 'lodash-es'
+
 import { Logger } from '@idux/cdk/utils'
+
 import { isAbstractControl } from './typeof'
 import { injectControl } from './utils'
 

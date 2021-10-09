@@ -9,7 +9,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isBrowser, isBlink, isWebKit, isIOS, isAndroid } from '@idux/cdk/platform'
+
+import { isAndroid, isBlink, isBrowser, isIOS, isWebKit } from '@idux/cdk/platform'
 
 export default defineComponent({
   setup() {

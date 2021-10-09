@@ -1,6 +1,8 @@
-import { mount, VueWrapper } from '@vue/test-utils'
-import { ComponentPublicInstance, nextTick, reactive, UnwrapRef } from 'vue'
-import { wait, renderWork } from '@tests'
+import { VueWrapper, mount } from '@vue/test-utils'
+import { ComponentPublicInstance, UnwrapRef, nextTick, reactive } from 'vue'
+
+import { renderWork, wait } from '@tests'
+
 import IxAffix from '../src/Affix'
 import { AffixProps } from '../src/types'
 interface Offset {

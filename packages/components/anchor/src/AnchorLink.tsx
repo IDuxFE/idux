@@ -1,6 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
-import { linkProps } from './types'
+
 import { anchorToken } from './token'
+import { linkProps } from './types'
 
 export default defineComponent({
   name: 'IxAnchorLink',

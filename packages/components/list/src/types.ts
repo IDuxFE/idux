@@ -1,6 +1,13 @@
-import type { DefineComponent, HTMLAttributes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { RowProps, RowGutter } from '@idux/components/grid'
+import type { RowGutter, RowProps } from '@idux/components/grid'
+import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 

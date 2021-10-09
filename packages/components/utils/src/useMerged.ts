@@ -1,6 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Ref, WritableComputedRef } from 'vue'
 
 import { computed, ref, watch } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
 
 export function useMergedProp<T, K extends keyof T>(props: T, key: K): WritableComputedRef<T[K]> {

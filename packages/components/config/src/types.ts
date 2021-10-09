@@ -1,30 +1,32 @@
-import type { VNode } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
+import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { CheckboxSize } from '@idux/components/checkbox'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
-import type { TextareaResize, TextareaAutoRows } from '@idux/components/textarea'
 import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
+import type { ModalType } from '@idux/components/modal'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
-import type { ProgressSize, ProgressFormat } from '@idux/components/progress'
+import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
-import type { SpinTipAlignType, SpinSize } from '@idux/components/spin'
+import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperSize } from '@idux/components/stepper'
-import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { ModalType } from '@idux/components/modal'
-import type {
-  TableColumnAlign,
-  TableColumnSortOrder,
-  TablePaginationPosition,
-  TableSize,
-} from '@idux/components/table/src/types'
-import { TagShape } from '@idux/components/tag/src/types'
+import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
+import type { TagShape } from '@idux/components/tag'
+import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { VNode } from 'vue'
 
 // Common
 export interface CommonConfig {

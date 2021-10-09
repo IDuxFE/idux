@@ -1,17 +1,24 @@
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
-import type { TableConfig } from '@idux/components/config'
-import type { TableLocale } from '@idux/components/i18n'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ColumnsContext } from './composables/useColumns'
 import type { DataSourceContext } from './composables/useDataSource'
 import type { ExpandableContext } from './composables/useExpandable'
 import type { GetRowKey } from './composables/useGetRowKey'
+import type { PaginationContext } from './composables/usePagination'
 import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
-import type { PaginationContext } from './composables/usePagination'
 import type { TagsContext } from './composables/useTags'
 import type { Key, TableProps } from './types'
+import type { TableConfig } from '@idux/components/config'
+import type { TableLocale } from '@idux/components/i18n'
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface TableContext
   extends ColumnsContext,

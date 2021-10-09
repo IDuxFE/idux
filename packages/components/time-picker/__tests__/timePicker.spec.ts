@@ -1,8 +1,10 @@
-import { mount, DOMWrapper, MountingOptions } from '@vue/test-utils'
+import { DOMWrapper, MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+import dayjs from 'dayjs/esm'
+
 import IxTimePicker from '../src/TimePicker'
 import { TimePickerProps } from '../src/types'
-import dayjs from 'dayjs/esm'
 
 describe.skip('TimePicker', () => {
   const TimePickerMount = (options?: MountingOptions<Partial<TimePickerProps>>) =>

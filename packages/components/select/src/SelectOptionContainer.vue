@@ -15,8 +15,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, provide, ref } from 'vue'
+
 import { IxPropTypes } from '@idux/cdk/utils'
 import { IxEmpty } from '@idux/components/empty'
+
 import SelectOption from './SelectOption.vue'
 import SelectOptionGroup from './SelectOptionGroup.vue'
 import { visibleChangeToken } from './token'

@@ -20,7 +20,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { AbstractControl, useFormGroup, Validators } from '@idux/cdk/forms'
+
+import { AbstractControl, Validators, useFormGroup } from '@idux/cdk/forms'
 
 const mobilePhoneValidator = (value: string) => {
   if (!value || /(^1\d{10}$)/.test(value)) {

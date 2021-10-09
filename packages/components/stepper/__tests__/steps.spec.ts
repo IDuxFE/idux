@@ -1,8 +1,10 @@
 import { mount } from '@vue/test-utils'
+import { nextTick, ref } from 'vue'
+
 import { renderWork } from '@tests'
+
 import IxStepper from '../src/Stepper'
 import IxStepperItem from '../src/StepperItem'
-import { nextTick, ref } from 'vue'
 
 const TestComponent = {
   components: { IxStepper, IxStepperItem },
