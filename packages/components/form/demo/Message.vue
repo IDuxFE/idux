@@ -46,7 +46,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { AbstractControl, useFormGroup, ValidateErrors, Validators } from '@idux/cdk/forms'
+
+import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
 
 Validators.setMessages({
   default: '验证失败/Validation error',

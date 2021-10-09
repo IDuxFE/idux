@@ -1,4 +1,5 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import IxProgress from '../src/Progress.vue'
 import { ProgressProps } from '../src/types'
 

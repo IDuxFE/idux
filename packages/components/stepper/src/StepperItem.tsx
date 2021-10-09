@@ -1,10 +1,20 @@
-import type { ComputedRef, Slot, VNodeTypes, WritableComputedRef } from 'vue'
-import type { StepperProps, StepperItemProps, StepperStatus } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, inject, computed } from 'vue'
+import type { StepperItemProps, StepperProps, StepperStatus } from './types'
+import type { ComputedRef, Slot, VNodeTypes, WritableComputedRef } from 'vue'
+
+import { computed, defineComponent, inject } from 'vue'
+
 import { isBoolean, isNil } from 'lodash-es'
+
 import { hasSlot } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
+
 import { stepperToken } from './token'
 import { stepperItemProps } from './types'
 

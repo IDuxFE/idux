@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({

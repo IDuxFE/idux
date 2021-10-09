@@ -1,8 +1,11 @@
+import { MountingOptions, mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { mount, MountingOptions } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { IxHeader } from '@idux/components/header'
+
 import { IxButton } from '@idux/components/button'
+import { IxHeader } from '@idux/components/header'
+
 import Card from '../src/Card'
 import { CardProps } from '../src/types'
 

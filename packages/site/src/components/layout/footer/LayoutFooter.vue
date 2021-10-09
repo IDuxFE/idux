@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
-import { appContextToken } from '../../../context'
 
+import { appContextToken } from '../../../context'
 import { footerLocales } from './locales'
 
 export default defineComponent({

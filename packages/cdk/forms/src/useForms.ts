@@ -1,7 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions } from './types'
 import type { AbstractControl, ArrayElement, GroupControls } from './controls'
+import type { AsyncValidatorFn, ValidatorFn, ValidatorOptions } from './types'
 
 import { FormArray, FormControl, FormGroup } from './controls'
 import { isAbstractControl } from './typeof'

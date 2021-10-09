@@ -1,6 +1,12 @@
-import { ref, watch, WritableComputedRef } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { computed } from 'vue'
+import { WritableComputedRef, computed, ref, watch } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
 
 /**

@@ -1,13 +1,21 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, provide, ref } from 'vue'
+
+import VirtualHolder from './VirtualHolder'
+import VirtualItem from './VirtualItem'
+import VirtualScrollBar from './VirtualScrollBar'
 import { useGetKey } from './composables/useGetKey'
 import { useItemHeights } from './composables/useItemHeights'
 import { useScroll } from './composables/useScroll'
-import { getScrollTo } from './utils/getScrollTo'
-import VirtualItem from './VirtualItem'
-import VirtualScrollBar from './VirtualScrollBar'
-import VirtualHolder from './VirtualHolder'
 import { virtualScrollToken } from './token'
 import { virtualListProps } from './types'
+import { getScrollTo } from './utils/getScrollTo'
 
 export default defineComponent({
   name: 'IxVirtualScroll',

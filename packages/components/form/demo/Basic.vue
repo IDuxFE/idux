@@ -30,7 +30,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useFormGroup, Validators } from '@idux/cdk/forms'
+
+import { Validators, useFormGroup } from '@idux/cdk/forms'
 
 export default defineComponent({
   setup() {

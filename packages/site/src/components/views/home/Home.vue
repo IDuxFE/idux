@@ -41,6 +41,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
+
 import { appContextToken } from '../../../context'
 import { homeLocales } from './locales'
 

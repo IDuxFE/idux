@@ -1,6 +1,8 @@
-import { mount, MountingOptions } from '@vue/test-utils'
-import CheckboxGroup from '../src/CheckboxGroup'
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
+import CheckboxGroup from '../src/CheckboxGroup'
 import { CheckboxGroupProps } from '../src/types'
 
 describe('CheckboxGroup.vue and Checkbox', () => {

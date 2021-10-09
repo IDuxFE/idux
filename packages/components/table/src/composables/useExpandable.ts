@@ -1,8 +1,16 @@
-import type { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Key, TableProps } from '../types'
-import type { TableColumnMergedExpandable, TableColumnMerged } from './useColumns'
+import type { TableColumnMerged, TableColumnMergedExpandable } from './useColumns'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, ref, watch } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
 
 export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnMerged[]>): ExpandableContext {

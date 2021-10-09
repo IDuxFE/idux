@@ -1,39 +1,46 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IconDefinition } from './types'
 
 import {
-  Up,
-  Down,
-  Left,
-  Right,
-  Loading,
-  Empty,
-  RotateLeft,
-  RotateRight,
-  ZoomIn,
-  ZoomOut,
   Calendar,
-  Close,
   Check,
   CheckCircle,
+  CheckCircleFilled,
+  ClockCircle,
+  Close,
   CloseCircle,
   CloseCircleFilled,
-  ClockCircle,
-  CheckCircleFilled,
-  InfoCircle,
-  InfoCircleFilled,
-  ExclamationCircleFilled,
-  ExclamationCircle,
-  Star,
-  VerticalAlignTop,
-  Ellipsis,
-  QuestionCircle,
   DoubleLeft,
   DoubleRight,
-  QuestionCircleFilled,
-  User,
+  Down,
+  Ellipsis,
+  Empty,
+  ExclamationCircle,
+  ExclamationCircleFilled,
+  InfoCircle,
+  InfoCircleFilled,
+  Left,
+  Loading,
+  Menu,
   Minus,
   Plus,
-  Menu,
+  QuestionCircle,
+  QuestionCircleFilled,
+  Right,
+  RotateLeft,
+  RotateRight,
+  Star,
+  Up,
+  User,
+  VerticalAlignTop,
+  ZoomIn,
+  ZoomOut,
 } from './definitions'
 
 export const staticIcons: IconDefinition[] = [

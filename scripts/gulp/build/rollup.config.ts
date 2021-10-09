@@ -1,12 +1,14 @@
 import { join, resolve } from 'path'
-import { RollupOptions } from 'rollup'
+
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
-import eslintPlugin from 'vite-plugin-eslint'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
-import { esbuildPlugin } from './esbuildPlugin'
+import { RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
+import eslintPlugin from 'vite-plugin-eslint'
+
+import { esbuildPlugin } from './esbuildPlugin'
 
 const externalDeps = [
   'vue',

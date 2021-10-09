@@ -1,4 +1,5 @@
-import { series, TaskFunction } from 'gulp'
+import { TaskFunction, series } from 'gulp'
+
 import { iconsCopy } from '../icons'
 import { execNodeTask } from '../taskHelpers'
 import { initSite } from './utils'

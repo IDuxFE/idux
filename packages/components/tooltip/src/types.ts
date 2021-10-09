@@ -1,10 +1,16 @@
-import type { DefineComponent, HTMLAttributes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { portalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-
-import { overlayPlacementDef, overlayTriggerDef, overlayDelayDef } from '@idux/components/_private'
+import { overlayDelayDef, overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
 
 export const tooltipProps = {
   visible: IxPropTypes.bool.def(false),

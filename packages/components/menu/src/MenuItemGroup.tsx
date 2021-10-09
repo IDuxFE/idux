@@ -1,6 +1,15 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, inject, provide } from 'vue'
+
 import { IxIcon } from '@idux/components/icon'
-import { menuItemGroupToken, menuToken, menuSubToken } from './token'
+
+import { menuItemGroupToken, menuSubToken, menuToken } from './token'
 import { menuItemGroupProps } from './types'
 import { usePaddingLeft } from './usePaddingLeft'
 

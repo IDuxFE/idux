@@ -1,5 +1,6 @@
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { mount, MountingOptions } from '@vue/test-utils'
 
 import IxEmpty from '../src/Empty.vue'
 import { EmptyProps } from '../src/types'

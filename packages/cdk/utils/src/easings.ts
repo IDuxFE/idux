@@ -1,12 +1,8 @@
 /**
- * origin: https://github.com/bameyrick/js-easing-functions/blob/master/src/index.ts
+ * @license
  *
- * Principle of JS Easing Functions https://joshondesign.com/2013/03/01/improvedEasingEquations
- * or https://github.com/ai/easings.net.
- *
- * `elapsed` is the current time, starting at zero,
- * `duration` is the duration in time,
- * `initialValue` and `amountOfChange` are the starting and ending values.
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
 export type EasingFn = (elapsed: number, initialValue: number, amountOfChange: number, duration: number) => number

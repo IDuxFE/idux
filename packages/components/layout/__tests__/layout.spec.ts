@@ -1,11 +1,13 @@
+import { MountingOptions, mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { mount, MountingOptions } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
 import Layout from '../src/Layout'
 import LayoutContent from '../src/LayoutContent'
-import LayoutSider from '../src/LayoutSider'
-import LayoutHeader from '../src/LayoutHeader'
 import LayoutFooter from '../src/LayoutFooter'
+import LayoutHeader from '../src/LayoutHeader'
+import LayoutSider from '../src/LayoutSider'
 import { LayoutProps } from '../src/types'
 
 const defaultSlots = [

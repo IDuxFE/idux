@@ -1,9 +1,16 @@
-import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
+import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
 import { controlPropDef } from '@idux/cdk/forms'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export type RadioMode = 'default' | 'primary'
 export type RadioOptions = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>

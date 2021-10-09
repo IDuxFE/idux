@@ -1,14 +1,24 @@
-import type { ComputedRef, Slot, Slots, VNode, VNodeTypes } from 'vue'
-import type { HeaderProps } from '@idux/components/header'
-import type { CardConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { CardButtonProps, CardCover, CardProps, CardSize } from './types'
+import type { CardConfig } from '@idux/components/config'
+import type { HeaderProps } from '@idux/components/header'
+import type { ComputedRef, Slot, Slots, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, isVNode, provide } from 'vue'
+
 import { isString } from 'lodash-es'
+
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxRow } from '@idux/components/grid'
 import { IxHeader } from '@idux/components/header'
+
 import { cardToken } from './token'
 import { cardProps } from './types'
 

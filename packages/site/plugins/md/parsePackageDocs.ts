@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import remark from 'remark'
 import { dirname, join } from 'path'
-import { existsSync, readdirSync, readFileSync } from 'fs-extra'
+
+import { existsSync, readFileSync, readdirSync } from 'fs-extra'
+import remark from 'remark'
 import { loadFront } from 'yaml-front-matter'
 
-import marked from './marked'
 import { generateTitle } from './generateTitle'
+import marked from './marked'
 import { getComponentScript, getExampleTemplate } from './template'
 import { nonBindAble, withoutSuffix } from './utils'
 

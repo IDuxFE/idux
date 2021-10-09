@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { flushPromises, mount } from '@vue/test-utils'
-import { zh_CN, en_US } from '../src/locales'
+
+import { en_US, zh_CN } from '../src/locales'
 import { addLocale, getLocale, useLocale } from '../src/useI18n'
 
 const Comp = {

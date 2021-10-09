@@ -1,7 +1,9 @@
 import { mount } from '@vue/test-utils'
-import IxBackTop from '../src/BackTop.vue'
-import { renderWork, waitRAF, isShow, wait, scrollTarget } from '@tests'
 import { nextTick } from 'vue'
+
+import { isShow, renderWork, scrollTarget, wait, waitRAF } from '@tests'
+
+import IxBackTop from '../src/BackTop.vue'
 
 const warn = jest.spyOn(console, 'warn').mockImplementation()
 

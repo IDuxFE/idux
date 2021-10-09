@@ -1,7 +1,14 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { Key, TableProps, TablePagination } from '../types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { Key, TablePagination, TableProps } from '../types'
 import type { GetRowKey } from './useGetRowKey'
 import type { ActiveSortable } from './useSortable'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed } from 'vue'
 

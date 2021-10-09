@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
+
 import { useMessage } from '@idux/components/message'
 
 export default defineComponent({

@@ -1,67 +1,63 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { App, Directive } from 'vue'
 
-import { version } from '@idux/components/version'
-
-// import General
-import { IxButton, IxButtonGroup } from '@idux/components/button'
-import { IxIcon } from '@idux/components/icon'
-import { IxHeader } from '@idux/components/header'
-import { IxTypography } from '@idux/components/typography'
-import { IxTag } from '@idux/components/tag'
-// import Layout
-import { IxLayout, IxLayoutHeader, IxLayoutSider, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
-import { IxDivider } from '@idux/components/divider'
-import { IxSpace } from '@idux/components/space'
-import { IxRow, IxCol } from '@idux/components/grid'
-// import Navigation
-import { IxPagination } from '@idux/components/pagination'
 import { IxAffix } from '@idux/components/affix'
-import { IxDropdown } from '@idux/components/dropdown'
-import { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub } from '@idux/components/menu'
-// import Data Entry
-import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
-import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
-import { IxInput } from '@idux/components/input'
-import { IxRadio, IxRadioGroup } from '@idux/components/radio'
-import { IxRate } from '@idux/components/rate'
-import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/select'
-import { IxSwitch } from '@idux/components/switch'
-import { IxTextarea } from '@idux/components/textarea'
-import { IxTimePicker } from '@idux/components/time-picker'
-// import Data Display
-import { IxTable } from '@idux/components/table'
+import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 import { IxAvatar } from '@idux/components/avatar'
-import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
-import { IxStepper, IxStepperItem } from '@idux/components/stepper'
-import { IxList, IxListItem } from '@idux/components/list'
+import { IxBackTop } from '@idux/components/back-top'
 import { IxBadge } from '@idux/components/badge'
+import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard } from '@idux/components/card'
-import { IxEmpty } from '@idux/components/empty'
-import { IxImage } from '@idux/components/image'
-import { IxStatistic } from '@idux/components/statistic'
-import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
-import { IxTooltip } from '@idux/components/tooltip'
-import { IxPopover } from '@idux/components/popover'
-// import Feedback
+import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
+import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
+import { IxDivider } from '@idux/components/divider'
 import { IxDrawer } from '@idux/components/drawer'
+import { IxDropdown } from '@idux/components/dropdown'
+import { IxEmpty } from '@idux/components/empty'
+import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
+import { IxCol, IxRow } from '@idux/components/grid'
+import { IxHeader } from '@idux/components/header'
+import { IxIcon } from '@idux/components/icon'
+import { IxImage } from '@idux/components/image'
+import { IxInput } from '@idux/components/input'
+import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
+import { IxList, IxListItem } from '@idux/components/list'
+import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
 import { IxMessage, IxMessageProvider } from '@idux/components/message'
 import { IxModal, IxModalProvider } from '@idux/components/modal'
-import { IxResult } from '@idux/components/result'
-import { IxSpin } from '@idux/components/spin'
+import { IxPagination } from '@idux/components/pagination'
+import { IxPopover } from '@idux/components/popover'
 import { IxProgress } from '@idux/components/progress'
-// import Other
-import { IxBackTop } from '@idux/components/back-top'
-import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
-// --- import end ---
+import { IxRadio, IxRadioGroup } from '@idux/components/radio'
+import { IxRate } from '@idux/components/rate'
+import { IxResult } from '@idux/components/result'
+import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/select'
+import { IxSpace } from '@idux/components/space'
+import { IxSpin } from '@idux/components/spin'
+import { IxStatistic } from '@idux/components/statistic'
+import { IxStepper, IxStepperItem } from '@idux/components/stepper'
+import { IxSwitch } from '@idux/components/switch'
+import { IxTable } from '@idux/components/table'
+import { IxTag } from '@idux/components/tag'
+import { IxTextarea } from '@idux/components/textarea'
+import { IxTimePicker } from '@idux/components/time-picker'
+import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
+import { IxTooltip } from '@idux/components/tooltip'
+import { IxTypography } from '@idux/components/typography'
+import { version } from '@idux/components/version'
 
 const components = [
-  // components General
   IxButton,
   IxButtonGroup,
   IxIcon,
   IxHeader,
   IxTag,
-  // components Layout
   IxLayout,
   IxLayoutHeader,
   IxLayoutSider,
@@ -71,7 +67,6 @@ const components = [
   IxSpace,
   IxRow,
   IxCol,
-  // components Navigation
   IxPagination,
   IxAffix,
   IxDropdown,
@@ -80,7 +75,6 @@ const components = [
   IxMenuItemGroup,
   IxMenuDivider,
   IxMenuSub,
-  // components Data Entry
   IxForm,
   IxFormItem,
   IxFormWrapper,
@@ -96,7 +90,6 @@ const components = [
   IxSelectOptionGroup,
   IxSwitch,
   IxTimePicker,
-  // components Data Display
   IxTable,
   IxAvatar,
   IxCollapse,
@@ -114,7 +107,6 @@ const components = [
   IxTimelineItem,
   IxTooltip,
   IxPopover,
-  // components Feedback
   IxDrawer,
   IxMessage,
   IxMessageProvider,
@@ -123,23 +115,13 @@ const components = [
   IxResult,
   IxSpin,
   IxProgress,
-  // components Other
   IxBackTop,
   IxAnchor,
   IxAnchorLink,
-  // --- components end ---
 ]
 
 const directives: Record<string, Directive> = {
-  // directives General
   typography: IxTypography,
-  // directives Layout
-  // directives Navigation
-  // directives Data Entry
-  // directives Data Display
-  // directives Feedback
-  // directives Other
-  // --- directives end ---
 }
 
 const install = (app: App): void => {

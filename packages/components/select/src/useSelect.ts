@@ -1,15 +1,25 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ComputedRef, Ref } from 'vue'
+
+import type IxSelectInput from './SelectInput.vue'
+import type { SelectOption, SelectOptionProps, SelectProps } from './types'
 import type { OverlayOptions } from '@idux/cdk/overlay'
 import type { SelectConfig } from '@idux/components/config'
-import type IxSelectInput from './SelectInput.vue'
-import type { SelectOptionProps, SelectOption, SelectProps } from './types'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue'
-import { useOverlay } from '@idux/cdk/overlay'
-import { offResize, onResize, convertArray } from '@idux/cdk/utils'
+
 import { useValueAccessor } from '@idux/cdk/forms'
+import { useOverlay } from '@idux/cdk/overlay'
+import { convertArray, offResize, onResize } from '@idux/cdk/utils'
 import { useFormItemRegister } from '@idux/components/form'
+
 import { selectToken } from './token'
 
 export interface SelectOverlay {

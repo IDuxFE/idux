@@ -12,8 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-import { TableColumn, TableColumnSortable } from '@idux/components/table'
 import { reactive } from 'vue'
+
+import { TableColumn, TableColumnSortable } from '@idux/components/table'
 
 interface Data {
   key: number

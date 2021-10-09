@@ -1,8 +1,10 @@
 import type { OverlayOptions, OverlayTrigger } from '@idux/cdk/overlay'
 
-import { nextTick, onMounted, PropType, unref, watch } from 'vue'
 import { mount } from '@vue/test-utils'
+import { PropType, nextTick, onMounted, unref, watch } from 'vue'
+
 import { wait } from '@tests'
+
 import { useOverlay } from '../src/useOverlay'
 
 const defaultOverlayOptions: OverlayOptions = {

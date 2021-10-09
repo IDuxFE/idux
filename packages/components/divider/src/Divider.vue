@@ -6,13 +6,15 @@
   </div>
 </template>
 <script lang="ts">
-import type { ComputedRef } from 'vue'
-import type { DividerConfig } from '@idux/components/config'
 import type { DividerProps } from './types'
+import type { DividerConfig } from '@idux/components/config'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent } from 'vue'
+
 import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+
 import { dividerProps } from './types'
 
 export default defineComponent({

@@ -1,7 +1,8 @@
+import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+
 import VirtualScroll from '../src/virtual/VirtualScroll'
-import { VirtualScrollInstance, VirtualItemRenderFn, VirtualScrollProps } from '../src/virtual/types'
+import { VirtualItemRenderFn, VirtualScrollInstance, VirtualScrollProps } from '../src/virtual/types'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []

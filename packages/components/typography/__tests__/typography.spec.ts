@@ -1,7 +1,8 @@
-import { renderWork } from '@tests'
-
 import { mount } from '@vue/test-utils'
 import { defineComponent } from 'vue'
+
+import { renderWork } from '@tests'
+
 import { TypographyProps } from '../src/types'
 import IxTypography from '../src/typography'
 

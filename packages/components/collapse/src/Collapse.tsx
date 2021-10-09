@@ -1,6 +1,15 @@
-import { defineComponent, provide, computed, unref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import { computed, defineComponent, provide, unref } from 'vue'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { useMergedProp } from '@idux/components/utils'
+
 import { collapseToken } from './token'
 import { collapseProps } from './types'
 

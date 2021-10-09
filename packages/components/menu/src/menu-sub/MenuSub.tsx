@@ -1,18 +1,28 @@
-import type { ComputedRef, Ref, VNodeTypes } from 'vue'
-import type { MenuMode, MenuSubProps } from '../types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { MenuContext, MenuSubContext } from '../token'
+import type { MenuMode, MenuSubProps } from '../types'
+import type { ComputedRef, Ref, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, provide, ref, watch } from 'vue'
+
 import { debounce } from 'lodash-es'
+
+import { IxOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
-import { IxOverlay } from '@idux/components/_private'
+
 import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
 import { menuSubProps } from '../types'
 import { usePaddingLeft } from '../usePaddingLeft'
-import Title from './Title'
 import InlineContent from './InlineContent'
 import OverlayContent from './OverlayContent'
+import Title from './Title'
 
 const defaultDelay: [number, number] = [0, 100]
 

@@ -1,9 +1,11 @@
-import type { MountingOptions } from '@vue/test-utils'
 import type { PopoverProps } from '../src/types'
+import type { MountingOptions } from '@vue/test-utils'
 
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
+
 import { renderWork } from '@tests'
+
 import IxPopover from '../src/Popover'
 
 describe('Popover', () => {

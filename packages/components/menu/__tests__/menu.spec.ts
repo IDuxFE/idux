@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils'
+
 import IxMenu from '../src/Menu'
+import IxMenuDivider from '../src/MenuDivider'
 import IxMenuItem from '../src/MenuItem'
 import IxMenuItemGroup from '../src/MenuItemGroup'
-import IxMenuDivider from '../src/MenuDivider'
 import IxMenuSub from '../src/menu-sub/MenuSub'
 
 describe('Menu', () => {

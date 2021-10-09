@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 import { VirtualScrollInstance, VirtualScrollToOptions } from '@idux/cdk/scroll'
 
 export default defineComponent({

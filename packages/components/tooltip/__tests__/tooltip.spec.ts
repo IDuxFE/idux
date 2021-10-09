@@ -1,10 +1,12 @@
-import type { MountingOptions } from '@vue/test-utils'
 import type { TooltipProps } from '../src/types'
+import type { MountingOptions } from '@vue/test-utils'
 
 import { mount } from '@vue/test-utils'
-import { isElementVisible, renderWork, wait } from '@tests'
-import IxTooltip from '../src/Tooltip'
 import { h } from 'vue'
+
+import { isElementVisible, renderWork, wait } from '@tests'
+
+import IxTooltip from '../src/Tooltip'
 
 describe('Tooltip', () => {
   const TooltipWrapper = (options?: MountingOptions<Partial<TooltipProps>>) => mount(IxTooltip, { ...options })

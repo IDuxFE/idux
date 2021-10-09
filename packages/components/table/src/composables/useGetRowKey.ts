@@ -1,9 +1,18 @@
-import type { ComputedRef } from 'vue'
-import type { TableConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Key, TableProps } from '../types'
+import type { TableConfig } from '@idux/components/config'
+import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
+
 import { isString } from 'lodash-es'
+
 import { Logger } from '@idux/cdk/utils'
 
 export type GetRowKey = (record: unknown) => Key

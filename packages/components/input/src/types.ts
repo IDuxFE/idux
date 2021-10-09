@@ -1,7 +1,13 @@
-import type { DefineComponent, InputHTMLAttributes } from 'vue'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
+import type { DefineComponent, InputHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'

@@ -1,4 +1,4 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 
 import IxPortal from '../src/Portal'
 import { PortalProps } from '../src/types'

@@ -16,8 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import { TableColumn } from '@idux/components/table'
 import { reactive, ref } from 'vue'
+
+import { TableColumn } from '@idux/components/table'
+
 import { TableColumnSelectable } from '../src/types'
 
 interface Data {

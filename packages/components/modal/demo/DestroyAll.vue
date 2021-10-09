@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
+
 import { useModal } from '@idux/components/modal'
 
 export default defineComponent({

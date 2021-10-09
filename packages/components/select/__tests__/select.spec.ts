@@ -1,6 +1,8 @@
+import { VueWrapper, flushPromises, mount } from '@vue/test-utils'
 import { ComponentPublicInstance, reactive } from 'vue'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+
 import { wait } from '@tests'
+
 import Select from '../src/Select.vue'
 import SelectOption from '../src/SelectOption.vue'
 import SelectOptionGroup from '../src/SelectOptionGroup.vue'

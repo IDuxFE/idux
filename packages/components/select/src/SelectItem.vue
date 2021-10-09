@@ -10,8 +10,9 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IxIcon } from '@idux/components/icon'
+
 import { IxPropTypes } from '@idux/cdk/utils'
+import { IxIcon } from '@idux/components/icon'
 
 export default defineComponent({
   components: { IxIcon },

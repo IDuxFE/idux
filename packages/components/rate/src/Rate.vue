@@ -28,9 +28,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUpdate, ref, watchEffect } from 'vue'
+
 import { convertNumber } from '@idux/cdk/utils'
-import { IxIcon } from '@idux/components/icon'
 import { useGlobalConfig } from '@idux/components/config'
+import { IxIcon } from '@idux/components/icon'
+
 import { rateProps } from './types'
 
 const HALF = 2

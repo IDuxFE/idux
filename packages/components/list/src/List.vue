@@ -26,15 +26,16 @@
 <script lang="ts">
 import type { ListProps } from './types'
 
-import { computed, defineComponent, ref, provide } from 'vue'
+import { computed, defineComponent, provide, ref } from 'vue'
 
 import { IxButton } from '@idux/components/button'
 import { ListConfig, useGlobalConfig } from '@idux/components/config'
 import { IxEmpty } from '@idux/components/empty'
 import { IxSpin } from '@idux/components/spin'
+
 import ListWrap from './ListWrap.vue'
-import { listProps } from './types'
 import { listToken } from './token'
+import { listProps } from './types'
 
 export default defineComponent({
   name: 'IxList',

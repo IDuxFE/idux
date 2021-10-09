@@ -1,9 +1,11 @@
 <script lang="ts">
+import type { TimelineItemPosition, TimelinePosition, TimelineProps } from './types'
 import type { VNode } from 'vue'
-import type { TimelinePosition, TimelineItemPosition, TimelineProps } from './types'
 
-import { defineComponent, h, cloneVNode } from 'vue'
+import { cloneVNode, defineComponent, h } from 'vue'
+
 import { IxIcon } from '@idux/components/icon'
+
 import IxTimelineItem from './TimelineItem.vue'
 import { timelineProps } from './types'
 

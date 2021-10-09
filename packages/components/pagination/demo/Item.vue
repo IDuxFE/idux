@@ -12,8 +12,9 @@
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { PaginationItemRenderOptions } from '@idux/components/config'
+
 import { IxButton } from '@idux/components/button'
+import { PaginationItemRenderOptions } from '@idux/components/config'
 
 export default defineComponent({
   setup() {

@@ -1,9 +1,19 @@
-import type { DeepReadonly, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { BreakpointKey } from './breakpoints'
+import type { DeepReadonly, Ref } from 'vue'
 
 import { onBeforeUnmount, reactive, readonly, ref, watchEffect } from 'vue'
+
 import { invert } from 'lodash-es'
+
 import { convertArray } from '@idux/cdk/utils'
+
 import { BREAKPOINTS } from './breakpoints'
 import { matchMedia } from './mediaMatcher'
 
@@ -83,6 +93,7 @@ export function useScreens(): Screens {
 
 /**
  * Whether one or more media queries match the current viewport size.
+ *
  * @param value One or more media queries to check.
  * @returns Whether any of the media queries match.
  */

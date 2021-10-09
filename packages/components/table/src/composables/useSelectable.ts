@@ -1,12 +1,21 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { TableLocale } from '@idux/components/i18n'
-import type { Key, TableColumnSelectableOption, TableProps } from '../types'
-import type { TableColumnMergedSelectable, TableColumnMerged } from './useColumns'
-import type { DataSourceContext, MergedData } from './useDataSource'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { computed, unref, ref, watch } from 'vue'
-import { callEmit } from '@idux/cdk/utils'
+import type { Key, TableColumnSelectableOption, TableProps } from '../types'
+import type { TableColumnMerged, TableColumnMergedSelectable } from './useColumns'
+import type { DataSourceContext, MergedData } from './useDataSource'
+import type { TableLocale } from '@idux/components/i18n'
+import type { ComputedRef, Ref } from 'vue'
+
+import { computed, ref, unref, watch } from 'vue'
+
 import { isString } from 'lodash-es'
+
+import { callEmit } from '@idux/cdk/utils'
 
 export function useSelectable(
   props: TableProps,

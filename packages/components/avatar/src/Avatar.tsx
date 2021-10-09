@@ -1,14 +1,24 @@
-import type { ComputedRef, CSSProperties, Ref, Slot, VNode, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { AvatarProps, AvatarSize } from './types'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { AvatarConfig } from '@idux/components/config'
-import type { AvatarProps, AvatarSize } from './types'
+import type { CSSProperties, ComputedRef, Ref, Slot, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+
 import { isNumber, isObject, isString } from 'lodash-es'
+
 import { useScreens } from '@idux/cdk/breakpoint'
-import { callEmit, hasSlot, offResize, onResize, convertCssPixel } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel, hasSlot, offResize, onResize } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+
 import { avatarProps } from './types'
 
 export default defineComponent({

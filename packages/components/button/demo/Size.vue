@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonSize } from '@idux/components/button'
-
 import { ref } from 'vue'
+
+import { ButtonSize } from '@idux/components/button'
 
 const size = ref<ButtonSize>('lg')
 </script>

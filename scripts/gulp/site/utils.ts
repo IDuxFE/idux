@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs-extra'
-import { lowerFirst } from 'lodash'
 import { join } from 'path'
+
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs-extra'
+import { lowerFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
 import { gulpConfig } from '../gulpConfig'

@@ -1,20 +1,30 @@
-import type { Instance } from '@popperjs/core'
-import type { PopperOptions, PopperInstance, PopperElement } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { watch, WatchStopHandle } from 'vue'
+import type { PopperElement, PopperInstance, PopperOptions } from './types'
+import type { Instance } from '@popperjs/core'
+
+import { WatchStopHandle, watch } from 'vue'
+
 import { createPopper } from '@popperjs/core'
 import { isEqual } from 'lodash-es'
+
 import { convertElement } from '@idux/cdk/utils'
+
 import {
-  useState,
   useBaseOptions,
+  useDelay,
   useElement,
   usePlacement,
   usePopperEvents,
+  useState,
   useTimer,
   useTriggerEvents,
   useVisibility,
-  useDelay,
 } from './hooks'
 import { convertOptions } from './utils'
 

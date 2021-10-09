@@ -1,14 +1,23 @@
-import type { ComputedRef, StyleValue, Ref } from 'vue'
-import type { CheckboxProps, CheckValue } from './types'
-import type { CheckboxGroupContext } from './token'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, ref, computed, inject } from 'vue'
+import type { CheckboxGroupContext } from './token'
+import type { CheckValue, CheckboxProps } from './types'
+import type { ComputedRef, Ref, StyleValue } from 'vue'
+
+import { computed, defineComponent, inject, ref } from 'vue'
+
 import { useValueAccessor } from '@idux/cdk/forms'
-import { useFormItemRegister } from '@idux/components/form'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormItemRegister } from '@idux/components/form'
+
 import { checkboxGroupToken } from './token'
-import { checkboxProps, CheckboxSize } from './types'
+import { CheckboxSize, checkboxProps } from './types'
 
 export default defineComponent({
   name: 'IxCheckbox',

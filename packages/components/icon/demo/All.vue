@@ -16,8 +16,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, watch } from 'vue'
+import { Ref, defineComponent, ref, watch } from 'vue'
+
 import { useClipboard } from '@idux/cdk/clipboard'
+
 import { allIcons } from './all'
 
 export default defineComponent({

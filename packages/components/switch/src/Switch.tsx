@@ -1,8 +1,17 @@
-import { computed, defineComponent, ref, ComputedRef, onMounted } from 'vue'
-import { IxIcon } from '@idux/components/icon'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import { ComputedRef, computed, defineComponent, onMounted, ref } from 'vue'
+
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useFormItemRegister } from '@idux/components/form'
+import { IxIcon } from '@idux/components/icon'
+
 import { SwitchProps, switchProps } from './types'
 
 export default defineComponent({

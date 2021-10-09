@@ -1,13 +1,22 @@
-import type { ComputedRef, Ref, Slots, VNodeTypes } from 'vue'
-import type { ButtonConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ButtonGroupProps, ButtonMode, ButtonProps } from './types'
+import type { ButtonConfig } from '@idux/components/config'
+import type { ComputedRef, Ref, Slots, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { buttonProps } from './types'
+
 import { buttonToken } from './token'
+import { buttonProps } from './types'
 
 export default defineComponent({
   name: 'IxButton',

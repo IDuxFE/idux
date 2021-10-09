@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { useClipboard } from '@idux/cdk/clipboard'
 
 export default defineComponent({

@@ -1,14 +1,23 @@
-import type { ComputedRef, Ref, Slot, StyleValue } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { TextareaProps } from './types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
-import type { TextareaProps } from './types'
+import type { ComputedRef, Ref, Slot, StyleValue } from 'vue'
 
 import { computed, defineComponent, normalizeClass } from 'vue'
+
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { ɵUseCommonBindings } from '@idux/components/input'
-import { useAutoRows } from './useAutoRows'
+
 import { textareaProps } from './types'
+import { useAutoRows } from './useAutoRows'
 
 export default defineComponent({
   name: 'IxTextarea',

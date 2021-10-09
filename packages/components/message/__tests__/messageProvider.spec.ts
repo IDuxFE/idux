@@ -1,5 +1,7 @@
-import { flushPromises, mount, MountingOptions, VueWrapper } from '@vue/test-utils'
+import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-utils'
+
 import { renderWork, wait } from '@tests'
+
 import MessageProvider from '../src/MessageProvider'
 import { MessageProviderInstance, MessageProviderProps } from '../src/types'
 

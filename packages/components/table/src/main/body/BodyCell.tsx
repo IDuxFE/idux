@@ -1,17 +1,27 @@
-import type { ComputedRef, Slots, StyleValue, VNodeTypes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type {
-  TableColumnMergedExtra,
   TableColumnMergedExpandable,
+  TableColumnMergedExtra,
   TableColumnMergedSelectable,
 } from '../../composables/useColumns'
 import type { TableBodyCellProps } from '../../types'
+import type { ComputedRef, Slots, StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
+
 import { isFunction, isString } from 'lodash-es'
+
 import { convertArray, convertCssPixel } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 import { IxRadio } from '@idux/components/radio'
+
 import { TABLE_TOKEN } from '../../token'
 import { tableBodyCellProps } from '../../types'
 import { getColTitle } from '../../utils'

@@ -4,10 +4,11 @@
   </component>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { progressProps } from './types'
-import Line from './Line.vue'
+import { computed, defineComponent } from 'vue'
+
 import Circle from './Circle.vue'
+import Line from './Line.vue'
+import { progressProps } from './types'
 import { convertPercent } from './util'
 
 export default defineComponent({

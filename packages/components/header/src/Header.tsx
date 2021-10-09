@@ -1,12 +1,22 @@
-import type { ComputedRef, Slot, VNode } from 'vue'
-import type { AvatarProps } from '@idux/components/avatar'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { HeaderProps } from './types'
+import type { AvatarProps } from '@idux/components/avatar'
+import type { ComputedRef, Slot, VNode } from 'vue'
 
 import { computed, defineComponent, h, isVNode } from 'vue'
+
 import { isString } from 'lodash-es'
+
 import { callEmit } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxIcon } from '@idux/components/icon'
+
 import { headerProps } from './types'
 
 const avatarSizeTransformMap = {

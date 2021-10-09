@@ -1,8 +1,16 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { Options, StrictModifiers } from '@popperjs/core'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { OverlayElement, OverlayPlacement } from './types'
+import type { Options, StrictModifiers } from '@popperjs/core'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed } from 'vue'
+
 import { isHTMLElement } from '@idux/cdk/utils'
 
 export const convertElement = (elementRef: Ref<OverlayElement | null>): ComputedRef<HTMLElement> => {

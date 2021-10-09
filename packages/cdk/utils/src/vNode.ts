@@ -1,8 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { isVNode, VNode, VNodeChild } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { Comment, Fragment, Slots, Text } from 'vue'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Comment, Fragment, Slots, Text, VNode, VNodeChild, isVNode } from 'vue'
+
 import { isNil, isNumber, isString } from 'lodash-es'
+
 import { convertArray } from './convert'
 
 const TEMPLATE = 'template'
@@ -24,6 +32,7 @@ function getChildren(node: VNode, depth: number): VNode | undefined {
 
 /**
  * get first valid child node (not fragment not comment)
+ *
  * @param nodes node to be searched
  * @param maxDepth depth to be searched, default is 3
  */
@@ -39,6 +48,7 @@ export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | unde
 
 /**
  * get all child node (Whatever dynamic or not)
+ *
  * @param slots slots of the component
  * @param key key of slots, default is 'default'
  * @param options the property of the render function
@@ -59,6 +69,7 @@ export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[
 
 /**
  * checks whether a slot exists
+ *
  * @param slots slots of the component
  * @param key key of slots, default is 'default'
  */

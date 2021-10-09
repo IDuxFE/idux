@@ -1,8 +1,16 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { TypographyOptions, TypographyProps } from './types'
 import type { FunctionDirective } from 'vue'
-import type { TypographyProps, TypographyOptions } from './types'
 
 import { isObject } from 'lodash-es'
-import { addClass, Logger, removeClass } from '@idux/cdk/utils'
+
+import { Logger, addClass, removeClass } from '@idux/cdk/utils'
 
 const typography: FunctionDirective<HTMLElement, TypographyProps> = (el, binding) => {
   const className: string[] = ['ix-typography']

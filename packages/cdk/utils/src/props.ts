@@ -1,22 +1,31 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { VNode, Prop } from 'vue'
+
+import type { Prop, VNode } from 'vue'
 import type { VueTypeDef, VueTypeValidableDef } from 'vue-types'
-import type { InferType, Prop as VueTypeProp, VueProp } from 'vue-types/dist/types'
+import type { InferType, VueProp, Prop as VueTypeProp } from 'vue-types/dist/types'
 
 import { isVNode } from 'vue'
+
 import {
-  func,
   array,
-  object,
+  arrayOf,
   custom,
+  func,
+  instanceOf,
+  object,
+  objectOf,
   oneOf,
   oneOfType,
-  arrayOf,
-  instanceOf,
-  objectOf,
   shape,
-  toValidableType,
   toType,
+  toValidableType,
 } from 'vue-types'
 
 type PublicRequiredKeys<T> = {

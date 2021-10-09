@@ -1,13 +1,32 @@
-import { ComputedRef, onBeforeUnmount, onMounted, Ref, watch } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { computed, defineComponent, inject, ref, Transition } from 'vue'
+import {
+  ComputedRef,
+  Ref,
+  Transition,
+  computed,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
+
 import { isFunction } from 'lodash-es'
-import { callEmit, getOffset, convertCssPixel } from '@idux/cdk/utils'
-import ModalHeader from './ModalHeader'
+
+import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
+import { ModalConfig } from '@idux/components/config'
+
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
-import { modalToken, MODAL_TOKEN } from './token'
-import { ModalConfig } from '@idux/components/config'
+import ModalHeader from './ModalHeader'
+import { MODAL_TOKEN, modalToken } from './token'
 import { ModalProps } from './types'
 
 export default defineComponent({

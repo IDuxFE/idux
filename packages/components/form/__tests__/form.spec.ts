@@ -1,5 +1,7 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
 import IxForm from '../src/Form'
 import { FormProps } from '../src/types'
 

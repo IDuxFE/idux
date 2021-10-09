@@ -1,8 +1,16 @@
-import type { VNode } from 'vue'
-import type { TablePagination } from '../types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { MergedData } from '../composables/useDataSource'
+import type { TablePagination } from '../types'
+import type { VNode } from 'vue'
 
 import { kebabCase } from 'lodash-es'
+
 import { IxPagination } from '@idux/components/pagination'
 
 export function renderPagination(

@@ -1,6 +1,13 @@
-import type { DefineComponent, HTMLAttributes } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
+import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import dayjs from 'dayjs/esm'
 

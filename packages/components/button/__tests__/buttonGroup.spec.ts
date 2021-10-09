@@ -1,7 +1,9 @@
 import { mount } from '@vue/test-utils'
-import ButtonGroup from '../src/ButtonGroup'
-import Button from '../src/Button'
+
 import { renderWork } from '@tests'
+
+import Button from '../src/Button'
+import ButtonGroup from '../src/ButtonGroup'
 
 const TestComponent = {
   components: { ButtonGroup, Button },

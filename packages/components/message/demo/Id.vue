@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { useMessage } from '@idux/components/message'
 
 export default defineComponent({

@@ -17,12 +17,15 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
+
 import { isObject } from 'lodash-es'
+
 import { convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+
 import { convertProgressProps } from './types'
-import { useInfo, useStatus, useStatusClasses, useSmallSize } from './useCommonLogic'
+import { useInfo, useSmallSize, useStatus, useStatusClasses } from './useCommonLogic'
 import { handleGradient } from './util'
 
 const defaultStrokeWidth = 8

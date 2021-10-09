@@ -1,13 +1,22 @@
-import type { Ref } from 'vue'
-import type { AnchorConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { AnchorLinkProps, AnchorProps } from './types'
+import type { AnchorConfig } from '@idux/components/config'
+import type { Ref } from 'vue'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
+
 import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, getOffset, off, on } from '@idux/cdk/utils'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
 import { getTarget } from '@idux/components/utils'
+
 import { anchorToken } from './token'
 import { anchorProps } from './types'
 

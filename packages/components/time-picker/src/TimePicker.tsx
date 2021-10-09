@@ -1,10 +1,20 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent } from 'vue'
+
 import dayjs from 'dayjs/esm'
+
 import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
+
 import TimePickerPanel from './TimePickerPanel'
-import { useCommonBindings, useCommonInputProps, useCommonPanelProps, useCommonOverlayProps } from './hooks'
+import { useCommonBindings, useCommonInputProps, useCommonOverlayProps, useCommonPanelProps } from './hooks'
 import { timePickerProps } from './types'
 import { normalizeFormat } from './utils'
 

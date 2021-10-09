@@ -1,12 +1,22 @@
-import type { TagConfig } from '@idux/components/config'
-import type { TagProps } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { computed, defineComponent, ComputedRef, Slots } from 'vue'
-import { IxIcon } from '@idux/components/icon'
-import { useGlobalConfig } from '@idux/components/config'
-import { isPresetColor, isStatusColor } from '@idux/components/utils'
-import { tagProps } from './types'
+import type { TagProps } from './types'
+import type { TagConfig } from '@idux/components/config'
+import type { ComputedRef, Slots } from 'vue'
+
+import { computed, defineComponent } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
+import { IxIcon } from '@idux/components/icon'
+import { isPresetColor, isStatusColor } from '@idux/components/utils'
+
+import { tagProps } from './types'
 
 export default defineComponent({
   name: 'IxTag',

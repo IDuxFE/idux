@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+
 import { useClipboard } from '../src/useClipboard'
 
 const copyText = 'copy text'

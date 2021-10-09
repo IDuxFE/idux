@@ -1,6 +1,14 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { SelectOptionGroupProps, SelectOptionProps, SelectProps } from './types'
 import type { InjectionKey, Ref } from 'vue'
-import type { SelectProps, SelectOptionProps, SelectOptionGroupProps } from './types'
 
 export interface SelectInjection {
   selectProps: SelectProps

@@ -1,7 +1,16 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ModalInstance, ModalOptions, ModalRef } from './types'
 
-import { defineComponent, ref, provide } from 'vue'
-import { callEmit, noop, convertArray, uniqueId } from '@idux/cdk/utils'
+import { defineComponent, provide, ref } from 'vue'
+
+import { callEmit, convertArray, noop, uniqueId } from '@idux/cdk/utils'
+
 import Modal from './Modal'
 import { modalProviderToken } from './token'
 

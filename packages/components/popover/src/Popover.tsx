@@ -1,10 +1,19 @@
-import type { Slots, VNode } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { PopoverProps } from './types'
+import type { Slots, VNode } from 'vue'
 
 import { defineComponent } from 'vue'
+
 import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵUseConfigProps } from '@idux/components/tooltip'
+
 import { popoverProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]

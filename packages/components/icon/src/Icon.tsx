@@ -1,12 +1,21 @@
-import type { Ref } from 'vue'
-import type { IconConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { IconProps } from './types'
+import type { IconConfig } from '@idux/components/config'
+import type { Ref } from 'vue'
 
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+
 import { isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
+
 import { iconProps } from './types'
+import { clearSVGElement, loadIconFontSvgElement, loadSVGElement } from './utils'
 
 export default defineComponent({
   name: 'IxIcon',

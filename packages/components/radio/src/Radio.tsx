@@ -1,12 +1,21 @@
-import type { ComputedRef } from 'vue'
-import type { RadioProps, RadioGroupProps } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { RadioGroupContext } from './token'
+import type { RadioGroupProps, RadioProps } from './types'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, inject, ref } from 'vue'
+
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
+
 import { radioGroupToken } from './token'
 import { radioProps } from './types'
 

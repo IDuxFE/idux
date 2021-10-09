@@ -1,7 +1,15 @@
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
-import type { PaginationConfig } from '@idux/components/config'
-import { PaginationLocale } from '@idux/components/i18n'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { PaginationProps } from './types'
+import type { PaginationConfig } from '@idux/components/config'
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+
+import { PaginationLocale } from '@idux/components/i18n'
 
 export interface PaginationContext {
   props: PaginationProps

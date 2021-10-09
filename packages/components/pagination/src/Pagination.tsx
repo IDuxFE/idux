@@ -1,16 +1,25 @@
-import type { ComputedRef, Slots } from 'vue'
-import type { PaginationConfig } from '@idux/components/config'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { PaginationProps, PaginationSize } from './types'
+import type { PaginationConfig } from '@idux/components/config'
+import type { ComputedRef, Slots } from 'vue'
 
 import { computed, defineComponent, provide, ref, watch } from 'vue'
+
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
-import Total from './Total'
+
 import Default from './Default'
 import Simple from './Simple'
-import { paginationProps } from './types'
+import Total from './Total'
 import { paginationToken } from './token'
+import { paginationProps } from './types'
 
 export default defineComponent({
   name: 'IxPagination',

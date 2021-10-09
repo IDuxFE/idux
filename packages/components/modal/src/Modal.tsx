@@ -1,11 +1,20 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import { computed, defineComponent, onBeforeUnmount, provide, ref, watch, watchEffect } from 'vue'
+
 import { IxPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise } from '@idux/cdk/utils'
 import { IxMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
+
 import ModalWrapper from './ModalWrapper'
-import { modalToken, MODAL_TOKEN } from './token'
+import { MODAL_TOKEN, modalToken } from './token'
 import { ModalProps, modalProps } from './types'
 
 export default defineComponent({

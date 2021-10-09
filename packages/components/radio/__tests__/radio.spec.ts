@@ -1,5 +1,7 @@
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
 import Radio from '../src/Radio'
 import { RadioProps } from '../src/types'
 

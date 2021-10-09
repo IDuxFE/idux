@@ -1,7 +1,10 @@
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
 import { h, reactive } from 'vue'
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
+
 import { IxIcon } from '@idux/components/icon'
+
 import Collapse from '../src/Collapse'
 import CollapsePanel from '../src/CollapsePanel'
 import { CollapseProps } from '../src/types'

@@ -1,5 +1,6 @@
+import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
+
 import { renderWork } from '@tests'
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils'
 
 import IxRate from '../src/Rate.vue'
 import { RateInstance, RateProps } from '../src/types'

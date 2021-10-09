@@ -1,3 +1,10 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { Options, Placement } from '@popperjs/core'
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
@@ -101,6 +108,7 @@ export interface OverlayInstance<
   /**
    * Update overlay.
    * If the overlay has not been initialized, the overlay will be initialized first, otherwise the overlay will be update directly.
+   *
    * @param options
    */
   update: (options?: Partial<OverlayOptions>) => void

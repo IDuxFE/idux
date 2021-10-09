@@ -1,6 +1,8 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
+
 import { renderWork } from '@tests'
+
 import IxSwitch from '../src/Switch'
 import { SwitchProps } from '../src/types'
 

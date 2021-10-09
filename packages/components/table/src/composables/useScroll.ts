@@ -1,8 +1,16 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { StickyContext } from './useSticky'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { TableProps } from '../types'
+import type { StickyContext } from './useSticky'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, onBeforeUnmount, ref } from 'vue'
+
 import { getScrollBarSize } from '@idux/cdk/scroll'
 import { convertCssPixel, convertElement } from '@idux/cdk/utils'
 

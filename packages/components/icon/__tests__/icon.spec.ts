@@ -1,9 +1,10 @@
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+
 import { useGlobalConfig } from '@idux/components/config'
 
-import { flushPromises, mount, MountingOptions } from '@vue/test-utils'
-import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
 import IxIcon from '../src/Icon'
-import { IconProps, IconDefinition } from '../src/types'
+import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
+import { IconDefinition, IconProps } from '../src/types'
 
 const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }
 const Down: IconDefinition = { name: 'down', svgString: '<svg></svg>' }

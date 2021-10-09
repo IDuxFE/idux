@@ -9,13 +9,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, onUnmounted, onMounted, ref } from 'vue'
+import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref } from 'vue'
+
 import { throttle } from 'lodash-es'
-import { scrollToTop, getScroll } from '@idux/cdk/scroll'
-import { on, off } from '@idux/cdk/utils'
+
+import { getScroll, scrollToTop } from '@idux/cdk/scroll'
+import { off, on } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { getTarget } from '@idux/components/utils'
+
 import { backTopProps } from './types'
 
 export default defineComponent({

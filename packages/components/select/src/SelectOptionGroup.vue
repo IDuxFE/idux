@@ -9,9 +9,10 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject, nextTick, onUnmounted, provide, ref, watch } from 'vue'
+
 import SelectOption from './SelectOption.vue'
-import { selectOptionGroupProps } from './types'
 import { visibleChangeToken } from './token'
+import { selectOptionGroupProps } from './types'
 
 export default defineComponent({
   name: 'IxSelectOptionGroup',

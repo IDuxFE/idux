@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { Validators, useFormGroup } from '@idux/cdk/forms'
 
 import CustomForm from './BasicForm.vue'

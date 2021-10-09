@@ -1,9 +1,18 @@
-import type { VNode, CSSProperties } from 'vue'
-import type { SpaceDirection, SpaceProps, SpaceSize } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, computed } from 'vue'
-import { filterEmptyNode, getSlotNodes, Logger } from '@idux/cdk/utils'
+import type { SpaceDirection, SpaceProps, SpaceSize } from './types'
+import type { CSSProperties, VNode } from 'vue'
+
+import { computed, defineComponent } from 'vue'
+
+import { Logger, filterEmptyNode, getSlotNodes } from '@idux/cdk/utils'
 import { SpaceConfig, useGlobalConfig } from '@idux/components/config'
+
 import { spaceProps } from './types'
 
 export default defineComponent({

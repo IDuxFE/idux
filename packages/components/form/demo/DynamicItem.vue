@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { FormArray, useFormArray, useFormControl, useFormGroup } from '@idux/cdk/forms'
 
 export default defineComponent({

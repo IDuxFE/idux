@@ -1,8 +1,15 @@
-import type { DefineComponent, HTMLAttributes } from 'vue'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes } from 'vue'
+
 import { controlPropDef } from '@idux/cdk/forms'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export const switchProps = {
   autofocus: IxPropTypes.bool.def(false),

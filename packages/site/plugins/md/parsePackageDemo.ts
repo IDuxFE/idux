@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { dirname, join } from 'path'
+
 import { existsSync, readFileSync } from 'fs-extra'
 import remark from 'remark'
-import { dirname, join } from 'path'
 import { loadFront } from 'yaml-front-matter'
 
 import marked from './marked'
-import { nonBindAble, withoutSuffix } from './utils'
 import { getDemoTemplate } from './template'
+import { nonBindAble, withoutSuffix } from './utils'
 
 const _remark = remark()
 export function parsePackageDemo(id: string, raw: string): string {

@@ -7,10 +7,19 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
 import { ModifierKeys } from '../types'
 
 /**
  * Creates a browser MouseEvent with the specified options.
+ *
  * @docs-private
  */
 export function createMouseEvent(
@@ -89,6 +98,7 @@ export function createPointerEvent(
 
 /**
  * Creates a browser TouchEvent with the specified pointer coordinates.
+ *
  * @docs-private
  */
 export function createTouchEvent(type: string, pageX = 0, pageY = 0): UIEvent {
@@ -111,6 +121,7 @@ export function createTouchEvent(type: string, pageX = 0, pageY = 0): UIEvent {
 
 /**
  * Creates a keyboard event with the specified key and modifiers.
+ *
  * @docs-private
  */
 export function createKeyboardEvent(type: string, keyCode = 0, key = '', modifiers: ModifierKeys = {}): KeyboardEvent {
@@ -188,6 +199,7 @@ export function createKeyboardEvent(type: string, keyCode = 0, key = '', modifie
 
 /**
  * Creates a fake event object with any desired event type.
+ *
  * @docs-private
  */
 export function createFakeEvent(type: string, canBubble = false, cancelable = true): Event {

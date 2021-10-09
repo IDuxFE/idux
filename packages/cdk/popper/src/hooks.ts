@@ -1,7 +1,15 @@
-import type { ComputedRef, Ref } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { PopperEvents, PopperOptions, PopperPlacement, PopperTriggerEvents } from './types'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, reactive, ref, watch } from 'vue'
+
 import { noop } from '@idux/cdk/utils'
 
 export function useElement<T>(): Ref<T | null> {

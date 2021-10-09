@@ -1,11 +1,20 @@
-import type { Slots } from 'vue'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { TooltipProps } from './types'
+import type { Slots } from 'vue'
 
 import { defineComponent } from 'vue'
+
 import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { useConfigProps } from './useConfigProps'
+
 import { tooltipProps } from './types'
+import { useConfigProps } from './useConfigProps'
 
 const defaultOffset: [number, number] = [0, 8]
 

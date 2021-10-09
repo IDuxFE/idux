@@ -1,10 +1,19 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 import type { ComputedRef, Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { on, off, rAF, cancelRAF } from '@idux/cdk/utils'
+
+import { cancelRAF, off, on, rAF } from '@idux/cdk/utils'
+
+import { ScrollBarState, SyncScrollTop } from './composables/useScroll'
 import { virtualScrollToken } from './token'
 import { VirtualScrollProps } from './types'
-import { ScrollBarState, SyncScrollTop } from './composables/useScroll'
 
 export default defineComponent({
   setup() {

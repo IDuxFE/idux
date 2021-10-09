@@ -5,6 +5,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
+
 import { SelectOption } from '../src/types'
 
 export default defineComponent({

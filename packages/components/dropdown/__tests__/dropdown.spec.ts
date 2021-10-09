@@ -1,4 +1,5 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+
 import IxDropdown from '../src/Dropdown'
 import { DropdownProps } from '../src/types'
 

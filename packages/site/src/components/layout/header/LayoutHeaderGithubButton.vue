@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue'
+
 import { appContextToken, isDevMode } from '../../../context'
 
 export default defineComponent({

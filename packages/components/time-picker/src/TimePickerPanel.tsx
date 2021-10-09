@@ -1,10 +1,20 @@
-import type { ComputedRef } from 'vue'
-import type { Dayjs } from 'dayjs/esm'
-import type { TimePickerPanelColumnType, PanelColumnProps, PanelCell, TimePickerPanelProps } from './types'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-import { defineComponent, computed } from 'vue'
+import type { PanelCell, PanelColumnProps, TimePickerPanelColumnType, TimePickerPanelProps } from './types'
+import type { Dayjs } from 'dayjs/esm'
+import type { ComputedRef } from 'vue'
+
+import { computed, defineComponent } from 'vue'
+
 import dayjs from 'dayjs/esm'
+
 import { callEmit } from '@idux/cdk/utils'
+
 import PanelColumn from './panel-column/PanelColumn'
 import { timePickerPanelProps } from './types'
 import { calculateValue, calculateViewHour, normalizeAmPm } from './utils'

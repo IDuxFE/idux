@@ -1,12 +1,20 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { CSSProperties, DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+
+import type { TableColumnMerged, TableColumnMergedExtra } from './composables/useColumns'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
 import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
-import type { TableColumnMerged, TableColumnMergedExtra } from './composables/useColumns'
+import type { CSSProperties, DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 

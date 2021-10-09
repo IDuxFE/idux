@@ -1,8 +1,9 @@
-import { existsSync, statSync } from 'fs-extra'
 import { dirname, extname, join, relative, resolve } from 'path'
+
+import { FilterPattern, createFilter } from '@rollup/pluginutils'
+import { Loader, Message, TransformOptions, transform } from 'esbuild'
+import { existsSync, statSync } from 'fs-extra'
 import { Plugin } from 'rollup'
-import { transform, Message, Loader, TransformOptions } from 'esbuild'
-import { createFilter, FilterPattern } from '@rollup/pluginutils'
 
 const cleanUrl = (url: string) => url.replace(/\?.*$/, '').replace(/#.*$/, '')
 

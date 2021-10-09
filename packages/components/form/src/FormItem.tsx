@@ -1,25 +1,35 @@
-import type { ComputedRef, Slots, WatchStopHandle } from 'vue'
-import {
-  AbstractControl,
-  ValidateStatus,
-  ValidateErrors,
-  isAbstractControl,
-  injectControl,
-  ControlPathType,
-} from '@idux/cdk/forms'
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { FormItemProps, FormLabelAlign } from './types'
 import type { ColProps } from '@idux/components/grid'
 import type { Locale } from '@idux/components/i18n'
-import type { FormItemProps, FormLabelAlign } from './types'
+import type { ComputedRef, Slots, WatchStopHandle } from 'vue'
 
 import { computed, defineComponent, inject, provide, ref, watchEffect } from 'vue'
+
 import { isFunction, isNil, isNumber, isString } from 'lodash-es'
-import { IxCol, IxRow } from '@idux/components/grid'
-import { IxIcon } from '@idux/components/icon'
-import { getLocale } from '@idux/components/i18n'
-import { IxTooltip } from '@idux/components/tooltip'
-import { formToken, FORM_ITEM_TOKEN } from './token'
-import { formItemProps } from './types'
+
+import {
+  AbstractControl,
+  ControlPathType,
+  ValidateErrors,
+  ValidateStatus,
+  injectControl,
+  isAbstractControl,
+} from '@idux/cdk/forms'
 import { Logger } from '@idux/cdk/utils'
+import { IxCol, IxRow } from '@idux/components/grid'
+import { getLocale } from '@idux/components/i18n'
+import { IxIcon } from '@idux/components/icon'
+import { IxTooltip } from '@idux/components/tooltip'
+
+import { FORM_ITEM_TOKEN, formToken } from './token'
+import { formItemProps } from './types'
 
 export default defineComponent({
   name: 'IxFormItem',

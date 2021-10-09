@@ -1,10 +1,13 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 import { h } from 'vue'
+
 import { renderWork } from '@tests'
+
+import { IxAvatar } from '@idux/components/avatar'
 import { IxIcon } from '@idux/components/icon'
+
 import IxHeader from '../src/Header'
 import { HeaderProps } from '../src/types'
-import { IxAvatar } from '@idux/components/avatar'
 
 describe('Header', () => {
   const HeaderMount = (options?: MountingOptions<Partial<HeaderProps>>) => mount(IxHeader, { ...options })

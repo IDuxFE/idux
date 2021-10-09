@@ -1,6 +1,8 @@
-import { mount, MountingOptions } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
+
 import { renderWork } from '@tests'
+
 import IxTimeline from '../src/Timeline.vue'
 import IxTimelineItem from '../src/TimelineItem.vue'
 import { TimelineProps } from '../src/types'
