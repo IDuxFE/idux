@@ -13,16 +13,14 @@ export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
   const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
   const componentsResolve = isBuild ? '../../dist/components' : '../components'
+  const esLint = eslintPlugin({
+    fix: true,
+    include: [resolve(__dirname, '../**/*.ts'), resolve(__dirname, '../**/*.tsx'), resolve(__dirname, '../**/*.vue')],
+  })
+
   return {
     plugins: [
-      eslintPlugin({
-        fix: true,
-        include: [
-          resolve(__dirname, '../**/*.ts'),
-          resolve(__dirname, '../**/*.tsx'),
-          resolve(__dirname, '../**/*.vue'),
-        ],
-      }),
+      isBuild ? esLint : undefined,
       vuePlugin({ include: [/\.vue$/, /\.md$/] }),
       vueJsxPlugin({ enableObjectSlots: false }),
       mdPlugin(),
