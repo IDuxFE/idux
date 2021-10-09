@@ -25,6 +25,11 @@ import type {
   TableSize,
 } from '@idux/components/table/src/types'
 
+// Common
+export interface CommonConfig {
+  prefixCls: string
+}
+
 // General
 
 export interface ButtonConfig {
@@ -316,6 +321,8 @@ export interface AnchorConfig {
 // --- end ---
 
 export interface GlobalConfig {
+  // Common
+  common: CommonConfig
   // General
   button: ButtonConfig
   icon: IconConfig
