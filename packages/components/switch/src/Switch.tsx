@@ -20,7 +20,7 @@ export default defineComponent({
   setup(props) {
     const { switchRef, focus, blur } = useElement()
     const { isChecked, isDisabled, handleClick, handleBlur, handleMouseup } = useSwitch(props, blur)
-    const isSmallSize = computed(() => props.size === 'small')
+    const isSmallSize = computed(() => props.size === 'sm')
     const classes = useClasses(props, isChecked, isDisabled, isSmallSize)
 
     onMounted(() => {
@@ -102,7 +102,7 @@ const useClasses = (
       'ix-switch-loading': props.loading,
       'ix-switch-checked': isChecked.value,
       'ix-switch-disabled': isDisabled.value,
-      'ix-switch-small': isSmallSize.value,
+      'ix-switch-sm': isSmallSize.value,
     }
   })
 }

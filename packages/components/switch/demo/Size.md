@@ -7,8 +7,8 @@ order: 3
 
 ## zh
 
-`Switch`共有两种尺寸`medium`和`small`，默认为`medium`
+`Switch`共有两种尺寸`md`和`sm`，默认为`md`
 
 ## en
 
-`Switch` has two sizes, `medium` and `small`, and the default is `medium`
+`Switch` has two sizes, `md` and `sm`, and the default is `md`

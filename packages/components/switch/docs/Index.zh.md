@@ -17,7 +17,7 @@ order: 0
 | `v-model:checked` | 确定切换器状态是否开启 | `boolean` | `false` | - | - |
 | `disabled` | 是否禁止操作切换器 | `boolean` | `false`| - | - |
 | `loading` | 是否处于加载中（加载时不允许改变切换器的当前状态） | `boolean` | `false` | - | - |
-| `size` | 切换器的大小 | `medium\|small` | `medium` | - | - |
+| `size` | 切换器的大小 | `'md' \| 'sm'` | `'md'` | - | - |
 | `checkedChildren` | 开启时切换器内部的文案 | `string \| #slot` | - | - | 插槽优先级更高 |
 | `unCheckedChildren` | 关闭时切换器内部的文案 | `string \| #slot` | - | - | 插槽优先级更高 |
 | `onFocus` | 获取焦点后触发的回调 | `(evt: FocusEvent) => void`| - | - | - |
