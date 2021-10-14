@@ -4,7 +4,7 @@
 
 .@{switch-prefix} {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   min-width: 44px;
   height: @switch-normal-height;
@@ -76,7 +76,7 @@
     }
   }
 
-  &-small {
+  &-sm {
     min-width: 28px;
     height: @switch-small-height;
 
@@ -99,7 +99,7 @@
     }
   }
 
-  &-small&-checked {
+  &-sm&-checked {
     .@{switch-prefix}-loading-icon {
       right: calc(100% - @switch-small-loading-icon-offset);
     }

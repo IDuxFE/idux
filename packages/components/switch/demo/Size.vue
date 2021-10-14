@@ -1,7 +1,7 @@
 <template>
   <IxSpace direction="vertical" :size="20">
-    <IxSwitch v-model:checked="checked1" size="small"></IxSwitch>
-    <IxSwitch v-model:checked="checked2" size="medium"></IxSwitch>
+    <IxSwitch v-model:checked="checked1" size="sm"></IxSwitch>
+    <IxSwitch v-model:checked="checked2"></IxSwitch>
   </IxSpace>
 </template>
 <script lang="ts">

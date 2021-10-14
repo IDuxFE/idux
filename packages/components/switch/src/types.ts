@@ -18,7 +18,7 @@ export const switchProps = {
   disabled: IxPropTypes.bool.def(false),
   checkedChildren: IxPropTypes.string.def(''),
   unCheckedChildren: IxPropTypes.string.def(''),
-  size: IxPropTypes.oneOf(['medium', 'small'] as const).def('medium'),
+  size: IxPropTypes.oneOf(['md', 'sm'] as const).def('md'),
   loading: IxPropTypes.bool.def(false),
 
   // events

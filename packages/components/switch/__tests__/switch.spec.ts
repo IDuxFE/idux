@@ -133,12 +133,12 @@ describe('Switch', () => {
   })
 
   test('size work', async () => {
-    const wrapper = SwitchMount({ props: { size: 'small' } })
+    const wrapper = SwitchMount({ props: { size: 'sm' } })
 
-    expect(wrapper.classes()).toContain('ix-switch-small')
+    expect(wrapper.classes()).toContain('ix-switch-sm')
 
-    await wrapper.setProps({ size: 'medium' })
+    await wrapper.setProps({ size: 'md' })
 
-    expect(wrapper.classes()).not.toContain('ix-switch-small')
+    expect(wrapper.classes()).not.toContain('ix-switch-sm')
   })
 })
