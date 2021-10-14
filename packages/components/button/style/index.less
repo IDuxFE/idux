@@ -1,5 +1,4 @@
 @import '../../style/themes/default.less';
-@import '../../icon/style/index.less';
 @import './mixin.less';
 
 @button-prefix: ~'@{idux-prefix}-button';
@@ -90,7 +89,7 @@
   }
 
   &-icon-only {
-    .button-icon-only(@button-prefix; @icon-prefix);
+    .button-icon-only(@button-prefix;);
   }
 
   &::before {
@@ -114,8 +113,8 @@
     position: relative;
   }
 
-  > .@{icon-prefix} + span,
-  > span + .@{icon-prefix} {
+  > .@{idux-prefix}-icon + span,
+  > span + .@{idux-prefix}-icon {
     margin-left: @button-icon-margin-left;
   }
 

@@ -88,7 +88,7 @@ const useTrigger = (props: ModalProps, updateVisible: (value: boolean) => void) 
   const open = () => updateVisible(true)
 
   const close = async (evt?: Event | unknown) => {
-    const result = await Promise.resolve(callEmit(props.onClose, evt))
+    const result = await callEmit(props.onClose, evt)
     if (result === false) {
       return
     }

@@ -50,6 +50,7 @@ import type {
 
 import { shallowReactive } from 'vue'
 
+import { TreeConfig } from '..'
 import { numFormatter } from './numFormatter'
 
 // --------------------- Common ---------------------
@@ -239,6 +240,13 @@ const tooltip = shallowReactive<TooltipConfig>({
   trigger: 'hover',
 })
 
+const tree = shallowReactive<TreeConfig>({
+  blocked: false,
+  expandIcon: 'right',
+  nodeKey: 'key',
+  showLine: false,
+})
+
 const popover = shallowReactive<PopoverConfig>({
   autoAdjust: true,
   delay: 100,
@@ -337,6 +345,7 @@ export const defaultConfig: GlobalConfig = {
   statistic,
   table,
   tooltip,
+  tree,
   popover,
   // Feedback
   message,

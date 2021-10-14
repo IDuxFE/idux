@@ -1,0 +1,70 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { TreeNode, TreeProps } from '../types'
+import type { MergedNode } from './useDataSource'
+import type { VKey } from '@idux/cdk/utils'
+import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
+
+import { computed, ref, watchEffect } from 'vue'
+
+import { callEmit } from '@idux/cdk/utils'
+import { useMergedProp } from '@idux/components/utils'
+
+import { callChange } from '../utils'
+
+export interface SelectableContext {
+  activeKey: Ref<VKey | undefined>
+  activeNode: ComputedRef<MergedNode | undefined>
+  selectedKeys: WritableComputedRef<VKey[]>
+  handleSelect: (key: VKey) => void
+}
+
+export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): SelectableContext {
+  const selectedKeys = useMergedProp(props, 'selectedKeys')
+  const isMultiple = computed(() => props.selectable === 'multiple')
+
+  const activeKey = ref<VKey>()
+  watchEffect(() => {
+    const currKeys = selectedKeys.value
+    const keySize = currKeys.length
+    activeKey.value = keySize > 0 ? currKeys[keySize - 1] : undefined
+  })
+  const activeNode = computed(() => {
+    const currKey = activeKey.value
+    return currKey !== undefined ? mergedNodeMap.value.get(currKey) : undefined
+  })
+
+  const handleSelect = (key: VKey) => {
+    const nodeMap = mergedNodeMap.value
+    const currNode = nodeMap.get(key)
+    if (!currNode) {
+      return
+    }
+
+    const index = selectedKeys.value.indexOf(key)
+    const selected = index > -1
+
+    let tempKeys = [...selectedKeys.value]
+    if (isMultiple.value) {
+      selected ? tempKeys.splice(index, 1) : tempKeys.push(key)
+    } else {
+      tempKeys = selected ? [] : [key]
+    }
+
+    handleChange(selected, currNode.rawNode, tempKeys)
+  }
+
+  const handleChange = (selected: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
+    selectedKeys.value = newKeys
+    const { onSelect, onSelectedChange } = props
+    callEmit(onSelect, selected, rawNode)
+    callChange(mergedNodeMap, newKeys, onSelectedChange)
+  }
+
+  return { activeKey, activeNode, selectedKeys, handleSelect }
+}

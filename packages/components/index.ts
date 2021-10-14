@@ -49,6 +49,7 @@ import { IxTextarea } from '@idux/components/textarea'
 import { IxTimePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
+import { IxTree } from '@idux/components/tree'
 import { IxTypography } from '@idux/components/typography'
 import { version } from '@idux/components/version'
 
@@ -91,6 +92,7 @@ const components = [
   IxSwitch,
   IxTimePicker,
   IxTable,
+  IxTree,
   IxAvatar,
   IxCollapse,
   IxCollapsePanel,

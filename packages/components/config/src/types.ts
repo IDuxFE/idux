@@ -240,6 +240,13 @@ export interface TableColumnExpandableConfig {
   icon: [string, string]
 }
 
+export interface TreeConfig {
+  blocked: boolean
+  expandIcon: string
+  nodeKey: string
+  showLine: boolean
+}
+
 export interface TooltipConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
@@ -358,6 +365,7 @@ export interface GlobalConfig {
   statistic: StatisticConfig
   table: TableConfig
   tooltip: TooltipConfig
+  tree: TreeConfig
   popover: PopoverConfig
   stepper: StepperConfig
   // Feedback

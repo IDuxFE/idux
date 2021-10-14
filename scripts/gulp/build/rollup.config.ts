@@ -1,4 +1,4 @@
-import { join, resolve } from 'path'
+import { join } from 'path'
 
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
@@ -6,7 +6,6 @@ import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import { RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
-import eslintPlugin from 'vite-plugin-eslint'
 
 import { esbuildPlugin } from './esbuildPlugin'
 
@@ -37,10 +36,6 @@ export const getRollupOptions = (options: Options): RollupOptions => {
   const plugins = [
     nodeResolve(),
     replace({ __DEV__: "process.env.NODE_ENV !== 'production'", preventAssignment: true }),
-    eslintPlugin({
-      fix: true,
-      include: [resolve(__dirname, '../**/*.ts'), resolve(__dirname, '../**/*.tsx'), resolve(__dirname, '../**/*.vue')],
-    }),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
   ]

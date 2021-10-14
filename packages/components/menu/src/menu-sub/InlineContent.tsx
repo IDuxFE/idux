@@ -23,7 +23,7 @@ export default defineComponent({
     })
 
     return () => (
-      <IxCollapseTransition>
+      <IxCollapseTransition appear>
         <ul v-show={isExpanded.value} class={classes.value}>
           {slots.default?.()}
         </ul>

@@ -304,10 +304,21 @@
 /* color -------------------------- */
 @background-color-base: hsv(0, 0, 95%); // Default grey background color
 @background-color-light: hsv(0, 0, 98%); // background of header and selected item
-@background-color-body: @color-white;
+
 @background-color-component: @color-white;
 @background-color-component-dark: #191c24;
 
+@background-color-hover-dark: @color-grey-l30;
+@background-color-hover: @color-grey-l40;
+@background-color-hover-light: @color-grey-l50;
+
+@background-color-selected-dark: @color-primary-l30;
+@background-color-selected: @color-primary-l40;
+@background-color-selected-light: @color-primary-l50;
+
+@background-color-disabled: hsv(0, 0, 95%);
+
+// @deprecated
 @disabled-color: fade(@color-black, 25%);
 @disabled-color-dark: fade(@color-white, 35%);
 @disabled-bg-color: @background-color-base;
@@ -317,3 +328,5 @@
 @text-color-secondary: fade(@color-black, 45%);
 @text-color-dark: fade(@color-white, 85%);
 @text-color-secondary-dark: fade(@color-white, 65%);
+@text-color-disabled: fade(@color-black, 25%);
+@text-color-disabled-dark: fade(@color-white, 35%);

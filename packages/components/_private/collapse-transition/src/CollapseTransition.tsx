@@ -7,6 +7,8 @@
 
 import { Transition, defineComponent } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
+
 import { collapseTransitionProps } from './types'
 
 export default defineComponent({
@@ -26,6 +28,8 @@ export default defineComponent({
       const mode = props.mode
       el.style[mode] = ''
       el.style.opacity = ''
+
+      callEmit(props.onAfterEnter)
     }
     const onBeforeLeave = (el: HTMLElement) => {
       const mode = props.mode
@@ -40,11 +44,13 @@ export default defineComponent({
       const mode = props.mode
       el.style[mode] = ''
       el.style.opacity = ''
+
+      callEmit(props.onAfterLeave)
     }
 
     return () => (
       <Transition
-        appear
+        appear={props.appear}
         name={props.name}
         onBeforeEnter={onBeforeEnter}
         onEnter={onEnter}
