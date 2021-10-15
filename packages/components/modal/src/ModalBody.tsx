@@ -27,7 +27,7 @@ const defaultIconTypes = {
 
 export default defineComponent({
   setup() {
-    const { props, slots, config } = inject(modalToken)!
+    const { props, slots, config, prefixCls } = inject(modalToken)!
     const isDefault = computed(() => props.type === 'default')
     const iconName = computed(() => {
       const { icon, type } = props
@@ -35,17 +35,18 @@ export default defineComponent({
     })
 
     return () => {
+      const _prefixCls = `${prefixCls.value}-body`
       if (isDefault.value) {
-        return <div class="ix-modal-body">{slots.default?.()}</div>
+        return <div class={_prefixCls}>{slots.default?.()}</div>
       }
-      const classes = `ix-modal-body ix-modal-body-${props.type}`
-      const icon = renderIcon(slots.icon, iconName.value)
-      const title = renderTitle(slots.title, props.title)
+      const classes = `${_prefixCls} ${_prefixCls}-${props.type}`
+      const iconNode = renderIcon(_prefixCls, slots.icon, iconName.value)
+      const titleNode = renderTitle(_prefixCls, slots.title, props.title)
       return (
         <div class={classes}>
-          {icon}
-          <div class="ix-modal-body-content">
-            {title}
+          {iconNode}
+          <div class={`${_prefixCls}-content`}>
+            {titleNode}
             {slots.default?.()}
           </div>
         </div>
@@ -54,23 +55,23 @@ export default defineComponent({
   },
 })
 
-const renderIcon = (iconSlot: Slot | undefined, icon: string | VNode | undefined) => {
+const renderIcon = (_prefixCls: string, iconSlot: Slot | undefined, icon: string | VNode | undefined) => {
   if (!iconSlot && !icon) {
     return null
   }
-  let child: VNodeTypes
+  let children: VNodeTypes
   if (iconSlot) {
-    child = iconSlot()
+    children = iconSlot()
   } else {
-    child = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon!
+    children = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon!
   }
-  return <div class="ix-modal-body-icon">{child}</div>
+  return <div class={`${_prefixCls}-icon`}>{children}</div>
 }
 
-const renderTitle = (titleSlot: Slot | undefined, title: string | VNode | undefined) => {
+const renderTitle = (_prefixCls: string, titleSlot: Slot | undefined, title: string | VNode | undefined) => {
   if (!titleSlot && !title) {
     return null
   }
-  const child = titleSlot ? titleSlot() : title
-  return <div class="ix-modal-body-title">{child}</div>
+  const children = titleSlot ? titleSlot() : title
+  return <div class={`${_prefixCls}-title`}>{children}</div>
 }

@@ -44,8 +44,7 @@ export interface IconConfig {
 }
 
 export interface TagConfig {
-  checkable: boolean
-  shape: TagShape
+  shape?: TagShape
 }
 
 // Layout

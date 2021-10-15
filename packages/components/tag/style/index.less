@@ -1,70 +1,35 @@
 @import '../../style/themes/default.less';
+@import './mixin.less';
 
 @tag-prefix: ~'@{idux-prefix}-tag';
 
 .@{tag-prefix} {
-  color: @tag-default-color;
   display: inline-block;
+  font-size: @tag-font-size;
+  color: @tag-default-color;
+  background: @tag-default-background-color;
   padding: @tag-default-padding;
   border: 1px solid @tag-default-border-color;
-  background: @tag-default-background-color;
-  font-size: @tag-font-size;
+  border-radius: @tag-border-radius;
 
-  & + .@{tag-prefix} {
+  .make-color-classes(@preset-colors);
+  .make-color-classes(@status-colors);
+
+  & + & {
     margin-left: @tag-margin;
   }
 
-  &-icon {
-    padding-right: @tag-padding;
-  }
-
-  &-close-icon {
-    color: fade(@tag-default-color, 60%);
+  .@{idux-prefix}-icon + &-content {
     padding-left: @tag-padding;
-    cursor: pointer;
-
-    &:hover {
-      color: @tag-default-color;
-    }
   }
 
   &-round {
     border-radius: @tag-round-border-radius;
   }
+
   &-rect {
     border-radius: 0;
   }
-  &-round-rect {
-    border-radius: @tag-border-radius;
-  }
-
-  // mixin to iterate over colors and create CSS class for each one
-  .make-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
-    .make-color-classes(@colors, @i - 1);
-
-    // list-用逗号或空格分隔的值列表。 index-一个整数，指定要返回的列表元素的位置。返回：列表中指定位置的值。
-    // 返回列表中指定位置的值。
-    @color: extract(@colors, @i);
-    @lightColor: 'color-@{color}-l50';
-    @lightBorderColor: 'color-@{color}-l30';
-    @darkColor: 'color-@{color}';
-    &-@{color} {
-      color: @@darkColor;
-      background: @@lightColor;
-      border-color: @@lightBorderColor;
-
-      .@{tag-prefix}-close-icon {
-        color: fade(@@darkColor, 60%);
-
-        &:hover {
-          color: @@darkColor;
-        }
-      }
-    }
-  }
-
-  .make-color-classes(@preset-colors);
-  .make-color-classes(@status-colors);
 
   &-has-color {
     color: @color-white;
@@ -72,44 +37,16 @@
   }
 
   &-checkable {
-    color: @tag-default-color;
-    background-color: transparent;
-    border-color: transparent;
     cursor: pointer;
 
-    .@{tag-prefix}-close-icon {
-      color: fade(@tag-default-color, 60%);
+    .@{tag-prefix}-content {
+      user-select: none;
     }
+  }
 
-    &:not(&-checked):hover {
-      color: @color-primary;
-
-      .@{tag-prefix}-close-icon {
-        color: fade(@color-primary, 60%);
-
-        &:hover {
-          color: @color-primary;
-        }
-      }
-    }
-
-    &:active,
-    &-checked {
-      color: @text-color-inverse;
-
-      .@{tag-prefix}-close-icon {
-        color: fade(@text-color-inverse, 60%);
-
-        &:hover {
-          color: @text-color-inverse;
-        }
-      }
-    }
-    &-checked {
-      background-color: @color-primary;
-    }
-    &:active {
-      background-color: @color-blue-d10;
-    }
+  &-checked {
+    color: @text-color-inverse;
+    background-color: @color-primary;
+    border-color: transparent;
   }
 }

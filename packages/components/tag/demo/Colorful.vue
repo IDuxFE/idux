@@ -1,6 +1,6 @@
 <template>
+  <IxDivider position="left">Presets Color</IxDivider>
   <div>
-    <p>Presets:</p>
     <IxTag color="red"> red </IxTag>
     <IxTag color="orange"> orange </IxTag>
     <IxTag color="brown"> brown </IxTag>
@@ -16,15 +16,15 @@
     <IxTag color="purple"> purple </IxTag>
     <IxTag color="magenta"> magenta </IxTag>
   </div>
+  <IxDivider position="left">Status Color</IxDivider>
   <div>
-    <p>StatusColorTypes:</p>
     <IxTag color="success"> success </IxTag>
     <IxTag color="pending"> pending </IxTag>
     <IxTag color="error"> error </IxTag>
     <IxTag color="warning"> warning </IxTag>
   </div>
+  <IxDivider position="left">Custom Color</IxDivider>
   <div>
-    <p>Custom:</p>
     <IxTag color="#2db7f5"> #2db7f5 </IxTag>
     <IxTag color="#87d068"> #87d068 </IxTag>
     <IxTag color="#f50"> #f50 </IxTag>
@@ -32,23 +32,3 @@
     <IxTag color="#abcfcf"> #abcfcf </IxTag>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup() {
-    const hide = ref(true)
-    const onClose = () => {
-      console.log('close-success')
-      hide.value = !hide.value
-    }
-    const checked = ref(false)
-    const onChangeChecked = () => {
-      console.log('close-success')
-      checked.value = !checked.value
-    }
-    return { hide, onClose, checked, onChangeChecked }
-  },
-})
-</script>

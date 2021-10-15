@@ -7,7 +7,7 @@
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 import { HeaderProps } from '@idux/components/header'
@@ -16,12 +16,12 @@ export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' |
 export interface ModalButtonProps extends ButtonProps {
   key?: string | number
   text?: string | VNode
-  visible?: boolean
   onClick?: (evt: Event) => void
 }
 export interface ModalOptions extends ModalPublicProps {
   key?: string
   content?: string | VNode
+  contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: string) => void
 }
 export interface ModalRef extends ModalBindings {

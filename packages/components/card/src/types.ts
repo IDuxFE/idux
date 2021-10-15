@@ -22,8 +22,6 @@ export interface CardButtonProps extends ButtonProps {
   key?: string | number
   // 按钮的文本
   text?: string
-  // 是否显示该按钮, 默认为 true
-  visible?: boolean
   // 按钮点击回调
   onClick?: (evt: Event) => void
 }

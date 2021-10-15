@@ -63,10 +63,7 @@ const checkbox: CheckboxConfig = { size: 'medium' }
 
 const icon = shallowReactive<IconConfig>({})
 
-const tag = shallowReactive<TagConfig>({
-  checkable: false,
-  shape: 'round-rect',
-})
+const tag = shallowReactive<TagConfig>({})
 
 // --------------------- Layout ---------------------
 const divider = shallowReactive<DividerConfig>({

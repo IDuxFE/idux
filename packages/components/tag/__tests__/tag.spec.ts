@@ -1,6 +1,9 @@
 import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
+
+import { IxIcon } from '@idux/components/icon'
 
 import IxTag from '../src/Tag'
 import { TagProps } from '../src/types'
@@ -8,59 +11,66 @@ import { TagProps } from '../src/types'
 describe('Tag', () => {
   const TagMount = (options?: MountingOptions<Partial<TagProps>>) => mount(IxTag, { ...options })
 
-  renderWork(IxTag)
+  renderWork(IxTag, { slots: { default: () => 'test tag' } })
 
-  test('tag work', () => {
-    const wrapper = TagMount({ slots: { default: 'slot tag' } })
+  test('checkable work', async () => {
+    const wrapper = TagMount({ props: { checkable: true } })
 
-    expect(wrapper.find('.ix-tag-content').text()).toBe('slot tag')
+    expect(wrapper.classes()).toContain('ix-tag-checkable')
+
+    await wrapper.setProps({ checkable: false })
+
+    expect(wrapper.classes()).not.toContain('ix-tag-checkable')
   })
 
-  test('isRound', () => {
-    const wrapper = TagMount({ props: { isRound: true } })
+  test('checked work', async () => {
+    const wrapper = TagMount({ props: { checked: true } })
 
-    expect(wrapper.find('.ix-tag-round'))
+    expect(wrapper.classes()).toContain('ix-tag-checked')
+
+    await wrapper.setProps({ checked: false })
+
+    expect(wrapper.classes()).not.toContain('ix-tag-checked')
   })
 
-  test('color', () => {
+  test('color work', async () => {
     const wrapper = TagMount({ props: { color: 'red' } })
 
-    expect(wrapper.find('.ix-tag-red'))
+    expect(wrapper.classes()).toContain('ix-tag-red')
+
+    await wrapper.setProps({ color: 'success' })
+
+    expect(wrapper.classes()).toContain('ix-tag-success')
+
+    await wrapper.setProps({ color: '#123456' })
+
+    expect(wrapper.classes()).toContain('ix-tag-has-color')
   })
 
-  test('custom color', () => {
-    const wrapper = TagMount({ props: { color: '#2db7f5' } })
+  test('icon work', async () => {
+    const wrapper = TagMount({ props: { icon: 'up' } })
 
-    expect(wrapper.find('.ix-tag-has-color'))
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
+
+    await wrapper.setProps({ icon: 'down' })
+
+    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
   })
 
-  test('closable', () => {
-    const wrapper = TagMount({ props: { closable: true } })
+  test('icon slot work', async () => {
+    const wrapper = TagMount({ props: { icon: 'up' }, slots: { icon: () => h(IxIcon, { name: 'down' }) } })
 
-    expect(wrapper.find('.ix-tag-close-icon'))
+    expect(wrapper.find('.ix-icon-up').exists()).not.toBe(true)
+    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
   })
 
-  test('checked', async () => {
-    const wrapper = TagMount({ props: { checkable: true, checked: true } })
+  test('shape work', async () => {
+    const wrapper = TagMount({ props: { shape: 'round' } })
 
-    expect(wrapper.find('.ix-tag-checkable-checked'))
-  })
+    expect(wrapper.classes()).toContain('ix-tag-round')
 
-  test('checkable false', async () => {
-    const wrapper = TagMount({ props: { checkable: false, checked: true } })
+    await wrapper.setProps({ shape: 'rect' })
 
-    expect(wrapper.classes()).not.toContain('ix-tag-checkable-checked')
-  })
-
-  test('icon word', () => {
-    const wrapper = TagMount({ props: { icon: 'down' } })
-
-    expect(wrapper.find('.ix-icon-down').exists()).toBeTruthy()
-  })
-
-  test('icon slot word', () => {
-    const wrapper = TagMount({ slots: { icon: 'slot tag icon' } })
-
-    expect(wrapper.find('.ix-tag-icon').text()).toBe('slot tag icon')
+    expect(wrapper.classes()).toContain('ix-tag-rect')
   })
 })

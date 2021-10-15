@@ -208,11 +208,6 @@ describe('Modal', () => {
     await wrapper.setProps({ footer })
 
     expect(modalWrapper.findAll('.ix-button').length).toBe(2)
-
-    footer = [...footer, { text: 'button3', visible: false }]
-    await wrapper.setProps({ footer })
-
-    expect(modalWrapper.findAll('.ix-button').length).toBe(2)
   })
 
   test('footer slot work', async () => {

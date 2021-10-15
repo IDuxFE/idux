@@ -7,7 +7,7 @@
 
 import type { ModalInstance, ModalOptions, ModalRef } from './types'
 
-import { defineComponent, provide, ref } from 'vue'
+import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 
 import { callEmit, convertArray, noop, uniqueId } from '@idux/cdk/utils'
 
@@ -17,41 +17,30 @@ import { modalProviderToken } from './token'
 export default defineComponent({
   name: 'IxModalProvider',
   setup(_, { expose, slots }) {
-    const { modalRefMap, setModalRef } = useModalRef()
-    const { modals, apis } = useModalApis(modalRefMap)
+    const { modals, apis } = useModalApis()
     provide(modalProviderToken, apis)
     expose(apis)
 
     return () => {
-      const child = modals.value.map(item => {
-        // The default value for `visible`
-        const { key, content, visible = true, destroyOnHide, ...rest } = item
-        return (
-          <Modal
-            {...rest}
-            key={key}
-            visible={visible}
-            onAfterClose={() => destroyOnHide && apis.destroy(key!)}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ref={(instance: any) => setModalRef(key!, instance)}
-          >
-            {content}
-          </Modal>
-        )
+      const children = modals.value.map(item => {
+        const { content, contentProps, ...rest } = item
+        const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
+        return <Modal {...rest}>{contentNode}</Modal>
       })
-
       return (
         <>
           {slots.default?.()}
-          {child}
+          {children}
         </>
       )
     }
   },
 })
 
-const useModalRef = () => {
+function useModal() {
+  const modals = shallowRef<Array<ModalOptions & { ref?: (instance: unknown) => void }>>([])
   const modalRefMap = new Map<string, ModalRef>()
+
   const setModalRef = (key: string, instance: ModalInstance | null) => {
     const ref = modalRefMap.get(key)
     if (instance) {
@@ -71,11 +60,6 @@ const useModalRef = () => {
       }
     }
   }
-  return { modalRefMap, setModalRef }
-}
-
-const useModal = () => {
-  const modals = ref<ModalOptions[]>([])
 
   const getCurrIndex = (key: string) => {
     return modals.value.findIndex(message => message.key === key)
@@ -83,21 +67,28 @@ const useModal = () => {
 
   const add = (item: ModalOptions) => {
     const currIndex = item.key ? getCurrIndex(item.key) : -1
+    const tempModals = [...modals.value]
     if (currIndex !== -1) {
-      modals.value.splice(currIndex, 1, item)
+      tempModals.splice(currIndex, 1, item)
+      modals.value = tempModals
       return item.key!
     }
-
-    const key = item.key ?? uniqueId('ix-modal')
-    modals.value.push({ ...item, key })
+    // The default value for `visible`
+    const { key = uniqueId('ix-modal'), visible = true, destroyOnHide, ...rest } = item
+    const setRef = (instance: unknown) => setModalRef(key, instance as ModalInstance | null)
+    const onAfterClose = destroyOnHide ? () => destroy(key) : undefined
+    tempModals.push({ ...rest, key, visible, ref: setRef, onAfterClose })
+    modals.value = tempModals
     return key
   }
 
   const update = (key: string, item: ModalOptions) => {
     const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
+      const tempModals = [...modals.value]
       const newItem = { ...modals.value[currIndex], ...item }
-      modals.value.splice(currIndex, 1, newItem)
+      tempModals.splice(currIndex, 1, newItem)
+      modals.value = tempModals
     }
   }
 
@@ -106,7 +97,9 @@ const useModal = () => {
     keys.forEach(key => {
       const currIndex = getCurrIndex(key)
       if (currIndex !== -1) {
-        const item = modals.value.splice(currIndex, 1)
+        const tempModals = [...modals.value]
+        const item = tempModals.splice(currIndex, 1)
+        modals.value = tempModals
         callEmit(item[0].onDestroy, key)
       }
     })
@@ -116,21 +109,21 @@ const useModal = () => {
     modals.value = []
   }
 
-  return { modals, add, update, destroy, destroyAll }
+  return { modals, modalRefMap, add, update, destroy, destroyAll }
 }
 
-const useModalApis = (modalRefMap: Map<string, ModalRef>) => {
-  const { modals, add, update, destroy, destroyAll } = useModal()
+function useModalApis() {
+  const { modals, modalRefMap, add, update, destroy, destroyAll } = useModal()
 
   const open = (options: ModalOptions): ModalRef => {
     const key = add(options)
-    const ref = {
+    const modalRef = {
       key,
       update: (options: ModalOptions) => update(key, options),
       destroy: () => destroy(key),
     } as ModalRef
-    modalRefMap.set(key, ref)
-    return ref
+    modalRefMap.set(key, modalRef)
+    return modalRef
   }
 
   const modalTypes = ['confirm', 'info', 'success', 'warning', 'error'] as const

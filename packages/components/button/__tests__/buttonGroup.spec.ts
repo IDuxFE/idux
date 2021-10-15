@@ -11,7 +11,7 @@ const TestComponent = {
   <ButtonGroup :mode="mode" :size="size" :shape="shape">
     <Button>default</Button>
     <Button mode="primary">primary</Button>
-    <Button size="large">large</Button>
+    <Button size="lg">large</Button>
     <Button shape="circle">circle</Button>
   </ButtonGroup>
   `,
@@ -40,13 +40,13 @@ describe('ButtonGroup', () => {
   test('size work', async () => {
     const wrapper = mount(TestComponent)
 
-    expect(wrapper.findAll('.ix-button-large').length).toBe(1)
-    expect(wrapper.findAll('.ix-button-small').length).toBe(0)
+    expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
+    expect(wrapper.findAll('.ix-button-sm').length).toBe(0)
 
-    await wrapper.setProps({ size: 'small' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.findAll('.ix-button-large').length).toBe(1)
-    expect(wrapper.findAll('.ix-button-small').length).toBe(3)
+    expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
+    expect(wrapper.findAll('.ix-button-sm').length).toBe(3)
   })
 
   test('shape work', async () => {

@@ -6,18 +6,18 @@
  */
 
 import type { ModalButtonProps } from './types'
-import type { ComputedRef, Ref, VNodeTypes } from 'vue'
+import type { VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, isVNode } from 'vue'
 
-import { ButtonProps, IxButton } from '@idux/components/button'
+import { IxButton } from '@idux/components/button'
 import { getLocale } from '@idux/components/i18n'
 
 import { MODAL_TOKEN, modalToken } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, slots, cancelLoading, okLoading } = inject(modalToken)!
+    const { props, slots, prefixCls, cancelLoading, okLoading } = inject(modalToken)!
     const { cancel, ok } = inject(MODAL_TOKEN)!
     const locale = getLocale('modal')
 
@@ -31,73 +31,51 @@ export default defineComponent({
       return cancelVisible.value ? locale.value.okText : locale.value.justOkText
     })
 
+    const okButtonProps = computed<ModalButtonProps>(() => {
+      return {
+        text: okText.value,
+        onClick: ok,
+        loading: okLoading.value,
+        mode: 'primary',
+        ...props.okButton,
+      }
+    })
+
+    const cancelButtonProps = computed<ModalButtonProps>(() => {
+      return {
+        text: cancelText.value,
+        onClick: cancel,
+        loading: cancelLoading.value,
+        ...props.cancelButton,
+      }
+    })
+
     return () => {
-      const { footer, cancelButton, okButton } = props
-      if (!slots.footer && footer === null) {
+      const { footer } = props
+      if (footer === null) {
         return null
       }
 
-      let childNode: VNodeTypes
-
+      let children: VNodeTypes
       if (slots.footer) {
-        childNode = slots.footer({ cancel, cancelLoading, ok, okLoading })
+        children = slots.footer({ cancel, cancelLoading, ok, okLoading })
       } else if (isVNode(footer)) {
-        childNode = footer
+        children = footer
       } else {
-        childNode = useButtons(
-          footer,
-          cancelText,
-          cancelVisible,
-          cancel,
-          cancelLoading,
-          cancelButton,
-          okText,
-          ok,
-          okLoading,
-          okButton,
-        )
+        let buttonProps = footer
+        if (!buttonProps) {
+          buttonProps = [okButtonProps.value]
+          if (cancelVisible.value) {
+            buttonProps.unshift(cancelButtonProps.value)
+          }
+        }
+        children = buttonProps.map(item => {
+          const { text, ...rest } = item
+          return <IxButton {...rest}>{text}</IxButton>
+        })
       }
 
-      return <div class="ix-modal-footer">{childNode}</div>
+      return <div class={`${prefixCls.value}-footer`}>{children}</div>
     }
   },
 })
-
-const useButtons = (
-  footer: ModalButtonProps[] | null | undefined,
-  cancelText: ComputedRef<string>,
-  cancelVisible: ComputedRef<boolean>,
-  cancel: (evt?: unknown) => Promise<void>,
-  cancelLoading: Ref<boolean>,
-  cancelButton: ButtonProps | undefined,
-  okText: ComputedRef<string>,
-  ok: (evt?: unknown) => Promise<void>,
-  okLoading: Ref<boolean>,
-  okButton: ButtonProps | undefined,
-) => {
-  let buttonProps = footer
-
-  if (!buttonProps) {
-    const _cancelButton: ModalButtonProps = {
-      text: cancelText.value,
-      visible: cancelVisible.value,
-      onClick: cancel,
-      loading: cancelLoading.value,
-      ...cancelButton,
-    }
-    const _okButton: ModalButtonProps = {
-      text: okText.value,
-      onClick: ok,
-      loading: okLoading.value,
-      mode: 'primary',
-      ...okButton,
-    }
-    buttonProps = [_cancelButton, _okButton]
-  }
-
-  return buttonProps.map(item => {
-    // The default value for `visible` is true
-    const { text, visible = true, ...rest } = item
-    return visible ? <IxButton {...rest}>{text}</IxButton> : null
-  })
-}

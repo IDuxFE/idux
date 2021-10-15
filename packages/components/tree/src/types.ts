@@ -31,7 +31,7 @@ export const treeProps = {
   leafLineIcon: IxPropTypes.string,
   loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),
   loadedKeys: IxPropTypes.array<VKey>().def(() => []),
-  nodeKey: IxPropTypes.string,
+  nodeKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(node: TreeNode) => VKey>()]),
   searchFn: IxPropTypes.func<(node: TreeNode, searchValue?: string) => boolean>(),
   searchValue: IxPropTypes.string,
   selectable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['multiple'])]).def(true),

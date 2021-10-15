@@ -8,8 +8,6 @@ order: 0
 
 进行标记和分类的小标签。
 
-## 何时使用
-
 - 用于标记事物的属性和维度。
 - 进行分类。
 
@@ -21,19 +19,8 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| closable | 标签是否可以关闭 | Boolean | `false` | - | - |
-| color | 标签颜色 | String | `#000` | - | `red, orange, gold, yellow, canary, prasinous, verdant, green, cyan, sky, blue, admiral, purple, magenta,lime, grey` |
-| icon | 标签左侧图标 | string | - | - | - |
-| checked | 标签选中状态 | Boolean | `false` | - | - |
-| checkable | 标签是否可选的状态 | Boolean | `false` | ✅ | - |
-| shape | 设置按钮形状 | `round \| rect \| round-rect`  | `round-rect` | ✅ | - |
-| onClose | 关闭时的回调 | `(e: MouseEvent) => void`  | - | - | - |
-
-[comment]: <> (| level | 数字等级&#40;正整数&#41;,这个可以优先级放后 | Number | - | ✅ | - |)
-
-#### TagSlots
-
-| 名称    | 说明              |
-| ------- | ---------------- |
-| default | tag的text内容 |
-| icon    | tag前面的icon内容 |
+| `checkable` | 标签是否可选中 | `boolean` | `false` | ✅ | - |
+| `checked` | 标签选中状态 | `boolean` | `false` | - | - |
+| `color` | 标签颜色 | `string` | - | - | 内置了 `PresetColor \| StatusColor` 等颜色，也可以传入一个具体的颜色值 |
+| `icon` | 标签图标 | `string \| #icon` | - | - | - |
+| `shape` | 标签形状 | `round \| rect \| round-rect`  | `round-rect` | ✅ | - |

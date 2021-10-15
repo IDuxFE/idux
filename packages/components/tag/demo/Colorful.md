@@ -2,7 +2,7 @@
 title:
   zh: 多彩标签
   en: Colorful Tag
-order: 0
+order: 1
 ---
 
 ## zh

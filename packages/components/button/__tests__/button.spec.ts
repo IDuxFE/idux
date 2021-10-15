@@ -66,14 +66,14 @@ describe('Button', () => {
   })
 
   test('size work', async () => {
-    const wrapper = ButtonMount({ props: { size: 'large' } })
+    const wrapper = ButtonMount({ props: { size: 'lg' } })
 
-    expect(wrapper.classes()).toContain('ix-button-large')
+    expect(wrapper.classes()).toContain('ix-button-lg')
 
-    await wrapper.setProps({ size: 'small' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.classes()).not.toContain('ix-button-large')
-    expect(wrapper.classes()).toContain('ix-button-small')
+    expect(wrapper.classes()).not.toContain('ix-button-lg')
+    expect(wrapper.classes()).toContain('ix-button-sm')
   })
 
   test('shape work', async () => {
