@@ -109,6 +109,9 @@ export function filterEmptyNode(nodes: VNodeChild): VNode[] {
 export function flattenNode(nodes: VNodeChild, filterEmpty = true): VNode[] {
   const result: VNode[] = []
   convertArray(nodes).forEach(node => {
+    if (node === null) {
+      return
+    }
     if (Array.isArray(node)) {
       result.push(...flattenNode(node, filterEmpty))
     } else if (node && isFragment(node)) {
@@ -121,6 +124,8 @@ export function flattenNode(nodes: VNodeChild, filterEmpty = true): VNode[] {
       } else if (!filterEmpty || isNumber(node) || (isString(node) && node.length > 0)) {
         result.push(node as unknown as VNode)
       }
+    } else {
+      result.push(node as unknown as VNode)
     }
   })
   return result
