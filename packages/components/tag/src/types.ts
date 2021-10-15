@@ -10,17 +10,15 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type TagShape = 'round' | 'rect' | 'round-rect'
+export type TagShape = 'round' | 'rect'
 
 export const tagProps = {
-  closable: IxPropTypes.bool,
-  icon: IxPropTypes.string,
-  color: IxPropTypes.string,
-  checked: IxPropTypes.bool,
   checkable: IxPropTypes.bool,
-  shape: IxPropTypes.oneOf<TagShape>(['round', 'rect', 'round-rect']),
-
-  onClose: IxPropTypes.emit<(evt: MouseEvent) => void>(),
+  checked: IxPropTypes.bool,
+  closable: IxPropTypes.bool,
+  color: IxPropTypes.string,
+  icon: IxPropTypes.string,
+  shape: IxPropTypes.oneOf<TagShape>(['round', 'rect']),
 }
 
 export type TagProps = IxInnerPropTypes<typeof tagProps>

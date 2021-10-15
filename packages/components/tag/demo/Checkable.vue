@@ -1,27 +1,12 @@
 <template>
-  <div>
-    <IxTag color="red" icon="alipay" closable checkable :checked="checked" :onClose="onClose" @click="onChangeChecked"
-      >测试可选</IxTag
-    >
-  </div>
+  <IxTag checkable :checked="checked" color="red" @click="onClick">Checkable Tag</IxTag>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const hide = ref(true)
-    const onClose = () => {
-      console.log('close-success')
-      hide.value = !hide.value
-    }
-    const checked = ref(false)
-    const onChangeChecked = () => {
-      console.log('change-success')
-      checked.value = !checked.value
-    }
-    return { hide, onClose, checked, onChangeChecked }
-  },
-})
+const checked = ref(false)
+const onClick = () => {
+  checked.value = !checked.value
+}
 </script>

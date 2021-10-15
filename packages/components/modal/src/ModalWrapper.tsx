@@ -32,11 +32,19 @@ import { ModalProps } from './types'
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
-    const { props, config, visible, animatedVisible } = inject(modalToken)!
+    const { props, config, prefixCls, visible, animatedVisible } = inject(modalToken)!
     const { close } = inject(MODAL_TOKEN)!
     const { centered, width, mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
 
-    const classes = useClasses(props, centered)
+    const classes = computed(() => {
+      const _prefixCls = prefixCls.value
+      const containerClassName = props.containerClassName
+      return {
+        [`${_prefixCls}-wrapper`]: true,
+        [`${_prefixCls}-centered`]: centered.value,
+        [containerClassName || '']: containerClassName,
+      }
+    })
     const modalTransformOrigin = ref<string>()
     const modalStyle = computed(() => ({ width: width.value, transformOrigin: modalTransformOrigin.value }))
 
@@ -67,6 +75,7 @@ export default defineComponent({
     })
 
     return () => {
+      const _prefixCls = prefixCls.value
       return (
         <div
           v-show={animatedVisible.value}
@@ -82,19 +91,19 @@ export default defineComponent({
               v-show={visible.value}
               ref={modalRef}
               role="document"
-              class="ix-modal"
+              class={_prefixCls}
               style={modalStyle.value}
               onMousedown={onModalMousedown}
               onMouseup={onModalMouseup}
               {...attrs}
             >
-              <div ref={sentinelStartRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
-              <div class="ix-modal-content">
+              <div ref={sentinelStartRef} tabindex={0} class={`${_prefixCls}-sentinel`} aria-hidden={true}></div>
+              <div class={`${_prefixCls}-content`}>
                 <ModalHeader></ModalHeader>
                 <ModalBody></ModalBody>
                 <ModalFooter></ModalFooter>
               </div>
-              <div ref={sentinelEndRef} tabindex={0} class="ix-modal-sentinel" aria-hidden="true"></div>
+              <div ref={sentinelEndRef} tabindex={0} class={`${_prefixCls}-sentinel`} aria-hidden={true}></div>
             </div>
           </Transition>
         </div>
@@ -112,17 +121,6 @@ const useConfig = (props: ModalProps, config: ModalConfig) => {
   const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
   return { centered, width, mask, maskClosable, closeOnEsc, zIndex }
-}
-
-const useClasses = (props: ModalProps, centered: ComputedRef<boolean>) => {
-  return computed(() => {
-    const containerClassName = props.containerClassName
-    return {
-      'ix-modal-wrapper': true,
-      'ix-modal-centered': centered.value,
-      [containerClassName || '']: containerClassName,
-    }
-  })
 }
 
 const watchVisibleChange = (

@@ -22,16 +22,18 @@ export default defineComponent({
   inheritAttrs: false,
   props: modalProps,
   setup(props, { slots, expose, attrs }) {
+    const common = useGlobalConfig('common')
+    const prefixCls = computed(() => `${common.prefixCls}-modal`)
     const config = useGlobalConfig('modal')
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
     const { updateVisible, visible, animatedVisible } = useVisible(props)
     const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, updateVisible)
 
-    provide(modalToken, { props, slots, config, visible, animatedVisible, cancelLoading, okLoading })
-    provide(MODAL_TOKEN, { open, close, cancel, ok })
-
-    expose({ open, close, cancel, ok })
+    provide(modalToken, { props, slots, config, prefixCls, visible, animatedVisible, cancelLoading, okLoading })
+    const apis = { open, close, cancel, ok }
+    provide(MODAL_TOKEN, apis)
+    expose(apis)
 
     return () => {
       if (!animatedVisible.value && props.destroyOnHide) {
@@ -39,7 +41,7 @@ export default defineComponent({
       }
 
       return (
-        <IxPortal target="ix-modal-container" load={visible.value}>
+        <IxPortal target={`${prefixCls.value}-container`} load={visible.value}>
           <IxMask mask={mask.value} visible={visible.value} zIndex={zIndex.value}></IxMask>
           <ModalWrapper {...attrs}></ModalWrapper>
         </IxPortal>

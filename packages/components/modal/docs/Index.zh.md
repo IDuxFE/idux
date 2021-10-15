@@ -53,8 +53,6 @@ export interface ModalButtonProps extends ButtonProps {
   key?: string | number
   // 按钮的文本
   text?: string
-  // 是否显示该按钮, 默认为 true
-  visible?: boolean
   // 按钮点击回调
   onClick?: (evt: Event) => void
 }
@@ -89,7 +87,7 @@ import { useModal } from '@idux/components/modal'
 export default defineComponent({
   setup() {
     const modal = useModal()
-    const openModal = ()=> modal.open({ header: 'Basic Modal', content: 'Some contents..' })
+    const openModal = () => modal.open({ header: 'Basic Modal', content: 'Some contents..' })
     return { openModal }
   },
 })
@@ -126,6 +124,8 @@ export interface ModalOptions extends ModalProps {
   key?: string
   // 对话框的内容
   content?: string | VNode
+  // 当 content 为 VNode 时, 可以传递 props 或者绑定 ref
+  contentProps?: Record<string, unknown> | VNodeProps
   // 对话框销毁后的回调
   onDestroy?: (key: string) => void
 }
@@ -174,6 +174,28 @@ export default defineComponent({
 
     return { modalProviderRef }
   },
+})
+</script>
+```
+
+### 如何拿到 content 实例的引用？
+
+```html
+<template>
+  <IxButton @click="openModal">Open</IxButton>
+</template>
+<script setup lang="ts">
+import { h, ref } from 'vue'
+import { useModal } from '@idux/components/modal'
+
+const { open } = useModal()
+
+const contentRef = ref()
+
+const openModal = () => open({ 
+  header: 'Basic Modal', 
+  content: h('', 'Some contents...'),
+  contentProps: { ref: contentRef }
 })
 </script>
 ```

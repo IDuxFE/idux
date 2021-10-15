@@ -7,12 +7,13 @@
 
 import type { ModalBindings, ModalProps, ModalProviderRef } from './types'
 import type { ModalConfig } from '@idux/components/config'
-import type { InjectionKey, Ref, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface ModalContext {
   props: ModalProps
   slots: Slots
   config: ModalConfig
+  prefixCls: ComputedRef<string>
   visible: Ref<boolean>
   animatedVisible: Ref<boolean>
   cancelLoading: Ref<boolean>

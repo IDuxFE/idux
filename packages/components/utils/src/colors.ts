@@ -7,7 +7,7 @@
 
 export type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never
 
-export const presetColor = [
+export const presetColors = [
   'red',
   'orange',
   'brown',
@@ -24,16 +24,16 @@ export const presetColor = [
   'magenta',
 ] as const
 
-export type PresetColor = ElementOf<typeof presetColor>
+export type PresetColor = ElementOf<typeof presetColors>
 
-export const isPresetColor = (color: string | undefined): boolean => {
-  return presetColor.includes(color as PresetColor)
+export function isPresetColor(color: string | undefined): boolean {
+  return presetColors.includes(color as PresetColor)
 }
 
-export const statusColor = ['primary', 'info', 'pending', 'success', 'warning', 'error'] as const
+export const statusColors = ['primary', 'info', 'pending', 'success', 'warning', 'error'] as const
 
-export type StatusColor = ElementOf<typeof statusColor>
+export type StatusColor = ElementOf<typeof statusColors>
 
-export const isStatusColor = (color: string | undefined): boolean => {
-  return statusColor.includes(color as StatusColor)
+export function isStatusColor(color: string | undefined): boolean {
+  return statusColors.includes(color as StatusColor)
 }

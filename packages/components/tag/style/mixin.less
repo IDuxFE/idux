@@ -1,0 +1,24 @@
+// mixin to iterate over colors and create CSS class for each one
+.make-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .make-color-classes(@colors, @i - 1);
+
+  // list-用逗号或空格分隔的值列表。 index-一个整数，指定要返回的列表元素的位置。返回：列表中指定位置的值。
+  // 返回列表中指定位置的值。
+  @color: extract(@colors, @i);
+  @lightColor: 'color-@{color}-l50';
+  @lightBorderColor: 'color-@{color}-l30';
+  @darkColor: 'color-@{color}';
+  &-@{color} {
+    color: @@darkColor;
+    background: @@lightColor;
+    border-color: @@lightBorderColor;
+
+    .@{tag-prefix}-close-icon {
+      color: fade(@@darkColor, 60%);
+
+      &:hover {
+        color: @@darkColor;
+      }
+    }
+  }
+}
