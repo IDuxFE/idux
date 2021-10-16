@@ -7,9 +7,10 @@
 
 import type { ColType, FormLabelAlign } from './types'
 import type { AbstractControl } from '@idux/cdk/forms'
+import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
-import { computed, getCurrentInstance, inject, onBeforeUnmount } from 'vue'
+import { inject, onBeforeUnmount } from 'vue'
 
 import { useKey } from '@idux/components/utils'
 
@@ -24,21 +25,18 @@ export interface FormContext {
 export const formToken: InjectionKey<FormContext> = Symbol('formToken')
 
 export interface FormItemContext {
-  registerControl: (key: string | number, controlOrPath: ComputedRef<string | AbstractControl | undefined>) => void
-  unregisterControl: (key: string | number, controlOrPath: ComputedRef<string | AbstractControl | undefined>) => void
+  registerControl: (key: VKey, control: Ref<AbstractControl | undefined>) => void
+  unregisterControl: (key: VKey) => void
 }
 
 export const FORM_ITEM_TOKEN: InjectionKey<FormItemContext> = Symbol('FORM_ITEM_TOKEN')
 
-export function useFormItemRegister(controlKey = 'control'): void {
+export function useFormItemRegister(control: Ref<AbstractControl | undefined>): void {
   const context = inject(FORM_ITEM_TOKEN, null)
   if (context) {
     const key = useKey()
-    const { props } = getCurrentInstance()!
-    const controlOrPath = computed(() => props[controlKey] as string | AbstractControl | undefined)
     const { registerControl, unregisterControl } = context
-    registerControl(key, controlOrPath)
-
-    onBeforeUnmount(() => unregisterControl(key, controlOrPath))
+    registerControl(key, control)
+    onBeforeUnmount(() => unregisterControl(key))
   }
 }

@@ -206,7 +206,7 @@ export function useAutoRows(
     })
 
     watch(
-      () => accessor.value,
+      () => accessor.valueRef.value,
       () => resizeToFitContent(),
     )
 

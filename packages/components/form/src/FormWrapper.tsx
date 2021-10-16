@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, watchEffect } from 'vue'
+import { defineComponent, provide } from 'vue'
 
-import { provideControl, useValueControl } from '@idux/cdk/forms'
+import { controlToken, useValueControl } from '@idux/cdk/forms'
 
 import { formWrapperProps } from './types'
 
@@ -16,9 +16,7 @@ export default defineComponent({
   props: formWrapperProps,
   setup(_, { slots }) {
     const control = useValueControl()
-    watchEffect(() => {
-      provideControl(control.value!)
-    })
+    provide(controlToken, control)
 
     return () => slots.default?.()
   },

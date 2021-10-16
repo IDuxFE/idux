@@ -18,8 +18,8 @@ export default defineComponent({
   name: 'IxCheckboxGroup',
   props: checkboxGroupProps,
   setup(props, { slots }) {
-    const { accessor } = useValueAccessor()
-    useFormItemRegister()
+    const { accessor, control } = useValueAccessor()
+    useFormItemRegister(control)
     provide(checkboxGroupToken, { props, accessor })
     const classes = computed(() => {
       return {

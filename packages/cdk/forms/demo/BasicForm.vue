@@ -3,15 +3,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, provide } from 'vue'
 
-import { provideControl } from '@idux/cdk/forms'
+import { controlToken, useValueControl } from '@idux/cdk/forms'
 
 export default defineComponent({
   // eslint-disable-next-line vue/require-prop-types
   props: ['control'],
-  setup(props) {
-    provideControl(props.control)
+  setup() {
+    const control = useValueControl()
+    provide(controlToken, control)
   },
 })
 </script>

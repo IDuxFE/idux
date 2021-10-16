@@ -5,7 +5,7 @@ import { renderWork } from '@tests'
 import CheckboxGroup from '../src/CheckboxGroup'
 import { CheckboxGroupProps } from '../src/types'
 
-describe('CheckboxGroup.vue and Checkbox', () => {
+describe('CheckboxGroup', () => {
   const defaultOptions = [
     { label: 'option1', value: 'option1' },
     { label: 'option2', value: 'option2' },
@@ -20,7 +20,8 @@ describe('CheckboxGroup.vue and Checkbox', () => {
   renderWork<CheckboxGroupProps>(CheckboxGroup, { props: { options: defaultOptions } })
 
   test('v-model:value work', async () => {
-    const wrapper = CheckboxGroupMount({ props: { value: ['option1'] } })
+    const onUpdateValue = jest.fn()
+    const wrapper = CheckboxGroupMount({ props: { value: ['option1'], 'onUpdate:value': onUpdateValue } })
 
     expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(1)
 
@@ -29,7 +30,8 @@ describe('CheckboxGroup.vue and Checkbox', () => {
     expect(wrapper.findAll('.ix-checkbox')[0].classes()).not.toContain('ix-checkbox-checked')
 
     await wrapper.findAll('input')[0].setValue(true)
-    expect(wrapper.emitted()['update:value'].slice(-1)[0]).toEqual([['option1']])
+
+    expect(onUpdateValue).toBeCalledWith(['option1'])
   })
 
   test('onChange work', async () => {
@@ -44,20 +46,20 @@ describe('CheckboxGroup.vue and Checkbox', () => {
   })
 
   test('disabled work', async () => {
-    const mockFn = jest.fn()
+    const onChange = jest.fn()
     const wrapper = CheckboxGroupMount({
       props: {
         value: ['option1'],
         disabled: true,
-        onChange: mockFn,
+        onChange,
       },
     })
 
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(3)
 
     await wrapper.findAll('input')[0].setValue(true)
-    expect(mockFn).toBeCalledTimes(0)
-    expect(wrapper.emitted()).not.toHaveProperty('update:value')
+
+    expect(onChange).toBeCalledTimes(0)
 
     await wrapper.setProps({ disabled: false })
 
@@ -65,8 +67,8 @@ describe('CheckboxGroup.vue and Checkbox', () => {
 
     await wrapper.findAll('input')[0].setValue(false)
 
-    expect(mockFn).toBeCalledTimes(1)
-    expect(wrapper.emitted()['update:value'].slice(-1)[0]).toEqual([[]])
+    expect(onChange).toBeCalledTimes(1)
+    expect(onChange).toBeCalledWith([])
   })
 
   test('options work', async () => {

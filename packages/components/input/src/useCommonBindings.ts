@@ -42,12 +42,12 @@ export function useCommonBindings(
   config: InputConfig | TextareaConfig,
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
   const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()
-  const { accessor } = useValueAccessor()
-  useFormItemRegister()
+  const { accessor, control } = useValueAccessor()
+  useFormItemRegister(control)
 
   onMounted(() => {
     watchEffect(() => {
-      const value = accessor.value ?? ''
+      const value = accessor.valueRef.value ?? ''
       const element = elementRef.value!
       if (element.value !== value) {
         element.value = value
@@ -55,10 +55,10 @@ export function useCommonBindings(
     })
   })
 
-  const isDisabled = computed(() => accessor.disabled)
+  const isDisabled = computed(() => accessor.disabled.value)
   const isClearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-  const clearHidden = computed(() => isDisabled.value || props.readonly || !accessor.value)
+  const clearHidden = computed(() => isDisabled.value || props.readonly || !accessor.valueRef.value)
 
   const focus = (options?: FocusOptions) => elementRef.value?.focus(options)
   const blur = () => elementRef.value?.blur()
@@ -70,7 +70,7 @@ export function useCommonBindings(
     }
     const { value } = evt.target as HTMLInputElement
     callEmit(props.onInput, evt)
-    accessor.setValue?.(value)
+    accessor.setValue(value)
   }
 
   const handlerCompositionStart = (evt: CompositionEvent) => {
@@ -93,12 +93,12 @@ export function useCommonBindings(
   const handlerBlur = (evt: FocusEvent) => {
     isFocused.value = false
     callEmit(props.onBlur, evt)
-    accessor.markAsBlurred?.()
+    accessor.markAsBlurred()
   }
 
   const handlerClear = (evt: MouseEvent) => {
     callEmit(props.onClear, evt)
-    accessor.setValue?.('')
+    accessor.setValue('')
   }
 
   return {

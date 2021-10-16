@@ -1,5 +1,4 @@
 import { MountingOptions, mount } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
 
 import { renderWork } from '@tests'
 
@@ -12,39 +11,19 @@ describe('Switch', () => {
   renderWork(IxSwitch)
 
   test('v-model:checked work', async () => {
-    const checked = ref(true)
-    const wrapper = mount({
-      components: { IxSwitch },
-      template: `<IxSwitch v-model:checked="checked"></IxSwitch>`,
-      setup() {
-        return { checked }
-      },
-    })
+    const onUpdateChecked = jest.fn()
+    const wrapper = SwitchMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked } })
 
     expect(wrapper.classes()).toContain('ix-switch-checked')
 
-    checked.value = false
-
-    await nextTick()
+    await wrapper.setProps({ checked: false })
 
     expect(wrapper.classes()).not.toContain('ix-switch-checked')
 
     await wrapper.trigger('click')
 
-    expect(checked.value).toBe(true)
     expect(wrapper.classes()).toContain('ix-switch-checked')
-  })
-
-  test('onUpdate:checked work', async () => {
-    const onUpdate = jest.fn()
-    const wrapper = SwitchMount({ props: { checked: false, 'onUpdate:checked': onUpdate } })
-
-    expect(wrapper.classes()).not.toContain('ix-switch-checked')
-
-    await wrapper.setProps({ checked: true })
-
-    expect(wrapper.classes()).toContain('ix-switch-checked')
-    expect(onUpdate).toBeCalledWith(true)
+    expect(onUpdateChecked).toBeCalledWith(true)
   })
 
   test('checkedChildren and unCheckedChildren props work', async () => {

@@ -92,8 +92,8 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
 
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
-    isChecked = computed(() => accessor.value?.includes(props.value ?? props.trueValue))
-    isDisabled = computed(() => props.disabled ?? accessor.disabled)
+    isChecked = computed(() => accessor.valueRef.value?.includes(props.value ?? props.trueValue))
+    isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
@@ -104,8 +104,8 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       const checked = (evt.target as HTMLInputElement).checked
       const checkValue = checked ? props.trueValue : props.falseValue
       const value = props.value
-      const groupCheckedValue = [...accessor.value]
-      const checkValueIndex = accessor.value.indexOf(value)
+      const groupCheckedValue = [...accessor.valueRef.value]
+      const checkValueIndex = accessor.valueRef.value.indexOf(value)
       if (checkValueIndex === -1) {
         groupCheckedValue.push(value)
       } else {
@@ -117,10 +117,10 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       accessor.setValue(groupCheckedValue)
     }
   } else {
-    const { accessor } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
-    useFormItemRegister()
-    isChecked = computed(() => accessor.value === props.trueValue)
-    isDisabled = computed(() => accessor.disabled)
+    const { accessor, control } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
+    useFormItemRegister(control)
+    isChecked = computed(() => accessor.valueRef.value === props.trueValue)
+    isDisabled = computed(() => accessor.disabled.value)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false

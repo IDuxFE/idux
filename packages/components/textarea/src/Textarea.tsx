@@ -117,7 +117,7 @@ function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: Fo
     const maxCount = props.maxCount ?? config.maxCount
     let dataCount = ''
     if (showCount) {
-      const value = accessor.value ?? ''
+      const value = accessor.valueRef.value ?? ''
       dataCount = value.length
       if (computeCount) {
         dataCount = computeCount(value)
