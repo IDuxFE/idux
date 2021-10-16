@@ -136,11 +136,11 @@ export interface SelectValueAccessor {
 
 export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor => {
   const { emit } = getCurrentInstance()!
-  const { accessor } = useValueAccessor()
-  useFormItemRegister()
-  const disabled = computed(() => accessor.disabled)
+  const { accessor, control } = useValueAccessor()
+  useFormItemRegister(control)
+  const disabled = computed(() => accessor.disabled.value)
   const inputValue = ref('')
-  const selectedValue = ref<any[]>(convertArray(accessor.value))
+  const selectedValue = ref<any[]>(convertArray(accessor.valueRef.value))
   const activatedValue = ref(null) as Ref<any>
 
   const isComposing = ref(false)
@@ -196,7 +196,7 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
   }
 
   watch(
-    () => accessor.value,
+    () => accessor.valueRef.value,
     value => {
       const valueList = convertArray(value)
       if (valueList.length !== 0 || selectedValue.value.length !== 0) {
@@ -210,8 +210,8 @@ export const useSelectValueAccessor = (props: SelectProps): SelectValueAccessor 
     () => selectedValue.value,
     value => {
       const _value = props.multiple ? value : value[0]
-      if (accessor.value !== _value) {
-        accessor.setValue?.(_value)
+      if (accessor.valueRef.value !== _value) {
+        accessor.setValue(_value)
         emit('change', _value)
       }
     },

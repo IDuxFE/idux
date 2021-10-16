@@ -34,9 +34,10 @@ export default defineComponent({
     const panelProps = useCommonPanelProps(props)
     const overlayProps = useCommonOverlayProps(props)
 
-    const inputValue = computed(() =>
-      accessor.value ? dayjs(accessor.value).format(normalizeFormat(props.format)) : '',
-    )
+    const inputValue = computed(() => {
+      const value = accessor.valueRef.value
+      return value ? dayjs(value).format(normalizeFormat(props.format)) : ''
+    })
 
     return () => {
       const inputSlots = {
@@ -70,7 +71,7 @@ export default defineComponent({
           {...panelProps.value}
           ref="overlayRef"
           defaultOpenValue={props.defaultOpenValue}
-          value={accessor.value}
+          value={accessor.valueRef.value}
           visible={visibility.value}
           onChange={handleChange}
         />

@@ -18,7 +18,7 @@ import type {
 } from './types'
 import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } from 'vue'
 
-import { computed, ref, shallowRef, toRaw, watch, watchEffect } from 'vue'
+import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 
 import { isArray, isNil, isPlainObject } from 'lodash-es'
 
@@ -605,13 +605,13 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param control Provides the control for the given name
    */
   addControl<K extends OptionalKeys<T>>(name: K, control: AbstractControl<T[K]>): void {
-    const controls = toRaw(this._controls.value)
+    const controls = { ...this._controls.value }
     if (hasOwnProperty(controls, name as string)) {
       return
     }
     control.setParent(this)
     controls[name] = control
-    this._controls.value = { ...controls }
+    this._controls.value = controls
   }
 
   /**
@@ -620,9 +620,9 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    * @param name The control name to remove from the collection
    */
   removeControl<K extends OptionalKeys<T>>(name: K): void {
-    const controls = toRaw(this._controls.value)
+    const controls = { ...this._controls.value }
     delete controls[name]
-    this._controls.value = { ...controls }
+    this._controls.value = controls
   }
 
   /**
@@ -633,9 +633,9 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
    */
   setControl<K extends keyof T>(name: K, control: AbstractControl<T[K]>): void {
     control.setParent(this)
-    const controls = toRaw(this._controls.value)
+    const controls = { ...this._controls.value }
     controls[name] = control
-    this._controls.value = { ...controls }
+    this._controls.value = controls
   }
 
   private _watchValid() {
@@ -766,8 +766,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    */
   push(control: AbstractControl<ArrayElement<T>>): void {
     control.setParent(this as AbstractControl)
-    const controls = toRaw(this._controls.value)
-    this._controls.value = [...controls, control]
+    this._controls.value = [...this._controls.value, control]
   }
 
   /**
@@ -778,9 +777,9 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    */
   insert(index: number, control: AbstractControl<ArrayElement<T>>): void {
     control.setParent(this as AbstractControl)
-    const controls = toRaw(this._controls.value)
+    const controls = [...this._controls.value]
     controls.splice(index, 0, control)
-    this._controls.value = [...controls]
+    this._controls.value = controls
   }
 
   /**
@@ -789,9 +788,9 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param index Index in the array to remove the control
    */
   removeAt(index: number): void {
-    const controls = toRaw(this._controls.value)
+    const controls = [...this._controls.value]
     controls.splice(index, 1)
-    this._controls.value = [...controls]
+    this._controls.value = controls
   }
 
   /**
@@ -802,9 +801,9 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    */
   setControl(index: number, control: AbstractControl<ArrayElement<T>>): void {
     control.setParent(this as AbstractControl)
-    const controls = toRaw(this._controls.value)
+    const controls = [...this._controls.value]
     controls.splice(index, 1, control)
-    this._controls.value = [...controls]
+    this._controls.value = controls
   }
 
   private _watchValid() {

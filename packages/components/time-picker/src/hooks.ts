@@ -17,6 +17,7 @@ import { computed, ref } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { useFormItemRegister } from '@idux/components/form'
 
 import { normalizeFormat } from './utils'
 
@@ -36,8 +37,9 @@ export function useCommonBindings<T extends TimePickerProps | TimeRangePickerPro
   props: T,
 ): CommonBindings<T extends TimeRangePickerProps ? [Date, Date] : Date> {
   const inputRef = ref<InputInstance>()
-  const { accessor } = useValueAccessor()
-  const isDisabled = computed(() => accessor.disabled)
+  const { accessor, control } = useValueAccessor()
+  useFormItemRegister(control)
+  const isDisabled = computed(() => accessor.disabled.value)
 
   const focus = (options?: FocusOptions) => inputRef.value?.focus(options)
   const blur = () => inputRef.value?.blur()
@@ -51,7 +53,7 @@ export function useCommonBindings<T extends TimePickerProps | TimeRangePickerPro
 
   function handleClear(evt: Event) {
     callEmit(props.onClear, evt as MouseEvent)
-    accessor.setValue?.(null)
+    accessor.setValue(undefined)
   }
 
   function handleBlur(evt: FocusEvent) {

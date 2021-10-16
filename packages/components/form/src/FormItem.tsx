@@ -6,23 +6,17 @@
  */
 
 import type { FormItemProps, FormLabelAlign } from './types'
+import type { AbstractControl, ValidateErrors, ValidateStatus } from '@idux/cdk/forms'
 import type { ColProps } from '@idux/components/grid'
 import type { Locale } from '@idux/components/i18n'
-import type { ComputedRef, Slots, WatchStopHandle } from 'vue'
+import type { ComputedRef, Ref, Slots, WatchStopHandle } from 'vue'
 
-import { computed, defineComponent, inject, provide, ref, watchEffect } from 'vue'
+import { computed, defineComponent, inject, provide, shallowRef, watch, watchEffect } from 'vue'
 
-import { isFunction, isNil, isNumber, isString } from 'lodash-es'
+import { isFunction, isNumber, isString } from 'lodash-es'
 
-import {
-  AbstractControl,
-  ControlPathType,
-  ValidateErrors,
-  ValidateStatus,
-  injectControl,
-  isAbstractControl,
-} from '@idux/cdk/forms'
-import { Logger } from '@idux/cdk/utils'
+import { useValueControl } from '@idux/cdk/forms'
+import { VKey } from '@idux/cdk/utils'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { getLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
@@ -154,41 +148,45 @@ function normalizeColConfig(col: string | number | ColProps | undefined) {
   return isNumber(col) || isString(col) ? { span: col } : col
 }
 
-function useControl(props: FormItemProps) {
-  const firstChildControl = ref<string | AbstractControl>()
-  let firstChildKey: string | number | undefined
+function useControl() {
+  const firstChildControl = shallowRef<AbstractControl>()
+  let firstChildKey: VKey | undefined
   let firstChildWatchStop: WatchStopHandle | undefined
-  const registerControl = (key: string | number, controlOrPath: ComputedRef<string | AbstractControl | undefined>) => {
+
+  const registerControl = (key: VKey, control: Ref<AbstractControl | undefined>) => {
     if (!firstChildWatchStop) {
       firstChildKey = key
-      firstChildWatchStop = watchEffect(() => (firstChildControl.value = controlOrPath.value))
+      firstChildWatchStop = watchEffect(() => (firstChildControl.value = control.value))
     }
   }
-
-  const unregisterControl = (key: string | number) => {
+  const unregisterControl = (key: VKey) => {
     if (key === firstChildKey) {
-      firstChildWatchStop?.()
+      if (firstChildWatchStop) {
+        firstChildWatchStop()
+        firstChildWatchStop = undefined
+      }
       firstChildControl.value = undefined
     }
   }
 
   provide(FORM_ITEM_TOKEN, { registerControl, unregisterControl })
 
-  return computed(() => {
-    let control: AbstractControl | undefined
-    const _controlOrPath = props.control ?? firstChildControl.value
-    if (!isNil(_controlOrPath)) {
-      if (isAbstractControl(_controlOrPath)) {
-        control = _controlOrPath
-      } else {
-        control = injectControl(_controlOrPath as ControlPathType)
-        if (__DEV__ && !control) {
-          Logger.warn('components/form', `not find control by [${_controlOrPath}]`)
-        }
+  const selfControl = useValueControl()
+
+  const control = shallowRef<AbstractControl>()
+
+  watch(
+    [selfControl, firstChildControl],
+    ([self, child]) => {
+      const target = self ?? child
+      if (control.value !== target) {
+        control.value = target
       }
-    }
-    return control
-  })
+    },
+    { immediate: true },
+  )
+
+  return control
 }
 
 const iconTypeMap = {
@@ -198,7 +196,7 @@ const iconTypeMap = {
 } as const
 
 function useControlStatus(props: FormItemProps) {
-  const control = useControl(props)
+  const control = useControl()
 
   const status = useStatus(props, control)
   const message = useMessage(props, control, status)
@@ -210,7 +208,7 @@ function useControlStatus(props: FormItemProps) {
   return { status, statusIcon, message }
 }
 
-function useStatus(props: FormItemProps, control: ComputedRef<AbstractControl | undefined>) {
+function useStatus(props: FormItemProps, control: Ref<AbstractControl | undefined>) {
   return computed(() => {
     if (props.status) {
       return props.status
@@ -229,7 +227,7 @@ function useStatus(props: FormItemProps, control: ComputedRef<AbstractControl | 
 
 function useMessage(
   props: FormItemProps,
-  control: ComputedRef<AbstractControl | undefined>,
+  control: Ref<AbstractControl | undefined>,
   status: ComputedRef<ValidateStatus | undefined>,
 ) {
   const locale = getLocale()

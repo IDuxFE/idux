@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckboxGroup.vue and Checkbox render work 1`] = `
+exports[`CheckboxGroup render work 1`] = `
 "<div class=\\"ix-checkbox-group ix-checkbox-group-no-gap\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input-wrapper\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input\\" aria-hidden=\\"true\\" value=\\"option1\\"><span class=\\"ix-checkbox-inner\\"></span></span><span class=\\"ix-checkbox-label\\">option1</span>
     <!---->
   </label><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input-wrapper\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input\\" aria-hidden=\\"true\\" value=\\"option2\\"><span class=\\"ix-checkbox-inner\\"></span></span><span class=\\"ix-checkbox-label\\">option2</span>

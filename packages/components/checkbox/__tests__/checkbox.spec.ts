@@ -12,27 +12,24 @@ describe('Checkbox', () => {
   renderWork<CheckboxProps>(Checkbox)
 
   test('v-model:checked work', async () => {
-    const wrapper = CheckboxMount({
-      props: {
-        checked: true,
-      },
-    })
+    const onUpdateChecked = jest.fn()
+    const wrapper = CheckboxMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked } })
 
     expect(wrapper.classes()).toContain('ix-checkbox-checked')
 
     await wrapper.setProps({ checked: false })
 
     expect(wrapper.classes()).not.toContain('ix-checkbox-checked')
-    expect(wrapper.emitted()['update:checked'].slice(-1)[0]).toEqual([false])
+
+    await wrapper.find('input').setValue(true)
+
+    expect(wrapper.classes()).toContain('ix-checkbox-checked')
+    expect(onUpdateChecked).toBeCalledWith(true)
   })
 
   test('label work', async () => {
     let label = 'checkbox'
-    const wrapper = CheckboxMount({
-      props: {
-        label,
-      },
-    })
+    const wrapper = CheckboxMount({ props: { label } })
 
     expect(wrapper.find('.ix-checkbox-label').text()).toBe(label)
 
@@ -46,9 +43,7 @@ describe('Checkbox', () => {
     const label = 'radio'
     const defaultSlot = 'checkbox slot'
     const wrapper = CheckboxMount({
-      props: {
-        label,
-      },
+      props: { label },
       slots: { default: () => defaultSlot },
     })
 
@@ -69,7 +64,6 @@ describe('Checkbox', () => {
     await wrapper.setProps({ checked: 'no' })
 
     expect(wrapper.classes()).not.toContain('ix-checkbox-checked')
-    expect(wrapper.emitted()['update:checked'].slice(-1)[0]).toEqual(['no'])
   })
 
   test('buttoned work', async () => {
@@ -97,11 +91,11 @@ describe('Checkbox', () => {
   })
 
   test('disabled work', async () => {
-    const mockFn = jest.fn()
+    const onChange = jest.fn()
     const wrapper = CheckboxMount({
       props: {
         disabled: false,
-        onChange: mockFn,
+        onChange,
       },
     })
 
@@ -112,9 +106,9 @@ describe('Checkbox', () => {
     expect(wrapper.classes()).toContain('ix-checkbox-disabled')
 
     await wrapper.find('input').setValue(true)
+
     expect(wrapper.classes()).toContain('ix-checkbox-disabled')
-    expect(wrapper.emitted()).not.toHaveProperty('update:checkbed')
-    expect(mockFn).toBeCalledTimes(0)
+    expect(onChange).toBeCalledTimes(0)
   })
 
   test('indeterminate work', async () => {

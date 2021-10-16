@@ -18,8 +18,8 @@ export default defineComponent({
   name: 'IxRadioGroup',
   props: radioGroupProps,
   setup(props, { slots }) {
-    const { accessor } = useValueAccessor()
-    useFormItemRegister()
+    const { accessor, control } = useValueAccessor()
+    useFormItemRegister(control)
     provide(radioGroupToken, { props, accessor })
 
     return () => {

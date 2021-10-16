@@ -65,10 +65,10 @@ export default defineComponent({
 })
 
 const useSwitch = (props: SwitchProps, blur: () => void) => {
-  const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
-  useFormItemRegister()
-  const isChecked = computed(() => accessor.value)
-  const isDisabled = computed(() => props.disabled ?? accessor.disabled)
+  const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
+  useFormItemRegister(control)
+  const isChecked = computed(() => accessor.valueRef.value)
+  const isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
 
   const handleClick = () => {
     if (isDisabled.value || props.loading) {

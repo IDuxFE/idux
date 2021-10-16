@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, provide, toRef, watchEffect } from 'vue'
+import { computed, defineComponent, provide, toRef } from 'vue'
 
-import { provideControl, useValueControl } from '@idux/cdk/forms'
+import { controlToken, useValueControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { formToken } from './token'
@@ -18,7 +18,7 @@ export default defineComponent({
   props: formProps,
   setup(props, { slots }) {
     const control = useValueControl()
-    watchEffect(() => provideControl(control.value!))
+    provide(controlToken, control)
 
     const config = useGlobalConfig('form')
     const colonless = computed(() => props.colonless ?? config.colonless)

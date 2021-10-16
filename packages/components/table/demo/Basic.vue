@@ -1,5 +1,5 @@
 <template>
-  <IxTable :columns="columns" :dataSource="data" ex>
+  <IxTable :columns="columns" :dataSource="data">
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>

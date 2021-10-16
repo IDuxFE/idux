@@ -72,8 +72,8 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
 
   if (radioGroup) {
     const { accessor, props: groupProps } = radioGroup
-    isChecked = computed(() => accessor.value === props.value)
-    isDisabled = computed(() => props.disabled ?? accessor.disabled)
+    isChecked = computed(() => accessor.valueRef.value === props.value)
+    isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
@@ -88,10 +88,10 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       }
     }
   } else {
-    const { accessor } = useValueAccessor<boolean>({ valueKey: 'checked' })
-    useFormItemRegister()
-    isChecked = computed(() => accessor.value)
-    isDisabled = computed(() => accessor.disabled)
+    const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
+    useFormItemRegister(control)
+    isChecked = computed(() => accessor.valueRef.value)
+    isDisabled = computed(() => accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
