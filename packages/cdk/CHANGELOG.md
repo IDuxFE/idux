@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
+
+
+### Bug Fixes
+
+* all components type ([#454](https://github.com/IDuxFE/idux/issues/454)) ([ef0f2ca](https://github.com/IDuxFE/idux/commit/ef0f2ca80a96bd576ff63dff444c767d8bb9b73e))
+* **cdk:forms:** dynamic add or remove control ([#478](https://github.com/IDuxFE/idux/issues/478)) ([8d3f5ed](https://github.com/IDuxFE/idux/commit/8d3f5edc363a10b78fecfe6d829000139a9cddb1)), closes [#447](https://github.com/IDuxFE/idux/issues/447)
+
+
+### Features
+
+* add timePicker component ([#324](https://github.com/IDuxFE/idux/issues/324)) ([4660db4](https://github.com/IDuxFE/idux/commit/4660db43482dfe86361c05c511d6cfbb22feb950)), closes [#222](https://github.com/IDuxFE/idux/issues/222)
+* **comp: tree:** add tree component ([#476](https://github.com/IDuxFE/idux/issues/476)) ([8f8ebca](https://github.com/IDuxFE/idux/commit/8f8ebca26af86495c4be4246ab5aa1166f0930db)), closes [#446](https://github.com/IDuxFE/idux/issues/446)
+
+
+
+
+
 # [0.5.0](https://github.com/IDuxFE/idux/compare/v0.4.0...v0.5.0) (2021-09-11)
 
 

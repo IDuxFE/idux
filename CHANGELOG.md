@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
+
+
+### Bug Fixes
+
+* all components type ([#454](https://github.com/IDuxFE/idux/issues/454)) ([ef0f2ca](https://github.com/IDuxFE/idux/commit/ef0f2ca80a96bd576ff63dff444c767d8bb9b73e))
+* **cdk:forms:** dynamic add or remove control ([#478](https://github.com/IDuxFE/idux/issues/478)) ([8d3f5ed](https://github.com/IDuxFE/idux/commit/8d3f5edc363a10b78fecfe6d829000139a9cddb1)), closes [#447](https://github.com/IDuxFE/idux/issues/447)
+* **comp: spin:** fix icon style not work ([#448](https://github.com/IDuxFE/idux/issues/448)) ([7888da2](https://github.com/IDuxFE/idux/commit/7888da2b9575fef03d9c417ecf810c9561ef9b94))
+* **comp:drawer:** rename placement classname ([#450](https://github.com/IDuxFE/idux/issues/450)) ([#451](https://github.com/IDuxFE/idux/issues/451)) ([a1a7b5a](https://github.com/IDuxFE/idux/commit/a1a7b5abdf3a2b4963334f99f91aa9fdcf92bd02))
+* **comp:switch:** fix style and rename props ([#475](https://github.com/IDuxFE/idux/issues/475)) ([200e02d](https://github.com/IDuxFE/idux/commit/200e02d88c3c20bb323e9bae97e65f9838402947)), closes [#473](https://github.com/IDuxFE/idux/issues/473)
+* fix eslint-fix command execution error ([#481](https://github.com/IDuxFE/idux/issues/481)) ([0ffb76b](https://github.com/IDuxFE/idux/commit/0ffb76b74e558ae1190e443ff8ba0dd258416caf)), closes [#480](https://github.com/IDuxFE/idux/issues/480)
+* **site:** 修复npm run start子进程无法关闭的问题 ([#463](https://github.com/IDuxFE/idux/issues/463)) ([72e9508](https://github.com/IDuxFE/idux/commit/72e95083460acbfbf2becc736b8313fa9b222c7f))
+
+
+### Features
+
+* add timePicker component ([#324](https://github.com/IDuxFE/idux/issues/324)) ([4660db4](https://github.com/IDuxFE/idux/commit/4660db43482dfe86361c05c511d6cfbb22feb950)), closes [#222](https://github.com/IDuxFE/idux/issues/222)
+* **comp: tree:** add tree component ([#476](https://github.com/IDuxFE/idux/issues/476)) ([8f8ebca](https://github.com/IDuxFE/idux/commit/8f8ebca26af86495c4be4246ab5aa1166f0930db)), closes [#446](https://github.com/IDuxFE/idux/issues/446)
+* **comp:checkbox:** add new props & refactor style ([#453](https://github.com/IDuxFE/idux/issues/453)) ([5b4ba7c](https://github.com/IDuxFE/idux/commit/5b4ba7c62a083b540632407373371dbdd93ef773))
+* **comp:config:** add common ([#467](https://github.com/IDuxFE/idux/issues/467)) ([2217996](https://github.com/IDuxFE/idux/commit/2217996d9dd707a445970db2a14f707c51e796ea))
+
+
+
+
+
 # [0.5.0](https://github.com/IDuxFE/idux/compare/v0.4.0...v0.5.0) (2021-09-11)
 
 

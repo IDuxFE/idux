@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
+
+
+### Features
+
+* **comp: tree:** add tree component ([#476](https://github.com/IDuxFE/idux/issues/476)) ([8f8ebca](https://github.com/IDuxFE/idux/commit/8f8ebca26af86495c4be4246ab5aa1166f0930db)), closes [#446](https://github.com/IDuxFE/idux/issues/446)
+
+
+
+
+
 # [0.5.0](https://github.com/IDuxFE/idux/compare/v0.4.0...v0.5.0) (2021-09-11)
 
 
