@@ -68,14 +68,19 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     toggle(false, hideDelay)
   }
 
-  function update(options: Partial<PopperOptions>): void {
-    Object.entries(options).forEach(([key, value]) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (value !== undefined && !isEqual(value, (state as any)[key])) {
+  function update(options?: Partial<PopperOptions>): void {
+    if (options) {
+      Object.entries(options).forEach(([key, value]) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(state as any)[key] = value
-      }
-    })
+        if (value !== undefined && !isEqual(value, (state as any)[key])) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ;(state as any)[key] = value
+        }
+      })
+      return
+    }
+
+    popperInstance?.update()
   }
 
   function forceUpdate(): void {

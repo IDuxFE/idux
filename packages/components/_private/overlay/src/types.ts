@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
+import type { PopperOptions, PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
@@ -53,7 +53,15 @@ export const overlayProps = {
   onAfterLeave: IxPropTypes.emit<() => void>(),
 }
 
+export interface OverlayBindings {
+  updatePopper: (options?: Partial<PopperOptions>) => void
+  forceUpdatePopper: () => void
+}
+
 export type OverlayProps = IxInnerPropTypes<typeof overlayProps>
 export type OverlayPublicProps = IxPublicPropTypes<typeof overlayProps>
-export type OverlayComponent = DefineComponent<Omit<HTMLAttributes, keyof OverlayPublicProps> & OverlayPublicProps>
-export type OverlayInstance = InstanceType<DefineComponent<OverlayProps>>
+export type OverlayComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof OverlayPublicProps> & OverlayPublicProps,
+  OverlayBindings
+>
+export type OverlayInstance = InstanceType<DefineComponent<OverlayProps, OverlayBindings>>

@@ -32,7 +32,7 @@ export default defineComponent({
   name: 'IxOverlay',
   inheritAttrs: false,
   props: overlayProps,
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, expose }) {
     const popperOptions = usePopperOptions(props)
     const {
       arrowRef,
@@ -44,6 +44,7 @@ export default defineComponent({
       placement,
       initialize,
       update,
+      forceUpdate,
       show,
       hide,
       destroy,
@@ -66,6 +67,11 @@ export default defineComponent({
       }
       callEmit(props.onAfterLeave)
     }
+
+    expose({
+      updatePopper: update,
+      forceUpdatePopper: forceUpdate,
+    })
 
     return () => {
       const triggerNode = getFirstValidNode(slots.default?.())
