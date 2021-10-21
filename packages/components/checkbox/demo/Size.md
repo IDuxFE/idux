@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-共有`medium`、`small`两种尺寸，仅在属性`buttoned`为`true`时有效
+通过设置 `size` 来改变多选框的大小。
 
 ## en
 
-There are two sizes, `medium` and `small`, which are only valid under `buttoned`.
+Change the size of the checkbox by setting `size`.

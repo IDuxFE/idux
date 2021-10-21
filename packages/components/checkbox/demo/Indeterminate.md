@@ -1,14 +1,14 @@
 ---
-order: 7
+order: 3
 title:
-  zh: 半选状态
-  en: indeterminate
+  zh: 全选
+  en: Check all
 ---
 
 ## zh
 
-`indeterminate` 属性用以表示 `IxCheckbox` 的不确定状态，用于实现全选的效果。
+在实现全选效果时，你可能会用到 `indeterminate` 属性。
 
 ## en
 
-The attribute `indeterminate` is used to represent the uncertain state of the `IxCheckbox` and to achieve the effect of selecting all.
+The `indeterminate` property can help you to achieve a 'check all' effect.

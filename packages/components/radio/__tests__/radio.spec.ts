@@ -96,16 +96,16 @@ describe('Radio', () => {
   })
 
   test('size work', async () => {
-    const wrapper = RadioMount({ props: { buttoned: true, size: 'large' } })
+    const wrapper = RadioMount({ props: { buttoned: true, size: 'lg' } })
 
-    expect(wrapper.classes()).toContain('ix-radio-large')
+    expect(wrapper.classes()).toContain('ix-radio-lg')
 
-    await wrapper.setProps({ size: 'small' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.classes()).toContain('ix-radio-small')
+    expect(wrapper.classes()).toContain('ix-radio-sm')
 
-    await wrapper.setProps({ buttoned: false, size: 'large' })
+    await wrapper.setProps({ buttoned: false, size: 'lg' })
 
-    expect(wrapper.classes()).not.toContain('ix-radio-large')
+    expect(wrapper.classes()).not.toContain('ix-radio-lg')
   })
 })

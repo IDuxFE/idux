@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
@@ -13,7 +15,7 @@ import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type RadioMode = 'default' | 'primary'
-export type RadioOptions = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>
+export type RadioOption = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>
 
 export const radioProps = {
   autofocus: IxPropTypes.bool.def(false),
@@ -23,7 +25,7 @@ export const radioProps = {
   disabled: IxPropTypes.bool,
   label: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   value: IxPropTypes.any,
 
   // events
@@ -46,19 +48,18 @@ export type RadioComponent = DefineComponent<
 export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindings>>
 
 export const radioGroupProps = {
-  buttoned: IxPropTypes.bool,
-  disabled: IxPropTypes.bool.def(false),
+  value: IxPropTypes.any,
   control: controlPropDef,
+  buttoned: IxPropTypes.bool.def(false),
+  disabled: IxPropTypes.bool.def(false),
+  gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
-  options: IxPropTypes.array<RadioOptions>(),
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']).def('medium'),
-  value: IxPropTypes.any,
+  options: IxPropTypes.array<RadioOption>(),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']).def('md'),
 
   // events
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: IxPropTypes.emit<(value: any) => void>(),
 }
 

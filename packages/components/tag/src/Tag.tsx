@@ -17,9 +17,9 @@ export default defineComponent({
   name: 'IxTag',
   props: tagProps,
   setup(props, { slots }) {
-    const config = useGlobalConfig('tag')
     const common = useGlobalConfig('common')
-    const prefixCls = computed(() => `${common.prefixCls}-tag`)
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tag`)
+    const config = useGlobalConfig('tag')
 
     const isPresetOrStatusColor = computed(() => {
       const color = props.color
@@ -31,13 +31,14 @@ export default defineComponent({
     const classes = computed(() => {
       const { color, checkable, shape = config.shape, checked } = props
       const presetFlag = isPresetOrStatusColor.value
+      const prefixCls = mergedPrefixCls.value
       return {
-        [`${prefixCls.value}`]: true,
-        [`${prefixCls.value}-${shape}`]: shape,
-        [`${prefixCls.value}-${color}`]: presetFlag,
-        [`${prefixCls.value}-has-color`]: !presetFlag && color,
-        [`${prefixCls.value}-checkable`]: checkable,
-        [`${prefixCls.value}-checked`]: checked,
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-${shape}`]: shape,
+        [`${prefixCls}-${color}`]: presetFlag,
+        [`${prefixCls}-has-color`]: !presetFlag && color,
+        [`${prefixCls}-checkable`]: checkable,
+        [`${prefixCls}-checked`]: checked,
       }
     })
     const style = computed(() => {
@@ -45,13 +46,12 @@ export default defineComponent({
     })
 
     return () => {
-      const _prefixCls = prefixCls.value
       const { icon } = props
       const icoNode = slots.icon ? slots.icon() : icon && <IxIcon name={icon}></IxIcon>
       return (
         <span class={classes.value} style={style.value}>
           {icoNode}
-          <span class={`${_prefixCls}-content`}>{slots.default?.()}</span>
+          <span class={`${mergedPrefixCls.value}-content`}>{slots.default?.()}</span>
         </span>
       )
     }

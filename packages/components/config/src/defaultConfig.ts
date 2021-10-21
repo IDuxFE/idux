@@ -46,11 +46,11 @@ import type {
   TimePickerConfig,
   TimeRangePickerConfig,
   TooltipConfig,
+  TreeConfig,
 } from './types'
 
 import { shallowReactive } from 'vue'
 
-import { TreeConfig } from '..'
 import { numFormatter } from './numFormatter'
 
 // --------------------- Common ---------------------
@@ -58,8 +58,6 @@ const common = shallowReactive<CommonConfig>({ prefixCls: 'ix' })
 
 // --------------------- General ---------------------
 const button = shallowReactive<ButtonConfig>({ size: 'md' })
-
-const checkbox: CheckboxConfig = { size: 'medium' }
 
 const icon = shallowReactive<IconConfig>({})
 
@@ -117,14 +115,16 @@ const form = shallowReactive<FormConfig>({
   colonless: false,
   labelAlign: 'end',
   layout: 'horizontal',
-  size: 'medium',
+  size: 'md',
 })
+
+const checkbox = shallowReactive<CheckboxConfig>({ size: 'md' })
 
 const input = shallowReactive<InputConfig>({
   borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
-  size: 'medium',
+  size: 'md',
 })
 
 const textarea = shallowReactive<TextareaConfig>({
@@ -133,18 +133,18 @@ const textarea = shallowReactive<TextareaConfig>({
   clearIcon: 'close-circle',
   resize: 'vertical',
   showCount: false,
-  size: 'medium',
+  size: 'md',
 })
 
 const rate = shallowReactive<RateConfig>({
+  allowHalf: false,
+  clearable: false,
   count: 5,
   icon: 'star',
-  allowHalf: false,
-  allowClear: false,
 })
 
-const radio: RadioConfig = shallowReactive({
-  size: 'medium',
+const radio = shallowReactive<RadioConfig>({
+  size: 'md',
 })
 
 const select = shallowReactive<SelectConfig>({
@@ -152,7 +152,7 @@ const select = shallowReactive<SelectConfig>({
   clearable: false,
   labelKey: 'label',
   searchable: false,
-  size: 'medium',
+  size: 'md',
   valueKey: 'value',
 })
 
@@ -160,7 +160,7 @@ const timePicker = shallowReactive<TimePickerConfig>({
   borderless: false,
   clearable: true,
   clearIcon: 'close-circle',
-  size: 'medium',
+  size: 'md',
   suffix: 'clock-circle',
 })
 
@@ -168,7 +168,7 @@ const timeRangePicker = shallowReactive<TimeRangePickerConfig>({
   borderless: false,
   clearable: true,
   clearIcon: 'close-circle',
-  size: 'medium',
+  size: 'md',
   suffix: 'clock-circle',
   separator: '~',
 })
@@ -194,14 +194,14 @@ const list = shallowReactive<ListConfig>({
   borderless: true,
 })
 
-const collapse: CollapseConfig = shallowReactive<CollapseConfig>({
+const collapse = shallowReactive<CollapseConfig>({
   accordion: false,
   borderless: false,
   expandIcon: 'right',
   ghost: false,
 })
 
-const image: ImageConfig = shallowReactive({
+const image = shallowReactive<ImageConfig>({
   width: 100,
   height: 100,
   fallback:

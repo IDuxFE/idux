@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox render work 1`] = `
-"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input-wrapper\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-inner\\"></span></span>
+"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
   <!---->
   <!---->
 </label>"

@@ -7,24 +7,30 @@
 
 import type { CheckboxGroupContext } from './token'
 import type { CheckValue, CheckboxProps } from './types'
-import type { ComputedRef, Ref, StyleValue } from 'vue'
+import type { ComputedRef, StyleValue } from 'vue'
 
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
+import { useFormElement } from '@idux/components/utils'
 
 import { checkboxGroupToken } from './token'
-import { CheckboxSize, checkboxProps } from './types'
+import { checkboxProps } from './types'
 
 export default defineComponent({
   name: 'IxCheckbox',
   inheritAttrs: false,
   props: checkboxProps,
   setup(props, { attrs, expose, slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox`)
     const config = useGlobalConfig('checkbox')
+
+    const { elementRef, focus, blur } = useFormElement()
+    expose({ focus, blur })
 
     const checkboxGroup = inject(checkboxGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
@@ -34,44 +40,56 @@ export default defineComponent({
       props,
       checkboxGroup,
     )
-    const classes = useClasses(props, isChecked, isDisabled, isFocused, isButtoned, size)
-    const { inputRef, focus, blur } = useElement()
-    const style = useStyle(checkboxGroup, attrs.style as StyleValue)
-    expose({ focus, blur })
+    const classes = computed(() => {
+      const { indeterminate } = props
+      const buttoned = isButtoned.value
+      const prefixCls = mergedPrefixCls.value
+      const classes = {
+        [prefixCls]: true,
+        [`${prefixCls}-button`]: buttoned,
+        [`${prefixCls}-checked`]: !indeterminate && isChecked.value,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-indeterminate`]: indeterminate,
+        [`${prefixCls}-${size.value}`]: buttoned,
+      }
+      return normalizeClass([classes, attrs.class])
+    })
 
     return () => {
-      const child = slots.default ? slots.default() : props.label
-      const labelNode = child ? <span class="ix-checkbox-label">{child}</span> : undefined
-      const { class: className, type, tabindex, ...restAttrs } = attrs
-
+      const prefixCls = mergedPrefixCls.value
+      const { autofocus, value, label } = props
+      const labelNode = slots.default?.() ?? label
+      const labelWrapper = labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>
+      const { class: className, style, type, tabindex, ...restAttrs } = attrs
       return (
         <label
-          class={[classes.value, className]}
-          style={style.value}
+          class={classes.value}
+          style={style as StyleValue}
           role="checkbox"
           aria-checked={isChecked.value}
           aria-disabled={isDisabled.value}
         >
-          <span class="ix-checkbox-input-wrapper">
+          <span class={`${prefixCls}-input`}>
             <input
-              ref={inputRef}
+              ref={elementRef}
               type="checkbox"
-              class="ix-checkbox-input"
+              class={`${prefixCls}-input-inner`}
               aria-hidden
               {...restAttrs}
-              autofocus={props.autofocus}
+              autofocus={autofocus}
               name={mergedName.value}
-              value={props.value}
+              value={value}
               checked={isChecked.value}
               disabled={isDisabled.value}
               onChange={handleChange}
               onBlur={handleBlur}
               onFocus={handleFocus}
             />
-            {isButtoned.value ? null : <span class="ix-checkbox-inner" tabindex={tabindex as number} />}
+            {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
           </span>
-          {labelNode}
-          {isButtoned.value ? <span class="ix-checkbox-button-inner" tabindex={tabindex as number} /> : null}
+          {labelWrapper}
+          {isButtoned.value && <span class={`${prefixCls}-button-tick`} tabindex={tabindex as number} />}
         </label>
       )
     }
@@ -119,6 +137,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
   } else {
     const { accessor, control } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
     useFormItemRegister(control)
+
     isChecked = computed(() => accessor.valueRef.value === props.trueValue)
     isDisabled = computed(() => accessor.disabled.value)
 
@@ -136,64 +155,4 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
   }
 
   return { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus }
-}
-
-const useClasses = (
-  props: CheckboxProps,
-  isChecked: ComputedRef<boolean>,
-  isDisabled: ComputedRef<boolean>,
-  isFocused: Ref<boolean>,
-  isButtoned: ComputedRef<boolean>,
-  size: ComputedRef<CheckboxSize>,
-) => {
-  return computed(() => {
-    const disabled = isDisabled.value
-    const checked = isChecked.value
-    const focused = isFocused.value
-    const indeterminate = props.indeterminate
-    const buttoned = isButtoned.value
-    const buttonSize = size.value
-
-    return {
-      'ix-checkbox': true,
-      'ix-checkbox-button': !!buttoned,
-      'ix-checkbox-disabled': !!disabled,
-      'ix-checkbox-focused': !!focused,
-      'ix-checkbox-indeterminate': !!indeterminate,
-      'ix-checkbox-checked': !indeterminate && checked,
-      [`ix-checkbox-button-${buttonSize}`]: !!buttoned,
-    }
-  })
-}
-
-const useElement = () => {
-  const inputRef = ref<HTMLInputElement>()
-  const focus = (options?: FocusOptions) => inputRef.value?.focus(options)
-  const blur = () => inputRef.value?.blur()
-  return { inputRef, focus, blur }
-}
-
-const useStyle = (checkboxGroup: CheckboxGroupContext | null, style: StyleValue = {}) => {
-  return computed(() => {
-    let _style: StyleValue
-    const gap = checkboxGroup?.props.gap
-    if (gap) {
-      if (typeof style === 'string') {
-        _style = `margin-right: ${gap}px;` + style
-      } else if (Array.isArray(style)) {
-        _style = [`margin-right: ${gap}px;`, ...style]
-      } else {
-        _style = Object.assign(
-          {
-            marginRight: `${gap}px`,
-          },
-          style,
-        )
-      }
-    } else {
-      _style = style
-    }
-
-    return _style
-  })
 }

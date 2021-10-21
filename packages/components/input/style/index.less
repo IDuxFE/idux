@@ -1,10 +1,161 @@
-@import '../../style/themes/default.less';
 @import '../../style/mixins/borderless.less';
 @import '../../style/mixins/placeholder.less';
+@import './themes/default.less';
 @import './mixin.less';
 
-@input-prefix: ~'@{idux-prefix}-input';
-
 .@{input-prefix} {
-  .input();
+  display: inline-flex;
+  width: 100%;
+  line-height: @input-line-height;
+  background-color: @input-background-color;
+
+  &-sm {
+    .input-size(@input-font-size-sm; @input-padding-vertical-sm; @input-padding-horizontal-sm; @input-height-sm);
+  }
+
+  &-md {
+    .input-size(@input-font-size-md; @input-padding-vertical-md; @input-padding-horizontal-md; @input-height-md);
+  }
+
+  &-lg {
+    .input-size(@input-font-size-lg; @input-padding-vertical-lg; @input-padding-horizontal-lg; @input-height-lg);
+  }
+
+  &-focused {
+    .@{input-prefix}-wrapper {
+      border-color: @input-active-color;
+      box-shadow: @input-active-box-shadow;
+    }
+  }
+
+  &-disabled {
+    color: @input-disabled-color;
+    background-color: @input-disabled-background-color;
+    cursor: not-allowed;
+    opacity: 1;
+
+    .@{input-prefix}-wrapper {
+      &:hover {
+        border-color: @input-border-color;
+      }
+
+      .@{input-prefix}-suffix,
+      .@{input-prefix}-prefix {
+        cursor: not-allowed;
+        &:hover {
+          color: @input-disabled-color;
+        }
+      }
+    }
+  }
+
+  &-borderless {
+    &,
+    &:hover,
+    &-focused,
+    &-disabled {
+      .@{input-prefix}-wrapper {
+        .borderless();
+      }
+    }
+  }
+
+  &-wrapper {
+    display: inline-flex;
+    width: 100%;
+    border: @input-border-width @input-border-style @input-border-color;
+    border-radius: @input-border-radius;
+    transition: all @input-transition-duration @input-transition-function;
+
+    &:hover {
+      border-color: @input-hover-color;
+    }
+
+    .@{input-prefix}-inner {
+      .input-inner();
+    }
+
+    .@{input-prefix}-suffix,
+    .@{input-prefix}-prefix {
+      display: inline-flex;
+      text-align: center;
+      align-items: center;
+      color: @input-placeholder-color;
+      transition: color @input-transition-duration;
+      cursor: pointer;
+
+      &:hover {
+        color: @input-color-secondary;
+      }
+    }
+
+    .@{input-prefix}-prefix {
+      margin-right: @input-wrapper-inner-margin;
+    }
+
+    .@{input-prefix}-suffix {
+      margin-left: @input-wrapper-inner-margin;
+
+      &-hidden {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &-addon {
+    display: inline-block;
+    text-align: center;
+    background-color: @input-addon-background-color;
+    border: @input-border-width @input-border-style @input-border-color;
+    border-radius: @input-border-radius;
+    white-space: nowrap;
+
+    &:first-child {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      .@{idux-prefix}-select {
+        &-selector {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    &:last-child {
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      .@{idux-prefix}-select {
+        &-selector {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+
+    .@{idux-prefix}-select {
+      &-selector {
+        background-color: inherit;
+        border: @input-border-width @input-border-style transparent;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-with-addon-after {
+    .@{input-prefix}-wrapper {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &-with-addon-before {
+    .@{input-prefix}-wrapper {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
 }

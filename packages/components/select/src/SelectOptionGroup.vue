@@ -1,6 +1,6 @@
 <template>
-  <div v-show="visible" class="ix-option-group">
-    <span class="ix-option-group-label">
+  <div v-show="visible" class="ix-select-option-group">
+    <span class="ix-select-option-group-label">
       <slot name="label">{{ label }}</slot>
     </span>
   </div>

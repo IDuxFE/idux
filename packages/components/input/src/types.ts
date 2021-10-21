@@ -22,7 +22,7 @@ export const commonProps = {
   clearIcon: IxPropTypes.string,
   disabled: IxPropTypes.bool.def(false),
   readonly: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: string) => void>(),

@@ -1,115 +1,67 @@
-@import '../../style/themes/default.less';
-
-@switch-prefix: ~'@{idux-prefix}-switch';
+@import './themes/default.less';
+@import './mixin.less';
 
 .@{switch-prefix} {
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-width: 44px;
-  height: @switch-normal-height;
-  border-radius: 20px;
-  background: @switch-close-bg-color;
-  transition: @switch-transition;
   cursor: pointer;
+  font-size: @switch-font-size;
+  color: @switch-color;
+  background: @switch-background-color;
+  border-radius: @switch-border-radius;
+  transition: @switch-transition;
+
+  &::after {
+    position: absolute;
+    cursor: pointer;
+    left: @switch-box-size-padding;
+    border-radius: @switch-border-radius;
+    background-color: @switch-box-background-color;
+    box-shadow: @switch-box-box-shadow;
+    transition: @switch-transition;
+    content: ' ';
+  }
 
   &-loading-icon {
     position: absolute;
     z-index: 1;
-    right: calc(100% - @switch-normal-loading-icon-offset);
-    color: @switch-close-loading-icon-color;
-  }
-
-  &-inner {
-    padding: @switch-normal-text-padding;
-    color: @switch-inner-circle-bg-color;
-    font-size: @switch-inner-font-size;
-    transition: @switch-transition;
-  }
-
-  &::after {
-    position: absolute;
-    width: @switch-normal-inner-circle-size;
-    height: @switch-normal-inner-circle-size;
-    left: 2px;
-    border-radius: 50%;
-    background-color: @switch-inner-circle-bg-color;
-    content: ' ';
-    cursor: pointer;
-    box-shadow: @switch-inner-circle-shadow;
-    transition: @switch-transition;
-  }
-
-  &:focus {
-    outline: 0;
-    box-shadow: @switch-focus-shadow;
+    color: @switch-background-color;
   }
 
   &-checked {
-    background-color: @switch-open-bg-color;
+    background-color: @switch-active-color;
 
     .@{switch-prefix}-loading-icon {
-      left: calc(100% - @switch-normal-loading-icon-offset);
-      color: @switch-open-loading-icon-color;
-    }
-
-    .@{switch-prefix}-inner {
-      padding: @switch-normal-checked-text-padding;
-    }
-
-    &::after {
-      left: calc(100% - (@switch-normal-offset));
+      color: @switch-active-color;
     }
   }
 
   &-loading,
   &-disabled {
-    opacity: @switch-disable-opacity;
+    opacity: @switch-disabled-opacity;
     cursor: not-allowed;
 
-    &:focus {
-      box-shadow: none;
-    }
-
-    &::after {
-      cursor: not-allowed;
+    .@{switch-prefix} {
+      &::after {
+        cursor: not-allowed;
+      }
     }
   }
 
   &-sm {
-    min-width: 28px;
-    height: @switch-small-height;
+    .switch-size(@switch-height-sm, @switch-icon-font-size-sm, @switch-box-size-sm, @switch-box-size-padding, 0px, @switch-padding-horizontal-sm);
 
     .@{switch-prefix}-loading-icon {
-      right: calc(100% - @switch-small-loading-icon-offset);
-      top: -5px;
-      svg {
-        width: @switch-loading-icon-size-sm;
-        height: @switch-loading-icon-size-sm;
-      }
-    }
-
-    .@{switch-prefix}-inner {
-      padding: @switch-small-text-padding;
-    }
-
-    &::after {
-      width: @switch-small-inner-circle-size;
-      height: @switch-small-inner-circle-size;
+      top: -1.5px;
     }
   }
 
-  &-sm&-checked {
-    .@{switch-prefix}-loading-icon {
-      right: calc(100% - @switch-small-loading-icon-offset);
-    }
+  &-md {
+    .switch-size(@switch-height-md, @switch-icon-font-size-md, @switch-box-size-md, @switch-box-size-padding, 1px, @switch-padding-horizontal-md);
+  }
 
-    .@{switch-prefix}-inner {
-      padding: @switch-small-checked-text-padding;
-    }
-
-    &::after {
-      left: calc(100% - (@switch-small-offset));
-    }
+  &-lg {
+    .switch-size(@switch-height-lg, @switch-icon-font-size-lg, @switch-box-size-lg, @switch-box-size-padding, 1px, @switch-padding-horizontal-lg);
   }
 }

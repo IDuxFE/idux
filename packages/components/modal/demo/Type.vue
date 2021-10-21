@@ -23,18 +23,12 @@
   </IxModal>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const confirmVisible = ref(false)
-    const infoVisible = ref(false)
-    const successVisible = ref(false)
-    const warningVisible = ref(false)
-    const errorVisible = ref(false)
-
-    return { confirmVisible, infoVisible, successVisible, warningVisible, errorVisible }
-  },
-})
+const confirmVisible = ref(false)
+const infoVisible = ref(false)
+const successVisible = ref(false)
+const warningVisible = ref(false)
+const errorVisible = ref(false)
 </script>

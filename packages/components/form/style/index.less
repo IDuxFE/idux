@@ -1,20 +1,17 @@
-@import '../../style/themes/default.less';
+@import './themes/default.less';
 @import './mixin.less';
 @import './status.less';
 @import './layout.less';
 
-@form-prefix: ~'@{idux-prefix}-form';
-@form-item-prefix: ~'@{idux-prefix}-form-item';
-
 .@{form-prefix} {
-  &-small {
-    .form-size(@input-height-sm);
+  &-sm {
+    .form-size(@form-height-sm);
   }
-  &-medium {
-    .form-size(@input-height-md);
+  &-md {
+    .form-size(@form-height-md);
   }
-  &-large {
-    .form-size(@input-height-lg);
+  &-lg {
+    .form-size(@form-height-lg);
   }
 }
 
@@ -42,8 +39,8 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      color: @label-color;
-      font-size: @form-item-label-font-size;
+      color: @form-item-label-color;
+      font-size: @form-item-font-size;
 
       &::after {
         position: relative;
@@ -59,16 +56,16 @@
 
     &-required > label::before {
       display: inline-block;
-      margin-right: 4px;
-      color: @label-required-color;
-      font-size: @form-item-label-font-size;
+      margin-right: @spacing-xs;
+      color: @form-item-label-required-color;
+      font-size: @form-item-font-size;
       font-family: SimSun, sans-serif;
       line-height: 1;
       content: '*';
     }
 
     &-tooltip {
-      color: @text-color-secondary;
+      color: @form-color-secondary;
       cursor: help;
       writing-mode: horizontal-tb;
       margin-inline-start: @spacing-xs;
@@ -96,10 +93,11 @@
   &-extra {
     clear: both;
     min-height: @form-item-margin-bottom;
-    color: @text-color-secondary;
-    font-size: @font-size-base;
-    line-height: @line-height-base;
-    transition: color 0.3s @ease-out; // sync input color transition
-    .form-message-extra-distance((@form-item-margin-bottom - @form-font-height) / 2);
+    color: @form-color-secondary;
+    font-size: @form-item-font-size;
+    line-height: @form-line-height;
+    transition: color @form-transition-duration @form-transition-function;
+
+    .form-message-extra-distance((@form-item-margin-bottom - @form-item-font-height) / 2);
   }
 }

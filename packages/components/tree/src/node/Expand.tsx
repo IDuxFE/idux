@@ -17,7 +17,7 @@ import { treeNodeExpandProps } from '../types'
 export default defineComponent({
   props: treeNodeExpandProps,
   setup(props) {
-    const { prefixCls, slots, expandIcon, loadingKeys, handleExpand } = inject(treeToken)!
+    const { mergedPrefixCls, slots, expandIcon, loadingKeys, handleExpand } = inject(treeToken)!
 
     const isLoading = computed(() => loadingKeys.value.includes(props.nodeKey))
 
@@ -36,7 +36,7 @@ export default defineComponent({
         }
       }
       return (
-        <span class={`${prefixCls.value}-node-expand`} onClick={onClick}>
+        <span class={`${mergedPrefixCls.value}-node-expand`} onClick={onClick}>
           {children}
         </span>
       )

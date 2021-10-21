@@ -7,7 +7,11 @@
 
 import { computed, defineComponent, provide } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { useValueAccessor } from '@idux/cdk/forms'
+import { convertCssPixel } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 
 import Checkbox from './Checkbox'
@@ -21,15 +25,31 @@ export default defineComponent({
     const { accessor, control } = useValueAccessor()
     useFormItemRegister(control)
     provide(checkboxGroupToken, { props, accessor })
+
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox-group`)
+
     const classes = computed(() => {
+      const { gap } = props
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-checkbox-group': true,
-        'ix-checkbox-group-no-gap': props.gap === 0,
+        [prefixCls]: true,
+        [`${prefixCls}-with-gap`]: !isNil(gap),
       }
     })
+
+    const style = computed(() => {
+      const { gap } = props
+      return gap !== 0 ? `gap: ${convertCssPixel(gap)};` : undefined
+    })
+
     return () => {
       const child = props.options ? props.options.map(option => <Checkbox {...option} />) : slots.default?.()
-      return <div class={classes.value}>{child}</div>
+      return (
+        <div class={classes.value} style={style.value}>
+          {child}
+        </div>
+      )
     }
   },
 })

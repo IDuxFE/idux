@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-垂直的 `IxRadioGroup`，配合更多输入框选项。
+垂直的单选组，配合更多输入框选项。
 
 ## en
 
-Vertical `IxRadioGroup`, with more radios.
+Vertical radio group, with more radios.

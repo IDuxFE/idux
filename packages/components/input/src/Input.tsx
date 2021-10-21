@@ -6,8 +6,7 @@
  */
 
 import type { InputProps } from './types'
-import type { InputConfig } from '@idux/components/config'
-import type { ComputedRef, Ref, Slot, Slots, StyleValue, VNodeTypes } from 'vue'
+import type { Slot, Slots, StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, normalizeClass } from 'vue'
 
@@ -19,8 +18,11 @@ import { useCommonBindings } from './useCommonBindings'
 
 export default defineComponent({
   name: 'IxInput',
+  inheritAttrs: false,
   props: inputProps,
   setup(props, { slots, expose, attrs }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-input`)
     const config = useGlobalConfig('input')
 
     const {
@@ -45,23 +47,33 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const classes = useClasses(props, slots, config, isFocused, isDisabled)
+    const classes = computed(() => {
+      const { borderless = config.borderless, size = config.size, addonAfter, addonBefore } = props
+      const prefixCls = mergedPrefixCls.value
+      const classes = {
+        [prefixCls]: true,
+        [`${prefixCls}-borderless`]: borderless,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-with-addon-after`]: addonAfter || slots.addonAfter,
+        [`${prefixCls}-with-addon-before`]: addonBefore || slots.addonBefore,
+      }
+      return normalizeClass([classes, attrs.class])
+    })
 
     return () => {
-      const addonBefore = renderAddon(slots.addonBefore, props.addonBefore)
-      const addonAfter = renderAddon(slots.addonAfter, props.addonAfter)
-      const prefix = renderPrefix(slots.prefix, props.prefix)
-      const suffix = renderSuffix(props, slots, isClearable.value, clearIcon.value, clearHidden.value, handlerClear)
       const { class: className, style, ...rest } = attrs
+      const prefixCls = mergedPrefixCls.value
       return (
-        <span class={normalizeClass([classes.value, className])} style={style as StyleValue}>
-          {addonBefore}
-          <span class="ix-input-wrapper">
-            {prefix}
+        <span class={classes.value} style={style as StyleValue}>
+          {renderAddon(slots.addonBefore, props.addonBefore, prefixCls)}
+          <span class={`${prefixCls}-wrapper`}>
+            {renderPrefix(slots.prefix, props.prefix, prefixCls)}
             <input
               {...rest}
               ref={elementRef}
-              class="ix-input-inner"
+              class={`${prefixCls}-inner`}
               disabled={isDisabled.value}
               readonly={props.readonly}
               onInput={handlerInput}
@@ -70,50 +82,29 @@ export default defineComponent({
               onFocus={handlerFocus}
               onBlur={handlerBlur}
             />
-            {suffix}
+            {renderSuffix(props, slots, isClearable.value, clearIcon.value, clearHidden.value, handlerClear, prefixCls)}
           </span>
-          {addonAfter}
+          {renderAddon(slots.addonAfter, props.addonAfter, prefixCls)}
         </span>
       )
     }
   },
 })
 
-function useClasses(
-  props: InputProps,
-  slots: Slots,
-  config: InputConfig,
-  isFocused: Ref<boolean>,
-  disabled: ComputedRef<boolean>,
-) {
-  return computed(() => {
-    const sizeClass = `ix-input-${props.size ?? config.size}`
-    return {
-      'ix-input': true,
-      [sizeClass]: true,
-      'ix-input-disabled': disabled.value,
-      'ix-input-borderless': props.borderless ?? config.borderless,
-      'ix-input-focused': isFocused.value,
-      'ix-input-with-addon-after': props.addonAfter || slots.addonAfter,
-      'ix-input-with-addon-before': props.addonBefore || slots.addonBefore,
-    }
-  })
-}
-
-function renderAddon(addonSlot: Slot | undefined, addon: string | undefined) {
+function renderAddon(addonSlot: Slot | undefined, addon: string | undefined, prefixCls: string) {
   if (!(addonSlot || addon)) {
     return null
   }
   const child = addonSlot ? addonSlot() : addon
-  return <span class="ix-input-addon">{child}</span>
+  return <span class={`${prefixCls}-addon`}>{child}</span>
 }
 
-function renderPrefix(prefixSlot: Slot | undefined, icon: string | undefined) {
+function renderPrefix(prefixSlot: Slot | undefined, icon: string | undefined, prefixCls: string) {
   if (!(prefixSlot || icon)) {
     return null
   }
   const child = prefixSlot ? prefixSlot() : <IxIcon name={icon}></IxIcon>
-  return <span class="ix-input-prefix">{child}</span>
+  return <span class={`${prefixCls}-prefix`}>{child}</span>
 }
 
 function renderSuffix(
@@ -122,24 +113,29 @@ function renderSuffix(
   isClearable: boolean,
   clearIcon: string,
   clearHidden: boolean,
-  handlerClear: (evt: MouseEvent) => void,
+  onClear: (evt: MouseEvent) => void,
+  prefixCls: string,
 ) {
   if (!(isClearable || slots.suffix || props.suffix)) {
     return null
   }
 
+  let classes = `${prefixCls}-suffix`
+
   if (isClearable && !(slots.suffix || props.suffix)) {
-    const classes = { 'ix-input-suffix': true, 'ix-input-suffix-hidden': clearHidden }
-    const child = slots.clearIcon?.({ handlerClear }) ?? <IxIcon name={clearIcon} onClick={handlerClear}></IxIcon>
+    if (clearHidden) {
+      classes += ` ${prefixCls}-suffix-hidden`
+    }
+    const child = slots.clearIcon?.({ onClear }) ?? <IxIcon name={clearIcon} onClick={onClear}></IxIcon>
     return <span class={classes}>{child}</span>
   }
 
   let child: VNodeTypes
   if (isClearable && !clearHidden) {
-    child = slots.clearIcon?.({ handlerClear }) ?? <IxIcon name={clearIcon} onClick={handlerClear}></IxIcon>
+    child = slots.clearIcon?.({ onClear }) ?? <IxIcon name={clearIcon} onClick={onClear}></IxIcon>
   } else {
     child = slots.suffix?.() ?? <IxIcon name={props.suffix}></IxIcon>
   }
 
-  return <span class="ix-input-suffix">{child}</span>
+  return <span class={classes}>{child}</span>
 }

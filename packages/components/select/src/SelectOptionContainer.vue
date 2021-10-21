@@ -1,11 +1,11 @@
 <template>
-  <div class="ix-option-container">
+  <div class="ix-select-option-container">
     <template v-for="option in options" :key="option.value">
       <SelectOptionGroup v-if="option.children" :label="option.label" :options="option.children" />
       <SelectOption v-else :disabled="option.disabled" :label="option.label" :value="option.value" />
     </template>
     <slot v-if="!options.length" />
-    <div v-show="isEmpty" class="ix-option-container-empty">
+    <div v-show="isEmpty">
       <slot name="empty">
         <IxEmpty :description="empty" />
       </slot>

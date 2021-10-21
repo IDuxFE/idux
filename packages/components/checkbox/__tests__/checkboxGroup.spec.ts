@@ -120,22 +120,20 @@ describe('CheckboxGroup', () => {
 
   test('size work', async () => {
     const wrapper = CheckboxGroupMount({
-      props: {
-        buttoned: true,
-        size: 'small',
-      },
+      props: { buttoned: true, size: 'sm' },
     })
 
-    expect(wrapper.findAll('.ix-checkbox-button-small').length).toBe(3)
+    expect(wrapper.findAll('.ix-checkbox-sm').length).toBe(3)
   })
 
   test('gap work', async () => {
     const wrapper = CheckboxGroupMount()
 
-    expect(wrapper.classes()).toContain('ix-checkbox-group-no-gap')
+    expect(wrapper.classes()).not.toContain('ix-checkbox-group-with-gap')
 
-    await wrapper.setProps({ gap: 20 })
+    await wrapper.setProps({ gap: 8 })
 
-    expect(wrapper.findAll('.ix-checkbox')[0].attributes()['style']).toEqual('margin-right: 20px;')
+    expect(wrapper.classes()).toContain('ix-checkbox-group-with-gap')
+    expect((wrapper.element as HTMLElement).style.gap).toEqual('8px')
   })
 })

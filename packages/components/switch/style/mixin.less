@@ -1,0 +1,39 @@
+.switch-size(@height, @icon-size, @box-size, @box-padding, @icon-padding, @label-padding) {
+  height: @height;
+  min-width: @height * 2;
+
+  &::after {
+    width: @box-size;
+    height: @box-size;
+  }
+
+  .@{switch-prefix} {
+    &-loading-icon {
+      font-size: @icon-size;
+      right: calc(100% - @box-size + @icon-padding);
+    }
+
+    &-label {
+      padding-left: @box-size + @label-padding;
+      padding-right: @label-padding;
+    }
+  }
+
+  &.@{switch-prefix}-checked {
+    &::after {
+      width: @box-size;
+      height: @box-size;
+      left: calc(100% - @box-size - @box-padding);
+    }
+
+    .@{switch-prefix} {
+      &-loading-icon {
+        left: calc(100% - @box-size + @icon-padding);
+      }
+
+      &-label {
+        padding-left: @label-padding;
+      }
+    }
+  }
+}

@@ -1,17 +1,12 @@
 <template>
-  <IxRadio :disabled="disabled">a</IxRadio>
-  <IxRadio checked :disabled="disabled">b</IxRadio>
+  <IxRadio :disabled="disabled">A</IxRadio>
+  <IxRadio checked :disabled="disabled">B</IxRadio>
   <IxButton @click="toggle">Toggle</IxButton>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  setup() {
-    const disabled = ref(true)
-    const toggle = () => (disabled.value = !disabled.value)
+<script setup lang="ts">
+import { ref } from 'vue'
 
-    return { toggle, disabled }
-  },
-})
+const disabled = ref(true)
+const toggle = () => (disabled.value = !disabled.value)
 </script>

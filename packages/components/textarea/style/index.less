@@ -1,11 +1,88 @@
-@import '../../style/themes/default.less';
 @import '../../style/mixins/placeholder.less';
+@import './themes/default.less';
 @import './mixin.less';
 
-@textarea-prefix: ~'@{idux-prefix}-textarea';
-
 .@{textarea-prefix} {
-  .textarea();
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: @textarea-line-height;
+
+  &-inner {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    outline: 0;
+    background-color: @textarea-background-color;
+    border: @textarea-border-width @textarea-border-style @textarea-border-color;
+    border-radius: @textarea-border-radius;
+    transition: all @textarea-transition-duration @textarea-transition-function, height 0s, width 0s;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+    .placeholder(@textarea-placeholder-color);
+
+    &:hover {
+      border-color: @textarea-hover-color;
+    }
+  }
+
+  &-sm {
+    .textarea-size(@textarea-font-size-sm, @textarea-padding-vertical-sm, @textarea-padding-horizontal-sm);
+  }
+
+  &-md {
+    .textarea-size(@textarea-font-size-md, @textarea-padding-vertical-md, @textarea-padding-horizontal-md);
+  }
+
+  &-lg {
+    .textarea-size(@textarea-font-size-lg, @textarea-padding-vertical-lg, @textarea-padding-horizontal-lg);
+  }
+
+  &-focused {
+    .@{textarea-prefix}-inner {
+      border-color: @textarea-active-color;
+      box-shadow: @textarea-active-box-shadow;
+    }
+  }
+
+  &-disabled {
+    .@{textarea-prefix}-inner {
+      color: @textarea-disabled-color;
+      background-color: @textarea-disabled-background-color;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    &:hover {
+      .@{textarea-prefix}-inner {
+        border-color: @textarea-border-color;
+      }
+    }
+  }
+
+  &-suffix {
+    position: absolute;
+    color: @textarea-placeholder-color;
+    transition: color @textarea-transition-duration;
+
+    &:hover {
+      color: @textarea-color-secondary;
+    }
+
+    &-hidden {
+      visibility: hidden;
+    }
+  }
+
+  &-with-count::after {
+    display: block;
+    text-align: right;
+    color: @textarea-placeholder-color;
+    content: attr(data-count);
+  }
 }
 
 textarea.@{textarea-prefix}-autosize-measuring {

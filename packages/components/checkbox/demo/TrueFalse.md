@@ -1,14 +1,14 @@
 ---
-order: 1
+order: 4
 title:
-  zh: 选中值 & 不选中值
-  en: trueValue & falseValue
+  zh: 自定义值
+  en: Custom value
 ---
 
 ## zh
 
-控制`IxCheckbox`是否选中的返回值。
+通过 `trueValue`, `falseValue` 设置是否选中的值。
 
 ## en
 
-The return value that controls whether the `IxCheckbox` is selected.
+Sets the checked value via `trueValue`, `falseValue`.  

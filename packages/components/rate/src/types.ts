@@ -12,15 +12,25 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export const rateProps = {
   value: IxPropTypes.oneOfType([Number, String]).def(0),
-  count: IxPropTypes.oneOfType([Number, String]),
-  icon: IxPropTypes.string,
   allowHalf: IxPropTypes.bool,
+  clearable: IxPropTypes.bool,
+  count: IxPropTypes.oneOfType([Number, String]),
   disabled: IxPropTypes.bool,
+  icon: IxPropTypes.string,
   tooltips: IxPropTypes.arrayOf(String),
-  allowClear: IxPropTypes.bool,
+
+  // events
+  'onUpdate:value': IxPropTypes.emit<(value: number) => void>(),
+  onChange: IxPropTypes.emit<(value: number) => void>(),
+  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
 export type RateProps = IxInnerPropTypes<typeof rateProps>
 export type RatePublicProps = IxPublicPropTypes<typeof rateProps>
-export type RateComponent = DefineComponent<Omit<HTMLAttributes, keyof RatePublicProps> & RatePublicProps>
-export type RateInstance = InstanceType<DefineComponent<RateProps>>
+export interface RateBindings {
+  blur: () => void
+  focus: (options?: FocusOptions) => void
+}
+export type RateComponent = DefineComponent<Omit<HTMLAttributes, keyof RatePublicProps> & RatePublicProps, RateBindings>
+export type RateInstance = InstanceType<DefineComponent<RateProps, RateBindings>>

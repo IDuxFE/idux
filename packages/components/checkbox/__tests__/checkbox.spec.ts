@@ -78,16 +78,14 @@ describe('Checkbox', () => {
 
   test('size work', async () => {
     const wrapper = CheckboxMount({
-      props: {
-        size: 'small',
-      },
+      props: { size: 'sm' },
     })
 
-    expect(wrapper.classes()).not.toContain('ix-checkbox-button-small')
+    expect(wrapper.classes()).not.toContain('ix-checkbox-sm')
 
     await wrapper.setProps({ buttoned: true })
 
-    expect(wrapper.classes()).toContain('ix-checkbox-button-small')
+    expect(wrapper.classes()).toContain('ix-checkbox-sm')
   })
 
   test('disabled work', async () => {
@@ -156,7 +154,6 @@ describe('Checkbox', () => {
 
     const checkboxWrapper = wrapper.find('.ix-checkbox')
     const originalInput = wrapper.find('input')
-    const input = wrapper.find('.ix-checkbox-inner')
 
     expect(checkboxWrapper.classes()).toContain('test-checkox')
     expect(checkboxWrapper.attributes()['style']).toEqual('color: red;')
@@ -169,7 +166,7 @@ describe('Checkbox', () => {
     expect(originalInput.classes()).not.toContain('test-checkox')
     expect(originalInput.attributes()['style']).not.toEqual('color: red')
 
-    expect(input.attributes()['tabindex']).toEqual('1')
+    expect(wrapper.find('.ix-checkbox-input-box').attributes()['tabindex']).toEqual('1')
   })
 
   test('focus & blur method work', async () => {

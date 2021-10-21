@@ -10,7 +10,7 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import { controlToken, useValueControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 
-import { formToken } from './token'
+import { FORM_TOKEN, formToken } from './token'
 import { formProps } from './types'
 
 export default defineComponent({
@@ -20,6 +20,8 @@ export default defineComponent({
     const control = useValueControl()
     provide(controlToken, control)
 
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-form`)
     const config = useGlobalConfig('form')
     const colonless = computed(() => props.colonless ?? config.colonless)
     const labelAlign = computed(() => props.labelAlign ?? config.labelAlign)
@@ -28,17 +30,20 @@ export default defineComponent({
 
     provide(formToken, {
       colonless,
-      labelAlign,
       controlCol: toRef(props, 'controlCol'),
       hasFeedback: toRef(props, 'hasFeedback'),
+      labelAlign,
       labelCol: toRef(props, 'labelCol'),
     })
 
+    provide(FORM_TOKEN, { size })
+
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-form': true,
-        [`ix-form-${layout.value}`]: true,
-        [`ix-form-${size.value}`]: true,
+        [prefixCls]: true,
+        [`${prefixCls}-${layout.value}`]: true,
+        [`${prefixCls}-${size.value}`]: true,
       }
     })
 

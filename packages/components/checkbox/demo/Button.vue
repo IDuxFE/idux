@@ -1,16 +1,22 @@
 <template>
-  <IxCheckbox v-model:checked="checked" buttoned label="选项" />
+  <IxSpace direction="vertical">
+    <IxCheckboxGroup v-model:value="value" buttoned>
+      <IxCheckbox value="beijing">Beijing</IxCheckbox>
+      <IxCheckbox value="shanghai">Shanghai</IxCheckbox>
+      <IxCheckbox value="guangzhou">Guangzhou</IxCheckbox>
+      <IxCheckbox value="shenzhen">Shenzhen</IxCheckbox>
+    </IxCheckboxGroup>
+    <IxCheckboxGroup v-model:value="value" buttoned disabled>
+      <IxCheckbox value="beijing">Beijing</IxCheckbox>
+      <IxCheckbox value="shanghai">Shanghai</IxCheckbox>
+      <IxCheckbox value="guangzhou">Guangzhou</IxCheckbox>
+      <IxCheckbox value="shenzhen">Shenzhen</IxCheckbox>
+    </IxCheckboxGroup>
+  </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checked = ref(true)
-    return {
-      checked,
-    }
-  },
-})
+const value = ref(['beijing'])
 </script>

@@ -43,8 +43,8 @@ export default defineComponent({
   name: 'IxTree',
   props: treeProps,
   setup(props, { attrs, expose, slots }) {
-    const commonConfig = useGlobalConfig('common')
-    const prefixCls = computed(() => `${commonConfig.prefixCls}-tree`)
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
     const getNodeKey = useGetNodeKey(props, config)
     const { mergedNodes, mergedNodeMap } = useMergeNodes(props, getNodeKey)
@@ -59,7 +59,7 @@ export default defineComponent({
       props,
       slots,
       config,
-      prefixCls,
+      mergedPrefixCls,
       getNodeKey,
       searchedKeys,
       ...checkableContext,
@@ -82,14 +82,14 @@ export default defineComponent({
     )
 
     const classes = computed(() => {
-      const _prefixCls = prefixCls.value
+      const prefixCls = mergedPrefixCls.value
       const { blocked = config.blocked, showLine = config.showLine } = props
       return {
-        [_prefixCls]: true,
-        [`${_prefixCls}-active`]: activeKey.value !== undefined,
-        [`${_prefixCls}-blocked`]: blocked,
-        [`${_prefixCls}-focused`]: focused.value,
-        [`${_prefixCls}-show-line`]: showLine,
+        [prefixCls]: true,
+        [`${prefixCls}-active`]: activeKey.value !== undefined,
+        [`${prefixCls}-blocked`]: blocked,
+        [`${prefixCls}-focused`]: focused.value,
+        [`${prefixCls}-show-line`]: showLine,
       }
     })
 

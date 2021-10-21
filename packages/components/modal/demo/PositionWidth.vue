@@ -8,26 +8,20 @@
   </IxModal>
 </template>
 
-<script lang="ts">
-import { defineComponent, h, ref } from 'vue'
+<script setup lang="ts">
+import { h, ref } from 'vue'
 
 import { useModal } from '@idux/components/modal'
 
-export default defineComponent({
-  setup() {
-    const visible = ref(false)
+const visible = ref(false)
 
-    const { open } = useModal()
-    const openModal = () => {
-      open({
-        header: 'This is title',
-        content: h('p', 'Some contents...'),
-        centered: true,
-        width: 400,
-      })
-    }
-
-    return { visible, openModal }
-  },
-})
+const { open } = useModal()
+const openModal = () => {
+  open({
+    header: 'This is title',
+    content: h('p', 'Some contents...'),
+    centered: true,
+    width: 400,
+  })
+}
 </script>

@@ -15,6 +15,7 @@ import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useFormItemRegister } from '@idux/components/form'
+import { useFormElement } from '@idux/components/utils'
 
 export interface CommonBindings<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
@@ -41,9 +42,10 @@ export function useCommonBindings(
   props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
-  const elementRef = ref<HTMLInputElement | HTMLTextAreaElement>()
   const { accessor, control } = useValueAccessor()
   useFormItemRegister(control)
+
+  const { elementRef, focus, blur } = useFormElement<HTMLInputElement | HTMLTextAreaElement>()
 
   onMounted(() => {
     watchEffect(() => {
@@ -59,9 +61,6 @@ export function useCommonBindings(
   const isClearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
   const clearHidden = computed(() => isDisabled.value || props.readonly || !accessor.valueRef.value)
-
-  const focus = (options?: FocusOptions) => elementRef.value?.focus(options)
-  const blur = () => elementRef.value?.blur()
 
   const isComposing = ref(false)
   const handlerInput = (evt: Event) => {

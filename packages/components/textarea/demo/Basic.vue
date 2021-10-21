@@ -1,17 +1,11 @@
 <template>
-  <IxTextarea v-model:value="valueRef" placeholder="Basic usage" />
-  <br /><br />
-  <IxTextarea v-model:value="valueRef" placeholder="Textarea usage" rows="4" />
+  <IxSpace direction="vertical">
+    <IxTextarea v-model:value="valueRef" placeholder="Basic usage" />
+    <IxTextarea v-model:value="valueRef" placeholder="Textarea usage" rows="4" />
+  </IxSpace>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const valueRef = ref('')
-    watch(valueRef, value => console.log(value))
-    return { valueRef }
-  },
-})
+const valueRef = ref('')
 </script>
-<style lang="less" scoped></style>

@@ -13,12 +13,6 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type FormLabelAlign = 'start' | 'end'
-export type FormLayout = 'horizontal' | 'vertical' | `inline`
-export type FormSize = 'small' | 'medium' | 'large'
-export type FormMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
-export type ColType = string | number | ColProps
-
 const colProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<ColProps>()])
 
 export const formProps = {
@@ -29,13 +23,19 @@ export const formProps = {
   labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
   labelCol: colProp,
   layout: IxPropTypes.oneOf<FormLayout>(['horizontal', 'vertical', 'inline']),
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<FormSize>(['lg', 'md', 'sm']),
 }
 
 export type FormProps = IxInnerPropTypes<typeof formProps>
 export type FormPublicProps = IxPublicPropTypes<typeof formProps>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
+
+export type FormColType = string | number | ColProps
+export type FormLabelAlign = 'start' | 'end'
+export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
+export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
   colonless: IxPropTypes.bool,
@@ -68,5 +68,7 @@ export const formWrapperProps = {
 
 export type FormWrapperProps = IxInnerPropTypes<typeof formWrapperProps>
 export type FormWrapperPublicProps = IxPublicPropTypes<typeof formWrapperProps>
-export type FormWrapperComponent = DefineComponent<FormWrapperPublicProps>
+export type FormWrapperComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof FormWrapperPublicProps> & FormWrapperPublicProps
+>
 export type FormWrapperInstance = InstanceType<DefineComponent<FormItemProps>>

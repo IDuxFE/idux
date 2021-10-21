@@ -19,7 +19,7 @@ import { treeNodeContentProps } from '../types'
 export default defineComponent({
   props: treeNodeContentProps,
   setup(props) {
-    const { props: treeProps, prefixCls, slots, handleSelect, searchedKeys } = inject(treeToken)!
+    const { props: treeProps, mergedPrefixCls, slots, handleSelect, searchedKeys } = inject(treeToken)!
 
     const searched = computed(() => searchedKeys.value.includes(props.nodeKey))
 
@@ -42,14 +42,14 @@ export default defineComponent({
       const prefixIcon = slots.prefix?.(iconProps) || (prefix && <IxIcon name={prefix} />)
       const suffixIcon = slots.suffix?.(iconProps) || (suffix && <IxIcon name={suffix} />)
 
-      const _prefixCls = `${prefixCls.value}-node-content`
+      const prefixCls = `${mergedPrefixCls.value}-node-content`
       return (
-        <span class={_prefixCls} onClick={onClick} onContextmenu={onContextmenu}>
-          {prefixIcon && <span class={`${_prefixCls}-prefix`}>{prefixIcon}</span>}
-          <span class={`${_prefixCls}-label`}>
-            {renderLabel(slots.label, label, rawNode, treeProps.searchValue, searched.value, _prefixCls)}
+        <span class={prefixCls} onClick={onClick} onContextmenu={onContextmenu}>
+          {prefixIcon && <span class={`${prefixCls}-prefix`}>{prefixIcon}</span>}
+          <span class={`${prefixCls}-label`}>
+            {renderLabel(slots.label, label, rawNode, treeProps.searchValue, searched.value, prefixCls)}
           </span>
-          {suffixIcon && <span class={`${_prefixCls}-suffix`}>{suffixIcon}</span>}
+          {suffixIcon && <span class={`${prefixCls}-suffix`}>{suffixIcon}</span>}
         </span>
       )
     }
@@ -62,7 +62,7 @@ function renderLabel(
   node: TreeNode,
   searchValue: string | undefined,
   searched: boolean,
-  _prefixCls: string,
+  prefixCls: string,
 ) {
   if (labelSlot) {
     return labelSlot({ node, searchValue, searched })
@@ -72,7 +72,7 @@ function renderLabel(
     if (index > -1) {
       const beforeLabel = label.substr(0, index)
       const afterLabel = label.substr(index + searchValue.length)
-      const highlightLabel = <span class={`${_prefixCls}-label-highlight`}>{searchValue}</span>
+      const highlightLabel = <span class={`${prefixCls}-label-highlight`}>{searchValue}</span>
       return [beforeLabel, highlightLabel, afterLabel]
     }
   }

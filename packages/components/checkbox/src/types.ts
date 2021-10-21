@@ -5,28 +5,30 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
+import { FormSize } from '@idux/components/form'
 
 export type CheckValue = string | number | boolean
-export type CheckboxOptions = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
-export type CheckboxSize = 'medium' | 'small'
+export type CheckboxOption = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
 
 export const checkboxProps = {
+  checked: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
   control: controlPropDef,
   autofocus: IxPropTypes.bool.def(false),
-  checked: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
   buttoned: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
   indeterminate: IxPropTypes.bool.def(false),
   label: IxPropTypes.string,
   trueValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(true),
   falseValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
-  value: IxPropTypes.string,
-  size: IxPropTypes.oneOf<CheckboxSize>(['medium', 'small']),
+  value: IxPropTypes.any,
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: CheckValue) => void>(),
@@ -48,18 +50,18 @@ export type CheckboxComponent = DefineComponent<
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
+  value: IxPropTypes.array().def(() => []),
   control: controlPropDef,
-  buttoned: IxPropTypes.bool.def(false).def(false),
-  value: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
+  buttoned: IxPropTypes.bool.def(false),
   disabled: IxPropTypes.bool.def(false),
+  gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
-  options: IxPropTypes.array<CheckboxOptions>(),
-  size: IxPropTypes.oneOf<CheckboxSize>(['medium', 'small']).def('medium'),
-  gap: IxPropTypes.number.def(0),
+  options: IxPropTypes.array<CheckboxOption>(),
+  size: IxPropTypes.oneOf(['sm', 'md', 'lg']).def('md'),
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: Array<string | number>) => void>(),
-  onChange: IxPropTypes.emit<(value: Array<string | number>) => void>(),
+  'onUpdate:value': IxPropTypes.emit<(value: any[]) => void>(),
+  onChange: IxPropTypes.emit<(value: any[]) => void>(),
 }
 
 export type CheckboxGroupProps = IxInnerPropTypes<typeof checkboxGroupProps>

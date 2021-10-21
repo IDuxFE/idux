@@ -1,0 +1,21 @@
+.select-option(@font-size; @text-color) {
+  display: block;
+  position: relative;
+  height: @select-option-height;
+  padding: @select-option-padding;
+  font-size: @font-size;
+  color: @text-color;
+  transition: @select-option-transition;
+  cursor: pointer;
+}
+
+.select-icon() {
+  position: absolute;
+  top: 50%;
+  margin-top: -(@select-icon-font-size / 2);
+  right: @select-icon-margin-right;
+  line-height: 1;
+  font-size: @select-icon-font-size;
+  color: @select-icon-color;
+  transition: color @select-transition-duration @select-transition-function;
+}

@@ -1,8 +1,8 @@
 <template>
-  <IxSpace>
-    <IxTimePicker v-model:value="time" size="large" />
-    <IxTimePicker v-model:value="time" size="medium" />
-    <IxTimePicker v-model:value="time" size="small" />
+  <IxSpace direction="vertical">
+    <IxTimePicker v-model:value="time" size="sm" />
+    <IxTimePicker v-model:value="time" />
+    <IxTimePicker v-model:value="time" size="lg" />
   </IxSpace>
 </template>
 <script setup lang="ts">

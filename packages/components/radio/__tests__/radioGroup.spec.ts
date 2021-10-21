@@ -65,6 +65,17 @@ describe('RadioGroup', () => {
     expect(wrapper.findAll('.ix-radio-disabled').length).toBe(0)
   })
 
+  test('gap work', async () => {
+    const wrapper = RadioGroupMount()
+
+    expect(wrapper.classes()).not.toContain('ix-radio-group-with-gap')
+
+    await wrapper.setProps({ gap: 8 })
+
+    expect(wrapper.classes()).toContain('ix-radio-group-with-gap')
+    expect((wrapper.element as HTMLElement).style.gap).toEqual('8px')
+  })
+
   test('name work', async () => {
     const wrapper = RadioGroupMount({ props: { name: 'city' } })
 
@@ -106,13 +117,17 @@ describe('RadioGroup', () => {
   })
 
   test('size work', async () => {
-    const wrapper = RadioGroupMount({ props: { size: 'large', buttoned: true } })
+    const wrapper = RadioGroupMount({ props: { size: 'lg', buttoned: true } })
 
-    expect(wrapper.findAll('.ix-radio-large').length).toBe(4)
+    expect(wrapper.findAll('.ix-radio-lg').length).toBe(4)
 
-    await wrapper.setProps({ size: 'medium' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.findAll('.ix-radio-medium').length).toBe(4)
+    expect(wrapper.findAll('.ix-radio-sm').length).toBe(4)
+
+    await wrapper.setProps({ size: undefined })
+
+    expect(wrapper.findAll('.ix-radio-md').length).toBe(4)
   })
 
   test('default slot work', async () => {

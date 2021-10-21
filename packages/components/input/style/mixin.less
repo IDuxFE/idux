@@ -1,50 +1,16 @@
-.input-size() {
-  &-large {
-    font-size: @input-font-size-lg;
-    .@{input-prefix}-addon,
-    .@{input-prefix}-wrapper {
-      padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
-    }
-
-    .@{input-prefix}-addon {
-      height: @input-height-lg;
-    }
-
-    .@{input-prefix}-addon .@{idux-prefix}-select {
-      margin: -@input-padding-vertical-lg -@input-padding-horizontal-lg;
-    }
+.input-size(@font-size; @padding-vertical; @padding-horizontal; @height) {
+  font-size: @font-size;
+  .@{input-prefix}-addon,
+  .@{input-prefix}-wrapper {
+    padding: @padding-vertical @padding-horizontal;
   }
 
-  &-medium {
-    font-size: @input-font-size-md;
-    .@{input-prefix}-addon,
-    .@{input-prefix}-wrapper {
-      padding: @input-padding-vertical-md @input-padding-horizontal-md;
-    }
-
-    .@{input-prefix}-addon {
-      height: @input-height-md;
-    }
-
-    .@{input-prefix}-addon .@{idux-prefix}-select {
-      margin: -@input-padding-vertical-md -@input-padding-horizontal-md;
-    }
+  .@{input-prefix}-addon {
+    height: @height;
   }
 
-  &-small {
-    font-size: @input-font-size-sm;
-    .@{input-prefix}-addon,
-    .@{input-prefix}-wrapper {
-      padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
-    }
-
-    .@{input-prefix}-addon {
-      height: @input-height-sm;
-    }
-
-    .@{input-prefix}-addon .@{idux-prefix}-select {
-      margin: -@input-padding-vertical-sm -@input-padding-horizontal-sm;
-    }
+  .@{input-prefix}-addon .@{idux-prefix}-select {
+    margin: -@padding-vertical -@padding-horizontal;
   }
 }
 
@@ -59,153 +25,4 @@
   }
 
   .placeholder(@input-placeholder-color);
-}
-
-.input() {
-  display: inline-flex;
-  width: 100%;
-  line-height: @input-line-height;
-  background-color: @input-bg-color;
-
-  .input-size();
-
-  &-focused {
-    .@{input-prefix}-wrapper {
-      & when (@theme = default) {
-        border-color: @input-active-border-color;
-      }
-      box-shadow: @input-active-box-shadow;
-    }
-  }
-
-  &-disabled {
-    color: @input-disabled-color;
-    background-color: @input-disabled-bg-color;
-    cursor: not-allowed;
-    opacity: 1;
-
-    .@{input-prefix}-wrapper {
-      &:hover {
-        border-color: @input-border-color;
-      }
-
-      .@{input-prefix}-suffix,
-      .@{input-prefix}-prefix {
-        cursor: not-allowed;
-        &:hover {
-          color: @input-disabled-color;
-        }
-      }
-    }
-  }
-
-  &-borderless {
-    &,
-    &:hover,
-    &-focused,
-    &-disabled {
-      .@{input-prefix}-wrapper {
-        .borderless();
-      }
-    }
-  }
-
-  &-wrapper {
-    display: inline-flex;
-    width: 100%;
-    border: @input-border-width @input-border-style @input-border-color;
-    border-radius: @input-border-radius;
-    transition: all @input-transition-duration;
-
-    &:hover {
-      border-color: @input-hover-border-color;
-    }
-
-    .@{input-prefix}-inner {
-      .input-inner();
-    }
-
-    .@{input-prefix}-suffix,
-    .@{input-prefix}-prefix {
-      display: inline-flex;
-      text-align: center;
-      align-items: center;
-      color: @input-placeholder-color;
-      transition: color @input-transition-duration;
-      cursor: pointer;
-
-      &:hover {
-        color: @input-color-secondary;
-      }
-    }
-
-    .@{input-prefix}-prefix {
-      margin-right: @input-wrapper-inner-margin;
-    }
-
-    .@{input-prefix}-suffix {
-      margin-left: @input-wrapper-inner-margin;
-
-      &-hidden {
-        visibility: hidden;
-      }
-    }
-  }
-
-  &-addon {
-    display: inline-block;
-    text-align: center;
-    background-color: @input-addon-bg-color;
-    border: @input-border-width @input-border-style @input-border-color;
-    border-radius: @input-border-radius;
-    white-space: nowrap;
-    
-    &:first-child {
-      border-right: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-
-      .@{idux-prefix}-select {
-        &-selector {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-      }
-    }
-
-    &:last-child {
-      border-left: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-
-      .@{idux-prefix}-select {
-        &-selector {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-        }
-      }
-    }
-
-    .@{idux-prefix}-select {
-      &-selector {
-        background-color: inherit;
-        border: @input-border-width @input-border-style transparent;
-        box-shadow: none;
-      }
-    }
-  }
-
-  &-with-addon-after {
-    .@{input-prefix}-wrapper {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-
-  &-with-addon-before {
-    .@{input-prefix}-wrapper {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
 }

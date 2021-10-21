@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 1
 title:
   zh: 禁用状态
   en: Disabled
@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-用来控制`IxCheckbox`的禁用状态，与`checked`独立。
+通过设置 `disabled` 来禁用多选框。
 
 ## en
 
-It is used to control the `disabled` state of the `IxCheckbox` and is independent of `checked`.
+Disable the checkbox by setting `disabled`.

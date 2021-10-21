@@ -26,59 +26,31 @@ describe('Switch', () => {
     expect(onUpdateChecked).toBeCalledWith(true)
   })
 
-  test('checkedChildren and unCheckedChildren props work', async () => {
+  test('labels work', async () => {
     const wrapper = SwitchMount({
-      props: {
-        checked: true,
-        checkedChildren: 'open',
-        unCheckedChildren: 'close',
-      },
+      props: { checked: true, labels: ['open', 'close'] },
     })
-    const innerWrapper = wrapper.find('.ix-switch-inner')
-    expect(innerWrapper.text()).toEqual('open')
+
+    expect(wrapper.find('.ix-switch-label').text()).toEqual('open')
 
     await wrapper.setProps({ checked: false })
 
-    expect(innerWrapper.text()).toEqual('close')
+    expect(wrapper.find('.ix-switch-label').text()).toEqual('close')
   })
 
-  test('children slots work', async () => {
+  test('label slot work', async () => {
     const wrapper = SwitchMount({
-      props: {
-        checked: true,
-      },
+      props: { checked: true, labels: ['open', 'close'] },
       slots: {
-        checkedChildren: `<span>checked</span>`,
-        unCheckedChildren: `<span>unChecked</span>`,
+        label: ({ checked }: { checked: boolean }) => (checked ? 'open slot' : 'close slot'),
       },
     })
-    const innerWrapper = wrapper.find('.ix-switch-inner')
-    const childrenElement = innerWrapper.element
-    expect(childrenElement.innerHTML).toEqual('<span>checked</span>')
 
-    await wrapper.setProps({ checked: false })
-    expect(childrenElement.innerHTML).toEqual('<span>unChecked</span>')
-  })
-
-  test('when children props and slots exist meanwhile, slots work', async () => {
-    const wrapper = SwitchMount({
-      props: {
-        checked: true,
-        checkedChildren: 'open',
-        unCheckedChildren: 'close',
-      },
-      slots: {
-        checkedChildren: 'checkedSlot',
-        unCheckedChildren: 'unCheckedSlot',
-      },
-    })
-    const innerWrapper = wrapper.find('.ix-switch-inner')
-
-    expect(innerWrapper.text()).toEqual('checkedSlot')
+    expect(wrapper.find('.ix-switch-label').text()).toEqual('open slot')
 
     await wrapper.setProps({ checked: false })
 
-    expect(innerWrapper.text()).toEqual('unCheckedSlot')
+    expect(wrapper.find('.ix-switch-label').text()).toEqual('close slot')
   })
 
   test('disabled work', async () => {
@@ -116,8 +88,8 @@ describe('Switch', () => {
 
     expect(wrapper.classes()).toContain('ix-switch-sm')
 
-    await wrapper.setProps({ size: 'md' })
+    await wrapper.setProps({ size: undefined })
 
-    expect(wrapper.classes()).not.toContain('ix-switch-sm')
+    expect(wrapper.classes()).toContain('ix-switch-md')
   })
 })

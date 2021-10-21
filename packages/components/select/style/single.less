@@ -1,3 +1,26 @@
+.select-size(@selector-height;  @select-padding-horizontal; @selector-font-size) {
+  .@{select-prefix}-selector {
+    height: @selector-height;
+    padding: 0 @select-padding-horizontal;
+    font-size: @selector-font-size;
+
+    .@{select-prefix}-item,
+    .@{select-prefix}-placeholder,
+    .@{select-prefix}-input-inner {
+      line-height: @selector-height - 2 * @select-border-width;
+    }
+  }
+
+  .@{select-prefix}-input {
+    right: @select-padding-horizontal;
+    left: @select-padding-horizontal;
+  }
+
+  &.@{select-prefix}-show-suffix .@{select-prefix}-input {
+    right: @select-padding-horizontal + @selector-font-size;
+  }
+}
+
 .@{select-prefix}-single {
   .@{select-prefix}-selector {
     width: 100%;
@@ -20,33 +43,15 @@
     color: @select-placeholder-color;
   }
 
-  .select-size(@size-suffix, @selector-height,  @select-padding-horizontal, @selector-font-size) {
-    @select-size-cls: ~'@{select-prefix}-@{size-suffix}';
-    &.@{select-size-cls} {
-      .@{select-prefix}-selector {
-        height: @selector-height;
-        padding: 0 @select-padding-horizontal;
-        font-size: @selector-font-size;
-
-        .@{select-prefix}-item,
-        .@{select-prefix}-placeholder,
-        .@{select-prefix}-input-inner {
-          line-height: @selector-height - 2 * @select-selector-border-width;
-        }
-      }
-
-      .@{select-prefix}-input {
-        right: @select-padding-horizontal;
-        left: @select-padding-horizontal;
-      }
-    }
-
-    &.@{select-size-cls}.@{select-prefix}-show-suffix .@{select-prefix}-input {
-      right: @select-padding-horizontal + @selector-font-size;
-    }
+  &.@{select-prefix}-sm {
+    .select-size(@select-height-sm, @select-padding-horizontal-sm, @select-font-size-sm);
   }
 
-  .select-size('large', @select-height-lg, @select-padding-horizontal-lg, @select-font-size-lg);
-  .select-size('medium', @select-height-md, @select-padding-horizontal-md, @select-font-size-md);
-  .select-size('small', @select-height-sm, @select-padding-horizontal-sm, @select-font-size-sm);
+  &.@{select-prefix}-md {
+    .select-size(@select-height-md, @select-padding-horizontal-md, @select-font-size-md);
+  }
+
+  &.@{select-prefix}-lg {
+    .select-size(@select-height-lg, @select-padding-horizontal-lg, @select-font-size-lg);
+  }
 }

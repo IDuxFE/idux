@@ -6,44 +6,74 @@
  */
 
 import type { RadioGroupContext } from './token'
-import type { RadioGroupProps, RadioProps } from './types'
-import type { ComputedRef } from 'vue'
+import type { RadioProps } from './types'
+import type { ComputedRef, StyleValue } from 'vue'
 
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
+import { useFormElement } from '@idux/components/utils'
 
 import { radioGroupToken } from './token'
 import { radioProps } from './types'
 
 export default defineComponent({
   name: 'IxRadio',
+  inheritAttrs: false,
   props: radioProps,
   setup(props, { attrs, expose, slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-radio`)
+    const config = useGlobalConfig('radio')
+
+    const { elementRef, focus, blur } = useFormElement()
+    expose({ focus, blur })
+
     const radioGroup = inject(radioGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? radioGroup?.props.name)
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
-    const { isChecked, isDisabled, handleChange, handleBlur, handleFocus } = useRadio(props, radioGroup)
-    const classes = useClasses(props, radioGroup?.props, isButtoned, isChecked, isDisabled)
-    const { inputRef, focus, blur } = useElement()
-
-    expose({ focus, blur })
+    const size = computed(() => props.size ?? radioGroup?.props.size ?? config.size)
+    const mode = computed(() => props.mode ?? radioGroup?.props.mode ?? 'default')
+    const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useRadio(props, radioGroup)
+    const classes = computed(() => {
+      const buttoned = isButtoned.value
+      const prefixCls = mergedPrefixCls.value
+      const classes = {
+        [prefixCls]: true,
+        [`${prefixCls}-button`]: buttoned,
+        [`${prefixCls}-checked`]: isChecked.value,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-${mode.value}`]: buttoned,
+        [`${prefixCls}-${size.value}`]: buttoned,
+      }
+      return normalizeClass([classes, attrs.class])
+    })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const { autofocus, value, label } = props
       const labelNode = slots.default?.() ?? label
-      const labelWrapper = labelNode ? <span class="ix-radio-label">{labelNode}</span> : undefined
+      const labelWrapper = labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>
+      const { class: className, style, type, tabindex, ...restAttrs } = attrs
       return (
-        <label class={classes.value} role="radio" aria-checked={isChecked.value} aria-disabled={isDisabled.value}>
-          <span class="ix-radio-input">
+        <label
+          class={classes.value}
+          style={style as StyleValue}
+          role="radio"
+          aria-checked={isChecked.value}
+          aria-disabled={isDisabled.value}
+        >
+          <span class={`${prefixCls}-input`}>
             <input
-              ref={inputRef}
+              ref={elementRef}
               type="radio"
-              class="ix-radio-input-inner"
+              class={`${prefixCls}-input-inner`}
               aria-hidden
+              {...restAttrs}
               autofocus={autofocus}
               checked={isChecked.value}
               disabled={isDisabled.value}
@@ -52,8 +82,8 @@ export default defineComponent({
               onChange={handleChange}
               onBlur={handleBlur}
               onFocus={handleFocus}
-            ></input>
-            {isButtoned.value ? null : <span class="ix-radio-input-box"></span>}
+            />
+            {isButtoned.value ? null : <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}></span>}
           </span>
           {labelWrapper}
         </label>
@@ -65,16 +95,21 @@ export default defineComponent({
 const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
+  const isFocused = ref(false)
 
   let handleChange: (evt: Event) => void
   let handleBlur: (evt: FocusEvent) => void
-  const handleFocus = (evt: FocusEvent) => callEmit(props.onFocus, evt)
+  const handleFocus = (evt: FocusEvent) => {
+    isFocused.value = true
+    callEmit(props.onFocus, evt)
+  }
 
   if (radioGroup) {
     const { accessor, props: groupProps } = radioGroup
     isChecked = computed(() => accessor.valueRef.value === props.value)
     isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {
+      isFocused.value = false
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
     }
@@ -93,6 +128,7 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
     isChecked = computed(() => accessor.valueRef.value)
     isDisabled = computed(() => accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {
+      isFocused.value = false
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
     }
@@ -103,35 +139,5 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
     }
   }
 
-  return { isChecked, isDisabled, handleChange, handleBlur, handleFocus }
-}
-
-const useClasses = (
-  props: RadioProps,
-  groupProps: RadioGroupProps | undefined,
-  isButtoned: ComputedRef<boolean | undefined>,
-  isChecked: ComputedRef<boolean>,
-  isDisabled: ComputedRef<boolean>,
-) => {
-  const config = useGlobalConfig('radio')
-  return computed(() => {
-    const isButton = isButtoned.value
-    const mode = props.mode ?? groupProps?.mode ?? 'default'
-    const size = props.size ?? groupProps?.size ?? config.size
-    return {
-      'ix-radio': true,
-      'ix-radio-button': isButton,
-      'ix-radio-checked': isChecked.value,
-      'ix-radio-disabled': isDisabled.value,
-      [`ix-radio-${mode}`]: isButton,
-      [`ix-radio-${size}`]: isButton,
-    }
-  })
-}
-
-const useElement = () => {
-  const inputRef = ref<HTMLInputElement>()
-  const focus = (options?: FocusOptions) => inputRef.value?.focus(options)
-  const blur = () => inputRef.value?.blur()
-  return { inputRef, focus, blur }
+  return { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus }
 }
