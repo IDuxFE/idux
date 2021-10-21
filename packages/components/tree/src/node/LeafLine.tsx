@@ -15,10 +15,10 @@ import { treeToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, prefixCls, slots } = inject(treeToken)!
+    const { props, mergedPrefixCls, slots } = inject(treeToken)!
 
     return () => {
-      const _prefixCls = `${prefixCls.value}-node-leaf`
+      const prefixCls = `${mergedPrefixCls.value}-node-leaf`
 
       let children: VNodeTypes | undefined
       if (slots.leafLineIcon) {
@@ -26,10 +26,10 @@ export default defineComponent({
       } else if (props.leafLineIcon) {
         children = <IxIcon name={props.leafLineIcon} />
       } else {
-        children = <span class={`${_prefixCls}-line`}></span>
+        children = <span class={`${prefixCls}-line`}></span>
       }
 
-      return <span class={_prefixCls}>{children}</span>
+      return <span class={prefixCls}>{children}</span>
     }
   },
 })

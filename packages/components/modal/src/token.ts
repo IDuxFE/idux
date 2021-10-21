@@ -13,7 +13,7 @@ export interface ModalContext {
   props: ModalProps
   slots: Slots
   config: ModalConfig
-  prefixCls: ComputedRef<string>
+  mergedPrefixCls: ComputedRef<string>
   visible: Ref<boolean>
   animatedVisible: Ref<boolean>
   cancelLoading: Ref<boolean>

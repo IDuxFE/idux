@@ -1,14 +1,14 @@
 ---
 title:
-  zh: disabled的使用
-  en: disabled usage
+  zh: 禁用
+  en: Disabled
 order: 1
 ---
 
 ## zh
 
-通过设置 `disabled` 将`Switch`设为禁用状态。
+将开关设为禁用状态。
 
 ## en
 
-Set `Switch` to disabled status by setting `disabled`.
+Set the switch to disabled.

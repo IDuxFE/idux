@@ -91,15 +91,15 @@ describe('Textarea', () => {
   })
 
   test('size work', async () => {
-    const wrapper = TextareaMount({ props: { size: 'large' } })
+    const wrapper = TextareaMount({ props: { size: 'lg' } })
 
-    expect(wrapper.classes()).toContain('ix-textarea-large')
+    expect(wrapper.classes()).toContain('ix-textarea-lg')
 
-    await wrapper.setProps({ size: 'small' })
-    expect(wrapper.classes()).toContain('ix-textarea-small')
+    await wrapper.setProps({ size: 'sm' })
+    expect(wrapper.classes()).toContain('ix-textarea-sm')
 
     await wrapper.setProps({ size: undefined })
-    expect(wrapper.classes()).toContain('ix-textarea-medium')
+    expect(wrapper.classes()).toContain('ix-textarea-md')
   })
 
   test('clearable work', async () => {

@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 7
 title:
   zh: 间距
   en: Gap
@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-`IxCheckboxGroup` 的`gap`属性，用来控制子元素的间隔。
+通过设置 `gap`, 来调整多选框组的间隔。
 
 ## en
 
-The `gap` attribute of `IxCheckboxGroup` is used to control the spacing of child elements.
+You can adjust the spacing of the checkbox group by setting `gap`.

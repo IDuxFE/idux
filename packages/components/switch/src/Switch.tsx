@@ -5,111 +5,85 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useFormElement } from '@idux/components/utils'
 
-import { SwitchProps, switchProps } from './types'
+import { switchProps } from './types'
 
 export default defineComponent({
   name: 'IxSwitch',
   props: switchProps,
-  setup(props) {
-    const { switchRef, focus, blur } = useElement()
-    const { isChecked, isDisabled, handleClick, handleBlur, handleMouseup } = useSwitch(props, blur)
-    const isSmallSize = computed(() => props.size === 'sm')
-    const classes = useClasses(props, isChecked, isDisabled, isSmallSize)
+  setup(props, { expose, slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-switch`)
+    const { elementRef, focus, blur } = useFormElement()
 
-    onMounted(() => {
-      props.autofocus && focus()
+    expose({ focus, blur })
+
+    const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
+    useFormItemRegister(control)
+
+    const isChecked = computed(() => accessor.valueRef.value)
+    const isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
+
+    const handleClick = () => {
+      if (isDisabled.value || props.loading) {
+        return
+      }
+      callEmit(props.onChange, !isChecked.value)
+      accessor.setValue(!isChecked.value)
+    }
+
+    const handleFocus = (evt: FocusEvent) => {
+      callEmit(props.onFocus, evt)
+    }
+
+    const handleBlur = (evt: FocusEvent) => {
+      callEmit(props.onBlur, evt)
+      accessor.markAsBlurred()
+    }
+
+    const classes = computed(() => {
+      const { loading, size } = props
+      const prefixCls = mergedPrefixCls.value
+      return {
+        [prefixCls]: true,
+        [`${prefixCls}-checked`]: isChecked.value,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-loading`]: loading,
+        [`${prefixCls}-${size}`]: true,
+      }
     })
 
-    return {
-      isChecked,
-      isDisabled,
-      classes,
-      switchRef,
-      handleClick,
-      handleBlur,
-      handleMouseup,
-      focus,
-      blur,
+    onMounted(() => props.autofocus && focus())
+
+    return () => {
+      const checked = isChecked.value
+      const label = slots.label?.({ checked }) ?? props.labels[checked ? 0 : 1]
+      const prefixCls = mergedPrefixCls.value
+      return (
+        <button
+          ref={elementRef}
+          type="button"
+          class={classes.value}
+          onClick={handleClick}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        >
+          {props.loading && (
+            <span class={`${prefixCls}-loading-icon`}>
+              <IxIcon name="loading" />
+            </span>
+          )}
+          <span class={`${prefixCls}-label`}>{label}</span>
+        </button>
+      )
     }
-  },
-  render() {
-    const { loading, checkedChildren, unCheckedChildren, isChecked, classes, handleClick, handleBlur, handleMouseup } =
-      this
-    const checkedChild = this.$slots.checkedChildren ? this.$slots.checkedChildren() : checkedChildren
-    const unCheckedChild = this.$slots.unCheckedChildren ? this.$slots.unCheckedChildren() : unCheckedChildren
-    return (
-      <button
-        ref="switchRef"
-        type="button"
-        class={classes}
-        onClick={handleClick}
-        onMouseup={handleMouseup}
-        onBlur={handleBlur}
-      >
-        {loading && (
-          <div class="ix-switch-loading-icon">
-            <IxIcon name="loading" />
-          </div>
-        )}
-        <div class="ix-switch-inner">{isChecked ? checkedChild : unCheckedChild}</div>
-      </button>
-    )
   },
 })
-
-const useSwitch = (props: SwitchProps, blur: () => void) => {
-  const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
-  useFormItemRegister(control)
-  const isChecked = computed(() => accessor.valueRef.value)
-  const isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
-
-  const handleClick = () => {
-    if (isDisabled.value || props.loading) {
-      return
-    }
-    callEmit(props.onChange, !isChecked.value)
-    accessor.setValue(!isChecked.value)
-  }
-
-  const handleBlur = (evt: FocusEvent) => {
-    callEmit(props.onBlur, evt)
-    accessor.markAsBlurred()
-  }
-
-  const handleMouseup = () => {
-    blur()
-  }
-
-  return { isChecked, isDisabled, handleClick, handleBlur, handleMouseup }
-}
-
-const useClasses = (
-  props: SwitchProps,
-  isChecked: ComputedRef<boolean>,
-  isDisabled: ComputedRef<boolean>,
-  isSmallSize: ComputedRef<boolean>,
-) => {
-  return computed(() => {
-    return {
-      'ix-switch': true,
-      'ix-switch-loading': props.loading,
-      'ix-switch-checked': isChecked.value,
-      'ix-switch-disabled': isDisabled.value,
-      'ix-switch-sm': isSmallSize.value,
-    }
-  })
-}
-
-const useElement = () => {
-  const switchRef = ref<HTMLButtonElement>()
-  const focus = (options?: FocusOptions) => switchRef.value?.focus(options)
-  const blur = () => switchRef.value?.blur()
-  return { switchRef, focus, blur }
-}

@@ -17,7 +17,7 @@ import { MODAL_TOKEN, modalToken } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, slots, prefixCls, cancelLoading, okLoading } = inject(modalToken)!
+    const { props, slots, mergedPrefixCls, cancelLoading, okLoading } = inject(modalToken)!
     const { cancel, ok } = inject(MODAL_TOKEN)!
     const locale = getLocale('modal')
 
@@ -75,7 +75,7 @@ export default defineComponent({
         })
       }
 
-      return <div class={`${prefixCls.value}-footer`}>{children}</div>
+      return <div class={`${mergedPrefixCls.value}-footer`}>{children}</div>
     }
   },
 })

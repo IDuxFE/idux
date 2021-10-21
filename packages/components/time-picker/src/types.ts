@@ -42,7 +42,7 @@ const basePickerProps = {
   clearText: IxPropTypes.string,
   format: IxPropTypes.string.def('HH:mm:ss'),
   overlayClassName: IxPropTypes.string,
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
 
   // events

@@ -1,10 +1,10 @@
 <template>
   <IxRow :gutter="8">
     <IxCol :span="12">
-      <IxSelect v-model:value="singleValue" :options="options" size="large"> </IxSelect>
+      <IxSelect v-model:value="singleValue" :options="options" size="sm"> </IxSelect>
     </IxCol>
     <IxCol :span="12">
-      <IxSelect v-model:value="multipleValue" :options="options" multiple size="large"> </IxSelect>
+      <IxSelect v-model:value="multipleValue" :options="options" multiple size="sm"> </IxSelect>
     </IxCol>
     <IxCol :span="12">
       <IxSelect v-model:value="singleValue" :options="options"> </IxSelect>
@@ -13,10 +13,10 @@
       <IxSelect v-model:value="multipleValue" :options="options" multiple> </IxSelect>
     </IxCol>
     <IxCol :span="12">
-      <IxSelect v-model:value="singleValue" :options="options" size="small"> </IxSelect>
+      <IxSelect v-model:value="singleValue" :options="options" size="lg"> </IxSelect>
     </IxCol>
     <IxCol :span="12">
-      <IxSelect v-model:value="multipleValue" :options="options" multiple size="small"> </IxSelect>
+      <IxSelect v-model:value="multipleValue" :options="options" multiple size="lg"> </IxSelect>
     </IxCol>
   </IxRow>
 </template>

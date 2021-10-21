@@ -12,35 +12,29 @@
   </IxModal>
 </template>
 
-<script lang="ts">
-import { defineComponent, h, ref } from 'vue'
+<script setup lang="ts">
+import { h, ref } from 'vue'
 
 import { useModal } from '@idux/components/modal'
 
-export default defineComponent({
-  setup() {
-    const visible = ref(false)
+const visible = ref(false)
 
-    const { confirm } = useModal()
-    const openModal = () => {
-      const modalRef = confirm({
-        title: 'Customize footer via options',
-        content: h('p', 'Some contents...'),
-        footer: [
-          {
-            text: 'My Cancel',
-            onClick: () => modalRef.cancel(),
-          },
-          {
-            text: 'My Ok',
-            mode: 'primary',
-            onClick: () => modalRef.ok(),
-          },
-        ],
-      })
-    }
-
-    return { visible, openModal }
-  },
-})
+const { confirm } = useModal()
+const openModal = () => {
+  const modalRef = confirm({
+    title: 'Customize footer via options',
+    content: h('p', 'Some contents...'),
+    footer: [
+      {
+        text: 'My Cancel',
+        onClick: () => modalRef.cancel(),
+      },
+      {
+        text: 'My Ok',
+        mode: 'primary',
+        onClick: () => modalRef.ok(),
+      },
+    ],
+  })
+}
 </script>

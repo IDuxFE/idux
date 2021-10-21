@@ -1,35 +1,13 @@
-<template>
-  <div class="ix-rate-wrap">
-    <div
-      v-for="(item, index) in rateCount"
-      :key="index"
-      :ref="
-        el => {
-          if (el) starRefs[index] = el
-        }
-      "
-      class="ix-rate-item"
-      :title="getTooltip(index)"
-      :style="{ cursor: disabled ? 'auto' : 'pointer' }"
-      @mousemove="handleMouseEnter(item, $event)"
-      @mouseleave="handleMouseLeave(item)"
-      @click="handleClick(item, $event)"
-    >
-      <div class="ix-rate-full">
-        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main" :class="getIconClass(item)" />
-      </div>
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
 
-      <div v-if="showDecimalIcon(item)" class="ix-rate-half">
-        <IxIcon :name="rateIcon" class="ix-rate-iconfont-main ix-rate-half-icon" />
-      </div>
-    </div>
-  </div>
-</template>
+import { computed, defineComponent, ref, watchEffect } from 'vue'
 
-<script lang="ts">
-import { computed, defineComponent, onBeforeUpdate, ref, watchEffect } from 'vue'
-
-import { convertNumber } from '@idux/cdk/utils'
+import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
@@ -39,23 +17,17 @@ const HALF = 2
 
 export default defineComponent({
   name: 'IxRate',
-  components: { IxIcon },
   props: rateProps,
-  emits: ['update:value', 'change'],
-  setup(props, { emit }) {
+  setup(props) {
     const score = ref(props.value)
     const touchHalf = ref(false)
     const starRefs = ref([])
 
-    const rateGlobalConfig = useGlobalConfig('rate')
-    const rateCount = computed(() => convertNumber(props.count ?? rateGlobalConfig.count))
-    const rateIcon = computed(() => props.icon ?? rateGlobalConfig.icon)
-    const allowHalf = computed(() => props.allowHalf ?? rateGlobalConfig.allowHalf)
-    const allowClear = computed(() => props.allowClear ?? rateGlobalConfig.allowClear)
-
-    onBeforeUpdate(() => {
-      starRefs.value = []
-    })
+    const config = useGlobalConfig('rate')
+    const rateCount = computed(() => convertNumber(props.count ?? config.count))
+    const rateIcon = computed(() => props.icon ?? config.icon)
+    const allowHalf = computed(() => props.allowHalf ?? config.allowHalf)
+    const clearable = computed(() => props.clearable ?? config.clearable)
 
     watchEffect(() => {
       const value = convertNumber(props.value)
@@ -126,29 +98,43 @@ export default defineComponent({
       const beforeValue = convertNumber(props.value)
       const currentScore = convertNumber(score.value)
 
-      if (allowClear.value) {
+      if (clearable.value) {
         clearValue = beforeValue === currentScore
       }
 
       emitValue = clearValue ? 0 : currentScore
 
       if (emitValue !== beforeValue) {
-        emit('update:value', emitValue)
-        emit('change', emitValue)
+        callEmit(props['onUpdate:value'], emitValue)
+        callEmit(props.onChange, emitValue)
       }
     }
 
-    return {
-      rateCount,
-      rateIcon,
-      getTooltip,
-      showDecimalIcon,
-      handleMouseEnter,
-      handleMouseLeave,
-      handleClick,
-      getIconClass,
-      starRefs,
+    return () => {
+      const children = []
+      for (let index = 0; index < rateCount.value; index++) {
+        children.push(
+          <div
+            key={index}
+            ref={el => (starRefs.value[index] = el)}
+            class="ix-rate-item"
+            title={getTooltip(index)}
+            onClick={handleClick}
+            onMousemove={$event => handleMouseEnter(index + 1, $event)}
+            onMouseleave={handleMouseLeave}
+          >
+            <div class="ix-rate-full">
+              <IxIcon class={getIconClass(index + 1)} name={rateIcon.value} />
+            </div>
+            {showDecimalIcon(index + 1) && (
+              <div class="ix-rate-half">
+                <IxIcon class="ix-rate-half-icon" name={rateIcon.value} />
+              </div>
+            )}
+          </div>,
+        )
+      }
+      return <div class="ix-rate">{children}</div>
     }
   },
 })
-</script>

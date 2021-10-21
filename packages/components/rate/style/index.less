@@ -1,18 +1,25 @@
-@import '../../style/themes/default.less';
-
-@rate-prefix: ~'@{idux-prefix}-rate';
+@import './themes/default.less';
 
 .@{rate-prefix} {
+  display: inline-block;
+  line-height: unset;
+  list-style: none;
+  outline: none;
+  cursor: pointer;
+  font-size: @rate-size;
+  color: @rate-color;
+  transition: @rate-transition;
+
   &-item {
     display: inline-block;
     position: relative;
+    margin-right: @rate-item-margin-right;
   }
-  &-iconfont-main {
-    position: relative;
-    font-size: @rate-icon-size;
-    margin-right: @rate-icon-margin;
-    vertical-align: baseline;
+
+  &-highlight {
+    color: @rate-active-color;
   }
+
   &-half {
     position: absolute;
     left: 0;
@@ -21,13 +28,12 @@
     height: 100%;
     overflow: hidden;
   }
-  &-highlight {
-    color: @rate-stroke-color;
-  }
-  &-normal {
-    color: @rate-background-color;
-  }
+
   &-half-icon {
-    color: @rate-stroke-color;
+    color: @rate-active-color;
+  }
+
+  &-disabled {
+    cursor: not-allowed;
   }
 }

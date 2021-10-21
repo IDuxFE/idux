@@ -12,19 +12,19 @@ import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const switchProps = {
-  autofocus: IxPropTypes.bool.def(false),
   checked: IxPropTypes.bool.def(false),
   control: controlPropDef,
+  autofocus: IxPropTypes.bool.def(false),
   disabled: IxPropTypes.bool.def(false),
-  checkedChildren: IxPropTypes.string.def(''),
-  unCheckedChildren: IxPropTypes.string.def(''),
-  size: IxPropTypes.oneOf(['md', 'sm'] as const).def('md'),
+  labels: IxPropTypes.arrayOf(String).def(() => []),
   loading: IxPropTypes.bool.def(false),
+  size: IxPropTypes.oneOf(['md', 'sm'] as const).def('md'),
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: boolean) => void>(),
   onChange: IxPropTypes.emit<(checked: boolean) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
 export type SwitchProps = IxInnerPropTypes<typeof switchProps>

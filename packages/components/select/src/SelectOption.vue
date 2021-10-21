@@ -1,9 +1,9 @@
 <template>
   <div v-show="visible" :class="classes" @mouseenter="onMouseEnter" @click.stop="onClick">
-    <span v-if="showCheckbox" class="ix-option-checkbox">
+    <span v-if="showCheckbox" class="ix-select-option-checkbox">
       <IxCheckbox :checked="selected" :disabled="disabled" readonly />
     </span>
-    <span class="ix-option-label">
+    <span class="ix-select-option-label">
       <slot>{{ label }}</slot>
     </span>
   </div>
@@ -58,10 +58,10 @@ export default defineComponent({
     const classes = computed(() => {
       const _disabled = props.disabled
       return {
-        'ix-option': true,
-        'ix-option-disabled': _disabled,
-        'ix-option-active': !_disabled && active.value,
-        'ix-option-selected': !_disabled && selected.value,
+        'ix-select-option': true,
+        'ix-select-option-disabled': _disabled,
+        'ix-select-option-active': !_disabled && active.value,
+        'ix-select-option-selected': !_disabled && selected.value,
       }
     })
 

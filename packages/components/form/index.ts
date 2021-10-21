@@ -17,7 +17,7 @@ const IxFormWrapper = FormWrapper as unknown as FormWrapperComponent
 
 export { IxForm, IxFormItem, IxFormWrapper }
 
-export { FORM_ITEM_TOKEN, useFormItemRegister } from './src/token'
+export { FORM_TOKEN, FORM_ITEM_TOKEN, useFormItemRegister } from './src/token'
 
 export type {
   FormInstance,
@@ -26,8 +26,9 @@ export type {
   FormItemPublicProps as FormItemProps,
   FormWrapperInstance,
   FormWrapperPublicProps as FormWrapperProps,
+  FormColType,
   FormLabelAlign,
   FormLayout,
-  FormSize,
   FormMessage,
+  FormSize,
 } from './src/types'

@@ -1,28 +1,20 @@
 <template>
-  <IxRadioGroup v-model:value="value" :options="options" buttoned size="small"></IxRadioGroup>
-  <br /><br />
-  <IxRadioGroup v-model:value="value" :options="options" buttoned></IxRadioGroup>
-  <br /><br />
-  <IxRadioGroup v-model:value="value" :options="options" buttoned size="large">></IxRadioGroup>
+  <IxSpace direction="vertical">
+    <IxRadioGroup v-model:value="value" :options="options" buttoned size="sm"></IxRadioGroup>
+    <IxRadioGroup v-model:value="value" :options="options" buttoned></IxRadioGroup>
+    <IxRadioGroup v-model:value="value" :options="options" buttoned size="lg">></IxRadioGroup>
+  </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-import { RadioOptions } from '@idux/components/radio'
+const value = ref('beijing')
 
-export default defineComponent({
-  setup() {
-    const value = ref('a')
-
-    const options: RadioOptions[] = [
-      { label: 'Beijing', value: 'a' },
-      { label: 'Shanghai', value: 'b' },
-      { label: 'Guangzhou', value: 'c' },
-      { label: 'Shenzhen', value: 'd' },
-    ]
-
-    return { value, options }
-  },
-})
+const options = [
+  { label: 'Beijing', value: 'beijing' },
+  { label: 'Shanghai', value: 'shanghai' },
+  { label: 'Guangzhou', value: 'guangzhou' },
+  { label: 'Shenzhen', value: 'shenzhen' },
+]
 </script>

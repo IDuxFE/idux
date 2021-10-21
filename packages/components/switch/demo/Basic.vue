@@ -1,28 +1,8 @@
 <template>
-  <IxSpace direction="vertical" :size="20">
-    <IxSwitch v-model:checked="checked" @change="updateChecked"></IxSwitch>
-    <IxButton @click="changeChecked">Change</IxButton>
-  </IxSpace>
+  <IxSwitch v-model:checked="checked"></IxSwitch>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checked = ref(true)
-    const changeChecked = () => {
-      checked.value = !checked.value
-    }
-
-    const updateChecked = (updateChecked: boolean) => {
-      console.log(updateChecked)
-    }
-
-    return {
-      checked,
-      changeChecked,
-      updateChecked,
-    }
-  },
-})
+const checked = ref(true)
 </script>

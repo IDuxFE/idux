@@ -22,10 +22,10 @@ subtitle: 单选框
 | `disabled` | 是否为禁用状态 | `boolean` | `false` | - | - |
 | `label` | 单选框的文本 | `string \| #default` | `false` | - | - |
 | `mode` | 按钮类型 | `'default' \| 'primary'`| `'default'` | - | 仅 `buttoned` 为 `true` 时生效  |
-| `size` | 按钮大小 | `'large' \| 'medium' \| 'small'`| `'medium'` | ✅ | 仅 `buttoned` 为 `true` 时生效 |
+| `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'`| `'md'` | ✅ | 仅 `buttoned` 为 `true` 时生效 |
 | `value` | 设置单选框的值，与 `IxRadioGroup` 配合使用 | `any`| - | - | - |
-| `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onChange` | 选中状态发生变化后的回调 | `(checked: boolean) => void`| - | - | - |
+| `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 
 #### RadioMethods
@@ -44,10 +44,11 @@ subtitle: 单选框
 | `v-model:value` | 当前选中的值 | `any` | - | - | - |
 | `buttoned` | 设置单选框组内 `IxRadio` 的 `buttoned` | `boolean` | - | - | - |
 | `disabled` | 设置单选框组内 `IxRadio` 的 `disabled` | `boolean` | - | - | - |
+| `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
-| `options` | 以配置形式设置子元素 | `RadioOptions[]`| - | - | - |
-| `size` | 设置单选框组内 `IxRadio` 的 `size` | `'large' \| 'medium' \| 'small'`| - | - | - |
+| `options` | 以配置形式设置子元素 | `RadioOption[]`| - | - | - |
+| `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: any) => void`| - | - | - |
 
 #### RadioGroupSlots

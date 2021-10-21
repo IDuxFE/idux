@@ -1,14 +1,14 @@
 ---
 title:
   zh: 加载状态
-  en: Loading usage
-order: 2
+  en: Loading state
+order: 4
 ---
 
 ## zh
 
-处于`loading`的`Switch`会置灰不可操作
+处于 `loading` 状态的开关会置灰不可操作。
 
 ## en
 
-The loading switch will be grayed out and inoperable.
+A switch in `loading` becomes unavailable.

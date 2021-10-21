@@ -10,7 +10,6 @@ import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
-import type { CheckboxSize } from '@idux/components/checkbox'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
@@ -104,7 +103,7 @@ export interface PaginationConfig {
 
 // Data Entry
 export interface CheckboxConfig {
-  size: CheckboxSize
+  size: FormSize
 }
 
 export interface FormConfig {
@@ -137,10 +136,10 @@ export interface RadioConfig {
 }
 
 export interface RateConfig {
+  allowHalf: boolean
+  clearable: boolean
   count: number
   icon: string
-  allowHalf: boolean
-  allowClear: boolean
 }
 
 export interface SelectConfig {

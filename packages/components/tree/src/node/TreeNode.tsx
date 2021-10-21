@@ -20,7 +20,7 @@ export default defineComponent({
   setup(props) {
     const {
       props: treeProps,
-      prefixCls,
+      mergedPrefixCls,
       activeKey,
       selectedKeys,
       dragKey,
@@ -49,19 +49,19 @@ export default defineComponent({
     const dropAfter = computed(() => dropping.value && dropType.value === 'after')
 
     const classes = computed(() => {
-      const _prefixCls = `${prefixCls.value}-node`
+      const prefixCls = `${mergedPrefixCls.value}-node`
       return {
-        [_prefixCls]: true,
-        [`${_prefixCls}-active`]: isActive.value,
-        [`${_prefixCls}-disabled`]: disabled.value,
-        [`${_prefixCls}-selected`]: selected.value,
-        [`${_prefixCls}-expanded`]: props.node.expanded,
-        [`${_prefixCls}-dragging`]: dragging.value,
-        [`${_prefixCls}-dropping`]: dropping.value,
-        [`${_prefixCls}-drop-parent`]: dropParent.value,
-        [`${_prefixCls}-drop-before`]: dropBefore.value,
-        [`${_prefixCls}-drop-inside`]: dropInside.value,
-        [`${_prefixCls}-drop-after`]: dropAfter.value,
+        [prefixCls]: true,
+        [`${prefixCls}-active`]: isActive.value,
+        [`${prefixCls}-disabled`]: disabled.value,
+        [`${prefixCls}-selected`]: selected.value,
+        [`${prefixCls}-expanded`]: props.node.expanded,
+        [`${prefixCls}-dragging`]: dragging.value,
+        [`${prefixCls}-dropping`]: dropping.value,
+        [`${prefixCls}-drop-parent`]: dropParent.value,
+        [`${prefixCls}-drop-before`]: dropBefore.value,
+        [`${prefixCls}-drop-inside`]: dropInside.value,
+        [`${prefixCls}-drop-after`]: dropAfter.value,
       }
     })
 
@@ -121,7 +121,7 @@ export default defineComponent({
           onDragleave={mergedDraggable ? onDragleave : undefined}
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
         >
-          <Indent level={level} prefixCls={prefixCls.value} />
+          <Indent level={level} prefixCls={mergedPrefixCls.value} />
           {!isLeaf ? <Expand expanded={expanded} nodeKey={key} rawNode={rawNode} /> : showLine && <LeafLine />}
           {checkable && <Checkbox node={node} />}
           <Content disabled={disabled.value} nodeKey={key} rawNode={rawNode} selected={selected.value} />

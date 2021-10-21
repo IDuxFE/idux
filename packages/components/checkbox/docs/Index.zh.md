@@ -22,24 +22,19 @@ cover:
 | 名称 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:checked` | 指定当前勾选框是否选中 |  `boolean \| string \| number`  | `false` | - | - |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |.
-| `buttoned` | 是否以按钮显示 | `boolean` | `false` | - | - |
-| `disabled` | 禁用状态 |`boolean`| `false` | - | - |
-| `label` | 勾选框的文本 | `string \| #default` | - | - | - |
+| `buttoned` | 是否以按钮显示 | `boolean` | - | - | - |
+| `disabled` | 禁用状态 |`boolean`| - | - | - |
 | `indeterminate` | 是否处于不确定状态 | `boolean` | `false`| - | 当值为`true`时，按钮样式处于半选状态，且不受`checked`影响 |
+| `label` | 勾选框的文本 | `string \| #default` | - | - | - |
 | `trueValue` | 勾选框选中时返回的值 |  `boolean \| string \| number`  | `true`| - | - |
 | `falseValue` | 勾选框不选中时返回的值 | `boolean \| string \| number` | `false`| - | - |
 | `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | - |
-| `size` | 按钮大小 | `medium \| small` | - | `medium` | 仅`buttoned`为`true`时生效 |
+| `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'` | - | `'md'` | 仅`buttoned`为`true`时生效 |
 | `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onChange` | 选中状态发生变化后的回调 | `(checked: boolean \| string \| number) => void`| - | - | - |
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
-
-#### CheckboxSlots
-
-|名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-|`default` | 文本区域 | - | - |
 
 #### CheckboxMethods
 
@@ -54,60 +49,12 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 指定当前勾选框是否选中 |  `Array<string \| number>`  | `[]` | - | - |
+| `v-model:value` | 指定当前勾选框是否选中 |  `any[]`  | `[]` | - | - |
+| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `buttoned` | 子`IxCheckbox`的`buttoned`属性 | `boolean` | `false` | - | - |
 | `disabled` | 子`IxCheckbox`的`disabled`属性 | `boolean` | `false` | - |- |
+| `gap` | 子`IxCheckbox` 的间隔 | `number \| string` | - | - | - |
 | `name` | 子`IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
-| `size` | 子`IxCheckbox` 的 `size` 属性 | `medium \| small` | `medium` | - | 仅`buttoned`为`true`时生效 |
-| `gap` | 子`IxCheckbox` 的间隔 | `number` | `0` | - | - |
-| `options` | 以配置形式设置子元素 | `CheckboxOptions[]`| - | - | - |
+| `options` | 以配置形式设置子元素 | `CheckboxOption[]`| - | - | - |
+| `size` | 子`IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: Array<string \| number>) => void`| - | - | - |
-
-#### GroupSlots
-
-|名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-|`default` | `IxCheckbox`区域 | - | - |
-
-### 主题变量
-
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |
-| `@checkbox-checked-color` | `@color-primary` | - |
-| `@checkbox-hover-color` | `@color-primary-l10` | - |
-| `@checkbox-focus-color` | `@color-primary-d10` | - |
-| `@checkbox-disabled-color` | `@color-graphite-l10` | - |
-| `@checkbox-border-color` | `@color-graphite-l20` | - |
-| `@checkbox-bg-color` | `@color-white` | - |
-| `@checkbox-indeterminate-tick-color` | `@color-white` | - |
-| `@checkbox-disabled-border-color` | `@color-graphite-l20` | - |
-| `@checkbox-disabled-bg-color` | `@color-graphite-l40` | - |
-| `@checkbox-disabled-checked-bg-color` | `@color-graphite-l40` | - |
-| `@checkbox-disabled-checked-border-color` | `@color-graphite-l20` | - |
-| `@checkbox-button-disabled-bg-color` | `@color-graphite-l50` | - |
-| `@checkbox-button-disabled-border-color` | `@color-graphite-l30` | - |
-| `@checkbox-button-checked-bg-color` | `@color-white` | - |
-| `@checkbox-inner-zindex` | `@zindex-l1-1` | - |
-| `@checkbox-line-height` | `1` | - |
-| `@checkbox-border-width` | `@border-width-sm` | - |
-| `@checkbox-border-style` | `@checkbox-border-width solid @checkbox-border-color` | - |
-| `@checkbox-border-radius` | `@border-radius-sm` | - |
-| `@checkbox-tick-border-style` | `@border-width-md solid @color-white` | - |
-| `@checkbox-tick-width` | `(@checkbox-width / @font-size-base) * 5px` | - |
-| `@checkbox-tick-height` | `(@checkbox-height / @font-size-base) * 9px` | - |
-| `@checkbox-indeterminate-width` | `8px` | - |
-| `@checkbox-indeterminate-height` | `2px` | - |
-| `@checkbox-font-size` | `@font-size-md` | - |
-| `@checkbox-height` | `14px` | - |
-| `@checkbox-width` | `14px` | - |
-| `@checkbox-group-line-height` | `@line-height-base` | - |
-| `@checkbox-label-padding` | `0 @spacing-sm 0 @spacing-sm` | - |
-| `@checkbox-button-height-sm` | `@height-sm` | - |
-| `@checkbox-button-font-size-sm` | `@font-size-sm` | - |
-| `@checkbox-button-padding-horizontal-sm` | `@padding-sm` | - |
-| `@checkbox-button-height-md` | `@height-md` | - |
-| `@checkbox-button-font-size-md` | `@font-size-md` | - |
-| `@checkbox-button-padding-horizontal-md` | `@padding-md` | - |
-| `@checkbox-transition-duration` | `@form-transition-duration` | - |
-| `@checkbox-transition-function` | `@form-transition-function` | - |
-| `@checkbox-transition` | `all @checkbox-transition-duration @checkbox-transition-function` | - |

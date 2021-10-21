@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FormItemProps, FormLabelAlign } from './types'
+import type { FormItemProps } from './types'
 import type { AbstractControl, ValidateErrors, ValidateStatus } from '@idux/cdk/forms'
 import type { ColProps } from '@idux/components/grid'
 import type { Locale } from '@idux/components/i18n'
@@ -17,6 +17,7 @@ import { isFunction, isNumber, isString } from 'lodash-es'
 
 import { useValueControl } from '@idux/cdk/forms'
 import { VKey } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { getLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
@@ -29,22 +30,45 @@ export default defineComponent({
   name: 'IxFormItem',
   props: formItemProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-form-item`)
+
+    const formContext = inject(formToken, null)
+
+    const labelColConfig = computed(() => normalizeColConfig(props.labelCol ?? formContext?.labelCol.value))
+    const controlColConfig = computed(() => normalizeColConfig(props.controlCol ?? formContext?.controlCol.value))
+    const hasFeedback = computed(() => props.hasFeedback ?? !!formContext?.hasFeedback.value)
+
     const { status, statusIcon, message } = useControlStatus(props)
 
-    const { colonless, controlCol, labelAlign, labelCol, hasFeedback: formHasFeedback } = inject(formToken, null) || {}
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      const currStatus = status.value
+      return {
+        [prefixCls]: true,
+        [`${prefixCls}-has-feedback`]: hasFeedback.value && !!currStatus,
+        [`${prefixCls}-has-message`]: !!message.value,
+        [`${prefixCls}-${currStatus}`]: !!currStatus,
+      }
+    })
 
-    const labelColConfig = computed(() => normalizeColConfig(props.labelCol ?? labelCol?.value))
-    const controlColConfig = computed(() => normalizeColConfig(props.controlCol ?? controlCol?.value))
-    const hasFeedback = computed(() => props.hasFeedback ?? !!formHasFeedback?.value)
-
-    const classes = useClasses(hasFeedback, status, message)
-    const labelClasses = useLabelClasses(props, colonless, labelAlign)
+    const labelClasses = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      const { colonless = formContext?.colonless.value, labelAlign = formContext?.labelAlign.value, required } = props
+      return {
+        [`${prefixCls}-label`]: true,
+        [`${prefixCls}-label-colonless`]: colonless,
+        [`${prefixCls}-label-required`]: required,
+        [`${prefixCls}-label-start`]: labelAlign === 'start',
+      }
+    })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       return (
         <IxRow class={classes.value}>
-          {renderLabel(props, slots, labelClasses, labelColConfig)}
-          {renderControl(props, slots, controlColConfig, hasFeedback, statusIcon, message)}
+          {renderLabel(props, slots, labelClasses, labelColConfig, prefixCls)}
+          {renderControl(props, slots, controlColConfig, hasFeedback, statusIcon, message, prefixCls)}
         </IxRow>
       )
     }
@@ -54,28 +78,29 @@ export default defineComponent({
 function renderLabel(
   props: FormItemProps,
   slots: Slots,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  classes: ComputedRef<Record<string, any>>,
+  classes: ComputedRef<Record<string, unknown>>,
   labelColConfig: ComputedRef<ColProps | undefined>,
+  prefixCls: string,
 ) {
   const { label, labelFor, labelTooltip } = props
   const { label: labelSlot, labelTooltip: labelTooltipSlot } = slots
   if (!(label || labelSlot || labelTooltip || labelTooltipSlot)) {
     return undefined
   }
-  const tooltipNode = labelTooltipSlot ? (
-    labelTooltipSlot()
-  ) : labelTooltip ? (
-    <IxTooltip title={labelTooltip}>
-      <IxIcon name="question-circle" />
-    </IxTooltip>
-  ) : undefined
-  const tooltipWrapper = tooltipNode ? <span class="ix-form-item-label-tooltip">{tooltipNode}</span> : undefined
+
+  const tooltipNode =
+    labelTooltipSlot?.() ??
+    (labelTooltip && (
+      <IxTooltip title={labelTooltip}>
+        <IxIcon name="question-circle" />
+      </IxTooltip>
+    ))
+
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
       <label for={labelFor}>
         {labelSlot?.() ?? label}
-        {tooltipWrapper}
+        {tooltipNode && <span class={`${prefixCls}-label-tooltip`}>{tooltipNode}</span>}
       </label>
     </IxCol>
   )
@@ -88,60 +113,28 @@ function renderControl(
   hasFeedback: ComputedRef<boolean>,
   statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
+  prefixCls: string,
 ) {
   const { extra } = props
   const { extra: extraSlot } = slots
-  const statusNode =
-    hasFeedback.value && statusIcon.value ? (
-      <span class="ix-form-item-status-icon">
-        <IxIcon name={statusIcon.value} />
-      </span>
-    ) : undefined
-  const messageNode = message.value ? <div class="ix-form-item-message">{message.value}</div> : undefined
+  const statusNode = hasFeedback.value && statusIcon.value && (
+    <span class={`${prefixCls}-status-icon`}>
+      <IxIcon name={statusIcon.value} />
+    </span>
+  )
+  const messageNode = message.value && <div class={`${prefixCls}-message`}>{message.value}</div>
   const extraNode = extraSlot?.() ?? extra
-  const extraWrapper = extraNode ? <div class="ix-form-item-extra">{extraNode}</div> : undefined
+  const extraWrapper = extraNode && <div class={`${prefixCls}-extra`}>{extraNode}</div>
   return (
-    <IxCol class="ix-form-item-control" {...controlColConfig.value}>
-      <div class="ix-form-item-control-input">
-        <div class="ix-form-item-control-input-content">{slots.default?.()}</div>
+    <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
+      <div class={`${prefixCls}-control-input`}>
+        <div class={`${prefixCls}-control-input-content`}>{slots.default?.()}</div>
         {statusNode}
       </div>
       {messageNode}
       {extraWrapper}
     </IxCol>
   )
-}
-
-function useClasses(
-  hasFeedback: ComputedRef<boolean>,
-  status: ComputedRef<ValidateStatus | undefined>,
-  message: ComputedRef<string | undefined>,
-) {
-  return computed(() => {
-    const currStatus = status.value
-    return {
-      'ix-form-item': true,
-      'ix-form-item-has-feedback': hasFeedback.value && currStatus,
-      'ix-form-item-has-message': message.value,
-      [`ix-form-item-${currStatus}`]: currStatus,
-    }
-  })
-}
-
-function useLabelClasses(
-  props: FormItemProps,
-  colonlessRef: ComputedRef<boolean> | undefined,
-  labelAlignRef: ComputedRef<FormLabelAlign> | undefined,
-) {
-  return computed(() => {
-    const { colonless = colonlessRef?.value, labelAlign = labelAlignRef?.value, required } = props
-    return {
-      'ix-form-item-label': true,
-      'ix-form-item-label-colonless': colonless,
-      'ix-form-item-label-required': required,
-      'ix-form-item-label-start': labelAlign === 'start',
-    }
-  })
 }
 
 function normalizeColConfig(col: string | number | ColProps | undefined) {

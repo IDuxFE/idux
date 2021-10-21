@@ -1,24 +1,22 @@
-@import '../../style/themes/default.less';
-
-@time-picker-prefix: ~'@{idux-prefix}-time-picker';
-@time-picker-panel-prefix: ~'@{time-picker-prefix}-panel';
+@import './themes/default.less';
 
 .@{time-picker-prefix} {
   display: inline-flex;
+
   &-clear-icon {
     cursor: pointer;
   }
 }
 
-.@{time-picker-panel-prefix} {
+.@{time-picker-prefix}-panel {
   display: flex;
   max-height: 200px;
-  background-color: @color-white;
-  box-shadow: @time-picker-container-box-shadow;
+  background-color: @time-picker-background-color;
+  box-shadow: @time-picker-panel-box-shadow;
 
   &-column {
     width: 56px;
-    border-right: 1px solid @time-option-border-color;
+    border-right: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
     margin: 0;
     list-style-type: none;
     overflow-y: hidden;
@@ -36,17 +34,20 @@
     padding: 8px 20px 8px 12px;
     margin: 0;
     cursor: pointer;
+    transition: @time-transition-duration;
+
     &:hover {
-      background-color: @time-option-hover-bg-color;
+      background-color: @time-picker-cell-active-background-color;
     }
+
     &-disabled {
       cursor: not-allowed;
       color: @time-picker-disabled-color;
     }
+
     &-selected {
-      transition-duration: @time-option-transition-duration;
-      color: @time-option-selected-color;
-      background-color: @time-option-selected-bg-color;
+      color: @time-picker-cell-selected-color;
+      background-color: @time-picker-cell-selected-background-color;
     }
   }
 }

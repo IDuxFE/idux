@@ -19,7 +19,7 @@ export interface TreeContext extends CheckableContext, DragDropContext, Expandab
   props: TreeProps
   slots: Slots
   config: TreeConfig
-  prefixCls: ComputedRef<string>
+  mergedPrefixCls: ComputedRef<string>
   getNodeKey: ComputedRef<GetNodeKey>
   searchedKeys: ComputedRef<VKey[]>
 }

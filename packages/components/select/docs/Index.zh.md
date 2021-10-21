@@ -39,7 +39,7 @@ order: 0
 | `options` | 选项列表，可以取代 `IxSelectOption` | `SelectOption[]` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean` | `false` | ✅ | - |
-| `size` | 设置选择器大小 | `large \| medium \| small` | `medium` | ✅ | - |
+| `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | - | ✅ | 单选默认为 `down` |
 
 ```ts

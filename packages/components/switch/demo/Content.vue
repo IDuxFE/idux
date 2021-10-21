@@ -1,25 +1,11 @@
 <template>
-  <IxSpace direction="vertical" :size="20">
-    <IxSwitch v-model:checked="checked">
-      <template #checkedChildren>
-        <span>开</span>
-      </template>
-      <template #unCheckedChildren>
-        <span>关</span>
+  <IxSpace>
+    <IxSwitch checked :labels="['开', '关']"></IxSwitch>
+    <IxSwitch :labels="['1', '0']"></IxSwitch>
+    <IxSwitch checked>
+      <template #label="{ checked }">
+        <IxIcon :name="checked ? 'check' : 'close'" />
       </template>
     </IxSwitch>
   </IxSpace>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup() {
-    const checked = ref(true)
-
-    return {
-      checked,
-    }
-  },
-})
-</script>

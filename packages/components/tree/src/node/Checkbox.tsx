@@ -15,7 +15,7 @@ import { treeNodeCheckboxProps } from '../types'
 export default defineComponent({
   props: treeNodeCheckboxProps,
   setup(props) {
-    const { prefixCls, checkedKeys, indeterminateKeys, handleCheck } = inject(treeToken)!
+    const { mergedPrefixCls, checkedKeys, indeterminateKeys, handleCheck } = inject(treeToken)!
 
     const isChecked = computed(() => checkedKeys.value.includes(props.node.key))
     const isIndeterminate = computed(() => indeterminateKeys.value.includes(props.node.key))
@@ -24,7 +24,7 @@ export default defineComponent({
 
     return () => (
       <IxCheckbox
-        class={`${prefixCls.value}-node-checkbox`}
+        class={`${mergedPrefixCls.value}-node-checkbox`}
         checked={isChecked.value}
         disabled={props.node.checkDisabled}
         indeterminate={isIndeterminate.value}

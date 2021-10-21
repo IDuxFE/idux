@@ -1,15 +1,14 @@
 .form-vertical-layout-label() {
-  & when (@form-vertical-label-margin > 0) {
-    margin: @form-vertical-label-margin;
+  & when (@form-item-vertical-label-margin > 0) {
+    margin: @form-item-vertical-label-margin;
   }
-  padding: @form-vertical-label-padding;
-  line-height: @line-height-base;
+  padding: @form-item-vertical-label-padding;
+  line-height: @form-line-height;
   white-space: initial;
-  text-align: left;
+  text-align: start;
 
   > label {
     margin: 0;
-
     &::after {
       display: none;
     }
@@ -20,6 +19,7 @@
   .@{form-prefix}-item .@{form-prefix}-item-label {
     .form-vertical-layout-label();
   }
+
   .@{form-prefix} {
     .@{form-prefix}-item {
       flex-wrap: wrap;
@@ -42,11 +42,11 @@
   }
 }
 
-.form-message-extra-distance(@num) when (@num >= 0) {
-  padding-top: floor(@num);
+.form-message-extra-distance(@distance) when (@distance >= 0) {
+  padding-top: floor(@distance);
 }
 
-.form-message-extra-distance(@num) when (@num < 0) {
-  margin-top: ceil(@num);
-  margin-bottom: ceil(@num);
+.form-message-extra-distance(@distance) when (@distance < 0) {
+  margin-top: ceil(@distance);
+  margin-bottom: ceil(@distance);
 }

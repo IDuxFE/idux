@@ -8,7 +8,7 @@
 import type { TextareaProps } from './types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
-import type { ComputedRef, Ref, Slot, StyleValue } from 'vue'
+import type { Ref, Slot, StyleValue } from 'vue'
 
 import { computed, defineComponent, normalizeClass } from 'vue'
 
@@ -21,8 +21,11 @@ import { useAutoRows } from './useAutoRows'
 
 export default defineComponent({
   name: 'IxTextarea',
+  inheritAttrs: false,
   props: textareaProps,
   setup(props, { slots, expose, attrs }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-textarea`)
     const config = useGlobalConfig('textarea')
 
     const {
@@ -48,7 +51,18 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const classes = useClasses(props, config, isFocused, isDisabled)
+    const classes = computed(() => {
+      const { showCount = config.showCount, size = config.size } = props
+      const prefixCls = mergedPrefixCls.value
+      const classes = {
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-with-count`]: showCount,
+        [`${prefixCls}-${size}`]: true,
+      }
+      return normalizeClass([classes, attrs.class])
+    })
     const dataCount = useDataCount(props, config, accessor)
     const autoRows = computed(() => props.autoRows ?? config.autoRows)
     const resize = computed(() => {
@@ -64,18 +78,14 @@ export default defineComponent({
     useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
 
     return () => {
-      const suffix = renderSuffix(isClearable.value, slots.clearIcon, clearIcon.value, clearHidden.value, handlerClear)
       const { class: className, style, ...rest } = attrs
+      const prefixCls = mergedPrefixCls.value
       return (
-        <span
-          class={normalizeClass([classes.value, className])}
-          style={style as StyleValue}
-          data-count={dataCount.value}
-        >
+        <span class={classes.value} style={style as StyleValue} data-count={dataCount.value}>
           <textarea
             {...rest}
             ref={elementRef}
-            class="ix-textarea-inner"
+            class={`${prefixCls}-inner`}
             style={textareaStyle.value}
             disabled={isDisabled.value}
             readonly={props.readonly}
@@ -84,31 +94,20 @@ export default defineComponent({
             onCompositionend={handlerCompositionEnd}
             onFocus={handlerFocus}
             onBlur={handlerBlur}
-          ></textarea>
-          {suffix}
+          />
+          {renderSuffix(
+            isClearable.value,
+            slots.clearIcon,
+            clearIcon.value,
+            clearHidden.value,
+            handlerClear,
+            prefixCls,
+          )}
         </span>
       )
     }
   },
 })
-
-function useClasses(
-  props: TextareaProps,
-  config: TextareaConfig,
-  isFocused: Ref<boolean>,
-  disabled: ComputedRef<boolean>,
-) {
-  return computed(() => {
-    const sizeClass = `ix-textarea-${props.size ?? config.size}`
-    return {
-      'ix-textarea': true,
-      [sizeClass]: true,
-      'ix-textarea-disabled': disabled.value,
-      'ix-textarea-focused': isFocused.value,
-      'ix-textarea-with-count': props.showCount ?? config.showCount,
-    }
-  })
-}
 
 function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: FormAccessor) {
   return computed(() => {
@@ -134,13 +133,17 @@ function renderSuffix(
   clearIconSlot: Slot | undefined,
   clearIcon: string,
   clearHidden: boolean,
-  handlerClear: (evt: MouseEvent) => void,
+  onClear: (evt: MouseEvent) => void,
+  prefixCls: string,
 ) {
   if (!isClearable) {
     return null
   }
 
-  const classes = { 'ix-textarea-suffix': true, 'ix-textarea-suffix-hidden': clearHidden }
-  const child = clearIconSlot?.({ handlerClear }) ?? <IxIcon name={clearIcon} onClick={handlerClear}></IxIcon>
-  return <span class={classes}>{child}</span>
+  let classes = `${prefixCls}-suffix`
+  if (clearHidden) {
+    classes += ` ${prefixCls}-suffix-hidden`
+  }
+  const children = clearIconSlot?.({ onClear }) ?? <IxIcon name={clearIcon} onClick={onClear}></IxIcon>
+  return <span class={classes}>{children}</span>
 }

@@ -1,16 +1,9 @@
 <template>
-  <IxCheckbox v-model:checked="checked" label="选项" />
+  <IxCheckbox v-model:checked="checked">Checked: {{ checked }}</IxCheckbox>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checked = ref(false)
-    return {
-      checked,
-    }
-  },
-})
+const checked = ref(false)
 </script>

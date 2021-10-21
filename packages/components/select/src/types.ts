@@ -7,7 +7,9 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -27,16 +29,17 @@ const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
   value: IxPropTypes.any,
+  control: controlPropDef,
   open: IxPropTypes.bool.def(false),
+
   autofocus: IxPropTypes.bool.def(false),
   borderless: IxPropTypes.bool,
   clearable: IxPropTypes.bool,
   compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareWith),
-  control: controlPropDef,
   disabled: IxPropTypes.bool.def(false),
   overlayClass: IxPropTypes.string,
-  empty: IxPropTypes.string,
-  filterOption: IxPropTypes.oneOfType([IxPropTypes.func<SelectFilterFn>(), Boolean]).def(true),
+  empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
+  filterOption: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
   inputable: IxPropTypes.bool,
   maxLabelCount: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
   multiple: IxPropTypes.bool.def(false),
@@ -45,9 +48,22 @@ export const selectProps = {
   options: IxPropTypes.array<SelectOption>(),
   placeholder: IxPropTypes.string,
   searchable: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<FormSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<FormSize>(['lg', 'md', 'sm']),
   suffix: IxPropTypes.string,
   valueKey: IxPropTypes.string,
+  virtual: IxPropTypes.bool.def(false),
+
+  // events
+  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
+  'onUpdate:open': IxPropTypes.emit<(open: boolean) => void>(),
+  onChange: IxPropTypes.emit<(value: any) => void>(),
+  onClear: IxPropTypes.emit<(evt: Event) => void>(),
+  onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
+  onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
+  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onInput: IxPropTypes.emit<(evt: Event) => void>(),
+  onOverlayScroll: IxPropTypes.emit<(evt: Event) => void>(),
 }
 
 export type SelectProps = IxInnerPropTypes<typeof selectProps>
@@ -55,8 +71,8 @@ export type SelectPublicProps = IxPublicPropTypes<typeof selectProps>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
+  scrollTo: VirtualScrollToFn
 }
-
 export type SelectComponent = DefineComponent<
   Omit<HTMLAttributes, keyof SelectPublicProps> & SelectPublicProps,
   SelectBindings

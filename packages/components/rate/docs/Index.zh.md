@@ -19,15 +19,10 @@ cover: 评分组件
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 高亮的数目（分数） | `number` | `0`| - | - |
-| `count` | 图标数目 | `number` | `5` | ✅ | - |
-| `icon` | 自定义图标名称 | `string` | `star` | ✅ | - |
 | `allowHalf` | 支持半分（选） | `boolean` | `false` | ✅ | - |
-| `disabled` | 只读模式 | `boolean` | `false` | - |-|
-| `tooltips` | 每一个元素的悬浮提示信息 | `Array` | `[]` | - |-|
-| `allowClear` | 二次点击元素后清除选择 | `boolean` | `false` | ✅ |-|
-
-### Emits
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `change` | 点击评分元素时触发 | `number` | - |
+| `clearable` | 二次点击元素后清除选择 | `boolean` | `false` | ✅ |-|
+| `count` | 图标数目 | `number` | `5` | ✅ | - |
+| `disabled` | 只读模式 | `boolean` | `false` | - | - |
+| `icon` | 自定义图标名称 | `string` | `star` | ✅ | - |
+| `tooltips` | 每一个元素的悬浮提示信息 | `Array` | `[]` | - | - |
+| `onChange` | 点击评分元素时触发 | `(value: number) => void` | - | - | - |

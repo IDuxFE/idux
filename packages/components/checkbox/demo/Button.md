@@ -1,14 +1,14 @@
 ---
-order: 2
+order: 5
 title:
-  zh: 复选按钮
-  en: Buttoned
+  zh: 按钮样式
+  en: Button style
 ---
 
 ## zh
 
-复选按钮
+按钮样式的多选组合。
 
 ## en
 
-Multi selection button.
+The combination of checkbox button style.

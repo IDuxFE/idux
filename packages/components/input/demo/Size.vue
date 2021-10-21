@@ -1,7 +1,7 @@
 <template>
-  <IxInput size="large" placeholder="large size" />
-  <br /><br />
-  <IxInput placeholder="medium size" />
-  <br /><br />
-  <IxInput size="small" placeholder="small size" />
+  <IxSpace direction="vertical">
+    <IxInput size="sm" placeholder="small size" />
+    <IxInput placeholder="medium size" />
+    <IxInput size="lg" placeholder="large size" />
+  </IxSpace>
 </template>

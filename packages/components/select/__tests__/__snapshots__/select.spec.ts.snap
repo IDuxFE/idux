@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select multiple template work render work 1`] = `
-"<div class=\\"ix-select ix-select-multiple ix-select-searchable ix-select-medium\\">
+"<div class=\\"ix-select ix-select-multiple ix-select-searchable ix-select-md\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-input\\"><input class=\\"ix-select-input-inner\\" autocomplete=\\"off\\"><span class=\\"ix-select-input-mirror\\" aria-hidden=\\"true\\"></span></div>
     <div class=\\"ix-select-placeholder\\"></div>
@@ -49,7 +49,7 @@ exports[`Select render options work render work 1`] = `
 `;
 
 exports[`Select single template work group options work 1`] = `
-"<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
+"<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-md\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-item\\"><span class=\\"ix-select-item-label\\">Tom0</span>
       <!--v-if-->
@@ -69,7 +69,7 @@ exports[`Select single template work group options work 1`] = `
 `;
 
 exports[`Select single template work render work 1`] = `
-"<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-medium\\">
+"<div class=\\"ix-select ix-select-single ix-select-show-suffix ix-select-md\\">
   <div class=\\"ix-select-selector\\">
     <div class=\\"ix-select-input\\"><input class=\\"ix-select-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">
       <!--v-if-->

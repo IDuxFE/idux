@@ -7,8 +7,8 @@ order: 0
 
 ## zh
 
-通过v-model:checked进行双向数据绑定
+最简单的用法。
 
 ## en
 
-Two-way data binding through v-model:checked.
+The simplest usage.

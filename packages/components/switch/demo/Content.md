@@ -1,14 +1,14 @@
 ---
 title:
-  zh: 内容
-  en: Content
-order: 4
+  zh: 文案
+  en: Label
+order: 2
 ---
 
 ## zh
 
-向开关中加入内容。
+向开关中加入文案。
 
 ## en
 
-Add content to the `Switch`.
+Add label to the switch.

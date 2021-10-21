@@ -15,11 +15,10 @@ import { IxButton } from '@idux/components/button'
 import { MODAL_TOKEN, useModal } from '@idux/components/modal'
 
 const MyComponent = {
-  props: {},
   setup() {
-    const { props, cancel, ok } = inject(MODAL_TOKEN)!
+    const { cancel, ok } = inject(MODAL_TOKEN)!
 
-    const content = h('p', { style: { marginBottom: '16px' } }, { default: () => `modal title is: ${props.title}` })
+    const content = h('p', { style: { marginBottom: '16px' } }, { default: () => `Some contents...t` })
 
     const cancelButton = h(IxButton, { onClick: cancel, style: { marginRight: '16px' } }, `Cancel`)
     const okButton = h(IxButton, { onClick: ok, mode: 'primary' }, `Ok`)
@@ -31,14 +30,13 @@ const MyComponent = {
 
 export default defineComponent({
   components: { MyComponent },
-  setup() {
-    const visible = ref(false)
-
-    const { confirm } = useModal()
-
-    const openModal = () => confirm({ title: 'This is title', footer: null, content: h(MyComponent) })
-
-    return { visible, openModal }
-  },
 })
+</script>
+
+<script setup lang="ts">
+const visible = ref(false)
+
+const { confirm } = useModal()
+
+const openModal = () => confirm({ title: 'This is title', footer: null, content: h(MyComponent) })
 </script>

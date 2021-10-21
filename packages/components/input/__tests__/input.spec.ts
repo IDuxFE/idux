@@ -179,15 +179,15 @@ describe('Input', () => {
   })
 
   test('size work', async () => {
-    const wrapper = InputMount({ props: { size: 'large' } })
+    const wrapper = InputMount({ props: { size: 'lg' } })
 
-    expect(wrapper.classes()).toContain('ix-input-large')
+    expect(wrapper.classes()).toContain('ix-input-lg')
 
-    await wrapper.setProps({ size: 'small' })
-    expect(wrapper.classes()).toContain('ix-input-small')
+    await wrapper.setProps({ size: 'sm' })
+    expect(wrapper.classes()).toContain('ix-input-sm')
 
     await wrapper.setProps({ size: undefined })
-    expect(wrapper.classes()).toContain('ix-input-medium')
+    expect(wrapper.classes()).toContain('ix-input-md')
   })
 
   test('clearable work', async () => {

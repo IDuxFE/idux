@@ -32,16 +32,16 @@ import { ModalProps } from './types'
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
-    const { props, config, prefixCls, visible, animatedVisible } = inject(modalToken)!
+    const { props, config, mergedPrefixCls, visible, animatedVisible } = inject(modalToken)!
     const { close } = inject(MODAL_TOKEN)!
     const { centered, width, mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
 
     const classes = computed(() => {
-      const _prefixCls = prefixCls.value
+      const prefixCls = mergedPrefixCls.value
       const containerClassName = props.containerClassName
       return {
-        [`${_prefixCls}-wrapper`]: true,
-        [`${_prefixCls}-centered`]: centered.value,
+        [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-centered`]: centered.value,
         [containerClassName || '']: containerClassName,
       }
     })
@@ -75,7 +75,7 @@ export default defineComponent({
     })
 
     return () => {
-      const _prefixCls = prefixCls.value
+      const prefixCls = mergedPrefixCls.value
       return (
         <div
           v-show={animatedVisible.value}
@@ -91,19 +91,19 @@ export default defineComponent({
               v-show={visible.value}
               ref={modalRef}
               role="document"
-              class={_prefixCls}
+              class={prefixCls}
               style={modalStyle.value}
               onMousedown={onModalMousedown}
               onMouseup={onModalMouseup}
               {...attrs}
             >
-              <div ref={sentinelStartRef} tabindex={0} class={`${_prefixCls}-sentinel`} aria-hidden={true}></div>
-              <div class={`${_prefixCls}-content`}>
+              <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+              <div class={`${prefixCls}-content`}>
                 <ModalHeader></ModalHeader>
                 <ModalBody></ModalBody>
                 <ModalFooter></ModalFooter>
               </div>
-              <div ref={sentinelEndRef} tabindex={0} class={`${_prefixCls}-sentinel`} aria-hidden={true}></div>
+              <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
             </div>
           </Transition>
         </div>

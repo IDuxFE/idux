@@ -1,34 +1,28 @@
 <template>
-  <IxRadioGroup v-model:value="value" buttoned>
-    <IxRadio value="a">Beijing</IxRadio>
-    <IxRadio value="b">Shanghai</IxRadio>
-    <IxRadio value="c">Guangzhou</IxRadio>
-    <IxRadio value="d">Shenzhen</IxRadio>
-  </IxRadioGroup>
-  <br /><br />
-  <IxRadioGroup v-model:value="value" buttoned mode="primary">
-    <IxRadio value="a">Beijing</IxRadio>
-    <IxRadio value="b">Shanghai</IxRadio>
-    <IxRadio value="c">Guangzhou</IxRadio>
-    <IxRadio value="d">Shenzhen</IxRadio>
-  </IxRadioGroup>
-  <br /><br />
-  <IxRadioGroup v-model:value="value" buttoned disabled>
-    <IxRadio value="a">Beijing</IxRadio>
-    <IxRadio value="b">Shanghai</IxRadio>
-    <IxRadio value="c">Guangzhou</IxRadio>
-    <IxRadio value="d">Shenzhen</IxRadio>
-  </IxRadioGroup>
+  <IxSpace direction="vertical">
+    <IxRadioGroup v-model:value="value" buttoned>
+      <IxRadio value="beijing">Beijing</IxRadio>
+      <IxRadio value="shanghai">Shanghai</IxRadio>
+      <IxRadio value="guangzhou">Guangzhou</IxRadio>
+      <IxRadio value="shenzhen">Shenzhen</IxRadio>
+    </IxRadioGroup>
+    <IxRadioGroup v-model:value="value" buttoned mode="primary">
+      <IxRadio value="beijing">Beijing</IxRadio>
+      <IxRadio value="shanghai">Shanghai</IxRadio>
+      <IxRadio value="guangzhou">Guangzhou</IxRadio>
+      <IxRadio value="shenzhen">Shenzhen</IxRadio>
+    </IxRadioGroup>
+    <IxRadioGroup v-model:value="value" buttoned disabled>
+      <IxRadio value="beijing">Beijing</IxRadio>
+      <IxRadio value="shanghai">Shanghai</IxRadio>
+      <IxRadio value="guangzhou">Guangzhou</IxRadio>
+      <IxRadio value="shenzhen">Shenzhen</IxRadio>
+    </IxRadioGroup>
+  </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const value = ref('a')
-
-    return { value }
-  },
-})
+const value = ref('beijing')
 </script>

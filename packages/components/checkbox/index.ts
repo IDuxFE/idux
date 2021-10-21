@@ -20,5 +20,5 @@ export type {
   CheckboxPublicProps as CheckboxProps,
   CheckboxGroupInstance,
   CheckboxGroupPublicProps as CheckboxGroupProps,
-  CheckboxSize,
+  CheckboxOption,
 } from './src/types'
