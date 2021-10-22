@@ -1,140 +1,116 @@
-import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import IxRate from '../src/Rate'
-import { RateInstance, RateProps } from '../src/types'
+import Rate from '../src/Rate'
+import { RateProps } from '../src/types'
 
-// TODO rebuild
-describe.skip('Rate', () => {
-  const RateMount = (options?: MountingOptions<Partial<RateProps>>) => mount(IxRate, { ...options })
-  let findNormalIcon: (wrapper: VueWrapper<RateInstance>) => number
+describe('Rate', () => {
+  const RateMount = (options?: MountingOptions<Partial<RateProps>>) => mount(Rate, { ...options })
 
-  beforeEach(() => {
-    findNormalIcon = (wrapper: VueWrapper<RateInstance>): number => {
-      const res = wrapper.findAll('.ix-rate-iconfont-main').filter(item => {
-        return item.classes().includes('ix-rate-normal')
-      })
+  renderWork(Rate, { props: { value: 3 } })
 
-      return res.length
-    }
-  })
-
-  renderWork(IxRate, { props: { value: 3 } })
-
-  test('init hightlight as value', () => {
+  test('v-model:value work', async () => {
+    const onUpdateValue = jest.fn()
     const wrapper = RateMount({
-      props: {
-        value: 3,
-      },
+      props: { value: 3, 'onUpdate:value': onUpdateValue },
     })
 
-    const normalIcon = findNormalIcon(wrapper)
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(3)
 
-    expect(normalIcon).toBe(2)
+    await wrapper.setProps({ value: 2 })
+
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(2)
+
+    await wrapper.findAll('.ix-rate-item > span')[4].trigger('click')
+
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(5)
+    expect(onUpdateValue).toBeCalledWith(5)
   })
 
-  test('test count', () => {
+  test('allowHalf work', async () => {
     const wrapper = RateMount({
-      props: {
-        value: 3,
-        count: 10,
-      },
+      props: { allowHalf: true, value: 3.5 },
     })
 
-    expect(wrapper.findAll('.ix-rate-full').length).toBe(10)
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(3)
+    expect(wrapper.findAll('.ix-rate-item')[3].classes()).toContain('ix-rate-item-half')
+
+    await wrapper.setProps({ value: 2.5 })
+
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(2)
+    expect(wrapper.findAll('.ix-rate-item')[2].classes()).toContain('ix-rate-item-half')
   })
 
-  test('test tooltip', () => {
+  test('clearable work', async () => {
     const wrapper = RateMount({
-      props: {
-        value: 3,
-        tooltips: ['1', '2', '3', '4', '5'],
-      },
+      props: { clearable: true, value: 3 },
     })
 
-    const titleList = wrapper.findAll('.ix-rate-item').filter(item => {
-      return item.attributes()['title']
-    })
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(3)
 
-    expect(titleList.length).toBe(5)
+    await wrapper.findAll('.ix-rate-item > span')[2].trigger('click')
+
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(0)
   })
 
-  test('test click', async () => {
-    const wrapper = RateMount({})
-
-    await wrapper.setProps({ value: 3 })
-
-    const thirdStar = wrapper.findAll('.ix-rate-item')[2].element as HTMLElement
-    thirdStar.click()
-
-    const normalIcon = findNormalIcon(wrapper)
-
-    expect(normalIcon).toBe(2)
-  })
-
-  test('touch half and allow half', async () => {
-    const wrapper = mount({
-      template: `<IxRate v-model:value="value" allow-half ref="testRateRef" />`,
-      data() {
-        return {
-          value: 4,
-        }
-      },
-      components: { IxRate },
+  test('count work', async () => {
+    const wrapper = RateMount({
+      props: { count: 10 },
     })
 
-    const vm = wrapper.vm
-    const testHalfItem = wrapper.findAll('.ix-rate-item')[1]
+    expect(wrapper.findAll('.ix-rate-item').length).toBe(10)
 
-    await testHalfItem.trigger('mousemove', { offsetX: 0 })
-    await testHalfItem.trigger('click')
-    await testHalfItem.trigger('mouseleave')
+    await wrapper.setProps({ count: 3 })
 
-    expect(vm.value).toEqual(1.5)
+    expect(wrapper.findAll('.ix-rate-item').length).toBe(3)
   })
 
-  test('disable', async () => {
-    const wrapper = mount({
-      template: `<IxRate v-model:value="value" disabled ref="testRateRef" />`,
-      data() {
-        return {
-          value: 4,
-        }
-      },
-      components: { IxRate },
+  test('disabled work', async () => {
+    const wrapper = RateMount({
+      props: { disabled: true },
     })
 
-    const vm = wrapper.vm
-    const testItem = wrapper.findAll('.ix-rate-item')[1]
+    await wrapper.findAll('.ix-rate-item > span')[0].trigger('click')
 
-    await testItem.trigger('mousemove')
-    await testItem.trigger('click')
-    await testItem.trigger('mouseleave')
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(0)
 
-    expect(vm.value).toEqual(4)
+    await wrapper.setProps({ disabled: false })
+
+    await wrapper.findAll('.ix-rate-item > span')[0].trigger('click')
+
+    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(1)
   })
 
-  test('allow clear', async () => {
-    const wrapper = mount({
-      template: `<IxRate v-model:value="value" allow-clear ref="testRateRef" />`,
-      data() {
-        return {
-          value: 2,
-        }
-      },
-      components: { IxRate },
+  test('icon work', async () => {
+    const wrapper = RateMount({
+      props: { icon: 'up' },
     })
 
-    await wrapper.setProps({ value: 3 })
+    expect(wrapper.findAll('.ix-icon-up').length).toBe(10)
 
-    const vm = wrapper.vm
-    const testItem = wrapper.findAll('.ix-rate-item')[2]
+    await wrapper.setProps({ icon: 'down' })
 
-    await testItem.trigger('mousemove', { offsetX: 26 })
-    await testItem.trigger('click')
-    await testItem.trigger('mouseleave')
+    expect(wrapper.findAll('.ix-icon-up').length).toBe(0)
+    expect(wrapper.findAll('.ix-icon-down').length).toBe(10)
+  })
 
-    expect(vm.value).toEqual(0)
+  test('icon slot work', async () => {
+    const wrapper = RateMount({
+      props: { icon: 'up' },
+      slots: { icon: ({ index }) => index },
+    })
+
+    expect(wrapper.findAll('.ix-rate-item-first')[0].text()).toBe('0')
+    expect(wrapper.findAll('.ix-rate-item-first')[1].text()).toBe('1')
+  })
+
+  test('tooltips work', async () => {
+    const tooltips = ['Poor', 'Fair', 'Average', 'Good', 'Excellent']
+    const wrapper = RateMount({
+      props: { tooltips },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
