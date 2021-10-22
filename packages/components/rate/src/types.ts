@@ -11,19 +11,20 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const rateProps = {
-  value: IxPropTypes.oneOfType([Number, String]).def(0),
+  value: IxPropTypes.oneOfType([Number, String]),
   allowHalf: IxPropTypes.bool,
   clearable: IxPropTypes.bool,
   count: IxPropTypes.oneOfType([Number, String]),
-  disabled: IxPropTypes.bool,
+  disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
-  tooltips: IxPropTypes.arrayOf(String),
+  tooltips: IxPropTypes.arrayOf(String).def(() => []),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: number) => void>(),
   onChange: IxPropTypes.emit<(value: number) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onKeyDown: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
 }
 
 export type RateProps = IxInnerPropTypes<typeof rateProps>
@@ -34,3 +35,18 @@ export interface RateBindings {
 }
 export type RateComponent = DefineComponent<Omit<HTMLAttributes, keyof RatePublicProps> & RatePublicProps, RateBindings>
 export type RateInstance = InstanceType<DefineComponent<RateProps, RateBindings>>
+
+// private
+export const rateItemProps = {
+  count: IxPropTypes.number.isRequired,
+  disabled: IxPropTypes.bool.isRequired,
+  focused: IxPropTypes.bool.isRequired,
+  index: IxPropTypes.number.isRequired,
+  prefixCls: IxPropTypes.string.isRequired,
+  tooltip: IxPropTypes.string,
+  value: IxPropTypes.number.isRequired,
+
+  // events
+  onClick: IxPropTypes.func<(evt: MouseEvent, element: HTMLElement, index: number) => void>().isRequired,
+  onMouseMove: IxPropTypes.func<(evt: MouseEvent, element: HTMLElement, index: number) => void>().isRequired,
+}

@@ -37,7 +37,7 @@ import {
   Right,
   RotateLeft,
   RotateRight,
-  Star,
+  StarFilled,
   Up,
   User,
   VerticalAlignTop,
@@ -72,7 +72,7 @@ export const staticIcons: IconDefinition[] = [
   InfoCircleFilled, // modal
   ExclamationCircle,
   ExclamationCircleFilled, // modal
-  Star,
+  StarFilled, // rate
   VerticalAlignTop,
   Ellipsis,
   QuestionCircle,

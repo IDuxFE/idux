@@ -14,12 +14,12 @@ describe('Menu', () => {
         components: { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub },
         template: `
         <IxMenu>
-        <IxMenuItem key="item1" icon="star">
+        <IxMenuItem key="item1" icon="up">
           <a href="javascript: void(0)">Item 1</a>
         </IxMenuItem>
-        <IxMenuItem key="item2" disabled icon="star"> Item 2 </IxMenuItem>
+        <IxMenuItem key="item2" disabled icon="up"> Item 2 </IxMenuItem>
         <IxMenuDivider />
-        <IxMenuSub key="menuSub1" title="Sub Menu 1" icon="star">
+        <IxMenuSub key="menuSub1" title="Sub Menu 1" icon="up">
           <IxMenuItemGroup title="Item Group 1">
             <IxMenuItem key="item3">Item 3</IxMenuItem>
             <IxMenuItem key="item4">Item 4</IxMenuItem>
@@ -35,7 +35,7 @@ describe('Menu', () => {
             <IxMenuItem key="item8">Item 8</IxMenuItem>
           </IxMenuSub>
         </IxMenuSub>
-        <IxMenuSub key="menuSub4" disabled title="MenuSub 4" icon="star">
+        <IxMenuSub key="menuSub4" disabled title="MenuSub 4" icon="up">
           <IxMenuItem key="item9">Item 9</IxMenuItem>
           <IxMenuItem key="item10">Item 10</IxMenuItem>
         </IxMenuSub>

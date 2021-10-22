@@ -140,7 +140,7 @@ const rate = shallowReactive<RateConfig>({
   allowHalf: false,
   clearable: false,
   count: 5,
-  icon: 'star',
+  icon: 'star-filled',
 })
 
 const radio = shallowReactive<RadioConfig>({

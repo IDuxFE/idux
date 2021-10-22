@@ -3,3 +3,4 @@ import './index.less'
 
 // style dependencies
 import '../../icon/style'
+import '../../tooltip/style'

@@ -5,35 +5,72 @@
   line-height: unset;
   list-style: none;
   outline: none;
-  cursor: pointer;
   font-size: @rate-size;
-  color: @rate-color;
-  transition: @rate-transition;
+  color: @rate-active-color;
 
   &-item {
-    display: inline-block;
     position: relative;
-    margin-right: @rate-item-margin-right;
+    display: inline-block;
+    color: inherit;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: @rate-item-margin-right;
+    }
+
+    > span {
+      transition: @rate-transition;
+
+      &:hover,
+      &:focus-visible {
+        transform: scale(@rate-item-hover-scale);
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        outline: @rate-item-focus-outline;
+      }
+    }
+
+    &-first,
+    &-second {
+      color: @rate-color;
+      transition: @rate-transition;
+      user-select: none;
+
+      .@{icon-prefix} {
+        vertical-align: middle;
+      }
+    }
+
+    &-first {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    &-half &-first,
+    &-half &-second {
+      opacity: 1;
+    }
+
+    &-half &-first,
+    &-full &-second {
+      color: inherit;
+    }
   }
 
-  &-highlight {
-    color: @rate-active-color;
-  }
-
-  &-half {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  &-half-icon {
-    color: @rate-active-color;
-  }
-
-  &-disabled {
+  &-disabled &-item {
     cursor: not-allowed;
+    &:hover {
+      transform: scale(1);
+    }
   }
 }

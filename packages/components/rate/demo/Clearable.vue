@@ -1,5 +1,5 @@
 <template>
-  <IxRate v-model:value="value" />
+  <IxRate v-model:value="value" clearable />
 </template>
 
 <script setup lang="ts">

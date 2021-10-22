@@ -5,136 +5,160 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, ref, watchEffect } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
+import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormItemRegister } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useFormElement } from '@idux/components/utils'
 
+import RateItem from './RateItem'
 import { rateProps } from './types'
-
-const HALF = 2
 
 export default defineComponent({
   name: 'IxRate',
   props: rateProps,
-  setup(props) {
-    const score = ref(props.value)
-    const touchHalf = ref(false)
-    const starRefs = ref([])
-
+  setup(props, { attrs, expose, slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-rate`)
     const config = useGlobalConfig('rate')
-    const rateCount = computed(() => convertNumber(props.count ?? config.count))
-    const rateIcon = computed(() => props.icon ?? config.icon)
-    const allowHalf = computed(() => props.allowHalf ?? config.allowHalf)
-    const clearable = computed(() => props.clearable ?? config.clearable)
 
-    watchEffect(() => {
-      const value = convertNumber(props.value)
-      score.value = value
-      touchHalf.value = value !== Math.floor(value)
+    const { elementRef, focus, blur } = useFormElement()
+    expose({ focus, blur })
+
+    const { accessor, control } = useValueAccessor<number>()
+    useFormItemRegister(control)
+
+    const countRef = computed(() => convertNumber(props.count ?? config.count))
+    const iconRef = computed(() => props.icon ?? config.icon)
+    const allowHalfRef = computed(() => props.allowHalf ?? config.allowHalf)
+    const clearableRef = computed(() => props.clearable ?? config.clearable)
+    const isDisabled = computed(() => accessor.disabled.value)
+    const isFocused = ref(false)
+
+    const hoverValue = ref<number>()
+
+    const changeValue = (value: number) => {
+      callEmit(props.onChange, value)
+      accessor.setValue(value)
+    }
+
+    const calcValue = (evt: MouseEvent, element: HTMLElement, index: number) => {
+      let value = index + 1
+      if (allowHalfRef.value) {
+        if (evt.offsetX < element.clientWidth / 2) {
+          value -= 0.5
+        }
+      }
+      return value
+    }
+
+    const handleItemClick = (evt: MouseEvent, element: HTMLElement, index: number) => {
+      const currValue = accessor.valueRef.value
+      const newValue = calcValue(evt, element, index)
+      const isClear = clearableRef.value && currValue === newValue
+
+      changeValue(isClear ? 0 : newValue)
+    }
+
+    const handleItemMouseMove = (evt: MouseEvent, element: HTMLElement, index: number) => {
+      const newValue = calcValue(evt, element, index)
+      hoverValue.value = newValue
+    }
+
+    const handleFocus = (evt: FocusEvent) => {
+      isFocused.value = true
+      callEmit(props.onFocus, evt)
+    }
+
+    const handleBlur = (evt: FocusEvent) => {
+      isFocused.value = false
+      callEmit(props.onBlur, evt)
+      accessor.markAsBlurred()
+    }
+
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      const currValue = accessor.valueRef.value
+      const currCount = countRef.value
+      const currAllowHalf = allowHalfRef.value
+      const eventCode = evt.code
+      switch (eventCode) {
+        case 'ArrowRight':
+        case 'ArrowUp':
+          {
+            if (currValue < currCount) {
+              changeValue(currValue + (currAllowHalf ? 0.5 : 1))
+              evt.preventDefault()
+            }
+          }
+          break
+        case 'ArrowLeft':
+        case 'ArrowDown':
+          if (currValue > 0) {
+            changeValue(currValue - (currAllowHalf ? 0.5 : 1))
+            evt.preventDefault()
+          }
+          break
+      }
+    }
+
+    const handleMouseLeave = () => {
+      hoverValue.value = undefined
+    }
+
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return {
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-focused`]: isFocused.value,
+      }
     })
 
-    function getIconClass(item: number) {
-      return item <= score.value ? 'ix-rate-highlight' : 'ix-rate-normal'
-    }
-
-    function showDecimalIcon(item: number) {
-      return allowHalf.value && item - 0.5 <= score.value && item > score.value
-    }
-
-    function getTooltip(index: number) {
-      if (!props.tooltips || !Array.isArray(props.tooltips)) {
-        return
-      }
-
-      return props.tooltips[index] || ''
-    }
-
-    function handleMouseEnter(item: number, e: MouseEvent) {
-      if (props.disabled) {
-        return
-      }
-
-      if (allowHalf.value) {
-        updateTouchHalf(item - 1, e)
-        score.value = touchHalf.value ? item - 0.5 : item
-      } else {
-        score.value = item
-      }
-    }
-
-    function updateTouchHalf(index: number, e: MouseEvent) {
-      const target = starRefs.value[index] as HTMLElement
-
-      if (e.offsetX <= target.clientWidth / HALF) {
-        touchHalf.value = true
-        return
-      }
-
-      touchHalf.value = false
-    }
-
-    function handleMouseLeave() {
-      if (props.disabled) {
-        return
-      }
-
-      const value = convertNumber(props.value)
-
-      if (allowHalf.value) {
-        touchHalf.value = value !== Math.floor(value)
-      }
-      score.value = value
-    }
-
-    function handleClick() {
-      if (props.disabled) {
-        return
-      }
-
-      let clearValue = false
-      let emitValue = 0
-      const beforeValue = convertNumber(props.value)
-      const currentScore = convertNumber(score.value)
-
-      if (clearable.value) {
-        clearValue = beforeValue === currentScore
-      }
-
-      emitValue = clearValue ? 0 : currentScore
-
-      if (emitValue !== beforeValue) {
-        callEmit(props['onUpdate:value'], emitValue)
-        callEmit(props.onChange, emitValue)
-      }
-    }
-
     return () => {
+      const count = countRef.value
+      const disabled = isDisabled.value
+      const focused = isFocused.value
+      const itemValue = convertNumber(hoverValue.value ?? accessor.valueRef.value)
+      const itemPrefixCls = `${mergedPrefixCls.value}-item`
+
+      const { tooltips } = props
       const children = []
-      for (let index = 0; index < rateCount.value; index++) {
+      for (let index = 0; index < count; index++) {
         children.push(
-          <div
+          <RateItem
             key={index}
-            ref={el => (starRefs.value[index] = el)}
-            class="ix-rate-item"
-            title={getTooltip(index)}
-            onClick={handleClick}
-            onMousemove={$event => handleMouseEnter(index + 1, $event)}
-            onMouseleave={handleMouseLeave}
+            count={count}
+            disabled={disabled}
+            focused={focused}
+            index={index}
+            prefixCls={itemPrefixCls}
+            tooltip={tooltips[index]}
+            value={itemValue}
+            onClick={handleItemClick}
+            onMouseMove={handleItemMouseMove}
           >
-            <div class="ix-rate-full">
-              <IxIcon class={getIconClass(index + 1)} name={rateIcon.value} />
-            </div>
-            {showDecimalIcon(index + 1) && (
-              <div class="ix-rate-half">
-                <IxIcon class="ix-rate-half-icon" name={rateIcon.value} />
-              </div>
-            )}
-          </div>,
+            {slots.icon?.({ disabled, focused, index }) ?? <IxIcon name={iconRef.value} />}
+          </RateItem>,
         )
       }
-      return <div class="ix-rate">{children}</div>
+
+      return (
+        <ul
+          ref={elementRef}
+          class={classes.value}
+          tabindex={disabled ? -1 : (attrs.tabindex as number)}
+          onFocus={disabled ? undefined : handleFocus}
+          onBlur={disabled ? undefined : handleBlur}
+          onKeydown={disabled ? undefined : handleKeyDown}
+          onMouseleave={disabled ? undefined : handleMouseLeave}
+          role="radiogroup"
+        >
+          {children}
+        </ul>
+      )
     }
   },
 })

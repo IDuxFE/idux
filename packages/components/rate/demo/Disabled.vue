@@ -1,15 +1,9 @@
 <template>
   <IxRate v-model:value="value" disabled />
 </template>
-<script>
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  setup() {
-    const value = ref(3)
 
-    return {
-      value,
-    }
-  },
-})
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const value = ref(3)
 </script>
