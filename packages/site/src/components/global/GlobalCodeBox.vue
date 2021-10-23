@@ -15,8 +15,8 @@
       </div>
       <div class="global-code-box-actions">
         <IxIcon name="copy" @click="onCopy" />
-        <IxIcon v-show="expanded" name="code-expand" @click="expanded = !expanded" />
-        <IxIcon v-show="!expanded" name="code-collapse" @click="expanded = !expanded" />
+        <IxIcon v-show="expanded" name="expand" @click="expanded = !expanded" />
+        <IxIcon v-show="!expanded" name="unexpand" @click="expanded = !expanded" />
       </div>
     </section>
     <section class="highlight-wrapper" :class="{ 'highlight-wrapper-expand': expanded }">

@@ -264,10 +264,10 @@ describe.skip('TimePicker', () => {
   test('suffix work', async () => {
     const wrapper = TimePickerMount({
       props: {
-        suffix: 'calendar',
+        suffix: 'up',
       },
     })
-    expect(wrapper.find(`.ix-input-suffix .ix-icon-calendar`).exists()).toBe(true)
+    expect(wrapper.find(`.ix-input-suffix .ix-icon-up`).exists()).toBe(true)
   })
 
   test('optionsStep work', async () => {

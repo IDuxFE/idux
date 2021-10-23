@@ -13,6 +13,7 @@ export const gulpConfig = {
     assetsDirname: join(__dirname, 'icons/assets'),
     publicDirname: join(siteDirname, 'public/icon-svg'),
     definitionsFilename: join(componentsDirname, 'icon/src/definitions.ts'),
+    allIconsFilename: join(componentsDirname, 'icon/demo/all.ts'),
   },
   site: {
     siteDirname,

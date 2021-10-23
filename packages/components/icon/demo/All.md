@@ -1,10 +1,14 @@
 ---
 order: 0
 title:
-  zh: 全局图标
-  en: All Icons
+  zh: 默认图标
+  en: Default icons
 ---
 
 ## zh
 
-图标素材大部分来自 [ant-design-icons](https://github.com/ant-design/ant-design-icons)
+我们提供许多精心设计的图标，你可以很方便的使用它们。
+
+## en
+
+We provide many well-designed icons, you can use them very easily.

@@ -37,13 +37,9 @@
 
     &-first,
     &-second {
-      color: @rate-color;
+      color: @rate-placeholder-color;
       transition: @rate-transition;
       user-select: none;
-
-      .@{icon-prefix} {
-        vertical-align: middle;
-      }
     }
 
     &-first {
@@ -69,6 +65,7 @@
 
   &-disabled &-item {
     cursor: not-allowed;
+
     &:hover {
       transform: scale(1);
     }
