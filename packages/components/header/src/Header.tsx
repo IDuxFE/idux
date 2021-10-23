@@ -9,7 +9,7 @@ import type { HeaderProps } from './types'
 import type { AvatarProps } from '@idux/components/avatar'
 import type { ComputedRef, Slot, VNode } from 'vue'
 
-import { computed, defineComponent, h, isVNode } from 'vue'
+import { computed, defineComponent, isVNode } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -75,14 +75,12 @@ const renderIcon = (
   if (!slot && !icon) {
     return null
   }
-  const iconNode = slot ? (
-    slot()
-  ) : isVNode(icon) ? (
-    h(icon as VNode, { onClick })
-  ) : (
-    <IxIcon name={icon} onClick={onClick} />
+  const iconNode = slot ? slot() : isVNode(icon) ? icon : <IxIcon name={icon} />
+  return (
+    <div class={wrapperClassName} onClick={onClick}>
+      {iconNode}
+    </div>
   )
-  return <div class={wrapperClassName}>{iconNode}</div>
 }
 
 const renderTitle = (slot: Slot | undefined, title: string | undefined, wrapperClassName: string) => {

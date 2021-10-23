@@ -3,7 +3,7 @@ module.exports = {
   // u can change this option to a more specific folder for test single component or util when dev
   // for example, roots: ['<rootDir>/packages/components/button'],
   roots: ['<rootDir>/packages/'],
-  // when running jst locally, you can turn off coverage.
+  // when running jest locally, you can turn off coverage.
   // for example, collectCoverage: false,
   collectCoverage: true,
   testEnvironment: 'jsdom',

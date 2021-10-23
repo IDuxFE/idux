@@ -18,7 +18,7 @@ const MyComponent = {
   setup() {
     const { cancel, ok } = inject(MODAL_TOKEN)!
 
-    const content = h('p', { style: { marginBottom: '16px' } }, { default: () => `Some contents...t` })
+    const content = h('p', { style: { marginBottom: '16px' } }, { default: () => `Some contents...` })
 
     const cancelButton = h(IxButton, { onClick: cancel, style: { marginRight: '16px' } }, `Cancel`)
     const okButton = h(IxButton, { onClick: ok, mode: 'primary' }, `Ok`)

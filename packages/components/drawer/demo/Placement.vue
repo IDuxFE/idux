@@ -1,29 +1,25 @@
 <template>
   <IxRadioGroup v-model:value="placement">
-    <IxRadio value="left">left</IxRadio>
-    <IxRadio value="right">right</IxRadio>
     <IxRadio value="top">top</IxRadio>
+    <IxRadio value="end">end</IxRadio>
     <IxRadio value="bottom">bottom</IxRadio>
+    <IxRadio value="start">start</IxRadio>
   </IxRadioGroup>
-  <IxButton @click="showDrawer"> Click me </IxButton>
-  <IxDrawer v-model:visible="visible" title="抽屉标题" :placement="placement">
-    <p>上下左右多方向打开抽屉内容</p>
-    <p>上下左右多方向打开抽屉内容</p>
-    <p>上下左右多方向打开抽屉内容</p>
+  <IxButton @click="showDrawer"> Open </IxButton>
+  <IxDrawer v-model:visible="visible" header="Basic Drawer" :placement="placement">
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
   </IxDrawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const placement = ref('left')
-    const visible = ref(false)
-    const showDrawer = () => {
-      visible.value = !visible.value
-    }
-    return { placement, visible, showDrawer }
-  },
-})
+const placement = ref('end')
+
+const visible = ref(false)
+
+const showDrawer = () => {
+  visible.value = !visible.value
+}
 </script>
-<style lang="less" scoped></style>

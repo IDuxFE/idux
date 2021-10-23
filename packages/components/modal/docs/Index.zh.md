@@ -8,11 +8,11 @@ order: 0
 
 需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 `IxModal` 在当前页面正中打开一个浮层，承载相应的操作。
 
-另外当需要一个简洁的确认框询问用户时，可以使用精心封装好的 `useModal` 等方法。
+另外当需要一个简洁的对话框询问或提示用户时，可以使用精心封装好的 `useModal` 等方法。
 
 推荐使用封装好的组件 (`Component`) 作为 `IxModal` 的默认插槽，或 `useModal` 的 `content` 参数，这样 `Component` 内的逻辑可以完全隔离、并且可以做到随时复用。
 
-在 `Component` 中可以注入 `MODAL_TOKEN`, 以获取对话框组件的属性和方法，用于控制对话框的行为。
+在 `Component` 中可以注入 `MODAL_TOKEN`, 以获取对话框组件的方法，用于控制对话框的行为。
 
 ## API
 
@@ -29,28 +29,29 @@ order: 0
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon='{onClose}'` | `close` | ✅ | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
-| `containerClassName` | 浮层容器类名 | `string` | - | - | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
 | `footer` | 自定义底部按钮 | `ModalButtonProps[] \| VNode \| #footer` | - | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `null` 则不显示 |
-| `header` | 对话框标题 | `sting \| HeaderProps \| #header` | - | - | - |
+| `header` | 对话框标题 | `sting \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
 | `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
+| `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
 | `title` | 对话框次标题 | `sting  \| VNode \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
 | `width` | 对话框宽度 | `sting \| number` | `520` | ✅ | - |
+| `wrapperClassName` | 对话框外层容器类名 | `string` | - | - | - |
 | `zIndex` | 设置对话框的 `z-index` | `number` | `1000` | ✅ | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
 | `onAfterClose` | 关闭后的回调 | `() => void` | - | - | - |
-| `onClose` | 点击遮罩层或关闭图标的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 返回 `false` 的时候，将阻止关闭 |
+| `onClose` | 点击蒙层或关闭图标的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 返回 `false` 的时候，将阻止关闭 |
 | `onCancel` | 点击取消按钮的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 执行完回调后，默认会关闭对话框，返回 `false` 的时候，将阻止关闭 |
 | `onOk` | 点击确认按钮的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 执行完回调后，默认会关闭对话框，返回 `false` 的时候，将阻止关闭 |
 
 ```ts
 export interface ModalButtonProps extends ButtonProps {
-  key?: string | number
+  key?: VKey
   // 按钮的文本
   text?: string
   // 按钮点击回调
@@ -140,12 +141,12 @@ export interface ModalRef extends ModalBindings {
 }
 ```
 
-### modalToken
+### MODAL_TOKEN
 
 可以在子组件中注入该 `token` 来获取对话框的属性和方法，以便于控制对话框的行为。
 
 ```ts
-export const modalToken: InjectionKey<ModalBindings & { props: ModalProps }>;
+export const MODAL_TOKEN: InjectionKey<ModalBindings>;
 ```
 
 ## FAQ
@@ -194,7 +195,7 @@ const contentRef = ref()
 
 const openModal = () => open({ 
   header: 'Basic Modal', 
-  content: h('', 'Some contents...'),
+  content: h('div', 'Some contents...'),
   contentProps: { ref: contentRef }
 })
 </script>

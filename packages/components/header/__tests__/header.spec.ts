@@ -46,9 +46,9 @@ describe('Header', () => {
       props: { prefix: 'up', onPrefixClick },
     })
 
-    expect(wrapper.find('.ix-header-prefix').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
 
-    await wrapper.find('.ix-icon-up').trigger('click')
+    await wrapper.find('.ix-header-prefix').trigger('click')
 
     expect(onPrefixClick).toBeCalledTimes(1)
 
@@ -56,7 +56,7 @@ describe('Header', () => {
 
     expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
 
-    await wrapper.find('.ix-icon-down').trigger('click')
+    await wrapper.find('.ix-header-prefix').trigger('click')
 
     expect(onPrefixClick).toBeCalledTimes(2)
   })
@@ -77,9 +77,9 @@ describe('Header', () => {
       props: { suffix: 'up', onSuffixClick },
     })
 
-    expect(wrapper.find('.ix-header-suffix').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
 
-    await wrapper.find('.ix-icon-up').trigger('click')
+    await wrapper.find('.ix-header-suffix').trigger('click')
 
     expect(onSuffixClick).toBeCalledTimes(1)
 
@@ -88,7 +88,7 @@ describe('Header', () => {
 
     expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
 
-    await wrapper.find('.ix-icon-down').trigger('click')
+    await wrapper.find('.ix-header-suffix').trigger('click')
 
     expect(onSuffixClick).toBeCalledTimes(2)
   })

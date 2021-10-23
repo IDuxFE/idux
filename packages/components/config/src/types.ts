@@ -286,11 +286,13 @@ export interface ModalConfig {
 
 export interface DrawerConfig {
   closable: boolean
+  closeIcon: string
   closeOnEsc: boolean
+  height: string | number
   mask: boolean
   maskClosable: boolean
+  width: string | number
   zIndex?: number
-  containerClassName?: string
 }
 
 export interface ResultConfig {

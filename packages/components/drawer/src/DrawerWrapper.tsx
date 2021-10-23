@@ -5,54 +5,155 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, Ref, Transition, computed, defineComponent, inject, ref } from 'vue'
+import type { DrawerProps } from './types'
+import type { DrawerConfig } from '@idux/components/config'
+import type { ComputedRef, Ref } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
-import { DrawerConfig } from '@idux/components/config'
+import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import DrawerBody from './DrawerBody'
+import { isFunction } from 'lodash-es'
+
+import { callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { IxHeader } from '@idux/components/_private'
+
+import DrawerFooter from './DrawerFooter'
 import { DRAWER_TOKEN, drawerToken } from './token'
-import { DrawerProps } from './types'
+
+const drawerTransitionMap = {
+  top: 'move-up',
+  bottom: 'move-down',
+  start: 'move-start',
+  end: 'move-end',
+}
+const horizontalPlacement = ['start', 'end']
+const defaultDistance = 160
 
 export default defineComponent({
   inheritAttrs: false,
-  setup() {
-    const { props, config, animatedVisible } = inject(drawerToken)!
+  setup(_, { attrs }) {
+    const { props, slots, common, config, mergedPrefixCls, visible, animatedVisible, level, levelAction } =
+      inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
-    const { mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
+    const { closable, closeIcon, closeOnEsc, mask, maskClosable, zIndex } = useConfig(props, config)
 
-    const placement = computed(() => props.placement ?? 'right')
-
-    const drawerTransition = computed(() => {
-      const drawerTransitionMap = {
-        left: 'ix-move-left',
-        right: 'ix-move-right',
-        top: 'ix-move-up',
-        bottom: 'ix-move-down',
+    const transitionName = computed(() => `${common.prefixCls}-${drawerTransitionMap[props.placement]}`)
+    const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
+    const placementStyle = computed(() => {
+      const { width, height, offset, placement } = props
+      const horizontal = isHorizontal.value
+      const offsetPixel = convertCssPixel(offset)
+      let offsetObj
+      if (horizontal) {
+        const transformPlacement = placement === 'start' ? 'left' : 'right'
+        offsetObj = { top: offsetPixel, [transformPlacement]: 0 }
+      } else {
+        offsetObj = { left: offsetPixel, [placement]: 0 }
       }
-      return drawerTransitionMap[placement.value]
+      return {
+        width: convertCssPixel(width || (horizontal ? config.width : '100%')),
+        height: convertCssPixel(height || (horizontal ? '100%' : config.height)),
+        ...offsetObj,
+      }
     })
 
-    const classes = useClasses(props)
+    const transformStyle = computed(() => {
+      const { placement } = props
+      const horizontal = isHorizontal.value
+      const distance = level.value * defaultDistance
+      let transform
+      if (horizontal) {
+        transform = distance > 0 ? `translateX(${placement === 'start' ? distance : -distance}px)` : undefined
+      } else {
+        transform = distance > 0 ? `translateY(${placement === 'top' ? distance : -distance}px)` : undefined
+      }
+      return transform
+    })
+
+    const wrapperClasses = computed(() => {
+      const { wrapperClassName = '' } = props
+      const action = levelAction.value
+      const prefixCls = mergedPrefixCls.value
+      return {
+        [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-${props.placement}`]: true,
+        [`${prefixCls}-opened`]: animatedVisible.value,
+        [`${prefixCls}-${action}`]: !!action,
+        [`${prefixCls}-with-mask`]: mask.value,
+        [wrapperClassName]: !!wrapperClassName,
+      }
+    })
+
+    const wrapperStyle = computed(() => {
+      const placement = mask.value ? undefined : placementStyle.value
+      return { zIndex: zIndex.value, transform: transformStyle.value, ...placement }
+    })
+
+    const contentStyle = computed(() => {
+      return mask.value ? placementStyle.value : undefined
+    })
 
     const wrapperRef = ref<HTMLDivElement>()
+    const sentinelStartRef = ref<HTMLDivElement>()
+    const sentinelEndRef = ref<HTMLDivElement>()
 
-    const { onWrapperClick, onWrapperKeydown } = useEvent(close, mask, maskClosable, closeOnEsc)
+    const { onWrapperClick, onWrapperKeydown, onContentMousedown, onContentMouseup } = useEvent(
+      close,
+      mask,
+      maskClosable,
+      closeOnEsc,
+      sentinelStartRef,
+      sentinelEndRef,
+    )
 
-    const { onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible)
+    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible)
+
+    onMounted(() => {
+      watchVisibleChange(props, wrapperRef, sentinelStartRef, mask)
+    })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       return (
-        <Transition name={drawerTransition.value} appear onAfterEnter={onAfterEnter} onAfterLeave={onAfterLeave}>
+        <Transition
+          name={transitionName.value}
+          appear
+          onEnter={onEnter}
+          onAfterEnter={onAfterEnter}
+          onAfterLeave={onAfterLeave}
+        >
           <div
-            v-show={animatedVisible.value}
+            v-show={visible.value}
             ref={wrapperRef}
-            class={classes.value}
-            style={{ zIndex: zIndex.value }}
+            class={wrapperClasses.value}
+            style={wrapperStyle.value}
+            tabindex={-1}
             onClick={onWrapperClick}
             onKeydown={onWrapperKeydown}
           >
-            <DrawerBody></DrawerBody>
+            <Transition name={transitionName.value}>
+              <div
+                role="document"
+                class={prefixCls}
+                style={contentStyle.value}
+                onMousedown={onContentMousedown}
+                onMouseup={onContentMouseup}
+                {...attrs}
+              >
+                <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+                <div class={`${prefixCls}-content`}>
+                  <IxHeader
+                    closable={closable.value}
+                    closeIcon={closeIcon.value}
+                    header={props.header}
+                    onClose={close}
+                    v-slots={slots}
+                  />
+                  <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
+                  <DrawerFooter></DrawerFooter>
+                </div>
+                <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+              </div>
+            </Transition>
           </div>
         </Transition>
       )
@@ -60,29 +161,65 @@ export default defineComponent({
   },
 })
 
-const useConfig = (props: DrawerProps, config: DrawerConfig) => {
+function useConfig(props: DrawerProps, config: DrawerConfig) {
+  const closable = computed(() => props.closable ?? config.closable)
+  const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
   const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-  return { mask, maskClosable, closeOnEsc, zIndex }
+  return { closable, closeIcon, closeOnEsc, mask, maskClosable, zIndex }
 }
 
-const useClasses = (props: DrawerProps) => {
-  return computed(() => {
-    return ['ix-drawer-wrapper', props.containerClassName]
-  })
+function watchVisibleChange(
+  props: DrawerProps,
+  wrapperRef: Ref<HTMLDivElement | undefined>,
+  sentinelStartRef: Ref<HTMLDivElement | undefined>,
+  mask: ComputedRef<boolean>,
+) {
+  let lastOutSideActiveElement: HTMLElement | null = null
+  watch(
+    () => props.visible,
+    visible => {
+      if (visible) {
+        const wrapperElement = wrapperRef.value!
+        const activeElement = document.activeElement
+        if (!wrapperElement.contains(activeElement)) {
+          lastOutSideActiveElement = activeElement as HTMLElement
+          sentinelStartRef.value?.focus()
+        }
+      } else {
+        if (mask.value) {
+          lastOutSideActiveElement?.focus?.()
+          lastOutSideActiveElement = null
+        }
+      }
+    },
+    { immediate: true },
+  )
 }
 
-const useEvent = (
+function useEvent(
   close: (evt: Event) => void,
   mask: ComputedRef<boolean>,
   maskClosable: ComputedRef<boolean>,
   closeOnEsc: ComputedRef<boolean>,
-) => {
+  sentinelStartRef: Ref<HTMLDivElement | undefined>,
+  sentinelEndRef: Ref<HTMLDivElement | undefined>,
+) {
+  let timeId: NodeJS.Timeout | undefined
+  let mouseDown = false
+
+  const clearTimer = () => {
+    if (timeId) {
+      clearTimeout(timeId)
+      timeId = undefined
+    }
+  }
+
   const onWrapperClick = (evt: MouseEvent) => {
-    if (evt.target === evt.currentTarget && mask.value && maskClosable.value) {
+    if (evt.target === evt.currentTarget && !mouseDown && mask.value && maskClosable.value) {
       close(evt)
     }
   }
@@ -93,22 +230,79 @@ const useEvent = (
       close(evt)
       return
     }
+
+    if (evt.code === 'Tab') {
+      const activeElement = document.activeElement
+      const sentinelStartElement = sentinelStartRef.value
+      const sentinelEndElement = sentinelEndRef.value
+      if (evt.shiftKey) {
+        if (activeElement === sentinelStartElement) {
+          sentinelEndElement?.focus()
+        }
+      } else if (activeElement === sentinelEndElement) {
+        sentinelStartElement?.focus()
+      }
+    }
   }
 
-  return { onWrapperClick, onWrapperKeydown }
+  const onContentMousedown = () => {
+    clearTimer()
+    mouseDown = true
+  }
+
+  const onContentMouseup = () => {
+    if (mouseDown) {
+      timeId = setTimeout(() => (mouseDown = false))
+    }
+  }
+
+  onBeforeUnmount(() => clearTimer())
+
+  return { onContentMousedown, onContentMouseup, onWrapperClick, onWrapperKeydown }
 }
 
-const useEvents = (props: DrawerProps, wrapperRef: Ref<HTMLDivElement | undefined>, animatedVisible: Ref<boolean>) => {
+function useEvents(
+  props: DrawerProps,
+  wrapperRef: Ref<HTMLDivElement | undefined>,
+  animatedVisible: Ref<boolean | undefined>,
+) {
+  let lastOutSideActiveElement: HTMLElement | null = null
+  const onEnter = () => {
+    const wrapperElement = wrapperRef.value!
+    const activeElement = document.activeElement
+    if (!wrapperElement.contains(activeElement)) {
+      lastOutSideActiveElement = activeElement as HTMLElement
+    }
+  }
+
   const onAfterEnter = () => {
     const wrapperElement = wrapperRef.value!
-    wrapperElement.focus()
+    const activeElement = document.activeElement
+    if (!wrapperElement.contains(activeElement)) {
+      wrapperElement.focus()
+    }
 
     callEmit(props.onAfterOpen)
+    animatedVisible.value = true
   }
 
   const onAfterLeave = () => {
+    if (lastOutSideActiveElement && isFunction(lastOutSideActiveElement.focus)) {
+      const wrapperElement = wrapperRef.value!
+      const activeElement = document.activeElement
+
+      if (
+        !activeElement ||
+        activeElement === document.body ||
+        activeElement === wrapperElement ||
+        wrapperElement.contains(activeElement)
+      ) {
+        lastOutSideActiveElement.focus()
+      }
+    }
+
     callEmit(props.onAfterClose)
     animatedVisible.value = false
   }
-  return { onAfterEnter, onAfterLeave }
+  return { onEnter, onAfterEnter, onAfterLeave }
 }

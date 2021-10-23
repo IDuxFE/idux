@@ -5,12 +5,25 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DrawerComponent } from './src/types'
+import type { DrawerComponent, DrawerProviderComponent } from './src/types'
 
 import Drawer from './src/Drawer'
+import DrawerProvider from './src/DrawerProvider'
 
 const IxDrawer = Drawer as unknown as DrawerComponent
+const IxDrawerProvider = DrawerProvider as unknown as DrawerProviderComponent
 
-export { IxDrawer }
+export { IxDrawer, IxDrawerProvider }
+export { useDrawer } from './src/useDrawer'
+export { DRAWER_TOKEN } from './src/token'
 
-export type { DrawerInstance, DrawerPublicProps as DrawerProps } from './src/types'
+export type {
+  DrawerInstance,
+  DrawerPublicProps as DrawerProps,
+  DrawerProviderInstance,
+  DrawerProviderRef,
+  DrawerButtonProps,
+  DrawerOptions,
+  DrawerRef,
+  DrawerBindings,
+} from './src/types'

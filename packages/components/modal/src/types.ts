@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
@@ -14,7 +14,7 @@ import { HeaderProps } from '@idux/components/header'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
 export interface ModalButtonProps extends ButtonProps {
-  key?: string | number
+  key?: VKey
   text?: string | VNode
   onClick?: (evt: Event) => void
 }
@@ -38,18 +38,19 @@ export const modalProps = {
   closable: IxPropTypes.bool,
   closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
-  containerClassName: IxPropTypes.string,
   destroyOnHide: IxPropTypes.bool.def(false),
   footer: IxPropTypes.oneOfType<ModalButtonProps[] | VNode | null>([IxPropTypes.array(), IxPropTypes.vNode]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   mask: IxPropTypes.bool,
   maskClosable: IxPropTypes.bool,
+  offset: IxPropTypes.oneOfType([String, Number]).def(128),
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
   title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   type: IxPropTypes.oneOf<ModalType>(['default', 'confirm', 'info', 'success', 'warning', 'error']).def('default'),
   width: IxPropTypes.oneOfType([String, Number]),
+  wrapperClassName: IxPropTypes.string,
   zIndex: IxPropTypes.number,
 
   // events
