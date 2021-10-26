@@ -5,17 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, onBeforeUnmount, provide, ref, watch, watchEffect } from 'vue'
+import type { ModalProps } from './types'
+import type { ComputedRef, Ref } from 'vue'
+
+import { computed, defineComponent, onBeforeUnmount, provide, ref, watchEffect } from 'vue'
 
 import { IxPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise } from '@idux/cdk/utils'
 import { IxMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
+import { useMergedProp } from '@idux/components/utils'
 
 import ModalWrapper from './ModalWrapper'
 import { MODAL_TOKEN, modalToken } from './token'
-import { ModalProps, modalProps } from './types'
+import { modalProps } from './types'
 
 export default defineComponent({
   name: 'IxModal',
@@ -27,22 +31,39 @@ export default defineComponent({
     const config = useGlobalConfig('modal')
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
-    const { updateVisible, visible, animatedVisible } = useVisible(props)
-    const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, updateVisible)
+    const { visible, animatedVisible, mergedVisible } = useVisible(props, mask)
+    const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, visible)
 
-    provide(modalToken, { props, slots, config, mergedPrefixCls, visible, animatedVisible, cancelLoading, okLoading })
+    provide(modalToken, {
+      props,
+      slots,
+      common,
+      config,
+      mergedPrefixCls,
+      visible,
+      animatedVisible,
+      mergedVisible,
+      cancelLoading,
+      okLoading,
+    })
+
     const apis = { open, close, cancel, ok }
     provide(MODAL_TOKEN, apis)
     expose(apis)
 
     return () => {
-      if (!animatedVisible.value && props.destroyOnHide) {
+      if (!mergedVisible.value && props.destroyOnHide) {
         return null
       }
 
       return (
         <IxPortal target={`${mergedPrefixCls.value}-container`} load={visible.value}>
-          <IxMask mask={mask.value} visible={visible.value} zIndex={zIndex.value}></IxMask>
+          <IxMask
+            class={`${mergedPrefixCls.value}-mask`}
+            mask={mask.value}
+            visible={visible.value}
+            zIndex={zIndex.value}
+          ></IxMask>
           <ModalWrapper {...attrs}></ModalWrapper>
         </IxPortal>
       )
@@ -50,51 +71,48 @@ export default defineComponent({
   },
 })
 
-const useVisible = (props: ModalProps) => {
-  const visible = ref(props.visible)
-  const animatedVisible = ref(props.visible)
-  watch(
-    () => props.visible,
-    value => {
-      if (value) {
-        animatedVisible.value = value
-      }
-      visible.value = value!
-    },
-  )
+function useVisible(props: ModalProps, mask: ComputedRef<boolean>) {
+  const visible = useMergedProp(props, 'visible')
+  const animatedVisible = ref<boolean>()
 
-  const updateVisible = (value: boolean) => {
-    if (value) {
-      animatedVisible.value = value
+  const mergedVisible = computed(() => {
+    const currVisible = visible.value
+    const currAnimatedVisible = animatedVisible.value
+    if (currAnimatedVisible === undefined || currVisible) {
+      return currVisible
     }
-    visible.value = value
-    callEmit(props['onUpdate:visible'], value)
-  }
+    return currAnimatedVisible
+  })
 
-  const scrollStrategy = new BlockScrollStrategy()
+  let scrollStrategy: BlockScrollStrategy | undefined
 
   watchEffect(() => {
-    if (animatedVisible.value) {
-      scrollStrategy.enable()
-    } else {
-      scrollStrategy.disable()
+    if (mask.value) {
+      if (mergedVisible.value) {
+        if (!scrollStrategy) {
+          scrollStrategy = new BlockScrollStrategy()
+        }
+        scrollStrategy.enable()
+      } else {
+        scrollStrategy?.disable()
+      }
     }
   })
 
-  onBeforeUnmount(() => scrollStrategy.disable())
+  onBeforeUnmount(() => scrollStrategy?.disable())
 
-  return { updateVisible, visible, animatedVisible }
+  return { visible, animatedVisible, mergedVisible }
 }
 
-const useTrigger = (props: ModalProps, updateVisible: (value: boolean) => void) => {
-  const open = () => updateVisible(true)
+function useTrigger(props: ModalProps, visible: Ref<boolean>) {
+  const open = () => (visible.value = true)
 
   const close = async (evt?: Event | unknown) => {
     const result = await callEmit(props.onClose, evt)
     if (result === false) {
       return
     }
-    updateVisible(false)
+    visible.value = false
   }
 
   const cancelLoading = ref(false)
@@ -108,7 +126,7 @@ const useTrigger = (props: ModalProps, updateVisible: (value: boolean) => void) 
     if (result === false) {
       return
     }
-    updateVisible(false)
+    visible.value = false
   }
 
   const okLoading = ref(false)
@@ -122,7 +140,7 @@ const useTrigger = (props: ModalProps, updateVisible: (value: boolean) => void) 
     if (result === false) {
       return
     }
-    updateVisible(false)
+    visible.value = false
   }
 
   return { cancelLoading, okLoading, open, close, cancel, ok }

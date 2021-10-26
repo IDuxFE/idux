@@ -1,46 +1,53 @@
-@import '../../style/themes/default.less';
 @import '../../style/mixins/box.less';
 @import '../../style/motion/zoom.less';
 @import '../../_private/mask/style/index.less';
-
-@modal-prefix: ~'@{idux-prefix}-modal';
+@import './themes/default.less';
 
 .@{modal-prefix} {
   position: relative;
-  top: @modal-top;
+  pointer-events: none;
   width: auto;
   max-width: @modal-max-width;
   margin: 0 auto;
-  pointer-events: none;
+  font-size: @modal-font-size;
+  line-height: @modal-line-height;
 
   &-wrapper {
-    .box(fixed);
     z-index: @zindex-l4-base;
     overflow: auto;
-    outline: 0;
+    outline: none;
+
+    .box(fixed);
   }
 
   &-sentinel {
     width: 0;
     height: 0;
-    overflow: 'hidden';
-    outline: 'none';
+    overflow: hidden;
+    outline: none;
   }
 
   &-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     pointer-events: auto;
-    background-color: @modal-content-bg;
-    border-radius: @modal-content-border-radius;
-    box-shadow: @modal-content-box-shadow;
-    padding: @modal-content-padding;
+    overflow: hidden;
+    background-color: @modal-background-color;
+    box-shadow: @modal-box-shadow;
+    border-radius: @modal-border-radius;
+
+    > .@{header-prefix} {
+      padding-left: @modal-header-padding-horizontal;
+      padding-right: @modal-header-padding-horizontal;
+    }
   }
 
   &-body {
-    font-size: @modal-body-font-size;
-    line-height: @modal-body-line-height;
-    padding-bottom: @modal-body-padding-bottom;
-    word-wrap: break-word;
+    flex: 1;
+    padding: @modal-body-padding;
+    overflow: auto;
 
     &-title {
       font-size: @modal-body-title-font-size;
@@ -78,16 +85,19 @@
         color: @modal-body-info-color;
       }
     }
+
     &-success {
       .@{modal-prefix}-body-icon {
         color: @modal-body-success-color;
       }
     }
+
     &-warning {
       .@{modal-prefix}-body-icon {
         color: @modal-body-warning-color;
       }
     }
+
     &-error {
       .@{modal-prefix}-body-icon {
         color: @modal-body-error-color;
@@ -96,10 +106,11 @@
   }
 
   &-footer {
-    text-align: right;
-    padding-bottom: @modal-footer-padding-bottom;
+    text-align: end;
+    min-height: @modal-footer-min-height;
+    padding: @modal-footer-padding;
 
-    .@{idux-prefix}-button + .@{idux-prefix}-button {
+    .@{button-prefix} + .@{button-prefix} {
       margin-left: @modal-footer-button-margin-left;
     }
   }
@@ -116,7 +127,6 @@
     }
 
     .@{modal-prefix} {
-      top: 0;
       display: inline-block;
       text-align: left;
       vertical-align: middle;

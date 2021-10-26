@@ -5,25 +5,49 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ButtonProps } from '@idux/components/button'
+import type { HeaderProps } from '@idux/components/header'
+import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
+
+export interface DrawerButtonProps extends ButtonProps {
+  key?: VKey
+  text?: string | VNode
+  onClick?: (evt: Event) => void
+}
+
+export interface DrawerOptions extends DrawerPublicProps {
+  key?: string
+  content?: string | VNode
+  contentProps?: Record<string, unknown> | VNodeProps
+  onDestroy?: (key: string) => void
+}
+export interface DrawerRef extends DrawerBindings {
+  key: string
+  update: (options: DrawerOptions) => void
+  destroy: () => void
+}
+
 export const drawerProps = {
   visible: IxPropTypes.bool.def(false),
-  title: IxPropTypes.string,
-  footer: IxPropTypes.string,
-  closable: IxPropTypes.bool.def(true),
-  placement: IxPropTypes.oneOf(['top', 'right', 'bottom', 'left'] as const).def('right'),
-  width: IxPropTypes.oneOfType([String, Number]),
+  closable: IxPropTypes.bool,
+  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+  closeOnEsc: IxPropTypes.bool,
+  destroyOnHide: IxPropTypes.bool.def(false),
+  footer: IxPropTypes.oneOfType<DrawerButtonProps[] | VNode>([IxPropTypes.array(), IxPropTypes.vNode]),
+  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   height: IxPropTypes.oneOfType([String, Number]),
-  offset: IxPropTypes.oneOfType([String, Number]).def(0),
   mask: IxPropTypes.bool,
   maskClosable: IxPropTypes.bool,
-  containerClassName: IxPropTypes.string,
-  destroyOnHide: IxPropTypes.bool.def(false),
-  closeOnEsc: IxPropTypes.bool,
+  offset: IxPropTypes.oneOfType([String, Number]).def(0),
+  placement: IxPropTypes.oneOf<DrawerPlacement>(['top', 'bottom', 'start', 'end']).def('end'),
+  target: IxPropTypes.oneOfType([String, HTMLElement]),
+  width: IxPropTypes.oneOfType([String, Number]),
+  wrapperClassName: IxPropTypes.string,
   zIndex: IxPropTypes.number,
 
   // events
@@ -45,3 +69,12 @@ export type DrawerComponent = DefineComponent<
   DrawerBindings
 >
 export type DrawerInstance = InstanceType<DefineComponent<DrawerProps, DrawerBindings>>
+
+export interface DrawerProviderRef {
+  open: (options: DrawerOptions) => DrawerRef
+  update: (key: string, options: DrawerOptions) => void
+  destroy: (key: string | string[]) => void
+  destroyAll: () => void
+}
+export type DrawerProviderComponent = DefineComponent<HTMLAttributes, DrawerProviderRef>
+export type DrawerProviderInstance = InstanceType<DefineComponent<HTMLAttributes, DrawerProviderRef>>

@@ -273,8 +273,11 @@ const modal = shallowReactive<ModalConfig>({
 const drawer = shallowReactive<DrawerConfig>({
   closable: true,
   closeOnEsc: true,
+  closeIcon: 'close',
+  height: 256,
   mask: true,
   maskClosable: true,
+  width: 480,
 })
 
 const result = shallowReactive<ResultConfig>({ status: 'info' })

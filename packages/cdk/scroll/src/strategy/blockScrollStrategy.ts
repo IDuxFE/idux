@@ -11,24 +11,19 @@ import { getScroll, setScroll } from '../utils'
 import { ScrollStrategy } from './scrollStrategy'
 
 export interface BlockScrollStrategyOptions {
-  container?: HTMLElement
+  target?: HTMLElement
   className?: string
 }
 
 const defaultClassName = 'ix-cdk-scroll-block'
 
-let cacheStrategy: {
-  id: number
-  options: BlockScrollStrategyOptions
-}[] = []
-
-const hasExisted = (uid: number) => {
-  return cacheStrategy.some(({ id }) => id === uid)
+interface CacheStrategy extends BlockScrollStrategyOptions {
+  uid: number
+  cacheScroll: { scrollTop: number; scrollLeft: number }
+  cacheStyle: { top: string; left: string }
 }
 
-const hasSame = (container: HTMLElement, className: string) => {
-  return cacheStrategy.some(({ options }) => options.container === container && options.className === className)
-}
+let cacheStrategy: CacheStrategy[] = []
 
 let uuid = 0
 
@@ -38,55 +33,82 @@ let uuid = 0
 export class BlockScrollStrategy implements ScrollStrategy {
   uid = uuid++
 
-  private cacheStyle = { top: '', left: '' }
-  private cacheScroll: { scrollTop: number; scrollLeft: number } | undefined
-  private container: HTMLElement
+  private target: HTMLElement
   private className: string
 
   constructor(options: BlockScrollStrategyOptions = {}) {
-    const { container = document.documentElement, className = defaultClassName } = options
-    this.container = container
+    const { target = document.documentElement, className = defaultClassName } = options
+    this.target = target
     this.className = className
   }
 
-  /** Blocks page-level scroll while the attached overlay is open. */
+  /** Blocks scroll while the attached overlay is open. */
   enable(): void {
-    const { uid, container, className } = this
-    if (hasExisted(uid)) {
-      return
-    }
-    if (hasSame(container, className)) {
-      cacheStrategy.push({ id: uid, options: { container, className } })
+    const { uid, target, className } = this
+    if (cacheStrategy.some(item => item.uid === uid)) {
       return
     }
 
-    this.cacheScroll = getScroll(container)
-    this.cacheStyle = { top: container.style.top, left: container.style.left }
+    let cacheScroll: { scrollTop: number; scrollLeft: number }
+    let cacheStyle: { top: string; left: string }
 
-    container.style.top = convertCssPixel(-this.cacheScroll.scrollTop)
-    container.style.left = convertCssPixel(-this.cacheScroll.scrollLeft)
+    const sameTargetTarget = cacheStrategy.find(item => item.target === target)
+    if (!sameTargetTarget) {
+      cacheScroll = getScroll(target)
+      cacheStyle = { top: target.style.top, left: target.style.left }
 
-    addClass(container, className)
+      target.style.top = convertCssPixel(-cacheScroll.scrollTop)
+      target.style.left = convertCssPixel(-cacheScroll.scrollLeft)
+    } else {
+      cacheScroll = sameTargetTarget.cacheScroll
+      cacheStyle = sameTargetTarget.cacheStyle
+    }
 
-    cacheStrategy.push({ id: uid, options: { container, className } })
+    if (!target.classList.contains(className)) {
+      addClass(target, className)
+    }
+
+    cacheStrategy.push({ uid, target, className, cacheScroll, cacheStyle })
   }
 
-  /** Unblocks page-level scroll while the attached overlay is open. */
+  /** Unblocks scroll while the attached overlay is open. */
   disable(): void {
-    const { uid, container, className } = this
-    if (!hasExisted(uid)) {
-      return
-    }
-    cacheStrategy = cacheStrategy.filter(({ id }) => id !== this.uid)
-    if (hasSame(container, className)) {
+    const { uid, target, className } = this
+    const currStrategy = cacheStrategy.find(item => item.uid === uid)
+    if (!currStrategy) {
       return
     }
 
-    container.style.top = this.cacheStyle.top
-    container.style.left = this.cacheStyle.left
+    cacheStrategy = cacheStrategy.filter(item => item.uid !== uid)
 
-    removeClass(container, className)
+    if (!cacheStrategy.some(item => item.target === target && item.className === className)) {
+      removeClass(target, className)
+    }
 
-    setScroll(this.cacheScroll!, container)
+    if (!cacheStrategy.some(item => item.target === target)) {
+      target.style.top = currStrategy.cacheStyle.top
+      target.style.left = currStrategy.cacheStyle.left
+
+      setScroll(currStrategy.cacheScroll, target)
+    }
+  }
+
+  /** Re-lock scroll while the options change. */
+  update(options: BlockScrollStrategyOptions): void {
+    const { uid, target, className } = this
+    const currStrategy = cacheStrategy.find(item => item.uid === uid)
+
+    if (currStrategy) {
+      this.disable()
+    }
+
+    this.target = options.target ?? target
+    this.className = options.className ?? className
+
+    if (currStrategy) {
+      currStrategy.target = this.target
+      currStrategy.className = this.className
+      this.enable()
+    }
   }
 }

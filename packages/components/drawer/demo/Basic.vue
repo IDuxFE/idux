@@ -1,20 +1,18 @@
 <template>
-  <IxButton @click="showDrawer"> Click me </IxButton>
-  <IxDrawer v-model:visible="visible" title="抽屉标题">
-    <p>抽屉内容</p>
+  <IxButton @click="showDrawer"> Open </IxButton>
+  <IxDrawer v-model:visible="visible" header="Basic Drawer">
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
   </IxDrawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const visible = ref(false)
-    const showDrawer = () => {
-      visible.value = !visible.value
-    }
-    return { visible, showDrawer }
-  },
-})
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const visible = ref(false)
+
+const showDrawer = () => {
+  visible.value = !visible.value
+}
 </script>
-<style lang="less" scoped></style>

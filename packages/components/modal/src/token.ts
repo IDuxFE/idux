@@ -6,21 +6,24 @@
  */
 
 import type { ModalBindings, ModalProps, ModalProviderRef } from './types'
-import type { ModalConfig } from '@idux/components/config'
+import type { CommonConfig, ModalConfig } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface ModalContext {
   props: ModalProps
   slots: Slots
+  common: CommonConfig
   config: ModalConfig
   mergedPrefixCls: ComputedRef<string>
   visible: Ref<boolean>
-  animatedVisible: Ref<boolean>
+  animatedVisible: Ref<boolean | undefined>
+  mergedVisible: ComputedRef<boolean>
   cancelLoading: Ref<boolean>
   okLoading: Ref<boolean>
 }
 
 export const modalToken: InjectionKey<ModalContext> = Symbol('modalToken')
+
 export const modalProviderToken: InjectionKey<ModalProviderRef> = Symbol('modalProviderToken')
 
 // public token

@@ -6,5 +6,6 @@
  */
 
 export * from './collapse-transition'
+export * from './header'
 export * from './mask'
 export * from './overlay'

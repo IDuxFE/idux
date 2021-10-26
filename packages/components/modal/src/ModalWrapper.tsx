@@ -21,39 +21,53 @@ import {
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
+import { IxHeader } from '@idux/components/_private'
 import { ModalConfig } from '@idux/components/config'
 
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
-import ModalHeader from './ModalHeader'
 import { MODAL_TOKEN, modalToken } from './token'
 import { ModalProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
-    const { props, config, mergedPrefixCls, visible, animatedVisible } = inject(modalToken)!
+    const { props, slots, common, config, mergedPrefixCls, visible, animatedVisible, mergedVisible } =
+      inject(modalToken)!
     const { close } = inject(MODAL_TOKEN)!
-    const { centered, width, mask, maskClosable, closeOnEsc, zIndex } = useConfig(props, config)
+    const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex } = useConfig(props, config)
 
-    const classes = computed(() => {
+    const placementStyle = computed(() => {
+      const top = centered.value ? 0 : convertCssPixel(props.offset)
+      return { top, width: width.value }
+    })
+
+    const wrapperClasses = computed(() => {
+      const { wrapperClassName = '' } = props
       const prefixCls = mergedPrefixCls.value
-      const containerClassName = props.containerClassName
       return {
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-centered`]: centered.value,
-        [containerClassName || '']: containerClassName,
+        [`${prefixCls}-with-mask`]: mask.value,
+        [wrapperClassName]: !!wrapperClassName,
       }
     })
+
+    const wrapperStyle = computed(() => {
+      return { zIndex: zIndex.value }
+    })
+
     const modalTransformOrigin = ref<string>()
-    const modalStyle = computed(() => ({ width: width.value, transformOrigin: modalTransformOrigin.value }))
+    const contentStyle = computed(() => {
+      return { transformOrigin: modalTransformOrigin.value, ...placementStyle.value }
+    })
 
     const wrapperRef = ref<HTMLDivElement>()
     const modalRef = ref<HTMLDivElement>()
     const sentinelStartRef = ref<HTMLDivElement>()
     const sentinelEndRef = ref<HTMLDivElement>()
 
-    const { onModalMousedown, onModalMouseup, onWrapperClick, onWrapperKeydown } = useEvent(
+    const { onWrapperClick, onWrapperKeydown, onContentMousedown, onContentMouseup } = useEvent(
       close,
       mask,
       maskClosable,
@@ -65,41 +79,51 @@ export default defineComponent({
     const { onEnter, onAfterEnter, onAfterLeave } = useEvents(
       props,
       wrapperRef,
-      modalTransformOrigin,
       modalRef,
       animatedVisible,
+      modalTransformOrigin,
     )
 
-    onMounted(() => {
-      watchVisibleChange(wrapperRef, sentinelStartRef, props, mask)
-    })
+    onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, mask))
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
         <div
-          v-show={animatedVisible.value}
+          v-show={mergedVisible.value}
           ref={wrapperRef}
-          class={classes.value}
+          class={wrapperClasses.value}
+          style={wrapperStyle.value}
           tabindex={-1}
-          style={{ zIndex: zIndex.value }}
           onClick={onWrapperClick}
           onKeydown={onWrapperKeydown}
         >
-          <Transition name="ix-zoom" appear onEnter={onEnter} onAfterEnter={onAfterEnter} onAfterLeave={onAfterLeave}>
+          <Transition
+            name={`${common.prefixCls}-zoom`}
+            appear
+            onEnter={onEnter}
+            onAfterEnter={onAfterEnter}
+            onAfterLeave={onAfterLeave}
+          >
             <div
               v-show={visible.value}
               ref={modalRef}
               role="document"
               class={prefixCls}
-              style={modalStyle.value}
-              onMousedown={onModalMousedown}
-              onMouseup={onModalMouseup}
+              style={contentStyle.value}
+              onMousedown={onContentMousedown}
+              onMouseup={onContentMouseup}
               {...attrs}
             >
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               <div class={`${prefixCls}-content`}>
-                <ModalHeader></ModalHeader>
+                <IxHeader
+                  closable={closable.value}
+                  closeIcon={closeIcon.value}
+                  header={props.header}
+                  onClose={close}
+                  v-slots={slots}
+                />
                 <ModalBody></ModalBody>
                 <ModalFooter></ModalFooter>
               </div>
@@ -112,23 +136,25 @@ export default defineComponent({
   },
 })
 
-const useConfig = (props: ModalProps, config: ModalConfig) => {
+function useConfig(props: ModalProps, config: ModalConfig) {
   const centered = computed(() => props.centered ?? config.centered)
+  const closable = computed(() => props.closable ?? config.closable)
+  const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
   const width = computed(() => convertCssPixel(props.width ?? config.width))
   const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-  return { centered, width, mask, maskClosable, closeOnEsc, zIndex }
+  return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex }
 }
 
-const watchVisibleChange = (
+function watchVisibleChange(
+  props: ModalProps,
   wrapperRef: Ref<HTMLDivElement | undefined>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
-  props: ModalProps,
   mask: ComputedRef<boolean>,
-) => {
+) {
   let lastOutSideActiveElement: HTMLElement | null = null
   watch(
     () => props.visible,
@@ -151,27 +177,21 @@ const watchVisibleChange = (
   )
 }
 
-const useEvent = (
+function useEvent(
   close: (evt: Event) => void,
   mask: ComputedRef<boolean>,
   maskClosable: ComputedRef<boolean>,
   closeOnEsc: ComputedRef<boolean>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   sentinelEndRef: Ref<HTMLDivElement | undefined>,
-) => {
-  let timeId: NodeJS.Timeout | null = null
+) {
+  let timeId: NodeJS.Timeout | undefined
   let mouseDown = false
-  const onModalMousedown = () => {
+
+  const clearTimer = () => {
     if (timeId) {
       clearTimeout(timeId)
-      timeId = null
-    }
-    mouseDown = true
-  }
-
-  const onModalMouseup = () => {
-    if (mouseDown) {
-      timeId = setTimeout(() => (mouseDown = false))
+      timeId = undefined
     }
   }
 
@@ -202,22 +222,29 @@ const useEvent = (
     }
   }
 
-  onBeforeUnmount(() => {
-    if (timeId) {
-      clearTimeout(timeId)
-    }
-  })
+  const onContentMousedown = () => {
+    clearTimer()
+    mouseDown = true
+  }
 
-  return { onModalMousedown, onModalMouseup, onWrapperClick, onWrapperKeydown }
+  const onContentMouseup = () => {
+    if (mouseDown) {
+      timeId = setTimeout(() => (mouseDown = false))
+    }
+  }
+
+  onBeforeUnmount(() => clearTimer())
+
+  return { onWrapperClick, onWrapperKeydown, onContentMousedown, onContentMouseup }
 }
 
-const useEvents = (
+function useEvents(
   props: ModalProps,
   wrapperRef: Ref<HTMLDivElement | undefined>,
-  modalTransformOrigin: Ref<string | undefined>,
   modalRef: Ref<HTMLDivElement | undefined>,
-  animatedVisible: Ref<boolean>,
-) => {
+  animatedVisible: Ref<boolean | undefined>,
+  modalTransformOrigin: Ref<string | undefined>,
+) {
   let lastOutSideActiveElement: HTMLElement | null = null
   const onEnter = () => {
     const wrapperElement = wrapperRef.value!
@@ -245,6 +272,7 @@ const useEvents = (
     }
 
     callEmit(props.onAfterOpen)
+    animatedVisible.value = true
   }
 
   const onAfterLeave = () => {
@@ -263,7 +291,6 @@ const useEvents = (
     }
 
     callEmit(props.onAfterClose)
-
     animatedVisible.value = false
   }
   return { onEnter, onAfterEnter, onAfterLeave }

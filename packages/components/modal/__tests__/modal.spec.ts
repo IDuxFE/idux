@@ -149,32 +149,16 @@ describe('Modal', () => {
     expect(modalWrapper.find('.ix-modal').isVisible()).toBe(false)
   })
 
-  test('containerClassName work', async () => {
-    let containerClassName = 'test-container'
-    const wrapper = ModalMount({ props: { containerClassName } })
-    const modalWrapper = wrapper.getComponent(ModalWrapper)
-
-    expect(modalWrapper.classes()).toContain(containerClassName)
-
-    containerClassName = 'test-container2'
-
-    await wrapper.setProps({ containerClassName })
-
-    expect(modalWrapper.classes()).toContain(containerClassName)
-  })
-
   test('destroyOnHide work', async () => {
-    const wrapper = ModalMount({ props: { destroyOnHide: true } })
+    const wrapper = ModalMount({ props: { visible: true, destroyOnHide: true } })
     let modalWrapper = wrapper.getComponent(ModalWrapper)
 
     expect(modalWrapper.find('.ix-modal').exists()).toBe(true)
 
     await wrapper.setProps({ visible: false })
-    // todo: transition leave
-    // modalWrapper.vm.onAfterLeave()
-    // await flushPromises()
+    await flushPromises()
 
-    // expect(isElementVisible(document.querySelector('.ix-modal-wrapper'))).toBe(false)
+    expect(document.querySelector('.ix-modal-wrapper')).toBe(null)
 
     await wrapper.setProps({ visible: true })
     modalWrapper = wrapper.getComponent(ModalWrapper)
@@ -308,6 +292,19 @@ describe('Modal', () => {
     expect(modalWrapper.find('.ix-modal').isVisible()).toBe(false)
   })
 
+  test('offset work', async () => {
+    const wrapper = ModalMount({ props: { offset: 256 } })
+    const modalWrapper = wrapper.getComponent(ModalWrapper)
+
+    const contentDom = modalWrapper.find('.ix-modal').element as HTMLElement
+
+    expect(contentDom.style.top).toBe('256px')
+
+    await wrapper.setProps({ offset: '30%' })
+
+    expect(contentDom.style.top).toBe('30%')
+  })
+
   test('title work', async () => {
     let title: VNode | string = 'This is title'
     const wrapper = ModalMount({ props: { type: 'confirm', title } })
@@ -365,16 +362,31 @@ describe('Modal', () => {
   test('width work', async () => {
     const wrapper = ModalMount({ props: { width: 400 } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
+    const contentDom = modalWrapper.find('.ix-modal').element as HTMLElement
 
-    expect(modalWrapper.find('.ix-modal').attributes('style')).toContain('width: 400px')
+    expect(contentDom.style.width).toBe('400px')
 
     await wrapper.setProps({ width: '200px' })
 
-    expect(modalWrapper.find('.ix-modal').attributes('style')).toContain('width: 200px')
+    expect(contentDom.style.width).toBe('200px')
 
     await wrapper.setProps({ width: '20%' })
 
-    expect(modalWrapper.find('.ix-modal').attributes('style')).toContain('width: 20%')
+    expect(contentDom.style.width).toBe('20%')
+  })
+
+  test('wrapperClassName work', async () => {
+    let wrapperClassName = 'test-container'
+    const wrapper = ModalMount({ props: { wrapperClassName } })
+    const modalWrapper = wrapper.getComponent(ModalWrapper)
+
+    expect(modalWrapper.classes()).toContain(wrapperClassName)
+
+    wrapperClassName = 'test-container2'
+
+    await wrapper.setProps({ wrapperClassName })
+
+    expect(modalWrapper.classes()).toContain(wrapperClassName)
   })
 
   test('zIndex work', async () => {

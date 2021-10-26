@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header render work 1`] = `
+"<div class=\\"ix-header ix-header-large\\">
+  <div class=\\"ix-header-content\\">
+    <!---->
+    <!----><span class=\\"ix-header-title\\">Header title</span>
+    <!---->
+    <div class=\\"ix-header-suffix\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></div>
+  </div>
+  <!---->
+</div>"
+`;
