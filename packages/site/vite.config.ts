@@ -29,6 +29,10 @@ export default defineConfig(({ command }) => {
               const path = `@idux/cdk/scroll`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }
+            } else if (name === 'IxTab') {
+              const path = `@idux/components/tabs`
+              const sideEffects = undefined
+              return { importName: name, path, sideEffects }
             }
           },
           IduxResolver({ importStyle: 'less' }),
