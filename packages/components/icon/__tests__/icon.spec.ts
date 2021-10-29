@@ -1,35 +1,33 @@
 import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
 
+import { renderWork } from '@tests'
+
 import { useGlobalConfig } from '@idux/components/config'
 
 import IxIcon from '../src/Icon'
-import { addIconDefinitions, fetchFromIconfont } from '../src/helper'
+import { addIconDefinitions } from '../src/helper'
 import { IconDefinition, IconProps } from '../src/types'
 
-const Up: IconDefinition = { name: 'up', svgString: '<svg></svg>' }
-const Down: IconDefinition = { name: 'down', svgString: '<svg></svg>' }
-const Loading: IconDefinition = { name: 'loading', svgString: '<svg></svg>' }
+const MyUp: IconDefinition = { name: 'my-up', svg: '<svg></svg>' }
+const MyDown: IconDefinition = { name: 'my-down', svg: '<svg></svg>' }
 
 describe('Icon', () => {
   const IconMount = (options?: MountingOptions<Partial<IconProps>>) => mount(IxIcon, { ...options })
-  test('render work', async () => {
-    addIconDefinitions([Up])
-    const wrapper = IconMount({ props: { name: 'up' } })
-    await flushPromises()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+
+  renderWork<IconProps>(IxIcon, { props: { name: 'up' } })
 
   test('static load work', async () => {
-    addIconDefinitions([Up, Down])
-    const wrapper = IconMount({ props: { name: 'up' } })
+    addIconDefinitions([MyUp, MyDown])
+
+    const wrapper = IconMount({ props: { name: 'my-up' } })
     await flushPromises()
 
-    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('up')
+    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('my-up')
 
-    await wrapper.setProps({ name: 'down' })
+    await wrapper.setProps({ name: 'my-down' })
     await flushPromises()
 
-    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('down')
+    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('my-down')
   })
 
   test('dynamic load work', async () => {
@@ -53,55 +51,28 @@ describe('Icon', () => {
     expect(wrapper.find('svg').attributes()['data-icon']).toEqual('dynamic-down')
   })
 
-  test('iconfont load work', async () => {
-    fetchFromIconfont('https://at.alicdn.com/t/font_2269256_s10i6xhg8l.js')
-    fetchFromIconfont([
-      'https://at.alicdn.com/t/font_2269256_s10i6xhg8l.js',
-      'https://at.alicdn.com/t/font_2269253_ogsttp6ftdp.js',
-      'https://at.alicdn.com/t/font_2269256_s10i6xhg8l2.js',
-    ])
-
-    const wrapper = IconMount({ props: { name: 'ix-icon-up', iconfont: true } })
-    await flushPromises()
-
-    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('ix-icon-up')
-
-    await wrapper.setProps({ name: 'ix-icon-down' })
-    await flushPromises()
-
-    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('ix-icon-down')
-
-    await wrapper.setProps({ name: 'ix-icon-up' })
-    await flushPromises()
-
-    expect(wrapper.find('svg').attributes()['data-icon']).toEqual('ix-icon-up')
-  })
-
   test('rotate work', async () => {
-    addIconDefinitions([Up, Loading])
-    const wrapper = IconMount({ props: { rotate: true } })
+    const wrapper = IconMount({ props: { name: 'up', rotate: true } })
+    await flushPromises()
 
     expect(wrapper.classes()).toContain('ix-icon-spin')
 
-    await wrapper.setProps({ name: 'up', rotate: 90 })
+    await wrapper.setProps({ rotate: 90 })
     await flushPromises()
 
     expect(wrapper.classes()).not.toContain('ix-icon-spin')
-    expect(wrapper.find('svg').attributes()['style']).toEqual('transform: rotate(90deg)')
+    expect(wrapper.find('svg').element.style.transform).toBe('rotate(90deg)')
 
     await wrapper.setProps({ name: 'loading', rotate: '180' })
     await flushPromises()
 
     expect(wrapper.classes()).toContain('ix-icon-spin')
-    expect(wrapper.find('svg').attributes()['style']).toEqual('transform: rotate(180deg)')
+    expect(wrapper.find('svg').element.style.transform).toBe('rotate(180deg)')
   })
 
   test('slot work', async () => {
-    const wrapper = IconMount({
-      slots: {
-        default: Up.svgString,
-      },
-    })
-    expect(wrapper.find('svg').exists()).toBeTruthy()
+    const wrapper = IconMount({ slots: { default: MyUp.svg } })
+
+    expect(wrapper.find('svg').exists()).toBe(true)
   })
 })

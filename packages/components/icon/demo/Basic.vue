@@ -1,44 +1,17 @@
 <template>
-  <div class="basic-icons">
-    <IxIcon name="up" />
-    <IxIcon name="down" rotate />
-    <IxIcon name="left" rotate="90" />
-    <IxIcon name="right" style="color: red" rotate />
-    <IxIcon name="ix-icon-up" class="icon-blue" iconfont />
-    <IxIcon name="ix-icon-down" iconfont />
-  </div>
+  <IxIcon name="alert" />
+  <IxIcon name="heart" rotate="30" />
+  <IxIcon name="sync" rotate />
+  <IxIcon name="tool" class="red" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<style scoped lang="less">
+.ix-icon {
+  margin-right: 12px;
+  font-size: 24px;
+}
 
-import { useGlobalConfig } from '@idux/components/config'
-import { Down, Up, addIconDefinitions, fetchFromIconfont } from '@idux/components/icon'
-
-export default defineComponent({
-  setup() {
-    // 静态加载：无需发请求,但是会增加包体积, 推荐首屏加载的图标使用静态加载，减少 http 请求数量
-    addIconDefinitions([Up, Down])
-
-    // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
-    const loadIconDynamically = (iconName: string) => {
-      return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
-    }
-    useGlobalConfig('icon', { loadIconDynamically })
-
-    // 直接引入 iconfont script, 使用时需要注明 iconfont
-    fetchFromIconfont('https://at.alicdn.com/t/font_2269256_s10i6xhg8l.js')
-  },
-})
-</script>
-<style lang="less" scoped>
-.basic-icons {
-  .ix-icon {
-    margin-right: 6px;
-    font-size: 24px;
-  }
-  .icon-blue {
-    color: blue;
-  }
+.red {
+  color: red;
 }
 </style>

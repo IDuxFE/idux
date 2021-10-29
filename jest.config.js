@@ -48,4 +48,5 @@ module.exports = {
   },
   coveragePathIgnorePatterns: ['/node_modules/', '<rootDir>/tests'],
   reporters: ['default', 'jest-junit'],
+  setupFiles: ['./tests/setup.ts'],
 }

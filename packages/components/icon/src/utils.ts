@@ -5,12 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IconDefinition, IconRendered } from './types'
+import type { IconDefinition } from './types'
+import type { VNode, VNodeChild } from 'vue'
 
-import { Logger } from '@idux/cdk/utils'
+import { cloneVNode } from 'vue'
+
+import { Logger, getFirstValidNode } from '@idux/cdk/utils'
 
 export const iconDefinitions = new Map<string, IconDefinition>()
-const iconRenderedCache = new Map<string, IconRendered>()
+const iconCache = new Map<string, { name: string; svg: SVGElement }>()
 const iconfontCache = new Set<string>()
 
 export const clearSVGElement = (el: HTMLElement): void => {
@@ -29,17 +32,17 @@ export const loadSVGElement = async (
   iconName: string,
   loadIconDynamically?: (iconName: string) => Promise<string>,
 ): Promise<SVGElement | null> => {
-  const cached = iconRenderedCache.get(iconName)
+  const cached = iconCache.get(iconName)
   if (cached) {
     return cached.svg.cloneNode(true) as SVGElement
   }
   let svg: SVGElement | null = null
   const icon = await loadIconDefinition(iconName, loadIconDynamically)
   if (icon) {
-    svg = createSVGElement(icon.svgString)
+    svg = createSVGElement(icon.svg)
     if (svg) {
       setSVGAttribute(svg, iconName)
-      iconRenderedCache.set(iconName, { name: iconName, svg })
+      iconCache.set(iconName, { name: iconName, svg })
     } else {
       __DEV__ && Logger.warn('components/icon', `The icon [${iconName}] create failed.`)
     }
@@ -49,14 +52,15 @@ export const loadSVGElement = async (
 
 export const loadIconFontSvgElement = (iconName: string): SVGElement => {
   let svg: SVGElement | null
-  const cached = iconRenderedCache.get('iconfont-' + iconName)
+  const cachedName = `IDUX_CACHED_ICON_FONT_` + iconName
+  const cached = iconCache.get(cachedName)
   if (cached) {
     svg = cached.svg
   } else {
     const svgString = `<svg><use xlink:href="#${iconName}"></svg>`
     svg = createSVGElement(svgString)!
     setSVGAttribute(svg, iconName)
-    iconRenderedCache.set('iconfont-' + iconName, { name: iconName, svg })
+    iconCache.set(cachedName, { name: iconName, svg })
   }
 
   return svg.cloneNode(true) as SVGElement
@@ -67,9 +71,9 @@ async function loadIconDefinition(iconName: string, loadIconDynamically?: (iconN
 
   if (!icon) {
     if (loadIconDynamically) {
-      const svgString = await loadIconDynamically(iconName)
-      if (validSVGString(svgString)) {
-        icon = { name: iconName, svgString }
+      const svg = await loadIconDynamically(iconName)
+      if (validSVGString(svg)) {
+        icon = { name: iconName, svg }
         iconDefinitions.set(iconName, icon)
       } else {
         __DEV__ && Logger.warn('components/icon', `The dynamically loaded icon [${iconName}] is invalid.`)
@@ -83,24 +87,41 @@ async function loadIconDefinition(iconName: string, loadIconDynamically?: (iconN
   return icon
 }
 
-function validSVGString(svgString: string): boolean {
-  return !!svgString && svgString.includes('<svg')
+function validSVGString(svg: string): boolean {
+  return !!svg && svg.includes('<svg')
 }
 
-function createSVGElement(svgString: string): SVGElement | null {
+function createSVGElement(svg: string): SVGElement | null {
   const div = document.createElement('div')
-  div.innerHTML = svgString
+  div.innerHTML = svg
   return div.querySelector('svg')
 }
 
+const defaultSVGAttributes = {
+  viewBox: '0 0 1024 1024',
+  width: '1em',
+  height: '1em',
+  focusable: 'false',
+  fill: 'currentColor',
+  'aria-hidden': 'true',
+}
+
 function setSVGAttribute(svg: SVGElement, iconName: string): void {
-  svg.setAttribute('width', '1em')
-  svg.setAttribute('height', '1em')
-  svg.setAttribute('viewBox', '64 64 896 896')
-  svg.setAttribute('focusable', 'false')
-  svg.setAttribute('fill', 'currentColor')
-  svg.setAttribute('aria-hidden', 'true')
+  Object.entries(defaultSVGAttributes).forEach(([key, value]) => {
+    if (!svg.hasAttribute(key)) {
+      svg.setAttribute(key, value)
+    }
+  })
   svg.setAttribute('data-icon', iconName)
+}
+
+export function covertSVGNode(child: VNodeChild | undefined): VNode | undefined {
+  const node = getFirstValidNode(child)
+  if (!node || node.type !== 'svg') {
+    Logger.warn('components/icon', 'The children must is svg element')
+    return
+  }
+  return cloneVNode(node, { ...defaultSVGAttributes, ...node.props })
 }
 
 export function createScriptElements(urls: string[], index = 0): void {

@@ -82,9 +82,9 @@ export function useGlobalConfig<T extends GlobalConfigKey>(compName: T, config: 
 
 > 需要注意的是: `useGlobalConfig` 参数类型不同的返回结果也不同。
 
-### FAQ
+## FAQ
 
-#### 优先级说明
+### 优先级说明
 
 对于任何一个属性来说，各个来源的值的优先级如下：
 
@@ -93,7 +93,7 @@ export function useGlobalConfig<T extends GlobalConfigKey>(compName: T, config: 
 3. 通过 `createGlobalConfig` 设置的全局配置
 4. `@idux` 提供的默认全局配置
 
-#### 查看所有可用的全局配置项
+### 查看所有可用的全局配置项
 
 [`GlobalConfig`](https://github.com/IDuxFE/idux/blob/master/packages/components/core/config/types.ts) 接口提供的类型定义信息能够帮助你找到所有支持全局配置项的组件和属性。
 

@@ -7,6 +7,10 @@ title:
 
 ## zh
 
-通过指定 `name` 属性来加载不同的图标, 可以使用 `rotate` 来开启旋转或者直接指定旋转角度。
-支持动态加载和静态加载, 推荐在首屏加载的图标使用静态加载的方式，其他图标使用动态加载。  
-同时还支持直接引入 iconfont 的脚本, 使用较为方便。
+- 通过 `name` 来加载不同的图标。
+- 通过 `rotate` 来指定旋转角度或者开启循环旋转。
+
+## en
+
+- Load different icon by `name`.
+- Specify rotation angle or rotate with `rotate`.

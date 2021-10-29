@@ -23,10 +23,5 @@ export type IconInstance = InstanceType<DefineComponent<IconProps>>
 
 export interface IconDefinition {
   name: string
-  svgString: string
-}
-
-export interface IconRendered {
-  name: string
-  svg: SVGElement
+  svg: string
 }
