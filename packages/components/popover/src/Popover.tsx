@@ -34,6 +34,7 @@ export default defineComponent({
         transitionName="ix-fade"
         {...configProps.value}
         offset={defaultOffset}
+        showArrow
       />
     )
   },

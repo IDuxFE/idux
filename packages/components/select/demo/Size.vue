@@ -1,40 +1,26 @@
 <template>
-  <IxRow :gutter="8">
-    <IxCol :span="12">
-      <IxSelect v-model:value="singleValue" :options="options" size="sm"> </IxSelect>
-    </IxCol>
-    <IxCol :span="12">
-      <IxSelect v-model:value="multipleValue" :options="options" multiple size="sm"> </IxSelect>
-    </IxCol>
-    <IxCol :span="12">
-      <IxSelect v-model:value="singleValue" :options="options"> </IxSelect>
-    </IxCol>
-    <IxCol :span="12">
-      <IxSelect v-model:value="multipleValue" :options="options" multiple> </IxSelect>
-    </IxCol>
-    <IxCol :span="12">
-      <IxSelect v-model:value="singleValue" :options="options" size="lg"> </IxSelect>
-    </IxCol>
-    <IxCol :span="12">
-      <IxSelect v-model:value="multipleValue" :options="options" multiple size="lg"> </IxSelect>
-    </IxCol>
-  </IxRow>
+  <IxRadioGroup v-model:value="size" buttoned>
+    <IxRadio value="sm">Small</IxRadio>
+    <IxRadio value="md">Medium</IxRadio>
+    <IxRadio value="lg">Large</IxRadio>
+  </IxRadioGroup>
+  <br />
+  <br />
+  <IxSelect v-model:value="singleValue" :options="options" :size="size" style="width: 120px"> </IxSelect>
+  <IxSelect v-model:value="multipleValue" :options="options" :size="size" multiple> </IxSelect>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const singleValue = ref('tom')
-    const multipleValue = ref(['tom'])
+import { SelectOption } from '@idux/components/select'
 
-    const options = [
-      { label: 'Tom', value: 'tom' },
-      { label: 'Jerry', value: 'jerry' },
-      { label: 'Speike', value: 'speike', disabled: true },
-    ]
+const options: SelectOption[] = [
+  { label: 'Tom', value: 'tom' },
+  { label: 'Jerry', value: 'jerry' },
+  { label: 'Speike', value: 'speike', disabled: true },
+]
 
-    return { singleValue, multipleValue, options }
-  },
-})
+const size = ref('md')
+const singleValue = ref('tom')
+const multipleValue = ref(['tom'])
 </script>

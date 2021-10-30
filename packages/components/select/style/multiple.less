@@ -7,29 +7,29 @@
   .@{select-prefix}-selector {
     padding: @select-padding-vertical @select-multiple-padding;
     font-size: @select-font-size;
-  }
 
-  &.@{select-prefix}-show-suffix .@{select-prefix}-selector,
-  &.@{select-prefix}-clearable .@{select-prefix}-selector {
-    padding-right: @select-icon-font-size + @select-multiple-padding;
-  }
-
-  .@{select-prefix}-item {
-    height: @select-item-height;
-    line-height: @select-item-line-height;
-    margin: @select-margin-half 0;
-    margin-inline-end: @select-multiple-padding;
-  }
-
-  .@{select-prefix}-input {
-    margin: @select-margin-half 0;
-    margin-inline-start: @select-multiple-padding;
-
-    &-inner,
-    &-mirror {
+    &-item {
       height: @select-item-height;
       line-height: @select-item-line-height;
+      margin: @select-margin-half 0;
+      margin-inline-end: @select-multiple-padding;
     }
+
+    &-input {
+      margin: @select-margin-half 0;
+      margin-inline-start: @select-multiple-padding;
+
+      &-inner,
+      &-mirror {
+        height: @select-item-height;
+        line-height: @select-item-line-height;
+      }
+    }
+  }
+
+  &.@{select-prefix}-with-suffix .@{select-prefix}-selector,
+  &.@{select-prefix}-clearable .@{select-prefix}-selector {
+    padding-right: @select-icon-font-size + @select-multiple-padding;
   }
 }
 
@@ -37,65 +37,65 @@
   .@{select-prefix}-selector {
     flex-wrap: wrap;
     align-items: center;
-  }
 
-  .@{select-prefix}-item {
-    display: flex;
-    flex: none;
-    max-width: 100%;
-    padding: @select-multiple-item-padding;
-    background: @select-multiple-item-background-color;
-    border: @select-multiple-item-border;
-    border-radius: @select-multiple-item-border-radius;
-    cursor: default;
+    &-item {
+      display: flex;
+      flex: none;
+      max-width: 100%;
+      padding: @select-multiple-item-padding;
+      background: @select-multiple-item-background-color;
+      border: @select-multiple-item-border;
+      border-radius: @select-multiple-item-border-radius;
+      cursor: default;
 
-    &-disabled {
-      color: @select-multiple-item-disabled-color;
-      border-color: @select-multiple-item-disabled-border-color;
-      cursor: not-allowed;
-    }
+      &-disabled {
+        color: @select-multiple-item-disabled-color;
+        border-color: @select-multiple-item-disabled-border-color;
+        cursor: not-allowed;
+      }
 
-    &-label {
-      display: inline-block;
-      .ellipsis();
-    }
+      &-label {
+        display: inline-block;
+        .ellipsis();
+      }
 
-    &-remove {
-      margin-left: @select-multiple-item-label-margin-left;
-      color: @select-icon-color;
-      font-size: @select-multiple-item-remove-icon-font-size;
-      line-height: inherit;
-      cursor: pointer;
+      &-remove {
+        margin-left: @select-multiple-item-label-margin-left;
+        color: @select-icon-color;
+        font-size: @select-multiple-item-remove-icon-font-size;
+        line-height: inherit;
+        cursor: pointer;
 
-      &:hover {
-        color: @select-icon-hover-color;
+        &:hover {
+          color: @select-icon-hover-color;
+        }
       }
     }
-  }
 
-  .@{select-prefix}-input {
-    position: relative;
-    max-width: 100%;
+    &-input {
+      position: relative;
+      max-width: 100%;
 
-    &-mirror {
-      position: absolute;
-      top: 0;
-      left: 0;
-      white-space: pre;
-      visibility: hidden;
+      &-mirror {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: pre;
+        visibility: hidden;
+      }
     }
-  }
 
-  .@{select-prefix}-placeholder {
-    position: absolute;
-    right: @select-padding-horizontal-md;
-    left: @select-padding-horizontal-md;
+    &-placeholder {
+      position: absolute;
+      right: @select-padding-horizontal-md;
+      left: @select-padding-horizontal-md;
+    }
   }
 
   &.@{select-prefix}-sm {
     .select-size(@select-height-sm, @select-font-size-sm);
 
-    .@{select-prefix}-input {
+    .@{select-prefix}-selector-input {
       margin: 0;
     }
   }

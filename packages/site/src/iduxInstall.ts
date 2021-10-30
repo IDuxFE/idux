@@ -4,8 +4,6 @@ import { clickOutside } from '@idux/cdk/click-outside'
 import { createGlobalConfig } from '@idux/components/config'
 import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from '@idux/components/icon'
 import { IxTypography } from '@idux/components/typography'
-// eslint-disable-next-line import/no-unassigned-import
-import '@idux/components/typography/style'
 
 const directives: Record<string, Directive> = {
   clickOutside,

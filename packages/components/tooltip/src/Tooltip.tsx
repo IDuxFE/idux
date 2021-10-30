@@ -6,7 +6,7 @@
  */
 
 import type { TooltipProps } from './types'
-import type { OverlayInstance } from '@idux/components/_private'
+import type { ɵOverlayInstance } from '@idux/components/_private'
 import type { Slots } from 'vue'
 
 import { defineComponent, ref } from 'vue'
@@ -24,7 +24,7 @@ export default defineComponent({
   name: 'IxTooltip',
   props: tooltipProps,
   setup(props, { slots, expose }) {
-    const overlayRef = ref<OverlayInstance | null>(null)
+    const overlayRef = ref<ɵOverlayInstance | null>(null)
     const config = useGlobalConfig('tooltip')
     const configProps = useConfigProps(props, config)
     const visibility = useMergedProp(props, 'visible')
@@ -41,6 +41,7 @@ export default defineComponent({
         transitionName="ix-fade-fast"
         {...configProps.value}
         offset={defaultOffset}
+        showArrow={true}
       />
     )
   },

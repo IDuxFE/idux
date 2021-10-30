@@ -4,19 +4,19 @@
     padding: 0 @select-padding-horizontal;
     font-size: @selector-font-size;
 
-    .@{select-prefix}-item,
-    .@{select-prefix}-placeholder,
-    .@{select-prefix}-input-inner {
+    &-item,
+    &-placeholder,
+    &-input-inner {
       line-height: @selector-height - 2 * @select-border-width;
+    }
+
+    &-input {
+      right: @select-padding-horizontal;
+      left: @select-padding-horizontal;
     }
   }
 
-  .@{select-prefix}-input {
-    right: @select-padding-horizontal;
-    left: @select-padding-horizontal;
-  }
-
-  &.@{select-prefix}-show-suffix .@{select-prefix}-input {
+  &.@{select-prefix}-show-suffix &-selector-input {
     right: @select-padding-horizontal + @selector-font-size;
   }
 }
@@ -25,21 +25,21 @@
   .@{select-prefix}-selector {
     width: 100%;
 
-    .@{select-prefix}-input {
+    &-input {
       position: absolute;
     }
 
-    .@{select-prefix}-item {
+    &-item {
       position: relative;
     }
   }
 
-  &.@{select-prefix}-show-suffix .@{select-prefix}-item,
-  &.@{select-prefix}-show-suffix .@{select-prefix}-placeholder {
+  &.@{select-prefix}-with-suffix .@{select-prefix}-selector-item,
+  &.@{select-prefix}-with-suffix .@{select-prefix}-selector-placeholder {
     padding-right: @select-icon-font-size;
   }
 
-  &.@{select-prefix}-opened .@{select-prefix}-item {
+  &.@{select-prefix}-opened .@{select-prefix}-selector-item {
     color: @select-placeholder-color;
   }
 

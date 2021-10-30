@@ -10,7 +10,7 @@ import type { FormAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, toRaw, watch } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
@@ -65,15 +65,19 @@ export function useCommonBindings(
 
   const isComposing = ref(false)
   const handlerInput = (evt: Event) => {
+    callEmit(props.onInput, evt)
     if (isComposing.value) {
       return
     }
     const { value } = evt.target as HTMLInputElement
-    callEmit(props.onInput, evt)
-    accessor.setValue(value)
+    const oldValue = toRaw(accessor.valueRef.value)
+    if (value !== oldValue) {
+      accessor.setValue(value)
+      callEmit(props.onChange, value, oldValue)
 
-    //controlled value , see: https://github.com/IDuxFE/idux/issues/495
-    nextTick(() => syncValue())
+      //controlled value , see: https://github.com/IDuxFE/idux/issues/495
+      nextTick(() => syncValue())
+    }
   }
 
   const handlerCompositionStart = (evt: CompositionEvent) => {

@@ -1,8 +1,8 @@
 ---
-order: 3
 title:
   zh: 选项的值为对象
   en: The value of the option is an object
+order: 7
 ---
 
 ## zh

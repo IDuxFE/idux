@@ -150,10 +150,10 @@ const radio = shallowReactive<RadioConfig>({
 
 const select = shallowReactive<SelectConfig>({
   borderless: false,
-  clearable: false,
+  childrenKey: 'children',
   labelKey: 'label',
-  searchable: false,
   size: 'md',
+  suffix: 'down',
   valueKey: 'value',
 })
 

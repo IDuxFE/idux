@@ -26,6 +26,7 @@ export const commonProps = {
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: string) => void>(),
+  onChange: IxPropTypes.emit<(value: string, oldValue: string) => void>(),
   onClear: IxPropTypes.emit<(evt: Event) => void>(),
   onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
   onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),

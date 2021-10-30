@@ -1,733 +1,491 @@
-import { VueWrapper, flushPromises, mount } from '@vue/test-utils'
-import { ComponentPublicInstance, reactive } from 'vue'
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+import { VNode, h, ref } from 'vue'
 
-import { wait } from '@tests'
+import { isElementVisible, renderWork } from '@tests'
 
-import Select from '../src/Select.vue'
-import SelectOption from '../src/SelectOption.vue'
-import SelectOptionGroup from '../src/SelectOptionGroup.vue'
-import { SelectOptionProps, SelectProps } from '../src/types'
+import { IxEmpty } from '@idux/components/empty'
+import { IxIcon } from '@idux/components/icon'
 
-// todo rebuild
-describe.skip('Select', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const SelectMount = (options = {}) => {
-    return mount(
-      {
-        components: { IxSelect: Select, IxSelectOption: SelectOption, IxSelectOptionGroup: SelectOptionGroup },
-        ...options,
-      },
-      { attachTo: 'body' },
-    )
-  }
+import Select from '../src/Select'
+import Content from '../src/content/Content'
+import Option from '../src/content/Option'
+import { SelectOption as SelectOptionComponent, SelectOptionGroup as SelectOptionGroupComponent } from '../src/option'
+import Trigger from '../src/trigger/Trigger'
+import { SelectOption, SelectProps } from '../src/types'
 
-  describe('single template work', () => {
-    let selectProps: Partial<SelectProps>
-    let selectWrapper: VueWrapper<ComponentPublicInstance>
-    let selectContainer: HTMLElement
-    let optionContainer: HTMLElement
-    let options: HTMLElement[]
-    const getOptions = () => Array.from(document.querySelectorAll('.ix-select-option')) as HTMLElement[]
-
-    const initSelect = (props: Partial<SelectProps>, slots?: string) => {
-      selectWrapper = SelectMount({
-        template: `
-        <IxSelect
-          v-model:value="props.value"
-          v-model:open="props.open"
-          :autofocus="props.autofocus"
-          :borderless="props.borderless"
-          :clearable="props.clearable"
-          :compareWith="props.compareWith"
-          :disabled="props.disabled"
-          :empty="props.empty"
-          :filterOption="props.filterOption"
-          :inputable="props.inputable"
-          :overlayClass="props.overlayClass"
-          :placeholder="props.placeholder"
-          :searchable="props.searchable"
-          :size="props.size"
-          :suffix="props.suffix"
-        >
-          <IxSelectOption label="Tom" value="tom" />
-          <IxSelectOption label="Jerry" value="jerry" />
-          <IxSelectOption label="Speike" value="speike" /> 
-          ${slots || ''}
-        </IxSelect>
-        `,
-        setup() {
-          return { props }
-        },
+describe('Select', () => {
+  describe('single work', () => {
+    const defaultOptions = [
+      { key: 1, label: 'Tom', value: 'tom' },
+      { key: 2, label: 'Jerry', value: 'jerry' },
+      { key: 3, label: 'Speike', value: 'speike', disabled: true },
+    ]
+    const defaultValue = 'tom'
+    const SelectMount = (options?: MountingOptions<Partial<SelectProps>>) => {
+      const { props, ...rest } = options || {}
+      return mount(Select, {
+        ...rest,
+        props: { options: defaultOptions, value: defaultValue, ...props },
+        attachTo: 'body',
       })
-
-      selectContainer = document.querySelector('.ix-select-container')!
-      optionContainer = document.querySelector('.ix-select-option-container')!
-      options = getOptions()
     }
 
     afterEach(() => {
-      selectContainer.innerHTML = ''
+      if (document.querySelector('.ix-select-overlay')) {
+        document.querySelector('.ix-select-overlay')!.innerHTML = ''
+      }
     })
 
-    test('render work', () => {
-      selectProps = reactive({ value: 'tom' })
-      initSelect(selectProps)
-
-      expect(selectWrapper.html()).toMatchSnapshot()
-
-      expect(() => {
-        selectWrapper.vm.$forceUpdate()
-        selectWrapper.unmount()
-      }).not.toThrow()
-    })
+    renderWork<SelectProps>(Select, { props: { options: defaultOptions, value: defaultValue }, attachTo: 'body' })
 
     test('v-model:value work', async () => {
-      selectProps = reactive({ value: 'tom' })
-      initSelect(selectProps)
-      await flushPromises()
+      const onUpdateValue = jest.fn()
+      const onChange = jest.fn()
+      const wrapper = SelectMount({ props: { open: true, value: 'tom', 'onUpdate:value': onUpdateValue, onChange } })
 
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
 
-      selectProps.value = undefined
-      await flushPromises()
+      await wrapper.setProps({ value: undefined })
 
-      expect(selectWrapper.find('.ix-select-item').exists()).toBeFalsy()
+      expect(wrapper.find('.ix-select-selector-item').exists()).toBe(false)
 
-      options[1].click()
-      await flushPromises()
+      const options = wrapper.findAllComponents(Option)
+      await options[0].trigger('click')
 
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-      expect(selectProps.value).toBe('jerry')
+      expect(onUpdateValue).toBeCalledWith('tom')
+      expect(onChange).toBeCalledWith('tom', undefined)
+
+      await wrapper.setProps({ value: 'tom' })
+      await options[1].trigger('click')
+
+      expect(onUpdateValue).toBeCalledWith('jerry')
+      expect(onChange).toBeCalledWith('jerry', 'tom')
     })
 
     test('v-model:open work', async () => {
-      selectProps = reactive({ open: true })
-      initSelect(selectProps)
-      await flushPromises()
+      const onUpdateOpen = jest.fn()
+      const wrapper = SelectMount({ props: { open: true, 'onUpdate:open': onUpdateOpen } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-opened')
-      expect(optionContainer.style.display).toBe('')
+      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.findComponent(Content).isVisible()).toBe(true)
 
-      selectProps.open = false
-      await flushPromises()
+      await wrapper.setProps({ open: false })
 
-      expect(selectWrapper.classes()).not.toContain('ix-select-opened')
-      expect(optionContainer.style.display).toBe('none')
+      expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      expect(wrapper.findComponent(Content).isVisible()).toBe(false)
 
-      await selectWrapper.trigger('click')
+      await wrapper.findComponent(Trigger).trigger('click')
 
-      expect(selectWrapper.classes()).toContain('ix-select-opened')
-      expect(optionContainer.style.display).toBe('')
-      expect(selectProps.open).toBe(true)
+      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(onUpdateOpen).toBeCalledWith(true)
 
-      await selectWrapper.trigger('click')
+      await wrapper.findComponent(Trigger).trigger('click')
 
-      expect(selectWrapper.classes()).not.toContain('ix-select-opened')
-      expect(optionContainer.style.display).toBe('none')
-      expect(selectProps.open).toBe(false)
+      expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      expect(onUpdateOpen).toBeCalledWith(false)
+    })
+
+    test('allowInput work', async () => {
+      const onUpdateValue = jest.fn()
+      const wrapper = SelectMount({ props: { allowInput: true, 'onUpdate:value': onUpdateValue } })
+
+      const input = wrapper.find('input')
+
+      await input.setValue('inputValue')
+      await input.trigger('keydown', { code: 'Enter' })
+
+      expect(onUpdateValue).toBeCalledWith('inputValue')
+
+      await input.setValue('testValue')
+      await input.trigger('keydown', { code: 'Enter' })
+
+      expect(onUpdateValue).toBeCalledWith('testValue')
     })
 
     test('autofocus work', async () => {
-      selectProps = reactive({ autofocus: true })
-      initSelect(selectProps)
-
-      await flushPromises()
-      await wait(120)
-
-      expect(optionContainer.style.display).toBe('')
-
-      selectProps.autofocus = false
+      const wrapper = SelectMount({ props: { autofocus: true } })
       await flushPromises()
 
-      expect(optionContainer.style.display).toBe('')
+      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.findComponent(Content).isVisible()).toBe(true)
     })
 
-    test('autofocus work', async () => {
-      selectProps = reactive({ borderless: true })
-      initSelect(selectProps)
-      await flushPromises()
+    test('borderless work', async () => {
+      const wrapper = SelectMount({ props: { borderless: true } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-borderless')
+      expect(wrapper.find('.ix-select-borderless').exists()).toBe(true)
 
-      selectProps.borderless = false
-      await flushPromises()
+      await wrapper.setProps({ borderless: false })
 
-      expect(selectWrapper.classes()).not.toContain('ix-select-borderless')
+      expect(wrapper.find('.ix-select-borderless').exists()).toBe(false)
+    })
+
+    test('custom keys work', async () => {
+      const options = [
+        {
+          key: 1,
+          text: 'Manager',
+          options: [
+            { key: 11, text: 'Tom', name: 'tom' },
+            { key: 12, text: 'Jerry', name: 'jerry' },
+          ],
+        },
+        {
+          key: 2,
+          text: 'Engineer',
+          options: [{ key: 21, text: 'Speike', name: 'speike' }],
+        },
+      ]
+
+      const wrapper = SelectMount({
+        props: { value: 'tom', open: true, options, childrenKey: 'options', labelKey: 'text', valueKey: 'name' },
+      })
+
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
+
+      const optionsComps = wrapper.findAllComponents(Option)
+      expect(optionsComps.length).toBe(3)
     })
 
     test('clearable work', async () => {
-      selectProps = reactive({ value: 'tom', clearable: true })
-      initSelect(selectProps)
-      await flushPromises()
+      const onUpdateValue = jest.fn()
+      const wrapper = SelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-clearable')
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-select-clearable').exists()).toBe(true)
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
 
-      selectWrapper.find('.ix-select-clear').trigger('click')
-      await flushPromises()
+      await wrapper.find('.ix-select-selector-clear').trigger('click')
 
-      expect(selectWrapper.find('.ix-select-clear').exists()).toBeFalsy()
-      expect(selectWrapper.find('.ix-select-item').exists()).toBeFalsy()
+      expect(wrapper.find('.ix-select-clear').exists()).toBe(false)
+      expect(onUpdateValue).toBeCalledWith(undefined)
 
-      selectProps.clearable = false
-      selectProps.value = 'tom'
-      await flushPromises()
+      await wrapper.setProps({ value: 'jerry', clearable: false })
 
-      expect(selectWrapper.classes()).not.toContain('ix-select-clearable')
-      expect(selectWrapper.find('.ix-select-clear').exists()).toBeFalsy()
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-select-clearable').exists()).toBe(false)
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
     })
 
     test('compareWith work', async () => {
       const compareWith = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
-      selectProps = reactive({ value: 't', compareWith })
-      initSelect(selectProps)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { value: 't', compareWith } })
 
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
 
-      selectProps.value = 'j'
-      await flushPromises()
+      await wrapper.setProps({ value: 'j' })
 
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-
-      options[0].click()
-      await flushPromises()
-
-      expect(selectProps.value).toBe('tom')
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
     })
 
     test('disabled work', async () => {
-      selectProps = reactive({ disabled: true })
-      initSelect(selectProps)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { disabled: true } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-disabled')
+      expect(wrapper.find('.ix-select-disabled').exists()).toBe(true)
 
-      await selectWrapper.trigger('click')
+      // await wrapper.findComponent(Trigger).trigger('click')
 
-      expect(optionContainer.style.display).toBe('none')
+      // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
 
-      selectProps.disabled = false
+      await wrapper.setProps({ disabled: false })
 
-      await flushPromises()
+      expect(wrapper.find('.ix-select-disabled').exists()).toBe(false)
 
-      expect(selectWrapper.classes()).not.toContain('ix-select-disabled')
+      // await wrapper.findComponent(Trigger).trigger('click')
 
-      await selectWrapper.trigger('click')
-
-      expect(optionContainer.style.display).toBe('')
+      // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
     })
 
-    test('overlayClass work', async () => {
-      selectProps = reactive({ overlayClass: 'text-class' })
-      initSelect(selectProps)
-      await flushPromises()
+    test('empty work', async () => {
+      let emptyText = 'empty text'
+      const wrapper = SelectMount({ props: { open: true, empty: emptyText, options: [] } })
 
-      expect(optionContainer.classList).toContain('text-class')
+      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
 
-      selectProps.overlayClass = undefined
-      await flushPromises()
+      emptyText = 'empty text 2'
+      await wrapper.setProps({ empty: { description: emptyText } })
 
-      expect(optionContainer.classList).not.toContain('text-class')
+      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
+    })
+
+    test('empty slot work', async () => {
+      const wrapper = SelectMount({
+        props: { open: true, empty: 'empty text', options: [] },
+        slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
+      })
+
+      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe('empty slot')
+    })
+
+    test('options work', async () => {
+      const wrapper = SelectMount({ props: { open: true, options: [] } })
+
+      expect(wrapper.findAllComponents(Option).length).toBe(0)
+
+      await wrapper.setProps({ options: defaultOptions })
+
+      expect(wrapper.findAllComponents(Option).length).toBe(3)
+    })
+
+    test('overlayClassName work', async () => {
+      const wrapper = SelectMount({ props: { open: true, overlayClassName: 'test-class' } })
+
+      expect(isElementVisible(document.querySelector('.test-class'))).toBe(true)
+
+      await wrapper.setProps({ overlayClassName: undefined })
+
+      expect(isElementVisible(document.querySelector('.test-class'))).toBe(false)
+    })
+
+    test('overlayRender work', async () => {
+      const overlayRender = (children: VNode[]) => {
+        return [children, h('div', { class: 'custom-render-div' })]
+      }
+      const wrapper = SelectMount({ props: { open: true, overlayRender } })
+
+      expect(wrapper.findComponent(Content).find('.custom-render-div').exists()).toBe(true)
     })
 
     test('placeholder work', async () => {
-      selectProps = reactive({ placeholder: 'placeholder' })
-      initSelect(selectProps)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { value: undefined, placeholder: 'placeholder' } })
 
-      expect(selectWrapper.find('.ix-select-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder')
 
-      selectProps.value = 'tom'
-      await flushPromises()
+      await wrapper.setProps({ value: 'tom' })
 
-      expect(selectWrapper.find('.ix-select-placeholder').exists()).toBeFalsy()
+      expect(wrapper.find('.ix-select-selector-placeholder').exists()).toBe(false)
 
-      selectProps.value = undefined
-      await flushPromises()
+      await wrapper.setProps({ value: undefined })
 
-      expect(selectWrapper.find('.ix-select-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder')
 
-      selectProps.placeholder = ''
-      await flushPromises()
+      await wrapper.setProps({ placeholder: 'place' })
 
-      expect(selectWrapper.find('.ix-select-placeholder').text()).toBe('')
+      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('place')
     })
 
     test('placeholder slot work', async () => {
-      const placeholderSlot = '<template #placeholder>placeholderSlot</template>'
-      selectProps = reactive({ placeholder: 'placeholder' })
-      initSelect(selectProps, placeholderSlot)
-      await flushPromises()
+      const wrapper = SelectMount({
+        props: { value: undefined, placeholder: 'placeholder' },
+        slots: { placeholder: () => 'placeholder slot' },
+      })
 
-      expect(selectWrapper.find('.ix-select-placeholder').text()).toBe('placeholderSlot')
+      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder slot')
     })
 
     test('searchable work', async () => {
-      selectProps = reactive({ searchable: true })
-      initSelect(selectProps)
-      const input = selectWrapper.find('input')
-      const getShowOptions = () => options.filter(option => option.style.display !== 'none')
-      await flushPromises()
+      const wrapper = SelectMount({ props: { open: true, searchable: true } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-searchable')
+      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
 
-      input.element.value = 't'
-      await input.trigger('input')
+      const input = wrapper.find('input')
+      await input.setValue('t')
 
-      expect(getShowOptions().length).toBe(1)
+      expect(wrapper.findAllComponents(Option).length).toBe(1)
 
-      input.element.value = 'e'
-      await input.trigger('input')
+      await input.setValue('e')
+      expect(wrapper.findAllComponents(Option).length).toBe(2)
 
-      expect(getShowOptions().length).toBe(2)
-
-      input.element.value = '拼音'
-      await input.trigger('compositionstart')
-
-      expect(getShowOptions().length).toBe(2)
-
-      await input.trigger('input')
-
-      expect(getShowOptions().length).toBe(2)
-
-      await input.trigger('compositionend')
-
-      expect(getShowOptions().length).toBe(0)
-
-      input.element.value = ''
-      await input.trigger('input')
-
-      expect(getShowOptions().length).toBe(3)
-
-      selectProps.searchable = false
-      await flushPromises()
+      await wrapper.setProps({ searchable: false })
 
       expect(input.element.style.opacity).toBe('0')
     })
 
-    test('filterOption work', async () => {
-      const filterOption = (searchValue: string, option: SelectOptionProps) => searchValue === option.value
-      selectProps = reactive({ searchable: true, filterOption })
-      initSelect(selectProps)
-      const input = selectWrapper.find('input')
-      const getShowOptions = () => options.filter(option => option.style.display !== 'none')
-      await flushPromises()
+    test('searchFilter work', async () => {
+      const searchFilter = (searchValue: string, option: SelectOption) => searchValue === option.value
+      const wrapper = SelectMount({ props: { open: true, searchable: true, searchFilter } })
 
-      input.element.value = 't'
-      await input.trigger('input')
+      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
 
-      expect(getShowOptions().length).toBe(0)
+      const input = wrapper.find('input')
+      await input.setValue('tom')
 
-      input.element.value = 'tom'
-      await input.trigger('input')
+      expect(wrapper.findAllComponents(Option).length).toBe(1)
 
-      expect(getShowOptions().length).toBe(1)
-
-      selectProps.filterOption = undefined
-      await flushPromises()
-      input.element.value = 't'
-      await input.trigger('input')
-
-      expect(getShowOptions().length).toBe(1)
-    })
-
-    test('empty work', async () => {
-      selectProps = reactive({ empty: 'empty' })
-      selectWrapper = SelectMount({
-        template: `<IxSelect :empty="selectProps.empty"></IxSelect>`,
-        setup() {
-          return { selectProps }
-        },
-      })
-      optionContainer = document.querySelector('.ix-option-container')!
-      await flushPromises()
-
-      expect(optionContainer.querySelector('.ix-option-container-empty')!.textContent).toBe('empty')
-    })
-
-    test('empty slot work', async () => {
-      const emptySlot = '<template #empty>emptySlot</template>'
-      selectProps = reactive({ empty: 'empty' })
-      selectWrapper = SelectMount({
-        template: `<IxSelect :empty="selectProps.empty">${emptySlot}</IxSelect>`,
-        setup() {
-          return { selectProps }
-        },
-      })
-      optionContainer = document.querySelector('.ix-option-container')!
-      await flushPromises()
-
-      expect(optionContainer.querySelector('.ix-option-container-empty')!.textContent).toBe('emptySlot')
+      await input.setValue('Tom')
+      expect(wrapper.findAllComponents(Option).length).toBe(0)
     })
 
     test('size work', async () => {
-      selectProps = reactive({ size: 'large' })
-      initSelect(selectProps)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { size: 'lg' } })
 
-      expect(selectWrapper.classes()).toContain('ix-select-large')
+      expect(wrapper.find('.ix-select-lg').exists()).toBe(true)
 
-      selectProps.size = 'small'
-      await flushPromises()
+      await wrapper.setProps({ size: 'sm' })
 
-      expect(selectWrapper.classes()).toContain('ix-select-small')
+      expect(wrapper.find('.ix-select-sm').exists()).toBe(true)
 
-      selectProps.size = undefined
-      await flushPromises()
+      await wrapper.setProps({ size: undefined })
 
-      expect(selectWrapper.classes()).toContain('ix-select-medium')
+      expect(wrapper.find('.ix-select-md').exists()).toBe(true)
     })
 
     test('suffix work', async () => {
-      selectProps = reactive({ suffix: 'star' })
-      initSelect(selectProps)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { suffix: 'up' } })
 
-      expect(selectWrapper.find('.ix-icon-star').exists()).toBeTruthy()
+      expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
 
-      selectProps.suffix = undefined
-      await flushPromises()
+      await wrapper.setProps({ suffix: undefined })
 
-      expect(selectWrapper.find('.ix-icon-down').exists()).toBeTruthy()
+      expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('suffix slot work', async () => {
-      const suffixSlot = '<template #suffix>suffixSlot</template>'
-      selectProps = reactive({ suffix: 'star' })
-      initSelect(selectProps, suffixSlot)
-      await flushPromises()
+      const wrapper = SelectMount({ props: { suffix: 'down' }, slots: { suffix: () => h(IxIcon, { name: 'up' }) } })
 
-      expect(selectWrapper.find('.ix-select-suffix').text()).toBe('suffixSlot')
+      expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
     })
 
-    test('group options work', async () => {
-      selectProps = reactive({ value: 'tom0' })
-      selectWrapper = SelectMount({
-        template: `
-        <IxSelect v-model:value="props.value"  >
-          <IxSelectOption-group label="Tom">
-            <IxSelectOption label="Tom0" value="tom0" />
-            <IxSelectOption label="Tom1" value="tom1" />
-          </IxSelectOption-group>  
-          <IxSelectOption-group label="Jerry">
-            <IxSelectOption label="Jerry0" value="jerry0" />
-            <IxSelectOption label="Jerry1" value="jerry1" />
-          </IxSelectOption-group>
-          <IxSelectOption-group label="Speike">
-            <IxSelectOption label="Speike0" value="speike0" />
-            <IxSelectOption label="Speike1" value="speike1" />
-          </IxSelectOption-group>
-        </IxSelect>
-        `,
-        setup() {
-          return { props: selectProps }
-        },
-      })
-      await flushPromises()
+    test('virtual work', async () => {
+      const options: SelectOption[] = []
 
-      expect(selectWrapper.html()).toMatchSnapshot()
+      for (let index = 0; index < 100; index++) {
+        const value = `${index.toString(36)}${index}`
+        options.push({ key: index, label: value, value, disabled: index % 10 === 0 })
+      }
+
+      const wrapper = SelectMount({ props: { virtual: true, open: true, options } })
+
+      expect(wrapper.findAllComponents(Option).length).toBe(10)
+
+      await wrapper.setProps({ virtual: false })
+
+      expect(wrapper.findAllComponents(Option).length).toBe(100)
     })
   })
 
-  describe('multiple template work', () => {
-    let selectProps: Partial<SelectProps>
-    let selectWrapper: VueWrapper<ComponentPublicInstance>
-    let selectContainer: HTMLElement
-    let options: HTMLElement[]
-    const getOptions = () => Array.from(document.querySelectorAll('.ix-option')) as HTMLElement[]
+  describe('multiple work', () => {
+    const defaultOptions: SelectOption[] = []
+    for (let index = 0; index < 20; index++) {
+      const prefix = index > 9 ? 'B' : 'A'
+      defaultOptions.push({ key: index, label: prefix + index, value: index, disabled: index % 3 === 0 })
+    }
 
-    const initSelect = (props: Partial<SelectProps>, slots?: string) => {
-      selectWrapper = SelectMount({
-        template: `
-        <IxSelect
-          multiple
-          v-model:value="props.value"
-          :maxLabelCount="props.maxLabelCount"
-          :multipleLimit="props.multipleLimit"
-        >
-          <IxSelectOption label="Tom" value="tom" />
-          <IxSelectOption label="Jerry" value="jerry" />
-          <IxSelectOption label="Speike" value="speike" />
-          ${slots || ''}
-        </IxSelect>
-        `,
-        setup() {
-          return { props }
-        },
+    const defaultValue = [0, 1, 2]
+
+    const SelectMount = (options?: MountingOptions<Partial<SelectProps>>) => {
+      const { props, ...rest } = options || {}
+      return mount(Select, {
+        ...rest,
+        props: { multiple: true, options: defaultOptions, value: defaultValue, ...props },
+        attachTo: 'body',
       })
-
-      selectContainer = document.querySelector('.ix-select-container')!
-      options = getOptions()
     }
 
     afterEach(() => {
-      selectContainer.innerHTML = ''
+      if (document.querySelector('.ix-select-overlay')) {
+        document.querySelector('.ix-select-overlay')!.innerHTML = ''
+      }
     })
 
-    test('render work', () => {
-      selectProps = reactive({ value: ['tom', 'jerry', 'speike'] })
-      initSelect(selectProps)
-
-      expect(selectWrapper.html()).toMatchSnapshot()
-
-      expect(() => {
-        selectWrapper.vm.$forceUpdate()
-        selectWrapper.unmount()
-      }).not.toThrow()
+    renderWork<SelectProps>(Select, {
+      props: { multiple: true, value: [0, 1, 2] },
+      attachTo: 'body',
     })
 
     test('v-model:value work', async () => {
-      selectProps = reactive({ value: ['tom'] })
-      initSelect(selectProps)
-      await flushPromises()
+      const onUpdateValue = jest.fn()
+      const onChange = jest.fn()
+      const wrapper = SelectMount({
+        props: { open: true, value: [0, 1, 2], 'onUpdate:value': onUpdateValue, onChange },
+      })
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(1)
+      expect(wrapper.findAll('.ix-select-selector-item').length).toBe(3)
 
-      selectProps.value = ['tom', 'jerry']
-      await flushPromises()
+      await wrapper.setProps({ value: [0] })
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(2)
+      expect(wrapper.findAll('.ix-select-selector-item').length).toBe(1)
 
-      options[2].click()
-      await flushPromises()
+      // TODO fix
+      // const options = wrapper.findAllComponents(Option)
+      // await options[0].trigger('click')
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(3)
-      expect(selectProps.value).toEqual(['tom', 'jerry', 'speike'])
+      // expect(onUpdateValue).toBeCalledWith(['tom', 'jerry'])
+      // expect(onChange).toBeCalledWith(['tom', 'jerry'], ['tom'])
 
-      options[2].click()
-      await flushPromises()
+      // await wrapper.setProps({ value: ['tom', 'jerry'] })
+      // await options[1].trigger('click')
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(2)
-      expect(selectProps.value).toEqual(['tom', 'jerry'])
-
-      await selectWrapper.findAll('.ix-select-item-remove')[1].trigger('click')
-
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(1)
-      expect(selectProps.value).toEqual(['tom'])
-    })
-
-    test('maxLabelCount work', async () => {
-      selectProps = reactive({ maxLabelCount: 2 })
-      initSelect(selectProps)
-      await flushPromises()
-
-      options.forEach(item => item.click())
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom')
-      expect(selectWrapper.findAll('.ix-select-item')[1].text()).toBe('Jerry')
-      expect(selectWrapper.findAll('.ix-select-item')[2].text()).toBe('+ 1 ...')
-
-      options.forEach(item => item.click())
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(0)
-
-      selectProps.maxLabelCount = 1
-      options.forEach(item => item.click())
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom')
-      expect(selectWrapper.findAll('.ix-select-item')[1].text()).toBe('+ 2 ...')
-    })
-
-    test('maxLabelCount slot work', async () => {
-      const maxLabelCountSlot =
-        '<template #customMaxLabel="{ option }">and {{ option.value.length }} more selected</template>'
-      selectProps = reactive({ maxLabelCount: 1 })
-      initSelect(selectProps, maxLabelCountSlot)
-      await flushPromises()
-
-      options.forEach(item => item.click())
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom')
-      expect(selectWrapper.findAll('.ix-select-item')[1].text()).toBe('and 2 more selected')
-
-      options[2].click()
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom')
-      expect(selectWrapper.findAll('.ix-select-item')[1].text()).toBe('and 1 more selected')
-    })
-
-    test('customLabel slot work', async () => {
-      const customLabelSlot = '<template #customLabel="{ option }">{{ option.label }}:{{ option.value }}</template>'
-      selectProps = reactive({ value: ['tom'] })
-      initSelect(selectProps, customLabelSlot)
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom:tom')
-
-      options[1].click()
-      await flushPromises()
-
-      expect(selectWrapper.findAll('.ix-select-item')[0].text()).toBe('Tom:tom')
-      expect(selectWrapper.findAll('.ix-select-item')[1].text()).toBe('Jerry:jerry')
+      // expect(onUpdateValue).toBeCalledWith(['tom'])
+      // expect(onChange).toBeCalledWith(['tom'], ['tom', 'jerry'])
     })
 
     test('multipleLimit work', async () => {
-      selectProps = reactive({ multipleLimit: 2 })
-      initSelect(selectProps)
-      await flushPromises()
+      const onUpdateValue = jest.fn()
+      const onChange = jest.fn()
+      SelectMount({
+        props: { open: true, value: [], multipleLimit: 3, 'onUpdate:value': onUpdateValue, onChange },
+      })
 
-      options.forEach(item => item.click())
-      await flushPromises()
+      // TODO fix
+      // const options = wrapper.findAllComponents(Option)
+      // await Promise.all(options.map(item => item.trigger('click')))
+      // await flushPromises()
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(2)
-      expect(selectProps.value).toEqual(['tom', 'jerry'])
+      // expect(wrapper.findAll('.ix-select-selector-item').length).toBe(3)
+    })
 
-      selectProps.value = []
-      await flushPromises()
+    test('maxLabelCount work', async () => {
+      const wrapper = SelectMount({ props: { maxLabelCount: 3, value: [0, 1, 2, 4, 5] } })
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(0)
+      let items = wrapper.findAll('.ix-select-selector-item')
 
-      selectProps.multipleLimit = 1
-      await flushPromises()
+      expect(items[0].text()).toBe('A0')
+      expect(items[1].text()).toBe('A1')
+      expect(items[2].text()).toBe('A2')
+      expect(items[3].text()).toBe('+ 2 ...')
 
-      options.forEach(item => item.click())
-      await flushPromises()
+      await wrapper.setProps({ maxLabelCount: 2 })
 
-      expect(selectWrapper.findAll('.ix-select-item').length).toBe(1)
-      expect(selectProps.value).toEqual(['tom'])
+      items = wrapper.findAll('.ix-select-selector-item')
+
+      expect(items[0].text()).toBe('A0')
+      expect(items[1].text()).toBe('A1')
+      expect(items[2].text()).toBe('+ 3 ...')
     })
   })
 
-  describe('render options work', () => {
-    let selectProps: Partial<SelectProps>
-    let selectWrapper: VueWrapper<ComponentPublicInstance>
-    let selectContainer: HTMLElement
-    let options: HTMLElement[]
-    const getOptions = () => Array.from(document.querySelectorAll('.ix-option')) as HTMLElement[]
-
-    const initSelect = (props: Partial<SelectProps>) => {
-      selectWrapper = SelectMount({
-        template: `
-        <IxSelect
-          v-model:value="props.value"
-          :options="props.options"
-          :labelKey="props.labelKey"
-          :valueKey="props.valueKey"
-        >
-        </IxSelect>
-        `,
-        setup() {
-          return { props }
-        },
-      })
-
-      selectContainer = document.querySelector('.ix-select-container')!
-      options = getOptions()
-    }
-
+  describe('template work', () => {
     afterEach(() => {
-      selectContainer.innerHTML = ''
+      if (document.querySelector('.ix-select-overlay')) {
+        document.querySelector('.ix-select-overlay')!.innerHTML = ''
+      }
     })
 
-    test.skip('render work', () => {
-      selectProps = reactive({
-        value: 'tom',
-        options: [
-          { label: 'Tom', value: 'tom' },
-          { label: 'Jerry', value: 'jerry' },
-          { label: 'Speike', value: 'speike' },
-        ],
-      })
-      initSelect(selectProps)
+    test('render work', () => {
+      const wrapper = mount(
+        {
+          components: { Select, SelectOptionComponent, SelectOptionGroupComponent },
+          template: `<Select v-model:value="value">
+          <SelectOptionComponent v-for="option in options" :key="option.key" :label="option.label" :value="option.value" :disabled="option.disabled">
+          </SelectOptionComponent>
+          <SelectOptionGroupComponent key="1" label="Manager">
+            <SelectOptionComponent key="11" label="Tom" value="tom1"></SelectOptionComponent>
+            <SelectOptionComponent key="11" label="Jerry" value="jerry2"></SelectOptionComponent>
+          </SelectOptionGroupComponent>
+          <SelectOptionGroupComponent key="21" label="Engineer">
+            <SelectOptionComponent key="2" label="Speike" value="speike3"></SelectOptionComponent>
+          </SelectOptionGroupComponent>
+        </Select>`,
+          setup() {
+            const value = ref('tom')
+            const options: SelectOption[] = [
+              { key: '01', label: 'Tom', value: 'tom' },
+              { key: '02', label: 'Jerry', value: 'jerry' },
+              { key: '03', label: 'Speike', value: 'speike', disabled: true },
+            ]
+            return { value, options }
+          },
+        },
+        {
+          attachTo: 'body',
+        },
+      )
 
-      expect(selectWrapper.html()).toMatchSnapshot()
+      expect(wrapper.html()).toMatchSnapshot()
 
       expect(() => {
-        selectWrapper.vm.$forceUpdate()
-        selectWrapper.unmount()
+        wrapper.vm.$forceUpdate()
+        wrapper.unmount()
       }).not.toThrow()
-    })
-
-    test.skip('v-model:value work', async () => {
-      selectProps = reactive({
-        value: 'tom',
-        options: [
-          { label: 'Tom', value: 'tom' },
-          { label: 'Jerry', value: 'jerry' },
-          { label: 'Speike', value: 'speike', disabled: true },
-        ],
-      })
-      initSelect(selectProps)
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
-
-      selectProps.value = 'jerry'
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-
-      options[2].click()
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-      expect(selectProps.value).toEqual('jerry')
-
-      options[0].click()
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
-      expect(selectProps.value).toEqual('tom')
-    })
-
-    test.skip('labelKey and valueKey work', async () => {
-      selectProps = reactive({
-        value: 'tom',
-        labelKey: 'text',
-        valueKey: 'key',
-        options: [
-          { text: 'Tom', key: 'tom' },
-          { text: 'Jerry', key: 'jerry' },
-          { text: 'Speike', key: 'speike', disabled: true },
-        ],
-      })
-      initSelect(selectProps)
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
-
-      selectProps.value = 'jerry'
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-
-      options[2].click()
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Jerry')
-      expect(selectProps.value).toEqual('jerry')
-
-      options[0].click()
-      await flushPromises()
-
-      expect(selectWrapper.find('.ix-select-item').text()).toBe('Tom')
-      expect(selectProps.value).toEqual('tom')
-    })
-
-    test.skip('group options work', async () => {
-      selectProps = reactive({
-        value: 'tom0',
-        options: [
-          { label: 'Tom0', value: 'tom0', groupLabel: 'Tom' },
-          { label: 'Tom1', value: 'tom1', groupLabel: 'Tom' },
-          { label: 'Jerry0', value: 'jerry0', groupLabel: 'Jerry' },
-          { label: 'Jerry1', value: 'jerry1', groupLabel: 'Jerry' },
-          { label: 'Speike0', value: 'speike0', groupLabel: 'Speike' },
-          { label: 'Speike1', value: 'speike1', groupLabel: 'Speike' },
-        ],
-      })
-      initSelect(selectProps)
-      await flushPromises()
-
-      expect(selectWrapper.html()).toMatchSnapshot()
     })
   })
 })
