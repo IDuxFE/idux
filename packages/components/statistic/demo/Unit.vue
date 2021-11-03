@@ -2,7 +2,7 @@
   <div class="statistic-demo-unit">
     <IxStatistic title="Feedback" :value="1128">
       <template #suffix>
-        <IxIcon name="like" />
+        <IxIcon name="book-mark" />
       </template>
     </IxStatistic>
     <IxStatistic title="Unmerged" :value="93" class="demo-class">

@@ -13,10 +13,11 @@ import { cloneVNode } from 'vue'
 import { Logger, getFirstValidNode } from '@idux/cdk/utils'
 
 export const iconDefinitions = new Map<string, IconDefinition>()
-const iconCache = new Map<string, { name: string; svg: SVGElement }>()
-const iconfontCache = new Set<string>()
 
-export const clearSVGElement = (el: HTMLElement): void => {
+const iconCache = new Map<string, SVGElement | Promise<SVGElement | null>>()
+const scriptCache = new Set<string>()
+
+export function clearSVGElement(el: HTMLElement): void {
   const children = el.childNodes
   const length = children.length
   for (let i = length - 1; i >= 0; i--) {
@@ -28,42 +29,57 @@ export const clearSVGElement = (el: HTMLElement): void => {
   }
 }
 
-export const loadSVGElement = async (
+export async function loadSVGElement(
   iconName: string,
   loadIconDynamically?: (iconName: string) => Promise<string>,
-): Promise<SVGElement | null> => {
+): Promise<SVGElement | null> {
   const cached = iconCache.get(iconName)
   if (cached) {
-    return cached.svg.cloneNode(true) as SVGElement
+    const svg = await cached
+    if (svg) {
+      return svg.cloneNode(true) as SVGElement
+    } else {
+      iconCache.delete(iconName)
+      return null
+    }
   }
+  const svg = createSVGElement(iconName, loadIconDynamically)
+  iconCache.set(iconName, svg)
+  return svg
+}
+
+export async function loadSvgElementFormScript(iconName: string): Promise<SVGElement | null> {
+  let svg: SVGElement | null = null
+  const cachedName = `IDUX_CACHED_ICON_FONT_` + iconName
+  const cached = iconCache.get(cachedName)
+  if (cached) {
+    svg = await cached
+  }
+  if (!svg) {
+    svg = covertSVGElement(`<svg><use xlink:href="#${iconName}"></svg>`)!
+    setSVGAttribute(svg, iconName)
+    iconCache.set(cachedName, svg)
+  }
+
+  return svg.cloneNode(true) as SVGElement
+}
+
+async function createSVGElement(
+  iconName: string,
+  loadIconDynamically: ((iconName: string) => Promise<string>) | undefined,
+) {
   let svg: SVGElement | null = null
   const icon = await loadIconDefinition(iconName, loadIconDynamically)
   if (icon) {
-    svg = createSVGElement(icon.svg)
+    svg = covertSVGElement(icon.svg)
     if (svg) {
       setSVGAttribute(svg, iconName)
-      iconCache.set(iconName, { name: iconName, svg })
+      iconCache.set(iconName, svg)
     } else {
       __DEV__ && Logger.warn('components/icon', `The icon [${iconName}] create failed.`)
     }
   }
   return svg
-}
-
-export const loadIconFontSvgElement = (iconName: string): SVGElement => {
-  let svg: SVGElement | null
-  const cachedName = `IDUX_CACHED_ICON_FONT_` + iconName
-  const cached = iconCache.get(cachedName)
-  if (cached) {
-    svg = cached.svg
-  } else {
-    const svgString = `<svg><use xlink:href="#${iconName}"></svg>`
-    svg = createSVGElement(svgString)!
-    setSVGAttribute(svg, iconName)
-    iconCache.set(cachedName, { name: iconName, svg })
-  }
-
-  return svg.cloneNode(true) as SVGElement
 }
 
 async function loadIconDefinition(iconName: string, loadIconDynamically?: (iconName: string) => Promise<string>) {
@@ -91,7 +107,7 @@ function validSVGString(svg: string): boolean {
   return !!svg && svg.includes('<svg')
 }
 
-function createSVGElement(svg: string): SVGElement | null {
+function covertSVGElement(svg: string): SVGElement | null {
   const div = document.createElement('div')
   div.innerHTML = svg
   return div.querySelector('svg')
@@ -126,7 +142,7 @@ export function covertSVGNode(child: VNodeChild | undefined): VNode | undefined 
 
 export function createScriptElements(urls: string[], index = 0): void {
   const currentUrl = urls[index]
-  if (!iconfontCache.has(currentUrl)) {
+  if (!scriptCache.has(currentUrl)) {
     const scriptElement = document.createElement('script')
     scriptElement.setAttribute('src', currentUrl)
     if (urls.length > index + 1) {
@@ -136,7 +152,7 @@ export function createScriptElements(urls: string[], index = 0): void {
         createScriptElements(urls, index + 1)
       }
     }
-    iconfontCache.add(currentUrl)
+    scriptCache.add(currentUrl)
     document.body.appendChild(scriptElement)
   }
 }

@@ -8,8 +8,8 @@
 import type { IconDefinition } from './types'
 
 import {
-  CaretDown,
-  CaretUp,
+  CaretDownFilled,
+  CaretUpFilled,
   Check,
   CheckCircle,
   CheckCircleFilled,
@@ -26,7 +26,6 @@ import {
   ExclamationCircleFilled,
   InfoCircle,
   InfoCircleFilled,
-  Left,
   Loading,
   Menu,
   Minus,
@@ -38,7 +37,6 @@ import {
   RotateRight,
   Search,
   StarFilled,
-  Up,
   User,
   VerticalAlignTop,
   ZoomIn,
@@ -46,8 +44,8 @@ import {
 } from './definitions'
 
 export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
-  CaretDown, // Table
-  CaretUp, // Table
+  CaretDownFilled, // Table
+  CaretUpFilled, // Table
   Check, // Progress Stepper
   CheckCircle, // Result Message
   CheckCircleFilled, // Progress Modal FormItem
@@ -64,7 +62,6 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   ExclamationCircleFilled, // Modal
   InfoCircle, // Message Result
   InfoCircleFilled, // Modal
-  Left, // Tests
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout
   Minus, // Table
@@ -76,7 +73,6 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   RotateRight, // Image
   Search, // Select
   StarFilled, // Rate
-  Up, // Tests
   User, // Avatar
   VerticalAlignTop, // BackTop
   ZoomIn, // Image

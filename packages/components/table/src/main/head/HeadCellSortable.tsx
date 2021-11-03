@@ -50,10 +50,10 @@ function getNextTooltipTitle(
 
 function renderSortTrigger(orders: TableColumnSortOrder[], activeOrderBy?: TableColumnSortOrder) {
   const upNode = orders!.includes('ascend') ? (
-    <IxIcon name="caret-up" class={{ 'ix-table-sortable-trigger-active': activeOrderBy === 'ascend' }} />
+    <IxIcon name="caret-up-filled" class={{ 'ix-table-sortable-trigger-active': activeOrderBy === 'ascend' }} />
   ) : undefined
   const downNode = orders!.includes('descend') ? (
-    <IxIcon name="caret-down" class={{ 'ix-table-sortable-trigger-active': activeOrderBy === 'descend' }} />
+    <IxIcon name="caret-down-filled" class={{ 'ix-table-sortable-trigger-active': activeOrderBy === 'descend' }} />
   ) : undefined
   return (
     <span class="ix-table-sortable-trigger">

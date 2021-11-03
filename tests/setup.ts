@@ -1,3 +1,3 @@
-import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from '@idux/components/icon'
+import { IDUX_ICON_DEPENDENCIES, Left, Up, addIconDefinitions } from '@idux/components/icon'
 
-addIconDefinitions(IDUX_ICON_DEPENDENCIES)
+addIconDefinitions([...IDUX_ICON_DEPENDENCIES, Up, Left])
