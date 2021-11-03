@@ -15,7 +15,7 @@ import { isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { iconProps } from './types'
-import { clearSVGElement, covertSVGNode, loadIconFontSvgElement, loadSVGElement } from './utils'
+import { clearSVGElement, covertSVGNode, loadSVGElement, loadSvgElementFormScript } from './utils'
 
 export default defineComponent({
   name: 'IxIcon',
@@ -73,7 +73,9 @@ export default defineComponent({
 async function appendChild(props: IconProps, config: IconConfig, root: Ref<HTMLElement>): Promise<void> {
   const { name, iconfont, rotate } = props
   if (name) {
-    const svgElement = iconfont ? loadIconFontSvgElement(name) : await loadSVGElement(name, config.loadIconDynamically)
+    const svgElement = iconfont
+      ? await loadSvgElementFormScript(name)
+      : await loadSVGElement(name, config.loadIconDynamically)
     if (svgElement) {
       handleRotate(svgElement, rotate)
       root.value?.appendChild(svgElement)

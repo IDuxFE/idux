@@ -5,7 +5,7 @@
   <IxHeader>
     Title
     <template #prefix>
-      <IxIcon name="caret-left" @click="onPrefixClick" />
+      <IxIcon name="caret-left-filled" @click="onPrefixClick" />
     </template>
     <template #suffix>
       <IxIcon name="setting" @click="onSuffixClick"></IxIcon>
