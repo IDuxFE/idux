@@ -9,7 +9,7 @@
 
 import { Comment, Fragment, Slots, Text, VNode, VNodeChild, isVNode } from 'vue'
 
-import { isNil, isNumber, isString } from 'lodash-es'
+import { isNil } from 'lodash-es'
 
 import { convertArray } from './convert'
 
@@ -79,7 +79,7 @@ export function hasSlot(slots: Slots, key = 'default'): boolean {
 
 export function isEmptyNode(node: VNodeChild): boolean {
   return (
-    isNil(node) ||
+    !node ||
     isComment(node) ||
     (isFragment(node) && (node as any).children.length === 0) ||
     (isText(node) && (node as any).children.trim() === '')
@@ -106,27 +106,29 @@ export function filterEmptyNode(nodes: VNodeChild): VNode[] {
   return result.filter(c => !isEmptyNode(c))
 }
 
-export function flattenNode(nodes: VNodeChild, filterEmpty = true): VNode[] {
+export function flattenNode(
+  nodes: VNodeChild,
+  filterOptions: { empty?: boolean; key?: string | string[] } = {},
+): VNode[] {
   const result: VNode[] = []
+
   convertArray(nodes).forEach(node => {
-    if (node === null) {
-      return
-    }
     if (Array.isArray(node)) {
-      result.push(...flattenNode(node, filterEmpty))
-    } else if (node && isFragment(node)) {
-      if (isFragment(node)) {
-        result.push(...flattenNode((node as any).children, filterEmpty))
-      } else if (isVNode(node)) {
-        if (!filterEmpty || !isEmptyNode(node)) {
-          result.push(node)
-        }
-      } else if (!filterEmpty || isNumber(node) || (isString(node) && node.length > 0)) {
-        result.push(node as unknown as VNode)
-      }
+      result.push(...flattenNode(node, filterOptions))
+    } else if (isFragment(node)) {
+      result.push(...flattenNode((node as any).children, filterOptions))
     } else {
+      const { empty = true, key } = filterOptions
+      if (empty && isEmptyNode(node)) {
+        return
+      }
+      const keys = convertArray(key)
+      if (keys.length && isVNode(node) && !keys.some(key => (node.type as any)[key])) {
+        return
+      }
       result.push(node as unknown as VNode)
     }
   })
+
   return result
 }
