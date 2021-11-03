@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+export * from './src/composable'
 export * from './src/convert'
 export * from './src/dom'
 export * from './src/easings'

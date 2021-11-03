@@ -95,7 +95,7 @@ export function useDelay(state: Required<PopperOptions>): ComputedRef<{ show: nu
 }
 
 export function useTimer(): { setTimer: (action: () => void, delay: number) => void; clearTimer: () => void } {
-  let timer: NodeJS.Timer | null = null
+  let timer: number | null = null
 
   const setTimer = (action: () => void, delay: number) => {
     if (timer) {

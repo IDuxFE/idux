@@ -18,7 +18,8 @@ export const virtualListProps = {
   itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => string | number>()]).isRequired,
   itemRender: IxPropTypes.func<VirtualItemRenderFn>(),
   contentRender: IxPropTypes.func<VirtualContentRenderFn>(),
-  onScroll: IxPropTypes.func<(evt: Event) => void>(),
+  virtual: IxPropTypes.bool.def(true),
+  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
 }
 
 export type VirtualScrollProps = IxInnerPropTypes<typeof virtualListProps>

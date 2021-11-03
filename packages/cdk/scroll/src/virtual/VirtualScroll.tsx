@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'IxVirtualScroll',
   props: virtualListProps,
   setup(props, { expose, slots }) {
-    const useVirtual = computed(() => props.height > 0 && props.itemHeight > 0)
+    const useVirtual = computed(() => props.virtual && props.height > 0 && props.itemHeight > 0)
     const getKey = useGetKey(props)
     const { heights, collectHeights, setItemElement } = useItemHeights(getKey)
 

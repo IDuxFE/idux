@@ -77,7 +77,7 @@ function useMobileTouchMove(
   let touchY = 0
 
   // Smooth scroll
-  let intervalId: NodeJS.Timer
+  let intervalId: number
 
   const cleanUpEvents = (element: HTMLElement) => {
     off(element, 'touchmove', onTouchMove)
