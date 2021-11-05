@@ -21,7 +21,7 @@ import {
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
-import { IxHeader } from '@idux/components/_private'
+import { ɵHeader } from '@idux/components/_private'
 import { ModalConfig } from '@idux/components/config'
 
 import ModalBody from './ModalBody'
@@ -117,7 +117,7 @@ export default defineComponent({
             >
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               <div class={`${prefixCls}-content`}>
-                <IxHeader
+                <ɵHeader
                   closable={closable.value}
                   closeIcon={closeIcon.value}
                   header={props.header}
@@ -185,7 +185,7 @@ function useEvent(
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   sentinelEndRef: Ref<HTMLDivElement | undefined>,
 ) {
-  let timeId: NodeJS.Timeout | undefined
+  let timeId: number | undefined
   let mouseDown = false
 
   const clearTimer = () => {

@@ -10,7 +10,7 @@ import type { DropdownConfig } from '@idux/components/config'
 
 import { computed, defineComponent, provide } from 'vue'
 
-import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
+import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { dropdownToken } from './token'
@@ -34,7 +34,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <IxOverlay
+        <ɵOverlay
           v-model={[visibility.value, 'visible']}
           v-slots={{ default: slots.default, content: slots.overlay }}
           class="ix-dropdown"

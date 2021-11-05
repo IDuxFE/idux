@@ -1,5 +1,5 @@
 <template>
-  <IxCollapse expandIcon="caret-right" class="demo-collapse">
+  <IxCollapse expandIcon="caret-right-filled" class="demo-collapse">
     <IxCollapsePanel key="1" header="Francis Bacon's saying" class="demo-collapse-panel">
       <span>A wise man will make more opportunities than he finds.</span>
     </IxCollapsePanel>

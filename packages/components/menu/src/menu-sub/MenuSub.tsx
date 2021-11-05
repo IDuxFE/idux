@@ -13,7 +13,7 @@ import { computed, defineComponent, inject, provide, ref, watch } from 'vue'
 
 import { debounce } from 'lodash-es'
 
-import { IxOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
 
@@ -82,7 +82,7 @@ export default defineComponent({
         const trigger = () => <Title></Title>
         const content = () => <OverlayContent></OverlayContent>
         children = (
-          <IxOverlay
+          <ɵOverlay
             visible={isExpanded.value}
             v-slots={{ default: trigger, content: content }}
             class="ix-menu-sub-overlay"

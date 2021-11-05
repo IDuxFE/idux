@@ -40,7 +40,7 @@ export function useDragDrop(props: TreeProps, { expandedKeys }: ExpandableContex
   const dropParentKey = ref<VKey>()
   const dropType = ref<TreeDropType>()
 
-  let dragTimer: NodeJS.Timeout | undefined
+  let dragTimer: number | undefined
 
   const clearTimer = () => {
     if (dragTimer) {

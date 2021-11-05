@@ -14,7 +14,7 @@ import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMount
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
-import { IxHeader } from '@idux/components/_private'
+import { ɵHeader } from '@idux/components/_private'
 
 import DrawerFooter from './DrawerFooter'
 import { DRAWER_TOKEN, drawerToken } from './token'
@@ -141,7 +141,7 @@ export default defineComponent({
               >
                 <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
                 <div class={`${prefixCls}-content`}>
-                  <IxHeader
+                  <ɵHeader
                     closable={closable.value}
                     closeIcon={closeIcon.value}
                     header={props.header}
@@ -208,7 +208,7 @@ function useEvent(
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   sentinelEndRef: Ref<HTMLDivElement | undefined>,
 ) {
-  let timeId: NodeJS.Timeout | undefined
+  let timeId: number | undefined
   let mouseDown = false
 
   const clearTimer = () => {

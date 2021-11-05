@@ -107,7 +107,7 @@ const useScrollState = (
 const useOriginScroll = (isScrollAtTop: Ref<boolean>, isScrollAtBottom: Ref<boolean>): OriginScroll => {
   // Do lock for a wheel when scrolling
   let lock = false
-  let lockTimeout: NodeJS.Timeout
+  let lockTimeout: number
   const lockScroll = () => {
     clearTimeout(lockTimeout)
     lock = true
@@ -191,7 +191,7 @@ export function useScroll(
 
 function useVisible(props: VirtualScrollProps, scrollState: ComputedRef<ScrollBarState>, scrollTop: Ref<number>) {
   const _visible = ref(false)
-  let visibleTimeout: NodeJS.Timeout
+  let visibleTimeout: number
 
   const hideScrollBar = throttle(() => {
     clearTimeout(visibleTimeout)

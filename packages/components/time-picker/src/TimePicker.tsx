@@ -9,7 +9,7 @@ import { computed, defineComponent } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
-import { IxOverlay, ɵUseVisibility } from '@idux/components/_private'
+import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
 
@@ -78,7 +78,7 @@ export default defineComponent({
       )
 
       return (
-        <IxOverlay
+        <ɵOverlay
           {...overlayProps.value}
           v-model={[visibility.value, 'visible']}
           v-slots={{ default: renderInput, content: renderContent }}

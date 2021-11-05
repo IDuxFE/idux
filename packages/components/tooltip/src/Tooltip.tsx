@@ -11,7 +11,7 @@ import type { Slots } from 'vue'
 
 import { defineComponent, ref } from 'vue'
 
-import { IxOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { useMergedProp } from '@idux/components/utils'
 
@@ -33,7 +33,7 @@ export default defineComponent({
     expose({ updatePopper })
 
     return () => (
-      <IxOverlay
+      <ɵOverlay
         ref={overlayRef}
         v-model={[visibility.value, 'visible']}
         v-slots={{ default: slots.default, content: () => renderTitle(props, slots) }}

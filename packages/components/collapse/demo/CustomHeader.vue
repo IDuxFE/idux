@@ -13,7 +13,7 @@
       <template #header="{ expanded, onClick }">
         <IxHeader title="Francis Bacon's saying" @click="onClick">
           <template #prefix>
-            <IxIcon name="caret-right" :rotate="expanded ? 90 : 0"></IxIcon>
+            <IxIcon name="caret-right-filled" :rotate="expanded ? 90 : 0"></IxIcon>
           </template>
           <template #suffix>
             <IxIcon name="setting"></IxIcon>

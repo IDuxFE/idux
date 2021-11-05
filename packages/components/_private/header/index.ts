@@ -5,8 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import IxHeader from './src/Header'
+import Header from './src/Header'
 
-export { IxHeader }
+const ɵHeader = Header
 
-export type { HeaderProps } from './src/types'
+export { ɵHeader }
+
+export type { HeaderProps as ɵHeaderProps } from './src/types'

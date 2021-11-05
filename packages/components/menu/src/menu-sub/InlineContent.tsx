@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { IxCollapseTransition } from '@idux/components/_private'
+import { ɵCollapseTransition } from '@idux/components/_private'
 
 import { menuSubToken } from '../token'
 
@@ -23,11 +23,11 @@ export default defineComponent({
     })
 
     return () => (
-      <IxCollapseTransition appear>
+      <ɵCollapseTransition appear>
         <ul v-show={isExpanded.value} class={classes.value}>
           {slots.default?.()}
         </ul>
-      </IxCollapseTransition>
+      </ɵCollapseTransition>
     )
   },
 })

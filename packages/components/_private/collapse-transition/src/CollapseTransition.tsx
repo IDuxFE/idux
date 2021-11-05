@@ -5,15 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Transition, defineComponent } from 'vue'
+import { Transition, computed, defineComponent } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { collapseTransitionProps } from './types'
 
 export default defineComponent({
   props: collapseTransitionProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse-transition`)
+
     const onBeforeEnter = (el: HTMLElement) => {
       const mode = props.mode
       el.style[mode] = `0px`
@@ -48,19 +52,22 @@ export default defineComponent({
       callEmit(props.onAfterLeave)
     }
 
-    return () => (
-      <Transition
-        appear={props.appear}
-        name={props.name}
-        onBeforeEnter={onBeforeEnter}
-        onEnter={onEnter}
-        onAfterEnter={onAfterEnter}
-        onBeforeLeave={onBeforeLeave}
-        onLeave={onLeave}
-        onAfterLeave={onAfterLeave}
-      >
-        {slots.default!()}
-      </Transition>
-    )
+    return () => {
+      const { appear, name = mergedPrefixCls.value } = props
+      return (
+        <Transition
+          appear={appear}
+          name={name}
+          onBeforeEnter={onBeforeEnter}
+          onEnter={onEnter}
+          onAfterEnter={onAfterEnter}
+          onBeforeLeave={onBeforeLeave}
+          onLeave={onLeave}
+          onAfterLeave={onAfterLeave}
+        >
+          {slots.default!()}
+        </Transition>
+      )
+    }
   },
 })

@@ -82,7 +82,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
 
   const lockedScrollTargetRef = ref<HTMLElement>()
 
-  let timeout: NodeJS.Timeout | undefined
+  let timeout: number | undefined
 
   const clearTimer = () => {
     if (timeout) {
