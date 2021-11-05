@@ -1,12 +1,9 @@
-@import '../../../style/themes/default.less';
 @import '../../../style/mixins/box.less';
-@import '../../../style/motion/fade.less';
-
-@mask-prefix: ~'@{idux-prefix}-mask';
+@import './themes/default.less';
 
 .@{mask-prefix} {
   .box(fixed);
   height: 100%;
-  background-color: @mask-bg-color;
+  background-color: @mask-background-color;
   z-index: @zindex-l4-base;
 }

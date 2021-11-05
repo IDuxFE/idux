@@ -9,12 +9,12 @@ import type { CollapseTransitionComponent } from './src/types'
 
 import CollapseTransition from './src/CollapseTransition'
 
-const IxCollapseTransition = CollapseTransition as unknown as CollapseTransitionComponent
+const ɵCollapseTransition = CollapseTransition as unknown as CollapseTransitionComponent
 
-export { IxCollapseTransition }
+export { ɵCollapseTransition }
 
 export type {
-  CollapseTransitionInstance,
-  CollapseTransitionPublicProps as CollapseTransitionProps,
-  CollapseTransitionMode,
+  CollapseTransitionInstance as ɵCollapseTransitionInstance,
+  CollapseTransitionPublicProps as ɵCollapseTransitionProps,
+  CollapseTransitionMode as ɵCollapseTransitionMode,
 } from './src/types'

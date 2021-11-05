@@ -11,7 +11,7 @@ import type { VueTypeDef } from 'vue-types'
 
 import { portalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-import { overlayPlacementDef, overlayTriggerDef } from '@idux/components/_private'
+import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
 
 export const dropdownProps = {
   visible: IxPropTypes.bool.def(false),
@@ -19,10 +19,10 @@ export const dropdownProps = {
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool.def(false),
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
-  placement: overlayPlacementDef,
+  placement: ɵOverlayPlacementDef,
   showArrow: IxPropTypes.bool,
   target: portalTargetDef,
-  trigger: overlayTriggerDef,
+  trigger: ɵOverlayTriggerDef,
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),

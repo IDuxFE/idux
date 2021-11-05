@@ -11,6 +11,7 @@ import { defineComponent, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
+import { ɵHeader } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 import { IxSpin } from '@idux/components/spin'
@@ -28,7 +29,6 @@ import { useTableLayout } from './composables/useTableLayout'
 import { useTags } from './composables/useTags'
 import MainTable from './main/MainTable'
 import { renderFooter } from './other/Footer'
-import { renderHeader } from './other/Header'
 import { renderPagination } from './other/Pagination'
 import { TABLE_TOKEN } from './token'
 import { tableProps } from './types'
@@ -78,7 +78,7 @@ export default defineComponent({
     provide(TABLE_TOKEN, context)
 
     return () => {
-      const header = renderHeader(props, slots)
+      const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots)
       const [paginationTop, paginationBottom] = renderPagination(mergedPagination.value, dataContext.filteredData.value)
       const children = [header, paginationTop, <MainTable />, paginationBottom, footer]

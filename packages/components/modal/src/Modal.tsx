@@ -13,7 +13,7 @@ import { computed, defineComponent, onBeforeUnmount, provide, ref, watchEffect }
 import { IxPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise } from '@idux/cdk/utils'
-import { IxMask } from '@idux/components/_private'
+import { ɵMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { useMergedProp } from '@idux/components/utils'
 
@@ -58,12 +58,12 @@ export default defineComponent({
 
       return (
         <IxPortal target={`${mergedPrefixCls.value}-container`} load={visible.value}>
-          <IxMask
+          <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
             visible={visible.value}
             zIndex={zIndex.value}
-          ></IxMask>
+          />
           <ModalWrapper {...attrs}></ModalWrapper>
         </IxPortal>
       )

@@ -9,10 +9,14 @@ import type { OverlayComponent } from './src/types'
 
 import Overlay from './src/Overlay'
 
-const IxOverlay = Overlay as unknown as OverlayComponent
+const ɵOverlay = Overlay as unknown as OverlayComponent
 
-export { IxOverlay }
-export { overlayPlacementDef, overlayTriggerDef, overlayDelayDef } from './src/types'
+export { ɵOverlay }
+export {
+  overlayPlacementDef as ɵOverlayPlacementDef,
+  overlayTriggerDef as ɵOverlayTriggerDef,
+  overlayDelayDef as ɵOverlayDelayDef,
+} from './src/types'
 export { useVisibility as ɵUseVisibility } from './src/useVisibility'
 
-export type { OverlayInstance, OverlayPublicProps as OverlayProps } from './src/types'
+export type { OverlayInstance as ɵOverlayInstance, OverlayPublicProps as ɵOverlayProps } from './src/types'

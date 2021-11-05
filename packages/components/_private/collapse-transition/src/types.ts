@@ -14,7 +14,7 @@ export type CollapseTransitionMode = 'height' | 'width'
 
 export const collapseTransitionProps = {
   appear: IxPropTypes.bool.def(false),
-  name: IxPropTypes.string.def('ix-collapse-transition'),
+  name: IxPropTypes.string,
   mode: IxPropTypes.oneOf<CollapseTransitionMode>(['height', 'width']).def('height'),
   onAfterEnter: IxPropTypes.emit(),
   onAfterLeave: IxPropTypes.emit(),

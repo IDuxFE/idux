@@ -13,7 +13,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { isString } from 'lodash-es'
 
 import { getFirstValidNode } from '@idux/cdk/utils'
-import { IxCollapseTransition } from '@idux/components/_private'
+import { ɵCollapseTransition } from '@idux/components/_private'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
@@ -50,11 +50,11 @@ export default defineComponent({
       return (
         <div class={classes.value}>
           {headerNode}
-          <IxCollapseTransition appear>
+          <ɵCollapseTransition appear>
             <div v-show={expanded} class="ix-collapse-panel-content">
               <div class="ix-collapse-panel-content-box">{slots.default?.()}</div>
             </div>
-          </IxCollapseTransition>
+          </ɵCollapseTransition>
         </div>
       )
     }

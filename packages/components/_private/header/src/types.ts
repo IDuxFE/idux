@@ -9,8 +9,8 @@ import type { HeaderProps as IxHeaderProps } from '@idux/components/header'
 import type { VNode } from 'vue'
 
 export interface HeaderProps {
-  closable: boolean
-  closeIcon: string | VNode
+  closable?: boolean
+  closeIcon?: string | VNode
   header?: string | IxHeaderProps
-  onClose: (evt: Event) => void
+  onClose?: (evt: Event) => void
 }

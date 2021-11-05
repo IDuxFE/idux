@@ -9,8 +9,8 @@ import type { MaskComponent } from './src/types'
 
 import Mask from './src/Mask'
 
-const IxMask = Mask as unknown as MaskComponent
+const ɵMask = Mask as unknown as MaskComponent
 
-export { IxMask }
+export { ɵMask }
 
-export type { MaskInstance, MaskPublicProps as MaskProps } from './src/types'
+export type { MaskInstance as ɵMaskInstance, MaskPublicProps as ɵMaskProps } from './src/types'

@@ -25,14 +25,16 @@ import { clickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
 import { IxPortal } from '@idux/cdk/portal'
 import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { overlayProps } from './types'
 
 export default defineComponent({
-  name: 'IxOverlay',
   inheritAttrs: false,
   props: overlayProps,
   setup(props, { slots, attrs, expose }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
     const popperOptions = usePopperOptions(props)
     const {
       arrowRef,
@@ -84,7 +86,16 @@ export default defineComponent({
         return triggerNode
       }
       const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, popperRef, hide)
-      const content = renderContent(props, visibility, contentNode!, arrowRef, popperRef, popperEvents, attrs)
+      const content = renderContent(
+        props,
+        mergedPrefixCls,
+        visibility,
+        contentNode!,
+        arrowRef,
+        popperRef,
+        popperEvents,
+        attrs,
+      )
       return (
         <>
           {trigger}
@@ -108,6 +119,7 @@ function usePopperOptions(props: OverlayProps) {
 
 function renderContent(
   props: OverlayProps,
+  mergedPrefixCls: ComputedRef<string>,
   visibility: ComputedRef<boolean>,
   contentNode: VNode[],
   arrowRef: Ref<PopperElement | null>,
@@ -118,13 +130,11 @@ function renderContent(
   if (props.destroyOnHide && !visibility.value) {
     return null
   }
-
-  const arrow = props.showArrow ? <div ref={arrowRef} class="ix-overlay-arrow"></div> : null
-
+  const prefixCls = mergedPrefixCls.value
   const overlay = (
-    <div ref={popperRef} class="ix-overlay" {...popperEvents.value} {...attrs}>
+    <div ref={popperRef} class={prefixCls} {...popperEvents.value} {...attrs}>
       {contentNode}
-      {arrow}
+      {props.showArrow && <div ref={arrowRef} class={`${prefixCls}-arrow`}></div>}
     </div>
   )
 

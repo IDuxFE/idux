@@ -5,13 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Transition, defineComponent } from 'vue'
+import { Transition, computed, defineComponent } from 'vue'
+
+import { useGlobalConfig } from '@idux/components/config'
 
 import { maskProps } from './types'
 
 export default defineComponent({
   props: maskProps,
   setup(props) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-mask`)
+
     return () => {
       const { mask, transitionName, visible, zIndex } = props
       if (!mask) {
@@ -20,7 +25,7 @@ export default defineComponent({
 
       return (
         <Transition appear name={transitionName}>
-          <div v-show={visible} class="ix-mask" style={{ zIndex }}></div>
+          <div v-show={visible} class={mergedPrefixCls.value} style={{ zIndex }}></div>
         </Transition>
       )
     }
