@@ -21,6 +21,7 @@
         .@{idux-prefix}-input-suffix,
         .@{idux-prefix}-input-prefix {
           color: @form-item-invalid-color;
+
           &:hover {
             color: @form-item-invalid-color;
           }
@@ -59,6 +60,34 @@
       }
 
       &.@{idux-prefix}-select-active .@{idux-prefix}-select-selector {
+        border-color: @form-item-invalid-color;
+        box-shadow: @form-item-invalid-box-shadow;
+      }
+    }
+
+    // textarea
+    .@{idux-prefix}-textarea:not(.@{idux-prefix}-textarea-disabled) {
+      &::after {
+        color: @form-item-invalid-color;
+      }
+
+      .@{idux-prefix}-textarea-inner {
+        border-color: @form-item-invalid-color;
+
+        &:hover {
+          border-color: @form-item-invalid-color;
+        }
+      }
+
+      .@{idux-prefix}-textarea-suffix {
+        color: @form-item-invalid-color;
+
+        &:hover {
+          color: @form-item-invalid-color;
+        }
+      }
+
+      &.@{idux-prefix}-textarea-focused .@{idux-prefix}-textarea-inner {
         border-color: @form-item-invalid-color;
         box-shadow: @form-item-invalid-box-shadow;
       }
