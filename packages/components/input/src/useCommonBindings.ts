@@ -10,7 +10,7 @@ import type { FormAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
@@ -42,20 +42,21 @@ export function useCommonBindings(
   props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): CommonBindings<HTMLInputElement | HTMLTextAreaElement> {
+  const { elementRef, focus, blur } = useFormElement<HTMLInputElement | HTMLTextAreaElement>()
   const { accessor, control } = useValueAccessor()
   useFormItemRegister(control)
 
-  const { elementRef, focus, blur } = useFormElement<HTMLInputElement | HTMLTextAreaElement>()
+  const syncValue = () => {
+    const element = elementRef.value
+    const value = accessor.valueRef.value ?? ''
+    if (element && element.value !== value) {
+      element.value = value
+    }
+  }
 
-  onMounted(() => {
-    watchEffect(() => {
-      const value = accessor.valueRef.value ?? ''
-      const element = elementRef.value!
-      if (element.value !== value) {
-        element.value = value
-      }
-    })
-  })
+  watch(accessor.valueRef, () => syncValue())
+
+  onMounted(() => syncValue())
 
   const isDisabled = computed(() => accessor.disabled.value)
   const isClearable = computed(() => props.clearable ?? config.clearable)
@@ -70,6 +71,9 @@ export function useCommonBindings(
     const { value } = evt.target as HTMLInputElement
     callEmit(props.onInput, evt)
     accessor.setValue(value)
+
+    //controlled value , see: https://github.com/IDuxFE/idux/issues/495
+    nextTick(() => syncValue())
   }
 
   const handlerCompositionStart = (evt: CompositionEvent) => {

@@ -23,7 +23,6 @@ describe('Checkbox', () => {
 
     await wrapper.find('input').setValue(true)
 
-    expect(wrapper.classes()).toContain('ix-checkbox-checked')
     expect(onUpdateChecked).toBeCalledWith(true)
   })
 

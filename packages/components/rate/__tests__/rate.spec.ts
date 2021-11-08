@@ -24,7 +24,6 @@ describe('Rate', () => {
 
     await wrapper.findAll('.ix-rate-item > span')[4].trigger('click')
 
-    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(5)
     expect(onUpdateValue).toBeCalledWith(5)
   })
 
@@ -43,15 +42,16 @@ describe('Rate', () => {
   })
 
   test('clearable work', async () => {
+    const onUpdateValue = jest.fn()
     const wrapper = RateMount({
-      props: { clearable: true, value: 3 },
+      props: { clearable: true, value: 3, 'onUpdate:value': onUpdateValue },
     })
 
     expect(wrapper.findAll('.ix-rate-item-full').length).toBe(3)
 
     await wrapper.findAll('.ix-rate-item > span')[2].trigger('click')
 
-    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(0)
+    expect(onUpdateValue).toBeCalledWith(0)
   })
 
   test('count work', async () => {
@@ -67,19 +67,20 @@ describe('Rate', () => {
   })
 
   test('disabled work', async () => {
+    const onUpdateValue = jest.fn()
     const wrapper = RateMount({
-      props: { disabled: true },
+      props: { disabled: true, 'onUpdate:value': onUpdateValue },
     })
 
     await wrapper.findAll('.ix-rate-item > span')[0].trigger('click')
 
-    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(0)
+    expect(onUpdateValue).not.toBeCalled()
 
     await wrapper.setProps({ disabled: false })
 
     await wrapper.findAll('.ix-rate-item > span')[0].trigger('click')
 
-    expect(wrapper.findAll('.ix-rate-item-full').length).toBe(1)
+    expect(onUpdateValue).toBeCalledWith(1)
   })
 
   test('icon work', async () => {
