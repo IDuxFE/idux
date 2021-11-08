@@ -93,10 +93,7 @@ export function useValueAccessor<T = any>(
       } else {
         accessor.valueRef = toRef(props, valueKey) as Ref<T>
         accessor.disabled = toRef(props, disabledKey) as Ref<boolean>
-        accessor.setValue = value => {
-          accessor.valueRef.value = value
-          emit(`update:${valueKey}`, value)
-        }
+        accessor.setValue = value => emit(`update:${valueKey}`, value)
         accessor.markAsBlurred = () => {}
       }
     },

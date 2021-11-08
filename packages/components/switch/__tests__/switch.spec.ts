@@ -22,7 +22,6 @@ describe('Switch', () => {
 
     await wrapper.trigger('click')
 
-    expect(wrapper.classes()).toContain('ix-switch-checked')
     expect(onUpdateChecked).toBeCalledWith(true)
   })
 

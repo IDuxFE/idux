@@ -28,7 +28,6 @@ describe('Radio', () => {
 
     await wrapper.find('input').setValue(true)
 
-    expect(wrapper.classes()).toContain('ix-radio-checked')
     expect(onUpdate).toBeCalledWith(true)
   })
 

@@ -29,7 +29,6 @@ describe('Input', () => {
     expect(valueRef.value).toBe('input setValue')
 
     valueRef.value = 'valueRef change'
-
     await nextTick()
 
     expect(input.element.value).toBe('valueRef change')
@@ -49,6 +48,23 @@ describe('Input', () => {
 
     expect(wrapper.emitted()).toHaveProperty('compositionend')
     expect(valueRef.value).toBe('使用拼音')
+  })
+
+  test('controlled value work', async () => {
+    const wrapper = InputMount({ props: { value: 'init value' } })
+    const input = wrapper.find('input')
+
+    expect(input.element.value).toBe('init value')
+
+    // don't trigger change
+    await input.setValue('input setValue')
+    await nextTick()
+
+    expect(input.element.value).toBe('init value')
+
+    await wrapper.setProps({ value: 'updated value' })
+
+    expect(input.element.value).toBe('updated value')
   })
 
   test('disabled work', async () => {
