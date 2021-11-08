@@ -1,5 +1,5 @@
 <template>
-  <CdkVirtualScroll :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
+  <CdkVirtualScroll :dataSource="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
   </CdkVirtualScroll>
 
   <IxSpace>
@@ -30,10 +30,10 @@
   </IxSpace>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, h, ref } from 'vue'
+<script setup lang="ts">
+import { computed, h, ref } from 'vue'
 
-import { VirtualItemRenderFn, VirtualScrollInstance } from '@idux/cdk/scroll'
+import { VirtualItemRenderFn } from '@idux/cdk/scroll'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []
@@ -43,28 +43,21 @@ const getData = (length: number, key = 'key') => {
   return data
 }
 
-export default defineComponent({
-  setup() {
-    const listRef = ref<VirtualScrollInstance>()
-    const dataLength = ref(20)
-    const data = computed(() => getData(dataLength.value))
-    const height = ref(200)
-    const switchItemRender = ref(false)
-    const itemRender = computed<VirtualItemRenderFn>(() => {
-      if (switchItemRender.value) {
-        return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.key}`])
-      } else {
-        return ({ index }) => h('span', { style: { height: '20px', paddingLeft: '8px' } }, [`index-${index}`])
-      }
-    })
-
-    return { listRef, dataLength, data, height, switchItemRender, itemRender }
-  },
+const dataLength = ref(20)
+const data = computed(() => getData(dataLength.value))
+const height = ref(200)
+const switchItemRender = ref(false)
+const itemRender = computed<VirtualItemRenderFn>(() => {
+  if (switchItemRender.value) {
+    return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.key}`])
+  } else {
+    return ({ index }) => h('span', { style: { height: '20px', paddingLeft: '8px' } }, [`index-${index}`])
+  }
 })
 </script>
 
 <style lang="less" scoped>
-.ix-virtual-scroll {
+.cdk-virtual-scroll {
   border: 1px solid red;
   margin-bottom: 8px;
 }

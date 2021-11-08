@@ -6,6 +6,7 @@
  */
 
 import type { VirtualScrollProps } from '../types'
+import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
@@ -14,7 +15,7 @@ import { isString } from 'lodash-es'
 
 import { Logger } from '@idux/cdk/utils'
 
-export type GetKey = (item: unknown) => string | number
+export type GetKey = (item: unknown) => VKey
 
 export function useGetKey(props: VirtualScrollProps): ComputedRef<GetKey> {
   return computed(() => {

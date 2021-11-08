@@ -6,34 +6,36 @@
  */
 
 import type { GetKey } from '../composables/useGetKey'
-import type { ScrollContext } from '../composables/useScroll'
+import type { SyncScrollTop } from '../composables/useScrollPlacement'
 import type { VirtualScrollProps, VirtualScrollToFn, VirtualScrollToOptions } from '../types'
+import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
 import { cancelRAF, rAF } from '@idux/cdk/utils'
 
-export function getScrollTo(
+export function useScrollTo(
   props: VirtualScrollProps,
   holderRef: Ref<HTMLElement | undefined>,
   getKey: ComputedRef<GetKey>,
-  heights: Record<string, number>,
+  heights: Map<VKey, number>,
   collectHeight: () => void,
-  { hideScrollBar, syncScrollTop }: ScrollContext,
+  hideScroll: () => void,
+  syncScrollTop: SyncScrollTop,
 ): VirtualScrollToFn {
   let refId: number
 
   return (option?: number | VirtualScrollToOptions) => {
     // When not argument provided, we think dev may want to show the scrollbar
     if (isNil(option)) {
-      hideScrollBar()
+      hideScroll()
       return
     }
 
     // Normal scroll logic
     cancelRAF(refId)
-    const { data, itemHeight } = props
+    const { dataSource, itemHeight } = props
 
     if (typeof option === 'number') {
       syncScrollTop(option)
@@ -43,7 +45,7 @@ export function getScrollTo(
       if ('index' in option) {
         index = option.index
       } else {
-        index = data.findIndex(item => getKey.value(item) === option.key)
+        index = dataSource.findIndex(item => getKey.value(item) === option.key)
       }
 
       // We will retry 3 times in case dynamic height shaking
@@ -67,9 +69,9 @@ export function getScrollTo(
           let itemBottom = 0
 
           for (let i = 0; i <= index; i++) {
-            const itemKey = getKey.value(data[i])
+            const itemKey = getKey.value(dataSource[i])
             itemTop = stackTop
-            const cacheHeight = heights[itemKey]
+            const cacheHeight = heights.get(itemKey)
             itemBottom = itemTop + (isNil(cacheHeight) ? itemHeight! : cacheHeight)
 
             stackTop = itemBottom

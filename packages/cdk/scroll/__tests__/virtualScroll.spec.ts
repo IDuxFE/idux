@@ -40,9 +40,9 @@ describe('VirtualScroll', () => {
   })
 
   describe('basic work', () => {
-    test('render work', () => {
+    test('render work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(20) },
+        props: { dataSource: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
@@ -56,7 +56,7 @@ describe('VirtualScroll', () => {
 
     test.skip('tag work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(20) },
+        props: { dataSource: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
@@ -72,26 +72,26 @@ describe('VirtualScroll', () => {
       expect(wrapper.find('.cdk-virtual-scroll-holder').classes()).toContain('test-span')
     })
 
-    test('data work', async () => {
+    test('dataSource work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(5) },
+        props: { dataSource: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
       expect(wrapper.findAll('.virtual-item').length).toEqual(5)
 
-      await wrapper.setProps({ data: getData(10) })
+      await wrapper.setProps({ dataSource: getData(10) })
 
       expect(wrapper.findAll('.virtual-item').length).toEqual(10)
 
-      await wrapper.setProps({ data: getData(15) })
+      await wrapper.setProps({ dataSource: getData(15) })
 
       expect(wrapper.findAll('.virtual-item').length).toEqual(12)
     })
 
     test('fullHeight work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(5) },
+        props: { dataSource: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
@@ -108,14 +108,14 @@ describe('VirtualScroll', () => {
 
     test('height work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(5) },
+        props: { dataSource: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').attributes('style')).toContain('height: 200px')
       expect(wrapper.findAll('.virtual-item').length).toEqual(5)
 
-      await wrapper.setProps({ data: getData(20) })
+      await wrapper.setProps({ dataSource: getData(20) })
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').attributes('style')).toContain('height: 200px')
       expect(wrapper.findAll('.virtual-item').length).toEqual(12)
@@ -128,13 +128,13 @@ describe('VirtualScroll', () => {
 
     test('itemHeight work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(5) },
+        props: { dataSource: getData(5) },
         slots: { item: defaultItemSlot },
       })
 
       expect(wrapper.findAll('.virtual-item').length).toEqual(5)
 
-      await wrapper.setProps({ data: getData(30) })
+      await wrapper.setProps({ dataSource: getData(30) })
 
       expect(wrapper.findAll('.virtual-item').length).toEqual(12)
 
@@ -145,13 +145,13 @@ describe('VirtualScroll', () => {
 
     test('itemKey work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(20) },
+        props: { dataSource: getData(20) },
         slots: { item: defaultItemSlot },
       })
 
       wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
 
-      await wrapper.setProps({ data: getData(20, 'key'), itemKey: 'key' })
+      await wrapper.setProps({ dataSource: getData(20, 'key'), itemKey: 'key' })
 
       wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
     })
@@ -162,7 +162,7 @@ describe('VirtualScroll', () => {
         return h('span', { class: 'virtual-item' }, [`${key} - ${index}`])
       }
       const wrapper = VirtualScrollMount({
-        props: { data: getData(20), itemRender },
+        props: { dataSource: getData(20), itemRender },
       })
 
       expect(wrapper.html()).toMatchSnapshot()
@@ -180,7 +180,7 @@ describe('VirtualScroll', () => {
 
     test('scrollTo work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(40) },
+        props: { dataSource: getData(40) },
         slots: { item: defaultItemSlot },
       })
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(0)
@@ -225,7 +225,7 @@ describe('VirtualScroll', () => {
 
     test('moving work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(100) },
+        props: { dataSource: getData(100) },
         slots: { item: defaultItemSlot },
       })
 
@@ -250,7 +250,7 @@ describe('VirtualScroll', () => {
     test('onScroll work', async () => {
       const onScroll = jest.fn()
       const wrapper = VirtualScrollMount({
-        props: { data: getData(100) },
+        props: { dataSource: getData(100) },
         slots: { item: defaultItemSlot },
         attrs: { onScroll },
       })
@@ -264,7 +264,7 @@ describe('VirtualScroll', () => {
   describe('touch work', () => {
     test('moving work', async () => {
       const wrapper = VirtualScrollMount({
-        props: { data: getData(100) },
+        props: { dataSource: getData(100) },
         slots: { item: defaultItemSlot },
       })
 
