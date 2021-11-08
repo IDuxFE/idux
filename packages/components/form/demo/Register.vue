@@ -53,6 +53,9 @@
         </IxCol>
       </IxRow>
     </IxFormItem>
+    <IxFormItem label="time" labelFor="time" required>
+      <IxTimePicker control="time"></IxTimePicker>
+    </IxFormItem>
     <IxFormItem control="agree" :controlCol="noLabelControlCol">
       <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
@@ -92,6 +95,7 @@ export default defineComponent({
       phoneNumberPrefix: ['+86', required],
       phoneNumber: ['', required],
       website: [''],
+      time: [Date.now(), required],
       captcha: ['', required],
       agree: [false],
     })

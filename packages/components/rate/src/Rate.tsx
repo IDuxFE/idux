@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 import { useFormElement } from '@idux/components/utils'
 
@@ -24,6 +24,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-rate`)
     const config = useGlobalConfig('rate')
+    const formContext = inject(FORM_TOKEN, null)
 
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
@@ -108,12 +109,14 @@ export default defineComponent({
       hoverValue.value = undefined
     }
 
+    const size = computed(() => props.size ?? formContext?.size.value ?? config.size)
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-${size.value}`]: true,
       }
     })
 

@@ -6,6 +6,7 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -18,6 +19,7 @@ export const rateProps = {
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
   tooltips: IxPropTypes.arrayOf(String).def(() => []),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: number) => void>(),

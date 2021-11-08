@@ -14,7 +14,7 @@ import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
 import { useFormElement } from '@idux/components/utils'
 
 import { checkboxGroupToken } from './token'
@@ -32,10 +32,11 @@ export default defineComponent({
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
 
+    const formContext = inject(FORM_TOKEN, null)
     const checkboxGroup = inject(checkboxGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
     const isButtoned = computed(() => props.buttoned ?? checkboxGroup?.props.buttoned ?? false)
-    const size = computed(() => props.size ?? checkboxGroup?.props.size ?? config.size)
+    const size = computed(() => props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size)
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useCheckbox(
       props,
       checkboxGroup,

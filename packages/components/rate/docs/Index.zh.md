@@ -21,5 +21,6 @@ subtitle: 评分
 | `count` | 图标数目 | `number` | `5` | ✅ | - |
 | `disabled` | 禁用状态 | `boolean` | `false` | - | - |
 | `icon` | 自定义图标 | `string \| #icon={disabled, focused, index}` | `'star-filled'` | ✅ | - |
+| `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `tooltips` | 悬浮提示信息数组 | `string[]` | `[]` | - | - |
 | `onChange` | 值发生改变时的回调 | `(value: number) => void` | - | - | - |
