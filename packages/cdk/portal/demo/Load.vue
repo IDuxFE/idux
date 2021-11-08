@@ -1,7 +1,7 @@
 <template>
-  <IxPortal target="ix-container" :load="load">
+  <CdkPortal target="ix-container" :load="load">
     <div>Portal</div>
-  </IxPortal>
+  </CdkPortal>
   <IxButton @click="load = !load">Load</IxButton>
 </template>
 

@@ -404,7 +404,7 @@ describe('Tree', () => {
       props: { height: 100, virtual: true },
     })
 
-    expect(wrapper.find('.ix-virtual-scroll').exists()).toBe(true)
+    expect(wrapper.find('.cdk-virtual-scroll').exists()).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ virtual: false })

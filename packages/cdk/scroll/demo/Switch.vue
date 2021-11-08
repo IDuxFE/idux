@@ -1,6 +1,6 @@
 <template>
-  <IxVirtualScroll :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
-  </IxVirtualScroll>
+  <CdkVirtualScroll :data="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
+  </CdkVirtualScroll>
 
   <IxSpace>
     DataLength:

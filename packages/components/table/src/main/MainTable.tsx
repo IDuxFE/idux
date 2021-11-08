@@ -12,7 +12,7 @@ import type { StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 
-import { IxVirtualScroll } from '@idux/cdk/scroll'
+import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
 
 import { TABLE_TOKEN, tableBodyToken } from '../token'
@@ -154,7 +154,7 @@ export default defineComponent({
             )
           }
           tableBody = (
-            <IxVirtualScroll
+            <CdkVirtualScroll
               ref={scrollBodyRef}
               style={contentStyle.value}
               data={flattedData.value}

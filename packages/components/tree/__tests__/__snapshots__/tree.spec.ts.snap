@@ -192,10 +192,10 @@ exports[`Tree dataSource work 2`] = `
 exports[`Tree height and virtual work 1`] = `
 "<div class=\\"ix-tree ix-tree-active\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
-  <div class=\\"ix-virtual-scroll\\" style=\\"position: relative;\\">
-    <div class=\\"ix-virtual-scroll-holder\\" style=\\"max-height: 100px; overflow-y: hidden;\\">
-      <div class=\\"ix-virtual-scroll-filler\\" style=\\"height: 308px; position: relative; overflow: hidden;\\">
-        <div class=\\"ix-virtual-scroll-content\\" style=\\"display: flex; flex-direction: column; transform: translateY(0px); position: absolute; left: 0px; right: 0px; top: 0px;\\">
+  <div class=\\"cdk-virtual-scroll\\" style=\\"position: relative;\\">
+    <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px; overflow-y: hidden;\\">
+      <div class=\\"cdk-virtual-scroll-filler\\" style=\\"height: 308px; position: relative; overflow: hidden;\\">
+        <div class=\\"cdk-virtual-scroll-content\\" style=\\"display: flex; flex-direction: column; transform: translateY(0px); position: absolute; left: 0px; right: 0px; top: 0px;\\">
           <div class=\\"ix-tree-node ix-tree-node-expanded\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span><span class=\\"ix-tree-node-expand\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span><label class=\\"ix-checkbox ix-checkbox-indeterminate ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
               <!---->
               <!---->
@@ -232,8 +232,8 @@ exports[`Tree height and virtual work 1`] = `
         </div>
       </div>
     </div>
-    <div class=\\"ix-virtual-scroll-bar\\" style=\\"width: 8px; top: 0px; bottom: 0px; right: 0px; position: absolute; display: none;\\">
-      <div class=\\"ix-virtual-scroll-thumb\\" style=\\"width: 100%; height: 50px; top: 0px; left: 0px; position: absolute; background: rgba(0, 0, 0, 0.5); border-radius: 99px; cursor: pointer; user-select: none;\\"></div>
+    <div class=\\"cdk-virtual-scroll-bar\\" style=\\"width: 8px; top: 0px; bottom: 0px; right: 0px; position: absolute; display: none;\\">
+      <div class=\\"cdk-virtual-scroll-thumb\\" style=\\"width: 100%; height: 50px; top: 0px; left: 0px; position: absolute; background: rgba(0, 0, 0, 0.5); border-radius: 99px; cursor: pointer; user-select: none;\\"></div>
     </div>
   </div>
 </div>"

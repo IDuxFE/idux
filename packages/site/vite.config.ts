@@ -25,7 +25,11 @@ export default defineConfig(({ command }) => {
         resolvers: [
           name => {
             // where `name` is always CapitalCase
-            if (name.startsWith('IxVirtualScroll')) {
+            if (name === 'CdkPortal') {
+              const path = `@idux/cdk/portal`
+              const sideEffects = undefined
+              return { importName: name, path, sideEffects }
+            } else if (name === 'CdkVirtualScroll') {
               const path = `@idux/cdk/scroll`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }

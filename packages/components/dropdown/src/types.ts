@@ -9,7 +9,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
-import { portalTargetDef } from '@idux/cdk/portal'
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
 
@@ -21,7 +21,7 @@ export const dropdownProps = {
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   placement: ɵOverlayPlacementDef,
   showArrow: IxPropTypes.bool,
-  target: portalTargetDef,
+  target: ɵPortalTargetDef,
   trigger: ɵOverlayTriggerDef,
 
   // events

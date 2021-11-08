@@ -38,7 +38,7 @@
     <div v-if="clearable && !disabled$$ && selectedItems.length" class="ix-select-clear" @click.stop="onClear">
       <IxIcon name="close-circle" />
     </div>
-    <IxPortal target="ix-select-container">
+    <CdkPortal target="ix-select-container">
       <transition>
         <SelectOptionContainer
           v-show="visibility"
@@ -52,7 +52,7 @@
           <template #empty><slot name="empty" /></template>
         </SelectOptionContainer>
       </transition>
-    </IxPortal>
+    </CdkPortal>
   </div>
 </template>
 <script lang="ts">
@@ -62,7 +62,7 @@ import type { SelectOptionProps } from './types'
 import { computed, defineComponent, ref, watch } from 'vue'
 
 import { clickOutside } from '@idux/cdk/click-outside'
-import { IxPortal } from '@idux/cdk/portal'
+import { CdkPortal } from '@idux/cdk/portal'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
@@ -81,7 +81,7 @@ import {
 
 export default defineComponent({
   name: 'IxSelect',
-  components: { IxPortal, IxIcon, SelectItem, SelectInput, SelectOptionContainer },
+  components: { CdkPortal, IxIcon, SelectItem, SelectInput, SelectOptionContainer },
   directives: { clickOutside },
   props: selectProps,
   emits: [

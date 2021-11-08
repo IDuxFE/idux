@@ -10,7 +10,7 @@ import type { ComputedRef, Ref } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 
-import { IxPortal, useTarget } from '@idux/cdk/portal'
+import { CdkPortal, useTarget } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private'
@@ -61,7 +61,7 @@ export default defineComponent({
       }
       const { target } = props
       return (
-        <IxPortal target={target ?? `${mergedPrefixCls.value}-container`} load={visible.value}>
+        <CdkPortal target={target ?? `${mergedPrefixCls.value}-container`} load={visible.value}>
           <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
@@ -69,7 +69,7 @@ export default defineComponent({
             zIndex={zIndex.value}
           />
           <DrawerWrapper {...attrs}></DrawerWrapper>
-        </IxPortal>
+        </CdkPortal>
       )
     }
   },

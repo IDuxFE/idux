@@ -6,14 +6,16 @@
  */
 
 import type { GetKey } from './useGetKey'
-import type { ComputedRef } from 'vue'
+import type { ComponentPublicInstance, ComputedRef } from 'vue'
 
 import { reactive } from 'vue'
+
+import { convertElement } from '@idux/cdk/utils'
 
 export interface ItemHeightsContext {
   heights: Record<string, number>
   collectHeights: () => void
-  setItemElement: (item: unknown, el: HTMLElement) => void
+  setItemElement: (item: unknown, elementOrInstance: HTMLElement | ComponentPublicInstance | null) => void
 }
 
 export function useItemHeights(getKey: ComputedRef<GetKey>): ItemHeightsContext {
@@ -42,11 +44,11 @@ export function useItemHeights(getKey: ComputedRef<GetKey>): ItemHeightsContext 
     })
   }
 
-  const setItemElement = (item: unknown, el: HTMLElement) => {
+  const setItemElement = (item: unknown, elementOrInstance: HTMLElement | ComponentPublicInstance | null) => {
     const key = getKey.value(item)
-
-    if (el) {
-      itemMap.set(key, el)
+    const element = convertElement(elementOrInstance)
+    if (element) {
+      itemMap.set(key, element)
       collectHeights()
     } else {
       itemMap.delete(key)

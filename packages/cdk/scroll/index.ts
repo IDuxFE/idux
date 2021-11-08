@@ -12,9 +12,9 @@ import type { VirtualScrollComponent } from './src/virtual/types'
 
 import VirtualScroll from './src/virtual/VirtualScroll'
 
-const IxVirtualScroll = VirtualScroll as unknown as VirtualScrollComponent
+const CdkVirtualScroll = VirtualScroll as unknown as VirtualScrollComponent
 
-export { IxVirtualScroll }
+export { CdkVirtualScroll }
 
 export type {
   VirtualScrollInstance,

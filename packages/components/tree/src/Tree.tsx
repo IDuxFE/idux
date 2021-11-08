@@ -12,7 +12,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
-import { IxVirtualScroll } from '@idux/cdk/scroll'
+import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxEmpty } from '@idux/components/empty'
 
@@ -134,7 +134,7 @@ export default defineComponent({
             <TreeNode key={item.key} node={item}></TreeNode>
           )
           children = (
-            <IxVirtualScroll
+            <CdkVirtualScroll
               ref={virtualScrollRef}
               data={flattedNodes.value}
               fullHeight={false}

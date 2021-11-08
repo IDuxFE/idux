@@ -7,7 +7,7 @@
 
 import { ComputedRef, TransitionGroup, VNode, computed, defineComponent, provide, ref } from 'vue'
 
-import { IxPortal } from '@idux/cdk/portal'
+import { CdkPortal } from '@idux/cdk/portal'
 import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -43,11 +43,11 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <IxPortal target="ix-message-container" load={loadContainer.value}>
+          <CdkPortal target="ix-message-container" load={loadContainer.value}>
             <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={style.value} {...attrs}>
               {child}
             </TransitionGroup>
-          </IxPortal>
+          </CdkPortal>
         </>
       )
     }

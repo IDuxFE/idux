@@ -1,5 +1,5 @@
 <template>
-  <IxPortal target="ix-container">
+  <CdkPortal target="ix-container">
     <div>Portal</div>
-  </IxPortal>
+  </CdkPortal>
 </template>

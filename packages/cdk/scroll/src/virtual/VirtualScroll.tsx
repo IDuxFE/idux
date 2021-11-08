@@ -7,9 +7,9 @@
 
 import { computed, defineComponent, provide, ref } from 'vue'
 
-import VirtualHolder from './VirtualHolder'
-import VirtualItem from './VirtualItem'
-import VirtualScrollBar from './VirtualScrollBar'
+import Holder from './Holder'
+import Item from './Item'
+import ScrollBar from './ScrollBar'
 import { useGetKey } from './composables/useGetKey'
 import { useItemHeights } from './composables/useItemHeights'
 import { useScroll } from './composables/useScroll'
@@ -18,7 +18,7 @@ import { virtualListProps } from './types'
 import { getScrollTo } from './utils/getScrollTo'
 
 export default defineComponent({
-  name: 'IxVirtualScroll',
+  name: 'CdkVirtualScroll',
   props: virtualListProps,
   setup(props, { expose, slots }) {
     const useVirtual = computed(() => props.virtual && props.height > 0 && props.itemHeight > 0)
@@ -53,16 +53,17 @@ export default defineComponent({
       const children = props.data.slice(start, end + 1).map((item, index) => {
         const key = getKeyFn(item)
         return (
-          <VirtualItem key={key} setRef={el => setItemElement(item, el)}>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <Item key={key} ref={elementOrInstance => setItemElement(item, elementOrInstance as any)}>
             {itemRender?.({ item, index: start + index })}
-          </VirtualItem>
+          </Item>
         )
       })
 
       return (
-        <div class="ix-virtual-scroll" style={{ position: 'relative' }}>
-          <VirtualHolder>{children}</VirtualHolder>
-          {useVirtual.value && <VirtualScrollBar />}
+        <div class="cdk-virtual-scroll" style={{ position: 'relative' }}>
+          <Holder>{children}</Holder>
+          {useVirtual.value && <ScrollBar />}
         </div>
       )
     }
