@@ -23,7 +23,7 @@ import {
 
 import { clickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
-import { IxPortal } from '@idux/cdk/portal'
+import { CdkPortal } from '@idux/cdk/portal'
 import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -99,11 +99,11 @@ export default defineComponent({
       return (
         <>
           {trigger}
-          <IxPortal target={props.target} load={visibility.value}>
+          <CdkPortal target={props.target} load={visibility.value}>
             <Transition appear name={props.transitionName} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>
-          </IxPortal>
+          </CdkPortal>
         </>
       )
     }

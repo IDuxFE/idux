@@ -1,8 +1,8 @@
 <template>
   <IxButton ref="triggerRef" v-click-outside="() => hide()">Trigger</IxButton>
-  <IxPortal target="ix-overlay">
+  <CdkPortal target="ix-overlay">
     <div v-if="visibility" ref="overlayRef" class="overlay">Overlay 浮层</div>
-  </IxPortal>
+  </CdkPortal>
 </template>
 
 <script lang="ts">

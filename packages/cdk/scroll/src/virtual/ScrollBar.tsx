@@ -39,7 +39,7 @@ export default defineComponent({
     const thumbStyle = useThumbStyle(thumbHight, thumbTop)
 
     return () => (
-      <div ref={scrollBarRef} class="ix-virtual-scroll-bar" style={style.value}>
+      <div ref={scrollBarRef} class="cdk-virtual-scroll-bar" style={style.value}>
         <div ref={thumbRef} class={thumbClass.value} style={thumbStyle.value} />
       </div>
     )
@@ -194,8 +194,8 @@ const useStyle = (visible: ComputedRef<boolean>) => {
 const useThumbClass = (dragging: Ref<boolean>) => {
   return computed(() => {
     return {
-      'ix-virtual-scroll-thumb': true,
-      'ix-virtual-scroll-thumb-moving': dragging.value,
+      'cdk-virtual-scroll-thumb': true,
+      'cdk-virtual-scroll-thumb-moving': dragging.value,
     }
   })
 }

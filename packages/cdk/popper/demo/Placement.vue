@@ -1,8 +1,8 @@
 <template>
   <IxButton ref="triggerRef" v-bind="triggerEvents">Hover</IxButton>
-  <IxPortal target="ix-overlay">
+  <CdkPortal target="ix-overlay">
     <div v-if="visibility" ref="popperRef" v-bind="popperEvents" class="popper">Popper Element</div>
-  </IxPortal>
+  </CdkPortal>
   <br />
   <br />
   <IxRadioGroup v-model:value="placement">

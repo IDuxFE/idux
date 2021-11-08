@@ -12,7 +12,7 @@ cover:
 
 ## API
 
-### IxPortal
+### CdkPortal
 
 #### PortalProps
 

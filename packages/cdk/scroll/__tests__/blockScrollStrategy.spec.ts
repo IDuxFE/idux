@@ -1,7 +1,7 @@
 import { BlockScrollStrategy } from '../src/strategy/blockScrollStrategy'
 
 describe('blockScrollStrategy.ts', () => {
-  const defaultClassName = 'ix-cdk-scroll-block'
+  const defaultClassName = 'cdk-scroll-block'
   let blockScrollStrategy: BlockScrollStrategy
 
   beforeEach(() => {

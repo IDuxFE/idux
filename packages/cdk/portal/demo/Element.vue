@@ -1,7 +1,7 @@
 <template>
-  <IxPortal :target="container">
+  <CdkPortal :target="container">
     <div>Portal</div>
-  </IxPortal>
+  </CdkPortal>
 </template>
 
 <script lang="ts">

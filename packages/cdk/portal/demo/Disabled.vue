@@ -1,7 +1,7 @@
 <template>
-  <IxPortal target="ix-container" :disabled="disabled">
+  <CdkPortal target="ix-container" :disabled="disabled">
     <div>Portal</div>
-  </IxPortal>
+  </CdkPortal>
   <IxButton @click="handleDisable">Disabled</IxButton>
 </template>
 

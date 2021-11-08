@@ -8,7 +8,7 @@
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { portalTargetDef } from '@idux/cdk/portal'
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
 
@@ -18,7 +18,7 @@ export const tooltipProps = {
   destroyOnHide: IxPropTypes.bool,
   delay: ɵOverlayDelayDef,
   placement: ɵOverlayPlacementDef,
-  target: portalTargetDef,
+  target: ɵPortalTargetDef,
   title: IxPropTypes.string,
   trigger: ɵOverlayTriggerDef,
 

@@ -1,10 +1,10 @@
 <template>
   <div class="scroll-wrapper">
-    <IxVirtualScroll ref="listRef" :data="data" :height="200" :itemHeight="20" itemKey="key" @scroll="onScroll">
+    <CdkVirtualScroll ref="listRef" :data="data" :height="200" :itemHeight="20" itemKey="key" @scroll="onScroll">
       <template #item="{ item, index }">
         <span class="virtual-item" @click="onItemClick(item.key)">{{ item.key }} - {{ index }}</span>
       </template>
-    </IxVirtualScroll>
+    </CdkVirtualScroll>
 
     <IxSpace>
       <IxButton @click="scrollTo(100)"> Scroll To 100px </IxButton>

@@ -11,7 +11,7 @@ import { portalProps } from './types'
 import { useTarget } from './useTarget'
 
 export default defineComponent({
-  name: 'IxPortal',
+  name: 'CdkPortal',
   props: portalProps,
   setup(props) {
     const loaded = ref(props.load)

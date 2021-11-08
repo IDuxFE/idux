@@ -15,7 +15,7 @@ export interface BlockScrollStrategyOptions {
   className?: string
 }
 
-const defaultClassName = 'ix-cdk-scroll-block'
+const defaultClassName = 'cdk-scroll-block'
 
 interface CacheStrategy extends BlockScrollStrategyOptions {
   uid: number
