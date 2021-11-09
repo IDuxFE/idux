@@ -15,24 +15,24 @@ describe('Result', () => {
   test('status work', async () => {
     const wrapper = ResultMount()
     expect(wrapper.findComponent(IxIcon).exists()).toBeTruthy()
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle-filled')
+    expect(wrapper.find('.ix-icon-info-circle-filled').exists()).toBe(true)
     expect(wrapper.classes()).toContain('ix-result-info')
 
     await wrapper.setProps({ status: 'success' })
     expect(wrapper.classes()).toContain('ix-result-success')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('check-circle-filled')
+    expect(wrapper.find('.ix-icon-check-circle-filled').exists()).toBe(true)
 
     await wrapper.setProps({ status: 'warning' })
     expect(wrapper.classes()).toContain('ix-result-warning')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('exclamation-circle-filled')
+    expect(wrapper.find('.ix-icon-exclamation-circle-filled').exists()).toBe(true)
 
     await wrapper.setProps({ status: 'error' })
     expect(wrapper.classes()).toContain('ix-result-error')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('close-circle-filled')
+    expect(wrapper.find('.ix-icon-close-circle-filled').exists()).toBe(true)
 
     await wrapper.setProps({ status: 'info' })
     expect(wrapper.classes()).toContain('ix-result-info')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle-filled')
+    expect(wrapper.find('.ix-icon-info-circle-filled').exists()).toBe(true)
   })
 
   test('title work', async () => {
@@ -53,7 +53,7 @@ describe('Result', () => {
 
   test('icon work', () => {
     const wrapper = ResultMount({ props: { icon: 'check-circle' } })
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('check-circle')
+    expect(wrapper.find('.ix-icon-check-circle').exists()).toBe(true)
   })
 
   test('slot work', () => {
