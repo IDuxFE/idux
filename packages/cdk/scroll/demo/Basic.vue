@@ -1,6 +1,15 @@
 <template>
   <div class="scroll-wrapper">
-    <CdkVirtualScroll ref="listRef" :data="data" :height="200" :itemHeight="20" itemKey="key" @scroll="onScroll">
+    <CdkVirtualScroll
+      ref="listRef"
+      :dataSource="data"
+      :height="200"
+      :itemHeight="20"
+      itemKey="key"
+      @scroll="onScroll"
+      @scrolledChange="onScrolledChange"
+      @scrolledBottom="onScrolledBottom"
+    >
       <template #item="{ item, index }">
         <span class="virtual-item" @click="onItemClick(item.key)">{{ item.key }} - {{ index }}</span>
       </template>
@@ -17,32 +26,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import { VirtualScrollInstance, VirtualScrollToOptions } from '@idux/cdk/scroll'
 
-export default defineComponent({
-  setup() {
-    const listRef = ref<VirtualScrollInstance>()
-    const data: { key: string }[] = []
-    for (let index = 0; index < 1000; index++) {
-      data.push({ key: `key-${index}` })
-    }
+const listRef = ref<VirtualScrollInstance>()
+const data: { key: string }[] = []
+for (let index = 0; index < 1000; index++) {
+  data.push({ key: `key-${index}` })
+}
 
-    const onScroll = (evt: Event) => {
-      console.log('scroll:', evt.currentTarget!.scrollTop)
-    }
+const onScroll = (evt: Event) => {
+  console.log('scroll:', evt.currentTarget!.scrollTop)
+}
 
-    const onItemClick = (key: string) => {
-      console.log('click:', key)
-    }
+const onScrolledChange = (startIndex: number, endIndex: number, visibleData: any[]) =>
+  console.log('onScrolledChange', startIndex, endIndex, visibleData)
 
-    const scrollTo = (value: number | VirtualScrollToOptions) => listRef.value?.scrollTo(value)
+const onScrolledBottom = () => console.log('onScrolledBottom')
 
-    return { listRef, data, onScroll, onItemClick, scrollTo }
-  },
-})
+const onItemClick = (key: string) => {
+  console.log('click:', key)
+}
+
+const scrollTo = (value: number | VirtualScrollToOptions) => listRef.value?.scrollTo(value)
 </script>
 
 <style lang="less" scoped>
@@ -50,7 +58,7 @@ export default defineComponent({
   height: 240px;
 }
 
-.ix-virtual-scroll {
+.cdk-virtual-scroll {
   border: 1px solid red;
   margin-bottom: 8px;
 }

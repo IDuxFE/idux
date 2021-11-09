@@ -157,7 +157,7 @@ export default defineComponent({
             <CdkVirtualScroll
               ref={scrollBodyRef}
               style={contentStyle.value}
-              data={flattedData.value}
+              dataSource={flattedData.value}
               height={props.scroll?.y}
               itemHeight={44}
               itemKey="rowKey"

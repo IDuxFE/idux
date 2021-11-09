@@ -5,17 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, provide, ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 
-import Holder from './Holder'
-import Item from './Item'
-import ScrollBar from './ScrollBar'
+import { computed, defineComponent, provide, ref, watch } from 'vue'
+
+import { callEmit, useState } from '@idux/cdk/utils'
+
 import { useGetKey } from './composables/useGetKey'
-import { useItemHeights } from './composables/useItemHeights'
-import { useScroll } from './composables/useScroll'
+import { useHeights } from './composables/useHeights'
+import { useOriginScroll } from './composables/useOriginScroll'
+import { useScrollPlacement } from './composables/useScrollPlacement'
+import { useScrollState } from './composables/useScrollState'
+import { useScrollTo } from './composables/useScrollTo'
+import { useScrollVisible } from './composables/useScrollVisible'
+import Holder from './contents/Holder'
+import Item from './contents/Item'
+import ScrollBar from './contents/ScrollBar'
 import { virtualScrollToken } from './token'
 import { virtualListProps } from './types'
-import { getScrollTo } from './utils/getScrollTo'
 
 export default defineComponent({
   name: 'CdkVirtualScroll',
@@ -23,38 +30,64 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const useVirtual = computed(() => props.virtual && props.height > 0 && props.itemHeight > 0)
     const getKey = useGetKey(props)
-    const { heights, collectHeights, setItemElement } = useItemHeights(getKey)
+    const { heights, collectHeights, heightsUpdateMark, setItem } = useHeights()
 
     const holderRef = ref<HTMLElement>()
     const fillerRef = ref<HTMLElement>()
 
-    const scrollContext = useScroll(props, holderRef, fillerRef, useVirtual, getKey, heights)
+    const [scrollTop, changeScrollTop] = useState(0)
+    const [scrollMoving, changeScrollMoving] = useState(false)
+    const { scrollHeight, scrollOffset, startIndex, endIndex } = useScrollState(
+      props,
+      fillerRef,
+      useVirtual,
+      getKey,
+      scrollTop,
+      heightsUpdateMark,
+      heights,
+    )
+    const { scrollVisible, hideScroll } = useScrollVisible(props, scrollTop, scrollHeight)
+    const { scrolledTop, scrolledBottom, syncScrollTop } = useScrollPlacement(
+      props,
+      holderRef,
+      scrollTop,
+      scrollHeight,
+      changeScrollTop,
+    )
+    const originScroll = useOriginScroll(scrolledTop, scrolledBottom)
 
-    const context = {
+    provide(virtualScrollToken, {
       props,
       slots,
       holderRef,
       fillerRef,
       useVirtual,
-      getKey,
       collectHeights,
-      ...scrollContext,
-    }
+      scrollTop,
+      scrollHeight,
+      scrollOffset,
+      scrollVisible,
+      hideScroll,
+      scrollMoving,
+      changeScrollMoving,
+      syncScrollTop,
+      originScroll,
+    })
 
-    provide(virtualScrollToken, context)
-
-    const scrollTo = getScrollTo(props, holderRef, getKey, heights, collectHeights, scrollContext)
+    const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, hideScroll, syncScrollTop)
     expose({ scrollTo })
 
+    const mergedData = computed(() => props.dataSource.slice(startIndex.value, endIndex.value + 1))
+    watch(mergedData, data => callEmit(props.onScrolledChange, startIndex.value, endIndex.value, data))
+
     return () => {
-      const { start, end } = scrollContext.scrollState.value
       const getKeyFn = getKey.value
+      const start = startIndex.value
       const itemRender = slots.item ?? props.itemRender
-      const children = props.data.slice(start, end + 1).map((item, index) => {
+      const children = mergedData.value.map((item, index) => {
         const key = getKeyFn(item)
         return (
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          <Item key={key} ref={elementOrInstance => setItemElement(item, elementOrInstance as any)}>
+          <Item key={key} ref={instance => setItem(key, instance as ComponentPublicInstance | null)}>
             {itemRender?.({ item, index: start + index })}
           </Item>
         )

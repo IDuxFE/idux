@@ -136,8 +136,7 @@ export default defineComponent({
           children = (
             <CdkVirtualScroll
               ref={virtualScrollRef}
-              data={flattedNodes.value}
-              fullHeight={false}
+              dataSource={flattedNodes.value}
               height={props.height}
               itemHeight={28}
               itemKey="key"

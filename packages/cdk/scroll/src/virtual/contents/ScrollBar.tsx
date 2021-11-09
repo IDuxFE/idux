@@ -5,42 +5,66 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { SyncScrollTop } from '../composables/useScrollPlacement'
+import type { VirtualScrollProps } from '../types'
 import type { ComputedRef, Ref, StyleValue } from 'vue'
 
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, ref } from 'vue'
 
 import { cancelRAF, off, on, rAF } from '@idux/cdk/utils'
 
-import { ScrollBarState, SyncScrollTop } from './composables/useScroll'
-import { virtualScrollToken } from './token'
-import { VirtualScrollProps } from './types'
+import { virtualScrollToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, scrollState, scrollTop, hideScrollBar, syncScrollTop, setScrollMoving, scrollBarVisible } =
-      inject(virtualScrollToken)!
+    const {
+      props,
+      scrollTop,
+      scrollHeight,
+      syncScrollTop,
+      scrollMoving,
+      changeScrollMoving,
+      scrollVisible,
+      hideScroll,
+    } = inject(virtualScrollToken)!
 
     const thumbHight = useThumbHight(props)
-    const enableScrollRange = useEnableScrollRange(props, scrollState)
+    const enableScrollRange = useEnableScrollRange(props, scrollHeight)
     const enableHeightRange = useEnableHeightRange(props, thumbHight)
     const thumbTop = useThumbTop(scrollTop, enableScrollRange, enableHeightRange)
 
-    const { scrollBarRef, thumbRef, dragging } = useEvents(
-      enableScrollRange,
-      enableHeightRange,
-      thumbTop,
-      setScrollMoving,
-      hideScrollBar,
-      syncScrollTop,
-    )
+    const {
+      scrollBarRef,
+      handleScrollbarMouseDown,
+      handleScrollbarTouchStart,
+      thumbRef,
+      handleThumbMouseDown,
+      handleThumbMouseMove,
+      handleThumbMouseUp,
+    } = useEvents(enableScrollRange, enableHeightRange, thumbTop, scrollMoving, changeScrollMoving, syncScrollTop)
 
-    const style = useStyle(scrollBarVisible)
-    const thumbClass = useThumbClass(dragging)
+    const style = useStyle(scrollVisible)
+    const thumbClass = useThumbClass(scrollMoving)
     const thumbStyle = useThumbStyle(thumbHight, thumbTop)
 
     return () => (
-      <div ref={scrollBarRef} class="cdk-virtual-scroll-bar" style={style.value}>
-        <div ref={thumbRef} class={thumbClass.value} style={thumbStyle.value} />
+      <div
+        ref={scrollBarRef}
+        class="cdk-virtual-scroll-bar"
+        style={style.value}
+        onMousedown={handleScrollbarMouseDown}
+        onMousemove={hideScroll}
+        onTouchstart={handleScrollbarTouchStart}
+      >
+        <div
+          ref={thumbRef}
+          class={thumbClass.value}
+          style={thumbStyle.value}
+          onMousedown={handleThumbMouseDown}
+          onTouchstart={handleThumbMouseDown}
+          onTouchmove={handleThumbMouseMove}
+          onTouchend={handleThumbMouseUp}
+        />
       </div>
     )
   },
@@ -53,16 +77,16 @@ const getPageY = (evt: MouseEvent | TouchEvent) => {
 const minHight = 20
 const useThumbHight = (props: VirtualScrollProps) => {
   return computed(() => {
-    const { height, data } = props
-    let baseHeight = (height / data.length) * 10
+    const { height, dataSource } = props
+    let baseHeight = (height / dataSource.length) * 10
     baseHeight = Math.max(baseHeight, minHight)
     baseHeight = Math.min(baseHeight, height / 2)
     return Math.floor(baseHeight)
   })
 }
 
-const useEnableScrollRange = (props: VirtualScrollProps, scrollState: ComputedRef<ScrollBarState>) => {
-  return computed(() => scrollState.value.scrollHeight - props.height)
+const useEnableScrollRange = (props: VirtualScrollProps, scrollHeight: Ref<number>) => {
+  return computed(() => scrollHeight.value - props.height)
 }
 
 const useEnableHeightRange = (props: VirtualScrollProps, thumbHight: ComputedRef<number>) => {
@@ -88,51 +112,27 @@ const useEvents = (
   enableScrollRange: ComputedRef<number>,
   enableHeightRange: ComputedRef<number>,
   thumbTop: ComputedRef<number>,
-  setScrollMoving: (value: boolean) => void,
-  hideScrollBar: () => void,
+  scrollMoving: Ref<boolean>,
+  changeScrollMoving: (value: boolean) => void,
   syncScrollTop: SyncScrollTop,
 ) => {
-  const dragging = ref(false)
-  watch(dragging, value => setScrollMoving(value))
-
   let pageY = 0
   let startTop = 0
   const scrollBarRef = ref<HTMLElement>()
   const thumbRef = ref<HTMLDivElement>()
   let rafId: number
 
-  const onScrollbarTouchStart = (evt: TouchEvent) => {
+  const handleScrollbarTouchStart = (evt: TouchEvent) => {
     evt.preventDefault()
   }
 
-  const onScrollbarMouseDown = (evt: MouseEvent) => {
+  const handleScrollbarMouseDown = (evt: MouseEvent) => {
     evt.stopPropagation()
     evt.preventDefault()
   }
 
-  const patchEvents = () => {
-    on(window, 'mousemove', onMouseMove)
-    on(window, 'mouseup', onMouseUp)
-
-    on(thumbRef.value, 'touchmove', onMouseMove)
-    on(thumbRef.value, 'touchend', onMouseUp)
-  }
-
-  const removeEvents = () => {
-    off(window, 'mousemove', onMouseMove)
-    off(window, 'mouseup', onMouseUp)
-
-    off(thumbRef.value, 'touchmove', onMouseMove)
-    off(thumbRef.value, 'touchend', onMouseUp)
-
-    off(scrollBarRef.value!, 'touchstart', onScrollbarTouchStart)
-    off(thumbRef.value, 'touchstart', onMouseDown)
-
-    cancelRAF(rafId)
-  }
-
-  const onMouseDown = (evt: MouseEvent | TouchEvent) => {
-    dragging.value = true
+  const handleThumbMouseDown = (evt: MouseEvent | TouchEvent) => {
+    changeScrollMoving(true)
     pageY = getPageY(evt)
     startTop = thumbTop.value
     patchEvents()
@@ -140,9 +140,9 @@ const useEvents = (
     evt.preventDefault()
   }
 
-  const onMouseMove = (evt: MouseEvent | TouchEvent) => {
+  const handleThumbMouseMove = (evt: MouseEvent | TouchEvent) => {
     cancelRAF(rafId)
-    if (dragging.value) {
+    if (scrollMoving.value) {
       const offsetY = getPageY(evt) - pageY
       const newTop = startTop + offsetY
 
@@ -153,29 +153,37 @@ const useEvents = (
     }
   }
 
-  const onMouseUp = () => {
-    dragging.value = false
+  const handleThumbMouseUp = () => {
+    changeScrollMoving(false)
     removeEvents()
   }
 
-  onMounted(() => {
-    on(scrollBarRef.value, 'touchstart', onScrollbarTouchStart)
-    on(thumbRef.value, 'touchstart', onMouseDown)
+  const patchEvents = () => {
+    on(window, 'mousemove', handleThumbMouseMove)
+    on(window, 'mouseup', handleThumbMouseUp)
+  }
 
-    on(scrollBarRef.value, 'mousedown', onScrollbarMouseDown)
-    on(scrollBarRef.value, 'mousemove', hideScrollBar)
-    on(thumbRef.value, 'mousedown', onMouseDown)
-  })
+  const removeEvents = () => {
+    off(window, 'mousemove', handleThumbMouseMove)
+    off(window, 'mouseup', handleThumbMouseUp)
+
+    cancelRAF(rafId)
+  }
 
   onBeforeUnmount(() => {
     removeEvents()
-
-    off(scrollBarRef.value, 'mousedown', onScrollbarMouseDown)
-    off(scrollBarRef.value, 'mousemove', hideScrollBar)
-    off(thumbRef.value, 'mousedown', onMouseDown)
+    cancelRAF(rafId)
   })
 
-  return { scrollBarRef, thumbRef, dragging }
+  return {
+    scrollBarRef,
+    handleScrollbarMouseDown,
+    handleScrollbarTouchStart,
+    thumbRef,
+    handleThumbMouseDown,
+    handleThumbMouseMove,
+    handleThumbMouseUp,
+  }
 }
 
 const useStyle = (visible: ComputedRef<boolean>) => {
@@ -191,11 +199,11 @@ const useStyle = (visible: ComputedRef<boolean>) => {
   })
 }
 
-const useThumbClass = (dragging: Ref<boolean>) => {
+const useThumbClass = (scrollMoving: Ref<boolean>) => {
   return computed(() => {
     return {
       'cdk-virtual-scroll-thumb': true,
-      'cdk-virtual-scroll-thumb-moving': dragging.value,
+      'cdk-virtual-scroll-thumb-moving': scrollMoving.value,
     }
   })
 }

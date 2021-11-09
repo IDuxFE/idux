@@ -20,14 +20,16 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `component` | 自定义列表的容器节点 | `string \| Component` | `div` | - | - |
-| `data` | 需要渲染的数据列表 | `Array` | `[]` | - | - |
+| `contentRender` | 自定义列表的容器节点 | `VirtualContentRenderFn \| #content={children}` | - | - | - |
+| `dataSource` | 需要渲染的数据列表 | `Array` | `[]` | - | - |
 | `fullHeight` | 是否永远使用 `height` 作为容器高度 | `boolean` | `false` | - | 仅在不符合虚拟滚动条件时生效 |
 | `height` | 列表的高度 | `number` | `0` | - | 设置为大于 0 时才可以启用虚拟滚动 |
 | `itemHeight` | 列表项的高度 | `number` | `0` | - | 设置为大于 0 时才可以启用虚拟滚动 |
-| `itemKey` | 列表项的唯一标识 | `string \| number \| (item) => string \| number` | - | - | 必须设置 |
-| `itemRender` | 列表项的渲染函数 | `(option: { item: T; index: number }) => VNodeTypes \| #item={item, index}` | - | - | 必须设置或者提供 `item` 插槽 |
+| `itemKey` | 列表项的唯一标识 | `string \| (item) => VKey` | - | - | 必须设置 |
+| `itemRender` | 列表项的渲染函数 | `VirtualItemRenderFn \| #item={item, index}` | - | - | 必须设置或者提供 `item` 插槽 |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: any[]) => void` | - | - | - |
+| `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | - |
 
 #### VirtualListMethods
 

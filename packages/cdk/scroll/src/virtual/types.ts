@@ -5,21 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const virtualListProps = {
-  data: IxPropTypes.array().def(() => []),
-  fullHeight: IxPropTypes.bool.def(true),
+  contentRender: IxPropTypes.func<VirtualContentRenderFn>(),
+  dataSource: IxPropTypes.array().def(() => []),
+  fullHeight: IxPropTypes.bool.def(false),
   height: IxPropTypes.number.def(0),
   itemHeight: IxPropTypes.number.def(0),
-  itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => string | number>()]).isRequired,
+  itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => VKey>()]).isRequired,
   itemRender: IxPropTypes.func<VirtualItemRenderFn>(),
-  contentRender: IxPropTypes.func<VirtualContentRenderFn>(),
   virtual: IxPropTypes.bool.def(true),
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: any[]) => void>(),
+  onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
 export type VirtualScrollProps = IxInnerPropTypes<typeof virtualListProps>
@@ -36,7 +39,7 @@ export type VirtualScrollInstance = InstanceType<DefineComponent<VirtualScrollPr
 export type VirtualScrollToAlign = 'top' | 'bottom' | 'auto'
 export type VirtualScrollToOptions =
   | {
-      key: string | number
+      key: VKey
       align?: VirtualScrollToAlign
       offset?: number
     }
