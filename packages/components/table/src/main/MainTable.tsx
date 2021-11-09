@@ -12,8 +12,10 @@ import type { StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 
+import { isNumber } from 'lodash-es'
+
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
-import { convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
 
 import { TABLE_TOKEN, tableBodyToken } from '../token'
 import ColGroup from './ColGroup'
@@ -112,7 +114,7 @@ export default defineComponent({
       const x = scrollX.value
       const y = scrollY.value
       const overflowX = x ? 'auto' : undefined
-      const overflowY = props.useVirtual ? 'hidden' : y ? 'scroll' : x ? 'hidden' : undefined
+      const overflowY = props.virtual ? 'hidden' : y ? 'scroll' : x ? 'hidden' : undefined
       const maxHeight = y
       return { overflowX, overflowY, maxHeight }
     })
@@ -124,6 +126,15 @@ export default defineComponent({
         minWidth: scrollX.value ? '100%' : undefined,
       }
     })
+
+    const handleScrolledChange = (startIndex: number, endIndex: number, visibleData: FlattedData[]) => {
+      callEmit(
+        props.onScrolledChange,
+        startIndex,
+        endIndex,
+        visibleData.map(item => item.record),
+      )
+    }
 
     return () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,7 +149,7 @@ export default defineComponent({
         )
 
         let tableBody: VNodeTypes
-        if (props.useVirtual) {
+        if (props.virtual) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) => {
             const { expanded, level, record, rowKey } = item
             const rowProps = { key: rowKey, expanded, level, record, rowIndex: index, rowKey }
@@ -153,17 +164,28 @@ export default defineComponent({
               </TableTag>
             )
           }
+          const { scroll, onScrolledBottom } = props
+          const height = scroll?.y
+
+          __DEV__ &&
+            !isNumber(height) &&
+            Logger.warn('components/table', 'scroll.y must is a valid number when enable virtual scroll')
+
           tableBody = (
             <CdkVirtualScroll
               ref={scrollBodyRef}
               style={contentStyle.value}
               dataSource={flattedData.value}
-              height={props.scroll?.y}
+              fullHeight
+              height={height as number}
               itemHeight={44}
               itemKey="rowKey"
               itemRender={itemRender}
               contentRender={contentRender}
+              virtual
               onScroll={handleScroll}
+              onScrolledBottom={onScrolledBottom}
+              onScrolledChange={handleScrolledChange}
             />
           )
         } else {

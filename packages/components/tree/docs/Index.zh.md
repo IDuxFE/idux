@@ -54,6 +54,9 @@ order: 0
 | `onSelectedChange` | 选中状态发生变化时触发 | `(selectedKeys: VKey[], selectedNodes: TreeNode[]) => void` | - | - | - |
 | `onNodeClick` | 节点点击事件 | `(evt: Event, node: TreeNode) => void` | - | - | - |
 | `onNodeContextmenu` | 节点右击事件 | `(evt: Event, node: TreeNode) => void` | - | - | - |
+| `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
 
 ##### TreeNode
 
@@ -102,4 +105,4 @@ export type TreeDropType = 'before' | 'inside' | 'after'
 | --- | --- | --- | --- |
 | `blur` | 失去焦点 | - | - |
 | `focus` | 获取焦点 | - | - |
-| `scrollTo` | 虚拟滚动下，滚动到指定位置 | `(value?: number \| ScrollToConfig) => void` | - |
+| `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |

@@ -62,6 +62,9 @@ export const treeProps = {
   onKeyup: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
   onNodeClick: IxPropTypes.emit<(evt: Event, node: TreeNode) => void>(),
   onNodeContextmenu: IxPropTypes.emit<(evt: Event, node: TreeNode) => void>(),
+  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
+  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void>(),
+  onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
 export type TreeProps = IxInnerPropTypes<typeof treeProps>
@@ -135,6 +138,7 @@ export const treeNodeCheckboxProps = {
 
 export const treeNodeExpandProps = {
   expanded: IxPropTypes.bool.isRequired,
+  isLeaf: IxPropTypes.bool,
   nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
   rawNode: IxPropTypes.object<TreeNode>().isRequired,
 }

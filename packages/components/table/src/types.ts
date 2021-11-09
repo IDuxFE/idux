@@ -16,6 +16,7 @@ import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
 import type { CSSProperties, DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
+import { VirtualScrollToFn } from '@idux/cdk/scroll'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tableProps = {
@@ -37,17 +38,27 @@ export const tableProps = {
   sticky: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TableSticky>()]),
   tableLayout: IxPropTypes.oneOf(['auto', 'fixed'] as const),
   tags: IxPropTypes.object<TableTags>(),
-  useVirtual: IxPropTypes.bool.def(false),
+  virtual: IxPropTypes.bool.def(false),
 
   // events
   'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
   'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
+  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: any[]) => void>(),
+  onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
 export type TableProps = IxInnerPropTypes<typeof tableProps>
 export type TablePublicProps = IxPublicPropTypes<typeof tableProps>
-export type TableComponent = DefineComponent<Omit<HTMLAttributes, keyof TablePublicProps> & TablePublicProps>
-export type TableInstance = InstanceType<DefineComponent<TableProps>>
+export interface TableBindings {
+  scrollTo: VirtualScrollToFn
+}
+export type TableComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof TablePublicProps> & TablePublicProps,
+  TableBindings
+>
+export type TableInstance = InstanceType<DefineComponent<TableProps, TableBindings>>
 
 export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
 

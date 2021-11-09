@@ -122,7 +122,11 @@ export default defineComponent({
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
         >
           <Indent level={level} prefixCls={mergedPrefixCls.value} />
-          {!isLeaf ? <Expand expanded={expanded} nodeKey={key} rawNode={rawNode} /> : showLine && <LeafLine />}
+          {isLeaf && showLine ? (
+            <LeafLine />
+          ) : (
+            <Expand expanded={expanded} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
+          )}
           {checkable && <Checkbox node={node} />}
           <Content disabled={disabled.value} nodeKey={key} rawNode={rawNode} selected={selected.value} />
         </div>
