@@ -14,7 +14,7 @@ import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
 import { useFormElement } from '@idux/components/utils'
 
 import { radioGroupToken } from './token'
@@ -32,10 +32,11 @@ export default defineComponent({
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
 
+    const formContext = inject(FORM_TOKEN, null)
     const radioGroup = inject(radioGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? radioGroup?.props.name)
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
-    const size = computed(() => props.size ?? radioGroup?.props.size ?? config.size)
+    const size = computed(() => props.size ?? radioGroup?.props.size ?? formContext?.size.value ?? config.size)
     const mode = computed(() => props.mode ?? radioGroup?.props.mode ?? 'default')
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useRadio(props, radioGroup)
     const classes = computed(() => {

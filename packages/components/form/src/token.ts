@@ -14,7 +14,7 @@ import { inject, onBeforeUnmount } from 'vue'
 
 import { useKey } from '@idux/components/utils'
 
-export interface FormContext {
+export interface InnerFormContext {
   colonless: ComputedRef<boolean>
   controlCol: Ref<FormColType | undefined>
   hasFeedback: Ref<boolean>
@@ -22,10 +22,13 @@ export interface FormContext {
   labelCol: Ref<FormColType | undefined>
 }
 
-export const formToken: InjectionKey<FormContext> = Symbol('formToken')
+export const formToken: InjectionKey<InnerFormContext> = Symbol('formToken')
 
 // public token
-export const FORM_TOKEN: InjectionKey<{ size: Ref<FormSize> }> = Symbol('FORM_TOKEN')
+export interface FormContext {
+  size: Ref<FormSize>
+}
+export const FORM_TOKEN: InjectionKey<FormContext> = Symbol('FORM_TOKEN')
 
 export interface FormItemContext {
   registerControl: (key: VKey, control: Ref<AbstractControl | undefined>) => void

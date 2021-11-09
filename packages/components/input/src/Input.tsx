@@ -8,9 +8,10 @@
 import type { InputProps } from './types'
 import type { Slot, Slots, StyleValue, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, normalizeClass } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import { inputProps } from './types'
@@ -24,6 +25,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-input`)
     const config = useGlobalConfig('input')
+    const formContext = inject(FORM_TOKEN, null)
 
     const {
       elementRef,
@@ -47,15 +49,16 @@ export default defineComponent({
 
     expose({ focus, blur })
 
+    const size = computed(() => props.size ?? formContext?.size.value ?? config.size)
     const classes = computed(() => {
-      const { borderless = config.borderless, size = config.size, addonAfter, addonBefore } = props
+      const { borderless = config.borderless, addonAfter, addonBefore } = props
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
-        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${size.value}`]: true,
         [`${prefixCls}-with-addon-after`]: addonAfter || slots.addonAfter,
         [`${prefixCls}-with-addon-before`]: addonBefore || slots.addonBefore,
       }

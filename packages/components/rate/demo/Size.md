@@ -11,4 +11,4 @@ order: 3
 
 ## en
 
-The switch has three sizes, `sm`, `md` and `lg`, and the default is `md`.
+The rate has three sizes, `sm`, `md` and `lg`, and the default is `md`.

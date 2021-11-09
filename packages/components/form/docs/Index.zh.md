@@ -29,7 +29,7 @@ single: true
 | `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `left \| right` | `right` | ✅ | - |
 | `labelCol` | 配置 `IxFormItem` 的 `labelCol` 默认值 | `number \| ColProps` | - | - | - |
 | `layout` | 表单布局 | `horizontal \| vertical \| inline` | `horizontal` | ✅ | - |
-| `size` | 表单大小 | `small \| medium \| large` | `medium` | ✅ | - |
+| `size` | 表单大小 | `sm \| md \| lg` | `md` | ✅ | - |
 
 ### IxFormItem
 

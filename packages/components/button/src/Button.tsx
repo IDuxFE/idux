@@ -11,6 +11,7 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import { buttonToken } from './token'
@@ -25,21 +26,14 @@ export default defineComponent({
     const config = useGlobalConfig('button')
 
     const groupProps = inject(buttonToken, {})
+    const formContext = inject(FORM_TOKEN, null)
 
     const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const hasDefaultSlot = computed(() => hasSlot(slots))
 
+    const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? config.size)
     const classes = computed(() => {
-      const {
-        block,
-        danger,
-        disabled,
-        ghost,
-        loading,
-        icon,
-        shape = groupProps.shape,
-        size = groupProps.size || config.size,
-      } = props
+      const { block, danger, disabled, ghost, loading, icon, shape = groupProps.shape } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
@@ -51,7 +45,7 @@ export default defineComponent({
         [`${prefixCls}-icon-only`]: !hasDefaultSlot.value && (icon || loading),
         [`${prefixCls}-${mode.value}`]: mode.value !== 'default',
         [`${prefixCls}-${shape}`]: !!shape,
-        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${size.value}`]: true,
       })
     })
 

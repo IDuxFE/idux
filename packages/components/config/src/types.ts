@@ -140,6 +140,7 @@ export interface RateConfig {
   clearable: boolean
   count: number
   icon: string
+  size: FormSize
 }
 
 export interface SelectConfig {

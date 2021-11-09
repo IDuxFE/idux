@@ -5,12 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
 import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
+import { FORM_TOKEN } from '@idux/components/form'
 import { IxInput } from '@idux/components/input'
 
 import TimePickerPanel from './TimePickerPanel'
@@ -30,7 +31,8 @@ export default defineComponent({
     expose({ focus, blur })
 
     const config = useGlobalConfig('timePicker')
-    const inputProps = useCommonInputProps(props, config)
+    const formContext = inject(FORM_TOKEN, null)
+    const inputProps = useCommonInputProps(props, config, formContext)
     const panelProps = useCommonPanelProps(props)
     const overlayProps = useCommonOverlayProps(props)
 

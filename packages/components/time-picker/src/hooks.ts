@@ -9,7 +9,7 @@ import type { BasePanelProps, TimePickerProps, TimeRangePickerProps } from './ty
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { TimePickerConfig, TimeRangePickerConfig } from '@idux/components/config'
-import type { FormSize } from '@idux/components/form'
+import type { FormContext, FormSize } from '@idux/components/form'
 import type { InputInstance } from '@idux/components/input'
 import type { ComputedRef, Ref } from 'vue'
 
@@ -89,13 +89,14 @@ export interface CommonInputProps {
 export function useCommonInputProps(
   props: TimePickerProps | TimeRangePickerProps,
   config: TimePickerConfig | TimeRangePickerConfig,
+  formContext?: FormContext | null,
 ): ComputedRef<CommonInputProps> {
   return computed(() => {
     return {
       borderless: props.borderless ?? config.borderless,
       clearable: props.clearable ?? config.clearable,
       clearIcon: props.clearIcon ?? config.clearIcon,
-      size: props.size ?? config.size,
+      size: props.size ?? formContext?.size.value ?? config.size,
       suffix: props.suffix ?? config.suffix,
     }
   })
