@@ -26,6 +26,7 @@
       &-unit {
         position: relative;
         height: 100%;
+
         &::before {
           position: absolute;
           top: -@tree-node-padding-vertical;
@@ -56,6 +57,10 @@
     line-height: @tree-node-content-height;
     text-align: center;
     cursor: pointer;
+
+    &-noop {
+      cursor: default;
+    }
   }
 
   &-checkbox {
@@ -75,6 +80,7 @@
       display: inline-block;
       width: 100%;
       height: 100%;
+
       &::before {
         position: absolute;
         top: -@tree-node-padding-vertical;
@@ -84,6 +90,7 @@
         border-right: @tree-node-line-border;
         content: ' ';
       }
+
       &::after {
         position: absolute;
         width: (@tree-node-content-height / 2);
@@ -135,6 +142,7 @@
   &-disabled &-content {
     color: @tree-node-disabled-color;
     cursor: not-allowed;
+
     &:hover {
       background: transparent;
     }

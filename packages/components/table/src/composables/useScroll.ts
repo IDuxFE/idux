@@ -22,7 +22,7 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
   const scrollY = computed(() => convertCssPixel(props.scroll?.y))
   const scrollHorizontal = computed(() => !!scrollX.value)
   const scrollVertical = computed(() => !!scrollY.value)
-  const scrollBarSize = computed(() => (props.useVirtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
+  const scrollBarSize = computed(() => (props.virtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
   const scrollBarSizeOnFixedHolder = computed(() =>
     isSticky.value ? 0 : scrollVertical.value ? scrollBarSize.value : 0,
   )

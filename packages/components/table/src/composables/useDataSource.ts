@@ -45,7 +45,7 @@ export function useDataSource(
   const paginatedData = computed(() => {
     const pagination = mergedPagination.value
     const data = sortedData.value
-    if (pagination === null || pagination.total) {
+    if (pagination === null || !pagination.pageSize) {
       return data
     } else {
       const { total } = pagination

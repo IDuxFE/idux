@@ -34,7 +34,10 @@ single: true
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
 | `tags` | 覆盖默认的表格元素, 参见[TableTags](#TableTags) | `TableTags` | - | - | - |
-| `useVirtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.y` |
+| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.y` |
+| `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
 
 #### TableColumn
 
@@ -170,3 +173,9 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `footer` | 表格尾部 | - | - |
 | `header` | 表格头部 | - | - |
 | `summary` | 表格总结栏 | - | - |
+
+#### TableMethods
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |

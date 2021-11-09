@@ -480,7 +480,7 @@ describe('Tree', () => {
 
     expect(allNodes.length).toBe(2)
     expect(allNodes[0].find('.ix-tree-node-expand').exists()).toBe(true)
-    expect(allNodes[1].find('.ix-tree-node-expand').exists()).toBe(false)
+    expect(allNodes[1].find('.ix-tree-node-expand-noop').exists()).toBe(true)
 
     await allNodes[0].find('.ix-tree-node-expand').trigger('click')
 

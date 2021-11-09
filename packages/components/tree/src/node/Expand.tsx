@@ -7,7 +7,7 @@
 
 import type { VNodeTypes } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { IxIcon } from '@idux/components/icon'
 
@@ -20,6 +20,13 @@ export default defineComponent({
     const { mergedPrefixCls, slots, expandIcon, loadingKeys, handleExpand } = inject(treeToken)!
 
     const isLoading = computed(() => loadingKeys.value.includes(props.nodeKey))
+    const classes = computed(() => {
+      const prefixCls = `${mergedPrefixCls.value}-node-expand`
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-noop`]: props.isLeaf,
+      })
+    })
 
     const onClick = () => handleExpand(props.nodeKey, props.rawNode)
 
@@ -27,7 +34,7 @@ export default defineComponent({
       let children: VNodeTypes | undefined
       if (isLoading.value) {
         children = <IxIcon name="loading"></IxIcon>
-      } else {
+      } else if (!props.isLeaf) {
         if (slots.expandIcon) {
           const { nodeKey: key, expanded, rawNode: node } = props
           children = slots.expandIcon({ key, expanded, node })
@@ -36,7 +43,7 @@ export default defineComponent({
         }
       }
       return (
-        <span class={`${mergedPrefixCls.value}-node-expand`} onClick={onClick}>
+        <span class={classes.value} onClick={onClick}>
           {children}
         </span>
       )

@@ -13,6 +13,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 import { isNil, isString } from 'lodash-es'
 
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
+import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxEmpty } from '@idux/components/empty'
 
@@ -125,27 +126,37 @@ export default defineComponent({
 
     expose({ focus, blur, scrollTo })
 
+    const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: FlattedNode[]) => {
+      callEmit(
+        props.onScrolledChange,
+        startIndex,
+        endIndex,
+        visibleNodes.map(item => item.rawNode),
+      )
+    }
+
     return () => {
       const nodes = flattedNodes.value
       let children: VNodeTypes
       if (nodes.length > 0) {
-        if (props.virtual) {
-          const itemRender: VirtualItemRenderFn<FlattedNode> = ({ item }) => (
-            <TreeNode key={item.key} node={item}></TreeNode>
-          )
-          children = (
-            <CdkVirtualScroll
-              ref={virtualScrollRef}
-              dataSource={flattedNodes.value}
-              height={props.height}
-              itemHeight={28}
-              itemKey="key"
-              itemRender={itemRender}
-            />
-          )
-        } else {
-          children = flattedNodes.value.map(node => <TreeNode key={node.key} node={node}></TreeNode>)
-        }
+        const itemRender: VirtualItemRenderFn<FlattedNode> = ({ item }) => (
+          <TreeNode key={item.key} node={item}></TreeNode>
+        )
+        const { height, virtual, onScroll, onScrolledBottom } = props
+        children = (
+          <CdkVirtualScroll
+            ref={virtualScrollRef}
+            dataSource={flattedNodes.value}
+            height={height}
+            itemHeight={28}
+            itemKey="key"
+            itemRender={itemRender}
+            virtual={virtual}
+            onScroll={onScroll}
+            onScrolledBottom={onScrolledBottom}
+            onScrolledChange={handleScrolledChange}
+          />
+        )
       } else {
         children = <IxEmpty {...emptyProps.value}></IxEmpty>
       }
