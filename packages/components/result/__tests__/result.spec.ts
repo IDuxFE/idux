@@ -4,7 +4,7 @@ import { defineComponent } from 'vue'
 import { renderWork } from '@tests'
 
 import { IxIcon } from '../../icon'
-import IxResult from '../src/Result.vue'
+import IxResult from '../src/Result'
 import { ResultProps } from '../src/types'
 
 describe('Result', () => {
@@ -15,24 +15,24 @@ describe('Result', () => {
   test('status work', async () => {
     const wrapper = ResultMount()
     expect(wrapper.findComponent(IxIcon).exists()).toBeTruthy()
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle')
+    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle-filled')
     expect(wrapper.classes()).toContain('ix-result-info')
 
     await wrapper.setProps({ status: 'success' })
     expect(wrapper.classes()).toContain('ix-result-success')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('check-circle')
+    expect(wrapper.findComponent(IxIcon).props().name).toEqual('check-circle-filled')
 
     await wrapper.setProps({ status: 'warning' })
     expect(wrapper.classes()).toContain('ix-result-warning')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('exclamation-circle')
+    expect(wrapper.findComponent(IxIcon).props().name).toEqual('exclamation-circle-filled')
 
     await wrapper.setProps({ status: 'error' })
     expect(wrapper.classes()).toContain('ix-result-error')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('close-circle')
+    expect(wrapper.findComponent(IxIcon).props().name).toEqual('close-circle-filled')
 
     await wrapper.setProps({ status: 'info' })
     expect(wrapper.classes()).toContain('ix-result-info')
-    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle')
+    expect(wrapper.findComponent(IxIcon).props().name).toEqual('info-circle-filled')
   })
 
   test('title work', async () => {

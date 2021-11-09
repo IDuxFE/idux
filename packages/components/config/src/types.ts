@@ -298,6 +298,7 @@ export interface DrawerConfig {
 
 export interface ResultConfig {
   status: ResultStatus
+  icon?: Partial<Record<ResultStatus, string | VNode>>
 }
 
 export interface SpinConfig {

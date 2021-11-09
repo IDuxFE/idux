@@ -13,7 +13,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 
 export const resultProps = {
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   status: IxPropTypes.oneOf<ResultStatus>(['success', 'error', 'info', 'warning']),
   subtitle: IxPropTypes.string,
   title: IxPropTypes.string,

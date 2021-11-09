@@ -2,10 +2,10 @@
 
 exports[`Result render work 1`] = `
 "<div class=\\"ix-result ix-result-info\\">
-  <div class=\\"ix-result-icon\\"><i class=\\"ix-icon ix-icon-info-circle\\" role=\\"img\\" aria-label=\\"info-circle\\"></i></div>
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class=\\"ix-result-icon\\"><i class=\\"ix-icon ix-icon-info-circle-filled\\" role=\\"img\\" aria-label=\\"info-circle-filled\\"></i></div>
+  <!---->
+  <!---->
+  <!---->
+  <!---->
 </div>"
 `;
