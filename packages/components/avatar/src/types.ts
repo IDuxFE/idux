@@ -12,11 +12,11 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type AvatarShape = 'circle' | 'square'
-export type AvatarSize = number | 'large' | 'medium' | 'small'
+export type AvatarSize = number | 'lg' | 'md' | 'sm'
 
 const sizeProp = IxPropTypes.oneOfType<AvatarSize | Partial<Record<BreakpointKey, number>>>([
   Number,
-  IxPropTypes.oneOf(['large', 'medium', 'small'] as const),
+  IxPropTypes.oneOf(['lg', 'md', 'sm'] as const),
   IxPropTypes.object<Record<BreakpointKey, number>>(),
 ])
 

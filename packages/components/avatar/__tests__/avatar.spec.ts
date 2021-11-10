@@ -178,15 +178,15 @@ describe('Avatar', () => {
 
   test('size work', async () => {
     const wrapper = AvatarMount()
-    expect(wrapper.classes()).toContain('ix-avatar-medium')
+    expect(wrapper.classes()).toContain('ix-avatar-md')
 
-    await wrapper.setProps({ size: 'large' })
+    await wrapper.setProps({ size: 'lg' })
 
-    expect(wrapper.classes()).toContain('ix-avatar-large')
+    expect(wrapper.classes()).toContain('ix-avatar-lg')
 
-    await wrapper.setProps({ size: 'small' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.classes()).toContain('ix-avatar-small')
+    expect(wrapper.classes()).toContain('ix-avatar-sm')
 
     await wrapper.setProps({ size: 64 })
 

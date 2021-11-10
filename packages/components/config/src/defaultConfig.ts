@@ -179,7 +179,7 @@ const avatar = shallowReactive<AvatarConfig>({
   gap: 4,
   icon: 'user',
   shape: 'circle',
-  size: 'medium',
+  size: 'md',
 })
 
 const badge = shallowReactive<BadgeConfig>({ showZero: false, dot: false, overflowCount: 99 })
