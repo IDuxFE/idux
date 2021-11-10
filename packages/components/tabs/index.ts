@@ -15,4 +15,10 @@ const IxTab = Tab as unknown as TabComponent
 
 export { IxTabs, IxTab }
 
-export type { TabsInstance, TabInstance, TabsPublicProps as TabsProps, TabPublicProps as TabProps } from './src/types'
+export type {
+  TabsInstance,
+  TabInstance,
+  TabsPublicProps as TabsProps,
+  TabPublicProps as TabProps,
+  TabsPlacement,
+} from './src/types'

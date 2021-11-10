@@ -52,14 +52,15 @@ describe('Tabs', () => {
     const wrapper = TabsMount()
 
     expect(wrapper.classes()).toContain('ix-tabs-card')
-
+    expect(wrapper.find('.ix-tabs-nav-bar').exists()).toBe(false)
     await wrapper.setProps({ type: 'line' })
 
     expect(wrapper.classes()).toContain('ix-tabs-line')
+    expect(wrapper.find('.ix-tabs-nav-bar').exists()).toBe(true)
 
     await wrapper.setProps({ type: 'segment' })
-
     expect(wrapper.classes()).toContain('ix-tabs-segment')
+    expect(wrapper.find('.ix-tabs-nav-bar').exists()).toBe(false)
   })
 
   test('mode work', async () => {
@@ -102,9 +103,21 @@ describe('Tabs', () => {
 
     expect(wrapper.classes()).toContain('ix-tabs-nav-start')
 
+    await wrapper.setProps({ placement: 'end' })
+
+    expect(wrapper.classes()).toContain('ix-tabs-nav-end')
+
+    await wrapper.setProps({ placement: 'top' })
+
+    expect(wrapper.classes()).toContain('ix-tabs-nav-top')
+
+    await wrapper.setProps({ placement: 'bottom' })
+
+    expect(wrapper.classes()).toContain('ix-tabs-nav-bottom')
+
     await wrapper.setProps({ type: 'card' })
 
-    expect(wrapper.classes()).not.toContain('ix-tabs-nav-start')
+    expect(wrapper.classes()).not.toContain('ix-tabs-nav-bottom')
   })
 
   test('only accept tab children work', async () => {

@@ -18,8 +18,12 @@
 @tabs-nav-tab-text-color: @color-graphite-d40;
 @tabs-nav-bar-color: @color-primary;
 @tabs-nav-bar-height: 2px;
+@tabs-nav-bar-transition: left .2s @tabs-transition-timing-function, top .2s @tabs-transition-timing-function;
 @tabs-nav-pre-next-width: 20px;
-@tabs-nav-transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+@tabs-nav-transition: transform .2s @tabs-transition-timing-function;
+@tabs-nav-tab-transition: all .2s @tabs-transition-timing-function;
 @tabs-border-radius: 2px;
 @tabs-pane-min-width: 72px;
 @tabs-pane-padding: 16px;
+
+@tabs-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

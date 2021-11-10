@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, ref, watchEffect } from 'vue'
 
 import { useKey } from '@idux/components/utils'
 
@@ -17,15 +17,22 @@ export default defineComponent({
   props: tabNavProps,
   setup(props, { slots }) {
     const key = useKey()
-    const { selectedKey, mergedPrefixCls, handleTabClick } = inject(tabsToken)!
+    const { selectedKey, selectedElRef, mergedPrefixCls, handleTabClick } = inject(tabsToken)!
 
+    const selfElRef = ref<HTMLElement | null>(null)
     const isSelected = computed(() => selectedKey.value === key)
     const prefixCls = computed(() => `${mergedPrefixCls.value}-nav`)
     const classes = computed(() => {
-      return {
+      return normalizeClass({
         [`${prefixCls.value}-tab`]: true,
         [`${prefixCls.value}-tab-selected`]: isSelected.value,
         [`${prefixCls.value}-tab-disabled`]: props.disabled,
+      })
+    })
+
+    watchEffect(() => {
+      if (isSelected.value && selfElRef.value) {
+        selectedElRef.value = selfElRef.value
       }
     })
 
@@ -38,7 +45,7 @@ export default defineComponent({
     return () => {
       const tab = <span class={`${prefixCls.value}-tab-label`}> {slots.title?.() ?? props.title}</span>
       return (
-        <div class={classes.value} data-key={key} onClick={onClick}>
+        <div class={classes.value} onClick={onClick} ref={selfElRef}>
           {tab}
         </div>
       )
