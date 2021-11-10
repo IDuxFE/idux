@@ -75,6 +75,15 @@ export default defineComponent({
       forceUpdatePopper: forceUpdate,
     })
 
+    const handleClickOutside = (evt: Event) => {
+      const popperElement = convertElement(popperRef)
+      const target = evt.target as Node
+      if (!popperElement || popperElement === target || popperElement.contains(target)) {
+        return
+      }
+      hide()
+    }
+
     return () => {
       const triggerNode = getFirstValidNode(slots.default?.())
       if (!triggerNode) {
@@ -85,7 +94,7 @@ export default defineComponent({
       if (!getFirstValidNode(contentNode)) {
         return triggerNode
       }
-      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, popperRef, hide)
+      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, handleClickOutside)
       const content = renderContent(
         props,
         mergedPrefixCls,
@@ -145,12 +154,11 @@ function renderTrigger(
   props: OverlayProps,
   triggerNode: VNode,
   extraProps: Record<string, unknown>,
-  popperRef: Ref<PopperElement | null>,
-  handler: () => void,
+  handleClickOutside: (evt: Event) => void,
 ) {
   const element = cloneVNode(triggerNode, extraProps, true)
   if (props.clickOutside) {
-    return withDirectives(element, [[clickOutside, { exclude: [convertElement(popperRef)], handler }]])
+    return withDirectives(element, [[clickOutside, handleClickOutside]])
   }
   return element
 }
