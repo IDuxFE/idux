@@ -244,10 +244,7 @@ export default defineComponent({
     })
 
     return () => {
-      const tabPaneVNodes = flattenNode(slots.default?.()).filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        vnode => (vnode.type as any).__TAB_PANE__,
-      )
+      const tabPaneVNodes = flattenNode(slots.default?.(), { key: '__IDUX_TAB' })
       return (
         <div class={classes.value}>
           <div

@@ -1,70 +1,36 @@
 <template>
-  <IxRow :gutter="8">
-    <IxCol :span="6">
-      <IxSelect v-model:value="singleValue" placeholder="choose Tom or Jerry">
-        <IxSelectOption label="Tom" value="tom" />
-        <IxSelectOption label="Jerry" value="jerry" />
-        <IxSelectOption label="Speike" value="speike" disabled />
-      </IxSelect>
-    </IxCol>
-    <IxCol :span="6">
-      <IxSelect v-model:value="singleValue" disabled>
-        <IxSelectOption label="Tom" value="tom" />
-        <IxSelectOption label="Jerry" value="jerry" />
-        <IxSelectOption label="Speike" value="speike" disabled />
-      </IxSelect>
-    </IxCol>
-    <IxCol :span="6">
-      <IxSelect v-model:value="singleValue" clearable>
-        <IxSelectOption label="Tom" value="tom" />
-        <IxSelectOption label="Jerry" value="jerry" />
-        <IxSelectOption label="Speike" value="speike" disabled />
-      </IxSelect>
-    </IxCol>
-    <IxCol :span="6">
-      <IxSelect v-model:value="singleValue" searchable>
-        <IxSelectOption label="Tom" value="tom" />
-        <IxSelectOption label="Jerry" value="jerry" />
-        <IxSelectOption label="Speike" value="speike" disabled />
-      </IxSelect>
-    </IxCol>
-    <IxCol :span="8">
-      <IxSelect v-model:value="multipleValue" multiple disabled placeholder="Choose">
-        <IxSelectOption
-          v-for="option in multipleOptions"
-          :key="option.value"
-          :label="option.label"
-          :value="option.value"
-          :disabled="option.disabled"
-        />
-      </IxSelect>
-    </IxCol>
-    <IxCol :span="8">
-      <IxSelect v-model:value="multipleValue" :options="multipleOptions" multiple clearable> </IxSelect>
-    </IxCol>
-    <IxCol :span="8">
-      <IxSelect v-model:value="multipleValue" :options="multipleOptions" multiple :multipleLimit="5" :maxLabelCount="3">
-      </IxSelect>
-    </IxCol>
-  </IxRow>
+  <IxSpace>
+    <IxSelect v-model:value="value" :options="options" @change="onChange"></IxSelect>
+    <IxSelect v-model:value="value" :options="options" disabled></IxSelect>
+    <IxSelect v-model:value="value" :options="options" clearable></IxSelect>
+    <IxSelect v-model:value="value">
+      <IxSelectOption v-for="option in options" :key="option.key" :value="option.value" :disabled="option.disabled">
+        <IxIcon name="star"></IxIcon>
+        <span style="margin-left: 8px">{{ option.label }}</span>
+      </IxSelectOption>
+    </IxSelect>
+  </IxSpace>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-import { SelectOption } from '../src/types'
+import { SelectOption } from '@idux/components/select'
 
-export default defineComponent({
-  setup() {
-    const singleValue = ref('tom')
-    const multipleValue = ref([0])
+const options: SelectOption[] = [
+  { key: 1, label: 'Tom', value: 'tom' },
+  { key: 2, label: 'Jerry', value: 'jerry' },
+  { key: 3, label: 'Speike', value: 'speike', disabled: true },
+]
 
-    const multipleOptions = ref<SelectOption[]>([])
-    for (let index = 0; index < 20; index++) {
-      const prefix = index > 9 ? 'B' : 'A'
-      multipleOptions.value.push({ label: prefix + index, value: index, disabled: index % 3 === 0 })
-    }
+const value = ref('tom')
 
-    return { singleValue, multipleValue, multipleOptions }
-  },
-})
+const onChange = (value: string, oldValue: string) => {
+  console.log('selected change: ', value, oldValue)
+}
 </script>
+
+<style scoped lang="less">
+:deep(.ix-select) {
+  width: 120px;
+}
+</style>

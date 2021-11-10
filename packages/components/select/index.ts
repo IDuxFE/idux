@@ -5,24 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SelectComponent, SelectOptionComponent, SelectOptionGroupComponent } from './src/types'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import Select from './src/Select.vue'
-import SelectOption from './src/SelectOption.vue'
-import SelectOptionGroup from './src/SelectOptionGroup.vue'
+import type { SelectComponent } from './src/types'
+
+import Select from './src/Select'
+import { SelectOption, SelectOptionGroup } from './src/option'
 
 const IxSelect = Select as unknown as SelectComponent
-const IxSelectOption = SelectOption as unknown as SelectOptionComponent
-const IxSelectOptionGroup = SelectOptionGroup as unknown as SelectOptionGroupComponent
+const IxSelectOption = SelectOption
+const IxSelectOptionGroup = SelectOptionGroup
 
 export { IxSelect, IxSelectOption, IxSelectOptionGroup }
 
 export type {
   SelectInstance,
   SelectPublicProps as SelectProps,
-  SelectOptionInstance,
   SelectOptionPublicProps as SelectOptionProps,
-  SelectOptionGroupInstance,
   SelectOptionGroupPublicProps as SelectOptionGroupProps,
   SelectOption,
   SelectFilterFn,

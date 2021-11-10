@@ -1,28 +1,27 @@
 <template>
-  <IxSelect v-model:value="singleValue" :compareWith="compareFn">
-    <IxSelectOption v-for="option in options" :key="option.value" :label="option.label" :value="option" />
+  <IxSelect v-model:value="value" :compareWith="compareFn" @change="onChange">
+    <IxSelectOption v-for="option in options" :key="option.id" :label="option.name" :value="option" />
   </IxSelect>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-import { SelectOption } from '../src/types'
+interface User {
+  id: number
+  name: string
+}
 
-export default defineComponent({
-  setup() {
-    const singleValue = ref({ value: 'tom' })
+const options: User[] = [
+  { id: 1, name: 'Tom' },
+  { id: 2, name: 'Jerry' },
+  { id: 3, name: 'Speike' },
+]
 
-    watch(singleValue, value => console.log(value))
+const value = ref({ id: 1 })
 
-    const options: SelectOption[] = [
-      { label: 'Tom', value: 'tom' },
-      { label: 'Jerry', value: 'jerry' },
-      { label: 'Speike', value: 'speike' },
-    ]
+const compareFn = (o1: User, o2: User) => (o1 && o2 ? o1.id === o2.id : o1 === o2)
 
-    const compareFn = (o1: SelectOption, o2: SelectOption) => (o1 && o2 ? o1.value === o2.value : o1 === o2)
-
-    return { singleValue, options, compareFn }
-  },
-})
+const onChange = (value: string, oldValue: string) => {
+  console.log('selected change: ', value, oldValue)
+}
 </script>

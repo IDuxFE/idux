@@ -9,7 +9,7 @@ import type { FlattedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
-import type { DefineComponent, HTMLAttributes, StyleValue } from 'vue'
+import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -81,7 +81,8 @@ export interface TreeNode {
   additional?: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     class?: any
-    style?: StyleValue
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    style?: any
     [key: string]: unknown
   }
   children?: TreeNode[]

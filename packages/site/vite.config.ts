@@ -39,7 +39,7 @@ export default defineConfig(({ command }) => {
               return { importName: name, path, sideEffects }
             }
           },
-          IduxResolver({ importStyle: 'less' }),
+          IduxResolver(),
         ],
       }),
       transformIndexPlugin(),

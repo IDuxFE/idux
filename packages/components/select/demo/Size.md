@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 2
 title:
   zh: 尺寸
   en: Sizes
@@ -11,4 +11,4 @@ title:
 
 ## en
 
-There are three sizes in the input box: `large`, `medium`, and `small`, using different sizes by setting `size`, which defaults to `medium`.
+There are three sizes in the input box: `sm`, `md`, and `lg`, using different sizes by setting `size`, which defaults to `md`.

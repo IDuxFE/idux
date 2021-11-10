@@ -31,6 +31,10 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
 
     const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
+    const emptyProps = computed(() => {
+      const { empty } = props
+      return isString(empty) ? { description: empty } : empty
+    })
 
     return () => {
       const children: VNodeTypes[] = []
@@ -50,12 +54,7 @@ export default defineComponent({
           })
         }
       } else {
-        const emptyProps = isString(props.empty) ? { description: props.empty } : props.empty
-        children.push(
-          <BodyRowSingle>
-            <IxEmpty {...emptyProps}></IxEmpty>
-          </BodyRowSingle>,
-        )
+        children.push(<BodyRowSingle>{slots.empty?.() ?? <IxEmpty {...emptyProps.value}></IxEmpty>}</BodyRowSingle>)
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyTag = bodyTag.value as any

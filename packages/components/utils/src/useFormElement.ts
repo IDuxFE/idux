@@ -17,7 +17,11 @@ export interface FormElementContext<T> {
 
 export function useFormElement<T extends HTMLElement = HTMLElement>(): FormElementContext<T> {
   const elementRef = ref<T>()
-  const focus = (options?: FocusOptions) => elementRef.value?.focus(options)
+
+  const focus = (options?: FocusOptions) => {
+    elementRef.value?.focus(options)
+  }
+
   const blur = () => elementRef.value?.blur()
 
   return { elementRef, focus, blur }

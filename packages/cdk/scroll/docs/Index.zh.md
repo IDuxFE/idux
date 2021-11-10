@@ -9,14 +9,14 @@ single: true
 
 ## API
 
-### IxVirtualList
+### CdkVirtualScroll
 
 虚拟滚动：
 
 - 通过仅渲染那些屏幕上可见的条目，来高效的显示大型列表。
 - 数据量过多时，用于提升页面渲染性能。
 
-#### VirtualListProps
+#### VirtualScrollProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ single: true
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: any[]) => void` | - | - | - |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | - |
 
-#### VirtualListMethods
+#### VirtualScrollMethods
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

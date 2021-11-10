@@ -8,22 +8,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, Slots, VNode, VNodeTypes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export interface SelectOption {
-  label?: string
-  value?: any
+  additional?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    class?: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    style?: any
+    [key: string]: unknown
+  }
   disabled?: boolean
-  groupLabel?: string
+  key?: VKey
+  label?: string
+  children?: SelectOption[]
+  slots?: Slots
+  value?: any
+
   [key: string]: any
 }
-export type SelectFilterFn = (searchValue: string, selectOption: SelectOptionProps) => boolean
+export type SelectFilterFn = (searchValue: string, option: SelectOption) => boolean
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
@@ -32,23 +42,30 @@ export const selectProps = {
   control: controlPropDef,
   open: IxPropTypes.bool.def(false),
 
+  allowInput: IxPropTypes.bool.def(false),
   autofocus: IxPropTypes.bool.def(false),
   borderless: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
+  childrenKey: IxPropTypes.string,
+  clearable: IxPropTypes.bool.def(false),
   compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareWith),
   disabled: IxPropTypes.bool.def(false),
-  overlayClass: IxPropTypes.string,
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
-  filterOption: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
-  inputable: IxPropTypes.bool,
   maxLabelCount: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
   multiple: IxPropTypes.bool.def(false),
   multipleLimit: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
   labelKey: IxPropTypes.string,
   options: IxPropTypes.array<SelectOption>(),
+  overlayClassName: IxPropTypes.string,
+  // private
+  overlayHeight: IxPropTypes.number.def(256),
+  // private
+  overlayItemHeight: IxPropTypes.number.def(32),
+  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
   placeholder: IxPropTypes.string,
-  searchable: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<FormSize>(['lg', 'md', 'sm']),
+  readonly: IxPropTypes.bool.def(false),
+  searchable: IxPropTypes.bool.def(false),
+  searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
   valueKey: IxPropTypes.string,
   virtual: IxPropTypes.bool.def(false),
@@ -56,14 +73,17 @@ export const selectProps = {
   // events
   'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
   'onUpdate:open': IxPropTypes.emit<(open: boolean) => void>(),
-  onChange: IxPropTypes.emit<(value: any) => void>(),
+  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
   onClear: IxPropTypes.emit<(evt: Event) => void>(),
   onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
   onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onInput: IxPropTypes.emit<(evt: Event) => void>(),
-  onOverlayScroll: IxPropTypes.emit<(evt: Event) => void>(),
+  onSearch: IxPropTypes.emit<(searchValue: string) => void>(),
+  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
+  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleOptions: SelectOption[]) => void>(),
+  onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
 export type SelectProps = IxInnerPropTypes<typeof selectProps>
@@ -81,25 +101,39 @@ export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBin
 
 export const selectOptionProps = {
   disabled: IxPropTypes.bool.def(false),
-  label: IxPropTypes.string.isRequired,
+  label: IxPropTypes.string,
   value: IxPropTypes.any.isRequired,
 }
 
 export type SelectOptionProps = IxInnerPropTypes<typeof selectOptionProps>
 export type SelectOptionPublicProps = IxPublicPropTypes<typeof selectOptionProps>
-export type SelectOptionComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
->
-export type SelectOptionInstance = InstanceType<DefineComponent<SelectOptionProps>>
 
 export const selectOptionGroupProps = {
-  label: IxPropTypes.string.isRequired,
-  options: IxPropTypes.array<SelectOption>().def(() => []),
+  label: IxPropTypes.string,
 }
 
 export type SelectOptionGroupProps = IxInnerPropTypes<typeof selectOptionGroupProps>
 export type SelectOptionGroupPublicProps = IxPublicPropTypes<typeof selectOptionGroupProps>
-export type SelectOptionGroupComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof SelectOptionGroupPublicProps> & SelectOptionGroupPublicProps
->
-export type SelectOptionGroupInstance = InstanceType<DefineComponent<SelectOptionGroupProps>>
+
+// private
+export const selectorProps = {
+  clearable: IxPropTypes.bool,
+  suffix: IxPropTypes.string,
+}
+export type SelectorProps = IxInnerPropTypes<typeof optionProps>
+
+export const optionProps = {
+  disabled: IxPropTypes.bool,
+  index: IxPropTypes.number.isRequired,
+  label: IxPropTypes.string,
+  type: IxPropTypes.oneOf(['grouped', 'group']),
+  rawOption: IxPropTypes.object<SelectOption>().isRequired,
+  value: IxPropTypes.any,
+}
+export type OptionProps = IxInnerPropTypes<typeof optionProps>
+
+export const optionGroupProps = {
+  label: IxPropTypes.string,
+  rawOption: IxPropTypes.object<SelectOption>().isRequired,
+}
+export type OptionGroupProps = IxInnerPropTypes<typeof optionGroupProps>

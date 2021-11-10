@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SelectOption render work 1`] = `
-"<div class=\\"ix-select-option\\">
-  <!--v-if--><span class=\\"ix-select-option-label\\">Tom</span>
-</div>"
-`;
-
-exports[`SelectOptionGroup render work 1`] = `"<div class=\\"ix-select-option-group\\" style=\\"display: none;\\"><span class=\\"ix-select-option-group-label\\">TomGroup</span></div>"`;

@@ -147,7 +147,6 @@ export interface CommonOverlayProps {
   clickOutside: boolean
   offset: [number, number]
   placement: PopperPlacement
-  showArrow: boolean
   transitionName: string
   trigger: PopperTrigger
 }
@@ -159,7 +158,6 @@ export function useCommonOverlayProps(props: TimePickerProps | TimeRangePickerPr
     clickOutside: true,
     offset: defaultOffset,
     placement: 'bottom',
-    showArrow: false,
     transitionName: 'ix-fade',
     target: 'ix-time-picker-panel-container',
     trigger: 'click',

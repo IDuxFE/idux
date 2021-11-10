@@ -1,20 +1,26 @@
 <template>
-  <IxSelect v-model:value="singleValue" :options="options" labelKey="text" valueKey="key"> </IxSelect>
+  <IxSelect v-model:value="value" :options="options" childrenKey="options" labelKey="text" valueKey="name"> </IxSelect>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const singleValue = ref('tom')
+import { SelectOption } from '@idux/components/select'
 
-    const options = [
-      { text: 'Tom', key: 'tom' },
-      { text: 'Jerry', key: 'jerry' },
-      { text: 'Speike', key: 'speike', disabled: true },
-    ]
-
-    return { singleValue, options }
+const options: SelectOption[] = [
+  {
+    key: 1,
+    text: 'Manager',
+    options: [
+      { key: 11, text: 'Tom', name: 'tom' },
+      { key: 12, text: 'Jerry', name: 'jerry' },
+    ],
   },
-})
+  {
+    key: 2,
+    text: 'Engineer',
+    options: [{ key: 21, text: 'Speike', name: 'speike' }],
+  },
+]
+
+const value = ref('tom')
 </script>

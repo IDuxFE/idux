@@ -92,7 +92,6 @@ export default defineComponent({
             disabled={props.disabled}
             offset={offset.value}
             placement={placement.value}
-            showArrow={false}
             target="ix-menu-container"
             transitionName="ix-fade"
             trigger="manual"

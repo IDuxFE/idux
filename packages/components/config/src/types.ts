@@ -145,11 +145,10 @@ export interface RateConfig {
 
 export interface SelectConfig {
   borderless: boolean
-  clearable: boolean
+  childrenKey: string
   labelKey: string
-  searchable: boolean
   size: FormSize
-  suffix?: string
+  suffix: string
   valueKey: string
 }
 

@@ -14,7 +14,7 @@ import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
 import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
-import type { CSSProperties, DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
 import { VirtualScrollToFn } from '@idux/cdk/scroll'
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -65,7 +65,7 @@ export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandabl
 export interface TableColumnCommon<T = unknown> {
   additional?: {
     class?: any
-    style?: CSSProperties
+    style?: any
     [key: string]: unknown
   }
   align?: TableColumnAlign

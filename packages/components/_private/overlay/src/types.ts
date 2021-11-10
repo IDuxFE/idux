@@ -42,7 +42,7 @@ export const overlayProps = {
   disabled: IxPropTypes.bool,
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   placement: overlayPlacementDef,
-  showArrow: IxPropTypes.bool.def(true),
+  showArrow: IxPropTypes.bool,
   target: IxPropTypes.oneOfType([String, HTMLElement]).def('ix-overlay-container'),
   transitionName: IxPropTypes.string,
   trigger: overlayTriggerDef,

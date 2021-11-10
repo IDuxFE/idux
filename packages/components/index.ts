@@ -131,7 +131,7 @@ const directives: Record<string, Directive> = {
 
 const install = (app: App): void => {
   components.forEach(component => {
-    app.component(component.name, component)
+    app.component(component.name ?? component.displayName, component)
   })
 
   Object.keys(directives).forEach(key => {

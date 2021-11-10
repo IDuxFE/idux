@@ -11,7 +11,7 @@ import { tabsToken } from './tokens'
 import { tabProps } from './types'
 
 export default defineComponent({
-  __TAB_PANE__: true,
+  __IDUX_TAB: true,
   name: 'IxTab',
   props: tabProps,
   setup(props, { slots }) {

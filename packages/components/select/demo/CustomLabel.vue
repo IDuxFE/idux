@@ -1,28 +1,28 @@
 <template>
-  <IxSelect v-model:value="singleValue" :options="options" multiple :multipleLimit="5" :maxLabelCount="3">
-    <template #customLabel="{ option }"><IxIcon :name="option.value" />{{ option.label }}</template>
-    <template #customMaxLabel="{ option }">and {{ option.value.length }} more selected</template>
+  <IxSelect v-model:value="value" :options="options" multiple :maxLabelCount="3" :multipleLimit="5" @change="onChange">
+    <template #label="option"><IxIcon :name="option.value" />{{ option.label }}</template>
+    <template #maxLabel="moreOptions">and {{ moreOptions.length }} more selected</template>
   </IxSelect>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const singleValue = ref('github')
+import { SelectOption } from '@idux/components/select'
 
-    const options = [
-      { label: 'Github', value: 'github' },
-      { label: 'Gitlab', value: 'gitlab' },
-      { label: 'Chrome', value: 'chrome' },
-      { label: 'Edeg', value: 'edeg' },
-      { label: 'IE', value: 'ie' },
-      { label: 'Android', value: 'android' },
-      { label: 'Apple', value: 'apple' },
-      { label: 'Windows', value: 'windows' },
-    ]
+const options: SelectOption[] = [
+  { key: 1, label: 'Github', value: 'github' },
+  { key: 2, label: 'Gitlab', value: 'gitlab' },
+  { key: 3, label: 'Chrome', value: 'chrome' },
+  { key: 4, label: 'Edeg', value: 'edeg' },
+  { key: 5, label: 'IE', value: 'ie' },
+  { key: 6, label: 'Android', value: 'android' },
+  { key: 7, label: 'Apple', value: 'apple' },
+  { key: 8, label: 'Windows', value: 'windows' },
+]
 
-    return { singleValue, options }
-  },
-})
+const value = ref('github')
+
+const onChange = (value: string, oldValue: string) => {
+  console.log('selected change: ', value, oldValue)
+}
 </script>
