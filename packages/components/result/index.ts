@@ -7,7 +7,7 @@
 
 import type { ResultComponent } from './src/types'
 
-import Result from './src/Result.vue'
+import Result from './src/Result'
 
 const IxResult = Result as unknown as ResultComponent
 
