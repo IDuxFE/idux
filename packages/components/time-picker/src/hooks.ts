@@ -152,7 +152,10 @@ export interface CommonOverlayProps {
 }
 
 const defaultOffset: [number, number] = [0, 8]
-export function useCommonOverlayProps(props: TimePickerProps | TimeRangePickerProps): ComputedRef<CommonOverlayProps> {
+export function useCommonOverlayProps(
+  props: TimePickerProps | TimeRangePickerProps,
+  setVisibility: (value: boolean) => void,
+): ComputedRef<CommonOverlayProps> {
   return computed(() => ({
     class: props.overlayClassName,
     clickOutside: true,
@@ -161,5 +164,6 @@ export function useCommonOverlayProps(props: TimePickerProps | TimeRangePickerPr
     transitionName: 'ix-fade',
     target: 'ix-time-picker-panel-container',
     trigger: 'click',
+    ['onUpdate:visible']: setVisibility,
   }))
 }

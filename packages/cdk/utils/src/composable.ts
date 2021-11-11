@@ -5,11 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DeepReadonly, EffectScope, Ref } from 'vue'
+import type { ComputedRef, EffectScope, Ref } from 'vue'
 
-import { effectScope, onScopeDispose, readonly, shallowRef } from 'vue'
+import { computed, effectScope, onScopeDispose, ref, shallowRef, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
+
+import { callEmit } from './props'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createSharedComposable<T extends (...args: any[]) => ReturnType<T>>(composable: T): T {
@@ -35,11 +37,49 @@ export function createSharedComposable<T extends (...args: any[]) => ReturnType<
   }) as T
 }
 
-export function useState<T>(init: T | (() => T)): [Ref<DeepReadonly<T>>, (value: T) => void] {
-  const value = isFunction(init) ? init() : init
-  const state = shallowRef(value)
-  const changeState = (value: T) => {
-    state.value = value
+export function useState<T>(defaultOrFactory: T | (() => T), shallow = true): [ComputedRef<T>, (value: T) => void] {
+  const defaultValue = isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory
+
+  const state = shallow ? shallowRef(defaultValue) : ref(defaultValue)
+
+  const setState = (value: T) => {
+    if (value !== state.value) {
+      state.value = value
+    }
   }
-  return [readonly(state), changeState]
+
+  return [computed(() => state.value) as ComputedRef<T>, setState]
+}
+
+export function useControlledProp<T, K extends keyof T>(props: T, key: K): [ComputedRef<T[K]>, (value: T[K]) => void]
+export function useControlledProp<T, K extends keyof T>(
+  props: T,
+  key: K,
+  defaultOrFactory: T[K] | (() => T[K]),
+): [ComputedRef<Exclude<T[K], undefined>>, (value: Exclude<T[K], undefined>) => void]
+export function useControlledProp<T, K extends keyof T>(
+  props: T,
+  key: K,
+  defaultOrFactory?: T[K] | (() => T[K]),
+): [ComputedRef<T[K]>, (value: T[K]) => void] {
+  const tempProp = ref(props[key]) as Ref<T[K]>
+
+  watch(
+    () => props[key],
+    value => (tempProp.value = value),
+  )
+
+  const state = computed(
+    () => props[key] ?? tempProp.value ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!,
+  )
+
+  const setState = (value: T[K]) => {
+    if (value !== state.value) {
+      tempProp.value = value
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      callEmit((props as any)[`onUpdate:${key}`], value)
+    }
+  }
+
+  return [state, setState]
 }

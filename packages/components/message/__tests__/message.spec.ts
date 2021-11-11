@@ -27,7 +27,7 @@ describe('Message', () => {
     attachTo: 'body',
   })
 
-  test('visible work', async () => {
+  test('v-model:visible work', async () => {
     const onUpdateVisible = jest.fn()
     const wrapper = MessageMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
@@ -40,37 +40,38 @@ describe('Message', () => {
 
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(false)
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test('destroyOnHover work', async () => {
-    const wrapper = MessageMount()
+    const onUpdateVisible = jest.fn()
+    const wrapper = MessageMount({ props: { 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
     await wrapper.trigger('mouseenter')
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(true)
+    expect(onUpdateVisible).not.toBeCalled()
 
     await wrapper.trigger('mouseleave')
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
 
     await wrapper.setProps({ visible: true, destroyOnHover: true })
 
     await wrapper.trigger('mouseenter')
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test(`duration work`, async () => {
-    const wrapper = MessageMount()
+    const onUpdateVisible = jest.fn()
+    const wrapper = MessageMount({ props: { 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
 
     await wrapper.setProps({ visible: false })
     await wrapper.setProps({ visible: true, duration: 199 })
@@ -83,7 +84,7 @@ describe('Message', () => {
 
     await wait(100)
 
-    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
 
     await wrapper.setProps({ visible: false })
     await wrapper.setProps({ visible: true, duration: 98 })
@@ -95,7 +96,7 @@ describe('Message', () => {
 
     await wait(50)
 
-    expect(wrapper.isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test('icon work', async () => {

@@ -7,13 +7,11 @@
 
 import type { TreeNode, TreeProps } from '../types'
 import type { MergedNode } from './useDataSource'
-import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, WritableComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
-import { useMergedProp } from '@idux/components/utils'
+import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
 import { callChange, getChildrenKeys, getParentKeys } from '../utils'
 
@@ -25,7 +23,7 @@ export interface CheckableContext {
 }
 
 export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): CheckableContext {
-  const checkedKeys = useMergedProp(props, 'checkedKeys')
+  const [checkedKeys, setCheckedKeys] = useControlledProp(props, 'checkedKeys', () => [])
 
   const checkDisabledKeys = computed(() => {
     const disabledKeys: VKey[] = []
@@ -94,9 +92,9 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
   }
 
   const handleChange = (checked: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
-    checkedKeys.value = newKeys
     const { onCheck, onCheckedChange } = props
-    callEmit(onCheck, checked, rawNode)
+    callEmit(onCheck, !checked, rawNode)
+    setCheckedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onCheckedChange)
   }
 

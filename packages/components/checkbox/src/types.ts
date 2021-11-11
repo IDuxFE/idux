@@ -18,7 +18,7 @@ export type CheckValue = string | number | boolean
 export type CheckboxOption = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
 
 export const checkboxProps = {
-  checked: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
+  checked: IxPropTypes.oneOfType([String, Number, Boolean]),
   control: controlPropDef,
   autofocus: IxPropTypes.bool.def(false),
   buttoned: IxPropTypes.bool,
@@ -50,7 +50,7 @@ export type CheckboxComponent = DefineComponent<
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
-  value: IxPropTypes.array().def(() => []),
+  value: IxPropTypes.array(),
   control: controlPropDef,
   buttoned: IxPropTypes.bool.def(false),
   disabled: IxPropTypes.bool.def(false),

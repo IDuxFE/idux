@@ -16,7 +16,7 @@ import type { SelectProps } from './types'
 import type { FocusMonitor } from '@idux/cdk/a11y'
 import type { VirtualScrollInstance } from '@idux/cdk/scroll'
 import type { SelectConfig } from '@idux/components/config'
-import type { ComputedRef, InjectionKey, Ref, Slots, WritableComputedRef } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface SelectContext
   extends AccessorContext,
@@ -34,8 +34,8 @@ export interface SelectContext
   blur: () => void
   virtualScrollRef: Ref<VirtualScrollInstance | undefined>
   triggerRef: Ref<HTMLDivElement | undefined>
-  overlayOpened: WritableComputedRef<boolean>
-  changeOverlayOpened: (open: boolean) => void
+  overlayOpened: ComputedRef<boolean>
+  setOverlayOpened: (open: boolean) => void
 }
 
 export const selectToken: InjectionKey<SelectContext> = Symbol('selectToken')

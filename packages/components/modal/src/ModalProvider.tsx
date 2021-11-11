@@ -6,10 +6,11 @@
  */
 
 import type { ModalInstance, ModalOptions, ModalRef } from './types'
+import type { VKey } from '@idux/cdk/utils'
 
 import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 
-import { callEmit, convertArray, noop, uniqueId } from '@idux/cdk/utils'
+import { NoopFunction, callEmit, convertArray, uniqueId } from '@idux/cdk/utils'
 
 import Modal from './Modal'
 import { modalProviderToken } from './token'
@@ -17,15 +18,28 @@ import { modalProviderToken } from './token'
 export default defineComponent({
   name: 'IxModalProvider',
   setup(_, { expose, slots }) {
-    const { modals, apis } = useModalApis()
+    const { modals, setModalRef, open, confirm, info, success, warning, error, update, destroy, destroyAll } =
+      useModal()
+    const apis = { open, confirm, info, success, warning, error, update, destroy, destroyAll }
+
     provide(modalProviderToken, apis)
     expose(apis)
 
     return () => {
       const children = modals.value.map(item => {
-        const { content, contentProps, ...rest } = item
+        // The default value for `visible`, onDestroy should not be passed in Modal
+        const { key, visible = true, destroyOnHide, onDestroy, content, contentProps, ...restProps } = item
+        const setRef = (instance: unknown) => setModalRef(key!, instance as ModalInstance | null)
+        const onUpdateVisible = (visible: boolean) => update(key!, { visible })
+        const onAfterClose = destroyOnHide ? () => destroy(key!) : undefined
+        const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onAfterClose }
+
         const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
-        return <Modal {...rest}>{contentNode}</Modal>
+        return (
+          <Modal {...mergedProps} {...restProps}>
+            {contentNode}
+          </Modal>
+        )
       })
       return (
         <>
@@ -39,9 +53,9 @@ export default defineComponent({
 
 function useModal() {
   const modals = shallowRef<Array<ModalOptions & { ref?: (instance: unknown) => void }>>([])
-  const modalRefMap = new Map<string, ModalRef>()
+  const modalRefMap = new Map<VKey, ModalRef>()
 
-  const setModalRef = (key: string, instance: ModalInstance | null) => {
+  const setModalRef = (key: VKey, instance: ModalInstance | null) => {
     const ref = modalRefMap.get(key)
     if (instance) {
       if (ref && !ref.open) {
@@ -53,15 +67,15 @@ function useModal() {
     } else {
       if (ref) {
         modalRefMap.delete(key)
-        ref.open = noop
-        ref.close = noop as (evt?: unknown) => Promise<void>
-        ref.cancel = noop as (evt?: unknown) => Promise<void>
-        ref.ok = noop as (evt?: unknown) => Promise<void>
+        ref.open = NoopFunction
+        ref.close = NoopFunction as (evt?: unknown) => Promise<void>
+        ref.cancel = NoopFunction as (evt?: unknown) => Promise<void>
+        ref.ok = NoopFunction as (evt?: unknown) => Promise<void>
       }
     }
   }
 
-  const getCurrIndex = (key: string) => {
+  const getCurrIndex = (key: VKey) => {
     return modals.value.findIndex(message => message.key === key)
   }
 
@@ -73,16 +87,13 @@ function useModal() {
       modals.value = tempModals
       return item.key!
     }
-    // The default value for `visible`
-    const { key = uniqueId('ix-modal'), visible = true, destroyOnHide, ...rest } = item
-    const setRef = (instance: unknown) => setModalRef(key, instance as ModalInstance | null)
-    const onAfterClose = destroyOnHide ? () => destroy(key) : undefined
-    tempModals.push({ ...rest, key, visible, ref: setRef, onAfterClose })
+    item.key = item.key ?? uniqueId('ix-modal')
+    tempModals.push(item)
     modals.value = tempModals
-    return key
+    return item.key
   }
 
-  const update = (key: string, item: ModalOptions) => {
+  const update = (key: VKey, item: ModalOptions) => {
     const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
       const tempModals = [...modals.value]
@@ -92,7 +103,7 @@ function useModal() {
     }
   }
 
-  const destroy = (key: string | string[]) => {
+  const destroy = (key: VKey | VKey[]) => {
     const keys = convertArray(key)
     keys.forEach(key => {
       const currIndex = getCurrIndex(key)
@@ -108,12 +119,6 @@ function useModal() {
   const destroyAll = () => {
     modals.value = []
   }
-
-  return { modals, modalRefMap, add, update, destroy, destroyAll }
-}
-
-function useModalApis() {
-  const { modals, modalRefMap, add, update, destroy, destroyAll } = useModal()
 
   const open = (options: ModalOptions): ModalRef => {
     const key = add(options)
@@ -131,7 +136,5 @@ function useModalApis() {
     return (options: Omit<ModalOptions, 'type'>) => open({ ...options, type })
   })
 
-  const apis = { open, confirm, info, success, warning, error, update, destroy, destroyAll }
-
-  return { modals, apis }
+  return { modals, setModalRef, open, confirm, info, success, warning, error, update, destroy, destroyAll }
 }

@@ -20,7 +20,7 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:visible` | 菜单是否显示 | `boolean` | `false` | - | - |
+| `v-model:visible` | 菜单是否显示 | `boolean` | - | - | - |
 | `autoAdjust` | 悬浮层被遮挡时自动调整位置 | `boolean` | `true` | ✅ | - |
 | `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
 | `disabled` | 菜单是否禁用 | `boolean` | `false` | - | - |

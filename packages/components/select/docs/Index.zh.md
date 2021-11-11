@@ -32,7 +32,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `mode` 为 `multiple` 或 `tags` 时，`value` 为数组 |
-| `v-model:open` | 下拉菜单是否展开 | `boolean` | `false` | - | - |
+| `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean` | `false` | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |

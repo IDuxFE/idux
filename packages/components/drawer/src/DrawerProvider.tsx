@@ -6,10 +6,11 @@
  */
 
 import type { DrawerInstance, DrawerOptions, DrawerRef } from './types'
+import type { VKey } from '@idux/cdk/utils'
 
 import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 
-import { callEmit, convertArray, noop, uniqueId } from '@idux/cdk/utils'
+import { NoopFunction, callEmit, convertArray, uniqueId } from '@idux/cdk/utils'
 
 import Drawer from './Drawer'
 import { drawerProviderToken } from './token'
@@ -17,15 +18,27 @@ import { drawerProviderToken } from './token'
 export default defineComponent({
   name: 'IxDrawerProvider',
   setup(_, { expose, slots }) {
-    const { drawers, apis } = useDrawerApis()
+    const { drawers, setDrawerRef, open, update, destroy, destroyAll } = useDrawer()
+    const apis = { open, update, destroy, destroyAll }
+
     provide(drawerProviderToken, apis)
     expose(apis)
 
     return () => {
       const children = drawers.value.map(item => {
-        const { content, contentProps, ...rest } = item
+        // The default value for `visible`, onDestroy should not be passed in Drawer
+        const { key, visible = true, destroyOnHide, onDestroy, content, contentProps, ...rest } = item
+        const setRef = (instance: unknown) => setDrawerRef(key!, instance as DrawerInstance | null)
+        const onUpdateVisible = (visible: boolean) => update(key!, { visible })
+        const onAfterClose = destroyOnHide ? () => destroy(key!) : undefined
+        const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onAfterClose }
+
         const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
-        return <Drawer {...rest}>{contentNode}</Drawer>
+        return (
+          <Drawer {...mergedProps} {...rest}>
+            {contentNode}
+          </Drawer>
+        )
       })
       return (
         <>
@@ -38,10 +51,10 @@ export default defineComponent({
 })
 
 function useDrawer() {
-  const drawers = shallowRef<Array<DrawerOptions & { ref?: (instance: unknown) => void }>>([])
-  const drawerRefMap = new Map<string, DrawerRef>()
+  const drawers = shallowRef<Array<DrawerOptions & { ref?: (instance: unknown) => void; isProvider?: boolean }>>([])
+  const drawerRefMap = new Map<VKey, DrawerRef>()
 
-  const setDrawerRef = (key: string, instance: DrawerInstance | null) => {
+  const setDrawerRef = (key: VKey, instance: DrawerInstance | null) => {
     const ref = drawerRefMap.get(key)
     if (instance) {
       if (ref && !ref.open) {
@@ -51,13 +64,13 @@ function useDrawer() {
     } else {
       if (ref) {
         drawerRefMap.delete(key)
-        ref.open = noop
-        ref.close = noop as (evt?: unknown) => Promise<void>
+        ref.open = NoopFunction
+        ref.close = NoopFunction as (evt?: unknown) => Promise<void>
       }
     }
   }
 
-  const getCurrIndex = (key: string) => {
+  const getCurrIndex = (key: VKey) => {
     return drawers.value.findIndex(message => message.key === key)
   }
 
@@ -69,16 +82,13 @@ function useDrawer() {
       drawers.value = tempDrawers
       return item.key!
     }
-    // The default value for `visible`
-    const { key = uniqueId('ix-drawer'), visible = true, destroyOnHide, ...rest } = item
-    const setRef = (instance: unknown) => setDrawerRef(key, instance as DrawerInstance | null)
-    const onAfterClose = destroyOnHide ? () => destroy(key) : undefined
-    tempDrawers.push({ ...rest, key, visible, ref: setRef, onAfterClose })
+    item.key = item.key ?? uniqueId('ix-drawer')
+    tempDrawers.push(item)
     drawers.value = tempDrawers
-    return key
+    return item.key
   }
 
-  const update = (key: string, item: DrawerOptions) => {
+  const update = (key: VKey, item: DrawerOptions) => {
     const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
       const tempDrawers = [...drawers.value]
@@ -88,7 +98,7 @@ function useDrawer() {
     }
   }
 
-  const destroy = (key: string | string[]) => {
+  const destroy = (key: VKey | VKey[]) => {
     const keys = convertArray(key)
     keys.forEach(key => {
       const currIndex = getCurrIndex(key)
@@ -105,12 +115,6 @@ function useDrawer() {
     drawers.value = []
   }
 
-  return { drawers, drawerRefMap, add, update, destroy, destroyAll }
-}
-
-function useDrawerApis() {
-  const { drawers, drawerRefMap, add, update, destroy, destroyAll } = useDrawer()
-
   const open = (options: DrawerOptions): DrawerRef => {
     const key = add(options)
     const drawerRef = {
@@ -122,7 +126,5 @@ function useDrawerApis() {
     return drawerRef
   }
 
-  const apis = { open, update, destroy, destroyAll }
-
-  return { drawers, apis }
+  return { drawers, setDrawerRef, open, update, destroy, destroyAll }
 }

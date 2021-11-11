@@ -111,8 +111,8 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
 
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
-    isChecked = computed(() => accessor.valueRef.value?.includes(props.value ?? props.trueValue))
-    isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
+    isChecked = computed(() => (accessor.valueRef.value ?? []).includes(props.value ?? props.trueValue))
+    isDisabled = computed(() => accessor.disabled.value)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
@@ -123,17 +123,16 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       const checked = (evt.target as HTMLInputElement).checked
       const checkValue = checked ? props.trueValue : props.falseValue
       const value = props.value
-      const groupCheckedValue = [...accessor.valueRef.value]
-      const checkValueIndex = accessor.valueRef.value.indexOf(value)
+      const groupCheckedValue = [...(accessor.valueRef.value ?? [])]
+      const checkValueIndex = groupCheckedValue.indexOf(value)
       if (checkValueIndex === -1) {
         groupCheckedValue.push(value)
       } else {
         groupCheckedValue.splice(checkValueIndex, 1)
       }
-      callEmit(props.onChange, checkValue)
-
-      callEmit(groupProps.onChange, groupCheckedValue)
       accessor.setValue(groupCheckedValue)
+      callEmit(props.onChange, checkValue)
+      callEmit(groupProps.onChange, groupCheckedValue)
     }
   } else {
     const { accessor, control } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
@@ -150,8 +149,8 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
       const checkValue = checked ? props.trueValue : props.falseValue
-      callEmit(props.onChange, checkValue)
       accessor.setValue(checkValue)
+      callEmit(props.onChange, checkValue)
     }
   }
 

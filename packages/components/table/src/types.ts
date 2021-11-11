@@ -20,18 +20,19 @@ import { VirtualScrollToFn } from '@idux/cdk/scroll'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const tableProps = {
+  expandedRowKeys: IxPropTypes.array<Key>(),
+  selectedRowKeys: IxPropTypes.array<Key>(),
+
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string.def('children'),
   columns: IxPropTypes.array<TableColumn<any>>().def(() => []),
   dataSource: IxPropTypes.array().def(() => []),
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
-  expandedRowKeys: IxPropTypes.array<Key>().def(() => []),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   headless: IxPropTypes.bool,
   pagination: IxPropTypes.object<TablePagination | null>(),
   rowClassName: IxPropTypes.func<(record: unknown, rowIndex: number) => string>(),
   rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
-  selectedRowKeys: IxPropTypes.array<Key>().def(() => []),
   scroll: IxPropTypes.object<TableScroll>(),
   size: IxPropTypes.oneOf<TableSize>(['large', 'medium', 'small']),
   spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<SpinProps>()]),

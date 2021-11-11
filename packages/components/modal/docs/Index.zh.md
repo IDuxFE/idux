@@ -22,7 +22,7 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:visible` | 是否可见 | `boolean` | `false` | - | - |
+| `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `cancelButton` | 取消按钮的属性 | `ButtonProps` | - | - | - |
 | `cancelText` | 取消按钮的文本 | `string` | `取消` | - | - |
 | `centered` | 垂直居中展示 | `boolean` | `false` | ✅ | - |
@@ -82,16 +82,12 @@ export interface ModalButtonProps extends ButtonProps {
 <template>
   <IxButton @click="openModal">Open</IxButton>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+
+<script setup lang="ts">
 import { useModal } from '@idux/components/modal'
-export default defineComponent({
-  setup() {
-    const modal = useModal()
-    const openModal = () => modal.open({ header: 'Basic Modal', content: 'Some contents..' })
-    return { openModal }
-  },
-})
+
+const modal = useModal()
+const openModal = () => modal.open({ header: 'Basic Modal', content: 'Some contents..' })
 </script>
 ```
 
@@ -114,21 +110,21 @@ export interface ModalProviderRef {
   warning: (options: Omit<ModalOptions, 'type'>) => ModalRef
   error: (options: Omit<ModalOptions, 'type'>) => ModalRef
   // 更新指定 key 的对话框的配置信息
-  update: (key: string, options: ModalOptions) => void
+  update: (key: VKey, options: ModalOptions) => void
   // 销毁指定 key 的对话框
-  destroy: (key: string | string[]) => void
+  destroy: (key: VKey | VKey[]) => void
   // 销毁所有对话框
   destroyAll: () => void
 }
 
 export interface ModalOptions extends ModalProps {
-  key?: string
+  key?: VKey
   // 对话框的内容
   content?: string | VNode
   // 当 content 为 VNode 时, 可以传递 props 或者绑定 ref
   contentProps?: Record<string, unknown> | VNodeProps
   // 对话框销毁后的回调
-  onDestroy?: (key: string) => void
+  onDestroy?: (key: VKey) => void
 }
 
 export interface ModalRef extends ModalBindings {
@@ -160,22 +156,16 @@ export const MODAL_TOKEN: InjectionKey<ModalBindings>;
      <router-view></router-view>
   </IxModalProvider>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ModalProviderInstance } from '@idux/components/modal'
 
-export default defineComponent({
-  name: 'App',
-  setup() {
-    const modalProviderRef = ref<ModalProviderInstance>()
-    const router = useRouter()
+const modalProviderRef = ref<ModalProviderInstance>()
+const router = useRouter()
 
-    router.afterEach(() => modalProviderRef.value?.destroyAll())
-
-    return { modalProviderRef }
-  },
-})
+router.afterEach(() => modalProviderRef.value?.destroyAll())
 </script>
 ```
 
@@ -185,6 +175,7 @@ export default defineComponent({
 <template>
   <IxButton @click="openModal">Open</IxButton>
 </template>
+
 <script setup lang="ts">
 import { h, ref } from 'vue'
 import { useModal } from '@idux/components/modal'

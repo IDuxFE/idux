@@ -9,7 +9,7 @@ import type { ObjectDirective } from 'vue'
 
 import { isFunction, isObject } from 'lodash-es'
 
-import { noop, on } from '@idux/cdk/utils'
+import { NoopFunction, on } from '@idux/cdk/utils'
 
 interface ClickOutsideOptions {
   exclude: (HTMLElement | null)[]
@@ -39,7 +39,7 @@ on(document, 'click', event => {
 
 function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   const exclude: HTMLElement[] = [el]
-  let handler: ClickOutsideHandler = noop
+  let handler: ClickOutsideHandler = NoopFunction
   if (isFunction(binding)) {
     handler = binding
   } else if (isObject(binding)) {

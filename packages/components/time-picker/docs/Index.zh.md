@@ -19,6 +19,7 @@ order: 0
  | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
  | ----- | ------ | ------ | ------- | -------- | ----- |
  | `v-model:value` | 当前选择的时间 | `Date` | - | - | - |
+ | `v-model:open` | 下拉面板是否展开 | `Date` | - | - | - |
  | `control` | 控件控制器 | `string\| AbstractControl` | - | - | 当存在 control 时, 控件将由 AbstractControl 完全控制，此时 value 会失效 |
  | `format` | 展示的格式 | `string` | `HH:mm:ss` | - | 1. format的格式参考[dayjs](https://dayjs.gitee.io/docs/zh-CN/display/format) <br>2.如果传入的值有小写的`h`，如`hh:mm:ss`、`hh:mm`，会自动在后面加上a，变成`hh:mm:ss a`和`hh:mm a`，代表开启12小时进制<br>3. 会根据format的内容进行选项的展示，如`HH:mm`则不展示秒的选项 |
  | `placeholder` | 值为空时展示的提示 | `string` | 请选择时间 | - | - |

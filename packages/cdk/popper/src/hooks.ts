@@ -10,7 +10,7 @@ import type { ComputedRef, Ref } from 'vue'
 
 import { computed, reactive, ref, watch } from 'vue'
 
-import { noop } from '@idux/cdk/utils'
+import { NoopFunction, NoopObject } from '@idux/cdk/utils'
 
 export function useElement<T>(): Ref<T | null> {
   const element: Ref<T | null> = ref(null)
@@ -31,7 +31,7 @@ export function useState(options: PopperOptions): Required<PopperOptions> {
     visible = false,
     strategy = 'absolute',
     modifiers = [],
-    onFirstUpdate = noop,
+    onFirstUpdate = NoopFunction,
   } = options
 
   return reactive({
@@ -159,15 +159,13 @@ export function usePopperEvents(
   const onMouseenter = () => show()
   const onMouseleave = () => hide()
 
-  const noop = {}
-
   const eventsMap = {
-    click: noop,
-    focus: noop,
+    click: NoopObject,
+    focus: NoopObject,
     hover: { onMouseenter, onMouseleave },
-    contextmenu: noop,
-    manual: noop,
+    contextmenu: NoopObject,
+    manual: NoopObject,
   }
 
-  return computed(() => (baseOptions.allowEnter ? eventsMap[baseOptions.trigger] : noop))
+  return computed(() => (baseOptions.allowEnter ? eventsMap[baseOptions.trigger] : NoopObject))
 }

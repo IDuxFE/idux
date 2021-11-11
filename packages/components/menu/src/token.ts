@@ -7,12 +7,12 @@
 
 import type { MenuMode, MenuSubProps, MenuTheme } from './types'
 import type { MenuSubConfig } from '@idux/components/config'
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface MenuContext {
-  expandedKeys: Ref<Array<string | number>>
+  expandedKeys: ComputedRef<Array<string | number>>
   handleExpand: (key: string | number, expanded: boolean) => void
-  selectedKeys: Ref<Array<string | number>>
+  selectedKeys: ComputedRef<Array<string | number>>
   handleItemClick: (key: string | number, evt: Event) => void
   indent: ComputedRef<number>
   mode: ComputedRef<MenuMode>

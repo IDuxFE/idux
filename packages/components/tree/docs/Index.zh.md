@@ -16,9 +16,10 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:checkedKeys` | 选中选择框节点的 `key` 数组 | `VKey[]` | `[]` | - | - |
-| `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | `[]` | - | - |
-| `v-model:selectedKeys` | 选中节点的 `key` 数组 | `VKey[]` | `[]` | - | - |
+| `v-model:checkedKeys` | 选中选择框节点的 `key` 数组 | `VKey[]` | - | - | - |
+| `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | - | - | - |
+| `v-model:loadedKeys` | 已经加载完毕的节点的 `key` | `VKey[]` | - | - | - |
+| `v-model:selectedKeys` | 选中节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `blocked` | 节点整行撑开 | `boolean` | `false` | ✅ | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
@@ -31,7 +32,6 @@ order: 0
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
 | `leafLineIcon` | 叶子节点的图标，用于替换默认的连接线 | `string \| #leafLineIcon` | - | - | 仅在 `showLine` 时生效 |
 | `loadChildren` | 加载子节点数据 | `(node: TreeNode) => Promise<TreeNode[]>` | - | - | - |
-| `loadedKeys` | 已经加载完毕的节点的 `key` | `VKey[]` | - | - | - |
 | `nodeKey` | 节点 `key` 的取值 | `string \| (node: TreeNode) => VKey` | `key` | ✅ | -
 | `searchFn` | 搜索函数 | `(node: TreeNode, searchValue?: string) => boolean` | - | - | -
 | `searchValue` | 用于搜索的值 | `string` | - | - | -

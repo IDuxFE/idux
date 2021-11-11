@@ -10,7 +10,8 @@ import type { DropdownConfig } from '@idux/components/config'
 
 import { computed, defineComponent, provide } from 'vue'
 
-import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
+import { useControlledProp } from '@idux/cdk/utils'
+import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { dropdownToken } from './token'
@@ -23,19 +24,14 @@ export default defineComponent({
   props: dropdownProps,
   setup(props, { slots }) {
     const config = useGlobalConfig('dropdown')
-    const configProps = useConfigProps(props, config)
-    const visibility = ɵUseVisibility(props)
-
-    const changeVisible = (visible: boolean) => {
-      visibility.value = visible
-    }
-
-    provide(dropdownToken, { changeVisible })
+    const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
+    const configProps = useConfigProps(props, config, setVisibility)
+    provide(dropdownToken, { setVisibility })
 
     return () => {
       return (
         <ɵOverlay
-          v-model={[visibility.value, 'visible']}
+          visible={visibility.value}
           v-slots={{ default: slots.default, content: slots.overlay }}
           class="ix-dropdown"
           delay={defaultDelay}
@@ -48,7 +44,7 @@ export default defineComponent({
   },
 })
 
-function useConfigProps(props: DropdownProps, config: DropdownConfig) {
+function useConfigProps(props: DropdownProps, config: DropdownConfig, setVisibility: (value: boolean) => void) {
   return computed(() => {
     const trigger = props.trigger ?? config.trigger
     return {
@@ -60,6 +56,7 @@ function useConfigProps(props: DropdownProps, config: DropdownConfig) {
       showArrow: props.showArrow ?? config.showArrow,
       target: props.target ?? config.target,
       trigger: trigger,
+      ['onUpdate:visible']: setVisibility,
     }
   })
 }

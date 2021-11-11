@@ -1,5 +1,5 @@
 <template>
-  <IxTabs selectedKey="tab1" type="segment" mode="primary">
+  <IxTabs v-model:selectedKey="selectedKey" type="segment" mode="primary">
     <IxTab key="tab1">
       <template #title>
         <IxIcon name="file"></IxIcon>
@@ -23,3 +23,9 @@
     </IxTab>
   </IxTabs>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const selectedKey = ref('tab1')
+</script>

@@ -32,7 +32,7 @@ export type BasePanelProps = IxInnerPropTypes<typeof basePanelProps>
 const basePickerProps = {
   ...basePanelProps,
   // v-model
-  open: IxPropTypes.bool.def(false),
+  open: IxPropTypes.bool,
   control: controlPropDef,
 
   autofocus: IxPropTypes.bool,

@@ -21,19 +21,19 @@ export interface DrawerButtonProps extends ButtonProps {
 }
 
 export interface DrawerOptions extends DrawerPublicProps {
-  key?: string
+  key?: VKey
   content?: string | VNode
   contentProps?: Record<string, unknown> | VNodeProps
-  onDestroy?: (key: string) => void
+  onDestroy?: (key: VKey) => void
 }
 export interface DrawerRef extends DrawerBindings {
-  key: string
+  key: VKey
   update: (options: DrawerOptions) => void
   destroy: () => void
 }
 
 export const drawerProps = {
-  visible: IxPropTypes.bool.def(false),
+  visible: IxPropTypes.bool,
   closable: IxPropTypes.bool,
   closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
@@ -57,13 +57,12 @@ export const drawerProps = {
   onAfterClose: IxPropTypes.emit<() => void>(),
 }
 
+export type DrawerProps = IxInnerPropTypes<typeof drawerProps>
+export type DrawerPublicProps = IxPublicPropTypes<typeof drawerProps>
 export interface DrawerBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>
 }
-
-export type DrawerProps = IxInnerPropTypes<typeof drawerProps>
-export type DrawerPublicProps = IxPublicPropTypes<typeof drawerProps>
 export type DrawerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof DrawerPublicProps> & DrawerPublicProps,
   DrawerBindings
@@ -72,8 +71,8 @@ export type DrawerInstance = InstanceType<DefineComponent<DrawerProps, DrawerBin
 
 export interface DrawerProviderRef {
   open: (options: DrawerOptions) => DrawerRef
-  update: (key: string, options: DrawerOptions) => void
-  destroy: (key: string | string[]) => void
+  update: (key: VKey, options: DrawerOptions) => void
+  destroy: (key: VKey | VKey[]) => void
   destroyAll: () => void
 }
 export type DrawerProviderComponent = DefineComponent<HTMLAttributes, DrawerProviderRef>

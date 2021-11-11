@@ -36,10 +36,10 @@ describe('Tooltip', () => {
     expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
     expect(onUpdateVisible).toBeCalledWith(true)
 
+    await wrapper.setProps({ visible: true })
     await wrapper.find('#trigger').trigger('mouseleave')
     await wait(100)
 
-    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(false)
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 

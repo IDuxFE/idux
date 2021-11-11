@@ -15,8 +15,8 @@ export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 
 export const menuProps = {
-  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
-  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])).def(() => []),
+  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])),
+  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])),
   collapsed: IxPropTypes.bool.def(false),
   collapsedWidth: IxPropTypes.oneOfType([String, Number]),
   indent: IxPropTypes.number,

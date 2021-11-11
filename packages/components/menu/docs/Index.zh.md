@@ -22,8 +22,8 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:expandedKeys` | 当前展开的 `IxMenuSub` 的 `key` 数组 | `Array<string \| number>` | `[]` | - | - |
-| `v-model:selectedKeys` | 当前选中的 `IxMenuItem` 的 `key` 数组 | `Array<string \| number>` | `[]` | - | - |
+| `v-model:expandedKeys` | 当前展开的 `IxMenuSub` 的 `key` 数组 | `Array<string \| number>` | - | - | - |
+| `v-model:selectedKeys` | 当前选中的 `IxMenuItem` 的 `key` 数组 | `Array<string \| number>` | - | - | - |
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
 | `collapsedWidth` | 菜单收起时的宽度 | `string \| number` | `64` | ✅ | `horizontal` 模式时无效 |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24` | ✅ | 仅支持 `inline` 模式 |

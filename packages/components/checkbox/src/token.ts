@@ -11,7 +11,7 @@ import type { InjectionKey } from 'vue'
 
 export interface CheckboxGroupContext {
   props: CheckboxGroupProps
-  accessor: FormAccessor
+  accessor: FormAccessor<unknown[] | undefined>
 }
 
 export const checkboxGroupToken: InjectionKey<CheckboxGroupContext> = Symbol('checkboxGroupToken')

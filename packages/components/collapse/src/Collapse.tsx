@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, provide, unref } from 'vue'
+import { computed, defineComponent, provide } from 'vue'
 
+import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useMergedProp } from '@idux/components/utils'
 
 import { collapseToken } from './token'
 import { collapseProps } from './types'
@@ -23,10 +23,10 @@ export default defineComponent({
     const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
     const ghost = computed(() => props.ghost ?? config.ghost)
 
-    const expandedKeys = useMergedProp(props, 'expandedKeys')
+    const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
     const handleExpand = (key: string | number) => {
-      let tempKeys = unref(expandedKeys)
+      let tempKeys = [...expandedKeys.value]
       const index = tempKeys.indexOf(key)
       if (accordion.value) {
         tempKeys = index > -1 ? [] : [key]
@@ -34,7 +34,7 @@ export default defineComponent({
         index > -1 ? tempKeys.splice(index, 1) : tempKeys.push(key)
       }
 
-      expandedKeys.value = [...tempKeys]
+      setExpandedKeys(tempKeys)
     }
 
     provide(collapseToken, { props, slots, expandedKeys, expandIcon, handleExpand })

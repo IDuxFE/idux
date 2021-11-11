@@ -21,7 +21,7 @@ cover:
 
 | 名称 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:checked` | 指定当前勾选框是否选中 |  `boolean \| string \| number`  | `false` | - | - |
+| `v-model:checked` | 指定当前勾选框是否选中 |  `boolean \| string \| number`  | - | - | - |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |.
 | `buttoned` | 是否以按钮显示 | `boolean` | - | - | - |
@@ -49,7 +49,7 @@ cover:
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 指定当前勾选框是否选中 |  `any[]`  | `[]` | - | - |
+| `v-model:value` | 指定当前勾选框是否选中 |  `any[]`  | - | - | - |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `buttoned` | 子`IxCheckbox`的`buttoned`属性 | `boolean` | `false` | - | - |
 | `disabled` | 子`IxCheckbox`的`disabled`属性 | `boolean` | `false` | - |- |

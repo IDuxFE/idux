@@ -31,7 +31,7 @@ export function useSelectedState(
   accessor: FormAccessor,
   mergedOptions: ComputedRef<MergedOption[]>,
   focus: () => void,
-  changeOverlayOpened: (open: boolean) => void,
+  setOverlayOpened: (open: boolean) => void,
   clearInput: () => void,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))
@@ -59,7 +59,7 @@ export function useSelectedState(
     const isSelected = targetIndex > -1
     if (!multiple) {
       !isSelected && setValue([value])
-      changeOverlayOpened(false)
+      setOverlayOpened(false)
     } else {
       if (isSelected) {
         setValue(currValue.filter((_, index) => targetIndex !== index))

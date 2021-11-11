@@ -5,14 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, InjectionKey, Slots, WritableComputedRef } from 'vue'
+import { ComputedRef, InjectionKey, Slots } from 'vue'
 
 import { CollapseProps } from './types'
 
 export interface CollapseContext {
   props: CollapseProps
   slots: Slots
-  expandedKeys: WritableComputedRef<(string | number)[]>
+  expandedKeys: ComputedRef<(string | number)[]>
   expandIcon: ComputedRef<string>
   handleExpand: (key: string | number) => void
 }

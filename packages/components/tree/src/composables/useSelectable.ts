@@ -12,8 +12,7 @@ import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 
 import { computed, ref, watchEffect } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
-import { useMergedProp } from '@idux/components/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
 import { callChange } from '../utils'
 
@@ -25,7 +24,7 @@ export interface SelectableContext {
 }
 
 export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): SelectableContext {
-  const selectedKeys = useMergedProp(props, 'selectedKeys')
+  const [selectedKeys, setSelectedKeys] = useControlledProp(props, 'selectedKeys', () => [])
   const isMultiple = computed(() => props.selectable === 'multiple')
 
   const activeKey = ref<VKey>()
@@ -60,9 +59,9 @@ export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
   }
 
   const handleChange = (selected: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
-    selectedKeys.value = newKeys
     const { onSelect, onSelectedChange } = props
-    callEmit(onSelect, selected, rawNode)
+    callEmit(onSelect, !selected, rawNode)
+    setSelectedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onSelectedChange)
   }
 

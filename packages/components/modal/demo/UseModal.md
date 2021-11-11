@@ -9,7 +9,7 @@ order: 2
 
 使用 `useModal` 可以快速创建不同场景的对话框。
 
-注意：需要在父级组件中使用 `iIxMessageProvider`。
+注意：需要在父级组件中使用 `IxMessageProvider`。
 
 ## en
 

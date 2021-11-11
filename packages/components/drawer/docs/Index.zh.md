@@ -28,7 +28,7 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:visible` | 是否可见 | `boolean` | `false` | - | - |
+| `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon='{onClose}'` | `close` | ✅ | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
@@ -78,16 +78,12 @@ export interface DrawerButtonProps extends ButtonProps {
 <template>
   <IxButton @click="openDrawer">Open</IxButton>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+
+<script setup lang="ts">
 import { useDrawer } from '@idux/components/drawer'
-export default defineComponent({
-  setup() {
-    const drawer = useDrawer()
-    const openDrawer = () => drawer.open({ header: 'Basic Drawer', content: 'Some contents..' })
-    return { openDrawer }
-  },
-})
+
+const drawer = useDrawer()
+const openDrawer = () => drawer.open({ header: 'Basic Drawer', content: 'Some contents..' })
 </script>
 ```
 
@@ -105,26 +101,26 @@ export interface DrawerProviderRef {
   // 打开抽屉
   open: (options: DrawerOptions) => DrawerRef
   // 更新指定 key 的抽屉的配置信息
-  update: (key: string, options: DrawerOptions) => void
+  update: (key: VKey, options: DrawerOptions) => void
   // 销毁指定 key 的抽屉
-  destroy: (key: string | string[]) => void
+  destroy: (key: VKey | VKey[]) => void
   // 销毁所有抽屉
   destroyAll: () => void
 }
 
 export interface DrawerOptions extends DrawerProps {
-  key?: string
+  key?: VKey
   // 抽屉的内容
   content?: string | VNode
   // 当 content 为 VNode 时, 可以传递 props 或者绑定 ref
   contentProps?: Record<string, unknown> | VNodeProps
   // 抽屉销毁后的回调
-  onDestroy?: (key: string) => void
+  onDestroy?: (key: VKey) => void
 }
 
 export interface DrawerRef extends DrawerBindings {
   // 抽屉的唯一标识
-  key: string
+  key: VKey
   // 更新当前配置信息
   update: (options: Partial<DrawerOptions>) => void
   // 销毁当前抽屉
@@ -151,22 +147,16 @@ export const MODAL_TOKEN: InjectionKey<DrawerBindings>;
      <router-view></router-view>
   </IxDrawerProvider>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { DrawerProviderInstance } from '@idux/components/drawer'
 
-export default defineComponent({
-  name: 'App',
-  setup() {
-    const drawerProviderRef = ref<DrawerProviderInstance>()
-    const router = useRouter()
+const drawerProviderRef = ref<DrawerProviderInstance>()
+const router = useRouter()
 
-    router.afterEach(() => drawerProviderRef.value?.destroyAll())
-
-    return { drawerProviderRef }
-  },
-})
+router.afterEach(() => drawerProviderRef.value?.destroyAll())
 </script>
 ```
 
@@ -176,6 +166,7 @@ export default defineComponent({
 <template>
   <IxButton @click="openDrawer">Open</IxButton>
 </template>
+
 <script setup lang="ts">
 import { h, ref } from 'vue'
 import { useDrawer } from '@idux/components/drawer'

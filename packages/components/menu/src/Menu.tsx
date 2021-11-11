@@ -11,10 +11,9 @@ import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, inject, provide, watch } from 'vue'
 
-import { callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
-import { useMergedProp } from '@idux/components/utils'
 
 import { menuToken } from './token'
 import { menuProps } from './types'
@@ -61,16 +60,16 @@ export default defineComponent({
 })
 
 function useExpanded(props: MenuProps) {
-  const expandedKeys = useMergedProp(props, 'expandedKeys')
+  const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
   const handleExpand = (key: string | number, expanded: boolean) => {
     const index = expandedKeys.value.indexOf(key)
     if (expanded) {
-      index === -1 && (expandedKeys.value = [...expandedKeys.value, key])
+      index === -1 && setExpandedKeys([...expandedKeys.value, key])
     } else {
       if (index > -1) {
         expandedKeys.value.splice(index, 1)
-        expandedKeys.value = [...expandedKeys.value]
+        setExpandedKeys([...expandedKeys.value])
       }
     }
   }
@@ -81,9 +80,9 @@ function useExpanded(props: MenuProps) {
     collapsed => {
       if (collapsed) {
         cachedExpandedKeys = [...expandedKeys.value]
-        expandedKeys.value = []
+        setExpandedKeys([])
       } else {
-        expandedKeys.value = cachedExpandedKeys
+        setExpandedKeys(cachedExpandedKeys)
         cachedExpandedKeys = []
       }
     },
@@ -93,11 +92,11 @@ function useExpanded(props: MenuProps) {
 }
 
 function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null) {
-  const selectedKeys = useMergedProp(props, 'selectedKeys')
+  const [selectedKeys, setSelectedKeys] = useControlledProp(props, 'selectedKeys', () => [])
 
   const handleItemClick = (key: string | number, evt: Event) => {
     callEmit(props.onItemClick, key, evt)
-    dropdownContext?.changeVisible?.(false)
+    dropdownContext?.setVisibility?.(false)
     // dropdown 默认为 false, 其他情况默认为 true
     const selectable = props.selectable ?? !dropdownContext
     if (!selectable) {
@@ -108,10 +107,10 @@ function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null
     if (index > -1) {
       if (props.multiple) {
         selectedKeys.value.splice(index, 1)
-        selectedKeys.value = [...selectedKeys.value]
+        setSelectedKeys([...selectedKeys.value])
       }
     } else {
-      selectedKeys.value = props.multiple ? [...selectedKeys.value, key] : [key]
+      setSelectedKeys(props.multiple ? [...selectedKeys.value, key] : [key])
     }
   }
 
