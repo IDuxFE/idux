@@ -34,7 +34,7 @@ export const tableProps = {
   rowClassName: IxPropTypes.func<(record: unknown, rowIndex: number) => string>(),
   rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
   scroll: IxPropTypes.object<TableScroll>(),
-  size: IxPropTypes.oneOf<TableSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<TableSize>(['lg', 'md', 'sm']),
   spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<SpinProps>()]),
   sticky: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TableSticky>()]),
   tableLayout: IxPropTypes.oneOf(['auto', 'fixed'] as const),
@@ -155,7 +155,7 @@ export interface TableScroll {
   y?: string | number
 }
 
-export type TableSize = 'large' | 'medium' | 'small'
+export type TableSize = 'lg' | 'md' | 'sm'
 
 export interface TableTags {
   table?: VNodeTypes

@@ -11,4 +11,4 @@ title:
 
 ## en
 
-There are three sizes in the input box: `large`, `medium`, and `small`, using different sizes by setting `size`, which defaults to `medium`.
+There are three sizes in the input box: `lg`, `md`, and `sm`, using different sizes by setting `size`, which defaults to `md`.

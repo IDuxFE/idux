@@ -86,7 +86,5 @@ function renderHeader(
   const headerSlots = iconNode ? { prefix: () => iconNode } : undefined
   const { header, disabled } = props
   const headerProps = isString(header) ? { title: header } : header
-  return (
-    <IxHeader v-slots={headerSlots} size="medium" disabled={disabled} onClick={handleClick} {...headerProps}></IxHeader>
-  )
+  return <IxHeader v-slots={headerSlots} disabled={disabled} onClick={handleClick} {...headerProps}></IxHeader>
 }

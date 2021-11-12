@@ -6,7 +6,7 @@
   </IxSpace>
   <br />
 
-  <IxAvatar size="large" :gap="gap" :text="text" :style="{ backgroundColor }" />
+  <IxAvatar size="lg" :gap="gap" :text="text" :style="{ backgroundColor }" />
 </template>
 
 <script lang="ts">

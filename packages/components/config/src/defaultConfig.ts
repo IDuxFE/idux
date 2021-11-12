@@ -71,7 +71,7 @@ const divider = shallowReactive<DividerConfig>({
   type: 'horizontal',
 })
 
-const space = shallowReactive<SpaceConfig>({ size: 'small', wrap: true })
+const space = shallowReactive<SpaceConfig>({ size: 'sm', wrap: true })
 
 const row = shallowReactive<RowConfig>({ wrap: true })
 
@@ -107,7 +107,7 @@ const pagination = shallowReactive<PaginationConfig>({
   showTitle: true,
   showTotal: true,
   simple: false,
-  size: 'medium',
+  size: 'md',
 })
 
 // --------------------- Data Entry ---------------------
@@ -185,13 +185,13 @@ const avatar = shallowReactive<AvatarConfig>({
 const badge = shallowReactive<BadgeConfig>({ showZero: false, dot: false, overflowCount: 99 })
 
 const card = shallowReactive<CardConfig>({
-  size: 'medium',
   borderless: false,
   hoverable: false,
+  size: 'md',
 })
 
 const list = shallowReactive<ListConfig>({
-  size: 'medium',
+  size: 'md',
   borderless: true,
 })
 
@@ -217,7 +217,7 @@ const statistic = shallowReactive<StatisticConfig>({
 const table = shallowReactive<TableConfig>({
   borderless: true,
   rowKey: 'key',
-  size: 'medium',
+  size: 'md',
 
   extra: { icon: 'ellipsis' },
   pagination: { position: 'bottomEnd' },
@@ -287,16 +287,16 @@ const spin = shallowReactive<SpinConfig>({
   icon: 'loading',
   tip: '',
   tipAlign: 'vertical',
-  size: 'small',
+  size: 'sm',
 })
 
 const progress = shallowReactive<ProgressConfig>({
-  size: 'medium',
+  size: 'md',
   format: (percent: number) => percent + '%',
 })
 
 const stepper = shallowReactive<StepperConfig>({
-  size: 'medium',
+  size: 'md',
 })
 
 // --------------------- Other ---------------------

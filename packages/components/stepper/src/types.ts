@@ -11,7 +11,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type StepperStatus = 'wait' | 'process' | 'finish' | 'error'
-export type StepperSize = 'medium' | 'small'
+export type StepperSize = 'md' | 'sm'
 
 export const stepperProps = {
   active: IxPropTypes.number.def(0),
@@ -20,7 +20,7 @@ export const stepperProps = {
   placement: IxPropTypes.oneOf(['horizontal', 'vertical'] as const).def('horizontal'),
   percent: IxPropTypes.range(0, 100),
   progressDot: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<StepperSize>(['medium', 'small']).def('medium'),
+  size: IxPropTypes.oneOf<StepperSize>(['md', 'sm']).def('md'),
   status: IxPropTypes.oneOf<StepperStatus>(['wait', 'process', 'finish', 'error']).def('process'),
 
   'onUpdate:active': IxPropTypes.emit<(index: number) => void>(),

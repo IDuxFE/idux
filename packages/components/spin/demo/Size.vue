@@ -4,9 +4,9 @@
       <div class="content">content</div>
     </IxSpin>
     <div class="operation-area">
-      <IxButton mode="primary" @click="size = 'small'">small</IxButton>
-      <IxButton mode="primary" @click="size = 'medium'">medium</IxButton>
-      <IxButton mode="primary" @click="size = 'large'">large</IxButton>
+      <IxButton mode="primary" @click="size = 'sm'">small</IxButton>
+      <IxButton mode="primary" @click="size = 'md'">medium</IxButton>
+      <IxButton mode="primary" @click="size = 'lg'">large</IxButton>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {
     const tip = ref('数据加载中，请等待')
-    const size = ref('small')
+    const size = ref('sm')
 
     return {
       tip,

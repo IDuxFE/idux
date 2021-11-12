@@ -31,7 +31,7 @@ cover:
 | `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | 仅在 `horizontal` 时生效 |
 
 ```typescript
-type SpaceSize = 'small' | 'medium' | 'large' | number
+type SpaceSize = 'sm' | 'md' | 'lg' | number
 ```
 
 #### slots

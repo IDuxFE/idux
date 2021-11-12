@@ -11,7 +11,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type ListSize = 'small' | 'medium' | 'large'
+export type ListSize = 'sm' | 'md' | 'lg'
 export type ListLayout = 'horizontal' | 'vertical'
 export interface ListGridProps extends RowProps {
   column?: number
@@ -30,7 +30,7 @@ export const listProps = {
   borderless: IxPropTypes.bool,
   split: IxPropTypes.bool.def(true),
   loading: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<ListSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<ListSize>(['sm', 'md', 'lg']),
   grid: IxPropTypes.object<ListGridProps>(),
 }
 

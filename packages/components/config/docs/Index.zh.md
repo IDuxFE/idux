@@ -24,7 +24,7 @@ import { createApp } from 'vue'
 import { createGlobalConfig } from '@idux/components/config'
 
 const globalConfig = createGlobalConfig({
-  button: { size: 'large' },
+  button: { size: 'lg' },
 })
 
 createApp(App).use(globalConfig)
@@ -88,7 +88,7 @@ export function useGlobalConfig<T extends GlobalConfigKey>(compName: T, config: 
 
 对于任何一个属性来说，各个来源的值的优先级如下：
 
-1. 组件的某个实例单独设置的值, 例如：`<IxButton size="small" />`
+1. 组件的某个实例单独设置的值, 例如：`<IxButton size="sm" />`
 2. 业务组件通过 `useGlobalConfig` 覆盖的全局配置, 例如代码演示中的示例
 3. 通过 `createGlobalConfig` 设置的全局配置
 4. `@idux` 提供的默认全局配置

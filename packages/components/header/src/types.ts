@@ -11,13 +11,13 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type HeaderSize = 'xLarge' | 'large' | 'medium' | 'small'
+export type HeaderSize = 'xl' | 'lg' | 'md' | 'sm'
 
 export const headerProps = {
   avatar: IxPropTypes.oneOfType([String, IxPropTypes.object<AvatarProps>()]),
   disabled: IxPropTypes.bool.def(false),
   prefix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  size: IxPropTypes.oneOf<HeaderSize>(['xLarge', 'large', 'medium', 'small']).def('large'),
+  size: IxPropTypes.oneOf<HeaderSize>(['xl', 'lg', 'md', 'sm']).def('md'),
   showBar: IxPropTypes.bool.def(false),
   subTitle: IxPropTypes.string,
   suffix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),

@@ -12,7 +12,7 @@ import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type CardSize = 'large' | 'medium' | 'small'
+export type CardSize = 'sm' | 'md' | 'lg'
 export interface CardCover {
   alt: string
   src: string
@@ -32,7 +32,7 @@ export const cardProps = {
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   hoverable: IxPropTypes.bool,
   loading: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<CardSize>(['large', 'medium', 'small']),
+  size: IxPropTypes.oneOf<CardSize>(['sm', 'md', 'lg']),
   footer: IxPropTypes.array<CardButtonProps | VNode>(),
 }
 

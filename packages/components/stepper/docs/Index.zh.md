@@ -28,7 +28,7 @@ single: true
 `placement` | 指定步骤条节点附带的标签放置的位置 | `horizontal \| vertical` | `horizontal` | -| - |
 `percent` | 当前活跃节点的进度 | `number` | 0 | - | 取值是0-100 |
 `progressDot` | 指定步骤条是否为点状步骤条| `boolean \| #progressDot` | `false` | - | 使用slot的话，会传入当前节点对象{index, status} |
-`size` | 指定步骤条节点的大小 | `medium\| small` | `medium` | ✅ | - |
+`size` | 指定步骤条节点的大小 | `md \| sm` | `md` | ✅ | - |
 `status` | 指定步骤条节点的状态 | `wait \| process \| finish \| error` | `process` | - | - |
 
 ### IxStepperItem

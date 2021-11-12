@@ -1,6 +1,6 @@
 <template>
-  <IxHeader showBar size="xLarge"> Title </IxHeader>
+  <IxHeader showBar size="xl"> Title </IxHeader>
+  <IxHeader showBar size="lg"> Title </IxHeader>
   <IxHeader showBar> Title </IxHeader>
-  <IxHeader showBar size="medium"> Title </IxHeader>
-  <IxHeader showBar size="small"> Title </IxHeader>
+  <IxHeader showBar size="sm"> Title </IxHeader>
 </template>

@@ -179,7 +179,7 @@ describe('Stepper', () => {
 
   test('size work', async () => {
     const active = ref(1)
-    const size = ref('small')
+    const size = ref('sm')
     const wrapper = mount({
       components: { IxStepper, IxStepperItem },
       template: `
@@ -194,7 +194,7 @@ describe('Stepper', () => {
       },
     })
 
-    expect(wrapper.findAll('.ix-stepper-small').length).toBe(1)
+    expect(wrapper.findAll('.ix-stepper-sm').length).toBe(1)
   })
 
   test('steps(status) work', async () => {

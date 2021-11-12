@@ -10,7 +10,7 @@ import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type PaginationSize = 'small' | 'medium'
+export type PaginationSize = 'sm' | 'md'
 export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
 export interface PaginationItemRenderOptions {
   index?: number
@@ -33,7 +33,7 @@ export const paginationProps = {
   showTitle: IxPropTypes.bool,
   showTotal: IxPropTypes.bool,
   simple: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<PaginationSize>(['medium', 'small']),
+  size: IxPropTypes.oneOf<PaginationSize>(['sm', 'md']),
   total: IxPropTypes.number.def(0),
   totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 

@@ -270,38 +270,50 @@
 }
 
 .button-round(@buttonPrefix) {
-  .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
-  &.@{buttonPrefix}-small {
+  &.@{buttonPrefix}-sm {
     .button-size(@button-height-sm; @button-font-size-sm; @button-height-sm / 2; @button-height-sm);
   }
-  &.@{buttonPrefix}-large {
+
+  &.@{buttonPrefix}-md {
+    .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
+  }
+
+  &.@{buttonPrefix}-lg {
     .button-size(@button-height-lg; @button-font-size-lg; @button-height-lg / 2; @button-height-lg);
   }
 }
 
 .button-circle(@buttonPrefix) {
-  min-width: @button-height-md;
   padding-right: 0;
   padding-left: 0;
   text-align: center;
   border-radius: 50%;
-  &.@{buttonPrefix}-small {
+
+  &.@{buttonPrefix}-sm {
     min-width: @button-height-sm;
-    border-radius: 50%;
   }
-  &.@{buttonPrefix}-large {
+
+  &.@{buttonPrefix}-md {
+    min-width: @button-height-md;
+  }
+
+  &.@{buttonPrefix}-lg {
     min-width: @button-height-lg;
-    border-radius: 50%;
   }
 }
 
 .button-icon-only(@buttonPrefix;) {
   line-height: 1;
-  font-size: @button-font-size-md + 2;
-  &.@{buttonPrefix}-small {
+
+  &.@{buttonPrefix}-sm {
     font-size: @button-font-size-sm + 2;
   }
-  &.@{buttonPrefix}-large {
+
+  &.@{buttonPrefix}-md {
+    font-size: @button-font-size-md + 2;
+  }
+
+  &.@{buttonPrefix}-lg {
     font-size: @button-font-size-lg + 2;
   }
 }

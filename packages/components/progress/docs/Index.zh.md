@@ -40,7 +40,7 @@ cover:
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `size` | 进度条尺寸，可选`medium` `small` | `string` | `medium` | ✅ | - |
+| `size` | 进度条尺寸 | `'md' \| 'sm'` | `'md'` | ✅ | - |
 | `strokeColor` | 进度条的色彩，传入 object 时为渐变 | `string` \| { from: string; to: string; direction: string } | - | - | - |
 | `strokeWidth` | 进度条线的宽度，单位 px | `number` | 10 | - | - |
 

@@ -25,7 +25,7 @@ order: 0
 | `borderless` | 是否无边框 | `boolean` | true | ✅ | - |
 | `split` | 是否显示分割线 | `boolean` | true | - | - |
 | `loading` | 加载状态 | `boolean \| SpinProps` | false | - | SpinProps请参照 spin 组件 |
-| `size` | 大小 | `string` | medium | ✅ | - |
+| `size` | 大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | ✅ | - |
 | `grid` | grid 布局 | `ListGridProps` | - | - | 结合了IxRow, IxCol 的部分配置 |
 | `grid.gutter` | grid 元素间隔 | `number` | - | - | IxRow 中的 gutter |
 | `grid.column` | gird 布局中每一行元素的个数 | `number` | - | - | 通过Math.floor(24 / column) 计算得到IxCol 中的 span |

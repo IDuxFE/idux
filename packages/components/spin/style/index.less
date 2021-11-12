@@ -39,7 +39,7 @@
       }
     }
 
-    &-small {
+    &-sm {
       .@{spin-prefix}-spinner {
         &-icon,
         &-tip {
@@ -48,7 +48,16 @@
       }
     }
 
-    &-large {
+    &-md {
+      .@{spin-prefix}-spinner {
+        &-icon,
+        &-tip {
+          font-size: @spin-font-size-md;
+        }
+      }
+    }
+
+    &-lg {
       .@{spin-prefix}-spinner {
         &-icon,
         &-tip {
@@ -59,7 +68,6 @@
 
     &-tip {
       color: @spin-tip-color;
-      font-size: @spin-font-size-md;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -67,7 +75,6 @@
 
     &-icon {
       color: @spin-icon-color;
-      font-size: @spin-font-size-md;
     }
   }
 

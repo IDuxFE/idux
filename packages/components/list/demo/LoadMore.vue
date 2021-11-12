@@ -1,12 +1,5 @@
 <template>
-  <IxList
-    header="Header"
-    footer="Footer"
-    :borderless="false"
-    size="large"
-    loadMore="加载更多"
-    @loadMore="handleLoadMore"
-  >
+  <IxList header="Header" footer="Footer" :borderless="false" size="lg" loadMore="加载更多" @loadMore="handleLoadMore">
     <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
   </IxList>
 </template>

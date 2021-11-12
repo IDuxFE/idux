@@ -1,14 +1,14 @@
 <template>
   <h3 style="margin: 16px 0">Large</h3>
-  <IxList header="Header" footer="Footer" :borderless="false" size="large">
+  <IxList header="Header" footer="Footer" :borderless="false" size="lg">
     <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
   </IxList>
   <h3 style="margin: 16px 0">Medium (default)</h3>
-  <IxList header="Header" footer="Footer" :borderless="false" size="medium">
+  <IxList header="Header" footer="Footer" :borderless="false">
     <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
   </IxList>
   <h3 style="margin: 16px 0">Small</h3>
-  <IxList header="Header" footer="Footer" :borderless="false" size="small">
+  <IxList header="Header" footer="Footer" :borderless="false" size="sm">
     <IxList-item v-for="item in listData" :key="item.title" :title="item.title" :content="item.content" />
   </IxList>
 </template>

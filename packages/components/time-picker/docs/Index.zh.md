@@ -31,7 +31,7 @@ order: 0
  | `suffix` | 后缀图标 |`string` | `clock-circle` | ✅ | - |
  | `clearIcon` | 清除按钮图标 |`string` | `close-circle` | ✅ | - |
  | `clearText` | hover到clearIcon上，显示的title |`string` | clear | ✅ | - |
- | `size` | 尺寸大小 | `large\| medium\| small` | `medium` | ✅ | - |
+ | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
  | `v-model:open` | 是否打开picker |`boolean` |`false` | - | - |
  | `disabledHours` | 禁用部分小时选项 | `()=>number[]` | ``() => []`` | - | - |
  | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number)=>number[]` | `() => []` | - | - |

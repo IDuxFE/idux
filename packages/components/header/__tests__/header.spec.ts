@@ -104,21 +104,21 @@ describe('Header', () => {
   })
 
   test('size work', async () => {
-    const wrapper = HeaderMount({ props: { size: 'xLarge', title: 'title' } })
+    const wrapper = HeaderMount({ props: { size: 'xl', title: 'title' } })
 
-    expect(wrapper.classes()).toContain('ix-header-xLarge')
+    expect(wrapper.classes()).toContain('ix-header-xl')
 
     await wrapper.setProps({ size: undefined })
 
-    expect(wrapper.classes()).toContain('ix-header-large')
+    expect(wrapper.classes()).toContain('ix-header-md')
 
-    await wrapper.setProps({ size: 'medium' })
+    await wrapper.setProps({ size: 'lg' })
 
-    expect(wrapper.classes()).toContain('ix-header-medium')
+    expect(wrapper.classes()).toContain('ix-header-lg')
 
-    await wrapper.setProps({ size: 'small' })
+    await wrapper.setProps({ size: 'sm' })
 
-    expect(wrapper.classes()).toContain('ix-header-small')
+    expect(wrapper.classes()).toContain('ix-header-sm')
   })
 
   test('showBar work', async () => {

@@ -7,8 +7,8 @@ order: 1
 
 ## zh
 
-小号的步骤条，通过设置 `<IxStepper size="small">` 启用.
+小号的步骤条，通过设置 `<IxStepper size="sm">` 启用.
 
 ## en
 
-By setting like this: `<IxStepper size="small">`, you can get a mini steps.
+By setting like this: `<IxStepper size="sm">`, you can get a mini steps.

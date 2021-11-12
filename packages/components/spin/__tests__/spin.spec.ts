@@ -22,16 +22,16 @@ describe('Spin', () => {
   test('size work', async () => {
     const wrapper = SpinMount()
 
-    expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-small')
+    expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-sm')
 
-    await wrapper.setProps({ size: 'medium' })
+    await wrapper.setProps({ size: 'md' })
 
-    expect(wrapper.find('.ix-spin-spinner').classes()).not.toContain('ix-spin-spinner-small')
-    expect(wrapper.find('.ix-spin-spinner').classes()).not.toContain('ix-spin-spinner-medium')
+    expect(wrapper.find('.ix-spin-spinner').classes()).not.toContain('ix-spin-spinner-sm')
+    expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-md')
 
-    await wrapper.setProps({ size: 'large' })
+    await wrapper.setProps({ size: 'lg' })
 
-    expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-large')
+    expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-lg')
   })
 
   test('icon work', async () => {
@@ -103,7 +103,7 @@ describe('Spin', () => {
 
     expect(wrapper.find('.ix-spin-spinner').exists()).toBeFalsy()
 
-    expect(wrapper.find('.ix-spin-spinner-small').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-spin-spinner-sm').exists()).toBeFalsy()
   })
 
   test('spinning with tip work', async () => {
