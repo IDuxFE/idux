@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, ref, watchEffect } from 'vue'
+import { computed, defineComponent, inject, ref, watch, watchEffect } from 'vue'
 
 import { IxInput } from '@idux/components/input'
 
@@ -28,6 +28,11 @@ export default defineComponent({
       isLastIndex.value = activeIndex.value === _lastIndex
     })
 
+    const inputValue = ref(activeIndex.value.toString())
+    watch(activeIndex, value => {
+      inputValue.value = value.toString()
+    })
+
     const jumpToIndex = useJumpToIndex(false)
 
     return () => {
@@ -36,9 +41,9 @@ export default defineComponent({
           <Item disabled={isFirstIndex.value} type="prev" />
           <li class="ix-pagination-item">
             <IxInput
+              v-model={[inputValue.value, 'value']}
               disabled={props.disabled}
               size={size.value}
-              value={activeIndex.value.toString()}
               onKeydown={jumpToIndex}
             />
             <span class="ix-pagination-item-slash">/</span>
