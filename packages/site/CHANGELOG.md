@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/IDuxFE/idux/compare/v0.6.0...v0.7.0) (2021-11-12)
+
+
+### Bug Fixes
+
+* **comp:icon:** requests should not be repeated ([#490](https://github.com/IDuxFE/idux/issues/490)) ([8a1b7fb](https://github.com/IDuxFE/idux/commit/8a1b7fb709ff214e89d79aca24d5a64d92a87e13))
+
+
+### Features
+
+* add tabs comp ([#483](https://github.com/IDuxFE/idux/issues/483)) ([6312087](https://github.com/IDuxFE/idux/commit/6312087e7f8dbf1cfe7ac049484602757d6a260b))
+* **comp: all:** all v-model props support controlled ([#509](https://github.com/IDuxFE/idux/issues/509)) ([b30de1c](https://github.com/IDuxFE/idux/commit/b30de1cd706e23b21dd0970e0fd226f2ba4d43f0)), closes [#510](https://github.com/IDuxFE/idux/issues/510)
+
+
+
+
+
 # [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
 
 

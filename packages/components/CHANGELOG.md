@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/IDuxFE/idux/compare/v0.6.0...v0.7.0) (2021-11-12)
+
+
+### Bug Fixes
+
+* **comp:_private/overlay:** warn: Maximum recursive updates exceeded ([#503](https://github.com/IDuxFE/idux/issues/503)) ([17b701c](https://github.com/IDuxFE/idux/commit/17b701cdb7ef810eaf092e88657cb46687b6da8d))
+* **comp:icon:** requests should not be repeated ([#490](https://github.com/IDuxFE/idux/issues/490)) ([8a1b7fb](https://github.com/IDuxFE/idux/commit/8a1b7fb709ff214e89d79aca24d5a64d92a87e13))
+* **comp:input:** support controlled value ([#497](https://github.com/IDuxFE/idux/issues/497)) ([aceb4b7](https://github.com/IDuxFE/idux/commit/aceb4b7dd398fb371cbd80820e4c38c5defb35e0)), closes [#495](https://github.com/IDuxFE/idux/issues/495)
+* **comp:pagination:** controlled input can't change value ([#514](https://github.com/IDuxFE/idux/issues/514)) ([1ca6470](https://github.com/IDuxFE/idux/commit/1ca647004615423f4a4963dff3c8b7606299ce40))
+* **comp:selelct:** sync overlay width when opened ([#513](https://github.com/IDuxFE/idux/issues/513)) ([82a520b](https://github.com/IDuxFE/idux/commit/82a520b5c2095cee495f91b5a3600a814aefda7f)), closes [#488](https://github.com/IDuxFE/idux/issues/488)
+* **comp:textarea:** textarea turns red when invaild ([#494](https://github.com/IDuxFE/idux/issues/494)) ([e338007](https://github.com/IDuxFE/idux/commit/e338007f454cf1ca1aa02d04315e7357acecd168)), closes [#401](https://github.com/IDuxFE/idux/issues/401)
+* **comp:tooltip:** add updatePopper function ([#479](https://github.com/IDuxFE/idux/issues/479)) ([8cd625b](https://github.com/IDuxFE/idux/commit/8cd625baca80b0dc51f6e10be6f8626832831427)), closes [#474](https://github.com/IDuxFE/idux/issues/474)
+
+
+### Features
+
+* add tabs comp ([#483](https://github.com/IDuxFE/idux/issues/483)) ([6312087](https://github.com/IDuxFE/idux/commit/6312087e7f8dbf1cfe7ac049484602757d6a260b))
+* **cdk:a11y:** add focus monitor ([#489](https://github.com/IDuxFE/idux/issues/489)) ([fcb9d8a](https://github.com/IDuxFE/idux/commit/fcb9d8a2eda81a6880a72ca696db203e58a55709))
+* **cdk:scroll:** virtual-scroll props update ([#499](https://github.com/IDuxFE/idux/issues/499)) ([994c039](https://github.com/IDuxFE/idux/commit/994c03983601d5b8a52842a7719ec5e51e949b47))
+* **comp: all:** all v-model props support controlled ([#509](https://github.com/IDuxFE/idux/issues/509)) ([b30de1c](https://github.com/IDuxFE/idux/commit/b30de1cd706e23b21dd0970e0fd226f2ba4d43f0)), closes [#510](https://github.com/IDuxFE/idux/issues/510)
+* **comp: all:** update size ([#511](https://github.com/IDuxFE/idux/issues/511)) ([16ceb1e](https://github.com/IDuxFE/idux/commit/16ceb1e8a0157a5ad0d82765af816f49a80d1f59))
+* **comp:avatar:** update size type ([#506](https://github.com/IDuxFE/idux/issues/506)) ([43720c6](https://github.com/IDuxFE/idux/commit/43720c63dc343d3bf7ccc310a6ad3875e59d1b28)), closes [#466](https://github.com/IDuxFE/idux/issues/466)
+* **comp:form:** formsize supported for the form component ([#498](https://github.com/IDuxFE/idux/issues/498)) ([686dbb6](https://github.com/IDuxFE/idux/commit/686dbb6bf7f508c191a5e0bd691d50e765975b9f))
+
+
+
+
+
 # [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
 
 

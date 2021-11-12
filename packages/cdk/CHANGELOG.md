@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/IDuxFE/idux/compare/v0.6.0...v0.7.0) (2021-11-12)
+
+
+### Bug Fixes
+
+* **comp:input:** support controlled value ([#497](https://github.com/IDuxFE/idux/issues/497)) ([aceb4b7](https://github.com/IDuxFE/idux/commit/aceb4b7dd398fb371cbd80820e4c38c5defb35e0)), closes [#495](https://github.com/IDuxFE/idux/issues/495)
+* **comp:tooltip:** add updatePopper function ([#479](https://github.com/IDuxFE/idux/issues/479)) ([8cd625b](https://github.com/IDuxFE/idux/commit/8cd625baca80b0dc51f6e10be6f8626832831427)), closes [#474](https://github.com/IDuxFE/idux/issues/474)
+
+
+### Features
+
+* add tabs comp ([#483](https://github.com/IDuxFE/idux/issues/483)) ([6312087](https://github.com/IDuxFE/idux/commit/6312087e7f8dbf1cfe7ac049484602757d6a260b))
+* **cdk:a11y:** add focus monitor ([#489](https://github.com/IDuxFE/idux/issues/489)) ([fcb9d8a](https://github.com/IDuxFE/idux/commit/fcb9d8a2eda81a6880a72ca696db203e58a55709))
+* **cdk:scroll:** virtual-scroll props update ([#499](https://github.com/IDuxFE/idux/issues/499)) ([994c039](https://github.com/IDuxFE/idux/commit/994c03983601d5b8a52842a7719ec5e51e949b47))
+* **comp: all:** all v-model props support controlled ([#509](https://github.com/IDuxFE/idux/issues/509)) ([b30de1c](https://github.com/IDuxFE/idux/commit/b30de1cd706e23b21dd0970e0fd226f2ba4d43f0)), closes [#510](https://github.com/IDuxFE/idux/issues/510)
+
+
+
+
+
 # [0.6.0](https://github.com/IDuxFE/idux/compare/v0.5.0...v0.6.0) (2021-10-18)
 
 
