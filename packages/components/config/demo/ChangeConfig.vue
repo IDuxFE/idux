@@ -2,9 +2,9 @@
   <p>Default size of button: {{ config.size }}</p>
   <br />
   <IxSpace>
-    <IxButton @click="changeConfig({ size: 'small' })">Small</IxButton>
-    <IxButton @click="changeConfig({ size: 'medium' })">Medium</IxButton>
-    <IxButton @click="changeConfig({ size: 'large' })">Large</IxButton>
+    <IxButton @click="changeConfig({ size: 'sm' })">Small</IxButton>
+    <IxButton @click="changeConfig({ size: 'md' })">Medium</IxButton>
+    <IxButton @click="changeConfig({ size: 'lg' })">Large</IxButton>
   </IxSpace>
 </template>
 
@@ -15,7 +15,7 @@ import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   setup() {
-    const { config, changeConfig } = useGlobalConfig('button', { size: 'large' })
+    const { config, changeConfig } = useGlobalConfig('button', { size: 'md' })
     return { config, changeConfig }
   },
 })

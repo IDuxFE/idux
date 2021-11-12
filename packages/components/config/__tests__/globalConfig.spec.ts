@@ -14,28 +14,28 @@ const ParentComponent = {
   components: { ChildComponent },
   template: `<ChildComponent />`,
   setup() {
-    const { changeConfig } = useGlobalConfig('button', { size: 'large' })
+    const { changeConfig } = useGlobalConfig('button', { size: 'lg' })
     return { changeConfig }
   },
 }
 
 describe('globalConfig.ts', () => {
   test('createGlobalConfig work', async () => {
-    const config = createGlobalConfig({ button: { size: 'large' } })
+    const config = createGlobalConfig({ button: { size: 'lg' } })
 
     const wrapper = mount(ChildComponent, { global: { plugins: [config] } })
 
-    expect(wrapper.text()).toEqual('large')
+    expect(wrapper.text()).toEqual('lg')
   })
 
   test('useGlobalConfig work', async () => {
     const wrapper = mount(ParentComponent)
 
-    expect(wrapper.text()).toEqual('large')
+    expect(wrapper.text()).toEqual('lg')
 
-    wrapper.vm.changeConfig({ size: 'small' })
+    wrapper.vm.changeConfig({ size: 'sm' })
     await flushPromises()
 
-    expect(wrapper.text()).toEqual('small')
+    expect(wrapper.text()).toEqual('sm')
   })
 })

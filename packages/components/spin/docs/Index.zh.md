@@ -19,7 +19,7 @@ cover:
 
 | 参数 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-|`size` | 控制 icon 和 tip大小 |  `small \| medium \| large`  | `small` | ✅ | - |
+|`size` | 控制 icon 和 tip大小 |  `sm \| md \| lg`  | `sm` | ✅ | - |
 |`spinning` | 是否显示加载遮罩层|`boolean`| `true` | - | - |
 | `icon`| 加载图标名称 | `string` | `loading`| ✅ | - |
 | `tip`| 加载提示文字描述 |  `string`  | `''`| ✅ | - |

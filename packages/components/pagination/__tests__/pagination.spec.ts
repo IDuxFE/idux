@@ -153,13 +153,13 @@ describe.skip('Pagination', () => {
   })
 
   test('size work', async () => {
-    const wrapper = PaginationMount({ props: { total: 50, size: 'small' } })
+    const wrapper = PaginationMount({ props: { total: 50, size: 'sm' } })
 
-    expect(wrapper.find('.ix-pagination-small').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-pagination-sm').exists()).toBeTruthy()
 
     await wrapper.setProps({ size: undefined })
 
-    expect(wrapper.find('.ix-pagination-medium').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-pagination-md').exists()).toBeTruthy()
   })
 
   test('total work', async () => {
@@ -193,7 +193,7 @@ describe.skip('Pagination', () => {
       const { type, original } = options
       if (type === 'prev' || type === 'next') {
         const text = type === 'prev' ? 'Previous' : 'Next'
-        return h(IxButton, { mode: 'text', size: 'small' }, { default: () => text })
+        return h(IxButton, { mode: 'text', size: 'sm' }, { default: () => text })
       }
       return original
     }

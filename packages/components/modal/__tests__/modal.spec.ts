@@ -217,13 +217,13 @@ describe('Modal', () => {
     await wrapper.setProps({ header })
 
     expect(modalWrapper.find('.ix-header').text()).toBe(header)
-    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-large')
+    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-md')
 
-    header = { title: 'This is header2', size: 'medium' }
+    header = { title: 'This is header2', size: 'lg' }
     await wrapper.setProps({ header })
 
     expect(modalWrapper.find('.ix-header').text()).toBe('This is header2')
-    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-medium')
+    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-lg')
   })
 
   test('header slot work', async () => {

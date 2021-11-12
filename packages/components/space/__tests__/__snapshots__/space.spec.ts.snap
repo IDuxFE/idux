@@ -2,9 +2,9 @@
 
 exports[`Space render work 1`] = `
 "<div class=\\"ix-space ix-space-wrap ix-space-baseline ix-space-horizontal\\">
-  <div class=\\"ix-space-item ix-space-item-small\\"> Space </div>
+  <div class=\\"ix-space-item ix-space-item-sm\\"> Space </div>
   <!---->
-  <div class=\\"ix-space-item ix-space-item-small\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>
+  <div class=\\"ix-space-item ix-space-item-sm\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>
   <!---->
   <div class=\\"ix-space-item\\"><button class=\\"ix-button ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>
   <!---->

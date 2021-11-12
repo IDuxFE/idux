@@ -12,9 +12,9 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
-export type SpaceSize = 'small' | 'medium' | 'large' | number
+export type SpaceSize = 'sm' | 'md' | 'lg' | number
 
-const spaceSizeProp = IxPropTypes.oneOf<SpaceSize>(['small', 'medium', 'large'])
+const spaceSizeProp = IxPropTypes.oneOf<SpaceSize>(['sm', 'md', 'lg'])
 
 export const spaceProps = {
   align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']).def('baseline'),

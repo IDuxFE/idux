@@ -49,15 +49,15 @@ describe('List', () => {
   test('size', async () => {
     const wrapper = mount(TestComponent)
 
-    expect(wrapper.findAll('.ix-list-medium').length).toBe(1)
-    expect(wrapper.findAll('.ix-list-small').length).toBe(0)
-    expect(wrapper.findAll('.ix-list-large').length).toBe(0)
+    expect(wrapper.findAll('.ix-list-md').length).toBe(1)
+    expect(wrapper.findAll('.ix-list-sm').length).toBe(0)
+    expect(wrapper.findAll('.ix-list-lg').length).toBe(0)
 
-    await wrapper.setProps({ size: 'large' })
+    await wrapper.setProps({ size: 'lg' })
 
-    expect(wrapper.findAll('.ix-list-medium').length).toBe(0)
-    expect(wrapper.findAll('.ix-list-small').length).toBe(0)
-    expect(wrapper.findAll('.ix-list-large').length).toBe(1)
+    expect(wrapper.findAll('.ix-list-md').length).toBe(0)
+    expect(wrapper.findAll('.ix-list-sm').length).toBe(0)
+    expect(wrapper.findAll('.ix-list-lg').length).toBe(1)
   })
 
   test('header', async () => {

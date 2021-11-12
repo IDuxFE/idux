@@ -7,6 +7,7 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { useGlobalConfig } from '@idux/components/config'
 import { IxCol } from '@idux/components/grid'
 
 import { cardToken } from './token'
@@ -15,19 +16,19 @@ import { cardGridProps } from './types'
 export default defineComponent({
   name: 'IxCardGrid',
   props: cardGridProps,
-  setup(props) {
+  setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-card-grid`)
     const { hoverable } = inject(cardToken)!
 
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-card-grid': true,
-        'ix-card-grid-hoverable': props.hoverable ?? hoverable.value,
+        [prefixCls]: true,
+        [`${prefixCls}-hoverable`]: props.hoverable ?? hoverable.value,
       }
     })
 
-    return { classes }
-  },
-  render() {
-    return <IxCol class={this.classes}>{this.$slots.default?.()}</IxCol>
+    return () => <IxCol class={classes.value}>{slots.default?.()}</IxCol>
   },
 })

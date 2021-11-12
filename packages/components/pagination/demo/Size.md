@@ -7,8 +7,8 @@ order: 3
 
 ## zh
 
-通过设置 `size="small"` 可以使用迷你版本。
+通过设置 `size="sm"` 可以使用迷你版本。
 
 ## en
 
-The mini version can be used by setting `size="small"`.
+The mini version can be used by setting `size="sm"`.

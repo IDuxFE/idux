@@ -30,7 +30,7 @@ single: true
 | `rowClassName` | 表格行的类名 | `(record: T, rowIndex: number) => string` | - | - | - |
 | `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | - | - |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
-| `size` | 表格大小 | `'large' \| 'medium' \| 'small'` | `medium` | ✅ |- |
+| `size` | 表格大小 | `'lg' \| 'md' \| 'sm'` | `md` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
 | `tags` | 覆盖默认的表格元素, 参见[TableTags](#TableTags) | `TableTags` | - | - | - |

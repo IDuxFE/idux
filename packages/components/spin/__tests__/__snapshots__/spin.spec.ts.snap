@@ -2,7 +2,7 @@
 
 exports[`Spin render work 1`] = `
 "<div class=\\"ix-spin\\">
-  <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-small\\">
+  <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-sm\\">
     <div class=\\"ix-spin-spinner-icon\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
     <!---->
   </div>

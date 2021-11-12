@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card render work 1`] = `
-"<div class=\\"ix-card ix-card-medium\\">
+"<div class=\\"ix-card ix-card-md\\">
   <!---->
   <!---->
   <div class=\\"ix-card-body\\">

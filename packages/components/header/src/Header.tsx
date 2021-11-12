@@ -20,10 +20,10 @@ import { IxIcon } from '@idux/components/icon'
 import { headerProps } from './types'
 
 const avatarSizeTransformMap = {
-  xLarge: 'medium',
-  large: 'medium',
-  medium: 'small',
-  small: 'small',
+  xl: 'md',
+  lg: 'md',
+  md: 'sm',
+  sm: 'sm',
 } as const
 
 export default defineComponent({
@@ -93,7 +93,7 @@ const renderTitle = (slot: Slot | undefined, title: string | undefined, wrapperC
 const renderAvatar = (
   slot: Slot | undefined,
   avatar: string | AvatarProps | undefined,
-  size: ComputedRef<'medium' | 'small'>,
+  size: ComputedRef<'md' | 'sm'>,
 ) => {
   if (slot) {
     return slot()

@@ -5,19 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CardButtonProps, CardCover, CardProps, CardSize } from './types'
-import type { CardConfig } from '@idux/components/config'
-import type { HeaderProps } from '@idux/components/header'
-import type { ComputedRef, Slot, Slots, VNode, VNodeTypes } from 'vue'
+import type { CardProps } from './types'
+import type { ComputedRef, Slots, VNode, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, isVNode, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { ɵHeader } from '@idux/components/_private'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxRow } from '@idux/components/grid'
-import { IxHeader } from '@idux/components/header'
+import { IxCol, IxRow } from '@idux/components/grid'
 
 import { cardToken } from './token'
 import { cardProps } from './types'
@@ -26,140 +24,108 @@ export default defineComponent({
   name: 'IxCard',
   props: cardProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-card`)
     const config = useGlobalConfig('card')
     const hoverable = computed(() => props.hoverable ?? config.hoverable)
-    const size$$ = computed(() => props.size ?? config.size)
-    const { hasGrid } = useChildren(slots, hoverable)
-    const classes = useClasses(props, config, hoverable, size$$, hasGrid)
 
-    return { classes, size$$, hasGrid }
-  },
-  render() {
-    const cover = renderCover(this.$slots.cover, this.cover)
-    const header = renderHeader(this.$slots.header, this.header, this.size$$)
-    const body = renderBody(this.$slots.default, this.loading, this.hasGrid)
-    const footer = renderFooter(this.$slots.footer, this.footer)
+    provide(cardToken, { hoverable })
 
-    return (
-      <div class={this.classes}>
-        {cover}
-        {header}
-        {body}
-        {footer}
-      </div>
-    )
+    const children = computed(() => slots.default?.() || [])
+    const hasGrid = computed(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return children.value.some(node => node.type && (node.type as any).name === 'IxCardGrid')
+    })
+
+    const classes = computed(() => {
+      const { borderless = config.borderless, loading, size = config.size } = props
+      const hasGridValue = hasGrid.value
+      const prefixCls = mergedPrefixCls.value
+      return {
+        [prefixCls]: true,
+        [`${prefixCls}-borderless`]: borderless,
+        [`${prefixCls}-hoverable`]: !hasGridValue && hoverable.value,
+        [`${prefixCls}-loading`]: loading,
+        [`${prefixCls}-has-grid`]: hasGridValue,
+        [`${prefixCls}-${size}`]: true,
+      }
+    })
+
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      return (
+        <div class={classes.value}>
+          {renderCover(props, slots, prefixCls)}
+          <ɵHeader v-slots={slots} header={props.header} />
+          {renderBody(props, children, hasGrid, prefixCls)}
+          {renderFooter(props, slots, prefixCls)}
+        </div>
+      )
+    }
   },
 })
 
-const useClasses = (
-  props: CardProps,
-  cardConfig: CardConfig,
-  hoverable: ComputedRef<boolean>,
-  size: ComputedRef<CardSize>,
-  hasGrid: ComputedRef<boolean>,
-) => {
-  return computed(() => {
-    const borderless = props.borderless ?? cardConfig.borderless
-    const hasGridValue = hasGrid.value
-    return {
-      'ix-card': true,
-      'ix-card-borderless': borderless,
-      'ix-card-hoverable': !hasGridValue && hoverable.value,
-      'ix-card-loading': props.loading,
-      'ix-card-has-grid': hasGridValue,
-      [`ix-card-${size.value}`]: true,
-    }
-  })
-}
-
-const useChildren = (slots: Slots, hoverable: ComputedRef<boolean>) => {
-  const hasGrid = computed(() => {
-    const children = slots.default?.() || []
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return children.some(node => node.type && (node.type as any).name === 'IxCardGrid')
-  })
-
-  provide(cardToken, { hoverable })
-
-  return { hasGrid }
-}
-
-const renderCover = (coverSlot: Slot | undefined, cover: string | CardCover | undefined) => {
-  let child: VNodeTypes | undefined
-  if (coverSlot) {
-    child = coverSlot()
-  } else if (cover) {
+const renderCover = (props: CardProps, slots: Slots, prefixCls: string) => {
+  let coverNode: VNodeTypes | undefined
+  if (slots.cover) {
+    coverNode = slots.cover()
+  } else if (props.cover) {
+    const { cover } = props
     const imgProps = isString(cover) ? { src: cover } : cover
-    child = <img {...imgProps} />
+    coverNode = <img {...imgProps} />
   }
-  return child ? <div class="ix-card-cover">{child}</div> : null
+  return coverNode ? <div class={`${prefixCls}-cover`}>{coverNode}</div> : undefined
 }
 
-const renderHeader = (headerSlot: Slot | undefined, header: string | HeaderProps | undefined, size: CardSize) => {
-  if (headerSlot) {
-    return headerSlot()
+const renderBody = (
+  props: CardProps,
+  children: ComputedRef<VNode[]>,
+  hasGrid: ComputedRef<boolean>,
+  prefixCls: string,
+) => {
+  let bodyNode: VNodeTypes | undefined
+  if (props.loading) {
+    bodyNode = renderLoading(prefixCls)
+  } else if (children.value.length) {
+    bodyNode = hasGrid.value ? <IxRow>{children.value}</IxRow> : children.value
   }
-
-  if (!header) {
-    return null
-  }
-
-  const headerProps = isString(header) ? { title: header } : header
-  return <IxHeader size={size} {...headerProps}></IxHeader>
+  return bodyNode ? <div class={`${prefixCls}-body`}>{bodyNode}</div> : undefined
 }
 
-const listOfLoading = [
-  ['ix-col-span-22'],
-  ['ix-col-span-8', 'ix-col-span-15'],
-  ['ix-col-span-6', 'ix-col-span-18'],
-  ['ix-col-span-13', 'ix-col-span-9'],
-  ['ix-col-span-4', 'ix-col-span-3', 'ix-col-span-16'],
-  ['ix-col-span-8', 'ix-col-span-6', 'ix-col-span-8'],
-]
+const loadingSpans = [[22], [8, 15], [6, 18], [13, 9], [4, 3, 16], [8, 6, 8]]
 
-const renderLoading = () => {
-  const loadingChild = listOfLoading.map(items => {
-    const cols = items.map(col => (
-      <div class={`ix-col ${col} ix-card-loading-col`}>
+const renderLoading = (prefixCls: string) => {
+  const loadingChild = loadingSpans.map(spans => {
+    const cols = spans.map(span => (
+      <IxCol span={span} class={`${prefixCls}-loading-col`}>
         <div class="ix-card-loading-block"></div>
-      </div>
+      </IxCol>
     ))
-    return <div class="ix-row">{cols}</div>
+    return <IxRow>{cols}</IxRow>
   })
   return <div class="ix-card-loading">{loadingChild}</div>
 }
 
-const renderBody = (defaultSlot: Slot | undefined, loading: boolean, hasGrid: boolean) => {
-  let child: VNodeTypes | undefined
-  if (loading) {
-    child = renderLoading()
-  } else if (defaultSlot) {
-    child = hasGrid ? <IxRow>{defaultSlot()}</IxRow> : defaultSlot()
-  }
-  return child ? <div class="ix-card-body">{child}</div> : null
-}
-
-const renderFooter = (footerSlot: Slot | undefined, footer: Array<CardButtonProps | VNode> | undefined) => {
-  if (!footerSlot && !footer) {
-    return null
+const renderFooter = (props: CardProps, slots: Slots, prefixCls: string) => {
+  if (!slots.footer && !props.footer) {
+    return undefined
   }
 
-  let child: VNodeTypes
-  if (footerSlot) {
-    child = footerSlot()
+  let footerNode: VNodeTypes
+  if (slots.footer) {
+    footerNode = slots.footer()
   } else {
-    child = footer!.map(item => {
+    footerNode = props.footer!.map(item => {
       let itemChild: VNodeTypes | null
       if (isVNode(item)) {
         itemChild = item
       } else {
-        // The default value for `visible` is true
-        const { text, visible = true, ...rest } = item
-        itemChild = visible ? <IxButton {...rest}>{text}</IxButton> : null
+        const { text, ...rest } = item
+        itemChild = <IxButton {...rest}>{text}</IxButton>
       }
       return itemChild ? <li>{itemChild}</li> : null
     })
   }
 
-  return <ul class="ix-card-footer">{child}</ul>
+  return <ul class={`${prefixCls}-footer`}>{footerNode}</ul>
 }

@@ -54,7 +54,7 @@ export default defineComponent({
         statusClass.value,
         props.hideInfo ? '' : 'ix-progress-show-info',
         props.strokeLinecap === 'round' ? 'ix-progress-round' : '',
-        isSmallSize.value ? 'ix-progress-small' : '',
+        isSmallSize.value ? 'ix-progress-sm' : '',
       ]
     })
     const successStyle = computed(() => ({

@@ -10,7 +10,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type ProgressSize = 'small' | 'medium'
+export type ProgressSize = 'sm' | 'md'
 export type ProgressFormat = (percent: number, successPercent?: number) => string
 export type ProgressType = 'line' | 'circle' | 'dashboard'
 export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
@@ -45,7 +45,7 @@ export const progressProps = {
   gapDegree: IxPropTypes.oneOfType([String, Number]),
   gapPosition: IxPropTypes.oneOf<ProgressGapPositionType>(['top', 'bottom', 'left', 'right']),
   width: IxPropTypes.oneOfType([String, Number]).def(132),
-  size: IxPropTypes.oneOf<ProgressSize>(['small', 'medium']),
+  size: IxPropTypes.oneOf<ProgressSize>(['sm', 'md']),
 }
 
 export type ProgressProps = IxInnerPropTypes<typeof progressProps>

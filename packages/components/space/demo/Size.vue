@@ -6,19 +6,21 @@
   </IxSpace>
   <br />
   <select v-model="size">
-    <option value="small">small</option>
-    <option value="medium">medium</option>
-    <option value="large">large</option>
+    <option value="sm">small</option>
+    <option value="md">medium</option>
+    <option value="lg">large</option>
   </select>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
+import { SpaceSize } from '@idux/components/space'
+
 export default defineComponent({
   name: 'Size',
   setup() {
-    const size = ref('small')
+    const size = ref<SpaceSize>('sm')
     return { size }
   },
 })

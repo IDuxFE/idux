@@ -52,7 +52,7 @@ const useClasses = (props: SpinProps, config: SpinConfig, hasDefaultSlot: Comput
   const spinnerClassName = computed(() => {
     const size = props.size ?? config.size
     const tipAlign = props.tipAlign ?? config.tipAlign
-    return ['ix-spin-spinner', `ix-spin-spinner-tip-${tipAlign}`, size !== 'medium' ? `ix-spin-spinner-${size}` : '']
+    return ['ix-spin-spinner', `ix-spin-spinner-tip-${tipAlign}`, `ix-spin-spinner-${size}`]
   })
 
   const containerClassName = computed(() => {

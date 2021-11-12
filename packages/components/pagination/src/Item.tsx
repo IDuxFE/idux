@@ -82,7 +82,7 @@ export default defineComponent({
       const _itemRender = itemRender.value
       let original: VNodeTypes
       const icon = iconMap[type]
-      const commonButtonProps = { mode: 'text', size: 'small', shape: 'circle' } as const
+      const commonButtonProps = { mode: 'text', size: 'sm', shape: 'circle' } as const
       if (props.type === 'prev5' || type === 'next5') {
         original = (
           <span class="ix-pagination-item-jumper">

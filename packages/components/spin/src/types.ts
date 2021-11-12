@@ -11,14 +11,14 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type SpinTipAlignType = 'horizontal' | 'vertical'
-export type SpinSize = 'large' | 'medium' | 'small'
+export type SpinSize = 'lg' | 'md' | 'sm'
 
 export const spinProps = {
   spinning: IxPropTypes.bool.def(true),
   icon: IxPropTypes.string,
   tip: IxPropTypes.string,
   tipAlign: IxPropTypes.oneOf(['horizontal', 'vertical'] as const),
-  size: IxPropTypes.oneOf(['large', 'medium', 'small'] as const),
+  size: IxPropTypes.oneOf(['lg', 'md', 'sm'] as const),
 }
 
 export type SpinProps = IxInnerPropTypes<typeof spinProps>

@@ -71,6 +71,6 @@ export const useInfo = (
 export function useSmallSize(props: ConvertProgressProps, config: ProgressConfig): ComputedRef<boolean> {
   return computed(() => {
     const size = props.size ?? config.size
-    return size === 'small'
+    return size === 'sm'
   })
 }

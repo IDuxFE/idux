@@ -7,7 +7,7 @@ title:
 
 ## zh
 
-用来控制tip和icon的大小，支持`small | medium | large` 三种选项
+用来控制tip和icon的大小，支持 `sm | md | lg` 三种选项
 
 ## en
 

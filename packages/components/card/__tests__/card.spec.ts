@@ -89,17 +89,17 @@ describe('Card', () => {
   })
 
   test('size work', async () => {
-    const wrapper = CardMount({ props: { size: 'small' } })
+    const wrapper = CardMount({ props: { size: 'sm' } })
 
-    expect(wrapper.classes()).toContain('ix-card-small')
+    expect(wrapper.classes()).toContain('ix-card-sm')
 
-    await wrapper.setProps({ size: 'large' })
+    await wrapper.setProps({ size: 'lg' })
 
-    expect(wrapper.classes()).toContain('ix-card-large')
+    expect(wrapper.classes()).toContain('ix-card-lg')
 
     await wrapper.setProps({ size: undefined })
 
-    expect(wrapper.classes()).toContain('ix-card-medium')
+    expect(wrapper.classes()).toContain('ix-card-md')
   })
 
   test('footer work', async () => {

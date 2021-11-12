@@ -86,7 +86,7 @@ export default defineComponent({
 const useClasses = (props: ListProps, listConfig: ListConfig) => {
   return computed(() => {
     const borderless = props.borderless ?? listConfig.borderless
-    const size = props.size ?? listConfig.size ?? 'medium'
+    const size = props.size ?? listConfig.size
     const split = props.split
     return [
       `ix-list-${size}`,
