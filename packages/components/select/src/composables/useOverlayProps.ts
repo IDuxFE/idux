@@ -9,7 +9,7 @@ import type { SelectProps } from '../types'
 import type { ɵOverlayInstance } from '@idux/components/_private'
 import type { CSSProperties, ComputedRef, Ref } from 'vue'
 
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 
 import { convertCssPixel, offResize, onResize, useControlledProp } from '@idux/cdk/utils'
 
@@ -37,7 +37,12 @@ export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivEleme
   }
 
   onMounted(() => {
-    syncOverlayWidth()
+    watchEffect(() => {
+      if (overlayOpened.value) {
+        syncOverlayWidth()
+      }
+    })
+
     onResize(triggerRef.value!, handleTriggerResize)
   })
 
