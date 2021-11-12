@@ -12,6 +12,7 @@
       width: 100%;
       left: (@stepper-item-dot-head-width / 2 + @stepper-item-dot-width / 2);
       padding: 0 (@stepper-item-dot-width * 2) 0 (@stepper-item-dot-width);
+
       &::after {
         display: inline-block;
         width: 100%;
@@ -27,6 +28,7 @@
     height: auto;
     background: none;
     border: none;
+
     &-dot {
       display: inline-block;
       width: @stepper-item-dot-width;
@@ -55,6 +57,7 @@
     .@{stepper-item-prefix}-process {
       .@{stepper-item-prefix}-head {
         // 激活点的圆圈比一般的大了2个px，向左移动1px是
+
         &-dot {
           left: @stepper-item-dot-active-offset;
         }

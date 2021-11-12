@@ -66,9 +66,12 @@
 
   &-checked {
     .@{radio-prefix} {
+
       &-input {
+
         &-box {
           border-color: @radio-active-color;
+
           &::after {
             transform: scale(1);
             opacity: 1;
@@ -84,6 +87,7 @@
     color: @radio-disabled-color;
 
     .@{radio-prefix}-input {
+
       &-inner {
         cursor: not-allowed;
       }
@@ -91,6 +95,7 @@
       &-box {
         background-color: @radio-disabled-background-color;
         border-color: @radio-disabled-color;
+
         &::after {
           background-color: @radio-disabled-color;
         }
@@ -107,6 +112,7 @@
   transition: @radio-transition;
 
   .@{radio-prefix} {
+
     &-input {
       position: absolute;
       top: 0;
@@ -121,6 +127,7 @@
         pointer-events: none;
       }
     }
+
     &-label {
       padding: 0;
     }
@@ -181,6 +188,7 @@
 
   &-no-gap {
     .@{radio-prefix} {
+
       &:not(&-button):not(:last-child) {
         margin-right: @radio-group-item-margin-right;
       }

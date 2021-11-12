@@ -48,6 +48,7 @@
 
     &:last-child {
       .@{timeline-item-prefix} {
+
         &-line {
           display: none;
         }
@@ -56,6 +57,7 @@
 
     &-pending {
       .@{timeline-item-prefix} {
+
         &-line {
           border-left-style: dotted;
         }
@@ -69,7 +71,9 @@
 
   &-right {
     .@{timeline-item-prefix} {
+
       &-dot {
+
         &-custom {
           left: @timeline-custom-dot-gap;
           transform: translate(-50%, -50%);
@@ -88,6 +92,7 @@
 
   &-left {
     .@{timeline-item-prefix} {
+
       &-dot {
         right: 0;
 
@@ -110,8 +115,10 @@
 
   &-alternate {
     .@{timeline-item-prefix} {
+
       &-left {
         .@{timeline-item-prefix} {
+
           &-content {
             width: calc(50% - @timeline-content-gap);
             text-align: right;
@@ -121,6 +128,7 @@
 
       &-right {
         .@{timeline-item-prefix} {
+
           &-content {
             margin-left: calc(50% + @timeline-content-gap);
             width: 50%;
@@ -146,8 +154,10 @@
 
   &-reverse {
     .@{timeline-item-prefix} {
+
       &-pending {
         .@{timeline-item-prefix} {
+
           &-line {
             top: @timeline-reverse-pending-dot-line-top;
             height: calc(100% - @timeline-reverse-pending-dot-line-top);

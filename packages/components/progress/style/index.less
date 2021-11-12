@@ -5,17 +5,22 @@
 .@{progress-prefix} {
   line-height: 1.5715;
   // line
+
   &-status-normal &-bg {
     background: @progress-normal-bg;
   }
+
   &-status-success &-bg {
     background: @progress-success-bg;
   }
+
   &-status-exception &-bg {
     background: @progress-exception-bg;
   }
+
   &-status-active &-bg {
     background: @progress-active-bg;
+
     &::before {
       position: absolute;
       top: 0;
@@ -28,70 +33,87 @@
       animation: ~'@{progress-prefix}-active' @ease-in-out-quad 2.4s infinite;
     }
   }
+
   &-line {
     display: inline-flex;
     align-items: center;
     width: 100%;
     font-size: @progress-line-font-size-md;
   }
+
   &-sm {
     font-size: @progress-line-font-size-sm;
   }
+
   &-outer {
     flex-basis: 100%;
   }
+
   &-show-info &-outer {
     flex-basis: calc(100% - 36px);
   }
+
   &-inner {
     position: relative;
     display: flex;
     background: @progress-trail-bg;
   }
+
   &-line &-text {
     flex-basis: 36px;
     padding-left: @spacing-xs;
     color: @progress-text-color;
   }
+
   &-round &-inner,
   &-round &-bg,
   &-round &-success-bg {
     border-radius: @progress-border-radius;
   }
+
   &-success-bg {
     position: absolute;
     top: 0;
     left: 0;
     background: @progress-success-bg;
   }
+
   &-bg,
   &-success-bg {
     transition: all 0.4s cubic-bezier(0.08, 0.82, 0.17, 1) 0s;
   }
+
   &-success-icon {
     color: @progress-success-bg;
   }
+
   &-exception-icon {
     color: @progress-exception-bg;
   }
   // circle
+
   &-circle {
     position: relative;
     display: inline-block;
     font-size: @progress-circle-font-size-md;
   }
+
   &-circle-bg {
     stroke: @progress-normal-bg;
   }
+
   &-circle-success {
     stroke: @progress-success-bg;
   }
+
   &-status-success &-circle-path {
     stroke: @progress-success-bg;
   }
+
   &-status-exception &-circle-path {
     stroke: @progress-exception-bg;
   }
+
   &-circle &-text {
     position: absolute;
     top: 50%;
@@ -108,14 +130,17 @@
 }
 
 @keyframes ~'@{progress-prefix}-active' {
+
   0% {
     width: 0;
     opacity: 0.1;
   }
+
   20% {
     width: 0;
     opacity: 0.5;
   }
+
   100% {
     width: 100%;
     opacity: 0;

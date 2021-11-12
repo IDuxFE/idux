@@ -9,6 +9,7 @@
   color: @typography-default-color;
 
   // text
+
   &-secondary {
     color: @typography-color-secondary;
   }
@@ -31,6 +32,7 @@
   }
 
   // tag
+
   mark {
     .typography-mark();
   }
@@ -60,12 +62,14 @@
   }
 
   // paragraph
+
   div&,
   p {
     .typography-paragraph();
   }
 
   // title
+
   h1&,
   h1 {
     .typography-title-1();
@@ -110,6 +114,7 @@
   h3,
   h4,
   h5 {
+
     + h1,
     + h2,
     + h3,
@@ -120,6 +125,7 @@
   }
 
   // list
+
   ul,
   ol {
     margin: @typography-list-margin;

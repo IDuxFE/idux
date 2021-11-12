@@ -6,13 +6,16 @@
   .@{stepper-item-prefix}-head {
     width: @height-sm;
     height: @height-sm;
+
     &-icon,
     &-text {
       line-height: @height-sm;
     }
+
     &-percent {
       width: (@height-sm + @stepper-item-percent-gutter);
       height: (@height-sm + @stepper-item-percent-gutter);
+
       &-left,
       &-right {
         width: ((@height-sm + @stepper-item-percent-gutter) / 2);
@@ -27,6 +30,7 @@
   .@{stepper-item-prefix}-title {
     line-height: @height-sm;
     padding-right: @spacing-sm;
+
     &::after {
       top: (@height-sm / 2);
     }

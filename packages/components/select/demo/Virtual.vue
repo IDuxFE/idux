@@ -29,10 +29,10 @@ const onChange = (value: number[], oldValue: number[]) => {
 }
 
 const onScroll = (evt: Event) => {
-  console.log('scroll:', evt.currentTarget!.scrollTop)
+  console.log('scroll:', evt)
 }
 
-const onScrolledChange = (startIndex: number, endIndex: number, visibleData: any[]) =>
+const onScrolledChange = (startIndex: number, endIndex: number, visibleData: SelectOption[]) =>
   console.log('onScrolledChange', startIndex, endIndex, visibleData)
 
 const onScrolledBottom = () => console.log('onScrolledBottom')

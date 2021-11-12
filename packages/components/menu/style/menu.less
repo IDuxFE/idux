@@ -9,6 +9,7 @@
   }
 
   &-item-group {
+
     &-title {
       height: @menu-item-height;
       line-height: @menu-item-height;
@@ -45,6 +46,7 @@
 
   &:hover {
     color: @menu-highlight-color;
+
     a {
       color: @menu-highlight-color;
     }
@@ -71,6 +73,7 @@
 }
 
 .@{menu-prefix}-sub {
+
   &-title-suffix-icon {
     position: absolute;
     right: @menu-sub-suffix-icon-right;
@@ -102,6 +105,7 @@
   .@{menu-prefix}-item.@{menu-prefix}-item-selected,
   .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-title {
     color: @menu-highlight-color;
+
     a {
       color: @menu-highlight-color;
     }
@@ -112,10 +116,12 @@
     color: @menu-disabled-color;
     background-color: @menu-disabled-bg-color;
     cursor: not-allowed;
+
     &:hover,
     &:active {
       background-color: @menu-disabled-bg-color;
     }
+
     a {
       color: @menu-disabled-color;
       cursor: not-allowed;

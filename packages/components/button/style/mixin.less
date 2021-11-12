@@ -15,11 +15,13 @@
 
 .button-disabled(@color: @button-disable-color; @background: @button-disable-bg-color; @border: @button-disable-border) {
   &.@{button-prefix}-disabled {
+
     &,
     &:hover,
     &:focus,
     &:active {
       .button-color(@color; @background; @border);
+
       text-shadow: none;
       box-shadow: none;
     }
@@ -28,6 +30,7 @@
 
 .button-variant-primary(@color; @background; @border) {
   .button-color(@color; @background; @border);
+
   text-shadow: @button-primary-text-shadow;
   box-shadow: @button-primary-box-shadow;
 
@@ -36,6 +39,7 @@
       .button-color(@color; ~`colorPalette('@{background}', -10) `; @background);
     }
   }
+
   &:focus,
   &:active {
     & when (@theme = default) {
@@ -54,6 +58,7 @@
       .button-color(~`colorPalette('@{button-primary-bg}', -10) `; @background; @button-primary-bg);
     }
   }
+
   &:focus,
   &:active {
     & when (@theme = default) {
@@ -65,6 +70,7 @@
 
 .button-variant-ghost(@color; @border: @color) {
   text-shadow: none;
+
   &:hover {
     & when (@border = transparent) {
       & when (@theme = default) {
@@ -77,6 +83,7 @@
       }
     }
   }
+
   &:focus,
   &:active {
     & when (@border = transparent) {
@@ -96,8 +103,10 @@
   color: @color;
   background: @background;
   border-color: @border;
+
   > a:only-child {
     color: currentColor;
+
     &::after {
       position: absolute;
       top: 0;
@@ -129,9 +138,11 @@
   &:focus {
     outline: 0;
   }
+
   &:hover {
     text-decoration: none;
   }
+
   &:active {
     box-shadow: none;
   }
@@ -139,9 +150,11 @@
   &-sm {
     .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius);
   }
+
   &-md {
     .button-size(@button-height-md; @button-font-size-md; @button-padding-md; @button-border-radius);
   }
+
   &-lg {
     .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius);
   }
@@ -149,6 +162,7 @@
 
 .button-default() {
   .button-variant-other(@button-default-color; @button-default-bg; @button-default-border);
+
   &:hover,
   &:focus,
   &:active {
@@ -163,18 +177,22 @@
 
 .button-dashed() {
   .button-variant-other(@button-default-color, @button-default-bg, @button-default-border);
+
   border-style: dashed;
 }
 
 .button-text() {
   .button-variant-other(@button-text-color, transparent, transparent);
+
   box-shadow: none;
+
   &:hover,
   &:focus {
     color: @button-text-color;
     background: @button-text-hover-bg;
     border-color: transparent;
   }
+
   &:active {
     color: @button-text-color;
     background: fadein(@button-text-hover-bg, 1%);
@@ -185,10 +203,13 @@
 
 .button-link() {
   .button-variant-other(@button-link-color, transparent, transparent);
+
   box-shadow: none;
+
   &:hover {
     background: @button-link-hover-bg;
   }
+
   &:hover,
   &:focus,
   &:active {
@@ -199,11 +220,13 @@
 
 .button-danger() {
   .button-color(@button-danger-color, @button-default-bg, @button-danger-border);
+
   &:hover {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-default-bg; @button-danger-color);
     }
   }
+
   &:focus,
   &:active {
     & when (@theme = default) {
@@ -219,12 +242,15 @@
 
 .button-danger-text() {
   .button-variant-other(@button-danger-color, transparent, transparent);
+
   box-shadow: none;
+
   &:hover {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-text-hover-bg; transparent);
     }
   }
+
   &:focus,
   &:active {
     & when (@theme = default) {
@@ -236,12 +262,15 @@
 
 .button-danger-link() {
   .button-variant-other(@button-danger-color, transparent, transparent);
+
   box-shadow: none;
+
   &:hover {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', -10) `; transparent; transparent);
     }
   }
+
   &:focus,
   &:active {
     & when (@theme = dark) {

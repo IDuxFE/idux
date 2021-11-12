@@ -5,6 +5,7 @@
     display: block;
     flex: none;
     padding-left: 0 !important;
+
     &:not(:last-child) {
       .@{stepper-item-prefix}-tail {
         position: absolute;
@@ -12,6 +13,7 @@
         left: (@height-md / 2);
         height: 100%;
         padding: (@height-md + @spacing-gutter) 0 (@spacing-gutter);
+
         &::after {
           display: inline-block;
           content: '';

@@ -35,6 +35,7 @@
     opacity: 1;
 
     .@{input-prefix}-wrapper {
+
       &:hover {
         border-color: @input-border-color;
       }
@@ -42,6 +43,7 @@
       .@{input-prefix}-suffix,
       .@{input-prefix}-prefix {
         cursor: not-allowed;
+
         &:hover {
           color: @input-disabled-color;
         }
@@ -50,6 +52,7 @@
   }
 
   &-borderless {
+
     &,
     &:hover,
     &-focused,
@@ -116,6 +119,7 @@
       border-bottom-right-radius: 0;
 
       .@{idux-prefix}-select {
+
         &-selector {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -129,6 +133,7 @@
       border-bottom-left-radius: 0;
 
       .@{idux-prefix}-select {
+
         &-selector {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
@@ -137,6 +142,7 @@
     }
 
     .@{idux-prefix}-select {
+
       &-selector {
         background-color: inherit;
         border: @input-border-width @input-border-style transparent;

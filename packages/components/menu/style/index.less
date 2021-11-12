@@ -24,6 +24,7 @@
     }
 
     .@{menu-prefix}-item {
+
       &::after {
         position: absolute;
         top: 0;
@@ -35,7 +36,9 @@
         opacity: 0;
         transition: transform @transition-duration-base @ease-in-out, opacity @transition-duration-base @ease-in-out;
       }
+
       &-selected {
+
         &::after {
           transform: scaleY(1);
           opacity: 1;

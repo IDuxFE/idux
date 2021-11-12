@@ -20,31 +20,37 @@
 .@{image-preview-prefix} {
   cursor: default;
   user-select: none;
+
   &-mask {
     .ix-image-preview-base-position(@image-zindex,0);
 
     background-color: @image-mask-bg;
     height: @image-height;
   }
+
   &-tools {
     .ix-image-preview-base-position(@image-zindex + 1,0);
 
     height: @image-tools-h;
     background: @image-tools-bg;
+
     .ix-preview-tools {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       list-style: none;
       height: @image-height;
+
       .ix-tools-item {
         padding: 0 12px;
         cursor: pointer;
         color: #fff;
+
         &:not(:first-child) {
           margin-left: 12px;
         }
       }
+
       .ix-tools-item-disabled {
         color: rgba(255, 255, 255, 0.25);
         pointer-events: none;
@@ -52,12 +58,14 @@
       }
     }
   }
+
   .ix-image-preview-img {
     .ix-image-preview-base-position(@image-zindex,@image-tools-h);
 
     height: @image-height;
     display: flex;
     justify-content: center;
+
     img {
       height: @image-height;
       object-fit: none;
