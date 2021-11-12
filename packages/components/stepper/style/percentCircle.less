@@ -1,12 +1,15 @@
 .@{stepper-item-prefix} {
+
   &-head {
     // 圆环进度条
+
     &-percent {
       position: absolute;
       width: (@height-md + @stepper-item-percent-gutter);
       height: (@height-md + @stepper-item-percent-gutter);
       left: -(@stepper-item-percent-gutter / 2 + 1);
       top: -(@stepper-item-percent-gutter / 2 + 1);
+
       &-left,
       &-right {
         position: absolute;
@@ -24,6 +27,7 @@
           transform: rotate(45deg);
         }
       }
+
       &-left {
         left: 0;
         .@{stepper-item-prefix}-head-percent-circle {
@@ -32,6 +36,7 @@
           left: 0;
         }
       }
+
       &-right {
         right: 0;
         .@{stepper-item-prefix}-head-percent-circle {

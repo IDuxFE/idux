@@ -1,4 +1,5 @@
 .@{menu-prefix} {
+
   &&-dropdown {
     z-index: @menu-overlay-zindex;
     min-width: @menu-overlay-min-width;
@@ -9,7 +10,9 @@
     &.@{menu-prefix}-vertical,
     &.@{menu-prefix}-inline {
       .@{menu-prefix}-item {
+
         &-selected {
+
           &::after {
             transform: scaleY(0);
             opacity: 0;
@@ -21,6 +24,7 @@
     &.@{menu-prefix}-horizontal {
       .@{menu-prefix}-item,
       .@{menu-prefix}-sub {
+
         &:hover,
         &-expanded,
         &-selected {

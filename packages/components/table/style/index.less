@@ -92,6 +92,7 @@
   }
 
   thead > tr:not(:last-child) > th {
+
     &[colspan] {
       border-bottom: 0;
     }
@@ -111,7 +112,9 @@
   }
 
   tr {
+
     &:hover {
+
       > td {
         background: @table-body-hover-background;
       }
@@ -119,12 +122,15 @@
   }
 
   &-align {
+
     &-start {
       text-align: start;
     }
+
     &-center {
       text-align: center;
     }
+
     &-end {
       text-align: end;
     }
@@ -171,6 +177,7 @@
   }
 
   // --------- Selectable ---------
+
   & &-col-selectable {
     width: 40px;
   }
@@ -186,15 +193,18 @@
   }
 
   & &-row-selected {
+
     & > td {
       background: @color-primary-l50;
     }
+
     &:hover > td {
       background: darken(@color-primary-l50, 2%);
     }
   }
 
   // --------- Sortable ---------
+
   &-cell-sortable {
     cursor: pointer;
     transition: background 0.3s;
