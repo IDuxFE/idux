@@ -13,7 +13,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
 
 export const tooltipProps = {
-  visible: IxPropTypes.bool.def(false),
+  visible: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool,
   delay: ɵOverlayDelayDef,

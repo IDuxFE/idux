@@ -19,19 +19,19 @@ export interface ModalButtonProps extends ButtonProps {
   onClick?: (evt: Event) => void
 }
 export interface ModalOptions extends ModalPublicProps {
-  key?: string
+  key?: VKey
   content?: string | VNode
   contentProps?: Record<string, unknown> | VNodeProps
-  onDestroy?: (key: string) => void
+  onDestroy?: (key: VKey) => void
 }
 export interface ModalRef extends ModalBindings {
-  key: string
+  key: VKey
   update: (options: ModalOptions) => void
   destroy: () => void
 }
 
 export const modalProps = {
-  visible: IxPropTypes.bool.def(false),
+  visible: IxPropTypes.bool,
   cancelButton: IxPropTypes.object<ButtonProps>(),
   cancelText: IxPropTypes.string,
   centered: IxPropTypes.bool,
@@ -63,13 +63,13 @@ export const modalProps = {
 }
 
 export type ModalProps = IxInnerPropTypes<typeof modalProps>
+export type ModalPublicProps = IxPublicPropTypes<typeof modalProps>
 export interface ModalBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>
   cancel: (evt?: Event | unknown) => Promise<void>
   ok: (evt?: Event | unknown) => Promise<void>
 }
-export type ModalPublicProps = IxPublicPropTypes<typeof modalProps>
 export type ModalComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ModalPublicProps> & ModalPublicProps,
   ModalBindings
@@ -83,8 +83,8 @@ export interface ModalProviderRef {
   success: (options: Omit<ModalOptions, 'type'>) => ModalRef
   warning: (options: Omit<ModalOptions, 'type'>) => ModalRef
   error: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  update: (key: string, options: ModalOptions) => void
-  destroy: (key: string | string[]) => void
+  update: (key: VKey, options: ModalOptions) => void
+  destroy: (key: VKey | VKey[]) => void
   destroyAll: () => void
 }
 export type ModalProviderComponent = DefineComponent<HTMLAttributes, ModalProviderRef>

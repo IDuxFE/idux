@@ -29,7 +29,7 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       overlayOpened,
-      changeOverlayOpened,
+      setOverlayOpened,
       activeIndex,
       activeOption,
       changeActive,
@@ -78,7 +78,7 @@ export default defineComponent({
         return
       }
 
-      changeOverlayOpened(!currOpened)
+      setOverlayOpened(!currOpened)
     }
 
     const handleKeyDown = (evt: KeyboardEvent) => {
@@ -97,7 +97,7 @@ export default defineComponent({
           break
         case 'Escape':
           evt.preventDefault()
-          changeOverlayOpened(false)
+          setOverlayOpened(false)
           break
       }
     }

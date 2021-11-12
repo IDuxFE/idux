@@ -48,21 +48,14 @@ export default defineComponent({
     expose({ focus, blur, scrollTo })
 
     const triggerRef = ref<HTMLDivElement>()
-    const { overlayRef, overlayStyle, overlayOpened, changeOverlayOpened } = useOverlayProps(props, triggerRef)
+    const { overlayRef, overlayStyle, overlayOpened, setOverlayOpened } = useOverlayProps(props, triggerRef)
 
     const { accessor, isDisabled } = useAccessor()
     const mergedOptions = useMergedOptions(props, slots, config)
     const inputStateContext = useInputState(props, inputRef, accessor)
     const { inputValue, clearInput } = inputStateContext
     const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
-    const selectedStateContext = useSelectedState(
-      props,
-      accessor,
-      mergedOptions,
-      focus,
-      changeOverlayOpened,
-      clearInput,
-    )
+    const selectedStateContext = useSelectedState(props, accessor, mergedOptions, focus, setOverlayOpened, clearInput)
     const { selectedValue, changeSelected } = selectedStateContext
     const activeStateContext = useActiveState(props, flattedOptions, selectedValue, inputValue, scrollTo)
 
@@ -78,7 +71,7 @@ export default defineComponent({
       virtualScrollRef,
       triggerRef,
       overlayOpened,
-      changeOverlayOpened,
+      setOverlayOpened,
       accessor,
       isDisabled,
       mergedOptions,
@@ -112,10 +105,12 @@ export default defineComponent({
     return () => {
       const renderTrigger = () => <Trigger {...attrs}></Trigger>
       const renderContent = () => <Content></Content>
+      const overlayProps = { 'onUpdate:visible': setOverlayOpened }
       return (
         <ɵOverlay
           ref={overlayRef}
-          v-model={[overlayOpened.value, 'visible']}
+          {...overlayProps}
+          visible={overlayOpened.value}
           v-slots={{ default: renderTrigger, content: renderContent }}
           class={classes.value}
           style={overlayStyle.value}

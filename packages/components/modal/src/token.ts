@@ -15,7 +15,7 @@ export interface ModalContext {
   common: CommonConfig
   config: ModalConfig
   mergedPrefixCls: ComputedRef<string>
-  visible: Ref<boolean>
+  visible: ComputedRef<boolean>
   animatedVisible: Ref<boolean | undefined>
   mergedVisible: ComputedRef<boolean>
   cancelLoading: Ref<boolean>

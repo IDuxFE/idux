@@ -11,9 +11,9 @@ import type { Slots } from 'vue'
 
 import { defineComponent, ref } from 'vue'
 
+import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { useMergedProp } from '@idux/components/utils'
 
 import { tooltipProps } from './types'
 import { useConfigProps } from './useConfigProps'
@@ -26,8 +26,8 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const overlayRef = ref<ɵOverlayInstance | null>(null)
     const config = useGlobalConfig('tooltip')
-    const configProps = useConfigProps(props, config)
-    const visibility = useMergedProp(props, 'visible')
+    const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
+    const configProps = useConfigProps(props, config, setVisibility)
     const updatePopper = () => overlayRef.value?.updatePopper()
 
     expose({ updatePopper })
@@ -35,13 +35,13 @@ export default defineComponent({
     return () => (
       <ɵOverlay
         ref={overlayRef}
-        v-model={[visibility.value, 'visible']}
+        visible={visibility.value}
         v-slots={{ default: slots.default, content: () => renderTitle(props, slots) }}
         class="ix-tooltip"
         transitionName="ix-fade-fast"
         {...configProps.value}
         offset={defaultOffset}
-        showArrow={true}
+        showArrow
       />
     )
   },

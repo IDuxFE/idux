@@ -21,7 +21,7 @@ export default defineComponent({
       inputValue,
       inputWidth,
       overlayOpened,
-      changeOverlayOpened,
+      setOverlayOpened,
       mirrorRef,
       syncMirrorWidth,
       handleCompositionStart,
@@ -35,7 +35,7 @@ export default defineComponent({
       watch(overlayOpened, opened => (opened ? focus() : blur()))
 
       if (props.autofocus) {
-        changeOverlayOpened(true)
+        setOverlayOpened(true)
       }
     })
 

@@ -12,7 +12,7 @@ import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const switchProps = {
-  checked: IxPropTypes.bool.def(false),
+  checked: IxPropTypes.bool,
   control: controlPropDef,
   autofocus: IxPropTypes.bool.def(false),
   disabled: IxPropTypes.bool.def(false),

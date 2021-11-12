@@ -6,13 +6,14 @@
  */
 
 import type { MessageProps } from './types'
+import type { MessageConfig } from '@idux/components/config'
 
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, watchEffect } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
-import { MessageConfig, useGlobalConfig } from '@idux/components/config'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import { messageProps } from './types'
@@ -63,16 +64,12 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
   const destroyOnHover = computed(() => props.destroyOnHover ?? config.destroyOnHover)
   const autoClose = computed(() => duration.value > 0)
 
-  const visible = ref(props.visible)
-  watch(
-    () => props.visible,
-    value => (visible.value = value),
-  )
+  const [visible, setVisible] = useControlledProp(props, 'visible', false)
 
   let timer: number | null = null
 
   const startTimer = () => {
-    timer = setTimeout(() => destroy(), duration.value)
+    timer = setTimeout(() => close(), duration.value)
   }
 
   const clearTimer = () => {
@@ -82,10 +79,10 @@ const useEvents = (props: MessageProps, config: MessageConfig) => {
     }
   }
 
-  const destroy = () => {
+  const close = () => {
     clearTimer()
-    visible.value = false
-    callEmit(props['onUpdate:visible'], false)
+    setVisible(false)
+    callEmit(props.onClose)
   }
 
   const onMouseEnter = () => {

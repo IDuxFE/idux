@@ -19,7 +19,7 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:expandedKeys` | 当前展开面板的 key | `(string \| number)[]` | `[]` | - |- |
+| `v-model:expandedKeys` | 当前展开面板的 key | `(string \| number)[]` | - | - |- |
 | `accordion` | 是否开启手风琴模式 | `boolean` | `false` | ✅ | - |
 | `borderless` | 是否显示边框 | `boolean` | `false` | ✅ |- |
 | `expandIcon` | 自定义展开图标 | `string \| #expandIcon="{key, expanded}"` | `'right'` | ✅ |- |

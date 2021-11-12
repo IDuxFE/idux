@@ -9,7 +9,8 @@ import { computed, defineComponent, inject } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
-import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
+import { useControlledProp } from '@idux/cdk/utils'
+import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
 import { IxInput } from '@idux/components/input'
@@ -23,7 +24,7 @@ export default defineComponent({
   name: 'IxTimePicker',
   props: timePickerProps,
   setup(props, { attrs, expose, slots }) {
-    const visibility = ɵUseVisibility(props, 'open')
+    const [visibility, setVisibility] = useControlledProp(props, 'open', false)
 
     const { inputRef, accessor, isDisabled, handleChange, handleClear, handleBlur, handleFocus, focus, blur } =
       useCommonBindings(props)
@@ -34,7 +35,7 @@ export default defineComponent({
     const formContext = inject(FORM_TOKEN, null)
     const inputProps = useCommonInputProps(props, config, formContext)
     const panelProps = useCommonPanelProps(props)
-    const overlayProps = useCommonOverlayProps(props)
+    const overlayProps = useCommonOverlayProps(props, setVisibility)
 
     const inputValue = computed(() => {
       const value = accessor.valueRef.value
@@ -82,7 +83,7 @@ export default defineComponent({
       return (
         <ɵOverlay
           {...overlayProps.value}
-          v-model={[visibility.value, 'visible']}
+          visible={visibility.value}
           v-slots={{ default: renderInput, content: renderContent }}
           disabled={isDisabled.value || props.readonly}
         />

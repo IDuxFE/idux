@@ -96,21 +96,25 @@ describe('Tree', () => {
     // 0-0, unchecked
     await allNodes[1].find('input').setValue(false)
 
+    expect(onUpdateCheckedKeys).toBeCalledWith([])
+
+    await wrapper.setProps({ checkedKeys: [] })
+
     expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
     expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(false)
 
-    expect(onUpdateCheckedKeys).toBeCalledWith([])
-
     // 0-0, checked
     await allNodes[1].find('input').setValue(true)
+
+    expect(onUpdateCheckedKeys).toBeCalledWith(['0-0', '0', '0-0-0', '0-0-1', '0-0-2'])
+
+    await wrapper.setProps({ checkedKeys: ['0-0', '0', '0-0-0', '0-0-1', '0-0-2'] })
 
     expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
     expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
     expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(true)
     expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(true)
     expect(allNodes[4].find('.ix-checkbox-checked').exists()).toBe(true)
-
-    expect(onUpdateCheckedKeys).toBeCalledWith(['0-0', '0', '0-0-0', '0-0-1', '0-0-2'])
   })
 
   test('v-model:expandedKeys work', async () => {
@@ -131,18 +135,22 @@ describe('Tree', () => {
     // 0-0
     await allNodes[1].find('.ix-tree-node-expand').trigger('click')
 
+    expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
+
+    await wrapper.setProps({ expandedKeys: ['0'] })
+
     expect(allNodes[0].classes()).toContain('ix-tree-node-expanded')
     expect(allNodes[1].classes()).not.toContain('ix-tree-node-expanded')
-
-    expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
 
     // 0-0
     await allNodes[1].find('.ix-tree-node-expand').trigger('click')
 
+    expect(onUpdateExpandedKeys).toBeCalledWith(['0', '0-0'])
+
+    await wrapper.setProps({ expandedKeys: ['0', '0-0'] })
+
     expect(allNodes[0].classes()).toContain('ix-tree-node-expanded')
     expect(allNodes[1].classes()).toContain('ix-tree-node-expanded')
-
-    expect(onUpdateExpandedKeys).toBeCalledWith(['0', '0-0'])
   })
 
   test('v-model:selectedKeys work', async () => {
@@ -163,18 +171,22 @@ describe('Tree', () => {
     // 0-0
     await allNodes[1].find('.ix-tree-node-content').trigger('click')
 
+    expect(onUpdateSelectedKeys).toBeCalledWith([])
+
+    await wrapper.setProps({ selectedKeys: [] })
+
     expect(allNodes[0].classes()).not.toContain('ix-tree-node-selected')
     expect(allNodes[1].classes()).not.toContain('ix-tree-node-selected')
-
-    expect(onUpdateSelectedKeys).toBeCalledWith([])
 
     // 0-0
     await allNodes[1].find('.ix-tree-node-content').trigger('click')
 
+    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0'])
+
+    await wrapper.setProps({ selectedKeys: ['0-0'] })
+
     expect(allNodes[0].classes()).not.toContain('ix-tree-node-selected')
     expect(allNodes[1].classes()).toContain('ix-tree-node-selected')
-
-    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0'])
   })
 
   test('selectable work', async () => {
@@ -195,21 +207,30 @@ describe('Tree', () => {
     await wrapper.setProps({ selectable: true })
     await allNodes[0].find('.ix-tree-node-content').trigger('click')
 
-    expect(allNodes[0].classes()).toContain('ix-tree-node-selected')
     expect(onUpdateSelectedKeys).toBeCalledWith(['0'])
+
+    await wrapper.setProps({ selectedKeys: ['0'] })
+
+    expect(allNodes[0].classes()).toContain('ix-tree-node-selected')
 
     await allNodes[1].find('.ix-tree-node-content').trigger('click')
 
+    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0'])
+
+    await wrapper.setProps({ selectedKeys: ['0-0'] })
+
     expect(allNodes[0].classes()).not.toContain('ix-tree-node-selected')
     expect(allNodes[1].classes()).toContain('ix-tree-node-selected')
-    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0'])
 
     await wrapper.setProps({ selectable: 'multiple' })
     await allNodes[0].find('.ix-tree-node-content').trigger('click')
 
+    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0', '0'])
+
+    await wrapper.setProps({ selectedKeys: ['0-0', '0'] })
+
     expect(allNodes[0].classes()).toContain('ix-tree-node-selected')
     expect(allNodes[1].classes()).toContain('ix-tree-node-selected')
-    expect(onUpdateSelectedKeys).toBeCalledWith(['0-0', '0'])
   })
 
   test('blocked work', async () => {
@@ -382,8 +403,9 @@ describe('Tree', () => {
   })
 
   test('expandIcon slot work', async () => {
+    const onUpdateExpandedKeys = jest.fn()
     const wrapper = TreeMount({
-      props: { expandIcon: 'right' },
+      props: { expandIcon: 'right', 'onUpdate:expandedKeys': onUpdateExpandedKeys },
       slots: {
         expandIcon: ({ expanded }: { expanded: boolean }) => h(IxIcon, { name: expanded ? 'down' : 'up' }),
       },
@@ -394,6 +416,10 @@ describe('Tree', () => {
     expect(allNodes[0].find('.ix-icon-down').exists()).toBe(true)
 
     await allNodes[0].find('.ix-tree-node-expand').trigger('click')
+
+    expect(onUpdateExpandedKeys).toBeCalledWith(['0-0', '0-1'])
+
+    await wrapper.setProps({ expandedKeys: ['0-0', '0-1'] })
 
     expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(true)
     expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-down').exists()).toBe(false)
@@ -462,16 +488,17 @@ describe('Tree', () => {
         }, 50)
       })
     }
-
+    const onUpdateExpandedKeys = jest.fn()
     const wrapper = TreeMount({
       props: {
         dataSource: [
           { key: '0', label: '0' },
           { key: '1', label: '1', isLeaf: true },
         ],
-        expandedKeys: [],
-        checkedKeys: [],
-        selectedKeys: [],
+        expandedKeys: undefined,
+        checkedKeys: undefined,
+        selectedKeys: undefined,
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
         loadChildren,
       },
     })
@@ -513,9 +540,9 @@ describe('Tree', () => {
           { key: '0', label: '0' },
           { key: '1', label: '1', isLeaf: true },
         ],
-        expandedKeys: [],
-        checkedKeys: [],
-        selectedKeys: [],
+        expandedKeys: undefined,
+        checkedKeys: undefined,
+        selectedKeys: undefined,
         loadChildren,
         loadedKeys: ['0'],
       },

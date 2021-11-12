@@ -14,9 +14,10 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const treeProps = {
-  checkedKeys: IxPropTypes.array<VKey>().def(() => []),
-  expandedKeys: IxPropTypes.array<VKey>().def(() => []),
-  selectedKeys: IxPropTypes.array<VKey>().def(() => []),
+  checkedKeys: IxPropTypes.array<VKey>(),
+  expandedKeys: IxPropTypes.array<VKey>(),
+  loadedKeys: IxPropTypes.array<VKey>(),
+  selectedKeys: IxPropTypes.array<VKey>(),
 
   blocked: IxPropTypes.bool,
   checkable: IxPropTypes.bool.def(false),
@@ -30,7 +31,7 @@ export const treeProps = {
   height: IxPropTypes.number,
   leafLineIcon: IxPropTypes.string,
   loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),
-  loadedKeys: IxPropTypes.array<VKey>().def(() => []),
+
   nodeKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(node: TreeNode) => VKey>()]),
   searchFn: IxPropTypes.func<(node: TreeNode, searchValue?: string) => boolean>(),
   searchValue: IxPropTypes.string,
@@ -41,6 +42,7 @@ export const treeProps = {
   // events
   'onUpdate:checkedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
   'onUpdate:expandedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
+  'onUpdate:loadedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
   'onUpdate:selectedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
   onCheck: IxPropTypes.emit<(checked: boolean, node: TreeNode) => void>(),
   onCheckedChange: IxPropTypes.emit<(checkedKeys: VKey[], checkedNodes: TreeNode[]) => void>(),

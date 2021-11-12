@@ -6,16 +6,15 @@
  */
 
 import type { ModalProps } from './types'
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, onBeforeUnmount, provide, ref, watchEffect } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
-import { callEmit, isPromise } from '@idux/cdk/utils'
+import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { useMergedProp } from '@idux/components/utils'
 
 import ModalWrapper from './ModalWrapper'
 import { MODAL_TOKEN, modalToken } from './token'
@@ -31,8 +30,8 @@ export default defineComponent({
     const config = useGlobalConfig('modal')
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
-    const { visible, animatedVisible, mergedVisible } = useVisible(props, mask)
-    const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, visible)
+    const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props, mask)
+    const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, setVisible)
 
     provide(modalToken, {
       props,
@@ -72,7 +71,8 @@ export default defineComponent({
 })
 
 function useVisible(props: ModalProps, mask: ComputedRef<boolean>) {
-  const visible = useMergedProp(props, 'visible')
+  const [visible, setVisible] = useControlledProp(props, 'visible', false)
+
   const animatedVisible = ref<boolean>()
 
   const mergedVisible = computed(() => {
@@ -101,18 +101,18 @@ function useVisible(props: ModalProps, mask: ComputedRef<boolean>) {
 
   onBeforeUnmount(() => scrollStrategy?.disable())
 
-  return { visible, animatedVisible, mergedVisible }
+  return { visible, setVisible, animatedVisible, mergedVisible }
 }
 
-function useTrigger(props: ModalProps, visible: Ref<boolean>) {
-  const open = () => (visible.value = true)
+function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
+  const open = () => setVisible(true)
 
   const close = async (evt?: Event | unknown) => {
     const result = await callEmit(props.onClose, evt)
     if (result === false) {
       return
     }
-    visible.value = false
+    setVisible(false)
   }
 
   const cancelLoading = ref(false)
@@ -126,7 +126,7 @@ function useTrigger(props: ModalProps, visible: Ref<boolean>) {
     if (result === false) {
       return
     }
-    visible.value = false
+    setVisible(false)
   }
 
   const okLoading = ref(false)
@@ -140,7 +140,7 @@ function useTrigger(props: ModalProps, visible: Ref<boolean>) {
     if (result === false) {
       return
     }
-    visible.value = false
+    setVisible(false)
   }
 
   return { cancelLoading, okLoading, open, close, cancel, ok }

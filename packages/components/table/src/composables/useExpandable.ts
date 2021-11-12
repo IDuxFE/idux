@@ -7,35 +7,32 @@
 
 import type { Key, TableProps } from '../types'
 import type { TableColumnMerged, TableColumnMergedExpandable } from './useColumns'
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
 export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnMerged[]>): ExpandableContext {
   const expandable = computed(() =>
     flattedColumns.value.find(column => 'type' in column && column.type === 'expandable'),
   ) as ComputedRef<TableColumnMergedExpandable | undefined>
 
-  const expandedRowKeys = ref(props.expandedRowKeys)
-  watch(
-    () => props.expandedRowKeys,
-    value => (expandedRowKeys.value = value),
-  )
+  const [expandedRowKeys, setExpandedRowKeys] = useControlledProp(props, 'expandedRowKeys', () => [])
 
   const handleExpandChange = (key: Key, record: unknown) => {
     const { onChange, onExpand } = expandable.value || {}
-    const index = expandedRowKeys.value.indexOf(key)
+    const tempKeys = [...expandedRowKeys.value]
+    const index = tempKeys.indexOf(key)
     const expanded = index >= 0
     if (expanded) {
-      expandedRowKeys.value.splice(index, 1)
+      tempKeys.splice(index, 1)
     } else {
-      expandedRowKeys.value.push(key)
+      tempKeys.push(key)
     }
-    callEmit(onExpand, expanded, record)
-    callEmit(onChange, expandedRowKeys.value)
-    callEmit(props['onUpdate:expandedRowKeys'], expandedRowKeys.value)
+    callEmit(onExpand, !expanded, record)
+    setExpandedRowKeys(tempKeys)
+    callEmit(onChange, tempKeys)
   }
 
   return { expandable, expandedRowKeys, handleExpandChange }
@@ -43,6 +40,6 @@ export function useExpandable(props: TableProps, flattedColumns: ComputedRef<Tab
 
 export interface ExpandableContext {
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>
-  expandedRowKeys: Ref<Key[]>
+  expandedRowKeys: ComputedRef<Key[]>
   handleExpandChange: (key: Key, record: unknown) => void
 }

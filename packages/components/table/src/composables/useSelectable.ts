@@ -9,13 +9,13 @@ import type { Key, TableColumnSelectableOption, TableProps } from '../types'
 import type { TableColumnMerged, TableColumnMergedSelectable } from './useColumns'
 import type { DataSourceContext, MergedData } from './useDataSource'
 import type { TableLocale } from '@idux/components/i18n'
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 
-import { computed, ref, unref, watch } from 'vue'
+import { computed } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
 export function useSelectable(
   props: TableProps,
@@ -27,11 +27,7 @@ export function useSelectable(
     flattedColumns.value.find(column => 'type' in column && column.type === 'selectable'),
   ) as ComputedRef<TableColumnMergedSelectable | undefined>
 
-  const selectedRowKeys = ref(props.selectedRowKeys)
-  watch(
-    () => props.selectedRowKeys,
-    value => (selectedRowKeys.value = value),
-  )
+  const [selectedRowKeys, setSelectedRowKeys] = useControlledProp(props, 'selectedRowKeys', () => [])
 
   const currentPageRowKeys = computed(() => {
     const { disabled } = selectable.value || {}
@@ -99,7 +95,7 @@ export function useSelectable(
   const currentPageSomeSelected = computed(() => !currentPageAllSelected.value && countCurrentPageSelected.value > 0)
 
   const emitChange = (tempRowKeys: Key[]) => {
-    selectedRowKeys.value = tempRowKeys
+    setSelectedRowKeys(tempRowKeys)
     const dataMap = mergedMap.value
     const { onChange } = selectable.value || {}
     if (onChange) {
@@ -110,14 +106,13 @@ export function useSelectable(
       })
       callEmit(onChange, tempRowKeys, selectedRecords)
     }
-    callEmit(props['onUpdate:selectedRowKeys'], tempRowKeys)
   }
 
   const handleSelectChange = (key: Key, record: unknown) => {
     const dataMap = mergedMap.value
     const { disabledRowKeys } = currentPageRowKeys.value
     const { multiple, onSelect } = selectable.value || {}
-    let tempRowKeys = unref(selectedRowKeys)
+    let tempRowKeys = [...selectedRowKeys.value]
     const index = tempRowKeys.indexOf(key)
     const selected = index >= 0
 
@@ -134,19 +129,16 @@ export function useSelectable(
         tempRowKeys.push(...childrenKeys)
       }
     } else {
-      tempRowKeys.length = 0
-      if (!selected) {
-        tempRowKeys.push(key)
-      }
+      tempRowKeys = selected ? [] : [key]
     }
 
+    callEmit(onSelect, !selected, record)
     emitChange(tempRowKeys)
-    callEmit(onSelect, selected, record)
   }
 
   const handleHeadSelectChange = () => {
     const { enabledRowKeys } = currentPageRowKeys.value
-    const tempRowKeySet = new Set(unref(selectedRowKeys))
+    const tempRowKeySet = new Set(selectedRowKeys.value)
     if (currentPageAllSelected.value) {
       enabledRowKeys.forEach(key => tempRowKeySet.delete(key))
     } else {
@@ -163,13 +155,13 @@ export function useSelectable(
         tempRowKeys.push(key)
       }
     })
-    emitChange(tempRowKeys)
     callEmit(onSelectAll, tempRowKeys)
+    emitChange(tempRowKeys)
   }
 
   const handleSelectInvert = () => {
     const { disabled, onSelectInvert } = selectable.value || {}
-    const tempRowKeys = unref(selectedRowKeys)
+    const tempRowKeys = [...selectedRowKeys.value]
 
     mergedMap.value.forEach((currData, key) => {
       if (disabled?.(currData.record)) {
@@ -188,8 +180,8 @@ export function useSelectable(
 
   const handleSelectNone = () => {
     const { onSelectNone } = selectable.value || {}
-    emitChange([])
     callEmit(onSelectNone)
+    emitChange([])
   }
 
   const handleSelectPageInvert = () => {
@@ -202,8 +194,8 @@ export function useSelectable(
       }
       tempRowKeys.push(key)
     })
-    emitChange(tempRowKeys)
     callEmit(onSelectPageInvert, tempRowKeys)
+    emitChange(tempRowKeys)
   }
 
   const handleSelectOptionClick = (callback?: (pageRowKeys: Key[]) => void) => {
@@ -260,7 +252,7 @@ export function useSelectable(
 
 export interface SelectableContext {
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>
-  selectedRowKeys: Ref<Key[]>
+  selectedRowKeys: ComputedRef<Key[]>
   indeterminateRowKeys: ComputedRef<Key[]>
   currentPageRowKeys: ComputedRef<{
     enabledRowKeys: Key[]

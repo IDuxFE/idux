@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -13,18 +13,18 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
 export interface MessageOptions extends MessagePublicProps {
-  key?: string
+  key?: VKey
   content?: string | VNode
-  onDestroy?: () => void
+  onDestroy?: (key: VKey) => void
 }
 export interface MessageRef {
-  key: string
+  key: VKey
   update: (options: MessageOptions) => void
   destroy: () => void
 }
 
 export const messageProps = {
-  visible: IxPropTypes.bool.def(false),
+  visible: IxPropTypes.bool,
   destroyOnHover: IxPropTypes.bool,
   duration: IxPropTypes.number,
   icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
@@ -32,6 +32,7 @@ export const messageProps = {
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
+  onClose: IxPropTypes.emit<(evt?: Event) => void>(),
 }
 
 export type MessageProps = IxInnerPropTypes<typeof messageProps>

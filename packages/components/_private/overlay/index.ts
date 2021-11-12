@@ -17,6 +17,5 @@ export {
   overlayTriggerDef as ɵOverlayTriggerDef,
   overlayDelayDef as ɵOverlayDelayDef,
 } from './src/types'
-export { useVisibility as ɵUseVisibility } from './src/useVisibility'
 
 export type { OverlayInstance as ɵOverlayInstance, OverlayPublicProps as ɵOverlayProps } from './src/types'

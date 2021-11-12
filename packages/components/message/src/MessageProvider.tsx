@@ -5,7 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, TransitionGroup, VNode, computed, defineComponent, provide, ref } from 'vue'
+import type { MessageOptions, MessageRef } from './types'
+import type { VKey } from '@idux/cdk/utils'
+import type { ComputedRef, VNode } from 'vue'
+
+import { TransitionGroup, computed, defineComponent, provide, ref } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
@@ -13,7 +17,7 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import Message from './Message'
 import { messageProviderToken } from './token'
-import { MessageOptions, MessageRef, messageProviderProps } from './types'
+import { messageProviderProps } from './types'
 
 export default defineComponent({
   name: 'IxMessageProvider',
@@ -23,18 +27,22 @@ export default defineComponent({
     const config = useGlobalConfig('message')
     const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
-    const { messages, loadContainer, apis } = useMessageApis(maxCount)
+    const { messages, loadContainer, open, info, success, warning, error, loading, update, destroy, destroyAll } =
+      useMessage(maxCount)
+
+    const apis = { open, info, success, warning, error, loading, update, destroy, destroyAll }
 
     provide(messageProviderToken, apis)
     expose(apis)
 
     return () => {
       const child = messages.value.map(item => {
-        // The default value for `visible` is true
-        const { key, content, visible = true, onDestroy, ...rest } = item
-        const update = { 'onUpdate:visible': (visible: boolean) => !visible && apis.destroy(key!) }
+        // The default value for `visible` is true, onDestroy should not be passed in Message
+        const { key, content, visible = true, onDestroy, ...restProps } = item
+        const onClose = () => destroy(key!)
+        const mergedProps = { key, visible, onClose }
         return (
-          <Message key={key} {...rest} {...update} visible={visible}>
+          <Message {...mergedProps} {...restProps}>
             {content}
           </Message>
         )
@@ -57,7 +65,7 @@ export default defineComponent({
 const useMessage = (maxCount: ComputedRef<number>) => {
   const messages = ref<MessageOptions[]>([])
 
-  const getCurrIndex = (key: string) => {
+  const getCurrIndex = (key: VKey) => {
     return messages.value.findIndex(message => message.key === key)
   }
 
@@ -77,7 +85,7 @@ const useMessage = (maxCount: ComputedRef<number>) => {
     return key
   }
 
-  const update = (key: string, item: MessageOptions) => {
+  const update = (key: VKey, item: MessageOptions) => {
     const currIndex = getCurrIndex(key)
     if (currIndex !== -1) {
       const newItem = { ...messages.value[currIndex], ...item }
@@ -85,13 +93,13 @@ const useMessage = (maxCount: ComputedRef<number>) => {
     }
   }
 
-  const destroy = (key: string | string[]) => {
+  const destroy = (key: VKey | VKey[]) => {
     const keys = convertArray(key)
     keys.forEach(key => {
       const currIndex = getCurrIndex(key)
       if (currIndex !== -1) {
         const item = messages.value.splice(currIndex, 1)
-        callEmit(item[0].onDestroy)
+        callEmit(item[0].onDestroy, key)
       }
     })
   }
@@ -100,11 +108,6 @@ const useMessage = (maxCount: ComputedRef<number>) => {
     messages.value = []
   }
 
-  return { messages, add, update, destroy, destroyAll }
-}
-
-const useMessageApis = (maxCount: ComputedRef<number>) => {
-  const { messages, add, update, destroy, destroyAll } = useMessage(maxCount)
   const loadContainer = ref(false)
 
   const open = (options: MessageOptions): MessageRef => {
@@ -126,7 +129,5 @@ const useMessageApis = (maxCount: ComputedRef<number>) => {
       open({ ...options, content, type })
   })
 
-  const apis = { open, info, success, warning, error, loading, update, destroy, destroyAll }
-
-  return { messages, loadContainer, apis }
+  return { messages, loadContainer, open, info, success, warning, error, loading, update, destroy, destroyAll }
 }

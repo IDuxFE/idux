@@ -1,36 +1,38 @@
 <template>
-  <IxModalProvider ref="modalProviderRef">
-    <IxMessageProvider>
-      <div class="root-wrapper">
-        <LayoutHeader></LayoutHeader>
-        <div v-if="page !== 'home'" class="main-wrapper">
-          <IxRow>
-            <IxCol xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
-              <IxAffix>
-                <LayoutSider></LayoutSider>
-              </IxAffix>
-            </IxCol>
-            <IxCol xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
-              <router-view></router-view>
-            </IxCol>
-            <IxCol
-              xs="24"
-              :sm="{ span: 17, offset: 7 }"
-              :md="{ span: 18, offset: 6 }"
-              :lg="{ span: 19, offset: 5 }"
-              :xl="{ span: 20, offset: 4 }"
-            >
-              <LayoutFooter></LayoutFooter>
-            </IxCol>
-          </IxRow>
+  <IxDrawerProvider ref="drawerProviderRef">
+    <IxModalProvider ref="modalProviderRef">
+      <IxMessageProvider>
+        <div class="root-wrapper">
+          <LayoutHeader></LayoutHeader>
+          <div v-if="page !== 'home'" class="main-wrapper">
+            <IxRow>
+              <IxCol xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
+                <IxAffix>
+                  <LayoutSider></LayoutSider>
+                </IxAffix>
+              </IxCol>
+              <IxCol xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
+                <router-view></router-view>
+              </IxCol>
+              <IxCol
+                xs="24"
+                :sm="{ span: 17, offset: 7 }"
+                :md="{ span: 18, offset: 6 }"
+                :lg="{ span: 19, offset: 5 }"
+                :xl="{ span: 20, offset: 4 }"
+              >
+                <LayoutFooter></LayoutFooter>
+              </IxCol>
+            </IxRow>
+          </div>
+          <template v-else>
+            <router-view></router-view>
+            <LayoutFooter></LayoutFooter>
+          </template>
         </div>
-        <template v-else>
-          <router-view></router-view>
-          <LayoutFooter></LayoutFooter>
-        </template>
-      </div>
-    </IxMessageProvider>
-  </IxModalProvider>
+      </IxMessageProvider>
+    </IxModalProvider>
+  </IxDrawerProvider>
 </template>
 
 <script lang="ts">
@@ -39,6 +41,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useScreens } from '@idux/cdk/breakpoint'
+import { DrawerProviderInstance } from '@idux/components/drawer'
 import { ModalProviderInstance } from '@idux/components/modal'
 
 import { AppContext, appContextToken } from './context'
@@ -46,9 +49,14 @@ import { AppContext, appContextToken } from './context'
 export default defineComponent({
   name: 'App',
   setup() {
+    const drawerProviderRef = ref<DrawerProviderInstance>()
     const modalProviderRef = ref<ModalProviderInstance>()
+
     const router = useRouter()
-    router.afterEach(() => modalProviderRef.value?.destroyAll())
+    router.afterEach(() => {
+      drawerProviderRef.value?.destroyAll()
+      modalProviderRef.value?.destroyAll()
+    })
 
     const route = useRoute()
     const path = computed(() => route.path)

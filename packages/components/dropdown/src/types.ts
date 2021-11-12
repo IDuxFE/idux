@@ -14,7 +14,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
 
 export const dropdownProps = {
-  visible: IxPropTypes.bool.def(false),
+  visible: IxPropTypes.bool,
   autoAdjust: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool.def(false),

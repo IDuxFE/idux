@@ -148,8 +148,6 @@ export function throttleRAF<T extends (...args: any[]) => void>(
   return requestCb
 }
 
-export const noop = (): void => {}
-
 function isStyleVisible(element: HTMLElement | SVGElement) {
   const { display, visibility, opacity } = getComputedStyle(element)
 

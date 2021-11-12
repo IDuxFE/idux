@@ -1,7 +1,7 @@
 <template>
   <IxSpace>
-    <IxSwitch checked size="sm"></IxSwitch>
-    <IxSwitch checked></IxSwitch>
+    <IxSwitch size="sm"></IxSwitch>
+    <IxSwitch></IxSwitch>
     <IxSwitch size="lg"></IxSwitch>
   </IxSpace>
 </template>

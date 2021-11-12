@@ -49,12 +49,11 @@ describe('Collapse', () => {
 
       await wrapper.findAll('.ix-header')[0].trigger('click')
 
-      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
       expect(onUpdateExpandedKeys).toBeCalledWith([1])
 
+      await wrapper.setProps({ expandedKeys: [1] })
       await wrapper.findAll('.ix-header')[0].trigger('click')
 
-      expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(2)
       expect(onUpdateExpandedKeys).toBeCalledWith([1, 0])
     })
 
@@ -72,6 +71,7 @@ describe('Collapse', () => {
 
       expect(wrapper.findAll('.ix-collapse-panel-expanded').length).toBe(1)
       expect(onUpdateExpandedKeys).toBeCalledWith([1])
+      await wrapper.setProps({ expandedKeys: [1] })
 
       await wrapper.findAll('.ix-header')[0].trigger('click')
 

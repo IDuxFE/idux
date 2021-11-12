@@ -7,30 +7,24 @@
 
 import type { SelectProps } from '../types'
 import type { ɵOverlayInstance } from '@idux/components/_private'
-import type { CSSProperties, ComputedRef, Ref, WritableComputedRef } from 'vue'
+import type { CSSProperties, ComputedRef, Ref } from 'vue'
 
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { convertCssPixel, offResize, onResize } from '@idux/cdk/utils'
-import { useMergedProp } from '@idux/components/utils'
+import { convertCssPixel, offResize, onResize, useControlledProp } from '@idux/cdk/utils'
 
 export interface OverlayPropsContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties>
-  overlayOpened: WritableComputedRef<boolean>
-  changeOverlayOpened: (open: boolean) => void
+  overlayOpened: ComputedRef<boolean>
+  setOverlayOpened: (open: boolean) => void
 }
 
 export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivElement | undefined>): OverlayPropsContext {
   const overlayRef = ref<ɵOverlayInstance>()
   const overlayWidth = ref<string>()
   const overlayStyle = computed(() => ({ width: overlayWidth.value }))
-  const overlayOpened = useMergedProp(props, 'open')
-  const changeOverlayOpened = (open: boolean) => {
-    if (overlayOpened.value !== open) {
-      overlayOpened.value = open
-    }
-  }
+  const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
 
   const syncOverlayWidth = () => {
     overlayWidth.value = convertCssPixel(triggerRef.value?.getBoundingClientRect().width)
@@ -51,5 +45,5 @@ export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivEleme
     offResize(triggerRef.value!, handleTriggerResize)
   })
 
-  return { overlayRef, overlayStyle, overlayOpened, changeOverlayOpened }
+  return { overlayRef, overlayStyle, overlayOpened, setOverlayOpened }
 }

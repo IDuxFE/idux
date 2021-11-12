@@ -10,11 +10,11 @@
 import type { AbstractControl, ControlPathType } from './controls'
 import type { InjectionKey, Ref, WatchStopHandle } from 'vue'
 
-import { getCurrentInstance, inject, shallowReactive, shallowRef, toRef, watch } from 'vue'
+import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRef, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { IxPropTypes, Logger } from '@idux/cdk/utils'
+import { IxPropTypes, Logger, callEmit } from '@idux/cdk/utils'
 
 import { isAbstractControl } from './typeof'
 
@@ -78,22 +78,39 @@ export function useValueAccessor<T = any>(
   options: FormAccessorOptions = {},
 ): { control: Ref<AbstractControl<T> | undefined>; accessor: FormAccessor<T> } {
   const { controlKey, valueKey = 'value', disabledKey = 'disabled' } = options
-  const { props, emit } = getCurrentInstance()!
+  const { props } = getCurrentInstance()!
   const control = useValueControl(controlKey)
 
   const accessor = shallowReactive({}) as FormAccessor<T>
+  let stopWatcher: WatchStopHandle | undefined
+
   watch(
     control,
     currControl => {
+      if (stopWatcher) {
+        stopWatcher()
+        stopWatcher = undefined
+      }
+
       if (currControl) {
         accessor.valueRef = currControl.valueRef
         accessor.disabled = currControl.disabled
         accessor.setValue = value => currControl.setValue(value, { dirty: true })
         accessor.markAsBlurred = () => currControl.markAsBlurred()
       } else {
-        accessor.valueRef = toRef(props, valueKey) as Ref<T>
+        const tempRef = ref(props[valueKey])
+        stopWatcher = watch(
+          () => props[valueKey],
+          value => (tempRef.value = value),
+        )
+        accessor.valueRef = computed(() => props[valueKey] ?? tempRef.value)
         accessor.disabled = toRef(props, disabledKey) as Ref<boolean>
-        accessor.setValue = value => emit(`update:${valueKey}`, value)
+        accessor.setValue = value => {
+          if (value != accessor.valueRef.value) {
+            tempRef.value = value
+            callEmit(props[`onUpdate:${valueKey}`], value)
+          }
+        }
         accessor.markAsBlurred = () => {}
       }
     },

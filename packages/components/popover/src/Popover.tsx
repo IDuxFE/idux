@@ -10,7 +10,8 @@ import type { Slots, VNode } from 'vue'
 
 import { defineComponent } from 'vue'
 
-import { ɵOverlay, ɵUseVisibility } from '@idux/components/_private'
+import { useControlledProp } from '@idux/cdk/utils'
+import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵUseConfigProps } from '@idux/components/tooltip'
 
@@ -23,12 +24,12 @@ export default defineComponent({
   props: popoverProps,
   setup(props, { slots }) {
     const config = useGlobalConfig('popover')
-    const configProps = ɵUseConfigProps(props, config)
-    const visibility = ɵUseVisibility(props)
+    const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
+    const configProps = ɵUseConfigProps(props, config, setVisibility)
 
     return () => (
       <ɵOverlay
-        v-model={[visibility.value, 'visible']}
+        visible={visibility.value}
         v-slots={{ default: slots.default, content: () => renderContent(props, slots) }}
         class="ix-popover"
         transitionName="ix-fade"

@@ -116,17 +116,17 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
-      callEmit(props.onChange, checked)
       if (checked) {
         const value = props.value
-        callEmit(groupProps.onChange, value)
         accessor.setValue(value)
+        callEmit(props.onChange, checked)
+        callEmit(groupProps.onChange, value)
       }
     }
   } else {
     const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
     useFormItemRegister(control)
-    isChecked = computed(() => accessor.valueRef.value)
+    isChecked = computed(() => !!accessor.valueRef.value)
     isDisabled = computed(() => accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
@@ -135,8 +135,8 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
     }
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
-      callEmit(props.onChange, checked)
       accessor.setValue(checked)
+      callEmit(props.onChange, checked)
     }
   }
 

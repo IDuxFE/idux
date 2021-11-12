@@ -26,10 +26,9 @@ import {
 
 import { throttle } from 'lodash-es'
 
-import { addClass, callEmit, flattenNode, offResize, onResize, removeClass } from '@idux/cdk/utils'
+import { addClass, callEmit, flattenNode, offResize, onResize, removeClass, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { useMergedProp } from '@idux/components/utils'
 
 import TabNav from './TabNav'
 import { tabsToken } from './tokens'
@@ -45,7 +44,7 @@ export default defineComponent({
     const navWrapperElRef = ref<HTMLElement | null>(null)
     const navElRef = ref<HTMLElement | null>(null)
     const navBarElRef = ref<HTMLElement | null>(null)
-    const selectedKey = useMergedProp(props, 'selectedKey')
+    const [selectedKey, setSelectedKey] = useControlledProp(props, 'selectedKey')
     const isLineType = computed(() => props.type === 'line')
     const isSegmentType = computed(() => props.type === 'segment')
     const hasScroll = ref(false)
@@ -124,7 +123,7 @@ export default defineComponent({
 
     const handleTabClick = (key: string | number, evt: Event) => {
       callEmit(props.onTabClick, key, evt)
-      selectedKey.value = key
+      setSelectedKey(key)
       updateNavOffset()
       updateNavBarStyle()
     }

@@ -14,6 +14,7 @@ import { computed } from 'vue'
 export function useConfigProps(
   props: TooltipProps,
   config: TooltipConfig,
+  setVisibility: (visible: boolean) => void,
 ): ComputedRef<TooltipConfig & { clickOutside: boolean }> {
   return computed(() => {
     const trigger = props.trigger ?? config.trigger
@@ -25,6 +26,7 @@ export function useConfigProps(
       placement: props.placement ?? config.placement,
       target: props.target ?? config.target,
       trigger: trigger,
+      ['onUpdate:visible']: setVisibility,
     }
   })
 }

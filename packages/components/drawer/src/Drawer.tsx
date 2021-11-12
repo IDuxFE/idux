@@ -12,10 +12,9 @@ import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide,
 
 import { CdkPortal, useTarget } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { useMergedProp } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
@@ -32,8 +31,8 @@ export default defineComponent({
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-    const { visible, animatedVisible, mergedVisible } = useVisible(props, mask)
-    const { open, close } = useTrigger(props, visible)
+    const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props, mask)
+    const { open, close } = useTrigger(props, setVisible)
     const { level, levelAction, push, pull } = useLevel(visible)
 
     provide(drawerToken, {
@@ -76,7 +75,7 @@ export default defineComponent({
 })
 
 function useVisible(props: DrawerProps, mask: ComputedRef<boolean>) {
-  const visible = useMergedProp(props, 'visible')
+  const [visible, setVisible] = useControlledProp(props, 'visible', false)
   const animatedVisible = ref<boolean>()
 
   const mergedVisible = computed(() => {
@@ -112,18 +111,18 @@ function useVisible(props: DrawerProps, mask: ComputedRef<boolean>) {
 
   onBeforeUnmount(() => scrollStrategy?.disable())
 
-  return { visible, animatedVisible, mergedVisible }
+  return { visible, setVisible, animatedVisible, mergedVisible }
 }
 
-function useTrigger(props: DrawerProps, visible: Ref<boolean>) {
-  const open = () => (visible.value = true)
+function useTrigger(props: DrawerProps, setVisible: (visible: boolean) => void) {
+  const open = () => setVisible(true)
 
   const close = async (evt?: Event | unknown) => {
     const result = await callEmit(props.onClose, evt)
     if (result === false) {
       return
     }
-    visible.value = false
+    setVisible(false)
   }
 
   return { open, close }

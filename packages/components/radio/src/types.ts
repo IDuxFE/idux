@@ -18,9 +18,10 @@ export type RadioMode = 'default' | 'primary'
 export type RadioOption = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>
 
 export const radioProps = {
+  checked: IxPropTypes.bool,
+
   autofocus: IxPropTypes.bool.def(false),
   buttoned: IxPropTypes.bool,
-  checked: IxPropTypes.bool.def(false),
   control: controlPropDef,
   disabled: IxPropTypes.bool,
   label: IxPropTypes.string,

@@ -34,7 +34,7 @@ describe('Drawer', () => {
     attachTo: 'body',
   })
 
-  test('visible work', async () => {
+  test('v-model:visible work', async () => {
     const onUpdateVisible = jest.fn()
     const wrapper = DrawerMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     expect(isElementVisible(document.querySelector('.ix-drawer-wrapper'))).toBe(false)
@@ -47,7 +47,6 @@ describe('Drawer', () => {
 
     await drawerWrapper.find('.ix-icon-close').trigger('click')
 
-    expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 
@@ -99,7 +98,8 @@ describe('Drawer', () => {
   })
 
   test('closeOnEsc work', async () => {
-    const wrapper = DrawerMount({ props: { closeOnEsc: false } })
+    const onUpdateVisible = jest.fn()
+    const wrapper = DrawerMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     await drawerWrapper.find('.ix-drawer-wrapper').trigger('keydown', { code: 'Escape' })
@@ -110,7 +110,7 @@ describe('Drawer', () => {
 
     await drawerWrapper.find('.ix-drawer-wrapper').trigger('keydown', { code: 'Escape' })
 
-    expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test('destroyOnHide work', async () => {
@@ -219,7 +219,8 @@ describe('Drawer', () => {
   })
 
   test('maskClosable work', async () => {
-    const wrapper = DrawerMount({ props: { maskClosable: false } })
+    const onUpdateVisible = jest.fn()
+    const wrapper = DrawerMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     await drawerWrapper.find('.ix-drawer-wrapper').trigger('click')
@@ -229,7 +230,7 @@ describe('Drawer', () => {
     await wrapper.setProps({ maskClosable: true })
     await drawerWrapper.find('.ix-drawer-wrapper').trigger('click')
 
-    expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
+    expect(onUpdateVisible).toBeCalledWith(false)
   })
 
   test('offset work', async () => {
@@ -312,50 +313,50 @@ describe('Drawer', () => {
   describe('Events', () => {
     test('onClose work', async () => {
       const onClose = jest.fn()
-      const wrapper = DrawerMount({ props: { onClose } })
-      const drawerWrapper = wrapper.getComponent(DrawerWrapper)
+      const onUpdateVisible = jest.fn()
+      const wrapper = DrawerMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close()
       await flushPromises()
 
       expect(onClose).toBeCalled()
-      expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
+      expect(onUpdateVisible).toBeCalledWith(false)
     })
 
     test('onClose with result work', async () => {
       const onClose = jest.fn().mockImplementation((evt: unknown) => evt === 'close')
-      const wrapper = DrawerMount({ props: { onClose } })
-      const drawerWrapper = wrapper.getComponent(DrawerWrapper)
+      const onUpdateVisible = jest.fn()
+      const wrapper = DrawerMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()
 
       expect(onClose).toBeCalledWith(1)
-      expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(true)
+      expect(onUpdateVisible).not.toBeCalled()
 
       wrapper.vm.close('close')
       await flushPromises()
 
       expect(onClose).toBeCalledWith('close')
-      expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
+      expect(onUpdateVisible).toBeCalledWith(false)
     })
 
     test('onClose with promise work', async () => {
       const onClose = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
-      const wrapper = DrawerMount({ props: { onClose } })
-      const drawerWrapper = wrapper.getComponent(DrawerWrapper)
+      const onUpdateVisible = jest.fn()
+      const wrapper = DrawerMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()
 
       expect(onClose).toBeCalledWith(1)
-      expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(true)
+      expect(onUpdateVisible).not.toBeCalled()
 
       wrapper.vm.close('close')
       await flushPromises()
 
       expect(onClose).toBeCalledWith('close')
-      expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(false)
+      expect(onUpdateVisible).toBeCalledWith(false)
     })
   })
 })

@@ -12,7 +12,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const collapseProps = {
-  expandedKeys: IxPropTypes.array<string | number>().def(() => []),
+  expandedKeys: IxPropTypes.array<string | number>(),
   accordion: IxPropTypes.bool,
   borderless: IxPropTypes.bool,
   expandIcon: IxPropTypes.string,

@@ -40,7 +40,7 @@ const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 export const selectProps = {
   value: IxPropTypes.any,
   control: controlPropDef,
-  open: IxPropTypes.bool.def(false),
+  open: IxPropTypes.bool,
 
   allowInput: IxPropTypes.bool.def(false),
   autofocus: IxPropTypes.bool.def(false),
@@ -56,10 +56,6 @@ export const selectProps = {
   labelKey: IxPropTypes.string,
   options: IxPropTypes.array<SelectOption>(),
   overlayClassName: IxPropTypes.string,
-  // private
-  overlayHeight: IxPropTypes.number.def(256),
-  // private
-  overlayItemHeight: IxPropTypes.number.def(32),
   overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
   placeholder: IxPropTypes.string,
   readonly: IxPropTypes.bool.def(false),
@@ -84,10 +80,14 @@ export const selectProps = {
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
   onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleOptions: SelectOption[]) => void>(),
   onScrolledBottom: IxPropTypes.emit<() => void>(),
+
+  // private
+  overlayHeight: IxPropTypes.number.def(256),
+  overlayItemHeight: IxPropTypes.number.def(32),
 }
 
 export type SelectProps = IxInnerPropTypes<typeof selectProps>
-export type SelectPublicProps = IxPublicPropTypes<typeof selectProps>
+export type SelectPublicProps = Omit<IxPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
