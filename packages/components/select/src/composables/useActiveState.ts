@@ -12,7 +12,7 @@ import type { MergedOption } from './useOptions'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 
 export interface ActiveStateContext {
   activeIndex: Ref<number>
@@ -30,19 +30,21 @@ export function useActiveState(
 ): ActiveStateContext {
   const activeIndex = ref(0)
 
-  watchEffect(() => {
-    const { compareWith, allowInput } = props
-    const options = flattedOptions.value
-    let currIndex: number
-    if (allowInput && inputValue.value) {
-      const searchValue = inputValue.value
-      currIndex = options.findIndex(option => option.value === searchValue)
-    } else {
-      const currValue = selectedValue.value
-      currIndex = options.findIndex(option => currValue.some(value => compareWith(option.value, value)))
-    }
-    currIndex = currIndex === -1 ? 0 : currIndex
-    activeIndex.value = getEnabledActiveIndex(options, currIndex, 1)
+  onMounted(() => {
+    watchEffect(() => {
+      const { compareWith, allowInput } = props
+      const options = flattedOptions.value
+      let currIndex: number
+      if (allowInput && inputValue.value) {
+        const searchValue = inputValue.value
+        currIndex = options.findIndex(option => option.value === searchValue)
+      } else {
+        const currValue = selectedValue.value
+        currIndex = options.findIndex(option => currValue.some(value => compareWith(option.value, value)))
+      }
+      currIndex = currIndex === -1 ? 0 : currIndex
+      activeIndex.value = getEnabledActiveIndex(options, currIndex, 1)
+    })
   })
 
   const activeOption = computed(() => flattedOptions.value[activeIndex.value])

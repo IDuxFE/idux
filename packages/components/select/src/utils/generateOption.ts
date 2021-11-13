@@ -7,7 +7,7 @@
 
 import type { MergedOption } from '../composables/useOptions'
 
-const keyPrefix = '__IDUX_SELECT_GENERATE_INPUT_OPTION_KEY_'
+const keyPrefix = '__IDUX_SELECT_GENERATE_OPTION_KEY_'
 
 export function generateOption(value: string): MergedOption {
   const rawOption = { label: value, value }

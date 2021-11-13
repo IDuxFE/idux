@@ -10,7 +10,6 @@ import Select from '../src/Select'
 import Content from '../src/content/Content'
 import Option from '../src/content/Option'
 import { SelectOption as SelectOptionComponent, SelectOptionGroup as SelectOptionGroupComponent } from '../src/option'
-// import Trigger from '../src/trigger/Trigger'
 import { SelectOption, SelectProps } from '../src/types'
 
 describe('Select', () => {
@@ -75,12 +74,12 @@ describe('Select', () => {
       expect(wrapper.findComponent(Content).isVisible()).toBe(false)
 
       // TODO fix
-      // await wrapper.findComponent(Trigger).trigger('click')
+      // await wrapper.find('.ix-select').trigger('click')
 
       // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
       // expect(onUpdateOpen).toBeCalledWith(true)
 
-      // await wrapper.findComponent(Trigger).trigger('click')
+      // await wrapper.find('.ix-select').trigger('click')
 
       // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
       // expect(onUpdateOpen).toBeCalledWith(false)
@@ -182,7 +181,7 @@ describe('Select', () => {
 
       expect(wrapper.find('.ix-select-disabled').exists()).toBe(true)
 
-      // await wrapper.findComponent(Trigger).trigger('click')
+      // await wrapper.find('.ix-select').trigger('click')
 
       // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
 
@@ -190,7 +189,7 @@ describe('Select', () => {
 
       expect(wrapper.find('.ix-select-disabled').exists()).toBe(false)
 
-      // await wrapper.findComponent(Trigger).trigger('click')
+      // await wrapper.find('.ix-select').trigger('click')
 
       // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
     })

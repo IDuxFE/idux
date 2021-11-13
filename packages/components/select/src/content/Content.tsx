@@ -25,12 +25,15 @@ export default defineComponent({
     onMounted(() => scrollToActivated())
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleOptions: MergedOption[]) => {
-      callEmit(
-        props.onScrolledChange,
-        startIndex,
-        endIndex,
-        visibleOptions.map(item => item.rawOption),
-      )
+      const { onScrolledChange } = props
+      if (onScrolledChange) {
+        callEmit(
+          onScrolledChange,
+          startIndex,
+          endIndex,
+          visibleOptions.map(item => item.rawOption),
+        )
+      }
     }
 
     return () => {
