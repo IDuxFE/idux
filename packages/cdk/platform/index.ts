@@ -6,5 +6,6 @@
  */
 
 export * from './src/platform'
+export * from './src/features/flexGap'
 export * from './src/features/passiveListeners'
 export * from './src/features/shadowDom'

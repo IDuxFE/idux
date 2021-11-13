@@ -17,10 +17,10 @@ export type SpaceSize = 'sm' | 'md' | 'lg' | number
 const spaceSizeProp = IxPropTypes.oneOf<SpaceSize>(['sm', 'md', 'lg'])
 
 export const spaceProps = {
-  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']).def('baseline'),
+  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']),
   direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']).def('horizontal'),
   size: IxPropTypes.oneOfType([spaceSizeProp, Number, IxPropTypes.array<SpaceSize>()]),
-  split: IxPropTypes.string,
+  split: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   wrap: IxPropTypes.bool,
 }
 

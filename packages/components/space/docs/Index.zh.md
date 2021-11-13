@@ -20,22 +20,22 @@ cover:
 
 ### IxSpace
 
-#### props
+#### SpaceProps
 
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `align` | 对齐方式 | `start \| center \| end \| baseline` | `baseline` | - | - |
-| `direction` | 间距方向 | `vertical \| horizontal` | `horizontal` | - | - |
-| `size` | 间距大小 | `SpaceSize \| SpaceSize[]` | - | ✅ | 有三个预设间距大小，除此之外还可以传入一个数字自定义间距大小，还可以传入一个数组来控制每个间距的大小（数组长度需等于间距个数，否则组件会抛出警告） |
-| `split` | 设置拆分 | `string \| #split` | - | - | 设置间隔分割符，当传入 `split` 时，内部间距会被分隔符替代；除了这种方式，你还可以设置 `#split` 的方式设置分隔符，优先级高于 prop |
-| `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | 仅在 `horizontal` 时生效 |
+| `align` | 对齐方式 | `'start' \| 'center' \| 'end' \| 'baseline'` | - | - | `horizontal` 时，默认为 `center` |
+| `direction` | 间距方向 | `'horizontal' \| 'vertical'` | `'horizontal'` | - | - |
+| `size` | 间距大小 | `SpaceSize \| SpaceSize[]` | - | ✅ | 当传入一个数组时，第一个元素表示水平间距，第二个元素表示垂直间距 |
+| `split` | 设置间隔分割符 | `string \| #split` | - | - | - |
+| `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | - |
 
-```typescript
-type SpaceSize = 'sm' | 'md' | 'lg' | number
+```ts
+export type SpaceSize = 'sm' | 'md' | 'lg' | number
 ```
 
-#### slots
+#### SpaceSlots
 
-| 属性      | 说明             | 参数类型 | 备注 |
-| --------- | ---------------- | -------- | ---- |
-| `default` | 需要被间隔的内容 | -        | -    |
+| 属性 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `default` | 需要被间隔的内容 | - | - |
