@@ -12,16 +12,10 @@
   </select>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import { SpaceSize } from '@idux/components/space'
 
-export default defineComponent({
-  name: 'Size',
-  setup() {
-    const size = ref<SpaceSize>('sm')
-    return { size }
-  },
-})
+const size = ref<SpaceSize>('sm')
 </script>

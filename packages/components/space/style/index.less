@@ -1,20 +1,32 @@
-@import '../../style/themes/default.less';
-@import './mixins.less';
-
-@space-prefix: ~'@{idux-prefix}-space';
-@space-item-prefix: ~'@{space-prefix}-item';
+@import './themes/default.less';
 
 .@{space-prefix} {
   display: inline-flex;
 
   &-wrap {
     flex-wrap: wrap;
+  }
 
-    .@{space-item-prefix} {
-      margin-bottom: @space-margin-md;
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-align {
+
+    &-center {
+      align-items: center;
+    }
+
+    &-start {
+      align-items: flex-start;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-baseline {
+      align-items: baseline;
     }
   }
 }
-
-.space-align-traverse(@space-prefix);
-.space-direction-traverse(@space-prefix);

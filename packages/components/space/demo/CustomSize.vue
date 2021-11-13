@@ -5,19 +5,11 @@
     <IxButton>Button</IxButton>
   </IxSpace>
   <br />
-  <input v-model="num" type="number" />
+  <input v-model="size" type="number" />
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'CustomSize',
-  setup() {
-    const num = ref(20)
-    const size = computed(() => +num.value)
-
-    return { num, size }
-  },
-})
+const size = ref(20)
 </script>

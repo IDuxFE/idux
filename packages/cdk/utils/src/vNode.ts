@@ -86,26 +86,6 @@ export function isEmptyNode(node: VNodeChild): boolean {
   )
 }
 
-export function filterEmptyNode(nodes: VNodeChild): VNode[] {
-  if (isNil(nodes) || (Array.isArray(nodes) && !nodes.length)) {
-    return []
-  }
-
-  const result: VNode[] = []
-
-  convertArray(nodes).forEach(node => {
-    if (Array.isArray(node)) {
-      result.push(...(node as VNode[]))
-    } else if (isFragment(node)) {
-      result.push(...(node as any).children)
-    } else {
-      result.push(node as VNode)
-    }
-  })
-
-  return result.filter(c => !isEmptyNode(c))
-}
-
 export function flattenNode(
   nodes: VNodeChild,
   filterOptions: { empty?: boolean; key?: string | string[] } = {},
