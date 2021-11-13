@@ -26,28 +26,28 @@ export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivEleme
   const overlayStyle = computed(() => ({ width: overlayWidth.value }))
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
 
-  const syncOverlayWidth = () => {
+  const updatePopper = () => {
     overlayWidth.value = convertCssPixel(triggerRef.value?.getBoundingClientRect().width)
-  }
-
-  const handleTriggerResize = () => {
-    syncOverlayWidth()
 
     overlayRef.value?.updatePopper()
   }
 
   onMounted(() => {
+    if (props.autofocus) {
+      setOverlayOpened(true)
+    }
+
     watchEffect(() => {
       if (overlayOpened.value) {
-        syncOverlayWidth()
+        updatePopper()
       }
     })
 
-    onResize(triggerRef.value!, handleTriggerResize)
+    onResize(triggerRef.value!, updatePopper)
   })
 
   onBeforeUnmount(() => {
-    offResize(triggerRef.value!, handleTriggerResize)
+    offResize(triggerRef.value!, updatePopper)
   })
 
   return { overlayRef, overlayStyle, overlayOpened, setOverlayOpened }

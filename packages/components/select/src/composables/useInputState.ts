@@ -11,7 +11,7 @@ import type { SelectProps } from '../types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { Ref } from 'vue'
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
@@ -21,7 +21,6 @@ export interface InputStateContext {
   inputWidth: Ref<string>
   isComposing: Ref<boolean>
   isFocused: Ref<boolean>
-  syncMirrorWidth: () => void
   handleCompositionStart: (evt: CompositionEvent) => void
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleInput: (evt: Event) => void
@@ -102,13 +101,14 @@ export function useInputState(
     syncMirrorWidth()
   }
 
+  onMounted(() => syncMirrorWidth())
+
   return {
     mirrorRef,
     inputValue,
     inputWidth,
     isComposing,
     isFocused,
-    syncMirrorWidth,
     handleCompositionStart,
     handleCompositionEnd,
     handleInput,

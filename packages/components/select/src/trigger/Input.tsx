@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, onMounted, watch } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import { selectToken } from '../token'
 
@@ -16,28 +16,13 @@ export default defineComponent({
       mergedPrefixCls,
       isDisabled,
       inputRef,
-      focus,
-      blur,
       inputValue,
       inputWidth,
-      overlayOpened,
-      setOverlayOpened,
       mirrorRef,
-      syncMirrorWidth,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
     } = inject(selectToken)!
-
-    onMounted(() => {
-      syncMirrorWidth()
-
-      watch(overlayOpened, opened => (opened ? focus() : blur()))
-
-      if (props.autofocus) {
-        setOverlayOpened(true)
-      }
-    })
 
     const style = computed(() => ({ width: inputWidth.value }))
 

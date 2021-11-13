@@ -55,9 +55,19 @@ export default defineComponent({
     const inputStateContext = useInputState(props, inputRef, accessor)
     const { inputValue, clearInput } = inputStateContext
     const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
-    const selectedStateContext = useSelectedState(props, accessor, mergedOptions, focus, setOverlayOpened, clearInput)
+    const selectedStateContext = useSelectedState(props, accessor, mergedOptions)
     const { selectedValue, changeSelected } = selectedStateContext
     const activeStateContext = useActiveState(props, flattedOptions, selectedValue, inputValue, scrollTo)
+
+    const handleOptionClick = (value: any) => {
+      changeSelected(value)
+      if (props.multiple) {
+        focus()
+        clearInput()
+      } else {
+        setOverlayOpened(false)
+      }
+    }
 
     provide(selectToken, {
       props,
@@ -65,17 +75,16 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       focusMonitor,
-      inputRef,
-      focus,
-      blur,
-      virtualScrollRef,
       triggerRef,
+      inputRef,
+      virtualScrollRef,
       overlayOpened,
       setOverlayOpened,
       accessor,
       isDisabled,
       mergedOptions,
       flattedOptions,
+      handleOptionClick,
       ...selectedStateContext,
       ...inputStateContext,
       ...activeStateContext,
@@ -85,6 +94,9 @@ export default defineComponent({
       if (!opened && props.allowInput && inputValue.value) {
         changeSelected(inputValue.value)
       }
+
+      opened ? focus() : blur()
+
       clearInput()
     })
 

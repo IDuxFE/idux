@@ -30,9 +30,6 @@ export function useSelectedState(
   props: SelectProps,
   accessor: FormAccessor,
   mergedOptions: ComputedRef<MergedOption[]>,
-  focus: () => void,
-  setOverlayOpened: (open: boolean) => void,
-  clearInput: () => void,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))
   const selectedOptions = computed(() => {
@@ -59,7 +56,6 @@ export function useSelectedState(
     const isSelected = targetIndex > -1
     if (!multiple) {
       !isSelected && setValue([value])
-      setOverlayOpened(false)
     } else {
       if (isSelected) {
         setValue(currValue.filter((_, index) => targetIndex !== index))
@@ -70,8 +66,6 @@ export function useSelectedState(
           setValue([...currValue.slice(-multipleLimit + 1), value])
         }
       }
-      focus()
-      clearInput()
     }
   }
 

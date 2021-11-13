@@ -30,12 +30,11 @@ export interface SelectContext
   mergedPrefixCls: ComputedRef<string>
   focusMonitor: FocusMonitor
   inputRef: Ref<HTMLInputElement | undefined>
-  focus: (options?: FocusOptions) => void
-  blur: () => void
   virtualScrollRef: Ref<VirtualScrollInstance | undefined>
   triggerRef: Ref<HTMLDivElement | undefined>
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
+  handleOptionClick: (value: any) => void
 }
 
 export const selectToken: InjectionKey<SelectContext> = Symbol('selectToken')

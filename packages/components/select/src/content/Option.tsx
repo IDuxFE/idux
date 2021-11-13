@@ -19,7 +19,7 @@ export default defineComponent({
       props: selectProps,
       mergedPrefixCls,
       selectedValue,
-      changeSelected,
+      handleOptionClick,
       activeOption,
       changeActive,
     } = inject(selectToken)!
@@ -30,6 +30,7 @@ export default defineComponent({
       const activeValue = activeOption.value?.value
       return compareWith(activeValue, value)
     })
+
     const isSelected = computed(() => {
       const { value } = props
       const { compareWith } = selectProps
@@ -50,7 +51,7 @@ export default defineComponent({
 
     const handleMouseEnter = () => changeActive(props.index, 0)
 
-    const handleClick = () => changeSelected(props.value)
+    const handleClick = () => handleOptionClick(props.value)
 
     return () => {
       const { disabled, label, rawOption } = props
