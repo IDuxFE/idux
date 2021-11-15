@@ -1,60 +1,132 @@
-import { mount } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
-import IxMenu from '../src/Menu'
-import IxMenuDivider from '../src/MenuDivider'
-import IxMenuItem from '../src/MenuItem'
-import IxMenuItemGroup from '../src/MenuItemGroup'
-import IxMenuSub from '../src/menu-sub/MenuSub'
+import { renderWork, wait } from '@tests'
+
+import Menu from '../src/Menu'
+// import MenuDivider from '../src/MenuDivider'
+import MenuItem from '../src/MenuItem'
+// import MenuItemGroup from '../src/MenuItemGroup'
+import MenuSub from '../src/menu-sub/MenuSub'
+import { MenuData, MenuProps } from '../src/types'
+
+const dataSource: MenuData[] = [
+  { type: 'item', key: 'item1', icon: 'home', slots: { default: () => h('a', 'Item 1') } },
+  { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
+  { type: 'item', key: 'item3', icon: 'appstore', label: 'Item 3', disabled: true },
+  { type: 'divider', key: 'divider1' },
+  {
+    type: 'sub',
+    key: 'sub1',
+    icon: 'setting',
+    label: 'Sub Menu 1',
+    children: [
+      {
+        type: 'itemGroup',
+        key: 'itemGroup1',
+        label: 'Item Group 1',
+        children: [
+          { type: 'item', key: 'item4', label: 'Item 4' },
+          { type: 'item', key: 'item5', label: 'Item 5' },
+        ],
+      },
+      { type: 'divider', key: 'divider2' },
+      {
+        type: 'sub',
+        key: 'sub2',
+        label: 'Menu Sub 2',
+        children: [
+          { type: 'item', key: 'item6', label: 'Item 6' },
+          { type: 'item', key: 'item7', label: 'Item 7' },
+        ],
+      },
+      {
+        type: 'sub',
+        key: 'sub3',
+        label: 'Menu Sub 3',
+        children: [
+          { type: 'item', key: 'item8', label: 'Item 8' },
+          { type: 'item', key: 'item9', label: 'Item 9' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'sub',
+    key: 'sub4',
+    icon: 'github',
+    label: 'Menu Sub 4',
+    disabled: true,
+    children: [
+      { type: 'item', key: 'item10', label: 'Item 10' },
+      { type: 'item', key: 'item11', label: 'Item 11' },
+    ],
+  },
+]
 
 describe('Menu', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const MenuMount = (options = {}) => {
-    return mount(
-      {
-        components: { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub },
-        template: `
-        <IxMenu>
-        <IxMenuItem key="item1" icon="up">
-          <a href="javascript: void(0)">Item 1</a>
-        </IxMenuItem>
-        <IxMenuItem key="item2" disabled icon="up"> Item 2 </IxMenuItem>
-        <IxMenuDivider />
-        <IxMenuSub key="menuSub1" title="Sub Menu 1" icon="up">
-          <IxMenuItemGroup title="Item Group 1">
-            <IxMenuItem key="item3">Item 3</IxMenuItem>
-            <IxMenuItem key="item4">Item 4</IxMenuItem>
-          </IxMenuItemGroup>
-          <IxMenuDivider />
-          <IxMenuSub key="menuSub2">
-            <template #title><a href="javascript: void(0)">Sub Menu 2</a></template>
-            <IxMenuItem key="item5">Item 5</IxMenuItem>
-            <IxMenuItem key="item6">Item 6</IxMenuItem>
-          </IxMenuSub>
-          <IxMenuSub key="menuSub3" title="Sub Menu 3">
-            <IxMenuItem key="item7">Item 7</IxMenuItem>
-            <IxMenuItem key="item8">Item 8</IxMenuItem>
-          </IxMenuSub>
-        </IxMenuSub>
-        <IxMenuSub key="menuSub4" disabled title="MenuSub 4" icon="up">
-          <IxMenuItem key="item9">Item 9</IxMenuItem>
-          <IxMenuItem key="item10">Item 10</IxMenuItem>
-        </IxMenuSub>
-      </IxMenu>
-        `,
-        ...options,
-      },
-      { attachTo: 'body' },
-    )
+  const MenuMount = (options?: MountingOptions<Partial<MenuProps>>) => {
+    const { props, ...rest } = options || {}
+    return mount(Menu, {
+      ...rest,
+      props: { dataSource, ...props },
+      attachTo: 'body',
+    })
   }
 
-  test('render work', () => {
-    const wrapper = MenuMount({})
+  afterEach(() => {
+    if (document.querySelector('.ix-menu-sub-overlay-container')) {
+      document.querySelector('.ix-menu-sub-overlay-container')!.innerHTML = ''
+    }
+  })
 
-    expect(wrapper.html()).toMatchSnapshot()
+  renderWork<MenuProps>(Menu, { props: { dataSource }, attachTo: 'body' })
 
-    expect(() => {
-      wrapper.vm.$forceUpdate()
-      wrapper.unmount()
-    }).not.toThrow()
+  test('v-model:expandedKeys work', async () => {
+    const onUpdateExpandedKeys = jest.fn()
+    const wrapper = MenuMount({ props: { expandedKeys: ['sub1'], 'onUpdate:expandedKeys': onUpdateExpandedKeys } })
+
+    const subs = wrapper.findAllComponents(MenuSub)
+    expect(subs.length).toBe(4)
+    expect(subs[0].classes()).toContain('ix-menu-sub-expanded')
+    expect(subs[1].classes()).not.toContain('ix-menu-sub-expanded')
+    expect(subs[2].classes()).not.toContain('ix-menu-sub-expanded')
+    expect(subs[3].classes()).not.toContain('ix-menu-sub-expanded')
+
+    await wrapper.setProps({ expandedKeys: ['sub4'] })
+
+    expect(subs[0].classes()).not.toContain('ix-menu-sub-expanded')
+    expect(subs[1].classes()).not.toContain('ix-menu-sub-expanded')
+    expect(subs[2].classes()).not.toContain('ix-menu-sub-expanded')
+    expect(subs[3].classes()).toContain('ix-menu-sub-expanded')
+
+    await wrapper.setProps({ expandedKeys: [] })
+    await subs[0].find('.ix-menu-sub-title').trigger('mouseenter')
+    await wait(100)
+
+    expect(onUpdateExpandedKeys).toBeCalledWith(['sub1'])
+  })
+
+  test('v-model:selectedKeys work', async () => {
+    const onUpdateSelectedKeys = jest.fn()
+    const wrapper = MenuMount({ props: { selectedKeys: ['item1'], 'onUpdate:selectedKeys': onUpdateSelectedKeys } })
+
+    const items = wrapper.findAllComponents(MenuItem)
+    expect(items.length).toBe(3)
+    expect(items[0].classes()).toContain('ix-menu-item-selected')
+    expect(items[1].classes()).not.toContain('ix-menu-item-selected')
+    expect(items[2].classes()).not.toContain('ix-menu-item-selected')
+
+    await wrapper.setProps({ selectedKeys: ['item3'] })
+
+    expect(items[0].classes()).not.toContain('ix-menu-item-selected')
+    expect(items[1].classes()).not.toContain('ix-menu-item-selected')
+    expect(items[2].classes()).toContain('ix-menu-item-selected')
+
+    await wrapper.setProps({ selectedKeys: [] })
+    await items[0].trigger('click')
+    await wait(100)
+
+    expect(onUpdateSelectedKeys).toBeCalledWith(['item1'])
   })
 })

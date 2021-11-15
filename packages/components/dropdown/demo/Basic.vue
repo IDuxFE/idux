@@ -2,7 +2,7 @@
   <IxDropdown>
     <a class="ix-dropdown-trigger">Hover me <IxIcon name="down"></IxIcon></a>
     <template #overlay>
-      <IxMenu @itemClick="onClick">
+      <IxMenu @click="onClick">
         <IxMenuItem key="one"> Item 1 </IxMenuItem>
         <IxMenuItem key="two"> Item 2 </IxMenuItem>
         <IxMenuDivider />
@@ -19,7 +19,7 @@ type Key = 'one' | 'two' | 'three'
 
 export default defineComponent({
   setup() {
-    const onClick = (key: Key) => {
+    const onClick = ({ key }: { key: Key }) => {
       if (key === 'one') {
         console.log('One was clicked')
       } else if (key === 'two') {

@@ -7,7 +7,9 @@
 
 import { computed, defineComponent, inject, provide } from 'vue'
 
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useKey } from '@idux/components/utils'
 
 import { menuItemGroupToken, menuSubToken, menuToken } from './token'
 import { menuItemGroupProps } from './types'
@@ -17,34 +19,44 @@ export default defineComponent({
   name: 'IxMenuItemGroup',
   props: menuItemGroupProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-item-group`)
+
+    const key = useKey()
+
     provide(menuItemGroupToken, true)
 
     // menuContext must exist
-    const { mode, indent } = inject(menuToken, null)!
+    const { mode, indent, handleClick } = inject(menuToken, null)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, null)
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(mode, indent, level, !!menuItemGroupContext)
-    const style = computed(() => {
+    const titleStyle = computed(() => {
       return { paddingLeft: paddingLeft.value }
     })
 
+    const onClick = (evt: Event) => {
+      handleClick(key, 'itemGroup', evt)
+    }
+
     return () => {
       const { icon, label } = props
+      const prefixCls = mergedPrefixCls.value
 
       const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
-      const iconWrapper = iconNode ? <span class="ix-menu-item-group-title-icon">{iconNode}</span> : undefined
+      const iconWrapper = iconNode ? <span class={`${prefixCls}-title-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.label?.() ?? label}</span>
 
       return (
-        <li class="ix-menu-item-group">
-          <div class="ix-menu-item-group-title" style={style.value}>
+        <li class={prefixCls} onClick={onClick}>
+          <div class={`${prefixCls}-title`} style={titleStyle.value}>
             {iconWrapper}
             {labelNode}
           </div>
-          <ul class="ix-menu-item-group-content">{slots.default?.()}</ul>
+          <ul class={`${prefixCls}-content`}>{slots.default?.()}</ul>
         </li>
       )
     }

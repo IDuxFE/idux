@@ -73,7 +73,7 @@ export interface SelectOption {
   key?: VKey
   label?: string
   options?: SelectOption[]
-  slots?: Slots
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
   value?: any
   [key: string]: any
 }

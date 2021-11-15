@@ -22,16 +22,25 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:expandedKeys` | 当前展开的 `IxMenuSub` 的 `key` 数组 | `Array<string \| number>` | - | - | - |
-| `v-model:selectedKeys` | 当前选中的 `IxMenuItem` 的 `key` 数组 | `Array<string \| number>` | - | - | - |
+| `v-model:expandedKeys` | 当前展开的 `IxMenuSub` 的 `key` 数组 | `VKey[]` | - | - | - |
+| `v-model:selectedKeys` | 当前选中的 `IxMenuItem` 的 `key` 数组 | `VKey[]` | - | - | - |
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
 | `collapsedWidth` | 菜单收起时的宽度 | `string \| number` | `64` | ✅ | `horizontal` 模式时无效 |
+| `dataSource` | 菜单数据数组 | `MenuData[]` | - | - | 优先级高于 `default` 插槽 |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24` | ✅ | 仅支持 `inline` 模式 |
-| `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `vertical \| horizontal \| inline` | `vertical` | - | - |
+| `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
-| `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
-| `theme` | 主题颜色 | `light` | `light \| dark` | ✅ | - |
-| `onItemClick` | 点击 `IxMenuItem` 后的回调 | `(key: string \| number, evt: Event) => void` | ✅ | - |
+| `selectable` | 是否允许选中 | `boolean` | - | - | 在 `IxDropdown` 中默认为 `false`, 其他情况默认为 `true` |
+| `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |
+| `onClick` | 点击 `IxMenuItem` 或 `IxMenuSub` 后的回调 | `(options: MenuClickOptions) => void>` | ✅ | - |
+
+```ts
+export interface MenuClickOptions {
+  event: Event
+  key: VKey
+  type: 'item' | 'itemGroup' | 'sub'
+}
+```
 
 ### IxMenuItem
 
@@ -39,7 +48,7 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `key` | 唯一标识 | `sting \| number` | `uid` | - | - |
+| `key` | 唯一标识 | `VKey` | `uid` | - | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `icon` | 菜单图标| `string \| #icon` | - | - |
 | `label` | 菜单文本 | `string \| #default`  | - | - |
@@ -50,13 +59,13 @@ single: true
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `key` | 唯一标识 | `sting \| number` | `uid` | - | - |
+| `key` | 唯一标识 | `VKey` | `uid` | - | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `icon` | 菜单图标| `string \| #icon` | - | - | - |
-| `overlayClass` | 悬浮层的自定义 `class` | `string` | - | - | - |
-| `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
-| `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
 | `label` | 菜单文本 | `string \| #label`  | - | - |
+| `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | - |
+| `suffix` | 后缀图标 | `string \| #suffix` | `right` | ✅ | - |
+| `suffixRotates` | 展开收起时后缀图标旋转角度 | `[number, number]` | `[-90, 90]` | ✅ | 仅 `inline` 模式下生效 |
 
 ### IxMenuItemGroup
 

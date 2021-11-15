@@ -6,10 +6,11 @@
  */
 
 import type { MenuContext, MenuSubContext } from '../token'
-import type { MenuMode, MenuSubProps } from '../types'
-import type { ComputedRef, Ref, VNodeTypes } from 'vue'
+import type { MenuMode } from '../types'
+import type { VKey } from '@idux/cdk/utils'
+import type { ComputedRef, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, inject, provide, ref, watch } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, provide, ref, watch } from 'vue'
 
 import { debounce } from 'lodash-es'
 
@@ -30,6 +31,10 @@ export default defineComponent({
   name: 'IxMenuSub',
   props: menuSubProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-sub`)
+    const mergedTransitionName = computed(() => `${common.prefixCls}-fade`)
+
     // menuContext must exist
     const menuContext = inject(menuToken, null)!
     const menuSubContext = inject(menuSubToken, null)
@@ -38,7 +43,11 @@ export default defineComponent({
     const config = useGlobalConfig('menuSub')
     const key = useKey()
     const level = menuSubContext ? menuSubContext.level + 1 : 1
-    const mode = useMode(menuContext.mode, !!menuSubContext)
+    const mode = computed(() => {
+      const currMode = menuContext.mode.value
+      return currMode !== 'inline' && !!menuSubContext ? 'vertical' : currMode
+    })
+    const paddingLeft = usePaddingLeft(mode, menuContext.indent, level, menuItemGroupContext)
     const { isExpanded, changeExpanded, handleExpand, handleMouseEvent } = useExpand(
       key,
       mode,
@@ -46,92 +55,83 @@ export default defineComponent({
       menuSubContext,
     )
     const { isSelected, handleSelect } = useSelect(key, menuContext.multiple, menuSubContext)
+
     const handleItemClick = () => {
       if (!props.disabled && mode.value !== 'inline' && !menuContext.multiple.value) {
         changeExpanded(false)
       }
     }
-    const paddingLeft = usePaddingLeft(mode, menuContext.indent, level, menuItemGroupContext)
 
     provide(menuSubToken, {
       props,
       slots,
       config,
       isExpanded,
+      mode,
+      level,
+      paddingLeft,
       changeExpanded,
       handleExpand,
       handleMouseEvent,
       handleSelect,
       handleItemClick,
-      level,
-      mode,
-      paddingLeft,
-      theme: menuContext.theme,
     })
 
     const placement = computed(() => (mode.value === 'vertical' ? 'rightStart' : 'bottomStart'))
 
-    const classes = useClasses(props, mode, isExpanded, isSelected)
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-expanded`]: isExpanded.value,
+        [`${prefixCls}-selected`]: isSelected.value,
+        [`${prefixCls}-${mode.value}`]: true,
+      })
+    })
+
     const offset = computed(() => props.offset ?? config.offset)
+
+    const onClick = (evt: Event) => {
+      menuContext.handleClick(key, 'sub', evt)
+    }
 
     return () => {
       let children: VNodeTypes
       if (mode.value === 'inline') {
         children = [<Title></Title>, <InlineContent></InlineContent>]
       } else {
+        const prefixCls = mergedPrefixCls.value
         const trigger = () => <Title></Title>
         const content = () => <OverlayContent></OverlayContent>
         children = (
           <ɵOverlay
             visible={isExpanded.value}
             v-slots={{ default: trigger, content: content }}
-            class="ix-menu-sub-overlay"
+            class={`${prefixCls}-overlay`}
             autoAdjust
             destroyOnHide={false}
             delay={defaultDelay}
             disabled={props.disabled}
             offset={offset.value}
             placement={placement.value}
-            target="ix-menu-container"
-            transitionName="ix-fade"
+            target={`${prefixCls}-overlay-container`}
+            transitionName={mergedTransitionName.value}
             trigger="manual"
           />
         )
       }
-      return <li class={classes.value}>{children}</li>
+      return (
+        <li class={classes.value} onClick={onClick}>
+          {children}
+        </li>
+      )
     }
   },
 })
 
-function useClasses(
-  props: MenuSubProps,
-  mode: ComputedRef<MenuMode>,
-  isExpanded: Ref<boolean>,
-  isSelected: Ref<boolean>,
-) {
-  return computed(() => {
-    return {
-      'ix-menu-sub': true,
-      'ix-menu-sub-disabled': props.disabled,
-      'ix-menu-sub-expanded': isExpanded.value,
-      'ix-menu-sub-selected': isSelected.value,
-      [`ix-menu-sub-${mode.value}`]: true,
-    }
-  })
-}
-
-function useMode(menuMode: ComputedRef<MenuMode>, hasParentMenuSub: boolean) {
-  return computed(() => {
-    const currMode = menuMode.value
-    if (currMode !== 'inline' && hasParentMenuSub) {
-      return 'vertical'
-    }
-    return currMode
-  })
-}
-
 function useExpand(
-  key: string | number,
+  key: VKey,
   mode: ComputedRef<MenuMode>,
   menuContext: MenuContext,
   menuSubContext: MenuSubContext | null,
@@ -143,12 +143,10 @@ function useExpand(
 
   const changeExpanded = (expanded: boolean) => {
     menuContext.handleExpand(key, expanded)
-    if (menuSubContext) {
-      menuSubContext.handleExpand(key, expanded)
-    }
+    menuSubContext?.handleExpand(key, expanded)
   }
 
-  const handleExpand = (_: string | number, expanded: boolean) => {
+  const handleExpand = (_: VKey, expanded: boolean) => {
     childExpanded.value = expanded
   }
 
@@ -163,13 +161,13 @@ function useExpand(
   return { isExpanded, changeExpanded, handleExpand, handleMouseEvent }
 }
 
-function useSelect(key: string | number, multiple: ComputedRef<boolean>, menuSubContext: MenuSubContext | null) {
-  const selectedKeys = ref<Array<string | number>>([])
+function useSelect(key: VKey, multiple: ComputedRef<boolean>, menuSubContext: MenuSubContext | null) {
+  const selectedKeys = ref<VKey[]>([])
 
   const isSelected = computed(() => selectedKeys.value.length > 0)
   watch(isSelected, selected => menuSubContext?.handleSelect(key, selected))
 
-  const handleSelect = (key: string | number, selected: boolean) => {
+  const handleSelect = (key: VKey, selected: boolean) => {
     const index = selectedKeys.value.indexOf(key)
     if (selected && index > -1) {
       return

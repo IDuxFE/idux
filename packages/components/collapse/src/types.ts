@@ -5,21 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const collapseProps = {
-  expandedKeys: IxPropTypes.array<string | number>(),
+  expandedKeys: IxPropTypes.array<VKey>(),
   accordion: IxPropTypes.bool,
   borderless: IxPropTypes.bool,
   expandIcon: IxPropTypes.string,
   ghost: IxPropTypes.bool,
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<(activeKeys: (string | number)[]) => void>(),
+  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
 }
 
 export type CollapseProps = IxInnerPropTypes<typeof collapseProps>

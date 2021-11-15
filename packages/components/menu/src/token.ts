@@ -6,18 +6,20 @@
  */
 
 import type { MenuMode, MenuSubProps, MenuTheme } from './types'
+import type { VKey } from '@idux/cdk/utils'
 import type { MenuSubConfig } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface MenuContext {
-  expandedKeys: ComputedRef<Array<string | number>>
-  handleExpand: (key: string | number, expanded: boolean) => void
-  selectedKeys: ComputedRef<Array<string | number>>
-  handleItemClick: (key: string | number, evt: Event) => void
+  mergedPrefixCls: ComputedRef<string>
   indent: ComputedRef<number>
   mode: ComputedRef<MenuMode>
   multiple: ComputedRef<boolean>
   theme: ComputedRef<MenuTheme>
+  expandedKeys: ComputedRef<VKey[]>
+  handleExpand: (key: VKey, expanded: boolean) => void
+  selectedKeys: ComputedRef<VKey[]>
+  handleClick: (key: VKey, type: 'item' | 'itemGroup' | 'sub', evt: Event) => void
 }
 
 export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')
@@ -27,15 +29,14 @@ export interface MenuSubContext {
   slots: Slots
   config: MenuSubConfig
   isExpanded: ComputedRef<boolean>
-  changeExpanded: (expanded: boolean) => void
-  handleExpand: (key: string | number, expanded: boolean) => void
-  handleMouseEvent: (hover: boolean) => void
-  handleSelect: (key: string | number, selected: boolean) => void
-  handleItemClick: () => void
-  level: number
   mode: ComputedRef<MenuMode>
+  level: number
   paddingLeft: ComputedRef<string | undefined>
-  theme: ComputedRef<MenuTheme>
+  changeExpanded: (expanded: boolean) => void
+  handleExpand: (key: VKey, expanded: boolean) => void
+  handleMouseEvent: (hover: boolean) => void
+  handleSelect: (key: VKey, selected: boolean) => void
+  handleItemClick: () => void
 }
 
 export const menuSubToken: InjectionKey<MenuSubContext> = Symbol('menuSubToken')

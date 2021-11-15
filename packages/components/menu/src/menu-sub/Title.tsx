@@ -9,10 +9,11 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { IxIcon } from '@idux/components/icon'
 
-import { menuSubToken } from '../token'
+import { menuSubToken, menuToken } from '../token'
 
 export default defineComponent({
   setup() {
+    const { mergedPrefixCls } = inject(menuToken)!
     const { props, slots, config, isExpanded, changeExpanded, handleMouseEvent, mode, paddingLeft } =
       inject(menuSubToken)!
 
@@ -48,9 +49,10 @@ export default defineComponent({
 
     return () => {
       const { icon, label } = props
+      const prefixCls = mergedPrefixCls.value
 
       const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
-      const iconWrapper = iconNode ? <span class="ix-menu-sub-title-icon">{iconNode}</span> : undefined
+      const iconWrapper = iconNode ? <span class={`${prefixCls}-sub-title-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.label?.() ?? label}</span>
 
@@ -58,10 +60,10 @@ export default defineComponent({
         slots.suffix?.({ rotate: rotate.value }) ?? suffix.value ? (
           <IxIcon name={suffix.value} rotate={rotate.value}></IxIcon>
         ) : undefined
-      const suffixWrapper = suffixNode ? <span class="ix-menu-sub-title-suffix-icon">{suffixNode}</span> : undefined
+      const suffixWrapper = suffixNode ? <span class={`${prefixCls}-sub-title-suffix`}>{suffixNode}</span> : undefined
 
       return (
-        <div class="ix-menu-sub-title" style={style.value} {...events.value}>
+        <div class={`${prefixCls}-sub-title`} style={style.value} {...events.value}>
           {iconWrapper}
           {labelNode}
           {suffixWrapper}

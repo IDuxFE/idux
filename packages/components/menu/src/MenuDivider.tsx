@@ -5,11 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent } from 'vue'
+import type { FunctionalComponent, HTMLAttributes } from 'vue'
 
-export default defineComponent({
-  name: 'IxMenuDivider',
-  setup() {
-    return () => <li class="ix-menu-divider"></li>
-  },
-})
+import { computed } from 'vue'
+
+import { useGlobalConfig } from '@idux/components/config'
+
+const MenuDivider: FunctionalComponent<HTMLAttributes> = () => {
+  const common = useGlobalConfig('common')
+  const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-divider`)
+  return <li class={mergedPrefixCls.value}></li>
+}
+
+MenuDivider.displayName = 'IxMenuDivider'
+
+export default MenuDivider
