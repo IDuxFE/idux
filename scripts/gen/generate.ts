@@ -19,9 +19,9 @@ import {
   getLessTemplate,
   getStyleIndexTemplate,
   getTestTemplate,
+  getThemesTemplate,
   getTsxTemplate,
   getTypesTemplate,
-  getVueTemplate,
 } from './template'
 
 type AnswerType =
@@ -76,21 +76,11 @@ const questions: QuestionCollection<AnswerOptions>[] = [
     ],
   },
   { name: 'name', message: 'Please enter the name.' },
-  {
-    name: 'useTsx',
-    message: 'Do you want to use tsx?',
-    type: 'confirm',
-    default: true,
-    when(answer) {
-      return answer.category === 'components'
-    },
-  },
 ]
 
 class Generate {
   private packageRoot!: string
   private dirPath!: string
-  private useTsx = false
   private isPrivate = false
 
   constructor() {
@@ -100,9 +90,8 @@ class Generate {
   private async init() {
     console.log(chalk.greenBright(textSync('IDux Generate Tool')))
 
-    const { category, name, type, useTsx, isPrivate } = await inquirer.prompt<AnswerOptions>(questions)
+    const { category, name, type, isPrivate } = await inquirer.prompt<AnswerOptions>(questions)
 
-    this.useTsx = !!useTsx
     this.isPrivate = !!isPrivate
 
     const spin = ora()
@@ -120,6 +109,7 @@ class Generate {
 
     if (pathExistsSync(this.dirPath)) {
       spin.fail(chalk.redBright(`${name} is already exists in ${category}, please change it!`))
+      return
     }
     await this.createDir()
     await this.generate(category, name, type)
@@ -142,7 +132,7 @@ class Generate {
   private generate(category: AnswerOptions['category'], name: string, type?: AnswerType) {
     switch (category) {
       case 'components':
-        this.generateComponents(name, type!)
+        this.generateComponents(name)
         break
       case 'cdk':
         this.generateCdk(name)
@@ -168,57 +158,58 @@ class Generate {
     ])
   }
 
-  private async generateComponents(name: string, type: AnswerType) {
+  private async generateComponents(name: string) {
     await mkdir(`${this.dirPath}/style`)
+    await mkdir(`${this.dirPath}/style/themes`)
     const camelCaseName = camelCase(name)
     const upperFirstName = upperFirst(camelCaseName)
+
+    const testTemplate = getTestTemplate(upperFirstName)
+
+    const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
+    const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
+
+    const themesTemplate = getThemesTemplate(this.isPrivate)
     const lessTemplate = getLessTemplate(kebabCase(name))
     const styleIndexTemplate = getStyleIndexTemplate()
-    const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
-    const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
-    const vueTemplate = getVueTemplate(upperFirstName, camelCaseName)
-    const indexTemplate = getIndexTemplate(upperFirstName, this.useTsx)
-    const testTemplate = getTestTemplate(upperFirstName, this.useTsx)
+
+    const indexTemplate = getIndexTemplate(upperFirstName)
 
     await Promise.all([
+      writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),
+      writeFile(`${this.dirPath}/src/${upperFirstName}.tsx`, tsxTemplate),
+      writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
+      writeFile(`${this.dirPath}/style/themes/default.less`, themesTemplate),
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
       writeFile(`${this.dirPath}/style/index.ts`, styleIndexTemplate),
-      writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
-      this.useTsx
-        ? writeFile(`${this.dirPath}/src/${upperFirstName}.tsx`, tsxTemplate)
-        : writeFile(`${this.dirPath}/src/${upperFirstName}.vue`, vueTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
-      writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),
     ])
 
     if (this.isPrivate) {
-      return
+      const currIndexPath = resolve(this.packageRoot, '_private/index.ts')
+      let currIndexContent = await readFile(currIndexPath, 'utf-8')
+      currIndexContent += `\nexport *  from './${kebabCase(name)}'`
+
+      writeFile(currIndexPath, currIndexContent)
+    } else {
+      const currIndexPath = resolve(this.packageRoot, 'index.ts')
+      let currIndexContent = await readFile(currIndexPath, 'utf-8')
+      currIndexContent += `\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`
+
+      writeFile(currIndexPath, currIndexContent)
+
+      const currLessPath = resolve(this.packageRoot, 'components.less')
+      let curLessContent = await readFile(currLessPath, 'utf-8')
+      curLessContent += `\n@import './${kebabCase(name)}/style/index.less';`
+
+      writeFile(currLessPath, curLessContent)
     }
 
-    const [typeEn] = type.split('_')
+    const currPrefixPath = resolve(this.packageRoot, 'style/variable/prefix.less')
+    let currPrefixContent = await readFile(currPrefixPath, 'utf-8')
+    currPrefixContent += `\n@${kebabCase(name)}-prefix: ~'@{idux-prefix}-${kebabCase(name)}';`
 
-    const [importRegx, componentsRegx, exportRegx] = [
-      `// import ${typeEn}`,
-      `// components ${typeEn}`,
-      `// export ${typeEn}`,
-    ]
-
-    const currIndexPath = resolve(this.packageRoot, 'index.ts')
-    let currIndexContent = await readFile(currIndexPath, 'utf-8')
-    currIndexContent = currIndexContent
-      .replace(importRegx, `${importRegx}\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`)
-      .replace(componentsRegx, `${componentsRegx}\n  Ix${upperFirstName},`)
-      .replace(exportRegx, `${exportRegx}\n  Ix${upperFirstName},`)
-    writeFile(currIndexPath, currIndexContent)
-
-    const currLessPath = resolve(this.packageRoot, 'components.less')
-    let curLessContent = await readFile(currLessPath, 'utf-8')
-    curLessContent = curLessContent.replace(
-      importRegx,
-      `${importRegx}\n@import './${kebabCase(name)}/style/index.less';`,
-    )
-
-    writeFile(currLessPath, curLessContent)
+    writeFile(currPrefixPath, currPrefixContent)
   }
 
   private async generateCdk(name: string) {

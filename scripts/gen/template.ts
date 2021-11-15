@@ -1,7 +1,9 @@
-export function getLessTemplate(compName: string): string {
-  return `@import '../../style/themes/default.less';
+export function getThemesTemplate(isPrivate: boolean): string {
+  return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';`
+}
 
-@${compName}-prefix: ~'@{idux-prefix}-${compName}';
+export function getLessTemplate(compName: string): string {
+  return `@import './themes/default.less';
 
 .@{${compName}-prefix} {
 
@@ -48,30 +50,10 @@ export default defineComponent({
 `
 }
 
-export function getVueTemplate(upperFirstName: string, camelCaseName: string): string {
-  return `<template>
-  <div></div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { ${camelCaseName}Props } from './types'
-
-export default defineComponent({
-  name: 'Ix${upperFirstName}',
-  props: ${camelCaseName}Props,
-  setup(props) {
-    
-  },
-})
-</script>
-`
-}
-
-export function getIndexTemplate(compName: string, useTsx: boolean): string {
+export function getIndexTemplate(compName: string): string {
   return `import type { ${compName}Component } from './src/types'
 
-import ${compName} from './src/${compName}${useTsx ? '' : '.vue'}'
+import ${compName} from './src/${compName}'
 
 const Ix${compName} = ${compName} as unknown as ${compName}Component
 
@@ -81,10 +63,10 @@ export type { ${compName}Instance, ${compName}PublicProps as ${compName}Props } 
 `
 }
 
-export function getTestTemplate(compName: string, useTsx: boolean): string {
+export function getTestTemplate(compName: string): string {
   return `import { mount, MountingOptions } from '@vue/test-utils'
 import { renderWork } from '@tests'
-import ${compName} from '../src/${compName}${useTsx ? '' : '.vue'}'
+import ${compName} from '../src/${compName}'
 import { ${compName}Props } from '../src/types'
 
 describe('${compName}', () => {
@@ -154,7 +136,6 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
 | - | - | - | - |
-
 `
 }
 
@@ -173,7 +154,6 @@ order: 0
 ## en
 
 The simplest usage.
-
 `
 }
 
