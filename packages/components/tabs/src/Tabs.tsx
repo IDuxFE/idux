@@ -6,15 +6,14 @@
  */
 
 import type { TabProps, TabsProps } from './types'
-import type { Ref } from 'vue'
+import type { IconInstance } from '@idux/components/icon'
+import type { ComputedRef, Ref, VNode } from 'vue'
 
 import {
-  ComputedRef,
-  VNode,
-  WritableComputedRef,
   computed,
   defineComponent,
   nextTick,
+  normalizeClass,
   onBeforeUnmount,
   onMounted,
   provide,
@@ -24,13 +23,15 @@ import {
   withDirectives,
 } from 'vue'
 
-import { throttle } from 'lodash-es'
+import { curry, throttle } from 'lodash-es'
 
 import { addClass, callEmit, flattenNode, offResize, onResize, removeClass, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import TabNav from './TabNav'
+import { useSelectedElOffset } from './composables/useOffset'
+import { useNavRelatedElSize, useVisibleSize } from './composables/useSize'
 import { tabsToken } from './tokens'
 import { tabsProps } from './types'
 
@@ -44,150 +45,87 @@ export default defineComponent({
     const navWrapperElRef = ref<HTMLElement | null>(null)
     const navElRef = ref<HTMLElement | null>(null)
     const navBarElRef = ref<HTMLElement | null>(null)
+    const navPreElRef = ref<IconInstance | null>(null)
+    const selectedElRef = ref<HTMLElement | null>(null)
+
     const [selectedKey, setSelectedKey] = useControlledProp(props, 'selectedKey')
+
     const isLineType = computed(() => props.type === 'line')
     const isSegmentType = computed(() => props.type === 'segment')
-    const hasScroll = ref(false)
-    const navWrapperWidth = ref(0)
-    const navWidth = ref(0)
-    const navWrapperHeight = ref(0)
-    const navHeight = ref(0)
-    const navOffset = ref(0)
-    const preReached = ref(false)
-    const nextReached = ref(false)
-    const horizontalPlacement = ['top']
 
-    const classes = useClasses(props, mergedPrefixCls)
-    const navPreClasses = useNavPreNextClasses(props, 'pre', preReached, mergedPrefixCls)
-    const navNextClasses = useNavPreNextClasses(props, 'next', nextReached, mergedPrefixCls)
-
+    const horizontalPlacement = ['top', 'bottom']
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
 
-    const getSelectedNavTabEl = () => {
-      return navElRef.value?.querySelector(`[data-key="${selectedKey.value}"]`)
-    }
+    const { navSize, navWrapperSize, navPreNextSize, selectedElSize, syncNavRelatedElSize } = useNavRelatedElSize(
+      isHorizontal,
+      navWrapperElRef,
+      navElRef,
+      navPreElRef,
+      selectedElRef,
+    )
 
-    const getSelectedNavTabElAttr = () => {
-      const el = getSelectedNavTabEl()
-      return {
-        w: Number(el?.offsetWidth ?? 0),
-        h: Number(el?.offsetHeight ?? 0),
-        l: Number(el?.offsetLeft ?? 0),
-        t: Number(el?.offsetTop ?? 0),
+    const navOffset = ref(0)
+    const { selectedElOffset } = useSelectedElOffset(isHorizontal, selectedElRef)
+
+    const visibleSize = useVisibleSize(navWrapperSize, selectedElOffset, navOffset)
+    const hasScroll = computed(() => navSize.value > navWrapperSize.value)
+
+    // 处理存在滚动状态下，手动点击tab时nav位置偏移（在可视范围内第一个和最后一个tab没有展示完全，需要进行偏移使其展示完全；）
+    const updateNavOffset = () => {
+      if (visibleSize.value < selectedElSize.value) {
+        // 即可视范围内最后一个tab没有展示完全
+        navOffset.value += selectedElSize.value - visibleSize.value
+      } else if (visibleSize.value / navWrapperSize.value > 1) {
+        // 即可视范围内第一个tab没有展示完全
+        navOffset.value -= visibleSize.value % navWrapperSize.value
       }
     }
 
-    const navSize = computed(() => {
-      if (isHorizontal.value) {
-        return navWidth.value
-      } else {
-        return navHeight.value
-      }
+    const preReached = ref(false)
+    const nextReached = ref(false)
+
+    const classes = computed(() => {
+      const { type, placement, mode } = props
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-nav-${placement}`]: placement === 'top' || type === 'line',
+        [`${prefixCls}-nav-${mode}`]: type === 'segment',
+      })
     })
 
-    const navWrapperSize = computed(() => {
-      if (isHorizontal.value) {
-        return navWrapperWidth.value
-      } else {
-        return navWrapperHeight.value
-      }
-    })
-
-    const selectedNavTabElSize = computed(() => {
-      if (isHorizontal.value) {
-        return getSelectedNavTabElAttr().w
-      } else {
-        return getSelectedNavTabElAttr().h
-      }
-    })
-
-    const selectedNavTabElOffset = computed(() => {
-      if (isHorizontal.value) {
-        return getSelectedNavTabElAttr().l
-      } else {
-        return getSelectedNavTabElAttr().t
-      }
-    })
-
-    const navPreNextSize = computed(() => {
-      if (isHorizontal.value) {
-        return Number(navWrapperElRef.value?.querySelector(`.${mergedPrefixCls.value}-nav-pre`)?.offsetWidth ?? 0)
-      } else {
-        return Number(navWrapperElRef.value?.querySelector(`.${mergedPrefixCls.value}-nav-pre`)?.offsetHeight ?? 0)
-      }
-    })
-
-    const visibleSize = computed(() => {
-      return navWrapperSize.value - (selectedNavTabElOffset.value - navOffset.value)
-    })
+    const curryNavPreNextClasses = curry(useNavPreNextClasses)(props, mergedPrefixCls)
+    const navPreClasses = curryNavPreNextClasses('pre', preReached)
+    const navNextClasses = curryNavPreNextClasses('next', nextReached)
 
     const handleTabClick = (key: string | number, evt: Event) => {
       callEmit(props.onTabClick, key, evt)
       setSelectedKey(key)
-      updateNavOffset()
-      updateNavBarStyle()
-    }
-
-    // 处理存在滚动状态下，手动点击tab时nav位置偏移（在可视范围内第一个和最后一个tab没有展示完全，需要进行偏移使其展示完全；）
-    const updateNavOffset = () => {
-      if (hasScroll.value) {
-        if (visibleSize.value < selectedNavTabElSize.value) {
-          // 即可视范围内最后一个tab没有展示完全
-          navOffset.value += selectedNavTabElSize.value - visibleSize.value
-        } else if (visibleSize.value / navWrapperSize.value > 1) {
-          // 即可视范围内第一个tab没有展示完全
-          navOffset.value -= visibleSize.value % navWrapperSize.value
-        }
-      }
     }
 
     const updateNavBarStyle = () => {
       if (isLineType.value && navBarElRef.value) {
-        const isBarDisabled = getSelectedNavTabEl()?.classList.contains(`${mergedPrefixCls.value}-nav-tab-disabled`)
+        const isBarDisabled = selectedElRef.value?.classList.contains(`${mergedPrefixCls.value}-nav-tab-disabled`)
         const barDisabledClassName = `${mergedPrefixCls.value}-nav-bar-disabled`
-        const barOffset = selectedNavTabElOffset.value - navOffset.value + navPreNextSize.value + 'px'
-        const barSize = selectedNavTabElSize.value + 'px'
+        const barOffset = selectedElOffset.value - navOffset.value + navPreNextSize.value + 'px'
+        const barSize = selectedElSize.value + 'px'
 
         if (isHorizontal.value) {
           navBarElRef.value.style.left = barOffset
           navBarElRef.value.style.width = barSize
+          navBarElRef.value.style.top = ''
+          navBarElRef.value.style.height = ''
         } else {
           navBarElRef.value.style.top = barOffset
           navBarElRef.value.style.height = barSize
+          navBarElRef.value.style.left = ''
+          navBarElRef.value.style.width = ''
         }
         if (isBarDisabled) {
           addClass(navBarElRef.value, barDisabledClassName)
         } else {
           removeClass(navBarElRef.value, barDisabledClassName)
-        }
-      }
-    }
-
-    const useScroll = () => {
-      if (navElRef.value && navWrapperElRef.value) {
-        if (isHorizontal.value) {
-          navWrapperWidth.value = navWrapperElRef.value.offsetWidth
-          navWidth.value = navElRef.value.offsetWidth
-          hasScroll.value = navWidth.value > navWrapperWidth.value
-        } else {
-          navWrapperHeight.value = navWrapperElRef.value.offsetHeight
-          navHeight.value = navElRef.value.offsetHeight
-          hasScroll.value = navHeight.value > navWrapperHeight.value
-        }
-        if (hasScroll.value) {
-          nextTick(() => {
-            // 存在滚动状态时，因为会增加前进、后退两个按钮，所以需要重新获取navWrapper宽度
-            if (navWrapperElRef.value) {
-              if (isHorizontal.value) {
-                navWrapperWidth.value -= navPreNextSize.value * 2
-              } else {
-                navWrapperHeight.value -= navPreNextSize.value * 2
-              }
-            }
-            updateNavOffset()
-            updateNavBarStyle()
-            judgePreNextStatus()
-          })
         }
       }
     }
@@ -203,7 +141,13 @@ export default defineComponent({
     const handleNextClick = (evt: Event) => {
       if (!nextReached.value) {
         callEmit(props.onNextClick, evt)
-        const offset = navOffset.value + navWrapperSize.value
+        const _offset = navOffset.value + navWrapperSize.value
+        let offset
+        if (navSize.value - _offset < navWrapperSize.value) {
+          offset = navSize.value - navWrapperSize.value
+        } else {
+          offset = _offset
+        }
         navOffset.value = offset
       }
     }
@@ -215,15 +159,30 @@ export default defineComponent({
 
     watch(navOffset, val => {
       if (navElRef.value) {
-        navElRef.value.style.transform = `translate${props.placement === 'start' ? 'Y' : 'X'}(-${val}px)`
+        navElRef.value.style.transform = `translate${isHorizontal.value ? 'X' : 'Y'}(-${val}px)`
         judgePreNextStatus()
         updateNavBarStyle()
       }
     })
 
+    watch(selectedElRef, () => {
+      if (hasScroll.value) {
+        updateNavOffset()
+      }
+      updateNavBarStyle()
+    })
+
     const onTabsResize = throttle(() => {
-      useScroll()
-      if (!hasScroll.value) {
+      syncNavRelatedElSize()
+      if (hasScroll.value) {
+        //存在滚动状态时，因为会增加前进、后退两个按钮，所以需要重新获取navWrapper宽度
+        nextTick(() => {
+          syncNavRelatedElSize()
+          updateNavOffset()
+          updateNavBarStyle()
+          judgePreNextStatus()
+        })
+      } else {
         updateNavBarStyle()
       }
     }, 10)
@@ -238,12 +197,13 @@ export default defineComponent({
 
     provide(tabsToken, {
       selectedKey,
+      selectedElRef,
       mergedPrefixCls,
       handleTabClick,
     })
 
     return () => {
-      const tabPaneVNodes = flattenNode(slots.default?.(), { key: '__IDUX_TAB' })
+      const tabVNodes = flattenTabVNodes(slots.default?.())
       return (
         <div class={classes.value}>
           <div
@@ -253,12 +213,17 @@ export default defineComponent({
             ref={navWrapperElRef}
           >
             {hasScroll.value && (
-              <IxIcon class={navPreClasses.value} name={isHorizontal.value ? 'left' : 'up'} onClick={handlePreClick} />
+              <IxIcon
+                class={navPreClasses.value}
+                name={isHorizontal.value ? 'left' : 'up'}
+                onClick={handlePreClick}
+                ref={navPreElRef}
+              />
             )}
             <div class={`${mergedPrefixCls.value}-nav`} ref={navElRef}>
               {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                tabPaneVNodes.map((vnode: any) => (
+                tabVNodes.map((vnode: any) => (
                   <TabNav {...vnode.props} v-slots={{ title: vnode.children?.title }} />
                 ))
               }
@@ -273,62 +238,53 @@ export default defineComponent({
             {!isSegmentType.value && <div class={`${mergedPrefixCls.value}-nav-border`}></div>}
             {isLineType.value && <div class={`${mergedPrefixCls.value}-nav-bar`} ref={navBarElRef}></div>}
           </div>
-          <div class={`${mergedPrefixCls.value}-pane-wrapper`}>{filterTabPanes(props, tabPaneVNodes, selectedKey)}</div>
+          <div class={`${mergedPrefixCls.value}-pane-wrapper`}>{filterTabVNodes(props, tabVNodes, selectedKey)}</div>
         </div>
       )
     }
   },
 })
 
-function useClasses(props: TabsProps, mergedPrefixCls: ComputedRef<string>) {
-  return computed(() => {
-    const { type, placement, mode } = props
-    const prefixCls = mergedPrefixCls.value
-    return {
-      [prefixCls]: true,
-      [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-nav-${placement}`]: type === 'line',
-      [`${prefixCls}-nav-${mode}`]: type === 'segment',
-    }
-  })
-}
-
 function useNavPreNextClasses(
   props: TabsProps,
+  mergedPrefixCls: ComputedRef<string>,
   type: 'pre' | 'next',
   disabled: Ref<boolean>,
-  mergedPrefixCls: ComputedRef<string>,
 ) {
   return computed(() => {
     const { placement } = props
     const prefixCls = mergedPrefixCls.value
-    return {
+    return normalizeClass({
       [`${prefixCls}-nav-${type}`]: true,
       [`${prefixCls}-nav-${type}-disabled`]: disabled.value,
       [`${prefixCls}-nav-${type}-${placement}`]: true,
-    }
+    })
   })
 }
 
-function filterTabPanes(
+function flattenTabVNodes(tabVNodes: VNode[] | undefined): VNode[] {
+  return flattenNode(tabVNodes, { key: '__IDUX_TAB' })
+}
+
+function filterTabVNodes(
   props: TabsProps,
-  tabPaneVNodes: VNode[],
-  selectedKey: WritableComputedRef<string | number | undefined>,
+  tabVNodes: VNode[],
+  selectedKey: ComputedRef<string | number | undefined>,
 ): VNode[] {
-  const rendertabPaneVNodes: VNode[] = []
-  tabPaneVNodes.forEach(vNode => {
+  const renderTabVNodes: VNode[] = []
+  tabVNodes.forEach(vNode => {
     const { key } = vNode
     const { forceRender } = vNode.props as TabProps
-    const useVShow = forceRender ?? props.forceRender === true
+    const useVShow = forceRender ?? props.forceRender
     const show = selectedKey.value === key
     if (vNode.key !== undefined) {
       vNode.key = key!
     }
     if (useVShow) {
-      rendertabPaneVNodes.push(withDirectives(vNode, [[vShow, show]]))
+      renderTabVNodes.push(withDirectives(vNode, [[vShow, show]]))
     } else if (show) {
-      rendertabPaneVNodes.push(vNode)
+      renderTabVNodes.push(vNode)
     }
   })
-  return rendertabPaneVNodes
+  return renderTabVNodes
 }

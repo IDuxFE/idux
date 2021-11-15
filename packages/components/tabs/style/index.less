@@ -15,6 +15,7 @@
     &-pane-wrapper {
         grid-area: bottom;
         padding: @tabs-pane-padding 0 0 0;
+
         .@{tabs-prefix} {
 
             &-pane {
@@ -32,6 +33,7 @@
         &&-has-scroll {
             padding: 0 @tabs-nav-pre-next-width;
         }
+
         .@{tabs-prefix} {
 
             &-nav {
@@ -52,7 +54,7 @@
                     white-space: nowrap;
                     padding: @tabs-nav-tab-padding;
                     background-color: @tabs-nav-bg-color;
-                    transition: @tabs-nav-transition;
+                    transition: @tabs-nav-tab-transition;
 
                     &-label {
                         display: flex;
@@ -97,33 +99,51 @@
                 }
 
                 &-pre-top,
-                &-next-top {
+                &-pre-bottom,
+                &-next-top,
+                &-next-bottom {
                     width: @tabs-nav-pre-next-width;
                     height: @tabs-nav-tab-height;
                     line-height: @tabs-nav-tab-height;
                 }
 
-                &-pre-top {
+                &-pre-top,
+                &-pre-bottom {
                     left: 0;
                 }
 
-                &-next-top {
+                &-next-top,
+                &-next-bottom {
                     right: 0;
                 }
 
                 &-pre-start,
-                &-next-start {
+                &-pre-end,
+                &-next-start,
+                &-next-end {
                     width: 100%;
                     height: @tabs-nav-pre-next-width;
                     line-height: @tabs-nav-pre-next-width;
                 }
 
-                &-pre-start {
+                &-pre-start,
+                &-pre-end {
                     top: 0;
                 }
 
-                &-next-start {
+                &-next-start,
+                &-next-end {
                     bottom: 0;
+                }
+
+                &-pre-start,
+                &-next-start {
+                    border-right: 1px solid @tabs-nav-border-color;
+                }
+
+                &-pre-end,
+                &-next-end {
+                    border-left: 1px solid @tabs-nav-border-color;
                 }
 
                 &-pre-disabled,
@@ -145,6 +165,7 @@
     }
 
     &-card {
+
         .@{tabs-prefix}-nav {
             z-index: @zindex-l1-1;
 
@@ -184,12 +205,13 @@
     }
 
     &-line {
+
         .@{tabs-prefix}-nav {
 
             &-bar {
                 position: absolute;
                 background-color: @tabs-nav-bar-color;
-                transition: @tabs-nav-transition;
+                transition: @tabs-nav-bar-transition;
                 bottom: 0;
                 height: @tabs-nav-bar-height;
                 border-radius: @tabs-border-radius @tabs-border-radius 0 0;
@@ -212,11 +234,12 @@
         }
         &.@{tabs-prefix} {
 
-            &-nav-start {
+            &-nav-start,
+            &-nav-end {
+
                 .@{tabs-prefix} {
 
                     &-nav-wrapper {
-                        grid-area: start;
                         flex-wrap: wrap;
                         &.@{tabs-prefix}-nav-wrapper-has-scroll {
                             padding: @tabs-nav-pre-next-width 0;
@@ -228,14 +251,74 @@
                         flex-direction: column;
 
                         &-bar {
-                            right: 0;
                             width: @tabs-nav-bar-height;
-                            border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
                         }
 
                         &-border {
                             height: 100%;
+                            width: 1px;
+                        }
+
+                        &-tab {
+                            min-height: @tabs-nav-tab-height;
+                        }
+                    }
+
+                    &-pane {
+                        height: 100%;
+                    }
+                }
+            }
+
+            &-nav-start {
+
+                .@{tabs-prefix} {
+
+                    &-nav-wrapper {
+                        grid-area: start;
+                    }
+
+                    &-nav {
+
+                        &-bar {
+                            right: 0;
+                            border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
+                        }
+
+                        &-border {
                             left: unset;
+                        }
+
+                        &-tab {
+                            min-height: @tabs-nav-tab-height;
+                        }
+                    }
+
+                    &-pane-wrapper {
+                        padding: 0 0 0 @tabs-pane-padding;
+                    }
+                }
+            }
+
+            &-nav-end {
+
+                .@{tabs-prefix} {
+
+                    &-nav-wrapper {
+                        grid-area: end;
+                    }
+
+                    &-nav {
+
+                        &-bar {
+                            left: 0;
+                            width: @tabs-nav-bar-height;
+                            border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
+                        }
+
+                        &-border {
+                            height: 100%;
+                            left: 0;
                             width: 1px;
                             background-color: @tabs-nav-border-color;
                         }
@@ -246,11 +329,23 @@
                     }
 
                     &-pane-wrapper {
-                        padding: 0 0 0 20px;
+                        padding: 0 @tabs-pane-padding 0 0;
+                    }
+                }
+            }
+
+            &-nav-bottom {
+                grid-template-rows: 1fr auto;
+
+                .@{tabs-prefix} {
+
+                    &-nav-wrapper {
+                        grid-area: bottom;
                     }
 
-                    &-pane {
-                        height: 100%;
+                    &-pane-wrapper {
+                        grid-area: top;
+                        padding: 0 0 @tabs-pane-padding 0;
                     }
                 }
             }
@@ -258,6 +353,7 @@
     }
 
     &-segment {
+
         .@{tabs-prefix}-nav {
 
             &-wrapper {

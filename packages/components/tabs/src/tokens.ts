@@ -9,6 +9,7 @@ import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface TabsContext {
   selectedKey: Ref<string | number | undefined>
+  selectedElRef: Ref<HTMLElement | null>
   mergedPrefixCls: ComputedRef<string>
   handleTabClick: (key: string | number, evt: Event) => void
 }
