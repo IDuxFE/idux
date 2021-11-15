@@ -8,6 +8,11 @@
 import type { TimePickerPanelColumnType } from './types'
 import type { Dayjs } from 'dayjs/esm'
 
+import dayjs from 'dayjs/esm'
+import customParseFormat from 'dayjs/esm/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
+
 /**
  * normalize format string
  *
@@ -73,4 +78,14 @@ export function calculateValue(
   }
 
   return dateNow.millisecond(0).toDate()
+}
+
+export function parseDate(date: Date | undefined): Dayjs
+export function parseDate(date: string, format: string, strict?: boolean): Dayjs
+export function parseDate(date: string | Date | undefined, format?: string, strict?: boolean): Dayjs {
+  return dayjs(date, format, strict)
+}
+
+export function formatDate(date: Date, format: string): string {
+  return dayjs(date).format(format)
 }

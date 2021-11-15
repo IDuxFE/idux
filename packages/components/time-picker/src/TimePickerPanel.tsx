@@ -9,13 +9,14 @@ import type { PanelCell, PanelColumnProps, TimePickerPanelColumnType, TimePicker
 import type { Dayjs } from 'dayjs/esm'
 import type { ComputedRef } from 'vue'
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
 import { callEmit } from '@idux/cdk/utils'
 
 import PanelColumn from './panel-column/PanelColumn'
+import { timePickerToken } from './tokens'
 import { timePickerPanelProps } from './types'
 import { calculateValue, calculateViewHour, normalizeAmPm } from './utils'
 
@@ -23,6 +24,7 @@ export default defineComponent({
   name: 'IxTimePickerPanel',
   props: timePickerPanelProps,
   setup(props) {
+    const { mergedPrefixCls } = inject(timePickerToken)!
     const { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps } = useOptions(props)
 
     const columns = computed(() => {
@@ -35,7 +37,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class="ix-time-picker-panel">
+      <div class={`${mergedPrefixCls.value}-panel`}>
         {columns.value.map((item, index) => (
           <PanelColumn key={index} {...item} visible={props.visible} />
         ))}

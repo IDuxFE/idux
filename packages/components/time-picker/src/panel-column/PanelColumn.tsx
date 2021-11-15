@@ -5,17 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, nextTick, ref, watchEffect } from 'vue'
+import { defineComponent, inject, nextTick, ref, watch, watchEffect } from 'vue'
 
 import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 
+import { timePickerToken } from '../tokens'
 import { panelColumnProps } from '../types'
 import PanelCell from './PanelCell'
 
 export default defineComponent({
   props: panelColumnProps,
   setup(props) {
+    const { mergedPrefixCls } = inject(timePickerToken)!
     const listRef = ref<HTMLElement | null>(null)
 
     const onChange = (value: string | number) => {
@@ -38,9 +40,13 @@ export default defineComponent({
         nextTick(() => scrollToSelected(0))
       }
     })
+    watch(
+      () => props.selectedValue,
+      () => nextTick(scrollToSelected),
+    )
 
     return () => (
-      <ul ref={listRef} class="ix-time-picker-panel-column">
+      <ul ref={listRef} class={`${mergedPrefixCls.value}-panel-column`}>
         {props.options.map((item, index) => {
           const { disabled, value } = item
           return (
