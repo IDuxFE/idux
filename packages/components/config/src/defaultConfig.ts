@@ -71,7 +71,7 @@ const divider = shallowReactive<DividerConfig>({
   type: 'horizontal',
 })
 
-const space = shallowReactive<SpaceConfig>({ size: 'sm', wrap: true })
+const space = shallowReactive<SpaceConfig>({ gap: 8, wrap: true })
 
 const row = shallowReactive<RowConfig>({ wrap: true })
 
