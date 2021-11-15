@@ -18,9 +18,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export interface SelectOption {
   additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     class?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     style?: any
     [key: string]: unknown
   }
@@ -28,7 +26,7 @@ export interface SelectOption {
   key?: VKey
   label?: string
   children?: SelectOption[]
-  slots?: Slots
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
   value?: any
 
   [key: string]: any

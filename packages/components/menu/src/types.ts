@@ -5,8 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -14,11 +16,18 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 
+export interface MenuClickOptions {
+  event: Event
+  key: VKey
+  type: 'item' | 'itemGroup' | 'sub'
+}
+
 export const menuProps = {
-  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])),
-  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number])),
+  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
+  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
   collapsed: IxPropTypes.bool.def(false),
   collapsedWidth: IxPropTypes.oneOfType([String, Number]),
+  dataSource: IxPropTypes.array<MenuData>(),
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
@@ -26,9 +35,9 @@ export const menuProps = {
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: (string | number)[]) => void>(),
-  'onUpdate:selectedKeys': IxPropTypes.emit<(selectedKeys: (string | number)[]) => void>(),
-  onItemClick: IxPropTypes.emit<(key: string | number, evt: Event) => void>(),
+  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
+  'onUpdate:selectedKeys': IxPropTypes.emit<(selectedKeys: VKey[]) => void>(),
+  onClick: IxPropTypes.emit<(options: MenuClickOptions) => void>(),
 }
 
 export type MenuProps = IxInnerPropTypes<typeof menuProps>
@@ -59,15 +68,6 @@ export type MenuItemGroupComponent = DefineComponent<
 >
 export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
 
-export const menuDividerProps = {}
-
-export type MenuDividerProps = IxInnerPropTypes<typeof menuDividerProps>
-export type MenuDividerPublicProps = IxPublicPropTypes<typeof menuDividerProps>
-export type MenuDividerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof MenuDividerPublicProps> & MenuDividerPublicProps
->
-export type MenuDividerInstance = InstanceType<DefineComponent<MenuDividerProps>>
-
 export const menuSubProps = {
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
@@ -82,3 +82,50 @@ export type MenuSubProps = IxInnerPropTypes<typeof menuSubProps>
 export type MenuSubPublicProps = IxPublicPropTypes<typeof menuSubProps>
 export type MenuSubComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
 export type MenuSubInstance = InstanceType<DefineComponent<MenuSubProps>>
+
+export interface MenuItem extends MenuItemPublicProps {
+  type: 'item'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
+}
+
+export interface MenuItemGroup extends MenuItemGroupPublicProps {
+  type: 'itemGroup'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+  children?: MenuData[]
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
+}
+
+export interface MenuSub extends MenuSubPublicProps {
+  type: 'sub'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+  children?: MenuData[]
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
+}
+
+export interface MenuDivider {
+  type: 'divider'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+}
+
+export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider

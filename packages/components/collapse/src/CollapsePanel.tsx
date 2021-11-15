@@ -6,6 +6,7 @@
  */
 
 import type { CollapsePanelProps } from './types'
+import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -65,7 +66,7 @@ function renderHeader(
   props: CollapsePanelProps,
   slots: Slots,
   collapseSlots: Slots,
-  key: string | number,
+  key: VKey,
   expanded: boolean,
   expandIcon: ComputedRef<string>,
   handleClick: () => void,

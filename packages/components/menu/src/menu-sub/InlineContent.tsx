@@ -5,21 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { ɵCollapseTransition } from '@idux/components/_private'
 
-import { menuSubToken } from '../token'
+import { menuSubToken, menuToken } from '../token'
 
 export default defineComponent({
   setup() {
+    const { mergedPrefixCls } = inject(menuToken)!
     const { slots, isExpanded } = inject(menuSubToken)!
 
     const classes = computed(() => {
-      return {
-        'ix-menu-content': true,
-        'ix-menu-inline': true,
-      }
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}-content`]: true,
+        [`${prefixCls}-inline`]: true,
+      })
     })
 
     return () => (

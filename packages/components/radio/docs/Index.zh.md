@@ -49,12 +49,6 @@ subtitle: 单选框
 | `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
-| `options` | 以配置形式设置子元素 | `RadioOption[]`| - | - | - |
+| `options` | 以配置形式设置子元素 | `RadioOption[]`| - | 优先级高于 `default` 插槽 |  |
 | `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: any) => void`| - | - | - |
-
-#### RadioGroupSlots
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `default` | 设置单选框组的 `IxRadio` | - | - |

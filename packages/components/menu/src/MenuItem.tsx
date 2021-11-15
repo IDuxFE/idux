@@ -5,11 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuItemProps } from './types'
-import type { Ref } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, watch } from 'vue'
 
-import { computed, defineComponent, inject, watch } from 'vue'
-
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
 
@@ -21,17 +19,27 @@ export default defineComponent({
   name: 'IxMenuItem',
   props: menuItemProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-item`)
+
     const key = useKey()
 
     // menuContext must exist
-    const { indent, mode, selectedKeys, handleItemClick } = inject(menuToken, null)!
+    const { indent, mode, selectedKeys, handleClick } = inject(menuToken, null)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
     const isSelected = computed(() => selectedKeys.value.includes(key))
     watch(isSelected, selected => menuSubContext?.handleSelect(key, selected))
 
-    const classes = useClasses(props, isSelected)
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-selected`]: isSelected.value,
+      })
+    })
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(mode, indent, level, menuItemGroupContext)
@@ -40,22 +48,21 @@ export default defineComponent({
     })
 
     const onClick = (evt: Event) => {
-      if (!props.disabled) {
-        handleItemClick(key, evt)
-        menuSubContext?.handleItemClick()
-      }
+      handleClick(key, 'item', evt)
+      menuSubContext?.handleItemClick()
     }
 
     return () => {
-      const { icon, label } = props
+      const { disabled, icon, label } = props
+      const prefixCls = mergedPrefixCls.value
 
       const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
-      const iconWrapper = iconNode ? <span class="ix-menu-item-icon">{iconNode}</span> : undefined
+      const iconWrapper = iconNode ? <span class={`${prefixCls}-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.default?.() ?? label}</span>
 
       return (
-        <li class={classes.value} style={style.value} onClick={onClick}>
+        <li class={classes.value} style={style.value} onClick={disabled ? undefined : onClick}>
           {iconWrapper}
           {labelNode}
         </li>
@@ -63,13 +70,3 @@ export default defineComponent({
     }
   },
 })
-
-const useClasses = (props: MenuItemProps, selected: Ref<boolean>) => {
-  return computed(() => {
-    return {
-      'ix-menu-item': true,
-      'ix-menu-item-disabled': props.disabled,
-      'ix-menu-item-selected': selected.value,
-    }
-  })
-}

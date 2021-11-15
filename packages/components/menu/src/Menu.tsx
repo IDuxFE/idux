@@ -5,45 +5,71 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuMode, MenuProps } from './types'
+import type { MenuData, MenuProps } from './types'
 import type { ɵDropdownContext } from '@idux/components/dropdown'
-import type { ComputedRef } from 'vue'
+import type { Slots, VNode } from 'vue'
 
-import { computed, defineComponent, inject, provide, watch } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, provide, watch } from 'vue'
 
-import { callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
+import { Logger, VKey, callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 
+import MenuDivider from './MenuDivider'
+import MenuItem from './MenuItem'
+import MenuItemGroup from './MenuItemGroup'
+import MenuSub from './menu-sub/MenuSub'
 import { menuToken } from './token'
 import { menuProps } from './types'
-
 export default defineComponent({
   name: 'IxMenu',
   props: menuProps,
   setup(props, { slots }) {
-    const dropdownContext = inject(ɵDropdownToken, null)
-    const { expandedKeys, handleExpand } = useExpanded(props)
-    const { selectedKeys, handleItemClick } = useSelected(props, dropdownContext)
-
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu`)
     const config = useGlobalConfig('menu')
     const indent = computed(() => props.indent ?? config.indent)
-    const mode = useMenuMode(props)
+    const mode = computed(() => {
+      const { collapsed, mode } = props
+      return collapsed && mode !== 'horizontal' ? 'vertical' : mode
+    })
     const multiple = computed(() => props.multiple)
     const theme = computed(() => props.theme ?? config.theme)
 
+    const dropdownContext = inject(ɵDropdownToken, null)
+    const { expandedKeys, handleExpand } = useExpanded(props)
+    const { selectedKeys, handleSelected } = useSelected(props, dropdownContext)
+
+    const handleClick = (key: VKey, type: 'item' | 'itemGroup' | 'sub', evt: Event) => {
+      if (type === 'item') {
+        handleSelected(key)
+      }
+      callEmit(props.onClick, { key, type, event: evt })
+    }
+
     provide(menuToken, {
-      expandedKeys,
-      handleExpand,
-      selectedKeys,
-      handleItemClick,
+      mergedPrefixCls,
       indent,
       mode,
       multiple,
       theme,
+      expandedKeys,
+      handleExpand,
+      selectedKeys,
+      handleClick,
     })
 
-    const classes = useClasses(props, theme, mode, !!dropdownContext)
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-${theme.value}`]: true,
+        [`${prefixCls}-${mode.value}`]: true,
+        [`${prefixCls}-collapsed`]: props.collapsed,
+        [`${prefixCls}-dropdown`]: !!dropdownContext,
+      })
+    })
+
     const style = computed(() => {
       if (!props.collapsed || mode.value === 'horizontal') {
         return undefined
@@ -51,18 +77,22 @@ export default defineComponent({
       return { width: convertCssPixel(props.collapsedWidth ?? config.collapsedWidth) }
     })
 
-    return () => (
-      <ul class={classes.value} style={style.value}>
-        {slots.default?.()}
-      </ul>
-    )
+    return () => {
+      const { dataSource } = props
+      const children = dataSource ? coverChildren(dataSource) : slots.default?.()
+      return (
+        <ul class={classes.value} style={style.value}>
+          {children}
+        </ul>
+      )
+    }
   },
 })
 
 function useExpanded(props: MenuProps) {
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
-  const handleExpand = (key: string | number, expanded: boolean) => {
+  const handleExpand = (key: VKey, expanded: boolean) => {
     const index = expandedKeys.value.indexOf(key)
     if (expanded) {
       index === -1 && setExpandedKeys([...expandedKeys.value, key])
@@ -74,7 +104,7 @@ function useExpanded(props: MenuProps) {
     }
   }
 
-  let cachedExpandedKeys: Array<string | number> = []
+  let cachedExpandedKeys: Array<VKey> = []
   watch(
     () => props.collapsed,
     collapsed => {
@@ -94,8 +124,7 @@ function useExpanded(props: MenuProps) {
 function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null) {
   const [selectedKeys, setSelectedKeys] = useControlledProp(props, 'selectedKeys', () => [])
 
-  const handleItemClick = (key: string | number, evt: Event) => {
-    callEmit(props.onItemClick, key, evt)
+  const handleSelected = (key: VKey) => {
     dropdownContext?.setVisibility?.(false)
     // dropdown 默认为 false, 其他情况默认为 true
     const selectable = props.selectable ?? !dropdownContext
@@ -114,27 +143,36 @@ function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null
     }
   }
 
-  return { selectedKeys, handleItemClick }
+  return { selectedKeys, handleSelected }
 }
 
-function useMenuMode(props: MenuProps) {
-  return computed(() => {
-    const { collapsed, mode } = props
-    if (collapsed && mode !== 'horizontal') {
-      return 'vertical'
-    }
-    return mode
-  })
-}
+function coverChildren(data?: MenuData[]) {
+  if (!data || data.length === 0) {
+    return []
+  }
 
-function useClasses(props: MenuProps, theme: ComputedRef<string>, mode: ComputedRef<MenuMode>, isDropdown: boolean) {
-  return computed(() => {
-    return {
-      'ix-menu': true,
-      [`ix-menu-${theme.value}`]: true,
-      [`ix-menu-${mode.value}`]: true,
-      'ix-menu-collapsed': props.collapsed,
-      'ix-menu-dropdown': isDropdown,
+  const nodes: VNode[] = []
+  data.forEach(item => {
+    const { type, additional, children, slots, ...rest } = item as MenuData & { children?: MenuData[]; slots?: Slots }
+    if (type === 'item') {
+      nodes.push(<MenuItem v-slots={slots} {...rest} {...additional}></MenuItem>)
+    } else if (type === 'divider') {
+      nodes.push(<MenuDivider {...rest} {...additional}></MenuDivider>)
+    } else if (type === 'itemGroup') {
+      nodes.push(
+        <MenuItemGroup v-slots={slots} {...rest} {...additional}>
+          {coverChildren(children)}
+        </MenuItemGroup>,
+      )
+    } else if (type === 'sub') {
+      nodes.push(
+        <MenuSub v-slots={slots} {...rest} {...additional}>
+          {coverChildren(children)}
+        </MenuSub>,
+      )
+    } else {
+      __DEV__ && Logger.warn('components/menu', `type [${type}] not supported`)
     }
   })
+  return nodes
 }

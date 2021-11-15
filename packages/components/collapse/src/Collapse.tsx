@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { VKey } from '@idux/cdk/utils'
+
 import { computed, defineComponent, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
@@ -25,7 +27,7 @@ export default defineComponent({
 
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
-    const handleExpand = (key: string | number) => {
+    const handleExpand = (key: VKey) => {
       let tempKeys = [...expandedKeys.value]
       const index = tempKeys.indexOf(key)
       if (accordion.value) {

@@ -5,18 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { VKey } from '@idux/cdk/utils'
+
 import { getCurrentInstance } from 'vue'
 
-import { isSymbol } from 'lodash-es'
-
-import { Logger } from '@idux/cdk/utils'
-
-export function useKey(): string | number {
+export function useKey(): VKey {
   const { vnode, uid } = getCurrentInstance()!
-  let key = vnode.key ?? uid
-  if (isSymbol(key)) {
-    key = String(key)
-    __DEV__ && Logger.warn('components/utils', `useKey not support Symbol`)
-  }
-  return key
+  return vnode.key ?? uid
 }

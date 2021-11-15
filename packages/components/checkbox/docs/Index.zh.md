@@ -55,6 +55,6 @@ cover:
 | `disabled` | 子`IxCheckbox`的`disabled`属性 | `boolean` | `false` | - |- |
 | `gap` | 子`IxCheckbox` 的间隔 | `number \| string` | - | - | - |
 | `name` | 子`IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
-| `options` | 以配置形式设置子元素 | `CheckboxOption[]`| - | - | - |
+| `options` | 以配置形式设置子元素 | `CheckboxOption[]`| - | - | 优先级高于 `default` 插槽 |
 | `size` | 子`IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: Array<string \| number>) => void`| - | - | - |

@@ -1,3 +1,4 @@
-import { IDUX_ICON_DEPENDENCIES, Left, Up, addIconDefinitions } from '@idux/components/icon'
+import { addIconDefinitions } from '@idux/components/icon'
+import * as allIcon from '@idux/components/icon/src/definitions'
 
-addIconDefinitions([...IDUX_ICON_DEPENDENCIES, Up, Left])
+addIconDefinitions(Object.values(allIcon))
