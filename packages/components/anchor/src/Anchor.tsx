@@ -7,7 +7,7 @@
 
 import type { AnchorLinkProps, AnchorProps } from './types'
 import type { AnchorConfig } from '@idux/components/config'
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
 
@@ -24,6 +24,9 @@ export default defineComponent({
   name: 'IxAnchor',
   props: anchorProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-anchor`)
+
     const config = useGlobalConfig('anchor')
     const hideLinkBall = computed(() => props.hideLinkBall ?? config.hideLinkBall)
     const wrapperStyle = computed(() => {
@@ -32,17 +35,18 @@ export default defineComponent({
     })
 
     const { activeLink } = useLinks(props, config)
-    const { anchorRef, inkBallClasses, inkBallTop } = useInkBall(activeLink)
+    const { anchorRef, inkBallClasses, inkBallTop } = useInkBall(activeLink, mergedPrefixCls)
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const linkBall = hideLinkBall.value ? null : (
         <span class={inkBallClasses.value} style={{ top: inkBallTop.value }} />
       )
 
       const anchorNode = (
-        <div class="ix-anchor-wrapper" style={wrapperStyle.value}>
-          <div class="ix-anchor" ref={anchorRef}>
-            <div class="ix-anchor-ink">{linkBall}</div>
+        <div class={`${prefixCls}-wrapper`} style={wrapperStyle.value}>
+          <div class={prefixCls} ref={anchorRef}>
+            <div class={`${prefixCls}-ink`}>{linkBall}</div>
             {slots.default?.()}
           </div>
         </div>
@@ -96,12 +100,13 @@ const useLinks = (props: AnchorProps, config: AnchorConfig) => {
   return { activeLink }
 }
 
-const useInkBall = (activeLink: Ref<string | undefined>) => {
+const useInkBall = (activeLink: Ref<string | undefined>, mergedPrefixCls: ComputedRef<string>) => {
   const anchorRef = ref<HTMLDivElement>()
   const inkBallClasses = computed(() => {
+    const prefixCls = mergedPrefixCls.value
     return {
-      'ix-anchor-ink-ball': true,
-      'ix-anchor-ink-ball-visible': !!activeLink.value,
+      [`${prefixCls}-ink-ball`]: true,
+      [`${prefixCls}-ink-ball-visible`]: !!activeLink.value,
     }
   })
 
