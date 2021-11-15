@@ -16,12 +16,6 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import { spaceProps } from './types'
 
-const spaceSize = {
-  sm: 8,
-  md: 16,
-  lg: 24,
-}
-
 const flexGapSupported = supportsFlexGap()
 
 export default defineComponent({
@@ -41,13 +35,10 @@ export default defineComponent({
       return align
     })
 
-    const mergedSizes = computed(() => {
-      const { size = config.size } = props
-      const [horizontalSize, verticalSize] = Array.isArray(size) ? size : [size, size]
-      return [
-        spaceSize[horizontalSize as 'sm' | 'md' | 'lg'] ?? horizontalSize,
-        spaceSize[verticalSize as 'sm' | 'md' | 'lg'] ?? verticalSize,
-      ]
+    const mergedGaps = computed(() => {
+      const { gap = config.gap } = props
+      const gaps = Array.isArray(gap) ? gap : [gap, gap]
+      return gaps.map(gap => convertCssPixel(gap))
     })
 
     const classes = computed(() => {
@@ -63,11 +54,12 @@ export default defineComponent({
     })
 
     const style = computed(() => {
-      const [horizontalSize, verticalSize] = mergedSizes.value
+      const [rowGap, columnGap] = mergedGaps.value
       if (flexGapSupported) {
-        return `gap: ${convertCssPixel(verticalSize)} ${convertCssPixel(horizontalSize)}`
+        return `gap: ${rowGap} ${columnGap}`
       } else {
-        return wrap.value ? `margin-bottom: -${convertCssPixel(verticalSize)}` : undefined
+        const { direction } = props
+        return direction === 'horizontal' && wrap.value ? `margin-bottom: -${convertCssPixel(columnGap)}` : undefined
       }
     })
 
@@ -77,7 +69,7 @@ export default defineComponent({
         return
       }
       const prefixCls = mergedPrefixCls.value
-      const children = renderChildren(props, slots, prefixCls, nodes, mergedSizes, wrap)
+      const children = renderChildren(props, slots, prefixCls, nodes, mergedGaps, wrap)
       return (
         <div class={classes.value} style={style.value}>
           {children}
@@ -92,13 +84,13 @@ function renderChildren(
   slots: Slots,
   prefixCls: string,
   nodes: VNode[],
-  mergedSizes: ComputedRef<number[]>,
+  mergedGaps: ComputedRef<(string | number)[]>,
   wrap: ComputedRef<boolean>,
 ) {
   const lastIndex = nodes.length - 1
 
   const { direction } = props
-  const [horizontalSize, verticalSize] = mergedSizes.value
+  const [rowGap, columnGap] = mergedGaps.value
   const children: VNode[] = []
 
   const splitNode = slots.split?.() ?? props.split
@@ -107,12 +99,13 @@ function renderChildren(
     if (flexGapSupported) {
       return undefined
     }
+
     if (direction === 'horizontal') {
-      const marginRight = index < lastIndex ? convertCssPixel(horizontalSize / (splitNode ? 2 : 1)) : undefined
-      const paddingBottom = wrap.value ? convertCssPixel(verticalSize) : undefined
+      const marginRight = index < lastIndex ? convertCssPixel(rowGap) : undefined
+      const paddingBottom = wrap.value ? convertCssPixel(columnGap) : undefined
       return { marginRight, paddingBottom }
     } else {
-      const marginBottom = index < lastIndex ? convertCssPixel(verticalSize / (splitNode ? 2 : 1)) : undefined
+      const marginBottom = index < lastIndex ? convertCssPixel(rowGap) : undefined
       return { marginBottom }
     }
   }

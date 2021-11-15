@@ -1,8 +1,8 @@
 ---
-order: 4
+order: 3
 title:
   zh: 自定义间距
-  en: Custom space size
+  en: Custom gap
 ---
 
 ## zh

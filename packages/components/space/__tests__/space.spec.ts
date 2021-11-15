@@ -54,7 +54,7 @@ describe('Space', () => {
     expect(wrapper.classes()).toContain('ix-space-vertical')
   })
 
-  test('size work', async () => {
+  test('gap work', async () => {
     const wrapper = SpaceMount()
 
     const wrapperElement = wrapper.element as HTMLElement
@@ -68,7 +68,7 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('8px')
 
-    await wrapper.setProps({ size: 'md' })
+    await wrapper.setProps({ gap: 16 })
 
     expect(wrapperElement.style.marginBottom).toBe('-16px')
     expect(itemElements[0].style.marginRight).toBe('16px')
@@ -78,7 +78,7 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('16px')
 
-    await wrapper.setProps({ size: 'lg' })
+    await wrapper.setProps({ gap: `24px` })
 
     expect(wrapperElement.style.marginBottom).toBe('-24px')
     expect(itemElements[0].style.marginRight).toBe('24px')
@@ -88,15 +88,15 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('24px')
 
-    await wrapper.setProps({ size: 20 })
+    await wrapper.setProps({ gap: [8, 16] })
 
-    expect(wrapperElement.style.marginBottom).toBe('-20px')
-    expect(itemElements[0].style.marginRight).toBe('20px')
-    expect(itemElements[0].style.paddingBottom).toEqual('20px')
-    expect(itemElements[1].style.marginRight).toBe('20px')
-    expect(itemElements[1].style.paddingBottom).toEqual('20px')
+    expect(wrapperElement.style.marginBottom).toBe('-16px')
+    expect(itemElements[0].style.marginRight).toBe('8px')
+    expect(itemElements[0].style.paddingBottom).toEqual('16px')
+    expect(itemElements[1].style.marginRight).toBe('8px')
+    expect(itemElements[1].style.paddingBottom).toEqual('16px')
     expect(itemElements[2].style.marginRight).toBe('')
-    expect(itemElements[2].style.paddingBottom).toEqual('20px')
+    expect(itemElements[2].style.paddingBottom).toEqual('16px')
   })
 
   test('split work', async () => {

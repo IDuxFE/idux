@@ -1,15 +1,16 @@
 <template>
-  <IxSpace :size="size">
+  <!-- TODO IxInputNumber -->
+  <input v-model="gap" type="number" />
+  <br /><br />
+  <IxSpace :gap="gap">
     Space
     <IxButton mode="primary">Button</IxButton>
     <IxButton>Button</IxButton>
   </IxSpace>
-  <br />
-  <input v-model="size" type="number" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const size = ref(20)
+const gap = ref(8)
 </script>
