@@ -5,20 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import { callEmit, isNumeric } from '@idux/cdk/utils'
 
+import { timePickerToken } from '../tokens'
 import { panelCellProps } from '../types'
 
 export default defineComponent({
   props: panelCellProps,
   setup(props) {
+    const { mergedPrefixCls } = inject(timePickerToken)!
     const classes = computed(() => {
       return {
-        'ix-time-picker-panel-cell': true,
-        'ix-time-picker-panel-cell-disabled': props.disabled,
-        'ix-time-picker-panel-cell-selected': props.selected,
+        [`${mergedPrefixCls.value}-panel-cell`]: true,
+        [`${mergedPrefixCls.value}-panel-cell-disabled`]: props.disabled,
+        [`${mergedPrefixCls.value}-panel-cell-selected`]: props.selected,
       }
     })
 

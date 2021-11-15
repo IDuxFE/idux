@@ -6,6 +6,7 @@
  */
 
 import type { BasePanelProps, TimePickerProps, TimeRangePickerProps } from './types'
+import type { InputPreProcessor, InputValidator } from './usePickerControl'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { TimePickerConfig, TimeRangePickerConfig } from '@idux/components/config'
@@ -19,37 +20,45 @@ import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useFormItemRegister } from '@idux/components/form'
 
+import { usePickerControl } from './usePickerControl'
 import { normalizeFormat } from './utils'
 
-export interface CommonBindings<T> {
+export interface CommonBindings {
   inputRef: Ref<InputInstance | undefined>
-  accessor: FormAccessor<T>
+  accessor: FormAccessor<Date>
   isDisabled: ComputedRef<boolean>
-  handleChange: (value: T) => void
+  inputValue: Ref<string>
+  pannelValue: Ref<Date | undefined>
+  handleInputChange: (value: string) => void
+  handlePanelChange: (value: Date) => void
   handleClear: (evt: Event) => void
   handleBlur: (evt: FocusEvent) => void
   handleFocus: (evt: FocusEvent) => void
+  handleClose: () => void
+  handleInputConfirm: () => void
   focus: (options?: FocusOptions) => void
   blur: () => void
 }
 
-export function useCommonBindings<T extends TimePickerProps | TimeRangePickerProps>(
-  props: T,
-): CommonBindings<T extends TimeRangePickerProps ? [Date, Date] : Date> {
+export function useCommonBindings(
+  props: TimePickerProps,
+  inputPreProcessors: InputPreProcessor[],
+  inputValidator: InputValidator,
+): CommonBindings {
   const inputRef = ref<InputInstance>()
   const { accessor, control } = useValueAccessor()
   useFormItemRegister(control)
+  const { inputValue, pannelValue, handleInputChange, handlePanelChange, handleInputConfirm, handleClose } =
+    usePickerControl(accessor.valueRef, props.format, inputPreProcessors, inputValidator, value => {
+      callEmit(props.onChange, value)
+      accessor.setValue(value)
+      inputRef.value?.focus()
+    })
+
   const isDisabled = computed(() => accessor.disabled.value)
 
   const focus = (options?: FocusOptions) => inputRef.value?.focus(options)
   const blur = () => inputRef.value?.blur()
-
-  function handleChange(value: Date | [Date, Date]) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    callEmit(props.onChange, value as any)
-    accessor.setValue(value)
-    inputRef.value?.focus()
-  }
 
   function handleClear(evt: Event) {
     callEmit(props.onClear, evt as MouseEvent)
@@ -69,10 +78,15 @@ export function useCommonBindings<T extends TimePickerProps | TimeRangePickerPro
     inputRef,
     accessor,
     isDisabled,
-    handleChange,
+    inputValue,
+    pannelValue,
+    handleInputChange,
+    handlePanelChange,
     handleClear,
     handleBlur,
     handleFocus,
+    handleInputConfirm,
+    handleClose,
     focus,
     blur,
   }
@@ -163,7 +177,7 @@ export function useCommonOverlayProps(
     placement: 'bottom',
     transitionName: 'ix-fade',
     target: 'ix-time-picker-panel-container',
-    trigger: 'click',
+    trigger: 'manual',
     ['onUpdate:visible']: setVisibility,
   }))
 }

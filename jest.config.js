@@ -34,7 +34,7 @@ module.exports = {
     '^@idux(.*)$': '<rootDir>/packages$1',
     '^@tests(.*)$': '<rootDir>/tests$1',
     '^lodash-es$': 'lodash',
-    '^dayjs/esm$': 'dayjs',
+    '^dayjs/esm(.*)$': 'dayjs/$1',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   coverageReporters: ['json', 'lcov', 'text', 'cobertura'],

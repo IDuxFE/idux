@@ -9,7 +9,7 @@
 import { ref } from 'vue'
 
 function changeToNow() {
-  time.value = Date.now()
+  time.value = new Date()
 }
 
 const time = ref()
