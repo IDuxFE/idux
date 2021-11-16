@@ -1,0 +1,27 @@
+
+.alert-status-color (@type, @color, @bg-color) {
+  &.@{alert-prefix}-@{type} .@{alert-prefix}-icon {
+    color: @color;
+  }
+
+  &.@{alert-prefix}-@{type} {
+    background-color: @bg-color;
+  }
+}
+
+.alert-transition () {
+
+  &-enter-active, &-leave-active {
+    transition: all .3s cubic-bezier(.4, 0, .2, 1) 0s;
+  }
+
+  &-enter-from, &-leave-to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  &-leave-from, &-enter-to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

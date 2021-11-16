@@ -283,6 +283,11 @@ export interface ModalConfig {
   zIndex?: number
 }
 
+export interface AlertConfig {
+  closable: boolean
+  icon: string
+}
+
 export interface DrawerConfig {
   closable: boolean
   closeIcon: string
@@ -369,6 +374,7 @@ export interface GlobalConfig {
   popover: PopoverConfig
   stepper: StepperConfig
   // Feedback
+  alert: AlertConfig
   message: MessageConfig
   modal: ModalConfig
   drawer: DrawerConfig

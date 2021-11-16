@@ -6,6 +6,7 @@
  */
 
 import type {
+  AlertConfig,
   AnchorConfig,
   AvatarConfig,
   BackTopConfig,
@@ -271,6 +272,11 @@ const modal = shallowReactive<ModalConfig>({
   width: 520,
 })
 
+const alert = shallowReactive<AlertConfig>({
+  closable: false,
+  icon: '',
+})
+
 const drawer = shallowReactive<DrawerConfig>({
   closable: true,
   closeOnEsc: true,
@@ -349,6 +355,7 @@ export const defaultConfig: GlobalConfig = {
   tree,
   popover,
   // Feedback
+  alert,
   message,
   modal,
   drawer,
