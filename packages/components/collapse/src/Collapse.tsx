@@ -19,6 +19,8 @@ export default defineComponent({
   name: 'IxCollapse',
   props: collapseProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse`)
     const config = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? config.accordion)
     const borderless = computed(() => props.borderless ?? config.borderless)
@@ -42,10 +44,11 @@ export default defineComponent({
     provide(collapseToken, { props, slots, expandedKeys, expandIcon, handleExpand })
 
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-collapse': true,
-        'ix-collapse-borderless': borderless.value,
-        'ix-collapse-ghost': ghost.value,
+        [prefixCls]: true,
+        [`${prefixCls}-borderless`]: borderless.value,
+        [`${prefixCls}-ghost`]: ghost.value,
       }
     })
 

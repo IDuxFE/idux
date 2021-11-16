@@ -15,6 +15,7 @@ import { isString } from 'lodash-es'
 
 import { getFirstValidNode } from '@idux/cdk/utils'
 import { ɵCollapseTransition } from '@idux/components/_private'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
@@ -26,15 +27,18 @@ export default defineComponent({
   name: 'IxCollapsePanel',
   props: collapsePanelProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse-panel`)
     const { slots: collapseSlots, expandedKeys, expandIcon, handleExpand } = inject(collapseToken)!
 
     const key = useKey()
     const isExpanded = computed(() => expandedKeys.value.includes(key))
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-collapse-panel': true,
-        'ix-collapse-panel-disabled': props.disabled,
-        'ix-collapse-panel-expanded': isExpanded.value,
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-expanded`]: isExpanded.value,
       }
     })
 
@@ -48,12 +52,13 @@ export default defineComponent({
     return () => {
       const expanded = isExpanded.value
       const headerNode = renderHeader(props, slots, collapseSlots, key, expanded, expandIcon, handleClick)
+      const prefixCls = mergedPrefixCls.value
       return (
         <div class={classes.value}>
           {headerNode}
           <ɵCollapseTransition appear>
-            <div v-show={expanded} class="ix-collapse-panel-content">
-              <div class="ix-collapse-panel-content-box">{slots.default?.()}</div>
+            <div v-show={expanded} class={`${prefixCls}-content`}>
+              <div class={`${prefixCls}-content-box`}>{slots.default?.()}</div>
             </div>
           </ɵCollapseTransition>
         </div>
