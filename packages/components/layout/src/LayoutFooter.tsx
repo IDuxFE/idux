@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+
+import { useGlobalConfig } from '@idux/components/config'
 
 import { layoutFooterProps } from './types'
 
@@ -13,8 +15,11 @@ export default defineComponent({
   name: 'IxLayoutFooter',
   props: layoutFooterProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-footer`)
     return () => {
-      return <footer class="ix-layout-footer">{slots.default?.()}</footer>
+      const prefixCls = mergedPrefixCls.value
+      return <footer class={prefixCls}>{slots.default?.()}</footer>
     }
   },
 })

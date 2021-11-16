@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+
+import { useGlobalConfig } from '@idux/components/config'
 
 import { layoutContentProps } from './types'
 
@@ -13,8 +15,11 @@ export default defineComponent({
   name: 'IxLayoutContent',
   props: layoutContentProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-content`)
     return () => {
-      return <main class="ix-layout-content">{slots.default?.()}</main>
+      const prefixCls = mergedPrefixCls.value
+      return <main class={`${prefixCls}`}>{slots.default?.()}</main>
     }
   },
 })
