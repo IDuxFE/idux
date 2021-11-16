@@ -25,6 +25,8 @@ export default defineComponent({
   name: 'IxAvatar',
   props: avatarProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-avatar`)
     const config = useGlobalConfig('avatar')
 
     const showText = ref(false)
@@ -41,7 +43,7 @@ export default defineComponent({
 
     const { avatarRef, textRef, size, avatarStyle, textStyle } = useSize(props, config)
 
-    const classes = useClasses(props, config, size, showText, showIcon)
+    const classes = useClasses(props, config, size, showText, showIcon, mergedPrefixCls)
 
     const handleError = (evt: Event) => {
       const result = callEmit(props.onError, evt)
@@ -54,30 +56,30 @@ export default defineComponent({
       }
     }
 
-    return { avatarRef, textRef, showText, showIcon, icon$$, classes, avatarStyle, textStyle, handleError }
-  },
+    return () => {
+      let child: VNodeTypes
 
-  render() {
-    let child: VNodeTypes
+      const prefixCls = mergedPrefixCls.value
 
-    if (this.showIcon) {
-      child = renderIcon(this.$slots.icon, this.icon$$)
-    } else if (this.showText) {
-      const textChild = this.$slots.default?.() ?? this.text
-      child = (
-        <span ref="textRef" class="ix-avatar-text" style={this.textStyle}>
-          {textChild}
+      if (showIcon.value) {
+        child = renderIcon(slots.icon, icon$$.value)
+      } else if (showText.value) {
+        const textChild = slots.default?.() ?? props.text
+        child = (
+          <span ref={textRef} class={`${prefixCls}-text`} style={textStyle.value}>
+            {textChild}
+          </span>
+        )
+      } else {
+        child = <img src={props.src} srcset={props.srcset} alt={props.alt} onError={handleError} />
+      }
+
+      return (
+        <span ref={avatarRef} class={classes.value} style={avatarStyle.value}>
+          {child}
         </span>
       )
-    } else {
-      child = <img src={this.src} srcset={this.srcset} alt={this.alt} onError={this.handleError} />
     }
-
-    return (
-      <span ref="avatarRef" class={this.classes} style={this.avatarStyle}>
-        {child}
-      </span>
-    )
   },
 })
 
@@ -87,15 +89,17 @@ const useClasses = (
   size: ComputedRef<AvatarSize | Partial<Record<BreakpointKey, number>>>,
   showText: Ref<boolean>,
   showIcon: Ref<boolean>,
+  mergedPrefixCls: ComputedRef<string>,
 ) => {
   return computed(() => {
     const shape = props.shape ?? config.shape
     const sizeValue = size.value
+    const prefixCls = mergedPrefixCls.value
     return {
-      'ix-avatar': true,
-      'ix-avatar-image': !!props.src && !showText.value && !showIcon.value,
-      [`ix-avatar-${shape}`]: true,
-      [`ix-avatar-${sizeValue}`]: isString(sizeValue),
+      [`${prefixCls}`]: true,
+      [`${prefixCls}-image`]: !!props.src && !showText.value && !showIcon.value,
+      [`${prefixCls}-${shape}`]: true,
+      [`${prefixCls}-${sizeValue}`]: isString(sizeValue),
     }
   })
 }

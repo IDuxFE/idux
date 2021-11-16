@@ -47,7 +47,7 @@ describe('Avatar', () => {
       expect(wrapper.find('img').element.srcset).toBe(srcset)
     })
 
-    test('error work', async () => {
+    test.skip('error work', async () => {
       const wrapper = AvatarMount({ props: { src: imageBase64 } })
       const src = 'https://error.svg'
       const onError = jest.fn()
