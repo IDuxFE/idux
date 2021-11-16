@@ -15,6 +15,7 @@ import { isString } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import { headerProps } from './types'
@@ -30,7 +31,10 @@ export default defineComponent({
   name: 'IxHeader',
   props: headerProps,
   setup(props, { slots }) {
-    const classes = useClasses(props)
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-header`)
+
+    const classes = useClasses(props, mergedPrefixCls)
 
     const avatarSize = computed(() => avatarSizeTransformMap[props.size])
 
@@ -39,29 +43,31 @@ export default defineComponent({
 
     return () => {
       const { prefix, suffix, avatar, title, subTitle } = props
+      const prefixCls = mergedPrefixCls.value
       return (
         <div class={classes.value}>
-          <div class="ix-header-content">
-            {renderIcon(slots.prefix, prefix, onPrefixClick, 'ix-header-prefix')}
+          <div class={`${prefixCls}-content`}>
+            {renderIcon(slots.prefix, prefix, onPrefixClick, `${prefixCls}-prefix`)}
             {renderAvatar(slots.avatar, avatar, avatarSize)}
-            {renderTitle(slots.default, title, 'ix-header-title')}
-            {renderTitle(slots.subTitle, subTitle, 'ix-header-sub-title')}
-            {renderIcon(slots.suffix, suffix, onSuffixClick, 'ix-header-suffix')}
+            {renderTitle(slots.default, title, `${prefixCls}-title`)}
+            {renderTitle(slots.subTitle, subTitle, `${prefixCls}-sub-title`)}
+            {renderIcon(slots.suffix, suffix, onSuffixClick, `${prefixCls}-suffix`)}
           </div>
-          {slots.description ? <div class="ix-header-description">{slots.description()}</div> : null}
+          {slots.description ? <div class={`${prefixCls}-description`}>{slots.description()}</div> : null}
         </div>
       )
     }
   },
 })
 
-const useClasses = (props: HeaderProps) => {
+const useClasses = (props: HeaderProps, mergedPrefixCls: ComputedRef<string>) => {
   return computed(() => {
+    const prefixCls = mergedPrefixCls.value
     return {
-      'ix-header': true,
-      'ix-header-bar': props.showBar,
-      'ix-header-disabled': props.disabled,
-      [`ix-header-${props.size}`]: true,
+      [prefixCls]: true,
+      [`${prefixCls}-bar`]: props.showBar,
+      [`${prefixCls}-disabled`]: props.disabled,
+      [`${prefixCls}-${props.size}`]: true,
     }
   })
 }
