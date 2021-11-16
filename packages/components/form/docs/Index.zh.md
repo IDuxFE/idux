@@ -26,7 +26,7 @@ single: true
 | `control` | 表单的控制器 | `string \| number \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
 | `controlCol` | 配置 `IxFormItem` 的 `controlCol` 默认值 | `number \| ColProps` | - | - | - |
 | `hasFeedback` | 配置 `IxFormItem` 的 `hasFeedback` 默认值 | `boolean` | `false` | - | - |
-| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `left \| right` | `right` | ✅ | - |
+| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `start \| end` | `end` | ✅ | - |
 | `labelCol` | 配置 `IxFormItem` 的 `labelCol` 默认值 | `number \| ColProps` | - | - | - |
 | `layout` | 表单布局 | `horizontal \| vertical \| inline` | `horizontal` | ✅ | - |
 | `size` | 表单大小 | `sm \| md \| lg` | `md` | ✅ | - |
@@ -47,7 +47,7 @@ single: true
 | `extra` | 额外的提示信息 | `string \| #extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `hasFeedback` | 是否展示校验状态图标 | `boolean` | `false` | - | - |
 | `label` | `label` 标签的文本| `string \| #label` | - | - | - |
-| `labelAlign` | `label` 标签文本对齐方式 | `left \| right` | - | - | - |
+| `labelAlign` | `label` 标签文本对齐方式 | `start \| end` | - | - | - |
 | `labelCol` | `label` 标签布局，同 `<IxCol>` 组件，设置 `span` `offset` 的值  | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
 | `labelFor` | `label` 标签的 `for` 属性 | `string` | - | - | - |
 | `labelTooltip` | 配置提示信息 | `sting \| #tooltip` | - | - | - |
