@@ -1,0 +1,57 @@
+@import './themes/default.less';
+@import './mixin.less';
+
+@alert-prefix: ~'@{idux-prefix}-alert';
+
+.@{alert-prefix} {
+  display: flex;
+  align-items: center;
+  margin-bottom: @alert-margin-bottom;
+  padding: @alert-padding;
+  word-wrap: break-word;
+  font-size: @alert-font-size;
+  line-height: @alert-line-height;
+  border-radius: @alert-border-radius;
+
+  .alert-transition();
+
+  .alert-status-color(success, @alert-success-color, @alert-success-background-color);
+  .alert-status-color(info, @alert-info-color, @alert-info-background-color);
+  .alert-status-color(warning, @alert-warning-color, @alert-warning-background-color);
+  .alert-status-color(error, @alert-error-color, @alert-error-background-color);
+
+  &-with-description {
+    align-items: flex-start;
+  }
+
+  &-icon {
+    margin-right: @alert-icon-margin-right;
+  }
+
+  &-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-pagination {
+    margin-left: @alert-action-margin-left;
+
+    .@{alert-prefix}-page-text {
+      margin: @alert-page-text-margin;
+    }
+
+    .@{idux-prefix}-icon {
+      cursor: pointer;
+    }
+
+    .@{alert-prefix}-disabled-icon {
+      cursor: not-allowed;
+      color: @alert-disabled-icon-color;
+    }
+  }
+
+  &-close-icon {
+    cursor: pointer;
+    margin-left: @alert-action-margin-left;
+  }
+}

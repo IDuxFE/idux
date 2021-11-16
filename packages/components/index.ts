@@ -8,6 +8,7 @@
 import type { App, Directive } from 'vue'
 
 import { IxAffix } from '@idux/components/affix'
+import { IxAlert } from '@idux/components/alert'
 import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxBackTop } from '@idux/components/back-top'
@@ -56,6 +57,7 @@ import { version } from '@idux/components/version'
 
 const components = [
   IxAffix,
+  IxAlert,
   IxAnchor,
   IxAnchorLink,
   IxAvatar,
