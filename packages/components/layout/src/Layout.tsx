@@ -7,16 +7,21 @@
 
 import { computed, defineComponent } from 'vue'
 
+import { useGlobalConfig } from '@idux/components/config'
+
 import { layoutProps } from './types'
 
 export default defineComponent({
   name: 'IxLayout',
   props: layoutProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-layout`)
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-layout': true,
-        'ix-layout-out-sider': props.outSider,
+        [prefixCls]: true,
+        [`${prefixCls}-out-sider`]: props.outSider,
       }
     })
     return () => {

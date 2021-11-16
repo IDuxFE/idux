@@ -14,6 +14,7 @@ import { isUndefined } from 'lodash-es'
 
 import { BREAKPOINTS, useBreakpoints } from '@idux/cdk/breakpoint'
 import { callEmit, hasSlot } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import Trigger from './Trigger'
 import { layoutSiderProps } from './types'
@@ -22,6 +23,8 @@ export default defineComponent({
   name: 'IxLayoutHeader',
   props: layoutSiderProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-sider`)
     const isDefinedBreakPoint = computed(() => {
       return !isUndefined(props.breakpoint)
     })
@@ -36,20 +39,22 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-layout-sider': true,
-        'ix-layout-sider-end': props.placement === 'end',
-        'ix-layout-sider-collapsed': isCollapsed.value,
+        [prefixCls]: true,
+        [`${prefixCls}-end`]: props.placement === 'end',
+        [`${prefixCls}-collapsed`]: isCollapsed.value,
       }
     })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const trigger =
         props.showTrigger &&
         (slots.trigger ? slots.trigger() : <Trigger collapsed={isCollapsed.value} onClick={handleClick} />)
       return (
         <aside class={classes.value} style={style.value}>
-          <div class="ix-layout-sider-children">{slots.default?.()}</div>
+          <div class={`${prefixCls}-children`}>{slots.default?.()}</div>
           {trigger}
         </aside>
       )
