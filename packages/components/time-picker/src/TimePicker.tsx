@@ -38,8 +38,8 @@ export default defineComponent({
 
     const overlayProps = useCommonOverlayProps(props, changeVisible)
     const handleInputConfirm = withKeys(() => changeVisible(false), ['enter'])
-    const handleInputChange = () => changeVisible(true)
-    const handleInputFocus = () => changeVisible(true)
+    const handleInput = () => changeVisible(true)
+    const handleInputClick = () => changeVisible(true)
     const handleInputClear = () => changeVisible(false)
 
     return () => {
@@ -55,9 +55,9 @@ export default defineComponent({
               {
                 ...attrs,
                 class: cls,
-                onChange: handleInputChange,
+                onInput: handleInput,
                 onKeydown: handleInputConfirm,
-                onFocus: handleInputFocus,
+                onClick: handleInputClick,
                 onClear: handleInputClear,
               },
               inputSlots,
