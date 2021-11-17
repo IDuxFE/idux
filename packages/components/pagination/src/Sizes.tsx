@@ -13,7 +13,7 @@ import { paginationToken } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, config, locale, activeSize, onPageSizeChange } = inject(paginationToken)!
+    const { props, config, locale, activeSize, onPageSizeChange, mergedPrefixCls } = inject(paginationToken)!
 
     const size = computed(() => props.size ?? config.size)
     const pageSizes = computed(() => props.pageSizes ?? config.pageSizes)
@@ -28,8 +28,9 @@ export default defineComponent({
     })
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-sizes`
       return (
-        <li class="ix-pagination-sizes">
+        <li class={prefixCls}>
           <IxSelect
             disabled={props.disabled}
             options={sizeOptions.value}
