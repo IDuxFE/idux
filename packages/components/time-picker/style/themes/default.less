@@ -1,20 +1,31 @@
 @import '../../../style/themes/default.less';
 @import '../../../form/style/themes/default.less';
 
-@time-picker-border-width: @form-border-width;
-@time-picker-border-style: @form-border-style;
-@time-picker-border-color: @form-border-color;
+@time-picker-window-border-width: @form-border-width;
+@time-picker-window-border-style: @form-border-style;
+@time-picker-window-border-color: @form-border-color;
+@time-picker-window-margin: @margin-lg;
 
 @time-picker-color: @form-color;
 @time-picker-background-color: @form-background-color;
 @time-picker-disabled-color: @form-disabled-color;
 
-@time-picker-transition-duration: @form-transition-duration;
-@time-picker-transition-function: @form-transition-function;
-@time-transition-duration: all @time-picker-transition-duration @time-picker-transition-function;
+@time-transition: none;
 
+@time-picker-panel-height: 200px;
+@time-picker-panel-padding: @spacing-sm;
 @time-picker-panel-box-shadow: @shadow-bottom-md;
 
-@time-picker-cell-active-background-color: @color-grey-l50;
-@time-picker-cell-selected-color: @color-primary;
-@time-picker-cell-selected-background-color: tint(@color-primary, 90%);
+@time-picker-cell-width: 60px;
+@time-picker-cell-height: 32px;
+@time-picker-cell-color: @color-graphite-d10;
+@time-picker-cell-active-background-color: transparent;
+@time-picker-cell-selected-color: @color-graphite-d40;
+@time-picker-cell-selected-font-weight: @font-weight-lg;
+@time-picker-cell-selected-background-color: transparent;
+
+@time-picker-scrollbar-width: 6px;
+@time-picker-scrollbar-thumb-background-color: @color-graphite-l10;
+@time-picker-scrollbar-thumb-border-radius: 10px;
+@time-picker-scrollbar-track-background: transparent;
+@time-picker-scrollbar-track-transition: all 0.1s linear;
