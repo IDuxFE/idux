@@ -31,10 +31,13 @@ export default defineComponent({
   name: 'IxMessage',
   props: messageProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const config = useGlobalConfig('message')
 
     const classes = computed(() => {
-      const clsPrefix = 'ix-message'
+      const prefixCls = mergedPrefixCls.value
+      const clsPrefix = [prefixCls]
       return [clsPrefix, `${clsPrefix}-${props.type}`]
     })
 
@@ -46,12 +49,13 @@ export default defineComponent({
     const { visible, onMouseEnter, onMouseLeave } = useEvents(props, config)
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const iconNode = isString(icon.value) ? <IxIcon name={icon.value}></IxIcon> : icon.value
       return (
         <div v-show={visible.value} class={classes.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
-          <div class="ix-message-content">
+          <div class={`${prefixCls}-content`}>
             {iconNode}
-            <span class="ix-message-content-text">{slots.default?.()}</span>
+            <span class={`${prefixCls}-content-text`}>{slots.default?.()}</span>
           </div>
         </div>
       )

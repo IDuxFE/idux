@@ -24,11 +24,13 @@ export default defineComponent({
   inheritAttrs: false,
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-message-provider`)
     const config = useGlobalConfig('message')
     const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { messages, loadContainer, open, info, success, warning, error, loading, update, destroy, destroyAll } =
-      useMessage(maxCount)
+      useMessage(maxCount, mergedPrefixCls)
 
     const apis = { open, info, success, warning, error, loading, update, destroy, destroyAll }
 
@@ -36,6 +38,7 @@ export default defineComponent({
     expose(apis)
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const child = messages.value.map(item => {
         // The default value for `visible` is true, onDestroy should not be passed in Message
         const { key, content, visible = true, onDestroy, ...restProps } = item
@@ -51,8 +54,8 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target="ix-message-container" load={loadContainer.value}>
-            <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={style.value} {...attrs}>
+          <CdkPortal target={`${prefixCls}-container`} load={loadContainer.value}>
+            <TransitionGroup tag="div" name="ix-move-up" class={`${prefixCls}-wrapper`} style={style.value} {...attrs}>
               {child}
             </TransitionGroup>
           </CdkPortal>
@@ -62,7 +65,8 @@ export default defineComponent({
   },
 })
 
-const useMessage = (maxCount: ComputedRef<number>) => {
+const useMessage = (maxCount: ComputedRef<number>, mergedPrefixCls: ComputedRef<string>) => {
+  const prefixCls = mergedPrefixCls.value
   const messages = ref<MessageOptions[]>([])
 
   const getCurrIndex = (key: VKey) => {
@@ -80,7 +84,7 @@ const useMessage = (maxCount: ComputedRef<number>) => {
       messages.value = messages.value.slice(-maxCount.value + 1)
     }
 
-    const key = item.key ?? uniqueId('ix-message')
+    const key = item.key ?? uniqueId(`${prefixCls}`)
     messages.value.push({ ...item, key })
     return key
   }
