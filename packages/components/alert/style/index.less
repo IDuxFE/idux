@@ -4,13 +4,15 @@
 @alert-prefix: ~'@{idux-prefix}-alert';
 
 .@{alert-prefix} {
+  position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: @alert-margin-bottom;
-  padding: @alert-padding;
   word-wrap: break-word;
   font-size: @alert-font-size;
   line-height: @alert-line-height;
+  margin-bottom: @alert-margin-bottom;
+  padding: @alert-padding;
+  color: @alert-color;
   border-radius: @alert-border-radius;
 
   .alert-transition();
@@ -22,6 +24,16 @@
 
   &-with-description {
     align-items: flex-start;
+
+    .@{alert-prefix}-icon {
+      font-size: @alert-icon-font-size-with-description;
+      margin-right: @alert-icon-margin-right-with-description;
+    }
+
+    .@{alert-prefix}-title {
+      font-size: @alert-title-font-size-with-description;
+      margin-bottom: @alert-title-margin-bottom-with-description;
+    }
   }
 
   &-icon {
@@ -35,23 +47,32 @@
 
   &-pagination {
     margin-left: @alert-action-margin-left;
+    color: @alert-color-secondary;
 
-    .@{alert-prefix}-page-text {
-      margin: @alert-page-text-margin;
-    }
-
-    .@{idux-prefix}-icon {
+    .@{icon-prefix} {
       cursor: pointer;
-    }
+      padding: @alert-pagination-icon-padding;
+      transition: color @alert-transition-duration;
 
-    .@{alert-prefix}-disabled-icon {
-      cursor: not-allowed;
-      color: @alert-disabled-icon-color;
+      &:hover {
+        color: @alert-color;
+      }
+
+      &.@{alert-prefix}-pagination-disabled {
+        cursor: not-allowed;
+        color: @alert-disabled-color;
+      }
     }
   }
 
   &-close-icon {
     cursor: pointer;
     margin-left: @alert-action-margin-left;
+    color: @alert-color-secondary;
+    transition: color @alert-transition-duration;
+
+    &:hover {
+      color: @alert-color;
+    }
   }
 }

@@ -10,23 +10,14 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-type AlertType = 'success' | 'info' | 'warning' | 'error'
-
-export const alertIconMap = {
-  success: 'check-circle',
-  error: 'info-circle',
-  info: 'bulb',
-  warning: 'exclamation-circle',
-}
-
 export const alertProps = {
-  type: IxPropTypes.oneOf<AlertType>(['success', 'info', 'warning', 'error']).def('info'),
   closable: IxPropTypes.bool.def(false),
   closeIcon: IxPropTypes.string.def('close'),
-  icon: IxPropTypes.string,
-  title: IxPropTypes.string,
   description: IxPropTypes.string,
-  showPagination: IxPropTypes.bool.def(false),
+  icon: IxPropTypes.string,
+  title: IxPropTypes.oneOfType([String, IxPropTypes.arrayOf(String)]),
+  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<AlertPagination>()]).def(false),
+  type: IxPropTypes.oneOf<AlertType>(['success', 'info', 'warning', 'error']).def('info'),
   onBeforeClose: IxPropTypes.emit<() => void | boolean | Promise<boolean>>(),
   onClose: IxPropTypes.emit<() => void>(),
 }
@@ -35,3 +26,9 @@ export type AlertProps = IxInnerPropTypes<typeof alertProps>
 export type AlertPublicProps = IxPublicPropTypes<typeof alertProps>
 export type AlertComponent = DefineComponent<Omit<HTMLAttributes, keyof AlertPublicProps> & AlertPublicProps>
 export type AlertInstance = InstanceType<DefineComponent<AlertProps>>
+
+export type AlertType = 'success' | 'info' | 'warning' | 'error'
+export interface AlertPagination {
+  pageIndex?: number
+  onChange?: (pageIndex: number) => void
+}

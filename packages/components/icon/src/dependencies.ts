@@ -8,6 +8,7 @@
 import type { IconDefinition } from './types'
 
 import {
+  Bulb,
   CaretDownFilled,
   CaretUpFilled,
   Check,
@@ -44,13 +45,14 @@ import {
 } from './definitions'
 
 export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
+  Bulb, // Alert
   CaretDownFilled, // Table
   CaretUpFilled, // Table
   Check, // Progress Stepper
-  CheckCircle, // Result Message
+  CheckCircle, // Result Message Alert
   CheckCircleFilled, // Progress Modal FormItem
   ClockCircle, // TimePicker
-  Close, // Stepper Modal Drawer Image Message
+  Close, // Stepper Modal Drawer Image Message Alert
   CloseCircle, // TimePicker TimeRangePicker Input Textarea
   CloseCircleFilled, // Modal FormItem
   DoubleLeft, // Pagination
@@ -58,9 +60,9 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Down, // Select Table
   Ellipsis, // Table
   Empty, // Empty
-  ExclamationCircle, // Message Result
+  ExclamationCircle, // Message Result Alert
   ExclamationCircleFilled, // Modal
-  InfoCircle, // Message Result
+  InfoCircle, // Message Result Alert
   InfoCircleFilled, // Modal
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout

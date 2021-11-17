@@ -274,7 +274,12 @@ const modal = shallowReactive<ModalConfig>({
 
 const alert = shallowReactive<AlertConfig>({
   closable: false,
-  icon: '',
+  icon: {
+    success: 'check-circle',
+    error: 'info-circle',
+    info: 'bulb',
+    warning: 'exclamation-circle',
+  },
 })
 
 const drawer = shallowReactive<DrawerConfig>({

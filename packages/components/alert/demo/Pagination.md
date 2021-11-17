@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 5
 title:
   zh: 切换提示
 ---
