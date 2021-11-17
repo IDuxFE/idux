@@ -8,7 +8,7 @@
 import type { PopoverProps } from './types'
 import type { Slots, VNode } from 'vue'
 
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
@@ -23,36 +23,41 @@ export default defineComponent({
   name: 'IxPopover',
   props: popoverProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
     const configProps = ɵUseConfigProps(props, config, setVisibility)
 
-    return () => (
-      <ɵOverlay
-        visible={visibility.value}
-        v-slots={{ default: slots.default, content: () => renderContent(props, slots) }}
-        class="ix-popover"
-        transitionName="ix-fade"
-        {...configProps.value}
-        offset={defaultOffset}
-        showArrow
-      />
-    )
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      return (
+        <ɵOverlay
+          visible={visibility.value}
+          v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
+          class={prefixCls}
+          transitionName="ix-fade"
+          {...configProps.value}
+          offset={defaultOffset}
+          showArrow
+        />
+      )
+    }
   },
 })
 
-const renderContent = (props: PopoverProps, slots: Slots) => {
+const renderContent = (props: PopoverProps, slots: Slots, prefixCls: string) => {
   if (!(slots.title || props.title || slots.content || props.content)) {
     return null
   }
 
   const child: VNode[] = []
   if (slots.title || props.title) {
-    child.push(<div class="ix-popover-title">{slots.title?.() ?? props.title}</div>)
+    child.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
   }
 
   if (slots.content || props.content) {
-    child.push(<div class="ix-popover-content">{slots.content?.() ?? props.content}</div>)
+    child.push(<div class={`${prefixCls}-content`}>{slots.content?.() ?? props.content}</div>)
   }
 
   return child
