@@ -5,13 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, Ref, Transition, VNode, computed, defineComponent, normalizeClass, ref } from 'vue'
+import { Transition, computed, defineComponent, normalizeClass } from 'vue'
 
-import { callEmit, flattenNode, useState } from '@idux/cdk/utils'
-import { AlertConfig, useGlobalConfig } from '@idux/components/config'
+import { isObject } from 'lodash-es'
+
+import { convertArray, flattenNode } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
-import { AlertProps, alertIconMap, alertProps } from './types'
+import { useCloseable } from './composables/useCloseable'
+import { usePagination } from './composables/usePagination'
+import { alertProps } from './types'
 
 export default defineComponent({
   name: 'IxAlert',
@@ -19,63 +23,73 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-alert`)
-    const isVisible = ref(true)
-    const alertConfig = useGlobalConfig('alert')
-    const iconName = computed(() => props.icon ?? (alertConfig.icon || alertIconMap[props.type]))
-    const isShowIcon = computed(() => iconName.value !== '')
-    const children = computed(() => flattenNode(slots.default?.() ?? []))
 
-    const { pageIndex, pageText, isShowPagination, isLeftDisabled, isRightDisabled, offsetPageIndex } = usePagination(
+    const config = useGlobalConfig('alert')
+    const icon = computed(() => {
+      if (props.icon !== undefined) {
+        return props.icon
+      }
+      const iconConfig = config.icon
+      return isObject(iconConfig) ? iconConfig[props.type] : iconConfig
+    })
+    const titleChildren = computed(() => {
+      if (slots.default) {
+        return flattenNode(slots.default())
+      }
+      return convertArray(props.title)
+    })
+    const { pageIndex, pageText, isPagination, leftDisabled, rightDisabled, offsetPageIndex } = usePagination(
       props,
-      children,
+      titleChildren,
     )
+    const { closeable, visible, handleClose } = useCloseable(props, config)
 
-    const { mergedClosable, handleCloseClick } = useClose(props, alertConfig, isVisible)
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-${props.type}`]: true,
+        [`${prefixCls}-with-description`]: slots.description || props.description,
+      })
+    })
 
     return () => {
-      const titleContent = Array.isArray(props.title)
-        ? props.title.map(item => <div>{item}</div>)
-        : props.title || children.value
-      const title = isShowPagination.value
-        ? props.title?.[pageIndex.value] || children.value[pageIndex.value]
-        : titleContent
+      // TODO: TransitionGroup with pagination
+      const pagination = isPagination.value
+      const titleNodes = pagination ? titleChildren.value[pageIndex.value - 1] : titleChildren.value
 
-      const description = slots.description?.() ?? props.description
+      const iconNode = slots.icon?.() ?? (icon.value && <IxIcon name={icon.value} />)
+      const descriptionNode = slots.description?.() ?? props.description
 
-      const closeIcon = slots.closeIcon?.() ?? <IxIcon name={props.closeIcon} />
-      const icon = (
-        <span class={`${mergedPrefixCls.value}-icon`}>{slots.icon?.() ?? <IxIcon name={iconName.value} />}</span>
-      )
-
-      const disabledIconCls = `${mergedPrefixCls.value}-disabled-icon`
-      const leftIconClass = { [disabledIconCls]: isLeftDisabled.value }
-      const rightIconClass = { [disabledIconCls]: isRightDisabled.value }
-
-      const alertClass = normalizeClass({
-        [mergedPrefixCls.value]: true,
-        [`${mergedPrefixCls.value}-${props.type}`]: true,
-        [`${mergedPrefixCls.value}-with-description`]: !!description,
-      })
-
+      const prefixCls = mergedPrefixCls.value
+      const paginationDisabledCls = `${prefixCls}-pagination-disabled`
       return (
-        <Transition appear name={mergedPrefixCls.value}>
-          {isVisible.value && (
-            <div class={alertClass}>
-              {isShowIcon.value && icon}
-              <div class={`${mergedPrefixCls.value}-content`}>
-                {title}
-                {description && <div>{description}</div>}
+        <Transition name={prefixCls}>
+          {visible.value && (
+            <div class={classes.value}>
+              {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
+              <div class={`${prefixCls}-content`}>
+                <div class={`${prefixCls}-title`}>{titleNodes}</div>
+                {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
               </div>
-              {isShowPagination.value && (
-                <div class={`${mergedPrefixCls.value}-pagination`}>
-                  <IxIcon name="left" class={leftIconClass} onClick={() => offsetPageIndex(-1)}></IxIcon>
-                  <span class={`${mergedPrefixCls.value}-page-text`}>{pageText.value}</span>
-                  <IxIcon name="right" class={rightIconClass} onClick={() => offsetPageIndex(1)}></IxIcon>
+              {pagination && (
+                <div class={`${prefixCls}-pagination`}>
+                  <IxIcon
+                    class={leftDisabled.value ? paginationDisabledCls : undefined}
+                    name="left"
+                    onClick={() => offsetPageIndex(-1)}
+                  />
+                  <span class={`${prefixCls}-pagination-text`}>{pageText.value}</span>
+                  <IxIcon
+                    class={rightDisabled.value ? paginationDisabledCls : undefined}
+                    name="right"
+                    onClick={() => offsetPageIndex(1)}
+                  />
                 </div>
               )}
-              {mergedClosable.value && (
-                <span class={`${mergedPrefixCls.value}-close-icon`} onClick={handleCloseClick}>
-                  {closeIcon}
+              {closeable.value && (
+                <span class={`${prefixCls}-close-icon`} onClick={handleClose}>
+                  {slots.closeIcon?.() ?? <IxIcon name={props.closeIcon} />}
                 </span>
               )}
             </div>
@@ -85,49 +99,3 @@ export default defineComponent({
     }
   },
 })
-
-const useClose = (props: AlertProps, alertConfig: Readonly<AlertConfig>, isVisible: Ref<boolean>) => {
-  const mergedClosable = computed(() => props.closable || alertConfig.closable)
-
-  const handleCloseClick = async () => {
-    const result = await callEmit(props.onBeforeClose)
-    if (result === false) {
-      return
-    }
-    isVisible.value = false
-    callEmit(props.onClose)
-  }
-
-  return {
-    mergedClosable,
-    handleCloseClick,
-  }
-}
-
-const usePagination = (props: AlertProps, children: ComputedRef<VNode[]>) => {
-  const [pageIndex, setPageIndex] = useState(0)
-  const pageTotal = computed(() => children.value.length)
-  const isShowPagination = computed(() => props.showPagination && pageTotal.value > 1)
-  const pageText = computed(() => `${pageIndex.value + 1}/${pageTotal.value}`)
-  const isLeftDisabled = computed(() => pageIndex.value <= 0)
-  const isRightDisabled = computed(() => pageIndex.value + 1 >= pageTotal.value)
-
-  const offsetPageIndex = (offset: -1 | 1) => {
-    if (offset === -1 && isLeftDisabled.value) {
-      return
-    }
-    if (offset === 1 && isRightDisabled.value) {
-      return
-    }
-    setPageIndex(pageIndex.value + offset)
-  }
-
-  return {
-    pageIndex,
-    pageText,
-    isShowPagination,
-    isLeftDisabled,
-    isRightDisabled,
-    offsetPageIndex,
-  }
-}

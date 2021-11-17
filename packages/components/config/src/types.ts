@@ -7,6 +7,7 @@
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
+import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
@@ -285,7 +286,7 @@ export interface ModalConfig {
 
 export interface AlertConfig {
   closable: boolean
-  icon: string
+  icon: string | Partial<Record<AlertType, string>>
 }
 
 export interface DrawerConfig {
