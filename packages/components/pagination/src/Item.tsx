@@ -12,6 +12,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { IxButton } from '@idux/components/button'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { paginationToken } from './token'
 import { paginationItemProps } from './types'
@@ -34,6 +35,8 @@ const indexDiffMap = {
 export default defineComponent({
   props: paginationItemProps,
   setup(props) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-pagination-item`)
     const { props: paginationProps, slots, config, locale, activeIndex, onPageIndexChange } = inject(paginationToken)!
 
     const isActive = computed(() => activeIndex.value === props.index)
@@ -42,9 +45,10 @@ export default defineComponent({
     const itemRender = computed(() => slots.item ?? paginationProps.itemRender ?? config.itemRender)
 
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-pagination-item': true,
-        'ix-pagination-item-active': isActive.value,
+        [prefixCls]: true,
+        [`${prefixCls}-active`]: isActive.value,
       }
     })
 
@@ -76,6 +80,7 @@ export default defineComponent({
     }
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const { index, type } = props
       const disabled = isDisabled.value
       const active = isActive.value
@@ -85,9 +90,9 @@ export default defineComponent({
       const commonButtonProps = { mode: 'text', size: 'sm', shape: 'circle' } as const
       if (props.type === 'prev5' || type === 'next5') {
         original = (
-          <span class="ix-pagination-item-jumper">
+          <span class={`${prefixCls}-jumper`}>
             <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-            <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
+            <IxButton {...commonButtonProps} class={`${prefixCls}-ellipsis`} icon="ellipsis" disabled={disabled} />
           </span>
         )
       } else if (!isNil(index)) {

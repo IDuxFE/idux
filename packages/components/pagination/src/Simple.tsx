@@ -7,6 +7,7 @@
 
 import { computed, defineComponent, inject, ref, watch, watchEffect } from 'vue'
 
+import { useGlobalConfig } from '@idux/components/config'
 import { IxInput } from '@idux/components/input'
 
 import Item from './Item'
@@ -15,6 +16,8 @@ import { useJumpToIndex } from './utils'
 
 export default defineComponent({
   setup() {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-pagination-item`)
     const { props, config, activeIndex, activeSize } = inject(paginationToken)!
     const size = computed(() => props.size ?? config.size)
     const lastIndex = ref(0)
@@ -36,17 +39,18 @@ export default defineComponent({
     const jumpToIndex = useJumpToIndex(false)
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       return (
         <>
           <Item disabled={isFirstIndex.value} type="prev" />
-          <li class="ix-pagination-item">
+          <li class={prefixCls}>
             <IxInput
               v-model={[inputValue.value, 'value']}
               disabled={props.disabled}
               size={size.value}
               onKeydown={jumpToIndex}
             />
-            <span class="ix-pagination-item-slash">/</span>
+            <span class={`${prefixCls}-slash`}>/</span>
             <span>{lastIndex.value}</span>
           </li>
           <Item disabled={isLastIndex.value} type="next" />

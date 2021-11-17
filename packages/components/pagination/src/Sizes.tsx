@@ -7,12 +7,15 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { useGlobalConfig } from '@idux/components/config'
 import { IxSelect } from '@idux/components/select'
 
 import { paginationToken } from './token'
 
 export default defineComponent({
   setup() {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-pagination-sizes`)
     const { props, config, locale, activeSize, onPageSizeChange } = inject(paginationToken)!
 
     const size = computed(() => props.size ?? config.size)
@@ -28,8 +31,9 @@ export default defineComponent({
     })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       return (
-        <li class="ix-pagination-sizes">
+        <li class={prefixCls}>
           <IxSelect
             disabled={props.disabled}
             options={sizeOptions.value}
