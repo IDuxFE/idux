@@ -34,7 +34,15 @@ const indexDiffMap = {
 export default defineComponent({
   props: paginationItemProps,
   setup(props) {
-    const { props: paginationProps, slots, config, locale, activeIndex, onPageIndexChange } = inject(paginationToken)!
+    const {
+      props: paginationProps,
+      slots,
+      config,
+      locale,
+      mergedPrefixCls,
+      activeIndex,
+      onPageIndexChange,
+    } = inject(paginationToken)!
 
     const isActive = computed(() => activeIndex.value === props.index)
     const isDisabled = computed(() => props.disabled || paginationProps.disabled)
@@ -42,9 +50,10 @@ export default defineComponent({
     const itemRender = computed(() => slots.item ?? paginationProps.itemRender ?? config.itemRender)
 
     const classes = computed(() => {
+      const prefixCls = `${mergedPrefixCls.value}-item`
       return {
-        'ix-pagination-item': true,
-        'ix-pagination-item-active': isActive.value,
+        [prefixCls]: true,
+        [`${prefixCls}-active`]: isActive.value,
       }
     })
 
@@ -76,6 +85,8 @@ export default defineComponent({
     }
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-item`
+
       const { index, type } = props
       const disabled = isDisabled.value
       const active = isActive.value
@@ -85,9 +96,9 @@ export default defineComponent({
       const commonButtonProps = { mode: 'text', size: 'sm', shape: 'circle' } as const
       if (props.type === 'prev5' || type === 'next5') {
         original = (
-          <span class="ix-pagination-item-jumper">
+          <span class={`${prefixCls}-jumper`}>
             <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-            <IxButton {...commonButtonProps} class="ix-pagination-item-ellipsis" icon="ellipsis" disabled={disabled} />
+            <IxButton {...commonButtonProps} class={`"${prefixCls}-ellipsis`} icon="ellipsis" disabled={disabled} />
           </span>
         )
       } else if (!isNil(index)) {

@@ -11,7 +11,7 @@ import { paginationToken } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, slots, config, locale, activeIndex, activeSize } = inject(paginationToken)!
+    const { props, slots, config, locale, activeIndex, activeSize, mergedPrefixCls } = inject(paginationToken)!
 
     const totalRender = computed(() => slots.total ?? props.totalRender ?? config.totalRender)
 
@@ -24,13 +24,14 @@ export default defineComponent({
     })
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-total`
       const { total } = props
       const { totalPrefix, totalSuffix } = locale.value
       const _totalRender = totalRender.value
       const children = _totalRender
         ? _totalRender({ total, range: range.value })
         : `${totalPrefix} ${total} ${totalSuffix}`
-      return <li class="ix-pagination-total">{children}</li>
+      return <li class={prefixCls}>{children}</li>
     }
   },
 })
