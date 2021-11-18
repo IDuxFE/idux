@@ -21,45 +21,48 @@ export default defineComponent({
   name: 'IxSpin',
   props: spinProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-spin`)
     const spinConfig = useGlobalConfig('spin')
 
     const hasDefaultSlot = computed(() => hasSlot(slots))
     const icon$$ = computed(() => props.icon ?? spinConfig.icon)
     const tip$$ = computed(() => props.tip ?? spinConfig.tip)
 
-    const { spinnerClassName, containerClassName } = useClasses(props, spinConfig, hasDefaultSlot)
+    const { spinnerClassName, containerClassName } = useClasses(props, spinConfig, hasDefaultSlot, mergedPrefixCls)
 
-    return {
-      tip$$,
-      icon$$,
-      spinnerClassName,
-      containerClassName,
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+
+      return (
+        <div class={prefixCls}>
+          {renderSpinner(props.spinning, spinnerClassName.value, icon$$.value, slots.icon, tip$$.value, prefixCls)}
+          {renderContent(slots.default, containerClassName.value)}
+        </div>
+      )
     }
-  },
-  render() {
-    const { spinning, spinnerClassName, containerClassName, icon$$, tip$$, $slots } = this
-
-    return (
-      <div class="ix-spin">
-        {renderSpinner(spinning, spinnerClassName, icon$$, $slots.icon, tip$$)}
-        {renderContent($slots.default, containerClassName)}
-      </div>
-    )
   },
 })
 
-const useClasses = (props: SpinProps, config: SpinConfig, hasDefaultSlot: ComputedRef<boolean>) => {
+const useClasses = (
+  props: SpinProps,
+  config: SpinConfig,
+  hasDefaultSlot: ComputedRef<boolean>,
+  mergedPrefixCls: ComputedRef<string>,
+) => {
+  const prefixCls = mergedPrefixCls.value
+
   const spinnerClassName = computed(() => {
     const size = props.size ?? config.size
     const tipAlign = props.tipAlign ?? config.tipAlign
-    return ['ix-spin-spinner', `ix-spin-spinner-tip-${tipAlign}`, `ix-spin-spinner-${size}`]
+    return [`${prefixCls}-spinner`, `${prefixCls}-spinner-tip-${tipAlign}`, `${prefixCls}-spinner-${size}`]
   })
 
   const containerClassName = computed(() => {
     if (!hasDefaultSlot.value) {
       return []
     }
-    return ['ix-spin-container', props.spinning ? 'ix-spin-container-blur' : '']
+    return [`${prefixCls}-container`, props.spinning ? `${prefixCls}-container-blur` : '']
   })
 
   return {
@@ -74,26 +77,27 @@ const renderSpinner = (
   icon: string,
   iconSlot: Slot | undefined,
   tip: string | undefined,
+  prefixCls: string,
 ) => {
   if (!spinning) {
     return null
   }
   const iconNode = iconSlot ? iconSlot() : <IxIcon name={icon} />
-  const tipNode = renderTip(tip)
+  const tipNode = renderTip(tip, prefixCls)
   return (
     <div class={spinnerClassName}>
-      <div class="ix-spin-spinner-icon">{iconNode}</div>
+      <div class={`${prefixCls}-spinner-icon`}>{iconNode}</div>
       {tipNode}
     </div>
   )
 }
 
-const renderTip = (tip: string | undefined) => {
+const renderTip = (tip: string | undefined, prefixCls: string) => {
   if (!tip) {
     return null
   }
 
-  return <div class="ix-spin-spinner-tip">{tip}</div>
+  return <div class={`${prefixCls}-spinner-tip`}>{tip}</div>
 }
 
 const renderContent = (defaultSlot: Slot | undefined, containerClassName: string[]) => {
