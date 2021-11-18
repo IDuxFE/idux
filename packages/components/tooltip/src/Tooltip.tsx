@@ -9,7 +9,7 @@ import type { TooltipProps } from './types'
 import type { ɵOverlayInstance } from '@idux/components/_private'
 import type { Slots } from 'vue'
 
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
@@ -24,6 +24,8 @@ export default defineComponent({
   name: 'IxTooltip',
   props: tooltipProps,
   setup(props, { slots, expose }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tooltip`)
     const overlayRef = ref<ɵOverlayInstance | null>(null)
     const config = useGlobalConfig('tooltip')
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
@@ -32,24 +34,28 @@ export default defineComponent({
 
     expose({ updatePopper })
 
-    return () => (
-      <ɵOverlay
-        ref={overlayRef}
-        visible={visibility.value}
-        v-slots={{ default: slots.default, content: () => renderTitle(props, slots) }}
-        class="ix-tooltip"
-        transitionName="ix-fade-fast"
-        {...configProps.value}
-        offset={defaultOffset}
-        showArrow
-      />
-    )
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+
+      return (
+        <ɵOverlay
+          ref={overlayRef}
+          visible={visibility.value}
+          v-slots={{ default: slots.default, content: () => renderTitle(props, slots, prefixCls) }}
+          class={prefixCls}
+          transitionName="ix-fade-fast"
+          {...configProps.value}
+          offset={defaultOffset}
+          showArrow
+        />
+      )
+    }
   },
 })
 
-const renderTitle = (props: TooltipProps, slots: Slots) => {
+const renderTitle = (props: TooltipProps, slots: Slots, prefixCls: string) => {
   if (!(slots.title || props.title)) {
     return null
   }
-  return <div class="ix-tooltip-title">{slots.title?.() ?? props.title}</div>
+  return <div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>
 }
