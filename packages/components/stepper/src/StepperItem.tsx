@@ -13,6 +13,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { isBoolean, isNil } from 'lodash-es'
 
 import { hasSlot } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import { stepperToken } from './token'
@@ -22,6 +23,8 @@ export default defineComponent({
   name: 'IxStepperItem',
   props: stepperItemProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-stepper-item`)
     // stepsContext must exist
     const { props: parentProps, slots: parentSlots, currActive } = inject(stepperToken)!
     const isActive = computed(() => currActive.value === props.index)
@@ -35,7 +38,7 @@ export default defineComponent({
 
     const hasIcon = computed(() => hasSlot(slots, 'icon'))
     const status = useStatus(props, isActive, parentProps, currActive)
-    const classes = useClasses(props, parentProps, status, hasIcon)
+    const classes = useClasses(props, parentProps, status, hasIcon, mergedPrefixCls)
     const deg = useDeg(parentProps, status)
 
     const progressDot = computed(() => parentSlots.progressDot ?? parentProps.progressDot)
@@ -45,14 +48,15 @@ export default defineComponent({
     })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       let headContent
       if (canShowPercent.value) {
-        headContent = renderHeadPercent(props, deg)
+        headContent = renderHeadPercent(props, deg, prefixCls)
       } else if (progressDot.value) {
-        headContent = renderHeadProcessDot(props, progressDot, status)
+        headContent = renderHeadProcessDot(props, progressDot, status, prefixCls)
       } else {
-        const _icon = renderHeadIcon(props, slots.icon, status)
-        headContent = _icon ?? <span class="ix-stepper-item-head-text">{props.index + 1}</span>
+        const _icon = renderHeadIcon(props, slots.icon, status, prefixCls)
+        headContent = _icon ?? <span class={`${prefixCls}-head-text`}>{props.index + 1}</span>
       }
 
       const title = slots.title?.() ?? props.title
@@ -60,14 +64,14 @@ export default defineComponent({
       const description = slots.description?.() ?? props.description
       return (
         <div class={classes.value} onClick={onClick}>
-          <div class="ix-stepper-item-tail"></div>
-          <div class="ix-stepper-item-head">{headContent}</div>
-          <div class="ix-stepper-item-content">
-            <div class="ix-stepper-item-title">
+          <div class={`${prefixCls}-tail`}></div>
+          <div class={`${prefixCls}-head`}>{headContent}</div>
+          <div class={`${prefixCls}-content`}>
+            <div class={`${prefixCls}-title`}>
               {title}
-              <span class="ix-stepper-item-subtitle">{subTitle}</span>
+              <span class={`${prefixCls}-subtitle`}>{subTitle}</span>
             </div>
-            <div class="ix-stepper-item-description">{description}</div>
+            <div class={`${prefixCls}-description`}>{description}</div>
           </div>
         </div>
       )
@@ -99,15 +103,17 @@ const useClasses = (
   parentProps: StepperProps,
   status: ComputedRef<StepperStatus>,
   hasIcon: ComputedRef<boolean>,
+  mergedPrefixCls: ComputedRef<string>,
 ) => {
   return computed(() => {
+    const prefixCls = mergedPrefixCls.value
     const { disabled, icon } = props
     return {
-      'ix-stepper-item': true,
-      'ix-stepper-item-disabled': disabled,
-      'ix-stepper-item-clickable': !disabled && parentProps.clickable,
-      'ix-stepper-item-custom': icon || hasIcon.value,
-      [`ix-stepper-item-${status.value!}`]: true,
+      [prefixCls]: true,
+      [`${prefixCls}-disabled`]: disabled,
+      [`${prefixCls}-clickable`]: !disabled && parentProps.clickable,
+      [`${prefixCls}-custom`]: icon || hasIcon.value,
+      [`${prefixCls}-${status.value!}`]: true,
     }
   })
 }
@@ -147,19 +153,20 @@ function useDeg(parentProps: StepperProps, status: ComputedRef<StepperStatus>) {
   })
 }
 
-const renderHeadPercent = (props: StepperItemProps, deg: ComputedRef<Deg>) => {
+const renderHeadPercent = (props: StepperItemProps, deg: ComputedRef<Deg>, prefixCls: string) => {
   const { left, right } = deg.value
+
   return (
     <>
-      <div class="ix-stepper-item-head-percent">
-        <div class="ix-stepper-item-head-percent-right">
-          <div class="ix-stepper-item-head-percent-circle" style={'transform: rotate(' + right + 'deg)'}></div>
+      <div class={`${prefixCls}-head-percent`}>
+        <div class={`${prefixCls}-head-percent-right`}>
+          <div class={`${prefixCls}-head-percent-circle`} style={'transform: rotate(' + right + 'deg)'}></div>
         </div>
-        <div class="ix-stepper-item-head-percent-left">
-          <div class="ix-stepper-item-head-percent-circle" style={'transform: rotate(' + left + 'deg)'}></div>
+        <div class={`${prefixCls}-head-percent-left`}>
+          <div class={`${prefixCls}-head-percent-circle`} style={'transform: rotate(' + left + 'deg)'}></div>
         </div>
       </div>
-      <span class="ix-stepper-item-head-text">{props.index + 1}</span>
+      <span class={`${prefixCls}-head-text`}>{props.index + 1}</span>
     </>
   )
 }
@@ -168,9 +175,10 @@ const renderHeadProcessDot = (
   props: StepperItemProps,
   progressDot: ComputedRef<boolean | Slot>,
   status: ComputedRef<StepperStatus>,
+  prefixCls: string,
 ) => {
   if (isBoolean(progressDot.value)) {
-    return <span class="ix-stepper-item-head-dot"></span>
+    return <span class={`${prefixCls}-head-dot`}></span>
   }
   return progressDot.value({ index: props.index, status: status.value })
 }
@@ -180,7 +188,12 @@ const statusIconMap: Partial<Record<StepperStatus, string>> = {
   error: 'close',
 }
 
-const renderHeadIcon = (props: StepperItemProps, iconSlot: Slot | undefined, status: ComputedRef<StepperStatus>) => {
+const renderHeadIcon = (
+  props: StepperItemProps,
+  iconSlot: Slot | undefined,
+  status: ComputedRef<StepperStatus>,
+  prefixCls: string,
+) => {
   let iconNode: VNodeTypes | undefined
 
   if (iconSlot) {
@@ -192,5 +205,5 @@ const renderHeadIcon = (props: StepperItemProps, iconSlot: Slot | undefined, sta
     }
   }
 
-  return iconNode ? <span class="ix-stepper-item-head-icon">{iconNode}</span> : null
+  return iconNode ? <span class={`${prefixCls}-head-icon`}>{iconNode}</span> : null
 }

@@ -7,7 +7,7 @@
 
 import type { StepperProps } from './types'
 import type { StepperConfig } from '@idux/components/config'
-import type { Slots } from 'vue'
+import type { ComputedRef, Slots } from 'vue'
 
 import { computed, defineComponent, provide, ref, watch } from 'vue'
 
@@ -21,8 +21,10 @@ export default defineComponent({
   name: 'IxStepper',
   props: stepperProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-stepper`)
     const config = useGlobalConfig('stepper')
-    const classes = useClasses(props, slots, config)
+    const classes = useClasses(props, slots, config, mergedPrefixCls)
     const currActive = useActive(props)
 
     provide(stepperToken, { props, slots, currActive })
@@ -37,17 +39,19 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: StepperProps, slots: Slots, config: StepperConfig) {
+function useClasses(props: StepperProps, slots: Slots, config: StepperConfig, mergedPrefixCls: ComputedRef<string>) {
   return computed(() => {
+    const prefixCls = mergedPrefixCls.value
+
     const { direction, size = config.size, placement, progressDot } = props
 
     return {
-      'ix-stepper': true,
-      [`ix-stepper-${direction}`]: true,
-      [`ix-stepper-${size}`]: true,
-      'ix-stepper-vertical-placement': placement === 'vertical',
-      'ix-stepper-vertical': direction === 'vertical',
-      'ix-stepper-dot': progressDot || hasSlot(slots, 'progressDot'),
+      [prefixCls]: true,
+      [`${prefixCls}-${direction}`]: true,
+      [`${prefixCls}-${size}`]: true,
+      [`${prefixCls}-vertical-placement`]: placement === 'vertical',
+      [`${prefixCls}-vertical`]: direction === 'vertical',
+      [`${prefixCls}-dot`]: progressDot || hasSlot(slots, 'progressDot'),
     }
   })
 }
