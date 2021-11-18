@@ -8,17 +8,22 @@
 import { computed, defineComponent } from 'vue'
 
 import { callEmit, isNumeric } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { panelCellProps } from '../types'
 
 export default defineComponent({
   props: panelCellProps,
   setup(props) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-panel-cell`)
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+
       return {
-        'ix-time-picker-panel-cell': true,
-        'ix-time-picker-panel-cell-disabled': props.disabled,
-        'ix-time-picker-panel-cell-selected': props.selected,
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-selected`]: props.selected,
       }
     })
 

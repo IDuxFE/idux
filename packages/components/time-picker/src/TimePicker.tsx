@@ -24,6 +24,8 @@ export default defineComponent({
   name: 'IxTimePicker',
   props: timePickerProps,
   setup(props, { attrs, expose, slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
     const [visibility, setVisibility] = useControlledProp(props, 'open', false)
 
     const { inputRef, accessor, isDisabled, handleChange, handleClear, handleBlur, handleFocus, focus, blur } =
@@ -43,6 +45,8 @@ export default defineComponent({
     })
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
+
       const inputSlots = {
         suffix: slots.suffix,
         clearIcon: slots.clearIcon,
@@ -50,7 +54,7 @@ export default defineComponent({
       const renderInput = () => {
         const cls = visibility.value ? 'ix-input-focused' : ''
         return (
-          <div class="ix-time-picker">
+          <div class={prefixCls}>
             <IxInput
               {...inputProps.value}
               {...attrs}

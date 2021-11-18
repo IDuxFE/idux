@@ -14,6 +14,7 @@ import { computed, defineComponent } from 'vue'
 import dayjs from 'dayjs/esm'
 
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import PanelColumn from './panel-column/PanelColumn'
 import { timePickerPanelProps } from './types'
@@ -23,6 +24,8 @@ export default defineComponent({
   name: 'IxTimePickerPanel',
   props: timePickerPanelProps,
   setup(props) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-panel`)
     const { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps } = useOptions(props)
 
     const columns = computed(() => {
@@ -34,13 +37,16 @@ export default defineComponent({
       return result
     })
 
-    return () => (
-      <div class="ix-time-picker-panel">
-        {columns.value.map((item, index) => (
-          <PanelColumn key={index} {...item} visible={props.visible} />
-        ))}
-      </div>
-    )
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      return (
+        <div class={prefixCls}>
+          {columns.value.map((item, index) => (
+            <PanelColumn key={index} {...item} visible={props.visible} />
+          ))}
+        </div>
+      )
+    }
   },
 })
 
