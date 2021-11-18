@@ -21,12 +21,15 @@ order: 0
 | `v-model:loadedKeys` | 已经加载完毕的节点的 `key` | `VKey[]` | - | - | - |
 | `v-model:selectedKeys` | 选中节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `blocked` | 节点整行撑开 | `boolean` | `false` | ✅ | - |
+| `cascade` | 是否开启级联功能 | `boolean` | `false` | - | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
+| `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `dataSource` | 树型数据数组,参见[TreeNode](#TreeNode) | `TreeNode[]` | `[]` | - | - |
 | `disabled` | 禁用节点的函数 | `(node: TreeNode) => boolean \| TreeNodeDisabled` | - | - | - |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
+| `defaultExpandAll` | 是否默认展开全部节点 | `boolean` | `false` | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |

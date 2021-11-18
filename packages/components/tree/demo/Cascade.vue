@@ -3,7 +3,9 @@
     v-model:checkedKeys="checkedKeys"
     v-model:expandedKeys="expandedKeys"
     v-model:selectedKeys="selectedKeys"
+    cascade
     checkable
+    checkStrategy="parent"
     :dataSource="treeData"
     @check="onCheck"
     @expand="onExpand"
@@ -40,15 +42,21 @@ const treeData: TreeNode[] = [
         label: 'Node 0-1',
         key: '0-1',
         children: [
-          { label: 'Node 0-1-0', key: '0-1-0' },
-          { label: 'Node 0-1-1', key: '0-1-1' },
+          {
+            label: 'Node 0-1-0',
+            key: '0-1-0',
+          },
+          {
+            label: 'Node 0-1-1',
+            key: '0-1-1',
+          },
         ],
       },
     ],
   },
 ]
 
-const checkedKeys = ref(['0-0', '0-1'])
+const checkedKeys = ref(['0'])
 const expandedKeys = ref(['0', '0-0', '0-1'])
 const selectedKeys = ref(['0-1'])
 

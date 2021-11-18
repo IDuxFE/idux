@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { VKey } from '@idux/cdk/utils'
+import type { TreeDragDropOptions, TreeDropType, TreeDroppableOptions, TreeNode } from '@idux/components/tree'
 
-import { VKey } from '@idux/cdk/utils'
-import { TreeDragDropOptions, TreeDropType, TreeDroppableOptions, TreeNode } from '@idux/components/tree'
+import { ref } from 'vue'
 
 const treeData = ref<TreeNode[]>([
   {

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { TreeNode } from '@idux/components/tree'
+import type { TreeNode } from '@idux/components/tree'
 
 const treeData: TreeNode[] = [
   {
