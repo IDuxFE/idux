@@ -11,7 +11,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const alertProps = {
-  closable: IxPropTypes.bool.def(false),
+  closable: IxPropTypes.bool,
   closeIcon: IxPropTypes.string.def('close'),
   description: IxPropTypes.string,
   icon: IxPropTypes.string,
