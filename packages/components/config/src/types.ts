@@ -289,6 +289,10 @@ export interface AlertConfig {
   icon: string | Partial<Record<AlertType, string>>
 }
 
+export interface SkeletonConfig {
+  animated: boolean
+}
+
 export interface DrawerConfig {
   closable: boolean
   closeIcon: string
@@ -376,6 +380,7 @@ export interface GlobalConfig {
   stepper: StepperConfig
   // Feedback
   alert: AlertConfig
+  skeleton: SkeletonConfig
   message: MessageConfig
   modal: ModalConfig
   drawer: DrawerConfig

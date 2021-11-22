@@ -1,0 +1,33 @@
+@import './themes/default.less';
+@import './mixin.less';
+
+.@{skeleton-prefix} {
+  margin-bottom: @skeleton-margin-bottom;
+
+  &-loader {
+    width: 100%;
+    background: linear-gradient(90deg, @skeleton-start-color 25%, @skeleton-end-color 36%, @skeleton-start-color 62%);
+
+    & + & {
+      margin-top: @skeleton-loader-margin-bottom;
+    }
+  }
+
+  &-animated {
+    .skeleton-animated();
+  }
+
+  &-text {
+    display: inline-block;
+    height: 1em;
+  }
+
+  &-round {
+    border-radius: 4096px;
+  }
+
+  &-circle {
+    display: inline-block;
+    border-radius: 50%;
+  }
+}
