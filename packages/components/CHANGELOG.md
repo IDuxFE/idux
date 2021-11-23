@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/IDuxFE/idux/compare/v0.7.0...v0.8.0) (2021-11-23)
+
+
+### Bug Fixes
+
+* **comp:alert:** fix the failure of closable configuration ([#546](https://github.com/IDuxFE/idux/issues/546)) ([ca01713](https://github.com/IDuxFE/idux/commit/ca01713f1bda6b3d55599f0630b645da5f8d4d45))
+* **comp:table:** stopPropagation with checkbox or radio click ([#550](https://github.com/IDuxFE/idux/issues/550)) ([dc18c8b](https://github.com/IDuxFE/idux/commit/dc18c8b8cd6e4f50b1e4e026f16fe7f862298579)), closes [#547](https://github.com/IDuxFE/idux/issues/547)
+
+
+### Features
+
+* **comp: alert:** support controlled pagination ([#537](https://github.com/IDuxFE/idux/issues/537)) ([85e4b96](https://github.com/IDuxFE/idux/commit/85e4b96076360e3054d01b865c62b0db1d055ef6)), closes [#533](https://github.com/IDuxFE/idux/issues/533)
+* **comp: menu:** add dataSource, onClick remove onItemClick ([#525](https://github.com/IDuxFE/idux/issues/525)) ([80870ee](https://github.com/IDuxFE/idux/commit/80870eeee1e0ad997dcf4e6473b09dc3829f2147))
+* **comp: skeleton:** add Skeleton component ([#548](https://github.com/IDuxFE/idux/issues/548)) ([248e6d0](https://github.com/IDuxFE/idux/commit/248e6d0ce5afb81e3d0b863e8955c089c9f56e5b)), closes [#94](https://github.com/IDuxFE/idux/issues/94)
+* **comp: space:** add gap, remove size ([#521](https://github.com/IDuxFE/idux/issues/521)) ([0cddecc](https://github.com/IDuxFE/idux/commit/0cddecc3b8b7ead59baaf6b9bb3e57df5624737b))
+* **comp:alert:** add alert component ([#520](https://github.com/IDuxFE/idux/issues/520)) ([38829ae](https://github.com/IDuxFE/idux/commit/38829ae124464de9cd99c7a9a871550a23f8db49)), closes [#43](https://github.com/IDuxFE/idux/issues/43)
+* **comp:anchor:** update prefixCls type ([#523](https://github.com/IDuxFE/idux/issues/523)) ([df816d0](https://github.com/IDuxFE/idux/commit/df816d0b1c412eb4e656d4661b879237ca4401fb))
+* **comp:avatar:** suport prefixCls ([#527](https://github.com/IDuxFE/idux/issues/527)) ([13423a0](https://github.com/IDuxFE/idux/commit/13423a00460cb7ecf4e8f166fb3b82fb94fae679))
+* **comp:avatar:** update prefixCls type ([#526](https://github.com/IDuxFE/idux/issues/526)) ([6751b14](https://github.com/IDuxFE/idux/commit/6751b14d244713b64f23c5a0337b766b666ffec8))
+* **comp:header:** suport prefixCls ([#528](https://github.com/IDuxFE/idux/issues/528)) ([c3387a7](https://github.com/IDuxFE/idux/commit/c3387a7e35e594893d3b172f36d91fffe523be15))
+* **comp:layout:** suport prefixCls ([#530](https://github.com/IDuxFE/idux/issues/530)) ([f9692a4](https://github.com/IDuxFE/idux/commit/f9692a488361f62b112bcd2c8ebdb676f5bf8c53))
+* **comp:pagination:** suport prefixCls ([#536](https://github.com/IDuxFE/idux/issues/536)) ([81d5d90](https://github.com/IDuxFE/idux/commit/81d5d9074b07c2c75a94974f794d6a295259957c))
+* **comp:popover:** suport prefixCls ([#538](https://github.com/IDuxFE/idux/issues/538)) ([2aaf7d7](https://github.com/IDuxFE/idux/commit/2aaf7d72f7a2a5f813d3b28e3dd0d2836b070ecb))
+* **comp:spin:** suport prefixCls ([#540](https://github.com/IDuxFE/idux/issues/540)) ([3e085ee](https://github.com/IDuxFE/idux/commit/3e085ee75d7baa490270e5ec6d2084eb69a583da))
+* **comp:stepper:** suport prefixCls ([#542](https://github.com/IDuxFE/idux/issues/542)) ([f3883ca](https://github.com/IDuxFE/idux/commit/f3883ca844cc50b26acf880a68351c69fb294198))
+* **comp:table:** pagination supports boolean types ([#551](https://github.com/IDuxFE/idux/issues/551)) ([532a1d2](https://github.com/IDuxFE/idux/commit/532a1d297f01d7b01f12f94e7af455a805172645))
+* **comp:tooltip:** suport prefixCls ([#544](https://github.com/IDuxFE/idux/issues/544)) ([5947038](https://github.com/IDuxFE/idux/commit/594703880f8cdd4b6f5fa49359e40388778e7113))
+
+
+
+
+
 # [0.7.0](https://github.com/IDuxFE/idux/compare/v0.6.0...v0.7.0) (2021-11-12)
 
 
