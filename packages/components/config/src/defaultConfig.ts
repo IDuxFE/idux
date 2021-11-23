@@ -37,6 +37,7 @@ import type {
   ResultConfig,
   RowConfig,
   SelectConfig,
+  SkeletonConfig,
   SpaceConfig,
   SpinConfig,
   StatisticConfig,
@@ -282,6 +283,10 @@ const alert = shallowReactive<AlertConfig>({
   },
 })
 
+const skeleton = shallowReactive<SkeletonConfig>({
+  animated: true,
+})
+
 const drawer = shallowReactive<DrawerConfig>({
   closable: true,
   closeOnEsc: true,
@@ -361,6 +366,7 @@ export const defaultConfig: GlobalConfig = {
   popover,
   // Feedback
   alert,
+  skeleton,
   message,
   modal,
   drawer,
