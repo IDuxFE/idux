@@ -17,6 +17,7 @@ import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
+import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
@@ -272,6 +273,16 @@ export interface MessageConfig {
   top?: number | string
 }
 
+export interface NotificationConfig {
+  destroyOnHover: boolean
+  duration: number
+  icon?: Partial<Record<NotificationType, string | VNode>>
+  closeIcon?: string | VNode
+  maxCount: number
+  offset: number | string | (string | number)[]
+  placement: NotificationPlacement
+}
+
 export interface ModalConfig {
   centered: boolean
   closable: boolean
@@ -382,6 +393,7 @@ export interface GlobalConfig {
   alert: AlertConfig
   skeleton: SkeletonConfig
   message: MessageConfig
+  notification: NotificationConfig
   modal: ModalConfig
   drawer: DrawerConfig
   result: ResultConfig

@@ -29,6 +29,7 @@ import type {
   MenuSubConfig,
   MessageConfig,
   ModalConfig,
+  NotificationConfig,
   PaginationConfig,
   PopoverConfig,
   ProgressConfig,
@@ -263,6 +264,14 @@ const message = shallowReactive<MessageConfig>({
   maxCount: 5,
 })
 
+const notification = shallowReactive<NotificationConfig>({
+  destroyOnHover: false,
+  duration: 4500,
+  maxCount: 5,
+  offset: 24,
+  placement: 'topEnd',
+})
+
 const modal = shallowReactive<ModalConfig>({
   centered: false,
   closable: true,
@@ -368,6 +377,7 @@ export const defaultConfig: GlobalConfig = {
   alert,
   skeleton,
   message,
+  notification,
   modal,
   drawer,
   result,

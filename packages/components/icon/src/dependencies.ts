@@ -49,20 +49,20 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   CaretDownFilled, // Table
   CaretUpFilled, // Table
   Check, // Progress Stepper
-  CheckCircle, // Result Message Alert
+  CheckCircle, // Result Message Alert Notification
   CheckCircleFilled, // Progress Modal FormItem
   ClockCircle, // TimePicker
   Close, // Stepper Modal Drawer Image Message Alert
-  CloseCircle, // TimePicker TimeRangePicker Input Textarea
+  CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
   CloseCircleFilled, // Modal FormItem
   DoubleLeft, // Pagination
   DoubleRight, // Pagination
   Down, // Select Table
   Ellipsis, // Table
   Empty, // Empty
-  ExclamationCircle, // Message Result Alert
+  ExclamationCircle, // Message Result Alert Notification
   ExclamationCircleFilled, // Modal
-  InfoCircle, // Message Result Alert
+  InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout
