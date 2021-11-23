@@ -30,7 +30,7 @@ export const tableProps = {
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   headless: IxPropTypes.bool,
-  pagination: IxPropTypes.object<TablePagination | null>(),
+  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TablePagination>()]),
   rowClassName: IxPropTypes.func<(record: unknown, rowIndex: number) => string>(),
   rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
   scroll: IxPropTypes.object<TableScroll>(),
