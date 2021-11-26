@@ -17,7 +17,7 @@ import { ɵUseConfigProps } from '@idux/components/tooltip'
 
 import { popoverProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 12]
 
 export default defineComponent({
   name: 'IxPopover',

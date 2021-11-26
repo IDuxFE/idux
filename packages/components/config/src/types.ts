@@ -342,6 +342,15 @@ export interface SpinConfig {
   size: SpinSize
 }
 
+export interface PopconfirmConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
+  placement: PopperPlacement
+  target: string | HTMLElement
+  trigger: PopperTrigger
+}
+
 export interface ProgressConfig {
   size: ProgressSize
   format: ProgressFormat
@@ -415,7 +424,9 @@ export interface GlobalConfig {
   drawer: DrawerConfig
   result: ResultConfig
   spin: SpinConfig
+  popconfirm: PopconfirmConfig
   progress: ProgressConfig
+
   // Other
   backTop: BackTopConfig
   anchor: AnchorConfig

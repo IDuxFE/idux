@@ -49,6 +49,10 @@ export interface ModalLocale {
   okText: string
   justOkText: string
 }
+export interface PopconfirmLocale {
+  cancelText: string
+  okText: string
+}
 
 export interface PaginationLocale {
   itemsPerPage: string
@@ -86,6 +90,7 @@ export interface Locale {
   dateRangePicker: DateRangePickerLocale
   empty: EmptyLocale
   modal: ModalLocale
+  popconfirm: PopconfirmLocale
   pagination: PaginationLocale
   table: TableLocale
 }

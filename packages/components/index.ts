@@ -34,6 +34,7 @@ import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@
 import { IxMessage, IxMessageProvider } from '@idux/components/message'
 import { IxModal, IxModalProvider } from '@idux/components/modal'
 import { IxPagination } from '@idux/components/pagination'
+import { IxPopconfirm } from '@idux/components/popconfirm'
 import { IxPopover } from '@idux/components/popover'
 import { IxProgress } from '@idux/components/progress'
 import { IxRadio, IxRadioGroup } from '@idux/components/radio'
@@ -103,6 +104,7 @@ const components = [
   IxModal,
   IxModalProvider,
   IxPagination,
+  IxPopconfirm,
   IxPopover,
   IxProgress,
   IxRadio,

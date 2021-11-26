@@ -18,7 +18,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { tooltipProps } from './types'
 import { useConfigProps } from './useConfigProps'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 12]
 
 export default defineComponent({
   name: 'IxTooltip',

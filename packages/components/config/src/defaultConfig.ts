@@ -33,6 +33,7 @@ import type {
   ModalConfig,
   NotificationConfig,
   PaginationConfig,
+  PopconfirmConfig,
   PopoverConfig,
   ProgressConfig,
   RadioConfig,
@@ -327,6 +328,15 @@ const spin = shallowReactive<SpinConfig>({
   size: 'sm',
 })
 
+const popconfirm = shallowReactive<PopconfirmConfig>({
+  autoAdjust: true,
+  delay: 100,
+  destroyOnHide: false,
+  placement: 'top',
+  target: 'ix-popconfirm-container',
+  trigger: 'click',
+})
+
 const progress = shallowReactive<ProgressConfig>({
   size: 'md',
   format: (percent: number) => percent + '%',
@@ -397,6 +407,7 @@ export const defaultConfig: GlobalConfig = {
   result,
   spin,
   progress,
+  popconfirm,
   stepper,
   // Other
   backTop,
