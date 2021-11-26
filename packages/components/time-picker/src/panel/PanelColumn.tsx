@@ -12,21 +12,21 @@ import { debounce, isNil } from 'lodash-es'
 import { getScroll, scrollToTop } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 
-import { timePickerToken } from '../tokens'
+import { timePickerPanelContext } from '../tokens'
 import { panelColumnProps } from '../types'
 import PanelCell from './PanelCell'
 
 export default defineComponent({
   props: panelColumnProps,
   setup(props) {
-    const { mergedPrefixCls } = inject(timePickerToken)!
+    const { mergedPrefixCls } = inject(timePickerPanelContext)!
     const listRef = ref<HTMLElement | null>(null)
     let scrollHandlerLocked = false
     let isScrolling = false
     let scrollTargetIndex: number | undefined
 
     function getCellHeight() {
-      return listRef.value?.querySelector<HTMLLIElement>(`li.${mergedPrefixCls.value}-panel-cell`)?.offsetHeight ?? 0
+      return listRef.value?.querySelector<HTMLLIElement>(`li.${mergedPrefixCls.value}-cell`)?.offsetHeight ?? 0
     }
 
     function adjustPanel(selectedIndex: number, duration = 200) {
@@ -99,7 +99,7 @@ export default defineComponent({
     return () => (
       <ul
         ref={listRef}
-        class={`${mergedPrefixCls.value}-panel-column`}
+        class={`${mergedPrefixCls.value}-column`}
         onScroll={handlePanelScroll}
         onMousemove={handleScrollAdjust}
         onMouseenter={handleScrollAdjust}

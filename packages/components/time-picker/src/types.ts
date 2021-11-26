@@ -95,6 +95,12 @@ export type TimeRangePickerPublicProps = IxPublicPropTypes<typeof timeRangePicke
 export type TimeRangePickerComponent = DefineComponent<HTMLAttributes & typeof timeRangePickerProps>
 export type TimeRangePickerInstance = InstanceType<DefineComponent<TimeRangePickerProps>>
 
+export const timePickerTriggerProps = {
+  value: IxPropTypes.object<Date>()
+}
+
+export type TimePickerTriggerProps = IxInnerPropTypes<typeof timePickerTriggerProps>
+
 export const timePickerPanelProps = {
   ...basePanelProps,
 

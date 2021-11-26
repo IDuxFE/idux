@@ -11,7 +11,7 @@ import { ref, watch } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
-import { formatDate, parseDate } from './utils'
+import { formatDate, parseDate } from '../utils'
 
 export type InputPreProcessor = (value: string) => string
 export type OnPickerValueChange = (value: Date) => void

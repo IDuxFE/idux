@@ -9,18 +9,19 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { callEmit, isNumeric } from '@idux/cdk/utils'
 
-import { timePickerToken } from '../tokens'
+import { timePickerPanelContext } from '../tokens'
 import { panelCellProps } from '../types'
 
 export default defineComponent({
   props: panelCellProps,
   setup(props) {
-    const { mergedPrefixCls } = inject(timePickerToken)!
+    const { mergedPrefixCls } = inject(timePickerPanelContext)!
     const classes = computed(() => {
+      const prefixCls = `${mergedPrefixCls.value}-panel-cell`
       return {
-        [`${mergedPrefixCls.value}-panel-cell`]: true,
-        [`${mergedPrefixCls.value}-panel-cell-disabled`]: props.disabled,
-        [`${mergedPrefixCls.value}-panel-cell-selected`]: props.selected,
+        [prefixCls]: true,
+        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-selected`]: props.selected,
       }
     })
 

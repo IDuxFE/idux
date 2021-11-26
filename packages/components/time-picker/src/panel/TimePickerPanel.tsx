@@ -5,27 +5,31 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelCell, PanelColumnProps, TimePickerPanelColumnType, TimePickerPanelProps } from './types'
+import type { PanelCell, PanelColumnProps, TimePickerPanelColumnType, TimePickerPanelProps } from '../types'
 import type { Dayjs } from 'dayjs/esm'
 import type { ComputedRef } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, provide } from 'vue'
 
 import dayjs from 'dayjs/esm'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import PanelColumn from './panel-column/PanelColumn'
-import { timePickerToken } from './tokens'
-import { timePickerPanelProps } from './types'
-import { calculateValue, calculateViewHour, normalizeAmPm } from './utils'
+import PanelColumn from './PanelColumn'
+import { timePickerPanelProps } from '../types'
+import { timePickerPanelContext } from '../tokens'
+import { calculateValue, calculateViewHour, normalizeAmPm } from '../utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 export default defineComponent({
   name: 'IxTimePickerPanel',
   props: timePickerPanelProps,
   setup(props) {
-    const { mergedPrefixCls } = inject(timePickerToken)!
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-panel`)
     const { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps } = useOptions(props)
+
+    provide(timePickerPanelContext, { mergedPrefixCls })
 
     const columns = computed(() => {
       const result: PanelColumnProps[] = []
@@ -37,7 +41,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={`${mergedPrefixCls.value}-panel`}>
+      <div class={`${mergedPrefixCls.value}`}>
         {columns.value.map((item, index) => (
           <PanelColumn key={index} {...item} visible={props.visible} />
         ))}

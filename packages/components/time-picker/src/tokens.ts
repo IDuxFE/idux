@@ -7,8 +7,8 @@
 
 import type { ComputedRef, InjectionKey } from 'vue'
 
-export interface TimePickerContext {
+export interface TimePickerPanelContext {
   mergedPrefixCls: ComputedRef<string>
 }
 
-export const timePickerToken: InjectionKey<TimePickerContext> = Symbol('timepickerToken')
+export const timePickerPanelContext: InjectionKey<TimePickerPanelContext> = Symbol('timePickerPanelContext')
