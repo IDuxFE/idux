@@ -26,7 +26,7 @@ single: true
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
-| `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `TablePagination \| null` | - | ✅ | 设置 `null` 时表示不显示分页 |
+| `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
 | `rowClassName` | 表格行的类名 | `(record: T, rowIndex: number) => string` | - | - | - |
 | `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | - | - |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |

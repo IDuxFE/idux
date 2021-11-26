@@ -1,0 +1,18 @@
+
+@animated-key: ~'@{skeleton-prefix}-animated-key';
+
+.skeleton-animated() {
+  background-size: 400% 100%;
+  animation: @animated-key 1.4s ease infinite;
+
+  @keyframes @animated-key {
+
+    0% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0 50%;
+    }
+  }
+}

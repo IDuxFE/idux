@@ -16,6 +16,7 @@ export interface PaginationContext {
   slots: Slots
   config: PaginationConfig
   locale: ComputedRef<PaginationLocale>
+  mergedPrefixCls: ComputedRef<string>
   activeIndex: Ref<number>
   activeSize: Ref<number>
   onPageIndexChange: (index: number) => void

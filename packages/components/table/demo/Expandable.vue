@@ -1,5 +1,5 @@
 <template>
-  <IxTable v-model:expandedRowKeys="expandedRowKeys" :columns="columns" :dataSource="data" :pagination="null">
+  <IxTable v-model:expandedRowKeys="expandedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>

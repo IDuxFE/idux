@@ -15,7 +15,7 @@ import { useJumpToIndex } from './utils'
 
 export default defineComponent({
   setup() {
-    const { props, config, activeIndex, activeSize } = inject(paginationToken)!
+    const { props, config, activeIndex, activeSize, mergedPrefixCls } = inject(paginationToken)!
     const size = computed(() => props.size ?? config.size)
     const lastIndex = ref(0)
     const isFirstIndex = ref(false)
@@ -36,17 +36,18 @@ export default defineComponent({
     const jumpToIndex = useJumpToIndex(false)
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-item`
       return (
         <>
           <Item disabled={isFirstIndex.value} type="prev" />
-          <li class="ix-pagination-item">
+          <li class={prefixCls}>
             <IxInput
               v-model={[inputValue.value, 'value']}
               disabled={props.disabled}
               size={size.value}
               onKeydown={jumpToIndex}
             />
-            <span class="ix-pagination-item-slash">/</span>
+            <span class={`${prefixCls}-slash`}>/</span>
             <span>{lastIndex.value}</span>
           </li>
           <Item disabled={isLastIndex.value} type="next" />

@@ -23,28 +23,38 @@ export function usePagination(props: TableProps, config: TableConfig): Paginatio
   const pageIndex = ref<number>()
   const pageSize = ref<number>()
 
+  const tempPagination = computed(() => {
+    const { pagination } = props
+    if (pagination === false) {
+      return null
+    }
+    return pagination === true ? {} : pagination
+  })
+
   watchEffect(() => {
-    pageIndex.value = props.pagination?.pageIndex ?? 1
-    pageSize.value = props.pagination?.pageSize ?? config.pagination.pageSize ?? paginationConfig.pageSize
+    const pagination = tempPagination.value
+    pageIndex.value = pagination?.pageIndex ?? 1
+    pageSize.value = pagination?.pageSize ?? config.pagination.pageSize ?? paginationConfig.pageSize
   })
 
   const handlePageIndexChange = (index: number) => {
     pageIndex.value = index
-    callEmit(props.pagination?.['onUpdate:pageIndex'], index)
+    callEmit(tempPagination.value?.['onUpdate:pageIndex'], index)
   }
 
   const handlePageSizeChange = (size: number) => {
     pageSize.value = size
-    callEmit(props.pagination?.['onUpdate:pageSize'], size)
+    callEmit(tempPagination.value?.['onUpdate:pageSize'], size)
   }
 
   const mergedPagination = computed(() => {
-    if (props.pagination === null) {
+    const pagination = tempPagination.value
+    if (pagination === null) {
       return null
     }
     return {
       ...config.pagination,
-      ...props.pagination,
+      ...pagination,
       pageIndex: pageIndex.value,
       pageSize: pageSize.value,
       'onUpdate:pageIndex': handlePageIndexChange,

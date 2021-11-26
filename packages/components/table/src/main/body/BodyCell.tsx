@@ -68,6 +68,11 @@ export default defineComponent({
       return { class: classes, style }
     })
 
+    const handleClick = (evt: Event) => {
+      // see https://github.com/IDuxFE/idux/issues/547
+      evt.stopPropagation()
+    }
+
     return () => {
       const { type, additional } = props.column as BodyColumn
       let children: VNodeTypes | null
@@ -75,7 +80,7 @@ export default defineComponent({
       if (type === 'expandable') {
         children = props.disabled ? null : renderExpandableChildren(props, slots, expandable)
       } else if (type === 'selectable') {
-        children = renderSelectableChildren(props, selectable)
+        children = renderSelectableChildren(props, selectable, handleClick)
       } else {
         const { ellipsis } = props.column
         const text = dataValue.value
@@ -142,14 +147,15 @@ function renderExpandableChildren(
 function renderSelectableChildren(
   props: TableBodyCellProps,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
+  onClick: (evt: Event) => void,
 ) {
   const { selected: checked, indeterminate, disabled, handleSelect: onChange } = props
   const { multiple } = selectable.value!
   if (multiple) {
-    const checkboxProps = { checked, disabled, indeterminate, onChange }
+    const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
     return <IxCheckbox {...checkboxProps}></IxCheckbox>
   } else {
-    const radioProps = { checked, disabled, onChange }
+    const radioProps = { checked, disabled, onChange, onClick }
     return <IxRadio {...radioProps}></IxRadio>
   }
 }

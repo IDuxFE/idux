@@ -14,15 +14,16 @@ import { useJumpToIndex } from './utils'
 
 export default defineComponent({
   setup() {
-    const { props, config, locale } = inject(paginationToken)!
+    const { props, config, locale, mergedPrefixCls } = inject(paginationToken)!
     const size = computed(() => props.size ?? config.size)
     const jumpToIndex = useJumpToIndex(true)
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-jumper`
       const { disabled } = props
       const { jumpTo, page } = locale.value
       return (
-        <li class="ix-pagination-jumper">
+        <li class={prefixCls}>
           {jumpTo}
           <IxInput disabled={disabled} size={size.value} onKeydown={jumpToIndex} />
           {page}

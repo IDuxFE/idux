@@ -20,7 +20,7 @@ export interface CloseableContext {
 }
 
 export function useCloseable(props: AlertProps, config: AlertConfig): CloseableContext {
-  const closeable = computed(() => props.closable || config.closable)
+  const closeable = computed(() => props.closable ?? config.closable)
   const [visible, setVisible] = useState(true)
 
   const handleClose = async () => {
