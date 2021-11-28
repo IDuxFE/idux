@@ -132,6 +132,11 @@ export interface DateRangePickerConfig {
   separator: string | VNode
 }
 
+export interface InputNumberConfig {
+  keyboard: boolean
+  size: FormSize
+}
+
 export interface InputConfig {
   borderless: boolean
   clearable: boolean
@@ -405,6 +410,7 @@ export interface GlobalConfig {
   datePicker: DatePickerConfig
   dateRangePicker: DateRangePickerConfig
   input: InputConfig
+  inputNumber: InputNumberConfig
   textarea: TextareaConfig
   radio: RadioConfig
   rate: RateConfig
