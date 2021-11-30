@@ -42,10 +42,8 @@ export type LayoutContentInstance = InstanceType<DefineComponent<LayoutContentPr
 
 export const layoutSiderProps = {
   collapsed: IxPropTypes.bool.def(false),
-  collapsedWidth: IxPropTypes.number.def(64),
   breakpoint: IxPropTypes.oneOf<BreakpointKey>(['xs', 'sm', 'md', 'lg', 'xl']),
   placement: IxPropTypes.oneOf(['start', 'end'] as const).def('start'),
-  width: IxPropTypes.number.def(200),
   showTrigger: IxPropTypes.bool.def(false),
 
   // events

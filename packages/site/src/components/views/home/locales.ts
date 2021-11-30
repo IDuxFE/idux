@@ -13,7 +13,7 @@ export const homeLocales = {
       {
         name: '高级组件',
         icon: '/icons/component-pro.svg',
-        path: '/',
+        path: '/pro/layout/zh',
         description: '规划中...',
       },
       {

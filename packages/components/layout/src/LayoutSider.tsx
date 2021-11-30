@@ -32,12 +32,6 @@ export default defineComponent({
     const hasTriggerSlot = hasSlot(slots, 'trigger')
     const { isCollapsed, handleClick } = useCollapsed(props, isDefinedBreakPoint, hasTriggerSlot)
 
-    const style = computed(() => {
-      return {
-        width: isCollapsed.value ? `${Math.min(props.width, props.collapsedWidth)}px` : `${props.width}px`,
-      }
-    })
-
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
@@ -53,7 +47,7 @@ export default defineComponent({
         props.showTrigger &&
         (slots.trigger ? slots.trigger() : <Trigger collapsed={isCollapsed.value} onClick={handleClick} />)
       return (
-        <aside class={classes.value} style={style.value}>
+        <aside class={classes.value}>
           <div class={`${prefixCls}-children`}>{slots.default?.()}</div>
           {trigger}
         </aside>

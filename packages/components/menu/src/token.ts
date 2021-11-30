@@ -22,6 +22,7 @@ export interface MenuContext {
   handleExpand: (key: VKey, expanded: boolean) => void
   selectedKeys: ComputedRef<VKey[]>
   handleClick: (key: VKey, type: 'item' | 'itemGroup' | 'sub', evt: Event) => void
+  overlayClassName: ComputedRef<string>
 }
 
 export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')

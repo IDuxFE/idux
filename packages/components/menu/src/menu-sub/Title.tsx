@@ -10,6 +10,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { IxIcon } from '@idux/components/icon'
 
 import { menuSubToken, menuToken } from '../token'
+import { getIconNode } from '../utils'
 
 export default defineComponent({
   setup() {
@@ -51,7 +52,7 @@ export default defineComponent({
       const { icon, label } = props
       const prefixCls = mergedPrefixCls.value
 
-      const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
+      const iconNode = getIconNode({ slotCfg: slots.icon, propCfg: icon })
       const iconWrapper = iconNode ? <span class={`${prefixCls}-sub-title-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.label?.() ?? label}</span>

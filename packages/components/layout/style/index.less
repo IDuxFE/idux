@@ -34,6 +34,11 @@
     grid-area: sider-start;
     transition: width @transition-duration-base;
     z-index: @zindex-l1-1;
+    width: @layout-sider-width;
+
+    &-collapsed {
+      width: @layout-sider-collapsed-width;
+    }
 
     &-end {
       grid-area: sider-end;

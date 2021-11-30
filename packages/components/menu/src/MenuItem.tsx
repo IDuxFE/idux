@@ -8,12 +8,12 @@
 import { computed, defineComponent, inject, normalizeClass, watch } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
-import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
 
 import { menuItemGroupToken, menuSubToken, menuToken } from './token'
 import { menuItemProps } from './types'
 import { usePaddingLeft } from './usePaddingLeft'
+import { getIconNode } from './utils'
 
 export default defineComponent({
   name: 'IxMenuItem',
@@ -48,6 +48,10 @@ export default defineComponent({
     })
 
     const onClick = (evt: Event) => {
+      evt.stopPropagation()
+      if (props.disabled) {
+        return
+      }
       handleClick(key, 'item', evt)
       menuSubContext?.handleItemClick()
     }
@@ -56,7 +60,7 @@ export default defineComponent({
       const { disabled, icon, label } = props
       const prefixCls = mergedPrefixCls.value
 
-      const iconNode = slots.icon?.() ?? icon ? <IxIcon name={icon}></IxIcon> : undefined
+      const iconNode = getIconNode({ slotCfg: slots.icon, propCfg: icon })
       const iconWrapper = iconNode ? <span class={`${prefixCls}-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.default?.() ?? label}</span>

@@ -16,6 +16,10 @@
     padding: 0.02px 0;
     border-right: @menu-border-width @menu-border-style @menu-border-color;
 
+    &.@{menu-prefix}-collapsed {
+      width: @menu-sider-collapsed-width;
+    }
+
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub-title {
       margin: @menu-item-margin;

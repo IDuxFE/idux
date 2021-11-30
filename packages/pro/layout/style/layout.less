@@ -1,0 +1,286 @@
+@layout-pro-prefix: ~'@{idux-prefix}-layout-pro';
+@idux-menu: ~'@{idux-prefix}-menu';
+@idux-layout: ~'@{idux-prefix}-layout';
+@icon-prefix: ~'@{idux-prefix}-icon';
+
+.getBaseStyle(@theme: 'light') {
+  background-color: ~"@{layoutPro-@{theme}-base-bg-color}";
+  color: ~"@{layoutPro-@{theme}-base-color}";
+}
+
+.getHoverStyle(@theme: 'light') {
+  color: ~"@{layoutPro-@{theme}-base-color}";
+  background-color: ~"@{layoutPro-@{theme}-hover-bg-color}";
+}
+
+.getActiveStyle(@theme: 'light') {
+  color: ~"@{layoutPro-@{theme}-active-color}";
+  background-color: ~"@{layoutPro-@{theme}-active-bg-color}";
+}
+
+// menuItem的通用样式
+
+.getMenuItemStyle(@theme: 'light') {
+  .@{idux-menu}-item:not(.@{idux-menu}-item-disabled) {
+    color: ~"@{layoutPro-@{theme}-base-color}";
+    border: 0;
+    transition: none;
+
+    &:not(.@{idux-menu}-item-selected):hover {
+      .getHoverStyle(@theme);
+    }
+
+    &.@{idux-menu}-item-selected {
+      .getActiveStyle(@theme);
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+// menuSub的通用样式
+
+.getMenuSubStyle(@theme: 'light') {
+  .@{idux-menu}-sub:not(.@{idux-menu}-sub-disabled) {
+    border: 0;
+    transition: none;
+
+    .@{idux-menu}-sub-title {
+      transition: none;
+    }
+
+    &:not(.@{idux-menu}-sub-selected) {
+      .@{idux-menu}-sub-title:hover {
+        .getHoverStyle(@theme);
+      }
+    }
+
+    // inline下关注item的hover和selected即可，title不需要加active样式
+    &.@{idux-menu}-sub-selected:not(.@{idux-menu}-sub-inline) {
+      .getActiveStyle(@theme);
+
+      .@{idux-menu}-sub-title {
+        .getActiveStyle(@theme);
+      }
+    }
+  }
+}
+
+// 顶部导航栏特殊处理
+
+.getHeaderMenuSubStyle(@theme: 'light') {
+  .@{idux-menu} {
+    // expanded或者selected都当作选中
+    .@{idux-menu}-sub-selected, .@{idux-menu}-sub-expanded {
+      .getActiveStyle(@theme);
+    }
+
+    .@{idux-menu}-sub:not(.@{idux-menu}-sub-disabled):not(.@{idux-menu}-sub-selected):hover {
+      .getHoverStyle(@theme);
+
+      .@{idux-menu}-sub-title {
+        .getHoverStyle(@theme);
+      }
+    }
+  }
+}
+
+// 只有一层节点时（即mode=both时的顶部导航栏），menuSub的expanded样式
+
+.getMenuSubSingleNodeExpandedStyle(@theme: 'light') {
+  .@{idux-menu}-sub:not(.@{idux-menu}-sub-disabled):not(.@{idux-menu}-sub-selected) {
+    &.@{idux-menu}-sub-expanded { // 只有一层时，expanded即选中
+      .getActiveStyle(@theme);
+
+      .@{idux-menu}-sub-title {
+        .getActiveStyle(@theme);
+      }
+    }
+  }
+}
+
+// 导航栏不止一层节点（如左侧导航和mode=header的顶部导航）
+
+.getMenuSubNormalExpandedStyle(@theme: 'light') {
+  .@{idux-menu}-sub:not(.@{idux-menu}-sub-disabled):not(.@{idux-menu}-sub-selected):not(.@{idux-menu}-sub-inline) {
+    &.@{idux-menu}-sub-expanded { // 正常情况expanded都当作hover效果
+      .getHoverStyle(@theme);
+
+      .@{idux-menu}-sub-title {
+        .getHoverStyle(@theme);
+      }
+    }
+  }
+
+  // inline下关注item的hover和selected即可，title不需要加hover样式
+  .@{idux-menu}-sub.@{idux-menu}-sub-inline {
+    &.@{idux-menu}-sub-expanded, &.@{idux-menu}-sub-selected {
+      .@{idux-menu}-sub-title {
+        .getBaseStyle(@theme);
+
+        &:hover {
+          .getHoverStyle(@theme);
+        }
+      }
+    }
+  }
+}
+
+.getThemeStyle(@theme: 'light') {
+  .@{idux-menu} {
+    background-color: ~"@{layoutPro-@{theme}-base-bg-color}";
+
+    .getMenuSubStyle(@theme);
+
+    .getMenuItemStyle(@theme);
+  }
+}
+
+.@{layout-pro-prefix} {
+
+  &-fixed {
+    height: @layoutPro-height;
+    grid-template-rows: auto 100%;
+    &.@{layout-pro-prefix}-with-header {
+      grid-template-rows: auto calc(~'100% - @{layoutPro-header-height}');
+    }
+
+    .@{idux-layout}-content {
+      overflow: auto;
+    }
+  }
+
+  &-header {
+    display: flex;
+    vertical-align: middle;;
+    height: @layoutPro-header-height;
+    line-height: @layoutPro-header-height;
+    box-shadow: @layoutPro-header-box-shadow;
+    z-index: @layoutPro-header-zindex;
+
+    .@{idux-menu}-item {
+      border-radius: @layoutPro-header-item-radius;
+      height: @layoutPro-header-item-height;
+      line-height: @layoutPro-header-item-height;
+      padding: @layoutPro-header-item-padding;
+    }
+
+    .@{idux-menu}-sub {
+      border-radius: @layoutPro-header-item-radius;
+      height: @layoutPro-header-item-height;
+      line-height: @layoutPro-header-item-height;
+      padding: @layoutPro-header-item-padding;
+
+      .@{idux-menu}-sub-title {
+        height: @layoutPro-header-item-height;
+        line-height: @layoutPro-header-item-height;
+      }
+    }
+
+    &-logo {
+      width: @layoutPro-header-logo-width;
+    }
+
+    &-extra {
+      min-width: @layoutPro-header-extra-width;
+    }
+
+    &-menu {
+      flex: 1;
+      border: 0;
+    }
+
+    &-light {
+      .getBaseStyle('light');
+      .getThemeStyle('light');
+      .getHeaderMenuSubStyle('light');
+
+      .@{layout-pro-prefix}-header-menu-both {
+        .getMenuSubSingleNodeExpandedStyle('light');
+      }
+      .@{layout-pro-prefix}-header-menu-header {
+        .getMenuSubNormalExpandedStyle('light');
+      }
+    }
+
+    &-dark {
+      .getBaseStyle('dark');
+      .getThemeStyle('dark');
+      .getHeaderMenuSubStyle('dark');
+
+      .@{layout-pro-prefix}-header-menu-both {
+        .getMenuSubSingleNodeExpandedStyle('dark');
+      }
+      .@{layout-pro-prefix}-header-menu-header {
+        .getMenuSubNormalExpandedStyle('dark');
+      }
+    }
+  }
+
+  &-sider {
+    width: @layoutPro-sider-width;
+    box-shadow: @layoutPro-sider-box-shadow;
+
+    .@{idux-layout}-sider-children {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-collapsed {
+      width: @layoutPro-sider-collapsed-width;
+    }
+
+    &-top {
+      height: @layoutPro-sider-top-height;
+    }
+
+    &-menu {
+      flex: 1;
+      border: 0;
+    }
+
+    &-bottom {
+      height: @layoutPro-sider-bottom-height;
+    }
+
+    &-light {
+      .getBaseStyle('light');
+      .getThemeStyle('light');
+      .@{idux-menu} {
+        .getMenuSubNormalExpandedStyle('light');
+      }
+    }
+
+    &-dark {
+      .getBaseStyle('dark');
+      .getThemeStyle('dark');
+      .@{idux-menu} {
+        .getMenuSubNormalExpandedStyle('dark');
+      }
+    }
+  }
+}
+
+/* ------- 悬浮层的样式覆盖 begin ---- */
+.@{layout-pro-prefix}-sub-overlay-light {
+  &.@{idux-menu}-sub-overlay {
+    .getMenuItemStyle('light');
+    .getMenuSubStyle('light');
+    .getMenuSubNormalExpandedStyle('light');
+  }
+}
+
+.@{layout-pro-prefix}-sub-overlay-dark {
+  &.@{idux-menu}-sub-overlay {
+    .getMenuItemStyle('dark');
+    .getMenuSubStyle('dark');
+    .getMenuSubNormalExpandedStyle('dark');
+  }
+}
+
+/* ------- 悬浮层的样式覆盖 end ---- */
+
+
+// 顶部导航下拉内边距12px

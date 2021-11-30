@@ -11,11 +11,19 @@ import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
+import { Slot } from 'vue'
+
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
+export type IconType = string | VNode
+
+export type IconParams = {
+  slotCfg?: Slot
+  propCfg?: IconType
+}
 
 export interface MenuClickOptions {
   event: Event
@@ -27,7 +35,6 @@ export const menuProps = {
   expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
   selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
   collapsed: IxPropTypes.bool.def(false),
-  collapsedWidth: IxPropTypes.oneOfType([String, Number]),
   dataSource: IxPropTypes.array<MenuData>(),
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
@@ -35,6 +42,7 @@ export const menuProps = {
   selectable: IxPropTypes.bool,
   target: ɵPortalTargetDef,
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
+  overlayClassName: IxPropTypes.string,
 
   // events
   'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),

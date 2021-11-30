@@ -44,10 +44,8 @@ grid-template-areas:
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `placement` | 侧边栏的位置 | `start \| end` | `start` | - | - |
-| `width` | 侧边栏宽度 | `number` | `200` | - |  - |
 | `breakpoint` | 触发响应式布局的断点 | `xs`, `sm`, `md`, `lg`, `xl` | - | - |  - |
 | `v-model: collapsed` | 当前收起状态 | `boolean` | - | - |  不建议`breakpoint`和`v-model: collapsed`同时存在，若存在则以`breakpoint`的值为默认折叠状态 |
-| `collapsedWidth` | 折叠时的宽度 | `number` | `64` | - |  - |
 | `showTrigger` | 是否展示trigger | `boolean` | `false` | - |  配合`breakpoint`或者`v-model: collapsed` 一起使用 |
 | `onCollapse` | 展开-收起时的回调函数，有点击 trigger 以及响应式反馈两种方式可以触发 | `(collapsed: boolean, type: 'breakpoint\|trigger') => {}` | - | - |  - |
 

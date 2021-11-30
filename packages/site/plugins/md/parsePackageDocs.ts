@@ -43,7 +43,6 @@ export function parsePackageDocs(id: string, raw: string): string {
     demoMetas.map(item => item.importStr),
     componentNames,
   )
-
   return docsTemplate + docsScript
 }
 
@@ -118,7 +117,7 @@ function wrapperDocsTemplate(toc: string, header: string, examples: string, api:
   <section class="example-wrapper">${examples}</section>
   <section class="markdown api-wrapper">${api}</section>
   </article>
-</template>  
+</template>
 `
 }
 
