@@ -5,5 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export * from './src/types'
+export * from './src/dateConfig'
 export * from './src/globalConfig'
+export * from './src/types'

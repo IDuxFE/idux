@@ -10,7 +10,7 @@
 import type { AbstractControl, ControlPathType } from './controls'
 import type { InjectionKey, Ref, WatchStopHandle } from 'vue'
 
-import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRef, watch } from 'vue'
+import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRaw, toRef, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -106,7 +106,7 @@ export function useValueAccessor<T = any>(
         accessor.valueRef = computed(() => props[valueKey] ?? tempRef.value)
         accessor.disabled = toRef(props, disabledKey) as Ref<boolean>
         accessor.setValue = value => {
-          if (value != accessor.valueRef.value) {
+          if (value != toRaw(accessor.valueRef.value)) {
             tempRef.value = value
             callEmit(props[`onUpdate:${valueKey}`], value)
           }

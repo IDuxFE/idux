@@ -6,6 +6,7 @@
  */
 
 export * from './collapse-transition'
+export * from './date-panel'
 export * from './empty'
 export * from './header'
 export * from './mask'

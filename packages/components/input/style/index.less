@@ -9,62 +9,10 @@
   line-height: @input-line-height;
   background-color: @input-background-color;
 
-  &-sm {
-    .input-size(@input-font-size-sm; @input-padding-vertical-sm; @input-padding-horizontal-sm; @input-height-sm);
-  }
-
-  &-md {
-    .input-size(@input-font-size-md; @input-padding-vertical-md; @input-padding-horizontal-md; @input-height-md);
-  }
-
-  &-lg {
-    .input-size(@input-font-size-lg; @input-padding-vertical-lg; @input-padding-horizontal-lg; @input-height-lg);
-  }
-
-  &-focused {
-    .@{input-prefix}-wrapper {
-      border-color: @input-active-color;
-      box-shadow: @input-active-box-shadow;
-    }
-  }
-
-  &-disabled {
-    color: @input-disabled-color;
-    background-color: @input-disabled-background-color;
-    cursor: not-allowed;
-    opacity: 1;
-
-    .@{input-prefix}-wrapper {
-
-      &:hover {
-        border-color: @input-border-color;
-      }
-
-      .@{input-prefix}-suffix,
-      .@{input-prefix}-prefix {
-        cursor: not-allowed;
-
-        &:hover {
-          color: @input-disabled-color;
-        }
-      }
-    }
-  }
-
-  &-borderless {
-
-    &,
-    &:hover,
-    &-focused,
-    &-disabled {
-      .@{input-prefix}-wrapper {
-        .borderless();
-      }
-    }
-  }
-
   &-wrapper {
+    position: relative;
     display: inline-flex;
+    align-items: center;
     width: 100%;
     border: @input-border-width @input-border-style @input-border-color;
     border-radius: @input-border-radius;
@@ -162,6 +110,60 @@
     .@{input-prefix}-wrapper {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+    }
+  }
+
+  &-sm {
+    .input-size(@input-font-size-sm; @input-padding-vertical-sm; @input-padding-horizontal-sm; @input-height-sm);
+  }
+
+  &-md {
+    .input-size(@input-font-size-md; @input-padding-vertical-md; @input-padding-horizontal-md; @input-height-md);
+  }
+
+  &-lg {
+    .input-size(@input-font-size-lg; @input-padding-vertical-lg; @input-padding-horizontal-lg; @input-height-lg);
+  }
+
+  &-focused {
+    .@{input-prefix}-wrapper {
+      border-color: @input-active-color;
+      box-shadow: @input-active-box-shadow;
+    }
+  }
+
+  &-disabled {
+    color: @input-disabled-color;
+    background-color: @input-disabled-background-color;
+    cursor: not-allowed;
+    opacity: 1;
+
+    .@{input-prefix}-wrapper {
+
+      &:hover {
+        border-color: @input-border-color;
+      }
+
+      .@{input-prefix}-suffix,
+      .@{input-prefix}-prefix {
+        cursor: not-allowed;
+
+        &:hover {
+          color: @input-disabled-color;
+        }
+      }
+    }
+  }
+
+  &-borderless {
+
+    &,
+    &:hover,
+    &-focused,
+    &-disabled {
+      .@{input-prefix}-wrapper {
+        .borderless();
+      }
     }
   }
 }

@@ -17,6 +17,7 @@ import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard } from '@idux/components/card'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
+import { IxDatePicker } from '@idux/components/date-picker'
 import { IxDivider } from '@idux/components/divider'
 import { IxDrawer } from '@idux/components/drawer'
 import { IxDropdown } from '@idux/components/dropdown'
@@ -71,6 +72,7 @@ const components = [
   IxCheckboxGroup,
   IxCollapse,
   IxCollapsePanel,
+  IxDatePicker,
   IxDivider,
   IxDrawer,
   IxDropdown,

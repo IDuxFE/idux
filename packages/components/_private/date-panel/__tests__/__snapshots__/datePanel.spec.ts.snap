@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePanel disabledDate work 1`] = `
+"<div class=\\"ix-date-panel ix-date-panel-date\\">
+  <div class=\\"ix-date-panel-header\\"><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上一年\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i></button><button class=\\"ix-date-panel-header-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上个月\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button>
+    <div class=\\"ix-date-panel-header-content\\"><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择年份\\">2021年</button><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择月份\\">11月</button></div><button class=\\"ix-date-panel-header-super-next visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下个月\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下一年\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i></button>
+  </div>
+  <div class=\\"ix-date-panel-body\\">
+    <table role=\\"grid\\">
+      <thead>
+        <tr role=\\"row\\">
+          <th role=\\"columnheader\\">一</th>
+          <th role=\\"columnheader\\">二</th>
+          <th role=\\"columnheader\\">三</th>
+          <th role=\\"columnheader\\">四</th>
+          <th role=\\"columnheader\\">五</th>
+          <th role=\\"columnheader\\">六</th>
+          <th role=\\"columnheader\\">日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">1</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">2</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">3</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">4</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">5</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">6</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">7</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">8</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">9</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">10</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">11</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">12</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">13</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">14</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">15</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">16</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">17</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">18</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">19</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">20</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">21</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">22</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">23</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">24</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">25</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">26</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">27</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">28</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">29</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-selected ix-date-panel-cell-today\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">30</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">1</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">2</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">3</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">4</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">5</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`DatePanel render work 1`] = `
+"<div class=\\"ix-date-panel ix-date-panel-date\\">
+  <div class=\\"ix-date-panel-header\\"><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上一年\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i></button><button class=\\"ix-date-panel-header-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上个月\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button>
+    <div class=\\"ix-date-panel-header-content\\"><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择年份\\">2021年</button><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择月份\\">11月</button></div><button class=\\"ix-date-panel-header-super-next visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下个月\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下一年\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i></button>
+  </div>
+  <div class=\\"ix-date-panel-body\\">
+    <table role=\\"grid\\">
+      <thead>
+        <tr role=\\"row\\">
+          <th role=\\"columnheader\\">一</th>
+          <th role=\\"columnheader\\">二</th>
+          <th role=\\"columnheader\\">三</th>
+          <th role=\\"columnheader\\">四</th>
+          <th role=\\"columnheader\\">五</th>
+          <th role=\\"columnheader\\">六</th>
+          <th role=\\"columnheader\\">日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">1</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">2</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">3</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">4</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">5</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">6</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">7</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">8</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">9</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">10</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">11</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">12</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">13</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">14</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">15</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">16</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">17</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">18</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">19</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">20</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">21</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">22</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">23</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">24</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">25</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">26</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">27</div>
+          </td>
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">28</div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">29</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-today\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">30</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">1</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">2</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">3</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">4</div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">5</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!---->
+</div>"
+`;

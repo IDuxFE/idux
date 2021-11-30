@@ -1,0 +1,23 @@
+@import '../../style/mixins/borderless.less';
+@import '../../style/mixins/placeholder.less';
+@import './themes/default.less';
+@import './input.less';
+@import './panel.less';
+
+.@{date-picker-prefix} {
+  display: inline-flex;
+  width: 100%;
+  line-height: @date-picker-line-height;
+  background-color: @date-picker-background-color;
+
+  .date-picker-input();
+
+  &-overlay {
+    z-index: @date-picker-overlay-zindex;
+    width: @date-picker-overlay-width;
+    border-radius: @date-picker-overlay-border-radius;
+    box-shadow: @date-picker-overlay-box-shadow;
+
+    .date-picker-panel();
+  }
+}

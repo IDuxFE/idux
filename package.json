@@ -46,6 +46,7 @@
     "@juggle/resize-observer": "^3.3.1",
     "@popperjs/core": "^2.9.3",
     "axios": "^0.21.1",
+    "date-fns": "^2.26.0",
     "dayjs": "^1.10.6",
     "vue": "^3.2.6",
     "vue-router": "^4.0.0",
