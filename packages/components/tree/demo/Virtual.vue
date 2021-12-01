@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { VKey } from '@idux/cdk/utils'
-import { TreeNode } from '@idux/components/tree'
+import type { VKey } from '@idux/cdk/utils'
+import type { TreeNode } from '@idux/components/tree'
 
 const expandedKeys: VKey[] = []
 

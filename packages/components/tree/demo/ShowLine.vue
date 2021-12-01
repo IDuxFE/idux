@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { TreeNode } from '@idux/components/tree'
 
-import { TreeNode } from '@idux/components/tree'
+import { ref } from 'vue'
 
 const customExpandIcon = ref(true)
 const customLeafLineIcon = ref(true)

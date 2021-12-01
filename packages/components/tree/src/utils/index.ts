@@ -57,3 +57,15 @@ export function getParentKeys(
   }
   return keys
 }
+
+export function getAllParentKeys(nodeMap: Map<VKey, MergedNode>): VKey[] {
+  const parentKeys: VKey[] = []
+
+  nodeMap.forEach(item => {
+    if (!item.isLeaf) {
+      parentKeys.push(item.key)
+    }
+  })
+
+  return parentKeys
+}

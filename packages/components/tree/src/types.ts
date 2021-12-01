@@ -13,21 +13,27 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export type CheckStrategy = 'all' | 'parent' | 'child'
+
 export const treeProps = {
   checkedKeys: IxPropTypes.array<VKey>(),
   expandedKeys: IxPropTypes.array<VKey>(),
+  indeterminateKeys: IxPropTypes.array<VKey>(),
   loadedKeys: IxPropTypes.array<VKey>(),
   selectedKeys: IxPropTypes.array<VKey>(),
 
   blocked: IxPropTypes.bool,
+  cascade: IxPropTypes.bool.def(false),
   checkable: IxPropTypes.bool.def(false),
   childrenKey: IxPropTypes.string.def('children'),
+  checkStrategy: IxPropTypes.oneOf<CheckStrategy>(['all', 'parent', 'child']).def('all'),
   dataSource: IxPropTypes.array<TreeNode>().def(() => []),
   disabled: IxPropTypes.func<(node: TreeNode) => boolean | TreeNodeDisabled>(),
   draggable: IxPropTypes.bool.def(false),
   droppable: IxPropTypes.func<TreeDroppable>(),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
   expandIcon: IxPropTypes.string,
+  defaultExpandAll: IxPropTypes.bool.def(false),
   height: IxPropTypes.number,
   leafLineIcon: IxPropTypes.string,
   loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),

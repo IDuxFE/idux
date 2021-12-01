@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeNode, TreeProps } from '../types'
+import type { CheckStrategy, TreeNode, TreeProps } from '../types'
 import type { MergedNode } from './useDataSource'
 import type { ComputedRef, WritableComputedRef } from 'vue'
 
@@ -17,6 +17,7 @@ import { callChange, getChildrenKeys, getParentKeys } from '../utils'
 
 export interface CheckableContext {
   checkedKeys: WritableComputedRef<VKey[]>
+  allCheckedKeys: ComputedRef<VKey[]>
   checkDisabledKeys: ComputedRef<VKey[]>
   indeterminateKeys: ComputedRef<VKey[]>
   handleCheck: (node: MergedNode) => void
@@ -37,9 +38,18 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
     return disabledKeys
   })
 
+  // allCheckedKeys控制勾选框的勾选状态，checkedKeys控制回调的返回值
+  const allCheckedKeys = computed(() => {
+    if (props.cascade) {
+      return findAllCheckedKeys(mergedNodeMap.value, checkedKeys.value, checkDisabledKeys.value)
+    } else {
+      return checkedKeys.value
+    }
+  })
+
   const indeterminateKeys = computed(() => {
-    const _checkedKeys = checkedKeys.value
-    if (_checkedKeys.length === 0) {
+    const _checkedKeys = allCheckedKeys.value
+    if (_checkedKeys.length === 0 || !props.cascade) {
       return []
     }
 
@@ -69,26 +79,33 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
   const handleCheck = (node: MergedNode) => {
     const currKey = node.key
     const nodeMap = mergedNodeMap.value
-
     const disabledKeys = checkDisabledKeys.value
-    const childrenKeys = getChildrenKeys(node, disabledKeys)
-    const index = checkedKeys.value.indexOf(currKey)
+    const childrenKeys = props.cascade ? getChildrenKeys(node, disabledKeys) : []
+    const index = allCheckedKeys.value.indexOf(currKey)
     const checked = index > -1
-    const tempKeys = [...checkedKeys.value]
-    if (checked) {
-      const parentKeys = getParentKeys(nodeMap, node, disabledKeys)
+    let tempKeys = [...allCheckedKeys.value]
+
+    if (
+      checked ||
+      (childrenKeys.length &&
+        childrenKeys.every(key => tempKeys.includes(key) || indeterminateKeys.value.includes(key)))
+    ) {
+      const parentKeys = props.cascade ? getParentKeys(nodeMap, node, disabledKeys) : []
       tempKeys.splice(index, 1)
-      handleChange(
-        checked,
-        node.rawNode,
-        tempKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key)),
-      )
+      tempKeys = tempKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key))
     } else {
       tempKeys.push(currKey)
-      setParentChecked(nodeMap, node, tempKeys, disabledKeys)
+      props.cascade && setParentChecked(nodeMap, node, tempKeys, disabledKeys)
       tempKeys.push(...childrenKeys)
-      handleChange(checked, node.rawNode, tempKeys)
     }
+
+    tempKeys = [...new Set(tempKeys)]
+
+    if (props.cascade) {
+      tempKeys = processAllCheckedKeysByCheckStrategy(nodeMap, tempKeys, disabledKeys, props.checkStrategy)
+    }
+
+    handleChange(checked, node.rawNode, tempKeys)
   }
 
   const handleChange = (checked: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
@@ -100,6 +117,7 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
 
   return {
     checkedKeys,
+    allCheckedKeys,
     checkDisabledKeys,
     indeterminateKeys,
     handleCheck,
@@ -123,4 +141,77 @@ function setParentChecked(
     }
     currNode = parent
   }
+}
+function processAllCheckedKeysByCheckStrategy(
+  dataMap: Map<VKey, MergedNode>,
+  checkedKys: VKey[],
+  disabledKeys: VKey[],
+  checkStrategy: CheckStrategy,
+) {
+  let res: VKey[] = []
+
+  checkedKys = filterCheckedKeysWithDisabled(dataMap, checkedKys, disabledKeys)
+
+  // 将禁用且勾选的节点先push
+  if (disabledKeys.length) {
+    res = checkedKys.filter(item => disabledKeys.includes(item))
+  }
+
+  debugger
+  for (const checkedKey of checkedKys) {
+    const currNode = dataMap.get(checkedKey)
+    if (currNode) {
+      const selfKey = currNode.key
+      const parentKey = currNode.parentKey
+
+      if (checkStrategy === 'parent') {
+        if (!checkedKys.includes(parentKey!)) {
+          res.push(selfKey)
+        }
+      } else if (checkStrategy === 'child') {
+        if (currNode.isLeaf) {
+          res.push(selfKey)
+        }
+      } else {
+        res.push(selfKey)
+      }
+    }
+  }
+
+  return [...new Set(res)]
+}
+
+function findAllCheckedKeys(dataMap: Map<VKey, MergedNode>, checkedKys: VKey[], disabledKeys: VKey[]) {
+  let res = [...checkedKys]
+  let lastParentKey
+
+  for (const checkedKey of checkedKys) {
+    const currNode = dataMap.get(checkedKey)
+    const parentKey = currNode?.parentKey
+    const childrenKeys = getChildrenKeys(currNode, disabledKeys)
+    res = res.concat(childrenKeys)
+    if (parentKey && lastParentKey !== parentKey) {
+      setParentChecked(dataMap, currNode, res, disabledKeys)
+      lastParentKey = parentKey
+    }
+  }
+
+  res = filterCheckedKeysWithDisabled(dataMap, [...new Set(res)], disabledKeys)
+
+  return res
+}
+
+// 把禁用且未勾选节点的父节点从checkedKeys中排除
+function filterCheckedKeysWithDisabled(dataMap: Map<VKey, MergedNode>, tempKeys: VKey[], disabledKeys: VKey[]) {
+  let res = [...tempKeys]
+  if (disabledKeys.length) {
+    for (const disabledKey of disabledKeys) {
+      if (!res.includes(disabledKey)) {
+        const currNode = dataMap.get(disabledKey)
+        const parentKeys = getParentKeys(dataMap, currNode, disabledKeys)
+        res = res.filter(key => !parentKeys.includes(key))
+      }
+    }
+  }
+  return res
 }
