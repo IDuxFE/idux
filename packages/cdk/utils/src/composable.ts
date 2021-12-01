@@ -7,7 +7,7 @@
 
 import type { ComputedRef, EffectScope, Ref } from 'vue'
 
-import { computed, effectScope, onScopeDispose, ref, shallowRef, watch } from 'vue'
+import { computed, effectScope, onScopeDispose, ref, shallowRef, toRaw, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -43,7 +43,7 @@ export function useState<T>(defaultOrFactory: T | (() => T), shallow = true): [C
   const state = shallow ? shallowRef(defaultValue) : ref(defaultValue)
 
   const setState = (value: T) => {
-    if (value !== state.value) {
+    if (value !== toRaw(state.value)) {
       state.value = value
     }
   }
@@ -74,7 +74,7 @@ export function useControlledProp<T, K extends keyof T>(
   )
 
   const setState = (value: T[K]) => {
-    if (value !== state.value) {
+    if (value !== toRaw(state.value)) {
       tempProp.value = value
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       callEmit((props as any)[`onUpdate:${key}`], value)

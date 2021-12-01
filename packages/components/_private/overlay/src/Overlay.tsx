@@ -81,6 +81,7 @@ export default defineComponent({
       if (!popperElement || popperElement === target || popperElement.contains(target)) {
         return
       }
+
       hide()
     }
 

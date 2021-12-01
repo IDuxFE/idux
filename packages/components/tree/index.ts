@@ -21,4 +21,5 @@ export type {
   TreeDroppableOptions,
   TreeDragDropOptions,
   TreeDropType,
+  CheckStrategy as TreeCheckStrategy,
 } from './src/types'

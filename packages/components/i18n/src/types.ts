@@ -5,18 +5,53 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export interface EmptyLocale {
-  description: string
+import { Locale as FNSLocale } from 'date-fns'
+
+export type DateLocale = FNSLocale
+
+export interface DatePickerLocale {
+  today: string
+  ok: string
+  clear: string
+  month: string
+  year: string
+  monthSelect: string
+  yearSelect: string
+  monthFormat: string
+  yearFormat: string
+  previousMonth: string
+  nextMonth: string
+  previousYear: string
+  nextYear: string
+  previousDecade: string
+  nextDecade: string
+  datePlaceholder: string
+  weekPlaceholder: string
+  monthPlaceholder: string
+  quarterPlaceholder: string
+  yearPlaceholder: string
 }
 
-export interface GlobalLocale {
-  placeholder: string
+export interface DateRangePickerLocale {
+  datePlaceholder: [string, string]
+  weekPlaceholder: [string, string]
+  monthPlaceholder: [string, string]
+  quarterPlaceholder: [string, string]
+  yearPlaceholder: [string, string]
+}
+
+export interface EmptyLocale {
+  description: string
 }
 
 export interface ModalLocale {
   cancelText: string
   okText: string
   justOkText: string
+}
+export interface PopconfirmLocale {
+  cancelText: string
+  okText: string
 }
 
 export interface PaginationLocale {
@@ -50,9 +85,12 @@ export interface TableLocale {
 
 export interface Locale {
   type: LocaleType
+  date: DateLocale
+  datePicker: DatePickerLocale
+  dateRangePicker: DateRangePickerLocale
   empty: EmptyLocale
-  global: GlobalLocale
   modal: ModalLocale
+  popconfirm: PopconfirmLocale
   pagination: PaginationLocale
   table: TableLocale
 }

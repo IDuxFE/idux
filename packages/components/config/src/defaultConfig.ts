@@ -16,6 +16,8 @@ import type {
   CheckboxConfig,
   CollapseConfig,
   CommonConfig,
+  DatePickerConfig,
+  DateRangePickerConfig,
   DividerConfig,
   DrawerConfig,
   DropdownConfig,
@@ -29,7 +31,9 @@ import type {
   MenuSubConfig,
   MessageConfig,
   ModalConfig,
+  NotificationConfig,
   PaginationConfig,
+  PopconfirmConfig,
   PopoverConfig,
   ProgressConfig,
   RadioConfig,
@@ -122,19 +126,20 @@ const form = shallowReactive<FormConfig>({
 
 const checkbox = shallowReactive<CheckboxConfig>({ size: 'md' })
 
-const input = shallowReactive<InputConfig>({
+const datePicker = shallowReactive<DatePickerConfig>({
   borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
   size: 'md',
+  suffix: 'calendar',
 })
 
-const textarea = shallowReactive<TextareaConfig>({
-  autoRows: false,
+const dateRangePicker = shallowReactive<DateRangePickerConfig>({ separator: 'swap-right' })
+
+const input = shallowReactive<InputConfig>({
+  borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
-  resize: 'vertical',
-  showCount: false,
   size: 'md',
 })
 
@@ -157,6 +162,15 @@ const select = shallowReactive<SelectConfig>({
   size: 'md',
   suffix: 'down',
   valueKey: 'value',
+})
+
+const textarea = shallowReactive<TextareaConfig>({
+  autoRows: false,
+  clearable: false,
+  clearIcon: 'close-circle',
+  resize: 'vertical',
+  showCount: false,
+  size: 'md',
 })
 
 const timePicker = shallowReactive<TimePickerConfig>({
@@ -263,6 +277,14 @@ const message = shallowReactive<MessageConfig>({
   maxCount: 5,
 })
 
+const notification = shallowReactive<NotificationConfig>({
+  destroyOnHover: false,
+  duration: 4500,
+  maxCount: 5,
+  offset: 24,
+  placement: 'topEnd',
+})
+
 const modal = shallowReactive<ModalConfig>({
   centered: false,
   closable: true,
@@ -306,6 +328,15 @@ const spin = shallowReactive<SpinConfig>({
   size: 'sm',
 })
 
+const popconfirm = shallowReactive<PopconfirmConfig>({
+  autoAdjust: true,
+  delay: 100,
+  destroyOnHide: false,
+  placement: 'top',
+  target: 'ix-popconfirm-container',
+  trigger: 'click',
+})
+
 const progress = shallowReactive<ProgressConfig>({
   size: 'md',
   format: (percent: number) => percent + '%',
@@ -343,13 +374,15 @@ export const defaultConfig: GlobalConfig = {
   menuSub,
   pagination,
   // Data Entry
-  checkbox,
   form,
+  checkbox,
+  datePicker,
+  dateRangePicker,
   input,
-  textarea,
   rate,
   radio,
   select,
+  textarea,
   timePicker,
   timeRangePicker,
   // Data Display
@@ -368,11 +401,13 @@ export const defaultConfig: GlobalConfig = {
   alert,
   skeleton,
   message,
+  notification,
   modal,
   drawer,
   result,
   spin,
   progress,
+  popconfirm,
   stepper,
   // Other
   backTop,

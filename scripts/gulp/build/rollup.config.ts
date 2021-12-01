@@ -16,6 +16,7 @@ const externalDeps = [
   '@juggle/resize-observer',
   '@popperjs/core',
   'dayjs',
+  'date-fns',
   'lodash-es',
   'vue-types',
 ]

@@ -61,6 +61,27 @@ const dataSource: TreeNode[] = [
   { label: 'Node 2', key: '2' },
 ]
 
+const simpleDataSource = [
+  {
+    label: 'Node 0',
+    key: '0',
+    children: [
+      {
+        label: 'Node 0-0',
+        key: '0-0',
+      },
+      {
+        label: 'Node 0-1',
+        key: '0-1',
+      },
+      {
+        label: 'Node 0-2',
+        key: '0-2',
+      },
+    ],
+  },
+]
+
 const checkedKeys = ['0-0', '0-1']
 const expandedKeys = ['0', '0-0', '0-1']
 const selectedKeys = ['0-1']
@@ -78,43 +99,214 @@ describe('Tree', () => {
     props: { dataSource, expandedKeys, checkedKeys, selectedKeys, checkable: true },
   })
 
-  test('v-model:checkedKeys work', async () => {
-    const onUpdateCheckedKeys = jest.fn()
-    const wrapper = TreeMount({
-      props: { checkedKeys: ['0'], 'onUpdate:checkedKeys': onUpdateCheckedKeys },
+  describe('v-model:checkedKeys work', () => {
+    test('with cascade', async () => {
+      const onUpdateCheckedKeys = jest.fn()
+      const wrapper = TreeMount({
+        props: {
+          dataSource: simpleDataSource,
+          cascade: true,
+          checkedKeys: ['0'],
+          'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        },
+      })
+
+      const allNodes = wrapper.findAll('.ix-tree-node')
+
+      allNodes.forEach(node => {
+        expect(node.find('.ix-checkbox-checked').exists()).toBe(true)
+      })
+
+      // 0-0, unchecked
+      await allNodes[1].find('input').setValue(false)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-1', '0-2'])
+
+      await wrapper.setProps({ checkedKeys: ['0-0'] })
+
+      // 0 indeterminate
+      expect(allNodes[0].find('.ix-checkbox-indeterminate').exists()).toBe(true)
     })
 
-    const allNodes = wrapper.findAll('.ix-tree-node')
+    test('with checkStrategy: all', async () => {
+      const onUpdateCheckedKeys = jest.fn()
+      const wrapper = TreeMount({
+        props: {
+          dataSource: simpleDataSource,
+          checkedKeys: ['0', '0-0'],
+          checkStrategy: 'all',
+          'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        },
+      })
 
-    expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
+      const allNodes = wrapper.findAll('.ix-tree-node')
 
-    await wrapper.setProps({ checkedKeys: ['0', '0-0'] })
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
+      expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
+      expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(false)
 
-    expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
-    expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
+      // 0-0, unchecked
+      await allNodes[1].find('input').setValue(false)
 
-    // 0-0, unchecked
-    await allNodes[1].find('input').setValue(false)
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0'])
 
-    expect(onUpdateCheckedKeys).toBeCalledWith([])
+      await wrapper.setProps({ cascade: true, checkedKeys: [] })
 
-    await wrapper.setProps({ checkedKeys: [] })
+      // 0, checked
+      await allNodes[0].find('input').setValue(true)
 
-    expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
-    expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0', '0-0', '0-1', '0-2'])
+    })
 
-    // 0-0, checked
-    await allNodes[1].find('input').setValue(true)
+    test('with checkStrategy: parent', async () => {
+      const onUpdateCheckedKeys = jest.fn()
+      const wrapper = TreeMount({
+        props: {
+          dataSource: [
+            {
+              label: 'Node 0',
+              key: '0',
+              children: [
+                {
+                  label: 'Node 0-0',
+                  key: '0-0',
+                },
+                {
+                  label: 'Node 0-1',
+                  key: '0-1',
+                  disabled: true,
+                },
+                {
+                  label: 'Node 0-2',
+                  key: '0-2',
+                },
+              ],
+            },
+          ],
+          checkedKeys: ['0'],
+          cascade: true,
+          checkStrategy: 'parent',
+          'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        },
+      })
 
-    expect(onUpdateCheckedKeys).toBeCalledWith(['0-0', '0', '0-0-0', '0-0-1', '0-0-2'])
+      const allNodes = wrapper.findAll('.ix-tree-node')
 
-    await wrapper.setProps({ checkedKeys: ['0-0', '0', '0-0-0', '0-0-1', '0-0-2'] })
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
+      // 0-1 exclude disabled
+      expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(true)
 
-    expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
-    expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
-    expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(true)
-    expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(true)
-    expect(allNodes[4].find('.ix-checkbox-checked').exists()).toBe(true)
+      // 0-0, unchecked
+      await allNodes[1].find('input').setValue(false)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-2'])
+
+      await wrapper.setProps({ checkedKeys: [] })
+
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(false)
+
+      // 0-0 checked
+      await allNodes[1].find('input').setValue(true)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-0'])
+
+      // 0 checked
+      await allNodes[0].find('input').setValue(true)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-0', '0-2'])
+    })
+
+    test('with checkStrategy: child', async () => {
+      const onUpdateCheckedKeys = jest.fn()
+      const wrapper = TreeMount({
+        props: {
+          dataSource: [
+            {
+              label: 'Node 0',
+              key: '0',
+              children: [
+                {
+                  label: 'Node 0-0',
+                  key: '0-0',
+                },
+                {
+                  label: 'Node 0-1',
+                  key: '0-1',
+                  disabled: true,
+                },
+              ],
+            },
+          ],
+          checkedKeys: ['0-0', '0-1'],
+          cascade: true,
+          checkStrategy: 'child',
+          'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        },
+      })
+
+      const allNodes = wrapper.findAll('.ix-tree-node')
+
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
+
+      //0-0, unchecked
+      await allNodes[1].find('input').setValue(false)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-1'])
+
+      await wrapper.setProps({ checkedKeys: [] })
+
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+
+      //0, checked
+      await allNodes[0].find('input').setValue(true)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-0'])
+    })
+
+    test('with all children disabled', async () => {
+      const onUpdateCheckedKeys = jest.fn()
+      const wrapper = TreeMount({
+        props: {
+          dataSource: [
+            {
+              label: 'Node 0',
+              key: '0',
+              children: [
+                {
+                  label: 'Node 0-0',
+                  key: '0-0',
+                  disabled: true,
+                },
+                {
+                  label: 'Node 0-1',
+                  key: '0-1',
+                  disabled: true,
+                },
+              ],
+            },
+          ],
+          checkedKeys: [],
+          cascade: true,
+          checkStrategy: 'child',
+          'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        },
+      })
+
+      const allNodes = wrapper.findAll('.ix-tree-node')
+      //0, checked
+      await allNodes[0].find('input').setValue(true)
+
+      expect(onUpdateCheckedKeys).toBeCalledWith([])
+    })
   })
 
   test('v-model:expandedKeys work', async () => {
@@ -151,6 +343,20 @@ describe('Tree', () => {
 
     expect(allNodes[0].classes()).toContain('ix-tree-node-expanded')
     expect(allNodes[1].classes()).toContain('ix-tree-node-expanded')
+  })
+
+  test('defaultExpandAll work', async () => {
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        expandedKeys: [],
+        defaultExpandAll: true,
+      },
+    })
+
+    const allNodes = wrapper.findAll('.ix-tree-node')
+
+    expect(allNodes[0].find('.ix-tree-node-expand').exists()).toBe(true)
   })
 
   test('v-model:selectedKeys work', async () => {
@@ -342,8 +548,12 @@ describe('Tree', () => {
   })
 
   test('disabled work', async () => {
+    const onUpdateCheckedKeys = jest.fn()
     const wrapper = TreeMount({
-      props: { disabled: node => node.key === '0' },
+      props: {
+        disabled: node => node.key === '0',
+        'onUpdate:checkedKeys': onUpdateCheckedKeys,
+      },
     })
 
     const allNodes = wrapper.findAll('.ix-tree-node')
@@ -353,26 +563,20 @@ describe('Tree', () => {
     expect(allNodes[1].classes()).not.toContain('ix-tree-node-disabled')
     expect(allNodes[1].find('.ix-checkbox').classes()).not.toContain('ix-checkbox-disabled')
 
+    await allNodes[0].find('input').setValue(true)
+
+    expect(onUpdateCheckedKeys).not.toBeCalled()
+
     await wrapper.setProps({ disabled: (node: TreeNode) => node.key === '0-0' })
 
     expect(allNodes[0].classes()).not.toContain('ix-tree-node-disabled')
     expect(allNodes[0].find('.ix-checkbox').classes()).not.toContain('ix-checkbox-disabled')
     expect(allNodes[1].classes()).toContain('ix-tree-node-disabled')
     expect(allNodes[1].find('.ix-checkbox').classes()).toContain('ix-checkbox-disabled')
-  })
 
-  test('empty work', async () => {
-    let emptyDescription = 'This is an empty tree'
-    const wrapper = TreeMount({
-      props: { dataSource: [], empty: emptyDescription },
-    })
+    await allNodes[0].find('input').setValue(false)
 
-    expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
-
-    emptyDescription = 'This is an empty tree2'
-    await wrapper.setProps({ empty: { description: emptyDescription } })
-
-    expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
+    expect(onUpdateCheckedKeys).toBeCalled()
   })
 
   test('empty work', async () => {

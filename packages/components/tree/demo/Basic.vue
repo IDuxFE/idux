@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { TreeNode } from '@idux/components/tree'
 
-import { TreeNode } from '@idux/components/tree'
+import { ref } from 'vue'
 
 const treeData: TreeNode[] = [
   {
@@ -25,17 +25,14 @@ const treeData: TreeNode[] = [
       {
         label: 'Node 0-0',
         key: '0-0',
-        disabled: true,
         children: [
           {
             label: 'Node 0-0-0',
             key: '0-0-0',
-            disabled: { check: true },
           },
           {
             label: 'Node 0-0-1',
             key: '0-0-1',
-            disabled: { select: true },
           },
         ],
       },

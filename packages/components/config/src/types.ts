@@ -17,6 +17,7 @@ import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
+import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
@@ -26,6 +27,8 @@ import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, T
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { VNode } from 'vue'
+
+import { DatePickerType } from '@idux/components/date-picker/src/types'
 
 // Common
 export interface CommonConfig {
@@ -102,15 +105,28 @@ export interface PaginationConfig {
 }
 
 // Data Entry
-export interface CheckboxConfig {
-  size: FormSize
-}
-
 export interface FormConfig {
   colonless: boolean
   labelAlign: FormLabelAlign
   layout: FormLayout
   size: FormSize
+}
+
+export interface CheckboxConfig {
+  size: FormSize
+}
+
+export interface DatePickerConfig {
+  borderless: boolean
+  clearable: boolean
+  clearIcon: string
+  format?: Partial<Record<DatePickerType, string>>
+  size: FormSize
+  suffix: string
+}
+
+export interface DateRangePickerConfig {
+  separator: string | VNode
 }
 
 export interface InputConfig {
@@ -272,6 +288,16 @@ export interface MessageConfig {
   top?: number | string
 }
 
+export interface NotificationConfig {
+  destroyOnHover: boolean
+  duration: number
+  icon?: Partial<Record<NotificationType, string | VNode>>
+  closeIcon?: string | VNode
+  maxCount: number
+  offset: number | string | (string | number)[]
+  placement: NotificationPlacement
+}
+
 export interface ModalConfig {
   centered: boolean
   closable: boolean
@@ -316,6 +342,15 @@ export interface SpinConfig {
   size: SpinSize
 }
 
+export interface PopconfirmConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
+  placement: PopperPlacement
+  target: string | HTMLElement
+  trigger: PopperTrigger
+}
+
 export interface ProgressConfig {
   size: ProgressSize
   format: ProgressFormat
@@ -356,8 +391,10 @@ export interface GlobalConfig {
   menuSub: MenuSubConfig
   pagination: PaginationConfig
   // Data Entry
-  checkbox: CheckboxConfig
   form: FormConfig
+  checkbox: CheckboxConfig
+  datePicker: DatePickerConfig
+  dateRangePicker: DateRangePickerConfig
   input: InputConfig
   textarea: TextareaConfig
   radio: RadioConfig
@@ -382,11 +419,14 @@ export interface GlobalConfig {
   alert: AlertConfig
   skeleton: SkeletonConfig
   message: MessageConfig
+  notification: NotificationConfig
   modal: ModalConfig
   drawer: DrawerConfig
   result: ResultConfig
   spin: SpinConfig
+  popconfirm: PopconfirmConfig
   progress: ProgressConfig
+
   // Other
   backTop: BackTopConfig
   anchor: AnchorConfig

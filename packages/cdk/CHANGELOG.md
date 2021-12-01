@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/IDuxFE/idux/compare/v0.8.0...v0.9.0) (2021-12-01)
+
+
+### Features
+
+* **comp:date-picker:** add date-picker ([#559](https://github.com/IDuxFE/idux/issues/559)) ([517d31f](https://github.com/IDuxFE/idux/commit/517d31f13f5322cc65eba87cae21e595aadb72a0))
+
+
+
+
+
 # [0.8.0](https://github.com/IDuxFE/idux/compare/v0.7.0...v0.8.0) (2021-11-23)
 
 **Note:** Version bump only for package @idux/cdk

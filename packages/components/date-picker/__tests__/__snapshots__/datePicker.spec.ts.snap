@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker render work 1`] = `
+"<div class=\\"ix-date-picker ix-date-picker-with-suffix ix-date-picker-md\\">
+  <div class=\\"ix-date-picker-input\\"><input class=\\"ix-date-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"请选择日期\\" size=\\"12\\"><span class=\\"ix-date-picker-suffix\\"><i class=\\"ix-icon ix-icon-calendar\\" role=\\"img\\" aria-label=\\"calendar\\"></i></span>
+    <!---->
+  </div>
+</div>
+<!---->"
+`;
+
+exports[`DatePicker v-model:value work 1`] = `
+"<div class=\\"ix-date-picker ix-date-picker-with-suffix ix-date-picker-md\\">
+  <div class=\\"ix-date-picker-input\\"><input class=\\"ix-date-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"请选择日期\\" size=\\"12\\"><span class=\\"ix-date-picker-suffix\\"><i class=\\"ix-icon ix-icon-calendar\\" role=\\"img\\" aria-label=\\"calendar\\"></i></span>
+    <!---->
+  </div>
+</div>
+<!---->"
+`;

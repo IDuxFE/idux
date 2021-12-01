@@ -1,0 +1,33 @@
+@import '../../style/motion/fade.less';
+@import '../../_private/overlay/style/index.less';
+
+@import './themes/default.less';
+
+.@{popconfirm-prefix} {
+  z-index: @popconfirm-zindex;
+  font-size: @popconfirm-font-size;
+  color: @popconfirm-color;
+  background-color: @popconfirm-background-color;
+  border-radius: @popconfirm-border-radius;
+  box-shadow: @popconfirm-box-shadow;
+
+  &-title {
+    position: relative;
+    padding: @popconfirm-title-padding;
+    z-index: 1;
+  }
+
+  .@{idux-prefix}-overlay-arrow {
+    color: @popconfirm-background-color;
+  }
+
+  &-footer {
+    text-align: end;
+    padding: @popconfirm-footer-padding;
+    zoom: 0.85;
+
+    .@{button-prefix} + .@{button-prefix} {
+      margin: @popconfirm-footer-button-margin;
+    }
+  }
+}
