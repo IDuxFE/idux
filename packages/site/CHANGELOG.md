@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/IDuxFE/idux/compare/v0.8.0...v0.9.0) (2021-12-01)
+
+
+### Features
+
+* **comp: notification:** add notification component ([#552](https://github.com/IDuxFE/idux/issues/552)) ([8f6f572](https://github.com/IDuxFE/idux/commit/8f6f572a7b0b5497b65a1677d2b76f6e52b375cb)), closes [#545](https://github.com/IDuxFE/idux/issues/545)
+* **comp:date-picker:** add date-picker ([#559](https://github.com/IDuxFE/idux/issues/559)) ([517d31f](https://github.com/IDuxFE/idux/commit/517d31f13f5322cc65eba87cae21e595aadb72a0))
+
+
+
+
+
 # [0.8.0](https://github.com/IDuxFE/idux/compare/v0.7.0...v0.8.0) (2021-11-23)
 
 **Note:** Version bump only for package @idux/site

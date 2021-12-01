@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/IDuxFE/idux/compare/v0.8.0...v0.9.0) (2021-12-01)
+
+
+### Features
+
+* **comp: notification:** add notification component ([#552](https://github.com/IDuxFE/idux/issues/552)) ([8f6f572](https://github.com/IDuxFE/idux/commit/8f6f572a7b0b5497b65a1677d2b76f6e52b375cb)), closes [#545](https://github.com/IDuxFE/idux/issues/545)
+* **comp: tree:** Add cascade、checkstrategy、defaultexpandall attributes ([#549](https://github.com/IDuxFE/idux/issues/549)) ([f2a6f5d](https://github.com/IDuxFE/idux/commit/f2a6f5d977a253d1a5b45a53bb4b79e03669af04))
+* **comp:config:** update date config ([#560](https://github.com/IDuxFE/idux/issues/560)) ([81394dc](https://github.com/IDuxFE/idux/commit/81394dcb4b78e13a6b8137b39b3cbf02e7144dcf))
+* **comp:date-picker:** add date-picker ([#559](https://github.com/IDuxFE/idux/issues/559)) ([517d31f](https://github.com/IDuxFE/idux/commit/517d31f13f5322cc65eba87cae21e595aadb72a0))
+* **comp:popconfim:** add popconfim component ([#556](https://github.com/IDuxFE/idux/issues/556)) ([3449f6e](https://github.com/IDuxFE/idux/commit/3449f6ea86314fd3930e07da502f3b5fae49b443)), closes [#555](https://github.com/IDuxFE/idux/issues/555)
+
+
+
+
+
 # [0.8.0](https://github.com/IDuxFE/idux/compare/v0.7.0...v0.8.0) (2021-11-23)
 
 
