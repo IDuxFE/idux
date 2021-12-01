@@ -5,17 +5,17 @@ import { en_US, zh_CN } from '../src/locales'
 import { addLocale, getLocale, useLocale } from '../src/useI18n'
 
 const Comp = {
-  template: `<div>{{globalLocale.placeholder}}</div>`,
+  template: `<div>{{emptyLocale.description}}</div>`,
   setup() {
-    const globalLocale = getLocale('global')
-    return { globalLocale }
+    const emptyLocale = getLocale('empty')
+    return { emptyLocale }
   },
 }
 
 describe('useI18n.ts', () => {
   test('default zh-CN work', async () => {
     const wrapper = mount(Comp)
-    expect(wrapper.text()).toEqual(zh_CN.global.placeholder)
+    expect(wrapper.text()).toEqual(zh_CN.empty.description)
   })
 
   test('addLocale work', async () => {
@@ -28,12 +28,12 @@ describe('useI18n.ts', () => {
     addLocale(en_US)
     useLocale('en-US')
     await flushPromises()
-    expect(wrapper.text()).toEqual(en_US.global.placeholder)
+    expect(wrapper.text()).toEqual(en_US.empty.description)
 
     addLocale([en_US, zh_CN])
     useLocale('zh-CN')
     await flushPromises()
-    expect(wrapper.text()).toEqual(zh_CN.global.placeholder)
+    expect(wrapper.text()).toEqual(zh_CN.empty.description)
   })
 
   test('useLocale work', async () => {
@@ -41,11 +41,11 @@ describe('useI18n.ts', () => {
 
     useLocale(en_US)
     await flushPromises()
-    expect(wrapper.text()).toEqual(en_US.global.placeholder)
+    expect(wrapper.text()).toEqual(en_US.empty.description)
 
     useLocale('zh-CN')
     await flushPromises()
-    expect(wrapper.text()).toEqual(zh_CN.global.placeholder)
+    expect(wrapper.text()).toEqual(zh_CN.empty.description)
   })
 
   test('getLocale work', async () => {

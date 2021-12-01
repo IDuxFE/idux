@@ -29,7 +29,8 @@
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^0.8.0",
-    "dayjs": "^1.10.6"
+    "dayjs": "^1.10.6",
+    "date-fns": "^2.26.0"
   },
   "peerDependencies": {
     "vue": "^3.0.0"

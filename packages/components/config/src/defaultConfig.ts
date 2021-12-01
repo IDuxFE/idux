@@ -16,6 +16,8 @@ import type {
   CheckboxConfig,
   CollapseConfig,
   CommonConfig,
+  DatePickerConfig,
+  DateRangePickerConfig,
   DividerConfig,
   DrawerConfig,
   DropdownConfig,
@@ -123,19 +125,20 @@ const form = shallowReactive<FormConfig>({
 
 const checkbox = shallowReactive<CheckboxConfig>({ size: 'md' })
 
-const input = shallowReactive<InputConfig>({
+const datePicker = shallowReactive<DatePickerConfig>({
   borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
   size: 'md',
+  suffix: 'calendar',
 })
 
-const textarea = shallowReactive<TextareaConfig>({
-  autoRows: false,
+const dateRangePicker = shallowReactive<DateRangePickerConfig>({ separator: 'swap-right' })
+
+const input = shallowReactive<InputConfig>({
+  borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
-  resize: 'vertical',
-  showCount: false,
   size: 'md',
 })
 
@@ -158,6 +161,15 @@ const select = shallowReactive<SelectConfig>({
   size: 'md',
   suffix: 'down',
   valueKey: 'value',
+})
+
+const textarea = shallowReactive<TextareaConfig>({
+  autoRows: false,
+  clearable: false,
+  clearIcon: 'close-circle',
+  resize: 'vertical',
+  showCount: false,
+  size: 'md',
 })
 
 const timePicker = shallowReactive<TimePickerConfig>({
@@ -352,13 +364,15 @@ export const defaultConfig: GlobalConfig = {
   menuSub,
   pagination,
   // Data Entry
-  checkbox,
   form,
+  checkbox,
+  datePicker,
+  dateRangePicker,
   input,
-  textarea,
   rate,
   radio,
   select,
+  textarea,
   timePicker,
   timeRangePicker,
   // Data Display

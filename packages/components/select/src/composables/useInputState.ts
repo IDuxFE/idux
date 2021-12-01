@@ -88,7 +88,7 @@ export function useInputState(
   const handleBlur = (evt: FocusEvent) => {
     isFocused.value = false
     callEmit(props.onBlur, evt)
-    accessor.markAsBlurred?.()
+    accessor.markAsBlurred()
   }
 
   const clearInput = () => {

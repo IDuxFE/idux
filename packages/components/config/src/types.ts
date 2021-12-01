@@ -28,6 +28,8 @@ import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { VNode } from 'vue'
 
+import { DatePickerType } from '@idux/components/date-picker/src/types'
+
 // Common
 export interface CommonConfig {
   prefixCls: string
@@ -103,15 +105,28 @@ export interface PaginationConfig {
 }
 
 // Data Entry
-export interface CheckboxConfig {
-  size: FormSize
-}
-
 export interface FormConfig {
   colonless: boolean
   labelAlign: FormLabelAlign
   layout: FormLayout
   size: FormSize
+}
+
+export interface CheckboxConfig {
+  size: FormSize
+}
+
+export interface DatePickerConfig {
+  borderless: boolean
+  clearable: boolean
+  clearIcon: string
+  format?: Partial<Record<DatePickerType, string>>
+  size: FormSize
+  suffix: string
+}
+
+export interface DateRangePickerConfig {
+  separator: string | VNode
 }
 
 export interface InputConfig {
@@ -367,8 +382,10 @@ export interface GlobalConfig {
   menuSub: MenuSubConfig
   pagination: PaginationConfig
   // Data Entry
-  checkbox: CheckboxConfig
   form: FormConfig
+  checkbox: CheckboxConfig
+  datePicker: DatePickerConfig
+  dateRangePicker: DateRangePickerConfig
   input: InputConfig
   textarea: TextareaConfig
   radio: RadioConfig
