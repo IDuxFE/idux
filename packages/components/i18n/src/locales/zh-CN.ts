@@ -50,6 +50,10 @@ export const zh_CN: Locale = {
     okText: '确定',
     justOkText: '知道了',
   },
+  popconfirm: {
+    cancelText: '取消',
+    okText: '确定',
+  },
   pagination: {
     itemsPerPage: '条/页',
     jumpTo: '前往',

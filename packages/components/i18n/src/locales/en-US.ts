@@ -61,6 +61,10 @@ export const en_US: Locale = {
     totalPrefix: 'Total',
     totalSuffix: 'items',
   },
+  popconfirm: {
+    cancelText: 'No',
+    okText: 'Yes',
+  },
   table: {
     expand: 'Expand row',
     collapse: 'Collapse row',
