@@ -12,6 +12,8 @@ import { isNil, isString } from 'lodash-es'
 import {
   addDays,
   addMonths,
+  addQuarters,
+  addWeeks,
   addYears,
   endOfDay,
   endOfMonth,
@@ -66,7 +68,7 @@ export type DateConfig<P = number | Date, R = Date> = {
 
   get: (date: P, type: DateConfigType | TimeConfigType) => number
   set: (date: P, amount: number, type: DateConfigType | TimeConfigType) => R
-  add: (date: P, amount: number, type: 'year' | 'quarter' | 'month' | 'date' | 'day') => R
+  add: (date: P, amount: number, type: DateConfigType) => R
   startOf: (date: P, type: DateConfigType) => R
   endOf: (date: P, type: DateConfigType) => R
   isSame: (date: P, dateToCompare: P, type: DateConfigType | TimeConfigType) => boolean
@@ -74,7 +76,7 @@ export type DateConfig<P = number | Date, R = Date> = {
 
   format: (date: P, format: string) => string
   parse: (dateString: string, format: string) => R
-  covert: (date: unknown, format?: string) => R
+  covert: (date: unknown, format: string) => R
 
   getLocalizedLabels: (
     type: 'month' | 'day' | 'dayPeriod',
@@ -153,9 +155,11 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'year':
           return addYears(date, amount)
         case 'quarter':
-          return addMonths(date, amount * 3)
+          return addQuarters(date, amount)
         case 'month':
           return addMonths(date, amount)
+        case 'week':
+          return addWeeks(date, amount)
         case 'date':
         case 'day':
           return addDays(date, amount)
