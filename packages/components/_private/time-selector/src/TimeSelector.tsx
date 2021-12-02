@@ -5,30 +5,31 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelCell, PanelColumnProps, TimePickerPanelColumnType, TimePickerPanelProps } from './types'
-import type { Dayjs } from 'dayjs/esm'
+import type { TimeSelectorCell, TimeSelectorColumnProps, TimeSelectorColumnType, TimeSelectorProps } from './types'
 import type { ComputedRef } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
-
-import dayjs from 'dayjs/esm'
+import { computed, defineComponent, provide } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
-import PanelColumn from './panel-column/PanelColumn'
-import { timePickerToken } from './tokens'
-import { timePickerPanelProps } from './types'
+import PanelColumn from './TimeSelectorColumn'
+import { timeSelectorContext } from './tokens'
+import { timeSelectorProps } from './types'
 import { calculateValue, calculateViewHour, normalizeAmPm } from './utils'
 
 export default defineComponent({
   name: 'IxTimePickerPanel',
-  props: timePickerPanelProps,
+  props: timeSelectorProps,
   setup(props) {
-    const { mergedPrefixCls } = inject(timePickerToken)!
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-selector`)
     const { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps } = useOptions(props)
 
+    provide(timeSelectorContext, { mergedPrefixCls })
+
     const columns = computed(() => {
-      const result: PanelColumnProps[] = []
+      const result: TimeSelectorColumnProps[] = []
       props.hourEnabled && result.push(hourOptionsProps.value)
       props.minuteEnabled && result.push(minuteOptionsProps.value)
       props.secondEnabled && result.push(secondOptionsProps.value)
@@ -37,7 +38,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={`${mergedPrefixCls.value}-panel`}>
+      <div class={`${mergedPrefixCls.value}`}>
         {columns.value.map((item, index) => (
           <PanelColumn key={index} {...item} visible={props.visible} />
         ))}
@@ -46,10 +47,10 @@ export default defineComponent({
   },
 })
 
-function useOptions(props: TimePickerPanelProps) {
-  const selectedValue = computed(() => dayjs(props.value ?? props.defaultOpenValue))
-  const viewHours = computed(() => calculateViewHour(selectedValue.value.hour(), props.use12Hours))
-  const ampm = computed(() => normalizeAmPm(selectedValue.value.hour(), props.use12Hours, props.amPmCapital))
+function useOptions(props: TimeSelectorProps) {
+  const selectedValue = computed(() => props.value ?? props.defaultOpenValue)
+  const viewHours = computed(() => calculateViewHour(selectedValue.value.getHours(), props.use12Hours))
+  const ampm = computed(() => normalizeAmPm(selectedValue.value.getHours(), props.use12Hours, props.amPmCapital))
 
   const [onHourChange, onMinuteChange, onSecondChange, onAmPmChange] = generateOnChanges(props, selectedValue)
 
@@ -71,7 +72,7 @@ function useOptions(props: TimePickerPanelProps) {
     ),
   )
   const minuteOptionsProps = computed(() => ({
-    selectedValue: selectedValue.value.minute(),
+    selectedValue: selectedValue.value.getMinutes(),
     options: minuteOptions.value,
     onChange: onMinuteChange,
   }))
@@ -80,12 +81,12 @@ function useOptions(props: TimePickerPanelProps) {
     generateOptions(
       60,
       props.secondStep,
-      props.disabledSeconds(viewHours.value, selectedValue.value.minute(), ampm.value),
+      props.disabledSeconds(viewHours.value, selectedValue.value.getMinutes(), ampm.value),
       props.hideDisabledOptions,
     ),
   )
   const secondOptionsProps = computed(() => ({
-    selectedValue: selectedValue.value.second(),
+    selectedValue: selectedValue.value.getSeconds(),
     options: secondOptions.value,
     onChange: onSecondChange,
   }))
@@ -100,8 +101,8 @@ function useOptions(props: TimePickerPanelProps) {
   return { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps }
 }
 
-function generateOnChanges(props: TimePickerPanelProps, selectedValue: ComputedRef<Dayjs>) {
-  const genChange = (type: TimePickerPanelColumnType, value: string | number) => {
+function generateOnChanges(props: TimeSelectorProps, selectedValue: ComputedRef<Date>) {
+  const genChange = (type: TimeSelectorColumnType, value: string | number) => {
     const newValue = calculateValue(selectedValue.value, type, props.use12Hours, value)
     callEmit(props['onUpdate:value'], newValue)
     callEmit(props.onChange, newValue)
@@ -128,7 +129,7 @@ function generateHourOptions(
 }
 
 function generateOptions(total: number, step: number, disabledOptions: number[], hideDisabledOptions: boolean) {
-  const options: PanelCell[] = []
+  const options: TimeSelectorCell[] = []
   for (let index = 0; index < total; index += step) {
     const isDisabled = disabledOptions.includes(index)
     if (!isDisabled || !hideDisabledOptions) {

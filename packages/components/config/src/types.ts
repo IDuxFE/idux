@@ -179,6 +179,7 @@ export interface TimePickerConfig {
   size: FormSize
   suffix: string
   target?: PortalTargetType
+  allowInput: boolean | 'overlay'
 }
 
 export interface TimeRangePickerConfig extends TimePickerConfig {

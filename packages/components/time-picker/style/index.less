@@ -1,100 +1,157 @@
 @import './themes/default.less';
+@import '../../style/mixins/placeholder.less';
 
 .@{time-picker-prefix} {
-  display: inline-flex;
+  width: 100%;
+  display: inline-block;
+}
 
-  &-clear-icon {
+.@{time-picker-prefix}-trigger {
+  position: relative;
+  width: 100%;
+  line-height: @time-picker-line-height;
+  color: @time-picker-color;
+  border: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
+  border-radius: @time-picker-border-radius;
+  cursor: pointer;
+
+  @icon-padding: @time-picker-icon-margin-left + @time-picker-icon-margin-right;
+
+  &-sm {
+    height: @time-picker-height-sm;
+    padding: @time-picker-padding-vertical-sm (@icon-padding + @time-picker-font-size-sm)
+      @time-picker-padding-vertical-sm @time-picker-padding-horizontal-sm;
+    font-size: @time-picker-font-size-sm;
+  }
+
+  &-md {
+    height: @time-picker-height-md;
+    padding: @time-picker-padding-vertical-md (@icon-padding + @time-picker-font-size-md)
+      @time-picker-padding-vertical-md @time-picker-padding-horizontal-md;
+    font-size: @time-picker-font-size-md;
+  }
+
+  &-lg {
+    height: @time-picker-height-lg;
+    padding: @time-picker-padding-vertical-lg (@icon-padding + @time-picker-font-size-lg)
+      @time-picker-padding-vertical-lg @time-picker-padding-horizontal-lg;
+    font-size: @time-picker-font-size-lg;
+  }
+
+  &:hover:not(&-disabled) {
+    border-color: @time-picker-hover-color;
+  }
+
+  &-active:not(&-disabled):not(&-borderless) {
+    border-color: @time-picker-active-color;
+    box-shadow: @time-picker-active-box-shadow;
+  }
+
+  &-disabled {
+    color: @time-picker-disabled-color;
+    background-color: @time-picker-disabled-background-color;
+    cursor: not-allowed;
+  }
+
+  &-disabled &-input {
+    cursor: not-allowed;
+  }
+
+  // &-borderless &-selector {
+  //   .borderless();
+  // }
+
+  &-placeholder {
+    color: @time-picker-placeholder-color;
+  }
+
+  &-suffix {
+    position: absolute;
+    top: 0;
+    right: @time-picker-icon-margin-right;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: @time-picker-icon-color;
+  }
+
+  &:not(&-disabled) &-clear-icon {
     cursor: pointer;
+
+    &:hover {
+      color: @time-picker-icon-hover-color;
+    }
+  }
+
+  &-input {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    .placeholder(@time-picker-placeholder-color);
   }
 }
 
 .@{time-picker-prefix}-panel {
-  position: relative;
-  display: flex;
-  height: @time-picker-panel-height;
+  width: @time-picker-panel-width;
   padding: @time-picker-panel-padding;
-  background-color: @time-picker-background-color;
+  background-color: @time-picker-panel-background-color;
   box-shadow: @time-picker-panel-box-shadow;
 
-  ::-webkit-scrollbar {
-    width: @time-picker-scrollbar-width;
-    height: @time-picker-scrollbar-width;
+  & &-input {
+    margin-bottom: @time-picker-input-margin;
   }
+}
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: @time-picker-scrollbar-thumb-border-radius;
-    background-color: @time-picker-scrollbar-thumb-background-color;
-  }
+.@{time-range-picker-prefix}-trigger {
 
-  ::-webkit-scrollbar-track {
-    border-radius: 0;
-    background: @time-picker-scrollbar-track-background;
-    transition: @time-picker-scrollbar-track-transition;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    display: block;
-    top: 50%;
-    width: calc(100% - (@time-picker-window-margin * 2 + @time-picker-panel-padding * 2));
-    margin: -(@time-picker-cell-height / 2) @time-picker-window-margin 0 @time-picker-window-margin;
-    height: @time-picker-cell-height;
-    border-top: @time-picker-window-border-width @time-picker-window-border-style @time-picker-window-border-color;
-    border-bottom: @time-picker-window-border-width @time-picker-window-border-style @time-picker-window-border-color;
-  }
-
-  &-column {
-    position: relative;
-    width: @time-picker-cell-width;
-    height: 100%;
-    margin: 0;
-    list-style-type: none;
-    overflow-y: hidden;
-
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: calc(50% - (@time-picker-cell-height / 2));
-    }
-
-    &:last-child {
-      border-right: none;
-    }
-
-    &:hover {
-      overflow-y: scroll;
-      .@{time-picker-prefix}-panel-cell {
-        padding-left: @time-picker-scrollbar-width;
-      }
-    }
-  }
-
-  &-cell {
+  &-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: @time-picker-cell-height;
-    margin: 0;
-    cursor: pointer;
-    color: @time-picker-cell-color;
-    transition: @time-transition;
 
-    &:not(.@{time-picker-prefix}-panel-cell-selected):hover {
-      background-color: @time-picker-cell-active-background-color;
+    &-side {
+      flex: 1 1 0%;
     }
 
-    &-disabled {
-      cursor: not-allowed;
-      color: @time-picker-disabled-color;
-    }
-
-    &-selected {
-      color: @time-picker-cell-selected-color;
-      background-color: @time-picker-cell-selected-background-color;
-      font-weight: @time-picker-cell-selected-font-weight;
+    &-split {
+      margin: 0 @time-range-picker-split-margin;
     }
   }
 }
+
+.@{time-range-picker-prefix}-panel {
+  background-color: @time-picker-panel-background-color;
+  box-shadow: @time-picker-panel-box-shadow;
+
+  &-content {
+    display: flex;
+    padding: @time-picker-panel-padding;
+  }
+
+  &-footer {
+    text-align: end;
+    border-top: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
+    padding: @time-picker-footer-padding;
+  }
+  
+  &-side {
+    width: @time-range-picker-panel-side-width;
+
+    & &-input {
+      margin-bottom: @time-picker-input-margin;
+    }
+
+    &:first-child {
+      margin-right: 20px;
+    }
+
+    .@{time-picker-prefix}-selector {
+      border: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
+      border-radius: @time-picker-border-radius;
+    }
+  }
+}
+
+@import './selector.less';

@@ -81,4 +81,9 @@ export const en_US: Locale = {
     sortAsc: 'Click to sort ascending',
     sortCancel: 'Click to cancel sorting',
   },
+  timePicker: {
+    okText: 'Yes',
+    to: 'To',
+    selectTime: 'Click to select time',
+  },
 }

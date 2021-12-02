@@ -10,4 +10,10 @@
 import { ref } from 'vue'
 
 const time = ref(new Date())
+window.__time = time
 </script>
+<style scoped lang="less">
+:deep(.ix-time-picker) {
+  width: 200px;
+}
+</style>

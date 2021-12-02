@@ -37,6 +37,10 @@ export default defineConfig(({ command }) => {
               const path = `@idux/components/tabs`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }
+            } else if (name === 'IxTimePicker' || name === 'IxTimeRangePicker') {
+              const path = `@idux/components/time-picker`
+              const sideEffects = undefined
+              return { importName: name, path, sideEffects }
             }
           },
           IduxResolver(),

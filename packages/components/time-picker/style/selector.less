@@ -1,0 +1,95 @@
+.@{time-picker-prefix}-selector {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: @time-picker-selector-height;
+  padding: @time-picker-selector-padding;
+
+  ::-webkit-scrollbar {
+    width: @time-picker-scrollbar-width;
+    height: @time-picker-scrollbar-width;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: @time-picker-scrollbar-thumb-border-radius;
+    background-color: @time-picker-scrollbar-thumb-background-color;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: @time-picker-scrollbar-track-background;
+    transition: @time-picker-scrollbar-track-transition;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 50%;
+    width: calc(100% - @time-picker-selector-padding * 2);
+    margin-top: -(@time-picker-selector-cell-height / 2);
+    height: @time-picker-selector-cell-height;
+    border-top: @time-picker-selector-window-border-width @time-picker-selector-window-border-style @time-picker-selector-window-border-color;
+    border-bottom: @time-picker-selector-window-border-width @time-picker-selector-window-border-style @time-picker-selector-window-border-color;
+  }
+
+  &-column {
+    position: relative;
+    width: @time-picker-selector-cell-width;
+    height: 100%;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: hidden;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: calc(50% - (@time-picker-selector-cell-height / 2));
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:hover {
+      overflow-y: scroll;
+      padding-left: @time-picker-scrollbar-width;
+    }
+  }
+
+  &-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @time-picker-selector-cell-height;
+    margin: 0;
+    cursor: pointer;
+    color: @time-picker-selector-cell-color;
+    transition: @time-transition;
+
+    &:not(.@{time-picker-prefix}-selector-cell-selected):hover {
+      background-color: @time-picker-selector-cell-active-background-color;
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      color: @time-picker-disabled-color;
+    }
+
+    &-selected {
+      color: @time-picker-selector-cell-selected-color;
+      background-color: @time-picker-selector-cell-selected-background-color;
+      font-weight: @time-picker-selector-cell-selected-font-weight;
+    }
+  }
+
+//   &-column:first-child &-cell{
+//     justify-content: flex-start;
+//   }
+//   &-column:last-child &-cell{
+//     justify-content: flex-end;
+//   }
+}

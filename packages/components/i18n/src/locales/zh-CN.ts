@@ -81,4 +81,9 @@ export const zh_CN: Locale = {
     sortAsc: '点击升序',
     sortCancel: '取消排序',
   },
+  timePicker: {
+    okText: '确定',
+    to: '至',
+    selectTime: '选择时间',
+  },
 }

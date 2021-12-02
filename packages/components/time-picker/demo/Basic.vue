@@ -1,6 +1,6 @@
 <template>
   <IxSpace>
-    <IxTimePicker v-model:value="time" v-model:open="open"></IxTimePicker>
+    <IxTimePicker v-model:value="time" v-model:open="open" allow-input="overlay"></IxTimePicker>
     <IxButton @click="changeToNow">now</IxButton>
   </IxSpace>
 </template>
@@ -15,3 +15,8 @@ function changeToNow() {
 const time = ref()
 const open = ref(false)
 </script>
+<style scoped lang="less">
+:deep(.ix-time-picker) {
+  width: 200px;
+}
+</style>

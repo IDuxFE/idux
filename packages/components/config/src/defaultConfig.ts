@@ -178,6 +178,7 @@ const timePicker = shallowReactive<TimePickerConfig>({
   clearIcon: 'close-circle',
   size: 'md',
   suffix: 'clock-circle',
+  allowInput: true,
 })
 
 const timeRangePicker = shallowReactive<TimeRangePickerConfig>({
@@ -187,6 +188,7 @@ const timeRangePicker = shallowReactive<TimeRangePickerConfig>({
   size: 'md',
   suffix: 'clock-circle',
   separator: '~',
+  allowInput: true,
 })
 
 // --------------------- Data Display ---------------------
