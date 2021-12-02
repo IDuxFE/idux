@@ -12,37 +12,46 @@ pool:
 stages:
   - stage: env
     jobs:
-      - job: Nodes
+      - job: env_nodes
         steps:
+          - checkout: none
           - task: NodeTool@0
             inputs:
-              versionSpec: '12.x'
+              versionSpec: '14.x'
             displayName: 'Install Node.js'
 
   - stage: lint
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    dependsOn: env
     jobs:
-      - job: Packages
+      - job: lint_packages
         steps:
           - task: Npm@1
             inputs:
               command: 'install'
+
           - script: npm run lint
-    dependsOn: env
+            displayName: 'Run lint'
 
   - stage: test
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    dependsOn: env
     jobs:
-      - job: Packages
+      - job: test_packages
         steps:
           - task: Npm@1
             inputs:
               command: 'install'
-          - script: |
-              npm run test
-              ./node_modules/.bin/codecov -t $(CODECOV_TOKEN)
+          - script: npm run test
+            displayName: 'Run test'
+
+          - script: ./node_modules/.bin/codecov -t $(CODECOV_TOKEN)
+            condition: succeededOrFailed()
+            displayName: 'Upload code codecov results'
 
           - task: PublishCodeCoverageResults@1
-            displayName: 'publish code coverage results'
             condition: succeededOrFailed()
+            displayName: 'Publish code coverage results'
             inputs:
               codeCoverageTool: Cobertura
               summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
@@ -50,38 +59,55 @@ stages:
               failIfCoverageEmpty: true
 
           - task: PublishTestResults@2
-            displayName: 'publish test results'
+            displayName: 'Publish test results'
             condition: succeededOrFailed()
             inputs:
               testResultsFiles: junit.xml
               mergeTestResults: true
               testRunTitle: 'Jest Unit Tests'
               failTaskOnFailedTests: true
-    dependsOn: env
 
   - stage: build
+    dependsOn: env
     jobs:
-      - job: Packages
+      - job: build_site
+        condition: eq(variables['Build.Reason'], 'PullRequest')
         steps:
           - task: Npm@1
             inputs:
               command: 'install'
+
+          - script: npm run build
+            displayName: 'Run build'
+
           - script: |
-              npm run build
               export DEPLOY_DOMAIN=https://preview-${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER}-idux.surge.sh
               npx surge --project ./dist/site --domain $DEPLOY_DOMAIN
-              tar czvf build.tgz ./dist/site
             env:
               SURGE_LOGIN: $(SURGE_LOGIN)
               SURGE_TOKEN: $(SURGE_TOKEN)
+            displayName: 'Deploy build result'
+
+      - job: publish_artifacts
+        condition: ne(variables['Build.Reason'], 'PullRequest')
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+
+          - script: npm run build
+            displayName: 'Run build'
+
+          - script: tar czvf build.tgz ./dist
+            displayName: 'Create archives'
 
           - task: CopyFiles@2
             inputs:
               contents: build.tgz
               targetFolder: $(Build.ArtifactStagingDirectory)
             displayName: 'Copy archives to artifacts staging directory'
+
           - task: PublishBuildArtifacts@1
             inputs:
               path: $(Build.ArtifactStagingDirectory)
             displayName: 'Upload artifacts'
-    dependsOn: env
