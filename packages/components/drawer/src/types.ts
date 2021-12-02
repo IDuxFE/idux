@@ -10,6 +10,7 @@ import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
@@ -45,7 +46,7 @@ export const drawerProps = {
   maskClosable: IxPropTypes.bool,
   offset: IxPropTypes.oneOfType([String, Number]).def(0),
   placement: IxPropTypes.oneOf<DrawerPlacement>(['top', 'bottom', 'start', 'end']).def('end'),
-  target: IxPropTypes.oneOfType([String, HTMLElement]),
+  target: ɵPortalTargetDef,
   width: IxPropTypes.oneOfType([String, Number]),
   wrapperClassName: IxPropTypes.string,
   zIndex: IxPropTypes.number,

@@ -20,7 +20,6 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `content` | 浮层内容 | `string \| #content` | - | - | - |
-| `target` | 浮层容器节点 | `string \| HTMLElement` | `ix-popover-container` | ✅ | - |
 | `title` | 浮层的标题 | `string \| #title` | - | - | - |
 
 更多属性请参考 [Tooltip](/components/tooltip/zh#TooltipProps).

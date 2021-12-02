@@ -29,7 +29,7 @@ export default defineComponent({
     const overlayRef = ref<ɵOverlayInstance | null>(null)
     const config = useGlobalConfig('tooltip')
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = useConfigProps(props, config, setVisibility)
+    const configProps = useConfigProps(props, config, mergedPrefixCls, setVisibility)
     const updatePopper = () => overlayRef.value?.updatePopper()
 
     expose({ updatePopper })
@@ -43,7 +43,7 @@ export default defineComponent({
           visible={visibility.value}
           v-slots={{ default: slots.default, content: () => renderTitle(props, slots, prefixCls) }}
           class={prefixCls}
-          transitionName="ix-fade-fast"
+          transitionName={`${common.prefixCls}-fade-fast`}
           {...configProps.value}
           offset={defaultOffset}
           showArrow

@@ -54,6 +54,7 @@ order: 0
 | `searchFilter` | 根据搜索的文本进行筛选 | `boolean \| SelectFilterFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
+| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
 | `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |

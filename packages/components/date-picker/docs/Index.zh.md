@@ -34,6 +34,7 @@ order: 0
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `'calendar'` | ✅ | - |
+| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
 | `type` | 设置选择器类型 | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year'` | `'date'` | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 | `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |

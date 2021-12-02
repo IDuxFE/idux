@@ -8,6 +8,7 @@
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { ButtonProps } from '@idux/components/button'
 
@@ -51,6 +52,7 @@ export const notificationProps = {
 export const notificationProviderProps = {
   offset: IxPropTypes.oneOfType<string | number | (number | string)[]>([String, Number, Array]),
   maxCount: IxPropTypes.number,
+  target: ɵPortalTargetDef,
 }
 
 export type NotificationType = typeof notificationType[number]

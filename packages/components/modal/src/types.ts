@@ -9,6 +9,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { HeaderProps } from '@idux/components/header'
 
@@ -47,6 +48,7 @@ export const modalProps = {
   offset: IxPropTypes.oneOfType([String, Number]).def(128),
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
+  target: ɵPortalTargetDef,
   title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   type: IxPropTypes.oneOf<ModalType>(['default', 'confirm', 'info', 'success', 'warning', 'error']).def('default'),
   width: IxPropTypes.oneOfType([String, Number]),

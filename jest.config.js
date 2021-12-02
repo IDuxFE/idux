@@ -38,14 +38,6 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   coverageReporters: ['json', 'lcov', 'text', 'cobertura'],
-  coverageThreshold: {
-    global: {
-      branches: 85,
-      functions: 85,
-      lines: 85,
-      statements: 85,
-    },
-  },
   coveragePathIgnorePatterns: ['/node_modules/', '<rootDir>/tests'],
   reporters: ['default', 'jest-junit'],
   setupFiles: ['./tests/setup.ts'],

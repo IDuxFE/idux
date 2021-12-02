@@ -7,6 +7,7 @@
 
 import type { DropdownProps } from './types'
 import type { DropdownConfig } from '@idux/components/config'
+import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, provide } from 'vue'
 
@@ -23,9 +24,11 @@ export default defineComponent({
   name: 'IxDropdown',
   props: dropdownProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
     const config = useGlobalConfig('dropdown')
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = useConfigProps(props, config, setVisibility)
+    const configProps = useConfigProps(props, config, mergedPrefixCls, setVisibility)
     provide(dropdownToken, { setVisibility })
 
     return () => {
@@ -33,10 +36,10 @@ export default defineComponent({
         <ɵOverlay
           visible={visibility.value}
           v-slots={{ default: slots.default, content: slots.overlay }}
-          class="ix-dropdown"
+          class={mergedPrefixCls.value}
           delay={defaultDelay}
           disabled={props.disabled}
-          transitionName="ix-fade"
+          transitionName={`${common.prefixCls}-fade`}
           {...configProps.value}
         />
       )
@@ -44,7 +47,12 @@ export default defineComponent({
   },
 })
 
-function useConfigProps(props: DropdownProps, config: DropdownConfig, setVisibility: (value: boolean) => void) {
+function useConfigProps(
+  props: DropdownProps,
+  config: DropdownConfig,
+  mergedPrefixCls: ComputedRef<string>,
+  setVisibility: (value: boolean) => void,
+) {
   return computed(() => {
     const trigger = props.trigger ?? config.trigger
     return {
@@ -54,7 +62,7 @@ function useConfigProps(props: DropdownProps, config: DropdownConfig, setVisibil
       offset: props.offset ?? config.offset,
       placement: props.placement ?? config.placement,
       showArrow: props.showArrow ?? config.showArrow,
-      target: props.target ?? config.target,
+      target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,
       trigger: trigger,
       ['onUpdate:visible']: setVisibility,
     }

@@ -8,6 +8,7 @@
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
@@ -43,6 +44,7 @@ export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 export const messageProviderProps = {
   maxCount: IxPropTypes.number,
   top: IxPropTypes.oneOfType([String, Number]),
+  target: ɵPortalTargetDef,
 }
 export interface MessageProviderRef {
   open: (options: MessageOptions) => MessageRef

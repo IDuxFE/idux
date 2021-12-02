@@ -95,10 +95,7 @@ export default defineComponent({
       })
     })
 
-    const target = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return `${prefixCls}-overlay-container`
-    })
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
 
     return () => {
       const renderTrigger = () => <Trigger {...attrs}></Trigger>

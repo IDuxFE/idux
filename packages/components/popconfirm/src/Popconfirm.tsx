@@ -31,7 +31,7 @@ export default defineComponent({
 
     const { visible, setVisible } = useVisible(props)
 
-    const configProps = ɵUseConfigProps(props, config, setVisible)
+    const configProps = ɵUseConfigProps(props, config, mergedPrefixCls, setVisible)
 
     const { cancelLoading, okLoading, cancel, ok } = useTrigger(props, setVisible)
 
@@ -55,7 +55,7 @@ export default defineComponent({
           visible={visible.value}
           v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
           class={prefixCls}
-          transitionName="ix-fade"
+          transitionName={`${common.prefixCls}-fade`}
           {...configProps.value}
           offset={defaultOffset}
           showArrow

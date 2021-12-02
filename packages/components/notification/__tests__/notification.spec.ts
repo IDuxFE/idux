@@ -19,6 +19,7 @@ describe('Notification', () => {
     const { props, ...rest } = options || {}
     const _options = {
       props: {
+        duration: 100,
         visible: true,
         title: titleText,
         content: contentText,
@@ -44,7 +45,6 @@ describe('Notification', () => {
       props: {
         visible: false,
         'onUpdate:visible': onUpdateVisible,
-        duration: 100,
       },
     })
     await flushPromises()
@@ -55,7 +55,8 @@ describe('Notification', () => {
 
     expect(wrapper.isVisible()).toBe(true)
 
-    await wait(120)
+    await wait(100)
+
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 
@@ -65,7 +66,6 @@ describe('Notification', () => {
       propsData: {
         visible: false,
         'onUpdate:visible': onUpdateVisible,
-        duration: 1000,
       },
     })
     const wrapperDom = wrapper.find(`.${notificationWrapCls}`)
@@ -75,12 +75,12 @@ describe('Notification', () => {
     })
     await flushPromises()
     await wrapperDom.trigger('mouseenter')
-    await wait(1200)
+    await wait(100)
 
     expect(onUpdateVisible).not.toBeCalled()
 
     await wrapperDom.trigger('mouseleave')
-    await wait(1200)
+    await wait(100)
 
     expect(onUpdateVisible).toBeCalledWith(false)
 
@@ -89,7 +89,7 @@ describe('Notification', () => {
       destroyOnHover: true,
     })
     await wrapperDom.trigger('mouseenter')
-    await wait(1200)
+    await wait(100)
 
     expect(onUpdateVisible).toBeCalledWith(false)
   })
@@ -103,26 +103,26 @@ describe('Notification', () => {
       },
     })
 
-    await wait(4400)
+    await wait(90)
 
     expect(onUpdateVisible).not.toBeCalled()
 
-    await wait(200)
+    await wait(10)
 
     expect(onUpdateVisible).toBeCalledWith(false)
 
     await wrapper.setProps({
       visible: true,
-      duration: 100,
+      duration: 200,
     })
-    await wait(90)
+    await wait(190)
 
     expect(onUpdateVisible).toHaveBeenCalledTimes(1)
 
-    await wait(20)
+    await wait(10)
 
     expect(onUpdateVisible).toBeCalledWith(false)
-  }, 9000)
+  })
 
   test('icon work', async () => {
     const wrapper = NotificationMount()

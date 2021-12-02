@@ -24,6 +24,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const config = useGlobalConfig('message')
     const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
@@ -34,6 +36,8 @@ export default defineComponent({
 
     provide(messageProviderToken, apis)
     expose(apis)
+
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       const child = messages.value.map(item => {
@@ -51,8 +55,14 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target="ix-message-container" load={loadContainer.value}>
-            <TransitionGroup tag="div" name="ix-move-up" class="ix-message-wrapper" style={style.value} {...attrs}>
+          <CdkPortal target={target.value} load={loadContainer.value}>
+            <TransitionGroup
+              tag="div"
+              name={`${common.prefixCls}-move-up`}
+              class={`${mergedPrefixCls.value}-wrapper`}
+              style={style.value}
+              {...attrs}
+            >
               {child}
             </TransitionGroup>
           </CdkPortal>
