@@ -28,6 +28,8 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-menu`)
     const config = useGlobalConfig('menu')
+    // TODO remove 'sub'
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-sub-overlay-container`)
     const indent = computed(() => props.indent ?? config.indent)
     const mode = computed(() => {
       const { collapsed, mode } = props
@@ -49,6 +51,7 @@ export default defineComponent({
 
     provide(menuToken, {
       mergedPrefixCls,
+      target,
       indent,
       mode,
       multiple,

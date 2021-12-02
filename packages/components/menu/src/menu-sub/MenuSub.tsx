@@ -115,7 +115,7 @@ export default defineComponent({
             disabled={props.disabled}
             offset={offset.value}
             placement={placement.value}
-            target={`${prefixCls}-overlay-container`}
+            target={menuContext.target.value}
             transitionName={mergedTransitionName.value}
             trigger="manual"
           />

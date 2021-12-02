@@ -88,7 +88,6 @@ const dropdown = shallowReactive<DropdownConfig>({
   offset: [0, 8],
   placement: 'bottomStart',
   showArrow: false,
-  target: 'ix-dropdown-container',
   trigger: 'hover',
 })
 
@@ -250,7 +249,6 @@ const tooltip = shallowReactive<TooltipConfig>({
   delay: 100,
   destroyOnHide: false,
   placement: 'top',
-  target: 'ix-tooltip-container',
   trigger: 'hover',
 })
 
@@ -266,7 +264,6 @@ const popover = shallowReactive<PopoverConfig>({
   delay: 100,
   destroyOnHide: false,
   placement: 'top',
-  target: 'ix-popover-container',
   trigger: 'hover',
 })
 
@@ -333,7 +330,6 @@ const popconfirm = shallowReactive<PopconfirmConfig>({
   delay: 100,
   destroyOnHide: false,
   placement: 'top',
-  target: 'ix-popconfirm-container',
   trigger: 'click',
 })
 

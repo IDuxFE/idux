@@ -26,10 +26,10 @@ exports[`DatePanel disabledDate work 1`] = `
           <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">30</div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-selected ix-date-panel-cell-today\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-selected\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">1</div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-today\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">2</div>
           </td>
           <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
@@ -167,10 +167,10 @@ exports[`DatePanel render work 1`] = `
           <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">30</div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-today\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-selected\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">1</div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-today\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">2</div>
           </td>
           <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">

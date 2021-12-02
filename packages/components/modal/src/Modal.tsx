@@ -50,13 +50,15 @@ export default defineComponent({
     provide(MODAL_TOKEN, apis)
     expose(apis)
 
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
+
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {
         return null
       }
 
       return (
-        <CdkPortal target={`${mergedPrefixCls.value}-container`} load={visible.value}>
+        <CdkPortal target={target.value} load={visible.value}>
           <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
