@@ -211,13 +211,14 @@ describe('NotificationProvider', () => {
         wrapper.vm.open({
           title: defaultTitle,
           content: defaultContent,
+          duration: 20,
         })
       }
       await flushPromises()
 
       expect(document.querySelectorAll(`.${notificationCls}`).length).toBe(3)
 
-      await wait(5000)
+      await wait(20)
 
       await wrapper.setProps({ maxCount: 5 })
 
@@ -232,7 +233,7 @@ describe('NotificationProvider', () => {
       expect(document.querySelectorAll(`.${notificationCls}`).length).toBe(5)
 
       wrapper.vm.destroyAll()
-    }, 9000)
+    })
 
     //todo 待transitionGroup测试有解决方案再处理
     // test('offset work', async () => {
