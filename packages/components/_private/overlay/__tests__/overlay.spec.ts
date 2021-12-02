@@ -9,8 +9,14 @@ import { isElementVisible, renderWork } from '@tests'
 import Overlay from '../src/Overlay'
 
 describe('Overlay', () => {
-  const OverlayMount = (options?: MountingOptions<Partial<OverlayProps>>) =>
-    mount(Overlay, { ...options } as MountingOptions<OverlayProps>)
+  const OverlayMount = (options?: MountingOptions<Partial<OverlayProps>>) => {
+    const { props, ...rest } = options || {}
+    return mount(Overlay, {
+      props: { target: 'ix-overlay-container', ...props },
+      ...rest,
+    } as MountingOptions<OverlayProps>)
+  }
+
   const slots = {
     default: () => h('div', { id: 'trigger' }, 'trigger'),
     content: () => h('div', { id: 'content' }, 'content'),
@@ -20,7 +26,7 @@ describe('Overlay', () => {
     document.querySelector('.ix-overlay-container')!.innerHTML = ''
   })
 
-  renderWork<OverlayProps>(Overlay, { props: { visible: true }, slots })
+  renderWork<OverlayProps>(Overlay, { props: { target: 'ix-overlay-container', visible: true }, slots })
 
   test('visible work', async () => {
     const onUpdateVisible = jest.fn()

@@ -27,7 +27,7 @@ order: 0
 | `offset` | 悬浮层位置偏移量 | `[number, number]` | `[0,8]` | ✅ | - |
 | `placement` | 悬浮层的对齐方式 | `PopperPlacement` | `bottomStart` | ✅ | - |
 | `showArrow` | 是否显示箭头 | `boolean` | `false` | ✅ | - |
-| `target` | 浮层容器节点 | `string \| HTMLElement` | `ix-dropdown-container` | ✅ | 为 `string` 时，会在 `document.body` 中创建一个 `div` |
+| `target` | 自定义下拉框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
 | `trigger` | 悬浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |
 
 #### DropdownSlots

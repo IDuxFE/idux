@@ -14,6 +14,7 @@ import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, Slots, VNode, VNodeTypes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export interface SelectOption {
@@ -61,6 +62,7 @@ export const selectProps = {
   searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
+  target: ɵPortalTargetDef,
   valueKey: IxPropTypes.string,
   virtual: IxPropTypes.bool.def(false),
 

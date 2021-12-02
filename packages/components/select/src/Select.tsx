@@ -104,15 +104,12 @@ export default defineComponent({
       const { overlayClassName } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [`${prefixCls}-dropdown`]: true,
+        [`${prefixCls}-overlay`]: true,
         [overlayClassName || '']: !!overlayClassName,
       })
     })
 
-    const target = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return `${prefixCls}-overlay`
-    })
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
 
     return () => {
       const renderTrigger = () => <Trigger {...attrs}></Trigger>

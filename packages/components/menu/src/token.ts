@@ -6,12 +6,14 @@
  */
 
 import type { MenuMode, MenuSubProps, MenuTheme } from './types'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VKey } from '@idux/cdk/utils'
 import type { MenuSubConfig } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface MenuContext {
   mergedPrefixCls: ComputedRef<string>
+  target: ComputedRef<PortalTargetType>
   indent: ComputedRef<number>
   mode: ComputedRef<MenuMode>
   multiple: ComputedRef<boolean>

@@ -54,13 +54,14 @@ export default defineComponent({
     provide(DRAWER_TOKEN, apis)
     expose(apis)
 
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
+
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {
         return null
       }
-      const { target } = props
       return (
-        <CdkPortal target={target ?? `${mergedPrefixCls.value}-container`} load={visible.value}>
+        <CdkPortal target={target.value} load={visible.value}>
           <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}

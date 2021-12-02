@@ -41,7 +41,7 @@ export default defineComponent({
   props: notificationProviderProps,
   setup(props, { slots, expose }) {
     const commonCfg = useGlobalConfig('common')
-    const comPrefix = computed(() => `${commonCfg.prefixCls}-notification`)
+    const mergedPrefixCls = computed(() => `${commonCfg.prefixCls}-notification`)
     const config = useGlobalConfig('notification')
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { notifications, open, info, success, warning, error, update, destroy, destroyAll } =
@@ -51,6 +51,8 @@ export default defineComponent({
 
     provide(notificationProviderToken, apis)
     expose(apis)
+
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       const getChild = (notifications: NotificationOptions[]) => {
@@ -71,7 +73,7 @@ export default defineComponent({
             key={placement}
             tag="div"
             name={moveName}
-            class={[`${comPrefix.value}-wrapper`, `${comPrefix.value}-wrapper-${placement}`]}
+            class={[`${mergedPrefixCls.value}-wrapper`, `${mergedPrefixCls.value}-wrapper-${placement}`]}
             style={position}
           >
             {child}
@@ -82,7 +84,7 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target={`${comPrefix.value}-container`} load={true}>
+          <CdkPortal target={target.value} load={true}>
             {placementGroup}
           </CdkPortal>
         </>

@@ -28,6 +28,7 @@ import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { VNode } from 'vue'
 
+import { PortalTargetType } from '@idux/cdk/portal'
 import { DatePickerType } from '@idux/components/date-picker/src/types'
 
 // Common
@@ -74,13 +75,14 @@ export interface DropdownConfig {
   offset: [number, number]
   placement: PopperPlacement
   showArrow: boolean
-  target: string | HTMLElement
+  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
 export interface MenuConfig {
   collapsedWidth: string | number
   indent: number
+  target?: PortalTargetType
   theme: MenuTheme
 }
 
@@ -123,6 +125,7 @@ export interface DatePickerConfig {
   format?: Partial<Record<DatePickerType, string>>
   size: FormSize
   suffix: string
+  target?: PortalTargetType
 }
 
 export interface DateRangePickerConfig {
@@ -165,6 +168,7 @@ export interface SelectConfig {
   labelKey: string
   size: FormSize
   suffix: string
+  target?: PortalTargetType
   valueKey: string
 }
 
@@ -174,6 +178,7 @@ export interface TimePickerConfig {
   clearIcon: string
   size: FormSize
   suffix: string
+  target?: PortalTargetType
 }
 
 export interface TimeRangePickerConfig extends TimePickerConfig {
@@ -266,7 +271,7 @@ export interface TooltipConfig {
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
   placement: PopperPlacement
-  target: string | HTMLElement
+  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
@@ -275,7 +280,7 @@ export interface PopoverConfig {
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
   placement: PopperPlacement
-  target: string | HTMLElement
+  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
@@ -285,6 +290,7 @@ export interface MessageConfig {
   duration: number
   icon?: Partial<Record<MessageType, string | VNode>>
   maxCount: number
+  target?: PortalTargetType
   top?: number | string
 }
 
@@ -296,6 +302,7 @@ export interface NotificationConfig {
   maxCount: number
   offset: number | string | (string | number)[]
   placement: NotificationPlacement
+  target?: PortalTargetType
 }
 
 export interface ModalConfig {
@@ -306,6 +313,7 @@ export interface ModalConfig {
   icon?: Partial<Record<ModalType, string | VNode>>
   mask: boolean
   maskClosable: boolean
+  target?: PortalTargetType
   width: string | number
   zIndex?: number
 }
@@ -326,6 +334,7 @@ export interface DrawerConfig {
   height: string | number
   mask: boolean
   maskClosable: boolean
+  target?: PortalTargetType
   width: string | number
   zIndex?: number
 }
@@ -347,7 +356,7 @@ export interface PopconfirmConfig {
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
   placement: PopperPlacement
-  target: string | HTMLElement
+  target?: PortalTargetType
   trigger: PopperTrigger
 }
 

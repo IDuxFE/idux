@@ -11,6 +11,7 @@ import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
@@ -32,6 +33,7 @@ export const menuProps = {
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
   selectable: IxPropTypes.bool,
+  target: ɵPortalTargetDef,
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
 
   // events

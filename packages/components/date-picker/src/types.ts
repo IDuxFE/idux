@@ -13,6 +13,7 @@ import type { TimePickerProps } from '@idux/components/time-picker'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeTypes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 const datePickerCommonProps = {
@@ -27,10 +28,12 @@ const datePickerCommonProps = {
   disabledDate: IxPropTypes.func<(date: Date) => boolean>(),
   format: IxPropTypes.string,
   overlayClassName: IxPropTypes.string,
+  overlayContainer: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
   overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
   readonly: IxPropTypes.bool.def(false),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
+  target: ɵPortalTargetDef,
   type: IxPropTypes.oneOf<DatePickerType>(['date', 'week', 'month', 'quarter', 'year']).def('date'),
 
   // events

@@ -14,6 +14,7 @@ import { computed } from 'vue'
 export function useConfigProps(
   props: TooltipProps,
   config: TooltipConfig,
+  mergedPrefixCls: ComputedRef<string>,
   setVisibility: (visible: boolean) => void,
 ): ComputedRef<TooltipConfig & { clickOutside: boolean }> {
   return computed(() => {
@@ -24,7 +25,7 @@ export function useConfigProps(
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
       placement: props.placement ?? config.placement,
-      target: props.target ?? config.target,
+      target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,
       trigger: trigger,
       ['onUpdate:visible']: setVisibility,
     }

@@ -10,11 +10,15 @@ import type { DefineComponent } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export const portalTargetDef = IxPropTypes.oneOfType([String, HTMLElement])
+export const portalTargetDef = IxPropTypes.oneOfType([
+  String,
+  HTMLElement,
+  IxPropTypes.func<() => string | HTMLElement>(),
+])
 
 export const portalProps = {
   disabled: IxPropTypes.bool,
-  target: IxPropTypes.oneOfType([String, HTMLElement]).isRequired,
+  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]).isRequired,
   load: IxPropTypes.bool.def(true),
 }
 
@@ -22,3 +26,5 @@ export type PortalProps = IxInnerPropTypes<typeof portalProps>
 export type PortalPublicProps = IxPublicPropTypes<typeof portalProps>
 export type PortalComponent = DefineComponent<PortalPublicProps>
 export type PortalInstance = InstanceType<DefineComponent<PortalProps>>
+
+export type PortalTargetType = string | HTMLElement | (() => string | HTMLElement)

@@ -27,7 +27,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = ɵUseConfigProps(props, config, setVisibility)
+    const configProps = ɵUseConfigProps(props, config, mergedPrefixCls, setVisibility)
 
     return () => {
       const prefixCls = mergedPrefixCls.value
@@ -36,7 +36,7 @@ export default defineComponent({
           visible={visibility.value}
           v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
           class={prefixCls}
-          transitionName="ix-fade"
+          transitionName={`${common.prefixCls}-fade`}
           {...configProps.value}
           offset={defaultOffset}
           showArrow

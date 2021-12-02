@@ -5,20 +5,27 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { isString } from 'lodash-es'
+import type { PortalTargetType } from './types'
+
+import { isFunction, isString } from 'lodash-es'
 
 const targetHashmap: Record<string, HTMLElement> = {}
 
-export function useTarget(target: string | HTMLElement): HTMLElement {
-  if (!isString(target)) {
-    return target
+export function useTarget(target: PortalTargetType): HTMLElement {
+  const temp = isFunction(target) ? target() : target
+
+  if (!isString(temp)) {
+    return temp
   }
-  if (targetHashmap[target]) {
-    return targetHashmap[target]
+
+  if (targetHashmap[temp]) {
+    return targetHashmap[temp]
   }
-  const Target = document.createElement('div')
-  Target.classList.add(target)
-  document.body.appendChild(Target)
-  targetHashmap[target] = Target
-  return Target
+
+  const element = document.createElement('div')
+  element.classList.add(temp)
+  document.body.appendChild(element)
+  targetHashmap[temp] = element
+
+  return element
 }
