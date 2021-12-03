@@ -7,9 +7,9 @@
 
 import type { FunctionalComponent, VNodeTypes } from 'vue'
 
-const Indent: FunctionalComponent<{ level: number; noopIdentUnit: number; prefixCls: string }> = ({
+const Indent: FunctionalComponent<{ level: number; noopIdentUnitArr: number[]; prefixCls: string }> = ({
   level,
-  noopIdentUnit,
+  noopIdentUnitArr,
   prefixCls,
 }) => {
   const children: VNodeTypes[] = []
@@ -17,7 +17,9 @@ const Indent: FunctionalComponent<{ level: number; noopIdentUnit: number; prefix
     children.push(
       <span
         key={index}
-        class={index < noopIdentUnit ? `${prefixCls}-node-indent-noop-unit` : `${prefixCls}-node-indent-unit`}
+        class={
+          noopIdentUnitArr.includes(index) ? `${prefixCls}-node-indent-noop-unit` : `${prefixCls}-node-indent-unit`
+        }
       />,
     )
   }

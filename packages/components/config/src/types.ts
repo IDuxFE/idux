@@ -167,6 +167,15 @@ export interface SelectConfig {
   valueKey: string
 }
 
+export interface TreeSelectConfig {
+  size: FormSize
+  suffix: string
+  childrenKey: string
+  labelKey: string
+  nodeKey: string
+  target?: PortalTargetType
+}
+
 export interface TimePickerConfig {
   borderless: boolean
   clearable: boolean
@@ -407,6 +416,7 @@ export interface GlobalConfig {
   radio: RadioConfig
   rate: RateConfig
   select: SelectConfig
+  treeSelect: TreeSelectConfig
   timePicker: TimePickerConfig
   timeRangePicker: TimeRangePickerConfig
   // Data Display

@@ -58,6 +58,7 @@ import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
 import { IxTree } from '@idux/components/tree'
+import { IxTreeSelect } from '@idux/components/tree-select'
 import { IxTypography } from '@idux/components/typography'
 import { version } from '@idux/components/version'
 
@@ -141,6 +142,7 @@ const components = [
   IxTimelineItem,
   IxTooltip,
   IxTree,
+  IxTreeSelect,
 ]
 
 const directives: Record<string, Directive> = {
