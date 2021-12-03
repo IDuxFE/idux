@@ -157,7 +157,6 @@ function processAllCheckedKeysByCheckStrategy(
     res = checkedKys.filter(item => disabledKeys.includes(item))
   }
 
-  debugger
   for (const checkedKey of checkedKys) {
     const currNode = dataMap.get(checkedKey)
     if (currNode) {

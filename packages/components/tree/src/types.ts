@@ -35,6 +35,7 @@ export const treeProps = {
   expandIcon: IxPropTypes.string,
   defaultExpandAll: IxPropTypes.bool.def(false),
   height: IxPropTypes.number,
+  labelKey: IxPropTypes.string.def('label'),
   leafLineIcon: IxPropTypes.string,
   loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),
 
@@ -155,6 +156,7 @@ export const treeNodeExpandProps = {
 export const treeNodeContentProps = {
   disabled: IxPropTypes.bool,
   nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
+  label: IxPropTypes.string.isRequired,
   rawNode: IxPropTypes.object<TreeNode>().isRequired,
   selected: IxPropTypes.bool,
 }

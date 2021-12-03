@@ -497,6 +497,40 @@ describe('Tree', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  test('labelKey work', async () => {
+    const dataSource: TreeNode[] = [
+      {
+        test: 'Node 0',
+        key: '0',
+        children: [
+          {
+            test: 'Node 0-0',
+            key: '0-0',
+            children: [
+              { test: 'Node 0-0-0', key: '0-0-0' },
+              { test: 'Node 0-0-1', key: '0-0-1' },
+            ],
+          },
+          {
+            test: 'Node 0-1',
+            key: '0-1',
+            disabled: true,
+            children: [
+              { test: 'Node 0-1-0', key: '0-1-0' },
+              { test: 'Node 0-1-1', key: '0-1-1' },
+            ],
+          },
+        ],
+      },
+    ]
+
+    const wrapper = TreeMount({
+      props: { dataSource, labelKey: 'test' },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   test('dataSource work', async () => {
     const wrapper = TreeMount()
 

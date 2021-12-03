@@ -17,6 +17,7 @@ import { isBoolean } from 'lodash-es'
 
 export interface MergedNode {
   children?: MergedNode[]
+  label: string
   isLeaf: boolean
   key: VKey
   parentKey?: VKey
@@ -73,9 +74,9 @@ export function covertMergeNodes(
 ): MergedNode[] {
   const getKey = getNodeKey.value
 
-  const { childrenKey, disabled, loadChildren } = props
+  const { childrenKey, labelKey, disabled, loadChildren } = props
 
-  return nodes.map(node => covertMergeNode(node, getKey, disabled, childrenKey, !!loadChildren, parentKey))
+  return nodes.map(node => covertMergeNode(node, getKey, disabled, childrenKey, labelKey, !!loadChildren, parentKey))
 }
 
 function covertMergeNode(
@@ -83,15 +84,20 @@ function covertMergeNode(
   getKey: GetNodeKey,
   disabled: ((node: TreeNode) => boolean | TreeNodeDisabled) | undefined,
   childrenKey: string,
+  labelKey: string,
   hasLoad: boolean,
   parentKey?: VKey,
 ): MergedNode {
   const key = getKey(rawNode)
   const { check, drag, drop, select } = covertDisabled(rawNode, disabled)
   const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeNode[] | undefined
-  const children = subNodes?.map(subNode => covertMergeNode(subNode, getKey, disabled, childrenKey, hasLoad, key))
+  const label = rawNode[labelKey] as string
+  const children = subNodes?.map(subNode =>
+    covertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
+  )
   return {
     children,
+    label,
     key,
     isLeaf: rawNode.isLeaf ?? !(children?.length || hasLoad),
     parentKey,
