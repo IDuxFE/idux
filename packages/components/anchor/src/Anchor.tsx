@@ -15,7 +15,7 @@ import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, getOffset, off, on } from '@idux/cdk/utils'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
-import { getTarget } from '@idux/components/utils'
+import { covertTarget } from '@idux/components/utils'
 
 import { anchorToken } from './token'
 import { anchorProps } from './types'
@@ -26,7 +26,6 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-anchor`)
-
     const config = useGlobalConfig('anchor')
     const hideLinkBall = computed(() => props.hideLinkBall ?? config.hideLinkBall)
     const wrapperStyle = computed(() => {
@@ -204,14 +203,14 @@ const useScroll = (
     () => props.target,
     () => {
       off(container.value, eventType, handleScroll)
-      container.value = getTarget(props.target)
+      container.value = covertTarget(props.target)
       on(container.value, eventType, handleScroll)
       handleScroll()
     },
   )
 
   onMounted(() => {
-    container.value = getTarget(props.target)
+    container.value = covertTarget(props.target)
     on(container.value, eventType, handleScroll)
     handleScroll()
   })

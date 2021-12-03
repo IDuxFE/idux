@@ -15,7 +15,7 @@ export const anchorProps = {
   bounds: IxPropTypes.number,
   hideLinkBall: IxPropTypes.bool,
   offsetTop: IxPropTypes.number,
-  target: IxPropTypes.oneOfType([String, HTMLElement]),
+  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
   targetOffset: IxPropTypes.number,
 
   // events

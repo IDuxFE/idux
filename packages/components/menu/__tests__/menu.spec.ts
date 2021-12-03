@@ -102,7 +102,7 @@ describe('Menu', () => {
 
     await wrapper.setProps({ expandedKeys: [] })
     await subs[0].find('.ix-menu-sub-title').trigger('mouseenter')
-    await wait(100)
+    await wait(105)
 
     expect(onUpdateExpandedKeys).toBeCalledWith(['sub1'])
   })

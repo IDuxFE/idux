@@ -3,14 +3,14 @@ import { nextTick } from 'vue'
 
 import { isShow, renderWork, scrollTarget, wait, waitRAF } from '@tests'
 
-import IxBackTop from '../src/BackTop.vue'
+import BackTop from '../src/BackTop'
 
 const warn = jest.spyOn(console, 'warn').mockImplementation()
 
 const backTopMount = (template: string, options = {}) =>
   mount(
     {
-      components: { IxBackTop },
+      components: { BackTop },
       template,
       ...options,
     },
@@ -18,14 +18,14 @@ const backTopMount = (template: string, options = {}) =>
   )
 
 describe('BackTop', () => {
-  renderWork(IxBackTop)
+  renderWork(BackTop)
 
   test('scroll work', async () => {
     const wrapper = backTopMount(
       `
       <div class="ix-back-top-test" style="height: 300px; overflow: auto;">
         <div style="height: 1000px;">
-          <IxBackTop :duration="100" :visibilityHeight="200" target=".ix-back-top-test" />
+          <BackTop :duration="100" :visibilityHeight="200" target=".ix-back-top-test" />
         </div>
       </div>
     `,
@@ -47,7 +47,7 @@ describe('BackTop', () => {
     const wrapper = backTopMount(
       `
       <div style="height: 1000px;">
-        <IxBackTop :target="target" />
+        <BackTop :target="target" />
       </div>
     `,
       {
@@ -67,7 +67,7 @@ describe('BackTop', () => {
   })
 
   test('props work: target does not exist', async () => {
-    mount(IxBackTop, { props: { target: '#ix-back-top-test' } })
+    mount(BackTop, { props: { target: '#ix-back-top-test' } })
 
     await nextTick()
 
@@ -80,7 +80,7 @@ describe('BackTop', () => {
 
     const wrapper = backTopMount(`
       <div style="height: 1000px; overflow: auto;">
-        <IxBackTop />
+        <BackTop />
       </div>
     `)
 

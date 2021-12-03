@@ -11,7 +11,7 @@ import { isObject, isUndefined } from 'lodash-es'
 
 import { convertNumber, isHTMLElement, off, on } from '@idux/cdk/utils'
 
-export type AffixStyle = {
+export type ContentStyle = {
   position?: 'fixed' | 'absolute'
   top?: string
   bottom?: string
@@ -94,8 +94,8 @@ export function calcPosition(
   affixRect: AffixDirectionNumber,
   offsetOption: Partial<AffixDirectionNumber>,
   target: Window | HTMLElement,
-): AffixStyle {
-  const style: AffixStyle = {}
+): ContentStyle {
+  const style: ContentStyle = {}
 
   if (isSticky(affixRect, offsetOption)) {
     style.position = target === window ? 'fixed' : 'absolute'

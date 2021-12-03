@@ -5,13 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { AffixStyle } from './utils'
+import type { ContentStyle } from './utils'
 import type { CSSProperties } from 'vue'
 
 import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { throttleRAF } from '@idux/cdk/utils'
-import { getTarget } from '@idux/components/utils'
+import { useGlobalConfig } from '@idux/components/config'
+import { covertTarget } from '@idux/components/utils'
 
 import { affixProps } from './types'
 import {
@@ -27,9 +28,11 @@ import {
 export default defineComponent({
   name: 'IxAffix',
   props: affixProps,
-  setup(props) {
-    const affixStyle = ref<AffixStyle>({} as AffixStyle)
-    const wrapperStyle = ref({} as CSSProperties)
+  setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-affix`)
+    const contentStyle = ref<ContentStyle>({} as ContentStyle)
+    const affixStyle = ref({} as CSSProperties)
 
     const targetRef = ref<Window | HTMLElement | null>(null)
     const affixRef = ref<HTMLElement | null>(null)
@@ -48,20 +51,20 @@ export default defineComponent({
       }
       const affixRect = getTargetRect(affixRef.value, targetRef.value)
       isStickyRef.value = isSticky(affixRect, offset.value)
-      affixStyle.value = calcPosition(affixRect, offset.value, targetRef.value)
+      contentStyle.value = calcPosition(affixRect, offset.value, targetRef.value)
       if (isStickyRef.value && contentRef.value) {
         const { width, height } = getTargetSize(contentRef.value)
-        affixStyle.value = {
-          ...affixStyle.value,
+        contentStyle.value = {
+          ...contentStyle.value,
           width: `${width}px`,
           height: `${height}px`,
         }
-        wrapperStyle.value = {
+        affixStyle.value = {
           width: `${width}px`,
           height: `${height}px`,
         }
         if (targetRef.value !== window) {
-          wrapperStyle.value.position = 'relative'
+          affixStyle.value.position = 'relative'
         }
       }
     }
@@ -89,24 +92,19 @@ export default defineComponent({
     )
 
     function initContainer() {
-      targetRef.value = getTarget(props.target)
+      targetRef.value = covertTarget(props.target)
       observeTarget(targetRef.value, throttleMeasure)
     }
 
-    return {
-      affixRef,
-      contentRef,
-      affixStyle,
-      wrapperStyle,
-    }
-  },
-  render() {
-    return (
-      <div ref="affixRef" style={this.wrapperStyle} class="ix-affix">
-        <div ref="contentRef" class="ix-affix-content" style={this.affixStyle}>
-          {this.$slots.default?.()}
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      return (
+        <div ref={affixRef} style={affixStyle.value} class={prefixCls}>
+          <div ref={contentRef} class={`${prefixCls}-content`} style={contentStyle.value}>
+            {slots.default?.()}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   },
 })

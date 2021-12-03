@@ -24,7 +24,7 @@ order: 0
 | `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
 | `delay` | 浮层显示隐藏延时 | `number \| [number, number]` | `100` | ✅ | - |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
-| `target` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
+| `target` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `title` | 浮层的标题 | `string \| #title` | - | - | - |
 | `trigger` | 浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |
 

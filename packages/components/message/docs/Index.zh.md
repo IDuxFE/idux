@@ -35,7 +35,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `maxCount` | 同一时间可展示的最大提示数量 | `number` | `5` | ✅ | - |
-| `target` | 自定义提示框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
+| `target` | 自定义提示框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `top` | 消息距离顶部的位置 | `number \| string` | `15%` | ✅ | - |
 
 ```html

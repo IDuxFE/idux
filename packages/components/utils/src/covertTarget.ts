@@ -5,13 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { isString } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { Logger } from '@idux/cdk/utils'
 
-export function getTarget(target: string | HTMLElement | Window | undefined): HTMLElement | Window {
-  if (isString(target)) {
-    const targetDom = document.querySelector<HTMLElement>(target)
+export function covertTarget(
+  target: string | HTMLElement | (() => string | HTMLElement) | undefined,
+): HTMLElement | Window {
+  const temp = isFunction(target) ? target() : target
+  if (isString(temp)) {
+    const targetDom = document.querySelector<HTMLElement>(temp)
     if (targetDom) {
       return targetDom
     } else {
@@ -21,5 +24,5 @@ export function getTarget(target: string | HTMLElement | Window | undefined): HT
     }
   }
 
-  return target || window
+  return temp || window
 }
