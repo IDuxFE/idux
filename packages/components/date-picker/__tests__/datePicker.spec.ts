@@ -17,7 +17,7 @@ describe('DatePicker', () => {
     const onUpdateValue = jest.fn()
     const onChange = jest.fn()
     const wrapper = DatePickerMount({
-      props: { value: new Date('2021-12-01'), 'onUpdate:value': onUpdateValue, onChange },
+      props: { value: new Date('2021-11-01'), 'onUpdate:value': onUpdateValue, onChange },
     })
 
     expect(wrapper.html()).toMatchSnapshot()

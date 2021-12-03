@@ -11,9 +11,11 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const backTopProps = {
-  target: IxPropTypes.oneOfType([String, HTMLElement]),
+  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
   duration: IxPropTypes.number,
   visibilityHeight: IxPropTypes.number,
+
+  onClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
 
 export type BackTopProps = IxInnerPropTypes<typeof backTopProps>

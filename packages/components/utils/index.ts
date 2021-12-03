@@ -6,6 +6,6 @@
  */
 
 export * from './src/colors'
-export * from './src/propsHandler'
+export * from './src/covertTarget'
 export * from './src/useFormElement'
 export * from './src/useKey'

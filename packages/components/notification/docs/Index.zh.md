@@ -38,7 +38,7 @@ order: 0
 | ---------------- | ------------------------------ | --------------------------------------------------------- | ---------- | -------- | ------------------------------------------------------------ |
 | `maxCount`       | 同一时间可展示的最大提示数量   | `number`                                                  | 5          | ☑️        | -                                                            |
 | `offset`         | 通知消息弹出时，距离边缘的位置 | `number \| string \|[number \| string, number \| string]` | 24         | ☑️        | number时：单位为px；<br/>string时：可为`vh`或者`%`；<br/>array时：[上下边缘，左右边缘]；<br />设置为非array时上下边缘和左右边缘相等 |
-| `target` | 自定义通知框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
+| `target` | 自定义通知框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 
 ```html
 <!-- App.vue -->

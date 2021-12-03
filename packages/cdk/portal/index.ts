@@ -12,7 +12,7 @@ import Portal from './src/Portal'
 const CdkPortal = Portal as unknown as PortalComponent
 
 export { CdkPortal }
-export { useTarget } from './src/useTarget'
+export { covertTarget as covertPortalTarget } from './src/covertTarget'
 export { portalTargetDef as ɵPortalTargetDef } from './src/types'
 
 export type { PortalInstance, PortalPublicProps as PortalProps, PortalTargetType } from './src/types'

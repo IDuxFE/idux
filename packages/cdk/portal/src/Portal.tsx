@@ -7,14 +7,15 @@
 
 import { Teleport, computed, defineComponent, ref, watch } from 'vue'
 
+import { covertTarget } from './covertTarget'
 import { portalProps } from './types'
-import { useTarget } from './useTarget'
 
 export default defineComponent({
   name: 'CdkPortal',
   props: portalProps,
-  setup(props) {
+  setup(props, { slots }) {
     const loaded = ref(props.load)
+
     watch(
       () => props.load,
       load => {
@@ -23,19 +24,19 @@ export default defineComponent({
         }
       },
     )
-    const to = computed(() => loaded.value && useTarget(props.target))
-    return { to }
-  },
-  render() {
-    const { to, disabled, $slots } = this
-    if (!to) {
-      return null
-    }
+    const target = computed(() => loaded.value && covertTarget(props.target))
 
-    return (
-      <Teleport to={to} disabled={disabled}>
-        {$slots.default?.()}
-      </Teleport>
-    )
+    return () => {
+      const _target = target.value
+      if (!_target) {
+        return null
+      }
+
+      return (
+        <Teleport to={_target} disabled={props.disabled}>
+          {slots.default?.()}
+        </Teleport>
+      )
+    }
   },
 })

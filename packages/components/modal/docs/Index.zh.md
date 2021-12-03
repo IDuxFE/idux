@@ -38,7 +38,7 @@ order: 0
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
-| `target` | 自定义对话框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | ✅ | - | - |
+| `target` | 自定义对话框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `title` | 对话框次标题 | `sting  \| VNode \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
 | `width` | 对话框宽度 | `sting \| number` | `520` | ✅ | - |

@@ -6,11 +6,12 @@
  */
 
 import type { DrawerProps } from './types'
+import type { DrawerConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
-import { CdkPortal, useTarget } from '@idux/cdk/portal'
+import { CdkPortal, covertPortalTarget } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private'
@@ -31,7 +32,8 @@ export default defineComponent({
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-    const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props, mask)
+    const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const target = useTarget(props, config, mergedPrefixCls, mask, mergedVisible)
     const { open, close } = useTrigger(props, setVisible)
     const { level, levelAction, push, pull } = useLevel(visible)
 
@@ -54,8 +56,6 @@ export default defineComponent({
     provide(DRAWER_TOKEN, apis)
     expose(apis)
 
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
-
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {
         return null
@@ -75,7 +75,7 @@ export default defineComponent({
   },
 })
 
-function useVisible(props: DrawerProps, mask: ComputedRef<boolean>) {
+function useVisible(props: DrawerProps) {
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
   const animatedVisible = ref<boolean>()
 
@@ -88,31 +88,42 @@ function useVisible(props: DrawerProps, mask: ComputedRef<boolean>) {
     return currAnimatedVisible
   })
 
+  return { visible, setVisible, animatedVisible, mergedVisible }
+}
+
+function useTarget(
+  props: DrawerProps,
+  config: DrawerConfig,
+  mergedPrefixCls: ComputedRef<string>,
+  mask: ComputedRef<boolean>,
+  mergedVisible: ComputedRef<boolean>,
+) {
+  const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
   let scrollStrategy: BlockScrollStrategy | undefined
 
-  const target = computed(() => {
-    const { target } = props
-    return target ? useTarget(target) : undefined
-  })
-
-  watch(target, value => scrollStrategy?.update({ target: value }))
-
-  watchEffect(() => {
-    if (mask.value) {
-      if (mergedVisible.value) {
+  onMounted(() => {
+    watch(target, value => scrollStrategy?.update({ target: covertPortalTarget(value) }))
+    watch(
+      [mask, mergedVisible],
+      ([maskValue, visible]) => {
+        if (!maskValue) {
+          return
+        }
+        if (!visible) {
+          scrollStrategy?.disable()
+        }
         if (!scrollStrategy) {
-          scrollStrategy = new BlockScrollStrategy({ target: target.value })
+          scrollStrategy = new BlockScrollStrategy({ target: covertPortalTarget(target.value) })
         }
         scrollStrategy.enable()
-      } else {
-        scrollStrategy?.disable()
-      }
-    }
+      },
+      { immediate: true },
+    )
   })
 
   onBeforeUnmount(() => scrollStrategy?.disable())
 
-  return { visible, setVisible, animatedVisible, mergedVisible }
+  return target
 }
 
 function useTrigger(props: DrawerProps, setVisible: (visible: boolean) => void) {

@@ -15,7 +15,7 @@ export type AffixOffset = number | string | Partial<Record<AffixDirection, numbe
 
 export const affixProps = {
   offset: IxPropTypes.oneOfType([Number, String, IxPropTypes.object<AffixOffset>()]).def(0),
-  target: IxPropTypes.oneOfType([String, HTMLElement]),
+  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
   onChange: IxPropTypes.func<(value: boolean) => void>(),
 }
 

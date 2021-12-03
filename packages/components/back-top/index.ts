@@ -7,7 +7,7 @@
 
 import type { BackTopComponent } from './src/types'
 
-import BackTop from './src/BackTop.vue'
+import BackTop from './src/BackTop'
 
 const IxBackTop = BackTop as unknown as BackTopComponent
 
