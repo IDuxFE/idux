@@ -44,7 +44,7 @@ export default defineComponent({
 
     return () => {
       const { footer } = props
-      if (footer === null) {
+      if (footer === false) {
         return null
       }
 
@@ -55,7 +55,7 @@ export default defineComponent({
         children = footer
       } else {
         let buttonProps = footer
-        if (!buttonProps) {
+        if (!Array.isArray(buttonProps)) {
           buttonProps = [cancelButtonProps.value, okButtonProps.value]
         }
         children = buttonProps.map(item => {

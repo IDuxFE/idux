@@ -18,7 +18,9 @@ export const popconfirmProps = {
   cancelText: IxPropTypes.string,
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
-  footer: IxPropTypes.oneOfType<PopconfirmButtonProps[] | VNode | null>([IxPropTypes.array(), IxPropTypes.vNode]),
+  footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<PopconfirmButtonProps>(), IxPropTypes.vNode]).def(true),
+
+  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   onCancel: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
   onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
 }
@@ -27,14 +29,16 @@ export interface PopconfirmButtonProps extends ButtonProps {
   text?: string | VNode
   onClick?: (evt: Event) => void
 }
+
+export type PopconfirmProps = IxInnerPropTypes<typeof popconfirmProps>
+export type PopconfirmPublicProps = IxPublicPropTypes<typeof popconfirmProps>
 export interface PopconfirmBindings {
   cancel: (evt?: Event | unknown) => Promise<void>
   ok: (evt?: Event | unknown) => Promise<void>
 }
 
-export type PopconfirmProps = IxInnerPropTypes<typeof popconfirmProps>
-export type PopconfirmPublicProps = IxPublicPropTypes<typeof popconfirmProps>
 export type PopconfirmComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof PopconfirmPublicProps> & PopconfirmPublicProps
+  Omit<HTMLAttributes, keyof PopconfirmPublicProps> & PopconfirmPublicProps,
+  PopconfirmBindings
 >
 export type PopconfirmInstance = InstanceType<DefineComponent<PopconfirmProps, PopconfirmBindings>>
