@@ -20,6 +20,7 @@ const datePickerCommonProps = {
   control: controlPropDef,
   open: IxPropTypes.bool,
 
+  allowInput: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]),
   autofocus: IxPropTypes.bool.def(false),
   borderless: IxPropTypes.bool,
   clearable: IxPropTypes.bool,

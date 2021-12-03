@@ -103,6 +103,7 @@ export function useDateConfig(): DateConfig<number | Date, Date> {
 function createDefaultDateConfig(): DateConfig<number | Date, Date> {
   const locale = getLocale('date')
   const now = () => new Date()
+  const parse = (dateString: string, format: string) => parseDate(dateString, format, now(), { locale: locale.value })
   return {
     now,
     weekStartsOn: () => locale.value.options?.weekStartsOn || 1,
@@ -220,15 +221,12 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
     isValid: date => isValid(date),
 
     format: (date, format) => formatDate(date, format, { locale: locale.value }),
-    parse: (dateString, format) => parseDate(dateString, format, now(), { locale: locale.value }),
+    parse: parse,
     covert: (date, format) => {
       if (isNil(date)) {
         return now()
       }
-      if (isString(date)) {
-        return parseDate(date, format!, now(), { locale: locale.value })
-      }
-      return toDate(date as number | Date)
+      return isString(date) ? parse(date, format!) : toDate(date as number | Date)
     },
     getLocalizedLabels: (type, length, width) => {
       const localize = locale.value.localize!

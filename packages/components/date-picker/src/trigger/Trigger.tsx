@@ -37,6 +37,7 @@ export default defineComponent({
 
     const placeholder = computed(() => props.placeholder ?? locale.value[`${props.type}Placeholder`])
     const inputSize = computed(() => Math.max(10, format.value.length) + 2)
+    const allowInput = computed(() => props.allowInput ?? config.allowInput)
     const clearable = computed(() => !isDisabled.value && props.clearable && inputValue.value.length > 0)
 
     const suffix = computed(() => props.suffix ?? config.suffix)
@@ -107,7 +108,7 @@ export default defineComponent({
               autocomplete="off"
               disabled={isDisabled.value}
               placeholder={placeholder.value}
-              readonly={readonly}
+              readonly={readonly || allowInput.value !== true}
               size={inputSize.value}
               value={inputValue.value}
               onInput={handleInput}

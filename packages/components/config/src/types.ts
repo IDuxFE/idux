@@ -112,6 +112,7 @@ export interface CheckboxConfig {
 }
 
 export interface DatePickerConfig {
+  allowInput: boolean | 'overlay'
   borderless: boolean
   clearable: boolean
   clearIcon: string

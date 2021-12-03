@@ -16,5 +16,3 @@ const monthValue = ref('2022-01')
 const quarterValue = ref('2022-Q1')
 const yearValue = ref('2022')
 </script>
-
-<style scoped lang="less"></style>

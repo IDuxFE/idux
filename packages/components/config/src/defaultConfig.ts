@@ -123,6 +123,7 @@ const form: FormConfig = {
 const checkbox: CheckboxConfig = { size: 'md' }
 
 const datePicker: DatePickerConfig = {
+  allowInput: true,
   borderless: false,
   clearable: false,
   clearIcon: 'close-circle',
