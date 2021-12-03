@@ -24,7 +24,7 @@ const defaultOffset: [number, number] = [0, 12]
 export default defineComponent({
   name: 'IxPopconfirm',
   props: popconfirmProps,
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popconfirm`)
     const config = useGlobalConfig('popconfirm')
@@ -48,6 +48,9 @@ export default defineComponent({
       ok,
     })
 
+    const apis = { open, close, cancel, ok }
+    expose(apis)
+
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
@@ -66,10 +69,6 @@ export default defineComponent({
 })
 
 const renderContent = (props: PopconfirmProps, slots: Slots, prefixCls: string) => {
-  if (!(slots.title || props.title)) {
-    return null
-  }
-
   const child: VNode[] = []
   if (slots.title || props.title) {
     child.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
