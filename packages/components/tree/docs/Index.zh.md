@@ -23,7 +23,7 @@ order: 0
 | `blocked` | 节点整行撑开 | `boolean` | `false` | ✅ | - |
 | `cascade` | 是否开启级联功能 | `boolean` | `false` | - | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
-| `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
+| `childrenKey` | 替代[TreeNode](#TreeNode)中的`children`字段 | `string` | `children` | - | - |
 | `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `dataSource` | 树型数据数组,参见[TreeNode](#TreeNode) | `TreeNode[]` | `[]` | - | - |
 | `disabled` | 禁用节点的函数 | `(node: TreeNode) => boolean \| TreeNodeDisabled` | - | - | - |
@@ -33,9 +33,10 @@ order: 0
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
+| `labelKey` | 替代[TreeNode](#TreeNode)中的`label`字段 | `string` | `label` | - | -
 | `leafLineIcon` | 叶子节点的图标，用于替换默认的连接线 | `string \| #leafLineIcon` | - | - | 仅在 `showLine` 时生效 |
 | `loadChildren` | 加载子节点数据 | `(node: TreeNode) => Promise<TreeNode[]>` | - | - | - |
-| `nodeKey` | 节点 `key` 的取值 | `string \| (node: TreeNode) => VKey` | `key` | ✅ | -
+| `nodeKey` | 替代[TreeNode](#TreeNode)中的`key`字段 | `string \| (node: TreeNode) => VKey` | `key` | ✅ | -
 | `searchFn` | 搜索函数 | `(node: TreeNode, searchValue?: string) => boolean` | - | - | -
 | `searchValue` | 用于搜索的值 | `string` | - | - | -
 | `selectable` | 是否允许选择 | `boolean \| 'multiple'` | `true` | - | 为 `multiple` 时表示允许多选 |

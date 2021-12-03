@@ -35,8 +35,8 @@ export default defineComponent({
     }
 
     return () => {
-      const { nodeKey, rawNode, selected } = props
-      const { prefix, suffix, label } = rawNode
+      const { nodeKey, label, rawNode, selected } = props
+      const { prefix, suffix } = rawNode
 
       const iconProps = { key: nodeKey, selected, node: rawNode }
       const prefixIcon = slots.prefix?.(iconProps) || (prefix && <IxIcon name={prefix} />)

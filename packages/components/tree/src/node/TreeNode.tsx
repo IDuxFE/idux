@@ -104,7 +104,8 @@ export default defineComponent({
 
     return () => {
       const node = props.node
-      const { isLeaf, key, level, rawNode, expanded, dragDisabled, dropDisabled } = node
+
+      const { isLeaf, key, label, level, rawNode, expanded, dragDisabled, dropDisabled } = node
       const { showLine, checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
 
@@ -128,7 +129,7 @@ export default defineComponent({
             <Expand expanded={expanded} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
           )}
           {checkable && <Checkbox node={node} />}
-          <Content disabled={disabled.value} nodeKey={key} rawNode={rawNode} selected={selected.value} />
+          <Content disabled={disabled.value} nodeKey={key} label={label} rawNode={rawNode} selected={selected.value} />
         </div>
       )
     }
