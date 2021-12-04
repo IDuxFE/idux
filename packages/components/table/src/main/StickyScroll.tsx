@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+// eslint-disable vue/no-reserved-props
+
 import type { StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
@@ -78,7 +80,7 @@ export default defineComponent({
         return
       }
       // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
-      const { buttons } = evt || window?.event
+      const { buttons } = evt || window.event
       if (buttons === 0) {
         // If out body mouse up, we can set isActive false when mouse move
         isActive.value = false

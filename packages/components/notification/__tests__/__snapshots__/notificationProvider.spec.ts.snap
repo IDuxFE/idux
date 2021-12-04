@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`NotificationProvider basic render work 1`] = `
-"<!---->
-<!--teleport start-->
-<!--teleport end-->"
-`;

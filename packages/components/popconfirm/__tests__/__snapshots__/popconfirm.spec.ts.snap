@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Popconfirm onCancel work 1`] = `"<p>Some contents...</p>"`;
-
 exports[`Popconfirm render work 1`] = `
 "<div id=\\"trigger\\">trigger</div>
 <!--teleport start-->
