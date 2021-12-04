@@ -1,7 +1,5 @@
-@import '../../style/themes/default.less';
+@import './themes/default.less';
 @import './mixin.less';
-
-@tag-prefix: ~'@{idux-prefix}-tag';
 
 .@{tag-prefix} {
   display: inline-block;
@@ -45,7 +43,7 @@
   }
 
   &-checked {
-    color: @text-color-inverse;
+    color: @tag-color-inverse;
     background-color: @color-primary;
     border-color: transparent;
   }
