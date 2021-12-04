@@ -10,16 +10,17 @@
   border-radius: @tooltip-border-radius;
   box-shadow: @tooltip-box-shadow;
 
-  &-title {
+  &-wrapper {
     position: relative;
-    max-width: @tooltip-title-max-width;
-    min-width: @tooltip-title-min-width;
-    min-height: @tooltip-title-min-height;
-    padding: @tooltip-title-padding;
+    word-wrap: break-word;
+    max-width: @tooltip-wrapper-max-width;
+    min-width: @tooltip-wrapper-min-width;
+    min-height: @tooltip-wrapper-min-height;
+    padding: @tooltip-wrapper-padding;
     z-index: 1;
   }
 
-  .@{idux-prefix}-overlay-arrow {
+  .@{overlay-prefix}-arrow {
     color: @tooltip-background-color;
   }
 }

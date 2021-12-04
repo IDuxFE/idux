@@ -10,21 +10,25 @@
   border-radius: @popover-border-radius;
   box-shadow: @popover-box-shadow;
 
-  &-title {
+  &-wrapper {
     position: relative;
+    word-wrap: break-word;
+    min-width: @popover-wrapper-min-width;
+    padding: @popover-wrapper-padding;
+    z-index: 1;
+  }
+
+  &-title {
     font-weight: @popover-title-font-weight;
-    min-width: @popover-title-min-width;
     min-height: @popover-title-min-height;
     padding: @popover-title-padding;
-    border-bottom: @popover-title-border-bottom;
-    z-index: 1;
   }
 
   &-content {
     padding: @popover-content-padding;
   }
 
-  .@{idux-prefix}-overlay-arrow {
+  .@{overlay-prefix}-arrow {
     color: @popover-background-color;
   }
 }

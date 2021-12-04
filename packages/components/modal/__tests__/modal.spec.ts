@@ -170,18 +170,18 @@ describe('Modal', () => {
     expect(modalWrapper.find('.ix-modal').exists()).toBe(true)
   })
 
-  test('footer null work', async () => {
-    const wrapper = ModalMount({ props: { footer: null } })
+  test('footer with boolean work', async () => {
+    const wrapper = ModalMount({ props: { footer: false } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
     expect(modalWrapper.find('.ix-modal-footer').exists()).toBe(false)
 
-    await wrapper.setProps({ footer: undefined })
+    await wrapper.setProps({ footer: true })
 
     expect(modalWrapper.find('.ix-modal-footer').exists()).toBe(true)
   })
 
-  test('footer buttons work', async () => {
+  test('footer with buttons work', async () => {
     let footer: ModalButtonProps[] = [{ text: 'button1' }]
     const wrapper = ModalMount({ props: { footer } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
@@ -194,7 +194,7 @@ describe('Modal', () => {
     expect(modalWrapper.findAll('.ix-button').length).toBe(2)
   })
 
-  test('footer slot work', async () => {
+  test('footer with slot work', async () => {
     const footer: ModalButtonProps[] = [{ text: 'button1' }]
     const wrapper = ModalMount({
       props: { footer },

@@ -6,20 +6,17 @@
  */
 
 import type { PopconfirmProps } from './types'
-import type { Slots, VNode } from 'vue'
 
 import { computed, defineComponent, provide, ref } from 'vue'
 
-import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
+import { callEmit, isPromise } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { ɵUseConfigProps } from '@idux/components/tooltip'
+import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
 
-import PopconfirmFooter from './PopconfirmFooter'
+import PopconfirmContent from './PopconfirmContent'
 import { popconfirmToken } from './token'
 import { popconfirmProps } from './types'
-
-const defaultOffset: [number, number] = [0, 12]
 
 export default defineComponent({
   name: 'IxPopconfirm',
@@ -29,17 +26,17 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popconfirm`)
     const config = useGlobalConfig('popconfirm')
 
-    const { visible, setVisible } = useVisible(props)
-
-    const configProps = ɵUseConfigProps(props, config, mergedPrefixCls, setVisible)
+    const { overlayRef, updatePopper, visible, setVisible, overlayProps } = ɵUseTooltipOverlay(
+      props,
+      config,
+      mergedPrefixCls,
+    )
 
     const { cancelLoading, okLoading, cancel, ok } = useTrigger(props, setVisible)
 
     provide(popconfirmToken, {
       props,
       slots,
-      common,
-      config,
       mergedPrefixCls,
       visible,
       cancelLoading,
@@ -48,40 +45,22 @@ export default defineComponent({
       ok,
     })
 
-    const apis = { open, close, cancel, ok }
-    expose(apis)
+    expose({ updatePopper, cancel, ok })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
         <ɵOverlay
-          visible={visible.value}
-          v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
+          ref={overlayRef}
+          v-slots={{ default: slots.default, content: () => <PopconfirmContent /> }}
           class={prefixCls}
           transitionName={`${common.prefixCls}-fade`}
-          {...configProps.value}
-          offset={defaultOffset}
-          showArrow
+          {...overlayProps.value}
         />
       )
     }
   },
 })
-
-const renderContent = (props: PopconfirmProps, slots: Slots, prefixCls: string) => {
-  const child: VNode[] = []
-  if (slots.title || props.title) {
-    child.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
-  }
-  child.push(<PopconfirmFooter />)
-
-  return child
-}
-function useVisible(props: PopconfirmProps) {
-  const [visible, setVisible] = useControlledProp(props, 'visible', false)
-
-  return { visible, setVisible }
-}
 
 function useTrigger(props: PopconfirmProps, setVisible: (value: boolean) => void) {
   const cancelLoading = ref(false)

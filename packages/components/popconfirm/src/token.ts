@@ -6,14 +6,11 @@
  */
 
 import type { PopconfirmProps } from './types'
-import type { CommonConfig, PopconfirmConfig } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface PopconfirmContext {
   props: PopconfirmProps
   slots: Slots
-  common: CommonConfig
-  config: PopconfirmConfig
   mergedPrefixCls: ComputedRef<string>
   visible: ComputedRef<boolean>
   cancelLoading: Ref<boolean>

@@ -6,19 +6,16 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ɵFooterButtonProps } from '@idux/components/_private'
 import type { ButtonProps } from '@idux/components/button'
+import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-import { HeaderProps } from '@idux/components/header'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
-export interface ModalButtonProps extends ButtonProps {
-  key?: VKey
-  text?: string | VNode
-  onClick?: (evt: Event) => void
-}
+export type ModalButtonProps = ɵFooterButtonProps
 export interface ModalOptions extends ModalPublicProps {
   key?: VKey
   content?: string | VNode
@@ -40,7 +37,7 @@ export const modalProps = {
   closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool.def(false),
-  footer: IxPropTypes.oneOfType<ModalButtonProps[] | VNode | null>([IxPropTypes.array(), IxPropTypes.vNode]),
+  footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<ModalButtonProps>(), IxPropTypes.vNode]).def(true),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   mask: IxPropTypes.bool,

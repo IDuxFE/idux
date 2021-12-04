@@ -10,36 +10,31 @@ import type { Slots, VNode } from 'vue'
 
 import { computed, defineComponent } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
-import { ɵUseConfigProps } from '@idux/components/tooltip'
+import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
 
 import { popoverProps } from './types'
-
-const defaultOffset: [number, number] = [0, 12]
 
 export default defineComponent({
   name: 'IxPopover',
   props: popoverProps,
-  setup(props, { slots }) {
+  setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
-    const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = ɵUseConfigProps(props, config, mergedPrefixCls, setVisibility)
+    const { overlayRef, updatePopper, overlayProps } = ɵUseTooltipOverlay(props, config, mergedPrefixCls)
+    expose({ updatePopper })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
         <ɵOverlay
-          visible={visibility.value}
+          ref={overlayRef}
           v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
           class={prefixCls}
           transitionName={`${common.prefixCls}-fade`}
-          {...configProps.value}
-          offset={defaultOffset}
-          showArrow
+          {...overlayProps.value}
         />
       )
     }
@@ -51,14 +46,14 @@ const renderContent = (props: PopoverProps, slots: Slots, prefixCls: string) => 
     return null
   }
 
-  const child: VNode[] = []
+  const children: VNode[] = []
   if (slots.title || props.title) {
-    child.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
+    children.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
   }
 
   if (slots.content || props.content) {
-    child.push(<div class={`${prefixCls}-content`}>{slots.content?.() ?? props.content}</div>)
+    children.push(<div class={`${prefixCls}-content`}>{slots.content?.() ?? props.content}</div>)
   }
 
-  return child
+  return <div class={`${prefixCls}-wrapper`}>{children}</div>
 }

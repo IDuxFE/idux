@@ -9,7 +9,7 @@ import { renderWork } from '@tests'
 import { IxButton } from '@idux/components/button'
 
 import Popconfirm from '../src/Popconfirm'
-import PopconfirmFooter from '../src/PopconfirmFooter'
+import PopconfirmContent from '../src/PopconfirmContent'
 import { PopconfirmButtonProps, PopconfirmInstance } from '../src/types'
 
 describe('Popconfirm', () => {
@@ -66,7 +66,7 @@ describe('Popconfirm', () => {
 
     const wrapper = PopconfirmMount({ props: { cancelText, cancelButton, okText, okButton } })
 
-    const [cancelButtonWrapper, okButtonWrapper] = await wrapper.getComponent(PopconfirmFooter).findAll('.ix-button')
+    const [cancelButtonWrapper, okButtonWrapper] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
 
     expect(cancelButtonWrapper.text()).toBe(cancelText)
     expect(cancelButtonWrapper.classes()).toContain('ix-button-dashed')
@@ -78,7 +78,7 @@ describe('Popconfirm', () => {
     okText = 'Yes Yes'
     await wrapper.setProps({ cancelText, okText })
 
-    const [cancelButtonWrapper1, okButtonWrapper1] = await wrapper.getComponent(PopconfirmFooter).findAll('.ix-button')
+    const [cancelButtonWrapper1, okButtonWrapper1] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
 
     expect(cancelButtonWrapper1.text()).toBe(cancelText)
     expect(okButtonWrapper1.text()).toBe(okText)
@@ -180,15 +180,15 @@ describe('Popconfirm', () => {
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 
-  test('footer null work', async () => {
+  test('footer with boolean work', async () => {
     const wrapper = PopconfirmMount({ props: { footer: false } })
     const popconfirmWrapper = wrapper.getComponent(Popconfirm)
 
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).isVisible()).toBe(false)
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).find('.ix-popconfirm-footer').exists()).toBe(false)
 
     await wrapper.setProps({ footer: undefined })
 
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).classes()).toContain('ix-popconfirm-footer')
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).find('.ix-popconfirm-footer').exists()).toBe(true)
   })
 
   test('footer buttons work', async () => {
@@ -196,12 +196,12 @@ describe('Popconfirm', () => {
     const wrapper = PopconfirmMount({ props: { footer } })
     const popconfirmWrapper = wrapper.getComponent(Popconfirm)
 
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).findAll('.ix-button').length).toBe(1)
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).findAll('.ix-button').length).toBe(1)
 
     footer = [...footer, { text: 'button2' }]
     await wrapper.setProps({ footer })
 
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).findAll('.ix-button').length).toBe(2)
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).findAll('.ix-button').length).toBe(2)
   })
 
   test('footer slot work', async () => {
@@ -212,7 +212,7 @@ describe('Popconfirm', () => {
     })
     const popconfirmWrapper = wrapper.getComponent(Popconfirm)
 
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).findAll('.ix-button').length).toBe(1)
-    expect(popconfirmWrapper.findComponent(PopconfirmFooter).find('.ix-button').text()).toBe('button slot')
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).findAll('.ix-button').length).toBe(1)
+    expect(popconfirmWrapper.findComponent(PopconfirmContent).find('.ix-button').text()).toBe('button slot')
   })
 })

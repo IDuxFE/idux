@@ -18,6 +18,7 @@ export const popconfirmProps = {
   cancelText: IxPropTypes.string,
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
+  icon: IxPropTypes.string.def('exclamation-circle-filled'),
   footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<PopconfirmButtonProps>(), IxPropTypes.vNode]).def(true),
 
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
@@ -33,10 +34,10 @@ export interface PopconfirmButtonProps extends ButtonProps {
 export type PopconfirmProps = IxInnerPropTypes<typeof popconfirmProps>
 export type PopconfirmPublicProps = IxPublicPropTypes<typeof popconfirmProps>
 export interface PopconfirmBindings {
+  updatePopper: () => void
   cancel: (evt?: Event | unknown) => Promise<void>
   ok: (evt?: Event | unknown) => Promise<void>
 }
-
 export type PopconfirmComponent = DefineComponent<
   Omit<HTMLAttributes, keyof PopconfirmPublicProps> & PopconfirmPublicProps,
   PopconfirmBindings
