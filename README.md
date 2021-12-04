@@ -4,7 +4,7 @@
 
 基于 Vue 3.x + TypeScript 开发, 全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
 
-<div class="introduce-badges">
+<div align="center">
 
 [![Build Status](https://dev.azure.com/iduxfeteam/IduxFE/_apis/build/status/IduxFE.idux?branchName=main)](https://dev.azure.com/iduxfeteam/IduxFE/_build/latest?definitionId=2&branchName=main)
 [![Codecov](https://codecov.io/gh/IDuxFE/idux/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IDuxFE/idux)
