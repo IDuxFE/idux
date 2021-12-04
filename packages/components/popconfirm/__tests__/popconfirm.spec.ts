@@ -181,7 +181,7 @@ describe('Popconfirm', () => {
   })
 
   test('footer null work', async () => {
-    const wrapper = PopconfirmMount({ props: { footer: null } })
+    const wrapper = PopconfirmMount({ props: { footer: false } })
     const popconfirmWrapper = wrapper.getComponent(Popconfirm)
 
     expect(popconfirmWrapper.findComponent(PopconfirmFooter).isVisible()).toBe(false)
