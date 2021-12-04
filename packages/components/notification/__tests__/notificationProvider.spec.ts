@@ -1,6 +1,6 @@
 import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-utils'
 
-import { renderWork, wait } from '@tests'
+import { wait } from '@tests'
 
 import NotificationProvider from '@idux/components/notification/src/NotificationProvider'
 
@@ -23,13 +23,11 @@ describe('NotificationProvider', () => {
   })
 
   describe('basic', () => {
-    renderWork(NotificationProvider, { props: { title: defaultTitle, content: defaultContent } })
-
     test('open work', async () => {
       const wrapper = NotificationProviderMount()
       const title = 'open test title'
       const content = 'open test content'
-      const notificationRef = wrapper.vm.open({ content, title })
+      const notificationRef = wrapper.vm.open({ content, title, duration: 100 })
       await flushPromises()
 
       expect(document.querySelector(`.${notificationCls}-title`)!.textContent).toBe(title)
@@ -43,6 +41,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.info({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -56,6 +55,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.success({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -69,6 +69,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.warning({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -82,6 +83,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.error({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -95,7 +97,7 @@ describe('NotificationProvider', () => {
       const title = 'open test title'
       const content = 'open test content'
       const newContent = 'open update content'
-      const notificationRef = wrapper.vm.open({ title, content })
+      const notificationRef = wrapper.vm.open({ title, content, duration: 100 })
       await flushPromises()
 
       expect(document.querySelector(`.${notificationCls}-content`)!.textContent).toBe(content)
@@ -113,6 +115,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -129,14 +132,17 @@ describe('NotificationProvider', () => {
       wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -174,6 +180,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -192,6 +199,7 @@ describe('NotificationProvider', () => {
       const notificationRef = wrapper.vm.open({
         title: defaultTitle,
         content: defaultContent,
+        duration: 100,
       })
       await flushPromises()
 
@@ -211,13 +219,14 @@ describe('NotificationProvider', () => {
         wrapper.vm.open({
           title: defaultTitle,
           content: defaultContent,
+          duration: 100,
         })
       }
       await flushPromises()
 
       expect(document.querySelectorAll(`.${notificationCls}`).length).toBe(3)
 
-      await wait(5000)
+      await wait(120)
 
       await wrapper.setProps({ maxCount: 5 })
 
@@ -225,6 +234,7 @@ describe('NotificationProvider', () => {
         wrapper.vm.open({
           title: defaultTitle,
           content: defaultContent,
+          duration: 100,
         })
       }
       await flushPromises()
@@ -232,7 +242,7 @@ describe('NotificationProvider', () => {
       expect(document.querySelectorAll(`.${notificationCls}`).length).toBe(5)
 
       wrapper.vm.destroyAll()
-    }, 9000)
+    })
 
     //todo 待transitionGroup测试有解决方案再处理
     // test('offset work', async () => {

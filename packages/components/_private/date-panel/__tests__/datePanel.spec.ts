@@ -10,11 +10,11 @@ describe('DatePanel', () => {
     mount(DatePanel, { ...(options as MountingOptions<DatePanelProps>) })
 
   renderWork<DatePanelProps>(DatePanel, {
-    props: { value: new Date('2021-11-01') },
+    props: { value: new Date('2021-10-01') },
   })
 
   test('disabledDate work', async () => {
-    const wrapper = DatePanelMount({ props: { value: new Date('2021-11-01'), disabledDate: () => true } })
+    const wrapper = DatePanelMount({ props: { value: new Date('2021-10-01'), disabledDate: () => true } })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
