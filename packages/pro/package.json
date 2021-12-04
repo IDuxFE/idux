@@ -31,8 +31,5 @@
   "dependencies": {
     "@idux/cdk": "^0.9.0",
     "@idux/components": "^0.9.0"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0"
   }
 }

@@ -31,8 +31,5 @@
     "@idux/cdk": "^0.9.0",
     "date-fns": "^2.26.0",
     "dayjs": "^1.10.6"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0"
   }
 }
