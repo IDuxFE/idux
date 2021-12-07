@@ -21,6 +21,7 @@ import type {
   DividerConfig,
   DrawerConfig,
   DropdownConfig,
+  EmptyConfig,
   FormConfig,
   GlobalConfig,
   IconConfig,
@@ -205,6 +206,10 @@ const card = shallowReactive<CardConfig>({
   size: 'md',
 })
 
+const empty = shallowReactive<EmptyConfig>({
+  icon: 'empty',
+})
+
 const list = shallowReactive<ListConfig>({
   size: 'md',
   borderless: true,
@@ -385,6 +390,7 @@ export const defaultConfig: GlobalConfig = {
   avatar,
   badge,
   card,
+  empty,
   list,
   collapse,
   image,

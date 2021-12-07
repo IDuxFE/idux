@@ -12,7 +12,8 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export const emptyProps = {
   description: IxPropTypes.string,
-  image: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+  image: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
 }
 
 export type EmptyProps = IxInnerPropTypes<typeof emptyProps>

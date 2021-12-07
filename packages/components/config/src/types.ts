@@ -205,6 +205,11 @@ export interface CardConfig {
   hoverable: boolean
 }
 
+export interface EmptyConfig {
+  icon: string | VNode
+  image?: string | VNode
+}
+
 export interface ListConfig {
   size: ListSize
   borderless: boolean
@@ -415,6 +420,7 @@ export interface GlobalConfig {
   avatar: AvatarConfig
   badge: BadgeConfig
   card: CardConfig
+  empty: EmptyConfig
   list: ListConfig
   collapse: CollapseConfig
   image: ImageConfig
