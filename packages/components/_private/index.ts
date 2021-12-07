@@ -11,3 +11,6 @@ export * from './empty'
 export * from './header'
 export * from './mask'
 export * from './overlay'
+// The `footer` must follow the `overlay`, otherwise it will get an error(i don't know why):
+// Uncaught ReferenceError: Cannot access 'ɵOverlayDelayDef' before initialization at types.ts(tooltip/types.ts)
+export * from './footer'

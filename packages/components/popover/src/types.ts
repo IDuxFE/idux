@@ -18,5 +18,11 @@ export const popoverProps = {
 
 export type PopoverProps = IxInnerPropTypes<typeof popoverProps>
 export type PopoverPublicProps = IxPublicPropTypes<typeof popoverProps>
-export type PopoverComponent = DefineComponent<Omit<HTMLAttributes, keyof PopoverPublicProps> & PopoverPublicProps>
-export type PopoverInstance = InstanceType<DefineComponent<PopoverProps>>
+export interface PopoverBindings {
+  updatePopper: () => void
+}
+export type PopoverComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof PopoverPublicProps> & PopoverPublicProps,
+  PopoverBindings
+>
+export type PopoverInstance = InstanceType<DefineComponent<PopoverProps, PopoverBindings>>

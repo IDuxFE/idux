@@ -11,8 +11,6 @@ import Popconfirm from './src/Popconfirm'
 
 const IxPopconfirm = Popconfirm as unknown as PopconfirmComponent
 
-export type { PopconfirmInstance, PopconfirmPublicProps as PopconfirmProps } from './src/types'
-
 export { IxPopconfirm }
 
-export type { PopconfirmButtonProps, PopconfirmBindings } from './src/types'
+export type { PopconfirmInstance, PopconfirmPublicProps as PopconfirmProps, PopconfirmButtonProps } from './src/types'

@@ -6,7 +6,7 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { ButtonProps } from '@idux/components/button'
+import type { ɵFooterButtonProps } from '@idux/components/_private'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
 
@@ -15,11 +15,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
 
-export interface DrawerButtonProps extends ButtonProps {
-  key?: VKey
-  text?: string | VNode
-  onClick?: (evt: Event) => void
-}
+export type DrawerButtonProps = ɵFooterButtonProps
 
 export interface DrawerOptions extends DrawerPublicProps {
   key?: VKey
@@ -39,7 +35,7 @@ export const drawerProps = {
   closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   closeOnEsc: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool.def(false),
-  footer: IxPropTypes.oneOfType<DrawerButtonProps[] | VNode>([IxPropTypes.array(), IxPropTypes.vNode]),
+  footer: IxPropTypes.oneOfType([IxPropTypes.array<DrawerButtonProps>(), IxPropTypes.vNode]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   height: IxPropTypes.oneOfType([String, Number]),
   mask: IxPropTypes.bool,

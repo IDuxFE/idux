@@ -14,9 +14,8 @@ import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMount
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
-import { ɵHeader } from '@idux/components/_private'
+import { ɵFooter, ɵHeader } from '@idux/components/_private'
 
-import DrawerFooter from './DrawerFooter'
 import { DRAWER_TOKEN, drawerToken } from './token'
 
 const drawerTransitionMap = {
@@ -149,7 +148,7 @@ export default defineComponent({
                     v-slots={slots}
                   />
                   <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
-                  <DrawerFooter></DrawerFooter>
+                  <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
                 </div>
                 <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               </div>

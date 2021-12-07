@@ -27,6 +27,7 @@ import {
   ExclamationCircleFilled,
   InfoCircle,
   InfoCircleFilled,
+  Left,
   Loading,
   Menu,
   Minus,
@@ -61,9 +62,10 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Ellipsis, // Table
   Empty, // Empty
   ExclamationCircle, // Message Result Alert Notification
-  ExclamationCircleFilled, // Modal
+  ExclamationCircleFilled, // Modal Popconfirm
   InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
+  Left, // date-panel
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout
   Minus, // Table

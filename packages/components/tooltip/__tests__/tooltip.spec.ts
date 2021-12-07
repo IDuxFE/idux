@@ -49,11 +49,11 @@ describe('Tooltip', () => {
       slots,
     })
 
-    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title')
+    expect(document.querySelector('.ix-tooltip-wrapper')!.textContent).toBe('Title')
 
     await wrapper.setProps({ title: 'Title 2' })
 
-    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title 2')
+    expect(document.querySelector('.ix-tooltip-wrapper')!.textContent).toBe('Title 2')
   })
 
   test('title slot work', async () => {
@@ -62,7 +62,7 @@ describe('Tooltip', () => {
       slots: { ...slots, title: () => h('div', 'Title slot') },
     })
 
-    expect(document.querySelector('.ix-tooltip-title')!.textContent).toBe('Title slot')
+    expect(document.querySelector('.ix-tooltip-wrapper')!.textContent).toBe('Title slot')
   })
 
   test('empty content work', async () => {

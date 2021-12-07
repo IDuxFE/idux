@@ -16,4 +16,4 @@ export { IxTooltip }
 export type { TooltipInstance, TooltipPublicProps as TooltipProps } from './src/types'
 
 export { tooltipProps as ɵTooltipProps } from './src/types'
-export { useConfigProps as ɵUseConfigProps } from './src/useConfigProps'
+export { useTooltipOverlay as ɵUseTooltipOverlay } from './src/useTooltipOverlay'

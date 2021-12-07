@@ -6,19 +6,15 @@
  */
 
 import type { TooltipProps } from './types'
-import type { ɵOverlayInstance } from '@idux/components/_private'
 import type { Slots } from 'vue'
 
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { tooltipProps } from './types'
-import { useConfigProps } from './useConfigProps'
-
-const defaultOffset: [number, number] = [0, 12]
+import { useTooltipOverlay } from './useTooltipOverlay'
 
 export default defineComponent({
   name: 'IxTooltip',
@@ -26,12 +22,8 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tooltip`)
-    const overlayRef = ref<ɵOverlayInstance | null>(null)
     const config = useGlobalConfig('tooltip')
-    const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = useConfigProps(props, config, mergedPrefixCls, setVisibility)
-    const updatePopper = () => overlayRef.value?.updatePopper()
-
+    const { overlayRef, updatePopper, overlayProps } = useTooltipOverlay(props, config, mergedPrefixCls)
     expose({ updatePopper })
 
     return () => {
@@ -40,22 +32,19 @@ export default defineComponent({
       return (
         <ɵOverlay
           ref={overlayRef}
-          visible={visibility.value}
-          v-slots={{ default: slots.default, content: () => renderTitle(props, slots, prefixCls) }}
+          v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
           class={prefixCls}
           transitionName={`${common.prefixCls}-fade-fast`}
-          {...configProps.value}
-          offset={defaultOffset}
-          showArrow
+          {...overlayProps.value}
         />
       )
     }
   },
 })
 
-const renderTitle = (props: TooltipProps, slots: Slots, prefixCls: string) => {
+const renderContent = (props: TooltipProps, slots: Slots, prefixCls: string) => {
   if (!(slots.title || props.title)) {
     return null
   }
-  return <div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>
+  return <div class={`${prefixCls}-wrapper`}>{slots.title?.() ?? props.title}</div>
 }

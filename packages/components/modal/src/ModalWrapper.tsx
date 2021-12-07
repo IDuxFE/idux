@@ -21,21 +21,43 @@ import {
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
-import { ɵHeader } from '@idux/components/_private'
+import { ɵFooter, ɵHeader } from '@idux/components/_private'
 import { ModalConfig } from '@idux/components/config'
+import { getLocale } from '@idux/components/i18n'
 
 import ModalBody from './ModalBody'
-import ModalFooter from './ModalFooter'
 import { MODAL_TOKEN, modalToken } from './token'
 import { ModalProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
-    const { props, slots, common, config, mergedPrefixCls, visible, animatedVisible, mergedVisible } =
-      inject(modalToken)!
-    const { close } = inject(MODAL_TOKEN)!
+    const {
+      props,
+      slots,
+      common,
+      config,
+      mergedPrefixCls,
+      visible,
+      animatedVisible,
+      mergedVisible,
+      cancelLoading,
+      okLoading,
+    } = inject(modalToken)!
+    const { close, cancel, ok } = inject(MODAL_TOKEN)!
     const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex } = useConfig(props, config)
+
+    const locale = getLocale('modal')
+
+    const cancelVisible = computed(() => props.type === 'default' || props.type === 'confirm')
+
+    const cancelText = computed(() => props.cancelText ?? locale.value.cancelText)
+    const okText = computed(() => {
+      if (props.okText) {
+        return props.okText
+      }
+      return cancelVisible.value ? locale.value.okText : locale.value.justOkText
+    })
 
     const placementStyle = computed(() => {
       const top = centered.value ? 0 : convertCssPixel(props.offset)
@@ -118,14 +140,27 @@ export default defineComponent({
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               <div class={`${prefixCls}-content`}>
                 <ɵHeader
+                  v-slots={slots}
                   closable={closable.value}
                   closeIcon={closeIcon.value}
                   header={props.header}
                   onClose={close}
-                  v-slots={slots}
                 />
                 <ModalBody></ModalBody>
-                <ModalFooter></ModalFooter>
+                <ɵFooter
+                  v-slots={slots}
+                  class={`${prefixCls}-footer`}
+                  cancel={cancel}
+                  cancelButton={props.cancelButton}
+                  cancelLoading={cancelLoading.value}
+                  cancelText={cancelText.value}
+                  cancelVisible={cancelVisible.value}
+                  footer={props.footer}
+                  ok={ok}
+                  okButton={props.okButton}
+                  okLoading={okLoading.value}
+                  okText={okText.value}
+                ></ɵFooter>
               </div>
               <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
             </div>
