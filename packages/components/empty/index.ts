@@ -7,7 +7,7 @@
 
 import type { EmptyComponent } from './src/types'
 
-import Empty from './src/Empty.vue'
+import Empty from './src/Empty'
 
 const IxEmpty = Empty as unknown as EmptyComponent
 

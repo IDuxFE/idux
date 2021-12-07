@@ -1,29 +1,31 @@
 @import './themes/default.less';
 
 .@{empty-prefix} {
-  display: block;
   text-align: center;
-  font-size: @empty-font-size-md;
-  line-height: @empty-line-height-md;
-  margin: 0 @empty-margin-md;
+  font-size: @empty-font-size;
+  line-height: @empty-line-height;
+  margin: @empty-margin;
+  color: @empty-color;
 
   &-image {
-    margin-bottom: @empty-margin-md;
+    margin-bottom: @empty-image-margin-bottom;
 
     img {
       height: 100%;
     }
 
-    .@{idux-prefix}-icon {
-      font-size: @empty-icon-font-size-md;
+    .@{icon-prefix} {
+      opacity: @empty-image-icon-opacity;
+      font-size: @empty-image-icon-font-size;
     }
   }
 
   &-description {
-    margin: 0;
+    opacity: @empty-description-opacity;
+    margin: @empty-description-margin;
   }
 
-  &-footer {
-    margin-top: @empty-margin-md;
+  &-content {
+    margin-top: @empty-content-margin-top;
   }
 }
