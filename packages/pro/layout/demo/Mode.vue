@@ -1,10 +1,18 @@
 <template>
-  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both">
+  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" :mode="mode">
     <template #logo>
       <div class="logo">Logo</div>
     </template>
+    <template #extra>🔧Tools can be placed here</template>
     <template #default="{ activePath }">
       <div class="content">
+        <IxSpace>
+          <template v-for="modeType in modeTypes" :key="modeType">
+            <IxButton :mode="modeType === mode ? 'primary' : undefined" @click="switchMode(modeType)">{{
+              modeType
+            }}</IxButton>
+          </template>
+        </IxSpace>
         <div>Currently active is: {{ activeKey }}</div>
         <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
       </div>
@@ -17,7 +25,12 @@ import type { LayoutProMenuData } from '@idux/pro/layout'
 
 import { ref } from 'vue'
 
-const activeKey = ref()
+const activeKey = ref(null)
+const modeTypes = ['header', 'sider', 'both', 'mixin']
+const mode = ref('both')
+const switchMode = selectMode => {
+  mode.value = selectMode
+}
 const dataSource: LayoutProMenuData[] = [
   {
     type: 'sub',

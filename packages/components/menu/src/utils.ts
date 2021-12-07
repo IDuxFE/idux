@@ -14,7 +14,7 @@ import { isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
-export function getIconNode({ slotCfg, propCfg }: IconParams): VNode | undefined {
+export function getIconNode({ slotCfg, propCfg }: IconParams): VNode | VNode[] | null {
   if (slotCfg) {
     return slotCfg()
   }
@@ -24,4 +24,5 @@ export function getIconNode({ slotCfg, propCfg }: IconParams): VNode | undefined
     }
     return propCfg
   }
+  return null
 }

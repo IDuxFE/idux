@@ -3,11 +3,20 @@
     <template #logo>
       <div class="logo">Logo</div>
     </template>
-    <template #default="{ activePath }">
-      <div class="content">
-        <div>Currently active is: {{ activeKey }}</div>
-        <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
-      </div>
+    <template #extra>
+      <IxSpace class="extra">
+        <IxIcon name="alert"></IxIcon>
+        <IxButton>sign out</IxButton>
+      </IxSpace>
+    </template>
+    <template #siderTop>
+      <div class="title">Title</div>
+    </template>
+    <template #siderBottom>
+      <IxIcon name="github" class="sider-bottom"></IxIcon>
+    </template>
+    <template #default>
+      <div class="content">Main page</div>
     </template>
   </IxLayoutPro>
 </template>
@@ -80,8 +89,25 @@ const dataSource: LayoutProMenuData[] = [
   font-size: 24px;
 }
 
+.title {
+  line-height: 44px;
+  padding-left: 24px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .content {
   padding: 24px;
   line-height: 24px;
+}
+
+.extra {
+  float: right;
+  margin-right: 24px;
+}
+
+.sider-bottom {
+  line-height: 44px;
+  padding-left: 24px;
 }
 </style>

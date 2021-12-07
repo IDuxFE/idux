@@ -1,12 +1,18 @@
 <template>
-  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both">
+  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both" :theme="theme">
     <template #logo>
       <div class="logo">Logo</div>
     </template>
-    <template #default="{ activePath }">
+    <template #default>
       <div class="content">
-        <div>Currently active is: {{ activeKey }}</div>
-        <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
+        <div>The current theme configuration is {{ JSON.stringify(theme) }}</div>
+        <IxSpace>
+          <div>whole: <IxSelect v-model:value="wholeTheme" :options="wholdThemeOptionss"></IxSelect></div>
+          <template v-if="wholeTheme === 'separate'">
+            <div>header: <IxSelect v-model:value="separateTheme.header" :options="themesOptions"></IxSelect></div>
+            <div>sider: <IxSelect v-model:value="separateTheme.sider" :options="themesOptions"></IxSelect></div>
+          </template>
+        </IxSpace>
       </div>
     </template>
   </IxLayoutPro>
@@ -15,9 +21,28 @@
 <script setup lang="ts">
 import type { LayoutProMenuData } from '@idux/pro/layout'
 
-import { ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 const activeKey = ref()
+const wholeTheme = ref('light')
+const themesOptions = [
+  { key: 'light', label: 'light', value: 'light' },
+  { key: 'dark', label: 'dark', value: 'dark' },
+]
+const wholdThemeOptionss = [...themesOptions, { key: 'separate', label: 'separate', value: 'separate' }]
+const separateTheme = reactive({
+  header: 'light',
+  sider: 'light',
+})
+const theme = computed(() => {
+  if (wholeTheme.value === 'separate') {
+    return {
+      header: separateTheme.header,
+      sider: separateTheme.sider,
+    }
+  }
+  return wholeTheme.value
+})
 const dataSource: LayoutProMenuData[] = [
   {
     type: 'sub',

@@ -8,10 +8,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, Slot, Slots, VNode } from 'vue'
 import type { VueTypeDef } from 'vue-types'
-
-import { Slot } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -57,7 +55,7 @@ export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export const menuItemProps = {
   disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
 }
 
@@ -67,7 +65,7 @@ export type MenuItemComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuI
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export const menuItemGroupProps = {
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
 }
 
@@ -80,7 +78,7 @@ export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupPr
 
 export const menuSubProps = {
   disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   overlayClassName: IxPropTypes.string,

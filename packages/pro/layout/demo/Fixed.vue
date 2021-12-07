@@ -1,15 +1,17 @@
 <template>
-  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both">
-    <template #logo>
-      <div class="logo">Logo</div>
-    </template>
-    <template #default="{ activePath }">
-      <div class="content">
-        <div>Currently active is: {{ activeKey }}</div>
-        <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
-      </div>
-    </template>
-  </IxLayoutPro>
+  <div class="wrapper">
+    <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both" :fixed="fixed">
+      <template #logo>
+        <div class="logo">Logo</div>
+      </template>
+      <template #default>
+        <div class="content">
+          <div>Currently fixed is {{ fixed }}</div>
+          <IxButton @click="switchFixed">switch</IxButton>
+        </div>
+      </template>
+    </IxLayoutPro>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +20,10 @@ import type { LayoutProMenuData } from '@idux/pro/layout'
 import { ref } from 'vue'
 
 const activeKey = ref()
+const fixed = ref(true)
+const switchFixed = () => {
+  fixed.value = !fixed.value
+}
 const dataSource: LayoutProMenuData[] = [
   {
     type: 'sub',
@@ -74,6 +80,10 @@ const dataSource: LayoutProMenuData[] = [
 </script>
 
 <style lang="less" scoped>
+.wrapper {
+  height: 300px;
+}
+
 .logo {
   padding-left: 24px;
   font-weight: bold;
@@ -81,7 +91,10 @@ const dataSource: LayoutProMenuData[] = [
 }
 
 .content {
-  padding: 24px;
-  line-height: 24px;
+  margin: 24px;
+  height: 400px;
+  line-height: 40px;
+  text-align: center;
+  background: linear-gradient(45deg, #567df5, transparent);
 }
 </style>

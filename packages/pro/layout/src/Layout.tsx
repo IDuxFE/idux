@@ -22,7 +22,7 @@ import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 
 import { computed, defineComponent, provide, readonly, ref, watch } from 'vue'
 
-import { isString, pick, xor } from 'lodash-es'
+import { isNil, isString, pick, xor } from 'lodash-es'
 
 import { callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
 import { IxLayout, IxLayoutContent, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
@@ -58,7 +58,7 @@ export default defineComponent({
     const siderMenus = useSiderMenus(props, activeHeaderKeys, realMode)
     const { headerShow, headerNavShow, siderShow } = useShow(realMode, siderMenus)
     const headerExpandedKeys = computed(() => (realMode.value === 'header' ? undefined : activeHeaderKeys.value))
-    const { siderExpandedKeys, onExpandedChange } = useSiderExpandedKeys(siderMode)
+    const { siderExpandedKeys, onExpandedChange } = useSiderExpandedKeys(siderMode, siderMenus)
     const headerCls = computed(() => [
       `${comCls.value}-header`,
       `${comCls.value}-header-${theme.value.header}`,
@@ -71,6 +71,7 @@ export default defineComponent({
       { [`${comCls.value}-sider-fixed`]: fixed.value },
     ])
     const layoutCls = computed(() => [
+      comCls.value,
       { [`${comCls.value}-with-header`]: headerShow.value },
       { [`${comCls.value}-fixed`]: fixed.value },
     ])
@@ -86,7 +87,7 @@ export default defineComponent({
         const curMenu = realMenus.value.find(menu => menu.key === menuClickOption.key)
         if (menuClickOption.type === 'item') {
           activeKey.value = [menuClickOption.key]
-        } else if (isBothMode && !!curMenu) {
+        } else if (isBothMode && !!curMenu?.children) {
           activeKey.value = [getDefaultActivePath(curMenu.children).slice(-1)[0]?.key]
         }
         callEmit(props['onMenuClick'], menuClickOption)
@@ -95,7 +96,8 @@ export default defineComponent({
         callEmit(props['onMenuClick'], menuClickOption)
       }
       const siderMenuHandle = {
-        'v-model:selectedKeys': activeKey.value,
+        selectedKeys: activeKey.value,
+        'onUpdate:selectedKeys': (selectedKeys: VKey[]) => (activeKey.value = selectedKeys),
         expandedKeys: siderExpandedKeys.value,
         'onUpdate:expandedKeys': onExpandedChange,
       }
@@ -122,7 +124,12 @@ export default defineComponent({
               </IxLayoutHeader>
             )}
             {siderShow.value && (
-              <IxLayoutSider class={siderCls.value} breakpoint={props.breakpoint} collapsed={collapsed.value}>
+              <IxLayoutSider
+                class={siderCls.value}
+                breakpoint={props.breakpoint}
+                collapsed={collapsed.value}
+                onCollapse={changeCollapsed}
+              >
                 {slots.siderTop && <section class={`${comCls.value}-sider-top`}>{slots.siderTop()}</section>}
                 <IxMenu
                   class={`${comCls.value}-sider-menu`}
@@ -192,8 +199,8 @@ function useSiderMenus(
   })
 }
 
-function useSiderExpandedKeys(mode: ComputedRef<LayoutProSiderMode>) {
-  const siderExpandedKeys = ref<VKey[] | undefined>()
+function useSiderExpandedKeys(mode: ComputedRef<LayoutProSiderMode>, siderMenus: ComputedRef<LayoutProMenuData[]>) {
+  const siderExpandedKeys = ref<VKey[] | undefined>() // 数组的下标表示第几层，同一层只能展开一个
 
   watch(
     mode,
@@ -209,6 +216,7 @@ function useSiderExpandedKeys(mode: ComputedRef<LayoutProSiderMode>) {
   )
 
   const onExpandedChange = (keys: VKey[]) => {
+    const curAvailableSiderMenu = getAvailableMenus(siderMenus.value)
     if (mode.value !== 'inline') {
       return
     }
@@ -216,7 +224,26 @@ function useSiderExpandedKeys(mode: ComputedRef<LayoutProSiderMode>) {
       siderExpandedKeys.value = []
       return
     }
-    siderExpandedKeys.value = xor(keys, siderExpandedKeys.value)
+
+    // 同一层仅能展开一个
+    const keysDeepth = getKeysDeepth(curAvailableSiderMenu, keys)
+    const sortDeepth = Object.keys(keysDeepth).sort((a, b) => Number(a) - Number(b))
+    const notAvailableFloor = Number(sortDeepth.find(deepth => !keysDeepth[deepth] || keysDeepth[deepth].length === 0))
+    const availableKeysDeepth = pick(
+      keysDeepth,
+      sortDeepth.filter(item => Number(item) < notAvailableFloor),
+    )
+    siderExpandedKeys.value = Object.keys(availableKeysDeepth).reduce((acc, item) => {
+      const curDeepth = Number(item)
+      const preCurDeepthSiderExpandedKey = siderExpandedKeys.value?.[curDeepth]
+      const curExpanded = preCurDeepthSiderExpandedKey ? [preCurDeepthSiderExpandedKey] : []
+      if (curExpanded.length !== availableKeysDeepth[curDeepth].length) {
+        acc[curDeepth] = xor(curExpanded, availableKeysDeepth[curDeepth])?.[0]
+      } else {
+        acc[curDeepth] = preCurDeepthSiderExpandedKey!
+      }
+      return acc
+    }, [] as VKey[])
   }
 
   return {
@@ -277,12 +304,16 @@ function useActiveKey(
 ) {
   return computed({
     get() {
-      if (!props.activeKey) {
-        return defaultActiveKey.value
+      if (isNil(props.activeKey)) {
+        const defaultActive = defaultActiveKey.value
+        callEmit(props['onUpdate:activeKey'], defaultActive?.[0])
+        return defaultActive
       }
       // 如果当前不是MenuItem叶子节点则继续往下查找
       const targetMenu = getTargetMenu(realMenus.value, props.activeKey)
       if (targetMenu?.type === 'itemGroup' || targetMenu?.type === 'sub') {
+        const defaultActive = getDefaultActivePath(targetMenu.children).slice(-1)[0]?.key
+        callEmit(props['onUpdate:activeKey'], defaultActive)
         return [getDefaultActivePath(targetMenu.children).slice(-1)[0]?.key]
       }
       return [props.activeKey]
@@ -420,4 +451,20 @@ function getMenuItemChildren<T extends LayoutProMenuData | LayoutProAvailableMen
     return (menu.children ?? []) as T[]
   }
   return []
+}
+
+// 获取按照菜单层级整理keys
+function getKeysDeepth(menus: LayoutProAvailableMenu[], keys: VKey[]) {
+  const resultDeepth: Record<string, VKey[]> = {}
+  const handleResultDeepth = (menus: LayoutProAvailableMenu[], deepth = 0) => {
+    resultDeepth[deepth] = resultDeepth[deepth] ?? []
+    menus.forEach(menu => {
+      if (keys.includes(menu.key)) {
+        resultDeepth[deepth].push(menu.key)
+      }
+      handleResultDeepth(menu.children, deepth + 1)
+    })
+  }
+  handleResultDeepth(menus)
+  return resultDeepth
 }

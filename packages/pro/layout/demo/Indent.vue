@@ -1,12 +1,12 @@
 <template>
-  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both">
+  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both" :indent="indent">
     <template #logo>
       <div class="logo">Logo</div>
     </template>
-    <template #default="{ activePath }">
+    <template #default>
       <div class="content">
-        <div>Currently active is: {{ activeKey }}</div>
-        <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
+        indent (numbers only):
+        <IxInput :value="`${indent}`" class="input-box" @update:value="updateIndent"></IxInput>
       </div>
     </template>
   </IxLayoutPro>
@@ -18,6 +18,10 @@ import type { LayoutProMenuData } from '@idux/pro/layout'
 import { ref } from 'vue'
 
 const activeKey = ref()
+const indent = ref(24)
+const updateIndent = (val: string) => {
+  indent.value = Number(val)
+}
 const dataSource: LayoutProMenuData[] = [
   {
     type: 'sub',
@@ -83,5 +87,9 @@ const dataSource: LayoutProMenuData[] = [
 .content {
   padding: 24px;
   line-height: 24px;
+}
+
+.input-box {
+  width: 100px;
 }
 </style>

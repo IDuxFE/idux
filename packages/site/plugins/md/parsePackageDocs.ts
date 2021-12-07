@@ -23,7 +23,7 @@ export function parsePackageDocs(id: string, raw: string): string {
   const docsPath = `${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
 
-  const { __content: content, single = false, ...meta } = loadFront(raw)
+  const { __content: content, single = false, full = false, ...meta } = loadFront(raw)
 
   const title = generateTitle({ ...(meta as Meta), path: docsPath })
   const { description, api } = parseContent(content)
@@ -36,6 +36,7 @@ export function parsePackageDocs(id: string, raw: string): string {
     generateHeader(title, description, language),
     examples,
     api,
+    full,
   )
 
   const docsScript = getComponentScript(
@@ -108,10 +109,10 @@ function generateExample(single: boolean, components: string[]) {
   return getExampleTemplate(single, firstZhPart, secondZhPart)
 }
 
-function wrapperDocsTemplate(toc: string, header: string, examples: string, api: string): string {
+function wrapperDocsTemplate(toc: string, header: string, examples: string, api: string, full: boolean): string {
   return `
 <template>
-  <article>
+  <article class="${full ? 'example-full' : ''}">
   ${toc}
   ${header}
   <section class="example-wrapper">${examples}</section>

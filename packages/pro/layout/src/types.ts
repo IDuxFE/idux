@@ -10,6 +10,8 @@ import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { MenuClickOptions, MenuData, MenuDivider, MenuItemGroup, MenuSub } from '@idux/components/menu'
 import type { DefineComponent, HTMLAttributes, Ref } from 'vue'
 
+import { VNode } from 'vue'
+
 import { IxPropTypes } from '@idux/cdk/utils'
 
 const modeTypes = ['header', 'sider', 'mixin', 'both'] as const
@@ -62,3 +64,12 @@ export type LayoutProCtrlType = {
   collapsed: Readonly<Ref<boolean>>
   changeCollapsed: (collapsed: boolean) => void
 }
+export const layoutProCtrlProps = {
+  foldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
+  unfoldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
+}
+export type LayoutProCtrlProps = IxInnerPropTypes<typeof layoutProCtrlProps>
+export type LayoutProCtrlPublicProps = IxPublicPropTypes<typeof layoutProProps>
+export type LayoutProCtrlComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof LayoutProCtrlPublicProps> & LayoutProCtrlPublicProps
+>

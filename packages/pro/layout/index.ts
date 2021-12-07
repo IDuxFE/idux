@@ -6,7 +6,7 @@
  */
 
 import type { LayoutProComponent } from './src/types'
-import type { MenuClickOptions, MenuData } from '@idux/components/menu'
+import type { MenuClickOptions } from '@idux/components/menu'
 
 import LayoutPro from './src/Layout'
 import LayoutProCtrl from './src/LayoutCtrl'
@@ -14,6 +14,12 @@ import LayoutProCtrl from './src/LayoutCtrl'
 const IxLayoutPro = LayoutPro as unknown as LayoutProComponent
 const IxLayoutProCtrl = LayoutProCtrl
 
-export type { MenuClickOptions, MenuData }
-export type { LayoutProThemes, LayoutProModeTypes, LayoutProProps } from './src/types'
+export type { MenuClickOptions }
+export type {
+  LayoutProThemes,
+  LayoutProModeTypes,
+  LayoutProProps,
+  LayoutProMenuData,
+  LayoutProMenuPath,
+} from './src/types'
 export { IxLayoutPro, IxLayoutProCtrl }

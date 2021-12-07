@@ -82,6 +82,8 @@
 
       .@{idux-menu}-sub-title {
         .getHoverStyle(@theme);
+
+        background-color: transparent;
       }
     }
   }
@@ -139,9 +141,11 @@
 }
 
 .@{layout-pro-prefix} {
+  height: @layoutPro-height;
+  overflow: auto;
 
   &-fixed {
-    height: @layoutPro-height;
+    overflow: hidden;
     grid-template-rows: auto 100%;
     &.@{layout-pro-prefix}-with-header {
       grid-template-rows: auto calc(~'100% - @{layoutPro-header-height}');
@@ -149,6 +153,7 @@
 
     .@{idux-layout}-content {
       overflow: auto;
+      height: @layoutPro-content-height;
     }
   }
 
@@ -221,7 +226,7 @@
 
   &-sider {
     width: @layoutPro-sider-width;
-    box-shadow: @layoutPro-sider-box-shadow;
+    border-right: @layoutPro-sider-border-right;
 
     .@{idux-layout}-sider-children {
       display: flex;
