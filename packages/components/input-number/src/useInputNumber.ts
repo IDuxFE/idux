@@ -56,11 +56,10 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
 
   function getIncValueFormAccessor(step: number) {
     const { value } = accessor.valueRef
-    let newVal = parseFloat(value?.toFixed(precision.value) ?? '0')
-    if (value === null || value === undefined || Number.isNaN(value)) {
-      newVal += step
-    } else {
-      newVal = value + step
+    let newVal = step
+    if (typeof value === 'number' && !Number.isNaN(value)) {
+      // Use the toFixed func to ensure numerical accuracy.
+      newVal = parseFloat(value.toFixed(precision.value)) + step
     }
 
     return Math.max(props.min, Math.min(props.max, newVal))
