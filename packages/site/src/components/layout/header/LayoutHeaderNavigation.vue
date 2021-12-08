@@ -38,10 +38,10 @@ import { appContextToken } from '../../../context'
 
 export default defineComponent({
   setup() {
-    const { lang, page, screens, org, repo } = inject(appContextToken)!
+    const { lang, page, breakpoints, org, repo } = inject(appContextToken)!
     const selectedKeys = computed(() => [page.value])
-    const isXs = computed(() => screens.xs)
-    const isSm = computed(() => screens.sm)
+    const isXs = computed(() => breakpoints.xs)
+    const isSm = computed(() => breakpoints.sm)
 
     const githubUrl = computed(() => `https://github.com/${org}/${repo}`)
     return { lang, selectedKeys, isXs, isSm, githubUrl }

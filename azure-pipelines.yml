@@ -34,7 +34,6 @@ stages:
             displayName: 'Run lint'
 
   - stage: test
-    condition: eq(variables['Build.Reason'], 'PullRequest')
     dependsOn: env
     jobs:
       - job: test_packages

@@ -42,7 +42,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
-import { useScreens } from '@idux/cdk/breakpoint'
+import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { DrawerProviderInstance } from '@idux/components/drawer'
 import { ModalProviderInstance } from '@idux/components/modal'
 
@@ -67,7 +67,7 @@ export default defineComponent({
       return match?.[1] ?? 'home'
     })
 
-    const screens = useScreens()
+    const breakpoints = useSharedBreakpoints()
 
     const appContext: AppContext = {
       org: 'IDuxFE',
@@ -75,7 +75,7 @@ export default defineComponent({
       lang: ref('zh'),
       path,
       page,
-      screens,
+      breakpoints,
     }
 
     provide(appContextToken, appContext)

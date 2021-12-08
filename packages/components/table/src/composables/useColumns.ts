@@ -15,7 +15,7 @@ import type {
   TableColumnSelectable,
   TableProps,
 } from '../types'
-import type { Screens } from '@idux/cdk/breakpoint'
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
 import type { ComputedRef } from 'vue'
 
@@ -23,7 +23,7 @@ import { computed, reactive, ref, watchEffect } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { useScreens } from '@idux/cdk/breakpoint'
+import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { convertArray } from '@idux/cdk/utils'
 
 export function useColumns(
@@ -31,8 +31,10 @@ export function useColumns(
   config: TableConfig,
   scrollBarSizeOnFixedHolder: ComputedRef<number>,
 ): ColumnsContext {
-  const screens = useScreens()
-  const mergedColumns = computed(() => mergeColumns(props.columns, screens, config.columnBase, config.columnExpandable))
+  const breakpoints = useSharedBreakpoints()
+  const mergedColumns = computed(() =>
+    mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable),
+  )
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
     mergedColumns,
     scrollBarSizeOnFixedHolder,
@@ -125,21 +127,21 @@ export type TableColumnMergedScrollBar = TableColumnMergedBaseExtra & TableColum
 
 function mergeColumns(
   columns: TableColumn[],
-  screens: Screens,
+  breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
   parentKey?: Key,
 ): TableColumnMerged[] {
   return columns
-    .filter(column => !column.responsive || column.responsive.some(key => screens[key]))
+    .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
     .map((column, colIndex) =>
-      covertColumn(column, screens, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${colIndex}`),
+      covertColumn(column, breakpoints, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${colIndex}`),
     )
 }
 
 function covertColumn(
   column: TableColumn,
-  screens: Screens,
+  breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
   defaultKey: Key,
@@ -164,7 +166,7 @@ function covertColumn(
       newColumn.sortable = { ...baseConfig.sortable, ...sortable }
     }
     if (children?.length) {
-      newColumn.children = mergeColumns(children, screens, baseConfig, expandableConfig, _key)
+      newColumn.children = mergeColumns(children, breakpoints, baseConfig, expandableConfig, _key)
     }
     return newColumn
   }
