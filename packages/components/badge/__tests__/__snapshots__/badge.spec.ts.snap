@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Badge color work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\" style=\\"background-color: rgb(255, 0, 0);\\"><!--v-if--></sup>"`;
+exports[`Badge color work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\" style=\\"background-color: rgb(255, 0, 0);\\"><!----></sup>"`;
 
-exports[`Badge count slot work 1`] = `"<span class=\\"ix-badge-wrapper\\"><sup class=\\"ix-badge ix-badge-empty ix-badge-slot-count\\"><div class=\\"count-slot\\"></div></sup></span>"`;
+exports[`Badge count slot work 1`] = `"<span class=\\"ix-badge-wrapper\\"><!----><sup class=\\"ix-badge ix-badge-empty ix-badge-slot-count\\"><div class=\\"count-slot\\"></div></sup></span>"`;
 
 exports[`Badge count work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">10</sup>"`;
 
@@ -10,9 +10,9 @@ exports[`Badge count work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge
 
 exports[`Badge count work 3`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">1-1</sup>"`;
 
-exports[`Badge dot work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;
+exports[`Badge dot work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!----></sup>"`;
 
-exports[`Badge dot work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-dot\\"><!--v-if--></sup>"`;
+exports[`Badge dot work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-dot\\"><!----></sup>"`;
 
 exports[`Badge overflowCount work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">99+</sup>"`;
 
@@ -22,8 +22,8 @@ exports[`Badge overflowCount work 3`] = `"<sup class=\\"ix-badge ix-badge-empty 
 
 exports[`Badge overflowCount work 4`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">1000</sup>"`;
 
-exports[`Badge render work 1`] = `"<span class=\\"ix-badge-wrapper\\"><sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup></span>"`;
+exports[`Badge render work 1`] = `"<span class=\\"ix-badge-wrapper\\"><!----><sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!----></sup></span>"`;
 
-exports[`Badge showZero work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!--v-if--></sup>"`;
+exports[`Badge showZero work 1`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count ix-badge-hide-zero\\"><!----></sup>"`;
 
 exports[`Badge showZero work 2`] = `"<sup class=\\"ix-badge ix-badge-empty ix-badge-count\\">0</sup>"`;

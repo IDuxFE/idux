@@ -7,7 +7,7 @@
 
 import type { BadgeComponent } from './src/types'
 
-import Badge from './src/Badge.vue'
+import Badge from './src/Badge'
 
 const IxBadge = Badge as unknown as BadgeComponent
 

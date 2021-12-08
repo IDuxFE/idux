@@ -1,22 +1,7 @@
 <template>
   <div class="badge-demo">
-    <IxBadge count="5">
+    <IxBadge count="5" title="Custom hover text">
       <a href="#"></a>
-    </IxBadge>
-
-    <IxBadge count="0" showZero>
-      <a href="#"></a>
-    </IxBadge>
-
-    <IxBadge dot>
-      <a href="#"></a>
-    </IxBadge>
-
-    <IxBadge>
-      <a href="#"></a>
-      <template #count>
-        <IxIcon name="clock-circle"></IxIcon>
-      </template>
     </IxBadge>
   </div>
 </template>
