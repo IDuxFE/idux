@@ -88,7 +88,7 @@ const dataSource: LayoutProMenuData[] = [
     key: 'sub4',
     icon: 'github',
     label: 'Menu Sub 4',
-    // disabled: true,
+    disabled: true,
     children: [
       { type: 'item', key: 'item10', label: 'Item 10' },
       { type: 'item', key: 'item11', label: 'Item 11' },

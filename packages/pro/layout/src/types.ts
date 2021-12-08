@@ -22,13 +22,16 @@ type SiderHeaderValue<T> = {
   header: T
 }
 
+export type A = Omit<Extract<MenuData, MenuItemGroup | MenuSub>, 'children'>
+
 export type SiderHeaderTheme = SiderHeaderValue<typeof themes[number]>
 
 export type LayoutProSiderMode = 'vertical' | 'inline'
 export type LayoutProModeTypes = typeof modeTypes[number]
 export type LayoutProThemes = typeof themes[number] | SiderHeaderTheme
 export type LayoutProMenuData = (
-  | (Omit<Extract<MenuData, MenuItemGroup | MenuSub>, 'children'> & { children: LayoutProMenuData[] })
+  | (Omit<Extract<MenuData, MenuItemGroup>, 'children'> & { children: LayoutProMenuData[] })
+  | (Omit<Extract<MenuData, MenuSub>, 'children'> & { children: LayoutProMenuData[] })
   | Exclude<MenuData, MenuItemGroup | MenuSub>
 ) & { key: VKey }
 export type LayoutProHeaderMenu = Omit<LayoutProMenuData, 'children'>
@@ -38,13 +41,13 @@ export type LayoutProAvailableMenu = Exclude<LayoutProMenuData, MenuDivider> & {
 export type LayoutProMenuPath = Pick<LayoutProAvailableMenu, 'key' | 'label' | 'type'>
 
 export const layoutProProps = {
-  collapsed: IxPropTypes.bool,
+  collapsed: IxPropTypes.bool.def(false),
   activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
   menus: IxPropTypes.array<LayoutProMenuData>().isRequired,
   mode: IxPropTypes.oneOf<LayoutProModeTypes>(['header', 'sider', 'mixin', 'both']).def('sider'),
-  theme: IxPropTypes.oneOfType<LayoutProThemes>([IxPropTypes.oneOf(themes), Object]),
-  indent: IxPropTypes.number,
-  fixed: IxPropTypes.oneOfType<boolean | SiderHeaderValue<boolean>>([Boolean, Object]),
+  theme: IxPropTypes.oneOfType<LayoutProThemes>([IxPropTypes.oneOf(themes), Object]).def('light'),
+  indent: IxPropTypes.number.def(24),
+  fixed: IxPropTypes.oneOfType<boolean | SiderHeaderValue<boolean>>([Boolean, Object]).def(true),
   breakpoint: IxPropTypes.oneOf<BreakpointKey>(['xs', 'sm', 'md', 'lg', 'xl']),
 
   // event
@@ -60,16 +63,17 @@ export type LayoutProComponent = DefineComponent<
 >
 export type LayoutProInstance = InstanceType<DefineComponent<LayoutProProps>>
 
-export type LayoutProCtrlType = {
+export type LayoutSiderTriggerType = {
   collapsed: Readonly<Ref<boolean>>
   changeCollapsed: (collapsed: boolean) => void
 }
-export const layoutProCtrlProps = {
+export const layoutSiderTriggerProps = {
   foldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
   unfoldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
 }
-export type LayoutProCtrlProps = IxInnerPropTypes<typeof layoutProCtrlProps>
-export type LayoutProCtrlPublicProps = IxPublicPropTypes<typeof layoutProProps>
-export type LayoutProCtrlComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof LayoutProCtrlPublicProps> & LayoutProCtrlPublicProps
+export type LayoutSiderTriggerProps = IxInnerPropTypes<typeof layoutSiderTriggerProps>
+export type LayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof layoutProProps>
+export type LayoutSiderTriggerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof LayoutSiderTriggerPublicProps> & LayoutSiderTriggerPublicProps
 >
+export type LayoutSiderTriggerInstance = InstanceType<DefineComponent<LayoutSiderTriggerProps>>

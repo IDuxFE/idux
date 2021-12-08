@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, Slot, Slots, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -17,11 +17,6 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 export type IconType = string | VNode
-
-export type IconParams = {
-  slotCfg?: Slot
-  propCfg?: IconType
-}
 
 export interface MenuClickOptions {
   event: Event

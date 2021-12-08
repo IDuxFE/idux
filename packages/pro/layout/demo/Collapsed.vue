@@ -12,12 +12,12 @@
     <template #siderTop>
       <div class="sider-top" :style="siderTopStyle">
         <div v-show="!collapsed" class="title">title</div>
-        <IxLayoutProCtrl foldedIcon="right" unfoldedIcon="left"></IxLayoutProCtrl>
+        <IxLayoutSiderTrigger foldedIcon="right" unfoldedIcon="left"></IxLayoutSiderTrigger>
       </div>
     </template>
     <template #default>
       <div class="content">
-        <p>The current IxLayoutProCtrl is placed in siderTop and siderBottom.</p>
+        <p>The current IxLayoutSiderTrigger is placed in siderTop and siderBottom.</p>
         <p
           >Try to drag the page to change the width, breakpoin will make the sidebar collapse according to the page
           width.</p
@@ -25,7 +25,7 @@
       </div>
     </template>
     <template #siderBottom>
-      <IxLayoutProCtrl class="sider-bottom"></IxLayoutProCtrl>
+      <IxLayoutSiderTrigger class="sider-bottom"></IxLayoutSiderTrigger>
     </template>
   </IxLayoutPro>
 </template>

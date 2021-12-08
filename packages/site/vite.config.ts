@@ -38,7 +38,7 @@ export default defineConfig(({ command }) => {
               const path = `@idux/components/tabs`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }
-            } else if (name === 'IxLayoutPro' || name === 'IxLayoutProCtrl') {
+            } else if (name === 'IxLayoutPro' || name === 'IxLayoutSiderTrigger') {
               const path = `@idux/pro/layout`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }

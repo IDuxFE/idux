@@ -10,14 +10,12 @@ import type {
   LayoutProHeaderMenu,
   LayoutProMenuData,
   LayoutProMenuPath,
-  LayoutProModeTypes,
   LayoutProProps,
   LayoutProSiderMode,
   SiderHeaderTheme,
 } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { MenuClickOptions } from '@idux/components/menu'
-import type { CommonConfig, LayoutProConfig } from '@idux/pro/config'
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 
 import { computed, defineComponent, provide, readonly, ref, watch } from 'vue'
@@ -27,11 +25,12 @@ import { isNil, isString, pick, xor } from 'lodash-es'
 import { callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
 import { IxLayout, IxLayoutContent, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
 import { IxMenu } from '@idux/components/menu'
-import { useGlobalConfig } from '@idux/pro/config'
 
 import { LayoutProToken } from './token'
 import { layoutProProps } from './types'
 
+const prefixCls = 'ix'
+const comCls = `${prefixCls}-layout-pro`
 const menuPathKeys = ['label', 'key', 'type'] as const // 菜单路径的字段
 
 export default defineComponent({
@@ -39,41 +38,35 @@ export default defineComponent({
   props: layoutProProps,
   setup(props, { slots }) {
     const headerMenus = useHeaderMenus(props)
-    const commonConfig = useGlobalConfig('common')
-    const comCls = useLayoutProCls(commonConfig)
-    const config = useGlobalConfig('layout')
-    const realMode = useMode(props, config)
-    const theme = useTheme(props, config)
-    const fixed = useFixed(props, config)
-    const headerMenuCls = useHeaderMenuCls(comCls, realMode)
-    const realIndent = useIndent(props, config)
-    const siderMode = useSiderMenuMode(props, config)
+    const theme = useTheme(props)
+    const headerMenuCls = useHeaderMenuCls(props)
+    const siderMode = useSiderMenuMode(props)
     const realMenus = useAvailableMenus(props)
     const [collapsed, changeCollapsed] = useControlledProp(props, 'collapsed', false)
     const defaultActivePath = useDefaultActivePath(realMenus)
     const defaultActiveKey = useDefaultActiveKey(defaultActivePath)
     const activeKey = useActiveKey(props, defaultActiveKey, realMenus)
     const activePath = useActivePath(realMenus, activeKey)
-    const { activeHeaderKeys } = useActiveHeaderKey(headerMenus, activePath, realMode)
-    const siderMenus = useSiderMenus(props, activeHeaderKeys, realMode)
-    const { headerShow, headerNavShow, siderShow } = useShow(realMode, siderMenus)
-    const headerExpandedKeys = computed(() => (realMode.value === 'header' ? undefined : activeHeaderKeys.value))
+    const { activeHeaderKeys } = useActiveHeaderKey(props, headerMenus, activePath)
+    const siderMenus = useSiderMenus(props, activeHeaderKeys)
+    const { headerShow, headerNavShow, siderShow } = useShow(props, siderMenus)
+    const headerExpandedKeys = computed(() => (props.mode === 'header' ? undefined : activeHeaderKeys.value))
     const { siderExpandedKeys, onExpandedChange } = useSiderExpandedKeys(siderMode, siderMenus)
     const headerCls = computed(() => [
-      `${comCls.value}-header`,
-      `${comCls.value}-header-${theme.value.header}`,
-      { [`${comCls.value}-header-fixed`]: fixed.value },
+      `${comCls}-header`,
+      `${comCls}-header-${theme.value.header}`,
+      { [`${comCls}-header-fixed`]: props.fixed },
     ])
     const siderCls = computed(() => [
-      `${comCls.value}-sider`,
-      `${comCls.value}-sider-${theme.value.sider}`,
-      { [`${comCls.value}-sider-collapsed`]: collapsed.value },
-      { [`${comCls.value}-sider-fixed`]: fixed.value },
+      `${comCls}-sider`,
+      `${comCls}-sider-${theme.value.sider}`,
+      { [`${comCls}-sider-collapsed`]: collapsed.value },
+      { [`${comCls}-sider-fixed`]: props.fixed },
     ])
     const layoutCls = computed(() => [
-      comCls.value,
-      { [`${comCls.value}-with-header`]: headerShow.value },
-      { [`${comCls.value}-fixed`]: fixed.value },
+      comCls,
+      { [`${comCls}-with-header`]: headerShow.value },
+      { [`${comCls}-fixed`]: props.fixed },
     ])
 
     provide(LayoutProToken, {
@@ -107,11 +100,11 @@ export default defineComponent({
           <IxLayout class={layoutCls.value}>
             {headerShow.value && (
               <IxLayoutHeader class={headerCls.value}>
-                {slots.logo && <section class={`${comCls.value}-header-logo`}>{slots.logo()}</section>}
+                {slots.logo && <section class={`${comCls}-header-logo`}>{slots.logo()}</section>}
                 {headerNavShow.value && (
                   <IxMenu
                     class={headerMenuCls.value}
-                    overlayClassName={`${comCls.value}-sub-overlay-${theme.value.header}`}
+                    overlayClassName={`${comCls}-sub-overlay-${theme.value.header}`}
                     selectedKeys={activeHeaderKeys.value}
                     expandedKeys={headerExpandedKeys.value}
                     onClick={onClickHeaderMenu}
@@ -120,7 +113,7 @@ export default defineComponent({
                     theme={theme.value.header}
                   ></IxMenu>
                 )}
-                {slots.extra && <section class={`${comCls.value}-header-extra`}>{slots.extra()}</section>}
+                {slots.extra && <section class={`${comCls}-header-extra`}>{slots.extra()}</section>}
               </IxLayoutHeader>
             )}
             {siderShow.value && (
@@ -130,11 +123,11 @@ export default defineComponent({
                 collapsed={collapsed.value}
                 onCollapse={changeCollapsed}
               >
-                {slots.siderTop && <section class={`${comCls.value}-sider-top`}>{slots.siderTop()}</section>}
+                {slots.siderTop && <section class={`${comCls}-sider-top`}>{slots.siderTop()}</section>}
                 <IxMenu
-                  class={`${comCls.value}-sider-menu`}
-                  overlayClassName={`${comCls.value}-sub-overlay-${theme.value.sider}`}
-                  indent={realIndent.value}
+                  class={`${comCls}-sider-menu`}
+                  overlayClassName={`${comCls}-sub-overlay-${theme.value.sider}`}
+                  indent={props.indent}
                   dataSource={siderMenus.value}
                   mode={siderMode.value}
                   theme={theme.value.sider}
@@ -142,7 +135,7 @@ export default defineComponent({
                   onClick={onClickSiderMenu}
                   {...siderMenuHandle}
                 ></IxMenu>
-                {slots.siderBottom && <section class={`${comCls.value}-sider-bottom`}>{slots.siderBottom()}</section>}
+                {slots.siderBottom && <section class={`${comCls}-sider-bottom`}>{slots.siderBottom()}</section>}
               </IxLayoutSider>
             )}
             <IxLayoutContent>{slots.default?.({ activePath: activePath.value })}</IxLayoutContent>
@@ -153,12 +146,8 @@ export default defineComponent({
   },
 })
 
-function useLayoutProCls(config: CommonConfig) {
-  return computed(() => `${config.prefixCls}-layout-pro`)
-}
-
-function useHeaderMenuCls(comCls: ComputedRef<string>, mode: ComputedRef<LayoutProModeTypes>) {
-  return computed(() => `${comCls.value}-header-menu ${comCls.value}-header-menu-${mode.value}`)
+function useHeaderMenuCls(props: LayoutProProps) {
+  return computed(() => `${comCls}-header-menu ${comCls}-header-menu-${props.mode}`)
 }
 
 function useHeaderMenus(props: LayoutProProps) {
@@ -179,16 +168,12 @@ function useHeaderMenus(props: LayoutProProps) {
   })
 }
 
-function useSiderMenus(
-  props: LayoutProProps,
-  activeHeaderKeys: Ref<VKey[]>,
-  mode: ComputedRef<LayoutProModeTypes>,
-): ComputedRef<LayoutProMenuData[]> {
+function useSiderMenus(props: LayoutProProps, activeHeaderKeys: Ref<VKey[]>): ComputedRef<LayoutProMenuData[]> {
   return computed(() => {
-    if (['mixin', 'sider'].includes(mode.value)) {
+    if (['mixin', 'sider'].includes(props.mode)) {
       return props.menus
     }
-    if (mode.value === 'header') {
+    if (props.mode === 'header') {
       return []
     }
     if (activeHeaderKeys.value.length === 0) {
@@ -252,9 +237,9 @@ function useSiderExpandedKeys(mode: ComputedRef<LayoutProSiderMode>, siderMenus:
   }
 }
 
-function useTheme(props: LayoutProProps, config: LayoutProConfig) {
+function useTheme(props: LayoutProProps) {
   return computed<SiderHeaderTheme>(() => {
-    const curTheme = props.theme ?? config.theme
+    const curTheme = props.theme
     if (isString(curTheme)) {
       return {
         sider: curTheme,
@@ -265,22 +250,10 @@ function useTheme(props: LayoutProProps, config: LayoutProConfig) {
   })
 }
 
-function useIndent(props: LayoutProProps, config: LayoutProConfig) {
-  return computed(() => props.indent ?? config.indent)
-}
-
-function useMode(props: LayoutProProps, config: LayoutProConfig) {
-  return computed(() => props.mode ?? config.mode)
-}
-
-function useFixed(props: LayoutProProps, config: LayoutProConfig) {
-  return computed(() => props.fixed ?? config.fixed)
-}
-
-function useShow(realMode: ComputedRef<LayoutProModeTypes>, siderMenu: ComputedRef<LayoutProMenuData[]>) {
-  const headerShow = computed(() => ['header', 'mixin', 'both'].includes(realMode.value))
-  const headerNavShow = computed(() => ['header', 'both'].includes(realMode.value))
-  const siderShow = computed(() => ['sider', 'mixin', 'both'].includes(realMode.value) && siderMenu.value.length > 0)
+function useShow(props: LayoutProProps, siderMenu: ComputedRef<LayoutProMenuData[]>) {
+  const headerShow = computed(() => ['header', 'mixin', 'both'].includes(props.mode))
+  const headerNavShow = computed(() => ['header', 'both'].includes(props.mode))
+  const siderShow = computed(() => ['sider', 'mixin', 'both'].includes(props.mode) && siderMenu.value.length > 0)
   return {
     headerShow,
     headerNavShow,
@@ -288,8 +261,8 @@ function useShow(realMode: ComputedRef<LayoutProModeTypes>, siderMenu: ComputedR
   }
 }
 
-function useSiderMenuMode(props: LayoutProProps, config: LayoutProConfig) {
-  return computed(() => (convertCssPixel(props.indent ?? config.indent) === '0px' ? 'vertical' : 'inline'))
+function useSiderMenuMode(props: LayoutProProps) {
+  return computed(() => (convertCssPixel(props.indent) === '0px' ? 'vertical' : 'inline'))
 }
 
 function useAvailableMenus(props: LayoutProProps) {
@@ -325,9 +298,9 @@ function useActiveKey(
 }
 
 function useActiveHeaderKey(
+  props: LayoutProProps,
   headerMenus: ComputedRef<LayoutProHeaderMenu[]>,
   activePath: ComputedRef<LayoutProMenuPath[]>,
-  mode: ComputedRef<LayoutProModeTypes>,
 ) {
   const activeHeaderKeys = ref<VKey[]>([])
 
@@ -336,7 +309,7 @@ function useActiveHeaderKey(
   }
 
   watch(
-    [headerMenus, activePath, mode],
+    [headerMenus, activePath, () => props.mode],
     ([headerMenus$$, activePath$$, mode$$]) => {
       if (mode$$ === 'both') {
         // both情况下，顶部导航栏只展示一层菜单节点

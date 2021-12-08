@@ -60,7 +60,7 @@ export default defineComponent({
       const { disabled, icon, label } = props
       const prefixCls = mergedPrefixCls.value
 
-      const iconNode = getIconNode({ slotCfg: slots.icon, propCfg: icon })
+      const iconNode = getIconNode(slots.icon, icon)
       const iconWrapper = iconNode ? <span class={`${prefixCls}-icon`}>{iconNode}</span> : undefined
 
       const labelNode = <span> {slots.default?.() ?? label}</span>
