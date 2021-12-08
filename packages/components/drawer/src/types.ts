@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private'
 import type { HeaderProps } from '@idux/components/header'
@@ -42,6 +43,7 @@ export const drawerProps = {
   maskClosable: IxPropTypes.bool,
   offset: IxPropTypes.oneOfType([String, Number]).def(0),
   placement: IxPropTypes.oneOf<DrawerPlacement>(['top', 'bottom', 'start', 'end']).def('end'),
+  scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
   target: ɵPortalTargetDef,
   width: IxPropTypes.oneOfType([String, Number]),
   wrapperClassName: IxPropTypes.string,

@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private'
 import type { ButtonProps } from '@idux/components/button'
@@ -45,6 +46,7 @@ export const modalProps = {
   offset: IxPropTypes.oneOfType([String, Number]).def(128),
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
+  scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
   target: ɵPortalTargetDef,
   title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   type: IxPropTypes.oneOf<ModalType>(['default', 'confirm', 'info', 'success', 'warning', 'error']).def('default'),

@@ -56,19 +56,18 @@ export class BlockScrollStrategy implements ScrollStrategy {
     if (!sameTargetTarget) {
       cacheScroll = getScroll(target)
       cacheStyle = { top: target.style.top, left: target.style.left }
-
-      target.style.top = convertCssPixel(-cacheScroll.scrollTop)
-      target.style.left = convertCssPixel(-cacheScroll.scrollLeft)
     } else {
       cacheScroll = sameTargetTarget.cacheScroll
       cacheStyle = sameTargetTarget.cacheStyle
     }
+    cacheStrategy.push({ uid, target, className, cacheScroll, cacheStyle })
 
-    if (!target.classList.contains(className)) {
+    if (!target.classList.contains(className) && this.isScrolled()) {
+      target.style.top = convertCssPixel(-cacheScroll.scrollTop)
+      target.style.left = convertCssPixel(-cacheScroll.scrollLeft)
+
       addClass(target, className)
     }
-
-    cacheStrategy.push({ uid, target, className, cacheScroll, cacheStyle })
   }
 
   /** Unblocks scroll while the attached overlay is open. */
@@ -110,5 +109,11 @@ export class BlockScrollStrategy implements ScrollStrategy {
       currStrategy.className = this.className
       this.enable()
     }
+  }
+
+  private isScrolled(): boolean {
+    const { target } = this
+
+    return target.scrollHeight > target.clientHeight
   }
 }
