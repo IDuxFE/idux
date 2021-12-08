@@ -23,7 +23,6 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-button`)
-    const config = useGlobalConfig('button')
 
     const groupProps = inject(buttonToken, {})
     const formContext = inject(FORM_TOKEN, null)
@@ -31,7 +30,7 @@ export default defineComponent({
     const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const hasDefaultSlot = computed(() => hasSlot(slots))
 
-    const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? config.size)
+    const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? 'md')
     const classes = computed(() => {
       const { block, danger, disabled, ghost, loading, icon, shape = groupProps.shape } = props
       const prefixCls = mergedPrefixCls.value

@@ -7,10 +7,11 @@
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
-import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
+import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
@@ -28,19 +29,12 @@ import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { VNode } from 'vue'
 
-import { PortalTargetType } from '@idux/cdk/portal'
-import { DatePickerType } from '@idux/components/date-picker/src/types'
-
 // Common
 export interface CommonConfig {
   prefixCls: string
 }
 
 // General
-
-export interface ButtonConfig {
-  size: ButtonSize
-}
 
 export interface IconConfig {
   loadIconDynamically?: (iconName: string) => Promise<string>
@@ -395,8 +389,6 @@ export interface AnchorConfig {
 export interface GlobalConfig {
   // Common
   common: CommonConfig
-  // General
-  button: ButtonConfig
   icon: IconConfig
   tag: TagConfig
   // Layout

@@ -5,7 +5,7 @@ import { createGlobalConfig, useGlobalConfig } from '../src/globalConfig'
 const ChildComponent = {
   template: `<div>{{ config.size }}</div>`,
   setup() {
-    const config = useGlobalConfig('button')
+    const config = useGlobalConfig('form')
     return { config }
   },
 }
@@ -14,14 +14,14 @@ const ParentComponent = {
   components: { ChildComponent },
   template: `<ChildComponent />`,
   setup() {
-    const { changeConfig } = useGlobalConfig('button', { size: 'lg' })
+    const [, changeConfig] = useGlobalConfig('form', true)
     return { changeConfig }
   },
 }
 
-describe('globalConfig.ts', () => {
+describe('globalConfig', () => {
   test('createGlobalConfig work', async () => {
-    const config = createGlobalConfig({ button: { size: 'lg' } })
+    const config = createGlobalConfig({ form: { size: 'lg' } })
 
     const wrapper = mount(ChildComponent, { global: { plugins: [config] } })
 

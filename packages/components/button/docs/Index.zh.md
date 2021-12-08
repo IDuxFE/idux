@@ -39,7 +39,7 @@ cover:
 | `ghost` | 设置幽灵状态 | `boolean` | - | - |- |
 | `disabled` | 设置禁用状态 | `boolean` | - | - |- |
 | `loading` | 设置加载中状态 | `boolean` |  - | - |- |
-| `size` | 设置按钮大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | ✅ |- |
+| `size` | 设置按钮大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | - |- |
 | `shape` | 设置按钮形状 | `'circle' \| 'round'` | - | - |- |
 | `block` | 将按钮宽度调整为自适应其父元素的宽度 | `boolean` | - | - |- |
 | `icon` | 设置图标类型 | `string \| #icon` | - | - | `loading` 为 `true` 时无效 |
