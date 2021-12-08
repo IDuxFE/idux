@@ -49,8 +49,15 @@ export default defineComponent({
     const config = useGlobalConfig('tree')
     const getNodeKey = useGetNodeKey(props, config)
     const { mergedNodes, mergedNodeMap } = useMergeNodes(props, getNodeKey)
-    const searchedKeys = useSearchable(props, mergedNodeMap)
-    const expandableContext = useExpandable(props, config, getNodeKey, mergedNodeMap, searchedKeys)
+    const { searchedKeys, lastEffectiveSearchedKeys } = useSearchable(props, mergedNodeMap)
+    const expandableContext = useExpandable(
+      props,
+      config,
+      getNodeKey,
+      mergedNodeMap,
+      searchedKeys,
+      lastEffectiveSearchedKeys,
+    )
     const flattedNodes = useFlattedNodes(mergedNodes, expandableContext)
     const checkableContext = useCheckable(props, mergedNodeMap)
     const dragDropContext = useDragDrop(props, expandableContext)

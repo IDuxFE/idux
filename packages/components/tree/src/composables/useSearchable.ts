@@ -8,18 +8,22 @@
 import type { TreeNode, TreeProps } from '../types'
 import type { MergedNode } from './useDataSource'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { callChange } from '../utils'
 
 const defaultSearchedKeys: VKey[] = []
 
-export function useSearchable(
-  props: TreeProps,
-  mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
-): ComputedRef<VKey[]> {
+export interface SearchableContext {
+  searchedKeys: ComputedRef<VKey[]>
+  lastEffectiveSearchedKeys: Ref<VKey[]>
+}
+
+export function useSearchable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): SearchableContext {
+  const lastEffectiveSearchedKeys = ref<VKey[]>([])
+
   const searchedKeys = computed(() => {
     const { searchValue, searchFn } = props
     if (!searchValue && !searchFn) {
@@ -31,12 +35,17 @@ export function useSearchable(
         keys.push(node.key)
       }
     })
+
+    if (keys.length) {
+      lastEffectiveSearchedKeys.value = keys
+    }
+
     return keys
   })
 
   watch(searchedKeys, currKeys => callChange(mergedNodeMap, currKeys, props.onSearchedChange))
 
-  return searchedKeys
+  return { searchedKeys, lastEffectiveSearchedKeys }
 }
 
 function checkNodeIsMatched(
