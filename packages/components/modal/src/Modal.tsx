@@ -6,12 +6,12 @@
  */
 
 import type { ModalProps } from './types'
-import type { ModalConfig } from '@idux/components/config'
+import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
-import { CdkPortal, covertPortalTarget } from '@idux/cdk/portal'
+import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private'
@@ -32,7 +32,7 @@ export default defineComponent({
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
-    const target = useTarget(props, config, mergedPrefixCls, mask, mergedVisible)
+
     const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, setVisible)
 
     provide(modalToken, {
@@ -51,6 +51,9 @@ export default defineComponent({
     const apis = { open, close, cancel, ok }
     provide(MODAL_TOKEN, apis)
     expose(apis)
+
+    useScrollStrategy(props, mask, mergedVisible)
+    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {
@@ -89,29 +92,19 @@ function useVisible(props: ModalProps) {
   return { visible, setVisible, animatedVisible, mergedVisible }
 }
 
-function useTarget(
-  props: ModalProps,
-  config: ModalConfig,
-  mergedPrefixCls: ComputedRef<string>,
-  mask: ComputedRef<boolean>,
-  mergedVisible: ComputedRef<boolean>,
-) {
-  const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
-  let scrollStrategy: BlockScrollStrategy | undefined
+function useScrollStrategy(props: ModalProps, mask: ComputedRef<boolean>, mergedVisible: ComputedRef<boolean>) {
+  let scrollStrategy: ScrollStrategy | undefined
 
   onMounted(() => {
-    watch(target, value => scrollStrategy?.update({ target: covertPortalTarget(value) }))
     watch(
       [mask, mergedVisible],
       ([maskValue, visible]) => {
-        if (!maskValue) {
+        if (!maskValue || !visible) {
+          scrollStrategy?.disable()
           return
         }
-        if (!visible) {
-          scrollStrategy?.disable()
-        }
         if (!scrollStrategy) {
-          scrollStrategy = new BlockScrollStrategy({ target: covertPortalTarget(target.value) })
+          scrollStrategy = props.scrollStrategy ?? new BlockScrollStrategy()
         }
         scrollStrategy.enable()
       },
@@ -120,8 +113,6 @@ function useTarget(
   })
 
   onBeforeUnmount(() => scrollStrategy?.disable())
-
-  return target
 }
 
 function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
