@@ -32,6 +32,7 @@ export function useExpandable(
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
   searchedKeys: ComputedRef<VKey[]>,
 ): ExpandableContext {
+  const { onExpand, onExpandedChange } = props
   const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
@@ -41,7 +42,9 @@ export function useExpandable(
     if (searchedKeys.value.length) {
       setExpandWithSearch(searchedKeys.value)
     } else if (expandedKeys.value.length === 0 && props.defaultExpandAll) {
-      setExpandedKeys(getAllParentKeys(mergedNodeMap.value))
+      const allParentKeys = getAllParentKeys(mergedNodeMap.value)
+      setExpandedKeys(allParentKeys)
+      callChange(mergedNodeMap, allParentKeys, onExpandedChange)
     }
   })
 
@@ -56,6 +59,7 @@ export function useExpandable(
       getParentKeys(nodeMap, nodeMap.get(key)).forEach(parentKey => keySet.add(parentKey))
     })
     setExpandedKeys([...keySet])
+    callChange(mergedNodeMap, [...keySet], onExpandedChange)
   }
 
   const handleExpand = async (key: VKey, rawNode: TreeNode) => {
@@ -95,7 +99,6 @@ export function useExpandable(
   }
 
   const handleChange = (expanded: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
-    const { onExpand, onExpandedChange } = props
     callEmit(onExpand, !expanded, rawNode)
     setExpandedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onExpandedChange)
