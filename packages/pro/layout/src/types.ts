@@ -8,9 +8,7 @@
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { MenuClickOptions, MenuData, MenuDivider, MenuItemGroup, MenuSub } from '@idux/components/menu'
-import type { DefineComponent, HTMLAttributes, Ref } from 'vue'
-
-import { VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, Ref, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -21,8 +19,6 @@ type SiderHeaderValue<T> = {
   sider: T
   header: T
 }
-
-export type A = Omit<Extract<MenuData, MenuItemGroup | MenuSub>, 'children'>
 
 export type SiderHeaderTheme = SiderHeaderValue<typeof themes[number]>
 
@@ -39,6 +35,7 @@ export type LayoutProAvailableMenu = Exclude<LayoutProMenuData, MenuDivider> & {
   children: LayoutProAvailableMenu[]
 }
 export type LayoutProMenuPath = Pick<LayoutProAvailableMenu, 'key' | 'label' | 'type'>
+export type HeaderMenu = LayoutProMenuData[] | Omit<LayoutProMenuData, 'children'>[]
 
 export const layoutProProps = {
   collapsed: IxPropTypes.bool.def(false),

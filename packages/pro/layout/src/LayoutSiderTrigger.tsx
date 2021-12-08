@@ -16,12 +16,10 @@ import { IxIcon } from '@idux/components/icon'
 
 import { LayoutProToken } from './token'
 import { layoutSiderTriggerProps } from './types'
+import { layoutSiderTriggerCls as cmpCls } from './util/prefix'
 
 const defaultFoldIcon = 'menu-fold'
 const defaultUnfoldIcon = 'menu-unfold'
-
-const prefixCls = 'ix'
-const cmpCls = `${prefixCls}-layout-pro-ctrl`
 
 export default defineComponent({
   name: 'IxLayoutSiderTrigger',
