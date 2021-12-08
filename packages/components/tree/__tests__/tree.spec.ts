@@ -827,7 +827,6 @@ describe('Tree', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-
     await wrapper.setProps({ searchValue: '0-0' })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -835,6 +834,10 @@ describe('Tree', () => {
     // not match
     await wrapper.setProps({ searchValue: '0-0-0-0' })
 
+    expect(wrapper.html()).toMatchSnapshot()
+
+    // setValue = ''
+    await wrapper.setProps({ searchValue: '' })
     expect(wrapper.html()).toMatchSnapshot()
   })
 
