@@ -14,7 +14,7 @@ import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, wa
 
 import { isNumber, isObject, isString } from 'lodash-es'
 
-import { useScreens } from '@idux/cdk/breakpoint'
+import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { callEmit, convertCssPixel, hasSlot, offResize, onResize } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
@@ -107,7 +107,7 @@ const useClasses = (
 const useSizeStyle = (
   size: ComputedRef<AvatarSize | Partial<Record<BreakpointKey, number>>>,
 ): ComputedRef<CSSProperties> => {
-  const screens = useScreens()
+  const breakpoints = useSharedBreakpoints()
   return computed(() => {
     let currSize: number | undefined
 
@@ -115,7 +115,7 @@ const useSizeStyle = (
     if (isNumber(sizeValue)) {
       currSize = sizeValue
     } else if (isObject(sizeValue)) {
-      const currBreakpoint = (Object.keys(screens) as BreakpointKey[]).find(key => screens[key])!
+      const currBreakpoint = (Object.keys(breakpoints) as BreakpointKey[]).find(key => breakpoints[key])!
       currSize = sizeValue[currBreakpoint]
     }
 

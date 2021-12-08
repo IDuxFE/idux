@@ -36,8 +36,10 @@ single: true
 | `pull` | 栅格向左移动格数 | `number` | - | - | - |
 | `push` | 栅格向右移动格数 | `number` | - | - | - |
 | `span` | 栅格占位格数 | `number` | - | -  | - |
-| `xs` | `< 768px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | `number \| object` | - | -  | - |
-| `sm` | `≥ 768px && < 1024px` 响应式栅格，同上 | `number/object` | - | -  | - |
-| `md` | `≥ 1024px && < 1280px` 响应式栅格，同上 | `number/object` | - | -  | - |
-| `lg` | `≥ 1280px && < 1720px` 响应式栅格，同上 | `number/object` | - | -  | - |
-| `xl` | `≥ 1720px` 响应式栅格，同上 | `number/object` | - | -  | - |
+| `xs` | 响应式栅格，可为栅格数或一个包含其他属性的对象 | `number \| object` | - | -  | - |
+| `sm` | 响应式栅格，同上 | `number/object` | - | -  | - |
+| `md` | 响应式栅格，同上 | `number/object` | - | -  | - |
+| `lg` | 响应式栅格，同上 | `number/object` | - | -  | - |
+| `xl` | 响应式栅格，同上 | `number/object` | - | -  | - |
+
+响应式栅格请参考[断点](/cdk/breakpoint/zh), 如果你修改默认的断点，请同步修改相关的 `less` 变量。

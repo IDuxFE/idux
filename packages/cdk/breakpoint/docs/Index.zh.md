@@ -1,86 +1,70 @@
 ---
 category: cdk
-type:
 title: Breakpoint
 subtitle: 断点
 single: true
 ---
 
-提供构建响应式系统的工具, 以响应屏幕尺寸的变化：
+提供构建响应式系统的工具, 以响应屏幕尺寸的变化。
 
-## API
-
-### BREAKPOINTS
-
-默认提供的 5 个断点
+默认提供了 5 个断点：
 
 | 属性 | 说明 |
 | --- | --- |
-| `xs` | `< 768px` |
-| `sm` | `≥ 768px && < 1024px` |
-| `md` | `≥ 1024px && < 1280px` |
+| `xs` | `< 600px` |
+| `sm` | `≥ 600px && < 960px` |
+| `md` | `≥ 960px && < 1280px` |
 | `lg` | `≥ 1280px && < 1720px` |
 | `xl` | `≥ 1720px` |
 
-### matchMedia
-
-媒体匹配器，主要用于抹平各个浏览器的实现差异, 参数支持：`string`
-
-```ts
-const mediaQueryList = matchMedia(BREAKPOINTS.sm);
-```
-
-### isMatched
-
-非响应式的断点匹配, 参数支持: `string | string[]`
-
-```ts
-const { xs, sm, lg } = BREAKPOINTS
-const isXs = isMatched(xs)
-const isSmOrLg = isMatched([sm, lg])
-```
+## API
 
 ### useBreakpoints
 
-断点观察者, 响应式的监听断点变化, 参数支持: `string | string[]`
+断点观察者, 响应式的监听断点变化, 如果不传参数，会使用默认断点。
 
 ```ts
-const { xs, sm } = BREAKPOINTS
-const state = useBreakpoints([xs, sm])
-
-watchEffect(() => {
-  console.log('matches', state.matches)
-  console.log('breakpoints', state.breakpoints)
-})
+export function useBreakpoints(): Record<BreakpointKey, boolean>
+export function useBreakpoints<T extends string>(value: Record<T, string>): Record<T, boolean>
 ```
 
-### useBreakpointsMatch
-
-对断点观察者的进一步封装，更易于使用。
+可以通过 `BREAKPOINTS_TOKEN` 来修改默认断点。
 
 ```ts
-const { xs, sm } = BREAKPOINTS
-const md = '(min-width: 1024px) and (max-width: 1365.99px)'
-const all = 'all'
-const state = useBreakpointsMatch({ xs, sm, md, all })
+import { provide } from 'vue'
+import { BREAKPOINTS_TOKEN } from '@idux/cdk/breakpoint'
 
-watchEffect(() => {
-  console.log('isXs', state.xs)
-  console.log('isSm', state.sm)
-  console.log('isMd', state.md)
-  console.log('isAll', state.all)
-})
+provide(BREAKPOINTS_TOKEN, { .../* your breakpoints*/ })
 ```
 
-### useScreens
+### useSharedBreakpoints
 
-根据默认的 `BREAKPOINTS`，响应式的判断屏幕大小，。
+通过 `createSharedComposable` 创建的全局共享的 `useBreakpoints`。
 
 ```ts
-const state = useScreens()
+export const useSharedBreakpoints: () => Record<BreakpointKey, boolean>
+```
 
-watchEffect(() => {
-  console.log('isXs', state.xs)
-  console.log('isSm', state.sm)
-})
-``
+### useMediaQuery
+
+媒体匹配观察者, 每当匹配结果发生变化，就会返回一个新的计算结果。
+
+```ts
+export function useMediaQuery(value: string | string[]): ComputedRef<MediaQueryState>
+```
+
+### isMediaMatched
+
+非响应式的媒体匹配。
+
+```ts
+export function isMediaMatched(value: string | string[]): boolean
+```
+
+### matchMedia
+
+媒体匹配器，主要用于抹平各个浏览器的实现差异
+
+```ts
+export const matchMedia: (query: string) => MediaQueryList
+```

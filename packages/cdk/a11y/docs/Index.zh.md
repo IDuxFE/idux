@@ -93,10 +93,10 @@ export interface FocusMonitorOptions {
 
 #### useSharedFocusMonitor
 
-创建一个全局的焦点管理器。
+通过 `createSharedComposable` 创建的全局共享的 `useFocusMonitor`。
 
 ```ts
-export const useSharedFocusMonitor: (options?: FocusMonitorOptions) => FocusMonitor
+export const useSharedFocusMonitor: () => FocusMonitor
 ```
 
 ## FAQ

@@ -6,7 +6,7 @@
  */
 
 import type { RowGutter, RowProps } from './types'
-import type { Screens } from '@idux/cdk/breakpoint'
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { RowConfig } from '@idux/components/config'
 import type { CSSProperties, ComputedRef } from 'vue'
 
@@ -14,7 +14,7 @@ import { computed, defineComponent, provide } from 'vue'
 
 import { isArray, isObject, isUndefined } from 'lodash-es'
 
-import { BREAKPOINTS_KEYS, useScreens } from '@idux/cdk/breakpoint'
+import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -54,8 +54,8 @@ function useClasses(props: RowProps, config: RowConfig) {
 }
 
 function useGutter(props: RowProps) {
-  const screens = useScreens()
-  return computed(() => normalizeGutter(props.gutter, screens))
+  const breakpoints = useSharedBreakpoints()
+  return computed(() => normalizeGutter(props.gutter, breakpoints))
 }
 
 function useStyle(gutter: ComputedRef<[number, number]>) {
@@ -76,14 +76,14 @@ function useStyle(gutter: ComputedRef<[number, number]>) {
 }
 
 // gutter: RowGutter => [0, 0]
-function normalizeGutter(propGutter: RowGutter, screens: Screens) {
+function normalizeGutter(propGutter: RowGutter, breakpoints: Record<BreakpointKey, boolean>) {
   const results: [number, number] = [0, 0]
 
   const normalizedGutters = isArray(propGutter) ? propGutter : [propGutter, 0]
   normalizedGutters.forEach((gutter, index) => {
     if (isObject(gutter)) {
       BREAKPOINTS_KEYS.some(key => {
-        if (!isUndefined(gutter[key]) && screens[key]) {
+        if (!isUndefined(gutter[key]) && breakpoints[key]) {
           results[index] = gutter[key]
           return true
         }

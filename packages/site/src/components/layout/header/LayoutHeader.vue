@@ -28,15 +28,15 @@ import { appContextToken } from '../../../context'
 
 export default defineComponent({
   setup() {
-    const { page, screens } = inject(appContextToken)!
+    const { page, breakpoints } = inject(appContextToken)!
     const classes = computed(() => {
       return {
         header: true,
         'home-header': page.value === 'home',
       }
     })
-    const isXs = computed(() => screens.xs)
-    const isSm = computed(() => screens.sm)
+    const isXs = computed(() => breakpoints.xs)
+    const isSm = computed(() => breakpoints.sm)
     return { classes, isXs, isSm }
   },
 })

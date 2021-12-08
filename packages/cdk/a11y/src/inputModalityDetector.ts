@@ -211,4 +211,4 @@ export function useInputModalityDetector(options?: InputModalityDetectorOptions)
   }
 }
 
-export const useSharedInputModalityDetector = createSharedComposable(useInputModalityDetector)
+export const useSharedInputModalityDetector = createSharedComposable(() => useInputModalityDetector())
