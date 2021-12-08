@@ -1,0 +1,85 @@
+@import './themes/default.less';
+
+@input-number-prefix: ~'@{idux-prefix}-input-number';
+
+.@{input-number-prefix} {
+  display: inline-block;
+  width: @input-number-width-md;
+
+  & .@{idux-prefix}-input-wrapper {
+    border-radius: 0;
+  }
+
+  & .@{idux-prefix}-input-inner {
+    text-align: center;
+  }
+
+  & .@{idux-prefix}-input-addon {
+    padding: 0 !important;
+    background-color: @input-number-button-bg;
+  }
+
+  &-sm {
+    width: @input-number-width-sm;
+    font-size: @input-number-font-size-sm;
+  }
+
+  &-md {
+    width: @input-number-width-md;
+    font-size: @input-number-font-size-md;
+  }
+
+  &-lg {
+    width: @input-number-width-lg;
+    font-size: @input-number-font-size-lg;
+  }
+
+  &-disabled {
+    & .@{input-number-prefix}-decrease,
+    & .@{input-number-prefix}-increase {
+      cursor: not-allowed;
+      color: @input-number-disabled-color !important;
+      background-color: @input-number-disabled-bg;
+    }
+  }
+
+  &-illegal {
+    & .@{idux-prefix}-input-inner {
+      color: @input-number-error;
+    }
+  }
+
+  &-decrease,
+  &-increase {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &&-sm {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-sm;
+    }
+  }
+
+  &&-md {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-md;
+    }
+  }
+
+  &&-lg {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-lg;
+    }
+  }
+
+  & &-decrease:hover,
+  &-increase:hover {
+    color: @input-number-button-hover-color;
+  }
+}

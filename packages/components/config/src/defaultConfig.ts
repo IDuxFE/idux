@@ -27,6 +27,7 @@ import type {
   IconConfig,
   ImageConfig,
   InputConfig,
+  InputNumberConfig,
   ListConfig,
   MenuConfig,
   MenuSubConfig,
@@ -135,6 +136,11 @@ const datePicker = shallowReactive<DatePickerConfig>({
 })
 
 const dateRangePicker = shallowReactive<DateRangePickerConfig>({ separator: 'swap-right' })
+
+const inputNumber = shallowReactive<InputNumberConfig>({
+  keyboard: true,
+  size: 'md',
+})
 
 const input = shallowReactive<InputConfig>({
   borderless: false,
@@ -380,6 +386,7 @@ export const defaultConfig: GlobalConfig = {
   datePicker,
   dateRangePicker,
   input,
+  inputNumber,
   rate,
   radio,
   select,
