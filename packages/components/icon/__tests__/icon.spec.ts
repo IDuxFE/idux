@@ -2,7 +2,7 @@ import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import { useGlobalConfig } from '@idux/components/config'
+import { createGlobalConfig } from '@idux/components/config'
 
 import IxIcon from '../src/Icon'
 import { addIconDefinitions } from '../src/helper'
@@ -32,13 +32,11 @@ describe('Icon', () => {
 
   test('dynamic load work', async () => {
     const loadIconDynamically = async (iconName: string) => `<svg data-icon="${iconName}"></svg>`
+    const config = createGlobalConfig({ icon: { loadIconDynamically } })
 
-    const wrapper = mount({
-      components: { IxIcon },
-      template: `<IxIcon name="dynamic-up" />`,
-      setup() {
-        useGlobalConfig('icon', { loadIconDynamically })
-      },
+    const wrapper = IconMount({
+      props: { name: 'dynamic-up' },
+      global: { plugins: [config] },
     })
 
     await flushPromises()
