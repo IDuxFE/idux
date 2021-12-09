@@ -1,28 +1,25 @@
 <template>
-  <div class="badge-demo">
-    <IxBadge count="5">
+  <div class="capping">
+    <IxBadge count="99">
       <a href="#"></a>
     </IxBadge>
 
-    <IxBadge count="0" showZero>
+    <IxBadge count="100">
       <a href="#"></a>
     </IxBadge>
 
-    <IxBadge dot>
+    <IxBadge count="1000" :overflowCount="10">
       <a href="#"></a>
     </IxBadge>
 
-    <IxBadge>
+    <IxBadge count="1000" :overflowCount="999">
       <a href="#"></a>
-      <template #count>
-        <IxIcon name="clock-circle"></IxIcon>
-      </template>
     </IxBadge>
   </div>
 </template>
 
 <style lang="less" scoped>
-.badge-demo {
+.capping {
   & > * {
     margin-right: 20px;
     a {

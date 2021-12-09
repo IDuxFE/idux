@@ -2,7 +2,7 @@ import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import IxBadge from '../src/Badge.vue'
+import IxBadge from '../src/Badge'
 import { BadgeProps } from '../src/types'
 
 describe('Badge', () => {
