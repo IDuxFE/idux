@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{skeleton-prefix} {
+  .reset-component();
+
   margin-bottom: @skeleton-margin-bottom;
 
   &-loader {

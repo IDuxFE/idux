@@ -15,7 +15,7 @@ import {
 } from './gulpUtils'
 
 const { packageRoot, projectRoot } = gulpConfig
-const { cdkDirname, componentsDirname, distDirname } = gulpConfig.build
+const { cdkDirname, componentsDirname, proDirname, distDirname } = gulpConfig.build
 
 const cdkDistDirname = join(distDirname, 'cdk')
 const cdkOptions = {
@@ -24,8 +24,6 @@ const cdkOptions = {
   packageName: 'cdk',
 }
 
-export const buildCdk = series(clean(cdkDistDirname), buildPackage(cdkOptions), complete('CDK'))
-
 const componentsDistDirname = join(distDirname, 'components')
 const componentsOptions = {
   targetDirname: componentsDirname,
@@ -33,12 +31,21 @@ const componentsOptions = {
   packageName: 'components',
 }
 
+const proDistDirname = join(distDirname, 'pro')
+const proOptions = {
+  targetDirname: proDirname,
+  distDirname: proDistDirname,
+  packageName: 'pro',
+}
+
+export const buildCdk = series(clean(cdkDistDirname), buildPackage(cdkOptions), buildIndex(cdkOptions), complete('CDK'))
 export const buildComponents = series(
   clean(componentsDistDirname),
   buildPackage(componentsOptions),
   buildIndex(componentsOptions),
   complete('Components'),
 )
+export const buildPro = series(clean(proDistDirname), buildPackage(proOptions), buildIndex(proOptions), complete('Pro'))
 
 const declarationDirname = join(distDirname, 'packages')
 export const buildDeclaration = series(
@@ -50,6 +57,7 @@ export const buildDeclaration = series(
 export const buildStyle = series(
   _buildStyle(cdkDirname, cdkDistDirname, true),
   _buildStyle(componentsDirname, componentsDistDirname, false),
+  _buildStyle(proDirname, proDistDirname, false),
   complete('Style'),
 )
 

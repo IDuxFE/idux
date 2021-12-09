@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixins.less';
 
 .@{result-prefix} {
+  .reset-component();
+
   padding: @result-padding;
   text-align: @result-text-align;
 

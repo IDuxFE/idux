@@ -7,8 +7,8 @@
 
 import type { App, Directive } from 'vue'
 
-import { version } from '@idux/components/version'
 import { IxLayoutPro, IxLayoutSiderTrigger } from '@idux/pro/layout'
+import { version } from '@idux/pro/version'
 
 const directives: Record<string, Directive> = {}
 

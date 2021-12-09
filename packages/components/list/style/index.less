@@ -1,4 +1,4 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 @border: @list-border-size @border-style @list-border-color;
 
@@ -7,6 +7,8 @@
 @spacing-small: 8px 16px;
 
 .@{list-prefix} {
+  .reset-component();
+
   font-size: @list-font-size-md;
 
   &-border {

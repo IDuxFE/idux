@@ -1,11 +1,15 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{stepper-prefix} {
+  .reset-component();
+
   display: flex;
   padding: @spacing-gutter;
 }
 
 .@{stepper-item-prefix} {
+  .reset-component();
+
   display: inline-block;
   flex: 1;
   font-size: @font-size-md;

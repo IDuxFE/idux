@@ -1,10 +1,11 @@
+/* eslint-disable import/order */
+
 import { createApp } from 'vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
 import App from './App.vue'
-// eslint-disable-next-line import/order
-import Idux from './iduxInstall'
+import IduxInstall from './iduxInstall'
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.less'
@@ -25,4 +26,4 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(router).use(Idux).mount('#app')
+createApp(App).use(router).use(IduxInstall).mount('#app')

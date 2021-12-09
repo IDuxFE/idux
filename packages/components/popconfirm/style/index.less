@@ -1,9 +1,9 @@
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
-@import '../../_private/overlay/style/index.less';
-
-@import './themes/default.less';
 
 .@{popconfirm-prefix} {
+  .reset-component();
+
   z-index: @popconfirm-zindex;
   font-size: @popconfirm-font-size;
   color: @popconfirm-color;

@@ -2,7 +2,6 @@ import { resolve } from 'path'
 
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
-import { IduxResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
@@ -23,29 +22,6 @@ export default defineConfig(({ command }) => {
       Components({
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         dts: true,
-        resolvers: [
-          name => {
-            // where `name` is always CapitalCase
-            if (name === 'CdkPortal') {
-              const path = `@idux/cdk/portal`
-              const sideEffects = undefined
-              return { importName: name, path, sideEffects }
-            } else if (name === 'CdkVirtualScroll') {
-              const path = `@idux/cdk/scroll`
-              const sideEffects = undefined
-              return { importName: name, path, sideEffects }
-            } else if (name === 'IxTab') {
-              const path = `@idux/components/tabs`
-              const sideEffects = undefined
-              return { importName: name, path, sideEffects }
-            } else if (name === 'IxLayoutPro' || name === 'IxLayoutSiderTrigger') {
-              const path = `@idux/pro/layout`
-              const sideEffects = undefined
-              return { importName: name, path, sideEffects }
-            }
-          },
-          IduxResolver(),
-        ],
       }),
       transformIndexPlugin(),
     ],

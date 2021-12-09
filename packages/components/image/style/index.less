@@ -1,4 +1,4 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .ix-image-preview-base-position(@zIndex,@top) {
   position: fixed;
@@ -10,6 +10,8 @@
 }
 
 .@{image-prefix} {
+  .reset-component();
+
   &-img.@{image-preview-prefix}-is {
     cursor: pointer;
   }

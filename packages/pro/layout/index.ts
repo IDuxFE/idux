@@ -19,6 +19,7 @@ export type {
   LayoutProPublicProps as LayoutProProps,
   LayoutSiderTriggerPublicProps as LayoutSiderTriggerProps,
   LayoutProInstance,
+  LayoutProComponent,
   LayoutSiderTriggerInstance,
   LayoutProThemes,
   LayoutProModeTypes,

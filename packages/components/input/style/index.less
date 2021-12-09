@@ -1,9 +1,11 @@
 @import '../../style/mixins/borderless.less';
 @import '../../style/mixins/placeholder.less';
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{input-prefix} {
+  .reset-component();
+
   display: inline-flex;
   width: 100%;
   line-height: @input-line-height;

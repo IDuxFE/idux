@@ -20,7 +20,7 @@ import Trigger from './Trigger'
 import { layoutSiderProps } from './types'
 
 export default defineComponent({
-  name: 'IxLayoutHeader',
+  name: 'IxLayoutSider',
   props: layoutSiderProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')

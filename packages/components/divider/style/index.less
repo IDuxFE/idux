@@ -1,6 +1,8 @@
-@import '../../style/themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{divider-prefix} {
+  .reset-component();
+
   border-top: @border-width-sm solid @border-color;
 
   &-horizontal {

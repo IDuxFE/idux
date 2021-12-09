@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/mixins/ellipsis.less';
 
 .@{anchor-prefix} {
+  .reset-component();
+
   position: relative;
   padding-left: @anchor-border-width;
 

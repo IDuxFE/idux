@@ -1,15 +1,15 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/move.less';
 @import './mixin.less';
 
-@notification-prefix: ~'@{idux-prefix}-notification';
-@icon-prefix: ~'@{idux-prefix}-icon';
-
 .@{notification-prefix} {
+  .reset-component();
+
   display: inline-grid;
   gap: 0 0;
-  grid-template-areas: 'icon main'
-                       'footer footer';
+  grid-template-areas:
+    'icon main'
+    'footer footer';
   grid-template-columns: auto 1fr;
   position: relative;
   padding: @notification-padding;

@@ -1,8 +1,10 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/move.less';
 @import './mixin.less';
 
 .@{message-prefix} {
+  .reset-component();
+
   text-align: center;
   padding: @message-padding;
   font-size: @font-size-md;

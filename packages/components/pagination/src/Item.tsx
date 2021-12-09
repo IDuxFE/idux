@@ -98,7 +98,7 @@ export default defineComponent({
         original = (
           <span class={`${prefixCls}-jumper`}>
             <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-            <IxButton {...commonButtonProps} class={`"${prefixCls}-ellipsis`} icon="ellipsis" disabled={disabled} />
+            <IxButton {...commonButtonProps} class={`${prefixCls}-ellipsis`} icon="ellipsis" disabled={disabled} />
           </span>
         )
       } else if (!isNil(index)) {

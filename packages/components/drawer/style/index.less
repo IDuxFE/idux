@@ -1,7 +1,9 @@
 @import '../../style/mixins/box.less';
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{drawer-prefix} {
+  .reset-component();
+
   position: absolute;
   pointer-events: none;
   width: 100%;

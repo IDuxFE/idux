@@ -1,9 +1,10 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 @import './status.less';
 @import './layout.less';
 
 .@{form-prefix} {
+  .reset-component();
 
   &-sm {
     .form-size(@form-height-sm);
@@ -19,6 +20,8 @@
 }
 
 .@{form-item-prefix} {
+  .reset-component();
+
   margin-bottom: @form-item-margin-bottom;
   vertical-align: top;
 

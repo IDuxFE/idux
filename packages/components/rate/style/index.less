@@ -1,10 +1,11 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{rate-prefix} {
+  .reset-component();
+
   display: inline-block;
   line-height: unset;
   list-style: none;
-  outline: none;
   color: @rate-active-color;
 
   &-item {

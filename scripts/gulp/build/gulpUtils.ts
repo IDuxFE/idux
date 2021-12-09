@@ -174,6 +174,7 @@ export const copyPackageFiles = (distDirname: string, projectRoot: string, packa
       .filter(packageName => !filterPackages.includes(packageName))
       .map(async packageName => {
         await copyFile(join(projectRoot, packageName, 'package.json'), join(distDirname, packageName, 'package.json'))
+        await copyFile(join(projectRoot, packageName, 'types.d.ts'), join(distDirname, packageName, 'types.d.ts'))
         await copyFile(join(packageRoot, 'README.md'), join(distDirname, packageName, 'README.md'))
       })
     done()

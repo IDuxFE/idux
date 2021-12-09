@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{switch-prefix} {
+  .reset-component();
+
   position: relative;
   display: inline-flex;
   align-items: center;

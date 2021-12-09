@@ -1,9 +1,10 @@
 @import '../../style/mixins/box.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/zoom.less';
-@import '../../_private/mask/style/index.less';
-@import './themes/default.less';
 
 .@{modal-prefix} {
+  .reset-component();
+
   position: relative;
   pointer-events: none;
   width: auto;
