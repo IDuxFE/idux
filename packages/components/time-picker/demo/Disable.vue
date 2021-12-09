@@ -15,6 +15,7 @@
   <div class="title">disabled</div>
   <IxSpace>
     <IxTimePicker v-model:value="time" :disabled="disabled" />
+    <IxTimeRangePicker v-model:value="timeRange" :disabled="disabled" />
     <IxButton @click="disabled = !disabled">change disable</IxButton>
   </IxSpace>
 
@@ -28,6 +29,7 @@
 import { ref } from 'vue'
 
 const time = ref()
+const timeRange = ref()
 const disabled = ref(true)
 const readonly = ref(true)
 const hideDisabledOptions = ref(false)
@@ -48,5 +50,8 @@ function disabledSeconds(selectedHour: number, selectedMinute: number, selectedA
 <style scoped lang="less">
 .title {
   padding: 10px 0;
+}
+:deep(.ix-time-picker) {
+  width: 200px;
 }
 </style>

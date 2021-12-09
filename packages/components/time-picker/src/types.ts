@@ -9,41 +9,30 @@ import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import dayjs from 'dayjs/esm'
-
 import { controlPropDef } from '@idux/cdk/forms'
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-
-const basePanelProps = {
-  disabledHours: IxPropTypes.func<(selectedAmPm: string) => number[]>().def(() => []),
-  disabledMinutes: IxPropTypes.func<(selectedHour: number, selectedAmPm: string) => number[]>().def(() => []),
-  disabledSeconds: IxPropTypes.func<
-    (selectedHour: number, selectedMinute: number, selectedAmPm: string) => number[]
-  >().def(() => []),
-
-  hideDisabledOptions: IxPropTypes.bool.def(false),
-  hourStep: IxPropTypes.number.def(1),
-  minuteStep: IxPropTypes.number.def(1),
-  secondStep: IxPropTypes.number.def(1),
-}
-
-export type BasePanelProps = IxInnerPropTypes<typeof basePanelProps>
+import { ɵbaseTimeSelectorProps } from '@idux/components/_private'
 
 const basePickerProps = {
-  ...basePanelProps,
+  ...ɵbaseTimeSelectorProps,
   // v-model
   open: IxPropTypes.bool,
   control: controlPropDef,
+
+  allowInput: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]),
+  autoSwap: IxPropTypes.bool.def(true),
 
   autofocus: IxPropTypes.bool,
   borderless: IxPropTypes.bool,
   clearable: IxPropTypes.bool,
   clearIcon: IxPropTypes.string,
   clearText: IxPropTypes.string,
-  format: IxPropTypes.string.def('HH:mm:ss'),
+  format: IxPropTypes.string,
   overlayClassName: IxPropTypes.string,
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
+  target: ɵPortalTargetDef,
 
   // events
   'onUpdate:open': IxPropTypes.emit<(isOpen: boolean) => void>(),
@@ -56,16 +45,16 @@ export const timePickerProps = {
   ...basePickerProps,
 
   // v-model
-  value: IxPropTypes.object<Date>(),
+  value: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
 
-  defaultOpenValue: IxPropTypes.object<Date>().def(() => dayjs().hour(0).minute(0).second(0).toDate()),
+  defaultOpenValue: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
   disabled: IxPropTypes.bool.def(false),
-  placeholder: IxPropTypes.string.def('请选择时间'),
+  placeholder: IxPropTypes.string,
   readonly: IxPropTypes.bool.def(false),
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: Date) => void>(),
-  onChange: IxPropTypes.emit<(value: Date) => void>(),
+  'onUpdate:value': IxPropTypes.emit<(value: Date | undefined) => void>(),
+  onChange: IxPropTypes.emit<(value: Date | undefined) => void>(),
 }
 
 export type TimePickerProps = IxInnerPropTypes<typeof timePickerProps>
@@ -77,17 +66,16 @@ export const timeRangePickerProps = {
   ...basePickerProps,
 
   // v-model
-  value: IxPropTypes.object<[Date, Date]>(),
+  value: IxPropTypes.object<[number | string | Date | undefined, number | string | Date | undefined]>(),
 
-  defaultOpenValue: IxPropTypes.object<[Date, Date]>(),
-  disabled: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<[boolean, boolean]>()]).def(false),
-  placeholder: IxPropTypes.array<string>().def(['起始时间', '结束时间']),
-  readonly: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<[boolean, boolean]>()]).def(false),
-  separator: IxPropTypes.string,
+  defaultOpenValue: IxPropTypes.object<[number | string | Date | undefined, number | string | Date | undefined]>(),
+  placeholder: IxPropTypes.object<[string, string]>(),
+  readonly: IxPropTypes.bool.def(false),
+  separator: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: [Date, Date]) => void>(),
-  onChange: IxPropTypes.emit<(value: [Date, Date]) => void>(),
+  'onUpdate:value': IxPropTypes.emit<(value: [Date | undefined, Date | undefined] | undefined) => void>(),
+  onChange: IxPropTypes.emit<(value: [Date | undefined, Date | undefined] | undefined) => void>(),
 }
 
 export type TimeRangePickerProps = IxInnerPropTypes<typeof timeRangePickerProps>
@@ -95,50 +83,28 @@ export type TimeRangePickerPublicProps = IxPublicPropTypes<typeof timeRangePicke
 export type TimeRangePickerComponent = DefineComponent<HTMLAttributes & typeof timeRangePickerProps>
 export type TimeRangePickerInstance = InstanceType<DefineComponent<TimeRangePickerProps>>
 
-export const timePickerPanelProps = {
-  ...basePanelProps,
-
-  value: IxPropTypes.object<Date>(),
-  defaultOpenValue: IxPropTypes.object<Date>().def(() => dayjs().hour(0).minute(0).second(0).toDate()),
-  visible: IxPropTypes.bool,
-  hourEnabled: IxPropTypes.bool.def(true),
-  minuteEnabled: IxPropTypes.bool.def(true),
-  secondEnabled: IxPropTypes.bool.def(true),
-  use12Hours: IxPropTypes.bool.def(false),
-  amPmCapital: IxPropTypes.bool.def(true),
-
-  // events
-  'onUpdate:value': IxPropTypes.emit<(value: Date) => void>(),
-  onChange: IxPropTypes.emit<(value: Date) => void>(),
-}
-
-export type TimePickerPanelProps = IxInnerPropTypes<typeof timePickerPanelProps>
-
-export const panelColumnProps = {
-  selectedValue: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.string]).isRequired,
-  options: IxPropTypes.arrayOf(IxPropTypes.object<PanelCell>()).isRequired,
-  visible: IxPropTypes.bool,
-
-  // events
-  onChange: IxPropTypes.emit<(value: number | string) => void>(),
-}
-
-export type PanelColumnProps = IxInnerPropTypes<typeof panelColumnProps>
-
-export interface PanelCell {
-  value: number | string
-  disabled: boolean
-}
-
-export const panelCellProps = {
+export const baseTriggerProps = {
+  borderless: IxPropTypes.bool,
+  clearable: IxPropTypes.bool,
+  clearIcon: IxPropTypes.string,
+  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
+  suffix: IxPropTypes.string,
   disabled: IxPropTypes.bool.def(false),
-  selected: IxPropTypes.bool.def(false),
-  value: IxPropTypes.oneOfType([Number, String]).isRequired,
-
-  // events
-  onChange: IxPropTypes.emit<(value: number | string) => void>(),
+  readonly: IxPropTypes.bool.def(false),
+  focused: IxPropTypes.bool,
+  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onClick: IxPropTypes.emit<(evt: Event) => void>(),
+  onClear: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
+export type BaseTriggerProps = IxInnerPropTypes<typeof baseTriggerProps>
 
-export type PanelCellProps = IxInnerPropTypes<typeof panelCellProps>
+export const timePickerTriggerProps = {
+  value: IxPropTypes.object<Date>(),
+}
+export type TimePickerTriggerProps = IxInnerPropTypes<typeof timePickerTriggerProps>
 
-export type TimePickerPanelColumnType = 'hour' | 'minute' | 'second' | 'AM/PM'
+export const timeRangePickerTriggerProps = {
+  value: IxPropTypes.object<[Date | undefined, Date | undefined]>(),
+}
+export type TimeRangePickerTriggerProps = IxInnerPropTypes<typeof timeRangePickerTriggerProps>

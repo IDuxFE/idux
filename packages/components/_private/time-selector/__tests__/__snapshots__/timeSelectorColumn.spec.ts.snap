@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeSelectorColumn render work 1`] = `
+"<ul class=\\"ix-time-selector-column\\">
+  <li class=\\"ix-time-selector-cell ix-time-selector-cell-selected\\">01</li>
+  <li class=\\"ix-time-selector-cell ix-time-selector-cell-disabled\\">02</li>
+  <li class=\\"ix-time-selector-cell\\">03</li>
+  <li class=\\"ix-time-selector-cell\\">04</li>
+  <li class=\\"ix-time-selector-cell ix-time-selector-cell-disabled\\">05</li>
+</ul>"
+`;
