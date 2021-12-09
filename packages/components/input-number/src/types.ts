@@ -44,4 +44,4 @@ export type InputNumberComponent = DefineComponent<
   Omit<HTMLAttributes, keyof InputNumberPublicProps> & InputNumberPublicProps,
   InputNumberBindings
 >
-export type InputNumberInstance = InstanceType<DefineComponent<InputNumberProps>>
+export type InputNumberInstance = InstanceType<DefineComponent<InputNumberProps, InputNumberBindings>>

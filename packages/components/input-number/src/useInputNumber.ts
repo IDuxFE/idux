@@ -207,6 +207,6 @@ export function getPrecision(value: number | undefined | null): number {
     return 0
   }
 
-  const fraction = String(value).split('.')[1]
-  return fraction ? fraction.length : 0
+  const decimal = String(value).split('.')[1]
+  return decimal ? decimal.length : 0
 }

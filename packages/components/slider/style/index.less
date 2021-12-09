@@ -1,0 +1,185 @@
+.slider-rail() {
+  position: absolute;
+  height: 4px;
+  border-radius: 2px;
+  transition: background-color @transition-duration-slow;
+}
+
+.@{slider-prefix} {
+  position: relative;
+  box-sizing: border-box;
+  height: 12px;
+  margin: 10px 6px;
+  padding: 4px 0;
+  cursor: pointer;
+  touch-action: none;
+
+  &:hover &-rail {
+    background-color: @slider-rail-hover-bg;
+  }
+
+  &:hover &-track {
+    background-color: @slider-track-hover-bg;
+  }
+
+  &-rail {
+    .slider-rail();
+
+    width: 100%;
+    background-color: @slider-rail-bg;
+  }
+
+  &-track {
+    .slider-rail();
+
+    background-color: @slider-track-bg;
+  }
+
+  &-step {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: 0 0;
+  }
+
+  &-dot {
+    position: absolute;
+    top: -2px;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    background-color: @slider-dot-bg;
+    border: @slider-dot-border;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:first-child,
+    &:last-child {
+      margin-left: -4px;
+    }
+
+    &-active {
+      border-color: @slider-dot-active-border-color;
+    }
+  }
+
+  &-thumb {
+    position: absolute;
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    margin-top: -5px;
+    background-color: @slider-thumb-bg;
+    border: @slider-thumb-border;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: @slider-thumb-transition;
+    
+    &:hover {
+      border-color: @slider-thumb-hover-border-color;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: @slider-thumb-focus-border-color;
+      box-shadow: @slider-thumb-focus-box-shadow;
+    }
+  }
+
+  &-mark {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+
+    &-label {
+      position: absolute;
+      display: inline-block;
+      color: @slider-marks-label-color;
+      text-align: center;
+      word-break: keep-all;
+      cursor: pointer;
+      user-select: none;
+
+      &-active {
+        color: @slider-marks-label-active-color;
+      }
+    }
+  }
+
+  &-with-marks {
+    margin-bottom: 44px;
+  }
+
+  &-vertical {
+    width: 12px;
+    height: 100%;
+    margin: 6px 10px;
+    padding: 0 4px;
+
+    & .@{slider-prefix}-rail {
+      width: 4px;
+      height: 100%;
+    }
+
+    & .@{slider-prefix}-track {
+      width: 4px;
+    }
+
+    & .@{slider-prefix}-step {
+      width: 4px;
+      height: 100%;
+    }
+
+    & .@{slider-prefix}-thumb {
+      margin-top: -6px;
+      margin-left: -5px;
+    }
+
+    & .@{slider-prefix}-dot {
+      top: auto;
+      left: 2px;
+      margin-bottom: -4px;
+    }
+
+    & .@{slider-prefix}-mark {
+      top: 0;
+      left: 12px;
+      width: 18px;
+      height: 100%;
+
+      &-label {
+        left: 4px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+
+    & .@{slider-prefix}-track {
+      background-color: @slider-track-disabled-bg !important;
+    }
+
+    & .@{slider-prefix}-thumb {
+      background-color: @slider-thumb-disabled-bg;
+      border-color: @slider-thumb-disabled-border-color !important;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    & .@{slider-prefix}-dot {
+      cursor: not-allowed;
+
+      &-active {
+        border-color: @slider-dot-disabled-active-border-color !important;
+      }
+    }
+
+    & .@{slider-prefix}-mark {
+      cursor: not-allowed;
+    }
+  }
+}
