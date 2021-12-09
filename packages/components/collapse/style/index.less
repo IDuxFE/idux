@@ -1,7 +1,8 @@
-@import './themes/default.less';
-@import '../../_private/collapse-transition/style/index.less';
+@import '../../style/mixins/reset.less';
 
 .@{collapse-prefix} {
+  .reset-component();
+
   line-height: @collapse-line-height;
   font-size: @font-size-md;
   color: @collapse-color;

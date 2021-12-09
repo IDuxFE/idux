@@ -15,4 +15,4 @@ export { CdkPortal }
 export { covertTarget as covertPortalTarget } from './src/covertTarget'
 export { portalTargetDef as ɵPortalTargetDef } from './src/types'
 
-export type { PortalInstance, PortalPublicProps as PortalProps, PortalTargetType } from './src/types'
+export type { PortalInstance, PortalComponent, PortalPublicProps as PortalProps, PortalTargetType } from './src/types'

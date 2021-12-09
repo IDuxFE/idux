@@ -23,7 +23,8 @@ export const gulpConfig = {
   },
   build: {
     cdkDirname: join(packageRoot, 'cdk'),
-    componentsDirname: join(packageRoot, 'components'),
+    componentsDirname: componentsDirname,
+    proDirname: join(packageRoot, 'pro'),
     distDirname: join(packageRoot, '../dist'),
   },
 } as const

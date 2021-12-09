@@ -52,6 +52,7 @@ module.exports = {
         'packages/site/**/*.ts',
         '**/demo/*.ts',
         '**/style/*.ts',
+        '**/style/**/*.ts',
         '*.spec.ts',
       ],
       rules: {
@@ -59,7 +60,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/style/*.ts'],
+      files: ['**/style/*.ts', '**/style/**/*.ts'],
       rules: {
         'import/no-unassigned-import': 'off',
       },

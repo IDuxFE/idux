@@ -1,7 +1,7 @@
 <template>
   <IxSpace>
     <!-- TODO input-number -->
-    <label>Gap: <IxInput v-model:value="gap" style="width: 120px" /></label>
+    <label>Gap: <IxInputNumber v-model:value="gap" style="width: 120px" /></label>
     <IxButton @click="change">Change Text</IxButton>
   </IxSpace>
   <br />

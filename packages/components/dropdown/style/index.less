@@ -1,9 +1,8 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
-@import '../../_private/collapse-transition/style/index.less';
-@import '../../_private/overlay/style/index.less';
 
 .@{dropdown-prefix} {
+  .reset-component();
 
   &-trigger {
     cursor: pointer;

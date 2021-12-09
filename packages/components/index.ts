@@ -14,12 +14,12 @@ import { IxAvatar } from '@idux/components/avatar'
 import { IxBackTop } from '@idux/components/back-top'
 import { IxBadge } from '@idux/components/badge'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
-import { IxCard } from '@idux/components/card'
+import { IxCard, IxCardGrid } from '@idux/components/card'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxDatePicker } from '@idux/components/date-picker'
 import { IxDivider } from '@idux/components/divider'
-import { IxDrawer } from '@idux/components/drawer'
+import { IxDrawer, IxDrawerProvider } from '@idux/components/drawer'
 import { IxDropdown } from '@idux/components/dropdown'
 import { IxEmpty } from '@idux/components/empty'
 import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
@@ -28,11 +28,13 @@ import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
 import { IxImage } from '@idux/components/image'
 import { IxInput } from '@idux/components/input'
+import { IxInputNumber } from '@idux/components/input-number'
 import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
 import { IxList, IxListItem } from '@idux/components/list'
 import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
 import { IxMessage, IxMessageProvider } from '@idux/components/message'
 import { IxModal, IxModalProvider } from '@idux/components/modal'
+import { IxNotification, IxNotificationProvider } from '@idux/components/notification'
 import { IxPagination } from '@idux/components/pagination'
 import { IxPopconfirm } from '@idux/components/popconfirm'
 import { IxPopover } from '@idux/components/popover'
@@ -69,6 +71,7 @@ const components = [
   IxButton,
   IxButtonGroup,
   IxCard,
+  IxCardGrid,
   IxCheckbox,
   IxCheckboxGroup,
   IxCollapse,
@@ -76,6 +79,7 @@ const components = [
   IxDatePicker,
   IxDivider,
   IxDrawer,
+  IxDrawerProvider,
   IxDropdown,
   IxEmpty,
   IxForm,
@@ -87,6 +91,7 @@ const components = [
   IxIcon,
   IxImage,
   IxInput,
+  IxInputNumber,
   IxLayout,
   IxLayoutContent,
   IxLayoutFooter,
@@ -103,6 +108,8 @@ const components = [
   IxMessageProvider,
   IxModal,
   IxModalProvider,
+  IxNotification,
+  IxNotificationProvider,
   IxPagination,
   IxPopconfirm,
   IxPopover,
@@ -139,7 +146,7 @@ const directives: Record<string, Directive> = {
 
 const install = (app: App): void => {
   components.forEach(component => {
-    app.component(component.name ?? component.displayName, component)
+    app.component(component.displayName ?? component.name, component)
   })
 
   Object.keys(directives).forEach(key => {

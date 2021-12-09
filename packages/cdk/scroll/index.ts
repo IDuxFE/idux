@@ -18,6 +18,7 @@ export { CdkVirtualScroll }
 
 export type {
   VirtualScrollInstance,
+  VirtualScrollComponent,
   VirtualScrollPublicProps as VirtualScrollProps,
   VirtualContentRenderFn,
   VirtualItemRenderFn,

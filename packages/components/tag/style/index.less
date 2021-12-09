@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{tag-prefix} {
+  .reset-component();
+
   display: inline-block;
   font-size: @tag-font-size;
   color: @tag-default-color;

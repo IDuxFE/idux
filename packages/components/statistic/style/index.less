@@ -1,13 +1,11 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{statistic-prefix} {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  .reset-component();
+
   color: @statistic-color;
   font-size: @statistic-font-size-sm;
   line-height: @statistic-line-height;
-  list-style: none;
 
   &-title {
     margin-bottom: @statistic-title-margin;

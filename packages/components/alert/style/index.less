@@ -1,9 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
-@alert-prefix: ~'@{idux-prefix}-alert';
-
 .@{alert-prefix} {
+  .reset-component();
+
   position: relative;
   display: flex;
   align-items: center;

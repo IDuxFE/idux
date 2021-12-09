@@ -1,9 +1,8 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 .@{tree-prefix} {
-  color: @text-color;
-  font-size: @font-size-md;
-  line-height: @line-height-base;
+  .reset-component();
+
   background: @tree-background;
   border-radius: @border-radius-sm;
   transition: @tree-transition;

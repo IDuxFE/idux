@@ -1,13 +1,15 @@
-@import './themes/default.less';
 @import '../../style/motion/fade.less';
 @import '../../style/mixins/ellipsis.less';
-@import '../../_private/collapse-transition/style/index.less';
+@import '../../style/mixins/reset.less';
+
 @import './menu.less';
 @import './dark.less';
 @import './collapsed.less';
 @import './dropdown.less';
 
 .@{menu-prefix} {
+  .reset-component();
+
   transition: background @transition-duration-base, width @transition-duration-base;
 
   &-vertical,

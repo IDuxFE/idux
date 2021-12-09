@@ -1,8 +1,10 @@
 @import '../../style/mixins/placeholder.less';
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{textarea-prefix} {
+  .reset-component();
+
   position: relative;
   display: inline-block;
   width: 100%;

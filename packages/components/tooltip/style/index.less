@@ -1,8 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
-@import '../../_private/overlay/style/index.less';
 
 .@{tooltip-prefix} {
+  .reset-component();
+
   z-index: @tooltip-zindex;
   font-size: @tooltip-font-size;
   color: @tooltip-color;

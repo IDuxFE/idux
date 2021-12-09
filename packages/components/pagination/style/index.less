@@ -1,7 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{pagination-prefix} {
+  .reset-component();
+
   font-size: @pagination-font-size;
 
   &-item,

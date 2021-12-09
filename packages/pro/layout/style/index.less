@@ -1,3 +1,7 @@
-@import "./themes/default.less";
-@import "./layout.less";
-@import "./ctrl.less";
+@import '../../style/mixins/reset.less';
+@import './layout.less';
+@import './ctrl.less';
+
+.@{pro-layout-prefix} {
+  .reset-component();
+}

@@ -1,4 +1,4 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 
 @spin-mask: {
   position: absolute;
@@ -10,6 +10,8 @@
 };
 
 .@{spin-prefix} {
+  .reset-component();
+
   position: relative;
 
   &-spinner {

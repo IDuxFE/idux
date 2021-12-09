@@ -37,8 +37,8 @@
   </IxDrawerProvider>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, provide, ref } from 'vue'
+<script setup lang="ts">
+import { computed, provide, ref } from 'vue'
 
 import { useRoute, useRouter } from 'vue-router'
 
@@ -48,39 +48,32 @@ import { ModalProviderInstance } from '@idux/components/modal'
 
 import { AppContext, appContextToken } from './context'
 
-export default defineComponent({
-  name: 'App',
-  setup() {
-    const drawerProviderRef = ref<DrawerProviderInstance>()
-    const modalProviderRef = ref<ModalProviderInstance>()
+const drawerProviderRef = ref<DrawerProviderInstance>()
+const modalProviderRef = ref<ModalProviderInstance>()
 
-    const router = useRouter()
-    router.afterEach(() => {
-      drawerProviderRef.value?.destroyAll()
-      modalProviderRef.value?.destroyAll()
-    })
-
-    const route = useRoute()
-    const path = computed(() => route.path)
-    const page = computed(() => {
-      const match = route.path.match(/\/(\w+)/)
-      return match?.[1] ?? 'home'
-    })
-
-    const breakpoints = useSharedBreakpoints()
-
-    const appContext: AppContext = {
-      org: 'IDuxFE',
-      repo: 'components',
-      lang: ref('zh'),
-      path,
-      page,
-      breakpoints,
-    }
-
-    provide(appContextToken, appContext)
-
-    return { page, modalProviderRef }
-  },
+const router = useRouter()
+router.afterEach(() => {
+  drawerProviderRef.value?.destroyAll()
+  modalProviderRef.value?.destroyAll()
 })
+
+const route = useRoute()
+const path = computed(() => route.path)
+const page = computed(() => {
+  const match = route.path.match(/\/(\w+)/)
+  return match?.[1] ?? 'home'
+})
+
+const breakpoints = useSharedBreakpoints()
+
+const appContext: AppContext = {
+  org: 'IDuxFE',
+  repo: 'components',
+  lang: ref('zh'),
+  path,
+  page,
+  breakpoints,
+}
+
+provide(appContextToken, appContext)
 </script>

@@ -1,5 +1,9 @@
 /* eslint-disable import/order */
-import type { App, Directive, Plugin } from 'vue'
+import type { App } from 'vue'
+
+import IduxCdk from '@idux/cdk'
+import IduxComponents from '@idux/components'
+import IduxPro from '@idux/pro'
 
 // eslint-disable-next-line camelcase
 import { useLocale, zh_CN } from '@idux/components/i18n'
@@ -21,24 +25,8 @@ const globalConfig = createGlobalConfig({
   icon: { loadIconDynamically },
 })
 
-const plugins: Plugin[] = [globalConfig]
-
-import { clickOutside } from '@idux/cdk/click-outside'
-import { IxTypography } from '@idux/components/typography'
-
-const directives: Record<string, Directive> = {
-  clickOutside,
-  typography: IxTypography,
-}
-
 const install = (app: App): void => {
-  plugins.forEach(plugin => {
-    app.use(plugin)
-  })
-
-  Object.keys(directives).forEach(key => {
-    app.directive(key, directives[key])
-  })
+  app.use(IduxCdk).use(IduxComponents).use(IduxPro).use(globalConfig)
 }
 
 export default { install }

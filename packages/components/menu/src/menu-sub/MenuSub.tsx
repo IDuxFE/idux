@@ -105,7 +105,6 @@ export default defineComponent({
       if (mode.value === 'inline') {
         children = [<Title></Title>, <InlineContent></InlineContent>]
       } else {
-        const prefixCls = mergedPrefixCls.value
         const trigger = () => <Title></Title>
         const content = () => <OverlayContent></OverlayContent>
         children = (

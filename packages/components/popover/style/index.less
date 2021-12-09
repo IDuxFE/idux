@@ -1,8 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
-@import '../../_private/overlay/style/index.less';
 
 .@{popover-prefix} {
+  .reset-component();
+
   z-index: @popover-zindex;
   font-size: @popover-font-size;
   color: @popover-color;

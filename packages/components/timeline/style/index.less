@@ -1,8 +1,9 @@
-@import './themes/default.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{timeline-prefix} {
-  list-style: none;
+  .reset-component();
+
   line-height: @timeline-content-line-height;
   color: @color-grey;
 
