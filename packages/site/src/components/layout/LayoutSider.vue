@@ -7,13 +7,8 @@
         </router-link>
       </IxMenuItem>
     </template>
-    <template v-if="page === 'components'">
-      <IxMenuItemGroup
-        v-for="group in config.components"
-        v-show="group.lang === lang"
-        :key="group.name"
-        :label="group.name"
-      >
+    <template v-if="['components', 'pro'].includes(page)">
+      <IxMenuItemGroup v-for="group in config[page]" v-show="group.lang === lang" :key="group.name" :label="group.name">
         <IxMenuItem v-for="component in group.children" :key="component.path">
           <router-link :to="component.path">
             <IxSpace>

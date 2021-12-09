@@ -16,6 +16,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
+export type IconType = string | VNode
 
 export interface MenuClickOptions {
   event: Event
@@ -27,7 +28,6 @@ export const menuProps = {
   expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
   selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
   collapsed: IxPropTypes.bool.def(false),
-  collapsedWidth: IxPropTypes.oneOfType([String, Number]),
   dataSource: IxPropTypes.array<MenuData>(),
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
@@ -35,6 +35,7 @@ export const menuProps = {
   selectable: IxPropTypes.bool,
   target: ɵPortalTargetDef,
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
+  overlayClassName: IxPropTypes.string,
 
   // events
   'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
@@ -49,7 +50,7 @@ export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
 export const menuItemProps = {
   disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
 }
 
@@ -59,7 +60,7 @@ export type MenuItemComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuI
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
 export const menuItemGroupProps = {
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
 }
 
@@ -72,7 +73,7 @@ export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupPr
 
 export const menuSubProps = {
   disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
+  icon: IxPropTypes.oneOfType<IconType>([String, IxPropTypes.vNode]),
   label: IxPropTypes.string,
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   overlayClassName: IxPropTypes.string,

@@ -60,9 +60,9 @@ export function initSite(): void {
     })
   })
 
-  const { docs, components, cdk, routes } = handleDocsMeta(docsMeta)
+  const { docs, components, proComponents, cdk, routes } = handleDocsMeta(docsMeta)
 
-  writeFileSync(join(sideNavFilename), getSideNavConfigTemplate(docs, components, cdk))
+  writeFileSync(join(sideNavFilename), getSideNavConfigTemplate(docs, components, proComponents, cdk))
   writeFileSync(join(routerFilename), getRoutesTemplate(routes))
 }
 
@@ -92,12 +92,25 @@ const componentsSortMap: Record<string, number> = {
   其他: 7,
 }
 
+const proComponentsSortMap: Record<string, number> = {
+  General: 0,
+  通用: 0,
+  Layout: 1,
+  布局: 1,
+}
+
 const defaultRoutes = [`{path: '/', 'component': () => import('./components/views/home/Home.vue')},`]
+
+type ComponentsMap = Record<string, { lang: string; children: Omit<DocsItem, 'lang'>[] }>
 
 function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
   const docs: DocsItem[] = []
-  const components: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }> = []
-  const componentsMap: Record<string, { lang: string; children: Omit<DocsItem, 'lang'>[] }> = {}
+  const componentsMap: ComponentsMap = {}
+  const proComponentsMap: ComponentsMap = {}
+  const mapType: { [key: string]: ComponentsMap } = {
+    components: componentsMap,
+    pro: proComponentsMap,
+  }
   const cdk: DocsItem[] = []
   const routes: string[] = defaultRoutes
   for (const packageName in docsMeta) {
@@ -108,12 +121,13 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
         const item = { path, title, subtitle, lang, order }
         docs.push(item)
         mdPath = `./${packageName}/${componentName}.${lang}.md`
-      } else if (category === 'components') {
+      } else if (['components', 'pro'].includes(category)) {
         const item = { path, title, subtitle, order }
-        if (!componentsMap[type]) {
-          componentsMap[type] = { children: [item], lang }
+        const cmpMap = mapType[category]
+        if (!cmpMap[type]) {
+          cmpMap[type] = { children: [item], lang }
         } else {
-          componentsMap[type].children.push(item)
+          cmpMap[type].children.push(item)
         }
         mdPath = `../../${packageName}/${componentName}/docs/Index.${lang}.md`
       } else if (category === 'cdk') {
@@ -128,27 +142,37 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
 
   routes.push(`{path: '/:pathMatch(.*)*', redirect: '/'},`)
 
-  for (const name in componentsMap) {
-    const { lang, children } = componentsMap[name]
-    children.sort((pre, next) => pre.order - next.order)
-    components.push({ name, lang, children })
-  }
+  const components = getComponentSort(componentsMap)
+  const proComponents = getComponentSort(proComponentsMap)
 
   docs.sort((pre, next) => pre.order - next.order)
   components.sort((pre, next) => componentsSortMap[pre.name] - componentsSortMap[next.name])
+  proComponents.sort((pre, next) => proComponentsSortMap[pre.name] - proComponentsSortMap[next.name])
   cdk.sort((pre, next) => pre.order - next.order)
 
-  return { docs, components, cdk, routes }
+  return { docs, components, proComponents, cdk, routes }
+}
+
+function getComponentSort(cmpMap: ComponentsMap) {
+  const components: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }> = []
+  for (const name in cmpMap) {
+    const { lang, children } = cmpMap[name]
+    children.sort((pre, next) => pre.order - next.order)
+    components.push({ name, lang, children })
+  }
+  return components
 }
 
 function getSideNavConfigTemplate(
   docs: DocsItem[],
   components: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }>,
+  proComponents: Array<{ name: string; lang: string; children: Omit<DocsItem, 'lang'>[] }>,
   cdk: DocsItem[],
 ): string {
   return `export const config = {
   docs: ${JSON.stringify(docs, null, 2)},
   components: ${JSON.stringify(components, null, 2)},
+  pro: ${JSON.stringify(proComponents, null, 2)},
   cdk: ${JSON.stringify(cdk, null, 2)}
 };
 `

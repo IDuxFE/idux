@@ -39,8 +39,15 @@
       color: @menu-dark-color;
     }
 
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-title {
+    .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled) {
+
+      &:hover,
+      &:active {
+        background-color: @menu-dark-highlight-bg-color;
+      }
+    }
+
+    .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) > .@{menu-prefix}-sub-title {
 
       &:hover,
       &:active {

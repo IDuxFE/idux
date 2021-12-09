@@ -13,6 +13,7 @@ export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
   const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
   const componentsResolve = isBuild ? '../../dist/components' : '../components'
+  const proResolve = isBuild ? '../../dist/pro' : '../pro'
 
   return {
     plugins: [
@@ -37,6 +38,10 @@ export default defineConfig(({ command }) => {
               const path = `@idux/components/tabs`
               const sideEffects = undefined
               return { importName: name, path, sideEffects }
+            } else if (name === 'IxLayoutPro' || name === 'IxLayoutSiderTrigger') {
+              const path = `@idux/pro/layout`
+              const sideEffects = undefined
+              return { importName: name, path, sideEffects }
             }
           },
           IduxResolver(),
@@ -48,6 +53,7 @@ export default defineConfig(({ command }) => {
       alias: [
         { find: '@idux/cdk', replacement: resolve(__dirname, cdkResolve) },
         { find: '@idux/components', replacement: resolve(__dirname, componentsResolve) },
+        { find: '@idux/pro', replacement: resolve(__dirname, proResolve) },
         { find: '@idux/site', replacement: resolve(__dirname, './src') },
       ],
     },

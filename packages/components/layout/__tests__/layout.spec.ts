@@ -56,16 +56,6 @@ describe('Layout', () => {
       expect(wrapper.find('.ix-layout-sider').classes()).toContain('ix-layout-sider-end')
     })
 
-    test('width work', async () => {
-      const wrapper = mount(Layout, {
-        slots: {
-          default: () => [h(LayoutSider, { width: 200 }, { default: () => 'sider' })],
-        },
-      })
-
-      expect(wrapper.find('.ix-layout-sider').attributes()['style']).toEqual('width: 200px;')
-    })
-
     test('showTrigger work', async () => {
       const wrapper = mount(Layout, {
         slots: {
@@ -84,37 +74,6 @@ describe('Layout', () => {
       })
 
       expect(wrapper.find('.ix-layout-sider-trigger').exists()).toBeTruthy()
-    })
-
-    test('collapsed work', async () => {
-      const onCollapse = jest.fn()
-
-      const wrapper = mount(Layout, {
-        slots: {
-          default: () => [
-            h(
-              LayoutSider,
-              {
-                collapsed: true,
-                collapsedWidth: 0,
-                showTrigger: true,
-                'onUpdate:collapsed': onCollapse,
-                onCollapse,
-              },
-              { default: () => 'sider' },
-            ),
-          ],
-        },
-      })
-      const siderWrapper = wrapper.find('.ix-layout-sider')
-
-      expect(siderWrapper.classes()).toContain('ix-layout-sider-collapsed')
-      expect(siderWrapper.attributes()['style']).toEqual('width: 0px;')
-      expect(wrapper.find('.ix-layout-sider-trigger').exists()).toBeTruthy()
-
-      await wrapper.find('.ix-layout-sider-trigger').trigger('click')
-      expect(onCollapse).toBeCalledTimes(2)
-      expect(siderWrapper.classes()).not.toContain('ix-layout-sider-collapsed')
     })
 
     test('trigger slot work', async () => {

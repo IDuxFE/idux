@@ -15,6 +15,11 @@
         <span>{{ lang == 'zh' ? '基础组件' : 'Components' }}</span>
       </router-link>
     </IxMenuItem>
+    <IxMenuItem key="pro">
+      <router-link :to="'/pro/layout/' + lang">
+        <span>{{ lang == 'zh' ? '高级组件' : 'Pro' }}</span>
+      </router-link>
+    </IxMenuItem>
     <IxMenuItem key="cdk">
       <router-link :to="'/cdk/breakpoint/' + lang">
         <span>{{ lang == 'zh' ? '开发套件' : 'CDK' }}</span>

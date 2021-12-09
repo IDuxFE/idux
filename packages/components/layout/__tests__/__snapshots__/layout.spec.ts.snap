@@ -3,7 +3,7 @@
 exports[`Layout render work 1`] = `
 "<section class=\\"ix-layout\\">
   <header class=\\"ix-layout-header\\">header</header>
-  <aside class=\\"ix-layout-sider\\" style=\\"width: 200px;\\">
+  <aside class=\\"ix-layout-sider\\">
     <div class=\\"ix-layout-sider-children\\">sider</div>
     <!---->
   </aside>

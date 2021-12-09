@@ -8,16 +8,16 @@
 import type { MenuComponent, MenuItemComponent, MenuItemGroupComponent, MenuSubComponent } from './src/types'
 
 import Menu from './src/Menu'
-import MenuDivider from './src/MenuDivider'
-import MenuItem from './src/MenuItem'
-import MenuItemGroup from './src/MenuItemGroup'
-import MenuSub from './src/menu-sub/MenuSub'
+import MenuDividerCpm from './src/MenuDivider'
+import MenuItemCpm from './src/MenuItem'
+import MenuItemGroupCpm from './src/MenuItemGroup'
+import MenuSubCpm from './src/menu-sub/MenuSub'
 
 const IxMenu = Menu as unknown as MenuComponent
-const IxMenuDivider = MenuDivider
-const IxMenuItem = MenuItem as unknown as MenuItemComponent
-const IxMenuItemGroup = MenuItemGroup as unknown as MenuItemGroupComponent
-const IxMenuSub = MenuSub as unknown as MenuSubComponent
+const IxMenuDivider = MenuDividerCpm
+const IxMenuItem = MenuItemCpm as unknown as MenuItemComponent
+const IxMenuItemGroup = MenuItemGroupCpm as unknown as MenuItemGroupComponent
+const IxMenuSub = MenuSubCpm as unknown as MenuSubComponent
 
 export { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub }
 
@@ -37,4 +37,5 @@ export type {
   MenuItem,
   MenuItemGroup,
   MenuSub,
+  MenuDivider,
 } from './src/types'

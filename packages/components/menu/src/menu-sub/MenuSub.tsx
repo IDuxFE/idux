@@ -6,7 +6,7 @@
  */
 
 import type { MenuContext, MenuSubContext } from '../token'
-import type { MenuMode } from '../types'
+import type { MenuMode, MenuSubProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, VNodeTypes } from 'vue'
 
@@ -40,6 +40,7 @@ export default defineComponent({
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
+    const overlayCls = useClassName(props, mergedPrefixCls, menuContext.overlayClassName)
     const config = useGlobalConfig('menuSub')
     const key = useKey()
     const level = menuSubContext ? menuSubContext.level + 1 : 1
@@ -93,6 +94,9 @@ export default defineComponent({
     const offset = computed(() => props.offset ?? config.offset)
 
     const onClick = (evt: Event) => {
+      if (props.disabled) {
+        return
+      }
       menuContext.handleClick(key, 'sub', evt)
     }
 
@@ -108,7 +112,7 @@ export default defineComponent({
           <ɵOverlay
             visible={isExpanded.value}
             v-slots={{ default: trigger, content: content }}
-            class={`${prefixCls}-overlay`}
+            class={overlayCls.value}
             autoAdjust
             destroyOnHide={false}
             delay={defaultDelay}
@@ -159,6 +163,16 @@ function useExpand(
   })
 
   return { isExpanded, changeExpanded, handleExpand, handleMouseEvent }
+}
+
+function useClassName(
+  props: MenuSubProps,
+  mergedPrefixCls: ComputedRef<string>,
+  menuOverlayClassName: ComputedRef<string>,
+) {
+  return computed(
+    () => `${props.overlayClassName ?? menuOverlayClassName.value ?? ''} ${mergedPrefixCls.value}-overlay`,
+  )
 }
 
 function useSelect(key: VKey, multiple: ComputedRef<boolean>, menuSubContext: MenuSubContext | null) {

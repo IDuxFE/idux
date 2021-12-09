@@ -80,7 +80,6 @@ export interface DropdownConfig {
 }
 
 export interface MenuConfig {
-  collapsedWidth: string | number
   indent: number
   target?: PortalTargetType
   theme: MenuTheme

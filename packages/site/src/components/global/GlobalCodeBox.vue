@@ -177,4 +177,15 @@ export default defineComponent({
     font-size: @font-size-xl;
   }
 }
+.example-full {
+  .global-code-box-demo {
+    padding: 0;
+  }
+  .global-code-box-title {
+    top: 0;
+  }
+  .global-code-box-description {
+    padding: @spacing-2xl @spacing-xl @spacing-md;
+  }
+}
 </style>

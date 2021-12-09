@@ -94,7 +94,6 @@ const dropdown = shallowReactive<DropdownConfig>({
 })
 
 const menu = shallowReactive<MenuConfig>({
-  collapsedWidth: 64,
   indent: 24,
   theme: 'light',
 })

@@ -11,7 +11,7 @@ import type { Slots, VNode } from 'vue'
 
 import { computed, defineComponent, inject, normalizeClass, provide, watch } from 'vue'
 
-import { Logger, VKey, callEmit, convertCssPixel, useControlledProp } from '@idux/cdk/utils'
+import { Logger, VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 
@@ -36,6 +36,7 @@ export default defineComponent({
       return collapsed && mode !== 'horizontal' ? 'vertical' : mode
     })
     const multiple = computed(() => props.multiple)
+    const overlayClassName = computed(() => props.overlayClassName)
     const theme = computed(() => props.theme ?? config.theme)
 
     const dropdownContext = inject(ɵDropdownToken, null)
@@ -51,6 +52,7 @@ export default defineComponent({
 
     provide(menuToken, {
       mergedPrefixCls,
+      overlayClassName,
       target,
       indent,
       mode,
@@ -73,21 +75,10 @@ export default defineComponent({
       })
     })
 
-    const style = computed(() => {
-      if (!props.collapsed || mode.value === 'horizontal') {
-        return undefined
-      }
-      return { width: convertCssPixel(props.collapsedWidth ?? config.collapsedWidth) }
-    })
-
     return () => {
       const { dataSource } = props
       const children = dataSource ? coverChildren(dataSource) : slots.default?.()
-      return (
-        <ul class={classes.value} style={style.value}>
-          {children}
-        </ul>
-      )
+      return <ul class={classes.value}>{children}</ul>
     }
   },
 })
@@ -101,8 +92,9 @@ function useExpanded(props: MenuProps) {
       index === -1 && setExpandedKeys([...expandedKeys.value, key])
     } else {
       if (index > -1) {
-        expandedKeys.value.splice(index, 1)
-        setExpandedKeys([...expandedKeys.value])
+        const preExpandedKeys = [...expandedKeys.value]
+        preExpandedKeys.splice(index, 1)
+        setExpandedKeys(preExpandedKeys)
       }
     }
   }
@@ -138,8 +130,9 @@ function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext | null
     const index = selectedKeys.value.indexOf(key)
     if (index > -1) {
       if (props.multiple) {
-        selectedKeys.value.splice(index, 1)
-        setSelectedKeys([...selectedKeys.value])
+        const curSelectKeys = [...selectedKeys.value]
+        curSelectKeys.splice(index, 1)
+        setSelectedKeys(curSelectKeys)
       }
     } else {
       setSelectedKeys(props.multiple ? [...selectedKeys.value, key] : [key])
