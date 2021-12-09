@@ -13,4 +13,10 @@ const IxAvatar = Avatar as unknown as AvatarComponent
 
 export { IxAvatar }
 
-export type { AvatarInstance, AvatarPublicProps as AvatarProps, AvatarShape, AvatarSize } from './src/types'
+export type {
+  AvatarInstance,
+  AvatarComponent,
+  AvatarPublicProps as AvatarProps,
+  AvatarShape,
+  AvatarSize,
+} from './src/types'

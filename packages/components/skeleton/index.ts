@@ -13,4 +13,4 @@ const IxSkeleton = Skeleton as unknown as SkeletonComponent
 
 export { IxSkeleton }
 
-export type { SkeletonInstance, SkeletonPublicProps as SkeletonProps } from './src/types'
+export type { SkeletonInstance, SkeletonComponent, SkeletonPublicProps as SkeletonProps } from './src/types'

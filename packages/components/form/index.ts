@@ -22,10 +22,13 @@ export type { FormContext } from './src/token'
 
 export type {
   FormInstance,
+  FormComponent,
   FormPublicProps as FormProps,
   FormItemInstance,
+  FormItemComponent,
   FormItemPublicProps as FormItemProps,
   FormWrapperInstance,
+  FormWrapperComponent,
   FormWrapperPublicProps as FormWrapperProps,
   FormColType,
   FormLabelAlign,

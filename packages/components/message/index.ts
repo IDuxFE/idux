@@ -18,8 +18,10 @@ export { useMessage } from './src/useMessage'
 
 export type {
   MessageInstance,
+  MessageComponent,
   MessagePublicProps as MessageProps,
   MessageProviderInstance,
+  MessageProviderComponent,
   MessageProviderPublicProps as MessageProviderProps,
   MessageProviderRef,
   MessageType,

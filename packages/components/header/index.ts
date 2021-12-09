@@ -13,4 +13,4 @@ const IxHeader = Header as unknown as HeaderComponent
 
 export { IxHeader }
 
-export type { HeaderInstance, HeaderPublicProps as HeaderProps } from './src/types'
+export type { HeaderInstance, HeaderComponent, HeaderPublicProps as HeaderProps } from './src/types'

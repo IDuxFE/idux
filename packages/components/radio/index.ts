@@ -17,8 +17,10 @@ export { IxRadio, IxRadioGroup }
 
 export type {
   RadioInstance,
+  RadioComponent,
   RadioPublicProps as RadioProps,
   RadioGroupInstance,
+  RadioGroupComponent,
   RadioGroupPublicProps as RadioGroupProps,
   RadioMode,
   RadioOption,

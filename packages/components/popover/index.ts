@@ -13,4 +13,4 @@ const IxPopover = Popover as unknown as PopoverComponent
 
 export { IxPopover }
 
-export type { PopoverInstance, PopoverPublicProps as PopoverProps } from './src/types'
+export type { PopoverInstance, PopoverComponent, PopoverPublicProps as PopoverProps } from './src/types'

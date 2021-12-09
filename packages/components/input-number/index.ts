@@ -13,4 +13,4 @@ const IxInputNumber = InputNumber as unknown as InputNumberComponent
 
 export { IxInputNumber }
 
-export type { InputNumberInstance, InputNumberPublicProps as InputNumberProps } from './src/types'
+export type { InputNumberInstance, InputNumberComponent, InputNumberPublicProps as InputNumberProps } from './src/types'

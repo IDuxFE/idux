@@ -13,4 +13,4 @@ const IxSpin = Spin as unknown as SpinComponent
 
 export { IxSpin }
 
-export type { SpinInstance, SpinPublicProps as SpinProps, SpinTipAlignType, SpinSize } from './src/types'
+export type { SpinInstance, SpinComponent, SpinPublicProps as SpinProps, SpinTipAlignType, SpinSize } from './src/types'

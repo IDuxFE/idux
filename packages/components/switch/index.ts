@@ -13,4 +13,4 @@ const IxSwitch = Switch as unknown as SwitchComponent
 
 export { IxSwitch }
 
-export type { SwitchInstance, SwitchPublicProps as SwitchProps } from './src/types'
+export type { SwitchInstance, SwitchComponent, SwitchPublicProps as SwitchProps } from './src/types'

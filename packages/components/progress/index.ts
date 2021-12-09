@@ -15,6 +15,7 @@ export { IxProgress }
 
 export type {
   ProgressInstance,
+  ProgressComponent,
   ProgressPublicProps as ProgressProps,
   ProgressSize,
   ProgressFormat,

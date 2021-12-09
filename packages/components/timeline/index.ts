@@ -17,8 +17,10 @@ export { IxTimeline, IxTimelineItem }
 
 export type {
   TimelineInstance,
+  TimelineComponent,
   TimelinePublicProps as TimelineProps,
   TimelineItemInstance,
+  TimelineItemComponent,
   TimelineItemPublicProps as TimelineItemProps,
   TimelineItemPosition,
 } from './src/types'

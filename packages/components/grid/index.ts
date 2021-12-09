@@ -17,8 +17,10 @@ export { IxRow, IxCol }
 
 export type {
   RowInstance,
+  RowComponent,
   RowPublicProps as RowProps,
   ColInstance,
+  ColComponent,
   ColPublicProps as ColProps,
   RowGutter,
   RowAlign,

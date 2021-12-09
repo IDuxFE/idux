@@ -29,13 +29,18 @@ export { IxLayout, IxLayoutHeader, IxLayoutSider, IxLayoutContent, IxLayoutFoote
 
 export type {
   LayoutInstance,
+  LayoutComponent,
   LayoutPublicProps as LayoutProps,
   LayoutHeaderInstance,
+  LayoutHeaderComponent,
   LayoutPublicProps as LayoutHeaderProps,
   LayoutSiderInstance,
+  LayoutSiderComponent,
   LayoutSiderPublicProps as LayoutSiderProps,
   LayoutContentInstance,
+  LayoutContentComponent,
   LayoutContentPublicProps as LayoutContentProps,
   LayoutFooterInstance,
+  LayoutFooterComponent,
   LayoutFooterPublicProps as LayoutFooterProps,
 } from './src/types'

@@ -17,8 +17,10 @@ export { IxCheckbox, IxCheckboxGroup }
 
 export type {
   CheckboxInstance,
+  CheckboxComponent,
   CheckboxPublicProps as CheckboxProps,
   CheckboxGroupInstance,
+  CheckboxGroupComponent,
   CheckboxGroupPublicProps as CheckboxGroupProps,
   CheckboxOption,
 } from './src/types'

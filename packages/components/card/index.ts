@@ -17,8 +17,10 @@ export { IxCard, IxCardGrid }
 
 export type {
   CardInstance,
+  CardComponent,
   CardPublicProps as CardProps,
   CardGridInstance,
+  CardGridComponent,
   CardGridPublicProps as CardGridProps,
   CardSize,
   CardCover,

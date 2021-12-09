@@ -15,6 +15,7 @@ export { IxTable }
 
 export type {
   TableInstance,
+  TableComponent,
   TablePublicProps as TableProps,
   TableColumn,
   TableColumnBase,

@@ -21,6 +21,7 @@ export type {
   LayoutProInstance,
   LayoutProComponent,
   LayoutSiderTriggerInstance,
+  LayoutSiderTriggerComponent,
   LayoutProThemes,
   LayoutProModeTypes,
   LayoutProMenuData,
