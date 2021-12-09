@@ -53,7 +53,7 @@ full: true
 | `extra`     | 顶部区域右侧，适合放登录状态、系统消息等 | -                 | 宽度按照视觉规范限宽，特殊需求覆盖less变量       |
 | `siderTop`      | 侧边栏顶部，适合放模块标题和icon         | -          | -                                           |
 | `siderBottom`   | 侧边栏底部，工具类插件，如折叠左树按钮   | -           | -                       |
-| `default`       | 页面主体                      | `ContentSlotProp` | 加上左侧导航最小宽度1366px，再小横向滚动     |
+| `default`       | 页面主体                      | `ContentSlotProp` | -     |
 
 ### ContentSlotProp
 
