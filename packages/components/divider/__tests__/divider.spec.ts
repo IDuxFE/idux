@@ -2,7 +2,7 @@ import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import IxDivider from '../src/Divider.vue'
+import IxDivider from '../src/Divider'
 import { DividerProps } from '../src/types'
 
 describe('Divider', () => {
