@@ -7,7 +7,7 @@
 
 import type { DividerComponent } from './src/types'
 
-import Divider from './src/Divider.vue'
+import Divider from './src/Divider'
 
 const IxDivider = Divider as unknown as DividerComponent
 
