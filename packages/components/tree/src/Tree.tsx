@@ -68,6 +68,7 @@ export default defineComponent({
       slots,
       config,
       mergedPrefixCls,
+      mergedNodeMap,
       getNodeKey,
       searchedKeys,
       ...checkableContext,
@@ -144,6 +145,7 @@ export default defineComponent({
 
     return () => {
       const nodes = flattedNodes.value
+
       let children: VNodeTypes
       if (nodes.length > 0) {
         const itemRender: VirtualItemRenderFn<FlattedNode> = ({ item }) => (
