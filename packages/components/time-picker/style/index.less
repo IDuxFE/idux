@@ -1,55 +1,125 @@
+@import './themes/default.less';
+@import '../../_private/time-panel/style/index.less';
+@import '../../style/mixins/placeholder.less';
+@import '../../style/mixins/borderless.less';
 @import '../../style/mixins/reset.less';
 
 .@{time-picker-prefix} {
+  width: 100%;
+  display: inline-block;
   .reset-component();
+}
 
-  display: inline-flex;
+.time-picker-trigger-size(@height, @vertical-padding, @horizontal-padding, @font-size) {
+  @icon-padding: @time-picker-icon-margin-left + @time-picker-icon-margin-right;
+
+  height: @height;
+  padding: @vertical-padding (@icon-padding + @time-picker-font-size-sm) @vertical-padding @horizontal-padding;
+  font-size: @font-size;
+}
+
+.@{time-picker-prefix}-trigger {
+  position: relative;
+  width: 100%;
+  line-height: @time-picker-line-height;
+  color: @time-picker-color;
+  border: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
+  border-radius: @time-picker-border-radius;
+  background-color: @time-picker-background-color;
+  cursor: pointer;
+  transition: all @time-picker-transition-duration @time-picker-transition-function;
+
+  @icon-padding: @time-picker-icon-margin-left + @time-picker-icon-margin-right;
+
+  &-sm {
+    .time-picker-trigger-size(@time-picker-height-sm, @time-picker-padding-vertical-sm, @time-picker-padding-horizontal-sm, @time-picker-font-size-sm);
+  }
+
+  &-md {
+    .time-picker-trigger-size(@time-picker-height-md, @time-picker-padding-vertical-md, @time-picker-padding-horizontal-md, @time-picker-font-size-md);
+  }
+
+  &-lg {
+    .time-picker-trigger-size(@time-picker-height-lg, @time-picker-padding-vertical-lg, @time-picker-padding-horizontal-lg, @time-picker-font-size-lg);
+  }
+
+  &:hover:not(&-disabled):not(&-borderless) {
+    border-color: @time-picker-hover-color;
+  }
+
+  &-opened:not(&-disabled):not(&-borderless),
+  &-focused:not(&-disabled):not(&-borderless) {
+    border-color: @time-picker-active-color;
+    box-shadow: @time-picker-active-box-shadow;
+  }
+
+  &-disabled {
+    color: @time-picker-disabled-color;
+    background-color: @time-picker-disabled-background-color;
+    cursor: not-allowed;
+  }
+
+  &-disabled &-input {
+    cursor: not-allowed;
+  }
+
+  &-borderless {
+    .borderless();
+  }
+
+  &-placeholder {
+    color: @time-picker-placeholder-color;
+  }
+
+  &-suffix,
+  &-clear-icon {
+    position: absolute;
+    top: 0;
+    right: @time-picker-icon-margin-right;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    transition: opacity @time-picker-transition-duration @time-picker-transition-function;
+  }
+  
+  &-suffix {
+    color: @time-picker-icon-color;
+  }
 
   &-clear-icon {
     cursor: pointer;
+    color: @time-picker-clear-icon-color;
+    background-color: @time-picker-background-color;
+    opacity: 0;
+  }
+
+  &:not(&-disabled):hover &-clear-icon {
+    opacity: 1;
+  }
+
+  &-input {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    .placeholder(@time-picker-placeholder-color);
   }
 }
 
-.@{time-picker-prefix}-panel {
-  display: flex;
-  max-height: 200px;
-  background-color: @time-picker-background-color;
-  box-shadow: @time-picker-panel-box-shadow;
+.@{time-picker-prefix}-overlay {
+  .reset-component();
+  
+  width: @time-picker-overlay-width;
+  padding: @time-picker-overlay-padding;
+  background-color: @time-picker-overlay-background-color;
+  box-shadow: @time-picker-overlay-box-shadow;
 
-  &-column {
-    width: 56px;
-    border-right: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
-    margin: 0;
-    list-style-type: none;
-    overflow-y: hidden;
-
-    &:last-child {
-      border-right: none;
-    }
-
-    &:hover {
-      overflow-y: scroll;
-    }
-  }
-
-  &-cell {
-    padding: 8px 20px 8px 12px;
-    margin: 0;
-    cursor: pointer;
-    transition: @time-transition-duration;
-
-    &:hover {
-      background-color: @time-picker-cell-active-background-color;
-    }
-
-    &-disabled {
-      cursor: not-allowed;
-      color: @time-picker-disabled-color;
-    }
-
-    &-selected {
-      color: @time-picker-cell-selected-color;
-      background-color: @time-picker-cell-selected-background-color;
-    }
+  & &-input {
+    margin-bottom: @time-picker-input-margin;
   }
 }
+
+@import './range.less';

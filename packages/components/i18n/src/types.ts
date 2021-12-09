@@ -83,6 +83,14 @@ export interface TableLocale {
   sortCancel: string
 }
 
+export interface TimePickerLocale {
+  okText: string
+  to: string
+  placeholder: string
+  startTimePlaceholder: string
+  endTimePlaceholder: string
+}
+
 export interface Locale {
   type: LocaleType
   date: DateLocale
@@ -93,6 +101,7 @@ export interface Locale {
   popconfirm: PopconfirmLocale
   pagination: PaginationLocale
   table: TableLocale
+  timePicker: TimePickerLocale
 }
 
 export type LocaleKey = keyof Locale

@@ -53,7 +53,7 @@ import { IxTable } from '@idux/components/table'
 import { IxTab, IxTabs } from '@idux/components/tabs'
 import { IxTag } from '@idux/components/tag'
 import { IxTextarea } from '@idux/components/textarea'
-import { IxTimePicker } from '@idux/components/time-picker'
+import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
 import { IxTree } from '@idux/components/tree'
@@ -134,6 +134,7 @@ const components = [
   IxTag,
   IxTextarea,
   IxTimePicker,
+  IxTimeRangePicker,
   IxTimeline,
   IxTimelineItem,
   IxTooltip,

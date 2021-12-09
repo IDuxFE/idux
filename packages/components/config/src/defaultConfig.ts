@@ -180,6 +180,8 @@ const timePicker: TimePickerConfig = {
   clearIcon: 'close-circle',
   size: 'md',
   suffix: 'clock-circle',
+  allowInput: true,
+  format: 'HH:mm:ss',
 }
 
 const timeRangePicker: TimeRangePickerConfig = {
@@ -188,7 +190,8 @@ const timeRangePicker: TimeRangePickerConfig = {
   clearIcon: 'close-circle',
   size: 'md',
   suffix: 'clock-circle',
-  separator: '~',
+  allowInput: true,
+  format: 'HH:mm:ss',
 }
 
 // --------------------- Data Display ---------------------

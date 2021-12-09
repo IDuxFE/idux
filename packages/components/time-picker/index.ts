@@ -5,13 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TimePickerComponent } from './src/types'
+import type { TimePickerComponent, TimeRangePickerComponent } from './src/types'
 
 import TimePicker from './src/TimePicker'
+import TimeRangePicker from './src/TimeRangePicker'
 
 const IxTimePicker = TimePicker as unknown as TimePickerComponent
+const IxTimeRangePicker = TimeRangePicker as unknown as TimeRangePickerComponent
 
-export { IxTimePicker }
+export { IxTimePicker, IxTimeRangePicker }
 
 export type {
   TimePickerInstance,
