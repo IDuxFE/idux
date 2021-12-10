@@ -18,6 +18,7 @@ import { useFormItemRegister } from '@idux/components/form'
 export interface InputNumberBindings {
   displayValue: Ref<string>
   isIllegal: Ref<boolean>
+  isDisabled: ComputedRef<boolean>
   nowValue: ComputedRef<number | undefined>
 
   handleKeyDown: (evt: KeyboardEvent) => void
@@ -36,6 +37,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   const isIllegal = ref(true)
   const nowValue = computed(() => accessor.valueRef.value ?? undefined)
   const isKeyboard = computed(() => props.keyboard ?? config.keyboard)
+  const isDisabled = computed(() => accessor?.disabled.value)
 
   const precision = computed(() => {
     const stepPrecision = getPrecision(props.step)
@@ -131,7 +133,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   }
 
   function handleDec() {
-    if (props.readonly || props.disabled || disabledDec.value) {
+    if (props.readonly || isDisabled.value || disabledDec.value) {
       return
     }
 
@@ -140,7 +142,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   }
 
   function handleInc() {
-    if (props.readonly || props.disabled || disabledInc.value) {
+    if (props.readonly || isDisabled.value || disabledInc.value) {
       return
     }
 
@@ -189,6 +191,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   return {
     displayValue,
     isIllegal,
+    isDisabled,
     nowValue,
     handleKeyDown,
     handleDec,

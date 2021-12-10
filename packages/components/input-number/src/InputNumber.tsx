@@ -31,6 +31,7 @@ export default defineComponent({
       displayValue,
       nowValue,
       isIllegal,
+      isDisabled,
       handleInput,
       handleFocus,
       handleBlur,
@@ -47,7 +48,7 @@ export default defineComponent({
       const classes = {
         [prefixCls]: true,
         [`${prefixCls}-${size.value}`]: true,
-        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-illegal`]: isIllegal.value,
       }
       return normalizeClass([classes, attrs.class])
@@ -67,7 +68,7 @@ export default defineComponent({
             aria-valuemin={props.min}
             aria-valuemax={props.max}
             aria-valuenow={nowValue.value}
-            disabled={props.disabled}
+            disabled={isDisabled.value}
             readonly={props.readonly}
             placeholder={props.placeholder}
             size={props.size}
