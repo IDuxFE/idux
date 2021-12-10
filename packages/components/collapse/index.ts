@@ -17,7 +17,9 @@ export { IxCollapse, IxCollapsePanel }
 
 export type {
   CollapseInstance,
+  CollapseComponent,
   CollapsePublicProps as CollapseProps,
   CollapsePanelProps,
+  CollapsePanelComponent,
   CollapsePanelPublicProps as CollapsePanelInstance,
 } from './src/types'

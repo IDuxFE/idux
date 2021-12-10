@@ -15,6 +15,7 @@ export { IxTree }
 
 export type {
   TreeInstance,
+  TreeComponent,
   TreePublicProps as TreeProps,
   TreeNode,
   TreeDroppable,

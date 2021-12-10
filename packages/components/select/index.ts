@@ -20,9 +20,13 @@ export { IxSelect, IxSelectOption, IxSelectOptionGroup }
 
 export type {
   SelectInstance,
+  SelectComponent,
   SelectPublicProps as SelectProps,
   SelectOptionPublicProps as SelectOptionProps,
   SelectOptionGroupPublicProps as SelectOptionGroupProps,
   SelectOption,
   SelectFilterFn,
 } from './src/types'
+
+export type SelectOptionComponent = typeof IxSelectOption
+export type SelectOptionGroupComponent = typeof IxSelectOptionGroup

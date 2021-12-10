@@ -15,6 +15,7 @@ export { IxTimePicker }
 
 export type {
   TimePickerInstance,
+  TimePickerComponent,
   TimePickerPublicProps as TimePickerProps,
   TimeRangePickerInstance,
   TimeRangePickerPublicProps as TimeRangePickerProps,

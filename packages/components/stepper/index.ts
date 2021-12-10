@@ -17,8 +17,10 @@ export { IxStepper, IxStepperItem }
 
 export type {
   StepperInstance,
+  StepperComponent,
   StepperPublicProps as StepperProps,
   StepperItemInstance,
+  StepperItemComponent,
   StepperItemPublicProps as StepperItemProps,
   StepperSize,
   StepperStatus,

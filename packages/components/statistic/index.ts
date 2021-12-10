@@ -13,4 +13,4 @@ const IxStatistic = Statistic as unknown as StatisticComponent
 
 export { IxStatistic }
 
-export type { StatisticInstance, StatisticPublicProps as StatisticProps } from './src/types'
+export type { StatisticInstance, StatisticComponent, StatisticPublicProps as StatisticProps } from './src/types'

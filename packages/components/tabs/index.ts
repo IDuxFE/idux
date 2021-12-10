@@ -17,7 +17,9 @@ export { IxTabs, IxTab }
 
 export type {
   TabsInstance,
+  TabsComponent,
   TabInstance,
+  TabComponent,
   TabsPublicProps as TabsProps,
   TabPublicProps as TabProps,
   TabsPlacement,

@@ -13,4 +13,4 @@ const IxTag = Tag as unknown as TagComponent
 
 export { IxTag }
 
-export type { TagInstance, TagPublicProps as TagProps, TagShape } from './src/types'
+export type { TagInstance, TagComponent, TagPublicProps as TagProps, TagShape } from './src/types'

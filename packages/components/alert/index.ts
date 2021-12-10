@@ -13,4 +13,10 @@ const IxAlert = Alert as unknown as AlertComponent
 
 export { IxAlert }
 
-export type { AlertInstance, AlertPublicProps as AlertProps, AlertType, AlertPagination } from './src/types'
+export type {
+  AlertInstance,
+  AlertComponent,
+  AlertPublicProps as AlertProps,
+  AlertType,
+  AlertPagination,
+} from './src/types'

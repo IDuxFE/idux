@@ -17,7 +17,9 @@ export { IxAnchor, IxAnchorLink }
 
 export type {
   AnchorInstance,
+  AnchorComponent,
   AnchorPublicProps as AnchorProps,
   AnchorLinkInstance,
+  AnchorLinkComponent,
   AnchorLinkPublicProps as AnchorLinkProps,
 } from './src/types'

@@ -19,8 +19,10 @@ export { DRAWER_TOKEN } from './src/token'
 
 export type {
   DrawerInstance,
+  DrawerComponent,
   DrawerPublicProps as DrawerProps,
   DrawerProviderInstance,
+  DrawerProviderComponent,
   DrawerProviderRef,
   DrawerButtonProps,
   DrawerOptions,

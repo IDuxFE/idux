@@ -13,4 +13,4 @@ const IxEmpty = Empty as unknown as EmptyComponent
 
 export { IxEmpty }
 
-export type { EmptyInstance, EmptyPublicProps as EmptyProps } from './src/types'
+export type { EmptyInstance, EmptyComponent, EmptyPublicProps as EmptyProps } from './src/types'

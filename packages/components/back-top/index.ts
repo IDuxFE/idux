@@ -13,4 +13,4 @@ const IxBackTop = BackTop as unknown as BackTopComponent
 
 export { IxBackTop }
 
-export type { BackTopInstance, BackTopPublicProps as BackTopProps } from './src/types'
+export type { BackTopInstance, BackTopComponent, BackTopPublicProps as BackTopProps } from './src/types'

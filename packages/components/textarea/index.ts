@@ -15,6 +15,7 @@ export { IxTextarea }
 
 export type {
   TextareaInstance,
+  TextareaComponent,
   TextareaPublicProps as TextareaProps,
   TextareaAutoRows,
   TextareaResize,

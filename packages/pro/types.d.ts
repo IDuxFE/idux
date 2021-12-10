@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { LayoutProComponent } from '@idux/pro/layout'
+import type { LayoutProComponent } from '@idux/pro/layout'
 
 declare module 'vue' {
   export interface GlobalComponents {

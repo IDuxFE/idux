@@ -13,4 +13,4 @@ const IxResult = Result as unknown as ResultComponent
 
 export { IxResult }
 
-export type { ResultInstance, ResultPublicProps as ResultProps, ResultStatus } from './src/types'
+export type { ResultInstance, ResultComponent, ResultPublicProps as ResultProps, ResultStatus } from './src/types'

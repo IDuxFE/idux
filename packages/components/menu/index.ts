@@ -23,12 +23,16 @@ export { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub }
 
 export type {
   MenuInstance,
+  MenuComponent,
   MenuPublicProps as MenuProps,
   MenuItemInstance,
+  MenuItemComponent,
   MenuItemPublicProps as MenuItemProps,
   MenuItemGroupInstance,
+  MenuItemGroupComponent,
   MenuItemGroupPublicProps as MenuItemGroupProps,
   MenuSubInstance,
+  MenuSubComponent,
   MenuSubPublicProps as MenuSubProps,
   MenuMode,
   MenuTheme,
@@ -39,3 +43,5 @@ export type {
   MenuSub,
   MenuDivider,
 } from './src/types'
+
+export type MenuDividerComponent = typeof IxMenuDivider

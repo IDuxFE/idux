@@ -13,4 +13,4 @@ const IxDatePicker = DatePicker as unknown as DatePickerComponent
 
 export { IxDatePicker }
 
-export type { DatePickerInstance, DatePickerPublicProps as DatePickerProps } from './src/types'
+export type { DatePickerInstance, DatePickerComponent, DatePickerPublicProps as DatePickerProps } from './src/types'

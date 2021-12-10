@@ -13,4 +13,4 @@ const IxRate = Rate as unknown as RateComponent
 
 export { IxRate }
 
-export type { RateInstance, RatePublicProps as RateProps } from './src/types'
+export type { RateInstance, RateComponent, RatePublicProps as RateProps } from './src/types'

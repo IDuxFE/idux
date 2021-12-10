@@ -13,4 +13,4 @@ const IxBadge = Badge as unknown as BadgeComponent
 
 export { IxBadge }
 
-export type { BadgeInstance, BadgePublicProps as BadgeProps } from './src/types'
+export type { BadgeInstance, BadgeComponent, BadgePublicProps as BadgeProps } from './src/types'

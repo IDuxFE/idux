@@ -17,8 +17,10 @@ export { IxList, IxListItem }
 
 export type {
   ListInstance,
+  ListComponent,
   ListPublicProps as ListProps,
   ListItemInstance,
+  ListItemComponent,
   ListItemPublicProps as ListItemProps,
   ListSize,
   ListLayout,

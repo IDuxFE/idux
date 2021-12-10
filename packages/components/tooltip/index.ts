@@ -13,7 +13,7 @@ const IxTooltip = Tooltip as unknown as TooltipComponent
 
 export { IxTooltip }
 
-export type { TooltipInstance, TooltipPublicProps as TooltipProps } from './src/types'
+export type { TooltipInstance, TooltipComponent, TooltipPublicProps as TooltipProps } from './src/types'
 
 export { tooltipProps as ɵTooltipProps } from './src/types'
 export { useTooltipOverlay as ɵUseTooltipOverlay } from './src/useTooltipOverlay'

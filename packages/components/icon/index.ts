@@ -16,4 +16,4 @@ export { addIconDefinitions, fetchIconFormScript } from './src/helper'
 export { IDUX_ICON_DEPENDENCIES } from './src/dependencies'
 export * from './src/definitions'
 
-export type { IconInstance, IconPublicProps as IconProps, IconDefinition } from './src/types'
+export type { IconInstance, IconComponent, IconPublicProps as IconProps, IconDefinition } from './src/types'

@@ -17,10 +17,12 @@ export { IxButton, IxButtonGroup }
 
 export type {
   ButtonInstance,
+  ButtonComponent,
   ButtonPublicProps as ButtonProps,
   ButtonMode,
   ButtonShape,
   ButtonSize,
   ButtonGroupInstance,
+  ButtonGroupComponent,
   ButtonGroupPublicProps as ButtonGroupProps,
 } from './src/types'

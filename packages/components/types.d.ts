@@ -5,84 +5,149 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AlertComponent } from '@idux/components/alert'
+import type { AnchorComponent, AnchorLinkComponent } from '@idux/components/anchor'
+import type { AvatarComponent } from '@idux/components/avatar'
+import type { BackTopComponent } from '@idux/components/back-top'
+import type { BadgeComponent } from '@idux/components/badge'
+import type { ButtonComponent, ButtonGroupComponent } from '@idux/components/button'
+import type { CardComponent, CardGridComponent } from '@idux/components/card'
+import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
+import type { CollapseComponent, CollapsePanelComponent } from '@idux/components/collapse'
+import type { DatePickerComponent } from '@idux/components/date-picker'
+import type { DividerComponent } from '@idux/components/divider'
+import type { DrawerComponent, DrawerProviderComponent } from '@idux/components/drawer'
+import type { DropdownComponent } from '@idux/components/dropdown'
+import type { EmptyComponent } from '@idux/components/empty'
+import type { FormComponent, FormItemComponent, FormWrapperComponent } from '@idux/components/form'
+import type { ColComponent, RowComponent } from '@idux/components/grid'
+import type { HeaderComponent } from '@idux/components/header'
+import type { IconComponent } from '@idux/components/icon'
+import type { ImageComponent } from '@idux/components/image'
+import type { InputComponent } from '@idux/components/input'
+import type { InputNumberComponent } from '@idux/components/input-number'
+import type {
+  LayoutComponent,
+  LayoutContentComponent,
+  LayoutFooterComponent,
+  LayoutHeaderComponent,
+  LayoutSiderComponent,
+} from '@idux/components/layout'
+import type { ListComponent, ListItemComponent } from '@idux/components/list'
+import type {
+  MenuComponent,
+  MenuDividerComponent,
+  MenuItemComponent,
+  MenuItemGroupComponent,
+  MenuSubComponent,
+} from '@idux/components/menu'
+import type { MessageComponent, MessageProviderComponent } from '@idux/components/message'
+import type { ModalComponent, ModalProviderComponent } from '@idux/components/modal'
+import type { NotificationComponent, NotificationProviderComponent } from '@idux/components/notification'
+import type { PaginationComponent } from '@idux/components/pagination'
+import type { PopconfirmComponent } from '@idux/components/popconfirm'
+import type { PopoverComponent } from '@idux/components/popover'
+import type { ProgressComponent } from '@idux/components/progress'
+import type { RadioComponent, RadioGroupComponent } from '@idux/components/radio'
+import type { RateComponent } from '@idux/components/rate'
+import type { ResultComponent } from '@idux/components/result'
+import type { SelectComponent, SelectOptionComponent, SelectOptionGroupComponent } from '@idux/components/select'
+import type { SkeletonComponent } from '@idux/components/skeleton'
+import type { SpaceComponent } from '@idux/components/space'
+import type { SpinComponent } from '@idux/components/spin'
+import type { StatisticComponent } from '@idux/components/statistic'
+import type { StepperComponent, StepperItemComponent } from '@idux/components/stepper'
+import type { SwitchComponent } from '@idux/components/switch'
+import type { TableComponent } from '@idux/components/table'
+import type { TabComponent, TabsComponent } from '@idux/components/tabs'
+import type { TagComponent } from '@idux/components/tag'
+import type { TextareaComponent } from '@idux/components/textarea'
+import type { TimePickerComponent } from '@idux/components/time-picker'
+import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
+import type { TooltipComponent } from '@idux/components/tooltip'
+import type { TreeComponent } from '@idux/components/tree'
+import type { LayoutProComponent, LayoutSiderTriggerComponent } from '@idux/pro/layout'
+
 declare module 'vue' {
   export interface GlobalComponents {
-    IxAlert: typeof import('@idux/components/alert')['IxAlert']
-    IxAnchor: typeof import('@idux/components/anchor')['IxAnchor']
-    IxAnchorLink: typeof import('@idux/components/anchor')['IxAnchorLink']
-    IxAvatar: typeof import('@idux/components/avatar')['IxAvatar']
-    IxBackTop: typeof import('@idux/components/back-top')['IxBackTop']
-    IxBadge: typeof import('@idux/components/badge')['IxBadge']
-    IxButton: typeof import('@idux/components/button')['IxButton']
-    IxButtonGroup: typeof import('@idux/components/button')['IxButtonGroup']
-    IxCard: typeof import('@idux/components/card')['IxCard']
-    IxCardGrid: typeof import('@idux/components/card')['IxCardGrid']
-    IxCheckbox: typeof import('@idux/components/checkbox')['IxCheckbox']
-    IxCheckboxGroup: typeof import('@idux/components/checkbox')['IxCheckboxGroup']
-    IxCol: typeof import('@idux/components/grid')['IxCol']
-    IxCollapse: typeof import('@idux/components/collapse')['IxCollapse']
-    IxCollapsePanel: typeof import('@idux/components/collapse')['IxCollapsePanel']
-    IxDatePicker: typeof import('@idux/components/date-picker')['IxDatePicker']
-    IxDivider: typeof import('@idux/components/divider')['IxDivider']
-    IxDrawer: typeof import('@idux/components/drawer')['IxDrawer']
-    IxDrawerProvider: typeof import('@idux/components/drawer')['IxDrawerProvider']
-    IxDropdown: typeof import('@idux/components/dropdown')['IxDropdown']
-    IxEmpty: typeof import('@idux/components/empty')['IxEmpty']
-    IxForm: typeof import('@idux/components/form')['IxForm']
-    IxFormItem: typeof import('@idux/components/form')['IxFormItem']
-    IxFormWrapper: typeof import('@idux/components/form')['IxFormWrapper']
-    IxHeader: typeof import('@idux/components/header')['IxHeader']
-    IxIcon: typeof import('@idux/components/icon')['IxIcon']
-    IxImage: typeof import('@idux/components/image')['IxImage']
-    IxInput: typeof import('@idux/components/input')['IxInput']
-    IxInputNumber: typeof import('@idux/components/input-number')['IxInputNumber']
-    IxLayout: typeof import('@idux/components/layout')['IxLayout']
-    IxLayoutContent: typeof import('@idux/components/layout')['IxLayoutContent']
-    IxLayoutFooter: typeof import('@idux/components/layout')['IxLayoutFooter']
-    IxLayoutHeader: typeof import('@idux/components/layout')['IxLayoutHeader']
-    IxLayoutPro: typeof import('@idux/pro/layout')['IxLayoutPro']
-    IxLayoutSider: typeof import('@idux/components/layout')['IxLayoutSider']
-    IxLayoutSiderTrigger: typeof import('@idux/pro/layout')['IxLayoutSiderTrigger']
-    IxList: typeof import('@idux/components/list')['IxList']
-    IxListItem: typeof import('@idux/components/list')['IxListItem']
-    IxMenu: typeof import('@idux/components/menu')['IxMenu']
-    IxMenuDivider: typeof import('@idux/components/menu')['IxMenuDivider']
-    IxMenuItem: typeof import('@idux/components/menu')['IxMenuItem']
-    IxMenuItemGroup: typeof import('@idux/components/menu')['IxMenuItemGroup']
-    IxMenuSub: typeof import('@idux/components/menu')['IxMenuSub']
-    IxMessageProvider: typeof import('@idux/components/message')['IxMessageProvider']
-    IxModal: typeof import('@idux/components/modal')['IxModal']
-    IxModalProvider: typeof import('@idux/components/modal')['IxModalProvider']
-    IxNotificationProvider: typeof import('@idux/components/notification')['IxNotificationProvider']
-    IxPagination: typeof import('@idux/components/pagination')['IxPagination']
-    IxPopconfirm: typeof import('@idux/components/popconfirm')['IxPopconfirm']
-    IxPopover: typeof import('@idux/components/popover')['IxPopover']
-    IxProgress: typeof import('@idux/components/progress')['IxProgress']
-    IxRadio: typeof import('@idux/components/radio')['IxRadio']
-    IxRadioGroup: typeof import('@idux/components/radio')['IxRadioGroup']
-    IxRate: typeof import('@idux/components/rate')['IxRate']
-    IxResult: typeof import('@idux/components/result')['IxResult']
-    IxRow: typeof import('@idux/components/grid')['IxRow']
-    IxSelect: typeof import('@idux/components/select')['IxSelect']
-    IxSelectOption: typeof import('@idux/components/select')['IxSelectOption']
-    IxSelectOptionGroup: typeof import('@idux/components/select')['IxSelectOptionGroup']
-    IxSkeleton: typeof import('@idux/components/skeleton')['IxSkeleton']
-    IxSpace: typeof import('@idux/components/space')['IxSpace']
-    IxSpin: typeof import('@idux/components/spin')['IxSpin']
-    IxStatistic: typeof import('@idux/components/statistic')['IxStatistic']
-    IxStepper: typeof import('@idux/components/stepper')['IxStepper']
-    IxStepperItem: typeof import('@idux/components/stepper')['IxStepperItem']
-    IxSwitch: typeof import('@idux/components/switch')['IxSwitch']
-    IxTab: typeof import('@idux/components/tabs')['IxTab']
-    IxTable: typeof import('@idux/components/table')['IxTable']
-    IxTabs: typeof import('@idux/components/tabs')['IxTabs']
-    IxTag: typeof import('@idux/components/tag')['IxTag']
-    IxTextarea: typeof import('@idux/components/textarea')['IxTextarea']
-    IxTimeline: typeof import('@idux/components/timeline')['IxTimeline']
-    IxTimelineItem: typeof import('@idux/components/timeline')['IxTimelineItem']
-    IxTimePicker: typeof import('@idux/components/time-picker')['IxTimePicker']
-    IxTooltip: typeof import('@idux/components/tooltip')['IxTooltip']
-    IxTree: typeof import('@idux/components/tree')['IxTree']
+    IxAlert: AlertComponent
+    IxAnchor: AnchorComponent
+    IxAnchorLink: AnchorLinkComponent
+    IxAvatar: AvatarComponent
+    IxBackTop: BackTopComponent
+    IxBadge: BadgeComponent
+    IxButton: ButtonComponent
+    IxButtonGroup: ButtonGroupComponent
+    IxCard: CardComponent
+    IxCardGrid: CardGridComponent
+    IxCheckbox: CheckboxComponent
+    IxCheckboxGroup: CheckboxGroupComponent
+    IxCol: ColComponent
+    IxCollapse: CollapseComponent
+    IxCollapsePanel: CollapsePanelComponent
+    IxDatePicker: DatePickerComponent
+    IxDivider: DividerComponent
+    IxDrawer: DrawerComponent
+    IxDrawerProvider: DrawerProviderComponent
+    IxDropdown: DropdownComponent
+    IxEmpty: EmptyComponent
+    IxForm: FormComponent
+    IxFormItem: FormItemComponent
+    IxFormWrapper: FormWrapperComponent
+    IxHeader: HeaderComponent
+    IxIcon: IconComponent
+    IxImage: ImageComponent
+    IxInput: InputComponent
+    IxInputNumber: InputNumberComponent
+    IxLayout: LayoutComponent
+    IxLayoutContent: LayoutContentComponent
+    IxLayoutFooter: LayoutFooterComponent
+    IxLayoutHeader: LayoutHeaderComponent
+    IxLayoutPro: LayoutProComponent
+    IxLayoutSider: LayoutSiderComponent
+    IxLayoutSiderTrigger: LayoutSiderTriggerComponent
+    IxList: ListComponent
+    IxListItem: ListItemComponent
+    IxMenu: MenuComponent
+    IxMenuDivider: MenuDividerComponent
+    IxMenuItem: MenuItemComponent
+    IxMenuItemGroup: MenuItemGroupComponent
+    IxMenuSub: MenuSubComponent
+    IxMessage: MessageComponent
+    IxMessageProvider: MessageProviderComponent
+    IxModal: ModalComponent
+    IxModalProvider: ModalProviderComponent
+    IxNotification: NotificationComponent
+    IxNotificationProvider: NotificationProviderComponent
+    IxPagination: PaginationComponent
+    IxPopconfirm: PopconfirmComponent
+    IxPopover: PopoverComponent
+    IxProgress: ProgressComponent
+    IxRadio: RadioComponent
+    IxRadioGroup: RadioGroupComponent
+    IxRate: RateComponent
+    IxResult: ResultComponent
+    IxRow: RowComponent
+    IxSelect: SelectComponent
+    IxSelectOption: SelectOptionComponent
+    IxSelectOptionGroup: SelectOptionGroupComponent
+    IxSkeleton: SkeletonComponent
+    IxSpace: SpaceComponent
+    IxSpin: SpinComponent
+    IxStatistic: StatisticComponent
+    IxStepper: StepperComponent
+    IxStepperItem: StepperItemComponent
+    IxSwitch: SwitchComponent
+    IxTab: TabComponent
+    IxTable: TableComponent
+    IxTabs: TabsComponent
+    IxTag: TagComponent
+    IxTextarea: TextareaComponent
+    IxTimeline: TimelineComponent
+    IxTimelineItem: TimelineItemComponent
+    IxTimePicker: TimePickerComponent
+    IxTooltip: TooltipComponent
+    IxTree: TreeComponent
   }
 }
 

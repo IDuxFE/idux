@@ -19,8 +19,10 @@ export { MODAL_TOKEN } from './src/token'
 
 export type {
   ModalInstance,
+  ModalComponent,
   ModalPublicProps as ModalProps,
   ModalProviderInstance,
+  ModalProviderComponent,
   ModalProviderRef,
   ModalType,
   ModalButtonProps,
