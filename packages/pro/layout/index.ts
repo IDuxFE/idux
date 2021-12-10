@@ -6,25 +6,19 @@
  */
 
 import type { LayoutProComponent } from './src/types'
-import type { MenuClickOptions } from '@idux/components/menu'
 
 import LayoutPro from './src/Layout'
-import LayoutSiderTrigger from './src/LayoutSiderTrigger'
 
 const IxLayoutPro = LayoutPro as unknown as LayoutProComponent
-const IxLayoutSiderTrigger = LayoutSiderTrigger
 
-export type { MenuClickOptions }
+export { IxLayoutPro }
+
 export type {
-  LayoutProPublicProps as LayoutProProps,
-  LayoutSiderTriggerPublicProps as LayoutSiderTriggerProps,
   LayoutProInstance,
   LayoutProComponent,
-  LayoutSiderTriggerInstance,
-  LayoutSiderTriggerComponent,
+  LayoutProPublicProps as LayoutProProps,
   LayoutProThemes,
   LayoutProModeTypes,
   LayoutProMenuData,
   LayoutProMenuPath,
 } from './src/types'
-export { IxLayoutPro, IxLayoutSiderTrigger }

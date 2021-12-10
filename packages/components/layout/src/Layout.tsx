@@ -14,18 +14,12 @@ import { layoutProps } from './types'
 export default defineComponent({
   name: 'IxLayout',
   props: layoutProps,
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout`)
-    const classes = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return {
-        [prefixCls]: true,
-        [`${prefixCls}-out-sider`]: props.outSider,
-      }
-    })
+
     return () => {
-      return <section class={classes.value}>{slots.default?.()}</section>
+      return <section class={mergedPrefixCls.value}>{slots.default?.()}</section>
     }
   },
 })

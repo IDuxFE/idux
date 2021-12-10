@@ -1,12 +1,14 @@
 ---
 title:
-  zh: 自定义折叠触发器
-  en: Trigger
-order: 6
+  zh: 侧边栏触发器
+  en: Sider trigger
+order: 4
 ---
 
 ## zh
 
-如果不喜欢自带的折叠样式，可以进行自定义
+你可以任意自定义触发器的样式。
 
 ## en
+
+You can customize the style of the trigger.

@@ -12,7 +12,7 @@
     <template #siderTop>
       <div class="sider-top" :style="siderTopStyle">
         <div v-show="!collapsed" class="title">title</div>
-        <IxLayoutSiderTrigger foldedIcon="right" unfoldedIcon="left"></IxLayoutSiderTrigger>
+        <IxLayoutSiderTrigger></IxLayoutSiderTrigger>
       </div>
     </template>
     <template #default>

@@ -1,12 +1,14 @@
 ---
 title:
-  zh: 响应式
-  en: Breakpoint
-order: 4
+  zh: 响应式侧边栏
+  en: Reactive sider
+order: 3
 ---
 
 ## zh
 
-响应式侧边栏，可以配合`showTrigger`属性一起使用
+响应式侧边栏，配合响应式断点使用。
 
 ## en
+
+Reactive sider, used with reactive breakpoints.

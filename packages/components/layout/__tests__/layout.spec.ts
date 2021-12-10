@@ -1,4 +1,4 @@
-import { MountingOptions, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 
 import { renderWork } from '@tests'
@@ -8,6 +8,7 @@ import LayoutContent from '../src/LayoutContent'
 import LayoutFooter from '../src/LayoutFooter'
 import LayoutHeader from '../src/LayoutHeader'
 import LayoutSider from '../src/LayoutSider'
+import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
 import { LayoutProps } from '../src/types'
 
 const defaultSlots = [
@@ -24,77 +25,33 @@ describe('Layout', () => {
     },
   })
 
-  describe('basic work', () => {
-    const LayoutMount = (options?: MountingOptions<Partial<LayoutProps>>) => {
-      const { slots, ...rest } = options || {}
-      const mergedOptions = {
-        slots: { default: () => defaultSlots, ...slots },
-        ...rest,
-      } as MountingOptions<LayoutProps>
-      return mount(Layout, mergedOptions)
-    }
-
-    test('outSider work', async () => {
-      const wrapper = LayoutMount({
-        props: {
-          outSider: true,
-        },
-      })
-
-      expect(wrapper.classes()).toContain('ix-layout-out-sider')
-    })
-  })
-
   describe('LayoutSider', () => {
-    test('placement work', async () => {
+    test('collapsed work', async () => {
       const wrapper = mount(Layout, {
         slots: {
-          default: () => [h(LayoutSider, { placement: 'end' }, { default: () => 'sider' })],
+          default: () => [h(LayoutSider, { collapsed: true }, { default: () => 'sider' })],
         },
       })
 
-      expect(wrapper.find('.ix-layout-sider').classes()).toContain('ix-layout-sider-end')
+      expect(wrapper.find('.ix-layout-sider').classes()).toContain('ix-layout-sider-collapsed')
     })
 
-    test('showTrigger work', async () => {
+    test('trigger work', async () => {
       const wrapper = mount(Layout, {
         slots: {
           default: () => [
-            h(
-              LayoutSider,
-              {
-                showTrigger: true,
-              },
-              {
-                default: () => 'sider',
-              },
-            ),
+            h(LayoutSider, null, {
+              default: () => h(LayoutSiderTrigger),
+            }),
           ],
         },
       })
 
-      expect(wrapper.find('.ix-layout-sider-trigger').exists()).toBeTruthy()
-    })
+      expect(wrapper.find('.ix-layout-sider').classes()).not.toContain('ix-layout-sider-collapsed')
 
-    test('trigger slot work', async () => {
-      const wrapper = mount(Layout, {
-        slots: {
-          default: () => [
-            h(
-              LayoutSider,
-              {
-                showTrigger: true,
-              },
-              {
-                default: () => 'sider',
-                trigger: () => h('div', { class: 'slotTrigger' }, 'triggerDiv'),
-              },
-            ),
-          ],
-        },
-      })
+      await wrapper.find('.ix-layout-sider-trigger').trigger('click')
 
-      expect(wrapper.find('.slotTrigger').exists()).toBeTruthy()
+      expect(wrapper.find('.ix-layout-sider').classes()).toContain('ix-layout-sider-collapsed')
     })
   })
 })

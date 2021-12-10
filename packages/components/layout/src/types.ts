@@ -11,11 +11,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type LayoutSiderCollapseType = 'trigger' | 'breakpoint'
-
-export const layoutProps = {
-  outSider: IxPropTypes.bool.def(false),
-}
+export const layoutProps = {}
 
 export type LayoutProps = IxInnerPropTypes<typeof layoutProps>
 export type LayoutPublicProps = IxPublicPropTypes<typeof layoutProps>
@@ -40,20 +36,22 @@ export type LayoutContentComponent = DefineComponent<
 >
 export type LayoutContentInstance = InstanceType<DefineComponent<LayoutContentProps>>
 
+export const layoutFooterProps = {}
+
+export type LayoutFooterProps = IxInnerPropTypes<typeof layoutFooterProps>
+export type LayoutFooterPublicProps = IxPublicPropTypes<typeof layoutFooterProps>
+export type LayoutFooterComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof LayoutFooterPublicProps> & LayoutFooterPublicProps
+>
+export type LayoutFooterInstance = InstanceType<DefineComponent<LayoutFooterProps>>
+
 export const layoutSiderProps = {
-  collapsed: IxPropTypes.bool.def(false),
+  collapsed: IxPropTypes.bool,
   breakpoint: IxPropTypes.oneOf<BreakpointKey>(['xs', 'sm', 'md', 'lg', 'xl']),
-  placement: IxPropTypes.oneOf(['start', 'end'] as const).def('start'),
-  showTrigger: IxPropTypes.bool.def(false),
 
   // events
   'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
-  onCollapse: IxPropTypes.emit<(collapsed: boolean, type: LayoutSiderCollapseType) => void>(),
-}
-
-export const triggerProps = {
-  collapsed: IxPropTypes.bool.def(false),
-  onClick: IxPropTypes.emit<(collapsed: boolean) => void>(),
+  onCollapse: IxPropTypes.emit<(collapsed: boolean, type: 'trigger' | 'breakpoint') => void>(),
 }
 
 export type LayoutSiderProps = IxInnerPropTypes<typeof layoutSiderProps>
@@ -63,11 +61,13 @@ export type LayoutSiderComponent = DefineComponent<
 >
 export type LayoutSiderInstance = InstanceType<DefineComponent<LayoutSiderProps>>
 
-export const layoutFooterProps = {}
+export const layoutSiderTriggerProps = {
+  icons: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, IxPropTypes.vNode])),
+}
 
-export type LayoutFooterProps = IxInnerPropTypes<typeof layoutFooterProps>
-export type LayoutFooterPublicProps = IxPublicPropTypes<typeof layoutFooterProps>
-export type LayoutFooterComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof LayoutFooterPublicProps> & LayoutFooterPublicProps
+export type LayoutSiderTriggerProps = IxInnerPropTypes<typeof layoutSiderTriggerProps>
+export type LayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof layoutSiderTriggerProps>
+export type LayoutSiderTriggerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof LayoutSiderTriggerPublicProps> & LayoutSiderTriggerPublicProps
 >
-export type LayoutFooterInstance = InstanceType<DefineComponent<LayoutFooterProps>>
+export type LayoutSiderTriggerInstance = InstanceType<DefineComponent<LayoutSiderTriggerProps>>

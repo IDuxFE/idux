@@ -14,7 +14,7 @@ import { layoutContentProps } from './types'
 export default defineComponent({
   name: 'IxLayoutContent',
   props: layoutContentProps,
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-content`)
     return () => {

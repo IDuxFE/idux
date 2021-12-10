@@ -30,6 +30,8 @@ import {
   Left,
   Loading,
   Menu,
+  MenuFold,
+  MenuUnfold,
   Minus,
   Plus,
   QuestionCircle,
@@ -68,6 +70,8 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Left, // date-panel
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout
+  MenuFold, // Layout
+  MenuUnfold, // Layout
   Minus, // Table
   Plus, // Table
   QuestionCircle, // FormItem
