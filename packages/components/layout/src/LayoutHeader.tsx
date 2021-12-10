@@ -14,7 +14,7 @@ import { layoutHeaderProps } from './types'
 export default defineComponent({
   name: 'IxLayoutHeader',
   props: layoutHeaderProps,
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-header`)
     return () => {

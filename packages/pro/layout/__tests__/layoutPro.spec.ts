@@ -5,10 +5,10 @@ import { renderWork } from '@tests'
 
 import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
+import { IxLayoutSiderTrigger } from '@idux/components/layout'
 import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
 
 import LayoutPro from '../src/Layout'
-import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
 import { LayoutProMenuData, LayoutProProps } from '../src/types'
 
 export const dataSource: LayoutProMenuData[] = [
@@ -121,14 +121,14 @@ describe('LayoutPro', () => {
         'onUpdate:collapsed': onUpdateCollapsed,
       },
       slots: {
-        siderTop: () => h(LayoutSiderTrigger),
+        siderTop: () => h(IxLayoutSiderTrigger),
       },
     })
     await flushPromises()
 
     expect(wrapper.find(`${cpmCls}-sider-collapsed`).exists()).toBe(false)
 
-    await wrapper.findComponent(LayoutSiderTrigger).trigger('click')
+    await wrapper.findComponent(IxLayoutSiderTrigger).trigger('click')
 
     expect(onUpdateCollapsed).toBeCalledWith(true)
   })
@@ -282,42 +282,44 @@ describe('LayoutPro', () => {
     expect(wrapper.find(`.${prefix}-layout-content`).find('#default').exists()).toBe(true)
   })
 
-  test('LayoutSiderTrigger icon work', async () => {
+  test('trigger icon work', async () => {
     const wrapper = LayoutProMount({
       props: {
         collapsed: false,
       },
       slots: {
-        siderTop: () => h(LayoutSiderTrigger),
+        siderTop: () => h(IxLayoutSiderTrigger),
       },
     })
     await flushPromises()
 
-    expect(wrapper.findComponent(LayoutSiderTrigger).find(`.${prefix}-icon-menu-unfold`).exists()).toBe(true)
+    expect(wrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-menu-unfold`).exists()).toBe(true)
 
     await wrapper.setProps({
       collapsed: true,
     })
 
-    expect(wrapper.findComponent(LayoutSiderTrigger).find(`.${prefix}-icon-menu-fold`).exists()).toBe(true)
+    expect(wrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-menu-fold`).exists()).toBe(true)
 
     const customStringIconWrapper = LayoutProMount({
       props: {
         collapsed: false,
       },
       slots: {
-        siderTop: () => h(LayoutSiderTrigger, { foldedIcon: 'right', unfoldedIcon: 'left' }),
+        siderTop: () => h(IxLayoutSiderTrigger, { icons: ['right', 'left'] }),
       },
     })
     await flushPromises()
 
-    expect(customStringIconWrapper.findComponent(LayoutSiderTrigger).find(`.${prefix}-icon-left`).exists()).toBe(true)
+    expect(customStringIconWrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-left`).exists()).toBe(true)
 
     await customStringIconWrapper.setProps({
       collapsed: true,
     })
 
-    expect(customStringIconWrapper.findComponent(LayoutSiderTrigger).find(`.${prefix}-icon-right`).exists()).toBe(true)
+    expect(customStringIconWrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-right`).exists()).toBe(
+      true,
+    )
 
     const customRenderIconWrapper = LayoutProMount({
       props: {
@@ -325,20 +327,19 @@ describe('LayoutPro', () => {
       },
       slots: {
         siderTop: () =>
-          h(LayoutSiderTrigger, {
-            foldedIcon: h(IxIcon, { name: 'star' }),
-            unfoldedIcon: h(IxButton, null, () => 'put'),
+          h(IxLayoutSiderTrigger, {
+            icons: ['star', h(IxButton, null, () => 'put')],
           }),
       },
     })
     await flushPromises()
 
-    expect(customRenderIconWrapper.findComponent(LayoutSiderTrigger).findComponent(IxButton).exists()).toBe(true)
+    expect(customRenderIconWrapper.findComponent(IxLayoutSiderTrigger).findComponent(IxButton).exists()).toBe(true)
 
     await customRenderIconWrapper.setProps({
       collapsed: true,
     })
 
-    expect(customRenderIconWrapper.findComponent(LayoutSiderTrigger).findComponent(IxIcon).exists()).toBe(true)
+    expect(customRenderIconWrapper.findComponent(IxLayoutSiderTrigger).findComponent(IxIcon).exists()).toBe(true)
   })
 })

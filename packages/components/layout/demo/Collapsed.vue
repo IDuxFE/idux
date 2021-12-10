@@ -1,37 +1,18 @@
 <template>
   <IxLayout>
-    <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider v-model:collapsed="collapsed" :show-trigger="true">sider</IxLayoutSider>
-    <IxLayoutContent> collapsed: {{ collapsed }} </IxLayoutContent>
-    <IxLayoutFooter>footer</IxLayoutFooter>
+    <IxLayoutHeader>Header</IxLayoutHeader>
+    <IxLayoutSider v-model:collapsed="collapsed">Sider</IxLayoutSider>
+    <IxLayoutContent> <IxButton @click="changeCollapsed">Change Collapsed</IxButton> </IxLayoutContent>
+    <IxLayoutFooter>Footer</IxLayoutFooter>
   </IxLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const collapsed = ref(true)
-    return {
-      collapsed,
-    }
-  },
-})
-</script>
+const collapsed = ref(true)
 
-<style lang="less" scoped>
-.ix-layout {
-  background-color: @color-blue;
-  &-footer,
-  &-header {
-    background-color: @color-blue-l20;
-  }
-  &-sider {
-    background-color: @color-blue-l10;
-  }
-  &-content {
-    height: 200px;
-  }
+const changeCollapsed = () => {
+  collapsed.value = !collapsed.value
 }
-</style>
+</script>

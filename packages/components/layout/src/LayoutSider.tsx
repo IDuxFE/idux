@@ -5,18 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { LayoutSiderCollapseType, LayoutSiderProps } from './types'
-import type { ComputedRef } from 'vue'
+import type { LayoutSiderProps } from './types'
 
-import { computed, defineComponent, ref, watch } from 'vue'
+import { WatchStopHandle, computed, defineComponent, normalizeClass, provide, watch, watchEffect } from 'vue'
 
-import { isUndefined } from 'lodash-es'
-
-import { BREAKPOINTS, useBreakpoints } from '@idux/cdk/breakpoint'
-import { callEmit, hasSlot } from '@idux/cdk/utils'
+import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
-import Trigger from './Trigger'
+import { layoutSiderToken } from './token'
 import { layoutSiderProps } from './types'
 
 export default defineComponent({
@@ -25,78 +22,58 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-sider`)
-    const isDefinedBreakPoint = computed(() => {
-      return !isUndefined(props.breakpoint)
-    })
 
-    const hasTriggerSlot = hasSlot(slots, 'trigger')
-    const { isCollapsed, handleClick } = useCollapsed(props, isDefinedBreakPoint, hasTriggerSlot)
+    const { collapsed, setCollapsed } = useCollapsed(props)
+    provide(layoutSiderToken, { collapsed, setCollapsed })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-end`]: props.placement === 'end',
-        [`${prefixCls}-collapsed`]: isCollapsed.value,
-      }
+        [`${prefixCls}-collapsed`]: collapsed.value,
+      })
     })
 
     return () => {
-      const prefixCls = mergedPrefixCls.value
-      const trigger =
-        props.showTrigger &&
-        (slots.trigger ? slots.trigger() : <Trigger collapsed={isCollapsed.value} onClick={handleClick} />)
-      return (
-        <aside class={classes.value}>
-          <div class={`${prefixCls}-children`}>{slots.default?.()}</div>
-          {trigger}
-        </aside>
-      )
+      return <aside class={classes.value}>{slots.default?.()}</aside>
     }
   },
 })
 
-const useCollapsed = (props: LayoutSiderProps, isDefinedBreakPoint: ComputedRef<boolean>, hasTriggerSlot: boolean) => {
-  const isCollapsed = ref(props.collapsed)
-  let handleClick = () => {}
+const useCollapsed = (props: LayoutSiderProps) => {
+  const [collapsed, _setCollapsed] = useControlledProp(props, 'collapsed', false)
 
-  const changeCollapsed = (collapsed: boolean, type: LayoutSiderCollapseType) => {
-    isCollapsed.value = collapsed
-    callEmit(props['onUpdate:collapsed'], collapsed)
+  const changeCollapsed = (collapsed: boolean, type: 'trigger' | 'breakpoint') => {
+    _setCollapsed(collapsed)
     callEmit(props.onCollapse, collapsed, type)
   }
 
-  if (isDefinedBreakPoint.value) {
-    const matchBreakpointsMaxWidth = props.breakpoint && BREAKPOINTS[props.breakpoint]?.match(/\(max-width.*\)/)?.[0]
-    const breakpointsState = matchBreakpointsMaxWidth && useBreakpoints(matchBreakpointsMaxWidth)
+  const breakpointIndex = computed(() => {
+    const { breakpoint } = props
+    return breakpoint ? BREAKPOINTS_KEYS.indexOf(breakpoint) : -1
+  })
+  const useBreakpoint = computed(() => breakpointIndex.value > -1)
 
-    watch(
-      () => breakpointsState && breakpointsState.matches,
-      value => {
-        changeCollapsed(value as boolean, 'breakpoint')
-      },
-      {
-        // When breakpoint and collapsed exist at the same time, the breakpoint value takes precedence
-        immediate: true,
-      },
-    )
+  let stopBreakpoints: WatchStopHandle | undefined
+  watch(
+    useBreakpoint,
+    breakpoint => {
+      stopBreakpoints?.()
+
+      if (breakpoint) {
+        const breakpoints = useSharedBreakpoints()
+        stopBreakpoints = watchEffect(() => {
+          const currBreakpointIndex = BREAKPOINTS_KEYS.findIndex(key => breakpoints[key])
+          changeCollapsed(currBreakpointIndex <= breakpointIndex.value, 'breakpoint')
+        })
+      }
+    },
+    { immediate: true },
+  )
+
+  const setCollapsed = (collapsed: boolean) => {
+    changeCollapsed(collapsed, 'trigger')
   }
 
-  handleClick = () => {
-    changeCollapsed(!isCollapsed.value, 'trigger')
-  }
-
-  if (hasTriggerSlot) {
-    watch(
-      () => props.collapsed,
-      value => {
-        changeCollapsed(value!, 'trigger')
-      },
-    )
-  }
-
-  return {
-    isCollapsed,
-    handleClick,
-  }
+  return { collapsed, setCollapsed }
 }

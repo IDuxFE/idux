@@ -14,7 +14,7 @@ import { layoutFooterProps } from './types'
 export default defineComponent({
   name: 'IxLayoutFooter',
   props: layoutFooterProps,
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-footer`)
     return () => {

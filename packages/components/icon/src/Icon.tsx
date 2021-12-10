@@ -7,7 +7,6 @@
 
 import type { IconProps } from './types'
 import type { IconConfig } from '@idux/components/config'
-import type { Ref } from 'vue'
 
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 
@@ -25,21 +24,25 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-icon`)
     const config = useGlobalConfig('icon')
 
-    const root = ref(null as unknown as HTMLElement)
+    const root = ref<HTMLElement>()
 
-    onMounted(() => appendChild(props, config, root))
+    onMounted(() => appendChild(props, config, root.value!))
 
     watch([() => props.name, () => props.iconfont], () => {
-      clearSVGElement(root.value)
-      appendChild(props, config, root)
+      const rootElement = root.value
+      if (!rootElement) {
+        return
+      }
+      clearSVGElement(rootElement)
+      appendChild(props, config, rootElement)
     })
 
     watch(
       () => props.rotate,
       rotate => {
-        const firstChild = root.value.firstElementChild as SVGElement
+        const firstChild = root.value?.firstElementChild
         if (firstChild) {
-          handleRotate(firstChild, rotate)
+          handleRotate(firstChild as SVGElement, rotate)
         }
       },
     )
@@ -70,7 +73,7 @@ export default defineComponent({
   },
 })
 
-async function appendChild(props: IconProps, config: IconConfig, root: Ref<HTMLElement>): Promise<void> {
+async function appendChild(props: IconProps, config: IconConfig, rootElement: HTMLElement): Promise<void> {
   const { name, iconfont, rotate } = props
   if (name) {
     const svgElement = iconfont
@@ -78,7 +81,7 @@ async function appendChild(props: IconProps, config: IconConfig, root: Ref<HTMLE
       : await loadSVGElement(name, config.loadIconDynamically)
     if (svgElement) {
       handleRotate(svgElement, rotate)
-      root.value?.appendChild(svgElement)
+      rootElement.appendChild(svgElement)
     }
   }
 }

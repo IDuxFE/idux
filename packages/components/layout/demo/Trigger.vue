@@ -1,54 +1,29 @@
 <template>
   <IxLayout>
-    <IxLayoutHeader>header</IxLayoutHeader>
-    <IxLayoutSider v-model:collapsed="collapsed" :show-trigger="true">
-      <template #trigger>
-        <IxButton class="trigger" :icon="iconName" shape="circle" @click="onClick"></IxButton>
-      </template>
+    <IxLayoutHeader>Header</IxLayoutHeader>
+    <IxLayoutSider>
+      <div class="ix-layout-sider-content">Sider</div>
+      <IxLayoutSiderTrigger></IxLayoutSiderTrigger>
     </IxLayoutSider>
-    <IxLayoutContent> collapsed: {{ collapsed }} </IxLayoutContent>
-    <IxLayoutFooter>footer</IxLayoutFooter>
+    <IxLayoutContent>Content</IxLayoutContent>
+    <IxLayoutFooter>Footer</IxLayoutFooter>
   </IxLayout>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup() {
-    const collapsed = ref(true)
-    const onClick = () => {
-      collapsed.value = !collapsed.value
-    }
-    const iconName = computed(() => {
-      return collapsed.value ? 'right' : 'left'
-    })
-    return {
-      iconName,
-      collapsed,
-      onClick,
-    }
-  },
-})
-</script>
-
-<style lang="less" scoped>
+<style scoped lang="less">
 .ix-layout {
-  background-color: @color-blue;
-  &-footer,
-  &-header {
-    background-color: @color-blue-l20;
-  }
   &-sider {
-    background-color: @color-blue-l10;
-  }
-  &-content {
-    height: 200px;
-  }
-  .trigger {
-    position: absolute;
-    top: 50%;
-    right: -15px;
+    padding-bottom: 48px;
+    line-height: 1;
+    &-content {
+      padding-top: 48px;
+      height: 100%;
+    }
+
+    &-trigger {
+      background: @color-blue;
+      line-height: 48px;
+    }
   }
 }
 </style>

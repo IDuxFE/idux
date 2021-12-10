@@ -1,11 +1,15 @@
 // button
+
 [id^='components-button-demo-'] .ix-button {
   margin: 8px 12px 8px 0;
 }
 
 // grid
+
 [id^='components-grid-demo-'] {
+
   .ix-row:not(.gutter-row) {
+
     .ix-col {
       background: @color-primary;
       color: @color-white;
@@ -19,12 +23,39 @@
   }
 }
 
+// layout
+
+[id^='components-layout-demo-'] {
+
+  .ix-layout {
+    text-align: center;
+
+    &-footer,
+    &-header {
+      background-color: @color-blue-l20;
+    }
+
+    &-sider {
+      background-color: @color-blue-l10;
+      line-height: 120px;
+    }
+
+    &-content {
+      background-color: @color-blue;
+      height: 120px;
+      line-height: 120px;
+    }
+  }
+}
+
 // select
+
 [id^='components-select-demo-'] .ix-select {
   margin-bottom: 16px;
 }
 
 // card
+
 [id^='components-card-demo-'] .ix-card {
   max-width: 300px;
 }

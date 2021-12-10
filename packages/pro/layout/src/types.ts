@@ -8,7 +8,7 @@
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { MenuClickOptions, MenuData, MenuDivider, MenuItemGroup, MenuSub } from '@idux/components/menu'
-import type { DefineComponent, HTMLAttributes, Ref, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, Ref } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -64,13 +64,3 @@ export type LayoutSiderTriggerType = {
   collapsed: Readonly<Ref<boolean>>
   changeCollapsed: (collapsed: boolean) => void
 }
-export const layoutSiderTriggerProps = {
-  foldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
-  unfoldedIcon: IxPropTypes.oneOfType<string | VNode>([String, IxPropTypes.vNode]),
-}
-export type LayoutSiderTriggerProps = IxInnerPropTypes<typeof layoutSiderTriggerProps>
-export type LayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof layoutProProps>
-export type LayoutSiderTriggerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof LayoutSiderTriggerPublicProps> & LayoutSiderTriggerPublicProps
->
-export type LayoutSiderTriggerInstance = InstanceType<DefineComponent<LayoutSiderTriggerProps>>
