@@ -2,11 +2,10 @@
 
 exports[`Statistic render work 1`] = `
 "<div class=\\"ix-statistic\\">
-  <!--v-if-->
+  <!---->
   <div class=\\"ix-statistic-content\\">
-    <!--v-if--><span class=\\"ix-statistic-content-value\\"><span class=\\"ix-statistic-content-value-int\\"></span>
-    <!--v-if--></span>
-    <!--v-if-->
+    <!----><span class=\\"ix-statistic-content-value\\"><span class=\\"ix-statistic-content-value-int\\"></span></span>
+    <!---->
   </div>
 </div>"
 `;

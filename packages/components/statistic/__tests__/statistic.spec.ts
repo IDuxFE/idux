@@ -2,7 +2,7 @@ import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import IxStatistic from '../src/Statistic.vue'
+import IxStatistic from '../src/Statistic'
 import { StatisticProps } from '../src/types'
 
 describe('Statistic', () => {

@@ -7,7 +7,7 @@
 
 import type { StatisticComponent } from './src/types'
 
-import Statistic from './src/Statistic.vue'
+import Statistic from './src/Statistic'
 
 const IxStatistic = Statistic as unknown as StatisticComponent
 
