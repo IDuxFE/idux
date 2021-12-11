@@ -3,31 +3,19 @@ import { h } from 'vue'
 
 import { renderWork } from '@tests'
 
-import { IxButton } from '@idux/components/button'
-import { IxIcon } from '@idux/components/icon'
-import { IxLayoutSiderTrigger } from '@idux/components/layout'
-import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
+import ProLayout from '../src/Layout'
+import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
+import { ProLayoutMenuData, ProLayoutProps } from '../src/types'
 
-import LayoutPro from '../src/Layout'
-import { LayoutProMenuData, LayoutProProps } from '../src/types'
-
-export const dataSource: LayoutProMenuData[] = [
+const dataSource: ProLayoutMenuData[] = [
   {
     type: 'sub',
     key: 'sub1',
     icon: 'setting',
     label: 'Sub Menu 1',
     children: [
-      {
-        type: 'itemGroup',
-        key: 'itemGroup1',
-        icon: 'setting',
-        label: 'Item Group 1',
-        children: [
-          { type: 'item', key: 'item4', label: 'Item 4', disabled: true },
-          { type: 'item', key: 'item5', label: 'Item 5' },
-        ],
-      },
+      { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting', disabled: true },
+      { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
       { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
@@ -61,285 +49,172 @@ export const dataSource: LayoutProMenuData[] = [
       { type: 'item', key: 'item11', label: 'Item 11' },
     ],
   },
-  { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
+  { type: 'item', key: 'item12', icon: 'mail', label: 'Item 12' },
 ]
 
-export const defaultSelectedLabel = 'Item 5'
-
-const prefix = 'ix'
-const cpmCls = `${prefix}-layout-pro`
+const defaultSelectedLabel = 'Item 5'
 const defaultContent = 'This is page content'
 
-describe('LayoutPro', () => {
-  const LayoutProMount = (options?: MountingOptions<Partial<LayoutProProps>>) => {
-    const { props, ...rest } = options || {}
+describe('ProLayout', () => {
+  const ProLayoutMount = (options?: MountingOptions<Partial<ProLayoutProps>>) => {
+    const { props, slots, ...rest } = options || {}
     const _options = {
       props: {
-        activeKey: null,
         menus: dataSource,
         ...props,
       },
+      slots: {
+        default: () => defaultContent,
+        ...slots,
+      },
       ...rest,
-    } as MountingOptions<LayoutProProps>
-    return mount(LayoutPro, { ..._options })
+    } as MountingOptions<ProLayoutProps>
+    return mount(ProLayout, { ..._options })
   }
 
-  renderWork<LayoutProProps>(LayoutPro, {
-    props: {
-      menus: [],
-    },
-    slots: {
-      default: () => defaultContent,
-    },
+  renderWork<ProLayoutProps>(ProLayout, {
+    props: { menus: dataSource },
+    slots: { default: () => defaultContent },
   })
 
-  test('activeKey work', async () => {
+  test('v-model:activeKey work', async () => {
     const onUpdateActiveKey = jest.fn()
-    const wrapper = LayoutProMount({
-      props: {
-        'onUpdate:activeKey': onUpdateActiveKey,
-      },
+    const wrapper = ProLayoutMount({
+      props: { 'onUpdate:activeKey': onUpdateActiveKey },
     })
-    await flushPromises()
 
-    expect(wrapper.find(`.${prefix}-menu-item-selected`).html().toString().includes(defaultSelectedLabel))
+    expect(wrapper.find('.ix-menu-item-selected').text()).toBe(defaultSelectedLabel)
 
-    wrapper.setProps({ activeKey: 'item7' })
+    await wrapper.setProps({ activeKey: 'item7' })
 
-    expect(wrapper.find(`.${prefix}-menu-item-selected`).html().toString().includes('Item 7'))
+    expect(wrapper.find('.ix-menu-item-selected').text()).toBe('Item 7')
 
-    await wrapper.findComponent(IxMenuItem).trigger('click')
+    const items = await wrapper.findAll('.ix-menu-item')
+    await items[items.length - 1].trigger('click')
 
-    expect(onUpdateActiveKey).toBeCalled()
+    expect(onUpdateActiveKey).toBeCalledWith('item12')
   })
 
-  test('collapsed work', async () => {
+  test('v-model:collapsed work', async () => {
     const onUpdateCollapsed = jest.fn()
-    const wrapper = LayoutProMount({
-      props: {
-        collapsed: false,
-        'onUpdate:collapsed': onUpdateCollapsed,
-      },
+    const wrapper = ProLayoutMount({
+      props: { collapsed: true, 'onUpdate:collapsed': onUpdateCollapsed },
       slots: {
-        siderTop: () => h(IxLayoutSiderTrigger),
+        siderFooter: () => h(LayoutSiderTrigger),
       },
     })
-    await flushPromises()
 
-    expect(wrapper.find(`${cpmCls}-sider-collapsed`).exists()).toBe(false)
+    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(true)
 
-    await wrapper.findComponent(IxLayoutSiderTrigger).trigger('click')
+    await wrapper.setProps({ collapsed: false })
+
+    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(false)
+
+    await wrapper.findComponent(LayoutSiderTrigger).trigger('click')
 
     expect(onUpdateCollapsed).toBeCalledWith(true)
   })
 
-  test('mode work', async () => {
-    const wrapper = LayoutProMount()
+  test('fixed work', async () => {
+    const wrapper = ProLayoutMount({ props: { fixed: true } })
     await flushPromises()
 
-    // sider(default)
-    expect(wrapper.find(`.${cpmCls}-header`).exists()).toBe(false)
-    expect(wrapper.find(`.${cpmCls}-sider`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider`).find(`.${prefix}-menu`).exists()).toBe(true)
+    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-fixed')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-fixed')
 
-    await wrapper.setProps({ mode: 'header' })
+    await wrapper.setProps({ fixed: false })
 
-    expect(wrapper.find(`.${cpmCls}-header`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-header`).find(`.${prefix}-menu`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider`).exists()).toBe(false)
+    expect(wrapper.classes()).not.toContain('ix-pro-layout-fixed')
+    expect(wrapper.find('.ix-pro-layout-header').classes()).not.toContain('ix-pro-layout-header-fixed')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).not.toContain('ix-pro-layout-sider-fixed')
 
-    await wrapper.setProps({ mode: 'mixin' })
+    await wrapper.setProps({ fixed: { header: true, sider: false } })
 
-    expect(wrapper.find(`.${cpmCls}-header`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-header`).find(`.${prefix}-menu`).exists()).toBe(false)
-    expect(wrapper.find(`.${cpmCls}-sider`).exists()).toBe(true)
+    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-fixed')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).not.toContain('ix-pro-layout-sider-fixed')
 
-    await wrapper.setProps({ mode: 'both' })
+    await wrapper.setProps({ fixed: { header: false, sider: true } })
 
-    expect(wrapper.find(`.${cpmCls}-header`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-header`).find(`.${prefix}-menu`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider`).exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider`).find(`.${prefix}-menu`).exists()).toBe(true)
+    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
+    expect(wrapper.find('.ix-pro-layout-header').classes()).not.toContain('ix-pro-layout-header-fixed')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-fixed')
   })
 
   test('menus work', async () => {
-    const wrapper = LayoutProMount({
-      props: {
-        menus: [],
-      },
-    })
-    await flushPromises()
-
-    expect(wrapper.findComponent(IxMenu).exists()).toBe(false)
-
-    await wrapper.setProps({
-      menus: dataSource,
+    const wrapper = ProLayoutMount({
+      props: { menus: [] },
     })
 
-    expect(wrapper.findComponent(IxMenu).exists()).toBe(true)
-    expect(wrapper.findComponent(IxMenuItem).exists()).toBe(true)
-    expect(wrapper.findComponent(IxMenuItemGroup).exists()).toBe(true)
-    expect(wrapper.findComponent(IxMenuDivider).exists()).toBe(true)
+    expect(wrapper.find('.ix-menu-item').exists()).toBe(false)
+
+    await wrapper.setProps({ menus: dataSource })
+
+    expect(wrapper.find('.ix-menu-item').exists()).toBe(true)
   })
 
   test('theme work', async () => {
-    const wrapper = LayoutProMount({
-      props: {
-        mode: 'both',
-      },
-    })
-    await flushPromises()
+    const wrapper = ProLayoutMount({ props: { mode: 'both' } })
 
-    expect(wrapper.find(`.${cpmCls}-header`).classes()).toContain(`${cpmCls}-header-light`)
-    expect(wrapper.find(`.${cpmCls}-sider`).classes()).toContain(`${cpmCls}-sider-light`)
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-light')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-light')
 
-    await wrapper.setProps({
-      theme: 'dark',
-    })
+    await wrapper.setProps({ theme: 'dark' })
 
-    expect(wrapper.find(`.${cpmCls}-header`).classes()).toContain(`${cpmCls}-header-dark`)
-    expect(wrapper.find(`.${cpmCls}-sider`).classes()).toContain(`${cpmCls}-sider-dark`)
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-dark')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-dark')
 
-    await wrapper.setProps({
-      theme: {
-        header: 'light',
-        sider: 'dark',
-      },
-    })
+    await wrapper.setProps({ theme: { header: 'light', sider: 'dark' } })
 
-    expect(wrapper.find(`.${cpmCls}-header`).classes()).toContain(`${cpmCls}-header-light`)
-    expect(wrapper.find(`.${cpmCls}-sider`).classes()).toContain(`${cpmCls}-sider-dark`)
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-light')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-dark')
   })
 
-  test('indent work', async () => {
-    const wrapper = LayoutProMount({
-      props: {
-        mode: 'both',
-      },
-    })
-    await flushPromises()
+  test('type work', async () => {
+    const wrapper = ProLayoutMount()
 
-    expect(wrapper.find(`.${cpmCls}-sider`).find(`.${prefix}-menu-item-group-title`).attributes('style')).toContain(
-      'padding-left: 24px',
-    )
+    expect(wrapper.classes()).toContain('ix-pro-layout-is-mixin')
+    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
 
-    await wrapper.setProps({
-      indent: 10,
-    })
+    await wrapper.setProps({ type: 'header' })
 
-    expect(wrapper.find(`.${cpmCls}-sider`).find(`.${prefix}-menu-item-group-title`).attributes('style')).toContain(
-      'padding-left: 10px',
-    )
+    expect(wrapper.classes()).toContain('ix-pro-layout-is-header')
+    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(false)
+
+    await wrapper.setProps({ type: 'sider' })
+
+    expect(wrapper.classes()).toContain('ix-pro-layout-is-sider')
+    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(false)
+    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
+
+    await wrapper.setProps({ type: 'both' })
+
+    expect(wrapper.classes()).toContain('ix-pro-layout-is-both')
+    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
   })
 
-  test('fixed work', async () => {
-    const wrapper = LayoutProMount()
-    await flushPromises()
-
-    expect(wrapper.find(`.${cpmCls}`).classes(`${cpmCls}-fixed`)).toBe(true)
-
-    await wrapper.setProps({
-      fixed: false,
-    })
-
-    expect(wrapper.find(`.${cpmCls}`).classes(`${cpmCls}-fixed`)).toBe(false)
-  })
-
-  test('onMenuClick work', async () => {
-    const onMenuClick = jest.fn()
-    const wrapper = LayoutProMount({
-      props: {
-        onMenuClick,
-      },
-    })
-    await flushPromises()
-    await wrapper.findComponent(IxMenuItem).trigger('click')
-    await wrapper.findComponent(IxMenuSub).trigger('click')
-    await wrapper.findComponent(IxMenuItemGroup).trigger('click')
-
-    expect(onMenuClick).toHaveBeenCalledTimes(3)
-  })
-
-  test('slot work', async () => {
-    const wrapper = LayoutProMount({
-      props: {
-        mode: 'both',
-      },
+  test('slots work', async () => {
+    const wrapper = ProLayoutMount({
+      props: { type: 'both' },
       slots: {
         logo: () => h('div', { id: 'logo' }),
-        extra: () => h('div', { id: 'extra' }),
-        siderTop: () => h('div', { id: 'siderTop' }),
-        siderBottom: () => h('div', { id: 'siderBottom' }),
+        headerExtra: () => h('div', { id: 'extra' }),
+        siderHeader: () => h('div', { id: 'siderHeader' }),
+        siderFooter: () => h('div', { id: 'siderFooter' }),
         default: () => h('div', { id: 'default' }),
+        footer: () => h('div', { id: 'footer' }),
       },
     })
-    await flushPromises()
 
-    expect(wrapper.find(`.${cpmCls}-header-logo`).find('#logo').exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-header-extra`).find('#extra').exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider-top`).find('#siderTop').exists()).toBe(true)
-    expect(wrapper.find(`.${cpmCls}-sider-bottom`).find('#siderBottom').exists()).toBe(true)
-    expect(wrapper.find(`.${prefix}-layout-content`).find('#default').exists()).toBe(true)
-  })
-
-  test('trigger icon work', async () => {
-    const wrapper = LayoutProMount({
-      props: {
-        collapsed: false,
-      },
-      slots: {
-        siderTop: () => h(IxLayoutSiderTrigger),
-      },
-    })
-    await flushPromises()
-
-    expect(wrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-menu-unfold`).exists()).toBe(true)
-
-    await wrapper.setProps({
-      collapsed: true,
-    })
-
-    expect(wrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-menu-fold`).exists()).toBe(true)
-
-    const customStringIconWrapper = LayoutProMount({
-      props: {
-        collapsed: false,
-      },
-      slots: {
-        siderTop: () => h(IxLayoutSiderTrigger, { icons: ['right', 'left'] }),
-      },
-    })
-    await flushPromises()
-
-    expect(customStringIconWrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-left`).exists()).toBe(true)
-
-    await customStringIconWrapper.setProps({
-      collapsed: true,
-    })
-
-    expect(customStringIconWrapper.findComponent(IxLayoutSiderTrigger).find(`.${prefix}-icon-right`).exists()).toBe(
-      true,
-    )
-
-    const customRenderIconWrapper = LayoutProMount({
-      props: {
-        collapsed: false,
-      },
-      slots: {
-        siderTop: () =>
-          h(IxLayoutSiderTrigger, {
-            icons: ['star', h(IxButton, null, () => 'put')],
-          }),
-      },
-    })
-    await flushPromises()
-
-    expect(customRenderIconWrapper.findComponent(IxLayoutSiderTrigger).findComponent(IxButton).exists()).toBe(true)
-
-    await customRenderIconWrapper.setProps({
-      collapsed: true,
-    })
-
-    expect(customRenderIconWrapper.findComponent(IxLayoutSiderTrigger).findComponent(IxIcon).exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-header-logo').find('#logo').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-header-extra').find('#extra').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider-header').find('#siderHeader').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider-footer').find('#siderFooter').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-content').find('#default').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-footer').find('#footer').exists()).toBe(true)
   })
 })

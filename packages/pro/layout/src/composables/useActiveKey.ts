@@ -5,93 +5,54 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { LayoutProAvailableMenu, LayoutProHeaderMenu, LayoutProMenuPath, LayoutProProps } from '../types'
+import type { ProLayoutMenuData, ProLayoutProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { useControlledProp } from '@idux/cdk/utils'
 
-import { callEmit } from '@idux/cdk/utils'
+import { getDefaultPaths } from '../utils/menu'
 
-import { getDefaultActivePath, getTargetMenu } from '../util/menu'
-import { useDefaultActivePath } from './useActivePath'
+export function useActiveKey(props: ProLayoutProps): {
+  activeKey: ComputedRef<VKey>
+  setActiveKey: (value: VKey) => void
+} {
+  let defaultActiveKey = props.activeKey
+  const [activeKey, setActiveKey] = useControlledProp(props, 'activeKey', defaultActiveKey)
 
-interface ActiveKeyType {
-  activeHeaderKeys: Ref<VKey[]>
-  changeActiveHeaderKey: (activeKey: VKey) => void
-}
+  // 如果没有默认的 key, 则自动查早第一个 key
+  if (!defaultActiveKey) {
+    const defaultPaths = getDefaultPaths(props.menus)
+    defaultActiveKey = defaultPaths[defaultPaths.length - 1]?.key
+    if (defaultActiveKey) {
+      setActiveKey(defaultActiveKey)
+    }
+  }
 
-export function useActiveKey(
-  props: LayoutProProps,
-  realMenus: ComputedRef<LayoutProAvailableMenu[]>,
-): WritableComputedRef<VKey[]> {
-  const defaultActiveKey = useDefaultActiveKey(realMenus)
-  return computed({
-    get() {
-      if (isNil(props.activeKey)) {
-        const defaultActive = defaultActiveKey.value
-        callEmit(props['onUpdate:activeKey'], defaultActive?.[0])
-        return defaultActive
-      }
-      // 如果当前不是MenuItem叶子节点则继续往下查找
-      const targetMenu = getTargetMenu(realMenus.value, props.activeKey)
-      if (targetMenu?.type === 'itemGroup' || targetMenu?.type === 'sub') {
-        const defaultActive = getDefaultActivePath(targetMenu.children).slice(-1)[0]?.key
-        callEmit(props['onUpdate:activeKey'], defaultActive)
-        return [getDefaultActivePath(targetMenu.children).slice(-1)[0]?.key]
-      }
-      return [props.activeKey]
-    },
-    set(activeKey: VKey[]) {
-      callEmit(props['onUpdate:activeKey'], activeKey?.[0])
-    },
-  })
+  return { activeKey, setActiveKey }
 }
 
 export function useActiveHeaderKey(
-  props: LayoutProProps,
-  headerMenus: ComputedRef<LayoutProHeaderMenu[]>,
-  activePath: ComputedRef<LayoutProMenuPath[]>,
-): ActiveKeyType {
-  const activeHeaderKeys = ref<VKey[]>([])
-
-  const changeActiveHeaderKey = (activeKey: VKey) => {
-    activeHeaderKeys.value = [activeKey]
-  }
-
-  watch(
-    [headerMenus, activePath, () => props.mode],
-    ([headerMenus$$, activePath$$, mode$$]) => {
-      if (mode$$ === 'both') {
-        // both情况下，顶部导航栏只展示一层菜单节点
-        if (activePath$$.length === 0) {
-          activeHeaderKeys.value = headerMenus$$.length !== 0 ? [headerMenus$$[0].key] : []
-        } else {
-          activeHeaderKeys.value = [activePath$$[0].key]
-        }
-        return
-      }
-      if (mode$$ === 'header') {
-        activeHeaderKeys.value = [activePath$$.slice(-1)?.[0]?.key]
-      }
-    },
-    { immediate: true },
-  )
-
-  return {
-    activeHeaderKeys,
-    changeActiveHeaderKey,
-  }
-}
-
-function useDefaultActiveKey(realMenus: ComputedRef<LayoutProAvailableMenu[]>) {
-  const defaultActivePath = useDefaultActivePath(realMenus)
+  props: ProLayoutProps,
+  activePaths: ComputedRef<ProLayoutMenuData[]>,
+  headerMenus: ComputedRef<ProLayoutMenuData[]>,
+): ComputedRef<VKey | undefined> {
   return computed(() => {
-    if (defaultActivePath.value.length === 0) {
-      return []
+    const { type } = props
+    const currActivePaths = activePaths.value
+    if (type === 'both') {
+      if (currActivePaths.length === 0) {
+        const [firstMenu] = headerMenus.value
+        return firstMenu?.key
+      }
+      return currActivePaths[0].key
     }
-    return [defaultActivePath.value.slice(-1)[0].key]
+    if (type === 'header') {
+      const lastPath = currActivePaths[currActivePaths.length - 1]
+      return lastPath?.key
+    }
+    return undefined
   })
 }

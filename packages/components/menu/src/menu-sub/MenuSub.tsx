@@ -10,10 +10,11 @@ import type { MenuMode, MenuSubProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, inject, normalizeClass, provide, ref, watch } from 'vue'
+import { computed, defineComponent, inject, nextTick, normalizeClass, provide, ref, watch } from 'vue'
 
 import { debounce } from 'lodash-es'
 
+import { useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
@@ -44,10 +45,8 @@ export default defineComponent({
     const config = useGlobalConfig('menuSub')
     const key = useKey()
     const level = menuSubContext ? menuSubContext.level + 1 : 1
-    const mode = computed(() => {
-      const currMode = menuContext.mode.value
-      return currMode !== 'inline' && !!menuSubContext ? 'vertical' : currMode
-    })
+
+    const mode = useMode(menuContext, menuSubContext)
     const paddingLeft = usePaddingLeft(mode, menuContext.indent, level, menuItemGroupContext)
     const { isExpanded, changeExpanded, handleExpand, handleMouseEvent } = useExpand(
       key,
@@ -132,6 +131,19 @@ export default defineComponent({
     }
   },
 })
+
+function useMode(menuContext: MenuContext, menuSubContext: MenuSubContext | null) {
+  const menuMode = menuContext.mode.value
+  const defaultMode = menuMode !== 'inline' && !!menuSubContext ? 'vertical' : menuMode
+  const [mode, setMode] = useState(defaultMode)
+
+  watch(menuContext.mode, mode => {
+    // 避免重复渲染
+    nextTick(() => setMode(mode !== 'inline' && !!menuSubContext ? 'vertical' : mode))
+  })
+
+  return mode
+}
 
 function useExpand(
   key: VKey,

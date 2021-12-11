@@ -29,14 +29,7 @@ import { IxIcon } from '@idux/components/icon'
 import { IxImage } from '@idux/components/image'
 import { IxInput } from '@idux/components/input'
 import { IxInputNumber } from '@idux/components/input-number'
-import {
-  IxLayout,
-  IxLayoutContent,
-  IxLayoutFooter,
-  IxLayoutHeader,
-  IxLayoutSider,
-  IxLayoutSiderTrigger,
-} from '@idux/components/layout'
+import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
 import { IxList, IxListItem } from '@idux/components/list'
 import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
 import { IxMessage, IxMessageProvider } from '@idux/components/message'
@@ -104,7 +97,6 @@ const components = [
   IxLayoutFooter,
   IxLayoutHeader,
   IxLayoutSider,
-  IxLayoutSiderTrigger,
   IxList,
   IxListItem,
   IxMenu,

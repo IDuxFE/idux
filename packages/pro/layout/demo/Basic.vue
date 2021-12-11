@@ -1,40 +1,29 @@
 <template>
-  <IxLayoutPro v-model:activeKey="activeKey" :menus="dataSource" mode="both">
+  <IxProLayout v-model:activeKey="activeKey" :menus="dataSource">
     <template #logo>
       <div class="logo">Logo</div>
     </template>
-    <template #default="{ activePath }">
-      <div class="content">
-        <div>Currently active is: {{ activeKey }}</div>
-        <div>Currently activePath is: {{ JSON.stringify(activePath) }}</div>
-      </div>
-    </template>
-  </IxLayoutPro>
+    <div class="content">
+      <div>Currently active is: {{ activeKey }}</div>
+    </div>
+  </IxProLayout>
 </template>
 
 <script setup lang="ts">
-import type { LayoutProMenuData } from '@idux/pro/layout'
+import type { ProLayoutMenuData } from '@idux/pro/layout'
 
 import { ref } from 'vue'
 
 const activeKey = ref()
-const dataSource: LayoutProMenuData[] = [
+const dataSource: ProLayoutMenuData[] = [
   {
     type: 'sub',
     key: 'sub1',
     icon: 'setting',
     label: 'Sub Menu 1',
     children: [
-      {
-        type: 'itemGroup',
-        key: 'itemGroup1',
-        icon: 'setting',
-        label: 'Item Group 1',
-        children: [
-          { type: 'item', key: 'item4', label: 'Item 4', disabled: true },
-          { type: 'item', key: 'item5', label: 'Item 5' },
-        ],
-      },
+      { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting' },
+      { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
       { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
@@ -63,7 +52,6 @@ const dataSource: LayoutProMenuData[] = [
     key: 'sub4',
     icon: 'github',
     label: 'Menu Sub 4',
-    // disabled: true,
     children: [
       { type: 'item', key: 'item10', label: 'Item 10' },
       { type: 'item', key: 'item11', label: 'Item 11' },

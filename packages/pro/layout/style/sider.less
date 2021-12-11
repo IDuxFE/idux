@@ -1,0 +1,55 @@
+.@{pro-layout-prefix}-sider {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  height: 100%;
+  width: @pro-layout-sider-width;
+
+  &-fixed {
+    position: sticky;
+  }
+
+  &-collapsed {
+    width: @pro-layout-sider-collapsed-width;
+  }
+
+  &-header {
+    height: @pro-layout-sider-header-height;
+    line-height: @pro-layout-sider-header-height;
+  }
+
+  &-content {
+    flex: 1 1 0%;
+    height: 100%;
+    overflow: hidden auto;
+  }
+
+  &-footer {
+    height: @pro-layout-sider-footer-height;
+    line-height: @pro-layout-sider-footer-height;
+  }
+
+  &-trigger {
+    z-index: 1;
+    cursor: pointer;
+    text-align: center;
+    font-size: @pro-layout-sider-trigger-font-size;
+    background: @pro-layout-sider-trigger-background;
+    color: @pro-layout-sider-trigger-color;
+    transition: color @transition-duration-base;
+
+    &:hover {
+      color: @pro-layout-sider-trigger-active-color;
+    }
+  }
+
+  &-light {
+    .pro-layout-theme-base-color('light');
+    .pro-layout-theme-menu('light');
+  }
+
+  &-dark {
+    .pro-layout-theme-base-color('dark');
+    .pro-layout-theme-menu('dark');
+  }
+}

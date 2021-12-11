@@ -1,9 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LayoutPro render work 1`] = `
-"<section class=\\"ix-layout ix-layout-pro ix-layout-pro-fixed\\">
+exports[`ProLayout render work 1`] = `
+"<section class=\\"ix-layout ix-pro-layout ix-pro-layout-is-mixin\\">
+  <header class=\\"ix-layout-header ix-pro-layout-header ix-pro-layout-header-light\\">
+    <!---->
+    <div class=\\"ix-pro-layout-header-content\\">
+      <ul class=\\"ix-menu ix-menu-light ix-menu-horizontal\\"></ul>
+    </div>
+    <!---->
+  </header>
+  <aside class=\\"ix-layout-sider ix-pro-layout-sider ix-pro-layout-sider-light\\">
+    <!---->
+    <div class=\\"ix-pro-layout-sider-content\\">
+      <ul class=\\"ix-menu ix-menu-light ix-menu-inline\\">
+        <li class=\\"ix-menu-sub ix-menu-sub-expanded ix-menu-sub-inline\\">
+          <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 24px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span> Sub Menu 1</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+          <transition-stub>
+            <ul class=\\"ix-menu-content ix-menu-inline\\">
+              <li class=\\"ix-menu-item ix-menu-item-disabled\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span> Item 4</span></li>
+              <li class=\\"ix-menu-item ix-menu-item-selected\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span> Item 5</span></li>
+              <li class=\\"ix-menu-divider\\"></li>
+              <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+                <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span> Menu Sub 2</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+                <transition-stub>
+                  <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                      <!----><span> Item 6</span>
+                    </li>
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                      <!----><span> Item 7</span>
+                    </li>
+                  </ul>
+                </transition-stub>
+              </li>
+              <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+                <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span> Menu Sub 3</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+                <transition-stub>
+                  <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                      <!----><span> Item 8</span>
+                    </li>
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                      <!----><span> Item 9</span>
+                    </li>
+                  </ul>
+                </transition-stub>
+              </li>
+            </ul>
+          </transition-stub>
+        </li>
+        <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+          <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 24px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i></span><span> Menu Sub 4</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+          <transition-stub>
+            <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\">
+                <!----><span> Item 10</span>
+              </li>
+              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\">
+                <!----><span> Item 11</span>
+              </li>
+            </ul>
+          </transition-stub>
+        </li>
+        <li class=\\"ix-menu-item\\" style=\\"padding-left: 24px;\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i></span><span> Item 12</span></li>
+      </ul>
+    </div>
+    <!---->
+  </aside>
+  <main class=\\"ix-layout-content ix-pro-layout-content\\">This is page content</main>
   <!---->
-  <!---->
-  <main class=\\"ix-layout-content\\">This is page content</main>
 </section>"
 `;

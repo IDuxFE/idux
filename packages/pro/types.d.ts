@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { LayoutProComponent } from '@idux/pro/layout'
+import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from '@idux/pro/layout'
 
 declare module 'vue' {
   export interface GlobalComponents {
-    LayoutProComponent: LayoutProComponent
+    IxProLayout: ProLayoutComponent
+    IxProProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
   }
 }
 

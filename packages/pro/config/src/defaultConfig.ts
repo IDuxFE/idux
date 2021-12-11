@@ -7,7 +7,7 @@
 
 import type { CommonConfig, GlobalConfig } from './types'
 
-const common: CommonConfig = { prefixCls: 'ixp' }
+const common: CommonConfig = { prefixCls: 'ix-pro' }
 
 export const defaultConfig: GlobalConfig = {
   common,

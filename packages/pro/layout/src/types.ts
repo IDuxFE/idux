@@ -5,62 +5,55 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { MenuClickOptions, MenuData, MenuDivider, MenuItemGroup, MenuSub } from '@idux/components/menu'
-import type { DefineComponent, HTMLAttributes, Ref } from 'vue'
+import type { LayoutSiderProps } from '@idux/components/layout'
+import type { MenuClickOptions, MenuData, MenuItemGroup, MenuProps, MenuSub, MenuTheme } from '@idux/components/menu'
+import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-const modeTypes = ['header', 'sider', 'mixin', 'both'] as const
-const themes = ['light', 'dark'] as const
-
-type SiderHeaderValue<T> = {
-  sider: T
-  header: T
-}
-
-export type SiderHeaderTheme = SiderHeaderValue<typeof themes[number]>
-
-export type LayoutProSiderMode = 'vertical' | 'inline'
-export type LayoutProModeTypes = typeof modeTypes[number]
-export type LayoutProThemes = typeof themes[number] | SiderHeaderTheme
-export type LayoutProMenuData = (
-  | (Omit<Extract<MenuData, MenuItemGroup>, 'children'> & { children: LayoutProMenuData[] })
-  | (Omit<Extract<MenuData, MenuSub>, 'children'> & { children: LayoutProMenuData[] })
-  | Exclude<MenuData, MenuItemGroup | MenuSub>
-) & { key: VKey }
-export type LayoutProHeaderMenu = Omit<LayoutProMenuData, 'children'>
-export type LayoutProAvailableMenu = Exclude<LayoutProMenuData, MenuDivider> & {
-  children: LayoutProAvailableMenu[]
-}
-export type LayoutProMenuPath = Pick<LayoutProAvailableMenu, 'key' | 'label' | 'type'>
-export type HeaderMenu = LayoutProMenuData[] | Omit<LayoutProMenuData, 'children'>[]
-
-export const layoutProProps = {
-  collapsed: IxPropTypes.bool.def(false),
+export const proLayoutProps = {
   activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
-  menus: IxPropTypes.array<LayoutProMenuData>().isRequired,
-  mode: IxPropTypes.oneOf<LayoutProModeTypes>(['header', 'sider', 'mixin', 'both']).def('sider'),
-  theme: IxPropTypes.oneOfType<LayoutProThemes>([IxPropTypes.oneOf(themes), Object]).def('light'),
-  indent: IxPropTypes.number.def(24),
-  fixed: IxPropTypes.oneOfType<boolean | SiderHeaderValue<boolean>>([Boolean, Object]).def(true),
-  breakpoint: IxPropTypes.oneOf<BreakpointKey>(['xs', 'sm', 'md', 'lg', 'xl']),
+  collapsed: IxPropTypes.bool,
+  fixed: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ header: boolean; sider: boolean }>()]).def(false),
+  menus: IxPropTypes.array<ProLayoutMenuData>().def(() => []),
+  sider: IxPropTypes.object<LayoutSiderProps>(),
+  siderMenu: IxPropTypes.object<MenuProps>(),
+  theme: IxPropTypes.oneOfType([
+    IxPropTypes.oneOf(['light', 'dark']),
+    IxPropTypes.object<{ header: MenuTheme; sider: MenuTheme }>(),
+  ]).def('light'),
+  type: IxPropTypes.oneOf<ProLayoutType>(['header', 'sider', 'both', 'mixin']).def('mixin'),
 
   // event
-  'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
   'onUpdate:activeKey': IxPropTypes.emit<(activeKey: VKey | null) => void>(),
+  'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
   onMenuClick: IxPropTypes.emit<(options: MenuClickOptions) => void>(),
 }
 
-export type LayoutProProps = IxInnerPropTypes<typeof layoutProProps>
-export type LayoutProPublicProps = IxPublicPropTypes<typeof layoutProProps>
-export type LayoutProComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof LayoutProPublicProps> & LayoutProPublicProps
+export type ProLayoutProps = IxInnerPropTypes<typeof proLayoutProps>
+export type ProLayoutPublicProps = IxPublicPropTypes<typeof proLayoutProps>
+export type ProLayoutComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ProLayoutPublicProps> & ProLayoutPublicProps
 >
-export type LayoutProInstance = InstanceType<DefineComponent<LayoutProProps>>
+export type ProLayoutInstance = InstanceType<DefineComponent<ProLayoutProps>>
 
-export type LayoutSiderTriggerType = {
-  collapsed: Readonly<Ref<boolean>>
-  changeCollapsed: (collapsed: boolean) => void
+export type ProLayoutFixed = boolean | { header: boolean; sider: boolean }
+export type ProLayoutType = 'header' | 'sider' | 'mixin' | 'both'
+
+export const proLayoutSiderTriggerProps = {
+  icon: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, IxPropTypes.vNode])),
 }
+
+export type ProLayoutSiderTriggerProps = IxInnerPropTypes<typeof proLayoutSiderTriggerProps>
+export type ProLayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof proLayoutSiderTriggerProps>
+export type ProLayoutSiderTriggerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ProLayoutSiderTriggerPublicProps> & ProLayoutSiderTriggerPublicProps
+>
+export type ProLayoutSiderTriggerInstance = InstanceType<DefineComponent<ProLayoutSiderTriggerProps>>
+
+export type ProLayoutMenuData = (
+  | (Omit<Extract<MenuData, MenuItemGroup>, 'children'> & { children: ProLayoutMenuData[] })
+  | (Omit<Extract<MenuData, MenuSub>, 'children'> & { children: ProLayoutMenuData[] })
+  | Exclude<MenuData, MenuItemGroup | MenuSub>
+) & { key: VKey }

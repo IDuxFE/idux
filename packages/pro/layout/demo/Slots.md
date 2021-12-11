@@ -7,8 +7,8 @@ order: 6
 
 ## zh
 
-支持`logo`、`extra`、`siderTop`、`siderBottom`、`default`五个区域插槽用于业务自定义实现。
+支持众多插槽用于自定义内容。
 
 ## en
 
-Support five regional slots of `logo`, `extra`, `siderTop`, `siderBottom`, and `default` for business customization implementation.
+Supports many slots for custom content.

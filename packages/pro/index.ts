@@ -7,12 +7,12 @@
 
 import type { App, Directive } from 'vue'
 
-import { IxLayoutPro } from '@idux/pro/layout'
+import { IxProLayout } from '@idux/pro/layout'
 import { version } from '@idux/pro/version'
 
 const directives: Record<string, Directive> = {}
 
-const components = [IxLayoutPro]
+const components = [IxProLayout]
 
 const install = (app: App): void => {
   components.forEach(component => {
