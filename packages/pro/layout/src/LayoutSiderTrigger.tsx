@@ -11,27 +11,24 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
-import { layoutSiderToken } from './token'
-import { layoutSiderTriggerProps } from './types'
+import { proLayoutToken } from './token'
+import { proLayoutSiderTriggerProps } from './types'
 
 export default defineComponent({
-  name: 'IxLayoutSiderTrigger',
-  props: layoutSiderTriggerProps,
+  name: 'IxProLayoutSiderTrigger',
+  props: proLayoutSiderTriggerProps,
   setup(props, { slots }) {
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-sider-trigger`)
-    const { collapsed, setCollapsed } = inject(layoutSiderToken)!
+    const { mergedPrefixCls, collapsed, setCollapsed } = inject(proLayoutToken)!
 
     const icon = computed(() => {
-      const [fold = 'menu-fold', unfold = 'menu-unfold'] = props.icons || []
+      const [fold = 'menu-fold', unfold = 'menu-unfold'] = props.icon || []
       return collapsed.value ? fold : unfold
     })
 
     const classes = computed(() => {
-      const prefixCls = mergedPrefixCls.value
+      const prefixCls = `${mergedPrefixCls.value}-sider-trigger`
       return {
         [prefixCls]: true,
         [`${prefixCls}-collapsed`]: collapsed.value,

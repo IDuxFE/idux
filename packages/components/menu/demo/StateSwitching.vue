@@ -28,7 +28,13 @@
   </IxRow>
 
   <div :style="{ marginTop: '16px', width: mode !== 'horizontal' ? '256px' : undefined }">
-    <IxMenu :mode="mode" :theme="theme" :collapsed="collapsed">
+    <IxMenu
+      v-model:selectedKeys="selectedKeys"
+      v-model:expandedKeys="expandedKeys"
+      :mode="mode"
+      :theme="theme"
+      :collapsed="collapsed"
+    >
       <IxMenuItem key="item1" icon="home"><a>Item 1</a></IxMenuItem>
       <IxMenuItem key="item2" icon="mail"> Item 2 </IxMenuItem>
       <IxMenuItem key="item3" disabled icon="appstore"> Item 3 </IxMenuItem>
@@ -65,4 +71,6 @@ import { MenuMode, MenuTheme } from '@idux/components/menu'
 const mode = ref<MenuMode>('vertical')
 const theme = ref<MenuTheme>('light')
 const collapsed = ref(false)
+const selectedKeys = ref([])
+const expandedKeys = ref([])
 </script>

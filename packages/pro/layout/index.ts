@@ -5,20 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { LayoutProComponent } from './src/types'
+import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from './src/types'
 
-import LayoutPro from './src/Layout'
+import ProLayout from './src/Layout'
+import ProLayoutSiderTrigger from './src/LayoutSiderTrigger'
 
-const IxLayoutPro = LayoutPro as unknown as LayoutProComponent
+const IxProLayout = ProLayout as unknown as ProLayoutComponent
+const IxProLayoutSiderTrigger = ProLayoutSiderTrigger as unknown as ProLayoutSiderTriggerComponent
 
-export { IxLayoutPro }
+export { IxProLayout, IxProLayoutSiderTrigger }
 
 export type {
-  LayoutProInstance,
-  LayoutProComponent,
-  LayoutProPublicProps as LayoutProProps,
-  LayoutProThemes,
-  LayoutProModeTypes,
-  LayoutProMenuData,
-  LayoutProMenuPath,
+  ProLayoutInstance,
+  ProLayoutComponent,
+  ProLayoutPublicProps as ProLayoutProps,
+  ProLayoutSiderTriggerInstance,
+  ProLayoutSiderTriggerComponent,
+  ProLayoutSiderTriggerPublicProps as ProLayoutSiderTriggerProps,
+  ProLayoutMenuData,
 } from './src/types'

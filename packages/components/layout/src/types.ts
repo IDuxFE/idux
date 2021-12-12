@@ -60,14 +60,3 @@ export type LayoutSiderComponent = DefineComponent<
   Omit<HTMLAttributes, keyof LayoutSiderPublicProps> & LayoutSiderPublicProps
 >
 export type LayoutSiderInstance = InstanceType<DefineComponent<LayoutSiderProps>>
-
-export const layoutSiderTriggerProps = {
-  icons: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, IxPropTypes.vNode])),
-}
-
-export type LayoutSiderTriggerProps = IxInnerPropTypes<typeof layoutSiderTriggerProps>
-export type LayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof layoutSiderTriggerProps>
-export type LayoutSiderTriggerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof LayoutSiderTriggerPublicProps> & LayoutSiderTriggerPublicProps
->
-export type LayoutSiderTriggerInstance = InstanceType<DefineComponent<LayoutSiderTriggerProps>>

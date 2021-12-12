@@ -1,7 +1,17 @@
-@import '../../style/mixins/reset.less';
-@import './layout.less';
-@import './ctrl.less';
+@import './mixin.less';
+@import './header.less';
+@import './sider.less';
 
 .@{pro-layout-prefix} {
-  .reset-component();
+  height: @pro-layout-height;
+  overflow: auto;
+
+  &-fixed {
+    overflow: hidden;
+    grid-template-rows: auto 100%;
+
+    .@{pro-layout-prefix}-content {
+      overflow: auto;
+    }
+  }
 }

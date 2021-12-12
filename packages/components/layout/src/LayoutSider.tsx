@@ -7,13 +7,12 @@
 
 import type { LayoutSiderProps } from './types'
 
-import { WatchStopHandle, computed, defineComponent, normalizeClass, provide, watch, watchEffect } from 'vue'
+import { WatchStopHandle, computed, defineComponent, normalizeClass, watch, watchEffect } from 'vue'
 
 import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
-import { layoutSiderToken } from './token'
 import { layoutSiderProps } from './types'
 
 export default defineComponent({
@@ -23,8 +22,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-sider`)
 
-    const { collapsed, setCollapsed } = useCollapsed(props)
-    provide(layoutSiderToken, { collapsed, setCollapsed })
+    const collapsed = useCollapsed(props)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -71,9 +69,5 @@ const useCollapsed = (props: LayoutSiderProps) => {
     { immediate: true },
   )
 
-  const setCollapsed = (collapsed: boolean) => {
-    changeCollapsed(collapsed, 'trigger')
-  }
-
-  return { collapsed, setCollapsed }
+  return collapsed
 }

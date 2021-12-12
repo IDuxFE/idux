@@ -5,48 +5,50 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { HeaderMenu, LayoutProAvailableMenu, LayoutProMenuData, LayoutProProps } from '../types'
+import type { ProLayoutMenuData, ProLayoutProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import { getAvailableMenus, getMenuItemChildren } from '../util/menu'
+import { NoopArray } from '@idux/cdk/utils'
 
-export function useHeaderMenus(props: LayoutProProps): ComputedRef<HeaderMenu> {
+import { getMenuChildren } from '../utils/menu'
+
+export function useHeaderMenus(props: ProLayoutProps): ComputedRef<ProLayoutMenuData[]> {
   return computed(() => {
-    if (props.mode === 'both') {
-      return props.menus.map(menu => {
+    const { type, menus } = props
+    if (type === 'header') {
+      return menus
+    }
+
+    if (type === 'both') {
+      return menus.map(menu => {
         if (menu.type === 'item' || menu.type === 'divider') {
           return menu
         }
         const { children, ...rest } = menu
-        return rest
+        return rest as ProLayoutMenuData
       })
     }
-    if (props.mode === 'header') {
-      return props.menus
-    }
-    return []
+
+    return NoopArray as unknown as ProLayoutMenuData[]
   })
 }
 
-export function useSiderMenus(props: LayoutProProps, activeHeaderKeys: Ref<VKey[]>): ComputedRef<LayoutProMenuData[]> {
+export function useSiderMenus(
+  props: ProLayoutProps,
+  activeHeaderKey: ComputedRef<VKey | undefined>,
+): ComputedRef<ProLayoutMenuData[]> {
   return computed(() => {
-    if (['mixin', 'sider'].includes(props.mode)) {
-      return props.menus
+    const { type, menus } = props
+    if (['mixin', 'sider'].includes(type)) {
+      return menus
     }
-    if (props.mode === 'header') {
-      return []
+    if (type === 'both') {
+      const currActiveMenu = menus.find(menu => menu.key === activeHeaderKey.value)
+      return getMenuChildren(currActiveMenu)
     }
-    if (activeHeaderKeys.value.length === 0) {
-      return []
-    }
-    const curActiveMenu = props.menus.filter(menu => menu.key === activeHeaderKeys.value[0])
-    return getMenuItemChildren(curActiveMenu?.[0])
+    return NoopArray as unknown as ProLayoutMenuData[]
   })
-}
-
-export function useAvailableMenus(props: LayoutProProps): ComputedRef<LayoutProAvailableMenu[]> {
-  return computed(() => getAvailableMenus(props.menus))
 }

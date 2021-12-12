@@ -32,7 +32,6 @@ import type {
   LayoutFooterComponent,
   LayoutHeaderComponent,
   LayoutSiderComponent,
-  LayoutSiderTriggerComponent,
 } from '@idux/components/layout'
 import type { ListComponent, ListItemComponent } from '@idux/components/list'
 import type {
@@ -67,7 +66,6 @@ import type { TimePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
 import type { TooltipComponent } from '@idux/components/tooltip'
 import type { TreeComponent } from '@idux/components/tree'
-import type { LayoutProComponent } from '@idux/pro/layout'
 
 declare module 'vue' {
   export interface GlobalComponents {
@@ -104,9 +102,7 @@ declare module 'vue' {
     IxLayoutContent: LayoutContentComponent
     IxLayoutFooter: LayoutFooterComponent
     IxLayoutHeader: LayoutHeaderComponent
-    IxLayoutPro: LayoutProComponent
     IxLayoutSider: LayoutSiderComponent
-    IxLayoutSiderTrigger: LayoutSiderTriggerComponent
     IxList: ListComponent
     IxListItem: ListItemComponent
     IxMenu: MenuComponent

@@ -47,13 +47,3 @@ grid-template-areas:
 | `v-model:collapsed` | 是否折叠状态 | `boolean` | - | - | -  |
 | `breakpoint` | 触发响应式布局的断点 | `xs`, `sm`, `md`, `lg`, `xl` | - | - |  - |
 | `onCollapse` | 折叠状态发生变量时的回调 | `(collapsed: boolean, type: 'breakpoint \| trigger') => void` | - | - |  - |
-
-### IxLayoutSiderTrigger
-
-侧边栏折叠状态触发器，可以控制 `IxLayoutSider` 的折叠状态，只能放在 `IxLayoutSider` 中。
-
-#### LayoutSiderTriggerProps
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `icons` | 自定义折叠图标 | `Array<string \| VNode> \| #default={collapsed: boolean}` | - | - | 默认为 `[menu-fold, menu-unfold]` |

@@ -1,0 +1,87 @@
+.pro-layout-theme-base-color(@theme) {
+  color: ~'@{pro-layout-@{theme}-color}';
+  background-color: ~'@{pro-layout-@{theme}-background-color}';
+}
+
+.pro-layout-theme-hover-color(@theme) {
+  color: ~'@{pro-layout-@{theme}-hover-color}';
+  background-color: ~'@{pro-layout-@{theme}-hover-background-color}';
+}
+
+.pro-layout-theme-active-color(@theme) {
+  color: ~'@{pro-layout-@{theme}-active-color}';
+  background-color: ~'@{pro-layout-@{theme}-active-background-color}';
+}
+
+.pro-layout-theme-menu(@theme) {
+  .@{menu-prefix} {
+    background-color: ~'@{pro-layout-@{theme}-background-color}';
+
+    .pro-layout-theme-menu-sub(@theme);
+    .pro-layout-theme-menu-item(@theme);
+  }
+}
+
+.pro-layout-theme-menu-sub(@theme) {
+  .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) {
+    border: 0;
+    transition: none;
+
+    .@{menu-prefix}-sub-title {
+      transition: none;
+    }
+
+    &:not(.@{menu-prefix}-sub-selected) {
+      .@{menu-prefix}-sub-title:hover {
+        .pro-layout-theme-hover-color(@theme);
+      }
+    }
+
+    &.@{menu-prefix}-sub-selected:not(.@{menu-prefix}-sub-inline) {
+      .pro-layout-theme-active-color(@theme);
+
+      .@{menu-prefix}-sub-title {
+        .pro-layout-theme-active-color(@theme);
+      }
+    }
+  }
+}
+
+.pro-layout-theme-menu-item(@theme) {
+  .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled) {
+    color: ~'@{pro-layout-@{theme}-color}';
+    border: 0;
+    transition: none;
+
+    &:not(.@{menu-prefix}-item-selected):hover {
+      .pro-layout-theme-hover-color(@theme);
+    }
+
+    &.@{menu-prefix}-item-selected {
+      .pro-layout-theme-active-color(@theme);
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.pro-layout-theme-menu-item-in-header(@theme) {
+  .@{menu-prefix} {
+    .@{menu-prefix}-sub-selected,
+    .@{menu-prefix}-sub-expanded {
+      .pro-layout-theme-active-color(@theme);
+    }
+
+    .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled):not(.@{menu-prefix}-sub-selected):hover {
+      .pro-layout-theme-hover-color(@theme);
+
+      .@{menu-prefix}-sub-title {
+        .pro-layout-theme-hover-color(@theme);
+
+        background-color: transparent;
+      }
+    }
+  }
+}
