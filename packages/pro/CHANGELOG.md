@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/IDuxFE/idux/compare/v0.10.0...v0.10.1) (2021-12-13)
+
+
+### Bug Fixes
+
+* **comp:style:** add reset.less ([#611](https://github.com/IDuxFE/idux/issues/611)) ([c8258d7](https://github.com/IDuxFE/idux/commit/c8258d7993ccf929441248ce30bf0bb2ea6186d1))
+
+
+
+
+
 # [0.10.0](https://github.com/IDuxFE/idux/compare/v0.9.0...v0.10.0) (2021-12-13)
 
 

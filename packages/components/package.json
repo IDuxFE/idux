@@ -1,6 +1,6 @@
 {
   "name": "@idux/components",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "A UI Component Library for Vue 3.x",
   "keywords": [
     "vue",
