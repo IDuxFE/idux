@@ -10,7 +10,7 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
+import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
 export const tooltipProps = {
   visible: IxPropTypes.bool,

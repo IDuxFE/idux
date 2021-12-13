@@ -10,7 +10,7 @@ import type { VNode } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { ɵFooter } from '@idux/components/_private'
+import { ɵFooter } from '@idux/components/_private/footer'
 import { getLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
 

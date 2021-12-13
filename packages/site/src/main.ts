@@ -3,9 +3,8 @@
 import { createApp } from 'vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
-
-import App from './App.vue'
 import IduxInstall from './iduxInstall'
+import App from './App.vue'
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.less'

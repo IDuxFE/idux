@@ -10,7 +10,7 @@ import { computed, defineComponent, inject } from 'vue'
 import dayjs from 'dayjs/esm'
 
 import { useControlledProp } from '@idux/cdk/utils'
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
 import { IxInput } from '@idux/components/input'

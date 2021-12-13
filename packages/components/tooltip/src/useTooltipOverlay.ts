@@ -6,7 +6,7 @@
  */
 
 import type { TooltipProps } from './types'
-import type { ɵOverlayInstance, ɵOverlayProps } from '@idux/components/_private'
+import type { ɵOverlayInstance, ɵOverlayProps } from '@idux/components/_private/overlay'
 import type { TooltipConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 

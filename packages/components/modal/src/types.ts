@@ -7,7 +7,7 @@
 
 import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { ɵFooterButtonProps } from '@idux/components/_private'
+import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'

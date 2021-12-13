@@ -11,7 +11,7 @@ import { defineComponent, inject, onMounted } from 'vue'
 
 import { CdkVirtualScroll, VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
-import { ɵEmpty } from '@idux/components/_private'
+import { ɵEmpty } from '@idux/components/_private/empty'
 
 import { selectToken } from '../token'
 import ListBox from './ListBox'

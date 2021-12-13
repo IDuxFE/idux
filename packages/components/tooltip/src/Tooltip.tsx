@@ -10,7 +10,7 @@ import type { Slots } from 'vue'
 
 import { computed, defineComponent } from 'vue'
 
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { tooltipProps } from './types'

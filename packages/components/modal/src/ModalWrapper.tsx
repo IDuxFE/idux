@@ -21,7 +21,8 @@ import {
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
-import { ɵFooter, ɵHeader } from '@idux/components/_private'
+import { ɵFooter } from '@idux/components/_private/footer'
+import { ɵHeader } from '@idux/components/_private/header'
 import { ModalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 

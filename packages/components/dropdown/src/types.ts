@@ -11,7 +11,7 @@ import type { VueTypeDef } from 'vue-types'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private'
+import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
 export const dropdownProps = {
   visible: IxPropTypes.bool,

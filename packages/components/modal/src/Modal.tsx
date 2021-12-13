@@ -14,7 +14,7 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, wa
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
-import { ɵMask } from '@idux/components/_private'
+import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 
 import ModalWrapper from './ModalWrapper'

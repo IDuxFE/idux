@@ -14,7 +14,8 @@ import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMount
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
-import { ɵFooter, ɵHeader } from '@idux/components/_private'
+import { ɵFooter } from '@idux/components/_private/footer'
+import { ɵHeader } from '@idux/components/_private/header'
 
 import { DRAWER_TOKEN, drawerToken } from './token'
 

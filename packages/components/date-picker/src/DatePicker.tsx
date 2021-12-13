@@ -9,7 +9,7 @@ import { computed, defineComponent, normalizeClass, provide, toRaw, watch } from
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { callEmit } from '@idux/cdk/utils'
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 import { useFormElement } from '@idux/components/utils'

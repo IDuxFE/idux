@@ -11,7 +11,7 @@ import { defineComponent, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
-import { ɵHeader } from '@idux/components/_private'
+import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 import { IxSpin } from '@idux/components/spin'

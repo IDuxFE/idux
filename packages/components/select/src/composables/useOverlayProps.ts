@@ -6,7 +6,7 @@
  */
 
 import type { SelectProps } from '../types'
-import type { ɵOverlayInstance } from '@idux/components/_private'
+import type { ɵOverlayInstance } from '@idux/components/_private/overlay'
 import type { CSSProperties, ComputedRef, Ref } from 'vue'
 
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
