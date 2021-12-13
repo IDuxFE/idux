@@ -12,7 +12,7 @@ import type { VirtualScrollInstance, VirtualScrollToFn } from '@idux/cdk/scroll'
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/utils'
 

@@ -44,9 +44,20 @@ export const buildPackage = (options: Options): TaskFunction => {
   const { targetDirname, distDirname, packageName } = options
   const buildPackage: TaskFunction = async done => {
     const childrenDirs = await readdir(targetDirname)
-    const components = childrenDirs.filter(dirname => {
-      return !filters.includes(dirname) && statSync(join(targetDirname, dirname)).isDirectory()
+    const components: string[] = []
+    const dirs = childrenDirs.map(async dirname => {
+      if (filters.includes(dirname) || !statSync(join(targetDirname, dirname)).isDirectory()) {
+        return
+      }
+      if (dirname !== '_private') {
+        components.push(dirname)
+        return
+      }
+      const privateDirs = await readdir(join(targetDirname, dirname))
+      components.push(...privateDirs.map(privateName => `${dirname}/${privateName}`))
     })
+
+    await Promise.all(dirs)
 
     const outputs = components.map(async compName => {
       const { output, ...inputOptions } = getRollupOptions({ targetDirname, distDirname, packageName, compName })

@@ -12,7 +12,7 @@ import type { ComputedRef } from 'vue'
 import { computed, defineComponent, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { dropdownToken } from './token'

@@ -14,7 +14,7 @@ import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide,
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
-import { ɵMask } from '@idux/components/_private'
+import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 
 import DrawerWrapper from './DrawerWrapper'

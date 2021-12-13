@@ -7,7 +7,7 @@
 
 import { defineComponent, inject } from 'vue'
 
-import { ɵDatePanel } from '@idux/components/_private'
+import { ɵDatePanel } from '@idux/components/_private/date-panel'
 
 import { datePickerToken } from '../token'
 

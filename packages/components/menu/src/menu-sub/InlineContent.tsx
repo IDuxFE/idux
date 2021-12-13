@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { ɵCollapseTransition } from '@idux/components/_private'
+import { ɵCollapseTransition } from '@idux/components/_private/collapse-transition'
 
 import { menuSubToken, menuToken } from '../token'
 

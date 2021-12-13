@@ -15,7 +15,7 @@ import { computed, defineComponent, inject, nextTick, normalizeClass, provide, r
 import { debounce } from 'lodash-es'
 
 import { useState } from '@idux/cdk/utils'
-import { ɵOverlay } from '@idux/components/_private'
+import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
 

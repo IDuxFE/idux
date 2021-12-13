@@ -12,7 +12,7 @@ import { computed, defineComponent, isVNode, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { ɵHeader } from '@idux/components/_private'
+import { ɵHeader } from '@idux/components/_private/header'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxCol, IxRow } from '@idux/components/grid'
