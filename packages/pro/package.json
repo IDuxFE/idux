@@ -1,6 +1,6 @@
 {
   "name": "@idux/pro",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "An out-of-box UI solution for enterprise applications",
   "keywords": [
     "vue",
@@ -29,7 +29,7 @@
   "style": "./index.css",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^0.9.0",
-    "@idux/components": "^0.9.0"
+    "@idux/cdk": "^0.10.0",
+    "@idux/components": "^0.10.0"
   }
 }

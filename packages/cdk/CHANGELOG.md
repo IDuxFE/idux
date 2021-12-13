@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/IDuxFE/idux/compare/v0.9.0...v0.10.0) (2021-12-13)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** add class only scrolled ([#594](https://github.com/IDuxFE/idux/issues/594)) ([5f71d9f](https://github.com/IDuxFE/idux/commit/5f71d9f5bf639ff70acb1de08ddbde9fbc3b09fc)), closes [#568](https://github.com/IDuxFE/idux/issues/568)
+* package.json version ([#575](https://github.com/IDuxFE/idux/issues/575)) ([0ccc0fe](https://github.com/IDuxFE/idux/commit/0ccc0fe505c84b7615b3a6956a01adf341781b59))
+
+
+### Features
+
+* **cdk:breakpoint:** update export api ([#591](https://github.com/IDuxFE/idux/issues/591)) ([50ae6b0](https://github.com/IDuxFE/idux/commit/50ae6b0d6773a3a196898f2ac32331311f99f5e4))
+* **cdk:portal:** target support funtion ([#563](https://github.com/IDuxFE/idux/issues/563)) ([eeba516](https://github.com/IDuxFE/idux/commit/eeba51694f044ce6aeafb570deebd7a0260b5ff5))
+* **comp:*:** tartget support function ([#570](https://github.com/IDuxFE/idux/issues/570)) ([26fc984](https://github.com/IDuxFE/idux/commit/26fc984c7eba31eee361ad9c74460b8487414d4e))
+
+
+
+
+
 # [0.9.0](https://github.com/IDuxFE/idux/compare/v0.8.0...v0.9.0) (2021-12-01)
 
 

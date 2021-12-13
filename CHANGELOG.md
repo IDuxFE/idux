@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/IDuxFE/idux/compare/v0.9.0...v0.10.0) (2021-12-13)
+
+
+### Bug Fixes
+
+* all components type ([#601](https://github.com/IDuxFE/idux/issues/601)) ([11649e2](https://github.com/IDuxFE/idux/commit/11649e2a68b4e46ad9dfd668f75bc80956362b50))
+* **cdk:scroll:** add class only scrolled ([#594](https://github.com/IDuxFE/idux/issues/594)) ([5f71d9f](https://github.com/IDuxFE/idux/commit/5f71d9f5bf639ff70acb1de08ddbde9fbc3b09fc)), closes [#568](https://github.com/IDuxFE/idux/issues/568)
+* **comp:input-number:** step calculation error when value is NaN ([#589](https://github.com/IDuxFE/idux/issues/589)) ([757a4a8](https://github.com/IDuxFE/idux/commit/757a4a8edd25a92777db713ad6a8511526aecd45)), closes [#588](https://github.com/IDuxFE/idux/issues/588)
+* **comp:input-number:** use form Control to control disabled status ([#602](https://github.com/IDuxFE/idux/issues/602)) ([2b2929b](https://github.com/IDuxFE/idux/commit/2b2929b1649a1259e68e868bf2f9c341b1da3ca9))
+* **comp:tree:** defaultExpandAll is invalid in controlled mode ([#590](https://github.com/IDuxFE/idux/issues/590)) ([d8348c7](https://github.com/IDuxFE/idux/commit/d8348c72c658fd7ae99a1e3b560de2ead277def5))
+* package.json version ([#575](https://github.com/IDuxFE/idux/issues/575)) ([0ccc0fe](https://github.com/IDuxFE/idux/commit/0ccc0fe505c84b7615b3a6956a01adf341781b59))
+
+
+### Features
+
+* **cdk:breakpoint:** update export api ([#591](https://github.com/IDuxFE/idux/issues/591)) ([50ae6b0](https://github.com/IDuxFE/idux/commit/50ae6b0d6773a3a196898f2ac32331311f99f5e4))
+* **cdk:portal:** target support funtion ([#563](https://github.com/IDuxFE/idux/issues/563)) ([eeba516](https://github.com/IDuxFE/idux/commit/eeba51694f044ce6aeafb570deebd7a0260b5ff5))
+* **comp:*:** tartget support function ([#570](https://github.com/IDuxFE/idux/issues/570)) ([26fc984](https://github.com/IDuxFE/idux/commit/26fc984c7eba31eee361ad9c74460b8487414d4e))
+* **comp:all:** update style location ([#574](https://github.com/IDuxFE/idux/issues/574)) ([5d931aa](https://github.com/IDuxFE/idux/commit/5d931aa5769c4f8cc4401df506295b000d9a50a0))
+* **comp:config:** refactor useGlobalConfig ([#592](https://github.com/IDuxFE/idux/issues/592)) ([2b186eb](https://github.com/IDuxFE/idux/commit/2b186ebb2d492a411a0f46e0ebe055779c072986))
+* **comp:empty:** add icon prop and rebuild with tsx ([#585](https://github.com/IDuxFE/idux/issues/585)) ([d83d938](https://github.com/IDuxFE/idux/commit/d83d93818bcaaf373dab7b0871e1e8d330ea4275))
+* **comp:input-number:** add input-number component ([#584](https://github.com/IDuxFE/idux/issues/584)) ([198381c](https://github.com/IDuxFE/idux/commit/198381c09f7de175bbd63a31b5801c993954a2b7)), closes [#31](https://github.com/IDuxFE/idux/issues/31)
+* **comp:layout:** update api ([#603](https://github.com/IDuxFE/idux/issues/603)) ([d5c2f81](https://github.com/IDuxFE/idux/commit/d5c2f8113ca9d770b52a42229cce91ef3dc8e26b)), closes [#587](https://github.com/IDuxFE/idux/issues/587)
+* **comp:private:** add footer component ([#583](https://github.com/IDuxFE/idux/issues/583)) ([ed211eb](https://github.com/IDuxFE/idux/commit/ed211ebb73fc913c1919622f9f97fd47981cbc23))
+* **comp:prolayout:** init pro components ([#558](https://github.com/IDuxFE/idux/issues/558)) ([e8e7148](https://github.com/IDuxFE/idux/commit/e8e714892be3a93f710de16027076509fed5e424)), closes [#554](https://github.com/IDuxFE/idux/issues/554) [#577](https://github.com/IDuxFE/idux/issues/577) [#580](https://github.com/IDuxFE/idux/issues/580)
+* **comp:tree:** add labelKey props ([#569](https://github.com/IDuxFE/idux/issues/569)) ([b2c0ae9](https://github.com/IDuxFE/idux/commit/b2c0ae9b7710e8486b792b2ea6f3da69649b15db))
+* **pro:layout:** redesign api ([#607](https://github.com/IDuxFE/idux/issues/607)) ([2b285f2](https://github.com/IDuxFE/idux/commit/2b285f2858599341e49dffe8580c058134fa235a))
+
+
+
+
+
 # [0.9.0](https://github.com/IDuxFE/idux/compare/v0.8.0...v0.9.0) (2021-12-01)
 
 
