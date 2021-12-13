@@ -10,7 +10,7 @@ import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from '@idux/p
 declare module 'vue' {
   export interface GlobalComponents {
     IxProLayout: ProLayoutComponent
-    IxProProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
+    IxProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
   }
 }
 
