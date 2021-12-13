@@ -9,6 +9,6 @@
   "ignoreFiles": [
     "dist/**/*.less",
     "packages/components/style/variable/color/*.less",
-    "packages/site/src/styles/reset.less"
+    "packages/components/style/core/reset.less"
   ]
 }
