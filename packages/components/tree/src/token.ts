@@ -6,6 +6,7 @@
  */
 
 import type { CheckableContext } from './composables/useCheckable'
+import type { MergedNode } from './composables/useDataSource'
 import type { DragDropContext } from './composables/useDragDrop'
 import type { ExpandableContext } from './composables/useExpandable'
 import type { GetNodeKey } from './composables/useGetNodeKey'
@@ -20,6 +21,7 @@ export interface TreeContext extends CheckableContext, DragDropContext, Expandab
   slots: Slots
   config: TreeConfig
   mergedPrefixCls: ComputedRef<string>
+  mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
   getNodeKey: ComputedRef<GetNodeKey>
   searchedKeys: ComputedRef<VKey[]>
 }

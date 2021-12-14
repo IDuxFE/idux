@@ -31,6 +31,8 @@ export default defineComponent({
     const onClick = () => handleExpand(props.nodeKey, props.rawNode)
 
     return () => {
+      const prefixCls = `${mergedPrefixCls.value}-node-expand`
+
       let children: VNodeTypes | undefined
       if (isLoading.value) {
         children = <IxIcon name="loading"></IxIcon>
@@ -44,6 +46,7 @@ export default defineComponent({
       }
       return (
         <span class={classes.value} onClick={onClick}>
+          {props.hasTopLine && <div class={`${prefixCls}-top-line`} />}
           {children}
         </span>
       )

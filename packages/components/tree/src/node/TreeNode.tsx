@@ -9,6 +9,7 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { treeToken } from '../token'
 import { treeNodeProps } from '../types'
+import { getParentKeys } from '../utils'
 import Checkbox from './Checkbox'
 import Content from './Content'
 import Expand from './Expand'
@@ -21,6 +22,7 @@ export default defineComponent({
     const {
       props: treeProps,
       mergedPrefixCls,
+      mergedNodeMap,
       activeKey,
       selectedKeys,
       dragKey,
@@ -38,6 +40,10 @@ export default defineComponent({
     const key = computed(() => props.node.key)
 
     const isActive = computed(() => activeKey.value === key.value)
+    const isLast = computed(() => treeProps.showLine && props.node.isLast)
+    const hasTopLine = computed(
+      () => treeProps.showLine && !props.node.isLeaf && props.node.level !== 0 && props.node.isFirst,
+    )
     const selected = computed(() => selectedKeys.value.includes(key.value))
     const disabled = computed(() => props.node.selectDisabled || !treeProps.selectable)
 
@@ -53,6 +59,7 @@ export default defineComponent({
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
+        [`${prefixCls}-last`]: isLast.value,
         [`${prefixCls}-disabled`]: disabled.value,
         [`${prefixCls}-selected`]: selected.value,
         [`${prefixCls}-expanded`]: props.node.expanded,
@@ -103,11 +110,21 @@ export default defineComponent({
     }
 
     return () => {
+      const nodeMap = mergedNodeMap.value
       const node = props.node
 
       const { isLeaf, key, label, level, rawNode, expanded, dragDisabled, dropDisabled } = node
       const { showLine, checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
+      const currNode = nodeMap.get(key)
+      let noopIdentUnit = 0
+      if (treeProps.showLine) {
+        getParentKeys(nodeMap, currNode).forEach(parentKey => {
+          if (nodeMap.get(parentKey)?.isLast) {
+            noopIdentUnit++
+          }
+        })
+      }
 
       return (
         <div
@@ -122,11 +139,11 @@ export default defineComponent({
           onDragleave={mergedDraggable ? onDragleave : undefined}
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
         >
-          <Indent level={level} prefixCls={mergedPrefixCls.value} />
+          <Indent level={level} noopIdentUnit={noopIdentUnit} prefixCls={mergedPrefixCls.value} />
           {isLeaf && showLine ? (
             <LeafLine />
           ) : (
-            <Expand expanded={expanded} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
+            <Expand expanded={expanded} hasTopLine={hasTopLine.value} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
           )}
           {checkable && <Checkbox node={node} />}
           <Content disabled={disabled.value} nodeKey={key} label={label} rawNode={rawNode} selected={selected.value} />

@@ -18,7 +18,9 @@ import { isBoolean } from 'lodash-es'
 export interface MergedNode {
   children?: MergedNode[]
   label: string
+  isFirst: boolean
   isLeaf: boolean
+  isLast: boolean
   key: VKey
   parentKey?: VKey
   rawNode: TreeNode
@@ -57,6 +59,7 @@ export function useFlattedNodes(
 ): ComputedRef<FlattedNode[]> {
   return computed(() => {
     const _expandedKeys = expandedKeys.value
+
     if (_expandedKeys.length > 0) {
       const nodes: FlattedNode[] = []
       mergedNodes.value.forEach(item => nodes.push(...flatNode(item, 0, _expandedKeys)))
@@ -70,13 +73,23 @@ export function covertMergeNodes(
   props: TreeProps,
   getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeNode[],
-  parentKey?: VKey,
 ): MergedNode[] {
   const getKey = getNodeKey.value
 
   const { childrenKey, labelKey, disabled, loadChildren } = props
 
-  return nodes.map(node => covertMergeNode(node, getKey, disabled, childrenKey, labelKey, !!loadChildren, parentKey))
+  return nodes.map((node, index) =>
+    covertMergeNode(
+      node,
+      getKey,
+      disabled,
+      childrenKey,
+      labelKey,
+      !!loadChildren,
+      index === 0,
+      index === nodes.length - 1,
+    ),
+  )
 }
 
 function covertMergeNode(
@@ -86,20 +99,34 @@ function covertMergeNode(
   childrenKey: string,
   labelKey: string,
   hasLoad: boolean,
+  isFirst: boolean,
+  isLast: boolean,
   parentKey?: VKey,
 ): MergedNode {
   const key = getKey(rawNode)
   const { check, drag, drop, select } = covertDisabled(rawNode, disabled)
   const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeNode[] | undefined
   const label = rawNode[labelKey] as string
-  const children = subNodes?.map(subNode =>
-    covertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
+  const children = subNodes?.map((subNode, index) =>
+    covertMergeNode(
+      subNode,
+      getKey,
+      disabled,
+      childrenKey,
+      labelKey,
+      hasLoad,
+      index === 0,
+      index === subNodes.length - 1,
+      key,
+    ),
   )
   return {
     children,
     label,
     key,
+    isFirst,
     isLeaf: rawNode.isLeaf ?? !(children?.length || hasLoad),
+    isLast,
     parentKey,
     rawNode,
     checkDisabled: check,

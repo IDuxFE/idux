@@ -148,6 +148,7 @@ export const treeNodeCheckboxProps = {
 
 export const treeNodeExpandProps = {
   expanded: IxPropTypes.bool.isRequired,
+  hasTopLine: IxPropTypes.bool,
   isLeaf: IxPropTypes.bool,
   nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
   rawNode: IxPropTypes.object<TreeNode>().isRequired,
