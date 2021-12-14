@@ -127,7 +127,8 @@ export default defineComponent({
       virtualScrollRef?.value?.scrollTo(option)
     }
 
-    expose({ focus, blur, scrollTo })
+    const { setExpandAll } = expandableContext
+    expose({ focus, blur, scrollTo, setExpandAll })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: FlattedNode[]) => {
       callEmit(

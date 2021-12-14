@@ -11,7 +11,7 @@ import type { GetNodeKey } from './useGetNodeKey'
 import type { TreeConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
@@ -22,6 +22,7 @@ export interface ExpandableContext {
   expandIcon: ComputedRef<string>
   expandedKeys: WritableComputedRef<VKey[]>
   handleExpand: (key: VKey, rawNode: TreeNode) => void
+  setExpandAll: (isAll: boolean) => void
   loadingKeys: Ref<VKey[]>
 }
 
@@ -37,17 +38,6 @@ export function useExpandable(
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
   const loadingKeys = ref<VKey[]>([])
-
-  onMounted(() => {
-    if (searchedKeys.value.length) {
-      setExpandWithSearch(searchedKeys.value)
-    } else if (expandedKeys.value.length === 0 && props.defaultExpandAll) {
-      const { onExpandedChange } = props
-      const allParentKeys = getAllParentKeys(mergedNodeMap.value)
-      setExpandedKeys(allParentKeys)
-      callChange(mergedNodeMap, allParentKeys, onExpandedChange)
-    }
-  })
 
   watch(searchedKeys, currKeys => {
     const { searchValue } = props
@@ -109,5 +99,18 @@ export function useExpandable(
     callChange(mergedNodeMap, newKeys, onExpandedChange)
   }
 
-  return { expandIcon, expandedKeys, handleExpand, loadingKeys }
+  const setExpandAll = (isAll: boolean) => {
+    const { onExpandedChange } = props
+    const allParentKeys = isAll ? getAllParentKeys(mergedNodeMap.value) : []
+    setExpandedKeys(allParentKeys)
+    callChange(mergedNodeMap, allParentKeys, onExpandedChange)
+  }
+
+  if (searchedKeys.value.length) {
+    setExpandWithSearch(searchedKeys.value)
+  } else if (expandedKeys.value.length === 0 && props.defaultExpandAll) {
+    setExpandAll(true)
+  }
+
+  return { expandIcon, expandedKeys, handleExpand, setExpandAll, loadingKeys }
 }

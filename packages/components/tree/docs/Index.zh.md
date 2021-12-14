@@ -110,3 +110,4 @@ export type TreeDropType = 'before' | 'inside' | 'after'
 | `blur` | 失去焦点 | - | - |
 | `focus` | 获取焦点 | - | - |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+| `setExpandAll` | 设置节点是否全部展开 | `(isAll: boolean) => void` | - |

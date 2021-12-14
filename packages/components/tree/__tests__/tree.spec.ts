@@ -878,4 +878,60 @@ describe('Tree', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  test('setExpandedAll work', async () => {
+    const onUpdateExpandedKeys = jest.fn()
+    const onExpandedChange = jest.fn()
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        expandedKeys: [],
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        onExpandedChange,
+      },
+    })
+
+    const allNodes = wrapper.findAll('.ix-tree-node')
+
+    expect(allNodes[0].classes()).not.toContain('ix-tree-node-expanded')
+
+    await wrapper.vm.setExpandAll(true)
+
+    expect(allNodes[0].classes()).not.toContain('ix-tree-node-expanded')
+    expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
+    expect(onExpandedChange).toBeCalledWith(
+      ['0'],
+      [
+        {
+          children: [
+            { key: '0-0', label: 'Node 0-0' },
+            { key: '0-1', label: 'Node 0-1' },
+            { key: '0-2', label: 'Node 0-2' },
+          ],
+          key: '0',
+          label: 'Node 0',
+        },
+      ],
+    )
+  })
+
+  test('focus && blur work', async () => {
+    const onFocus = jest.fn()
+    const onBlur = jest.fn()
+    const wrapper = TreeMount({
+      props: {
+        onFocus,
+        onBlur,
+      },
+      attachTo: 'body',
+    })
+
+    await wrapper.vm.focus()
+
+    expect(onFocus).toBeCalled()
+
+    await wrapper.vm.blur()
+
+    expect(onBlur).toBeCalled()
+  })
 })

@@ -82,6 +82,7 @@ export interface TreeBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
   scrollTo: VirtualScrollToFn
+  setExpandAll: (isAll: boolean) => void
 }
 export type TreeComponent = DefineComponent<Omit<HTMLAttributes, keyof TreePublicProps> & TreePublicProps, TreeBindings>
 export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>>
