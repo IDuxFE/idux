@@ -2,7 +2,7 @@
 import { join } from 'path'
 
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs-extra'
-import { lowerFirst } from 'lodash'
+import { kebabCase, lowerCase } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
 import { gulpConfig } from '../gulpConfig'
@@ -26,7 +26,8 @@ export function initSite(): void {
   readdirSync(docsDirname).forEach(docs => {
     const { __content, ...meta } = loadFront(readFileSync(join(docsDirname, docs)))
     const [name, lang] = docs.split('.')
-    const path = `/${'docs'}/${lowerFirst(name)}/${lang}`
+    const kebabCaseName = name === 'I18n' ? lowerCase(name) : kebabCase(name)
+    const path = `/${'docs'}/${kebabCaseName}/${lang}`
     docsMeta['docs'][name] = { ...meta, lang, path } as Meta
   })
 

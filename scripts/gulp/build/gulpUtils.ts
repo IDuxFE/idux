@@ -187,6 +187,7 @@ export const copyPackageFiles = (distDirname: string, projectRoot: string, packa
         await copyFile(join(projectRoot, packageName, 'package.json'), join(distDirname, packageName, 'package.json'))
         await copyFile(join(projectRoot, packageName, 'types.d.ts'), join(distDirname, packageName, 'types.d.ts'))
         await copyFile(join(packageRoot, 'README.md'), join(distDirname, packageName, 'README.md'))
+        await copyFile(join(packageRoot, 'LICENSE'), join(distDirname, packageName, 'LICENSE'))
       })
     done()
   }

@@ -20,6 +20,7 @@ const defaultOptions: Options = {
   sourcemap: false,
   jsxFactory: 'h',
   jsxFragment: 'Fragment',
+  legalComments: 'none',
 }
 
 export const esbuildPlugin = (options?: Options): Plugin => {
