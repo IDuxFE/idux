@@ -77,7 +77,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
         Logger.warn('components/input-number', `model value(${value}) is not a number.`)
       }
     } else {
-      if (value !== Number(displayValue.value)) {
+      if (displayValue.value === '' || value !== Number(displayValue.value)) {
         displayValue.value = value.toFixed(precision.value)
       }
     }
