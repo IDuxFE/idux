@@ -3,6 +3,7 @@ import { h } from 'vue'
 
 import { renderWork, wait } from '@tests'
 
+import { IxEmpty } from '@idux/components/empty'
 import { IxIcon } from '@idux/components/icon'
 
 import Tree from '../src/Tree'
@@ -625,6 +626,15 @@ describe('Tree', () => {
     await wrapper.setProps({ empty: { description: emptyDescription } })
 
     expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
+  })
+
+  test('empty slot work', async () => {
+    const wrapper = TreeMount({
+      props: { dataSource: [] },
+      slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
+    })
+
+    expect(wrapper.find('.ix-empty-description').text()).toBe('empty slot')
   })
 
   test('expandIcon work', async () => {
