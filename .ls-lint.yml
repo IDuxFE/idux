@@ -4,7 +4,6 @@ ls:
     .tsx: PascalCase
     .spec.ts: camelCase
     .config.ts: camelCase
-    .less: camelCase
     .vue: PascalCase
     .md: PascalCase
     .zh.md: PascalCase
