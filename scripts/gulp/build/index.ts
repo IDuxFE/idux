@@ -1,5 +1,6 @@
 import { join } from 'path'
 
+import { copy, copyFile } from 'fs-extra'
 import { series } from 'gulp'
 
 import { gulpConfig } from '../gulpConfig'
@@ -14,7 +15,7 @@ import {
   syncVersion,
 } from './gulpUtils'
 
-const { packageRoot, projectRoot } = gulpConfig
+const { packageRoot, projectRoot, icon } = gulpConfig
 const { cdkDirname, componentsDirname, proDirname, distDirname } = gulpConfig.build
 
 const cdkDistDirname = join(distDirname, 'cdk')
@@ -42,6 +43,10 @@ export const buildCdk = series(clean(cdkDistDirname), buildPackage(cdkOptions), 
 export const buildComponents = series(
   clean(componentsDistDirname),
   buildPackage(componentsOptions),
+  async () => {
+    await copyFile(join(icon.assetsDirname, '../bin.js'), join(componentsDistDirname, 'bin.js'))
+    await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/inline-icons'))
+  },
   buildIndex(componentsOptions),
   complete('Components'),
 )

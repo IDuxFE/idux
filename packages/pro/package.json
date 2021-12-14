@@ -1,7 +1,7 @@
 {
   "name": "@idux/pro",
   "version": "0.10.1",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "A higher level of abstraction UI component library for Vue 3.x",
   "keywords": [
     "vue",
     "vue3",
@@ -19,14 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IDuxFE/idux"
+    "url": "https://github.com/IDuxFE/idux",
+    "directory": "packages/pro"
   },
   "license": "MIT",
   "author": "IDuxFE<idux.feteam@gmail.com>",
   "main": "./index.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
-  "style": "./index.css",
+  "style": "./default.css",
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^0.10.0",

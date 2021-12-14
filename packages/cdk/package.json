@@ -21,7 +21,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IDuxFE/idux"
+    "url": "https://github.com/IDuxFE/idux",
+    "directory": "packages/cdk"
   },
   "license": "MIT",
   "author": "IDuxFE<idux.feteam@gmail.com>",

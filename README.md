@@ -44,64 +44,12 @@ npm install --save @idux/cdk @idux/components
 
 ## 🔨 使用
 
-- **按需加载**：当你只用到 `@idux` 的部分组件且比较在意包体积大小时，可以使用以下方式只加载用到的组件。
+最简单的使用方式参照以下 CodeSandbox 或者 StackBlitz 演示，也推荐 Fork 示例来进行 `Bug Report`，也可以将其下载下来作为项目初始化模板。
 
-  - Vite:
+- [CodeSandbox: idux-starter](https://codesandbox.io/s/idux-starter-7o9lv)
+- [StackBlitz: idux-starter](https://stackblitz.com/edit/idux-starter)
 
-    ```ts
-    // vite.config
-    import { IduxResolver } from 'unplugin-vue-components/resolvers'
-    import Components from 'unplugin-vue-components/vite'
-
-    export default {
-      plugins: [
-        /* ... */
-        Components({
-        // 如果不指定 `importStyle`（推荐用法）
-        // 依旧需要在 main.ts 中 `import "@idux/components/index.css"`
-        resolvers: [IduxResolver({ importStyle: 'css' })],
-        }),
-      ]
-    }
-    ```
-
-  - Webpack:
-
-    ```ts
-    // webpack.config
-    import { IduxResolver } from 'unplugin-vue-components/resolvers'
-    import Components from 'unplugin-vue-components/webpack'
-
-    module.exports = {
-      plugins: [
-        /* ... */
-        Components({
-        // 如果不指定 `importStyle`（推荐用法）
-        // 依旧需要在 main.ts 中 `import "@idux/components/index.css"`
-        resolvers: [IduxResolver({ importStyle: 'css' })],
-        }),
-      ]
-    }
-    ```
-
-  - 手动加载
-
-    ```ts
-    // App.vue or other components
-    import { IxButton } from "@idux/components/button"
-    import "@idux/components/button/style/css"
-    ```
-
-- **全量加载**：当你会用到 `@idux` 的大部分组件或者对包体积不敏感时，可以使用全量加载。
-
-    ```ts
-    // main.ts
-    import iduxComponents from "@idux/components"
-    // or import "@idux/components/index.less"
-    import "@idux/components/index.css" 
-
-    createApp(App).use(iduxComponents).mount('#app')
-    ```
+参考[快速上手](https://idux.site/docs/getting-started/zh)以了解更多。
 
 ## 🔗 链接
 

@@ -18,14 +18,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IDuxFE/idux"
+    "url": "https://github.com/IDuxFE/idux",
+    "directory": "packages/components"
   },
   "license": "MIT",
   "author": "IDuxFE<idux.feteam@gmail.com>",
   "main": "./index.js",
   "module": "./index.js",
   "typings": ".index.d.ts",
-  "style": "./index.css",
+  "style": "./default.css",
+  "bin": {
+    "idux": "bin.js"
+  },
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^0.10.0",
