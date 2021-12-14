@@ -67,11 +67,11 @@ export function useExpandable(
   }
 
   const handleExpand = async (key: VKey, rawNode: TreeNode) => {
+    const { childrenKey, loadChildren } = props
     if (loadingKeys.value.includes(key)) {
       return
     }
-    if (!rawNode.children?.length) {
-      const loadChildren = props.loadChildren
+    if (!(rawNode?.[childrenKey] as TreeNode[])?.length) {
       if (!loadChildren || loadingKeys.value.includes(key) || loadedKeys.value.includes(key)) {
         return
       }
@@ -84,7 +84,7 @@ export function useExpandable(
       if (childrenNodes.length) {
         const mergedChildren = covertMergeNodes(props, getNodeKey, childrenNodes, key)
         covertMergedNodeMap(mergedChildren, nodeMap)
-        currNode.rawNode.children = childrenNodes
+        currNode.rawNode[childrenKey] = childrenNodes
         currNode.children = mergedChildren
         const newLoadedKeys = [...loadedKeys.value, key]
         setLoadedKeys(newLoadedKeys)

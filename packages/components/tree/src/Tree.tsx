@@ -10,12 +10,12 @@ import type { StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, provide, ref } from 'vue'
 
-import { isNil, isString } from 'lodash-es'
+import { isNil } from 'lodash-es'
 
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
+import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxEmpty } from '@idux/components/empty'
 
 import { useCheckable } from './composables/useCheckable'
 import { FlattedNode, useFlattedNodes, useMergeNodes } from './composables/useDataSource'
@@ -116,11 +116,6 @@ export default defineComponent({
       return path
     })
 
-    const emptyProps = computed(() => {
-      const { empty } = props
-      return isString(empty) ? { description: empty } : empty
-    })
-
     const focus = (options?: FocusOptions) => {
       inputRef?.value?.focus(options)
     }
@@ -165,7 +160,7 @@ export default defineComponent({
           />
         )
       } else {
-        children = <IxEmpty {...emptyProps.value}></IxEmpty>
+        children = <ɵEmpty v-slots={slots} empty={props.empty} />
       }
 
       return (
