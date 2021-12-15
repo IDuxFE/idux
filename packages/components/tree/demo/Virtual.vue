@@ -1,5 +1,5 @@
 <template>
-  <IxTree :dataSource="treeData" defaultExpandAll :height="200" virtual></IxTree>
+  <IxTree :dataSource="treeData" :height="200" virtual></IxTree>
 </template>
 
 <script setup lang="ts">

@@ -29,7 +29,6 @@ order: 0
 | `disabled` | 禁用节点的函数 | `(node: TreeNode) => boolean \| TreeNodeDisabled` | - | - | - |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
-| `defaultExpandAll` | 是否默认展开全部节点 | `boolean` | `false` | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
