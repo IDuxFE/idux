@@ -11,12 +11,8 @@ order: 5
 - 支持 2 种主题：亮色和暗黑，默认为亮色
 - 支持 2 种状态：展开和收起，默认为展开
 
-注意：必须设置 `key`。
-
 ## en
 
 - Support three modes: vertical, horizontal and inline, the default is vertical
 - Support two themes: light and dark, the default is light
 - Supports 2 states: expanded and collapsed, the default is expanded
-
-Note: `key` must be set.

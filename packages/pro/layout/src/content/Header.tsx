@@ -43,14 +43,17 @@ export default defineComponent({
 
     const menuSelectedKeys = computed(() => (activeHeaderKey.value ? [activeHeaderKey.value] : []))
     const onMenuClick = (menuClickOption: MenuClickOptions) => {
-      if (menuClickOption.type === 'item') {
-        setActiveKey(menuClickOption.key)
-      } else if (props.type === 'both') {
+      if (props.type === 'both') {
         const targetMenu = props.menus.find(menu => menu.key === menuClickOption.key)
         if (targetMenu && 'children' in targetMenu && targetMenu.children.length > 0) {
           const activePaths = getDefaultPaths(targetMenu.children)
           setActiveKey(activePaths.pop()!.key)
+          callEmit(props['onMenuClick'], menuClickOption)
+          return
         }
+      }
+      if (menuClickOption.type === 'item') {
+        setActiveKey(menuClickOption.key)
       }
       callEmit(props['onMenuClick'], menuClickOption)
     }

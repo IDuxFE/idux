@@ -29,7 +29,6 @@ import type {
   InputNumberConfig,
   ListConfig,
   MenuConfig,
-  MenuSubConfig,
   MessageConfig,
   ModalConfig,
   NotificationConfig,
@@ -91,13 +90,9 @@ const dropdown: DropdownConfig = {
 
 const menu: MenuConfig = {
   indent: 24,
-  theme: 'light',
-}
-
-const menuSub: MenuSubConfig = {
   offset: [0, 8],
   suffix: 'right',
-  suffixRotates: [-90, 90],
+  theme: 'light',
 }
 
 const pagination: PaginationConfig = {
@@ -376,7 +371,6 @@ export const defaultConfig: GlobalConfig = {
   // Navigation
   dropdown,
   menu,
-  menuSub,
   pagination,
   // Data Entry
   form,

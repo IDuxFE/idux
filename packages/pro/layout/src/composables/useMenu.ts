@@ -28,7 +28,7 @@ export function useHeaderMenus(props: ProLayoutProps): ComputedRef<ProLayoutMenu
           return menu
         }
         const { children, ...rest } = menu
-        return rest as ProLayoutMenuData
+        return { ...rest, type: 'item' } as ProLayoutMenuData
       })
     }
 

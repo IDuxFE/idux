@@ -34,43 +34,74 @@
       :mode="mode"
       :theme="theme"
       :collapsed="collapsed"
+      :dataSource="dataSource"
     >
-      <IxMenuItem key="item1" icon="home"><a>Item 1</a></IxMenuItem>
-      <IxMenuItem key="item2" icon="mail"> Item 2 </IxMenuItem>
-      <IxMenuItem key="item3" disabled icon="appstore"> Item 3 </IxMenuItem>
-      <IxMenuDivider />
-      <IxMenuSub key="menuSub1" label="Menu Sub 1" icon="setting">
-        <IxMenuItemGroup label="Item Group 1">
-          <IxMenuItem key="item4">Item 4</IxMenuItem>
-          <IxMenuItem key="item5">Item 5</IxMenuItem>
-        </IxMenuItemGroup>
-        <IxMenuDivider />
-        <IxMenuSub key="menuSub2">
-          <template #label><span>Menu Sub 2</span></template>
-          <IxMenuItem key="item6">Item 6</IxMenuItem>
-          <IxMenuItem key="item7">Item 7</IxMenuItem>
-        </IxMenuSub>
-        <IxMenuSub key="menuSub3" label="Menu Sub 3">
-          <IxMenuItem key="item8">Item 8</IxMenuItem>
-          <IxMenuItem key="item9">Item 9</IxMenuItem>
-        </IxMenuSub>
-      </IxMenuSub>
-      <IxMenuSub key="menuSub4" disabled label="Menu Sub 4" icon="github">
-        <IxMenuItem key="item10">Item 10</IxMenuItem>
-        <IxMenuItem key="item11">Item 11</IxMenuItem>
-      </IxMenuSub>
     </IxMenu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { h, ref } from 'vue'
 
-import { MenuMode, MenuTheme } from '@idux/components/menu'
+import { MenuData, MenuMode, MenuTheme } from '@idux/components/menu'
 
 const mode = ref<MenuMode>('vertical')
 const theme = ref<MenuTheme>('light')
 const collapsed = ref(false)
 const selectedKeys = ref([])
 const expandedKeys = ref([])
+
+const dataSource: MenuData[] = [
+  { type: 'item', key: 'item1', icon: 'home', slots: { label: () => h('a', 'Item 1') } },
+  { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
+  { type: 'item', key: 'item3', icon: 'appstore', label: 'Item 3', disabled: true },
+  { type: 'divider', key: 'divider1' },
+  {
+    type: 'sub',
+    key: 'sub1',
+    icon: 'setting',
+    label: 'Sub Menu 1',
+    children: [
+      {
+        type: 'itemGroup',
+        key: 'itemGroup1',
+        label: 'Item Group 1',
+        children: [
+          { type: 'item', key: 'item4', label: 'Item 4' },
+          { type: 'item', key: 'item5', label: 'Item 5' },
+        ],
+      },
+      { type: 'divider', key: 'divider2' },
+      {
+        type: 'sub',
+        key: 'sub2',
+        label: 'Menu Sub 2',
+        children: [
+          { type: 'item', key: 'item6', label: 'Item 6' },
+          { type: 'item', key: 'item7', label: 'Item 7' },
+        ],
+      },
+      {
+        type: 'sub',
+        key: 'sub3',
+        label: 'Menu Sub 3',
+        children: [
+          { type: 'item', key: 'item8', label: 'Item 8' },
+          { type: 'item', key: 'item9', label: 'Item 9' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'sub',
+    key: 'sub4',
+    icon: 'github',
+    label: 'Menu Sub 4',
+    disabled: true,
+    children: [
+      { type: 'item', key: 'item10', label: 'Item 10' },
+      { type: 'item', key: 'item11', label: 'Item 11' },
+    ],
+  },
+]
 </script>

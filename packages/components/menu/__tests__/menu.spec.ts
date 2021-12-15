@@ -5,13 +5,13 @@ import { renderWork, wait } from '@tests'
 
 import Menu from '../src/Menu'
 // import MenuDivider from '../src/MenuDivider'
-import MenuItem from '../src/MenuItem'
+import MenuItem from '../src/children/MenuItem'
 // import MenuItemGroup from '../src/MenuItemGroup'
-import MenuSub from '../src/menu-sub/MenuSub'
+import MenuSub from '../src/children/menu-sub/MenuSub'
 import { MenuData, MenuProps } from '../src/types'
 
 const dataSource: MenuData[] = [
-  { type: 'item', key: 'item1', icon: 'home', slots: { default: () => h('a', 'Item 1') } },
+  { type: 'item', key: 'item1', icon: 'home', slots: { label: () => h('a', 'Item 1') } },
   { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
   { type: 'item', key: 'item3', icon: 'appstore', label: 'Item 3', disabled: true },
   { type: 'divider', key: 'divider1' },

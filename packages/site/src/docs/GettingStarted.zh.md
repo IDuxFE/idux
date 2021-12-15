@@ -100,6 +100,25 @@ import App from "./App.vue";
 createApp(App).use(Idux).mount("#app");
 ```
 
+### 类型提示
+
+我们提供了所以组件的类型定义，你可以参考下面的代码进行导入类型声明。
+
+```ts
+// env.d.ts
+/// <reference types="vite/client" />
+/// <reference types="@idux/cdk/types" />
+/// <reference types="@idux/components/types" />
+/// <reference types="@idux/pro/types" />
+
+declare module '*.vue' {
+  import { DefineComponent } from 'vue'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+  const component: DefineComponent<{}, {}, any>
+  export default component
+}
+```
+
 ### 开发调试
 
 一键启动调试，运行成功后显示欢迎页面。

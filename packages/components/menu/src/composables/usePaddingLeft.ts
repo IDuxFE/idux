@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuMode } from './types'
+import type { MenuMode } from '../types'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'

@@ -82,7 +82,6 @@ const dataSource: ProLayoutMenuData[] = [
 
 .content {
   margin: 24px;
-  width: 800px;
   height: 400px;
   line-height: 40px;
   text-align: center;

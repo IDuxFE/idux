@@ -117,7 +117,7 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const isOption = (type as any)[optionKey]
     if (isOption) {
-      const { key, disabled, label, value, ...additional } = props!
+      const { key, disabled, label, value, ...additional } = props || {}
       // <IxSelectOption disabled /> => disabled = ''
       const _disabled = disabled || disabled === ''
       const rawOption = { key, disabled: _disabled, label, value, additional, slots }
@@ -133,8 +133,8 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
 
       mergedOptions.push(option)
     } else {
-      const { key, label, ...additional } = props!
-      const children = convertOptions(slots?.default?.(), key, true)
+      const { key, label, ...additional } = props || {}
+      const children = convertOptions(slots.default?.(), key, true)
       const rawOption = { key, label, children, additional }
       mergedOptions.push({ key: key ?? index, label, type: 'group', rawOption })
       mergedOptions.push(...children)

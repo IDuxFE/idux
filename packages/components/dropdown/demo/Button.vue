@@ -5,12 +5,7 @@
       <IxDropdown>
         <IxButton icon="ellipsis"></IxButton>
         <template #overlay>
-          <IxMenu>
-            <IxMenuItem> Item 1 </IxMenuItem>
-            <IxMenuItem> Item 2 </IxMenuItem>
-            <IxMenuDivider />
-            <IxMenuItem disabled> Item 3 </IxMenuItem>
-          </IxMenu>
+          <IxMenu :dataSource="dataSource"> </IxMenu>
         </template>
       </IxDropdown>
     </IxButtonGroup>
@@ -19,12 +14,7 @@
       <IxDropdown>
         <IxButton icon="setting"></IxButton>
         <template #overlay>
-          <IxMenu>
-            <IxMenuItem> Item 1 </IxMenuItem>
-            <IxMenuItem> Item 2 </IxMenuItem>
-            <IxMenuDivider />
-            <IxMenuItem disabled> Item 3 </IxMenuItem>
-          </IxMenu>
+          <IxMenu :dataSource="dataSource"></IxMenu>
         </template>
       </IxDropdown>
     </IxButtonGroup>
@@ -32,24 +22,21 @@
     <IxDropdown>
       <IxButton>Button <IxIcon name="down"></IxIcon></IxButton>
       <template #overlay>
-        <IxMenu>
-          <IxMenuItem> Item 1 </IxMenuItem>
-          <IxMenuItem> Item 2 </IxMenuItem>
-          <IxMenuDivider />
-          <IxMenuItem disabled> Item 3 </IxMenuItem>
-        </IxMenu>
+        <IxMenu :dataSource="dataSource"></IxMenu>
       </template>
     </IxDropdown>
   </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { MenuData } from '@idux/components/menu'
 
-export default defineComponent({
-  setup() {
-    const onClick = () => console.log('button click')
-    return { onClick }
-  },
-})
+const dataSource: MenuData[] = [
+  { type: 'item', key: 'one', label: 'One' },
+  { type: 'item', key: 'two', label: 'Two' },
+  { type: 'divider' },
+  { type: 'item', key: 'three', label: 'Three', disabled: true },
+]
+
+const onClick = () => console.log('button click')
 </script>

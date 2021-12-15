@@ -75,14 +75,10 @@ export interface DropdownConfig {
 
 export interface MenuConfig {
   indent: number
-  target?: PortalTargetType
-  theme: MenuTheme
-}
-
-export interface MenuSubConfig {
   offset: [number, number]
   suffix: string
-  suffixRotates: [number, number]
+  target?: PortalTargetType
+  theme: MenuTheme
 }
 
 export interface PaginationConfig {
@@ -399,7 +395,6 @@ export interface GlobalConfig {
   // Navigation
   dropdown: DropdownConfig
   menu: MenuConfig
-  menuSub: MenuSubConfig
   pagination: PaginationConfig
   // Data Entry
   form: FormConfig
