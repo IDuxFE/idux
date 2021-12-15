@@ -76,7 +76,7 @@ export type DateConfig<P = number | Date, R = Date> = {
 
   format: (date: P, format: string) => string
   parse: (dateString: string, format: string) => R
-  covert: (date: unknown, format: string) => R
+  convert: (date: unknown, format: string) => R
 
   getLocalizedLabels: (
     type: 'month' | 'day' | 'dayPeriod',
@@ -222,7 +222,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
 
     format: (date, format) => formatDate(date, format, { locale: locale.value }),
     parse: parse,
-    covert: (date, format) => {
+    convert: (date, format) => {
       if (isNil(date)) {
         return now()
       }

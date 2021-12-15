@@ -28,16 +28,16 @@ export function usePanelState(
   formatRef: ComputedRef<string>,
 ): PanelStateContext {
   const initValue = accessor.valueRef.value ?? props.defaultOpenValue
-  const initDate = initValue ? dateConfig.covert(accessor.valueRef.value, formatRef.value) : undefined
+  const initDate = initValue ? dateConfig.convert(accessor.valueRef.value, formatRef.value) : undefined
   const [panelDate, setPanelDate] = useState(initDate)
 
   watch(accessor.valueRef, value => {
-    const { covert, isSame } = dateConfig
+    const { convert, isSame } = dateConfig
     const mergedValue = value ?? props.defaultOpenValue
     if (!mergedValue) {
       setPanelDate(undefined)
     }
-    const currValue = covert(mergedValue, formatRef.value)
+    const currValue = convert(mergedValue, formatRef.value)
     if (!panelDate.value || !isSame(panelDate.value, currValue, props.type)) {
       setPanelDate(currValue)
     }
