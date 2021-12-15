@@ -81,4 +81,13 @@ export const zh_CN: Locale = {
     sortAsc: '点击升序',
     sortCancel: '取消排序',
   },
+  timePicker: {
+    okText: '确定',
+    placeholder: '请选择时间',
+  },
+  timeRangePicker: {
+    okText: '确定',
+    separator: '至',
+    placeholder: ['起始时间', '结束时间'],
+  },
 }

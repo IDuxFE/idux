@@ -1,0 +1,56 @@
+.@{time-range-picker-prefix}-trigger {
+  .reset-component();
+
+  &-content {
+    display: flex;
+
+    &-side {
+      flex: 1 1 0%;
+    }
+
+    &-separator {
+      margin: 0 @time-range-picker-trigger-separator-margin;
+    }
+  }
+}
+
+.@{time-range-picker-prefix}-overlay {
+  .reset-component();
+  
+  background-color: @time-picker-overlay-background-color;
+  box-shadow: @time-picker-overlay-box-shadow;
+
+  &-content {
+    display: flex;
+    padding: @time-range-picker-overlay-padding;
+  }
+
+  &-gap {
+    padding: @time-range-picker-overlay-gap-padding;
+    text-align: center;
+    color: @time-picker-placeholder-color;
+  }
+
+  &-footer {
+    text-align: end;
+    border-top: @time-picker-border-width @time-picker-border-style @time-picker-border-color;
+    padding: @time-picker-footer-padding;
+    margin: @time-picker-footer-margin;
+  }
+
+  &-side {
+    width: @time-range-picker-overlay-side-width;
+
+    & &-input {
+      margin-bottom: @time-picker-input-margin;
+    }
+
+    .@{time-panel-prefix} {
+      border: @time-range-picker-panel-border-width @time-range-picker-panel-border-style
+        @time-range-picker-panel-border-color;
+      border-radius: @time-range-picker-panel-border-radius;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}

@@ -81,4 +81,13 @@ export const en_US: Locale = {
     sortAsc: 'Click to sort ascending',
     sortCancel: 'Click to cancel sorting',
   },
+  timePicker: {
+    okText: 'Yes',
+    placeholder: 'Please select time',
+  },
+  timeRangePicker: {
+    okText: 'Yes',
+    separator: 'To',
+    placeholder: ['Start time', 'End time'],
+  },
 }

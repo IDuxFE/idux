@@ -5,86 +5,89 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
-
-import dayjs from 'dayjs/esm'
+import { computed, defineComponent, inject, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
-import { useGlobalConfig } from '@idux/components/config'
+import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { IxInput } from '@idux/components/input'
 
-import TimePickerPanel from './TimePickerPanel'
-import { useCommonBindings, useCommonInputProps, useCommonOverlayProps, useCommonPanelProps } from './hooks'
+import { useInputEnableStatus } from './composables/useInputEnableStatus'
+import { usePickerControl } from './composables/usePickerControl'
+import { useCommonOverlayProps } from './composables/useProps'
+import { useTimePickerCommonBindings } from './composables/useTimePickerCommonBindings'
+import Overlay from './overlay/Overlay'
+import { timePickerContext, timePickerControl } from './tokens'
+import Trigger from './trigger/Trigger'
 import { timePickerProps } from './types'
-import { normalizeFormat } from './utils'
+import { convertToDate } from './utils'
 
 export default defineComponent({
   name: 'IxTimePicker',
   props: timePickerProps,
-  setup(props, { attrs, expose, slots }) {
+  setup(props, { slots }) {
+    const config = useGlobalConfig('timePicker')
+    const dateConfig = useDateConfig()
+    const { isValid, parse } = dateConfig
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
     const [visibility, setVisibility] = useControlledProp(props, 'open', false)
 
-    const { inputRef, accessor, isDisabled, handleChange, handleClear, handleBlur, handleFocus, focus, blur } =
-      useCommonBindings(props)
+    const format = computed(() => props.format ?? config.format)
+    const commonBindings = useTimePickerCommonBindings(props)
+    const { accessor, isDisabled, handleChange } = commonBindings
+    const pickerControl = usePickerControl(
+      accessor.valueRef,
+      dateConfig,
+      format,
+      [],
+      (value: string) => !value || isValid(parse(value, format.value)),
+      handleChange,
+    )
+    const { init } = pickerControl
 
-    expose({ focus, blur })
+    const inputEnableStatus = useInputEnableStatus(props, config)
 
-    const config = useGlobalConfig('timePicker')
+    const changeVisible = (visible: boolean) => {
+      setVisibility(visible)
+      if (!visible) {
+        init()
+      }
+    }
+
     const formContext = inject(FORM_TOKEN, null)
-    const inputProps = useCommonInputProps(props, config, formContext)
-    const panelProps = useCommonPanelProps(props)
-    const overlayProps = useCommonOverlayProps(props, setVisibility)
 
-    const inputValue = computed(() => {
-      const value = accessor.valueRef.value
-      return value ? dayjs(value).format(normalizeFormat(props.format)) : ''
+    provide(timePickerControl, pickerControl)
+    provide(timePickerContext, {
+      dateConfig,
+      config,
+      props,
+      format,
+      formContext,
+      slots,
+      overlayOpened: visibility,
+      mergedPrefixCls,
+      inputEnableStatus,
+      commonBindings,
+      setOverlayOpened: changeVisible,
     })
 
-    return () => {
-      const inputSlots = {
-        suffix: slots.suffix,
-        clearIcon: slots.clearIcon,
-      }
-      const renderInput = () => {
-        const cls = visibility.value ? 'ix-input-focused' : ''
-        return (
-          <div class="ix-time-picker">
-            <IxInput
-              {...inputProps.value}
-              {...attrs}
-              class={cls}
-              ref={inputRef}
-              value={inputValue.value}
-              disabled={isDisabled.value}
-              readonly={props.readonly}
-              placeholder={props.placeholder}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onClear={handleClear}
-              v-slots={inputSlots}
-            />
-          </div>
-        )
-      }
+    const overlayProps = useCommonOverlayProps(props, config, mergedPrefixCls, changeVisible)
 
-      const renderContent = () => (
-        <TimePickerPanel
-          {...panelProps.value}
-          ref="overlayRef"
-          defaultOpenValue={props.defaultOpenValue}
-          value={accessor.valueRef.value}
-          visible={visibility.value}
-          onChange={handleChange}
+    return () => {
+      const renderTrigger = () => (
+        <Trigger
+          class={mergedPrefixCls.value}
+          value={convertToDate(dateConfig, accessor.valueRef.value, format.value)}
         />
       )
+      const renderContent = () => <Overlay />
 
       return (
         <ɵOverlay
           {...overlayProps.value}
           visible={visibility.value}
-          v-slots={{ default: renderInput, content: renderContent }}
+          v-slots={{ default: renderTrigger, content: renderContent }}
           disabled={isDisabled.value || props.readonly}
         />
       )

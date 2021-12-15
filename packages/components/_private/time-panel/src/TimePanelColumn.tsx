@@ -5,42 +5,35 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, nextTick, ref, watchEffect } from 'vue'
+import { defineComponent, inject, nextTick, ref } from 'vue'
 
-import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 
-import { panelColumnProps } from '../types'
-import PanelCell from './PanelCell'
+import PanelCell from './TimePanelCell'
+import { usePanelScroll } from './composables/usePanelScroll'
+import { timePanelContext } from './tokens'
+import { timePanelColumnProps } from './types'
 
 export default defineComponent({
-  props: panelColumnProps,
+  props: timePanelColumnProps,
   setup(props) {
+    const { mergedPrefixCls } = inject(timePanelContext)!
     const listRef = ref<HTMLElement | null>(null)
+    const { scrollToSelected, handleScroll, handleScrollAdjust } = usePanelScroll(props, listRef, mergedPrefixCls)
 
-    const onChange = (value: string | number) => {
+    function onChange(value: string | number) {
       callEmit(props.onChange, value)
       nextTick(scrollToSelected)
     }
 
-    const scrollToSelected = (duration = 200) => {
-      const target = listRef.value
-      if (target) {
-        const selectedIndex = props.options.findIndex(item => item.value === props.selectedValue)
-        const top = (target.children[selectedIndex] as HTMLElement)?.offsetTop ?? 0
-
-        scrollToTop({ top, target, duration })
-      }
-    }
-
-    watchEffect(() => {
-      if (props.visible) {
-        nextTick(() => scrollToSelected(0))
-      }
-    })
-
     return () => (
-      <ul ref={listRef} class="ix-time-picker-panel-column">
+      <ul
+        ref={listRef}
+        class={`${mergedPrefixCls.value}-column`}
+        onScroll={handleScroll}
+        onMousemove={handleScrollAdjust}
+        onMouseenter={handleScrollAdjust}
+      >
         {props.options.map((item, index) => {
           const { disabled, value } = item
           return (

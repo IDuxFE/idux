@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimePanelCell render work 1`] = `"<li class=\\"ix-time-Panel-cell ix-time-Panel-cell-selected\\">01</li>"`;
