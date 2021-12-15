@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/IDuxFE/idux/compare/v0.10.1...v0.11.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* add default.variable.less ([#612](https://github.com/IDuxFE/idux/issues/612)) ([b95128a](https://github.com/IDuxFE/idux/commit/b95128a58fd6e2b6d8a59675e81671bb49b9a605))
+* **comp:input-number:** not displayed when value is zero ([#616](https://github.com/IDuxFE/idux/issues/616)) ([df8a367](https://github.com/IDuxFE/idux/commit/df8a367771659656c7905412fb28d126ac260b63))
+* **comp:time-picker,slider:** style entry ([#619](https://github.com/IDuxFE/idux/issues/619)) ([d74d33b](https://github.com/IDuxFE/idux/commit/d74d33b4f3e430501e2e9df5daa2665e4fd507e7))
+* **comp:tree:** modify the childrenKey causes the expand to fail ([#613](https://github.com/IDuxFE/idux/issues/613)) ([b736977](https://github.com/IDuxFE/idux/commit/b7369777b65e8d338c23b1b84cb35f5e55cf6027))
+
+
+### Features
+
+* **comp:slider:** add slider component ([#186](https://github.com/IDuxFE/idux/issues/186)) ([#614](https://github.com/IDuxFE/idux/issues/614)) ([3bd3833](https://github.com/IDuxFE/idux/commit/3bd38330ff80f647f55cac394f6e167facd48277))
+
+
+
+
+
 ## [0.10.1](https://github.com/IDuxFE/idux/compare/v0.10.0...v0.10.1) (2021-12-13)
 
 

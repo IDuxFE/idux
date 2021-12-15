@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/IDuxFE/idux/compare/v0.10.1...v0.11.0) (2021-12-15)
+
+
+### Features
+
+* **comp:slider:** add slider component ([#186](https://github.com/IDuxFE/idux/issues/186)) ([#614](https://github.com/IDuxFE/idux/issues/614)) ([3bd3833](https://github.com/IDuxFE/idux/commit/3bd38330ff80f647f55cac394f6e167facd48277))
+
+
+
+
+
 # [0.10.0](https://github.com/IDuxFE/idux/compare/v0.9.0...v0.10.0) (2021-12-13)
 
 
