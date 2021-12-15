@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider render work 1`] = `
+"<div class=\\"ix-slider\\">
+  <div class=\\"ix-slider-rail\\"></div>
+  <div class=\\"ix-slider-track\\" style=\\"left: 0%; width: 30%;\\"></div>
+  <div class=\\"ix-slider-step\\"></div>
+  <div role=\\"slider\\" tabindex=\\"0\\" aria-label=\\"Slider\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-valuenow=\\"30\\" aria-readonly=\\"false\\" aria-orientation=\\"horizontal\\" style=\\"transform: translateX(-50%); left: 30%;\\" class=\\"ix-slider-thumb\\"></div>
+  <!---->
+  <div class=\\"ix-slider-mark\\">
+    <!---->
+  </div>
+</div>"
+`;

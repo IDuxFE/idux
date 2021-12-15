@@ -44,6 +44,7 @@ import { IxRate } from '@idux/components/rate'
 import { IxResult } from '@idux/components/result'
 import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/select'
 import { IxSkeleton } from '@idux/components/skeleton'
+import { IxSlider } from '@idux/components/slider'
 import { IxSpace } from '@idux/components/space'
 import { IxSpin } from '@idux/components/spin'
 import { IxStatistic } from '@idux/components/statistic'
@@ -122,6 +123,7 @@ const components = [
   IxSelectOption,
   IxSelectOptionGroup,
   IxSkeleton,
+  IxSlider,
   IxSpace,
   IxSpin,
   IxStatistic,

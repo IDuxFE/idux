@@ -178,3 +178,20 @@ export function isVisibleElement(element: HTMLElement | SVGElement | undefined):
 
   return isStyleVisible(element) && isAttributeVisible(element)
 }
+
+export function getMouseClientXY(ev: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
+  let clientX: number
+  let clientY: number
+  if (ev.type.startsWith('touch')) {
+    clientY = (ev as TouchEvent).touches[0].clientY
+    clientX = (ev as TouchEvent).touches[0].clientX
+  } else {
+    clientY = (ev as MouseEvent).clientY
+    clientX = (ev as MouseEvent).clientX
+  }
+
+  return {
+    clientX,
+    clientY,
+  }
+}
