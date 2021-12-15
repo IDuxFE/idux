@@ -5,35 +5,39 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, watch } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { useGlobalConfig } from '@idux/components/config'
+import { isString } from 'lodash-es'
+
 import { useKey } from '@idux/components/utils'
 
-import { menuItemGroupToken, menuSubToken, menuToken } from './token'
-import { menuItemProps } from './types'
-import { usePaddingLeft } from './usePaddingLeft'
-import { getIconNode } from './utils'
+import { usePaddingLeft } from '../composables/usePaddingLeft'
+import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
+import { MenuItem, menuItemProps } from '../types'
+import { coverIcon } from './Utils'
 
 export default defineComponent({
-  name: 'IxMenuItem',
   props: menuItemProps,
-  setup(props, { slots }) {
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-item`)
-
+  setup(props) {
     const key = useKey()
 
     // menuContext must exist
-    const { indent, mode, selectedKeys, handleClick } = inject(menuToken, null)!
+    const {
+      slots: menuSlots,
+      mergedPrefixCls,
+      indent,
+      mode,
+      selectedKeys,
+      handleSelected,
+      handleClick,
+    } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
     const isSelected = computed(() => selectedKeys.value.includes(key))
-    watch(isSelected, selected => menuSubContext?.handleSelect(key, selected))
 
     const classes = computed(() => {
-      const prefixCls = mergedPrefixCls.value
+      const prefixCls = `${mergedPrefixCls.value}-item`
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: props.disabled,
@@ -49,26 +53,31 @@ export default defineComponent({
 
     const onClick = (evt: Event) => {
       evt.stopPropagation()
-      if (props.disabled) {
-        return
-      }
+      handleSelected(key)
       handleClick(key, 'item', evt)
       menuSubContext?.handleItemClick()
     }
 
     return () => {
       const { disabled, icon, label } = props
-      const prefixCls = mergedPrefixCls.value
+      const slotProps = { ...props, key } as MenuItem
 
-      const iconNode = getIconNode(slots.icon, icon)
-      const iconWrapper = iconNode ? <span class={`${prefixCls}-icon`}>{iconNode}</span> : undefined
+      const slots = props.slots || {}
+      const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
+      const iconNode = coverIcon(iconSlot, slotProps, icon)
+      let labelSlot = slots.label
+      if (!labelSlot && slots.default) {
+        labelSlot = slots.default
+      }
+      if (isString(labelSlot)) {
+        labelSlot = menuSlots[labelSlot]
+      }
 
-      const labelNode = <span> {slots.default?.() ?? label}</span>
-
+      const prefixCls = `${mergedPrefixCls.value}-item`
       return (
         <li class={classes.value} style={style.value} onClick={disabled ? undefined : onClick}>
-          {iconWrapper}
-          {labelNode}
+          {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
+          <span>{labelSlot ? labelSlot(slotProps) : label}</span>
         </li>
       )
     }

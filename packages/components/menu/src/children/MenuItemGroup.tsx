@@ -7,27 +7,24 @@
 
 import { computed, defineComponent, inject, provide } from 'vue'
 
-import { useGlobalConfig } from '@idux/components/config'
+import { isString } from 'lodash-es'
+
 import { useKey } from '@idux/components/utils'
 
-import { menuItemGroupToken, menuSubToken, menuToken } from './token'
-import { menuItemGroupProps } from './types'
-import { usePaddingLeft } from './usePaddingLeft'
-import { getIconNode } from './utils'
+import { usePaddingLeft } from '../composables/usePaddingLeft'
+import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
+import { MenuItemGroup, menuItemGroupProps } from '../types'
+import { coverChildren, coverIcon } from './Utils'
 
 export default defineComponent({
-  name: 'IxMenuItemGroup',
   props: menuItemGroupProps,
-  setup(props, { slots }) {
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-item-group`)
-
+  setup(props) {
     const key = useKey()
 
     provide(menuItemGroupToken, true)
 
     // menuContext must exist
-    const { mode, indent, handleClick } = inject(menuToken, null)!
+    const { slots: menuSlots, mergedPrefixCls, mode, indent, handleClick } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, null)
 
@@ -43,21 +40,22 @@ export default defineComponent({
     }
 
     return () => {
-      const { icon, label } = props
-      const prefixCls = mergedPrefixCls.value
+      const { icon, label, children } = props
+      const slotProps = { ...props, key } as MenuItemGroup
 
-      const iconNode = getIconNode(slots.icon, icon)
-      const iconWrapper = iconNode ? <span class={`${prefixCls}-title-icon`}>{iconNode}</span> : undefined
+      const slots = props.slots || {}
+      const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
+      const iconNode = coverIcon(iconSlot, slotProps, icon)
+      const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
 
-      const labelNode = <span> {slots.label?.() ?? label}</span>
-
+      const prefixCls = `${mergedPrefixCls.value}-item-group`
       return (
         <li class={prefixCls} onClick={onClick}>
           <div class={`${prefixCls}-title`} style={titleStyle.value}>
-            {iconWrapper}
-            {labelNode}
+            {iconNode && <span class={`${prefixCls}-title-icon`}>{iconNode}</span>}
+            {<span> {labelSlot ? labelSlot(slotProps) : label}</span>}
           </div>
-          <ul class={`${prefixCls}-content`}>{slots.default?.()}</ul>
+          <ul class={`${prefixCls}-content`}>{coverChildren(children)}</ul>
         </li>
       )
     }

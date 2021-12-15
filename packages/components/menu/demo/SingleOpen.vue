@@ -1,27 +1,11 @@
 <template>
-  <IxMenu style="width: 256px" mode="inline" :expandedKeys="expandedKeys" @update:expandedKeys="onExpandedChange">
-    <IxMenuSub key="sub1" label="Menu Sub 1" icon="home">
-      <IxMenuItem>Item 1</IxMenuItem>
-      <IxMenuItem>Item 2</IxMenuItem>
-      <IxMenuSub key="sub1-1" label="Menu Sub 1-1">
-        <IxMenuItem>Item 3</IxMenuItem>
-        <IxMenuItem>Item 4</IxMenuItem>
-      </IxMenuSub>
-      <IxMenuSub key="sub1-2" label="Menu Sub 1-2">
-        <IxMenuItem>Item 5</IxMenuItem>
-        <IxMenuItem>Item 6</IxMenuItem>
-      </IxMenuSub>
-    </IxMenuSub>
-    <IxMenuSub key="sub2" label="Menu Sub 2" icon="mail">
-      <IxMenuItem>Item 7</IxMenuItem>
-      <IxMenuItem>Item 8</IxMenuItem>
-      <IxMenuItem>Item 9</IxMenuItem>
-    </IxMenuSub>
-    <IxMenuSub key="sub3" label="Menu Sub 3" icon="appstore">
-      <IxMenuItem>Item 10</IxMenuItem>
-      <IxMenuItem>Item 11</IxMenuItem>
-      <IxMenuItem>Item 12</IxMenuItem>
-    </IxMenuSub>
+  <IxMenu
+    mode="inline"
+    :expandedKeys="expandedKeys"
+    :dataSource="dataSource"
+    style="width: 256px"
+    @update:expandedKeys="onExpandedChange"
+  >
   </IxMenu>
 </template>
 
@@ -29,8 +13,68 @@
 import { ref } from 'vue'
 
 import { VKey } from '@idux/cdk/utils'
+import { MenuData } from '@idux/components/menu'
 
-const rootMenuSubKeys: VKey[] = ['sub1', 'sub2', 'sub3']
+const dataSource: MenuData[] = [
+  {
+    type: 'sub',
+    key: 'sub1',
+    icon: 'setting',
+    label: 'Sub Menu 1',
+    children: [
+      {
+        type: 'itemGroup',
+        key: 'itemGroup1',
+        label: 'Item Group 1',
+        children: [
+          { type: 'item', key: 'item4', label: 'Item 4' },
+          { type: 'item', key: 'item5', label: 'Item 5' },
+        ],
+      },
+      { type: 'divider', key: 'divider2' },
+      {
+        type: 'sub',
+        key: 'sub2',
+        label: 'Menu Sub 2',
+        children: [
+          { type: 'item', key: 'item6', label: 'Item 6' },
+          { type: 'item', key: 'item7', label: 'Item 7' },
+        ],
+      },
+      {
+        type: 'sub',
+        key: 'sub3',
+        label: 'Menu Sub 3',
+        children: [
+          { type: 'item', key: 'item8', label: 'Item 8' },
+          { type: 'item', key: 'item9', label: 'Item 9' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'sub',
+    key: 'sub4',
+    icon: 'github',
+    label: 'Menu Sub 4',
+    children: [
+      { type: 'item', key: 'item10', label: 'Item 10' },
+      { type: 'item', key: 'item11', label: 'Item 11' },
+    ],
+  },
+  {
+    type: 'sub',
+    key: 'sub5',
+    icon: 'github',
+    label: 'Menu Sub 5',
+    children: [
+      { type: 'item', key: 'item12', label: 'Item 12' },
+      { type: 'item', key: 'item13', label: 'Item 13' },
+    ],
+  },
+]
+
+const rootMenuSubKeys: VKey[] = ['sub1', 'sub4', 'sub5']
 
 const expandedKeys = ref<VKey[]>([])
 

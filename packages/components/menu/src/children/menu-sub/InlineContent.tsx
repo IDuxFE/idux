@@ -9,12 +9,13 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { ɵCollapseTransition } from '@idux/components/_private/collapse-transition'
 
-import { menuSubToken, menuToken } from '../token'
+import { menuSubToken, menuToken } from '../../token'
+import { coverChildren } from '../Utils'
 
 export default defineComponent({
   setup() {
     const { mergedPrefixCls } = inject(menuToken)!
-    const { slots, isExpanded } = inject(menuSubToken)!
+    const { props, isExpanded } = inject(menuSubToken)!
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -24,12 +25,14 @@ export default defineComponent({
       })
     })
 
-    return () => (
-      <ɵCollapseTransition appear>
-        <ul v-show={isExpanded.value} class={classes.value}>
-          {slots.default?.()}
-        </ul>
-      </ɵCollapseTransition>
-    )
+    return () => {
+      return (
+        <ɵCollapseTransition appear>
+          <ul v-show={isExpanded.value} class={classes.value}>
+            {coverChildren(props.children)}
+          </ul>
+        </ɵCollapseTransition>
+      )
+    }
   },
 })

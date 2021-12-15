@@ -9,12 +9,13 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { ɵDropdownToken } from '@idux/components/dropdown'
 
-import { menuSubToken, menuToken } from '../token'
+import { menuSubToken, menuToken } from '../../token'
+import { coverChildren } from '../Utils'
 
 export default defineComponent({
   setup() {
     const { mergedPrefixCls, theme } = inject(menuToken)!
-    const { props, slots, handleMouseEvent } = inject(menuSubToken)!
+    const { props, handleMouseEvent } = inject(menuSubToken)!
     const dropdownContext = inject(ɵDropdownToken, null)
 
     const classes = computed(() => {
@@ -39,7 +40,7 @@ export default defineComponent({
 
     return () => (
       <ul class={classes.value} {...events.value}>
-        {slots.default?.()}
+        {coverChildren(props.children)}
       </ul>
     )
   },

@@ -7,16 +7,13 @@
 
 import type { FunctionalComponent, HTMLAttributes } from 'vue'
 
-import { computed } from 'vue'
+import { inject } from 'vue'
 
-import { useGlobalConfig } from '@idux/components/config'
+import { menuToken } from '../token'
 
 const MenuDivider: FunctionalComponent<HTMLAttributes> = () => {
-  const common = useGlobalConfig('common')
-  const mergedPrefixCls = computed(() => `${common.prefixCls}-menu-divider`)
-  return <li class={mergedPrefixCls.value}></li>
+  const { mergedPrefixCls } = inject(menuToken)!
+  return <li class={`${mergedPrefixCls.value}-divider`}></li>
 }
-
-MenuDivider.displayName = 'IxMenuDivider'
 
 export default MenuDivider

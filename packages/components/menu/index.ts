@@ -5,19 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuComponent, MenuItemComponent, MenuItemGroupComponent, MenuSubComponent } from './src/types'
+import type { MenuComponent } from './src/types'
 
 import Menu from './src/Menu'
-import MenuDividerCpm from './src/MenuDivider'
-import MenuItemCpm from './src/MenuItem'
-import MenuItemGroupCpm from './src/MenuItemGroup'
-import MenuSubCpm from './src/menu-sub/MenuSub'
+import { MenuDivider, MenuGroupItem, MenuItem, MenuSub } from './src/menus'
 
 const IxMenu = Menu as unknown as MenuComponent
-const IxMenuDivider = MenuDividerCpm
-const IxMenuItem = MenuItemCpm as unknown as MenuItemComponent
-const IxMenuItemGroup = MenuItemGroupCpm as unknown as MenuItemGroupComponent
-const IxMenuSub = MenuSubCpm as unknown as MenuSubComponent
+const IxMenuDivider = MenuDivider
+const IxMenuItem = MenuItem
+const IxMenuItemGroup = MenuGroupItem
+const IxMenuSub = MenuSub
 
 export { IxMenu, IxMenuItem, IxMenuItemGroup, IxMenuDivider, IxMenuSub }
 
@@ -34,6 +31,7 @@ export type {
   MenuSubInstance,
   MenuSubComponent,
   MenuSubPublicProps as MenuSubProps,
+  MenuDividerComponent,
   MenuMode,
   MenuTheme,
   MenuClickOptions,
@@ -43,5 +41,3 @@ export type {
   MenuSub,
   MenuDivider,
 } from './src/types'
-
-export type MenuDividerComponent = typeof IxMenuDivider

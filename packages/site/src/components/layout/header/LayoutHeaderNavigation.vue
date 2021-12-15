@@ -25,10 +25,10 @@
         <span>{{ lang == 'zh' ? '开发套件' : 'CDK' }}</span>
       </router-link>
     </IxMenuItem>
-    <IxMenuItem v-if="isXs">
+    <IxMenuItem v-if="isXs" key="github">
       <a :href="githubUrl" target="_blank" rel="noopener noreferrer">Github</a>
     </IxMenuItem>
-    <IxMenuSub v-else-if="isSm" overlayClass="header-menu-sub" icon="unordered-list">
+    <IxMenuSub v-else-if="isSm" key="more-menu" overlayClass="header-menu-sub" icon="menu">
       <IxMenuItem>
         <a :href="githubUrl" target="_blank" rel="noopener noreferrer">Github</a>
       </IxMenuItem>
