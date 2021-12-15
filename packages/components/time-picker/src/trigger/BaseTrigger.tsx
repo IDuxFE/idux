@@ -15,7 +15,7 @@ import { IxIcon } from '@idux/components/icon'
 import { baseTriggerProps } from '../types'
 
 export default defineComponent({
-  name: 'IxTimePickerTrigger',
+  name: 'IxTimePickerBaseTrigger',
   props: baseTriggerProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')

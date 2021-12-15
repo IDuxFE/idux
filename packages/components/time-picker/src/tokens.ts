@@ -7,6 +7,7 @@
 
 import type { InputEnableStatus } from './composables/useInputEnableStatus'
 import type { PickerControl } from './composables/usePickerControl'
+import type { TimePickerCommonBindings } from './composables/useTimePickerCommonBindings'
 import type { TimePickerProps, TimeRangePickerProps } from './types'
 import type { DateConfig, TimePickerConfig } from '@idux/components/config'
 import type { FormContext } from '@idux/components/form'
@@ -20,18 +21,15 @@ interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps> {
   format: ComputedRef<string>
   formContext: FormContext | null
   slots: Slots
-  isDisabled: ComputedRef<boolean>
-  isFocused: ComputedRef<boolean>
   overlayOpened: ComputedRef<boolean>
   inputEnableStatus: ComputedRef<InputEnableStatus>
+  commonBindings: TimePickerCommonBindings<T>
   setOverlayOpened: (open: boolean) => void
-  handleClear: (evt: Event) => void
-  handleFocus: (evt: FocusEvent) => void
-  handleBlur: (evt: FocusEvent) => void
 }
 
 export type TimePickerContext = BasePickerContext<TimePickerProps>
 export interface TimeRangePickerContext extends BasePickerContext<TimeRangePickerProps> {
+  bufferValue: ComputedRef<[Date | undefined, Date | undefined]>
   renderSeparator: () => VNodeTypes
 }
 

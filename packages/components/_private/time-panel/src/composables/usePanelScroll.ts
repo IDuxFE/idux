@@ -37,7 +37,7 @@ export function usePanelScroll(
 
   function adjustPanel(selectedIndex: number, duration = 200) {
     const target = listRef.value
-    if (!target) {
+    if (!target || isScrolling || scrollHandlerLocked) {
       return
     }
 
@@ -56,10 +56,6 @@ export function usePanelScroll(
   }
 
   function handleScrollAdjust() {
-    if (isScrolling || scrollHandlerLocked) {
-      return
-    }
-
     isNil(scrollTargetIndex) || scrollTargetIndex < 0 ? scrollToSelected() : adjustPanel(scrollTargetIndex)
   }
 
@@ -88,9 +84,10 @@ export function usePanelScroll(
   watch(
     () => props.selectedValue,
     value => {
-      scrollTargetIndex = props.options.findIndex(item => item.value === value)
-      if (!isScrolling) {
-        nextTick(scrollToSelected)
+      const newScrollTargetIndex = props.options.findIndex(item => item.value === value)
+      if (scrollTargetIndex !== newScrollTargetIndex) {
+        scrollTargetIndex = newScrollTargetIndex
+        !isScrolling && nextTick(scrollToSelected)
       }
     },
   )

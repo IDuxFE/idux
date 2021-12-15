@@ -19,25 +19,24 @@ import { timeRangePickerTriggerProps } from '../types'
 import BaseTrigger from './BaseTrigger'
 
 export default defineComponent({
-  name: 'IxTimePickerTrigger',
+  name: 'IxTimeRangePickerTrigger',
   props: timeRangePickerTriggerProps,
   setup(props) {
     const common = useGlobalConfig('common')
     const commonPrefixCls = computed(() => common.prefixCls)
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker-trigger`)
-    const locale = getLocale('timePicker')
+    const locale = getLocale('timeRangePicker')
 
     const context = inject(timeRangePickerContext)!
     const {
       dateConfig,
       props: pickerProps,
       format,
-      isDisabled,
       slots,
       inputEnableStatus,
       setOverlayOpened,
-      handleClear,
       renderSeparator,
+      commonBindings: { isDisabled, handleClear },
     } = context
 
     const [fromPickerControl, toPickerControl] = inject(timeRangePickerControl)!
@@ -50,8 +49,8 @@ export default defineComponent({
     }
 
     const placeholder: ComputedRef<[string, string]> = computed(() => [
-      pickerProps.placeholder?.[0] ?? locale.value.startTimePlaceholder,
-      pickerProps.placeholder?.[1] ?? locale.value.endTimePlaceholder,
+      pickerProps.placeholder?.[0] ?? locale.value.placeholder[0],
+      pickerProps.placeholder?.[1] ?? locale.value.placeholder[1],
     ])
 
     const triggerProps = useCommonTriggerProps(props, context)

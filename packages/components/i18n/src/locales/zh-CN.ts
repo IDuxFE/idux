@@ -83,9 +83,11 @@ export const zh_CN: Locale = {
   },
   timePicker: {
     okText: '确定',
-    to: '至',
     placeholder: '请选择时间',
-    startTimePlaceholder: '起始时间',
-    endTimePlaceholder: '结束时间',
+  },
+  timeRangePicker: {
+    okText: '确定',
+    separator: '至',
+    placeholder: ['起始时间', '结束时间'],
   },
 }

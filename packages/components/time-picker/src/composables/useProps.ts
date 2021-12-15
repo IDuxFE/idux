@@ -54,12 +54,9 @@ export function useCommonTriggerProps<
   const {
     props: pickerProps,
     config,
-    isDisabled,
-    isFocused,
     overlayOpened,
     formContext,
-    handleFocus,
-    handleBlur,
+    commonBindings: { isDisabled, isFocused, handleBlur, handleFocus },
   } = timePickerContext
   return computed(() => {
     const pickerClearable = pickerProps.clearable ?? config.clearable
@@ -77,7 +74,7 @@ export function useCommonTriggerProps<
       size: pickerProps.size ?? formContext?.size.value ?? config.size,
       suffix: pickerProps.suffix ?? config.suffix,
 
-      onfocus: handleFocus,
+      onFocus: handleFocus,
       onBlur: handleBlur,
     }
   })

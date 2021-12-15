@@ -83,9 +83,11 @@ export const en_US: Locale = {
   },
   timePicker: {
     okText: 'Yes',
-    to: 'To',
     placeholder: 'Please select time',
-    startTimePlaceholder: 'Start time',
-    endTimePlaceholder: 'End time',
+  },
+  timeRangePicker: {
+    okText: 'Yes',
+    separator: 'To',
+    placeholder: ['Start time', 'End time'],
   },
 }

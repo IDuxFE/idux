@@ -85,10 +85,13 @@ export interface TableLocale {
 
 export interface TimePickerLocale {
   okText: string
-  to: string
   placeholder: string
-  startTimePlaceholder: string
-  endTimePlaceholder: string
+}
+
+export interface TimeRangePickerLocale {
+  okText: string
+  separator: string
+  placeholder: [string, string]
 }
 
 export interface Locale {
@@ -102,6 +105,7 @@ export interface Locale {
   pagination: PaginationLocale
   table: TableLocale
   timePicker: TimePickerLocale
+  timeRangePicker: TimeRangePickerLocale
 }
 
 export type LocaleKey = keyof Locale

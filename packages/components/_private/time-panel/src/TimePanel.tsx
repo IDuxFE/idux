@@ -17,7 +17,6 @@ import { timePanelContext } from './tokens'
 import { timePanelProps } from './types'
 
 export default defineComponent({
-  name: 'IxTimePanel',
   props: timePanelProps,
   setup(props) {
     const common = useGlobalConfig('common')

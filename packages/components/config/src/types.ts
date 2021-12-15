@@ -181,9 +181,7 @@ export interface TimePickerConfig {
   format: string
 }
 
-export interface TimeRangePickerConfig extends TimePickerConfig {
-  separator?: string | VNode
-}
+export type TimeRangePickerConfig = TimePickerConfig
 
 // Data Display
 export interface AvatarConfig {

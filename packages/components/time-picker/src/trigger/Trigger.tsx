@@ -28,11 +28,10 @@ export default defineComponent({
       dateConfig,
       props: pickerProps,
       format,
-      isDisabled,
       slots,
       inputEnableStatus,
       setOverlayOpened,
-      handleClear,
+      commonBindings: { isDisabled, handleClear },
     } = context
 
     const { inputValue, handleInputChange } = inject(timePickerControl)!
