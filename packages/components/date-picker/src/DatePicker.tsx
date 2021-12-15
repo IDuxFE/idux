@@ -51,7 +51,7 @@ export default defineComponent({
 
     const handlePanelCellClick = (date: Date) => {
       const oldDate = toRaw(accessor.valueRef.value)
-      if (!oldDate || !dateConfig.isSame(date, dateConfig.covert(oldDate, format.value), props.type)) {
+      if (!oldDate || !dateConfig.isSame(date, dateConfig.convert(oldDate, format.value), props.type)) {
         setOverlayOpened(false)
         accessor.setValue(date)
         callEmit(props.onChange, date, oldDate)

@@ -1,3 +1,4 @@
+@import '../../../style/themes/default.less';
 @import '../index.less';
 
 @slider-marks-label-color: rgba(0, 0, 0, 0.451);
@@ -25,7 +26,5 @@
 @slider-thumb-disabled-border-color: rgba(0, 0, 0, 0.251);
 @slider-dot-disabled-active-border-color: rgba(0, 0, 0, 0.251);
 
-@slider-thumb-transition: border-color @transition-duration-base,
-                          box-shadow @transition-duration-base * 2,
-                          transform @transition-duration-base 
-                          cubic-bezier(.18,.89,.32,1.28);
+@slider-thumb-transition: border-color @transition-duration-base, box-shadow @transition-duration-base * 2,
+  transform @transition-duration-base cubic-bezier(0.18, 0.89, 0.32, 1.28);

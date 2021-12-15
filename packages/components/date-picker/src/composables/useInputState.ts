@@ -34,7 +34,7 @@ export function useInputState(
   const initValue = accessor.valueRef.value
   const formatText = formatRef.value
   const initText = initValue
-    ? dateConfig.format(dateConfig.covert(accessor.valueRef.value, formatText), formatText)
+    ? dateConfig.format(dateConfig.convert(accessor.valueRef.value, formatText), formatText)
     : ''
   const [inputValue, setInputValue] = useState(initText)
   const [isFocused, setFocused] = useState(false)
@@ -45,7 +45,7 @@ export function useInputState(
       return
     }
     const formatText = formatRef.value
-    const newValue = dateConfig.format(dateConfig.covert(value, formatText), formatText)
+    const newValue = dateConfig.format(dateConfig.convert(value, formatText), formatText)
     if (newValue !== inputValue.value) {
       setInputValue(newValue)
     }

@@ -17,5 +17,5 @@ export function convertToDate(
     return undefined
   }
 
-  return dateConfig.covert(value, format)
+  return dateConfig.convert(value, format)
 }
