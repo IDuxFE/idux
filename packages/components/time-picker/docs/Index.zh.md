@@ -6,10 +6,6 @@ subtitle: 时间选择器
 order: 0
 ---
 
-时间选择器
-
-## 何时使用
-
 ## API
 
 ### ix-time-picker

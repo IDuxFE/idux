@@ -6,10 +6,6 @@ subtitle: 列表
 order: 0
 ---
 
-
-
-## 何时使用
-
 ## API
 
 ### IxList

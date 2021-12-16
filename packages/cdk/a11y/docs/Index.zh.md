@@ -5,8 +5,6 @@ subtitle: 无障碍性
 single: true
 ---
 
-`@idux/cdk/a11y` 包提供了许多提高无障碍性（可访问性）的工具。
-
 ## API
 
 ### FocusMonitor

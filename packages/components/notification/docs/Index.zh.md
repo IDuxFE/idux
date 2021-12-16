@@ -6,12 +6,6 @@ subtitle: 通知提醒
 order: 0
 ---
 
-全局展示通知提醒信息。
-
-- 悬浮于页面角落
-- 可带交互操作
-- 相对于message，可展示更为复交的内容
-
 ## API
 
 ### globalConfig

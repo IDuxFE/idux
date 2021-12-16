@@ -7,7 +7,6 @@ order: 0
 ---
 
 
-
 ## API
 
 ### IxSlider
