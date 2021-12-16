@@ -11,11 +11,11 @@ import type { GetNodeKey } from './useGetNodeKey'
 import type { TreeConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
 
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
-import { callChange, getAllParentKeys, getParentKeys } from '../utils'
+import { callChange, getParentKeys } from '../utils'
 import { covertMergeNodes, covertMergedNodeMap } from './useDataSource'
 
 export interface ExpandableContext {
@@ -37,17 +37,6 @@ export function useExpandable(
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
   const loadingKeys = ref<VKey[]>([])
-
-  onMounted(() => {
-    if (searchedKeys.value.length) {
-      setExpandWithSearch(searchedKeys.value)
-    } else if (expandedKeys.value.length === 0 && props.defaultExpandAll) {
-      const { onExpandedChange } = props
-      const allParentKeys = getAllParentKeys(mergedNodeMap.value)
-      setExpandedKeys(allParentKeys)
-      callChange(mergedNodeMap, allParentKeys, onExpandedChange)
-    }
-  })
 
   watch(searchedKeys, currKeys => {
     const { searchValue } = props
@@ -107,6 +96,10 @@ export function useExpandable(
     callEmit(onExpand, !expanded, rawNode)
     setExpandedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onExpandedChange)
+  }
+
+  if (searchedKeys.value.length) {
+    setExpandWithSearch(searchedKeys.value)
   }
 
   return { expandIcon, expandedKeys, handleExpand, loadingKeys }

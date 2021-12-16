@@ -12,7 +12,6 @@
       v-model:selectedKeys="selectedKeys"
       checkable
       cascade
-      defaultExpandAll
       :checkStrategy="checkStrategy"
       :dataSource="treeData"
       @check="onCheck"
@@ -77,7 +76,7 @@ const treeData: TreeNode[] = [
 ]
 
 const checkedKeys = ref(['0'])
-const expandedKeys = ref([])
+const expandedKeys = ref(['0', '0-0', '0-1'])
 const selectedKeys = ref(['0-1'])
 
 const checkStrategy = ref<TreeCheckStrategy>('parent')

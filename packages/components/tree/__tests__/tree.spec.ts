@@ -346,20 +346,6 @@ describe('Tree', () => {
     expect(allNodes[1].classes()).toContain('ix-tree-node-expanded')
   })
 
-  test('defaultExpandAll work', async () => {
-    const wrapper = TreeMount({
-      props: {
-        dataSource: simpleDataSource,
-        expandedKeys: [],
-        defaultExpandAll: true,
-      },
-    })
-
-    const allNodes = wrapper.findAll('.ix-tree-node')
-
-    expect(allNodes[0].find('.ix-tree-node-expand').exists()).toBe(true)
-  })
-
   test('v-model:selectedKeys work', async () => {
     const onUpdateSelectedKeys = jest.fn()
     const wrapper = TreeMount({
@@ -877,5 +863,25 @@ describe('Tree', () => {
     await wrapper.setProps({ searchValue: 'test' })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('focus and blur work', async () => {
+    const focusFn = jest.fn()
+    const blurFn = jest.fn()
+    const wrapper = TreeMount({
+      props: {
+        onFocus: focusFn,
+        onBlur: blurFn,
+      },
+      attachTo: 'body',
+    })
+
+    await wrapper.vm.focus()
+
+    expect(focusFn).toBeCalled()
+
+    await wrapper.vm.blur()
+
+    expect(blurFn).toBeCalled()
   })
 })

@@ -33,7 +33,6 @@ export const treeProps = {
   droppable: IxPropTypes.func<TreeDroppable>(),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
   expandIcon: IxPropTypes.string,
-  defaultExpandAll: IxPropTypes.bool.def(false),
   height: IxPropTypes.number,
   labelKey: IxPropTypes.string.def('label'),
   leafLineIcon: IxPropTypes.string,
