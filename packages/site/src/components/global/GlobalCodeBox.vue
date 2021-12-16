@@ -1,28 +1,40 @@
 <template>
-  <section :id="id" class="global-code-box" :class="{ expand: expanded }">
-    <section class="global-code-box-demo">
-      <slot name="rawCode"></slot>
-    </section>
-    <section class="global-code-box-meta markdown">
-      <div class="global-code-box-title">
-        {{ title }}
-        <a class="global-code-box-edit" :href="editHref" target="_blank" rel="noopener noreferrer">
-          <IxIcon name="edit" />
-        </a>
-      </div>
-      <div class="global-code-box-description">
-        <slot name="description"></slot>
-      </div>
-      <div class="global-code-box-actions">
-        <IxIcon name="copy" @click="onCopy" />
-        <IxIcon v-show="expanded" name="expand" @click="expanded = !expanded" />
-        <IxIcon v-show="!expanded" name="unexpand" @click="expanded = !expanded" />
-      </div>
-    </section>
-    <section class="highlight-wrapper" :class="{ 'highlight-wrapper-expand': expanded }">
-      <slot name="highlightCode"></slot>
-    </section>
-  </section>
+  <div :id="id" class="global-code-box-wrapper">
+    <h3 class="global-code-box-title">
+      {{ title }}
+    </h3>
+    <div class="global-code-box-border">
+      <section class="global-code-box">
+        <section class="global-code-box-meta markdown">
+          <div class="global-code-box-description">
+            <slot name="description"></slot>
+          </div>
+          <div class="global-code-box-actions">
+            <IxTooltip placement="top" :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
+              <a :href="editHref" class="global-code-box-edit" target="_blank" rel="noopener noreferrer">
+                <IxIcon name="edit" />
+              </a>
+            </IxTooltip>
+            <IxTooltip placement="top" :title="lang === 'zh' ? '复制代码' : 'Copy code'">
+              <IxIcon name="copy" @click="onCopy" />
+            </IxTooltip>
+            <IxTooltip placement="top" :title="lang === 'zh' ? '显示代码' : 'Show code'">
+              <IxIcon v-show="expanded" name="expand" @click="expanded = !expanded" />
+            </IxTooltip>
+            <IxTooltip placement="top" :title="lang === 'zh' ? '收起代码' : 'Hide code'">
+              <IxIcon v-show="!expanded" name="unexpand" @click="expanded = !expanded" />
+            </IxTooltip>
+          </div>
+        </section>
+        <section class="global-code-box-demo">
+          <slot name="rawCode"></slot>
+        </section>
+        <section class="highlight-wrapper" :class="{ 'highlight-wrapper-expand': expanded }">
+          <slot name="highlightCode"></slot>
+        </section>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -36,6 +48,7 @@ import { useMessage } from '@idux/components/message'
 import { appContextToken } from '../../context'
 
 export default defineComponent({
+  name: 'GlobalCodeBox',
   props: {
     title: { type: String, default: '' },
     packageName: { type: String, default: '' },
@@ -65,127 +78,74 @@ export default defineComponent({
       })
     }, 300)
 
-    return { id, editHref, expanded, onCopy }
+    return { id, lang, editHref, expanded, onCopy }
   },
 })
 </script>
 
 <style lang="less">
-.global-code-box {
+.global-code-box-wrapper {
   position: relative;
+  margin-bottom: 16px;
   width: 100%;
-  margin: 0 0 @spacing-lg;
-  background-color: @background-color-component;
-  border: @border-width-sm @border-style @border-color-split;
-  border-radius: @border-radius-md;
-  transition: all @transition-duration-base;
 
-  &.expand &-meta {
-    border-bottom: @border-width-sm dashed @border-color-split;
-    border-radius: 0;
+  .global-code-box-border {
+    padding: 8px;
+    border-radius: @border-radius-md;
+    background: @color-graphite-l50;
+    box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.1);
   }
 
-  &-demo {
-    padding: @spacing-xl;
-    border-bottom: @border-width-sm @border-style @border-color-split;
-  }
+  .global-code-box {
+    position: relative;
+    width: 100%;
+    padding: 16px;
+    background-color: @background-color-component;
+    border: 1px @border-style @border-color-split;
+    border-radius: @border-radius-md;
+    transition: all 0.3s;
 
-  &-meta {
-    &.markdown {
-      position: relative;
-      border-radius: 0 0 @border-radius-md @border-radius-md;
-
-      pre {
-        margin: @spacing-xs 0;
-        padding: @spacing-xs @spacing-sm;
-      }
-
-      pre code {
-        margin: 0;
-      }
-
-      blockquote {
-        margin: 0;
-      }
-
-      h4,
-      section& p {
-        margin: 0;
-      }
+    &-title {
+      margin-bottom: 0;
     }
-  }
 
-  &-title {
-    position: absolute;
-    top: -@spacing-lg;
-    margin-left: @spacing-lg;
-    padding: @spacing-xs @spacing-sm;
-    background: @color-white;
-    border-radius: @border-radius-sm @border-radius-sm 0 0;
+    &-description {
+      border-bottom: 1px dashed @border-color-split;
+    }
 
-    .global-code-box-edit {
-      color: @text-color;
-      padding-right: @spacing-xs;
+    &-actions {
+      position: absolute;
+      top: 8px;
+      right: 16px;
 
       .ix-icon {
+        padding: 0 @spacing-sm;
         color: @text-color-secondary;
+        cursor: pointer;
+        transition: color 0.3s;
         &:hover {
-          color: @color-primary;
+          color: @text-color;
         }
       }
     }
-  }
 
-  &-description {
-    padding: @spacing-lg @spacing-xl @spacing-md;
-  }
+    &-demo {
+      padding: 16px 0;
+    }
 
-  &-actions {
-    padding: @spacing-sm;
-    text-align: center;
-    border-top: @border-width-sm dashed @border-color-split;
+    .highlight-wrapper {
+      display: none;
+      border-radius: 0 0 @border-radius-md @border-radius-md;
 
-    .ix-icon {
-      margin: 0 @spacing-xs;
-      color: @text-color-secondary;
-      opacity: 0.7;
-      cursor: pointer;
-      &:hover {
-        color: @color-primary;
-        opacity: 1;
+      &-expand {
+        display: block;
+      }
+
+      pre {
+        margin: 0;
+        padding: 8px;
       }
     }
-  }
-
-  .highlight-wrapper {
-    display: none;
-    overflow: auto;
-    border-radius: 0 0 @border-radius-md @border-radius-md;
-
-    &-expand {
-      display: block;
-    }
-
-    pre {
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  &-expand-trigger {
-    margin-left: @spacing-md;
-    font-size: @font-size-xl;
-  }
-}
-.example-full {
-  .global-code-box-demo {
-    padding: 0;
-  }
-  .global-code-box-title {
-    top: 0;
-  }
-  .global-code-box-description {
-    padding: @spacing-2xl @spacing-xl @spacing-md;
   }
 }
 </style>

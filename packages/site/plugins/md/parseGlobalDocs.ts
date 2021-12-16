@@ -1,14 +1,13 @@
-import remark from 'remark'
 import { loadFront } from 'yaml-front-matter'
 
 import { generateTitle } from './generateTitle'
 import marked from './marked'
-import { nonBindAble } from './utils'
+import { generateDocsToc, nonBindAble } from './utils'
 
 interface Meta {
   order: number
   title: string
-  timeline: boolean
+  toc: boolean
 }
 
 const scriptTemplate = `<script lang='ts'>
@@ -25,13 +24,11 @@ export default {
 </script>
 `
 
-const _remark = remark()
-
 export function parseGlobalDocs(id: string, raw: string): string {
   const [filename, docsDirname] = id.split('/').reverse()
   const docsPath = `${docsDirname}/${filename}`
   const { __content: content, ...meta } = loadFront(raw)
-  const toc = generateToc(meta as Meta, content)
+  const toc = generateDocsToc(meta as Meta, content)
   const title = generateTitle({ ...(meta as Meta), path: docsPath })
   const markedContent = nonBindAble(marked(content))
   const template = wrapperDocs(toc, title, markedContent)
@@ -46,24 +43,4 @@ function wrapperDocs(toc: string, title: string, content: string): string {
   </article>
 </template>  
 `
-}
-
-function generateToc(meta: Meta, content: string): string {
-  if (meta.timeline) {
-    return ''
-  }
-
-  const ast = _remark.parse(content)
-  let links = ''
-  ast.children.forEach(child => {
-    if (child.type === 'heading' && child.depth === 2) {
-      const text = child.children[0].value
-      const lowerText = text.toLowerCase().replace(/ /g, '-').replace(/\./g, '-').replace(/\?/g, '')
-      links += `<IxAnchorLink href="#${lowerText}" title="${text}"></IxAnchorLink>`
-    }
-  })
-
-  return `<IxAnchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
-  ${links}
-</IxAnchor>`
 }

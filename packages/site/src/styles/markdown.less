@@ -142,39 +142,7 @@
   margin: 0;
 }
 
-.markdown a.edit-button {
-  display: inline-block;
-  margin-left: @spacing-sm;
-  text-decoration: none;
-
-  .ix-icon {
-    font-size: @font-size-xl;
-    color: @text-color-secondary;
-
-    &:hover {
-      color: @color-primary;
-    }
-  }
-}
-
 .markdown > br,
 .markdown > p > br {
   clear: both;
-}
-
-.markdown.api-wrapper {
-  overflow-x: auto;
-  table {
-    th {
-      font-weight: @font-weight-lg;
-    }
-    td {
-      &:first-child {
-        font-weight: @font-weight-lg;
-      }
-      & code {
-        color: @color-magenta;
-      }
-    }
-  }
 }

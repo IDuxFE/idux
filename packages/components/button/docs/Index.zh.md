@@ -6,28 +6,11 @@ subtitle: 按钮
 cover: 
 ---
 
-标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
-
-我们共有 5 种按钮。
-
-- 主按钮：用于主行动点，一个操作区域只能有一个主按钮。
-- 默认按钮：用于没有主次之分的一组行动点。
-- 虚线按钮：常用于添加操作。
-- 文本按钮：用于最次级的行动点。
-- 链接按钮：用于次要或外链的行动点。
-
-以及 4 种状态属性与上面配合使用。
-
-- 危险：删除/移动/修改权限等危险操作，一般需要二次确认。
-- 幽灵：用于背景色比较复杂的地方，常用在首页/产品页等展示场景。
-- 禁用：行动点不可用的时候，一般需要文案解释。
-- 加载中：用于异步操作等待反馈的时候，也可以避免多次提交。
-
 ## API
 
 ### IxButton
 
-#### Props
+#### ButtonProps
 
 > 当 `mode` 不为 `link` 时，除以下表格之外还支持原生 `button` 元素的[所有属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button)。  
 > 当 `mode` 为 `link` 时，除以下表格之外还支持原生 `a` 元素的[所有属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a)。
@@ -47,7 +30,7 @@ cover:
 
 ### IxButtonGroup
 
-#### GroupProps
+#### ButtonGroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -56,38 +39,3 @@ cover:
 | `shape` | 设置组内按钮形状 | `'circle' \| 'round'` | - | - |- |
 
 ### 主题变量
-
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |
-| @button-font-weight | @font-weight-md | - |
-| @button-line-height | @line-height-base | - |
-| @button-height-sm | @height-sm | - |
-| @button-height-md | @height-md | - |
-| @button-height-lg | @height-lg | - |
-| @button-font-size-sm | @font-size-md | - |
-| @button-font-size-md | @font-size-md | - |
-| @button-font-size-lg | @font-size-lg | - |
-| @button-padding-sm | @spacing-xs | - |
-| @button-padding-md | @spacing-md | - |
-| @button-padding-lg | @spacing-lg | - |
-| @button-icon-margin-left | @spacing-xs | - |
-| @button-border-style | @border-style | - |
-| @button-border-size | @border-width-sm | - |
-| @button-border-radius | @border-radius-sm | - |
-| @button-disable-opacity | 0.4 | - |
-| @button-shadow | 0 2px 0 rgba(0, 0, 0, 0.015) | - |
-| @button-primary | @color-white | - |
-| @button-primary-bg | @color-primary | - |
-| @button-primary-text-shadow | 0 -1px 0 rgba(0, 0, 0, 0.15) | - |
-| @button-default-color | @text-color | - |
-| @button-default-bg | @background-color-component | - |
-| @button-default-border | @border-color | - |
-| @button-danger-color | @color-error | - |
-| @button-danger-bg | @color-error | - |
-| @button-ghost-color | @background-color-component | - |
-| @button-ghost-color | transparent | - |
-| @button-ghost-border | @background-color-component | - |
-| @button-link-color | @color-primary | - |
-| @button-link-hover-bg | transparent | - |
-| @button-text-color | @text-color | - |
-| @button-text-hover-bg | rgba(0, 0, 0, 0.12) | - |

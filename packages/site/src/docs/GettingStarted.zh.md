@@ -6,7 +6,7 @@ title: 快速上手
 
 `@idux` 致力于提供给程序员**愉悦**的开发体验。
 
-<blockquote style="border-color: red;"><p><strong>在开始之前，推荐先学习 [Vue 3.x](https://v3.vuejs.org) 和 [ES2015](https://babeljs.io/docs/en/learn)，并正确安装和配置了 [Node.js](https://nodejs.org) v12 或以上。官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识，并且已经完全掌握了 Vue 3.x 及配套设施的正确开发方式。如果你刚开始学习前端或者 Vue，将 UI 框架作为你的第一步可能不是最好的主意。</strong></p></blockquote>
+> 在开始之前，推荐先学习 [Vue 3.x](https://v3.vuejs.org) 和 [ES2015](https://babeljs.io/docs/en/learn)，并正确安装和配置了 [Node.js](https://nodejs.org) v12 或以上。官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识，并且已经完全掌握了 Vue 3.x 及配套设施的正确开发方式。如果你刚开始学习前端或者 Vue，将 UI 框架作为你的第一步可能不是最好的主意。
 
 ## 在线演示
 
@@ -15,9 +15,10 @@ title: 快速上手
 - [CodeSandbox: idux-starter](https://codesandbox.io/s/idux-starter-7o9lv)
 - [StackBlitz: idux-starter](https://stackblitz.com/edit/idux-starter)
 
-## 第一个本地实例
+## 使用 vite
 
 实际项目开发中，你会需要对 Vue 和 TypeScript 代码的构建、调试、代理、打包部署等一系列工程化的需求。
+
 我们强烈建议使用 [vite](https://vitejs.dev) 及其工具链辅助进行开发，下面我们用一个简单的实例来说明。
 
 ### 创建一个项目
@@ -135,9 +136,22 @@ npm run dev
 
 ## 按需加载
 
-当你只用到 `@idux` 的部分组件且比较在意包体积大小时，可以使用以下方式只加载用到的组件。
+当你只用到 `@idux` 的部分组件且比较在意包体积大小时，可以只加载用到的组件。
 
-推荐仅按需加载 js 代码，css 代码无需按需加载。
+推荐仅按需加载 js 代码，css 代码无需按需加载, 首先你需要修改 `idux.ts` 中的代码。
+
+```diff
+- import IduxCdk from "@idux/cdk";
+- import IduxComponents from "@idux/components";
+- import IduxPro from "@idux/pro";
+
+const install = (app: App): void => {
+-  app.use(IduxCdk).use(IduxComponents).use(IduxPro).use(globalConfig);
++  app.use(globalConfig)
+};
+```
+
+然后可以选择以下任意一种方式进行加载组件代码。
 
 - Vite:
 
@@ -150,9 +164,10 @@ export default {
   plugins: [
     /* ... */
     Components({
-    // 如果不指定 `importStyle`
-    // 依旧需要在 main.ts 中 `import "@idux/components/default.min.css"`
-    resolvers: [IduxResolver({ importStyle: 'css' })],
+      resolvers: [IduxResolver()],
+      // 可以通过指定 `importStyle` 来按需加载 css 代码
+      // 别忘了移除掉 idux.ts 中的样式导入代码
+      // resolvers: [IduxResolver({ importStyle: 'css' })],
     }),
   ]
 }
@@ -169,9 +184,7 @@ module.exports = {
   plugins: [
     /* ... */
     Components({
-    // 如果不指定 `importStyle`
-    // 依旧需要在 main.ts 中 `import "@idux/components/default.min.css"`
-    resolvers: [IduxResolver({ importStyle: 'css' })],
+      resolvers: [IduxResolver()],
     }),
   ]
 }
@@ -187,5 +200,6 @@ import "@idux/components/button/style/default_css"
 
 ## 其他
 
+- [全局配置](/docs/global-config/zh)
 - [国际化配置](/docs/i18n/zh)
 - [使用图标](/components/icon/zh#FAQ)

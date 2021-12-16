@@ -76,46 +76,6 @@ The `IDuxFE` team will pay attention to all Pull Requests. We will review and me
 
 We use `eslint`, `stylelint`, `markdownlint` and `ls-lint` to ensure the overall code style is consistent. And automatic formatting and lint are configured in commit hooks, as long as the submission is passed.
 
-### vue
-
-- filename: `PascalCase`
-- props
-  - name: `camelCase`
-  - default: Please use the `IxPropTypes` in `@idux/cdk/utils`, please note: when there is no specified default value displayed, the default value of all types is `undefined`, which is different from the default behavior of vue compiler the difference.
-- slots
-  - name: `camcelCase`
-  - If it is consistent with the function of a props, it needs to have the same name as the props.
-- emits
-  - name: `camelCase`
-- Use Composition API as much as possible to complete our functions, including Demo.
-
-### typescript
-
-- filename: `camelCase`
-- the variable name: Usually use `camelCase`, for static constants that need to be shared globally or used by users, use all uppercase `snake_case`.
-- Give the most accurate type definition possible.
-- Functions that require `export` must specify the return value type.
-
-### less
-
-- filename: `camelCase`
-- Class naming does not need to use `BEM`, you can refer to antd naming.
-- Define variables as much as possible to facilitate user customization.
-- The variable name must be prefixed with the component name.
-
-### test
-
-- filename: The same name as the tested file, and the suffix `.spec`.
-- the test name: It should be the name of the API or function being tested, simple and clear.
-- All Public APIs need to have corresponding test cases.
-- As far as possible, one test case is only used for testing one API or function.
-
-### docs & demo
-
-- filename: `kebab-case`
-- Unless multiple APIs are closely related, a demo should only be used to show the usage of one API.
-- When the demo code is more complicated, you can create a separate vue file with the same name (the first letter is capitalized).
-
 ## Commit
 
 We have very precise rules for how to submit a git commit message. We hope that all commit messages are more readable, so that it is easier to view the project history, and we use commit messages to generate the Changelog.
