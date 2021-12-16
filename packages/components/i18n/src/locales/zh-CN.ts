@@ -7,12 +7,11 @@
 
 import type { Locale } from '../types'
 
-import { zhCN } from 'date-fns/locale'
+import { zhCN as dateFnsLocale } from 'date-fns/locale'
 
-/* eslint-disable camelcase */
-export const zh_CN: Locale = {
+const zhCN: Locale = {
   type: 'zh-CN',
-  date: zhCN,
+  date: dateFnsLocale,
   datePicker: {
     today: '今天',
     ok: '确定',
@@ -91,3 +90,5 @@ export const zh_CN: Locale = {
     placeholder: ['起始时间', '结束时间'],
   },
 }
+
+export default zhCN

@@ -63,8 +63,8 @@ import "@idux/components/default.min.css";
 import "@idux/pro/default.min.css";
 
 // 默认为中文，可以打开注释设置为其他语言
-// import { useLocale, en_US } from "@idux/components/i18n";
-// useLocale(en_US);
+// import { useLocale, enUS } from "@idux/components/i18n";
+// useLocale(enUS);
 
 import { createGlobalConfig } from "@idux/components/config";
 import {

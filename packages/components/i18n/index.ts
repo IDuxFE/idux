@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export * from './src/locales'
 export * from './src/types'
 export * from './src/useI18n'
+
+export { default as zhCN } from './src/locales/zh-CN'
+export { default as enUS } from './src/locales/en-US'

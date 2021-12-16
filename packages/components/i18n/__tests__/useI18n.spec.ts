@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import { flushPromises, mount } from '@vue/test-utils'
 
-import { en_US, zh_CN } from '../src/locales'
+import enUS from '../src/locales/en-US'
+import zhCN from '../src/locales/zh-CN'
 import { addLocale, getLocale, useLocale } from '../src/useI18n'
 
 const Comp = {
@@ -15,7 +16,7 @@ const Comp = {
 describe('useI18n.ts', () => {
   test('default zh-CN work', async () => {
     const wrapper = mount(Comp)
-    expect(wrapper.text()).toEqual(zh_CN.empty.description)
+    expect(wrapper.text()).toEqual(zhCN.empty.description)
   })
 
   test('addLocale work', async () => {
@@ -25,34 +26,34 @@ describe('useI18n.ts', () => {
     useLocale('en-US')
     expect(warnSpy).toBeCalledTimes(1)
 
-    addLocale(en_US)
+    addLocale(enUS)
     useLocale('en-US')
     await flushPromises()
-    expect(wrapper.text()).toEqual(en_US.empty.description)
+    expect(wrapper.text()).toEqual(enUS.empty.description)
 
-    addLocale([en_US, zh_CN])
+    addLocale([enUS, zhCN])
     useLocale('zh-CN')
     await flushPromises()
-    expect(wrapper.text()).toEqual(zh_CN.empty.description)
+    expect(wrapper.text()).toEqual(zhCN.empty.description)
   })
 
   test('useLocale work', async () => {
     const wrapper = mount(Comp)
 
-    useLocale(en_US)
+    useLocale(enUS)
     await flushPromises()
-    expect(wrapper.text()).toEqual(en_US.empty.description)
+    expect(wrapper.text()).toEqual(enUS.empty.description)
 
     useLocale('zh-CN')
     await flushPromises()
-    expect(wrapper.text()).toEqual(zh_CN.empty.description)
+    expect(wrapper.text()).toEqual(zhCN.empty.description)
   })
 
   test('getLocale work', async () => {
     const i18n = getLocale()
 
-    useLocale(en_US)
+    useLocale(enUS)
     await flushPromises()
-    expect(i18n.value).toEqual(en_US)
+    expect(i18n.value).toEqual(enUS)
   })
 })

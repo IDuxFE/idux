@@ -6,9 +6,9 @@ import IduxComponents from '@idux/components'
 import IduxPro from '@idux/pro'
 
 // eslint-disable-next-line camelcase
-import { useLocale, zh_CN } from '@idux/components/i18n'
+import { useLocale, zhCN } from '@idux/components/i18n'
 
-useLocale(zh_CN)
+useLocale(zhCN)
 
 import { createGlobalConfig } from '@idux/components/config'
 import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from '@idux/components/icon'
