@@ -20,13 +20,13 @@
 
 ## ✨ 特性
 
-- Monorepo 管理模式：`cdk`, `components`, `pro`
-- 全面拥抱 Composition Api，从源码到文档
+- 全面拥抱 Composition API，从源码到文档
 - 完全使用 TypeScript 开发，提供完整的类型定义
-- 开箱即用的 Tree Shaking
-- 国际化语言支持
+- Monorepo 管理模式：`cdk`, `components`, `pro`
+- 开箱即用的高质量组件
 - 灵活的全局配置
 - 深入细节的主题定制能力
+- 国际化语言支持
 
 ## 🖥 支持环境
 
@@ -39,7 +39,7 @@
 ## 📦 安装
 
 ```bash
-npm install --save @idux/cdk @idux/components
+npm install --save @idux/cdk @idux/components @idux/pro
 ```
 
 ## 🔨 使用
