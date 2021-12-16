@@ -8,7 +8,7 @@ import { loadFront } from 'yaml-front-matter'
 import { generateTitle } from './generateTitle'
 import marked from './marked'
 import { getComponentScript, getExampleTemplate } from './template'
-import { nonBindAble, withoutSuffix } from './utils'
+import { generateDocsToc, nonBindAble, withoutSuffix } from './utils'
 
 interface Meta {
   order: number
@@ -22,27 +22,30 @@ export function parsePackageDocs(id: string, raw: string): string {
   const [filename, docsDirname, componentName, moduleName] = id.split('/').reverse()
   const docsPath = `${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
+  const designDocPath = id.replace(/Index/g, 'Design')
+  const designRaw = existsSync(designDocPath) ? readFileSync(designDocPath, { encoding: 'utf-8' }) : ''
 
-  const { __content: content, single = false, full = false, ...meta } = loadFront(raw)
+  const { __content: indexContent, ...indexMeta } = loadFront(raw)
+  const { __content: designContent, ...designMeta } = loadFront(designRaw)
 
-  const title = generateTitle({ ...(meta as Meta), path: docsPath })
-  const { description, api } = parseContent(content)
+  const title = generateTitle({ ...(indexMeta as Meta), path: docsPath })
+  const { description, api } = parseContent(indexContent)
   const demoMetas = getDemoMetas(id)
-  const componentNames = demoMetas.map(item => item.componentName)
 
-  const examples = generateExample(single, componentNames)
   const docsTemplate = wrapperDocsTemplate(
     generateToc(demoMetas, language, moduleName, componentName),
-    generateHeader(title, description, language),
-    examples,
+    generateDocsToc(designMeta, designContent),
+    generateHeader(title, description),
+    generateExample(true, demoMetas),
     api,
-    full,
+    language,
+    nonBindAble(marked(designContent)),
   )
 
   const docsScript = getComponentScript(
     'Demo' + componentName,
     demoMetas.map(item => item.importStr),
-    componentNames,
+    demoMetas.map(item => item.componentName),
   )
   return docsTemplate + docsScript
 }
@@ -92,33 +95,81 @@ function getDemoMetas(id: string) {
   return demoMates
 }
 
-function generateExample(single: boolean, components: string[]) {
+function generateExample(single: boolean, components: any[]) {
   let firstZhPart = ''
   let secondZhPart = ''
   components.forEach((item, index) => {
+    const comp = item.dev ? `<${item.componentName} v-if="showDevDemo" />` : `<${item.componentName} />`
     if (single) {
-      firstZhPart += `<${item} />`
+      firstZhPart += comp
     } else {
       if (index % 2 === 0) {
-        firstZhPart += `<${item} />`
+        firstZhPart += comp
       } else {
-        secondZhPart += `<${item} />`
+        secondZhPart += comp
       }
     }
   })
   return getExampleTemplate(single, firstZhPart, secondZhPart)
 }
 
-function wrapperDocsTemplate(toc: string, header: string, examples: string, api: string, full: boolean): string {
+const locale: Record<string, Record<string, string>> = {
+  examples: { zh: '代码演示', en: 'Examples' },
+  showDev: { zh: '显示开发专用演示', en: 'Expand development examples' },
+  hideDev: { zh: '隐藏开发专用演示', en: 'Collapse development examples' },
+  develop: { zh: '开发指南', en: 'Develop Guide' },
+  design: { zh: '设计指南', en: 'Design Guide' },
+}
+
+function wrapperDocsTemplate(
+  developToc: string,
+  designToc: string,
+  header: string,
+  examples: string,
+  api: string,
+  language: string,
+  designContent: string,
+): string {
   return `
 <template>
-  <article class="${full ? 'example-full' : ''}">
-  ${toc}
-  ${header}
-  <section class="example-wrapper">${examples}</section>
-  <section class="markdown api-wrapper">${api}</section>
+  <article class="markdown component-wrapper">
+    ${header}
+    <template v-if="selectedTab === 'develop' ">
+      ${developToc}
+    </template>
+    <template v-else>
+      ${designToc}
+    </template>
+    <IxTabs v-model:selectedKey="selectedTab" type="line" class="component-tabs">
+      <IxTab key="develop" title="${locale.develop[language]}">
+        <h2 class="component-develop-header">
+          ${locale.examples[language]}
+          <span class="component-develop-header-tools">
+            <IxTooltip :title="showDevDemo? '${locale.hideDev[language]}' : '${locale.showDev[language]}'">
+              <IxIcon :name="showDevDemo? 'bug-filled' : 'bug'" @click="showDevDemo = !showDevDemo" />
+            </IxTooltip>
+          </span>
+        </h2>
+        <section class="markdown component-develop-examples">${examples}</section>
+        <section class="markdown component-develop-api">${api}</section>
+      </IxTab>
+      <IxTab key="design" title="${locale.design[language]}">
+        <section class="markdown">${designContent}</section>
+      </IxTab>
+    </IxTabs>
   </article>
 </template>
+`
+}
+
+function generateHeader(title: string, description: string) {
+  return `
+<section class="markdown component-header">
+	${title}
+	<section class="markdown">
+		${description}
+	</section>
+</section>
 `
 }
 
@@ -133,21 +184,4 @@ function generateToc(demoMetas: any[], language: string, module: string, compone
   return `<IxAnchor class="toc-wrapper" affix offset="16" @click="goLink($event)">
   ${links.join('  ')}
 </IxAnchor>`
-}
-
-function generateHeader(title: string, description: string, language: string) {
-  const examples = language === 'zh' ? '代码演示' : 'Examples'
-  const expand = language === 'zh' ? '展开全部' : 'Expand All'
-  return `
-<section class="markdown header-wrapper">
-	${title}
-	<section class="markdown">
-		${description}
-	</section>
-	<h2>
-		<span>${examples}</span>
-		<IxIcon name="appstore" class="code-box-expand-trigger" title="${expand}" @click="expandAll()" />
-	</h2>
-</section>
-`
 }

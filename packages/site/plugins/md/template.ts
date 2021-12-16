@@ -14,12 +14,12 @@ export const getComponentScript = (componentName: string, imports: string[], com
             window.location.hash = link
           }
         }
+
+        const selectedTab = ref('develop')
         const expanded = ref(false)
-        const expandAll = () => {
-          expanded.value = !expanded.value
-        }
+        const showDevDemo = ref(false)
     
-        return { goLink, expanded, expandAll }
+        return { goLink, selectedTab, expanded, showDevDemo }
       },
     }
     </script>
@@ -71,8 +71,8 @@ export const getDemoTemplate = (options: {
     :title="lang==='zh' ? '${zhTitle}' : '${enTitle}'"
   >
     <template #description>
-    <span v-if="lang==='zh'">${zhDescription}</span>
-    <span v-if="lang==='en'">${enDescription}</span>
+      <template v-if="lang==='zh'">${zhDescription}</template>
+      <template v-if="lang==='en'">${enDescription}</template>
     </template>
     <template #rawCode><raw-demo></raw-demo></template>
     <template #highlightCode><div v-pre>${codeHtml}</div></template>

@@ -75,47 +75,6 @@ order: 11
 ## 代码风格
 
 我们使用了 `eslint`, `stylelint`, `markdownlint` 以及 `ls-lint` 来保证整体的代码风格一致。并且在 commit hooks 中配置了自动格式化和 lint, 只要提交通过即可。
-
-### vue
-
-- 文件命名：`PascalCase`
-- props
-  - 命名：`camelCase`
-  - 默认值：请使用 `@idux/cdk/utils` 中的 `IxPropTypes`, 请注意：在没有显示的指定默认值的情况下，所有类型的默认值都为 `undefined`, 这与 vue compiler 默认的行为有所区别。
-- slots
-  - 命名：`camelCase`
-  - 如果与某个 props 的功能一致时，需要跟该 props 同名
-- emits
-  - 命名：`camelCase`
-- 尽可能的使用 Composition API 去完成我们的功能，包括 Demo
-
-### typescript
-
-- 文件命名：`camelCase`
-- 变量命名: 通常情况下使用 `camelCase`, 对于需要全局共享或者给用户使用的静态常量，使用全大写的 `snake_case`
-- 尽可能的给出最准确的类型定义
-- 需要 `export` 的函数，必须指定返回值类型
-
-### less
-
-- 文件命名：`camelCase`
-- class 命名不需要使用 `BEM`, 可以参考 antd 的命名
-- 尽可能的定义变量，方便用户进行自定义
-- 变量名必须以组件名为前缀
-
-### test
-
-- 文件命名：与被测试的文件同名，同时添加 `.spec` 后缀
-- test 命名：应该是被测试的 API 或者功能的名字，简单明了即可
-- 所有 Public API 都需要有对应的测试用例
-- 尽可能的一个测试用例只用于一个 API 或功能的测试
-
-### docs & demo
-
-- 文件命名：`kebab-case`
-- 除非多个 API 的关联性很强，否则应该一个 demo 只用于展示一个 API 的用法
-- 当 demo 的示例代码比较复杂时，可以单独建立一个同名（首字母大写）的 vue 文件
-
 ## Commit
 
 对于如何提交 git commit message，我们有非常精确的规则。我们希望所有的 commit message 更具可读性，这样在查看项目历史记录会变得容易，同时我们使用 commit message 生成 Changelog.

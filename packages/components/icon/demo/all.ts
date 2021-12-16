@@ -12,6 +12,7 @@ export const allIcons = [
   'bars',
   'blacklist',
   'book-mark',
+  'bug-filled',
   'bug',
   'bulb',
   'calendar',
