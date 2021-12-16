@@ -11,6 +11,8 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { useControlledProp } from '@idux/cdk/utils'
 
 import { getDefaultPaths } from '../utils/menu'
@@ -22,8 +24,8 @@ export function useActiveKey(props: ProLayoutProps): {
   let defaultActiveKey = props.activeKey
   const [activeKey, setActiveKey] = useControlledProp(props, 'activeKey', defaultActiveKey)
 
-  // 如果没有默认的 key, 则自动查早第一个 key
-  if (!defaultActiveKey) {
+  // 如果没有默认的 key, 则自动查找第一个 key
+  if (isNil(defaultActiveKey)) {
     const defaultPaths = getDefaultPaths(props.menus)
     defaultActiveKey = defaultPaths[defaultPaths.length - 1]?.key
     if (defaultActiveKey) {
