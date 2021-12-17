@@ -4,7 +4,8 @@
     "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
     "rule-empty-line-before": ["always"],
     "no-invalid-double-slash-comments": null,
-    "no-invalid-position-at-import-rule": null
+    "no-invalid-position-at-import-rule": null,
+    "font-family-no-missing-generic-family-keyword": null
   },
   "ignoreFiles": [
     "dist/**/*.less",

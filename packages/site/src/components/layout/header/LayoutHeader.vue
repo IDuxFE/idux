@@ -15,7 +15,7 @@
         <template v-else>
           <LayoutHeaderSearchBox />
           <LayoutHeaderNavigation mode="horizontal" />
-          <LayoutHeaderGithubButton v-if="!isXs && !isSm" />
+          <LayoutHeaderGithubButton v-if="!isXs && !isSm && !isHome" />
         </template>
       </IxCol>
     </IxRow>
@@ -29,15 +29,16 @@ import { appContextToken } from '../../../context'
 export default defineComponent({
   setup() {
     const { page, breakpoints } = inject(appContextToken)!
+    const isHome = computed(() => page.value === 'home')
     const classes = computed(() => {
       return {
         header: true,
-        'home-header': page.value === 'home',
+        'home-header': isHome.value,
       }
     })
     const isXs = computed(() => breakpoints.xs)
     const isSm = computed(() => breakpoints.sm)
-    return { classes, isXs, isSm }
+    return { classes, isHome, isXs, isSm }
   },
 })
 </script>

@@ -4,11 +4,13 @@
   font-size: @font-size-md;
   line-height: @line-height-base;
   color: @color-grey;
-  background-color: @color-primary-d40;
+  background-color: #1F284C;
 
   & a {
     transition: @transition-all-base;
-    color: @color-grey;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
     text-decoration: none;
     &:hover {
       color: @color-grey-l20;
@@ -26,7 +28,10 @@
     margin-bottom: @spacing-2xl;
 
     h3 {
-      color: @color-grey-l10;
+      opacity: 0.5;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #FFFFFF;
     }
 
     &-icon {
@@ -53,6 +58,21 @@
     padding-top: @spacing-lg;
     font-size: @font-size-lg;
     border-top: @border-width-sm @border-style @color-grey;
+  }
+
+  &-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      height: 38px;
+      width: 38px;
+    }
+    &-title {
+      font-family: PingFangSC-Semibold;
+      font-size: 20px;
+      color: #1E71FF;
+    }
   }
 }
 

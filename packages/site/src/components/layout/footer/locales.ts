@@ -2,11 +2,6 @@ export const footerLocales = {
   zh: [
     {
       icon: '',
-      title: '资源',
-      items: [],
-    },
-    {
-      icon: '',
       title: '帮助',
       items: [
         {
@@ -25,6 +20,24 @@ export const footerLocales = {
           icon: '',
           title: '报告 Bug',
           link: 'https://github.com/IDuxFE/idux/issues',
+          description: '',
+        },
+      ],
+    },
+    {
+      icon: '',
+      title: '友情链接',
+      items: [
+        {
+          icon: '',
+          title: '掘金',
+          link: 'https://juejin.cn/user/3104676565234429',
+          description: '',
+        },
+        {
+          icon: '',
+          title: '站酷',
+          link: 'https://www.zcool.com.cn/u/24240100',
           description: '',
         },
       ],

@@ -4,9 +4,11 @@
       <LayoutFooterCol v-for="col in locale" :key="col.title" :icon="col.icon" :title="col.title">
         <LayoutFooterItem v-for="item in col.items" :key="item.title" v-bind="item"></LayoutFooterItem>
       </LayoutFooterCol>
-    </section>
-    <section class="footer-bottom">
-      <div>Made with ❤ by IDuxFE team</div>
+      <div class="footer-logo">
+        <img alt="logo" src="/icons/logo.svg" />
+        <span class="footer-logo-title">iDUX</span>
+        <span>Made with ❤ by IDuxFE</span>
+      </div>
     </section>
   </footer>
 </template>

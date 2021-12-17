@@ -14,7 +14,7 @@
     img {
       position: relative;
       top: 16px;
-      width: 48px;
+      width: 40px;
       height: 48px;
       margin-right: @spacing-lg;
     }
@@ -78,9 +78,20 @@
   }
 
   &.home-header {
-    max-width: @home-width;
-    margin: 0 auto;
+    position: relative;
     box-shadow: none;
+    background-color: transparent;
+    z-index: 1;
+    .ix-menu-horizontal > .ix-menu-item:hover,
+    .ix-menu {
+      background: transparent;
+    }
+    .header-search-box {
+      .ix-input {
+        background: transparent;
+      }
+
+    }
   }
 }
 

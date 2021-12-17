@@ -1,10 +1,10 @@
 <template>
   <IxMenu class="header-menu" :selectedKeys="selectedKeys">
-    <IxMenuItem key="home">
+    <!-- <IxMenuItem key="home">
       <router-link :to="'/'">
         <span>{{ lang == 'zh' ? '首页' : 'Home' }}</span>
       </router-link>
-    </IxMenuItem>
+    </IxMenuItem> -->
     <IxMenuItem key="docs">
       <router-link :to="'/docs/introduce/' + lang">
         <span>{{ lang == 'zh' ? '文档' : 'Docs' }}</span>
