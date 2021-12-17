@@ -1,8 +1,8 @@
 <template>
   <div :id="id" class="global-code-box-wrapper">
-    <h3 class="global-code-box-title">
-      {{ title }}
-    </h3>
+    <section class="global-code-box-title markdown">
+      <h3>{{ title }}</h3>
+    </section>
     <div class="global-code-box-border">
       <section class="global-code-box">
         <section class="global-code-box-meta markdown">
@@ -105,7 +105,7 @@ export default defineComponent({
     border-radius: @border-radius-md;
     transition: all 0.3s;
 
-    &-title {
+    &-title h3 {
       margin-bottom: 0;
     }
 

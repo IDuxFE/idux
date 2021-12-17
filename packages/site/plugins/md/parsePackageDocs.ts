@@ -132,7 +132,7 @@ function wrapperDocsTemplate(
 ): string {
   return `
 <template>
-  <article class="markdown component-wrapper">
+  <article class="component-wrapper">
     ${header}
     <template v-if="selectedTab === 'develop' ">
       ${developToc}
@@ -150,7 +150,7 @@ function wrapperDocsTemplate(
             </IxTooltip>
           </span>
         </h2>
-        <section class="markdown component-develop-examples">${examples}</section>
+        <section class="component-develop-examples">${examples}</section>
         <section class="markdown component-develop-api">${api}</section>
       </IxTab>
       <IxTab key="design" title="${locale.design[language]}">
