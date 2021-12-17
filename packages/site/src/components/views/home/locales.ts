@@ -1,51 +1,91 @@
 export const homeLocales = {
   zh: {
-    description: '企业级产品组件，创造高效愉悦的工作体验',
+    videoErr: '您的浏览器不支持 video 标签。',
+    bannerTitle: 'iDUX',
+    bannerTitleDesc: '更懂程序员的 UI 组件库',
     start: '开 始 使 用',
-    moreText: '更多指引',
-    guidelines: [
+    github: 'Github',
+    compProperties: [
       {
-        name: '基础组件',
-        icon: '/icons/component-base.svg',
-        path: '/components/button/zh',
-        description: '一个基于 Vue 3.x 的基础组件库',
+        title: '全新 vue 3.x，无包袱更纯粹',
+        descs: ['全面拥抱 Composition Api，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
       },
       {
-        name: '高级组件',
-        icon: '/icons/component-pro.svg',
-        path: '/pro/layout/zh',
-        description: '规划中...',
+        title: '开箱即用，尽享高效',
+        descs: ['Monorepo模式：cdk，components，pro', '开箱即用的高质量组件'],
       },
       {
-        name: '开发套件',
-        icon: '/icons/component-cdk.svg',
-        path: '/cdk/breakpoint/zh',
-        description: '一个基于 Vue 3.x 的组件开发套件',
+        title: '百变百搭，灵活定制',
+        descs: ['灵活的全局配置，深入细节的主题定制能力', '国际化语言支持'],
+      },
+      {
+        title: '组件体验，持续迭代',
+        descs: ['基于业务需求及设计趋势', '专业团队持续维护，不断提升组件质量'],
+      },
+    ],
+    sceneDesc: ['多场景跨业务产品案例', '云计算&安全多场景落地，未来实现集团内全产品覆盖'],
+    welcome: ['同伙伴一起成长', 'IDUX 希望又更多的伙伴加入进来，一起进步一起创新～'],
+    comments: [
+      {
+        desc: '组件挺全的，覆盖的比较广，整体风格也不错。',
+        author: '@ 刘**8',
+      },
+      {
+        desc: '有很多公司内的其他业务使用，有比较多的样例参考，我们依托组件规范，参考其他业务平台的设计方案，总结了自己的前端规范，统一平台的交付标准。',
+        author: '@ F**4',
+      },
+      {
+        desc: '搞组件的很辛苦，头发都快掉完了，大家多多支持。',
+        author: '@ X**2',
+      },
+      {
+        desc: '组件挺全的，覆盖的比较广，整体风格也不错。',
+        author: '@ 刘**8',
       },
     ],
   },
   en: {
-    description: 'Enterprise-level product components to create an efficient and pleasant work experience',
-    start: 'Get Started',
-    moreText: 'More Guidelines',
-    guidelines: [
+    videoErr: '您的浏览器不支持 video 标签。',
+    bannerTitle: 'iDUX',
+    bannerTitleDesc: '更懂程序员的 UI 组件库',
+    start: '开 始 使 用',
+    github: 'Github',
+    compProperties: [
       {
-        name: 'Components',
-        icon: 'appstore',
-        path: '/components/button/en',
-        description: 'A UI Component Library for Vue 3.x',
+        title: '全新 vue 3.x，无包袱更纯粹',
+        descs: ['全面拥抱 Composition Api，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
       },
       {
-        name: 'CDK',
-        icon: 'appstore',
-        path: '/cdk/breakpoint/en',
-        description: 'A UI Component Development Kit for Vue 3.x',
+        title: '开箱即用，尽享高效',
+        descs: ['Monorepo模式：cdk，components，pro', '开箱即用的高质量组件'],
       },
       {
-        name: 'Plus',
-        icon: 'appstore',
-        path: '/',
-        description: 'Todo...',
+        title: '百变百搭，灵活定制',
+        descs: ['灵活的全局配置，深入细节的主题定制能力', '国际化语言支持'],
+      },
+      {
+        title: '组件体验，持续迭代',
+        descs: ['基于业务需求及设计趋势', '专业团队持续维护，不断提升组件质量'],
+      },
+    ],
+    sceneDesc: ['多场景跨业务产品案例', '云计算&安全多场景落地，未来实现集团内全产品覆盖'],
+    welcome: ['同伙伴一起成长', 'IDUX 希望又更多的伙伴加入进来，一起进步一起创新～'],
+    comments: [
+      {
+        desc: '组件挺全的，覆盖的比较广，整体风格也不错。',
+        author: '@ 刘**8',
+      },
+      {
+        desc: '有很多公司内的其他业务使用，有比较多的样例参考，我们依托组件规范，参考其他业务平台的设计方案，总结了自己的前端规范，统一平台的交付标准。',
+        author: '@ F**4',
+      },
+      {
+        desc: '搞组件的很辛苦，头发都快掉完了，大家多多支持。',
+        author: '@ X**2',
+      },
+      {
+        desc: '组件挺全的，覆盖的比较广，整体风格也不错。',
+        author: '@ 刘**8',
       },
     ],
   },

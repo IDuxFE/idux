@@ -9,7 +9,7 @@ const init: TaskFunction = done => {
   done()
 }
 
-const start: TaskFunction = done => execNodeTask('vite', [])(done)
+const start: TaskFunction = done => execNodeTask('vite', ['--host'])(done)
 
 const build: TaskFunction = done => execNodeTask('lerna', ['run', 'build', '--scope', '@idux/site'])(done)
 
