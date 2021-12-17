@@ -3,7 +3,7 @@ import { parseFragment, serialize } from 'parse5'
 import { highlight, languages } from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 
-loadLanguages(['ts', 'typescript', 'bash', 'vim', 'diff', 'vue'])
+loadLanguages(['ts', 'typescript', 'bash', 'vim', 'diff'])
 
 const renderer = new marked.Renderer()
 
