@@ -5,8 +5,6 @@ title: Textarea
 subtitle: 文本域
 ---
 
-通过鼠标或键盘输入内容，是最基础的表单域的包装。
-
 ## API
 
 ### IxTextarea

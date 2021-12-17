@@ -7,10 +7,6 @@ order: 0
 single: true
 ---
 
-24 栅格系统
-
-快速简便地创建布局
-
 ## API
 
 ### IxRow

@@ -5,9 +5,6 @@ title: Rate
 subtitle: 评分
 ---
 
-
-- 对某个内容进行评分或展示评分
-
 ## API
 
 ### IxRate
