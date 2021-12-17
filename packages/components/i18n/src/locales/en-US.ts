@@ -7,12 +7,11 @@
 
 import type { Locale } from '../types'
 
-import { enUS } from 'date-fns/locale'
+import { enUS as dateFnsLocale } from 'date-fns/locale'
 
-/* eslint-disable camelcase */
-export const en_US: Locale = {
+const enUS: Locale = {
   type: 'en-US',
-  date: enUS,
+  date: dateFnsLocale,
   datePicker: {
     today: 'Today',
     ok: 'OK',
@@ -91,3 +90,5 @@ export const en_US: Locale = {
     placeholder: ['Start time', 'End time'],
   },
 }
+
+export default enUS

@@ -12,7 +12,7 @@ import { computed, ref } from 'vue'
 
 import { Logger } from '@idux/cdk/utils'
 
-import { zh_CN as defaultLocale } from './locales'
+import defaultLocale from './locales/zh-CN'
 
 const currentType = ref<LocaleType>('zh-CN')
 const localeMap: Partial<Record<LocaleType, Locale>> = { 'zh-CN': defaultLocale }
