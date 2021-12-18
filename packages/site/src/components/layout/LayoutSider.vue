@@ -1,5 +1,5 @@
 <template>
-  <IxMenu class="side-nav" mode="inline" :indent="48" :selectedKeys="selectedKeys">
+  <IxMenu mode="inline" :indent="breakpoints.xs ? 24 : 48" :selectedKeys="selectedKeys">
     <template v-if="page === 'docs'">
       <IxMenuItem v-for="docs in config.docs" v-show="docs.lang === lang" :key="docs.path">
         <router-link :to="docs.path">
@@ -32,17 +32,12 @@
   </IxMenu>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, inject } from 'vue'
+<script setup lang="ts">
+import { computed, inject } from 'vue'
 
 import { appContextToken } from '../../context'
 import { config } from '../../sideNav'
 
-export default defineComponent({
-  setup() {
-    const { lang, page, path } = inject(appContextToken)!
-    const selectedKeys = computed(() => [path.value])
-    return { lang, page, selectedKeys, config }
-  },
-})
+const { breakpoints, lang, page, path } = inject(appContextToken)!
+const selectedKeys = computed(() => [path.value])
 </script>

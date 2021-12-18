@@ -6,7 +6,8 @@
       </IxCol>
       <IxCol xs="2" sm="17" md="18" lg="19" xl="20" class="header-right">
         <template v-if="isXs">
-          <IxDropdown icon="unordered-list">
+          <IxDropdown>
+            <IxIcon name="normal" />
             <template #overlay>
               <LayoutHeaderNavigation />
             </template>

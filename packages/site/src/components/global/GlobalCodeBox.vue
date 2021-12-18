@@ -10,19 +10,16 @@
             <slot name="description"></slot>
           </div>
           <div class="global-code-box-actions">
-            <IxTooltip placement="top" :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
+            <IxTooltip :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
               <a :href="editHref" class="global-code-box-edit" target="_blank" rel="noopener noreferrer">
                 <IxIcon name="edit" />
               </a>
             </IxTooltip>
-            <IxTooltip placement="top" :title="lang === 'zh' ? '复制代码' : 'Copy code'">
+            <IxTooltip :title="lang === 'zh' ? '复制代码' : 'Copy code'">
               <IxIcon name="copy" @click="onCopy" />
             </IxTooltip>
-            <IxTooltip placement="top" :title="lang === 'zh' ? '显示代码' : 'Show code'">
-              <IxIcon v-show="expanded" name="expand" @click="expanded = !expanded" />
-            </IxTooltip>
-            <IxTooltip placement="top" :title="lang === 'zh' ? '收起代码' : 'Hide code'">
-              <IxIcon v-show="!expanded" name="unexpand" @click="expanded = !expanded" />
+            <IxTooltip :title="expandedTitle">
+              <IxIcon :name="expanded ? 'unexpand' : 'expand'" @click="onExpanded" />
             </IxTooltip>
           </div>
         </section>
@@ -68,6 +65,16 @@ export default defineComponent({
     })
 
     const expanded = ref(false)
+    const expandedTitle = computed(() => {
+      if (lang.value === 'zh') {
+        return expanded.value ? '收起代码' : '显示代码'
+      }
+      return expanded.value ? 'Hide Code' : 'Show Code'
+    })
+
+    const onExpanded = () => {
+      expanded.value = !expanded.value
+    }
 
     const { copy } = useClipboard()
     const { success } = useMessage()
@@ -78,7 +85,7 @@ export default defineComponent({
       })
     }, 300)
 
-    return { id, lang, editHref, expanded, onCopy }
+    return { id, lang, editHref, expanded, expandedTitle, onExpanded, onCopy }
   },
 })
 </script>

@@ -9,8 +9,14 @@
               <IxRow>
                 <IxCol xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
                   <IxAffix v-if="!breakpoints.xs">
-                    <LayoutSider></LayoutSider>
+                    <LayoutSider class="side-nav"></LayoutSider>
                   </IxAffix>
+                  <IxDropdown v-else>
+                    <IxIcon name="menu"></IxIcon>
+                    <template #overlay>
+                      <LayoutHeaderNavigation />
+                    </template>
+                  </IxDropdown>
                 </IxCol>
                 <IxCol xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
                   <router-view></router-view>
@@ -28,8 +34,21 @@
             </div>
             <template v-else>
               <router-view></router-view>
-              <LayoutFooter></LayoutFooter>
             </template>
+          </div>
+          <div v-if="page !== 'home' && breakpoints.xs" class="root-drawer">
+            <div class="root-drawer-handle" @click="isDrawerOpen = !isDrawerOpen">
+              <IxIcon name="menu-fold"></IxIcon>
+            </div>
+            <IxDrawer
+              v-model:visible="isDrawerOpen"
+              class="root-drawer"
+              :closable="false"
+              placement="start"
+              :width="200"
+            >
+              <LayoutSider></LayoutSider>
+            </IxDrawer>
           </div>
         </IxMessageProvider>
       </IxNotificationProvider>
@@ -65,6 +84,7 @@ const page = computed(() => {
 })
 
 const breakpoints = useSharedBreakpoints()
+const isDrawerOpen = ref(false)
 
 const appContext: AppContext = {
   org: 'IDuxFE',
