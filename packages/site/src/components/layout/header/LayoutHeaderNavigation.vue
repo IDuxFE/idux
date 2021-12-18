@@ -21,7 +21,7 @@
       </router-link>
     </IxMenuItem>
     <IxMenuItem key="cdk">
-      <router-link :to="'/cdk/breakpoint/' + lang">
+      <router-link :to="'/cdk/a11y/' + lang">
         <span>{{ lang == 'zh' ? '开发套件' : 'CDK' }}</span>
       </router-link>
     </IxMenuItem>
