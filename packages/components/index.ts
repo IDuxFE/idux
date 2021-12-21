@@ -15,6 +15,7 @@ import { IxBackTop } from '@idux/components/back-top'
 import { IxBadge } from '@idux/components/badge'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard, IxCardGrid } from '@idux/components/card'
+import { IxCarousel } from '@idux/components/carousel'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxDatePicker } from '@idux/components/date-picker'
@@ -73,6 +74,7 @@ const components = [
   IxButtonGroup,
   IxCard,
   IxCardGrid,
+  IxCarousel,
   IxCheckbox,
   IxCheckboxGroup,
   IxCollapse,

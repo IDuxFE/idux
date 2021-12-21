@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel render work 1`] = `
+"<div class=\\"ix-carousel ix-carousel-horizontal\\" style=\\"height: 0px;\\">
+  <div class=\\"ix-carousel-slides\\" style=\\"width: 0px; left: -0px;\\">
+    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
+      <div>card2</div>
+    </div>
+    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
+      <div>card1</div>
+    </div>
+    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
+      <div>card2</div>
+    </div>
+    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
+      <div>card1</div>
+    </div>
+  </div>
+  <!---->
+  <ul class=\\"ix-carousel-dot ix-carousel-dot-bottom\\">
+    <li class=\\"ix-carousel-dot-item ix-carousel-dot-item-active\\"><button class=\\"ix-carousel-dot-item-default\\"></button></li>
+    <li class=\\"ix-carousel-dot-item\\"><button class=\\"ix-carousel-dot-item-default\\"></button></li>
+  </ul>
+</div>"
+`;

@@ -11,6 +11,7 @@ import type { PortalTargetType } from '@idux/cdk/portal'
 import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { CardSize } from '@idux/components/card'
+import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
@@ -327,6 +328,13 @@ export interface SkeletonConfig {
   animated: boolean
 }
 
+export interface CarouselConfig {
+  autoplayTime: number
+  dotPlacement: DotPlacement
+  showArrow: boolean
+  trigger: DotTrigger
+}
+
 export interface DrawerConfig {
   closable: boolean
   closeIcon: string
@@ -414,6 +422,7 @@ export interface GlobalConfig {
   badge: BadgeConfig
   card: CardConfig
   empty: EmptyConfig
+  carousel: CarouselConfig
   list: ListConfig
   collapse: CollapseConfig
   image: ImageConfig
