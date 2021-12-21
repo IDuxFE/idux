@@ -58,6 +58,7 @@ export default defineComponent({
           <CdkPortal target={target.value} load={loadContainer.value}>
             <TransitionGroup
               tag="div"
+              appear
               name={`${common.prefixCls}-move-up`}
               class={`${mergedPrefixCls.value}-wrapper`}
               style={style.value}
