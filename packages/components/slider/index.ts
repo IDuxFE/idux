@@ -13,4 +13,4 @@ const IxSlider = Slider as unknown as SliderComponent
 
 export { IxSlider }
 
-export type { SliderInstance, SliderPublicProps as SliderProps } from './src/types'
+export type { SliderInstance, SliderComponent, SliderPublicProps as SliderProps } from './src/types'

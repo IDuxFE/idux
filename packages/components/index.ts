@@ -13,6 +13,7 @@ import { IxAnchor, IxAnchorLink } from '@idux/components/anchor'
 import { IxAvatar } from '@idux/components/avatar'
 import { IxBackTop } from '@idux/components/back-top'
 import { IxBadge } from '@idux/components/badge'
+import { IxBreadcrumb, IxBreadcrumbItem } from '@idux/components/breadcrumb'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard, IxCardGrid } from '@idux/components/card'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
@@ -69,6 +70,8 @@ const components = [
   IxAvatar,
   IxBackTop,
   IxBadge,
+  IxBreadcrumb,
+  IxBreadcrumbItem,
   IxButton,
   IxButtonGroup,
   IxCard,

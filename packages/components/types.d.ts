@@ -10,6 +10,7 @@ import type { AnchorComponent, AnchorLinkComponent } from '@idux/components/anch
 import type { AvatarComponent } from '@idux/components/avatar'
 import type { BackTopComponent } from '@idux/components/back-top'
 import type { BadgeComponent } from '@idux/components/badge'
+import type { BreadcrumbComponent, BreadcrumbItemComponent } from '@idux/components/breadcrumb'
 import type { ButtonComponent, ButtonGroupComponent } from '@idux/components/button'
 import type { CardComponent, CardGridComponent } from '@idux/components/card'
 import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
@@ -53,6 +54,7 @@ import type { RateComponent } from '@idux/components/rate'
 import type { ResultComponent } from '@idux/components/result'
 import type { SelectComponent, SelectOptionComponent, SelectOptionGroupComponent } from '@idux/components/select'
 import type { SkeletonComponent } from '@idux/components/skeleton'
+import type { SliderComponent } from '@idux/components/slider'
 import type { SpaceComponent } from '@idux/components/space'
 import type { SpinComponent } from '@idux/components/spin'
 import type { StatisticComponent } from '@idux/components/statistic'
@@ -75,6 +77,8 @@ declare module 'vue' {
     IxAvatar: AvatarComponent
     IxBackTop: BackTopComponent
     IxBadge: BadgeComponent
+    IxBreadcrumb: BreadcrumbComponent
+    IxBreadcrumbItem: BreadcrumbItemComponent
     IxButton: ButtonComponent
     IxButtonGroup: ButtonGroupComponent
     IxCard: CardComponent
@@ -129,6 +133,7 @@ declare module 'vue' {
     IxSelectOption: SelectOptionComponent
     IxSelectOptionGroup: SelectOptionGroupComponent
     IxSkeleton: SkeletonComponent
+    IxSlider: SliderComponent
     IxSpace: SpaceComponent
     IxSpin: SpinComponent
     IxStatistic: StatisticComponent

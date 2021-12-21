@@ -1,0 +1,46 @@
+.@{breadcrumb-prefix} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: @breadcrumb-font-size;
+  color: @breadcrumb-base-color;
+  white-space: nowrap;
+
+  & ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  & a {
+    color: @breadcrumb-link-color;
+    transition: color @transition-duration-base @ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+      color: @breadcrumb-link-color-hover;
+    }
+  }
+
+  &-item {
+    display: inline-block;
+
+    &-separator {
+      margin: @breadcrumb-separator-margin;
+      color: @breadcrumb-separator-color;
+    }
+  }
+
+  &-item:last-child {
+    color: @breadcrumb-last-item-color;
+
+    .@{breadcrumb-prefix}-item-separator {
+      display: none;
+    }
+
+    a {
+      color: @breadcrumb-last-item-color;
+    }
+  }
+}
