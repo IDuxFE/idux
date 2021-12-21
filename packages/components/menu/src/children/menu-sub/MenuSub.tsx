@@ -166,10 +166,16 @@ function useExpanded(
   handleExpand: (key: VKey, expanded: boolean) => void,
   mode: ComputedRef<'vertical' | 'horizontal' | 'inline'>,
 ) {
-  const isExpanded = computed(() => expandedKeys.value.includes(key))
+  const isHover = ref(false)
+  const isExpanded = computed(() => {
+    // https://github.com/IDuxFE/idux/issues/636
+    if (mode.value === 'inline') {
+      return expandedKeys.value.includes(key)
+    }
+    return isHover.value && expandedKeys.value.includes(key)
+  })
   const changeExpanded = (expanded: boolean) => handleExpand(key, expanded)
   const childExpanded = computed(() => getState(props.children, expandedKeys.value))
-  const isHover = ref(false)
   const handleMouseEvent = debounce((value: boolean) => (isHover.value = value), 100)
   watch([mode, childExpanded, isHover], ([currMode, currChildExpanded, currIsHover]) => {
     if (currMode !== 'inline') {

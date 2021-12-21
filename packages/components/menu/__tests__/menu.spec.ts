@@ -84,7 +84,9 @@ describe('Menu', () => {
 
   test('v-model:expandedKeys work', async () => {
     const onUpdateExpandedKeys = jest.fn()
-    const wrapper = MenuMount({ props: { expandedKeys: ['sub1'], 'onUpdate:expandedKeys': onUpdateExpandedKeys } })
+    const wrapper = MenuMount({
+      props: { expandedKeys: ['sub1'], 'onUpdate:expandedKeys': onUpdateExpandedKeys, mode: 'inline' },
+    })
 
     const subs = wrapper.findAllComponents(MenuSub)
     expect(subs.length).toBe(4)
@@ -101,7 +103,7 @@ describe('Menu', () => {
     expect(subs[3].classes()).toContain('ix-menu-sub-expanded')
 
     await wrapper.setProps({ expandedKeys: [] })
-    await subs[0].find('.ix-menu-sub-title').trigger('mouseenter')
+    await subs[0].find('.ix-menu-sub-title').trigger('click')
     await wait(105)
 
     expect(onUpdateExpandedKeys).toBeCalledWith(['sub1'])
