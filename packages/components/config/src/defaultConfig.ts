@@ -53,6 +53,7 @@ import type {
   TimeRangePickerConfig,
   TooltipConfig,
   TreeConfig,
+  TreeSelectConfig,
 } from './types'
 
 import { numFormatter } from './numFormatter'
@@ -188,6 +189,14 @@ const timeRangePicker: TimeRangePickerConfig = {
   suffix: 'clock-circle',
   allowInput: true,
   format: 'HH:mm:ss',
+}
+
+const treeSelect: TreeSelectConfig = {
+  size: 'md',
+  suffix: 'down',
+  childrenKey: 'children',
+  labelKey: 'label',
+  nodeKey: 'key',
 }
 
 // --------------------- Data Display ---------------------
@@ -385,6 +394,7 @@ export const defaultConfig: GlobalConfig = {
   textarea,
   timePicker,
   timeRangePicker,
+  treeSelect,
   // Data Display
   avatar,
   badge,

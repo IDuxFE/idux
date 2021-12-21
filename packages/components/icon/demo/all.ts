@@ -172,6 +172,8 @@ export const allIcons = [
   'thunderbolt',
   'tool',
   'transmit',
+  'tree-expand',
+  'tree-unexpand',
   'unexpand',
   'unlock',
   'up',

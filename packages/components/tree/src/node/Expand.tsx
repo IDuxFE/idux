@@ -28,7 +28,10 @@ export default defineComponent({
       })
     })
 
-    const onClick = () => handleExpand(props.nodeKey, props.rawNode)
+    const onClick = (evt: Event) => {
+      handleExpand(props.nodeKey, props.rawNode)
+      evt.stopPropagation()
+    }
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-node-expand`

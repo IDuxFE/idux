@@ -41,6 +41,8 @@ import {
   RotateRight,
   Search,
   StarFilled,
+  TreeExpand,
+  TreeUnexpand,
   User,
   VerticalAlignTop,
   ZoomIn,
@@ -82,6 +84,8 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Search, // Select
   StarFilled, // Rate
   User, // Avatar
+  TreeExpand, // TreeSelect
+  TreeUnexpand, // TreeSelect
   VerticalAlignTop, // BackTop
   ZoomIn, // Image
   ZoomOut, // Image

@@ -117,13 +117,15 @@ export default defineComponent({
       const { showLine, checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
       const currNode = nodeMap.get(key)
-      let noopIdentUnit = 0
+      const noopIdentUnitArr: number[] = []
       if (treeProps.showLine) {
-        getParentKeys(nodeMap, currNode).forEach(parentKey => {
-          if (nodeMap.get(parentKey)?.isLast) {
-            noopIdentUnit++
-          }
-        })
+        getParentKeys(nodeMap, currNode)
+          .reverse()
+          .forEach((parentKey, index) => {
+            if (nodeMap.get(parentKey)?.isLast) {
+              noopIdentUnitArr.push(index)
+            }
+          })
       }
 
       return (
@@ -139,7 +141,7 @@ export default defineComponent({
           onDragleave={mergedDraggable ? onDragleave : undefined}
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
         >
-          <Indent level={level} noopIdentUnit={noopIdentUnit} prefixCls={mergedPrefixCls.value} />
+          <Indent level={level} noopIdentUnitArr={noopIdentUnitArr} prefixCls={mergedPrefixCls.value} />
           {isLeaf && showLine ? (
             <LeafLine />
           ) : (
