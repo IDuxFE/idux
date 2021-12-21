@@ -44,7 +44,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${commonCfg.prefixCls}-notification`)
     const config = useGlobalConfig('notification')
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
-    const { notifications, open, info, success, warning, error, update, destroy, destroyAll } =
+    const { notifications, loadContainer, open, info, success, warning, error, update, destroy, destroyAll } =
       useNotification(maxCount)
     const apis = { open, info, success, warning, error, update, destroy, destroyAll }
     const placementNotifications = usePlacementNotifications(props, config, notifications)
@@ -72,6 +72,7 @@ export default defineComponent({
           <TransitionGroup
             key={placement}
             tag="div"
+            appear
             name={moveName}
             class={[`${mergedPrefixCls.value}-wrapper`, `${mergedPrefixCls.value}-wrapper-${placement}`]}
             style={position}
@@ -84,7 +85,7 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target={target.value} load={true}>
+          <CdkPortal target={target.value} load={loadContainer.value}>
             {placementGroup}
           </CdkPortal>
         </>
@@ -165,12 +166,17 @@ function useNotification(maxCount: ComputedRef<number>) {
     notifications.value = []
   }
 
+  const loadContainer = ref(false)
+
   const open = (options: NotificationOptions): NotificationRef => {
     const key = add(options)
     const ref = {
       key,
       update: (options: Partial<NotificationOptions>) => update(key, options),
       destroy: () => destroy(key),
+    }
+    if (!loadContainer.value) {
+      loadContainer.value = true
     }
     return ref
   }
@@ -179,7 +185,7 @@ function useNotification(maxCount: ComputedRef<number>) {
     type => (options: Omit<NotificationOptions, 'type'>) => open({ ...options, type }),
   )
 
-  return { notifications, open, info, success, warning, error, update, destroy, destroyAll }
+  return { notifications, loadContainer, open, info, success, warning, error, update, destroy, destroyAll }
 }
 
 function getGroupPosition(
