@@ -16,12 +16,11 @@ interface ItemProps {
   disabled?: boolean
   prefixCls: string
   removable: boolean
-  readonly: boolean
   handleItemRemove: (key: any) => void
 }
 
 const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
-  const { disabled, prefixCls, removable, readonly, handleItemRemove } = props
+  const { disabled, prefixCls, removable, handleItemRemove } = props
 
   const key = useKey()
   const classes = prefixCls + (disabled ? ` ${prefixCls}-disabled` : '')
@@ -34,7 +33,7 @@ const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
   return (
     <div class={classes}>
       <span class={`${prefixCls}-label`}>{slots.default!()}</span>
-      {!disabled && !readonly && removable && (
+      {removable && (
         <span class={`${prefixCls}-remove`} onClick={handleClick}>
           <IxIcon name="close" />
         </span>

@@ -263,21 +263,29 @@ describe('TreeSelect', () => {
     })
 
     test('readonly work', async () => {
-      const wrapper = TreeSelectMount({ props: { readonly: true } })
+      const wrapper = TreeSelectMount({
+        props: { searchable: true, clearable: true, readonly: true, multiple: true, value: ['0'] },
+      })
 
       expect(wrapper.find('.ix-tree-select-readonly').exists()).toBe(true)
+      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(false)
+      expect(wrapper.find('.ix-tree-select-searchable').exists()).toBe(false)
+      expect(wrapper.find('.ix-tree-select-selector-item-remove').exists()).toBe(false)
 
-      // await wrapper.find('.ix-select').trigger('click')
+      await wrapper.find('.ix-tree-select').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(false)
 
       await wrapper.setProps({ readonly: false })
 
       expect(wrapper.find('.ix-tree-select-readonly').exists()).toBe(false)
+      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(true)
+      expect(wrapper.find('.ix-tree-select-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-tree-select-selector-item-remove').exists()).toBe(true)
 
-      // await wrapper.find('.ix-select').trigger('click')
+      await wrapper.find('.ix-tree-select').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(true)
     })
 
     test('overlayClassName work', async () => {

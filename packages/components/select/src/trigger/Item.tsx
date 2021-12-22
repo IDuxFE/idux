@@ -32,7 +32,7 @@ const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
   return (
     <div class={classes}>
       <span class={`${prefixCls}-label`}>{slots.default!()}</span>
-      {!disabled && removable && (
+      {removable && (
         <span class={`${prefixCls}-remove`} onClick={handleClick}>
           <IxIcon name="close" />
         </span>
