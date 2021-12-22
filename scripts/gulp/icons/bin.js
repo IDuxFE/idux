@@ -13,7 +13,7 @@ async function init() {
       case 'icon':
         return copyIconsToPublic()
       default:
-        console.log(`Command [${command} not supported]`)
+        console.log(`Command [${command}] not supported`)
     }
   } catch (err) {
     console.error(err)
