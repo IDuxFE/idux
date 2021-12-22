@@ -61,12 +61,14 @@ export default defineComponent({
       const itemPrefixCls = `${prefixCls}-item`
       const itemNodes = selectedItems.value.map(item => {
         const { key, isMax, label } = item
+        const _disabled = disabled || item.selectDisabled
+        const removable = multiple && !_disabled && !readonly && !isMax
+
         const itemProps = {
           key,
-          disabled: disabled || item.selectDisabled,
+          disabled: _disabled,
           prefixCls: itemPrefixCls,
-          removable: multiple && !isMax,
-          readonly,
+          removable,
           title: label,
           handleItemRemove,
         }

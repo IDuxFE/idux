@@ -56,18 +56,20 @@ export default defineComponent({
 
     return () => {
       const { clearable, suffix } = props
-      const { multiple } = selectProps
+      const { multiple, readonly } = selectProps
       const disabled = isDisabled.value
       const prefixCls = `${mergedPrefixCls.value}-selector`
 
       const itemPrefixCls = `${prefixCls}-item`
       const itemNodes = selectedItems.value.map(item => {
         const { key, isMax, label, value, rawOption } = item
+        const _disabled = disabled || item.disabled
+        const removable = multiple && !_disabled && !readonly && !isMax
         const itemProps = {
           key,
-          disabled: disabled || item.disabled,
+          disabled: _disabled,
           prefixCls: itemPrefixCls,
-          removable: multiple && !isMax,
+          removable,
           value,
           handleItemRemove,
           title: label,

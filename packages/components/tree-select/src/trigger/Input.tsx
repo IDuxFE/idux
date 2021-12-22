@@ -27,7 +27,7 @@ export default defineComponent({
     })
 
     return () => {
-      const { autofocus, multiple } = props
+      const { autofocus, multiple, readonly } = props
       const prefixCls = `${mergedPrefixCls.value}-selector-input`
       return (
         <div class={prefixCls} style={style.value}>
@@ -38,6 +38,7 @@ export default defineComponent({
             autocomplete="off"
             autofocus={autofocus}
             disabled={isDisabled.value}
+            readonly={readonly}
             value={searchValue.value}
             onClick={onClick}
             onInput={handleInput}
