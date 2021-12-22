@@ -13,6 +13,7 @@ import type { BadgeComponent } from '@idux/components/badge'
 import type { BreadcrumbComponent, BreadcrumbItemComponent } from '@idux/components/breadcrumb'
 import type { ButtonComponent, ButtonGroupComponent } from '@idux/components/button'
 import type { CardComponent, CardGridComponent } from '@idux/components/card'
+import type { CarouselComponent } from '@idux/components/carousel'
 import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
 import type { CollapseComponent, CollapsePanelComponent } from '@idux/components/collapse'
 import type { DatePickerComponent } from '@idux/components/date-picker'
@@ -83,6 +84,7 @@ declare module 'vue' {
     IxButtonGroup: ButtonGroupComponent
     IxCard: CardComponent
     IxCardGrid: CardGridComponent
+    IxCarousel: CarouselComponent
     IxCheckbox: CheckboxComponent
     IxCheckboxGroup: CheckboxGroupComponent
     IxCol: ColComponent
