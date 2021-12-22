@@ -1,0 +1,94 @@
+@import '../../style/mixins/reset.less';
+@import './mixin.less';
+
+.@{carousel-prefix} {
+  .reset-component();
+
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  &-slides {
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  &-horizontal &-slide-item {
+    float: left;
+  }
+
+  &-arrow {
+    font-size: @carousel-arrow-size;
+    color: @carousel-arrow-color;
+    opacity: @carousel-icon-opacity;
+    cursor: pointer;
+
+    .carousel-vertical-center();
+
+    &:hover {
+      opacity: @carousel-icon-active-opacity;
+    }
+
+    &-prev {
+      left: @carousel-arrow-spacing;
+    }
+
+    &-next {
+      right: @carousel-arrow-spacing;
+    }
+  }
+
+  &-horizontal &-dot {
+    .carousel-horizontal-center();
+  }
+
+  &-vertical &-dot {
+    flex-direction: column;
+    .carousel-vertical-center();
+  }
+
+  &-dot {
+    display: flex;
+
+    &-item {
+      opacity: @carousel-icon-opacity;
+      cursor: pointer;
+
+      &:hover,
+      &-active {
+        opacity: @carousel-icon-active-opacity;
+      }
+
+      &-default {
+        width: @carousel-dot-size;
+        height: @carousel-dot-size;
+        border-radius: 50%;
+        background-color: @carousel-dot-background-color;
+      }
+    }
+
+    .@{carousel-prefix}-vertical &-item + &-item {
+      margin-top: @carousel-dot-gap;
+    }
+
+    .@{carousel-prefix}-horizontal &-item + &-item {
+      margin-left: @carousel-dot-gap;
+    }
+
+    &-start {
+      left: @carousel-dot-spacing;
+    }
+
+    &-end {
+      right: @carousel-dot-spacing;
+    }
+
+    &-top {
+      top: @carousel-dot-spacing;
+    }
+
+    &-bottom {
+      bottom: @carousel-dot-spacing;
+    }
+  }
+}

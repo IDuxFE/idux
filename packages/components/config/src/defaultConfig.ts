@@ -12,6 +12,7 @@ import type {
   BackTopConfig,
   BadgeConfig,
   CardConfig,
+  CarouselConfig,
   CheckboxConfig,
   CollapseConfig,
   CommonConfig,
@@ -320,6 +321,13 @@ const skeleton: SkeletonConfig = {
   animated: true,
 }
 
+const carousel: CarouselConfig = {
+  autoplayTime: 0,
+  dotPlacement: 'bottom',
+  showArrow: false,
+  trigger: 'click',
+}
+
 const drawer: DrawerConfig = {
   closable: true,
   closeOnEsc: true,
@@ -400,6 +408,7 @@ export const defaultConfig: GlobalConfig = {
   badge,
   card,
   empty,
+  carousel,
   list,
   collapse,
   image,
