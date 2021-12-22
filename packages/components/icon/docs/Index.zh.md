@@ -73,7 +73,7 @@ const loadIconDynamically = (iconName: string) => {
 useGlobalConfig('icon', { loadIconDynamically })
 ```
 
-`@idux` 的默认图标文件地址：[Github](https://github.com/IDuxFE/idux/tree/main/scripts/gulp/icons/assets)
+`@idux` 的默认图标文件地址：[GitHub](https://github.com/IDuxFE/idux/tree/main/scripts/gulp/icons/assets)
 
 #### 静态加载
 

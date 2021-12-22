@@ -4,7 +4,7 @@ export const homeLocales = {
     bannerTitle: 'iDUX',
     bannerTitleDesc: '更懂程序员的 UI 组件库',
     start: '开 始 使 用',
-    github: 'Github',
+    github: 'GitHub',
     compProperties: [
       {
         title: '全新 vue 3.x，无包袱更纯粹',
@@ -49,7 +49,7 @@ export const homeLocales = {
     bannerTitle: 'iDUX',
     bannerTitleDesc: '更懂程序员的 UI 组件库',
     start: '开 始 使 用',
-    github: 'Github',
+    github: 'GitHub',
     compProperties: [
       {
         title: '全新 vue 3.x，无包袱更纯粹',

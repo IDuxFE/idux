@@ -10,7 +10,7 @@ import { ref } from 'vue'
 import { SelectOption } from '@idux/components/select'
 
 const options: SelectOption[] = [
-  { key: 1, label: 'Github', value: 'github' },
+  { key: 1, label: 'GitHub', value: 'github' },
   { key: 2, label: 'Gitlab', value: 'gitlab' },
   { key: 3, label: 'Chrome', value: 'chrome' },
   { key: 4, label: 'Edeg', value: 'edeg' },
