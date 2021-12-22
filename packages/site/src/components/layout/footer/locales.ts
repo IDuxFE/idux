@@ -48,7 +48,7 @@ export const footerLocales = {
       items: [
         {
           icon: '',
-          title: 'Github',
+          title: 'GitHub',
           link: 'https://github.com/IDuxFE/idux',
           description: '',
         },
@@ -99,7 +99,7 @@ export const footerLocales = {
       items: [
         {
           icon: '',
-          title: 'Github',
+          title: 'GitHub',
           link: 'https://github.com/IDuxFE/idux',
           description: '',
         },

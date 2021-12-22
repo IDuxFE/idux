@@ -1,5 +1,5 @@
 <template>
-  <IxTag icon="github">Github</IxTag>
+  <IxTag icon="github">GitHub</IxTag>
   <IxTag>
     Gitlab
     <template #icon>

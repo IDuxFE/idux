@@ -26,11 +26,11 @@
       </router-link>
     </IxMenuItem>
     <IxMenuItem v-if="isXs" key="github">
-      <a :href="githubUrl" target="_blank" rel="noopener noreferrer">Github</a>
+      <a :href="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
     </IxMenuItem>
     <IxMenuSub v-else-if="isSm" key="more-menu" overlayClass="header-menu-sub" icon="menu">
       <IxMenuItem>
-        <a :href="githubUrl" target="_blank" rel="noopener noreferrer">Github</a>
+        <a :href="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
       </IxMenuItem>
     </IxMenuSub>
   </IxMenu>

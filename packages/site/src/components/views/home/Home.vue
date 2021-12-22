@@ -140,12 +140,16 @@ export default defineComponent({
 
     &-btn-group {
       &.ix-button-group {
+        display: flex;
         @media (max-width: @screen-xs-max) {
           text-align: center;
         }
         .ix-button {
           margin: 0 16px;
           font-size: 18px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           width: 160px;
           border-radius: 32px;
           border-color: @color-primary;
