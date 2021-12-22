@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import { textSync } from 'figlet'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 import inquirer from 'inquirer'
-import { camelCase, kebabCase, upperFirst } from 'lodash'
+import { camelCase, kebabCase, lowerFirst, upperFirst } from 'lodash'
 import ora from 'ora'
 
 import {
@@ -14,11 +14,12 @@ import {
   getCdkUseTemplate,
   getDemoTemplate,
   getDemoVueTemplate,
+  getDesignTemplate,
   getDocsTemplate,
   getIndexTemplate,
   getLessTemplate,
-  getStyleIndexTemplate,
   getTestTemplate,
+  getThemesIndexTemplate,
   getThemesTemplate,
   getTsxTemplate,
   getTypesTemplate,
@@ -55,7 +56,7 @@ const questions: QuestionCollection<AnswerOptions>[] = [
     type: 'confirm',
     default: false,
     when(answer) {
-      return answer.category === 'components'
+      return answer.category !== 'cdk'
     },
   },
   {
@@ -63,7 +64,7 @@ const questions: QuestionCollection<AnswerOptions>[] = [
     message: 'Please select the type you want to generate.',
     type: 'list',
     when(answer) {
-      return answer.category === 'components' && !answer.isPrivate
+      return answer.category !== 'cdk' && !answer.isPrivate
     },
     choices: [
       'General_通用',
@@ -132,84 +133,100 @@ class Generate {
   private generate(category: AnswerOptions['category'], name: string, type?: AnswerType) {
     switch (category) {
       case 'components':
-        this.generateComponents(name)
+      case 'pro':
+        this.generateComponents(name, category)
         break
       case 'cdk':
         this.generateCdk(name)
         break
-      // todo pro
     }
 
     if (this.isPrivate) {
       return Promise.resolve()
     }
 
-    const compName = upperFirst(camelCase(name))
+    let compName = upperFirst(camelCase(name))
+    if (category === 'pro') {
+      compName = `Pro${compName}`
+    }
     const docsZhTemplate = getDocsTemplate(category, compName, type)
     const docsEnTemplate = getDocsTemplate(category, compName, type, true)
+    const designZhTemplate = getDesignTemplate()
+    const designEnTemplate = getDesignTemplate(true)
     const demoTemplate = getDemoTemplate()
     const demoVueTemplate = getDemoVueTemplate(compName)
 
     return Promise.all([
       writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), docsZhTemplate),
       writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), docsEnTemplate),
+      writeFile(resolve(this.dirPath, 'docs', 'Design.zh.md'), designZhTemplate),
+      writeFile(resolve(this.dirPath, 'docs', 'Design.en.md'), designEnTemplate),
       writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), demoTemplate),
       writeFile(resolve(this.dirPath, 'demo', 'Basic.vue'), demoVueTemplate),
     ])
   }
 
-  private async generateComponents(name: string) {
+  private async generateComponents(name: string, category: AnswerOptions['category']) {
     await mkdir(`${this.dirPath}/style`)
     await mkdir(`${this.dirPath}/style/themes`)
+
     const camelCaseName = camelCase(name)
     const upperFirstName = upperFirst(camelCaseName)
 
-    const testTemplate = getTestTemplate(upperFirstName)
+    const isPro = category === 'pro'
+    const compName = isPro ? `Pro${upperFirstName}` : upperFirstName
+    const lowerFirstCompName = isPro ? lowerFirst(compName) : camelCaseName
 
-    const tsxTemplate = getTsxTemplate(upperFirstName, camelCaseName)
-    const typesTemplate = getTypesTemplate(upperFirstName, camelCaseName)
+    const testTemplate = getTestTemplate(compName)
+
+    const tsxTemplate = getTsxTemplate(compName, lowerFirstCompName)
+    const typesTemplate = getTypesTemplate(compName, lowerFirstCompName)
 
     const themesTemplate = getThemesTemplate(this.isPrivate)
-    const lessTemplate = getLessTemplate(kebabCase(name))
-    const styleIndexTemplate = getStyleIndexTemplate()
+    const themesIndexTemplate = getThemesIndexTemplate(category)
+    const lessTemplate = getLessTemplate(`${isPro ? 'pro-' : ''}${kebabCase(name)}`)
 
-    const indexTemplate = getIndexTemplate(upperFirstName)
+    const indexTemplate = getIndexTemplate(compName)
 
-    await Promise.all([
-      writeFile(`${this.dirPath}/__tests__/${camelCaseName}.spec.ts`, testTemplate),
-      writeFile(`${this.dirPath}/src/${upperFirstName}.tsx`, tsxTemplate),
+    const tasks = [
+      writeFile(`${this.dirPath}/__tests__/${lowerFirstCompName}.spec.ts`, testTemplate),
+      writeFile(`${this.dirPath}/src/${compName}.tsx`, tsxTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       writeFile(`${this.dirPath}/style/themes/default.less`, themesTemplate),
+      writeFile(`${this.dirPath}/style/themes/default.ts`, themesIndexTemplate),
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
-      writeFile(`${this.dirPath}/style/index.ts`, styleIndexTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
-    ])
+    ]
 
-    if (this.isPrivate) {
-      const currIndexPath = resolve(this.packageRoot, '_private/index.ts')
-      let currIndexContent = await readFile(currIndexPath, 'utf-8')
-      currIndexContent += `\nexport *  from './${kebabCase(name)}'`
-
-      writeFile(currIndexPath, currIndexContent)
-    } else {
+    if (!this.isPrivate) {
       const currIndexPath = resolve(this.packageRoot, 'index.ts')
       let currIndexContent = await readFile(currIndexPath, 'utf-8')
-      currIndexContent += `\nimport { Ix${upperFirstName} } from '@idux/components/${kebabCase(name)}'`
+      currIndexContent += `\nimport { Ix${compName} } from '@idux/${category}/${kebabCase(name)}'`
 
-      writeFile(currIndexPath, currIndexContent)
+      tasks.push(writeFile(currIndexPath, currIndexContent))
 
-      const currLessPath = resolve(this.packageRoot, 'components.less')
-      let curLessContent = await readFile(currLessPath, 'utf-8')
-      curLessContent += `\n@import './${kebabCase(name)}/style/index.less';`
+      const typesPath = resolve(this.packageRoot, 'types.d.ts')
+      let typesContent = await readFile(typesPath, 'utf-8')
+      typesContent += `\nimport { Ix${compName} } from '@idux/${category}/${kebabCase(name)}'`
 
-      writeFile(currLessPath, curLessContent)
+      tasks.push(writeFile(typesPath, typesContent))
     }
+
+    const currLessPath = resolve(this.packageRoot, 'default.less')
+    let curLessContent = await readFile(currLessPath, 'utf-8')
+    curLessContent += `\n@import '${this.isPrivate ? './_private' : '.'}/${kebabCase(name)}/style/themes/default.less';`
+
+    tasks.push(writeFile(currLessPath, curLessContent))
 
     const currPrefixPath = resolve(this.packageRoot, 'style/variable/prefix.less')
     let currPrefixContent = await readFile(currPrefixPath, 'utf-8')
-    currPrefixContent += `\n@${kebabCase(name)}-prefix: ~'@{idux-prefix}-${kebabCase(name)}';`
+    currPrefixContent += `\n@${isPro ? 'pro-' : ''}${kebabCase(name)}-prefix: ~'@{idux-${
+      isPro ? 'pro-' : ''
+    }prefix}-${kebabCase(name)}';`
 
-    writeFile(currPrefixPath, currPrefixContent)
+    tasks.push(writeFile(currPrefixPath, currPrefixContent))
+
+    await Promise.all(tasks)
   }
 
   private async generateCdk(name: string) {

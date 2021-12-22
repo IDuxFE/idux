@@ -1,21 +1,23 @@
 export function getThemesTemplate(isPrivate: boolean): string {
-  return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';`
+  return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';
+@import '../index.less';  
+`
 }
 
 export function getLessTemplate(compName: string): string {
-  return `@import './themes/default.less';
+  return `@import '../../style/mixins/reset.less';
 
 .@{${compName}-prefix} {
-
+  .reset-component();
 }
 `
 }
 
-export function getStyleIndexTemplate(): string {
-  return `import '../../style/index.less'
-import './index.less'
+export function getThemesIndexTemplate(category: 'cdk' | 'components' | 'pro'): string {
+  return `// style dependencies
+import '@idux/${category}/style/core/default'
 
-// style dependencies
+import './default.less'
 `
 }
 
@@ -59,7 +61,7 @@ const Ix${compName} = ${compName} as unknown as ${compName}Component
 
 export { Ix${compName} }
 
-export type { ${compName}Instance, ${compName}PublicProps as ${compName}Props } from './src/types'
+export type { ${compName}Instance, ${compName}Component, ${compName}PublicProps as ${compName}Props } from './src/types'
 `
 }
 
@@ -74,6 +76,16 @@ describe('${compName}', () => {
 
   renderWork<${compName}Props>(${compName},{
     props: { },
+  })
+
+  test('xxx work', async () => {
+    const wrapper = ${compName}Mount({ props: { xxx: 'Xxx' } })
+
+    expect(wrapper.classes()).toContain('ix-Xxx')
+
+    await wrapper.setProps({ xxx: 'Yyy' })
+
+    expect(wrapper.classes()).toContain('ix-Yyy')
   })
 })
 `
@@ -103,13 +115,11 @@ export function getDocsTemplate(moduleName: string, compName: string, type = '',
   const [enType, zhType] = type.split('_')
   return `---
 category: ${moduleName}
-type: ${isEn ? enType ?? '' : zhType}
+type: ${isEn ? enType || '' : zhType || ''}
 title: ${compName}
 subtitle:
 order: 0
 ---
-
-
 
 ## API
 
@@ -137,6 +147,12 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 | --- | --- | --- | --- |
 | - | - | - | - |
 `
+}
+
+export function getDesignTemplate(isEn = false): string {
+  return `## ${isEn ? 'Description' : '组件定义'}
+
+## ${isEn ? 'Usage scenarios' : '使用场景'}`
 }
 
 export function getDemoTemplate(): string {
