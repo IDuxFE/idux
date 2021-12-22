@@ -400,10 +400,11 @@ describe('Modal', () => {
   })
 
   describe('Events', () => {
-    test('onClose work', async () => {
+    test('onClose and onBeforeClose work', async () => {
       const onClose = jest.fn()
+      const onBeforeClose = jest.fn()
       const onUpdateVisible = jest.fn()
-      const wrapper = ModalMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = ModalMount({ props: { onClose, onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close()
       await flushPromises()
@@ -412,39 +413,39 @@ describe('Modal', () => {
       expect(onUpdateVisible).toBeCalledWith(false)
     })
 
-    test('onClose with result work', async () => {
-      const onClose = jest.fn().mockImplementation((evt: unknown) => evt === 'close')
+    test('onBeforeClose with result work', async () => {
+      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => evt === 'close')
       const onUpdateVisible = jest.fn()
-      const wrapper = ModalMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = ModalMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()
 
-      expect(onClose).toBeCalledWith(1)
+      expect(onBeforeClose).toBeCalledWith(1)
       expect(onUpdateVisible).not.toBeCalled()
 
       wrapper.vm.close('close')
       await flushPromises()
 
-      expect(onClose).toBeCalledWith('close')
+      expect(onBeforeClose).toBeCalledWith('close')
       expect(onUpdateVisible).toBeCalledWith(false)
     })
 
-    test('onClose with promise work', async () => {
-      const onClose = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
+    test('onBeforeClose with promise work', async () => {
+      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
       const onUpdateVisible = jest.fn()
-      const wrapper = ModalMount({ props: { onClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = ModalMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()
 
-      expect(onClose).toBeCalledWith(1)
+      expect(onBeforeClose).toBeCalledWith(1)
       expect(onUpdateVisible).not.toBeCalled()
 
       wrapper.vm.close('close')
       await flushPromises()
 
-      expect(onClose).toBeCalledWith('close')
+      expect(onBeforeClose).toBeCalledWith('close')
       expect(onUpdateVisible).toBeCalledWith(false)
     })
 
