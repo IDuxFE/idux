@@ -7,8 +7,8 @@ export const homeLocales = {
     github: 'GitHub',
     compProperties: [
       {
-        title: '全新 vue 3.x，无包袱更纯粹',
-        descs: ['全面拥抱 Composition Api，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
+        title: '全新 Vue 3.x，无包袱更纯粹',
+        descs: ['全面拥抱 Composition API，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
       },
       {
         title: '开箱即用，尽享高效',
@@ -53,7 +53,7 @@ export const homeLocales = {
     compProperties: [
       {
         title: '全新 vue 3.x，无包袱更纯粹',
-        descs: ['全面拥抱 Composition Api，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
+        descs: ['全面拥抱 Composition API，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
       },
       {
         title: '开箱即用，尽享高效',
