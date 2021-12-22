@@ -13,4 +13,10 @@ const IxCarousel = Carousel as unknown as CarouselComponent
 
 export { IxCarousel }
 
-export type { CarouselInstance, CarouselPublicProps as CarouselProps, DotPlacement, DotTrigger } from './src/types'
+export type {
+  CarouselInstance,
+  CarouselComponent,
+  CarouselPublicProps as CarouselProps,
+  DotPlacement,
+  DotTrigger,
+} from './src/types'

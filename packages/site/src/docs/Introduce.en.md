@@ -1,10 +1,14 @@
-# @idux
+---
+category: docs
+order: 0
+title: Introduction
+---
 
 `@idux` is a UI component library for middle and back-end products. It aims to provide an efficient and enjoyable experience for developers.
 
 Based on Vue 3 and TypeScript, the library is open source and free for any enterprise, organization, or individual to use under the MIT License.
 
-<div align="center">
+<div class="introduce-badges">
 
 [![Build Status](https://dev.azure.com/iduxfeteam/IduxFE/_apis/build/status/IduxFE.idux?branchName=main)](https://dev.azure.com/iduxfeteam/IduxFE/_build/latest?definitionId=2&branchName=main)
 [![Codecov](https://codecov.io/gh/IDuxFE/idux/branch/main/graph/badge.svg?token=PGAUXP06V3)](https://codecov.io/gh/IDuxFE/idux)
@@ -17,8 +21,6 @@ Based on Vue 3 and TypeScript, the library is open source and free for any enter
 [![GitHub license](https://img.shields.io/github/license/IDuxFE/idux)](https://github.com/IDuxFE/idux/blob/main/LICENSE)
 
 </div>
-
-English | [简体中文](README.zh.md)
 
 ## ✨ Features
 

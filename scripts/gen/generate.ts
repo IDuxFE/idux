@@ -193,6 +193,7 @@ class Generate {
       writeFile(`${this.dirPath}/src/${compName}.tsx`, tsxTemplate),
       writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
       writeFile(`${this.dirPath}/style/themes/default.less`, themesTemplate),
+      writeFile(`${this.dirPath}/style/themes/default.variable.less`, ''),
       writeFile(`${this.dirPath}/style/themes/default.ts`, themesIndexTemplate),
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
       writeFile(`${this.dirPath}/index.ts`, indexTemplate),
