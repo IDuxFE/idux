@@ -38,7 +38,8 @@ order: 0
 | `zIndex` | 设置对话框的 `z-index` | `number` | `1000` | ✅ | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
 | `onAfterClose` | 关闭后的回调 | `() => void` | - | - | - |
-| `onClose` | 点击蒙层或关闭图标的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 返回 `false` 的时候，将阻止关闭 |
+| `onBeforeClose` | 蒙层关闭前的回调 | `(evt?: Event \| unknown) => void \| boolean \| Promise<boolean>` | - | - | 返回 `false` 的时候，将阻止关闭 |
+| `onClose` | 点击蒙层或关闭图标的回调 | `(evt?: Event \| unknown) => void` | - | - | - |
 | `onCancel` | 点击取消按钮的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 执行完回调后，默认会关闭对话框，返回 `false` 的时候，将阻止关闭 |
 | `onOk` | 点击确认按钮的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 执行完回调后，默认会关闭对话框，返回 `false` 的时候，将阻止关闭 |
 
