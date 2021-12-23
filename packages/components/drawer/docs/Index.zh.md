@@ -32,7 +32,8 @@ order: 0
 | `zIndex` | 设置抽屉的 `z-index` | `number` | `1000` | ✅ | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
 | `onAfterClose` | 关闭后的回调 | `() => void` | - | - | - |
-| `onClose` | 点击蒙层或关闭图标的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 返回 `false` 的时候，将阻止关闭 |
+| `onBeforeClose` | 蒙层关闭前的回调 | `(evt?: Event \| unknown) => void \| boolean \| Promise<boolean>` | - | - | 返回 `false` 的时候，将阻止关闭 |
+| `onClose` | 点击蒙层或关闭图标的回调 | `(evt?: Event \| unknown) => void` | - | - | - |
 
 ```ts
 export interface DrawerButtonProps extends ButtonProps {

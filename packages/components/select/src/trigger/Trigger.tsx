@@ -38,11 +38,11 @@ export default defineComponent({
     const formContext = inject(FORM_TOKEN, null)
 
     const clearable = computed(() => {
-      return !isDisabled.value && props.clearable && selectedValue.value.length > 0
+      return !isDisabled.value && !props.readonly && props.clearable && selectedValue.value.length > 0
     })
 
     const searchable = computed(() => {
-      return !isDisabled.value && props.searchable
+      return !isDisabled.value && !props.readonly && props.searchable
     })
 
     const suffix = computed(() => {
@@ -54,13 +54,19 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { borderless = config.borderless, multiple, size = formContext?.size.value ?? config.size } = props
+      const {
+        borderless = config.borderless,
+        readonly,
+        multiple,
+        size = formContext?.size.value ?? config.size,
+      } = props
       const disabled = isDisabled.value
       const prefixCls = mergedPrefixCls.value
       return {
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: clearable.value,
+        [`${prefixCls}-readonly`]: readonly,
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-opened`]: overlayOpened.value,
@@ -74,7 +80,8 @@ export default defineComponent({
 
     const handleClick = () => {
       const currOpened = overlayOpened.value
-      if ((currOpened && searchable.value) || isDisabled.value) {
+      const notAllowedClick = isDisabled.value || props.readonly
+      if (notAllowedClick || (currOpened && searchable.value)) {
         return
       }
 
