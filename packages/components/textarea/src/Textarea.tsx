@@ -10,11 +10,11 @@ import type { FormAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
 import type { Ref, Slot, StyleValue } from 'vue'
 
-import { computed, defineComponent, normalizeClass } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { ɵUseCommonBindings } from '@idux/components/input'
+import { ɵUseInput } from '@idux/components/input'
 
 import { textareaProps } from './types'
 import { useAutoRows } from './useAutoRows'
@@ -33,23 +33,28 @@ export default defineComponent({
       accessor,
 
       isDisabled,
+      clearable,
       clearIcon,
-      clearHidden,
-      isClearable,
+      clearVisible,
       isFocused,
 
       focus,
       blur,
 
-      handlerInput,
-      handlerCompositionStart,
-      handlerCompositionEnd,
-      handlerFocus,
-      handlerBlur,
-      handlerClear,
-    } = ɵUseCommonBindings(props, config)
+      handleInput,
+      handleCompositionStart,
+      handleCompositionEnd,
+      handleFocus,
+      handleBlur,
+      handleClear,
+      syncValue,
+    } = ɵUseInput(props, config)
 
     expose({ focus, blur })
+
+    onMounted(() => {
+      syncValue()
+    })
 
     const classes = computed(() => {
       const { showCount = config.showCount, size = config.size } = props
@@ -89,20 +94,13 @@ export default defineComponent({
             style={textareaStyle.value}
             disabled={isDisabled.value}
             readonly={props.readonly}
-            onInput={handlerInput}
-            onCompositionstart={handlerCompositionStart}
-            onCompositionend={handlerCompositionEnd}
-            onFocus={handlerFocus}
-            onBlur={handlerBlur}
+            onInput={handleInput}
+            onCompositionstart={handleCompositionStart}
+            onCompositionend={handleCompositionEnd}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
-          {renderSuffix(
-            isClearable.value,
-            slots.clearIcon,
-            clearIcon.value,
-            clearHidden.value,
-            handlerClear,
-            prefixCls,
-          )}
+          {renderSuffix(clearable.value, slots.clearIcon, clearIcon.value, clearVisible.value, handleClear, prefixCls)}
         </span>
       )
     }
@@ -132,7 +130,7 @@ function renderSuffix(
   isClearable: boolean,
   clearIconSlot: Slot | undefined,
   clearIcon: string,
-  clearHidden: boolean,
+  clearVisible: boolean,
   onClear: (evt: MouseEvent) => void,
   prefixCls: string,
 ) {
@@ -141,7 +139,7 @@ function renderSuffix(
   }
 
   let classes = `${prefixCls}-suffix`
-  if (clearHidden) {
+  if (!clearVisible) {
     classes += ` ${prefixCls}-suffix-hidden`
   }
   const children = clearIconSlot?.({ onClear }) ?? <IxIcon name={clearIcon} onClick={onClear}></IxIcon>

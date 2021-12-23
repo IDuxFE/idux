@@ -16,4 +16,4 @@ export { IxInput }
 export type { InputInstance, InputComponent, InputPublicProps as InputProps } from './src/types'
 
 export { commonProps as ɵCommonProps } from './src/types'
-export { useCommonBindings as ɵUseCommonBindings } from './src/useCommonBindings'
+export { useInput as ɵUseInput } from './src/useInput'

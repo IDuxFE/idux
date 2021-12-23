@@ -4,8 +4,8 @@ export function getThemesTemplate(isPrivate: boolean): string {
 `
 }
 
-export function getLessTemplate(compName: string): string {
-  return `@import '../../style/mixins/reset.less';
+export function getLessTemplate(compName: string, isPrivate: boolean): string {
+  return `@import '${isPrivate ? '../../../' : '../../'}style/mixins/reset.less';
 
 .@{${compName}-prefix} {
   .reset-component();
