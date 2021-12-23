@@ -40,13 +40,22 @@ describe('Portal', () => {
     const container1 = document.body.querySelector('.target-container1')!
     expect(container1.querySelector('#content')).not.toBeNull()
 
-    const container = document.createElement('div')
-    container.classList.add('target-container2')
-    document.body.appendChild(container)
+    const container2 = document.createElement('div')
+    container2.classList.add('target-container2')
+    document.body.appendChild(container2)
 
-    await wrapper.setProps({ target: container })
+    await wrapper.setProps({ target: container2 })
     expect(container1.querySelector('#content')).toBeNull()
-    expect(container.querySelector('#content')).not.toBeNull()
+    expect(container2.querySelector('#content')).not.toBeNull()
+
+    const container3 = document.createElement('div')
+    container3.classList.add('target-container3')
+    document.body.appendChild(container3)
+
+    await wrapper.setProps({ target: '.target-container3' })
+    expect(container1.querySelector('#content')).toBeNull()
+    expect(container2.querySelector('#content')).toBeNull()
+    expect(container3.querySelector('#content')).not.toBeNull()
   })
 
   test('load work', async () => {

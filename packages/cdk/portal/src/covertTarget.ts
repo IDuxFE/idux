@@ -22,9 +22,13 @@ export function covertTarget(target: PortalTargetType): HTMLElement {
     return targetHashmap[temp]
   }
 
-  const element = document.createElement('div')
-  element.classList.add(temp)
-  document.body.appendChild(element)
+  let element = document.querySelector(temp)
+  if (!element) {
+    element = document.createElement('div')
+    element.classList.add(temp)
+    document.body.appendChild(element)
+  }
+
   targetHashmap[temp] = element
 
   return element
