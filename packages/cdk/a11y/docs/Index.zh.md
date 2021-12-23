@@ -37,6 +37,13 @@ export interface FocusMonitor {
    * @param options 可用于配置焦点行为的参数
    */
   focusVia(element: ElementType, origin: FocusOrigin, options?: FocusOptions): void
+
+    /**
+   * 让元素失去焦点.
+   *
+   * @param element 要失去焦点的元素.
+   */
+    blurVia: (element: ElementType) => void
 }
 
 /**

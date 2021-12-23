@@ -1,50 +1,61 @@
 @import '../../style/mixins/reset.less';
 
 .@{input-number-prefix} {
-  .reset-component();
 
-  display: inline-block;
-  width: @input-number-width-md;
-
-  & .@{idux-prefix}-input-wrapper {
-    border-radius: 0;
+  &-decrease:hover,
+  &-increase:hover {
+    color: @input-number-button-hover-color;
   }
 
-  & .@{idux-prefix}-input-inner {
-    text-align: center;
-  }
-
-  & .@{idux-prefix}-input-addon {
+  & .@{input-prefix}-addon {
     padding: 0 !important;
     background-color: @input-number-button-bg;
   }
 
-  &-sm {
+  & .@{input-prefix}-inner {
+    text-align: center;
+  }
+
+  &.@{input-prefix}-sm {
     width: @input-number-width-sm;
-    font-size: @input-number-font-size-sm;
+
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-sm;
+    }
   }
 
-  &-md {
+  &.@{input-prefix}-md {
     width: @input-number-width-md;
-    font-size: @input-number-font-size-md;
+
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-md;
+    }
   }
 
-  &-lg {
+  &.@{input-prefix}-lg {
     width: @input-number-width-lg;
-    font-size: @input-number-font-size-lg;
+
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-height-lg;
+    }
   }
 
-  &-disabled {
-    & .@{input-number-prefix}-decrease,
-    & .@{input-number-prefix}-increase {
-      cursor: not-allowed;
-      color: @input-number-disabled-color !important;
+  &.@{input-prefix}-disabled {
+    .@{input-prefix}-addon {
       background-color: @input-number-disabled-bg;
+    }
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      cursor: not-allowed;
+      color: @input-number-disabled-color;
     }
   }
 
   &-illegal {
-    & .@{idux-prefix}-input-inner {
+    .@{idux-prefix}-input-inner {
       color: @input-number-error;
     }
   }
@@ -55,31 +66,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  &&-sm {
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-sm;
-    }
-  }
-
-  &&-md {
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-md;
-    }
-  }
-
-  &&-lg {
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-lg;
-    }
-  }
-
-  & &-decrease:hover,
-  &-increase:hover {
-    color: @input-number-button-hover-color;
   }
 }

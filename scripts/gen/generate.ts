@@ -184,7 +184,7 @@ class Generate {
 
     const themesTemplate = getThemesTemplate(this.isPrivate)
     const themesIndexTemplate = getThemesIndexTemplate(category)
-    const lessTemplate = getLessTemplate(`${isPro ? 'pro-' : ''}${kebabCase(name)}`)
+    const lessTemplate = getLessTemplate(`${isPro ? 'pro-' : ''}${kebabCase(name)}`, this.isPrivate)
 
     const indexTemplate = getIndexTemplate(compName)
 

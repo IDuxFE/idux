@@ -19,6 +19,7 @@ export interface InputNumberBindings {
   displayValue: Ref<string>
   isIllegal: Ref<boolean>
   isDisabled: ComputedRef<boolean>
+  isFocused: Ref<boolean>
   nowValue: ComputedRef<number | undefined>
 
   handleKeyDown: (evt: KeyboardEvent) => void
@@ -164,13 +165,17 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     }
   }
 
+  const isFocused = ref(false)
   function handleFocus(evt: FocusEvent) {
+    isFocused.value = true
     callEmit(props.onFocus, evt)
   }
 
   function handleBlur(evt: FocusEvent) {
+    isFocused.value = false
     updateModelValueFromDisplayValue()
     callEmit(props.onBlur, evt)
+    accessor.markAsBlurred()
   }
 
   watch(
@@ -192,6 +197,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     displayValue,
     isIllegal,
     isDisabled,
+    isFocused,
     nowValue,
     handleKeyDown,
     handleDec,

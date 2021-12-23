@@ -47,41 +47,31 @@ describe('InputNumber', () => {
   })
 
   test('disabled work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onUpdateValue = jest.fn()
+    const wrapper = InputNumberMount({ props: { disabled: true, 'onUpdate:value': onUpdateValue } })
 
-    const wrapper = InputNumberMount({ props: { disabled: true, onFocus, onBlur } })
-    await wrapper.find('input').trigger('focus')
+    await wrapper.find('.ix-input-number-increase').trigger('click')
 
-    expect(wrapper.classes()).toContain('ix-input-number-disabled')
-    expect(onFocus).not.toBeCalled()
-
-    await wrapper.find('input').trigger('blur')
-
-    expect(onBlur).not.toBeCalled()
+    expect(onUpdateValue).not.toBeCalled()
 
     await wrapper.setProps({ disabled: false })
-    await wrapper.find('input').trigger('focus')
+    await wrapper.find('.ix-input-number-increase').trigger('click')
 
-    expect(wrapper.classes()).not.toContain('ix-input-number-disabled')
-    expect(onFocus).toBeCalled()
-
-    await wrapper.find('input').trigger('blur')
-
-    expect(onBlur).toBeCalled()
+    expect(onUpdateValue).toBeCalled()
   })
 
   test('readonly work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
-    const wrapper = InputNumberMount({ props: { readonly: true, onFocus, onBlur } })
-    await wrapper.find('input').trigger('focus')
+    const onUpdateValue = jest.fn()
+    const wrapper = InputNumberMount({ props: { readonly: true, 'onUpdate:value': onUpdateValue } })
 
-    expect(onFocus).toBeCalled()
+    await wrapper.find('.ix-input-number-increase').trigger('click')
 
-    await wrapper.find('input').trigger('blur')
+    expect(onUpdateValue).not.toBeCalled()
 
-    expect(onBlur).toBeCalled()
+    await wrapper.setProps({ readonly: false })
+    await wrapper.find('.ix-input-number-increase').trigger('click')
+
+    expect(onUpdateValue).toBeCalled()
   })
 
   test('step work', async () => {

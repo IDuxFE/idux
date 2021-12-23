@@ -125,6 +125,13 @@ export interface FocusMonitor {
    * @param options Options that can be used to configure the focus behavior.
    */
   focusVia(element: ElementType, origin: FocusOrigin, options?: FocusOptions): void
+
+  /**
+   * Blur the element.
+   *
+   * @param element Element to blur.
+   */
+  blurVia: (element: ElementType) => void
 }
 
 /** Monitors mouse and keyboard events to determine the cause of focus events. */
@@ -290,6 +297,26 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
       if (nativeElement && typeof nativeElement.focus === 'function') {
         nativeElement.focus(options)
       }
+    }
+  }
+
+  /**
+   * Blur the element.
+   *
+   * @param element Element to blur.
+   */
+  function blurVia(element: ElementType): void {
+    const nativeElement = convertElement(element)
+    if (!nativeElement) {
+      return
+    }
+
+    const focusedElement = _getDocument().activeElement
+    // If the element is focused already, calling `focus` again won't trigger the event listener
+    // which means that the focus classes won't be updated. If that's the case, update the classes
+    // directly without waiting for an event.
+    if (nativeElement === focusedElement && typeof nativeElement.blur === 'function') {
+      nativeElement.blur()
     }
   }
 
@@ -539,7 +566,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
 
   onScopeDispose(() => _elementInfo.forEach((_info, element) => stopMonitoring(element)))
 
-  return { monitor, stopMonitoring, focusVia }
+  return { monitor, stopMonitoring, focusVia, blurVia }
 }
 
 export const useSharedFocusMonitor = createSharedComposable(() => useFocusMonitor())
