@@ -28,7 +28,8 @@ export interface SelectOption {
   label?: string
   children?: SelectOption[]
   slots?: Slots | Record<string, (...args: any[]) => VNode>
-  value?: any
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  value?: string | number | object
 
   [key: string]: any
 }
@@ -37,7 +38,7 @@ export type SelectFilterFn = (searchValue: string, option: SelectOption) => bool
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
-  value: IxPropTypes.any,
+  value: IxPropTypes.oneOfType([String, Number, Object]),
   control: controlPropDef,
   open: IxPropTypes.bool,
 
@@ -67,9 +68,11 @@ export const selectProps = {
   virtual: IxPropTypes.bool.def(false),
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  'onUpdate:value': IxPropTypes.emit<(value: string | number | Object) => void>(),
   'onUpdate:open': IxPropTypes.emit<(open: boolean) => void>(),
-  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onChange: IxPropTypes.emit<(value: string | number | Object, oldValue: string | number | Object) => void>(),
   onClear: IxPropTypes.emit<(evt: Event) => void>(),
   onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
   onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
@@ -102,7 +105,7 @@ export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBin
 export const selectOptionProps = {
   disabled: IxPropTypes.bool.def(false),
   label: IxPropTypes.string,
-  value: IxPropTypes.any.isRequired,
+  value: IxPropTypes.oneOfType([String, Number, Object]).isRequired,
 }
 
 export type SelectOptionProps = IxInnerPropTypes<typeof selectOptionProps>
@@ -128,7 +131,7 @@ export const optionProps = {
   label: IxPropTypes.string,
   type: IxPropTypes.oneOf(['grouped', 'group']),
   rawOption: IxPropTypes.object<SelectOption>().isRequired,
-  value: IxPropTypes.any,
+  value: IxPropTypes.oneOfType([String, Number, Object]),
 }
 export type OptionProps = IxInnerPropTypes<typeof optionProps>
 
