@@ -21,6 +21,7 @@ import {
   getTestTemplate,
   getThemesIndexTemplate,
   getThemesTemplate,
+  getThemesVariableTemplate,
   getTsxTemplate,
   getTypesTemplate,
 } from './template'
@@ -149,20 +150,14 @@ class Generate {
     if (category === 'pro') {
       compName = `Pro${compName}`
     }
-    const docsZhTemplate = getDocsTemplate(category, compName, type)
-    const docsEnTemplate = getDocsTemplate(category, compName, type, true)
-    const designZhTemplate = getDesignTemplate()
-    const designEnTemplate = getDesignTemplate(true)
-    const demoTemplate = getDemoTemplate()
-    const demoVueTemplate = getDemoVueTemplate(compName)
 
     return Promise.all([
-      writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), docsZhTemplate),
-      writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), docsEnTemplate),
-      writeFile(resolve(this.dirPath, 'docs', 'Design.zh.md'), designZhTemplate),
-      writeFile(resolve(this.dirPath, 'docs', 'Design.en.md'), designEnTemplate),
-      writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), demoTemplate),
-      writeFile(resolve(this.dirPath, 'demo', 'Basic.vue'), demoVueTemplate),
+      writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), getDocsTemplate(category, compName, type)),
+      writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), getDocsTemplate(category, compName, type, true)),
+      writeFile(resolve(this.dirPath, 'docs', 'Design.zh.md'), getDesignTemplate()),
+      writeFile(resolve(this.dirPath, 'docs', 'Design.en.md'), getDesignTemplate(true)),
+      writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), getDemoTemplate()),
+      writeFile(resolve(this.dirPath, 'demo', 'Basic.vue'), getDemoVueTemplate(compName)),
     ])
   }
 
@@ -177,26 +172,17 @@ class Generate {
     const compName = isPro ? `Pro${upperFirstName}` : upperFirstName
     const lowerFirstCompName = isPro ? lowerFirst(compName) : camelCaseName
 
-    const testTemplate = getTestTemplate(compName)
-
-    const tsxTemplate = getTsxTemplate(compName, lowerFirstCompName)
-    const typesTemplate = getTypesTemplate(compName, lowerFirstCompName)
-
-    const themesTemplate = getThemesTemplate(this.isPrivate)
-    const themesIndexTemplate = getThemesIndexTemplate(category)
     const lessTemplate = getLessTemplate(`${isPro ? 'pro-' : ''}${kebabCase(name)}`, this.isPrivate)
 
-    const indexTemplate = getIndexTemplate(compName)
-
     const tasks = [
-      writeFile(`${this.dirPath}/__tests__/${lowerFirstCompName}.spec.ts`, testTemplate),
-      writeFile(`${this.dirPath}/src/${compName}.tsx`, tsxTemplate),
-      writeFile(`${this.dirPath}/src/types.ts`, typesTemplate),
-      writeFile(`${this.dirPath}/style/themes/default.less`, themesTemplate),
-      writeFile(`${this.dirPath}/style/themes/default.variable.less`, ''),
-      writeFile(`${this.dirPath}/style/themes/default.ts`, themesIndexTemplate),
+      writeFile(`${this.dirPath}/__tests__/${lowerFirstCompName}.spec.ts`, getTestTemplate(compName)),
+      writeFile(`${this.dirPath}/src/${compName}.tsx`, getTsxTemplate(compName, lowerFirstCompName)),
+      writeFile(`${this.dirPath}/src/types.ts`, getTypesTemplate(compName, lowerFirstCompName)),
+      writeFile(`${this.dirPath}/style/themes/default.less`, getThemesTemplate()),
+      writeFile(`${this.dirPath}/style/themes/default.variable.less`, getThemesVariableTemplate(this.isPrivate)),
+      writeFile(`${this.dirPath}/style/themes/default.ts`, getThemesIndexTemplate(category)),
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
-      writeFile(`${this.dirPath}/index.ts`, indexTemplate),
+      writeFile(`${this.dirPath}/index.ts`, getIndexTemplate(compName)),
     ]
 
     if (!this.isPrivate) {
@@ -231,15 +217,19 @@ class Generate {
   }
 
   private async generateCdk(name: string) {
-    const cdkTemplate = getCdkUseTemplate(upperFirst(camelCase(name)))
     const indexTemplate = `export * from './src/use${upperFirst(camelCase(name))}'\
     `
-    const testTemplate = getCdkTestTemplate(upperFirst(camelCase(name)), camelCase(name))
 
     return Promise.all([
-      writeFile(resolve(this.dirPath, 'src', `use${upperFirst(camelCase(name))}.ts`), cdkTemplate),
+      writeFile(
+        resolve(this.dirPath, 'src', `use${upperFirst(camelCase(name))}.ts`),
+        getCdkUseTemplate(upperFirst(camelCase(name))),
+      ),
       writeFile(resolve(this.dirPath, 'index.ts'), indexTemplate),
-      writeFile(resolve(this.dirPath, '__tests__', `${camelCase(name)}.spec.ts`), testTemplate),
+      writeFile(
+        resolve(this.dirPath, '__tests__', `${camelCase(name)}.spec.ts`),
+        getCdkTestTemplate(upperFirst(camelCase(name)), camelCase(name)),
+      ),
     ])
   }
 }
