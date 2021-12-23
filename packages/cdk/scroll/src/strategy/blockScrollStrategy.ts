@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { addClass, convertCssPixel, removeClass } from '@idux/cdk/utils'
+import { addClass, removeClass } from '@idux/cdk/utils'
 
-import { getScroll, setScroll } from '../utils'
+import { getScrollBarSize } from '../utils'
 import { ScrollStrategy } from './scrollStrategy'
 
 export interface BlockScrollStrategyOptions {
@@ -17,13 +17,8 @@ export interface BlockScrollStrategyOptions {
 
 const defaultClassName = 'cdk-scroll-block'
 
-interface CacheStrategy extends BlockScrollStrategyOptions {
-  uid: number
-  cacheScroll: { scrollTop: number; scrollLeft: number }
-  cacheStyle: { top: string; left: string }
-}
-
-let cacheStrategy: CacheStrategy[] = []
+const cacheStrategy = new Map<number, BlockScrollStrategyOptions>()
+const cacheStyle = new Map<HTMLElement, { width: string; overflow: string; overflowX: string; overflowY: string }>()
 
 let uuid = 0
 
@@ -44,58 +39,65 @@ export class BlockScrollStrategy implements ScrollStrategy {
 
   /** Blocks scroll while the attached overlay is open. */
   enable(): void {
-    const { uid, target, className } = this
-    if (cacheStrategy.some(item => item.uid === uid)) {
+    if (!this.isScrolled()) {
       return
     }
 
-    let cacheScroll: { scrollTop: number; scrollLeft: number }
-    let cacheStyle: { top: string; left: string }
-
-    const sameTargetTarget = cacheStrategy.find(item => item.target === target)
-    if (!sameTargetTarget) {
-      cacheScroll = getScroll(target)
-      cacheStyle = { top: target.style.top, left: target.style.left }
-    } else {
-      cacheScroll = sameTargetTarget.cacheScroll
-      cacheStyle = sameTargetTarget.cacheStyle
+    const { uid, target, className } = this
+    if (cacheStrategy.has(uid)) {
+      return
     }
-    cacheStrategy.push({ uid, target, className, cacheScroll, cacheStyle })
 
-    if (!target.classList.contains(className) && this.isScrolled()) {
-      target.style.top = convertCssPixel(-cacheScroll.scrollTop)
-      target.style.left = convertCssPixel(-cacheScroll.scrollLeft)
+    if (!Array.from(cacheStrategy.values()).some(item => item.target === target)) {
+      const scrollBarSize = getScrollBarSize(target === document.documentElement ? undefined : target)
+      cacheStyle.set(target, {
+        width: target.style.width,
+        overflow: target.style.overflow,
+        overflowX: target.style.overflowX,
+        overflowY: target.style.overflowY,
+      })
 
-      addClass(target, className)
+      target.style.width = scrollBarSize !== 0 ? `calc(100% - ${scrollBarSize}px)` : ''
+      target.style.overflow = 'hidden'
+      target.style.overflowX = 'hidden'
+      target.style.overflowY = 'hidden'
     }
+
+    this.addClassName()
+    cacheStrategy.set(uid, { target, className })
   }
 
   /** Unblocks scroll while the attached overlay is open. */
   disable(): void {
     const { uid, target, className } = this
-    const currStrategy = cacheStrategy.find(item => item.uid === uid)
+    const currStrategy = cacheStrategy.get(uid)
     if (!currStrategy) {
       return
     }
 
-    cacheStrategy = cacheStrategy.filter(item => item.uid !== uid)
+    cacheStrategy.delete(uid)
 
-    if (!cacheStrategy.some(item => item.target === target && item.className === className)) {
+    const strategyArray = Array.from(cacheStrategy.values())
+    if (!strategyArray.some(item => item.target === target && item.className === className)) {
       removeClass(target, className)
     }
 
-    if (!cacheStrategy.some(item => item.target === target)) {
-      target.style.top = currStrategy.cacheStyle.top
-      target.style.left = currStrategy.cacheStyle.left
+    if (!strategyArray.some(item => item.target === target)) {
+      const style = cacheStyle.get(target)!
 
-      setScroll(currStrategy.cacheScroll, target)
+      target.style.width = style.width
+      target.style.overflow = style.overflow
+      target.style.overflowX = style.overflowX
+      target.style.overflowY = style.overflowY
+
+      cacheStyle.delete(target)
     }
   }
 
   /** Re-lock scroll while the options change. */
   update(options: BlockScrollStrategyOptions): void {
     const { uid, target, className } = this
-    const currStrategy = cacheStrategy.find(item => item.uid === uid)
+    const currStrategy = cacheStrategy.get(uid)
 
     if (currStrategy) {
       this.disable()
@@ -114,6 +116,16 @@ export class BlockScrollStrategy implements ScrollStrategy {
   private isScrolled(): boolean {
     const { target } = this
 
-    return target.scrollHeight > target.clientHeight
+    return (
+      (target === document.documentElement && document.body.scrollWidth > window.innerWidth) ||
+      target.scrollHeight > target.clientHeight
+    )
+  }
+
+  private addClassName(): void {
+    const { target, className } = this
+    if (!target.classList.contains(className)) {
+      addClass(target, className)
+    }
   }
 }
