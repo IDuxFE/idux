@@ -119,11 +119,12 @@ function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
   const open = () => setVisible(true)
 
   const close = async (evt?: Event | unknown) => {
-    const result = await callEmit(props.onClose, evt)
+    const result = await callEmit(props.onBeforeClose, evt)
     if (result === false) {
       return
     }
     setVisible(false)
+    callEmit(props.onClose, evt)
   }
 
   const cancelLoading = ref(false)

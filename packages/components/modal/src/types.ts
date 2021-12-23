@@ -58,7 +58,8 @@ export const modalProps = {
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   onAfterOpen: IxPropTypes.emit<() => void>(),
   onAfterClose: IxPropTypes.emit<() => void>(),
-  onClose: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
+  onBeforeClose: IxPropTypes.emit<(evt?: Event | unknown) => void | boolean | Promise<boolean>>(),
+  onClose: IxPropTypes.emit<(evt?: Event | unknown) => void>(),
   onCancel: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
   onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
 }

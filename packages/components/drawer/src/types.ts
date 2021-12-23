@@ -51,9 +51,10 @@ export const drawerProps = {
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onClose: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
   onAfterOpen: IxPropTypes.emit<() => void>(),
   onAfterClose: IxPropTypes.emit<() => void>(),
+  onBeforeClose: IxPropTypes.emit<(evt?: Event | unknown) => void | boolean | Promise<boolean>>(),
+  onClose: IxPropTypes.emit<(evt?: Event | unknown) => void>(),
 }
 
 export type DrawerProps = IxInnerPropTypes<typeof drawerProps>
