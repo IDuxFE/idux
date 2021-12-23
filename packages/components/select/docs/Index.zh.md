@@ -90,7 +90,7 @@ export type SelectFilterFn = (searchValue: string, selectOption: SelectOptionPro
 | --- | --- | --- | --- | --- | --- |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `label` | 显示的文本 | `string \| #default` | - | - | - |
-| `value` | option 的值 | `any` | - | - | - |
+| `value` | option 的值 | `string \| number \| object` | - | - | - |
 
 ### IxSelectOptionGroup
 
