@@ -1,21 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
-    <title>logo/idux3 立体32</title>
-    <desc>Created with Sketch.</desc>
-    <g id="组件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="logo/idux3-立体32">
-            <g id="编组">
-                <rect id="矩形" x="0" y="0" width="32" height="32"></rect>
-                <g id="2版" transform="translate(4.000000, 2.281250)">
-                    <path d="M18.5,3.7535625 L24,6.9296875 L24,20.7890625 L12,27.71875 L0,20.7890625 L0,6.9296875 L5.5,3.7535625 L5.5,17.625 L12,21.375 L18.5,17.625 L18.5,3.7535625 Z" id="形状结合" fill="#1E71FF"></path>
-                    <path d="M5.5,3.7535625 L5.5,17.625 L12,21.375 L12,27.71875 L0,20.7890625 L0,6.9296875 L5.5,3.7535625 Z" id="形状结合" fill="#0E54CC"></path>
-                    <polygon id="多边形" fill="#1E71FF" points="12 0 15.5 2.0234375 15.5 6.0703125 12 8.09375 8.5 6.0703125 8.5 2.0234375"></polygon>
-                    <path d="M8.5,2.0234375 L12,4.046875 L12,8.09375 L8.5,6.0703125 L8.5,2.0234375 Z" id="形状结合" fill="#0E54CC"></path>
-                    <polygon id="多边形" fill="#30D59F" points="12 9.84375 15.5 11.8671875 15.5 15.9140625 12 17.9375 8.5 15.9140625 8.5 11.8671875"></polygon>
-                    <path d="M8.5,11.875 L12,13.8984375 L12,17.9453125 L8.5,15.921875 L8.5,11.875 Z" id="形状结合" fill="#1DA377"></path>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1640339368114"
+    class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4117"
+    xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64">
+    <defs>
+        <style type="text/css"></style>
+    </defs>
+    <path d="M720 193.12L896 294.72v443.52L512 960 128 738.24V294.72l176-101.6v443.872l208 120 208-120V193.12z"
+        fill="#1E71FF" p-id="4118"></path>
+    <path d="M304 193.12v443.872l208 120V960L128 738.24V294.72l176-101.6z" fill="#0E54CC" p-id="4119"></path>
+    <path d="M512 72.992l112 64.768v129.504L512 332l-112-64.736V137.76z" fill="#1E71FF" p-id="4120"></path>
+    <path d="M400 137.76L512 202.496v129.504l-112-64.736V137.76z" fill="#0E54CC" p-id="4121"></path>
+    <path d="M512 388l112 64.736v129.504L512 647.04l-112-64.768v-129.504z" fill="#30D59F" p-id="4122"></path>
+    <path d="M400 452.992L512 517.76v129.504l-112-64.768v-129.504z" fill="#1DA377" p-id="4123"></path>
 </svg>
