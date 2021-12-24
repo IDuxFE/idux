@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 6
 title:
   zh: 按钮尺寸
 ---
