@@ -9,10 +9,10 @@ order: 2
 
 使用 `useModal` 可以快速创建不同场景的对话框。
 
-注意：需要在父级组件中使用 `IxMessageProvider`。
+注意：需要在父级组件中使用 `IxModalProvider`。
 
 ## en
 
 Via `useModal` to quickly create modal dialog.
 
-Note: You need to use `IxMessageProvider` in the parent component.
+Note: You need to use `IxModalProvider` in the parent component.
