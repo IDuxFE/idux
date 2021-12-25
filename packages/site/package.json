@@ -12,6 +12,7 @@
   "dependencies": {
     "@idux/cdk": "^1.0.0-alpha.0",
     "@idux/components": "^1.0.0-alpha.0",
-    "@idux/pro": "^1.0.0-alpha.0"
+    "@idux/pro": "^1.0.0-alpha.0",
+    "codesandbox": "^2.2.3"
   }
 }
