@@ -4,7 +4,7 @@
   "command": {
     "publish": {
       "allowBranch": ["main", "next"],
-      "ignoreChanges": ["ignored-file", "*.md"],
+      "ignoreChanges": ["*.md", "**/__tests__/**", "**/demo/**", "**/docs/**"],
       "message": "docs(release): publish %s",
       "registry": "https://registry.npmjs.org"
     },
