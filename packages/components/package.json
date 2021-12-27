@@ -33,7 +33,6 @@
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^1.0.0-alpha.1",
-    "date-fns": "^2.26.0",
-    "dayjs": "^1.10.6"
+    "date-fns": "^2.26.0"
   }
 }
