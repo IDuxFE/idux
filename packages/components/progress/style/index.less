@@ -1,5 +1,7 @@
 @import '../../style/mixins/reset.less';
 
+@progress-animated-key: ~'@{progress-prefix}-animated-key';
+
 .@{progress-prefix} {
   .reset-component();
 
@@ -27,7 +29,7 @@
       content: '';
       border-radius: @progress-border-radius;
       background: @background-color-component;
-      animation: ~'@{progress-prefix}-active' @ease-in-out-quad 2.4s infinite;
+      animation: @progress-animated-key @ease-in-out-quad 2.4s infinite;
     }
   }
 
@@ -126,7 +128,7 @@
   }
 }
 
-@keyframes ~'@{progress-prefix}-active' {
+@keyframes @progress-animated-key {
 
   0% {
     width: 0;

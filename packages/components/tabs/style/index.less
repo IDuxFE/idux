@@ -5,11 +5,11 @@
 
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
+  grid-template:
     'start top end'
     'start bottom end';
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 
   &-pane-wrapper {
     grid-area: bottom;

@@ -1,4 +1,4 @@
-import marked from 'marked'
+import { marked } from 'marked'
 import { parseFragment, serialize } from 'parse5'
 import { highlight, languages } from 'prismjs'
 import loadLanguages from 'prismjs/components/'

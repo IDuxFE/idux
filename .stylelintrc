@@ -1,6 +1,9 @@
 {
+  "customSyntax": "postcss-less",
   "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
   "rules": {
+    "keyframes-name-pattern": null,
+    "at-rule-no-unknown": null,
     "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
     "rule-empty-line-before": ["always"],
     "no-invalid-double-slash-comments": null,
