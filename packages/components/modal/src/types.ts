@@ -43,6 +43,7 @@ export const modalProps = {
   icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   mask: IxPropTypes.bool,
   maskClosable: IxPropTypes.bool,
+  animatable: IxPropTypes.bool.def(true),
   offset: IxPropTypes.oneOfType([String, Number]).def(128),
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,

@@ -27,6 +27,7 @@ order: 0
 | `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
+| `animatable` | 是否开启弹窗动画效果 | `boolean` | `true` | - | - |
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
