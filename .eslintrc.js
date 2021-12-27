@@ -146,7 +146,7 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: '{@juggle/**,@popperjs/**,dayjs,lodash-es}',
+            pattern: '{@juggle/**,@popperjs/**,lodash-es}',
             group: 'external',
             position: 'before',
           },

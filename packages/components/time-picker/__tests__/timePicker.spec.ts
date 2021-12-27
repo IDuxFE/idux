@@ -1,7 +1,6 @@
 import { DOMWrapper, MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
-import dayjs from 'dayjs/esm'
 
 import IxTimePicker from '../src/TimePicker'
 import { TimePickerProps } from '../src/types'
@@ -61,7 +60,7 @@ describe.skip('TimePicker', () => {
     const onUpdateValue = jest.fn()
     const wrapper = TimePickerMount({
       props: {
-        value: dayjs().hour(1).minute(2).second(3).toDate(),
+        value: new Date().setHours(1, 2, 3),
         open: true,
         format: 'HH:mm:ss',
         'onUpdate:value': onUpdateValue,
@@ -74,7 +73,7 @@ describe.skip('TimePicker', () => {
     expect(getSelectedIndex(2)).toBe(3)
 
     // test value change
-    await wrapper.setProps({ value: dayjs().hour(10).minute(20).second(30).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(10, 20, 30) })
 
     expect(getSelectedIndex(0)).toBe(10)
     expect(getSelectedIndex(1)).toBe(20)
@@ -86,50 +85,50 @@ describe.skip('TimePicker', () => {
     await clickOption(2, 5)
 
     // 毫秒数对不上。
-    // expect(onUpdateValue).lastCalledWith(dayjs().hour(5).minute(5).second(5).toDate())
+    // expect(onUpdateValue).lastCalledWith(new Date().setHours(5, 5, 5))
 
     /** test ampm, 12 am */
-    await wrapper.setProps({ format: 'hh:mm:ss a', value: dayjs().hour(0).toDate() })
+    await wrapper.setProps({ format: 'hh:mm:ss a', value: new Date().setHours(0) })
 
     expect(getSelectedIndex(0)).toBe(0)
     expect(getSelectedIndex(3)).toBe(0)
 
     // 10 am
-    await wrapper.setProps({ value: dayjs().hour(10).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(10) })
 
     expect(getSelectedIndex(0)).toBe(10)
     expect(getSelectedIndex(3)).toBe(0)
 
     // 12 pm
-    await wrapper.setProps({ value: dayjs().hour(12).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(12) })
 
     expect(getSelectedIndex(0)).toBe(0)
     expect(getSelectedIndex(3)).toBe(1)
 
     // 3 pm
-    await wrapper.setProps({ value: dayjs().hour(15).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(15) })
     expect(getSelectedIndex(0)).toBe(3)
     expect(getSelectedIndex(3)).toBe(1)
 
     // 12 am
-    await wrapper.setProps({ value: dayjs().hour(24).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(24) })
     expect(getSelectedIndex(0)).toBe(0)
     expect(getSelectedIndex(3)).toBe(0)
 
     // test click change value when use ampm
-    await wrapper.setProps({ value: dayjs().hour(5).minute(5).second(5).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(5, 5, 5) })
 
     await clickOption(0, 0)
-    // expect(onUpdateValue).toBeCalledWith(dayjs().hour(0).minute(5).second(5).toDate())
+    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(0, 5, 5))
 
     await clickOption(3, 1)
-    // expect(onUpdateValue).toBeCalledWith(dayjs().hour(12).minute(5).second(5).toDate())
+    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(12, 5, 5))
 
     await clickOption(0, 5)
-    // expect(onUpdateValue).toBeCalledWith(dayjs().hour(17).minute(5).second(5).toDate())
+    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(17, 5, 5))
 
     await clickOption(3, 0)
-    // expect(onUpdateValue).toBeCalledWith(dayjs().hour(5).minute(5).second(5).toDate())
+    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(5, 5, 5))
 
     // test clear value
     // await wrapper.find('.ix-time-picker').trigger('mouseenter')
@@ -162,7 +161,7 @@ describe.skip('TimePicker', () => {
   test('format work', async () => {
     const wrapper = TimePickerMount({
       props: {
-        value: dayjs().hour(1).minute(1).second(1).toDate(),
+        value: new Date().setHours(1, 1, 1),
         open: true,
         format: 'hh:mm:ss',
       },
@@ -179,7 +178,7 @@ describe.skip('TimePicker', () => {
     const onUpdateValue = jest.fn()
     const wrapper = TimePickerMount({
       props: {
-        value: dayjs().hour(0).minute(0).second(0).toDate(),
+        value: new Date().setHours(0, 0, 0),
         open: true,
         disabled: true,
         'onUpdate:value': onUpdateValue,
@@ -197,7 +196,7 @@ describe.skip('TimePicker', () => {
       disabledHours: () => [1, 2, 3],
       disabledMinutes: (hour: number) => (hour === 5 ? [1, 2, 3] : []),
       disabledSeconds: (hour: number, minute: number) => (hour === 5 && minute === 5 ? [1, 2, 3] : []),
-      value: dayjs().hour(5).minute(5).second(0).toDate(),
+      value: new Date().setHours(5, 5, 0),
     })
 
     expect(getDisabledIndexs(0)).toEqual([1, 2, 3])
@@ -208,7 +207,7 @@ describe.skip('TimePicker', () => {
     await clickOption(0, 1)
     await clickOption(1, 1)
     await clickOption(2, 1)
-    // expect(onUpdateValue).toBeCalledWith(dayjs().hour(5).minute(5).second(0).toDate())
+    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(5, 5, 0))
 
     // test hiding disabled options
     await wrapper.setProps({ hideDisabledOptions: true })
@@ -311,7 +310,7 @@ describe.skip('TimePicker', () => {
     expect(getSelectedIndex(1)).toBe(0)
     expect(getSelectedIndex(2)).toBe(0)
 
-    await wrapper.setProps({ defaultOpenValue: dayjs().hour(12).minute(20).second(30).toDate() })
+    await wrapper.setProps({ defaultOpenValue: new Date().setHours(12, 20, 30) })
 
     expect(getSelectedIndex(0)).toBe(12)
     expect(getSelectedIndex(1)).toBe(20)
@@ -323,13 +322,13 @@ describe.skip('TimePicker', () => {
     expect(getSelectedIndex(1)).toBe(20)
     expect(getSelectedIndex(2)).toBe(30)
 
-    await wrapper.setProps({ defaultOpenValue: dayjs().hour(15).minute(20).second(30).toDate() })
+    await wrapper.setProps({ defaultOpenValue: new Date().setHours(15, 20, 30) })
 
     expect(getSelectedIndex(0)).toBe(3)
     expect(getSelectedIndex(1)).toBe(20)
     expect(getSelectedIndex(2)).toBe(30)
 
-    await wrapper.setProps({ value: dayjs().hour(5).minute(5).second(5).toDate() })
+    await wrapper.setProps({ value: new Date().setHours(5, 5, 5) })
 
     expect(getSelectedIndex(0)).toBe(5)
     expect(getSelectedIndex(1)).toBe(5)
