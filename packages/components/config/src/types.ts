@@ -21,7 +21,7 @@ import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
 import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
 import type { PaginationSize } from '@idux/components/pagination'
-import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/components/progress'
+import type { ProgressFormat, ProgressGradient, ProgressIcons, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
@@ -29,6 +29,7 @@ import type { StepperSize } from '@idux/components/stepper'
 import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { UploadIconType, UploadListType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { VNode } from 'vue'
 
 // Common
@@ -187,6 +188,22 @@ export interface TimePickerConfig {
 }
 
 export type TimeRangePickerConfig = TimePickerConfig
+
+export interface UploadConfig {
+  multiple: boolean
+  dragable: boolean
+  directory: boolean
+  name: string
+  withCredentials: boolean
+  requestMethod: UploadRequestMethod
+  strokeColor: ProgressGradient | string
+  customRequest?: (option: UploadRequestOption) => { abort: () => void }
+}
+
+export interface UploadListConfig {
+  listType: UploadListType
+  icon: Partial<Record<UploadIconType, string | boolean | VNode>>
+}
 
 // Data Display
 export interface AvatarConfig {
@@ -437,6 +454,8 @@ export interface GlobalConfig {
   treeSelect: TreeSelectConfig
   timePicker: TimePickerConfig
   timeRangePicker: TimeRangePickerConfig
+  upload: UploadConfig
+  uploadList: UploadListConfig
   // Data Display
   avatar: AvatarConfig
   badge: BadgeConfig

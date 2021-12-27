@@ -1,0 +1,21 @@
+<template>
+  <IxUpload v-model:files="files" action="/upload">
+    <IxButton>Upload</IxButton>
+    <template #list>
+      <IxUploadList type="text" :icon="icon" />
+    </template>
+  </IxUpload>
+</template>
+
+<script setup lang="ts">
+import { h, ref } from 'vue'
+
+import { IxIcon } from '@idux/components/icon'
+
+const files = ref([])
+const icon = ref({
+  file: true,
+  download: 'thunderbolt',
+  remove: h(IxIcon, { name: 'close' }),
+})
+</script>

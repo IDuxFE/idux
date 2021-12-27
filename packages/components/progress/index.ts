@@ -23,5 +23,6 @@ export type {
   ProgressIcons,
   ProgressGapPositionType,
   ProgressStatus,
+  ProgressGradient,
   ProgressStrokeLinecap,
 } from './src/types'

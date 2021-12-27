@@ -62,6 +62,7 @@ import { IxTooltip } from '@idux/components/tooltip'
 import { IxTree } from '@idux/components/tree'
 import { IxTreeSelect } from '@idux/components/tree-select'
 import { IxTypography } from '@idux/components/typography'
+import { IxUpload, IxUploadList } from '@idux/components/upload'
 import { version } from '@idux/components/version'
 
 const components = [
@@ -150,6 +151,8 @@ const components = [
   IxTooltip,
   IxTree,
   IxTreeSelect,
+  IxUpload,
+  IxUploadList,
 ]
 
 const directives: Record<string, Directive> = {

@@ -89,6 +89,15 @@ const zhCN: Locale = {
     separator: '至',
     placeholder: ['起始时间', '结束时间'],
   },
+  upload: {
+    uploading: '正在上传...',
+    error: '上传失败',
+    cancel: '取消上传',
+    preview: '预览文件',
+    remove: '删除文件',
+    retry: '重新上传',
+    download: '下载文件',
+  },
 }
 
 export default zhCN

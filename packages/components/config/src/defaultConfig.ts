@@ -56,6 +56,8 @@ import type {
   TooltipConfig,
   TreeConfig,
   TreeSelectConfig,
+  UploadConfig,
+  UploadListConfig,
 } from './types'
 
 import { numFormatter } from './numFormatter'
@@ -198,6 +200,25 @@ const treeSelect: TreeSelectConfig = {
   childrenKey: 'children',
   labelKey: 'label',
   nodeKey: 'key',
+}
+
+const upload: UploadConfig = {
+  multiple: false,
+  dragable: false,
+  directory: false,
+  name: 'file',
+  withCredentials: false,
+  requestMethod: 'post',
+  strokeColor: '#20CC94',
+}
+
+const uploadList: UploadListConfig = {
+  listType: 'text',
+  icon: {
+    file: true,
+    remove: true,
+    retry: true,
+  },
 }
 
 // --------------------- Data Display ---------------------
@@ -410,6 +431,8 @@ export const defaultConfig: GlobalConfig = {
   timePicker,
   timeRangePicker,
   treeSelect,
+  upload,
+  uploadList,
   // Data Display
   avatar,
   badge,
