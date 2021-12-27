@@ -18,7 +18,7 @@ import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
   setup() {
-    const { scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(TABLE_TOKEN)!
+    const { mergedPrefixCls, scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(TABLE_TOKEN)!
 
     const isShow = ref(false)
     const isActive = ref(false)
@@ -54,9 +54,10 @@ export default defineComponent({
     })
 
     const scrollBarClasses = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-table-sticky-scroll-bar': true,
-        'ix-table-sticky-scroll-bar-active': isActive.value,
+        [`${prefixCls}-sticky-scroll-bar`]: true,
+        [`${prefixCls}-sticky-scroll-bar-active`]: isActive.value,
       }
     })
 
@@ -154,7 +155,7 @@ export default defineComponent({
       }
 
       return (
-        <div class="ix-table-sticky-scroll" style={style.value}>
+        <div class={`${mergedPrefixCls.value}-sticky-scroll`} style={style.value}>
           <div class={scrollBarClasses.value} style={scrollBarStyle.value} onMousedown={handleMouseDown} />
         </div>
       )

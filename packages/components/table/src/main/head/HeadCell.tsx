@@ -6,7 +6,7 @@
  */
 
 import type { TableColumnMergedExtra } from '../../composables/useColumns'
-import type { TableColumnTitleFn } from '../../types'
+import type { TableColumnFilterable, TableColumnSortable, TableColumnTitleFn } from '../../types'
 import type { Slots, StyleValue, VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -18,8 +18,9 @@ import { convertCssPixel } from '@idux/cdk/utils'
 import { TABLE_TOKEN } from '../../token'
 import { tableHeadCellProps } from '../../types'
 import { getColTitle } from '../../utils'
+import HeadCellFilterableTrigger from '../head-trigger/HeadCellFilterableTrigger'
+import HeadCellSortableTrigger from '../head-trigger/HeadCellSortableTrigger'
 import HeadCellSelectable from './HeadCellSelectable'
-import HeadCellSortable from './HeadCellSortable'
 
 type HeadColumn = TableColumnMergedExtra & {
   type: 'selectable' | 'expandable' | 'scroll-bar' | undefined
@@ -29,11 +30,18 @@ type HeadColumn = TableColumnMergedExtra & {
 export default defineComponent({
   props: tableHeadCellProps,
   setup(props) {
-    const { slots, fixedColumnKeys, columnOffsetsWithScrollBar, isSticky, activeSortable, handleSort, headColTag } =
-      inject(TABLE_TOKEN)!
-    const key = computed(() => props.column.key)
-    const isSorted = computed(() => activeSortable.key === key.value && !!activeSortable.orderBy)
-    const activeSortOrderBy = computed(() => (isSorted.value ? activeSortable.orderBy : undefined))
+    const {
+      mergedPrefixCls,
+      slots,
+      fixedColumnKeys,
+      columnOffsetsWithScrollBar,
+      isSticky,
+      handleSort,
+      headColTag,
+      activeSortable,
+      filterables,
+    } = inject(TABLE_TOKEN)!
+
     const onClick = () => {
       const { key, sortable } = props.column
       if (sortable) {
@@ -45,11 +53,10 @@ export default defineComponent({
       const { type, align, hasChildren, fixed, key, colStart, colEnd, sortable, titleColSpan, titleRowSpan } =
         props.column as HeadColumn
 
-      const prefixCls = 'ix-table'
+      const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean | undefined> = {
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-sortable`]: !!sortable,
-        [`${prefixCls}-cell-sorted`]: isSorted.value,
         [`${prefixCls}-align-${align}`]: !hasChildren && !!align,
         [`${prefixCls}-align-center`]: hasChildren,
       }
@@ -82,34 +89,46 @@ export default defineComponent({
       }
     })
 
+    const sortable = computed(() => props.column.sortable)
+    const activeSortOrderBy = computed(() =>
+      activeSortable.key === props.column.key && !!activeSortable.orderBy ? activeSortable.orderBy : undefined,
+    )
+    const filterable = computed(() => filterables.value.find(f => f.key === props.column.key))
+
     return () => {
       const { type, additional } = props.column as HeadColumn
+      const prefixCls = mergedPrefixCls.value
+
       let _title: string | undefined
       let children: VNodeTypes | undefined
-      if (type === 'expandable' || type === 'scroll-bar') {
+      let iconTriggers: (VNodeTypes | null)[] | undefined
+      if (type === 'scroll-bar') {
         children = undefined
       } else if (type === 'selectable') {
         children = <HeadCellSelectable></HeadCellSelectable>
       } else {
-        const { title, customTitle, ellipsis, sortable } = props.column as HeadColumn
+        const { title, customTitle, ellipsis } = props.column as HeadColumn
         children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
-        if (ellipsis || sortable) {
-          children = <span class="ix-table-cell-title">{children}</span>
-          if (sortable) {
-            children = (
-              <HeadCellSortable activeOrderBy={activeSortOrderBy.value} sortable={sortable}>
-                {children}
-              </HeadCellSortable>
-            )
-          }
+
+        iconTriggers = [
+          renderSortableTrigger(sortable.value, activeSortOrderBy.value),
+          renderFilterableTrigger(filterable.value),
+        ]
+
+        if (ellipsis || iconTriggers.some(trigger => !!trigger)) {
+          children = <span class={`${prefixCls}-cell-title`}>{children}</span>
         }
       }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const HeadColTag = headColTag.value as any
       return (
         <HeadColTag {...cellProps.value} title={_title} {...additional} onClick={onClick}>
-          {children}
+          <span class={`${prefixCls}-head-cell-wrapper`}>
+            {children}
+            <span class={`${prefixCls}-head-icon-triggers`}>{iconTriggers}</span>
+          </span>
         </HeadColTag>
       )
     }
@@ -124,4 +143,23 @@ function renderChildren(title: string | undefined, customTitle: string | TableCo
     children = slots[customTitle]!({ title })
   }
   return children
+}
+
+function renderSortableTrigger(
+  sortable: TableColumnSortable | undefined,
+  activeSortOrderBy: 'descend' | 'ascend' | undefined,
+): VNodeTypes | null {
+  if (!sortable) {
+    return null
+  }
+
+  return <HeadCellSortableTrigger activeOrderBy={activeSortOrderBy} sortable={sortable} />
+}
+
+function renderFilterableTrigger(filterable: TableColumnFilterable | undefined): VNodeTypes | null {
+  if (!filterable) {
+    return null
+  }
+
+  return <HeadCellFilterableTrigger filterable={filterable} />
 }

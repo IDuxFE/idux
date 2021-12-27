@@ -2,7 +2,7 @@
 title:
   zh: 行/列合并
   en: Merge row and column
-order: 60
+order: 10
 ---
 
 ## zh

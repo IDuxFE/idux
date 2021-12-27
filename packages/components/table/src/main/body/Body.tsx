@@ -49,7 +49,7 @@ export default defineComponent({
         } else {
           data.forEach((item, rowIndex) => {
             const { expanded, level, record, rowKey } = item
-            const rowProps = { key: rowKey, expanded, level, record, rowIndex, rowKey }
+            const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex, rowKey }
             children.push(<BodyRow {...rowProps} />)
           })
         }

@@ -7,9 +7,10 @@
 
 import type { Slots, VNode } from 'vue'
 
-export function renderFooter(slots: Slots): VNode | null {
+export function renderFooter(slots: Slots, prefixCls: string): VNode | null {
   if (!slots.footer) {
     return null
   }
-  return <div class="ix-table-footer">{slots.footer()}</div>
+
+  return <div class={`${prefixCls}-footer`}>{slots.footer()}</div>
 }

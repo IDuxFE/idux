@@ -36,4 +36,6 @@ export type {
   TableColumnFixed,
   TableColumnSortable,
   TableColumnSortOrder,
+  TableColumnFilter,
+  TableColumnFilterable,
 } from './src/types'

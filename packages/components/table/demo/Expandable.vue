@@ -66,13 +66,13 @@ const data: Data[] = [
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park',
+    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
   },
   {
     key: 4,
     name: 'Disabled User',
     age: 99,
     address: 'Sidney No. 1 Lake Park',
-    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
   },
 ]
 </script>

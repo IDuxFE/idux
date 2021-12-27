@@ -1,8 +1,12 @@
-.table-size(@size, @padding-vertical, @padding-horizontal, @font-size) {
+.table-size(@size, @head-height, @padding-vertical, @padding-horizontal, @font-size) {
   .@{table-prefix}-@{size} {
     font-size: @font-size;
 
-    th,
+    th {
+      padding: 0 @padding-horizontal;
+      height: @head-height;
+    }
+
     td {
       padding: @padding-vertical @padding-horizontal;
     }
@@ -11,6 +15,6 @@
   }
 }
 
-.table-size(~'lg', @table-padding-vertical-lg, @table-padding-horizontal-lg, @table-font-size-lg);
-.table-size(~'md', @table-padding-vertical-md, @table-padding-horizontal-md, @table-font-size-md);
-.table-size(~'sm', @table-padding-vertical-sm, @table-padding-horizontal-sm, @table-font-size-sm);
+.table-size(~'lg', @table-head-height-lg, @table-padding-vertical-lg, @table-padding-horizontal-lg, @table-font-size-lg);
+.table-size(~'md', @table-head-height-md, @table-padding-vertical-md, @table-padding-horizontal-md, @table-font-size-md);
+.table-size(~'sm', @table-head-height-sm, @table-padding-vertical-sm, @table-padding-horizontal-sm, @table-font-size-sm);

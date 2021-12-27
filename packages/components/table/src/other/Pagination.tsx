@@ -16,6 +16,7 @@ import { IxPagination } from '@idux/components/pagination'
 export function renderPagination(
   mergedPagination: TablePagination | null,
   filteredData: MergedData[],
+  prefixCls: string,
 ): [VNode | null, VNode | null] {
   let top: VNode | null = null
   let bottom: VNode | null = null
@@ -23,7 +24,7 @@ export function renderPagination(
   if (mergedPagination !== null) {
     const { position } = mergedPagination
     const [vertical, horizontal] = kebabCase(position).split('-')
-    const className = `ix-table-pagination ix-table-pagination-${horizontal}`
+    const className = `${prefixCls}-pagination ${prefixCls}-pagination-${horizontal}`
 
     const node = <IxPagination class={className} total={filteredData.length} {...mergedPagination} />
 
