@@ -12,26 +12,39 @@
 
     // === input ===
     .@{idux-prefix}-input:not(.@{idux-prefix}-input-disabled) {
-      .@{idux-prefix}-input-wrapper {
+      border-color: @form-item-invalid-color;
+
+      &:hover {
+        border-color: @form-item-invalid-color;
+      }
+
+      .@{idux-prefix}-input-wrapper,
+      .@{idux-prefix}-input-inner {
         border-color: @form-item-invalid-color;
 
         &:hover {
           border-color: @form-item-invalid-color;
         }
+      }
 
-        .@{idux-prefix}-input-suffix,
-        .@{idux-prefix}-input-prefix {
+      .@{idux-prefix}-input-suffix,
+      .@{idux-prefix}-input-prefix {
+        color: @form-item-invalid-color;
+
+        &:hover {
           color: @form-item-invalid-color;
-
-          &:hover {
-            color: @form-item-invalid-color;
-          }
         }
       }
 
-      &.@{idux-prefix}-input-focused .@{idux-prefix}-input-wrapper {
+      &:focus,
+      &.@{idux-prefix}-input-focused {
         border-color: @form-item-invalid-color;
         box-shadow: @form-item-invalid-box-shadow;
+
+        .@{idux-prefix}-input-wrapper,
+        .@{idux-prefix}-input-inner {
+          box-shadow: none;
+        }
       }
 
       .@{idux-prefix}-input-addon {
@@ -139,7 +152,7 @@
     }
 
     // input
-    .@{idux-prefix}-input-wrapper {
+    .@{idux-prefix}-input {
       padding-right: 24px;
 
       .@{idux-prefix}-input-suffix {
