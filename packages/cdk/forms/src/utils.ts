@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ControlPathType } from './controls'
-import type { InjectionKey, Ref, WatchStopHandle } from 'vue'
+import type { InjectionKey, Ref, ShallowRef, WatchStopHandle } from 'vue'
 
 import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRaw, toRef, watch } from 'vue'
 
@@ -24,9 +24,9 @@ export const controlPropDef = IxPropTypes.oneOfType<string | number | AbstractCo
   IxPropTypes.object<AbstractControl>(),
 ])
 
-export const controlToken: InjectionKey<Ref<AbstractControl>> = Symbol('controlToken')
+export const controlToken: InjectionKey<ShallowRef<AbstractControl>> = Symbol('controlToken')
 
-export function useValueControl<T = any>(controlKey = 'control'): Ref<AbstractControl<T> | undefined> {
+export function useValueControl<T = any>(controlKey = 'control'): ShallowRef<AbstractControl<T> | undefined> {
   const { props } = getCurrentInstance()!
   const parentControl = inject(controlToken, shallowRef<AbstractControl>())
   const control = shallowRef<AbstractControl>()

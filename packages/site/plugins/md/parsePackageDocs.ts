@@ -24,9 +24,12 @@ export function parsePackageDocs(id: string, raw: string): string {
   const [, language] = filename.split('.')
   const designDocPath = id.replace(/Index/g, 'Design')
   const designRaw = existsSync(designDocPath) ? readFileSync(designDocPath, { encoding: 'utf-8' }) : ''
+  const overviewDocPath = id.replace(/Index/g, 'Overview')
+  const overviewRaw = existsSync(overviewDocPath) ? readFileSync(overviewDocPath, { encoding: 'utf-8' }) : ''
 
   const { __content: indexContent, ...indexMeta } = loadFront(raw)
   const { __content: designContent, ...designMeta } = loadFront(designRaw)
+  const { __content: overviewContent, ...overviewMeta } = loadFront(overviewRaw)
 
   const title = generateTitle({ ...(indexMeta as Meta), path: docsPath })
   const { description, api } = parseContent(indexContent)
@@ -35,11 +38,13 @@ export function parsePackageDocs(id: string, raw: string): string {
   const docsTemplate = wrapperDocsTemplate(
     generateToc(demoMetas, language, moduleName, componentName),
     generateDocsToc(designMeta, designContent),
+    generateDocsToc(overviewMeta, overviewContent),
     generateHeader(title, description),
     generateExample(true, demoMetas),
     api,
     language,
     nonBindAble(marked(designContent)),
+    nonBindAble(marked(overviewContent)),
   )
 
   const docsScript = getComponentScript(
@@ -119,26 +124,66 @@ const locale: Record<string, Record<string, string>> = {
   hideDev: { zh: '隐藏开发专用演示', en: 'Collapse development examples' },
   develop: { zh: '开发指南', en: 'Develop Guide' },
   design: { zh: '设计指南', en: 'Design Guide' },
+  overview: { zh: '概要说明', en: 'Overview' },
 }
 
 function wrapperDocsTemplate(
   developToc: string,
   designToc: string,
+  overviewToc: string,
   header: string,
   examples: string,
   api: string,
   language: string,
   designContent: string,
+  overviewContent: string,
 ): string {
+  const content = `<h2 class="component-develop-header">
+  ${locale.examples[language]}
+  <span class="component-develop-header-tools">
+    <IxTooltip :title="showDevDemo? '${locale.hideDev[language]}' : '${locale.showDev[language]}'">
+      <IxIcon :name="showDevDemo? 'bug-filled' : 'bug'" @click="showDevDemo = !showDevDemo" />
+    </IxTooltip>
+  </span>
+</h2>
+<section class="component-develop-examples">${examples}</section>
+<section class="markdown component-develop-api">${api}</section>
+`
+
+  if (!designContent && !overviewContent) {
+    return `<template>
+  <article class="component-wrapper">
+    ${header}
+    ${developToc}
+    <br />
+    ${content}
+  </article>
+</template>
+`
+  }
+
+  const designTab = designContent
+    ? `<IxTab key="design" title="${locale.design[language]}">
+ <section class="markdown">${designContent}</section>
+</IxTab>`
+    : ''
+  const overviewTab = overviewContent
+    ? `<IxTab key="overview" title="${locale.overview[language]}">
+  <section class="markdown">${overviewContent}</section>
+</IxTab>`
+    : ''
   return `
 <template>
   <article class="component-wrapper">
     ${header}
-    <template v-if="selectedTab === 'develop' ">
+    <template v-if="selectedTab === 'develop'">
       ${developToc}
     </template>
-    <template v-else>
+    <template v-else-if="selectedTab === 'design'">
       ${designToc}
+    </template>
+    <template v-else>
+      ${overviewToc}
     </template>
     <IxTabs v-model:selectedKey="selectedTab" type="line" class="component-tabs">
       <IxTab key="develop" title="${locale.develop[language]}">
@@ -153,9 +198,8 @@ function wrapperDocsTemplate(
         <section class="component-develop-examples">${examples}</section>
         <section class="markdown component-develop-api">${api}</section>
       </IxTab>
-      <IxTab key="design" title="${locale.design[language]}">
-        <section class="markdown">${designContent}</section>
-      </IxTab>
+      ${designTab}
+      ${overviewTab}
     </IxTabs>
   </article>
 </template>

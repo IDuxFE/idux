@@ -37,10 +37,10 @@ export interface AsyncValidatorFn {
 export type TriggerType = 'change' | 'blur' | 'submit'
 
 export interface ValidatorOptions {
+  disabled?: boolean
+  trigger?: TriggerType
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
-  trigger?: TriggerType
-  disabled?: boolean
 }
 
 export type ValidateStatus = 'valid' | 'invalid' | 'validating'

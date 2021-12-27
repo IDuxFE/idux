@@ -2,7 +2,6 @@
 category: cdk
 title: Breakpoint
 subtitle: 断点
-single: true
 ---
 
 ## API
@@ -14,15 +13,6 @@ single: true
 ```ts
 export function useBreakpoints(): Record<BreakpointKey, boolean>
 export function useBreakpoints<T extends string>(value: Record<T, string>): Record<T, boolean>
-```
-
-可以通过 `BREAKPOINTS_TOKEN` 来修改默认断点。
-
-```ts
-import { provide } from 'vue'
-import { BREAKPOINTS_TOKEN } from '@idux/cdk/breakpoint'
-
-provide(BREAKPOINTS_TOKEN, { .../* your breakpoints*/ })
 ```
 
 ### useSharedBreakpoints

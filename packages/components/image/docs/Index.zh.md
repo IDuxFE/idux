@@ -3,7 +3,6 @@ category: components
 type: 数据展示
 title: Image
 subtitle: 图片
-cover: 可预览的图片
 ---
 
 ## API

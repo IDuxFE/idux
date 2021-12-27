@@ -1,21 +1,21 @@
 <template>
-  <IxButton @click="onCopy">Copy</IxButton>
+  <IxSpace>
+    <IxInput v-model:value="text" style="width: 200px"></IxInput>
+    <IxButton @click="onCopy">Copy</IxButton>
+  </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import { useClipboard } from '@idux/cdk/clipboard'
 
-export default defineComponent({
-  setup() {
-    const { copy } = useClipboard()
-    const onCopy = () => {
-      copy('Copy Text').then(success => {
-        console.log('onCopy', success)
-      })
-    }
-    return { onCopy }
-  },
-})
+const text = ref('')
+
+const { copy } = useClipboard()
+const onCopy = () => {
+  copy(text.value).then(success => {
+    console.log('onCopy', success)
+  })
+}
 </script>

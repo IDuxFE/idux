@@ -1,10 +1,14 @@
 ---
 category: cdk
-type: 
 title: Clipboard
 subtitle: 剪贴板
-cover: 
 ---
+
+`@idux/cdk/a11y` 对系统剪贴板进行了简单封装，更加方便使用。
+
+## 使用场景
+
+对于简单的文本可以直接复制，但是对于较长的文本，浏览器需要时间来填充中间 `textarea` 元素并复制内容。在这种情况下，直接调用可能会失败，因此可以通过传入 `attempts` 进行多次尝试。
 
 ## API
 

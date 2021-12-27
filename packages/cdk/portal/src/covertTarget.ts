@@ -22,7 +22,7 @@ export function covertTarget(target: PortalTargetType): HTMLElement {
     return targetHashmap[temp]
   }
 
-  let element = document.querySelector(temp)
+  let element = document.querySelector<HTMLElement>(temp)
   if (!element) {
     element = document.createElement('div')
     element.classList.add(temp)
