@@ -6,6 +6,7 @@
  */
 
 import type { SpaceProps } from './types'
+import type { FormSize } from '@idux/components/form'
 import type { ComputedRef, Slots, VNode } from 'vue'
 
 import { computed, defineComponent, normalizeClass } from 'vue'
@@ -17,6 +18,12 @@ import { useGlobalConfig } from '@idux/components/config'
 import { spaceProps } from './types'
 
 const flexGapSupported = supportsFlexGap()
+
+const defaultSizeMap = {
+  sm: '8px',
+  md: '16px',
+  lg: '24px',
+} as const
 
 export default defineComponent({
   name: 'IxSpace',
@@ -36,17 +43,18 @@ export default defineComponent({
     })
 
     const mergedGaps = computed(() => {
-      const { gap = config.gap } = props
-      const gaps = Array.isArray(gap) ? gap : [gap, gap]
-      return gaps.map(gap => convertCssPixel(gap))
+      const { size = config.size } = props
+      const sizes = Array.isArray(size) ? size : [size, size]
+      return sizes.map(size => defaultSizeMap[size as FormSize] || convertCssPixel(size))
     })
 
     const classes = computed(() => {
-      const { direction } = props
+      const { block, direction } = props
       const align = mergedAlign.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-block`]: block && direction === 'vertical',
         [`${prefixCls}-align-${align}`]: align,
         [`${prefixCls}-${direction}`]: true,
         [`${prefixCls}-wrap`]: wrap.value,

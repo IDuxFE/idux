@@ -19,4 +19,5 @@ export type {
   SpacePublicProps as SpaceProps,
   SpaceAlign,
   SpaceDirection,
+  SpaceSize,
 } from './src/types'

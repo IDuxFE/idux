@@ -6,17 +6,25 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
 export type SpaceDirection = 'vertical' | 'horizontal'
+export type SpaceSize = 'sm' | 'md' | 'lg'
 
 export const spaceProps = {
   align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']),
+  block: IxPropTypes.bool,
   direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']).def('horizontal'),
-  gap: IxPropTypes.oneOfType([Number, String, IxPropTypes.arrayOf(Number)]),
+  size: IxPropTypes.oneOfType([
+    Number,
+    String,
+    IxPropTypes.oneOf([Number, String]),
+    IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
+  ]),
   split: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   wrap: IxPropTypes.bool,
 }

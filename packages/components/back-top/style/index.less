@@ -10,13 +10,19 @@
   background-color: @back-top-background-color;
   width: @back-top-width;
   height: @back-top-height;
-  color: @color-white;
+  color: @back-top-color;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: @back-top-font-size;
   border-radius: @back-top-border-radius;
+  box-shadow: @back-top-box-shadow;
   cursor: pointer;
+
+  &:hover {
+    background-color: @back-top-background-hover-color;
+    color: @back-top-hover-color;
+  }
 }
 
 @media screen and (min-width: @screen-lg) and (max-width: @screen-lg-max) {
