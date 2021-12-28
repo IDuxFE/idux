@@ -65,10 +65,7 @@ describe('Result', () => {
       template: `
       <IxResult>
         <template>
-          <ul>
-            <li>1</li>
-            <li>2</li>
-          </ul>
+          <span>default slot</span>
         </template>
         <template #title>${title}</template>
         <template #subtitle>${subtitle}</template>
@@ -82,7 +79,7 @@ describe('Result', () => {
     expect(wrapper.find('.ix-result-subtitle').exists()).toBeTruthy()
     expect(wrapper.find('.ix-result-extra').exists()).toBeTruthy()
 
-    expect(wrapper.get('.ix-result-content').get('ul').html()).toEqual('<ul><li>1</li><li>2</li></ul>')
+    expect(wrapper.get('.ix-result-content').text()).toEqual('default slot')
     expect(wrapper.get('.ix-result-title').text()).toEqual(title)
     expect(wrapper.get('.ix-result-subtitle').text()).toEqual(subtitle)
     expect(wrapper.get('.ix-result-extra').text()).toEqual(extra)
