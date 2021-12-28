@@ -43,7 +43,7 @@ export interface FocusMonitor {
    *
    * @param element 要失去焦点的元素.
    */
-    blurVia: (element: ElementType) => void
+  blurVia: (element: ElementType) => void
 }
 
 /**

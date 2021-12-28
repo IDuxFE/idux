@@ -36,6 +36,7 @@ export interface FormFocusMonitor<T> {
 }
 
 export function useFormFocusMonitor<T extends HTMLElement = HTMLElement>(options: {
+  checkChildren?: boolean
   handleFocus: (evt: FocusEvent) => void
   handleBlur: (evt: FocusEvent) => void
 }): FormFocusMonitor<T> {
@@ -48,7 +49,7 @@ export function useFormFocusMonitor<T extends HTMLElement = HTMLElement>(options
     watchStopHandle?.()
     focusMonitor.stopMonitoring(prevElement)
 
-    watchStopHandle = watch(focusMonitor.monitor(currElement, false), evt => {
+    watchStopHandle = watch(focusMonitor.monitor(currElement, options.checkChildren), evt => {
       const { origin, event } = evt
       if (event) {
         origin ? options.handleFocus(event) : options.handleBlur(event)

@@ -13,9 +13,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import type { ComputedRef, InjectionKey } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
 
-import { computed, inject, onScopeDispose, ref, triggerRef } from 'vue'
+import { customRef, inject, onScopeDispose, ref } from 'vue'
 
 import { _getEventTarget, isBrowser, normalizePassiveListenerOptions } from '@idux/cdk/platform'
 import { createSharedComposable } from '@idux/cdk/utils'
@@ -81,14 +81,14 @@ const modalityEventListenerOptions = normalizePassiveListenerOptions({
 
 export interface InputModalityDetector {
   /** Emits when the input modality changes. */
-  modality: ComputedRef<InputModality>
+  modality: Ref<InputModality>
   /** Emits whenever an input modality is detected. */
-  modalityDetected: ComputedRef<InputModality>
+  modalityDetected: Ref<InputModality>
   /**
    * The most recently detected input modality event target. Is null if no input modality has been
    * detected or if the associated event target is null for some unknown reason.
    */
-  target: ComputedRef<HTMLElement | null>
+  target: Ref<HTMLElement | null>
 }
 
 /**
@@ -115,11 +115,23 @@ export function useInputModalityDetector(options?: InputModalityDetectorOptions)
   const _modality = ref<InputModality>(null)
 
   /** Emits whenever an input modality is detected. */
-  const modalityDetected = computed(() => _modality.value)
+  const _modalityDetected = customRef<InputModality>((track, trigger) => {
+    let value: InputModality = null
+    return {
+      get() {
+        track()
+        return value
+      },
+      set(newValue) {
+        value = newValue
+        trigger()
+      },
+    }
+  })
 
   const changeModality = (value: InputModality) => {
     _modality.value = value
-    triggerRef(modalityDetected)
+    _modalityDetected.value = value
   }
 
   /**
@@ -205,9 +217,9 @@ export function useInputModalityDetector(options?: InputModalityDetectorOptions)
   })
 
   return {
-    modality: computed(() => _modality.value),
-    modalityDetected,
-    target: computed(() => _target.value),
+    modality: _modality,
+    modalityDetected: _modalityDetected,
+    target: _target,
   }
 }
 

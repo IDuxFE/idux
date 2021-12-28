@@ -1,13 +1,13 @@
 ---
 title:
-  zh: 对齐方式
+  zh: 位置
   en: Placement
 order: 1
 ---
 
 ## zh
 
-提供12种对齐方式。
+提供 12 种对齐位置。
 
 ## en
 
