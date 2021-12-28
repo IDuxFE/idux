@@ -5,12 +5,8 @@
   <IxButton @click="load = !load">Load</IxButton>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  setup() {
-    const load = ref(false)
-    return { load }
-  },
-})
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const load = ref(false)
 </script>

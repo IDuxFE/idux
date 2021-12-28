@@ -7,4 +7,8 @@ title:
 
 ## zh
 
-复制文本
+最简单的用法。
+
+## en
+
+The simplest usage.

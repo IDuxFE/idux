@@ -1,10 +1,9 @@
 ---
 category: pro
 type: 
-title: LayoutPro
+title: ProLayout
 subtitle:
 order: 0
-single: true
 ---
 
 

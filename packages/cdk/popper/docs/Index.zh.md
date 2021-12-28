@@ -6,6 +6,8 @@ subtitle: 浮层
 order: 0
 ---
 
+`@idux/cdk/popper` 基于 `@popperjs/core` 对浮层的创建进行了封装.
+
 ## API
 
 ### usePopper

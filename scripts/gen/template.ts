@@ -120,9 +120,9 @@ export function getDocsTemplate(moduleName: string, compName: string, type = '',
   return `---
 category: ${moduleName}
 type: ${isEn ? enType || '' : zhType || ''}
+order: 0
 title: ${compName}
 subtitle:
-order: 0
 ---
 
 ## API
@@ -161,10 +161,10 @@ export function getDesignTemplate(isEn = false): string {
 
 export function getDemoTemplate(): string {
   return `---
+order: 0
 title:
   zh: 基本使用
   en: Basic usage
-order: 0
 ---
 
 ## zh

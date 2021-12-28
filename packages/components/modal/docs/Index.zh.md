@@ -142,7 +142,9 @@ export const MODAL_TOKEN: InjectionKey<ModalBindings>;
 
 ## FAQ
 
-### 当路由发生改变时，如何在根组件 (App.vue) 中销毁所有对话框？
+### 销毁所有对话框
+
+当路由发生改变时，如何在根组件 (App.vue) 中销毁所有对话框？
 
 ```html
 <!-- App.vue -->
@@ -164,7 +166,9 @@ router.afterEach(() => modalProviderRef.value?.destroyAll())
 </script>
 ```
 
-### 如何拿到 content 实例的引用？
+### 拿到 content 实例的引用
+
+当 content 为 VNode 时，可以通过 contentProps 传入一个 ref 引用。
 
 ```html
 <template>

@@ -3,7 +3,6 @@ category: components
 type: Navigation
 title: Stepper
 subtitle:
-single: true
 ---
 
 

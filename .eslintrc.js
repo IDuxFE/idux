@@ -9,8 +9,8 @@ module.exports = {
   },
   plugins: ['jsdoc', 'import'],
   extends: [
-    'plugin:vue/vue3-recommended',
     'eslint:recommended',
+    'plugin:vue/vue3-recommended',
     '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
   ],
@@ -21,6 +21,12 @@ module.exports = {
       jsx: true,
       tsx: true,
     },
+  },
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
   },
   overrides: [
     {

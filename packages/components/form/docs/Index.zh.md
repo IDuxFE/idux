@@ -4,7 +4,6 @@ type: 数据录入
 title: Form
 subtitle: 表单
 order: 0
-single: true
 ---
 
 ## API
@@ -57,3 +56,53 @@ single: true
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
+
+## FAQ
+
+### 自定义表单组件
+
+参考下列代码来自定义表单组件，实现 `control` 并与 `IxFormItem` 配合使用。
+
+```html
+<template>
+  <input :value="valueRef" :disabled="isDisabled" @blur="onBlur" @change="onChange" />
+</template>
+
+<script lang="ts">
+import { PropType, computed, defineComponent } from 'vue'
+
+import { AbstractControl, useValueAccessor } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
+
+export default defineComponent({
+  name: 'CustomInput',
+  props: {
+    value: String,
+    control: { type: [String, Object] as PropType<string | AbstractControl> },
+    disabled: Boolean,
+  },
+  setup(_) {
+    // 使用 valueAccessor 接管 props.value 的控制
+    const { accessor, control } = useValueAccessor()
+    // 在 IxFormItem 中注册 control
+    useFormItemRegister(control)
+
+    // 输入框绑定的值
+    const valueRef = computed(() => accessor.valueRef.value)
+    // 输入框禁用状态
+    const isDisabled = computed(() => accessor.disabled.value)
+    // 输入框 blur 状态
+    const onBlur = () => {
+      accessor.markAsBlurred()
+    }
+    // 输入框值发生变更后的回调
+    const onChange = (evt: Event) => {
+      const { value } = evt.target as HTMLInputElement
+      accessor.setValue(value)
+    }
+
+    return { valueRef, isDisabled, onBlur, onChange }
+  },
+})
+</script>
+```

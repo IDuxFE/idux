@@ -18,7 +18,6 @@
   }
   &-api {
     table {
-      display: block;
       overflow-x: auto;
       overflow-y: hidden;
       line-height: 1.5715;
@@ -33,6 +32,10 @@
         & code {
           color: @color-magenta;
         }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        display: block;
       }
     }
   }

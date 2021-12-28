@@ -4,7 +4,6 @@ type: 导航
 title: Pagination
 subtitle: 分页
 order: 0
-single: true
 ---
 
 ## API

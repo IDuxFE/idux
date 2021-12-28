@@ -102,7 +102,7 @@ export function useGlobalConfig<T extends GlobalConfigKey>(
 3. 通过 `createGlobalConfig` 设置的全局配置
 4. `@idux` 提供的默认全局配置
 
-### 如何设置 `@idux/pro` 中组件的全局配置
+### 设置 `@idux/pro` 中组件的全局配置
 
 在 `@idux/pro` 中也同样提供了 `createGlobalConfig` 和 `useGlobalConfig` 两个 API。
 

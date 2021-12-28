@@ -126,7 +126,9 @@ export const MODAL_TOKEN: InjectionKey<DrawerBindings>;
 
 ## FAQ
 
-### 当路由发生改变时，如何在根组件 (App.vue) 中销毁所有抽屉？
+### 销毁所有抽屉
+
+当路由发生改变时，如何在根组件 (App.vue) 中销毁所有抽屉？
 
 ```html
 <!-- App.vue -->
@@ -148,7 +150,9 @@ router.afterEach(() => drawerProviderRef.value?.destroyAll())
 </script>
 ```
 
-### 如何拿到 content 实例的引用？
+### 拿到 content 实例的引用
+
+当 content 为 VNode 时，可以通过 contentProps 传入一个 ref 引用。
 
 ```html
 <template>

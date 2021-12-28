@@ -4,7 +4,6 @@ type: 布局
 title: ProLayout
 subtitle: 高级布局
 order: 0
-single: true
 ---
 
 ## API
