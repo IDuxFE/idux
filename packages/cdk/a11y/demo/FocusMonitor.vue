@@ -25,6 +25,14 @@ const subtreeOrigin = ref<FocusOrigin>(null)
 const focusMonitor = useSharedFocusMonitor()
 
 onMounted(() => {
+  setInterval(() => {
+    if (elementOrigin.value) {
+      focusMonitor.blurVia(element.value)
+    } else {
+      focusMonitor.focusVia(element.value, 'program')
+    }
+  }, 3000)
+
   watch(focusMonitor.monitor(element), ({ origin, event }) => {
     elementOrigin.value = origin
     console.log(origin, event)
