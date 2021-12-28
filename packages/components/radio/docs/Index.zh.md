@@ -13,11 +13,11 @@ subtitle: 单选框
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:checked` | 是否选中 | `boolean` | - | - | - |
+| `v-model:checked` | 是否选中 | `boolean` | - | - | 使用 `control` 时，此配置无效 |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |
 | `buttoned` | 是否以按钮显示 | `boolean` | `false` | - | - |
-| `disabled` | 是否为禁用状态 | `boolean` | `false` | - | - |
+| `disabled` | 是否为禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `label` | 单选框的文本 | `string \| #default` | `false` | - | - |
 | `mode` | 按钮类型 | `'default' \| 'primary'`| `'default'` | - | 仅 `buttoned` 为 `true` 时生效  |
 | `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'`| `'md'` | ✅ | 仅 `buttoned` 为 `true` 时生效 |
@@ -39,10 +39,10 @@ subtitle: 单选框
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 当前选中的值 | `any` | - | - | - |
+| `v-model:value` | 当前选中的值 | `any` | - | - | 使用 `control` 时，此配置无效 |
 | `buttoned` | 设置单选框组内 `IxRadio` 的 `buttoned` | `boolean` | - | - | - |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `disabled` | 设置单选框组内 `IxRadio` 的 `disabled` | `boolean` | - | - | - |
+| `disabled` | 设置单选框组内 `IxRadio` 的 `disabled` | `boolean` | - | - | 使用 `control` 时，此配置无效 |
 | `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |

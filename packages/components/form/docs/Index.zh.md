@@ -83,7 +83,8 @@ export default defineComponent({
   },
   setup(_) {
     // 使用 valueAccessor 接管 props.value 的控制
-    const { accessor, control } = useValueAccessor()
+    const control = useValueControl()
+    const accessor = useValueAccessor({ control })
     // 在 IxFormItem 中注册 control
     useFormItemRegister(control)
 

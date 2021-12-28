@@ -7,7 +7,7 @@
 
 import { defineComponent, provide } from 'vue'
 
-import { controlToken, useValueControl } from '@idux/cdk/forms'
+import { FORMS_CONTROL_TOKEN, useValueControl } from '@idux/cdk/forms'
 
 import { formWrapperProps } from './types'
 
@@ -16,7 +16,7 @@ export default defineComponent({
   props: formWrapperProps,
   setup(_, { slots }) {
     const control = useValueControl()
-    provide(controlToken, control)
+    provide(FORMS_CONTROL_TOKEN, control)
 
     return () => slots.default?.()
   },

@@ -7,12 +7,11 @@
 
 import { computed, defineComponent, inject, onMounted } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
+import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { switchProps } from './types'
 
@@ -27,8 +26,7 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
-    useFormItemRegister(control)
+    const accessor = useFormAccessor<boolean>('checked')
 
     const isChecked = computed(() => accessor.valueRef.value)
     const isDisabled = computed(() => props.disabled ?? accessor.disabled.value)

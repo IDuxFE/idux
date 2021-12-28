@@ -26,8 +26,7 @@ export default defineComponent({
 
     const {
       elementRef,
-
-      isDisabled,
+      accessor,
       clearable,
       clearIcon,
       clearVisible,
@@ -64,7 +63,7 @@ export default defineComponent({
           clearable={clearable.value}
           clearIcon={clearIcon.value}
           clearVisible={clearVisible.value}
-          disabled={isDisabled.value}
+          disabled={accessor.disabled.value}
           focused={isFocused.value}
           prefix={prefix}
           size={size.value}

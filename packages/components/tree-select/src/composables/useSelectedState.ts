@@ -9,7 +9,7 @@
 
 import type { TreeSelectNode, TreeSelectProps } from '../types'
 import type { MergedNode } from './useDataSource'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef } from 'vue'
 
@@ -29,7 +29,7 @@ export interface SelectedStateContext {
 
 export function useSelectedState(
   props: TreeSelectProps,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))

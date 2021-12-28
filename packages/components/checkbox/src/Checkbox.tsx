@@ -11,11 +11,10 @@ import type { ComputedRef, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
-import { useFormElement } from '@idux/components/utils'
+import { FORM_TOKEN } from '@idux/components/form'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { checkboxGroupToken } from './token'
 import { checkboxProps } from './types'
@@ -135,8 +134,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       callEmit(groupProps.onChange, groupCheckedValue)
     }
   } else {
-    const { accessor, control } = useValueAccessor<CheckValue>({ valueKey: 'checked' })
-    useFormItemRegister(control)
+    const accessor = useFormAccessor<CheckValue>('checked')
 
     isChecked = computed(() => accessor.valueRef.value === props.trueValue)
     isDisabled = computed(() => accessor.disabled.value)

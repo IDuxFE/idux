@@ -16,9 +16,8 @@ import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
-import { useAccessor } from './composables/useAccessor'
 import { useMergeNodes } from './composables/useDataSource'
 import { useGetNodeKey } from './composables/useGetNodeKey'
 import { useInputState } from './composables/useInputState'
@@ -44,7 +43,8 @@ export default defineComponent({
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
     const focusMonitor = useSharedFocusMonitor()
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
-    const { accessor, isDisabled } = useAccessor()
+    const accessor = useFormAccessor()
+    const isDisabled = computed(() => accessor.disabled.value)
     const inputStateContext = useInputState(props, inputRef, accessor, searchValue)
     const { clearInput } = inputStateContext
     const { mergedNodeMap } = useMergeNodes(props, getNodeKey, config)

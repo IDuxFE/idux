@@ -96,13 +96,20 @@ export default defineComponent({
       phoneNumber: ['', required],
       website: [''],
       time: [Date.now(), required],
-      captcha: ['', required],
+      captcha: ['', { validators: [required], disabled: true }],
       agree: [false],
     })
 
-    const passwordControl = formGroup.get('password')!
-    const confirmPasswordControl = formGroup.get('confirmPassword')!
+    const passwordControl = formGroup.get('password')
+    const confirmPasswordControl = formGroup.get('confirmPassword')
     passwordControl.watchValue(() => confirmPasswordControl.validate())
+
+    const captchaControl = formGroup.get('captcha')
+    const agreeControl = formGroup.get('agree')
+
+    agreeControl.watchValue(value => {
+      value ? captchaControl.enable() : captchaControl.disable()
+    })
 
     const register = () => {
       if (formGroup.valid.value) {

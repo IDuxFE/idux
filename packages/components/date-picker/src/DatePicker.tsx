@@ -12,9 +12,8 @@ import { callEmit } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
-import { useAccessor } from './composables/useAccessor'
 import { useFormat } from './composables/useFormat'
 import { useInputState } from './composables/useInputState'
 import { useOverlayState } from './composables/useOverlayState'
@@ -43,7 +42,7 @@ export default defineComponent({
     expose({ focus, blur })
 
     const { overlayOpened, setOverlayOpened } = useOverlayState(props)
-    const { accessor, isDisabled } = useAccessor()
+    const accessor = useFormAccessor()
     const format = useFormat(props, config)
     const inputStateContext = useInputState(props, dateConfig, accessor, format)
     const { inputValue } = inputStateContext
@@ -70,7 +69,6 @@ export default defineComponent({
       overlayOpened,
       setOverlayOpened,
       accessor,
-      isDisabled,
       format,
       ...inputStateContext,
       panelDate,
@@ -108,7 +106,7 @@ export default defineComponent({
           v-slots={{ default: renderTrigger, content: renderContent }}
           class={classes.value}
           clickOutside
-          disabled={isDisabled.value || props.readonly}
+          disabled={accessor.disabled.value || props.readonly}
           offset={defaultOffset}
           placement="bottomStart"
           target={target.value}
