@@ -122,7 +122,7 @@ export default defineComponent({
           onKeydown={onWrapperKeydown}
         >
           <Transition
-            name={`${common.prefixCls}-zoom`}
+            name={props.animatable ? `${common.prefixCls}-zoom` : undefined}
             appear
             onEnter={onEnter}
             onAfterEnter={onAfterEnter}
