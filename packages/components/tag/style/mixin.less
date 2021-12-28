@@ -1,3 +1,20 @@
+.tag-style() {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: @tag-font-size;
+  line-height: @tag-line-height;
+  color: @tag-default-color;
+  background: @tag-default-background-color;
+  padding: 0 max(@tag-default-padding-horizontal - 1px, 0);
+  border-radius: @tag-border-radius;
+  border: 1px solid @tag-default-border-color;
+
+  & + & {
+    margin-left: @tag-margin;
+  }
+}
+
 // mixin to iterate over colors and create CSS class for each one
 .make-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
   .make-color-classes(@colors, @i - 1);
@@ -20,5 +37,15 @@
         color: @@darkColor;
       }
     }
+  }
+}
+
+.make-numeric-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .make-numeric-color-classes(@colors, @i - 1);
+  @color: extract(@colors, @i);
+  @bgColor: 'color-@{color}';
+  &-@{color} {
+    color: @text-color-inverse;
+    background: @@bgColor;
   }
 }

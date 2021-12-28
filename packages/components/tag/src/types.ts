@@ -13,11 +13,9 @@ import { IxPropTypes } from '@idux/cdk/utils'
 export type TagShape = 'round' | 'rect'
 
 export const tagProps = {
-  checkable: IxPropTypes.bool,
-  checked: IxPropTypes.bool,
-  closable: IxPropTypes.bool,
   color: IxPropTypes.string,
   icon: IxPropTypes.string,
+  number: IxPropTypes.number,
   shape: IxPropTypes.oneOf<TagShape>(['round', 'rect']),
 }
 

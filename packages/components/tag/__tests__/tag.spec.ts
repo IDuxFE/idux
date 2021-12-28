@@ -13,26 +13,6 @@ describe('Tag', () => {
 
   renderWork(IxTag, { slots: { default: () => 'test tag' } })
 
-  test('checkable work', async () => {
-    const wrapper = TagMount({ props: { checkable: true } })
-
-    expect(wrapper.classes()).toContain('ix-tag-checkable')
-
-    await wrapper.setProps({ checkable: false })
-
-    expect(wrapper.classes()).not.toContain('ix-tag-checkable')
-  })
-
-  test('checked work', async () => {
-    const wrapper = TagMount({ props: { checked: true } })
-
-    expect(wrapper.classes()).toContain('ix-tag-checked')
-
-    await wrapper.setProps({ checked: false })
-
-    expect(wrapper.classes()).not.toContain('ix-tag-checked')
-  })
-
   test('color work', async () => {
     const wrapper = TagMount({ props: { color: 'red' } })
 
@@ -43,6 +23,8 @@ describe('Tag', () => {
     expect(wrapper.classes()).toContain('ix-tag-success')
 
     await wrapper.setProps({ color: '#123456' })
+
+    expect(['#123456', 'rgb(18, 52, 86)'].includes(getComputedStyle(wrapper.element).backgroundColor)).toBe(true)
 
     expect(wrapper.classes()).toContain('ix-tag-has-color')
   })
@@ -72,5 +54,12 @@ describe('Tag', () => {
     await wrapper.setProps({ shape: 'rect' })
 
     expect(wrapper.classes()).toContain('ix-tag-rect')
+  })
+
+  test('number work', async () => {
+    const wrapper = TagMount({ props: { number: 2 } })
+
+    expect(wrapper.classes()).toContain('ix-tag-numeric')
+    expect(wrapper.find('.ix-tag-numeric-prefix').text()).toBe('2')
   })
 })
