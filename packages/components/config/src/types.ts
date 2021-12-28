@@ -23,6 +23,7 @@ import type { NotificationPlacement, NotificationType } from '@idux/components/n
 import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
+import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperSize } from '@idux/components/stepper'
 import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
@@ -55,7 +56,7 @@ export interface DividerConfig {
 }
 
 export interface SpaceConfig {
-  gap: number | string | [number | string, number | string]
+  size: number | string | [number | string, number | string] | SpaceSize
   wrap: boolean
 }
 

@@ -76,7 +76,7 @@ const divider: DividerConfig = {
   type: 'horizontal',
 }
 
-const space: SpaceConfig = { gap: 8, wrap: true }
+const space: SpaceConfig = { size: 'sm', wrap: true }
 
 const row: RowConfig = { wrap: true }
 

@@ -54,7 +54,25 @@ describe('Space', () => {
     expect(wrapper.classes()).toContain('ix-space-vertical')
   })
 
-  test('gap work', async () => {
+  test('block work', async () => {
+    const wrapper = SpaceMount({
+      props: {
+        direction: 'vertical',
+      },
+    })
+
+    expect(wrapper.classes()).not.toContain('ix-space-block')
+
+    await wrapper.setProps({ block: true })
+
+    expect(wrapper.classes()).toContain('ix-space-block')
+
+    await wrapper.setProps({ direction: 'horizontal' })
+
+    expect(wrapper.classes()).not.toContain('ix-space-block')
+  })
+
+  test('size work', async () => {
     const wrapper = SpaceMount()
 
     const wrapperElement = wrapper.element as HTMLElement
@@ -68,7 +86,7 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('8px')
 
-    await wrapper.setProps({ gap: 16 })
+    await wrapper.setProps({ size: 'md' })
 
     expect(wrapperElement.style.marginBottom).toBe('-16px')
     expect(itemElements[0].style.marginRight).toBe('16px')
@@ -78,17 +96,17 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('16px')
 
-    await wrapper.setProps({ gap: `24px` })
+    await wrapper.setProps({ size: 30 })
 
-    expect(wrapperElement.style.marginBottom).toBe('-24px')
-    expect(itemElements[0].style.marginRight).toBe('24px')
-    expect(itemElements[0].style.paddingBottom).toEqual('24px')
-    expect(itemElements[1].style.marginRight).toBe('24px')
-    expect(itemElements[1].style.paddingBottom).toEqual('24px')
+    expect(wrapperElement.style.marginBottom).toBe('-30px')
+    expect(itemElements[0].style.marginRight).toBe('30px')
+    expect(itemElements[0].style.paddingBottom).toEqual('30px')
+    expect(itemElements[1].style.marginRight).toBe('30px')
+    expect(itemElements[1].style.paddingBottom).toEqual('30px')
     expect(itemElements[2].style.marginRight).toBe('')
-    expect(itemElements[2].style.paddingBottom).toEqual('24px')
+    expect(itemElements[2].style.paddingBottom).toEqual('30px')
 
-    await wrapper.setProps({ gap: [8, 16] })
+    await wrapper.setProps({ size: [8, 16] })
 
     expect(wrapperElement.style.marginBottom).toBe('-16px')
     expect(itemElements[0].style.marginRight).toBe('8px')
