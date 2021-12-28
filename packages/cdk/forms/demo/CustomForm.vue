@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { provide } from 'vue'
 
-import { controlToken, useValueControl } from '@idux/cdk/forms'
+import { FORMS_CONTROL_TOKEN, useValueControl } from '@idux/cdk/forms'
 
 defineProps<{
   control?: string | object
@@ -15,7 +15,7 @@ defineProps<{
 const control = useValueControl()
 
 // 注入父 control, 以便子组件通过 key 获取对应的子 control
-provide(controlToken, control)
+provide(FORMS_CONTROL_TOKEN, control)
 </script>
 
 <style scoped lang="less">

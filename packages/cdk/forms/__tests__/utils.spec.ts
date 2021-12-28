@@ -4,14 +4,15 @@ import { computed, provide } from 'vue'
 import { Validators } from '..'
 import { FormGroup } from '../src/controls'
 import { useFormGroup } from '../src/useForms'
-import { controlToken, useValueAccessor, useValueControl } from '../src/utils'
+import { FORMS_CONTROL_TOKEN, useValueAccessor, useValueControl } from '../src/utils'
 
 const InputComponent = {
   template: `<input :value="valueRef" @input="onInput" @blur="onBlur" />`,
   props: ['value', 'control'],
   emits: ['update:value'],
   setup() {
-    const { accessor } = useValueAccessor()
+    const control = useValueControl()
+    const accessor = useValueAccessor({ control })
     const valueRef = computed(() => accessor.valueRef.value)
     const onInput = (evt: Event) => accessor.setValue((evt.target as HTMLInputElement).value)
     const onBlur = () => accessor.markAsBlurred()
@@ -24,7 +25,7 @@ const FormComponent = {
   props: ['control'],
   setup() {
     const control = useValueControl()
-    provide(controlToken, control)
+    provide(FORMS_CONTROL_TOKEN, control)
   },
 }
 

@@ -20,7 +20,7 @@ export default defineComponent({
       locale,
       config,
       mergedPrefixCls,
-      isDisabled,
+      accessor,
       format,
       focusMonitor,
       inputRef,
@@ -38,13 +38,13 @@ export default defineComponent({
     const placeholder = computed(() => props.placeholder ?? locale.value[`${props.type}Placeholder`])
     const inputSize = computed(() => Math.max(10, format.value.length) + 2)
     const allowInput = computed(() => props.allowInput ?? config.allowInput)
-    const clearable = computed(() => !isDisabled.value && props.clearable && inputValue.value.length > 0)
+    const clearable = computed(() => !accessor.disabled.value && props.clearable && inputValue.value.length > 0)
 
     const suffix = computed(() => props.suffix ?? config.suffix)
 
     const classes = computed(() => {
       const { borderless = config.borderless, size = formContext?.size.value ?? config.size } = props
-      const disabled = isDisabled.value
+      const disabled = accessor.disabled.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
@@ -60,7 +60,7 @@ export default defineComponent({
 
     const handleClick = () => {
       const currOpened = overlayOpened.value
-      if (currOpened || isDisabled.value) {
+      if (currOpened || accessor.disabled.value) {
         return
       }
 
@@ -106,7 +106,7 @@ export default defineComponent({
               ref={inputRef}
               class={`${prefixCls}-input-inner`}
               autocomplete="off"
-              disabled={isDisabled.value}
+              disabled={accessor.disabled.value}
               placeholder={placeholder.value}
               readonly={readonly || allowInput.value !== true}
               size={inputSize.value}

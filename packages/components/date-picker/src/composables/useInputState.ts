@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { DatePickerProps } from '../types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { DateConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
@@ -28,7 +28,7 @@ export interface InputStateContext {
 export function useInputState(
   props: DatePickerProps,
   dateConfig: DateConfig,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
   formatRef: ComputedRef<string>,
 ): InputStateContext {
   const initValue = accessor.valueRef.value

@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { SelectProps } from '../types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { Ref } from 'vue'
 
 import { onMounted, ref } from 'vue'
@@ -32,7 +32,7 @@ export interface InputStateContext {
 export function useInputState(
   props: SelectProps,
   inputRef: Ref<HTMLInputElement | undefined>,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
 ): InputStateContext {
   const mirrorRef = ref<HTMLSpanElement>()
   const inputValue = ref('')

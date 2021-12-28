@@ -6,16 +6,15 @@
  */
 
 import type { TimePickerProps, TimeRangePickerProps } from '../types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
 import { isArray } from 'lodash-es'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit, useState } from '@idux/cdk/utils'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormAccessor } from '@idux/components/utils'
 
 type TimeValueProp = TimePickerProps['value']
 type TimeRangeValueProp = TimeRangePickerProps['value']
@@ -29,7 +28,7 @@ type AccessorValueType<T extends TimePickerProps | TimeRangePickerProps> = T ext
   : TimeRangeValueProp
 
 export interface TimePickerCommonBindings<T extends TimePickerProps | TimeRangePickerProps> {
-  accessor: FormAccessor<AccessorValueType<T>>
+  accessor: ValueAccessor<AccessorValueType<T>>
   isDisabled: ComputedRef<boolean>
   isFocused: ComputedRef<boolean>
   handleChange: (value: CommonBindingValueType<T>) => void
@@ -44,8 +43,7 @@ function valueIsRange(value: TimeValue | TimeRangeValue): value is Exclude<TimeR
 export function useTimePickerCommonBindings<T extends TimePickerProps | TimeRangePickerProps>(
   props: T,
 ): TimePickerCommonBindings<T> {
-  const { accessor, control } = useValueAccessor<AccessorValueType<T>>()
-  useFormItemRegister(control)
+  const accessor = useFormAccessor<AccessorValueType<T>>()
 
   const isDisabled = computed(() => accessor.disabled.value)
   const [isFocused, setFocused] = useState(false)

@@ -17,7 +17,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `v-model:value` | 选中节点的 `key` 数组 | `VKey[]` | - | - | - |
+| `v-model:value` | 选中节点的 `key` 数组 | `VKey[]` | - | - | 使用 `control` 时，此配置无效 |
 | `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:loadedKeys` | 已经加载完毕的节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
@@ -28,7 +28,7 @@ order: 0
 | `childrenKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`children`字段 | `string` | `children` | ✅ | - |
 | `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `dataSource` | 树型数据数组,参见[TreeSelectNode](#TreeSelectNode) | `TreeSelectNode[]` | `[]` | - | - |
-| `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
+| `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](/components/tree/zh#TreeDroppable) | `TreeDroppable` | - | - | - |
 | `empty` | 空数据时的内容 | `string \|` [EmptyProps](/components/empty/zh#EmptyProps) | - | - | - |

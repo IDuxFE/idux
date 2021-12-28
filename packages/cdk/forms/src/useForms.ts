@@ -25,12 +25,12 @@ type GroupConfig<T> = {
 
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
-  validators?: ValidatorFn | ValidatorFn[],
-  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[],
+  validatorOptions?: ValidatorOptions,
 ): FormGroup<T>
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
-  validatorOptions?: ValidatorOptions,
+  validators?: ValidatorFn | ValidatorFn[],
+  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormGroup<T>
 export function useFormGroup<T extends Record<string, any> = Record<string, any>>(
   config: GroupConfig<T>,
@@ -45,12 +45,12 @@ type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<Arr
 
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
-  validators?: ValidatorFn | ValidatorFn[],
-  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[],
+  validatorOptions?: ValidatorOptions,
 ): FormArray<T>
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
-  validatorOptions?: ValidatorOptions,
+  validators?: ValidatorFn | ValidatorFn[],
+  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormArray<T>
 export function useFormArray<T extends any[] = any[]>(
   config: ArrayConfig<T>,
@@ -61,12 +61,12 @@ export function useFormArray<T extends any[] = any[]>(
   return new FormArray(controls, validatorOrOptions, asyncValidators)
 }
 
+export function useFormControl<T = any>(initValue?: T, validatorOptions?: ValidatorOptions): FormControl<T>
 export function useFormControl<T = any>(
   initValue?: T,
   validators?: ValidatorFn | ValidatorFn[],
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[],
 ): FormControl<T>
-export function useFormControl<T = any>(initValue?: T, validatorOptions?: ValidatorOptions): FormControl<T>
 export function useFormControl<T = any>(
   initValue?: T,
   validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,

@@ -20,7 +20,7 @@ order: 0
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `clearIcon` | 清除按钮图标 |`string` | `'close-circle'` | ✅ | - |
-| `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
+| `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |
 | `format` | 展示的格式 | `string` | - | ✅ | 默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format) |
 | `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |
@@ -64,7 +64,7 @@ const defaultFormat = {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 当前选中的日期 | `number \| string \| Date` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`  |
+| `v-model:value` | 当前选中的日期 | `number \| string \| Date` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`，使用 `control` 时，此配置无效  |
 | `defaultOpenValue` | 打开面板时默认选中的值 | `number \| string \| Date` | - | - | `value` 为空时，高亮的值 |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | 默认使用 `i18n` 配置 |
 | `timePicker` | 是否显示时间选择器 | `boolean \| TimePickerProps` | `false` | - | 仅在 `type='date'` 时生效 |
@@ -76,7 +76,7 @@ const defaultFormat = {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 当前选中的日期 | `Array<number \| string \| Date>` | - | - | 当传入 `string` 类型时，请指定时区信息 |
+| `v-model:value` | 当前选中的日期 | `Array<number \| string \| Date>` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`，使用 `control` 时，此配置无效 |
 | `defaultOpenValue` | 打开面板时默认选中的值 | `Array<number \| string \| Date>` | - | - | `value` 为空时，高亮的值 |
 | `placeholder` | 选择框默认文本 | `string[] \| #placeholder=placement:'start'\|'end'` | - | - | 默认使用 `i18n` 配置 |
 | `separator` | 自定义分隔符图标 | `string \| VNode \| #separator` | `'swap-right'` | ✅ | - |

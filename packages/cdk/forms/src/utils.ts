@@ -8,27 +8,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ControlPathType } from './controls'
-import type { InjectionKey, Ref, ShallowRef, WatchStopHandle } from 'vue'
+import type { ComputedRef, InjectionKey, PropType, ShallowRef, WatchStopHandle } from 'vue'
 
-import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRaw, toRef, watch } from 'vue'
+import { computed, getCurrentInstance, inject, ref, shallowReactive, shallowRef, toRaw, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { IxPropTypes, Logger, callEmit } from '@idux/cdk/utils'
+import { Logger, NoopFunction, callEmit } from '@idux/cdk/utils'
 
 import { isAbstractControl } from './typeof'
 
-export const controlPropDef = IxPropTypes.oneOfType<string | number | AbstractControl>([
-  String,
-  Number,
-  IxPropTypes.object<AbstractControl>(),
-])
+export const controlPropDef = [String, Number, Object] as PropType<string | number | AbstractControl>
 
-export const controlToken: InjectionKey<ShallowRef<AbstractControl>> = Symbol('controlToken')
+export const FORMS_CONTROL_TOKEN: InjectionKey<ShallowRef<AbstractControl>> = Symbol('cdk-forms-control')
 
-export function useValueControl<T = any>(controlKey = 'control'): ShallowRef<AbstractControl<T> | undefined> {
+export interface ValueControlOptions {
+  controlKey?: string
+}
+
+export function useValueControl<T = any>(
+  options: ValueControlOptions = {},
+): ShallowRef<AbstractControl<T> | undefined> {
+  const { controlKey = 'control' } = options
   const { props } = getCurrentInstance()!
-  const parentControl = inject(controlToken, shallowRef<AbstractControl>())
+  const parentControl = inject(FORMS_CONTROL_TOKEN, shallowRef<AbstractControl>())
+
   const control = shallowRef<AbstractControl>()
   let watchStop: WatchStopHandle | undefined
 
@@ -61,35 +65,32 @@ export function useValueControl<T = any>(controlKey = 'control'): ShallowRef<Abs
   return control
 }
 
-export interface FormAccessorOptions {
-  controlKey?: string
+export interface ValueAccessorOptions<T = any> {
+  control: ShallowRef<AbstractControl<T> | undefined>
   valueKey?: string
   disabledKey?: string
 }
 
-export interface FormAccessor<T = any> {
-  valueRef: Ref<T>
-  disabled: Ref<boolean>
+export interface ValueAccessor<T = any> {
+  valueRef: ComputedRef<T>
+  disabled: ComputedRef<boolean>
   markAsBlurred: () => void
   setValue: (value: T) => void
 }
 
-export function useValueAccessor<T = any>(
-  options: FormAccessorOptions = {},
-): { control: Ref<AbstractControl<T> | undefined>; accessor: FormAccessor<T> } {
-  const { controlKey, valueKey = 'value', disabledKey = 'disabled' } = options
+export function useValueAccessor<T = any>(options: ValueAccessorOptions): ValueAccessor<T> {
+  const { control, valueKey = 'value', disabledKey = 'disabled' } = options
   const { props } = getCurrentInstance()!
-  const control = useValueControl(controlKey)
 
-  const accessor = shallowReactive({}) as FormAccessor<T>
-  let stopWatcher: WatchStopHandle | undefined
+  const accessor = shallowReactive({} as ValueAccessor<T>)
+  let watchStop: WatchStopHandle | undefined
 
   watch(
     control,
     currControl => {
-      if (stopWatcher) {
-        stopWatcher()
-        stopWatcher = undefined
+      if (watchStop) {
+        watchStop()
+        watchStop = undefined
       }
 
       if (currControl) {
@@ -99,23 +100,23 @@ export function useValueAccessor<T = any>(
         accessor.markAsBlurred = () => currControl.markAsBlurred()
       } else {
         const tempRef = ref(props[valueKey])
-        stopWatcher = watch(
+        watchStop = watch(
           () => props[valueKey],
           value => (tempRef.value = value),
         )
-        accessor.valueRef = computed(() => props[valueKey] ?? tempRef.value)
-        accessor.disabled = toRef(props, disabledKey) as Ref<boolean>
+        accessor.valueRef = computed(() => props[valueKey] ?? tempRef.value) as ComputedRef<T>
+        accessor.disabled = computed(() => props[disabledKey]) as ComputedRef<boolean>
         accessor.setValue = value => {
           if (value != toRaw(accessor.valueRef.value)) {
             tempRef.value = value
-            callEmit(props[`onUpdate:${valueKey}`], value)
+            callEmit((props as any)[`onUpdate:${valueKey}`], value)
           }
         }
-        accessor.markAsBlurred = () => {}
+        accessor.markAsBlurred = NoopFunction
       }
     },
     { immediate: true },
   )
 
-  return { control, accessor }
+  return accessor
 }

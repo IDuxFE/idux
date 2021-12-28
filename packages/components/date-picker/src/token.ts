@@ -7,17 +7,17 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AccessorContext } from './composables/useAccessor'
 import type { InputStateContext } from './composables/useInputState'
 import type { OverlayStateContext } from './composables/useOverlayState'
 import type { PanelStateContext } from './composables/usePanelState'
 import type { DatePickerProps } from './types'
 import type { FocusMonitor } from '@idux/cdk/a11y'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { DateConfig, DatePickerConfig } from '@idux/components/config'
 import type { DatePickerLocale } from '@idux/components/i18n'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
-export interface DataPickerContext extends AccessorContext, InputStateContext, OverlayStateContext, PanelStateContext {
+export interface DataPickerContext extends InputStateContext, OverlayStateContext, PanelStateContext {
   props: DatePickerProps
   slots: Slots
   locale: ComputedRef<DatePickerLocale>
@@ -27,6 +27,7 @@ export interface DataPickerContext extends AccessorContext, InputStateContext, O
   focusMonitor: FocusMonitor
   inputRef: Ref<HTMLInputElement | undefined>
   format: ComputedRef<string>
+  accessor: ValueAccessor
   handlePanelCellClick: (date: Date) => void
 }
 

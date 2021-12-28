@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, provide, toRef } from 'vue'
 
-import { controlToken, useValueControl } from '@idux/cdk/forms'
+import { FORMS_CONTROL_TOKEN, useValueControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { FORM_TOKEN, formToken } from './token'
@@ -18,7 +18,7 @@ export default defineComponent({
   props: formProps,
   setup(props, { slots }) {
     const control = useValueControl()
-    provide(controlToken, control)
+    provide(FORMS_CONTROL_TOKEN, control)
 
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-form`)

@@ -11,10 +11,8 @@ import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { Logger, callEmit, getMouseClientXY, isNumeric, off, on } from '@idux/cdk/utils'
-import { useFormItemRegister } from '@idux/components/form'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { sliderStartDirection } from './token'
 
@@ -38,8 +36,7 @@ export interface SliderBindings {
 
 export function useSlider(props: SliderProps): SliderBindings {
   const { elementRef, focus, blur } = useFormElement<HTMLElement>()
-  const { accessor, control } = useValueAccessor<number | number[]>()
-  useFormItemRegister(control)
+  const accessor = useFormAccessor<number | number[]>()
 
   const valuesRef = ref<number[]>([props.min, props.min])
   const thumbListRef = ref<SliderThumbInstance[]>([])

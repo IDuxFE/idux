@@ -14,9 +14,8 @@ import { computed, defineComponent, normalizeClass, provide, ref, watch } from '
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
-import { useAccessor } from './composables/useAccessor'
 import { useActiveState } from './composables/useActiveState'
 import { useInputState } from './composables/useInputState'
 import { useFlattedOptions, useMergedOptions } from './composables/useOptions'
@@ -50,7 +49,8 @@ export default defineComponent({
     const triggerRef = ref<HTMLDivElement>()
     const { overlayRef, overlayStyle, overlayOpened, setOverlayOpened } = useOverlayProps(props, triggerRef)
 
-    const { accessor, isDisabled } = useAccessor()
+    const accessor = useFormAccessor()
+    const isDisabled = computed(() => accessor.disabled.value)
     const mergedOptions = useMergedOptions(props, slots, config)
     const inputStateContext = useInputState(props, inputRef, accessor)
     const { inputValue, clearInput } = inputStateContext

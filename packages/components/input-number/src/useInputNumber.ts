@@ -11,9 +11,8 @@ import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { Logger, callEmit } from '@idux/cdk/utils'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormAccessor } from '@idux/components/utils'
 
 export interface InputNumberBindings {
   displayValue: Ref<string>
@@ -31,8 +30,7 @@ export interface InputNumberBindings {
 }
 
 export function useInputNumber(props: InputNumberProps, config: InputNumberConfig): InputNumberBindings {
-  const { accessor, control } = useValueAccessor<number | null | undefined>()
-  useFormItemRegister(control)
+  const accessor = useFormAccessor<number | null | undefined>()
 
   const displayValue = ref('')
   const isIllegal = ref(true)
