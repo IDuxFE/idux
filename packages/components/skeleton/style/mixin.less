@@ -1,11 +1,10 @@
-
-@animated-key: ~'@{skeleton-prefix}-animated-key';
+@skeleton-animated-key: ~'@{skeleton-prefix}-animated-key';
 
 .skeleton-animated() {
   background-size: 400% 100%;
-  animation: @animated-key 1.4s ease infinite;
+  animation: @skeleton-animated-key 1.4s ease infinite;
 
-  @keyframes @animated-key {
+  @keyframes @skeleton-animated-key {
 
     0% {
       background-position: 100% 50%;

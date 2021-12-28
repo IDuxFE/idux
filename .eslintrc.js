@@ -11,9 +11,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier',
-    '@vue/prettier/@typescript-eslint',
+    '@vue/eslint-config-typescript/recommended',
+    '@vue/eslint-config-prettier',
   ],
   parserOptions: {
     sourceType: 'module',
@@ -126,6 +125,8 @@ module.exports = {
     'vue/attribute-hyphenation': 'off',
     'vue/html-closing-bracket-spacing': 'error',
     'vue/max-attributes-per-line': 'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/v-on-event-hyphenation': 'off',
     'vue/require-default-prop': 'error',
     'vue/require-explicit-emits': 'error',
 

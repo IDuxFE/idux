@@ -4,12 +4,12 @@
   .reset-component();
 
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
+  grid-template:
     'header header header'
     'sider content content'
     'sider footer footer';
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
   grid-area: content;
 
   &-header {
