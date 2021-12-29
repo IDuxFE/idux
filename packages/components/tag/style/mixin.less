@@ -49,3 +49,26 @@
     background: @@bgColor;
   }
 }
+
+.getTagPrefixSizeMixin() {
+  @function: ~`(function() {
+    this.getPrefixSize = function(fontSize, lineHeight) {
+      function parseSize(size) {
+        var _number = parseFloat(size);
+        return {
+          number: _number,
+          suffix: size.replace(String(_number), '')
+        }
+      }
+
+      var { number: fontSizeNumber, suffix: fontSizeSuffix } = parseSize(fontSize)
+      var { number: lineHeightNumber, suffix: lineHeightSuffix } = parseSize(lineHeight)
+
+      if (lineHeightSuffix) {
+        return lineHeight;
+      }
+
+      return fontSizeNumber * lineHeightNumber + fontSizeSuffix;
+    }
+  })()`
+}
