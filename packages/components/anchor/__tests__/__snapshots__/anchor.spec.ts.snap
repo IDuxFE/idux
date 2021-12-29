@@ -34,7 +34,7 @@ exports[`Anchor register and unregister work 2`] = `
   <div class=\\"ix-affix-content\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
-        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: 0px;\\"></span></div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
           <!---->
         </div>
@@ -65,7 +65,7 @@ exports[`Anchor register and unregister work 3`] = `
   <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px; width: 0px; height: 0px;\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
-        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: 0px;\\"></span></div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
           <!---->
         </div>
@@ -96,7 +96,7 @@ exports[`Anchor register and unregister work 4`] = `
   <div class=\\"ix-affix-content\\" style=\\"position: fixed; top: 0px; left: 0px; width: 0px; height: 0px;\\">
     <div class=\\"ix-anchor-wrapper\\" style=\\"max-height: 100vh;\\">
       <div class=\\"ix-anchor\\">
-        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: -4.5px;\\"></span></div>
+        <div class=\\"ix-anchor-ink\\"><span class=\\"ix-anchor-ink-ball ix-anchor-ink-ball-visible\\" style=\\"top: 0px;\\"></span></div>
         <div class=\\"ix-anchor-link\\"><a class=\\"ix-anchor-link-title ix-anchor-link-title-active\\" href=\\"#demo\\" data-href=\\"#demo\\" title=\\"Demo\\">Demo</a>
           <!---->
         </div>
