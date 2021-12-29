@@ -9,10 +9,9 @@ import { computed, defineComponent, provide } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormAccessor } from '@idux/components/utils'
 
 import Radio from './Radio'
 import { radioGroupToken } from './token'
@@ -22,8 +21,8 @@ export default defineComponent({
   name: 'IxRadioGroup',
   props: radioGroupProps,
   setup(props, { slots }) {
-    const { accessor, control } = useValueAccessor()
-    useFormItemRegister(control)
+    const accessor = useFormAccessor()
+
     provide(radioGroupToken, { props, accessor })
 
     const common = useGlobalConfig('common')

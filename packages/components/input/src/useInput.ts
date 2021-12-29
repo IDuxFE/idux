@@ -6,21 +6,18 @@
  */
 
 import type { CommonProps } from './types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
-import { useFormItemRegister } from '@idux/components/form'
-import { useFormFocusMonitor } from '@idux/components/utils'
+import { useFormAccessor, useFormFocusMonitor } from '@idux/components/utils'
 
 export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
-  accessor: FormAccessor
-  isDisabled: ComputedRef<boolean>
+  accessor: ValueAccessor
   clearIcon: ComputedRef<string>
   clearVisible: ComputedRef<boolean>
   clearable: ComputedRef<boolean>
@@ -42,14 +39,11 @@ export function useInput(
   props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): InputContext<HTMLInputElement | HTMLTextAreaElement> {
-  const { accessor, control } = useValueAccessor()
-  useFormItemRegister(control)
-
-  const isDisabled = computed(() => accessor.disabled.value)
+  const accessor = useFormAccessor()
 
   const clearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-  const clearVisible = computed(() => !isDisabled.value && !props.readonly && !!accessor.valueRef.value)
+  const clearVisible = computed(() => !accessor.disabled.value && !props.readonly && !!accessor.valueRef.value)
 
   const isFocused = ref(false)
   const handleFocus = (evt: FocusEvent) => {
@@ -114,7 +108,6 @@ export function useInput(
   return {
     elementRef,
     accessor,
-    isDisabled,
     clearable,
     clearIcon,
     clearVisible,

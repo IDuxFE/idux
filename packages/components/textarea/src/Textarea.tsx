@@ -6,7 +6,7 @@
  */
 
 import type { TextareaProps } from './types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { TextareaConfig } from '@idux/components/config'
 import type { Ref, Slot, StyleValue } from 'vue'
 
@@ -31,8 +31,6 @@ export default defineComponent({
     const {
       elementRef,
       accessor,
-
-      isDisabled,
       clearable,
       clearIcon,
       clearVisible,
@@ -61,7 +59,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
-        [`${prefixCls}-disabled`]: isDisabled.value,
+        [`${prefixCls}-disabled`]: accessor.disabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-with-count`]: showCount,
         [`${prefixCls}-${size}`]: true,
@@ -92,7 +90,7 @@ export default defineComponent({
             ref={elementRef}
             class={`${prefixCls}-inner`}
             style={textareaStyle.value}
-            disabled={isDisabled.value}
+            disabled={accessor.disabled.value}
             readonly={props.readonly}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
@@ -107,7 +105,7 @@ export default defineComponent({
   },
 })
 
-function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: FormAccessor) {
+function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: ValueAccessor) {
   return computed(() => {
     const showCount = props.showCount ?? config.showCount
     const computeCount = props.computeCount ?? config.computeCount

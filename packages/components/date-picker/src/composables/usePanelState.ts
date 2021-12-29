@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { DatePickerProps } from '../types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { DateConfig } from '@idux/components/config'
 import type { ComputedRef } from 'vue'
 
@@ -24,7 +24,7 @@ export interface PanelStateContext {
 export function usePanelState(
   props: DatePickerProps,
   dateConfig: DateConfig,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
   formatRef: ComputedRef<string>,
 ): PanelStateContext {
   const initValue = accessor.valueRef.value ?? props.defaultOpenValue

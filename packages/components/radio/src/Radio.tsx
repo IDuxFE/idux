@@ -11,11 +11,10 @@ import type { ComputedRef, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
-import { useFormElement } from '@idux/components/utils'
+import { FORM_TOKEN } from '@idux/components/form'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { radioGroupToken } from './token'
 import { radioProps } from './types'
@@ -124,8 +123,7 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       }
     }
   } else {
-    const { accessor, control } = useValueAccessor<boolean>({ valueKey: 'checked' })
-    useFormItemRegister(control)
+    const accessor = useFormAccessor<boolean>('checked')
     isChecked = computed(() => !!accessor.valueRef.value)
     isDisabled = computed(() => accessor.disabled.value)
     handleBlur = (evt: FocusEvent) => {

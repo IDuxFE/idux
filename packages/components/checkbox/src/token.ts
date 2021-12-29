@@ -6,12 +6,12 @@
  */
 
 import type { CheckboxGroupProps } from './types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { InjectionKey } from 'vue'
 
 export interface CheckboxGroupContext {
   props: CheckboxGroupProps
-  accessor: FormAccessor<unknown[] | undefined>
+  accessor: ValueAccessor<unknown[] | undefined>
 }
 
 export const checkboxGroupToken: InjectionKey<CheckboxGroupContext> = Symbol('checkboxGroupToken')

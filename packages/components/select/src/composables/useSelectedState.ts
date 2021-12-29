@@ -9,7 +9,7 @@
 
 import type { SelectProps } from '../types'
 import type { MergedOption } from './useOptions'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { ComputedRef } from 'vue'
 
 import { computed, toRaw } from 'vue'
@@ -28,7 +28,7 @@ export interface SelectedStateContext {
 
 export function useSelectedState(
   props: SelectProps,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
   mergedOptions: ComputedRef<MergedOption[]>,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))

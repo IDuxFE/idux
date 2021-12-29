@@ -7,23 +7,25 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AccessorContext } from './composables/useAccessor'
 import type { MergedNode } from './composables/useDataSource'
 import type { GetNodeKey } from './composables/useGetNodeKey'
 import type { InputStateContext } from './composables/useInputState'
 import type { SelectedStateContext } from './composables/useSelectedState'
 import type { TreeSelectProps } from './types'
 import type { FocusMonitor } from '@idux/cdk/a11y'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { VirtualScrollInstance } from '@idux/cdk/scroll'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeSelectConfig } from '@idux/components/config'
 import type { TreeInstance } from '@idux/components/tree'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
-export interface TreeSelectContext extends AccessorContext, InputStateContext, SelectedStateContext {
+export interface TreeSelectContext extends InputStateContext, SelectedStateContext {
   props: TreeSelectProps
   slots: Slots
   config: TreeSelectConfig
+  accessor: ValueAccessor
+  isDisabled: ComputedRef<boolean>
   getNodeKey: ComputedRef<GetNodeKey>
   expandedKeys: ComputedRef<any[]>
   mergedPrefixCls: ComputedRef<string>

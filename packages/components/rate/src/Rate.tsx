@@ -7,12 +7,11 @@
 
 import { computed, defineComponent, inject, ref } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormItemRegister } from '@idux/components/form'
+import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import RateItem from './RateItem'
 import { rateProps } from './types'
@@ -29,8 +28,7 @@ export default defineComponent({
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
 
-    const { accessor, control } = useValueAccessor<number>()
-    useFormItemRegister(control)
+    const accessor = useFormAccessor<number>()
 
     const countRef = computed(() => convertNumber(props.count ?? config.count))
     const iconRef = computed(() => props.icon ?? config.icon)

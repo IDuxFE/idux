@@ -6,7 +6,7 @@
  */
 
 import type { TextareaAutoRows } from './types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { ComputedRef, Ref } from 'vue'
 
 import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
@@ -23,7 +23,7 @@ const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
 export function useAutoRows(
   textareaRef: Ref<HTMLTextAreaElement | undefined>,
   autoRows: ComputedRef<boolean | TextareaAutoRows>,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
 ): void {
   let enabled = false
   let minRows: number | null = null

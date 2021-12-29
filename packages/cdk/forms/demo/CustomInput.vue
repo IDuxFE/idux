@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { useValueAccessor } from '@idux/cdk/forms'
+import { useValueAccessor, useValueControl } from '@idux/cdk/forms'
 
 defineProps<{
   value?: string
@@ -14,7 +14,8 @@ defineProps<{
 }>()
 
 // 使用 valueAccessor 接管 props.value 的控制
-const { accessor } = useValueAccessor()
+const control = useValueControl()
+const accessor = useValueAccessor({ control })
 
 // 表单绑定的值
 const valueRef = computed(() => accessor.valueRef.value)

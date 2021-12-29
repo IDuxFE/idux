@@ -7,5 +7,6 @@
 
 export * from './src/colors'
 export * from './src/covertTarget'
+export * from './src/useFormAccessor'
 export * from './src/useFormElement'
 export * from './src/useKey'

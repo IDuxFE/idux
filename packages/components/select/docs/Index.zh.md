@@ -15,7 +15,7 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `mode` 为 `multiple` 或 `tags` 时，`value` 为数组 |
+| `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `mode` 为 `multiple` 或 `tags` 时，`value` 为数组，使用 `control` 时，此配置无效 |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean` | `false` | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
@@ -23,7 +23,7 @@ order: 0
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `options` 时有效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `compareWith` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
-| `disabled` | 是否禁用状态 | `boolean` | `false` | - | - |
+| `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `options` 时有效 |
 | `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |

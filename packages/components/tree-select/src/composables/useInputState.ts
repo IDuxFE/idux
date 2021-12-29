@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { TreeSelectProps } from '../types'
-import type { FormAccessor } from '@idux/cdk/forms'
+import type { ValueAccessor } from '@idux/cdk/forms'
 import type { Ref } from 'vue'
 
 import { onMounted, ref } from 'vue'
@@ -28,7 +28,7 @@ export interface InputStateContext {
 export function useInputState(
   props: TreeSelectProps,
   inputRef: Ref<HTMLInputElement | undefined>,
-  accessor: FormAccessor,
+  accessor: ValueAccessor,
   searchValue: Ref<string>,
 ): InputStateContext {
   const mirrorRef = ref<HTMLSpanElement>()
