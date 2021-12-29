@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical" :size="40">
+  <IxSpace direction="vertical" :size="40" block>
     <IxTabs v-model:selectedKey="selectedKey">
       <IxTab v-for="panel in panels" :key="'tab' + panel" :title="'Tab ' + panel"> Content of Tab {{ panel }} </IxTab>
     </IxTabs>

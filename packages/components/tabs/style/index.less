@@ -4,16 +4,12 @@
   .reset-component();
 
   position: relative;
-  display: grid;
-  grid-template:
-    'start top end'
-    'start bottom end';
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
 
   &-pane-wrapper {
-    grid-area: bottom;
     padding: @tabs-pane-padding 0 0 0;
+    flex: auto;
 
     .@{tabs-prefix} {
 
@@ -24,7 +20,6 @@
   }
 
   &-nav-wrapper {
-    grid-area: top;
     position: relative;
     display: inline-flex;
     overflow: hidden;
@@ -267,11 +262,12 @@
       }
 
       &-nav-start {
-        .@{tabs-prefix} {
 
-          &-nav-wrapper {
-            grid-area: start;
-          }
+        &.@{tabs-prefix} {
+          flex-direction: row;
+        }
+
+        .@{tabs-prefix} {
 
           &-nav {
 
@@ -296,11 +292,12 @@
       }
 
       &-nav-end {
-        .@{tabs-prefix} {
 
-          &-nav-wrapper {
-            grid-area: end;
-          }
+        &.@{tabs-prefix} {
+          flex-direction: row-reverse;
+        }
+
+        .@{tabs-prefix} {
 
           &-nav {
 
@@ -329,13 +326,12 @@
       }
 
       &-nav-bottom {
-        grid-template-rows: 1fr auto;
 
+        &.@{tabs-prefix} {
+          flex-direction: column-reverse;
+        }
+      
         .@{tabs-prefix} {
-
-          &-nav-wrapper {
-            grid-area: bottom;
-          }
 
           &-pane-wrapper {
             grid-area: top;
