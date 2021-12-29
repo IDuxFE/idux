@@ -26,6 +26,13 @@
   &-disabled {
     color: @typography-disabled-color;
     cursor: not-allowed;
+
+    a,
+    a:hover,
+    a:focus {
+      color: @typography-disabled-color !important;
+      cursor: not-allowed !important;
+    }
   }
 
   // tag
