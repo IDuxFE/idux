@@ -34,12 +34,12 @@ export default defineComponent({
     })
 
     const { activeLink } = useLinks(props, config)
-    const { anchorRef, inkBallClasses, inkBallTop } = useInkBall(activeLink, mergedPrefixCls)
+    const { anchorRef, inkBallElRef, inkBallClasses, inkBallTop } = useInkBall(activeLink, mergedPrefixCls)
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       const linkBall = hideLinkBall.value ? null : (
-        <span class={inkBallClasses.value} style={{ top: inkBallTop.value }} />
+        <span class={inkBallClasses.value} style={{ top: inkBallTop.value }} ref={inkBallElRef} />
       )
 
       const anchorNode = (
@@ -101,6 +101,7 @@ const useLinks = (props: AnchorProps, config: AnchorConfig) => {
 
 const useInkBall = (activeLink: Ref<string | undefined>, mergedPrefixCls: ComputedRef<string>) => {
   const anchorRef = ref<HTMLDivElement>()
+  const inkBallElRef = ref<HTMLSpanElement>()
   const inkBallClasses = computed(() => {
     const prefixCls = mergedPrefixCls.value
     return {
@@ -117,13 +118,15 @@ const useInkBall = (activeLink: Ref<string | undefined>, mergedPrefixCls: Comput
       if (!activeLinkElement) {
         return
       }
+      const inkBallHeight = inkBallElRef.value?.getBoundingClientRect().height ?? 9
       const { offsetTop, clientHeight } = activeLinkElement as HTMLElement
-      inkBallTop.value = `${offsetTop + clientHeight / 2 - 4.5}px`
+      inkBallTop.value = `${offsetTop + clientHeight / 2 - inkBallHeight / 2}px`
     })
   })
 
   return {
     anchorRef,
+    inkBallElRef,
     inkBallClasses,
     inkBallTop,
   }

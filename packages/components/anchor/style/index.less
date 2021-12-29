@@ -23,7 +23,7 @@
     &::before {
       position: relative;
       display: block;
-      width: @anchor-border-width;
+      width: @anchor-ink-line-border-width;
       height: 100%;
       margin: 0 auto;
       background-color: @anchor-border-color;
@@ -34,10 +34,10 @@
       position: absolute;
       left: 50%;
       display: none;
-      width: @anchor-ink-ball-size;
-      height: @anchor-ink-ball-size;
+      width: @anchor-ink-ball-width;
+      height: @anchor-ink-ball-height;
       background-color: @anchor-bg;
-      border: @anchor-border-width solid @anchor-link-active-color;
+      border: @anchor-ink-ball-border-width solid @anchor-link-active-color;
       border-radius: @anchor-ink-ball-radius;
       transform: translateX(-50%);
       transition: top @transition-duration-base @ease-in-out;
