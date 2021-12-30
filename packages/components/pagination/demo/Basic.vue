@@ -1,7 +1,13 @@
 <template>
-  <IxPagination :pageIndex="1" :total="50" />
+  <IxPagination :total="50" />
   <br />
-  <IxPagination disabled :pageIndex="1" :total="50" />
+  <IxPagination :pageIndex="pageIndex" disabled :total="500" />
   <br />
-  <IxPagination :pageIndex="6" :total="500" />
+  <IxPagination v-model:pageIndex="pageIndex" :total="500" />
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const pageIndex = ref(6)
+</script>

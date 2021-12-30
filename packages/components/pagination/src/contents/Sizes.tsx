@@ -9,20 +9,19 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { IxSelect } from '@idux/components/select'
 
-import { paginationToken } from './token'
+import { paginationToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, config, locale, activeSize, onPageSizeChange, mergedPrefixCls } = inject(paginationToken)!
-
-    const size = computed(() => props.size ?? config.size)
-    const pageSizes = computed(() => props.pageSizes ?? config.pageSizes)
+    const { props, config, locale, mergedPrefixCls, size, activeSize, changePageSize } = inject(paginationToken)!
 
     const sizeOptions = computed(() => {
-      return pageSizes.value.map(size => {
+      const { pageSizes = config.pageSizes } = props
+      const { itemsPerPage } = locale.value
+      return pageSizes.map(size => {
         return {
           value: size,
-          label: `${size} ${locale.value.itemsPerPage}`,
+          label: `${size} ${itemsPerPage}`,
         }
       })
     })
@@ -36,7 +35,7 @@ export default defineComponent({
             options={sizeOptions.value}
             size={size.value}
             value={activeSize.value}
-            onChange={onPageSizeChange}
+            onChange={changePageSize}
           />
         </li>
       )

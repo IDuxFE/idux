@@ -20,7 +20,7 @@ import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
 import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
-import type { PaginationItemRenderFn, PaginationSize, PaginationTotalRenderFn } from '@idux/components/pagination'
+import type { PaginationSize } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
@@ -84,8 +84,6 @@ export interface MenuConfig {
 }
 
 export interface PaginationConfig {
-  itemRender?: PaginationItemRenderFn
-  lessJumper: boolean
   pageSize: number
   pageSizes: number[]
   showQuickJumper: boolean
@@ -94,7 +92,6 @@ export interface PaginationConfig {
   showTotal: boolean
   simple: boolean
   size: PaginationSize
-  totalRender?: PaginationTotalRenderFn
 }
 
 // Data Entry

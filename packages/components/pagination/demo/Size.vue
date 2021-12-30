@@ -1,5 +1,5 @@
 <template>
-  <IxPagination :pageIndex="1" :total="500" size="sm" />
+  <IxPagination :total="500" size="sm" />
   <br />
-  <IxPagination :pageIndex="1" :total="500" size="sm" showQuickJumper showSizeChanger />
+  <IxPagination :total="500" size="sm" showQuickJumper showSizeChanger />
 </template>

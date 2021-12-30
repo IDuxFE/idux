@@ -1,5 +1,11 @@
 <template>
-  <IxPagination :pageIndex="1" :total="500" :pageSize="20" showSizeChanger />
+  <IxPagination showSizeChanger :total="500" />
   <br />
-  <IxPagination :pageIndex="1" :total="500" :pageSizes="[10, 20, 30, 40]" showSizeChanger />
+  <IxPagination v-model:pageSize="pageSize" :pageSizes="[10, 20, 30, 40]" showSizeChanger :total="500" />
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const pageSize = ref(20)
+</script>

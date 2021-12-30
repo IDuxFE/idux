@@ -5,22 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PaginationProps } from './types'
+import type { PagesContext } from './composables/usePages'
+import type { PaginationProps, PaginationSize } from './types'
 import type { PaginationConfig } from '@idux/components/config'
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { PaginationLocale } from '@idux/components/i18n'
+import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
-import { PaginationLocale } from '@idux/components/i18n'
-
-export interface PaginationContext {
+export interface PaginationContext extends PagesContext {
   props: PaginationProps
   slots: Slots
   config: PaginationConfig
   locale: ComputedRef<PaginationLocale>
   mergedPrefixCls: ComputedRef<string>
-  activeIndex: Ref<number>
-  activeSize: Ref<number>
-  onPageIndexChange: (index: number) => void
-  onPageSizeChange: (size: number) => void
+  size: ComputedRef<PaginationSize>
+  jumpToIndex: (event: KeyboardEvent) => void
 }
 
 export const paginationToken: InjectionKey<PaginationContext> = Symbol('paginationToken')

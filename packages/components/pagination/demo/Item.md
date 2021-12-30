@@ -7,8 +7,8 @@ order: 6
 
 ## zh
 
-通过设置 `itemRender` 或者插槽 `item` 可以自定义页码的结构。
+通过插槽 `item` 可以自定义页码的结构。
 
 ## en
 
-The structure of the page item can be customized by setting `itemRender` or slot `item`.
+The structure of the page item can be customized by `item` slot.

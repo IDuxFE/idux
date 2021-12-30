@@ -7,13 +7,11 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { paginationToken } from './token'
+import { paginationToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, slots, config, locale, activeIndex, activeSize, mergedPrefixCls } = inject(paginationToken)!
-
-    const totalRender = computed(() => slots.total ?? props.totalRender ?? config.totalRender)
+    const { props, slots, locale, activeIndex, activeSize, mergedPrefixCls } = inject(paginationToken)!
 
     const range = computed(() => {
       const currIndex = activeIndex.value
@@ -27,9 +25,9 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-total`
       const { total } = props
       const { totalPrefix, totalSuffix } = locale.value
-      const _totalRender = totalRender.value
-      const children = _totalRender
-        ? _totalRender({ total, range: range.value })
+
+      const children = slots.total
+        ? slots.total({ total, range: range.value, prefix: totalPrefix, suffix: totalSuffix })
         : `${totalPrefix} ${total} ${totalSuffix}`
       return <li class={prefixCls}>{children}</li>
     }
