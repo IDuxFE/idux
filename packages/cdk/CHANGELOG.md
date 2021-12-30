@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-12-30)
+
+
+### Features
+
+* **cdk:forms:** add default messages ([#689](https://github.com/IDuxFE/idux/issues/689)) ([22d45d6](https://github.com/IDuxFE/idux/commit/22d45d64b009617abff1456cec38397348287a6f)), closes [#684](https://github.com/IDuxFE/idux/issues/684)
+
+
+
+
+
 # [1.0.0-alpha.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2021-12-25)
 
 

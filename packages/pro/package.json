@@ -1,6 +1,6 @@
 {
   "name": "@idux/pro",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A higher level of abstraction UI component library for Vue 3.x",
   "keywords": [
     "vue",
@@ -30,7 +30,7 @@
   "style": "./default.css",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^1.0.0-alpha.1",
-    "@idux/components": "^1.0.0-alpha.2"
+    "@idux/cdk": "^1.0.0-alpha.3",
+    "@idux/components": "^1.0.0-alpha.3"
   }
 }

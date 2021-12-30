@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-12-30)
+
+
+### Bug Fixes
+
+* **comp:input-number:** decimal precision calculation error ([#688](https://github.com/IDuxFE/idux/issues/688)) ([d863ad0](https://github.com/IDuxFE/idux/commit/d863ad08f2f64bdcb1652b9814051521754c3314))
+* **comp:menu:** remove border-bototm on horizontal mode ([#690](https://github.com/IDuxFE/idux/issues/690)) ([be02417](https://github.com/IDuxFE/idux/commit/be02417d298d7b645cb87e94e1e9b09e22a101b2))
+* **comp:typography:** fix typography disabled style ([#687](https://github.com/IDuxFE/idux/issues/687)) ([41d5225](https://github.com/IDuxFE/idux/commit/41d522584844ea0ffe19c61a3ae330a53eb374fa)), closes [#567](https://github.com/IDuxFE/idux/issues/567)
+
+
+### Features
+
+* **cdk:forms:** add default messages ([#689](https://github.com/IDuxFE/idux/issues/689)) ([22d45d6](https://github.com/IDuxFE/idux/commit/22d45d64b009617abff1456cec38397348287a6f)), closes [#684](https://github.com/IDuxFE/idux/issues/684)
+* **comp: space:** add size and block props ([#670](https://github.com/IDuxFE/idux/issues/670)) ([a1f895b](https://github.com/IDuxFE/idux/commit/a1f895b67e65efb800dcd5c5e9f54330bca06bd0))
+* **comp:modal:** add prop to control transition ([#674](https://github.com/IDuxFE/idux/issues/674)) ([4b4d786](https://github.com/IDuxFE/idux/commit/4b4d7866debe9950e8d640885baad5750728404d)), closes [#623](https://github.com/IDuxFE/idux/issues/623)
+* **comp:pagination:** remove itemRender and totalRender ([#695](https://github.com/IDuxFE/idux/issues/695)) ([e2dccc6](https://github.com/IDuxFE/idux/commit/e2dccc6f35a8be626199a2cf75a0819bb42d291b)), closes [#658](https://github.com/IDuxFE/idux/issues/658)
+
+
+### BREAKING CHANGES
+
+* **comp:pagination:** itemRender and totalRender have been removed
+* **comp: space:** size is used instead of gap
+
+
+
+
+
 # [1.0.0-alpha.2](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-12-27)
 
 
