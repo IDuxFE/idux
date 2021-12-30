@@ -6,7 +6,7 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -17,16 +17,13 @@ export interface PaginationItemRenderOptions {
   type: PaginationItemType
   active: boolean
   disabled: boolean
-  original: VNodeTypes
+  original: VNode
 }
-export type PaginationItemRenderFn = (options: PaginationItemRenderOptions) => VNodeTypes
-export type PaginationTotalRenderFn = (options: { total: number; range: [number, number] }) => VNodeTypes
 
 export const paginationProps = {
-  pageIndex: IxPropTypes.number.def(1),
+  pageIndex: IxPropTypes.number,
   pageSize: IxPropTypes.number,
   disabled: IxPropTypes.bool.def(false),
-  itemRender: IxPropTypes.func<PaginationItemRenderFn>(),
   pageSizes: IxPropTypes.arrayOf(Number),
   showQuickJumper: IxPropTypes.bool,
   showSizeChanger: IxPropTypes.bool,
@@ -35,7 +32,6 @@ export const paginationProps = {
   simple: IxPropTypes.bool,
   size: IxPropTypes.oneOf<PaginationSize>(['sm', 'md']),
   total: IxPropTypes.number.def(0),
-  totalRender: IxPropTypes.func<PaginationTotalRenderFn>(),
 
   // events
   'onUpdate:pageIndex': IxPropTypes.emit<(pageIndex: number) => void>(),

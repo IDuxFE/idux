@@ -13,8 +13,8 @@ import { isNil } from 'lodash-es'
 
 import { IxButton } from '@idux/components/button'
 
-import { paginationToken } from './token'
-import { paginationItemProps } from './types'
+import { paginationToken } from '../token'
+import { paginationItemProps } from '../types'
 
 const iconMap = {
   prev: 'left',
@@ -41,13 +41,12 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       activeIndex,
-      onPageIndexChange,
+      changePageIndex,
     } = inject(paginationToken)!
 
     const isActive = computed(() => activeIndex.value === props.index)
     const isDisabled = computed(() => props.disabled || paginationProps.disabled)
     const showTitle = computed(() => paginationProps.showTitle ?? config.showTitle)
-    const itemRender = computed(() => slots.item ?? paginationProps.itemRender ?? config.itemRender)
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item`
@@ -81,7 +80,7 @@ export default defineComponent({
       } else {
         newIndex = activeIndex.value + indexDiffMap[type]
       }
-      onPageIndexChange(newIndex)
+      changePageIndex(newIndex)
     }
 
     return () => {
@@ -90,7 +89,6 @@ export default defineComponent({
       const { index, type } = props
       const disabled = isDisabled.value
       const active = isActive.value
-      const _itemRender = itemRender.value
       let original: VNodeTypes
       const icon = iconMap[type]
       const commonButtonProps = { mode: 'text', size: 'sm', shape: 'circle' } as const
@@ -111,7 +109,7 @@ export default defineComponent({
         original = <IxButton {...commonButtonProps} icon={icon} disabled={disabled}></IxButton>
       }
 
-      const children = _itemRender ? _itemRender({ index, type, active, disabled, original }) : original
+      const children = slots.item ? slots.item({ index, type, active, disabled, original }) : original
 
       return (
         <li class={classes.value} title={title.value} onClick={onClick}>
