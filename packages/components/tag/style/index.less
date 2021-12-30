@@ -44,6 +44,7 @@
   // font-size * line-height + tag border width + tag prefix border width
   @tag-prefix-inner-size: ~`getPrefixSize('@{tag-font-size}', '@{tag-line-height}')`;
   @tag-prefix-size: calc(@tag-prefix-inner-size + 4px);
+
   padding-left: calc(@tag-default-padding-horizontal + @tag-prefix-inner-size / 2 + 2px + @tag-padding);
   position: relative;
   border-radius: @tag-round-border-radius;

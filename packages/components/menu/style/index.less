@@ -68,15 +68,19 @@
 
   &-horizontal {
     line-height: @menu-item-height;
-    border-bottom: @menu-border-width @menu-border-style @menu-border-color;
 
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub {
       display: inline-block;
       vertical-align: bottom;
+    }
+
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-sub-title {
       margin: 0 @menu-item-padding-left;
+      padding: @menu-item-horizontal-padding;
       border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
-      transition: border @transition-duration-base @ease-in-out;
+      transition: border @transition-duration-base;
 
       &:hover,
       &-expanded,
@@ -89,9 +93,17 @@
       }
     }
 
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-title {
-      padding: @menu-item-horizontal-padding;
+    .@{menu-prefix}-item:hover,
+    .@{menu-prefix}-item-selected,
+    .@{menu-prefix}-sub-title:hover,
+    .@{menu-prefix}-sub-expanded .@{menu-prefix}-sub-title,
+    .@{menu-prefix}-sub-selected .@{menu-prefix}-sub-title {
+      border-color: @menu-highlight-color;
+    }
+
+    .@{menu-prefix}-item-disabled,
+    .@{menu-prefix}-sub-disabled .@{menu-prefix}-sub-title {
+      border-color: transparent !important;
     }
 
     .@{menu-prefix}-sub-title-suffix {
