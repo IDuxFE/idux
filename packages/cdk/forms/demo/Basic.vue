@@ -15,9 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { Validators, useFormGroup } from '@idux/cdk/forms'
+import { Validators, useFormArray, useFormGroup } from '@idux/cdk/forms'
 
-import { useFormArray } from '../src/useForms'
 import CustomForm from './CustomForm.vue'
 import CustomInput from './CustomInput.vue'
 

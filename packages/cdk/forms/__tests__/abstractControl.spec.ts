@@ -2,6 +2,7 @@ import { flushPromises } from '@vue/test-utils'
 import { Ref, ref, watch } from 'vue'
 
 import { AbstractControl } from '../src/controls'
+import { zhCNMessages } from '../src/messages/zh-CN'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
 
@@ -42,7 +43,7 @@ class Control<T = unknown> extends AbstractControl<T> {
 
 describe('abstractControl.ts', () => {
   describe('basic work', () => {
-    let control: Control
+    let control: AbstractControl
 
     beforeEach(() => {
       control = new Control()
@@ -71,14 +72,14 @@ describe('abstractControl.ts', () => {
       const { required, minLength, email } = Validators
       control.setValidator(required)
 
-      expect(await control.validate()).toEqual({ required: { message: undefined } })
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
 
       control.setValidator([email, minLength(5)])
       control.setValue('test')
 
       expect(await control.validate()).toEqual({
-        email: { message: undefined, actual: 'test' },
-        minLength: { message: undefined, minLength: 5, actual: 4 },
+        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
+        minLength: { actual: 4, minLength: 5, message: zhCNMessages.minLength({ actual: 4, minLength: 5 }, control) },
       })
     })
 
@@ -195,12 +196,12 @@ describe('abstractControl.ts', () => {
   })
 
   describe('convert options work', () => {
-    let control: Control
+    let control: AbstractControl
 
     test('options work', async () => {
       control = new Control({ validators: Validators.required })
 
-      expect(await control.validate()).toEqual({ required: { message: undefined } })
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
 
       expect(control.trigger).toEqual('change')
 
@@ -213,7 +214,7 @@ describe('abstractControl.ts', () => {
       const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
 
       control = new Control(Validators.required, _asyncValidator)
-      expect(await control.validate()).toEqual({ required: { message: undefined } })
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
 
       control.setValue('test')
       control.validate()

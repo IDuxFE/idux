@@ -1,7 +1,7 @@
 ---
 title:
-  zh: 自定义验证
-  en: Customized validation
+  zh: 手动设置验证信息
+  en: Customized validation status and message
 order: 7
 ---
 

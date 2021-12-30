@@ -22,82 +22,88 @@ import { isArray, isFunction, isNil, isNumber, isString } from 'lodash-es'
 
 import { isNumeric } from '@idux/cdk/utils'
 
+import { zhCNMessages } from './messages/zh-CN'
+
 /** See [this commit](https://github.com/angular/angular.js/commit/f3f5cf72e) for more details. */
 const emailRegexp =
   /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
 export class Validators {
-  private static messages: ValidateMessages = {}
+  private static messages: ValidateMessages = zhCNMessages
 
   static setMessages(messages: ValidateMessages): void {
     Validators.messages = { ...Validators.messages, ...messages }
   }
 
-  static getError(key: string, errorContext: Omit<ValidateError, 'message'> = {}): ValidateError {
+  static getError(
+    key: string,
+    control: AbstractControl,
+    errorContext: Omit<ValidateError, 'message'> = {},
+  ): ValidateError {
     let message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | undefined = undefined
     const validMessage = Validators.messages[key] || Validators.messages.default || undefined
     if (isFunction(validMessage)) {
-      message = validMessage(errorContext)
+      message = validMessage(errorContext, control)
     } else {
       message = validMessage
     }
     return { ...errorContext, message }
   }
 
-  static required(value: any, _: AbstractControl): { required: ValidateError } | undefined {
+  static required(value: any, control: AbstractControl): { required: ValidateError } | undefined {
     if (isEmpty(value)) {
-      return { required: Validators.getError('required') }
+      return { required: Validators.getError('required', control) }
     }
     return undefined
   }
 
-  static requiredTrue(value: any, _: AbstractControl): { requiredTrue: ValidateError } | undefined {
+  static requiredTrue(value: any, control: AbstractControl): { requiredTrue: ValidateError } | undefined {
     if (value === true) {
       return undefined
     }
-    return { requiredTrue: Validators.getError('requiredTrue', { actual: value }) }
+    return { requiredTrue: Validators.getError('requiredTrue', control, { actual: value }) }
   }
 
-  static email(value: any, _: AbstractControl): { email: ValidateError } | undefined {
+  static email(value: any, control: AbstractControl): { email: ValidateError } | undefined {
     if (isEmpty(value) || emailRegexp.test(value)) {
       return undefined
     }
-    return { email: Validators.getError('email', { actual: value }) }
+    return { email: Validators.getError('email', control, { actual: value }) }
   }
 
   static min(min: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { min: ValidateError } | undefined => {
+    return (value: any, control: AbstractControl): { min: ValidateError } | undefined => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) >= min) {
         return undefined
       }
-      return { min: Validators.getError('min', { min, actual: value }) }
+      return { min: Validators.getError('min', control, { min, actual: value }) }
     }
   }
 
   static max(max: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { max: ValidateError } | undefined => {
+    return (value: any, control: AbstractControl): { max: ValidateError } | undefined => {
       if (isEmpty(value) || !isNumeric(value) || Number(value) <= max) {
         return undefined
       }
-      return { max: Validators.getError('max', { max, actual: value }) }
+      return { max: Validators.getError('max', control, { max, actual: value }) }
     }
   }
 
   static minLength(minLength: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { minLength: ValidateError } | undefined => {
+    return (value: any, control: AbstractControl): { minLength: ValidateError } | undefined => {
       if (isEmpty(value) || !hasLength(value) || value.length >= minLength) {
         return undefined
       }
-      return { minLength: Validators.getError('minLength', { minLength, actual: value.length }) }
+      return { minLength: Validators.getError('minLength', control, { minLength, actual: value.length }) }
     }
   }
 
   static maxLength(maxLength: number): ValidatorFn {
-    return (value: any, _: AbstractControl): { maxLength: ValidateError } | undefined => {
+    return (value: any, control: AbstractControl): { maxLength: ValidateError } | undefined => {
       if (isEmpty(value) || !hasLength(value) || value.length <= maxLength) {
         return undefined
       }
-      return { maxLength: Validators.getError('maxLength', { maxLength, actual: value.length }) }
+      return { maxLength: Validators.getError('maxLength', control, { maxLength, actual: value.length }) }
     }
   }
 
@@ -121,15 +127,15 @@ export class Validators {
       regexStr = pattern.toString()
       regex = pattern
     }
-    return (value: any, _: AbstractControl): { pattern: ValidateError } | undefined => {
+    return (value: any, control: AbstractControl): { pattern: ValidateError } | undefined => {
       if (isEmpty(value) || regex.test(value)) {
         return undefined
       }
-      return { pattern: Validators.getError('pattern', { pattern: regexStr, actual: value }) }
+      return { pattern: Validators.getError('pattern', control, { pattern: regexStr, actual: value }) }
     }
   }
 
-  static nullValidator(_: any, __: AbstractControl): undefined {
+  static nullValidator(_: any, _control: AbstractControl): undefined {
     return undefined
   }
 
@@ -172,7 +178,7 @@ function hasLength(val: any): boolean {
   return !isNil(val) && isNumber(val.length)
 }
 
-type GenericValidatorFn = (value: any, _: AbstractControl) => any
+type GenericValidatorFn = (value: any, control: AbstractControl) => any
 
 function executeValidators<V extends GenericValidatorFn>(
   value: any,

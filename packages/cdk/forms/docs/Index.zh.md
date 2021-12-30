@@ -89,6 +89,7 @@ export function useFormControl<T>(
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
 | `disabled` | 默认禁用当前控件 | `boolean` | - | - |
+| `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
 | `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
@@ -107,7 +108,9 @@ export function useFormControl<T>(
 | `minLength()` | 验证表单控件的值的长度大于或等于指定的数字 | `number` | - | 验证失败返回 `{ minLength: { message: '', minLength, actual: value.length } }`|
 | `maxLength()` | 验证表单控件的值的长度小于或等于指定的数字 | `number` | - | 验证失败返回 `{ maxLength: { message: '', maxLength, actual: value.length } }`|
 | `pattern()` | 验证表单控件的值匹配一个正则表达式 | `string \| RegExp` | - | 验证失败返回 `{ pattern: { message: '', pattern, actual: value } }`|
-| `setMessages()` | 设置验证失败的提示信息 | `ValidateMessages` | - | 每次设置的 `messages` 会跟之前的进行合并 |
+| `setMessages()` | 设置验证失败的提示信息 | `ValidateMessages` | - | 每次设置的 `messages` 会跟之前的进行合并, 默认的提示信息为 `zhCNMessages` |
+
+更多默认的提示信息，参见 [messages](https://github.com/IDuxFE/idux/tree/main/packages/cdk/forms/src/messages)
 
 ### useValueControl
 
