@@ -1,3 +1,20 @@
+.tag-style() {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: @tag-font-size;
+  line-height: @tag-line-height;
+  color: @tag-default-color;
+  background: @tag-default-background-color;
+  padding: 0 max(@tag-default-padding-horizontal - 1px, 0);
+  border-radius: @tag-border-radius;
+  border: 1px solid @tag-default-border-color;
+
+  & + & {
+    margin-left: @tag-margin;
+  }
+}
+
 // mixin to iterate over colors and create CSS class for each one
 .make-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
   .make-color-classes(@colors, @i - 1);
@@ -21,4 +38,37 @@
       }
     }
   }
+}
+
+.make-numeric-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .make-numeric-color-classes(@colors, @i - 1);
+  @color: extract(@colors, @i);
+  @bgColor: 'color-@{color}';
+  &-@{color} {
+    color: @text-color-inverse;
+    background: @@bgColor;
+  }
+}
+
+.getTagPrefixSizeMixin() {
+  @function: ~`(function() {
+    this.getPrefixSize = function(fontSize, lineHeight) {
+      function parseSize(size) {
+        var _number = parseFloat(size);
+        return {
+          number: _number,
+          suffix: size.replace(String(_number), '')
+        }
+      }
+
+      var { number: fontSizeNumber, suffix: fontSizeSuffix } = parseSize(fontSize)
+      var { number: lineHeightNumber, suffix: lineHeightSuffix } = parseSize(lineHeight)
+
+      if (lineHeightSuffix) {
+        return lineHeight;
+      }
+
+      return fontSizeNumber * lineHeightNumber + fontSizeSuffix;
+    }
+  })()`
 }

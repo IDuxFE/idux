@@ -5,7 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import type { StyleValue } from 'vue'
+
+import { computed, defineComponent, normalizeClass } from 'vue'
+
+import { isNil } from 'lodash-es'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
@@ -28,32 +32,48 @@ export default defineComponent({
       }
       return isPresetColor(color) || isStatusColor(color)
     })
+
     const classes = computed(() => {
-      const { color, checkable, shape = config.shape, checked } = props
-      const presetFlag = isPresetOrStatusColor.value
+      const { shape = config.shape, color, number } = props
       const prefixCls = mergedPrefixCls.value
-      return {
+      const isPreset = isPresetOrStatusColor.value
+      const isNumeric = !isNil(number)
+
+      return normalizeClass({
         [`${prefixCls}`]: true,
-        [`${prefixCls}-${shape}`]: shape,
-        [`${prefixCls}-${color}`]: presetFlag,
-        [`${prefixCls}-has-color`]: !presetFlag && color,
-        [`${prefixCls}-checkable`]: checkable,
-        [`${prefixCls}-checked`]: checked,
-      }
+        [`${prefixCls}-${shape}`]: !isNumeric && shape,
+        [`${prefixCls}-${color}`]: isPreset,
+        [`${prefixCls}-numeric`]: isNumeric,
+        [`${prefixCls}-has-color`]: !isPreset && color,
+      })
     })
-    const style = computed(() => {
-      return { backgroundColor: isPresetOrStatusColor.value ? undefined : props.color }
-    })
+    const style = computed(() => ({
+      backgroundColor: isPresetOrStatusColor.value ? undefined : props.color,
+    }))
 
     return () => {
-      const { icon } = props
+      const prefixCls = mergedPrefixCls.value
+      const { icon, number } = props
       const icoNode = slots.icon ? slots.icon() : icon && <IxIcon name={icon}></IxIcon>
       return (
         <span class={classes.value} style={style.value}>
+          {renderNumericPrefix(prefixCls, number, style.value)}
           {icoNode}
-          <span class={`${mergedPrefixCls.value}-content`}>{slots.default?.()}</span>
+          <span class={`${prefixCls}-content`}>{slots.default?.()}</span>
         </span>
       )
     }
   },
 })
+
+function renderNumericPrefix(prefixCls: string, number: number | undefined, style: StyleValue) {
+  if (isNil(number)) {
+    return null
+  }
+
+  return (
+    <span class={`${prefixCls}-numeric-prefix`} style={style}>
+      {number}
+    </span>
+  )
+}

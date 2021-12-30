@@ -2,13 +2,13 @@
 title:
   zh: 基本使用
   en: Basic usage
-order: 0
+order: 1
 ---
 
 ## zh
 
-最简单的用法。
+基本使用
 
 ## en
 
-The simplest usage.
+Basic usage

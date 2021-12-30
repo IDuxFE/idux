@@ -4,49 +4,65 @@
 .@{tag-prefix} {
   .reset-component();
 
-  display: inline-block;
-  font-size: @tag-font-size;
-  color: @tag-default-color;
-  background: @tag-default-background-color;
-  padding: @tag-default-padding;
-  border: 1px solid @tag-default-border-color;
-  border-radius: @tag-border-radius;
-
+  .tag-style();
   .make-color-classes(@preset-colors);
   .make-color-classes(@status-colors);
 
-  & + & {
-    margin-left: @tag-margin;
+  min-width: @tag-rect-min-width;
+
+  .@{icon-prefix} {
+    font-size: @tag-font-size;
   }
 
   .@{idux-prefix}-icon + &-content {
     padding-left: @tag-padding;
   }
 
+  &-has-color {
+    color: @text-color-inverse;
+    border-color: transparent;
+  }
+
   &-round {
     border-radius: @tag-round-border-radius;
+    min-width: @tag-round-min-width;
   }
 
   &-rect {
     border-radius: 0;
+    min-width: @tag-rect-min-width;
+  }
+}
+
+.@{tag-prefix}-numeric {
+  .tag-style();
+  .make-numeric-color-classes(@preset-colors);
+  .make-numeric-color-classes(@status-colors);
+
+  .getTagPrefixSizeMixin();
+
+  // font-size * line-height + tag border width + tag prefix border width
+  @tag-prefix-inner-size: ~`getPrefixSize('@{tag-font-size}', '@{tag-line-height}')`;
+  @tag-prefix-size: calc(@tag-prefix-inner-size + 4px);
+  padding-left: calc(@tag-default-padding-horizontal + @tag-prefix-inner-size / 2 + 2px + @tag-padding);
+  position: relative;
+  border-radius: @tag-round-border-radius;
+  min-width: @tag-numeric-min-width;
+
+  &.@{tag-prefix}-has-color {
+    color: @text-color-inverse;
   }
 
-  &-has-color {
-    color: @color-white;
-    border-color: transparent;
-  }
-
-  &-checkable {
-    cursor: pointer;
-
-    .@{tag-prefix}-content {
-      user-select: none;
-    }
-  }
-
-  &-checked {
-    color: @tag-color-inverse;
-    background-color: @color-primary;
-    border-color: transparent;
+  .@{tag-prefix}-numeric-prefix {
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @tag-prefix-size;
+    width: @tag-prefix-size;
+    border-radius: @tag-prefix-size;
+    border: 1px solid @text-color-inverse;
   }
 }

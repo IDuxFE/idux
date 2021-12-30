@@ -92,6 +92,7 @@ export const allIcons = [
   'gitlab',
   'global',
   'heart',
+  'heat',
   'history',
   'holder',
   'home',
