@@ -47,8 +47,7 @@
     background-color: @drawer-background-color;
 
     > .@{header-prefix} {
-      padding-left: @drawer-header-padding-horizontal;
-      padding-right: @drawer-header-padding-horizontal;
+      padding: @drawer-header-padding;
     }
   }
 
@@ -59,7 +58,6 @@
   }
 
   &-footer {
-    min-height: @drawer-footer-min-height;
     padding: @drawer-footer-padding;
 
     .@{button-prefix} + .@{button-prefix} {
