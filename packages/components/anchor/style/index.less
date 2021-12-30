@@ -53,7 +53,7 @@
   }
 
   &-link {
-    padding: @anchor-link-padding;
+    margin: @anchor-link-margin;
     line-height: @anchor-link-line-height;
 
     &-title {
@@ -61,23 +61,14 @@
 
       position: relative;
       display: block;
-      margin-bottom: @anchor-link-margin-bottom;
+      font-size: @anchor-link-font-size;
       color: @anchor-color;
       text-decoration: none;
       transition: all @transition-duration-base;
-
+      
       &-active {
         color: @anchor-link-active-color;
       }
-
-      &:only-child {
-        margin-bottom: 0;
-      }
     }
-  }
-
-  &-link &-link {
-    padding-top: 4px;
-    padding-bottom: 4px;
   }
 }
