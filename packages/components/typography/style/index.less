@@ -5,29 +5,6 @@
   overflow-wrap: break-word;
   color: @typography-default-color;
 
-  // text
-
-  &-secondary {
-    color: @typography-color-secondary;
-  }
-
-  &-success {
-    color: @typography-success;
-  }
-
-  &-warning {
-    color: @typography-warning;
-  }
-
-  &-error {
-    color: @typography-error;
-  }
-
-  &-disabled {
-    color: @typography-disabled-color;
-    cursor: not-allowed;
-  }
-
   // tag
 
   mark {
@@ -118,6 +95,38 @@
     + h4,
     + h5 {
       margin-top: @typography-title-margin-top;
+    }
+  }
+
+  // text
+
+  &-secondary {
+    color: @typography-color-secondary;
+  }
+
+  &-success {
+    color: @typography-success;
+  }
+
+  &-warning {
+    color: @typography-warning;
+  }
+
+  &-error {
+    color: @typography-error;
+  }
+
+  &-disabled {
+    color: @typography-disabled-color;
+    cursor: not-allowed;
+
+    > * {
+      pointer-events: none;
+    }
+    
+    > a {
+      color: @typography-disabled-color;
+      cursor: not-allowed;
     }
   }
 
