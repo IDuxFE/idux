@@ -24,15 +24,10 @@
 
   &-icon {
     grid-area: icon;
-    width: @notification-icon-width;
     font-size: @notification-icon-font-size;
     display: flex;
     flex-direction: @notification-icon-flex-direction;
     margin: @notification-icon-margin;
-
-    .@{icon-prefix} {
-      font-size: @notification-icon-width;
-    }
   }
 
   &-close-icon {
@@ -57,6 +52,7 @@
 
   &-content {
     font-size: @notification-content-font-size;
+    color: @notification-content-color;
   }
 
   &-footer {
