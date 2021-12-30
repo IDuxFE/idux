@@ -60,7 +60,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     let newVal = step
     if (typeof value === 'number' && !Number.isNaN(value)) {
       // Use the toFixed func to ensure numerical accuracy.
-      newVal = parseFloat(value.toFixed(precision.value)) + step
+      newVal = parseFloat((value + step).toFixed(precision.value))
     }
 
     return Math.max(props.min, Math.min(props.max, newVal))
