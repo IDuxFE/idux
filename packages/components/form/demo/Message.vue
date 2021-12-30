@@ -47,20 +47,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
+import { AbstractControl, ValidateErrors, Validators, enUSMessages, useFormGroup, zhCNMessages } from '@idux/cdk/forms'
 
 Validators.setMessages({
-  default: '验证失败/Validation error',
   required: '必填项/Input is required',
-  email: { 'zh-CN': '邮箱格式不正确', 'en-US': 'The input is not valid email' },
-  minLength: {
-    'zh-CN': err => `长度不能小于 ${err.minLength}, 当前 ${err.actual}`,
-    'en-US': err => `Length can't be less than ${err.minLength}, current is ${err.actual}`,
-  },
-  maxLength: {
-    'zh-CN': err => `长度不能大于 ${err.maxLength}, 当前 ${err.actual}`,
-    'en-US': err => `Length can't be greater than ${err.maxLength}, current is ${err.actual}`,
-  },
+  email: { 'zh-CN': zhCNMessages.email, 'en-US': enUSMessages.email },
+  minLength: { 'zh-CN': zhCNMessages.minLength, 'en-US': enUSMessages.minLength },
+  maxLength: { 'zh-CN': zhCNMessages.maxLength, 'en-US': enUSMessages.maxLength },
   passwordRequired: {
     'zh-CN': '请确认你的密码',
     'en-US': 'Please confirm your password',
@@ -77,18 +70,18 @@ Validators.setMessages({
 
 const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value) {
-    return { passwordRequired: Validators.getError('passwordRequired') }
+    return { passwordRequired: Validators.getError('passwordRequired', control) }
   } else if (value !== control.root.get('password')?.getValue()) {
-    return { passwordConfirm: Validators.getError('passwordConfirm') }
+    return { passwordConfirm: Validators.getError('passwordConfirm', control) }
   }
   return undefined
 }
 
-const mobilePhoneValidator = (value: string): ValidateErrors | undefined => {
+const mobilePhoneValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value || /(^1\d{10}$)/.test(value)) {
     return undefined
   }
-  return { mobilePhone: Validators.getError('mobilePhone') }
+  return { mobilePhone: Validators.getError('mobilePhone', control) }
 }
 
 export default defineComponent({
@@ -100,7 +93,7 @@ export default defineComponent({
     const { required, email, minLength, maxLength } = Validators
 
     const formGroup = useFormGroup({
-      email: ['', [required, email]],
+      email: ['', { name: 'E-mail', validators: [required, email] }],
       password: ['', [required, minLength(12), maxLength(16)]],
       confirmPassword: ['', [required, confirmPasswordValidator]],
       nickname: ['', [required]],

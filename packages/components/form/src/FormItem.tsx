@@ -238,12 +238,16 @@ function useMessage(
     if (currMessage) {
       return isString(currMessage) ? currMessage : currMessage(control.value!)
     }
-
-    return getMessageByError(control.value?.errors.value, locale)
+    const currControl = control.value
+    return getMessageByError(currControl, currControl?.errors.value, locale)
   })
 }
 
-function getMessageByError(error: ValidateErrors | undefined, locale: ComputedRef<Locale>) {
+function getMessageByError(
+  control: AbstractControl | undefined,
+  error: ValidateErrors | undefined,
+  locale: ComputedRef<Locale>,
+) {
   if (!error) {
     return undefined
   }
@@ -256,14 +260,14 @@ function getMessageByError(error: ValidateErrors | undefined, locale: ComputedRe
       }
 
       if (isFunction(message)) {
-        return message(rest)
+        return message(rest, control!)
       }
 
       const currMessage = message[locale.value.type]
       if (isString(currMessage)) {
         return currMessage
       }
-      return currMessage(rest)
+      return currMessage(rest, control!)
     }
   }
 

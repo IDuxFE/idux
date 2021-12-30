@@ -26,5 +26,6 @@ ignore:
   - packages/components/node_modules
   - packages/pro/node_modules
   - packages/site/node_modules
+  - packages/cdk/forms/src/messages
   - packages/components/i18n/src/locales
   - packages/site/components.d.ts

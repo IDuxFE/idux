@@ -1,6 +1,7 @@
 import { flushPromises } from '@vue/test-utils'
 
 import { FormControl } from '../src/controls'
+import { zhCNMessages } from '../src/messages/zh-CN'
 import { ValidateErrors } from '../src/types'
 import { Validators } from '../src/validators'
 
@@ -67,7 +68,7 @@ describe('formControl.ts', () => {
 
       control.setValidator(Validators.required)
 
-      expect(await control.validate()).toEqual({ required: { message: undefined } })
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
     })
   })
 

@@ -7,8 +7,8 @@
 
 - `AbstractControl`: 它提供了一些所有控件和控件组共有的行为，比如运行验证器、计算状态和重置状态，还定义了一些所有子类共享的属性，如 `value`、`status`。它是 `FormControl`、`FormGroup` 和 `FormArray` 的基类,不允许直接实例化它。
 - `FormControl`: 它用于跟踪独立表单控件的值和验证状态，实现了关于访问值、验证状态、用户交互和事件的大部分基本功能。
-- `FormGroup`: 它用于跟踪一组控件实例的值和有效性状态，它把每个子控件的值聚合进一个数组，它的 `index` 是每个控件的名字。它通过归集其子控件的状态值来计算出自己的状态。 比如，如果组中的任何一个控件是无效的，那么整个组就是无效的。
-- `AbstractControl`: 它用于跟踪一个控件数组实例的值和有效性状态，它把每个子控件的值聚合进一个对象，它的 `key` 是每个控件的名字。它通过归集其子控件的状态值来计算出自己的状态。 比如，如果数组中的任何一个控件是无效的，那么整个数组就是无效的。
+- `FormGroup`: 它用于跟踪一组控件实例的值和有效性状态，它把每个子控件的值聚合进一个对象。它通过归集其子控件的状态值来计算出自己的状态。 比如，如果组中的任何一个控件是无效的，那么整个组就是无效的。
+- `FormArray`: 它用于跟踪一个控件数组实例的值和有效性状态，它把每个子控件的值聚合进一个数组。它通过归集其子控件的状态值来计算出自己的状态。 比如，如果数组中的任何一个控件是无效的，那么整个数组就是无效的。
 
 ### 实现支持控制器的输入控件
 
@@ -344,8 +344,7 @@ export declare abstract class AbstractControl<T = any> {
    * @param options Configuration options that emits events when the value changes.
    * * `dirty`: Marks it dirty, default is false.
    */
-  abstract setValue(value: T, options?: { dirty?: boolean }): void;
-  abstract setValue(value: Partial<T>, options?: { dirty?: boolean }): void;
+  abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean }): void;
   /**
    * The aggregate value of the control.
    */

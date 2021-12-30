@@ -11,3 +11,8 @@ export * from './src/types'
 export * from './src/useForms'
 export * from './src/utils'
 export * from './src/validators'
+
+// messages
+
+export * from './src/messages/zh-CN'
+export * from './src/messages/en-US'

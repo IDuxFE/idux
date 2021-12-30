@@ -56,7 +56,7 @@ export abstract class AbstractControl<T = any> {
   /**
    * A collection of child controls.
    */
-  readonly controls!: ComputedRef<GroupControls<T> | AbstractControl<ArrayElement<T>>[] | undefined>
+  readonly controls!: ComputedRef<any>
 
   /**
    * The ref value for the control.
@@ -145,7 +145,9 @@ export abstract class AbstractControl<T = any> {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
-  protected _controls: Ref<GroupControls<T> | AbstractControl<ArrayElement<T>>[] | undefined>
+  name?: string
+
+  protected _controls: Ref<any>
   protected _valueRef!: Ref<T>
   protected _status!: Ref<ValidateStatus>
   protected _controlsStatus!: Ref<ValidateStatus>
@@ -179,8 +181,7 @@ export abstract class AbstractControl<T = any> {
    * @param options Configuration options that emits events when the value changes.
    * * `dirty`: Marks it dirty, default is false.
    */
-  abstract setValue(value: T, options?: { dirty?: boolean }): void
-  abstract setValue(value: Partial<T>, options?: { dirty?: boolean }): void
+  abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.
@@ -425,6 +426,7 @@ export abstract class AbstractControl<T = any> {
   ) {
     let disabled = false
     if (isOptions(validatorOrOptions)) {
+      this.name = validatorOrOptions.name
       this._trigger = validatorOrOptions.trigger ?? this._trigger
       this._validators = toValidator(validatorOrOptions.validators)
       this._asyncValidators = toAsyncValidator(validatorOrOptions.asyncValidators)
@@ -511,6 +513,7 @@ export abstract class AbstractControl<T = any> {
 }
 
 export class FormControl<T = any> extends AbstractControl<T> {
+  readonly controls!: ComputedRef<undefined>
   constructor(
     private _initValue?: T,
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
