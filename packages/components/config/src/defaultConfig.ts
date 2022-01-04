@@ -278,7 +278,9 @@ const popover: PopoverConfig = {
   delay: 100,
   destroyOnHide: false,
   placement: 'top',
+  showArrow: true,
   trigger: 'hover',
+  closeIcon: 'close',
 }
 
 // --------------------- Feedback ---------------------

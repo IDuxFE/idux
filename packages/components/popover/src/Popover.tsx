@@ -6,10 +6,10 @@
  */
 
 import type { PopoverProps } from './types'
-import type { Slots, VNode } from 'vue'
 
-import { computed, defineComponent } from 'vue'
+import { Ref, Slots, VNode, computed, defineComponent } from 'vue'
 
+import { ɵHeader } from '@idux/components/_private/header'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
@@ -19,36 +19,61 @@ import { popoverProps } from './types'
 export default defineComponent({
   name: 'IxPopover',
   props: popoverProps,
-  setup(props, { expose, slots }) {
+  setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
-    const { overlayRef, updatePopper, overlayProps } = ɵUseTooltipOverlay(props, config, mergedPrefixCls)
+    const { overlayRef, updatePopper, overlayProps, visible, setVisible } = ɵUseTooltipOverlay(
+      props,
+      config,
+      mergedPrefixCls,
+    )
+
     expose({ updatePopper })
+
+    const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
         <ɵOverlay
           ref={overlayRef}
-          v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
           class={prefixCls}
-          transitionName={`${common.prefixCls}-fade`}
           {...overlayProps.value}
+          visible={visible.value}
+          v-slots={{
+            default: slots.default,
+            content: () => renderContent(props, slots, closeIcon, setVisible, prefixCls),
+          }}
+          transitionName={`${common.prefixCls}-fade`}
         />
       )
     }
   },
 })
 
-const renderContent = (props: PopoverProps, slots: Slots, prefixCls: string) => {
-  if (!(slots.title || props.title || slots.content || props.content)) {
+const renderContent = (
+  props: PopoverProps,
+  slots: Slots,
+  closeIcon: Ref<string | VNode>,
+  setVisibility: (visible: boolean) => void,
+  prefixCls: string,
+) => {
+  if (!(slots.header || props.header || slots.content || props.content)) {
     return null
   }
 
   const children: VNode[] = []
-  if (slots.title || props.title) {
-    children.push(<div class={`${prefixCls}-title`}>{slots.title?.() ?? props.title}</div>)
+  if (slots.header || props.header) {
+    children.push(
+      <ɵHeader
+        closable={props.closable}
+        closeIcon={closeIcon.value}
+        header={props.header ?? props.title}
+        onClose={() => setVisibility(false)}
+        v-slots={{ header: slots.header }}
+      />,
+    )
   }
 
   if (slots.content || props.content) {
