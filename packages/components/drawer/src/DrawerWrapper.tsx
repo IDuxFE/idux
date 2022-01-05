@@ -142,11 +142,11 @@ export default defineComponent({
                 <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
                 <div class={`${prefixCls}-content`}>
                   <ɵHeader
+                    v-slots={slots}
                     closable={closable.value}
                     closeIcon={closeIcon.value}
                     header={props.header}
                     onClose={close}
-                    v-slots={slots}
                   />
                   <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
                   <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
