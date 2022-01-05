@@ -170,7 +170,7 @@ describe('Drawer', () => {
     await wrapper.setProps({ header })
 
     expect(drawerWrapper.find('.ix-header').text()).toBe(header)
-    expect(drawerWrapper.find('.ix-header').classes()).toContain('ix-header-md')
+    expect(drawerWrapper.find('.ix-header').classes()).toContain('ix-header-sm')
 
     header = { title: 'This is header2', size: 'lg' }
     await wrapper.setProps({ header })

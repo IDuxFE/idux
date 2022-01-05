@@ -217,7 +217,7 @@ describe('Modal', () => {
     await wrapper.setProps({ header })
 
     expect(modalWrapper.find('.ix-header').text()).toBe(header)
-    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-md')
+    expect(modalWrapper.find('.ix-header').classes()).toContain('ix-header-sm')
 
     header = { title: 'This is header2', size: 'lg' }
     await wrapper.setProps({ header })
