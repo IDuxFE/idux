@@ -53,10 +53,14 @@
       font-size: @modal-body-title-font-size;
       font-weight: @modal-body-title-font-weight;
       margin-bottom: @modal-body-title-margin-bottom;
+      color: @modal-body-title-color;
     }
 
     &-content {
       width: 100%;
+      padding: @modal-body-content-padding;
+      font-size: @modal-body-content-font-size;
+      color: @modal-body-content-color;
     }
 
     &-confirm,
@@ -65,7 +69,7 @@
     &-warning,
     &-error {
       display: flex;
-      padding-top: 0;
+      padding: @modal-typed-body-padding;
     }
 
     &-icon {
