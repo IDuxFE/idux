@@ -12,6 +12,13 @@
   color: @radio-color;
   cursor: pointer;
 
+  &:not(&-button)::after {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    content: "\a0";
+  }
+
   &-input {
     position: relative;
     display: inline-block;
