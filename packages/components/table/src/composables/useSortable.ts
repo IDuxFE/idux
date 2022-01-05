@@ -9,25 +9,36 @@ import type { Key, TableColumnSortOrder, TableColumnSortable } from '../types'
 import type { TableColumnMerged } from './useColumns'
 import type { ComputedRef } from 'vue'
 
-import { computed, reactive, watchEffect } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
 export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): SortableContext {
-  const activeSortable = reactive<ActiveSortable>({})
   const activeSortColumn = computed(() => flattedColumns.value.find(column => column.sortable?.orderBy))
 
-  watchEffect(() => {
+  const orderByRef = ref<'descend' | 'ascend' | undefined>(activeSortColumn.value?.sortable?.orderBy)
+
+  const tempOrderByRef = ref<'descend' | 'ascend' | undefined>()
+  const activeSortable = reactive<ActiveSortable>({
+    orderBy: orderByRef.value,
+  })
+
+  watch(activeSortColumn, () => {
     const sortColumn = activeSortColumn.value
     if (sortColumn) {
       activeSortable.key = sortColumn.key
-      activeSortable.orderBy = sortColumn.sortable!.orderBy!
+      orderByRef.value = sortColumn.sortable!.orderBy!
       activeSortable.sorter = sortColumn.sortable!.sorter
     } else {
       activeSortable.key = undefined
-      activeSortable.orderBy = undefined
+      orderByRef.value = undefined
+      tempOrderByRef.value = undefined
       activeSortable.sorter = undefined
     }
+  })
+
+  watch([orderByRef, tempOrderByRef], () => {
+    activeSortable.orderBy = orderByRef.value ?? tempOrderByRef.value
   })
 
   const handleSort = (key: Key, sortable: TableColumnSortable) => {
@@ -40,9 +51,9 @@ export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): S
       activeSortable.key = key
       activeSortable.sorter = sorter
     }
-    activeSortable.orderBy = orderBy
 
-    callEmit(onChange, activeSortable.orderBy)
+    tempOrderByRef.value = orderBy
+    callEmit(onChange, orderBy)
   }
 
   return { activeSortable, handleSort }

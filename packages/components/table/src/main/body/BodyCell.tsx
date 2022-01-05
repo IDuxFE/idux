@@ -33,18 +33,28 @@ type BodyColumn = TableColumnMergedExtra & {
 export default defineComponent({
   props: tableBodyCellProps,
   setup(props) {
-    const { slots, activeSortable, fixedColumnKeys, columnOffsets, isSticky, expandable, selectable, bodyColTag } =
-      inject(TABLE_TOKEN)!
+    const {
+      mergedPrefixCls,
+      slots,
+      activeSortable,
+      fixedColumnKeys,
+      columnOffsets,
+      isSticky,
+      expandable,
+      selectable,
+      bodyColTag,
+    } = inject(TABLE_TOKEN)!
     const dataValue = useDataValue(props)
 
     const cellProps = computed(() => {
       const { key, fixed, align, ellipsis } = props.column as BodyColumn
-      const prefixCls = 'ix-table'
+      const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean> = {
         [`${prefixCls}-cell-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
         [`${prefixCls}-align-${align}`]: !!align,
         [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
+
       let style: StyleValue | undefined
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
@@ -75,22 +85,23 @@ export default defineComponent({
 
     return () => {
       const { type, additional } = props.column as BodyColumn
-      let children: VNodeTypes | null
+      let children: VNodeTypes | null = null
       let title: string | undefined
-      if (type === 'expandable') {
-        children = props.disabled ? null : renderExpandableChildren(props, slots, expandable)
-      } else if (type === 'selectable') {
+
+      if (type === 'selectable') {
         children = renderSelectableChildren(props, selectable, handleClick)
       } else {
         const { ellipsis } = props.column
         const text = dataValue.value
-        children = renderChildren(props, slots, text)
-        title = getColTitle(ellipsis, children, text)
+        children = text ? renderChildren(props, slots, text) : null
+        title = children ? getColTitle(ellipsis, children, text) : undefined
       }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyColTag = bodyColTag.value as any
       return (
         <BodyColTag {...cellProps.value} title={title} {...additional}>
+          {type === 'expandable' ? renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value) : null}
           {children}
         </BodyColTag>
       )
@@ -102,6 +113,10 @@ function useDataValue(props: TableBodyCellProps) {
   return computed(() => {
     const { column, record } = props
     const dataKeys = convertArray(column.dataKey)
+    if (dataKeys.length <= 0) {
+      return undefined
+    }
+
     let value = record
     for (let index = 0; index < dataKeys.length; index++) {
       if (!value) {
@@ -130,18 +145,31 @@ function renderExpandableChildren(
   props: TableBodyCellProps,
   slots: Slots,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
+  prefixCls: string,
 ) {
-  const { icon, customIcon } = expandable.value!
-  const record = props.record
-  const expanded = props.expanded!
+  const { icon, customIcon, indent } = expandable.value!
+  const { record, expanded, level, disabled } = props
   const onExpand = props.handleExpend!
-  if (isFunction(customIcon)) {
-    return customIcon({ expanded, record, onExpand })
+  const style = {
+    marginLeft: indent ? convertCssPixel(level * indent) : undefined,
   }
-  if (isString(customIcon) && slots[customIcon]) {
-    return slots[customIcon]!({ expanded, record, onExpand })
+
+  let iconNode: VNodeTypes | null
+  if (disabled) {
+    iconNode = null
+  } else if (isFunction(customIcon)) {
+    iconNode = customIcon({ expanded: !!expanded, record, onExpand })
+  } else if (isString(customIcon) && slots[customIcon]) {
+    iconNode = slots[customIcon]!({ expanded, record, onExpand })
+  } else {
+    iconNode = <IxIcon name={icon[expanded ? 1 : 0]} rotate={expanded ? 180 : -180} onClick={onExpand} />
   }
-  return <IxIcon name={icon[expanded ? 1 : 0]} rotate={expanded ? 180 : -180} onClick={onExpand} />
+
+  return (
+    <button class={`${prefixCls}-expandable-icon`} style={style}>
+      {iconNode}
+    </button>
+  )
 }
 
 function renderSelectableChildren(

@@ -16,6 +16,7 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
+| `v-model:expandAllStatus` | 全部展开的状态 | `boolean` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
@@ -85,14 +86,14 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
 ##### TableColumnExpandable
 
-可展开列配置的属性，继承 `TableColumnCommon`
+可展开列配置的属性，继承 `TableColumnBase`
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
 | `customExpand` | 自定义展开内容 | `string \| TableColumnExpandableExpandFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customIcon` | 自定义展开图标 | `string \| TableColumnExpandableIconFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
-| `disabled` |  设置是否允许行展开 | `(record:T, rowIndex: number) => boolean` | - | - | - |
+| `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
 | `icon` | 展开按钮图标 | `[string, string]` | `['plus', 'minus']` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
@@ -143,6 +144,15 @@ export interface TableColumnSelectableOption {
 | `orders` | 支持的排序方式 | `Array<'ascend' \| 'descend'>` | `['ascend', 'descend']` | ✅ | - |
 | `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
 | `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于服务端排序 |
+
+##### TableColumnFilterable
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `filters` | 筛选项 | `{ text: string, value: any }[]` | - | - | - |
+| `filterBy` | 当前激活的筛选项 | `any[]` | - | - | - |
+| `filter` | 本地模式下的筛选函数 | `(currFilterBy: any[], record: T) => boolean` | - | - | - |
+| `onChange` | 排序规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于服务端筛选 |
 
 #### TablePagination
 

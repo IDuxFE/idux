@@ -7,6 +7,7 @@
 
 import type { Key, TableProps } from '../types'
 import type { TableColumnMerged, TableColumnMergedExpandable } from './useColumns'
+import type { MergedData } from './useDataSource'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
@@ -35,11 +36,28 @@ export function useExpandable(props: TableProps, flattedColumns: ComputedRef<Tab
     callEmit(onChange, tempKeys)
   }
 
-  return { expandable, expandedRowKeys, handleExpandChange }
+  const checkExpandDisabled = (data: MergedData) => {
+    if (!expandable.value) {
+      return true
+    }
+
+    const { disabled, customExpand } = expandable.value
+    const { record } = data
+
+    if (disabled?.(record)) {
+      return true
+    }
+
+    return !(customExpand || (data.children && data.children.length > 0))
+  }
+
+  return { expandable, expandedRowKeys, setExpandedRowKeys, checkExpandDisabled, handleExpandChange }
 }
 
 export interface ExpandableContext {
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>
   expandedRowKeys: ComputedRef<Key[]>
+  setExpandedRowKeys: (value: Key[]) => void
+  checkExpandDisabled: (data: MergedData) => boolean
   handleExpandChange: (key: Key, record: unknown) => void
 }

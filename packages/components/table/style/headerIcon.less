@@ -1,0 +1,20 @@
+.header-icon() {
+  min-width: @table-head-icon-size;
+  min-height: @table-head-icon-size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+  font-size: @table-head-icon-font-size;
+  color: @table-head-icon-color;
+  transition: color, background @table-head-icon-transition-duration;
+  cursor: pointer;
+
+  &:hover {
+    background-color: @table-head-icon-hover-backgroud-color;
+  }
+
+  &-active {
+    color: @color-primary;
+  }
+}

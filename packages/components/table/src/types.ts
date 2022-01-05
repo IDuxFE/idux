@@ -9,6 +9,7 @@
 
 import type { TableColumnMerged, TableColumnMergedExtra } from './composables/useColumns'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
+import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
@@ -16,12 +17,15 @@ import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
 import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
-import { VirtualScrollToFn } from '@idux/cdk/scroll'
 import { IxPropTypes } from '@idux/cdk/utils'
+
+import { FlattedData } from './composables/useDataSource'
 
 export const tableProps = {
   expandedRowKeys: IxPropTypes.array<Key>(),
   selectedRowKeys: IxPropTypes.array<Key>(),
+
+  expandedAllStatus: IxPropTypes.bool,
 
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string.def('children'),
@@ -61,7 +65,10 @@ export type TableComponent = DefineComponent<
 >
 export type TableInstance = InstanceType<DefineComponent<TableProps, TableBindings>>
 
-export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
+export type TableColumn<T = unknown, V = any> =
+  | TableColumnBase<T, V>
+  | TableColumnExpandable<T, V>
+  | TableColumnSelectable<T>
 
 export interface TableColumnCommon<T = unknown> {
   additional?: {
@@ -78,12 +85,13 @@ export interface TableColumnCommon<T = unknown> {
   width?: string | number
 }
 
-export interface TableColumnBase<T = unknown> extends TableColumnCommon<T> {
+export interface TableColumnBase<T = unknown, V = any> extends TableColumnCommon<T> {
   dataKey?: Key | Key[]
   editable?: boolean
   ellipsis?: boolean
   key?: Key
   sortable?: TableColumnSortable<T>
+  filterable?: TableColumnFilterable<T, V>
   title?: string
   children?: TableColumn<T>[]
   customRender?: string | TableColumnRenderFn<any, T>
@@ -98,12 +106,12 @@ export interface TableColumnRenderOption<V = any, T = unknown> {
 export type TableColumnRenderFn<V = any, T = unknown> = (options: TableColumnRenderOption<V, T>) => VNodeTypes
 export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
-export interface TableColumnExpandable<T = unknown> extends TableColumnCommon<T> {
+export interface TableColumnExpandable<T = unknown, V = any> extends TableColumnBase<T, V> {
   type: 'expandable'
   customExpand?: string | TableColumnExpandableExpandFn<T>
   customIcon?: string | TableColumnExpandableIconFn<T>
 
-  disabled?: (record: T, rowIndex: number) => boolean
+  disabled?: (record: T) => boolean
   // remove ?
   icon?: [string, string]
   indent?: number
@@ -181,6 +189,18 @@ export interface TableColumnSortable<T = unknown> {
   onChange?: (currOrderBy?: TableColumnSortOrder) => void
 }
 
+export interface TableColumnFilter<V = unknown> {
+  text: string
+  value: V
+}
+
+export interface TableColumnFilterable<T = unknown, V = any> {
+  filters: TableColumnFilter<V>[]
+  filterBy?: V[]
+  filter: (currFilterBy: V[], record: T) => boolean
+  onChange?: (currFilterBy: V[]) => void
+}
+
 export interface TableSticky {
   offsetHead?: number
   offsetFoot?: number
@@ -208,6 +228,7 @@ export const tableBodyRowProps = {
   rowIndex: IxPropTypes.number.isRequired,
   level: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
+  rowData: IxPropTypes.object<FlattedData>().isRequired,
   rowKey: IxPropTypes.oneOfType([String, Number]).isRequired,
 }
 
@@ -216,6 +237,7 @@ export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
 export const tableBodyCellProps = {
   column: IxPropTypes.object<TableColumnMerged>().isRequired,
   colIndex: IxPropTypes.number.isRequired,
+  level: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
   rowIndex: IxPropTypes.number.isRequired,
   disabled: IxPropTypes.bool,
@@ -234,3 +256,12 @@ export const tableMeasureCellProps = {
 }
 
 export type TableMeasureCellProps = IxInnerPropTypes<typeof tableMeasureCellProps>
+
+export const tableFilterPanelProps = {
+  filterable: IxPropTypes.object<TableColumnFilterable>().isRequired,
+}
+
+export type TableFilterPanelProps = IxInnerPropTypes<typeof tableFilterPanelProps>
+
+export const tableHeadCellFilterableTriggerProps = tableFilterPanelProps
+export type TableHeadCellFilterableTriggerProps = TableFilterPanelProps

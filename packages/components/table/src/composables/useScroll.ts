@@ -7,6 +7,7 @@
 
 import type { TableProps } from '../types'
 import type { StickyContext } from './useSticky'
+import type { VirtualScrollInstance, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ComputedRef, Ref } from 'vue'
 
 import { computed, onBeforeUnmount, ref } from 'vue'
@@ -27,11 +28,18 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
     isSticky.value ? 0 : scrollVertical.value ? scrollBarSize.value : 0,
   )
 
+  const scrollTo: VirtualScrollToFn = options => {
+    if (props.virtual) {
+      return (scrollBodyRef.value as unknown as VirtualScrollInstance)?.scrollTo(options)
+    }
+  }
+
   return {
     scrollHeadRef,
     scrollBodyRef,
     scrollFootRef,
     handleScroll,
+    scrollTo,
     pingedStart,
     pingedEnd,
     scrollX,
@@ -48,6 +56,7 @@ export interface ScrollContext {
   scrollBodyRef: Ref<HTMLDivElement | undefined>
   scrollFootRef: Ref<HTMLDivElement | undefined>
   handleScroll: (evt?: Event, scrollLeft?: number) => void
+  scrollTo: VirtualScrollToFn
   pingedStart: Ref<boolean>
   pingedEnd: Ref<boolean>
   scrollX: ComputedRef<string>

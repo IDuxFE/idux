@@ -80,6 +80,7 @@ export const allIcons = [
   'file-text',
   'file-zip',
   'file',
+  'filter-filled',
   'filter',
   'folder-add',
   'folder-open',

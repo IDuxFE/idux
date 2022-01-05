@@ -16,7 +16,7 @@ import ColGroup from './ColGroup'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const { scrollHeadRef, handleScroll, scrollX, flattedData, isSticky, mergedSticky, columnWidths } =
+    const { mergedPrefixCls, scrollHeadRef, handleScroll, scrollX, flattedData, isSticky, mergedSticky, columnWidths } =
       inject(TABLE_TOKEN)!
 
     useScrollEvents(scrollHeadRef, handleScroll)
@@ -24,9 +24,10 @@ export default defineComponent({
     const isMaxContent = computed(() => scrollX.value === 'max-content')
     const hasData = computed(() => flattedData.value.length > 0)
     const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
       return {
-        'ix-table-fixed-holder': true,
-        'ix-table-sticky-holder': isSticky.value,
+        [`${prefixCls}-fixed-holder`]: true,
+        [`${prefixCls}-sticky-holder`]: isSticky.value,
       }
     })
     const style = computed<StyleValue>(() => {

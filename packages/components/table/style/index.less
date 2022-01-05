@@ -6,11 +6,14 @@
 @import './fixed.less';
 @import './radius.less';
 @import './size.less';
+@import './headerIcon.less';
+@import './filterDropdown.less';
 
 .@{table-prefix} {
   .reset-component();
   .clearfix();
 
+  color: @table-color;
   max-width: 100%;
 
   &-container {
@@ -49,6 +52,7 @@
     color: @table-head-color;
     background: @table-head-background;
     font-weight: @table-head-font-weight;
+    line-height: @table-head-line-height;
     overflow-wrap: break-word;
     border-bottom: @table-border-width @table-border-style @table-border-color;
 
@@ -78,6 +82,7 @@
   td {
     position: relative;
     border-bottom: @table-border-width @table-border-style @table-border-color;
+    line-height: @table-body-line-height;
     overflow-wrap: break-word;
     transition: background 0.3s;
 
@@ -120,11 +125,17 @@
   &-cell-title {
     position: relative;
     z-index: 1;
-    flex: 1;
   }
 
   &-cell-scroll-bar {
     box-shadow: 0 1px 0 1px @table-head-background;
+  }
+
+  & &-head-cell-wrapper,
+  & &-head-icon-triggers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   &-pagination {
@@ -149,6 +160,14 @@
     }
   }
 
+  & &-expandable-icon {
+    width: @table-expandable-icon-size;
+    height: @table-expandable-icon-size;
+    font-size: @table-expandable-icon-size;
+    margin-right: @table-icon-margin;
+    color: @table-expandable-icon-color;
+  }
+
   // --------- Selectable ---------
 
   & &-col-selectable {
@@ -160,10 +179,19 @@
   }
 
   & &-cell-selectable {
-    display: flex;
-    align-items: center;
-    & > .@{idux-prefix}-dropdown-trigger {
-      margin-left: 4px;
+    .@{table-prefix}-selectable {
+      display: flex;
+      align-items: center;
+
+      &-trigger {
+        margin-left: @table-icon-margin;
+        color: @table-head-icon-color;
+        cursor: pointer;
+
+        &--open {
+          transform: rotateX(180deg);
+        }
+      }
     }
   }
 
@@ -189,32 +217,21 @@
     }
   }
 
-  & th&-cell-sorted,
-  & td&-cell-sorted {
-    background: @table-body-hover-background;
+  &-sortable-trigger {
+    .header-icon();
+
+    flex-direction: column;
+    font-size: 8px;
+    margin-left: @table-icon-margin;
+
+    .@{idux-prefix}-icon + .@{idux-prefix}-icon {
+      margin-top: -0.2em;
+    }
   }
 
-  &-sortable {
-    display: flex;
-    flex: auto;
-    align-items: center;
-    justify-content: space-between;
+  &-filterable-trigger {
+    .header-icon();
 
-    &-trigger {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      color: @table-head-icon-color;
-      font-size: 10px;
-      transition: color 0.3s;
-
-      &-active {
-        color: @color-primary;
-      }
-
-      .@{idux-prefix}-icon + .@{idux-prefix}-icon {
-        margin-top: -0.2em;
-      }
-    }
+    margin-left: @table-icon-margin;
   }
 }

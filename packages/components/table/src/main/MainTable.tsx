@@ -30,6 +30,7 @@ export default defineComponent({
   setup() {
     const {
       props,
+      mergedPrefixCls,
       config,
       changeColumnWidth,
       flattedData,
@@ -95,7 +96,7 @@ export default defineComponent({
     onBeforeUnmount(() => offResize(mainTableRef.value, handleWrapperResize))
 
     const classes = computed(() => {
-      const prefixCls = 'ix-table'
+      const prefixCls = mergedPrefixCls.value
       const { borderless = config.borderless, size = config.size } = props
       return {
         [`${prefixCls}-container`]: true,
@@ -141,6 +142,8 @@ export default defineComponent({
       const TableTag = tableTag.value as any
       let children: VNodeTypes
 
+      const prefixCls = mergedPrefixCls.value
+
       if (scrollVertical.value || isSticky.value) {
         const tableHead = props.headless ? null : (
           <FixedHolder>
@@ -152,7 +155,7 @@ export default defineComponent({
         if (props.virtual) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) => {
             const { expanded, level, record, rowKey } = item
-            const rowProps = { key: rowKey, expanded, level, record, rowIndex: index, rowKey }
+            const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex: index, rowKey }
             return <BodyRow {...rowProps} />
           }
           const contentRender: VirtualContentRenderFn = children => {
@@ -190,7 +193,7 @@ export default defineComponent({
           )
         } else {
           tableBody = (
-            <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
+            <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
@@ -207,7 +210,7 @@ export default defineComponent({
         children = [tableHead, tableBody, tableFoot, sticky]
       } else {
         children = (
-          <div ref={scrollBodyRef} class="ix-table-content" style={contentStyle.value} onScroll={handleScroll}>
+          <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
               {props.headless ? null : <Head></Head>}

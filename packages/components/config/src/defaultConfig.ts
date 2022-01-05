@@ -255,7 +255,7 @@ const table: TableConfig = {
     align: 'start',
     sortable: { nextTooltip: false, orders: ['ascend', 'descend'] },
   },
-  columnExpandable: { icon: ['plus', 'minus'] },
+  columnExpandable: { icon: ['plus-square', 'minus-square'] },
 }
 
 const tooltip: TooltipConfig = {

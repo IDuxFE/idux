@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VNodeTypes } from 'vue'
+import type { DropdownProps } from '@idux/components/dropdown'
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { useState } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxDropdown } from '@idux/components/dropdown'
 import { IxIcon } from '@idux/components/icon'
@@ -19,6 +20,7 @@ import { TABLE_TOKEN } from '../../token'
 export default defineComponent({
   setup() {
     const {
+      mergedPrefixCls,
       paginatedMap,
       selectable,
       currentPageRowKeys,
@@ -32,31 +34,61 @@ export default defineComponent({
       const dataCount = paginatedMap.value.size
       return dataCount === 0 || dataCount === currentPageRowKeys.value.disabledRowKeys.length
     })
+    const [visible, setVisible] = useState(false)
+    const prefixCls = computed(() => `${mergedPrefixCls.value}-selectable`)
+    const triggerClasses = computed(() => {
+      return {
+        [`${prefixCls.value}-trigger`]: true,
+        [`${prefixCls.value}-trigger--open`]: visible.value,
+      }
+    })
+
+    const renderOverlay = () => {
+      const options = mergedSelectableOptions.value
+      if (!options) {
+        return null
+      }
+
+      return (
+        <IxMenu>
+          {options.map(option => (
+            <IxMenuItem {...option}></IxMenuItem>
+          ))}
+        </IxMenu>
+      )
+    }
+    const renderTrigger = () => <IxIcon name="down" class={triggerClasses.value}></IxIcon>
+    const renderDropDown = () => {
+      if (!mergedSelectableOptions.value) {
+        return null
+      }
+
+      const dropdownProps: DropdownProps = {
+        'onUpdate:visible': setVisible,
+        trigger: 'click',
+      }
+
+      return <IxDropdown {...dropdownProps} v-slots={{ default: renderTrigger, overlay: renderOverlay }} />
+    }
 
     return () => {
       const { multiple } = selectable.value!
+
       if (!multiple) {
         return undefined
       }
-      const children: VNodeTypes[] = []
-      const checked = currentPageAllSelected.value
-      const indeterminate = currentPageSomeSelected.value
-      const checkboxProps = { checked, indeterminate, disabled: disabled.value, onChange: handleHeadSelectChange }
-      children.push(<IxCheckbox {...checkboxProps}></IxCheckbox>)
-      const options = mergedSelectableOptions.value
-      if (options) {
-        const trigger = <IxIcon name="down" class="ix-dropdown-trigger"></IxIcon>
-        const content = (
-          <IxMenu>
-            {options.map(option => (
-              <IxMenuItem {...option}></IxMenuItem>
-            ))}
-          </IxMenu>
-        )
-        const slots = { default: () => trigger, overlay: () => content }
-        children.push(<IxDropdown v-slots={slots}></IxDropdown>)
-      }
-      return children
+
+      return (
+        <div class={`${prefixCls.value}`}>
+          <IxCheckbox
+            checked={currentPageAllSelected.value}
+            indeterminate={currentPageSomeSelected.value}
+            disabled={disabled.value}
+            onChange={handleHeadSelectChange}
+          />
+          {renderDropDown()}
+        </div>
+      )
     }
   },
 })

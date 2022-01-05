@@ -8,6 +8,7 @@
 import type { ColumnsContext } from './composables/useColumns'
 import type { DataSourceContext } from './composables/useDataSource'
 import type { ExpandableContext } from './composables/useExpandable'
+import type { FilterableContext } from './composables/useFilterable'
 import type { GetRowKey } from './composables/useGetRowKey'
 import type { PaginationContext } from './composables/usePagination'
 import type { ScrollContext } from './composables/useScroll'
@@ -28,9 +29,11 @@ export interface TableContext
     ScrollContext,
     SelectableContext,
     SortableContext,
+    FilterableContext,
     StickyContext,
     TagsContext {
   props: TableProps
+  mergedPrefixCls: ComputedRef<string>
   slots: Slots
   config: TableConfig
   locale: ComputedRef<TableLocale>
@@ -43,7 +46,7 @@ export const TABLE_TOKEN: InjectionKey<TableContext> = Symbol('TABLE_TOKEN')
 
 export interface TableBodyContext {
   mainTableWidth: Ref<number>
-  changeColumnWidth: (key: Key, width: number) => void
+  changeColumnWidth: (key: Key, width: number | false) => void
 }
 
 export const tableBodyToken: InjectionKey<TableBodyContext> = Symbol('tableBodyToken')

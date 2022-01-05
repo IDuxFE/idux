@@ -13,7 +13,7 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isNil, isString } from 'lodash-es'
 
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
@@ -50,17 +50,14 @@ export function useSelectable(
     const dataMap = mergedMap.value
     selectedKeys.forEach(key => {
       const { parentKey } = dataMap.get(key) || {}
-      if (parentKey) {
+      if (!isNil(parentKey)) {
         let parent = dataMap.get(parentKey)
         if (parent && !selectedKeys.includes(parent.rowKey)) {
-          if (!disabledRowKeys.includes(parentKey)) {
-            indeterminateKeySet.add(parentKey)
-          }
-          while (parent?.parentKey) {
-            if (!disabledRowKeys.includes(parent.parentKey)) {
-              indeterminateKeySet.add(parent.parentKey)
+          while (parent && !isNil(parent?.rowKey)) {
+            if (!disabledRowKeys.includes(parent.rowKey)) {
+              indeterminateKeySet.add(parent.rowKey)
             }
-            parent = dataMap.get(parent.parentKey)
+            parent = !isNil(parent.parentKey) ? dataMap.get(parent.parentKey) : undefined
           }
         }
       }
@@ -125,9 +122,10 @@ export function useSelectable(
         tempRowKeys = tempRowKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key))
       } else {
         tempRowKeys.push(key)
-        setParentSelected(dataMap, currData, tempRowKeys, disabledRowKeys)
         tempRowKeys.push(...childrenKeys)
       }
+
+      setParentSelected(dataMap, currData, tempRowKeys, disabledRowKeys)
     } else {
       tempRowKeys = selected ? [] : [key]
     }
@@ -302,14 +300,18 @@ function setParentSelected(
   disabledRowKeys: Key[],
 ) {
   let parentSelected = true
-  while (parentSelected && currData?.parentKey) {
+  while (parentSelected && currData && !isNil(currData.parentKey)) {
     const parent = dataMap.get(currData.parentKey)
     if (parent && !disabledRowKeys.includes(currData.parentKey)) {
       parentSelected = parent.children!.every(
         item => disabledRowKeys.includes(item.rowKey) || tempRowKeys.includes(item.rowKey),
       )
+
+      const parentKeyIdx = tempRowKeys.findIndex(key => key === currData!.parentKey)
       if (parentSelected) {
-        tempRowKeys.push(currData.parentKey)
+        parentKeyIdx < 0 && tempRowKeys.push(currData.parentKey)
+      } else {
+        parentKeyIdx > -1 && tempRowKeys.splice(parentKeyIdx, 1)
       }
     }
     currData = parent

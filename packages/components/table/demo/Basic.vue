@@ -43,11 +43,11 @@ const columns: TableColumn<Data>[] = [
     dataKey: 'tags',
     customRender: ({ value }: TableColumnRenderOption<Data['tags'], Data>) =>
       value.map(tag => {
-        let type = tag.length > 5 ? 'warning' : 'success'
+        let color = tag.length > 5 ? 'warning' : 'success'
         if (tag === 'loser') {
-          type = 'error'
+          color = 'error'
         }
-        return h(IxTag, { type }, { default: () => tag.toUpperCase() })
+        return h(IxTag, { color }, { default: () => tag.toUpperCase() })
       }),
   },
   {
