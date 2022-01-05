@@ -8,10 +8,12 @@
 import type { TableComponent } from './src/types'
 
 import Table from './src/Table'
+import { TableColumn } from './src/tableColumn'
 
 const IxTable = Table as unknown as TableComponent
+const IxTableColumn = TableColumn
 
-export { IxTable }
+export { IxTable, IxTableColumn }
 
 export type {
   TableInstance,
@@ -39,3 +41,5 @@ export type {
   TableColumnFilter,
   TableColumnFilterable,
 } from './src/types'
+
+export type TableColumnComponent = typeof IxTableColumn

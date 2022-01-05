@@ -17,24 +17,52 @@ import type {
 } from '../types'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Slots, VNode } from 'vue'
 
 import { computed, reactive, ref, watchEffect } from 'vue'
 
 import { isNil } from 'lodash-es'
 
 import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { convertArray } from '@idux/cdk/utils'
+import { convertArray, flattenNode } from '@idux/cdk/utils'
+
+import { tableColumnKey } from '../tableColumn'
 
 export function useColumns(
   props: TableProps,
+  slots: Slots,
   config: TableConfig,
   scrollBarSizeOnFixedHolder: ComputedRef<number>,
 ): ColumnsContext {
   const breakpoints = useSharedBreakpoints()
-  const mergedColumns = computed(() =>
-    mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable),
-  )
+  const mergedColumns = computed(() => {
+    const { columns } = props
+    if (columns && columns.length > 0) {
+      return mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable)
+    } else {
+      return (
+        flattenNode(slots.default?.(), { key: tableColumnKey }).map((column, colIndex) => {
+          const { children, props: columnProps } = column as VNode & { children: Slots }
+          const { editable, ellipsis } = columnProps || {}
+          const _editable = editable || editable === ''
+          const _ellipsis = ellipsis || ellipsis === ''
+          const newColumn = {
+            ...columnProps,
+            editable: _editable,
+            ellipsis: _ellipsis,
+            slots: children,
+          } as TableColumn
+          return covertColumn(
+            newColumn,
+            breakpoints,
+            config.columnBase,
+            config.columnExpandable,
+            `IDUX_TABLE_KEY-${colIndex}`,
+          )
+        }) || []
+      )
+    }
+  })
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
     mergedColumns,
     scrollBarSizeOnFixedHolder,

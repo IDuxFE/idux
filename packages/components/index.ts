@@ -52,7 +52,7 @@ import { IxSpin } from '@idux/components/spin'
 import { IxStatistic } from '@idux/components/statistic'
 import { IxStepper, IxStepperItem } from '@idux/components/stepper'
 import { IxSwitch } from '@idux/components/switch'
-import { IxTable } from '@idux/components/table'
+import { IxTable, IxTableColumn } from '@idux/components/table'
 import { IxTab, IxTabs } from '@idux/components/tabs'
 import { IxTag } from '@idux/components/tag'
 import { IxTextarea } from '@idux/components/textarea'
@@ -137,6 +137,7 @@ const components = [
   IxStepperItem,
   IxSwitch,
   IxTable,
+  IxTableColumn,
   IxTab,
   IxTabs,
   IxTag,

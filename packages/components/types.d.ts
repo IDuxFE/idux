@@ -61,7 +61,7 @@ import type { SpinComponent } from '@idux/components/spin'
 import type { StatisticComponent } from '@idux/components/statistic'
 import type { StepperComponent, StepperItemComponent } from '@idux/components/stepper'
 import type { SwitchComponent } from '@idux/components/switch'
-import type { TableComponent } from '@idux/components/table'
+import type { TableColumnComponent, TableComponent } from '@idux/components/table'
 import type { TabComponent, TabsComponent } from '@idux/components/tabs'
 import type { TagComponent } from '@idux/components/tag'
 import type { TextareaComponent } from '@idux/components/textarea'
@@ -144,6 +144,7 @@ declare module 'vue' {
     IxSwitch: SwitchComponent
     IxTab: TabComponent
     IxTable: TableComponent
+    IxTableColumn: TableColumnComponent
     IxTabs: TabsComponent
     IxTag: TagComponent
     IxTextarea: TextareaComponent
