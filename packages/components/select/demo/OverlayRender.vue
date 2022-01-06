@@ -25,15 +25,15 @@ const onChange = (value: string) => {
 const onAdd = () => {
   const currOptions = options.value
   const label = inputValue.value
-  options.value = [...currOptions, { key: currOptions.length, label, value: label }]
+  options.value = [...currOptions, { key: label, label, value: label }]
   inputValue.value = ''
 }
 
 const overlayRender = (children: VNode[]) => {
   const divider = h(IxDivider)
-  const input = h(IxInput, { style: { flex: 'auto' }, value: inputValue.value, onChange: onChange })
-  const button = h(IxButton, { style: { flex: 'none', marginLeft: '8px' }, icon: 'plus', onClick: onAdd }, () => 'Add')
-  const addItem = h('div', { style: { display: 'flex', padding: '0 16px 8px' } }, [input, button])
+  const input = h(IxInput, { style: { width: '100px' }, value: inputValue.value, onChange: onChange })
+  const button = h(IxButton, { icon: 'plus', onClick: onAdd }, () => 'Add')
+  const addItem = h('div', { style: { display: 'flex', padding: '0 16px 8px', gap: '8px' } }, [input, button])
   return h('div', [children, divider, addItem])
 }
 </script>
