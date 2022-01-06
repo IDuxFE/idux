@@ -15,7 +15,7 @@ import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
 import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
-import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, Slots, VNode, VNodeTypes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -96,6 +96,7 @@ export interface TableColumnBase<T = unknown, V = any> extends TableColumnCommon
   children?: TableColumn<T>[]
   customRender?: string | TableColumnRenderFn<any, T>
   customTitle?: string | TableColumnTitleFn
+  slots?: Slots | Record<string, (...args: any[]) => VNode>
 }
 
 export interface TableColumnRenderOption<V = any, T = unknown> {

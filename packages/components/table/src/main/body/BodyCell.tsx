@@ -91,9 +91,9 @@ export default defineComponent({
       if (type === 'selectable') {
         children = renderSelectableChildren(props, selectable, handleClick)
       } else {
-        const { ellipsis } = props.column
+        const { ellipsis, slots: columnSlots } = props.column
         const text = dataValue.value
-        children = text ? renderChildren(props, slots, text) : null
+        children = text ? renderChildren(props, (columnSlots as Slots) ?? slots, text) : null
         title = children ? getColTitle(ellipsis, children, text) : undefined
       }
 

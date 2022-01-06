@@ -47,7 +47,7 @@ export default defineComponent({
     const getRowKey = useGetRowKey(props, config)
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, stickyContext)
-    const columnsContext = useColumns(props, config, scrollContext.scrollBarSizeOnFixedHolder)
+    const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
     const sortableContext = useSortable(columnsContext.flattedColumns)
     const filterableContext = useFilterables(columnsContext.flattedColumns)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
