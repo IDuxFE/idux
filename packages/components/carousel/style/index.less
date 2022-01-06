@@ -26,7 +26,7 @@
     .carousel-vertical-center();
 
     &:hover {
-      opacity: @carousel-icon-active-opacity;
+      opacity: @carousel-icon-hover-opacity;
     }
 
     &-prev {
@@ -60,10 +60,11 @@
       }
 
       &-default {
-        width: @carousel-dot-size;
-        height: @carousel-dot-size;
-        border-radius: 50%;
+        width: @carousel-dot-width;
+        height: @carousel-dot-height;
+        border-radius: @carousel-dot-border-radius;
         background-color: @carousel-dot-background-color;
+        outline: none;
       }
     }
 
