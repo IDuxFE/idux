@@ -289,7 +289,9 @@ export interface PopoverConfig {
   destroyOnHide: boolean
   placement: PopperPlacement
   target?: PortalTargetType
+  showArrow: boolean
   trigger: PopperTrigger
+  closeIcon: string
 }
 
 // Feedback

@@ -17,30 +17,47 @@ describe('Popover', () => {
   })
 
   renderWork<PopoverProps>(IxPopover, {
-    props: { visible: true, title: 'Title', content: 'Content' },
+    props: { visible: true, header: 'Title', content: 'Content' },
     slots,
   })
 
-  test('title work', async () => {
+  test('text header work', async () => {
     const wrapper = PopoverWrapper({
-      props: { visible: true, title: 'Title' },
+      props: { visible: true, header: 'Title' },
       slots,
     })
 
-    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title')
+    expect(document.querySelector('.ix-popover .ix-header')!.textContent).toBe('Title')
 
-    await wrapper.setProps({ title: 'Title 2' })
+    await wrapper.setProps({ header: 'Title 2' })
 
-    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title 2')
+    expect(document.querySelector('.ix-popover .ix-header')!.textContent).toBe('Title 2')
   })
 
-  test('title slot work', async () => {
+  test('header props work', async () => {
     PopoverWrapper({
-      props: { visible: true, title: 'Title' },
-      slots: { ...slots, title: () => h('div', 'Title slot') },
+      props: {
+        visible: true,
+        header: {
+          title: 'Title',
+          subTitle: 'subTitle',
+          prefix: 'up',
+          suffix: 'down',
+        },
+      },
+      slots,
     })
 
-    expect(document.querySelector('.ix-popover-title')!.textContent).toBe('Title slot')
+    expect(document.querySelector('.ix-popover-container')!.innerHTML).toMatchSnapshot()
+  })
+
+  test('header slot work', async () => {
+    PopoverWrapper({
+      props: { visible: true, header: 'Title' },
+      slots: { ...slots, header: () => h('div', { class: 'ix-header-slot' }, 'Title slot') },
+    })
+
+    expect(document.querySelector('.ix-popover .ix-header-slot')!.textContent).toBe('Title slot')
   })
 
   test('content work', async () => {

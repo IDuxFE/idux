@@ -2,7 +2,7 @@
 title:
   zh: 触发方式
   en: Trigger type
-order: 2
+order: 4
 ---
 
 ## zh

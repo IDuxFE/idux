@@ -6,6 +6,7 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -13,6 +14,9 @@ import { ɵTooltipProps } from '@idux/components/tooltip'
 
 export const popoverProps = {
   ...ɵTooltipProps,
+  closable: IxPropTypes.bool.def(false),
+  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   content: IxPropTypes.string,
 }
 

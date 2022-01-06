@@ -1,30 +1,45 @@
 <template>
   <IxSpace>
-    <IxPopover title="Title" content="Content...">
+    <IxPopover header="Title">
+      <template #content>
+        <div>This is content...</div>
+        <div>This is content...</div>
+      </template>
       <IxButton>Hover</IxButton>
     </IxPopover>
-    <IxPopover title="Title" content="Content..." trigger="focus">
+    <IxPopover header="Title" trigger="focus">
+      <template #content>
+        <div>This is content...</div>
+        <div>This is content...</div>
+      </template>
       <IxButton>Focus</IxButton>
     </IxPopover>
-    <IxPopover title="Title" content="Content..." trigger="click">
+    <IxPopover header="Title" trigger="click">
+      <template #content>
+        <div>This is content...</div>
+        <div>This is content...</div>
+      </template>
       <IxButton>Click</IxButton>
     </IxPopover>
-    <IxPopover title="Title" content="Content..." trigger="contextmenu">
+    <IxPopover header="Title" trigger="contextmenu">
+      <template #content>
+        <div>This is content...</div>
+        <div>This is content...</div>
+      </template>
       <IxButton>Context Menu</IxButton>
     </IxPopover>
-    <IxPopover title="Title" content="Content..." trigger="manual" :visible="visible">
-      <IxButton @click="visible = !visible">Manual</IxButton>
+    <IxPopover header="Title" trigger="manual" :visible="visible">
+      <template #content>
+        <div>This is content...</div>
+        <div>This is content...</div>
+      </template>
+      <IxButton @Click="visible = !visible">Manual</IxButton>
     </IxPopover>
   </IxSpace>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const visible = ref(false)
-    return { visible }
-  },
-})
+const visible = ref(false)
 </script>
