@@ -119,6 +119,7 @@
 }
 
 .@{select-option-prefix} {
+  .reset-component();
   .select-option(@select-option-font-size, @select-option-color);
 
   &-disabled {
@@ -136,20 +137,19 @@
     font-weight: @select-option-selected-font-weight;
   }
 
-  &-checkbox {
-    margin-left: @select-option-margin-left;
-  }
-
   &-label {
-    margin-left: @select-option-margin-left;
     .ellipsis();
   }
 
+  .@{checkbox-prefix} + &-label {
+    margin-left: @select-option-label-margin-left;
+  }
+
   &-group {
+    .reset-component();
     .select-option(@select-option-font-size - 2px, @select-option-disabled-color);
 
     &-label {
-      margin-left: @select-option-margin-left;
       .ellipsis();
     }
   }
