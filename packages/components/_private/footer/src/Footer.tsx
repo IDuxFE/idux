@@ -17,21 +17,6 @@ import { footerProps } from './types'
 export default defineComponent({
   props: footerProps,
   setup(props, { slots }) {
-    const okButtonProps = computed<FooterButtonProps | undefined>(() => {
-      const { ok, okButton, okLoading, okText } = props
-      if (!ok && !okText && !okButton) {
-        return undefined
-      }
-      return {
-        key: '__IDUX_FOOTER_BUTTON_OK',
-        text: okText,
-        onClick: ok,
-        loading: okLoading,
-        mode: 'primary',
-        ...okButton,
-      }
-    })
-
     const cancelButtonProps = computed<FooterButtonProps | undefined>(() => {
       const { cancel, cancelButton, cancelVisible, cancelLoading, cancelText } = props
       if (!cancelVisible || (!cancel && !cancelText && !cancelButton)) {
@@ -43,6 +28,21 @@ export default defineComponent({
         onClick: cancel,
         loading: cancelLoading,
         ...cancelButton,
+      }
+    })
+
+    const okButtonProps = computed<FooterButtonProps | undefined>(() => {
+      const { ok, okButton, okLoading, okText } = props
+      if (!ok && !okText && !okButton) {
+        return undefined
+      }
+      return {
+        key: '__IDUX_FOOTER_BUTTON_OK',
+        text: okText,
+        onClick: ok,
+        loading: okLoading,
+        mode: cancelButtonProps.value ? 'primary' : 'default',
+        ...okButton,
       }
     })
 

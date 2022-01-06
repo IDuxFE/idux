@@ -47,7 +47,7 @@ const zhCN: Locale = {
   modal: {
     cancelText: '取消',
     okText: '确定',
-    justOkText: '知道了',
+    justOkText: '我知道了',
   },
   popconfirm: {
     cancelText: '取消',

@@ -5,30 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  ComputedRef,
-  Ref,
-  Transition,
-  computed,
-  defineComponent,
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue'
+import type { ModalProps } from './types'
+import type { ModalConfig } from '@idux/components/config'
+import type { ComputedRef, Ref } from 'vue'
+
+import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
-import { ModalConfig } from '@idux/components/config'
 import { getLocale } from '@idux/components/i18n'
 
 import ModalBody from './ModalBody'
 import { MODAL_TOKEN, modalToken } from './token'
-import { ModalProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
