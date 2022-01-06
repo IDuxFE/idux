@@ -1,6 +1,7 @@
 ---
 category: components
 type: 数据展示
+order: 0
 title: Image
 subtitle: 图片
 ---
@@ -9,20 +10,38 @@ subtitle: 图片
 
 ### IxImage
 
+图片组件
+
 #### ImageProps
+
+> 继承所有 [img标签属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `src` | 图片地址 | `string` | - | - | - |
-| `width` | 图像宽度 | `string \| number` | - | ✅ | - |
-| `height` | 图像高度 | `string \| number` | - | ✅ | - |
-| `fallback` | 加载失败容错地址 | `string` | - | ✅ | - |
-| `preview` | 预览参数，为 `false` 时禁用 | `boolean` | - | - | - |
-| `alt` | 图像描述 | `string` | - | - | - |
-| `objectFit` | 确定图片如何适应容器框 | `string` | - | - | 同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)  |
+| `preview` | 是否开启预览 | `boolean` | `true` | ✅ | - |
+| `imageViewer` | 预览组件`IxImageViewer`的配置 | `ImageViewerProps` | `{}` | - | - |
 
-#### ImageEmits
+#### ImageSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `statusChange` | 图片加载状态改变时触发 | `loading\|loaded\|failed` | - |
+| `previewIcon` | 预览的icon | - | - |
+| `placeholder` | 图片未加载的占位内容 | - | - |
+| `fallback` | 加载失败时展示内容 | - | - |
+
+### IxImageViewer
+
+图片预览组件
+
+#### ImageViewerProps
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `v-model:visible` | 是否可见 | `boolean` | `false` | - | - |
+| `v-model:activeIndex` | 当前激活的索引 | `number` | `0` | - | - |
+| `images` | 用于预览的图片链接列表，必选 | `string[]` | `[]` | - | - |
+| `loop` | 是否无限循环 | `boolean` | `true` | ✅ | - |
+| `zoom` | 可缩放的倍数范围 | `number[]` | `[0.5, 2]` | ✅ | - |
+| `target` | 预览窗口容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `maskClosable` | 是否可以通过点击遮罩层关闭预览 | `boolean` | `true` | ✅ | - |

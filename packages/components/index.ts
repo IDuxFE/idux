@@ -28,7 +28,7 @@ import { IxForm, IxFormItem, IxFormWrapper } from '@idux/components/form'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
-import { IxImage } from '@idux/components/image'
+import { IxImage, IxImageViewer } from '@idux/components/image'
 import { IxInput } from '@idux/components/input'
 import { IxInputNumber } from '@idux/components/input-number'
 import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
@@ -97,6 +97,7 @@ const components = [
   IxHeader,
   IxIcon,
   IxImage,
+  IxImageViewer,
   IxInput,
   IxInputNumber,
   IxLayout,

@@ -1,0 +1,56 @@
+@import '../../style/mixins/reset.less';
+@import '../../style/motion/zoom.less';
+
+.@{image-viewer-prefix} {
+  .reset-component();
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: @image-viewer-bg-color;
+  user-select: none;
+  z-index: @image-viewer-z-index;
+
+  .@{image-viewer-prefix}-opr {
+    position: absolute;
+    z-index: @image-viewer-opr-z-index;
+    bottom: @image-viewer-opr-bottom;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: @image-viewer-opr-border-radius;
+    height: @image-viewer-opr-height;
+    color: @image-viewer-opr-color;
+    font-size: @image-viewer-opr-font-size;
+    background-color: @image-viewer-opr-bg-color;
+
+    &-item {
+      margin: @image-viewer-opr-item-margin;
+      cursor: pointer;
+
+      &-disabled {
+        pointer-events: none;
+        color: @image-viewer-opr-disabled-color;
+      }
+    }
+  }
+
+  .@{image-viewer-prefix}-preview {
+    width: 100%;
+    height: 100%;;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-img {
+      transition: all .3s;
+      will-change: transform;
+      max-height: @image-viewer-preview-img-max-height;
+      max-width: @image-viewer-preview-img-max-width;
+    }
+  }
+}
