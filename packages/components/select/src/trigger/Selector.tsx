@@ -29,6 +29,7 @@ export default defineComponent({
       isDisabled,
       selectedValue,
       selectedOptions,
+      overlayOpened,
       handleItemRemove,
       handleClear,
       inputValue,
@@ -111,7 +112,11 @@ export default defineComponent({
             <div class={`${prefixCls}-placeholder`}> {slots.placeholder?.() ?? selectProps.placeholder}</div>
           )}
           {(slots.suffix || suffix) && (
-            <div class={`${prefixCls}-suffix`}>{slots.suffix?.() ?? <IxIcon name={suffix} />}</div>
+            <div class={`${prefixCls}-suffix`}>
+              {slots.suffix?.() ?? (
+                <IxIcon name={suffix} rotate={overlayOpened.value && selectProps.searchable !== true ? 180 : 0} />
+              )}
+            </div>
           )}
           {clearable && (
             <div class={`${prefixCls}-clear`} onClick={handleClear}>

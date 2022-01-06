@@ -54,7 +54,7 @@ export default defineComponent({
       if (options.length > 0) {
         const itemRender: VirtualItemRenderFn<MergedOption> = ({ item, index }) => {
           const { type, ...rest } = item
-          return type === 'group' ? <OptionGroup {...rest} /> : <Option index={index} {...rest} />
+          return type === 'group' ? <OptionGroup {...rest} /> : <Option index={index} type={type} {...rest} />
         }
 
         children.push(
