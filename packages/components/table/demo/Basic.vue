@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { h } from 'vue'
 
-import { TableColumn, TableColumnRenderOption } from '@idux/components/table'
+import { TableColumn } from '@idux/components/table'
 import { IxTag } from '@idux/components/tag'
 
 interface Data {
@@ -28,7 +28,7 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',
@@ -41,19 +41,21 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Tags',
     dataKey: 'tags',
-    customRender: ({ value }: TableColumnRenderOption<Data['tags'], Data>) =>
-      value.map(tag => {
-        let color = tag.length > 5 ? 'warning' : 'success'
-        if (tag === 'loser') {
-          color = 'error'
-        }
-        return h(IxTag, { color }, { default: () => tag.toUpperCase() })
-      }),
+    slots: {
+      cell: ({ value }) =>
+        value.map((tag: string) => {
+          let color = tag.length > 5 ? 'warning' : 'success'
+          if (tag === 'loser') {
+            color = 'error'
+          }
+          return h(IxTag, { color }, { default: () => tag.toUpperCase() })
+        }),
+    },
   },
   {
     title: 'Action',
     key: 'action',
-    customRender: 'action',
+    slots: { cell: 'action' },
   },
 ]
 

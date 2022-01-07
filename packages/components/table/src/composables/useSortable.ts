@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Key, TableColumnSortOrder, TableColumnSortable } from '../types'
-import type { TableColumnMerged } from './useColumns'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed, reactive, ref, watch } from 'vue'
 
-import { computed, reactive, ref, watch } from 'vue'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type TableColumnSortOrder, type TableColumnSortable } from '../types'
+import { type TableColumnMerged } from './useColumns'
 
 export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): SortableContext {
   const activeSortColumn = computed(() => flattedColumns.value.find(column => column.sortable?.orderBy))
@@ -41,7 +40,7 @@ export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): S
     activeSortable.orderBy = orderByRef.value ?? tempOrderByRef.value
   })
 
-  const handleSort = (key: Key, sortable: TableColumnSortable) => {
+  const handleSort = (key: VKey, sortable: TableColumnSortable) => {
     const { orders, sorter, onChange } = sortable
 
     const isSameKey = key === activeSortable.key
@@ -61,11 +60,11 @@ export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): S
 
 export interface SortableContext {
   activeSortable: ActiveSortable
-  handleSort: (key: Key, sortable: TableColumnSortable) => void
+  handleSort: (key: VKey, sortable: TableColumnSortable) => void
 }
 
 export interface ActiveSortable {
-  key?: Key
+  key?: VKey
   orderBy?: 'descend' | 'ascend'
   sorter?: (curr: unknown, next: unknown) => number
 }

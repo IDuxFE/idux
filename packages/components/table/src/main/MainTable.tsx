@@ -5,18 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FlattedData } from '../composables/useDataSource'
-import type { Key } from '../types'
-import type { VirtualContentRenderFn, VirtualItemRenderFn } from '@idux/cdk/scroll'
-import type { StyleValue, VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch, watchEffect } from 'vue'
+import {
+  type StyleValue,
+  type VNodeTypes,
+  computed,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  watch,
+  watchEffect,
+} from 'vue'
 
 import { isNumber } from 'lodash-es'
 
-import { CdkVirtualScroll } from '@idux/cdk/scroll'
-import { Logger, callEmit, convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
+import { CdkVirtualScroll, type VirtualContentRenderFn, type VirtualItemRenderFn } from '@idux/cdk/scroll'
+import { Logger, type VKey, callEmit, convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
 
+import { type FlattedData } from '../composables/useDataSource'
 import { TABLE_TOKEN, tableBodyToken } from '../token'
 import ColGroup from './ColGroup'
 import FixedHolder from './FixedHolder'
@@ -51,7 +59,7 @@ export default defineComponent({
     const mainTableRef = ref<HTMLDivElement>()
     const mainTableWidth = ref(0)
 
-    const _changeColumnWidth = (key: Key, width: number | false) => {
+    const _changeColumnWidth = (key: VKey, width: number | false) => {
       if (isVisibleElement(mainTableRef.value)) {
         changeColumnWidth(key, width)
       }

@@ -5,12 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TableProps } from '../types'
-import type { ColumnsContext } from './useColumns'
-import type { ScrollContext } from './useScroll'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
-import { computed } from 'vue'
+import { type TableProps } from '../types'
+import { type ColumnsContext } from './useColumns'
+import { type ScrollContext } from './useScroll'
 
 export function useTableLayout(
   props: TableProps,

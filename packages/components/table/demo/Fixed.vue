@@ -23,9 +23,9 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
     width: 100,
     fixed: 'start',
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',
@@ -85,7 +85,7 @@ const columns: TableColumn<Data>[] = [
     key: 'action',
     fixed: 'end',
     width: 100,
-    customRender: 'action',
+    slots: { cell: 'action' },
   },
 ]
 

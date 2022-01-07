@@ -5,10 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TableProps } from '../types'
-import type { ComputedRef, VNodeTypes } from 'vue'
+import { type ComputedRef, type VNodeTypes, computed } from 'vue'
 
-import { computed } from 'vue'
+import { type TableProps } from '../types'
 
 export function useTags(props: TableProps): TagsContext {
   return {

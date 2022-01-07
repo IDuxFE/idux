@@ -7,26 +7,23 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { TableColumnMerged, TableColumnMergedExtra } from './composables/useColumns'
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { EmptyProps } from '@idux/components/empty'
-import type { HeaderProps } from '@idux/components/header'
-import type { PaginationProps } from '@idux/components/pagination'
-import type { SpinProps } from '@idux/components/spin'
-import type { DefineComponent, HTMLAttributes, Slots, VNode, VNodeTypes } from 'vue'
+import { type DefineComponent, type HTMLAttributes, type VNodeChild, type VNodeTypes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import { type BreakpointKey } from '@idux/cdk/breakpoint'
+import { type VirtualScrollToFn } from '@idux/cdk/scroll'
+import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type EmptyProps } from '@idux/components/empty'
+import { type HeaderProps } from '@idux/components/header'
+import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
+import { type PaginationProps } from '@idux/components/pagination'
+import { type SpinProps } from '@idux/components/spin'
 
-import { FlattedData } from './composables/useDataSource'
+import { type TableColumnMerged, type TableColumnMergedExtra } from './composables/useColumns'
+import { type FlattedData } from './composables/useDataSource'
 
 export const tableProps = {
-  expandedRowKeys: IxPropTypes.array<Key>(),
-  selectedRowKeys: IxPropTypes.array<Key>(),
-
-  expandedAllStatus: IxPropTypes.bool,
-
+  expandedRowKeys: IxPropTypes.array<VKey>(),
+  selectedRowKeys: IxPropTypes.array<VKey>(),
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string.def('children'),
   columns: IxPropTypes.array<TableColumn<any>>().def(() => []),
@@ -46,8 +43,8 @@ export const tableProps = {
   virtual: IxPropTypes.bool.def(false),
 
   // events
-  'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
-  'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: Key[]) => void>(),
+  'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
+  'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: any[]) => void>(),
@@ -65,12 +62,12 @@ export type TableComponent = DefineComponent<
 >
 export type TableInstance = InstanceType<DefineComponent<TableProps, TableBindings>>
 
-export type TableColumn<T = unknown, V = any> =
+export type TableColumn<T = any, V = any> =
   | TableColumnBase<T, V>
   | TableColumnExpandable<T, V>
   | TableColumnSelectable<T>
 
-export interface TableColumnCommon<T = unknown> {
+export interface TableColumnCommon<T = any> {
   additional?: {
     class?: any
     style?: any
@@ -85,71 +82,59 @@ export interface TableColumnCommon<T = unknown> {
   width?: string | number
 }
 
-export interface TableColumnBase<T = unknown, V = any> extends TableColumnCommon<T> {
-  dataKey?: Key | Key[]
+export interface TableColumnBaseSlots<T = any, V = any> {
+  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  title?: string | ((data: { title?: string }) => VNodeChild)
+}
+
+export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> {
+  dataKey?: VKey | VKey[]
   editable?: boolean
   ellipsis?: boolean
-  key?: Key
+  key?: VKey
   sortable?: TableColumnSortable<T>
   filterable?: TableColumnFilterable<T, V>
   title?: string
   children?: TableColumn<T>[]
-  customRender?: string | TableColumnRenderFn<any, T>
-  customTitle?: string | TableColumnTitleFn
-  slots?: Slots | Record<string, (...args: any[]) => VNode>
+  slots?: TableColumnBaseSlots<T, V>
 }
 
-export interface TableColumnRenderOption<V = any, T = unknown> {
-  value: V
-  record: T
-  rowIndex: number
+export interface TableColumnExpandableSlots<T = any, V = any> {
+  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  title?: string | ((data: { title?: string }) => VNodeChild)
+  expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
+  icon?: string | ((data: { expanded: boolean; record: T; onExpand: () => void }) => VNodeChild)
 }
-export type TableColumnRenderFn<V = any, T = unknown> = (options: TableColumnRenderOption<V, T>) => VNodeTypes
-export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 
-export interface TableColumnExpandable<T = unknown, V = any> extends TableColumnBase<T, V> {
+export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase<T, V> {
   type: 'expandable'
-  customExpand?: string | TableColumnExpandableExpandFn<T>
-  customIcon?: string | TableColumnExpandableIconFn<T>
 
   disabled?: (record: T) => boolean
   // remove ?
   icon?: [string, string]
   indent?: number
   trigger?: 'click' | 'dblclick'
+  slots?: TableColumnExpandableSlots<T, V>
 
-  onChange?: (expendedRowKeys: Key[]) => void
+  onChange?: (expendedRowKeys: VKey[]) => void
   onExpand?: (expanded: boolean, record: T) => void
 }
 
-export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; rowIndex: number }) => VNodeTypes
-export type TableColumnExpandableIconFn<T = unknown> = (options: {
-  expanded: boolean
-  record: T
-  onExpand: () => void
-}) => VNodeTypes
-
-export interface TableColumnSelectable<T = unknown> extends TableColumnCommon<T> {
+export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
   type: 'selectable'
 
   disabled?: (record: T) => boolean
   multiple?: boolean
-  options?: ('all' | 'invert' | 'none' | 'pageInvert' | TableColumnSelectableOption)[]
-
+  menus?: ('all' | 'invert' | 'none' | 'pageInvert' | MenuData)[]
   trigger?: 'click' | 'dblclick'
 
-  onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void
+  onChange?: (selectedRowKeys: VKey[], selectedRows: T[]) => void
+  onMenuClick?: (options: MenuClickOptions, currentPageRowKeys: VKey[]) => void
   onSelect?: (selected: boolean, record: T) => void
-  onSelectAll?: (selectedRowKeys: Key[]) => void
-  onSelectInvert?: (selectedRowKeys: Key[]) => void
+  onSelectAll?: (selectedRowKeys: VKey[]) => void
+  onSelectInvert?: (selectedRowKeys: VKey[]) => void
   onSelectNone?: () => void
-  onSelectPageInvert?: (selectedRowKeys: Key[]) => void
-}
-
-export interface TableColumnSelectableOption {
-  key: Key
-  label: string
-  onClick: (currentPageRowKeys: Key[]) => void
+  onSelectPageInvert?: (selectedRowKeys: VKey[]) => void
 }
 
 export interface TablePagination extends PaginationProps {
@@ -182,7 +167,7 @@ export type TableColumnFixed = 'start' | 'end'
 
 export type TableColumnSortOrder = 'ascend' | 'descend'
 
-export interface TableColumnSortable<T = unknown> {
+export interface TableColumnSortable<T = any> {
   nextTooltip?: boolean
   orderBy?: TableColumnSortOrder
   orders?: TableColumnSortOrder[]
@@ -195,7 +180,7 @@ export interface TableColumnFilter<V = unknown> {
   value: V
 }
 
-export interface TableColumnFilterable<T = unknown, V = any> {
+export interface TableColumnFilterable<T = any, V = any> {
   filters: TableColumnFilter<V>[]
   filterBy?: V[]
   filter: (currFilterBy: V[], record: T) => boolean
@@ -208,8 +193,6 @@ export interface TableSticky {
   offsetScroll?: number
   container?: Window | HTMLElement
 }
-
-export type Key = string | number
 
 /** private components */
 export const tableHeadRowProps = {
@@ -230,7 +213,7 @@ export const tableBodyRowProps = {
   level: IxPropTypes.number.isRequired,
   record: IxPropTypes.any.isRequired,
   rowData: IxPropTypes.object<FlattedData>().isRequired,
-  rowKey: IxPropTypes.oneOfType([String, Number]).isRequired,
+  rowKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
 }
 
 export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
@@ -252,8 +235,8 @@ export const tableBodyCellProps = {
 export type TableBodyCellProps = IxInnerPropTypes<typeof tableBodyCellProps>
 
 export const tableMeasureCellProps = {
-  cellKey: IxPropTypes.oneOfType([String, Number]).isRequired,
-  changeColumnWidth: IxPropTypes.func<(key: Key, width: number | false) => void>().isRequired,
+  cellKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
+  changeColumnWidth: IxPropTypes.func<(key: VKey, width: number | false) => void>().isRequired,
 }
 
 export type TableMeasureCellProps = IxInnerPropTypes<typeof tableMeasureCellProps>

@@ -5,20 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Key, TablePagination, TableProps } from '../types'
-import type { Filterable } from './useFilterable'
-import type { GetRowKey } from './useGetRowKey'
-import type { ActiveSortable } from './useSortable'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed } from 'vue'
 
-import { computed } from 'vue'
+import { type VKey } from '@idux/cdk/utils'
+
+import { type TablePagination, type TableProps } from '../types'
+import { type Filterable } from './useFilterable'
+import { type GetRowKey } from './useGetRowKey'
+import { type ActiveSortable } from './useSortable'
 
 export function useDataSource(
   props: TableProps,
   getRowKey: ComputedRef<GetRowKey>,
   activeSortable: ActiveSortable,
   activeFilterables: ComputedRef<Filterable[]>,
-  expandedRowKeys: Ref<Key[]>,
+  expandedRowKeys: Ref<VKey[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
   const mergedData = computed(() => {
@@ -28,7 +29,7 @@ export function useDataSource(
   })
 
   const mergedMap = computed(() => {
-    const map = new Map<Key, MergedData>()
+    const map = new Map<VKey, MergedData>()
     covertDataMap(mergedData.value, map)
     return map
   })
@@ -58,7 +59,7 @@ export function useDataSource(
     }
   })
   const paginatedMap = computed(() => {
-    const map = new Map<Key, MergedData>()
+    const map = new Map<VKey, MergedData>()
     covertDataMap(paginatedData.value, map)
     return map
   })
@@ -77,15 +78,15 @@ export function useDataSource(
 export interface DataSourceContext {
   filteredData: ComputedRef<MergedData[]>
   flattedData: ComputedRef<FlattedData[]>
-  mergedMap: ComputedRef<Map<Key, MergedData>>
-  paginatedMap: ComputedRef<Map<Key, MergedData>>
+  mergedMap: ComputedRef<Map<VKey, MergedData>>
+  paginatedMap: ComputedRef<Map<VKey, MergedData>>
 }
 
 export interface MergedData {
   children?: MergedData[]
-  parentKey?: Key
+  parentKey?: VKey
   record: unknown
-  rowKey: Key
+  rowKey: VKey
 }
 
 export interface FlattedData extends MergedData {
@@ -93,7 +94,7 @@ export interface FlattedData extends MergedData {
   level: number
 }
 
-function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: Key) {
+function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: VKey) {
   const rowKey = getRowKey(record)
   const result: MergedData = { record, rowKey, parentKey }
 
@@ -104,7 +105,7 @@ function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: str
   return result
 }
 
-function covertDataMap(mergedData: MergedData[], map: Map<Key, MergedData>) {
+function covertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
   mergedData.forEach(item => {
     const { rowKey, children } = item
     map.set(rowKey, item)
@@ -149,7 +150,7 @@ function filterData(mergedData: MergedData[], activeFilterables: Filterable[]): 
 
 // TODO: performance optimization
 // when virtual scrolling is enabled, this do not need to traverse all nodes
-function flatData(mergedData: MergedData[], expandedRowKeys: Key[], level = 0) {
+function flatData(mergedData: MergedData[], expandedRowKeys: VKey[], level = 0) {
   return mergedData.reduce((result, item) => {
     const { children, parentKey, record, rowKey } = item
     const expanded = expandedRowKeys.includes(rowKey)

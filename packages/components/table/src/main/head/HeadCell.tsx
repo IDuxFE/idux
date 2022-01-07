@@ -5,18 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TableColumnMergedExtra } from '../../composables/useColumns'
-import type { TableColumnFilterable, TableColumnSortable, TableColumnTitleFn } from '../../types'
-import type { Slots, StyleValue, VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import { type CSSProperties, type Slots, type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
-import { convertCssPixel } from '@idux/cdk/utils'
+import { Logger, convertCssPixel } from '@idux/cdk/utils'
 
+import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
-import { tableHeadCellProps } from '../../types'
+import { type TableColumnFilterable, type TableColumnSortable, tableHeadCellProps } from '../../types'
 import { getColTitle } from '../../utils'
 import HeadCellFilterableTrigger from '../head-trigger/HeadCellFilterableTrigger'
 import HeadCellSortableTrigger from '../head-trigger/HeadCellSortableTrigger'
@@ -60,7 +57,7 @@ export default defineComponent({
         [`${prefixCls}-align-${align}`]: !hasChildren && !!align,
         [`${prefixCls}-align-center`]: hasChildren,
       }
-      let style: StyleValue | undefined
+      let style: CSSProperties | undefined
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
         classes = {
@@ -107,8 +104,14 @@ export default defineComponent({
       } else if (type === 'selectable') {
         children = <HeadCellSelectable></HeadCellSelectable>
       } else {
-        const { title, customTitle, ellipsis } = props.column as HeadColumn
-        children = renderChildren(title, customTitle, slots)
+        /**
+         * @deprecated customTitle
+         */
+        const { title, customTitle, slots: columnSlots, ellipsis } = props.column as HeadColumn
+        if (__DEV__ && customTitle) {
+          Logger.warn('components/table', '`customTitle` is deprecated,  please use `title` in `slots` instead')
+        }
+        children = renderChildren(title, customTitle ?? columnSlots?.title, slots)
         _title = getColTitle(ellipsis, children!, title)
 
         iconTriggers = [
@@ -135,7 +138,11 @@ export default defineComponent({
   },
 })
 
-function renderChildren(title: string | undefined, customTitle: string | TableColumnTitleFn | undefined, slots: Slots) {
+function renderChildren(
+  title: string | undefined,
+  customTitle: string | ((options: { title?: string }) => VNodeTypes) | undefined,
+  slots: Slots,
+) {
   let children: VNodeTypes | undefined = title
   if (isFunction(customTitle)) {
     children = customTitle({ title })

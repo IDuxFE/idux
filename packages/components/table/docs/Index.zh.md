@@ -16,7 +16,6 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
-| `v-model:expandAllStatus` | 全部展开的状态 | `boolean` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
@@ -38,10 +37,13 @@ order: 0
 
 #### TableColumn
 
-表格列的配置描述，`T` 为 `dataSource` 的数据类型。
+表格列的配置描述，`T` 为 `dataSource` 的数据类型, `V` 为对应列的值类型。
 
 ```ts
-export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandable<T> | TableColumnSelectable<T>
+export type TableColumn<T = any, V = any> =
+  | TableColumnBase<T, V>
+  | TableColumnExpandable<T, V>
+  | TableColumnSelectable<T>
 ```
 
 ##### TableColumnCommon
@@ -66,22 +68,20 @@ export type TableColumn<T = unknown> = TableColumnBase<T> | TableColumnExpandabl
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
-| `customRender` | 自定义列内容 | `string \| TableColumnRenderFn<any, T>` | - | - | 类型为 `string` 时，对应插槽名 |
-| `customTitle` | 自定义列头 | `string \| TableColumnTitleFn` | - | - | 类型为 `string` 时，对应插槽名 |
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
 | `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 不支持和排序筛选一起使用 |
 | `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
+| `slots` | 自定义渲染 | `TableColumnBaseSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
 
 ```ts
-export interface TableColumnRenderOption<V = any, T = unknown> {
-  value: V
-  record: T
-  rowIndex: number
+export interface TableColumnBaseSlots<T = any, V = any> {
+  // 自定义单元格内容
+  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  // 自定义单表头内容
+  title?: string | ((data: { title?: string }) => VNodeChild)
 }
-export type TableColumnRenderFn<V = any, T = unknown> = (options: TableColumnRenderOption<V, T>) => VNodeTypes
-export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 ```
 
 ##### TableColumnExpandable
@@ -91,22 +91,25 @@ export type TableColumnTitleFn = (options: { title?: string }) => VNodeTypes
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
-| `customExpand` | 自定义展开内容 | `string \| TableColumnExpandableExpandFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
-| `customIcon` | 自定义展开图标 | `string \| TableColumnExpandableIconFn<T>` | - | - | 类型为 `string` 时，对应插槽名 |
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
 | `icon` | 展开按钮图标 | `[string, string]` | `['plus', 'minus']` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
+| `slots` | 自定义渲染 | `TableColumnExpandableSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \| number)[], expendedRecords: T[]) => void` | - | - | - |
 | `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |
 
 ```ts
-export type TableColumnExpandableExpandFn<T = unknown> = (options: { record: T; rowIndex: number }) => VNodeTypes
-export type TableColumnExpandableIconFn<T = unknown> = (options: {
-  expanded: boolean
-  record: T
-  onExpand: () => void
-}) => VNodeTypes
+export interface TableColumnExpandableSlots<T = any, V = any> {
+  // 自定义单元格内容
+  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  // 自定义单表头内容
+  title?: string | ((data: { title?: string }) => VNodeChild)
+  // 自定义展开内容
+  expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
+  // 自定义展开图标
+  icon?: string | ((data: { expanded: boolean; record: T; onExpand: () => void }) => VNodeChild)
+}
 ```
 
 ##### TableColumnSelectable
@@ -161,7 +164,6 @@ export interface TablePagination extends PaginationProps {
   position: TablePaginationPosition
 }
 export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
-
 ```
 
 #### TableScroll

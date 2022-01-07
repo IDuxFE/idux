@@ -17,13 +17,11 @@ interface Data {
   address: string
 }
 
-type AgeFilter = (age: number) => boolean
-
 const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',
@@ -46,7 +44,7 @@ const columns: TableColumn<Data>[] = [
         return currentFilterBy.every(filterBy => filterBy(record.age))
       },
     },
-  } as TableColumn<Data, AgeFilter>,
+  },
   {
     title: 'Grade',
     dataKey: 'grade',
@@ -65,11 +63,11 @@ const columns: TableColumn<Data>[] = [
           value: 'New York',
         },
       ],
-      handleFilter(currentFilterBy, record) {
+      filter(currentFilterBy, record) {
         return currentFilterBy.every(filterBy => record.address.includes(filterBy))
       },
     },
-  } as TableColumn<Data, string>,
+  },
 ]
 
 const data: Data[] = [

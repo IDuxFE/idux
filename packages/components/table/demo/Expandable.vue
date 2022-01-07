@@ -29,12 +29,12 @@ const columns: TableColumn<Data>[] = [
     type: 'expandable',
     disabled: record => !record.description,
     onChange: expendedRowKeys => console.log(expendedRowKeys),
-    customExpand: 'expand',
+    slots: { expand: 'expand' },
   },
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',

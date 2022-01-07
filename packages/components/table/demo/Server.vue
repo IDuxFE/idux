@@ -1,8 +1,5 @@
 <template>
   <IxTable :columns="columns" :dataSource="dataSource" :rowKey="getRowKey" :pagination="pagination" :spin="loading">
-    <template #name="{ value }">
-      <a>{{ value }}</a>
-    </template>
   </IxTable>
 </template>
 

@@ -21,11 +21,11 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
     sortable: {
       orders: ['descend'],
       sorter: (curr, next) => curr.name.length - next.name.length,
     },
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',
