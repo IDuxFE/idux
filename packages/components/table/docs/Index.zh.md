@@ -71,9 +71,9 @@ export type TableColumn<T = any, V = any> =
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
 | `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 不支持和排序筛选一起使用 |
 | `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
+| `slots` | 自定义渲染 | `TableColumnBaseSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
-| `slots` | 自定义渲染 | `TableColumnBaseSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
 
 ```ts
 export interface TableColumnBaseSlots<T = any, V = any> {
@@ -121,22 +121,15 @@ export interface TableColumnExpandableSlots<T = any, V = any> {
 | `type` | 列类型 | `'selectable'` | - | - | `type` 设置为 `selectable`,即为选择列 |
 | `disabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
-| `options` | 自定义列头选择项 | `boolean \| TableSelectableSelection[]` | `false` | - | 为 `false` 时，不显示，为 `true` 时，显示默认的选择项 |
+| `menus` | 自定义列头下拉菜单 | `('all' \| 'invert' \| 'none' \| 'pageInvert' \| MenuData)[]` | - | - | - |
 | `trigger` | 不通过点击选择框，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string \| number)[], selectedRecords: T[]) => void` | - | - | - |
+| `onMenuClick` | 点击下拉菜单时触发 | `(options: MenuClickOptions, currentPageRowKeys: VKey[]) => void` | - | - | 如果点击时预设的值, 则不会触发该回调（例如：`all`, 那么触发的是 `onSelectAll`） |
 | `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected: boolean, record: T) => void` | - | - | - |
 | `onSelectAll` | 点击全选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | - |
 | `onSelectInvert` | 点击反选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | - |
 | `onSelectNone` | 点击清空所有时触发 | `() => void` | - | - | - |
 | `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | - |
-
-```ts
-export interface TableColumnSelectableOption {
-  key: string | number
-  text: string
-  onClick: (selectedRowKeys: (string | number)[]) => void
-}
-```
 
 ##### TableColumnSortable
 
@@ -187,3 +180,19 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+
+### IxTableColumn
+
+在 `template` 中描述 `columns` 的语法糖。
+
+```html
+<template>
+  <IxTable :dataSource="data">
+    <IxTableColumn title="Name" dataKey="name">
+        <template #cell="{ value }">
+          <a>{{ value }}</a>
+        </template>
+    </IxTableColumn>
+  </IxTable>
+</template>
+```
