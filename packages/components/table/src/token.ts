@@ -16,7 +16,8 @@ import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
 import type { TagsContext } from './composables/useTags'
-import type { Key, TableProps } from './types'
+import type { TableProps } from './types'
+import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
 import type { TableLocale } from '@idux/components/i18n'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
@@ -46,7 +47,7 @@ export const TABLE_TOKEN: InjectionKey<TableContext> = Symbol('TABLE_TOKEN')
 
 export interface TableBodyContext {
   mainTableWidth: Ref<number>
-  changeColumnWidth: (key: Key, width: number | false) => void
+  changeColumnWidth: (key: VKey, width: number | false) => void
 }
 
 export const tableBodyToken: InjectionKey<TableBodyContext> = Symbol('tableBodyToken')
