@@ -3,10 +3,6 @@
     <template #name="{ value }">
       <a>{{ value }}</a>
     </template>
-    <template #action="{ record }">
-      <a style="margin-right: 8px">Invite {{ record.name }}</a>
-      <a>Delete</a>
-    </template>
   </IxTable>
 </template>
 
@@ -29,9 +25,9 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
     width: 100,
     fixed: 'start',
+    slots: { cell: 'name' },
   },
   {
     title: 'Other',

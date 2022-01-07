@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import { type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
 import { isString } from 'lodash-es'
 

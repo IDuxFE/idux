@@ -5,17 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Key, TableProps } from '../types'
-import type { TableConfig } from '@idux/components/config'
-import type { ComputedRef } from 'vue'
-
-import { computed } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { Logger } from '@idux/cdk/utils'
+import { Logger, type VKey } from '@idux/cdk/utils'
+import { type TableConfig } from '@idux/components/config'
 
-export type GetRowKey = (record: unknown) => Key
+import { type TableProps } from '../types'
+
+export type GetRowKey = (record: unknown) => VKey
 
 export function useGetRowKey(props: TableProps, config: TableConfig): ComputedRef<GetRowKey> {
   return computed(() => {

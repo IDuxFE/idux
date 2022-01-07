@@ -24,8 +24,8 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customRender: 'name',
     colSpan: record => (record.name === 'Jake White' ? 5 : 1),
+    slots: { cell: 'name' },
   },
   {
     title: 'Age',

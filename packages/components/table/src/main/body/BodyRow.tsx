@@ -5,21 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type {
-  TableColumnMerged,
-  TableColumnMergedExpandable,
-  TableColumnMergedSelectable,
-} from '../../composables/useColumns'
-import type { Key, TableBodyRowProps, TableColumnExpandable, TableProps } from '../../types'
-import type { ComputedRef, Slots, VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import { type ComputedRef, type Slots, type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
+import { Logger, type VKey } from '@idux/cdk/utils'
+
+import {
+  type TableColumnMerged,
+  type TableColumnMergedExpandable,
+  type TableColumnMergedSelectable,
+} from '../../composables/useColumns'
 import { FlattedData } from '../../composables/useDataSource'
 import { TABLE_TOKEN } from '../../token'
-import { tableBodyRowProps } from '../../types'
+import { type TableBodyRowProps, type TableColumnExpandable, type TableProps, tableBodyRowProps } from '../../types'
 import BodyCell from './BodyCell'
 import BodyRowSingle from './BodyRowSingle'
 
@@ -108,10 +107,10 @@ function useEvents(
   props: TableBodyRowProps,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   checkExpandDisabled: (data: FlattedData) => boolean,
-  handleExpandChange: (key: Key, record: unknown) => void,
+  handleExpandChange: (key: VKey, record: unknown) => void,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
-  handleSelectChange: (key: Key, record: unknown) => void,
-  currentPageRowKeys: ComputedRef<{ enabledRowKeys: Key[]; disabledRowKeys: Key[] }>,
+  handleSelectChange: (key: VKey, record: unknown) => void,
+  currentPageRowKeys: ComputedRef<{ enabledRowKeys: VKey[]; disabledRowKeys: VKey[] }>,
 ) {
   const expandDisabled = computed(() => checkExpandDisabled(props.rowData))
   const expendTrigger = computed(() => expandable.value?.trigger)
@@ -202,13 +201,20 @@ function renderChildren(
 }
 
 function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
-  const { customExpand } = expandable || {}
+  /**
+   * @deprecated customExpand
+   */
+  const { customExpand, slots: columnSlots } = expandable || {}
   const { record, rowIndex } = props
+  if (__DEV__ && customExpand) {
+    Logger.warn('components/table', '`customExpand` is deprecated,  please use `expand` in `slots` instead')
+  }
+  const expandRender = customExpand ?? columnSlots?.expand
   let expandedContext: VNodeTypes | null = null
-  if (isFunction(customExpand)) {
-    expandedContext = customExpand({ record, rowIndex })
-  } else if (isString(customExpand) && slots[customExpand]) {
-    expandedContext = slots[customExpand]!({ record, rowIndex })
+  if (isFunction(expandRender)) {
+    expandedContext = expandRender({ record, rowIndex })
+  } else if (isString(expandRender) && slots[expandRender]) {
+    expandedContext = slots[expandRender]!({ record, rowIndex })
   }
   return expandedContext ? <BodyRowSingle>{expandedContext}</BodyRowSingle> : null
 }

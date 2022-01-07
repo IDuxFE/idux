@@ -5,28 +5,25 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type {
-  Key,
-  TableColumn,
-  TableColumnAlign,
-  TableColumnBase,
-  TableColumnExpandable,
-  TableColumnFixed,
-  TableColumnSelectable,
-  TableProps,
-} from '../types'
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { TableColumnBaseConfig, TableColumnExpandableConfig, TableConfig } from '@idux/components/config'
-import type { ComputedRef, Slots, VNode } from 'vue'
-
-import { computed, reactive, ref, watchEffect } from 'vue'
+import { type ComputedRef, type Slots, type VNode, computed, reactive, ref, watchEffect } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { convertArray, flattenNode } from '@idux/cdk/utils'
+import { type BreakpointKey, useSharedBreakpoints } from '@idux/cdk/breakpoint'
+import { type VKey, convertArray, flattenNode } from '@idux/cdk/utils'
+import { type TableColumnBaseConfig, type TableColumnExpandableConfig, type TableConfig } from '@idux/components/config'
 
 import { tableColumnKey } from '../tableColumn'
+import {
+  type TableColumn,
+  type TableColumnAlign,
+  type TableColumnBase,
+  type TableColumnExpandable,
+  type TableColumnExpandableSlots,
+  type TableColumnFixed,
+  type TableColumnSelectable,
+  type TableProps,
+} from '../types'
 
 export function useColumns(
   props: TableProps,
@@ -40,27 +37,7 @@ export function useColumns(
     if (columns && columns.length > 0) {
       return mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable)
     } else {
-      return (
-        flattenNode(slots.default?.(), { key: tableColumnKey }).map((column, colIndex) => {
-          const { children, props: columnProps } = column as VNode & { children: Slots }
-          const { editable, ellipsis } = columnProps || {}
-          const _editable = editable || editable === ''
-          const _ellipsis = ellipsis || ellipsis === ''
-          const newColumn = {
-            ...columnProps,
-            editable: _editable,
-            ellipsis: _ellipsis,
-            slots: children,
-          } as TableColumn
-          return covertColumn(
-            newColumn,
-            breakpoints,
-            config.columnBase,
-            config.columnExpandable,
-            `IDUX_TABLE_KEY-${colIndex}`,
-          )
-        }) || []
-      )
+      return convertColumns(slots.default?.(), breakpoints, config.columnBase, config.columnExpandable)
     }
   })
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
@@ -100,14 +77,14 @@ export interface ColumnsContext {
   scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>
   flattedColumnsWithScrollBar: ComputedRef<(TableColumnMerged | TableColumnScrollBar)[]>
   fixedColumnKeys: ComputedRef<{
-    lastStartKey: Key | undefined
-    firstEndKey: Key | undefined
+    lastStartKey: VKey | undefined
+    firstEndKey: VKey | undefined
   }>
   hasEllipsis: ComputedRef<boolean>
   hasFixed: ComputedRef<boolean>
   columnWidths: ComputedRef<number[]>
   columnWidthsWithScrollBar: ComputedRef<number[]>
-  changeColumnWidth: (key: Key, width: number | false) => void
+  changeColumnWidth: (key: VKey, width: number | false) => void
   columnOffsets: ComputedRef<{ starts: number[]; ends: number[] }>
   columnOffsetsWithScrollBar: ComputedRef<{ starts: number[]; ends: number[] }>
   mergedRows: ComputedRef<TableColumnMergedExtra[][]>
@@ -122,7 +99,7 @@ export type TableColumnMergedExtra =
 
 export interface TableColumnMergedBase extends TableColumnBase {
   align: TableColumnAlign
-  key: Key
+  key: VKey
 }
 export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
   colStart: number
@@ -131,15 +108,16 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
   titleColSpan: number
   titleRowSpan?: number
 }
-export interface TableColumnMergedExpandable extends TableColumnExpandable, TableColumnMergedBaseExtra {
+export interface TableColumnMergedExpandable extends TableColumnMergedBaseExtra, TableColumnExpandable {
   align: TableColumnAlign
-  key: Key
+  key: VKey
   icon: [string, string]
   titleColSpan: number
+  slots: TableColumnExpandableSlots
 }
-export interface TableColumnMergedSelectable extends TableColumnSelectable, TableColumnMergedBaseExtra {
+export interface TableColumnMergedSelectable extends TableColumnMergedBaseExtra, TableColumnSelectable {
   align: TableColumnAlign
-  key: Key
+  key: VKey
   multiple: boolean
   titleColSpan: number
 }
@@ -158,13 +136,36 @@ function mergeColumns(
   breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
-  parentKey?: Key,
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
-    .map((column, colIndex) =>
-      covertColumn(column, breakpoints, baseConfig, expandableConfig, `IDUX_TABLE_KEY_${parentKey}-${colIndex}`),
-    )
+    .map(column => covertColumn(column, breakpoints, baseConfig, expandableConfig))
+}
+
+function convertColumns(
+  nodes: VNode[] | undefined,
+  breakpoints: Record<BreakpointKey, boolean>,
+  baseConfig: TableColumnBaseConfig,
+  expandableConfig: TableColumnExpandableConfig,
+) {
+  const mergedColumns: Array<TableColumnMerged> = []
+
+  flattenNode(nodes, { key: tableColumnKey }).forEach(node => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { props, children } = node as VNode & { children: any }
+    const { key = Symbol(), editable, ellipsis, slots, ...newColumn } = props || {}
+    newColumn.key = key
+    newColumn.editable = editable || editable === ''
+    newColumn.editable = ellipsis || ellipsis === ''
+    const { default: defaultSlot, ...restSlots } = children || {}
+    newColumn.slots = { ...slots, ...restSlots }
+    if (defaultSlot) {
+      newColumn.children = convertColumns(defaultSlot(), breakpoints, baseConfig, expandableConfig)
+    }
+    mergedColumns.push(covertColumn(newColumn as TableColumnMerged, breakpoints, baseConfig, expandableConfig))
+  })
+
+  return mergedColumns
 }
 
 function covertColumn(
@@ -172,7 +173,6 @@ function covertColumn(
   breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
-  defaultKey: Key,
 ): TableColumnMerged {
   const { align = baseConfig.align } = column
 
@@ -188,13 +188,13 @@ function covertColumn(
     }
   } else {
     const { key, dataKey, sortable, children } = column
-    const _key = key ?? (convertArray(dataKey).join('-') || defaultKey)
+    const _key = key ?? (convertArray(dataKey).join('-') || Symbol())
     const newColumn = { ...column, key: _key, align }
     if (sortable) {
       newColumn.sortable = { ...baseConfig.sortable, ...sortable }
     }
     if (children?.length) {
-      newColumn.children = mergeColumns(children, breakpoints, baseConfig, expandableConfig, _key)
+      newColumn.children = mergeColumns(children, breakpoints, baseConfig, expandableConfig)
     }
     return newColumn
   }
@@ -252,8 +252,8 @@ function flatColumns(columns: TableColumnMerged[]) {
 
 function useFixedColumnKeys(flattedColumnsWithScrollBar: ComputedRef<(TableColumnMerged | TableColumnScrollBar)[]>) {
   return computed(() => {
-    let lastStartKey: Key | undefined
-    let firstEndKey: Key | undefined
+    let lastStartKey: VKey | undefined
+    let firstEndKey: VKey | undefined
     flattedColumnsWithScrollBar.value.forEach(column => {
       const { fixed, key } = column
       if (fixed === 'start') {
@@ -273,7 +273,7 @@ function useColumnWidths(
   flattedColumns: ComputedRef<TableColumnMerged[]>,
   scrollBarColumn: ComputedRef<TableColumnScrollBar | undefined>,
 ) {
-  const widthMap = reactive<Record<Key, number>>({})
+  const widthMap = reactive<Record<VKey, number>>({})
   const widthString = ref<string>()
 
   watchEffect(() => {
@@ -300,7 +300,7 @@ function useColumnWidths(
     return scrollBar ? [...widths, scrollBar.width] : widths
   })
 
-  const changeColumnWidth = (key: Key, width: number | false) => {
+  const changeColumnWidth = (key: VKey, width: number | false) => {
     if (width === false) {
       delete widthMap[key]
     } else {

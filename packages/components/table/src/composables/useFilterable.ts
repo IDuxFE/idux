@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Key, TableColumnFilterable } from '../types'
-import type { TableColumnMerged } from './useColumns'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed, reactive } from 'vue'
 
-import { computed, reactive } from 'vue'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type TableColumnFilterable } from '../types'
+import { type TableColumnMerged } from './useColumns'
 
 export function useFilterables(flattedColumns: ComputedRef<TableColumnMerged[]>): FilterableContext {
   const tempFilterByMap = reactive(new Map())
@@ -46,7 +45,7 @@ export function useFilterables(flattedColumns: ComputedRef<TableColumnMerged[]>)
 }
 
 export interface Filterable<T = unknown> extends TableColumnFilterable<T> {
-  key: Key
+  key: VKey
 }
 
 export interface FilterableContext<T = unknown> {

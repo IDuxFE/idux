@@ -5,25 +5,30 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type {
-  TableColumnMergedExpandable,
-  TableColumnMergedExtra,
-  TableColumnMergedSelectable,
-} from '../../composables/useColumns'
-import type { TableBodyCellProps } from '../../types'
-import type { ComputedRef, Slots, StyleValue, VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import {
+  type CSSProperties,
+  type ComputedRef,
+  type Slots,
+  type VNodeTypes,
+  computed,
+  defineComponent,
+  inject,
+} from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
-import { convertArray, convertCssPixel } from '@idux/cdk/utils'
+import { Logger, convertArray, convertCssPixel } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 import { IxRadio } from '@idux/components/radio'
 
+import {
+  type TableColumnMergedExpandable,
+  type TableColumnMergedExtra,
+  type TableColumnMergedSelectable,
+} from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
-import { tableBodyCellProps } from '../../types'
+import { type TableBodyCellProps, tableBodyCellProps } from '../../types'
 import { getColTitle } from '../../utils'
 
 type BodyColumn = TableColumnMergedExtra & {
@@ -55,7 +60,7 @@ export default defineComponent({
         [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
 
-      let style: StyleValue | undefined
+      let style: CSSProperties | undefined
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
         classes = {
@@ -85,23 +90,23 @@ export default defineComponent({
 
     return () => {
       const { type, additional } = props.column as BodyColumn
-      let children: VNodeTypes | null = null
+      let children: VNodeTypes
       let title: string | undefined
 
       if (type === 'selectable') {
         children = renderSelectableChildren(props, selectable, handleClick)
       } else {
-        const { ellipsis, slots: columnSlots } = props.column
+        const { ellipsis } = props.column
         const text = dataValue.value
-        children = text ? renderChildren(props, (columnSlots as Slots) ?? slots, text) : null
-        title = children ? getColTitle(ellipsis, children, text) : undefined
+        children = renderChildren(props, slots, dataValue.value)
+        title = getColTitle(ellipsis, children, text)
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyColTag = bodyColTag.value as any
       return (
         <BodyColTag {...cellProps.value} title={title} {...additional}>
-          {type === 'expandable' ? renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value) : null}
+          {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
           {children}
         </BodyColTag>
       )
@@ -132,11 +137,19 @@ function useDataValue(props: TableBodyCellProps) {
 
 function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) {
   const { record, rowIndex, column } = props
-  const { customRender } = column
-  if (isFunction(customRender)) {
-    return customRender({ value, record, rowIndex })
-  } else if (isString(customRender) && slots[customRender]) {
-    return slots[customRender]!({ value, record, rowIndex })
+  /**
+   * @deprecated customRender
+   */
+  const { customRender, slots: columnSlots } = column
+  if (__DEV__ && customRender) {
+    Logger.warn('components/table', '`customRender` is deprecated,  please use `cell` in `slots` instead')
+  }
+
+  const cellRender = customRender ?? columnSlots?.cell
+  if (isFunction(cellRender)) {
+    return cellRender({ value, record, rowIndex })
+  } else if (isString(cellRender) && slots[cellRender]) {
+    return slots[cellRender]!({ value, record, rowIndex })
   }
   return value
 }
@@ -147,20 +160,26 @@ function renderExpandableChildren(
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   prefixCls: string,
 ) {
-  const { icon, customIcon, indent } = expandable.value!
+  /**
+   * @deprecated customIcon
+   */
+  const { icon, customIcon, slots: columnSlots, indent } = expandable.value!
   const { record, expanded, level, disabled } = props
   const onExpand = props.handleExpend!
   const style = {
     marginLeft: indent ? convertCssPixel(level * indent) : undefined,
   }
-
+  if (__DEV__ && customIcon) {
+    Logger.warn('components/table', '`customIcon` is deprecated,  please use `icon` in `slots` instead')
+  }
+  const iconRender = customIcon ?? columnSlots?.icon
   let iconNode: VNodeTypes | null
   if (disabled) {
     iconNode = null
-  } else if (isFunction(customIcon)) {
-    iconNode = customIcon({ expanded: !!expanded, record, onExpand })
-  } else if (isString(customIcon) && slots[customIcon]) {
-    iconNode = slots[customIcon]!({ expanded, record, onExpand })
+  } else if (isFunction(iconRender)) {
+    iconNode = iconRender({ expanded: !!expanded, record, onExpand })
+  } else if (isString(iconRender) && slots[iconRender]) {
+    iconNode = slots[iconRender]!({ expanded, record, onExpand })
   } else {
     iconNode = <IxIcon name={icon[expanded ? 1 : 0]} rotate={expanded ? 180 : -180} onClick={onExpand} />
   }
