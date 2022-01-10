@@ -77,6 +77,7 @@ export default defineComponent({
       props,
       key,
       isExpanded,
+      isSelected,
       mode,
       level,
       paddingLeft,

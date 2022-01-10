@@ -31,6 +31,7 @@ export interface MenuSubContext {
   props: MenuSubProps
   key: VKey
   isExpanded: ComputedRef<boolean>
+  isSelected: ComputedRef<boolean>
   mode: ComputedRef<MenuMode>
   level: number
   paddingLeft: ComputedRef<string | undefined>
