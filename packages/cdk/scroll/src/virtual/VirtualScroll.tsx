@@ -46,7 +46,7 @@ export default defineComponent({
       heightsUpdateMark,
       heights,
     )
-    const { scrollVisible, hideScroll } = useScrollVisible(props, scrollTop, scrollHeight)
+    const { scrollVisible, showScroll, hideScroll } = useScrollVisible(props, scrollTop, scrollHeight)
     const { scrolledTop, scrolledBottom, syncScrollTop } = useScrollPlacement(
       props,
       holderRef,
@@ -67,6 +67,7 @@ export default defineComponent({
       scrollHeight,
       scrollOffset,
       scrollVisible,
+      showScroll,
       hideScroll,
       scrollMoving,
       changeScrollMoving,
@@ -79,6 +80,18 @@ export default defineComponent({
 
     const mergedData = computed(() => props.dataSource.slice(startIndex.value, endIndex.value + 1))
     watch(mergedData, data => callEmit(props.onScrolledChange, startIndex.value, endIndex.value, data))
+
+    const handleMouseEnterWrapper = () => {
+      if (!scrollMoving.value) {
+        showScroll()
+      }
+    }
+
+    const handleMouseLeaveWrapper = () => {
+      if (!scrollMoving.value) {
+        hideScroll()
+      }
+    }
 
     return () => {
       const getKeyFn = getKey.value
@@ -94,7 +107,12 @@ export default defineComponent({
       })
 
       return (
-        <div class="cdk-virtual-scroll" style={{ position: 'relative' }}>
+        <div
+          class="cdk-virtual-scroll"
+          style={{ position: 'relative' }}
+          onMouseenter={handleMouseEnterWrapper}
+          onMouseleave={handleMouseLeaveWrapper}
+        >
           <Holder>{children}</Holder>
           {useVirtual.value && <ScrollBar />}
         </div>

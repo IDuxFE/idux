@@ -8,12 +8,11 @@
 import type { VirtualScrollProps } from '../types'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
-
-import { throttle } from 'lodash-es'
+import { computed, ref, watch } from 'vue'
 
 export interface ScrollVisibleContext {
   scrollVisible: ComputedRef<boolean>
+  showScroll: () => void
   hideScroll: () => void
 }
 
@@ -31,16 +30,15 @@ export function useScrollVisible(
     return visible.value
   })
 
-  let timer: number
-  const hideScroll = throttle(() => {
-    clearTimeout(timer)
+  const showScroll = () => {
     visible.value = true
-    timer = setTimeout(() => (visible.value = false), 1200)
-  }, 300)
+  }
 
-  watch(scrollTop, hideScroll, { flush: 'post' })
+  const hideScroll = () => {
+    visible.value = false
+  }
 
-  onBeforeUnmount(() => clearTimeout(timer))
+  watch(scrollTop, showScroll, { flush: 'post' })
 
-  return { scrollVisible, hideScroll }
+  return { scrollVisible, showScroll, hideScroll }
 }

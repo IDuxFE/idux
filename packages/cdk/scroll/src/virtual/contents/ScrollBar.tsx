@@ -17,16 +17,8 @@ import { virtualScrollToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const {
-      props,
-      scrollTop,
-      scrollHeight,
-      syncScrollTop,
-      scrollMoving,
-      changeScrollMoving,
-      scrollVisible,
-      hideScroll,
-    } = inject(virtualScrollToken)!
+    const { props, scrollTop, scrollHeight, syncScrollTop, scrollMoving, changeScrollMoving, scrollVisible } =
+      inject(virtualScrollToken)!
 
     const thumbHight = useThumbHight(props)
     const enableScrollRange = useEnableScrollRange(props, scrollHeight)
@@ -53,7 +45,6 @@ export default defineComponent({
         class="cdk-virtual-scroll-bar"
         style={style.value}
         onMousedown={handleScrollbarMouseDown}
-        onMousemove={hideScroll}
         onTouchstart={handleScrollbarTouchStart}
       >
         <div
