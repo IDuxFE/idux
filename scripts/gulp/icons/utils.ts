@@ -2,7 +2,7 @@ import { join } from 'path'
 
 import { copy, existsSync, readFile, readdir, writeFile } from 'fs-extra'
 import { camelCase, upperFirst } from 'lodash'
-import { OptimizeOptions, optimize } from 'svgo'
+import { OptimizeOptions, OptimizedSvg, optimize } from 'svgo'
 
 import { gulpConfig } from '../gulpConfig'
 
@@ -75,7 +75,12 @@ export async function generateIcons(): Promise<void> {
 
   const definitionPromises = iconPaths.map(async iconName => {
     const iconContent = await readFile(join(assetsDirname, iconName), 'utf8')
-    const { data } = optimize(iconContent, options)
+    const optimizeData = optimize(iconContent, options)
+    if (optimizeData.error) {
+      throw Error(optimizeData.error)
+    }
+
+    const { data } = optimizeData as OptimizedSvg
 
     await writeFile(join(assetsDirname, iconName), data, 'utf8')
 
