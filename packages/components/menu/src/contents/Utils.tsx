@@ -27,7 +27,7 @@ export function coverChildren(data?: MenuData[]): VNode[] {
   data.forEach(item => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { type, additional, ...rest } = item as any
-    if (type === 'item') {
+    if (!type || type === 'item') {
       nodes.push(<MenuItem {...rest} {...additional}></MenuItem>)
     } else if (type === 'sub') {
       nodes.push(<MenuSub {...rest} {...additional}></MenuSub>)

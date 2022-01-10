@@ -95,18 +95,23 @@ export type MenuSubInstance = InstanceType<DefineComponent<MenuSubProps>>
 
 export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>
 
-export interface MenuItemSlots {
-  icon?: string | ((data: MenuItem) => VNodeChild)
-  label?: string | ((data: MenuItem) => VNodeChild)
-}
-export interface MenuItem extends MenuItemPublicProps {
-  type: 'item'
+export interface MenuCommon {
+  type?: 'item' | 'itemGroup' | 'sub' | 'divider'
   additional?: {
     class?: any
     style?: any
     [key: string]: unknown
   }
   key: VKey
+  slots?: unknown
+}
+
+export interface MenuItemSlots {
+  icon?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
+}
+export interface MenuItem extends MenuItemPublicProps, MenuCommon {
+  type?: 'item'
   slots?: MenuItemSlots
 }
 
@@ -114,32 +119,23 @@ export interface MenuItemGroupSlots {
   icon?: string | ((data: MenuItemGroup) => VNodeChild)
   label?: string | ((data: MenuItemGroup) => VNodeChild)
 }
-
-export interface MenuItemGroup extends MenuItemGroupPublicProps {
+export interface MenuItemGroup extends MenuItemGroupPublicProps, MenuCommon {
   type: 'itemGroup'
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-  key: VKey
   slots?: MenuItemGroupSlots
 }
 
 export interface MenuSubSlots {
-  icon?: string | ((data: MenuSub) => VNodeChild)
-  label?: string | ((data: MenuSub) => VNodeChild)
-  suffix?: string | ((data: MenuSub) => VNodeChild)
+  icon?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+  suffix?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
-
-export interface MenuSub extends MenuSubPublicProps {
+export interface MenuSub extends MenuSubPublicProps, MenuCommon {
   type: 'sub'
   additional?: {
     class?: any
     style?: any
     [key: string]: unknown
   }
-  key: VKey
   slots?: MenuSubSlots
 }
 

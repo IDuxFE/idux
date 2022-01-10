@@ -30,6 +30,59 @@ order: 0
 ```ts
 export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider
 
+export interface MenuCommon {
+  type?: 'item' | 'itemGroup' | 'sub' | 'divider'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key: VKey
+  slots?: unknown
+}
+
+export interface MenuItemSlots {
+  icon?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
+}
+export interface MenuItem extends MenuItemPublicProps, MenuCommon {
+  type?: 'item'
+  slots?: MenuItemSlots
+}
+
+export interface MenuItemGroupSlots {
+  icon?: string | ((data: MenuItemGroup) => VNodeChild)
+  label?: string | ((data: MenuItemGroup) => VNodeChild)
+}
+export interface MenuItemGroup extends MenuItemGroupPublicProps, MenuCommon {
+  type: 'itemGroup'
+  slots?: MenuItemGroupSlots
+}
+
+export interface MenuSubSlots {
+  icon?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+  suffix?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+}
+export interface MenuSub extends MenuSubPublicProps, MenuCommon {
+  type: 'sub'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  slots?: MenuSubSlots
+}
+
+export interface MenuDivider {
+  type: 'divider'
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+}
 ```
 
 ### IxMenuItem
@@ -40,8 +93,8 @@ export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider
 | --- | --- | --- | --- | --- | --- |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 菜单图标| `string \| #icon \| VNode` | - | - |
-| `label` | 菜单文本 | `string \| #default`  | - | - |
+| `icon` | 菜单图标| `string  \| VNode \| #icon` | - | - |
+| `label` | 菜单文本 | `string \| #label`  | - | - |
 
 ### IxMenuSub
 
@@ -50,9 +103,9 @@ export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
-| `children` | 子菜单数据 | `MenuData[]` | - | - | - |
+| `children` | 子菜单数据 | `MenuData[] \| #default` | - | - | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `icon` | 菜单图标| `string \| #icon \| VNode` | - | - | - |
+| `icon` | 菜单图标| `string \| VNode \| #icon` | - | - | - |
 | `label` | 菜单文本 | `string \| #label`  | - | - |
 | `suffix` | 后缀图标 | `string \| #suffix` | `right` | ✅ | - |
 
@@ -63,8 +116,8 @@ export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
-| `children` | 子菜单数据 | `MenuData[]` | - | - | - |
-| `icon` | 菜单图标| `string \| #icon \| VNode` | - | - |
+| `children` | 子菜单数据 | `MenuData[] \| #default` | - | - | - |
+| `icon` | 菜单图标| `string \| VNode \| #icon` | - | - |
 | `label` | 菜单文本 | `string \| #label`  | - | - |
 
 ### IxMenuDivider

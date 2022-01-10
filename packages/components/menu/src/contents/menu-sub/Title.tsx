@@ -16,7 +16,8 @@ import { coverIcon } from '../Utils'
 export default defineComponent({
   setup() {
     const { slots: menuSlots, config, mergedPrefixCls } = inject(menuToken)!
-    const { props, key, isExpanded, changeExpanded, handleMouseEvent, mode, paddingLeft } = inject(menuSubToken)!
+    const { props, key, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } =
+      inject(menuSubToken)!
 
     const suffix = computed(() => props.suffix ?? config.suffix)
     const rotate = computed(() => {
@@ -48,20 +49,28 @@ export default defineComponent({
 
     return () => {
       const { icon, label } = props
-      const slotProps = { ...props, key, expanded: isExpanded.value } as MenuSub & { expanded: boolean }
-
       const slots = props.slots || {}
       const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      const iconNode = coverIcon(iconSlot, slotProps, icon)
       const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
       const suffixSlot = isString(slots.suffix) ? menuSlots[slots.suffix] : slots.suffix
-      const suffixNode = coverIcon(suffixSlot, slotProps, suffix.value, rotate.value)
+
+      const slotProps =
+        iconSlot || labelSlot || suffixSlot
+          ? ({ ...props, key, expanded: isExpanded.value, selected: isSelected.value } as MenuSub & {
+              expanded: boolean
+              selected: boolean
+            })
+          : undefined
+
+      const iconNode = coverIcon(iconSlot, slotProps!, icon)
+      const labelNode = labelSlot ? labelSlot(slotProps!) : label
+      const suffixNode = coverIcon(suffixSlot, slotProps!, suffix.value, rotate.value)
 
       const prefixCls = `${mergedPrefixCls.value}-sub-title`
       return (
         <div class={prefixCls} style={style.value} {...events.value}>
           {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span>{labelSlot ? labelSlot(slotProps) : label}</span>
+          <span>{labelNode}</span>
           {suffixNode && <span class={`${prefixCls}-suffix`}>{suffixNode}</span>}
         </div>
       )

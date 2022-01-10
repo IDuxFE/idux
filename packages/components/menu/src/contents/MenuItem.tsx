@@ -60,24 +60,26 @@ export default defineComponent({
 
     return () => {
       const { disabled, icon, label } = props
-      const slotProps = { ...props, key } as MenuItem
-
       const slots = props.slots || {}
       const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      const iconNode = coverIcon(iconSlot, slotProps, icon)
-      let labelSlot = slots.label
-      if (!labelSlot && slots.default) {
-        labelSlot = slots.default
-      }
+      // <IxMenuItem key="key">label</IxMenuItem>
+      let labelSlot = slots.label ?? slots.default
       if (isString(labelSlot)) {
         labelSlot = menuSlots[labelSlot]
       }
+
+      const slotProps =
+        iconSlot || labelSlot
+          ? ({ ...props, key, selected: isSelected.value } as MenuItem & { selected: boolean })
+          : undefined
+      const iconNode = coverIcon(iconSlot, slotProps!, icon)
+      const labelNode = labelSlot ? labelSlot(slotProps) : label
 
       const prefixCls = `${mergedPrefixCls.value}-item`
       return (
         <li class={classes.value} style={style.value} onClick={disabled ? undefined : onClick}>
           {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span>{labelSlot ? labelSlot(slotProps) : label}</span>
+          <span>{labelNode}</span>
         </li>
       )
     }
