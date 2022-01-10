@@ -5,13 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuProps } from '../types'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, watch } from 'vue'
 
-import { watch } from 'vue'
+import { type VKey, useControlledProp } from '@idux/cdk/utils'
 
-import { useControlledProp } from '@idux/cdk/utils'
+import { type MenuProps } from '../types'
 
 export interface ExpandedContext {
   expandedKeys: ComputedRef<VKey[]>

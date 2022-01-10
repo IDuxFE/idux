@@ -23,6 +23,12 @@
     }
 
     .@{menu-prefix}-item,
+    .@{menu-prefix}-item-group-title,
+    .@{menu-prefix}-sub-title {
+      width: 100%;
+    }
+
+    .@{menu-prefix}-item,
     .@{menu-prefix}-sub-title {
       margin: @menu-item-margin;
     }
@@ -120,6 +126,19 @@
   }
 
   &-inline {
+
+    &-item,
+    &-item-group-title,
+    &-sub-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      & > &-content {
+        flex: auto;
+      }
+    }
+
     &.@{menu-prefix}-content {
       border-right: 0;
     }

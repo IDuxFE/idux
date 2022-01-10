@@ -5,9 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { InjectionKey } from 'vue'
+import { type InjectionKey, type Ref } from 'vue'
 
 export interface DropdownContext {
+  hideOnClick: Ref<boolean>
   setVisibility: (visible: boolean) => void
 }
 

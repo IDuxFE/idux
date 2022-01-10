@@ -7,12 +7,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNodeChild } from 'vue'
-import type { VueTypeDef } from 'vue-types'
+import { type DefineComponent, type FunctionalComponent, type HTMLAttributes, type VNode, type VNodeChild } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { IxPropTypes } from '@idux/cdk/utils'
+import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
@@ -47,106 +45,94 @@ export type MenuPublicProps = IxPublicPropTypes<typeof menuProps>
 export type MenuComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuPublicProps> & MenuPublicProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 
-export const menuItemProps = {
-  disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  label: IxPropTypes.string,
-
-  slots: IxPropTypes.object<MenuItemSlots>(),
+export interface MenuCommonProps {
+  type?: 'item' | 'itemGroup' | 'sub' | 'divider'
+  key: VKey
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
 }
 
-export type MenuItemProps = IxInnerPropTypes<typeof menuItemProps>
-export type MenuItemPublicProps = Omit<IxPublicPropTypes<typeof menuItemProps>, 'slots'>
+export interface MenuItemSlots {
+  icon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
+}
+
+export interface MenuItemProps extends MenuCommonProps {
+  type?: 'item'
+  disabled?: boolean
+  icon?: string | VNode
+  label?: string
+  slots?: MenuItemSlots
+}
+export type MenuItemPublicProps = Omit<MenuItemProps, 'type' | 'additional' | 'slots'>
 export type MenuItemComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemPublicProps> & MenuItemPublicProps
 >
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
 
-export const menuItemGroupProps = {
-  children: IxPropTypes.array<MenuData>(),
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  label: IxPropTypes.string,
-
-  slots: IxPropTypes.object<MenuItemGroupSlots>(),
+export interface MenuItemGroupSlots {
+  icon?: string | ((data: MenuItemGroupProps) => VNodeChild)
+  label?: string | ((data: MenuItemGroupProps) => VNodeChild)
 }
 
-export type MenuItemGroupProps = IxInnerPropTypes<typeof menuItemGroupProps>
-export type MenuItemGroupPublicProps = Omit<IxPublicPropTypes<typeof menuItemGroupProps>, 'slots'>
+export interface MenuItemGroupProps extends MenuCommonProps {
+  type: 'itemGroup'
+  children?: MenuData[]
+  icon?: string | VNode
+  label?: string
+  slots?: MenuItemGroupSlots
+}
+export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type' | 'additional' | 'slots'>
 export type MenuItemGroupComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemGroupPublicProps> & MenuItemGroupPublicProps
 >
 export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
 
-export const menuSubProps = {
-  children: IxPropTypes.array<MenuData>(),
-  disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  label: IxPropTypes.string,
-  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
-  suffix: IxPropTypes.string,
-
-  slots: IxPropTypes.object<MenuSubSlots>(),
-}
-
-export type MenuSubProps = IxInnerPropTypes<typeof menuSubProps>
-export type MenuSubPublicProps = Omit<IxPublicPropTypes<typeof menuSubProps>, 'slots'>
-export type MenuSubComponent = FunctionalComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
-export type MenuSubInstance = InstanceType<DefineComponent<MenuSubProps>>
-
-export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>
-
-export interface MenuCommon {
-  type?: 'item' | 'itemGroup' | 'sub' | 'divider'
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-  key: VKey
-  slots?: unknown
-}
-
-export interface MenuItemSlots {
-  icon?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
-}
-export interface MenuItem extends MenuItemPublicProps, MenuCommon {
-  type?: 'item'
-  slots?: MenuItemSlots
-}
-
-export interface MenuItemGroupSlots {
-  icon?: string | ((data: MenuItemGroup) => VNodeChild)
-  label?: string | ((data: MenuItemGroup) => VNodeChild)
-}
-export interface MenuItemGroup extends MenuItemGroupPublicProps, MenuCommon {
-  type: 'itemGroup'
-  slots?: MenuItemGroupSlots
-}
-
 export interface MenuSubSlots {
-  icon?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
-  suffix?: string | ((data: MenuSub & { expanded: boolean; selected: boolean }) => VNodeChild)
+  icon?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
+  suffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
-export interface MenuSub extends MenuSubPublicProps, MenuCommon {
+export interface MenuSubProps extends MenuCommonProps {
   type: 'sub'
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
+  children?: MenuData[]
+  disabled?: boolean
+  icon?: string | VNode
+  label?: string
+  offset?: [number, number]
+  suffix?: string
   slots?: MenuSubSlots
 }
 
-export interface MenuDivider {
+export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional' | 'slots'>
+export type MenuSubComponent = FunctionalComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
+
+export interface MenuDividerProps {
   type: 'divider'
+  key?: VKey
   additional?: {
     class?: any
     style?: any
     [key: string]: unknown
   }
-  key?: VKey
 }
 
-export type MenuData = MenuItem | MenuItemGroup | MenuSub | MenuDivider
+export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>
+
+export type MenuData = MenuItemProps | MenuItemGroupProps | MenuSubProps | MenuDividerProps
+
+// private
+export const menuItemProps = {
+  data: IxPropTypes.object<MenuItemProps>().isRequired,
+}
+
+export const menuItemGroupProps = {
+  data: IxPropTypes.object<MenuItemGroupProps>().isRequired,
+}
+
+export const menuSubProps = {
+  data: IxPropTypes.object<MenuSubProps>().isRequired,
+}

@@ -13,7 +13,7 @@ import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../composables/usePaddingLeft'
 import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
-import { MenuItemGroup, menuItemGroupProps } from '../types'
+import { menuItemGroupProps } from '../types'
 import { coverChildren, coverIcon } from './Utils'
 
 export default defineComponent({
@@ -40,20 +40,21 @@ export default defineComponent({
     }
 
     return () => {
-      const { icon, label, children } = props
-      const slotProps = { ...props, key } as MenuItemGroup
+      const { additional, icon, label, children, slots = {} } = props.data
 
-      const slots = props.slots || {}
       const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      const iconNode = coverIcon(iconSlot, slotProps, icon)
       const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
+
+      const slotProps = props.data
+      const iconNode = coverIcon(iconSlot, slotProps, icon)
+      const labelNode = labelSlot ? labelSlot(slotProps) : label
 
       const prefixCls = `${mergedPrefixCls.value}-item-group`
       return (
-        <li class={prefixCls} onClick={onClick}>
+        <li class={prefixCls} {...additional} onClick={onClick}>
           <div class={`${prefixCls}-title`} style={titleStyle.value}>
             {iconNode && <span class={`${prefixCls}-title-icon`}>{iconNode}</span>}
-            {<span> {labelSlot ? labelSlot(slotProps) : label}</span>}
+            {<span class={`${prefixCls}-title-content`}> {labelNode}</span>}
           </div>
           <ul class={`${prefixCls}-content`}>{coverChildren(children)}</ul>
         </li>

@@ -8,13 +8,19 @@
     text-decoration: none;
   }
 
+  &-item,
+  &-item-group-title,
+  &-sub-title {
+    position: relative;
+    height: @menu-item-height;
+    line-height: @menu-item-height;
+    padding-left: @menu-item-padding-left;
+    padding-right: @menu-item-padding-right;
+  }
+
   &-item-group {
 
     &-title {
-      height: @menu-item-height;
-      line-height: @menu-item-height;
-      padding-left: @menu-item-padding-left;
-      padding-right: @menu-item-padding-right;
       color: @menu-item-group-text-color;
       font-size: @menu-font-size;
       .ellipsis();
@@ -35,11 +41,6 @@
 
 .@{menu-prefix}-item,
 .@{menu-prefix}-sub-title {
-  position: relative;
-  height: @menu-item-height;
-  line-height: @menu-item-height;
-  padding-left: @menu-item-padding-left;
-  padding-right: @menu-item-padding-right;
   cursor: pointer;
   transition: background @transition-duration-base, color @transition-duration-base;
   .ellipsis();

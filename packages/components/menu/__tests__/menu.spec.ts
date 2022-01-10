@@ -4,10 +4,6 @@ import { h } from 'vue'
 import { renderWork, wait } from '@tests'
 
 import Menu from '../src/Menu'
-// import MenuDivider from '../src/MenuDivider'
-import MenuItem from '../src/contents/MenuItem'
-// import MenuItemGroup from '../src/MenuItemGroup'
-import MenuSub from '../src/contents/menu-sub/MenuSub'
 import { MenuData, MenuProps } from '../src/types'
 
 const dataSource: MenuData[] = [
@@ -88,7 +84,7 @@ describe('Menu', () => {
       props: { expandedKeys: ['sub1'], 'onUpdate:expandedKeys': onUpdateExpandedKeys, mode: 'inline' },
     })
 
-    const subs = wrapper.findAllComponents(MenuSub)
+    const subs = wrapper.findAll('.ix-menu-sub')
     expect(subs.length).toBe(4)
     expect(subs[0].classes()).toContain('ix-menu-sub-expanded')
     expect(subs[1].classes()).not.toContain('ix-menu-sub-expanded')
@@ -113,7 +109,7 @@ describe('Menu', () => {
     const onUpdateSelectedKeys = jest.fn()
     const wrapper = MenuMount({ props: { selectedKeys: ['item1'], 'onUpdate:selectedKeys': onUpdateSelectedKeys } })
 
-    const items = wrapper.findAllComponents(MenuItem)
+    const items = wrapper.findAll('.ix-menu-item')
     expect(items.length).toBe(3)
     expect(items[0].classes()).toContain('ix-menu-item-selected')
     expect(items[1].classes()).not.toContain('ix-menu-item-selected')

@@ -29,7 +29,7 @@ export default defineComponent({
     })
 
     const events = computed(() => {
-      if (props.disabled) {
+      if (props.data.disabled) {
         return undefined
       }
       return {
@@ -40,7 +40,7 @@ export default defineComponent({
 
     return () => (
       <ul class={classes.value} {...events.value}>
-        {coverChildren(props.children)}
+        {coverChildren(props.data.children)}
       </ul>
     )
   },

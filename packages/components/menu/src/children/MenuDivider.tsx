@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FunctionalComponent, HTMLAttributes } from 'vue'
-
-import { inject } from 'vue'
+import { type FunctionalComponent, type HTMLAttributes, inject } from 'vue'
 
 import { menuToken } from '../token'
 
