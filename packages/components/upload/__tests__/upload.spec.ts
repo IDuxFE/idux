@@ -60,6 +60,21 @@ const uploadMount = (options?: MountingOptions<Partial<UploadProps>>) => {
 }
 
 describe('Upload render', () => {
+  let xhrMock: Partial<XMLHttpRequest> = {}
+
+  beforeEach(() => {
+    xhrMock = {
+      abort: jest.fn(),
+      send: jest.fn(),
+      open: jest.fn(),
+      setRequestHeader: jest.fn(),
+      readyState: 4,
+      status: 200,
+      withCredentials: false,
+    }
+    jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
+  })
+
   renderWork<UploadProps>(UploadCpm, { props: { action: '/upload', files: [] } })
 
   test('slots work', async () => {
@@ -190,7 +205,7 @@ describe('Upload render', () => {
     expect(wrapper.findAll('.ix-upload-file').length).toBe(1)
   })
 
-  test('strokeColor work', async () => {
+  test('progress work', async () => {
     const wrapper = uploadMount({
       props: {
         files: [
@@ -207,11 +222,12 @@ describe('Upload render', () => {
 
     expect(wrapper.findComponent(IxProgress).props()).toMatchObject(expect.objectContaining({ strokeColor: '#20CC94' }))
 
-    await wrapper.setProps({ strokeColor: { '0%': '#108ee9', '100%': '#87d068' } })
+    await wrapper.setProps({ progress: { strokeColor: { '0%': '#108ee9', '100%': '#87d068' }, strokeWidth: 3 } })
 
     expect(wrapper.findComponent(IxProgress).props()).toMatchObject(
       expect.objectContaining({
         strokeColor: { '0%': '#108ee9', '100%': '#87d068' },
+        strokeWidth: 3,
       }),
     )
   })

@@ -7,7 +7,7 @@
 
 import type { UploadDrag } from '../composables/useDrag'
 import type { UploadToken } from '../token'
-import type { UploadFileStatus, UploadProps } from '../types'
+import type { UploadFile, UploadFileStatus, UploadProps } from '../types'
 import type { UploadConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, ShallowRef } from 'vue'
 
@@ -24,15 +24,7 @@ import { getFileInfo, getFilesAcceptAllow, getFilesCountAllow } from '../util/fi
 export default defineComponent({
   name: 'IxUploadSelector',
   setup(props, { slots }) {
-    const {
-      props: uploadProps,
-      onUpdateFiles,
-      startUpload,
-    } = inject(uploadToken, {
-      props: {},
-      onUpdateFiles: () => {},
-      startUpload: () => {},
-    } as unknown as UploadToken)
+    const { props: uploadProps, files, onUpdateFiles, abort, startUpload } = inject(uploadToken)!
     const cpmClasses = useCmpClasses()
     const config = useGlobalConfig('upload')
     const dir = useDir(uploadProps, config)
@@ -49,12 +41,12 @@ export default defineComponent({
       onDragLeave,
     } = useDrag(uploadProps)
     const [filesSelected, updateFilesSelected] = useFilesSelected(dragFilesSelected, allowDrag)
-    const filesReady = useFilesAllowed(uploadProps, filesSelected, accept, maxCount)
+    const filesReady = useFilesAllowed(files, filesSelected, accept, maxCount)
     const fileInputRef: Ref<HTMLInputElement | null> = ref(null)
     const inputClasses = computed(() => `${cpmClasses.value}-input`)
     const selectorClasses = useSelectorClasses(uploadProps, cpmClasses, dragable, dragOver)
 
-    syncUploadHandle(uploadProps, filesReady, onUpdateFiles, startUpload)
+    syncUploadHandle(uploadProps, files, filesReady, onUpdateFiles, abort, startUpload)
 
     return () => {
       return (
@@ -140,16 +132,16 @@ function useFilesSelected(
 }
 
 function useFilesAllowed(
-  uploadProps: UploadProps,
+  files: ComputedRef<UploadFile[]>,
   filesSelected: ShallowRef<File[]>,
   accept: ComputedRef<string[] | undefined>,
   maxCount: ComputedRef<number>,
 ) {
   const filesAllowed: ShallowRef<File[]> = shallowRef([])
 
-  watch(filesSelected, files => {
-    const filesCheckAccept = getFilesAcceptAllow(files, accept.value)
-    filesAllowed.value = getFilesCountAllow(filesCheckAccept, uploadProps.files.length, maxCount.value)
+  watch(filesSelected, filesSelected$$ => {
+    const filesCheckAccept = getFilesAcceptAllow(filesSelected$$, accept.value)
+    filesAllowed.value = getFilesCountAllow(filesCheckAccept, files.value.length, maxCount.value)
   })
 
   return filesAllowed
@@ -158,27 +150,29 @@ function useFilesAllowed(
 // 选中文件变化就处理上传
 function syncUploadHandle(
   uploadProps: UploadProps,
+  files: ComputedRef<UploadFile[]>,
   filesReady: ShallowRef<File[]>,
   onUpdateFiles: UploadToken['onUpdateFiles'],
+  abort: UploadToken['abort'],
   startUpload: UploadToken['startUpload'],
 ) {
-  watch(filesReady, async files => {
-    if (files.length === 0) {
+  watch(filesReady, async filesReady$$ => {
+    if (filesReady$$.length === 0) {
       return
     }
-    const filesAfterHandle = uploadProps.onSelect ? await callEmit(uploadProps.onSelect, files) : files
-    const filesReadyUpload = getFilesHandled(filesAfterHandle!, files)
+    const filesAfterHandle = uploadProps.onSelect ? await callEmit(uploadProps.onSelect, filesReady$$) : filesReady$$
+    const filesReadyUpload = getFilesHandled(filesAfterHandle!, filesReady$$)
     const filesFormat = getFormatFiles(filesReadyUpload, uploadProps, 'selected')
     const filesIds = filesFormat.map(file => file.uid)
     if (uploadProps.maxCount === 1) {
+      files.value.forEach(file => abort(file))
       callEmit(onUpdateFiles, filesFormat)
     } else {
-      callEmit(onUpdateFiles, uploadProps.files.concat(filesFormat))
+      callEmit(onUpdateFiles, files.value.concat(filesFormat))
     }
 
-    // 需要用props的files，已做了响应式处理，对status属性改变能够触发更新
     await nextTick(() => {
-      uploadProps.files
+      files.value
         .filter(item => filesIds.includes(item.uid))
         .forEach(file => {
           startUpload(file)

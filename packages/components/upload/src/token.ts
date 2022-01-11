@@ -7,10 +7,11 @@
 
 import type { UploadRequest } from './composables/useRequest'
 import type { UploadFile, UploadProps } from './types'
-import type { InjectionKey } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 export type UploadToken = {
   props: UploadProps
+  files: ComputedRef<UploadFile[]>
   onUpdateFiles: (file: UploadFile[]) => void
   setSelectorVisible: (isShow: boolean) => void
 } & UploadRequest

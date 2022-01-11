@@ -6,7 +6,7 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { ProgressGradient } from '@idux/components/progress'
+import type { ProgressProps } from '@idux/components/progress'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -68,7 +68,7 @@ export const uploadProps = {
   disabled: IxPropTypes.bool,
   maxCount: IxPropTypes.number,
   multiple: IxPropTypes.bool,
-  strokeColor: IxPropTypes.oneOfType([String, IxPropTypes.object<ProgressGradient>()]),
+  progress: IxPropTypes.object<ProgressProps>(),
   name: IxPropTypes.string,
   customRequest: IxPropTypes.func<(option: UploadRequestOption) => { abort: () => void }>(),
   withCredentials: IxPropTypes.bool,
@@ -91,7 +91,7 @@ export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 
 export const uploadListProps = {
   type: IxPropTypes.oneOf<UploadListType>(['text', 'image', 'imageCard']),
-  icon: IxPropTypes.object<Partial<Record<UploadIconType, string | boolean | VNode>>>(),
+  icon: IxPropTypes.object<Partial<Record<UploadIconType, string | VNode>>>(),
   onDownload: IxPropTypes.emit<(file: UploadFile) => void>(),
   onPreview: IxPropTypes.emit<(file: UploadFile) => void>(),
   onRemove: IxPropTypes.emit<(file: UploadFile) => boolean | Promise<boolean>>(),

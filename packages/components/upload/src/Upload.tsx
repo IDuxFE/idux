@@ -23,10 +23,11 @@ export default defineComponent({
   setup(props, { slots }) {
     const cpmClasses = useCmpClasses()
     const [showSelector, setSelectorVisible] = useShowSelector()
-    const [, onUpdateFiles] = useControlledProp(props, 'files', [])
-    const { fileUploading, abort, startUpload, upload } = useRequest(props)
+    const [files, onUpdateFiles] = useControlledProp(props, 'files', [])
+    const { fileUploading, abort, startUpload, upload } = useRequest(props, files)
     provide(uploadToken, {
       props,
+      files,
       fileUploading,
       onUpdateFiles,
       abort,

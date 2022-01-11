@@ -7,7 +7,7 @@
 
 import type { UploadFile, UploadProgressEvent, UploadProps, UploadRequestOption } from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 import { ref } from 'vue'
 
@@ -26,13 +26,13 @@ export interface UploadRequest {
   upload: (file: UploadFile) => void
 }
 
-export function useRequest(props: UploadProps): UploadRequest {
+export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>): UploadRequest {
   const fileUploading: Ref<UploadFile[]> = ref([])
   const aborts = new Map<VKey, () => void>([])
   const config = useGlobalConfig('upload')
 
   function abort(file: UploadFile): void {
-    const curFile = getTargetFile(file, props.files)
+    const curFile = getTargetFile(file, files.value)
     if (!curFile) {
       return
     }
@@ -95,19 +95,19 @@ export function useRequest(props: UploadProps): UploadRequest {
     } as UploadRequestOption
     const uploadHttpRequest = props.customRequest ?? config.customRequest ?? defaultUpload
 
-    setFileStatus(file, 'uploading', props.onFileStatusChange)
     props.onRequestChange &&
       callEmit(props.onRequestChange, {
         status: 'loadstart',
         file: { ...file },
       })
+    setFileStatus(file, 'uploading', props.onFileStatusChange)
     file.percent = 0
     aborts.set(file.uid, uploadHttpRequest(requestOption)?.abort ?? (() => {}))
     fileUploading.value.push(file)
   }
 
   function _onProgress(e: UploadProgressEvent, file: UploadFile): void {
-    const curFile = getTargetFile(file, props.files)
+    const curFile = getTargetFile(file, files.value)
     if (!curFile) {
       return
     }
@@ -121,22 +121,22 @@ export function useRequest(props: UploadProps): UploadRequest {
   }
 
   function _onError(error: Error, file: UploadFile): void {
-    const curFile = getTargetFile(file, props.files)
+    const curFile = getTargetFile(file, files.value)
     if (!curFile) {
       return
     }
     fileUploading.value.splice(getTargetFileIndex(curFile, fileUploading.value), 1)
-    setFileStatus(curFile, 'error', props.onFileStatusChange)
-    curFile.error = error
     props.onRequestChange &&
       callEmit(props.onRequestChange, {
         file: { ...curFile },
         status: 'error',
       })
+    setFileStatus(curFile, 'error', props.onFileStatusChange)
+    curFile.error = error
   }
 
   function _onSuccess(res: Response, file: UploadFile): void {
-    const curFile = getTargetFile(file, props.files)
+    const curFile = getTargetFile(file, files.value)
     if (!curFile) {
       return
     }

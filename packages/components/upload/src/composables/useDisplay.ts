@@ -16,7 +16,6 @@ import { useGlobalConfig } from '@idux/components/config'
 import { isImage } from '@idux/components/upload/src/util/file'
 
 import { UploadFile } from '../types'
-import { getIcons } from '../util/icon'
 
 export type StrokeColorType = ProgressGradient | string
 
@@ -38,12 +37,7 @@ export function useListClasses(props: UploadProps, type: UploadListType): Comput
 
 export function useIcon(props: UploadListProps): ComputedRef<IconsMap> {
   const uploadListConfig = useGlobalConfig('uploadList')
-  return computed(() => getIcons(props.icon ?? uploadListConfig.icon))
-}
-
-export function useStrokeColor(props: UploadProps): ComputedRef<StrokeColorType> {
-  const uploadConfig = useGlobalConfig('upload')
-  return computed(() => props.strokeColor ?? uploadConfig.strokeColor)
+  return computed(() => props.icon ?? uploadListConfig.icon)
 }
 
 export function useSelectorVisible(

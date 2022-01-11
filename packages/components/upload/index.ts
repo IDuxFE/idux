@@ -27,7 +27,9 @@ export type {
   UploadRequestChangeOption,
   UploadIconType,
   UploadInstance,
+  UploadComponent,
   UploadPublicProps as UploadProps,
   UploadListInstance,
+  UploadListComponent,
   UploadListPublicProps as UploadListProps,
 } from './src/types'

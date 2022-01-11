@@ -16,7 +16,7 @@ import IxUploadImageCardList from './component/ImageCardList'
 import IxUploadImageList from './component/ImageList'
 import IxUploadTextList from './component/TextList'
 import { useSelectorVisible } from './composables/useDisplay'
-import { UploadToken, uploadToken } from './token'
+import { uploadToken } from './token'
 import { uploadListProps } from './types'
 
 const cpmMap = {
@@ -31,10 +31,7 @@ export default defineComponent({
   setup(props) {
     const config = useGlobalConfig('uploadList')
     const listType = useListType(props, config)
-    const { props: uploadProps, setSelectorVisible } = inject(uploadToken, {
-      props: {},
-      setSelectorVisible: () => {},
-    } as unknown as UploadToken)
+    const { props: uploadProps, setSelectorVisible } = inject(uploadToken)!
     const [outerSelector] = useSelectorVisible(uploadProps, listType)
 
     watchEffect(() => setSelectorVisible(outerSelector.value))

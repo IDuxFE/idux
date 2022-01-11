@@ -7,8 +7,8 @@ order: 11
 
 ## zh
 
-使用`strokeColor`配置进度条色彩，配置同`IxProgress.strokeColor`
+使用`progress`配置进度条，配置同 [ProgressProps](/components/progress/zh#ProgressProps)
 
 ## en
 
-Use `strokeColor` to configure the color of the progress bar, the configuration is the same as that of `IxProgress.strokeColor`.
+Use `progress` to configure the progress bar, the configuration is the same as [ProgressProps](/components/progress/zh#ProgressProps).

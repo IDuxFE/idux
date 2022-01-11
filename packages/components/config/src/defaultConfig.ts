@@ -209,15 +209,14 @@ const upload: UploadConfig = {
   name: 'file',
   withCredentials: false,
   requestMethod: 'post',
-  strokeColor: '#20CC94',
 }
 
 const uploadList: UploadListConfig = {
   listType: 'text',
   icon: {
-    file: true,
-    remove: true,
-    retry: true,
+    file: 'paper-clip',
+    remove: 'delete',
+    retry: 'edit',
   },
 }
 

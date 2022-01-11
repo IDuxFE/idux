@@ -14,8 +14,9 @@ import { IxIcon } from '@idux/components/icon'
 
 const files = ref([])
 const icon = ref({
-  file: true,
+  file: 'paper-clip',
   download: 'thunderbolt',
+  retry: h(IxIcon, { name: 'reload' }),
   remove: h(IxIcon, { name: 'close' }),
 })
 </script>

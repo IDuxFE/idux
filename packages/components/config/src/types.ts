@@ -21,7 +21,7 @@ import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
 import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
 import type { PaginationSize } from '@idux/components/pagination'
-import type { ProgressFormat, ProgressGradient, ProgressIcons, ProgressSize } from '@idux/components/progress'
+import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
@@ -196,13 +196,12 @@ export interface UploadConfig {
   name: string
   withCredentials: boolean
   requestMethod: UploadRequestMethod
-  strokeColor: ProgressGradient | string
   customRequest?: (option: UploadRequestOption) => { abort: () => void }
 }
 
 export interface UploadListConfig {
   listType: UploadListType
-  icon: Partial<Record<UploadIconType, string | boolean | VNode>>
+  icon: Partial<Record<UploadIconType, string | VNode>>
 }
 
 // Data Display

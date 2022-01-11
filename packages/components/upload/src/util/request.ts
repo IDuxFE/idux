@@ -55,11 +55,8 @@ export default function upload(option: UploadRequestOption): UploadReturnType {
   if (option.requestData) {
     Object.keys(option.requestData).forEach(key => {
       const value = option.requestData![key]
-      // support key-value array data
       if (Array.isArray(value)) {
         value.forEach(item => {
-          // { list: [ 11, 22 ] }
-          // formData.append('list[]', 11);
           formData.append(`${key}[]`, item)
         })
         return
@@ -76,7 +73,6 @@ export default function upload(option: UploadRequestOption): UploadReturnType {
   }
 
   xhr.onload = function onload() {
-    // allow success when 2xx status
     if (xhr.status < 200 || xhr.status >= 300) {
       return option.onError?.(getError(option, xhr), getBody(xhr))
     }

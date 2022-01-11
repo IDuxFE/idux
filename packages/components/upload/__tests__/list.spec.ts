@@ -2,7 +2,7 @@ import type { UploadListProps } from '../src/types'
 import type { MountingOptions } from '@vue/test-utils'
 
 import { flushPromises, mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, ref } from 'vue'
 
 import { renderWork } from '@tests'
 
@@ -12,28 +12,46 @@ import UploadFilesListCpm from '../src/List'
 import { uploadToken } from '../src/token'
 
 const uploadListMount = (options?: MountingOptions<Partial<UploadListProps>>) => {
-  return mount(UploadFilesListCpm, (options ?? {}) as unknown as MountingOptions<UploadListProps>)
+  const { global: { provide: { [uploadToken as unknown as string]: provideObj } = {}, ...restGlobal } = {}, ...rest } =
+    options as MountingOptions<UploadListProps>
+
+  return mount(UploadFilesListCpm, {
+    global: {
+      provide: {
+        [uploadToken as symbol]: {
+          props: {},
+          files: { value: [] },
+          setSelectorVisible: () => {},
+          ...provideObj,
+        },
+      },
+      ...restGlobal,
+    },
+    ...rest,
+  })
 }
 
 describe('Upload list render', () => {
-  renderWork<UploadListProps>(UploadFilesListCpm)
+  renderWork<UploadListProps>(UploadFilesListCpm, {
+    global: { provide: { [uploadToken as symbol]: { props: {}, files: { value: [] }, setSelectorVisible: () => {} } } },
+  })
 
   test('type work', async () => {
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: [
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref([
               {
                 uid: 'test1',
                 name: 'idux.svg',
                 thumbUrl: '/icons/logo.svg',
               },
-            ],
+            ]),
           },
         },
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    })
     await flushPromises()
 
     expect(wrapper.classes()).toContain('ix-upload-list-text')
@@ -49,46 +67,44 @@ describe('Upload list render', () => {
 
   test('icon work', async () => {
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: [
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref([
               {
                 uid: 'test1',
                 name: 'idux.svg',
                 errorTip: 'error',
                 status: 'error',
               },
-            ],
+            ]),
           },
         },
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    })
     await flushPromises()
 
     expect(wrapper.find('.ix-icon-paper-clip').exists()).toBeTruthy()
     expect(wrapper.find('.ix-icon-delete').exists()).toBeTruthy()
     expect(wrapper.find('.ix-icon-edit').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-icon-exclamation-circle').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-icon-download').exists()).toBeFalsy()
 
     const wrapperFileSuccess = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: [
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref([
               {
                 uid: 'test1',
                 name: 'idux.svg',
                 status: 'success',
               },
-            ],
+            ]),
           },
         },
       },
       props: {
         icon: {
-          download: true,
+          download: 'download',
           remove: h(IxIcon, { name: 'close' }),
           file: 'left',
         },
@@ -112,16 +128,16 @@ describe('Upload list render', () => {
     ]
 
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: defaultFiles,
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref(defaultFiles),
           },
         },
       },
       props: {
         icon: {
-          download: true,
+          download: 'download',
         },
         onDownload,
       },
@@ -143,16 +159,16 @@ describe('Upload list render', () => {
     ]
 
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: defaultFiles,
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref(defaultFiles),
           },
         },
       },
       props: {
         icon: {
-          preview: true,
+          preview: 'zoom-in',
         },
         onPreview,
       },
@@ -180,17 +196,17 @@ describe('Upload list render', () => {
     ]
 
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: defaultFiles,
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref(defaultFiles),
+            upload,
           },
-          upload,
         },
       },
       props: {
         icon: {
-          retry: true,
+          retry: 'edit',
         },
         onRetry,
       },
@@ -215,13 +231,13 @@ describe('Upload list render', () => {
     ]
 
     const wrapper = uploadListMount({
-      provide: {
-        [uploadToken as symbol]: {
-          props: {
-            files: defaultFiles,
+      global: {
+        provide: {
+          [uploadToken as symbol]: {
+            files: ref(defaultFiles),
+            onUpdateFiles,
+            abort,
           },
-          onUpdateFiles,
-          abort,
         },
       },
       props: {

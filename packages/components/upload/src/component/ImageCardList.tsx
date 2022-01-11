@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { StrokeColorType } from '../composables/useDisplay'
 import type { FileOperation } from '../composables/useOperation'
-import type { UploadToken } from '../token'
 import type { UploadFile, UploadFileStatus, UploadProps } from '../types'
 import type { IconsMap } from '../util/icon'
 import type { Locale } from '@idux/components/i18n'
@@ -26,13 +24,11 @@ import {
   useIcon,
   useListClasses,
   useSelectorVisible,
-  useStrokeColor,
   useThumb,
 } from '../composables/useDisplay'
 import { useOperation } from '../composables/useOperation'
 import { uploadToken } from '../token'
 import { uploadListProps } from '../types'
-// import { getThumbNode } from '../util/file'
 import { renderOprIcon } from '../util/icon'
 import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
 import FileSelector from './Selector'
@@ -41,23 +37,11 @@ export default defineComponent({
   name: 'IxUploadImageCardList',
   props: uploadListProps,
   setup(listProps) {
-    const {
-      props: uploadProps,
-      upload,
-      abort,
-      onUpdateFiles,
-    } = inject(uploadToken, {
-      props: { files: [] },
-      upload: () => {},
-      abort: () => {},
-      onUpdateFiles: () => {},
-    } as unknown as UploadToken)
+    const { props: uploadProps, files, upload, abort, onUpdateFiles } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'imageCard')
-    const files = computed(() => uploadProps.files)
     const locale = getLocale('upload')
-    const strokeColor = useStrokeColor(uploadProps)
     const [, imageCardVisible] = useSelectorVisible(uploadProps, 'imageCard')
     const showSelector = useShowSelector(uploadProps, files, imageCardVisible)
     const { getThumbNode, revokeAll } = useThumb()
@@ -69,23 +53,23 @@ export default defineComponent({
     return () => (
       <ul class={listClasses.value}>
         {showSelector.value && selectorNode}
-        {files.value.map(file => renderItem(file, icons, cpmClasses, fileOperation, strokeColor, locale, getThumbNode))}
+        {files.value.map(file => renderItem(uploadProps, file, icons, cpmClasses, fileOperation, locale, getThumbNode))}
       </ul>
     )
   },
 })
 
 function renderItem(
+  uploadProps: UploadProps,
   file: UploadFile,
   icons: ComputedRef<IconsMap>,
   cpmClasses: ComputedRef<string>,
   fileOperation: FileOperation,
-  strokeColor: ComputedRef<StrokeColorType>,
   locale: ComputedRef<Locale['upload']>,
   getThumbNode: UseThumb['getThumbNode'],
 ) {
   const fileClasses = normalizeClass([`${cpmClasses.value}-file`, `${cpmClasses.value}-file-${file.status}`])
-  const uploadStatusNode = renderUploadStatus(file, locale, cpmClasses)
+  const uploadStatusNode = renderUploadStatus(uploadProps, file, locale, cpmClasses)
   const thumbNode = getThumbNode(file)
   const { retryNode, downloadNode, removeNode, previewNode } = renderOprIcon(
     file,
@@ -109,7 +93,12 @@ function renderItem(
   )
 }
 
-function renderUploadStatus(file: UploadFile, locale: ComputedRef<Locale['upload']>, cpmClasses: ComputedRef<string>) {
+function renderUploadStatus(
+  uploadProps: UploadProps,
+  file: UploadFile,
+  locale: ComputedRef<Locale['upload']>,
+  cpmClasses: ComputedRef<string>,
+) {
   const statusTitle = {
     error: locale.value.error,
     uploading: locale.value.uploading,
@@ -125,6 +114,7 @@ function renderUploadStatus(file: UploadFile, locale: ComputedRef<Locale['upload
           percent={file.percent}
           strokeWidth={3}
           hide-info
+          {...(uploadProps.progress ?? {})}
         ></IxProgress>
       )}
     </div>

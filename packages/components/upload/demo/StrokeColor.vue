@@ -2,9 +2,12 @@
   <IxUpload
     v-model:files="files"
     action="/upload"
-    :strokeColor="{
-      '0%': '#108ee9',
-      '100%': '#87d068',
+    :progress="{
+      strokeColor: {
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      },
+      strokeWidth: 3,
     }"
   >
     <IxButton>Upload</IxButton>

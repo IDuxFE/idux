@@ -23,11 +23,11 @@ import { ref } from 'vue'
 import { useMessage } from '@idux/components/message'
 
 const icon = ref({
-  file: true,
-  download: true,
-  retry: true,
-  remove: true,
-  preview: true,
+  file: 'paper-clip',
+  download: 'download',
+  retry: 'edit',
+  remove: 'delete',
+  preview: 'zoom-in',
 })
 const files: Ref<UploadFile[]> = ref([
   {

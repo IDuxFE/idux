@@ -16,43 +16,21 @@ import { isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
-const iconMap = {
-  file: 'paper-clip',
-  preview: 'zoom-in',
-  download: 'download',
-  remove: 'delete',
-  retry: 'edit',
-} as const
-
-type IconNodeType = string | boolean | VNode
+type IconNodeType = string | VNode
 type Opr = 'previewNode' | 'retryNode' | 'downloadNode' | 'removeNode'
 
-export type IconsMap = Partial<Record<UploadIconType, Exclude<IconNodeType, true>>>
+export type IconsMap = Partial<Record<UploadIconType, IconNodeType>>
 
 export type OprIcons = Record<Opr, VNode | null>
 
 export function getIconNode(icon: Exclude<IconNodeType, true>): VNode | null {
-  if (icon === false) {
+  if (!icon) {
     return null
   }
   if (isString(icon)) {
     return h(IxIcon, { name: icon })
   }
   return icon
-}
-
-export function getIcons(iconProp: Partial<Record<UploadIconType, IconNodeType>>): IconsMap {
-  const iconFormat = {} as IconsMap
-  let icon: UploadIconType
-  for (icon in iconProp) {
-    // 默认值
-    if (iconProp[icon] === true) {
-      iconFormat[icon] = iconMap[icon]
-    } else {
-      iconFormat[icon] = iconProp[icon] as Exclude<IconNodeType, true>
-    }
-  }
-  return iconFormat
 }
 
 export function renderIcon(icon: IconsMap[keyof IconsMap] | undefined, props?: Record<string, unknown>): VNode | null {
