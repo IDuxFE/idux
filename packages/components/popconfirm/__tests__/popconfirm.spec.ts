@@ -66,7 +66,7 @@ describe('Popconfirm', () => {
 
     const wrapper = PopconfirmMount({ props: { cancelText, cancelButton, okText, okButton } })
 
-    const [cancelButtonWrapper, okButtonWrapper] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
+    const [okButtonWrapper, cancelButtonWrapper] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
 
     expect(cancelButtonWrapper.text()).toBe(cancelText)
     expect(cancelButtonWrapper.classes()).toContain('ix-button-dashed')
@@ -78,7 +78,7 @@ describe('Popconfirm', () => {
     okText = 'Yes Yes'
     await wrapper.setProps({ cancelText, okText })
 
-    const [cancelButtonWrapper1, okButtonWrapper1] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
+    const [okButtonWrapper1, cancelButtonWrapper1] = await wrapper.getComponent(PopconfirmContent).findAll('.ix-button')
 
     expect(cancelButtonWrapper1.text()).toBe(cancelText)
     expect(okButtonWrapper1.text()).toBe(okText)

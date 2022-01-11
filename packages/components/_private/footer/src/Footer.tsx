@@ -64,8 +64,8 @@ export default defineComponent({
           const cancelButton = cancelButtonProps.value
           const okButton = okButtonProps.value
           buttonProps = []
-          cancelButton && buttonProps.push(cancelButton)
           okButton && buttonProps.push(okButton)
+          cancelButton && buttonProps.push(cancelButton)
         }
         children = buttonProps.map(item => {
           const { text, ...rest } = item
