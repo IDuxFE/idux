@@ -18,7 +18,6 @@ cover:
 | --- | --- | --- | --- | --- | --- |
 | `type` | 类型，可选 `line` `circle` `dashboard` | `string` | `line` | - | - |
 | `format` | 内容的函数模板，支持插槽 | `function(percent, successPercent) \| #format="percent, successPercent"`| percent => percent + '%' | ✅ | - |
-| `percent` | 百分比 | `function(percent, successPercent) \| #format="percent, successPercent"`| percent => percent + '%' | - | - |
 | `percent` | 百分比 | `number` | 0  | - | - |
 | `status` | 状态，可选：`success` `exception` `normal` `active`(仅限line) | `string` | - | - | - |
 | `hideInfo` | 是否显示进度数值或状态图标 | `boolean` | `false` | - | - |
@@ -26,12 +25,13 @@ cover:
 | `trailColor` | 未完成的分段的颜色 | `string` | - | - | - |
 | `strokeColor` | 进度条的色彩 | `string` | - | - | - |
 | `strokeLinecap` | 进度条的样式，可选：`round` `square`| `string` | `round` | - | - |
+| `icons` | 进度条状态图标 | `{ success: string \| VNode, exception: string \| VNode }` | - | ✅ | - |
 
 `type="line"`
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `size` | 进度条尺寸 | `'md' \| 'sm'` | `'md'` | ✅ | - |
+| `size` | 进度条尺寸 | `lg \| 'md' \| 'sm'` | `'md'` | ✅ | - |
 | `strokeColor` | 进度条的色彩，传入 object 时为渐变 | `string` \| { from: string; to: string; direction: string } | - | - | - |
 | `strokeWidth` | 进度条线的宽度，单位 px | `number` | 10 | - | - |
 

@@ -21,7 +21,7 @@ import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
 import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
 import type { PaginationSize } from '@idux/components/pagination'
-import type { ProgressFormat, ProgressSize } from '@idux/components/progress'
+import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
@@ -386,6 +386,10 @@ export interface PopconfirmConfig {
 export interface ProgressConfig {
   size: ProgressSize
   format: ProgressFormat
+  defaultCircleStrokeWidth?: string | number
+  strokeWidth?: string | number
+  strokeLinecap: 'round' | 'square'
+  icon?: Partial<ProgressIcons>
 }
 
 // Stepper

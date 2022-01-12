@@ -362,6 +362,7 @@ const popconfirm: PopconfirmConfig = {
 }
 
 const progress: ProgressConfig = {
+  strokeLinecap: 'round',
   size: 'md',
   format: (percent: number) => percent + '%',
 }

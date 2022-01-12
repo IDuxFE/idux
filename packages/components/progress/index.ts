@@ -7,7 +7,7 @@
 
 import type { ProgressComponent } from './src/types'
 
-import Progress from './src/Progress.vue'
+import Progress from './src/Progress'
 
 const IxProgress = Progress as unknown as ProgressComponent
 
@@ -20,6 +20,7 @@ export type {
   ProgressSize,
   ProgressFormat,
   ProgressType,
+  ProgressIcons,
   ProgressGapPositionType,
   ProgressStatus,
   ProgressStrokeLinecap,
