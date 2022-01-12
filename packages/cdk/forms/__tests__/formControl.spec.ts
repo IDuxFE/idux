@@ -173,4 +173,36 @@ describe('formControl.ts', () => {
       expect(control.hasError('required')).toEqual(false)
     })
   })
+
+  describe('trim work', () => {
+    let control: FormControl<string>
+
+    test('default trim work', () => {
+      control = new FormControl<string>('')
+
+      expect(control.getValue()).toEqual('')
+
+      control.setValue('test ')
+
+      expect(control.getValue()).toEqual('test ')
+
+      control.setValue(' test ')
+
+      expect(control.getValue()).toEqual(' test ')
+    })
+
+    test('trim enable work', () => {
+      control = new FormControl<string>('', { trim: true })
+
+      expect(control.getValue()).toEqual('')
+
+      control.setValue('test ')
+
+      expect(control.getValue()).toEqual('test')
+
+      control.setValue(' test')
+
+      expect(control.getValue()).toEqual('test')
+    })
+  })
 })

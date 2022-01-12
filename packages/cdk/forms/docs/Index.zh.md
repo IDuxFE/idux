@@ -91,6 +91,7 @@ export function useFormControl<T>(
 | `disabled` | 默认禁用当前控件 | `boolean` | - | - |
 | `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
 | `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
+| `trim` | 是否去除首尾空字符串 | `boolean` | - | 默认不去除 |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
 
