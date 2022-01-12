@@ -20,7 +20,6 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [`${prefixCls}-content`]: true,
         [`${prefixCls}-inline`]: true,
       })
     })

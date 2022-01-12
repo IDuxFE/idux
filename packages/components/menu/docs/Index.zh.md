@@ -64,8 +64,8 @@ export interface MenuItemSlots {
   /**
    * 如果类型为 `string`, 会根据该字符串去 `IxMenu` 的插槽中获取
    */
-  icon?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuItem & { selected: boolean }) => VNodeChild)
+  icon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
+  label?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
 }
 ```
 

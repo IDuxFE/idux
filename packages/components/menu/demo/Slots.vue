@@ -33,7 +33,6 @@ const dataSource: MenuData[] = [
         type: 'itemGroup',
         key: 'itemGroup1',
         label: 'Item Group 1',
-
         children: [
           { key: 'item4', label: 'Item 4', slots: { label: 'label' } },
           { key: 'item5', label: 'Item 5' },

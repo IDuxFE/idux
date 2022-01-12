@@ -21,7 +21,7 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [`${prefixCls}-content`]: true,
+        [prefixCls]: true,
         [`${prefixCls}-dropdown`]: !!dropdownContext,
         [`${prefixCls}-vertical`]: true,
         [`${prefixCls}-${theme.value}`]: true,

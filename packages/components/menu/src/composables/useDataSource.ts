@@ -9,7 +9,7 @@
 
 import { type ComputedRef, type Slots, type VNode, computed } from 'vue'
 
-import { Logger, type VKey, flattenNode } from '@idux/cdk/utils'
+import { Logger, flattenNode } from '@idux/cdk/utils'
 
 import { dividerKey, itemGroupKey, itemKey, subKey } from '../menus'
 import { type MenuData, type MenuProps } from '../types'
@@ -31,12 +31,13 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
   const dataSource: Array<MenuData> = []
 
   flattenNode(nodes, { key: filterKeys }).forEach(node => {
-    const { type, children: slots, props } = node as VNode & { children: any; props: { key: VKey } }
+    const type = node.type as any
+    const slots = node.children ?? ({} as any)
+    const props = node.props ?? ({} as any)
     let data: MenuData
-    if ((type as any)[itemKey]) {
-      const { key, disabled, icon, label, ...additional } = props || {}
+    if (type[itemKey]) {
+      const { key, disabled, icon, label, ...additional } = props
       data = {
-        type: 'item',
         key,
         disabled: disabled || disabled === '',
         icon,
@@ -44,8 +45,8 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         additional,
         slots,
       }
-    } else if ((type as any)[itemGroupKey]) {
-      const { key, children, icon, label, ...additional } = props || {}
+    } else if (type[itemGroupKey]) {
+      const { key, children, icon, label, ...additional } = props
       const _children = children ?? convertDataSource(slots.default?.())
       data = {
         type: 'itemGroup',
@@ -56,8 +57,8 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         additional,
         slots,
       }
-    } else if ((type as any)[subKey]) {
-      const { key, children, disabled, icon, label, suffix, ...additional } = props || {}
+    } else if (type[subKey]) {
+      const { key, children, disabled, icon, label, suffix, ...additional } = props
       const _children = children ?? convertDataSource(slots.default?.())
       data = {
         type: 'sub',
@@ -70,7 +71,7 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         slots,
       }
     } else {
-      const { key, ...additional } = props || {}
+      const { key, ...additional } = props
       data = { type: 'divider', key, additional }
     }
     if (__DEV__ && data.type !== 'divider' && !data.key) {
