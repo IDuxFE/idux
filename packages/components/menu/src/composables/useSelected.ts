@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuProps } from '../types'
-import type { VKey } from '@idux/cdk/utils'
-import type { ɵDropdownContext } from '@idux/components/dropdown'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
+import { type VKey, useControlledProp } from '@idux/cdk/utils'
+import { type ɵDropdownContext } from '@idux/components/dropdown'
+
+import { type MenuProps } from '../types'
 
 export interface SelectedContext {
   selectedKeys: ComputedRef<VKey[]>
@@ -21,7 +21,10 @@ export function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext
   const [selectedKeys, setSelectedKeys] = useControlledProp(props, 'selectedKeys', () => [])
 
   const handleSelected = (key: VKey) => {
-    dropdownContext?.setVisibility?.(false)
+    if (dropdownContext) {
+      const { hideOnClick, setVisibility } = dropdownContext
+      hideOnClick.value && setVisibility(false)
+    }
     // dropdown 默认为 false, 其他情况默认为 true
     const selectable = props.selectable ?? !dropdownContext
     if (!selectable) {

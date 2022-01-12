@@ -18,6 +18,7 @@ export const dropdownProps = {
   autoAdjust: IxPropTypes.bool,
   destroyOnHide: IxPropTypes.bool,
   disabled: IxPropTypes.bool.def(false),
+  hideOnClick: IxPropTypes.bool.def(true),
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
   placement: ɵOverlayPlacementDef,
   showArrow: IxPropTypes.bool,

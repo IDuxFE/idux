@@ -5,10 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuMode } from '../types'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
-import { computed } from 'vue'
+import { type MenuMode } from '../types'
 
 export const usePaddingLeft = (
   mode: ComputedRef<MenuMode>,

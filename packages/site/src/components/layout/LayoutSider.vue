@@ -1,33 +1,10 @@
 <template>
-  <IxMenu mode="inline" :indent="breakpoints.xs ? 24 : 48" :selectedKeys="selectedKeys">
-    <template v-if="page === 'docs'">
-      <IxMenuItem v-for="docs in config.docs" v-show="docs.lang === lang" :key="docs.path">
-        <router-link :to="docs.path">
-          <span>{{ docs.title }}</span>
-        </router-link>
-      </IxMenuItem>
-    </template>
-    <template v-if="['components', 'pro'].includes(page)">
-      <IxMenuItemGroup v-for="group in config[page]" v-show="group.lang === lang" :key="group.name" :label="group.name">
-        <IxMenuItem v-for="component in group.children" :key="component.path">
-          <router-link :to="component.path">
-            <IxSpace>
-              <span>{{ component.title }}</span>
-              <span>{{ component.subtitle }}</span>
-            </IxSpace>
-          </router-link>
-        </IxMenuItem>
-      </IxMenuItemGroup>
-    </template>
-    <template v-if="page === 'cdk'">
-      <IxMenuItem v-for="cdk in config.cdk" v-show="cdk.lang === lang" :key="cdk.path">
-        <router-link :to="cdk.path">
-          <IxSpace>
-            <span>{{ cdk.title }}</span>
-            <span>{{ cdk.subtitle }}</span>
-          </IxSpace>
-        </router-link>
-      </IxMenuItem>
+  <IxMenu :dataSource="menus" mode="inline" :indent="breakpoints.xs ? 24 : 48" :selectedKeys="selectedKeys">
+    <template #label="item">
+      <router-link :to="item.key">
+        <span>{{ item.title }}</span>
+        <span v-if="item.subtitle" class="sub-title">{{ item.subtitle }}</span>
+      </router-link>
     </template>
   </IxMenu>
 </template>
@@ -40,4 +17,33 @@ import { config } from '../../sideNav'
 
 const { breakpoints, lang, page, path } = inject(appContextToken)!
 const selectedKeys = computed(() => [path.value])
+const menus = computed(() => {
+  const currLang = lang.value
+  const currConfig = config[page.value as 'docs' | 'components' | 'pro' | 'cdk'] || []
+  return currConfig
+    .filter(item => item.lang === currLang)
+    .map(item => {
+      const { children } = item
+      if (children) {
+        const { name } = item
+        return {
+          type: 'itemGroup',
+          key: name,
+          label: name,
+          children: children.map(item => {
+            const { path, title, subtitle } = item
+            return { key: path, title, subtitle, slots: { label: 'label' } }
+          }),
+        }
+      }
+      const { path, title, subtitle } = item
+      return { key: path, title, subtitle, slots: { label: 'label' } }
+    })
+})
 </script>
+
+<style scoped lang="less">
+.sub-title {
+  margin-left: 8px;
+}
+</style>

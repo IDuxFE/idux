@@ -10,16 +10,14 @@ import { computed, defineComponent, inject } from 'vue'
 import { isString } from 'lodash-es'
 
 import { menuSubToken, menuToken } from '../../token'
-import { MenuSub } from '../../types'
 import { coverIcon } from '../Utils'
 
 export default defineComponent({
   setup() {
     const { slots: menuSlots, config, mergedPrefixCls } = inject(menuToken)!
-    const { props, key, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } =
-      inject(menuSubToken)!
+    const { props, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } = inject(menuSubToken)!
 
-    const suffix = computed(() => props.suffix ?? config.suffix)
+    const suffix = computed(() => props.data.suffix ?? config.suffix)
     const rotate = computed(() => {
       if (mode.value === 'inline') {
         return isExpanded.value ? -90 : 90
@@ -28,7 +26,7 @@ export default defineComponent({
     })
 
     const events = computed(() => {
-      if (props.disabled) {
+      if (props.data.disabled) {
         return undefined
       }
       if (mode.value === 'inline') {
@@ -48,18 +46,14 @@ export default defineComponent({
     })
 
     return () => {
-      const { icon, label } = props
-      const slots = props.slots || {}
+      const { icon, label, slots = {} } = props.data
       const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
       const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
       const suffixSlot = isString(slots.suffix) ? menuSlots[slots.suffix] : slots.suffix
 
       const slotProps =
         iconSlot || labelSlot || suffixSlot
-          ? ({ ...props, key, expanded: isExpanded.value, selected: isSelected.value } as MenuSub & {
-              expanded: boolean
-              selected: boolean
-            })
+          ? { ...props.data, expanded: isExpanded.value, selected: isSelected.value }
           : undefined
 
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
@@ -70,7 +64,7 @@ export default defineComponent({
       return (
         <div class={prefixCls} style={style.value} {...events.value}>
           {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span>{labelNode}</span>
+          <span class={`${prefixCls}-content`}>{labelNode}</span>
           {suffixNode && <span class={`${prefixCls}-suffix`}>{suffixNode}</span>}
         </div>
       )

@@ -5,18 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VKey } from '@idux/cdk/utils'
-
 import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 
+import { coverChildren } from './children/Utils'
 import { useDataSource } from './composables/useDataSource'
 import { useExpanded } from './composables/useExpanded'
 import { useSelected } from './composables/useSelected'
-import { coverChildren } from './contents/Utils'
 import { menuToken } from './token'
 import { menuProps } from './types'
 

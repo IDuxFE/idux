@@ -29,7 +29,7 @@ export default defineComponent({
       return (
         <ɵCollapseTransition appear>
           <ul v-show={isExpanded.value} class={classes.value}>
-            {coverChildren(props.children)}
+            {coverChildren(props.data.children)}
           </ul>
         </ɵCollapseTransition>
       )

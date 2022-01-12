@@ -5,12 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuSubContext } from '../../token'
-import type { MenuData, MenuMode, MenuSubProps } from '../../types'
-
 import {
-  ComputedRef,
-  VNodeTypes,
+  type ComputedRef,
+  type VNodeTypes,
   computed,
   defineComponent,
   inject,
@@ -23,14 +20,14 @@ import {
 
 import { debounce } from 'lodash-es'
 
-import { VKey, useState } from '@idux/cdk/utils'
+import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../../composables/usePaddingLeft'
-import { menuItemGroupToken, menuSubToken, menuToken } from '../../token'
-import { menuSubProps } from '../../types'
+import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
+import { type MenuData, type MenuMode, type MenuSubProps, menuSubProps } from '../../types'
 import InlineContent from './InlineContent'
 import OverlayContent from './OverlayContent'
 import Title from './Title'
@@ -64,18 +61,17 @@ export default defineComponent({
     const mode = useMode(menuMode, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(mode, indent, level, menuItemGroupContext)
-    const isSelected = computed(() => getState(props.children, selectedKeys.value))
+    const isSelected = computed(() => getState(props.data!.children, selectedKeys.value))
     const { isExpanded, changeExpanded, handleMouseEvent } = useExpanded(props, key, expandedKeys, handleExpand, mode)
 
     const handleItemClick = () => {
-      if (!props.disabled && mode.value !== 'inline' && !menuSlots.multiple) {
+      if (!props.data.disabled && mode.value !== 'inline' && !menuSlots.multiple) {
         handleExpand(key, false)
       }
     }
 
     provide(menuSubToken, {
       props,
-      key,
       isExpanded,
       isSelected,
       mode,
@@ -92,7 +88,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-sub`
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-disabled`]: props.data.disabled,
         [`${prefixCls}-expanded`]: isExpanded.value,
         [`${prefixCls}-selected`]: isSelected.value,
         [`${prefixCls}-${mode.value}`]: true,
@@ -107,7 +103,7 @@ export default defineComponent({
       })
     })
 
-    const offset = computed(() => props.offset ?? config.offset)
+    const offset = computed(() => props.data.offset ?? config.offset)
 
     const onClick = (evt: Event) => {
       evt.stopPropagation()
@@ -115,6 +111,7 @@ export default defineComponent({
     }
 
     return () => {
+      const { additional, disabled } = props.data
       let children: VNodeTypes
       if (mode.value === 'inline') {
         children = [<Title></Title>, <InlineContent></InlineContent>]
@@ -129,7 +126,7 @@ export default defineComponent({
             autoAdjust
             destroyOnHide={false}
             delay={defaultDelay}
-            disabled={props.disabled}
+            disabled={disabled}
             offset={offset.value}
             placement={placement.value}
             target={target.value}
@@ -139,7 +136,7 @@ export default defineComponent({
         )
       }
       return (
-        <li class={classes.value} onClick={props.disabled ? undefined : onClick}>
+        <li class={classes.value} {...additional} onClick={disabled ? undefined : onClick}>
           {children}
         </li>
       )
@@ -161,7 +158,7 @@ function useMode(menuMode: ComputedRef<MenuMode>, menuSubContext: MenuSubContext
 }
 
 function useExpanded(
-  props: MenuSubProps,
+  props: { data: MenuSubProps },
   key: VKey,
   expandedKeys: ComputedRef<VKey[]>,
   handleExpand: (key: VKey, expanded: boolean) => void,
@@ -173,10 +170,10 @@ function useExpanded(
     if (mode.value === 'inline') {
       return expandedKeys.value.includes(key)
     }
-    return isHover.value && expandedKeys.value.includes(key)
+    return (isHover.value && expandedKeys.value.includes(key)) || childExpanded.value
   })
   const changeExpanded = (expanded: boolean) => handleExpand(key, expanded)
-  const childExpanded = computed(() => getState(props.children, expandedKeys.value))
+  const childExpanded = computed(() => getState(props.data.children, expandedKeys.value))
   const handleMouseEvent = debounce((value: boolean) => (isHover.value = value), 100)
   watch([mode, childExpanded, isHover], ([currMode, currChildExpanded, currIsHover]) => {
     if (currMode !== 'inline') {

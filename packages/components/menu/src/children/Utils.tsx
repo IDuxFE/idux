@@ -5,14 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuData } from '../types'
-import type { Slot, VNode, VNodeChild } from 'vue'
+import { type Slot, type VNode, type VNodeChild } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { Logger } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
+import { type MenuData } from '../types'
 import MenuDivider from './MenuDivider'
 import MenuItem from './MenuItem'
 import MenuItemGroup from './MenuItemGroup'
@@ -25,16 +25,15 @@ export function coverChildren(data?: MenuData[]): VNode[] {
 
   const nodes: VNode[] = []
   data.forEach(item => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { type, additional, ...rest } = item as any
+    const { type } = item
     if (!type || type === 'item') {
-      nodes.push(<MenuItem {...rest} {...additional}></MenuItem>)
+      nodes.push(<MenuItem key={item.key} data={item}></MenuItem>)
     } else if (type === 'sub') {
-      nodes.push(<MenuSub {...rest} {...additional}></MenuSub>)
+      nodes.push(<MenuSub key={item.key} data={item}></MenuSub>)
     } else if (type === 'itemGroup') {
-      nodes.push(<MenuItemGroup {...rest} {...additional}></MenuItemGroup>)
+      nodes.push(<MenuItemGroup key={item.key} data={item}></MenuItemGroup>)
     } else if (type === 'divider') {
-      nodes.push(<MenuDivider {...rest} {...additional}></MenuDivider>)
+      nodes.push(<MenuDivider key={item.key} {...item.additional}></MenuDivider>)
     } else {
       __DEV__ && Logger.warn('components/menu', `type [${type}] not supported`)
     }

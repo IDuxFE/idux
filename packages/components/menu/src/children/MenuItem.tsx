@@ -13,7 +13,7 @@ import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../composables/usePaddingLeft'
 import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
-import { MenuItem, menuItemProps } from '../types'
+import { menuItemProps } from '../types'
 import { coverIcon } from './Utils'
 
 export default defineComponent({
@@ -40,7 +40,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-item`
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-disabled`]: props.disabled,
+        [`${prefixCls}-disabled`]: props.data.disabled,
         [`${prefixCls}-selected`]: isSelected.value,
       })
     })
@@ -59,8 +59,7 @@ export default defineComponent({
     }
 
     return () => {
-      const { disabled, icon, label } = props
-      const slots = props.slots || {}
+      const { additional, disabled, icon, label, slots = {} } = props.data
       const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
       // <IxMenuItem key="key">label</IxMenuItem>
       let labelSlot = slots.label ?? slots.default
@@ -68,18 +67,15 @@ export default defineComponent({
         labelSlot = menuSlots[labelSlot]
       }
 
-      const slotProps =
-        iconSlot || labelSlot
-          ? ({ ...props, key, selected: isSelected.value } as MenuItem & { selected: boolean })
-          : undefined
+      const slotProps = iconSlot || labelSlot ? { ...props.data, selected: isSelected.value } : undefined
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
       const labelNode = labelSlot ? labelSlot(slotProps) : label
 
       const prefixCls = `${mergedPrefixCls.value}-item`
       return (
-        <li class={classes.value} style={style.value} onClick={disabled ? undefined : onClick}>
+        <li class={classes.value} style={style.value} {...additional} onClick={disabled ? undefined : onClick}>
           {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span>{labelNode}</span>
+          <span class={`${prefixCls}-content`}>{labelNode}</span>
         </li>
       )
     }

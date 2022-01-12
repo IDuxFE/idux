@@ -7,14 +7,12 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { MenuData, MenuProps } from '../types'
-import type { ComputedRef, Slots, VNode } from 'vue'
+import { type ComputedRef, type Slots, type VNode, computed } from 'vue'
 
-import { computed } from 'vue'
-
-import { Logger, VKey, flattenNode } from '@idux/cdk/utils'
+import { Logger, type VKey, flattenNode } from '@idux/cdk/utils'
 
 import { dividerKey, itemGroupKey, itemKey, subKey } from '../menus'
+import { type MenuData, type MenuProps } from '../types'
 
 export function useDataSource(props: MenuProps, slots: Slots): ComputedRef<MenuData[]> {
   return computed(() => {
@@ -76,7 +74,7 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
       data = { type: 'divider', key, additional }
     }
     if (__DEV__ && data.type !== 'divider' && !data.key) {
-      Logger.warn('components/menu', 'key must exist', data, slots.default())
+      Logger.warn('components/menu', 'key must exist', data)
     }
     dataSource.push(data)
   })
