@@ -1,33 +1,6 @@
 .@{menu-prefix} {
 
   &&-dark {
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-title {
-
-      &:hover a,
-      &:active a {
-        color: @menu-highlight-color;
-      }
-    }
-
-    .@{menu-prefix}-item-disabled,
-    .@{menu-prefix}-item-disabled a,
-    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title,
-    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title a {
-      color: @menu-dark-disabled-color;
-    }
-
-    .@{menu-prefix}-item.@{menu-prefix}-item-selected,
-    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-title {
-
-      a {
-        color: @menu-highlight-color;
-      }
-    }
-  }
-
-  &&-dark,
-  &-dark&-content {
     color: @menu-dark-color;
     background: @menu-dark-bg-color;
 
@@ -39,20 +12,33 @@
       color: @menu-dark-color;
     }
 
-    .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled) {
-
-      &:hover,
-      &:active {
-        background-color: @menu-dark-highlight-bg-color;
-      }
-    }
-
+    .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled),
     .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) > .@{menu-prefix}-sub-title {
 
       &:hover,
       &:active {
         background-color: @menu-dark-highlight-bg-color;
       }
+
+      &:hover a,
+      &:active a {
+        color: @menu-highlight-color;
+      }
+    }
+
+    .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-title {
+
+      a {
+        color: @menu-highlight-color;
+      }
+    }
+
+    .@{menu-prefix}-item-disabled,
+    .@{menu-prefix}-item-disabled a,
+    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title,
+    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title a {
+      color: @menu-dark-disabled-color;
     }
   }
 

@@ -16,14 +16,14 @@ exports[`ProLayout render work 1`] = `
         <li class=\\"ix-menu-sub ix-menu-sub-expanded ix-menu-sub-selected ix-menu-sub-inline\\">
           <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 24px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Sub Menu 1</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
           <transition-stub>
-            <ul class=\\"ix-menu-content ix-menu-inline\\">
+            <ul class=\\"ix-menu-inline\\">
               <li class=\\"ix-menu-item ix-menu-item-disabled\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-item-content\\">Item 4</span></li>
               <li class=\\"ix-menu-item ix-menu-item-selected\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-item-content\\">Item 5</span></li>
               <li class=\\"ix-menu-divider\\"></li>
               <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
                 <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Menu Sub 2</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
                 <transition-stub>
-                  <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+                  <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
                     <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
                       <!----><span class=\\"ix-menu-item-content\\">Item 6</span>
                     </li>
@@ -36,7 +36,7 @@ exports[`ProLayout render work 1`] = `
               <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
                 <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 48px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Menu Sub 3</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
                 <transition-stub>
-                  <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+                  <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
                     <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
                       <!----><span class=\\"ix-menu-item-content\\">Item 8</span>
                     </li>
@@ -52,7 +52,7 @@ exports[`ProLayout render work 1`] = `
         <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
           <div class=\\"ix-menu-sub-title\\" style=\\"padding-left: 24px;\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Menu Sub 4</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
           <transition-stub>
-            <ul class=\\"ix-menu-content ix-menu-inline\\" style=\\"display: none;\\">
+            <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
               <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\">
                 <!----><span class=\\"ix-menu-item-content\\">Item 10</span>
               </li>
