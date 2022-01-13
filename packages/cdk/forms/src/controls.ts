@@ -20,7 +20,7 @@ import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } f
 
 import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 
-import { isArray, isNil, isPlainObject } from 'lodash-es'
+import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
 
 import { hasOwnProperty } from '@idux/cdk/utils'
 
@@ -544,7 +544,8 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   getValue(): T {
-    return this.trim ? (this._valueRef.value as any).trim() : this._valueRef.value
+    const value = this._valueRef.value
+    return this.trim && isString(value) ? (value as any).trim() : value;
   }
 
   protected _forEachControls(_: (v: AbstractControl, k: never) => void): void {}
