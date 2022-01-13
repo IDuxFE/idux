@@ -5,24 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VirtualScrollProps } from '../types'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed } from 'vue'
 
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { useState } from '@idux/cdk/utils'
 
-import { throttle } from 'lodash-es'
+import { type VirtualScrollProps } from '../types'
 
 export interface ScrollVisibleContext {
   scrollVisible: ComputedRef<boolean>
-  hideScroll: () => void
+  setScrollVisible: (visible: boolean) => void
 }
 
-export function useScrollVisible(
-  props: VirtualScrollProps,
-  scrollTop: Ref<number>,
-  scrollHeight: Ref<number>,
-): ScrollVisibleContext {
-  const visible = ref(false)
+export function useScrollVisible(props: VirtualScrollProps, scrollHeight: Ref<number>): ScrollVisibleContext {
+  const [visible, setScrollVisible] = useState(false)
 
   const scrollVisible = computed(() => {
     if (props.height >= scrollHeight.value) {
@@ -31,16 +26,5 @@ export function useScrollVisible(
     return visible.value
   })
 
-  let timer: number
-  const hideScroll = throttle(() => {
-    clearTimeout(timer)
-    visible.value = true
-    timer = setTimeout(() => (visible.value = false), 1200)
-  }, 300)
-
-  watch(scrollTop, hideScroll, { flush: 'post' })
-
-  onBeforeUnmount(() => clearTimeout(timer))
-
-  return { scrollVisible, hideScroll }
+  return { scrollVisible, setScrollVisible }
 }

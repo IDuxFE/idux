@@ -178,6 +178,21 @@ describe('VirtualScroll', () => {
       jest.useRealTimers()
     })
 
+    test('scrollBar show work', async () => {
+      const wrapper = VirtualScrollMount({
+        props: { dataSource: getData(40) },
+        slots: { item: defaultItemSlot },
+      })
+
+      await wrapper.trigger('mouseenter')
+
+      expect(wrapper.find('.cdk-virtual-scroll-bar').isVisible()).toBe(true)
+
+      await wrapper.trigger('mouseleave')
+
+      expect(wrapper.find('.cdk-virtual-scroll-bar').isVisible()).toBe(false)
+    })
+
     test('scrollTo work', async () => {
       const wrapper = VirtualScrollMount({
         props: { dataSource: getData(40) },
