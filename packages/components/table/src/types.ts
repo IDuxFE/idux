@@ -93,7 +93,7 @@ export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> 
   ellipsis?: boolean
   key?: VKey
   sortable?: TableColumnSortable<T>
-  filterable?: TableColumnFilterable<T, V>
+  filterable?: TableColumnFilterable<T>
   title?: string
   children?: TableColumn<T>[]
   slots?: TableColumnBaseSlots<T, V>
@@ -103,7 +103,7 @@ export interface TableColumnExpandableSlots<T = any, V = any> {
   cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
   title?: string | ((data: { title?: string }) => VNodeChild)
   expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
-  icon?: string | ((data: { expanded: boolean; record: T; onExpand: () => void }) => VNodeChild)
+  icon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
 }
 
 export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase<T, V> {
@@ -180,11 +180,13 @@ export interface TableColumnFilter<V = unknown> {
   value: V
 }
 
-export interface TableColumnFilterable<T = any, V = any> {
-  filters: TableColumnFilter<V>[]
-  filterBy?: V[]
-  filter: (currFilterBy: V[], record: T) => boolean
-  onChange?: (currFilterBy: V[]) => void
+export interface TableColumnFilterable<T = any> {
+  filter?: (currFilterBy: VKey[], record: T) => boolean
+  filterBy?: VKey[]
+  footer?: boolean
+  menus: MenuData[]
+  multiple?: boolean
+  onChange?: (currFilterBy: VKey[]) => void
 }
 
 export interface TableSticky {
@@ -208,9 +210,9 @@ export const tableHeadCellProps = {
 export type TableHeadCellProps = IxInnerPropTypes<typeof tableHeadCellProps>
 
 export const tableBodyRowProps = {
-  expanded: IxPropTypes.bool.isRequired,
+  expanded: IxPropTypes.bool,
   rowIndex: IxPropTypes.number.isRequired,
-  level: IxPropTypes.number.isRequired,
+  level: IxPropTypes.number,
   record: IxPropTypes.any.isRequired,
   rowData: IxPropTypes.object<FlattedData>().isRequired,
   rowKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
@@ -221,7 +223,7 @@ export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
 export const tableBodyCellProps = {
   column: IxPropTypes.object<TableColumnMerged>().isRequired,
   colIndex: IxPropTypes.number.isRequired,
-  level: IxPropTypes.number.isRequired,
+  level: IxPropTypes.number,
   record: IxPropTypes.any.isRequired,
   rowIndex: IxPropTypes.number.isRequired,
   disabled: IxPropTypes.bool,
@@ -241,11 +243,18 @@ export const tableMeasureCellProps = {
 
 export type TableMeasureCellProps = IxInnerPropTypes<typeof tableMeasureCellProps>
 
-export const tableFilterPanelProps = {
+export const tableFilterableTriggerProps = {
+  activeFilterBy: IxPropTypes.array<VKey>().isRequired,
   filterable: IxPropTypes.object<TableColumnFilterable>().isRequired,
+  onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
 }
 
-export type TableFilterPanelProps = IxInnerPropTypes<typeof tableFilterPanelProps>
+export type TableFilterableTriggerProps = IxInnerPropTypes<typeof tableFilterableTriggerProps>
 
-export const tableHeadCellFilterableTriggerProps = tableFilterPanelProps
-export type TableHeadCellFilterableTriggerProps = TableFilterPanelProps
+export const tableSortableTriggerProps = {
+  activeFilterBy: IxPropTypes.array<VKey>().isRequired,
+  filterable: IxPropTypes.object<TableColumnFilterable>().isRequired,
+  onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
+}
+
+export type TableSortableTriggerProps = IxInnerPropTypes<typeof tableSortableTriggerProps>

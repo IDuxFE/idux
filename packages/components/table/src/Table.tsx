@@ -19,7 +19,7 @@ import { IxSpin } from '@idux/components/spin'
 import { useColumns } from './composables/useColumns'
 import { useDataSource } from './composables/useDataSource'
 import { useExpandable } from './composables/useExpandable'
-import { useFilterables } from './composables/useFilterable'
+import { useFilterable } from './composables/useFilterable'
 import { useGetRowKey } from './composables/useGetRowKey'
 import { usePagination } from './composables/usePagination'
 import { useScroll } from './composables/useScroll'
@@ -49,7 +49,7 @@ export default defineComponent({
     const scrollContext = useScroll(props, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
     const sortableContext = useSortable(columnsContext.flattedColumns)
-    const filterableContext = useFilterables(columnsContext.flattedColumns)
+    const filterableContext = useFilterable(columnsContext.flattedColumns)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
     const tableLayout = useTableLayout(props, columnsContext, scrollContext, stickyContext.isSticky)
     const { mergedPagination } = usePagination(props, config)
@@ -58,7 +58,7 @@ export default defineComponent({
       props,
       getRowKey,
       sortableContext.activeSortable,
-      filterableContext.activeFilterables,
+      filterableContext.activeFilters,
       expandableContext.expandedRowKeys,
       mergedPagination,
     )

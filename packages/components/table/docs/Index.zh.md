@@ -108,7 +108,7 @@ export interface TableColumnExpandableSlots<T = any, V = any> {
   // 自定义展开内容
   expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
   // 自定义展开图标
-  icon?: string | ((data: { expanded: boolean; record: T; onExpand: () => void }) => VNodeChild)
+  icon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
 }
 ```
 

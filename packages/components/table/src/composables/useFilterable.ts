@@ -5,50 +5,58 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, reactive } from 'vue'
+import { type ComputedRef, computed, reactive, watch } from 'vue'
 
-import { type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey } from '@idux/cdk/utils'
 
-import { type TableColumnFilterable } from '../types'
 import { type TableColumnMerged } from './useColumns'
 
-export function useFilterables(flattedColumns: ComputedRef<TableColumnMerged[]>): FilterableContext {
-  const tempFilterByMap = reactive(new Map())
+export interface ActiveFilter {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filter: (currFilterBy: VKey[], record: any) => boolean
+  filterBy: VKey[]
+}
 
-  const filterables = computed<Filterable[]>(() =>
-    flattedColumns.value
-      .filter(column => !!column.filterable)
-      .map(column => {
-        const { filterable, key } = column
+export interface FilterableContext {
+  activeFilters: ComputedRef<ActiveFilter[]>
+  filterByMap: Record<VKey, VKey[]>
+  setFilterBy: (key: VKey, filterBy: VKey[]) => void
+}
 
-        const onChange = (value: unknown[]) => {
-          tempFilterByMap.set(key, value)
-          callEmit(filterable!.onChange, value)
+export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>): FilterableContext {
+  const filterByMap = reactive<Record<VKey, VKey[]>>({})
+  const setFilterBy = (key: VKey, filterBy: VKey[]) => {
+    filterByMap[key] = filterBy
+  }
+
+  const filterableColumns = computed(() => flattedColumns.value.filter(column => !!column.filterable))
+  watch(
+    filterableColumns,
+    columns => {
+      columns.forEach(column => {
+        if (filterByMap[column.key] === undefined) {
+          filterByMap[column.key] = column.filterable?.filterBy || []
         }
-
-        return {
-          key: column.key,
-          filters: filterable!.filters,
-          filterBy: filterable!.filterBy ?? tempFilterByMap.get(key),
-          filter: filterable!.filter,
-          onChange,
-        }
-      }),
+      })
+    },
+    { immediate: true },
   )
 
-  const activeFilterables = computed(() => filterables.value.filter(f => f.filterBy && f.filterBy.length > 0))
+  const activeFilters = computed(
+    () =>
+      filterableColumns.value
+        .map(column => {
+          const filterable = column.filterable!
+          const filter = filterable.filter
+          const filterBy = filterable.filterBy || filterByMap[column.key]
+          return { filter, filterBy }
+        })
+        .filter(item => item.filter && item.filterBy.length > 0) as ActiveFilter[],
+  )
 
   return {
-    filterables,
-    activeFilterables,
+    activeFilters,
+    filterByMap,
+    setFilterBy,
   }
-}
-
-export interface Filterable<T = unknown> extends TableColumnFilterable<T> {
-  key: VKey
-}
-
-export interface FilterableContext<T = unknown> {
-  filterables: ComputedRef<Filterable<T>[]>
-  activeFilterables: ComputedRef<Filterable<T>[]>
 }

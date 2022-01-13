@@ -153,7 +153,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       if (scrollVertical.value || isSticky.value) {
-        const tableHead = props.headless ? null : (
+        const tableHead = !props.headless && (
           <FixedHolder>
             <Head></Head>
           </FixedHolder>
@@ -221,7 +221,7 @@ export default defineComponent({
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
             <TableTag style={tableStyle.value}>
               <ColGroup></ColGroup>
-              {props.headless ? null : <Head></Head>}
+              {!props.headless && <Head></Head>}
               <Body></Body>
               <Foot></Foot>
             </TableTag>

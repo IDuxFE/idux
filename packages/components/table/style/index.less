@@ -6,8 +6,6 @@
 @import './fixed.less';
 @import './radius.less';
 @import './size.less';
-@import './headerIcon.less';
-@import './filterDropdown.less';
 
 .@{table-prefix} {
   .reset-component();
@@ -131,13 +129,6 @@
     box-shadow: 0 1px 0 1px @table-head-background;
   }
 
-  & &-head-cell-wrapper,
-  & &-head-icon-triggers {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
   &-pagination {
     display: flex;
     flex-wrap: wrap;
@@ -160,7 +151,13 @@
     }
   }
 
-  & &-expandable-icon {
+  // --------- Expandable ---------
+
+  & &-col-expandable {
+    width: 40px;
+  }
+
+  & &-expandable-trigger {
     width: @table-expandable-icon-size;
     height: @table-expandable-icon-size;
     font-size: @table-expandable-icon-size;
@@ -214,20 +211,63 @@
   }
 
   &-sortable-trigger {
-    .header-icon();
-
+    display: inline-flex;
     flex-direction: column;
-    font-size: 8px;
-    margin-left: @table-icon-margin;
+    font-size: 10px;
 
     .@{idux-prefix}-icon + .@{idux-prefix}-icon {
       margin-top: -0.2em;
     }
   }
 
-  &-filterable-trigger {
-    .header-icon();
+  // --------- Filterable ---------
 
+  &-filterable-trigger {
+    font-size: 12px;
+
+    &-footer {
+      border-top: @table-border-width @table-border-style @table-border-color;
+      padding: 8px 16px;
+      text-align: right;
+
+      .@{button-prefix} + .@{button-prefix} {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &-filterable-menu-label {
+    display: inline-flex;
+
+    &-content {
+      margin-left: 8px;
+    }
+  }
+
+  &-sortable-trigger,
+  &-filterable-trigger {
     margin-left: @table-icon-margin;
+    padding: 8px 4px;
+    border-radius: 1px;
+    color: @table-head-icon-color;
+    transition: color @transition-duration-base, background @transition-duration-base;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @table-head-icon-hover-backgroud-color;
+    }
+
+    &-active {
+      color: @color-primary;
+    }
+  }
+
+  &-cell-triggers {
+    display: flex;
+    align-items: center;
+
+    .@{table-prefix}-cell-title {
+      flex: auto;
+    }
   }
 }

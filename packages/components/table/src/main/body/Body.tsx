@@ -7,9 +7,7 @@
 
 import { type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
-import { isString } from 'lodash-es'
-
-import { IxEmpty } from '@idux/components/empty'
+import { ɵEmpty } from '@idux/components/_private/empty'
 
 import { TABLE_TOKEN } from '../../token'
 import BodyRow from './BodyRow'
@@ -29,16 +27,11 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
 
     const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
-    const emptyProps = computed(() => {
-      const { empty } = props
-      return isString(empty) ? { description: empty } : empty
-    })
 
     return () => {
       const children: VNodeTypes[] = []
       if (tableSlots.alert) {
-        const alertNode = tableSlots.alert()
-        children.push(<BodyRowSingle>{alertNode}</BodyRowSingle>)
+        children.push(<BodyRowSingle>{tableSlots.alert()}</BodyRowSingle>)
       }
       const data = flattedData.value
       if (data.length > 0) {
@@ -52,13 +45,13 @@ export default defineComponent({
           })
         }
       } else {
-        children.push(<BodyRowSingle>{slots.empty?.() ?? <IxEmpty {...emptyProps.value}></IxEmpty>}</BodyRowSingle>)
+        children.push(<BodyRowSingle>{slots.empty ? slots.empty() : <ɵEmpty empty={props.empty} />}</BodyRowSingle>)
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyTag = bodyTag.value as any
       return (
         <BodyTag>
-          {showMeasure.value ? <MeasureRow></MeasureRow> : null}
+          {showMeasure.value && <MeasureRow />}
           {children}
         </BodyTag>
       )

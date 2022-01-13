@@ -10,7 +10,7 @@ import { type ComputedRef, type Ref, computed } from 'vue'
 import { type VKey } from '@idux/cdk/utils'
 
 import { type TablePagination, type TableProps } from '../types'
-import { type Filterable } from './useFilterable'
+import { type ActiveFilter } from './useFilterable'
 import { type GetRowKey } from './useGetRowKey'
 import { type ActiveSortable } from './useSortable'
 
@@ -18,7 +18,7 @@ export function useDataSource(
   props: TableProps,
   getRowKey: ComputedRef<GetRowKey>,
   activeSortable: ActiveSortable,
-  activeFilterables: ComputedRef<Filterable[]>,
+  activeFilters: ComputedRef<ActiveFilter[]>,
   expandedRowKeys: Ref<VKey[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
@@ -34,11 +34,11 @@ export function useDataSource(
     return map
   })
 
-  const filteredData = computed(() => filterData(mergedData.value, activeFilterables.value))
+  const filteredData = computed(() => filterData(mergedData.value, activeFilters.value, expandedRowKeys.value))
   const sortedData = computed(() => {
     const { sorter, orderBy } = activeSortable
     if (sorter && orderBy) {
-      return sortData(filteredData.value, sorter, orderBy)
+      return sortData(filteredData.value, sorter, orderBy, expandedRowKeys.value)
     }
 
     return filteredData.value
@@ -69,7 +69,7 @@ export function useDataSource(
     if (expandedKeys.length > 0) {
       return flatData(paginatedData.value, expandedKeys, 0)
     }
-    return paginatedData.value.map((item, idx) => ({ ...item, expanded: false, level: 0, rowIndex: idx }))
+    return paginatedData.value
   })
 
   return { filteredData, flattedData, mergedMap, paginatedMap }
@@ -90,8 +90,8 @@ export interface MergedData {
 }
 
 export interface FlattedData extends MergedData {
-  expanded: boolean
-  level: number
+  expanded?: boolean
+  level?: number
 }
 
 function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: VKey) {
@@ -119,38 +119,45 @@ function sortData(
   mergedData: MergedData[],
   sorter: (curr: unknown, next: unknown) => number,
   orderBy: 'ascend' | 'descend',
+  expandedRowKeys: VKey[],
 ) {
   const tempData = mergedData.slice()
   const orderFlag = orderBy === 'ascend' ? 1 : -1
 
   tempData.forEach(item => {
-    if (item.children?.length && item.children.length > 0) {
-      item.children = sortData(item.children, sorter, orderBy)
+    if (expandedRowKeys.includes(item.rowKey) && item.children && item.children.length > 0) {
+      item.children = sortData(item.children, sorter, orderBy, expandedRowKeys)
     }
   })
-
   return tempData.sort((curr, next) => orderFlag * sorter(curr.record, next.record))
 }
 
-function filterData(mergedData: MergedData[], activeFilterables: Filterable[]): MergedData[] {
+function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], expandedRowKeys: VKey[]): MergedData[] {
+  if (activeFilters.length === 0) {
+    return mergedData
+  }
+
   return mergedData
     .map(item => {
-      const newItem = { ...item }
+      const valid = activeFilters.every(({ filter, filterBy }) => filter(filterBy, item.record))
 
-      const itemValid = activeFilterables.every(filterable => filterable.filter(filterable.filterBy ?? [], item.record))
-
-      if (item.children?.length && item.children.length > 0) {
-        newItem.children = filterData(item.children, activeFilterables)
+      const { rowKey, children } = item
+      const isExpanded = expandedRowKeys.includes(rowKey)
+      let newItem = item
+      if (isExpanded && children && children.length) {
+        const newChildren = filterData(children, activeFilters, expandedRowKeys)
+        if (newChildren.length !== children.length) {
+          newItem = { ...item, children: newChildren }
+        }
       }
-
-      return (newItem.children && newItem.children.length > 0) || itemValid ? newItem : null
+      return valid || (isExpanded && newItem.children) ? newItem : null
     })
-    .filter(item => !!item) as MergedData[]
+    .filter(item => item !== null) as MergedData[]
 }
 
 // TODO: performance optimization
 // when virtual scrolling is enabled, this do not need to traverse all nodes
-function flatData(mergedData: MergedData[], expandedRowKeys: VKey[], level = 0) {
+function flatData(mergedData: MergedData[], expandedRowKeys: VKey[], level: number) {
   return mergedData.reduce((result, item) => {
     const { children, parentKey, record, rowKey } = item
     const expanded = expandedRowKeys.includes(rowKey)

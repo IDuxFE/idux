@@ -62,24 +62,14 @@ const columns: TableColumn<Data>[] = [
           return h(IxTag, { color }, { default: () => tag.toUpperCase() })
         }),
     },
-
     filterable: {
-      filters: [
-        {
-          text: 'attack',
-          value: 'attack',
-        },
-        {
-          text: 'damage',
-          value: 'damage',
-        },
-        {
-          text: 'infiltrate',
-          value: 'infiltrate',
-        },
+      menus: [
+        { key: 'attack', label: 'Attack' },
+        { key: 'damage', label: 'Damage' },
+        { key: 'infiltrate', label: 'Infiltrate' },
       ],
-      filter(tags, record) {
-        return tags.every(tag => record.tags.includes(tag))
+      filter: (tags, record) => {
+        return tags.some(tag => record.tags.includes(tag as string))
       },
     },
   },

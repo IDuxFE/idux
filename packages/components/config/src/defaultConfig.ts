@@ -254,6 +254,7 @@ const table: TableConfig = {
   columnBase: {
     align: 'start',
     sortable: { nextTooltip: false, orders: ['ascend', 'descend'] },
+    filterable: { multiple: true, footer: true },
   },
   columnExpandable: { icon: ['plus-square', 'minus-square'] },
 }

@@ -2,7 +2,11 @@
 @import '../../style/motion/fade.less';
 
 .@{dropdown-prefix} {
-  .reset-component();
+  z-index: @dropdown-overlay-zindex;
+  min-width: @dropdown-overlay-min-width;
+  background-color: @dropdown-bg-color;
+  border-radius: @dropdown-overlay-border-radius;
+  box-shadow: @dropdown-overlay-box-shadow;
 
   &-trigger {
     cursor: pointer;
@@ -10,5 +14,46 @@
 
   .@{idux-prefix}-overlay-arrow {
     color: @dropdown-background-color;
+  }
+}
+
+.@{menu-prefix} {
+
+  &&-dropdown {
+    &.@{menu-prefix}-vertical,
+    &.@{menu-prefix}-inline {
+      .@{menu-prefix}-item {
+
+        &-selected {
+
+          &::after {
+            transform: scaleY(0);
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    &.@{menu-prefix}-horizontal {
+      .@{menu-prefix}-item,
+      .@{menu-prefix}-sub {
+
+        &:hover,
+        &-expanded,
+        &-selected {
+          border-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.@{menu-prefix}-dropdown {
+  .@{menu-prefix}-item,
+  .@{menu-prefix}-sub-title,
+  .@{menu-prefix}-item-group .@{menu-prefix}-item-group-title {
+    height: @dropdown-menu-item-height;
+    line-height: @dropdown-menu-item-height;
+    margin: @dropdown-menu-item-margin;
   }
 }
