@@ -308,7 +308,7 @@ export function useSlider(props: SliderProps): SliderBindings {
       val = [modelValue as number]
     }
 
-    const newVal = val
+    valuesRef.value = val
       .map(num => {
         if (!isNumeric(num)) {
           return props.min
@@ -317,15 +317,6 @@ export function useSlider(props: SliderProps): SliderBindings {
         return calcValueByStep(num)
       })
       .sort((a, b) => a - b) // order
-
-    // When the legal value is not equal to the modelValue, update modelValue
-    if (val.every((v, i) => v !== newVal[i])) {
-      const modelValue = props.range ? newVal : newVal[0]
-      callEmit(props.onChange, modelValue)
-      accessor.setValue(modelValue)
-    }
-
-    valuesRef.value = newVal
   }
 
   return {
