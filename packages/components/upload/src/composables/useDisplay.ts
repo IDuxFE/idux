@@ -5,19 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { UploadListProps, UploadListType, UploadProps } from '../types'
+import type { UploadFile, UploadListProps, UploadListType, UploadProps } from '../types'
 import type { IconsMap } from '../util/icon'
-import type { ProgressGradient } from '@idux/components/progress'
-import type { ComputedRef, ShallowRef } from 'vue'
+import type { ComputedRef, ShallowRef, VNode } from 'vue'
 
-import { VNode, computed, h, isProxy, normalizeClass, shallowRef } from 'vue'
+import { computed, h, isProxy, normalizeClass, shallowRef } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
-import { isImage } from '@idux/components/upload/src/util/file'
 
-import { UploadFile } from '../types'
-
-export type StrokeColorType = ProgressGradient | string
+import { isImage } from '../util/fileHandle'
 
 export function useCmpClasses(): ComputedRef<string> {
   const commonPrefix = useGlobalConfig('common')

@@ -37,7 +37,7 @@ export default defineComponent({
   name: 'IxUploadImageCardList',
   props: uploadListProps,
   setup(listProps) {
-    const { props: uploadProps, files, upload, abort, onUpdateFiles } = inject(uploadToken)!
+    const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'imageCard')
@@ -45,7 +45,12 @@ export default defineComponent({
     const [, imageCardVisible] = useSelectorVisible(uploadProps, 'imageCard')
     const showSelector = useShowSelector(uploadProps, files, imageCardVisible)
     const { getThumbNode, revokeAll } = useThumb()
-    const fileOperation = useOperation(files, listProps, uploadProps, { abort, upload, onUpdateFiles })
+    const fileOperation = useOperation(files, listProps, uploadProps, {
+      abort,
+      upload,
+      onUpdateFiles,
+      setViewerVisible,
+    })
     const selectorNode = renderSelector(cpmClasses)
 
     onBeforeUnmount(revokeAll)

@@ -41,5 +41,5 @@ export default defineComponent({
 })
 
 function useListType(props: UploadListProps, config: UploadListConfig) {
-  return computed(() => props.type ?? config.listType)
+  return computed(() => props.type ?? config.type)
 }

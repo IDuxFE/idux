@@ -10,23 +10,23 @@ import type { UploadFile, UploadFileStatus } from '../types'
 import { callEmit, uniqueId } from '@idux/cdk/utils'
 
 export function getFileInfo(file: File, options: Partial<UploadFile> = {}): UploadFile {
-  const uid = uniqueId()
+  const key = uniqueId()
   return {
-    uid,
+    key,
     name: file.name,
-    raw: Object.assign(file, { uid }),
+    raw: file,
     percent: 0,
     ...options,
   }
 }
 
 export function getTargetFile(file: UploadFile, files: UploadFile[]): UploadFile | undefined {
-  const matchKey = file.uid !== undefined ? 'uid' : 'name'
+  const matchKey = file.key !== undefined ? 'key' : 'name'
   return files.find(item => item[matchKey] === file[matchKey])
 }
 
 export function getTargetFileIndex(file: UploadFile, files: UploadFile[]): number {
-  const matchKey = file.uid !== undefined ? 'uid' : 'name'
+  const matchKey = file.key !== undefined ? 'key' : 'name'
   return files.findIndex(item => item[matchKey] === file[matchKey])
 }
 

@@ -28,12 +28,17 @@ export default defineComponent({
   name: 'IxUploadTextList',
   props: uploadListProps,
   setup(listProps) {
-    const { props: uploadProps, files, upload, abort, onUpdateFiles } = inject(uploadToken)!
+    const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'text')
     const locale = getLocale('upload')
-    const fileOperation = useOperation(files, listProps, uploadProps, { abort, upload, onUpdateFiles })
+    const fileOperation = useOperation(files, listProps, uploadProps, {
+      abort,
+      upload,
+      onUpdateFiles,
+      setViewerVisible,
+    })
 
     return () =>
       files.value.length > 0 && (

@@ -30,11 +30,11 @@ order: 0
 | `customRequest` | 覆盖内置的上传行为，自定义上传实现 | `(option: UploadRequestOption) => { abort: () => void }` | 基于XMLHttpRequest实现  | - | - |
 | `requestData` | 上传附加的参数  | `Record<string, unknown> \| ((file: UploadFile) => Record<string, unknown> \| Promise<Record<string, unknown>>)` | - | - | - |
 | `requestHeaders` | 设置上传请求的请求头  | `UploadRequestHeader` | -  | -  | -  |
-| `requestMethod` | 上传请求的http method | `string` | `post` | ✅ | - |
+| `requestMethod` | 上传请求的http method | `UploadRequestMethod` | `post` | ✅ | - |
 | `onSelect` | 选中文件时钩子 | `(file: File[]) => boolean \| File[] \| Promise<boolean \| File[]>` | `() => true` | - | - |
 | `onFileStatusChange` | 上传文件改变时的状态 | `(file: UploadFile) => void` | - | - | - |
 | `onBeforeUpload`   | 文件上传前的钩子，根据返回结果是否上传<br />返回`false`阻止上传<br />返回`Promise`对象`reject`时停止上传<br />返回`Promise`对象`resolve`时开始上传 | `(file: UploadFile) => boolean \| UploadFile \| Promise<boolean \| UploadFile>` | `() => true` | -  | -  |
-| `onRequestChange` | 请求状态改变的钩子 | `(option: UploadRequestChangeParam) => void` | - | - | - |
+| `onRequestChange` | 请求状态改变的钩子 | `(option: UploadRequestChangeOption) => void` | - | - | - |
 
 ### IxUploadFiles
 
@@ -45,7 +45,7 @@ order: 0
 | `type` | 展示的形式 | `text \| image \| imageCard` | `text` | ✅ | - |
 | `icon` | 展示的icon   | `Record<file \| preview \| download \| remove \| retry, string \| VNode`>  | `{file: 'paper-clip', remove: 'delete', retry: 'edit'}` | ✅ | - |
 | `onDownload`   | 点击下载文件时的回调 | `(file: UploadFile) => void` | -  | -  | -  |
-| `onPreview`    | 点击文件链接或预览图标时的回调 | `(file: UploadFile) => boolean \| Promise<boolean>` | - | - | - |
+| `onPreview`    | 点击文件链接或预览图标时的回调 | `(file: UploadFile) => void` | - | - | - |
 | `onRemove`     | 点击移除文件时的回调，返回boolean表示是否允许移除，支持Promise | `(file: UploadFile) => boolean \| Promise<boolean>` | `() => true` | -  | - |
 | `onRetry`      | 点击重新上传时的回调 | `(file: UploadFile) => void` | - | - | - |
 
@@ -60,24 +60,24 @@ order: 0
 ```typescript
 // 上传文件
 interface UploadFile {
-  uid: VKey // 唯一标识
+  key: VKey // 唯一标识
   name: string // 文件名
-  raw?: UploadRawFile
+  raw?: File
   status?: 'selected' | 'uploading' | 'error' | 'success' | 'abort' // 当前状态
-  error?: Error // 详细的报错信息，比如请求失败时
+  error?: UploadRequestError // 详细的报错信息，比如请求失败时
   errorTip?: string // 小i报错提示文本
   thumbUrl?: string  // 缩略图链接
   percent?: number // 上传进度
-  response?: Response // 服务端响应内容
+  response?: any // 服务端响应内容
 }
 
 // 自定义上传方法的参数
-interface UploadRequestOption {
+interface UploadRequestOption<T = unknown> {
   onProgress?: (event: UploadProgressEvent) => void
-  onError?: (event: UploadRequestError | ProgressEvent, body?: T) => void
+  onError?: (error: UploadRequestError) => void
   onSuccess?: (body: T) => void
-  filename: string
-  file: UploadRawFile | File
+  name: string
+  file: File
   withCredentials?: boolean
   action: string
   requestHeaders?: UploadRequestHeader
@@ -89,7 +89,8 @@ interface UploadRequestOption {
 interface UploadRequestChangeOption {
   file: UploadFile
   status: 'loadstart' | 'progress' | 'abort' | 'error' | 'loadend'
-  res?: Response
-  e?: ProgressEvent
+  response?: any
+  event?: UploadProgressEvent
+  error?: UploadRequestError
 }
 ```

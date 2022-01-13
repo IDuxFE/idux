@@ -1,5 +1,5 @@
 <template>
-  <IxUpload v-model:files="files" action="/upload" dragable>
+  <IxUpload v-model:files="files" action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354" dragable>
     <div class="drag-panel">
       <IxIcon name="upload" class="drag-panel-icon"></IxIcon>
       <p>Drag and drop files or click to select files to upload.</p>

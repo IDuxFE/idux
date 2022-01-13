@@ -1,5 +1,9 @@
 <template>
-  <IxUpload v-model:files="files" action="/upload" @beforeUpload="onBeforeUpload">
+  <IxUpload
+    v-model:files="files"
+    action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354"
+    @beforeUpload="onBeforeUpload"
+  >
     <IxButton>Manual upload</IxButton>
     <template #list>
       <IxUploadList type="text" />
@@ -25,7 +29,7 @@ const onBeforeUpload = (file: UploadFile) => {
     formData.append('file', file.raw!.slice(start, end))
 
     // custom request
-    fetch('/upload', {
+    fetch('https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354', {
       method: 'POST',
       body: formData,
     })

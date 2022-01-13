@@ -29,13 +29,18 @@ export default defineComponent({
   name: 'IxUploadImageList',
   props: uploadListProps,
   setup(listProps) {
-    const { props: uploadProps, files, upload, abort, onUpdateFiles } = inject(uploadToken)!
+    const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'image')
     const locale = getLocale('upload')
     const { getThumbNode, revokeAll } = useThumb()
-    const fileOperation = useOperation(files, listProps, uploadProps, { abort, upload, onUpdateFiles })
+    const fileOperation = useOperation(files, listProps, uploadProps, {
+      abort,
+      upload,
+      onUpdateFiles,
+      setViewerVisible,
+    })
 
     onBeforeUnmount(revokeAll)
 

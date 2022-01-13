@@ -1,7 +1,7 @@
 <template>
   <IxSpace direction="vertical">
     <IxRadioGroup v-model:value="curType" :options="listType"></IxRadioGroup>
-    <IxUpload v-model:files="files" action="/upload">
+    <IxUpload v-model:files="files" action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354">
       <IxButton>Upload</IxButton>
       <template #list>
         <IxUploadList :type="curType" />
@@ -21,8 +21,9 @@ const listType = [
 const curType = ref('text')
 const files = ref([
   {
-    uid: 'default',
+    key: 'default',
     name: 'idux.svg',
+    status: 'success',
     thumbUrl: '/icons/logo.svg',
   },
 ])

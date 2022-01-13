@@ -16,12 +16,12 @@ import { UploadProps } from '../src/types'
 
 const defaultFiles: UploadFile[] = [
   {
-    uid: 'test1',
+    key: 'test1',
     name: 'idux.svg',
     thumbUrl: '/icons/logo.svg',
   },
   {
-    uid: 'error',
+    key: 'error',
     name: 'error.png',
     status: 'error',
     errorTip: 'Upload failed.',
@@ -105,7 +105,7 @@ describe('Upload render', () => {
 
     expect(wrapper.findAll('.ix-upload-file').length).toBe(2)
 
-    await wrapper.setProps({ files: [{ uid: 'files test', name: 'files test' }] })
+    await wrapper.setProps({ files: [{ key: 'files test', name: 'files test' }] })
 
     expect(wrapper.findAll('.ix-upload-file').length).toBe(1)
 
@@ -210,7 +210,7 @@ describe('Upload render', () => {
       props: {
         files: [
           {
-            uid: 'test2',
+            key: 'test2',
             name: 'idux.svg',
             status: 'uploading',
             percent: 50,

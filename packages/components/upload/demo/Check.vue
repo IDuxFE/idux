@@ -1,5 +1,11 @@
 <template>
-  <IxUpload v-model:files="files" action="/upload" accept=".png" @select="onSelect" @beforeUpload="onBeforeUpload">
+  <IxUpload
+    v-model:files="files"
+    action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354"
+    accept=".png"
+    @select="onSelect"
+    @beforeUpload="onBeforeUpload"
+  >
     <IxButton>Upload</IxButton>
     <template #list>
       <IxUploadList type="text" />
@@ -8,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UploadFile, UploadRawFile } from '@idux/components/upload'
+import type { UploadFile } from '@idux/components/upload'
 
 import { ref } from 'vue'
 
@@ -28,7 +34,7 @@ const onBeforeUpload = (file: UploadFile) =>
     resolve(true)
   })
 
-const onSelect = (files: UploadRawFile[]) => {
+const onSelect = (files: File[]) => {
   if (files.some(file => file.name.length > 6)) {
     warning('Check from onSelect: The file size exceeds the limitFile name exceeds length.')
     return false

@@ -200,7 +200,7 @@ export interface UploadConfig {
 }
 
 export interface UploadListConfig {
-  listType: UploadListType
+  type: UploadListType
   icon: Partial<Record<UploadIconType, string | VNode>>
 }
 

@@ -212,7 +212,7 @@ const upload: UploadConfig = {
 }
 
 const uploadList: UploadListConfig = {
-  listType: 'text',
+  type: 'text',
   icon: {
     file: 'paper-clip',
     remove: 'delete',

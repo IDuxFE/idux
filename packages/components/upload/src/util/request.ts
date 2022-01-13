@@ -17,7 +17,14 @@ type UploadReturnType = {
 }
 
 function getError(option: UploadRequestOption, xhr: XMLHttpRequest) {
-  const msg = `cannot ${option.requestMethod} ${option.action} ${xhr.status}'`
+  let msg: string
+  if (xhr.response) {
+    msg = `${xhr.response.error || xhr.response}`
+  } else if (xhr.responseText) {
+    msg = `${xhr.responseText}`
+  } else {
+    msg = `fail to ${option.requestMethod} ${option.action} ${xhr.status}`
+  }
   const err = new Error(msg) as UploadRequestError
   err.status = xhr.status
   err.method = option.requestMethod
@@ -66,15 +73,15 @@ export default function upload(option: UploadRequestOption): UploadReturnType {
     })
   }
 
-  formData.append(option.filename, option.file, option.file.name)
+  formData.append(option.name, option.file, option.file.name)
 
-  xhr.onerror = function error(e) {
-    option.onError?.(e)
+  xhr.onerror = function error() {
+    option.onError?.(getError(option, xhr))
   }
 
   xhr.onload = function onload() {
     if (xhr.status < 200 || xhr.status >= 300) {
-      return option.onError?.(getError(option, xhr), getBody(xhr))
+      return option.onError?.(getError(option, xhr))
     }
 
     return option.onSuccess?.(getBody(xhr))

@@ -1,5 +1,10 @@
 <template>
-  <IxUpload v-model:files="files" action="/upload" :customRequest="customRequest" @requestChange="onRequestChange">
+  <IxUpload
+    v-model:files="files"
+    action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354"
+    :customRequest="customRequest"
+    @requestChange="onRequestChange"
+  >
     <IxButton>Custom upload</IxButton>
     <template #list>
       <IxUploadList type="text" />
@@ -13,7 +18,8 @@ import type { UploadRequestChangeOption, UploadRequestOption } from '@idux/compo
 import { ref } from 'vue'
 
 const files = ref([])
-const customRequest = (option: UploadRequestOption<Response>) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const customRequest = (option: UploadRequestOption<any>) => {
   const formData = new FormData()
   const controller = new AbortController()
   const signal = controller.signal
@@ -32,7 +38,7 @@ const customRequest = (option: UploadRequestOption<Response>) => {
     })
   }
 
-  formData.append(option.filename, option.file, option.file.name)
+  formData.append(option.name, option.file, option.file.name)
 
   fetch(option.action, {
     method: option.requestMethod,

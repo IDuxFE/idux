@@ -1,8 +1,8 @@
 <template>
-  <IxUpload v-model:files="files" action="/upload">
+  <IxUpload v-model:files="files" action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354">
     <IxButton>Upload</IxButton>
     <template #list="{ abort, upload }">
-      <div v-for="file in files" :key="file.uid" class="upload-file">
+      <div v-for="file in files" :key="file.key" class="upload-file">
         <a :class="`file file-${file.status}`" href="file.thumbUrl">{{ file.name }}</a>
         <div>
           <span>{{ file.percent.toFixed(2) }}% </span>

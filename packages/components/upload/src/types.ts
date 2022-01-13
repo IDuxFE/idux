@@ -26,26 +26,24 @@ export interface UploadRequestError extends Error {
   method?: UploadRequestMethod
   url?: string
 }
-export interface UploadRawFile extends File {
-  uid: VKey
-}
 export interface UploadFile {
-  uid: VKey
+  key: VKey
   name: string
-  raw?: UploadRawFile
+  raw?: File
   status?: UploadFileStatus
-  error?: Error
+  error?: UploadRequestError
   errorTip?: string
   thumbUrl?: string
   percent?: number
-  response?: Response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  response?: any
 }
 export interface UploadRequestOption<T = unknown> {
   onProgress?: (event: UploadProgressEvent) => void
-  onError?: (event: UploadRequestError | ProgressEvent, body?: T) => void
+  onError?: (error: UploadRequestError) => void
   onSuccess?: (body: T) => void
-  filename: string
-  file: UploadRawFile | File
+  name: string
+  file: File
   withCredentials?: boolean
   action: string
   requestHeaders?: UploadRequestHeader
@@ -55,8 +53,10 @@ export interface UploadRequestOption<T = unknown> {
 export interface UploadRequestChangeOption {
   file: UploadFile
   status: UploadRequestStatus
-  response?: Response
-  e?: ProgressEvent
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  response?: any
+  event?: UploadProgressEvent
+  error?: UploadRequestError
 }
 
 export const uploadProps = {

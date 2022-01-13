@@ -43,7 +43,7 @@ describe('Upload list render', () => {
           [uploadToken as symbol]: {
             files: ref([
               {
-                uid: 'test1',
+                key: 'test1',
                 name: 'idux.svg',
                 thumbUrl: '/icons/logo.svg',
               },
@@ -72,7 +72,7 @@ describe('Upload list render', () => {
           [uploadToken as symbol]: {
             files: ref([
               {
-                uid: 'test1',
+                key: 'test1',
                 name: 'idux.svg',
                 errorTip: 'error',
                 status: 'error',
@@ -94,7 +94,7 @@ describe('Upload list render', () => {
           [uploadToken as symbol]: {
             files: ref([
               {
-                uid: 'test1',
+                key: 'test1',
                 name: 'idux.svg',
                 status: 'success',
               },
@@ -121,7 +121,7 @@ describe('Upload list render', () => {
     const onDownload = jest.fn()
     const defaultFiles = [
       {
-        uid: 'test1',
+        key: 'test1',
         name: 'idux.svg',
         status: 'success',
       },
@@ -152,7 +152,7 @@ describe('Upload list render', () => {
     const onPreview = jest.fn()
     const defaultFiles = [
       {
-        uid: 'test1',
+        key: 'test1',
         name: 'idux.svg',
         status: 'success',
       },
@@ -189,7 +189,7 @@ describe('Upload list render', () => {
     const upload = jest.fn()
     const defaultFiles = [
       {
-        uid: 'test1',
+        key: 'test1',
         name: 'idux.svg',
         status: 'error',
       },
@@ -223,10 +223,10 @@ describe('Upload list render', () => {
     const abort = jest.fn()
     const defaultFiles = [
       {
-        uid: 'test1',
+        key: 'test1',
         name: 'idux.png',
         status: 'uploading',
-        raw: Object.assign(new File(['test1'], 'idux.png', { type: 'image/png' }), { uid: 'test1' }),
+        raw: new File(['test1'], 'idux.png', { type: 'image/png' }),
       },
     ]
 

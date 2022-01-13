@@ -12,6 +12,7 @@ import type { ComputedRef, InjectionKey } from 'vue'
 export type UploadToken = {
   props: UploadProps
   files: ComputedRef<UploadFile[]>
+  setViewerVisible: (visible: boolean, imageSrc?: string) => void
   onUpdateFiles: (file: UploadFile[]) => void
   setSelectorVisible: (isShow: boolean) => void
 } & UploadRequest

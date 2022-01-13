@@ -1,7 +1,7 @@
 <template>
   <IxUpload
     v-model:files="files"
-    action="/upload"
+    action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354"
     :maxCount="1"
     @beforeUpload="onBeforeUploadMessage"
     @select="onSelectMessage"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UploadFile, UploadRawFile, UploadRequestChangeOption } from '@idux/components/upload'
+import type { UploadFile, UploadRequestChangeOption } from '@idux/components/upload'
 import type { Ref } from 'vue'
 
 import { ref, watch } from 'vue'
@@ -34,7 +34,7 @@ const onBeforeUploadMessage = (file: UploadFile) => {
   timelineList.value.push(`${file.name}: beforeUpload`)
   return true
 }
-const onSelectMessage = (file: UploadRawFile[]) => {
+const onSelectMessage = (file: File[]) => {
   console.log('select', file)
   timelineList.value.push(`${file[0].name}: select`)
   return true

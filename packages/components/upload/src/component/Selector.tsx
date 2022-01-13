@@ -19,7 +19,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { useCmpClasses } from '../composables/useDisplay'
 import { useDrag } from '../composables/useDrag'
 import { uploadToken } from '../token'
-import { getFileInfo, getFilesAcceptAllow, getFilesCountAllow } from '../util/file'
+import { getFileInfo, getFilesAcceptAllow, getFilesCountAllow } from '../util/fileHandle'
 
 export default defineComponent({
   name: 'IxUploadSelector',
@@ -163,7 +163,7 @@ function syncUploadHandle(
     const filesAfterHandle = uploadProps.onSelect ? await callEmit(uploadProps.onSelect, filesReady$$) : filesReady$$
     const filesReadyUpload = getFilesHandled(filesAfterHandle!, filesReady$$)
     const filesFormat = getFormatFiles(filesReadyUpload, uploadProps, 'selected')
-    const filesIds = filesFormat.map(file => file.uid)
+    const filesIds = filesFormat.map(file => file.key)
     if (uploadProps.maxCount === 1) {
       files.value.forEach(file => abort(file))
       callEmit(onUpdateFiles, filesFormat)
@@ -173,7 +173,7 @@ function syncUploadHandle(
 
     await nextTick(() => {
       files.value
-        .filter(item => filesIds.includes(item.uid))
+        .filter(item => filesIds.includes(item.key))
         .forEach(file => {
           startUpload(file)
         })

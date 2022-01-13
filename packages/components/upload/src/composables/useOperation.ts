@@ -11,7 +11,7 @@ import type { ComputedRef } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { getTargetFile, getTargetFileIndex } from '../util/file'
+import { getTargetFile, getTargetFileIndex } from '../util/fileHandle'
 
 export interface FileOperation {
   abort: (file: UploadFile) => void
@@ -25,7 +25,7 @@ export function useOperation(
   files: ComputedRef<UploadFile[]>,
   listProps: UploadListProps,
   uploadProps: UploadProps,
-  opr: Pick<UploadToken, 'abort' | 'upload' | 'onUpdateFiles'>,
+  opr: Pick<UploadToken, 'abort' | 'upload' | 'onUpdateFiles' | 'setViewerVisible'>,
 ): FileOperation {
   const abort = (file: UploadFile) => {
     opr.abort(file)
@@ -48,6 +48,10 @@ export function useOperation(
 
   const preview = (file: UploadFile) => {
     if (uploadProps.disabled) {
+      return
+    }
+    if (!listProps.onPreview && file.thumbUrl) {
+      opr.setViewerVisible(true, file.thumbUrl)
       return
     }
     callEmit(listProps.onPreview, file)

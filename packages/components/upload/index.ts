@@ -16,7 +16,6 @@ const IxUploadList = UploadList as unknown as UploadListComponent
 export { IxUpload, IxUploadList }
 
 export type {
-  UploadRawFile,
   UploadListType,
   UploadRequestMethod,
   UploadRequestStatus,
