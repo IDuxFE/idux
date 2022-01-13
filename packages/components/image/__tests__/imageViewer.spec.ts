@@ -72,22 +72,22 @@ describe('ImageViewer', () => {
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('src')).toBe(images[1])
 
     await wrapper.findComponent(ImageViewerContent).trigger('keydown', { code: 'ArrowRight' })
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
 
     await wrapper.findComponent(ImageViewerContent).trigger('keydown', { code: 'ArrowLeft' })
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-left').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-right').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
   })
@@ -112,22 +112,22 @@ describe('ImageViewer', () => {
     await flushPromises()
 
     await wrapper.findComponent(ImageViewerContent).trigger('mousewheel', { wheelDelta: 10 })
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.2)')
 
     await wrapper.findComponent(ImageViewerContent).trigger('mousewheel', { wheelDelta: -10 })
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1)')
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-in').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.2)')
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-out').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1)')
 
@@ -136,7 +136,7 @@ describe('ImageViewer', () => {
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(0.9)')
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-in').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(0.9)')
 
@@ -145,7 +145,7 @@ describe('ImageViewer', () => {
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.1)')
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-out').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.1)')
   })
@@ -159,13 +159,13 @@ describe('ImageViewer', () => {
     await flushPromises()
 
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-left').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
 
     await wrapper.setProps({ activeIndex: 2 })
     await wrapper.findComponent(ImageViewerContent).find('.ix-icon-right').trigger('click')
-    await wait(10) // debounce
+    await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
