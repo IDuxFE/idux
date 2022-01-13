@@ -123,7 +123,6 @@ describe('Footer', () => {
     await wrapper.setProps({ okButton: undefined })
 
     expect(wrapper.find('.ix-button').classes()).not.toContain('ix-button-dashed')
-    expect(wrapper.find('.ix-button').classes()).toContain('ix-button-primary')
   })
 
   test('okLoading work', async () => {
