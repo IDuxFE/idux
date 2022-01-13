@@ -13,7 +13,7 @@ import { type BreakpointKey, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { type VKey, convertArray, flattenNode } from '@idux/cdk/utils'
 import { type TableColumnBaseConfig, type TableColumnExpandableConfig, type TableConfig } from '@idux/components/config'
 
-import { tableColumnKey } from '../tableColumn'
+import { tableColumnKey } from '../column'
 import {
   type TableColumn,
   type TableColumnAlign,
@@ -113,7 +113,7 @@ export interface TableColumnMergedExpandable extends TableColumnMergedBaseExtra,
   key: VKey
   icon: [string, string]
   titleColSpan: number
-  slots: TableColumnExpandableSlots
+  slots?: TableColumnExpandableSlots
 }
 export interface TableColumnMergedSelectable extends TableColumnMergedBaseExtra, TableColumnSelectable {
   align: TableColumnAlign
@@ -139,7 +139,7 @@ function mergeColumns(
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
-    .map(column => covertColumn(column, breakpoints, baseConfig, expandableConfig))
+    .map((column, index) => covertColumn(column, breakpoints, baseConfig, expandableConfig, index))
 }
 
 function convertColumns(
@@ -150,7 +150,7 @@ function convertColumns(
 ) {
   const mergedColumns: Array<TableColumnMerged> = []
 
-  flattenNode(nodes, { key: tableColumnKey }).forEach(node => {
+  flattenNode(nodes, { key: tableColumnKey }).forEach((node, index) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { props, children } = node as VNode & { children: any }
     const { key = Symbol(), editable, ellipsis, slots, ...newColumn } = props || {}
@@ -162,7 +162,7 @@ function convertColumns(
     if (defaultSlot) {
       newColumn.children = convertColumns(defaultSlot(), breakpoints, baseConfig, expandableConfig)
     }
-    mergedColumns.push(covertColumn(newColumn as TableColumnMerged, breakpoints, baseConfig, expandableConfig))
+    mergedColumns.push(covertColumn(newColumn as TableColumnMerged, breakpoints, baseConfig, expandableConfig, index))
   })
 
   return mergedColumns
@@ -173,6 +173,7 @@ function covertColumn(
   breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
+  index: number,
 ): TableColumnMerged {
   const { align = baseConfig.align } = column
 
@@ -187,11 +188,14 @@ function covertColumn(
       return { ...column, key, align, multiple }
     }
   } else {
-    const { key, dataKey, sortable, children } = column
-    const _key = key ?? (convertArray(dataKey).join('-') || Symbol())
+    const { key, dataKey, sortable, filterable, children } = column
+    const _key = key ?? (convertArray(dataKey).join('-') || `'IDUX_TABLE_KEY_${index}`)
     const newColumn = { ...column, key: _key, align }
     if (sortable) {
       newColumn.sortable = { ...baseConfig.sortable, ...sortable }
+    }
+    if (filterable) {
+      newColumn.filterable = { ...baseConfig.filterable, ...filterable }
     }
     if (children?.length) {
       newColumn.children = mergeColumns(children, breakpoints, baseConfig, expandableConfig)

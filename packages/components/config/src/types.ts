@@ -261,6 +261,7 @@ export interface TableConfig {
 export interface TableColumnBaseConfig {
   align: TableColumnAlign
   sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
+  filterable: { multiple: boolean; footer: true }
 }
 
 export interface TableColumnExpandableConfig {

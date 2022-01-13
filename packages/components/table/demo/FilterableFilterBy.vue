@@ -24,50 +24,38 @@ interface Data {
   address: string
 }
 
-type AgeFilter = (age: number) => boolean
-
-const ageFilterable: TableColumnFilterable<Data, AgeFilter> = reactive({
-  filters: [
-    {
-      text: 'over 19',
-      value: (age: number) => age > 19,
-    },
-    {
-      text: 'below 21',
-      value: (age: number) => age < 21,
-    },
+const ageFilterable: TableColumnFilterable<Data> = reactive({
+  menus: [
+    { key: 'over', label: 'Over 19' },
+    { key: 'under', label: 'Under 21' },
   ],
-  filter(currentFilterBy, record) {
-    return currentFilterBy.every(filterBy => filterBy(record.age))
+  multiple: false,
+  filter: (currentFilterBy, record) => {
+    const isOver = currentFilterBy.includes('over')
+    return isOver ? record.age > 19 : record.age < 21
   },
   filterBy: [],
-  onChange(currentFilterBy) {
+  onChange: currentFilterBy => {
     ageFilterable.filterBy = currentFilterBy
   },
 })
 
-const addressFilterable: TableColumnFilterable<Data, string> = reactive({
-  filters: [
-    {
-      text: 'Sidney',
-      value: 'Sidney',
-    },
-    {
-      text: 'New York',
-      value: 'New York',
-    },
+const addressFilterable: TableColumnFilterable<Data> = reactive({
+  menus: [
+    { key: 'Sidney', label: 'Sidney' },
+    { key: 'New York', label: 'New York' },
   ],
-  filter(currentFilterBy, record) {
-    return currentFilterBy.every(filterBy => record.address.includes(filterBy))
+  filter: (currentFilterBy, record) => {
+    return currentFilterBy.some(filterBy => record.address.includes(filterBy as string))
   },
   filterBy: [],
-  onChange(currentFilterBy) {
+  onChange: currentFilterBy => {
     addressFilterable.filterBy = currentFilterBy
   },
 })
 
 const filterByAge19 = () => {
-  ageFilterable.filterBy = [ageFilterable.filters[0].value]
+  ageFilterable.filterBy = ['over']
   addressFilterable.filterBy = []
 }
 
@@ -94,7 +82,7 @@ const columns: TableColumn<Data>[] = [
       sorter: (curr, next) => curr.age - next.age,
     },
     filterable: ageFilterable,
-  } as TableColumn<Data, AgeFilter>,
+  },
   {
     title: 'Grade',
     dataKey: 'grade',
@@ -103,7 +91,7 @@ const columns: TableColumn<Data>[] = [
     title: 'Address',
     dataKey: 'address',
     filterable: addressFilterable,
-  } as TableColumn<Data, string>,
+  },
 ]
 
 const data: Data[] = [

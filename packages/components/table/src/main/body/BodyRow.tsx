@@ -95,7 +95,7 @@ function useClasses(
     const { level, expanded } = props
     const computeRowClassName = rowClassName.value
     return {
-      [`${prefixCls}-level-${level}`]: level > 0,
+      [`${prefixCls}-level-${level}`]: !!level,
       [`${prefixCls}-selected`]: isSelected.value,
       [`${prefixCls}-expanded`]: expanded,
       [computeRowClassName as string]: !!computeRowClassName,

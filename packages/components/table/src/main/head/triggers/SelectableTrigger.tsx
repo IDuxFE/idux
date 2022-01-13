@@ -13,7 +13,7 @@ import { type DropdownProps, IxDropdown } from '@idux/components/dropdown'
 import { IxIcon } from '@idux/components/icon'
 import { IxMenu } from '@idux/components/menu'
 
-import { TABLE_TOKEN } from '../../token'
+import { TABLE_TOKEN } from '../../../token'
 
 export default defineComponent({
   setup() {

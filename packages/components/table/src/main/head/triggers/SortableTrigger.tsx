@@ -14,7 +14,7 @@ import { TableLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
 import { IxTooltip } from '@idux/components/tooltip'
 
-import { TABLE_TOKEN } from '../../token'
+import { TABLE_TOKEN } from '../../../token'
 
 export default defineComponent({
   // eslint-disable-next-line vue/require-prop-types
@@ -25,7 +25,7 @@ export default defineComponent({
     return () => {
       const { activeOrderBy, sortable } = props
       const { orders, nextTooltip } = sortable
-      const title = nextTooltip ? getNextTooltipTitle(locale.value, orders!, activeOrderBy) : undefined
+      const title = nextTooltip && getNextTooltipTitle(locale.value, orders!, activeOrderBy)
       const sortableTriggerNode = renderSortTrigger(mergedPrefixCls, orders!, activeOrderBy)
       return title ? <IxTooltip title={title}>{sortableTriggerNode}</IxTooltip> : sortableTriggerNode
     }
@@ -51,16 +51,13 @@ function renderSortTrigger(
   activeOrderBy?: TableColumnSortOrder,
 ) {
   const prefixCls = mergedPrefixCls.value
-
-  const upNode = orders!.includes('ascend') ? (
-    <IxIcon name="caret-up-filled" class={{ [`${prefixCls}-sortable-trigger-active`]: activeOrderBy === 'ascend' }} />
-  ) : undefined
-  const downNode = orders!.includes('descend') ? (
-    <IxIcon
-      name="caret-down-filled"
-      class={{ [`${prefixCls}-sortable-trigger-active`]: activeOrderBy === 'descend' }}
-    />
-  ) : undefined
+  const activeClassName = `${prefixCls}-sortable-trigger-active`
+  const upNode = orders!.includes('ascend') && (
+    <IxIcon name="caret-up-filled" class={activeOrderBy === 'ascend' ? activeClassName : undefined} />
+  )
+  const downNode = orders!.includes('descend') && (
+    <IxIcon name="caret-down-filled" class={activeOrderBy === 'descend' ? activeClassName : undefined} />
+  )
   return (
     <span class={`${prefixCls}-sortable-trigger`}>
       {upNode}

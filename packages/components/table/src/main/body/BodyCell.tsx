@@ -164,7 +164,7 @@ function renderExpandableChildren(
    * @deprecated customIcon
    */
   const { icon, customIcon, slots: columnSlots, indent } = expandable.value!
-  const { record, expanded, level, disabled } = props
+  const { record, expanded, level = 0, disabled } = props
   const onExpand = props.handleExpend!
   const style = {
     marginLeft: indent ? convertCssPixel(level * indent) : undefined,
@@ -173,19 +173,20 @@ function renderExpandableChildren(
     Logger.warn('components/table', '`customIcon` is deprecated,  please use `icon` in `slots` instead')
   }
   const iconRender = customIcon ?? columnSlots?.icon
+
   let iconNode: VNodeTypes | null
   if (disabled) {
     iconNode = null
   } else if (isFunction(iconRender)) {
-    iconNode = iconRender({ expanded: !!expanded, record, onExpand })
+    iconNode = iconRender({ expanded: !!expanded, record })
   } else if (isString(iconRender) && slots[iconRender]) {
-    iconNode = slots[iconRender]!({ expanded, record, onExpand })
+    iconNode = slots[iconRender]!({ expanded, record })
   } else {
-    iconNode = <IxIcon name={icon[expanded ? 1 : 0]} rotate={expanded ? 180 : -180} onClick={onExpand} />
+    iconNode = <IxIcon name={icon[expanded ? 1 : 0]} />
   }
 
   return (
-    <button class={`${prefixCls}-expandable-icon`} style={style}>
+    <button class={`${prefixCls}-expandable-trigger`} style={style} onClick={onExpand}>
       {iconNode}
     </button>
   )

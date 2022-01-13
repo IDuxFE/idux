@@ -40,14 +40,17 @@ export function useExpandable(props: TableProps, flattedColumns: ComputedRef<Tab
       return true
     }
 
-    const { disabled, customExpand } = expandable.value
+    /**
+     * @deprecated customExpand
+     */
+    const { disabled, customExpand, slots } = expandable.value
     const { record } = data
 
     if (disabled?.(record)) {
       return true
     }
 
-    return !(customExpand || (data.children && data.children.length > 0))
+    return !(customExpand || slots?.expand || (data.children && data.children.length > 0))
   }
 
   return { expandable, expandedRowKeys, setExpandedRowKeys, checkExpandDisabled, handleExpandChange }

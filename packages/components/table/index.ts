@@ -8,12 +8,13 @@
 import type { TableComponent } from './src/types'
 
 import Table from './src/Table'
-import { TableColumn } from './src/tableColumn'
+import { TableColumn } from './src/column'
+import { TABLE_TOKEN } from './src/token'
 
 const IxTable = Table as unknown as TableComponent
 const IxTableColumn = TableColumn
 
-export { IxTable, IxTableColumn }
+export { IxTable, IxTableColumn, TABLE_TOKEN }
 
 export type {
   TableInstance,
