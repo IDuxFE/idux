@@ -1,130 +1,109 @@
-import { MountingOptions, mount } from '@vue/test-utils'
+import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
 
-import IxImage from '../src/Image.vue'
+import Image from '../src/Image'
+import ImageViewer from '../src/ImageViewer'
 import { ImageProps } from '../src/types'
 
 describe('Image', () => {
-  const ImageMount = (options?: MountingOptions<Partial<ImageProps>>) => mount(IxImage, { ...options })
+  const ImageMount = (options?: MountingOptions<Partial<ImageProps>>) => {
+    const { props, ...rest } = options ?? {}
+    const src = '/icons/logo.svg'
 
-  renderWork(IxImage)
+    return mount(Image, { ...({ ...rest, props: { src, ...props } } as MountingOptions<ImageProps>) })
+  }
 
-  test('render src work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-    await wrapper.setProps({ src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/vue.png' })
-  })
-  test('render width work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        width: '100px',
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-    await wrapper.setProps({ width: '200px' })
-    expect(wrapper.find('img').attributes()['style']).toMatch('width: 200px')
-    await wrapper.setProps({ width: null })
+  renderWork<ImageProps>(Image, { props: { src: '/icons/logo.svg' } })
 
-    expect(wrapper.find('img').attributes()['style']).toMatch(`width: 100px`)
-  })
-  test('render height work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        height: '100px',
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
+  test('src work', async () => {
+    const testSrcA = '/a'
+    const testSrcB = '/b'
+    const wrapper = ImageMount({ props: { src: testSrcA } })
+    await flushPromises()
 
-    expect(wrapper.html()).toMatchSnapshot()
-    await wrapper.setProps({ height: '200px' })
-    expect(wrapper.find('img').attributes()['style']).toMatch('height: 200px')
-    await wrapper.setProps({ height: null })
-    expect(wrapper.find('img').attributes()['style']).toMatch('height: 100px')
-  })
-  test('render alt work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        alt: 'demo',
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
+    expect(wrapper.find('.ix-image-inner').attributes('src')).toBe(testSrcA)
 
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('img').attributes()['alt']).toEqual('demo')
-  })
-  test('render objectFit work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
+    await wrapper.setProps({ src: testSrcB })
 
-    expect(wrapper.html()).toMatchSnapshot()
-    await wrapper.setProps({ objectFit: 'fill' })
-    expect(wrapper.find('img').attributes()['style']).toMatch('fill')
+    expect(wrapper.find('.ix-image-inner').attributes('src')).toBe(testSrcB)
   })
 
-  test('render preview work', async () => {
-    const wrapper = ImageMount({
-      props: {
-        preview: true,
-        width: 200,
-        height: 200,
-        src: 'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg',
-      },
-    })
+  test('preview work', async () => {
+    const wrapper = ImageMount()
+    await flushPromises()
+    await wrapper.find('.ix-image-inner').trigger('load')
 
-    expect(wrapper.html()).toMatchSnapshot()
-    await wrapper.find('.ix-image-preview-is').trigger('click')
+    expect(wrapper.find('.ix-image-preview-wrapper').exists()).toBe(true)
 
-    expect(wrapper.find('.ix-image-preview').exists()).toBe(true)
-    await wrapper.find('.ix-rotate-left').trigger('click')
-    expect(wrapper.find('.ix-image-preview-img>img').attributes()['style']).toEqual(
-      'transform: scale3d(1, 1, 1) rotate(-90deg);',
-    )
-    await wrapper.find('.ix-rotate-right').trigger('click')
+    await wrapper.find('.ix-image-preview-wrapper').trigger('click')
 
-    expect(wrapper.find('.ix-image-preview-img>img').attributes()['style']).toEqual(
-      'transform: scale3d(1, 1, 1) rotate(0deg);',
-    )
-    await wrapper.find('.ix-zoom-in').trigger('click')
-    expect(wrapper.find('.ix-image-preview-img>img').attributes()['style']).toEqual(
-      'transform: scale3d(1.1, 1.1, 1) rotate(0deg);',
-    )
-    await wrapper.find('.ix-zoom-out').trigger('click')
-    expect(wrapper.find('.ix-image-preview-img>img').attributes()['style']).toEqual(
-      'transform: scale3d(1, 1, 1) rotate(0deg);',
-    )
+    expect(wrapper.findComponent(ImageViewer).props('visible')).toBe(true)
 
-    let i = 10
-    while (i) {
-      await wrapper.find('.ix-zoom-out').trigger('click')
-      i--
+    await wrapper.setProps({ preview: false })
+
+    expect(wrapper.find('.ix-image-preview-wrapper').exists()).toBe(false)
+  })
+
+  test('img attrs work', async () => {
+    const wrapper = ImageMount({ attrs: { alt: 'testAlt', width: '200' } })
+    await flushPromises()
+
+    expect(wrapper.find('.ix-image-inner').attributes('alt')).toBe('testAlt')
+    expect(wrapper.find('.ix-image-inner').attributes('width')).toBe('200')
+  })
+
+  test('hooks work', async () => {
+    const onLoad = jest.fn()
+    const onError = jest.fn()
+    const wrapper = ImageMount({ props: { onLoad, onError } })
+    await flushPromises()
+    await wrapper.find('.ix-image-inner').trigger('load')
+
+    expect(onLoad).toBeCalled()
+
+    await wrapper.find('.ix-image-inner').trigger('error')
+
+    expect(onError).toBeCalled()
+  })
+
+  test('imageViewerProps work', async () => {
+    const imageViewer = {
+      visible: true,
+      activeIndex: 0,
+      images: ['/a'],
+      zoom: [1, 2],
+      loop: false,
+      maskClosable: false,
+      target: 'ix-image-container',
+      'onUpdate:visible': () => {},
+      'onUpdate:activeIndex': () => {},
     }
-    expect(wrapper.find('.ix-zoom-out').attributes()['class']).toEqual(
-      'ix-tools-item ix-zoom-out ix-tools-item-disabled',
-    )
+    const wrapper = ImageMount({ props: { imageViewer } })
+    await flushPromises()
 
-    await wrapper.find('.ix-close').trigger('click')
-    expect(wrapper.find('ix-image-preview').exists()).toBe(false)
+    expect(wrapper.findComponent(ImageViewer).props()).toEqual(imageViewer)
   })
-  test('render fallback work', async () => {
-    const fallback =
-      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTI4cHgiIGhlaWdodD0iMTI4cHgiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA1OCAoODQ2NjMpIC0gaHR0cHM6Ly9za2V0Y2guY29tIC0tPgogICAgPHRpdGxlPjEyODwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxsaW5lYXJHcmFkaWVudCB4MT0iNTAlIiB5MT0iMCUiIHgyPSI1MCUiIHkyPSI5OS42Mjc4NTA1JSIgaWQ9ImxpbmVhckdyYWRpZW50LTEiPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjMDBBQ0ZGIiBvZmZzZXQ9IjAlIj48L3N0b3A+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMzMzY2RkYiIG9mZnNldD0iMTAwJSI+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IHgxPSI1MCUiIHkxPSIwJSIgeDI9IjUwJSIgeTI9IjEwMCUiIGlkPSJsaW5lYXJHcmFkaWVudC0yIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzFEQjgzRiIgb2Zmc2V0PSIwJSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjNzJEMTNEIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPGcgaWQ9IjEyOCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTQ0LjQ2NzMxMjYsNjIuMjMyMTcwNSBMNzAuMTI5ODAxNSw4My43NjU1NTU0IEM2MC4xODk3NTEyLDk1LjYxMTY0NiA0Mi41Mjg1OTQ2LDk3LjE1Njc5NyAzMC42ODI1MDQsODcuMjE2NzQ2NyBMMjguMjQ4MTQ5Miw4NS4xNzM4OTc1IEMyMS4zMTIxMTA4LDc5LjMwODkyOTQgMTQuMzM1NDQzOSw3My40NTQ4NzE4IDcuMzE4MTQ4NDYsNjcuNjExNzI0NiBMOS4yNDY1MTEyOSw2NS4zMTM1OTEzIEMxMy44NDgzODY0LDU5LjgyOTI5MDEgMjAuMzAzNzUwNyw1Ni44MTc3Nzk2IDI2LjkyNzcxNzYsNTYuNDI2NDY4MyBMMjguMzQ5MTA1Nyw1Ni4zODI2OTk1IEMzNC4wNDAwNjg2LDU2LjM2ODg1MDQgMzkuNzY2NDgzLDU4LjI4NzcwNjEgNDQuNDY3MzEyNiw2Mi4yMzIxNzA1IFoiIGlkPSLot6/lvoQiIGZpbGw9IiMyMDRFRDkiPjwvcGF0aD4KICAgICAgICA8cGF0aCBkPSJNOTUuNDM4MDk4NCw0NS4xMzQ1MDkgTDk3LjMzMTY2NTYsNDUuMjI3OTkzMiBMOTguNzAxMDU1OSw0NS4zNjI3MDcyIEwxMDAuNTE2MTI5LDQ1LjYyOTI5MTYgTDEwMS44OTEyODcsNDUuODk5NDE2NCBMMTAzLjQzNjU4NSw0Ni4yNzUwNzE5IEwxMDUuMTY5NDEsNDYuNzkwNDA1MSBMMTA2LjU4NzY2NSw0Ny4yODk1OTM3IEwxMDguMjEyNTY1LDQ3Ljk1MjAwNzQgTDEwOC45MzE3Niw0OC4yNzc2NDAxIEwxMDguOTMxNzYsNDguMjc3NjQwMSBMMTEwLjM1Mzg5OCw0OC45ODM2MzEgTDExMS44MDUxMjgsNDkuNzk0NjA0NSBMMTEzLjQ0MzE5OSw1MC44MzAxOTgxIEwxMTQuNjUzNDk2LDUxLjY4NTY5MTIgTDExNS44MjE1MjEsNTIuNTkyMTI3NSBMMTE3LjE4ODUzNyw1My43NjU3NjYgTDExOC40NzMyOTksNTQuOTk1MDg2NCBMMTE5LjUzMzEzLDU2LjExNTU4MDYgTDEyMC4wODg2Miw1Ni43NDY0NjgzIEwxMjAuMDg4NjIsNTYuNzQ2NDY4MyBMMTIxLjIwODAwMyw1OC4xMjIyMDA1IEwxMjIuMTMwNDY5LDU5LjM3NzQ1NiBMNzIuMjk3NDUzMyw5NC4yNzA5MDkyIEM2Ny41NzI1ODc4LDk3LjU3OTI5NTcgNjIuMTMzNTU1NCw5OS4zMTAyNzggNTYuNjY4NDkzMSw5OS40OTg0MDA0IEw1NS4wMjg4ODE3LDk5LjUwODU4NTggQzQ4LjQ3MjgxNzUsOTkuMzY0NDYwNyA0MS45NzgzNjIyLDk3LjAwMzU5MTYgMzYuNzM0NjE2NSw5Mi40ODU2NzA5IEwzMi43NjgwODE2LDg5LjAzMzg2MiBMMzIuNzY4MDgxNiw4OS4wMzM4NjIgTDI3LjYzNjUwMzksODQuNjQ2ODk0IEw3NS42Mzg0ODQ5LDUxLjE0MzQ2MzQgQzc3LjQ1OTY4NTEsNDkuODcyMzM5NyA3OS4zNjM0NjM3LDQ4LjgwNzg1NjQgODEuMzIxOTc2Miw0Ny45NDUwODIgTDgzLjI5NzM3NzksNDcuMTQ5NDc5OSBDODQuMzIzMzMxMSw0Ni43NzQwNzgyIDg1LjM2MTE5MzEsNDYuNDUxNzgxNSA4Ni40MDcyNTc2LDQ2LjE4MTg4MTUgTDg3Ljk4MjA0MzEsNDUuODE2MjQwMyBMODkuNjQ0MTg2Niw0NS41MTY1NyBMOTEuMzg1OTMwMyw0NS4yOTQ4NTUxIEw5My4wNTA0MjI4LDQ1LjE2OTM0MjMgQzkzLjg0NjY4MzIsNDUuMTI5Mjc1NyA5NC42NDMxMDY0LDQ1LjExNzc1ODggOTUuNDM4MDk4NCw0NS4xMzQ1MDkgWiIgaWQ9Iui3r+W+hCIgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0xKSI+PC9wYXRoPgogICAgICAgIDxwYXRoIGQ9Ik01MS4zODg4NTIsMzIuNDY5NDc1OSBMNjMuNjQ1NTYzMSw0Mi43NTQwNzc2IEM1OC42NzU1MzgsNDguNjc3MTIyOSA0OS44NDQ5NTk3LDQ5LjQ0OTY5ODQgNDMuOTIxOTE0NCw0NC40Nzk2NzMzIEwzMi44MTQyNywzNS4xNTkyNTMgTDMzLjc3ODQ1MTQsMzQuMDEwMTg2MyBDMzguMjE1OTczOCwyOC43MjE3NTMgNDYuMTAwNDE4NywyOC4wMzE5NTM0IDUxLjM4ODg1MiwzMi40Njk0NzU5IFoiIGlkPSLot6/lvoQiIGZpbGw9IiMwMzc4MkEiPjwvcGF0aD4KICAgICAgICA8cGF0aCBkPSJNNzIuMDY0NTA2MiwyNi4xMjg0NDA2IEw3My4yNjYzMDc5LDI2LjIyMjA0MTMgTDc0LjM3NzU0MTYsMjYuMzk3MDkgTDc1LjU3NjI3OTIsMjYuNjg0OTIyNCBMNzYuNDc4NTYyMywyNi45NzMxMDM2IEw3Ny41MTY0NTg5LDI3LjM4NjMzNDcgTDc3LjUxNjQ1ODksMjcuMzg2MzM0NyBMNzguMjAwNjU1MywyNy43MTA0NDczIEw3OS4zMDc1MTExLDI4LjMzMTQwODYgTDc5LjcwNDIsMjguNTg1OTgwNSBMODAuMjkxNTU3OCwyOC45OTc0NTY2IEw4MC44MDkzMjg3LDI5LjM5NzU4MjggTDgxLjIxODA3NjgsMjkuNzQwODE0MyBMODEuNzcyNzI0MywzMC4yNDk2ODA3IEw4Mi4yMTE2Mzk2LDMwLjY5MTk2MzIgTDgyLjIxMTYzOTYsMzAuNjkxOTYzMiBMODIuNjM0NzgxOCwzMS4xNTYxOTk0IEw4My4wOTIyMjcyLDMxLjcwNjIzMjEgTDgzLjYxOTAyNjMsMzIuNDEzNDQ1NSBMNjMuMTYzMzEwOCw0Ni43MzY2OTE3IEM2MC45ODg3ODEsNDguMjU5MzEzOSA1OC41MTE3ODE3LDQ5LjExMzY3NjggNTYuMDAwNjA2Myw0OS4zMTMzMzE2IEw1NC43NDM0MTI4LDQ5LjM1ODY2MjggQzUxLjM4OTkyNjQsNDkuMzM0Mzg5NyA0OC4wNTUxNzcxLDQ4LjE1MDIwNjEgNDUuMzc1MTE5NSw0NS44MzgyMzM0IEw0Mi4zNzc0OTk1LDQzLjI1MjMxMyBMNjMuMDcwNjgxNiwyOC43ODMyMDI2IEM2My42NzAxMjExLDI4LjM2NDA2MTggNjQuMjg5ODcxMywyNy45OTU2NDMzIDY0LjkyNDgzNTYsMjcuNjc3MDQ2OCBMNjUuOTUxNDUxMywyNy4yMTAyOTkxIEw2NS45NTE0NTEzLDI3LjIxMDI5OTEgTDY2LjU3MDYwOTYsMjYuOTczMjE1NyBMNjcuNzY3NzYyNywyNi42MDI1NDE2IEw2Ny43Njc3NjI3LDI2LjYwMjU0MTYgTDY4Ljk4MjU5NjQsMjYuMzM3MjA5MiBMNjkuNzk2ODcyMSwyNi4yMTg1ODE3IEw3MC4yMTY0MDg1LDI2LjE3NTQ3ODUgQzcwLjgzMjMzODgsMjYuMTIxMDkyMyA3MS40NDk2MzQ3LDI2LjEwNTYzNjEgNzIuMDY0NTA2MiwyNi4xMjg0NDA2IFoiIGlkPSLot6/lvoQiIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQtMikiPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+'
+
+  test('slots work', async () => {
     const wrapper = ImageMount({
-      props: {
-        fallback,
-        src: '',
+      slots: {
+        previewIcon: h('div', { class: 'slot-previewIcon' }),
+        placeholder: h('div', { class: 'slot-placeholder' }),
+        fallback: h('div', { class: 'slot-fallback' }),
       },
     })
-    await wrapper.find('img').trigger('error')
+    await flushPromises()
 
-    expect(wrapper.find('.ix-image-error').isVisible()).toBe(true)
+    expect(wrapper.find('.slot-placeholder').exists()).toBe(true)
+
+    await wrapper.find('.ix-image-inner').trigger('load')
+
+    expect(wrapper.find('.slot-previewIcon').exists()).toBe(true)
+
+    await wrapper.find('.ix-image-inner').trigger('error')
+
+    expect(wrapper.find('.slot-fallback').exists()).toBe(true)
   })
 })

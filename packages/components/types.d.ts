@@ -25,7 +25,7 @@ import type { FormComponent, FormItemComponent, FormWrapperComponent } from '@id
 import type { ColComponent, RowComponent } from '@idux/components/grid'
 import type { HeaderComponent } from '@idux/components/header'
 import type { IconComponent } from '@idux/components/icon'
-import type { ImageComponent } from '@idux/components/image'
+import type { ImageComponent, ImageViewerComponent } from '@idux/components/image'
 import type { InputComponent } from '@idux/components/input'
 import type { InputNumberComponent } from '@idux/components/input-number'
 import type {
@@ -102,6 +102,7 @@ declare module 'vue' {
     IxHeader: HeaderComponent
     IxIcon: IconComponent
     IxImage: ImageComponent
+    IxImageViewer: ImageViewerComponent
     IxInput: InputComponent
     IxInputNumber: InputNumberComponent
     IxLayout: LayoutComponent

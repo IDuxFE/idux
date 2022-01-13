@@ -1,43 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image render alt work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"demo\\">
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Image render height work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Image render objectFit work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Image render preview work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img ix-image-preview-is\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 200px; height: 200px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Image render src work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Image render width work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/idux.jpg\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
-</div>"
-`;
-
 exports[`Image render work 1`] = `
-"<div class=\\"ix-image\\"><img class=\\"ix-image-img\\" src=\\"\\" style=\\"width: 100px; height: 100px; object-fit: fill;\\" alt=\\"\\">
-  <!--v-if-->
+"<div class=\\"ix-image ix-image-loading ix-image-preview\\">
+  <div class=\\"ix-image-layer\\">
+    <!----><i class=\\"ix-icon ix-icon-loading ix-icon-spin ix-image-placeholder\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+    <!---->
+    <!---->
+  </div><img src=\\"/icons/logo.svg\\" class=\\"ix-image-inner ix-image-inner-hidden\\">
 </div>"
 `;

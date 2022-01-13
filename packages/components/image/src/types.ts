@@ -8,18 +8,34 @@
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
+import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ImageStatus = 'loading' | 'loaded' | 'failed'
 
+const zoomValidator = {
+  validator: (val: number[]) => val.length === 2,
+  msg: 'zoom only accepts the length of the array is 2',
+}
+
+export const imageViewerProps = {
+  visible: IxPropTypes.bool,
+  activeIndex: IxPropTypes.number,
+  images: IxPropTypes.array<string>().isRequired,
+  zoom: IxPropTypes.custom<number[]>(zoomValidator.validator, zoomValidator.msg),
+  loop: IxPropTypes.bool,
+  target: ɵPortalTargetDef,
+  maskClosable: IxPropTypes.bool,
+  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
+  'onUpdate:activeIndex': IxPropTypes.emit<(curIndex: number) => void>(),
+}
+
 export const imageProps = {
-  src: IxPropTypes.string.def(''),
-  width: IxPropTypes.oneOfType([String, Number]),
-  height: IxPropTypes.oneOfType([String, Number]),
-  preview: IxPropTypes.bool.def(false),
-  fallback: IxPropTypes.string,
-  alt: IxPropTypes.string.def(''),
-  objectFit: IxPropTypes.string.def('fill'),
+  src: IxPropTypes.string.isRequired,
+  preview: IxPropTypes.bool,
+  imageViewer: IxPropTypes.shape<ImageViewerProps>({ ...imageViewerProps, images: IxPropTypes.array<string>() }),
+  onLoad: IxPropTypes.emit<(e: Event) => void>(),
+  onError: IxPropTypes.emit<(e: Event) => void>(),
 }
 
 export type ImageProps = IxInnerPropTypes<typeof imageProps>
@@ -27,13 +43,16 @@ export type ImagePublicProps = IxPublicPropTypes<typeof imageProps>
 export type ImageComponent = DefineComponent<Omit<HTMLAttributes, keyof ImagePublicProps> & ImagePublicProps>
 export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
-export const imagePreviewProps = {
-  previewSrc: IxPropTypes.string.def(''),
-}
-
-export type ImagePreviewProps = IxInnerPropTypes<typeof imagePreviewProps>
-export type ImagePreviewPublicProps = IxPublicPropTypes<typeof imagePreviewProps>
-export type ImagePreviewComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof ImagePreviewPublicProps> & ImagePreviewPublicProps
+export type ImageViewerProps = IxInnerPropTypes<typeof imageViewerProps>
+export type ImageViewerPublicProps = IxPublicPropTypes<typeof imageViewerProps>
+export type ImageViewerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ImageViewerPublicProps> & ImageViewerPublicProps
 >
-export type ImagePreviewInstance = InstanceType<DefineComponent<ImagePreviewProps>>
+export type ImageViewerInstance = InstanceType<DefineComponent<ImageViewerProps>>
+
+// private
+export const imageViewerContentProps = {
+  mergedPrefixCls: IxPropTypes.string.isRequired,
+  ...imageViewerProps,
+}
+export type ImageViewerContentProps = IxInnerPropTypes<typeof imageViewerContentProps>

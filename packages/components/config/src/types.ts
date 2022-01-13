@@ -226,9 +226,14 @@ export interface CollapseConfig {
 }
 
 export interface ImageConfig {
-  width: string | number
-  height: string | number
-  fallback: string
+  preview: boolean
+}
+
+export interface ImageViewerConfig {
+  loop: boolean
+  maskClosable: boolean
+  zoom: number[]
+  target?: PortalTargetType
 }
 
 export interface NumFormatted {
@@ -437,6 +442,7 @@ export interface GlobalConfig {
   list: ListConfig
   collapse: CollapseConfig
   image: ImageConfig
+  imageViewer: ImageViewerConfig
   statistic: StatisticConfig
   table: TableConfig
   tooltip: TooltipConfig
