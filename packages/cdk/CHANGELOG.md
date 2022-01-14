@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-01-14)
+
+
+### Features
+
+* **cdk:forms:** add option to remove space ([#718](https://github.com/IDuxFE/idux/issues/718)) ([be43870](https://github.com/IDuxFE/idux/commit/be43870b3e013ba2009a52f6d77ac23abdbab199)), closes [#553](https://github.com/IDuxFE/idux/issues/553)
+* **cdk:scroll:** show scrollbar when mouseenter ([#722](https://github.com/IDuxFE/idux/issues/722)) ([cfa48ce](https://github.com/IDuxFE/idux/commit/cfa48ce257ad5c2be3c2c6754d0ae751fdf99dd7))
+
+
+
+
+
 # [1.0.0-alpha.3](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-12-30)
 
 

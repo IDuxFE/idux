@@ -1,6 +1,6 @@
 {
   "name": "@idux/site",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "private": true,
   "description": "A website for @idux",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@idux/cdk": "^1.0.0-alpha.3",
-    "@idux/components": "^1.0.0-alpha.3",
-    "@idux/pro": "^1.0.0-alpha.3",
+    "@idux/cdk": "^1.0.0-alpha.4",
+    "@idux/components": "^1.0.0-alpha.4",
+    "@idux/pro": "^1.0.0-alpha.4",
     "codesandbox": "^2.2.3"
   }
 }

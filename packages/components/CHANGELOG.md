@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-01-14)
+
+
+### Bug Fixes
+
+* **comp:image:** fix image test error ([#723](https://github.com/IDuxFE/idux/issues/723)) ([329fc2c](https://github.com/IDuxFE/idux/commit/329fc2c3bc3b15f85f4994f51c4da0343df5d8d0))
+* **comp:select:** fix option style ([#704](https://github.com/IDuxFE/idux/issues/704)) ([45a9763](https://github.com/IDuxFE/idux/commit/45a9763101d1ccaebb6158ed534442000e4030dc))
+* **radio,checkbox:** fix checkbox and radio aligin ([#692](https://github.com/IDuxFE/idux/issues/692)) ([cafa7ba](https://github.com/IDuxFE/idux/commit/cafa7ba78fb094c705e73d72f5f618720f644b1c))
+
+
+### Code Refactoring
+
+* **comp:menu:** use customXxx instead of slots ([#725](https://github.com/IDuxFE/idux/issues/725)) ([f88ca6d](https://github.com/IDuxFE/idux/commit/f88ca6db43b1eba493cda16b91a16062a654ce0a))
+* **comp:select:** use customLabel instead of slots ([#726](https://github.com/IDuxFE/idux/issues/726)) ([3a34fc4](https://github.com/IDuxFE/idux/commit/3a34fc44d759f4f0c835efe51b406c3e2fd1efa4))
+
+
+### Features
+
+* **comp:dropdown:** support hideOnClick ([#715](https://github.com/IDuxFE/idux/issues/715)) ([fbbe478](https://github.com/IDuxFE/idux/commit/fbbe4786b3f47b1924c9d7b404306f424111fbd4))
+* **comp:footer:** swap confirm and cancel btn ([#714](https://github.com/IDuxFE/idux/issues/714)) ([78f3e06](https://github.com/IDuxFE/idux/commit/78f3e064faca07b025ea327a6ca5bb65c8809fec))
+* **comp:image:** add image and imageViewer components ([#706](https://github.com/IDuxFE/idux/issues/706)) ([8b5212b](https://github.com/IDuxFE/idux/commit/8b5212bc1287e5c2b3cedd4e1fe556cb707eba0c)), closes [#698](https://github.com/IDuxFE/idux/issues/698)
+* **comp:menu:** type of MenuItem is optional ([#712](https://github.com/IDuxFE/idux/issues/712)) ([5d1490a](https://github.com/IDuxFE/idux/commit/5d1490ae407ac59a7e1f863ad8a3db256f8c3b91))
+* **comp:modal:** add padding to padding next icon ([#701](https://github.com/IDuxFE/idux/issues/701)) ([e663401](https://github.com/IDuxFE/idux/commit/e66340144ced3a04c60e93aaaf5cd7aa1585930d))
+* **comp:slider:** unify trigger conditions for change events ([#721](https://github.com/IDuxFE/idux/issues/721)) ([a3209fa](https://github.com/IDuxFE/idux/commit/a3209fa8e1194869b9df0aec3324e135c332f15c)), closes [#696](https://github.com/IDuxFE/idux/issues/696)
+* **comp:table:** add TableColumn component ([#702](https://github.com/IDuxFE/idux/issues/702)) ([eb979a6](https://github.com/IDuxFE/idux/commit/eb979a688f157eec0cd10d96df20a60980065717)), closes [#650](https://github.com/IDuxFE/idux/issues/650)
+* **comp:table:** redesign api of filter ([#720](https://github.com/IDuxFE/idux/issues/720)) ([c8078ea](https://github.com/IDuxFE/idux/commit/c8078ea5915be0326463b6beabf766e49d43c413))
+* **comp:table:** redesign TableColumn and support children in template ([#708](https://github.com/IDuxFE/idux/issues/708)) ([356faaf](https://github.com/IDuxFE/idux/commit/356faaf708624e1e0a918b08cba634a42ad1c2fe))
+* **comp:table:** use `menus` instead of `options` ([#709](https://github.com/IDuxFE/idux/issues/709)) ([71185fc](https://github.com/IDuxFE/idux/commit/71185fcdd8e5023c3629dc4ffb5771f891e92eb2))
+* **table:** modify table functions and style ([#672](https://github.com/IDuxFE/idux/issues/672)) ([05e6399](https://github.com/IDuxFE/idux/commit/05e639922eae342e557a6c142c7aa296d81c7f72))
+
+
+### BREAKING CHANGES
+
+* **comp:select:** `slots` of `SelectOption` is deprecated, please use customLabel instead
+* **comp:menu:** `slots` of `MenuData` is deprecated,  please use `customIcon`, `customLabel` and
+`customSuffix` instead
+* **comp:table:** `options` in `TableColumnSelectable` was deprecated, please use `menus` instead
+* **comp:table:** `customRender`, `customTtile`, `customIcon` and `customExpand` have been
+deprecated, please use `slots` instead
+
+
+
+
+
 # [1.0.0-alpha.3](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-12-30)
 
 
