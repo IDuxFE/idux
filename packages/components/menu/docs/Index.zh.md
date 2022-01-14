@@ -94,10 +94,21 @@ export interface MenuClickOptions {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `type` | 菜单类型 | `'divider'` | - | - | 必传 |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
-| `children` | 子菜单数据 | `MenuData[] \| #default` | - | - | - |
-| `icon` | 菜单图标| `string \| VNode \| #icon` | - | - |
-| `label` | 菜单文本 | `string \| #label`  | - | - |
+| `additional` | 菜单的额外配置 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
+
+#### MenuSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+|  --- | --- | --- | --- |
+| `itemIcon` | 自定菜单项的图标 | `MenuItemProps & { selected: boolean }` | - |
+| `itemLabel` | 自定菜单项的文本 | `MenuItemProps & { selected: boolean }` | - |
+| `itemGroupIcon` | 自定菜单组的图标 | `MenuItemGroupProps` | - |
+| `itemGroupLabel` | 自定菜单组的文本 | `MenuItemGroupProps` | - |
+| `subIcon` | 自定义子菜单的图标 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
+| `subLabel` | 自定义子菜单的文本 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
+| `subLabel` | 自定义子菜单的后缀 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
 
 ### IxMenuItem
 

@@ -72,7 +72,7 @@ export interface MenuItemProps extends MenuCommonProps {
   customIcon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
   customLabel?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
 }
-export type MenuItemPublicProps = Omit<MenuItemProps, 'type' | 'additional' | 'slots'>
+export type MenuItemPublicProps = Omit<MenuItemProps, 'type' | 'additional'>
 export type MenuItemComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemPublicProps> & MenuItemPublicProps
 >
@@ -95,7 +95,7 @@ export interface MenuItemGroupProps extends MenuCommonProps {
   customIcon?: string | ((data: MenuItemGroupProps) => VNodeChild)
   customLabel?: string | ((data: MenuItemGroupProps) => VNodeChild)
 }
-export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type' | 'additional' | 'slots'>
+export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type' | 'additional'>
 export type MenuItemGroupComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemGroupPublicProps> & MenuItemGroupPublicProps
 >
@@ -124,7 +124,7 @@ export interface MenuSubProps extends MenuCommonProps {
   customSuffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
 
-export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional' | 'slots'>
+export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional'>
 export type MenuSubComponent = FunctionalComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
 
 export interface MenuDividerProps {

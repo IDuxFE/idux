@@ -7,9 +7,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { SelectOption } from '@idux/components/select'
+import { SelectData } from '@idux/components/select'
 
-const options: SelectOption[] = [
+const options: SelectData[] = [
   { key: 1, label: 'GitHub', value: 'github' },
   { key: 2, label: 'Gitlab', value: 'gitlab' },
   { key: 3, label: 'Chrome', value: 'chrome' },

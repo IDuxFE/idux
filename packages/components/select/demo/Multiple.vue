@@ -5,9 +5,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { SelectOption } from '@idux/components/select'
+import { SelectData } from '@idux/components/select'
 
-const options: SelectOption[] = []
+const options: SelectData[] = []
 
 for (let index = 0; index < 20; index++) {
   const prefix = index > 9 ? 'B' : 'A'

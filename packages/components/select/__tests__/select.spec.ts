@@ -10,7 +10,7 @@ import Select from '../src/Select'
 import Content from '../src/content/Content'
 import Option from '../src/content/Option'
 import { SelectOption as SelectOptionComponent, SelectOptionGroup as SelectOptionGroupComponent } from '../src/option'
-import { SelectOption, SelectProps } from '../src/types'
+import { SelectData, SelectProps } from '../src/types'
 
 describe('Select', () => {
   describe('single work', () => {
@@ -316,7 +316,7 @@ describe('Select', () => {
     })
 
     test('searchFilter work', async () => {
-      const searchFilter = (searchValue: string, option: SelectOption) => searchValue === option.value
+      const searchFilter = (searchValue: string, option: SelectData) => searchValue === option.value
       const wrapper = SelectMount({ props: { open: true, searchable: true, searchFilter } })
 
       expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
@@ -361,7 +361,7 @@ describe('Select', () => {
     })
 
     test('virtual work', async () => {
-      const options: SelectOption[] = []
+      const options: SelectData[] = []
 
       for (let index = 0; index < 100; index++) {
         const value = `${index.toString(36)}${index}`
@@ -379,7 +379,7 @@ describe('Select', () => {
   })
 
   describe('multiple work', () => {
-    const defaultOptions: SelectOption[] = []
+    const defaultOptions: SelectData[] = []
     for (let index = 0; index < 20; index++) {
       const prefix = index > 9 ? 'B' : 'A'
       defaultOptions.push({ key: index, label: prefix + index, value: index, disabled: index % 3 === 0 })
@@ -493,7 +493,7 @@ describe('Select', () => {
         </Select>`,
           setup() {
             const value = ref('tom')
-            const options: SelectOption[] = [
+            const options: SelectData[] = [
               { key: '01', label: 'Tom', value: 'tom' },
               { key: '02', label: 'Jerry', value: 'jerry' },
               { key: '03', label: 'Speike', value: 'speike', disabled: true },

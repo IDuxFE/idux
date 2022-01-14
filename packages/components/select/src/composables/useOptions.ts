@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SelectFilterFn, SelectOption, SelectProps } from '../types'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { SelectData, SelectFilterFn, SelectProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { SelectConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, Slots, VNode } from 'vue'
@@ -25,7 +27,7 @@ export interface MergedOption {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any
   disabled?: boolean
-  rawOption: SelectOption
+  rawOption: SelectData
   type?: 'group' | 'grouped'
   parentKey?: VKey
 }
@@ -72,7 +74,7 @@ export function useFlattedOptions(
   })
 }
 
-function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions: SelectOption[]) {
+function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions: SelectData[]) {
   const { childrenKey = config.childrenKey, labelKey = config.labelKey, valueKey = config.valueKey } = props
 
   const mergedOptions: MergedOption[] = []
@@ -80,7 +82,7 @@ function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions:
   originalOptions.forEach((item, index) => {
     const { key } = item
     const label = item[labelKey]
-    const children = item[childrenKey] as SelectOption[]
+    const children = item[childrenKey] as SelectData[]
 
     if (children && children.length > 0) {
       const groupKey = key ?? index
@@ -113,14 +115,17 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
   const mergedOptions: Array<MergedOption> = []
 
   flattenNode(nodes, { key: filterKeys }).forEach((node, index) => {
-    const { type, children: slots, props } = node as VNode & { children: Slots }
+    const type = node.type as any
+    const slots = node.children ?? ({} as any)
+    const props = node.props ?? ({} as any)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const isOption = (type as any)[optionKey]
     if (isOption) {
-      const { key, disabled, label, value, ...additional } = props || {}
+      const { key, disabled, label, value, ...additional } = props
+      const { label: customLabel, default: customLabel2 } = slots
       // <IxSelectOption disabled /> => disabled = ''
       const _disabled = disabled || disabled === ''
-      const rawOption = { key, disabled: _disabled, label, value, additional, slots }
+      const rawOption = { key, disabled: _disabled, label, value, additional, customLabel: customLabel ?? customLabel2 }
       const option: MergedOption = {
         key: key ?? `${isSymbol(parentKey) ? String(parentKey) : parentKey}-${index}`,
         label,
@@ -133,18 +138,19 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
 
       mergedOptions.push(option)
     } else {
-      const { key, label, ...additional } = props || {}
-      const children = convertOptions(slots.default?.(), key, true)
-      const rawOption = { key, label, children, additional }
+      const { key, label, children, ...additional } = props
+      const { label: customLabel, default: defaultSlot } = slots
+      const _children = children ?? convertOptions(defaultSlot?.(), key, true)
+      const rawOption = { key, label, children: _children, additional, customLabel }
       mergedOptions.push({ key: key ?? index, label, type: 'group', rawOption })
-      mergedOptions.push(...children)
+      mergedOptions.push(..._children)
     }
   })
 
   return mergedOptions
 }
 
-const defaultFilter: SelectFilterFn = (searchValue: string, option: SelectOption): boolean => {
+const defaultFilter: SelectFilterFn = (searchValue: string, option: SelectData): boolean => {
   return option.label?.toLowerCase().includes(searchValue.toLowerCase()) ?? false
 }
 

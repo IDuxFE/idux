@@ -29,7 +29,7 @@ order: 0
 | `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
-| `options` | 选项列表，可以取代 `IxSelectOption` | `SelectOption[]` | - | - | 推荐使用此配置替换 `template`, 性能会更好 |
+| `options` | 选项列表 | `SelectData[]` | - | - | 推荐使用此配置替换 `default` 插槽, 性能会更好 |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
@@ -42,37 +42,51 @@ order: 0
 | `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
-| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
 
 ```ts
-export interface SelectOption {
-  additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    class?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    style?: any
-    [key: string]: unknown
-  }
-  disabled?: boolean
-  key?: VKey
-  label?: string
-  options?: SelectOption[]
-  slots?: Slots | Record<string, (...args: any[]) => VNode>
-  value?: any
-  [key: string]: any
-}
+export type SelectData = SelectOption | SelectOptionGroup
 
-export type SelectFilterFn = (searchValue: string, selectOption: SelectOptionProps) => boolean
+export type SelectFilterFn = (searchValue: string, data: SelectData) => boolean
 ```
+
+#### SelectCommonProps
+
+`SelectData` 的通用属性
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 不传时使用 `index` 代替 |
+| `additional` | 选项的扩展属性 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
+| `label` | 选项的文本 | `string` | - | - | - |
+
+#### SelectOptionProps
+
+继承自 `SelectCommonProps`
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `disabled` | 是否禁用 | `boolean` | `false` | - | - |
+| `value` | option 的值 | `string \| number \| object` | - | - | - |
+| `customLabel` | 自定义文本内容 | `string \| ((data: SelectOptionProps) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+
+#### SelectOptionGroupProps
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `children` | 子选项 | `SelectOptionProps[]` | - | - | - |
+| `customLabel` | 自定义文本内容 | `string \| ((data: SelectOptionGroupProps) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 #### SelectSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 选项内容 | - | - |
-|  `label` | 自定义选中的标签 | `option: SelectOption` |  |
-|  `maxLabel` | 自定义超出最多显示多少个标签的内容 | `options: SelectOption[]` | 参数为超出的数组 |
+|  `label` | 自定义选中的标签 | `data: SelectOption` |  |
+|  `maxLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
+|  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
+|  `optionGroupLabel` | 自定义选项组的文本 | `data: SelectOptionGroup` | - |
 
 #### SelectMethods
 
@@ -84,24 +98,8 @@ export type SelectFilterFn = (searchValue: string, selectOption: SelectOptionPro
 
 ### IxSelectOption
 
-#### SelectOptionProps
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `label` | 显示的文本 | `string \| #default` | - | - | - |
-| `value` | option 的值 | `string \| number \| object` | - | - | - |
+在 `template` 中设置 `SelectOptionProps`。
 
 ### IxSelectOptionGroup
 
-#### SelectOptionGroupProps
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `label` | 分组名 | `string \| #label` | - | - | 必填项 |
-
-#### SelectOptionGroupSlots
-
-| 名称 | 说明 | 参数类型 | 备注 |
-|  -- | -- | -- | -- |
-|  `default` | 选项内容 | - | - |
+在 `template` 中设置 `SelectOptionGroupProps`。

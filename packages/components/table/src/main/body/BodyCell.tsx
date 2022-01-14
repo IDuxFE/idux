@@ -139,7 +139,7 @@ function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) 
   const { record, rowIndex, column } = props
   const { customRender, customCell } = column
   if (__DEV__ && customRender) {
-    Logger.warn('components/table', '`customRender` is deprecated,  please use `customCell` instead')
+    Logger.warn('components/table', '`customRender` is deprecated, please use `customCell` instead')
   }
 
   const cellRender = customRender ?? customCell

@@ -11,29 +11,11 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes, Slots, VNode, VNodeTypes } from 'vue'
+import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNode, VNodeChild, VNodeTypes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-
-export interface SelectOption {
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-  disabled?: boolean
-  key?: VKey
-  label?: string
-  children?: SelectOption[]
-  slots?: Slots | Record<string, (...args: any[]) => VNode>
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  value?: string | number | object
-
-  [key: string]: any
-}
-export type SelectFilterFn = (searchValue: string, option: SelectOption) => boolean
 
 const defaultCompareWith = (o1: any, o2: any) => o1 === o2
 
@@ -54,7 +36,7 @@ export const selectProps = {
   multiple: IxPropTypes.bool.def(false),
   multipleLimit: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
   labelKey: IxPropTypes.string,
-  options: IxPropTypes.array<SelectOption>(),
+  options: IxPropTypes.array<SelectData>(),
   overlayClassName: IxPropTypes.string,
   overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
   placeholder: IxPropTypes.string,
@@ -81,7 +63,7 @@ export const selectProps = {
   onInput: IxPropTypes.emit<(evt: Event) => void>(),
   onSearch: IxPropTypes.emit<(searchValue: string) => void>(),
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleOptions: SelectOption[]) => void>(),
+  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>(),
   onScrolledBottom: IxPropTypes.emit<() => void>(),
 
   // private
@@ -102,21 +84,40 @@ export type SelectComponent = DefineComponent<
 >
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export const selectOptionProps = {
-  disabled: IxPropTypes.bool.def(false),
-  label: IxPropTypes.string,
-  value: IxPropTypes.oneOfType([String, Number, Object]).isRequired,
+export interface SelectCommonProps {
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+  key?: VKey
+  label?: string
+  [key: string]: any
 }
 
-export type SelectOptionProps = IxInnerPropTypes<typeof selectOptionProps>
-export type SelectOptionPublicProps = IxPublicPropTypes<typeof selectOptionProps>
-
-export const selectOptionGroupProps = {
-  label: IxPropTypes.string,
+export interface SelectOptionProps extends SelectCommonProps {
+  disabled?: boolean
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  value?: string | number | object
+  customLabel?: string | ((data: SelectOptionProps) => VNodeChild)
 }
+export type SelectOptionPublicProps = Omit<SelectOptionProps, 'additional'>
+export type SelectOptionComponent = FunctionalComponent<
+  Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
+>
 
-export type SelectOptionGroupProps = IxInnerPropTypes<typeof selectOptionGroupProps>
-export type SelectOptionGroupPublicProps = IxPublicPropTypes<typeof selectOptionGroupProps>
+export interface SelectOptionGroupProps extends SelectCommonProps {
+  children?: SelectOptionProps[]
+  customLabel?: string | ((data: SelectOptionGroupProps) => VNodeChild)
+}
+export type SelectOptionGroupPublicProps = Omit<SelectOptionGroupProps, 'additional'>
+export type SelectOptionGroupComponent = FunctionalComponent<
+  Omit<HTMLAttributes, keyof SelectOptionGroupPublicProps> & SelectOptionGroupPublicProps
+>
+
+export type SelectData = SelectOptionProps | SelectOptionGroupProps
+
+export type SelectFilterFn = (searchValue: string, data: SelectData) => boolean
 
 // private
 export const selectorProps = {
@@ -130,13 +131,13 @@ export const optionProps = {
   index: IxPropTypes.number.isRequired,
   label: IxPropTypes.string,
   type: IxPropTypes.oneOf(['grouped', 'group']),
-  rawOption: IxPropTypes.object<SelectOption>().isRequired,
+  rawOption: IxPropTypes.object<SelectOptionProps>().isRequired,
   value: IxPropTypes.oneOfType([String, Number, Object]),
 }
 export type OptionProps = IxInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
   label: IxPropTypes.string,
-  rawOption: IxPropTypes.object<SelectOption>().isRequired,
+  rawOption: IxPropTypes.object<SelectOptionGroupProps>().isRequired,
 }
 export type OptionGroupProps = IxInnerPropTypes<typeof optionGroupProps>

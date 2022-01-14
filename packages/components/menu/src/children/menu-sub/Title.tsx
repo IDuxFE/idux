@@ -52,7 +52,7 @@ export default defineComponent({
       if (__DEV__ && (slots.icon || slots.label || slots.suffix)) {
         Logger.warn(
           'components/menu',
-          '`slots` of `MenuSub` is deprecated,  please use `customIcon`, `customLabel` and `customSuffix` instead',
+          '`slots` of `MenuSub` is deprecated, please use `customIcon`, `customLabel` and `customSuffix` instead',
         )
       }
       const iconRender = customIcon ?? slots.icon ?? 'subIcon'

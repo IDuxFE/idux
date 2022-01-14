@@ -8,9 +8,9 @@ import { VNode, h, ref } from 'vue'
 import { IxButton } from '@idux/components/button'
 import { IxDivider } from '@idux/components/divider'
 import { IxInput } from '@idux/components/input'
-import { SelectOption } from '@idux/components/select'
+import { SelectData } from '@idux/components/select'
 
-const options = ref<SelectOption[]>([
+const options = ref<SelectData[]>([
   { key: 1, label: 'Tom', value: 'tom' },
   { key: 2, label: 'Jerry', value: 'jerry' },
   { key: 3, label: 'Speike', value: 'speike' },
