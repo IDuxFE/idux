@@ -9,6 +9,7 @@ import { computed, defineComponent, inject, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { Logger } from '@idux/cdk/utils'
 import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../composables/usePaddingLeft'
@@ -40,10 +41,17 @@ export default defineComponent({
     }
 
     return () => {
-      const { additional, icon, label, children, slots = {} } = props.data
-
-      const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
+      const { additional, icon, label, children, slots = {}, customIcon, customLabel } = props.data
+      if (__DEV__ && (slots.icon || slots.label)) {
+        Logger.warn(
+          'components/menu',
+          '`slots` of `MenuItemGroup` is deprecated,  please use `customIcon` and `customLabel` instead',
+        )
+      }
+      const iconRender = customIcon ?? slots.icon ?? 'itemGroupIcon'
+      const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
+      const labelRender = customLabel ?? slots.label ?? 'itemGroupLabel'
+      const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
 
       const slotProps = props.data
       const iconNode = coverIcon(iconSlot, slotProps, icon)

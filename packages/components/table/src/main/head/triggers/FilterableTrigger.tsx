@@ -29,27 +29,6 @@ export default defineComponent({
     const multiple = computed(() => props.filterable.multiple ?? config.columnBase.filterable.multiple)
     const footer = computed(() => props.filterable.footer ?? config.columnBase.filterable.footer)
 
-    const labelRender = (item: MenuItemProps & { selected: boolean }) => {
-      const prefixCls = `${mergedPrefixCls.value}-filterable-menu-label`
-      const Node = multiple.value ? IxCheckbox : IxRadio
-      return (
-        <span class={prefixCls}>
-          {<Node checked={item.selected} disabled={item.disabled} />}
-          <span class={`${prefixCls}-content`}>{item.label}</span>
-        </span>
-      )
-    }
-
-    const mergedMenus = computed(() => {
-      return props.filterable.menus.map(item => {
-        const { type } = item
-        if ((!type || type === 'item') && (!item.slots || !item.slots.label)) {
-          return { ...item, slots: { label: labelRender, ...item.slots } }
-        }
-        return item
-      })
-    })
-
     // eslint-disable-next-line vue/no-setup-props-destructure
     const initSelectedKeys = props.activeFilterBy
     const [selectedKeys, setSelectedKeys] = useState(() => initSelectedKeys)
@@ -75,6 +54,33 @@ export default defineComponent({
       setSelectedKeys(initSelectedKeys)
     }
 
+    const customLabel = (item: MenuItemProps & { selected: boolean }) => {
+      const prefixCls = `${mergedPrefixCls.value}-filterable-menu-label`
+      const Node = multiple.value ? IxCheckbox : IxRadio
+      return (
+        <span class={prefixCls}>
+          {<Node checked={item.selected} disabled={item.disabled} />}
+          <span class={`${prefixCls}-content`}>{item.label}</span>
+        </span>
+      )
+    }
+
+    const renderOverlay = () => {
+      const children: VNodeChild[] = []
+      const { customMenu, menus } = props.filterable
+      if (isFunction(customMenu)) {
+        children.push(customMenu())
+      } else if (isString(customMenu) && slots[customMenu]) {
+        children.push(slots[customMenu]!())
+      } else {
+        children.push(renderMenu(menus, multiple, selectedKeys, setSelectedKeys, customLabel))
+      }
+      if (footer.value) {
+        children.push(renderFooter(locale, mergedPrefixCls, handleConfirm, handleReset))
+      }
+      return children
+    }
+
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-filterable-trigger`
       return normalizeClass({
@@ -82,22 +88,6 @@ export default defineComponent({
         [`${prefixCls}-active`]: props.activeFilterBy.length > 0,
       })
     })
-
-    const renderOverlay = () => {
-      const children: VNodeChild[] = []
-      const { customMenu } = props.filterable
-      if (isFunction(customMenu)) {
-        children.push(customMenu())
-      } else if (isString(customMenu) && slots[customMenu]) {
-        children.push(slots[customMenu]!())
-      } else {
-        children.push(renderMenu(mergedMenus, multiple, selectedKeys, setSelectedKeys))
-      }
-      if (footer.value) {
-        children.push(renderFooter(locale, mergedPrefixCls, handleConfirm, handleReset))
-      }
-      return children
-    }
 
     const renderTrigger = () => {
       const { customTrigger } = props.filterable
@@ -129,19 +119,21 @@ export default defineComponent({
 })
 
 const renderMenu = (
-  mergedMenus: ComputedRef<MenuData[]>,
+  menus: MenuData[],
   multiple: ComputedRef<boolean>,
   selectedKeys: ComputedRef<VKey[]>,
   setSelectedKeys: (value: VKey[]) => void,
+  customLabel: (item: MenuItemProps & { selected: boolean }) => VNodeChild,
 ) => {
   const menuProps: MenuProps = {
-    dataSource: mergedMenus.value,
+    dataSource: menus,
     multiple: multiple.value,
     selectable: true,
     selectedKeys: selectedKeys.value,
     'onUpdate:selectedKeys': setSelectedKeys,
   }
-  return <IxMenu {...menuProps} />
+  const slots = { itemLabel: customLabel }
+  return <IxMenu v-slots={slots} {...menuProps} />
 }
 
 const renderFooter = (

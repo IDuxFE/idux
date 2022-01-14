@@ -1,10 +1,13 @@
 <template>
   <IxMenu :dataSource="dataSource" style="width: 256px">
-    <template #label="item">
-      <span style="color: red">{{ item.label }} with slot</span>
+    <template #itemLabel="{ label }">
+      <span style="color: red">{{ label }} with slot</span>
     </template>
-    <template #subIcon="item">
-      <IxIcon :name="item.expanded ? 'menu-fold' : 'menu-unfold'" style="color: red"></IxIcon>
+    <template #subIcon="{ expanded }">
+      <IxIcon :name="expanded ? 'menu-fold' : 'menu-unfold'"></IxIcon>
+    </template>
+    <template #subLabel="{ label }">
+      <span>{{ label }} with slot</span>
     </template>
   </IxMenu>
 </template>
@@ -16,25 +19,28 @@ import { IxIcon } from '@idux/components/icon'
 import { MenuData } from '@idux/components/menu'
 
 const dataSource: MenuData[] = [
-  { key: 'item1', icon: 'home', label: 'Item 1', slots: { label: 'label' } },
+  { key: 'item1', icon: 'home', label: 'Item 1' },
   {
     key: 'item2',
     label: 'Item 2',
-    slots: { label: item => h('a', item.label), icon: () => h(IxIcon, { name: 'mail' }) },
+    customIcon: () => h(IxIcon, { name: 'mail' }),
+    customLabel: item => h('a', `${item.label} with customLabel`),
   },
   { type: 'divider', key: 'divider1' },
+
   {
     type: 'sub',
     key: 'sub1',
     label: 'Menu Sub 1',
-    slots: { label: 'label', icon: 'subIcon' },
+    customIcon: () => h(IxIcon, { name: 'setting' }),
+    customLabel: item => h('a', `${item.label} with customLabel`),
     children: [
       {
         type: 'itemGroup',
         key: 'itemGroup1',
         label: 'Item Group 1',
         children: [
-          { key: 'item4', label: 'Item 4', slots: { label: 'label' } },
+          { key: 'item4', label: 'Item 4' },
           { key: 'item5', label: 'Item 5' },
         ],
       },
@@ -44,7 +50,7 @@ const dataSource: MenuData[] = [
         key: 'sub2',
         label: 'Menu Sub 2',
         children: [
-          { key: 'item6', label: 'Item 6', slots: { label: 'label' } },
+          { key: 'item6', label: 'Item 6' },
           { key: 'item7', label: 'Item 7' },
         ],
       },
@@ -63,10 +69,9 @@ const dataSource: MenuData[] = [
     type: 'sub',
     key: 'sub4',
     label: 'Menu Sub 4',
-    slots: { label: 'label', icon: 'subIcon' },
     children: [
       { key: 'item10', label: 'Item 10' },
-      { key: 'item11', label: 'Item 911' },
+      { key: 'item11', label: 'Item 11' },
     ],
   },
 ]

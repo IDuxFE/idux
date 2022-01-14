@@ -65,7 +65,12 @@ export interface MenuItemProps extends MenuCommonProps {
   disabled?: boolean
   icon?: string | VNode
   label?: string
+  /**
+   * @deprecated please use `customIcon` and `customLabel` instead'
+   */
   slots?: MenuItemSlots
+  customIcon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
+  customLabel?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
 }
 export type MenuItemPublicProps = Omit<MenuItemProps, 'type' | 'additional' | 'slots'>
 export type MenuItemComponent = FunctionalComponent<
@@ -83,7 +88,12 @@ export interface MenuItemGroupProps extends MenuCommonProps {
   children?: MenuData[]
   icon?: string | VNode
   label?: string
+  /**
+   * @deprecated please use `customIcon` and `customLabel` instead'
+   */
   slots?: MenuItemGroupSlots
+  customIcon?: string | ((data: MenuItemGroupProps) => VNodeChild)
+  customLabel?: string | ((data: MenuItemGroupProps) => VNodeChild)
 }
 export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type' | 'additional' | 'slots'>
 export type MenuItemGroupComponent = FunctionalComponent<
@@ -96,6 +106,7 @@ export interface MenuSubSlots {
   label?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
   suffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
+
 export interface MenuSubProps extends MenuCommonProps {
   type: 'sub'
   children?: MenuData[]
@@ -104,7 +115,13 @@ export interface MenuSubProps extends MenuCommonProps {
   label?: string
   offset?: [number, number]
   suffix?: string
+  /**
+   * @deprecated please use `customIcon`, `customLabel` and `customSuffix` instead'
+   */
   slots?: MenuSubSlots
+  customIcon?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
+  customLabel?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
+  customSuffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
 
 export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional' | 'slots'>
