@@ -8,7 +8,7 @@ import { h } from 'vue'
 import { MenuData } from '@idux/components/menu'
 
 const dataSource: MenuData[] = [
-  { key: 'item1', icon: 'home', slots: { label: () => h('a', 'Item 1') } },
+  { key: 'item1', icon: 'home', customLabel: () => h('a', 'Item 1') },
   { key: 'item2', icon: 'mail', label: 'Item 2' },
   { key: 'item3', icon: 'appstore', label: 'Item 3', disabled: true },
   { type: 'divider', key: 'divider1' },

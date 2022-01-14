@@ -9,6 +9,8 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { Logger } from '@idux/cdk/utils'
+
 import { menuSubToken, menuToken } from '../../token'
 import { coverIcon } from '../Utils'
 
@@ -46,16 +48,24 @@ export default defineComponent({
     })
 
     return () => {
-      const { icon, label, slots = {} } = props.data
-      const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      const labelSlot = isString(slots.label) ? menuSlots[slots.label] : slots.label
-      const suffixSlot = isString(slots.suffix) ? menuSlots[slots.suffix] : slots.suffix
+      const { icon, label, slots = {}, customIcon, customLabel, customSuffix } = props.data
+      if (__DEV__ && (slots.icon || slots.label || slots.suffix)) {
+        Logger.warn(
+          'components/menu',
+          '`slots` of `MenuSub` is deprecated,  please use `customIcon`, `customLabel` and `customSuffix` instead',
+        )
+      }
+      const iconRender = customIcon ?? slots.icon ?? 'subIcon'
+      const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
+      const labelRender = customLabel ?? slots.label ?? 'subLabel'
+      const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
+      const suffixRender = customSuffix ?? slots.suffix ?? 'subSuffix'
+      const suffixSlot = isString(suffixRender) ? menuSlots[suffixRender] : suffixRender
 
       const slotProps =
         iconSlot || labelSlot || suffixSlot
           ? { ...props.data, expanded: isExpanded.value, selected: isSelected.value }
           : undefined
-
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
       const labelNode = labelSlot ? labelSlot(slotProps!) : label
       const suffixNode = coverIcon(suffixSlot, slotProps!, suffix.value, rotate.value)

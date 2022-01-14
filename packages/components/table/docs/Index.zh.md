@@ -104,7 +104,7 @@ export type TableColumn<T = any, V = any> =
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `type` | 列类型 | `'selectable'` | - | - | `type` 设置为 `selectable`,即为选择列 |
+| `type` | 列类型 | `'selectable'` | - | - | 必填 |
 | `disabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
 | `menus` | 自定义列头下拉菜单 | `('all' \| 'invert' \| 'none' \| 'pageInvert' \| MenuData)[]` | - | - | - |

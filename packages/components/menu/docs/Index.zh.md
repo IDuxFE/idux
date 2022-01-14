@@ -43,7 +43,7 @@ export interface MenuClickOptions {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `type` | 菜单类型 | `'item' \| 'itemGroup' \| 'sub' \| 'divider'` | `'item'` | - | - |
+| `type` | 菜单类型 | `'item' \| 'itemGroup' \| 'sub' \| 'divider'` | - | - | - |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
 | `additional` | 菜单的额外配置 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
 
@@ -57,17 +57,8 @@ export interface MenuClickOptions {
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
 | `icon` | 菜单图标| `string  \| VNode` | - | - |
 | `label` | 菜单文本 | `string`  | - | - |
-| `slots` | 自定义菜单内容 | `MenuItemSlots`  | - | - |
-
-```ts
-export interface MenuItemSlots {
-  /**
-   * 如果类型为 `string`, 会根据该字符串去 `IxMenu` 的插槽中获取
-   */
-  icon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
-}
-```
+| `customIcon` | 自定义图标 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `itemIcon` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `itemLabel` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuItemGroupProps
 
@@ -79,14 +70,8 @@ export interface MenuItemSlots {
 | `children` | 子菜单数据 | `MenuData[]` | - | - | - |
 | `icon` | 菜单图标| `string \| VNode \| #icon` | - | - |
 | `label` | 菜单文本 | `string \| #label`  | - | - |
-| `slots` | 自定义菜单内容 | `MenuItemGroupSlots`  | - | - |
-
-```ts
-export interface MenuItemGroupSlots {
-  icon?: string | ((data: MenuItemGroupProps) => VNodeChild)
-  label?: string | ((data: MenuItemGroupProps) => VNodeChild)
-}
-```
+| `customIcon` | 自定义图标 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `itemGroupIcon` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `itemGroupLabel` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuSubProps
 
@@ -101,15 +86,9 @@ export interface MenuItemGroupSlots {
 | `label` | 菜单文本 | `string`  | - | - |
 | `offset` | 浮层偏移量 | `[number, number]` | `[0, 8]` | ✅ | `inline` 模式时无效 |
 | `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
-| `slots` | 自定义菜单内容 | `MenuSubSlots`  | - | - |
-
-```ts
-export interface MenuSubSlots {
-  icon?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  suffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-}
-```
+| `customIcon` | 自定义图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subIcon` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subLabel` | - | 类型为 `string` 时，对应插槽名 |
+| `customSuffix` | 自定义后缀图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subSuffix` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuDividerProps
 

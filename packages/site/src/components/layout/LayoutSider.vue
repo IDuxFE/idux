@@ -1,6 +1,6 @@
 <template>
   <IxMenu :dataSource="menus" mode="inline" :indent="breakpoints.xs ? 24 : 48" :selectedKeys="selectedKeys">
-    <template #label="item">
+    <template #itemLabel="item">
       <router-link :to="item.key">
         <span>{{ item.title }}</span>
         <span v-if="item.subtitle" class="sub-title">{{ item.subtitle }}</span>
@@ -32,12 +32,12 @@ const menus = computed(() => {
           label: name,
           children: children.map(item => {
             const { path, title, subtitle } = item
-            return { key: path, title, subtitle, slots: { label: 'label' } }
+            return { key: path, title, subtitle }
           }),
         }
       }
       const { path, title, subtitle } = item
-      return { key: path, title, subtitle, slots: { label: 'label' } }
+      return { key: path, title, subtitle }
     })
 })
 </script>

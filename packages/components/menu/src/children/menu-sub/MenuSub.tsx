@@ -43,7 +43,6 @@ export default defineComponent({
     // menuContext must exist
     const {
       props: menuProps,
-      slots: menuSlots,
       config,
       mergedPrefixCls,
       indent,
@@ -65,7 +64,7 @@ export default defineComponent({
     const { isExpanded, changeExpanded, handleMouseEvent } = useExpanded(props, key, expandedKeys, handleExpand, mode)
 
     const handleItemClick = () => {
-      if (!props.data.disabled && mode.value !== 'inline' && !menuSlots.multiple) {
+      if (!props.data.disabled && mode.value !== 'inline' && !menuProps.multiple) {
         handleExpand(key, false)
       }
     }

@@ -9,6 +9,7 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { Logger } from '@idux/cdk/utils'
 import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../composables/usePaddingLeft'
@@ -59,17 +60,21 @@ export default defineComponent({
     }
 
     return () => {
-      const { additional, disabled, icon, label, slots = {} } = props.data
-      const iconSlot = isString(slots.icon) ? menuSlots[slots.icon] : slots.icon
-      // <IxMenuItem key="key">label</IxMenuItem>
-      let labelSlot = slots.label ?? slots.default
-      if (isString(labelSlot)) {
-        labelSlot = menuSlots[labelSlot]
+      const { additional, disabled, icon, label, slots = {}, customIcon, customLabel } = props.data
+      if (__DEV__ && (slots.icon || slots.label)) {
+        Logger.warn(
+          'components/menu',
+          '`slots` of `MenuItem` is deprecated,  please use `customIcon` and `customLabel` instead',
+        )
       }
+      const iconRender = customIcon ?? slots.icon ?? 'itemIcon'
+      const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
+      const labelRender = customLabel ?? slots.label ?? 'itemLabel'
+      const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
 
       const slotProps = iconSlot || labelSlot ? { ...props.data, selected: isSelected.value } : undefined
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
-      const labelNode = labelSlot ? labelSlot(slotProps) : label
+      const labelNode = labelSlot ? labelSlot(slotProps!) : label
 
       const prefixCls = `${mergedPrefixCls.value}-item`
       return (

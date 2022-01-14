@@ -37,38 +37,44 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
     let data: MenuData
     if (type[itemKey]) {
       const { key, disabled, icon, label, ...additional } = props
+      // <IxMenuItem key="key">label</IxMenuItem>
+      const { icon: customIcon, label: customLabel, default: customLabel2 } = slots
       data = {
         key,
         disabled: disabled || disabled === '',
         icon,
         label,
         additional,
-        slots,
+        customIcon,
+        customLabel: customLabel ?? customLabel2,
       }
     } else if (type[itemGroupKey]) {
       const { key, children, icon, label, ...additional } = props
-      const _children = children ?? convertDataSource(slots.default?.())
+      const { icon: customIcon, label: customLabel } = slots
       data = {
         type: 'itemGroup',
         key,
-        children: _children,
+        children: children ?? convertDataSource(slots.default?.()),
         icon,
         label,
         additional,
-        slots,
+        customIcon,
+        customLabel,
       }
     } else if (type[subKey]) {
       const { key, children, disabled, icon, label, suffix, ...additional } = props
-      const _children = children ?? convertDataSource(slots.default?.())
+      const { icon: customIcon, label: customLabel, suffix: customSuffix } = slots
       data = {
         type: 'sub',
         key,
-        children: _children,
+        children: children ?? convertDataSource(slots.default?.()),
         disabled: disabled || disabled === '',
         icon,
         label,
         additional,
-        slots,
+        customIcon,
+        customLabel,
+        customSuffix,
       }
     } else {
       const { key, ...additional } = props
