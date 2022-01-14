@@ -20,7 +20,7 @@ import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } f
 
 import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 
-import { isArray, isNil, isPlainObject } from 'lodash-es'
+import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
 
 import { hasOwnProperty } from '@idux/cdk/utils'
 
@@ -145,6 +145,15 @@ export abstract class AbstractControl<T = any> {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
+  /**
+   * Whether to remove the first and tail space
+   * Possible value: true | false
+   * Default value: false
+   */
+  get trim(): boolean {
+    return this._trim ?? this._parent?.trim ?? false
+  }
+
   name?: string
 
   protected _controls: Ref<any>
@@ -160,6 +169,7 @@ export abstract class AbstractControl<T = any> {
   private _asyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
   private _trigger?: TriggerType
+  private _trim?: boolean
 
   constructor(
     controls?: GroupControls<T> | AbstractControl<ArrayElement<T>>[],
@@ -428,6 +438,7 @@ export abstract class AbstractControl<T = any> {
     if (isOptions(validatorOrOptions)) {
       this.name = validatorOrOptions.name
       this._trigger = validatorOrOptions.trigger ?? this._trigger
+      this._trim = validatorOrOptions.trim ?? this._trim
       this._validators = toValidator(validatorOrOptions.validators)
       this._asyncValidators = toAsyncValidator(validatorOrOptions.asyncValidators)
       if (validatorOrOptions.disabled) {
@@ -533,7 +544,8 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   getValue(): T {
-    return this._valueRef.value
+    const value = this._valueRef.value
+    return this.trim && isString(value) ? (value as any).trim() : value;
   }
 
   protected _forEachControls(_: (v: AbstractControl, k: never) => void): void {}
