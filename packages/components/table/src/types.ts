@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type DefineComponent, type HTMLAttributes, type VNodeChild, type VNodeTypes } from 'vue'
+import { type DefineComponent, FunctionalComponent, type HTMLAttributes, type VNodeChild, type VNodeTypes } from 'vue'
 
 import { type BreakpointKey } from '@idux/cdk/breakpoint'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
@@ -62,6 +62,10 @@ export type TableComponent = DefineComponent<
 >
 export type TableInstance = InstanceType<DefineComponent<TableProps, TableBindings>>
 
+export type TableColumnComponent = FunctionalComponent<
+  Omit<HTMLAttributes, keyof TableColumnBase | keyof TableColumnExpandable | keyof TableColumnSelectable> & TableColumn
+>
+
 export type TableColumn<T = any, V = any> =
   | TableColumnBase<T, V>
   | TableColumnExpandable<T, V>
@@ -82,11 +86,6 @@ export interface TableColumnCommon<T = any> {
   width?: string | number
 }
 
-export interface TableColumnBaseSlots<T = any, V = any> {
-  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  title?: string | ((data: { title?: string }) => VNodeChild)
-}
-
 export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> {
   dataKey?: VKey | VKey[]
   editable?: boolean
@@ -96,28 +95,34 @@ export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> 
   filterable?: TableColumnFilterable<T>
   title?: string
   children?: TableColumn<T>[]
-  slots?: TableColumnBaseSlots<T, V>
+
+  /**
+   * @deprecated please use `customCell` instead'
+   */
+  customRender?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  customCell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }
 
-export interface TableColumnExpandableSlots<T = any, V = any> {
-  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  title?: string | ((data: { title?: string }) => VNodeChild)
-  expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
-  icon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
-}
-
-export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase<T, V> {
+export interface TableColumnExpandable<T = any, V = any> extends TableColumnCommon<T> {
   type: 'expandable'
-
+  dataKey?: VKey | VKey[]
   disabled?: (record: T) => boolean
-  // remove ?
-  icon?: [string, string]
+  editable?: boolean
+  ellipsis?: boolean
+  key?: VKey
+  icon?: string
   indent?: number
+  title?: string
   trigger?: 'click' | 'dblclick'
-  slots?: TableColumnExpandableSlots<T, V>
 
   onChange?: (expendedRowKeys: VKey[]) => void
   onExpand?: (expanded: boolean, record: T) => void
+
+  customCell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  customTitle?: string | ((data: { title?: string }) => VNodeChild)
+  customExpand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
+  customIcon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
 }
 
 export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
@@ -175,11 +180,6 @@ export interface TableColumnSortable<T = any> {
   onChange?: (currOrderBy?: TableColumnSortOrder) => void
 }
 
-export interface TableColumnFilter<V = unknown> {
-  text: string
-  value: V
-}
-
 export interface TableColumnFilterable<T = any> {
   filter?: (currFilterBy: VKey[], record: T) => boolean
   filterBy?: VKey[]
@@ -187,6 +187,9 @@ export interface TableColumnFilterable<T = any> {
   menus: MenuData[]
   multiple?: boolean
   onChange?: (currFilterBy: VKey[]) => void
+
+  customTrigger?: string | (() => VNodeChild)
+  customMenu?: string | (() => VNodeChild)
 }
 
 export interface TableSticky {

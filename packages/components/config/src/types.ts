@@ -270,7 +270,7 @@ export interface TableColumnBaseConfig {
 }
 
 export interface TableColumnExpandableConfig {
-  icon: [string, string]
+  icon: string
 }
 
 export interface TreeConfig {

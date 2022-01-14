@@ -1,18 +1,22 @@
 <template>
-  <IxTable v-model:expandedRowKeys="expandedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
-    <template #name="{ value }">
-      <a>{{ value }}</a>
-    </template>
-    <template #expand="{ record }">
-      <span>{{ record.description }}</span>
-    </template>
+  <IxTable v-model:expandedRowKeys="expandedRowKeys" :dataSource="data" :pagination="false">
+    <IxTableColumn type="expandable" :disabled="expandDisabled" @change="onExpandChange">
+      <template #expand="{ record }">
+        <span>{{ record.description }}</span>
+      </template>
+    </IxTableColumn>
+    <IxTableColumn title="Name" dataKey="name">
+      <template #cell="{ value }">
+        <a>{{ value }}</a>
+      </template>
+    </IxTableColumn>
+    <IxTableColumn title="Age" dataKey="age"></IxTableColumn>
+    <IxTableColumn title="Address" dataKey="address"></IxTableColumn>
   </IxTable>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-import { TableColumn } from '@idux/components/table'
 
 interface Data {
   key: number
@@ -23,28 +27,8 @@ interface Data {
 }
 
 const expandedRowKeys = ref([1])
-
-const columns: TableColumn<Data>[] = [
-  {
-    type: 'expandable',
-    disabled: record => !record.description,
-    onChange: expendedRowKeys => console.log(expendedRowKeys),
-    customExpand: 'expand',
-  },
-  {
-    title: 'Name',
-    dataKey: 'name',
-    customCell: 'name',
-  },
-  {
-    title: 'Age',
-    dataKey: 'age',
-  },
-  {
-    title: 'Address',
-    dataKey: 'address',
-  },
-]
+const expandDisabled = (record: Data) => !record.description
+const onExpandChange = (expendedRowKeys: number[]) => console.log(expendedRowKeys)
 
 const data: Data[] = [
   {

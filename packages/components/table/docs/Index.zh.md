@@ -69,20 +69,12 @@ export type TableColumn<T = any, V = any> =
 | --- | --- | --- | --- | --- | --- |
 | `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 不支持和排序筛选一起使用 |
+| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
 | `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
-| `slots` | 自定义渲染 | `TableColumnBaseSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
-
-```ts
-export interface TableColumnBaseSlots<T = any, V = any> {
-  // 自定义单元格内容
-  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  // 自定义单表头内容
-  title?: string | ((data: { title?: string }) => VNodeChild)
-}
-```
+| `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customTitle` | 自定义表头标题 | `string \| ((data: { title?: string }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 ##### TableColumnExpandable
 
@@ -90,27 +82,21 @@ export interface TableColumnBaseSlots<T = any, V = any> {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `type` | 列类型 | `'expandable'` | - | - | `type` 设置为 `expandable`,即为展开列 |
+| `type` | 列类型 | `'expandable'` | - | - | 必填 |
+| `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 通常在树形表格时设置 |
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
-| `icon` | 展开按钮图标 | `[string, string]` | `['plus', 'minus']` | ✅ | - |
+| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 通常在树形表格时设置 |
+| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey`，通常在树形表格时设置 |
+| `icon` | 展开按钮图标 | `string` | `'right'` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
-| `slots` | 自定义渲染 | `TableColumnExpandableSlots` | - | - | 值的类型为 `string` 时，对应插槽名 |
+| `title` | 列头的文本 | `string` | - | - | 通常在树形表格时设置 |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \| number)[], expendedRecords: T[]) => void` | - | - | - |
 | `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |
-
-```ts
-export interface TableColumnExpandableSlots<T = any, V = any> {
-  // 自定义单元格内容
-  cell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  // 自定义单表头内容
-  title?: string | ((data: { title?: string }) => VNodeChild)
-  // 自定义展开内容
-  expand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
-  // 自定义展开图标
-  icon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
-}
-```
+| `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customTitle` | 自定义表头标题 | `string \| ((data: { title?: string }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customExpand` | 自定义展开内容 | `string \| ((data: { record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customIcon` | 自定义表头标题 | `string \| ((data: { expanded: boolean; record: T }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 ##### TableColumnSelectable
 
@@ -139,16 +125,20 @@ export interface TableColumnExpandableSlots<T = any, V = any> {
 | `orderBy` | 当前排序规则 | `'ascend' \| 'descend'` | - | - | - |
 | `orders` | 支持的排序方式 | `Array<'ascend' \| 'descend'>` | `['ascend', 'descend']` | ✅ | - |
 | `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
-| `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于服务端排序 |
+| `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于受控模式或服务端排序 |
 
 ##### TableColumnFilterable
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `filters` | 筛选项 | `{ text: string, value: any }[]` | - | - | - |
-| `filterBy` | 当前激活的筛选项 | `any[]` | - | - | - |
-| `filter` | 本地模式下的筛选函数 | `(currFilterBy: any[], record: T) => boolean` | - | - | - |
-| `onChange` | 排序规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于服务端筛选 |
+| `filter` | 本地模式下的筛选函数 | `(currFilterBy: VKey[], record: T) => boolean` | - | - | - |
+| `filterBy` | 当前激活的筛选项 | `VKey[]` | - | - | - |
+| `footer` | 是否显示页脚 | `boolean` | `false` | ✅ | - |
+| `menus` | 删选菜单 | `MenuData[]` | - | - | - |
+| `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
+| `onChange` | 筛选规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于受控模式或服务端筛选 |
+| `customTrigger` | 自定义展开内容 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customMenu` | 自定义表头标题 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 #### TablePagination
 
@@ -189,9 +179,17 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 <template>
   <IxTable :dataSource="data">
     <IxTableColumn title="Name" dataKey="name">
-        <template #cell="{ value }">
-          <a>{{ value }}</a>
-        </template>
+      <template #title="{ title }">
+        <h1>{{ title }}</h1>
+      </template>
+      <template #cell="{ value }">
+        <a>{{ value }}</a>
+      </template>
+    </IxTableColumn>
+    <IxTableColumn type="expandable">
+      <template #expand="{ record }">
+        <span>{{ record.description }}</span>
+      </template>
     </IxTableColumn>
   </IxTable>
 </template>

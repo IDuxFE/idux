@@ -19,7 +19,6 @@ import {
   type TableColumnAlign,
   type TableColumnBase,
   type TableColumnExpandable,
-  type TableColumnExpandableSlots,
   type TableColumnFixed,
   type TableColumnSelectable,
   type TableProps,
@@ -37,7 +36,7 @@ export function useColumns(
     if (columns && columns.length > 0) {
       return mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable)
     } else {
-      return convertColumns(slots.default?.(), breakpoints, config.columnBase, config.columnExpandable)
+      return mergeColumns(convertColumns(slots.default?.()), breakpoints, config.columnBase, config.columnExpandable)
     }
   })
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
@@ -111,9 +110,8 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
 export interface TableColumnMergedExpandable extends TableColumnMergedBaseExtra, TableColumnExpandable {
   align: TableColumnAlign
   key: VKey
-  icon: [string, string]
+  icon: string
   titleColSpan: number
-  slots?: TableColumnExpandableSlots
 }
 export interface TableColumnMergedSelectable extends TableColumnMergedBaseExtra, TableColumnSelectable {
   align: TableColumnAlign
@@ -142,30 +140,36 @@ function mergeColumns(
     .map((column, index) => covertColumn(column, breakpoints, baseConfig, expandableConfig, index))
 }
 
-function convertColumns(
-  nodes: VNode[] | undefined,
-  breakpoints: Record<BreakpointKey, boolean>,
-  baseConfig: TableColumnBaseConfig,
-  expandableConfig: TableColumnExpandableConfig,
-) {
-  const mergedColumns: Array<TableColumnMerged> = []
+function convertColumns(nodes: VNode[] | undefined) {
+  const columns: Array<TableColumn> = []
 
   flattenNode(nodes, { key: tableColumnKey }).forEach((node, index) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { props, children } = node as VNode & { children: any }
-    const { key = Symbol(), editable, ellipsis, slots, ...newColumn } = props || {}
+    const { props, children } = node
+    const { key = index, editable, ellipsis, ...newColumn } = props || {}
     newColumn.key = key
     newColumn.editable = editable || editable === ''
     newColumn.editable = ellipsis || ellipsis === ''
-    const { default: defaultSlot, ...restSlots } = children || {}
-    newColumn.slots = { ...slots, ...restSlots }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { default: defaultSlot, cell, title, expand, icon } = (children || {}) as any
     if (defaultSlot) {
-      newColumn.children = convertColumns(defaultSlot(), breakpoints, baseConfig, expandableConfig)
+      newColumn.children = convertColumns(defaultSlot())
     }
-    mergedColumns.push(covertColumn(newColumn as TableColumnMerged, breakpoints, baseConfig, expandableConfig, index))
+    if (cell) {
+      newColumn.customCell = cell
+    }
+    if (title) {
+      newColumn.customTitle = title
+    }
+    if (expand) {
+      newColumn.customExpand = expand
+    }
+    if (icon) {
+      newColumn.customIcon = icon
+    }
+    columns.push(newColumn as TableColumn)
   })
 
-  return mergedColumns
+  return columns
 }
 
 function covertColumn(

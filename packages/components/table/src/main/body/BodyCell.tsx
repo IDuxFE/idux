@@ -9,7 +9,7 @@ import {
   type CSSProperties,
   type ComputedRef,
   type Slots,
-  type VNodeTypes,
+  type VNodeChild,
   computed,
   defineComponent,
   inject,
@@ -90,7 +90,7 @@ export default defineComponent({
 
     return () => {
       const { type, additional } = props.column as BodyColumn
-      let children: VNodeTypes
+      let children: VNodeChild
       let title: string | undefined
 
       if (type === 'selectable') {
@@ -137,15 +137,12 @@ function useDataValue(props: TableBodyCellProps) {
 
 function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) {
   const { record, rowIndex, column } = props
-  /**
-   * @deprecated customRender
-   */
-  const { customRender, slots: columnSlots } = column
+  const { customRender, customCell } = column
   if (__DEV__ && customRender) {
-    Logger.warn('components/table', '`customRender` is deprecated,  please use `cell` in `slots` instead')
+    Logger.warn('components/table', '`customRender` is deprecated,  please use `customCell` instead')
   }
 
-  const cellRender = customRender ?? columnSlots?.cell
+  const cellRender = customRender ?? customCell
   if (isFunction(cellRender)) {
     return cellRender({ value, record, rowIndex })
   } else if (isString(cellRender) && slots[cellRender]) {
@@ -160,29 +157,22 @@ function renderExpandableChildren(
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   prefixCls: string,
 ) {
-  /**
-   * @deprecated customIcon
-   */
-  const { icon, customIcon, slots: columnSlots, indent } = expandable.value!
+  const { icon, customIcon, indent } = expandable.value!
   const { record, expanded, level = 0, disabled } = props
   const onExpand = props.handleExpend!
   const style = {
     marginLeft: indent ? convertCssPixel(level * indent) : undefined,
   }
-  if (__DEV__ && customIcon) {
-    Logger.warn('components/table', '`customIcon` is deprecated,  please use `icon` in `slots` instead')
-  }
-  const iconRender = customIcon ?? columnSlots?.icon
 
-  let iconNode: VNodeTypes | null
+  let iconNode: VNodeChild | null
   if (disabled) {
     iconNode = null
-  } else if (isFunction(iconRender)) {
-    iconNode = iconRender({ expanded: !!expanded, record })
-  } else if (isString(iconRender) && slots[iconRender]) {
-    iconNode = slots[iconRender]!({ expanded, record })
+  } else if (isFunction(customIcon)) {
+    iconNode = customIcon({ expanded: !!expanded, record })
+  } else if (isString(customIcon) && slots[customIcon]) {
+    iconNode = slots[customIcon]!({ expanded, record })
   } else {
-    iconNode = <IxIcon name={icon[expanded ? 1 : 0]} />
+    iconNode = <IxIcon name={icon} rotate={expanded ? 90 : 0} />
   }
 
   return (

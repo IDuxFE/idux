@@ -25,7 +25,7 @@ const columns: TableColumn<Data>[] = [
       orders: ['descend'],
       sorter: (curr, next) => curr.name.length - next.name.length,
     },
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Age',

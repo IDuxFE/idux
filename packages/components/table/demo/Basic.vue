@@ -28,7 +28,7 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Age',
@@ -41,21 +41,19 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Tags',
     dataKey: 'tags',
-    slots: {
-      cell: ({ value }) =>
-        value.map((tag: string) => {
-          let color = tag.length > 5 ? 'warning' : 'success'
-          if (tag === 'loser') {
-            color = 'error'
-          }
-          return h(IxTag, { color }, { default: () => tag.toUpperCase() })
-        }),
-    },
+    customCell: ({ value }) =>
+      value.map((tag: string) => {
+        let color = tag.length > 5 ? 'warning' : 'success'
+        if (tag === 'loser') {
+          color = 'error'
+        }
+        return h(IxTag, { color }, { default: () => tag.toUpperCase() })
+      }),
   },
   {
     title: 'Action',
     key: 'action',
-    slots: { cell: 'action' },
+    customCell: 'action',
   },
 ]
 

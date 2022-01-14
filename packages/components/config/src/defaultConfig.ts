@@ -260,7 +260,7 @@ const table: TableConfig = {
     sortable: { nextTooltip: false, orders: ['ascend', 'descend'] },
     filterable: { multiple: true, footer: true },
   },
-  columnExpandable: { icon: ['plus-square', 'minus-square'] },
+  columnExpandable: { icon: 'right' },
 }
 
 const tooltip: TooltipConfig = {

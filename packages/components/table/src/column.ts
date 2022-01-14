@@ -7,11 +7,12 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { TableColumn as TableColumnProps } from './types'
-import type { FunctionalComponent, HTMLAttributes } from 'vue'
+import { type TableColumnComponent } from './types'
 
 const tableColumnKey = '__IDUX_TABLE_COLUMN'
-const TableColumn = (() => {}) as FunctionalComponent<Omit<HTMLAttributes, keyof TableColumnProps> & TableColumnProps>
+
+const TableColumn = (() => {}) as TableColumnComponent
+
 TableColumn.displayName = 'IxTableColumn'
 ;(TableColumn as any)[tableColumnKey] = true
 

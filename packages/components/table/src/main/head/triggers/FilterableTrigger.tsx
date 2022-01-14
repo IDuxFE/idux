@@ -5,15 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, VNodeTypes, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
+import { type ComputedRef, type VNodeChild, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
 
-import { VKey, useState } from '@idux/cdk/utils'
+import { isFunction, isString } from 'lodash-es'
+
+import { type VKey, useState } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { type DropdownProps, IxDropdown } from '@idux/components/dropdown'
-import { TableLocale } from '@idux/components/i18n'
+import { type TableLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
-import { IxMenu, MenuData, type MenuItemProps, type MenuProps } from '@idux/components/menu'
+import { IxMenu, type MenuData, type MenuItemProps, type MenuProps } from '@idux/components/menu'
 import { IxRadio } from '@idux/components/radio'
 
 import { TABLE_TOKEN } from '../../../token'
@@ -22,7 +24,7 @@ import { tableFilterableTriggerProps } from '../../../types'
 export default defineComponent({
   props: tableFilterableTriggerProps,
   setup(props) {
-    const { config, locale, mergedPrefixCls } = inject(TABLE_TOKEN)!
+    const { slots, config, locale, mergedPrefixCls } = inject(TABLE_TOKEN)!
 
     const multiple = computed(() => props.filterable.multiple ?? config.columnBase.filterable.multiple)
     const footer = computed(() => props.filterable.footer ?? config.columnBase.filterable.footer)
@@ -82,18 +84,35 @@ export default defineComponent({
     })
 
     const renderOverlay = () => {
-      const children: VNodeTypes[] = [renderMenu(mergedMenus, multiple, selectedKeys, setSelectedKeys)]
+      const children: VNodeChild[] = []
+      const { customMenu } = props.filterable
+      if (isFunction(customMenu)) {
+        children.push(customMenu())
+      } else if (isString(customMenu) && slots[customMenu]) {
+        children.push(slots[customMenu]!())
+      } else {
+        children.push(renderMenu(mergedMenus, multiple, selectedKeys, setSelectedKeys))
+      }
       if (footer.value) {
         children.push(renderFooter(locale, mergedPrefixCls, handleConfirm, handleReset))
       }
       return children
     }
 
-    const renderTrigger = () => (
-      <span class={classes.value} onClick={evt => evt.stopPropagation()}>
-        <IxIcon name="filter-filled" />
-      </span>
-    )
+    const renderTrigger = () => {
+      const { customTrigger } = props.filterable
+      if (isFunction(customTrigger)) {
+        return customTrigger()
+      }
+      if (isString(customTrigger) && slots[customTrigger]) {
+        return slots[customTrigger]!()
+      }
+      return (
+        <span class={classes.value} onClick={evt => evt.stopPropagation()}>
+          <IxIcon name="filter-filled" />
+        </span>
+      )
+    }
 
     return () => {
       const dropdownProps: DropdownProps = {
