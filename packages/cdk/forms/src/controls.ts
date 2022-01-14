@@ -545,7 +545,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
 
   getValue(): T {
     const value = this._valueRef.value
-    return this.trim && isString(value) ? (value as any).trim() : value;
+    return this.trim && isString(value) ? (value as any).trim() : value
   }
 
   protected _forEachControls(_: (v: AbstractControl, k: never) => void): void {}
