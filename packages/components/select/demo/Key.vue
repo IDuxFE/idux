@@ -4,9 +4,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { SelectOption } from '@idux/components/select'
+import { SelectData } from '@idux/components/select'
 
-const options: SelectOption[] = [
+const options: SelectData[] = [
   {
     key: 1,
     text: 'Manager',

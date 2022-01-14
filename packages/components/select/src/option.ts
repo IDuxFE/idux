@@ -7,23 +7,15 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type {
-  SelectOptionGroupPublicProps as SelectOptionGroupProps,
-  SelectOptionPublicProps as SelectOptionProps,
-} from './types'
-import type { FunctionalComponent, HTMLAttributes } from 'vue'
+import { type SelectOptionComponent, type SelectOptionGroupComponent } from './types'
 
 const optionKey = '__IDUX_SELECT_OPTION'
-const SelectOption = (() => {}) as FunctionalComponent<
-  Omit<HTMLAttributes, keyof SelectOptionProps> & SelectOptionProps
->
+const SelectOption = (() => {}) as SelectOptionComponent
 SelectOption.displayName = 'IxSelectOption'
 ;(SelectOption as any)[optionKey] = true
 
 const optionGroupKey = '__IDUX_SELECT_OPTION_GROUP'
-const SelectOptionGroup = (() => {}) as FunctionalComponent<
-  Omit<HTMLAttributes, keyof SelectOptionGroupProps> & SelectOptionGroupProps
->
+const SelectOptionGroup = (() => {}) as SelectOptionGroupComponent
 SelectOptionGroup.displayName = 'IxSelectOptionGroup'
 ;(SelectOptionGroup as any)[optionGroupKey] = true
 
