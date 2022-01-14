@@ -20,7 +20,7 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Age',

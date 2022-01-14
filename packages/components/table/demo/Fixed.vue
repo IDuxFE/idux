@@ -25,7 +25,7 @@ const columns: TableColumn<Data>[] = [
     dataKey: 'name',
     width: 100,
     fixed: 'start',
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Age',
@@ -85,7 +85,7 @@ const columns: TableColumn<Data>[] = [
     key: 'action',
     fixed: 'end',
     width: 100,
-    slots: { cell: 'action' },
+    customCell: 'action',
   },
 ]
 

@@ -30,12 +30,12 @@ const columns: TableColumn<Data>[] = [
     type: 'selectable',
   },
   {
-    width: 400,
     type: 'expandable',
+    width: 160,
     indent: 10,
     title: 'Event Name',
     dataKey: 'eventName',
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Description',
@@ -52,16 +52,6 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Tags',
     dataKey: 'tags',
-    slots: {
-      cell: ({ value }) =>
-        value.map((tag: string) => {
-          let color = tag.length > 5 ? 'warning' : 'success'
-          if (tag === 'attack' || tag === 'damage') {
-            color = 'error'
-          }
-          return h(IxTag, { color }, { default: () => tag.toUpperCase() })
-        }),
-    },
     filterable: {
       menus: [
         { key: 'attack', label: 'Attack' },
@@ -72,11 +62,19 @@ const columns: TableColumn<Data>[] = [
         return tags.some(tag => record.tags.includes(tag as string))
       },
     },
+    customCell: ({ value }) =>
+      value.map((tag: string) => {
+        let color = tag.length > 5 ? 'warning' : 'success'
+        if (tag === 'attack' || tag === 'damage') {
+          color = 'error'
+        }
+        return h(IxTag, { color }, { default: () => tag.toUpperCase() })
+      }),
   },
   {
     title: 'Action',
     key: 'action',
-    slots: { cell: 'action' },
+    customCell: 'action',
   },
 ]
 

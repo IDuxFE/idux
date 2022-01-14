@@ -20,6 +20,7 @@ export type {
   TableInstance,
   TableComponent,
   TablePublicProps as TableProps,
+  TableColumnComponent,
   TableColumn,
   TableColumnBase,
   TableColumnExpandable,
@@ -33,8 +34,5 @@ export type {
   TableColumnFixed,
   TableColumnSortable,
   TableColumnSortOrder,
-  TableColumnFilter,
   TableColumnFilterable,
 } from './src/types'
-
-export type TableColumnComponent = typeof IxTableColumn

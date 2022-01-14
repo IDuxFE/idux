@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VNode, VNodeTypes } from 'vue'
+import { type VNode, type VNodeChild } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -13,7 +13,7 @@ import { getFirstValidNode } from '@idux/cdk/utils'
 
 export function getColTitle(
   ellipsis: boolean | undefined,
-  children: VNodeTypes,
+  children: VNodeChild,
   title: string | undefined,
 ): string | undefined {
   if (!ellipsis) {

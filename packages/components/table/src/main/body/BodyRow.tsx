@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Slots, type VNodeTypes, computed, defineComponent, inject } from 'vue'
+import { type ComputedRef, type Slots, VNodeChild, type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
-import { Logger, type VKey } from '@idux/cdk/utils'
+import { type VKey } from '@idux/cdk/utils'
 
 import {
   type TableColumnMerged,
@@ -201,20 +201,13 @@ function renderChildren(
 }
 
 function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
-  /**
-   * @deprecated customExpand
-   */
-  const { customExpand, slots: columnSlots } = expandable || {}
+  const { customExpand } = expandable || {}
   const { record, rowIndex } = props
-  if (__DEV__ && customExpand) {
-    Logger.warn('components/table', '`customExpand` is deprecated,  please use `expand` in `slots` instead')
+  let expandedContext: VNodeChild
+  if (isFunction(customExpand)) {
+    expandedContext = customExpand({ record, rowIndex })
+  } else if (isString(customExpand) && slots[customExpand]) {
+    expandedContext = slots[customExpand]!({ record, rowIndex })
   }
-  const expandRender = customExpand ?? columnSlots?.expand
-  let expandedContext: VNodeTypes | null = null
-  if (isFunction(expandRender)) {
-    expandedContext = expandRender({ record, rowIndex })
-  } else if (isString(expandRender) && slots[expandRender]) {
-    expandedContext = slots[expandRender]!({ record, rowIndex })
-  }
-  return expandedContext ? <BodyRowSingle>{expandedContext}</BodyRowSingle> : null
+  return expandedContext && <BodyRowSingle>{expandedContext}</BodyRowSingle>
 }

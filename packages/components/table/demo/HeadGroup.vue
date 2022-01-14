@@ -27,7 +27,7 @@ const columns: TableColumn<Data>[] = [
     dataKey: 'name',
     width: 100,
     fixed: 'start',
-    slots: { cell: 'name' },
+    customCell: 'name',
   },
   {
     title: 'Other',

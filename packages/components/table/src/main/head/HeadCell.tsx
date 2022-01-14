@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, type Slots, type VNodeTypes, computed, defineComponent, inject } from 'vue'
+import { ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
-import { Logger, type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 
 import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
@@ -102,21 +102,15 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       let _title: string | undefined
-      let children: VNodeTypes | undefined
+      let children: VNodeChild | undefined
 
       if (type === 'scroll-bar') {
         children = undefined
       } else if (type === 'selectable') {
         children = <SelectableTrigger />
       } else {
-        /**
-         * @deprecated customTitle
-         */
-        const { title, customTitle, slots: columnSlots, ellipsis, sortable, filterable } = props.column as HeadColumn
-        if (__DEV__ && customTitle) {
-          Logger.warn('components/table', '`customTitle` is deprecated,  please use `title` in `slots` instead')
-        }
-        children = renderChildren(title, customTitle ?? columnSlots?.title, slots)
+        const { title, customTitle, ellipsis, sortable, filterable } = props.column as HeadColumn
+        children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
 
         const iconTriggers = renderTrigger(sortable, activeSortOrderBy, filterable, activeFilterBy, onUpdateFilterBy)
@@ -154,10 +148,10 @@ export default defineComponent({
 
 function renderChildren(
   title: string | undefined,
-  customTitle: string | ((options: { title?: string }) => VNodeTypes) | undefined,
+  customTitle: string | ((options: { title?: string }) => VNodeChild) | undefined,
   slots: Slots,
 ) {
-  let children: VNodeTypes | undefined = title
+  let children: VNodeChild | undefined = title
   if (isFunction(customTitle)) {
     children = customTitle({ title })
   } else if (isString(customTitle) && slots[customTitle]) {
@@ -173,7 +167,7 @@ function renderTrigger(
   activeFilterBy: ComputedRef<VKey[]>,
   onUpdateFilterBy: (filterBy: VKey[]) => void,
 ) {
-  const children = []
+  const children: VNodeChild[] = []
   sortable && children.push(<SortableTrigger activeOrderBy={activeSortOrderBy.value} sortable={sortable} />)
   if (filterable) {
     children.push(
