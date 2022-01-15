@@ -27,7 +27,7 @@ export default defineComponent({
       <IxCheckbox
         class={`${mergedPrefixCls.value}-node-checkbox`}
         checked={isChecked.value}
-        disabled={props.node.checkDisabled}
+        disabled={props.checkDisabled}
         indeterminate={isIndeterminate.value}
         onChange={onChange}
       />

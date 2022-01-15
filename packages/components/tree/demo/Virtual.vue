@@ -1,12 +1,14 @@
 <template>
-  <IxTree :dataSource="treeData" :height="200" virtual></IxTree>
+  <IxTree v-model:expandedKeys="expandedKeys" :dataSource="treeData" :height="200" virtual></IxTree>
 </template>
 
 <script setup lang="ts">
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeNode } from '@idux/components/tree'
 
-const expandedKeys: VKey[] = []
+import { ref } from 'vue'
+
+const expandedKeys = ref<VKey[]>([])
 
 function genData(path = '0', level = 3) {
   const data = []
@@ -19,7 +21,7 @@ function genData(path = '0', level = 3) {
     }
 
     if (level > 0) {
-      expandedKeys.push(key)
+      expandedKeys.value.push(key)
       node.children = genData(key, level - 1)
     }
 
