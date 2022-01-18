@@ -1,6 +1,6 @@
 import { MountingOptions, mount } from '@vue/test-utils'
 
-import IxProgress from '../src/Progress.vue'
+import IxProgress from '../src/Progress'
 import { ProgressProps } from '../src/types'
 
 describe('Progress', () => {
@@ -58,29 +58,29 @@ describe('Progress', () => {
 
   test('status work', async () => {
     const wrapper = ProgressMount({ props: { percent: 50, status: 'normal' } })
-    expect(wrapper.classes('ix-progress-status-normal')).toBe(true)
+    expect(wrapper.classes('ix-progress-normal')).toBe(true)
 
     await wrapper.setProps({ status: 'success' })
-    expect(wrapper.classes('ix-progress-status-success')).toBe(true)
+    expect(wrapper.classes('ix-progress-success')).toBe(true)
 
     await wrapper.setProps({ status: 'exception' })
-    expect(wrapper.classes('ix-progress-status-exception')).toBe(true)
+    expect(wrapper.classes('ix-progress-exception')).toBe(true)
 
     await wrapper.setProps({ status: 'active' })
-    expect(wrapper.classes('ix-progress-status-active')).toBe(true)
+    expect(wrapper.classes('ix-progress-active')).toBe(true)
   })
 
   test('should show success status when percent = 100', () => {
     const wrapper = ProgressMount({ props: { percent: 100 } })
-    expect(wrapper.classes('ix-progress-status-success')).toBe(true)
+    expect(wrapper.classes('ix-progress-success')).toBe(true)
   })
 
   test('strokeLinecap work', async () => {
-    const wrapper = ProgressMount({ props: { percent: 50, strokeLinecap: 'round' } })
-    expect(wrapper.classes('ix-progress-round')).toBe(true)
+    const wrapper = ProgressMount({ props: { type: 'line', percent: 50, strokeLinecap: 'round' } })
+    expect(wrapper.classes('ix-progress-line-round')).toBe(true)
 
     await wrapper.setProps({ strokeLinecap: 'square' })
-    expect(wrapper.classes('ix-progress-round')).toBe(false)
+    expect(wrapper.classes('ix-progress-line-round')).toBe(false)
   })
 
   test('strokeColor work', async () => {

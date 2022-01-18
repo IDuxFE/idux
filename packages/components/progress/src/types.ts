@@ -6,11 +6,11 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type ProgressSize = 'sm' | 'md'
+export type ProgressSize = 'sm' | 'md' | 'lg'
 export type ProgressFormat = (percent: number, successPercent?: number) => string
 export type ProgressType = 'line' | 'circle' | 'dashboard'
 export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
@@ -29,6 +29,11 @@ export interface ConvertProgressSuccess extends ProgressSuccess {
   percent: number
 }
 
+export interface ProgressIcons {
+  success: string | VNode
+  exception: string | VNode
+}
+
 export const progressStatus = ['normal', 'success', 'exception', 'active'] as const
 
 export const progressProps = {
@@ -40,23 +45,16 @@ export const progressProps = {
   success: IxPropTypes.object<ProgressSuccess>(),
   trailColor: IxPropTypes.string,
   strokeColor: IxPropTypes.oneOfType([String, IxPropTypes.object<ProgressGradient>()]),
-  strokeLinecap: IxPropTypes.oneOf<ProgressStrokeLinecap>(['round', 'square']).def('round'),
+  strokeLinecap: IxPropTypes.oneOf<ProgressStrokeLinecap>(['round', 'square']),
   strokeWidth: IxPropTypes.oneOfType([String, Number]),
   gapDegree: IxPropTypes.oneOfType([String, Number]),
   gapPosition: IxPropTypes.oneOf<ProgressGapPositionType>(['top', 'bottom', 'left', 'right']),
   width: IxPropTypes.oneOfType([String, Number]).def(132),
-  size: IxPropTypes.oneOf<ProgressSize>(['sm', 'md']),
+  size: IxPropTypes.oneOf<ProgressSize>(['sm', 'md', 'lg']),
+  icons: IxPropTypes.object<ProgressIcons>(),
 }
 
 export type ProgressProps = IxInnerPropTypes<typeof progressProps>
 export type ProgressPublicProps = IxPublicPropTypes<typeof progressProps>
 export type ProgressComponent = DefineComponent<Omit<HTMLAttributes, keyof ProgressPublicProps> & ProgressPublicProps>
 export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>
-
-export const convertProgressProps = {
-  ...progressProps,
-  success: IxPropTypes.object<ConvertProgressSuccess>().def(() => ({ percent: 0 })),
-  percent: IxPropTypes.number.def(0),
-}
-
-export type ConvertProgressProps = IxPublicPropTypes<typeof convertProgressProps>
