@@ -7,6 +7,8 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { useKey } from '@idux/components/utils'
+
 import { treeToken } from '../token'
 import { treeNodeProps } from '../types'
 import { getParentKeys } from '../utils'
@@ -37,19 +39,17 @@ export default defineComponent({
       handleDrop,
     } = inject(treeToken)!
 
-    const key = computed(() => props.node.key)
+    const key = useKey()
 
-    const isActive = computed(() => activeKey.value === key.value)
-    const isLast = computed(() => treeProps.showLine && props.node.isLast)
-    const hasTopLine = computed(
-      () => treeProps.showLine && !props.node.isLeaf && props.node.level !== 0 && props.node.isFirst,
-    )
-    const selected = computed(() => selectedKeys.value.includes(key.value))
-    const disabled = computed(() => props.node.selectDisabled || !treeProps.selectable)
+    const isActive = computed(() => activeKey.value === key)
+    const isLast = computed(() => treeProps.showLine && props.isLast)
+    const hasTopLine = computed(() => treeProps.showLine && !props.isLeaf && props.level !== 0 && props.isFirst)
+    const selected = computed(() => selectedKeys.value.includes(key))
+    const disabled = computed(() => props.selectDisabled || !treeProps.selectable)
 
-    const dragging = computed(() => dragKey.value === key.value)
-    const dropping = computed(() => dropKey.value === key.value)
-    const dropParent = computed(() => dropParentKey.value === key.value)
+    const dragging = computed(() => dragKey.value === key)
+    const dropping = computed(() => dropKey.value === key)
+    const dropParent = computed(() => dropParentKey.value === key)
     const dropBefore = computed(() => dropping.value && dropType.value === 'before')
     const dropInside = computed(() => dropping.value && dropType.value === 'inside')
     const dropAfter = computed(() => dropping.value && dropType.value === 'after')
@@ -62,7 +62,7 @@ export default defineComponent({
         [`${prefixCls}-last`]: isLast.value,
         [`${prefixCls}-disabled`]: disabled.value,
         [`${prefixCls}-selected`]: selected.value,
-        [`${prefixCls}-expanded`]: props.node.expanded,
+        [`${prefixCls}-expanded`]: props.expanded,
         [`${prefixCls}-dragging`]: dragging.value,
         [`${prefixCls}-dropping`]: dropping.value,
         [`${prefixCls}-drop-parent`]: dropParent.value,
@@ -111,9 +111,8 @@ export default defineComponent({
 
     return () => {
       const nodeMap = mergedNodeMap.value
-      const node = props.node
 
-      const { isLeaf, key, label, level, rawNode, expanded, dragDisabled, dropDisabled } = node
+      const { isLeaf, label, level, rawNode, expanded, checkDisabled, dragDisabled, dropDisabled, node } = props
       const { showLine, checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
       const currNode = nodeMap.get(key)
@@ -147,7 +146,7 @@ export default defineComponent({
           ) : (
             <Expand expanded={expanded} hasTopLine={hasTopLine.value} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
           )}
-          {checkable && <Checkbox node={node} />}
+          {checkable && <Checkbox checkDisabled={checkDisabled} node={node} />}
           <Content disabled={disabled.value} nodeKey={key} label={label} rawNode={rawNode} selected={selected.value} />
         </div>
       )

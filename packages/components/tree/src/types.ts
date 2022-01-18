@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FlattedNode } from './composables/useDataSource'
+import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
@@ -133,17 +133,31 @@ export interface TreeDragDropOptions {
 // private
 export const motionTreeNodeProps = {
   expanded: IxPropTypes.bool,
-  expandedNodes: IxPropTypes.array<FlattedNode>(),
-  node: IxPropTypes.object<FlattedNode>(),
+  expandedNodes: IxPropTypes.array<MergedNode>(),
+  node: IxPropTypes.object<MergedNode>(),
   prefixCls: IxPropTypes.string.isRequired,
 }
 
 export const treeNodeProps = {
-  node: IxPropTypes.object<FlattedNode>().isRequired,
+  node: IxPropTypes.object<MergedNode>().isRequired,
+  isLeaf: IxPropTypes.bool.isRequired,
+  isFirst: IxPropTypes.bool.isRequired,
+  isLast: IxPropTypes.bool.isRequired,
+  label: IxPropTypes.string.isRequired,
+  level: IxPropTypes.number.isRequired,
+  rawNode: IxPropTypes.object<TreeNode>().isRequired,
+  expanded: IxPropTypes.bool.isRequired,
+  children: IxPropTypes.array<MergedNode>(),
+  parentKey: IxPropTypes.oneOfType([String, Number, Symbol]),
+  checkDisabled: IxPropTypes.bool,
+  dragDisabled: IxPropTypes.bool,
+  dropDisabled: IxPropTypes.bool,
+  selectDisabled: IxPropTypes.bool,
 }
 
 export const treeNodeCheckboxProps = {
-  node: IxPropTypes.object<FlattedNode>().isRequired,
+  node: IxPropTypes.object<MergedNode>().isRequired,
+  checkDisabled: IxPropTypes.bool,
 }
 
 export const treeNodeExpandProps = {

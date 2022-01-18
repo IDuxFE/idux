@@ -22,17 +22,14 @@ export interface MergedNode {
   isLeaf: boolean
   isLast: boolean
   key: VKey
+  expanded: boolean
+  level: number
   parentKey?: VKey
   rawNode: TreeNode
   checkDisabled?: boolean
   dragDisabled?: boolean
   dropDisabled?: boolean
   selectDisabled?: boolean
-}
-
-export interface FlattedNode extends MergedNode {
-  expanded: boolean
-  level: number
 }
 
 export function useMergeNodes(
@@ -56,16 +53,15 @@ export function useMergeNodes(
 export function useFlattedNodes(
   mergedNodes: ComputedRef<MergedNode[]>,
   { expandedKeys }: ExpandableContext,
-): ComputedRef<FlattedNode[]> {
+): ComputedRef<MergedNode[]> {
   return computed(() => {
-    const _expandedKeys = expandedKeys.value
-
-    if (_expandedKeys.length > 0) {
-      const nodes: FlattedNode[] = []
-      mergedNodes.value.forEach(item => nodes.push(...flatNode(item, 0, _expandedKeys)))
+    const _expandedKeysMap = new Map(expandedKeys.value.map((item, index) => [item, index]))
+    if (_expandedKeysMap.size > 0) {
+      const nodes = flatNode(mergedNodes.value, _expandedKeysMap)
       return nodes
     }
-    return mergedNodes.value.map(item => ({ ...item, expanded: false, level: 0 }))
+
+    return mergedNodes.value
   })
 }
 
@@ -73,6 +69,7 @@ export function covertMergeNodes(
   props: TreeProps,
   getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeNode[],
+  parentKey?: VKey,
 ): MergedNode[] {
   const getKey = getNodeKey.value
 
@@ -88,6 +85,8 @@ export function covertMergeNodes(
       !!loadChildren,
       index === 0,
       index === nodes.length - 1,
+      -1,
+      parentKey,
     ),
   )
 }
@@ -101,12 +100,16 @@ function covertMergeNode(
   hasLoad: boolean,
   isFirst: boolean,
   isLast: boolean,
+  level: number,
   parentKey?: VKey,
 ): MergedNode {
   const key = getKey(rawNode)
   const { check, drag, drop, select } = covertDisabled(rawNode, disabled)
   const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeNode[] | undefined
   const label = rawNode[labelKey] as string
+
+  level++
+
   const children = subNodes?.map((subNode, index) =>
     covertMergeNode(
       subNode,
@@ -117,6 +120,7 @@ function covertMergeNode(
       hasLoad,
       index === 0,
       index === subNodes.length - 1,
+      level,
       key,
     ),
   )
@@ -128,6 +132,8 @@ function covertMergeNode(
     isLeaf: rawNode.isLeaf ?? !(children?.length || hasLoad),
     isLast,
     parentKey,
+    expanded: false,
+    level,
     rawNode,
     checkDisabled: check,
     dragDisabled: drag,
@@ -172,14 +178,31 @@ export function covertMergedNodeMap(mergedNodes: MergedNode[], map: Map<VKey, Me
 
 // TODO: performance optimization
 // when virtual scrolling is enabled, this do not need to traverse all nodes
-function flatNode(node: MergedNode, level: number, expandedRowKeys: VKey[]) {
-  const { children, key, ...reset } = node
-  const expanded = expandedRowKeys.includes(key)
-  const result: FlattedNode[] = [{ ...reset, children, key, level, expanded }]
+function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>) {
+  const flattedNodes: MergedNode[] = []
+  const stack: MergedNode[] = []
 
-  if (expanded && children) {
-    children.forEach(subNode => result.push(...flatNode(subNode, level + 1, expandedRowKeys)))
-  }
+  mergedNodes.forEach(node => {
+    stack.push(node)
 
-  return result
+    while (stack.length) {
+      const _node = stack.pop()
+      if (_node) {
+        const { children, key } = _node
+
+        const expanded = expandedKeysMap.has(key)
+        _node.expanded = expanded
+
+        flattedNodes.push(_node)
+
+        if (children && expanded) {
+          for (let i = children.length; i > 0; i--) {
+            stack.push(children[i - 1])
+          }
+        }
+      }
+    }
+  })
+
+  return flattedNodes
 }

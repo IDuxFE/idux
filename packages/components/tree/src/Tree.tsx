@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { MergedNode } from './composables/useDataSource'
 import type { VirtualItemRenderFn, VirtualScrollInstance, VirtualScrollToOptions } from '@idux/cdk/scroll'
 import type { StyleValue, VNodeTypes } from 'vue'
 
@@ -18,7 +19,7 @@ import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { useCheckable } from './composables/useCheckable'
-import { FlattedNode, useFlattedNodes, useMergeNodes } from './composables/useDataSource'
+import { useFlattedNodes, useMergeNodes } from './composables/useDataSource'
 import { useDragDrop } from './composables/useDragDrop'
 import { useEvents } from './composables/useEvents'
 import { useExpandable } from './composables/useExpandable'
@@ -126,10 +127,10 @@ export default defineComponent({
     const scrollTo = (option?: number | VirtualScrollToOptions) => {
       virtualScrollRef?.value?.scrollTo(option)
     }
-    const { setExpandAll } = expandableContext
-    expose({ focus, blur, scrollTo, setExpandAll })
 
-    const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: FlattedNode[]) => {
+    expose({ focus, blur, scrollTo })
+
+    const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: MergedNode[]) => {
       callEmit(
         props.onScrolledChange,
         startIndex,
@@ -143,9 +144,7 @@ export default defineComponent({
 
       let children: VNodeTypes
       if (nodes.length > 0) {
-        const itemRender: VirtualItemRenderFn<FlattedNode> = ({ item }) => (
-          <TreeNode key={item.key} node={item}></TreeNode>
-        )
+        const itemRender: VirtualItemRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
         const { height, virtual, onScroll, onScrolledBottom } = props
         children = (
           <CdkVirtualScroll
