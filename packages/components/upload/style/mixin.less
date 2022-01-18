@@ -1,0 +1,41 @@
+.upload-disabled-cursor() {
+  cursor: not-allowed;
+
+  > * {
+    pointer-events: none;
+  }
+}
+
+.upload-disabled-color() {
+
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: @disabled-color;
+  }
+}
+
+.upload-disabled-bg-color() {
+
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: @disabled-bg-color;
+  }
+}
+
+.upload-disabled-border-color() {
+
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: @color-graphite-l20;
+  }
+}
+
+.base-transition() {
+  transition: all .3s;
+}

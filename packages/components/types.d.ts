@@ -69,6 +69,7 @@ import type { TimePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
 import type { TooltipComponent } from '@idux/components/tooltip'
 import type { TreeComponent } from '@idux/components/tree'
+import type { UploadComponent, UploadFilesComponent } from '@idux/components/upload'
 
 declare module 'vue' {
   export interface GlobalComponents {
@@ -154,6 +155,8 @@ declare module 'vue' {
     IxTimePicker: TimePickerComponent
     IxTooltip: TooltipComponent
     IxTree: TreeComponent
+    IxUpload: UploadComponent
+    IxUploadFiles: UploadFilesComponent
   }
 }
 

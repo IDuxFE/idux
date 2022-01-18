@@ -94,6 +94,16 @@ export interface TimeRangePickerLocale {
   placeholder: [string, string]
 }
 
+export interface UploadLocale {
+  uploading: string
+  error: string
+  cancel: string
+  preview: string
+  remove: string
+  retry: string
+  download: string
+}
+
 export interface Locale {
   type: LocaleType
   date: DateLocale
@@ -106,6 +116,7 @@ export interface Locale {
   table: TableLocale
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale
+  upload: UploadLocale
 }
 
 export type LocaleKey = keyof Locale

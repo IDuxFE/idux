@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload render render work 1`] = `
+"<div class=\\"ix-upload\\">
+  <div class=\\"ix-upload-selector\\"><input class=\\"ix-upload-input\\" type=\\"file\\">
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  <div class=\\"ix-upload-tip\\">
+    <!---->
+  </div>
+</div>"
+`;

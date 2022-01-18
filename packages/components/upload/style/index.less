@@ -1,0 +1,35 @@
+@import "./list.less";
+@import "./mixin.less";
+
+.@{upload-prefix} {
+
+  &-selector {
+    display: inline-block;
+    cursor: pointer;
+
+    &-drag {
+      border-radius: @upload-border-radius;
+      border: @upload-selector-drag-border;
+      .base-transition();
+
+      &:hover {
+        border: @upload-selector-dragover-border;
+      }
+    }
+
+    &-dragover {
+      border: @upload-selector-dragover-border;
+    }
+
+    &-disabled {
+      .upload-disabled-cursor();
+      .upload-disabled-bg-color();
+      .upload-disabled-color();
+      .upload-disabled-border-color();
+    }
+  }
+
+  &-input {
+    display: none;
+  }
+}
