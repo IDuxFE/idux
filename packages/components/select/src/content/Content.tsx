@@ -12,6 +12,7 @@ import { defineComponent, inject, onMounted } from 'vue'
 import { CdkVirtualScroll, VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
+import { ɵInput } from '@idux/components/_private/input'
 
 import { selectToken } from '../token'
 import ListBox from './ListBox'
@@ -20,7 +21,17 @@ import OptionGroup from './OptionGroup'
 
 export default defineComponent({
   setup() {
-    const { props, slots, flattedOptions, virtualScrollRef, scrollToActivated } = inject(selectToken)!
+    const {
+      props,
+      slots,
+      mergedPrefixCls,
+      flattedOptions,
+      virtualScrollRef,
+      scrollToActivated,
+      inputValue,
+      handleInput,
+      handleClear,
+    } = inject(selectToken)!
 
     onMounted(() => scrollToActivated())
 
@@ -62,6 +73,21 @@ export default defineComponent({
         )
       } else {
         children.push(<ɵEmpty v-slots={slots} empty={props.empty} />)
+      }
+
+      if (props.searchable === 'overlay') {
+        children.unshift(
+          <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
+            <ɵInput
+              clearable
+              size="sm"
+              suffix="search"
+              value={inputValue.value}
+              onInput={handleInput}
+              onClear={handleClear}
+            />
+          </div>,
+        )
       }
 
       return overlayRender ? overlayRender(children) : <div>{children}</div>

@@ -10,26 +10,28 @@
 import type { MergedOption } from '../composables/useOptions'
 import type { FunctionalComponent } from 'vue'
 
-import { inject } from 'vue'
+import { type Slots, inject } from 'vue'
 
 import { selectToken } from '../token'
+import { renderOptionLabel } from '../utils/renderOptionLabel'
 
 const defaultStyle = { height: 0, width: 0, overflow: 'hidden' }
 
 const ListBox: FunctionalComponent = () => {
-  const { props, selectedValue, mergedOptions, activeIndex, activeOption } = inject(selectToken)!
+  const { props, slots, selectedValue, mergedOptions, activeIndex, activeOption } = inject(selectToken)!
   const currSelectedValue = selectedValue.value
   const { compareWith } = props
   return (
     <div role="listbox" style={defaultStyle}>
-      {renderOption(mergedOptions.value[activeIndex.value - 1], currSelectedValue, compareWith)}
-      {renderOption(activeOption.value, currSelectedValue, compareWith)}
-      {renderOption(mergedOptions.value[activeIndex.value + 1], currSelectedValue, compareWith)}
+      {renderOption(slots, mergedOptions.value[activeIndex.value - 1], currSelectedValue, compareWith)}
+      {renderOption(slots, activeOption.value, currSelectedValue, compareWith)}
+      {renderOption(slots, mergedOptions.value[activeIndex.value + 1], currSelectedValue, compareWith)}
     </div>
   )
 }
 
 const renderOption = (
+  slots: Slots,
   option: MergedOption | undefined,
   selectedValue: any,
   compareWith: (o1: any, o2: any) => boolean,
@@ -41,7 +43,7 @@ const renderOption = (
   const selected = compareWith(selectedValue, value)
   return (
     <div key={key} role="option" aria-label={label} aria-selected={selected}>
-      {rawOption.slots?.default?.(rawOption) ?? label}
+      {renderOptionLabel(slots, rawOption, label)}
     </div>
   )
 }

@@ -34,7 +34,7 @@ order: 0
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
-| `searchable` | 是否可搜索 | `boolean` | `false` | - | - |
+| `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
 | `searchFilter` | 根据搜索的文本进行筛选 | `boolean \| SelectFilterFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
@@ -83,8 +83,8 @@ export type SelectFilterFn = (searchValue: string, data: SelectData) => boolean
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 选项内容 | - | - |
-|  `label` | 自定义选中的标签 | `data: SelectOption` |  |
-|  `maxLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
+|  `selectedLabel` | 自定义选中的标签 | `data: SelectOption` |  |
+|  `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
 |  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
 |  `optionGroupLabel` | 自定义选项组的文本 | `data: SelectOptionGroup` | - |
 

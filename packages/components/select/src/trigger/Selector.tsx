@@ -6,14 +6,16 @@
  */
 
 import type { MergedOption } from '../composables/useOptions'
-import type { VNodeTypes } from 'vue'
+import type { VNodeChild } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { Logger } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 import { selectToken } from '../token'
 import { selectorProps } from '../types'
+import { renderOptionLabel } from '../utils/renderOptionLabel'
 import Input from './Input'
 import Item from './Item'
 
@@ -47,11 +49,20 @@ export default defineComponent({
     })
 
     const showItems = computed(() => {
-      return selectProps.multiple || (selectedValue.value.length > 0 && !isComposing.value && !inputValue.value)
+      return (
+        selectProps.multiple ||
+        (selectedValue.value.length > 0 &&
+          !isComposing.value &&
+          (!inputValue.value || selectProps.searchable === 'overlay'))
+      )
     })
 
     const showPlaceholder = computed(() => {
-      return selectedValue.value.length === 0 && !isComposing.value && !inputValue.value
+      return (
+        selectedValue.value.length === 0 &&
+        !isComposing.value &&
+        (!inputValue.value || selectProps.searchable === 'overlay')
+      )
     })
 
     return () => {
@@ -74,12 +85,21 @@ export default defineComponent({
           handleItemRemove,
           title: label,
         }
-        let labelNode: VNodeTypes | undefined
+        let labelNode: VNodeChild | undefined
         if (isMax) {
-          labelNode = slots.maxLabel?.(item.value) ?? label
+          if (__DEV__ && slots.maxLabel) {
+            Logger.warn('components/select', 'slot `maxLabel` is deprecated, please use slot `overflowedLabel` instead')
+          }
+          const overflowedLabelSlot = slots.overflowedLabel ?? slots.maxLabel
+          labelNode = overflowedLabelSlot?.(item.value) ?? label
         } else {
-          labelNode = slots.label?.(item.rawOption) ?? rawOption.slots?.default?.() ?? label
+          if (__DEV__ && slots.label) {
+            Logger.warn('components/select', 'slots `label` is deprecated, please use slots `selectedLabel` instead')
+          }
+          const selectedLabelSlot = slots.label ?? slots.selectedLabel
+          labelNode = selectedLabelSlot ? selectedLabelSlot(rawOption) : renderOptionLabel(slots, rawOption, label)
         }
+
         return <Item {...itemProps}>{labelNode}</Item>
       })
 

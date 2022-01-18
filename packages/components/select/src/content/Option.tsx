@@ -7,12 +7,11 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { isString } from 'lodash-es'
-
 import { IxCheckbox } from '@idux/components/checkbox'
 
 import { selectToken } from '../token'
 import { optionProps } from '../types'
+import { renderOptionLabel } from '../utils/renderOptionLabel'
 
 export default defineComponent({
   props: optionProps,
@@ -61,8 +60,7 @@ export default defineComponent({
       const { multiple } = selectProps
       const selected = isSelected.value
       const prefixCls = `${mergedPrefixCls.value}-option`
-      const labelRender = rawOption.customLabel ?? 'optionLabel'
-      const labelSlot = isString(labelRender) ? slots[labelRender] : labelRender
+
       return (
         <div
           class={classes.value}
@@ -73,7 +71,7 @@ export default defineComponent({
           aria-selected={selected}
         >
           {multiple && <IxCheckbox checked={isSelected.value} disabled={disabled} />}
-          <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawOption) : label}</span>
+          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawOption, label)}</span>
         </div>
       )
     }

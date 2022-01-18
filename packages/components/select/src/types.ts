@@ -41,7 +41,7 @@ export const selectProps = {
   overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
   placeholder: IxPropTypes.string,
   readonly: IxPropTypes.bool.def(false),
-  searchable: IxPropTypes.bool.def(false),
+  searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]).def(false),
   searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
