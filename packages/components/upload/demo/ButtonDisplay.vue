@@ -2,7 +2,7 @@
   <IxUpload v-model:files="files" action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354">
     <a>Click here</a>
     <template #list>
-      <IxUploadList type="text" />
+      <IxUploadFiles type="text" />
     </template>
   </IxUpload>
 </template>

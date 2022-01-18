@@ -29,7 +29,7 @@ import type { StepperSize } from '@idux/components/stepper'
 import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
-import type { UploadIconType, UploadListType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
+import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { VNode } from 'vue'
 
 // Common
@@ -199,8 +199,8 @@ export interface UploadConfig {
   customRequest?: (option: UploadRequestOption) => { abort: () => void }
 }
 
-export interface UploadListConfig {
-  type: UploadListType
+export interface UploadFilesConfig {
+  type: UploadFilesType
   icon: Partial<Record<UploadIconType, string | VNode>>
 }
 
@@ -454,7 +454,7 @@ export interface GlobalConfig {
   timePicker: TimePickerConfig
   timeRangePicker: TimeRangePickerConfig
   upload: UploadConfig
-  uploadList: UploadListConfig
+  uploadFiles: UploadFilesConfig
   // Data Display
   avatar: AvatarConfig
   badge: BadgeConfig

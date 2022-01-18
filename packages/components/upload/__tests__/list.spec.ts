@@ -1,4 +1,4 @@
-import type { UploadListProps } from '../src/types'
+import type { UploadFilesProps } from '../src/types'
 import type { MountingOptions } from '@vue/test-utils'
 
 import { flushPromises, mount } from '@vue/test-utils'
@@ -8,14 +8,14 @@ import { renderWork } from '@tests'
 
 import { IxIcon } from '@idux/components/icon'
 
-import UploadFilesListCpm from '../src/List'
+import UploadFilesCpm from '../src/List'
 import { uploadToken } from '../src/token'
 
-const uploadListMount = (options?: MountingOptions<Partial<UploadListProps>>) => {
+const uploadFilesMount = (options?: MountingOptions<Partial<UploadFilesProps>>) => {
   const { global: { provide: { [uploadToken as unknown as string]: provideObj } = {}, ...restGlobal } = {}, ...rest } =
-    options as MountingOptions<UploadListProps>
+    options as MountingOptions<UploadFilesProps>
 
-  return mount(UploadFilesListCpm, {
+  return mount(UploadFilesCpm, {
     global: {
       provide: {
         [uploadToken as symbol]: {
@@ -32,12 +32,12 @@ const uploadListMount = (options?: MountingOptions<Partial<UploadListProps>>) =>
 }
 
 describe('Upload list render', () => {
-  renderWork<UploadListProps>(UploadFilesListCpm, {
+  renderWork<UploadFilesProps>(UploadFilesCpm, {
     global: { provide: { [uploadToken as symbol]: { props: {}, files: { value: [] }, setSelectorVisible: () => {} } } },
   })
 
   test('type work', async () => {
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -66,7 +66,7 @@ describe('Upload list render', () => {
   })
 
   test('icon work', async () => {
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -88,7 +88,7 @@ describe('Upload list render', () => {
     expect(wrapper.find('.ix-icon-delete').exists()).toBeTruthy()
     expect(wrapper.find('.ix-icon-edit').exists()).toBeTruthy()
 
-    const wrapperFileSuccess = uploadListMount({
+    const wrapperFileSuccess = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -109,7 +109,7 @@ describe('Upload list render', () => {
           file: 'left',
         },
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    } as MountingOptions<Partial<UploadFilesProps>>)
     await flushPromises()
 
     expect(wrapperFileSuccess.find('.ix-icon-download').exists()).toBeTruthy()
@@ -127,7 +127,7 @@ describe('Upload list render', () => {
       },
     ]
 
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -141,7 +141,7 @@ describe('Upload list render', () => {
         },
         onDownload,
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    } as MountingOptions<Partial<UploadFilesProps>>)
 
     await wrapper.find('.ix-upload-icon-download').trigger('click')
 
@@ -158,7 +158,7 @@ describe('Upload list render', () => {
       },
     ]
 
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -172,7 +172,7 @@ describe('Upload list render', () => {
         },
         onPreview,
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    } as MountingOptions<Partial<UploadFilesProps>>)
 
     await wrapper.find('.ix-upload-name').trigger('click')
 
@@ -195,7 +195,7 @@ describe('Upload list render', () => {
       },
     ]
 
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -210,7 +210,7 @@ describe('Upload list render', () => {
         },
         onRetry,
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    } as MountingOptions<Partial<UploadFilesProps>>)
     await wrapper.find('.ix-upload-icon-retry').trigger('click')
 
     expect(upload).toBeCalled()
@@ -230,7 +230,7 @@ describe('Upload list render', () => {
       },
     ]
 
-    const wrapper = uploadListMount({
+    const wrapper = uploadFilesMount({
       global: {
         provide: {
           [uploadToken as symbol]: {
@@ -243,7 +243,7 @@ describe('Upload list render', () => {
       props: {
         onRemove,
       },
-    } as MountingOptions<Partial<UploadListProps>>)
+    } as MountingOptions<Partial<UploadFilesProps>>)
     await wrapper.find('.ix-upload-icon-remove').trigger('click')
 
     expect(onRemove).toBeCalledWith(expect.objectContaining(defaultFiles[0]))

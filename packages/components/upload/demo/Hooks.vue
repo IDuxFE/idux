@@ -10,7 +10,7 @@
   >
     <IxButton>Hook</IxButton>
     <template #list>
-      <IxUploadList type="imageCard" />
+      <IxUploadFiles type="imageCard" />
     </template>
   </IxUpload>
   <IxTimeline>

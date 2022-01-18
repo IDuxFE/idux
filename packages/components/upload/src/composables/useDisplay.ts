@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { UploadFile, UploadListProps, UploadListType, UploadProps } from '../types'
+import type { UploadFile, UploadFilesProps, UploadFilesType, UploadProps } from '../types'
 import type { IconsMap } from '../util/icon'
 import type { ComputedRef, ShallowRef, VNode } from 'vue'
 
@@ -20,7 +20,7 @@ export function useCmpClasses(): ComputedRef<string> {
   return computed(() => `${commonPrefix.prefixCls}-upload`)
 }
 
-export function useListClasses(props: UploadProps, type: UploadListType): ComputedRef<string> {
+export function useListClasses(props: UploadProps, type: UploadFilesType): ComputedRef<string> {
   const cpmClasses = useCmpClasses()
   return computed(() =>
     normalizeClass([
@@ -31,20 +31,20 @@ export function useListClasses(props: UploadProps, type: UploadListType): Comput
   )
 }
 
-export function useIcon(props: UploadListProps): ComputedRef<IconsMap> {
-  const uploadListConfig = useGlobalConfig('uploadList')
-  return computed(() => props.icon ?? uploadListConfig.icon)
+export function useIcon(props: UploadFilesProps): ComputedRef<IconsMap> {
+  const uploadFilesConfig = useGlobalConfig('uploadFiles')
+  return computed(() => props.icon ?? uploadFilesConfig.icon)
 }
 
 export function useSelectorVisible(
   props: UploadProps,
-  listType: ComputedRef<UploadListType> | UploadListType,
+  listType: ComputedRef<UploadFilesType> | UploadFilesType,
 ): ComputedRef<boolean>[] {
   // imageCard自带selector，drag统一用外部
   const outerSelector = computed(
     () =>
       props.dragable ||
-      (isProxy(listType) ? (listType as ComputedRef<UploadListType>).value !== 'imageCard' : listType !== 'imageCard'),
+      (isProxy(listType) ? (listType as ComputedRef<UploadFilesType>).value !== 'imageCard' : listType !== 'imageCard'),
   )
   const imageCardSelector = computed(() => !outerSelector.value)
   return [outerSelector, imageCardSelector]

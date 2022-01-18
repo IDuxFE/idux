@@ -5,7 +5,7 @@
       <p>Drag and drop files or click to select files to upload.</p>
     </div>
     <template #list>
-      <IxUploadList type="text" />
+      <IxUploadFiles type="text" />
     </template>
   </IxUpload>
 </template>

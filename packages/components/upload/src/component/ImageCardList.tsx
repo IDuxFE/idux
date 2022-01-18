@@ -28,14 +28,14 @@ import {
 } from '../composables/useDisplay'
 import { useOperation } from '../composables/useOperation'
 import { uploadToken } from '../token'
-import { uploadListProps } from '../types'
+import { uploadFilesProps } from '../types'
 import { renderOprIcon } from '../util/icon'
 import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
 import FileSelector from './Selector'
 
 export default defineComponent({
   name: 'IxUploadImageCardList',
-  props: uploadListProps,
+  props: uploadFilesProps,
   setup(listProps) {
     const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)

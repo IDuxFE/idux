@@ -16,7 +16,7 @@ export type UploadRequestHeader = Record<string, string>
 export type UploadRequestMethod = 'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'
 export type UploadRequestStatus = 'loadstart' | 'progress' | 'abort' | 'error' | 'loadend'
 export type UploadFileStatus = 'selected' | 'uploading' | 'error' | 'success' | 'abort'
-export type UploadListType = 'text' | 'image' | 'imageCard'
+export type UploadFilesType = 'text' | 'image' | 'imageCard'
 export type UploadIconType = 'file' | 'preview' | 'download' | 'remove' | 'retry'
 export interface UploadProgressEvent extends ProgressEvent {
   percent?: number
@@ -89,17 +89,17 @@ export type UploadPublicProps = IxPublicPropTypes<typeof uploadProps>
 export type UploadComponent = DefineComponent<Omit<HTMLAttributes, keyof UploadPublicProps> & UploadPublicProps>
 export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 
-export const uploadListProps = {
-  type: IxPropTypes.oneOf<UploadListType>(['text', 'image', 'imageCard']),
+export const uploadFilesProps = {
+  type: IxPropTypes.oneOf<UploadFilesType>(['text', 'image', 'imageCard']),
   icon: IxPropTypes.object<Partial<Record<UploadIconType, string | VNode>>>(),
   onDownload: IxPropTypes.emit<(file: UploadFile) => void>(),
   onPreview: IxPropTypes.emit<(file: UploadFile) => void>(),
   onRemove: IxPropTypes.emit<(file: UploadFile) => boolean | Promise<boolean>>(),
   onRetry: IxPropTypes.emit<(file: UploadFile) => void>(),
 }
-export type UploadListProps = IxInnerPropTypes<typeof uploadListProps>
-export type UploadListPublicProps = IxPublicPropTypes<typeof uploadListProps>
-export type UploadListComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof UploadListPublicProps> & UploadListPublicProps
+export type UploadFilesProps = IxInnerPropTypes<typeof uploadFilesProps>
+export type UploadFilesPublicProps = IxPublicPropTypes<typeof uploadFilesProps>
+export type UploadFilesComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof UploadFilesPublicProps> & UploadFilesPublicProps
 >
-export type UploadListInstance = InstanceType<DefineComponent<UploadListProps>>
+export type UploadFilesInstance = InstanceType<DefineComponent<UploadFilesProps>>

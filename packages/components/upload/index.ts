@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { UploadComponent, UploadListComponent } from './src/types'
+import type { UploadComponent, UploadFilesComponent } from './src/types'
 
-import UploadList from './src/List'
+import UploadFiles from './src/List'
 import Upload from './src/Upload'
 
 const IxUpload = Upload as unknown as UploadComponent
-const IxUploadList = UploadList as unknown as UploadListComponent
+const IxUploadFiles = UploadFiles as unknown as UploadFilesComponent
 
-export { IxUpload, IxUploadList }
+export { IxUpload, IxUploadFiles }
 
 export type {
-  UploadListType,
+  UploadFilesType,
   UploadRequestMethod,
   UploadRequestStatus,
   UploadFileStatus,
@@ -28,7 +28,7 @@ export type {
   UploadInstance,
   UploadComponent,
   UploadPublicProps as UploadProps,
-  UploadListInstance,
-  UploadListComponent,
-  UploadListPublicProps as UploadListProps,
+  UploadFilesInstance,
+  UploadFilesComponent,
+  UploadFilesPublicProps as UploadFilesProps,
 } from './src/types'

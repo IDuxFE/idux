@@ -6,7 +6,7 @@
  */
 
 import type { UploadToken } from '../token'
-import type { UploadFile, UploadListProps, UploadProps } from '../types'
+import type { UploadFile, UploadFilesProps, UploadProps } from '../types'
 import type { ComputedRef } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
@@ -23,7 +23,7 @@ export interface FileOperation {
 
 export function useOperation(
   files: ComputedRef<UploadFile[]>,
-  listProps: UploadListProps,
+  listProps: UploadFilesProps,
   uploadProps: UploadProps,
   opr: Pick<UploadToken, 'abort' | 'upload' | 'onUpdateFiles' | 'setViewerVisible'>,
 ): FileOperation {

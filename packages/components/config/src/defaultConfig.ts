@@ -57,7 +57,7 @@ import type {
   TreeConfig,
   TreeSelectConfig,
   UploadConfig,
-  UploadListConfig,
+  UploadFilesConfig,
 } from './types'
 
 import { numFormatter } from './numFormatter'
@@ -211,7 +211,7 @@ const upload: UploadConfig = {
   requestMethod: 'post',
 }
 
-const uploadList: UploadListConfig = {
+const uploadFiles: UploadFilesConfig = {
   type: 'text',
   icon: {
     file: 'paper-clip',
@@ -431,7 +431,7 @@ export const defaultConfig: GlobalConfig = {
   timeRangePicker,
   treeSelect,
   upload,
-  uploadList,
+  uploadFiles,
   // Data Display
   avatar,
   badge,

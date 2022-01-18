@@ -6,7 +6,7 @@
   >
     <IxButton>Manual upload</IxButton>
     <template #list>
-      <IxUploadList type="text" />
+      <IxUploadFiles type="text" />
     </template>
   </IxUpload>
 </template>
