@@ -22,8 +22,8 @@ subtitle: 分页
 | `showSizeChanger` | 是否是否可以改变 `pageSize` | `boolean` | `false` | ✅ | - |
 | `showTitle` | 是否显示原生 `title` 提示 | `boolean` | `true` | ✅ | - |
 | `showTotal` | 是否显示数据总数 | `boolean` | `true` | ✅ | - |
-| `simple` | 显示为简单分页 | `boolean` | `false` | ✅ | - |
-| `size` | 分页组件大小 | `md \| sm` | `sm` | ✅ | - |
+| `simple` | 显示为简单分页 | `boolean` | `false` | - | - |
+| `size` | 分页组件大小 | `md \| sm` | `md` | ✅ | - |
 | `total` | 数据总数 | `number` | `0` | - | - |
 | `onChange` | `pageIndex` 或者 `pageSize` 发生改变时的回调 | `(pageIndex: number, pageSize: number) => void` | - | - | - |
 

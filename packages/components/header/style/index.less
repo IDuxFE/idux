@@ -49,7 +49,7 @@
     }
   }
 
-  .@{idux-prefix}-avatar {
+  .@{avatar-prefix} {
     margin-right: @header-avatar-margin-right;
   }
 
@@ -72,13 +72,10 @@
     cursor: pointer;
     color: @header-suffix-color;
     font-size: @header-suffix-font-size;
+    padding: @header-suffix-padding;
 
-    > .@{idux-prefix}-icon {
-      padding: @header-suffix-padding;
-    }
-
-    > .@{idux-prefix}-icon:hover {
-      color: @header-suffix-active-icon-color;
+    &:hover {
+      color: @header-suffix-active-color;
     }
   }
 
@@ -94,8 +91,8 @@
     .@{header-prefix}-title,
     .@{header-prefix}-sub-title,
     .@{header-prefix}-description,
-    .@{header-prefix}-prefix:hover,
-    .@{header-prefix}-suffix > .@{idux-prefix}-icon:hover {
+    .@{header-prefix}-prefix,
+    .@{header-prefix}-suffix {
       color: @header-disabled-color;
       cursor: not-allowed;
     }

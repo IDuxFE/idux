@@ -76,8 +76,9 @@ import {
 addIconDefinitions(IDUX_ICON_DEPENDENCIES);
 
 // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
+// 注意：请确认图标的 svg 资源依旧被正确放入到 `public/idux-icons` 目录中
 const loadIconDynamically = (iconName: string) => {
-  return fetch(`/inline-icons/${iconName}.svg`).then((res) => res.text());
+  return fetch(`/idux-icons/${iconName}.svg`).then((res) => res.text());
 };
 
 const globalConfig = createGlobalConfig({

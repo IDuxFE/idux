@@ -87,7 +87,7 @@ function renderHeader(
     }
   } else {
     const iconName = expandIcon.value
-    iconNode = iconName ? <IxIcon name={iconName} rotate={expanded ? 90 : 0}></IxIcon> : undefined
+    iconNode = iconName ? <IxIcon name={iconName} rotate={expanded ? 90 : 0} /> : undefined
   }
   const headerSlots = iconNode ? { prefix: () => iconNode } : undefined
   const { header, disabled } = props

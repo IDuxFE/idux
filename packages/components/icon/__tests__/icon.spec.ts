@@ -51,21 +51,17 @@ describe('Icon', () => {
 
   test('rotate work', async () => {
     const wrapper = IconMount({ props: { name: 'up', rotate: true } })
-    await flushPromises()
 
-    expect(wrapper.classes()).toContain('ix-icon-spin')
+    expect(wrapper.classes()).toContain('ix-icon-spinning')
 
     await wrapper.setProps({ rotate: 90 })
-    await flushPromises()
 
-    expect(wrapper.classes()).not.toContain('ix-icon-spin')
-    expect(wrapper.find('svg').element.style.transform).toBe('rotate(90deg)')
+    expect(wrapper.classes()).not.toContain('ix-icon-spinning')
+    expect(wrapper.element.style.transform).toBe('rotate(90deg)')
 
-    await wrapper.setProps({ name: 'loading', rotate: '180' })
-    await flushPromises()
+    await wrapper.setProps({ rotate: '180' })
 
-    expect(wrapper.classes()).toContain('ix-icon-spin')
-    expect(wrapper.find('svg').element.style.transform).toBe('rotate(180deg)')
+    expect(wrapper.element.style.transform).toBe('rotate(180deg)')
   })
 
   test('slot work', async () => {

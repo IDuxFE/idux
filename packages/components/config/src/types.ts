@@ -304,7 +304,7 @@ export interface PopoverConfig {
 export interface MessageConfig {
   destroyOnHover: boolean
   duration: number
-  icon?: Partial<Record<MessageType, string | VNode>>
+  icon: Partial<Record<MessageType, string | VNode>>
   maxCount: number
   target?: PortalTargetType
   top?: number | string

@@ -8,9 +8,11 @@
       <IxIcon name="caret-left-filled" @click="onPrefixClick" />
     </template>
     <template #suffix>
-      <IxIcon name="setting" @click="onSuffixClick"></IxIcon>
-      <IxIcon name="menu" @click="onSuffixClick"></IxIcon>
-      <IxButton mode="link" @click="onSuffixClick">More</IxButton>
+      <IxSpace>
+        <IxButton icon="setting" @click="onSuffixClick"></IxButton>
+        <IxButton icon="menu" @click="onSuffixClick"></IxButton>
+        <IxButton @click="onSuffixClick">More</IxButton>
+      </IxSpace>
     </template>
   </IxHeader>
 </template>

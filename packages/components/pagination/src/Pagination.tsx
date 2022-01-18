@@ -84,7 +84,7 @@ export default defineComponent({
             <span>{lastIndex.value}</span>
           </li>,
         )
-        children.push(<Item disabled={activeIndex.value === 1} type="next" />)
+        children.push(<Item disabled={activeIndex.value === lastIndex.value} type="next" />)
       } else {
         items.value.forEach(item => children.push(<Item key={item.type + '-' + item.index} {...item} />))
         showSizeChanger.value && children.push(<Sizes />)

@@ -5,15 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IconProps } from './types'
-import type { IconConfig } from '@idux/components/config'
+import { type CSSProperties, computed, defineComponent, normalizeClass, onMounted, ref, watch } from 'vue'
 
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { convertCssPixel, isNumeric } from '@idux/cdk/utils'
+import { type IconConfig, useGlobalConfig } from '@idux/components/config'
 
-import { isNumeric } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
-
-import { iconProps } from './types'
+import { type IconProps, iconProps } from './types'
 import { clearSVGElement, covertSVGNode, loadSVGElement, loadSvgElementFormScript } from './utils'
 
 export default defineComponent({
@@ -37,34 +34,32 @@ export default defineComponent({
       appendChild(props, config, rootElement)
     })
 
-    watch(
-      () => props.rotate,
-      rotate => {
-        const firstChild = root.value?.firstElementChild
-        if (firstChild) {
-          handleRotate(firstChild as SVGElement, rotate)
-        }
-      },
-    )
-
     const classes = computed(() => {
       const { name, rotate } = props
-      const isSpin = name === 'loading' || (typeof rotate === 'boolean' && rotate)
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${name}`]: !!name,
-        [`${prefixCls}-spin`]: isSpin,
+        [`${prefixCls}-spinning`]: rotate === true,
+      })
+    })
+
+    const style = computed<CSSProperties>(() => {
+      const { rotate, color, size } = props
+      return {
+        color,
+        fontSize: convertCssPixel(size),
+        transform: isNumeric(rotate) ? `rotate(${rotate}deg)` : undefined,
       }
     })
 
     return () => {
       const { name } = props
       if (name) {
-        return <i ref={root} class={classes.value} role="img" aria-label={name}></i>
+        return <i ref={root} class={classes.value} style={style.value} role="img" aria-label={name}></i>
       } else {
         return (
-          <i ref={root} class={classes.value} role="img">
+          <i ref={root} class={classes.value} style={style.value} role="img">
             {covertSVGNode(slots.default?.())}
           </i>
         )
@@ -74,22 +69,13 @@ export default defineComponent({
 })
 
 async function appendChild(props: IconProps, config: IconConfig, rootElement: HTMLElement): Promise<void> {
-  const { name, iconfont, rotate } = props
+  const { name, iconfont } = props
   if (name) {
     const svgElement = iconfont
       ? await loadSvgElementFormScript(name)
       : await loadSVGElement(name, config.loadIconDynamically)
     if (svgElement) {
-      handleRotate(svgElement, rotate)
       rootElement.appendChild(svgElement)
     }
-  }
-}
-
-function handleRotate(svg: SVGElement, rotate?: number | string | boolean): void {
-  if (isNumeric(rotate)) {
-    svg.setAttribute('style', `transform: rotate(${rotate}deg)`)
-  } else {
-    svg.removeAttribute('style')
   }
 }
