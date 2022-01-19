@@ -50,7 +50,7 @@ export default defineComponent({
       if (suffix) {
         return suffix
       }
-      return props.searchable && isFocused.value ? 'search' : config.suffix
+      return props.searchable === true && isFocused.value ? 'search' : config.suffix
     })
 
     const classes = computed(() => {

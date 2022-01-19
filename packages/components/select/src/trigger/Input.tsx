@@ -28,7 +28,7 @@ export default defineComponent({
 
     const innerStyle = computed(() => {
       const { allowInput, searchable } = props
-      const isOpacity = allowInput || searchable
+      const isOpacity = allowInput || searchable === true
       return { opacity: isOpacity ? undefined : 0 }
     })
 

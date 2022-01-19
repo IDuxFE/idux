@@ -1,10 +1,29 @@
 <template>
-  <IxSelect v-model:value="value" :options="options" searchable placeholder="Searchable" @change="onChange"> </IxSelect>
+  <IxSpace direction="vertical">
+    <IxSpace> searchable:<IxRadioGroup v-model:value="searchableValue" :options="searchableOptions" /></IxSpace>
+    <IxSelect
+      v-model:value="value"
+      :options="options"
+      :searchable="searchableValue"
+      placeholder="Searchable"
+      @change="onChange"
+    >
+    </IxSelect>
+  </IxSpace>
 </template>
 <script setup lang="ts">
+import type { RadioOption } from '@idux/components/radio'
+import type { SelectData } from '@idux/components/select'
+
 import { ref } from 'vue'
 
-import { SelectData } from '@idux/components/select'
+const searchableValue = ref(true)
+
+const searchableOptions: RadioOption[] = [
+  { label: 'true', value: true },
+  { label: 'overlay', value: 'overlay' },
+  { label: 'false', value: false },
+]
 
 const options: SelectData[] = [
   { key: 1, label: 'Tom', value: 'tom' },
