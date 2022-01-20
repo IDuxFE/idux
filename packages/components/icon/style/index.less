@@ -1,37 +1,28 @@
+// for SVG icon, see https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
 .@{icon-prefix} {
-  display: inline-block;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-self: center;
+  position: relative;
+  top: 0.125em;
+  min-width: 1em;
+  min-height: 1em;
+  line-height: 1em;
   color: inherit;
-  font-style: normal;
-  line-height: 0;
-  text-align: center;
-  text-transform: none;
-  vertical-align: -0.125em;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  outline: 0;
 
-  > * {
-    line-height: 1;
+  > svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
   }
 
-  svg {
-    display: inline-block;
-    transition: transform @transition-duration-base @ease-out;
+  &-loading,
+  &-spinning {
+    animation: icon-spinning 1.5s infinite linear;
   }
 }
 
-.@{icon-prefix}::before {
-  display: none;
-}
-
-.@{icon-prefix}-spin::before,
-.@{icon-prefix}-spin {
-  display: inline-block;
-  animation: spin-circle 1s infinite linear;
-}
-
-@keyframes spin-circle {
+@keyframes icon-spinning {
 
   100% {
     transform: rotate(360deg);

@@ -91,24 +91,22 @@ describe('Alert', () => {
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1message2')
 
     await wrapper.setProps({ pagination: true })
+    const [leftIcon, rightIcon] = wrapper.findAll('.ix-alert-pagination-icon')
+
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
-    expect(wrapper.find('.ix-icon-left').classes()).toContain('ix-alert-pagination-disabled')
-    expect(wrapper.find('.ix-icon-right').classes()).not.toContain('ix-alert-pagination-disabled')
+    expect(leftIcon.classes()).toContain('ix-alert-pagination-disabled')
+    expect(rightIcon.classes()).not.toContain('ix-alert-pagination-disabled')
 
-    await wrapper.find('.ix-icon-left').trigger('click')
+    await wrapper.trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
 
-    await wrapper.find('.ix-icon-right').trigger('click')
-    expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
-    expect(wrapper.find('.ix-icon-left').classes()).not.toContain('ix-alert-pagination-disabled')
-    expect(wrapper.find('.ix-icon-right').classes()).toContain('ix-alert-pagination-disabled')
-
-    await wrapper.find('.ix-icon-right').trigger('click')
+    await rightIcon.trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
 
-    await wrapper.find('.ix-icon-left').trigger('click')
+    await rightIcon.trigger('click')
+    expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
+
+    await leftIcon.trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
-    expect(wrapper.find('.ix-icon-left').classes()).toContain('ix-alert-pagination-disabled')
-    expect(wrapper.find('.ix-icon-right').classes()).not.toContain('ix-alert-pagination-disabled')
   })
 })

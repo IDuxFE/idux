@@ -105,8 +105,8 @@ export default defineComponent({
           {slideItem}
         </div>
       ))
-      const prevArrow = slots.arrow?.({ type: 'prev' }) ?? <IxIcon name="left-circle" />
-      const nextArrow = slots.arrow?.({ type: 'next' }) ?? <IxIcon name="right-circle" />
+      const prevArrow = slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-circle" />
+      const nextArrow = slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-circle" />
       const dots = Array.from({ length: length.value }).map((_, index: number) => {
         const isActive = index + 1 === activeIndex.value
         const itemClass = {

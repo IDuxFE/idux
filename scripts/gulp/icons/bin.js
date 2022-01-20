@@ -21,10 +21,10 @@ async function init() {
 }
 
 function copyIconsToPublic() {
-  console.log('Copy `@idux/components/icons/inline-icons` to public')
+  console.log('Copy `@idux/components/icon/svg` to public')
 
-  const publicDirname = path.join(cwd, 'public/inline-icons')
-  const iconDirname = path.join(__dirname, './icon/inline-icons')
+  const publicDirname = path.join(cwd, 'public/idux-icons')
+  const iconDirname = path.join(__dirname, './icon/svg')
 
   copy(iconDirname, publicDirname)
 }

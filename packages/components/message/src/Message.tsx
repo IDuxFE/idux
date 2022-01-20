@@ -18,15 +18,6 @@ import { IxIcon } from '@idux/components/icon'
 
 import { messageProps } from './types'
 
-// staticIcons.ts
-const defaultIconTypes = {
-  success: 'check-circle',
-  error: 'close-circle',
-  info: 'info-circle',
-  warning: 'exclamation-circle',
-  loading: 'loading',
-} as const
-
 export default defineComponent({
   name: 'IxMessage',
   props: messageProps,
@@ -40,20 +31,21 @@ export default defineComponent({
       return [prefixCls, `${prefixCls}-${props.type}`]
     })
 
-    const icon = computed(() => {
+    const mergedIcon = computed(() => {
       const { icon, type } = props
-      return icon ?? config.icon?.[type] ?? defaultIconTypes[type]
+      return icon ?? config.icon[type]!
     })
 
     const { visible, onMouseEnter, onMouseLeave } = useEvents(props, config)
 
     return () => {
+      const icon = mergedIcon.value
+      const iconNode = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon
       const prefixCls = mergedPrefixCls.value
-      const iconNode = isString(icon.value) ? <IxIcon name={icon.value}></IxIcon> : icon.value
       return (
         <div v-show={visible.value} class={classes.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
           <div class={`${prefixCls}-content`}>
-            {iconNode}
+            <span class={`${prefixCls}-content-icon`}>{iconNode}</span>
             <span class={`${prefixCls}-content-text`}>{slots.default?.()}</span>
           </div>
         </div>

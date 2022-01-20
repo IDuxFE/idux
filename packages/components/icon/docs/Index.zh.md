@@ -15,8 +15,8 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `name`| 图标名称 | `string` | - | - | - |
-| `rotate` | 图标旋转角度 | `boolean \| number` | `false` | - |  为 `true` 时会循环旋转 |
 | `iconfont` | 图标是否来自 `iconfont` | `boolean` | - | - | - |
+| `rotate` | 图标旋转角度 | `boolean \| number` | `false` | - |  为 `true` 时会循环旋转 |
 
 ### 辅助函数
 
@@ -43,13 +43,13 @@ import { createGlobalConfig } from '@idux/components/config'
 
 /**
  * 1. 你可以用任意请求库来替换掉 fetch.
- * 2. 你可以将 @idux 的默认图标文件拷贝到 `public/icon-svg` 目录下，当然也可以是任意其他目录. 记得替换掉请求 url 的路径即可。
+ * 2. 你可以将 @idux 的默认图标文件拷贝到 `public/idux-icons` 目录下，当然也可以是任意其他目录. 记得替换掉请求 url 的路径即可。
  * 3. 你也可以使用 `ant-design-icons` 的图标文件。
  * 4. 你还可以将图标文件部署到任意 cdn 中。
  * 5. 其实 `IxIcon` 组件并不关心你的文件在哪，你只需要返回一个 svg 格式的字符串即可。
  */
 const loadIconDynamically = (iconName: string) => {
-  return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
+  return fetch(`/idux-icons/${iconName}.svg`).then(res => res.text())
 }
 
 const globalConfig = createGlobalConfig({
@@ -72,7 +72,8 @@ const loadIconDynamically = (iconName: string) => {
 useGlobalConfig('icon', { loadIconDynamically })
 ```
 
-`@idux` 的默认图标文件地址：[GitHub](https://github.com/IDuxFE/idux/tree/main/scripts/gulp/icons/assets)
+你可以执行 `node ./node_modules/@idux/components/bin icon` 命令将默认图标拷贝到 `public/idux-icons` 目录下。
+当然，你也可以手动拷贝，默认图标的存放地址为 `./node_modules/@idux/components/icon/svg`。
 
 #### 静态加载
 
@@ -111,4 +112,26 @@ addIconDefinitions([Home, Tool, MyIconDefinition])
 export default defineComponent({
    ...
 })
+```
+
+### 给图标设置 `padding` 后，可能存在抖动现象
+
+这是因为图标组件中的 `svg` 元素都是动态加载的，加载完成后，会撑开 `i` 标签，可能造成布局抖动。  
+为了缓解该现象，我们给 `i` 标签设置了最小宽高: `min-width: 1em; min-height: 1em;`。  
+但是，如果你设置了 `padding`，当 `svg` 加载完成后，依旧会撑开 `i` 标签。  
+对此，我们推荐的做法是，推荐用一个容器包裹图标组件。
+
+```html
+<span style="padding: 4px">
+  <IxIcon name="setting"></IxIcon>
+</span>
+```
+
+这样做还有一个理由，就是让图标回归本身，你应该把它当成文字来使用。  
+对于一些交互（例如：点击事件），我们也推荐用一个容器包裹，监听容器的事件，而不是直接监听图标组件。
+
+```html
+<span class="setting-wrapper" @click="onClick">
+  <IxIcon name="setting"></IxIcon>
+</span>
 ```

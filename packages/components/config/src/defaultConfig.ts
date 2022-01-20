@@ -313,6 +313,13 @@ const message: MessageConfig = {
   destroyOnHover: false,
   duration: 3000,
   maxCount: 5,
+  icon: {
+    success: 'check-circle',
+    error: 'close-circle',
+    info: 'info-circle',
+    warning: 'exclamation-circle',
+    loading: 'loading',
+  },
 }
 
 const notification: NotificationConfig = {

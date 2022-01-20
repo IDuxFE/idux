@@ -3,7 +3,7 @@
 exports[`Image render work 1`] = `
 "<div class=\\"ix-image ix-image-loading ix-image-preview\\">
   <div class=\\"ix-image-layer\\">
-    <!----><i class=\\"ix-icon ix-icon-loading ix-icon-spin ix-image-placeholder\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+    <!----><i class=\\"ix-icon ix-icon-loading ix-image-placeholder\\" role=\\"img\\" aria-label=\\"loading\\"></i>
     <!---->
     <!---->
   </div><img src=\\"/icons/logo.svg\\" class=\\"ix-image-inner ix-image-inner-hidden\\">

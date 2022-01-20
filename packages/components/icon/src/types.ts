@@ -11,9 +11,11 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const iconProps = {
-  iconfont: IxPropTypes.bool.def(false),
   name: IxPropTypes.string,
+  iconfont: IxPropTypes.bool.def(false),
   rotate: IxPropTypes.oneOfType([Boolean, Number, String]),
+  color: IxPropTypes.string,
+  size: IxPropTypes.oneOfType([String, Number]),
 }
 
 export type IconProps = IxInnerPropTypes<typeof iconProps>

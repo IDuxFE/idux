@@ -14,13 +14,12 @@
   }
 
   &-item {
-    .@{idux-prefix}-button {
+    .@{button-prefix} {
       transition: none;
     }
 
-    .@{idux-prefix}-icon {
+    .@{button-prefix}.@{button-prefix}-icon-only {
       font-size: @pagination-item-icon-font-size;
-      vertical-align: 0;
     }
 
     &-slash {
@@ -76,14 +75,13 @@
   }
 
   &-md {
-    vertical-align: middle;
     .pagination-size(@pagination-item-height-md, @pagination-item-input-width-md, @pagination-item-margin-right-md);
   }
 
   &-sm {
-    vertical-align: top;
     .pagination-size(@pagination-item-height-sm, @pagination-item-input-width-sm, @pagination-item-margin-right-sm);
-    .@{idux-prefix}-button {
+
+    .@{button-prefix} {
       min-width: @pagination-item-spacing-sm;
       height: @pagination-item-spacing-sm;
       line-height: @pagination-item-spacing-sm;

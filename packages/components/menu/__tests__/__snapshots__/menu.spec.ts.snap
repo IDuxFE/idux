@@ -7,11 +7,11 @@ exports[`Menu render work 1`] = `
   <li class=\\"ix-menu-item ix-menu-item-disabled\\"><span class=\\"ix-menu-item-icon\\"><i class=\\"ix-icon ix-icon-appstore\\" role=\\"img\\" aria-label=\\"appstore\\"></i></span><span class=\\"ix-menu-item-content\\">Item 3</span></li>
   <li class=\\"ix-menu-divider\\"></li>
   <li class=\\"ix-menu-sub ix-menu-sub-vertical\\">
-    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Sub Menu 1</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Sub Menu 1</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
     <!---->
   </li>
   <li class=\\"ix-menu-sub ix-menu-sub-disabled ix-menu-sub-vertical\\">
-    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Menu Sub 4</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+    <div class=\\"ix-menu-sub-title\\"><span class=\\"ix-menu-sub-title-icon\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i></span><span class=\\"ix-menu-sub-title-content\\">Menu Sub 4</span><span class=\\"ix-menu-sub-title-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
     <!---->
   </li>
 </ul>"

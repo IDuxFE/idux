@@ -10,18 +10,20 @@
             <slot name="description"></slot>
           </div>
           <div class="global-code-box-actions">
-            <GlobalCodeSandbox :code="code" />
-            <IxTooltip :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
-              <a :href="editHref" class="global-code-box-edit" target="_blank" rel="noopener noreferrer">
-                <IxIcon name="edit" />
-              </a>
-            </IxTooltip>
-            <IxTooltip :title="lang === 'zh' ? '复制代码' : 'Copy code'">
-              <IxIcon name="copy" @click="onCopy" />
-            </IxTooltip>
-            <IxTooltip :title="expandedTitle">
-              <IxIcon :name="expanded ? 'unexpand' : 'expand'" @click="onExpanded" />
-            </IxTooltip>
+            <IxSpace>
+              <GlobalCodeSandbox :code="code" />
+              <IxTooltip :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
+                <a :href="editHref" class="global-code-box-edit" target="_blank" rel="noopener noreferrer">
+                  <IxIcon name="edit" />
+                </a>
+              </IxTooltip>
+              <IxTooltip :title="lang === 'zh' ? '复制代码' : 'Copy code'">
+                <IxIcon name="copy" @click="onCopy" />
+              </IxTooltip>
+              <IxTooltip :title="expandedTitle">
+                <IxIcon :name="expanded ? 'unexpand' : 'expand'" @click="onExpanded" />
+              </IxTooltip>
+            </IxSpace>
           </div>
         </section>
         <section class="global-code-box-demo">
@@ -127,10 +129,9 @@ export default defineComponent({
       right: 16px;
 
       .ix-icon {
-        padding: 0 @spacing-sm;
         color: @text-color-secondary;
         cursor: pointer;
-        transition: color 0.3s;
+
         &:hover {
           color: @text-color;
         }

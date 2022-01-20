@@ -25,7 +25,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-alert`)
 
     const config = useGlobalConfig('alert')
-    const icon = computed(() => {
+    const mergedIcon = computed(() => {
       if (props.icon !== undefined) {
         return props.icon
       }
@@ -53,16 +53,31 @@ export default defineComponent({
       })
     })
 
+    const paginationLeftIconClass = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}-pagination-icon`]: true,
+        [`${prefixCls}-pagination-disabled`]: leftDisabled.value,
+      })
+    })
+
+    const paginationRightIconClass = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}-pagination-icon`]: true,
+        [`${prefixCls}-pagination-disabled`]: rightDisabled.value,
+      })
+    })
+
     return () => {
       // TODO: TransitionGroup with pagination
       const pagination = isPagination.value
       const titleNodes = pagination ? titleChildren.value[pageIndex.value - 1] : titleChildren.value
 
-      const iconNode = slots.icon?.() ?? (icon.value && <IxIcon name={icon.value} />)
+      const iconNode = slots.icon ? slots.icon() : mergedIcon.value && <IxIcon name={mergedIcon.value} />
       const descriptionNode = slots.description?.() ?? props.description
 
       const prefixCls = mergedPrefixCls.value
-      const paginationDisabledCls = `${prefixCls}-pagination-disabled`
       return (
         <Transition name={prefixCls}>
           {visible.value && (
@@ -74,22 +89,18 @@ export default defineComponent({
               </div>
               {pagination && (
                 <div class={`${prefixCls}-pagination`}>
-                  <IxIcon
-                    class={leftDisabled.value ? paginationDisabledCls : undefined}
-                    name="left"
-                    onClick={() => offsetPageIndex(-1)}
-                  />
+                  <span class={paginationLeftIconClass.value} onClick={() => offsetPageIndex(-1)}>
+                    <IxIcon name="left" />
+                  </span>
                   <span class={`${prefixCls}-pagination-text`}>{pageText.value}</span>
-                  <IxIcon
-                    class={rightDisabled.value ? paginationDisabledCls : undefined}
-                    name="right"
-                    onClick={() => offsetPageIndex(1)}
-                  />
+                  <span class={paginationRightIconClass.value} onClick={() => offsetPageIndex(1)}>
+                    <IxIcon name="right" />
+                  </span>
                 </div>
               )}
               {closeable.value && (
                 <span class={`${prefixCls}-close-icon`} onClick={handleClose}>
-                  {slots.closeIcon?.() ?? <IxIcon name={props.closeIcon} />}
+                  {slots.closeIcon ? slots.closeIcon() : <IxIcon name={props.closeIcon} />}
                 </span>
               )}
             </div>

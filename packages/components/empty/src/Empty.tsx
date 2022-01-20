@@ -21,7 +21,6 @@ import { emptyProps } from './types'
 
 export default defineComponent({
   name: 'IxEmpty',
-  components: { IxIcon },
   props: emptyProps,
   setup(props, { slots }) {
     const emptyLocale = getLocale('empty')

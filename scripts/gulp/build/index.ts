@@ -45,7 +45,7 @@ export const buildComponents = series(
   buildPackage(componentsOptions),
   async () => {
     await copyFile(join(icon.assetsDirname, '../bin.js'), join(componentsDistDirname, 'bin.js'))
-    await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/inline-icons'))
+    await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/svg'))
   },
   buildIndex(componentsOptions),
   complete('Components'),
