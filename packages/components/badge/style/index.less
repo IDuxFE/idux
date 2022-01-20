@@ -27,20 +27,20 @@
     width: @badge-dot-size;
     height: @badge-dot-size;
     border-radius: 100%;
-    box-shadow: 0 0 0 1px #fff;
+    box-shadow: 0 0 0 1px @color-white;
     background-color: @badge-color;
   }
 
   &-count {
+    height: @badge-size;
     padding: @badge-padding;
     min-width: @badge-size;
-    line-height: 1.2;
+    color: @color-white;
+    line-height: @badge-line-height;
     white-space: nowrap;
     text-align: center;
-    border-radius: 999px;
-    box-shadow: 0 0 0 1px #fff;
-    background-color: @badge-color;
-    color: #fff;
+    background: @badge-color;
+    border-radius: @badge-border-radius;
   }
 
   &-hide-zero {

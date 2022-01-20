@@ -4,6 +4,7 @@
 
 .@{textarea-prefix} {
   .reset-component();
+  .reset-scroll();
 
   position: relative;
   display: inline-block;
@@ -80,9 +81,13 @@
   }
 
   &-with-count::after {
-    display: block;
+    position: absolute;
+    bottom: @textarea-count-bottom;
+    right: @textarea-count-right;
     text-align: right;
-    color: @textarea-placeholder-color;
+    color: @textarea-count-color;
+    background-color: #fff;
+    opacity: @textarea-count-opacity;
     content: attr(data-count);
   }
 }

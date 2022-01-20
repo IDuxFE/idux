@@ -9,7 +9,7 @@ import type { StepperProps } from './types'
 import type { StepperConfig } from '@idux/components/config'
 import type { ComputedRef, Slots } from 'vue'
 
-import { computed, defineComponent, provide, ref, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
 import { callEmit, getSlotNodes, hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -45,14 +45,14 @@ function useClasses(props: StepperProps, slots: Slots, config: StepperConfig, me
 
     const { direction, size = config.size, placement, progressDot } = props
 
-    return {
+    return normalizeClass({
       [prefixCls]: true,
       [`${prefixCls}-${direction}`]: true,
       [`${prefixCls}-${size}`]: true,
       [`${prefixCls}-vertical-placement`]: placement === 'vertical',
       [`${prefixCls}-vertical`]: direction === 'vertical',
       [`${prefixCls}-dot`]: progressDot || hasSlot(slots, 'progressDot'),
-    }
+    })
   })
 }
 

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxCol } from '@idux/components/grid'
@@ -23,10 +23,10 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-hoverable`]: props.hoverable ?? hoverable.value,
-      }
+      })
     })
 
     return () => <IxCol class={classes.value}>{slots.default?.()}</IxCol>

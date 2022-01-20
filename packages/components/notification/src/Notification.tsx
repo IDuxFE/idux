@@ -24,10 +24,10 @@ import { notificationProps } from './types'
 const defaultCloseIcon = 'close'
 
 const defaultIcon = {
-  success: 'check-circle',
-  error: 'close-circle',
-  info: 'info-circle',
-  warning: 'exclamation-circle',
+  success: 'check-circle-filled',
+  error: 'close-circle-filled',
+  info: 'info-circle-filled',
+  warning: 'exclamation-circle-filled',
 } as const
 
 export default defineComponent({

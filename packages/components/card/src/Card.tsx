@@ -8,7 +8,7 @@
 import type { CardProps } from './types'
 import type { ComputedRef, Slots, VNode, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, isVNode, provide } from 'vue'
+import { computed, defineComponent, isVNode, normalizeClass, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -41,14 +41,14 @@ export default defineComponent({
       const { borderless = config.borderless, loading, size = config.size } = props
       const hasGridValue = hasGrid.value
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-hoverable`]: !hasGridValue && hoverable.value,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-has-grid`]: hasGridValue,
         [`${prefixCls}-${size}`]: true,
-      }
+      })
     })
 
     return () => {
@@ -98,12 +98,12 @@ const renderLoading = (prefixCls: string) => {
   const loadingChild = loadingSpans.map(spans => {
     const cols = spans.map(span => (
       <IxCol span={span} class={`${prefixCls}-loading-col`}>
-        <div class="ix-card-loading-block"></div>
+        <div class={`${prefixCls}-loading-block`}></div>
       </IxCol>
     ))
     return <IxRow>{cols}</IxRow>
   })
-  return <div class="ix-card-loading">{loadingChild}</div>
+  return <div class={`${prefixCls}-loading`}>{loadingChild}</div>
 }
 
 const renderFooter = (props: CardProps, slots: Slots, prefixCls: string) => {

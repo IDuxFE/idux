@@ -9,6 +9,7 @@
   width: 100%;
   height: 100%;
   font-size: @drawer-font-size;
+  color: @drawer-color;
   line-height: @drawer-line-height;
 
   &-wrapper {
@@ -47,7 +48,9 @@
     background-color: @drawer-background-color;
 
     > .@{header-prefix} {
-      padding: @drawer-header-padding;
+      padding-left: @drawer-header-padding-horizontal;
+      padding-right: @drawer-header-padding-horizontal;
+      color: @drawer-title-color;
     }
   }
 
@@ -58,6 +61,7 @@
   }
 
   &-footer {
+    min-height: @drawer-footer-min-height;
     padding: @drawer-footer-padding;
 
     .@{button-prefix} + .@{button-prefix} {

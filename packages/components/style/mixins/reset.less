@@ -1,11 +1,31 @@
-.reset-component() {
+.reset-component(@fontSize: @font-size-base) {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   color: @text-color;
-  font-size: @font-size-base;
+  font-size: @fontSize;
   font-variant: @font-variant-base;
   font-feature-settings: @font-feature-settings-base;
   line-height: @line-height-base;
   list-style: none;
+}
+
+.reset-scroll() {
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 3px solid #fff;
+    background-color: @color-graphite-l30;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: #fff;
+    transition: all 0.1s linear;
+  }
 }

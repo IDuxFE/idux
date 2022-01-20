@@ -8,7 +8,7 @@
 import type { StepperItemProps, StepperProps, StepperStatus } from './types'
 import type { ComputedRef, Slot, VNodeTypes, WritableComputedRef } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isBoolean, isNil } from 'lodash-es'
 
@@ -108,13 +108,13 @@ const useClasses = (
   return computed(() => {
     const prefixCls = mergedPrefixCls.value
     const { disabled, icon } = props
-    return {
+    return normalizeClass({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-clickable`]: !disabled && parentProps.clickable,
       [`${prefixCls}-custom`]: icon || hasIcon.value,
       [`${prefixCls}-${status.value!}`]: true,
-    }
+    })
   })
 }
 

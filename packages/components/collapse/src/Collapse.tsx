@@ -7,7 +7,7 @@
 
 import type { VKey } from '@idux/cdk/utils'
 
-import { computed, defineComponent, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -45,11 +45,11 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless.value,
         [`${prefixCls}-ghost`]: ghost.value,
-      }
+      })
     })
 
     return () => <div class={classes.value}>{slots.default?.()}</div>

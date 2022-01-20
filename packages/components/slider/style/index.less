@@ -66,19 +66,19 @@
   &-thumb {
     position: absolute;
     box-sizing: border-box;
-    width: 14px;
-    height: 14px;
-    margin-top: -5px;
+    width: @slider-thumb-width;
+    height: @slider-thumb-height;
+    margin-top: @slider-thumb-margin-top;
     background-color: @slider-thumb-bg;
     border: @slider-thumb-border;
     border-radius: 50%;
     cursor: pointer;
     transition: @slider-thumb-transition;
-    
+
     &:hover {
       border-color: @slider-thumb-hover-border-color;
     }
-    
+
     &:focus {
       outline: none;
       border-color: @slider-thumb-focus-border-color;
@@ -133,8 +133,8 @@
     }
 
     & .@{slider-prefix}-thumb {
-      margin-top: -6px;
-      margin-left: -5px;
+      margin-top: @slider-thumb-vertical-margin-top;
+      margin-left: @slider-thumb-vertical-margin-left;
     }
 
     & .@{slider-prefix}-dot {

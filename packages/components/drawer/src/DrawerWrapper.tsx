@@ -9,7 +9,17 @@ import type { DrawerProps } from './types'
 import type { DrawerConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
-import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import {
+  Transition,
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -73,14 +83,14 @@ export default defineComponent({
       const { wrapperClassName = '' } = props
       const action = levelAction.value
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-${props.placement}`]: true,
         [`${prefixCls}-opened`]: animatedVisible.value,
         [`${prefixCls}-${action}`]: !!action,
         [`${prefixCls}-with-mask`]: mask.value,
         [wrapperClassName]: !!wrapperClassName,
-      }
+      })
     })
 
     const wrapperStyle = computed(() => {

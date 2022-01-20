@@ -1,21 +1,21 @@
 @slider-marks-label-color: rgba(0, 0, 0, 0.451);
 
-@slider-rail-bg: @background-color-base;
-@slider-track-bg: #91d5ff;
+@slider-rail-bg: @color-graphite-l30;
+@slider-track-bg: @color-primary;
 @slider-thumb-bg: @color-white;
 @slider-dot-bg: @color-white;
 
-@slider-dot-border: 2px solid #f0f0f0;
-@slider-thumb-border: 2px solid #91d5ff;
+@slider-dot-border: 2px solid @color-primary;
+@slider-thumb-border: 2px solid @color-primary;
 
 @slider-rail-hover-bg: #e1e1e1;
-@slider-track-hover-bg: #69c0ff;
-@slider-thumb-hover-border-color: #46a6ff;
+@slider-track-hover-bg: @color-primary;
+@slider-thumb-hover-border-color: @color-primary;
 
-@slider-thumb-focus-border-color: #46a6ff;
+@slider-thumb-focus-border-color: @color-primary;
 @slider-thumb-focus-box-shadow: 0 0 0 5px fade(#46a6ff, 12%);
 
-@slider-dot-active-border-color: #8cc8ff;
+@slider-dot-active-border-color: @color-primary;
 @slider-marks-label-active-color: rgba(0, 0, 0, 0.851);
 
 @slider-track-disabled-bg: rgba(0, 0, 0, 0.251);
@@ -25,3 +25,9 @@
 
 @slider-thumb-transition: border-color @transition-duration-base, box-shadow @transition-duration-base * 2,
   transform @transition-duration-base cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+@slider-thumb-width: 10px;
+@slider-thumb-height: 10px;
+@slider-thumb-margin-top: -3px;
+@slider-thumb-vertical-margin-left: -3px;
+@slider-thumb-vertical-margin-top: -6px;

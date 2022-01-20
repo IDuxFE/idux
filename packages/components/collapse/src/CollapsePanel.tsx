@@ -9,7 +9,7 @@ import type { CollapsePanelProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -35,11 +35,11 @@ export default defineComponent({
     const isExpanded = computed(() => expandedKeys.value.includes(key))
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [`${prefixCls}`]: true,
         [`${prefixCls}-disabled`]: props.disabled,
         [`${prefixCls}-expanded`]: isExpanded.value,
-      }
+      })
     })
 
     const handleClick = () => {
@@ -86,6 +86,7 @@ function renderHeader(
       iconNode = tempNode
     }
   } else {
+    2
     const iconName = expandIcon.value
     iconNode = iconName ? <IxIcon name={iconName} rotate={expanded ? 90 : 0} /> : undefined
   }

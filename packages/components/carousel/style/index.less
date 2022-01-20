@@ -45,6 +45,11 @@
   &-vertical &-dot {
     flex-direction: column;
     .carousel-vertical-center();
+
+    .@{carousel-prefix}-dot-item-default {
+      width: @carousel-dot-vertical-width;
+      height: @carousel-dot-vertical-height;
+    }
   }
 
   &-dot {
@@ -60,8 +65,8 @@
       }
 
       &-default {
-        width: @carousel-dot-width;
-        height: @carousel-dot-height;
+        width: @carousel-dot-horizontal-width;
+        height: @carousel-dot-horizontal-height;
         border-radius: @carousel-dot-border-radius;
         background-color: @carousel-dot-background-color;
         outline: none;
