@@ -15,6 +15,7 @@ import { menuSubToken, menuToken } from '../../token'
 import { coverIcon } from '../Utils'
 
 export default defineComponent({
+  name: 'MenuSubLabel',
   setup() {
     const { slots: menuSlots, config, mergedPrefixCls } = inject(menuToken)!
     const { props, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } = inject(menuSubToken)!
@@ -70,11 +71,11 @@ export default defineComponent({
       const labelNode = labelSlot ? labelSlot(slotProps!) : label
       const suffixNode = coverIcon(suffixSlot, slotProps!, suffix.value, rotate.value)
 
-      const prefixCls = `${mergedPrefixCls.value}-sub-title`
+      const prefixCls = `${mergedPrefixCls.value}-sub-label`
       return (
         <div class={prefixCls} style={style.value} {...events.value}>
-          {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span class={`${prefixCls}-content`}>{labelNode}</span>
+          {iconNode}
+          <span>{labelNode}</span>
           {suffixNode && <span class={`${prefixCls}-suffix`}>{suffixNode}</span>}
         </div>
       )

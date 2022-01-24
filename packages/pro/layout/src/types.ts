@@ -7,7 +7,7 @@
 
 import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { LayoutSiderProps } from '@idux/components/layout'
-import type { MenuClickOptions, MenuData, MenuItemGroup, MenuProps, MenuSub, MenuTheme } from '@idux/components/menu'
+import type { MenuClickOptions, MenuData, MenuProps, MenuTheme } from '@idux/components/menu'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -16,7 +16,7 @@ export const proLayoutProps = {
   activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
   collapsed: IxPropTypes.bool,
   fixed: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ header: boolean; sider: boolean }>()]).def(false),
-  menus: IxPropTypes.array<ProLayoutMenuData>().def(() => []),
+  menus: IxPropTypes.array<MenuData>().def(() => []),
   sider: IxPropTypes.object<LayoutSiderProps>(),
   siderMenu: IxPropTypes.object<MenuProps>(),
   theme: IxPropTypes.oneOfType([
@@ -51,9 +51,3 @@ export type ProLayoutSiderTriggerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ProLayoutSiderTriggerPublicProps> & ProLayoutSiderTriggerPublicProps
 >
 export type ProLayoutSiderTriggerInstance = InstanceType<DefineComponent<ProLayoutSiderTriggerProps>>
-
-export type ProLayoutMenuData = (
-  | (Omit<Extract<MenuData, MenuItemGroup>, 'children'> & { children: ProLayoutMenuData[] })
-  | (Omit<Extract<MenuData, MenuSub>, 'children'> & { children: ProLayoutMenuData[] })
-  | Exclude<MenuData, MenuItemGroup | MenuSub>
-) & { key: VKey }

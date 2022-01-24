@@ -8,12 +8,12 @@
       color: @menu-dark-color;
     }
 
-    .@{menu-prefix}-item-group-title {
+    .@{menu-prefix}-item-group-label {
       color: @menu-dark-color;
     }
 
     .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled),
-    .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) > .@{menu-prefix}-sub-title {
+    .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) > .@{menu-prefix}-sub-label {
 
       &:hover,
       &:active {
@@ -27,7 +27,7 @@
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
-    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-title {
+    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
 
       a {
         color: @menu-highlight-color;
@@ -35,10 +35,12 @@
     }
 
     .@{menu-prefix}-item-disabled,
-    .@{menu-prefix}-item-disabled a,
-    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title,
-    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-title a {
+    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
       color: @menu-dark-disabled-color;
+
+      a {
+        color: @menu-dark-disabled-color;
+      }
     }
   }
 

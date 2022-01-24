@@ -18,6 +18,7 @@ import { menuItemProps } from '../types'
 import { coverIcon } from './Utils'
 
 export default defineComponent({
+  name: 'MenuItem',
   props: menuItemProps,
   setup(props) {
     const key = useKey()
@@ -76,11 +77,10 @@ export default defineComponent({
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
       const labelNode = labelSlot ? labelSlot(slotProps!) : label
 
-      const prefixCls = `${mergedPrefixCls.value}-item`
       return (
         <li class={classes.value} style={style.value} {...additional} onClick={disabled ? undefined : onClick}>
-          {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}
-          <span class={`${prefixCls}-content`}>{labelNode}</span>
+          {iconNode}
+          <span>{labelNode}</span>
         </li>
       )
     }

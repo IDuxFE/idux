@@ -5,20 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MenuClickOptions, MenuProps } from '@idux/components/menu'
-
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isObject } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 import { IxLayoutHeader } from '@idux/components/layout'
-import { IxMenu } from '@idux/components/menu'
+import { IxMenu, type MenuClickOptions, type MenuProps } from '@idux/components/menu'
 
 import { proLayoutToken } from '../token'
 import { getDefaultPaths } from '../utils/menu'
 
 export default defineComponent({
+  name: 'ProLayoutHeader',
   setup() {
     const { props, slots, mergedPrefixCls, setActiveKey, headerMenus, activeHeaderKey } = inject(proLayoutToken)!
 
@@ -45,10 +44,10 @@ export default defineComponent({
     const onMenuClick = (menuClickOption: MenuClickOptions) => {
       if (props.type === 'both') {
         const targetMenu = props.menus.find(menu => menu.key === menuClickOption.key)
-        if (targetMenu && 'children' in targetMenu && targetMenu.children.length > 0) {
+        if (targetMenu && 'children' in targetMenu && !!targetMenu.children?.length) {
           const activePaths = getDefaultPaths(targetMenu.children)
-          setActiveKey(activePaths.pop()!.key)
-          callEmit(props['onMenuClick'], menuClickOption)
+          setActiveKey(activePaths.pop()!.key!)
+          callEmit(props['onMenuClick'], { ...menuClickOption, type: targetMenu.type })
           return
         }
       }
@@ -69,7 +68,12 @@ export default defineComponent({
         theme: theme.value,
         onClick: onMenuClick,
       }
-      const contentNode = slots.headerContent ? slots.headerContent({ menuProps }) : <IxMenu {...menuProps} />
+
+      const contentNode = slots.headerContent ? (
+        slots.headerContent(menuProps)
+      ) : (
+        <IxMenu v-slots={slots} {...menuProps} />
+      )
 
       return (
         <IxLayoutHeader class={classes.value}>

@@ -5,23 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProLayoutMenuData } from '../types'
-import type { VKey } from '@idux/cdk/utils'
-import type { MenuClickOptions, MenuProps } from '@idux/components/menu'
-import type { ComputedRef } from 'vue'
-
-import { computed, defineComponent, inject, normalizeClass, watch } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
 
 import { isObject } from 'lodash-es'
 
-import { callEmit, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxLayoutSider } from '@idux/components/layout'
-import { IxMenu } from '@idux/components/menu'
+import { IxMenu, type MenuClickOptions, MenuData, MenuProps } from '@idux/components/menu'
 
 import { proLayoutToken } from '../token'
 import { getTargetPaths } from '../utils/menu'
 
 export default defineComponent({
+  name: 'ProLayoutSider',
   setup() {
     const { props, slots, mergedPrefixCls, activeKey, setActiveKey, activePaths, siderMenus, collapsed, setCollapsed } =
       inject(proLayoutToken)!
@@ -71,7 +67,7 @@ export default defineComponent({
       const contentNode = slots.siderContent ? (
         slots.siderContent(menuProps)
       ) : (
-        <IxMenu {...menuProps} {...props.siderMenu} />
+        <IxMenu v-slots={slots} {...menuProps} {...props.siderMenu} />
       )
 
       return (
@@ -85,7 +81,7 @@ export default defineComponent({
   },
 })
 
-function useExpandedKeys(activePaths: ComputedRef<ProLayoutMenuData[]>, siderMenus: ComputedRef<ProLayoutMenuData[]>) {
+function useExpandedKeys(activePaths: ComputedRef<MenuData[]>, siderMenus: ComputedRef<MenuData[]>) {
   const [expandedKeys, _setExpandedKeys] = useState(getExpandedKeys(activePaths.value))
 
   watch(activePaths, paths => _setExpandedKeys(getExpandedKeys(paths)))
@@ -98,7 +94,7 @@ function useExpandedKeys(activePaths: ComputedRef<ProLayoutMenuData[]>, siderMen
       return
     }
 
-    let targetPaths: ProLayoutMenuData[]
+    let targetPaths: MenuData[]
     const lastKey = keys[keys.length - 1]
     const targetIndex = activePaths.value.findIndex(menu => menu.key === lastKey)
     // 表示打开的是当前激活菜单路径的某个菜单
@@ -114,6 +110,6 @@ function useExpandedKeys(activePaths: ComputedRef<ProLayoutMenuData[]>, siderMen
   return { expandedKeys, setExpandedKeys }
 }
 
-function getExpandedKeys(menus: ProLayoutMenuData[]): VKey[] {
-  return menus.filter(menu => menu.type === 'sub' && menu.children?.length > 0).map(menu => menu.key)
+function getExpandedKeys(menus: MenuData[]): VKey[] {
+  return menus.filter(menu => menu.type === 'sub' && !!menu.children?.length).map(menu => menu.key!)
 }

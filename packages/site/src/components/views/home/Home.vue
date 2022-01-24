@@ -2,7 +2,9 @@
   <div class="home-content-wrapper">
     <div class="home-banner">
       <div class="video-wrapper">
-        <video src="/medias/home-banner.mp4" autoplay loop muted>{{ locale.videoErr }}</video>
+        <video src="https://idux-cdn.sangfor.com.cn/medias/home-banner.mp4" autoplay loop muted>
+          {{ locale.videoErr }}
+        </video>
         <div class="home-banner-title-wrapper">
           <h1 class="home-banner-title"> {{ locale.bannerTitle }} </h1>
           <div class="home-banner-title-desc">{{ locale.bannerTitleDesc }}</div>

@@ -99,7 +99,7 @@ describe('Menu', () => {
     expect(subs[3].classes()).toContain('ix-menu-sub-expanded')
 
     await wrapper.setProps({ expandedKeys: [] })
-    await subs[0].find('.ix-menu-sub-title').trigger('click')
+    await subs[0].find('.ix-menu-sub-label').trigger('click')
     await wait(105)
 
     expect(onUpdateExpandedKeys).toBeCalledWith(['sub1'])

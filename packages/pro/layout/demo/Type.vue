@@ -1,5 +1,8 @@
 <template>
   <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" :type="type">
+    <template #itemLabel="item">
+      <router-link :to="item.key">{{ item.label }}</router-link>
+    </template>
     <template #logo>
       <div class="logo">Logo</div>
     </template>
@@ -15,14 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ProLayoutMenuData } from '@idux/pro/layout'
-
 import { ref } from 'vue'
+
+import { type MenuData } from '@idux/components/menu'
 
 const activeKey = ref()
 const type = ref('mixin')
 
-const dataSource: ProLayoutMenuData[] = [
+const dataSource: MenuData[] = [
   {
     type: 'sub',
     key: 'sub1',

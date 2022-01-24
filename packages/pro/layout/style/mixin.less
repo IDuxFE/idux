@@ -1,16 +1,28 @@
 .pro-layout-theme-base-color(@theme) {
   color: ~'@{pro-layout-@{theme}-color}';
   background-color: ~'@{pro-layout-@{theme}-background-color}';
+
+  a {
+    color: ~'@{pro-layout-@{theme}-color}';
+  }
 }
 
 .pro-layout-theme-hover-color(@theme) {
   color: ~'@{pro-layout-@{theme}-hover-color}';
   background-color: ~'@{pro-layout-@{theme}-hover-background-color}';
+
+  a {
+    color: ~'@{pro-layout-@{theme}-hover-color}';
+  }
 }
 
 .pro-layout-theme-active-color(@theme) {
   color: ~'@{pro-layout-@{theme}-active-color}';
   background-color: ~'@{pro-layout-@{theme}-active-background-color}';
+
+  a {
+    color: ~'@{pro-layout-@{theme}-active-color}';
+  }
 }
 
 .pro-layout-theme-menu(@theme) {
@@ -28,12 +40,12 @@
     border: 0;
     transition: none;
 
-    .@{menu-prefix}-sub-title {
+    .@{menu-prefix}-sub-label {
       transition: none;
     }
 
     &:not(.@{menu-prefix}-sub-selected) {
-      .@{menu-prefix}-sub-title:hover {
+      .@{menu-prefix}-sub-label:hover {
         .pro-layout-theme-hover-color(@theme);
       }
     }
@@ -41,7 +53,7 @@
     &.@{menu-prefix}-sub-selected:not(.@{menu-prefix}-sub-inline) {
       .pro-layout-theme-active-color(@theme);
 
-      .@{menu-prefix}-sub-title {
+      .@{menu-prefix}-sub-label {
         .pro-layout-theme-active-color(@theme);
       }
     }
@@ -78,7 +90,7 @@
     .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled):not(.@{menu-prefix}-sub-selected):hover {
       .pro-layout-theme-hover-color(@theme);
 
-      .@{menu-prefix}-sub-title {
+      .@{menu-prefix}-sub-label {
         .pro-layout-theme-hover-color(@theme);
 
         background-color: transparent;
