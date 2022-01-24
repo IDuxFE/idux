@@ -13,6 +13,7 @@ import { menuSubToken, menuToken } from '../../token'
 import { coverChildren } from '../Utils'
 
 export default defineComponent({
+  name: 'MenuSubOverlayContent',
   setup() {
     const { mergedPrefixCls, theme } = inject(menuToken)!
     const { props, handleMouseEvent } = inject(menuSubToken)!

@@ -5,25 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProLayoutMenuData } from '../types'
-import type { VKey } from '@idux/cdk/utils'
+import { NoopArray, type VKey } from '@idux/cdk/utils'
+import { type MenuData } from '@idux/components/menu'
 
-import { NoopArray } from '@idux/cdk/utils'
-
-export function getMenuChildren(menu: ProLayoutMenuData | undefined): ProLayoutMenuData[] {
+export function getMenuChildren(menu: MenuData | undefined): MenuData[] {
   if (!menu || !('children' in menu)) {
-    return NoopArray as unknown as ProLayoutMenuData[]
+    return NoopArray as unknown as MenuData[]
   }
-  return menu.children
+  return menu.children!
 }
 
 // 获取目标 key 的菜单路径
-export function getTargetPaths(menus: ProLayoutMenuData[], target?: VKey): ProLayoutMenuData[] {
+export function getTargetPaths(menus: MenuData[], target?: VKey): MenuData[] {
   if (!target) {
     return getDefaultPaths(menus)
   }
 
-  let result: ProLayoutMenuData[] = []
+  let result: MenuData[] = []
   for (let i = 0; i < menus.length; i++) {
     const curMenu = menus[i]
     if (curMenu.key === target) {
@@ -41,14 +39,14 @@ export function getTargetPaths(menus: ProLayoutMenuData[], target?: VKey): ProLa
 }
 
 // 获取默认（第一个）的菜单路径
-export function getDefaultPaths(menus: ProLayoutMenuData[] | undefined): ProLayoutMenuData[] {
+export function getDefaultPaths(menus: MenuData[] | undefined): MenuData[] {
   if (!menus || menus.length === 0) {
-    return NoopArray as unknown as ProLayoutMenuData[]
+    return NoopArray as unknown as MenuData[]
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const currMenu = menus.find(menu => menu.type !== 'divider' && !(menu as any).disabled)
   if (!currMenu) {
-    return NoopArray as unknown as ProLayoutMenuData[]
+    return NoopArray as unknown as MenuData[]
   }
   const paths = [currMenu]
   const children = getMenuChildren(currMenu)

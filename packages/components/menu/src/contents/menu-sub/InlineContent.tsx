@@ -13,6 +13,7 @@ import { menuSubToken, menuToken } from '../../token'
 import { coverChildren } from '../Utils'
 
 export default defineComponent({
+  name: 'MenuSubInlineContent',
   setup() {
     const { mergedPrefixCls } = inject(menuToken)!
     const { props, isExpanded } = inject(menuSubToken)!

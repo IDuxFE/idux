@@ -9,7 +9,7 @@
   }
 
   &-item,
-  &-sub-title {
+  &-sub-label {
     cursor: pointer;
     transition: background @transition-duration-base, color @transition-duration-base;
 
@@ -36,25 +36,25 @@
       background-color: @menu-highlight-bg-color;
     }
 
-    &-icon {
-      margin-right: @menu-item-icon-margin-right;
+    .@{icon-prefix} + span {
+      margin-left: @menu-item-icon-margin-right;
     }
   }
 
   &-item-group {
 
-    &-title {
+    &-label {
       color: @menu-item-group-text-color;
       font-size: @menu-font-size;
 
-      &-icon {
-        margin-right: @menu-item-icon-margin-right;
+      .@{icon-prefix} + span {
+        margin-left: @menu-item-icon-margin-right;
       }
     }
 
     & > &-content {
       .@{menu-prefix}-item,
-      .@{menu-prefix}-sub-title {
+      .@{menu-prefix}-sub-label {
         padding-left: @menu-item-group-content-padding-left;
       }
     }
@@ -62,15 +62,15 @@
 
   &-sub {
 
-    &-title-suffix {
+    &-label-suffix {
       position: absolute;
       right: @menu-sub-suffix-icon-right;
     }
   }
 
   &-item,
-  &-item-group-title,
-  &-sub-title {
+  &-item-group-label,
+  &-sub-label {
     position: relative;
     height: @menu-item-height;
     line-height: @menu-item-height;
@@ -80,7 +80,7 @@
   }
 
   &-item&-item-selected,
-  &-sub-selected > &-sub-title {
+  &-sub-selected > &-sub-label {
     color: @menu-highlight-color;
 
     a {
@@ -89,7 +89,7 @@
   }
 
   &-item&-item-disabled,
-  &-sub-disabled > &-sub-title {
+  &-sub-disabled > &-sub-label {
     color: @menu-disabled-color;
     background-color: @menu-disabled-bg-color;
     cursor: not-allowed;

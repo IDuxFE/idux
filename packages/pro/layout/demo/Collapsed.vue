@@ -1,5 +1,8 @@
 <template>
   <IxProLayout v-model:activeKey="activeKey" v-model:collapsed="collapsed" :menus="dataSource">
+    <template #itemLabel="item">
+      <router-link :to="item.key">{{ item.label }}</router-link>
+    </template>
     <template #headerExtra>
       <IxProLayoutSiderTrigger></IxProLayoutSiderTrigger>
     </template>
@@ -13,13 +16,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ProLayoutMenuData } from '@idux/pro/layout'
-
 import { ref } from 'vue'
+
+import { type MenuData } from '@idux/components/menu'
 
 const activeKey = ref()
 const collapsed = ref(false)
-const dataSource: ProLayoutMenuData[] = [
+const dataSource: MenuData[] = [
   {
     type: 'sub',
     key: 'sub1',

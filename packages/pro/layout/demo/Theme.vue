@@ -1,9 +1,11 @@
 <template>
   <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" type="both" :theme="theme">
+    <template #itemLabel="item">
+      <router-link :to="item.key">{{ item.label }}</router-link>
+    </template>
     <template #logo>
       <div class="logo">Logo</div>
     </template>
-
     <div class="layout-content">
       <IxSpace>
         <div>whole: <IxSelect v-model:value="wholeTheme" :options="wholdThemeOptionss"></IxSelect></div>
@@ -17,9 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ProLayoutMenuData } from '@idux/pro/layout'
-
 import { computed, reactive, ref } from 'vue'
+
+import { type MenuData } from '@idux/components/menu'
+
 const activeKey = ref()
 const wholeTheme = ref('light')
 const themesOptions = [
@@ -40,7 +43,7 @@ const theme = computed(() => {
   }
   return wholeTheme.value
 })
-const dataSource: ProLayoutMenuData[] = [
+const dataSource: MenuData[] = [
   {
     type: 'sub',
     key: 'sub1',

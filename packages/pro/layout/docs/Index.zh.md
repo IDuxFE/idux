@@ -22,7 +22,7 @@ order: 0
 | `siderMenu` | 侧边栏菜单组件的更多配置 | `MenuProps` | - | - | 例如：可以配置缩进宽度：`indent` 和菜单模式: `mode` |
 | `theme` | 主题 | `light \| dark \| {sider: light \| dark, header: light \| dark}` | `light` | - | - |
 | `type` | 布局类型 | `'header' \| 'sider' \| 'both' \| 'mixin'` | `mixin` | - | 参见示例：[布局类型](#pro-layout-demo-Type) |
-| `onMenuClick` | 点击菜单回调 | `(options: MenuClickOptions) => void>`| - | -  | - |
+| `onMenuClick` | 点击菜单回调 | `(options: MenuClickOptions) => void`| - | -  | - |
 
 ### ProLayoutSlots
 
@@ -36,9 +36,12 @@ order: 0
 | `siderContent` | 侧边栏中间区域 | `MenuProps`  | 默认会渲染一个 `IxMenu` 组件 |
 | `siderFooter` | 侧边栏底部区域 | -  | 一般用于显示工具类按钮，例如：折叠触发器 |
 
+> 为了便于自定义导航菜单，除了上面表格中列举出来的插槽外，还支持 `IxMenu` 的全部插槽，参见 [MenuSlots](/components/menu/zh#MenuSlots).  
+> 默认会将 `IxProLayout` 的所有插槽传递给内部的 `IxMenu` 组件，参考示例中的 `itemLabel` 插槽。
+
 ### IxProLayoutSiderTrigger
 
-侧边栏折叠状态触发器，可以控制侧边栏的折叠状态，只能放在 `IxProLayout` 中。
+侧边栏折叠状态触发器，可以控制侧边栏的折叠状态，可以放在 `IxProLayout` 中的任意位置。
 
 #### ProLayoutSiderTriggerProps
 

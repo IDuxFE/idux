@@ -5,16 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProLayoutMenuData, ProLayoutProps } from '../types'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef } from 'vue'
-
-import { computed } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { useControlledProp } from '@idux/cdk/utils'
+import { type VKey, useControlledProp } from '@idux/cdk/utils'
+import { type MenuData } from '@idux/components/menu'
 
+import { type ProLayoutProps } from '../types'
 import { getDefaultPaths } from '../utils/menu'
 
 export function useActiveKey(props: ProLayoutProps): {
@@ -38,8 +36,8 @@ export function useActiveKey(props: ProLayoutProps): {
 
 export function useActiveHeaderKey(
   props: ProLayoutProps,
-  activePaths: ComputedRef<ProLayoutMenuData[]>,
-  headerMenus: ComputedRef<ProLayoutMenuData[]>,
+  activePaths: ComputedRef<MenuData[]>,
+  headerMenus: ComputedRef<MenuData[]>,
 ): ComputedRef<VKey | undefined> {
   return computed(() => {
     const { type } = props

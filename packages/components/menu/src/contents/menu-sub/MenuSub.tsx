@@ -29,12 +29,13 @@ import { usePaddingLeft } from '../../composables/usePaddingLeft'
 import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
 import { type MenuData, type MenuMode, type MenuSubProps, menuSubProps } from '../../types'
 import InlineContent from './InlineContent'
+import Label from './Label'
 import OverlayContent from './OverlayContent'
-import Title from './Title'
 
 const defaultDelay: [number, number] = [0, 100]
 
 export default defineComponent({
+  name: 'MenuSub',
   props: menuSubProps,
   setup(props) {
     const common = useGlobalConfig('common')
@@ -113,9 +114,9 @@ export default defineComponent({
       const { additional, disabled } = props.data
       let children: VNodeTypes
       if (mode.value === 'inline') {
-        children = [<Title></Title>, <InlineContent></InlineContent>]
+        children = [<Label></Label>, <InlineContent></InlineContent>]
       } else {
-        const trigger = () => <Title></Title>
+        const trigger = () => <Label></Label>
         const content = () => <OverlayContent></OverlayContent>
         children = (
           <ɵOverlay

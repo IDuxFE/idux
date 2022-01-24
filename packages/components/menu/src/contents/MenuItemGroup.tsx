@@ -18,6 +18,7 @@ import { menuItemGroupProps } from '../types'
 import { coverChildren, coverIcon } from './Utils'
 
 export default defineComponent({
+  name: 'MenuItemGroup',
   props: menuItemGroupProps,
   setup(props) {
     const key = useKey()
@@ -31,9 +32,7 @@ export default defineComponent({
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(mode, indent, level, !!menuItemGroupContext)
-    const titleStyle = computed(() => {
-      return { paddingLeft: paddingLeft.value }
-    })
+    const labelStyle = computed(() => ({ paddingLeft: paddingLeft.value }))
 
     const onClick = (evt: Event) => {
       evt.stopPropagation()
@@ -60,9 +59,9 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-item-group`
       return (
         <li class={prefixCls} {...additional} onClick={onClick}>
-          <div class={`${prefixCls}-title`} style={titleStyle.value}>
-            {iconNode && <span class={`${prefixCls}-title-icon`}>{iconNode}</span>}
-            {<span class={`${prefixCls}-title-content`}> {labelNode}</span>}
+          <div class={`${prefixCls}-label`} style={labelStyle.value}>
+            {iconNode}
+            <span>{labelNode}</span>
           </div>
           <ul class={`${prefixCls}-content`}>{coverChildren(children)}</ul>
         </li>

@@ -1,31 +1,31 @@
 .@{menu-prefix} {
 
   &-collapsed {
-    .@{menu-prefix}-item-icon,
-    .@{menu-prefix}-sub-title-icon {
-      margin: 0;
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-item-group-label,
+    .@{menu-prefix}-sub-label {
       font-size: @menu-collapsed-font-size;
 
-      + span {
+      .@{icon-prefix} + span {
         display: none;
       }
     }
 
-    .@{menu-prefix}-sub-title-suffix {
-      display: none;
+    .@{menu-prefix}-item-group-label {
+      padding: 0 8px;
     }
 
-    .@{menu-prefix}-item-group-title {
-      padding: 0 8px;
+    .@{menu-prefix}-sub-label-suffix {
+      display: none;
     }
   }
 
   &-vertical&-collapsed,
   &-inline&-collapsed {
     .@{menu-prefix}-item,
-    .@{menu-prefix}-sub > .@{menu-prefix}-sub-title,
+    .@{menu-prefix}-sub > .@{menu-prefix}-sub-label,
     .@{menu-prefix}-item-group .@{menu-prefix}-item,
-    .@{menu-prefix}-item-group .@{menu-prefix}-sub-title {
+    .@{menu-prefix}-item-group .@{menu-prefix}-sub-label {
       padding: 0 ~'calc(50% - @{menu-collapsed-font-size} / 2)';
     }
   }

@@ -13,5 +13,6 @@ const MenuDivider: FunctionalComponent<HTMLAttributes> = () => {
   const { mergedPrefixCls } = inject(menuToken)!
   return <li class={`${mergedPrefixCls.value}-divider`}></li>
 }
+MenuDivider.displayName = 'MenuDivider'
 
 export default MenuDivider
