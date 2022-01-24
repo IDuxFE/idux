@@ -7,7 +7,7 @@
 
 import type { SpinProps } from '@idux/components/spin'
 
-import { computed, defineComponent, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
@@ -87,18 +87,29 @@ export default defineComponent({
     provide(TABLE_TOKEN, context)
     expose({ scrollTo: scrollContext.scrollTo })
 
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      const { borderless = config.borderless, size = config.size } = props
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-borderless`]: borderless,
+        [`${prefixCls}-${size}`]: true,
+      })
+    })
+
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const header = <ɵHeader v-slots={slots} header={props.header} />
-      const footer = renderFooter(slots, mergedPrefixCls.value)
+      const footer = renderFooter(slots, prefixCls)
       const [paginationTop, paginationBottom] = renderPagination(
         mergedPagination.value,
         dataContext.filteredData.value,
-        mergedPrefixCls.value,
+        prefixCls,
       )
       const children = [header, paginationTop, <MainTable />, paginationBottom, footer]
       const spinProps = covertSpinProps(props.spin)
       const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
-      return <div class={mergedPrefixCls.value}>{spinWrapper}</div>
+      return <div class={classes.value}>{spinWrapper}</div>
     }
   },
 })

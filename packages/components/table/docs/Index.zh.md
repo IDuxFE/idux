@@ -153,9 +153,9 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `toTopOnChange` |  当分页、排序、筛选变化后是否滚动到表格顶部 | `boolean` | `false` | - | - |
-| `x` |  设置横向滚动，也可用于指定滚动区域的宽 | `string \| number \| boolean` | - | - | 可以设置为像素值，百分比， `max-content` 和 `true` |
-| `y` |  设置纵向滚动，也可用于指定滚动区域的高 | `string \| number` | - | - | 可以设置为像素值 |
+| `width` | 设置横向滚动，用于指定滚动区域的宽 | `string \| number` | - | - | 可以设置为像素值，百分比， `max-content` 和 `auto` |
+| `height` | 设置纵向滚动，用于指定滚动区域的高 | `string \| number` | - | - | 可以设置为像素值,当开启虚拟滚动时，必须为 `number` |
+| `fullHeight` | 是否使用 `height` 设置滚动区域高度 | `boolean` | - | - | 为 `true` 时使用 `height`, 否则使用 `max-height` 设置滚动区域的高度 |
 
 #### TableSlots
 

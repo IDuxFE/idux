@@ -149,9 +149,9 @@ export interface TablePagination extends PaginationProps {
 export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
 
 export interface TableScroll {
-  toTopOnChange?: boolean
-  x?: string | number
-  y?: string | number
+  width?: string | number
+  height?: string | number
+  fullHeight?: boolean
 }
 
 export type TableSize = 'lg' | 'md' | 'sm'

@@ -8,7 +8,7 @@
 import { type ComputedRef, type Ref, computed, onBeforeUnmount, ref } from 'vue'
 
 import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize } from '@idux/cdk/scroll'
-import { convertCssPixel, convertElement } from '@idux/cdk/utils'
+import { Logger, convertCssPixel, convertElement } from '@idux/cdk/utils'
 
 import { type TableProps } from '../types'
 import { type StickyContext } from './useSticky'
@@ -17,14 +17,19 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
     useScrollRef(stickyScrollLeft)
 
-  const scrollX = computed(() => convertCssPixel(props.scroll?.x))
-  const scrollY = computed(() => convertCssPixel(props.scroll?.y))
-  const scrollHorizontal = computed(() => !!scrollX.value)
-  const scrollVertical = computed(() => !!scrollY.value)
+  __DEV__ &&
+    props.scroll?.x &&
+    Logger.warn('components/table', '`scroll.x` was deprecated, please use `scroll.width` instead')
+
+  __DEV__ &&
+    props.scroll?.y &&
+    Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
+
+  const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
+  const scrollHeight = computed(() => convertCssPixel(props.scroll?.height || props.scroll?.y))
+
   const scrollBarSize = computed(() => (props.virtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
-  const scrollBarSizeOnFixedHolder = computed(() =>
-    isSticky.value ? 0 : scrollVertical.value ? scrollBarSize.value : 0,
-  )
+  const scrollBarSizeOnFixedHolder = computed(() => (isSticky.value ? 0 : scrollHeight.value ? scrollBarSize.value : 0))
 
   const scrollTo: VirtualScrollToFn = options => {
     if (props.virtual) {
@@ -40,10 +45,8 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
     scrollTo,
     pingedStart,
     pingedEnd,
-    scrollX,
-    scrollY,
-    scrollHorizontal,
-    scrollVertical,
+    scrollWidth,
+    scrollHeight,
     scrollBarSize,
     scrollBarSizeOnFixedHolder,
   }
@@ -57,10 +60,8 @@ export interface ScrollContext {
   scrollTo: VirtualScrollToFn
   pingedStart: Ref<boolean>
   pingedEnd: Ref<boolean>
-  scrollX: ComputedRef<string>
-  scrollY: ComputedRef<string>
-  scrollHorizontal: ComputedRef<boolean>
-  scrollVertical: ComputedRef<boolean>
+  scrollWidth: ComputedRef<string>
+  scrollHeight: ComputedRef<string>
   scrollBarSize: ComputedRef<number>
   scrollBarSizeOnFixedHolder: ComputedRef<number>
 }

@@ -16,17 +16,9 @@ import MeasureRow from './MeasureRow'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const {
-      props,
-      slots: tableSlots,
-      flattedData,
-      scrollHorizontal,
-      scrollVertical,
-      isSticky,
-      bodyTag,
-    } = inject(TABLE_TOKEN)!
+    const { props, slots: tableSlots, flattedData, scrollWidth, scrollHeight, isSticky, bodyTag } = inject(TABLE_TOKEN)!
 
-    const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
+    const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
 
     return () => {
       const children: VNodeTypes[] = []

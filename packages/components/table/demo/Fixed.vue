@@ -99,5 +99,5 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-const scroll: TableScroll = { x: 1500, y: 300 }
+const scroll: TableScroll = { width: 1500, height: 300 }
 </script>

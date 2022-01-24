@@ -5,7 +5,7 @@
     "keyframes-name-pattern": null,
     "at-rule-no-unknown": null,
     "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
-    "rule-empty-line-before": ["always"],
+    "rule-empty-line-before": null,
     "no-invalid-double-slash-comments": null,
     "no-invalid-position-at-import-rule": null,
     "font-family-no-missing-generic-family-keyword": null
