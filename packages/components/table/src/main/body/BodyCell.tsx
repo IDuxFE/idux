@@ -5,15 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  type CSSProperties,
-  type ComputedRef,
-  type Slots,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  inject,
-} from 'vue'
+import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -51,16 +43,14 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
     const dataValue = useDataValue(props)
 
-    const cellProps = computed(() => {
+    const classes = computed(() => {
       const { key, fixed, align, ellipsis } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean> = {
-        [`${prefixCls}-cell-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
+        [`${prefixCls}-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
         [`${prefixCls}-align-${align}`]: !!align,
         [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
-
-      let style: CSSProperties | undefined
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
         classes = {
@@ -71,16 +61,23 @@ export default defineComponent({
           [`${prefixCls}-fix-end-first`]: firstEndKey === key,
           [`${prefixCls}-fix-sticky`]: isSticky.value,
         }
-        const { starts, ends } = columnOffsets.value
-        const offsets = fixed === 'start' ? starts : ends
-        const fixedOffset = convertCssPixel(offsets[props.colIndex])
-        style = {
-          position: 'sticky',
-          left: fixed === 'start' ? fixedOffset : undefined,
-          right: fixed === 'end' ? fixedOffset : undefined,
-        }
       }
-      return { class: classes, style }
+      return normalizeClass(classes)
+    })
+
+    const style = computed(() => {
+      const { fixed } = props.column as BodyColumn
+      if (!fixed) {
+        return
+      }
+      const { starts, ends } = columnOffsets.value
+      const offsets = fixed === 'start' ? starts : ends
+      const fixedOffset = convertCssPixel(offsets[props.colIndex])
+      return {
+        position: 'sticky',
+        left: fixed === 'start' ? fixedOffset : undefined,
+        right: fixed === 'end' ? fixedOffset : undefined,
+      }
     })
 
     const handleClick = (evt: Event) => {
@@ -105,7 +102,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyColTag = bodyColTag.value as any
       return (
-        <BodyColTag {...cellProps.value} title={title} {...additional}>
+        <BodyColTag class={classes.value} style={style.value} title={title} {...additional}>
           {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
           {children}
         </BodyColTag>

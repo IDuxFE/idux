@@ -5,7 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Slots, VNodeChild, type VNodeTypes, computed, defineComponent, inject } from 'vue'
+import {
+  type ComputedRef,
+  type Slots,
+  VNodeChild,
+  type VNodeTypes,
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+} from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -89,17 +98,19 @@ function useClasses(
   isSelected: ComputedRef<boolean>,
   mergedPrefixCls: ComputedRef<string>,
 ) {
-  const rowClassName = computed(() => tableProps.rowClassName?.(props.record, props.rowIndex))
+  const rowClassName = computed(() =>
+    tableProps.rowClassName ? tableProps.rowClassName(props.record, props.rowIndex) : undefined,
+  )
   return computed(() => {
-    const prefixCls = `${mergedPrefixCls.value}`
+    const prefixCls = `${mergedPrefixCls.value}-row`
     const { level, expanded } = props
     const computeRowClassName = rowClassName.value
-    return {
+    return normalizeClass({
       [`${prefixCls}-level-${level}`]: !!level,
       [`${prefixCls}-selected`]: isSelected.value,
       [`${prefixCls}-expanded`]: expanded,
       [computeRowClassName as string]: !!computeRowClassName,
-    }
+    })
   })
 }
 

@@ -37,7 +37,11 @@ export default defineComponent({
           })
         }
       } else {
-        children.push(<BodyRowSingle>{slots.empty ? slots.empty() : <ɵEmpty empty={props.empty} />}</BodyRowSingle>)
+        children.push(
+          <BodyRowSingle>
+            <ɵEmpty v-slots={tableSlots} empty={props.empty} />
+          </BodyRowSingle>,
+        )
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyTag = bodyTag.value as any

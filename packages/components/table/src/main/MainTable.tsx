@@ -166,7 +166,7 @@ export default defineComponent({
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body>{children}</Body>
-                <Foot></Foot>
+                {false && <Foot></Foot>}
               </TableTag>
             )
           }
@@ -200,17 +200,15 @@ export default defineComponent({
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
-                <Foot></Foot>
+                {false && <Foot></Foot>}
               </TableTag>
             </div>
           )
         }
 
-        // TODO
-        const tableFoot = null
         const sticky = isSticky.value ? <StickyScroll></StickyScroll> : null
 
-        children = [tableHead, tableBody, tableFoot, sticky]
+        children = [tableHead, tableBody, sticky]
       } else {
         children = (
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
@@ -218,7 +216,7 @@ export default defineComponent({
               <ColGroup></ColGroup>
               {!props.headless && <Head></Head>}
               <Body></Body>
-              <Foot></Foot>
+              {false && <Foot></Foot>}
             </TableTag>
           </div>
         )

@@ -31,7 +31,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const descriptionNode = slots.description?.() ?? description.value
+      const descriptionNode = slots.description ? slots.description() : description.value
       return (
         <div class={prefixCls}>
           <div class={`${prefixCls}-image`}>{renderImage(props, slots, config)}</div>
