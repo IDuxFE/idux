@@ -45,7 +45,7 @@ export default defineComponent({
 
     const throttleMeasure = throttleRAF(measure)
 
-    function measure() {
+    function measure(event?: unknown) {
       if (!affixRef.value || !targetRef.value) {
         return
       }
@@ -53,6 +53,16 @@ export default defineComponent({
       isStickyRef.value = isSticky(affixRect, offset.value)
       contentStyle.value = calcPosition(affixRect, offset.value, targetRef.value)
       if (isStickyRef.value && contentRef.value) {
+        if (event && (event as Event).type === 'resize') {
+          clearStyle()
+
+          nextTick(() => {
+            measure()
+          })
+
+          return
+        }
+
         const { width, height } = getTargetSize(contentRef.value)
         contentStyle.value = {
           ...contentStyle.value,
@@ -67,6 +77,11 @@ export default defineComponent({
           affixStyle.value.position = 'relative'
         }
       }
+    }
+
+    function clearStyle() {
+      affixStyle.value = {}
+      contentStyle.value = {}
     }
 
     onMounted(() => {
