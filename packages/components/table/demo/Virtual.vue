@@ -42,5 +42,5 @@ for (let index = 0; index < 10000; index++) {
   })
 }
 
-const scroll = { y: 300 }
+const scroll = { height: 300 }
 </script>

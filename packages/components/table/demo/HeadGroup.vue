@@ -103,5 +103,5 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-const scroll = { x: 'calc(700px + 50%)', y: 240 }
+const scroll = { width: 'calc(700px + 50%)', height: 240 }
 </script>

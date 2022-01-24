@@ -16,17 +16,9 @@ import MeasureRow from './MeasureRow'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const {
-      props,
-      slots: tableSlots,
-      flattedData,
-      scrollHorizontal,
-      scrollVertical,
-      isSticky,
-      bodyTag,
-    } = inject(TABLE_TOKEN)!
+    const { props, slots: tableSlots, flattedData, scrollWidth, scrollHeight, isSticky, bodyTag } = inject(TABLE_TOKEN)!
 
-    const showMeasure = computed(() => scrollHorizontal.value || scrollVertical.value || isSticky.value)
+    const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
 
     return () => {
       const children: VNodeTypes[] = []
@@ -45,7 +37,11 @@ export default defineComponent({
           })
         }
       } else {
-        children.push(<BodyRowSingle>{slots.empty ? slots.empty() : <ɵEmpty empty={props.empty} />}</BodyRowSingle>)
+        children.push(
+          <BodyRowSingle>
+            <ɵEmpty v-slots={tableSlots} empty={props.empty} />
+          </BodyRowSingle>,
+        )
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyTag = bodyTag.value as any

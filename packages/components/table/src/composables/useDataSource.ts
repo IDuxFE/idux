@@ -35,14 +35,7 @@ export function useDataSource(
   })
 
   const filteredData = computed(() => filterData(mergedData.value, activeFilters.value, expandedRowKeys.value))
-  const sortedData = computed(() => {
-    const { sorter, orderBy } = activeSortable
-    if (sorter && orderBy) {
-      return sortData(filteredData.value, sorter, orderBy, expandedRowKeys.value)
-    }
-
-    return filteredData.value
-  })
+  const sortedData = computed(() => sortData(filteredData.value, activeSortable, expandedRowKeys.value))
   const paginatedData = computed(() => {
     const pagination = mergedPagination.value
     const data = sortedData.value
@@ -115,18 +108,18 @@ function covertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
   })
 }
 
-function sortData(
-  mergedData: MergedData[],
-  sorter: (curr: unknown, next: unknown) => number,
-  orderBy: 'ascend' | 'descend',
-  expandedRowKeys: VKey[],
-) {
+function sortData(mergedData: MergedData[], activeSortable: ActiveSortable, expandedRowKeys: VKey[]) {
+  const { sorter, orderBy } = activeSortable
+  if (!sorter || !orderBy) {
+    return mergedData
+  }
+
   const tempData = mergedData.slice()
   const orderFlag = orderBy === 'ascend' ? 1 : -1
 
   tempData.forEach(item => {
     if (expandedRowKeys.includes(item.rowKey) && item.children && item.children.length > 0) {
-      item.children = sortData(item.children, sorter, orderBy, expandedRowKeys)
+      item.children = sortData(item.children, activeSortable, expandedRowKeys)
     }
   })
   return tempData.sort((curr, next) => orderFlag * sorter(curr.record, next.record))

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject } from 'vue'
+import { ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -61,7 +61,7 @@ export default defineComponent({
           [`${prefixCls}-fix-sticky`]: isSticky.value,
         }
       }
-      return classes
+      return normalizeClass(classes)
     })
 
     const style = computed(() => {

@@ -6,11 +6,12 @@
  */
 
 import {
-  type StyleValue,
+  type CSSProperties,
   type VNodeTypes,
   computed,
   defineComponent,
   inject,
+  normalizeClass,
   onBeforeUnmount,
   onMounted,
   provide,
@@ -39,7 +40,6 @@ export default defineComponent({
     const {
       props,
       mergedPrefixCls,
-      config,
       changeColumnWidth,
       flattedData,
       isSticky,
@@ -47,10 +47,8 @@ export default defineComponent({
       handleScroll,
       pingedStart,
       pingedEnd,
-      scrollX,
-      scrollY,
-      scrollHorizontal,
-      scrollVertical,
+      scrollWidth,
+      scrollHeight,
       hasFixed,
       tableLayout,
       tableTag,
@@ -85,15 +83,15 @@ export default defineComponent({
     onMounted(() => {
       triggerScroll()
 
-      watch([() => props.dataSource, scrollHorizontal], ([, value]) => {
-        if (value) {
+      watch([() => props.dataSource, scrollWidth], ([, width]) => {
+        if (width) {
           triggerScroll()
         }
       })
 
       watchEffect(() => {
         const element = mainTableRef.value
-        if (scrollHorizontal.value) {
+        if (scrollWidth.value) {
           onResize(element, handleWrapperResize)
         } else {
           offResize(element, handleWrapperResize)
@@ -105,34 +103,31 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { borderless = config.borderless, size = config.size } = props
-      return {
+      return normalizeClass({
         [`${prefixCls}-container`]: true,
-        [`${prefixCls}-borderless`]: borderless,
-        [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-ping-start`]: pingedStart.value,
         [`${prefixCls}-ping-end`]: pingedEnd.value,
         [`${prefixCls}-fixed-layout`]: tableLayout.value === 'fixed',
         [`${prefixCls}-fixed-column`]: hasFixed.value,
-        [`${prefixCls}-scroll-horizontal`]: scrollHorizontal.value,
-        [`${prefixCls}-scroll-vertical`]: scrollVertical.value,
-      }
+        [`${prefixCls}-scroll-horizontal`]: scrollWidth.value,
+        [`${prefixCls}-scroll-vertical`]: scrollHeight.value,
+      })
     })
 
-    const contentStyle = computed<StyleValue>(() => {
-      const x = scrollX.value
-      const y = scrollY.value
-      const overflowX = x ? 'auto' : undefined
-      const overflowY = props.virtual ? 'hidden' : y ? 'scroll' : x ? 'hidden' : undefined
-      const maxHeight = y
-      return { overflowX, overflowY, maxHeight }
+    const contentStyle = computed<CSSProperties>(() => {
+      const width = scrollWidth.value
+      const height = scrollHeight.value
+      const overflowX = width ? 'auto' : undefined
+      const overflowY = props.virtual ? 'hidden' : height ? 'scroll' : width ? 'hidden' : undefined
+      const fullHeight = props.scroll?.fullHeight
+      return { overflowX, overflowY, [fullHeight ? 'height' : 'maxHeight']: height }
     })
 
-    const tableStyle = computed<StyleValue>(() => {
+    const tableStyle = computed<CSSProperties>(() => {
       return {
         tableLayout: tableLayout.value,
-        width: scrollX.value,
-        minWidth: scrollX.value ? '100%' : undefined,
+        width: scrollWidth.value,
+        minWidth: scrollWidth.value ? '100%' : undefined,
       }
     })
 
@@ -152,7 +147,7 @@ export default defineComponent({
 
       const prefixCls = mergedPrefixCls.value
 
-      if (scrollVertical.value || isSticky.value) {
+      if (scrollHeight.value || isSticky.value) {
         const tableHead = !props.headless && (
           <FixedHolder>
             <Head></Head>
@@ -160,7 +155,7 @@ export default defineComponent({
         )
 
         let tableBody: VNodeTypes
-        if (props.virtual) {
+        if (props.virtual && props.scroll) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) => {
             const { expanded, level, record, rowKey } = item
             const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex: index, rowKey }
@@ -171,15 +166,15 @@ export default defineComponent({
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body>{children}</Body>
-                <Foot></Foot>
+                {false && <Foot></Foot>}
               </TableTag>
             )
           }
           const { scroll, onScrolledBottom } = props
-          const height = scroll?.y
+          const { height, y, fullHeight } = scroll
 
           __DEV__ &&
-            !isNumber(height) &&
+            !isNumber(height || y) &&
             Logger.warn('components/table', 'scroll.y must is a valid number when enable virtual scroll')
 
           tableBody = (
@@ -187,8 +182,8 @@ export default defineComponent({
               ref={scrollBodyRef}
               style={contentStyle.value}
               dataSource={flattedData.value}
-              fullHeight
-              height={height as number}
+              fullHeight={fullHeight}
+              height={(height || y) as number}
               itemHeight={44}
               itemKey="rowKey"
               itemRender={itemRender}
@@ -205,17 +200,15 @@ export default defineComponent({
               <TableTag style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
-                <Foot></Foot>
+                {false && <Foot></Foot>}
               </TableTag>
             </div>
           )
         }
 
-        // TODO
-        const tableFoot = null
         const sticky = isSticky.value ? <StickyScroll></StickyScroll> : null
 
-        children = [tableHead, tableBody, tableFoot, sticky]
+        children = [tableHead, tableBody, sticky]
       } else {
         children = (
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
@@ -223,7 +216,7 @@ export default defineComponent({
               <ColGroup></ColGroup>
               {!props.headless && <Head></Head>}
               <Body></Body>
-              <Foot></Foot>
+              {false && <Foot></Foot>}
             </TableTag>
           </div>
         )

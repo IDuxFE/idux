@@ -18,7 +18,7 @@ const Empty: FunctionalComponent<EmptyProps> = (props, { slots }) => {
   }
 
   const { empty } = props
-  const emptyProps = isString(empty) ? { description: empty } : { ...empty }
+  const emptyProps = isString(empty) ? { description: empty } : empty
 
   return <IxEmpty {...emptyProps}></IxEmpty>
 }
