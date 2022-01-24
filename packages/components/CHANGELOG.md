@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.5](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-01-24)
+
+
+### Bug Fixes
+
+* **comp: affix:** style is not recalculated when resizing ([#737](https://github.com/IDuxFE/idux/issues/737)) ([9cda3d0](https://github.com/IDuxFE/idux/commit/9cda3d0354f93be7d1ac60fe767b15a3a51ddbf6))
+
+
+### Features
+
+* **comp:select:** add 'overlay' to searchable ([#729](https://github.com/IDuxFE/idux/issues/729)) ([68c6adc](https://github.com/IDuxFE/idux/commit/68c6adc63d11cd7516e420c1ab04309cfac6e33a))
+* **comp:table:** scroll support fullHeight ([#739](https://github.com/IDuxFE/idux/issues/739)) ([2255853](https://github.com/IDuxFE/idux/commit/2255853832ce9db96ac80a774bcc60924cc52511))
+* **comp:upload:** add file upload component ([#669](https://github.com/IDuxFE/idux/issues/669)) ([91f501a](https://github.com/IDuxFE/idux/commit/91f501a2f3373953dc7a8317d546e050fe6fddde)), closes [#605](https://github.com/IDuxFE/idux/issues/605)
+* **pro:layout:** suppor all slots of IxMenu ([#738](https://github.com/IDuxFE/idux/issues/738)) ([9745c32](https://github.com/IDuxFE/idux/commit/9745c329a962faa2499f0003c8badab33b9dcabc))
+
+
+### BREAKING CHANGES
+
+* **comp:table:** `scroll.x` and `scroll.y` are deprecated, please use `scroll.width` and
+`scroll.height` instead
+
+* test(comp:table): add basic test
+
+
+
+
+
 # [1.0.0-alpha.4](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-01-14)
 
 
