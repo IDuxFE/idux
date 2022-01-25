@@ -13,10 +13,4 @@ const IxDivider = Divider as unknown as DividerComponent
 
 export { IxDivider }
 
-export type {
-  DividerInstance,
-  DividerComponent,
-  DividerPublicProps as DividerProps,
-  DividerPosition,
-  DividerType,
-} from './src/types'
+export type { DividerInstance, DividerComponent, DividerPublicProps as DividerProps } from './src/types'

@@ -1,8 +1,8 @@
 ---
-order: 1
+order: 3
 title: 
   zh: 分割线使用正文样式
-  en: divider text use plain style
+  en: Divider label use plain style
 ---
 
 ## zh

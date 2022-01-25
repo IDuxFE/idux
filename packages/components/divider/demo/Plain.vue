@@ -1,21 +1,5 @@
 <template>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a
-    te dicta? Refert tamen, quo modo.
-  </p>
-  <IxDivider plain>Text</IxDivider>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a
-    te dicta? Refert tamen, quo modo.
-  </p>
-  <IxDivider position="left" plain>Left Text</IxDivider>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a
-    te dicta? Refert tamen, quo modo.
-  </p>
-  <IxDivider position="right" plain>Right Text</IxDivider>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a
-    te dicta? Refert tamen, quo modo.
-  </p>
+  <p>见山是山，见水是水；见山不是山，见水不是水；见山还是山，见水还是水。</p>
+  <IxDivider label="iDux" plain />
+  <p>见山是山，见水是水；见山不是山，见水不是水；见山还是山，见水还是水。</p>
 </template>

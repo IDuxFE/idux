@@ -7,178 +7,83 @@ import { DividerProps } from '../src/types'
 
 describe('Divider', () => {
   const DividerMount = (options?: MountingOptions<Partial<DividerProps>>) => mount(IxDivider, { ...options })
+
   renderWork(IxDivider)
 
-  test('type work', async () => {
-    const wrapper = DividerMount()
-    expect(wrapper.classes()).toContain('ix-divider-horizontal')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).toContain('ix-divider-horizontal')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).toContain('ix-divider-vertical')
-  })
-
   test('dashed work', async () => {
-    const wrapper = DividerMount()
-    expect(wrapper.classes()).not.toContain('ix-divider-dashed')
+    const wrapper = DividerMount({ props: { dashed: true } })
 
-    await wrapper.setProps({ dashed: true })
     expect(wrapper.classes()).toContain('ix-divider-dashed')
 
     await wrapper.setProps({ dashed: false })
     expect(wrapper.classes()).not.toContain('ix-divider-dashed')
   })
 
-  test('slot work', async () => {
-    const text = 'Text'
-    let wrapper = DividerMount()
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text')
-    expect(wrapper.text()).not.toEqual(text)
-    expect(wrapper.find('.ix-divider-inner-text').exists()).toBeFalsy()
+  test('label work', async () => {
+    const label = 'label'
+    const wrapper = DividerMount({ props: { label } })
 
-    wrapper = DividerMount({ slots: { default: text } })
-    expect(wrapper.classes()).toContain('ix-divider-with-text')
-    expect(wrapper.text()).toEqual(text)
-    expect(wrapper.find('.ix-divider-inner-text').exists()).toBeTruthy()
+    expect(wrapper.classes()).toContain('ix-divider-with-label')
+    expect(wrapper.text()).toEqual(label)
+
+    const label2 = `label2`
+    await wrapper.setProps({ label: label2 })
+
+    expect(wrapper.text()).toEqual(label2)
+  })
+
+  test('label slot work', async () => {
+    const label = 'label'
+    const labelSlot = 'label slot'
+    const wrapper = DividerMount({ props: { label }, slots: { default: labelSlot } })
+
+    expect(wrapper.text()).toEqual(labelSlot)
+  })
+
+  test('labelPlacement work', async () => {
+    const wrapper = DividerMount({ props: { label: 'label', labelPlacement: 'start' } })
+
+    expect(wrapper.classes()).toContain('ix-divider-with-label-start')
+
+    await wrapper.setProps({ labelPlacement: 'end' })
+
+    expect(wrapper.classes()).toContain('ix-divider-with-label-end')
+
+    await wrapper.setProps({ label: undefined })
+
+    expect(wrapper.classes()).not.toContain('ix-divider-with-label-end')
   })
 
   test('plain work', async () => {
-    const text = 'Text'
-    let wrapper = DividerMount()
-    expect(wrapper.classes()).not.toContain('ix-divider-plain')
+    const wrapper = DividerMount({ props: { label: 'label', plain: true } })
 
-    wrapper = DividerMount({ slots: { default: text } })
-    expect(wrapper.classes()).not.toContain('ix-divider-plain')
-
-    await wrapper.setProps({ plain: true })
     expect(wrapper.classes()).toContain('ix-divider-plain')
 
     await wrapper.setProps({ plain: false })
+
+    expect(wrapper.classes()).not.toContain('ix-divider-plain')
+
+    await wrapper.setProps({ label: undefined, plain: true })
+
     expect(wrapper.classes()).not.toContain('ix-divider-plain')
   })
 
-  test('position work', async () => {
-    const text = 'Text'
-    let wrapper = DividerMount()
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+  test('size work', async () => {
+    const wrapper = DividerMount({ props: { size: 'sm' } })
 
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+    expect(wrapper.classes()).toContain('ix-divider-sm')
 
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+    await wrapper.setProps({ size: 'lg' })
 
-    wrapper = DividerMount({ slots: { default: text } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+    expect(wrapper.classes()).toContain('ix-divider-lg')
+  })
 
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+  test('vertical work', async () => {
+    const wrapper = DividerMount({ props: { vertical: true } })
 
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+    expect(wrapper.classes()).toContain('ix-divider-vertical')
 
-    wrapper = DividerMount({ slots: { default: text }, props: { position: 'left' } })
-    expect(wrapper.classes()).toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    wrapper = DividerMount({ props: { position: 'left' } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    wrapper = DividerMount({ slots: { default: text }, props: { position: 'center' } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    wrapper = DividerMount({ props: { position: 'center' } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    wrapper = DividerMount({ slots: { default: text }, props: { position: 'right' } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    wrapper = DividerMount({ props: { position: 'right' } })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'horizontal' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
-
-    await wrapper.setProps({ type: 'vertical' })
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-left')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-center')
-    expect(wrapper.classes()).not.toContain('ix-divider-with-text-right')
+    await wrapper.setProps({ vertical: false })
+    expect(wrapper.classes()).toContain('ix-divider-horizontal')
   })
 })

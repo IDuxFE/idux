@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Slot, Slots, VNode, type VNodeChild, createVNode } from 'vue'
+import { type Slot, type Slots, type VNode, type VNodeChild, createVNode } from 'vue'
 
 import { isString } from 'lodash-es'
 

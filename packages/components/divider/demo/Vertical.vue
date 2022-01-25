@@ -1,7 +1,7 @@
 <template>
-  Text
-  <IxDivider type="vertical" />
+  <span>Text</span>
+  <IxDivider vertical />
   <a href="#">Link</a>
-  <IxDivider type="vertical" />
+  <IxDivider vertical dashed />
   <a href="#">Link</a>
 </template>
