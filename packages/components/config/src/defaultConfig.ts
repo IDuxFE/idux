@@ -374,10 +374,9 @@ const drawer: DrawerConfig = {
 const result: ResultConfig = { status: 'info' }
 
 const spin: SpinConfig = {
-  icon: 'loading',
   tip: '',
   tipAlign: 'vertical',
-  size: 'sm',
+  size: 'md',
 }
 
 const popconfirm: PopconfirmConfig = {

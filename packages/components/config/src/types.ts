@@ -383,10 +383,12 @@ export interface ResultConfig {
 }
 
 export interface SpinConfig {
-  icon: string
+  icon?: string
   tip: string
   tipAlign: SpinTipAlignType
   size: SpinSize
+  strokeWidth?: Partial<Record<SpinSize, number>>
+  radius?: Partial<Record<SpinSize, number>>
 }
 
 export interface PopconfirmConfig {

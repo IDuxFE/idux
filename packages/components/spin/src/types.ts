@@ -14,7 +14,11 @@ export type SpinTipAlignType = 'horizontal' | 'vertical'
 export type SpinSize = 'lg' | 'md' | 'sm'
 
 export const spinProps = {
+  strokeWidth: IxPropTypes.number,
+  radius: IxPropTypes.number,
+  duration: IxPropTypes.number,
   spinning: IxPropTypes.bool.def(true),
+  rotate: IxPropTypes.bool.def(true),
   icon: IxPropTypes.string,
   tip: IxPropTypes.string,
   tipAlign: IxPropTypes.oneOf(['horizontal', 'vertical'] as const),

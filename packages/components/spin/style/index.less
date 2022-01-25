@@ -1,6 +1,6 @@
 @import '../../style/mixins/reset.less';
 
-@spin-mask: {
+.spin-mask() {
   position: absolute;
   top: 0;
   left: 0;
@@ -9,13 +9,32 @@
   user-select: none;
 };
 
+.spin-size(@size) {
+  &-@{size} {
+    size: 1em;
+    .@{spin-prefix}-spinner {
+
+      @spin-size: 'spin-icon-size-@{size}';
+      @font-size: 'spin-font-size-@{size}';
+
+      &-icon {
+        font-size: @@spin-size;
+      }
+
+      &-tip {
+        font-size: @@font-size;
+      }
+    }
+  }
+}
+
 .@{spin-prefix} {
   .reset-component();
 
   position: relative;
 
   &-spinner {
-    @spin-mask();
+    .spin-mask();
 
     z-index: @spin-zindex;
     display: flex;
@@ -40,35 +59,13 @@
       }
     }
 
-    &-sm {
-      .@{spin-prefix}-spinner {
-
-        &-icon,
-        &-tip {
-          font-size: @spin-font-size-sm;
-        }
-      }
+    &-icon--rotate {
+      animation: icon-spinning 1.5s infinite linear;
     }
 
-    &-md {
-      .@{spin-prefix}-spinner {
-
-        &-icon,
-        &-tip {
-          font-size: @spin-font-size-md;
-        }
-      }
-    }
-
-    &-lg {
-      .@{spin-prefix}-spinner {
-
-        &-icon,
-        &-tip {
-          font-size: @spin-font-size-lg;
-        }
-      }
-    }
+    .spin-size(sm);
+    .spin-size(md);
+    .spin-size(lg);
 
     &-tip {
       color: @spin-tip-color;
@@ -92,5 +89,12 @@
       clear: both;
       overflow: hidden;
     }
+  }
+}
+
+@keyframes icon-spinning {
+
+  100% {
+    transform: rotate(360deg);
   }
 }

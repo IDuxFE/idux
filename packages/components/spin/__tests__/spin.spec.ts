@@ -20,7 +20,7 @@ describe('Spin', () => {
   })
 
   test('size work', async () => {
-    const wrapper = SpinMount()
+    const wrapper = SpinMount({ props: { size: 'sm' } })
 
     expect(wrapper.find('.ix-spin-spinner').classes()).toContain('ix-spin-spinner-sm')
 
@@ -35,7 +35,7 @@ describe('Spin', () => {
   })
 
   test('icon work', async () => {
-    const wrapper = SpinMount()
+    const wrapper = SpinMount({ props: { icon: 'loading' } })
 
     expect(wrapper.find('.ix-icon-loading').exists()).toBeTruthy()
 

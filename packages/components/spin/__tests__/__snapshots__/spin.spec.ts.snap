@@ -2,8 +2,22 @@
 
 exports[`Spin render work 1`] = `
 "<div class=\\"ix-spin\\">
-  <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-sm\\">
-    <div class=\\"ix-spin-spinner-icon\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+  <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-md\\">
+    <div class=\\"ix-spin-spinner-icon\\">
+      <div class=\\"ix-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg class=\\"ix-loading-icon\\" viewBox=\\"0 0 28 28\\">
+          <g id=\\"loading-48\\" fill=\\"none\\" fill-rule=\\"evenodd\\" transform=\\"rotate(-90,14,14)\\">
+            <circle class=\\"ix-loading-snd-arch\\" cx=\\"14\\" cy=\\"14\\" r=\\"12.5\\" stroke-width=\\"3\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"9.676105373056563 88.96459430051421\\">
+              <animate attributeName=\\"stroke-dashoffset\\" values=\\"9.676105373056563;9.676105373056563;-87.96459430051421\\" dur=\\"2s\\" begin=\\"0s\\" repeatCount=\\"indefinite\\" calcMode=\\"spline\\" keyTimes=\\"0;0.3333;1\\" keySplines=\\"0 0 0 0;0.42 0 0.58 1;\\"></animate>
+            </circle>
+            <circle class=\\"ix-loading-fst-arch\\" cx=\\"14\\" cy=\\"14\\" r=\\"12.5\\" stroke-width=\\"3\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"20.231856689118267 88.96459430051421\\">
+              <animate attributeName=\\"stroke-dashoffset\\" values=\\"20.231856689118267;20.231856689118267;-87.96459430051421;-87.96459430051421\\" dur=\\"2s\\" begin=\\"0s\\" repeatCount=\\"indefinite\\" calcMode=\\"spline\\" keyTimes=\\"0;0.3333;0.7;1\\" keySplines=\\"0 0 0 0;0.42 0 0.58 1;0 0 0 0\\"></animate>
+            </circle>
+            <circle class=\\"ix-loading-bg-circle\\" cx=\\"14\\" cy=\\"14\\" r=\\"12.5\\" stroke-width=\\"3\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"87.96459430051421 88.96459430051421\\">
+              <animate attributeName=\\"stroke-dashoffset\\" values=\\"87.96459430051421;0;-87.96459430051421;-87.96459430051421\\" dur=\\"2s\\" begin=\\"0s\\" repeatCount=\\"indefinite\\" calcMode=\\"spline\\" keyTimes=\\"0;0.3333;0.666;1\\" keySplines=\\"0.6 0 0.4 1;0.6 0 0.4 1;0,0,0,0\\"></animate>
+            </circle>
+          </g>
+        </svg></div>
+    </div>
     <!---->
   </div>
   <!---->
