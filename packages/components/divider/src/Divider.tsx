@@ -5,14 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DividerProps } from './types'
-import type { DividerConfig } from '@idux/components/config'
-import type { ComputedRef } from 'vue'
+import { computed, defineComponent, normalizeClass } from 'vue'
 
-import { computed, defineComponent } from 'vue'
-
-import { hasSlot } from '@idux/cdk/utils'
+import { Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { covertLabelVNode } from '@idux/components/utils'
 
 import { dividerProps } from './types'
 
@@ -22,43 +19,43 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-divider`)
-    const dividerConfig = useGlobalConfig('divider')
-    const withText = computed(() => hasSlot(slots))
-    const className = useClassName(props, dividerConfig, withText, mergedPrefixCls)
+    const config = useGlobalConfig('divider')
+
+    const classes = computed(() => {
+      const {
+        dashed = config.dashed,
+        label,
+        labelPlacement = config.labelPlacement,
+        plain = config.plain,
+        position,
+        size = config.size,
+        type,
+        vertical = config.vertical,
+      } = props
+
+      __DEV__ &&
+        position &&
+        Logger.warn('components/divider', '`position` was deprecated, please use `labelPlacement` instead')
+      __DEV__ && type && Logger.warn('components/divider', '`type` was deprecated, please use `vertical` instead')
+
+      const withLabel = !!label || !!slots.default
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-dashed`]: dashed,
+        [`${prefixCls}-horizontal`]: !(type === 'vertical' || vertical),
+        [`${prefixCls}-vertical`]: type === 'vertical' || vertical,
+        [`${prefixCls}-plain`]: withLabel && plain,
+        [`${prefixCls}-with-label`]: withLabel,
+        [`${prefixCls}-with-label-${position || labelPlacement}`]: withLabel,
+      })
+    })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      return (
-        <div class={className.value}>
-          {withText.value && <span class={`${prefixCls}-inner-text`}>{slots.default?.()}</span>}
-        </div>
-      )
+      const labelNode = covertLabelVNode(slots.default, props.label)
+      return <div class={classes.value}>{labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}</div>
     }
   },
 })
-
-function useClassName(
-  props: DividerProps,
-  config: DividerConfig,
-  withText: ComputedRef<boolean>,
-  mergedPrefixCls: ComputedRef<string>,
-) {
-  return computed(() => {
-    const prefixCls = mergedPrefixCls.value
-    const position = props.position || config.position
-    const type = props.type || config.type
-    const dashed = props.dashed || config.dashed
-    const plain = props.plain || config.plain
-
-    return [
-      `${prefixCls}-${type}`,
-      {
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-with-text`]: withText.value,
-        [`${prefixCls}-dashed`]: dashed,
-        [`${prefixCls}-plain`]: plain && withText.value,
-        [`${prefixCls}-with-text-${position}`]: type === 'horizontal' && withText.value,
-      },
-    ]
-  })
-}

@@ -1,10 +1,10 @@
 ---
-order: 3
+order: 1
 title:
   zh: 垂直分割线
-  en: vertical divider
+  en: Vertical divider
 ---
 
 ## zh
 
-使用 `type="vertical"`设置为行内的垂直分割线
+使用 `vertical` 设置为行内的垂直分割线

@@ -3,76 +3,113 @@
 .@{divider-prefix} {
   .reset-component();
 
-  border-top: @border-width-sm solid @border-color;
-
   &-horizontal {
+    display: flex;
+    clear: both;
     width: 100%;
     min-width: 100%;
-    margin: @spacing-xl 0;
-    clear: both;
-
-    &.@{divider-prefix}-with-text {
-      position: relative;
-
-      .@{divider-prefix}-inner-text {
-        position: absolute;
-        display: inline-block;
-        padding: 0 1em;
-        font-size: @font-size-xl;
-        color: @color-black;
-        font-weight: @font-weight-lg;
-        background: @color-white;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      @divider-prefix-with-text: ~'@{divider-prefix}-with-text';
-
-      &.@{divider-prefix-with-text}-center {
-        .@{divider-prefix}-inner-text {
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-
-      &.@{divider-prefix-with-text}-left {
-        .@{divider-prefix}-inner-text {
-          left: 5%;
-        }
-      }
-
-      &.@{divider-prefix-with-text}-right {
-        .@{divider-prefix}-inner-text {
-          right: 5%;
-        }
-      }
-
-      &.@{divider-prefix}-plain {
-        .@{divider-prefix}-inner-text {
-          font-size: @font-size-lg;
-          font-weight: @font-weight-md;
-        }
-      }
-    }
+    border-top: @divider-border-width solid @divider-border-color;
   }
 
   &-vertical {
-    top: -0.06em;
     display: inline-block;
+    position: relative;
+    top: -0.06em;
     height: 0.9em;
     vertical-align: middle;
-    border-top: 0;
-    border-left: @border-width-sm solid @border-color;
-    margin: 0 @spacing-sm;
-
-    &.@{divider-prefix}-dashed {
-      border-width: 0 0 0 1px;
-    }
+    border-left: @divider-border-width solid @divider-border-color;
   }
 
   &-dashed {
-    border-style: dashed;
-    border-width: 1px 0 0;
     background: none;
+    border-style: dashed;
+  }
+
+  &-dashed&-horizontal {
+    border-width: @divider-border-width 0 0;
+  }
+
+  &-dashed&-vertical {
+    border-width: 0 0 0 @divider-border-width;
+  }
+
+  &-label {
+    position: absolute;
+    display: inline-block;
+    padding: 0 1em;
+    color: @color-black;
+    font-weight: @font-weight-lg;
+    background: @color-white;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-with-label {
+    position: relative;
+
+    &-center {
+      .@{divider-prefix}-label {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &-start,
+    &-left {
+      .@{divider-prefix}-label {
+        left: 5%;
+      }
+    }
+
+    &-end,
+    &-right {
+      .@{divider-prefix}-label {
+        right: 5%;
+      }
+    }
+  }
+
+  &-plain {
+    .@{divider-prefix}-label {
+      font-weight: @font-weight-md;
+    }
+  }
+
+  &-sm {
+    .divider-size(@divider-horizontal-margin-sm; @divider-vertical-margin-sm; @divider-font-size-sm);
+
+    &.@{divider-prefix}-plain .@{divider-prefix}-label {
+      font-size: @divider-font-size-sm - 2px;
+    }
+  }
+
+  &-md {
+    .divider-size(@divider-horizontal-margin-md; @divider-vertical-margin-md; @divider-font-size-md);
+
+    &.@{divider-prefix}-plain .@{divider-prefix}-label {
+      font-size: @divider-font-size-md - 4px;
+    }
+  }
+
+  &-lg {
+    .divider-size(@divider-horizontal-margin-lg; @divider-vertical-margin-lg; @divider-font-size-lg);
+
+    &.@{divider-prefix}-plain .@{divider-prefix}-label {
+      font-size: @divider-font-size-lg - 4px;
+    }
+  }
+}
+
+.divider-size(@horizontal-margin; @vertical-margin; @font-size) {
+  &.@{divider-prefix}-horizontal {
+    margin: @horizontal-margin;
+  }
+
+  &.@{divider-prefix}-vertical {
+    margin: @vertical-margin;
+  }
+
+  .@{divider-prefix}-label {
+    font-size: @font-size;
   }
 }

@@ -74,9 +74,10 @@ const tag: TagConfig = {}
 // --------------------- Layout ---------------------
 const divider: DividerConfig = {
   dashed: false,
+  labelPlacement: 'center',
   plain: false,
-  position: 'center',
-  type: 'horizontal',
+  size: 'md',
+  vertical: false,
 }
 
 const space: SpaceConfig = { size: 'sm', wrap: true }

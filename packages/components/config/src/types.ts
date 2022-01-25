@@ -13,7 +13,6 @@ import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { CardSize } from '@idux/components/card'
 import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
-import type { DividerPosition, DividerType } from '@idux/components/divider'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
 import type { MenuTheme } from '@idux/components/menu'
@@ -52,8 +51,9 @@ export interface TagConfig {
 export interface DividerConfig {
   dashed: boolean
   plain: boolean
-  position: DividerPosition
-  type: DividerType
+  labelPlacement: 'start' | 'center' | 'end'
+  size: 'sm' | 'md' | 'lg'
+  vertical: boolean
 }
 
 export interface SpaceConfig {
