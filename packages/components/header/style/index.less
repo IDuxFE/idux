@@ -14,22 +14,6 @@
   background-color: @header-background-color;
   transition: @header-transition;
 
-  &-bar &-content {
-    padding-left: @header-bar-width * 2;
-
-    &::before {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      margin: @header-bar-margin;
-      width: @header-bar-width;
-      background-color: @header-bar-background-color;
-      border-radius: calc(@header-bar-width / 2);
-      content: '';
-    }
-  }
-
   &-content {
     position: relative;
     width: 100%;
@@ -95,6 +79,22 @@
     .@{header-prefix}-suffix {
       color: @header-disabled-color;
       cursor: not-allowed;
+    }
+  }
+
+  &-with-bar &-content {
+    padding-left: @header-bar-width * 2;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: @header-bar-margin;
+      width: @header-bar-width;
+      background-color: @header-bar-background-color;
+      border-radius: calc(@header-bar-width / 2);
+      content: '';
     }
   }
 
