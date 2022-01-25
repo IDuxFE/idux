@@ -15,6 +15,7 @@ export type HeaderSize = 'xl' | 'lg' | 'md' | 'sm'
 
 export const headerProps = {
   avatar: IxPropTypes.oneOfType([String, IxPropTypes.object<AvatarProps>()]),
+  description: IxPropTypes.string,
   disabled: IxPropTypes.bool.def(false),
   prefix: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   size: IxPropTypes.oneOf<HeaderSize>(['xl', 'lg', 'md', 'sm']).def('md'),

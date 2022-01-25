@@ -10,13 +10,15 @@ order: 0
 
 ### IxIcon
 
-#### Props
+#### IconProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `name`| 图标名称 | `string` | - | - | - |
+| `color` | 图标颜色 | `string` | - | - | - |
 | `iconfont` | 图标是否来自 `iconfont` | `boolean` | - | - | - |
 | `rotate` | 图标旋转角度 | `boolean \| number` | `false` | - |  为 `true` 时会循环旋转 |
+| `size` | 图标大小 | `number \| string` | - | - | - |
 
 ### 辅助函数
 
@@ -72,7 +74,7 @@ const loadIconDynamically = (iconName: string) => {
 useGlobalConfig('icon', { loadIconDynamically })
 ```
 
-你可以执行 `node ./node_modules/@idux/components/bin icon` 命令将默认图标拷贝到 `public/idux-icons` 目录下。
+你可以执行 `node ./node_modules/@idux/components/bin icon` 命令将默认图标拷贝到 `public/idux-icons` 目录下。  
 当然，你也可以手动拷贝，默认图标的存放地址为 `./node_modules/@idux/components/icon/svg`。
 
 #### 静态加载

@@ -21,6 +21,6 @@ export default defineComponent({
 
     provide(buttonToken, props)
 
-    return () => <div class={mergedPrefixCls.value}>{slots.default?.()}</div>
+    return () => <div class={mergedPrefixCls.value}>{slots.default && slots.default()}</div>
   },
 })

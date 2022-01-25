@@ -124,11 +124,11 @@ describe('Header', () => {
   test('showBar work', async () => {
     const wrapper = HeaderMount({ props: { showBar: true } })
 
-    expect(wrapper.find('.ix-header-bar').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('ix-header-with-bar')
 
     await wrapper.setProps({ showBar: false })
 
-    expect(wrapper.find('.ix-header-bar').exists()).toBe(false)
+    expect(wrapper.classes()).not.toContain('ix-header-with-bar')
   })
 
   test('subTitle work', async () => {
