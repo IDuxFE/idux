@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxDatePicker :disabledDate="disabledDate"></IxDatePicker>
   </IxSpace>
 </template>

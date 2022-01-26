@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxRate :value="3" icon="star" />
     <IxRate :value="3">
       <template #icon>A</template>

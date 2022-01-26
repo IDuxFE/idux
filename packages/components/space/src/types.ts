@@ -10,16 +10,20 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline'
+export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
+export type SpaceJustify = 'start' | 'center' | 'end' | 'space-around' | 'space-between'
 export type SpaceDirection = 'vertical' | 'horizontal'
 export type SpaceSize = 'sm' | 'md' | 'lg'
 
 export const spaceProps = {
-  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline']),
+  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline', 'stretch']).def('center'),
   block: IxPropTypes.bool,
-  direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']).def('horizontal'),
+  direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']),
+  justify: IxPropTypes.oneOf<SpaceJustify>(['start', 'center', 'end', 'space-around', 'space-between']).def('start'),
   size: IxPropTypes.oneOfType([Number, String, IxPropTypes.array<string | number>()]),
-  split: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+  split: IxPropTypes.string,
+  separator: IxPropTypes.string,
+  vertical: IxPropTypes.bool,
   wrap: IxPropTypes.bool,
 }
 

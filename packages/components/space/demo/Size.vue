@@ -1,9 +1,9 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxRadioGroup v-model:value="size">
-      <IxRadio value="sm">小</IxRadio>
-      <IxRadio value="md">正常</IxRadio>
-      <IxRadio value="lg">大</IxRadio>
+      <IxRadio value="sm">Small</IxRadio>
+      <IxRadio value="md">Medium</IxRadio>
+      <IxRadio value="lg">Large</IxRadio>
     </IxRadioGroup>
     <IxSpace :size="size">
       space:

@@ -5,15 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SpaceProps } from './types'
-import type { FormSize } from '@idux/components/form'
-import type { ComputedRef, Slots, VNode } from 'vue'
-
-import { computed, defineComponent, normalizeClass } from 'vue'
+import { type ComputedRef, type VNode, computed, defineComponent, normalizeClass } from 'vue'
 
 import { supportsFlexGap } from '@idux/cdk/platform'
-import { convertCssPixel, flattenNode } from '@idux/cdk/utils'
+import { Logger, convertCssPixel, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { type FormSize } from '@idux/components/form'
+import { covertLabelVNode } from '@idux/components/utils'
 
 import { spaceProps } from './types'
 
@@ -34,14 +32,14 @@ export default defineComponent({
     const config = useGlobalConfig('space')
 
     const wrap = computed(() => props.wrap ?? config.wrap)
-    const mergedAlign = computed(() => {
-      const { align, direction } = props
-      if (align === undefined && direction === 'horizontal') {
-        return 'center'
+    const vertical = computed(() => {
+      const { direction, vertical } = props
+      if (direction) {
+        __DEV__ && Logger.warn('components/space', '`direction` was deprecated, please use `vertical` instead')
+        return direction === 'vertical'
       }
-      return align
+      return vertical
     })
-
     const mergedGaps = computed(() => {
       const { size = config.size } = props
       const sizes = Array.isArray(size) ? size : [size, size]
@@ -49,14 +47,14 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { block, direction } = props
-      const align = mergedAlign.value
+      const { align, justify, block } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-block`]: block && direction === 'vertical',
-        [`${prefixCls}-align-${align}`]: align,
-        [`${prefixCls}-${direction}`]: true,
+        [`${prefixCls}-align-${align}`]: true,
+        [`${prefixCls}-justify-${justify}`]: true,
+        [`${prefixCls}-block`]: block,
+        [`${prefixCls}-vertical`]: vertical.value,
         [`${prefixCls}-wrap`]: wrap.value,
       })
     })
@@ -66,8 +64,7 @@ export default defineComponent({
       if (flexGapSupported) {
         return `gap: ${rowGap} ${columnGap}`
       } else {
-        const { direction } = props
-        return direction === 'horizontal' && wrap.value ? `margin-bottom: -${convertCssPixel(columnGap)}` : undefined
+        return !vertical.value && wrap.value ? `margin-bottom: -${convertCssPixel(columnGap)}` : undefined
       }
     })
 
@@ -76,8 +73,34 @@ export default defineComponent({
       if (nodes.length === 0) {
         return
       }
+
       const prefixCls = mergedPrefixCls.value
-      const children = renderChildren(props, slots, prefixCls, nodes, mergedGaps, wrap)
+      const children: VNode[] = []
+
+      let separatorNode = covertLabelVNode(slots, props, 'split')
+      if (separatorNode) {
+        __DEV__ && Logger.warn('components/space', '`split` was deprecated, please use `separator` instead')
+      } else {
+        separatorNode = covertLabelVNode(slots, props, 'separator')
+      }
+
+      const lastIndex = nodes.length - 1
+      nodes.forEach((node, index) => {
+        const style = calcItemStyle(mergedGaps, wrap, vertical, index, lastIndex)
+        console.log(style)
+        children.push(
+          <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
+            {node}
+          </div>,
+        )
+        if (separatorNode && index < lastIndex) {
+          children.push(
+            <div key={`separator-${index}`} class={`${prefixCls}-item-separator`} style={style}>
+              {separatorNode}
+            </div>,
+          )
+        }
+      })
       return (
         <div class={classes.value} style={style.value}>
           {children}
@@ -87,52 +110,25 @@ export default defineComponent({
   },
 })
 
-function renderChildren(
-  props: SpaceProps,
-  slots: Slots,
-  prefixCls: string,
-  nodes: VNode[],
+const calcItemStyle = (
   mergedGaps: ComputedRef<(string | number)[]>,
   wrap: ComputedRef<boolean>,
-) {
-  const lastIndex = nodes.length - 1
-
-  const { direction } = props
-  const [rowGap, columnGap] = mergedGaps.value
-  const children: VNode[] = []
-
-  const splitNode = slots.split?.() ?? props.split
-
-  const calcItemStyle = (index: number) => {
-    if (flexGapSupported) {
-      return undefined
-    }
-
-    if (direction === 'horizontal') {
-      const marginRight = index < lastIndex ? convertCssPixel(rowGap) : undefined
-      const paddingBottom = wrap.value ? convertCssPixel(columnGap) : undefined
-      return { marginRight, paddingBottom }
-    } else {
-      const marginBottom = index < lastIndex ? convertCssPixel(rowGap) : undefined
-      return { marginBottom }
-    }
+  vertical: ComputedRef<boolean | undefined>,
+  index: number,
+  lastIndex: number,
+) => {
+  if (flexGapSupported) {
+    return undefined
   }
 
-  nodes.forEach((node, index) => {
-    const style = calcItemStyle(index)
-    children.push(
-      <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
-        {node}
-      </div>,
-    )
-    if (splitNode && index < lastIndex) {
-      children.push(
-        <div key={`split-${index}`} class={`${prefixCls}-item-split`} style={style}>
-          {splitNode}
-        </div>,
-      )
-    }
-  })
+  const [rowGap, columnGap] = mergedGaps.value
 
-  return children
+  if (vertical.value) {
+    const marginBottom = index < lastIndex ? convertCssPixel(rowGap) : undefined
+    return { marginBottom }
+  } else {
+    const marginRight = index < lastIndex ? convertCssPixel(rowGap) : undefined
+    const paddingBottom = wrap.value ? convertCssPixel(columnGap) : undefined
+    return { marginRight, paddingBottom }
+  }
 }

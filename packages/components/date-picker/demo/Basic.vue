@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxDatePicker v-model:value="dateValue" clearable></IxDatePicker>
     <IxDatePicker v-model:value="weekValue" type="week" clearable></IxDatePicker>
     <IxDatePicker v-model:value="monthValue" type="month" clearable></IxDatePicker>

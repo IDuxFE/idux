@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxSpace>
       <IxCheckbox v-model:checked="customExpandIcon">Custom expandIcon</IxCheckbox>
       <IxCheckbox v-model:checked="customLeafLineIcon">Custom leafLineIcon</IxCheckbox>

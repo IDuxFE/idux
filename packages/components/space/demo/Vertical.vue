@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical" block>
+  <IxSpace vertical>
     space:
     <IxButton mode="primary">Button</IxButton>
     <IxButton>Button</IxButton>

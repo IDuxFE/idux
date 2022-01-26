@@ -53,7 +53,6 @@ export interface DividerConfig {
   plain: boolean
   labelPlacement: 'start' | 'center' | 'end'
   size: 'sm' | 'md' | 'lg'
-  vertical: boolean
 }
 
 export interface SpaceConfig {

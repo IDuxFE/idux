@@ -30,7 +30,7 @@ export default defineComponent({
         position,
         size = config.size,
         type,
-        vertical = config.vertical,
+        vertical,
       } = props
 
       __DEV__ &&

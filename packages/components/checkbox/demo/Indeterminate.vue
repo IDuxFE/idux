@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxCheckbox v-model:checked="isCheckAll" :indeterminate="indeterminate" @change="onCheckAllChange">
       Check all
     </IxCheckbox>

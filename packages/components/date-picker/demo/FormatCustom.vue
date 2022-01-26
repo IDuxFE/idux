@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxDatePicker v-model:value="value" type="week" :format="weekFormat"></IxDatePicker>
     <IxDatePicker v-model:value="value" type="quarter" :format="quarterFormat"></IxDatePicker>
   </IxSpace>

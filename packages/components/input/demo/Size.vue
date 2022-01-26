@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxInput size="sm" placeholder="small size" />
     <IxInput placeholder="medium size" />
     <IxInput size="lg" placeholder="large size" />

@@ -20,60 +20,41 @@ describe('Space', () => {
       slots: { default: defaultSlots, ...slots },
     })
   }
+
   renderWork<SpaceProps>(Space, { slots: { default: defaultSlots } })
 
   test('align work', async () => {
-    const wrapper = SpaceMount()
-
-    expect(wrapper.classes()).toContain('ix-space-align-center')
-
-    await wrapper.setProps({ align: 'start' })
+    const wrapper = SpaceMount({ props: { align: 'start' } })
 
     expect(wrapper.classes()).toContain('ix-space-align-start')
-
-    await wrapper.setProps({ align: 'center' })
-
-    expect(wrapper.classes()).toContain('ix-space-align-center')
 
     await wrapper.setProps({ align: 'end' })
 
     expect(wrapper.classes()).toContain('ix-space-align-end')
-
-    await wrapper.setProps({ align: 'baseline' })
-
-    expect(wrapper.classes()).toContain('ix-space-align-baseline')
-  })
-
-  test('direction work', async () => {
-    const wrapper = SpaceMount()
-
-    expect(wrapper.classes()).toContain('ix-space-horizontal')
-
-    await wrapper.setProps({ direction: 'vertical' })
-
-    expect(wrapper.classes()).toContain('ix-space-vertical')
   })
 
   test('block work', async () => {
-    const wrapper = SpaceMount({
-      props: {
-        direction: 'vertical',
-      },
-    })
-
-    expect(wrapper.classes()).not.toContain('ix-space-block')
-
-    await wrapper.setProps({ block: true })
+    const wrapper = SpaceMount({ props: { block: true } })
 
     expect(wrapper.classes()).toContain('ix-space-block')
 
-    await wrapper.setProps({ direction: 'horizontal' })
+    await wrapper.setProps({ block: false })
 
     expect(wrapper.classes()).not.toContain('ix-space-block')
   })
 
+  test('justify work', async () => {
+    const wrapper = SpaceMount({ props: { justify: 'start' } })
+
+    expect(wrapper.classes()).toContain('ix-space-justify-start')
+
+    await wrapper.setProps({ justify: 'end' })
+
+    expect(wrapper.classes()).toContain('ix-space-justify-end')
+  })
+
   test('size work', async () => {
-    const wrapper = SpaceMount()
+    const wrapper = SpaceMount({ props: { size: 'sm' } })
 
     const wrapperElement = wrapper.element as HTMLElement
     const itemElements = wrapper.findAll('.ix-space-item').map(item => item.element as HTMLElement)
@@ -117,15 +98,25 @@ describe('Space', () => {
     expect(itemElements[2].style.paddingBottom).toEqual('16px')
   })
 
-  test('split work', async () => {
-    const wrapper = SpaceMount({ props: { split: '/' } })
+  test('separator work', async () => {
+    const wrapper = SpaceMount({ props: { separator: '/' } })
 
-    expect(wrapper.findAll('.ix-space-item-split').length).toBe(2)
-    expect(wrapper.find('.ix-space-item-split').text()).toBe('/')
+    expect(wrapper.findAll('.ix-space-item-separator').length).toBe(2)
+    expect(wrapper.find('.ix-space-item-separator').text()).toBe('/')
 
-    await wrapper.setProps({ split: '-' })
+    await wrapper.setProps({ separator: '-' })
 
-    expect(wrapper.find('.ix-space-item-split').text()).toBe('-')
+    expect(wrapper.find('.ix-space-item-separator').text()).toBe('-')
+  })
+
+  test('vertical work', async () => {
+    const wrapper = SpaceMount({ props: { vertical: true } })
+
+    expect(wrapper.classes()).toContain('ix-space-vertical')
+
+    await wrapper.setProps({ vertical: false })
+
+    expect(wrapper.classes()).not.toContain('ix-space-vertical')
   })
 
   test('wrap work', async () => {
@@ -134,6 +125,7 @@ describe('Space', () => {
     expect(wrapper.classes()).toContain('ix-space-wrap')
 
     await wrapper.setProps({ wrap: false })
+
     expect(wrapper.classes()).not.toContain('ix-space-wrap')
   })
 })

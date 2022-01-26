@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxTimePicker v-model:value="time" size="sm" />
     <IxTimePicker v-model:value="time" />
     <IxTimePicker v-model:value="time" size="lg" />

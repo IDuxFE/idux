@@ -2,7 +2,7 @@
 order: 6 
 title:
   zh: 分隔符 
-  en: Divider
+  en: Separator
 ---
 
 ## zh

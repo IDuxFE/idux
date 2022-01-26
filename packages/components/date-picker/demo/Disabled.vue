@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxDatePicker v-model:value="value" disabled></IxDatePicker>
   </IxSpace>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxCheckbox v-model:checked="checkable" label="checkable" />
     <IxTreeSelect
       v-model:value="value"
