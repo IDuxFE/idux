@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxCheckboxGroup v-model:value="value" buttoned>
       <IxCheckbox value="beijing">Beijing</IxCheckbox>
       <IxCheckbox value="shanghai">Shanghai</IxCheckbox>

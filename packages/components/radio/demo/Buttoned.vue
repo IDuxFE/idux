@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxRadioGroup v-model:value="value" buttoned>
       <IxRadio value="beijing">Beijing</IxRadio>
       <IxRadio value="shanghai">Shanghai</IxRadio>

@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxInput prefix="user" suffix="info-circle" placeholder="Prefix and suffix" />
     <IxInput placeholder="Prefix and suffix">
       <template #prefix><span>￥</span></template>

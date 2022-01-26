@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxTextarea showCount placeholder="Textarea showCount" />
     <IxTextarea showCount maxCount="100" placeholder="Textarea showCount with maxCount" />
     <IxTextarea showCount :computeCount="computeCount" placeholder="Textarea showCount with computeCount" />

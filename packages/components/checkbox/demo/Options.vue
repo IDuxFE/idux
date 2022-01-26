@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxCheckboxGroup v-model:value="value" :options="options"></IxCheckboxGroup>
     <IxCheckboxGroup v-model:value="value" :options="options" buttoned></IxCheckboxGroup>
   </IxSpace>

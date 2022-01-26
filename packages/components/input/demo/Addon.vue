@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxInput v-model:value="value" :addonBefore="addonBefore" :addonAfter="addonAfter" />
     <IxInput v-model:value="value">
       <template #addonBefore>

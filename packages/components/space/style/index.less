@@ -10,25 +10,22 @@
   &-vertical {
     flex-direction: column;
   }
-  
+
   &-block {
     width: 100%;
-    >.@{space-prefix} {
+  }
 
-      &-item {
-        width: 100%;
-      }
-    }
+  &-block&-vertical > &-item {
+    width: 100%;
   }
 
   &-align {
+    &-start {
+      align-items: flex-start;
+    }
 
     &-center {
       align-items: center;
-    }
-
-    &-start {
-      align-items: flex-start;
     }
 
     &-end {
@@ -37,6 +34,32 @@
 
     &-baseline {
       align-items: baseline;
+    }
+
+    &-stretch {
+      align-items: stretch;
+    }
+  }
+
+  &-justify {
+    &-start {
+      justify-content: flex-start;
+    }
+
+    &-center {
+      justify-content: center;
+    }
+
+    &-end {
+      justify-content: flex-end;
+    }
+
+    &-space-around {
+      justify-content: space-around;
+    }
+
+    &-space-between {
+      justify-content: space-between;
     }
   }
 }

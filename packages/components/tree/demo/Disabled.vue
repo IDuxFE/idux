@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     checkStrategy：
     <IxRadioGroup v-model:value="checkStrategy">
       <IxRadio value="all">all</IxRadio>

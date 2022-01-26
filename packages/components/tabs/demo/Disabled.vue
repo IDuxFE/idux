@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical" :size="40">
+  <IxSpace vertical :size="40">
     <IxTabs v-model:selectedKey="selectedKey">
       <IxTab key="tab1" title="Tab 1"> Content of Tab 1 </IxTab>
       <IxTab key="tab2" title="Tab 2" disabled> Content of Tab 2 </IxTab>

@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxInput v-model:value="valueRef" placeholder="Basic usage" />
     <IxInput :value="valueRef" disabled placeholder="Disabled" />
     <IxInput :value="valueRef" readonly placeholder="Readonly" />

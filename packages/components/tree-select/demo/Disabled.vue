@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxCheckbox v-model:checked="disabled" label="disabled" />
     <IxTreeSelect v-model:value="value" placeholder="多选" multiple :dataSource="treeData" :disabled="disabled" />
   </IxSpace>

@@ -19,4 +19,4 @@ cover:
 | `labelPlacement` | 文字显示位置 | `left \|center\| right` | `center`| ✅ | - |
 | `plain` | 文字是否显示为普通正文样式 | `boolean` | `false` | ✅ | - |
 | `size` | 分割线大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
-| `vertical` | 是否为垂直分割线 | `boolean` | `false` | ✅ | - |
+| `vertical` | 是否为垂直分割线 | `boolean` | - | - | - |

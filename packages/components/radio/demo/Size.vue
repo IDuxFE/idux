@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxRadioGroup v-model:value="value" :options="options" buttoned size="sm"></IxRadioGroup>
     <IxRadioGroup v-model:value="value" :options="options" buttoned></IxRadioGroup>
     <IxRadioGroup v-model:value="value" :options="options" buttoned size="lg">></IxRadioGroup>

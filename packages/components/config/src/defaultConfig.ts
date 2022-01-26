@@ -77,10 +77,9 @@ const divider: DividerConfig = {
   labelPlacement: 'center',
   plain: false,
   size: 'md',
-  vertical: false,
 }
 
-const space: SpaceConfig = { size: 'sm', wrap: true }
+const space: SpaceConfig = { size: 'md', wrap: true }
 
 const row: RowConfig = { wrap: true }
 

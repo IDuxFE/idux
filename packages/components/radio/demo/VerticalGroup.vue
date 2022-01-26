@@ -1,6 +1,6 @@
 <template>
   <IxRadioGroup v-model:value="value">
-    <IxSpace direction="vertical">
+    <IxSpace vertical>
       <IxRadio value="a">A</IxRadio>
       <IxRadio value="b">B</IxRadio>
       <IxRadio value="c">C</IxRadio>

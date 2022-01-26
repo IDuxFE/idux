@@ -1,5 +1,5 @@
 <template>
-  <IxSpace direction="vertical">
+  <IxSpace vertical>
     <IxSpace> searchable:<IxRadioGroup v-model:value="searchableValue" :options="searchableOptions" /></IxSpace>
     <IxSelect
       v-model:value="value"
