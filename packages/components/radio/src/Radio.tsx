@@ -7,7 +7,7 @@
 
 import type { RadioGroupContext } from './token'
 import type { RadioProps } from './types'
-import type { ComputedRef, StyleValue } from 'vue'
+import type { ComputedRef, Ref, StyleValue } from 'vue'
 
 import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
@@ -37,7 +37,11 @@ export default defineComponent({
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
     const size = computed(() => props.size ?? radioGroup?.props.size ?? formContext?.size.value ?? config.size)
     const mode = computed(() => props.mode ?? radioGroup?.props.mode ?? 'default')
-    const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useRadio(props, radioGroup)
+    const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useRadio(
+      props,
+      radioGroup,
+      elementRef,
+    )
     const classes = computed(() => {
       const buttoned = isButtoned.value
       const prefixCls = mergedPrefixCls.value
@@ -92,7 +96,11 @@ export default defineComponent({
   },
 })
 
-const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
+const useRadio = (
+  props: RadioProps,
+  radioGroup: RadioGroupContext | null,
+  elementRef: Ref<HTMLInputElement | undefined>,
+) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
   const isFocused = ref(false)
@@ -114,10 +122,12 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
-      const checked = (evt.target as HTMLInputElement).checked
-      if (checked) {
+      if (elementRef.value) {
+        const checked = (evt.target as HTMLInputElement).checked
         const value = props.value
         accessor.setValue(value)
+        // 为了保持受控模式下保持原生input状态和数据一致
+        elementRef.value.checked = false
         callEmit(props.onChange, checked)
         callEmit(groupProps.onChange, value)
       }
@@ -132,9 +142,12 @@ const useRadio = (props: RadioProps, radioGroup: RadioGroupContext | null) => {
       accessor.markAsBlurred()
     }
     handleChange = (evt: Event) => {
-      const checked = (evt.target as HTMLInputElement).checked
-      accessor.setValue(checked)
-      callEmit(props.onChange, checked)
+      if (elementRef.value) {
+        const checked = (evt.target as HTMLInputElement).checked
+        accessor.setValue(checked)
+        elementRef.value.checked = false
+        callEmit(props.onChange, checked)
+      }
     }
   }
 

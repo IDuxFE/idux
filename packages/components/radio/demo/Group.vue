@@ -1,5 +1,5 @@
 <template>
-  <IxRadioGroup v-model:value="value" @Change="onChang">
+  <IxRadioGroup v-model:value="value" @Change="onChange">
     <IxRadio value="a">A</IxRadio>
     <IxRadio value="b">B</IxRadio>
     <IxRadio value="c">C</IxRadio>
@@ -11,5 +11,5 @@
 import { ref } from 'vue'
 
 const value = ref('a')
-const onChang = console.log
+const onChange = console.log
 </script>
