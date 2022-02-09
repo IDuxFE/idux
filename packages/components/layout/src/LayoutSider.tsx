@@ -5,15 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { LayoutSiderProps } from './types'
-
-import { WatchStopHandle, computed, defineComponent, normalizeClass, watch, watchEffect } from 'vue'
+import { type WatchStopHandle, computed, defineComponent, normalizeClass, watch, watchEffect } from 'vue'
 
 import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
-import { layoutSiderProps } from './types'
+import { type LayoutSiderProps, layoutSiderProps } from './types'
 
 export default defineComponent({
   name: 'IxLayoutSider',
@@ -39,12 +37,7 @@ export default defineComponent({
 })
 
 const useCollapsed = (props: LayoutSiderProps) => {
-  const [collapsed, _setCollapsed] = useControlledProp(props, 'collapsed', false)
-
-  const changeCollapsed = (collapsed: boolean, type: 'trigger' | 'breakpoint') => {
-    _setCollapsed(collapsed)
-    callEmit(props.onCollapse, collapsed, type)
-  }
+  const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed', false)
 
   const breakpointIndex = computed(() => {
     const { breakpoint } = props
@@ -62,7 +55,7 @@ const useCollapsed = (props: LayoutSiderProps) => {
         const breakpoints = useSharedBreakpoints()
         stopBreakpoints = watchEffect(() => {
           const currBreakpointIndex = BREAKPOINTS_KEYS.findIndex(key => breakpoints[key])
-          changeCollapsed(currBreakpointIndex <= breakpointIndex.value, 'breakpoint')
+          setCollapsed(currBreakpointIndex <= breakpointIndex.value)
         })
       }
     },
