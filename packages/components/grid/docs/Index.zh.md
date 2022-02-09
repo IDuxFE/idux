@@ -14,9 +14,9 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `align` | `flex` 布局下的垂直对齐方式 | `top \| middle \| bottom` | - | - | - |
-| `justify` | flex 布局下的水平排列方式 | `start \| end \| center \| space-around \| space-between` | - | - | - |
-| `gutter` | 栅格间隔, 支持配置数字, 对象和数组 | `number \| object \| array` | `0` | - | 对象结构形如 `{ xs: 8, sm: 16 }`, 数组结构同时设置 `[水平间距, 垂直间距]` 形如 `[8, 8]` 或 `[{ xs: 8 }, { xs: 8}]` |
+| `align` | 垂直对齐方式 | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'` | - | - | - |
+| `justify` | 水平对齐方式 | `'start' \| 'center' \| 'end' \| 'space-around' \| 'space-between'` | - | - | - |
+| `gutter` | 栅格间隔, 支持配置数字, 对象和数组 | `number \| object \| array` | `0` | - | 对象结构形如 `{ xs: 8, sm: 16 }`, 数组结构同时设置 `[垂直间距, 水平间距]` 形如 `[8, 8]` 或 `[{ xs: 8 }, { xs: 8}]` |
 | `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | - |
 
 ### IxCol

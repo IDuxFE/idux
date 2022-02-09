@@ -9,40 +9,48 @@
     display: flex;
   }
 
-  &-no-wrap {
+  &-nowrap {
     flex-wrap: nowrap;
   }
 
-  &-start {
-    justify-content: flex-start;
-  }
-
-  &-center {
-    justify-content: center;
-  }
-
-  &-end {
-    justify-content: flex-end;
-  }
-
-  &-space-between {
-    justify-content: space-between;
-  }
-
-  &-space-around {
-    justify-content: space-around;
-  }
-
-  &-top {
-    align-items: flex-start;
-  }
-
-  &-middle {
+  &-align-center {
     align-items: center;
   }
 
-  &-bottom {
+  &-align-end {
     align-items: flex-end;
+  }
+
+  &-align-baseline {
+    align-items: baseline;
+  }
+
+  &-align-stretch {
+    align-items: stretch;
+  }
+
+  &-justify-start {
+    justify-content: flex-start;
+  }
+
+  &-justify-center {
+    justify-content: center;
+  }
+
+  &-justify-end {
+    justify-content: flex-end;
+  }
+
+  &-justify-space-between {
+    justify-content: space-between;
+  }
+
+  &-justify-space-around {
+    justify-content: space-around;
+  }
+
+  &-align-start {
+    align-items: flex-start;
   }
 }
 
@@ -51,10 +59,6 @@
   max-width: 100%;
   // Prevent columns from collapsing when empty
   min-height: 1px;
-
-  &-no-wrap {
-    flex-wrap: nowrap;
-  }
 }
 
 .make-grid();

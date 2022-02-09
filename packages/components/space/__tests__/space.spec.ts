@@ -87,7 +87,7 @@ describe('Space', () => {
     expect(itemElements[2].style.marginRight).toBe('')
     expect(itemElements[2].style.paddingBottom).toEqual('30px')
 
-    await wrapper.setProps({ size: [8, 16] })
+    await wrapper.setProps({ size: [16, 8] })
 
     expect(wrapperElement.style.marginBottom).toBe('-16px')
     expect(itemElements[0].style.marginRight).toBe('8px')
@@ -120,12 +120,12 @@ describe('Space', () => {
   })
 
   test('wrap work', async () => {
-    const wrapper = SpaceMount()
+    const wrapper = SpaceMount({ props: { wrap: false } })
 
-    expect(wrapper.classes()).toContain('ix-space-wrap')
+    expect(wrapper.classes()).toContain('ix-space-nowrap')
 
-    await wrapper.setProps({ wrap: false })
+    await wrapper.setProps({ wrap: true })
 
-    expect(wrapper.classes()).not.toContain('ix-space-wrap')
+    expect(wrapper.classes()).not.toContain('ix-space-nowrap')
   })
 })

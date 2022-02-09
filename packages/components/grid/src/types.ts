@@ -5,25 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import { type DefineComponent, type HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import { type BreakpointKey } from '@idux/cdk/breakpoint'
+import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes } from '@idux/cdk/utils'
 
-export type RowAlign = 'top' | 'middle' | 'bottom'
-export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
-export type RowGutterRecord = Record<BreakpointKey, number>
-export type RowGutter = number | string | Array<number> | RowGutterRecord | [RowGutterRecord, RowGutterRecord]
+export type RowAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
+export type RowJustify = 'start' | 'center' | 'end' | 'space-around' | 'space-between'
 
 export const rowProps = {
-  align: IxPropTypes.oneOf<RowAlign>(['top', 'middle', 'bottom']),
+  align: IxPropTypes.oneOf<RowAlign>(['start', 'center', 'end', 'baseline', 'stretch']),
   justify: IxPropTypes.oneOf<RowJustify>(['start', 'end', 'center', 'space-around', 'space-between']),
-  gutter: IxPropTypes.oneOfType<RowGutter>([
+  gutter: IxPropTypes.oneOfType([
     Number,
     String,
-    IxPropTypes.array<number>(),
-    IxPropTypes.object<RowGutterRecord>(),
+    IxPropTypes.array<number | string>(),
+    IxPropTypes.object<Partial<Record<BreakpointKey, number | string>>>(),
   ]).def(0),
   wrap: IxPropTypes.bool,
 }
@@ -43,17 +40,7 @@ export interface ColBreakpointConfig {
 
 const singleProp = IxPropTypes.oneOfType([Number, String])
 
-const breakpointConfig = IxPropTypes.oneOfType([
-  Number,
-  String,
-  IxPropTypes.shape<ColBreakpointConfig>({
-    span: Number,
-    offset: Number,
-    order: Number,
-    push: Number,
-    pull: Number,
-  }).loose,
-])
+const breakpointConfig = IxPropTypes.oneOfType([Number, String, IxPropTypes.object<ColBreakpointConfig>()])
 
 export const colProps = {
   flex: singleProp,
