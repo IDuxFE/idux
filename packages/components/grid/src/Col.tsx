@@ -5,72 +5,65 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ColBreakpointConfig, ColProps } from './types'
-import type { CSSProperties, ComputedRef } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import { type CSSProperties, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isNumber, isString, isUndefined } from 'lodash-es'
 
 import { BREAKPOINTS_KEYS } from '@idux/cdk/breakpoint'
 import { isNumeric } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { rowToken } from './token'
-import { colProps } from './types'
+import { type ColBreakpointConfig, type ColProps, colProps } from './types'
 
 export default defineComponent({
   name: 'IxCol',
   props: colProps,
   setup(props, { slots }) {
-    const { gutter } = inject(rowToken)!
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-col`)
+    const { mergedGutters } = inject(rowToken)!
 
-    const classes = useClasses(props)
-    const style = useStyle(props, gutter)
+    const classes = computed(() => generateAllCls(props, mergedPrefixCls.value))
+    const style = computed(() => {
+      const style: CSSProperties = {}
+
+      const [verticalGutter, horizontalGutter] = mergedGutters.value
+
+      if (verticalGutter > 0) {
+        style.paddingTop = `${verticalGutter / 2}px`
+        style.paddingBottom = style.paddingTop
+      }
+
+      if (horizontalGutter > 0) {
+        style.paddingLeft = `${horizontalGutter / 2}px`
+        style.paddingRight = style.paddingLeft
+      }
+
+      if (props.flex) {
+        style.flex = parseFlex(props.flex)
+      }
+
+      return style
+    })
 
     return () => (
       <div class={classes.value} style={style.value}>
-        {slots.default?.()}
+        {slots.default && slots.default()}
       </div>
     )
   },
 })
 
-function useClasses(props: ColProps) {
-  return computed(() => generateAllCls(props))
-}
-
-function useStyle(props: ColProps, gutter: ComputedRef<[number, number]>) {
-  return computed(() => {
-    const style: CSSProperties = {}
-
-    const [horizontalGutter, verticalGutter] = gutter.value
-    if (horizontalGutter > 0) {
-      style.paddingLeft = `${horizontalGutter / 2}px`
-      style.paddingRight = style.paddingLeft
-    }
-    if (verticalGutter > 0) {
-      style.paddingTop = `${verticalGutter / 2}px`
-      style.paddingBottom = style.paddingTop
-    }
-
-    if (props.flex) {
-      style.flex = parseFlex(props.flex)
-    }
-
-    return style
-  })
-}
-
 const attrKeys = ['span', 'order', 'offset', 'push', 'pull'] as const
 
-function generateAllCls(props: ColProps) {
-  const clsPrefix = 'ix-col'
-  const clsMap = new Map<string, boolean>([[clsPrefix, true]])
+function generateAllCls(props: ColProps, prefixCLs: string) {
+  const clsMap = new Map<string, boolean>([[prefixCLs, true]])
 
   const generateSizeCls = (sizeConfig: ColBreakpointConfig, size?: string) => {
     attrKeys.forEach(attrKey => {
       const attr = sizeConfig[attrKey]
-      const cls = `${clsPrefix}${size ? `-${size}` : ''}-${attrKey}-${attr}`
+      const cls = `${prefixCLs}${size ? `-${size}` : ''}-${attrKey}-${attr}`
       clsMap.set(cls, !isUndefined(attr))
     })
   }
@@ -89,7 +82,7 @@ function generateAllCls(props: ColProps) {
     allCls[key] = value
   })
 
-  return allCls
+  return normalizeClass(allCls)
 }
 
 function normalizeSizeProps(rawProps: number | string | ColBreakpointConfig) {

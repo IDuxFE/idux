@@ -22,7 +22,6 @@ export type {
   ColInstance,
   ColComponent,
   ColPublicProps as ColProps,
-  RowGutter,
   RowAlign,
   RowJustify,
 } from './src/types'

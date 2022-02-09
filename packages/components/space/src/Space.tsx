@@ -55,7 +55,7 @@ export default defineComponent({
         [`${prefixCls}-justify-${justify}`]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-vertical`]: vertical.value,
-        [`${prefixCls}-wrap`]: wrap.value,
+        [`${prefixCls}-nowrap`]: !wrap.value,
       })
     })
 
@@ -64,7 +64,7 @@ export default defineComponent({
       if (flexGapSupported) {
         return `gap: ${rowGap} ${columnGap}`
       } else {
-        return !vertical.value && wrap.value ? `margin-bottom: -${convertCssPixel(columnGap)}` : undefined
+        return !vertical.value && wrap.value ? `margin-bottom: -${convertCssPixel(rowGap)}` : undefined
       }
     })
 
@@ -87,7 +87,6 @@ export default defineComponent({
       const lastIndex = nodes.length - 1
       nodes.forEach((node, index) => {
         const style = calcItemStyle(mergedGaps, wrap, vertical, index, lastIndex)
-        console.log(style)
         children.push(
           <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
             {node}
@@ -127,8 +126,8 @@ const calcItemStyle = (
     const marginBottom = index < lastIndex ? convertCssPixel(rowGap) : undefined
     return { marginBottom }
   } else {
-    const marginRight = index < lastIndex ? convertCssPixel(rowGap) : undefined
-    const paddingBottom = wrap.value ? convertCssPixel(columnGap) : undefined
+    const marginRight = index < lastIndex ? convertCssPixel(columnGap) : undefined
+    const paddingBottom = wrap.value ? convertCssPixel(rowGap) : undefined
     return { marginRight, paddingBottom }
   }
 }
