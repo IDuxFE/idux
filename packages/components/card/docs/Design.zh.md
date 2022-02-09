@@ -60,7 +60,6 @@
 | `@card-box-shadow` | `@shadow-bottom-sm` | - | - |
 | `@card-gradient-min` | `fade(@color-grey, 20%)` | - | - |
 | `@card-gradient-max` | `fade(@color-grey, 60%)` | - | - |
-| `@card-transition-duration` | `@transition-duration-base` | - | - |
 | `@card-header-padding` | `@spacing-sm` | - | - |
 | `@card-loading-spacing` | `@spacing-xs` | - | - |
 | `@card-loading-height` | `@font-size-md` | - | - |

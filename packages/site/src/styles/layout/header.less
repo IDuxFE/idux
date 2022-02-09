@@ -2,7 +2,7 @@
   z-index: 10;
   background: @background-color-component;
   box-shadow: @header-box-shadow;
-  transition: all @transition-duration-slow @ease-in-out-circ;
+  transition: @transition-all-base;
 
   &-logo {
     height: @header-height;
@@ -44,6 +44,7 @@
   }
 
   &-menu {
+
     &,
     &-sub {
       text-align: center;
@@ -82,11 +83,14 @@
     box-shadow: none;
     background-color: transparent;
     z-index: 1;
+
     .ix-menu-horizontal > .ix-menu-item:hover,
     .ix-menu {
       background: transparent;
     }
+
     .header-search-box {
+
       .ix-input {
         background: transparent;
       }
@@ -96,9 +100,12 @@
 }
 
 @media (max-width: @screen-sm-max) {
+
   .header {
+
     &-search-box {
       padding-left: @spacing-sm;
+
       .ix-input {
         max-width: 140px;
       }

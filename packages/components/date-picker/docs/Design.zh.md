@@ -52,8 +52,6 @@
 | `@date-picker-active-box-shadow` | `@form-active-box-shadow` | - | - |
 | `@date-picker-disabled-color` | `@form-disabled-color` | - | - |
 | `@date-picker-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@date-picker-transition-duration` | `@form-transition-duration` | - | - |
-| `@date-picker-transition-function` | `@form-transition-function` | - | - |
 | `@date-picker-panel-font-size` | `@font-size-md` | - | - |
 | `@date-picker-panel-color` | `@text-color` | - | - |
 | `@date-picker-panel-color-inverse` | `@text-color-inverse` | - | - |
@@ -64,7 +62,6 @@
 | `@date-picker-panel-border-width` | `@border-width-sm` | - | - |
 | `@date-picker-panel-border-style` | `@border-style` | - | - |
 | `@date-picker-panel-border-color` | `@border-color` | - | - |
-| `@date-picker-panel-transition-duration` | `@transition-duration-base` | - | - |
 | `@date-picker-panel-header-padding` | `0 @spacing-lg` | - | - |
 | `@date-picker-panel-header-height` | `@height-lg` | - | - |
 | `@date-picker-panel-header-item-padding` | `0 @spacing-xs` | - | - |

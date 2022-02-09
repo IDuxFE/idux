@@ -40,9 +40,6 @@
 | `@radio-focus-box-shadow` | `@form-focus-box-shadow` | - | - |
 | `@radio-disabled-color` | `@form-disabled-color` | - | - |
 | `@radio-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@radio-transition-duration` | `@form-transition-duration` | - | - |
-| `@radio-transition-function` | `@form-transition-function` | - | - |
-| `@radio-transition` | `all @radio-transition-duration @radio-transition-function` | - | - |
 | `@radio-inner-zindex` | `@zindex-l1-1` | - | - |
 | `@radio-input-top` | `0.2em` | - | - |
 | `@radio-box-size` | `16px` | - | - |

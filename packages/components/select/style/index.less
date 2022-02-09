@@ -19,7 +19,7 @@
     background-color: @select-background-color;
     border: @select-border-width @select-border-style @select-border-color;
     border-radius: @select-border-radius;
-    transition: all @select-transition-duration @select-transition-function;
+    transition: @transition-all-base;
     cursor: pointer;
 
     &-item {
@@ -46,7 +46,7 @@
       flex: 1;
       overflow: hidden;
       color: @select-placeholder-color;
-      transition: all @select-transition-duration @select-transition-function;
+      transition: @transition-all-base;
       .ellipsis();
     }
 

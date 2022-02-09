@@ -10,7 +10,7 @@
   background-color: @input-background-color;
   border: @input-border-width @input-border-style @input-border-color;
   border-radius: @input-border-radius;
-  transition: all @input-transition-duration @input-transition-function;
+  transition: @transition-all-base;
 
   .@{input-prefix}-inner {
     .input-inner();
@@ -230,7 +230,7 @@
     opacity: 0;
     color: @input-placeholder-color;
     background-color: @input-background-color;
-    transition: all @input-transition-duration;
+    transition: @transition-all-base;
 
     &:hover {
       color: @input-color;

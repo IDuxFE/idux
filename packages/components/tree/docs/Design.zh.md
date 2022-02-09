@@ -17,7 +17,6 @@
 | `@tree-background-focused` | `@background-color-selected-light` | - | - |
 | `@tree-box-shadow-size` | `2px` | - | - |
 | `@tree-box-shadow-color` | `@color-primary-l20` | - | - |
-| `@tree-transition` | `background-color @transition-duration-base` | - | - |
 | `@tree-node-disabled-color` | `@text-color-disabled` | - | - |
 | `@tree-node-hover-background-color` | `@color-graphite-l50` | - | - |
 | `@tree-node-selected-background-color` | `@color-graphite-l40` | - | - |

@@ -17,7 +17,7 @@
     background-color: @tree-select-background-color;
     border: @tree-select-border-width @tree-select-border-style @tree-select-border-color;
     border-radius: @tree-select-border-radius;
-    transition: all @tree-select-transition-duration @tree-select-transition-function;
+    transition: @transition-all-base;
     cursor: pointer;
 
     &-item {
@@ -45,7 +45,7 @@
       flex: 1;
       overflow: hidden;
       color: @tree-select-placeholder-color;
-      transition: all @tree-select-transition-duration @tree-select-transition-function;
+      transition: @transition-all-base;
       .ellipsis();
     }
 
@@ -104,6 +104,8 @@
   }
 
   &-overlay {
+    .reset-scroll();
+
     z-index: @tree-select-option-container-zindex;
     padding: @tree-select-option-container-padding;
     background-color: @tree-select-option-container-background-color;

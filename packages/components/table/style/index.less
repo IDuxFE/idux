@@ -25,7 +25,7 @@
       bottom: 0;
       z-index: 1;
       width: 30px;
-      transition: box-shadow 0.3s;
+      transition: @transition-all-base;
       content: '';
       pointer-events: none;
     }
@@ -81,7 +81,7 @@
     border-bottom: @table-border-width @table-border-style @table-border-color;
     line-height: @table-body-line-height;
     overflow-wrap: break-word;
-    transition: background 0.3s;
+    transition: @transition-all-base;
 
     // TODO: Nest Table
   }
@@ -198,7 +198,7 @@
 
   &-cell-sortable {
     cursor: pointer;
-    transition: background 0.3s;
+    transition: @transition-all-base;
 
     &:hover {
       background: @table-body-hover-background;
@@ -245,7 +245,7 @@
     padding: 8px 4px;
     border-radius: 1px;
     color: @table-head-icon-color;
-    transition: color @transition-duration-base, background @transition-duration-base;
+    transition: @transition-all-base;
     cursor: pointer;
 
     &:hover {

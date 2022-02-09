@@ -16,7 +16,7 @@
 
   &-hoverable {
     cursor: pointer;
-    transition: all @card-transition-duration;
+    transition: @transition-all-base;
 
     &:hover {
       border-color: @card-border-color-hover;
@@ -109,7 +109,7 @@
       0 @card-border-width 0 0 @card-border-color inset;
 
     &-hoverable {
-      transition: all @card-transition-duration;
+      transition: @transition-all-base;
 
       &:hover {
         box-shadow: @card-box-shadow;

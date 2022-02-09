@@ -40,7 +40,7 @@
       border: @anchor-ink-ball-border-width solid @anchor-link-active-color;
       border-radius: @anchor-ink-ball-radius;
       transform: translateX(-50%);
-      transition: top @transition-duration-base @ease-in-out;
+      transition: @transition-all-base;
 
       &-visible {
         display: inline-block;
@@ -64,8 +64,8 @@
       font-size: @anchor-link-font-size;
       color: @anchor-color;
       text-decoration: none;
-      transition: all @transition-duration-base;
-      
+      transition: @transition-all-base;
+
       &-active {
         color: @anchor-link-active-color;
       }

@@ -1,7 +1,7 @@
 .@{menu-prefix} {
   color: @menu-text-color;
   background-color: @menu-bg-color;
-  transition: background-color @transition-duration-slow, width @transition-duration-slow;
+  transition: @transition-all-base;
 
   a {
     color: @menu-text-color;
@@ -11,7 +11,7 @@
   &-item,
   &-sub-label {
     cursor: pointer;
-    transition: background @transition-duration-base, color @transition-duration-base;
+    transition: @transition-all-base;
 
     &:hover {
       color: @menu-highlight-color;
@@ -111,7 +111,7 @@
     background-color: @menu-bg-color;
     border-radius: @menu-overlay-border-radius;
     box-shadow: @menu-overlay-box-shadow;
-    transition: background-color @transition-duration-slow, width @transition-duration-slow;
+    transition: @transition-all-base;
 
     .@{menu-prefix} .@{menu-prefix}-item::after {
       border-right: 0;

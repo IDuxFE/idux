@@ -24,9 +24,6 @@ Switch开关用于控制界面某部分内容，则切换后应立即引起该�
 | `@switch-color` | `@form-background-color` | - | - |
 | `@switch-background-color` | `@form-placeholder-color` | - | - |
 | `@switch-active-color` | `@form-active-color` | - | - |
-| `@switch-transition-duration` | `@form-transition-duration` | - | - |
-| `@switch-transition-function` | `@form-transition-function` | - | - |
-| `@switch-transition` | `all @switch-transition-duration @switch-transition-function` | - | - |
 | `@switch-disabled-opacity` | `0.5` | - | - |
 | `@switch-box-size-sm` | `12px` | - | - |
 | `@switch-box-size-md` | `20px` | - | - |

@@ -50,4 +50,3 @@
 | `@alert-title-margin-bottom-with-description` | `@spacing-xs` | - | - |
 | `@alert-pagination-icon-padding` | `0 @spacing-xs` | - | - |
 | `@alert-action-margin-left` | `@spacing-lg` | - | - |
-| `@alert-transition-duration` | `@transition-duration-base` | - | - |

@@ -9,7 +9,7 @@
 .@{menu-prefix} {
   .reset-component();
 
-  transition: background @transition-duration-base, width @transition-duration-base;
+  transition: @transition-all-base;
 
   &-vertical,
   &-inline {
@@ -37,7 +37,7 @@
         content: '';
         transform: scaleY(0);
         opacity: 0;
-        transition: transform @transition-duration-base @ease-in-out, opacity @transition-duration-base @ease-in-out;
+        transition: @transition-all-base;
       }
 
       &-selected {
@@ -79,7 +79,7 @@
       margin: 0 @menu-item-padding-left;
       padding: @menu-item-horizontal-padding;
       border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
-      transition: border @transition-duration-base;
+      transition: @transition-all-base;
 
       &:hover,
       &-expanded,

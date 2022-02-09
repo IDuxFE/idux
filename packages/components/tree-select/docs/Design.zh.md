@@ -51,8 +51,6 @@
 | `@tree-select-active-box-shadow` | `@form-active-box-shadow` | - | - |
 | `@tree-select-disabled-color` | `@form-disabled-color` | - | - |
 | `@tree-select-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@tree-select-transition-duration` | `@form-transition-duration` | - | - |
-| `@tree-select-transition-function` | `@form-transition-function` | - | - |
 | `@tree-select-option-font-size` | `@font-size-md` | - | - |
 | `@tree-select-option-height` | `@height-md` | - | - |
 | `@tree-select-option-margin-left` | `@spacing-md` | - | - |
@@ -63,7 +61,6 @@
 | `@tree-select-option-selected-color` | `@color-primary` | - | - |
 | `@tree-select-option-selected-background-color` | `tint(@color-primary, 90%)` | - | - |
 | `@tree-select-option-selected-font-weight` | `@font-weight-xl` | - | - |
-| `@tree-select-option-transition` | `background @transition-duration-base @ease-in-out` | - | - |
 | `@tree-select-option-group-border` | `@border-width-sm @border-style @border-color` | - | - |
 | `@tree-select-option-container-zindex` | `@zindex-l4-3` | - | - |
 | `@tree-select-option-container-padding` | `@spacing-sm` | - | - |

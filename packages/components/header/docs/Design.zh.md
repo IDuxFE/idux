@@ -19,7 +19,6 @@
 | `@header-color` | `@text-color` | - | - |
 | `@header-background-color` | `@background-color-component` | - | - |
 | `@header-disabled-color` | `@disabled-color` | - | - |
-| `@header-transition` | `color @transition-duration-base @ease-in-out` | - | - |
 | `@header-bar-width` | `@spacing-xs` | - | - |
 | `@header-bar-margin` | `@spacing-sm 0` | - | - |
 | `@header-bar-background-color` | `@color-primary` | - | - |

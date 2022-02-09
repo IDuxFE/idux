@@ -49,8 +49,6 @@
 | `@time-picker-border-radius` | `@border-radius-sm` | - | - |
 | `@time-picker-color` | `@form-color` | - | - |
 | `@time-picker-disabled-color` | `@form-disabled-color` | - | - |
-| `@time-picker-transition-duration` | `@form-transition-duration` | - | - |
-| `@time-picker-transition-function` | `@form-transition-function` | - | - |
 | `@time-picker-overlay-width` | `200px` | - | - |
 | `@time-picker-overlay-padding` | `@spacing-sm` | - | - |
 | `@time-picker-overlay-box-shadow` | `@shadow-bottom-md` | - | - |

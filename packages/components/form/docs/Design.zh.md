@@ -117,8 +117,6 @@
 | `@form-focus-box-shadow` | `0 0 0 2px fade(@form-focus-color, 20%)` | - | - |
 | `@form-disabled-color` | `@text-color-disabled` | - | - |
 | `@form-disabled-background-color` | `@background-color-disabled` | - | - |
-| `@form-transition-duration` | `@transition-duration-base` | - | - |
-| `@form-transition-function` | `@ease-in-out` | - | - |
 | `@form-item-valid-color` | `@color-success` | - | - |
 | `@form-item-validating-color` | `@color-pending` | - | - |
 | `@form-item-invalid-color` | `@color-error` | - | - |

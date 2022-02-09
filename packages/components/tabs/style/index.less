@@ -33,7 +33,7 @@
       &-nav {
         display: flex;
         flex-wrap: nowrap;
-        transition: @tabs-nav-transition;
+        transition: @transition-all-base;
         transform: translateX(0);
 
         &-tab {
@@ -48,7 +48,7 @@
           white-space: nowrap;
           padding: @tabs-nav-tab-padding;
           background-color: @tabs-nav-bg-color;
-          transition: @tabs-nav-tab-transition;
+          transition: @transition-all-base;
 
           &-label {
             display: flex;
@@ -203,7 +203,7 @@
       &-bar {
         position: absolute;
         background-color: @tabs-nav-bar-color;
-        transition: @tabs-nav-bar-transition;
+        transition: @transition-all-base;
         bottom: 0;
         height: @tabs-nav-bar-height;
         border-radius: @tabs-border-radius @tabs-border-radius 0 0;
