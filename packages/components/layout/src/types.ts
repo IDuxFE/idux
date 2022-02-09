@@ -51,7 +51,6 @@ export const layoutSiderProps = {
 
   // events
   'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
-  onCollapse: IxPropTypes.emit<(collapsed: boolean, type: 'trigger' | 'breakpoint') => void>(),
 }
 
 export type LayoutSiderProps = IxInnerPropTypes<typeof layoutSiderProps>

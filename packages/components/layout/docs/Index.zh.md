@@ -34,4 +34,3 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:collapsed` | 是否折叠状态 | `boolean` | - | - | -  |
 | `breakpoint` | 触发响应式布局的断点 | `xs`, `sm`, `md`, `lg`, `xl` | - | - |  - |
-| `onCollapse` | 折叠状态发生变量时的回调 | `(collapsed: boolean, type: 'breakpoint \| trigger') => void` | - | - |  - |

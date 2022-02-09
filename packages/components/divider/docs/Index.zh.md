@@ -16,7 +16,7 @@ cover:
 | --- | --- | --- | --- | --- | --- |
 | `dashed` | 是否虚线 | `boolean` | `false` | ✅ | - |
 | `label` | 分割线显示文字 | `string \| #default` | - | - | `vertical` 模式下不可用 |
-| `labelPlacement` | 文字显示位置 | `left \|center\| right` | `center`| ✅ | - |
+| `labelPlacement` | 文字显示位置 | `'start' \| 'center' \| 'end'` | `center`| ✅ | - |
 | `plain` | 文字是否显示为普通正文样式 | `boolean` | `false` | ✅ | - |
 | `size` | 分割线大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `vertical` | 是否为垂直分割线 | `boolean` | - | - | - |
