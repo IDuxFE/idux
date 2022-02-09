@@ -15,3 +15,15 @@
 | 一级页面名称 | 本模块的第一个页面名称，可点击跳转此页面。 |
 | 中间页面路径 | 显示从第一个页面到当前页面的所有中间页面路径（建议最深页面层级不要超过4级），点击可跳转到对应的页面（可结合场景诉求做禁用）。 |
 | 当前页面标题 | 显示当前页面名称，无需在页面中重复显示页面标题。 |
+
+### 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@breadcrumb-base-color` | `@text-color-secondary` | - | - |
+| `@breadcrumb-link-color` | `@color-graphite` | - | - |
+| `@breadcrumb-link-color-hover` | `@color-primary` | - | - |
+| `@breadcrumb-separator-color` | `@text-color-secondary` | - | - |
+| `@breadcrumb-last-item-color` | `@color-graphite-d40` | - | - |
+| `@breadcrumb-font-size` | `@font-size-base` | - | - |
+| `@breadcrumb-separator-margin` | `0 @margin-sm` | - | - |

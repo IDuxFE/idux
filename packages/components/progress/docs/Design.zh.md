@@ -20,3 +20,25 @@
 | --- | ---  |
 | 表示进度 | 展示当前任务的进展，包括百分比进度和成功/失败等状态。 |
 | 表示使用率、容量 | 表示某项数据的当前值占总值的比例，不同的数据段可采用不同的颜色展示（可选）。 |
+
+### 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@progress-normal-bg` | `@color-success` | - | - |
+| `@progress-success-bg` | `@color-success` | - | - |
+| `@progress-exception-bg` | `@color-error` | - | - |
+| `@progress-active-bg` | `@color-success` | - | - |
+| `@progress-trail-bg` | `@color-graphite-l40` | - | - |
+| `@progress-text-width` | `36px` | - | - |
+| `@progress-border-radius` | `100px` | - | - |
+| `@progress-text-color` | `@text-color` | - | - |
+| `@progress-line-height-lg` | `8px` | - | - |
+| `@progress-line-height-md` | `6px` | - | - |
+| `@progress-line-height-sm` | `2px` | - | - |
+| `@progress-line-font-size-lg` | `@font-size-md` | - | - |
+| `@progress-line-font-size-md` | `@font-size-md` | - | - |
+| `@progress-line-font-size-sm` | `@font-size-sm` | - | - |
+| `@progress-line-text-padding` | `0 0 0 @spacing-sm` | - | - |
+| `@progress-circle-width` | `120px` | - | - |
+| `@progress-circle-font-size-md` | `@font-size-2xl` | - | - |

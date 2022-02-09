@@ -15,3 +15,33 @@
 | 卡片Tabs | 展示切换页面整体结构和内容，常用于容器顶部，默认选中第一项。 |
 | 下划线Tabs | 切换页面内对象信息，和其他内容结合出现。常用于容器内部。 |
 | 分段器Tabs | 更次级的Tab标签，常用于工具栏针对列表、表格数据筛选和切换；（必要时支持图标+文字）。 |
+
+### 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@tabs-selected-color` | `@color-primary` | - | - |
+| `@tabs-hover-color` | `@color-primary-l10` | - | - |
+| `@tabs-active-color` | `@color-primary-d10` | - | - |
+| `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
+| `@tabs-nav-bg-color` | `@color-white` | - | - |
+| `@tabs-nav-border-color` | `@color-graphite-l20` | - | - |
+| `@tabs-segment-nav-disabled-bg-color` | `@color-graphite-l40` | - | - |
+| `@tabs-segment-nav-primary-active-bg-color` | `@color-primary` | - | - |
+| `@tabs-segment-nav-primary-active-text-color` | `@color-white` | - | - |
+| `@tabs-segment-nav-height` | `32px` | - | - |
+| `@tabs-card-nav-tab-bg-color` | `@color-graphite-l50` | - | - |
+| `@tabs-card-nav-tab-selected-bg-color` | `@color-white` | - | - |
+| `@tabs-nav-tab-padding` | `0 16px` | - | - |
+| `@tabs-nav-tab-height` | `40px` | - | - |
+| `@tabs-nav-tab-text-color` | `@color-graphite-d40` | - | - |
+| `@tabs-nav-bar-color` | `@color-primary` | - | - |
+| `@tabs-nav-bar-height` | `2px` | - | - |
+| `@tabs-nav-bar-transition` | `left 0.2s @tabs-transition-timing-function, top 0.2s @tabs-transition-timing-function` | - | - |
+| `@tabs-nav-pre-next-width` | `20px` | - | - |
+| `@tabs-nav-transition` | `transform 0.2s @tabs-transition-timing-function` | - | - |
+| `@tabs-nav-tab-transition` | `all 0.2s @tabs-transition-timing-function` | - | - |
+| `@tabs-border-radius` | `2px` | - | - |
+| `@tabs-pane-min-width` | `72px` | - | - |
+| `@tabs-pane-padding` | `16px` | - | - |
+| `@tabs-transition-timing-function` | `cubic-bezier(0.4, 0, 0.2, 1)` | - | - |

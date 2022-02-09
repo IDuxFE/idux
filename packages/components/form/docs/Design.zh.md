@@ -80,3 +80,55 @@
 | 行内报错 | 通常与实时校验配合，校验和报错的位置在对应输入项的下方。 |
 | 即时提示报错 | 在错误信息为网络异常/通信异常等场景时使用。 |
 | 气泡提示报错 | 在位置受限的少数场景中（如表单内的表格），可以采用气泡提示错误信息，鼠标悬浮显示。 |
+
+### 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@form-font-size-xs` | `@font-size-sm` | - | - |
+| `@form-font-size-sm` | `@font-size-md` | - | - |
+| `@form-font-size-md` | `@font-size-md` | - | - |
+| `@form-font-size-lg` | `@font-size-lg` | - | - |
+| `@form-line-height` | `@line-height-base` | - | - |
+| `@form-height-xs` | `@height-xs` | - | - |
+| `@form-height-sm` | `@height-sm` | - | - |
+| `@form-height-md` | `@height-md` | - | - |
+| `@form-height-lg` | `@height-lg` | - | - |
+| `@form-padding-horizontal-sm` | `@spacing-sm - 2px` | - | - |
+| `@form-padding-horizontal-md` | `@spacing-sm` | - | - |
+| `@form-padding-horizontal-lg` | `@spacing-sm + 2px` | - | - |
+| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
+| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
+| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
+| `@form-border-width` | `@border-width-sm` | - | - |
+| `@form-border-style` | `@border-style` | - | - |
+| `@form-border-color` | `@border-color` | - | - |
+| `@form-border-radius-sm` | `@border-radius-sm` | - | - |
+| `@form-border-radius-md` | `@border-radius-md` | - | - |
+| `@form-border-radius-lg` | `@border-radius-lg` | - | - |
+| `@form-color` | `@text-color` | - | - |
+| `@form-color-secondary` | `@text-color-secondary` | - | - |
+| `@form-background-color` | `@background-color-component` | - | - |
+| `@form-placeholder-color` | `@color-graphite` | - | - |
+| `@form-hover-color` | `@color-primary-l10` | - | - |
+| `@form-active-color` | `@color-primary` | - | - |
+| `@form-active-box-shadow` | `0 0 0 2px fade(@form-active-color, 20%)` | - | - |
+| `@form-focus-color` | `@color-primary-d10` | - | - |
+| `@form-focus-box-shadow` | `0 0 0 2px fade(@form-focus-color, 20%)` | - | - |
+| `@form-disabled-color` | `@text-color-disabled` | - | - |
+| `@form-disabled-background-color` | `@background-color-disabled` | - | - |
+| `@form-transition-duration` | `@transition-duration-base` | - | - |
+| `@form-transition-function` | `@ease-in-out` | - | - |
+| `@form-item-valid-color` | `@color-success` | - | - |
+| `@form-item-validating-color` | `@color-pending` | - | - |
+| `@form-item-invalid-color` | `@color-error` | - | - |
+| `@form-item-invalid-box-shadow` | `0 0 0 2px fade(@form-item-invalid-color, 20%)` | - | - |
+| `@form-item-margin-bottom` | `24px` | - | - |
+| `@form-item-vertical-label-margin` | `0` | - | - |
+| `@form-item-vertical-label-padding` | `0 0 8px` | - | - |
+| `@form-item-font-size` | `@font-size-md` | - | - |
+| `@form-item-font-height` | `ceil(@form-item-font-size * @form-line-height)` | - | - |
+| `@form-item-label-required-color` | `@color-red-l10` | - | - |
+| `@form-item-label-color` | `@color-black` | - | - |
+| `@form-item-label-colon-margin-right` | `8px` | - | - |
+| `@form-item-label-colon-margin-left` | `2px` | - | - |

@@ -30,3 +30,32 @@
 | --- | ---  |
 | 连续型 | 可自由地选择滑块轨道内的任意节点/区间，通常用于比例选择场景。 |
 | 离散型 | 只能选择滑块轨道内的特定节点/区间，例如1-100的范围内，只能选择10的倍数。离散型需在滑动区域设定特定节点作为可选刻度，滑动过程中滑块自动捕捉距离最近的节点。 |
+
+### 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@slider-marks-label-color` | `rgba(0, 0, 0, 0.451)` | - | - |
+| `@slider-rail-bg` | `@color-graphite-l30` | - | - |
+| `@slider-track-bg` | `@color-primary` | - | - |
+| `@slider-thumb-bg` | `@color-white` | - | - |
+| `@slider-dot-bg` | `@color-white` | - | - |
+| `@slider-dot-border` | `2px solid @color-primary` | - | - |
+| `@slider-thumb-border` | `2px solid @color-primary` | - | - |
+| `@slider-rail-hover-bg` | `#e1e1e1` | - | - |
+| `@slider-track-hover-bg` | `@color-primary` | - | - |
+| `@slider-thumb-hover-border-color` | `@color-primary` | - | - |
+| `@slider-thumb-focus-border-color` | `@color-primary` | - | - |
+| `@slider-thumb-focus-box-shadow` | `0 0 0 5px fade(#46a6ff, 12%)` | - | - |
+| `@slider-dot-active-border-color` | `@color-primary` | - | - |
+| `@slider-marks-label-active-color` | `rgba(0, 0, 0, 0.851)` | - | - |
+| `@slider-track-disabled-bg` | `rgba(0, 0, 0, 0.251)` | - | - |
+| `@slider-thumb-disabled-bg` | `@color-white` | - | - |
+| `@slider-thumb-disabled-border-color` | `rgba(0, 0, 0, 0.251)` | - | - |
+| `@slider-dot-disabled-active-border-color` | `rgba(0, 0, 0, 0.251)` | - | - |
+| `@slider-thumb-transition` | `border-color @transition-duration-base, box-shadow @transition-duration-base * 2,  transform @transition-duration-base cubic-bezier(0.18, 0.89, 0.32, 1.28)` | - | - |
+| `@slider-thumb-width` | `10px` | - | - |
+| `@slider-thumb-height` | `10px` | - | - |
+| `@slider-thumb-margin-top` | `-3px` | - | - |
+| `@slider-thumb-vertical-margin-left` | `-3px` | - | - |
+| `@slider-thumb-vertical-margin-top` | `-6px` | - | - |
