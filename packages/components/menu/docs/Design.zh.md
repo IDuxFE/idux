@@ -14,11 +14,11 @@
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@menu-text-color` | `@text-color` | - | - |
-| `@menu-bg-color` | `@background-color-component` | - | - |
+| `@menu-background-color` | `@background-color-component` | - | - |
 | `@menu-highlight-color` | `@color-primary` | - | - |
-| `@menu-highlight-bg-color` | `~colorPalette('@{color-primary}', -50)` | - | - |
+| `@menu-highlight-background-color` | `~colorPalette('@{color-primary}', -50)` | - | - |
 | `@menu-disabled-color` | `@disabled-color` | - | - |
-| `@menu-disabled-bg-color` | `transparent` | - | - |
+| `@menu-disabled-background-color` | `transparent` | - | - |
 | `@menu-border-width` | `@border-width-sm` | - | - |
 | `@menu-border-style` | `@border-style` | - | - |
 | `@menu-border-color` | `@border-color-split` | - | - |
@@ -41,7 +41,7 @@
 | `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
 | `@menu-dark-disabled-color` | `@disabled-color-dark` | - | - |
 | `@menu-dark-color` | `@text-color-dark` | - | - |
-| `@menu-dark-bg-color` | `@background-color-component-dark` | - | - |
-| `@menu-dark-highlight-bg-color` | `fade(@color-white, 6%)` | - | - |
+| `@menu-dark-background` | `@background-color-component-dark` | - | - |
+| `@menu-dark-highlight-background-color` | `fade(@color-white, 6%)` | - | - |
 | `@menu-collapsed-font-size` | `@font-size-lg` | - | - |
 | `@menu-collapsed-width` | `64px` | - | - |

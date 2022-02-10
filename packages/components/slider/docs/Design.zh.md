@@ -36,21 +36,21 @@
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@slider-marks-label-color` | `rgba(0, 0, 0, 0.451)` | - | - |
-| `@slider-rail-bg` | `@color-graphite-l30` | - | - |
-| `@slider-track-bg` | `@color-primary` | - | - |
-| `@slider-thumb-bg` | `@color-white` | - | - |
-| `@slider-dot-bg` | `@color-white` | - | - |
+| `@slider-rail-background-color` | `@color-graphite-l30` | - | - |
+| `@slider-track-background-color` | `@color-primary` | - | - |
+| `@slider-thumb-background-color` | `@color-white` | - | - |
+| `@slider-dot-background-color` | `@color-white` | - | - |
 | `@slider-dot-border` | `2px solid @color-primary` | - | - |
 | `@slider-thumb-border` | `2px solid @color-primary` | - | - |
-| `@slider-rail-hover-bg` | `#e1e1e1` | - | - |
-| `@slider-track-hover-bg` | `@color-primary` | - | - |
+| `@slider-rail-hover-background-color` | `#e1e1e1` | - | - |
+| `@slider-track-hover-background-color` | `@color-primary` | - | - |
 | `@slider-thumb-hover-border-color` | `@color-primary` | - | - |
 | `@slider-thumb-focus-border-color` | `@color-primary` | - | - |
 | `@slider-thumb-focus-box-shadow` | `0 0 0 5px fade(#46a6ff, 12%)` | - | - |
 | `@slider-dot-active-border-color` | `@color-primary` | - | - |
 | `@slider-marks-label-active-color` | `rgba(0, 0, 0, 0.851)` | - | - |
-| `@slider-track-disabled-bg` | `rgba(0, 0, 0, 0.251)` | - | - |
-| `@slider-thumb-disabled-bg` | `@color-white` | - | - |
+| `@slider-track-disabled-background-color` | `rgba(0, 0, 0, 0.251)` | - | - |
+| `@slider-thumb-disabled-background-color` | `@color-white` | - | - |
 | `@slider-thumb-disabled-border-color` | `rgba(0, 0, 0, 0.251)` | - | - |
 | `@slider-dot-disabled-active-border-color` | `rgba(0, 0, 0, 0.251)` | - | - |
 | `@slider-thumb-width` | `10px` | - | - |

@@ -24,14 +24,14 @@
 | `@tabs-hover-color` | `@color-primary-l10` | - | - |
 | `@tabs-active-color` | `@color-primary-d10` | - | - |
 | `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
-| `@tabs-nav-bg-color` | `@color-white` | - | - |
+| `@tabs-nav-background-color` | `@color-white` | - | - |
 | `@tabs-nav-border-color` | `@color-graphite-l20` | - | - |
-| `@tabs-segment-nav-disabled-bg-color` | `@color-graphite-l40` | - | - |
-| `@tabs-segment-nav-primary-active-bg-color` | `@color-primary` | - | - |
+| `@tabs-segment-nav-disabled-background-color` | `@color-graphite-l40` | - | - |
+| `@tabs-segment-nav-primary-active-background-color` | `@color-primary` | - | - |
 | `@tabs-segment-nav-primary-active-text-color` | `@color-white` | - | - |
 | `@tabs-segment-nav-height` | `32px` | - | - |
-| `@tabs-card-nav-tab-bg-color` | `@color-graphite-l50` | - | - |
-| `@tabs-card-nav-tab-selected-bg-color` | `@color-white` | - | - |
+| `@tabs-card-nav-tab-background-color` | `@color-graphite-l50` | - | - |
+| `@tabs-card-nav-tab-selected-background-color` | `@color-white` | - | - |
 | `@tabs-nav-tab-padding` | `0 16px` | - | - |
 | `@tabs-nav-tab-height` | `40px` | - | - |
 | `@tabs-nav-tab-text-color` | `@color-graphite-d40` | - | - |

@@ -45,7 +45,7 @@
 | `@result-extra-children-margin` | `@spacing-sm` | - | - |
 | `@result-content-margin` | `@spacing-xl` | - | - |
 | `@result-content-padding` | `@spacing-xl @spacing-gutter * 5` | - | - |
-| `@result-content-background` | `@color-grey-l50` | - | - |
+| `@result-content-background-color` | `@color-grey-l50` | - | - |
 | `@result-success` | `@color-success` | - | - |
 | `@result-warning` | `@color-warning` | - | - |
 | `@result-error` | `@color-error` | - | - |

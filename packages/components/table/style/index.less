@@ -16,7 +16,7 @@
 
   &-container {
     position: relative;
-    background: @table-background;
+    background-color: @table-background-color;
 
     &::before,
     &::after {
@@ -48,7 +48,7 @@
   th {
     position: relative;
     color: @table-head-color;
-    background: @table-head-background;
+    background-color: @table-head-background-color;
     font-weight: @table-head-font-weight;
     line-height: @table-head-line-height;
     overflow-wrap: break-word;
@@ -122,7 +122,7 @@
   }
 
   &-cell-scroll-bar {
-    box-shadow: 0 1px 0 1px @table-head-background;
+    box-shadow: 0 1px 0 1px @table-head-background-color;
   }
 
   &-pagination {

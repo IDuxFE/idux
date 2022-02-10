@@ -25,11 +25,11 @@
 
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
-| `@progress-normal-bg` | `@color-success` | - | - |
-| `@progress-success-bg` | `@color-success` | - | - |
-| `@progress-exception-bg` | `@color-error` | - | - |
-| `@progress-active-bg` | `@color-success` | - | - |
-| `@progress-trail-bg` | `@color-graphite-l40` | - | - |
+| `@progress-normal-background-color` | `@color-success` | - | - |
+| `@progress-success-background-color` | `@color-success` | - | - |
+| `@progress-exception-background-color` | `@color-error` | - | - |
+| `@progress-active-background-color` | `@color-success` | - | - |
+| `@progress-trail-background-color` | `@color-graphite-l40` | - | - |
 | `@progress-text-width` | `36px` | - | - |
 | `@progress-border-radius` | `100px` | - | - |
 | `@progress-text-color` | `@text-color` | - | - |

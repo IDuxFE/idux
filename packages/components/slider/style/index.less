@@ -15,24 +15,24 @@
   touch-action: none;
 
   &:hover &-rail {
-    background-color: @slider-rail-hover-bg;
+    background-color: @slider-rail-hover-background-color;
   }
 
   &:hover &-track {
-    background-color: @slider-track-hover-bg;
+    background-color: @slider-track-hover-background-color;
   }
 
   &-rail {
     .slider-rail();
 
     width: 100%;
-    background-color: @slider-rail-bg;
+    background-color: @slider-rail-background-color;
   }
 
   &-track {
     .slider-rail();
 
-    background-color: @slider-track-bg;
+    background-color: @slider-track-background-color;
   }
 
   &-step {
@@ -48,7 +48,7 @@
     width: 8px;
     height: 8px;
     margin-left: -4px;
-    background-color: @slider-dot-bg;
+    background-color: @slider-dot-background-color;
     border: @slider-dot-border;
     border-radius: 50%;
     cursor: pointer;
@@ -69,7 +69,7 @@
     width: @slider-thumb-width;
     height: @slider-thumb-height;
     margin-top: @slider-thumb-margin-top;
-    background-color: @slider-thumb-bg;
+    background-color: @slider-thumb-background-color;
     border: @slider-thumb-border;
     border-radius: 50%;
     cursor: pointer;
@@ -160,11 +160,11 @@
     cursor: not-allowed;
 
     & .@{slider-prefix}-track {
-      background-color: @slider-track-disabled-bg !important;
+      background-color: @slider-track-disabled-background-color !important;
     }
 
     & .@{slider-prefix}-thumb {
-      background-color: @slider-thumb-disabled-bg;
+      background-color: @slider-thumb-disabled-background-color;
       border-color: @slider-thumb-disabled-border-color !important;
       box-shadow: none;
       cursor: not-allowed;

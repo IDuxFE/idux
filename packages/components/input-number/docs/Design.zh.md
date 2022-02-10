@@ -19,5 +19,5 @@
 | `@input-number-button-hover-color` | `@input-active-color` | - | - |
 | `@input-number-error` | `@color-error` | - | - |
 | `@input-number-disabled-color` | `@input-disabled-color` | - | - |
-| `@input-number-button-bg` | `@color-white` | - | - |
-| `@input-number-disabled-bg` | `@input-disabled-background-color` | - | - |
+| `@input-number-button-background-color` | `@color-white` | - | - |
+| `@input-number-disabled-background-color` | `@input-disabled-background-color` | - | - |

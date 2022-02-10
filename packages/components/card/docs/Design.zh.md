@@ -51,7 +51,7 @@
 | `@card-padding-md` | `@spacing-lg` | - | - |
 | `@card-padding-lg` | `@spacing-xl` | - | - |
 | `@card-color` | `@text-color` | - | - |
-| `@card-bg-color` | `@background-color-component` | - | - |
+| `@card-background-color` | `@background-color-component` | - | - |
 | `@card-border-width` | `@border-width-sm` | - | - |
 | `@card-border-style` | `@border-style` | - | - |
 | `@card-border-color` | `@color-graphite-l30` | - | - |
@@ -63,6 +63,6 @@
 | `@card-header-padding` | `@spacing-sm` | - | - |
 | `@card-loading-spacing` | `@spacing-xs` | - | - |
 | `@card-loading-height` | `@font-size-md` | - | - |
-| `@card-loading-bg-size` | `600%` | - | - |
+| `@card-loading-background-size` | `600%` | - | - |
 | `@card-loading-transition-duration` | `2s` | - | - |
 | `@card-grid-width` | `25%` | - | - |

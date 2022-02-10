@@ -15,7 +15,7 @@ grid-template-areas:
 
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
-| `@layout-header-background` | `@background-color-component` | - | - |
+| `@layout-header-background-color` | `@background-color-component` | - | - |
 | `@layout-header-color` | `@text-color` | - | - |
 | `@layout-header-height` | `64px` | - | - |
 | `@layout-header-padding` | `0 @spacing-xl` | - | - |

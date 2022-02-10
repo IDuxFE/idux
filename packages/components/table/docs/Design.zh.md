@@ -107,9 +107,9 @@ switch开关展示：表格信息较少，切换为主要操作，且能够实�
 | `@table-border-width` | `@border-width-sm` | - | - |
 | `@table-border-style` | `@border-style` | - | - |
 | `@table-border-color` | `@border-color-split` | - | - |
-| `@table-background` | `@background-color-component` | - | - |
+| `@table-background-color` | `@background-color-component` | - | - |
 | `@table-border-radius` | `@border-radius-sm` | - | - |
-| `@table-head-background` | `@background-color-light` | - | - |
+| `@table-head-background-color` | `@background-color-light` | - | - |
 | `@table-head-color` | `@color-black` | - | - |
 | `@table-head-split-height` | `16px` | - | - |
 | `@table-head-split-color` | `rgba(0, 0, 0, 0.06)` | - | - |

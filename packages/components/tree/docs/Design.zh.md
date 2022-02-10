@@ -13,8 +13,8 @@
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@tree-node-prefix` | `~'@{tree-prefix}-node'` | - | - |
-| `@tree-background` | `@background-color-component` | - | - |
-| `@tree-background-focused` | `@background-color-selected-light` | - | - |
+| `@tree-background-color` | `@background-color-component` | - | - |
+| `@tree-background-color-focused` | `@background-color-selected-light` | - | - |
 | `@tree-box-shadow-size` | `2px` | - | - |
 | `@tree-box-shadow-color` | `@color-primary-l20` | - | - |
 | `@tree-node-disabled-color` | `@text-color-disabled` | - | - |

@@ -45,7 +45,7 @@
     &-inner {
       position: relative;
       display: flex;
-      background: @progress-trail-bg;
+      background-color: @progress-trail-background-color;
     }
 
     .@{progress-prefix}-info {
@@ -64,7 +64,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background: @progress-success-bg;
+      background-color: @progress-success-background-color;
     }
 
     &-bg,
@@ -73,19 +73,19 @@
     }
 
     .@{progress-prefix}-normal &-bg {
-      background: @progress-normal-bg;
+      background-color: @progress-normal-background-color;
     }
 
     .@{progress-prefix}-success &-bg {
-      background: @progress-success-bg;
+      background-color: @progress-success-background-color;
     }
 
     .@{progress-prefix}-exception &-bg {
-      background: @progress-exception-bg;
+      background-color: @progress-exception-background-color;
     }
 
     .@{progress-prefix}-active &-bg {
-      background: @progress-active-bg;
+      background-color: @progress-active-background-color;
 
       &::before {
         position: absolute;
@@ -102,11 +102,11 @@
   }
 
   &-success-icon {
-    color: @progress-success-bg;
+    color: @progress-success-background-color;
   }
 
   &-exception-icon {
-    color: @progress-exception-bg;
+    color: @progress-exception-background-color;
   }
   // circle
 
@@ -118,7 +118,7 @@
     font-size: @progress-circle-font-size-md;
 
     &-bg {
-      stroke: @progress-normal-bg;
+      stroke: @progress-normal-background-color;
     }
 
     .@{progress-prefix}-info {
@@ -136,15 +136,15 @@
     }
 
     &-success {
-      stroke: @progress-success-bg;
+      stroke: @progress-success-background-color;
     }
 
     .@{progress-prefix}-success &-path {
-      stroke: @progress-success-bg;
+      stroke: @progress-success-background-color;
     }
 
     .@{progress-prefix}-exception &-path {
-      stroke: @progress-exception-bg;
+      stroke: @progress-exception-background-color;
     }
   }
 }

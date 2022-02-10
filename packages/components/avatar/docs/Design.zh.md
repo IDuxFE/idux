@@ -13,6 +13,6 @@
 | `@avatar-font-size-md` | `@font-size-xl` | - | - |
 | `@avatar-font-size-lg` | `@font-size-2xl` | - | - |
 | `@avatar-color` | `@color-white` | - | - |
-| `@avatar-bg-color` | `@color-grey` | - | - |
+| `@avatar-background-color` | `@color-grey` | - | - |
 | `@avatar-border-radius-circle` | `@border-radius-full` | - | - |
 | `@avatar-border-radius-square` | `@border-radius-sm` | - | - |

@@ -67,4 +67,4 @@
 | `@stepper-item-dot-vertical-gutter` | `6px` | - | - |
 | `@stepper-item-percent-gutter` | `8px` | - | - |
 | `@stepper-item-percent-width` | `2px` | - | - |
-| `@stepper-item-percent-bg` | `#dfdfdf` | - | - |
+| `@stepper-item-percent-background-color` | `#dfdfdf` | - | - |

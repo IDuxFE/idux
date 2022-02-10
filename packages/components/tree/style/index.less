@@ -3,12 +3,12 @@
 .@{tree-prefix} {
   .reset-component();
 
-  background: @tree-background;
+  background-color: @tree-background-color;
   border-radius: @border-radius-sm;
   transition: @transition-all-base;
 
   &-focused:not(:hover):not(&-active) {
-    background: @tree-background-focused;
+    background-color: @tree-background-color-focused;
   }
 
   &-blocked {

@@ -47,7 +47,7 @@
           cursor: pointer;
           white-space: nowrap;
           padding: @tabs-nav-tab-padding;
-          background-color: @tabs-nav-bg-color;
+          background-color: @tabs-nav-background-color;
           transition: @transition-all-base;
 
           &-label {
@@ -165,15 +165,15 @@
       &-tab {
         border: 1px solid @tabs-nav-border-color;
         margin-right: 4px;
-        background-color: @tabs-card-nav-tab-bg-color;
+        background-color: @tabs-card-nav-tab-background-color;
         border-radius: @tabs-border-radius @tabs-border-radius 0 0;
 
         &:last-child {
           margin-right: 0;
         }
         &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          border-bottom-color: @tabs-card-nav-tab-selected-bg-color;
-          background-color: @tabs-card-nav-tab-selected-bg-color;
+          border-bottom-color: @tabs-card-nav-tab-selected-background-color;
+          background-color: @tabs-card-nav-tab-selected-background-color;
 
           &::after {
             content: ' ';
@@ -381,7 +381,7 @@
         }
 
         &-disabled {
-          background-color: @tabs-segment-nav-disabled-bg-color;
+          background-color: @tabs-segment-nav-disabled-background-color;
         }
       }
 
@@ -395,7 +395,7 @@
     &.@{tabs-prefix}-nav-primary {
       .@{tabs-prefix}-nav-tab {
         &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          background-color: @tabs-segment-nav-primary-active-bg-color;
+          background-color: @tabs-segment-nav-primary-active-background-color;
           .@{tabs-prefix}-nav-tab-label {
             color: @tabs-segment-nav-primary-active-text-color;
           }

@@ -29,27 +29,3 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | --- | --- | --- | --- |
 | `default` | 复杂的情况说明，用于显示更多的信息 | - | - |
 | `extra` | 操作区 | - | - |
-
-### 主题变量
-
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |
-| @result-padding | @spacing-gutter *6 @spacing-gutter* 4 | - |
-| @result-text-align | `center` | - |
-| @result-icon-margin | @spacing-xl | - |
-| @result-icon-size | @font-size-xl * 4 | - |
-| @result-title-font-size | @font-size-2xl | - |
-| @result-title-color | @color-black | - |
-| @result-title-line-height | 1.8 | - |
-| @result-subtitle-font-size | @font-size-md | - |
-| @result-subtitle-color | @text-color-secondary | - |
-| @result-subtitle-line-height | 1.6 | - |
-| @result-extra-margin | @spacing-xl | - |
-| @result-extra-children-margin | @spacing-sm | - |
-| @result-content-margin | @spacing-xl | - |
-| @result-content-padding | @spacing-xl @spacing-gutter * 5 | - |
-| @result-content-background | @color-grey-l50 | - |
-| @result-success | @color-turquoise | - |
-| @result-warning | @color-yellow | - |
-| @result-error | @color-red | - |
-| @result-info | @color-blue | - |

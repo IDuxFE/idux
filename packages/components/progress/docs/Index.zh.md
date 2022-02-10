@@ -51,19 +51,3 @@ cover:
 | `strokeWidth` | 仪表盘进度条线的宽度，单位是进度条画布宽度的百分比 | `number` | 6 | - | - |
 | `gapDegree` | 仪表盘进度条缺口角度，可取值 0 ~ 360 | `number` | 0 | - | - |
 | `gapPosition` | 仪表盘进度条缺口位置，可选 `top` `bottom` `left` `right` | `string` | `top` | - | - |
-
-### 主题变量
-
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |
-| @progress-normal-bg | @color-primary | - |
-| @progress-success-bg | @color-success | - |
-| @progress-exception-bg | @color-error | - |
-| @progress-active-bg | @color-primary | - |
-| @progress-text-color | @text-color | - |
-| @progress-line-font-size-md | @font-size-md | - |
-| @progress-line-font-size-sm | @font-size-sm | - |
-| @progress-circle-font-size-md | @font-size-2xl | - |
-| @progress-trail-bg | #f5f5f5 | - |
-| @progress-text-width | 36px | - |
-| @progress-border-radius | 100px | - |

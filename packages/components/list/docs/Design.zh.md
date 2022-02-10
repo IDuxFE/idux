@@ -15,4 +15,3 @@
 | `@list-padding-lg` | `@spacing-lg` | - | - |
 | `@list-padding-sm` | `@spacing-sm` | - | - |
 | `@list-min-height` | `128px` | - | - |
-| `@list-bg-color` | `#fff` | - | - |

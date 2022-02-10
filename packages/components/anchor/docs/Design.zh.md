@@ -21,7 +21,7 @@
 
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
-| `@anchor-bg` | `@background-color-component` | - | - |
+| `@anchor-background-color` | `@background-color-component` | - | - |
 | `@anchor-wrapper-margin-left` | `-@spacing-xs` | - | - |
 | `@anchor-wrapper-padding-left` | `@spacing-xs` | - | - |
 | `@anchor-color` | `@text-color` | - | - |
