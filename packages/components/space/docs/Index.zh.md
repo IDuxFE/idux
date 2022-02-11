@@ -14,10 +14,10 @@ cover:
 
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `align` | 垂直对齐方式 | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'` | `'center'` | - | - |
+| `align` | 垂直对齐方式 | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'` | - | - | - |
 | `block` | 将内容宽度调整为自适应其父元素的宽度 | `boolean` | - | - | - |
-| `justify` | 水平对齐方式 | `'start' \| 'center' \| 'end' \| 'space-around' \| 'space-between'` | `'start'` | - | - |
-| `size` | 间距大小 | `'sm' \| 'md' \| 'lg' \| number \| string \| [number \| string, number \| string]` | `sm` | ✅  | 如果传入一个数组，那么分别表示 `[rowGap, columnGap]` |
+| `justify` | 水平对齐方式 | `'start' \| 'center' \| 'end' \| 'space-around' \| 'space-between'` | - | - | - |
+| `size` | 间距大小 | `'sm' \| 'md' \| 'lg' \| number \| string \| [number \| string, number \| string]` | `sm` | ✅  | 如果传入一个数组，那么分别表示 `[垂直间距, 水平间距]` |
 | `separator` | 设置间隔分割符 | `string \| #separator` | - | - | - |
 | `vertical` | 是否为垂直方向 | `boolean` | - | - | - |
 | `wrap` | 是否自动换行 | `boolean` | `true` | ✅ | - |

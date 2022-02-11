@@ -25,9 +25,8 @@ export function useSelected(props: MenuProps, dropdownContext: ɵDropdownContext
       const { hideOnClick, setVisibility } = dropdownContext
       hideOnClick.value && setVisibility(false)
     }
-    // dropdown 默认为 false, 其他情况默认为 true
-    const selectable = props.selectable ?? !dropdownContext
-    if (!selectable) {
+
+    if (!props.selectable) {
       return
     }
 

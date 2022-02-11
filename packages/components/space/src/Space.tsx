@@ -51,8 +51,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-align-${align}`]: true,
-        [`${prefixCls}-justify-${justify}`]: true,
+        [`${prefixCls}-align-${align}`]: align,
+        [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-vertical`]: vertical.value,
         [`${prefixCls}-nowrap`]: !wrap.value,

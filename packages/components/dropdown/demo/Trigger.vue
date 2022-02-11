@@ -1,33 +1,30 @@
 <template>
-  <IxSpace>
+  <IxSpace justify="center">
     <IxDropdown>
-      <a class="ix-dropdown-trigger">Hover me</a>
+      <IxButton>Hover</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
-    <IxDivider type="vertical" />
     <IxDropdown trigger="click">
-      <a class="ix-dropdown-trigger">Click me</a>
+      <IxButton>Click</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
-    <IxDivider type="vertical" />
     <IxDropdown trigger="contextmenu">
-      <a class="ix-dropdown-trigger">Right click me</a>
+      <IxButton>Right click</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
+      </template>
+    </IxDropdown>
+    <IxDropdown :visible="visible" trigger="manual">
+      <IxSwitch v-model:checked="visible"></IxSwitch>
+      <template #overlay>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
   </IxSpace>
-  <br />
-  <IxDropdown :visible="visible" trigger="manual">
-    <IxSwitch v-model:checked="visible"></IxSwitch>
-    <template #overlay>
-      <IxMenu :dataSource="dataSource"></IxMenu>
-    </template>
-  </IxDropdown>
 </template>
 
 <script setup lang="ts">

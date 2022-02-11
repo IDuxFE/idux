@@ -16,10 +16,10 @@ export type SpaceDirection = 'vertical' | 'horizontal'
 export type SpaceSize = 'sm' | 'md' | 'lg'
 
 export const spaceProps = {
-  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline', 'stretch']).def('center'),
+  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline', 'stretch']),
   block: IxPropTypes.bool,
   direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']),
-  justify: IxPropTypes.oneOf<SpaceJustify>(['start', 'center', 'end', 'space-around', 'space-between']).def('start'),
+  justify: IxPropTypes.oneOf<SpaceJustify>(['start', 'center', 'end', 'space-around', 'space-between']),
   size: IxPropTypes.oneOfType([Number, String, IxPropTypes.array<string | number>()]),
   split: IxPropTypes.string,
   separator: IxPropTypes.string,

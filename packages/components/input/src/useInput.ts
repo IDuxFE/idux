@@ -62,7 +62,7 @@ export function useInput(
   })
 
   const syncValue = () => {
-    const element = elementRef.value!
+    const element = elementRef.value
     const value = accessor.valueRef.value ?? ''
     if (element && element.value !== value) {
       element.value = value

@@ -22,7 +22,7 @@ order: 0
 | `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | `inline` 模式时无效 |
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
-| `selectable` | 是否允许选中 | `boolean` | - | - | 在 `IxDropdown` 中默认为 `false`, 其他情况默认为 `true` |
+| `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
 | `target` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
 | `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |
 | `onClick` | 点击菜单后的回调 | `(options: MenuClickOptions) => void>` | - | - |
