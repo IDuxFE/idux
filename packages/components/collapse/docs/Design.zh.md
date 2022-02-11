@@ -23,21 +23,3 @@
 | 列表概览折叠 | 针对列表，查看概览信息后，通过展开/收起引导查看更多内容或执行操作等场景；常用于应用服务、运营服务、资源统计等 |
 | 信息浏览折叠 | 以浏览信息为主要目的，通过折叠将信息分组，有主次的展示给用户，帮助高效获取信息；常用风险测评、主机等详情查看 |
 | 表单项折叠 | 更次级的Tab标签，常用于工具栏针对列表、表格数据筛选和切换；（必要时支持图标+文字） |
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@collapse-line-height` | `@line-height-base` | - | - |
-| `@collapse-font-size` | `@font-size-md` | - | - |
-| `@collapse-color` | `@text-color` | - | - |
-| `@collapse-background-color` | `@color-grey-l50` | - | - |
-| `@collapse-border` | `@border-width-sm @border-style @border-color` | - | - |
-| `@collapse-border-radius` | `@border-radius-sm` | - | - |
-| `@collapse-panel-header-padding` | `2px @spacing-lg` | - | - |
-| `@collapse-panel-header-prefix-font-size` | `@font-size-sm` | - | - |
-| `@collapse-panel-header-font-size` | `@font-size-md` | - | - |
-| `@collapse-panel-header-font-weight` | `@font-weight-md` | - | - |
-| `@collapse-panel-content-background-color` | `@background-color-component` | - | - |
-| `@collapse-panel-content-padding` | `@spacing-lg` | - | - |
-| `@collapse-panel-content-padding-top-compact` | `@spacing-xs` | - | - |

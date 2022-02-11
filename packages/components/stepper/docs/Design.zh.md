@@ -48,23 +48,3 @@
 ### 步骤标题
 
 对于可跳过/可选的步骤，请在步骤标题中标记『（选填）』（若空间摆放不下，也可标记在步骤描述中）。
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@stepper-item-highlight-color` | `@color-primary` | - | - |
-| `@stepper-item-tail-width` | `9999px` | - | - |
-| `@stepper-item-tail-height` | `1px` | - | - |
-| `@stepper-item-custom-icon-width` | `24px` | - | - |
-| `@stepper-item-custom-icon-width-small` | `20px` | - | - |
-| `@stepper-item-content-min-height` | `48px` | - | - |
-| `@stepper-item-dot-width` | `8px` | - | - |
-| `@stepper-item-dot-width-active` | `10px` | - | - |
-| `@stepper-item-dot-head-width` | `60px` | - | - |
-| `@stepper-item-dot-active-offset` | `-1px` | - | - |
-| `@stepper-item-dot-tail-width` | `2px` | - | - |
-| `@stepper-item-dot-vertical-gutter` | `6px` | - | - |
-| `@stepper-item-percent-gutter` | `8px` | - | - |
-| `@stepper-item-percent-width` | `2px` | - | - |
-| `@stepper-item-percent-background-color` | `#dfdfdf` | - | - |

@@ -194,3 +194,42 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
   </IxTable>
 </template>
 ```
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@table-color` | `@text-color` | - | - |
+| `@table-head-line-height` | `@line-height-base` | - | - |
+| `@table-body-line-height` | `@line-height-base` | - | - |
+| `@table-head-height-lg` | `@height-xxl` | - | - |
+| `@table-head-height-md` | `@height-xl` | - | - |
+| `@table-head-height-sm` | `@height-md` | - | - |
+| `@table-padding-vertical-lg` | `@spacing-lg` | - | - |
+| `@table-padding-horizontal-lg` | `@spacing-lg` | - | - |
+| `@table-padding-vertical-md` | `@spacing-md` | - | - |
+| `@table-padding-horizontal-md` | `@spacing-md` | - | - |
+| `@table-padding-vertical-sm` | `@spacing-sm` | - | - |
+| `@table-padding-horizontal-sm` | `@spacing-sm` | - | - |
+| `@table-font-size-lg` | `@font-size-lg` | - | - |
+| `@table-font-size-md` | `@font-size-md` | - | - |
+| `@table-font-size-sm` | `@font-size-sm` | - | - |
+| `@table-border-width` | `@border-width-sm` | - | - |
+| `@table-border-style` | `@border-style` | - | - |
+| `@table-border-color` | `@border-color-split` | - | - |
+| `@table-background-color` | `@background-color-component` | - | - |
+| `@table-border-radius` | `@border-radius-sm` | - | - |
+| `@table-head-background-color` | `@background-color-light` | - | - |
+| `@table-head-color` | `@color-black` | - | - |
+| `@table-head-split-height` | `16px` | - | - |
+| `@table-head-split-color` | `rgba(0, 0, 0, 0.06)` | - | - |
+| `@table-head-icon-color` | `@color-black` | - | - |
+| `@table-head-icon-hover-backgroud-color` | `@color-graphite-l40` | - | - |
+| `@table-head-font-weight` | `@font-weight-lg` | - | - |
+| `@table-body-hover-background` | `@background-color-light` | - | - |
+| `@table-pagination-margin` | `@spacing-lg 0` | - | - |
+| `@table-icon-margin` | `@spacing-xs` | - | - |
+| `@table-expandable-icon-size` | `@font-size-md` | - | - |
+| `@table-expandable-icon-color` | `@color-black` | - | - |
+<!--- insert less variable end  --->

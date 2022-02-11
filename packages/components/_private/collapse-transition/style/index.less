@@ -3,6 +3,7 @@
   &-enter-active,
   &-leave-active {
     overflow: hidden;
-    transition: @transition-all-base;
+    transition: height @transition-duration-base @ease-in-out, width @transition-duration-base @ease-in-out,
+      opacity @transition-duration-base @ease-in-out;
   }
 }

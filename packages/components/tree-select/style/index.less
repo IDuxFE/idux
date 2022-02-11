@@ -17,7 +17,7 @@
     background-color: @tree-select-background-color;
     border: @tree-select-border-width @tree-select-border-style @tree-select-border-color;
     border-radius: @tree-select-border-radius;
-    transition: @transition-all-base;
+    transition: all @transition-duration-base @ease-in-out;
     cursor: pointer;
 
     &-item {
@@ -45,7 +45,7 @@
       flex: 1;
       overflow: hidden;
       color: @tree-select-placeholder-color;
-      transition: @transition-all-base;
+      transition: all @transition-duration-base @ease-in-out;
       .ellipsis();
     }
 

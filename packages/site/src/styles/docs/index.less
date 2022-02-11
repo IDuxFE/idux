@@ -1,5 +1,6 @@
 @import './contributors.less';
 
+/* stylelint-disable */
 .component-develop {
   &-header {
     &-tools {
@@ -46,16 +47,18 @@
 .component-tabs {
   display: block;
 
-  .ix-tabs-nav-wrapper .ix-tabs-nav-border {
-    background-color: inherit;
-  }
+  & > .ix-tabs-nav-wrapper {
+    .ix-tabs-nav-border {
+      background-color: inherit;
+    }
 
-  .ix-tabs-nav-bar {
-    height: 3px;
-  }
+    .ix-tabs-nav-bar {
+      height: 3px;
+    }
 
-  .ix-tabs-nav-tab-label {
-    font-size: @font-size-lg;
+    .ix-tabs-nav-tab-label {
+      font-size: @font-size-lg;
+    }
   }
 }
 

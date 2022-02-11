@@ -21,22 +21,3 @@
 | --- | ---  |
 | 常规型分页 | 一般情况下默认使用常规型分页。 |
 | 精简型分页 | 适用于空间较小，无法放置完整常规型分页时，例如卡片中的表格、穿梭框中的表格等。 |
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@pagination-font-size` | `@font-size-md` | - | - |
-| `@pagination-item-icon-font-size` | `@font-size-sm` | - | - |
-| `@pagination-item-height-md` | `@height-md` | - | - |
-| `@pagination-item-height-sm` | `@height-sm` | - | - |
-| `@pagination-item-margin-right-md` | `@spacing-sm` | - | - |
-| `@pagination-item-margin-right-sm` | `@spacing-xs` | - | - |
-| `@pagination-item-input-width-md` | `48px` | - | - |
-| `@pagination-item-input-width-sm` | `40px` | - | - |
-| `@pagination-item-spacing-sm` | `20px` | - | - |
-| `@pagination-item-active-color` | `@button-primary` | - | - |
-| `@pagination-item-active-background-color` | `@button-primary-background-color` | - | - |
-| `@pagination-item-hover-background-color` | `tint(@button-primary-background-color, 90%)` | - | - |
-| `@pagination-item-disabled-color` | `@button-disable-color` | - | - |
-| `@pagination-item-disabled-background-color` | `@button-disable-background-color` | - | - |

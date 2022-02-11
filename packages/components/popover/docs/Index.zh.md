@@ -22,3 +22,20 @@ order: 0
 | `closeIcon` | 关闭按钮图标 | `string` | `close` | - | - |
 
 更多属性请参考 [Tooltip](/components/tooltip/zh#TooltipProps).
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@popover-zindex` | `@zindex-l4-2` | - | - |
+| `@popover-font-size` | `@font-size-md` | - | - |
+| `@popover-color` | `@color-graphite-d10` | - | - |
+| `@popover-background-color` | `@background-color-component` | - | - |
+| `@popover-border-radius` | `@border-radius-sm` | - | - |
+| `@popover-box-shadow` | `@shadow-bottom-sm` | - | - |
+| `@popover-wrapper-min-width` | `240px` | - | - |
+| `@popover-wrapper-padding` | `@spacing-sm @spacing-lg` | - | - |
+| `@popover-header-padding` | `0 0 @spacing-xs 0` | - | - |
+| `@popover-content-padding` | `0` | - | - |
+<!--- insert less variable end  --->

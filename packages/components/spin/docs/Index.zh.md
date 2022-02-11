@@ -26,13 +26,15 @@ cover:
 | --- | --- | --- | --- |
 |`default` | 需要遮罩的内容区域 | - | - |
 
-### 主题变量
+<!--- insert less variable begin  --->
+## 主题变量
 
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |
-| @spin-zindex | @zindex-l2-base | - |
-| @spin-tip-color | @color-primary | - |
-| @spin-icon-color | @color-primary | - |
-| @spin-font-size-sm | @font-size-md | - |
-| @spin-font-size-md | @font-size-lg | - |
-| @spin-font-size-lg | @font-size-xl | - |
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@spin-zindex` | `@zindex-l2-base` | - | - |
+| `@spin-tip-color` | `@color-primary` | - | - |
+| `@spin-icon-color` | `@color-primary` | - | - |
+| `@spin-font-size-sm` | `@font-size-md` | - | - |
+| `@spin-font-size-md` | `@font-size-lg` | - | - |
+| `@spin-font-size-lg` | `@font-size-xl` | - | - |
+<!--- insert less variable end  --->

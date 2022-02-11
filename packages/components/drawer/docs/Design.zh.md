@@ -41,21 +41,3 @@
 | 详细内容 | 主要由输入框、选择器、单选复选等相关组件构成，具体内容请参考表单组合规范。注：基于抽屉特性，不建议承载多标签切换、多层级复杂操作的表单内容。 |
 | 操作区 | 按钮始终放置抽屉底部，基于内容居左对齐。页面超出浏览器高度，页面按钮底部悬浮。主按键放置左边。 |
 | 模态层（可选） | 默认显示模态层，点击模态层不会关闭抽屉。默认关闭抽屉方式：点击关闭图标；键盘Esc按键；点击取消按钮。 |
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@drawer-font-size` | `@font-size-md` | - | - |
-| `@drawer-line-height` | `@line-height-base` | - | - |
-| `@drawer-color` | `@text-color` | - | - |
-| `@drawer-title-color` | `@color-graphite-d50` | - | - |
-| `@drawer-background-color` | `@background-color-component` | - | - |
-| `@drawer-box-shadow-start` | `@shadow-right-lg` | - | - |
-| `@drawer-box-shadow-end` | `@shadow-left-lg` | - | - |
-| `@drawer-box-shadow-top` | `@shadow-bottom-lg` | - | - |
-| `@drawer-header-padding-horizontal` | `@spacing-lg` | - | - |
-| `@drawer-body-padding` | `@spacing-lg` | - | - |
-| `@drawer-footer-min-height` | `64px` | - | - |
-| `@drawer-footer-padding` | `@spacing-lg` | - | - |
-| `@drawer-footer-button-margin-left` | `@spacing-sm` | - | - |

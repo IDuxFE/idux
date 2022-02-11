@@ -34,3 +34,25 @@ subtitle: 步骤条
 `disabled` | 节点禁用点击 | `true \| false` | `false` | - | - |
 `icon` | 每个节点的图标 | `string \| #icon` | - | - | - |
 `status` | 每个节点的状态，当不设置时，会用Steps里的status | `wait \| process \| finish \| error` | - | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@stepper-item-highlight-color` | `@color-primary` | - | - |
+| `@stepper-item-tail-width` | `9999px` | - | - |
+| `@stepper-item-tail-height` | `1px` | - | - |
+| `@stepper-item-custom-icon-width` | `24px` | - | - |
+| `@stepper-item-custom-icon-width-small` | `20px` | - | - |
+| `@stepper-item-content-min-height` | `48px` | - | - |
+| `@stepper-item-dot-width` | `8px` | - | - |
+| `@stepper-item-dot-width-active` | `10px` | - | - |
+| `@stepper-item-dot-head-width` | `60px` | - | - |
+| `@stepper-item-dot-active-offset` | `-1px` | - | - |
+| `@stepper-item-dot-tail-width` | `2px` | - | - |
+| `@stepper-item-dot-vertical-gutter` | `6px` | - | - |
+| `@stepper-item-percent-gutter` | `8px` | - | - |
+| `@stepper-item-percent-width` | `2px` | - | - |
+| `@stepper-item-percent-background-color` | `#dfdfdf` | - | - |
+<!--- insert less variable end  --->

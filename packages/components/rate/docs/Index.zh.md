@@ -21,3 +21,18 @@ subtitle: 评分
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `tooltips` | 悬浮提示信息数组 | `string[]` | `[]` | - | - |
 | `onChange` | 值发生改变时的回调 | `(value: number) => void` | - | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@rate-placeholder-color` | `@form-placeholder-color` | - | - |
+| `@rate-active-color` | `@color-yellow` | - | - |
+| `@rate-size-sm` | `14px` | - | - |
+| `@rate-size-md` | `20px` | - | - |
+| `@rate-size-lg` | `28px` | - | - |
+| `@rate-item-margin-right` | `@spacing-sm` | - | - |
+| `@rate-item-hover-scale` | `1.1` | - | - |
+| `@rate-item-focus-outline` | `1px dashed @rate-active-color` | - | - |
+<!--- insert less variable end  --->

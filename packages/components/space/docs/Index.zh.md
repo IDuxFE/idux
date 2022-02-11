@@ -27,3 +27,13 @@ cover:
 | 属性 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `default` | 需要被间隔的内容 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@space-margin-sm` | `@spacing-sm` | - | - |
+| `@space-margin-md` | `@spacing-lg` | - | - |
+| `@space-margin-lg` | `@spacing-xl` | - | - |
+<!--- insert less variable end  --->

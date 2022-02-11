@@ -33,3 +33,31 @@ order: 0
 | `forceRender` | 内容被隐藏时是否渲染 DOM 结构 | `boolean` | `false` | - | - |
 | `key` | 被选中时标签的`key`值 | `boolean` | `false` | - | - |
 | `title` | 标签内容 | `string \| #title` | - | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@tabs-selected-color` | `@color-primary` | - | - |
+| `@tabs-hover-color` | `@color-primary-l10` | - | - |
+| `@tabs-active-color` | `@color-primary-d10` | - | - |
+| `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
+| `@tabs-nav-background-color` | `@color-white` | - | - |
+| `@tabs-nav-border-color` | `@color-graphite-l20` | - | - |
+| `@tabs-segment-nav-disabled-background-color` | `@color-graphite-l40` | - | - |
+| `@tabs-segment-nav-primary-active-background-color` | `@color-primary` | - | - |
+| `@tabs-segment-nav-primary-active-text-color` | `@color-white` | - | - |
+| `@tabs-segment-nav-height` | `32px` | - | - |
+| `@tabs-card-nav-tab-background-color` | `@color-graphite-l50` | - | - |
+| `@tabs-card-nav-tab-selected-background-color` | `@color-white` | - | - |
+| `@tabs-nav-tab-padding` | `0 16px` | - | - |
+| `@tabs-nav-tab-height` | `40px` | - | - |
+| `@tabs-nav-tab-text-color` | `@color-graphite-d40` | - | - |
+| `@tabs-nav-bar-color` | `@color-primary` | - | - |
+| `@tabs-nav-bar-height` | `2px` | - | - |
+| `@tabs-nav-pre-next-width` | `20px` | - | - |
+| `@tabs-border-radius` | `2px` | - | - |
+| `@tabs-pane-min-width` | `72px` | - | - |
+| `@tabs-pane-padding` | `16px` | - | - |
+<!--- insert less variable end  --->

@@ -73,7 +73,7 @@
     border: @slider-thumb-border;
     border-radius: 50%;
     cursor: pointer;
-    transition: @transition-all-base;
+    transition: border-color @transition-duration-base, box-shadow @transition-duration-base * 2, transform @transition-duration-base cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
     &:hover {
       border-color: @slider-thumb-hover-border-color;

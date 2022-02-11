@@ -48,36 +48,3 @@
 ### 内容溢出
 
 对话框限定宽度，根据内容适应高度，若正文内容超过对话框的最大高度，内容部分可响应垂直滚动，滚动时标题和行动按钮保持固定。对话框内容不可以支持横向滚动。
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@modal-max-width` | `calc(100vw - 32px)` | - | - |
-| `@modal-font-size` | `@font-size-md` | - | - |
-| `@modal-line-height` | `@line-height-base` | - | - |
-| `@modal-background-color` | `@background-color-component` | - | - |
-| `@modal-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@modal-border-radius` | `@border-radius-md` | - | - |
-| `@modal-header-padding` | `@spacing-lg @spacing-xl @spacing-sm` | - | - |
-| `@modal-body-padding` | `@spacing-sm @spacing-xl` | - | - |
-| `@modal-footer-padding` | `@spacing-sm @spacing-xl @spacing-lg` | - | - |
-| `@modal-footer-button-margin-left` | `@spacing-sm` | - | - |
-| `@modal-footer-min-height` | `64px` | - | - |
-| `@modal-body-title-font-size` | `@font-size-lg` | - | - |
-| `@modal-body-title-font-weight` | `@font-weight-xl` | - | - |
-| `@modal-body-title-margin-bottom` | `@spacing-sm` | - | - |
-| `@modal-body-title-color` | `@text-color` | - | - |
-| `@modal-body-content-font-size` | `@modal-font-size` | - | - |
-| `@modal-body-content-color` | `@text-color` | - | - |
-| `@modal-body-content-padding` | `0` | - | - |
-| `@modal-body-icon-font-size` | `48px` | - | - |
-| `@modal-body-icon-margin` | `0 @spacing-lg` | - | - |
-| `@modal-body-confirm-color` | `@color-warning` | - | - |
-| `@modal-body-info-color` | `@color-info` | - | - |
-| `@modal-body-success-color` | `@color-success` | - | - |
-| `@modal-body-warning-color` | `@color-warning` | - | - |
-| `@modal-body-error-color` | `@color-error` | - | - |
-| `@modal-body-typed-padding` | `0 @spacing-sm @spacing-xl` | - | - |
-| `@modal-max-width-screen-sm` | `calc(100vw - 16px)` | - | - |
-| `@modal-margin-screen-sm` | `@spacing-sm auto` | - | - |

@@ -24,3 +24,23 @@ order: 0
 | `onOk` | 点击确认按钮的回调 | `(evt?: Event \| unknown) => unknown` | - | - | 执行完回调后，默认会关闭对话框，返回 `false` 的时候，将阻止关闭 |
 
 更多属性请参考 [Tooltip](/components/tooltip/zh#TooltipProps).
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@popconfirm-zindex` | `@zindex-l4-2` | - | - |
+| `@popconfirm-font-size` | `@font-size-md` | - | - |
+| `@popconfirm-color` | `@text-color` | - | - |
+| `@popconfirm-background-color` | `@background-color-component` | - | - |
+| `@popconfirm-border-radius` | `@border-radius-sm` | - | - |
+| `@popconfirm-box-shadow` | `@shadow-bottom-md` | - | - |
+| `@popconfirm-wrapper-min-width` | `192px` | - | - |
+| `@popconfirm-wrapper-padding` | `@spacing-sm @spacing-lg` | - | - |
+| `@popconfirm-title-padding` | `@spacing-sm 0` | - | - |
+| `@popconfirm-title-icon-color` | `@color-warning` | - | - |
+| `@popconfirm-title-icon-margin-right` | `@spacing-sm` | - | - |
+| `@popconfirm-footer-padding` | `@spacing-sm 0` | - | - |
+| `@popconfirm-footer-button-margin-left` | `@spacing-sm` | - | - |
+<!--- insert less variable end  --->

@@ -16,23 +16,3 @@
 ### 内容超出样式
 
 标题文字建议不超过6个字，文本超出最大宽度则末尾用“…”，指针hover显示全称。
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@anchor-background-color` | `@background-color-component` | - | - |
-| `@anchor-wrapper-margin-left` | `-@spacing-xs` | - | - |
-| `@anchor-wrapper-padding-left` | `@spacing-xs` | - | - |
-| `@anchor-color` | `@text-color` | - | - |
-| `@anchor-border-width` | `@border-width-md` | - | - |
-| `@anchor-border-color` | `@border-color` | - | - |
-| `@anchor-ink-ball-width` | `1px` | - | - |
-| `@anchor-ink-ball-height` | `16px` | - | - |
-| `@anchor-ink-ball-radius` | `2px` | - | - |
-| `@anchor-ink-ball-border-width` | `@border-width-sm` | - | - |
-| `@anchor-ink-line-border-width` | `@border-width-md` | - | - |
-| `@anchor-link-margin` | `@spacing-md 0 @spacing-md @spacing-lg` | - | - |
-| `@anchor-link-font-size` | `@font-size-md` | - | - |
-| `@anchor-link-line-height` | `1` | - | - |
-| `@anchor-link-active-color` | `@color-primary` | - | - |

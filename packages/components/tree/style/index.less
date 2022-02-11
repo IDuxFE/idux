@@ -5,7 +5,7 @@
 
   background-color: @tree-background-color;
   border-radius: @border-radius-sm;
-  transition: @transition-all-base;
+  transition: background-color @transition-duration-base;
 
   &-focused:not(:hover):not(&-active) {
     background-color: @tree-background-color-focused;
@@ -157,7 +157,7 @@
     cursor: pointer;
     min-height: @tree-node-content-height;
     line-height: @tree-node-content-height;
-    transition: @transition-all-base;
+    transition: background-color @transition-duration-base;
 
     &:hover {
       background-color: @tree-node-hover-background-color;

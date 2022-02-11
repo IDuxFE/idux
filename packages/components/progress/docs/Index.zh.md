@@ -51,3 +51,27 @@ cover:
 | `strokeWidth` | 仪表盘进度条线的宽度，单位是进度条画布宽度的百分比 | `number` | 6 | - | - |
 | `gapDegree` | 仪表盘进度条缺口角度，可取值 0 ~ 360 | `number` | 0 | - | - |
 | `gapPosition` | 仪表盘进度条缺口位置，可选 `top` `bottom` `left` `right` | `string` | `top` | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@progress-normal-background-color` | `@color-success` | - | - |
+| `@progress-success-background-color` | `@color-success` | - | - |
+| `@progress-exception-background-color` | `@color-error` | - | - |
+| `@progress-active-background-color` | `@color-success` | - | - |
+| `@progress-trail-background-color` | `@color-graphite-l40` | - | - |
+| `@progress-text-width` | `36px` | - | - |
+| `@progress-border-radius` | `100px` | - | - |
+| `@progress-text-color` | `@text-color` | - | - |
+| `@progress-line-height-lg` | `8px` | - | - |
+| `@progress-line-height-md` | `6px` | - | - |
+| `@progress-line-height-sm` | `2px` | - | - |
+| `@progress-line-font-size-lg` | `@font-size-md` | - | - |
+| `@progress-line-font-size-md` | `@font-size-md` | - | - |
+| `@progress-line-font-size-sm` | `@font-size-sm` | - | - |
+| `@progress-line-text-padding` | `0 0 0 @spacing-sm` | - | - |
+| `@progress-circle-width` | `120px` | - | - |
+| `@progress-circle-font-size-md` | `@font-size-2xl` | - | - |
+<!--- insert less variable end  --->

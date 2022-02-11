@@ -23,12 +23,12 @@
   }
 
   &-opened&-push {
-    transition: @transition-all-base;
+    transition: transform @transition-duration-fast @ease-out;
     transition-delay: @transition-duration-fast;
   }
 
   &-opened&-pull {
-    transition: @transition-all-base;
+    transition: transform @transition-duration-fast @ease-in;
   }
 
   &-sentinel {
@@ -48,8 +48,7 @@
     background-color: @drawer-background-color;
 
     > .@{header-prefix} {
-      padding-left: @drawer-header-padding-horizontal;
-      padding-right: @drawer-header-padding-horizontal;
+      padding: @drawer-header-padding;
       color: @drawer-title-color;
     }
   }

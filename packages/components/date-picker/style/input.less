@@ -32,7 +32,7 @@
     width: 100%;
     border: @date-picker-border-width @date-picker-border-style @date-picker-border-color;
     border-radius: @date-picker-border-radius;
-    transition: @transition-all-base;
+    transition: all @transition-duration-base @ease-in-out;
 
     &:hover {
       border-color: @date-picker-hover-color;
@@ -46,7 +46,7 @@
   &-suffix,
   &-clear {
     color: @date-picker-placeholder-color;
-    transition: @transition-all-base;
+    transition: color @transition-duration-base;
     cursor: pointer;
 
     &:hover {
@@ -59,7 +59,7 @@
     z-index: 1;
     opacity: 0;
     background-color: @date-picker-background-color;
-    transition: @transition-all-base;
+    transition: opacity @transition-duration-base;
   }
 
   &:hover &-clear {

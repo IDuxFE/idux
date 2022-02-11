@@ -20,7 +20,7 @@
     }
 
     > span {
-      transition: @transition-all-base;
+      transition: all @transition-duration-base @ease-in-out;
 
       &:hover,
       &:focus-visible {
@@ -39,7 +39,7 @@
     &-first,
     &-second {
       color: @rate-placeholder-color;
-      transition: @transition-all-base;
+      transition: all @transition-duration-base @ease-in-out;
       user-select: none;
     }
 

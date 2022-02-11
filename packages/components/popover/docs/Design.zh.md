@@ -21,18 +21,3 @@
 | --- | ---  |
 | 无箭头气泡 | 用于表格文本域、仪表盘Hover等较大区域，无法精准指向的场景，气泡随鼠标位置而变化，内容无任何操作。容器尺寸最大，320px宽 * 320px高。 |
 | 带箭头气泡 | 指向固定对象（如小“i”提示，按钮等目标），展示图文或更丰富的信息、可包含组件、功能操作等。容器尺寸最大，400px宽 * 480px高。 |
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@popover-zindex` | `@zindex-l4-2` | - | - |
-| `@popover-font-size` | `@font-size-md` | - | - |
-| `@popover-color` | `@color-graphite-d10` | - | - |
-| `@popover-background-color` | `@background-color-component` | - | - |
-| `@popover-border-radius` | `@border-radius-sm` | - | - |
-| `@popover-box-shadow` | `@shadow-bottom-sm` | - | - |
-| `@popover-wrapper-min-width` | `240px` | - | - |
-| `@popover-wrapper-padding` | `@spacing-sm @spacing-lg` | - | - |
-| `@popover-header-padding` | `0 0 @spacing-xs 0` | - | - |
-| `@popover-content-padding` | `0` | - | - |

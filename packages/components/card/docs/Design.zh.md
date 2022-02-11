@@ -42,27 +42,3 @@
 | 查看详情 | 当卡片支持跳转查看详情时，可在右上方放置【查看详情】按钮，根据业务诉求可支持点击卡片全域来跳转的方式，从而增大点击区域 |
 | 存在多个按钮 | 表格操作较多时，根据业务场景诉求选择【按钮外显】与【收纳到“更多”按钮】，外显时使用图标按钮 |
 | 悬停显示内容 | 当卡片以图片展示为主时，可以鼠标悬停时展示文案描述和相关操作 |
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@card-padding-sm` | `@spacing-md` | - | - |
-| `@card-padding-md` | `@spacing-lg` | - | - |
-| `@card-padding-lg` | `@spacing-xl` | - | - |
-| `@card-color` | `@text-color` | - | - |
-| `@card-background-color` | `@background-color-component` | - | - |
-| `@card-border-width` | `@border-width-sm` | - | - |
-| `@card-border-style` | `@border-style` | - | - |
-| `@card-border-color` | `@color-graphite-l30` | - | - |
-| `@card-border-color-hover` | `transparent` | - | - |
-| `@card-border-radius` | `@border-radius-sm` | - | - |
-| `@card-box-shadow` | `@shadow-bottom-sm` | - | - |
-| `@card-gradient-min` | `fade(@color-grey, 20%)` | - | - |
-| `@card-gradient-max` | `fade(@color-grey, 60%)` | - | - |
-| `@card-header-padding` | `@spacing-sm` | - | - |
-| `@card-loading-spacing` | `@spacing-xs` | - | - |
-| `@card-loading-height` | `@font-size-md` | - | - |
-| `@card-loading-background-size` | `600%` | - | - |
-| `@card-loading-transition-duration` | `2s` | - | - |
-| `@card-grid-width` | `25%` | - | - |

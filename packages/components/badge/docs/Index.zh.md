@@ -26,3 +26,17 @@ cover:
 | --- | --- | --- | --- |
 | `default` | 需要添加徽标的内容 | - | - |
 | `count`   | 自定义徽标 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@badge-zindex` | `@zindex-auto` | - | - |
+| `@badge-line-height` | `16px` | - | - |
+| `@badge-size` | `16px` | - | - |
+| `@badge-color` | `@color-red` | - | - |
+| `@badge-padding` | `0 4px` | - | - |
+| `@badge-dot-size` | `6px` | - | - |
+| `@badge-border-radius` | `10px` | - | - |
+<!--- insert less variable end  --->

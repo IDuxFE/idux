@@ -27,23 +27,3 @@
 
 1. 即时提示在页面默认停留3s后自动消失，停留时长可配置。  
 2. 当多条提示同时出现时，纵向堆叠，最新的在最底部，当旧的消失时，其余的整体往上移动；堆叠不应超过页面1/3的高度，超出后，旧的消息应自动消失（例如页面的1/3高度可承载6条消息，则再出现第七条消息时，自动将第一条挤走）。
-
-### 主题变量
-
-| 名称 | `default` | `dark` | 备注 |
-| --- | --- | --- | --- |
-| `@message-padding` | `@spacing-sm` | - | - |
-| `@message-margin-bottom` | `@spacing-lg` | - | - |
-| `@message-font-size` | `@font-size-md` | - | - |
-| `@message-line-height` | `@line-height-base` | - | - |
-| `@message-content-min-width` | `128px` | - | - |
-| `@message-content-max-width` | `480px` | - | - |
-| `@message-content-padding-horizontal` | `@spacing-lg` | - | - |
-| `@message-content-padding-vertical` | `(round((((@height-lg - @message-font-size * @message-line-height) / 2) * 10) / 10))` | - | - |
-| `@message-content-bg-color` | `@background-color-component` | - | - |
-| `@message-content-border-radius` | `@border-radius-md` | - | - |
-| `@message-content-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@message-icon-size` | `@font-size-lg` | - | - |
-| `@message-icon-margin-right` | `@spacing-sm` | - | - |
-| `@message-wrapper-top` | `15%` | - | - |
-| `@message-wrapper-zindex` | `@zindex-l4-1` | - | - |

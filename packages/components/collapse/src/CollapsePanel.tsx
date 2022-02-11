@@ -86,7 +86,6 @@ function renderHeader(
       iconNode = tempNode
     }
   } else {
-    2
     const iconName = expandIcon.value
     iconNode = iconName ? <IxIcon name={iconName} rotate={expanded ? 90 : 0} /> : undefined
   }

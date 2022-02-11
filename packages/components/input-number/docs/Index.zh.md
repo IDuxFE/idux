@@ -30,3 +30,21 @@ order: 0
 | `onChange` | 值发生改变时触发的回调 | `(value: number \| null, oldValue: number \| null \| undefined) => void` | - | - | - |
 | `onFocus` | 获取焦点时触发的回调 | `(evt: FocusEvent) => void` | - | - | - |
 | `onBlur` | 失去焦点时触发的回调 | `(evt: FocusEvent) => void` | - | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@input-number-height-sm` | `@input-height-sm` | - | - |
+| `@input-number-height-md` | `@input-height-md` | - | - |
+| `@input-number-height-lg` | `@input-height-lg` | - | - |
+| `@input-number-width-sm` | `120px` | - | - |
+| `@input-number-width-md` | `160px` | - | - |
+| `@input-number-width-lg` | `192px` | - | - |
+| `@input-number-button-hover-color` | `@input-active-color` | - | - |
+| `@input-number-error` | `@color-error` | - | - |
+| `@input-number-disabled-color` | `@input-disabled-color` | - | - |
+| `@input-number-button-background-color` | `@color-white` | - | - |
+| `@input-number-disabled-background-color` | `@input-disabled-background-color` | - | - |
+<!--- insert less variable end  --->

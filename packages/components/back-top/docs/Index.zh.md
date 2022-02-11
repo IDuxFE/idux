@@ -23,3 +23,27 @@ subtitle: 回到顶部
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 自定义显示内容 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@back-top-zindex` | `@zindex-l2-base` | - | - |
+| `@back-top-height` | `60px` | - | - |
+| `@back-top-width` | `60px` | - | - |
+| `@back-top-font-size` | `@font-size-3xl` | - | - |
+| `@back-top-border-radius` | `50%` | - | - |
+| `@back-top-right-gutter` | `15px` | - | - |
+| `@back-top-right-xs` | `(@back-top-right-gutter / 2)` | - | - |
+| `@back-top-right-sm` | `@back-top-right-gutter` | - | - |
+| `@back-top-right-md` | `@back-top-right-gutter * 1.5` | - | - |
+| `@back-top-right-lg` | `@back-top-right-gutter * 2` | - | - |
+| `@back-top-right-xl` | `@back-top-right-gutter * 3` | - | - |
+| `@back-top-bottom` | `50px` | - | - |
+| `@back-top-color` | `@color-primary` | - | - |
+| `@back-top-hover-color` | `@color-primary-l30` | - | - |
+| `@back-top-background-color` | `@color-white` | - | - |
+| `@back-top-background-hover-color` | `@color-white` | - | - |
+| `@back-top-box-shadow` | `0 2px 8px 0 rgba(30,35,43,0.12)` | - | - |
+<!--- insert less variable end  --->

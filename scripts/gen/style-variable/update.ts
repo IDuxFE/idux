@@ -5,7 +5,8 @@ import { appendFile, lstatSync, readFile, readdir, writeFile } from 'fs-extra'
 import config from './config'
 
 const packageRoot = join(__dirname, '../../../packages')
-const mdVariableTitle = `### 主题变量`
+const insertBeginFlag = `<!--- insert less variable begin  --->`
+const insertEndFlag = `<!--- insert less variable end  --->`
 
 async function update() {
   for (const dir of config.dirs ?? []) {
@@ -39,36 +40,42 @@ function getComponentStylePath(dir: string, component: string) {
 }
 
 function getComponentDocsPath(dir: string, component: string) {
-  return join(dir, component, 'docs/Design.zh.md')
+  return join(dir, component, 'docs/Index.zh.md')
 }
 
 /* eslint-disable */
 function getDocsTemplate(variables: string[][]) {
-  return `${mdVariableTitle}
+  const existVariables = variables.filter(variable => variable[0] && variable[1])
+
+  if (existVariables.length === 0) {
+    return ''
+  }
+
+  return `${insertBeginFlag}
+## 主题变量
 
 | 名称 | \`default\` | \`dark\` | 备注 |
 | --- | --- | --- | --- |
-${variables
-  .filter(variable => variable[0] && variable[1])
+${existVariables
   .map(
     variable => `| \`${variable[0]}\` | \`${variable[1]}\` | - | - |
 `,
   )
-  .join('')}`
+  .join('')}${insertEndFlag}`
 }
 /* eslint-enable */
 
 function file2Array(fileContent: string) {
   return fileContent
-    .replace(/\/\*(.|\s)*\*\/|\/\/.*/g, '')
+    .replace(/\/\*(.|\s)*\*\/|\/\/.*/g, '') // 去除注释
     .split(/;\s*/)
     .map(attr => attr.split(/:\s*/).map(item => item.replace(/(^\s*|\s*$|\n|`)/g, ''))) // 去除首尾空格和中间换行
 }
 
 async function appendVariable(target: string, template: string) {
   let targetContent = await readFile(target, 'utf-8')
-  if (targetContent.includes(mdVariableTitle)) {
-    targetContent = targetContent.replace(new RegExp(`${mdVariableTitle}(.|\\s)*(?=(#+)(.*))?`), template) // 匹配md中两个标题之间的内容进行替换
+  if (targetContent.includes(insertBeginFlag)) {
+    targetContent = targetContent.replace(new RegExp(`${insertBeginFlag}(.|\\s)*${insertEndFlag}`), template) // 匹配原有的内容进行替换
     writeFile(target, targetContent, 'utf-8')
   } else {
     appendFile(target, `\n${template}`)

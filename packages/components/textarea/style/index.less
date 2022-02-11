@@ -19,7 +19,7 @@
     background-color: @textarea-background-color;
     border: @textarea-border-width @textarea-border-style @textarea-border-color;
     border-radius: @textarea-border-radius;
-    transition: @transition-all-base;
+    transition: all @transition-duration-base @ease-in-out, height 0s, width 0s;
 
     &[disabled] {
       cursor: not-allowed;
@@ -69,7 +69,7 @@
   &-suffix {
     position: absolute;
     color: @textarea-placeholder-color;
-    transition: @transition-all-base;
+    transition: color @transition-duration-base;
 
     &:hover {
       color: @textarea-color-secondary;

@@ -33,7 +33,7 @@
       &-nav {
         display: flex;
         flex-wrap: nowrap;
-        transition: @transition-all-base;
+        transition: transform @transition-duration-base @ease-in-out;
         transform: translateX(0);
 
         &-tab {
@@ -48,7 +48,7 @@
           white-space: nowrap;
           padding: @tabs-nav-tab-padding;
           background-color: @tabs-nav-background-color;
-          transition: @transition-all-base;
+          transition: all @transition-duration-base @ease-in-out;
 
           &-label {
             display: flex;
@@ -203,7 +203,7 @@
       &-bar {
         position: absolute;
         background-color: @tabs-nav-bar-color;
-        transition: @transition-all-base;
+        transition: left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
         bottom: 0;
         height: @tabs-nav-bar-height;
         border-radius: @tabs-border-radius @tabs-border-radius 0 0;
