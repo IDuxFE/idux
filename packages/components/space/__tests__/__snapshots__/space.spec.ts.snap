@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Space render work 1`] = `
-"<div class=\\"ix-space ix-space-align-center ix-space-justify-start\\" style=\\"margin-bottom: -16px;\\">
+"<div class=\\"ix-space\\" style=\\"margin-bottom: -16px;\\">
   <div class=\\"ix-space-item\\" style=\\"margin-right: 16px; padding-bottom: 16px;\\">Space</div>
   <div class=\\"ix-space-item\\" style=\\"margin-right: 16px; padding-bottom: 16px;\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>
   <div class=\\"ix-space-item\\" style=\\"padding-bottom: 16px;\\"><button class=\\"ix-button ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>
