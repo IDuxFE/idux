@@ -5,7 +5,7 @@
     <IxStepperItem status="process" title="Pay" icon="loading"></IxStepperItem>
     <IxStepperItem status="wait" title="Done">
       <template #icon>
-        <IxIcon name="check-circle" />
+        <IxIcon name="check" />
       </template>
     </IxStepperItem>
   </IxStepper>

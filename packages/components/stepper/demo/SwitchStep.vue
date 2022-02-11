@@ -1,59 +1,41 @@
 <template>
-  <IxStepper :active="active">
-    <IxStepperItem v-for="(item, index) in steps" :key="index" :title="item.title"> </IxStepperItem>
+  <IxStepper :activeKey="active">
+    <IxStepperItem v-for="(item, index) in steps" :key="index + 1" :title="item.title"> </IxStepperItem>
   </IxStepper>
 
   <div class="steps-content">{{ activeContent }}</div>
 
   <IxSpace>
-    <IxButton v-show="active > 0" @click="pre"> Previous </IxButton>
-    <IxButton v-show="active < steps.length - 1" @click="next"> Next </IxButton>
-    <IxButton v-show="active === steps.length - 1" mode="primary" @click="done"> Done </IxButton>
+    <IxButton v-if="active === steps.length" mode="primary" @click="done"> Done </IxButton>
+    <IxButton v-if="active < steps.length" mode="primary" @click="next"> Next </IxButton>
+    <IxButton v-if="active > 1" @click="pre"> Previous </IxButton>
   </IxSpace>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const steps = [
-      {
-        title: 'First',
-        content: 'First-content',
-      },
-      {
-        title: 'Second',
-        content: 'Second-content',
-      },
-      {
-        title: 'Last',
-        content: 'Last-content',
-      },
-    ]
+const steps = [
+  { title: 'First', content: 'First-content' },
+  { title: 'Second', content: 'Second-content' },
+  { title: 'Last', content: 'Last-content' },
+]
 
-    const active = ref(0)
+const active = ref(1)
+const activeContent = computed(() => steps[active.value - 1].content)
 
-    const activeContent = computed(() => steps[active.value].content)
-
-    const pre = () => {
-      active.value -= 1
-    }
-
-    const next = () => {
-      active.value += 1
-    }
-
-    const done = () => {
-      console.log('done')
-    }
-
-    return { steps, active, activeContent, pre, next, done }
-  },
-})
+const pre = () => {
+  active.value -= 1
+}
+const next = () => {
+  active.value += 1
+}
+const done = () => {
+  console.log('done')
+}
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 .steps-content {
   margin: 8px 0;
   padding-top: 40px;

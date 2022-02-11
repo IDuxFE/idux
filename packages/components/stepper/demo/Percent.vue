@@ -1,14 +1,14 @@
 <template>
-  <IxStepper :active="1" :percent="percent">
-    <IxStepperItem title="Finished" subTitle="20:20:01" description="This is a description."></IxStepperItem>
+  <IxStepper :activeKey="2" :percent="percent">
+    <IxStepperItem title="Finished" description="This is a description."></IxStepperItem>
     <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
     <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
   </IxStepper>
 
   <IxSpace style="margin-top: 8px">
-    <IxButton v-show="percent > 0" @click="less"> Less </IxButton>
-    <IxButton v-show="percent < 100" @click="add"> Add </IxButton>
-    <IxButton v-show="percent === 100" mode="primary" @click="done"> Done </IxButton>
+    <IxButton v-if="percent === 100" mode="primary" @click="done"> Done </IxButton>
+    <IxButton v-if="percent < 100" mode="primary" @click="add"> Add </IxButton>
+    <IxButton v-if="percent > 0" @click="less"> Less </IxButton>
   </IxSpace>
 </template>
 

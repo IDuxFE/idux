@@ -5,13 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { StepperProps } from './types'
-import type { InjectionKey, Slots, WritableComputedRef } from 'vue'
+import { type ComputedRef, type InjectionKey, type Slots } from 'vue'
+
+import { type VKey } from '@idux/cdk/utils'
+
+import { type StepperProps } from './types'
 
 export interface StepperContext {
   props: StepperProps
   slots: Slots
-  currActive: WritableComputedRef<number>
+  activeKey: ComputedRef<VKey | undefined>
+  setActiveKey: (value: VKey) => void
 }
 
 export const stepperToken: InjectionKey<StepperContext> = Symbol('stepperToken')
+
+export const stepperItemKey = Symbol('IDUX_STEPPER_ITEM_KEY')

@@ -22,6 +22,7 @@ export type {
   StepperItemInstance,
   StepperItemComponent,
   StepperItemPublicProps as StepperItemProps,
+  StepperLabelPlacement,
   StepperSize,
   StepperStatus,
 } from './src/types'
