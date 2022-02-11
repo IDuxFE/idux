@@ -150,8 +150,11 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
   return mergedOptions
 }
 
-const defaultFilter: SelectFilterFn = (searchValue: string, option: SelectData): boolean => {
-  return option.label?.toLowerCase().includes(searchValue.toLowerCase()) ?? false
+const getDefaultFilter = (props: SelectProps): SelectFilterFn => {
+  return (searchValue: string, option: SelectData) => {
+    const filterField = props.labelKey ?? 'label'
+    return option[filterField]?.toLowerCase().includes(searchValue.toLowerCase()) ?? false
+  }
 }
 
 function useSearchFilter(props: SelectProps) {
@@ -160,6 +163,8 @@ function useSearchFilter(props: SelectProps) {
     if (isFunction(searchFilter)) {
       return searchFilter
     }
-    return searchFilter ? defaultFilter : false
+
+    // #750 配置了labelKey后过滤筛选不生效
+    return searchFilter ? getDefaultFilter(props) : false
   })
 }

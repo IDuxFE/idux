@@ -330,6 +330,35 @@ describe('Select', () => {
       expect(wrapper.findAllComponents(Option).length).toBe(0)
     })
 
+    test('searchFilter with labelKey work', async () => {
+      const wrapper = SelectMount({
+        props: {
+          open: true,
+          searchable: true,
+          options: [
+            { key: 1, name: 'Tom', id: 'tom' },
+            { key: 2, name: 'Jerry', id: 'jerry' },
+            { key: 3, name: 'Speike', id: 'speike' },
+          ],
+          labelKey: 'name',
+          valueKey: 'id',
+        },
+      })
+
+      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
+
+      const input = wrapper.find('input')
+      await input.setValue('T')
+
+      expect(wrapper.findAllComponents(Option).length).toBe(1)
+
+      await input.setValue('e')
+      expect(wrapper.findAllComponents(Option).length).toBe(2)
+
+      await input.setValue('z')
+      expect(wrapper.findAllComponents(Option).length).toBe(0)
+    })
+
     test('size work', async () => {
       const wrapper = SelectMount({ props: { size: 'lg' } })
 
