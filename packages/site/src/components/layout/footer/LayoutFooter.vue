@@ -6,7 +6,7 @@
       </LayoutFooterCol>
       <div class="footer-logo">
         <img alt="logo" src="/icons/logo.svg" />
-        <span class="footer-logo-title">iDUX</span>
+        <span class="footer-logo-title">iDux</span>
         <span>Made with ❤ by IDuxFE</span>
       </div>
     </section>

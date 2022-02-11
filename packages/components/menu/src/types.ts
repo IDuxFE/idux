@@ -29,7 +29,7 @@ export const menuProps = {
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
-  selectable: IxPropTypes.bool,
+  selectable: IxPropTypes.bool.def(true),
   target: ɵPortalTargetDef,
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
   overlayClassName: IxPropTypes.string,

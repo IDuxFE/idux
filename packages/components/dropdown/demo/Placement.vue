@@ -3,40 +3,41 @@
     <IxDropdown placement="bottomStart">
       <IxButton>BS</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
     <IxDropdown placement="bottom">
       <IxButton>Bottom</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
     <IxDropdown placement="bottomEnd">
       <IxButton>BE</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
   </IxSpace>
+  <br />
   <br />
   <IxSpace>
     <IxDropdown placement="topStart">
       <IxButton>TS</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
     <IxDropdown placement="top">
       <IxButton>Top</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
     <IxDropdown placement="topEnd">
       <IxButton>TE</IxButton>
       <template #overlay>
-        <IxMenu :dataSource="dataSource"></IxMenu>
+        <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
     </IxDropdown>
   </IxSpace>

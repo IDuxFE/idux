@@ -1,7 +1,7 @@
 export const homeLocales = {
   zh: {
     videoErr: '您的浏览器不支持 video 标签。',
-    bannerTitle: 'iDUX',
+    bannerTitle: 'iDux',
     bannerTitleDesc: '更懂程序员的 UI 组件库',
     start: '开 始 使 用',
     github: 'GitHub',
@@ -46,7 +46,7 @@ export const homeLocales = {
   },
   en: {
     videoErr: '您的浏览器不支持 video 标签。',
-    bannerTitle: 'iDUX',
+    bannerTitle: 'iDux',
     bannerTitleDesc: '更懂程序员的 UI 组件库',
     start: '开 始 使 用',
     github: 'GitHub',
