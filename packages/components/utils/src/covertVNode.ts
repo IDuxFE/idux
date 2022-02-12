@@ -34,9 +34,9 @@ export function covertIconVNode(slots: Slot | Slots | undefined, props: unknown,
   return isString(iconName) ? createVNode(IxIcon, { name: iconName }, null) : iconName
 }
 
-export function covertLabelVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
-export function covertLabelVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
-export function covertLabelVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
+export function covertStringVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
+export function covertStringVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
+export function covertStringVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
   let labelSlot: Slot | undefined
   let label: string | VNode | undefined
   if (key) {

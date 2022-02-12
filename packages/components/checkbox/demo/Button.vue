@@ -1,22 +1,21 @@
 <template>
   <IxSpace vertical>
-    <IxCheckboxGroup v-model:value="value" buttoned>
-      <IxCheckbox value="beijing">Beijing</IxCheckbox>
-      <IxCheckbox value="shanghai">Shanghai</IxCheckbox>
-      <IxCheckbox value="guangzhou">Guangzhou</IxCheckbox>
-      <IxCheckbox value="shenzhen">Shenzhen</IxCheckbox>
-    </IxCheckboxGroup>
-    <IxCheckboxGroup v-model:value="value" buttoned disabled>
-      <IxCheckbox value="beijing">Beijing</IxCheckbox>
-      <IxCheckbox value="shanghai">Shanghai</IxCheckbox>
-      <IxCheckbox value="guangzhou">Guangzhou</IxCheckbox>
-      <IxCheckbox value="shenzhen">Shenzhen</IxCheckbox>
-    </IxCheckboxGroup>
+    <IxCheckboxGroup v-model:value="value" buttoned :dataSource="dataSource"></IxCheckboxGroup>
+    <IxCheckboxGroup v-model:value="value" buttoned :dataSource="dataSource" disabled></IxCheckboxGroup>
   </IxSpace>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { CheckboxData } from '@idux/components/checkbox'
+
 const value = ref(['beijing'])
+
+const dataSource: CheckboxData[] = [
+  { label: 'Beijing', value: 'beijing' },
+  { label: 'Shanghai', value: 'shanghai' },
+  { label: 'Guangzhou', value: 'guangzhou' },
+  { label: 'Shenzhen', value: 'shenzhen' },
+]
 </script>

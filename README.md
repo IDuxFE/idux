@@ -58,9 +58,9 @@ See [Getting Started](https://idux.site/docs/getting-started/en) for more detail
 ## ⌨️ Development
 
 ```bash
-npm install
+pnpm install
 
-npm start
+pnpm start
 ```
 
 Open a browser: `http://localhost:3000`
