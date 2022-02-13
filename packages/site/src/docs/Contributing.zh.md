@@ -65,7 +65,7 @@ order: 11
 ## 开发流程
 
 - clone fork 后的仓库
-- 安装依赖：`npm install` 或 `yarn`
+- 安装依赖：`pnpm install`
 - 常用的命令：
   - `npm start` 在本地运行文档网站。
   - `npm run lint` 检查代码风格(tips: 使用 `npm run lint-fix` 可以修复简单格式错误)。
@@ -75,6 +75,7 @@ order: 11
 ## 代码风格
 
 我们使用了 `eslint`, `stylelint`, `markdownlint` 以及 `ls-lint` 来保证整体的代码风格一致。并且在 commit hooks 中配置了自动格式化和 lint, 只要提交通过即可。
+
 ## Commit
 
 对于如何提交 git commit message，我们有非常精确的规则。我们希望所有的 commit message 更具可读性，这样在查看项目历史记录会变得容易，同时我们使用 commit message 生成 Changelog.

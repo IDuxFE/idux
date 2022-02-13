@@ -9,9 +9,7 @@
       "registry": "https://registry.npmjs.org"
     },
     "bootstrap": {
-      "ignore": "",
-      "hoist": true,
-      "npmClientArgs": ["--no-package-lock"]
+      "npmClient": "pnpm"
     }
   }
 }

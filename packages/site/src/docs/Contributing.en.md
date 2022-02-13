@@ -65,7 +65,7 @@ The `IDuxFE` team will pay attention to all Pull Requests. We will review and me
 ## Development Process
 
 - clone the fork repository;
-- install dependencies with `npm i` or `yarn`;
+- install dependencies with `pnpm install`;
 - commonly used commands:
   - `npm start` Run the documentation website locally;
   - `npm run lint` Check code style(tips: run `npm run lint-fix` Can fix simple format errors);
