@@ -27,8 +27,9 @@ const list = [
 }
 
 .custom-dot {
-  width: 16px;
-  height: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
   background-color: #fff;
 }
 </style>

@@ -38,3 +38,25 @@ subtitle: 锚点
 | 名称 | 说明 | 参数类型 | 备注 |
 |  --- | --- | --- | --- |
 | `default` | 支持 `IxAnchorLink` 的嵌套 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@anchor-background-color` | `@background-color-component` | - | - |
+| `@anchor-wrapper-margin-left` | `-@spacing-xs` | - | - |
+| `@anchor-wrapper-padding-left` | `@spacing-xs` | - | - |
+| `@anchor-color` | `@text-color` | - | - |
+| `@anchor-border-width` | `@border-width-md` | - | - |
+| `@anchor-border-color` | `@border-color` | - | - |
+| `@anchor-ink-ball-width` | `1px` | - | - |
+| `@anchor-ink-ball-height` | `16px` | - | - |
+| `@anchor-ink-ball-radius` | `2px` | - | - |
+| `@anchor-ink-ball-border-width` | `@border-width-sm` | - | - |
+| `@anchor-ink-line-border-width` | `@border-width-md` | - | - |
+| `@anchor-link-margin` | `@spacing-md 0 @spacing-md @spacing-lg` | - | - |
+| `@anchor-link-font-size` | `@font-size-md` | - | - |
+| `@anchor-link-line-height` | `1` | - | - |
+| `@anchor-link-active-color` | `@color-primary` | - | - |
+<!--- insert less variable end  --->

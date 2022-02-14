@@ -11,7 +11,7 @@
     margin-left: @anchor-wrapper-margin-left;
     padding-left: @anchor-wrapper-padding-left;
     overflow: auto;
-    background-color: @anchor-bg;
+    background-color: @anchor-background-color;
   }
 
   &-ink {
@@ -36,7 +36,7 @@
       display: none;
       width: @anchor-ink-ball-width;
       height: @anchor-ink-ball-height;
-      background-color: @anchor-bg;
+      background-color: @anchor-background-color;
       border: @anchor-ink-ball-border-width solid @anchor-link-active-color;
       border-radius: @anchor-ink-ball-radius;
       transform: translateX(-50%);
@@ -64,8 +64,8 @@
       font-size: @anchor-link-font-size;
       color: @anchor-color;
       text-decoration: none;
-      transition: all @transition-duration-base;
-      
+      transition: @transition-all-base;
+
       &-active {
         color: @anchor-link-active-color;
       }

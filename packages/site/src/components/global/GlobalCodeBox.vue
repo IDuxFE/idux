@@ -113,7 +113,7 @@ export default defineComponent({
     background-color: @background-color-component;
     border: 1px @border-style @border-color-split;
     border-radius: @border-radius-md;
-    transition: all 0.3s;
+    transition: @transition-all-base;
 
     &-title h3 {
       margin-bottom: 0;

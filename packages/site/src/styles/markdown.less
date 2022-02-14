@@ -16,6 +16,7 @@
 .markdown h1 {
   margin-bottom: @spacing-lg;
   font-size: @font-size-3xl;
+
   .subtitle {
     margin-left: @spacing-md;
   }
@@ -72,6 +73,11 @@
   margin: @spacing-md 0;
 }
 
+.markdown ol > li {
+  margin-left: @spacing-xl;
+  list-style-type: decimal;
+}
+
 .markdown ul > li {
   margin-left: @spacing-xl;
   list-style-type: circle;
@@ -81,9 +87,8 @@
   }
 }
 
-.markdown ol > li {
-  margin-left: @spacing-xl;
-  list-style-type: decimal;
+.markdown blockquote p {
+  margin: 0;
 }
 
 .markdown ul > li > p,
@@ -120,7 +125,7 @@
   color: #5c6b77;
   font-weight: @font-weight-lg;
   white-space: nowrap;
-  background: rgba(0, 0, 0, 0.02);
+  background: rgb(0 0 0 / 2%);
 }
 
 .markdown > table th,
@@ -133,13 +138,9 @@
 .markdown blockquote {
   margin: @spacing-lg 0;
   padding-left: @spacing-md;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgb(0 0 0 / 45%);
   font-size: @font-size-md - 1px;
   border-left: @border-width-lg @border-style @border-color-split;
-}
-
-.markdown blockquote p {
-  margin: 0;
 }
 
 .markdown > br,

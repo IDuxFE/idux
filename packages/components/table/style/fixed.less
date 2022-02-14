@@ -7,7 +7,7 @@
       z-index: 2;
 
       td& {
-        background: @table-background;
+        background-color: @table-background-color;
       }
     }
   }
@@ -20,7 +20,7 @@
     bottom: -1px;
     width: 30px;
     transform: translate(100%);
-    transition: box-shadow 0.3s;
+    transition: box-shadow @transition-duration-base;
     content: '';
     pointer-events: none;
   }
@@ -33,7 +33,7 @@
     left: 0;
     width: 30px;
     transform: translate(-100%);
-    transition: box-shadow 0.3s;
+    transition: box-shadow @transition-duration-base;
     content: '';
     pointer-events: none;
   }

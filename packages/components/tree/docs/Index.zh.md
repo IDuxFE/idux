@@ -109,3 +109,25 @@ export type TreeDropType = 'before' | 'inside' | 'after'
 | `blur` | 失去焦点 | - | - |
 | `focus` | 获取焦点 | - | - |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@tree-node-prefix` | `~'@{tree-prefix}-node'` | - | - |
+| `@tree-background-color` | `@background-color-component` | - | - |
+| `@tree-background-color-focused` | `@background-color-selected-light` | - | - |
+| `@tree-box-shadow-size` | `2px` | - | - |
+| `@tree-box-shadow-color` | `@color-primary-l20` | - | - |
+| `@tree-node-disabled-color` | `@text-color-disabled` | - | - |
+| `@tree-node-hover-background-color` | `@color-graphite-l50` | - | - |
+| `@tree-node-selected-background-color` | `@color-graphite-l40` | - | - |
+| `@tree-node-line-width` | `1px` | - | - |
+| `@tree-node-line-border` | `1px dashed @border-color` | - | - |
+| `@tree-node-padding-vertical` | `(@spacing-xs / 2)` | - | - |
+| `@tree-node-checkbox-margin` | `0 @spacing-sm 0 @spacing-xs` | - | - |
+| `@tree-node-content-height` | `@height-sm` | - | - |
+| `@tree-node-content-label-padding` | `0 @spacing-xs` | - | - |
+| `@tree-node-content-label-highlight-color` | `@color-primary` | - | - |
+<!--- insert less variable end  --->

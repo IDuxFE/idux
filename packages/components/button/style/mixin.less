@@ -1,5 +1,4 @@
-@button-primary-border: color(~`colorPalette('@{button-primary-bg}', 10) `);
-@button-danger-border: color(~`colorPalette('@{button-danger-bg}', 10) `);
+@button-danger-border: color(~`colorPalette('@{button-danger-background-color}', 10) `);
 
 .button-size(@height; @font-size; @spacing-horizontal; @border-radius) {
   @spacing-vertical: max(
@@ -13,7 +12,7 @@
   border-radius: @border-radius;
 }
 
-.button-disabled(@color: @button-disable-color; @background: @button-disable-bg-color; @border: @button-disable-border) {
+.button-disabled(@color: @button-disable-color; @background: @button-disable-background-color; @border: @button-disable-border-color) {
   &.@{button-prefix}-disabled {
     &,
     &:hover,
@@ -35,14 +34,14 @@
 
   &:hover {
     & when (@theme = default) {
-      .button-color(@color; ~`colorPalette('@{background}', -10) `; @background);
+      .button-color(@color; ~`colorPalette('@{background}', -10) `; ~`colorPalette('@{border}', -10)`);
     }
   }
 
   &:focus,
   &:active {
     & when (@theme = default) {
-      .button-color(@color; ~`colorPalette('@{background}', 10) `; ~`colorPalette('@{background}', 20) `);
+      .button-color(@color; ~`colorPalette('@{background}', 10) `; ~`colorPalette('@{border}', 10)`);
     }
   }
 
@@ -54,14 +53,14 @@
 
   &:hover {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-primary-bg}', -10) `; @background; @button-primary-bg);
+      .button-color(~`colorPalette('@{button-primary-background-color}', -10) `; @background; @button-primary-background-color);
     }
   }
 
   &:focus,
   &:active {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-primary-bg}', 10) `; @background; ~`colorPalette('@{button-primary-bg}', 20) `);
+      .button-color(~`colorPalette('@{button-primary-background-color}', 10) `; @background; ~`colorPalette('@{button-primary-background-color}', 20) `);
     }
   }
   .button-disabled();
@@ -128,7 +127,7 @@
   border: @button-border-size @button-border-style transparent;
   box-shadow: @button-shadow;
   cursor: pointer;
-  transition: all 0.3s @ease-in-out;
+  transition: all @transition-duration-base @ease-in-out;
   user-select: none;
   touch-action: manipulation;
 
@@ -160,22 +159,22 @@
 }
 
 .button-default() {
-  .button-variant-other(@button-default-color; @button-default-bg; @button-default-border);
+  .button-variant-other(@button-default-color; @button-default-background-color; @button-default-border-color);
 
   &:hover,
   &:focus,
   &:active {
     text-decoration: none;
-    background: @button-default-bg;
+    background: @button-default-background-color;
   }
 }
 
 .button-primary() {
-  .button-variant-primary(@button-primary; @button-primary-bg; @button-primary-border);
+  .button-variant-primary(@button-primary; @button-primary-background-color; @button-primary-border-color);
 }
 
 .button-dashed() {
-  .button-variant-other(@button-default-color, @button-default-bg, @button-default-border);
+  .button-variant-other(@button-default-color, @button-default-background-color, @button-default-border-color);
 
   border-style: dashed;
 }
@@ -188,13 +187,13 @@
   &:hover,
   &:focus {
     color: @button-text-color;
-    background: @button-text-hover-bg;
+    background: @button-text-hover-background-color;
     border-color: transparent;
   }
 
   &:active {
     color: @button-text-color;
-    background: fadein(@button-text-hover-bg, 1%);
+    background: fadein(@button-text-hover-background-color, 1%);
     border-color: transparent;
   }
   .button-disabled(@button-disable-color; transparent; transparent);
@@ -206,7 +205,7 @@
   box-shadow: none;
 
   &:hover {
-    background: @button-link-hover-bg;
+    background: @button-link-hover-background-color;
   }
 
   &:hover,
@@ -218,25 +217,25 @@
 }
 
 .button-danger() {
-  .button-color(@button-danger-color, @button-default-bg, @button-danger-border);
+  .button-color(@button-danger-color, @button-default-background-color, @button-danger-border-color);
 
   &:hover {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-default-bg; @button-danger-color);
+      .button-color(@button-danger-hover-color, @button-default-background-color, @button-danger-hover-border-color);
     }
   }
 
   &:focus,
   &:active {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-danger-color}', 10) `; @button-default-bg; ~`colorPalette('@{button-danger-color}', 20) `);
+      .button-color(@button-danger-active-color, @button-default-background-color, @button-danger-active-border-color);
     }
   }
   .button-disabled();
 }
 
 .button-danger-primary() {
-  .button-variant-primary(@button-primary, @button-danger-bg, @button-danger-border);
+  .button-variant-primary(@button-primary, @button-danger-background-color, @button-danger-border-color);
 }
 
 .button-danger-text() {
@@ -246,14 +245,14 @@
 
   &:hover {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-text-hover-bg; transparent);
+      .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-text-hover-background-color; transparent);
     }
   }
 
   &:focus,
   &:active {
     & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-danger-color}', 10) `; fadein(@button-text-hover-bg, 1%); transparent);
+      .button-color(~`colorPalette('@{button-danger-color}', 10) `; fadein(@button-text-hover-background-color, 1%); transparent);
     }
   }
   .button-disabled(@button-disable-color; transparent; transparent);
@@ -280,19 +279,19 @@
 }
 
 .button-ghost() {
-  .button-color(@button-ghost-color; @button-ghost-bg; @button-ghost-border);
-  .button-variant-ghost(@button-primary-border);
+  .button-color(@button-ghost-color; @button-ghost-background-color; @button-ghost-border-color);
+  .button-variant-ghost(@button-primary-border-color);
   .button-disabled();
 }
 
 .button-ghost-primary() {
-  .button-color(@button-primary-border; @button-ghost-bg; @button-primary-border);
-  .button-variant-ghost(@button-primary-border);
+  .button-color(@button-primary-border-color; @button-ghost-background-color; @button-primary-border-color);
+  .button-variant-ghost(@button-primary-border-color);
   .button-disabled();
 }
 
 .button-ghost-danger() {
-  .button-color(@button-danger-color; @button-ghost-bg; @button-danger-color);
+  .button-color(@button-danger-color; @button-ghost-background-color; @button-danger-color);
   .button-variant-ghost(@button-danger-border);
   .button-disabled();
 }

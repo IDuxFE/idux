@@ -28,9 +28,3 @@ subtitle: 输入框
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
-
-### 主题变量
-
-<!-- TODO -->
-| 变量名 | default 主题| 说明 |
-| --- | --- | --- |

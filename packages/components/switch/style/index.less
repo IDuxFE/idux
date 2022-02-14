@@ -10,9 +10,9 @@
   cursor: pointer;
   font-size: @switch-font-size;
   color: @switch-color;
-  background: @switch-background-color;
+  background-color: @switch-background-color;
   border-radius: @switch-border-radius;
-  transition: @switch-transition;
+  transition: all @transition-duration-base @ease-in-out;
 
   &::after {
     position: absolute;
@@ -21,7 +21,7 @@
     border-radius: @switch-border-radius;
     background-color: @switch-box-background-color;
     box-shadow: @switch-box-box-shadow;
-    transition: @switch-transition;
+    transition: all @transition-duration-base @ease-in-out;
     content: ' ';
   }
 

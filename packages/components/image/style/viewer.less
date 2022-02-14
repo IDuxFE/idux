@@ -9,7 +9,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: @image-viewer-bg-color;
+  background-color: @image-viewer-background-color;
   user-select: none;
   z-index: @image-viewer-z-index;
 
@@ -26,7 +26,7 @@
     height: @image-viewer-opr-height;
     color: @image-viewer-opr-color;
     font-size: @image-viewer-opr-font-size;
-    background-color: @image-viewer-opr-bg-color;
+    background-color: @image-viewer-opr-background-color;
 
     &-item {
       margin: @image-viewer-opr-item-margin;
@@ -47,7 +47,7 @@
     justify-content: center;
 
     &-img {
-      transition: all .3s;
+      transition: @transition-all-base;
       will-change: transform;
       max-height: @image-viewer-preview-img-max-height;
       max-width: @image-viewer-preview-img-max-width;

@@ -314,10 +314,10 @@ const message: MessageConfig = {
   duration: 3000,
   maxCount: 5,
   icon: {
-    success: 'check-circle',
-    error: 'close-circle',
-    info: 'info-circle',
-    warning: 'exclamation-circle',
+    success: 'check-circle-filled',
+    error: 'close-circle-filled',
+    info: 'info-circle-filled',
+    warning: 'exclamation-circle-filled',
     loading: 'loading',
   },
 }

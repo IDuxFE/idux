@@ -6,6 +6,7 @@
   display: inline-block;
   line-height: unset;
   list-style: none;
+  outline: none;
   color: @rate-active-color;
 
   &-item {
@@ -19,7 +20,7 @@
     }
 
     > span {
-      transition: @rate-transition;
+      transition: all @transition-duration-base @ease-in-out;
 
       &:hover,
       &:focus-visible {
@@ -38,7 +39,7 @@
     &-first,
     &-second {
       color: @rate-placeholder-color;
-      transition: @rate-transition;
+      transition: all @transition-duration-base @ease-in-out;
       user-select: none;
     }
 

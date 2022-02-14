@@ -1,6 +1,6 @@
 .@{menu-prefix} {
   color: @menu-text-color;
-  background-color: @menu-bg-color;
+  background-color: @menu-background-color;
   transition: background-color @transition-duration-slow, width @transition-duration-slow;
 
   a {
@@ -33,7 +33,7 @@
 
     &:hover,
     &:active {
-      background-color: @menu-highlight-bg-color;
+      background-color: @menu-highlight-background-color;
     }
 
     .@{icon-prefix} + span {
@@ -91,12 +91,12 @@
   &-item&-item-disabled,
   &-sub-disabled > &-sub-label {
     color: @menu-disabled-color;
-    background-color: @menu-disabled-bg-color;
+    background-color: @menu-disabled-background-color;
     cursor: not-allowed;
 
     &:hover,
     &:active {
-      background-color: @menu-disabled-bg-color;
+      background-color: @menu-disabled-background-color;
     }
 
     a {
@@ -108,7 +108,7 @@
   &-overlay {
     z-index: @menu-overlay-zindex;
     min-width: @menu-overlay-min-width;
-    background-color: @menu-bg-color;
+    background-color: @menu-background-color;
     border-radius: @menu-overlay-border-radius;
     box-shadow: @menu-overlay-box-shadow;
     transition: background-color @transition-duration-slow, width @transition-duration-slow;

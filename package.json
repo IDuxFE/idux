@@ -9,6 +9,7 @@
     "build": "gulp build --gulpfile ./scripts/gulp/gulpfile.ts",
     "icons": "gulp icons --gulpfile ./scripts/gulp/gulpfile.ts",
     "gen": "ts-node scripts/gen/generate.ts",
+    "less-variable-update": "ts-node scripts/gen/style-variable/update.ts",
     "prepare": "husky install",
     "postinstall": "lerna bootstrap",
     "version": "lerna version --conventional-commits",

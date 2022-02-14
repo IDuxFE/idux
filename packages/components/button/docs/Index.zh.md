@@ -37,4 +37,55 @@ subtitle: 按钮
 | `shape` | 设置组内按钮形状 | `'circle' \| 'round'` | - | - |- |
 | `size` | 设置组内按钮大小 | `'lg' \| 'md' \| 'sm'` | - | - |- |
 
-### 主题变量
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@button-zindex` | `@zindex-l1-1` | - | - |
+| `@button-font-weight` | `@font-weight-md` | - | - |
+| `@button-line-height` | `@line-height-base` | - | - |
+| `@button-height-sm` | `@height-sm` | - | - |
+| `@button-height-md` | `@height-md` | - | - |
+| `@button-height-lg` | `@height-lg` | - | - |
+| `@button-font-size-sm` | `@font-size-md` | - | - |
+| `@button-font-size-md` | `@font-size-md` | - | - |
+| `@button-font-size-lg` | `@font-size-lg` | - | - |
+| `@button-padding-sm` | `@spacing-sm` | - | - |
+| `@button-padding-md` | `@spacing-md` | - | - |
+| `@button-padding-lg` | `@spacing-lg` | - | - |
+| `@button-icon-margin-left` | `@spacing-xs` | - | - |
+| `@button-border-style` | `@border-style` | - | - |
+| `@button-border-size` | `@border-width-sm` | - | - |
+| `@button-border-radius` | `@border-radius-sm` | - | - |
+| `@button-shadow` | `0 2px 0 rgba(0, 0, 0, 0.015)` | - | - |
+| `@button-disable-color` | `@text-color-disabled` | - | - |
+| `@button-disable-background-color` | `@background-color-disabled` | - | - |
+| `@button-disable-border-color` | `@border-color` | - | - |
+| `@button-primary` | `@color-white` | - | - |
+| `@button-primary-background-color` | `@color-primary` | - | - |
+| `@button-primary-border-color` | `@color-primary` | - | - |
+| `@button-primary-text-shadow` | `0 -1px 0 rgba(0, 0, 0, 0.15)` | - | - |
+| `@button-primary-box-shadow` | `0 2px 0 rgba(0, 0, 0, 0.045)` | - | - |
+| `@button-default-color` | `@text-color` | - | - |
+| `@button-default-background-color` | `@background-color-component` | - | - |
+| `@button-default-border-color` | `@border-color` | - | - |
+| `@button-danger-color` | `@color-error` | - | - |
+| `@button-danger-border-color` | `@color-error` | - | - |
+| `@button-danger-hover-color` | `@color-error-l10` | - | - |
+| `@button-danger-hover-border-color` | `@color-error-l10` | - | - |
+| `@button-danger-active-color` | `@color-error-d10` | - | - |
+| `@button-danger-active-border-color` | `@color-error-d10` | - | - |
+| `@button-danger-background-color` | `@color-error` | - | - |
+| `@button-ghost-color` | `@background-color-component` | - | - |
+| `@button-ghost-background-color` | `transparent` | - | - |
+| `@button-ghost-border-color` | `@background-color-component` | - | - |
+| `@button-link-color` | `@color-primary` | - | - |
+| `@button-link-hover-color` | `@color-primary-l10` | - | - |
+| `@button-link-active-color` | `@color-primary-d10` | - | - |
+| `@button-link-hover-background-color` | `transparent` | - | - |
+| `@button-text-color` | `@text-color` | - | - |
+| `@button-text-hover-color` | `@color-primary-l10` | - | - |
+| `@button-text-active-color` | `@color-primary-d10` | - | - |
+| `@button-text-hover-background-color` | `rgba(0, 0, 0, 0.12)` | - | - |
+<!--- insert less variable end  --->

@@ -29,3 +29,19 @@ order: 0
 | `defalut` | 自定义内容 | - | - |
 | `prefix`   | 自定义前缀 | - | - |
 | `suffix`   | 自定义后缀 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@statistic-font-size-sm` | `@font-size-md` | - | - |
+| `@statistic-font-size-md` | `@font-size-md` | - | - |
+| `@statistic-font-size-lg` | `@font-size-xl` | - | - |
+| `@statistic-font-size-xl` | `@font-size-2xl` | - | - |
+| `@statistic-line-height` | `@line-height-base` | - | - |
+| `@statistic-color` | `@color-black` | - | - |
+| `@statistic-title-margin` | `@space-margin-lg` | - | - |
+| `@statistic-prefix-margin` | `@spacing-xs` | - | - |
+| `@statistic-suffix-margin` | `@spacing-xs` | - | - |
+<!--- insert less variable end  --->

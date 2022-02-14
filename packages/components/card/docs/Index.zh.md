@@ -49,3 +49,29 @@ export interface CardButtonProps extends ButtonProps {
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | - | - | 未设置时，会使用父组件的 `hoverable` |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@card-padding-sm` | `@spacing-md` | - | - |
+| `@card-padding-md` | `@spacing-lg` | - | - |
+| `@card-padding-lg` | `@spacing-xl` | - | - |
+| `@card-color` | `@text-color` | - | - |
+| `@card-background-color` | `@background-color-component` | - | - |
+| `@card-border-width` | `@border-width-sm` | - | - |
+| `@card-border-style` | `@border-style` | - | - |
+| `@card-border-color` | `@color-graphite-l30` | - | - |
+| `@card-border-color-hover` | `transparent` | - | - |
+| `@card-border-radius` | `@border-radius-sm` | - | - |
+| `@card-box-shadow` | `@shadow-bottom-sm` | - | - |
+| `@card-gradient-min` | `fade(@color-grey, 20%)` | - | - |
+| `@card-gradient-max` | `fade(@color-grey, 60%)` | - | - |
+| `@card-header-padding` | `@spacing-sm` | - | - |
+| `@card-loading-spacing` | `@spacing-xs` | - | - |
+| `@card-loading-height` | `@font-size-md` | - | - |
+| `@card-loading-background-size` | `600%` | - | - |
+| `@card-loading-transition-duration` | `2s` | - | - |
+| `@card-grid-width` | `25%` | - | - |
+<!--- insert less variable end  --->

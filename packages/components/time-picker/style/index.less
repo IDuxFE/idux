@@ -26,7 +26,7 @@
   border-radius: @time-picker-border-radius;
   background-color: @time-picker-background-color;
   cursor: pointer;
-  transition: all @time-picker-transition-duration @time-picker-transition-function;
+  transition: all @transition-duration-base @ease-in-out;
 
   @icon-padding: @time-picker-icon-margin-left + @time-picker-icon-margin-right;
 
@@ -78,7 +78,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    transition: opacity @time-picker-transition-duration @time-picker-transition-function;
+    transition: opacity @transition-duration-base @ease-in-out;
   }
 
   &-suffix {

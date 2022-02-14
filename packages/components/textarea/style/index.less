@@ -4,6 +4,7 @@
 
 .@{textarea-prefix} {
   .reset-component();
+  .reset-scroll();
 
   position: relative;
   display: inline-block;
@@ -18,7 +19,7 @@
     background-color: @textarea-background-color;
     border: @textarea-border-width @textarea-border-style @textarea-border-color;
     border-radius: @textarea-border-radius;
-    transition: all @textarea-transition-duration @textarea-transition-function, height 0s, width 0s;
+    transition: all @transition-duration-base @ease-in-out, height 0s, width 0s;
 
     &[disabled] {
       cursor: not-allowed;
@@ -68,7 +69,7 @@
   &-suffix {
     position: absolute;
     color: @textarea-placeholder-color;
-    transition: color @textarea-transition-duration;
+    transition: color @transition-duration-base;
 
     &:hover {
       color: @textarea-color-secondary;
@@ -80,9 +81,13 @@
   }
 
   &-with-count::after {
-    display: block;
+    position: absolute;
+    bottom: @textarea-count-bottom;
+    right: @textarea-count-right;
     text-align: right;
-    color: @textarea-placeholder-color;
+    color: @textarea-count-color;
+    background-color: #fff;
+    opacity: @textarea-count-opacity;
     content: attr(data-count);
   }
 }

@@ -3,12 +3,12 @@
 .@{tree-prefix} {
   .reset-component();
 
-  background: @tree-background;
+  background-color: @tree-background-color;
   border-radius: @border-radius-sm;
-  transition: @tree-transition;
+  transition: background-color @transition-duration-base;
 
   &-focused:not(:hover):not(&-active) {
-    background: @tree-background-focused;
+    background-color: @tree-background-color-focused;
   }
 
   &-blocked {
@@ -40,7 +40,7 @@
           right: 50%;
           border-right: @tree-node-line-border;
         }
-        
+
         &::after {
           position: absolute;
           width: (@tree-node-content-height / 4);
@@ -66,7 +66,7 @@
         }
       }
     }
-    
+
     .@{tree-node-prefix}-indent {
       align-self: stretch;
       white-space: nowrap;
@@ -157,7 +157,7 @@
     cursor: pointer;
     min-height: @tree-node-content-height;
     line-height: @tree-node-content-height;
-    transition: @tree-transition;
+    transition: background-color @transition-duration-base;
 
     &:hover {
       background-color: @tree-node-hover-background-color;

@@ -169,7 +169,7 @@ describe('Notification', () => {
     await flushPromises()
 
     expect(wrapper.find(`.${notificationWrapCls}`).classes()).toContain(`${notificationWrapCls}-info`)
-    expect(wrapper.find('.ix-icon-info-circle').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-info-circle-filled').exists()).toBe(true)
   })
 
   test('title work', async () => {

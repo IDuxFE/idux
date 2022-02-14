@@ -30,3 +30,18 @@ order: 0
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `overlay` | 悬浮菜单, 传入一个 `IxMenu` 组件 | - | - |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@dropdown-menu-item-height` | `@height-md` | - | - |
+| `@dropdown-menu-item-margin` | `0` | - | - |
+| `@dropdown-overlay-arrow-color` | `@background-color-component` | - | - |
+| `@dropdown-overlay-zindex` | `@menu-overlay-zindex` | - | - |
+| `@dropdown-overlay-min-width` | `@menu-overlay-min-width` | - | - |
+| `@dropdown-overlay-background-color` | `@menu-background-color` | - | - |
+| `@dropdown-overlay-border-radius` | `@menu-overlay-border-radius` | - | - |
+| `@dropdown-overlay-box-shadow` | `@menu-overlay-box-shadow` | - | - |
+<!--- insert less variable end  --->

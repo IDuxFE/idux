@@ -16,14 +16,14 @@
       line-height: @date-picker-panel-header-height - @date-picker-panel-border-width;
       border-bottom: @date-picker-panel-border-width @date-picker-panel-border-style @date-picker-panel-border-color;
       color: @date-picker-panel-color;
-      transition: color @date-picker-panel-transition-duration;
+      transition: color @transition-duration-base;
 
       > * {
         flex: none;
       }
 
       button {
-        transition: color @date-picker-panel-transition-duration;
+        transition: color @transition-duration-base;
 
         &:hover {
           color: @date-picker-panel-active-color;
@@ -93,7 +93,7 @@
         z-index: 1;
         height: @date-picker-panel-cell-size;
         transform: translateY(-50%);
-        transition: all @date-picker-panel-transition-duration;
+        transition: @transition-all-base;
         content: '';
       }
 
@@ -109,7 +109,7 @@
         height: @date-picker-panel-cell-size;
         line-height: @date-picker-panel-cell-size;
         border-radius: @date-picker-panel-cell-border-radius;
-        transition: background @date-picker-panel-transition-duration, border @date-picker-panel-transition-duration;
+        transition: background @transition-duration-base, border @transition-duration-base;
       }
 
       &:hover:not(&-selected) {

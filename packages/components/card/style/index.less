@@ -5,9 +5,10 @@
 
   position: relative;
   color: @card-color;
-  background: @card-bg-color;
+  background-color: @card-background-color;
   border: @card-border-width @card-border-style @card-border-color;
   border-radius: @card-border-radius;
+  overflow: hidden;
 
   &-borderless {
     border: none;
@@ -15,7 +16,7 @@
 
   &-hoverable {
     cursor: pointer;
-    transition: all @card-transition-duration;
+    transition: @transition-all-base;
 
     &:hover {
       border-color: @card-border-color-hover;
@@ -91,7 +92,7 @@
     height: @card-loading-height;
     margin: @card-loading-spacing 0;
     background: linear-gradient(90deg, @card-gradient-min, @card-gradient-max, @card-gradient-min);
-    background-size: @card-loading-bg-size @card-loading-bg-size;
+    background-size: @card-loading-background-size @card-loading-background-size;
     border-radius: @card-border-radius;
     animation: card-loading @card-loading-transition-duration ease infinite;
   }
@@ -108,7 +109,7 @@
       0 @card-border-width 0 0 @card-border-color inset;
 
     &-hoverable {
-      transition: all @card-transition-duration;
+      transition: @transition-all-base;
 
       &:hover {
         box-shadow: @card-box-shadow;

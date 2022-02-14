@@ -43,7 +43,7 @@
       background-color: @radio-background-color;
       border: @radio-border-width @radio-border-style @radio-border-color;
       border-radius: @radio-box-border-radius;
-      transition: @radio-transition;
+      transition: all @transition-duration-base @ease-in-out;
 
       &::after {
         position: absolute;
@@ -55,7 +55,7 @@
         border-radius: @radio-dot-size;
         transform: scale(0);
         opacity: 0;
-        transition: @radio-transition;
+        transition: all @transition-duration-base @ease-in-out;
         content: '';
       }
     }
@@ -84,7 +84,7 @@
           &::after {
             transform: scale(1);
             opacity: 1;
-            transition: @radio-transition;
+            transition: all @transition-duration-base @ease-in-out;
           }
         }
       }
@@ -115,10 +115,10 @@
 
 .@{radio-prefix}-button {
   display: inline-block;
-  background: @radio-background-color;
+  background-color: @radio-background-color;
   border: @radio-border-width @radio-border-style @radio-border-color;
   border-radius: @radio-border-radius;
-  transition: @radio-transition;
+  transition: all @transition-duration-base @ease-in-out;
 
   .@{radio-prefix} {
 
@@ -224,7 +224,7 @@
         height: 100%;
         padding: @radio-border-width 0;
         background-color: @radio-border-color;
-        transition: @radio-transition;
+        transition: all @transition-duration-base @ease-in-out;
         content: '';
       }
 

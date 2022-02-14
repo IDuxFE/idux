@@ -15,7 +15,7 @@
 @select-border-width: @form-border-width;
 @select-border-style: @form-border-style;
 @select-border-color: @form-border-color;
-@select-border-radius: @border-radius-md;
+@select-border-radius: @border-radius-sm;
 
 @select-color: @form-color;
 @select-color-secondary: @form-color-secondary;
@@ -27,22 +27,22 @@
 @select-disabled-color: @form-disabled-color;
 @select-disabled-background-color: @form-disabled-background-color;
 
-@select-transition-duration: @form-transition-duration;
-@select-transition-function: @form-transition-function;
-
 @select-option-font-size: @font-size-md;
 @select-option-height: @height-md;
 @select-option-padding: @spacing-sm @spacing-md;
 @select-option-color: @text-color;
 @select-option-disabled-color: @text-color-disabled;
-@select-option-active-background-color: @color-grey-l50;
+@select-option-active-background-color: @color-graphite-l50;
 @select-option-selected-color: @color-primary;
-@select-option-selected-background-color: tint(@color-primary, 90%);
+@select-option-selected-background-color: @color-primary-l50;
 @select-option-selected-font-weight: @font-weight-xl;
-@select-option-transition: background @transition-duration-base @ease-in-out;
 @select-option-label-margin-left: @spacing-sm;
 
 @select-option-group-border: @border-width-sm @border-style @border-color;
+@select-option-group-color: @color-graphite;
+@select-option-group-margin: 0 @spacing-md;;
+@select-option-group-padding-left: 0;
+@select-option-grouped-padding-left: @spacing-xl;
 
 @select-option-container-zindex: @zindex-l4-3;
 @select-option-container-padding: @spacing-sm 0;
@@ -60,7 +60,7 @@
 
 @select-multiple-padding: @select-padding-vertical-md;
 @select-multiple-item-padding: 0 @spacing-xs;
-@select-multiple-item-background-color: @background-color-base;
+@select-multiple-item-background-color: @color-graphite-l40;
 @select-multiple-item-disabled-color: @select-disabled-color;
 @select-multiple-item-disabled-border-color: @select-border-color;
 @select-multiple-item-border-width: @border-width-sm;
@@ -68,3 +68,5 @@
 @select-multiple-item-border-radius: @select-border-radius;
 @select-multiple-item-label-margin-left: @spacing-xs;
 @select-multiple-item-remove-icon-font-size: @font-size-xs;
+@select-multiple-item-remove-icon-color: @color-graphite;
+@select-multiple-item-remove-icon-hover-color: @color-graphite-d10;

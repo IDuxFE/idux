@@ -38,3 +38,11 @@ order: 0
 | `xl` | 响应式栅格，同上 | `number/object` | - | -  | - |
 
 响应式栅格请参考[断点](/cdk/breakpoint/zh), 如果你修改默认的断点，请同步修改相关的 `less` 变量。
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@grid-columns` | `24` | - | - |
+<!--- insert less variable end  --->
