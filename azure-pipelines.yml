@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  install_packages: 'npm add -g pnpm && pnpm install'
+
 stages:
   - stage: env
     jobs:
@@ -26,9 +29,8 @@ stages:
     jobs:
       - job: lint_packages
         steps:
-          - task: Npm@1
-            inputs:
-              command: 'install'
+          - script: $(install_packages)
+            displayName: 'Install packages'
 
           - script: npm run lint
             displayName: 'Run lint'
@@ -38,9 +40,9 @@ stages:
     jobs:
       - job: test_packages
         steps:
-          - task: Npm@1
-            inputs:
-              command: 'install'
+          - script: $(install_packages)
+            displayName: 'Install packages'
+
           - script: npm run test
             displayName: 'Run test'
 
@@ -72,9 +74,8 @@ stages:
       - job: build_site
         condition: eq(variables['Build.Reason'], 'PullRequest')
         steps:
-          - task: Npm@1
-            inputs:
-              command: 'install'
+          - script: $(install_packages)
+            displayName: 'Install packages'
 
           - script: npm run build
             displayName: 'Run build'
@@ -90,9 +91,8 @@ stages:
       - job: publish_artifacts
         condition: ne(variables['Build.Reason'], 'PullRequest')
         steps:
-          - task: Npm@1
-            inputs:
-              command: 'install'
+          - script: $(install_packages)
+            displayName: 'Install packages'
 
           - script: npm run build
             displayName: 'Run build'

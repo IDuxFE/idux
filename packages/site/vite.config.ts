@@ -10,9 +10,6 @@ import { transformIndexPlugin } from './plugins/transformIndexPlugin'
 
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
-  const cdkResolve = isBuild ? '../../dist/cdk' : '../cdk'
-  const componentsResolve = isBuild ? '../../dist/components' : '../components'
-  const proResolve = isBuild ? '../../dist/pro' : '../pro'
 
   return {
     plugins: [
@@ -27,9 +24,9 @@ export default defineConfig(({ command }) => {
     ],
     resolve: {
       alias: [
-        { find: '@idux/cdk', replacement: resolve(__dirname, cdkResolve) },
-        { find: '@idux/components', replacement: resolve(__dirname, componentsResolve) },
-        { find: '@idux/pro', replacement: resolve(__dirname, proResolve) },
+        { find: '@idux/cdk', replacement: resolve(__dirname, '../cdk') },
+        { find: '@idux/components', replacement: resolve(__dirname, '../components') },
+        { find: '@idux/pro', replacement: resolve(__dirname, '../pro') },
         { find: '@idux/site', replacement: resolve(__dirname, './src') },
       ],
     },
