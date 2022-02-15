@@ -44,7 +44,7 @@ export default defineComponent({
       if (__DEV__ && (slots.icon || slots.label)) {
         Logger.warn(
           'components/menu',
-          '`slots` of `MenuItemGroup` is deprecated, please use `customIcon` and `customLabel` instead',
+          '`slots` of `MenuItemGroup` was deprecated, please use `customIcon` and `customLabel` instead',
         )
       }
       const iconRender = customIcon ?? slots.icon ?? 'itemGroupIcon'

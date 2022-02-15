@@ -5,19 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CheckboxGroupContext } from './token'
-import type { CheckValue, CheckboxProps } from './types'
-import type { ComputedRef, StyleValue } from 'vue'
-
-import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { covertStringVNode, useFormAccessor, useFormElement } from '@idux/components/utils'
 
-import { checkboxGroupToken } from './token'
-import { checkboxProps } from './types'
+import { type CheckboxGroupContext, checkboxGroupToken } from './token'
+import { type CheckValue, type CheckboxProps, checkboxProps } from './types'
 
 export default defineComponent({
   name: 'IxCheckbox',
@@ -57,15 +53,14 @@ export default defineComponent({
     })
 
     return () => {
-      const prefixCls = mergedPrefixCls.value
       const { autofocus, value, label } = props
-      const labelNode = slots.default?.() ?? label
-      const labelWrapper = labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
+      const prefixCls = mergedPrefixCls.value
+      const labelNode = covertStringVNode(slots.default, label)
       return (
         <label
           class={classes.value}
-          style={style as StyleValue}
+          style={style as string}
           role="checkbox"
           aria-checked={isChecked.value}
           aria-disabled={isDisabled.value}
@@ -88,7 +83,7 @@ export default defineComponent({
             />
             {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
           </span>
-          {labelWrapper}
+          {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
           {isButtoned.value && <span class={`${prefixCls}-button-tick`} tabindex={tabindex as number} />}
         </label>
       )
@@ -111,27 +106,31 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
     isChecked = computed(() => (accessor.valueRef.value ?? []).includes(props.value ?? props.trueValue))
-    isDisabled = computed(() => accessor.disabled.value)
+    isDisabled = computed(() => accessor.disabled.value ?? !!props.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
     }
+
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
-      const checkValue = checked ? props.trueValue : props.falseValue
-      const value = props.value
-      const groupCheckedValue = [...(accessor.valueRef.value ?? [])]
-      const checkValueIndex = groupCheckedValue.indexOf(value)
+      const { trueValue, falseValue, value } = props
+      const checkValue = checked ? trueValue : falseValue
+
+      const oldValue = accessor.valueRef.value ?? []
+      const newValue = [...oldValue]
+      const checkValueIndex = newValue.indexOf(value)
       if (checkValueIndex === -1) {
-        groupCheckedValue.push(value)
+        newValue.push(value)
       } else {
-        groupCheckedValue.splice(checkValueIndex, 1)
+        newValue.splice(checkValueIndex, 1)
       }
-      accessor.setValue(groupCheckedValue)
-      callEmit(props.onChange, checkValue)
-      callEmit(groupProps.onChange, groupCheckedValue)
+
+      accessor.setValue(newValue)
+      callEmit(props.onChange, checkValue, !checkValue)
+      callEmit(groupProps.onChange, newValue, oldValue)
     }
   } else {
     const accessor = useFormAccessor<CheckValue>('checked')
@@ -144,11 +143,13 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
     }
+
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
-      const checkValue = checked ? props.trueValue : props.falseValue
-      accessor.setValue(checkValue)
-      callEmit(props.onChange, checkValue)
+      const { trueValue, falseValue } = props
+      const newChecked = checked ? trueValue : falseValue
+      accessor.setValue(newChecked)
+      callEmit(props.onChange, newChecked, !newChecked)
     }
   }
 

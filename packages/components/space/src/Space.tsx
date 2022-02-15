@@ -11,7 +11,7 @@ import { supportsFlexGap } from '@idux/cdk/platform'
 import { Logger, convertCssPixel, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type FormSize } from '@idux/components/form'
-import { covertLabelVNode } from '@idux/components/utils'
+import { covertStringVNode } from '@idux/components/utils'
 
 import { spaceProps } from './types'
 
@@ -77,11 +77,11 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const children: VNode[] = []
 
-      let separatorNode = covertLabelVNode(slots, props, 'split')
+      let separatorNode = covertStringVNode(slots, props, 'split')
       if (separatorNode) {
         __DEV__ && Logger.warn('components/space', '`split` was deprecated, please use `separator` instead')
       } else {
-        separatorNode = covertLabelVNode(slots, props, 'separator')
+        separatorNode = covertStringVNode(slots, props, 'separator')
       }
 
       const lastIndex = nodes.length - 1

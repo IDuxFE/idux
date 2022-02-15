@@ -9,7 +9,7 @@ import { computed, defineComponent, normalizeClass } from 'vue'
 
 import { Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { covertLabelVNode } from '@idux/components/utils'
+import { covertStringVNode } from '@idux/components/utils'
 
 import { dividerProps } from './types'
 
@@ -54,7 +54,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const labelNode = covertLabelVNode(slots.default, props.label)
+      const labelNode = covertStringVNode(slots.default, props.label)
       return <div class={classes.value}>{labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}</div>
     }
   },

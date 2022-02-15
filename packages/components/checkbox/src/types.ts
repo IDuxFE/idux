@@ -7,19 +7,17 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { FormSize } from '@idux/components/form'
 
-export type CheckValue = string | number | boolean
-export type CheckboxOption = Omit<CheckboxPublicProps, 'checked' | 'onUpdate:checked' | 'onChange' | 'indeterminate'>
-
 export const checkboxProps = {
-  checked: IxPropTypes.oneOfType([String, Number, Boolean]),
   control: controlPropDef,
+  checked: IxPropTypes.oneOfType([String, Number, Boolean]),
+
   autofocus: IxPropTypes.bool.def(false),
   buttoned: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
@@ -32,7 +30,7 @@ export const checkboxProps = {
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: CheckValue) => void>(),
-  onChange: IxPropTypes.emit<(checked: CheckValue) => void>(),
+  onChange: IxPropTypes.emit<(newChecked: CheckValue, oldChecked: CheckValue) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
@@ -50,18 +48,20 @@ export type CheckboxComponent = DefineComponent<
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
-  value: IxPropTypes.array(),
   control: controlPropDef,
+  value: IxPropTypes.array(),
+
   buttoned: IxPropTypes.bool.def(false),
+  dataSource: IxPropTypes.array<CheckboxData>(),
   disabled: IxPropTypes.bool.def(false),
   gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
-  options: IxPropTypes.array<CheckboxOption>(),
+  options: IxPropTypes.array<CheckboxData>(),
   size: IxPropTypes.oneOf(['sm', 'md', 'lg']).def('md'),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: any[]) => void>(),
-  onChange: IxPropTypes.emit<(value: any[]) => void>(),
+  onChange: IxPropTypes.emit<(newValue: any[], oldValue: any[]) => void>(),
 }
 
 export type CheckboxGroupProps = IxInnerPropTypes<typeof checkboxGroupProps>
@@ -70,3 +70,8 @@ export type CheckboxGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
 >
 export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>
+
+export type CheckValue = string | number | boolean
+export interface CheckboxData extends CheckboxPublicProps {
+  key?: VKey
+}

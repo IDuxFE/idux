@@ -14,7 +14,7 @@ import { isString } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
-import { covertIconVNode, covertLabelVNode } from '@idux/components/utils'
+import { covertIconVNode, covertStringVNode } from '@idux/components/utils'
 
 import { headerProps } from './types'
 
@@ -52,9 +52,9 @@ export default defineComponent({
 
       const prefixIconNode = covertIconVNode(slots, props, 'prefix')
       const suffixIconNode = covertIconVNode(slots, props, 'suffix')
-      const titleNode = covertLabelVNode(slots.default, props.title)
-      const subTitleNode = covertLabelVNode(slots, props, 'subTitle')
-      const descriptionNode = covertLabelVNode(slots, props, 'description')
+      const titleNode = covertStringVNode(slots.default, props.title)
+      const subTitleNode = covertStringVNode(slots, props, 'subTitle')
+      const descriptionNode = covertStringVNode(slots, props, 'description')
 
       return (
         <div class={classes.value}>

@@ -88,13 +88,16 @@ export default defineComponent({
         let labelNode: VNodeChild | undefined
         if (isMax) {
           if (__DEV__ && slots.maxLabel) {
-            Logger.warn('components/select', 'slot `maxLabel` is deprecated, please use slot `overflowedLabel` instead')
+            Logger.warn(
+              'components/select',
+              'slot `maxLabel` was deprecated, please use slot `overflowedLabel` instead',
+            )
           }
           const overflowedLabelSlot = slots.overflowedLabel ?? slots.maxLabel
           labelNode = overflowedLabelSlot?.(item.value) ?? label
         } else {
           if (__DEV__ && slots.label) {
-            Logger.warn('components/select', 'slots `label` is deprecated, please use slots `selectedLabel` instead')
+            Logger.warn('components/select', 'slots `label` was deprecated, please use slots `selectedLabel` instead')
           }
           const selectedLabelSlot = slots.label ?? slots.selectedLabel
           labelNode = selectedLabelSlot ? selectedLabelSlot(rawOption) : renderOptionLabel(slots, rawOption, label)

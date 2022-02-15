@@ -3,7 +3,7 @@
     <IxCheckbox v-model:checked="isCheckAll" :indeterminate="indeterminate" @change="onCheckAllChange">
       Check all
     </IxCheckbox>
-    <IxCheckboxGroup v-model:value="groupValue" :options="options" />
+    <IxCheckboxGroup v-model:value="groupValue" :dataSource="dataSource" />
   </IxSpace>
 </template>
 
@@ -15,7 +15,7 @@ const list = ['Apple', 'Pear', 'Orange']
 const isCheckAll = ref(false)
 const indeterminate = ref(true)
 const groupValue = ref(['Apple', 'Orange'])
-const options = list.map(item => {
+const dataSource = list.map(item => {
   return { label: item, value: item }
 })
 

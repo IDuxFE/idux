@@ -14,10 +14,10 @@ describe('CheckboxGroup', () => {
 
   const CheckboxGroupMount = (groupOptions?: MountingOptions<Partial<CheckboxGroupProps>>) => {
     const { props, ...rest } = groupOptions || {}
-    return mount(CheckboxGroup, { props: { options: defaultOptions, ...props }, ...rest })
+    return mount(CheckboxGroup, { props: { dataSource: defaultOptions, ...props }, ...rest })
   }
 
-  renderWork<CheckboxGroupProps>(CheckboxGroup, { props: { options: defaultOptions } })
+  renderWork<CheckboxGroupProps>(CheckboxGroup, { props: { dataSource: defaultOptions } })
 
   test('v-model:value work', async () => {
     const onUpdateValue = jest.fn()
@@ -68,31 +68,31 @@ describe('CheckboxGroup', () => {
     await wrapper.findAll('input')[0].setValue(false)
 
     expect(onChange).toBeCalledTimes(1)
-    expect(onChange).toBeCalledWith([])
+    expect(onChange).toBeCalledWith([], ['option1'])
   })
 
-  test('options work', async () => {
-    let options = [
+  test('dataSource work', async () => {
+    let dataSource = [
       { label: 'option1', value: 'option1' },
       { label: 'option2', value: 'option2' },
     ]
-    const wrapper = CheckboxGroupMount({ props: { options } })
+    const wrapper = CheckboxGroupMount({ props: { dataSource } })
 
     expect(wrapper.findAll('.ix-checkbox').length).toBe(2)
 
-    options = [
+    dataSource = [
       { label: 'option1', value: 'option1' },
       { label: 'option2', value: 'option2' },
       { label: 'option3', value: 'option3' },
     ]
 
-    await wrapper.setProps({ options })
+    await wrapper.setProps({ dataSource })
 
     expect(wrapper.findAll('.ix-checkbox').length).toBe(3)
   })
 
   test('name work', async () => {
-    const options = [
+    const dataSource = [
       { label: 'option1', value: 'option1', name: 'child' },
       { label: 'option2', value: 'option2' },
       { label: 'option3', value: 'option3' },
@@ -100,7 +100,7 @@ describe('CheckboxGroup', () => {
     const wrapper = CheckboxGroupMount({
       props: {
         name: 'group',
-        options,
+        dataSource,
       },
     })
 

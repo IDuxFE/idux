@@ -5,11 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { isNil } from 'lodash-es'
-
-import { convertCssPixel } from '@idux/cdk/utils'
+import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormAccessor } from '@idux/components/utils'
 
@@ -21,32 +19,35 @@ export default defineComponent({
   name: 'IxCheckboxGroup',
   props: checkboxGroupProps,
   setup(props, { slots }) {
-    const accessor = useFormAccessor()
-
-    provide(checkboxGroupToken, { props, accessor })
-
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox-group`)
+    const accessor = useFormAccessor()
+    provide(checkboxGroupToken, { props, accessor })
 
     const classes = computed(() => {
       const { gap } = props
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-gap`]: !isNil(gap),
-      }
+        [`${prefixCls}-with-gap`]: gap != null,
+      })
     })
 
     const style = computed(() => {
       const { gap } = props
-      return gap !== 0 ? `gap: ${convertCssPixel(gap)};` : undefined
+      return gap != null ? `gap: ${convertCssPixel(gap)};` : undefined
     })
 
     return () => {
-      const child = props.options ? props.options.map(option => <Checkbox {...option} />) : slots.default?.()
+      const { options, dataSource } = props
+      if (options) {
+        Logger.warn('components/checkbox', '`options` was deprecated, please use `dataSource` instead')
+      }
+      const data = options ?? dataSource
+      const children = data ? data.map(item => <Checkbox {...item} />) : slots.default?.()
       return (
         <div class={classes.value} style={style.value}>
-          {child}
+          {children}
         </div>
       )
     }
