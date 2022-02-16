@@ -10,7 +10,7 @@ import { type ComputedRef, type InjectionKey, type Slots } from 'vue'
 import { type VKey } from '@idux/cdk/utils'
 import { type MenuData } from '@idux/components/menu'
 
-import { type ProLayoutProps } from './types'
+import { type HoverTriggerOption, type ProLayoutProps } from './types'
 
 export interface ProLayoutContext {
   props: ProLayoutProps
@@ -23,7 +23,9 @@ export interface ProLayoutContext {
   activeHeaderKey: ComputedRef<VKey | undefined>
   siderMenus: ComputedRef<MenuData[]>
   collapsed: ComputedRef<boolean>
+  hoverTrigger: ComputedRef<HoverTriggerOption>
   setCollapsed: (collapsed: boolean) => void
+  handleCollapsedDelay: (collapsed: boolean) => void
 }
 
 export const proLayoutToken: InjectionKey<ProLayoutContext> = Symbol('proLayout')

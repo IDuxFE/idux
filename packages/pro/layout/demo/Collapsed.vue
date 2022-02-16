@@ -1,5 +1,12 @@
 <template>
-  <IxProLayout v-model:activeKey="activeKey" v-model:collapsed="collapsed" :menus="dataSource">
+  <IxProLayout
+    v-model:activeKey="activeKey"
+    v-model:collapsed="collapsed"
+    :hoverTrigger="hoverTrigger"
+    :menus="dataSource"
+    :compress="false"
+    :style="{ height: '300px' }"
+  >
     <template #itemLabel="item">
       <router-link :to="item.key">{{ item.label }}</router-link>
     </template>
@@ -21,7 +28,11 @@ import { ref } from 'vue'
 import { type MenuData } from '@idux/components/menu'
 
 const activeKey = ref()
-const collapsed = ref(false)
+const collapsed = ref(true)
+const hoverTrigger = ref({
+  enable: true,
+  delay: 500,
+})
 const dataSource: MenuData[] = [
   {
     type: 'sub',

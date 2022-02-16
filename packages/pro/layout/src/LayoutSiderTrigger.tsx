@@ -33,7 +33,10 @@ export default defineComponent({
       }
     })
 
-    const handleClick = () => setCollapsed(!collapsed.value)
+    const handleClick = (evt: Event) => {
+      evt.stopPropagation()
+      setCollapsed(!collapsed.value)
+    }
 
     return () => {
       let children: VNodeTypes

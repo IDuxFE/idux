@@ -16,7 +16,7 @@ import { useExpanded } from './composables/useExpanded'
 import { useSelected } from './composables/useSelected'
 import { coverChildren } from './contents/Utils'
 import { menuToken } from './token'
-import { menuProps } from './types'
+import { type MenuProps, menuProps } from './types'
 
 export default defineComponent({
   name: 'IxMenu',
@@ -27,10 +27,7 @@ export default defineComponent({
     const config = useGlobalConfig('menu')
 
     const indent = computed(() => props.indent ?? config.indent)
-    const mode = computed(() => {
-      const { collapsed, mode } = props
-      return collapsed && mode !== 'horizontal' ? 'vertical' : mode
-    })
+    const mode = useMode(props)
 
     const theme = computed(() => props.theme ?? config.theme)
 
@@ -74,3 +71,14 @@ export default defineComponent({
     }
   },
 })
+
+function useMode(props: MenuProps) {
+  return computed(() => {
+    const { mode } = props
+    if (props.mode === 'inlineStretch') {
+      // 特殊的inline，只用于pro/layout 的悬浮侧边栏
+      return 'inline'
+    }
+    return props.collapsed && mode !== 'horizontal' ? 'vertical' : mode
+  })
+}
