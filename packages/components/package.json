@@ -1,6 +1,6 @@
 {
   "name": "@idux/components",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "A UI Component Library for Vue 3.x",
   "keywords": [
     "vue",
@@ -32,7 +32,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^1.0.0-alpha.4",
+    "@idux/cdk": "^1.0.0-alpha.6",
     "date-fns": "^2.27.0",
     "lodash-es": "^4.17.21",
     "vue-types": "^3.0.0"

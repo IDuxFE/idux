@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-02-18)
+
+
+### Bug Fixes
+
+* **comp:space:** remove default alian and justify ([#749](https://github.com/IDuxFE/idux/issues/749)) ([54456c6](https://github.com/IDuxFE/idux/commit/54456c6ddedc7e8c786cb23cedfedac4f5a0833e))
+
+
+### Features
+
+* **comp:stepper:** redesign api ([#760](https://github.com/IDuxFE/idux/issues/760)) ([623569d](https://github.com/IDuxFE/idux/commit/623569db9725c8f97ce2a1beec8eb1805d5b8027))
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-01-24)
 
 

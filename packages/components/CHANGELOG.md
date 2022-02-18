@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-02-18)
+
+
+### Bug Fixes
+
+* **comp: radio:** incomplete consideration of controlled mode ([#744](https://github.com/IDuxFE/idux/issues/744)) ([1a190bd](https://github.com/IDuxFE/idux/commit/1a190bd77d8b952ab263c8ffdc9153963e511804))
+* **comp:select:** filter option exception ([#751](https://github.com/IDuxFE/idux/issues/751)) ([96ed380](https://github.com/IDuxFE/idux/commit/96ed3807dc35b5445ec4bc83dde0894a56e99ed1)), closes [#750](https://github.com/IDuxFE/idux/issues/750)
+* **comp:space:** remove default alian and justify ([#749](https://github.com/IDuxFE/idux/issues/749)) ([54456c6](https://github.com/IDuxFE/idux/commit/54456c6ddedc7e8c786cb23cedfedac4f5a0833e))
+
+
+### Code Refactoring
+
+* **comp:layout:** remove onCollapse ([#747](https://github.com/IDuxFE/idux/issues/747)) ([3001bbd](https://github.com/IDuxFE/idux/commit/3001bbd74200d22510bf49d505ee176cd469d9ac))
+
+
+### Features
+
+* **comp:checkbox:** use dataSource instead of options ([#753](https://github.com/IDuxFE/idux/issues/753)) ([ac2579a](https://github.com/IDuxFE/idux/commit/ac2579aa2270f25040c01ea387f025a507f09e05))
+* **comp:divider:** add size prop ([#742](https://github.com/IDuxFE/idux/issues/742)) ([c6b4919](https://github.com/IDuxFE/idux/commit/c6b49197f2829f3999e5967a542eadd0c9c92a88))
+* **comp:space:** add justify prop ([#743](https://github.com/IDuxFE/idux/issues/743)) ([9340796](https://github.com/IDuxFE/idux/commit/93407968a8763fad05b7aa7dfa8b5fdf323151d6))
+* **comp:space:** add justify prop ([#746](https://github.com/IDuxFE/idux/issues/746)) ([af525d9](https://github.com/IDuxFE/idux/commit/af525d9263a1bb8f846ca916e82b224829030758))
+* **comp:stepper:** redesign api ([#760](https://github.com/IDuxFE/idux/issues/760)) ([623569d](https://github.com/IDuxFE/idux/commit/623569db9725c8f97ce2a1beec8eb1805d5b8027))
+
+
+### BREAKING CHANGES
+
+* **comp:checkbox:** `options` was deprecated, please use `dataSource` instead
+* **comp:layout:** `onCollapse` was removed
+* **comp:space:** `direction` was deprecated, please use `vertical` instead. split` was deprecated,
+please use `separator` instead.
+* **comp:divider:** `position` was deprecated, please use `labelPlacement` instead, `type` was
+deprecated, please use `vertical` instead
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-01-24)
 
 
