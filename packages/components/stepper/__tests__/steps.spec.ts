@@ -1,288 +1,115 @@
-import { mount } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
+import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
 
 import IxStepper from '../src/Stepper'
 import IxStepperItem from '../src/StepperItem'
+import { StepperProps } from '../src/types'
 
-const TestComponent = {
-  components: { IxStepper, IxStepperItem },
-  template: `
-  <IxStepper :active="1">
-    <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-    <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-    <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-  </IxStepper>
-  `,
-}
+const defaultSlots = [
+  h(IxStepperItem, { key: 1, title: 'Finished', description: 'This is a description.' }),
+  h(IxStepperItem, { key: 2, title: 'In Progress', description: 'This is a description.' }),
+  h(IxStepperItem, { key: 3, title: 'Waiting', description: 'This is a description.' }),
+]
 
 describe('Stepper', () => {
-  renderWork(TestComponent)
+  const StepperMount = (options?: MountingOptions<Partial<StepperProps>>) => {
+    const { props, slots, ...rest } = options || {}
+    return mount(IxStepper, {
+      ...rest,
+      props: { activeKey: 2, ...props },
+      slots: { default: () => [...defaultSlots], ...slots },
+    })
+  }
+
+  renderWork<StepperProps>(IxStepper, { props: { activeKey: 2 }, slots: { default: () => defaultSlots } })
 
   test('active work', async () => {
-    const active = ref(1)
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active }
-      },
-    })
+    const onUpdateActiveKey = jest.fn()
+    const wrapper = StepperMount({ props: { activeKey: 1, 'onUpdate:activeKey': onUpdateActiveKey } })
 
-    expect(wrapper.findAllComponents({ name: 'IxStepperItem' })[active.value].classes()).toContain(
-      'ix-stepper-item-process',
-    )
+    expect(wrapper.findAll('.ix-stepper-item')[0].classes()).toContain('ix-stepper-item-active')
 
-    active.value = 2
+    await wrapper.setProps({ activeKey: 2 })
 
-    await nextTick()
-
-    expect(wrapper.findAllComponents({ name: 'IxStepperItem' })[active.value].classes()).toContain(
-      'ix-stepper-item-process',
-    )
+    expect(wrapper.findAll('.ix-stepper-item')[0].classes()).not.toContain('ix-stepper-item-active')
+    expect(wrapper.findAll('.ix-stepper-item')[1].classes()).toContain('ix-stepper-item-active')
   })
 
-  test('direction work', async () => {
-    const active = ref(1)
-    const direction = ref('vertical')
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :direction="direction">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, direction }
-      },
-    })
+  test('clickable work', async () => {
+    const onUpdateActiveKey = jest.fn()
+    const wrapper = StepperMount({ props: { activeKey: 1, clickable: true, 'onUpdate:activeKey': onUpdateActiveKey } })
 
-    expect(wrapper.findAll('.ix-stepper-vertical').length).toBe(1)
+    expect(wrapper.findAll('.ix-stepper-item')[0].classes()).toContain('ix-stepper-item-clickable')
+    expect(wrapper.findAll('.ix-stepper-item')[0].classes()).toContain('ix-stepper-item-active')
+
+    await wrapper.findAll('.ix-stepper-item')[1].trigger('click')
+
+    expect(onUpdateActiveKey).toBeCalledTimes(1)
+    expect(onUpdateActiveKey).toBeCalledWith(2)
+
+    await wrapper.setProps({ activeKey: 2 })
+    await wrapper.findAll('.ix-stepper-item')[1].trigger('click')
+
+    expect(onUpdateActiveKey).toBeCalledTimes(1)
   })
 
-  test('placement work', async () => {
-    const active = ref(1)
-    const placement = ref('vertical')
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :placement="placement">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, placement }
-      },
-    })
+  test('labelPlacement work', async () => {
+    const wrapper = StepperMount({ props: { labelPlacement: 'bottom' } })
 
-    expect(wrapper.findAll('.ix-stepper-vertical-placement').length).toBe(1)
+    expect(wrapper.classes()).toContain('ix-stepper-label-bottom')
+
+    await wrapper.setProps({ labelPlacement: 'end' })
+
+    expect(wrapper.classes()).toContain('ix-stepper-label-end')
   })
 
   test('percent work', async () => {
-    const active = ref(1)
-    const percent = ref(25)
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :percent="percent">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, percent }
-      },
-    })
+    const wrapper = StepperMount({ props: { percent: 10 } })
 
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[0].attributes().style).toBe(
-      'transform: rotate(135deg);',
-    )
+    expect(wrapper.html()).toMatchSnapshot()
 
-    percent.value = 50
-    await nextTick()
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[0].attributes().style).toBe(
-      'transform: rotate(225deg);',
-    )
+    await wrapper.setProps({ percent: 50 })
 
-    percent.value = 75
-    await nextTick()
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[0].attributes().style).toBe(
-      'transform: rotate(225deg);',
-    )
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[1].attributes().style).toBe(
-      'transform: rotate(135deg);',
-    )
+    expect(wrapper.html()).toMatchSnapshot()
 
-    percent.value = 100
-    await nextTick()
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[0].attributes().style).toBe(
-      'transform: rotate(225deg);',
-    )
-    expect(wrapper.findAll('.ix-stepper-item-head-percent-circle')[1].attributes().style).toBe(
-      'transform: rotate(225deg);',
-    )
-  })
+    await wrapper.setProps({ percent: 100 })
 
-  test('progressDot work', async () => {
-    const active = ref(1)
-    const progressDot = ref(true)
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :progressDot="progressDot">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, progressDot }
-      },
-    })
-
-    expect(wrapper.findAll('.ix-stepper-dot').length).toBe(1)
-  })
-
-  test('progressDot work(slot)', async () => {
-    const active = ref(1)
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active">
-        <template #progressDot>            
-            <span class="ix-stepper-item-head-dot"></span>
-        </template>
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active }
-      },
-    })
-
-    expect(wrapper.findAll('.ix-stepper-dot').length).toBe(1)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   test('size work', async () => {
-    const active = ref(1)
-    const size = ref('sm')
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :size="size">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, size }
-      },
-    })
+    const wrapper = StepperMount({ props: { size: 'sm' } })
 
-    expect(wrapper.findAll('.ix-stepper-sm').length).toBe(1)
+    expect(wrapper.classes()).toContain('ix-stepper-sm')
+
+    await wrapper.setProps({ size: 'md' })
+
+    expect(wrapper.classes()).toContain('ix-stepper-md')
   })
 
-  test('steps(status) work', async () => {
-    const active = ref(1)
-    const status = ref('error')
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active" :status="status">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, status }
-      },
-    })
+  test('status work', async () => {
+    const wrapper = StepperMount({ props: { status: 'process' } })
 
-    expect(wrapper.findAllComponents({ name: 'IxStepperItem' })[active.value].classes()).toContain(
-      'ix-stepper-item-' + status.value,
-    )
-  })
+    let items = wrapper.findAll('.ix-stepper-item')
 
-  test('icon work', async () => {
-    const active = ref(1)
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active">
-        <IxStepperItem status="finish" title="Login" icon="up"></IxStepperItem>
-        <IxStepperItem status="finish" title="Verification" icon="down"></IxStepperItem>
-        <IxStepperItem status="process" title="Pay" icon="left"></IxStepperItem>
-        <IxStepperItem status="wait" title="Done" icon="right"></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active }
-      },
-    })
+    expect(items[0].classes()).toContain('ix-stepper-item-finish')
+    expect(items[1].classes()).toContain('ix-stepper-item-process')
+    expect(items[2].classes()).toContain('ix-stepper-item-wait')
 
-    expect(wrapper.find('.ix-icon-up').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-down').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-left').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-right').exists()).toBe(true)
-  })
+    await wrapper.setProps({ status: 'finish' })
 
-  test('title subTitle description work', async () => {
-    const active = ref(1)
-    const title = 'Finish'
-    const subTitle = '20:20:01'
-    const description = 'This is a description'
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active">
-        <IxStepperItem :title="title" :sub-title="subTitle" :description="description"></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, title, subTitle, description }
-      },
-    })
+    items = wrapper.findAll('.ix-stepper-item')
 
-    expect(wrapper.find('.ix-stepper-item-title').text()).toContain(title)
-    expect(wrapper.find('.ix-stepper-item-subtitle').text()).toContain(subTitle)
-    expect(wrapper.find('.ix-stepper-item-description').text()).toContain(description)
-  })
+    expect(items[0].classes()).toContain('ix-stepper-item-finish')
+    expect(items[1].classes()).toContain('ix-stepper-item-finish')
+    expect(items[2].classes()).toContain('ix-stepper-item-wait')
 
-  test('step(status) work', async () => {
-    const active = ref(1)
-    const status = ref('error')
-    const wrapper = mount({
-      components: { IxStepper, IxStepperItem },
-      template: `
-      <IxStepper :active="active">
-        <IxStepperItem title="Finish" sub-title="20:20:01" description="This is a description."></IxStepperItem>
-        <IxStepperItem :status="status" title="In Progress" description="This is a description."></IxStepperItem>
-        <IxStepperItem title="Waiting" description="This is a description."></IxStepperItem>
-      </IxStepper>
-      `,
-      setup() {
-        return { active, status }
-      },
-    })
+    await wrapper.setProps({ status: 'error' })
 
-    expect(wrapper.findAllComponents({ name: 'IxStepperItem' })[1].classes()).toContain(
-      'ix-stepper-item-' + status.value,
-    )
+    expect(items[0].classes()).toContain('ix-stepper-item-finish')
+    expect(items[1].classes()).toContain('ix-stepper-item-error')
+    expect(items[2].classes()).toContain('ix-stepper-item-wait')
   })
 })

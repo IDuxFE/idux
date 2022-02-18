@@ -50,10 +50,10 @@ export default defineComponent({
       if (props.hideInfo) {
         return null
       }
-
+      const slot = slots.format ?? slots.default
       return (
         <div class={`${mergedPrefixCls.value}-info`}>
-          {slots.format?.({ percent: percent.value, successPercent: formattedSuccess.value.percent }) ?? renderInfo()}
+          {slot ? slot({ percent: percent.value, successPercent: formattedSuccess.value.percent }) : renderInfo()}
         </div>
       )
     }

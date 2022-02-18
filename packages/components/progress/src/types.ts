@@ -6,12 +6,12 @@
  */
 
 import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ProgressSize = 'sm' | 'md' | 'lg'
-export type ProgressFormat = (percent: number, successPercent?: number) => string
+export type ProgressFormat = (percent: number, successPercent?: number) => VNodeChild
 export type ProgressType = 'line' | 'circle' | 'dashboard'
 export type ProgressGapPositionType = 'top' | 'bottom' | 'left' | 'right'
 export type ProgressStatus = 'normal' | 'success' | 'exception' | 'active'

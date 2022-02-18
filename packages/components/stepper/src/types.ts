@@ -5,25 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import { type DefineComponent, type HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
 
-export type StepperStatus = 'wait' | 'process' | 'finish' | 'error'
+export type StepperLabelPlacement = 'end' | 'bottom'
 export type StepperSize = 'md' | 'sm'
+export type StepperStatus = 'process' | 'finish' | 'wait' | 'error'
 
 export const stepperProps = {
-  active: IxPropTypes.number.def(0),
-  clickable: IxPropTypes.bool.def(false),
-  direction: IxPropTypes.oneOf(['horizontal', 'vertical'] as const).def('horizontal'),
-  placement: IxPropTypes.oneOf(['horizontal', 'vertical'] as const).def('horizontal'),
+  activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
+  clickable: IxPropTypes.bool,
+  labelPlacement: IxPropTypes.oneOf<StepperLabelPlacement>(['end', 'bottom']),
   percent: IxPropTypes.range(0, 100),
-  progressDot: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<StepperSize>(['md', 'sm']).def('md'),
-  status: IxPropTypes.oneOf<StepperStatus>(['wait', 'process', 'finish', 'error']).def('process'),
+  size: IxPropTypes.oneOf<StepperSize>(['md', 'sm']),
+  status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']).def('process'),
+  vertical: IxPropTypes.bool.def(false),
 
-  'onUpdate:active': IxPropTypes.emit<(index: number) => void>(),
+  'onUpdate:activeKey': IxPropTypes.emit<(key: VKey) => void>(),
 }
 
 export type StepperProps = IxInnerPropTypes<typeof stepperProps>
@@ -32,13 +31,11 @@ export type StepperComponent = DefineComponent<Omit<HTMLAttributes, keyof Steppe
 export type StepperInstance = InstanceType<DefineComponent<StepperProps>>
 
 export const stepperItemProps = {
-  index: IxPropTypes.number.isRequired,
-  title: IxPropTypes.string,
-  subTitle: IxPropTypes.string,
   description: IxPropTypes.string,
   disabled: IxPropTypes.bool.def(false),
   icon: IxPropTypes.string,
-  status: IxPropTypes.oneOf<StepperStatus>(['wait', 'process', 'finish', 'error']),
+  title: IxPropTypes.string,
+  status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']),
 }
 
 export type StepperItemProps = IxInnerPropTypes<typeof stepperItemProps>

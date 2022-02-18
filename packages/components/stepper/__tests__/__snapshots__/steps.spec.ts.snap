@@ -1,28 +1,159 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Stepper render work 1`] = `
-"<div class=\\"ix-stepper ix-stepper-horizontal ix-stepper-md\\">
+exports[`Stepper percent work 1`] = `
+"<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"></i></span></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"></i></div>
     <div class=\\"ix-stepper-item-content\\">
-      <div class=\\"ix-stepper-item-title\\">Finish<span class=\\"ix-stepper-item-subtitle\\">20:20:01</span></div>
+      <div class=\\"ix-stepper-item-title\\">Finished</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>
     </div>
   </div>
-  <div class=\\"ix-stepper-item ix-stepper-item-process\\">
+  <div class=\\"ix-stepper-item ix-stepper-item-process ix-stepper-item-active\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-text\\">2</span></div>
+    <div class=\\"ix-stepper-item-icon\\">
+      <div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 40px; height: 40px; font-size: 12px;\\"><svg viewBox=\\"0 0 100 100\\">
+          <!---->
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+          <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 30.159289474462014px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+        </svg>
+        <div class=\\"ix-progress-info\\">
+          <!---->
+        </div>
+      </div><span>2</span>
+    </div>
     <div class=\\"ix-stepper-item-content\\">
-      <div class=\\"ix-stepper-item-title\\">In Progress<span class=\\"ix-stepper-item-subtitle\\"><!----></span></div>
+      <div class=\\"ix-stepper-item-title\\">In Progress</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>
     </div>
   </div>
   <div class=\\"ix-stepper-item ix-stepper-item-wait\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-head\\"><span class=\\"ix-stepper-item-head-text\\">3</span></div>
+    <div class=\\"ix-stepper-item-icon\\"><span>3</span></div>
     <div class=\\"ix-stepper-item-content\\">
-      <div class=\\"ix-stepper-item-title\\">Waiting<span class=\\"ix-stepper-item-subtitle\\"><!----></span></div>
+      <div class=\\"ix-stepper-item-title\\">Waiting</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Stepper percent work 2`] = `
+"<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
+  <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"></i></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Finished</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-process ix-stepper-item-active\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\">
+      <div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 40px; height: 40px; font-size: 12px;\\"><svg viewBox=\\"0 0 100 100\\">
+          <!---->
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+          <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 150.79644737231007px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+        </svg>
+        <div class=\\"ix-progress-info\\">
+          <!---->
+        </div>
+      </div><span>2</span>
+    </div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">In Progress</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-wait\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><span>3</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Waiting</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Stepper percent work 3`] = `
+"<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
+  <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"check\\">
+          <path d=\\"M167.29 445.278 437.84 715.83a10.779 10.779 0 0 0 15.2 0l403.886-403.78a10.779 10.779 0 0 1 15.253 0l22.85 22.852a10.779 10.779 0 0 1 0 15.252L453.094 792.091a10.779 10.779 0 0 1-15.252 0L129.13 483.38a10.779 10.779 0 0 1 0-15.251l22.906-22.852a10.779 10.779 0 0 1 15.252 0z\\"></path>
+        </svg></i></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Finished</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-process ix-stepper-item-active\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\">
+      <div class=\\"ix-progress-circle ix-progress ix-progress-success\\" style=\\"width: 40px; height: 40px; font-size: 12px;\\"><svg viewBox=\\"0 0 100 100\\">
+          <!---->
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+          <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+       a 48,48 0 1 1 0,96
+       a 48,48 0 1 1 0,-96\\"></path>
+        </svg>
+        <div class=\\"ix-progress-info\\">
+          <!---->
+        </div>
+      </div><span>2</span>
+    </div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">In Progress</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-wait\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><span>3</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Waiting</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Stepper render work 1`] = `
+"<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md\\">
+  <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check\\" role=\\"img\\" aria-label=\\"check\\"></i></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Finished</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-process ix-stepper-item-active\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><span>2</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">In Progress</div>
+      <div class=\\"ix-stepper-item-description\\">This is a description.</div>
+    </div>
+  </div>
+  <div class=\\"ix-stepper-item ix-stepper-item-wait\\">
+    <div class=\\"ix-stepper-item-tail\\"></div>
+    <div class=\\"ix-stepper-item-icon\\"><span>3</span></div>
+    <div class=\\"ix-stepper-item-content\\">
+      <div class=\\"ix-stepper-item-title\\">Waiting</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>
     </div>
   </div>

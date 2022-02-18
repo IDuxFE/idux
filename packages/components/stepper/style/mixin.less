@@ -1,0 +1,28 @@
+.stepper-item-status(@status) {
+  @tail-color: 'stepper-item-@{status}-tail-color';
+  @icon-color: 'stepper-item-@{status}-icon-color';
+  @title-color: 'stepper-item-@{status}-title-color';
+  @description-color: 'stepper-item-@{status}-description-color';
+
+  &-@{status} &-tail::after,
+  &-@{status} &-content &-title::after {
+    background-color: @@tail-color;
+  }
+
+  &-@{status} &-icon {
+    border-color: @@icon-color;
+    color: @@icon-color;
+
+    &-dot {
+      background-color: @@icon-color;
+    }
+  }
+
+  &-@{status} &-content &-title {
+    color: @@title-color;
+  }
+
+  &-@{status} &-content &-description {
+    color: @@description-color;
+  }
+}

@@ -13,14 +13,13 @@ subtitle: 步骤条
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | ---| --- | --- | --- | --- | --- |
-`v-model:active` | 指定步骤条当前的活跃节点，从 0 开始计算 | `number` | 0 | - | - |
-`clickable` | 步骤条是否可点击 | `boolean` | `false` | - | - |
-`direction` | 指定步骤条的方向 | `horizontal \| vertical` | `horizontal` | - | - |
-`placement` | 指定步骤条节点附带的标签放置的位置 | `horizontal \| vertical` | `horizontal` | -| - |
-`percent` | 当前活跃节点的进度 | `number` | 0 | - | 取值是0-100 |
-`progressDot` | 指定步骤条是否为点状步骤条| `boolean \| #progressDot` | `false` | - | 使用slot的话，会传入当前节点对象{index, status} |
-`size` | 指定步骤条节点的大小 | `md \| sm` | `md` | ✅ | - |
-`status` | 指定步骤条节点的状态 | `wait \| process \| finish \| error` | `process` | - | - |
+`v-model:activeKey` | 当前的激活节点的 `key` | `VKey` | - | - | - |
+`clickable` | 是否可点击 | `boolean` | `false` | - | - |
+`dot` | 是否为点状步骤条 | `boolean \| #dot={key, status}` | `false` | - | - |
+`labelPlacement` | 指定文本信息放置的位置 | `'end' \| 'bottom'` | `'end'` | -| - |
+`percent` | 当前激活节点的进度 | `number` | - | - | 取值是 0-100 |
+`size` | 指定节点的大小 | `'md' \| 'sm'` | `'md'` | ✅ | - |
+`status` | 指定节点的状态 | `'process' \| 'finish' \| 'wait' \| 'error'` | `process` | - | - |
 
 ### IxStepperItem
 
@@ -28,31 +27,45 @@ subtitle: 步骤条
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | ---| --- | --- | --- | --- | --- |
+`key` | 节点的唯一标识 | `VKey` | - | - | 默认为 `index + 1` |
+`description` | 描述信息 | `string \| #description` | - | - | - |
+`disabled` | 禁用状态 | `true \| false` | `false` | - | - |
+`icon` | 每个节点的图标 | `string \| #icon={key, status}` | - | - | - |
+`status` | 当前节点的状态 | `'process' \| 'finish' \| 'wait' \| 'error'` | - | - | 默认会根据激活节点来自动设置 |
 `title` | 标题 | `string \| #title` | - | - | - |
-`subTitle` | 副标题 | `string \| #subTitle` | - | - | - |
-`description` | 步骤条节点的具体描述 | `string \| #description` | - | - | - |
-`disabled` | 节点禁用点击 | `true \| false` | `false` | - | - |
-`icon` | 每个节点的图标 | `string \| #icon` | - | - | - |
-`status` | 每个节点的状态，当不设置时，会用Steps里的status | `wait \| process \| finish \| error` | - | - | - |
 
 <!--- insert less variable begin  --->
 ## 主题变量
 
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
-| `@stepper-item-highlight-color` | `@color-primary` | - | - |
-| `@stepper-item-tail-width` | `9999px` | - | - |
-| `@stepper-item-tail-height` | `1px` | - | - |
-| `@stepper-item-custom-icon-width` | `24px` | - | - |
-| `@stepper-item-custom-icon-width-small` | `20px` | - | - |
-| `@stepper-item-content-min-height` | `48px` | - | - |
-| `@stepper-item-dot-width` | `8px` | - | - |
-| `@stepper-item-dot-width-active` | `10px` | - | - |
-| `@stepper-item-dot-head-width` | `60px` | - | - |
-| `@stepper-item-dot-active-offset` | `-1px` | - | - |
-| `@stepper-item-dot-tail-width` | `2px` | - | - |
-| `@stepper-item-dot-vertical-gutter` | `6px` | - | - |
-| `@stepper-item-percent-gutter` | `8px` | - | - |
-| `@stepper-item-percent-width` | `2px` | - | - |
-| `@stepper-item-percent-background-color` | `#dfdfdf` | - | - |
+| `@stepper-background` | `@background-color-component` | - | - |
+| `@stepper-item-process-tail-color` | `@disabled-color` | - | - |
+| `@stepper-item-process-icon-color` | `@color-primary` | - | - |
+| `@stepper-item-process-title-color` | `@text-color` | - | - |
+| `@stepper-item-process-description-color` | `@text-color` | - | - |
+| `@stepper-item-finish-tail-color` | `@color-primary` | - | - |
+| `@stepper-item-finish-icon-color` | `@color-primary` | - | - |
+| `@stepper-item-finish-title-color` | `@text-color` | - | - |
+| `@stepper-item-finish-description-color` | `@text-color-secondary` | - | - |
+| `@stepper-item-wait-tail-color` | `@disabled-color` | - | - |
+| `@stepper-item-wait-icon-color` | `@disabled-color` | - | - |
+| `@stepper-item-wait-title-color` | `@text-color-secondary` | - | - |
+| `@stepper-item-wait-description-color` | `@text-color-secondary` | - | - |
+| `@stepper-item-error-tail-color` | `@stepper-item-wait-tail-color` | - | - |
+| `@stepper-item-error-icon-color` | `@color-error` | - | - |
+| `@stepper-item-error-title-color` | `@color-error` | - | - |
+| `@stepper-item-error-description-color` | `@color-error` | - | - |
+| `@stepper-item-spacing-md` | `@spacing-lg` | - | - |
+| `@stepper-item-icon-size-md` | `32px` | - | - |
+| `@stepper-item-icon-font-size-md` | `@font-size-lg` | - | - |
+| `@stepper-item-icon-margin-md` | `0 8px 0 0` | - | - |
+| `@stepper-item-title-font-size-md` | `@font-size-lg` | - | - |
+| `@stepper-item-description-font-size-md` | `@font-size-md` | - | - |
+| `@stepper-item-spacing-sm` | `@spacing-md` | - | - |
+| `@stepper-item-icon-size-sm` | `24px` | - | - |
+| `@stepper-item-icon-font-size-sm` | `@font-size-md` | - | - |
+| `@stepper-item-icon-margin-sm` | `0 8px 0 0` | - | - |
+| `@stepper-item-title-font-size-sm` | `@font-size-md` | - | - |
+| `@stepper-item-description-font-size-sm` | `@font-size-sm` | - | - |
 <!--- insert less variable end  --->

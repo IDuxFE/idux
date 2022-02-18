@@ -24,7 +24,7 @@ import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/componen
 import type { ResultStatus } from '@idux/components/result'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
-import type { StepperSize } from '@idux/components/stepper'
+import type { StepperLabelPlacement, StepperSize } from '@idux/components/stepper'
 import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
@@ -412,6 +412,8 @@ export interface ProgressConfig {
 // Stepper
 
 export interface StepperConfig {
+  clickable: boolean
+  labelPlacement: StepperLabelPlacement
   size: StepperSize
 }
 

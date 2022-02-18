@@ -394,6 +394,8 @@ const progress: ProgressConfig = {
 }
 
 const stepper: StepperConfig = {
+  clickable: false,
+  labelPlacement: 'end',
   size: 'md',
 }
 

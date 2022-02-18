@@ -47,27 +47,6 @@ export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | unde
 }
 
 /**
- * get all child node (Whatever dynamic or not)
- *
- * @param slots slots of the component
- * @param key key of slots, default is 'default'
- * @param options the property of the render function
- */
-export function getSlotNodes(slots: Slots, key = 'default', ...options: unknown[]): VNode[] {
-  const slot = slots[key]
-  if (!slot) {
-    return []
-  }
-
-  let vNodes = slot(...options)
-  if (vNodes.length === 1 && isFragment(vNodes[0])) {
-    vNodes = (vNodes[0].children as VNode[]) ?? vNodes[0].dynamicChildren ?? []
-  }
-
-  return vNodes
-}
-
-/**
  * checks whether a slot exists
  *
  * @param slots slots of the component
@@ -88,7 +67,7 @@ export function isEmptyNode(node: VNodeChild): boolean {
 
 export function flattenNode(
   nodes: VNodeChild,
-  filterOptions: { empty?: boolean; key?: string | string[] } = {},
+  filterOptions: { empty?: boolean; key?: string | symbol | Array<string | symbol> } = {},
 ): VNode[] {
   const result: VNode[] = []
 
