@@ -25,6 +25,7 @@ export default defineComponent({
 
     // menuContext must exist
     const {
+      props: menuProps,
       slots: menuSlots,
       mergedPrefixCls,
       indent,
@@ -48,7 +49,7 @@ export default defineComponent({
     })
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
-    const paddingLeft = usePaddingLeft(mode, indent, level, menuItemGroupContext)
+    const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
     const style = computed(() => {
       return { paddingLeft: paddingLeft.value }
     })

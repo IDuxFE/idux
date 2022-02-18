@@ -45,8 +45,6 @@ export default defineComponent({
       return isObject(fixed) ? fixed.sider : fixed
     })
 
-    const siderMode = computed(() => (hoverTrigger.value.enable ? 'inlineStretch' : 'inline'))
-
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-sider`
       return normalizeClass({
@@ -82,7 +80,7 @@ export default defineComponent({
         'onUpdate:expandedKeys': setExpandedKeys,
         selectedKeys: menuSelectedKeys.value,
         'onUpdate:selectedKeys': keys => setActiveKey(keys[0]),
-        mode: siderMode.value,
+        mode: 'inline',
         theme: theme.value,
         onClick: onMenuClick,
         ...props.siderMenu,
@@ -112,21 +110,14 @@ function useExpandedKeys(
   collapsed: ComputedRef<boolean>,
 ) {
   const _expandedKeys: Ref<VKey[]> = ref([])
-  const expandedKeys = computed(() => (collapsed.value ? [] : _expandedKeys.value))
+  const expandedKeys = computed(() => _expandedKeys.value)
   const _setExpandedKeys = (keys: VKey[]) => {
-    if (keys !== _expandedKeys.value) {
-      _expandedKeys.value = keys
-    }
+    _expandedKeys.value = collapsed.value ? [] : keys
   }
 
   watch(activePaths, paths => _setExpandedKeys(getExpandedKeys(paths)))
 
   const setExpandedKeys = (keys: VKey[]) => {
-    if (collapsed.value) {
-      _setExpandedKeys(keys)
-      return
-    }
-
     const oldKeys = expandedKeys.value
     // 表示折叠了某个菜单
     if (oldKeys.length > keys.length) {

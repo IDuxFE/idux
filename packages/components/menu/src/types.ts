@@ -12,7 +12,7 @@ import { type DefineComponent, type FunctionalComponent, type HTMLAttributes, ty
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
 
-export type MenuMode = 'vertical' | 'horizontal' | 'inline' | 'inlineStretch'
+export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 
 export interface MenuClickOptions {
@@ -27,7 +27,7 @@ export const menuProps = {
   collapsed: IxPropTypes.bool.def(false),
   dataSource: IxPropTypes.array<MenuData>(),
   indent: IxPropTypes.number,
-  mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline', 'inlineStretch']).def('vertical'),
+  mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
   selectable: IxPropTypes.bool.def(true),
   target: ɵPortalTargetDef,
