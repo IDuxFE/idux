@@ -7,15 +7,27 @@
 
 import type { SpinProps } from './types'
 import type { SpinConfig } from '@idux/components/config'
-import type { ComputedRef, Slot } from 'vue'
+import type { ComputedRef } from 'vue'
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, normalizeClass, normalizeStyle } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
+import { IxLoading } from '@idux/components/_private/loading'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
-import { spinProps } from './types'
+import { type SpinSize, spinProps } from './types'
+
+const defaultStrokeWidth: Record<SpinSize, number> = {
+  sm: 3,
+  md: 3,
+  lg: 4,
+}
+const defaultRadius: Record<SpinSize, number> = {
+  sm: 14,
+  md: 14,
+  lg: 24,
+}
 
 export default defineComponent({
   name: 'IxSpin',
@@ -25,84 +37,121 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-spin`)
     const spinConfig = useGlobalConfig('spin')
 
+    const { size, strokeWidth, radius } = useSize(props, spinConfig)
+
     const hasDefaultSlot = computed(() => hasSlot(slots))
-    const icon$$ = computed(() => props.icon ?? spinConfig.icon)
-    const tip$$ = computed(() => props.tip ?? spinConfig.tip)
+    const mregedIcon = computed(() => props.icon ?? spinConfig.icon)
+    const mergedTip = computed(() => props.tip ?? spinConfig.tip)
 
-    const { spinnerClassName, containerClassName } = useClasses(props, spinConfig, hasDefaultSlot, mergedPrefixCls)
+    const { spinnerClassName, containerClassName } = useClasses(
+      props,
+      spinConfig,
+      size,
+      hasDefaultSlot,
+      mergedPrefixCls,
+    )
 
-    return () => {
-      const prefixCls = mergedPrefixCls.value
+    const renderContent = () => {
+      if (!slots.default) {
+        return null
+      }
+      return <div class={containerClassName.value}>{slots.default()}</div>
+    }
+
+    const renderTip = () => {
+      if (!mergedTip.value) {
+        return null
+      }
+
+      return <div class={`${mergedPrefixCls.value}-spinner-tip`}>{mergedTip.value}</div>
+    }
+
+    const renderIcon = () => {
+      const iconCls = `${mergedPrefixCls.value}-spinner-icon`
+
+      if (slots.icon) {
+        return <div class={iconCls}>{slots.icon()}</div>
+      }
+
+      if (mregedIcon.value) {
+        const iconStyle = normalizeStyle(props.duration && { animationDuration: `${props.duration}s` })
+        return (
+          <div class={[iconCls, props.rotate && `${iconCls}--rotate`]} style={iconStyle}>
+            <IxIcon name={mregedIcon.value} />
+          </div>
+        )
+      }
 
       return (
-        <div class={prefixCls}>
-          {renderSpinner(props.spinning, spinnerClassName.value, icon$$.value, slots.icon, tip$$.value, prefixCls)}
-          {renderContent(slots.default, containerClassName.value)}
+        <div class={iconCls}>
+          <IxLoading strokeWidth={strokeWidth.value} radius={radius.value} duration={props.duration} />
         </div>
       )
     }
+
+    const renderSpinner = () => {
+      if (!props.spinning) {
+        return null
+      }
+
+      return (
+        <div class={spinnerClassName.value}>
+          {renderIcon()}
+          {renderTip()}
+        </div>
+      )
+    }
+
+    return () => (
+      <div class={mergedPrefixCls.value}>
+        {renderSpinner()}
+        {renderContent()}
+      </div>
+    )
   },
 })
+
+const useSize = (props: SpinProps, config: SpinConfig) => {
+  const size = computed(() => props.size ?? config.size)
+  const strokeWidth = computed(
+    () => props.strokeWidth ?? config.strokeWidth?.[size.value] ?? defaultStrokeWidth[size.value],
+  )
+  const radius = computed(() => props.radius ?? config.radius?.[size.value] ?? defaultRadius[size.value])
+
+  return {
+    size,
+    strokeWidth,
+    radius,
+  }
+}
 
 const useClasses = (
   props: SpinProps,
   config: SpinConfig,
+  size: ComputedRef<SpinSize>,
   hasDefaultSlot: ComputedRef<boolean>,
   mergedPrefixCls: ComputedRef<string>,
 ) => {
   const prefixCls = mergedPrefixCls.value
 
   const spinnerClassName = computed(() => {
-    const size = props.size ?? config.size
     const tipAlign = props.tipAlign ?? config.tipAlign
-    return [`${prefixCls}-spinner`, `${prefixCls}-spinner-tip-${tipAlign}`, `${prefixCls}-spinner-${size}`]
+    return normalizeClass([
+      `${prefixCls}-spinner`,
+      `${prefixCls}-spinner-tip-${tipAlign}`,
+      `${prefixCls}-spinner-${size.value}`,
+    ])
   })
 
   const containerClassName = computed(() => {
     if (!hasDefaultSlot.value) {
       return []
     }
-    return [`${prefixCls}-container`, props.spinning ? `${prefixCls}-container-blur` : '']
+    return normalizeClass([`${prefixCls}-container`, props.spinning ? `${prefixCls}-container-blur` : ''])
   })
 
   return {
     spinnerClassName,
     containerClassName,
   }
-}
-
-const renderSpinner = (
-  spinning: boolean,
-  spinnerClassName: string[],
-  icon: string,
-  iconSlot: Slot | undefined,
-  tip: string | undefined,
-  prefixCls: string,
-) => {
-  if (!spinning) {
-    return null
-  }
-  const iconNode = iconSlot ? iconSlot() : <IxIcon name={icon} />
-  const tipNode = renderTip(tip, prefixCls)
-  return (
-    <div class={spinnerClassName}>
-      <div class={`${prefixCls}-spinner-icon`}>{iconNode}</div>
-      {tipNode}
-    </div>
-  )
-}
-
-const renderTip = (tip: string | undefined, prefixCls: string) => {
-  if (!tip) {
-    return null
-  }
-
-  return <div class={`${prefixCls}-spinner-tip`}>{tip}</div>
-}
-
-const renderContent = (defaultSlot: Slot | undefined, containerClassName: string[]) => {
-  if (!defaultSlot) {
-    return null
-  }
-  return <div class={containerClassName}>{defaultSlot()}</div>
 }
