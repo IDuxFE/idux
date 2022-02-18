@@ -49,6 +49,7 @@ describe('Stepper', () => {
     expect(onUpdateActiveKey).toBeCalledTimes(1)
     expect(onUpdateActiveKey).toBeCalledWith(2)
 
+    await wrapper.setProps({ activeKey: 2 })
     await wrapper.findAll('.ix-stepper-item')[1].trigger('click')
 
     expect(onUpdateActiveKey).toBeCalledTimes(1)
