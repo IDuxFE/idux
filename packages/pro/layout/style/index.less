@@ -13,4 +13,30 @@
       overflow: auto;
     }
   }
+
+  &-float {
+    display: flow-root;
+    position: relative;
+
+    &.@{pro-layout-prefix}-is-both, &.@{pro-layout-prefix}-is-mixin {
+      .@{pro-layout-prefix}-sider {
+        height: calc(100% - @pro-layout-header-height);
+      }
+    }
+
+    &.@{pro-layout-prefix}-is-sider {
+      .@{pro-layout-prefix}-sider {
+        height: 100%;
+      }
+    }
+
+    .@{pro-layout-prefix}-sider {
+      position: absolute;
+    }
+
+    .@{pro-layout-prefix}-content {
+      margin-left: @layout-sider-collapsed-width;
+      width: calc(100% - @layout-sider-collapsed-width);
+    }
+  }
 }

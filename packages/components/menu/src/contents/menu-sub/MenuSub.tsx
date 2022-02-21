@@ -60,7 +60,7 @@ export default defineComponent({
     const target = computed(() => menuProps.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
     const mode = useMode(menuMode, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
-    const paddingLeft = usePaddingLeft(mode, indent, level, menuItemGroupContext)
+    const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
     const isSelected = computed(() => getState(props.data!.children, selectedKeys.value))
     const { isExpanded, changeExpanded, handleMouseEvent } = useExpanded(props, key, expandedKeys, handleExpand, mode)
 

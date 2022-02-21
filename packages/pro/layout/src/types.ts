@@ -12,9 +12,19 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
+export interface SiderHover {
+  delay: number
+}
+
+export interface SiderHoverCtrl extends SiderHover {
+  enable: boolean
+}
+
 export const proLayoutProps = {
   activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
   collapsed: IxPropTypes.bool,
+  siderHover: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<SiderHover>()]),
+  compress: IxPropTypes.bool.def(true),
   fixed: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ header: boolean; sider: boolean }>()]).def(false),
   menus: IxPropTypes.array<MenuData>().def(() => []),
   sider: IxPropTypes.object<LayoutSiderProps>(),

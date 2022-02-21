@@ -7,16 +7,17 @@
 
 import { type ComputedRef, computed } from 'vue'
 
-import { type MenuMode } from '../types'
+import { type MenuMode, type MenuProps } from '../types'
 
 export const usePaddingLeft = (
+  menuProps: MenuProps,
   mode: ComputedRef<MenuMode>,
   indent: ComputedRef<number>,
   level: number,
   grouped: boolean,
 ): ComputedRef<string | undefined> => {
   return computed(() => {
-    if (mode.value !== 'inline') {
+    if (mode.value !== 'inline' || menuProps.collapsed) {
       return undefined
     }
     const groupedLeft = grouped ? 8 : 0

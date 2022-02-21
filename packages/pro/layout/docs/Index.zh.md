@@ -18,7 +18,9 @@ order: 0
 | `v-model:collapsed` | 左侧菜单折叠收起 | `boolean` | `false` | - | 仅对于侧边菜单生效 |
 | `fixed` | 固定 | `boolean \| {sider: boolean, header: boolean}` | `false` | - | - |
 | `menus` | 菜单数据 | `MenuData[]` | `[]` | - | - |
+| `compress` | 展开侧边栏是否压缩右侧内容区域 | `boolean` | `true` | - | 设置为 `false`时必须设置 `IxProLayout` 高度 |
 | `sider` | 侧边栏的更多配置 | `LayoutSiderProps` | - | - | 例如：可以配置响应式断点：`breakpoint` |
+| `siderHover` | 鼠标悬浮侧边栏时展开 | `boolean \| SiderHover` | `-` | - | `delay`单位为 `ms` |
 | `siderMenu` | 侧边栏菜单组件的更多配置 | `MenuProps` | - | - | 例如：可以配置缩进宽度：`indent` 和菜单模式: `mode` |
 | `theme` | 主题 | `light \| dark \| {sider: light \| dark, header: light \| dark}` | `light` | - | - |
 | `type` | 布局类型 | `'header' \| 'sider' \| 'both' \| 'mixin'` | `mixin` | - | 参见示例：[布局类型](#pro-layout-demo-Type) |
@@ -38,6 +40,12 @@ order: 0
 
 > 为了便于自定义导航菜单，除了上面表格中列举出来的插槽外，还支持 `IxMenu` 的全部插槽，参见 [MenuSlots](/components/menu/zh#MenuSlots).  
 > 默认会将 `IxProLayout` 的所有插槽传递给内部的 `IxMenu` 组件，参考示例中的 `itemLabel` 插槽。
+
+```ts
+interface SiderHover {
+  delay: number
+}
+```
 
 ### IxProLayoutSiderTrigger
 

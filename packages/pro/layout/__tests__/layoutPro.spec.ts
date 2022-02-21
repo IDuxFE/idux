@@ -1,10 +1,11 @@
 import { MountingOptions, flushPromises, mount } from '@vue/test-utils'
 import { h } from 'vue'
 
-import { renderWork } from '@tests'
+import { renderWork, wait } from '@tests'
 
 import ProLayout from '../src/Layout'
 import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
+import LayoutSider from '../src/contents/Sider'
 import { ProLayoutMenuData, ProLayoutProps } from '../src/types'
 
 const dataSource: ProLayoutMenuData[] = [
@@ -113,6 +114,43 @@ describe('ProLayout', () => {
     await wrapper.findComponent(LayoutSiderTrigger).trigger('click')
 
     expect(onUpdateCollapsed).toBeCalledWith(true)
+  })
+
+  test('compress work', async () => {
+    const wrapper = ProLayoutMount({})
+    await flushPromises()
+
+    expect(wrapper.classes()).not.toContain('ix-pro-layout-float')
+
+    await wrapper.setProps({ compress: false })
+
+    expect(wrapper.classes()).toContain('ix-pro-layout-float')
+
+    await wrapper.setProps({ compress: true })
+
+    expect(wrapper.classes()).not.toContain('ix-pro-layout-float')
+  })
+
+  test('collapsedDelay work', async () => {
+    const onUpdateCollapsed = jest.fn()
+    const wrapper = ProLayoutMount({
+      props: {
+        siderHover: { delay: 10 },
+        collapsed: true,
+        'onUpdate:collapsed': onUpdateCollapsed,
+      },
+    })
+    await flushPromises()
+
+    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(true)
+
+    await wrapper.findComponent(LayoutSider).trigger('mouseenter')
+
+    expect(onUpdateCollapsed).not.toBeCalled()
+
+    await wait(10)
+
+    expect(onUpdateCollapsed).toBeCalledWith(false)
   })
 
   test('fixed work', async () => {

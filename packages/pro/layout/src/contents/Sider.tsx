@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
 
 import { isObject } from 'lodash-es'
 
-import { type VKey, callEmit, useState } from '@idux/cdk/utils'
-import { IxLayoutSider } from '@idux/components/layout'
+import { type VKey, callEmit } from '@idux/cdk/utils'
+import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, MenuData, MenuProps } from '@idux/components/menu'
 
 import { proLayoutToken } from '../token'
@@ -19,10 +19,21 @@ import { getTargetPaths } from '../utils/menu'
 export default defineComponent({
   name: 'ProLayoutSider',
   setup() {
-    const { props, slots, mergedPrefixCls, activeKey, setActiveKey, activePaths, siderMenus, collapsed, setCollapsed } =
-      inject(proLayoutToken)!
+    const {
+      props,
+      slots,
+      mergedPrefixCls,
+      activeKey,
+      setActiveKey,
+      activePaths,
+      siderMenus,
+      collapsed,
+      siderHover,
+      setCollapsed,
+      handleCollapsedDelay,
+    } = inject(proLayoutToken)!
 
-    const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus)
+    const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus, collapsed)
 
     const theme = computed(() => {
       const { theme } = props
@@ -49,6 +60,15 @@ export default defineComponent({
       callEmit(props['onMenuClick'], menuClickOption)
     }
 
+    const siderEvent = {
+      onMouseenter() {
+        handleCollapsedDelay(false)
+      },
+      onMouseleave() {
+        handleCollapsedDelay(true)
+      },
+    }
+
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-sider`
 
@@ -63,15 +83,18 @@ export default defineComponent({
         mode: 'inline',
         theme: theme.value,
         onClick: onMenuClick,
+        ...props.siderMenu,
       }
-      const contentNode = slots.siderContent ? (
-        slots.siderContent(menuProps)
-      ) : (
-        <IxMenu v-slots={slots} {...menuProps} {...props.siderMenu} />
-      )
+      const contentNode = slots.siderContent ? slots.siderContent(menuProps) : <IxMenu v-slots={slots} {...menuProps} />
+
+      const siderProps: LayoutSiderProps = {
+        collapsed: collapsed.value,
+        'onUpdate:collapsed': setCollapsed,
+        ...props.sider,
+      }
 
       return (
-        <IxLayoutSider class={classes.value} onCollapse={setCollapsed} {...props.sider}>
+        <IxLayoutSider class={classes.value} {...siderProps} {...(siderHover.value.enable ? siderEvent : undefined)}>
           {slots.siderHeader && <div class={`${mergedPrefixCls.value}-sider-header`}>{slots.siderHeader()}</div>}
           <div class={`${prefixCls}-content`}>{contentNode}</div>
           {slots.siderFooter && <div class={`${mergedPrefixCls.value}-sider-footer`}>{slots.siderFooter()}</div>}
@@ -81,8 +104,16 @@ export default defineComponent({
   },
 })
 
-function useExpandedKeys(activePaths: ComputedRef<MenuData[]>, siderMenus: ComputedRef<MenuData[]>) {
-  const [expandedKeys, _setExpandedKeys] = useState(getExpandedKeys(activePaths.value))
+function useExpandedKeys(
+  activePaths: ComputedRef<MenuData[]>,
+  siderMenus: ComputedRef<MenuData[]>,
+  collapsed: ComputedRef<boolean>,
+) {
+  const _expandedKeys: Ref<VKey[]> = ref([])
+  const expandedKeys = computed(() => _expandedKeys.value)
+  const _setExpandedKeys = (keys: VKey[]) => {
+    _expandedKeys.value = collapsed.value ? [] : keys
+  }
 
   watch(activePaths, paths => _setExpandedKeys(getExpandedKeys(paths)))
 

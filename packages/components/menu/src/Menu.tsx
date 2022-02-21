@@ -27,10 +27,7 @@ export default defineComponent({
     const config = useGlobalConfig('menu')
 
     const indent = computed(() => props.indent ?? config.indent)
-    const mode = computed(() => {
-      const { collapsed, mode } = props
-      return collapsed && mode !== 'horizontal' ? 'vertical' : mode
-    })
+    const mode = computed(() => props.mode)
 
     const theme = computed(() => props.theme ?? config.theme)
 

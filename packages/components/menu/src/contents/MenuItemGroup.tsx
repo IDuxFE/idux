@@ -26,12 +26,12 @@ export default defineComponent({
     provide(menuItemGroupToken, true)
 
     // menuContext must exist
-    const { slots: menuSlots, mergedPrefixCls, mode, indent, handleClick } = inject(menuToken)!
+    const { props: menuProps, slots: menuSlots, mergedPrefixCls, mode, indent, handleClick } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, null)
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
-    const paddingLeft = usePaddingLeft(mode, indent, level, !!menuItemGroupContext)
+    const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, !!menuItemGroupContext)
     const labelStyle = computed(() => ({ paddingLeft: paddingLeft.value }))
 
     const onClick = (evt: Event) => {
