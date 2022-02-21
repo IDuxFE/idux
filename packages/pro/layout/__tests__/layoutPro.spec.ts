@@ -135,7 +135,7 @@ describe('ProLayout', () => {
     const onUpdateCollapsed = jest.fn()
     const wrapper = ProLayoutMount({
       props: {
-        hoverTrigger: { enable: true, delay: 10 },
+        siderHover: { delay: 10 },
         collapsed: true,
         'onUpdate:collapsed': onUpdateCollapsed,
       },

@@ -7,7 +7,7 @@
 
 import { type ComputedRef, type Ref, computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
-import { isBoolean } from 'lodash-es'
+import { isBoolean, isUndefined } from 'lodash-es'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { IxLayout, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
@@ -18,7 +18,7 @@ import { useHeaderMenus, useSiderMenus } from './composables/useMenu'
 import Header from './contents/Header'
 import Sider from './contents/Sider'
 import { proLayoutToken } from './token'
-import { type HoverTriggerOption, type ProLayoutProps, proLayoutProps } from './types'
+import { type ProLayoutProps, type SiderHoverCtrl, proLayoutProps } from './types'
 import { getTargetPaths } from './utils/menu'
 
 export default defineComponent({
@@ -34,9 +34,9 @@ export default defineComponent({
     const activeHeaderKey = useActiveHeaderKey(props, activePaths, headerMenus)
     const siderMenus = useSiderMenus(props, activeHeaderKey)
     const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed', false)
-    const hoverTrigger = useHoverTrigger(props)
+    const siderHover = useHoverTrigger(props)
 
-    const { handleCollapsedDelay } = useHandleCollapsedDelay(hoverTrigger, setCollapsed)
+    const { handleCollapsedDelay } = useHandleCollapsedDelay(siderHover, setCollapsed)
 
     provide(proLayoutToken, {
       props,
@@ -49,7 +49,7 @@ export default defineComponent({
       activeHeaderKey,
       siderMenus,
       collapsed,
-      hoverTrigger,
+      siderHover,
       handleCollapsedDelay, // 延迟折叠
       setCollapsed,
     })
@@ -84,32 +84,32 @@ export default defineComponent({
   },
 })
 
-function useHoverTrigger(props: ProLayoutProps) {
+function useHoverTrigger(props: ProLayoutProps): ComputedRef<SiderHoverCtrl> {
   return computed(() => {
-    if (isBoolean(props.hoverTrigger)) {
+    if (isUndefined(props.siderHover) || isBoolean(props.siderHover)) {
       return {
-        enable: props.hoverTrigger,
+        enable: !!props.siderHover,
         delay: 0,
       }
     }
-    return props.hoverTrigger
+    return {
+      enable: true,
+      ...props.siderHover,
+    }
   })
 }
 
-function useHandleCollapsedDelay(
-  hoverTrigger: ComputedRef<HoverTriggerOption>,
-  setCollapsed: (collapsed: boolean) => void,
-) {
+function useHandleCollapsedDelay(siderHover: ComputedRef<SiderHoverCtrl>, setCollapsed: (collapsed: boolean) => void) {
   const timer: Ref<number | null> = ref(null)
 
   const handleCollapsedDelay = (collapsed: boolean) => {
-    if (hoverTrigger.value.delay) {
+    if (siderHover.value.delay) {
       timer.value && clearTimeout(timer.value)
       if (!collapsed) {
         timer.value = setTimeout(() => {
           setCollapsed(collapsed)
           timer.value = null
-        }, hoverTrigger.value.delay)
+        }, siderHover.value.delay)
       } else {
         setCollapsed(collapsed)
       }

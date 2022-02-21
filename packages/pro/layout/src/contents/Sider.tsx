@@ -28,7 +28,7 @@ export default defineComponent({
       activePaths,
       siderMenus,
       collapsed,
-      hoverTrigger,
+      siderHover,
       setCollapsed,
       handleCollapsedDelay,
     } = inject(proLayoutToken)!
@@ -94,7 +94,7 @@ export default defineComponent({
       }
 
       return (
-        <IxLayoutSider class={classes.value} {...siderProps} {...(hoverTrigger.value.enable ? siderEvent : undefined)}>
+        <IxLayoutSider class={classes.value} {...siderProps} {...(siderHover.value.enable ? siderEvent : undefined)}>
           {slots.siderHeader && <div class={`${mergedPrefixCls.value}-sider-header`}>{slots.siderHeader()}</div>}
           <div class={`${prefixCls}-content`}>{contentNode}</div>
           {slots.siderFooter && <div class={`${mergedPrefixCls.value}-sider-footer`}>{slots.siderFooter()}</div>}

@@ -12,18 +12,18 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
-export interface HoverTriggerOption {
+export interface SiderHover {
+  delay: number
+}
+
+export interface SiderHoverCtrl extends SiderHover {
   enable: boolean
-  delay?: number
 }
 
 export const proLayoutProps = {
   activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
   collapsed: IxPropTypes.bool,
-  hoverTrigger: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<HoverTriggerOption>()]).def(() => ({
-    enable: false,
-    delay: 0,
-  })),
+  siderHover: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<SiderHover>()]),
   compress: IxPropTypes.bool.def(true),
   fixed: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ header: boolean; sider: boolean }>()]).def(false),
   menus: IxPropTypes.array<MenuData>().def(() => []),

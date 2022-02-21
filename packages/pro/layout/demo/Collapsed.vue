@@ -2,7 +2,7 @@
   <IxProLayout
     v-model:activeKey="activeKey"
     v-model:collapsed="collapsed"
-    :hoverTrigger="hoverTrigger"
+    :siderHover="siderHover"
     :menus="dataSource"
     :compress="false"
     :style="{ height: '300px' }"
@@ -29,8 +29,7 @@ import { type MenuData } from '@idux/components/menu'
 
 const activeKey = ref()
 const collapsed = ref(true)
-const hoverTrigger = ref({
-  enable: true,
+const siderHover = ref({
   delay: 500,
 })
 const dataSource: MenuData[] = [
