@@ -31,7 +31,7 @@ import ColGroup from './ColGroup'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
 import Body from './body/Body'
-import BodyRow from './body/BodyRow'
+import { renderBodyRow } from './body/RenderBodyRow'
 import Head from './head/Head'
 import Foot from './tfoot/Foot'
 
@@ -39,6 +39,8 @@ export default defineComponent({
   setup() {
     const {
       props,
+      slots,
+      expandable,
       mergedPrefixCls,
       changeColumnWidth,
       flattedData,
@@ -156,11 +158,9 @@ export default defineComponent({
 
         let tableBody: VNodeTypes
         if (props.virtual && props.scroll) {
-          const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) => {
-            const { expanded, level, record, rowKey } = item
-            const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex: index, rowKey }
-            return <BodyRow {...rowProps} />
-          }
+          const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
+            renderBodyRow(item, index, slots, expandable.value)
+
           const contentRender: VirtualContentRenderFn = children => {
             return (
               <TableTag style={tableStyle.value}>

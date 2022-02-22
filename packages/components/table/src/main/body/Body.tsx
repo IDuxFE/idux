@@ -10,13 +10,22 @@ import { type VNodeTypes, computed, defineComponent, inject } from 'vue'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
 import { TABLE_TOKEN } from '../../token'
-import BodyRow from './BodyRow'
 import BodyRowSingle from './BodyRowSingle'
 import MeasureRow from './MeasureRow'
+import { renderBodyRow } from './RenderBodyRow'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const { props, slots: tableSlots, flattedData, scrollWidth, scrollHeight, isSticky, bodyTag } = inject(TABLE_TOKEN)!
+    const {
+      props,
+      slots: tableSlots,
+      flattedData,
+      expandable,
+      scrollWidth,
+      scrollHeight,
+      isSticky,
+      bodyTag,
+    } = inject(TABLE_TOKEN)!
 
     const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
 
@@ -31,9 +40,7 @@ export default defineComponent({
           children.push(...slots.default())
         } else {
           data.forEach((item, rowIndex) => {
-            const { expanded, level, record, rowKey } = item
-            const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex, rowKey }
-            children.push(<BodyRow {...rowProps} />)
+            children.push(...renderBodyRow(item, rowIndex, tableSlots, expandable.value))
           })
         }
       } else {
