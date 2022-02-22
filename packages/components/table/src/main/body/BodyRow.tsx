@@ -5,18 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  type ComputedRef,
-  type Slots,
-  VNodeChild,
-  type VNodeTypes,
-  computed,
-  defineComponent,
-  inject,
-  normalizeClass,
-} from 'vue'
-
-import { isFunction, isString } from 'lodash-es'
+import { type ComputedRef, type VNodeTypes, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
 
@@ -27,9 +16,8 @@ import {
 } from '../../composables/useColumns'
 import { FlattedData } from '../../composables/useDataSource'
 import { TABLE_TOKEN } from '../../token'
-import { type TableBodyRowProps, type TableColumnExpandable, type TableProps, tableBodyRowProps } from '../../types'
+import { type TableBodyRowProps, type TableProps, tableBodyRowProps } from '../../types'
 import BodyCell from './BodyCell'
-import BodyRowSingle from './BodyRowSingle'
 
 export default defineComponent({
   props: tableBodyRowProps,
@@ -37,7 +25,6 @@ export default defineComponent({
     const {
       props: tableProps,
       mergedPrefixCls,
-      slots,
       flattedColumns,
       expandable,
       handleExpandChange,
@@ -77,17 +64,11 @@ export default defineComponent({
       )
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyRowTag = bodyRowTag.value as any
-      const nodes = [
+      return (
         <BodyRowTag class={classes.value} {...clickEvents.value}>
           {children}
-        </BodyRowTag>,
-      ]
-
-      if (props.expanded) {
-        const expandedContext = renderExpandedContext(props, slots, expandable.value)
-        expandedContext && nodes.push(expandedContext)
-      }
-      return nodes
+        </BodyRowTag>
+      )
     }
   },
 })
@@ -209,16 +190,4 @@ function renderChildren(
   })
 
   return children
-}
-
-function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
-  const { customExpand } = expandable || {}
-  const { record, rowIndex } = props
-  let expandedContext: VNodeChild
-  if (isFunction(customExpand)) {
-    expandedContext = customExpand({ record, rowIndex })
-  } else if (isString(customExpand) && slots[customExpand]) {
-    expandedContext = slots[customExpand]!({ record, rowIndex })
-  }
-  return expandedContext && <BodyRowSingle>{expandedContext}</BodyRowSingle>
 }
