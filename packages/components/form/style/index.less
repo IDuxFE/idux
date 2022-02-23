@@ -25,7 +25,7 @@
   margin-bottom: @form-item-margin-bottom;
   vertical-align: top;
 
-  &-has-message {
+  &-with-message {
     margin-bottom: 0;
   }
 
@@ -47,17 +47,13 @@
       align-items: center;
       color: @form-item-label-color;
       font-size: @form-item-font-size;
-
-      &::after {
-        position: relative;
-        top: -0.5px;
-        margin: 0 @form-item-label-colon-margin-right 0 @form-item-label-colon-margin-left;
-        content: ':';
-      }
     }
 
-    &-colonless > label::after {
-      content: ' ';
+    &-colon > label::after {
+      position: relative;
+      top: -0.5px;
+      margin: 0 @form-item-label-colon-margin-right 0 @form-item-label-colon-margin-left;
+      content: ':';
     }
 
     &-required > label::before {
@@ -96,7 +92,7 @@
   }
 
   &-message,
-  &-extra {
+  &-extra-message {
     clear: both;
     min-height: @form-item-margin-bottom;
     color: @form-color-secondary;

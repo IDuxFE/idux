@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form basic work render work 1`] = `
+"<form class=\\"ix-form ix-form-horizontal ix-form-md\\">
+  <div class=\\"ix-row ix-form-item\\">
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+        <!---->
+      </label></div>
+    <div class=\\"ix-col ix-form-item-control\\">
+      <div class=\\"ix-form-item-control-input\\">
+        <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class=\\"ix-row ix-form-item\\">
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Password
+        <!---->
+      </label></div>
+    <div class=\\"ix-col ix-form-item-control\\">
+      <div class=\\"ix-form-item-control-input\\">
+        <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class=\\"ix-row ix-form-item\\">
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Remember
+        <!---->
+      </label></div>
+    <div class=\\"ix-col ix-form-item-control\\">
+      <div class=\\"ix-form-item-control-input\\">
+        <div class=\\"ix-form-item-control-input-content\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
+            <!---->
+            <!---->
+          </label></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class=\\"ix-row ix-form-item\\">
+    <!---->
+    <div class=\\"ix-col ix-form-item-control\\">
+      <div class=\\"ix-form-item-control-input\\">
+        <div class=\\"ix-form-item-control-input-content\\"><button class=\\"ix-button ix-button-md\\" type=\\"button\\"><span>Click</span></button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`Form item work render work 1`] = `
+"<div class=\\"ix-row ix-form-item\\">
+  <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+      <!---->
+    </label></div>
+  <div class=\\"ix-col ix-form-item-control\\">
+    <div class=\\"ix-form-item-control-input\\">
+      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`Form wrapper work render work 1`] = `
+"<div class=\\"ix-row ix-form-item\\">
+  <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+      <!---->
+    </label></div>
+  <div class=\\"ix-col ix-form-item-control\\">
+    <div class=\\"ix-form-item-control-input\\">
+      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+<div class=\\"ix-row ix-form-item\\">
+  <div class=\\"ix-col ix-col-span-6 ix-form-item-label ix-form-item-label-colon\\"><label>Password
+      <!---->
+    </label></div>
+  <div class=\\"ix-col ix-form-item-control\\">
+    <div class=\\"ix-form-item-control-input\\">
+      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>
+<div class=\\"ix-row ix-form-item\\">
+  <div class=\\"ix-col ix-col-span-8 ix-form-item-label ix-form-item-label-colon\\"><label>Remember
+      <!---->
+    </label></div>
+  <div class=\\"ix-col ix-form-item-control\\">
+    <div class=\\"ix-form-item-control-input\\">
+      <div class=\\"ix-form-item-control-input-content\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
+          <!---->
+          <!---->
+        </label></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+  </div>
+</div>"
+`;

@@ -17,11 +17,11 @@ order: 0
 | `colonless` | 配置 `IxFormItem` 的 `colon` 默认值 | `boolean` | `false` | ✅ | - |
 | `control` | 表单的控制器 | `string \| number \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
 | `controlCol` | 配置 `IxFormItem` 的 `controlCol` 默认值 | `number \| ColProps` | - | - | - |
-| `hasFeedback` | 配置 `IxFormItem` 的 `hasFeedback` 默认值 | `boolean` | `false` | - | - |
-| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `start \| end` | `end` | ✅ | - |
+| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `'start' \| 'end'` | `'end'` | ✅ | - |
 | `labelCol` | 配置 `IxFormItem` 的 `labelCol` 默认值 | `number \| ColProps` | - | - | - |
-| `layout` | 表单布局 | `horizontal \| vertical \| inline` | `horizontal` | ✅ | - |
-| `size` | 表单大小 | `sm \| md \| lg` | `md` | ✅ | - |
+| `layout` | 表单布局 | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | ✅ | - |
+| `size` | 表单大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
+| `statusIcon` |  配置 `IxFormItem` 的 `statusIcon` 默认值 | `boolean \| Record<ValidateStatus, string>` | `false` | - | - |
 
 ### IxFormItem
 
@@ -35,17 +35,18 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | 默认取第 1 个子输入控件的 control，如果存在多个输入控件，建议手动指定，参考示例中的 `Phone Number`|
-| `controlCol` | 配置表单控件的布局，同 `<IxCol>` 组件，设置 `span` `offset` 的值 | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
-| `extra` | 额外的提示信息 | `string \| #extra` | - | - | 当需要错误信息和提示文案同时出现时使用 |
-| `hasFeedback` | 是否展示校验状态图标 | `boolean` | `false` | - | - |
+| `controlCol` | 配置表单控件的布局配置，可参考 `IxCol` 组件 | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
+| `controlTooltip` | 配置表单控件的提示信息 | `sting \| #controlTooltip` | - | - | 通常用于对输入规则的详细说明 |
+| `extraMessage` | 额外的提示信息 | `string \| #extraMessage` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `label` | `label` 标签的文本| `string \| #label` | - | - | - |
-| `labelAlign` | `label` 标签文本对齐方式 | `start \| end` | - | - | - |
-| `labelCol` | `label` 标签布局，同 `<IxCol>` 组件，设置 `span` `offset` 的值  | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
+| `labelAlign` | `label` 标签文本对齐方式 | `'start' \| 'end'` | - | - | - |
+| `labelCol` | `label` 标签布局配置，可参考 `IxCol` 组件  | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
 | `labelFor` | `label` 标签的 `for` 属性 | `string` | - | - | - |
-| `labelTooltip` | 配置提示信息 | `sting \| #tooltip` | - | - | - |
+| `labelTooltip` | 配置表单文本的提示信息 | `sting \| #labelTooltip` | - | - | 通常用于对表单本文的解释说名 |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |
-| `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string \| FormMessage` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
+| `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string \| FormValidateMessage` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
 | `status` | 手动指定表单项的校验状态 | `valid \| invalid \| validating` | - | - | - |
+| `statusIcon` | 自定义校验状态图标 | `boolean \| Record<ValidateStatus, string> \| #statusIcon={status}` | - | - | 为 `true` 时，显示默认的图标 |
 
 ### IxFormWrapper
 
@@ -56,57 +57,6 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
-
-## FAQ
-
-### 自定义表单组件
-
-参考下列代码来自定义表单组件，实现 `control` 并与 `IxFormItem` 配合使用。
-
-```html
-<template>
-  <input :value="valueRef" :disabled="isDisabled" @blur="onBlur" @change="onChange" />
-</template>
-
-<script lang="ts">
-import { PropType, computed, defineComponent } from 'vue'
-
-import { AbstractControl, useValueAccessor } from '@idux/cdk/forms'
-import { useFormItemRegister } from '@idux/components/form'
-
-export default defineComponent({
-  name: 'CustomInput',
-  props: {
-    value: String,
-    control: { type: [String, Object] as PropType<string | AbstractControl> },
-    disabled: Boolean,
-  },
-  setup(_) {
-    // 使用 valueAccessor 接管 props.value 的控制
-    const control = useValueControl()
-    const accessor = useValueAccessor({ control })
-    // 在 IxFormItem 中注册 control
-    useFormItemRegister(control)
-
-    // 输入框绑定的值
-    const valueRef = computed(() => accessor.valueRef.value)
-    // 输入框禁用状态
-    const isDisabled = computed(() => accessor.disabled.value)
-    // 输入框 blur 状态
-    const onBlur = () => {
-      accessor.markAsBlurred()
-    }
-    // 输入框值发生变更后的回调
-    const onChange = (evt: Event) => {
-      const { value } = evt.target as HTMLInputElement
-      accessor.setValue(value)
-    }
-
-    return { valueRef, isDisabled, onBlur, onChange }
-  },
-})
-</script>
-```
 
 <!--- insert less variable begin  --->
 ## 主题变量
@@ -159,3 +109,54 @@ export default defineComponent({
 | `@form-item-label-colon-margin-right` | `8px` | - | - |
 | `@form-item-label-colon-margin-left` | `2px` | - | - |
 <!--- insert less variable end  --->
+
+## FAQ
+
+### 自定义表单组件
+
+参考下列代码来自定义表单组件，实现 `control` 并与 `IxFormItem` 配合使用。
+
+```html
+<template>
+  <input :value="valueRef" :disabled="isDisabled" @blur="onBlur" @change="onChange" />
+</template>
+
+<script lang="ts">
+import { PropType, computed, defineComponent } from 'vue'
+
+import { AbstractControl, useValueAccessor } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
+
+export default defineComponent({
+  name: 'CustomInput',
+  props: {
+    value: String,
+    control: { type: [String, Object] as PropType<string | AbstractControl> },
+    disabled: Boolean,
+  },
+  setup(_) {
+    // 使用 valueAccessor 接管 props.value 的控制
+    const control = useValueControl()
+    const accessor = useValueAccessor({ control })
+    // 在 IxFormItem 中注册 control
+    useFormItemRegister(control)
+
+    // 输入框绑定的值
+    const valueRef = computed(() => accessor.valueRef.value)
+    // 输入框禁用状态
+    const isDisabled = computed(() => accessor.disabled.value)
+    // 输入框 blur 状态
+    const onBlur = () => {
+      accessor.markAsBlurred()
+    }
+    // 输入框值发生变更后的回调
+    const onChange = (evt: Event) => {
+      const { value } = evt.target as HTMLInputElement
+      accessor.setValue(value)
+    }
+
+    return { valueRef, isDisabled, onBlur, onChange }
+  },
+})
+</script>
+```

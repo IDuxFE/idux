@@ -55,7 +55,7 @@ export function useFormArray<T>(
 | --- | --- | --- | --- | --- |
 | `config` | 控件数组配置项 | `ArrayConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `index` |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
-| `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
+| `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
 | `validatorOptions` | 控件数组验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 
 ```ts
@@ -93,7 +93,7 @@ export function useFormControl<T>(
 | `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
 | `trim` | 是否去除首尾空字符串 | `boolean` | - | 默认不去除 |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
-| `asyncValidator` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
+| `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
 
 ### Validators
 

@@ -13,17 +13,18 @@ import type { DefineComponent, HTMLAttributes } from 'vue'
 import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
-const colProp = IxPropTypes.oneOfType([String, Number, IxPropTypes.object<ColProps>()])
+const colProp = IxPropTypes.oneOfType([Number, String, IxPropTypes.object<ColProps>()])
 
 export const formProps = {
-  colonless: IxPropTypes.bool,
   control: controlPropDef,
+  colonless: IxPropTypes.bool,
   controlCol: colProp,
-  hasFeedback: IxPropTypes.bool.def(false),
+  hasFeedback: IxPropTypes.bool,
   labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
   labelCol: colProp,
   layout: IxPropTypes.oneOf<FormLayout>(['horizontal', 'vertical', 'inline']),
   size: IxPropTypes.oneOf<FormSize>(['lg', 'md', 'sm']),
+  statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]).def(false),
 }
 
 export type FormProps = IxInnerPropTypes<typeof formProps>
@@ -31,18 +32,19 @@ export type FormPublicProps = IxPublicPropTypes<typeof formProps>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
-export type FormColType = string | number | ColProps
+export type FormColType = number | string | ColProps
 export type FormLabelAlign = 'start' | 'end'
 export type FormLayout = 'horizontal' | 'vertical' | `inline`
-export type FormMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
+export type FormValidateMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
 export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
   colonless: IxPropTypes.bool,
   control: controlPropDef,
   controlCol: colProp,
-  extra: IxPropTypes.string,
   hasFeedback: IxPropTypes.bool,
+  extra: IxPropTypes.string,
+  extraMessage: IxPropTypes.string,
   label: IxPropTypes.string,
   labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
   labelCol: colProp,
@@ -52,9 +54,10 @@ export const formItemProps = {
   message: IxPropTypes.oneOfType([
     String,
     IxPropTypes.func<(control: AbstractControl) => string>(),
-    IxPropTypes.object<FormMessage>(),
+    IxPropTypes.object<FormValidateMessage>(),
   ]),
   status: IxPropTypes.oneOf<ValidateStatus>(['valid', 'invalid', 'validating']),
+  statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]),
 }
 
 export type FormItemProps = IxInnerPropTypes<typeof formItemProps>
