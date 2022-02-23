@@ -1,6 +1,6 @@
 <template>
   <div class="header-search-box">
-    <IxInput borderless prefix="search" :placeholder="placeholder" />
+    <IxInput borderless prefix="search" :placeholder="placeholder" disabled />
   </div>
 </template>
 

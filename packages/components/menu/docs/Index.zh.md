@@ -57,8 +57,8 @@ export interface MenuClickOptions {
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
 | `icon` | 菜单图标| `string  \| VNode` | - | - |
 | `label` | 菜单文本 | `string`  | - | - |
-| `customIcon` | 自定义图标 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `itemIcon` | - | 类型为 `string` 时，对应插槽名 |
-| `customLabel` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `itemLabel` | - | 类型为 `string` 时，对应插槽名 |
+| `customIcon` | 自定义图标 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemIcon'` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemLabel'` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuItemGroupProps
 
@@ -68,10 +68,10 @@ export interface MenuClickOptions {
 | --- | --- | --- | --- | --- | --- |
 | `type` | 菜单类型 | `'itemGroup'` | - | - | 必传 |
 | `children` | 子菜单数据 | `MenuData[]` | - | - | - |
-| `icon` | 菜单图标| `string \| VNode \| #icon` | - | - |
-| `label` | 菜单文本 | `string \| #label`  | - | - |
-| `customIcon` | 自定义图标 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `itemGroupIcon` | - | 类型为 `string` 时，对应插槽名 |
-| `customLabel` | 自定义文本 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `itemGroupLabel` | - | 类型为 `string` 时，对应插槽名 |
+| `icon` | 菜单图标| `string \| VNode` | - | - |
+| `label` | 菜单文本 | `string`  | - | - |
+| `customIcon` | 自定义图标 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `'itemGroupIcon'` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuItemGroupProps) => VNodeChild)` | `'itemGroupLabel'` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuSubProps
 
@@ -86,9 +86,9 @@ export interface MenuClickOptions {
 | `label` | 菜单文本 | `string`  | - | - |
 | `offset` | 浮层偏移量 | `[number, number]` | `[0, 8]` | ✅ | `inline` 模式时无效 |
 | `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
-| `customIcon` | 自定义图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subIcon` | - | 类型为 `string` 时，对应插槽名 |
-| `customLabel` | 自定义文本 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subLabel` | - | 类型为 `string` 时，对应插槽名 |
-| `customSuffix` | 自定义后缀图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `subSuffix` | - | 类型为 `string` 时，对应插槽名 |
+| `customIcon` | 自定义图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subIcon'` | - | 类型为 `string` 时，对应插槽名 |
+| `customLabel` | 自定义文本 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subLabel'` | - | 类型为 `string` 时，对应插槽名 |
+| `customSuffix` | 自定义后缀图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subSuffix'` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuDividerProps
 
@@ -97,18 +97,6 @@ export interface MenuClickOptions {
 | `type` | 菜单类型 | `'divider'` | - | - | 必传 |
 | `key` | 唯一标识 | `VKey` | - | - | 必传 |
 | `additional` | 菜单的额外配置 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
-
-#### MenuSlots
-
-| 名称 | 说明 | 参数类型 | 备注 |
-|  --- | --- | --- | --- |
-| `itemIcon` | 自定菜单项的图标 | `MenuItemProps & { selected: boolean }` | - |
-| `itemLabel` | 自定菜单项的文本 | `MenuItemProps & { selected: boolean }` | - |
-| `itemGroupIcon` | 自定菜单组的图标 | `MenuItemGroupProps` | - |
-| `itemGroupLabel` | 自定菜单组的文本 | `MenuItemGroupProps` | - |
-| `subIcon` | 自定义子菜单的图标 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
-| `subLabel` | 自定义子菜单的文本 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
-| `subLabel` | 自定义子菜单的后缀 | `MenuSubProps & { expanded: boolean; selected: boolean }` | - |
 
 ### IxMenuItem
 

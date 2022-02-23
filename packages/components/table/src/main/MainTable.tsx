@@ -175,7 +175,7 @@ export default defineComponent({
 
           __DEV__ &&
             !isNumber(height || y) &&
-            Logger.warn('components/table', 'scroll.y must is a valid number when enable virtual scroll')
+            Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
 
           tableBody = (
             <CdkVirtualScroll

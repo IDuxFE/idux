@@ -5,26 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FormItemProps } from './types'
-import type { AbstractControl, ValidateErrors, ValidateStatus } from '@idux/cdk/forms'
-import type { ColProps } from '@idux/components/grid'
-import type { Locale } from '@idux/components/i18n'
-import type { ComputedRef, Ref, Slots, WatchStopHandle } from 'vue'
+import { type ComputedRef, type Slot, type Slots, computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { computed, defineComponent, inject, provide, shallowRef, watch, watchEffect } from 'vue'
+import { isNumber, isString } from 'lodash-es'
 
-import { isFunction, isNumber, isString } from 'lodash-es'
-
-import { useValueControl } from '@idux/cdk/forms'
-import { VKey } from '@idux/cdk/utils'
+import { Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxCol, IxRow } from '@idux/components/grid'
-import { getLocale } from '@idux/components/i18n'
+import { type ColProps, IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
 import { IxTooltip } from '@idux/components/tooltip'
 
-import { FORM_ITEM_TOKEN, formToken } from './token'
-import { formItemProps } from './types'
+import { useFormItem } from './composables/useFormItem'
+import { formToken } from './token'
+import { type FormItemProps, formItemProps } from './types'
 
 export default defineComponent({
   name: 'IxFormItem',
@@ -32,35 +25,33 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-form-item`)
+    const { props: formProps, config } = inject(formToken, null) || {}
 
-    const formContext = inject(formToken, null)
-
-    const labelColConfig = computed(() => normalizeColConfig(props.labelCol ?? formContext?.labelCol.value))
-    const controlColConfig = computed(() => normalizeColConfig(props.controlCol ?? formContext?.controlCol.value))
-    const hasFeedback = computed(() => props.hasFeedback ?? !!formContext?.hasFeedback.value)
-
-    const { status, statusIcon, message } = useControlStatus(props)
+    const colonless = computed(() => props.colonless ?? formProps?.colonless ?? config?.colonless)
+    const labelAlign = computed(() => props.labelAlign ?? formProps?.labelAlign ?? config?.labelAlign)
+    const labelColConfig = computed(() => normalizeColConfig(props.labelCol ?? formProps?.labelCol))
+    const controlColConfig = computed(() => normalizeColConfig(props.controlCol ?? formProps?.controlCol))
+    const { status, statusIcon, message } = useFormItem(props, formProps)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       const currStatus = status.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-has-feedback`]: hasFeedback.value && !!currStatus,
-        [`${prefixCls}-has-message`]: !!message.value,
+        [`${prefixCls}-with-message`]: !!message.value,
+        [`${prefixCls}-with-status-icon`]: !!statusIcon.value,
         [`${prefixCls}-${currStatus}`]: !!currStatus,
-      }
+      })
     })
 
     const labelClasses = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { colonless = formContext?.colonless.value, labelAlign = formContext?.labelAlign.value, required } = props
-      return {
+      return normalizeClass({
         [`${prefixCls}-label`]: true,
-        [`${prefixCls}-label-colonless`]: colonless,
-        [`${prefixCls}-label-required`]: required,
-        [`${prefixCls}-label-start`]: labelAlign === 'start',
-      }
+        [`${prefixCls}-label-colon`]: !colonless.value,
+        [`${prefixCls}-label-required`]: props.required,
+        [`${prefixCls}-label-start`]: labelAlign.value === 'start',
+      })
     })
 
     return () => {
@@ -68,38 +59,34 @@ export default defineComponent({
       return (
         <IxRow class={classes.value}>
           {renderLabel(props, slots, labelClasses, labelColConfig, prefixCls)}
-          {renderControl(props, slots, controlColConfig, hasFeedback, statusIcon, message, prefixCls)}
+          {renderControl(props, slots, controlColConfig, statusIcon, message, prefixCls)}
         </IxRow>
       )
     }
   },
 })
 
+function normalizeColConfig(col: string | number | ColProps | undefined) {
+  return isNumber(col) || isString(col) ? { span: col } : col
+}
+
 function renderLabel(
   props: FormItemProps,
   slots: Slots,
-  classes: ComputedRef<Record<string, unknown>>,
+  classes: ComputedRef<string>,
   labelColConfig: ComputedRef<ColProps | undefined>,
   prefixCls: string,
 ) {
   const { label, labelFor, labelTooltip } = props
   const { label: labelSlot, labelTooltip: labelTooltipSlot } = slots
-  if (!(label || labelSlot || labelTooltip || labelTooltipSlot)) {
+  if (!(label || labelSlot)) {
     return undefined
   }
-
-  const tooltipNode =
-    labelTooltipSlot?.() ??
-    (labelTooltip && (
-      <IxTooltip title={labelTooltip}>
-        <IxIcon name="question-circle" />
-      </IxTooltip>
-    ))
-
+  const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip)
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
       <label for={labelFor}>
-        {labelSlot?.() ?? label}
+        {labelSlot ? labelSlot() : label}
         {tooltipNode && <span class={`${prefixCls}-label-tooltip`}>{tooltipNode}</span>}
       </label>
     </IxCol>
@@ -110,25 +97,27 @@ function renderControl(
   props: FormItemProps,
   slots: Slots,
   controlColConfig: ComputedRef<ColProps | undefined>,
-  hasFeedback: ComputedRef<boolean>,
   statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
   prefixCls: string,
 ) {
-  const { extra } = props
-  const { extra: extraSlot } = slots
-  const statusNode = hasFeedback.value && statusIcon.value && (
+  const { extra, extraMessage } = props
+  const { extra: extraSlot, extraMessage: extraMessageSlot } = slots
+  if (__DEV__ && (extra || extraSlot)) {
+    Logger.warn('components/form', '`extra` was deprecated, please use `extraMessage` instead.')
+  }
+  const statusNode = statusIcon.value && (
     <span class={`${prefixCls}-status-icon`}>
       <IxIcon name={statusIcon.value} />
     </span>
   )
   const messageNode = message.value && <div class={`${prefixCls}-message`}>{message.value}</div>
-  const extraNode = extraSlot?.() ?? extra
-  const extraWrapper = extraNode && <div class={`${prefixCls}-extra`}>{extraNode}</div>
+  const extraNode = extraSlot ? extraSlot() : extraMessageSlot ? extraMessageSlot() : extra || extraMessage
+  const extraWrapper = extraNode && <div class={`${prefixCls}-extra-message`}>{extraNode}</div>
   return (
     <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
       <div class={`${prefixCls}-control-input`}>
-        <div class={`${prefixCls}-control-input-content`}>{slots.default?.()}</div>
+        <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
         {statusNode}
       </div>
       {messageNode}
@@ -137,139 +126,15 @@ function renderControl(
   )
 }
 
-function normalizeColConfig(col: string | number | ColProps | undefined) {
-  return isNumber(col) || isString(col) ? { span: col } : col
-}
-
-function useControl() {
-  const firstChildControl = shallowRef<AbstractControl>()
-  let firstChildKey: VKey | undefined
-  let firstChildWatchStop: WatchStopHandle | undefined
-
-  const registerControl = (key: VKey, control: Ref<AbstractControl | undefined>) => {
-    if (!firstChildWatchStop) {
-      firstChildKey = key
-      firstChildWatchStop = watchEffect(() => (firstChildControl.value = control.value))
-    }
+function renderTooltip(slot: Slot | undefined, tooltip: string | undefined) {
+  if (slot) {
+    return slot()
   }
-  const unregisterControl = (key: VKey) => {
-    if (key === firstChildKey) {
-      if (firstChildWatchStop) {
-        firstChildWatchStop()
-        firstChildWatchStop = undefined
-      }
-      firstChildControl.value = undefined
-    }
-  }
-
-  provide(FORM_ITEM_TOKEN, { registerControl, unregisterControl })
-
-  const selfControl = useValueControl()
-
-  const control = shallowRef<AbstractControl>()
-
-  watch(
-    [selfControl, firstChildControl],
-    ([self, child]) => {
-      const target = self ?? child
-      if (control.value !== target) {
-        control.value = target
-      }
-    },
-    { immediate: true },
+  return (
+    tooltip && (
+      <IxTooltip title={tooltip}>
+        <IxIcon name="question-circle" />
+      </IxTooltip>
+    )
   )
-
-  return control
-}
-
-const iconTypeMap = {
-  invalid: 'close-circle-filled',
-  validating: 'loading',
-  valid: 'check-circle-filled',
-} as const
-
-function useControlStatus(props: FormItemProps) {
-  const control = useControl()
-
-  const status = useStatus(props, control)
-  const message = useMessage(props, control, status)
-  const statusIcon = computed(() => {
-    const currStatus = status.value
-    return currStatus ? iconTypeMap[currStatus] : undefined
-  })
-
-  return { status, statusIcon, message }
-}
-
-function useStatus(props: FormItemProps, control: Ref<AbstractControl | undefined>) {
-  return computed(() => {
-    if (props.status) {
-      return props.status
-    }
-    const currControl = control.value
-    if (!currControl) {
-      return undefined
-    }
-    const { trigger, dirty, blurred } = currControl
-    if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
-      return currControl.status.value
-    }
-    return undefined
-  })
-}
-
-function useMessage(
-  props: FormItemProps,
-  control: Ref<AbstractControl | undefined>,
-  status: ComputedRef<ValidateStatus | undefined>,
-) {
-  const locale = getLocale()
-  const messages = computed(() => {
-    const message = props.message
-    return isString(message) || isFunction(message) ? { invalid: message } : message || {}
-  })
-  return computed(() => {
-    const currStatus = status.value
-    if (!currStatus) {
-      return undefined
-    }
-
-    const currMessage = messages.value[currStatus]
-    if (currMessage) {
-      return isString(currMessage) ? currMessage : currMessage(control.value!)
-    }
-    const currControl = control.value
-    return getMessageByError(currControl, currControl?.errors.value, locale)
-  })
-}
-
-function getMessageByError(
-  control: AbstractControl | undefined,
-  error: ValidateErrors | undefined,
-  locale: ComputedRef<Locale>,
-) {
-  if (!error) {
-    return undefined
-  }
-
-  for (const key in error) {
-    const { message, ...rest } = error[key]
-    if (message) {
-      if (isString(message)) {
-        return message
-      }
-
-      if (isFunction(message)) {
-        return message(rest, control!)
-      }
-
-      const currMessage = message[locale.value.type]
-      if (isString(currMessage)) {
-        return currMessage
-      }
-      return currMessage(rest, control!)
-    }
-  }
-
-  return undefined
 }

@@ -33,6 +33,6 @@ export type {
   FormColType,
   FormLabelAlign,
   FormLayout,
-  FormMessage,
+  FormValidateMessage,
   FormSize,
 } from './src/types'

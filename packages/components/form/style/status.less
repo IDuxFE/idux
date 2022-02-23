@@ -1,12 +1,38 @@
 .@{form-item-prefix} {
-  // === invalid ===
+  &-status-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 1;
+    width: @form-height-md;
+    height: 20px;
+    margin-top: -10px;
+    font-size: @form-font-size-md;
+    line-height: 20px;
+    text-align: center;
+    visibility: visible;
+    animation: zoomIn 0.3s @ease-out-back;
+    pointer-events: none;
+  }
 
+  &-with-status-icon {
+    // input
+    .@{idux-prefix}-input {
+      padding-right: 24px;
+
+      .@{idux-prefix}-input-suffix {
+        padding-right: 18px;
+      }
+    }
+  }
+
+  // === invalid ===
   &-invalid {
     .@{form-item-prefix}-message {
       color: @form-item-invalid-color;
     }
 
-    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
+    .@{form-item-prefix}-status-icon {
       color: @form-item-invalid-color;
     }
 
@@ -81,7 +107,6 @@
 
     // textarea
     .@{idux-prefix}-textarea:not(.@{idux-prefix}-textarea-disabled) {
-
       &::after {
         color: @form-item-invalid-color;
       }
@@ -110,54 +135,25 @@
   }
 
   // === Validating ===
-
   &-validating {
     .@{form-item-prefix}-message {
       color: @form-item-validating-color;
     }
 
-    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
+    .@{form-item-prefix}-status-icon {
       display: inline-block;
       color: @form-item-validating-color;
     }
   }
 
   // === valid ===
-
   &-valid {
     .@{form-item-prefix}-message {
       color: @form-item-valid-color;
     }
 
-    &.@{form-item-prefix}-has-feedback .@{form-item-prefix}-status-icon {
-      color: @form-item-valid-color;
-    }
-  }
-
-  &-has-feedback {
     .@{form-item-prefix}-status-icon {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      z-index: 1;
-      width: @form-height-md;
-      height: 20px;
-      margin-top: -10px;
-      font-size: @form-font-size-md;
-      line-height: 20px;
-      text-align: center;
-      visibility: visible;
-      animation: zoomIn 0.3s @ease-out-back;
-      pointer-events: none;
-    }
-
-    // input
-    .@{idux-prefix}-input {
-      padding-right: 24px;
-
-      .@{idux-prefix}-input-suffix {
-        padding-right: 18px;
-      }
+      color: @form-item-valid-color;
     }
   }
 }
