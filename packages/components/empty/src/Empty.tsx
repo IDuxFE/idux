@@ -5,29 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { EmptyProps } from './types'
-import type { EmptyConfig } from '@idux/components/config'
-import type { Slots } from 'vue'
-
-import { computed, defineComponent } from 'vue'
+import { type Slots, computed, defineComponent } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
+import { type EmptyConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
-import { emptyProps } from './types'
+import { type EmptyProps, emptyProps } from './types'
 
 export default defineComponent({
   name: 'IxEmpty',
   props: emptyProps,
   setup(props, { slots }) {
-    const emptyLocale = getLocale('empty')
     const common = useGlobalConfig('common')
+    const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-empty`)
     const config = useGlobalConfig('empty')
-    const description = computed(() => props.description ?? emptyLocale.value.description)
+    const description = computed(() => props.description ?? locale.empty.description)
 
     return () => {
       const prefixCls = mergedPrefixCls.value

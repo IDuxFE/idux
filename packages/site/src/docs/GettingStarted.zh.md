@@ -62,15 +62,12 @@ import IduxPro from "@idux/pro";
 import "@idux/components/default.min.css";
 import "@idux/pro/default.min.css";
 
-// 默认为中文，可以打开注释设置为其他语言
-// import { useLocale, enUS } from "@idux/components/i18n";
-// useLocale(enUS);
-
 import { createGlobalConfig } from "@idux/components/config";
 import {
   IDUX_ICON_DEPENDENCIES,
   addIconDefinitions,
 } from "@idux/components/icon";
+// import { enUS } from "@idux/components/locales";
 
 // 静态加载: `IDUX_ICON_DEPENDENCIES` 是 `@idux` 的部分组件默认所使用到图标，建议在此时静态引入。
 addIconDefinitions(IDUX_ICON_DEPENDENCIES);
@@ -82,6 +79,8 @@ const loadIconDynamically = (iconName: string) => {
 };
 
 const globalConfig = createGlobalConfig({
+  // 默认为中文，可以打开注释设置为其他语言
+  // locale: enUS,
   icon: { loadIconDynamically },
 });
 

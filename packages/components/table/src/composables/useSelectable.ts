@@ -10,7 +10,7 @@ import { type ComputedRef, computed } from 'vue'
 import { isNil, isString, isSymbol } from 'lodash-es'
 
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
-import { type TableLocale } from '@idux/components/i18n'
+import { type Locale } from '@idux/components/locales'
 import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
 
 import { type TableProps } from '../types'
@@ -19,7 +19,7 @@ import { type DataSourceContext, type MergedData } from './useDataSource'
 
 export function useSelectable(
   props: TableProps,
-  locale: ComputedRef<TableLocale>,
+  locale: Locale,
   flattedColumns: ComputedRef<TableColumnMerged[]>,
   { mergedMap, paginatedMap }: DataSourceContext,
 ): SelectableContext {
@@ -234,16 +234,13 @@ const invertMenuItemKey = Symbol('IDUX_TABLE_KEY_selectable-invert')
 const noneMenuItemKey = Symbol('IDUX_TABLE_KEY_selectable-none')
 const pageInvertMenuItemKey = Symbol('IDUX_TABLE_KEY_selectable-pageInvert')
 
-function useMergedMenus(
-  selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
-  locale: ComputedRef<TableLocale>,
-) {
+function useMergedMenus(selectable: ComputedRef<TableColumnMergedSelectable | undefined>, locale: Locale) {
   return computed<MenuData[]>(() => {
     const { menus } = selectable.value || {}
     if (!menus || menus.length === 0) {
       return []
     }
-    const { selectAll, selectInvert, selectNone, selectPageInvert } = locale.value
+    const { selectAll, selectInvert, selectNone, selectPageInvert } = locale.table
     return menus.map(item => {
       if (isString(item)) {
         if (item === 'all') {

@@ -11,16 +11,18 @@ import type { TimePickerCommonBindings } from './composables/useTimePickerCommon
 import type { TimePickerProps, TimeRangePickerProps } from './types'
 import type { DateConfig, TimePickerConfig } from '@idux/components/config'
 import type { FormContext } from '@idux/components/form'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Slots, VNodeTypes } from 'vue'
 
 interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps> {
-  config: Readonly<TimePickerConfig>
-  mergedPrefixCls: ComputedRef<string>
-  dateConfig: DateConfig
   props: T
+  slots: Slots
+  dateConfig: DateConfig
+  locale: Locale
+  config: TimePickerConfig
+  mergedPrefixCls: ComputedRef<string>
   format: ComputedRef<string>
   formContext: FormContext | null
-  slots: Slots
   overlayOpened: ComputedRef<boolean>
   inputEnableStatus: ComputedRef<InputEnableStatus>
   commonBindings: TimePickerCommonBindings<T>

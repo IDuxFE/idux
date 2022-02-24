@@ -7,12 +7,14 @@
 
 import type { ModalBindings, ModalProps, ModalProviderRef } from './types'
 import type { CommonConfig, ModalConfig } from '@idux/components/config'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface ModalContext {
   props: ModalProps
   slots: Slots
   common: CommonConfig
+  locale: Locale
   config: ModalConfig
   mergedPrefixCls: ComputedRef<string>
   visible: ComputedRef<boolean>

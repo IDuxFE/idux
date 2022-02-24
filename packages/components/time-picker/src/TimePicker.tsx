@@ -26,11 +26,12 @@ export default defineComponent({
   name: 'IxTimePicker',
   props: timePickerProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
+    const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('timePicker')
     const dateConfig = useDateConfig()
     const { isValid, parse } = dateConfig
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
     const [visibility, setVisibility] = useControlledProp(props, 'open', false)
 
     const format = computed(() => props.format ?? config.format)
@@ -59,14 +60,15 @@ export default defineComponent({
 
     provide(timePickerControl, pickerControl)
     provide(timePickerContext, {
-      dateConfig,
-      config,
       props,
+      slots,
+      dateConfig,
+      locale,
+      config,
+      mergedPrefixCls,
       format,
       formContext,
-      slots,
       overlayOpened: visibility,
-      mergedPrefixCls,
       inputEnableStatus,
       commonBindings,
       setOverlayOpened: changeVisible,

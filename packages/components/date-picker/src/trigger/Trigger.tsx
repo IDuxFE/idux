@@ -35,7 +35,7 @@ export default defineComponent({
     } = inject(datePickerToken)!
     const formContext = inject(FORM_TOKEN, null)
 
-    const placeholder = computed(() => props.placeholder ?? locale.value[`${props.type}Placeholder`])
+    const placeholder = computed(() => props.placeholder ?? locale.datePicker[`${props.type}Placeholder`])
     const inputSize = computed(() => Math.max(10, format.value.length) + 2)
     const allowInput = computed(() => props.allowInput ?? config.allowInput)
     const clearable = computed(() => !accessor.disabled.value && props.clearable && inputValue.value.length > 0)

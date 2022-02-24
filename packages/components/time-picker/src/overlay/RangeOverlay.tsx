@@ -11,7 +11,6 @@ import { defineComponent, inject } from 'vue'
 
 import { ɵTimePanel } from '@idux/components/_private/time-panel'
 import { IxButton } from '@idux/components/button'
-import { getLocale } from '@idux/components/i18n'
 import { IxInput } from '@idux/components/input'
 
 import { useCommonInputProps, useCommonPanelProps } from '../composables/useProps'
@@ -23,22 +22,21 @@ export default defineComponent({
   setup() {
     const {
       props,
-      config,
-      dateConfig,
-      format,
       slots,
+      dateConfig,
+      locale,
+      config,
+      mergedPrefixCls,
+      format,
       inputEnableStatus,
       overlayOpened,
       formContext,
-      mergedPrefixCls,
       bufferValue,
       commonBindings: { isDisabled, handleChange },
       renderSeparator,
       setOverlayOpened,
     } = inject(timeRangePickerContext)!
     const [fromPickerControl, toPickerControl] = inject(timeRangePickerControl)!
-
-    const locale = getLocale('timeRangePicker')
 
     const inputProps = useCommonInputProps(props, config, formContext)
     const panelProps = useCommonPanelProps(props, config)
@@ -93,7 +91,7 @@ export default defineComponent({
     const renderFooter = () =>
       slots.footer?.({ onConfirm: handleConfirm }) ?? (
         <IxButton mode="primary" size="sm" onClick={handleConfirm}>
-          {locale.value.okText}
+          {locale.timeRangePicker.okText}
         </IxButton>
       )
 
@@ -104,13 +102,13 @@ export default defineComponent({
           <div class={`${prefixCls}-content`}>
             {renderSide(
               fromPickerControl,
-              props.placeholder?.[0] ?? locale.value.placeholder[0],
+              props.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
               props.defaultOpenValue?.[0],
             )}
             <div class={`${prefixCls}-gap`}>{renderSeparator()}</div>
             {renderSide(
               toPickerControl,
-              props.placeholder?.[1] ?? locale.value.placeholder[1],
+              props.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
               props.defaultOpenValue?.[1],
             )}
           </div>

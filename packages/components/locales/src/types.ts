@@ -119,6 +119,4 @@ export interface Locale {
   upload: UploadLocale
 }
 
-export type LocaleKey = keyof Locale
-
 export type LocaleType = 'zh-CN' | 'en-US'

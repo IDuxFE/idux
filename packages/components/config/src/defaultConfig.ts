@@ -5,470 +5,327 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type {
-  AlertConfig,
-  AnchorConfig,
-  AvatarConfig,
-  BackTopConfig,
-  BadgeConfig,
-  CardConfig,
-  CarouselConfig,
-  CheckboxConfig,
-  CollapseConfig,
-  CommonConfig,
-  DatePickerConfig,
-  DateRangePickerConfig,
-  DividerConfig,
-  DrawerConfig,
-  DropdownConfig,
-  EmptyConfig,
-  FormConfig,
-  GlobalConfig,
-  IconConfig,
-  ImageConfig,
-  ImageViewerConfig,
-  InputConfig,
-  InputNumberConfig,
-  ListConfig,
-  MenuConfig,
-  MessageConfig,
-  ModalConfig,
-  NotificationConfig,
-  PaginationConfig,
-  PopconfirmConfig,
-  PopoverConfig,
-  ProgressConfig,
-  RadioConfig,
-  RateConfig,
-  ResultConfig,
-  RowConfig,
-  SelectConfig,
-  SkeletonConfig,
-  SpaceConfig,
-  SpinConfig,
-  StatisticConfig,
-  StepperConfig,
-  TableConfig,
-  TagConfig,
-  TextareaConfig,
-  TimePickerConfig,
-  TimeRangePickerConfig,
-  TooltipConfig,
-  TreeConfig,
-  TreeSelectConfig,
-  UploadConfig,
-  UploadFilesConfig,
-} from './types'
+import { zhCN } from '@idux/components/locales'
 
 import { numFormatter } from './numFormatter'
-
-// --------------------- Common ---------------------
-const common: CommonConfig = { prefixCls: 'ix' }
-
-// --------------------- General ---------------------
-
-const icon: IconConfig = {}
-
-const tag: TagConfig = {}
-
-// --------------------- Layout ---------------------
-const divider: DividerConfig = {
-  dashed: false,
-  labelPlacement: 'center',
-  plain: false,
-  size: 'md',
-}
-
-const space: SpaceConfig = { size: 'md', wrap: true }
-
-const row: RowConfig = { wrap: true }
-
-// --------------------- Navigation ---------------------
-const dropdown: DropdownConfig = {
-  autoAdjust: true,
-  destroyOnHide: false,
-  offset: [0, 8],
-  placement: 'bottomStart',
-  showArrow: false,
-  trigger: 'hover',
-}
-
-const menu: MenuConfig = {
-  indent: 24,
-  offset: [0, 8],
-  suffix: 'right',
-  theme: 'light',
-}
-
-const pagination: PaginationConfig = {
-  pageSize: 10,
-  pageSizes: [10, 20, 50, 100],
-  showQuickJumper: false,
-  showSizeChanger: false,
-  showTitle: true,
-  showTotal: true,
-  simple: false,
-  size: 'md',
-}
-
-// --------------------- Data Entry ---------------------
-const form: FormConfig = {
-  colonless: false,
-  labelAlign: 'end',
-  layout: 'horizontal',
-  size: 'md',
-}
-
-const checkbox: CheckboxConfig = { size: 'md' }
-
-const datePicker: DatePickerConfig = {
-  allowInput: true,
-  borderless: false,
-  clearable: false,
-  clearIcon: 'close-circle',
-  size: 'md',
-  suffix: 'calendar',
-}
-
-const dateRangePicker: DateRangePickerConfig = { separator: 'swap-right' }
-
-const inputNumber: InputNumberConfig = {
-  keyboard: true,
-  size: 'md',
-}
-
-const input: InputConfig = {
-  borderless: false,
-  clearable: false,
-  clearIcon: 'close-circle',
-  size: 'md',
-}
-
-const rate: RateConfig = {
-  allowHalf: false,
-  clearable: false,
-  count: 5,
-  icon: 'star-filled',
-  size: 'md',
-}
-
-const radio: RadioConfig = {
-  size: 'md',
-}
-
-const select: SelectConfig = {
-  borderless: false,
-  childrenKey: 'children',
-  labelKey: 'label',
-  size: 'md',
-  suffix: 'down',
-  valueKey: 'value',
-}
-
-const textarea: TextareaConfig = {
-  autoRows: false,
-  clearable: false,
-  clearIcon: 'close-circle',
-  resize: 'vertical',
-  showCount: false,
-  size: 'md',
-}
-
-const timePicker: TimePickerConfig = {
-  borderless: false,
-  clearable: true,
-  clearIcon: 'close-circle',
-  size: 'md',
-  suffix: 'clock-circle',
-  allowInput: true,
-  format: 'HH:mm:ss',
-}
-
-const timeRangePicker: TimeRangePickerConfig = {
-  borderless: false,
-  clearable: true,
-  clearIcon: 'close-circle',
-  size: 'md',
-  suffix: 'clock-circle',
-  allowInput: true,
-  format: 'HH:mm:ss',
-}
-
-const treeSelect: TreeSelectConfig = {
-  size: 'md',
-  suffix: 'down',
-  childrenKey: 'children',
-  labelKey: 'label',
-  nodeKey: 'key',
-}
-
-const upload: UploadConfig = {
-  multiple: false,
-  dragable: false,
-  directory: false,
-  name: 'file',
-  withCredentials: false,
-  requestMethod: 'post',
-}
-
-const uploadFiles: UploadFilesConfig = {
-  type: 'text',
-  icon: {
-    file: 'paper-clip',
-    remove: 'delete',
-    retry: 'edit',
-  },
-}
-
-// --------------------- Data Display ---------------------
-const avatar: AvatarConfig = {
-  gap: 4,
-  icon: 'user',
-  shape: 'circle',
-  size: 'md',
-}
-
-const badge: BadgeConfig = { showZero: false, dot: false, overflowCount: 99 }
-
-const card: CardConfig = {
-  borderless: false,
-  hoverable: false,
-  size: 'md',
-}
-
-const empty: EmptyConfig = {
-  icon: 'empty',
-}
-
-const list: ListConfig = {
-  size: 'md',
-  borderless: true,
-}
-
-const collapse: CollapseConfig = {
-  accordion: false,
-  borderless: false,
-  expandIcon: 'right',
-  ghost: false,
-}
-
-const image: ImageConfig = {
-  preview: true,
-}
-
-const imageViewer: ImageViewerConfig = {
-  loop: true,
-  maskClosable: true,
-  zoom: [0.5, 2],
-}
-
-const statistic: StatisticConfig = {
-  precision: 0,
-  formatter: numFormatter,
-}
-
-const table: TableConfig = {
-  borderless: true,
-  rowKey: 'key',
-  size: 'md',
-
-  extra: { icon: 'ellipsis' },
-  pagination: { position: 'bottomEnd' },
-
-  columnBase: {
-    align: 'start',
-    sortable: { nextTooltip: false, orders: ['ascend', 'descend'] },
-    filterable: { multiple: true, footer: true },
-  },
-  columnExpandable: { icon: 'right' },
-}
-
-const tooltip: TooltipConfig = {
-  autoAdjust: true,
-  delay: 100,
-  destroyOnHide: false,
-  placement: 'top',
-  trigger: 'hover',
-}
-
-const tree: TreeConfig = {
-  blocked: false,
-  expandIcon: 'right',
-  nodeKey: 'key',
-  showLine: false,
-}
-
-const popover: PopoverConfig = {
-  autoAdjust: true,
-  delay: 100,
-  destroyOnHide: false,
-  placement: 'top',
-  showArrow: true,
-  trigger: 'hover',
-  closeIcon: 'close',
-}
-
-// --------------------- Feedback ---------------------
-const message: MessageConfig = {
-  destroyOnHover: false,
-  duration: 3000,
-  maxCount: 5,
-  icon: {
-    success: 'check-circle-filled',
-    error: 'close-circle-filled',
-    info: 'info-circle-filled',
-    warning: 'exclamation-circle-filled',
-    loading: 'loading',
-  },
-}
-
-const notification: NotificationConfig = {
-  destroyOnHover: false,
-  duration: 4500,
-  maxCount: 5,
-  offset: 24,
-  placement: 'topEnd',
-}
-
-const modal: ModalConfig = {
-  centered: false,
-  closable: true,
-  closeIcon: 'close',
-  closeOnEsc: true,
-  mask: true,
-  maskClosable: true,
-  width: 520,
-}
-
-const alert: AlertConfig = {
-  closable: false,
-  icon: {
-    success: 'check-circle',
-    error: 'info-circle',
-    info: 'bulb',
-    warning: 'exclamation-circle',
-  },
-}
-
-const skeleton: SkeletonConfig = {
-  animated: true,
-}
-
-const carousel: CarouselConfig = {
-  autoplayTime: 0,
-  dotPlacement: 'bottom',
-  showArrow: false,
-  trigger: 'click',
-}
-
-const drawer: DrawerConfig = {
-  closable: true,
-  closeOnEsc: true,
-  closeIcon: 'close',
-  height: 256,
-  mask: true,
-  maskClosable: true,
-  width: 480,
-}
-
-const result: ResultConfig = { status: 'info' }
-
-const spin: SpinConfig = {
-  tip: '',
-  tipAlign: 'vertical',
-  size: 'md',
-}
-
-const popconfirm: PopconfirmConfig = {
-  autoAdjust: true,
-  delay: 100,
-  destroyOnHide: false,
-  placement: 'top',
-  trigger: 'click',
-}
-
-const progress: ProgressConfig = {
-  strokeLinecap: 'round',
-  size: 'md',
-  format: (percent: number) => percent + '%',
-}
-
-const stepper: StepperConfig = {
-  clickable: false,
-  labelPlacement: 'end',
-  size: 'md',
-}
-
-// --------------------- Other ---------------------
-const backTop: BackTopConfig = {
-  duration: 450,
-  visibilityHeight: 400,
-}
-const anchor: AnchorConfig = {
-  bounds: 5,
-  hideLinkBall: false,
-}
-// --------------------- end ---------------------
+import { type GlobalConfig } from './types'
 
 export const defaultConfig: GlobalConfig = {
-  // Common
-  common,
-  // General
-  icon,
-  tag,
-  // Layout
-  divider,
-  space,
-  row,
-  // Navigation
-  dropdown,
-  menu,
-  pagination,
-  // Data Entry
-  form,
-  checkbox,
-  datePicker,
-  dateRangePicker,
-  input,
-  inputNumber,
-  rate,
-  radio,
-  select,
-  textarea,
-  timePicker,
-  timeRangePicker,
-  treeSelect,
-  upload,
-  uploadFiles,
-  // Data Display
-  avatar,
-  badge,
-  card,
-  empty,
-  carousel,
-  list,
-  collapse,
-  image,
-  imageViewer,
-  statistic,
-  table,
-  tooltip,
-  tree,
-  popover,
-  // Feedback
-  alert,
-  skeleton,
-  message,
-  notification,
-  modal,
-  drawer,
-  result,
-  spin,
-  progress,
-  popconfirm,
-  stepper,
-  // Other
-  backTop,
-  anchor,
-  // --- end ---
+  common: {
+    prefixCls: 'ix',
+  },
+  locale: zhCN,
+
+  alert: {
+    closable: false,
+    icon: {
+      success: 'check-circle',
+      error: 'info-circle',
+      info: 'bulb',
+      warning: 'exclamation-circle',
+    },
+  },
+  anchor: {
+    bounds: 5,
+    hideLinkBall: false,
+  },
+  avatar: {
+    gap: 4,
+    icon: 'user',
+    shape: 'circle',
+    size: 'md',
+  },
+  backTop: {
+    duration: 450,
+    visibilityHeight: 400,
+  },
+  badge: {
+    showZero: false,
+    dot: false,
+    overflowCount: 99,
+  },
+  card: {
+    borderless: false,
+    hoverable: false,
+    size: 'md',
+  },
+  carousel: {
+    autoplayTime: 0,
+    dotPlacement: 'bottom',
+    showArrow: false,
+    trigger: 'click',
+  },
+  checkbox: {
+    size: 'md',
+  },
+  collapse: {
+    accordion: false,
+    borderless: false,
+    expandIcon: 'right',
+    ghost: false,
+  },
+  datePicker: {
+    allowInput: true,
+    borderless: false,
+    clearable: false,
+    clearIcon: 'close-circle',
+    size: 'md',
+    suffix: 'calendar',
+  },
+  dateRangePicker: {
+    separator: 'swap-right',
+  },
+  divider: {
+    dashed: false,
+    labelPlacement: 'center',
+    plain: false,
+    size: 'md',
+  },
+  drawer: {
+    closable: true,
+    closeOnEsc: true,
+    closeIcon: 'close',
+    height: 256,
+    mask: true,
+    maskClosable: true,
+    width: 480,
+  },
+  dropdown: {
+    autoAdjust: true,
+    destroyOnHide: false,
+    offset: [0, 8],
+    placement: 'bottomStart',
+    showArrow: false,
+    trigger: 'hover',
+  },
+  empty: {
+    icon: 'empty',
+  },
+  form: {
+    colonless: false,
+    labelAlign: 'end',
+    layout: 'horizontal',
+    size: 'md',
+  },
+  icon: {},
+  input: {
+    borderless: false,
+    clearable: false,
+    clearIcon: 'close-circle',
+    size: 'md',
+  },
+  inputNumber: {
+    keyboard: true,
+    size: 'md',
+  },
+  list: {
+    size: 'md',
+    borderless: true,
+  },
+  image: {
+    preview: true,
+  },
+  imageViewer: {
+    loop: true,
+    maskClosable: true,
+    zoom: [0.5, 2],
+  },
+  menu: {
+    indent: 24,
+    offset: [0, 8],
+    suffix: 'right',
+    theme: 'light',
+  },
+  message: {
+    destroyOnHover: false,
+    duration: 3000,
+    maxCount: 5,
+    icon: {
+      success: 'check-circle-filled',
+      error: 'close-circle-filled',
+      info: 'info-circle-filled',
+      warning: 'exclamation-circle-filled',
+      loading: 'loading',
+    },
+  },
+  modal: {
+    centered: false,
+    closable: true,
+    closeIcon: 'close',
+    closeOnEsc: true,
+    mask: true,
+    maskClosable: true,
+    width: 520,
+  },
+  notification: {
+    destroyOnHover: false,
+    duration: 4500,
+    maxCount: 5,
+    offset: 24,
+    placement: 'topEnd',
+  },
+  pagination: {
+    pageSize: 10,
+    pageSizes: [10, 20, 50, 100],
+    showQuickJumper: false,
+    showSizeChanger: false,
+    showTitle: true,
+    showTotal: true,
+    simple: false,
+    size: 'md',
+  },
+  popconfirm: {
+    autoAdjust: true,
+    delay: 100,
+    destroyOnHide: false,
+    placement: 'top',
+    trigger: 'click',
+  },
+  popover: {
+    autoAdjust: true,
+    delay: 100,
+    destroyOnHide: false,
+    placement: 'top',
+    showArrow: true,
+    trigger: 'hover',
+    closeIcon: 'close',
+  },
+  progress: {
+    strokeLinecap: 'round',
+    size: 'md',
+    format: (percent: number) => percent + '%',
+  },
+  radio: {
+    size: 'md',
+  },
+  rate: {
+    allowHalf: false,
+    clearable: false,
+    count: 5,
+    icon: 'star-filled',
+    size: 'md',
+  },
+  result: {
+    status: 'info',
+  },
+  row: {
+    wrap: true,
+  },
+  select: {
+    borderless: false,
+    childrenKey: 'children',
+    labelKey: 'label',
+    size: 'md',
+    suffix: 'down',
+    valueKey: 'value',
+  },
+  skeleton: {
+    animated: true,
+  },
+  space: {
+    size: 'md',
+    wrap: true,
+  },
+  spin: {
+    tip: '',
+    tipAlign: 'vertical',
+    size: 'md',
+  },
+  statistic: {
+    precision: 0,
+    formatter: numFormatter,
+  },
+  stepper: {
+    clickable: false,
+    labelPlacement: 'end',
+    size: 'md',
+  },
+  table: {
+    borderless: true,
+    rowKey: 'key',
+    size: 'md',
+    extra: {
+      icon: 'ellipsis',
+    },
+    pagination: {
+      position: 'bottomEnd',
+    },
+    columnBase: {
+      align: 'start',
+      sortable: {
+        nextTooltip: false,
+        orders: ['ascend', 'descend'],
+      },
+      filterable: {
+        multiple: true,
+        footer: true,
+      },
+    },
+    columnExpandable: {
+      icon: 'right',
+    },
+  },
+  tag: {},
+  textarea: {
+    autoRows: false,
+    clearable: false,
+    clearIcon: 'close-circle',
+    resize: 'vertical',
+    showCount: false,
+    size: 'md',
+  },
+  timePicker: {
+    borderless: false,
+    clearable: true,
+    clearIcon: 'close-circle',
+    size: 'md',
+    suffix: 'clock-circle',
+    allowInput: true,
+    format: 'HH:mm:ss',
+  },
+  timeRangePicker: {
+    borderless: false,
+    clearable: true,
+    clearIcon: 'close-circle',
+    size: 'md',
+    suffix: 'clock-circle',
+    allowInput: true,
+    format: 'HH:mm:ss',
+  },
+  tooltip: {
+    autoAdjust: true,
+    delay: 100,
+    destroyOnHide: false,
+    placement: 'top',
+    trigger: 'hover',
+  },
+  tree: {
+    blocked: false,
+    expandIcon: 'right',
+    nodeKey: 'key',
+    showLine: false,
+  },
+  treeSelect: {
+    size: 'md',
+    suffix: 'down',
+    childrenKey: 'children',
+    labelKey: 'label',
+    nodeKey: 'key',
+  },
+  upload: {
+    multiple: false,
+    dragable: false,
+    directory: false,
+    name: 'file',
+    withCredentials: false,
+    requestMethod: 'post',
+  },
+  uploadFiles: {
+    type: 'text',
+    icon: {
+      file: 'paper-clip',
+      remove: 'delete',
+      retry: 'edit',
+    },
+  },
 }

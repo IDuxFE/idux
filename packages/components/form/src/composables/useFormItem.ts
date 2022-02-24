@@ -20,7 +20,8 @@ import { isFunction, isObject, isString } from 'lodash-es'
 
 import { type AbstractControl, type ValidateStatus, useValueControl } from '@idux/cdk/forms'
 import { Logger, type VKey } from '@idux/cdk/utils'
-import { type Locale, getLocale } from '@idux/components/i18n'
+import { useGlobalConfig } from '@idux/components/config'
+import { type Locale } from '@idux/components/locales'
 
 import { FORM_ITEM_TOKEN } from '../token'
 import { type FormItemProps, type FormProps } from '../types'
@@ -135,7 +136,7 @@ function useMessage(
   control: Ref<AbstractControl | undefined>,
   status: ComputedRef<ValidateStatus | undefined>,
 ) {
-  const locale = getLocale()
+  const locale = useGlobalConfig('locale')
   const messages = computed(() => {
     const message = props.message
     return isString(message) || isFunction(message) ? { invalid: message } : message || {}
@@ -155,7 +156,7 @@ function useMessage(
   })
 }
 
-function getMessage(control: Ref<AbstractControl | undefined>, locale: ComputedRef<Locale>) {
+function getMessage(control: Ref<AbstractControl | undefined>, locale: Locale) {
   const currControl = control.value
   if (!currControl) {
     return undefined
@@ -173,7 +174,7 @@ function getMessage(control: Ref<AbstractControl | undefined>, locale: ComputedR
         return message(rest, currControl)
       }
 
-      const currMessage = message[locale.value.type]
+      const currMessage = message[locale.type]
       if (isString(currMessage)) {
         return currMessage
       }

@@ -7,6 +7,7 @@ import { h, ref } from 'vue'
 import { renderWork } from '@tests'
 
 import { IxIcon } from '@idux/components/icon'
+import { zhCN } from '@idux/components/locales'
 
 import UploadFilesCpm from '../src/List'
 import { uploadToken } from '../src/token'
@@ -20,6 +21,7 @@ const uploadFilesMount = (options?: MountingOptions<Partial<UploadFilesProps>>) 
       provide: {
         [uploadToken as symbol]: {
           props: {},
+          locale: zhCN,
           files: { value: [] },
           setSelectorVisible: () => {},
           ...provideObj,

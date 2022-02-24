@@ -15,6 +15,7 @@ import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
+import type { Locale } from '@idux/components/locales'
 import type { MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
@@ -31,79 +32,117 @@ import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { VNode } from 'vue'
 
-// Common
+export interface GlobalConfig {
+  common: CommonConfig
+  locale: Locale
+
+  alert: AlertConfig
+  anchor: AnchorConfig
+  avatar: AvatarConfig
+  backTop: BackTopConfig
+  badge: BadgeConfig
+  card: CardConfig
+  carousel: CarouselConfig
+  checkbox: CheckboxConfig
+  collapse: CollapseConfig
+  datePicker: DatePickerConfig
+  dateRangePicker: DateRangePickerConfig
+  divider: DividerConfig
+  drawer: DrawerConfig
+  dropdown: DropdownConfig
+  empty: EmptyConfig
+  form: FormConfig
+  icon: IconConfig
+  input: InputConfig
+  inputNumber: InputNumberConfig
+  list: ListConfig
+  image: ImageConfig
+  imageViewer: ImageViewerConfig
+  menu: MenuConfig
+  message: MessageConfig
+  modal: ModalConfig
+  notification: NotificationConfig
+  pagination: PaginationConfig
+  popconfirm: PopconfirmConfig
+  popover: PopoverConfig
+  progress: ProgressConfig
+  radio: RadioConfig
+  rate: RateConfig
+  result: ResultConfig
+  row: RowConfig
+  select: SelectConfig
+  skeleton: SkeletonConfig
+  space: SpaceConfig
+  spin: SpinConfig
+  statistic: StatisticConfig
+  stepper: StepperConfig
+  table: TableConfig
+  tag: TagConfig
+  textarea: TextareaConfig
+  timePicker: TimePickerConfig
+  timeRangePicker: TimeRangePickerConfig
+  tooltip: TooltipConfig
+  tree: TreeConfig
+  treeSelect: TreeSelectConfig
+  upload: UploadConfig
+  uploadFiles: UploadFilesConfig
+}
+
+export type GlobalConfigKey = keyof GlobalConfig
 export interface CommonConfig {
   prefixCls: string
 }
 
-// General
-
-export interface IconConfig {
-  loadIconDynamically?: (iconName: string) => Promise<string>
+export interface AlertConfig {
+  closable: boolean
+  icon: string | Partial<Record<AlertType, string>>
 }
 
-export interface TagConfig {
-  shape?: TagShape
+export interface AnchorConfig {
+  bounds: number
+  hideLinkBall: boolean
 }
 
-// Layout
-
-export interface DividerConfig {
-  dashed: boolean
-  plain: boolean
-  labelPlacement: 'start' | 'center' | 'end'
-  size: 'sm' | 'md' | 'lg'
+export interface AvatarConfig {
+  gap: number
+  icon: string | VNode
+  shape: AvatarShape
+  size: AvatarSize | Partial<Record<BreakpointKey, number>>
 }
 
-export interface SpaceConfig {
-  size: number | string | [number | string, number | string] | SpaceSize
-  wrap: boolean
+export interface BackTopConfig {
+  duration: number
+  visibilityHeight: number
 }
 
-export interface RowConfig {
-  wrap: boolean
+export interface BadgeConfig {
+  showZero: boolean
+  dot: boolean
+  overflowCount: number | string
 }
 
-// Navigation
-export interface DropdownConfig {
-  autoAdjust: boolean
-  destroyOnHide: boolean
-  offset: [number, number]
-  placement: PopperPlacement
+export interface CardConfig {
+  size: CardSize
+  borderless: boolean
+  hoverable: boolean
+}
+
+export interface CarouselConfig {
+  autoplayTime: number
+  dotPlacement: DotPlacement
   showArrow: boolean
-  target?: PortalTargetType
-  trigger: PopperTrigger
-}
-
-export interface MenuConfig {
-  indent: number
-  offset: [number, number]
-  suffix: string
-  target?: PortalTargetType
-  theme: MenuTheme
-}
-
-export interface PaginationConfig {
-  pageSize: number
-  pageSizes: number[]
-  showQuickJumper: boolean
-  showSizeChanger: boolean
-  showTitle: boolean
-  showTotal: boolean
-  simple: boolean
-  size: PaginationSize
-}
-
-// Data Entry
-export interface FormConfig {
-  colonless: boolean
-  labelAlign: FormLabelAlign
-  layout: FormLayout
-  size: FormSize
+  trigger: DotTrigger
 }
 
 export interface CheckboxConfig {
   size: FormSize
+}
+
+export interface CollapseConfig {
+  accordion: boolean
+  borderless: boolean
+  expandIcon: string
+  ghost: boolean
 }
 
 export interface DatePickerConfig {
@@ -121,9 +160,49 @@ export interface DateRangePickerConfig {
   separator: string | VNode
 }
 
-export interface InputNumberConfig {
-  keyboard: boolean
+export interface DividerConfig {
+  dashed: boolean
+  plain: boolean
+  labelPlacement: 'start' | 'center' | 'end'
+  size: 'sm' | 'md' | 'lg'
+}
+
+export interface DrawerConfig {
+  closable: boolean
+  closeIcon: string
+  closeOnEsc: boolean
+  height: string | number
+  mask: boolean
+  maskClosable: boolean
+  target?: PortalTargetType
+  width: string | number
+  zIndex?: number
+}
+
+export interface DropdownConfig {
+  autoAdjust: boolean
+  destroyOnHide: boolean
+  offset: [number, number]
+  placement: PopperPlacement
+  showArrow: boolean
+  target?: PortalTargetType
+  trigger: PopperTrigger
+}
+
+export interface EmptyConfig {
+  icon: string | VNode
+  image?: string | VNode
+}
+
+export interface FormConfig {
+  colonless: boolean
+  labelAlign: FormLabelAlign
+  layout: FormLayout
   size: FormSize
+}
+
+export interface IconConfig {
+  loadIconDynamically?: (iconName: string) => Promise<string>
 }
 
 export interface InputConfig {
@@ -133,15 +212,106 @@ export interface InputConfig {
   size: FormSize
 }
 
-export interface TextareaConfig {
-  autoRows: boolean | TextareaAutoRows
-  clearable: boolean
-  clearIcon: string
-  computeCount?: (value: string) => string
-  maxCount?: number | string
-  resize: TextareaResize
+export interface InputNumberConfig {
+  keyboard: boolean
   size: FormSize
-  showCount: boolean
+}
+
+export interface ListConfig {
+  size: ListSize
+  borderless: boolean
+}
+
+export interface ImageConfig {
+  preview: boolean
+}
+
+export interface ImageViewerConfig {
+  loop: boolean
+  maskClosable: boolean
+  zoom: number[]
+  target?: PortalTargetType
+}
+
+export interface MenuConfig {
+  indent: number
+  offset: [number, number]
+  suffix: string
+  target?: PortalTargetType
+  theme: MenuTheme
+}
+
+export interface MessageConfig {
+  destroyOnHover: boolean
+  duration: number
+  icon: Partial<Record<MessageType, string | VNode>>
+  maxCount: number
+  target?: PortalTargetType
+  top?: number | string
+}
+
+export interface ModalConfig {
+  centered: boolean
+  closable: boolean
+  closeIcon: string
+  closeOnEsc: boolean
+  icon?: Partial<Record<ModalType, string | VNode>>
+  mask: boolean
+  maskClosable: boolean
+  target?: PortalTargetType
+  width: string | number
+  zIndex?: number
+}
+
+export interface NotificationConfig {
+  destroyOnHover: boolean
+  duration: number
+  icon?: Partial<Record<NotificationType, string | VNode>>
+  closeIcon?: string | VNode
+  maxCount: number
+  offset: number | string | (string | number)[]
+  placement: NotificationPlacement
+  target?: PortalTargetType
+}
+
+export interface PaginationConfig {
+  pageSize: number
+  pageSizes: number[]
+  showQuickJumper: boolean
+  showSizeChanger: boolean
+  showTitle: boolean
+  showTotal: boolean
+  simple: boolean
+  size: PaginationSize
+}
+
+export interface PopconfirmConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
+  placement: PopperPlacement
+  target?: PortalTargetType
+  trigger: PopperTrigger
+}
+
+export interface PopoverConfig {
+  autoAdjust: boolean
+  delay: number | [number | null, number | null]
+  destroyOnHide: boolean
+  placement: PopperPlacement
+  target?: PortalTargetType
+  showArrow: boolean
+  trigger: PopperTrigger
+  closeIcon: string
+}
+
+export interface ProgressConfig {
+  size: ProgressSize
+  format: ProgressFormat
+  defaultCircleStrokeWidth?: string | number
+  strokeWidth?: string | number
+  strokeLinecap: 'round' | 'square'
+  icon?: Partial<ProgressIcons>
 }
 
 export interface RadioConfig {
@@ -156,6 +326,15 @@ export interface RateConfig {
   size: FormSize
 }
 
+export interface ResultConfig {
+  status: ResultStatus
+  icon?: Partial<Record<ResultStatus, string | VNode>>
+}
+
+export interface RowConfig {
+  wrap: boolean
+}
+
 export interface SelectConfig {
   borderless: boolean
   childrenKey: string
@@ -166,104 +345,41 @@ export interface SelectConfig {
   valueKey: string
 }
 
-export interface TreeSelectConfig {
-  size: FormSize
-  suffix: string
-  childrenKey: string
-  labelKey: string
-  nodeKey: string
-  target?: PortalTargetType
+export interface SkeletonConfig {
+  animated: boolean
 }
 
-export interface TimePickerConfig {
-  borderless: boolean
-  clearable: boolean
-  clearIcon: string
-  size: FormSize
-  suffix: string
-  target?: PortalTargetType
-  allowInput: boolean | 'overlay'
-  format: string
+export interface SpaceConfig {
+  size: number | string | [number | string, number | string] | SpaceSize
+  wrap: boolean
 }
 
-export type TimeRangePickerConfig = TimePickerConfig
-
-export interface UploadConfig {
-  multiple: boolean
-  dragable: boolean
-  directory: boolean
-  name: string
-  withCredentials: boolean
-  requestMethod: UploadRequestMethod
-  customRequest?: (option: UploadRequestOption) => { abort: () => void }
+export interface SpinConfig {
+  icon?: string
+  tip: string
+  tipAlign: SpinTipAlignType
+  size: SpinSize
+  strokeWidth?: Partial<Record<SpinSize, number>>
+  radius?: Partial<Record<SpinSize, number>>
 }
 
-export interface UploadFilesConfig {
-  type: UploadFilesType
-  icon: Partial<Record<UploadIconType, string | VNode>>
-}
-
-// Data Display
-export interface AvatarConfig {
-  gap: number
-  icon: string | VNode
-  shape: AvatarShape
-  size: AvatarSize | Partial<Record<BreakpointKey, number>>
-}
-
-export interface BadgeConfig {
-  showZero: boolean
-  dot: boolean
-  overflowCount: number | string
-}
-
-export interface CardConfig {
-  size: CardSize
-  borderless: boolean
-  hoverable: boolean
-}
-
-export interface EmptyConfig {
-  icon: string | VNode
-  image?: string | VNode
-}
-
-export interface ListConfig {
-  size: ListSize
-  borderless: boolean
-}
-
-export interface CollapseConfig {
-  accordion: boolean
-  borderless: boolean
-  expandIcon: string
-  ghost: boolean
-}
-
-export interface ImageConfig {
-  preview: boolean
-}
-
-export interface ImageViewerConfig {
-  loop: boolean
-  maskClosable: boolean
-  zoom: number[]
-  target?: PortalTargetType
+export interface StatisticConfig {
+  precision: number
+  formatter: NumFormatter
 }
 
 export interface NumFormatted {
   value: string
-
-  /** 格式化后的整数部分 */
   int: string
-
-  /** 格式化后的小数部分，带小数点 */
   decimal: string
 }
+
 export type NumFormatter = (value: string | number, precision: number) => NumFormatted
-export interface StatisticConfig {
-  precision: number
-  formatter: NumFormatter
+
+export interface StepperConfig {
+  clickable: boolean
+  labelPlacement: StepperLabelPlacement
+  size: StepperSize
 }
 
 export interface TableConfig {
@@ -288,12 +404,33 @@ export interface TableColumnExpandableConfig {
   icon: string
 }
 
-export interface TreeConfig {
-  blocked: boolean
-  expandIcon: string
-  nodeKey: string
-  showLine: boolean
+export interface TagConfig {
+  shape?: TagShape
 }
+
+export interface TextareaConfig {
+  autoRows: boolean | TextareaAutoRows
+  clearable: boolean
+  clearIcon: string
+  computeCount?: (value: string) => string
+  maxCount?: number | string
+  resize: TextareaResize
+  size: FormSize
+  showCount: boolean
+}
+
+export interface TimePickerConfig {
+  borderless: boolean
+  clearable: boolean
+  clearIcon: string
+  size: FormSize
+  suffix: string
+  target?: PortalTargetType
+  allowInput: boolean | 'overlay'
+  format: string
+}
+
+export type TimeRangePickerConfig = TimePickerConfig
 
 export interface TooltipConfig {
   autoAdjust: boolean
@@ -304,192 +441,33 @@ export interface TooltipConfig {
   trigger: PopperTrigger
 }
 
-export interface PopoverConfig {
-  autoAdjust: boolean
-  delay: number | [number | null, number | null]
-  destroyOnHide: boolean
-  placement: PopperPlacement
-  target?: PortalTargetType
-  showArrow: boolean
-  trigger: PopperTrigger
-  closeIcon: string
+export interface TreeConfig {
+  blocked: boolean
+  expandIcon: string
+  nodeKey: string
+  showLine: boolean
 }
 
-// Feedback
-export interface MessageConfig {
-  destroyOnHover: boolean
-  duration: number
-  icon: Partial<Record<MessageType, string | VNode>>
-  maxCount: number
-  target?: PortalTargetType
-  top?: number | string
-}
-
-export interface NotificationConfig {
-  destroyOnHover: boolean
-  duration: number
-  icon?: Partial<Record<NotificationType, string | VNode>>
-  closeIcon?: string | VNode
-  maxCount: number
-  offset: number | string | (string | number)[]
-  placement: NotificationPlacement
+export interface TreeSelectConfig {
+  size: FormSize
+  suffix: string
+  childrenKey: string
+  labelKey: string
+  nodeKey: string
   target?: PortalTargetType
 }
 
-export interface ModalConfig {
-  centered: boolean
-  closable: boolean
-  closeIcon: string
-  closeOnEsc: boolean
-  icon?: Partial<Record<ModalType, string | VNode>>
-  mask: boolean
-  maskClosable: boolean
-  target?: PortalTargetType
-  width: string | number
-  zIndex?: number
+export interface UploadConfig {
+  multiple: boolean
+  dragable: boolean
+  directory: boolean
+  name: string
+  withCredentials: boolean
+  requestMethod: UploadRequestMethod
+  customRequest?: (option: UploadRequestOption) => { abort: () => void }
 }
 
-export interface AlertConfig {
-  closable: boolean
-  icon: string | Partial<Record<AlertType, string>>
+export interface UploadFilesConfig {
+  type: UploadFilesType
+  icon: Partial<Record<UploadIconType, string | VNode>>
 }
-
-export interface SkeletonConfig {
-  animated: boolean
-}
-
-export interface CarouselConfig {
-  autoplayTime: number
-  dotPlacement: DotPlacement
-  showArrow: boolean
-  trigger: DotTrigger
-}
-
-export interface DrawerConfig {
-  closable: boolean
-  closeIcon: string
-  closeOnEsc: boolean
-  height: string | number
-  mask: boolean
-  maskClosable: boolean
-  target?: PortalTargetType
-  width: string | number
-  zIndex?: number
-}
-
-export interface ResultConfig {
-  status: ResultStatus
-  icon?: Partial<Record<ResultStatus, string | VNode>>
-}
-
-export interface SpinConfig {
-  icon?: string
-  tip: string
-  tipAlign: SpinTipAlignType
-  size: SpinSize
-  strokeWidth?: Partial<Record<SpinSize, number>>
-  radius?: Partial<Record<SpinSize, number>>
-}
-
-export interface PopconfirmConfig {
-  autoAdjust: boolean
-  delay: number | [number | null, number | null]
-  destroyOnHide: boolean
-  placement: PopperPlacement
-  target?: PortalTargetType
-  trigger: PopperTrigger
-}
-
-export interface ProgressConfig {
-  size: ProgressSize
-  format: ProgressFormat
-  defaultCircleStrokeWidth?: string | number
-  strokeWidth?: string | number
-  strokeLinecap: 'round' | 'square'
-  icon?: Partial<ProgressIcons>
-}
-
-// Stepper
-
-export interface StepperConfig {
-  clickable: boolean
-  labelPlacement: StepperLabelPlacement
-  size: StepperSize
-}
-
-// Other
-
-export interface BackTopConfig {
-  duration: number
-  visibilityHeight: number
-}
-export interface AnchorConfig {
-  bounds: number
-  hideLinkBall: boolean
-}
-// --- end ---
-
-export interface GlobalConfig {
-  // Common
-  common: CommonConfig
-  icon: IconConfig
-  tag: TagConfig
-  // Layout
-  divider: DividerConfig
-  space: SpaceConfig
-  row: RowConfig
-  // Navigation
-  dropdown: DropdownConfig
-  menu: MenuConfig
-  pagination: PaginationConfig
-  // Data Entry
-  form: FormConfig
-  checkbox: CheckboxConfig
-  datePicker: DatePickerConfig
-  dateRangePicker: DateRangePickerConfig
-  input: InputConfig
-  inputNumber: InputNumberConfig
-  textarea: TextareaConfig
-  radio: RadioConfig
-  rate: RateConfig
-  select: SelectConfig
-  treeSelect: TreeSelectConfig
-  timePicker: TimePickerConfig
-  timeRangePicker: TimeRangePickerConfig
-  upload: UploadConfig
-  uploadFiles: UploadFilesConfig
-  // Data Display
-  avatar: AvatarConfig
-  badge: BadgeConfig
-  card: CardConfig
-  empty: EmptyConfig
-  carousel: CarouselConfig
-  list: ListConfig
-  collapse: CollapseConfig
-  image: ImageConfig
-  imageViewer: ImageViewerConfig
-  statistic: StatisticConfig
-  table: TableConfig
-  tooltip: TooltipConfig
-  tree: TreeConfig
-  popover: PopoverConfig
-  stepper: StepperConfig
-  // Feedback
-  alert: AlertConfig
-  skeleton: SkeletonConfig
-  message: MessageConfig
-  notification: NotificationConfig
-  modal: ModalConfig
-  drawer: DrawerConfig
-  result: ResultConfig
-  spin: SpinConfig
-  popconfirm: PopconfirmConfig
-  progress: ProgressConfig
-
-  // Other
-  backTop: BackTopConfig
-  anchor: AnchorConfig
-  // --- end ---
-}
-
-export type GlobalConfigKey = keyof GlobalConfig

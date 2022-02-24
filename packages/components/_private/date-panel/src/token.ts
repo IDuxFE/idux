@@ -12,13 +12,13 @@ import type { ActiveTypeContext } from './composables/useActiveType'
 import type { MaxIndexContext } from './composables/useMaxIndex'
 import type { DatePanelProps } from './types'
 import type { DateConfig } from '@idux/components/config'
-import type { DatePickerLocale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface DatePanelContext extends ActiveTypeContext, ActiveDateContext, MaxIndexContext {
   props: DatePanelProps
   slots: Slots
-  locale: ComputedRef<DatePickerLocale>
+  locale: Locale
   mergedPrefixCls: ComputedRef<string>
   dateConfig: DateConfig
 }

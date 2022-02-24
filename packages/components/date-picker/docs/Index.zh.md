@@ -66,7 +66,7 @@ const defaultFormat = {
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 当前选中的日期 | `number \| string \| Date` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`，使用 `control` 时，此配置无效  |
 | `defaultOpenValue` | 打开面板时默认选中的值 | `number \| string \| Date` | - | - | `value` 为空时，高亮的值 |
-| `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | 默认使用 `i18n` 配置 |
+| `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | 可以通过国际化配置默认值 |
 | `timePicker` | 是否显示时间选择器 | `boolean \| TimePickerProps` | `false` | - | 仅在 `type='date'` 时生效 |
 | `onChange` | 值改变后的回调 | `(value: Date, oldValue: Date) => void` | - | - | - |
 

@@ -7,7 +7,7 @@
 
 import type { FileOperation } from '../composables/useOperation'
 import type { UploadFile, UploadIconType } from '../types'
-import type { Locale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, VNode } from 'vue'
 
 import { h } from 'vue'
@@ -45,27 +45,27 @@ export function renderOprIcon(
   icons: ComputedRef<IconsMap>,
   cpmClasses: ComputedRef<string>,
   fileOperation: FileOperation,
-  locale: ComputedRef<Locale['upload']>,
+  locale: Locale,
 ): OprIcons {
   const previewNode = renderIcon(icons.value.preview, {
     class: `${cpmClasses.value}-icon-opr ${cpmClasses.value}-icon-preview`,
     onClick: () => fileOperation.preview(file),
-    title: locale.value.preview,
+    title: locale.upload.preview,
   })
   const retryNode = renderIcon(icons.value.retry, {
     class: `${cpmClasses.value}-icon-opr ${cpmClasses.value}-icon-retry`,
     onClick: () => fileOperation.retry(file),
-    title: locale.value.retry,
+    title: locale.upload.retry,
   })
   const downloadNode = renderIcon(icons.value.download, {
     class: `${cpmClasses.value}-icon-opr ${cpmClasses.value}-icon-download`,
     onClick: () => fileOperation.download(file),
-    title: locale.value.download,
+    title: locale.upload.download,
   })
   const removeNode = renderIcon(icons.value.remove, {
     class: `${cpmClasses.value}-icon-opr ${cpmClasses.value}-icon-remove`,
     onClick: () => fileOperation.remove(file),
-    title: locale.value.remove,
+    title: locale.upload.remove,
   })
 
   return {

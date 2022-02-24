@@ -66,7 +66,7 @@ export default defineComponent({
         return index!.toString()
       }
 
-      return locale.value[type]
+      return locale.pagination[type]
     })
 
     const onClick = () => {

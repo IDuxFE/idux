@@ -10,7 +10,6 @@ import type { InputInstance } from '@idux/components/input'
 import { defineComponent, inject, nextTick, ref, watch } from 'vue'
 
 import { ɵTimePanel } from '@idux/components/_private/time-panel'
-import { getLocale } from '@idux/components/i18n'
 import { IxInput } from '@idux/components/input'
 
 import { useCommonInputProps, useCommonPanelProps } from '../composables/useProps'
@@ -23,6 +22,7 @@ export default defineComponent({
     const {
       slots,
       props,
+      locale,
       config,
       format,
       dateConfig,
@@ -33,7 +33,6 @@ export default defineComponent({
       commonBindings: { isDisabled, handleClear },
     } = inject(timePickerContext)!
     const { inputValue, panelValue, setInputValue, handleInputChange, handlePanelChange } = inject(timePickerControl)!
-    const locale = getLocale('timePicker')
 
     const handleInputClear = (evt: Event) => {
       evt.stopPropagation()
@@ -67,7 +66,7 @@ export default defineComponent({
               value={inputValue.value}
               disabled={isDisabled.value}
               readonly={props.readonly}
-              placeholder={props.placeholder ?? locale.value.placeholder}
+              placeholder={props.placeholder ?? locale.timePicker.placeholder}
               onChange={handleInputChange}
               onClear={handleInputClear}
               v-slots={inputSlots}

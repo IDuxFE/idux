@@ -24,7 +24,7 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-total`
       const { total } = props
-      const { totalPrefix, totalSuffix } = locale.value
+      const { totalPrefix, totalSuffix } = locale.pagination
 
       const children = slots.total
         ? slots.total({ total, range: range.value, prefix: totalPrefix, suffix: totalSuffix })

@@ -113,18 +113,27 @@ import IduxPro from '@idux/pro';
 import '@idux/components/default.min.css';
 import '@idux/pro/default.min.css';
 
-// import { useLocale, en_US } from '@idux/components/i18n';
-// useLocale(en_US);
-
+import { createGlobalConfig } from "@idux/components/config";
 import {
   IDUX_ICON_DEPENDENCIES,
   addIconDefinitions
 } from '@idux/components/icon';
+// import { enUS } from "@idux/components/locales";
 
 addIconDefinitions(IDUX_ICON_DEPENDENCIES);
 
-const install = (app: App) => {
-  app.use(IduxCdk).use(IduxComponents).use(IduxPro);
+const loadIconDynamically = (iconName: string) => {
+  return fetch(\`https://idux-cdn.sangfor.com.cn/icons/\${iconName}.svg\`).then((res) => res.text());
+};
+
+const globalConfig = createGlobalConfig({
+  // 默认为中文，可以打开注释设置为其他语言
+  // locale: enUS,
+  icon: { loadIconDynamically },
+});
+
+const install = (app: App): void => {
+  app.use(IduxCdk).use(IduxComponents).use(IduxPro).use(globalConfig);
 };
 
 export default { install };`

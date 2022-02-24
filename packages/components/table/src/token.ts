@@ -19,7 +19,7 @@ import type { TagsContext } from './composables/useTags'
 import type { TableProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
-import type { TableLocale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface TableContext
@@ -37,7 +37,7 @@ export interface TableContext
   mergedPrefixCls: ComputedRef<string>
   slots: Slots
   config: TableConfig
-  locale: ComputedRef<TableLocale>
+  locale: Locale
   getRowKey: ComputedRef<GetRowKey>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
