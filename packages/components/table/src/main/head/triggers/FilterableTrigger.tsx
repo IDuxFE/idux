@@ -13,8 +13,8 @@ import { type VKey, useState } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { type DropdownProps, IxDropdown } from '@idux/components/dropdown'
-import { type TableLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
+import { type Locale } from '@idux/components/locales'
 import { IxMenu, type MenuData, type MenuItemProps, type MenuProps } from '@idux/components/menu'
 import { IxRadio } from '@idux/components/radio'
 
@@ -137,12 +137,12 @@ const renderMenu = (
 }
 
 const renderFooter = (
-  locale: ComputedRef<TableLocale>,
+  locale: Locale,
   mergedPrefixCls: ComputedRef<string>,
   handleConfirm: () => void,
   handleReset: () => void,
 ) => {
-  const { filterConfirm, filterReset } = locale.value
+  const { filterConfirm, filterReset } = locale.table
   return (
     <div class={`${mergedPrefixCls.value}-filterable-trigger-footer`}>
       <IxButton mode="primary" size="sm" onClick={handleConfirm}>

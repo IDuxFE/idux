@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { NumFormatted } from './types'
+import { type NumFormatted } from './types'
 
 export function numFormatter(value: string | number, precision: number): NumFormatted {
   // 进行小数位精度补充，需要考虑value值为以下情况的场景：

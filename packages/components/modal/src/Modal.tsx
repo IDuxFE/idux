@@ -5,21 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ModalProps } from './types'
-import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { ComputedRef } from 'vue'
-
-import { computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { type ComputedRef, computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { BlockScrollStrategy } from '@idux/cdk/scroll'
+import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 
 import ModalWrapper from './ModalWrapper'
 import { MODAL_TOKEN, modalToken } from './token'
-import { modalProps } from './types'
+import { type ModalProps, modalProps } from './types'
 
 export default defineComponent({
   name: 'IxModal',
@@ -28,6 +24,7 @@ export default defineComponent({
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-modal`)
+    const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('modal')
     const mask = computed(() => props.mask ?? config.mask)
     const zIndex = computed(() => props.zIndex ?? config.zIndex)
@@ -39,6 +36,7 @@ export default defineComponent({
       props,
       slots,
       common,
+      locale,
       config,
       mergedPrefixCls,
       visible,

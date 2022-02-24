@@ -10,8 +10,8 @@ import type { ComputedRef } from 'vue'
 
 import { defineComponent, inject } from 'vue'
 
-import { TableLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
+import { type TableLocale } from '@idux/components/locales'
 import { IxTooltip } from '@idux/components/tooltip'
 
 import { TABLE_TOKEN } from '../../../token'
@@ -25,7 +25,7 @@ export default defineComponent({
     return () => {
       const { activeOrderBy, sortable } = props
       const { orders, nextTooltip } = sortable
-      const title = nextTooltip && getNextTooltipTitle(locale.value, orders!, activeOrderBy)
+      const title = nextTooltip && getNextTooltipTitle(locale.table, orders!, activeOrderBy)
       const sortableTriggerNode = renderSortTrigger(mergedPrefixCls, orders!, activeOrderBy)
       return title ? <IxTooltip title={title}>{sortableTriggerNode}</IxTooltip> : sortableTriggerNode
     }

@@ -5,21 +5,29 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ModalProps } from './types'
-import type { ModalConfig } from '@idux/components/config'
-import type { ComputedRef, Ref } from 'vue'
-
-import { Transition, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  Transition,
+  computed,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
 
 import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
-import { getLocale } from '@idux/components/i18n'
+import { type ModalConfig } from '@idux/components/config'
 
 import ModalBody from './ModalBody'
 import { MODAL_TOKEN, modalToken } from './token'
+import { type ModalProps } from './types'
 
 export default defineComponent({
   inheritAttrs: false,
@@ -28,6 +36,7 @@ export default defineComponent({
       props,
       slots,
       common,
+      locale,
       config,
       mergedPrefixCls,
       visible,
@@ -39,16 +48,14 @@ export default defineComponent({
     const { close, cancel, ok } = inject(MODAL_TOKEN)!
     const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex } = useConfig(props, config)
 
-    const locale = getLocale('modal')
-
     const cancelVisible = computed(() => props.type === 'default' || props.type === 'confirm')
 
-    const cancelText = computed(() => props.cancelText ?? locale.value.cancelText)
+    const cancelText = computed(() => props.cancelText ?? locale.modal.cancelText)
     const okText = computed(() => {
       if (props.okText) {
         return props.okText
       }
-      return cancelVisible.value ? locale.value.okText : locale.value.justOkText
+      return cancelVisible.value ? locale.modal.okText : locale.modal.justOkText
     })
 
     const placementStyle = computed(() => {

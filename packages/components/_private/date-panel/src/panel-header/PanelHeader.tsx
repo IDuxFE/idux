@@ -7,7 +7,7 @@
 
 import type { DatePanelType } from '../types'
 import type { DateConfig } from '@idux/components/config'
-import type { DatePickerLocale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
@@ -44,7 +44,7 @@ export default defineComponent({
     }
 
     return () => {
-      const { previousDecade, previousYear, previousMonth, nextDecade, nextYear, nextMonth } = locale.value
+      const { previousDecade, previousYear, previousMonth, nextDecade, nextYear, nextMonth } = locale.datePicker
       const currType = activeType.value
       const superPrev = true
       const prev = !hidePrevNextTypes.includes(activeType.value)
@@ -109,7 +109,7 @@ export default defineComponent({
 function useContents(
   activeType: ComputedRef<DatePanelType>,
   activeDate: ComputedRef<Date>,
-  locale: ComputedRef<DatePickerLocale>,
+  locale: Locale,
   dateConfig: DateConfig,
   setActiveType: (type: DatePanelType) => void,
 ) {
@@ -120,7 +120,7 @@ function useContents(
   return computed(() => {
     const currType = activeType.value
     const currDate = activeDate.value
-    const { yearSelect, monthSelect, yearFormat, monthFormat } = locale.value
+    const { yearSelect, monthSelect, yearFormat, monthFormat } = locale.datePicker
     const { format, get } = dateConfig
     switch (currType) {
       case 'date':

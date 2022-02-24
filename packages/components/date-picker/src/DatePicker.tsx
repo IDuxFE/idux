@@ -11,7 +11,6 @@ import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
 import { useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { useFormat } from './composables/useFormat'
@@ -30,8 +29,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: datePickerProps,
   setup(props, { attrs, expose, slots }) {
-    const locale = getLocale('datePicker')
     const common = useGlobalConfig('common')
+    const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-picker`)
     const config = useGlobalConfig('datePicker')
     const dateConfig = useDateConfig()

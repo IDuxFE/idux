@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { InjectionKey, inject } from 'vue'
+import { type InjectionKey, inject } from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
@@ -57,7 +57,7 @@ import {
   toDate,
 } from 'date-fns'
 
-import { getLocale } from '@idux/components/i18n'
+import { useGlobalConfig } from './globalConfig'
 
 export type TimeConfigType = 'hour' | 'minute' | 'second'
 export type DateConfigType = 'year' | 'quarter' | 'month' | 'week' | 'date' | 'day'
@@ -101,12 +101,12 @@ export function useDateConfig(): DateConfig<number | Date, Date> {
 }
 
 function createDefaultDateConfig(): DateConfig<number | Date, Date> {
-  const locale = getLocale('date')
+  const locale = useGlobalConfig('locale')
   const now = () => new Date()
-  const parse = (dateString: string, format: string) => parseDate(dateString, format, now(), { locale: locale.value })
+  const parse = (dateString: string, format: string) => parseDate(dateString, format, now(), { locale: locale.date })
   return {
     now,
-    weekStartsOn: () => locale.value.options?.weekStartsOn || 1,
+    weekStartsOn: () => locale.date.options?.weekStartsOn || 1,
     get: (date, type) => {
       switch (type) {
         case 'year':
@@ -116,7 +116,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'month':
           return getMonth(date)
         case 'week':
-          return getWeek(date, { locale: locale.value })
+          return getWeek(date, { locale: locale.date })
         case 'date':
           return getDate(date)
         case 'day':
@@ -138,11 +138,11 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'month':
           return setMonth(date, amount)
         case 'week':
-          return setWeek(date, amount, { locale: locale.value })
+          return setWeek(date, amount, { locale: locale.date })
         case 'date':
           return setDate(date, amount)
         case 'day':
-          return setDay(date, amount, { locale: locale.value })
+          return setDay(date, amount, { locale: locale.date })
         case 'hour':
           return setHours(date, amount)
         case 'minute':
@@ -175,7 +175,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'month':
           return startOfMonth(date)
         case 'week':
-          return startOfWeek(date, { locale: locale.value })
+          return startOfWeek(date, { locale: locale.date })
         case 'date':
         case 'day':
           return startOfDay(date)
@@ -190,7 +190,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'month':
           return endOfMonth(date)
         case 'week':
-          return endOfWeek(date, { locale: locale.value })
+          return endOfWeek(date, { locale: locale.date })
         case 'date':
         case 'day':
           return endOfDay(date)
@@ -206,7 +206,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'month':
           return isSameMonth(date, dateToCompare)
         case 'week':
-          return isSameWeek(date, dateToCompare, { locale: locale.value })
+          return isSameWeek(date, dateToCompare, { locale: locale.date })
         case 'date':
         case 'day':
           return isSameDay(date, dateToCompare)
@@ -220,7 +220,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
     },
     isValid: date => isValid(date),
 
-    format: (date, format) => formatDate(date, format, { locale: locale.value }),
+    format: (date, format) => formatDate(date, format, { locale: locale.date }),
     parse: parse,
     convert: (date, format) => {
       if (isNil(date)) {
@@ -229,7 +229,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
       return isString(date) ? parse(date, format!) : toDate(date as number | Date)
     },
     getLocalizedLabels: (type, length, width) => {
-      const localize = locale.value.localize!
+      const localize = locale.date.localize!
       switch (type) {
         case 'month':
           return Array.from({ length }).map((_, i) => localize.month(i, { width }))

@@ -8,7 +8,6 @@
 import { computed, defineComponent, provide } from 'vue'
 
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
 
 import { useActiveDate } from './composables/useActiveDate'
 import { useActiveType } from './composables/useActiveType'
@@ -21,8 +20,8 @@ import { datePanelProps } from './types'
 export default defineComponent({
   props: datePanelProps,
   setup(props, { slots }) {
-    const locale = getLocale('datePicker')
     const common = useGlobalConfig('common')
+    const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-panel`)
     const dateConfig = useDateConfig()
     const { activeType, setActiveType } = useActiveType(props)

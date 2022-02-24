@@ -8,12 +8,11 @@
 import type { FileOperation } from '../composables/useOperation'
 import type { UploadFile, UploadProps } from '../types'
 import type { IconsMap } from '../util/icon'
-import type { Locale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef } from 'vue'
 
 import { defineComponent, inject, normalizeClass } from 'vue'
 
-import { getLocale } from '@idux/components/i18n'
 import { IxProgress } from '@idux/components/progress'
 import { IxTooltip } from '@idux/components/tooltip'
 
@@ -28,11 +27,10 @@ export default defineComponent({
   name: 'IxUploadTextList',
   props: uploadFilesProps,
   setup(listProps) {
-    const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
+    const { props: uploadProps, locale, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'text')
-    const locale = getLocale('upload')
     const fileOperation = useOperation(files, listProps, uploadProps, {
       abort,
       upload,
@@ -55,7 +53,7 @@ function renderItem(
   icons: ComputedRef<IconsMap>,
   cpmClasses: ComputedRef<string>,
   fileOperation: FileOperation,
-  locale: ComputedRef<Locale['upload']>,
+  locale: Locale,
 ) {
   const fileClasses = normalizeClass([`${cpmClasses.value}-file`, `${cpmClasses.value}-file-${file.status}`])
   const fileNameClasses = normalizeClass([`${cpmClasses.value}-name`, `${cpmClasses.value}-name-pointer`])

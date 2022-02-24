@@ -5,11 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Ref } from 'vue'
-
-import { defineComponent, provide, ref, shallowRef } from 'vue'
+import { type Ref, defineComponent, provide, ref, shallowRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
 import { IxImageViewer } from '@idux/components/image'
 
 import FileSelector from './component/Selector'
@@ -22,6 +21,7 @@ export default defineComponent({
   name: 'IxUpload',
   props: uploadProps,
   setup(props, { slots }) {
+    const locale = useGlobalConfig('locale')
     const cpmClasses = useCmpClasses()
     const [showSelector, setSelectorVisible] = useShowSelector()
     const [files, onUpdateFiles] = useControlledProp(props, 'files', [])
@@ -29,6 +29,7 @@ export default defineComponent({
     const { viewerVisible, images, setViewerVisible } = useImageViewer()
     provide(uploadToken, {
       props,
+      locale,
       files,
       fileUploading,
       onUpdateFiles,

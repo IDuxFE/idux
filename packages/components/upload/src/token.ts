@@ -7,10 +7,12 @@
 
 import type { UploadRequest } from './composables/useRequest'
 import type { UploadFile, UploadProps } from './types'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey } from 'vue'
 
 export type UploadToken = {
   props: UploadProps
+  locale: Locale
   files: ComputedRef<UploadFile[]>
   setViewerVisible: (visible: boolean, imageSrc?: string) => void
   onUpdateFiles: (file: UploadFile[]) => void

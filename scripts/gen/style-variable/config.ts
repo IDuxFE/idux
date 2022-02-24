@@ -9,7 +9,7 @@ export default {
   excludes: [
     'components/_private',
     'components/config',
-    'components/i18n',
+    'components/locales',
     'components/style',
     'components/utils',
     'components/version',

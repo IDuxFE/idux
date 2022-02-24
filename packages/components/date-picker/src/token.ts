@@ -14,13 +14,13 @@ import type { DatePickerProps } from './types'
 import type { FocusMonitor } from '@idux/cdk/a11y'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { DateConfig, DatePickerConfig } from '@idux/components/config'
-import type { DatePickerLocale } from '@idux/components/i18n'
+import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface DataPickerContext extends InputStateContext, OverlayStateContext, PanelStateContext {
   props: DatePickerProps
   slots: Slots
-  locale: ComputedRef<DatePickerLocale>
+  locale: Locale
   config: DatePickerConfig
   mergedPrefixCls: ComputedRef<string>
   dateConfig: DateConfig

@@ -5,14 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PickerControl } from '../composables/usePickerControl'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject } from 'vue'
 
-import { computed, defineComponent, inject } from 'vue'
+import { type DateConfig, useGlobalConfig } from '@idux/components/config'
 
-import { DateConfig, useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
-
+import { type PickerControl } from '../composables/usePickerControl'
 import { useCommonTriggerProps } from '../composables/useProps'
 import { timeRangePickerContext, timeRangePickerControl } from '../tokens'
 import { timeRangePickerTriggerProps } from '../types'
@@ -25,14 +22,14 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const commonPrefixCls = computed(() => common.prefixCls)
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker-trigger`)
-    const locale = getLocale('timeRangePicker')
 
     const context = inject(timeRangePickerContext)!
     const {
-      dateConfig,
       props: pickerProps,
-      format,
       slots,
+      dateConfig,
+      locale,
+      format,
       inputEnableStatus,
       setOverlayOpened,
       renderSeparator,
@@ -49,8 +46,8 @@ export default defineComponent({
     }
 
     const placeholder: ComputedRef<[string, string]> = computed(() => [
-      pickerProps.placeholder?.[0] ?? locale.value.placeholder[0],
-      pickerProps.placeholder?.[1] ?? locale.value.placeholder[1],
+      pickerProps.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
+      pickerProps.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
     ])
 
     const triggerProps = useCommonTriggerProps(props, context)

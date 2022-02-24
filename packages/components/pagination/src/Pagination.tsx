@@ -9,7 +9,6 @@ import { type VNodeTypes, computed, defineComponent, normalizeClass, provide } f
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
 
 import { useItems } from './composables/useItems'
 import { useJumpToIndex } from './composables/useJumpTo'
@@ -27,8 +26,8 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-pagination`)
+    const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('pagination')
-    const locale = getLocale('pagination')
 
     const showTotal = computed(() => props.showTotal ?? config.showTotal)
     const simple = computed(() => props.simple ?? config.simple)

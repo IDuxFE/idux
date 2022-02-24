@@ -17,7 +17,7 @@ export default defineComponent({
 
     const sizeOptions = computed(() => {
       const { pageSizes = config.pageSizes } = props
-      const { itemsPerPage } = locale.value
+      const { itemsPerPage } = locale.pagination
       return pageSizes.map(size => {
         return {
           value: size,

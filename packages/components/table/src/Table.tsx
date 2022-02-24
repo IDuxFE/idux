@@ -13,7 +13,6 @@ import { isBoolean } from 'lodash-es'
 
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
 import { IxSpin } from '@idux/components/spin'
 
 import { useColumns } from './composables/useColumns'
@@ -38,11 +37,11 @@ export default defineComponent({
   name: 'IxTable',
   props: tableProps,
   setup(props, { expose, slots }) {
-    const config = useGlobalConfig('table')
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-table`)
+    const locale = useGlobalConfig('locale')
+    const config = useGlobalConfig('table')
 
-    const locale = getLocale('table')
     const tags = useTags(props)
     const getRowKey = useGetRowKey(props, config)
     const stickyContext = useSticky(props)

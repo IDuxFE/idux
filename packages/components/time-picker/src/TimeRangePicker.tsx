@@ -15,7 +15,6 @@ import { useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { getLocale } from '@idux/components/i18n'
 
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useRangePickerControl } from './composables/usePickerControl'
@@ -31,12 +30,12 @@ export default defineComponent({
   name: 'IxTimeRangePicker',
   props: timeRangePickerProps,
   setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker`)
+    const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('timeRangePicker')
     const dateConfig = useDateConfig()
     const { isValid, parse } = dateConfig
-    const locale = getLocale('timeRangePicker')
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker`)
     const [visibility, setVisibility] = useControlledProp(props, 'open', false)
 
     const format = computed(() => props.format ?? config.format)
@@ -73,18 +72,19 @@ export default defineComponent({
 
     const formContext = inject(FORM_TOKEN, null)
 
-    const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.value.separator
+    const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.timeRangePicker.separator
 
     provide(timeRangePickerControl, rangePickerControl)
     provide(timeRangePickerContext, {
-      dateConfig,
-      config,
       props,
+      slots,
+      dateConfig,
+      locale,
+      config,
+      mergedPrefixCls,
       format,
       formContext,
-      slots,
       overlayOpened: visibility,
-      mergedPrefixCls,
       inputEnableStatus,
       commonBindings,
       bufferValue,

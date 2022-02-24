@@ -5,24 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopconfirmButtonProps } from './types'
-import type { VNode } from 'vue'
-
 import { computed, defineComponent, inject } from 'vue'
 
 import { ɵFooter } from '@idux/components/_private/footer'
-import { getLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
 
 import { popconfirmToken } from './token'
+import { type PopconfirmButtonProps } from './types'
 
 export default defineComponent({
   setup() {
-    const { props, slots, mergedPrefixCls, cancelLoading, okLoading, cancel, ok } = inject(popconfirmToken)!
-    const locale = getLocale('popconfirm')
+    const { props, slots, locale, mergedPrefixCls, cancelLoading, okLoading, cancel, ok } = inject(popconfirmToken)!
 
-    const cancelText = computed(() => props.cancelText ?? locale.value.cancelText)
-    const okText = computed(() => props.okText ?? locale.value.okText)
+    const cancelText = computed(() => props.cancelText ?? locale.popconfirm.cancelText)
+    const okText = computed(() => props.okText ?? locale.popconfirm.okText)
 
     const cancelButton = computed<PopconfirmButtonProps>(() => {
       return { size: 'sm', ...props.cancelButton }
@@ -34,16 +30,12 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const children: VNode[] = []
-      if (slots.title || props.title) {
-        children.push()
-      }
 
       return (
         <div class={`${prefixCls}-wrapper`}>
           <div class={`${prefixCls}-title`}>
-            {slots.icon?.() ?? <IxIcon name={props.icon}></IxIcon>}
-            <span>{slots.title?.() ?? props.title}</span>
+            {slots.icon ? slots.icon() : <IxIcon name={props.icon}></IxIcon>}
+            <span>{slots.title ? slots.title() : props.title}</span>
           </div>
           <ɵFooter
             v-slots={slots}

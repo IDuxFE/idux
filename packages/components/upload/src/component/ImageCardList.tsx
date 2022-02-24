@@ -5,16 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FileOperation } from '../composables/useOperation'
-import type { UploadFile, UploadFileStatus, UploadProps } from '../types'
-import type { IconsMap } from '../util/icon'
-import type { Locale } from '@idux/components/i18n'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, onBeforeUnmount } from 'vue'
 
-import { computed, defineComponent, inject, normalizeClass, onBeforeUnmount } from 'vue'
-
-import { getLocale } from '@idux/components/i18n'
 import { IxIcon } from '@idux/components/icon'
+import { type Locale } from '@idux/components/locales'
 import { IxProgress } from '@idux/components/progress'
 import { IxTooltip } from '@idux/components/tooltip'
 
@@ -26,10 +20,10 @@ import {
   useSelectorVisible,
   useThumb,
 } from '../composables/useDisplay'
-import { useOperation } from '../composables/useOperation'
+import { type FileOperation, useOperation } from '../composables/useOperation'
 import { uploadToken } from '../token'
-import { uploadFilesProps } from '../types'
-import { renderOprIcon } from '../util/icon'
+import { UploadFile, type UploadFileStatus, type UploadProps, uploadFilesProps } from '../types'
+import { type IconsMap, renderOprIcon } from '../util/icon'
 import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
 import FileSelector from './Selector'
 
@@ -37,11 +31,10 @@ export default defineComponent({
   name: 'IxUploadImageCardList',
   props: uploadFilesProps,
   setup(listProps) {
-    const { props: uploadProps, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
+    const { props: uploadProps, locale, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'imageCard')
-    const locale = getLocale('upload')
     const [, imageCardVisible] = useSelectorVisible(uploadProps, 'imageCard')
     const showSelector = useShowSelector(uploadProps, files, imageCardVisible)
     const { getThumbNode, revokeAll } = useThumb()
@@ -70,7 +63,7 @@ function renderItem(
   icons: ComputedRef<IconsMap>,
   cpmClasses: ComputedRef<string>,
   fileOperation: FileOperation,
-  locale: ComputedRef<Locale['upload']>,
+  locale: Locale,
   getThumbNode: UseThumb['getThumbNode'],
 ) {
   const fileClasses = normalizeClass([`${cpmClasses.value}-file`, `${cpmClasses.value}-file-${file.status}`])
@@ -101,12 +94,12 @@ function renderItem(
 function renderUploadStatus(
   uploadProps: UploadProps,
   file: UploadFile,
-  locale: ComputedRef<Locale['upload']>,
+  locale: Locale,
   cpmClasses: ComputedRef<string>,
 ) {
   const statusTitle = {
-    error: locale.value.error,
-    uploading: locale.value.uploading,
+    error: locale.upload.error,
+    uploading: locale.upload.uploading,
   } as Record<UploadFileStatus, string>
   const curTitle = file.status && statusTitle[file.status!]
   return (

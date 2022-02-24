@@ -8,7 +8,6 @@
 import { computed, defineComponent, inject, withKeys } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
-import { getLocale } from '@idux/components/i18n'
 
 import { useCommonTriggerProps } from '../composables/useProps'
 import { timePickerContext, timePickerControl } from '../tokens'
@@ -21,14 +20,14 @@ export default defineComponent({
   setup(props) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-trigger`)
-    const locale = getLocale('timePicker')
 
     const context = inject(timePickerContext)!
     const {
-      dateConfig,
       props: pickerProps,
-      format,
       slots,
+      dateConfig,
+      locale,
+      format,
       inputEnableStatus,
       setOverlayOpened,
       commonBindings: { isDisabled, handleClear },
@@ -43,7 +42,7 @@ export default defineComponent({
       setOverlayOpened(true)
     }
 
-    const placeholder = computed(() => pickerProps.placeholder ?? locale.value.placeholder)
+    const placeholder = computed(() => pickerProps.placeholder ?? locale.timePicker.placeholder)
 
     const triggerProps = useCommonTriggerProps(props, context)
     const renderContent = () => {

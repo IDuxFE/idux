@@ -5,14 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GlobalConfig, GlobalConfigKey } from './types'
-import type { App, Plugin } from 'vue'
-
-import { inject, provide, reactive } from 'vue'
+import { type App, type Plugin, inject, provide, reactive } from 'vue'
 
 import { cloneDeep, merge } from 'lodash-es'
 
 import { defaultConfig } from './defaultConfig'
+import { type GlobalConfig, type GlobalConfigKey } from './types'
 
 const tokens: [GlobalConfigKey, symbol][] = Object.keys(defaultConfig).map(key => [key as GlobalConfigKey, Symbol(key)])
 const tokenMap = new Map<GlobalConfigKey, symbol>(tokens)
@@ -56,9 +54,9 @@ export function useGlobalConfig<T extends GlobalConfigKey>(
     return currConfig as Readonly<GlobalConfig[T]>
   }
 
-  const cloneConfig = reactive(merge(cloneDeep(currConfig), config)) as GlobalConfig[T]
+  const newConfig = reactive(merge(cloneDeep(currConfig), config)) as GlobalConfig[T]
 
-  provide(token, cloneConfig)
+  provide(token, newConfig)
 
-  return [cloneConfig, (config: Partial<GlobalConfig[T]>) => merge(cloneConfig, config)]
+  return [newConfig, (config: Partial<GlobalConfig[T]>) => merge(newConfig, config)]
 }

@@ -18,7 +18,7 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-jumper`
       const { disabled } = props
-      const { jumpTo, page } = locale.value
+      const { jumpTo, page } = locale.pagination
       return (
         <li class={prefixCls}>
           {jumpTo}
