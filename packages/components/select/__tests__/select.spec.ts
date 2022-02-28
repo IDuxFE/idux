@@ -14,7 +14,7 @@ import { SelectData, SelectProps } from '../src/types'
 
 describe('Select', () => {
   describe('single work', () => {
-    const defaultOptions = [
+    const defaultDataSource = [
       { key: 1, label: 'Tom', value: 'tom' },
       { key: 2, label: 'Jerry', value: 'jerry' },
       { key: 3, label: 'Speike', value: 'speike', disabled: true },
@@ -24,7 +24,7 @@ describe('Select', () => {
       const { props, ...rest } = options || {}
       return mount(Select, {
         ...rest,
-        props: { options: defaultOptions, value: defaultValue, ...props },
+        props: { dataSource: defaultDataSource, value: defaultValue, ...props },
         attachTo: 'body',
       })
     }
@@ -35,7 +35,7 @@ describe('Select', () => {
       }
     })
 
-    renderWork<SelectProps>(Select, { props: { options: defaultOptions, value: defaultValue }, attachTo: 'body' })
+    renderWork<SelectProps>(Select, { props: { dataSource: defaultDataSource, value: defaultValue }, attachTo: 'body' })
 
     test('v-model:value work', async () => {
       const onUpdateValue = jest.fn()
@@ -121,7 +121,7 @@ describe('Select', () => {
     })
 
     test('custom keys work', async () => {
-      const options = [
+      const dataSource = [
         {
           key: 1,
           text: 'Manager',
@@ -138,7 +138,7 @@ describe('Select', () => {
       ]
 
       const wrapper = SelectMount({
-        props: { value: 'tom', open: true, options, childrenKey: 'options', labelKey: 'text', valueKey: 'name' },
+        props: { value: 'tom', open: true, dataSource, childrenKey: 'options', labelKey: 'text', valueKey: 'name' },
       })
 
       expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
@@ -165,9 +165,9 @@ describe('Select', () => {
       expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
     })
 
-    test('compareWith work', async () => {
-      const compareWith = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
-      const wrapper = SelectMount({ props: { value: 't', compareWith } })
+    test('compareFn work', async () => {
+      const compareFn = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
+      const wrapper = SelectMount({ props: { value: 't', compareFn } })
 
       expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
 
@@ -222,7 +222,7 @@ describe('Select', () => {
 
     test('empty work', async () => {
       let emptyText = 'empty text'
-      const wrapper = SelectMount({ props: { open: true, empty: emptyText, options: [] } })
+      const wrapper = SelectMount({ props: { open: true, empty: emptyText, dataSource: [] } })
 
       expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
 
@@ -234,19 +234,19 @@ describe('Select', () => {
 
     test('empty slot work', async () => {
       const wrapper = SelectMount({
-        props: { open: true, empty: 'empty text', options: [] },
+        props: { open: true, empty: 'empty text', dataSource: [] },
         slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
       })
 
       expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe('empty slot')
     })
 
-    test('options work', async () => {
-      const wrapper = SelectMount({ props: { open: true, options: [] } })
+    test('dataSource work', async () => {
+      const wrapper = SelectMount({ props: { open: true, dataSource: [] } })
 
       expect(wrapper.findAllComponents(Option).length).toBe(0)
 
-      await wrapper.setProps({ options: defaultOptions })
+      await wrapper.setProps({ dataSource: defaultDataSource })
 
       expect(wrapper.findAllComponents(Option).length).toBe(3)
     })
@@ -315,9 +315,9 @@ describe('Select', () => {
       expect(input.element.style.opacity).toBe('0')
     })
 
-    test('searchFilter work', async () => {
-      const searchFilter = (searchValue: string, option: SelectData) => searchValue === option.value
-      const wrapper = SelectMount({ props: { open: true, searchable: true, searchFilter } })
+    test('searchable with searchFn work', async () => {
+      const searchFn = (option: SelectData, searchValue: string) => searchValue === option.value
+      const wrapper = SelectMount({ props: { open: true, searchable: true, searchFn } })
 
       expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
 
@@ -330,12 +330,12 @@ describe('Select', () => {
       expect(wrapper.findAllComponents(Option).length).toBe(0)
     })
 
-    test('searchFilter with labelKey work', async () => {
+    test('searchable with labelKey work', async () => {
       const wrapper = SelectMount({
         props: {
           open: true,
           searchable: true,
-          options: [
+          dataSource: [
             { key: 1, name: 'Tom', id: 'tom' },
             { key: 2, name: 'Jerry', id: 'jerry' },
             { key: 3, name: 'Speike', id: 'speike' },
@@ -390,14 +390,14 @@ describe('Select', () => {
     })
 
     test('virtual work', async () => {
-      const options: SelectData[] = []
+      const dataSource: SelectData[] = []
 
       for (let index = 0; index < 100; index++) {
         const value = `${index.toString(36)}${index}`
-        options.push({ key: index, label: value, value, disabled: index % 10 === 0 })
+        dataSource.push({ key: index, label: value, value, disabled: index % 10 === 0 })
       }
 
-      const wrapper = SelectMount({ props: { virtual: true, open: true, options } })
+      const wrapper = SelectMount({ props: { virtual: true, open: true, dataSource } })
 
       expect(wrapper.findAllComponents(Option).length).toBe(10)
 
@@ -408,10 +408,10 @@ describe('Select', () => {
   })
 
   describe('multiple work', () => {
-    const defaultOptions: SelectData[] = []
+    const defaultDataSource: SelectData[] = []
     for (let index = 0; index < 20; index++) {
       const prefix = index > 9 ? 'B' : 'A'
-      defaultOptions.push({ key: index, label: prefix + index, value: index, disabled: index % 3 === 0 })
+      defaultDataSource.push({ key: index, label: prefix + index, value: index, disabled: index % 3 === 0 })
     }
 
     const defaultValue = [0, 1, 2]
@@ -420,7 +420,7 @@ describe('Select', () => {
       const { props, ...rest } = options || {}
       return mount(Select, {
         ...rest,
-        props: { multiple: true, options: defaultOptions, value: defaultValue, ...props },
+        props: { multiple: true, dataSource: defaultDataSource, value: defaultValue, ...props },
         attachTo: 'body',
       })
     }
@@ -510,7 +510,7 @@ describe('Select', () => {
         {
           components: { Select, SelectOptionComponent, SelectOptionGroupComponent },
           template: `<Select v-model:value="value">
-          <SelectOptionComponent v-for="option in options" :key="option.key" :label="option.label" :value="option.value" :disabled="option.disabled">
+          <SelectOptionComponent v-for="option in dataSource" :key="option.key" :label="option.label" :value="option.value" :disabled="option.disabled">
           </SelectOptionComponent>
           <SelectOptionGroupComponent key="1" label="Manager">
             <SelectOptionComponent key="11" label="Tom" value="tom1"></SelectOptionComponent>
@@ -522,12 +522,12 @@ describe('Select', () => {
         </Select>`,
           setup() {
             const value = ref('tom')
-            const options: SelectData[] = [
+            const dataSource: SelectData[] = [
               { key: '01', label: 'Tom', value: 'tom' },
               { key: '02', label: 'Jerry', value: 'jerry' },
               { key: '03', label: 'Speike', value: 'speike', disabled: true },
             ]
-            return { value, options }
+            return { value, dataSource }
           },
         },
         {

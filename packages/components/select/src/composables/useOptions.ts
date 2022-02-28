@@ -7,8 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { SelectData, SelectFilterFn, SelectProps } from '../types'
-import type { VKey } from '@idux/cdk/utils'
+import type { SelectData, SelectProps, SelectSearchFn } from '../types'
 import type { SelectConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, Slots, VNode } from 'vue'
 
@@ -16,7 +15,7 @@ import { computed } from 'vue'
 
 import { isFunction, isSymbol } from 'lodash-es'
 
-import { flattenNode } from '@idux/cdk/utils'
+import { Logger, VKey, flattenNode } from '@idux/cdk/utils'
 
 import { optionGroupKey, optionKey } from '../option'
 import { generateOption } from '../utils/generateOption'
@@ -39,9 +38,12 @@ export interface OptionsContext {
 
 export function useMergedOptions(props: SelectProps, slots: Slots, config: SelectConfig): ComputedRef<MergedOption[]> {
   return computed(() => {
-    const { options } = props
-    if (options) {
-      return mergeOptions(props, config, options)
+    const dataSource = props.options ?? props.dataSource
+    if (dataSource) {
+      if (__DEV__ && props.options) {
+        Logger.warn('components/select', '`options` was deprecated, please use `dataSource` instead')
+      }
+      return mergeOptions(props, config, dataSource)
     } else {
       return convertOptions(slots.default?.())
     }
@@ -62,7 +64,7 @@ export function useFlattedOptions(
       return options
     }
     const filter = searchFilter.value
-    const filteredOptions = !filter ? options : options.filter(option => filter(searchValue, option.rawOption!))
+    const filteredOptions = !filter ? options : options.filter(option => filter(option.rawOption!, searchValue))
     const { allowInput } = props
     if (allowInput) {
       const matchedOption = filteredOptions.find(option => option.label === searchValue)
@@ -150,8 +152,8 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
   return mergedOptions
 }
 
-const getDefaultFilter = (props: SelectProps): SelectFilterFn => {
-  return (searchValue: string, option: SelectData) => {
+const getDefaultSearchFn = (props: SelectProps): SelectSearchFn => {
+  return (option: SelectData, searchValue: string) => {
     const filterField = props.labelKey ?? 'label'
     return option[filterField]?.toLowerCase().includes(searchValue.toLowerCase()) ?? false
   }
@@ -159,12 +161,14 @@ const getDefaultFilter = (props: SelectProps): SelectFilterFn => {
 
 function useSearchFilter(props: SelectProps) {
   return computed(() => {
-    const { searchFilter } = props
-    if (isFunction(searchFilter)) {
-      return searchFilter
+    const searchFn = props.searchFilter ?? props.searchFn
+    if (isFunction(searchFn)) {
+      if (__DEV__ && props.searchFilter) {
+        Logger.warn('components/select', '`searchFilter` was deprecated, please use `searchFn` instead')
+      }
+      return searchFn
     }
-
     // #750 配置了labelKey后过滤筛选不生效
-    return searchFilter ? getDefaultFilter(props) : false
+    return searchFn ? getDefaultSearchFn(props) : false
   })
 }

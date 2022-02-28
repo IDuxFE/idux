@@ -8,7 +8,7 @@
     @change="onChange"
     @search="onSearch"
   >
-    <IxSelectOption v-for="option in options" :key="option.login.uuid" :value="option.email">
+    <IxSelectOption v-for="option in dataSource" :key="option.login.uuid" :value="option.email">
       {{ option.name.first }} {{ option.name.last }}
     </IxSelectOption>
   </IxSelect>
@@ -32,7 +32,7 @@ interface RandomUser {
 
 const value = ref()
 const loading = ref(false)
-const options = ref<RandomUser[]>([])
+const dataSource = ref<RandomUser[]>([])
 
 const onChange = (value: string, oldValue: string) => {
   console.log('selected change: ', value, oldValue)
@@ -46,12 +46,6 @@ const onSearch = async (searchValue: string) => {
   const { data } = await axios.get('https://randomuser.me/api', { params })
 
   loading.value = false
-  options.value = data.results
+  dataSource.value = data.results
 }
 </script>
-
-<style scoped lang="less">
-:deep(.ix-select) {
-  width: 200px;
-}
-</style>

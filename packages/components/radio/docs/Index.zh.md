@@ -42,11 +42,11 @@ subtitle: 单选框
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:value` | 当前选中的值 | `any` | - | - | 使用 `control` 时，此配置无效 |
 | `buttoned` | 设置单选框组内 `IxRadio` 的 `buttoned` | `boolean` | - | - | - |
+| `dataSource` | 以配置形式设置子元素 | `RadioData[]`| - | 优先级高于 `default` 插槽 |  |
 | `disabled` | 设置单选框组内 `IxRadio` 的 `disabled` | `boolean` | - | - | 使用 `control` 时，此配置无效 |
 | `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
-| `dataSource` | 以配置形式设置子元素 | `RadioData[]`| - | 优先级高于 `default` 插槽 |  |
 | `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: any, oldValue: any) => void`| - | - | - |
 

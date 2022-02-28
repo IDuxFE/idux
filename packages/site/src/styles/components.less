@@ -7,9 +7,7 @@
 // grid
 
 [id^='components-grid-demo-'] {
-
   .ix-row:not(.gutter-row) {
-
     .ix-col {
       background: @color-primary;
       color: @color-white;
@@ -26,7 +24,6 @@
 // layout
 
 [id^='components-layout-demo-'] {
-
   .ix-layout {
     text-align: center;
 
@@ -51,7 +48,13 @@
 // select
 
 [id^='components-select-demo-'] .ix-select {
-  margin-bottom: 16px;
+  &-single {
+    width: 120px;
+  }
+
+  &-multiple {
+    width: 300px;
+  }
 }
 
 // card

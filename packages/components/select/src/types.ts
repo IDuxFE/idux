@@ -17,11 +17,11 @@ import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
-const defaultCompareWith = (o1: any, o2: any) => o1 === o2
+const defaultCompareFn = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
-  value: IxPropTypes.oneOfType([String, Number, Object]),
   control: controlPropDef,
+  value: IxPropTypes.oneOfType([String, Number, Object]),
   open: IxPropTypes.bool,
 
   allowInput: IxPropTypes.bool.def(false),
@@ -29,7 +29,9 @@ export const selectProps = {
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string,
   clearable: IxPropTypes.bool.def(false),
-  compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareWith),
+  compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>(),
+  compareFn: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareFn),
+  dataSource: IxPropTypes.array<SelectData>(),
   disabled: IxPropTypes.bool.def(false),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
   maxLabelCount: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
@@ -42,7 +44,8 @@ export const selectProps = {
   placeholder: IxPropTypes.string,
   readonly: IxPropTypes.bool.def(false),
   searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]).def(false),
-  searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectFilterFn>()]).def(true),
+  searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectSearchFn>()]),
+  searchFn: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectSearchFn>()]).def(true),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
   suffix: IxPropTypes.string,
   target: ɵPortalTargetDef,
@@ -117,7 +120,7 @@ export type SelectOptionGroupComponent = FunctionalComponent<
 
 export type SelectData = SelectOptionProps | SelectOptionGroupProps
 
-export type SelectFilterFn = (searchValue: string, data: SelectData) => boolean
+export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 
 // private
 export const selectorProps = {

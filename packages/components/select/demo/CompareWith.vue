@@ -1,6 +1,6 @@
 <template>
-  <IxSelect v-model:value="value" :compareWith="compareFn" @change="onChange">
-    <IxSelectOption v-for="option in options" :key="option.id" :label="option.name" :value="option" />
+  <IxSelect v-model:value="value" :compareFn="compareFn" @change="onChange">
+    <IxSelectOption v-for="option in dataSource" :key="option.id" :label="option.name" :value="option" />
   </IxSelect>
 </template>
 <script setup lang="ts">
@@ -11,7 +11,7 @@ interface User {
   name: string
 }
 
-const options: User[] = [
+const dataSource: User[] = [
   { id: 1, name: 'Tom' },
   { id: 2, name: 'Jerry' },
   { id: 3, name: 'Speike' },

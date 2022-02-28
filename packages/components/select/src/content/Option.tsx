@@ -28,15 +28,15 @@ export default defineComponent({
 
     const isActive = computed(() => {
       const { value } = props
-      const { compareWith } = selectProps
+      const compareFn = selectProps.compareWith ?? selectProps.compareFn
       const activeValue = activeOption.value?.value
-      return compareWith(activeValue, value)
+      return compareFn(activeValue, value)
     })
 
     const isSelected = computed(() => {
       const { value } = props
-      const { compareWith } = selectProps
-      return selectedValue.value.some(item => compareWith(item, value))
+      const compareFn = selectProps.compareWith ?? selectProps.compareFn
+      return selectedValue.value.some(item => compareFn(item, value))
     })
 
     const classes = computed(() => {

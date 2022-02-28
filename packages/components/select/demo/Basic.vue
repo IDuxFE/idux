@@ -1,10 +1,10 @@
 <template>
   <IxSpace>
-    <IxSelect v-model:value="value" :options="options" @change="onChange"></IxSelect>
-    <IxSelect v-model:value="value" :options="options" disabled></IxSelect>
-    <IxSelect v-model:value="value" :options="options" clearable></IxSelect>
+    <IxSelect v-model:value="value" :dataSource="dataSource" @change="onChange"></IxSelect>
+    <IxSelect v-model:value="value" :dataSource="dataSource" disabled></IxSelect>
+    <IxSelect v-model:value="value" :dataSource="dataSource" clearable></IxSelect>
     <IxSelect v-model:value="value">
-      <IxSelectOption v-for="option in options" :key="option.key" :value="option.value" :disabled="option.disabled">
+      <IxSelectOption v-for="option in dataSource" :key="option.key" :value="option.value" :disabled="option.disabled">
         <IxIcon name="star"></IxIcon>
         <span style="margin-left: 8px">{{ option.label }}</span>
       </IxSelectOption>
@@ -16,7 +16,7 @@ import { ref } from 'vue'
 
 import { SelectData } from '@idux/components/select'
 
-const options: SelectData[] = [
+const dataSource: SelectData[] = [
   { key: 1, label: 'Tom', value: 'tom' },
   { key: 2, label: 'Jerry', value: 'jerry' },
   { key: 3, label: 'Speike', value: 'speike', disabled: true },
@@ -28,9 +28,3 @@ const onChange = (value: string, oldValue: string) => {
   console.log('selected change: ', value, oldValue)
 }
 </script>
-
-<style scoped lang="less">
-:deep(.ix-select) {
-  width: 120px;
-}
-</style>

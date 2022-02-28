@@ -1,7 +1,7 @@
 <template>
   <IxSelect
     v-model:value="value"
-    :options="options"
+    :dataSource="dataSource"
     multiple
     virtual
     @change="onChange"
@@ -15,11 +15,11 @@ import { ref } from 'vue'
 
 import { SelectData } from '@idux/components/select'
 
-const options: SelectData[] = []
+const dataSource: SelectData[] = []
 
 for (let index = 0; index < 9999; index++) {
   const value = `${index.toString(36)}${index}`
-  options.push({ key: index, label: value, value, disabled: index % 10 === 0 })
+  dataSource.push({ key: index, label: value, value, disabled: index % 10 === 0 })
 }
 
 const value = ref(['00', '11'])

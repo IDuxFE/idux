@@ -32,15 +32,16 @@ export function useActiveState(
 
   onMounted(() => {
     watchEffect(() => {
-      const { compareWith, allowInput } = props
+      const allowInput = props.allowInput
       const options = flattedOptions.value
       let currIndex: number
       if (allowInput && inputValue.value) {
         const searchValue = inputValue.value
         currIndex = options.findIndex(option => option.value === searchValue)
       } else {
+        const compareFn = props.compareWith ?? props.compareFn
         const currValue = selectedValue.value
-        currIndex = options.findIndex(option => currValue.some(value => compareWith(option.value, value)))
+        currIndex = options.findIndex(option => currValue.some(value => compareFn(option.value, value)))
       }
       currIndex = currIndex === -1 ? 0 : currIndex
       activeIndex.value = getEnabledActiveIndex(options, currIndex, 1)

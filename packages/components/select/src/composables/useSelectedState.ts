@@ -33,10 +33,10 @@ export function useSelectedState(
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))
   const selectedOptions = computed(() => {
-    const { compareWith } = props
+    const compareFn = props.compareWith ?? props.compareFn
     const options = mergedOptions.value
     return selectedValue.value.map(
-      value => options.find(option => compareWith(option.value, value)) ?? generateOption(value),
+      value => options.find(option => compareFn(option.value, value)) ?? generateOption(value),
     )
   })
 
@@ -50,9 +50,10 @@ export function useSelectedState(
   }
 
   const changeSelected = (value: any) => {
-    const { compareWith, multiple, multipleLimit } = props
+    const compareFn = props.compareWith ?? props.compareFn
+    const { multiple, multipleLimit } = props
     const currValue = selectedValue.value
-    const targetIndex = currValue.findIndex(item => compareWith(item, value))
+    const targetIndex = currValue.findIndex(item => compareFn(item, value))
     const isSelected = targetIndex > -1
     if (!multiple) {
       !isSelected && setValue([value])
@@ -70,7 +71,8 @@ export function useSelectedState(
   }
 
   const handleItemRemove = (value: any) => {
-    setValue(selectedValue.value.filter(item => !props.compareWith(value, item)))
+    const compareFn = props.compareWith ?? props.compareFn
+    setValue(selectedValue.value.filter(item => !compareFn(value, item)))
   }
 
   const handleClear = (evt: MouseEvent) => {

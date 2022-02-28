@@ -22,33 +22,36 @@ order: 0
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `options` 时有效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
-| `compareWith` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
+| `compareFn` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
+| `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `options` 时有效 |
 | `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
-| `options` | 选项列表 | `SelectData[]` | - | - | 推荐使用此配置替换 `default` 插槽, 性能会更好 |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
-| `searchFilter` | 根据搜索的文本进行筛选 | `boolean \| SelectFilterFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
+| `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
+| `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
+| `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
+| `onSearch` | 开启搜索功能后，输入后的回调 | `(searchValue: string) => void` | - | - | 通常用于服务端搜索 |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
 
 ```ts
-export type SelectData = SelectOption | SelectOptionGroup
+export type SelectData = SelectOptionProps | SelectOptionGroupProps
 
-export type SelectFilterFn = (searchValue: string, data: SelectData) => boolean
+export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 ```
 
 #### SelectCommonProps
