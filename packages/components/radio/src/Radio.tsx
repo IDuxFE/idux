@@ -28,7 +28,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-radio`)
     const config = useGlobalConfig('radio')
 
-    const { elementRef, focus, blur } = useFormElement()
+    const { elementRef, focus, blur } = useFormElement<HTMLInputElement>()
     expose({ focus, blur })
 
     const formContext = inject(FORM_TOKEN, null)
@@ -125,11 +125,12 @@ const useRadio = (
       if (elementRef.value) {
         const checked = (evt.target as HTMLInputElement).checked
         const value = props.value
+        const oldValue = accessor.valueRef.value
         accessor.setValue(value)
         // 为了保持受控模式下保持原生input状态和数据一致
         elementRef.value.checked = false
-        callEmit(props.onChange, checked)
-        callEmit(groupProps.onChange, value)
+        callEmit(props.onChange, checked, !checked)
+        callEmit(groupProps.onChange, value, oldValue)
       }
     }
   } else {
@@ -146,7 +147,7 @@ const useRadio = (
         const checked = (evt.target as HTMLInputElement).checked
         accessor.setValue(checked)
         elementRef.value.checked = false
-        callEmit(props.onChange, checked)
+        callEmit(props.onChange, checked, !checked)
       }
     }
   }

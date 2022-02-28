@@ -1,23 +1,8 @@
 <template>
   <IxSpace vertical>
-    <IxRadioGroup v-model:value="value" buttoned>
-      <IxRadio value="beijing">Beijing</IxRadio>
-      <IxRadio value="shanghai">Shanghai</IxRadio>
-      <IxRadio value="guangzhou">Guangzhou</IxRadio>
-      <IxRadio value="shenzhen">Shenzhen</IxRadio>
-    </IxRadioGroup>
-    <IxRadioGroup v-model:value="value" buttoned mode="primary">
-      <IxRadio value="beijing">Beijing</IxRadio>
-      <IxRadio value="shanghai">Shanghai</IxRadio>
-      <IxRadio value="guangzhou">Guangzhou</IxRadio>
-      <IxRadio value="shenzhen">Shenzhen</IxRadio>
-    </IxRadioGroup>
-    <IxRadioGroup v-model:value="value" buttoned disabled>
-      <IxRadio value="beijing">Beijing</IxRadio>
-      <IxRadio value="shanghai">Shanghai</IxRadio>
-      <IxRadio value="guangzhou">Guangzhou</IxRadio>
-      <IxRadio value="shenzhen">Shenzhen</IxRadio>
-    </IxRadioGroup>
+    <IxRadioGroup v-model:value="value" buttoned :dataSource="dataSource"> </IxRadioGroup>
+    <IxRadioGroup v-model:value="value" buttoned :dataSource="dataSource" mode="primary"> </IxRadioGroup>
+    <IxRadioGroup v-model:value="value" buttoned :dataSource="dataSource" disabled> </IxRadioGroup>
   </IxSpace>
 </template>
 
@@ -25,4 +10,11 @@
 import { ref } from 'vue'
 
 const value = ref('beijing')
+
+const dataSource = [
+  { label: 'Beijing', value: 'beijing' },
+  { label: 'Shanghai', value: 'shanghai' },
+  { label: 'Guangzhou', value: 'guangzhou' },
+  { label: 'Shenzhen', value: 'shenzhen' },
+]
 </script>

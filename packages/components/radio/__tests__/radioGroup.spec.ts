@@ -8,7 +8,7 @@ import RadioGroup from '../src/RadioGroup'
 import { RadioGroupProps } from '../src/types'
 
 describe('RadioGroup', () => {
-  const defaultOptions = [
+  const defaultDataSource = [
     { label: 'Beijing', value: 'a' },
     { label: 'Shanghai', value: 'b' },
     { label: 'Guangzhou', value: 'c' },
@@ -16,10 +16,10 @@ describe('RadioGroup', () => {
   ]
   const RadioGroupMount = (groupOptions?: MountingOptions<Partial<RadioGroupProps>>) => {
     const { props, ...rest } = groupOptions || {}
-    return mount(RadioGroup, { props: { options: defaultOptions, ...props }, ...rest })
+    return mount(RadioGroup, { props: { dataSource: defaultDataSource, ...props }, ...rest })
   }
 
-  renderWork<RadioGroupProps>(Radio, { props: { label: 'Test', options: defaultOptions } })
+  renderWork<RadioGroupProps>(RadioGroup, { props: { dataSource: defaultDataSource } })
 
   test('value work', async () => {
     const wrapper = RadioGroupMount({ props: { value: 'a' } })
@@ -31,7 +31,7 @@ describe('RadioGroup', () => {
     expect(wrapper.find('.ix-radio-checked').text()).toBe('Shanghai')
   })
 
-  test('onUpdate:checked work', async () => {
+  test('onUpdate:value work', async () => {
     const onUpdate = jest.fn()
     const wrapper = RadioGroupMount({ props: { 'onUpdate:value': onUpdate } })
 
@@ -96,22 +96,30 @@ describe('RadioGroup', () => {
     expect(wrapper.findAll('.ix-radio-default').length).toBe(4)
   })
 
-  test('options work', async () => {
-    let options = [
+  test('dataSource work', async () => {
+    let dataSource = [
       { label: 'Beijing', value: 'a' },
       { label: 'Shanghai', value: 'b' },
     ]
-    const wrapper = RadioGroupMount({ props: { options } })
+    const wrapper = RadioGroupMount({ props: { dataSource } })
 
     expect(wrapper.findAll('.ix-radio').length).toBe(2)
 
-    options = [
+    dataSource = [
       { label: 'Beijing', value: 'a' },
       { label: 'Shanghai', value: 'b' },
       { label: 'Guangzhou', value: 'c' },
     ]
 
-    await wrapper.setProps({ options })
+    await wrapper.setProps({ dataSource })
+
+    expect(wrapper.findAll('.ix-radio').length).toBe(3)
+  })
+
+  test('default slot work', async () => {
+    const dataSource = undefined
+    const slots = [h(Radio, { label: 'A' }), h(Radio, { label: 'B' }), h(Radio, { label: 'C' })]
+    const wrapper = RadioGroupMount({ props: { dataSource }, slots: { default: () => slots } })
 
     expect(wrapper.findAll('.ix-radio').length).toBe(3)
   })
@@ -128,13 +136,5 @@ describe('RadioGroup', () => {
     await wrapper.setProps({ size: undefined })
 
     expect(wrapper.findAll('.ix-radio-md').length).toBe(4)
-  })
-
-  test('default slot work', async () => {
-    const options = undefined
-    const slots = [h(Radio, { label: 'A' }), h(Radio, { label: 'B' }), h(Radio, { label: 'C' })]
-    const wrapper = RadioGroupMount({ props: { options }, slots: { default: () => slots } })
-
-    expect(wrapper.findAll('.ix-radio').length).toBe(3)
   })
 })

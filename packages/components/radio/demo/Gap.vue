@@ -1,7 +1,7 @@
 <template>
   <IxSpace vertical>
-    <IxRadioGroup v-model:value="value" :options="options" :gap="16" />
-    <IxRadioGroup v-model:value="value" :options="options" :gap="16" buttoned />
+    <IxRadioGroup v-model:value="value" :dataSource="dataSource" :gap="16" />
+    <IxRadioGroup v-model:value="value" :dataSource="dataSource" :gap="16" buttoned />
   </IxSpace>
 </template>
 
@@ -10,7 +10,7 @@ import { ref } from 'vue'
 
 const value = ref('beijing')
 
-const options = [
+const dataSource = [
   { label: 'Beijing', value: 'beijing' },
   { label: 'Shanghai', value: 'shanghai' },
   { label: 'Guangzhou', value: 'guangzhou' },

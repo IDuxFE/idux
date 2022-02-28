@@ -23,5 +23,5 @@ export type {
   RadioGroupComponent,
   RadioGroupPublicProps as RadioGroupProps,
   RadioMode,
-  RadioOption,
+  RadioData,
 } from './src/types'

@@ -1,8 +1,8 @@
 <template>
   <IxSpace vertical>
-    <IxRadioGroup v-model:value="value" :options="options" name="city"></IxRadioGroup>
-    <IxRadioGroup v-model:value="value2" :options="options" name="city2" buttoned></IxRadioGroup>
-    <IxRadioGroup v-model:value="value3" :options="options" name="city3" buttoned mode="primary"></IxRadioGroup>
+    <IxRadioGroup v-model:value="value" :dataSource="dataSource" name="city"></IxRadioGroup>
+    <IxRadioGroup v-model:value="value2" :dataSource="dataSource" name="city2" buttoned></IxRadioGroup>
+    <IxRadioGroup v-model:value="value3" :dataSource="dataSource" name="city3" buttoned mode="primary"></IxRadioGroup>
   </IxSpace>
 </template>
 
@@ -13,7 +13,7 @@ const value = ref('beijing')
 const value2 = ref('beijing')
 const value3 = ref('beijing')
 
-const options = [
+const dataSource = [
   { label: 'Beijing', value: 'beijing' },
   { label: 'Shanghai', value: 'shanghai' },
   { label: 'Guangzhou', value: 'guangzhou' },

@@ -7,22 +7,19 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
-import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
+import { type DefineComponent, type HTMLAttributes, type LabelHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
-import { IxPropTypes } from '@idux/cdk/utils'
-
-export type RadioMode = 'default' | 'primary'
-export type RadioOption = Omit<RadioPublicProps, 'checked' | 'onUpdate:checked' | 'onChange'>
+import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type FormSize } from '@idux/components/form'
 
 export const radioProps = {
+  control: controlPropDef,
   checked: IxPropTypes.bool,
 
   autofocus: IxPropTypes.bool.def(false),
   buttoned: IxPropTypes.bool,
-  control: controlPropDef,
+
   disabled: IxPropTypes.bool,
   label: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
@@ -31,7 +28,7 @@ export const radioProps = {
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: boolean) => void>(),
-  onChange: IxPropTypes.emit<(checked: boolean) => void>(),
+  onChange: IxPropTypes.emit<(checked: boolean, oldChecked: boolean) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
@@ -49,19 +46,21 @@ export type RadioComponent = DefineComponent<
 export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindings>>
 
 export const radioGroupProps = {
-  value: IxPropTypes.any,
   control: controlPropDef,
+  value: IxPropTypes.any,
+
   buttoned: IxPropTypes.bool.def(false),
+  dataSource: IxPropTypes.array<RadioData>(),
   disabled: IxPropTypes.bool.def(false),
   gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
-  options: IxPropTypes.array<RadioOption>(),
+  options: IxPropTypes.array<RadioData>(),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']).def('md'),
 
   // events
   'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
-  onChange: IxPropTypes.emit<(value: any) => void>(),
+  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
 }
 
 export type RadioGroupProps = IxInnerPropTypes<typeof radioGroupProps>
@@ -70,3 +69,8 @@ export type RadioGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
 >
 export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
+
+export type RadioMode = 'default' | 'primary'
+export interface RadioData extends RadioPublicProps {
+  key?: VKey
+}
