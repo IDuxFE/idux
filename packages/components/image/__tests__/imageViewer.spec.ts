@@ -1,22 +1,24 @@
 import type { ImageViewerProps } from '../src/types'
 import type { MountingOptions } from '@vue/test-utils'
 
-import { flushPromises, mount } from '@vue/test-utils'
+import { DOMWrapper, flushPromises, mount } from '@vue/test-utils'
 
-import { renderWork, wait } from '@tests'
+import { isElementVisible, renderWork, wait } from '@tests'
 
 import ImageViewer from '../src/ImageViewer'
-import ImageViewerContent from '../src/component/ImageViewerContent'
 
 describe('ImageViewer', () => {
+  let bodyWrapper: DOMWrapper<Element>
+
   beforeEach(() => {
-    const el = document.createElement('div')
-    el.className = 'ix-image-viewer-container'
-    document.body.appendChild(el)
+    bodyWrapper = new DOMWrapper(document.body, {}) as DOMWrapper<Element>
   })
 
   afterEach(() => {
-    ;(document.querySelector('.ix-image-viewer-container') as HTMLElement).innerHTML = ''
+    const container = document.querySelector('.ix-image-viewer-container')
+    if (container) {
+      container.innerHTML = ''
+    }
   })
 
   const ImageViewerMount = (options: MountingOptions<Partial<ImageViewerProps>> = {}) => {
@@ -38,21 +40,21 @@ describe('ImageViewer', () => {
     const wrapper = ImageViewerMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
 
-    expect(wrapper.findComponent(ImageViewerContent).exists()).toBe(false)
+    expect(isElementVisible(document.querySelector('.ix-image-viewer'))).toBe(false)
 
     await wrapper.setProps({ visible: true })
 
-    expect(wrapper.findComponent(ImageViewerContent).exists()).toBe(true)
+    expect(isElementVisible(document.querySelector('.ix-image-viewer'))).toBe(true)
 
-    await wrapper.findComponent(ImageViewerContent).find('img').trigger('click')
-
-    expect(onUpdateVisible).toBeCalledWith(false)
-
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-close').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer img').trigger('click')
 
     expect(onUpdateVisible).toBeCalledWith(false)
 
-    await wrapper.findComponent(ImageViewerContent).trigger('keydown.esc')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-close').trigger('click')
+
+    expect(onUpdateVisible).toBeCalledWith(false)
+
+    await bodyWrapper.find('.ix-image-viewer').trigger('keydown.esc')
 
     expect(onUpdateVisible).toBeCalledWith(false)
   })
@@ -65,28 +67,28 @@ describe('ImageViewer', () => {
     })
     await flushPromises()
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('src')).toBe(images[0])
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('src')).toBe(images[0])
 
     await wrapper.setProps({ activeIndex: 1 })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('src')).toBe(images[1])
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('src')).toBe(images[1])
 
-    await wrapper.findComponent(ImageViewerContent).trigger('keydown', { code: 'ArrowRight' })
+    await bodyWrapper.find('.ix-image-viewer').trigger('keydown', { code: 'ArrowRight' })
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
 
-    await wrapper.findComponent(ImageViewerContent).trigger('keydown', { code: 'ArrowLeft' })
+    await bodyWrapper.find('.ix-image-viewer').trigger('keydown', { code: 'ArrowLeft' })
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-left').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-left').trigger('click')
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-right').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-right').trigger('click')
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
@@ -99,55 +101,55 @@ describe('ImageViewer', () => {
     })
     await flushPromises()
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('src')).toBe(imagesOld[0])
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('src')).toBe(imagesOld[0])
 
     const imageNew = ['/2.png']
     await wrapper.setProps({ images: imageNew })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('src')).toBe(imageNew[0])
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('src')).toBe(imageNew[0])
   })
 
   test('zoom work', async () => {
     const wrapper = ImageViewerMount({ props: { visible: true } })
     await flushPromises()
 
-    await wrapper.findComponent(ImageViewerContent).trigger('mousewheel', { wheelDelta: 10 })
+    await bodyWrapper.find('.ix-image-viewer').trigger('mousewheel', { wheelDelta: 10 })
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.2)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1.2)')
 
-    await wrapper.findComponent(ImageViewerContent).trigger('mousewheel', { wheelDelta: -10 })
+    await bodyWrapper.find('.ix-image-viewer').trigger('mousewheel', { wheelDelta: -10 })
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1)')
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-in').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-zoom-in').trigger('click')
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.2)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1.2)')
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-out').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-zoom-out').trigger('click')
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1)')
 
     await wrapper.setProps({ zoom: [0.8, 0.9] })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(0.9)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(0.9)')
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-in').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-zoom-in').trigger('click')
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(0.9)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(0.9)')
 
     await wrapper.setProps({ zoom: [1.1, 1.2] })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.1)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1.1)')
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-zoom-out').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-zoom-out').trigger('click')
     await wait(20) // debounce
 
-    expect(wrapper.findComponent(ImageViewerContent).find('img').attributes('style')).toMatch('scale(1.1)')
+    expect(bodyWrapper.find('.ix-image-viewer img').attributes('style')).toMatch('scale(1.1)')
   })
 
   test('loop work', async () => {
@@ -158,24 +160,24 @@ describe('ImageViewer', () => {
     })
     await flushPromises()
 
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-left').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-left').trigger('click')
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(2)
 
     await wrapper.setProps({ activeIndex: 2 })
-    await wrapper.findComponent(ImageViewerContent).find('.ix-icon-right').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-icon-right').trigger('click')
     await wait(20) // debounce
 
     expect(onUpdateActiveIndex).toBeCalledWith(0)
 
     await wrapper.setProps({ loop: false })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('.ix-icon-right').classes().toString()).toMatch('disabled')
+    expect(bodyWrapper.find('.ix-image-viewer .ix-icon-right').classes().toString()).toMatch('disabled')
 
     await wrapper.setProps({ activeIndex: 0 })
 
-    expect(wrapper.findComponent(ImageViewerContent).find('.ix-icon-left').classes().toString()).toMatch('disabled')
+    expect(bodyWrapper.find('.ix-image-viewer .ix-icon-left').classes().toString()).toMatch('disabled')
   })
 
   test('maskClosable work', async () => {
@@ -183,13 +185,13 @@ describe('ImageViewer', () => {
     const wrapper = ImageViewerMount({
       props: { visible: true, 'onUpdate:visible': onUpdateVisible },
     })
-    await wrapper.findComponent(ImageViewerContent).find('img').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer img').trigger('click')
 
     expect(onUpdateVisible).toBeCalledWith(false)
     onUpdateVisible.mockRestore()
 
     await wrapper.setProps({ maskClosable: false })
-    await wrapper.findComponent(ImageViewerContent).find('.ix-image-viewer-preview').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-image-viewer-preview').trigger('click')
 
     expect(onUpdateVisible).not.toBeCalled()
   })
@@ -198,12 +200,10 @@ describe('ImageViewer', () => {
     const wrapper = ImageViewerMount({ props: { visible: true } })
     await flushPromises()
 
-    expect((document.querySelector('.ix-image-viewer-container .ix-image-viewer') as HTMLElement).innerHTML).not.toBe(
-      '',
-    )
+    expect((document.querySelector('.ix-image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
 
     await wrapper.setProps({ target: 'image-viewer-container' })
 
-    expect((document.querySelector('.image-viewer-container .ix-image-viewer') as HTMLElement).innerHTML).not.toBe('')
+    expect((document.querySelector('.image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
   })
 })
