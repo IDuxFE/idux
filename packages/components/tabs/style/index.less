@@ -12,7 +12,6 @@
     flex: auto;
 
     .@{tabs-prefix} {
-
       &-pane {
         width: 100%;
       }
@@ -29,7 +28,6 @@
     }
 
     .@{tabs-prefix} {
-
       &-nav {
         display: flex;
         flex-wrap: nowrap;
@@ -55,13 +53,12 @@
             align-items: center;
             color: @tabs-nav-tab-text-color;
           }
-          &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+          &-selected:not(&-disabled) {
             .@{tabs-prefix}-nav-tab-label {
               color: @tabs-selected-color;
             }
           }
-          &:not(.@{tabs-prefix}-nav-tab-disabled) {
-
+          &:not(&-disabled) {
             &:hover {
               .@{tabs-prefix}-nav-tab-label {
                 color: @tabs-hover-color;
@@ -71,10 +68,10 @@
             &:active {
               .@{tabs-prefix}-nav-tab-label {
                 color: @tabs-active-color;
+                font-size: @tabs-active-font-size;
               }
             }
           }
-
           &-disabled {
             cursor: not-allowed;
             .@{tabs-prefix}-nav-tab-label {
@@ -188,7 +185,6 @@
         }
 
         &-disabled {
-
           &::after {
             background-color: @tabs-disabled-color;
           }
@@ -199,7 +195,6 @@
 
   &-line {
     .@{tabs-prefix}-nav {
-
       &-bar {
         position: absolute;
         background-color: @tabs-nav-bar-color;
@@ -225,11 +220,9 @@
       }
     }
     &.@{tabs-prefix} {
-
       &-nav-start,
       &-nav-end {
         .@{tabs-prefix} {
-
           &-nav-wrapper {
             flex-wrap: wrap;
             &.@{tabs-prefix}-nav-wrapper-has-scroll {
@@ -262,15 +255,12 @@
       }
 
       &-nav-start {
-
         &.@{tabs-prefix} {
           flex-direction: row;
         }
 
         .@{tabs-prefix} {
-
           &-nav {
-
             &-bar {
               right: 0;
               border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
@@ -292,15 +282,12 @@
       }
 
       &-nav-end {
-
         &.@{tabs-prefix} {
           flex-direction: row-reverse;
         }
 
         .@{tabs-prefix} {
-
           &-nav {
-
             &-bar {
               left: 0;
               width: @tabs-nav-bar-height;
@@ -326,13 +313,11 @@
       }
 
       &-nav-bottom {
-
         &.@{tabs-prefix} {
           flex-direction: column-reverse;
         }
 
         .@{tabs-prefix} {
-
           &-pane-wrapper {
             padding: 0 0 @tabs-pane-padding 0;
           }
@@ -343,7 +328,6 @@
 
   &-segment {
     .@{tabs-prefix}-nav {
-
       &-wrapper {
         font-size: 12px;
       }
@@ -353,7 +337,6 @@
         border-right: none;
         height: @tabs-segment-nav-height;
         &:not(.@{tabs-prefix}-nav-tab-disabled) {
-
           &:hover {
             border-color: @tabs-selected-color;
             & + .@{tabs-prefix}-nav-tab {

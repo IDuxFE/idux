@@ -15,18 +15,18 @@ order: 0
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `mode` 为 `multiple` 或 `tags` 时，`value` 为数组，使用 `control` 时，此配置无效 |
+| `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `multiple=true` 时，`value` 为数组，使用 `control` 时，此配置无效 |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean` | `false` | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
-| `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `options` 时有效 |
+| `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `compareFn` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `options` 时有效 |
+| `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
@@ -39,7 +39,7 @@ order: 0
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
-| `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | - |
+| `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
