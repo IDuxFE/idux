@@ -43,8 +43,10 @@ order: 0
 | `@tabs-hover-color` | `@color-primary-l10` | - | - |
 | `@tabs-active-color` | `@color-primary-d10` | - | - |
 | `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
+| `@tabs-nav-font-size` | `@font-size-md` | - | - |
 | `@tabs-nav-background-color` | `@color-white` | - | - |
 | `@tabs-nav-border-color` | `@color-graphite-l20` | - | - |
+| `@tabs-segment-nav-font-size` | `@font-size-sm` | - | - |
 | `@tabs-segment-nav-disabled-background-color` | `@color-graphite-l40` | - | - |
 | `@tabs-segment-nav-primary-active-background-color` | `@color-primary` | - | - |
 | `@tabs-segment-nav-primary-active-text-color` | `@color-white` | - | - |

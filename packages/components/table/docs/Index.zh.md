@@ -226,6 +226,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `@table-head-split-height` | `16px` | - | - |
 | `@table-head-split-color` | `rgba(0, 0, 0, 0.06)` | - | - |
 | `@table-head-icon-color` | `@color-black` | - | - |
+| `@table-head-icon-active-color` | `@color-primary` | - | - |
 | `@table-head-icon-hover-backgroud-color` | `@color-graphite-l40` | - | - |
 | `@table-head-font-weight` | `@font-weight-lg` | - | - |
 | `@table-body-hover-background` | `@background-color-light` | - | - |
