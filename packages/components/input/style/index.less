@@ -1,6 +1,6 @@
-@import '../../../style/mixins/borderless.less';
-@import '../../../style/mixins/placeholder.less';
-@import '../../../style/mixins/reset.less';
+@import '../../style/mixins/borderless.less';
+@import '../../style/mixins/placeholder.less';
+@import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{input-prefix} {
@@ -24,7 +24,6 @@
 
   &-inner,
   &-wrapper {
-
     &:hover {
       .input-hover();
     }
@@ -60,7 +59,6 @@
   }
 
   &-borderless {
-
     &,
     &:hover,
     &:focus,
@@ -164,7 +162,6 @@
       border-bottom-right-radius: 0;
 
       .@{idux-prefix}-select {
-
         &-selector {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -178,7 +175,6 @@
       border-bottom-left-radius: 0;
 
       .@{idux-prefix}-select {
-
         &-selector {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
@@ -187,7 +183,6 @@
     }
 
     .@{idux-prefix}-select {
-
       &-selector {
         background-color: inherit;
         border: @input-border-width @input-border-style transparent;
@@ -238,7 +233,6 @@
   }
 
   &-clearable {
-
     &:hover {
       .@{input-prefix}-clear.visible {
         opacity: 1;

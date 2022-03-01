@@ -22,6 +22,7 @@
     position: relative;
     display: inline-flex;
     overflow: hidden;
+    font-size: @tabs-nav-font-size;
 
     &&-has-scroll {
       padding: 0 @tabs-nav-pre-next-width;
@@ -68,7 +69,6 @@
             &:active {
               .@{tabs-prefix}-nav-tab-label {
                 color: @tabs-active-color;
-                font-size: @tabs-active-font-size;
               }
             }
           }
@@ -329,7 +329,7 @@
   &-segment {
     .@{tabs-prefix}-nav {
       &-wrapper {
-        font-size: 12px;
+        font-size: @tabs-segment-nav-font-size;
       }
 
       &-tab {
