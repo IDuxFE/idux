@@ -1,12 +1,13 @@
 {
   "packages": ["packages/*"],
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-beta.0",
   "command": {
     "publish": {
       "allowBranch": ["main", "next"],
       "ignoreChanges": ["*.md", "**/__tests__/**", "**/demo/**", "**/docs/**"],
       "message": "docs(release): publish %s",
-      "registry": "https://registry.npmjs.org"
+      "registry": "https://registry.npmjs.org",
+      "preid": "beta"
     },
     "bootstrap": {
       "npmClient": "pnpm"
