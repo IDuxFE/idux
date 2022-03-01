@@ -27,5 +27,5 @@ export type {
   SelectOptionGroupProps,
   SelectOptionGroupComponent,
   SelectData,
-  SelectFilterFn,
+  SelectSearchFn,
 } from './src/types'

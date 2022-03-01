@@ -21,7 +21,7 @@ const defaultCompareFn = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
   control: controlPropDef,
-  value: IxPropTypes.oneOfType([String, Number, Object]),
+  value: IxPropTypes.any,
   open: IxPropTypes.bool,
 
   allowInput: IxPropTypes.bool.def(false),
@@ -54,10 +54,10 @@ export const selectProps = {
 
   // events
   // eslint-disable-next-line @typescript-eslint/ban-types
-  'onUpdate:value': IxPropTypes.emit<(value: string | number | Object) => void>(),
+  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
   'onUpdate:open': IxPropTypes.emit<(open: boolean) => void>(),
   // eslint-disable-next-line @typescript-eslint/ban-types
-  onChange: IxPropTypes.emit<(value: string | number | Object, oldValue: string | number | Object) => void>(),
+  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
   onClear: IxPropTypes.emit<(evt: Event) => void>(),
   onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
   onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),

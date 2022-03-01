@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { FormSize } from '@idux/components/form'
 import { SelectData } from '@idux/components/select'
 
 const dataSource: SelectData[] = [
@@ -22,7 +23,7 @@ const dataSource: SelectData[] = [
   { label: 'Speike', value: 'speike', disabled: true },
 ]
 
-const size = ref('md')
+const size = ref<FormSize>('md')
 const singleValue = ref('tom')
 const multipleValue = ref(['tom'])
 </script>

@@ -7,9 +7,17 @@
 
 // eslint-disable vue/no-reserved-props
 
-import type { StyleValue } from 'vue'
-
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+import {
+  type CSSProperties,
+  computed,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+  watchEffect,
+} from 'vue'
 
 import { getScrollBarSize } from '@idux/cdk/scroll'
 import { convertElement, getOffset, off, on } from '@idux/cdk/utils'
@@ -61,7 +69,7 @@ export default defineComponent({
       }
     })
 
-    const scrollBarStyle = computed<StyleValue>(() => {
+    const scrollBarStyle = computed<CSSProperties>(() => {
       return {
         width: `${scrollBarWidth.value}px`,
         transform: `translate3d(${stickyScrollLeft.value}px, 0, 0)`,

@@ -44,7 +44,9 @@ export function useColumns(
     scrollBarSizeOnFixedHolder,
   )
   const fixedColumnKeys = useFixedColumnKeys(flattedColumnsWithScrollBar)
-  const hasEllipsis = computed(() => flattedColumns.value.some(column => (column as TableColumnBase).ellipsis))
+  const hasEllipsis = computed(
+    () => props.ellipsis || flattedColumns.value.some(column => (column as TableColumnBase).ellipsis),
+  )
   const hasFixed = computed(() => flattedColumns.value.some(column => column.fixed))
 
   const { columnWidths, columnWidthsWithScrollBar, changeColumnWidth } = useColumnWidths(
@@ -148,7 +150,7 @@ function convertColumns(nodes: VNode[] | undefined) {
     const { key = index, editable, ellipsis, ...newColumn } = props || {}
     newColumn.key = key
     newColumn.editable = editable || editable === ''
-    newColumn.editable = ellipsis || ellipsis === ''
+    newColumn.ellipsis = ellipsis || ellipsis === ''
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { default: defaultSlot, cell, title, expand, icon } = (children || {}) as any
     if (defaultSlot) {

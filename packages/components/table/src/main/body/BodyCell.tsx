@@ -31,8 +31,9 @@ export default defineComponent({
   props: tableBodyCellProps,
   setup(props) {
     const {
-      mergedPrefixCls,
+      props: tableProps,
       slots,
+      mergedPrefixCls,
       activeSortable,
       fixedColumnKeys,
       columnOffsets,
@@ -44,12 +45,12 @@ export default defineComponent({
     const dataValue = useDataValue(props)
 
     const classes = computed(() => {
-      const { key, fixed, align, ellipsis } = props.column as BodyColumn
+      const { key, fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
-      let classes: Record<string, boolean> = {
+      let classes = {
         [`${prefixCls}-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
         [`${prefixCls}-align-${align}`]: !!align,
-        [`${prefixCls}-ellipsis`]: !!ellipsis,
+        [`${prefixCls}-ellipsis`]: ellipsis,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
@@ -93,7 +94,7 @@ export default defineComponent({
       if (type === 'selectable') {
         children = renderSelectableChildren(props, selectable, handleClick)
       } else {
-        const { ellipsis } = props.column
+        const { ellipsis = tableProps.ellipsis } = props.column
         const text = dataValue.value
         children = renderChildren(props, slots, dataValue.value)
         title = getColTitle(ellipsis, children, text)
