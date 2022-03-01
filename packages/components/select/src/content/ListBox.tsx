@@ -7,11 +7,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { MergedOption } from '../composables/useOptions'
-import type { FunctionalComponent } from 'vue'
+import { type FunctionalComponent, type Slots, inject } from 'vue'
 
-import { type Slots, inject } from 'vue'
+import { Logger } from '@idux/cdk/utils'
 
+import { type MergedOption } from '../composables/useOptions'
 import { selectToken } from '../token'
 import { renderOptionLabel } from '../utils/renderOptionLabel'
 
@@ -20,12 +20,15 @@ const defaultStyle = { height: 0, width: 0, overflow: 'hidden' }
 const ListBox: FunctionalComponent = () => {
   const { props, slots, selectedValue, mergedOptions, activeIndex, activeOption } = inject(selectToken)!
   const currSelectedValue = selectedValue.value
-  const { compareWith } = props
+  const compareFn = props.compareWith ?? props.compareFn
+  if (__DEV__ && props.compareWith) {
+    Logger.warn('components/select', '`compareWith` was deprecated, please use `compareFn` instead')
+  }
   return (
     <div role="listbox" style={defaultStyle}>
-      {renderOption(slots, mergedOptions.value[activeIndex.value - 1], currSelectedValue, compareWith)}
-      {renderOption(slots, activeOption.value, currSelectedValue, compareWith)}
-      {renderOption(slots, mergedOptions.value[activeIndex.value + 1], currSelectedValue, compareWith)}
+      {renderOption(slots, mergedOptions.value[activeIndex.value - 1], currSelectedValue, compareFn)}
+      {renderOption(slots, activeOption.value, currSelectedValue, compareFn)}
+      {renderOption(slots, mergedOptions.value[activeIndex.value + 1], currSelectedValue, compareFn)}
     </div>
   )
 }

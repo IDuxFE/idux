@@ -1,5 +1,5 @@
 <template>
-  <IxSelect v-model:value="value" :options="options" :overlayRender="overlayRender" style="width: 200px"></IxSelect>
+  <IxSelect v-model:value="value" :dataSource="dataSource" :overlayRender="overlayRender"></IxSelect>
 </template>
 
 <script setup lang="ts">
@@ -10,7 +10,7 @@ import { IxDivider } from '@idux/components/divider'
 import { IxInput } from '@idux/components/input'
 import { SelectData } from '@idux/components/select'
 
-const options = ref<SelectData[]>([
+const dataSource = ref<SelectData[]>([
   { key: 1, label: 'Tom', value: 'tom' },
   { key: 2, label: 'Jerry', value: 'jerry' },
   { key: 3, label: 'Speike', value: 'speike' },
@@ -23,9 +23,9 @@ const onChange = (value: string) => {
   inputValue.value = value
 }
 const onAdd = () => {
-  const currOptions = options.value
+  const currOptions = dataSource.value
   const label = inputValue.value
-  options.value = [...currOptions, { key: label, label, value: label }]
+  dataSource.value = [...currOptions, { key: label, label, value: label }]
   inputValue.value = ''
 }
 

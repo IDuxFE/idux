@@ -1,5 +1,12 @@
 <template>
-  <IxSelect v-model:value="value" :options="options" multiple :maxLabelCount="3" :multipleLimit="5" @change="onChange">
+  <IxSelect
+    v-model:value="value"
+    :dataSource="dataSource"
+    multiple
+    :maxLabelCount="3"
+    :multipleLimit="5"
+    @change="onChange"
+  >
     <template #selectedLabel="option"><IxIcon :name="option.value" />{{ option.label }}</template>
     <template #overflowedLabel="moreOptions">and {{ moreOptions.length }} more selected</template>
   </IxSelect>
@@ -9,7 +16,7 @@ import { ref } from 'vue'
 
 import { SelectData } from '@idux/components/select'
 
-const options: SelectData[] = [
+const dataSource: SelectData[] = [
   { key: 1, label: 'GitHub', value: 'github' },
   { key: 2, label: 'Gitlab', value: 'gitlab' },
   { key: 3, label: 'Chrome', value: 'chrome' },

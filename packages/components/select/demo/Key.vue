@@ -1,12 +1,13 @@
 <template>
-  <IxSelect v-model:value="value" :options="options" childrenKey="options" labelKey="text" valueKey="name"> </IxSelect>
+  <IxSelect v-model:value="value" :dataSource="dataSource" childrenKey="options" labelKey="text" valueKey="name">
+  </IxSelect>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 
 import { SelectData } from '@idux/components/select'
 
-const options: SelectData[] = [
+const dataSource: SelectData[] = [
   {
     key: 1,
     text: 'Manager',

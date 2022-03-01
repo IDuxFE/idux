@@ -1,9 +1,9 @@
 <template>
   <IxSpace vertical>
-    <IxSpace> searchable:<IxRadioGroup v-model:value="searchableValue" :options="searchableOptions" /></IxSpace>
+    <IxSpace> searchable:<IxRadioGroup v-model:value="searchableValue" :dataSource="searchableOptions" /></IxSpace>
     <IxSelect
       v-model:value="value"
-      :options="options"
+      :dataSource="dataSource"
       :searchable="searchableValue"
       placeholder="Searchable"
       @change="onChange"
@@ -12,20 +12,20 @@
   </IxSpace>
 </template>
 <script setup lang="ts">
-import type { RadioOption } from '@idux/components/radio'
+import type { RadioData } from '@idux/components/radio'
 import type { SelectData } from '@idux/components/select'
 
 import { ref } from 'vue'
 
 const searchableValue = ref(true)
 
-const searchableOptions: RadioOption[] = [
+const searchableOptions: RadioData[] = [
   { label: 'true', value: true },
   { label: 'overlay', value: 'overlay' },
   { label: 'false', value: false },
 ]
 
-const options: SelectData[] = [
+const dataSource: SelectData[] = [
   { key: 1, label: 'Tom', value: 'tom' },
   { key: 2, label: 'Jerry', value: 'jerry' },
   { key: 3, label: 'Speike', value: 'speike' },
@@ -37,9 +37,3 @@ const onChange = (value: string, oldValue: string) => {
   console.log('selected change: ', value, oldValue)
 }
 </script>
-
-<style scoped lang="less">
-:deep(.ix-select) {
-  width: 200px;
-}
-</style>

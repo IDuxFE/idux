@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, onBeforeUnmount, onMounted, watch } from 'vue'
 
 import { FORM_TOKEN } from '@idux/components/form'
 
@@ -62,7 +62,7 @@ export default defineComponent({
       } = props
       const disabled = isDisabled.value
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: clearable.value,
@@ -75,7 +75,7 @@ export default defineComponent({
         [`${prefixCls}-searchable`]: searchable.value,
         [`${prefixCls}-with-suffix`]: slots.suffix || suffix.value,
         [`${prefixCls}-${size}`]: true,
-      }
+      })
     })
 
     const handleClick = () => {
