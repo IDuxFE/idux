@@ -75,10 +75,10 @@ function file2Array(fileContent: string) {
 async function appendVariable(target: string, template: string) {
   let targetContent = await readFile(target, 'utf-8')
   if (targetContent.includes(insertBeginFlag)) {
-    targetContent = targetContent.replace(new RegExp(`${insertBeginFlag}(.|\\s)*${insertEndFlag}`), template) // 匹配原有的内容进行替换
+    targetContent = targetContent.replace(new RegExp(`${insertBeginFlag}(.|\\s)*?${insertEndFlag}`), template) // 匹配原有的内容进行替换
     writeFile(target, targetContent, 'utf-8')
   } else {
-    appendFile(target, `\n${template}`)
+    template.trim() && appendFile(target, `\n${template}`)
   }
 }
 
