@@ -11,11 +11,7 @@ import { isString } from 'lodash-es'
 
 import { getFirstValidNode } from '@idux/cdk/utils'
 
-export function getColTitle(
-  ellipsis: boolean | undefined,
-  children: VNodeChild,
-  title: string | undefined,
-): string | undefined {
+export function getColTitle(ellipsis: boolean, children: VNodeChild, title: string | undefined): string | undefined {
   if (!ellipsis) {
     return undefined
   }

@@ -28,6 +28,7 @@ export const tableProps = {
   childrenKey: IxPropTypes.string.def('children'),
   columns: IxPropTypes.array<TableColumn<any>>().def(() => []),
   dataSource: IxPropTypes.array().def(() => []),
+  ellipsis: IxPropTypes.bool.def(false),
   empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   headless: IxPropTypes.bool,

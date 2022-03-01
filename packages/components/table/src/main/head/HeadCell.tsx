@@ -28,8 +28,9 @@ export default defineComponent({
   props: tableHeadCellProps,
   setup(props) {
     const {
-      mergedPrefixCls,
+      props: tableProps,
       slots,
+      mergedPrefixCls,
       fixedColumnKeys,
       columnOffsetsWithScrollBar,
       isSticky,
@@ -41,14 +42,24 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
 
     const classes = computed(() => {
-      const { type, align, hasChildren, fixed, key, sortable, filterable } = props.column as HeadColumn
+      const {
+        type,
+        align,
+        ellipsis = tableProps.ellipsis,
+        fixed,
+        hasChildren,
+        key,
+        sortable,
+        filterable,
+      } = props.column as HeadColumn
       const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean | undefined> = {
         [`${prefixCls}-cell-${type}`]: !!type,
-        [`${prefixCls}-cell-sortable`]: !!sortable,
         [`${prefixCls}-cell-filterable`]: !!filterable,
+        [`${prefixCls}-cell-sortable`]: !!sortable,
         [`${prefixCls}-align-${align}`]: !hasChildren && !!align,
         [`${prefixCls}-align-center`]: hasChildren,
+        [`${prefixCls}-ellipsis`]: ellipsis,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
@@ -109,7 +120,7 @@ export default defineComponent({
       } else if (type === 'selectable') {
         children = <SelectableTrigger />
       } else {
-        const { title, customTitle, ellipsis, sortable, filterable } = props.column as HeadColumn
+        const { title, customTitle, ellipsis = tableProps.ellipsis, sortable, filterable } = props.column as HeadColumn
         children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
 

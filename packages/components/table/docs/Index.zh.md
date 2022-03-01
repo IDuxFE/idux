@@ -20,6 +20,7 @@ order: 0
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
+| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
@@ -69,7 +70,7 @@ export type TableColumn<T = any, V = any> =
 | --- | --- | --- | --- | --- | --- |
 | `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
+| `ellipsis` | 超过宽度将自动省略 | `boolean` | - | - | 优先级高于 `props` 中的 `ellipsis` |
 | `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
