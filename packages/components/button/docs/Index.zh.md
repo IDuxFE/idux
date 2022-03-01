@@ -45,15 +45,26 @@ subtitle: 按钮
 | `@button-zindex` | `@zindex-l1-1` | - | - |
 | `@button-font-weight` | `@font-weight-md` | - | - |
 | `@button-line-height` | `@line-height-base` | - | - |
-| `@button-height-sm` | `@height-sm` | - | - |
+| `@button-height-xs` | `@height-sm` | - | - |
+| `@button-height-sm` | `@height-md` | - | - |
 | `@button-height-md` | `@height-md` | - | - |
 | `@button-height-lg` | `@height-lg` | - | - |
-| `@button-font-size-sm` | `@font-size-md` | - | - |
+| `@button-height-xl` | `@height-xl` | - | - |
+| `@button-min-width-xs` | `@width-xs` | - | - |
+| `@button-min-width-sm` | `@width-sm` | - | - |
+| `@button-min-width-md` | `@width-md` | - | - |
+| `@button-min-width-lg` | `@width-lg` | - | - |
+| `@button-min-width-xl` | `@width-xl` | - | - |
+| `@button-font-size-xs` | `@font-size-xs` | - | - |
+| `@button-font-size-sm` | `@font-size-sm` | - | - |
 | `@button-font-size-md` | `@font-size-md` | - | - |
-| `@button-font-size-lg` | `@font-size-lg` | - | - |
-| `@button-padding-sm` | `@spacing-sm` | - | - |
-| `@button-padding-md` | `@spacing-md` | - | - |
-| `@button-padding-lg` | `@spacing-lg` | - | - |
+| `@button-font-size-lg` | `@font-size-md` | - | - |
+| `@button-font-size-xl` | `@font-size-lg` | - | - |
+| `@button-padding-xs` | `@spacing-sm` | - | - |
+| `@button-padding-sm` | `@spacing-md` | - | - |
+| `@button-padding-md` | `@spacing-lg` | - | - |
+| `@button-padding-lg` | `@spacing-xl` | - | - |
+| `@button-padding-xl` | `@spacing-2xl` | - | - |
 | `@button-icon-margin-left` | `@spacing-xs` | - | - |
 | `@button-border-style` | `@border-style` | - | - |
 | `@button-border-size` | `@border-width-sm` | - | - |
@@ -65,6 +76,9 @@ subtitle: 按钮
 | `@button-primary` | `@color-white` | - | - |
 | `@button-primary-background-color` | `@color-primary` | - | - |
 | `@button-primary-border-color` | `@color-primary` | - | - |
+| `@button-primary-loading-color` | `@color-white` | - | - |
+| `@button-primary-loading-background-color` | `@color-primary-l10` | - | - |
+| `@button-primary-loading-border` | `@color-primary-l10` | - | - |
 | `@button-primary-text-shadow` | `0 -1px 0 rgba(0, 0, 0, 0.15)` | - | - |
 | `@button-primary-box-shadow` | `0 2px 0 rgba(0, 0, 0, 0.045)` | - | - |
 | `@button-default-color` | `@text-color` | - | - |
@@ -77,8 +91,11 @@ subtitle: 按钮
 | `@button-danger-active-color` | `@color-error-d10` | - | - |
 | `@button-danger-active-border-color` | `@color-error-d10` | - | - |
 | `@button-danger-background-color` | `@color-error` | - | - |
+| `@button-loading-color` | `@color-graphite` | - | - |
 | `@button-ghost-color` | `@background-color-component` | - | - |
 | `@button-ghost-background-color` | `transparent` | - | - |
+| `@button-ghost-hover-background-color` | `rgba(255,255,255,0.20)` | - | - |
+| `@button-ghost-disabled-background-color` | `rgba(255,255,255,0.40)` | - | - |
 | `@button-ghost-border-color` | `@background-color-component` | - | - |
 | `@button-link-color` | `@color-primary` | - | - |
 | `@button-link-hover-color` | `@color-primary-l10` | - | - |

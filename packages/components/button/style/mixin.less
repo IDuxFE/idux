@@ -1,13 +1,8 @@
 @button-danger-border: color(~`colorPalette('@{button-danger-background-color}', 10) `);
 
 .button-size(@height; @font-size; @spacing-horizontal; @border-radius) {
-  @spacing-vertical: max(
-    (round(((@height - @font-size * @button-line-height) / 2) * 10) / 10) - @button-border-size,
-    0
-  );
-
   height: @height;
-  padding: @spacing-vertical @spacing-horizontal;
+  padding: 0 @spacing-horizontal;
   font-size: @font-size;
   border-radius: @border-radius;
 }
@@ -32,16 +27,16 @@
   text-shadow: @button-primary-text-shadow;
   box-shadow: @button-primary-box-shadow;
 
+  &:focus,
   &:hover {
-    & when (@theme = default) {
-      .button-color(@color; ~`colorPalette('@{background}', -10) `; ~`colorPalette('@{border}', -10)`);
+    & when not (@theme = dark) {
+      .button-color(@color; ~`colorPalette('@{background}', -10) `; ~`colorPalette('@{border}', -10)` );
     }
   }
 
-  &:focus,
   &:active {
-    & when (@theme = default) {
-      .button-color(@color; ~`colorPalette('@{background}', 10) `; ~`colorPalette('@{border}', 10)`);
+    & when not (@theme = dark) {
+      .button-color(@color; ~`colorPalette('@{background}', 10) `; ~`colorPalette('@{border}', 10) `);
     }
   }
 
@@ -51,16 +46,16 @@
 .button-variant-other(@color; @background; @border) {
   .button-color(@color; @background; @border);
 
+  &:focus,
   &:hover {
-    & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-primary-background-color}', -10) `; @background; @button-primary-background-color);
+    & when not (@theme = dark) {
+      .button-color(~`colorPalette('@{button-primary-background-color}', -10) `; @background; ~`colorPalette('@{button-primary-border-color}', -10)`);
     }
   }
 
-  &:focus,
   &:active {
-    & when (@theme = default) {
-      .button-color(~`colorPalette('@{button-primary-background-color}', 10) `; @background; ~`colorPalette('@{button-primary-background-color}', 20) `);
+    & when not (@theme = dark) {
+      .button-color(~`colorPalette('@{button-primary-background-color}', 10) `; @background; ~`colorPalette('@{button-primary-background-color}', 10) `);
     }
   }
   .button-disabled();
@@ -69,29 +64,29 @@
 .button-variant-ghost(@color; @border: @color) {
   text-shadow: none;
 
+  &:focus,
   &:hover {
     & when (@border = transparent) {
-      & when (@theme = default) {
+      & when not (@theme = dark) {
         .button-color(~`colorPalette('@{color}', -10) `; transparent; transparent);
       }
     }
     & when not (@border = transparent) {
-      & when (@theme = default) {
-        .button-color(~`colorPalette('@{color}', -10) `; transparent; ~`colorPalette('@{border}', -10) `);
+      & when not (@theme = dark) {
+        .button-color(@button-ghost-color; @button-ghost-hover-background-color; @button-ghost-color);
       }
     }
   }
 
-  &:focus,
   &:active {
     & when (@border = transparent) {
-      & when (@theme = default) {
+      & when not (@theme = dark) {
         .button-color(~`colorPalette('@{color}', 10) `; transparent; transparent);
       }
     }
     & when not(@border = transparent) {
-      & when (@theme = default) {
-        .button-color(~`colorPalette('@{color}', 10) `; transparent; ~`colorPalette('@{border}', 10) `);
+      & when not (@theme = dark) {
+        .button-color(@button-text-color; @button-default-background-color; @button-ghost-color);
       }
     }
   }
@@ -119,7 +114,10 @@
 
 .button() {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
   font-weight: @button-font-weight;
   white-space: nowrap;
   text-align: center;
@@ -145,8 +143,20 @@
     box-shadow: none;
   }
 
+  .@{icon-prefix} {
+    top: 0;
+  }
+
+  &-xs {
+    .button-size(@button-height-xs; @button-font-size-xs; @button-padding-xs; @button-border-radius);
+
+    min-width: @button-min-width-xs;
+  }
+
   &-sm {
     .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius);
+
+    min-width: @button-min-width-sm;
   }
 
   &-md {
@@ -155,6 +165,14 @@
 
   &-lg {
     .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius);
+
+    min-width: @button-min-width-lg;
+  }
+
+  &-xl {
+    .button-size(@button-height-xl; @button-font-size-xl; @button-padding-xl; @button-border-radius);
+
+    min-width: @button-min-width-xl;
   }
 }
 
@@ -183,6 +201,7 @@
   .button-variant-other(@button-text-color, transparent, transparent);
 
   box-shadow: none;
+  min-width: 0;
 
   &:hover,
   &:focus {
@@ -203,6 +222,8 @@
   .button-variant-other(@button-link-color, transparent, transparent);
 
   box-shadow: none;
+  padding: 0;
+  min-width: 0;
 
   &:hover {
     background: @button-link-hover-background-color;
@@ -219,13 +240,13 @@
 .button-danger() {
   .button-color(@button-danger-color, @button-default-background-color, @button-danger-border-color);
 
+  &:focus,
   &:hover {
     & when (@theme = default) {
       .button-color(@button-danger-hover-color, @button-default-background-color, @button-danger-hover-border-color);
     }
   }
 
-  &:focus,
   &:active {
     & when (@theme = default) {
       .button-color(@button-danger-active-color, @button-default-background-color, @button-danger-active-border-color);
@@ -242,14 +263,16 @@
   .button-variant-other(@button-danger-color, transparent, transparent);
 
   box-shadow: none;
+  padding: 0;
 
+  &:focus,
   &:hover {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', -10) `; @button-text-hover-background-color; transparent);
     }
   }
 
-  &:focus,
+  
   &:active {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', 10) `; fadein(@button-text-hover-background-color, 1%); transparent);
@@ -263,15 +286,15 @@
 
   box-shadow: none;
 
+  &:focus,
   &:hover {
     & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', -10) `; transparent; transparent);
     }
   }
 
-  &:focus,
   &:active {
-    & when (@theme = dark) {
+    & when (@theme = default) {
       .button-color(~`colorPalette('@{button-danger-color}', 10) `; transparent; transparent);
     }
   }
@@ -281,7 +304,7 @@
 .button-ghost() {
   .button-color(@button-ghost-color; @button-ghost-background-color; @button-ghost-border-color);
   .button-variant-ghost(@button-primary-border-color);
-  .button-disabled();
+  .button-disabled(@button-ghost-color, @button-ghost-disabled-background-color);
 }
 
 .button-ghost-primary() {
@@ -297,16 +320,21 @@
 }
 
 .button-round(@buttonPrefix) {
+  .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
+  &.@{buttonPrefix}-xs {
+    .button-size(@button-height-xs; @button-font-size-xs; @button-height-xs / 2; @button-height-xs);
+  }
   &.@{buttonPrefix}-sm {
     .button-size(@button-height-sm; @button-font-size-sm; @button-height-sm / 2; @button-height-sm);
   }
-
   &.@{buttonPrefix}-md {
     .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
   }
-
   &.@{buttonPrefix}-lg {
     .button-size(@button-height-lg; @button-font-size-lg; @button-height-lg / 2; @button-height-lg);
+  }
+  &.@{buttonPrefix}-xl {
+    .button-size(@button-height-xl; @button-font-size-xl; @button-height-xl / 2; @button-height-xl);
   }
 }
 
@@ -329,18 +357,29 @@
   }
 }
 
-.button-icon-only(@buttonPrefix;) {
+.button-icon-only(@buttonPrefix) {
   line-height: 1;
+  min-width: auto;
 
+  &.@{buttonPrefix}-xs {
+    font-size: @button-font-size-xs + 2;
+    width: @button-height-xs;
+    padding: 0;
+  }
   &.@{buttonPrefix}-sm {
     font-size: @button-font-size-sm + 2;
+    width: @button-height-sm;
   }
-
   &.@{buttonPrefix}-md {
     font-size: @button-font-size-md + 2;
+    width: @button-height-md;
   }
-
   &.@{buttonPrefix}-lg {
     font-size: @button-font-size-lg + 2;
+    width: @button-height-lg;
+  }
+  &.@{buttonPrefix}-xl {
+    font-size: @button-font-size-xl + 2;
+    width: @button-height-xl;
   }
 }

@@ -10,6 +10,7 @@ import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
+import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
@@ -41,6 +42,7 @@ export interface GlobalConfig {
   avatar: AvatarConfig
   backTop: BackTopConfig
   badge: BadgeConfig
+  button: ButtonConfig
   card: CardConfig
   carousel: CarouselConfig
   checkbox: CheckboxConfig
@@ -119,6 +121,10 @@ export interface BadgeConfig {
   showZero: boolean
   dot: boolean
   overflowCount: number | string
+}
+
+export interface ButtonConfig {
+  size: ButtonSize
 }
 
 export interface CardConfig {

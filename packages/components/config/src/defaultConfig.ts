@@ -44,6 +44,9 @@ export const defaultConfig: GlobalConfig = {
     dot: false,
     overflowCount: 99,
   },
+  button: {
+    size: 'md',
+  },
   card: {
     borderless: false,
     hoverable: false,
