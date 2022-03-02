@@ -42,6 +42,7 @@ order: 0
 | `@tabs-selected-color` | `@color-primary` | - | - |
 | `@tabs-hover-color` | `@color-primary-l10` | - | - |
 | `@tabs-active-color` | `@color-primary-d10` | - | - |
+| `@tabs-active-font-size` | `@font-size-md` | - | - |
 | `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
 | `@tabs-nav-font-size` | `@font-size-md` | - | - |
 | `@tabs-nav-background-color` | `@color-white` | - | - |
