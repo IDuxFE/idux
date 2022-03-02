@@ -21,11 +21,12 @@ const zoomValidator = {
 export const imageViewerProps = {
   visible: IxPropTypes.bool,
   activeIndex: IxPropTypes.number,
-  images: IxPropTypes.array<string>().isRequired,
+  images: IxPropTypes.array<string>().def([]),
   zoom: IxPropTypes.custom<number[]>(zoomValidator.validator, zoomValidator.msg),
   loop: IxPropTypes.bool,
   target: ɵPortalTargetDef,
   maskClosable: IxPropTypes.bool,
+
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
   'onUpdate:activeIndex': IxPropTypes.emit<(curIndex: number) => void>(),
 }
@@ -51,8 +52,14 @@ export type ImageViewerComponent = DefineComponent<
 export type ImageViewerInstance = InstanceType<DefineComponent<ImageViewerProps>>
 
 // private
-export const imageViewerContentProps = {
-  mergedPrefixCls: IxPropTypes.string.isRequired,
-  ...imageViewerProps,
+export interface OprType {
+  icon: string
+  key: string
+  opr: () => void
+  visible: boolean
+  disabled?: boolean
 }
-export type ImageViewerContentProps = IxInnerPropTypes<typeof imageViewerContentProps>
+
+export type ScaleType = 'in' | 'out'
+export type RotateType = 'left' | 'right'
+export type GoType = 'previous' | 'next'
