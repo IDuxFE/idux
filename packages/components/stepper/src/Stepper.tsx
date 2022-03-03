@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, reactive, toRefs } from 'vue'
 
 import { flattenNode, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -21,13 +21,14 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-stepper`)
     const config = useGlobalConfig('stepper')
 
+    const size = computed(() => props.size ?? config.size)
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { size = config.size, labelPlacement = config.labelPlacement, percent, vertical } = props
+      const { labelPlacement = config.labelPlacement, percent, vertical } = props
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-label-${labelPlacement}`]: true,
-        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${size.value}`]: true,
         [`${prefixCls}-vertical`]: vertical,
         [`${prefixCls}-with-percent`]: percent != null,
       })
@@ -35,7 +36,7 @@ export default defineComponent({
 
     const [activeKey, setActiveKey] = useControlledProp(props, 'activeKey')
 
-    provide(stepperToken, { props, slots, activeKey, setActiveKey })
+    provide(stepperToken, { props: reactive({ ...toRefs(props), size }), slots, activeKey, setActiveKey })
 
     return () => {
       const children = flattenNode(slots.default?.(), { key: stepperItemKey }).map((item, index) => {

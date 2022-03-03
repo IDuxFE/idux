@@ -2,15 +2,12 @@
   .@{stepper-item-prefix} {
     overflow: visible;
     &-tail {
-      display: block;
+      display: flex;
       width: 100%;
       height: 1px;
-      margin-left: 60px;
-      padding: 3.5px 24px;
 
       &::after {
         width: 100%;
-        height: 1px;
       }
     }
 
@@ -30,6 +27,40 @@
       padding-left: 0;
       &::after {
         display: none;
+      }
+    }
+  }
+
+  &.@{stepper-prefix}-md {  
+    .@{stepper-item-prefix} {
+    
+      &-tail {
+        margin-left: 65px;
+        padding: 16px 36px 0 24px;
+      }
+
+      &:first-child {
+        .ix-stepper-item-tail {
+          margin-left: 48px;
+          padding: 16px 20px;
+        }
+      }
+    }
+  }
+
+  &.@{stepper-prefix}-sm {
+    .@{stepper-item-prefix} {
+    
+      &-tail {
+        margin-left: 54px;
+        padding: 12px 24px;
+      }
+
+      &:first-child {
+        .ix-stepper-item-tail {
+          margin-left: 48px;
+          padding: 12px 20px;
+        }
       }
     }
   }

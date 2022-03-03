@@ -40,6 +40,7 @@ subtitle: 步骤条
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@stepper-background` | `@background-color-component` | - | - |
+| `@stepper-line-border` | `1px solid transparent` | - | - |
 | `@stepper-item-process-tail-color` | `@disabled-color` | - | - |
 | `@stepper-item-process-icon-color` | `@color-primary` | - | - |
 | `@stepper-item-process-title-color` | `@text-color` | - | - |
@@ -68,4 +69,6 @@ subtitle: 步骤条
 | `@stepper-item-icon-margin-sm` | `0 8px 0 0` | - | - |
 | `@stepper-item-title-font-size-sm` | `@font-size-md` | - | - |
 | `@stepper-item-description-font-size-sm` | `@font-size-sm` | - | - |
+| `@stepper-item-content-min-height-md` | `80px` | - | - |
+| `@stepper-item-content-min-height-sm` | `60px` | - | - |
 <!--- insert less variable end  --->
