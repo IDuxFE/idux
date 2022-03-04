@@ -80,13 +80,17 @@ describe('Stepper', () => {
   })
 
   test('size work', async () => {
-    const wrapper = StepperMount({ props: { size: 'sm' } })
+    const wrapper = StepperMount({ props: { percent: 10 } })
 
-    expect(wrapper.classes()).toContain('ix-stepper-sm')
-
-    await wrapper.setProps({ size: 'md' })
+    const processWrapper = wrapper.find('.ix-progress-circle')
 
     expect(wrapper.classes()).toContain('ix-stepper-md')
+    expect(processWrapper.attributes('style')).toContain('width: 40px')
+
+    await wrapper.setProps({ size: 'sm' })
+
+    expect(wrapper.classes()).toContain('ix-stepper-sm')
+    expect(processWrapper.attributes('style')).toContain('width: 32px')
   })
 
   test('status work', async () => {
@@ -111,5 +115,19 @@ describe('Stepper', () => {
     expect(items[0].classes()).toContain('ix-stepper-item-finish')
     expect(items[1].classes()).toContain('ix-stepper-item-error')
     expect(items[2].classes()).toContain('ix-stepper-item-wait')
+  })
+
+  test('no desc work', async () => {
+    const wrapper = StepperMount({
+      slots: {
+        default: () => [
+          h(IxStepperItem, { key: 1, title: 'Finished' }),
+          h(IxStepperItem, { key: 2, title: 'In Progress' }),
+          h(IxStepperItem, { key: 3, title: 'Waiting' }),
+        ],
+      },
+    })
+
+    expect(wrapper.findAll('.ix-stepper-item-description').length).toBe(0)
   })
 })
