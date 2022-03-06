@@ -3,12 +3,14 @@ import { h } from 'vue'
 
 import { renderWork, wait } from '@tests'
 
+import { type MenuData } from '@idux/components/menu'
+
 import ProLayout from '../src/Layout'
 import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
 import LayoutSider from '../src/contents/Sider'
-import { ProLayoutMenuData, ProLayoutProps } from '../src/types'
+import { ProLayoutProps } from '../src/types'
 
-const dataSource: ProLayoutMenuData[] = [
+const dataSource: MenuData[] = [
   {
     type: 'sub',
     key: 'sub1',

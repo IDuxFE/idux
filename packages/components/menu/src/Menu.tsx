@@ -45,7 +45,6 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       indent,
-      mode,
       theme,
       expandedKeys,
       handleExpand,

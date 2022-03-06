@@ -22,5 +22,4 @@ export type {
   ProLayoutSiderTriggerInstance,
   ProLayoutSiderTriggerComponent,
   ProLayoutSiderTriggerPublicProps as ProLayoutSiderTriggerProps,
-  ProLayoutMenuData,
 } from './src/types'

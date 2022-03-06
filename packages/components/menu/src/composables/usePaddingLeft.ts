@@ -11,13 +11,13 @@ import { type MenuMode, type MenuProps } from '../types'
 
 export const usePaddingLeft = (
   menuProps: MenuProps,
-  mode: ComputedRef<MenuMode>,
   indent: ComputedRef<number>,
   level: number,
   grouped: boolean,
+  mode?: ComputedRef<MenuMode>,
 ): ComputedRef<string | undefined> => {
   return computed(() => {
-    if (mode.value !== 'inline' || menuProps.collapsed) {
+    if ((mode?.value ?? menuProps.mode) !== 'inline' || menuProps.collapsed) {
       return undefined
     }
     const groupedLeft = grouped ? 8 : 0

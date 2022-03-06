@@ -16,7 +16,6 @@ export interface MenuContext {
   config: MenuConfig
   mergedPrefixCls: ComputedRef<string>
   indent: ComputedRef<number>
-  mode: ComputedRef<MenuMode>
   theme: ComputedRef<MenuTheme>
   expandedKeys: ComputedRef<VKey[]>
   handleExpand: (key: VKey, expanded: boolean) => void
