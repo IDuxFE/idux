@@ -27,7 +27,7 @@ import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../../composables/usePaddingLeft'
 import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
-import { type MenuData, type MenuMode, type MenuSubProps, menuSubProps } from '../../types'
+import { type MenuData, type MenuProps, type MenuSubProps, menuSubProps } from '../../types'
 import InlineContent from './InlineContent'
 import Label from './Label'
 import OverlayContent from './OverlayContent'
@@ -47,7 +47,6 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       indent,
-      mode: menuMode,
       selectedKeys,
       expandedKeys,
       handleExpand,
@@ -58,7 +57,7 @@ export default defineComponent({
 
     const key = useKey()
     const target = computed(() => menuProps.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
-    const mode = useMode(menuMode, menuSubContext)
+    const mode = useMode(menuProps, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
     const isSelected = computed(() => getState(props.data!.children, selectedKeys.value))
@@ -144,15 +143,17 @@ export default defineComponent({
   },
 })
 
-function useMode(menuMode: ComputedRef<MenuMode>, menuSubContext: MenuSubContext | null) {
-  const currMode = menuMode.value
-  const defaultMode = currMode !== 'inline' && !!menuSubContext ? 'vertical' : currMode
+function useMode(menuProps: MenuProps, menuSubContext: MenuSubContext | null) {
+  const defaultMode = menuProps.mode !== 'inline' && !!menuSubContext ? 'vertical' : menuProps.mode
   const [mode, setMode] = useState(defaultMode)
 
-  watch(menuMode, mode => {
-    // 避免重复渲染
-    nextTick(() => setMode(mode !== 'inline' && !!menuSubContext ? 'vertical' : mode))
-  })
+  watch(
+    () => menuProps.mode,
+    mode => {
+      // 避免重复渲染
+      nextTick(() => setMode(mode !== 'inline' && !!menuSubContext ? 'vertical' : mode))
+    },
+  )
 
   return mode
 }
