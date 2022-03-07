@@ -29,7 +29,6 @@ export default defineComponent({
       slots: menuSlots,
       mergedPrefixCls,
       indent,
-      mode,
       selectedKeys,
       handleSelected,
       handleClick,
@@ -49,6 +48,7 @@ export default defineComponent({
     })
 
     const level = menuSubContext ? menuSubContext.level + 1 : 1
+    const mode = computed(() => menuProps.mode)
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
     const style = computed(() => {
       return { paddingLeft: paddingLeft.value }
