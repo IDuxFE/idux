@@ -93,6 +93,9 @@
         &-pre-bottom,
         &-next-top,
         &-next-bottom {
+          top: 0;
+          justify-content: center;
+          align-items: center;
           width: @tabs-nav-pre-next-width;
           height: @tabs-nav-tab-height;
           line-height: @tabs-nav-tab-height;
@@ -113,6 +116,8 @@
         &-next-start,
         &-next-end {
           width: 100%;
+          justify-content: center;
+          align-items: center;
           height: @tabs-nav-pre-next-width;
           line-height: @tabs-nav-pre-next-width;
         }
@@ -124,6 +129,7 @@
 
         &-next-start,
         &-next-end {
+          top: unset;
           bottom: 0;
         }
 
