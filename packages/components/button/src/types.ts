@@ -12,7 +12,7 @@ import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonShape = 'circle' | 'round'
-export type ButtonSize = 'lg' | 'md' | 'sm'
+export type ButtonSize = 'lg' | 'xl' | 'md' | 'sm' | 'xs'
 export type ButtonType = 'button' | 'submit' | 'reset'
 
 export const buttonProps = {
@@ -21,7 +21,7 @@ export const buttonProps = {
   ghost: IxPropTypes.bool,
   disabled: IxPropTypes.bool,
   loading: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'md', 'sm']),
+  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'xl', 'md', 'sm', 'xs']),
   shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
   block: IxPropTypes.bool,
   icon: IxPropTypes.string,
@@ -37,7 +37,7 @@ export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
   mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
-  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'md', 'sm']),
+  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'xl', 'md', 'sm', 'xs']),
   shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
 }
 

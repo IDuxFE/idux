@@ -60,7 +60,7 @@ export interface PaginationItemRenderOptions {
 | `@pagination-item-margin-right-sm` | `@spacing-xs` | - | - |
 | `@pagination-item-input-width-md` | `48px` | - | - |
 | `@pagination-item-input-width-sm` | `40px` | - | - |
-| `@pagination-item-spacing-sm` | `20px` | - | - |
+| `@pagination-item-spacing-sm` | `@height-sm` | - | - |
 | `@pagination-item-active-color` | `@button-primary` | - | - |
 | `@pagination-item-active-background-color` | `@button-primary-background-color` | - | - |
 | `@pagination-item-hover-background-color` | `tint(@button-primary-background-color, 90%)` | - | - |

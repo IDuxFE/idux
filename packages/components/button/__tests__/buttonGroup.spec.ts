@@ -41,12 +41,12 @@ describe('ButtonGroup', () => {
     const wrapper = mount(TestComponent)
 
     expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
-    expect(wrapper.findAll('.ix-button-sm').length).toBe(0)
+    expect(wrapper.findAll('.ix-button-md').length).toBe(3)
 
-    await wrapper.setProps({ size: 'sm' })
+    await wrapper.setProps({ size: 'xl' })
 
     expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
-    expect(wrapper.findAll('.ix-button-sm').length).toBe(3)
+    expect(wrapper.findAll('.ix-button-xl').length).toBe(3)
   })
 
   test('shape work', async () => {

@@ -58,6 +58,17 @@
   &&-loading {
     position: relative;
 
+    &.@{button-prefix} {
+      background-color: @button-default-background-color;
+      color: @button-loading-color;
+
+      &-primary {
+        background-color: @button-primary-loading-background-color;
+        border-color: @button-primary-loading-border;
+        color: @button-primary-loading-color;
+      }
+    }
+
     &::before {
       display: block;
     }
@@ -88,7 +99,7 @@
   }
 
   &-icon-only {
-    .button-icon-only(@button-prefix;);
+    .button-icon-only(@button-prefix);
   }
 
   &::before {
