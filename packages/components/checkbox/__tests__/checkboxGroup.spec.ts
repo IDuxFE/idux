@@ -21,7 +21,8 @@ describe('CheckboxGroup', () => {
 
   test('v-model:value work', async () => {
     const onUpdateValue = jest.fn()
-    const wrapper = CheckboxGroupMount({ props: { value: ['option1'], 'onUpdate:value': onUpdateValue } })
+    const onChange = jest.fn()
+    const wrapper = CheckboxGroupMount({ props: { value: ['option1'], 'onUpdate:value': onUpdateValue, onChange } })
 
     expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(1)
 
@@ -32,17 +33,7 @@ describe('CheckboxGroup', () => {
     await wrapper.findAll('input')[0].setValue(true)
 
     expect(onUpdateValue).toBeCalledWith(['option1'])
-  })
-
-  test('onChange work', async () => {
-    const mockFn = jest.fn()
-    const wrapper = CheckboxGroupMount({ props: { onChange: mockFn } })
-
-    expect(mockFn).toBeCalledTimes(0)
-
-    await wrapper.findAll('input')[0].setValue(true)
-
-    expect(mockFn).toBeCalledTimes(1)
+    expect(onChange).toBeCalledWith(['option1'], [])
   })
 
   test('disabled work', async () => {

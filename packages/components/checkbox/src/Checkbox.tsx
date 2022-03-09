@@ -118,6 +118,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       const checked = (evt.target as HTMLInputElement).checked
       const { trueValue, falseValue, value } = props
       const checkValue = checked ? trueValue : falseValue
+      const oldCheckValue = !checked ? trueValue : falseValue
 
       const oldValue = accessor.valueRef.value ?? []
       const newValue = [...oldValue]
@@ -129,7 +130,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       }
 
       accessor.setValue(newValue)
-      callEmit(props.onChange, checkValue, !checkValue)
+      callEmit(props.onChange, checkValue, oldCheckValue)
       callEmit(groupProps.onChange, newValue, oldValue)
     }
   } else {
@@ -148,8 +149,9 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
       const checked = (evt.target as HTMLInputElement).checked
       const { trueValue, falseValue } = props
       const newChecked = checked ? trueValue : falseValue
+      const oldChecked = !checked ? trueValue : falseValue
       accessor.setValue(newChecked)
-      callEmit(props.onChange, newChecked, !newChecked)
+      callEmit(props.onChange, newChecked, oldChecked)
     }
   }
 
