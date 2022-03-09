@@ -13,7 +13,8 @@ describe('Checkbox', () => {
 
   test('v-model:checked work', async () => {
     const onUpdateChecked = jest.fn()
-    const wrapper = CheckboxMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked } })
+    const onChange = jest.fn()
+    const wrapper = CheckboxMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked, onChange } })
 
     expect(wrapper.classes()).toContain('ix-checkbox-checked')
 
@@ -24,6 +25,7 @@ describe('Checkbox', () => {
     await wrapper.find('input').setValue(true)
 
     expect(onUpdateChecked).toBeCalledWith(true)
+    expect(onChange).toBeCalledWith(true, false)
   })
 
   test('label work', async () => {
@@ -50,11 +52,13 @@ describe('Checkbox', () => {
   })
 
   test('trueValue and falseValue work', async () => {
+    const onChange = jest.fn()
     const wrapper = CheckboxMount({
       props: {
         checked: 'yes',
         trueValue: 'yes',
         falseValue: 'no',
+        onChange,
       },
     })
 
@@ -63,6 +67,14 @@ describe('Checkbox', () => {
     await wrapper.setProps({ checked: 'no' })
 
     expect(wrapper.classes()).not.toContain('ix-checkbox-checked')
+
+    await wrapper.find('input').setValue(true)
+
+    expect(onChange).toBeCalledWith('yes', 'no')
+
+    await wrapper.find('input').setValue(false)
+
+    expect(onChange).toBeCalledWith('no', 'yes')
   })
 
   test('buttoned work', async () => {
