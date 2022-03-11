@@ -217,6 +217,7 @@ export const defaultConfig: GlobalConfig = {
   select: {
     borderless: false,
     childrenKey: 'children',
+    clearIcon: 'close-circle',
     labelKey: 'label',
     size: 'md',
     suffix: 'down',

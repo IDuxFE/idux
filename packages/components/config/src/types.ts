@@ -344,6 +344,7 @@ export interface RowConfig {
 export interface SelectConfig {
   borderless: boolean
   childrenKey: string
+  clearIcon: string
   labelKey: string
   size: FormSize
   suffix: string

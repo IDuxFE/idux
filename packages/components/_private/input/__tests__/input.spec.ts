@@ -1,6 +1,9 @@
 import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
+
+import { IxIcon } from '@idux/components/icon'
 
 import Input from '../src/Input'
 import { InputProps } from '../src/types'
@@ -103,6 +106,18 @@ describe('Input', () => {
     await wrapper.setProps({ clearable: false })
 
     expect(wrapper.find('.ix-input-clear').exists()).toBe(false)
+  })
+
+  test('clearIcon slot work', async () => {
+    const wrapper = InputMount({
+      props: { clearable: true, clearIcon: 'up' },
+      slots: {
+        clearIcon: () => h(IxIcon, { name: 'down' }),
+      },
+    })
+
+    expect(wrapper.find('.ix-input-clear').find('.ix-icon-up').exists()).toBe(false)
+    expect(wrapper.find('.ix-input-clear').find('.ix-icon-down').exists()).toBe(true)
   })
 
   test('disabled work', async () => {

@@ -79,9 +79,8 @@ export default defineComponent({
       }
 
       return (
-        <span class={`${mergedPrefixCls.value}-clear-icon`}>
-          {slots.clearIcon?.({ onClear }) ??
-            (props.clearIcon && <IxIcon name={props.clearIcon} onClick={onClear}></IxIcon>)}
+        <span class={`${mergedPrefixCls.value}-clear-icon`} onClick={onClear}>
+          {slots.clearIcon ? slots.clearIcon() : props.clearIcon && <IxIcon name={props.clearIcon}></IxIcon>}
         </span>
       )
     }

@@ -29,6 +29,7 @@ export const selectProps = {
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string,
   clearable: IxPropTypes.bool.def(false),
+  clearIcon: IxPropTypes.string,
   compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>(),
   compareFn: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareFn),
   dataSource: IxPropTypes.array<SelectData>(),

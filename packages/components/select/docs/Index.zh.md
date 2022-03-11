@@ -22,6 +22,7 @@ order: 0
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
+| `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `compareFn` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
