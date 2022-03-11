@@ -1,5 +1,5 @@
 <template>
-  <IxRow align="middle" gutter="16">
+  <IxRow align="center" gutter="16">
     <IxCol>
       <IxRadioGroup v-model:value="mode">
         <IxRadio value="vertical">Vertical</IxRadio>
@@ -8,7 +8,7 @@
       </IxRadioGroup>
     </IxCol>
     <IxCol>
-      <IxDivider type="vertical" />
+      <IxDivider vertical />
     </IxCol>
     <IxCol>
       <IxRadioGroup v-model:value="theme">
@@ -17,7 +17,7 @@
       </IxRadioGroup>
     </IxCol>
     <IxCol>
-      <IxDivider type="vertical" />
+      <IxDivider vertical />
     </IxCol>
     <IxCol>
       <IxRadioGroup v-model:value="collapsed">

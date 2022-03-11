@@ -17,8 +17,9 @@ import { coverIcon } from '../Utils'
 export default defineComponent({
   name: 'MenuSubLabel',
   setup() {
-    const { slots: menuSlots, config, mergedPrefixCls } = inject(menuToken)!
-    const { props, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } = inject(menuSubToken)!
+    const { slots: menuSlots, config, mergedPrefixCls, handleClick } = inject(menuToken)!
+    const { props, key, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } =
+      inject(menuSubToken)!
 
     const suffix = computed(() => props.data.suffix ?? config.suffix)
     const rotate = computed(() => {
@@ -34,10 +35,14 @@ export default defineComponent({
       }
       if (mode.value === 'inline') {
         return {
-          onClick: () => changeExpanded(!isExpanded.value),
+          onClick: (evt: MouseEvent) => {
+            handleClick(key, 'sub', evt)
+            changeExpanded(!isExpanded.value)
+          },
         }
       } else {
         return {
+          onClick: (evt: MouseEvent) => handleClick(key, 'sub', evt),
           onMouseenter: () => handleMouseEvent(true),
           onMouseleave: () => handleMouseEvent(false),
         }

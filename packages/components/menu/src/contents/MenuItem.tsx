@@ -55,7 +55,6 @@ export default defineComponent({
     })
 
     const onClick = (evt: Event) => {
-      evt.stopPropagation()
       handleSelected(key)
       handleClick(key, 'item', evt)
       menuSubContext?.handleItemClick()

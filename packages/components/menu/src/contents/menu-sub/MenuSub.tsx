@@ -50,7 +50,6 @@ export default defineComponent({
       selectedKeys,
       expandedKeys,
       handleExpand,
-      handleClick,
     } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
@@ -71,6 +70,7 @@ export default defineComponent({
 
     provide(menuSubToken, {
       props,
+      key,
       isExpanded,
       isSelected,
       mode,
@@ -104,11 +104,6 @@ export default defineComponent({
 
     const offset = computed(() => props.data.offset ?? config.offset)
 
-    const onClick = (evt: Event) => {
-      evt.stopPropagation()
-      handleClick(key, 'sub', evt)
-    }
-
     return () => {
       const { additional, disabled } = props.data
       let children: VNodeTypes
@@ -135,7 +130,7 @@ export default defineComponent({
         )
       }
       return (
-        <li class={classes.value} {...additional} onClick={disabled ? undefined : onClick}>
+        <li class={classes.value} {...additional}>
           {children}
         </li>
       )
