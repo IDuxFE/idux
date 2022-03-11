@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -19,8 +19,8 @@ export const timelineProps = {
   position: IxPropTypes.oneOf<TimelinePosition>(['left', 'alternate', 'right']).def('right'),
 }
 
-export type TimelineProps = IxInnerPropTypes<typeof timelineProps>
-export type TimelinePublicProps = IxPublicPropTypes<typeof timelineProps>
+export type TimelineProps = ExtractInnerPropTypes<typeof timelineProps>
+export type TimelinePublicProps = ExtractPublicPropTypes<typeof timelineProps>
 export type TimelineComponent = DefineComponent<Omit<HTMLAttributes, keyof TimelinePublicProps> & TimelinePublicProps>
 export type TimelineInstance = InstanceType<DefineComponent<TimelineProps>>
 
@@ -32,8 +32,8 @@ export const timelineItemProps = {
   position: IxPropTypes.oneOf<TimelineItemPosition>(['left', 'right']),
 }
 
-export type TimelineItemProps = IxInnerPropTypes<typeof timelineItemProps>
-export type TimelineItemPublicProps = IxPublicPropTypes<typeof timelineItemProps>
+export type TimelineItemProps = ExtractInnerPropTypes<typeof timelineItemProps>
+export type TimelineItemPublicProps = ExtractPublicPropTypes<typeof timelineItemProps>
 export type TimelineItemComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TimelineItemPublicProps> & TimelineItemPublicProps
 >

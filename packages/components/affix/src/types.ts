@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -19,7 +19,7 @@ export const affixProps = {
   onChange: IxPropTypes.func<(value: boolean) => void>(),
 }
 
-export type AffixProps = IxInnerPropTypes<typeof affixProps>
-export type AffixPublicProps = IxPublicPropTypes<typeof affixProps>
+export type AffixProps = ExtractInnerPropTypes<typeof affixProps>
+export type AffixPublicProps = ExtractPublicPropTypes<typeof affixProps>
 export type AffixComponent = DefineComponent<Omit<HTMLAttributes, keyof AffixPublicProps> & AffixPublicProps>
 export type AffixInstance = InstanceType<DefineComponent<AffixProps>>

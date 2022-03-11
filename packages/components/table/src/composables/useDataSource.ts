@@ -25,12 +25,12 @@ export function useDataSource(
   const mergedData = computed(() => {
     const { dataSource, childrenKey } = props
     const getKey = getRowKey.value
-    return dataSource.map(record => covertMergeData(record, getKey, childrenKey))
+    return dataSource.map(record => convertMergeData(record, getKey, childrenKey))
   })
 
   const mergedMap = computed(() => {
     const map = new Map<VKey, MergedData>()
-    covertDataMap(mergedData.value, map)
+    convertDataMap(mergedData.value, map)
     return map
   })
 
@@ -53,7 +53,7 @@ export function useDataSource(
   })
   const paginatedMap = computed(() => {
     const map = new Map<VKey, MergedData>()
-    covertDataMap(paginatedData.value, map)
+    convertDataMap(paginatedData.value, map)
     return map
   })
 
@@ -87,23 +87,23 @@ export interface FlattedData extends MergedData {
   level?: number
 }
 
-function covertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: VKey) {
+function convertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: VKey) {
   const rowKey = getRowKey(record)
   const result: MergedData = { record, rowKey, parentKey }
 
   const subData = (record as Record<string, unknown>)[childrenKey] as unknown[]
   if (subData) {
-    result.children = subData.map(subRecord => covertMergeData(subRecord, getRowKey, childrenKey, rowKey))
+    result.children = subData.map(subRecord => convertMergeData(subRecord, getRowKey, childrenKey, rowKey))
   }
   return result
 }
 
-function covertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
+function convertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
   mergedData.forEach(item => {
     const { rowKey, children } = item
     map.set(rowKey, item)
     if (children) {
-      covertDataMap(children, map)
+      convertDataMap(children, map)
     }
   })
 }

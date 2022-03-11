@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
@@ -35,8 +35,8 @@ export const checkboxProps = {
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
-export type CheckboxProps = IxInnerPropTypes<typeof checkboxProps>
-export type CheckboxPublicProps = IxPublicPropTypes<typeof checkboxProps>
+export type CheckboxProps = ExtractInnerPropTypes<typeof checkboxProps>
+export type CheckboxPublicProps = ExtractPublicPropTypes<typeof checkboxProps>
 export interface CheckboxBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -64,8 +64,8 @@ export const checkboxGroupProps = {
   onChange: IxPropTypes.emit<(newValue: any[], oldValue: any[]) => void>(),
 }
 
-export type CheckboxGroupProps = IxInnerPropTypes<typeof checkboxGroupProps>
-export type CheckboxGroupPublicProps = IxPublicPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupProps = ExtractInnerPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupPublicProps = ExtractPublicPropTypes<typeof checkboxGroupProps>
 export type CheckboxGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
 >

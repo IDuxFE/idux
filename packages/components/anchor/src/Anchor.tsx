@@ -15,7 +15,7 @@ import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, getOffset, off, on } from '@idux/cdk/utils'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
-import { covertTarget } from '@idux/components/utils'
+import { convertTarget } from '@idux/components/utils'
 
 import { anchorToken } from './token'
 import { anchorProps } from './types'
@@ -206,14 +206,14 @@ const useScroll = (
     () => props.target,
     () => {
       off(container.value, eventType, handleScroll)
-      container.value = covertTarget(props.target)
+      container.value = convertTarget(props.target)
       on(container.value, eventType, handleScroll)
       handleScroll()
     },
   )
 
   onMounted(() => {
-    container.value = covertTarget(props.target)
+    container.value = convertTarget(props.target)
     on(container.value, eventType, handleScroll)
     handleScroll()
   })

@@ -5,59 +5,85 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { LayoutSiderProps } from '@idux/components/layout'
 import type { MenuClickOptions, MenuData, MenuProps, MenuTheme } from '@idux/components/menu'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
-
-export interface SiderHover {
-  delay: number
-}
-
-export interface SiderHoverCtrl extends SiderHover {
-  enable: boolean
-}
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export const proLayoutProps = {
-  activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
-  collapsed: IxPropTypes.bool,
-  siderHover: IxPropTypes.oneOfType([IxPropTypes.bool, IxPropTypes.object<SiderHover>()]),
-  compress: IxPropTypes.bool.def(true),
-  fixed: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ header: boolean; sider: boolean }>()]).def(false),
-  menus: IxPropTypes.array<MenuData>().def(() => []),
-  sider: IxPropTypes.object<LayoutSiderProps>(),
-  siderMenu: IxPropTypes.object<MenuProps>(),
-  theme: IxPropTypes.oneOfType([
-    IxPropTypes.oneOf(['light', 'dark']),
-    IxPropTypes.object<{ header: MenuTheme; sider: MenuTheme }>(),
-  ]).def('light'),
-  type: IxPropTypes.oneOf<ProLayoutType>(['header', 'sider', 'both', 'mixin']).def('mixin'),
+  activeKey: {
+    type: [String, Number, Symbol] as PropType<VKey>,
+    default: undefined,
+  },
+  collapsed: {
+    type: Boolean,
+    default: undefined,
+  },
+  compress: {
+    type: Boolean,
+    default: true,
+  },
+  fixed: {
+    type: [Boolean, Object] as PropType<boolean | { header: boolean; sider: boolean }>,
+    default: false,
+  },
+  menus: {
+    type: Array as PropType<MenuData[]>,
+    default: (): MenuData[] => [],
+  },
+  sider: {
+    type: Object as PropType<LayoutSiderProps>,
+    default: undefined,
+  },
+  siderHover: {
+    type: [Boolean, Object] as PropType<boolean | SiderHover>,
+    default: undefined,
+  },
+  siderMenu: {
+    type: Object as PropType<MenuProps>,
+    default: (): MenuData[] => [],
+  },
+  theme: {
+    type: [String, Object] as PropType<MenuTheme | { header: MenuTheme; sider: MenuTheme }>,
+    default: 'light',
+  },
+  type: {
+    type: String as PropType<ProLayoutType>,
+    default: 'mixin',
+  },
 
   // event
-  'onUpdate:activeKey': IxPropTypes.emit<(activeKey: VKey | null) => void>(),
-  'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
-  onMenuClick: IxPropTypes.emit<(options: MenuClickOptions) => void>(),
+  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(activeKey: VKey | null) => void>>,
+  'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
+  onMenuClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions) => void>>,
 }
 
-export type ProLayoutProps = IxInnerPropTypes<typeof proLayoutProps>
-export type ProLayoutPublicProps = IxPublicPropTypes<typeof proLayoutProps>
+export type ProLayoutProps = ExtractInnerPropTypes<typeof proLayoutProps>
+export type ProLayoutPublicProps = ExtractPublicPropTypes<typeof proLayoutProps>
 export type ProLayoutComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ProLayoutPublicProps> & ProLayoutPublicProps
 >
 export type ProLayoutInstance = InstanceType<DefineComponent<ProLayoutProps>>
 
-export type ProLayoutFixed = boolean | { header: boolean; sider: boolean }
-export type ProLayoutType = 'header' | 'sider' | 'mixin' | 'both'
-
 export const proLayoutSiderTriggerProps = {
-  icon: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, IxPropTypes.vNode])),
+  icon: {
+    type: [String, Array] as PropType<string | Array<string | VNode>>,
+    default: undefined,
+  },
 }
 
-export type ProLayoutSiderTriggerProps = IxInnerPropTypes<typeof proLayoutSiderTriggerProps>
-export type ProLayoutSiderTriggerPublicProps = IxPublicPropTypes<typeof proLayoutSiderTriggerProps>
+export type ProLayoutSiderTriggerProps = ExtractInnerPropTypes<typeof proLayoutSiderTriggerProps>
+export type ProLayoutSiderTriggerPublicProps = ExtractPublicPropTypes<typeof proLayoutSiderTriggerProps>
 export type ProLayoutSiderTriggerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ProLayoutSiderTriggerPublicProps> & ProLayoutSiderTriggerPublicProps
 >
 export type ProLayoutSiderTriggerInstance = InstanceType<DefineComponent<ProLayoutSiderTriggerProps>>
+
+export type ProLayoutFixed = boolean | { header: boolean; sider: boolean }
+export type ProLayoutType = 'header' | 'sider' | 'mixin' | 'both'
+export interface SiderHover {
+  delay: number
+}
+export interface SiderHoverCtrl extends SiderHover {
+  enable: boolean
+}

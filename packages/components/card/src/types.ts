@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
@@ -36,8 +36,8 @@ export const cardProps = {
   footer: IxPropTypes.array<CardButtonProps | VNode>(),
 }
 
-export type CardProps = IxInnerPropTypes<typeof cardProps>
-export type CardPublicProps = IxPublicPropTypes<typeof cardProps>
+export type CardProps = ExtractInnerPropTypes<typeof cardProps>
+export type CardPublicProps = ExtractPublicPropTypes<typeof cardProps>
 export type CardComponent = DefineComponent<Omit<HTMLAttributes, keyof CardPublicProps> & CardPublicProps>
 export type CardInstance = InstanceType<DefineComponent<CardProps>>
 
@@ -45,7 +45,7 @@ export const cardGridProps = {
   hoverable: IxPropTypes.bool,
 }
 
-export type CardGridProps = IxInnerPropTypes<typeof cardGridProps>
-export type CardGridPublicProps = IxPublicPropTypes<typeof cardGridProps>
+export type CardGridProps = ExtractInnerPropTypes<typeof cardGridProps>
+export type CardGridPublicProps = ExtractPublicPropTypes<typeof cardGridProps>
 export type CardGridComponent = DefineComponent<Omit<HTMLAttributes, keyof CardGridPublicProps> & CardGridPublicProps>
 export type CardGridInstance = InstanceType<DefineComponent<CardGridProps>>

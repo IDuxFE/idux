@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { TooltipInstance } from '@idux/components/tooltip'
 import type { CSSProperties, DefineComponent, HTMLAttributes, VNode } from 'vue'
 
@@ -45,8 +45,8 @@ export interface SliderBindings {
   blur: () => void
 }
 
-export type SliderProps = IxInnerPropTypes<typeof sliderProps>
-export type SliderPublicProps = IxPublicPropTypes<typeof sliderProps>
+export type SliderProps = ExtractInnerPropTypes<typeof sliderProps>
+export type SliderPublicProps = ExtractPublicPropTypes<typeof sliderProps>
 export type SliderComponent = DefineComponent<
   Omit<HTMLAttributes, keyof SliderPublicProps> & SliderPublicProps,
   SliderBindings
@@ -70,8 +70,8 @@ export interface SliderThumbBindings {
   hideTooltip: () => void
 }
 
-export type SliderThumbProps = IxInnerPropTypes<typeof sliderThumbProps>
-export type SliderThumbPublicProps = IxPublicPropTypes<typeof sliderThumbProps>
+export type SliderThumbProps = ExtractInnerPropTypes<typeof sliderThumbProps>
+export type SliderThumbPublicProps = ExtractPublicPropTypes<typeof sliderThumbProps>
 export type SliderThumbComponent = DefineComponent<
   Omit<HTMLAttributes, keyof SliderThumbPublicProps> & SliderThumbPublicProps,
   SliderThumbBindings
@@ -83,8 +83,8 @@ export const sliderMarksProps = {
   onClickMark: IxPropTypes.emit<(evt: MouseEvent | TouchEvent, markValue: number) => void>(),
 }
 
-export type SliderMarksProps = IxInnerPropTypes<typeof sliderMarksProps>
-export type SliderMarksPublicProps = IxPublicPropTypes<typeof sliderMarksProps>
+export type SliderMarksProps = ExtractInnerPropTypes<typeof sliderMarksProps>
+export type SliderMarksPublicProps = ExtractPublicPropTypes<typeof sliderMarksProps>
 export type SliderMarksComponent = DefineComponent<
   Omit<HTMLAttributes, keyof SliderMarksPublicProps> & SliderMarksPublicProps
 >

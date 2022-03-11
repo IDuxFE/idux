@@ -6,7 +6,7 @@
  */
 
 import type { PopperOptions, PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
@@ -58,8 +58,8 @@ export interface OverlayBindings {
   forceUpdatePopper: () => void
 }
 
-export type OverlayProps = IxInnerPropTypes<typeof overlayProps>
-export type OverlayPublicProps = IxPublicPropTypes<typeof overlayProps>
+export type OverlayProps = ExtractInnerPropTypes<typeof overlayProps>
+export type OverlayPublicProps = ExtractPublicPropTypes<typeof overlayProps>
 export type OverlayComponent = DefineComponent<
   Omit<HTMLAttributes, keyof OverlayPublicProps> & OverlayPublicProps,
   OverlayBindings

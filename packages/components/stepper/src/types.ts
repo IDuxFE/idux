@@ -7,7 +7,7 @@
 
 import { type DefineComponent, type HTMLAttributes } from 'vue'
 
-import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
 
 export type StepperLabelPlacement = 'end' | 'bottom'
 export type StepperSize = 'md' | 'sm'
@@ -25,8 +25,8 @@ export const stepperProps = {
   'onUpdate:activeKey': IxPropTypes.emit<(key: VKey) => void>(),
 }
 
-export type StepperProps = IxInnerPropTypes<typeof stepperProps>
-export type StepperPublicProps = IxPublicPropTypes<typeof stepperProps>
+export type StepperProps = ExtractInnerPropTypes<typeof stepperProps>
+export type StepperPublicProps = ExtractPublicPropTypes<typeof stepperProps>
 export type StepperComponent = DefineComponent<Omit<HTMLAttributes, keyof StepperPublicProps> & StepperPublicProps>
 export type StepperInstance = InstanceType<DefineComponent<StepperProps>>
 
@@ -38,8 +38,8 @@ export const stepperItemProps = {
   status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']),
 }
 
-export type StepperItemProps = IxInnerPropTypes<typeof stepperItemProps>
-export type StepperItemPublicProps = IxPublicPropTypes<typeof stepperItemProps>
+export type StepperItemProps = ExtractInnerPropTypes<typeof stepperItemProps>
+export type StepperItemPublicProps = ExtractPublicPropTypes<typeof stepperItemProps>
 export type StepperItemComponent = DefineComponent<
   Omit<HTMLAttributes, keyof StepperItemPublicProps> & StepperItemPublicProps
 >

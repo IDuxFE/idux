@@ -13,7 +13,7 @@ import { NoopFunction, type VKey } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxProgress } from '@idux/components/progress'
-import { covertStringVNode, useKey } from '@idux/components/utils'
+import { convertStringVNode, useKey } from '@idux/components/utils'
 
 import { stepperItemKey, stepperToken } from './token'
 import { type StepperItemProps, type StepperProps, type StepperStatus, stepperItemProps } from './types'
@@ -67,8 +67,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const clickable = parentProps.clickable && !props.disabled
       const iconNode = renderIcon(props, slots, parentProps, status, key)
-      const titleNode = covertStringVNode(slots, props, 'title')
-      const descriptionNode = covertStringVNode(slots, props, 'description')
+      const titleNode = convertStringVNode(slots, props, 'title')
+      const descriptionNode = convertStringVNode(slots, props, 'description')
       return (
         <div
           class={classes.value}

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -16,7 +16,7 @@ export const loadingProps = {
   duration: IxPropTypes.number.def(2),
 }
 
-export type LoadingProps = IxInnerPropTypes<typeof loadingProps>
-export type LoadingPublicProps = IxPublicPropTypes<typeof loadingProps>
+export type LoadingProps = ExtractInnerPropTypes<typeof loadingProps>
+export type LoadingPublicProps = ExtractPublicPropTypes<typeof loadingProps>
 export type LoadingComponent = DefineComponent<Omit<HTMLAttributes, keyof LoadingPublicProps> & LoadingPublicProps>
 export type LoadingInstance = InstanceType<DefineComponent<LoadingProps>>

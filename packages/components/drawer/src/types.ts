@@ -6,7 +6,7 @@
  */
 
 import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
@@ -57,8 +57,8 @@ export const drawerProps = {
   onClose: IxPropTypes.emit<(evt?: Event | unknown) => void>(),
 }
 
-export type DrawerProps = IxInnerPropTypes<typeof drawerProps>
-export type DrawerPublicProps = IxPublicPropTypes<typeof drawerProps>
+export type DrawerProps = ExtractInnerPropTypes<typeof drawerProps>
+export type DrawerPublicProps = ExtractPublicPropTypes<typeof drawerProps>
 export interface DrawerBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>

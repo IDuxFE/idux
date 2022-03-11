@@ -83,7 +83,7 @@ export function usePlacement(state: Required<PopperOptions>): {
 }
 
 export function useDelay(state: Required<PopperOptions>): ComputedRef<{ show: number; hide: number }> {
-  const covertDelay = (delay: number | [number | null, number | null]) => {
+  const convertDelay = (delay: number | [number | null, number | null]) => {
     if (Array.isArray(delay)) {
       const [show, hide] = delay
       return { show: show ?? defaultDelay, hide: hide ?? defaultDelay }
@@ -91,7 +91,7 @@ export function useDelay(state: Required<PopperOptions>): ComputedRef<{ show: nu
     return { show: delay, hide: delay }
   }
 
-  return computed(() => covertDelay(state.delay))
+  return computed(() => convertDelay(state.delay))
 }
 
 export function useTimer(): { setTimer: (action: () => void, delay: number) => void; clearTimer: () => void } {

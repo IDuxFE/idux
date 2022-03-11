@@ -37,15 +37,15 @@ export function useMergeNodes(
 } {
   const mergedNodeMap = computed(() => {
     const map = new Map<VKey, MergedNode>()
-    const nodes = covertMergeNodes(props, getNodeKey, props.dataSource, config)
-    covertMergedNodeMap(nodes, map)
+    const nodes = convertMergeNodes(props, getNodeKey, props.dataSource, config)
+    convertMergedNodeMap(nodes, map)
     return map
   })
 
   return { mergedNodeMap }
 }
 
-export function covertMergeNodes(
+export function convertMergeNodes(
   props: TreeSelectProps,
   getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeSelectNode[],
@@ -57,11 +57,11 @@ export function covertMergeNodes(
   const { childrenKey = config.childrenKey, labelKey = config.labelKey, treeDisabled, loadChildren } = props
 
   return nodes.map(option =>
-    covertMergeNode(option, getKey, treeDisabled, childrenKey, labelKey, !!loadChildren, parentKey),
+    convertMergeNode(option, getKey, treeDisabled, childrenKey, labelKey, !!loadChildren, parentKey),
   )
 }
 
-function covertMergeNode(
+function convertMergeNode(
   rawNode: TreeSelectNode,
   getKey: GetNodeKey,
   disabled: ((node: TreeSelectNode) => boolean | TreeSelectNodeDisabled) | undefined,
@@ -71,11 +71,11 @@ function covertMergeNode(
   parentKey?: VKey,
 ): MergedNode {
   const key = getKey(rawNode)
-  const { check, drag, drop, select } = covertDisabled(rawNode, disabled)
+  const { check, drag, drop, select } = convertDisabled(rawNode, disabled)
   const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeSelectNode[] | undefined
   const label = rawNode[labelKey] as string
   const children = subNodes?.map(subNode =>
-    covertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
+    convertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
   )
   return {
     children,
@@ -91,7 +91,7 @@ function covertMergeNode(
   }
 }
 
-function covertDisabled(
+function convertDisabled(
   option: TreeSelectNode,
   disabled?: (option: TreeSelectNode) => boolean | TreeSelectNodeDisabled,
 ) {
@@ -120,12 +120,12 @@ function covertDisabled(
   }
 }
 
-export function covertMergedNodeMap(MergedNodes: MergedNode[], map: Map<VKey, MergedNode>): void {
+export function convertMergedNodeMap(MergedNodes: MergedNode[], map: Map<VKey, MergedNode>): void {
   MergedNodes.forEach(item => {
     const { key, children } = item
     map.set(key, item)
     if (children) {
-      covertMergedNodeMap(children, map)
+      convertMergedNodeMap(children, map)
     }
   })
 }

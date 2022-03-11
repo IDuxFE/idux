@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -22,8 +22,8 @@ export const collapseProps = {
   'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
 }
 
-export type CollapseProps = IxInnerPropTypes<typeof collapseProps>
-export type CollapsePublicProps = IxPublicPropTypes<typeof collapseProps>
+export type CollapseProps = ExtractInnerPropTypes<typeof collapseProps>
+export type CollapsePublicProps = ExtractPublicPropTypes<typeof collapseProps>
 export type CollapseComponent = DefineComponent<Omit<HTMLAttributes, keyof CollapsePublicProps> & CollapsePublicProps>
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
@@ -32,8 +32,8 @@ export const collapsePanelProps = {
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
 }
 
-export type CollapsePanelProps = IxInnerPropTypes<typeof collapsePanelProps>
-export type CollapsePanelPublicProps = IxPublicPropTypes<typeof collapsePanelProps>
+export type CollapsePanelProps = ExtractInnerPropTypes<typeof collapsePanelProps>
+export type CollapsePanelPublicProps = ExtractPublicPropTypes<typeof collapsePanelProps>
 export type CollapsePanelComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CollapsePanelPublicProps> & CollapsePanelPublicProps
 >

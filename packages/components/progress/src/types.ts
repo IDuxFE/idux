@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -54,7 +54,7 @@ export const progressProps = {
   icons: IxPropTypes.object<ProgressIcons>(),
 }
 
-export type ProgressProps = IxInnerPropTypes<typeof progressProps>
-export type ProgressPublicProps = IxPublicPropTypes<typeof progressProps>
+export type ProgressProps = ExtractInnerPropTypes<typeof progressProps>
+export type ProgressPublicProps = ExtractPublicPropTypes<typeof progressProps>
 export type ProgressComponent = DefineComponent<Omit<HTMLAttributes, keyof ProgressPublicProps> & ProgressPublicProps>
 export type ProgressInstance = InstanceType<DefineComponent<ProgressProps>>

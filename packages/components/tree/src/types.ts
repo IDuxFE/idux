@@ -7,7 +7,7 @@
 
 import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -75,8 +75,8 @@ export const treeProps = {
   onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
-export type TreeProps = IxInnerPropTypes<typeof treeProps>
-export type TreePublicProps = IxPublicPropTypes<typeof treeProps>
+export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
+export type TreePublicProps = ExtractPublicPropTypes<typeof treeProps>
 export interface TreeBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void

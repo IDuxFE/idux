@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -20,8 +20,8 @@ export const popoverProps = {
   content: IxPropTypes.string,
 }
 
-export type PopoverProps = IxInnerPropTypes<typeof popoverProps>
-export type PopoverPublicProps = IxPublicPropTypes<typeof popoverProps>
+export type PopoverProps = ExtractInnerPropTypes<typeof popoverProps>
+export type PopoverPublicProps = ExtractPublicPropTypes<typeof popoverProps>
 export interface PopoverBindings {
   updatePopper: () => void
 }

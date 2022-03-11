@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -22,8 +22,8 @@ export const alertProps = {
   onClose: IxPropTypes.emit<() => void>(),
 }
 
-export type AlertProps = IxInnerPropTypes<typeof alertProps>
-export type AlertPublicProps = IxPublicPropTypes<typeof alertProps>
+export type AlertProps = ExtractInnerPropTypes<typeof alertProps>
+export type AlertPublicProps = ExtractPublicPropTypes<typeof alertProps>
 export type AlertComponent = DefineComponent<Omit<HTMLAttributes, keyof AlertPublicProps> & AlertPublicProps>
 export type AlertInstance = InstanceType<DefineComponent<AlertProps>>
 

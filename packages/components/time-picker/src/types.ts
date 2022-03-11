@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -57,8 +57,8 @@ export const timePickerProps = {
   onChange: IxPropTypes.emit<(value: Date | undefined) => void>(),
 }
 
-export type TimePickerProps = IxInnerPropTypes<typeof timePickerProps>
-export type TimePickerPublicProps = IxPublicPropTypes<typeof timePickerProps>
+export type TimePickerProps = ExtractInnerPropTypes<typeof timePickerProps>
+export type TimePickerPublicProps = ExtractPublicPropTypes<typeof timePickerProps>
 export type TimePickerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TimePickerPublicProps> & TimePickerPublicProps
 >
@@ -81,8 +81,8 @@ export const timeRangePickerProps = {
   onChange: IxPropTypes.emit<(value: [Date | undefined, Date | undefined] | undefined) => void>(),
 }
 
-export type TimeRangePickerProps = IxInnerPropTypes<typeof timeRangePickerProps>
-export type TimeRangePickerPublicProps = IxPublicPropTypes<typeof timeRangePickerProps>
+export type TimeRangePickerProps = ExtractInnerPropTypes<typeof timeRangePickerProps>
+export type TimeRangePickerPublicProps = ExtractPublicPropTypes<typeof timeRangePickerProps>
 export type TimeRangePickerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TimeRangePickerPublicProps> & TimeRangePickerPublicProps
 >
@@ -102,14 +102,14 @@ export const baseTriggerProps = {
   onClick: IxPropTypes.emit<(evt: Event) => void>(),
   onClear: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
-export type BaseTriggerProps = IxInnerPropTypes<typeof baseTriggerProps>
+export type BaseTriggerProps = ExtractInnerPropTypes<typeof baseTriggerProps>
 
 export const timePickerTriggerProps = {
   value: IxPropTypes.object<Date>(),
 }
-export type TimePickerTriggerProps = IxInnerPropTypes<typeof timePickerTriggerProps>
+export type TimePickerTriggerProps = ExtractInnerPropTypes<typeof timePickerTriggerProps>
 
 export const timeRangePickerTriggerProps = {
   value: IxPropTypes.object<[Date | undefined, Date | undefined]>(),
 }
-export type TimeRangePickerTriggerProps = IxInnerPropTypes<typeof timeRangePickerTriggerProps>
+export type TimeRangePickerTriggerProps = ExtractInnerPropTypes<typeof timeRangePickerTriggerProps>

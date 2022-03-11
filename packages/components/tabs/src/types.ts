@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -33,13 +33,13 @@ export const tabProps = {
   disabled: IxPropTypes.bool.def(false),
 }
 
-export type TabsProps = IxInnerPropTypes<typeof tabsProps>
-export type TabsPublicProps = IxPublicPropTypes<typeof tabsProps>
+export type TabsProps = ExtractInnerPropTypes<typeof tabsProps>
+export type TabsPublicProps = ExtractPublicPropTypes<typeof tabsProps>
 export type TabsComponent = DefineComponent<Omit<HTMLAttributes, keyof TabsPublicProps> & TabsPublicProps>
 export type TabsInstance = InstanceType<DefineComponent<TabsProps>>
 
-export type TabProps = IxInnerPropTypes<typeof tabProps>
-export type TabPublicProps = IxPublicPropTypes<typeof tabProps>
+export type TabProps = ExtractInnerPropTypes<typeof tabProps>
+export type TabPublicProps = ExtractPublicPropTypes<typeof tabProps>
 export type TabComponent = DefineComponent<Omit<HTMLAttributes, keyof TabPublicProps> & TabPublicProps>
 export type TabInstance = InstanceType<DefineComponent<TabProps>>
 

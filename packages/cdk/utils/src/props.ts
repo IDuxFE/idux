@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { IfAny } from '@vue/shared'
 import type { Prop, VNode } from 'vue'
 import type { VueTypeDef, VueTypeValidableDef } from 'vue-types'
 import type { InferType, VueProp, Prop as VueTypeProp } from 'vue-types/dist/types'
@@ -28,6 +29,8 @@ import {
   toValidableType,
 } from 'vue-types'
 
+export type MaybeArray<T> = T | T[]
+
 type PublicRequiredKeys<T> = {
   [K in keyof T]: T[K] extends { required: true } ? K : never
 }[keyof T]
@@ -35,34 +38,46 @@ type PublicRequiredKeys<T> = {
 type PublicOptionalKeys<T> = Exclude<keyof T, PublicRequiredKeys<T>>
 
 type InnerRequiredKeys<T> = {
-  [K in keyof T]: T[K] extends { required: true } | { default: any } ? K : never
+  [K in keyof T]: T[K] extends { required: true } | { default: any }
+    ? T[K] extends { default: undefined }
+      ? never
+      : K
+    : never
 }[keyof T]
 
 type InnerOptionalKeys<T> = Exclude<keyof T, InnerRequiredKeys<T>>
 
-type InferPropType<T> = T extends null
+type InferPropType<T> = [T] extends [null]
   ? any // null & true would fail to infer
-  : T extends { type: null | true }
+  : [T] extends [{ type: null | true }]
   ? any // As TS issue https://github.com/Microsoft/TypeScript/issues/14829 // somehow `ObjectConstructor` when inferred from { (): T } becomes `any` // `BooleanConstructor` when inferred from PropConstructor(with PropMethod) becomes `Boolean`
-  : T extends ObjectConstructor | { type: ObjectConstructor }
+  : [T] extends [ObjectConstructor | { type: ObjectConstructor }]
   ? Record<string, any>
-  : T extends BooleanConstructor | { type: BooleanConstructor }
+  : [T] extends [BooleanConstructor | { type: BooleanConstructor }]
   ? boolean
-  : T extends Prop<infer V, infer D>
+  : [T] extends [DateConstructor | { type: DateConstructor }]
+  ? Date
+  : [T] extends [(infer U)[] | { type: (infer U)[] }]
+  ? U extends DateConstructor
+    ? Date | InferPropType<U>
+    : InferPropType<U>
+  : [T] extends [Prop<infer V, infer D>]
   ? unknown extends V
-    ? D
+    ? IfAny<V, V, D>
     : V
   : T
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IxPublicPropTypes<O> = O extends object
-  ? { [K in PublicRequiredKeys<O>]: InferPropType<O[K]> } & { [K in PublicOptionalKeys<O>]?: InferPropType<O[K]> }
-  : { [K in string]: any }
+export type ExtractPublicPropTypes<O> = {
+  [K in keyof Pick<O, PublicRequiredKeys<O>>]: InferPropType<O[K]>
+} & {
+  [K in keyof Pick<O, PublicOptionalKeys<O>>]?: InferPropType<O[K]>
+}
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IxInnerPropTypes<O> = O extends object
-  ? { [K in InnerRequiredKeys<O>]: InferPropType<O[K]> } & { [K in InnerOptionalKeys<O>]?: InferPropType<O[K]> }
-  : { [K in string]: any }
+export type ExtractInnerPropTypes<O> = {
+  [K in keyof Pick<O, InnerRequiredKeys<O>>]: InferPropType<O[K]>
+} & {
+  [K in keyof Pick<O, InnerOptionalKeys<O>>]?: InferPropType<O[K]>
+}
 
 export class IxPropTypes {
   static get any(): VueTypeValidableDef<any> {

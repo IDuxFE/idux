@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
@@ -27,8 +27,8 @@ export const switchProps = {
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
-export type SwitchProps = IxInnerPropTypes<typeof switchProps>
-export type SwitchPublicProps = IxPublicPropTypes<typeof switchProps>
+export type SwitchProps = ExtractInnerPropTypes<typeof switchProps>
+export type SwitchPublicProps = ExtractPublicPropTypes<typeof switchProps>
 export interface SwitchBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void

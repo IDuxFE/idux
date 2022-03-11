@@ -7,10 +7,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type DefineComponent, type HTMLAttributes, type LabelHTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
-import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
 import { type FormSize } from '@idux/components/form'
 
 export const radioProps = {
@@ -33,8 +33,8 @@ export const radioProps = {
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
-export type RadioProps = IxInnerPropTypes<typeof radioProps>
-export type RadioPublicProps = IxPublicPropTypes<typeof radioProps>
+export type RadioProps = ExtractInnerPropTypes<typeof radioProps>
+export type RadioPublicProps = ExtractPublicPropTypes<typeof radioProps>
 export interface RadioBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -63,8 +63,8 @@ export const radioGroupProps = {
   onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
 }
 
-export type RadioGroupProps = IxInnerPropTypes<typeof radioGroupProps>
-export type RadioGroupPublicProps = IxPublicPropTypes<typeof radioGroupProps>
+export type RadioGroupProps = ExtractInnerPropTypes<typeof radioGroupProps>
+export type RadioGroupPublicProps = ExtractPublicPropTypes<typeof radioGroupProps>
 export type RadioGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
 >

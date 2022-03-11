@@ -11,9 +11,9 @@ import { isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
-export function covertIconVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
-export function covertIconVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
-export function covertIconVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
+export function convertIconVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
+export function convertIconVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
+export function convertIconVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
   let iconSlot: Slot | undefined
   let iconName: string | VNode | undefined
   if (key) {
@@ -34,9 +34,9 @@ export function covertIconVNode(slots: Slot | Slots | undefined, props: unknown,
   return isString(iconName) ? createVNode(IxIcon, { name: iconName }, null) : iconName
 }
 
-export function covertStringVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
-export function covertStringVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
-export function covertStringVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
+export function convertStringVNode(slot: Slot | undefined, prop: string | VNode | undefined): VNodeChild
+export function convertStringVNode(slots: Slots | undefined, props: unknown, key: string): VNodeChild
+export function convertStringVNode(slots: Slot | Slots | undefined, props: unknown, key?: string): VNodeChild {
   let labelSlot: Slot | undefined
   let label: string | VNode | undefined
   if (key) {

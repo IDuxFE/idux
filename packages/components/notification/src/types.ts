@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -58,8 +58,8 @@ export const notificationProviderProps = {
 export type NotificationType = typeof notificationType[number]
 export type NotificationPlacement = typeof notificationPlacement[number]
 export type NotificationNodePropKey = 'title' | 'content' | 'footer'
-export type NotificationProps = IxInnerPropTypes<typeof notificationProps>
-export type NotificationPublicProps = IxPublicPropTypes<typeof notificationProps>
+export type NotificationProps = ExtractInnerPropTypes<typeof notificationProps>
+export type NotificationPublicProps = ExtractPublicPropTypes<typeof notificationProps>
 export type NotificationComponent = DefineComponent<
   Omit<HTMLAttributes, keyof NotificationPublicProps> & NotificationPublicProps
 >
@@ -88,8 +88,8 @@ export interface NotificationRef {
   destroy: () => void
 }
 
-export type NotificationProviderProps = IxInnerPropTypes<typeof notificationProviderProps>
-export type NotificationProviderPublicProps = IxPublicPropTypes<typeof notificationProviderProps>
+export type NotificationProviderProps = ExtractInnerPropTypes<typeof notificationProviderProps>
+export type NotificationProviderPublicProps = ExtractPublicPropTypes<typeof notificationProviderProps>
 export type NotificationProviderComponent = DefineComponent<
   Omit<HTMLAttributes, keyof NotificationProviderPublicProps> & NotificationProviderPublicProps
 >

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -39,8 +39,8 @@ export const paginationProps = {
   onChange: IxPropTypes.emit<(pageIndex: number, pageSize: number) => void>(),
 }
 
-export type PaginationProps = IxInnerPropTypes<typeof paginationProps>
-export type PaginationPublicProps = IxPublicPropTypes<typeof paginationProps>
+export type PaginationProps = ExtractInnerPropTypes<typeof paginationProps>
+export type PaginationPublicProps = ExtractPublicPropTypes<typeof paginationProps>
 export type PaginationComponent = DefineComponent<
   Omit<HTMLAttributes, keyof PaginationPublicProps> & PaginationPublicProps
 >
@@ -52,4 +52,4 @@ export const paginationItemProps = {
   type: IxPropTypes.oneOf<PaginationItemType>(['page', 'prev', 'next', 'prev5', 'next5']).isRequired,
 }
 
-export type PaginationItemProps = IxInnerPropTypes<typeof paginationItemProps>
+export type PaginationItemProps = ExtractInnerPropTypes<typeof paginationItemProps>

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -34,8 +34,8 @@ export const inputNumberProps = {
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
-export type InputNumberProps = IxInnerPropTypes<typeof inputNumberProps>
-export type InputNumberPublicProps = IxPublicPropTypes<typeof inputNumberProps>
+export type InputNumberProps = ExtractInnerPropTypes<typeof inputNumberProps>
+export type InputNumberPublicProps = ExtractPublicPropTypes<typeof inputNumberProps>
 export interface InputNumberBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void

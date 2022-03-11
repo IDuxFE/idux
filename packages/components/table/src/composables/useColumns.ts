@@ -139,7 +139,7 @@ function mergeColumns(
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
-    .map((column, index) => covertColumn(column, breakpoints, baseConfig, expandableConfig, index))
+    .map((column, index) => convertColumn(column, breakpoints, baseConfig, expandableConfig, index))
 }
 
 function convertColumns(nodes: VNode[] | undefined) {
@@ -174,7 +174,7 @@ function convertColumns(nodes: VNode[] | undefined) {
   return columns
 }
 
-function covertColumn(
+function convertColumn(
   column: TableColumn,
   breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,

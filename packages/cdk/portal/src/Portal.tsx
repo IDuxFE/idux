@@ -7,7 +7,7 @@
 
 import { Teleport, computed, defineComponent, ref, watch } from 'vue'
 
-import { covertTarget } from './covertTarget'
+import { convertTarget } from './convertTarget'
 import { portalProps } from './types'
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
         }
       },
     )
-    const target = computed(() => loaded.value && covertTarget(props.target))
+    const target = computed(() => loaded.value && convertTarget(props.target))
 
     return () => {
       const _target = target.value

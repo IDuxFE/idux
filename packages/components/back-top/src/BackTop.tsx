@@ -13,7 +13,7 @@ import { getScroll, scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, off, on } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { covertTarget } from '@idux/components/utils'
+import { convertTarget } from '@idux/components/utils'
 
 import { backTopProps } from './types'
 
@@ -43,7 +43,7 @@ export default defineComponent({
 
     onMounted(() => {
       nextTick(() => {
-        container.value = covertTarget(props.target)
+        container.value = convertTarget(props.target)
         on(container.value, eventType, throttledScrollHandler)
         handleScroll()
       })

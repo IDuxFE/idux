@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -18,7 +18,7 @@ export const backTopProps = {
   color: IxPropTypes.string,
 }
 
-export type BadgeProps = IxInnerPropTypes<typeof backTopProps>
-export type BadgePublicProps = IxPublicPropTypes<typeof backTopProps>
+export type BadgeProps = ExtractInnerPropTypes<typeof backTopProps>
+export type BadgePublicProps = ExtractPublicPropTypes<typeof backTopProps>
 export type BadgeComponent = DefineComponent<Omit<HTMLAttributes, keyof BadgePublicProps> & BadgePublicProps>
 export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -25,8 +25,8 @@ export const virtualListProps = {
   onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
-export type VirtualScrollProps = IxInnerPropTypes<typeof virtualListProps>
-export type VirtualScrollPublicProps = IxPublicPropTypes<typeof virtualListProps>
+export type VirtualScrollProps = ExtractInnerPropTypes<typeof virtualListProps>
+export type VirtualScrollPublicProps = ExtractPublicPropTypes<typeof virtualListProps>
 export interface VirtualScrollBindings {
   scrollTo: VirtualScrollToFn
 }

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -20,8 +20,8 @@ export const datePanelProps = {
   onCellMouseenter: IxPropTypes.emit<(date: Date) => void>(),
 }
 
-export type DatePanelProps = IxInnerPropTypes<typeof datePanelProps>
-export type DatePanelPublicProps = IxPublicPropTypes<typeof datePanelProps>
+export type DatePanelProps = ExtractInnerPropTypes<typeof datePanelProps>
+export type DatePanelPublicProps = ExtractPublicPropTypes<typeof datePanelProps>
 export type DatePanelComponent = DefineComponent<
   Omit<HTMLAttributes, keyof DatePanelPublicProps> & DatePanelPublicProps
 >

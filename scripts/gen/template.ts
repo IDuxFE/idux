@@ -26,17 +26,17 @@ import './default.less'
 }
 
 export function getTypesTemplate(upperFirstName: string, camelCaseName: string): string {
-  return `import type { DefineComponent, HTMLAttributes } from 'vue'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+  return `import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 
-import { IxPropTypes } from '@idux/cdk/utils'
+
 
 export const ${camelCaseName}Props = {
   
 }
 
-export type ${upperFirstName}Props = IxInnerPropTypes<typeof ${camelCaseName}Props>
-export type ${upperFirstName}PublicProps = IxPublicPropTypes<typeof ${camelCaseName}Props>
+export type ${upperFirstName}Props = ExtractInnerPropTypes<typeof ${camelCaseName}Props>
+export type ${upperFirstName}PublicProps = ExtractPublicPropTypes<typeof ${camelCaseName}Props>
 export type ${upperFirstName}Component = DefineComponent<Omit<HTMLAttributes, keyof ${upperFirstName}PublicProps> & ${upperFirstName}PublicProps>
 export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirstName}Props>>
 `

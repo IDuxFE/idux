@@ -11,7 +11,7 @@ import { convertCssPixel, isNumeric } from '@idux/cdk/utils'
 import { type IconConfig, useGlobalConfig } from '@idux/components/config'
 
 import { type IconProps, iconProps } from './types'
-import { clearSVGElement, covertSVGNode, loadSVGElement, loadSvgElementFormScript } from './utils'
+import { clearSVGElement, convertSVGNode, loadSVGElement, loadSvgElementFormScript } from './utils'
 
 export default defineComponent({
   name: 'IxIcon',
@@ -60,7 +60,7 @@ export default defineComponent({
       } else {
         return (
           <i ref={root} class={classes.value} style={style.value} role="img">
-            {covertSVGNode(slots.default?.())}
+            {convertSVGNode(slots.default?.())}
           </i>
         )
       }

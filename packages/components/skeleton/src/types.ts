@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -21,7 +21,7 @@ export const skeletonProps = {
   repeat: IxPropTypes.number.def(1),
 }
 
-export type SkeletonProps = IxInnerPropTypes<typeof skeletonProps>
-export type SkeletonPublicProps = IxPublicPropTypes<typeof skeletonProps>
+export type SkeletonProps = ExtractInnerPropTypes<typeof skeletonProps>
+export type SkeletonPublicProps = ExtractPublicPropTypes<typeof skeletonProps>
 export type SkeletonComponent = DefineComponent<Omit<HTMLAttributes, keyof SkeletonPublicProps> & SkeletonPublicProps>
 export type SkeletonInstance = InstanceType<DefineComponent<SkeletonProps>>

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -39,13 +39,13 @@ export const imageProps = {
   onError: IxPropTypes.emit<(e: Event) => void>(),
 }
 
-export type ImageProps = IxInnerPropTypes<typeof imageProps>
-export type ImagePublicProps = IxPublicPropTypes<typeof imageProps>
+export type ImageProps = ExtractInnerPropTypes<typeof imageProps>
+export type ImagePublicProps = ExtractPublicPropTypes<typeof imageProps>
 export type ImageComponent = DefineComponent<Omit<HTMLAttributes, keyof ImagePublicProps> & ImagePublicProps>
 export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
-export type ImageViewerProps = IxInnerPropTypes<typeof imageViewerProps>
-export type ImageViewerPublicProps = IxPublicPropTypes<typeof imageViewerProps>
+export type ImageViewerProps = ExtractInnerPropTypes<typeof imageViewerProps>
+export type ImageViewerPublicProps = ExtractPublicPropTypes<typeof imageViewerProps>
 export type ImageViewerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ImageViewerPublicProps> & ImageViewerPublicProps
 >

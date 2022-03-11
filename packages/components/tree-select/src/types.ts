@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { TreeCheckStrategy, TreeDragDropOptions, TreeDroppable, TreeNode } from '@idux/components/tree'
@@ -87,8 +87,8 @@ export const treeSelectProps = {
   overlayHeight: IxPropTypes.number.def(256),
 }
 
-export type TreeSelectProps = IxInnerPropTypes<typeof treeSelectProps>
-export type TreeSelectPublicProps = IxPublicPropTypes<typeof treeSelectProps>
+export type TreeSelectProps = ExtractInnerPropTypes<typeof treeSelectProps>
+export type TreeSelectPublicProps = ExtractPublicPropTypes<typeof treeSelectProps>
 export interface TreeSelectBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
@@ -114,4 +114,4 @@ export const treeSelectorProps = {
   clearable: IxPropTypes.bool,
   suffix: IxPropTypes.string,
 }
-export type TreeSelectorProps = IxInnerPropTypes<any>
+export type TreeSelectorProps = ExtractInnerPropTypes<any>

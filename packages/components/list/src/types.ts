@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { RowGutter, RowProps } from '@idux/components/grid'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -34,8 +34,8 @@ export const listProps = {
   grid: IxPropTypes.object<ListGridProps>(),
 }
 
-export type ListProps = IxInnerPropTypes<typeof listProps>
-export type ListPublicProps = IxPublicPropTypes<typeof listProps>
+export type ListProps = ExtractInnerPropTypes<typeof listProps>
+export type ListPublicProps = ExtractPublicPropTypes<typeof listProps>
 export type ListComponent = DefineComponent<Omit<HTMLAttributes, keyof ListPublicProps> & ListPublicProps>
 export type ListInstance = InstanceType<DefineComponent<ListProps>>
 
@@ -45,8 +45,8 @@ export const listItemProps = {
   extra: IxPropTypes.string,
 }
 
-export type ListItemProps = IxInnerPropTypes<typeof listItemProps>
-export type ListItemPublicProps = IxPublicPropTypes<typeof listItemProps>
+export type ListItemProps = ExtractInnerPropTypes<typeof listItemProps>
+export type ListItemPublicProps = ExtractPublicPropTypes<typeof listItemProps>
 export type ListItemComponent = DefineComponent<Omit<HTMLAttributes, keyof ListItemPublicProps> & ListItemPublicProps>
 export type ListItemInstance = InstanceType<DefineComponent<ListItemProps>>
 
@@ -55,12 +55,12 @@ export const listWrapProps = {
   isUseGrid: IxPropTypes.bool,
 }
 
-export type ListWrapProps = IxInnerPropTypes<typeof listWrapProps>
+export type ListWrapProps = ExtractInnerPropTypes<typeof listWrapProps>
 export type ListWarpInstance = InstanceType<DefineComponent<ListWrapProps>>
 
 export const listItemWrapProps = {
   grid: IxPropTypes.object<ListGridProps>(),
 }
 
-export type ListItemWrapProps = IxInnerPropTypes<typeof listItemWrapProps>
+export type ListItemWrapProps = ExtractInnerPropTypes<typeof listItemWrapProps>
 export type ListItemWrapInstance = InstanceType<DefineComponent<ListItemWrapProps>>

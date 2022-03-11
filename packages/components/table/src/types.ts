@@ -11,7 +11,7 @@ import { type DefineComponent, FunctionalComponent, type HTMLAttributes, type VN
 
 import { type BreakpointKey } from '@idux/cdk/breakpoint'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
 import { type EmptyProps } from '@idux/components/empty'
 import { type HeaderProps } from '@idux/components/header'
 import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
@@ -52,8 +52,8 @@ export const tableProps = {
   onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
-export type TableProps = IxInnerPropTypes<typeof tableProps>
-export type TablePublicProps = IxPublicPropTypes<typeof tableProps>
+export type TableProps = ExtractInnerPropTypes<typeof tableProps>
+export type TablePublicProps = ExtractPublicPropTypes<typeof tableProps>
 export interface TableBindings {
   scrollTo: VirtualScrollToFn
 }
@@ -205,13 +205,13 @@ export const tableHeadRowProps = {
   columns: IxPropTypes.array<TableColumnMergedExtra>().isRequired,
 }
 
-export type TableHeadRowProps = IxInnerPropTypes<typeof tableHeadRowProps>
+export type TableHeadRowProps = ExtractInnerPropTypes<typeof tableHeadRowProps>
 
 export const tableHeadCellProps = {
   column: IxPropTypes.object<TableColumnMerged>().isRequired,
 }
 
-export type TableHeadCellProps = IxInnerPropTypes<typeof tableHeadCellProps>
+export type TableHeadCellProps = ExtractInnerPropTypes<typeof tableHeadCellProps>
 
 export const tableBodyRowProps = {
   expanded: IxPropTypes.bool,
@@ -222,7 +222,7 @@ export const tableBodyRowProps = {
   rowKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
 }
 
-export type TableBodyRowProps = IxInnerPropTypes<typeof tableBodyRowProps>
+export type TableBodyRowProps = ExtractInnerPropTypes<typeof tableBodyRowProps>
 
 export const tableBodyCellProps = {
   column: IxPropTypes.object<TableColumnMerged>().isRequired,
@@ -238,14 +238,14 @@ export const tableBodyCellProps = {
   handleSelect: IxPropTypes.func<() => void>(),
 }
 
-export type TableBodyCellProps = IxInnerPropTypes<typeof tableBodyCellProps>
+export type TableBodyCellProps = ExtractInnerPropTypes<typeof tableBodyCellProps>
 
 export const tableMeasureCellProps = {
   cellKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
   changeColumnWidth: IxPropTypes.func<(key: VKey, width: number | false) => void>().isRequired,
 }
 
-export type TableMeasureCellProps = IxInnerPropTypes<typeof tableMeasureCellProps>
+export type TableMeasureCellProps = ExtractInnerPropTypes<typeof tableMeasureCellProps>
 
 export const tableFilterableTriggerProps = {
   activeFilterBy: IxPropTypes.array<VKey>().isRequired,
@@ -253,7 +253,7 @@ export const tableFilterableTriggerProps = {
   onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
 }
 
-export type TableFilterableTriggerProps = IxInnerPropTypes<typeof tableFilterableTriggerProps>
+export type TableFilterableTriggerProps = ExtractInnerPropTypes<typeof tableFilterableTriggerProps>
 
 export const tableSortableTriggerProps = {
   activeFilterBy: IxPropTypes.array<VKey>().isRequired,
@@ -261,4 +261,4 @@ export const tableSortableTriggerProps = {
   onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
 }
 
-export type TableSortableTriggerProps = IxInnerPropTypes<typeof tableSortableTriggerProps>
+export type TableSortableTriggerProps = ExtractInnerPropTypes<typeof tableSortableTriggerProps>
