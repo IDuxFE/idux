@@ -11,7 +11,7 @@ import { isFunction, isString } from 'lodash-es'
 
 const targetHashmap: Record<string, HTMLElement> = {}
 
-export function covertTarget(target: PortalTargetType): HTMLElement {
+export function convertTarget(target: PortalTargetType): HTMLElement {
   const temp = isFunction(target) ? target() : target
 
   if (!isString(temp)) {

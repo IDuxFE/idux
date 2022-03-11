@@ -6,7 +6,7 @@
  */
 
 import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
@@ -65,8 +65,8 @@ export const modalProps = {
   onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
 }
 
-export type ModalProps = IxInnerPropTypes<typeof modalProps>
-export type ModalPublicProps = IxPublicPropTypes<typeof modalProps>
+export type ModalProps = ExtractInnerPropTypes<typeof modalProps>
+export type ModalPublicProps = ExtractPublicPropTypes<typeof modalProps>
 export interface ModalBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -19,7 +19,7 @@ export const tagProps = {
   shape: IxPropTypes.oneOf<TagShape>(['round', 'rect']),
 }
 
-export type TagProps = IxInnerPropTypes<typeof tagProps>
-export type TagPublicProps = IxPublicPropTypes<typeof tagProps>
+export type TagProps = ExtractInnerPropTypes<typeof tagProps>
+export type TagPublicProps = ExtractPublicPropTypes<typeof tagProps>
 export type TagComponent = DefineComponent<Omit<HTMLAttributes, keyof TagPublicProps> & TagPublicProps>
 export type TagInstance = InstanceType<DefineComponent<TagProps>>

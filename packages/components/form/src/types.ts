@@ -6,7 +6,7 @@
  */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { ColProps } from '@idux/components/grid'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -27,8 +27,8 @@ export const formProps = {
   statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]).def(false),
 }
 
-export type FormProps = IxInnerPropTypes<typeof formProps>
-export type FormPublicProps = IxPublicPropTypes<typeof formProps>
+export type FormProps = ExtractInnerPropTypes<typeof formProps>
+export type FormPublicProps = ExtractPublicPropTypes<typeof formProps>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
@@ -60,8 +60,8 @@ export const formItemProps = {
   statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]),
 }
 
-export type FormItemProps = IxInnerPropTypes<typeof formItemProps>
-export type FormItemPublicProps = IxPublicPropTypes<typeof formItemProps>
+export type FormItemProps = ExtractInnerPropTypes<typeof formItemProps>
+export type FormItemPublicProps = ExtractPublicPropTypes<typeof formItemProps>
 export type FormItemComponent = DefineComponent<Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps>
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
@@ -69,8 +69,8 @@ export const formWrapperProps = {
   control: controlPropDef,
 }
 
-export type FormWrapperProps = IxInnerPropTypes<typeof formWrapperProps>
-export type FormWrapperPublicProps = IxPublicPropTypes<typeof formWrapperProps>
+export type FormWrapperProps = ExtractInnerPropTypes<typeof formWrapperProps>
+export type FormWrapperPublicProps = ExtractPublicPropTypes<typeof formWrapperProps>
 export type FormWrapperComponent = DefineComponent<
   Omit<HTMLAttributes, keyof FormWrapperPublicProps> & FormWrapperPublicProps
 >

@@ -17,7 +17,7 @@ import { IxButton } from '@idux/components/button'
 import { IxInput } from '@idux/components/input'
 import { IxTree } from '@idux/components/tree'
 
-import { covertMergeNodes, covertMergedNodeMap } from '../composables/useDataSource'
+import { convertMergeNodes, convertMergedNodeMap } from '../composables/useDataSource'
 import { treeSelectToken } from '../token'
 
 export default defineComponent({
@@ -95,8 +95,8 @@ export default defineComponent({
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)
       if (childrenNodes.length && currNode) {
-        const mergedChildren = covertMergeNodes(props, getNodeKey, childrenNodes, config, key)
-        covertMergedNodeMap(mergedChildren, nodeMap)
+        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, config, key)
+        convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawNode.children = childrenNodes
         currNode.children = mergedChildren
         setLoadedKeys(loadedKeys)

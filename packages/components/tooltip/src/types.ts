@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -26,8 +26,8 @@ export const tooltipProps = {
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
 }
 
-export type TooltipProps = IxInnerPropTypes<typeof tooltipProps>
-export type TooltipPublicProps = IxPublicPropTypes<typeof tooltipProps>
+export type TooltipProps = ExtractInnerPropTypes<typeof tooltipProps>
+export type TooltipPublicProps = ExtractPublicPropTypes<typeof tooltipProps>
 export interface TooltipBindings {
   updatePopper: () => void
 }

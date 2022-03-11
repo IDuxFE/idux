@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -20,8 +20,8 @@ export const statisticProps = {
   value: IxPropTypes.oneOfType([String, Number]).def(''),
 }
 
-export type StatisticProps = IxInnerPropTypes<typeof statisticProps>
-export type StatisticPublicProps = IxPublicPropTypes<typeof statisticProps>
+export type StatisticProps = ExtractInnerPropTypes<typeof statisticProps>
+export type StatisticPublicProps = ExtractPublicPropTypes<typeof statisticProps>
 export type StatisticComponent = DefineComponent<
   Omit<HTMLAttributes, keyof StatisticPublicProps> & StatisticPublicProps
 >

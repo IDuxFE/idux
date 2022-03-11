@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -36,8 +36,8 @@ export const messageProps = {
   onClose: IxPropTypes.emit<(evt?: Event) => void>(),
 }
 
-export type MessageProps = IxInnerPropTypes<typeof messageProps>
-export type MessagePublicProps = IxPublicPropTypes<typeof messageProps>
+export type MessageProps = ExtractInnerPropTypes<typeof messageProps>
+export type MessagePublicProps = ExtractPublicPropTypes<typeof messageProps>
 export type MessageComponent = DefineComponent<Omit<HTMLAttributes, keyof MessagePublicProps> & MessagePublicProps>
 export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 
@@ -58,7 +58,7 @@ export interface MessageProviderRef {
   destroyAll: () => void
 }
 
-export type MessageProviderProps = IxInnerPropTypes<typeof messageProviderProps>
-export type MessageProviderPublicProps = IxPublicPropTypes<typeof messageProviderProps>
+export type MessageProviderProps = ExtractInnerPropTypes<typeof messageProviderProps>
+export type MessageProviderPublicProps = ExtractPublicPropTypes<typeof messageProviderProps>
 export type MessageProviderComponent = DefineComponent<MessageProviderPublicProps, MessageProviderRef>
 export type MessageProviderInstance = InstanceType<DefineComponent<MessageProviderProps, MessageProviderRef>>

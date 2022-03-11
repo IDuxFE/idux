@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -39,8 +39,8 @@ export const timePanelProps = {
   onChange: IxPropTypes.emit<(value: Date) => void>(),
 }
 
-export type TimePanelProps = IxInnerPropTypes<typeof timePanelProps>
-export type TimePanelPublicProps = IxPublicPropTypes<typeof timePanelProps>
+export type TimePanelProps = ExtractInnerPropTypes<typeof timePanelProps>
+export type TimePanelPublicProps = ExtractPublicPropTypes<typeof timePanelProps>
 export type TimePanelComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TimePanelPublicProps> & TimePanelPublicProps
 >
@@ -69,8 +69,8 @@ export const timePanelCellProps = {
   // events
   onChange: IxPropTypes.emit<(value: number | string) => void>(),
 }
-export type BaseTimePanelProps = IxInnerPropTypes<typeof baseTimePanelProps>
-export type TimePanelColumnProps = IxInnerPropTypes<typeof timePanelColumnProps>
-export type TimePanelCellProps = IxInnerPropTypes<typeof timePanelCellProps>
+export type BaseTimePanelProps = ExtractInnerPropTypes<typeof baseTimePanelProps>
+export type TimePanelColumnProps = ExtractInnerPropTypes<typeof timePanelColumnProps>
+export type TimePanelCellProps = ExtractInnerPropTypes<typeof timePanelCellProps>
 
 export type TimePanelColumnType = 'hour' | 'minute' | 'second' | 'AM/PM'

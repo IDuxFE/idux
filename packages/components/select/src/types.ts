@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNode, VNodeChild, VNodeTypes } from 'vue'
@@ -74,8 +74,8 @@ export const selectProps = {
   overlayItemHeight: IxPropTypes.number.def(32),
 }
 
-export type SelectProps = IxInnerPropTypes<typeof selectProps>
-export type SelectPublicProps = Omit<IxPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
+export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
+export type SelectPublicProps = Omit<ExtractPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -127,7 +127,7 @@ export const selectorProps = {
   clearable: IxPropTypes.bool,
   suffix: IxPropTypes.string,
 }
-export type SelectorProps = IxInnerPropTypes<typeof optionProps>
+export type SelectorProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionProps = {
   disabled: IxPropTypes.bool,
@@ -137,10 +137,10 @@ export const optionProps = {
   rawOption: IxPropTypes.object<SelectOptionProps>().isRequired,
   value: IxPropTypes.oneOfType([String, Number, Object]),
 }
-export type OptionProps = IxInnerPropTypes<typeof optionProps>
+export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
   label: IxPropTypes.string,
   rawOption: IxPropTypes.object<SelectOptionGroupProps>().isRequired,
 }
-export type OptionGroupProps = IxInnerPropTypes<typeof optionGroupProps>
+export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

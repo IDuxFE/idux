@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -27,7 +27,7 @@ export const spaceProps = {
   wrap: IxPropTypes.bool,
 }
 
-export type SpaceProps = IxInnerPropTypes<typeof spaceProps>
-export type SpacePublicProps = IxPublicPropTypes<typeof spaceProps>
+export type SpaceProps = ExtractInnerPropTypes<typeof spaceProps>
+export type SpacePublicProps = ExtractPublicPropTypes<typeof spaceProps>
 export type SpaceComponent = DefineComponent<Omit<HTMLAttributes, keyof SpacePublicProps> & SpacePublicProps>
 export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

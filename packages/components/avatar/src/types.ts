@@ -6,7 +6,7 @@
  */
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -34,7 +34,7 @@ export const avatarProps = {
   onError: IxPropTypes.emit<(evt: Event) => boolean | void>(),
 }
 
-export type AvatarProps = IxInnerPropTypes<typeof avatarProps>
-export type AvatarPublicProps = IxPublicPropTypes<typeof avatarProps>
+export type AvatarProps = ExtractInnerPropTypes<typeof avatarProps>
+export type AvatarPublicProps = ExtractPublicPropTypes<typeof avatarProps>
 export type AvatarComponent = DefineComponent<Omit<HTMLAttributes, keyof AvatarPublicProps> & AvatarPublicProps>
 export type AvatarInstance = InstanceType<DefineComponent<AvatarProps>>

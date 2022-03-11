@@ -12,7 +12,7 @@ import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref, watch
 
 import { throttleRAF } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { covertTarget } from '@idux/components/utils'
+import { convertTarget } from '@idux/components/utils'
 
 import { affixProps } from './types'
 import {
@@ -107,7 +107,7 @@ export default defineComponent({
     )
 
     function initContainer() {
-      targetRef.value = covertTarget(props.target)
+      targetRef.value = convertTarget(props.target)
       observeTarget(targetRef.value, throttleMeasure)
     }
 

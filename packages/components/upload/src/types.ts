@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ProgressProps } from '@idux/components/progress'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
@@ -84,8 +84,8 @@ export const uploadProps = {
   onFileStatusChange: IxPropTypes.emit<(file: UploadFile) => void>(),
   onRequestChange: IxPropTypes.emit<(option: UploadRequestChangeOption) => void>(),
 }
-export type UploadProps = IxInnerPropTypes<typeof uploadProps>
-export type UploadPublicProps = IxPublicPropTypes<typeof uploadProps>
+export type UploadProps = ExtractInnerPropTypes<typeof uploadProps>
+export type UploadPublicProps = ExtractPublicPropTypes<typeof uploadProps>
 export type UploadComponent = DefineComponent<Omit<HTMLAttributes, keyof UploadPublicProps> & UploadPublicProps>
 export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 
@@ -97,8 +97,8 @@ export const uploadFilesProps = {
   onRemove: IxPropTypes.emit<(file: UploadFile) => boolean | Promise<boolean>>(),
   onRetry: IxPropTypes.emit<(file: UploadFile) => void>(),
 }
-export type UploadFilesProps = IxInnerPropTypes<typeof uploadFilesProps>
-export type UploadFilesPublicProps = IxPublicPropTypes<typeof uploadFilesProps>
+export type UploadFilesProps = ExtractInnerPropTypes<typeof uploadFilesProps>
+export type UploadFilesPublicProps = ExtractPublicPropTypes<typeof uploadFilesProps>
 export type UploadFilesComponent = DefineComponent<
   Omit<HTMLAttributes, keyof UploadFilesPublicProps> & UploadFilesPublicProps
 >

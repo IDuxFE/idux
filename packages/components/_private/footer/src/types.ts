@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
@@ -30,7 +30,7 @@ export const footerProps = {
   okText: IxPropTypes.string,
 }
 
-export type FooterProps = IxInnerPropTypes<typeof footerProps>
-export type FooterPublicProps = IxPublicPropTypes<typeof footerProps>
+export type FooterProps = ExtractInnerPropTypes<typeof footerProps>
+export type FooterPublicProps = ExtractPublicPropTypes<typeof footerProps>
 export type FooterComponent = DefineComponent<Omit<HTMLAttributes, keyof FooterPublicProps> & FooterPublicProps>
 export type FooterInstance = InstanceType<DefineComponent<FooterProps>>

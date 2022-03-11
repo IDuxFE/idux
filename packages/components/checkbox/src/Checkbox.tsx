@@ -10,7 +10,7 @@ import { type ComputedRef, computed, defineComponent, inject, normalizeClass, re
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { covertStringVNode, useFormAccessor, useFormElement } from '@idux/components/utils'
+import { convertStringVNode, useFormAccessor, useFormElement } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'
@@ -56,7 +56,7 @@ export default defineComponent({
       const { autofocus, value, label } = props
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
       const prefixCls = mergedPrefixCls.value
-      const labelNode = covertStringVNode(slots.default, label)
+      const labelNode = convertStringVNode(slots.default, label)
       return (
         <label
           class={classes.value}

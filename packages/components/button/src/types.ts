@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -28,8 +28,8 @@ export const buttonProps = {
   type: IxPropTypes.oneOf<ButtonType>(['button', 'submit', 'reset']).def('button'),
 }
 
-export type ButtonProps = IxInnerPropTypes<typeof buttonProps>
-export type ButtonPublicProps = IxPublicPropTypes<typeof buttonProps>
+export type ButtonProps = ExtractInnerPropTypes<typeof buttonProps>
+export type ButtonPublicProps = ExtractPublicPropTypes<typeof buttonProps>
 export type ButtonComponent = DefineComponent<
   Omit<ButtonHTMLAttributes | AnchorHTMLAttributes, keyof ButtonPublicProps> & ButtonPublicProps
 >
@@ -41,8 +41,8 @@ export const buttonGroupProps = {
   shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
 }
 
-export type ButtonGroupProps = IxInnerPropTypes<typeof buttonGroupProps>
-export type ButtonGroupPublicProps = IxPublicPropTypes<typeof buttonGroupProps>
+export type ButtonGroupProps = ExtractInnerPropTypes<typeof buttonGroupProps>
+export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps>
 export type ButtonGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ButtonGroupPublicProps> & ButtonGroupPublicProps
 >

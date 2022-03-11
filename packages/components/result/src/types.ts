@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -19,7 +19,7 @@ export const resultProps = {
   title: IxPropTypes.string,
 }
 
-export type ResultProps = IxInnerPropTypes<typeof resultProps>
-export type ResultPublicProps = IxPublicPropTypes<typeof resultProps>
+export type ResultProps = ExtractInnerPropTypes<typeof resultProps>
+export type ResultPublicProps = ExtractPublicPropTypes<typeof resultProps>
 export type ResultComponent = DefineComponent<Omit<HTMLAttributes, keyof ResultPublicProps> & ResultPublicProps>
 export type ResultInstance = InstanceType<DefineComponent<ResultProps>>

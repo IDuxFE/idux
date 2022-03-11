@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { TimePickerProps } from '@idux/components/time-picker'
 import type { DefineComponent, HTMLAttributes, VNode, VNodeTypes } from 'vue'
@@ -44,7 +44,7 @@ const datePickerCommonProps = {
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
 }
 
-export type DatePickerCommonProps = IxInnerPropTypes<typeof datePickerCommonProps>
+export type DatePickerCommonProps = ExtractInnerPropTypes<typeof datePickerCommonProps>
 export interface DatePickerCommonBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -63,8 +63,8 @@ export const datePickerProps = {
   onInput: IxPropTypes.emit<(evt: Event) => void>(),
 }
 
-export type DatePickerProps = IxInnerPropTypes<typeof datePickerProps>
-export type DatePickerPublicProps = IxPublicPropTypes<typeof datePickerProps>
+export type DatePickerProps = ExtractInnerPropTypes<typeof datePickerProps>
+export type DatePickerPublicProps = ExtractPublicPropTypes<typeof datePickerProps>
 export type DatePickerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof DatePickerPublicProps> & DatePickerPublicProps,
   DatePickerCommonBindings
@@ -87,8 +87,8 @@ export const dateRangePickerProps = {
   'onUpdate:value': IxPropTypes.emit<(value: any[]) => void>(),
 }
 
-export type DateRangePickerProps = IxInnerPropTypes<typeof dateRangePickerProps>
-export type DateRangePickerPublicProps = IxPublicPropTypes<typeof dateRangePickerProps>
+export type DateRangePickerProps = ExtractInnerPropTypes<typeof dateRangePickerProps>
+export type DateRangePickerPublicProps = ExtractPublicPropTypes<typeof dateRangePickerProps>
 export type DateRangePickerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof DateRangePickerPublicProps> & DateRangePickerPublicProps,
   DatePickerCommonBindings

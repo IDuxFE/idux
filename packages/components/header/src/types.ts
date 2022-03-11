@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { AvatarProps } from '@idux/components/avatar'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -29,7 +29,7 @@ export const headerProps = {
   onSuffixClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
 }
 
-export type HeaderProps = IxInnerPropTypes<typeof headerProps>
-export type HeaderPublicProps = IxPublicPropTypes<typeof headerProps>
+export type HeaderProps = ExtractInnerPropTypes<typeof headerProps>
+export type HeaderPublicProps = ExtractPublicPropTypes<typeof headerProps>
 export type HeaderComponent = DefineComponent<Omit<HTMLAttributes, keyof HeaderPublicProps> & HeaderPublicProps>
 export type HeaderInstance = InstanceType<DefineComponent<HeaderProps>>

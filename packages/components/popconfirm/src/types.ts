@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
 
@@ -31,8 +31,8 @@ export interface PopconfirmButtonProps extends ButtonProps {
   onClick?: (evt: Event) => void
 }
 
-export type PopconfirmProps = IxInnerPropTypes<typeof popconfirmProps>
-export type PopconfirmPublicProps = IxPublicPropTypes<typeof popconfirmProps>
+export type PopconfirmProps = ExtractInnerPropTypes<typeof popconfirmProps>
+export type PopconfirmPublicProps = ExtractPublicPropTypes<typeof popconfirmProps>
 export interface PopconfirmBindings {
   updatePopper: () => void
   cancel: (evt?: Event | unknown) => Promise<void>

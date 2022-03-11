@@ -14,7 +14,7 @@ import { isString } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
 import { IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
-import { covertIconVNode, covertStringVNode } from '@idux/components/utils'
+import { convertIconVNode, convertStringVNode } from '@idux/components/utils'
 
 import { headerProps } from './types'
 
@@ -50,11 +50,11 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
 
-      const prefixIconNode = covertIconVNode(slots, props, 'prefix')
-      const suffixIconNode = covertIconVNode(slots, props, 'suffix')
-      const titleNode = covertStringVNode(slots.default, props.title)
-      const subTitleNode = covertStringVNode(slots, props, 'subTitle')
-      const descriptionNode = covertStringVNode(slots, props, 'description')
+      const prefixIconNode = convertIconVNode(slots, props, 'prefix')
+      const suffixIconNode = convertIconVNode(slots, props, 'suffix')
+      const titleNode = convertStringVNode(slots.default, props.title)
+      const subTitleNode = convertStringVNode(slots, props, 'subTitle')
+      const descriptionNode = convertStringVNode(slots, props, 'description')
 
       return (
         <div class={classes.value}>

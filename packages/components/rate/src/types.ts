@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
@@ -29,8 +29,8 @@ export const rateProps = {
   onKeyDown: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
 }
 
-export type RateProps = IxInnerPropTypes<typeof rateProps>
-export type RatePublicProps = IxPublicPropTypes<typeof rateProps>
+export type RateProps = ExtractInnerPropTypes<typeof rateProps>
+export type RatePublicProps = ExtractPublicPropTypes<typeof rateProps>
 export interface RateBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void

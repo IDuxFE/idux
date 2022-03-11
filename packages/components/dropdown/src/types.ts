@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
@@ -29,7 +29,7 @@ export const dropdownProps = {
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
 }
 
-export type DropdownProps = IxInnerPropTypes<typeof dropdownProps>
-export type DropdownPublicProps = IxPublicPropTypes<typeof dropdownProps>
+export type DropdownProps = ExtractInnerPropTypes<typeof dropdownProps>
+export type DropdownPublicProps = ExtractPublicPropTypes<typeof dropdownProps>
 export type DropdownComponent = DefineComponent<Omit<HTMLAttributes, keyof DropdownPublicProps> & DropdownPublicProps>
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>

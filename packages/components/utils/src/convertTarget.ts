@@ -9,7 +9,7 @@ import { isFunction, isString } from 'lodash-es'
 
 import { Logger } from '@idux/cdk/utils'
 
-export function covertTarget(
+export function convertTarget(
   target: string | HTMLElement | (() => string | HTMLElement) | undefined,
 ): HTMLElement | Window {
   const temp = isFunction(target) ? target() : target

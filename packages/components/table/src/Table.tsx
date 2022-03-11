@@ -106,13 +106,13 @@ export default defineComponent({
         prefixCls,
       )
       const children = [header, paginationTop, <MainTable />, paginationBottom, footer]
-      const spinProps = covertSpinProps(props.spin)
+      const spinProps = convertSpinProps(props.spin)
       const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
       return <div class={classes.value}>{spinWrapper}</div>
     }
   },
 })
 
-function covertSpinProps(spin: boolean | SpinProps | undefined) {
+function convertSpinProps(spin: boolean | SpinProps | undefined) {
   return isBoolean(spin) ? { spinning: spin } : spin
 }

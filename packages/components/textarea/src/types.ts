@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, TextareaHTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -20,8 +20,8 @@ export const textareaProps = {
   showCount: IxPropTypes.bool,
 }
 
-export type TextareaProps = IxInnerPropTypes<typeof textareaProps>
-export type TextareaPublicProps = IxPublicPropTypes<typeof textareaProps>
+export type TextareaProps = ExtractInnerPropTypes<typeof textareaProps>
+export type TextareaPublicProps = ExtractPublicPropTypes<typeof textareaProps>
 export interface TextareaBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void

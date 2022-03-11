@@ -16,7 +16,7 @@ import { computed, ref, watch } from 'vue'
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
 import { callChange, getParentKeys } from '../utils'
-import { covertMergeNodes, covertMergedNodeMap } from './useDataSource'
+import { convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 
 export interface ExpandableContext {
   expandIcon: ComputedRef<string>
@@ -71,8 +71,8 @@ export function useExpandable(
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)!
       if (childrenNodes.length) {
-        const mergedChildren = covertMergeNodes(props, getNodeKey, childrenNodes, key)
-        covertMergedNodeMap(mergedChildren, nodeMap)
+        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, key)
+        convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawNode[childrenKey] = childrenNodes
         currNode.children = mergedChildren
         const newLoadedKeys = [...loadedKeys.value, key]

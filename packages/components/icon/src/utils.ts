@@ -56,7 +56,7 @@ export async function loadSvgElementFormScript(iconName: string): Promise<SVGEle
     svg = await cached
   }
   if (!svg) {
-    svg = covertSVGElement(`<svg><use xlink:href="#${iconName}"></svg>`)!
+    svg = convertSVGElement(`<svg><use xlink:href="#${iconName}"></svg>`)!
     setSVGAttribute(svg, iconName)
     iconCache.set(cachedName, svg)
   }
@@ -71,7 +71,7 @@ async function createSVGElement(
   let svg: SVGElement | null = null
   const icon = await loadIconDefinition(iconName, loadIconDynamically)
   if (icon) {
-    svg = covertSVGElement(icon.svg)
+    svg = convertSVGElement(icon.svg)
     if (svg) {
       setSVGAttribute(svg, iconName)
       iconCache.set(iconName, svg)
@@ -107,7 +107,7 @@ function validSVGString(svg: string): boolean {
   return !!svg && svg.includes('<svg')
 }
 
-function covertSVGElement(svg: string): SVGElement | null {
+function convertSVGElement(svg: string): SVGElement | null {
   const div = document.createElement('div')
   div.innerHTML = svg
   return div.querySelector('svg')
@@ -128,7 +128,7 @@ function setSVGAttribute(svg: SVGElement, iconName: string): void {
   svg.setAttribute('data-icon', iconName)
 }
 
-export function covertSVGNode(child: VNodeChild | undefined): VNode | undefined {
+export function convertSVGNode(child: VNodeChild | undefined): VNode | undefined {
   const node = getFirstValidNode(child)
   if (!node || node.type !== 'svg') {
     Logger.warn('components/icon', 'The children must is svg element')

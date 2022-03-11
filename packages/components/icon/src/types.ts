@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -18,8 +18,8 @@ export const iconProps = {
   size: IxPropTypes.oneOfType([String, Number]),
 }
 
-export type IconProps = IxInnerPropTypes<typeof iconProps>
-export type IconPublicProps = IxPublicPropTypes<typeof iconProps>
+export type IconProps = ExtractInnerPropTypes<typeof iconProps>
+export type IconPublicProps = ExtractPublicPropTypes<typeof iconProps>
 export type IconComponent = DefineComponent<Omit<HTMLAttributes, keyof IconPublicProps> & IconPublicProps>
 export type IconInstance = InstanceType<DefineComponent<IconProps>>
 

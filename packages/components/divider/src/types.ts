@@ -7,7 +7,7 @@
 
 import { type DefineComponent, type HTMLAttributes } from 'vue'
 
-import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes } from '@idux/cdk/utils'
 
 export const dividerProps = {
   dashed: IxPropTypes.bool,
@@ -20,7 +20,7 @@ export const dividerProps = {
   vertical: IxPropTypes.bool,
 }
 
-export type DividerProps = IxInnerPropTypes<typeof dividerProps>
-export type DividerPublicProps = IxPublicPropTypes<typeof dividerProps>
+export type DividerProps = ExtractInnerPropTypes<typeof dividerProps>
+export type DividerPublicProps = ExtractPublicPropTypes<typeof dividerProps>
 export type DividerComponent = DefineComponent<Omit<HTMLAttributes, keyof DividerPublicProps> & DividerPublicProps>
 export type DividerInstance = InstanceType<DefineComponent<DividerProps>>

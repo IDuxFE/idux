@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { IxInnerPropTypes, IxPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -23,8 +23,8 @@ export const anchorProps = {
   onClick: IxPropTypes.emit<(evt: MouseEvent, link: AnchorLinkProps) => void>(),
 }
 
-export type AnchorProps = IxInnerPropTypes<typeof anchorProps>
-export type AnchorPublicProps = IxPublicPropTypes<typeof anchorProps>
+export type AnchorProps = ExtractInnerPropTypes<typeof anchorProps>
+export type AnchorPublicProps = ExtractPublicPropTypes<typeof anchorProps>
 export type AnchorComponent = DefineComponent<Omit<HTMLAttributes, keyof AnchorPublicProps> & AnchorPublicProps>
 export type AnchorInstance = InstanceType<DefineComponent<AnchorProps>>
 
@@ -33,8 +33,8 @@ export const linkProps = {
   title: IxPropTypes.string,
 }
 
-export type AnchorLinkProps = IxInnerPropTypes<typeof linkProps>
-export type AnchorLinkPublicProps = IxPublicPropTypes<typeof linkProps>
+export type AnchorLinkProps = ExtractInnerPropTypes<typeof linkProps>
+export type AnchorLinkPublicProps = ExtractPublicPropTypes<typeof linkProps>
 export type AnchorLinkComponent = DefineComponent<
   Omit<HTMLAttributes, keyof AnchorLinkPublicProps> & AnchorLinkPublicProps
 >

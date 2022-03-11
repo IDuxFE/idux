@@ -10,7 +10,7 @@
 import { type DefineComponent, type FunctionalComponent, type HTMLAttributes, type VNode, type VNodeChild } from 'vue'
 
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { type IxInnerPropTypes, IxPropTypes, type IxPublicPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
@@ -40,8 +40,8 @@ export const menuProps = {
   onClick: IxPropTypes.emit<(options: MenuClickOptions) => void>(),
 }
 
-export type MenuProps = IxInnerPropTypes<typeof menuProps>
-export type MenuPublicProps = IxPublicPropTypes<typeof menuProps>
+export type MenuProps = ExtractInnerPropTypes<typeof menuProps>
+export type MenuPublicProps = ExtractPublicPropTypes<typeof menuProps>
 export type MenuComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuPublicProps> & MenuPublicProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
 

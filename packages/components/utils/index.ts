@@ -6,8 +6,8 @@
  */
 
 export * from './src/colors'
-export * from './src/covertTarget'
-export * from './src/covertVNode'
+export * from './src/convertTarget'
+export * from './src/convertVNode'
 export * from './src/useFormAccessor'
 export * from './src/useFormElement'
 export * from './src/useKey'
