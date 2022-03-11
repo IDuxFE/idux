@@ -25,6 +25,7 @@ export default defineComponent({
     const {
       props: selectProps,
       slots,
+      config,
       mergedPrefixCls,
       isDisabled,
       selectedValue,
@@ -64,6 +65,8 @@ export default defineComponent({
         (!inputValue.value || selectProps.searchable === 'overlay')
       )
     })
+
+    const clearIcon = computed(() => selectProps.clearIcon ?? config.clearIcon)
 
     return () => {
       const { clearable, suffix } = props
@@ -118,7 +121,7 @@ export default defineComponent({
           )}
           {clearable && (
             <div class={`${prefixCls}-clear`} onClick={handleClear}>
-              <IxIcon name="close-circle" />
+              {slots.clearIcon ? slots.clearIcon() : <IxIcon name={clearIcon.value} />}
             </div>
           )}
         </div>

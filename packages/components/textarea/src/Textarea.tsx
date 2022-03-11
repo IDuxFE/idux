@@ -140,6 +140,10 @@ function renderSuffix(
   if (!clearVisible) {
     classes += ` ${prefixCls}-suffix-hidden`
   }
-  const children = clearIconSlot?.({ onClear }) ?? <IxIcon name={clearIcon} onClick={onClear}></IxIcon>
-  return <span class={classes}>{children}</span>
+
+  return (
+    <span class={classes} onClick={onClear}>
+      {clearIconSlot ? clearIconSlot() : <IxIcon name={clearIcon}></IxIcon>}
+    </span>
+  )
 }

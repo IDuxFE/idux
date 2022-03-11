@@ -165,6 +165,28 @@ describe('Select', () => {
       expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
     })
 
+    test('clearIcon work', async () => {
+      const wrapper = SelectMount({ props: { clearable: true, clearIcon: 'up' } })
+
+      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-up').exists()).toBe(true)
+
+      await wrapper.setProps({ clearIcon: 'down' })
+
+      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+    })
+
+    test('clearIcon slot work', async () => {
+      const wrapper = SelectMount({
+        props: { clearable: true, clearIcon: 'up' },
+        slots: {
+          clearIcon: () => h(IxIcon, { name: 'down' }),
+        },
+      })
+
+      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-up').exists()).toBe(false)
+      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+    })
+
     test('compareFn work', async () => {
       const compareFn = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
       const wrapper = SelectMount({ props: { value: 't', compareFn } })

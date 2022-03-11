@@ -21,7 +21,7 @@ subtitle: 输入框
 | `addonBefore` | 设置前置标签 | `string \| #addonBefore` | - | - | - |
 | `borderless` | 是否显示边框 | `boolean` | `false` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
-| `clearIcon` | 设置清除图标 | `string \| #clearIcon={onClear}` | `'close-circle'` | ✅ | - |
+| `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `prefix` | 设置前缀图标 | `string \| #prefix` | - | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |

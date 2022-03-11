@@ -51,7 +51,7 @@ export default defineComponent({
       const suffixNode = renderIcon(slots.suffix, suffix, `${prefixCls}-suffix`)
       const clearNode = clearable && (
         <span class={`${prefixCls}-clear${clearVisible ? ' visible' : ''}`} onClick={onClear}>
-          <IxIcon name={clearIcon} />
+          {slots.clearIcon ? slots.clearIcon() : <IxIcon name={clearIcon} />}
         </span>
       )
 

@@ -19,7 +19,7 @@ order: 0
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
-| `clearIcon` | 清除按钮图标 |`string` | `'close-circle'` | ✅ | - |
+| `clearIcon` | 清除按钮图标 |`string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |
 | `format` | 展示的格式 | `string` | - | ✅ | 默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format) |
