@@ -58,14 +58,15 @@ export function useInputState(
   }
 
   const handleCompositionEnd = (evt: CompositionEvent) => {
+    callEmit(props.onCompositionEnd, evt)
     if (isComposing.value) {
       isComposing.value = false
+      handleInput(evt, false)
     }
-    callEmit(props.onCompositionEnd, evt)
   }
 
-  const handleInput = (evt: Event) => {
-    callEmit(props.onInput, evt)
+  const handleInput = (evt: Event, emitInput = true) => {
+    emitInput && callEmit(props.onInput, evt)
     if (isComposing.value) {
       return
     }
