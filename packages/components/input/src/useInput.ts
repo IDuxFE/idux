@@ -72,8 +72,8 @@ export function useInput(
   watch(accessor.valueRef, () => syncValue())
 
   const isComposing = ref(false)
-  const handleInput = (evt: Event) => {
-    callEmit(props.onInput, evt)
+  const handleInput = (evt: Event, emitInput = true) => {
+    emitInput && callEmit(props.onInput, evt)
     if (isComposing.value) {
       return
     }
@@ -96,7 +96,7 @@ export function useInput(
     callEmit(props.onCompositionEnd, evt)
     if (isComposing.value) {
       isComposing.value = false
-      handleInput(evt)
+      handleInput(evt, false)
     }
   }
 
