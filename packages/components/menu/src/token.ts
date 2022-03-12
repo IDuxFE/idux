@@ -28,6 +28,7 @@ export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')
 
 export interface MenuSubContext {
   props: { data: MenuSubProps }
+  key: VKey
   isExpanded: ComputedRef<boolean>
   isSelected: ComputedRef<boolean>
   mode: ComputedRef<MenuMode>

@@ -36,7 +36,6 @@ export default defineComponent({
     const labelStyle = computed(() => ({ paddingLeft: paddingLeft.value }))
 
     const onClick = (evt: Event) => {
-      evt.stopPropagation()
       handleClick(key, 'itemGroup', evt)
     }
 
@@ -59,8 +58,8 @@ export default defineComponent({
 
       const prefixCls = `${mergedPrefixCls.value}-item-group`
       return (
-        <li class={prefixCls} {...additional} onClick={onClick}>
-          <div class={`${prefixCls}-label`} style={labelStyle.value}>
+        <li class={prefixCls} {...additional}>
+          <div class={`${prefixCls}-label`} style={labelStyle.value} onClick={onClick}>
             {iconNode}
             <span>{labelNode}</span>
           </div>
