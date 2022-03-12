@@ -44,7 +44,7 @@ export const zhCNMessages = {
   },
   maxLength: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const name = control.name || defaultName
-    return `${name}的长度不能小于 ${err.maxLength}, 当前长度为 ${err.actual}`
+    return `${name}的长度不能大于 ${err.maxLength}, 当前长度为 ${err.actual}`
   },
   pattern: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const name = control.name || defaultName
