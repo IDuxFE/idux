@@ -61,7 +61,7 @@ export function useFlattedNodes(
       return nodes
     }
 
-    return mergedNodes.value
+    return mergedNodes.value.map(item => ({ ...item, expanded: false, level: 0 }))
   })
 }
 
