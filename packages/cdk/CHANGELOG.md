@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* **cdk:forms:** maxLength message ([#800](https://github.com/IDuxFE/idux/issues/800)) ([93231ab](https://github.com/IDuxFE/idux/commit/93231abe2167adab5265e4d99697c06fc386d63b))
+
+
+### Code Refactoring
+
+* **comp:form:** api redesign and add test ([#763](https://github.com/IDuxFE/idux/issues/763)) ([825066e](https://github.com/IDuxFE/idux/commit/825066e011b46b50f536e413d189a7d7d104c185))
+
+
+### BREAKING CHANGES
+
+* **comp:form:** `hasFeedback` was deprecated, please use `statusIcon` instead.  `extra` was
+deprecated, please use `extraMessage` instead.
+
+
+
+
+
 # [1.0.0-alpha.6](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-02-18)
 
 

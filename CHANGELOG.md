@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* **cdk:forms:** maxLength message ([#800](https://github.com/IDuxFE/idux/issues/800)) ([93231ab](https://github.com/IDuxFE/idux/commit/93231abe2167adab5265e4d99697c06fc386d63b))
+* **comp: checkbox:** onChange returned an error oldValue ([#792](https://github.com/IDuxFE/idux/issues/792)) ([2825def](https://github.com/IDuxFE/idux/commit/2825defa4733e5b5c4c025405428221d82ffa577)), closes [#790](https://github.com/IDuxFE/idux/issues/790)
+* **comp: stepper:** vertical style error without description ([#784](https://github.com/IDuxFE/idux/issues/784)) ([5ec4906](https://github.com/IDuxFE/idux/commit/5ec49062f245755c2811a458e121ca29edec76a3))
+* **comp: tabs:** when scrolling style is wrong ([#785](https://github.com/IDuxFE/idux/issues/785)) ([05cb864](https://github.com/IDuxFE/idux/commit/05cb86494b7e20d96b2ccaa2c9320e4a022ee7e1))
+* **comp:menu:** remove stopPropagation ([#799](https://github.com/IDuxFE/idux/issues/799)) ([fedf778](https://github.com/IDuxFE/idux/commit/fedf778c319a9c69b56b3d7f96c16c55790da35b))
+* **comp:select:** trigger handleInput  when onCompositionEnd ([#801](https://github.com/IDuxFE/idux/issues/801)) ([d157f0c](https://github.com/IDuxFE/idux/commit/d157f0c3470747866c613e5b8151b388ba031fa6)), closes [#786](https://github.com/IDuxFE/idux/issues/786)
+* **comp:tree:** The expanded state of the first layer node is wrong ([#795](https://github.com/IDuxFE/idux/issues/795)) ([aba661a](https://github.com/IDuxFE/idux/commit/aba661a70c20404e1c4df93697c4d25661a54d9c))
+
+
+### Code Refactoring
+
+* **comp:form:** api redesign and add test ([#763](https://github.com/IDuxFE/idux/issues/763)) ([825066e](https://github.com/IDuxFE/idux/commit/825066e011b46b50f536e413d189a7d7d104c185))
+* **comp:locales:** use useGlobalConfig instead of useI18n ([#764](https://github.com/IDuxFE/idux/issues/764)) ([4f50728](https://github.com/IDuxFE/idux/commit/4f50728ae26c6091ac6d9bf85f95af134b16a97d))
+* **comp:radio:** use dataSource instead of options ([#771](https://github.com/IDuxFE/idux/issues/771)) ([25e85a3](https://github.com/IDuxFE/idux/commit/25e85a340edaaa7d26f9a24570f5c687b2ad8e5a))
+* **comp:select:** api redesign ([#773](https://github.com/IDuxFE/idux/issues/773)) ([934c0b2](https://github.com/IDuxFE/idux/commit/934c0b21e14e63860874f4a2fb3664d31e3534d0))
+
+
+### Features
+
+* **comp: button:** add xs and lg sizes ([#780](https://github.com/IDuxFE/idux/issues/780)) ([69f94c8](https://github.com/IDuxFE/idux/commit/69f94c8f9f7f68d7b91eb831b3ee286ed8a3d663))
+* **comp:select:** add clearIcon ([#798](https://github.com/IDuxFE/idux/issues/798)) ([57e88f0](https://github.com/IDuxFE/idux/commit/57e88f039c5b8dc51175687acd2c07f13deb2831))
+* **comp:table:** add ellipsis and less variable ([#778](https://github.com/IDuxFE/idux/issues/778)) ([3d1f3fe](https://github.com/IDuxFE/idux/commit/3d1f3fe2d8b02e212e6270f0f48fd3405d7550b2)), closes [#769](https://github.com/IDuxFE/idux/issues/769)
+* **comp:tabs:** add less variable ([#777](https://github.com/IDuxFE/idux/issues/777)) ([fa653f9](https://github.com/IDuxFE/idux/commit/fa653f91565dff8a5384cab6d8e2af6ccae54159)), closes [#768](https://github.com/IDuxFE/idux/issues/768)
+* **pro:layout:** add siderHover and compress props ([#759](https://github.com/IDuxFE/idux/issues/759)) ([faf0913](https://github.com/IDuxFE/idux/commit/faf09130c895a82ca65eee8a82dc082e36cc9247))
+
+
+### BREAKING CHANGES
+
+* **comp:select:** `compareWith` was deprecated, please use `compareFn` instead, `options` was deprecated, please use `dataSource` instead, `searchFilter` was deprecated, please use `searchFn` instead.
+* **comp:radio:** `options` was deprecated, please use `dataSource` instead
+* **comp:locales:** `useI18n` was removed.
+* **comp:form:** `hasFeedback` was deprecated, please use `statusIcon` instead.  `extra` was
+deprecated, please use `extraMessage` instead.
+
+
+
+
+
 # [1.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.0) (2022-03-01)
 
 
