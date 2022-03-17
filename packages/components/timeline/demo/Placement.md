@@ -1,9 +1,9 @@
 ---
-order: 0
+order: 4
 title:
   zh: 内容相对于时间轴的方向
 ---
 
 ## zh
 
-position可以设置为right、alternate和left
+`placement` 可以设置为`end`、`alternate`和`start`

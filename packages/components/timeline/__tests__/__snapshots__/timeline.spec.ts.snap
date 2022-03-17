@@ -1,434 +1,924 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Timeline pending slot work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right ix-timeline-item-pending\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
-    <div class=\\"ix-timeline-item-content\\">pendingSlotText</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">pendingSlotText</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending slot work 2`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right ix-timeline-item-pending\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"64 64 896 896\\" width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" fill=\\"currentColor\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
-          <path d=\\"M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z\\"></path>
-        </svg></i></div>
-    <div class=\\"ix-timeline-item-content\\">pendingSlotText</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">pendingSlotText</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending slot work 3`] = `
-"<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right ix-timeline-item-pending\\">
+"<ul class=\\"ix-timeline ix-timeline-end ix-timeline-reverse\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
-    <div class=\\"ix-timeline-item-content\\">pendingSlotText</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">pendingSlotText</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending work 2`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right ix-timeline-item-pending\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
-    <div class=\\"ix-timeline-item-content\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\"></div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending work 3`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right ix-timeline-item-pending\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"64 64 896 896\\" width=\\"1em\\" height=\\"1em\\" focusable=\\"false\\" fill=\\"currentColor\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
-          <path d=\\"M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z\\"></path>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
+          <path d=\\"m527.424 64.32 3.712.064a448 448 0 0 1 430.912 432.32v2.368a12.8 12.8 0 0 1-12.8 13.056h-38.336a12.8 12.8 0 0 1-12.8-13.632A384 384 0 0 0 528.64 128.384h-1.792a12.8 12.8 0 0 1-12.608-12.8V77.12a12.8 12.8 0 0 1 13.12-12.8z\\"></path>
         </svg></i></div>
-    <div class=\\"ix-timeline-item-content\\">pendingText</div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">pendingText</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pending work 4`] = `
-"<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right ix-timeline-item-pending\\">
+"<ul class=\\"ix-timeline ix-timeline-end ix-timeline-reverse\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
-    <div class=\\"ix-timeline-item-content\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\"></div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
-  </li>
-</ul>"
-`;
-
-exports[`Timeline pendingDot slot work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
-  </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\">pendingDotSlotText</div>
-    <div class=\\"ix-timeline-item-content\\"></div>
-  </li>
-</ul>"
-`;
-
-exports[`Timeline pendingDot slot work 2`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
-  </li>
-  <li class=\\"ix-timeline-item\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
-  </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\">pendingDotSlotText</div>
-    <div class=\\"ix-timeline-item-content\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pendingDot work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading ix-icon-spin\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
-    <div class=\\"ix-timeline-item-content\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\"></div>
+    </div>
   </li>
 </ul>"
 `;
 
 exports[`Timeline pendingDot work 2`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-pending-dot ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending-dot\\">
     <div class=\\"ix-timeline-item-line\\"></div>
     <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-custom ix-timeline-item-dot-primary\\">pendingDotText</div>
-    <div class=\\"ix-timeline-item-content\\"></div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\"></div>
+    </div>
   </li>
 </ul>"
 `;
 
-exports[`Timeline position work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+exports[`Timeline placement with item placement work 1`] = `
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
-  </li>
-</ul>"
-`;
-
-exports[`Timeline position work 2`] = `
-"<ul class=\\"ix-timeline ix-timeline-left\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
-  </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
-  </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
-  </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
-    <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
 </ul>"
 `;
 
-exports[`Timeline position work 3`] = `
+exports[`Timeline placement with item placement work 2`] = `
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline placement with item placement work 3`] = `
+"<ul class=\\"ix-timeline ix-timeline-start\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline placement with item placement work 4`] = `
 "<ul class=\\"ix-timeline ix-timeline-alternate\\">
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-right\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item ix-timeline-item-left\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
 </ul>"
 `;
 
-exports[`Timeline render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-right\\"></ul>"`;
+exports[`Timeline placement work 1`] = `
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline placement work 2`] = `
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline placement work 3`] = `
+"<ul class=\\"ix-timeline ix-timeline-start\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline placement work 4`] = `
+"<ul class=\\"ix-timeline ix-timeline-alternate\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-start\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+</ul>"
+`;
+
+exports[`Timeline render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-end\\"></ul>"`;
 
 exports[`Timeline reverse work 1`] = `
-"<ul class=\\"ix-timeline ix-timeline-right\\">
-  <li class=\\"ix-timeline-item\\">
+"<ul class=\\"ix-timeline ix-timeline-end\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">0</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">1</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">2</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
   </li>
-  <li class=\\"ix-timeline-item\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-line\\"></div>
-    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\"></div>
-    <div class=\\"ix-timeline-item-content\\">3</div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
   </li>
 </ul>"
 `;
 
-exports[`Timeline reverse work 2`] = `"<ul class=\\"ix-timeline ix-timeline-right ix-timeline-reverse\\"></ul>"`;
+exports[`Timeline reverse work 2`] = `
+"<ul class=\\"ix-timeline ix-timeline-end ix-timeline-reverse\\">
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">3</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">2</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">1</div>
+    </div>
+  </li>
+  <li class=\\"ix-timeline-item ix-timeline-item-end\\">
+    <div class=\\"ix-timeline-item-line\\"></div>
+    <div class=\\"ix-timeline-item-dot ix-timeline-item-dot-primary\\">
+      <!---->
+    </div>
+    <div class=\\"ix-timeline-item-content\\">
+      <!---->
+      <div class=\\"ix-timeline-item-desc\\">0</div>
+    </div>
+  </li>
+</ul>"
+`;

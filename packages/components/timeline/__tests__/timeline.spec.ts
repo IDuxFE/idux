@@ -1,60 +1,87 @@
 import { MountingOptions, mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
 
-import IxTimeline from '../src/Timeline.vue'
-import IxTimelineItem from '../src/TimelineItem.vue'
+import IxTimeline from '../src/Timeline'
+import IxTimelineItem from '../src/TimelineItem'
 import { TimelineProps } from '../src/types'
 
-const TimelineDefaultSlots = defineComponent({
-  components: { IxTimelineItem },
-  render() {
-    return [
-      h(IxTimelineItem, {}, { default: () => 0 }),
-      h(IxTimelineItem, {}, { default: () => 1 }),
-      h(IxTimelineItem, {}, { default: () => 2 }),
-      h(IxTimelineItem, {}, { default: () => 3 }),
-    ]
-  },
-})
+const TimelineMount = (options?: MountingOptions<Partial<TimelineProps>>) => {
+  const { slots = {}, ...rest } = options || {}
 
-describe.skip('Timeline', () => {
-  const TimelineMount = (options?: MountingOptions<Partial<TimelineProps>>) => mount(IxTimeline, { ...options })
+  const wrapper = mount(IxTimeline, {
+    ...rest,
+    slots: {
+      default: [
+        h(IxTimelineItem, {}, { default: () => 0 }),
+        h(IxTimelineItem, {}, { default: () => 1 }),
+        h(IxTimelineItem, {}, { default: () => 2 }),
+        h(IxTimelineItem, {}, { default: () => 3 }),
+      ],
+      ...slots,
+    },
+  })
 
+  return wrapper
+}
+
+describe('Timeline', () => {
   renderWork(IxTimeline)
 
-  test('position work', async () => {
-    const wrapper = TimelineMount({
-      slots: {
-        default: TimelineDefaultSlots,
-      },
-    })
+  test('placement work', async () => {
+    const wrapper = TimelineMount()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(4)
-    expect(wrapper.findAll('.ix-timeline-item-right').length).toBe(4)
+    expect(wrapper.findAll('.ix-timeline-item-end').length).toBe(4)
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.setProps({ position: 'left' })
-    expect(wrapper.findAll('.ix-timeline-item-left').length).toBe(4)
+    await wrapper.setProps({ placement: 'start' })
+    expect(wrapper.findAll('.ix-timeline-item-start').length).toBe(4)
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.setProps({ position: 'alternate' })
-    expect(wrapper.findAll('.ix-timeline-item-left').length).toBe(2)
-    expect(wrapper.findAll('.ix-timeline-item-right').length).toBe(2)
+    await wrapper.setProps({ placement: 'alternate' })
+    expect(wrapper.findAll('.ix-timeline-item-start').length).toBe(2)
+    expect(wrapper.findAll('.ix-timeline-item-end').length).toBe(2)
     wrapper.findAll('.ix-timeline-item').forEach((item, index) => {
-      const position = index % 2 ? 'left' : 'right'
+      const placement = index % 2 ? 'start' : 'end'
 
-      expect(item.classes()).toContain(`ix-timeline-item-${position}`)
+      expect(item.classes()).toContain(`ix-timeline-item-${placement}`)
     })
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  test('reverse work', async () => {
+  test('placement with item placement work', async () => {
     const wrapper = TimelineMount({
       slots: {
-        default: TimelineDefaultSlots,
+        default: [
+          h(IxTimelineItem, { placement: 'start' }, { default: () => 0 }),
+          h(IxTimelineItem, { placement: 'start' }, { default: () => 1 }),
+          h(IxTimelineItem, { placement: 'start' }, { default: () => 2 }),
+          h(IxTimelineItem, { placement: 'start' }, { default: () => 3 }),
+        ],
       },
     })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(wrapper.findAll('.ix-timeline-item').length).toBe(4)
+    expect(wrapper.findAll('.ix-timeline-item-end').length).toBe(4)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ placement: 'start' })
+    expect(wrapper.findAll('.ix-timeline-item-start').length).toBe(4)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ placement: 'alternate' })
+    expect(wrapper.findAll('.ix-timeline-item-start').length).toBe(4)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('reverse work', async () => {
+    const wrapper = TimelineMount()
     wrapper.findAll('.ix-timeline-item').forEach((item, index) => {
       expect(item.text()).toBe(index.toString())
     })
@@ -72,11 +99,7 @@ describe.skip('Timeline', () => {
   })
 
   test('pending work', async () => {
-    const wrapper = TimelineMount({
-      slots: {
-        default: TimelineDefaultSlots,
-      },
-    })
+    const wrapper = TimelineMount()
     const pendingText = 'pendingText'
 
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(4)
@@ -96,9 +119,6 @@ describe.skip('Timeline', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     const reverseWrapper = TimelineMount({
-      slots: {
-        default: TimelineDefaultSlots,
-      },
       props: {
         pending: true,
         reverse: true,
@@ -121,7 +141,6 @@ describe.skip('Timeline', () => {
     const pendingText = 'pendingText'
     const wrapper = TimelineMount({
       slots: {
-        default: TimelineDefaultSlots,
         pending: pendingSlotText,
       },
     })
@@ -138,7 +157,6 @@ describe.skip('Timeline', () => {
 
     const reverseWrapper = TimelineMount({
       slots: {
-        default: TimelineDefaultSlots,
         pending: pendingSlotText,
       },
       props: {
@@ -159,9 +177,6 @@ describe.skip('Timeline', () => {
 
   test('pendingDot work', async () => {
     const wrapper = TimelineMount({
-      slots: {
-        default: TimelineDefaultSlots,
-      },
       props: {
         pending: true,
       },
@@ -178,25 +193,91 @@ describe.skip('Timeline', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  test('pendingDot slot work', async () => {
-    const pendingDotSlotText = 'pendingDotSlotText'
-    const pendingDotText = 'pendingDotText'
+  test('both work', async () => {
     const wrapper = TimelineMount({
-      slots: {
-        default: TimelineDefaultSlots,
-        pendingDot: pendingDotSlotText,
-      },
       props: {
-        pending: true,
+        both: false,
       },
     })
 
-    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-dot').findAll('.ix-icon').length).toBe(0)
-    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-dot').text()).toBe(pendingDotSlotText)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.classes()).toContain('ix-timeline-not-both')
+  })
+})
 
-    await wrapper.setProps({ pendingDot: pendingDotText })
-    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-dot').text()).toBe(pendingDotSlotText)
-    expect(wrapper.html()).toMatchSnapshot()
+describe('TimelineItem', () => {
+  test('color work', async () => {
+    const wrapper = TimelineMount({
+      slots: {
+        default: [
+          h(IxTimelineItem, { color: 'red' }, { default: () => 0 }),
+          h(IxTimelineItem, { color: 'black' }, { default: () => 1 }),
+        ],
+      },
+    })
+
+    const items = wrapper.findAll('.ix-timeline-item')
+    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-red')
+
+    expect(items[1].find('.ix-timeline-item-dot-black').exists()).toBe(false)
+    expect(items[1].find('.ix-timeline-item-dot').html()).toContain('style="color: black; border-color: black;"')
+  })
+
+  test('dot work', async () => {
+    const dotText = 'dotText'
+    const wrapper = TimelineMount({
+      slots: {
+        default: [h(IxTimelineItem, { dot: 'dotText' }, { default: () => 0 })],
+      },
+    })
+
+    const items = wrapper.findAll('.ix-timeline-item')
+
+    expect(items[0].find('.ix-timeline-item-dot-custom').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-custom')
+    expect(items[0].find('.ix-timeline-item-dot').text()).toBe(dotText)
+  })
+
+  test('dot slot work', async () => {
+    const dotSlotText = 'dotSlotText'
+    const wrapper = TimelineMount({
+      slots: {
+        default: [h(IxTimelineItem, { dot: 'dotText' }, { dot: () => dotSlotText })],
+      },
+    })
+
+    const items = wrapper.findAll('.ix-timeline-item')
+
+    expect(items[0].find('.ix-timeline-item-dot-custom').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-custom')
+    expect(items[0].find('.ix-timeline-item-dot').text()).toBe(dotSlotText)
+  })
+
+  test('label work', async () => {
+    const labelText = 'labelText'
+    const wrapper = TimelineMount({
+      slots: {
+        default: [h(IxTimelineItem, { label: labelText }, { dot: () => 0 })],
+      },
+    })
+
+    const items = wrapper.findAll('.ix-timeline-item')
+
+    expect(items[0].find('.ix-timeline-item-label').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-label').text()).toBe(labelText)
+  })
+
+  test('label slot work', async () => {
+    const labelText = 'labelText'
+    const labelSlotText = 'dotSlotText'
+    const wrapper = TimelineMount({
+      slots: {
+        default: [h(IxTimelineItem, { label: labelText }, { label: () => labelSlotText })],
+      },
+    })
+
+    const items = wrapper.findAll('.ix-timeline-item')
+
+    expect(items[0].find('.ix-timeline-item-label').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-label').text()).toBe(labelSlotText)
   })
 })

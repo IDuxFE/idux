@@ -14,10 +14,11 @@ order: 0
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `pending` | 设置幽灵节点 | `boolean\|string\|#pending` | `false` | - |- |
+| `pending` | 设置幽灵节点 | `boolean\|string\|#pending` | `false` | - | - |
 | `pendingDot` | 幽灵节点存在时的时间轴点 | `string\|#pendingDot` | `undefined` | - |- |
 | `reverse` | 时间节点是否倒叙 | `boolean` | `false` | - |- |
-| `position` | 时间轴和内容的相对位置 | `left\|alternate\|right` | `right` | - |- |
+| `placement` | 时间节点内容相对于时间轴的位置 | `'start'\| 'end' \| 'alternate'` | `'end'` | - |- |
+| `both` | 设置标签和内容是否分开 | `boolean` | `false` | - |- |
 
 ### IxTimelineItem
 
@@ -27,7 +28,30 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `color` | 时间节点颜色 | `PresetColor \| StatusColor \| string` | `primary` | - |- |
 | `dot` | 时间轴点 | `string\|#dot` | `undefined` | - |- |
-| `position` | 时间节点内容的位置 | `left\|right` | `undefined` | - |- |
+| `label` | 设置标签 | `string\|#label` | `undefined` | - |- |
+| `placement` | 时间节点内容相对于时间轴的位置 | `'start' \| 'end'` | - | - | 仅当`Timeline`组件的`placement`为 `alternate` 时生效|
+
+``` ts
+export const presetColors = [
+  'red',
+  'orange',
+  'brown',
+  'yellow',
+  'canary',
+  'bud',
+  'green',
+  'turquoise',
+  'cyan',
+  'glacier',
+  'blue',
+  'indigo',
+  'purple',
+  'magenta',
+] as const
+
+export const statusColors = ['primary', 'info', 'pending', 'success', 'warning', 'error'] as const
+
+```
 
 <!--- insert less variable begin  --->
 ## 主题变量
@@ -44,6 +68,8 @@ order: 0
 | `@timeline-content-gap` | `18px` | - | - |
 | `@timeline-content-line-height` | `20px` | - | - |
 | `@timeline-content-top` | `-5px` | - | - |
+| `@timeline-content-color` | `@text-color` | - | - |
+| `@timeline-content-label-color` | `@color-grey` | - | - |
 | `@timeline-dotted-content-min-height` | `48px` | - | - |
 | `@timeline-line-gap` | `((@timeline-dot-dia - @border-width-md) / 2)` | - | - |
 | `@timeline-line-border` | `@border-width-md solid #e8e8e8` | - | - |
