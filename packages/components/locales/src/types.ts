@@ -66,6 +66,10 @@ export interface PaginationLocale {
   totalSuffix: string
 }
 
+export interface SelectLocale {
+  limitMessage: string
+}
+
 export interface TableLocale {
   expand: string
   collapse: string
@@ -113,6 +117,7 @@ export interface Locale {
   modal: ModalLocale
   popconfirm: PopconfirmLocale
   pagination: PaginationLocale
+  select: SelectLocale
   table: TableLocale
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale

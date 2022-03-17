@@ -21,6 +21,8 @@ export default defineComponent({
       slots,
       mergedPrefixCls,
       selectedValue,
+      selectedLimit,
+      selectedLimitTitle,
       handleOptionClick,
       activeOption,
       changeActive,
@@ -64,13 +66,14 @@ export default defineComponent({
       return (
         <div
           class={classes.value}
+          title={disabled || selected ? undefined : selectedLimitTitle.value}
           onMouseenter={disabled ? undefined : handleMouseEnter}
           onClick={disabled ? undefined : handleClick}
-          {...rawOption.additional}
           aria-label={label}
           aria-selected={selected}
+          {...rawOption.additional}
         >
-          {multiple && <IxCheckbox checked={isSelected.value} disabled={disabled} />}
+          {multiple && <IxCheckbox checked={selected} disabled={disabled || (!selected && selectedLimit.value)} />}
           <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawOption, label)}</span>
         </div>
       )

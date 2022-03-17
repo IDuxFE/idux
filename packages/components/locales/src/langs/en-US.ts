@@ -64,6 +64,9 @@ const enUS: Locale = {
     cancelText: 'No',
     okText: 'Yes',
   },
+  select: {
+    limitMessage: 'The value of this selector cannot be greater than ${0} items',
+  },
   table: {
     expand: 'Expand row',
     collapse: 'Collapse row',

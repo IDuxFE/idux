@@ -486,18 +486,21 @@ describe('Select', () => {
     })
 
     test('multipleLimit work', async () => {
-      const onUpdateValue = jest.fn()
-      const onChange = jest.fn()
-      SelectMount({
-        props: { open: true, value: [], multipleLimit: 3, 'onUpdate:value': onUpdateValue, onChange },
+      const wrapper = SelectMount({
+        props: { open: true, value: [0, 1, 2, 3], multipleLimit: 4 },
       })
 
-      // TODO fix
-      // const options = wrapper.findAllComponents(Option)
-      // await Promise.all(options.map(item => item.trigger('click')))
-      // await flushPromises()
+      let options = wrapper.findAllComponents(Option)
 
-      // expect(wrapper.findAll('.ix-select-selector-item').length).toBe(3)
+      expect(options[4].find('.ix-checkbox').classes()).toContain('ix-checkbox-disabled')
+      expect(options[4].attributes('title')).toBe('该选择器的值不能超过 4 项')
+
+      await wrapper.setProps({ multipleLimit: 5 })
+
+      options = wrapper.findAllComponents(Option)
+
+      expect(options[4].find('.ix-checkbox').classes()).not.toContain('ix-checkbox-disabled')
+      expect(options[4].attributes('title')).toBe('')
     })
 
     test('maxLabelCount work', async () => {

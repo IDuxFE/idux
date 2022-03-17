@@ -36,6 +36,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
+    const locale = useGlobalConfig('locale')
     const focusMonitor = useSharedFocusMonitor()
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
 
@@ -55,7 +56,7 @@ export default defineComponent({
     const inputStateContext = useInputState(props, inputRef, accessor)
     const { inputValue, clearInput } = inputStateContext
     const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
-    const selectedStateContext = useSelectedState(props, accessor, mergedOptions)
+    const selectedStateContext = useSelectedState(props, accessor, mergedOptions, locale)
     const { selectedValue, changeSelected } = selectedStateContext
     const activeStateContext = useActiveState(props, flattedOptions, selectedValue, inputValue, scrollTo)
 
