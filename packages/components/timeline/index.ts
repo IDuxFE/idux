@@ -7,8 +7,8 @@
 
 import type { TimelineComponent, TimelineItemComponent } from './src/types'
 
-import Timeline from './src/Timeline.vue'
-import TimelineItem from './src/TimelineItem.vue'
+import Timeline from './src/Timeline'
+import TimelineItem from './src/TimelineItem'
 
 const IxTimeline = Timeline as unknown as TimelineComponent
 const IxTimelineItem = TimelineItem as unknown as TimelineItemComponent
@@ -18,9 +18,10 @@ export { IxTimeline, IxTimelineItem }
 export type {
   TimelineInstance,
   TimelineComponent,
+  TimelinePlacement,
   TimelinePublicProps as TimelineProps,
   TimelineItemInstance,
   TimelineItemComponent,
+  TimelineItemPlacement,
   TimelineItemPublicProps as TimelineItemProps,
-  TimelineItemPosition,
 } from './src/types'

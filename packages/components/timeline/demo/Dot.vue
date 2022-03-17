@@ -1,5 +1,5 @@
 <template>
-  <IxTimeline :pending="true">
+  <IxTimeline>
     <IxTimelineItem>
       New issue in 2021-02-08
       <template #dot>

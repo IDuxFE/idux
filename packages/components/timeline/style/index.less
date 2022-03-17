@@ -5,7 +5,7 @@
   .reset-component();
 
   line-height: @timeline-content-line-height;
-  color: @color-grey;
+  color: @timeline-content-color;
 
   .@{timeline-item-prefix} {
     position: relative;
@@ -35,6 +35,7 @@
     &-line {
       position: absolute;
       top: @timeline-dot-dia;
+      width: 0;
       height: calc(100% - @timeline-dot-dia);
       border-left: @timeline-line-border;
     }
@@ -42,6 +43,10 @@
     &-content {
       position: relative;
       top: @timeline-content-top;
+    }
+
+    &-label {
+      color: @timeline-content-label-color;
     }
 
     &:last-child {
@@ -67,7 +72,7 @@
     }
   }
 
-  &-right {
+  &-end {
     .@{timeline-item-prefix} {
 
       &-dot {
@@ -88,7 +93,7 @@
     }
   }
 
-  &-left {
+  &-start {
     .@{timeline-item-prefix} {
 
       &-dot {
@@ -114,7 +119,7 @@
   &-alternate {
     .@{timeline-item-prefix} {
 
-      &-left {
+      &-start {
         .@{timeline-item-prefix} {
 
           &-content {
@@ -124,7 +129,7 @@
         }
       }
 
-      &-right {
+      &-end {
         .@{timeline-item-prefix} {
 
           &-content {
@@ -159,6 +164,54 @@
           &-line {
             top: @timeline-reverse-pending-dot-line-top;
             height: calc(100% - @timeline-reverse-pending-dot-line-top);
+          }
+        }
+      }
+    }
+  }
+
+  &-not-both {
+
+    .@{timeline-item-prefix} {
+      &-label {
+        position: absolute;
+        transform: translateX(-100%);
+      }
+
+      &-line {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &-dot {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &-start {
+        .@{timeline-item-prefix} {
+          &-content {
+            width: calc(50% - 18px);
+            margin-left: 0;
+          }
+          &-label {
+            right: calc(-50%);
+          }
+        }
+  
+      }
+
+      &-end {
+        .@{timeline-item-prefix} {
+          &-content {
+            width: 50%;
+            margin-left: calc(50% + 18px);
+          }
+          &-label {
+            left: -36px;
+          }
+          &-desc {
+            text-align: left;
           }
         }
       }
