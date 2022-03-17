@@ -64,6 +64,9 @@ const zhCN: Locale = {
     totalPrefix: '共',
     totalSuffix: '条',
   },
+  select: {
+    limitMessage: '该选择器的值不能超过 ${0} 项',
+  },
   table: {
     expand: '展开行',
     collapse: '收起行',
