@@ -13,10 +13,10 @@ exports[`ProLayout render work 1`] = `
     <!---->
     <div class=\\"ix-pro-layout-sider-content\\">
       <ul class=\\"ix-menu ix-menu-light ix-menu-inline\\">
-        <li class=\\"ix-menu-sub ix-menu-sub-selected ix-menu-sub-inline\\">
-          <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 24px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Sub Menu 1</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
+        <li class=\\"ix-menu-sub ix-menu-sub-expanded ix-menu-sub-selected ix-menu-sub-inline\\">
+          <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 24px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Sub Menu 1</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(-90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
           <transition-stub>
-            <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
+            <ul class=\\"ix-menu-inline\\">
               <li class=\\"ix-menu-item ix-menu-item-disabled\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 4</span></li>
               <li class=\\"ix-menu-item ix-menu-item-selected\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 5</span></li>
               <li class=\\"ix-menu-divider\\"></li>
