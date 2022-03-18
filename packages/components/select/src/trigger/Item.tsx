@@ -14,9 +14,9 @@ import { IxIcon } from '@idux/components/icon'
 interface ItemProps {
   disabled?: boolean
   prefixCls: string
-  removable: boolean
-  value: any
-  handleItemRemove: (value: any) => void
+  removable?: boolean
+  value?: any
+  handleItemRemove?: (value: any) => void
 }
 
 const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
@@ -26,7 +26,7 @@ const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
 
   const handleClick = (evt: Event) => {
     evt.stopPropagation()
-    handleItemRemove(value)
+    handleItemRemove?.(value)
   }
 
   return (

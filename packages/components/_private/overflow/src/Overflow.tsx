@@ -5,12 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { OverflowProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 
-import { ComputedRef, Ref, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { Ref, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { isNumber, isString } from 'lodash-es'
+import { isNumber } from 'lodash-es'
 
 import { offResize, onResize, throwError } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -25,50 +24,6 @@ const restNodeKey = '__IDUX_OVERFLOW_REST'
 const suffixNodeKey = '__IDUX_OVERFLOW_SUFFIX' as VKey
 const responsive = 'responsive'
 
-const useContainerSize = (containerElRef: Ref<HTMLElement | undefined>) => {
-  const containerWidth = ref(0)
-  const setContainerWidth = () => {
-    containerWidth.value = containerElRef.value?.clientWidth ?? 0
-  }
-
-  return {
-    containerWidth,
-    setContainerWidth,
-  }
-}
-
-const useItemSize = () => {
-  const itemsWidthMap = ref<Map<VKey, number>>(new Map())
-  const setItemWidth = (key: VKey, itemEl?: Element) => {
-    if (!itemEl && itemsWidthMap.value.get(key)) {
-      itemsWidthMap.value.delete(key)
-    } else {
-      itemEl?.clientWidth && itemsWidthMap.value.set(key, itemEl?.clientWidth ?? 0)
-    }
-  }
-
-  return {
-    itemsWidthMap,
-    setItemWidth,
-  }
-}
-
-export type GetKey = (item: unknown) => VKey
-
-const useGetKeys = (props: OverflowProps): ComputedRef<GetKey> => {
-  return computed(() => {
-    const itemKey = props.itemKey
-    if (isString(itemKey)) {
-      return (item: unknown) => {
-        const key = (item as SafeAny)[itemKey]
-
-        return key
-      }
-    }
-    return itemKey
-  })
-}
-
 export default defineComponent({
   name: 'IxOverflow',
   props: overflowProps,
@@ -82,17 +37,16 @@ export default defineComponent({
     const restWidth = ref(0)
     const suffixWidth = ref(0)
 
-    const getKey = useGetKeys(props)
     const displayCount = ref(props.dataSource.length)
-    const isResposive = computed(() => props.maxLabelCount === responsive)
+    const isResposive = computed(() => props.maxLabel === responsive)
     const restReady = ref(false)
     const showRest = computed(
-      () => isResposive.value || (isNumber(props.maxLabelCount) && props.dataSource.length > props.maxLabelCount),
+      () => isResposive.value || (isNumber(props.maxLabel) && props.dataSource.length > props.maxLabel),
     )
 
     const mergedData = computed(() => {
       if (!isResposive.value) {
-        return props.dataSource.slice(0, props.maxLabelCount as number)
+        return props.dataSource.slice(0, props.maxLabel as number)
       }
       return props.dataSource
     })
@@ -113,12 +67,13 @@ export default defineComponent({
         }
 
         if (!isResposive.value) {
-          displayCount.value = Math.min(props.maxLabelCount as number, len)
+          displayCount.value = Math.min(props.maxLabel as number, len)
+          restReady.value = true
           return
         }
 
         for (let i = 0; i < len; i++) {
-          const getItemWidth = (index: number) => itemsWidthMap.value.get(getKey.value(data[index])) ?? 0
+          const getItemWidth = (index: number) => itemsWidthMap.value.get(props.getKey(data[index])) ?? 0
           const internalContainerWidth = containerWidth.value - suffixWidth.value
           const curItemWidth = getItemWidth(i)
 
@@ -168,7 +123,7 @@ export default defineComponent({
       return (
         <Item
           {...itemSharedProps}
-          itemKey={getKey.value(item)}
+          itemKey={props.getKey(item)}
           display={index < displayCount.value}
           onSizeChange={(itemEl: Element, key?: VKey) => setItemWidth(key!, itemEl)}
         >
@@ -216,3 +171,31 @@ export default defineComponent({
     }
   },
 })
+
+const useContainerSize = (containerElRef: Ref<HTMLElement | undefined>) => {
+  const containerWidth = ref(0)
+  const setContainerWidth = () => {
+    containerWidth.value = containerElRef.value?.clientWidth ?? 0
+  }
+
+  return {
+    containerWidth,
+    setContainerWidth,
+  }
+}
+
+const useItemSize = () => {
+  const itemsWidthMap = ref<Map<VKey, number>>(new Map())
+  const setItemWidth = (key: VKey, itemEl?: Element) => {
+    if (!itemEl && itemsWidthMap.value.get(key)) {
+      itemsWidthMap.value.delete(key)
+    } else {
+      itemEl?.clientWidth && itemsWidthMap.value.set(key, itemEl?.clientWidth ?? 0)
+    }
+  }
+
+  return {
+    itemsWidthMap,
+    setItemWidth,
+  }
+}

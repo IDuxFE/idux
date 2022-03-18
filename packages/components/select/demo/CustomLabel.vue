@@ -1,12 +1,5 @@
 <template>
-  <IxSelect
-    v-model:value="value"
-    :dataSource="dataSource"
-    multiple
-    :maxLabelCount="3"
-    :multipleLimit="5"
-    @change="onChange"
-  >
+  <IxSelect v-model:value="value" :dataSource="dataSource" multiple :maxLabel="3" :multipleLimit="5" @change="onChange">
     <template #selectedLabel="option"><IxIcon :name="option.value" />{{ option.label }}</template>
     <template #overflowedLabel="moreOptions">and {{ moreOptions.length }} more selected</template>
   </IxSelect>

@@ -7,18 +7,16 @@
 
 import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { offResize, onResize } from '@idux/cdk/utils'
+import { callEmit, offResize, onResize } from '@idux/cdk/utils'
 
-import { overflowItemProps } from './itemTypes'
+import { overflowItemProps } from './types'
 
 export default defineComponent({
   name: 'IxOverflowItem',
   props: overflowItemProps,
   setup(props, { slots }) {
     const itemElRef = ref<HTMLElement | undefined>()
-    const handleResize = (entry: ResizeObserverEntry) => {
-      props.onSizeChange?.(entry.target, props.itemKey ?? '')
-    }
+    const handleResize = (entry: ResizeObserverEntry) => callEmit(props.onSizeChange, entry.target, props.itemKey ?? '')
 
     onMounted(() => onResize(itemElRef.value, handleResize))
     onBeforeUnmount(() => {

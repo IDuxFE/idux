@@ -9,8 +9,12 @@ import type { OverflowComponent } from './src/types'
 
 import Overflow from './src/Overflow'
 
-const IxOverflow = Overflow as unknown as OverflowComponent
+const ɵOverflow = Overflow as unknown as OverflowComponent
 
-export { IxOverflow }
+export { ɵOverflow }
 
-export type { OverflowInstance, OverflowComponent, OverflowPublicProps as OverflowProps } from './src/types'
+export type {
+  OverflowInstance as ɵOverflowInstance,
+  OverflowComponent as ɵOverflowComponent,
+  OverflowPublicProps as ɵOverflowProps,
+} from './src/types'

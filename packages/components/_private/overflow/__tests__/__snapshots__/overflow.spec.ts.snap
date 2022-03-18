@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Overflow maxLabelCount responsive work 1`] = `
+exports[`Overflow maxLabel responsive work 1`] = `
 "<div class=\\"ix-overflow ix-test-overflow\\">
   <div class=\\"ix-overflow-item\\">0</div>
   <div class=\\"ix-overflow-item\\">1</div>
@@ -27,7 +27,7 @@ exports[`Overflow maxLabelCount responsive work 1`] = `
 </div>"
 `;
 
-exports[`Overflow maxLabelCount responsive work 2`] = `
+exports[`Overflow maxLabel responsive work 2`] = `
 "<div class=\\"ix-overflow ix-test-overflow\\">
   <div class=\\"ix-overflow-item\\">0</div>
   <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">1</div>
@@ -49,7 +49,7 @@ exports[`Overflow maxLabelCount responsive work 2`] = `
   <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">17</div>
   <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">18</div>
   <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">19</div>
-  <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"display: none;\\">+ 19 ...</div>
+  <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"\\">+ 19 ...</div>
   <!---->
 </div>"
 `;

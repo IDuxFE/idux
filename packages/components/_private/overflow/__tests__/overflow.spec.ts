@@ -21,7 +21,7 @@ describe('Overflow', () => {
       ...(merge(
         {
           props: {
-            itemKey: 'key',
+            getKey: (item: OverflowData) => item.key,
             prefixCls: 'ix-test',
             dataSource: overfolwData,
           },
@@ -33,39 +33,40 @@ describe('Overflow', () => {
   }
 
   renderWork<OverflowProps>(Overflow, {
-    props: { maxLabelCount: 4 },
+    props: { maxLabel: 4 },
   })
 
   renderWork<OverflowData>(Overflow, {
-    props: { maxLabelCount: 'responsive' },
+    props: { maxLabel: 'responsive' },
   })
 
-  test('maxLabelCount work', async () => {
+  test('maxLabel work', async () => {
     const wrapper = OverflowMount()
 
     let items = wrapper.findAll('.ix-overflow-item')
 
     expect(items.length).toBe(totalLen)
 
-    await wrapper.setProps({ maxLabelCount: 3 })
+    await wrapper.setProps({ maxLabel: 3 })
 
     // [0, 1, 2, + 17 ...]
     items = wrapper.findAll('.ix-overflow-item')
 
     expect(items.length).toBe(4)
     expect(items[3].text()).toBe('+ 17 ...')
+    expect(items[3].attributes('style')).toEqual(expect.not.stringContaining('display: none'))
   })
-  test('maxLabelCount responsive work', async () => {
+  test('maxLabel responsive work', async () => {
     const wrapper = OverflowMount()
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.setProps({ maxLabelCount: 'responsive' })
+    await wrapper.setProps({ maxLabel: 'responsive' })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
   test('item slot work', async () => {
-    const wrapper = OverflowMount({ props: { maxLabelCount: 2 } })
+    const wrapper = OverflowMount({ props: { maxLabel: 2 } })
 
     const items = wrapper.findAll('.ix-overflow-item')
 
@@ -74,7 +75,7 @@ describe('Overflow', () => {
   })
   test('rest slot work', async () => {
     const wrapper = OverflowMount({
-      props: { maxLabelCount: 2 },
+      props: { maxLabel: 2 },
       slots: { rest: `<template #rest="rest">+ {{ rest.length }} more</template>` },
     })
 
@@ -84,7 +85,7 @@ describe('Overflow', () => {
   })
   test('suffix slot work', async () => {
     const wrapper = OverflowMount({
-      props: { maxLabelCount: 2 },
+      props: { maxLabel: 2 },
       slots: { suffix: `x` },
     })
 
