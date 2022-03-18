@@ -14,6 +14,7 @@ import {
   Check,
   CheckCircle,
   CheckCircleFilled,
+  Clear,
   ClockCircle,
   Close,
   CloseCircle,
@@ -29,6 +30,7 @@ import {
   InfoCircle,
   InfoCircleFilled,
   Left,
+  LeftDouble,
   Loading,
   Menu,
   MenuFold,
@@ -38,6 +40,7 @@ import {
   QuestionCircle,
   QuestionCircleFilled,
   Right,
+  RightDouble,
   RotateLeft,
   RotateRight,
   Search,
@@ -57,8 +60,9 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Check, // Progress Stepper
   CheckCircle, // Result Message Alert Notification
   CheckCircleFilled, // Progress Modal FormItem
+  Clear, // Transfer
   ClockCircle, // TimePicker
-  Close, // Stepper Modal Drawer Image Message Alert
+  Close, // Stepper Modal Drawer Image Message Alert Transfer
   CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
   CloseCircleFilled, // Modal FormItem
   DoubleLeft, // Pagination
@@ -72,6 +76,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
   Left, // date-panel
+  LeftDouble, // Transfer
   Loading, // Message Button Spin FormItem Switch Timeline Tree
   Menu, // Layout
   MenuFold, // Layout
@@ -81,9 +86,10 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   QuestionCircle, // FormItem
   QuestionCircleFilled, // Modal
   Right, // Tree Menu Collapse
+  RightDouble, // Transfer
   RotateLeft, // Image
   RotateRight, // Image
-  Search, // Select
+  Search, // Select Transfer
   StarFilled, // Rate
   User, // Avatar
   TreeExpand, // TreeSelect

@@ -1,0 +1,57 @@
+@import '../../../style/mixins/reset.less';
+
+.@{checkable-list-prefix} {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .reset-scroll();
+  
+  &.@{checkable-list-prefix}-virtual {
+    height: auto;
+  }
+
+  &-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    flex-shrink: 0;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: @checkable-list-item-min-height;
+    padding: @checkable-list-item-padding;
+    line-height: @checkable-list-item-line-height;
+    font-size: @checkable-list-item-font-size;
+
+    &-disabled {
+      color: @checkable-list-disabled-color;
+      cursor: not-allowed;
+    }
+    &-disabled &-label {
+      cursor: not-allowed;
+    }
+
+    &-checkbox {
+      flex: auto;
+    }
+
+    &-close-icon {
+      margin-left: auto;
+      font-size: @checkable-list-close-icon-font-size;
+      color: @checkable-list-close-icon-color;
+      &:hover {
+        color: @checkable-list-close-icon-hover-color;
+      }
+      &:focus,
+      &:active {
+        color: @checkable-list-close-icon-active-color;
+      }
+
+      cursor: pointer;
+    }
+  }
+}

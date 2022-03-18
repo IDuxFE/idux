@@ -89,6 +89,11 @@ const enUS: Locale = {
     separator: 'To',
     placeholder: ['Start time', 'End time'],
   },
+  transfer: {
+    toSelect: 'To select',
+    selected: 'Selected',
+    searchPlaceholder: ['Key words', 'Key words'],
+  },
   upload: {
     uploading: 'Uploading...',
     error: 'Upload error',

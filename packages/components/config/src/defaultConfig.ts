@@ -296,6 +296,12 @@ export const defaultConfig: GlobalConfig = {
     allowInput: true,
     format: 'HH:mm:ss',
   },
+  transfer: {
+    getKey: 'key',
+    clearable: true,
+    clearIcon: 'clear',
+    showSelectAll: true,
+  },
   tooltip: {
     autoAdjust: true,
     delay: 100,

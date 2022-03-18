@@ -89,6 +89,11 @@ const zhCN: Locale = {
     separator: '至',
     placeholder: ['起始时间', '结束时间'],
   },
+  transfer: {
+    toSelect: '待选',
+    selected: '已选',
+    searchPlaceholder: ['搜索关键字', '搜索关键字'],
+  },
   upload: {
     uploading: '正在上传...',
     error: '上传失败',

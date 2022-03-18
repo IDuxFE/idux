@@ -83,6 +83,7 @@ export interface GlobalConfig {
   textarea: TextareaConfig
   timePicker: TimePickerConfig
   timeRangePicker: TimeRangePickerConfig
+  transfer: TransferConfig
   tooltip: TooltipConfig
   tree: TreeConfig
   treeSelect: TreeSelectConfig
@@ -438,6 +439,14 @@ export interface TimePickerConfig {
 }
 
 export type TimeRangePickerConfig = TimePickerConfig
+
+export interface TransferConfig {
+  getKey: string
+  searchable?: boolean | { source: boolean; target: boolean }
+  clearable: boolean
+  clearIcon: string
+  showSelectAll: boolean
+}
 
 export interface TooltipConfig {
   autoAdjust: boolean
