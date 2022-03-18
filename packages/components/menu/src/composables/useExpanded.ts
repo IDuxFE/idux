@@ -32,11 +32,16 @@ export function useExpanded(props: MenuProps): ExpandedContext {
     }
   }
 
+  let cachedExpandedKeys: VKey[] = []
   watch(
     () => props.collapsed,
     collapsed => {
       if (collapsed) {
+        cachedExpandedKeys = [...expandedKeys.value]
         setExpandedKeys([])
+      } else {
+        setExpandedKeys(cachedExpandedKeys)
+        cachedExpandedKeys = []
       }
     },
   )

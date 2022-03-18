@@ -127,4 +127,26 @@ describe('Menu', () => {
 
     expect(onUpdateSelectedKeys).toBeCalledWith(['item1'])
   })
+
+  test('collapsed work', async () => {
+    const onUpdateExpandedKeys = jest.fn()
+    const wrapper = MenuMount({
+      props: { collapsed: true, mode: 'inline', 'onUpdate:expandedKeys': onUpdateExpandedKeys },
+    })
+
+    expect(wrapper.classes()).toContain('ix-menu-collapsed')
+
+    await wrapper.setProps({ collapsed: false, expandedKeys: ['sub1'] })
+
+    expect(wrapper.classes()).not.toContain('ix-menu-collapsed')
+    expect(wrapper.findAll('.ix-menu-sub')[0].classes()).toContain('ix-menu-sub-expanded')
+
+    await wrapper.setProps({ collapsed: true })
+
+    expect(onUpdateExpandedKeys).toBeCalledWith([])
+
+    await wrapper.setProps({ collapsed: false })
+
+    expect(onUpdateExpandedKeys).toBeCalledWith(['sub1'])
+  })
 })

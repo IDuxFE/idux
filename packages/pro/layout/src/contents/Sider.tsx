@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
 
 import { isObject } from 'lodash-es'
 
-import { type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, MenuData, MenuProps } from '@idux/components/menu'
 
@@ -33,7 +33,7 @@ export default defineComponent({
       handleCollapsedDelay,
     } = inject(proLayoutToken)!
 
-    const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus, collapsed)
+    const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus)
 
     const theme = computed(() => {
       const { theme } = props
@@ -104,16 +104,8 @@ export default defineComponent({
   },
 })
 
-function useExpandedKeys(
-  activePaths: ComputedRef<MenuData[]>,
-  siderMenus: ComputedRef<MenuData[]>,
-  collapsed: ComputedRef<boolean>,
-) {
-  const _expandedKeys: Ref<VKey[]> = ref([])
-  const expandedKeys = computed(() => _expandedKeys.value)
-  const _setExpandedKeys = (keys: VKey[]) => {
-    _expandedKeys.value = collapsed.value ? [] : keys
-  }
+function useExpandedKeys(activePaths: ComputedRef<MenuData[]>, siderMenus: ComputedRef<MenuData[]>) {
+  const [expandedKeys, _setExpandedKeys] = useState(getExpandedKeys(activePaths.value))
 
   watch(activePaths, paths => _setExpandedKeys(getExpandedKeys(paths)))
 
