@@ -20,14 +20,14 @@ order: 0
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
 | `footer` | 自定义底部按钮 | `DrawerButtonProps[] \| VNode \| #footer` | - | - | - |
-| `header` | 抽屉的标题 | `sting \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
-| `height` | 抽屉高度 | `sting \| number` | `'256'` | ✅ | 默认值仅在 `placement为` 为 `top/bottom` 时生效，其他情况默认为 `100%` |
+| `header` | 抽屉的标题 | `string \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
+| `height` | 抽屉高度 | `string \| number` | `'256'` | ✅ | 默认值仅在 `placement为` 为 `top/bottom` 时生效，其他情况默认为 `100%` |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
 | `offset` | 抽屉偏移量 | `number \| string` | `0` | - |  `placement` 为`start/end` 时, 为顶部偏移量，`top/bottom` 时, 为左边偏移量 |
 | `placement` | 抽屉打开方向 | `'top' \| 'bottom' \| 'start' \| 'end'` | `'end'` | - | - |
 | `target` | 自定义抽屉容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
-| `width` | 抽屉宽度 | `sting \| number` | `'480'` | ✅ | 默认值仅在 `placement为` 为 `start/end` 时生效，其他情况默认为 `100%` |
+| `width` | 抽屉宽度 | `string \| number` | `'480'` | ✅ | 默认值仅在 `placement为` 为 `start/end` 时生效，其他情况默认为 `100%` |
 | `wrapperClassName` | 抽屉外层容器类名 | `string` | - | - | - |
 | `zIndex` | 设置抽屉的 `z-index` | `number` | `1000` | ✅ | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
