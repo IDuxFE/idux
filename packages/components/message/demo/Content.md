@@ -1,5 +1,5 @@
 ---
-title: 
+title:
   zh: 自定义提示内容
   en: Customized content
 order: 1

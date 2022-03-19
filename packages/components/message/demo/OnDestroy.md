@@ -1,5 +1,5 @@
 ---
-title: 
+title:
   zh: 销毁后回调
   en: Callback after destroy
 order: 6
