@@ -98,6 +98,12 @@ export interface TimeRangePickerLocale {
   placeholder: [string, string]
 }
 
+export interface TransferLocale {
+  toSelect: string
+  selected: string
+  searchPlaceholder: [string, string]
+}
+
 export interface UploadLocale {
   uploading: string
   error: string
@@ -121,6 +127,7 @@ export interface Locale {
   table: TableLocale
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale
+  transfer: TransferLocale
   upload: UploadLocale
 }
 

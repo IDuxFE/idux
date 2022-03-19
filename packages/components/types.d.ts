@@ -68,6 +68,7 @@ import type { TextareaComponent } from '@idux/components/textarea'
 import type { TimePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
 import type { TooltipComponent } from '@idux/components/tooltip'
+import type { TransferComponent } from '@idux/components/transfer'
 import type { TreeComponent } from '@idux/components/tree'
 import type { UploadComponent, UploadFilesComponent } from '@idux/components/upload'
 
@@ -153,6 +154,7 @@ declare module 'vue' {
     IxTimeline: TimelineComponent
     IxTimelineItem: TimelineItemComponent
     IxTimePicker: TimePickerComponent
+    IxTransfer: TransferComponent
     IxTooltip: TooltipComponent
     IxTree: TreeComponent
     IxUpload: UploadComponent

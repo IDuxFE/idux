@@ -1,0 +1,34 @@
+@import '../../style/mixins/reset.less';
+
+.@{transfer-prefix} {
+  .reset-component();
+
+  display: flex;
+  align-items: stretch;
+  color: @transfer-color;
+
+  &-operations {
+    min-width: @transfer-operations-min-width;
+    flex-shrink: 0;
+    &-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: @transfer-operations-padding;
+    }
+
+    & &-btn {
+      width: @transfer-operations-btn-width;
+      height: @transfer-operations-btn-height;
+      padding: 0;
+    }
+
+    &-btn + &-btn {
+      margin-top: @transfer-operations-btn-gap;
+    }
+  }
+}
+
+@import './list.less';

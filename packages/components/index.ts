@@ -59,6 +59,7 @@ import { IxTextarea } from '@idux/components/textarea'
 import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
+import { IxTransfer } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 import { IxTreeSelect } from '@idux/components/tree-select'
 import { IxTypography } from '@idux/components/typography'
@@ -146,6 +147,7 @@ const components = [
   IxTextarea,
   IxTimePicker,
   IxTimeRangePicker,
+  IxTransfer,
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
