@@ -11,6 +11,7 @@ import type { VNodeChild } from 'vue'
 import { computed, defineComponent, inject } from 'vue'
 
 import { Logger } from '@idux/cdk/utils'
+import { ɵOverflow } from '@idux/components/_private/overflow'
 import { IxIcon } from '@idux/components/icon'
 
 import { selectToken } from '../token'
@@ -36,28 +37,6 @@ export default defineComponent({
       isComposing,
     } = inject(selectToken)!
 
-    const selectedItems = computed(() => {
-      const { maxLabelCount } = selectProps
-      const options = selectedOptions.value
-      const items = options.slice(0, maxLabelCount) as Array<MergedOption & { isMax?: boolean }>
-      if (options.length > maxLabelCount) {
-        const key = 'IDUX_SELECT_MAX_ITEM'
-        const label = `+ ${options.length - maxLabelCount} ...`
-        const value = options.slice(maxLabelCount).map(option => option.rawOption)
-        items.push({ isMax: true, key, label, value } as MergedOption & { isMax?: boolean })
-      }
-      return items
-    })
-
-    const showItems = computed(() => {
-      return (
-        selectProps.multiple ||
-        (selectedValue.value.length > 0 &&
-          !isComposing.value &&
-          (!inputValue.value || selectProps.searchable === 'overlay'))
-      )
-    })
-
     const showPlaceholder = computed(() => {
       return (
         selectedValue.value.length === 0 &&
@@ -75,10 +54,23 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-selector`
 
       const itemPrefixCls = `${prefixCls}-item`
-      const itemNodes = selectedItems.value.map(item => {
-        const { key, isMax, label, value, rawOption } = item
+
+      if (__DEV__ && selectProps.maxLabelCount) {
+        Logger.warn('components/select', '`maxLabelCount` was deprecated, please use `maxLabel` instead')
+      }
+
+      if (__DEV__ && slots.maxLabel) {
+        Logger.warn('components/select', 'slot `maxLabel` was deprecated, please use slot `overflowedLabel` instead')
+      }
+
+      if (__DEV__ && slots.label) {
+        Logger.warn('components/select', 'slots `label` was deprecated, please use slots `selectedLabel` instead')
+      }
+
+      const renderItem = (item: MergedOption) => {
+        const { key, label, value, rawOption } = item
         const _disabled = disabled || item.disabled
-        const removable = multiple && !_disabled && !readonly && !isMax
+        const removable = multiple && !_disabled && !readonly
         const itemProps = {
           key,
           disabled: _disabled,
@@ -88,31 +80,44 @@ export default defineComponent({
           handleItemRemove,
           title: label,
         }
-        let labelNode: VNodeChild | undefined
-        if (isMax) {
-          if (__DEV__ && slots.maxLabel) {
-            Logger.warn(
-              'components/select',
-              'slot `maxLabel` was deprecated, please use slot `overflowedLabel` instead',
-            )
-          }
-          const overflowedLabelSlot = slots.overflowedLabel ?? slots.maxLabel
-          labelNode = overflowedLabelSlot?.(item.value) ?? label
-        } else {
-          if (__DEV__ && slots.label) {
-            Logger.warn('components/select', 'slots `label` was deprecated, please use slots `selectedLabel` instead')
-          }
-          const selectedLabelSlot = slots.label ?? slots.selectedLabel
-          labelNode = selectedLabelSlot ? selectedLabelSlot(rawOption) : renderOptionLabel(slots, rawOption, label)
-        }
+
+        const selectedLabelSlot = slots.label ?? slots.selectedLabel
+        const labelNode: VNodeChild | undefined = selectedLabelSlot
+          ? selectedLabelSlot(rawOption)
+          : renderOptionLabel(slots, rawOption, label)
 
         return <Item {...itemProps}>{labelNode}</Item>
-      })
+      }
+      const renderRest = (rest: MergedOption[]) => {
+        const key = 'IDUX_SELECT_MAX_ITEM'
+        const itemProps = {
+          key,
+          prefixCls: itemPrefixCls,
+          removable: false,
+          value: null,
+        }
+
+        const overflowedLabelSlot = slots.overflowedLabel ?? slots.maxLabel
+        const labelNode: VNodeChild | undefined = overflowedLabelSlot?.(rest) ?? `+ ${rest.length} ...`
+
+        return <Item {...itemProps}>{labelNode}</Item>
+      }
+
+      const overflowSlot = {
+        item: renderItem,
+        rest: renderRest,
+        suffix: () => <Input />,
+      }
 
       return (
         <div class={prefixCls}>
-          {showItems.value && itemNodes}
-          <Input></Input>
+          <ɵOverflow
+            v-slots={overflowSlot}
+            prefixCls={prefixCls}
+            dataSource={selectedOptions.value}
+            maxLabel={selectProps.maxLabelCount ?? selectProps.maxLabel}
+            getKey={(item: MergedOption) => item.key}
+          />
           {showPlaceholder.value && (
             <div class={`${prefixCls}-placeholder`}> {slots.placeholder?.() ?? selectProps.placeholder}</div>
           )}

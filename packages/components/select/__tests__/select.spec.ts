@@ -503,8 +503,8 @@ describe('Select', () => {
       expect(options[4].attributes('title')).toBe('')
     })
 
-    test('maxLabelCount work', async () => {
-      const wrapper = SelectMount({ props: { maxLabelCount: 3, value: [0, 1, 2, 4, 5] } })
+    test('maxLabel work', async () => {
+      const wrapper = SelectMount({ props: { maxLabel: 3, value: [0, 1, 2, 4, 5] } })
 
       let items = wrapper.findAll('.ix-select-selector-item')
 
@@ -513,13 +513,22 @@ describe('Select', () => {
       expect(items[2].text()).toBe('A2')
       expect(items[3].text()).toBe('+ 2 ...')
 
-      await wrapper.setProps({ maxLabelCount: 2 })
+      await wrapper.setProps({ maxLabel: 2 })
 
       items = wrapper.findAll('.ix-select-selector-item')
 
       expect(items[0].text()).toBe('A0')
       expect(items[1].text()).toBe('A1')
       expect(items[2].text()).toBe('+ 3 ...')
+    })
+
+    test('maxLabel responsive work', async () => {
+      const wrapper = SelectMount({ props: { maxLabel: 'responsive', value: [0, 1, 2, 4, 5] } })
+
+      expect(wrapper.html()).toMatchSnapshot()
+
+      await wrapper.setProps({ maxLabel: 2 })
+      expect(wrapper.html()).toMatchSnapshot()
     })
   })
 
