@@ -5,22 +5,16 @@ import { existsSync, readFileSync, readdirSync } from 'fs-extra'
 import remark from 'remark'
 import { loadFront } from 'yaml-front-matter'
 
-import { generateTitle } from './generateTitle'
+import { TitleMeta, generateTitle } from './generateTitle'
 import marked from './marked'
 import { getComponentScript, getExampleTemplate } from './template'
 import { generateDocsToc, nonBindAble, withoutSuffix } from './utils'
 
-interface Meta {
-  order: number
-  title: string
-  timeline: boolean
-}
-
 const _remark = remark()
 
 export function parsePackageDocs(id: string, raw: string): string {
-  const [filename, docsDirname, componentName, moduleName] = id.split('/').reverse()
-  const docsPath = `${moduleName}/${componentName}/${docsDirname}/${filename}`
+  const [filename, docsDirname, componentName, moduleName, packageName] = id.split('/').reverse()
+  const docsPath = `${packageName}/${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
   const designDocPath = id.replace(/Index/g, 'Design')
   const designRaw = existsSync(designDocPath) ? readFileSync(designDocPath, { encoding: 'utf-8' }) : ''
@@ -30,8 +24,7 @@ export function parsePackageDocs(id: string, raw: string): string {
   const { __content: indexContent, ...indexMeta } = loadFront(raw)
   const { __content: designContent, ...designMeta } = loadFront(designRaw)
   const { __content: overviewContent, ...overviewMeta } = loadFront(overviewRaw)
-
-  const title = generateTitle({ ...(indexMeta as Meta), path: docsPath })
+  const title = generateTitle({ ...(indexMeta as Omit<TitleMeta, 'path'>), path: docsPath })
   const { description, api } = parseContent(indexContent)
   const demoMetas = getDemoMetas(id)
 
@@ -81,7 +74,7 @@ function parseContent(content: string) {
 
 function getDemoMetas(id: string) {
   const demoPath = join(dirname(id), '..', 'demo')
-  const demoMates: any[] = []
+  const demoMetas: any[] = []
 
   if (existsSync(demoPath) && readdirSync(demoPath).length > 0) {
     readdirSync(demoPath).forEach(demo => {
@@ -90,14 +83,14 @@ function getDemoMetas(id: string) {
         const componentName = withoutSuffix(demo)
         const importStr = `import ${componentName} from '../demo/${demo}'`
 
-        demoMates.push({ order, title, importStr, componentName })
+        demoMetas.push({ order, title, importStr, componentName })
       }
     })
   }
 
-  demoMates.sort((a, b) => a.order - b.order)
+  demoMetas.sort((a, b) => a.order - b.order)
 
-  return demoMates
+  return demoMetas
 }
 
 function generateExample(single: boolean, components: any[]) {
@@ -164,7 +157,7 @@ function wrapperDocsTemplate(
 
   const designTab = designContent
     ? `<IxTab key="design" title="${locale.design[language]}">
- <section class="markdown">${designContent}</section>
+  <section class="markdown">${designContent}</section>
 </IxTab>`
     : ''
   const overviewTab = overviewContent

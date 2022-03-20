@@ -1,6 +1,6 @@
 import { loadFront } from 'yaml-front-matter'
 
-import { generateTitle } from './generateTitle'
+import { TitleMeta, generateTitle } from './generateTitle'
 import marked from './marked'
 import { generateDocsToc, nonBindAble } from './utils'
 
@@ -25,11 +25,11 @@ export default {
 `
 
 export function parseGlobalDocs(id: string, raw: string): string {
-  const [filename, docsDirname] = id.split('/').reverse()
-  const docsPath = `${docsDirname}/${filename}`
+  const [filename, docsDirname, componentName, moduleName, packageName] = id.split('/').reverse()
+  const docsPath = `${packageName}/${moduleName}/${componentName}/${docsDirname}/${filename}`
   const { __content: content, ...meta } = loadFront(raw)
   const toc = generateDocsToc(meta as Meta, content)
-  const title = generateTitle({ ...(meta as Meta), path: docsPath })
+  const title = generateTitle({ ...(meta as Omit<TitleMeta, 'path'>), path: docsPath })
   const markedContent = nonBindAble(marked(content))
   const template = wrapperDocs(toc, title, markedContent)
   const script = scriptTemplate
@@ -39,8 +39,8 @@ export function parseGlobalDocs(id: string, raw: string): string {
 function wrapperDocs(toc: string, title: string, content: string): string {
   return `<template>
   <article class="markdown">${title}${toc}
-  <section class="markdown">${content}</section>
+    <section class="markdown">${content}</section>
   </article>
-</template>  
+</template>
 `
 }
