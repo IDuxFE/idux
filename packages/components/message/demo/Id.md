@@ -1,5 +1,5 @@
 ---
-title: 
+title:
   zh: 更新和销毁
   en: Update and destroy
 order: 5

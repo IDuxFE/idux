@@ -1,5 +1,5 @@
 ---
-title: 
+title:
   zh: 自定义图标
   en: Customized icon
 order: 3

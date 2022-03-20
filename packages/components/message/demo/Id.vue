@@ -10,13 +10,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import { VKey } from '@idux/cdk/utils'
 import { useMessage } from '@idux/components/message'
 
 export default defineComponent({
   setup() {
     const { info, destroyAll, destroy } = useMessage()
     let count = 0
-    let messageKey: string
+    let messageKey: string | VKey
     const open = () => {
       const content = `click count: ${count++}`
       if (!messageKey) {
