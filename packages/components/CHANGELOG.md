@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-03-20)
+
+
+### Bug Fixes
+
+* **comp:menu:** cache expandedKeys when collapse changed ([#805](https://github.com/IDuxFE/idux/issues/805)) ([48bacb2](https://github.com/IDuxFE/idux/commit/48bacb2140140c2a984ead14328dcb28d7494b99))
+* **comp:tab:** tab content is not vertically centered ([#809](https://github.com/IDuxFE/idux/issues/809)) ([74b0dba](https://github.com/IDuxFE/idux/commit/74b0dbaa85b221c1085e6a6e45f2d77773f82904))
+* **component:message:** message icon and content not align center when custom content ([#807](https://github.com/IDuxFE/idux/issues/807)) ([120390b](https://github.com/IDuxFE/idux/commit/120390b414f1feab98d86ee239f956a33f8b294f))
+
+
+*  feat(comp: select): maxLabel support responsive (#806) ([115b5ec](https://github.com/IDuxFE/idux/commit/115b5ecb5f30fb48356c9d71f31508430fb273ed)), closes [#806](https://github.com/IDuxFE/idux/issues/806) [#756](https://github.com/IDuxFE/idux/issues/756)
+
+
+### Features
+
+* **comp: timeline:** rebuild with tsx ([#803](https://github.com/IDuxFE/idux/issues/803)) ([8677d61](https://github.com/IDuxFE/idux/commit/8677d6163505769cb9af80f3073980dbdab6fc01))
+* **comp:select:** disable option when limited ([#804](https://github.com/IDuxFE/idux/issues/804)) ([aa6a5aa](https://github.com/IDuxFE/idux/commit/aa6a5aa47ca7ca82f09eaf6f245987f882f3b036))
+* **comp:transfer:** add transfer component ([#794](https://github.com/IDuxFE/idux/issues/794)) ([e861615](https://github.com/IDuxFE/idux/commit/e86161568affa4fb71d36f75ad5b8045cdbef699)), closes [#782](https://github.com/IDuxFE/idux/issues/782)
+
+
+### BREAKING CHANGES
+
+* `maxLabelCount` was deprecated, please use `maxLabel` instead
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.1) (2022-03-14)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-03-20)
+
+
+*  feat(comp: select): maxLabel support responsive (#806) ([115b5ec](https://github.com/IDuxFE/idux/commit/115b5ecb5f30fb48356c9d71f31508430fb273ed)), closes [#806](https://github.com/IDuxFE/idux/issues/806) [#756](https://github.com/IDuxFE/idux/issues/756)
+
+
+### BREAKING CHANGES
+
+* `maxLabelCount` was deprecated, please use `maxLabel` instead
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.1) (2022-03-14)
 
 

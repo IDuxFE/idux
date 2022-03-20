@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-03-20)
+
+
+### Features
+
+* **comp: timeline:** rebuild with tsx ([#803](https://github.com/IDuxFE/idux/issues/803)) ([8677d61](https://github.com/IDuxFE/idux/commit/8677d6163505769cb9af80f3073980dbdab6fc01))
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v1.0.0-alpha.6...v1.0.0-beta.1) (2022-03-14)
 
 
