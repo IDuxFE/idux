@@ -15,8 +15,8 @@ order: 0
 | 属性 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
-| `cover` | 卡片封面图片 | `sting \| CardCover \| #cover` | - | - | - |
-| `header` | 对话框标题 | `sting \| HeaderProps \| #header` | - | - | - |
+| `cover` | 卡片封面图片 | `string \| CardCover \| #cover` | - | - | - |
+| `header` | 对话框标题 | `string \| HeaderProps \| #header` | - | - | - |
 | `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | `false` | ✅ | - |
 | `loading` | 是否加载中状态 | `boolean` | `false` | - | 当卡片内容还在加载中时，显示占位图 |
 | `size` | 设置卡片大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |

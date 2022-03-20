@@ -36,13 +36,13 @@ order: 0
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | 默认取第 1 个子输入控件的 control，如果存在多个输入控件，建议手动指定，参考示例中的 `Phone Number`|
 | `controlCol` | 配置表单控件的布局配置，可参考 `IxCol` 组件 | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
-| `controlTooltip` | 配置表单控件的提示信息 | `sting \| #controlTooltip` | - | - | 通常用于对输入规则的详细说明 |
+| `controlTooltip` | 配置表单控件的提示信息 | `string \| #controlTooltip` | - | - | 通常用于对输入规则的详细说明 |
 | `extraMessage` | 额外的提示信息 | `string \| #extraMessage` | - | - | 当需要错误信息和提示文案同时出现时使用 |
 | `label` | `label` 标签的文本| `string \| #label` | - | - | - |
 | `labelAlign` | `label` 标签文本对齐方式 | `'start' \| 'end'` | - | - | - |
 | `labelCol` | `label` 标签布局配置，可参考 `IxCol` 组件  | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
 | `labelFor` | `label` 标签的 `for` 属性 | `string` | - | - | - |
-| `labelTooltip` | 配置表单文本的提示信息 | `sting \| #labelTooltip` | - | - | 通常用于对表单本文的解释说名 |
+| `labelTooltip` | 配置表单文本的提示信息 | `string \| #labelTooltip` | - | - | 通常用于对表单本文的解释说名 |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |
 | `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string \| FormValidateMessage` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
 | `status` | 手动指定表单项的校验状态 | `valid \| invalid \| validating` | - | - | - |

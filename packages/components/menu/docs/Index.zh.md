@@ -25,7 +25,7 @@ order: 0
 | `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
 | `target` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
 | `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |
-| `onClick` | 点击菜单后的回调 | `(options: MenuClickOptions) => void>` | - | - |
+| `onClick` | 点击菜单后的回调 | `(options: MenuClickOptions) => void` | - | - |
 
 ```ts
 export type MenuData = MenuItemProps | MenuItemGroupProps | MenuSubProps | MenuDividerProps

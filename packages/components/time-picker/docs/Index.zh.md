@@ -30,7 +30,7 @@ order: 0
  | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
  | `disabledHours` | 禁用部分小时选项 | `()=>number[]` | ``() => []`` | - | - |
  | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number)=>number[]` | `() => []` | - | - |
- | `disabledSeconds` | 禁用部分秒选项 | (selectedHour: number, selectedMinute: number)=>number[] | `() => []` | - | - |
+ | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number, selectedMinute: number)=>number[]` | `() => []` | - | - |
  | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
  | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
  | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
@@ -63,7 +63,7 @@ order: 0
  | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
  | `disabledHours` | 禁用部分小时选项 | `()=>number[]` | ``() => []`` | - | - |
  | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number)=>number[]` | `() => []` | - | - |
- | `disabledSeconds` | 禁用部分秒选项 | (selectedHour: number, selectedMinute: number)=>number[] | `() => []` | - | - |
+ | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number, selectedMinute: number)=>number[]` | `() => []` | - | - |
  | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
  | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
  | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
