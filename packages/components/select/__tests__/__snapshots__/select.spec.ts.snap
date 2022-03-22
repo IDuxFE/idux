@@ -100,18 +100,11 @@ exports[`Select single work render work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-with-suffix ix-select-md\\">
   <!---->
   <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-overflow ix-select-selector-overflow\\">
-      <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
-          <!---->
-        </div>
-      </div>
+    <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
       <!---->
-      <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
-          <!---->
-        </div>
-      </div>
+    </div>
+    <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+      <!---->
     </div>
     <!---->
     <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
@@ -125,18 +118,11 @@ exports[`Select template work render work 1`] = `
 "<div class=\\"ix-select ix-select-single ix-select-with-suffix ix-select-md\\">
   <!---->
   <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-overflow ix-select-selector-overflow\\">
-      <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
-          <!---->
-        </div>
-      </div>
+    <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
       <!---->
-      <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
-          <!---->
-        </div>
-      </div>
+    </div>
+    <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+      <!---->
     </div>
     <!---->
     <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>

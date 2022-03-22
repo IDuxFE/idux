@@ -67,6 +67,15 @@ export default defineComponent({
         Logger.warn('components/select', 'slots `label` was deprecated, please use slots `selectedLabel` instead')
       }
 
+      const showItems = computed(() => {
+        return (
+          selectProps.multiple ||
+          (selectedValue.value.length > 0 &&
+            !isComposing.value &&
+            (!inputValue.value || selectProps.searchable === 'overlay'))
+        )
+      })
+
       const renderItem = (item: MergedOption) => {
         const { key, label, value, rawOption } = item
         const _disabled = disabled || item.disabled
@@ -103,6 +112,8 @@ export default defineComponent({
         return <Item {...itemProps}>{labelNode}</Item>
       }
 
+      const singleItem = selectProps.multiple ? null : selectedOptions.value.map(item => renderItem(item))
+
       const overflowSlot = {
         item: renderItem,
         rest: renderRest,
@@ -111,13 +122,21 @@ export default defineComponent({
 
       return (
         <div class={prefixCls}>
-          <ɵOverflow
-            v-slots={overflowSlot}
-            prefixCls={prefixCls}
-            dataSource={selectedOptions.value}
-            maxLabel={selectProps.maxLabelCount ?? selectProps.maxLabel}
-            getKey={(item: MergedOption) => item.key}
-          />
+          {selectProps.multiple ? (
+            <ɵOverflow
+              v-slots={overflowSlot}
+              prefixCls={prefixCls}
+              dataSource={selectedOptions.value}
+              maxLabel={selectProps.maxLabelCount ?? selectProps.maxLabel}
+              getKey={(item: MergedOption) => item.key}
+            />
+          ) : (
+            <>
+              {showItems.value && singleItem}
+              <Input />
+            </>
+          )}
+
           {showPlaceholder.value && (
             <div class={`${prefixCls}-placeholder`}> {slots.placeholder?.() ?? selectProps.placeholder}</div>
           )}
