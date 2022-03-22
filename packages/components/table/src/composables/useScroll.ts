@@ -13,7 +13,11 @@ import { Logger, convertCssPixel, convertElement } from '@idux/cdk/utils'
 import { type TableProps } from '../types'
 import { type StickyContext } from './useSticky'
 
-export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: StickyContext): ScrollContext {
+export function useScroll(
+  props: TableProps,
+  autoHeight: ComputedRef<boolean>,
+  { isSticky, stickyScrollLeft }: StickyContext,
+): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
     useScrollRef(stickyScrollLeft)
 
@@ -26,7 +30,9 @@ export function useScroll(props: TableProps, { isSticky, stickyScrollLeft }: Sti
     Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
 
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
-  const scrollHeight = computed(() => convertCssPixel(props.scroll?.height || props.scroll?.y))
+  const scrollHeight = computed(() =>
+    convertCssPixel(props.scroll?.height || props.scroll?.y) || autoHeight.value ? 'auto' : '',
+  )
 
   const scrollBarSize = computed(() => (props.virtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
   const scrollBarSizeOnFixedHolder = computed(() => (isSticky.value ? 0 : scrollHeight.value ? scrollBarSize.value : 0))

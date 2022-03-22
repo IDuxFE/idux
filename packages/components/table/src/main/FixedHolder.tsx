@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Ref, StyleValue } from 'vue'
-
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
+import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 
 import { off, on } from '@idux/cdk/utils'
 
@@ -38,7 +36,7 @@ export default defineComponent({
         [`${prefixCls}-sticky-holder`]: isSticky.value,
       }
     })
-    const style = computed<StyleValue>(() => {
+    const style = computed<CSSProperties>(() => {
       const sticky = isSticky.value
       const { offsetHead, offsetFoot } = mergedSticky.value
       return {
@@ -48,7 +46,7 @@ export default defineComponent({
       }
     })
 
-    const tableStyle = computed<StyleValue>(() => {
+    const tableStyle = computed<CSSProperties>(() => {
       const visibility = hasData.value && !columnWidths.value.length ? 'hidden' : undefined
       return {
         tableLayout: 'fixed',
