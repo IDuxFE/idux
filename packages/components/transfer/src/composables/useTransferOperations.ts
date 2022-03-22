@@ -56,7 +56,7 @@ export function useTransferOperations<T extends TransferData = TransferData>(
       return
     }
 
-    append(keys ?? Array.from(sourceSelectedKeys.value))
+    append((keys ?? Array.from(sourceSelectedKeys.value)).filter(key => !disabledSourceKeys.value.has(key)))
   }
 
   const triggerRemove = (keys?: VKey[]) => {
@@ -64,7 +64,7 @@ export function useTransferOperations<T extends TransferData = TransferData>(
       return
     }
 
-    remove(keys ?? Array.from(targetSelectedKeys.value))
+    remove((keys ?? Array.from(targetSelectedKeys.value)).filter(key => !disabledTargetKeys.value.has(key)))
   }
 
   const triggerAppendAll = () => {

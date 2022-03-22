@@ -118,8 +118,8 @@ describe('Transfer', () => {
 
     selectedKeys = [7, 8, 9, 10, 11, 12]
     await wrapper.find('.source-handleSelectChange').trigger('click')
-    expect(wrapper.find('.source-selectedKeys').text()).toBe('5')
-    expect(wrapper.find('.source-selectedKeySet').text()).toBe('5')
+    expect(wrapper.find('.source-selectedKeys').text()).toBe('6')
+    expect(wrapper.find('.source-selectedKeySet').text()).toBe('6')
 
     await wrapper.find('.triggerAppend').trigger('click')
     expect(wrapper.find('.source-selectedKeys').text()).toBe('0')

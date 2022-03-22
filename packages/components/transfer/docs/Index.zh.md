@@ -33,27 +33,27 @@ export interface TransferData extends Record<VKey, any> {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `v-model:value` | 已选数据数组 | `VKey[]` | - | - | - |
 | `v-model:sourceSelectedKeys` | 源数据列表勾选的keys | `VKey[]` | - | - | - |
 | `v-model:targetSelectedKeys` | 目标数据列表勾选的keys | `VKey[]` | - | - | - |
-| `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
-| `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
-| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
-| `scroll` | 是否开启虚拟滚动 | `TransferScroll` | - | 仅使用默认列表并开启 `virtual` 下可用 |
-| `searchable` | 数据列表是否可搜索 | `boolean \| { source: boolean, target: boolean }` | `false` | ✅ | 仅使用默认列表头部时可用 |
-| `searchFn` | 搜索的判断函数 | `SearchFn` | - | - |
-| `pagination` | 数据列表分页配置 | `boolean \| TransferPaginationType` | `false` | ✅ | 仅使用默认列表底部时可用 |
-| `transferBySelect` | 是否通过源数据的勾选触发穿梭 | `boolean` | `false` | ✅ | 开启后默认不展示操作按钮 |
-| `showSelectAll` | 是否展示全选框 | `boolean` | `true` | ✅ | - |
-| `spin` | 数据列表的加载状态 | `boolean \| { source: boolean, target: boolean }` | `false` | - | - |
-| `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
+| `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
+| `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
+| `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
+| `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
+| `mode` | 穿梭框模式 | `'default' \| 'immediate'` | `'default'` | - | `'immediate'` 模式为勾选即触发穿梭，不展示穿梭操作按钮 |
+| `pagination` | 数据列表分页配置 | `boolean \| TransferPaginationProps` | `false` | ✅ | 仅使用默认列表底部时可用 |
+| `scroll` | 穿梭框列表滚动配置项，可以指定滚动区域的宽、高 | `TransferScroll` | - | - |
+| `searchable` | 数据列表是否可搜索 | `boolean \| { source: boolean, target: boolean }` | `false` | ✅ | - |
+| `searchFn` | 搜索的判断函数 | `SearchFn` | - | - |
+| `showSelectAll` | 是否展示全选框 | `boolean` | `true` | ✅ | - |
+| `spin` | 数据列表的加载状态 | `boolean \| { source: boolean, target: boolean }` | `false` | - | - |
+| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
 | `onChange` | 已选数据改变回调函数 | `(keys: VKey[], oldKeys: Vkey[]) => void` | - | - | - |
 | `onScroll` | 数据列表滚动事件 | `(isSource: boolean, evt: Event) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
 | `onScrolledChange` | 数据列表滚动的位置发生变化 | `(isSource: boolean, startIndex: number, endIndex: number, visibleNodes: unknown[]) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
-| `onScrolledBottom` | 源数据列表滚动到底部时触发 | `(isSource: boolean) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
+| `onScrolledBottom` | 数据列表滚动到底部时触发 | `(isSource: boolean) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
 | `onSearch` | 穿梭框搜索触发回调函数 | `(isSource: boolean, searchValue: string \| undefined) => void` | - | - | - |
 | `onSelectAll` | 数据列表全部勾选回调函数 | `(isSource: boolean, checked: boolean) => void` | - | - | - |
 | `onClear` | 已选数据清除的回调函数 | `(isSource: boolean) => void` | - | - | - |
@@ -71,7 +71,7 @@ export type SearchFn<T extends BaseTransferData = TransferData> = (
   searchValue: string,
 ) => boolean
 
-export interface TransferPaginationType {
+export interface TransferPaginationProps {
   pageIndex?: [number | undefined, number | undefined] | [number | undefined] | number
   pageSize?: [number | undefined, number | undefined] | [number | undefined] | number
   disabled?: boolean
@@ -84,13 +84,14 @@ export interface TransferPaginationType {
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+| `clearIcon` | 清除按钮 | - | - |
 | `default` | 穿梭框列表主体 | `TransferBindings & { isSource: boolean }` | - |
-| `headerLabel` | 穿梭框列表头部 | `{ data: TransferData[], isSource: boolean }` | - |
-| `headerSuffix` | 穿梭框列表头部 | `{ isSource: boolean }` | - |
-| `footer` | 穿梭框列表底部 | `TransferBindings & { isSource: boolean }` | - |
-| `operations` | 穿梭框列表底部 | `TransferOperationsContext` | - |
-| `label` | 穿梭框列表label | `TransferData` | 仅在使用默认列表时生效 |
 | `empty` | 穿梭框列表空状态 | `EmptyProps` | 仅在使用默认列表时生效 |
+| `footer` | 穿梭框列表底部 | `TransferBindings & { isSource: boolean }` | - |
+| `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | - |
+| `headerSuffix` | 穿梭框列表头部后缀 | `{ isSource: boolean }` | - |
+| `label` | 穿梭框列表label | `TransferData` | 仅在使用默认列表时生效 |
+| `operations` | 穿梭框操作按钮区域 | `TransferOperationsContext` | - |
 
 ```ts
 export interface TransferListSlotParams<T extends TransferData = TransferData> {
@@ -175,7 +176,7 @@ export interface TransferOperationsSlotParams {
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `scrollTo` | 源数据滚动到指定位置 | `(option?: number \| VirtualScrollToOptions, isSource?: boolean) => void` | 仅使用默认列表并开启 `virtual` 下可用 |
+| `scrollTo` | 滚动到指定位置 | `(isSource: boolean, option?: number \| VirtualScrollToOptions) => void` | 仅在开启 `virtual` 时可用 |
 
 <!--- insert less variable begin  --->
 ## 主题变量

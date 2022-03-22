@@ -33,7 +33,7 @@ export default defineComponent({
 
       const total =
         pagination.value?.total ??
-        (props.isSource && transferProps.mode === 'transferBySelect'
+        (props.isSource && transferProps.mode === 'immediate'
           ? filteredDataSource.value.length
           : filteredData.value.length)
 

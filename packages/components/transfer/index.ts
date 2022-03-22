@@ -20,12 +20,11 @@ export type {
   TransferListSlotParams,
   TransferOperationsSlotParams,
   TransferData,
-  TransferPaginationType,
+  TransferPaginationProps,
   TransferBindings,
   TransferDataStrategiesConfig,
   TransferMode,
   TransferScroll,
-  TransferScrollTo,
   SearchFn,
 } from './src/types'
 

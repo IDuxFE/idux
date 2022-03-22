@@ -41,9 +41,9 @@ const sourceScrollToIdx = ref(0)
 const targetScrollToIdx = ref(0)
 
 const handleSourceScrollTo = () => {
-  transferRef.value?.scrollTo({ index: sourceScrollToIdx.value }, true)
+  transferRef.value?.scrollTo(true, { index: sourceScrollToIdx.value })
 }
 const handleTargetScrollTo = () => {
-  transferRef.value?.scrollTo({ index: targetScrollToIdx.value }, false)
+  transferRef.value?.scrollTo(false, { index: targetScrollToIdx.value })
 }
 </script>

@@ -6,11 +6,13 @@
  */
 
 import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from '@idux/pro/layout'
+import type { ProTransferComponent } from '@idux/pro/transfer'
 
 declare module 'vue' {
   export interface GlobalComponents {
     IxProLayout: ProLayoutComponent
     IxProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
+    IxProTransfer: ProTransferComponent
   }
 }
 

@@ -39,7 +39,7 @@ export interface TransferDataStrategiesConfig<T extends TransferData = TransferD
 }
 export type TransferDataStrategies<T extends TransferData = TransferData> = Required<TransferDataStrategiesConfig<T>>
 
-export type TransferMode = 'normal' | 'transferBySelect'
+export type TransferMode = 'default' | 'immediate'
 
 export interface TransferBindings<T extends TransferData = TransferData> {
   data: ComputedRef<T[]>
@@ -91,7 +91,7 @@ export interface TransferSlots<T extends TransferData = TransferData> extends Sl
   clearIcon?: () => VNode[]
 }
 
-export interface TransferPaginationType {
+export interface TransferPaginationProps {
   pageIndex?: [number | undefined, number | undefined] | [number | undefined] | number
   pageSize?: [number | undefined, number | undefined] | [number | undefined] | number
   disabled?: boolean
@@ -121,9 +121,9 @@ export const transferProps = {
   scroll: IxPropTypes.object<TransferScroll>(),
   searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
   searchFn: IxPropTypes.func<SearchFn>(),
-  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TransferPaginationType>()]),
+  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TransferPaginationProps>()]),
 
-  mode: IxPropTypes.oneOf<TransferMode>(['normal', 'transferBySelect']).def('normal'),
+  mode: IxPropTypes.oneOf<TransferMode>(['default', 'immediate']).def('default'),
   showSelectAll: IxPropTypes.bool,
 
   spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
@@ -163,13 +163,8 @@ export const transferListItemProps = {
   onRemove: IxPropTypes.emit<() => void>(),
 }
 
-export interface TransferScrollTo {
-  (isSource?: boolean): ReturnType<VirtualScrollToFn>
-  (options: Parameters<VirtualScrollToFn>[0], isSource?: boolean): ReturnType<VirtualScrollToFn>
-}
-
 export interface TransferApis {
-  scrollTo: TransferScrollTo
+  scrollTo: (isSource: boolean, ...params: Parameters<VirtualScrollToFn>) => ReturnType<VirtualScrollToFn>
 }
 
 export type TransferProps = ExtractInnerPropTypes<typeof transferProps>

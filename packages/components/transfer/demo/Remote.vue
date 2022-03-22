@@ -6,7 +6,7 @@
     :pagination="pagination"
     :spin="spin"
     :searchable="{ source: true, target: false }"
-    mode="transferBySelect"
+    mode="immediate"
     :on-search="handleSearchChange"
   >
     <template #label="item">{{ item.label ?? 'Option' + item.key }}</template>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TransferPaginationType } from '@idux/components/transfer'
+import type { TransferPaginationProps } from '@idux/components/transfer'
 
 import { computed, onMounted, ref } from 'vue'
 
@@ -39,7 +39,7 @@ const dataSource = ref<Data[]>([])
 const filteredData = ref<Data[]>([])
 
 const sourcePageIndex = ref(1)
-const pagination = computed<TransferPaginationType>(() => ({
+const pagination = computed<TransferPaginationProps>(() => ({
   pageIndex: sourcePageIndex.value,
   pageSize: [20, 20],
   total: filteredData.value.length,

@@ -40,7 +40,7 @@ export default defineComponent({
         return slots.operations(convertToSlotParams(transferOperationsContext))
       }
 
-      if (transferProps.mode === 'transferBySelect') {
+      if (transferProps.mode === 'immediate') {
         return
       }
 

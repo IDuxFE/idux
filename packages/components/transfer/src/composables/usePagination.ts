@@ -11,8 +11,7 @@ import type { PaginationProps } from '@idux/components/pagination'
 
 import { type ComputedRef, computed, ref, watchEffect } from 'vue'
 
-import { isArray } from 'lodash-es'
-
+import { convertArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 export interface TransferPaginationContext {
@@ -48,13 +47,9 @@ function createPagination(
 
     const idx = isSource ? 0 : 1
 
-    const pageIndex = isArray(pagination.pageIndex)
-      ? pagination.pageIndex
-      : ([pagination.pageIndex] as [number | undefined])
-    const pageSize = isArray(pagination.pageSize)
-      ? pagination.pageSize
-      : ([pagination.pageSize] as [number | undefined])
-    const total = isArray(pagination.total) ? pagination.total : ([pagination.total] as [number | undefined])
+    const pageIndex = convertArray(pagination.pageIndex)
+    const pageSize = convertArray(pagination.pageSize)
+    const total = convertArray(pagination.total)
 
     return {
       pageIndex: pageIndex?.[idx],

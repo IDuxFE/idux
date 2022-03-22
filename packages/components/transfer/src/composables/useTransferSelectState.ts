@@ -47,27 +47,27 @@ export function useTransferSelectState(
   const { dataKeyMap, sourceDataKeys, targetDataKeys, disabledKeys, disabledSourceKeys, disabledTargetKeys } =
     transferDataContext
 
+  const sourceDataCount = computed(() =>
+    props.mode === 'immediate' ? dataKeyMap.value.size : sourceDataKeys.value.size,
+  )
+  const targetDataCount = computed(() => targetDataKeys.value.size)
   const sourceCheckableDataCount = computed(() => {
-    const allCount = props.mode === 'transferBySelect' ? dataKeyMap.value.size : sourceDataKeys.value.size
-    const disabledCount = props.mode === 'transferBySelect' ? disabledKeys.value.size : disabledSourceKeys.value.size
+    const disabledCount = props.mode === 'immediate' ? disabledKeys.value.size : disabledSourceKeys.value.size
 
-    return allCount - disabledCount
+    return sourceDataCount.value - disabledCount
   })
   const targetCheckableDataCount = computed(() => targetDataKeys.value.size - disabledTargetKeys.value.size)
+
   const sourceSelectAllStatus = computed(() => {
     return {
-      checked:
-        sourceCheckableDataCount.value === sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
-      indeterminate:
-        sourceCheckableDataCount.value > sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
+      checked: sourceDataCount.value >= sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
+      indeterminate: sourceDataCount.value > sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
     }
   })
   const targetSelectAllStatus = computed(() => {
     return {
-      checked:
-        targetCheckableDataCount.value === targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
-      indeterminate:
-        targetCheckableDataCount.value > targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
+      checked: targetDataCount.value >= targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
+      indeterminate: targetDataCount.value > targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
     }
   })
 
@@ -82,12 +82,12 @@ export function useTransferSelectState(
           return
         }
 
-        if (props.mode === 'normal' && targetDataKeys.value.has(key)) {
+        if (props.mode === 'default' && targetDataKeys.value.has(key)) {
           tempKeys.delete(key)
         }
       })
 
-      if (props.mode === 'transferBySelect') {
+      if (props.mode === 'immediate') {
         targetDataKeys.value.forEach(key => {
           if (dataKeyMap.value.has(key)) {
             tempKeys.add(key)
@@ -127,18 +127,18 @@ export function useTransferSelectState(
 
     const currentSelectedKeys = new Set<VKey>(keys)
 
-    if (props.mode === 'transferBySelect') {
+    if (props.mode === 'immediate') {
       transferBySelectionChange(sourceSelectedKeySet.value, currentSelectedKeys, transferDataContext)
     }
 
-    setSourceSelectedKeys((isArray(keys) ? keys : Array.from(keys)).filter(key => !disabledKeys.value.has(key)))
+    setSourceSelectedKeys(isArray(keys) ? keys : Array.from(keys))
   }
   const handleTargetSelectChange = (keys: VKey[] | Set<VKey>) => {
     if (props.disabled) {
       return
     }
 
-    setTargetSelectedKeys(isArray(keys) ? keys : Array.from(keys).filter(key => !disabledKeys.value.has(key)))
+    setTargetSelectedKeys(isArray(keys) ? keys : Array.from(keys))
   }
   const handleSelectAll = (selected = true, isSource = true) => {
     if (props.disabled) {
@@ -146,28 +146,32 @@ export function useTransferSelectState(
     }
 
     const dataKeys = isSource
-      ? props.mode === 'normal'
+      ? props.mode === 'default'
         ? sourceDataKeys.value
         : new Set(dataKeyMap.value.keys())
       : targetDataKeys.value
     const _disabledKeys = isSource
-      ? props.mode === 'normal'
+      ? props.mode === 'default'
         ? disabledSourceKeys.value
         : disabledKeys.value
       : disabledTargetKeys.value
+    const selectedKeySet = isSource ? sourceSelectedKeySet : targetSelectedKeySet
     const setSelectedKeys = isSource ? setSourceSelectedKeys : setTargetSelectedKeys
 
     let tempKeys: Set<VKey>
     if (!selected) {
       tempKeys = new Set()
+      _disabledKeys.forEach(key => {
+        selectedKeySet.value.has(key) && tempKeys.add(key)
+      })
     } else {
       tempKeys = new Set(dataKeys)
       _disabledKeys.forEach(key => {
-        tempKeys.delete(key)
+        !selectedKeySet.value.has(key) && tempKeys.delete(key)
       })
     }
 
-    if (props.mode === 'transferBySelect' && isSource) {
+    if (props.mode === 'immediate' && isSource) {
       transferBySelectionChange(sourceSelectedKeySet.value, tempKeys, transferDataContext)
     }
 
