@@ -224,7 +224,7 @@ export function useSlider(props: SliderProps): SliderBindings {
       percentage = 1 - percentage
     }
 
-    return calcValueByStep(percentage * (props.max - props.min))
+    return calcValueByStep(percentage * (props.max - props.min) + props.min)
   }
 
   function calcValueByStep(value: number) {
