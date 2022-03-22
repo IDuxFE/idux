@@ -176,3 +176,32 @@ export interface TransferOperationsSlotParams {
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `scrollTo` | 源数据滚动到指定位置 | `(option?: number \| VirtualScrollToOptions, isSource?: boolean) => void` | 仅使用默认列表并开启 `virtual` 下可用 |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@transfer-list-width` | `260px` | - | - |
+| `@transfer-list-height` | `290px` | - | - |
+| `@transfer-list-border-color` | `@form-border-color` | - | - |
+| `@transfer-list-border-radius` | `2px` | - | - |
+| `@transfer-list-background-color` | `@form-background-color` | - | - |
+| `@transfer-color` | `@text-color` | - | - |
+| `@transfer-disabled-color` | `@text-color-disabled` | - | - |
+| `@transfer-list-header-height` | `@height-lg` | - | - |
+| `@transfer-list-header-suffix-margin-left` | `@spacing-md` | - | - |
+| `@transfer-list-footer-height` | `@height-lg` | - | - |
+| `@transfer-list-header-padding` | `0 @spacing-md` | - | - |
+| `@transfer-list-footer-padding` | `0 @spacing-sm` | - | - |
+| `@transfer-operations-min-width` | `@spacing-xs` | - | - |
+| `@transfer-operations-padding` | `@spacing-sm` | - | - |
+| `@transfer-operations-btn-width` | `24px` | - | - |
+| `@transfer-operations-btn-height` | `32px` | - | - |
+| `@transfer-operations-btn-gap` | `@spacing-sm` | - | - |
+| `@transer-search-width` | `110px` | - | - |
+| `@transfer-clear-icon-font-size` | `@font-size-md` | - | - |
+| `@transfer-icon-color` | `@color-graphite-d20` | - | - |
+| `@transfer-icon-hover-color` | `@color-primary` | - | - |
+| `@transfer-icon-active-color` | `@color-primary` | - | - |
+<!--- insert less variable end  --->

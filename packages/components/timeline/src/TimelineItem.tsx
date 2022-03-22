@@ -20,21 +20,20 @@ export default defineComponent({
   props: timelineItemProps,
   [timelineItemKey]: true,
   setup(props, { slots }) {
+    const { props: parentProps, mergedPrefixCls } = inject(timelineToken)!
     const { vnode } = getCurrentInstance()!
 
-    const { props: parentProps, itemIndexArray, hasPendingNode, mergedPrefixCls } = inject(timelineToken)!
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const itemIndex = computed(() => itemIndexArray.value.indexOf((vnode as any).index))
-
     const itemPlacement = computed(() => {
-      const { placement: parentpPlacement } = parentProps
+      const { placement: parentPlacement } = parentProps
       const { placement } = props
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const index = (vnode as any).index
 
       let _placement
-      if (parentpPlacement === 'alternate') {
-        _placement = placement ? placement : itemIndex.value % 2 ? 'start' : 'end'
+      if (parentPlacement === 'alternate') {
+        _placement = placement ? placement : index % 2 ? 'start' : 'end'
       } else {
-        _placement = parentpPlacement
+        _placement = parentPlacement
       }
 
       return _placement
@@ -54,26 +53,19 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { reverse } = parentProps
-
       const prefixCls = `${mergedPrefixCls.value}-item`
       const placement = itemPlacement.value
-      const allItemLength = itemIndexArray.value.length
-      const index = itemIndex.value
-
-      const isReversePending = hasPendingNode.value && reverse && index === 0
-      const isPending = hasPendingNode.value && !reverse && index === allItemLength - 2
 
       return normalizeClass({
         [`${prefixCls}`]: true,
         [`${prefixCls}-${placement}`]: true,
-        [`${prefixCls}-pending`]: isReversePending || isPending,
       })
     })
 
     const dotClass = computed(() => {
-      const prefixCls = `${mergedPrefixCls.value}-item`
+      const prefixCls = `${mergedPrefixCls.value}-item-head`
       const { dot, color } = props
+
       return normalizeClass({
         [`${prefixCls}-dot`]: true,
         [`${prefixCls}-dot-custom`]: hasSlot(slots, 'dot') || !!dot,
@@ -84,18 +76,20 @@ export default defineComponent({
     return () => {
       const { label, dot } = props
       const prefixCls = `${mergedPrefixCls.value}-item`
-
       const dotNode = convertStringVNode(slots.dot, dot)
       const labelNode = convertStringVNode(slots.label, label)
+
       return (
         <li class={classes.value}>
-          <div class={`${prefixCls}-line`}></div>
-          <div class={dotClass.value} style={dotStyle.value as CSSProperties}>
-            {dotNode}
+          <div class={`${prefixCls}-head`}>
+            <div class={`${prefixCls}-head-line`}></div>
+            <div class={dotClass.value} style={dotStyle.value as CSSProperties}>
+              {dotNode}
+            </div>
           </div>
           <div class={`${prefixCls}-content`}>
-            {labelNode && <div class={`${prefixCls}-label`}>{labelNode}</div>}
-            {slots.default && <div class={`${prefixCls}-desc`}>{slots.default()}</div>}
+            {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
+            {slots.default && <div class={`${prefixCls}-content-desc`}>{slots.default()}</div>}
           </div>
         </li>
       )

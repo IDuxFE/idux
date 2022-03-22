@@ -87,15 +87,12 @@ describe('Timeline', () => {
     })
     expect(wrapper.html()).toMatchSnapshot()
 
-    const reverseWrapper = TimelineMount({
-      props: {
-        reverse: true,
-      },
-    })
-    reverseWrapper.findAll('.ix-timeline-item').forEach((item, index) => {
+    await wrapper.setProps({ reverse: true })
+
+    wrapper.findAll('.ix-timeline-item').forEach((item, index) => {
       expect(item.text()).toBe((3 - index).toString())
     })
-    expect(reverseWrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   test('pending work', async () => {
@@ -107,33 +104,14 @@ describe('Timeline', () => {
 
     await wrapper.setProps({ pending: true })
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
-    expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item-pending')
-    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending-dot')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending')
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ pending: pendingText })
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
-    expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item-pending')
-    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending-dot')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending')
     expect(wrapper.findAll('.ix-timeline-item')[4].text()).toBe(pendingText)
     expect(wrapper.html()).toMatchSnapshot()
-
-    const reverseWrapper = TimelineMount({
-      props: {
-        pending: true,
-        reverse: true,
-      },
-    })
-
-    reverseWrapper.findAll('.ix-timeline-item').forEach((item, index) => {
-      if (index === 0) {
-        expect(item.classes()).toContain('ix-timeline-item-pending')
-        expect(item.classes()).toContain('ix-timeline-item-pending-dot')
-      } else {
-        expect(item.text()).toBe((4 - index).toString())
-      }
-    })
-    expect(reverseWrapper.html()).toMatchSnapshot()
   })
 
   test('pending slot work', async () => {
@@ -146,16 +124,19 @@ describe('Timeline', () => {
     })
 
     expect(wrapper.findAll('.ix-timeline-item').length).toBe(5)
-    expect(wrapper.findAll('.ix-timeline-item')[3].classes()).toContain('ix-timeline-item-pending')
-    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending-dot')
+    expect(wrapper.findAll('.ix-timeline-item')[4].classes()).toContain('ix-timeline-item-pending')
     expect(wrapper.findAll('.ix-timeline-item')[4].text()).toBe(pendingSlotText)
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ pending: pendingText })
     expect(wrapper.findAll('.ix-timeline-item')[4].text()).toBe(pendingSlotText)
     expect(wrapper.html()).toMatchSnapshot()
+  })
 
-    const reverseWrapper = TimelineMount({
+  test('reverse with pending slot work', async () => {
+    const pendingSlotText = 'pendingSlotText'
+
+    const wrapper = TimelineMount({
       slots: {
         pending: pendingSlotText,
       },
@@ -164,15 +145,14 @@ describe('Timeline', () => {
       },
     })
 
-    reverseWrapper.findAll('.ix-timeline-item').forEach((item, index) => {
+    wrapper.findAll('.ix-timeline-item').forEach((item, index) => {
       if (index === 0) {
         expect(item.classes()).toContain('ix-timeline-item-pending')
-        expect(item.classes()).toContain('ix-timeline-item-pending-dot')
       } else {
         expect(item.text()).toBe((4 - index).toString())
       }
     })
-    expect(reverseWrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   test('pendingDot work', async () => {
@@ -183,13 +163,13 @@ describe('Timeline', () => {
     })
     const pendingDotText = 'pendingDotText'
 
-    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-dot').find('.ix-icon').classes()).toContain(
-      'ix-icon-loading',
-    )
+    expect(
+      wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-head-dot').find('.ix-icon').classes(),
+    ).toContain('ix-icon-loading')
     expect(wrapper.html()).toMatchSnapshot()
 
     await wrapper.setProps({ pendingDot: pendingDotText })
-    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-dot').text()).toBe(pendingDotText)
+    expect(wrapper.findAll('.ix-timeline-item')[4].find('.ix-timeline-item-head-dot').text()).toBe(pendingDotText)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -216,10 +196,10 @@ describe('TimelineItem', () => {
     })
 
     const items = wrapper.findAll('.ix-timeline-item')
-    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-red')
+    expect(items[0].find('.ix-timeline-item-head-dot').classes()).toContain('ix-timeline-item-head-dot-red')
 
-    expect(items[1].find('.ix-timeline-item-dot-black').exists()).toBe(false)
-    expect(items[1].find('.ix-timeline-item-dot').html()).toContain('style="color: black; border-color: black;"')
+    expect(items[1].find('.ix-timeline-item-head-dot-black').exists()).toBe(false)
+    expect(items[1].find('.ix-timeline-item-head-dot').html()).toContain('style="color: black; border-color: black;"')
   })
 
   test('dot work', async () => {
@@ -232,9 +212,9 @@ describe('TimelineItem', () => {
 
     const items = wrapper.findAll('.ix-timeline-item')
 
-    expect(items[0].find('.ix-timeline-item-dot-custom').exists()).toBe(true)
-    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-custom')
-    expect(items[0].find('.ix-timeline-item-dot').text()).toBe(dotText)
+    expect(items[0].find('.ix-timeline-item-head-dot-custom').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-head-dot').classes()).toContain('ix-timeline-item-head-dot-custom')
+    expect(items[0].find('.ix-timeline-item-head-dot').text()).toBe(dotText)
   })
 
   test('dot slot work', async () => {
@@ -247,9 +227,9 @@ describe('TimelineItem', () => {
 
     const items = wrapper.findAll('.ix-timeline-item')
 
-    expect(items[0].find('.ix-timeline-item-dot-custom').exists()).toBe(true)
-    expect(items[0].find('.ix-timeline-item-dot').classes()).toContain('ix-timeline-item-dot-custom')
-    expect(items[0].find('.ix-timeline-item-dot').text()).toBe(dotSlotText)
+    expect(items[0].find('.ix-timeline-item-head-dot-custom').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-head-dot').classes()).toContain('ix-timeline-item-head-dot-custom')
+    expect(items[0].find('.ix-timeline-item-head-dot').text()).toBe(dotSlotText)
   })
 
   test('label work', async () => {
@@ -262,8 +242,8 @@ describe('TimelineItem', () => {
 
     const items = wrapper.findAll('.ix-timeline-item')
 
-    expect(items[0].find('.ix-timeline-item-label').exists()).toBe(true)
-    expect(items[0].find('.ix-timeline-item-label').text()).toBe(labelText)
+    expect(items[0].find('.ix-timeline-item-content-label').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-content-label').text()).toBe(labelText)
   })
 
   test('label slot work', async () => {
@@ -277,7 +257,7 @@ describe('TimelineItem', () => {
 
     const items = wrapper.findAll('.ix-timeline-item')
 
-    expect(items[0].find('.ix-timeline-item-label').exists()).toBe(true)
-    expect(items[0].find('.ix-timeline-item-label').text()).toBe(labelSlotText)
+    expect(items[0].find('.ix-timeline-item-content-label').exists()).toBe(true)
+    expect(items[0].find('.ix-timeline-item-content-label').text()).toBe(labelSlotText)
   })
 })
