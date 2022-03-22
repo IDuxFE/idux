@@ -391,6 +391,7 @@ export interface StepperConfig {
 }
 
 export interface TableConfig {
+  autoHeight: boolean
   borderless: boolean
   rowKey: string
   size: TableSize

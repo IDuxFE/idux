@@ -158,6 +158,16 @@ describe('Table', () => {
       expect(onUpdateSelectedRowKeys).toBeCalledWith([2])
     })
 
+    test('autoHeight work', async () => {
+      const wrapper = TableMount({ props: { autoHeight: true } })
+
+      expect(wrapper.classes()).toContain('ix-table-auto-height')
+
+      await wrapper.setProps({ autoHeight: false })
+
+      expect(wrapper.classes()).not.toContain('ix-table-auto-height')
+    })
+
     test('borderless work', async () => {
       const wrapper = TableMount({ props: { borderless: true } })
 

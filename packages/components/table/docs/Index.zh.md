@@ -16,7 +16,8 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:expandedRowKeys` | 展开行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
-| `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
+| `autoHeight` | 是否自适应高度 | `boolean` | `false` | ✅ | - |
+| `borderless` | 是否无边框 | `boolean` | `true` | ✅ | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
 | `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |

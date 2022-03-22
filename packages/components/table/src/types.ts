@@ -24,6 +24,7 @@ import { type FlattedData } from './composables/useDataSource'
 export const tableProps = {
   expandedRowKeys: IxPropTypes.array<VKey>(),
   selectedRowKeys: IxPropTypes.array<VKey>(),
+  autoHeight: IxPropTypes.bool,
   borderless: IxPropTypes.bool,
   childrenKey: IxPropTypes.string.def('children'),
   columns: IxPropTypes.array<TableColumn<any>>().def(() => []),

@@ -245,6 +245,7 @@ export const defaultConfig: GlobalConfig = {
     size: 'md',
   },
   table: {
+    autoHeight: false,
     borderless: true,
     rowKey: 'key',
     size: 'md',
