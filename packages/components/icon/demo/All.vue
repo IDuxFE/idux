@@ -67,6 +67,7 @@ const onCopy = (evt: MouseEvent, name: string) => {
 .icon-box {
   position: relative;
   overflow: hidden;
+  margin-top: 24px;
 
   &-item {
     position: relative;

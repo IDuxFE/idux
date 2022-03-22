@@ -141,8 +141,10 @@ function renderSuffix(
     classes += ` ${prefixCls}-suffix-hidden`
   }
 
+  const clearStyle = computed(() => ({ cursor: 'pointer' }))
+
   return (
-    <span class={classes} onClick={onClear}>
+    <span class={classes} onClick={onClear} style={clearStyle.value}>
       {clearIconSlot ? clearIconSlot() : <IxIcon name={clearIcon}></IxIcon>}
     </span>
   )
