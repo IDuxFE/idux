@@ -70,20 +70,22 @@ export default defineComponent({
       const children: VNodeTypes[] = showTotal.value ? [<Total />] : []
 
       if (simple.value) {
-        children.push(<Item disabled={activeIndex.value === 1} type="prev" />)
+        const _activeIndex = activeIndex.value
+        const _lastIndex = lastIndex.value
+        children.push(<Item disabled={_activeIndex === 1} type="prev" />)
         children.push(
           <li class={`${prefixCls}-item`}>
             <ɵInput
               disabled={props.disabled}
               size={size.value}
-              value={activeIndex.value.toString()}
+              value={_activeIndex.toString()}
               onKeydown={jumpToIndex}
             />
             <span class={`${prefixCls}-item-slash`}>/</span>
-            <span>{lastIndex.value}</span>
+            <span>{_lastIndex}</span>
           </li>,
         )
-        children.push(<Item disabled={activeIndex.value === lastIndex.value} type="next" />)
+        children.push(<Item disabled={_activeIndex === _lastIndex} type="next" />)
       } else {
         items.value.forEach(item => children.push(<Item key={item.type + '-' + item.index} {...item} />))
         showSizeChanger.value && children.push(<Sizes />)

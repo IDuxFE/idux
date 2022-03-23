@@ -20,18 +20,16 @@ export function useItems(
   lastIndex: ComputedRef<number>,
 ): ComputedRef<PaginationItem[]> {
   return computed(() => {
-    const currActiveIndex = activeIndex.value
-    const currLastIndex = lastIndex.value
+    const _activeIndex = activeIndex.value
+    const _lastIndex = lastIndex.value
     let items: PaginationItem[]
-    if (currLastIndex <= 9) {
-      items = generatePage(1, currLastIndex)
+    if (_lastIndex <= 9) {
+      items = generatePage(1, _lastIndex)
     } else {
-      items = generateRangeItem(currActiveIndex, currLastIndex)
+      items = generateRangeItem(_activeIndex, _lastIndex)
     }
-
-    const prevItem: PaginationItem = { type: 'prev', disabled: currActiveIndex === 1 }
-    const nextItem: PaginationItem = { type: 'next', disabled: currActiveIndex === currLastIndex }
-
+    const prevItem: PaginationItem = { type: 'prev', disabled: _activeIndex === 1 }
+    const nextItem: PaginationItem = { type: 'next', disabled: _activeIndex === _lastIndex }
     return [prevItem, ...items, nextItem]
   })
 }

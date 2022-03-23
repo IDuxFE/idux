@@ -5,22 +5,46 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { type VNodeChild, computed, defineComponent, inject } from 'vue'
 
-import { TABLE_TOKEN } from '../../token'
+import { convertCssPixel } from '@idux/cdk/utils'
+
+import { TABLE_TOKEN, tableBodyToken } from '../../token'
 
 export default defineComponent({
-  setup(_, { slots }) {
-    const { flattedColumns, bodyRowTag, bodyColTag } = inject(TABLE_TOKEN)!
+  props: { isEmpty: Boolean },
+  setup(props, { slots }) {
+    const { bodyRowTag, bodyColTag, mergedPrefixCls, flattedColumns, hasFixed, scrollWidth, scrollBarColumn } =
+      inject(TABLE_TOKEN)!
+    const { mainTableWidth } = inject(tableBodyToken)!
     const columnCount = computed(() => flattedColumns.value.length)
     return () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyRowTag = bodyRowTag.value as any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const BodyColTag = bodyColTag.value as any
+
+      let children: VNodeChild = slots.default!()
+
+      if (props.isEmpty ? scrollWidth.value : hasFixed.value) {
+        const scrollBar = scrollBarColumn.value
+        children = (
+          <div
+            class={`${mergedPrefixCls.value}-fixed-row`}
+            style={{
+              width: convertCssPixel(mainTableWidth.value - (scrollBar ? scrollBar.width : 0)),
+              position: 'sticky',
+              left: 0,
+              overflow: 'hidden',
+            }}
+          >
+            {children}
+          </div>
+        )
+      }
       return (
         <BodyRowTag>
-          <BodyColTag colSpan={columnCount.value}>{slots.default?.()}</BodyColTag>
+          <BodyColTag colSpan={columnCount.value}>{children}</BodyColTag>
         </BodyRowTag>
       )
     }

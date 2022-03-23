@@ -14,7 +14,7 @@ import { type TableColumnMerged } from '../composables/useColumns'
 import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
-  props: { ixFixedHolder: Boolean },
+  props: { isFixedHolder: Boolean },
   setup(props) {
     const {
       flattedColumns,
@@ -26,10 +26,10 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
     const isRender = computed(() => flattedColumns.value.some(column => !!column.width || 'type' in column))
     return () => {
-      const { ixFixedHolder } = props
+      const { isFixedHolder } = props
 
       let children: VNodeTypes[] | undefined
-      if (ixFixedHolder) {
+      if (isFixedHolder) {
         const widths = columnWidthsWithScrollBar.value
         children = flattedColumnsWithScrollBar.value.map((column, colIndex) =>
           renderCol(mergedPrefixCls, mergedSelectableMenus, column as TableColumnMerged, widths[colIndex]),

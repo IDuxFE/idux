@@ -30,8 +30,8 @@ export function useScroll(
     Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
 
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
-  const scrollHeight = computed(() =>
-    convertCssPixel(props.scroll?.height || props.scroll?.y) || autoHeight.value ? 'auto' : '',
+  const scrollHeight = computed(
+    () => convertCssPixel(props.scroll?.height || props.scroll?.y) || (autoHeight.value ? 'auto' : ''),
   )
 
   const scrollBarSize = computed(() => (props.virtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
