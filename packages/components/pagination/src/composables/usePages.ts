@@ -23,7 +23,7 @@ export interface PagesContext {
 export function usePages(props: PaginationProps, config: PaginationConfig): PagesContext {
   const [activeIndex, setActiveIndex] = useControlledProp(props, 'pageIndex', 1)
   const [activeSize, setActiveSize] = useControlledProp(props, 'pageSize', props.pageSize ?? config.pageSize)
-  const lastIndex = computed(() => Math.ceil(props.total / activeSize.value))
+  const lastIndex = computed(() => Math.max(Math.ceil(props.total / activeSize.value), 1))
 
   const changePageIndex = (index: number) => {
     const validIndex = validatePageIndex(index, lastIndex.value)

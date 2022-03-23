@@ -45,7 +45,7 @@ export default defineComponent({
         }
       } else {
         children.push(
-          <BodyRowSingle>
+          <BodyRowSingle isEmpty>
             <ɵEmpty v-slots={tableSlots} empty={props.empty} />
           </BodyRowSingle>,
         )

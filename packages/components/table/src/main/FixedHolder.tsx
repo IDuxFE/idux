@@ -55,12 +55,11 @@ export default defineComponent({
     })
 
     return () => {
-      const children = hasData.value && !isMaxContent.value ? <ColGroup ixFixedHolder /> : null
       return (
         <div class={classes.value} style={style.value} ref={scrollHeadRef}>
           <table style={tableStyle.value}>
-            {children}
-            {slots.default?.()}
+            {(hasData.value || !isMaxContent.value) && <ColGroup isFixedHolder />}
+            {slots.default && slots.default()}
           </table>
         </div>
       )
