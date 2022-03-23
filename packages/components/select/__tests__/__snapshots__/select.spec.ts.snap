@@ -28,7 +28,7 @@ exports[`Select multiple work maxLabel responsive work 1`] = `
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
     <!---->
@@ -58,7 +58,7 @@ exports[`Select multiple work maxLabel responsive work 2`] = `
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\" style=\\"width: 0px;\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
     <!---->
@@ -85,7 +85,7 @@ exports[`Select multiple work render work 1`] = `
       </div>
       <!---->
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
     <!---->

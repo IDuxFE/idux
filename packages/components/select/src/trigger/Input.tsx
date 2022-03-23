@@ -17,14 +17,12 @@ export default defineComponent({
       isDisabled,
       inputRef,
       inputValue,
-      inputWidth,
+
       mirrorRef,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
     } = inject(selectToken)!
-
-    const style = computed(() => ({ width: inputWidth.value }))
 
     const innerStyle = computed(() => {
       const { allowInput, searchable } = props
@@ -36,7 +34,7 @@ export default defineComponent({
       const { autofocus, multiple, readonly } = props
       const prefixCls = `${mergedPrefixCls.value}-selector-input`
       return (
-        <div class={prefixCls} style={style.value}>
+        <div class={prefixCls}>
           <input
             ref={inputRef}
             class={`${prefixCls}-inner`}

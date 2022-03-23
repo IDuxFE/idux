@@ -6,7 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -50,5 +50,5 @@ export type VirtualScrollToOptions =
     }
 export type VirtualScrollToFn = (option?: number | VirtualScrollToOptions) => void
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type VirtualItemRenderFn<T = any> = (option: { item: T; index: number }) => VNodeTypes
-export type VirtualContentRenderFn = (children: VNodeTypes[]) => VNodeTypes
+export type VirtualItemRenderFn<T = any> = (option: { item: T; index: number }) => VNodeChild
+export type VirtualContentRenderFn = (children: VNode[]) => VNodeChild
