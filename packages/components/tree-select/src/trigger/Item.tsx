@@ -15,8 +15,8 @@ import { useKey } from '@idux/components/utils'
 interface ItemProps {
   disabled?: boolean
   prefixCls: string
-  removable: boolean
-  handleItemRemove: (key: any) => void
+  removable?: boolean
+  handleItemRemove?: (key: any) => void
 }
 
 const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
@@ -27,7 +27,7 @@ const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
 
   const handleClick = (evt: Event) => {
     evt.stopPropagation()
-    handleItemRemove(key)
+    handleItemRemove?.(key)
   }
 
   return (

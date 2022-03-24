@@ -6,10 +6,12 @@
  */
 
 import type { MergedNode } from '../composables/useDataSource'
-import type { VNodeTypes } from 'vue'
+import type { VNodeChild } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { Logger } from '@idux/cdk/utils'
+import { ɵOverflow } from '@idux/components/_private/overflow'
 import { IxIcon } from '@idux/components/icon'
 
 import { treeSelectToken } from '../token'
@@ -32,18 +34,6 @@ export default defineComponent({
       searchValue,
     } = inject(treeSelectToken)!
 
-    const selectedItems = computed(() => {
-      const { maxLabelCount } = treeSelectProps
-      const nodes = selectedNodes.value
-      const items = nodes.slice(0, maxLabelCount) as Array<MergedNode & { isMax?: boolean }>
-      if (nodes.length > maxLabelCount) {
-        const label = `+ ${nodes.length - maxLabelCount} ...`
-        const key = nodes.slice(maxLabelCount).map(node => node.rawNode)
-        items.push({ isMax: true, key, label } as unknown as MergedNode & { isMax?: boolean })
-      }
-      return items
-    })
-
     const showItems = computed(() => {
       return treeSelectProps.multiple || (selectedValue.value.length > 0 && !searchValue.value)
     })
@@ -59,10 +49,26 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-selector`
 
       const itemPrefixCls = `${prefixCls}-item`
-      const itemNodes = selectedItems.value.map(item => {
-        const { key, isMax, label } = item
+
+      if (__DEV__ && treeSelectProps.maxLabelCount) {
+        Logger.warn('components/treeSelect', '`maxLabelCount` was deprecated, please use `maxLabel` instead')
+      }
+
+      if (__DEV__ && slots.maxLabel) {
+        Logger.warn(
+          'components/treeSelect',
+          'slot `maxLabel` was deprecated, please use slot `overflowedLabel` instead',
+        )
+      }
+
+      if (__DEV__ && slots.label) {
+        Logger.warn('components/treeSelect', 'slots `label` was deprecated, please use slots `selectedLabel` instead')
+      }
+
+      const renderItem = (item: MergedNode) => {
+        const { key, label, rawNode } = item
         const _disabled = disabled || item.selectDisabled
-        const removable = multiple && !_disabled && !readonly && !isMax
+        const removable = multiple && !_disabled && !readonly
 
         const itemProps = {
           key,
@@ -72,19 +78,51 @@ export default defineComponent({
           title: label,
           handleItemRemove,
         }
-        let labelNode: VNodeTypes | undefined
-        if (isMax) {
-          labelNode = slots.maxLabel?.(item.key) ?? label
-        } else {
-          labelNode = slots.label?.(item.rawNode) ?? label
-        }
+
+        const selectedLabelSlot = slots.selectedLabel ?? slots.label
+        const labelNode: VNodeChild | undefined = selectedLabelSlot ? selectedLabelSlot(rawNode) : label
+
         return <Item {...itemProps}>{labelNode}</Item>
-      })
+      }
+      const renderRest = (rest: MergedNode[]) => {
+        const key = 'IDUX_TREE_SELECT_MAX_ITEM'
+
+        const itemProps = {
+          key,
+          prefixCls: itemPrefixCls,
+          removable: false,
+        }
+
+        const overflowedLabelSlot = slots.overflowedLabel ?? slots.maxLabel
+        const labelNode: VNodeChild | undefined = overflowedLabelSlot?.(rest) ?? `+ ${rest.length} ...`
+
+        return <Item {...itemProps}>{labelNode}</Item>
+      }
+
+      const singleItem = treeSelectProps.multiple ? null : selectedNodes.value.map(item => renderItem(item))
+
+      const overflowSlot = {
+        item: renderItem,
+        rest: renderRest,
+        suffix: () => <Input />,
+      }
 
       return (
         <label class={prefixCls}>
-          {showItems.value && itemNodes}
-          <Input></Input>
+          {treeSelectProps.multiple ? (
+            <ɵOverflow
+              v-slots={overflowSlot}
+              prefixCls={prefixCls}
+              dataSource={selectedNodes.value}
+              maxLabel={treeSelectProps.maxLabelCount ?? treeSelectProps.maxLabel}
+              getKey={(item: MergedNode) => item.key}
+            />
+          ) : (
+            <>
+              {showItems.value && singleItem}
+              <Input />
+            </>
+          )}
           {showPlaceholder.value && (
             <div class={`${prefixCls}-placeholder`}> {slots.placeholder?.() ?? treeSelectProps.placeholder}</div>
           )}
