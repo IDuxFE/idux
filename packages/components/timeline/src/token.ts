@@ -11,8 +11,6 @@ import { type TimelineProps } from './types'
 
 export interface TimelineContext {
   props: TimelineProps
-  itemIndexArray: ComputedRef<number[]>
-  hasPendingNode: ComputedRef<boolean>
   mergedPrefixCls: ComputedRef<string>
 }
 

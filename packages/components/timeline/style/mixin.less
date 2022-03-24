@@ -7,3 +7,32 @@
     color: @@color-name;
   }
 }
+
+.timeline-line-align-center() {
+  .@{timeline-item-prefix} {
+    &-head {
+      left: 50%;
+      width: @timeline-dot-size;
+      transform: translateX(-50%);
+
+      &-line {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+.timeline-dotted-line() {
+  .@{timeline-item-prefix} {
+
+    &-head-line {
+      background: @timeline-dotted-line-background;
+      background-size: @timeline-dotted-line-background-size;
+    }
+
+    &-content {
+      margin-bottom: @timeline-pending-item-content-min-height;
+    }
+  }
+}

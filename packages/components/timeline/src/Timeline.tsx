@@ -6,10 +6,9 @@
  */
 
 import type { TimelineProps } from './types'
-import type { Slots, VNode } from 'vue'
+import type { ComputedRef, Slots, VNode } from 'vue'
 
-import { ComputedRef, computed } from '@vue/reactivity'
-import { defineComponent, normalizeClass, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
@@ -30,9 +29,6 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-timeline`)
 
     const hasPendingNode = computed(() => props.pending !== false || hasSlot(slots, 'pending'))
-    const itemNodes = useItems(slots, props, hasPendingNode, mergedPrefixCls)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const itemIndexArray = computed(() => itemNodes.value.map(node => (node as any).index))
 
     const classes = computed(() => {
       const { placement, reverse, both } = props
@@ -42,21 +38,24 @@ export default defineComponent({
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-reverse`]: reverse,
         [`${prefixCls}-not-both`]: !both,
+        [`${prefixCls}-pending`]: hasPendingNode.value,
       })
     })
 
-    provide(timelineToken, { props, itemIndexArray, hasPendingNode, mergedPrefixCls })
+    provide(timelineToken, { props, mergedPrefixCls })
 
     return () => {
+      const itemNodes = useItems(slots, props, hasPendingNode, mergedPrefixCls)
+
       return <ul class={classes.value}>{itemNodes.value}</ul>
     }
   },
 })
 
-function convertItemNodes(itemsNodes: VNode[] | undefined): VNode[] {
-  return flattenNode(itemsNodes, { key: timelineItemKey }).map((node, index) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(node as any).index = index + 1
+function convertItemNodes(itemNodes: VNode[]): VNode[] {
+  return flattenNode(itemNodes, { key: timelineItemKey }).map((node, index) => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    ;(node as any).index = index
     return node
   })
 }
@@ -71,18 +70,19 @@ function useItems(
     const { pending, pendingDot, reverse } = props
 
     const defaultSlots = slots?.default?.() || []
-    const pendingDotNode = slots?.pendingDot?.() || pendingDot || <IxIcon name="loading" />
-    let penddingItem: null | VNode = null
+    let pendingNode: null | VNode = null
 
     if (hasPendingNode.value) {
-      penddingItem = (
-        <IxTimelineItem class={`${mergedPrefixCls.value}-item-pending-dot`} v-slots={{ dot: () => pendingDotNode }}>
+      const pendingDotNode = slots?.pendingDot?.() || pendingDot || <IxIcon name="loading" />
+
+      pendingNode = (
+        <IxTimelineItem class={`${mergedPrefixCls.value}-item-pending`} v-slots={{ dot: () => pendingDotNode }}>
           {convertStringVNode(slots.pending, isBoolean(pending) ? '' : pending)}
         </IxTimelineItem>
       )
     }
 
-    const timelineItemNodes = reverse ? [penddingItem, ...defaultSlots.reverse()] : [...defaultSlots, penddingItem]
+    const timelineItemNodes = reverse ? [pendingNode, ...defaultSlots.reverse()] : [...defaultSlots, pendingNode]
 
     return convertItemNodes(timelineItemNodes.filter(Boolean) as VNode[])
   })
