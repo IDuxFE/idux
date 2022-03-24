@@ -136,7 +136,6 @@ export default defineComponent({
               <Input />
             </>
           )}
-
           {showPlaceholder.value && (
             <div class={`${prefixCls}-placeholder`}> {slots.placeholder?.() ?? selectProps.placeholder}</div>
           )}

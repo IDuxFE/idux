@@ -26,6 +26,7 @@ export default defineComponent({
       isDisabled,
       selectedValue,
       isFocused,
+      clearInput,
       handleFocus,
       handleBlur,
       overlayOpened,
@@ -101,6 +102,7 @@ export default defineComponent({
         case 'Enter':
           evt.preventDefault()
           changeSelected(activeOption.value?.value)
+          clearInput()
           break
         case 'Escape':
           evt.preventDefault()

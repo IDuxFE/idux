@@ -9,16 +9,14 @@
 
 import type { SelectProps } from '../types'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { Ref } from 'vue'
 
-import { onMounted, ref } from 'vue'
+import { Ref, onMounted, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
 export interface InputStateContext {
   mirrorRef: Ref<HTMLSpanElement | undefined>
   inputValue: Ref<string>
-  inputWidth: Ref<string>
   isComposing: Ref<boolean>
   isFocused: Ref<boolean>
   handleCompositionStart: (evt: CompositionEvent) => void
@@ -36,19 +34,18 @@ export function useInputState(
 ): InputStateContext {
   const mirrorRef = ref<HTMLSpanElement>()
   const inputValue = ref('')
-  const inputWidth = ref('')
   const isComposing = ref(false)
   const isFocused = ref(false)
 
-  const syncMirrorWidth = () => {
+  const syncMirrorWidth = (evt?: Event) => {
     if (props.multiple) {
-      const inputElement = inputRef.value
       const mirrorElement = mirrorRef.value
-      if (inputElement && mirrorElement) {
-        // don't remove the space char, this is placeholder.
-        mirrorElement.innerText = ` ${inputElement.value}`
-        inputWidth.value = `${mirrorElement.scrollWidth}px`
+      if (!mirrorElement) {
+        return
       }
+      const inputText = evt ? (evt.target as HTMLInputElement).value : inputRef.value!.value
+      mirrorElement.textContent = inputText
+      inputRef.value!.style.width = `${mirrorElement.offsetWidth}px`
     }
   }
 
@@ -68,6 +65,7 @@ export function useInputState(
   const handleInput = (evt: Event, emitInput = true) => {
     emitInput && callEmit(props.onInput, evt)
     if (isComposing.value) {
+      syncMirrorWidth(evt)
       return
     }
     if (props.allowInput || props.searchable) {
@@ -98,7 +96,6 @@ export function useInputState(
       inputElement.value = ''
     }
     inputValue.value = ''
-
     syncMirrorWidth()
   }
 
@@ -107,7 +104,6 @@ export function useInputState(
   return {
     mirrorRef,
     inputValue,
-    inputWidth,
     isComposing,
     isFocused,
     handleCompositionStart,

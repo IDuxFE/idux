@@ -9,7 +9,7 @@ import type { MergedOption } from '../composables/useOptions'
 
 import { defineComponent, inject, onMounted } from 'vue'
 
-import { CdkVirtualScroll, VirtualItemRenderFn } from '@idux/cdk/scroll'
+import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { ɵInput } from '@idux/components/_private/input'

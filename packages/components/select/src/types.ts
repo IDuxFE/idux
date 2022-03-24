@@ -11,7 +11,7 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNode, VNodeChild, VNodeTypes } from 'vue'
+import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
@@ -42,7 +42,7 @@ export const selectProps = {
   labelKey: IxPropTypes.string,
   options: IxPropTypes.array<SelectData>(),
   overlayClassName: IxPropTypes.string,
-  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
+  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeChild>(),
   placeholder: IxPropTypes.string,
   readonly: IxPropTypes.bool.def(false),
   searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]).def(false),
