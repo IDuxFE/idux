@@ -16,7 +16,7 @@ import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ɵBaseTimePanelProps } from '@idux/components/_private/time-panel'
 import type { TimePickerConfig, TimeRangePickerConfig } from '@idux/components/config'
-import type { FormContext, FormSize } from '@idux/components/form'
+import type { FormSize } from '@idux/components/form'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
@@ -35,14 +35,13 @@ export interface CommonInputProps {
 export function useCommonInputProps(
   props: TimePickerProps | TimeRangePickerProps,
   config: TimePickerConfig | TimeRangePickerConfig,
-  formContext?: FormContext | null,
 ): ComputedRef<CommonInputProps> {
   return computed(() => {
     return {
       borderless: props.borderless ?? config.borderless,
       clearable: props.clearable ?? config.clearable,
       clearIcon: props.clearIcon ?? config.clearIcon,
-      size: props.size ?? formContext?.size.value ?? config.size,
+      size: 'sm',
     }
   })
 }
