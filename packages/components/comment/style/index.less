@@ -1,0 +1,99 @@
+@import '../../style/mixins/reset.less';
+
+.@{comment-prefix} {
+  .reset-component();
+
+  &-inner {
+    display: flex;
+    padding: @comment-padding-md;
+  }
+
+  &-avatar {
+    position: relative;
+    flex-shrink: 0;
+    margin-right: @comment-margin-right;
+    cursor: pointer;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+
+  &-content {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 1px;
+    font-size: @comment-font-size-md;
+    word-wrap: break-word;
+
+    &-author {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: @comment-author-margin-bottom;
+      font-size: @comment-font-size-md;
+
+      & > a,
+      & > span {
+        padding-right: @comment-content-padding-right;
+        font-size: @comment-font-size-sm;
+        line-height: 18px;
+      }
+
+      &-name {
+        color: @comment-author-name-color;
+        font-size: @comment-font-size-md;
+        transition: color 0.3s;
+
+        > * {
+          color: @comment-author-name-color;
+
+          &:hover {
+            color: @comment-author-name-color;
+          }
+        }
+      }
+
+      &-time {
+        color: @comment-author-time-color;
+        white-space: nowrap;
+        cursor: auto;
+      }
+    }
+
+    &-detail p {
+      margin-bottom: @comment-content-detail-p-margin-bottom;
+      white-space: pre-wrap;
+    }
+  }
+
+  &-actions {
+    margin-top: @comment-actions-margin-top;
+    margin-bottom: @comment-actions-margin-bottom;
+    padding-left: 0;
+
+    > li {
+      display: inline-block;
+      color: @comment-action-color;
+
+      > span {
+        margin-right: 10px;
+        color: @comment-action-color;
+        font-size: @comment-font-size-sm;
+        cursor: pointer;
+        transition: color 0.3s;
+        user-select: none;
+
+        &:hover {
+          color: @comment-action-hover-color;
+        }
+      }
+    }
+  }
+
+  &-nested {
+    margin-left: @comment-nest-indent;
+  }
+}
