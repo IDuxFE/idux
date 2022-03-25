@@ -90,7 +90,7 @@ export default defineComponent({
           title: label,
         }
 
-        const selectedLabelSlot = slots.label ?? slots.selectedLabel
+        const selectedLabelSlot = slots.selectedLabel ?? slots.label
         const labelNode: VNodeChild | undefined = selectedLabelSlot
           ? selectedLabelSlot(rawOption)
           : renderOptionLabel(slots, rawOption, label)

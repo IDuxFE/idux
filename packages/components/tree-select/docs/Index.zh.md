@@ -33,7 +33,7 @@ order: 0
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](/components/tree/zh#TreeDroppable) | `TreeDroppable` | - | - | - |
 | `empty` | 空数据时的内容 | `string \|` [EmptyProps](/components/empty/zh#EmptyProps) | - | - | - |
 | `expandIcon` | 树组件中的展开图标 | `string` | `right` | ✅ | - |
-| `maxLabelCount` | 最多显示多少个标签 | `number` | - | - | - |
+| `maxLabel` | 最多显示多少个标签，响应式模式会对性能产生损耗 | `number \| 'responsive'` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `nodeKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`key`字段 | `string \| (node: TreeSelectNode) => VKey` | `key` | ✅ | -
 | `labelKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`label`字段 | `string` | `label` | ✅ | -
@@ -89,9 +89,9 @@ order: 0
 | --- | --- | --- | --- |
 | `empty` | 自定义当下拉列表为空时显示的内容 | - | - |
 | `expandIcon` | 节点展开图标 | `{key: VKey, expanded: boolean, node: TreeSelectNode}` | - |
-| `label` | 自定义选中的标签 | `{node: RawNode}` | `RawNode`为用户传入的数据结构 |
+| `selectedLabel` | 自定义选中的标签 | `{node: RawNode}` | `RawNode`为用户传入的数据结构 |
 | `leafLineIcon` | 叶子节点的图标，用于替换默认的连接线 | - | 仅在 `showLine 时生效` |
-| `maxLabel` | 自定义超出最多显示多少个标签的内容 | `{nodes: RawNode[]}` | 参数为超出的数组 |
+| `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `{nodes: RawNode[]}` | 参数为超出的数组 |
 | `suffix` | 后缀图标 | - | - |
 | `placeholder` | 选择框默认文本 | - | - |
 | `treeLabel` | 自定义节点的文本 | `{node: TreeSelectNode}` | - |
