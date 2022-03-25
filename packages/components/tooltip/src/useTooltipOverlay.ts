@@ -47,6 +47,7 @@ export function useTooltipOverlay(
       placement: props.placement ?? config.placement,
       target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,
       trigger: trigger,
+      zIndex: props.zIndex,
     }
   })
   return { overlayRef, updatePopper, visible, setVisible, overlayProps }

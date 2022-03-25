@@ -96,6 +96,21 @@ describe('Overlay', () => {
     expect(target.querySelector('.ix-overlay')).not.toBeNull()
   })
 
+  test('zIndex work', async () => {
+    let zIndex = 1001
+    const wrapper = OverlayMount({
+      props: { target: 'ix-test-container', visible: true, zIndex },
+      slots,
+    })
+
+    expect((document.querySelector('.ix-overlay') as HTMLElement).style.zIndex).toBe(`${zIndex}`)
+
+    zIndex = 1002
+    await wrapper.setProps({ zIndex })
+
+    expect((document.querySelector('.ix-overlay') as HTMLElement).style.zIndex).toBe(`${zIndex}`)
+  })
+
   test('no slots work', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     OverlayMount()

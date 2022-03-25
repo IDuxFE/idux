@@ -21,6 +21,7 @@ export const tooltipProps = {
   target: ɵPortalTargetDef,
   title: IxPropTypes.string,
   trigger: ɵOverlayTriggerDef,
+  zIndex: IxPropTypes.number,
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
