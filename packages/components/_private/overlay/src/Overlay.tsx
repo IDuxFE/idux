@@ -141,8 +141,9 @@ function renderContent(
     return null
   }
   const prefixCls = mergedPrefixCls.value
+  const style = props.zIndex != null ? `z-index: ${props.zIndex}` : undefined
   const overlay = (
-    <div ref={popperRef} class={prefixCls} {...popperEvents.value} {...attrs}>
+    <div ref={popperRef} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>
       {contentNode}
       {props.showArrow && <div ref={arrowRef} class={`${prefixCls}-arrow`}></div>}
     </div>

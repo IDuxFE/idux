@@ -46,6 +46,7 @@ export const overlayProps = {
   target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]).isRequired,
   transitionName: IxPropTypes.string,
   trigger: overlayTriggerDef,
+  zIndex: IxPropTypes.number,
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
