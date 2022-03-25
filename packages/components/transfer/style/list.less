@@ -53,18 +53,20 @@
       margin-left: auto;
     }
     &-search-icon {
+      font-size: @transfer-search-icon-font-size;
+      color: @transfer-search-icon-color;
       cursor: pointer;
     }
     &-clear-icon {
       margin-left: auto;
       font-size: @transfer-clear-icon-font-size;
-      color: @transfer-icon-color;
+      color: @transfer-clear-icon-color;
       &:hover:not(&-disabled) {
-        color: @transfer-icon-hover-color;
+        color: @transfer-clear-icon-hover-color;
       }
       &:focus:not(&-disabled),
       &:active:not(&-disabled) {
-        color: @transfer-icon-active-color;
+        color: @transfer-clear-icon-active-color;
       }
 
       cursor: pointer;

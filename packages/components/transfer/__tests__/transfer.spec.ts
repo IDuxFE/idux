@@ -377,10 +377,10 @@ describe('Transfer', () => {
     expect(targetList.findAllComponents(CheckableListItem).length).toBe(1)
   })
 
-  test('transferBySelect work', async () => {
+  test('immediate work', async () => {
     const onChange = jest.fn()
     const wrapper = TransferMount({
-      props: { dataSource: mockedDataSource, mode: 'transferBySelect', 'onUpdate:value': onChange },
+      props: { dataSource: mockedDataSource, mode: 'immediate', 'onUpdate:value': onChange },
     })
 
     const [sourceList, targetList] = wrapper.findAllComponents(TransferList)

@@ -13,8 +13,6 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import { isBoolean } from 'lodash-es'
-
 export interface MergedNode {
   children?: MergedNode[]
   label: string
@@ -143,27 +141,22 @@ function convertMergeNode(
 }
 
 function convertDisabled(node: TreeNode, disabled?: (node: TreeNode) => boolean | TreeNodeDisabled) {
-  const nodeDisabled = node.disabled
-  if (isBoolean(nodeDisabled)) {
-    return { check: nodeDisabled, drag: nodeDisabled, drop: nodeDisabled, select: nodeDisabled }
-  } else {
-    let { check, drag, drop, select } = nodeDisabled ?? {}
-    if (disabled) {
-      const treeDisabled = disabled(node)
-      if (isBoolean(treeDisabled)) {
-        check ??= treeDisabled
-        drag ??= treeDisabled
-        drop ??= treeDisabled
-        select ??= treeDisabled
-      } else {
-        check ??= treeDisabled.check
-        drag ??= treeDisabled.drag
-        drop ??= treeDisabled.drop
-        select ??= treeDisabled.select
-      }
-    }
-    return { check, drag, drop, select }
+  const nodeDisabled = node.disabled || {}
+  if (nodeDisabled === true) {
+    return { check: true, drag: true, drop: true, select: true }
   }
+  let { check, drag, drop, select } = nodeDisabled
+  if (disabled) {
+    const treeDisabled = disabled(node) || {}
+    if (treeDisabled === true) {
+      return { check: true, drag: true, drop: true, select: true }
+    }
+    check = check || treeDisabled.check
+    drag = drag || treeDisabled.drag
+    drop = drop || treeDisabled.drop
+    select = select || treeDisabled.select
+  }
+  return { check, drag, drop, select }
 }
 
 export function convertMergedNodeMap(mergedNodes: MergedNode[], map: Map<VKey, MergedNode>): void {

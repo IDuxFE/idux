@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TransferPaginationType } from '@idux/components/transfer'
+import type { TransferPaginationProps } from '@idux/components/transfer'
 
 import { computed, ref } from 'vue'
 
@@ -24,7 +24,7 @@ const dataSource: Data[] = Array.from(new Array(100)).map((_, idx) => ({
 
 const sourcePageIndex = ref(1)
 const targetPageIndex = ref(1)
-const pagination = computed<TransferPaginationType>(() => ({
+const pagination = computed<TransferPaginationProps>(() => ({
   pageIndex: [sourcePageIndex.value, targetPageIndex.value],
   pageSize: [10, 10],
   onChange(isSource, pageIndex) {

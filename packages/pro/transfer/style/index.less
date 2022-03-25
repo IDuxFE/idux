@@ -1,0 +1,52 @@
+@import '../../style/mixins/reset.less';
+
+.@{pro-transfer-prefix} {
+  .reset-component();
+
+  .@{transfer-prefix}-list {
+    height: auto;
+    min-width: @pro-transfer-list-min-width;
+    min-height: @pro-transfer-list-min-height;
+  }
+
+  &-empty-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-table-content, &-tree-content {
+    &-close-icon {
+      margin-left: auto;
+      cursor: pointer;
+      font-size: @pro-transfer-list-close-icon-font-size;
+      color: @pro-transfer-list-close-icon-color;
+      &:hover {
+        color: @pro-transfer-list-close-icon-hover-color;
+      }
+      &:focus,
+      &:active {
+        color: @pro-transfer-list-close-icon-active-color;
+      }
+    }
+  }
+
+  &-table-content {
+    &-removable-label {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+    }
+    &-close-icon {
+      padding: @pro-transfer-table-close-icon-padding;
+    }
+  }
+
+  &-tree-content {
+    &-close-icon {
+      padding: @pro-transfer-tree-close-icon-padding;
+    }
+  }
+}

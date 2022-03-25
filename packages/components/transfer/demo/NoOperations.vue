@@ -1,6 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxTransfer v-model:value="selectedKeys" :data-source="dataSource" :disabled="disabled" mode="transferBySelect" />
+    <IxTransfer v-model:value="selectedKeys" :data-source="dataSource" :disabled="disabled" mode="immediate" />
     <IxSpace align="center">
       <label>disabled:</label>
       <IxSwitch v-model:checked="disabled" />

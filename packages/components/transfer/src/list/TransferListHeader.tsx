@@ -70,7 +70,7 @@ export default defineComponent({
     }
 
     const renderCheckAll = (prefixCls: string) => {
-      if (!showSelectAll.value || (!props.isSource && transferProps.mode === 'transferBySelect')) {
+      if (!showSelectAll.value || (!props.isSource && transferProps.mode === 'immediate')) {
         return
       }
 

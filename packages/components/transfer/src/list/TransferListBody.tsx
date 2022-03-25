@@ -28,7 +28,8 @@ export default defineComponent({
     } = inject(transferContext)!
 
     const transferBindings = props.isSource ? inject(TRANSFER_SOURCE_TOKEN)! : inject(TRANSFER_TARGET_TOKEN)!
-    const { paginatedDataSource, paginatedData, selectedKeySet, disabledKeys, handleSelectChange } = transferBindings
+    const { paginatedDataSource, paginatedData, selectedKeySet, disabledDataSourceKeys, handleSelectChange } =
+      transferBindings
     const { triggerRemove } = inject(TRANSFER_OPERATIONS_TOKEN)!
 
     const checkableListRef = props.isSource ? sourceCheckableListRef : targetCheckableListRef
@@ -44,12 +45,12 @@ export default defineComponent({
     }
 
     const checkListData = computed(() =>
-      props.isSource && transferProps.mode === 'transferBySelect' ? paginatedDataSource.value : paginatedData.value,
+      props.isSource && transferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
     )
 
     const defaultBodyRenderer = (prefixCls: string) => {
       const data =
-        props.isSource && transferProps.mode === 'transferBySelect' ? paginatedDataSource.value : paginatedData.value
+        props.isSource && transferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value
 
       if (data.length <= 0) {
         return (
@@ -77,9 +78,9 @@ export default defineComponent({
           dataSource={checkListData.value}
           getRowKey={getRowKey}
           checked={item => selectedKeySet.value.has(getRowKey(item))}
-          disabled={item => transferProps.disabled || disabledKeys.value.has(getRowKey(item))}
-          checkable={props.isSource || transferProps.mode === 'normal'}
-          removable={!props.isSource && transferProps.mode === 'transferBySelect'}
+          disabled={item => transferProps.disabled || disabledDataSourceKeys.value.has(getRowKey(item))}
+          checkable={props.isSource || transferProps.mode === 'default'}
+          removable={!props.isSource && transferProps.mode === 'immediate'}
           virtual={transferProps.virtual}
           scroll={transferProps.scroll}
           v-slots={{ label: slots.label }}

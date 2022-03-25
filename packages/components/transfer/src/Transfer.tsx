@@ -9,8 +9,6 @@ import type { ɵCheckableListInstance } from '@idux/components/_private/checkabl
 
 import { computed, defineComponent, provide, ref } from 'vue'
 
-import { isBoolean, isNil } from 'lodash-es'
-
 import { useGlobalConfig } from '@idux/components/config'
 
 import TransferOperations from './TransferOperations'
@@ -23,7 +21,7 @@ import { useTransferOperations } from './composables/useTransferOperations'
 import { useTransferSelectState } from './composables/useTransferSelectState'
 import TransferList from './list/TransferList'
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from './token'
-import { type TransferApis, type TransferScrollTo, transferProps } from './types'
+import { type TransferApis, transferProps } from './types'
 
 export default defineComponent({
   name: 'IxTransfer',
@@ -57,21 +55,8 @@ export default defineComponent({
     const targetCheckableListRef = ref<ɵCheckableListInstance>()
 
     const transferApi: TransferApis = {
-      scrollTo: ((options, isSource) => {
-        if (isNil(options) && isNil(isSource)) {
-          return sourceCheckableListRef.value?.scrollTo()
-        }
-
-        if (isBoolean(options)) {
-          return (options ? sourceCheckableListRef : targetCheckableListRef).value?.scrollTo()
-        }
-
-        if (isNil(isSource)) {
-          return sourceCheckableListRef.value?.scrollTo(options)
-        }
-
-        return (isSource ? sourceCheckableListRef : targetCheckableListRef).value?.scrollTo(options)
-      }) as TransferScrollTo,
+      scrollTo: (isSource, ...params) =>
+        (isSource ? sourceCheckableListRef : targetCheckableListRef).value?.scrollTo(...params),
     }
 
     expose(transferApi)
