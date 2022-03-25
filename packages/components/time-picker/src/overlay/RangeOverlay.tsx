@@ -30,7 +30,6 @@ export default defineComponent({
       format,
       inputEnableStatus,
       overlayOpened,
-      formContext,
       bufferValue,
       commonBindings: { isDisabled, handleChange },
       renderSeparator,
@@ -38,7 +37,7 @@ export default defineComponent({
     } = inject(timeRangePickerContext)!
     const [fromPickerControl, toPickerControl] = inject(timeRangePickerControl)!
 
-    const inputProps = useCommonInputProps(props, config, formContext)
+    const inputProps = useCommonInputProps(props, config)
     const panelProps = useCommonPanelProps(props, config)
 
     const handleConfirm = () => {
@@ -90,7 +89,7 @@ export default defineComponent({
 
     const renderFooter = () =>
       slots.footer?.({ onConfirm: handleConfirm }) ?? (
-        <IxButton mode="primary" size="sm" onClick={handleConfirm}>
+        <IxButton mode="primary" size="xs" onClick={handleConfirm}>
           {locale.timeRangePicker.okText}
         </IxButton>
       )

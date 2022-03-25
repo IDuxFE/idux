@@ -8,7 +8,7 @@
 import type { TimePanelColumnType } from './types'
 import type { DateConfig } from '@idux/components/config'
 
-export function normalizeAmPm(hour: number, is12Hours = false): string {
+export function normalizeAmPm(hour: number, is12Hours = false): 'am' | 'pm' | '' {
   if (!is12Hours) {
     return ''
   }

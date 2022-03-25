@@ -71,13 +71,23 @@ export function useOptions(
     }
   }
 
+  const getHourValue = () => {
+    const value = ampm.value === 'pm' ? get(selectedValue.value, 'hour') % 12 : get(selectedValue.value, 'hour')
+
+    if (ampm.value) {
+      return value === 0 ? 12 : value
+    }
+
+    return value
+  }
+
   function getSelectedValue(type: TimePanelColumnType) {
     switch (type) {
       case 'AM/PM':
         return ampm.value
       case 'hour':
       default:
-        return get(selectedValue.value, 'hour')
+        return getHourValue()
       case 'minute':
         return get(selectedValue.value, 'minute')
       case 'second':
