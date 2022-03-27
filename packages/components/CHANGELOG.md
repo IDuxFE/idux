@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-03-27)
+
+
+### Bug Fixes
+
+* **comp: select:** placeholder position are squeezed  ([#813](https://github.com/IDuxFE/idux/issues/813)) ([a4d1933](https://github.com/IDuxFE/idux/commit/a4d1933286c60da132b741bd8348f19fa6acdd64)), closes [#812](https://github.com/IDuxFE/idux/issues/812)
+* **comp:select:** sync input width on composing ([#821](https://github.com/IDuxFE/idux/issues/821)) ([743328f](https://github.com/IDuxFE/idux/commit/743328f5f99a34aa8184956b6344a8990567213f))
+* **comp:slider:** slid distance calculation error ([#818](https://github.com/IDuxFE/idux/issues/818)) ([322f755](https://github.com/IDuxFE/idux/commit/322f7556d3463e38cf4fabbb4e08ecbf6a59d212)), closes [#817](https://github.com/IDuxFE/idux/issues/817)
+* **comp:table:** empty style ([#820](https://github.com/IDuxFE/idux/issues/820)) ([689437b](https://github.com/IDuxFE/idux/commit/689437b784f6198aa253c22e38b92fe3405b55b8))
+
+
+### Features
+
+* **comp:comment:** add comment component ([#822](https://github.com/IDuxFE/idux/issues/822)) ([e3f1e98](https://github.com/IDuxFE/idux/commit/e3f1e988139c1fde922c415e066cfc03dd034e04)), closes [#358](https://github.com/IDuxFE/idux/issues/358)
+* **comp:table:** support autoHeight ([#816](https://github.com/IDuxFE/idux/issues/816)) ([7a87569](https://github.com/IDuxFE/idux/commit/7a87569abf7ecf05ddb4c42eae4256551ec0dffe)), closes [#757](https://github.com/IDuxFE/idux/issues/757)
+* **comp:tooltip:** support setting zindex ([#825](https://github.com/IDuxFE/idux/issues/825)) ([0a97e42](https://github.com/IDuxFE/idux/commit/0a97e42b6c3b189a0baa5b74e0849401a2da10c7))
+* **comp:tree-select:** maxLabel support responsive ([#814](https://github.com/IDuxFE/idux/issues/814)) ([#823](https://github.com/IDuxFE/idux/issues/823)) ([df82e5d](https://github.com/IDuxFE/idux/commit/df82e5d4a61a3cd8bc064a448ea22502eb94967a))
+* **pro:transfer:** add pro transfer compoennt ([#815](https://github.com/IDuxFE/idux/issues/815)) ([e367009](https://github.com/IDuxFE/idux/commit/e367009c0b7cec277606574c1f485b43f094145b))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-03-20)
 
 

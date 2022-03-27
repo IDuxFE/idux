@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-03-27)
+
+
+### Features
+
+* **comp:tooltip:** support setting zindex ([#825](https://github.com/IDuxFE/idux/issues/825)) ([0a97e42](https://github.com/IDuxFE/idux/commit/0a97e42b6c3b189a0baa5b74e0849401a2da10c7))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-03-20)
 
 
