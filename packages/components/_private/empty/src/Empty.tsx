@@ -23,4 +23,6 @@ const Empty: FunctionalComponent<EmptyProps> = (props, { slots }) => {
   return <IxEmpty {...emptyProps}></IxEmpty>
 }
 
+Empty.displayName = 'ɵEmpty'
+
 export default Empty

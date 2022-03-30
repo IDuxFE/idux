@@ -11,7 +11,7 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import { loadingProps } from './types'
 export default defineComponent({
-  name: 'IxLoading',
+  name: 'ɵLoading',
   props: loadingProps,
   setup(props) {
     const common = useGlobalConfig('common')

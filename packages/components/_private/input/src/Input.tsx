@@ -15,6 +15,7 @@ import { IxIcon } from '@idux/components/icon'
 import { inputProps } from './types'
 
 export default defineComponent({
+  name: 'ɵInput',
   inheritAttrs: false,
   props: inputProps,
   setup(props, { attrs, slots, expose }) {

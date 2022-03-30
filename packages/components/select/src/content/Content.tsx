@@ -29,11 +29,13 @@ export default defineComponent({
       virtualScrollRef,
       scrollToActivated,
       inputValue,
-      handleInput,
-      handleClear,
+      setInputValue,
     } = inject(selectToken)!
 
     onMounted(() => scrollToActivated())
+
+    const handleChange = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const handleClear = () => setInputValue('')
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleOptions: MergedOption[]) => {
       const { onScrolledChange } = props
@@ -42,7 +44,7 @@ export default defineComponent({
           onScrolledChange,
           startIndex,
           endIndex,
-          visibleOptions.map(item => item.rawOption),
+          visibleOptions.map(item => item.rawData),
         )
       }
     }
@@ -51,6 +53,22 @@ export default defineComponent({
       const { overlayHeight, overlayItemHeight, virtual, onScroll, onScrolledBottom, overlayRender } = props
       const options = flattedOptions.value
       const children = [<ListBox />]
+
+      if (props.searchable === 'overlay') {
+        children.push(
+          <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
+            <ɵInput
+              clearable
+              size="sm"
+              suffix="search"
+              value={inputValue.value}
+              onChange={handleChange}
+              onClear={handleClear}
+            />
+          </div>,
+        )
+      }
+
       if (options.length > 0) {
         const itemRender: VirtualItemRenderFn<MergedOption> = ({ item, index }) => {
           const { type, ...rest } = item
@@ -73,21 +91,6 @@ export default defineComponent({
         )
       } else {
         children.push(<ɵEmpty v-slots={slots} empty={props.empty} />)
-      }
-
-      if (props.searchable === 'overlay') {
-        children.unshift(
-          <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
-            <ɵInput
-              clearable
-              size="sm"
-              suffix="search"
-              value={inputValue.value}
-              onInput={handleInput}
-              onClear={handleClear}
-            />
-          </div>,
-        )
       }
 
       return overlayRender ? overlayRender(children) : <div>{children}</div>

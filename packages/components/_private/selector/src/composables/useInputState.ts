@@ -7,35 +7,44 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { SelectProps } from '../types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-
-import { Ref, onMounted, ref } from 'vue'
+import { type Ref, onMounted, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
+import { useFormFocusMonitor } from '@idux/components/utils'
+
+import { type SelectorProps } from '../types'
 
 export interface InputStateContext {
   mirrorRef: Ref<HTMLSpanElement | undefined>
+  inputRef: Ref<HTMLInputElement | undefined>
   inputValue: Ref<string>
   isComposing: Ref<boolean>
   isFocused: Ref<boolean>
+  focus: (options?: FocusOptions) => void
+  blur: () => void
   handleCompositionStart: (evt: CompositionEvent) => void
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleInput: (evt: Event) => void
-  handleFocus: (evt: FocusEvent) => void
-  handleBlur: (evt: FocusEvent) => void
   clearInput: () => void
 }
 
-export function useInputState(
-  props: SelectProps,
-  inputRef: Ref<HTMLInputElement | undefined>,
-  accessor: ValueAccessor,
-): InputStateContext {
+export function useInputState(props: SelectorProps): InputStateContext {
   const mirrorRef = ref<HTMLSpanElement>()
   const inputValue = ref('')
   const isComposing = ref(false)
   const isFocused = ref(false)
+
+  const handleFocus = (evt: FocusEvent) => {
+    isFocused.value = true
+    callEmit(props.onFocus, evt)
+  }
+
+  const handleBlur = (evt: FocusEvent) => {
+    isFocused.value = false
+    callEmit(props.onBlur, evt)
+  }
+
+  const { elementRef: inputRef, focus, blur } = useFormFocusMonitor<HTMLInputElement>({ handleBlur, handleFocus })
 
   const syncMirrorWidth = (evt?: Event) => {
     if (props.multiple) {
@@ -72,22 +81,11 @@ export function useInputState(
       const { value } = evt.target as HTMLInputElement
       if (value !== inputValue.value) {
         inputValue.value = value
+        callEmit(props.onInputValueChange, value)
       }
       callEmit(props.onSearch, value)
       syncMirrorWidth()
     }
-  }
-
-  const handleFocus = (evt: FocusEvent) => {
-    isFocused.value = true
-
-    callEmit(props.onFocus, evt)
-  }
-
-  const handleBlur = (evt: FocusEvent) => {
-    isFocused.value = false
-    callEmit(props.onBlur, evt)
-    accessor.markAsBlurred()
   }
 
   const clearInput = () => {
@@ -96,12 +94,16 @@ export function useInputState(
       inputElement.value = ''
     }
     inputValue.value = ''
+    callEmit(props.onInputValueChange, '')
     syncMirrorWidth()
   }
 
   onMounted(() => syncMirrorWidth())
 
   return {
+    inputRef,
+    focus,
+    blur,
     mirrorRef,
     inputValue,
     isComposing,
@@ -109,8 +111,6 @@ export function useInputState(
     handleCompositionStart,
     handleCompositionEnd,
     handleInput,
-    handleFocus,
-    handleBlur,
     clearInput,
   }
 }

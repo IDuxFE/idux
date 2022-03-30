@@ -1,0 +1,120 @@
+@import '../../../style/mixins/borderless.less';
+@import '../../../style/mixins/ellipsis.less';
+@import '../../../style/mixins/reset.less';
+@import './single.less';
+@import './multiple.less';
+
+.@{selector-prefix} {
+  .reset-component();
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &-content {
+    position: relative;
+    display: flex;
+    color: @select-color;
+    background-color: @select-background-color;
+    border: @select-border-width @select-border-style @select-border-color;
+    border-radius: @select-border-radius;
+    transition: all @transition-duration-base @ease-in-out;
+    cursor: pointer;
+  }
+
+  &-item {
+    flex: 1;
+    user-select: none;
+    .ellipsis();
+
+    &-label {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  &-input {
+    &-inner {
+      width: 100%;
+      min-width: 1px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+  }
+
+  &-placeholder {
+    flex: 1;
+    overflow: hidden;
+    color: @select-placeholder-color;
+    .ellipsis();
+  }
+
+  &-suffix {
+    .selector-icon();
+
+    pointer-events: none;
+  }
+
+  &-clear {
+    .selector-icon();
+
+    z-index: 1;
+    opacity: 0;
+    background-color: @select-icon-background-color;
+
+    &:hover {
+      color: @select-icon-hover-color;
+    }
+
+    .@{selector-prefix}:hover & {
+      opacity: 1;
+    }
+  }
+
+  &:hover:not(&-disabled) &-content {
+    border-color: @select-hover-color;
+  }
+
+  &-focused:not(&-disabled):not(&-borderless) &-content {
+    border-color: @select-active-color;
+    box-shadow: @select-active-box-shadow;
+  }
+
+  &-disabled &-content {
+    color: @select-disabled-color;
+    background-color: @select-disabled-background-color;
+    cursor: not-allowed;
+
+    .@{selector-prefix}-input-inner {
+      cursor: not-allowed;
+    }
+  }
+
+  &-borderless &-content {
+    .borderless();
+  }
+
+  &-searchable &-content {
+    cursor: text;
+
+    .@{selector-prefix}-input-inner {
+      cursor: auto;
+    }
+  }
+}
+
+.selector-icon() {
+  position: absolute;
+  top: 50%;
+  margin-top: -(@select-icon-font-size / 2);
+  right: @select-icon-margin-right;
+  line-height: 1;
+  font-size: @select-icon-font-size;
+  color: @select-icon-color;
+  transition: color @transition-duration-base @ease-in-out;
+}

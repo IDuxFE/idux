@@ -7,23 +7,21 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { VirtualScrollInstance, VirtualScrollToFn } from '@idux/cdk/scroll'
-
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
-import { useSharedFocusMonitor } from '@idux/cdk/a11y'
+import { type VirtualScrollInstance, type VirtualScrollToFn } from '@idux/cdk/scroll'
+import { useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
+import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
-import { useInputState } from './composables/useInputState'
 import { useFlattedOptions, useMergedOptions } from './composables/useOptions'
 import { useOverlayProps } from './composables/useOverlayProps'
 import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { selectToken } from './token'
-import Trigger from './trigger/Trigger'
 import { selectProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
@@ -37,28 +35,44 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
     const locale = useGlobalConfig('locale')
-    const focusMonitor = useSharedFocusMonitor()
-    const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
+
+    const triggerRef = ref<ɵSelectorInstance>()
+    const [inputValue, setInputValue] = useState('')
+    const focus = () => triggerRef.value?.focus()
+    const blur = () => triggerRef.value?.blur()
+    const clearInput = () => {
+      props.searchable === 'overlay' ? setInputValue('') : triggerRef.value?.clearInput()
+    }
 
     const virtualScrollRef = ref<VirtualScrollInstance>()
-    const scrollTo: VirtualScrollToFn = options => {
-      virtualScrollRef.value?.scrollTo(options)
-    }
+    const scrollTo: VirtualScrollToFn = options => virtualScrollRef.value?.scrollTo(options)
 
     expose({ focus, blur, scrollTo })
 
-    const triggerRef = ref<HTMLDivElement>()
-    const { overlayRef, overlayStyle, overlayOpened, setOverlayOpened } = useOverlayProps(props, triggerRef)
+    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = useOverlayProps(props)
 
     const accessor = useFormAccessor()
-    const isDisabled = computed(() => accessor.disabled.value)
+
     const mergedOptions = useMergedOptions(props, slots, config)
-    const inputStateContext = useInputState(props, inputRef, accessor)
-    const { inputValue, clearInput } = inputStateContext
+
     const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
     const selectedStateContext = useSelectedState(props, accessor, mergedOptions, locale)
-    const { selectedValue, changeSelected } = selectedStateContext
-    const activeStateContext = useActiveState(props, flattedOptions, selectedValue, inputValue, scrollTo)
+    const {
+      selectedValue,
+      selectedLimit,
+      selectedLimitTitle,
+      changeSelected,
+      selectedOptions,
+      handleClear,
+      handleItemRemove,
+    } = selectedStateContext
+    const { activeIndex, activeOption, changeActive, scrollToActivated } = useActiveState(
+      props,
+      flattedOptions,
+      selectedValue,
+      inputValue,
+      scrollTo,
+    )
 
     const handleOptionClick = (value: any) => {
       changeSelected(value)
@@ -70,38 +84,40 @@ export default defineComponent({
       }
     }
 
+    const handleBlur = () => accessor.markAsBlurred()
+
     provide(selectToken, {
       props,
       slots,
       config,
       mergedPrefixCls,
-      focusMonitor,
-      triggerRef,
-      inputRef,
       virtualScrollRef,
+      accessor,
+      inputValue,
+      setInputValue,
       overlayOpened,
       setOverlayOpened,
-      accessor,
-      isDisabled,
       mergedOptions,
       flattedOptions,
       handleOptionClick,
-      ...selectedStateContext,
-      ...inputStateContext,
-      ...activeStateContext,
+      selectedValue,
+      selectedLimit,
+      selectedLimitTitle,
+      activeIndex,
+      activeOption,
+      changeActive,
+      scrollToActivated,
     })
 
     watch(overlayOpened, opened => {
       if (!opened && props.allowInput && inputValue.value) {
         changeSelected(inputValue.value)
       }
-
       opened ? focus() : blur()
-
       clearInput()
     })
 
-    const classes = computed(() => {
+    const overlayClasses = computed(() => {
       const { overlayClassName } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -112,26 +128,81 @@ export default defineComponent({
 
     const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
 
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      switch (evt.code) {
+        case 'ArrowUp':
+          evt.preventDefault()
+          changeActive(activeIndex.value - 1, -1)
+          break
+        case 'ArrowDown':
+          evt.preventDefault()
+          changeActive(activeIndex.value + 1, 1)
+          break
+        case 'Enter':
+          evt.preventDefault()
+          changeSelected(activeOption.value?.value)
+          props.multiple ? clearInput() : setOverlayOpened(false)
+          break
+        case 'Escape':
+          evt.preventDefault()
+          setOverlayOpened(false)
+          break
+      }
+    }
+
+    const renderTrigger = () => (
+      <ɵSelector
+        ref={triggerRef}
+        v-slots={slots}
+        class={mergedPrefixCls.value}
+        allowInput={props.allowInput}
+        autofocus={props.autofocus}
+        borderless={props.borderless}
+        clearable={props.clearable}
+        clearIcon={props.clearIcon}
+        config={config}
+        disabled={accessor.disabled.value}
+        maxLabel={props.maxLabel}
+        multiple={props.multiple}
+        opened={overlayOpened.value}
+        placeholder={props.placeholder}
+        readonly={props.readonly}
+        searchable={props.searchable}
+        selectedValue={selectedValue.value}
+        selectedData={selectedOptions.value}
+        size={props.size}
+        suffix={props.suffix}
+        onBlur={handleBlur}
+        onClear={handleClear}
+        onInputValueChange={setInputValue}
+        onItemRemove={handleItemRemove}
+        onKeydown={handleKeyDown}
+        onOpenedChange={setOverlayOpened}
+        onWidthChange={setOverlayWidth}
+        onSearch={props.onSearch}
+        {...attrs}
+      ></ɵSelector>
+    )
+
+    const renderContent = () => <Content></Content>
+
     return () => {
-      const renderTrigger = () => <Trigger {...attrs}></Trigger>
-      const renderContent = () => <Content></Content>
-      const overlayProps = { 'onUpdate:visible': setOverlayOpened }
-      return (
-        <ɵOverlay
-          ref={overlayRef}
-          {...overlayProps}
-          visible={overlayOpened.value}
-          v-slots={{ default: renderTrigger, content: renderContent }}
-          class={classes.value}
-          style={overlayStyle.value}
-          clickOutside
-          disabled={isDisabled.value || props.readonly}
-          offset={defaultOffset}
-          placement="bottom"
-          target={target.value}
-          trigger="manual"
-        />
-      )
+      const overlayProps = {
+        class: overlayClasses.value,
+        style: overlayStyle.value,
+        clickOutside: true,
+        disabled: accessor.disabled.value || props.readonly,
+        offset: defaultOffset,
+        placement: 'bottom',
+        target: target.value,
+        trigger: 'manual',
+        visible: overlayOpened.value,
+        'onUpdate:visible': setOverlayOpened,
+      } as const
+
+      const overlaySlots = { default: renderTrigger, content: renderContent }
+
+      return <ɵOverlay ref={overlayRef} {...overlayProps} v-slots={overlaySlots} />
     }
   },
 })

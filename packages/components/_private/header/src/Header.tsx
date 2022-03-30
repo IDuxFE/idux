@@ -44,4 +44,6 @@ function convertProps(props: HeaderProps) {
   return headerProps as HeaderProps
 }
 
+Header.displayName = 'ɵHeader'
+
 export default Header

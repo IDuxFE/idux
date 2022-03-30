@@ -26,7 +26,7 @@ export interface MergedOption {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any
   disabled?: boolean
-  rawOption: SelectData
+  rawData: SelectData
   type?: 'group' | 'grouped'
   parentKey?: VKey
 }
@@ -64,7 +64,7 @@ export function useFlattedOptions(
       return options
     }
     const filter = searchFilter.value
-    const filteredOptions = !filter ? options : options.filter(option => filter(option.rawOption!, searchValue))
+    const filteredOptions = !filter ? options : options.filter(option => filter(option.rawData!, searchValue))
     const { allowInput } = props
     if (allowInput) {
       const matchedOption = filteredOptions.find(option => option.label === searchValue)
@@ -88,23 +88,24 @@ function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions:
 
     if (children && children.length > 0) {
       const groupKey = key ?? index
-      mergedOptions.push({ key: groupKey, label, type: 'group', rawOption: item })
+      mergedOptions.push({ key: groupKey, label, type: 'group', rawData: item })
       mergedOptions.push(
         ...children.map((option, index) => {
+          const value = option[valueKey]
           return {
-            key: option.key ?? `${isSymbol(groupKey) ? String(groupKey) : groupKey}-${index}`,
+            key: option.key ?? `${isSymbol(groupKey) ? String(groupKey) : groupKey}-${value ?? index}`,
             label: option[labelKey],
-            value: option[valueKey],
+            value: value,
             disabled: option.disabled,
             type: 'grouped',
             parentKey: groupKey,
-            rawOption: option,
+            rawData: option,
           } as MergedOption
         }),
       )
     } else {
       const value = item[valueKey]
-      mergedOptions.push({ key: key ?? index, disabled: item.disabled, label, value, rawOption: item })
+      mergedOptions.push({ key: key ?? index, disabled: item.disabled, label, value, rawData: item })
     }
   })
 
@@ -127,13 +128,13 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
       const { label: customLabel, default: customLabel2 } = slots
       // <IxSelectOption disabled /> => disabled = ''
       const _disabled = disabled || disabled === ''
-      const rawOption = { key, disabled: _disabled, label, value, additional, customLabel: customLabel ?? customLabel2 }
+      const rawData = { key, disabled: _disabled, label, value, additional, customLabel: customLabel ?? customLabel2 }
       const option: MergedOption = {
-        key: key ?? `${isSymbol(parentKey) ? String(parentKey) : parentKey}-${index}`,
+        key: key ?? `${isSymbol(parentKey) ? String(parentKey) : parentKey}-${value ?? index}`,
         label,
         value,
         disabled: _disabled,
-        rawOption,
+        rawData,
         parentKey,
         type: grouped ? 'grouped' : undefined,
       }
@@ -143,8 +144,8 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
       const { key, label, children, ...additional } = props
       const { label: customLabel, default: defaultSlot } = slots
       const _children = children ?? convertOptions(defaultSlot?.(), key, true)
-      const rawOption = { key, label, children: _children, additional, customLabel }
-      mergedOptions.push({ key: key ?? index, label, type: 'group', rawOption })
+      const rawData = { key, label, children: _children, additional, customLabel }
+      mergedOptions.push({ key: key ?? index, label, type: 'group', rawData })
       mergedOptions.push(..._children)
     }
   })

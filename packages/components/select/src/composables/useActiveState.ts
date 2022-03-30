@@ -31,20 +31,20 @@ export function useActiveState(
   const activeIndex = ref(0)
 
   onMounted(() => {
+    const compareFn = props.compareWith ?? props.compareFn
+    const options = flattedOptions.value
+    const currValue = selectedValue.value
+    const currIndex = options.findIndex(option => currValue.some(value => compareFn(option.value, value)))
+    activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
+
     watchEffect(() => {
-      const allowInput = props.allowInput
-      const options = flattedOptions.value
-      let currIndex: number
-      if (allowInput && inputValue.value) {
-        const searchValue = inputValue.value
-        currIndex = options.findIndex(option => option.value === searchValue)
-      } else {
-        const compareFn = props.compareWith ?? props.compareFn
-        const currValue = selectedValue.value
-        currIndex = options.findIndex(option => currValue.some(value => compareFn(option.value, value)))
+      if (!props.allowInput || !inputValue.value) {
+        return
       }
-      currIndex = currIndex === -1 ? 0 : currIndex
-      activeIndex.value = getEnabledActiveIndex(options, currIndex, 1)
+      const options = flattedOptions.value
+      const searchValue = inputValue.value
+      const currIndex = options.findIndex(option => option.value === searchValue)
+      activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
     })
   })
 

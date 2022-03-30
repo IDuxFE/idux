@@ -65,7 +65,7 @@ describe('Pagination', () => {
       expect(item.classes()).toContain('ix-button-disabled')
     })
     expect(wrapper.find('.ix-input').classes()).toContain('ix-input-disabled')
-    expect(wrapper.find('.ix-select').classes()).toContain('ix-select-disabled')
+    expect(wrapper.find('.ix-select').classes()).toContain('ix-selector-disabled')
 
     await wrapper.find('.ix-pagination-item').trigger('click')
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('1')

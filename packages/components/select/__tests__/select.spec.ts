@@ -42,11 +42,11 @@ describe('Select', () => {
       const onChange = jest.fn()
       const wrapper = SelectMount({ props: { open: true, value: 'tom', 'onUpdate:value': onUpdateValue, onChange } })
 
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
 
       await wrapper.setProps({ value: undefined })
 
-      expect(wrapper.find('.ix-select-selector-item').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-item').exists()).toBe(false)
 
       const options = wrapper.findAllComponents(Option)
       await options[0].trigger('click')
@@ -65,23 +65,23 @@ describe('Select', () => {
       const onUpdateOpen = jest.fn()
       const wrapper = SelectMount({ props: { open: true, 'onUpdate:open': onUpdateOpen } })
 
-      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       expect(wrapper.findComponent(Content).isVisible()).toBe(true)
 
       await wrapper.setProps({ open: false })
 
-      expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
       expect(wrapper.findComponent(Content).isVisible()).toBe(false)
 
       // TODO fix
-      // await wrapper.find('.ix-select').trigger('click')
+      // await wrapper.find('.ix-selector').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      // expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       // expect(onUpdateOpen).toBeCalledWith(true)
 
-      // await wrapper.find('.ix-select').trigger('click')
+      // await wrapper.find('.ix-selector').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      // expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
       // expect(onUpdateOpen).toBeCalledWith(false)
     })
 
@@ -106,18 +106,18 @@ describe('Select', () => {
       const wrapper = SelectMount({ props: { autofocus: true } })
       await flushPromises()
 
-      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       expect(wrapper.findComponent(Content).isVisible()).toBe(true)
     })
 
     test('borderless work', async () => {
       const wrapper = SelectMount({ props: { borderless: true } })
 
-      expect(wrapper.find('.ix-select-borderless').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-borderless').exists()).toBe(true)
 
       await wrapper.setProps({ borderless: false })
 
-      expect(wrapper.find('.ix-select-borderless').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-borderless').exists()).toBe(false)
     })
 
     test('custom keys work', async () => {
@@ -141,7 +141,7 @@ describe('Select', () => {
         props: { value: 'tom', open: true, dataSource, childrenKey: 'options', labelKey: 'text', valueKey: 'name' },
       })
 
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
 
       const optionsComps = wrapper.findAllComponents(Option)
       expect(optionsComps.length).toBe(3)
@@ -151,28 +151,25 @@ describe('Select', () => {
       const onUpdateValue = jest.fn()
       const wrapper = SelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })
 
-      expect(wrapper.find('.ix-select-clearable').exists()).toBe(true)
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
 
-      await wrapper.find('.ix-select-selector-clear').trigger('click')
+      await wrapper.find('.ix-selector-clear').trigger('click')
 
-      expect(wrapper.find('.ix-select-clear').exists()).toBe(false)
       expect(onUpdateValue).toBeCalledWith(undefined)
 
-      await wrapper.setProps({ value: 'jerry', clearable: false })
+      await wrapper.setProps({ clearable: false })
 
-      expect(wrapper.find('.ix-select-clearable').exists()).toBe(false)
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(false)
     })
 
     test('clearIcon work', async () => {
       const wrapper = SelectMount({ props: { clearable: true, clearIcon: 'up' } })
 
-      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-up').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(true)
 
       await wrapper.setProps({ clearIcon: 'down' })
 
-      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('clearIcon slot work', async () => {
@@ -183,37 +180,37 @@ describe('Select', () => {
         },
       })
 
-      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-up').exists()).toBe(false)
-      expect(wrapper.find('.ix-select-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('compareFn work', async () => {
       const compareFn = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
       const wrapper = SelectMount({ props: { value: 't', compareFn } })
 
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Tom')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
 
       await wrapper.setProps({ value: 'j' })
 
-      expect(wrapper.find('.ix-select-selector-item').text()).toBe('Jerry')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Jerry')
     })
 
     test('disabled work', async () => {
       const wrapper = SelectMount({ props: { disabled: true } })
 
-      expect(wrapper.find('.ix-select-disabled').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-disabled').exists()).toBe(true)
 
       // await wrapper.find('.ix-select').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      // expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
 
       await wrapper.setProps({ disabled: false })
 
-      expect(wrapper.find('.ix-select-disabled').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-disabled').exists()).toBe(false)
 
       // await wrapper.find('.ix-select').trigger('click')
 
-      // expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      // expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
     })
 
     test('readonly work', async () => {
@@ -221,25 +218,25 @@ describe('Select', () => {
         props: { searchable: true, clearable: true, readonly: true, multiple: true, value: ['tom'] },
       })
 
-      expect(wrapper.find('.ix-select-readonly').exists()).toBe(true)
-      expect(wrapper.find('.ix-select-clearable').exists()).toBe(false)
-      expect(wrapper.find('.ix-select-searchable').exists()).toBe(false)
-      expect(wrapper.find('.ix-select-selector-item-remove').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-readonly').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-item-remove').exists()).toBe(false)
 
       await wrapper.find('.ix-select').trigger('click')
 
-      expect(wrapper.find('.ix-select-opened').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
 
       await wrapper.setProps({ readonly: false })
 
-      expect(wrapper.find('.ix-select-readonly').exists()).toBe(false)
-      expect(wrapper.find('.ix-select-clearable').exists()).toBe(true)
-      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
-      expect(wrapper.find('.ix-select-selector-item-remove').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-readonly').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-item-remove').exists()).toBe(true)
 
       await wrapper.find('.ix-select').trigger('click')
 
-      expect(wrapper.find('.ix-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
     })
 
     test('empty work', async () => {
@@ -295,19 +292,19 @@ describe('Select', () => {
     test('placeholder work', async () => {
       const wrapper = SelectMount({ props: { value: undefined, placeholder: 'placeholder' } })
 
-      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder')
 
       await wrapper.setProps({ value: 'tom' })
 
-      expect(wrapper.find('.ix-select-selector-placeholder').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-placeholder').exists()).toBe(false)
 
       await wrapper.setProps({ value: undefined })
 
-      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder')
 
       await wrapper.setProps({ placeholder: 'place' })
 
-      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('place')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('place')
     })
 
     test('placeholder slot work', async () => {
@@ -316,13 +313,13 @@ describe('Select', () => {
         slots: { placeholder: () => 'placeholder slot' },
       })
 
-      expect(wrapper.find('.ix-select-selector-placeholder').text()).toBe('placeholder slot')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder slot')
     })
 
     test('searchable work', async () => {
       const wrapper = SelectMount({ props: { open: true, searchable: true } })
 
-      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
 
       const input = wrapper.find('input')
       await input.setValue('t')
@@ -341,7 +338,7 @@ describe('Select', () => {
       const searchFn = (option: SelectData, searchValue: string) => searchValue === option.value
       const wrapper = SelectMount({ props: { open: true, searchable: true, searchFn } })
 
-      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
 
       const input = wrapper.find('input')
       await input.setValue('tom')
@@ -367,7 +364,7 @@ describe('Select', () => {
         },
       })
 
-      expect(wrapper.find('.ix-select-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
 
       const input = wrapper.find('input')
       await input.setValue('T')
@@ -384,15 +381,15 @@ describe('Select', () => {
     test('size work', async () => {
       const wrapper = SelectMount({ props: { size: 'lg' } })
 
-      expect(wrapper.find('.ix-select-lg').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-lg').exists()).toBe(true)
 
       await wrapper.setProps({ size: 'sm' })
 
-      expect(wrapper.find('.ix-select-sm').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-sm').exists()).toBe(true)
 
       await wrapper.setProps({ size: undefined })
 
-      expect(wrapper.find('.ix-select-md').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-md').exists()).toBe(true)
     })
 
     test('suffix work', async () => {
@@ -465,11 +462,11 @@ describe('Select', () => {
         props: { open: true, value: [0, 1, 2], 'onUpdate:value': onUpdateValue, onChange },
       })
 
-      expect(wrapper.findAll('.ix-select-selector-item').length).toBe(3)
+      expect(wrapper.findAll('.ix-selector-item').length).toBe(3)
 
       await wrapper.setProps({ value: [0] })
 
-      expect(wrapper.findAll('.ix-select-selector-item').length).toBe(1)
+      expect(wrapper.findAll('.ix-selector-item').length).toBe(1)
 
       // TODO fix
       // const options = wrapper.findAllComponents(Option)
@@ -506,7 +503,7 @@ describe('Select', () => {
     test('maxLabel work', async () => {
       const wrapper = SelectMount({ props: { maxLabel: 3, value: [0, 1, 2, 4, 5] } })
 
-      let items = wrapper.findAll('.ix-select-selector-item')
+      let items = wrapper.findAll('.ix-selector-item')
 
       expect(items[0].text()).toBe('A0')
       expect(items[1].text()).toBe('A1')
@@ -515,7 +512,7 @@ describe('Select', () => {
 
       await wrapper.setProps({ maxLabel: 2 })
 
-      items = wrapper.findAll('.ix-select-selector-item')
+      items = wrapper.findAll('.ix-selector-item')
 
       expect(items[0].text()).toBe('A0')
       expect(items[1].text()).toBe('A1')

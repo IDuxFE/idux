@@ -83,7 +83,6 @@ export function useSelectedState(
   }
 
   const handleClear = (evt: MouseEvent) => {
-    evt.stopPropagation()
     setValue([])
     callEmit(props.onClear, evt)
   }

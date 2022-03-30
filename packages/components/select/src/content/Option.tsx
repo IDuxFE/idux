@@ -58,7 +58,7 @@ export default defineComponent({
     const handleClick = () => handleOptionClick(props.value)
 
     return () => {
-      const { disabled, label, rawOption } = props
+      const { disabled, label, rawData } = props
       const { multiple } = selectProps
       const selected = isSelected.value
       const prefixCls = `${mergedPrefixCls.value}-option`
@@ -71,10 +71,10 @@ export default defineComponent({
           onClick={disabled ? undefined : handleClick}
           aria-label={label}
           aria-selected={selected}
-          {...rawOption.additional}
+          {...rawData.additional}
         >
           {multiple && <IxCheckbox checked={selected} disabled={disabled || (!selected && selectedLimit.value)} />}
-          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawOption, label)}</span>
+          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData, label)}</span>
         </div>
       )
     }

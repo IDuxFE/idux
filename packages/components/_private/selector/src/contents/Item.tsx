@@ -15,18 +15,18 @@ interface ItemProps {
   disabled?: boolean
   prefixCls: string
   removable?: boolean
-  value?: any
-  handleItemRemove?: (value: any) => void
+  value?: unknown
+  onRemove?: (value: unknown) => void
 }
 
 const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
-  const { disabled, prefixCls, removable, value, handleItemRemove } = props
+  const { disabled, prefixCls, removable, value, onRemove } = props
 
   const classes = prefixCls + (disabled ? ` ${prefixCls}-disabled` : '')
 
   const handleClick = (evt: Event) => {
     evt.stopPropagation()
-    handleItemRemove?.(value)
+    onRemove?.(value)
   }
 
   return (

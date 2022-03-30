@@ -7,32 +7,29 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { selectToken } from '../token'
+import { selectorToken } from '../token'
 
 export default defineComponent({
   setup() {
     const {
       props,
       mergedPrefixCls,
-      isDisabled,
+      mergedSearchable,
+      mirrorRef,
       inputRef,
       inputValue,
-
-      mirrorRef,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
-    } = inject(selectToken)!
+    } = inject(selectorToken)!
 
     const innerStyle = computed(() => {
-      const { allowInput, searchable } = props
-      const isOpacity = allowInput || searchable === true
-      return { opacity: isOpacity ? undefined : 0 }
+      return { opacity: props.allowInput || mergedSearchable.value ? undefined : 0 }
     })
 
     return () => {
-      const { autofocus, multiple, readonly } = props
-      const prefixCls = `${mergedPrefixCls.value}-selector-input`
+      const { autofocus, disabled, multiple, readonly } = props
+      const prefixCls = `${mergedPrefixCls.value}-input`
       return (
         <div class={prefixCls}>
           <input
@@ -41,7 +38,7 @@ export default defineComponent({
             style={innerStyle.value}
             autocomplete="off"
             autofocus={autofocus}
-            disabled={isDisabled.value}
+            disabled={disabled}
             readonly={readonly}
             value={inputValue.value}
             onCompositionstart={handleCompositionStart}

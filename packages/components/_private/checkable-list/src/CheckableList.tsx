@@ -18,7 +18,7 @@ import { checkableListContext } from './token'
 import { type CheckableListApi, type CheckableListData, checkableListProps } from './types'
 
 export default defineComponent({
-  name: 'IxCheckableList',
+  name: 'ɵCheckableList',
   props: checkableListProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
