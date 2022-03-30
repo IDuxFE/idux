@@ -115,7 +115,7 @@ const useRadio = (
   if (radioGroup) {
     const { accessor, props: groupProps } = radioGroup
     isChecked = computed(() => accessor.valueRef.value === props.value)
-    isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
+    isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
       callEmit(props.onBlur, evt)
