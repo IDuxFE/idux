@@ -98,10 +98,12 @@ describe('RadioGroup', () => {
 
   test('dataSource work', async () => {
     let dataSource = [
-      { label: 'Beijing', value: 'a' },
+      { label: 'Beijing', value: 'a', disabled: true },
       { label: 'Shanghai', value: 'b' },
     ]
     const wrapper = RadioGroupMount({ props: { dataSource } })
+
+    expect(wrapper.findAll('.ix-radio-disabled').length).toBe(1)
 
     expect(wrapper.findAll('.ix-radio').length).toBe(2)
 

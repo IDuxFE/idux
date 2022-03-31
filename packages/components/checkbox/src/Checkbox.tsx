@@ -106,7 +106,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
     isChecked = computed(() => (accessor.valueRef.value ?? []).includes(props.value ?? props.trueValue))
-    isDisabled = computed(() => accessor.disabled.value ?? !!props.disabled)
+    isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false

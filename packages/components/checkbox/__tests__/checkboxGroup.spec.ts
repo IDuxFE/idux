@@ -65,11 +65,13 @@ describe('CheckboxGroup', () => {
   test('dataSource work', async () => {
     let dataSource = [
       { label: 'option1', value: 'option1' },
-      { label: 'option2', value: 'option2' },
+      { label: 'option2', value: 'option2', disabled: true },
     ]
     const wrapper = CheckboxGroupMount({ props: { dataSource } })
 
     expect(wrapper.findAll('.ix-checkbox').length).toBe(2)
+
+    expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(1)
 
     dataSource = [
       { label: 'option1', value: 'option1' },
