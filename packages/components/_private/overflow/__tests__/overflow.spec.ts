@@ -13,8 +13,8 @@ interface OverflowData {
 }
 
 describe('Overflow', () => {
-  const overfolwData: OverflowData[] = Array.from(Array(20)).map((_, idx) => ({ value: idx, key: `${idx}-key` }))
-  const totalLen = overfolwData.length
+  const overflowData: OverflowData[] = Array.from(Array(20)).map((_, idx) => ({ value: idx, key: `${idx}-key` }))
+  const totalLen = overflowData.length
 
   const OverflowMount = (options?: MountingOptions<Partial<OverflowProps>>) => {
     return mount(Overflow, {
@@ -23,7 +23,7 @@ describe('Overflow', () => {
           props: {
             getKey: (item: OverflowData) => item.key,
             prefixCls: 'ix-test',
-            dataSource: overfolwData,
+            dataSource: overflowData,
           },
           slots: { item: `<template #item="item">{{ item.value }}</template>` },
         },
@@ -36,7 +36,7 @@ describe('Overflow', () => {
     props: { maxLabel: 4 },
   })
 
-  renderWork<OverflowData>(Overflow, {
+  renderWork<OverflowProps>(Overflow, {
     props: { maxLabel: 'responsive' },
   })
 

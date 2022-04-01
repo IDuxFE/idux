@@ -38,14 +38,14 @@ export default defineComponent({
     const suffixWidth = ref(0)
 
     const displayCount = ref(props.dataSource.length)
-    const isResposive = computed(() => props.maxLabel === responsive)
+    const isResponsive = computed(() => props.maxLabel === responsive)
     const restReady = ref(false)
     const showRest = computed(
-      () => isResposive.value || (isNumber(props.maxLabel) && props.dataSource.length > props.maxLabel),
+      () => isResponsive.value || (isNumber(props.maxLabel) && props.dataSource.length > props.maxLabel),
     )
 
     const mergedData = computed(() => {
-      if (!isResposive.value) {
+      if (!isResponsive.value) {
         return props.dataSource.slice(0, props.maxLabel as number)
       }
       return props.dataSource
@@ -66,7 +66,7 @@ export default defineComponent({
           return
         }
 
-        if (!isResposive.value) {
+        if (!isResponsive.value) {
           displayCount.value = Math.min(props.maxLabel as number, len)
           restReady.value = true
           return
