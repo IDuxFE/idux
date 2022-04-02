@@ -24,8 +24,9 @@ import { convertToDate } from './utils'
 
 export default defineComponent({
   name: 'IxTimePicker',
+  inheritAttrs: false,
   props: timePickerProps,
-  setup(props, { slots }) {
+  setup(props, { attrs, slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
     const locale = useGlobalConfig('locale')
@@ -81,6 +82,7 @@ export default defineComponent({
         <Trigger
           class={mergedPrefixCls.value}
           value={convertToDate(dateConfig, accessor.valueRef.value, format.value)}
+          {...attrs}
         />
       )
       const renderContent = () => <Overlay />
@@ -88,6 +90,7 @@ export default defineComponent({
       return (
         <ɵOverlay
           {...overlayProps.value}
+          triggerId={attrs.id}
           visible={visibility.value}
           v-slots={{ default: renderTrigger, content: renderContent }}
           disabled={isDisabled.value || props.readonly}

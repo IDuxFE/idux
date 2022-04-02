@@ -9,6 +9,7 @@
 
 import type { FunctionalComponent } from 'vue'
 
+import { type MaybeArray, callEmit } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 interface ItemProps {
@@ -16,7 +17,7 @@ interface ItemProps {
   prefixCls: string
   removable?: boolean
   value?: unknown
-  onRemove?: (value: unknown) => void
+  onRemove?: MaybeArray<(value: unknown) => void>
 }
 
 const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
@@ -26,7 +27,7 @@ const Item: FunctionalComponent<ItemProps> = (props, { slots }) => {
 
   const handleClick = (evt: Event) => {
     evt.stopPropagation()
-    onRemove?.(value)
+    callEmit(onRemove, value)
   }
 
   return (

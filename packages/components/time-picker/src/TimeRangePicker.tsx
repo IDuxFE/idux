@@ -28,8 +28,9 @@ import { convertToDate } from './utils'
 
 export default defineComponent({
   name: 'IxTimeRangePicker',
+  inheritAttrs: false,
   props: timeRangePickerProps,
-  setup(props, { slots }) {
+  setup(props, { attrs, slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker`)
     const locale = useGlobalConfig('locale')
@@ -95,12 +96,15 @@ export default defineComponent({
     const overlayProps = useCommonOverlayProps(props, config, mergedPrefixCls, changeVisible)
 
     return () => {
-      const renderTrigger = () => <RangeTrigger class={mergedPrefixCls.value} value={accessorDateValue.value} />
+      const renderTrigger = () => (
+        <RangeTrigger class={mergedPrefixCls.value} value={accessorDateValue.value} {...attrs} />
+      )
       const renderContent = () => <RangeOverlay />
 
       return (
         <ɵOverlay
           {...overlayProps.value}
+          triggerId={attrs.id}
           visible={visibility.value}
           v-slots={{ default: renderTrigger, content: renderContent }}
           disabled={isDisabled.value || props.readonly}

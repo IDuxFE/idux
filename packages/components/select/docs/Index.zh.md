@@ -18,6 +18,7 @@ order: 0
 | `v-model:value` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `multiple=true` 时，`value` 为数组，使用 `control` 时，此配置无效 |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean` | `false` | - | - |
+| `autocomplete` | 设置选择器的 `autocomplete` | `string` | `off` | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
