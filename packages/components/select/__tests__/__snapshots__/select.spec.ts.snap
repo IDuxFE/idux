@@ -1,132 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select multiple work maxLabel responsive work 1`] = `
-"<div class=\\"ix-select ix-select-multiple ix-select-with-suffix ix-select-md\\">
+"<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
-  <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-overflow ix-select-selector-overflow\\">
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-overflow ix-selector-overflow\\">
       <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item ix-select-selector-item-disabled\\"><span class=\\"ix-select-selector-item-label\\">A0</span>
+        <div class=\\"ix-selector-item ix-selector-item-disabled\\"><span class=\\"ix-selector-item-label\\">A0</span>
           <!---->
         </div>
       </div>
       <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">A1</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">A1</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">A2</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">A2</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">A4</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">A4</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">A5</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">A5</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"display: none;\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">+ 4 ...</span>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">+ 4 ...</span>
           <!---->
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <!---->
-    <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!---->"
 `;
 
 exports[`Select multiple work maxLabel responsive work 2`] = `
-"<div class=\\"ix-select ix-select-multiple ix-select-with-suffix ix-select-md\\">
+"<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
-  <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-overflow ix-select-selector-overflow\\">
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-overflow ix-selector-overflow\\">
       <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item ix-select-selector-item-disabled\\"><span class=\\"ix-select-selector-item-label\\">A0</span>
+        <div class=\\"ix-selector-item ix-selector-item-disabled\\"><span class=\\"ix-selector-item-label\\">A0</span>
           <!---->
         </div>
       </div>
       <div class=\\"ix-overflow-item\\" style=\\"\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">A1</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">A1</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">+ 3 ...</span>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">+ 3 ...</span>
           <!---->
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <!---->
-    <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!---->"
 `;
 
 exports[`Select multiple work render work 1`] = `
-"<div class=\\"ix-select ix-select-multiple ix-select-with-suffix ix-select-md\\">
+"<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
-  <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-overflow ix-select-selector-overflow\\">
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-overflow ix-selector-overflow\\">
       <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">0</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">0</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">1</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">1</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <div class=\\"ix-overflow-item\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">2</span><span class=\\"ix-select-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">2</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>
       <!---->
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-select-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <!---->
-    <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!---->"
 `;
 
 exports[`Select single work render work 1`] = `
-"<div class=\\"ix-select ix-select-single ix-select-with-suffix ix-select-md\\">
+"<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
-  <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
       <!---->
     </div>
-    <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!---->"
 `;
 
 exports[`Select template work render work 1`] = `
-"<div class=\\"ix-select ix-select-single ix-select-with-suffix ix-select-md\\">
+"<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
-  <div class=\\"ix-select-selector\\">
-    <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">Tom</span>
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
       <!---->
     </div>
-    <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!---->"

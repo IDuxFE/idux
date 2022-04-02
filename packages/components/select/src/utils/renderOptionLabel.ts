@@ -10,9 +10,8 @@ import type { Slots, VNodeChild } from 'vue'
 
 import { isString } from 'lodash-es'
 
-export function renderOptionLabel(slots: Slots, rawOption: SelectOptionProps, label?: string): VNodeChild {
-  const labelRender = rawOption.customLabel ?? 'optionLabel'
+export function renderOptionLabel(slots: Slots, rawData: SelectOptionProps, label?: string): VNodeChild {
+  const labelRender = rawData.customLabel ?? 'optionLabel'
   const labelSlot = isString(labelRender) ? slots[labelRender] : labelRender
-
-  return labelSlot?.(rawOption) ?? label
+  return labelSlot ? labelSlot(rawData) : label
 }

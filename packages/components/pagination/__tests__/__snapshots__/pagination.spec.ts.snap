@@ -35,18 +35,16 @@ exports[`Pagination render work 3`] = `
   <li class=\\"ix-pagination-item\\" title=\\"50\\"><button class=\\"ix-button ix-button-text ix-button-circle ix-button-sm\\" type=\\"button\\"><span>50</span></button></li>
   <li class=\\"ix-pagination-item\\" title=\\"下一页\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button></li>
   <li class=\\"ix-pagination-sizes\\">
-    <div class=\\"ix-select ix-select-single ix-select-with-suffix ix-select-md\\">
+    <div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-select\\">
       <!---->
-      <div class=\\"ix-select-selector\\">
-        <div class=\\"ix-select-selector-item\\"><span class=\\"ix-select-selector-item-label\\">10 条/页</span>
+      <div class=\\"ix-selector-content\\">
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">10 条/页</span>
           <!---->
         </div>
-        <div class=\\"ix-select-selector-input\\"><input class=\\"ix-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
           <!---->
         </div>
-        <!---->
-        <div class=\\"ix-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-        <!---->
+        <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
       </div>
     </div>
     <!---->

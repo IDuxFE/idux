@@ -33,7 +33,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 
 export const ${camelCaseName}Props = {
   
-}
+} as const
 
 export type ${upperFirstName}Props = ExtractInnerPropTypes<typeof ${camelCaseName}Props>
 export type ${upperFirstName}PublicProps = ExtractPublicPropTypes<typeof ${camelCaseName}Props>
@@ -42,12 +42,12 @@ export type ${upperFirstName}Instance = InstanceType<DefineComponent<${upperFirs
 `
 }
 
-export function getTsxTemplate(upperFirstName: string, camelCaseName: string): string {
+export function getTsxTemplate(upperFirstName: string, camelCaseName: string, isPrivate: boolean): string {
   return `import { defineComponent } from 'vue'
 import { ${camelCaseName}Props } from './types'
 
 export default defineComponent({
-  name: 'Ix${upperFirstName}',
+  name: '${isPrivate ? 'ɵ' : 'Ix'}${upperFirstName}',
   props: ${camelCaseName}Props,
   setup(props) {
 
@@ -56,16 +56,21 @@ export default defineComponent({
 `
 }
 
-export function getIndexTemplate(compName: string): string {
+export function getIndexTemplate(compName: string, isPrivate: boolean): string {
+  const prefix = isPrivate ? 'ɵ' : 'Ix'
+  const instance = isPrivate ? `${compName}Instance as ɵ${compName}Instance` : `${compName}Instance`
+  const component = isPrivate ? `${compName}Component as ɵ${compName}Component` : `${compName}Component`
+  const props = isPrivate ? `${compName}PublicProps as ɵ${compName}Props` : `${compName}PublicProps as ${compName}Props`
+
   return `import type { ${compName}Component } from './src/types'
 
 import ${compName} from './src/${compName}'
 
-const Ix${compName} = ${compName} as unknown as ${compName}Component
+const ${prefix}${compName} = ${compName} as unknown as ${compName}Component
 
-export { Ix${compName} }
+export { ${prefix}${compName} }
 
-export type { ${compName}Instance, ${compName}Component, ${compName}PublicProps as ${compName}Props } from './src/types'
+export type { ${instance}, ${component}, ${props} } from './src/types'
 `
 }
 

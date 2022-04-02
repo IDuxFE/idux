@@ -5,32 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SelectProps } from '../types'
-import type { ɵOverlayInstance } from '@idux/components/_private/overlay'
-import type { CSSProperties, ComputedRef, Ref } from 'vue'
+import { type CSSProperties, type ComputedRef, type Ref, computed, onMounted, ref, watchEffect } from 'vue'
 
-import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
+import { useControlledProp, useState } from '@idux/cdk/utils'
+import { type ɵOverlayInstance } from '@idux/components/_private/overlay'
 
-import { convertCssPixel, offResize, onResize, useControlledProp } from '@idux/cdk/utils'
+import { type SelectProps } from '../types'
 
 export interface OverlayPropsContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties>
+  setOverlayWidth: (width: string) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
 }
 
-export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivElement | undefined>): OverlayPropsContext {
+export function useOverlayProps(props: SelectProps): OverlayPropsContext {
   const overlayRef = ref<ɵOverlayInstance>()
-  const overlayWidth = ref<string>()
+  const [overlayWidth, setOverlayWidth] = useState('')
   const overlayStyle = computed(() => ({ width: overlayWidth.value }))
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
-
-  const updatePopper = () => {
-    overlayWidth.value = convertCssPixel(triggerRef.value?.getBoundingClientRect().width)
-
-    overlayRef.value?.updatePopper()
-  }
 
   onMounted(() => {
     if (props.autofocus) {
@@ -38,17 +32,12 @@ export function useOverlayProps(props: SelectProps, triggerRef: Ref<HTMLDivEleme
     }
 
     watchEffect(() => {
-      if (overlayOpened.value) {
-        updatePopper()
+      const overlayInstance = overlayRef.value
+      if (overlayInstance && overlayWidth.value && overlayOpened.value) {
+        overlayInstance.updatePopper()
       }
     })
-
-    onResize(triggerRef.value!, updatePopper)
   })
 
-  onBeforeUnmount(() => {
-    offResize(triggerRef.value!, updatePopper)
-  })
-
-  return { overlayRef, overlayStyle, overlayOpened, setOverlayOpened }
+  return { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened }
 }

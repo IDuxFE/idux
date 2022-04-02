@@ -79,6 +79,9 @@ export type ExtractInnerPropTypes<O> = {
   [K in keyof Pick<O, InnerOptionalKeys<O>>]?: InferPropType<O[K]>
 }
 
+/**
+ * @deprecated
+ */
 export class IxPropTypes {
   static get any(): VueTypeValidableDef<any> {
     return toValidableType('any', { default: undefined })

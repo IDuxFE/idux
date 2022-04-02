@@ -17,6 +17,7 @@ import { timePanelContext } from './tokens'
 import { timePanelProps } from './types'
 
 export default defineComponent({
+  name: 'ɵTimePanel',
   props: timePanelProps,
   setup(props) {
     const common = useGlobalConfig('common')

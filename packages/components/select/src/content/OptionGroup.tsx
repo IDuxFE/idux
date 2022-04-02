@@ -17,13 +17,13 @@ export default defineComponent({
   setup(props) {
     const { slots, mergedPrefixCls } = inject(selectToken)!
     return () => {
-      const { label, rawOption } = props
+      const { label, rawData } = props
       const prefixCls = `${mergedPrefixCls.value}-option-group`
-      const labelRender = rawOption.customLabel ?? 'optionGroupLabel'
+      const labelRender = rawData.customLabel ?? 'optionGroupLabel'
       const labelSlot = isString(labelRender) ? slots[labelRender] : labelRender
       return (
-        <div class={prefixCls} {...rawOption.additional} aria-label={label}>
-          <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawOption) : label}</span>
+        <div class={prefixCls} {...rawData.additional} aria-label={label}>
+          <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawData) : label}</span>
         </div>
       )
     }

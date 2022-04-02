@@ -112,7 +112,7 @@ export const proTransferProps = {
     MaybeArray<(isSource: boolean, startIndex: number, endIndex: number, visibleData: unknown[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<(isSource: boolean) => void>>,
-}
+} as const
 
 export const proTransferTableContentProps = {
   isSource: {

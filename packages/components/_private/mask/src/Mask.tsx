@@ -12,6 +12,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { maskProps } from './types'
 
 export default defineComponent({
+  name: 'ɵMask',
   props: maskProps,
   setup(props) {
     const common = useGlobalConfig('common')

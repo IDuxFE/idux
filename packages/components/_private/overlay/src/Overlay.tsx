@@ -30,6 +30,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { overlayProps } from './types'
 
 export default defineComponent({
+  name: 'ɵOverlay',
   inheritAttrs: false,
   props: overlayProps,
   setup(props, { slots, attrs, expose }) {

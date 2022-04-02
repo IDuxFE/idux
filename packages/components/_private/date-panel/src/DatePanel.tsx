@@ -18,6 +18,7 @@ import { datePanelToken } from './token'
 import { datePanelProps } from './types'
 
 export default defineComponent({
+  name: 'ɵDatePanel',
   props: datePanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')

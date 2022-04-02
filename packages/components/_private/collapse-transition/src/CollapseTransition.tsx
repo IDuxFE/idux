@@ -13,6 +13,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { collapseTransitionProps } from './types'
 
 export default defineComponent({
+  name: 'ɵCollapseTransition',
   props: collapseTransitionProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')

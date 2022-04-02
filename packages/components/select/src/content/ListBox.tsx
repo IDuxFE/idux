@@ -42,11 +42,11 @@ const renderOption = (
   if (!option) {
     return undefined
   }
-  const { key, label, rawOption, value } = option
+  const { key, label, rawData, value } = option
   const selected = compareWith(selectedValue, value)
   return (
     <div key={key} role="option" aria-label={label} aria-selected={selected}>
-      {renderOptionLabel(slots, rawOption, label)}
+      {renderOptionLabel(slots, rawData, label)}
     </div>
   )
 }

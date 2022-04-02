@@ -25,7 +25,7 @@ const suffixNodeKey = '__IDUX_OVERFLOW_SUFFIX' as VKey
 const responsive = 'responsive'
 
 export default defineComponent({
-  name: 'IxOverflow',
+  name: 'ɵOverflow',
   props: overflowProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')

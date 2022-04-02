@@ -46,8 +46,13 @@ export function useFormFocusMonitor<T extends HTMLElement = HTMLElement>(options
   let watchStopHandle: WatchStopHandle | undefined
 
   watch(elementRef, (currElement, prevElement) => {
-    watchStopHandle?.()
-    focusMonitor.stopMonitoring(prevElement)
+    if (watchStopHandle) {
+      watchStopHandle()
+    }
+
+    if (prevElement) {
+      focusMonitor.stopMonitoring(prevElement)
+    }
 
     watchStopHandle = watch(focusMonitor.monitor(currElement, options.checkChildren), evt => {
       const { origin, event } = evt
@@ -58,7 +63,9 @@ export function useFormFocusMonitor<T extends HTMLElement = HTMLElement>(options
   })
 
   onBeforeUnmount(() => {
-    watchStopHandle?.()
+    if (watchStopHandle) {
+      watchStopHandle()
+    }
     focusMonitor.stopMonitoring(elementRef.value)
   })
 

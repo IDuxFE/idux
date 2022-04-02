@@ -61,11 +61,6 @@ export const selectProps = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
   onClear: IxPropTypes.emit<(evt: Event) => void>(),
-  onCompositionStart: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
-  onCompositionEnd: IxPropTypes.emit<(evt: CompositionEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onInput: IxPropTypes.emit<(evt: Event) => void>(),
   onSearch: IxPropTypes.emit<(searchValue: string) => void>(),
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
   onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>(),
@@ -136,13 +131,13 @@ export const optionProps = {
   index: IxPropTypes.number.isRequired,
   label: IxPropTypes.string,
   type: IxPropTypes.oneOf(['grouped', 'group']),
-  rawOption: IxPropTypes.object<SelectOptionProps>().isRequired,
+  rawData: IxPropTypes.object<SelectOptionProps>().isRequired,
   value: IxPropTypes.oneOfType([String, Number, Object]),
 }
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
   label: IxPropTypes.string,
-  rawOption: IxPropTypes.object<SelectOptionGroupProps>().isRequired,
+  rawData: IxPropTypes.object<SelectOptionGroupProps>().isRequired,
 }
 export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

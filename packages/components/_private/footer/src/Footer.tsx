@@ -15,6 +15,7 @@ import { IxButton } from '@idux/components/button'
 import { footerProps } from './types'
 
 export default defineComponent({
+  name: 'ɵFooter',
   props: footerProps,
   setup(props, { slots }) {
     const cancelButtonProps = computed<FooterButtonProps | undefined>(() => {

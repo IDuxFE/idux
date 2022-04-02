@@ -9,12 +9,12 @@
 
 import { type SelectOptionComponent, type SelectOptionGroupComponent } from './types'
 
-const optionKey = '__IDUX_SELECT_OPTION'
+const optionKey = Symbol('IxSelectOption')
 const SelectOption = (() => {}) as SelectOptionComponent
 SelectOption.displayName = 'IxSelectOption'
 ;(SelectOption as any)[optionKey] = true
 
-const optionGroupKey = '__IDUX_SELECT_OPTION_GROUP'
+const optionGroupKey = Symbol('IxSelectOptionGroup')
 const SelectOptionGroup = (() => {}) as SelectOptionGroupComponent
 SelectOptionGroup.displayName = 'IxSelectOptionGroup'
 ;(SelectOptionGroup as any)[optionGroupKey] = true

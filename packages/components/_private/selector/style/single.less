@@ -1,8 +1,10 @@
 .select-size(@selector-height;  @select-padding-horizontal; @selector-font-size) {
-  .@{select-prefix}-selector {
-    height: @selector-height;
-    padding: 0 @select-padding-horizontal;
-    font-size: @selector-font-size;
+  .@{selector-prefix} {
+    &-content {
+      height: @selector-height;
+      padding: 0 @select-padding-horizontal;
+      font-size: @selector-font-size;
+    }
 
     &-item,
     &-placeholder,
@@ -16,14 +18,16 @@
     }
   }
 
-  &.@{select-prefix}-show-suffix &-selector-input {
+  &.@{selector-prefix}-show-suffix &-input {
     right: @select-padding-horizontal + @selector-font-size;
   }
 }
 
-.@{select-prefix}-single {
-  .@{select-prefix}-selector {
-    width: 100%;
+.@{selector-prefix}-single {
+  .@{selector-prefix} {
+    &-content {
+      width: 100%;
+    }
 
     &-input {
       position: absolute;
@@ -34,24 +38,24 @@
     }
   }
 
-  &.@{select-prefix}-with-suffix .@{select-prefix}-selector-item,
-  &.@{select-prefix}-with-suffix .@{select-prefix}-selector-placeholder {
+  &.@{selector-prefix}-with-suffix .@{selector-prefix}-item,
+  &.@{selector-prefix}-with-suffix .@{selector-prefix}-placeholder {
     padding-right: @select-icon-font-size;
   }
 
-  &.@{select-prefix}-opened .@{select-prefix}-selector-item {
+  &.@{selector-prefix}-opened .@{selector-prefix}-item {
     color: @select-placeholder-color;
   }
 
-  &.@{select-prefix}-sm {
+  &.@{selector-prefix}-sm {
     .select-size(@select-height-sm, @select-padding-horizontal-sm, @select-font-size-sm);
   }
 
-  &.@{select-prefix}-md {
+  &.@{selector-prefix}-md {
     .select-size(@select-height-md, @select-padding-horizontal-md, @select-font-size-md);
   }
 
-  &.@{select-prefix}-lg {
+  &.@{selector-prefix}-lg {
     .select-size(@select-height-lg, @select-padding-horizontal-lg, @select-font-size-lg);
   }
 }

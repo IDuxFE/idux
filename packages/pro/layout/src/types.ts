@@ -56,7 +56,7 @@ export const proLayoutProps = {
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(activeKey: VKey | null) => void>>,
   'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
   onMenuClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions) => void>>,
-}
+} as const
 
 export type ProLayoutProps = ExtractInnerPropTypes<typeof proLayoutProps>
 export type ProLayoutPublicProps = ExtractPublicPropTypes<typeof proLayoutProps>
