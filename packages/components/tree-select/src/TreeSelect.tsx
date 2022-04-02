@@ -127,7 +127,7 @@ export default defineComponent({
     return () => {
       const renderTrigger = () => <Trigger {...attrs}></Trigger>
       const renderContent = () => <Content />
-      const overlayProps = { 'onUpdate:visible': setOverlayOpened }
+      const overlayProps = { triggerId: attrs.id, 'onUpdate:visible': setOverlayOpened }
 
       return (
         <ɵOverlay

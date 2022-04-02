@@ -8,71 +8,95 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, FunctionalComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
+import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { IxPropTypes } from '@idux/cdk/utils'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const defaultCompareFn = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
   control: controlPropDef,
-  value: IxPropTypes.any,
-  open: IxPropTypes.bool,
+  value: { type: null, default: undefined },
+  open: { type: Boolean, default: undefined },
 
-  allowInput: IxPropTypes.bool.def(false),
-  autofocus: IxPropTypes.bool.def(false),
-  borderless: IxPropTypes.bool,
-  childrenKey: IxPropTypes.string,
-  clearable: IxPropTypes.bool.def(false),
-  clearIcon: IxPropTypes.string,
-  compareWith: IxPropTypes.func<(o1: any, o2: any) => boolean>(),
-  compareFn: IxPropTypes.func<(o1: any, o2: any) => boolean>().def(defaultCompareFn),
-  dataSource: IxPropTypes.array<SelectData>(),
-  disabled: IxPropTypes.bool.def(false),
-  empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
-  maxLabelCount: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.oneOf(['responsive'])]),
-  maxLabel: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.oneOf(['responsive'])]).def(Number.MAX_SAFE_INTEGER),
-  multiple: IxPropTypes.bool.def(false),
-  multipleLimit: IxPropTypes.number.def(Number.MAX_SAFE_INTEGER),
-  labelKey: IxPropTypes.string,
-  options: IxPropTypes.array<SelectData>(),
-  overlayClassName: IxPropTypes.string,
-  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeChild>(),
-  placeholder: IxPropTypes.string,
-  readonly: IxPropTypes.bool.def(false),
-  searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]).def(false),
-  searchFilter: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectSearchFn>()]),
-  searchFn: IxPropTypes.oneOfType([Boolean, IxPropTypes.func<SelectSearchFn>()]).def(true),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
+  allowInput: { type: Boolean, default: false },
+  autocomplete: { type: String, default: 'off' },
+  autofocus: { type: Boolean, default: false },
+  borderless: { type: Boolean, default: undefined },
+  childrenKey: { type: String, default: undefined },
+  clearable: { type: Boolean, default: false },
+  clearIcon: { type: String, default: undefined },
+  /**
+   * @deprecated
+   */
+  compareWith: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: undefined },
+  compareFn: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: defaultCompareFn },
+  dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
+  disabled: { type: Boolean, default: false },
+  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  labelKey: { type: String, default: undefined },
+  maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
+  maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
+  multiple: { type: Boolean, default: false },
+  multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
+  /**
+   * @deprecated
+   */
+  options: { type: Array as PropType<SelectData[]>, default: undefined },
+  overlayClassName: { type: String, default: undefined },
+  overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
+  placeholder: { type: String, default: undefined },
+  readonly: { type: Boolean, default: false },
+  searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
+  /**
+   * @deprecated
+   */
+  searchFilter: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: undefined },
+  searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
+  size: { type: String as PropType<FormSize>, default: undefined },
+  suffix: { type: String, default: undefined },
   target: ɵPortalTargetDef,
-  valueKey: IxPropTypes.string,
-  virtual: IxPropTypes.bool.def(false),
+  valueKey: { type: String, default: undefined },
+  virtual: { type: Boolean, default: false },
+
+  onCompositionStart: [Function, Array] as PropType<MaybeArray<(evt: CompositionEvent) => void>>,
+  onCompositionEnd: [Function, Array] as PropType<MaybeArray<(evt: CompositionEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
 
   // events
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
-  'onUpdate:open': IxPropTypes.emit<(open: boolean) => void>(),
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
-  onClear: IxPropTypes.emit<(evt: Event) => void>(),
-  onSearch: IxPropTypes.emit<(searchValue: string) => void>(),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
   // private
-  overlayHeight: IxPropTypes.number.def(256),
-  overlayItemHeight: IxPropTypes.number.def(32),
-}
+  overlayHeight: {
+    type: Number,
+    default: 256,
+  },
+  overlayItemHeight: {
+    type: Number,
+    default: 32,
+  },
+} as const
 
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
-export type SelectPublicProps = Omit<ExtractPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
+export type SelectPublicProps = Omit<
+  ExtractPublicPropTypes<typeof selectProps>,
+  'compareWith' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight'
+>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -121,23 +145,23 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 
 // private
 export const selectorProps = {
-  clearable: IxPropTypes.bool,
-  suffix: IxPropTypes.string,
+  clearable: Boolean,
+  suffix: String,
 }
 export type SelectorProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionProps = {
-  disabled: IxPropTypes.bool,
-  index: IxPropTypes.number.isRequired,
-  label: IxPropTypes.string,
-  type: IxPropTypes.oneOf(['grouped', 'group']),
-  rawData: IxPropTypes.object<SelectOptionProps>().isRequired,
-  value: IxPropTypes.oneOfType([String, Number, Object]),
-}
+  disabled: Boolean,
+  index: { type: Number, required: true },
+  label: String,
+  type: String as PropType<'grouped' | 'group'>,
+  rawData: { type: Object as PropType<SelectOptionProps>, required: true },
+  value: null,
+} as const
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
-  label: IxPropTypes.string,
-  rawData: IxPropTypes.object<SelectOptionGroupProps>().isRequired,
-}
+  label: String,
+  rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
+} as const
 export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

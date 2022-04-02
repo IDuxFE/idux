@@ -55,7 +55,7 @@ export default defineComponent({
     } = useInputState(props)
 
     const mergedClearable = computed(() => {
-      return !props.disabled && !props.readonly && props.clearable && props.selectedValue.length > 0
+      return !props.disabled && !props.readonly && props.clearable && props.value.length > 0
     })
     const mergedClearIcon = computed(() => props.clearIcon ?? props.config.clearIcon)
     const mergedSearchable = computed(() => {
@@ -65,7 +65,7 @@ export default defineComponent({
       return props.suffix ?? (mergedSearchable.value && isFocused.value ? 'search' : props.config.suffix)
     })
     const showPlaceholder = computed(() => {
-      return props.selectedValue.length === 0 && !isComposing.value && !inputValue.value
+      return props.value.length === 0 && !isComposing.value && !inputValue.value
     })
 
     const classes = computed(() => {
@@ -132,7 +132,7 @@ export default defineComponent({
     onBeforeUnmount(() => offResize(elementRef.value!, updateInputWidth))
 
     return () => {
-      const { multiple, disabled, readonly, selectedValue, selectedData, maxLabel } = props
+      const { multiple, disabled, readonly, value, dataSource, maxLabel } = props
       const prefixCls = mergedPrefixCls.value
       const itemPrefixCls = `${prefixCls}-item`
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -178,14 +178,14 @@ export default defineComponent({
           <ɵOverflow
             v-slots={overflowSlot}
             prefixCls={prefixCls}
-            dataSource={selectedData}
+            dataSource={dataSource}
             getKey={item => item.key}
             maxLabel={maxLabel}
           />,
         )
       } else {
-        if (selectedValue.length > 0 && !isComposing.value && !inputValue.value) {
-          selectedData.forEach(item => children.push(renderItem(item)))
+        if (value.length > 0 && !isComposing.value && !inputValue.value) {
+          dataSource.forEach(item => children.push(renderItem(item)))
         }
         children.push(<Input />)
       }
@@ -210,7 +210,7 @@ export default defineComponent({
         <div ref={elementRef} class={classes.value} onClick={handleClick}>
           {isFocused.value && !props.opened && (
             <span style={hiddenBoxStyle} aria-live="polite">
-              {props.selectedValue.join(', ')}
+              {props.value.join(', ')}
             </span>
           )}
           <div class={`${prefixCls}-content`}>{children}</div>

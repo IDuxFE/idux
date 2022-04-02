@@ -156,11 +156,13 @@ export default defineComponent({
         v-slots={slots}
         class={mergedPrefixCls.value}
         allowInput={props.allowInput}
+        autocomplete={props.autocomplete}
         autofocus={props.autofocus}
         borderless={props.borderless}
         clearable={props.clearable}
         clearIcon={props.clearIcon}
         config={config}
+        dataSource={selectedOptions.value}
         disabled={accessor.disabled.value}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
@@ -168,10 +170,9 @@ export default defineComponent({
         placeholder={props.placeholder}
         readonly={props.readonly}
         searchable={props.searchable}
-        selectedValue={selectedValue.value}
-        selectedData={selectedOptions.value}
         size={props.size}
         suffix={props.suffix}
+        value={selectedValue.value}
         onBlur={handleBlur}
         onClear={handleClear}
         onInputValueChange={setInputValue}
@@ -196,6 +197,7 @@ export default defineComponent({
         placement: 'bottom',
         target: target.value,
         trigger: 'manual',
+        triggerId: attrs.id,
         visible: overlayOpened.value,
         'onUpdate:visible': setOverlayOpened,
       } as const
