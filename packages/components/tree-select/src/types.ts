@@ -8,88 +8,104 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { TreeCheckStrategy, TreeDragDropOptions, TreeDroppable, TreeNode } from '@idux/components/tree'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export const treeSelectProps = {
-  value: IxPropTypes.any,
-  expandedKeys: IxPropTypes.array<VKey>(),
-  loadedKeys: IxPropTypes.array<VKey>(),
   control: controlPropDef,
-  open: IxPropTypes.bool,
+  value: { type: null, default: undefined },
+  open: { type: Boolean, default: undefined },
+  expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  loadedKeys: { type: Array as PropType<VKey[]>, default: undefined },
 
-  autofocus: IxPropTypes.bool.def(false),
-  childrenKey: IxPropTypes.string,
-  cascade: IxPropTypes.bool.def(false),
-  checkable: IxPropTypes.bool.def(false),
-  clearable: IxPropTypes.bool.def(false),
-  checkStrategy: IxPropTypes.oneOf<TreeCheckStrategy>(['all', 'parent', 'child']).def('all'),
-  dataSource: IxPropTypes.array<TreeSelectNode>().def(() => []),
-  disabled: IxPropTypes.bool.def(false),
-  draggable: IxPropTypes.bool.def(false),
-  droppable: IxPropTypes.func<TreeDroppable>(),
-  empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
-  expandIcon: IxPropTypes.string,
-  maxLabelCount: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.oneOf(['responsive'])]),
-  maxLabel: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.oneOf(['responsive'])]).def(Number.MAX_SAFE_INTEGER),
-  multiple: IxPropTypes.bool.def(false),
-  labelKey: IxPropTypes.string,
-  leafLineIcon: IxPropTypes.string,
-  loadChildren: IxPropTypes.func<(node: TreeSelectNode) => Promise<TreeSelectNode[]>>(),
-  nodeKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(node: TreeSelectNode) => VKey>()]),
-  overlayClassName: IxPropTypes.string,
-  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
-  placeholder: IxPropTypes.string,
-  readonly: IxPropTypes.bool.def(false),
-  searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]).def(false),
-  searchFn: IxPropTypes.func<(node: TreeSelectNode, searchValue?: string) => boolean>(),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
-  showLine: IxPropTypes.bool,
+  autocomplete: { type: String, default: 'off' },
+  autofocus: { type: Boolean, default: false },
+  borderless: { type: Boolean, default: undefined },
+  childrenKey: { type: String, default: undefined },
+  cascade: { type: Boolean, default: false },
+  checkable: { type: Boolean, default: false },
+  clearable: { type: Boolean, default: false },
+  clearIcon: { type: String, default: undefined },
+  checkStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
+  dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },
+  disabled: { type: Boolean, default: false },
+  draggable: { type: Boolean, default: false },
+  droppable: { type: Object as PropType<TreeDroppable>, default: false },
+  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  expandIcon: { type: String, default: undefined },
+  labelKey: { type: String, default: undefined },
+  leafLineIcon: { type: String, default: undefined },
+  loadChildren: { type: Function as PropType<(node: TreeSelectNode) => Promise<TreeSelectNode[]>>, default: undefined },
+  /**
+   * @deprecated
+   */
+  maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
+  maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
+  multiple: { type: Boolean, default: false },
+  nodeKey: { type: [String, Function] as PropType<string | ((node: TreeSelectNode) => VKey)>, default: undefined },
+  overlayClassName: { type: String, default: undefined },
+  overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
+  placeholder: { type: String, default: undefined },
+  readonly: { type: Boolean, default: false },
+  searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
+  searchFn: { type: Function as PropType<(node: TreeSelectNode, searchValue?: string) => boolean>, default: undefined },
+  size: { type: String as PropType<FormSize>, default: undefined },
+  showLine: { type: Boolean, default: undefined },
+  suffix: { type: String, default: undefined },
   target: ɵPortalTargetDef,
-  treeDisabled: IxPropTypes.func<(node: TreeSelectNode) => boolean | TreeSelectNodeDisabled>(),
-  virtual: IxPropTypes.bool.def(false),
+  treeDisabled: {
+    type: Function as PropType<(node: TreeSelectNode) => boolean | TreeSelectNodeDisabled>,
+    default: undefined,
+  },
+  virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
-  'onUpdate:expandedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:loadedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  onCheck: IxPropTypes.emit<(checked: boolean, node: TreeSelectNode) => void>(),
-  onChange: IxPropTypes.emit<(value: any, oldValue: any, node?: TreeSelectNode | TreeSelectNode[]) => void>(),
-  onClear: IxPropTypes.emit<(evt: Event) => void>(),
-  onDragstart: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragend: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragenter: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragleave: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragover: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDrop: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onExpand: IxPropTypes.emit<(expanded: boolean, node: TreeSelectNode) => void>(),
-  onExpandedChange: IxPropTypes.emit<(expendedKeys: VKey[], expendedNodes: TreeSelectNode[]) => void>(),
-  onLoaded: IxPropTypes.emit<(loadedKeys: VKey[], node: TreeSelectNode) => void>(),
-  onSelect: IxPropTypes.emit<(selected: boolean, node: TreeSelectNode) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onNodeClick: IxPropTypes.emit<(evt: Event, node: TreeSelectNode) => void>(),
-  onNodeContextmenu: IxPropTypes.emit<(evt: Event, node: TreeSelectNode) => void>(),
-  onSearchedChange: IxPropTypes.emit<(searchedKeys: VKey[], searchedNodes: TreeSelectNode[]) => void>(),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange:
-    IxPropTypes.emit<(startIndex: number, endIndex: number, visibleOptions: TreeSelectNode[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  onCheck: [Function, Array] as PropType<MaybeArray<(checked: boolean, node: TreeSelectNode) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onDragstart: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onDragend: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onDragenter: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onDragleave: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onDragover: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, node: TreeSelectNode) => void>>,
+  onExpandedChange: [Function, Array] as PropType<
+    MaybeArray<(expendedKeys: VKey[], expendedNodes: TreeSelectNode[]) => void>
+  >,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: VKey[], node: TreeSelectNode) => void>>,
+  onNodeClick: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode) => void>>,
+  onNodeContextmenu: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
+  onSearchedChange: [Function, Array] as PropType<
+    MaybeArray<(searchedKeys: VKey[], searchedNodes: TreeSelectNode[]) => void>
+  >,
+  onSelect: [Function, Array] as PropType<MaybeArray<(selected: boolean, node: TreeSelectNode) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: TreeSelectNode[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
   // private
-  overlayHeight: IxPropTypes.number.def(256),
-}
+  overlayHeight: { type: Number, default: 256 },
+} as const
 
 export type TreeSelectProps = ExtractInnerPropTypes<typeof treeSelectProps>
-export type TreeSelectPublicProps = ExtractPublicPropTypes<typeof treeSelectProps>
+export type TreeSelectPublicProps = Omit<
+  ExtractPublicPropTypes<typeof treeSelectProps>,
+  'maxLabelCount' | 'overlayHeight'
+>
 export interface TreeSelectBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
@@ -112,7 +128,7 @@ export interface TreeSelectNodeDisabled {
 
 // private
 export const treeSelectorProps = {
-  clearable: IxPropTypes.bool,
-  suffix: IxPropTypes.string,
+  clearable: Boolean,
+  suffix: String,
 }
-export type TreeSelectorProps = ExtractInnerPropTypes<any>
+export type TreeSelectorProps = ExtractInnerPropTypes<typeof treeSelectorProps>

@@ -17,6 +17,7 @@ const IxSelectOption = SelectOption
 const IxSelectOptionGroup = SelectOptionGroup
 
 export { IxSelect, IxSelectOption, IxSelectOptionGroup }
+export { useOverlayState as ɵUseOverlayState } from './src/composables/useOverlayState'
 
 export type {
   SelectInstance,

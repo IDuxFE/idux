@@ -21,7 +21,7 @@ export interface MergedNode {
   isLeaf: boolean
   key: VKey
   parentKey?: VKey
-  rawNode: TreeSelectNode
+  rawData: TreeSelectNode
   checkDisabled?: boolean
   dragDisabled?: boolean
   dropDisabled?: boolean
@@ -62,7 +62,7 @@ export function convertMergeNodes(
 }
 
 function convertMergeNode(
-  rawNode: TreeSelectNode,
+  rawData: TreeSelectNode,
   getKey: GetNodeKey,
   disabled: ((node: TreeSelectNode) => boolean | TreeSelectNodeDisabled) | undefined,
   childrenKey: string,
@@ -70,10 +70,10 @@ function convertMergeNode(
   hasLoad: boolean,
   parentKey?: VKey,
 ): MergedNode {
-  const key = getKey(rawNode)
-  const { check, drag, drop, select } = convertDisabled(rawNode, disabled)
-  const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeSelectNode[] | undefined
-  const label = rawNode[labelKey] as string
+  const key = getKey(rawData)
+  const { check, drag, drop, select } = convertDisabled(rawData, disabled)
+  const subNodes = (rawData as Record<string, unknown>)[childrenKey] as TreeSelectNode[] | undefined
+  const label = rawData[labelKey] as string
   const children = subNodes?.map(subNode =>
     convertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
   )
@@ -81,9 +81,9 @@ function convertMergeNode(
     children,
     label,
     key,
-    isLeaf: rawNode.isLeaf ?? !(children?.length || hasLoad),
+    isLeaf: rawData.isLeaf ?? !(children?.length || hasLoad),
     parentKey,
-    rawNode,
+    rawData,
     checkDisabled: check,
     dragDisabled: drag,
     dropDisabled: drop,

@@ -1,105 +1,43 @@
-@import '../../style/mixins/borderless.less';
 @import '../../style/mixins/ellipsis.less';
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
-@import './single.less';
-@import './multiple.less';
 
 .@{tree-select-prefix} {
-  position: relative;
-  display: inline-block;
-  width: 100%;
+  &-option {
+    .reset-component();
+    .tree-select-option(@tree-select-option-font-size, @tree-select-option-color);
 
-  &-selector {
-    position: relative;
-    display: flex;
-    color: @tree-select-color;
-    background-color: @tree-select-background-color;
-    border: @tree-select-border-width @tree-select-border-style @tree-select-border-color;
-    border-radius: @tree-select-border-radius;
-    transition: all @transition-duration-base @ease-in-out;
-    cursor: pointer;
-
-    &-item {
-      flex: 1;
-      user-select: none;
-      .ellipsis();
-    }
-
-    &-input {
-
-      &-inner {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-        border: none;
-        outline: none;
-        appearance: none;
-        cursor: pointer;
-        z-index: @zindex-l1-1;
-      }
-    }
-
-    &-placeholder {
-      flex: 1;
-      overflow: hidden;
-      color: @tree-select-placeholder-color;
-      transition: all @transition-duration-base @ease-in-out;
-      .ellipsis();
-    }
-
-    &-suffix {
-      .tree-select-icon();
-
-      pointer-events: none;
-    }
-
-    &-clear {
-      .tree-select-icon();
-
-      z-index: 1;
-      opacity: 0;
-      background-color: @tree-select-icon-background-color;
-
-      &:hover {
-        color: @tree-select-icon-hover-color;
-      }
-
-      .@{tree-select-prefix}:hover & {
-        opacity: 1;
-      }
-    }
-  }
-
-  &:hover:not(&-disabled) &-selector {
-    border-color: @tree-select-hover-color;
-  }
-
-  &-active:not(&-disabled):not(&-borderless) &-selector {
-    border-color: @tree-select-active-color;
-    box-shadow: @tree-select-active-box-shadow;
-  }
-
-  &-disabled &-selector {
-    color: @tree-select-disabled-color;
-    background-color: @tree-select-disabled-background-color;
-    cursor: not-allowed;
-
-    &-input-inner {
+    &-disabled {
+      color: @tree-select-option-disabled-color;
       cursor: not-allowed;
     }
+
+    &-active:not(&-disabled) {
+      background-color: @tree-select-option-active-background-color;
+    }
+
+    &-selected:not(&-disabled) {
+      color: @tree-select-option-selected-color;
+      background-color: @tree-select-option-selected-background-color;
+      font-weight: @tree-select-option-selected-font-weight;
+    }
+
+    &-checkbox {
+      margin-left: @tree-select-option-margin-left;
+    }
+
+    &-label {
+      margin-left: @tree-select-option-margin-left;
+      .ellipsis();
+    }
   }
 
-  &-borderless &-selector {
-    .borderless();
-  }
+  &-option-group {
+    .reset-component();
+    .tree-select-option(@tree-select-option-font-size - 2px, @tree-select-option-disabled-color);
 
-  &-searchable &-selector {
-    cursor: text;
-
-    &-input-inner {
-      cursor: auto;
+    &-label {
+      margin-left: @tree-select-option-margin-left;
+      .ellipsis();
     }
   }
 
@@ -125,39 +63,13 @@
   }
 }
 
-.@{tree-select-option-prefix} {
-  .tree-select-option(@tree-select-option-font-size, @tree-select-option-color);
-
-  &-disabled {
-    color: @tree-select-option-disabled-color;
-    cursor: not-allowed;
-  }
-
-  &-active:not(&-disabled) {
-    background-color: @tree-select-option-active-background-color;
-  }
-
-  &-selected:not(&-disabled) {
-    color: @tree-select-option-selected-color;
-    background-color: @tree-select-option-selected-background-color;
-    font-weight: @tree-select-option-selected-font-weight;
-  }
-
-  &-checkbox {
-    margin-left: @tree-select-option-margin-left;
-  }
-
-  &-label {
-    margin-left: @tree-select-option-margin-left;
-    .ellipsis();
-  }
-
-  &-group {
-    .tree-select-option(@tree-select-option-font-size - 2px, @tree-select-option-disabled-color);
-
-    &-label {
-      margin-left: @tree-select-option-margin-left;
-      .ellipsis();
-    }
-  }
+.tree-select-option(@font-size; @text-color) {
+  display: block;
+  position: relative;
+  height: @tree-select-option-height;
+  padding: @tree-select-option-padding;
+  font-size: @font-size;
+  color: @text-color;
+  transition: background @transition-duration-base @ease-in-out;
+  cursor: pointer;
 }

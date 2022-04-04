@@ -13,8 +13,8 @@ import type { VKey } from '@idux/cdk/utils'
 import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
-import { IxInput } from '@idux/components/input'
 import { IxTree } from '@idux/components/tree'
 
 import { convertMergeNodes, convertMergedNodeMap } from '../composables/useDataSource'
@@ -29,12 +29,13 @@ export default defineComponent({
       getNodeKey,
       mergedPrefixCls,
       mergedNodeMap,
-      selectedValue,
-      searchValue,
-      expandedKeys,
+      inputValue,
+      setInputValue,
       treeRef,
+      expandedKeys,
       setExpandedKeys,
       setExpandAll,
+      selectedValue,
       changeSelected,
       handleNodeClick,
     } = inject(treeSelectToken)!
@@ -50,7 +51,7 @@ export default defineComponent({
         onScrolledChange,
         startIndex,
         endIndex,
-        visibleNodes.map(item => item.rawNode),
+        visibleNodes.map(item => item.rawData),
       )
     }
 
@@ -97,24 +98,15 @@ export default defineComponent({
       if (childrenNodes.length && currNode) {
         const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, config, key)
         convertMergedNodeMap(mergedChildren, nodeMap)
-        currNode.rawNode.children = childrenNodes
+        currNode.rawData.children = childrenNodes
         currNode.children = mergedChildren
         setLoadedKeys(loadedKeys)
         callEmit(props.onLoaded, loadedKeys, node)
       }
     }
 
-    const handleSearchInput = (evt: Event) => {
-      const { value } = evt.target as HTMLInputElement
-      if (value !== searchValue.value) {
-        searchValue.value = value
-      }
-    }
-
-    const handleSearchClear = (evt: Event) => {
-      searchValue.value = ''
-      evt.stopPropagation()
-    }
+    const handleChange = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const handleClear = () => setInputValue('')
 
     const checkable = computed(() => props.multiple && props.checkable)
     const cascade = computed(() => checkable.value && props.cascade)
@@ -189,7 +181,7 @@ export default defineComponent({
           virtual={virtual}
           selectable={multiple ? 'multiple' : true}
           selectedKeys={selectedValue.value}
-          searchValue={searchValue.value}
+          searchValue={inputValue.value}
           searchFn={searchFn}
           showLine={showLine}
           onClick={handleClick}
@@ -223,12 +215,13 @@ export default defineComponent({
               icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
               onClick={handleExpandAll}
             />
-            <IxInput
+            <ɵInput
               clearable
+              size="sm"
               suffix="search"
-              value={searchValue.value}
-              onInput={handleSearchInput}
-              onClear={handleSearchClear}
+              value={inputValue.value}
+              onChange={handleChange}
+              onClear={handleClear}
             />
           </div>,
         )

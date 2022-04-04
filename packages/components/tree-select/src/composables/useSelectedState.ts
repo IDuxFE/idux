@@ -38,18 +38,18 @@ export function useSelectedState(
     return selectedValue.value.map(value => nodesMap.get(value)).filter(Boolean)
   })
 
-  const setValue = (value: any[], nodes?: TreeSelectNode[]) => {
+  const setValue = (value: any[]) => {
     const currValue = props.multiple ? value : value[0]
-    const node = props.multiple ? nodes : nodes?.[0]
+
     const oldValue = toRaw(accessor.valueRef.value)
     if (currValue !== oldValue) {
       accessor.setValue(currValue)
-      callEmit(props.onChange, currValue, oldValue, node)
+      callEmit(props.onChange, currValue, oldValue)
     }
   }
 
-  const changeSelected = (value: any[], nodes: TreeSelectNode[]) => {
-    setValue(value, nodes)
+  const changeSelected = (value: any[]) => {
+    setValue(value)
   }
 
   const handleItemRemove = (key: any) => {

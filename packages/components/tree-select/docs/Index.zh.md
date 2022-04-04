@@ -51,7 +51,7 @@ order: 0
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
-| `onChange` | 选择值发生变化时触发 | `(value: any, oldValue: any, node: TreeSelectNode \| TreeSelectNode[] => void` | - | - | - |
+| `onChange` | 选择值发生变化时触发 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onCheck` | 选择框勾选状态发生变化时触发 | `(checked: boolean, node: TreeSelectNode) => void` | - | - | - |
 | `onDragStart` | `dragstart` 触发时调用 | `(options: TreeDragDropOptions) => void` | - | - | - |
 | `onDragEnd` | `dragend` 触发时调用 | `(options: TreeDragDropOptions) => void` | - | - | - |

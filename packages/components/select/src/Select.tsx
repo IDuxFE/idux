@@ -18,7 +18,7 @@ import { useFormAccessor } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { useFlattedOptions, useMergedOptions } from './composables/useOptions'
-import { useOverlayProps } from './composables/useOverlayProps'
+import { useOverlayState } from './composables/useOverlayState'
 import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { selectToken } from './token'
@@ -49,14 +49,13 @@ export default defineComponent({
 
     expose({ focus, blur, scrollTo })
 
-    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = useOverlayProps(props)
+    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = useOverlayState(props)
 
     const accessor = useFormAccessor()
 
     const mergedOptions = useMergedOptions(props, slots, config)
 
     const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
-    const selectedStateContext = useSelectedState(props, accessor, mergedOptions, locale)
     const {
       selectedValue,
       selectedLimit,
@@ -65,7 +64,8 @@ export default defineComponent({
       selectedOptions,
       handleClear,
       handleItemRemove,
-    } = selectedStateContext
+    } = useSelectedState(props, accessor, mergedOptions, locale)
+
     const { activeIndex, activeOption, changeActive, scrollToActivated } = useActiveState(
       props,
       flattedOptions,
@@ -164,7 +164,7 @@ export default defineComponent({
         config={config}
         dataSource={selectedOptions.value}
         disabled={accessor.disabled.value}
-        maxLabel={props.maxLabel}
+        maxLabel={props.maxLabelCount ?? props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
         placeholder={props.placeholder}
@@ -182,10 +182,10 @@ export default defineComponent({
         onWidthChange={setOverlayWidth}
         onSearch={props.onSearch}
         {...attrs}
-      ></ɵSelector>
+      />
     )
 
-    const renderContent = () => <Content></Content>
+    const renderContent = () => <Content />
 
     return () => {
       const overlayProps = {

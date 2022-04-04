@@ -9,38 +9,32 @@
 
 import type { MergedNode } from './composables/useDataSource'
 import type { GetNodeKey } from './composables/useGetNodeKey'
-import type { InputStateContext } from './composables/useInputState'
-import type { SelectedStateContext } from './composables/useSelectedState'
-import type { TreeSelectProps } from './types'
-import type { FocusMonitor } from '@idux/cdk/a11y'
+import type { TreeSelectNode, TreeSelectProps } from './types'
 import type { ValueAccessor } from '@idux/cdk/forms'
-import type { VirtualScrollInstance } from '@idux/cdk/scroll'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeSelectConfig } from '@idux/components/config'
 import type { TreeInstance } from '@idux/components/tree'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
-export interface TreeSelectContext extends InputStateContext, SelectedStateContext {
+export interface TreeSelectContext {
   props: TreeSelectProps
   slots: Slots
   config: TreeSelectConfig
+  mergedPrefixCls: ComputedRef<string>
   accessor: ValueAccessor
-  isDisabled: ComputedRef<boolean>
   getNodeKey: ComputedRef<GetNodeKey>
   expandedKeys: ComputedRef<any[]>
-  mergedPrefixCls: ComputedRef<string>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
-  focusMonitor: FocusMonitor
-  inputRef: Ref<HTMLInputElement | undefined>
-  virtualScrollRef?: Ref<VirtualScrollInstance | undefined>
-  triggerRef: Ref<HTMLDivElement | undefined>
+  inputValue: ComputedRef<string>
+  setInputValue: (value: string) => void
   treeRef: Ref<TreeInstance | undefined>
-  overlayOpened: ComputedRef<boolean>
-  searchValue: Ref<string>
   setExpandedKeys: (value: any[]) => void
   setExpandAll: (isAll: boolean) => void
+  overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
   handleNodeClick: () => void
+  selectedValue: ComputedRef<any[]>
+  changeSelected: (value: any[], nodes: TreeSelectNode[]) => void
 }
 
 export const treeSelectToken: InjectionKey<TreeSelectContext> = Symbol('treeSelectToken')

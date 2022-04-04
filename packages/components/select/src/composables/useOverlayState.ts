@@ -10,9 +10,7 @@ import { type CSSProperties, type ComputedRef, type Ref, computed, onMounted, re
 import { useControlledProp, useState } from '@idux/cdk/utils'
 import { type ɵOverlayInstance } from '@idux/components/_private/overlay'
 
-import { type SelectProps } from '../types'
-
-export interface OverlayPropsContext {
+export interface OverlayStateContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties>
   setOverlayWidth: (width: string) => void
@@ -20,7 +18,7 @@ export interface OverlayPropsContext {
   setOverlayOpened: (open: boolean) => void
 }
 
-export function useOverlayProps(props: SelectProps): OverlayPropsContext {
+export function useOverlayState(props: { open?: boolean; autofocus?: boolean }): OverlayStateContext {
   const overlayRef = ref<ɵOverlayInstance>()
   const [overlayWidth, setOverlayWidth] = useState('')
   const overlayStyle = computed(() => ({ width: overlayWidth.value }))

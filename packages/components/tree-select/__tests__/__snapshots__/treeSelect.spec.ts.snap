@@ -1,145 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TreeSelect multiple work render work 1`] = `
-"<div class=\\"ix-tree-select ix-tree-select-opened ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-opened ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
-  </label>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect single work custom keys work 1`] = `
-"<div class=\\"ix-tree-select ix-tree-select-opened ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-opened ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
-  </label>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect single work render work 1`] = `
-"<div class=\\"ix-tree-select ix-tree-select-opened ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-opened ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
-  </label>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect single work searchFn work 1`] = `
-"<div class=\\"ix-tree-select ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\" searchvalue=\\"node\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\" searchvalue=\\"node\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
-  </label>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
 </div>
 <!---->"
 `;
 
 exports[`TreeSelect single work searchFn work 2`] = `
-"<div class=\\"ix-tree-select ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\" searchvalue=\\"node\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\" searchvalue=\\"node\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
           <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
         </svg></i></div>
-    <!---->
-  </label>
+  </div>
 </div>
 <!---->"
 `;
 
 exports[`TreeSelect single work searchFn work 3`] = `
-"<div class=\\"ix-tree-select ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\" searchvalue=\\"node\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\" searchvalue=\\"node\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
           <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
         </svg></i></div>
-    <!---->
-  </label>
+  </div>
 </div>
 <!---->"
 `;
 
 exports[`TreeSelect single work searchable work 1`] = `
-"<div class=\\"ix-tree-select ix-tree-select-opened ix-tree-select-single ix-tree-select-searchable ix-tree-select-with-suffix ix-tree-select-md\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <div class=\\"ix-tree-select-selector-item\\"><span class=\\"ix-tree-select-selector-item-label\\">Node 0</span>
+"<div class=\\"ix-selector ix-selector-opened ix-selector-single ix-selector-searchable ix-selector-with-suffix ix-selector-md ix-tree-select\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" autocomplete=\\"off\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
-    <!---->
-  </label>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect single work searchable work 2`] = `
-"<div class=\\"ix-tree-select ix-tree-select-opened ix-tree-select-single ix-tree-select-with-suffix ix-tree-select-md\\">
-  <!----><label class=\\"ix-tree-select-selector\\">
-    <!---->
-    <div class=\\"ix-tree-select-selector-input\\"><input class=\\"ix-tree-select-selector-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">
+"<div class=\\"ix-selector ix-selector-opened ix-selector-single ix-selector-with-suffix ix-selector-md ix-tree-select\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">
       <!---->
     </div>
-    <!---->
-    <div class=\\"ix-tree-select-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
           <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
         </svg></i></div>
-    <!---->
-  </label>
+  </div>
 </div>
 <!--teleport start-->
 <!--teleport end-->"
