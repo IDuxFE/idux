@@ -5,28 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeSelectNode } from './types'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { VKey } from '@idux/cdk/utils'
-import type { TreeInstance } from '@idux/components/tree'
-
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
-import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { type VirtualScrollToFn } from '@idux/cdk/scroll'
+import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
+import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { ɵUseOverlayState } from '@idux/components/select'
+import { type TreeInstance } from '@idux/components/tree'
+import { useFormAccessor } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
 import { useGetNodeKey } from './composables/useGetNodeKey'
-import { useInputState } from './composables/useInputState'
-import { useOverlayProps } from './composables/useOverlayProps'
 import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { treeSelectToken } from './token'
-import Trigger from './trigger/Trigger'
-import { treeSelectProps } from './types'
+import { type TreeSelectNode, treeSelectProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
 
@@ -39,20 +34,25 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
     const config = useGlobalConfig('treeSelect')
     const getNodeKey = useGetNodeKey(props, config)
-    const searchValue = ref('')
+
+    const triggerRef = ref<ɵSelectorInstance>()
+    const [inputValue, setInputValue] = useState('')
+    const focus = () => triggerRef.value?.focus()
+    const blur = () => triggerRef.value?.blur()
+    const clearInput = () => {
+      props.searchable === 'overlay' ? setInputValue('') : triggerRef.value?.clearInput()
+    }
+
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
-    const focusMonitor = useSharedFocusMonitor()
-    const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
+
     const accessor = useFormAccessor()
-    const isDisabled = computed(() => accessor.disabled.value)
-    const inputStateContext = useInputState(props, inputRef, accessor, searchValue)
-    const { clearInput } = inputStateContext
     const { mergedNodeMap } = useMergeNodes(props, getNodeKey, config)
-
-    const selectedStateContext = useSelectedState(props, accessor, mergedNodeMap)
-
-    const triggerRef = ref<HTMLDivElement>()
-    const { overlayRef, overlayStyle, overlayOpened, setOverlayOpened } = useOverlayProps(props, triggerRef)
+    const { selectedValue, selectedNodes, changeSelected, handleItemRemove, handleClear } = useSelectedState(
+      props,
+      accessor,
+      mergedNodeMap,
+    )
+    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = ɵUseOverlayState(props)
 
     const treeRef = ref<TreeInstance>()
     const scrollTo: VirtualScrollToFn = options => {
@@ -65,7 +65,7 @@ export default defineComponent({
         mergedNodeMap.value.forEach(node => {
           if (!node.isLeaf) {
             _expendedKeys.push(node.key)
-            _expendedNodes.push(node.rawNode)
+            _expendedNodes.push(node.rawData)
           }
         })
       }
@@ -84,28 +84,27 @@ export default defineComponent({
       }
     }
 
+    const handleBlur = () => accessor.markAsBlurred()
+
     provide(treeSelectToken, {
       props,
       slots,
       config,
+      mergedPrefixCls,
       getNodeKey,
       expandedKeys,
-      mergedPrefixCls,
       mergedNodeMap,
-      focusMonitor,
-      triggerRef,
+      inputValue,
+      setInputValue,
       treeRef,
-      inputRef,
-      overlayOpened,
       accessor,
-      isDisabled,
-      searchValue,
       setExpandedKeys,
       setExpandAll,
-      handleNodeClick,
+      overlayOpened,
       setOverlayOpened,
-      ...selectedStateContext,
-      ...inputStateContext,
+      handleNodeClick,
+      selectedValue,
+      changeSelected,
     })
 
     watch(overlayOpened, opened => {
@@ -113,7 +112,7 @@ export default defineComponent({
       clearInput()
     })
 
-    const classes = computed(() => {
+    const overlayClasses = computed(() => {
       const { overlayClassName } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -124,27 +123,61 @@ export default defineComponent({
 
     const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
 
-    return () => {
-      const renderTrigger = () => <Trigger {...attrs}></Trigger>
-      const renderContent = () => <Content />
-      const overlayProps = { triggerId: attrs.id, 'onUpdate:visible': setOverlayOpened }
+    const renderTrigger = () => (
+      <ɵSelector
+        ref={triggerRef}
+        v-slots={slots}
+        class={mergedPrefixCls.value}
+        allowInput={false}
+        autocomplete={props.autocomplete}
+        autofocus={props.autofocus}
+        borderless={props.borderless}
+        clearable={props.clearable}
+        clearIcon={props.clearIcon}
+        config={config}
+        dataSource={selectedNodes.value}
+        disabled={accessor.disabled.value}
+        maxLabel={props.maxLabelCount ?? props.maxLabel}
+        multiple={props.multiple}
+        opened={overlayOpened.value}
+        placeholder={props.placeholder}
+        readonly={props.readonly}
+        searchable={props.searchable}
+        size={props.size}
+        suffix={props.suffix}
+        value={selectedValue.value}
+        onBlur={handleBlur}
+        onClear={handleClear}
+        onInputValueChange={setInputValue}
+        onItemRemove={handleItemRemove}
+        //onKeydown={handleKeyDown}
+        onOpenedChange={setOverlayOpened}
+        onWidthChange={setOverlayWidth}
+        onSearch={props.onSearch}
+        {...attrs}
+      />
+    )
 
-      return (
-        <ɵOverlay
-          ref={overlayRef}
-          {...overlayProps}
-          v-slots={{ default: renderTrigger, content: renderContent }}
-          visible={overlayOpened.value}
-          class={classes.value}
-          style={overlayStyle.value}
-          target={target.value}
-          offset={defaultOffset}
-          disabled={isDisabled.value || props.readonly}
-          clickOutside
-          placement="bottom"
-          trigger="manual"
-        />
-      )
+    const renderContent = () => <Content />
+
+    return () => {
+      const overlayProps = {
+        class: overlayClasses.value,
+        style: overlayStyle.value,
+        clickOutside: true,
+        disabled: accessor.disabled.value || props.readonly,
+        offset: defaultOffset,
+        placement: 'bottom',
+        target: target.value,
+        trigger: 'manual',
+        triggerId: attrs.id,
+        visible: overlayOpened.value,
+        'onUpdate:visible': setOverlayOpened,
+      } as const
+
+      const overlaySlots = { default: renderTrigger, content: renderContent }
+
+      return <ɵOverlay ref={overlayRef} {...overlayProps} v-slots={overlaySlots} />
     }
   },
 })

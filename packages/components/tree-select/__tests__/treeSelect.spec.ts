@@ -64,32 +64,24 @@ describe('TreeSelect', () => {
       const onChange = jest.fn()
       const wrapper = TreeSelectMount({ props: { open: true, value: '0', 'onUpdate:value': onUpdateValue, onChange } })
 
-      expect(wrapper.find('.ix-tree-select-selector-item').text()).toBe('Node 0')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Node 0')
 
       await wrapper.setProps({ value: undefined })
 
-      expect(wrapper.find('.ix-tree-select-selector-item').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-item').exists()).toBe(false)
 
       const allNodes = wrapper.findComponent(Content).findAll('.ix-tree-node-content')
 
       await allNodes[0].trigger('click')
 
       expect(onUpdateValue).toBeCalledWith('0')
-      expect(onChange).toBeCalledWith('0', undefined, {
-        children: [
-          { key: '0-0', label: 'Node 0-0' },
-          { key: '0-1', label: 'Node 0-1' },
-          { key: '0-2', label: 'Node 0-2' },
-        ],
-        key: '0',
-        label: 'Node 0',
-      })
+      expect(onChange).toBeCalledWith('0', undefined)
 
       await wrapper.setProps({ value: '0' })
       await allNodes[1].trigger('click')
 
       expect(onUpdateValue).toBeCalledWith('0-0')
-      expect(onChange).toBeCalledWith('0-0', '0', { key: '0-0', label: 'Node 0-0' })
+      expect(onChange).toBeCalledWith('0-0', '0')
     })
 
     test('v-model:expandedKeys work', async () => {
@@ -179,12 +171,12 @@ describe('TreeSelect', () => {
     test('v-model:open work', async () => {
       const wrapper = TreeSelectMount({ props: { open: true } })
 
-      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       expect(wrapper.findComponent(Content).isVisible()).toBe(true)
 
       await wrapper.setProps({ open: false })
 
-      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
       expect(wrapper.findComponent(Content).isVisible()).toBe(false)
     })
 
@@ -192,7 +184,7 @@ describe('TreeSelect', () => {
       const wrapper = TreeSelectMount({ props: { autofocus: true } })
       await flushPromises()
 
-      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       expect(wrapper.findComponent(Content).isVisible()).toBe(true)
     })
 
@@ -222,7 +214,7 @@ describe('TreeSelect', () => {
         props: { value: '0', open: true, dataSource, childrenKey: 'options', labelKey: 'text', nodeKey: 'value' },
       })
 
-      expect(wrapper.find('.ix-tree-select-selector-item').text()).toBe('Node 0')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Node 0')
       expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -230,24 +222,31 @@ describe('TreeSelect', () => {
       const onUpdateValue = jest.fn()
       const wrapper = TreeSelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })
 
-      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(true)
-      expect(wrapper.find('.ix-tree-select-selector-item').text()).toBe('Node 0')
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
 
-      await wrapper.find('.ix-tree-select-selector-clear').trigger('click')
+      await wrapper.find('.ix-selector-clear').trigger('click')
 
-      expect(wrapper.find('.ix-tree-select-clear').exists()).toBe(false)
       expect(onUpdateValue).toBeCalledWith(undefined)
 
-      await wrapper.setProps({ value: '0-0', clearable: false })
+      await wrapper.setProps({ clearable: false })
 
-      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(false)
-      expect(wrapper.find('.ix-tree-select-selector-item').text()).toBe('Node 0-0')
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(false)
+    })
+
+    test('clearIcon work', async () => {
+      const wrapper = TreeSelectMount({ props: { clearable: true, clearIcon: 'up' } })
+
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(true)
+
+      await wrapper.setProps({ clearIcon: 'down' })
+
+      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('disabled work', async () => {
       const wrapper = TreeSelectMount({ props: { disabled: true } })
 
-      expect(wrapper.find('.ix-tree-select-disabled').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-disabled').exists()).toBe(true)
 
       // await wrapper.find('.ix-select').trigger('click')
 
@@ -255,7 +254,7 @@ describe('TreeSelect', () => {
 
       await wrapper.setProps({ disabled: false })
 
-      expect(wrapper.find('.ix-tree-select-disabled').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-disabled').exists()).toBe(false)
 
       // await wrapper.find('.ix-select').trigger('click')
 
@@ -267,25 +266,25 @@ describe('TreeSelect', () => {
         props: { searchable: true, clearable: true, readonly: true, multiple: true, value: ['0'] },
       })
 
-      expect(wrapper.find('.ix-tree-select-readonly').exists()).toBe(true)
-      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(false)
-      expect(wrapper.find('.ix-tree-select-searchable').exists()).toBe(false)
-      expect(wrapper.find('.ix-tree-select-selector-item-remove').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-readonly').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-item-remove').exists()).toBe(false)
 
-      await wrapper.find('.ix-tree-select').trigger('click')
+      await wrapper.find('.ix-selector').trigger('click')
 
-      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
 
       await wrapper.setProps({ readonly: false })
 
-      expect(wrapper.find('.ix-tree-select-readonly').exists()).toBe(false)
-      expect(wrapper.find('.ix-tree-select-clearable').exists()).toBe(true)
-      expect(wrapper.find('.ix-tree-select-searchable').exists()).toBe(true)
-      expect(wrapper.find('.ix-tree-select-selector-item-remove').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-readonly').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-item-remove').exists()).toBe(true)
 
-      await wrapper.find('.ix-tree-select').trigger('click')
+      await wrapper.find('.ix-selector').trigger('click')
 
-      expect(wrapper.find('.ix-tree-select-opened').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
     })
 
     test('overlayClassName work', async () => {
@@ -370,21 +369,21 @@ describe('TreeSelect', () => {
     test('size work', async () => {
       const wrapper = TreeSelectMount({ props: { size: 'lg' } })
 
-      expect(wrapper.find('.ix-tree-select-lg').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-lg').exists()).toBe(true)
 
       await wrapper.setProps({ size: 'sm' })
 
-      expect(wrapper.find('.ix-tree-select-sm').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-sm').exists()).toBe(true)
 
       await wrapper.setProps({ size: undefined })
 
-      expect(wrapper.find('.ix-tree-select-md').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-md').exists()).toBe(true)
     })
 
     test('clearable work', async () => {
       const wrapper = TreeSelectMount({ props: { clearable: true } })
 
-      expect(wrapper.find('.ix-tree-select-selector-clear').exists()).toBe(true)
+      expect(wrapper.find('.ix-selector-clear').exists()).toBe(true)
     })
   })
 
@@ -410,46 +409,31 @@ describe('TreeSelect', () => {
         props: { open: true, value: ['0', '0-0'], 'onUpdate:value': onUpdateValue, onChange },
       })
 
-      expect(wrapper.findAll('.ix-tree-select-selector-item').length).toBe(2)
+      expect(wrapper.findAll('.ix-selector-item').length).toBe(2)
 
       await wrapper.setProps({ value: ['0'] })
 
-      expect(wrapper.findAll('.ix-tree-select-selector-item').length).toBe(1)
+      expect(wrapper.findAll('.ix-selector-item').length).toBe(1)
 
       const allNodes = wrapper.findComponent(Content).findAll('.ix-tree-node-content')
 
       await allNodes[1].trigger('click')
       expect(onUpdateValue).toBeCalledWith(['0', '0-0'])
-      expect(onChange).toBeCalledWith(
-        ['0', '0-0'],
-        ['0'],
-        [
-          {
-            children: [
-              { key: '0-0', label: 'Node 0-0' },
-              { key: '0-1', label: 'Node 0-1' },
-              { key: '0-2', label: 'Node 0-2' },
-            ],
-            key: '0',
-            label: 'Node 0',
-          },
-          { key: '0-0', label: 'Node 0-0' },
-        ],
-      )
+      expect(onChange).toBeCalledWith(['0', '0-0'], ['0'])
     })
 
-    test('maxLabelCount work', async () => {
-      const wrapper = TreeSelectMount({ props: { maxLabelCount: 2, value: ['0', '0-0', '0-1'] } })
+    test('maxLabel work', async () => {
+      const wrapper = TreeSelectMount({ props: { maxLabel: 2, value: ['0', '0-0', '0-1'] } })
 
-      let items = wrapper.findAll('.ix-tree-select-selector-item')
+      let items = wrapper.findAll('.ix-selector-item')
 
       expect(items[0].text()).toBe('Node 0')
       expect(items[1].text()).toBe('Node 0-0')
       expect(items[2].text()).toBe('+ 1 ...')
 
-      await wrapper.setProps({ maxLabelCount: 3 })
+      await wrapper.setProps({ maxLabel: 3 })
 
-      items = wrapper.findAll('.ix-tree-select-selector-item')
+      items = wrapper.findAll('.ix-selector-item')
 
       expect(items[0].text()).toBe('Node 0')
       expect(items[1].text()).toBe('Node 0-0')
@@ -501,19 +485,19 @@ describe('TreeSelect', () => {
     test('placeholder work', async () => {
       const wrapper = TreeSelectMount({ props: { value: undefined, placeholder: 'placeholder' } })
 
-      expect(wrapper.find('.ix-tree-select-selector-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder')
 
       await wrapper.setProps({ value: 'tom' })
 
-      expect(wrapper.find('.ix-tree-select-selector-placeholder').exists()).toBe(false)
+      expect(wrapper.find('.ix-selector-placeholder').exists()).toBe(false)
 
       await wrapper.setProps({ value: undefined })
 
-      expect(wrapper.find('.ix-tree-select-selector-placeholder').text()).toBe('placeholder')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder')
 
       await wrapper.setProps({ placeholder: 'place' })
 
-      expect(wrapper.find('.ix-tree-select-selector-placeholder').text()).toBe('place')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('place')
     })
 
     test('placeholder slot work', async () => {
@@ -522,7 +506,7 @@ describe('TreeSelect', () => {
         slots: { placeholder: () => 'placeholder slot' },
       })
 
-      expect(wrapper.find('.ix-tree-select-selector-placeholder').text()).toBe('placeholder slot')
+      expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder slot')
     })
 
     test('suffix work', async () => {
@@ -573,7 +557,7 @@ describe('TreeSelect', () => {
       })
 
       expect(wrapper.find('.ix-icon-github').exists()).toBe(true)
-      expect(wrapper.find('.ix-tree-select-selector-item').text()).toBe('Node 0')
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Node 0')
     })
 
     test('treeLabel slot work', async () => {
@@ -714,14 +698,14 @@ describe('TreeSelect', () => {
           value: ['0', '0-0'],
           multiple: true,
           checkable: true,
-          maxLabelCount: 1,
+          maxLabel: 1,
         },
         slots: {
           maxLabel: moreNodes => h('span', moreNodes.length),
         },
       })
 
-      expect(wrapper.findAll('.ix-tree-select-selector-item-label')[1].text()).toBe('1')
+      expect(wrapper.findAll('.ix-selector-item-label')[1].text()).toBe('1')
     })
   })
 })

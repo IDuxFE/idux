@@ -317,6 +317,8 @@ export const defaultConfig: GlobalConfig = {
     showLine: false,
   },
   treeSelect: {
+    borderless: false,
+    clearIcon: 'close-circle',
     size: 'md',
     suffix: 'down',
     childrenKey: 'children',

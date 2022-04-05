@@ -40,6 +40,9 @@ export const selectProps = {
   disabled: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   labelKey: { type: String, default: undefined },
+  /**
+   * @deprecated
+   */
   maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
@@ -64,11 +67,6 @@ export const selectProps = {
   valueKey: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
 
-  onCompositionStart: [Function, Array] as PropType<MaybeArray<(evt: CompositionEvent) => void>>,
-  onCompositionEnd: [Function, Array] as PropType<MaybeArray<(evt: CompositionEvent) => void>>,
-  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-  onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
@@ -82,20 +80,14 @@ export const selectProps = {
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
   // private
-  overlayHeight: {
-    type: Number,
-    default: 256,
-  },
-  overlayItemHeight: {
-    type: Number,
-    default: 32,
-  },
+  overlayHeight: { type: Number, default: 256 },
+  overlayItemHeight: { type: Number, default: 32 },
 } as const
 
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
 export type SelectPublicProps = Omit<
   ExtractPublicPropTypes<typeof selectProps>,
-  'compareWith' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight'
+  'compareWith' | 'maxLabelCount' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight'
 >
 export interface SelectBindings {
   blur: () => void

@@ -466,6 +466,8 @@ export interface TreeConfig {
 }
 
 export interface TreeSelectConfig {
+  borderless: boolean
+  clearIcon: string
   size: FormSize
   suffix: string
   childrenKey: string
