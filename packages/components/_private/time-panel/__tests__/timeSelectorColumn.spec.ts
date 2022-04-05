@@ -67,7 +67,7 @@ describe('TimePanelColumn', () => {
   })
 
   test('onChange work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TimePanelColumnMount({ props: { selectedValue: 1, options, onChange } })
 
     await findCellWithValue(wrapper, 3)?.trigger('click')

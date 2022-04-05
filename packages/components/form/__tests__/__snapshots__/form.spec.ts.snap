@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Form basic work render work 1`] = `
+exports[`Form > basic work > render work 1`] = `
 "<form class=\\"ix-form ix-form-horizontal ix-form-md\\">
   <div class=\\"ix-row ix-form-item\\">
     <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
@@ -58,7 +58,7 @@ exports[`Form basic work render work 1`] = `
 </form>"
 `;
 
-exports[`Form item work render work 1`] = `
+exports[`Form > item work > render work 1`] = `
 "<div class=\\"ix-row ix-form-item\\">
   <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
       <!---->
@@ -74,7 +74,7 @@ exports[`Form item work render work 1`] = `
 </div>"
 `;
 
-exports[`Form wrapper work render work 1`] = `
+exports[`Form > wrapper work > render work 1`] = `
 "<div class=\\"ix-row ix-form-item\\">
   <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
       <!---->

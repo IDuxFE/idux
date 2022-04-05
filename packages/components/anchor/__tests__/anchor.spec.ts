@@ -84,7 +84,7 @@ describe('Anchor', () => {
   })
 
   test('link click work', async () => {
-    window.scrollTo = jest.fn()
+    window.scrollTo = vi.fn()
     const wrapper = mount(TestComponent, { attachTo: 'body' })
 
     await wrapper.find('a[href="#demo"]').trigger('click')

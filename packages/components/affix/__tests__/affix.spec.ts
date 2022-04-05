@@ -101,7 +101,7 @@ describe('Affix', () => {
       return (rectMap[className] || {}) as DOMRect
     }
 
-    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(spyGetBoundingClientRect)
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(spyGetBoundingClientRect)
   })
 
   renderWork(IxAffix)
@@ -175,7 +175,7 @@ describe('Affix', () => {
   })
 
   test('onChange work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const props = reactive<Partial<AffixProps>>({
       onChange,
     })

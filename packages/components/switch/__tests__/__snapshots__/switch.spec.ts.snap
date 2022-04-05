@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Switch render work 1`] = `
+exports[`Switch > render work 1`] = `
 "<button type=\\"button\\" class=\\"ix-switch ix-switch-md\\">
   <!----><span class=\\"ix-switch-label\\"><!----></span>
 </button>"

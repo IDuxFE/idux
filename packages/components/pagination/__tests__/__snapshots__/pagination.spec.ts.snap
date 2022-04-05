@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Pagination render work 1`] = `
+exports[`Pagination > render work 1`] = `
 "<ul class=\\"ix-pagination ix-pagination-md\\">
   <li class=\\"ix-pagination-total\\">共 50 条</li>
   <li class=\\"ix-pagination-item\\" title=\\"上一页\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button></li>
@@ -13,7 +13,7 @@ exports[`Pagination render work 1`] = `
 </ul>"
 `;
 
-exports[`Pagination render work 2`] = `
+exports[`Pagination > render work 2`] = `
 "<ul class=\\"ix-pagination ix-pagination-simple ix-pagination-md\\">
   <li class=\\"ix-pagination-total\\">共 50 条</li>
   <li class=\\"ix-pagination-item\\" title=\\"上一页\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button></li>
@@ -22,7 +22,7 @@ exports[`Pagination render work 2`] = `
 </ul>"
 `;
 
-exports[`Pagination render work 3`] = `
+exports[`Pagination > render work 3`] = `
 "<ul class=\\"ix-pagination ix-pagination-md\\">
   <li class=\\"ix-pagination-total\\">共 500 条</li>
   <li class=\\"ix-pagination-item\\" title=\\"上一页\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button></li>

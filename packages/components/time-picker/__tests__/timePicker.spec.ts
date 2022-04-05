@@ -57,7 +57,7 @@ describe.skip('TimePicker', () => {
   renderWork<TimePickerProps>(IxTimePicker, { props: { open: true } })
 
   test('v-model:value work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = TimePickerMount({
       props: {
         value: new Date().setHours(1, 2, 3),
@@ -137,7 +137,7 @@ describe.skip('TimePicker', () => {
   })
 
   test('v-model:open work', async () => {
-    const onUpdateOpen = jest.fn()
+    const onUpdateOpen = vi.fn()
     const wrapper = TimePickerMount({
       props: {
         open: true,
@@ -175,7 +175,7 @@ describe.skip('TimePicker', () => {
   })
 
   test('disabled & disabledOptions work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = TimePickerMount({
       props: {
         value: new Date().setHours(0, 0, 0),
@@ -243,8 +243,8 @@ describe.skip('TimePicker', () => {
   })
 
   test('focus and blur work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
     const wrapper = TimePickerMount({
       props: {
         value: new Date(),

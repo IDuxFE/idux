@@ -64,15 +64,15 @@ describe('Upload render', () => {
 
   beforeEach(() => {
     xhrMock = {
-      abort: jest.fn(),
-      send: jest.fn(),
-      open: jest.fn(),
-      setRequestHeader: jest.fn(),
+      abort: vi.fn(),
+      send: vi.fn(),
+      open: vi.fn(),
+      setRequestHeader: vi.fn(),
       readyState: 4,
       status: 200,
       withCredentials: false,
     }
-    jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
+    vi.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
   })
 
   renderWork<UploadProps>(UploadCpm, { props: { action: '/upload', files: [] } })
@@ -97,7 +97,7 @@ describe('Upload render', () => {
   })
 
   test('v-model:files work', async () => {
-    const onUpdateFiles = jest.fn()
+    const onUpdateFiles = vi.fn()
     const wrapper = uploadMount({
       props: { files: defaultFiles, 'onUpdate:files': onUpdateFiles },
     })
@@ -238,15 +238,15 @@ describe('Upload request', () => {
 
   beforeEach(() => {
     xhrMock = {
-      abort: jest.fn(),
-      send: jest.fn(),
-      open: jest.fn(),
-      setRequestHeader: jest.fn(),
+      abort: vi.fn(),
+      send: vi.fn(),
+      open: vi.fn(),
+      setRequestHeader: vi.fn(),
       readyState: 4,
       status: 200,
       withCredentials: false,
     }
-    jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
+    vi.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
   })
 
   test('action & requestMethod work', async () => {
@@ -267,7 +267,7 @@ describe('Upload request', () => {
 
   test('name work', async () => {
     let requestParams: FormData | null = null
-    xhrMock.send = jest.fn((val: FormData) => (requestParams = val))
+    xhrMock.send = vi.fn((val: FormData) => (requestParams = val))
 
     const wrapper = uploadMount({})
     await flushPromises()
@@ -286,7 +286,7 @@ describe('Upload request', () => {
   })
 
   test('customRequest work', async () => {
-    const customRequest = jest.fn()
+    const customRequest = vi.fn()
     const wrapper = uploadMount({ props: { customRequest: customRequest } })
     await flushPromises()
     await triggerInput(wrapper.find('.ix-upload-input'), getTestFiles())
@@ -310,7 +310,7 @@ describe('Upload request', () => {
 
   test('requestData work', async () => {
     let resultParams: FormData | null = null
-    xhrMock.send = jest.fn((val: FormData) => (resultParams = val))
+    xhrMock.send = vi.fn((val: FormData) => (resultParams = val))
     const requestData = { testField: Math.random().toString(36).slice(-6) }
     const wrapper = uploadMount({ props: { requestData } })
     await flushPromises()
@@ -321,7 +321,7 @@ describe('Upload request', () => {
 
   test('requestHeaders work', async () => {
     const resultHeaders: Record<string, string> = {}
-    xhrMock.setRequestHeader = jest.fn((name: string, val: string) => (resultHeaders[name] = val))
+    xhrMock.setRequestHeader = vi.fn((name: string, val: string) => (resultHeaders[name] = val))
     const requestHeaders = { testHeader: Math.random().toString(36).slice(-6) }
     const wrapper = uploadMount({ props: { requestHeaders } })
     await flushPromises()
@@ -336,19 +336,19 @@ describe('Upload hooks', () => {
 
   beforeEach(() => {
     xhrMock = {
-      abort: jest.fn(),
-      send: jest.fn(),
-      open: jest.fn(),
-      setRequestHeader: jest.fn(),
+      abort: vi.fn(),
+      send: vi.fn(),
+      open: vi.fn(),
+      setRequestHeader: vi.fn(),
       readyState: 4,
       status: 200,
       withCredentials: false,
     }
-    jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
+    vi.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest)
   })
 
   test('onSelect work', async () => {
-    const onSelectNotAllow = jest.fn(() => false)
+    const onSelectNotAllow = vi.fn(() => false)
     const wrapper = uploadMount({ props: { onSelect: onSelectNotAllow } })
     const fileNotAllowSelect = getTestFiles()
     await flushPromises()
@@ -357,7 +357,7 @@ describe('Upload hooks', () => {
     expect(onSelectNotAllow).toBeCalledWith(fileNotAllowSelect)
     expect(wrapper.findAll('.ix-upload-file').length).toBe(0)
 
-    const onSelectAllow = jest.fn(() => true)
+    const onSelectAllow = vi.fn(() => true)
     await wrapper.setProps({ onSelect: onSelectAllow })
     const fileAllowSelect = getTestFiles()
     await flushPromises()
@@ -366,7 +366,7 @@ describe('Upload hooks', () => {
     expect(onSelectAllow).toBeCalledWith(fileAllowSelect)
     expect(wrapper.findAll('.ix-upload-file').length).toBe(1)
 
-    const onSelectFileTransform = jest.fn((files: File[]) =>
+    const onSelectFileTransform = vi.fn((files: File[]) =>
       files.map(file => Object.assign(file, { transformKey: 'test' })),
     )
     await wrapper.setProps({ onSelect: onSelectFileTransform })
@@ -381,7 +381,7 @@ describe('Upload hooks', () => {
   })
 
   test('onBeforeUpload work', async () => {
-    const onBeforeUploadNotAllow = jest.fn(() => false)
+    const onBeforeUploadNotAllow = vi.fn(() => false)
     const wrapper = uploadMount({ props: { onBeforeUpload: onBeforeUploadNotAllow } })
     const fileNotAllowUpload = getTestFiles()
     await flushPromises()
@@ -391,9 +391,10 @@ describe('Upload hooks', () => {
     // Adding to the file list is allowed, but uploading requests are not allowed
     expect(wrapper.findAll('.ix-upload-file').length).toBe(1)
     expect(xhrMock.open).not.toBeCalled()
-    ;(xhrMock.open as jest.Mock).mockRestore()
 
-    const onBeforeUploadAllow = jest.fn(() => true)
+    vi.mocked(xhrMock.open)?.mockRestore()
+
+    const onBeforeUploadAllow = vi.fn(() => true)
     await wrapper.setProps({ onBeforeUpload: onBeforeUploadAllow })
     const fileAllowUpload = getTestFiles()
     await flushPromises()
@@ -402,9 +403,10 @@ describe('Upload hooks', () => {
     expect(onBeforeUploadAllow).toBeCalledWith(expect.objectContaining({ raw: fileAllowUpload[0] }))
     expect(wrapper.findAll('.ix-upload-file').length).toBe(2)
     expect(xhrMock.open).toBeCalled()
-    ;(xhrMock.open as jest.Mock).mockRestore()
 
-    const onBeforeUploadFileTransform = jest.fn((file: UploadFile) => file)
+    vi.mocked(xhrMock.open)?.mockRestore()
+
+    const onBeforeUploadFileTransform = vi.fn((file: UploadFile) => file)
     await wrapper.setProps({ onBeforeUpload: onBeforeUploadFileTransform })
     const fileUpload = getTestFiles()
     await flushPromises()
@@ -414,7 +416,7 @@ describe('Upload hooks', () => {
     expect(wrapper.findAll('.ix-upload-file').length).toBe(3)
     expect(xhrMock.open).toBeCalled()
 
-    const onBeforeUploadFilePromise = jest.fn(() => Promise.resolve(true))
+    const onBeforeUploadFilePromise = vi.fn(() => Promise.resolve(true))
     await wrapper.setProps({ onBeforeUpload: onBeforeUploadFilePromise })
     const fileUploadPromise = getTestFiles()
     await flushPromises()
@@ -427,7 +429,7 @@ describe('Upload hooks', () => {
 
   test('onFileStatusChange work', async () => {
     let hasStatus = false
-    const onFileStatusChange = jest.fn(
+    const onFileStatusChange = vi.fn(
       (file: UploadFile) => (hasStatus = ['selected', 'uploading', 'error', 'success', 'abort'].includes(file.status!)),
     )
     const wrapper = uploadMount({ props: { onFileStatusChange } })
@@ -440,7 +442,7 @@ describe('Upload hooks', () => {
   })
 
   test('onRequestChange work', async () => {
-    const onRequestChange = jest.fn()
+    const onRequestChange = vi.fn()
     const wrapper = uploadMount({ props: { onRequestChange } })
     const fileSelect = getTestFiles()
     await flushPromises()

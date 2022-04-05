@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Mask render work 1`] = `
+exports[`Mask > render work 1`] = `
 "<transition-stub>
   <div class=\\"ix-mask\\"></div>
 </transition-stub>"

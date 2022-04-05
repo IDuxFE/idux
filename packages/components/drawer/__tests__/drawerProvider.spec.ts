@@ -84,7 +84,7 @@ describe('DrawerProvider', () => {
 
   describe('drawerRef', () => {
     test('open and close work', async () => {
-      const onClose = jest.fn()
+      const onClose = vi.fn()
       const drawerRef = wrapper.vm.open({ onClose, destroyOnHide: false, header, content })
       await flushPromises()
 
@@ -101,7 +101,7 @@ describe('DrawerProvider', () => {
     })
 
     test('destroy work', async () => {
-      const onDestroy = jest.fn()
+      const onDestroy = vi.fn()
       const drawerRef = wrapper.vm.open({ onDestroy, header, content })
       await flushPromises()
 

@@ -10,31 +10,33 @@ describe('Skeleton', () => {
   const SkeletonMount = (options?: MountingOptions<Partial<SkeletonProps>>) =>
     mount(Skeleton, { ...(options as MountingOptions<SkeletonProps>) })
 
-  const sizeWork = (sizeName: 'width' | 'height') => {
-    test(`props ${sizeName} work`, async () => {
-      const wrapper = SkeletonMount({
-        props: {
-          [sizeName]: 40,
-        },
-      })
-      const getLoaderDom = () => wrapper.find('.ix-skeleton-loader').element as HTMLElement
-
-      let loaderDom = getLoaderDom()
-      expect(loaderDom.style[sizeName]).toBe('40px')
-
-      await wrapper.setProps({ [sizeName]: '50px' })
-      loaderDom = getLoaderDom()
-      expect(loaderDom.style[sizeName]).toBe('50px')
-
-      await wrapper.setProps({ [sizeName]: '30%' })
-      loaderDom = getLoaderDom()
-      expect(loaderDom.style[sizeName]).toBe('30%')
+  const sizeWork = async (sizeName: 'width' | 'height') => {
+    const wrapper = SkeletonMount({
+      props: {
+        [sizeName]: 40,
+      },
     })
+    const getLoaderDom = () => wrapper.find('.ix-skeleton-loader').element as HTMLElement
+
+    let loaderDom = getLoaderDom()
+    expect(loaderDom.style[sizeName]).toBe('40px')
+
+    await wrapper.setProps({ [sizeName]: '50px' })
+    loaderDom = getLoaderDom()
+    expect(loaderDom.style[sizeName]).toBe('50px')
+
+    await wrapper.setProps({ [sizeName]: '30%' })
+    loaderDom = getLoaderDom()
+    expect(loaderDom.style[sizeName]).toBe('30%')
   }
 
   renderWork<SkeletonProps>(Skeleton)
-  sizeWork('width')
-  sizeWork('height')
+  test(`props width work`, async () => {
+    sizeWork('width')
+  })
+  test(`props height work`, async () => {
+    sizeWork('height')
+  })
 
   test('props animated work', async () => {
     const wrapper = SkeletonMount()

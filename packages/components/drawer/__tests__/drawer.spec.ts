@@ -35,7 +35,7 @@ describe('Drawer', () => {
   })
 
   test('v-model:visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = DrawerMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     expect(isElementVisible(document.querySelector('.ix-drawer-wrapper'))).toBe(false)
 
@@ -62,7 +62,7 @@ describe('Drawer', () => {
   })
 
   test('closeIcon work', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = DrawerMount({ props: { closeIcon: 'up', onClose } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
@@ -98,7 +98,7 @@ describe('Drawer', () => {
   })
 
   test('closeOnEsc work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = DrawerMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
@@ -219,7 +219,7 @@ describe('Drawer', () => {
   })
 
   test('maskClosable work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = DrawerMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
@@ -312,9 +312,9 @@ describe('Drawer', () => {
 
   describe('Events', () => {
     test('onClose and onBeforeClose work', async () => {
-      const onClose = jest.fn()
-      const onBeforeClose = jest.fn()
-      const onUpdateVisible = jest.fn()
+      const onClose = vi.fn()
+      const onBeforeClose = vi.fn()
+      const onUpdateVisible = vi.fn()
       const wrapper = DrawerMount({ props: { onClose, onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close()
@@ -326,8 +326,8 @@ describe('Drawer', () => {
     })
 
     test('onBeforeClose with result work', async () => {
-      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => evt === 'close')
-      const onUpdateVisible = jest.fn()
+      const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => evt === 'close')
+      const onUpdateVisible = vi.fn()
       const wrapper = DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
@@ -344,8 +344,8 @@ describe('Drawer', () => {
     })
 
     test('onBeforeClose with promise work', async () => {
-      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
-      const onUpdateVisible = jest.fn()
+      const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
+      const onUpdateVisible = vi.fn()
       const wrapper = DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)

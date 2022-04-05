@@ -29,7 +29,7 @@ describe('TimePanel', () => {
   })
 
   test('onChange work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TimePanelMount({
       props: {
         value: newDate(),

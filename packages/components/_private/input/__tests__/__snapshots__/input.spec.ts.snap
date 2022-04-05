@@ -1,15 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Input render work 1`] = `"<input class=\\"ix-input ix-input-md\\">"`;
+exports[`Input > render work 1`] = `"<input class=\\"ix-input ix-input-md\\">"`;
 
-exports[`Input render work 2`] = `"<span class=\\"ix-input ix-input-md ix-input-with-addon-after\\"><!----><input class=\\"ix-input-inner\\"><span class=\\"ix-input-addon\\">addonAfter</span></span>"`;
+exports[`Input > render work 2`] = `"<span class=\\"ix-input ix-input-md ix-input-with-addon-after\\"><!----><input class=\\"ix-input-inner\\"><span class=\\"ix-input-addon\\">addonAfter</span></span>"`;
 
-exports[`Input render work 3`] = `
+exports[`Input > render work 3`] = `
 "<span class=\\"ix-input ix-input-md ix-input-with-suffix\\"><!----><input class=\\"ix-input-inner\\"><span class=\\"ix-input-suffix\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span>
 <!----></span>"
 `;
 
-exports[`Input render work 4`] = `
+exports[`Input > render work 4`] = `
 "<span class=\\"ix-input ix-input-md ix-input-with-addon-after ix-input-with-suffix\\"><!----><span class=\\"ix-input-wrapper\\"><!----><input class=\\"ix-input-inner\\"><span class=\\"ix-input-suffix\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i></span>
 <!----></span><span class=\\"ix-input-addon\\">addonAfter</span></span>"
 `;

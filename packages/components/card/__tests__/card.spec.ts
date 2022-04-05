@@ -103,8 +103,8 @@ describe('Card', () => {
   })
 
   test('footer work', async () => {
-    const onClick0 = jest.fn()
-    const onClick1 = jest.fn()
+    const onClick0 = vi.fn()
+    const onClick1 = vi.fn()
     const footer = [
       { icon: 'up', onClick: onClick0 },
       { icon: 'down', onClick: onClick1 },

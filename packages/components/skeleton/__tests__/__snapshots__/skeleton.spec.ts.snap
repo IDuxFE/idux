@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Skeleton render work 1`] = `
+exports[`Skeleton > render work 1`] = `
 "<div class=\\"ix-skeleton\\">
   <div class=\\"ix-skeleton-loader ix-skeleton-text ix-skeleton-animated\\"></div>
 </div>"

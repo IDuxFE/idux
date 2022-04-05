@@ -5,7 +5,7 @@ import { isShow, renderWork, scrollTarget, wait, waitRAF } from '@tests'
 
 import BackTop from '../src/BackTop'
 
-const warn = jest.spyOn(console, 'warn').mockImplementation()
+const warn = vi.spyOn(console, 'warn').mockImplementation()
 
 const backTopMount = (template: string, options = {}) =>
   mount(
@@ -75,7 +75,7 @@ describe('BackTop', () => {
   })
 
   test('props work: target is the default value', async () => {
-    const mockFn = jest.fn()
+    const mockFn = vi.fn()
     window.scrollTo = mockFn
 
     const wrapper = backTopMount(`

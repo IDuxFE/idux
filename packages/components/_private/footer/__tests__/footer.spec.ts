@@ -17,7 +17,7 @@ describe('Footer', () => {
   })
 
   test('cancel work', async () => {
-    const cancel = jest.fn()
+    const cancel = vi.fn()
     const wrapper = FooterMount({ props: { cancel } })
 
     expect(wrapper.findAll('.ix-button').length).toBe(1)
@@ -28,7 +28,7 @@ describe('Footer', () => {
   })
 
   test('cancelButton work', async () => {
-    const cancel = jest.fn()
+    const cancel = vi.fn()
     const wrapper = FooterMount({ props: { cancel, cancelButton: { mode: 'primary' } } })
 
     expect(wrapper.find('.ix-button').classes()).toContain('ix-button-primary')
@@ -40,7 +40,7 @@ describe('Footer', () => {
   })
 
   test('cancelLoading work', async () => {
-    const cancel = jest.fn()
+    const cancel = vi.fn()
     const wrapper = FooterMount({ props: { cancel, cancelLoading: true } })
 
     expect(wrapper.find('.ix-button').classes()).toContain('ix-button-loading')
@@ -104,7 +104,7 @@ describe('Footer', () => {
   })
 
   test('ok work', async () => {
-    const ok = jest.fn()
+    const ok = vi.fn()
     const wrapper = FooterMount({ props: { ok } })
 
     expect(wrapper.findAll('.ix-button').length).toBe(1)
@@ -115,7 +115,7 @@ describe('Footer', () => {
   })
 
   test('okButton work', async () => {
-    const ok = jest.fn()
+    const ok = vi.fn()
     const wrapper = FooterMount({ props: { ok, okButton: { mode: 'dashed' } } })
 
     expect(wrapper.find('.ix-button').classes()).toContain('ix-button-dashed')
@@ -126,7 +126,7 @@ describe('Footer', () => {
   })
 
   test('okLoading work', async () => {
-    const ok = jest.fn()
+    const ok = vi.fn()
     const wrapper = FooterMount({ props: { ok, okLoading: true } })
 
     expect(wrapper.find('.ix-button').classes()).toContain('ix-button-loading')

@@ -79,7 +79,7 @@ describe('utils.ts', () => {
   })
 
   test('not find work', async () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const { required, min, max, email } = Validators
     group = useFormGroup({
       age: ['18', [required, min(1), max(99)]],

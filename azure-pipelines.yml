@@ -65,7 +65,7 @@ stages:
             inputs:
               testResultsFiles: junit.xml
               mergeTestResults: true
-              testRunTitle: 'Jest Unit Tests'
+              testRunTitle: 'Vitest Unit Tests'
               failTaskOnFailedTests: true
 
   - stage: build

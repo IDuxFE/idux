@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`List render work 1`] = `
+exports[`List > render work 1`] = `
 "<div class=\\"ix-list ix-list-md ix-list-border\\">
   <!--v-if-->
   <div class=\\"ix-spin\\">

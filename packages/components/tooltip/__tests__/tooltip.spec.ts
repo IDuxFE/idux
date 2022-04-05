@@ -22,7 +22,7 @@ describe('Tooltip', () => {
   })
 
   test('visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = TooltipWrapper({
       props: { visible: false, 'onUpdate:visible': onUpdateVisible, title: 'Title' },
       slots,

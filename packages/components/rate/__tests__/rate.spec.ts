@@ -11,7 +11,7 @@ describe('Rate', () => {
   renderWork(Rate, { props: { value: 3 } })
 
   test('v-model:value work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = RateMount({
       props: { value: 3, 'onUpdate:value': onUpdateValue },
     })
@@ -42,7 +42,7 @@ describe('Rate', () => {
   })
 
   test('clearable work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = RateMount({
       props: { clearable: true, value: 3, 'onUpdate:value': onUpdateValue },
     })
@@ -67,7 +67,7 @@ describe('Rate', () => {
   })
 
   test('disabled work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = RateMount({
       props: { disabled: true, 'onUpdate:value': onUpdateValue },
     })

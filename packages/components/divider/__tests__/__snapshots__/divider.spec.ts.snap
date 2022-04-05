@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Divider render work 1`] = `
+exports[`Divider > render work 1`] = `
 "<div class=\\"ix-divider ix-divider-md ix-divider-horizontal\\">
   <!---->
 </div>"

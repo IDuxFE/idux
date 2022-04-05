@@ -107,7 +107,7 @@ describe('Table', () => {
     renderWork<TableProps>(Table, { props: { columns, dataSource }, slots: defaultSlots })
 
     test('v-model:expandedRowKeys work', async () => {
-      const onUpdateExpandedRowKeys = jest.fn()
+      const onUpdateExpandedRowKeys = vi.fn()
       const wrapper = TableMount({
         props: {
           expandedRowKeys: [0],
@@ -133,7 +133,7 @@ describe('Table', () => {
     })
 
     test('v-model:selectedRowKeys work', async () => {
-      const onUpdateSelectedRowKeys = jest.fn()
+      const onUpdateSelectedRowKeys = vi.fn()
       const wrapper = TableMount({
         props: {
           selectedRowKeys: [1],

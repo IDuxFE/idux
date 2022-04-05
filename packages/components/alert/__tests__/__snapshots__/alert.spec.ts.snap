@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Alert render work 1`] = `
+exports[`Alert > render work 1`] = `
 "<transition-stub>
   <div class=\\"ix-alert ix-alert-info\\"><span class=\\"ix-alert-icon\\"><i class=\\"ix-icon ix-icon-bulb\\" role=\\"img\\" aria-label=\\"bulb\\"></i></span>
     <div class=\\"ix-alert-content\\">

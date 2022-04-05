@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Stepper percent work 1`] = `
+exports[`Stepper > percent work 1`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
@@ -43,7 +43,7 @@ exports[`Stepper percent work 1`] = `
 </div>"
 `;
 
-exports[`Stepper percent work 2`] = `
+exports[`Stepper > percent work 2`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
@@ -86,7 +86,7 @@ exports[`Stepper percent work 2`] = `
 </div>"
 `;
 
-exports[`Stepper percent work 3`] = `
+exports[`Stepper > percent work 3`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
@@ -131,7 +131,7 @@ exports[`Stepper percent work 3`] = `
 </div>"
 `;
 
-exports[`Stepper render work 1`] = `
+exports[`Stepper > render work 1`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>

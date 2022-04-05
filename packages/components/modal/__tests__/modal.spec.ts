@@ -35,7 +35,7 @@ describe('Modal', () => {
   })
 
   test('v-model:visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = ModalMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     expect(isElementVisible(document.querySelector('.ix-modal-wrapper'))).toBe(false)
 
@@ -98,7 +98,7 @@ describe('Modal', () => {
   })
 
   test('closeIcon work', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = ModalMount({ props: { closeIcon: 'up', onClose } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
@@ -134,7 +134,7 @@ describe('Modal', () => {
   })
 
   test('closeOnEsc work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = ModalMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
@@ -279,7 +279,7 @@ describe('Modal', () => {
   })
 
   test('maskClosable work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = ModalMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
@@ -401,9 +401,9 @@ describe('Modal', () => {
 
   describe('Events', () => {
     test('onClose and onBeforeClose work', async () => {
-      const onClose = jest.fn()
-      const onBeforeClose = jest.fn()
-      const onUpdateVisible = jest.fn()
+      const onClose = vi.fn()
+      const onBeforeClose = vi.fn()
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onClose, onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close()
@@ -414,8 +414,8 @@ describe('Modal', () => {
     })
 
     test('onBeforeClose with result work', async () => {
-      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => evt === 'close')
-      const onUpdateVisible = jest.fn()
+      const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => evt === 'close')
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
@@ -432,8 +432,8 @@ describe('Modal', () => {
     })
 
     test('onBeforeClose with promise work', async () => {
-      const onBeforeClose = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
-      const onUpdateVisible = jest.fn()
+      const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
@@ -450,8 +450,8 @@ describe('Modal', () => {
     })
 
     test('onCancel work', async () => {
-      const onCancel = jest.fn()
-      const onUpdateVisible = jest.fn()
+      const onCancel = vi.fn()
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.cancel()
@@ -462,8 +462,8 @@ describe('Modal', () => {
     })
 
     test('onCancel with result work', async () => {
-      const onCancel = jest.fn().mockImplementation((evt: unknown) => evt === 'cancel')
-      const onUpdateVisible = jest.fn()
+      const onCancel = vi.fn().mockImplementation((evt: unknown) => evt === 'cancel')
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.cancel(1)
@@ -480,8 +480,8 @@ describe('Modal', () => {
     })
 
     test('onCancel with promise work', async () => {
-      const onCancel = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'cancel'))
-      const onUpdateVisible = jest.fn()
+      const onCancel = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'cancel'))
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.cancel(1)
@@ -498,8 +498,8 @@ describe('Modal', () => {
     })
 
     test('onOk work', async () => {
-      const onOk = jest.fn()
-      const onUpdateVisible = jest.fn()
+      const onOk = vi.fn()
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.ok()
@@ -510,8 +510,8 @@ describe('Modal', () => {
     })
 
     test('onOk with result work', async () => {
-      const onOk = jest.fn().mockImplementation((evt: unknown) => evt === 'ok')
-      const onUpdateVisible = jest.fn()
+      const onOk = vi.fn().mockImplementation((evt: unknown) => evt === 'ok')
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.ok(1)
@@ -528,8 +528,8 @@ describe('Modal', () => {
     })
 
     test('onOk with promise work', async () => {
-      const onOk = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'ok'))
-      const onUpdateVisible = jest.fn()
+      const onOk = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'ok'))
+      const onUpdateVisible = vi.fn()
       const wrapper = ModalMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.ok(1)

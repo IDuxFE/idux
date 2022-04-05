@@ -1,6 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
+import { DoneCallback } from 'vitest'
 
 import List from '../src/List.vue'
 import ListItem from '../src/ListItem.vue'
@@ -82,7 +83,7 @@ describe('List', () => {
     expect(wrapper.find('.ix-list-loadMore').exists()).toBeFalsy()
     await wrapper.setProps({
       loadMore: '123',
-      handleLoadMore: async function (done: jest.DoneCallback) {
+      handleLoadMore: async function (done: DoneCallback) {
         await sleep(1000)
         done()
       },

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Statistic render work 1`] = `
+exports[`Statistic > render work 1`] = `
 "<div class=\\"ix-statistic\\">
   <!---->
   <div class=\\"ix-statistic-content\\">

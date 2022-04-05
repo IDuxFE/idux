@@ -81,7 +81,7 @@ describe('ProLayout', () => {
   })
 
   test('v-model:activeKey work', async () => {
-    const onUpdateActiveKey = jest.fn()
+    const onUpdateActiveKey = vi.fn()
     const wrapper = ProLayoutMount({
       props: { 'onUpdate:activeKey': onUpdateActiveKey },
     })
@@ -99,7 +99,7 @@ describe('ProLayout', () => {
   })
 
   test('v-model:collapsed work', async () => {
-    const onUpdateCollapsed = jest.fn()
+    const onUpdateCollapsed = vi.fn()
     const wrapper = ProLayoutMount({
       props: { collapsed: true, 'onUpdate:collapsed': onUpdateCollapsed },
       slots: {
@@ -134,7 +134,7 @@ describe('ProLayout', () => {
   })
 
   test('collapsedDelay work', async () => {
-    const onUpdateCollapsed = jest.fn()
+    const onUpdateCollapsed = vi.fn()
     const wrapper = ProLayoutMount({
       props: {
         siderHover: { delay: 10 },

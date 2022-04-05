@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`CardGrid hoverable work 1`] = `
+exports[`CardGrid > hoverable work 1`] = `
 "<div class=\\"ix-card ix-card-has-grid ix-card-md\\">
   <!---->
   <!---->
@@ -19,7 +19,7 @@ exports[`CardGrid hoverable work 1`] = `
 </div>"
 `;
 
-exports[`CardGrid hoverable2 work 1`] = `
+exports[`CardGrid > hoverable2 work 1`] = `
 "<div class=\\"ix-card ix-card-has-grid ix-card-md\\">
   <!---->
   <!---->
@@ -38,7 +38,7 @@ exports[`CardGrid hoverable2 work 1`] = `
 </div>"
 `;
 
-exports[`CardGrid render work 1`] = `
+exports[`CardGrid > render work 1`] = `
 "<div class=\\"ix-card ix-card-has-grid ix-card-md\\">
   <!---->
   <!---->

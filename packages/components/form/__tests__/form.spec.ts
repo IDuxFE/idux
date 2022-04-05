@@ -353,7 +353,7 @@ describe('Form', () => {
 
     // TODO: FIX
     test.skip('labelFor work', async () => {
-      const onFocus = jest.fn()
+      const onFocus = vi.fn()
       const wrapper = FormItemMount({
         props: { label: 'Username', labelFor: 'test-input' },
         slots: { default: () => h(IxInput, { id: 'test-input', onFocus }) },

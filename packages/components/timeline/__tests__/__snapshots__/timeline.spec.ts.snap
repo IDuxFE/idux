@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Timeline pending slot work 1`] = `
+exports[`Timeline > pending slot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -63,7 +63,7 @@ exports[`Timeline pending slot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline pending slot work 2`] = `
+exports[`Timeline > pending slot work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -126,7 +126,7 @@ exports[`Timeline pending slot work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline pending work 1`] = `
+exports[`Timeline > pending work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -179,7 +179,7 @@ exports[`Timeline pending work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline pending work 2`] = `
+exports[`Timeline > pending work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -242,7 +242,7 @@ exports[`Timeline pending work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline pending work 3`] = `
+exports[`Timeline > pending work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -307,7 +307,7 @@ exports[`Timeline pending work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline pendingDot work 1`] = `
+exports[`Timeline > pendingDot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -370,7 +370,7 @@ exports[`Timeline pendingDot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline pendingDot work 2`] = `
+exports[`Timeline > pendingDot work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -433,7 +433,7 @@ exports[`Timeline pendingDot work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline placement with item placement work 1`] = `
+exports[`Timeline > placement with item placement work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -486,7 +486,7 @@ exports[`Timeline placement with item placement work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline placement with item placement work 2`] = `
+exports[`Timeline > placement with item placement work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -539,7 +539,7 @@ exports[`Timeline placement with item placement work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline placement with item placement work 3`] = `
+exports[`Timeline > placement with item placement work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-start\\">
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -592,7 +592,7 @@ exports[`Timeline placement with item placement work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline placement with item placement work 4`] = `
+exports[`Timeline > placement with item placement work 4`] = `
 "<ul class=\\"ix-timeline ix-timeline-alternate\\">
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -645,7 +645,7 @@ exports[`Timeline placement with item placement work 4`] = `
 </ul>"
 `;
 
-exports[`Timeline placement work 1`] = `
+exports[`Timeline > placement work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -698,7 +698,7 @@ exports[`Timeline placement work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline placement work 2`] = `
+exports[`Timeline > placement work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -751,7 +751,7 @@ exports[`Timeline placement work 2`] = `
 </ul>"
 `;
 
-exports[`Timeline placement work 3`] = `
+exports[`Timeline > placement work 3`] = `
 "<ul class=\\"ix-timeline ix-timeline-start\\">
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -804,7 +804,7 @@ exports[`Timeline placement work 3`] = `
 </ul>"
 `;
 
-exports[`Timeline placement work 4`] = `
+exports[`Timeline > placement work 4`] = `
 "<ul class=\\"ix-timeline ix-timeline-alternate\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -857,9 +857,9 @@ exports[`Timeline placement work 4`] = `
 </ul>"
 `;
 
-exports[`Timeline render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-end\\"></ul>"`;
+exports[`Timeline > render work 1`] = `"<ul class=\\"ix-timeline ix-timeline-end\\"></ul>"`;
 
-exports[`Timeline reverse with pending slot work 1`] = `
+exports[`Timeline > reverse with pending slot work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-reverse ix-timeline-pending\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -922,7 +922,7 @@ exports[`Timeline reverse with pending slot work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline reverse work 1`] = `
+exports[`Timeline > reverse work 1`] = `
 "<ul class=\\"ix-timeline ix-timeline-end\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">
@@ -975,7 +975,7 @@ exports[`Timeline reverse work 1`] = `
 </ul>"
 `;
 
-exports[`Timeline reverse work 2`] = `
+exports[`Timeline > reverse work 2`] = `
 "<ul class=\\"ix-timeline ix-timeline-end ix-timeline-reverse\\">
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
     <div class=\\"ix-timeline-item-head\\">

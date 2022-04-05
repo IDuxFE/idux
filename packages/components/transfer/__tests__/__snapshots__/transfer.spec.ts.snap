@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Transfer render work 1`] = `
+exports[`Transfer > render work 1`] = `
 "<div class=\\"ix-transfer\\">
   <div class=\\"ix-transfer-list ix-transfer-list-source\\">
     <div class=\\"ix-transfer-list-header\\">

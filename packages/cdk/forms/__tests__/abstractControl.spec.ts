@@ -134,7 +134,7 @@ describe('abstractControl.ts', () => {
     })
 
     test('watchValue work', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
       const stop = control.watchValue(value => log(value))
 
       control.setValue('test')
@@ -164,7 +164,7 @@ describe('abstractControl.ts', () => {
     })
 
     test('watchStatus work', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
       const stop = control.watchStatus(value => log(value))
 
       control.setValidator(Validators.required)

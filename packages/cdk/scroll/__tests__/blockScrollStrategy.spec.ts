@@ -84,8 +84,8 @@ describe('blockScrollStrategy.ts', () => {
 
   it('multiple instance with different target work', () => {
     const testDivElement = document.createElement('div')
-    jest.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => 100)
-    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 90)
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => 100)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 90)
 
     const scrollLocker1 = new BlockScrollStrategy({ target: testDivElement })
 
@@ -113,7 +113,7 @@ describe('blockScrollStrategy.ts', () => {
     expect(document.documentElement.className).toBe('')
     expect(testDivElement.className).toBe('')
 
-    jest.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockClear()
-    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockClear()
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
   })
 })

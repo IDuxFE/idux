@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Tabs render work 1`] = `
+exports[`Tabs > render work 1`] = `
 "<div class=\\"ix-tabs ix-tabs-card ix-tabs-nav-top\\">
   <div class=\\"ix-tabs-nav-wrapper \\">
     <!---->

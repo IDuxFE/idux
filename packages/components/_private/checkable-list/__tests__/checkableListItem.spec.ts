@@ -53,7 +53,7 @@ describe('CheckableListItem', () => {
   })
 
   test('removable work', async () => {
-    const onRemove = jest.fn()
+    const onRemove = vi.fn()
     const wrapper = CheckableListItemMount({
       props: {
         value: '1',
@@ -75,7 +75,7 @@ describe('CheckableListItem', () => {
   })
 
   test('disabled work', async () => {
-    const onCheckChange = jest.fn()
+    const onCheckChange = vi.fn()
     const wrapper = CheckableListItemMount({
       props: {
         value: '1',

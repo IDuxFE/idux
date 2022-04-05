@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`VirtualScroll basic work itemRender work 1`] = `
+exports[`VirtualScroll > basic work > itemRender work 1`] = `
 "<div class=\\"cdk-virtual-scroll\\" style=\\"position: relative;\\">
   <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 200px; overflow-y: hidden;\\">
     <div class=\\"cdk-virtual-scroll-filler\\" style=\\"height: 400px; position: relative; overflow: hidden;\\">
@@ -13,7 +13,7 @@ exports[`VirtualScroll basic work itemRender work 1`] = `
 </div>"
 `;
 
-exports[`VirtualScroll basic work render work 1`] = `
+exports[`VirtualScroll > basic work > render work 1`] = `
 "<div class=\\"cdk-virtual-scroll\\" style=\\"position: relative;\\">
   <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 200px; overflow-y: hidden;\\">
     <div class=\\"cdk-virtual-scroll-filler\\" style=\\"height: 400px; position: relative; overflow: hidden;\\">

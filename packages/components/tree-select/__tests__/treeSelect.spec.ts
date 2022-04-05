@@ -60,8 +60,8 @@ describe('TreeSelect', () => {
     })
 
     test('v-model:value work', async () => {
-      const onUpdateValue = jest.fn()
-      const onChange = jest.fn()
+      const onUpdateValue = vi.fn()
+      const onChange = vi.fn()
       const wrapper = TreeSelectMount({ props: { open: true, value: '0', 'onUpdate:value': onUpdateValue, onChange } })
 
       expect(wrapper.find('.ix-selector-item').text()).toBe('Node 0')
@@ -85,8 +85,8 @@ describe('TreeSelect', () => {
     })
 
     test('v-model:expandedKeys work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
-      const onExpandedChange = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
+      const onExpandedChange = vi.fn()
       const wrapper = TreeSelectMount({
         props: { open: true, expandedKeys: [], 'onUpdate:expandedKeys': onUpdateExpandedKeys, onExpandedChange },
       })
@@ -219,7 +219,7 @@ describe('TreeSelect', () => {
     })
 
     test('clearable work', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const wrapper = TreeSelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })
 
       expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
@@ -307,7 +307,7 @@ describe('TreeSelect', () => {
     })
 
     test('searchable work', async () => {
-      const onExpandedChange = jest.fn()
+      const onExpandedChange = vi.fn()
       const wrapper = TreeSelectMount({ props: { open: true, searchable: true, onExpandedChange } })
 
       const input = wrapper.find('input')
@@ -380,7 +380,7 @@ describe('TreeSelect', () => {
       expect(wrapper.find('.ix-selector-md').exists()).toBe(true)
     })
 
-    test('clearable work', async () => {
+    test('clearable props work', async () => {
       const wrapper = TreeSelectMount({ props: { clearable: true } })
 
       expect(wrapper.find('.ix-selector-clear').exists()).toBe(true)
@@ -403,8 +403,8 @@ describe('TreeSelect', () => {
     })
 
     test('v-model:value work', async () => {
-      const onUpdateValue = jest.fn()
-      const onChange = jest.fn()
+      const onUpdateValue = vi.fn()
+      const onChange = vi.fn()
       const wrapper = TreeSelectMount({
         props: { open: true, value: ['0', '0-0'], 'onUpdate:value': onUpdateValue, onChange },
       })
@@ -654,7 +654,7 @@ describe('TreeSelect', () => {
     })
 
     test('expandIcon slot work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
       const wrapper = TreeSelectMount({
         props: { open: true, expandIcon: 'right', 'onUpdate:expandedKeys': onUpdateExpandedKeys },
         slots: {

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`DatePanel disabledDate work 1`] = `
+exports[`DatePanel > disabledDate work 1`] = `
 "<div class=\\"ix-date-panel ix-date-panel-date\\">
   <div class=\\"ix-date-panel-header\\"><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上一年\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i></button><button class=\\"ix-date-panel-header-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上个月\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button>
     <div class=\\"ix-date-panel-header-content\\"><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择年份\\">2021年</button><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择月份\\">10月</button></div><button class=\\"ix-date-panel-header-super-next visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下个月\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下一年\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i></button>
@@ -141,7 +141,7 @@ exports[`DatePanel disabledDate work 1`] = `
 </div>"
 `;
 
-exports[`DatePanel render work 1`] = `
+exports[`DatePanel > render work 1`] = `
 "<div class=\\"ix-date-panel ix-date-panel-date\\">
   <div class=\\"ix-date-panel-header\\"><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上一年\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i></button><button class=\\"ix-date-panel-header-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"上个月\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button>
     <div class=\\"ix-date-panel-header-content\\"><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择年份\\">2021年</button><button type=\\"button\\" tabindex=\\"-1\\" title=\\"选择月份\\">10月</button></div><button class=\\"ix-date-panel-header-super-next visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下个月\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button><button class=\\"ix-date-panel-header-super-prev visible\\" type=\\"button\\" tabindex=\\"-1\\" title=\\"下一年\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i></button>

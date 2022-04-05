@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Rate render work 1`] = `
+exports[`Rate > render work 1`] = `
 "<ul class=\\"ix-rate ix-rate-md\\" role=\\"radiogroup\\">
   <li class=\\"ix-rate-item ix-rate-item-full\\"><span aria-checked=\\"true\\" aria-posinset=\\"1\\" aria-setsize=\\"5\\" role=\\"radio\\" tabindex=\\"0\\"><span class=\\"ix-rate-item-first\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span><span class=\\"ix-rate-item-second\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span></span></li>
   <li class=\\"ix-rate-item ix-rate-item-full\\"><span aria-checked=\\"true\\" aria-posinset=\\"2\\" aria-setsize=\\"5\\" role=\\"radio\\" tabindex=\\"0\\"><span class=\\"ix-rate-item-first\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span><span class=\\"ix-rate-item-second\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span></span></li>
@@ -10,7 +10,7 @@ exports[`Rate render work 1`] = `
 </ul>"
 `;
 
-exports[`Rate tooltips work 1`] = `
+exports[`Rate > tooltips work 1`] = `
 "<ul class=\\"ix-rate ix-rate-md\\" role=\\"radiogroup\\">
   <li class=\\"ix-rate-item ix-rate-item-zero\\"><span aria-checked=\\"false\\" aria-posinset=\\"1\\" aria-setsize=\\"5\\" role=\\"radio\\" tabindex=\\"0\\"><span class=\\"ix-rate-item-first\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span><span class=\\"ix-rate-item-second\\"><i class=\\"ix-icon ix-icon-star-filled\\" role=\\"img\\" aria-label=\\"star-filled\\"></i></span></span></li>
   <!---->

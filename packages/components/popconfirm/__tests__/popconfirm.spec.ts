@@ -85,8 +85,8 @@ describe('Popconfirm', () => {
   })
 
   test('onCancel work', async () => {
-    const onCancel = jest.fn()
-    const onUpdateVisible = jest.fn()
+    const onCancel = vi.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.cancel()
@@ -97,8 +97,8 @@ describe('Popconfirm', () => {
   })
 
   test('onCancel with result work', async () => {
-    const onCancel = jest.fn().mockImplementation((evt: unknown) => evt === 'cancel')
-    const onUpdateVisible = jest.fn()
+    const onCancel = vi.fn().mockImplementation((evt: unknown) => evt === 'cancel')
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.cancel(1)
@@ -115,8 +115,8 @@ describe('Popconfirm', () => {
   })
 
   test('onCancel with promise work', async () => {
-    const onCancel = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'cancel'))
-    const onUpdateVisible = jest.fn()
+    const onCancel = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'cancel'))
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onCancel, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.cancel(1)
@@ -133,8 +133,8 @@ describe('Popconfirm', () => {
   })
 
   test('onOk work', async () => {
-    const onOk = jest.fn()
-    const onUpdateVisible = jest.fn()
+    const onOk = vi.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.ok()
@@ -145,8 +145,8 @@ describe('Popconfirm', () => {
   })
 
   test('onOk with result work', async () => {
-    const onOk = jest.fn().mockImplementation((evt: unknown) => evt === 'ok')
-    const onUpdateVisible = jest.fn()
+    const onOk = vi.fn().mockImplementation((evt: unknown) => evt === 'ok')
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.ok(1)
@@ -163,8 +163,8 @@ describe('Popconfirm', () => {
   })
 
   test('onOk with promise work', async () => {
-    const onOk = jest.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'ok'))
-    const onUpdateVisible = jest.fn()
+    const onOk = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'ok'))
+    const onUpdateVisible = vi.fn()
     const wrapper = PopconfirmMount({ props: { onOk, 'onUpdate:visible': onUpdateVisible } })
 
     wrapper.vm.ok(1)

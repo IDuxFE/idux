@@ -16,7 +16,7 @@ describe('Pagination', () => {
   renderWork<PaginationProps>(IxPagination, { props: { total: 500, showQuickJumper: true, showSizeChanger: true } })
 
   test('v-model:pageIndex work', async () => {
-    const onUpdatePageIndex = jest.fn()
+    const onUpdatePageIndex = vi.fn()
     const wrapper = PaginationMount({ props: { total: 50, pageIndex: 1, 'onUpdate:pageIndex': onUpdatePageIndex } })
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('1')
@@ -37,7 +37,7 @@ describe('Pagination', () => {
   })
 
   test('v-model:pageSize work', async () => {
-    const onUpdatePageSize = jest.fn()
+    const onUpdatePageSize = vi.fn()
     const wrapper = PaginationMount({
       props: { total: 50, pageSize: 10, showSizeChanger: true, 'onUpdate:pageSize': onUpdatePageSize },
     })
@@ -121,7 +121,7 @@ describe('Pagination', () => {
   })
 
   test('simple work', async () => {
-    const onUpdatePageIndex = jest.fn()
+    const onUpdatePageIndex = vi.fn()
     const wrapper = PaginationMount({ props: { total: 50, simple: true, 'onUpdate:pageIndex': onUpdatePageIndex } })
 
     expect(wrapper.find('.ix-pagination-item-slash').exists()).toBeTruthy()

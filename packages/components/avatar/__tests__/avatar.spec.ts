@@ -50,7 +50,7 @@ describe('Avatar', () => {
     test.skip('error work', async () => {
       const wrapper = AvatarMount({ props: { src: imageBase64 } })
       const src = 'https://error.svg'
-      const onError = jest.fn()
+      const onError = vi.fn()
       await wrapper.setProps({ src, onError })
       const event = createFakeEvent('error')
       await wrapper.vm.handleError(event)
@@ -92,7 +92,7 @@ describe('Avatar', () => {
     test('short text work', async () => {
       const text = 'U'
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
         return this.className === 'ix-avatar-text' ? 10 : 40
       })
 
@@ -101,13 +101,13 @@ describe('Avatar', () => {
 
       expect(getScaleStyle(wrapper.find('.ix-avatar-text')!.attributes('style'))).toBe(1)
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
     })
 
     test('long text work', async () => {
       const text = 'LongUsername'
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
         return this.className === 'ix-avatar-text' ? 80 : 40
       })
 
@@ -116,13 +116,13 @@ describe('Avatar', () => {
 
       expect(getScaleStyle(wrapper.find('.ix-avatar-text')!.attributes('style'))).toBeLessThan(1)
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
     })
 
     test('gap work', async () => {
       const text = 'LongUsername'
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function () {
         return this.className === 'ix-avatar-text' ? 80 : 40
       })
 
@@ -141,7 +141,7 @@ describe('Avatar', () => {
 
       expect(getScaleStyle(wrapper.find('.ix-avatar-text')!.attributes('style'))).toBeGreaterThan(defaultScale)
 
-      jest.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
+      vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockClear()
     })
   })
 

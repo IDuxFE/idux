@@ -32,14 +32,14 @@ describe('TimePanelCell', () => {
   })
 
   test('onChange work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: false, onChange } })
     wrapper.trigger('click')
 
     expect(onChange).toBeCalledWith('cell')
   })
   test('disabled', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: true, selected: false, onChange } })
     wrapper.trigger('click')
 
@@ -48,7 +48,7 @@ describe('TimePanelCell', () => {
   })
 
   test('selected', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: true, onChange } })
     wrapper.trigger('click')
 

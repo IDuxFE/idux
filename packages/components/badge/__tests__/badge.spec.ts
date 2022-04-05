@@ -47,7 +47,7 @@ describe('Badge', () => {
     expect(badge.text()).toBe('999+')
     expect(badge.html()).toMatchSnapshot()
 
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
     await wrapper.setProps({ count: '1000', overflowCount: '999' })
     expect(badge.text()).toBe('999+')

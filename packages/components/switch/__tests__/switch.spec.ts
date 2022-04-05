@@ -11,7 +11,7 @@ describe('Switch', () => {
   renderWork(IxSwitch)
 
   test('v-model:checked work', async () => {
-    const onUpdateChecked = jest.fn()
+    const onUpdateChecked = vi.fn()
     const wrapper = SwitchMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked } })
 
     expect(wrapper.classes()).toContain('ix-switch-checked')

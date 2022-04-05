@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Loading render work 1`] = `
+exports[`Loading > render work 1`] = `
 "<div class=\\"ix-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg class=\\"ix-loading-icon\\" viewBox=\\"0 0 28 28\\">
     <g id=\\"loading-48\\" fill=\\"none\\" fill-rule=\\"evenodd\\" transform=\\"rotate(-90,14,14)\\">
       <circle class=\\"ix-loading-snd-arch\\" cx=\\"14\\" cy=\\"14\\" r=\\"12\\" stroke-width=\\"4\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"9.676105373056563 88.96459430051421\\">

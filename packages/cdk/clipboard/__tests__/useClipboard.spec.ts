@@ -18,7 +18,7 @@ describe('useClipboard.ts', () => {
   test('copy work', async () => {
     const wrapper = mount(getComp())
 
-    document.execCommand = jest.fn().mockReturnValue(true)
+    document.execCommand = vi.fn().mockReturnValue(true)
     await wrapper.vm.copy(copyText)
     wrapper.unmount()
 
@@ -28,7 +28,7 @@ describe('useClipboard.ts', () => {
   test('copy fail', async () => {
     const wrapper = mount(getComp())
 
-    document.execCommand = jest.fn().mockReturnValue(false)
+    document.execCommand = vi.fn().mockReturnValue(false)
     const successful = await wrapper.vm.copy(copyText)
 
     expect(successful).toBeFalsy()
@@ -37,12 +37,12 @@ describe('useClipboard.ts', () => {
   test('attempts work', async () => {
     const wrapper = mount(getComp())
 
-    document.execCommand = jest.fn().mockReturnValue(false)
+    document.execCommand = vi.fn().mockReturnValue(false)
     await wrapper.vm.copy(copyText, 3)
 
     expect(document.execCommand).toHaveBeenCalledTimes(3)
 
-    document.execCommand = jest.fn().mockReturnValue(true)
+    document.execCommand = vi.fn().mockReturnValue(true)
     await wrapper.vm.copy(copyText, 3)
 
     expect(document.execCommand).toHaveBeenCalledTimes(1)
@@ -50,8 +50,8 @@ describe('useClipboard.ts', () => {
 
   test('unmounted work', async () => {
     const wrapper = mount(getComp())
-    const clearTimeout = jest.spyOn(window, 'clearTimeout')
-    document.execCommand = jest.fn().mockReturnValue(false)
+    const clearTimeout = vi.spyOn(globalThis, 'clearTimeout')
+    document.execCommand = vi.fn().mockReturnValue(false)
     wrapper.vm.copy(copyText, 3)
     wrapper.unmount()
 

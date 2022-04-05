@@ -50,7 +50,7 @@ describe('Alert', () => {
   })
 
   test('props closable work', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = AlertMount({ props: { closable: false, onClose } })
 
     expect(wrapper.find('.ix-alert-close-icon').exists()).toBeFalsy()
@@ -61,8 +61,8 @@ describe('Alert', () => {
   })
 
   test('props onBeforeClose work', async () => {
-    const onBeforeClose = jest.fn().mockResolvedValue(false)
-    const onClose = jest.fn()
+    const onBeforeClose = vi.fn().mockResolvedValue(false)
+    const onClose = vi.fn()
     const wrapper = AlertMount({
       props: {
         closable: true,

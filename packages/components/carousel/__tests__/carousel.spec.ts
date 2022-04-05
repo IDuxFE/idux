@@ -26,7 +26,7 @@ describe('Carousel', () => {
   })
 
   test('prop showArrow work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CarouselMount({ props: { showArrow: true, onChange } })
 
     expect(wrapper.findAll('.ix-carousel-arrow').length).toBe(2)
@@ -76,7 +76,7 @@ describe('Carousel', () => {
   })
 
   test('prop trigger work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CarouselMount({ props: { onChange } })
 
     await wrapper.findAll('.ix-carousel-dot-item')[2].trigger('click')
@@ -99,7 +99,7 @@ describe('Carousel', () => {
   })
 
   test('prop onChange work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CarouselMount({
       props: { onChange, showArrow: true },
       slots: {
@@ -115,7 +115,7 @@ describe('Carousel', () => {
   })
 
   test('slot dot work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CarouselMount({
       props: { onChange },
       slots: {

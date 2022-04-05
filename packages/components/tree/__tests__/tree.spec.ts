@@ -102,7 +102,7 @@ describe('Tree', () => {
 
   describe('v-model:checkedKeys work', () => {
     test('with cascade', async () => {
-      const onUpdateCheckedKeys = jest.fn()
+      const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: simpleDataSource,
@@ -130,7 +130,7 @@ describe('Tree', () => {
     })
 
     test('with checkStrategy: all', async () => {
-      const onUpdateCheckedKeys = jest.fn()
+      const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: simpleDataSource,
@@ -161,7 +161,7 @@ describe('Tree', () => {
     })
 
     test('with checkStrategy: parent', async () => {
-      const onUpdateCheckedKeys = jest.fn()
+      const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: [
@@ -223,7 +223,7 @@ describe('Tree', () => {
     })
 
     test('with checkStrategy: child', async () => {
-      const onUpdateCheckedKeys = jest.fn()
+      const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: [
@@ -274,7 +274,7 @@ describe('Tree', () => {
     })
 
     test('with all children disabled', async () => {
-      const onUpdateCheckedKeys = jest.fn()
+      const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: [
@@ -311,7 +311,7 @@ describe('Tree', () => {
   })
 
   test('v-model:expandedKeys work', async () => {
-    const onUpdateExpandedKeys = jest.fn()
+    const onUpdateExpandedKeys = vi.fn()
     const wrapper = TreeMount({
       props: { expandedKeys: ['0'], 'onUpdate:expandedKeys': onUpdateExpandedKeys },
     })
@@ -347,7 +347,7 @@ describe('Tree', () => {
   })
 
   test('v-model:selectedKeys work', async () => {
-    const onUpdateSelectedKeys = jest.fn()
+    const onUpdateSelectedKeys = vi.fn()
     const wrapper = TreeMount({
       props: { selectedKeys: ['0'], 'onUpdate:selectedKeys': onUpdateSelectedKeys },
     })
@@ -383,7 +383,7 @@ describe('Tree', () => {
   })
 
   test('selectable work', async () => {
-    const onUpdateSelectedKeys = jest.fn()
+    const onUpdateSelectedKeys = vi.fn()
     const wrapper = TreeMount({
       props: { selectable: false, selectedKeys: [], 'onUpdate:selectedKeys': onUpdateSelectedKeys },
     })
@@ -569,7 +569,7 @@ describe('Tree', () => {
   })
 
   test('disabled work', async () => {
-    const onUpdateCheckedKeys = jest.fn()
+    const onUpdateCheckedKeys = vi.fn()
     const wrapper = TreeMount({
       props: {
         disabled: node => node.key === '0',
@@ -637,7 +637,7 @@ describe('Tree', () => {
   })
 
   test('expandIcon slot work', async () => {
-    const onUpdateExpandedKeys = jest.fn()
+    const onUpdateExpandedKeys = vi.fn()
     const wrapper = TreeMount({
       props: { expandIcon: 'right', 'onUpdate:expandedKeys': onUpdateExpandedKeys },
       slots: {
@@ -722,7 +722,7 @@ describe('Tree', () => {
         }, 50)
       })
     }
-    const onUpdateExpandedKeys = jest.fn()
+    const onUpdateExpandedKeys = vi.fn()
     const wrapper = TreeMount({
       props: {
         dataSource: [
@@ -873,8 +873,8 @@ describe('Tree', () => {
   })
 
   test('focus and blur work', async () => {
-    const focusFn = jest.fn()
-    const blurFn = jest.fn()
+    const focusFn = vi.fn()
+    const blurFn = vi.fn()
     const wrapper = TreeMount({
       props: {
         onFocus: focusFn,
