@@ -737,7 +737,7 @@ describe('Tree', () => {
       },
     })
 
-    const allNodes = wrapper.findAll('.ix-tree-node')
+    let allNodes = wrapper.findAll('.ix-tree-node')
 
     expect(allNodes.length).toBe(2)
     expect(allNodes[0].find('.ix-tree-node-expand').exists()).toBe(true)
@@ -749,9 +749,14 @@ describe('Tree', () => {
 
     await wait(50)
 
-    expect(wrapper.findAll('.ix-tree-node').length).toBe(4)
+    allNodes = wrapper.findAll('.ix-tree-node')
+
+    expect(allNodes.length).toBe(4)
     expect(allNodes[0].find('.ix-tree-node-expand').find('.ix-icon-loading').exists()).toBe(false)
     expect(allNodes[0].find('.ix-tree-node-expand').find('.ix-icon-right').exists()).toBe(true)
+    expect(
+      allNodes[1].find('.ix-tree-node').find('.ix-tree-node-indent').findAll('.ix-tree-node-indent-unit').length,
+    ).toBe(1)
   })
 
   test('loadedKeys work', async () => {
@@ -782,7 +787,7 @@ describe('Tree', () => {
       },
     })
 
-    const allNodes = wrapper.findAll('.ix-tree-node')
+    let allNodes = wrapper.findAll('.ix-tree-node')
 
     expect(allNodes.length).toBe(2)
 
@@ -792,7 +797,9 @@ describe('Tree', () => {
 
     await wait(50)
 
-    expect(wrapper.findAll('.ix-tree-node').length).toBe(2)
+    allNodes = wrapper.findAll('.ix-tree-node')
+
+    expect(allNodes.length).toBe(2)
 
     await wrapper.setProps({ loadedKeys: [] })
 
