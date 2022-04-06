@@ -13,6 +13,8 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 export interface MergedNode {
   children?: MergedNode[]
   label: string
@@ -68,11 +70,13 @@ export function convertMergeNodes(
   getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeNode[],
   parentKey?: VKey,
+  parentLevel?: number,
 ): MergedNode[] {
   const getKey = getNodeKey.value
 
   const { childrenKey, labelKey, disabled, loadChildren } = props
 
+  const level = isNil(parentLevel) ? -1 : parentLevel
   return nodes.map((node, index) =>
     convertMergeNode(
       node,
@@ -83,7 +87,7 @@ export function convertMergeNodes(
       !!loadChildren,
       index === 0,
       index === nodes.length - 1,
-      -1,
+      level,
       parentKey,
     ),
   )

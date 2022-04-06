@@ -71,7 +71,8 @@ export function useExpandable(
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)!
       if (childrenNodes.length) {
-        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, key)
+        const level = currNode.level
+        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, key, level)
         convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawNode[childrenKey] = childrenNodes
         currNode.children = mergedChildren
