@@ -7,17 +7,27 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { AvatarProps } from '@idux/components/avatar'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type CommentAvatar = AvatarProps
 
 export const commentProps = {
-  author: IxPropTypes.string,
-  avatar: IxPropTypes.oneOfType([String, IxPropTypes.object<CommentAvatar>()]),
-  content: IxPropTypes.string,
-  datetime: IxPropTypes.string,
+  author: {
+    type: String,
+    default: undefined,
+  },
+  avatar: {
+    type: [String, Object] as PropType<string | CommentAvatar>,
+    default: undefined,
+  },
+  content: {
+    type: String,
+    default: undefined,
+  },
+  datetime: {
+    type: String,
+    default: undefined,
+  },
 }
 
 export type CommentProps = ExtractInnerPropTypes<typeof commentProps>

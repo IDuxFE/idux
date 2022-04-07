@@ -63,36 +63,37 @@
       }
     }
 
+    &-actions {
+      margin-top: @comment-actions-margin-top;
+      margin-bottom: @comment-actions-margin-bottom;
+      padding-left: 0;
+  
+      > li {
+        display: inline-block;
+        color: @comment-action-color;
+  
+        > span {
+          margin-right: 10px;
+          color: @comment-action-color;
+          font-size: @comment-font-size-sm;
+          cursor: pointer;
+          transition: color 0.3s;
+          user-select: none;
+  
+          &:hover {
+            color: @comment-action-hover-color;
+          }
+        }
+      }
+    }
+
     &-detail p {
       margin-bottom: @comment-content-detail-p-margin-bottom;
       white-space: pre-wrap;
     }
   }
 
-  &-actions {
-    margin-top: @comment-actions-margin-top;
-    margin-bottom: @comment-actions-margin-bottom;
-    padding-left: 0;
-
-    > li {
-      display: inline-block;
-      color: @comment-action-color;
-
-      > span {
-        margin-right: 10px;
-        color: @comment-action-color;
-        font-size: @comment-font-size-sm;
-        cursor: pointer;
-        transition: color 0.3s;
-        user-select: none;
-
-        &:hover {
-          color: @comment-action-hover-color;
-        }
-      }
-    }
-  }
-
+  
   &-nested {
     margin-left: @comment-nest-indent;
   }

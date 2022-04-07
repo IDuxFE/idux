@@ -1,6 +1,6 @@
 <template>
   <IxList :header="`${listData.length} replies`">
-    <li v-for="item in listData" :key="item.id">
+    <li v-for="(item, index) in listData" :key="index">
       <IxComment :author="item.author" :avatar="item.avatar" :datetime="item.datetime">
         <template #content>
           <p>{{ item.content }}</p>
@@ -25,8 +25,8 @@
   </IxComment>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
 
 import { format } from 'date-fns'
 
@@ -37,31 +37,25 @@ interface listDataNode {
   datetime: string
 }
 
-export default defineComponent({
-  setup() {
-    const submitting = ref(false)
-    const commentValue = ref('')
-    const listData: listDataNode[] = reactive([])
+const submitting = ref(false)
+const commentValue = ref('')
+const listData: listDataNode[] = reactive([])
 
-    const handleSubmit = () => {
-      if (!commentValue.value) {
-        return
-      }
-      submitting.value = true
+const handleSubmit = () => {
+  if (!commentValue.value) {
+    return
+  }
+  submitting.value = true
 
-      setTimeout(() => {
-        listData.push({
-          author: 'Han Solo',
-          avatar: '/images/avatar/0.png',
-          content: commentValue.value,
-          datetime: format(new Date(), 'yyyy-MM-dd HH:mm'),
-        })
-        commentValue.value = ''
-        submitting.value = false
-      }, 1000)
-    }
-
-    return { submitting, commentValue, listData, handleSubmit }
-  },
-})
+  setTimeout(() => {
+    listData.push({
+      author: 'Han Solo',
+      avatar: '/images/avatar/0.png',
+      content: commentValue.value,
+      datetime: format(new Date(), 'yyyy-MM-dd HH:mm'),
+    })
+    commentValue.value = ''
+    submitting.value = false
+  }, 1000)
+}
 </script>

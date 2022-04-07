@@ -7,14 +7,6 @@
   </BasicComment>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import BasicComment from './Basic.vue'
-
-export default defineComponent({
-  components: {
-    BasicComment,
-  },
-})
 </script>

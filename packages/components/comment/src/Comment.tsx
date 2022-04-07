@@ -5,12 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Slots, VNodeTypes, computed, defineComponent } from 'vue'
+import { Slots, computed, defineComponent } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { CommentProps, commentProps } from './types'
 
@@ -23,6 +24,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
+
       return (
         <div class={prefixCls}>
           <div class={`${prefixCls}-inner`}>
@@ -36,8 +38,8 @@ export default defineComponent({
   },
 })
 
-const renderAvatar = (props: CommentProps, slots: Slots, prefixCls: string) => {
-  let avatarNode: VNodeTypes | undefined
+function renderAvatar(props: CommentProps, slots: Slots, prefixCls: string) {
+  let avatarNode
   if (slots.avatar) {
     avatarNode = slots.avatar()
   } else if (props.avatar) {
@@ -45,47 +47,32 @@ const renderAvatar = (props: CommentProps, slots: Slots, prefixCls: string) => {
     const avatarProps = isString(avatar) ? { src: avatar } : avatar
     avatarNode = <IxAvatar {...avatarProps}></IxAvatar>
   }
-  return avatarNode ? <div class={`${prefixCls}-avatar`}>{avatarNode}</div> : undefined
+  return avatarNode && <div class={`${prefixCls}-avatar`}>{avatarNode}</div>
 }
 
-const renderAuthor = (props: CommentProps, slots: Slots, prefixCls: string) => {
-  const author = (slots.author && slots.author()) || props.author
-  const datetime = (slots.datetime && slots.datetime()) || props.datetime
+function renderContent(props: CommentProps, slots: Slots, prefixCls: string) {
+  const contentPrefixCls = `${prefixCls}-content`
+
+  const contentNode = convertStringVNode(slots, props, 'content')
+  const authorNode = convertStringVNode(slots, props, 'author')
+  const datetimeNode = convertStringVNode(slots, props, 'datetime')
 
   return (
-    <div class={`${prefixCls}-content-author`}>
-      {author && <span class={`${prefixCls}-content-author-name`}>{author}</span>}
-      {datetime && <span class={`${prefixCls}-content-author-time`}>{datetime}</span>}
-    </div>
-  )
-}
-
-const renderAction = (props: CommentProps, slots: Slots, prefixCls: string) => {
-  if (!slots.actions) {
-    return undefined
-  }
-
-  const actionNodes = slots.actions().map((action, index) => {
-    return <li key={`action-${index}`}>{action}</li>
-  })
-
-  return <ul class={`${prefixCls}-actions`}>{actionNodes}</ul>
-}
-
-const renderContent = (props: CommentProps, slots: Slots, prefixCls: string) => {
-  let contentNode: VNodeTypes | string | undefined
-
-  if (slots.content) {
-    contentNode = slots.content()
-  } else if (props.content) {
-    contentNode = props.content
-  }
-
-  return (
-    <div class={`${prefixCls}-content`}>
-      {renderAuthor(props, slots, prefixCls)}
-      {contentNode && <div class={`${prefixCls}-content-detail`}>{contentNode}</div>}
-      {renderAction(props, slots, prefixCls)}
+    <div class={contentPrefixCls}>
+      {(authorNode || datetimeNode) && (
+        <div class={`${contentPrefixCls}-author`}>
+          {authorNode && <span class={`${contentPrefixCls}-author-name`}>{authorNode}</span>}
+          {datetimeNode && <span class={`${contentPrefixCls}-author-time`}>{datetimeNode}</span>}
+        </div>
+      )}
+      {contentNode && <div class={`${contentPrefixCls}-detail`}>{contentNode}</div>}
+      {slots.actions && (
+        <ul class={`${contentPrefixCls}-actions`}>
+          {slots.actions().map((action, index) => {
+            return <li key={`action-${index}`}>{action}</li>
+          })}
+        </ul>
+      )}
     </div>
   )
 }
