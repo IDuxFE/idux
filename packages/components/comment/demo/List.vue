@@ -20,34 +20,26 @@
   </IxList>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import { format } from 'date-fns'
 
-export default defineComponent({
-  setup() {
-    const datetime = format(new Date(), 'yyyy-MM-dd HH:mm')
-    const listData = [
-      {
-        author: 'Han Solo',
-        avatar: '/images/avatar/0.png',
-        content: `We supply a series of design principles, practical patterns and high quality design
+const datetime = format(new Date(), 'yyyy-MM-dd HH:mm')
+const listData = [
+  {
+    author: 'Han Solo',
+    avatar: '/images/avatar/0.png',
+    content: `We supply a series of design principles, practical patterns and high quality design
                     resources (Sketch and Axure), to help people create their product prototypes beautifully and
                     efficiently.`,
-        datetime: datetime,
-      },
-      {
-        author: 'Han Solo',
-        avatar: '/images/avatar/0.png',
-        content: `We supply a series of design principles, practical patterns and high quality design
-                    resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                    efficiently.`,
-        datetime: datetime,
-      },
-    ]
-
-    return { listData }
+    datetime: datetime,
   },
-})
+  {
+    author: 'Han Solo',
+    avatar: '/images/avatar/0.png',
+    content: `We supply a series of design principles, practical patterns and high quality design
+                    resources (Sketch and Axure), to help people create their product prototypes beautifully and
+                    efficiently.`,
+    datetime: datetime,
+  },
+]
 </script>

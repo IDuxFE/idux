@@ -5,10 +5,7 @@ exports[`Comment render work 1`] = `
   <div class=\\"ix-comment-inner\\">
     <!---->
     <div class=\\"ix-comment-content\\">
-      <div class=\\"ix-comment-content-author\\">
-        <!---->
-        <!---->
-      </div>
+      <!---->
       <div class=\\"ix-comment-content-detail\\">comment content</div>
       <!---->
     </div>

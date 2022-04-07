@@ -15,7 +15,7 @@ subtitle:
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 |`author` |评论作者名字的元素 |`string \| #author` | - | - | - |
-|`avatar` |评论头像的元素 |`string \| CommentAvatar \| #avatar` | - | - | - |
+|`avatar` |评论头像的元素 |`string \| object \| #avatar` | - | - | 当参数为`object`时，参考 [Avatar](/components/avatar/zh) |
 |`content` |评论的主要内容 |`string \| #content` | - | - | - |
 |`datetime` |展示时间描述 |`string \| #datetime` | - | - | - |
 
@@ -24,7 +24,7 @@ subtitle:
 |名称 |说明 |参数类型 |备注
 | --- | --- | --- | --- |
 |`default` |嵌套评论的子项 |- |-
-|`actions` |在评论内容下面呈现的操作项列表 |`#actions` |- |- -
+|`actions` |在评论内容下面呈现的操作项列表 |- |- |- -
 
 <!--- insert less variable begin  --->
 ## 主题变量
