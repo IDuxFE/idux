@@ -70,9 +70,15 @@ export default defineComponent({
 
     const classes = computed(() => {
       const config = props.config
-      const { borderless = config.borderless, multiple, size = formContext?.size.value ?? config.size } = props
+      const {
+        className,
+        borderless = config.borderless,
+        multiple,
+        size = formContext?.size.value ?? config.size,
+      } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [className]: true,
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: mergedClearable.value,
@@ -132,7 +138,7 @@ export default defineComponent({
     onBeforeUnmount(() => offResize(elementRef.value!, updateInputWidth))
 
     return () => {
-      const { multiple, disabled, readonly, value, dataSource, maxLabel } = props
+      const { multiple, disabled, readonly, opened, value, dataSource, maxLabel } = props
       const prefixCls = mergedPrefixCls.value
       const itemPrefixCls = `${prefixCls}-item`
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -192,15 +198,25 @@ export default defineComponent({
 
       if (showPlaceholder.value) {
         const placeholderNode = slots.placeholder ? slots.placeholder() : props.placeholder
-        children.push(<div class={`${prefixCls}-placeholder`}>{placeholderNode}</div>)
+        children.push(
+          <div key="__placeholder" class={`${prefixCls}-placeholder`}>
+            {placeholderNode}
+          </div>,
+        )
       }
 
-      const suffixNode = slots.suffix ? slots.suffix() : <IxIcon name={mergedSuffix.value} />
-      suffixNode && children.push(<div class={`${prefixCls}-suffix`}>{suffixNode}</div>)
+      const suffixProps = { name: mergedSuffix.value, rotate: opened ? 180 : 0 }
+      const suffixNode = slots.suffix ? slots.suffix(suffixProps) : <IxIcon {...suffixProps} />
+      suffixNode &&
+        children.push(
+          <div key="__suffix" class={`${prefixCls}-suffix`}>
+            {suffixNode}
+          </div>,
+        )
 
       if (mergedClearable.value) {
         children.push(
-          <div class={`${prefixCls}-clear`} onClick={handleClear}>
+          <div key="__clear" class={`${prefixCls}-clear`} onClick={handleClear}>
             {slots.clearIcon ? slots.clearIcon() : <IxIcon name={mergedClearIcon.value} />}
           </div>,
         )
@@ -208,9 +224,9 @@ export default defineComponent({
 
       return (
         <div ref={elementRef} class={classes.value} onClick={handleClick}>
-          {isFocused.value && !props.opened && (
+          {isFocused.value && !opened && (
             <span style={hiddenBoxStyle} aria-live="polite">
-              {props.value.join(', ')}
+              {value.join(', ')}
             </span>
           )}
           <div class={`${prefixCls}-content`}>{children}</div>

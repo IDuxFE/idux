@@ -1,5 +1,10 @@
 <template>
-  <IxSelect v-model:value="value" :dataSource="dataSource" :overlayRender="overlayRender"></IxSelect>
+  <IxSelect
+    v-model:value="value"
+    :dataSource="dataSource"
+    :overlayRender="overlayRender"
+    style="width: 200px"
+  ></IxSelect>
 </template>
 
 <script setup lang="ts">
