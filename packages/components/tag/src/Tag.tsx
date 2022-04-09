@@ -55,11 +55,13 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { icon, number } = props
       const icoNode = slots.icon ? slots.icon() : icon && <IxIcon name={icon}></IxIcon>
+
       return (
         <span class={classes.value} style={style.value}>
           {renderNumericPrefix(prefixCls, number, style.value)}
           {icoNode}
           <span class={`${prefixCls}-content`}>{slots.default?.()}</span>
+          {slots.suffix?.()}
         </span>
       )
     }

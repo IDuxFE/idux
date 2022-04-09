@@ -271,6 +271,10 @@ export const defaultConfig: GlobalConfig = {
     },
   },
   tag: {},
+  tagGroup: {
+    gap: 8,
+    wrap: true,
+  },
   textarea: {
     autoRows: false,
     clearable: false,

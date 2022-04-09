@@ -67,3 +67,17 @@
     border: 1px solid @text-color-inverse;
   }
 }
+
+.@{tag-group-prefix} {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &-clickable,
+  &-close-icon {
+    cursor: pointer;
+  }
+}

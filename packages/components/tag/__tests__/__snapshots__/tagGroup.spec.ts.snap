@@ -1,0 +1,8 @@
+// Vitest Snapshot v1
+
+exports[`TagGroup > render work 1`] = `
+"<div class=\\"ix-tag-group\\" style=\\"gap: 8px 8px;\\"><span class=\\"ix-tag\\"><!----><!----><span class=\\"ix-tag-content\\">A</span>
+  <!----></span><span class=\\"ix-tag\\"><!----><!----><span class=\\"ix-tag-content\\">B</span>
+  <!----></span>
+</div>"
+`;
