@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Message render work 1`] = `
+exports[`Message > render work 1`] = `
 "<div class=\\"ix-message ix-message-info\\">
   <div class=\\"ix-message-content\\"><span class=\\"ix-message-content-icon\\"><i class=\\"ix-icon ix-icon-info-circle-filled\\" role=\\"img\\" aria-label=\\"info-circle-filled\\"></i></span><span class=\\"ix-message-content-text\\">This is a message</span></div>
 </div>"

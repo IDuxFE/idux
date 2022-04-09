@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Card render work 1`] = `
+exports[`Card > render work 1`] = `
 "<div class=\\"ix-card ix-card-md\\">
   <!---->
   <!---->

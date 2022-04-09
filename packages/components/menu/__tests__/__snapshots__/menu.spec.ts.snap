@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Menu render work 1`] = `
+exports[`Menu > render work 1`] = `
 "<ul class=\\"ix-menu ix-menu-light ix-menu-vertical\\">
   <li class=\\"ix-menu-item\\"><i class=\\"ix-icon ix-icon-home\\" role=\\"img\\" aria-label=\\"home\\"></i><span><a>Item 1</a></span></li>
   <li class=\\"ix-menu-item\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i><span>Item 2</span></li>

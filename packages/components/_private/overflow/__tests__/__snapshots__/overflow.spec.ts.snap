@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Overflow maxLabel responsive work 1`] = `
+exports[`Overflow > maxLabel responsive work 1`] = `
 "<div class=\\"ix-overflow ix-test-overflow\\">
   <div class=\\"ix-overflow-item\\">0</div>
   <div class=\\"ix-overflow-item\\">1</div>
@@ -27,7 +27,7 @@ exports[`Overflow maxLabel responsive work 1`] = `
 </div>"
 `;
 
-exports[`Overflow maxLabel responsive work 2`] = `
+exports[`Overflow > maxLabel responsive work 2`] = `
 "<div class=\\"ix-overflow ix-test-overflow\\">
   <div class=\\"ix-overflow-item\\">0</div>
   <div class=\\"ix-overflow-item\\" style=\\"display: none;\\">1</div>
@@ -54,14 +54,14 @@ exports[`Overflow maxLabel responsive work 2`] = `
 </div>"
 `;
 
-exports[`Overflow render work 1`] = `
+exports[`Overflow > render work 1`] = `
 "<div class=\\"ix-overflow undefined-overflow\\">
   <!---->
   <!---->
 </div>"
 `;
 
-exports[`Overflow render work 2`] = `
+exports[`Overflow > render work 2`] = `
 "<div class=\\"ix-overflow undefined-overflow\\">
   <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"display: none;\\">+ 0 ...</div>
   <!---->

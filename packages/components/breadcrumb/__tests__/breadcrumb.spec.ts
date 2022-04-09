@@ -26,7 +26,7 @@ describe('Breadcrumb', () => {
   renderWork<BreadcrumbProps>(Breadcrumb)
 
   test('BreadcrumbItem not placed inside Breadcrumb', () => {
-    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const mockErrorLogger = vi.spyOn(console, 'error').mockImplementation()
     const wrapper = mount(BreadcrumbItem)
 
     expect(wrapper.isVisible()).toBe(false)

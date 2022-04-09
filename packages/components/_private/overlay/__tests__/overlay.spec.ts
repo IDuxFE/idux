@@ -29,7 +29,7 @@ describe('Overlay', () => {
   renderWork<OverlayProps>(Overlay, { props: { target: 'ix-overlay-container', visible: true }, slots })
 
   test('visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = OverlayMount({
       props: { visible: true, 'onUpdate:visible': onUpdateVisible },
       slots,
@@ -112,7 +112,7 @@ describe('Overlay', () => {
   })
 
   test('no slots work', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     OverlayMount()
     expect(warn).toBeCalled()
   })

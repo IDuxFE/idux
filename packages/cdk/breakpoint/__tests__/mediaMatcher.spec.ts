@@ -7,7 +7,7 @@ describe('matchMedia.ts', () => {
   })
 
   test('createEmptyStyleRule work', () => {
-    const createElementSyn = jest.spyOn(document, 'createElement').mockReturnValue(document.createElement('style'))
+    const createElementSyn = vi.spyOn(document, 'createElement').mockReturnValue(document.createElement('style'))
 
     matchMedia(BREAKPOINTS.sm)
     expect(createElementSyn).toBeCalledTimes(1)

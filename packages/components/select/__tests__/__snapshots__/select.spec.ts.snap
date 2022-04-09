@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Select multiple work maxLabel responsive work 1`] = `
+exports[`Select > multiple work > maxLabel responsive work 1`] = `
 "<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
   <div class=\\"ix-selector-content\\">
@@ -37,7 +37,7 @@ exports[`Select multiple work maxLabel responsive work 1`] = `
 <!---->"
 `;
 
-exports[`Select multiple work maxLabel responsive work 2`] = `
+exports[`Select > multiple work > maxLabel responsive work 2`] = `
 "<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
   <div class=\\"ix-selector-content\\">
@@ -65,7 +65,7 @@ exports[`Select multiple work maxLabel responsive work 2`] = `
 <!---->"
 `;
 
-exports[`Select multiple work render work 1`] = `
+exports[`Select > multiple work > render work 1`] = `
 "<div class=\\"ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
   <div class=\\"ix-selector-content\\">
@@ -90,7 +90,7 @@ exports[`Select multiple work render work 1`] = `
 <!---->"
 `;
 
-exports[`Select single work render work 1`] = `
+exports[`Select > single work > render work 1`] = `
 "<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
   <div class=\\"ix-selector-content\\">
@@ -106,7 +106,7 @@ exports[`Select single work render work 1`] = `
 <!---->"
 `;
 
-exports[`Select template work render work 1`] = `
+exports[`Select > template work > render work 1`] = `
 "<div class=\\"ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md ix-select\\">
   <!---->
   <div class=\\"ix-selector-content\\">

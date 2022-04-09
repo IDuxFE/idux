@@ -4,10 +4,10 @@ import { clickOutside } from '../src/useClickOutside'
 
 describe('useClickOutside.ts', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'log').mockClear()
-    jest.spyOn(console, 'warn').mockClear()
-    jest.spyOn(console, 'error').mockClear()
-    jest.spyOn(console, 'info').mockClear()
+    vi.spyOn(console, 'log').mockClear()
+    vi.spyOn(console, 'warn').mockClear()
+    vi.spyOn(console, 'error').mockClear()
+    vi.spyOn(console, 'info').mockClear()
   })
 
   const testComponent = {
@@ -42,10 +42,10 @@ describe('useClickOutside.ts', () => {
 
   test('directive work', async () => {
     const wrapper = mount(testComponent)
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
-    const log = jest.spyOn(console, 'log').mockImplementation(() => {})
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {})
-    const info = jest.spyOn(console, 'info').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {})
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {})
 
     document.body.click()
     expect(log).toBeCalled()

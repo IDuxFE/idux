@@ -40,7 +40,7 @@ describe('Notification', () => {
   })
 
   test('visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = NotificationMount({
       props: {
         visible: false,
@@ -61,7 +61,7 @@ describe('Notification', () => {
   })
 
   test('destroyOnHover work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = NotificationMount({
       propsData: {
         visible: false,
@@ -95,7 +95,7 @@ describe('Notification', () => {
   })
 
   test('duration work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = NotificationMount({
       props: {
         visible: true,
@@ -242,7 +242,7 @@ describe('Notification', () => {
 
     expect(wrapper.find('#footVNode').exists()).toBe(true)
 
-    const clickFn = jest.fn()
+    const clickFn = vi.fn()
     await wrapper.setProps({
       footer: [
         {

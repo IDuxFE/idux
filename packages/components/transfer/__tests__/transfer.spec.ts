@@ -58,7 +58,7 @@ describe('Transfer', () => {
   })
 
   test('transfer work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource, onChange } })
 
     const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
@@ -170,7 +170,7 @@ describe('Transfer', () => {
   })
 
   test('selectAll work', async () => {
-    const onSelectAll = jest.fn()
+    const onSelectAll = vi.fn()
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource, onSelectAll } })
 
     const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
@@ -221,8 +221,8 @@ describe('Transfer', () => {
   })
 
   test('clear work', async () => {
-    const onClear = jest.fn()
-    const onChange = jest.fn()
+    const onClear = vi.fn()
+    const onChange = vi.fn()
     const wrapper = TransferMount({
       props: { dataSource: mockedDataSource, value: [2, 3, 4, 5], disabled: true, onClear, 'onUpdate:value': onChange },
     })
@@ -261,7 +261,7 @@ describe('Transfer', () => {
   })
 
   test('pagination work', async () => {
-    const onPageChange = jest.fn()
+    const onPageChange = vi.fn()
     const wrapper = TransferMount({
       props: {
         dataSource: Array.from(new Array(50)).map((_, idx) => ({
@@ -349,7 +349,7 @@ describe('Transfer', () => {
   })
 
   test('searchable work', async () => {
-    const onSearch = jest.fn()
+    const onSearch = vi.fn()
     const wrapper = TransferMount({
       props: {
         dataSource: mockedDataSource,
@@ -378,7 +378,7 @@ describe('Transfer', () => {
   })
 
   test('immediate work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = TransferMount({
       props: { dataSource: mockedDataSource, mode: 'immediate', 'onUpdate:value': onChange },
     })

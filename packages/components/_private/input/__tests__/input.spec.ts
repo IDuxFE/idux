@@ -86,7 +86,7 @@ describe('Input', () => {
   })
 
   test('clearable work', async () => {
-    const onClear = jest.fn()
+    const onClear = vi.fn()
     const wrapper = InputMount({ props: { clearIcon: 'close', clearable: true, onClear } })
 
     expect(wrapper.find('.ix-input-clear').exists()).toBe(true)
@@ -121,8 +121,8 @@ describe('Input', () => {
   })
 
   test('disabled work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
 
     const wrapper = InputMount({ props: { disabled: true, onFocus, onBlur } })
     await wrapper.find('input').trigger('focus')

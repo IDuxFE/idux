@@ -52,8 +52,8 @@ describe('Textarea', () => {
   })
 
   test('disabled work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
     const wrapper = TextareaMount({ props: { disabled: true, onFocus, onBlur } })
     await wrapper.find('textarea').trigger('focus')
 
@@ -78,8 +78,8 @@ describe('Textarea', () => {
   })
 
   test('readonly work', async () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
     const wrapper = TextareaMount({ props: { readonly: true, onFocus, onBlur } })
     await wrapper.find('textarea').trigger('focus')
 
@@ -103,7 +103,7 @@ describe('Textarea', () => {
   })
 
   test('clearable work', async () => {
-    const onClear = jest.fn()
+    const onClear = vi.fn()
     const wrapper = TextareaMount({ props: { clearable: true, onClear } })
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)

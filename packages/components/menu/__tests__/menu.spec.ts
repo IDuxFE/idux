@@ -79,7 +79,7 @@ describe('Menu', () => {
   renderWork<MenuProps>(Menu, { props: { dataSource }, attachTo: 'body' })
 
   test('v-model:expandedKeys work', async () => {
-    const onUpdateExpandedKeys = jest.fn()
+    const onUpdateExpandedKeys = vi.fn()
     const wrapper = MenuMount({
       props: { expandedKeys: ['sub1'], 'onUpdate:expandedKeys': onUpdateExpandedKeys, mode: 'inline' },
     })
@@ -106,7 +106,7 @@ describe('Menu', () => {
   })
 
   test('v-model:selectedKeys work', async () => {
-    const onUpdateSelectedKeys = jest.fn()
+    const onUpdateSelectedKeys = vi.fn()
     const wrapper = MenuMount({ props: { selectedKeys: ['item1'], 'onUpdate:selectedKeys': onUpdateSelectedKeys } })
 
     const items = wrapper.findAll('.ix-menu-item')
@@ -129,7 +129,7 @@ describe('Menu', () => {
   })
 
   test('collapsed work', async () => {
-    const onUpdateExpandedKeys = jest.fn()
+    const onUpdateExpandedKeys = vi.fn()
     const wrapper = MenuMount({
       props: { collapsed: true, mode: 'inline', 'onUpdate:expandedKeys': onUpdateExpandedKeys },
     })

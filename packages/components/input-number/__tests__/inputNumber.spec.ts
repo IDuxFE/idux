@@ -47,7 +47,7 @@ describe('InputNumber', () => {
   })
 
   test('disabled work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = InputNumberMount({ props: { disabled: true, 'onUpdate:value': onUpdateValue } })
 
     await wrapper.find('.ix-input-number-increase').trigger('click')
@@ -61,7 +61,7 @@ describe('InputNumber', () => {
   })
 
   test('readonly work', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = InputNumberMount({ props: { readonly: true, 'onUpdate:value': onUpdateValue } })
 
     await wrapper.find('.ix-input-number-increase').trigger('click')

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Notification render work 1`] = `
+exports[`Notification > render work 1`] = `
 "<div>
   <div class=\\"ix-notification\\">
     <div class=\\"ix-notification-icon\\" style=\\"display: none;\\">

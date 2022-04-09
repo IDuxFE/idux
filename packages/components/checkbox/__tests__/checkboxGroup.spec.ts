@@ -20,8 +20,8 @@ describe('CheckboxGroup', () => {
   renderWork<CheckboxGroupProps>(CheckboxGroup, { props: { dataSource: defaultOptions } })
 
   test('v-model:value work', async () => {
-    const onUpdateValue = jest.fn()
-    const onChange = jest.fn()
+    const onUpdateValue = vi.fn()
+    const onChange = vi.fn()
     const wrapper = CheckboxGroupMount({ props: { value: ['option1'], 'onUpdate:value': onUpdateValue, onChange } })
 
     expect(wrapper.findAll('.ix-checkbox-checked').length).toBe(1)
@@ -37,7 +37,7 @@ describe('CheckboxGroup', () => {
   })
 
   test('disabled work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CheckboxGroupMount({
       props: {
         value: ['option1'],

@@ -140,7 +140,7 @@ describe('ModalProvider', () => {
 
   describe('modalRef', () => {
     test('open and close work', async () => {
-      const onClose = jest.fn()
+      const onClose = vi.fn()
       const modalRef = wrapper.vm.open({ onClose, destroyOnHide: false, header, content })
       await flushPromises()
 
@@ -157,7 +157,7 @@ describe('ModalProvider', () => {
     })
 
     test('cancel work', async () => {
-      const onCancel = jest.fn()
+      const onCancel = vi.fn()
       const modalRef = wrapper.vm.open({ onCancel, header, content })
       await flushPromises()
 
@@ -168,7 +168,7 @@ describe('ModalProvider', () => {
     })
 
     test('ok work', async () => {
-      const onOk = jest.fn()
+      const onOk = vi.fn()
       const modalRef = wrapper.vm.open({ onOk, header, content })
       await flushPromises()
 
@@ -179,7 +179,7 @@ describe('ModalProvider', () => {
     })
 
     test('destroy work', async () => {
-      const onDestroy = jest.fn()
+      const onDestroy = vi.fn()
       const modalRef = wrapper.vm.open({ onDestroy, header, content })
       await flushPromises()
 

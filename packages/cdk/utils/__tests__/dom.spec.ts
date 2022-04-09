@@ -8,7 +8,7 @@ describe('dom.ts', () => {
   })
 
   test('event listener', () => {
-    const listener = jest.fn()
+    const listener = vi.fn()
     on(testElement, 'click', listener)
     testElement.click()
 

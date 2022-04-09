@@ -55,8 +55,8 @@ describe('Image', () => {
   })
 
   test('hooks work', async () => {
-    const onLoad = jest.fn()
-    const onError = jest.fn()
+    const onLoad = vi.fn()
+    const onError = vi.fn()
     const wrapper = ImageMount({ props: { onLoad, onError } })
     await flushPromises()
     await wrapper.find('.ix-image-inner').trigger('load')

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`ProTransfer table transfer render work 1`] = `
+exports[`ProTransfer > table transfer render work 1`] = `
 <div
   class="ix-transfer ix-pro-transfer"
 >
@@ -1265,7 +1265,7 @@ exports[`ProTransfer table transfer render work 1`] = `
 </div>
 `;
 
-exports[`ProTransfer tree transfer render work 1`] = `
+exports[`ProTransfer > tree transfer render work 1`] = `
 <div
   class="ix-transfer ix-pro-transfer"
 >

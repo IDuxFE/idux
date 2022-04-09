@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`CheckableListItem render work 1`] = `
+exports[`CheckableListItem > render work 1`] = `
 "<li class=\\"ix-checkable-list-item\\"><label class=\\"ix-checkbox ix-checkable-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"1\\"><span class=\\"ix-checkbox-input-box\\"></span></span><span class=\\"ix-checkbox-label\\">Option-1</span>
     <!---->
   </label><i class=\\"ix-icon ix-icon-close ix-checkable-list-item-close-icon\\" role=\\"img\\" aria-label=\\"close\\"></i></li>"

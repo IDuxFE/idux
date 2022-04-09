@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Table basic work render work 1`] = `
+exports[`Table > basic work > render work 1`] = `
 "<div class=\\"ix-table ix-table-borderless ix-table-md\\">
   <!---->
   <!---->

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Spin render work 1`] = `
+exports[`Spin > render work 1`] = `
 "<div class=\\"ix-spin\\">
   <div class=\\"ix-spin-spinner ix-spin-spinner-tip-vertical ix-spin-spinner-md\\">
     <div class=\\"ix-spin-spinner-icon\\">

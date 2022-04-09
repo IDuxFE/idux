@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`TimePanel disableMinutes work 1`] = `
+exports[`TimePanel > disableMinutes work 1`] = `
 "<div class=\\"ix-time-panel\\">
   <ul class=\\"ix-time-panel-column\\">
     <li class=\\"ix-time-panel-cell ix-time-panel-cell-selected\\">00</li>
@@ -155,7 +155,7 @@ exports[`TimePanel disableMinutes work 1`] = `
 </div>"
 `;
 
-exports[`TimePanel disableSeconds work 1`] = `
+exports[`TimePanel > disableSeconds work 1`] = `
 "<div class=\\"ix-time-panel\\">
   <ul class=\\"ix-time-panel-column\\">
     <li class=\\"ix-time-panel-cell ix-time-panel-cell-selected\\">00</li>
@@ -310,7 +310,7 @@ exports[`TimePanel disableSeconds work 1`] = `
 </div>"
 `;
 
-exports[`TimePanel disabledHours work 1`] = `
+exports[`TimePanel > disabledHours work 1`] = `
 "<div class=\\"ix-time-panel\\">
   <ul class=\\"ix-time-panel-column\\">
     <li class=\\"ix-time-panel-cell ix-time-panel-cell-selected\\">00</li>
@@ -465,7 +465,7 @@ exports[`TimePanel disabledHours work 1`] = `
 </div>"
 `;
 
-exports[`TimePanel render work 1`] = `
+exports[`TimePanel > render work 1`] = `
 "<div class=\\"ix-time-panel\\">
   <ul class=\\"ix-time-panel-column\\">
     <li class=\\"ix-time-panel-cell ix-time-panel-cell-selected\\">00</li>

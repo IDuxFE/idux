@@ -41,7 +41,7 @@ describe('Header', () => {
   })
 
   test('prefix work', async () => {
-    const onPrefixClick = jest.fn()
+    const onPrefixClick = vi.fn()
     const wrapper = HeaderMount({
       props: { prefix: 'up', onPrefixClick },
     })
@@ -72,7 +72,7 @@ describe('Header', () => {
   })
 
   test('suffix work', async () => {
-    const onSuffixClick = jest.fn()
+    const onSuffixClick = vi.fn()
     const wrapper = HeaderMount({
       props: { suffix: 'up', onSuffixClick },
     })

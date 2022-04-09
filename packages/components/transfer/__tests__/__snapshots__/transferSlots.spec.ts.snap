@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Transfer clearIcon slot work 1`] = `
+exports[`Transfer > clearIcon slot work 1`] = `
 <div
   class="ix-transfer"
 >
@@ -723,7 +723,7 @@ exports[`Transfer clearIcon slot work 1`] = `
 </div>
 `;
 
-exports[`Transfer default slot work 1`] = `
+exports[`Transfer > default slot work 1`] = `
 <div
   class="ix-transfer"
 >
@@ -1079,7 +1079,7 @@ exports[`Transfer default slot work 1`] = `
 </div>
 `;
 
-exports[`Transfer empty slot work 1`] = `
+exports[`Transfer > empty slot work 1`] = `
 <div
   class="ix-transfer"
 >
@@ -1788,7 +1788,7 @@ exports[`Transfer empty slot work 1`] = `
 </div>
 `;
 
-exports[`Transfer footer slot work 1`] = `
+exports[`Transfer > footer slot work 1`] = `
 <div
   class="ix-transfer"
 >
@@ -2727,7 +2727,7 @@ exports[`Transfer footer slot work 1`] = `
 </div>
 `;
 
-exports[`Transfer headerLabel slot work 1`] = `
+exports[`Transfer > headerLabel slot work 1`] = `
 <div
   class="ix-transfer"
 >
@@ -3462,7 +3462,7 @@ exports[`Transfer headerLabel slot work 1`] = `
 </div>
 `;
 
-exports[`Transfer label slot work 1`] = `
+exports[`Transfer > label slot work 1`] = `
 <div
   class="ix-transfer"
 >

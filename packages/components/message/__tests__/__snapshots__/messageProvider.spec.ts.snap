@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`MessageProvider basic render work 1`] = `
+exports[`MessageProvider > basic > render work 1`] = `
 "This is a message
 <!---->"
 `;

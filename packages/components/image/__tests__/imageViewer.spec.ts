@@ -36,7 +36,7 @@ describe('ImageViewer', () => {
   renderWork<ImageViewerProps>(ImageViewer, { props: { images: ['/icons/logo.svg'] } })
 
   test('v-model:visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = ImageViewerMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
 
@@ -60,7 +60,7 @@ describe('ImageViewer', () => {
   })
 
   test('v-model:activeIndex work', async () => {
-    const onUpdateActiveIndex = jest.fn()
+    const onUpdateActiveIndex = vi.fn()
     const images = ['/1.png', '/2.png', '/3.png']
     const wrapper = ImageViewerMount({
       props: { images, visible: true, activeIndex: 0, 'onUpdate:activeIndex': onUpdateActiveIndex },
@@ -154,7 +154,7 @@ describe('ImageViewer', () => {
 
   test('loop work', async () => {
     const images = ['/1.png', '/2.png', '/3.png']
-    const onUpdateActiveIndex = jest.fn()
+    const onUpdateActiveIndex = vi.fn()
     const wrapper = ImageViewerMount({
       props: { images, visible: true, activeIndex: 0, 'onUpdate:activeIndex': onUpdateActiveIndex },
     })
@@ -181,7 +181,7 @@ describe('ImageViewer', () => {
   })
 
   test('maskClosable work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = ImageViewerMount({
       props: { visible: true, 'onUpdate:visible': onUpdateVisible },
     })

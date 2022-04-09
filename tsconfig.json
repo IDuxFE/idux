@@ -27,7 +27,8 @@
       "@idux/*": ["./packages/*"],
       "@tests": ["./tests"],
       "@tests/*": ["./tests/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "exclude": ["node_modules", "dist"]
 }

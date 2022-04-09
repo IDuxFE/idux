@@ -38,8 +38,8 @@ describe('Select', () => {
     renderWork<SelectProps>(Select, { props: { dataSource: defaultDataSource, value: defaultValue }, attachTo: 'body' })
 
     test('v-model:value work', async () => {
-      const onUpdateValue = jest.fn()
-      const onChange = jest.fn()
+      const onUpdateValue = vi.fn()
+      const onChange = vi.fn()
       const wrapper = SelectMount({ props: { open: true, value: 'tom', 'onUpdate:value': onUpdateValue, onChange } })
 
       expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
@@ -62,7 +62,7 @@ describe('Select', () => {
     })
 
     test('v-model:open work', async () => {
-      const onUpdateOpen = jest.fn()
+      const onUpdateOpen = vi.fn()
       const wrapper = SelectMount({ props: { open: true, 'onUpdate:open': onUpdateOpen } })
 
       expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
@@ -86,7 +86,7 @@ describe('Select', () => {
     })
 
     test('allowInput work', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const wrapper = SelectMount({ props: { allowInput: true, 'onUpdate:value': onUpdateValue } })
 
       const input = wrapper.find('input')
@@ -148,7 +148,7 @@ describe('Select', () => {
     })
 
     test('clearable work', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const wrapper = SelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })
 
       expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
@@ -456,8 +456,8 @@ describe('Select', () => {
     })
 
     test('v-model:value work', async () => {
-      const onUpdateValue = jest.fn()
-      const onChange = jest.fn()
+      const onUpdateValue = vi.fn()
+      const onChange = vi.fn()
       const wrapper = SelectMount({
         props: { open: true, value: [0, 1, 2], 'onUpdate:value': onUpdateValue, onChange },
       })

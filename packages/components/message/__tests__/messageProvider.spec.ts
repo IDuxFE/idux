@@ -148,7 +148,7 @@ describe('MessageProvider', () => {
     })
 
     test('destroy work', async () => {
-      const onDestroy = jest.fn()
+      const onDestroy = vi.fn()
       const wrapper = MessageProviderMount()
       const messageRef = wrapper.vm.open({ onDestroy, content })
       await flushPromises()

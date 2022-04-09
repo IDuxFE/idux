@@ -30,16 +30,6 @@ describe('ListItem', () => {
     expect(wrapper.find('.ix-list-item-content').text()).toEqual('item content 2')
   })
 
-  test('title', async () => {
-    const wrapper = ListItemMount({ props: { title: 'item title 1' } })
-
-    expect(wrapper.find('.ix-list-item-title').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-list-item-title').text()).toEqual('item title 1')
-
-    await wrapper.setProps({ title: 'item title 2' })
-    expect(wrapper.find('.ix-list-item-title').text()).toEqual('item title 2')
-  })
-
   test('slot work', async () => {
     const text = 'ListItem'
     const titleText = 'ListItemTitle'

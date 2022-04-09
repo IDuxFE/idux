@@ -69,7 +69,7 @@ The `IDuxFE` team will pay attention to all Pull Requests. We will review and me
 - commonly used commands:
   - `npm start` Run the documentation website locally;
   - `npm run lint` Check code style(tips: run `npm run lint-fix` Can fix simple format errors);
-  - `npm run test` Run unit tests(tips: Modify the `root` configuration of `jest.config.js` to adjust the scope of unit testing);
+  - `npm run test` Run unit tests(tips: Modify the `root` configuration of `vitest.config.ts` to adjust the scope of unit testing);
   - `npm run gen` Quickly create templates through a graphical interface.
 
 ## Code format

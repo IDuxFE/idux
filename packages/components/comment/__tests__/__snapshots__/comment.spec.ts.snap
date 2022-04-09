@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Comment render work 1`] = `
+exports[`Comment > render work 1`] = `
 "<div class=\\"ix-comment\\">
   <div class=\\"ix-comment-inner\\">
     <!---->

@@ -1,3 +1,3 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Radio render work 1`] = `"<label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-radio-input-box\\"></span></span><span class=\\"ix-radio-label\\">Radio</span></label>"`;
+exports[`Radio > render work 1`] = `"<label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-radio-input-box\\"></span></span><span class=\\"ix-radio-label\\">Radio</span></label>"`;

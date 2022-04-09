@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Collapse panel work header work 1`] = `
+exports[`Collapse > panel work > header work 1`] = `
 "<div class=\\"ix-collapse\\">
   <div class=\\"ix-collapse-panel\\">
     <div class=\\"ix-header ix-header-md\\">
@@ -22,7 +22,7 @@ exports[`Collapse panel work header work 1`] = `
 </div>"
 `;
 
-exports[`Collapse panel work header work 2`] = `
+exports[`Collapse > panel work > header work 2`] = `
 "<div class=\\"ix-collapse\\">
   <div class=\\"ix-collapse-panel\\">
     <div class=\\"ix-header ix-header-md\\">
@@ -43,7 +43,7 @@ exports[`Collapse panel work header work 2`] = `
 </div>"
 `;
 
-exports[`Collapse render work 1`] = `
+exports[`Collapse > render work 1`] = `
 "<div class=\\"ix-collapse\\">
   <div class=\\"ix-collapse-panel\\">
     <div class=\\"ix-header ix-header-md\\">

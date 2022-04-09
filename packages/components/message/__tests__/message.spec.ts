@@ -28,7 +28,7 @@ describe('Message', () => {
   })
 
   test('v-model:visible work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = MessageMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
 
@@ -44,7 +44,7 @@ describe('Message', () => {
   })
 
   test('destroyOnHover work', async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = MessageMount({ props: { 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
     await wrapper.trigger('mouseenter')
@@ -66,7 +66,7 @@ describe('Message', () => {
   })
 
   test(`duration work`, async () => {
-    const onUpdateVisible = jest.fn()
+    const onUpdateVisible = vi.fn()
     const wrapper = MessageMount({ props: { 'onUpdate:visible': onUpdateVisible } })
     await flushPromises()
     await wait(100)

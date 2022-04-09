@@ -125,7 +125,7 @@ describe('ProTransfer', () => {
   })
 
   test('table v-model:value work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = ProTableTransferMount({ props: { value: [0, 1, 2, 3], onChange } })
 
     const [sourceTable, targetTable] = wrapper.findAll('.ix-table')
@@ -154,7 +154,7 @@ describe('ProTransfer', () => {
   })
 
   test('tree v-model:value work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = proTreeTransferMount({ props: { value: ['1-2', '1-2-1', '1-2-2'], onChange } })
 
     const [sourceTree, targetTree] = wrapper.findAll('.ix-tree')

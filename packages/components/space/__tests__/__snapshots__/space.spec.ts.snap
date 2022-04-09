@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Space render work 1`] = `
+exports[`Space > render work 1`] = `
 "<div class=\\"ix-space\\" style=\\"margin-bottom: -16px;\\">
   <div class=\\"ix-space-item\\" style=\\"margin-right: 16px; padding-bottom: 16px;\\">Space</div>
   <div class=\\"ix-space-item\\" style=\\"margin-right: 16px; padding-bottom: 16px;\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>Button</span></button></div>

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Layout render work 1`] = `
+exports[`Layout > render work 1`] = `
 "<section class=\\"ix-layout\\">
   <header class=\\"ix-layout-header\\">header</header>
   <aside class=\\"ix-layout-sider\\">sider</aside>

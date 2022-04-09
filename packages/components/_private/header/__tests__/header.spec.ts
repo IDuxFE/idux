@@ -18,7 +18,7 @@ describe('Header', () => {
   renderWork<HeaderProps>(Header, { props: { header: 'Header title', closable: true, closeIcon: 'close' } })
 
   test('closable work', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = HeaderMount({ props: { closable: true, closeIcon: 'close', onClose } })
 
     expect(wrapper.find('.ix-header-suffix').exists()).toBe(true)

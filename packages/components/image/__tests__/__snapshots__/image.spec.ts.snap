@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Image render work 1`] = `
+exports[`Image > render work 1`] = `
 "<div class=\\"ix-image ix-image-loading ix-image-preview\\">
   <div class=\\"ix-image-layer\\">
     <!----><i class=\\"ix-icon ix-icon-loading ix-image-placeholder\\" role=\\"img\\" aria-label=\\"loading\\"></i>

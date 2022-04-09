@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`TimePanelColumn render work 1`] = `
+exports[`TimePanelColumn > render work 1`] = `
 "<ul class=\\"ix-time-Panel-column\\">
   <li class=\\"ix-time-Panel-cell ix-time-Panel-cell-selected\\">01</li>
   <li class=\\"ix-time-Panel-cell ix-time-Panel-cell-disabled\\">02</li>

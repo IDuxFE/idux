@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`ProLayout render work 1`] = `
+exports[`ProLayout > render work 1`] = `
 "<section class=\\"ix-layout ix-pro-layout ix-pro-layout-is-mixin\\">
   <header class=\\"ix-layout-header ix-pro-layout-header ix-pro-layout-header-light\\">
     <!---->

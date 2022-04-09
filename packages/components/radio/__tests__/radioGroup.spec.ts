@@ -32,7 +32,7 @@ describe('RadioGroup', () => {
   })
 
   test('onUpdate:value work', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = RadioGroupMount({ props: { 'onUpdate:value': onUpdate } })
 
     await wrapper.findAll('input')[0].setValue(true)

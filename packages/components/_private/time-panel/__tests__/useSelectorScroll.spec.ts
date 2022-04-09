@@ -68,7 +68,7 @@ describe('usePanelScroll', () => {
         },
       })
     })
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const props: TimePanelColumnProps = reactive({
       selectedValue: selectedValue ?? 1,
       options,

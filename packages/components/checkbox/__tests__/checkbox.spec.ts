@@ -12,8 +12,8 @@ describe('Checkbox', () => {
   renderWork<CheckboxProps>(Checkbox)
 
   test('v-model:checked work', async () => {
-    const onUpdateChecked = jest.fn()
-    const onChange = jest.fn()
+    const onUpdateChecked = vi.fn()
+    const onChange = vi.fn()
     const wrapper = CheckboxMount({ props: { checked: true, 'onUpdate:checked': onUpdateChecked, onChange } })
 
     expect(wrapper.classes()).toContain('ix-checkbox-checked')
@@ -52,7 +52,7 @@ describe('Checkbox', () => {
   })
 
   test('trueValue and falseValue work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CheckboxMount({
       props: {
         checked: 'yes',
@@ -100,7 +100,7 @@ describe('Checkbox', () => {
   })
 
   test('disabled work', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = CheckboxMount({
       props: {
         disabled: false,
@@ -138,7 +138,7 @@ describe('Checkbox', () => {
   })
 
   test('onChange work', async () => {
-    const mockFn = jest.fn()
+    const mockFn = vi.fn()
     const wrapper = CheckboxMount({
       props: {
         onChange: mockFn,
@@ -181,8 +181,8 @@ describe('Checkbox', () => {
   })
 
   test('focus & blur method work', async () => {
-    const focusFn = jest.fn()
-    const blurFn = jest.fn()
+    const focusFn = vi.fn()
+    const blurFn = vi.fn()
     const wrapper = CheckboxMount({
       props: {
         ref: 'component',

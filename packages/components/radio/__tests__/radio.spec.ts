@@ -21,7 +21,7 @@ describe('Radio', () => {
   })
 
   test('onUpdate:checked work', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = RadioMount({ props: { 'onUpdate:checked': onUpdate } })
 
     expect(wrapper.classes()).not.toContain('ix-radio-checked')
@@ -33,7 +33,7 @@ describe('Radio', () => {
 
   // TODO fix
   test.skip('autofocus work', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     RadioMount({ props: { autofocus: true, onFocus } })
     await flushPromises()
 

@@ -10,7 +10,10 @@ import { IxIcon } from '@idux/components/icon'
 import { zhCN } from '@idux/components/locales'
 
 import UploadFilesCpm from '../src/List'
-import { uploadToken } from '../src/token'
+import * as token from '../src/token'
+
+// https://github.com/vitest-dev/vitest/issues/1082
+const { uploadToken } = token
 
 const uploadFilesMount = (options?: MountingOptions<Partial<UploadFilesProps>>) => {
   const { global: { provide: { [uploadToken as unknown as string]: provideObj } = {}, ...restGlobal } = {}, ...rest } =
@@ -120,7 +123,7 @@ describe('Upload list render', () => {
   })
 
   test('onDownload work', async () => {
-    const onDownload = jest.fn()
+    const onDownload = vi.fn()
     const defaultFiles = [
       {
         key: 'test1',
@@ -151,7 +154,7 @@ describe('Upload list render', () => {
   })
 
   test('onPreview work', async () => {
-    const onPreview = jest.fn()
+    const onPreview = vi.fn()
     const defaultFiles = [
       {
         key: 'test1',
@@ -187,8 +190,8 @@ describe('Upload list render', () => {
   })
 
   test('onRetry work', async () => {
-    const onRetry = jest.fn()
-    const upload = jest.fn()
+    const onRetry = vi.fn()
+    const upload = vi.fn()
     const defaultFiles = [
       {
         key: 'test1',
@@ -220,9 +223,9 @@ describe('Upload list render', () => {
   })
 
   test('onRemove work', async () => {
-    const onRemove = jest.fn(() => false)
-    const onUpdateFiles = jest.fn()
-    const abort = jest.fn()
+    const onRemove = vi.fn(() => false)
+    const onUpdateFiles = vi.fn()
+    const abort = vi.fn()
     const defaultFiles = [
       {
         key: 'test1',
@@ -252,7 +255,7 @@ describe('Upload list render', () => {
     expect(onUpdateFiles).not.toBeCalled()
     onUpdateFiles.mockRestore()
 
-    const allowRemove = jest.fn(() => true)
+    const allowRemove = vi.fn(() => true)
     await wrapper.setProps({ onRemove: allowRemove })
     await wrapper.find('.ix-upload-icon-remove').trigger('click')
 
@@ -261,7 +264,7 @@ describe('Upload list render', () => {
     expect(onUpdateFiles).toBeCalled()
     onUpdateFiles.mockRestore()
 
-    const allowRemovePromise = jest.fn(() => Promise.resolve(true))
+    const allowRemovePromise = vi.fn(() => Promise.resolve(true))
     await wrapper.setProps({ onRemove: allowRemovePromise })
     await wrapper.find('.ix-upload-icon-remove').trigger('click')
 
@@ -270,7 +273,7 @@ describe('Upload list render', () => {
     expect(abort).toBeCalled()
     onUpdateFiles.mockRestore()
 
-    const notAllowRemovePromise = jest.fn(() => Promise.resolve(false))
+    const notAllowRemovePromise = vi.fn(() => Promise.resolve(false))
     await wrapper.setProps({ onRemove: notAllowRemovePromise })
     await wrapper.find('.ix-upload-icon-remove').trigger('click')
 

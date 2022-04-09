@@ -70,7 +70,7 @@ describe('CheckableList', () => {
   })
 
   test('onCheckChange work', async () => {
-    const onCheckChange = jest.fn()
+    const onCheckChange = vi.fn()
     const wrapper = CheckableListMount({
       props: { dataSource: mockedDataSource, onCheckChange, checkable: true },
     })
@@ -85,7 +85,7 @@ describe('CheckableList', () => {
   })
 
   test('onRemove work', async () => {
-    const onRemove = jest.fn()
+    const onRemove = vi.fn()
     const wrapper = CheckableListMount({
       props: { dataSource: mockedDataSource, onRemove, removable: true },
     })

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Carousel render work 1`] = `
+exports[`Carousel > render work 1`] = `
 "<div class=\\"ix-carousel ix-carousel-horizontal\\" style=\\"height: 0px;\\">
   <div class=\\"ix-carousel-slides\\" style=\\"width: 0px; left: -0px;\\">
     <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">

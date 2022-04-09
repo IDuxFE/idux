@@ -32,7 +32,7 @@ describe('Collapse', () => {
     }
 
     test('v-model:expandedKeys work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
       const wrapper = CollapseMount({
         props: {
           expandedKeys: [0],
@@ -58,7 +58,7 @@ describe('Collapse', () => {
     })
 
     test('accordion work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
       const wrapper = CollapseMount({
         props: {
           accordion: true,
@@ -139,7 +139,7 @@ describe('Collapse', () => {
 
   describe('panel work', () => {
     test('disabled work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
       // TODO remove reactive
       const panelProps = reactive({ key: 0, header: 'header 0', disabled: true })
       const wrapper = mount(Collapse, {
@@ -167,7 +167,7 @@ describe('Collapse', () => {
     })
 
     test('header work', async () => {
-      const onUpdateExpandedKeys = jest.fn()
+      const onUpdateExpandedKeys = vi.fn()
       // TODO remove reactive
       const panelProps = reactive({ key: 0, header: 'header 0' })
       const wrapper = mount(Collapse, {

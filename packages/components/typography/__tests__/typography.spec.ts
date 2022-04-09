@@ -61,7 +61,7 @@ describe('typography.ts', () => {
   })
 
   test('dev warn work', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const wrapper = typographyMount({ type: 'hello' })

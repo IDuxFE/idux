@@ -26,8 +26,8 @@ describe('Tabs', () => {
   renderWork<TabsProps>(Tabs)
 
   test('v-model:selectedKey work', async () => {
-    const onUpdateSelectedKey = jest.fn()
-    const onTabClick = jest.fn()
+    const onUpdateSelectedKey = vi.fn()
+    const onTabClick = vi.fn()
     const wrapper = TabsMount({
       props: {
         selectedKey: 'tab1',

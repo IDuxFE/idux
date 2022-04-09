@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Tooltip render work 1`] = `
+exports[`Tooltip > render work 1`] = `
 "<div id=\\"trigger\\">trigger</div>
 <!--teleport start-->
 <!--teleport end-->"

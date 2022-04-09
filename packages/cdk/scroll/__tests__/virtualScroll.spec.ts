@@ -32,11 +32,11 @@ describe('VirtualScroll', () => {
   }
 
   beforeAll(() => {
-    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 200)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 200)
   })
 
   afterAll(() => {
-    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
   })
 
   describe('basic work', () => {
@@ -170,14 +170,6 @@ describe('VirtualScroll', () => {
   })
 
   describe('scroll work', () => {
-    beforeEach(() => {
-      jest.useFakeTimers()
-    })
-
-    afterEach(() => {
-      jest.useRealTimers()
-    })
-
     test('scrollBar show work', async () => {
       const wrapper = VirtualScrollMount({
         props: { dataSource: getData(40) },
@@ -194,6 +186,8 @@ describe('VirtualScroll', () => {
     })
 
     test('scrollTo work', async () => {
+      vi.useFakeTimers()
+
       const wrapper = VirtualScrollMount({
         props: { dataSource: getData(40) },
         slots: { item: defaultItemSlot },
@@ -202,40 +196,41 @@ describe('VirtualScroll', () => {
       expect(wrapper.find('.cdk-virtual-scroll-bar').attributes('style')).toContain('display: none')
 
       wrapper.vm.scrollTo(100)
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(100)
       expect(wrapper.find('.cdk-virtual-scroll-thumb').attributes('style')).not.toContain('display: none')
 
       wrapper.vm.scrollTo({ index: 20, align: 'top' })
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(400)
 
       wrapper.vm.scrollTo({ index: 20, align: 'bottom' })
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(220)
 
       wrapper.vm.scrollTo({ key: 'key-20', align: 'top' })
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(400)
 
       wrapper.vm.scrollTo({ key: 'key-20', align: 'top', offset: 20 })
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(380)
 
       wrapper.vm.scrollTo(9999)
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(600)
 
       wrapper.vm.scrollTo(-1)
-      jest.runAllTimers()
+      vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(0)
+      vi.useRealTimers()
     })
 
     test('moving work', async () => {
@@ -263,7 +258,7 @@ describe('VirtualScroll', () => {
     })
 
     test('onScroll work', async () => {
-      const onScroll = jest.fn()
+      const onScroll = vi.fn()
       const wrapper = VirtualScrollMount({
         props: { dataSource: getData(100) },
         slots: { item: defaultItemSlot },
@@ -287,7 +282,7 @@ describe('VirtualScroll', () => {
       wrapper.find('.cdk-virtual-scroll-holder').trigger('touchmove', { touches: [{ pageY: 80 }] })
       wrapper.find('.cdk-virtual-scroll-holder').trigger('touchend')
       await flushPromises()
-      // todo fix: jest
+      // todo fix: vi
       // expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop >= 20).toBeTruthy()
     })
   })

@@ -26,7 +26,7 @@ describe('Stepper', () => {
   renderWork<StepperProps>(IxStepper, { props: { activeKey: 2 }, slots: { default: () => defaultSlots } })
 
   test('active work', async () => {
-    const onUpdateActiveKey = jest.fn()
+    const onUpdateActiveKey = vi.fn()
     const wrapper = StepperMount({ props: { activeKey: 1, 'onUpdate:activeKey': onUpdateActiveKey } })
 
     expect(wrapper.findAll('.ix-stepper-item')[0].classes()).toContain('ix-stepper-item-active')
@@ -38,7 +38,7 @@ describe('Stepper', () => {
   })
 
   test('clickable work', async () => {
-    const onUpdateActiveKey = jest.fn()
+    const onUpdateActiveKey = vi.fn()
     const wrapper = StepperMount({ props: { activeKey: 1, clickable: true, 'onUpdate:activeKey': onUpdateActiveKey } })
 
     expect(wrapper.findAll('.ix-stepper-item')[0].classes()).toContain('ix-stepper-item-clickable')

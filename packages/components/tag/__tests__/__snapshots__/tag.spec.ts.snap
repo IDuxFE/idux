@@ -1,3 +1,3 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Tag render work 1`] = `"<span class=\\"ix-tag\\"><!----><!----><span class=\\"ix-tag-content\\">test tag</span></span>"`;
+exports[`Tag > render work 1`] = `"<span class=\\"ix-tag\\"><!----><!----><span class=\\"ix-tag-content\\">test tag</span></span>"`;
