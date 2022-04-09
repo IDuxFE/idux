@@ -15,6 +15,7 @@ export const selectorProps = {
   autocomplete: { type: String, required: true },
   autofocus: { type: Boolean, required: true },
   borderless: { type: Boolean, default: undefined },
+  className: { type: String, required: true },
   clearable: { type: Boolean, required: true },
   clearIcon: { type: String, default: undefined },
   config: {

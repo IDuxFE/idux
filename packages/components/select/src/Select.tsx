@@ -118,10 +118,11 @@ export default defineComponent({
     })
 
     const overlayClasses = computed(() => {
-      const { overlayClassName } = props
+      const { overlayClassName, multiple } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [`${prefixCls}-overlay`]: true,
+        [`${prefixCls}-overlay-multiple`]: multiple,
         [overlayClassName || '']: !!overlayClassName,
       })
     })
@@ -154,7 +155,7 @@ export default defineComponent({
       <ɵSelector
         ref={triggerRef}
         v-slots={slots}
-        class={mergedPrefixCls.value}
+        className={mergedPrefixCls.value}
         allowInput={props.allowInput}
         autocomplete={props.autocomplete}
         autofocus={props.autofocus}

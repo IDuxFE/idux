@@ -77,13 +77,13 @@
         color: @form-item-invalid-color;
         border-color: @form-item-invalid-color;
 
-        .@{idux-prefix}-select {
-          &:hover .@{idux-prefix}-select-selector,
-          .@{idux-prefix}-select-selector {
+        .@{selector-prefix} {
+          &:hover &-content,
+          &-content {
             border-color: transparent;
           }
 
-          &.@{idux-prefix}-select-active .@{idux-prefix}-select-selector {
+          &&-active &-content {
             border-color: transparent;
             // todo remove
             box-shadow: none;
@@ -93,13 +93,13 @@
     }
 
     // select
-    .@{idux-prefix}-select:not(.@{idux-prefix}-select-disabled) {
-      &:hover .@{idux-prefix}-select-selector,
-      .@{idux-prefix}-select-selector {
+    .@{selector-prefix}:not(.@{selector-prefix}-disabled) {
+      &:hover .@{selector-prefix}-content,
+      .@{selector-prefix}-content {
         border-color: @form-item-invalid-color;
       }
 
-      &.@{idux-prefix}-select-active .@{idux-prefix}-select-selector {
+      &.@{selector-prefix}-active .@{selector-prefix}-content {
         border-color: @form-item-invalid-color;
         box-shadow: @form-item-invalid-box-shadow;
       }

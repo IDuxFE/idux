@@ -7,7 +7,7 @@
 
 import type { MergedOption } from '../composables/useOptions'
 
-import { defineComponent, inject, onMounted } from 'vue'
+import { computed, defineComponent, inject, onMounted } from 'vue'
 
 import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
@@ -24,6 +24,7 @@ export default defineComponent({
     const {
       props,
       slots,
+      config,
       mergedPrefixCls,
       flattedOptions,
       virtualScrollRef,
@@ -34,7 +35,8 @@ export default defineComponent({
 
     onMounted(() => scrollToActivated())
 
-    const handleChange = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
+    const handleInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
     const handleClear = () => setInputValue('')
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleOptions: MergedOption[]) => {
@@ -55,15 +57,18 @@ export default defineComponent({
       const children = [<ListBox />]
 
       if (props.searchable === 'overlay') {
+        const value = inputValue.value
         children.push(
           <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
             <ɵInput
               clearable
+              clearIcon={mergedClearIcon.value}
+              clearVisible={!!value}
               size="sm"
               suffix="search"
-              value={inputValue.value}
-              onChange={handleChange}
+              value={value}
               onClear={handleClear}
+              onInput={handleInput}
             />
           </div>,
         )

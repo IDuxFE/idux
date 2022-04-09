@@ -46,12 +46,12 @@ export default defineComponent({
       const { clearable, clearIcon, clearVisible, disabled, addonAfter, addonBefore, prefix, suffix, onClear } = props
       const prefixCls = mergedPrefixCls.value
 
-      const addonBeforeNode = renderAddon(slots.addonBefore, addonBefore, `${prefixCls}-addon`)
-      const addonAfterNode = renderAddon(slots.addonAfter, addonAfter, `${prefixCls}-addon`)
-      const prefixNode = renderIcon(slots.prefix, prefix, `${prefixCls}-prefix`)
-      const suffixNode = renderIcon(slots.suffix, suffix, `${prefixCls}-suffix`)
+      const addonBeforeNode = renderAddon(slots.addonBefore, addonBefore, `${prefixCls}-addon`, '__before-addon')
+      const addonAfterNode = renderAddon(slots.addonAfter, addonAfter, `${prefixCls}-addon`, '__before-after')
+      const prefixNode = renderIcon(slots.prefix, prefix, `${prefixCls}-prefix`, '__prefix')
+      const suffixNode = renderIcon(slots.suffix, suffix, `${prefixCls}-suffix`, '__suffix')
       const clearNode = clearable && (
-        <span class={`${prefixCls}-clear${clearVisible ? ' visible' : ''}`} onClick={onClear}>
+        <span key="__clear" class={`${prefixCls}-clear${clearVisible ? ' visible' : ''}`} onClick={onClear}>
           {slots.clearIcon ? slots.clearIcon() : <IxIcon name={clearIcon} />}
         </span>
       )
@@ -88,7 +88,7 @@ export default defineComponent({
       return (
         <span class={classNames} style={style as CSSProperties}>
           {addonBeforeNode}
-          <span class={`${prefixCls}-wrapper`}>
+          <span key="__wrapper" class={`${prefixCls}-wrapper`}>
             {prefixNode}
             {inputNode}
             {suffixNode}
@@ -101,16 +101,24 @@ export default defineComponent({
   },
 })
 
-function renderAddon(slot: Slot | undefined, prop: string | undefined, cls: string) {
+function renderAddon(slot: Slot | undefined, prop: string | undefined, cls: string, key: string) {
   if (!(slot || prop)) {
     return undefined
   }
-  return <span class={cls}>{slot ? slot() : prop}</span>
+  return (
+    <span key={key} class={cls}>
+      {slot ? slot() : prop}
+    </span>
+  )
 }
 
-function renderIcon(slot: Slot | undefined, prop: string | undefined, cls: string) {
+function renderIcon(slot: Slot | undefined, prop: string | undefined, cls: string, key: string) {
   if (!(slot || prop)) {
     return undefined
   }
-  return <span class={cls}>{slot ? slot() : <IxIcon name={prop} />}</span>
+  return (
+    <span key={key} class={cls}>
+      {slot ? slot() : <IxIcon name={prop} />}
+    </span>
+  )
 }

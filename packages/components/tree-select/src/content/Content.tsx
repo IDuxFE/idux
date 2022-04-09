@@ -105,7 +105,8 @@ export default defineComponent({
       }
     }
 
-    const handleChange = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
+    const handleInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
     const handleClear = () => setInputValue('')
 
     const checkable = computed(() => props.multiple && props.checkable)
@@ -208,6 +209,7 @@ export default defineComponent({
       ]
 
       if (searchable === 'overlay') {
+        const value = inputValue.value
         children.unshift(
           <div class={`${prefixCls}-overlay-search-wrapper`}>
             <IxButton
@@ -217,11 +219,13 @@ export default defineComponent({
             />
             <ɵInput
               clearable
+              clearIcon={mergedClearIcon.value}
+              clearVisible={!!value}
               size="sm"
               suffix="search"
-              value={inputValue.value}
-              onChange={handleChange}
+              value={value}
               onClear={handleClear}
+              onInput={handleInput}
             />
           </div>,
         )
