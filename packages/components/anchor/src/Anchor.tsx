@@ -113,15 +113,20 @@ const useInkBall = (activeLink: Ref<string | undefined>, mergedPrefixCls: Comput
   const inkBallTop = ref<string>()
 
   onMounted(() => {
-    watchEffect(() => {
-      const activeLinkElement = anchorRef.value?.querySelector(`a[data-href="${activeLink.value}"]`) as HTMLElement
-      if (!activeLinkElement) {
-        return
-      }
-      const inkBallHeight = inkBallElRef.value?.getBoundingClientRect().height ?? 9
-      const { offsetTop, clientHeight } = activeLinkElement as HTMLElement
-      inkBallTop.value = `${offsetTop + clientHeight / 2 - inkBallHeight / 2}px`
-    })
+    watchEffect(
+      () => {
+        const activeLinkElement = anchorRef.value?.querySelector(`a[data-href="${activeLink.value}"]`) as HTMLElement
+        if (!activeLinkElement) {
+          return
+        }
+        const inkBallHeight = inkBallElRef.value?.getBoundingClientRect().height ?? 9
+        const { offsetTop, clientHeight } = activeLinkElement as HTMLElement
+        inkBallTop.value = `${offsetTop + clientHeight / 2 - inkBallHeight / 2}px`
+      },
+      {
+        flush: 'post',
+      },
+    )
   })
 
   return {
@@ -147,16 +152,24 @@ const getCurrentAnchor = (
   offsetTop: number,
   bounds: number,
 ): string => {
-  const maxSection = links.reduce(
-    (curr, link) => {
+  if (!links.length) {
+    return ''
+  }
+  const maxSection = links
+    .map(link => {
       const top = getTargetTop(link, container)
+      return {
+        link,
+        top,
+      }
+    })
+    .reduce((curr, item) => {
+      const { top } = item
       if (top !== null && top < offsetTop + bounds && curr.top < top) {
-        return { link, top }
+        return item
       }
       return curr
-    },
-    { link: '', top: Number.MIN_SAFE_INTEGER },
-  )
+    })
 
   return maxSection.link
 }

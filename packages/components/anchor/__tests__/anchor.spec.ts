@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 
 import { renderWork, scrollTarget, wait } from '@tests'
 
@@ -91,6 +91,14 @@ describe('Anchor', () => {
     await wait(100)
 
     expect(window.scrollTo).toHaveBeenCalled()
+  })
+
+  test('anchor default active first one', async () => {
+    // fix issue #774
+    const wrapper = mount(TestComponent)
+    await nextTick()
+    const links = wrapper.findAll('.ix-anchor-link')
+    expect(links[0].find('a').classes()).toContain('ix-anchor-link-title-active')
   })
 
   test('register and unregister work', async () => {
