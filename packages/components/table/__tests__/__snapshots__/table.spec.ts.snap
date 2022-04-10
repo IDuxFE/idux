@@ -56,7 +56,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 0
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -82,7 +84,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 1
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -108,7 +112,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 2
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -132,7 +138,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 3
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -158,7 +166,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 4
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -184,7 +194,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 5
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -208,7 +220,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 6
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -234,7 +248,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 7
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -260,7 +276,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 8
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
@@ -284,7 +302,9 @@ exports[`Table > basic work > render work 1`] = `
               <!---->London Park no. 9
             </td>
             <td class=\\"ix-table-align-start\\">
-              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span></span>
+              <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+              <!----></span>
             </td>
             <td class=\\"ix-table-align-start\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>

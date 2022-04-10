@@ -80,6 +80,7 @@ export interface GlobalConfig {
   stepper: StepperConfig
   table: TableConfig
   tag: TagConfig
+  tagGroup: TagGroupConfig
   textarea: TextareaConfig
   timePicker: TimePickerConfig
   timeRangePicker: TimeRangePickerConfig
@@ -415,6 +416,11 @@ export interface TableColumnExpandableConfig {
 
 export interface TagConfig {
   shape?: TagShape
+}
+
+export interface TagGroupConfig {
+  gap: number | string
+  wrap: boolean
 }
 
 export interface TextareaConfig {

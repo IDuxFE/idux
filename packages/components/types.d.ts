@@ -63,7 +63,7 @@ import type { StepperComponent, StepperItemComponent } from '@idux/components/st
 import type { SwitchComponent } from '@idux/components/switch'
 import type { TableColumnComponent, TableComponent } from '@idux/components/table'
 import type { TabComponent, TabsComponent } from '@idux/components/tabs'
-import type { TagComponent } from '@idux/components/tag'
+import type { TagComponent, TagGroupComponent } from '@idux/components/tag'
 import type { TextareaComponent } from '@idux/components/textarea'
 import type { TimePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
@@ -150,6 +150,7 @@ declare module 'vue' {
     IxTableColumn: TableColumnComponent
     IxTabs: TabsComponent
     IxTag: TagComponent
+    IxTagGroup: TagGroupComponent
     IxTextarea: TextareaComponent
     IxTimeline: TimelineComponent
     IxTimelineItem: TimelineItemComponent

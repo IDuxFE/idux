@@ -55,7 +55,7 @@ import { IxStepper, IxStepperItem } from '@idux/components/stepper'
 import { IxSwitch } from '@idux/components/switch'
 import { IxTable, IxTableColumn } from '@idux/components/table'
 import { IxTab, IxTabs } from '@idux/components/tabs'
-import { IxTag } from '@idux/components/tag'
+import { IxTag, IxTagGroup } from '@idux/components/tag'
 import { IxTextarea } from '@idux/components/textarea'
 import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
@@ -146,6 +146,7 @@ const components = [
   IxTab,
   IxTabs,
   IxTag,
+  IxTagGroup,
   IxTextarea,
   IxTimePicker,
   IxTimeRangePicker,
