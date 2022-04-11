@@ -205,7 +205,10 @@ export default defineComponent({
         )
       }
 
-      const suffixProps = { name: mergedSuffix.value, rotate: opened ? 180 : 0 }
+      const suffixProps = {
+        name: mergedSuffix.value,
+        rotate: !mergedSearchable.value && opened ? 180 : 0,
+      }
       const suffixNode = slots.suffix ? slots.suffix(suffixProps) : <IxIcon {...suffixProps} />
       suffixNode &&
         children.push(
