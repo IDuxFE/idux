@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-04-11)
+
+
+### Bug Fixes
+
+* **comp: checkbox-group:** invalid disabled in dataSource ([#827](https://github.com/IDuxFE/idux/issues/827)) ([0f43a09](https://github.com/IDuxFE/idux/commit/0f43a09ab7da5d5f8c52a38e506438ec0764b7f8))
+* **comp: space:** error color value in style ([#832](https://github.com/IDuxFE/idux/issues/832)) ([052aefe](https://github.com/IDuxFE/idux/commit/052aefeff0d6ee69e2e0eccdd359adb87b8f0919))
+* **comp: tree:** Asynchronous loading node hierarchy error ([#838](https://github.com/IDuxFE/idux/issues/838)) ([1e41588](https://github.com/IDuxFE/idux/commit/1e41588937fb23ea3afe5c7d4be3148c8e2045e8)), closes [#835](https://github.com/IDuxFE/idux/issues/835)
+* **comp:anchor:** should default active first item ([#843](https://github.com/IDuxFE/idux/issues/843)) ([84bf725](https://github.com/IDuxFE/idux/commit/84bf72526bd3d4923ceb0455d783d9914205bcde))
+* **comp:input:** update style with selector ([#842](https://github.com/IDuxFE/idux/issues/842)) ([39239be](https://github.com/IDuxFE/idux/commit/39239bee20fd814da8ef13108f20d5ab892e84a1))
+
+
+### Features
+
+* **comp:select:** support setting autocomplete ([#833](https://github.com/IDuxFE/idux/issues/833)) ([583952d](https://github.com/IDuxFE/idux/commit/583952d8859a0cd0944491ead11fa72dac788ec8))
+* **comp:tag-group:** add tagGroup component ([#836](https://github.com/IDuxFE/idux/issues/836)) ([b365f3e](https://github.com/IDuxFE/idux/commit/b365f3e97c9bc94b3542d50045990fb23df0266b))
+
+
+
+
+
 # [1.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-03-27)
 
 
