@@ -113,7 +113,7 @@ exports[`TreeSelect > single work > searchable work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
 </div>
 <!--teleport start-->
