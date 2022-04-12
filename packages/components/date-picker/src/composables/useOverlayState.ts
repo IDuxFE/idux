@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DatePickerProps } from '../types'
+import type { DatePickerProps, DateRangePickerProps } from '../types'
+import type { PickerControlContext } from './useControl'
+import type { PickerRangeControlContext } from './useRangeControl'
 import type { ComputedRef } from 'vue'
 
 import { onMounted } from 'vue'
@@ -17,8 +19,18 @@ export interface OverlayStateContext {
   setOverlayOpened: (open: boolean) => void
 }
 
-export function useOverlayState(props: DatePickerProps): OverlayStateContext {
+export function useOverlayState(
+  props: DatePickerProps | DateRangePickerProps,
+  control: PickerControlContext | PickerRangeControlContext,
+): OverlayStateContext {
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
+
+  const changeOpenedState = (open: boolean) => {
+    setOverlayOpened(open)
+    if (!open) {
+      control.init()
+    }
+  }
 
   onMounted(() => {
     if (props.autofocus) {
@@ -26,5 +38,5 @@ export function useOverlayState(props: DatePickerProps): OverlayStateContext {
     }
   })
 
-  return { overlayOpened, setOverlayOpened }
+  return { overlayOpened, setOverlayOpened: changeOpenedState }
 }

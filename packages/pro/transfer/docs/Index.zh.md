@@ -109,3 +109,18 @@ export interface ProTransferTreeProps {
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `scrollTo` | 滚动到指定位置 | `(isSource: boolean, option?: number \| VirtualScrollToOptions) => void` | 仅在开启 `virtual` 时可用 |
+
+<!--- insert less variable begin  --->
+## 主题变量
+
+| 名称 | `default` | `dark` | 备注 |
+| --- | --- | --- | --- |
+| `@pro-transfer-list-min-width` | `260px` | - | - |
+| `@pro-transfer-list-min-height` | `290px` | - | - |
+| `@pro-transfer-table-close-icon-padding` | `0 0 0 @spacing-md` | - | - |
+| `@pro-transfer-tree-close-icon-padding` | `0 @spacing-md` | - | - |
+| `@pro-transfer-list-close-icon-font-size` | `@font-size-md` | - | - |
+| `@pro-transfer-list-close-icon-color` | `@color-graphite-d20` | - | - |
+| `@pro-transfer-list-close-icon-hover-color` | `@color-primary` | - | - |
+| `@pro-transfer-list-close-icon-active-color` | `@color-primary` | - | - |
+<!--- insert less variable end  --->

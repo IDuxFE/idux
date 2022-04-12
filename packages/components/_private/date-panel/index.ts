@@ -13,4 +13,8 @@ const ɵDatePanel = DatePanel as unknown as DatePanelComponent
 
 export { ɵDatePanel }
 
-export type { DatePanelInstance as ɵDatePanelInstance, DatePanelPublicProps as ɵDatePanelProps } from './src/types'
+export type {
+  DatePanelType as ɵDatePanelType,
+  DatePanelInstance as ɵDatePanelInstance,
+  DatePanelPublicProps as ɵDatePanelProps,
+} from './src/types'

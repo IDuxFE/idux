@@ -47,7 +47,16 @@ export function usePanelScroll(
     }
 
     scrollHandlerLocked = true
-    scrollToTop({ top, target, duration, callback: () => (scrollHandlerLocked = false) })
+    scrollToTop({
+      top,
+      target,
+      duration,
+      callback: () => {
+        setTimeout(() => {
+          scrollHandlerLocked = false
+        }, 100)
+      },
+    })
   }
 
   function scrollToSelected(duration?: number) {

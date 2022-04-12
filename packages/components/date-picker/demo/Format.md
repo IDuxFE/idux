@@ -2,7 +2,7 @@
 title:
   zh: 日期格式
   en: Date format
-order: 4
+order: 3
 ---
 
 ## zh

@@ -1,0 +1,136 @@
+/**
+ * @license
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
+ */
+
+import type { FormatContext } from './useFormat'
+import type { InputEnableStatus } from './useInputEnableStatus'
+import type { DateConfig } from '@idux/components/config'
+
+import { type ComputedRef, computed, watch } from 'vue'
+
+import { convertArray, useState } from '@idux/cdk/utils'
+
+import { convertToDate, sortRangeValue } from '../utils'
+import { type PickerControlContext, useControl } from './useControl'
+
+export interface PickerRangeControlContext {
+  buffer: ComputedRef<(Date | undefined)[] | undefined>
+  panelValue: ComputedRef<(Date | undefined)[] | undefined>
+  isSelecting: ComputedRef<boolean>
+  bufferUpdated: ComputedRef<boolean>
+
+  visiblePanel: ComputedRef<'datePanel' | 'timePanel'>
+  setVisiblePanel: (value: 'datePanel' | 'timePanel') => void
+
+  fromControl: PickerControlContext
+  toControl: PickerControlContext
+
+  init: (force?: boolean) => void
+  handleDatePanelCellClick: (value: Date) => void
+  handleDatePanelCellMouseenter: (value: Date) => void
+}
+
+export function useRangeControl(
+  dateConfig: DateConfig,
+  formatContext: FormatContext,
+  inputEnableStatus: ComputedRef<InputEnableStatus>,
+  valueRef: ComputedRef<(string | number | Date | undefined)[] | undefined>,
+): PickerRangeControlContext {
+  const { formatRef } = formatContext
+  const [buffer, setBuffer] = useState<(Date | undefined)[] | undefined>(
+    convertArray(valueRef.value).map(v => convertToDate(dateConfig, v, formatRef.value)),
+  )
+  const [bufferUpdated, setBufferUpdated] = useState(false)
+  const handleBufferUpdate = (values: (string | number | Date | undefined)[] | undefined) => {
+    setBuffer(getRangeValue(dateConfig, values, formatRef.value))
+    setBufferUpdated(true)
+  }
+
+  const [selectingDate, setSelectingDate] = useState<(Date | undefined)[] | undefined>(buffer.value)
+  const [isSelecting, setIsSelecting] = useState<boolean>(false)
+  const [visiblePanel, setVisiblePanel] = useState<'datePanel' | 'timePanel'>('datePanel')
+
+  const handleVisiblePanelUpdate = (value: 'datePanel' | 'timePanel') => {
+    visiblePanel.value !== value && setVisiblePanel(value)
+    fromControl.visiblePanel.value !== value && fromControl.setVisiblePanel(value)
+    toControl.visiblePanel.value !== value && toControl.setVisiblePanel(value)
+  }
+
+  const rangeValueRef = computed(() => convertArray(buffer.value))
+  const fromDateRef = computed(() => rangeValueRef.value[0])
+  const toDateRef = computed(() => rangeValueRef.value[1])
+
+  const panelValue = computed(() => {
+    if (isSelecting.value) {
+      return sortRangeValue([...convertArray(selectingDate.value)])
+    }
+
+    return sortRangeValue([...convertArray(buffer.value)])
+  })
+
+  watch(valueRef, handleBufferUpdate)
+
+  const fromControl = useControl(dateConfig, formatContext, inputEnableStatus, fromDateRef, value => {
+    handleBufferUpdate([value, buffer.value?.[1]])
+  })
+  const toControl = useControl(dateConfig, formatContext, inputEnableStatus, toDateRef, value => {
+    handleBufferUpdate([buffer.value?.[0], value])
+  })
+
+  watch(fromControl.visiblePanel, handleVisiblePanelUpdate)
+  watch(toControl.visiblePanel, handleVisiblePanelUpdate)
+
+  const init = (force = false) => {
+    handleBufferUpdate(valueRef.value)
+    handleVisiblePanelUpdate('datePanel')
+    setBufferUpdated(false)
+    fromControl.init(force)
+    toControl.init(force)
+  }
+
+  const handleDatePanelCellClick = (value: Date) => {
+    if (!isSelecting.value) {
+      setIsSelecting(true)
+      setSelectingDate([value, undefined])
+    } else {
+      setIsSelecting(false)
+      handleBufferUpdate([selectingDate.value?.[0], value])
+    }
+  }
+
+  const handleDatePanelCellMouseenter = (value: Date) => {
+    if (!isSelecting.value) {
+      return
+    }
+
+    setSelectingDate([selectingDate.value?.[0], value])
+  }
+
+  return {
+    buffer,
+    panelValue,
+    isSelecting,
+    bufferUpdated,
+
+    visiblePanel,
+    setVisiblePanel: handleVisiblePanelUpdate,
+
+    fromControl,
+    toControl,
+
+    init,
+    handleDatePanelCellClick,
+    handleDatePanelCellMouseenter,
+  }
+}
+
+function getRangeValue(
+  dateConfig: DateConfig,
+  values: (string | number | Date | undefined)[] | undefined,
+  format: string,
+) {
+  return convertArray(values).map(v => convertToDate(dateConfig, v, format))
+}

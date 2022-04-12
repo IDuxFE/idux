@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type VNodeTypes, computed, defineComponent, inject } from 'vue'
+import { VNodeChild, computed, defineComponent, inject } from 'vue'
 
 import { convertArray } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
@@ -31,7 +31,7 @@ export default defineComponent({
     const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
 
     return () => {
-      const children: VNodeTypes[] = []
+      const children: VNodeChild[] = []
       if (tableSlots.alert) {
         children.push(<BodyRowSingle>{tableSlots.alert()}</BodyRowSingle>)
       }

@@ -15,7 +15,6 @@ interface TbodyCell {
   key: string
   rowIndex: number
   cellIndex: number
-  isWeek?: boolean
 }
 
 export default defineComponent({
@@ -26,11 +25,10 @@ export default defineComponent({
     const cells = computed(() => {
       const { rowIndex } = props
       const currType = activeType.value
-      const isWeek = currType === 'week'
-      const cells: TbodyCell[] = isWeek ? [{ key: `${currType}-${-1}`, rowIndex, cellIndex: 0, isWeek }] : []
+      const cells: TbodyCell[] = []
       const maxIndex = maxCellIndex.value
       for (let cellIndex = 0; cellIndex < maxIndex; cellIndex++) {
-        cells.push({ key: `${currType}-${cellIndex}`, rowIndex, cellIndex })
+        cells.push({ key: `${currType}-${cellIndex}`, rowIndex: rowIndex!, cellIndex })
       }
       return cells
     })

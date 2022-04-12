@@ -66,9 +66,8 @@ function useTheadCells(
 ) {
   return computed(() => {
     const currType = activeType.value
-    const isWeek = currType === 'week'
-    const cols: TheadCell[] = isWeek ? [{ key: -1 }] : []
-    if (currType === 'date' || isWeek) {
+    const cols: TheadCell[] = []
+    if (currType === 'date' || currType === 'week') {
       const maxIndex = maxCellIndex.value
       const labels = dateConfig.getLocalizedLabels('day', maxIndex, 'narrow')
       const weekStarts = dateConfig.weekStartsOn()

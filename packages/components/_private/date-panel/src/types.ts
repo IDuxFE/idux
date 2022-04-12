@@ -5,19 +5,30 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const datePanelProps = {
-  disabledDate: IxPropTypes.func<(date: Date) => boolean>(),
-  type: IxPropTypes.oneOf<DatePanelType>(['date', 'week', 'month', 'quarter', 'year']).def('date'),
-  value: IxPropTypes.object<Date>(),
-  visible: IxPropTypes.bool,
+  cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
+  disabledDate: Function as PropType<(date: Date) => boolean>,
+  type: {
+    type: String as PropType<DatePanelType>,
+    default: 'date',
+  },
+  value: [Date, Array] as PropType<Date | (Date | undefined)[]>,
+  activeDate: Date,
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  isSelecting: {
+    type: Boolean,
+    default: undefined,
+  },
 
-  onCellClick: IxPropTypes.emit<(date: Date) => void>(),
-  onCellMouseenter: IxPropTypes.emit<(date: Date) => void>(),
+  onCellClick: [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
+  onCellMouseenter: [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
+  'onUpdate:activeDate': [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
 }
 
 export type DatePanelProps = ExtractInnerPropTypes<typeof datePanelProps>
@@ -31,11 +42,19 @@ export type DatePanelType = 'date' | 'week' | 'month' | 'quarter' | 'year'
 
 // private
 export const panelRowProps = {
-  rowIndex: IxPropTypes.number.isRequired,
+  rowIndex: {
+    type: Number,
+    required: true,
+  },
 }
 
 export const panelCellProps = {
-  rowIndex: IxPropTypes.number.isRequired,
-  cellIndex: IxPropTypes.number.isRequired,
-  isWeek: IxPropTypes.bool,
+  rowIndex: {
+    type: Number,
+    required: true,
+  },
+  cellIndex: {
+    type: Number,
+    required: true,
+  },
 }

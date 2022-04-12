@@ -9,7 +9,9 @@ import type { DatePanelType } from '../types'
 
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, convertArray } from '@idux/cdk/utils'
+import { DateConfig } from '@idux/components/config'
+import { IxTooltip } from '@idux/components/tooltip'
 
 import { datePanelToken } from '../token'
 import { panelCellProps } from '../types'
@@ -40,17 +42,22 @@ export default defineComponent({
       maxCellIndex,
     } = inject(datePanelToken)!
 
-    const offsetIndex = computed(() => props.rowIndex * maxCellIndex.value + props.cellIndex)
+    const offsetIndex = computed(() => props.rowIndex! * maxCellIndex.value + props.cellIndex!)
     const cellDate = computed(() => {
       const currType = activeType.value
       const offsetUnit = dayTypes.includes(currType) ? 'day' : currType
       return dateConfig.add(startActiveDate.value, offsetIndex.value, offsetUnit as 'day')
     })
+
+    const startDate = computed(() => getDateValue(dateConfig, panelProps.value, activeType.value, true))
+    const endDate = computed(() => getDateValue(dateConfig, panelProps.value, activeType.value, false))
+
     const isDisabled = computed(() => panelProps.disabledDate?.(cellDate.value))
-    const isSelected = computed(() => {
-      const currValue = panelProps.value
-      return currValue && dateConfig.isSame(currValue, cellDate.value, activeType.value)
-    })
+    const cellTooltip = computed(() =>
+      panelProps.cellTooltip?.({ value: cellDate.value, disabled: !!isDisabled.value }),
+    )
+    const isStart = computed(() => startDate.value && dateConfig.isSame(startDate.value, cellDate.value, 'date'))
+    const isEnd = computed(() => endDate.value && dateConfig.isSame(endDate.value, cellDate.value, 'date'))
     const isToday = computed(
       () => dayTypes.includes(activeType.value) && dateConfig.isSame(cellDate.value, dateConfig.now(), 'day'),
     )
@@ -65,22 +72,46 @@ export default defineComponent({
       }
       return false
     })
+    const isSelected = computed(() => {
+      if (outView.value) {
+        return false
+      }
+
+      const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
+
+      if (panelProps.isSelecting) {
+        return startDate.value && dateConfig.isSame(startDate.value, cellDate.value, compareType)
+      }
+
+      return (
+        (startDate.value && dateConfig.isSame(startDate.value, cellDate.value, compareType)) ||
+        (endDate.value && dateConfig.isSame(endDate.value, cellDate.value, compareType))
+      )
+    })
+    const isInRange = computed(() => {
+      const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
+      const cellDateValue = dateConfig.startOf(cellDate.value, compareType).valueOf()
+
+      return (
+        !!startDate.value &&
+        !!endDate.value &&
+        cellDateValue >= dateConfig.startOf(startDate.value, compareType).valueOf() &&
+        cellDateValue <= dateConfig.startOf(endDate.value, compareType).valueOf()
+      )
+    })
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-cell`
-      if (props.isWeek) {
-        return normalizeClass({
-          [prefixCls]: true,
-          [`${prefixCls}-selected`]: isSelected.value,
-          [`${prefixCls}-week-number`]: true,
-        })
-      }
+
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-selected`]: isSelected.value,
+        [`${prefixCls}-in-range`]: isInRange.value,
         [`${prefixCls}-today`]: isToday.value,
         [`${prefixCls}-out-view`]: outView.value,
+        [`${prefixCls}-start`]: isStart.value,
+        [`${prefixCls}-end`]: isEnd.value,
       })
     })
 
@@ -102,16 +133,11 @@ export default defineComponent({
     return () => {
       const currDate = cellDate.value
       const { format } = dateConfig
-      if (props.isWeek) {
-        return (
-          <td class={classes.value} role="gridcell">
-            {format(currDate, 'ww')}
-          </td>
-        )
-      }
 
       const cellNode = slots.cell?.({ date: currDate }) ?? (
-        <div class={`${mergedPrefixCls.value}-cell-inner`}>{format(currDate, labelFormat[activeType.value])}</div>
+        <div class={`${mergedPrefixCls.value}-cell-inner`}>
+          <div class={`${mergedPrefixCls.value}-cell-trigger`}>{format(currDate, labelFormat[activeType.value])}</div>
+        </div>
       )
       return (
         <td
@@ -120,9 +146,23 @@ export default defineComponent({
           onClick={isDisabled.value ? undefined : handleClick}
           onMouseenter={isDisabled.value ? undefined : handleMouseenter}
         >
-          {cellNode}
+          {cellTooltip.value ? <IxTooltip title={cellTooltip.value}>{cellNode}</IxTooltip> : cellNode}
         </td>
       )
     }
   },
 })
+
+function getDateValue(
+  dateConfig: DateConfig,
+  value: Date | (Date | undefined)[] | undefined,
+  type: DatePanelType,
+  isStart: boolean,
+) {
+  const valueArr = convertArray(value)
+  if (type === 'week') {
+    return isStart ? dateConfig.startOf(valueArr[0], 'week') : dateConfig.endOf(valueArr[1] ?? valueArr[0], 'week')
+  }
+
+  return valueArr[isStart ? 0 : 1]
+}

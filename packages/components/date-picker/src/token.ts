@@ -7,28 +7,48 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { InputStateContext } from './composables/useInputState'
+// import type { InputStateContext } from './composables/useInputState'
+import type { PickerControlContext } from './composables/useControl'
+import type { FormatContext } from './composables/useFormat'
+import type { InputEnableStatus } from './composables/useInputEnableStatus'
 import type { OverlayStateContext } from './composables/useOverlayState'
-import type { PanelStateContext } from './composables/usePanelState'
-import type { DatePickerProps } from './types'
-import type { FocusMonitor } from '@idux/cdk/a11y'
-import type { ValueAccessor } from '@idux/cdk/forms'
+// import type { PanelStateContext } from './composables/usePanelState'
+import type { PickerStateContext } from './composables/usePickerState'
+import type { PickerRangeControlContext } from './composables/useRangeControl'
+import type { DatePickerProps, DateRangePickerProps } from './types'
 import type { DateConfig, DatePickerConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
 
-export interface DataPickerContext extends InputStateContext, OverlayStateContext, PanelStateContext {
+export interface DataPickerContext extends OverlayStateContext, FormatContext, PickerStateContext<DatePickerProps> {
   props: DatePickerProps
   slots: Slots
   locale: Locale
   config: DatePickerConfig
   mergedPrefixCls: ComputedRef<string>
   dateConfig: DateConfig
-  focusMonitor: FocusMonitor
   inputRef: Ref<HTMLInputElement | undefined>
-  format: ComputedRef<string>
-  accessor: ValueAccessor
-  handlePanelCellClick: (date: Date) => void
+  inputEnableStatus: ComputedRef<InputEnableStatus>
+  controlContext: PickerControlContext
+  handleKeyDown: (evt: KeyboardEvent) => void
+}
+
+export interface DateRangePickerContext
+  extends OverlayStateContext,
+    FormatContext,
+    PickerStateContext<DateRangePickerProps> {
+  props: DateRangePickerProps
+  slots: Slots
+  locale: Locale
+  config: DatePickerConfig
+  mergedPrefixCls: ComputedRef<string>
+  dateConfig: DateConfig
+  inputRef: Ref<HTMLInputElement | undefined>
+  inputEnableStatus: ComputedRef<InputEnableStatus>
+  rangeControlContext: PickerRangeControlContext
+  renderSeparator: () => VNodeTypes
+  handleKeyDown: (evt: KeyboardEvent) => void
 }
 
 export const datePickerToken: InjectionKey<DataPickerContext> = Symbol('datePickerToken')
+export const dateRangePickerToken: InjectionKey<DateRangePickerContext> = Symbol('dateRangePickerToken')

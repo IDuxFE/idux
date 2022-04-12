@@ -235,4 +235,6 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `@table-icon-margin` | `@spacing-xs` | - | - |
 | `@table-expandable-icon-size` | `@font-size-md` | - | - |
 | `@table-expandable-icon-color` | `@color-black` | - | - |
+| `@table-sticky-scroll-bar-background` | `fade(#000, 35%)` | - | - |
+| `@table-sticky-scroll-bar-radius` | `4px` | - | - |
 <!--- insert less variable end  --->

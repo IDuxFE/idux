@@ -33,6 +33,7 @@ const zhCN: Locale = {
     quarterPlaceholder: '请选择季度',
     monthPlaceholder: '请选择月份',
     weekPlaceholder: '请选择周',
+    datetimePlaceholder: '请选择日期时间',
   },
   dateRangePicker: {
     datePlaceholder: ['开始日期', '结束日期'],
@@ -40,6 +41,10 @@ const zhCN: Locale = {
     monthPlaceholder: ['开始月份', '结束月份'],
     quarterPlaceholder: ['开始季度', '结束季度'],
     yearPlaceholder: ['开始年份', '结束年份'],
+    datetimePlaceholder: ['开始时间', '结束时间'],
+    separator: '至',
+    okText: '确定',
+    cancelText: '取消',
   },
   empty: {
     description: '暂无数据',

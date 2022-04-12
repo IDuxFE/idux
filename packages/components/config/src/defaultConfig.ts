@@ -68,15 +68,12 @@ export const defaultConfig: GlobalConfig = {
     ghost: false,
   },
   datePicker: {
-    allowInput: true,
+    allowInput: false,
     borderless: false,
     clearable: false,
     clearIcon: 'close-circle',
     size: 'md',
     suffix: 'calendar',
-  },
-  dateRangePicker: {
-    separator: 'swap-right',
   },
   divider: {
     dashed: false,
@@ -289,7 +286,7 @@ export const defaultConfig: GlobalConfig = {
     clearIcon: 'close-circle',
     size: 'md',
     suffix: 'clock-circle',
-    allowInput: true,
+    allowInput: false,
     format: 'HH:mm:ss',
   },
   timeRangePicker: {
@@ -298,7 +295,7 @@ export const defaultConfig: GlobalConfig = {
     clearIcon: 'close-circle',
     size: 'md',
     suffix: 'clock-circle',
-    allowInput: true,
+    allowInput: false,
     format: 'HH:mm:ss',
   },
   transfer: {

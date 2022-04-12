@@ -5,43 +5,82 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { TimePickerProps } from '@idux/components/time-picker'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeTypes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { IxPropTypes } from '@idux/cdk/utils'
+import { ɵFooterTypeDef } from '@idux/components/_private/footer'
+
+export interface TimePanelOptions {
+  disabledHours?: (selectedAmPm: string) => number[]
+  disabledMinutes?: (selectedHour: number, selectedAmPm: string) => number[]
+  disabledSeconds?: (selectedHour: number, selectedMinute: number, selectedAmPm: string) => number[]
+  hideDisabledOptions?: boolean
+  hourStep?: number
+  minuteStep?: number
+  secondStep?: number
+  hourEnabled?: boolean
+  minuteEnabled?: boolean
+  secondEnabled?: boolean
+  use12Hours?: boolean
+}
 
 const datePickerCommonProps = {
   control: controlPropDef,
-  open: IxPropTypes.bool,
+  cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
+  open: {
+    type: Boolean,
+    default: undefined,
+  },
 
-  allowInput: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]),
-  autofocus: IxPropTypes.bool.def(false),
-  borderless: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
-  disabled: IxPropTypes.bool.def(false),
-  disabledDate: IxPropTypes.func<(date: Date) => boolean>(),
-  format: IxPropTypes.string,
-  overlayClassName: IxPropTypes.string,
-  overlayContainer: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
-  overlayRender: IxPropTypes.func<(children: VNode[]) => VNodeTypes>(),
-  readonly: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
+  allowInput: {
+    type: [Boolean, String] as PropType<boolean | 'overlay'>,
+    default: undefined,
+  },
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearable: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearIcon: String,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  disabledDate: Function as PropType<(date: Date) => boolean>,
+  format: String,
+  dateFormat: String,
+  timeFormat: String,
+  overlayClassName: String,
+  // overlayContainer: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
+  overlayContainer: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+  overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
+  readonly: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  size: String as PropType<FormSize>,
+  suffix: String,
+  type: {
+    type: String as PropType<DatePickerType>,
+    default: 'date',
+  },
   target: ɵPortalTargetDef,
-  type: IxPropTypes.oneOf<DatePickerType>(['date', 'week', 'month', 'quarter', 'year']).def('date'),
 
   // events
-  'onUpdate:open': IxPropTypes.emit<(isOpen: boolean) => void>(),
-  onClear: IxPropTypes.emit<(evt: MouseEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  'onUpdate:open': [Function, Array] as PropType<MaybeArray<(isOpen: boolean) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 }
 
 export type DatePickerCommonProps = ExtractInnerPropTypes<typeof datePickerCommonProps>
@@ -53,14 +92,14 @@ export interface DatePickerCommonBindings {
 export const datePickerProps = {
   ...datePickerCommonProps,
 
-  value: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
-  defaultOpenValue: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
-  placeholder: IxPropTypes.string,
-  timePicker: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TimePickerProps>()]),
-
-  'onUpdate:value': IxPropTypes.emit<(value: Date) => void>(),
-  onChange: IxPropTypes.emit<(value: Date, oldValue: Date) => void>(),
-  onInput: IxPropTypes.emit<(evt: Event) => void>(),
+  value: [String, Date, Number],
+  defaultOpenValue: [String, Date, Number],
+  footer: { type: ɵFooterTypeDef, default: false },
+  placeholder: String,
+  timePanelOptions: Object as PropType<TimePanelOptions>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
+  onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
 }
 
 export type DatePickerProps = ExtractInnerPropTypes<typeof datePickerProps>
@@ -74,17 +113,17 @@ export type DatePickerInstance = InstanceType<DefineComponent<DatePickerProps, D
 export const dateRangePickerProps = {
   ...datePickerCommonProps,
 
-  value: IxPropTypes.array<number | string | Date>(),
-  defaultOpenValue: IxPropTypes.array<number | string | Date>(),
-  placeholder: IxPropTypes.arrayOf(String),
-  separator: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  timePicker: IxPropTypes.oneOfType([
-    Boolean,
-    IxPropTypes.object<TimePickerProps>(),
-    IxPropTypes.array<TimePickerProps>(),
-  ]),
-
-  'onUpdate:value': IxPropTypes.emit<(value: any[]) => void>(),
+  value: Array as PropType<(number | string | Date | undefined)[]>,
+  defaultOpenValue: Array as PropType<(number | string | Date)[]>,
+  footer: { type: ɵFooterTypeDef, default: true },
+  placeholder: Array as PropType<string[]>,
+  separator: [String, Object] as PropType<string | VNode>,
+  timePanelOptions: [Object, Array] as PropType<TimePanelOptions | TimePanelOptions[]>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
+  onChange: [Function, Array] as PropType<
+    MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
+  >,
+  onInput: [Function, Array] as PropType<MaybeArray<(isFrom: boolean, evt: Event) => void>>,
 }
 
 export type DateRangePickerProps = ExtractInnerPropTypes<typeof dateRangePickerProps>
@@ -95,16 +134,4 @@ export type DateRangePickerComponent = DefineComponent<
 >
 export type DateRangePickerInstance = InstanceType<DefineComponent<DateRangePickerProps, DatePickerCommonBindings>>
 
-export type DatePickerType = 'date' | 'week' | 'month' | 'quarter' | 'year'
-
-// private
-
-export const panelRowProps = {
-  rowIndex: IxPropTypes.number.isRequired,
-}
-
-export const panelCellProps = {
-  rowIndex: IxPropTypes.number.isRequired,
-  cellIndex: IxPropTypes.number.isRequired,
-  isWeek: IxPropTypes.bool,
-}
+export type DatePickerType = 'date' | 'week' | 'month' | 'quarter' | 'year' | 'datetime'

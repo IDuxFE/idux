@@ -30,6 +30,7 @@ export interface DatePickerLocale {
   monthPlaceholder: string
   quarterPlaceholder: string
   yearPlaceholder: string
+  datetimePlaceholder: string
 }
 
 export interface DateRangePickerLocale {
@@ -38,6 +39,10 @@ export interface DateRangePickerLocale {
   monthPlaceholder: [string, string]
   quarterPlaceholder: [string, string]
   yearPlaceholder: [string, string]
+  datetimePlaceholder: [string, string]
+  separator: string
+  okText: string
+  cancelText: string
 }
 
 export interface EmptyLocale {

@@ -117,15 +117,15 @@ describe('usePanelScroll', () => {
     props.visible = false
     await wait()
     props.visible = true
-    await wait(300)
+    await wait(400)
     expect(wrapper.element.scrollTop).toBe(cellHeight)
 
     props.selectedValue = 3
-    await wait(300)
+    await wait(400)
     expect(wrapper.element.scrollTop).toBe(2 * cellHeight)
 
     props.selectedValue = 1
-    await wait(300)
+    await wait(400)
     expect(wrapper.element.scrollTop).toBe(0)
   })
 
