@@ -23,5 +23,6 @@ export type {
   ColComponent,
   ColPublicProps as ColProps,
   RowAlign,
+  RowGutter,
   RowJustify,
 } from './src/types'

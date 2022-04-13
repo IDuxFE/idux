@@ -25,8 +25,10 @@
   "author": "IDuxFE<idux.feteam@gmail.com>",
   "main": "./index.js",
   "module": "./index.js",
-  "typings": ".index.d.ts",
+  "typings": "./index.d.ts",
   "style": "./default.css",
+  "unpkg": "./index.full.js",
+  "jsdelivr": "./index.full.js",
   "bin": {
     "idux": "bin.js"
   },

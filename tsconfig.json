@@ -15,7 +15,7 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "removeComments": true,
+    "removeComments": false,
     "strict": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,

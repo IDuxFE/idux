@@ -12,6 +12,7 @@ import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes } 
 
 export type RowAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
 export type RowJustify = 'start' | 'center' | 'end' | 'space-around' | 'space-between'
+export type RowGutter = number | string | Array<number | string> | Partial<Record<BreakpointKey, number | string>>
 
 export const rowProps = {
   align: IxPropTypes.oneOf<RowAlign>(['start', 'center', 'end', 'baseline', 'stretch']),

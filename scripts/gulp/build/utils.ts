@@ -1,12 +1,12 @@
 import { join } from 'path'
 
+// import { Extractor, ExtractorConfig } from '@microsoft/api-extractor'
 import { copy, copyFile, readJSON, readdir, statSync, writeFile } from 'fs-extra'
 import { TaskFunction } from 'gulp'
 import { OutputOptions, rollup } from 'rollup'
 
-// import { Extractor, ExtractorConfig, ExtractorResult } from '@microsoft/api-extractor'
 import { compileLess } from './less'
-import { getRollupOptions } from './rollup.config'
+import { getRollupDeclarationOptions, getRollupFullOptions, getRollupSingleOptions } from './rollup'
 
 export const complete = (taskName: string): TaskFunction => {
   const complete: TaskFunction = done => {
@@ -30,12 +30,12 @@ const writePackageJson = (distDirname: string, packageName: string, compName: st
     join(distDirname, compName, 'package.json'),
     `{
   "name": "@idux/${packageName}/${compName}",
-  "main": "index.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "style": "./style/themes/default.css",
   "sideEffects": false
-}
-`,
+}`,
   )
 }
 
@@ -60,7 +60,7 @@ export const buildPackage = (options: Options): TaskFunction => {
     await Promise.all(dirs)
 
     const outputs = components.map(async compName => {
-      const { output, ...inputOptions } = getRollupOptions({ targetDirname, distDirname, packageName, compName })
+      const { output, ...inputOptions } = getRollupSingleOptions({ targetDirname, distDirname, packageName, compName })
       const bundle = await rollup(inputOptions)
       await bundle.write(output as OutputOptions)
       return writePackageJson(distDirname, packageName, compName)
@@ -72,93 +72,100 @@ export const buildPackage = (options: Options): TaskFunction => {
   return buildPackage
 }
 
-// rollup 打包 Index, 同时生成声明文件
+// rollup 打包 Index
 export const buildIndex = (options: Options): TaskFunction => {
   const buildIndex: TaskFunction = async done => {
-    const { output, ...inputOptions } = getRollupOptions(options)
+    const { output, ...inputOptions } = getRollupSingleOptions(options)
     const bundle = await rollup(inputOptions)
     await bundle.write(output as OutputOptions)
     done()
-    console.log(`Index built successfully`)
   }
   return buildIndex
 }
 
-/**
- * TODO: Merge declaration files
- * Error: The expression contains an import() type, which is not yet supported by API Extractor
- * See: https://github.com/microsoft/rushstack/issues/2140, https://github.com/microsoft/rushstack/issues/1050
- */
+// rollup 打包 Index
+export const buildFullIndex = (options: Options): TaskFunction => {
+  const buildIndex: TaskFunction = async done => {
+    const { output: fullOutput, ...inputFullOptions } = getRollupFullOptions(options)
+    const fullBundle = await rollup(inputFullOptions)
+    await fullBundle.write(fullOutput as OutputOptions)
+    done()
+  }
+  return buildIndex
+}
 
-// const apiExtractor = `{
+export const buildDeclaration = (options: Options): TaskFunction => {
+  const buildDeclaration: TaskFunction = async done => {
+    const { output, ...inputOptions } = getRollupDeclarationOptions(options)
+    const bundle = await rollup(inputOptions)
+    await bundle.write(output as OutputOptions)
+    done()
+  }
+  return buildDeclaration
+}
+
+// const extractorConfigFileName = 'api-extractor.json'
+// const extractorConfigTemplate = `{
 //   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
 //   "mainEntryPointFilePath": "./index.d.ts",
 //   "dtsRollup": {
 //     "enabled": true,
-//     "publicTrimmedFilePath": "./index.d.ts"
+//     "publicTrimmedFilePath": "./index.d.ts",
 //   },
 //   "apiReport": {
 //     "enabled": false
 //   },
 //   "docModel": {
 //     "enabled": false
-//   }
+//   },
+//   "tsdocMetadata": {
+//     "enabled": false
+//   },
+//   "compiler": {
+//     "skipLibCheck": true
+//   },
 // }`
 
 // // api-extractor 整理 .d.ts 文件
-// const apiExtractorGenerate = async (dirname: string) => {
-//   const extractorFileName = 'api-extractor.json'
-//   const extractorDirname = join(dirname, extractorFileName)
-//   await writeFile(extractorDirname, apiExtractor)
+// const apiExtractorGenerate = async (path: string) => {
+//   const extractorConfigPath = join(path, extractorConfigFileName)
+//   await writeFile(extractorConfigPath, extractorConfigTemplate)
 
-//   const apiExtractorJsonPath = join(extractorDirname)
-//   const extractorConfig: ExtractorConfig = await ExtractorConfig.loadFileAndPrepare(apiExtractorJsonPath)
-
-//   await remove(extractorDirname)
-
-//   const isExist: boolean = await pathExists(extractorConfig.mainEntryPointFilePath)
-
-//   if (!isExist) {
-//     console.error(`API Extractor not find ${dirname} index.d.ts`)
-//     return
-//   }
-
-//   const extractorResult: ExtractorResult = await Extractor.invoke(extractorConfig, { localBuild: true })
+//   const extractorConfig = await ExtractorConfig.loadFileAndPrepare(extractorConfigPath)
+//   const extractorResult = await Extractor.invoke(extractorConfig, { localBuild: false })
 
 //   if (extractorResult.succeeded) {
-//     // 删除多余的文件
-//     const distFiles: string[] = await readdir(dirname)
-//     distFiles.forEach(async file => {
-//       if (!file.includes('index')) {
-//         await remove(join(dirname, file))
-//       }
-//     })
 //     console.log('API Extractor completed successfully')
 //   } else {
 //     console.error(
 //       `API Extractor completed with ${extractorResult.errorCount} errors` +
 //         ` and ${extractorResult.warningCount} warnings`,
 //     )
+//     process.exitCode = 1
 //   }
 // }
 
 export const moveDeclaration = (declarationDirname: string): TaskFunction => {
+  // const filterDirnames = ['_private', 'node_modules', 'style']
   const moveDeclaration: TaskFunction = async done => {
     const declarations = await readdir(declarationDirname)
-
     await Promise.all(
       declarations.map(async packageName => {
         const packageDirname = join(declarationDirname, packageName)
         const components = await readdir(packageDirname)
         return Promise.all(
-          components.map(async componentName => {
-            const srcDirname = join(packageDirname, componentName)
-            const destDirname = join(declarationDirname, '..', packageName, componentName)
-            // if (statSync(srcDirname).isDirectory()) {
-            //   await apiExtractorGenerate(srcDirname)
-            // }
-            return await copy(srcDirname, destDirname)
-          }),
+          components
+            .filter(componentName => componentName !== 'temp.js')
+            .map(async componentName => {
+              const srcDirname = join(packageDirname, componentName)
+              const destDirname = join(declarationDirname, '..', packageName, componentName)
+              // // 跳过合并类型声明
+              // if (!filterDirnames.includes(componentName) && statSync(srcDirname).isDirectory()) {
+              //   await apiExtractorGenerate(srcDirname)
+              //   return await copyFile(join(srcDirname, 'index.d.ts'), join(destDirname, 'index.d.ts'))
+              // }
+              return await copy(srcDirname, destDirname)
+            }),
         )
       }),
     )
@@ -168,18 +175,9 @@ export const moveDeclaration = (declarationDirname: string): TaskFunction => {
   return moveDeclaration
 }
 
-export const buildStyle = (targetDirname: string, distDirname: string, isCdk: boolean): TaskFunction => {
-  const buildStyle: TaskFunction = async done => {
-    await compileLess(targetDirname, distDirname, isCdk)
-    done()
-    console.log(`Style built successfully`)
-  }
-  return buildStyle
-}
-
 export const copyPackageFiles = (distDirname: string, projectRoot: string, packageRoot: string): TaskFunction => {
   const copyPackageFiles: TaskFunction = async done => {
-    const filterPackages = ['site']
+    const filterPackages = ['site', 'packages']
     const packages = await readdir(distDirname)
     packages
       .filter(packageName => !filterPackages.includes(packageName))
@@ -197,7 +195,7 @@ export const copyPackageFiles = (distDirname: string, projectRoot: string, packa
 
 export const syncVersion = (distDirname: string): TaskFunction => {
   const syncVersion: TaskFunction = async done => {
-    const filterPackages = ['site']
+    const filterPackages = ['site', 'packages']
     const packages = await readdir(distDirname)
     packages
       .filter(packageName => !filterPackages.includes(packageName))
@@ -211,4 +209,12 @@ export const syncVersion = (distDirname: string): TaskFunction => {
     done()
   }
   return syncVersion
+}
+
+export const buildStyle = (targetDirname: string, distDirname: string, isCdk: boolean): TaskFunction => {
+  const buildStyle: TaskFunction = async done => {
+    await compileLess(targetDirname, distDirname, isCdk)
+    done()
+  }
+  return buildStyle
 }

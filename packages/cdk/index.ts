@@ -28,7 +28,19 @@ const install = (app: App): void => {
   })
 }
 
-export default {
-  install,
-  version,
-}
+const installer = { install, version }
+
+export default installer
+export { install, version }
+
+export * from '@idux/cdk/a11y'
+export * from '@idux/cdk/breakpoint'
+export * from '@idux/cdk/click-outside'
+export * from '@idux/cdk/clipboard'
+export * from '@idux/cdk/forms'
+export * from '@idux/cdk/platform'
+export * from '@idux/cdk/popper'
+export * from '@idux/cdk/portal'
+export * from '@idux/cdk/scroll'
+export * from '@idux/cdk/utils'
+export * from '@idux/cdk/version'
