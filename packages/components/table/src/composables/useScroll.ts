@@ -34,7 +34,7 @@ export function useScroll(
     () => convertCssPixel(props.scroll?.height || props.scroll?.y) || (autoHeight.value ? 'auto' : ''),
   )
 
-  const scrollBarSize = computed(() => (props.virtual ? 0 : getScrollBarSize(convertElement(scrollBodyRef))))
+  const scrollBarSize = computed(() => getScrollBarSize(convertElement(scrollBodyRef)))
   const scrollBarSizeOnFixedHolder = computed(() => (isSticky.value ? 0 : scrollHeight.value ? scrollBarSize.value : 0))
 
   const scrollTo: VirtualScrollToFn = options => {

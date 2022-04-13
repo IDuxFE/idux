@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComponentPublicInstance, type WatchStopHandle, computed, defineComponent, provide, ref, watch } from 'vue'
+import { type ComponentPublicInstance, computed, defineComponent, provide, ref, watch } from 'vue'
 
 import { callEmit, useState } from '@idux/cdk/utils'
 
@@ -15,10 +15,8 @@ import { useOriginScroll } from './composables/useOriginScroll'
 import { useScrollPlacement } from './composables/useScrollPlacement'
 import { useScrollState } from './composables/useScrollState'
 import { useScrollTo } from './composables/useScrollTo'
-import { useScrollVisible } from './composables/useScrollVisible'
 import Holder from './contents/Holder'
 import Item from './contents/Item'
-import ScrollBar from './contents/ScrollBar'
 import { virtualScrollToken } from './token'
 import { virtualListProps } from './types'
 
@@ -34,7 +32,6 @@ export default defineComponent({
     const fillerRef = ref<HTMLElement>()
 
     const [scrollTop, changeScrollTop] = useState(0)
-    const [scrollMoving, changeScrollMoving] = useState(false)
     const { scrollHeight, scrollOffset, startIndex, endIndex } = useScrollState(
       props,
       fillerRef,
@@ -44,7 +41,7 @@ export default defineComponent({
       heightsUpdateMark,
       heights,
     )
-    const { scrollVisible, setScrollVisible } = useScrollVisible(props, scrollHeight)
+
     const { scrolledTop, scrolledBottom, syncScrollTop } = useScrollPlacement(
       props,
       holderRef,
@@ -64,46 +61,15 @@ export default defineComponent({
       scrollTop,
       scrollHeight,
       scrollOffset,
-      scrollVisible,
-      setScrollVisible,
-      scrollMoving,
-      changeScrollMoving,
       syncScrollTop,
       originScroll,
     })
 
-    const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, setScrollVisible, syncScrollTop)
+    const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, syncScrollTop)
     expose({ scrollTo })
 
     const mergedData = computed(() => props.dataSource.slice(startIndex.value, endIndex.value + 1))
     watch(mergedData, data => callEmit(props.onScrolledChange, startIndex.value, endIndex.value, data))
-
-    let stopWatchScrollMoving: WatchStopHandle | undefined
-
-    const clearWatch = () => {
-      if (stopWatchScrollMoving) {
-        stopWatchScrollMoving()
-        stopWatchScrollMoving = undefined
-      }
-    }
-
-    const handleMouseEnter = () => {
-      clearWatch()
-      if (!scrollMoving.value) {
-        setScrollVisible(true)
-      }
-    }
-
-    const handleMouseLeave = () => {
-      clearWatch()
-      if (!scrollMoving.value) {
-        setScrollVisible(false)
-      } else {
-        stopWatchScrollMoving = watch(scrollMoving, () => {
-          setScrollVisible(false)
-        })
-      }
-    }
 
     return () => {
       const getKeyFn = getKey.value
@@ -119,14 +85,8 @@ export default defineComponent({
       })
 
       return (
-        <div
-          class="cdk-virtual-scroll"
-          style={{ position: 'relative' }}
-          onMouseenter={handleMouseEnter}
-          onMouseleave={handleMouseLeave}
-        >
+        <div class="cdk-virtual-scroll" style={{ position: 'relative' }}>
           <Holder>{children}</Holder>
-          {useVirtual.value && <ScrollBar />}
         </div>
       )
     }

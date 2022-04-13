@@ -170,21 +170,6 @@ describe('VirtualScroll', () => {
   })
 
   describe('scroll work', () => {
-    test('scrollBar show work', async () => {
-      const wrapper = VirtualScrollMount({
-        props: { dataSource: getData(40) },
-        slots: { item: defaultItemSlot },
-      })
-
-      await wrapper.trigger('mouseenter')
-
-      expect(wrapper.find('.cdk-virtual-scroll-bar').isVisible()).toBe(true)
-
-      await wrapper.trigger('mouseleave')
-
-      expect(wrapper.find('.cdk-virtual-scroll-bar').isVisible()).toBe(false)
-    })
-
     test('scrollTo work', async () => {
       vi.useFakeTimers()
 
@@ -193,13 +178,11 @@ describe('VirtualScroll', () => {
         slots: { item: defaultItemSlot },
       })
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(0)
-      expect(wrapper.find('.cdk-virtual-scroll-bar').attributes('style')).toContain('display: none')
 
       wrapper.vm.scrollTo(100)
       vi.runAllTimers()
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(100)
-      expect(wrapper.find('.cdk-virtual-scroll-thumb').attributes('style')).not.toContain('display: none')
 
       wrapper.vm.scrollTo({ index: 20, align: 'top' })
       vi.runAllTimers()
@@ -231,30 +214,6 @@ describe('VirtualScroll', () => {
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(0)
       vi.useRealTimers()
-    })
-
-    test('moving work', async () => {
-      const wrapper = VirtualScrollMount({
-        props: { dataSource: getData(100) },
-        slots: { item: defaultItemSlot },
-      })
-
-      wrapper.find('.cdk-virtual-scroll-thumb').trigger('mousedown', { pageY: 0 })
-
-      const mouseMoveEvent = new Event('mousemove') as MouseEvent
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(mouseMoveEvent as any).pageY = 10
-      window.dispatchEvent(mouseMoveEvent)
-      await flushPromises()
-
-      expect(wrapper.find('.cdk-virtual-scroll-holder').attributes('style')).toContain('pointer-events: none')
-
-      await flushPromises()
-      expect(wrapper.find('.cdk-virtual-scroll-holder').element.scrollTop).toEqual(100)
-
-      const mouseUpEvent = new Event('mouseup') as MouseEvent
-      window.dispatchEvent(mouseUpEvent)
-      await flushPromises()
     })
 
     test('onScroll work', async () => {

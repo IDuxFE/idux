@@ -28,7 +28,6 @@ export default defineComponent({
       scrollHeight,
       scrollOffset,
       scrollTop,
-      scrollMoving,
       syncScrollTop,
       originScroll,
     } = inject(virtualScrollToken)!
@@ -40,9 +39,8 @@ export default defineComponent({
       }
       return {
         [fullHeight ? 'height' : 'maxHeight']: height + 'px',
-        overflowY: useVirtual.value ? 'hidden' : 'auto',
+        overflow: 'auto',
         overflowAnchor: 'none',
-        pointerEvents: useVirtual.value && scrollMoving.value ? 'none' : undefined,
       }
     })
 
@@ -50,7 +48,7 @@ export default defineComponent({
       if (scrollOffset.value === undefined) {
         return undefined
       }
-      return { height: `${scrollHeight.value}px`, position: 'relative', overflow: 'hidden' }
+      return { height: `${scrollHeight.value}px`, position: 'relative' }
     })
 
     const contentStyle = computed<CSSProperties>(() => {
@@ -115,6 +113,10 @@ function useEvents(
   let rafId: number
 
   function handleWheel(evt: WheelEvent) {
+    if (evt.shiftKey) {
+      return
+    }
+
     cancelRAF(rafId)
 
     const { deltaY } = evt
