@@ -20,6 +20,4 @@ export type {
   PaginationSize,
   PaginationItemType,
   PaginationItemRenderOptions,
-  PaginationItemRenderFn,
-  PaginationTotalRenderFn,
 } from './src/types'

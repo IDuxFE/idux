@@ -61,10 +61,10 @@ export async function compileLess(targetDirname: string, distDirname: string, is
     }
   }
 
-  for (const componentDirname of readdirSync(distDirname)) {
+  for (const componentDirname of readdirSync(targetDirname)) {
     // handler private components
     if (componentDirname === '_private') {
-      for (const privateComponentName of readdirSync(path.resolve(distDirname, componentDirname))) {
+      for (const privateComponentName of readdirSync(path.resolve(targetDirname, componentDirname))) {
         const styleDirname = `${targetDirname}/${componentDirname}/${privateComponentName}/style`
         const outputDirname = `${distDirname}/${componentDirname}/${privateComponentName}/style`
         await copyAndCompile(styleDirname, outputDirname, 'default')

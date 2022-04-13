@@ -29,6 +29,9 @@
   "main": "./index.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
+  "style": "./default.css",
+  "unpkg": "./index.full.js",
+  "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",

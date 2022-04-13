@@ -6,6 +6,8 @@ import { series } from 'gulp'
 import { gulpConfig } from '../gulpConfig'
 import { clean } from '../taskHelpers'
 import {
+  buildDeclaration as _buildDeclaration,
+  buildFullIndex as _buildFullIndex,
   buildStyle as _buildStyle,
   buildIndex,
   buildPackage,
@@ -13,10 +15,12 @@ import {
   copyPackageFiles,
   moveDeclaration,
   syncVersion,
-} from './gulpUtils'
+} from './utils'
 
 const { packageRoot, projectRoot, icon } = gulpConfig
 const { cdkDirname, componentsDirname, proDirname, distDirname } = gulpConfig.build
+
+export const buildClean = clean(distDirname)
 
 const cdkDistDirname = join(distDirname, 'cdk')
 const cdkOptions = {
@@ -39,9 +43,8 @@ const proOptions = {
   packageName: 'pro',
 }
 
-export const buildCdk = series(clean(cdkDistDirname), buildPackage(cdkOptions), buildIndex(cdkOptions), complete('CDK'))
+export const buildCdk = series(buildPackage(cdkOptions), buildIndex(cdkOptions), complete('CDK'))
 export const buildComponents = series(
-  clean(componentsDistDirname),
   buildPackage(componentsOptions),
   async () => {
     await copyFile(join(componentsDirname, 'bin.js'), join(componentsDistDirname, 'bin.js'))
@@ -50,10 +53,11 @@ export const buildComponents = series(
   buildIndex(componentsOptions),
   complete('Components'),
 )
-export const buildPro = series(clean(proDistDirname), buildPackage(proOptions), buildIndex(proOptions), complete('Pro'))
+export const buildPro = series(buildPackage(proOptions), buildIndex(proOptions), complete('Pro'))
 
 const declarationDirname = join(distDirname, 'packages')
 export const buildDeclaration = series(
+  _buildDeclaration(proOptions),
   moveDeclaration(declarationDirname),
   clean(declarationDirname),
   complete('Declaration'),
@@ -70,4 +74,10 @@ export const buildVersion = series(
   copyPackageFiles(distDirname, packageRoot, projectRoot),
   syncVersion(distDirname),
   complete('Version'),
+)
+
+export const buildFullIndex = series(
+  _buildFullIndex(cdkOptions),
+  _buildFullIndex(componentsOptions),
+  _buildFullIndex(proOptions),
 )

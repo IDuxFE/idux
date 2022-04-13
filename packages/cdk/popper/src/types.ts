@@ -88,7 +88,8 @@ export interface PopperOptions {
   visible?: boolean
 
   strategy?: PopperPositioningStrategy
-  modifiers?: Array<Partial<Modifier<unknown, unknown>>>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  modifiers?: Array<Partial<Modifier<unknown, any>>>
   onFirstUpdate?: (state: Partial<State>) => void
 }
 

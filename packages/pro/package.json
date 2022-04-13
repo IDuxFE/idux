@@ -28,6 +28,8 @@
   "module": "./index.js",
   "typings": "./index.d.ts",
   "style": "./default.css",
+  "unpkg": "./index.full.js",
+  "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^1.0.0-beta.4",
