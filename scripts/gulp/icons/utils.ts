@@ -61,9 +61,6 @@ const options: OptimizeOptions = {
       type: 'perItem',
       fn: node => {
         if (node.name === 'svg') {
-          if (node.removeAttr('viewBox', '0 0 1024 1024')) {
-            node.addAttr({ name: 'viewBox', value: '64 64 896 896' })
-          }
           if (!node.hasAttr('focusable')) {
             node.addAttr({ name: 'focusable', value: false })
           }
