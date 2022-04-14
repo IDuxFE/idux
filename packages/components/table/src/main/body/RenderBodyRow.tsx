@@ -8,7 +8,7 @@
 import type { TableColumnMergedExpandable } from '../../composables/useColumns'
 import type { FlattedData } from '../../composables/useDataSource'
 import type { TableBodyRowProps, TableColumnExpandable } from '../../types'
-import type { Slots, VNodeChild, VNodeTypes } from 'vue'
+import type { Slots, VNodeChild } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -20,18 +20,13 @@ export function renderBodyRow(
   rowIndex: number,
   slots: Slots,
   expandable: TableColumnMergedExpandable | undefined,
-): VNodeTypes[] {
-  const nodes: VNodeTypes[] = []
+): VNodeChild {
   const { expanded, level, record, rowKey } = item
   const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex, rowKey }
-  nodes.push(<BodyRow {...rowProps} />)
+  const rowNode = <BodyRow {...rowProps} />
 
-  if (expanded) {
-    const expandedContext = renderExpandedContext(rowProps, slots, expandable)
-    expandedContext && nodes.push(expandedContext)
-  }
-
-  return nodes
+  const expandedNode = expanded && renderExpandedContext(rowProps, slots, expandable)
+  return expandedNode ? [rowNode, expandedNode] : rowNode
 }
 
 function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
