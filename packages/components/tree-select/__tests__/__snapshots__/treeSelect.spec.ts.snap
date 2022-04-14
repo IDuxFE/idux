@@ -77,8 +77,8 @@ exports[`TreeSelect > single work > searchFn work 2`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+          <path d=\\"m294.784 411.776 208.192 208.192a12.8 12.8 0 0 0 18.048 0l208.192-208.192a12.8 12.8 0 0 1 18.112 0l27.136 27.2a12.8 12.8 0 0 1 0 18.048l-253.44 253.44a12.8 12.8 0 0 1-18.048 0l-253.44-253.44a12.8 12.8 0 0 1 0-18.048l27.136-27.2a12.8 12.8 0 0 1 18.112 0z\\"></path>
         </svg></i></div>
   </div>
 </div>
@@ -95,8 +95,8 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+          <path d=\\"m294.784 411.776 208.192 208.192a12.8 12.8 0 0 0 18.048 0l208.192-208.192a12.8 12.8 0 0 1 18.112 0l27.136 27.2a12.8 12.8 0 0 1 0 18.048l-253.44 253.44a12.8 12.8 0 0 1-18.048 0l-253.44-253.44a12.8 12.8 0 0 1 0-18.048l27.136-27.2a12.8 12.8 0 0 1 18.112 0z\\"></path>
         </svg></i></div>
   </div>
 </div>
@@ -127,8 +127,8 @@ exports[`TreeSelect > single work > searchable work 2`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" autocomplete=\\"off\\" style=\\"opacity: 0;\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M534.016 661.568a29.888 29.888 0 0 1-45.376 0L265.408 414.144a38.336 38.336 0 0 1 0-50.24 29.888 29.888 0 0 1 45.312 0l191.552 212.288a11.968 11.968 0 0 0 18.112 0l192.896-213.76a29.888 29.888 0 0 1 45.312 0 38.336 38.336 0 0 1 0 50.24l-224.64 248.96z\\"></path>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+          <path d=\\"m294.784 411.776 208.192 208.192a12.8 12.8 0 0 0 18.048 0l208.192-208.192a12.8 12.8 0 0 1 18.112 0l27.136 27.2a12.8 12.8 0 0 1 0 18.048l-253.44 253.44a12.8 12.8 0 0 1-18.048 0l-253.44-253.44a12.8 12.8 0 0 1 0-18.048l27.136-27.2a12.8 12.8 0 0 1 18.112 0z\\"></path>
         </svg></i></div>
   </div>
 </div>
