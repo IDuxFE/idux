@@ -7,11 +7,10 @@
 
 import type { OriginScroll } from './composables/useOriginScroll'
 import type { SyncScrollTop } from './composables/useScrollPlacement'
-import type { ScrollVisibleContext } from './composables/useScrollVisible'
 import type { VirtualScrollProps } from './types'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
-export interface VirtualScrollContext extends ScrollVisibleContext {
+export interface VirtualScrollContext {
   props: VirtualScrollProps
   slots: Slots
   holderRef: Ref<HTMLElement | undefined>
@@ -21,8 +20,6 @@ export interface VirtualScrollContext extends ScrollVisibleContext {
   scrollTop: Ref<number>
   scrollHeight: Ref<number>
   scrollOffset: Ref<number | undefined>
-  scrollMoving: Ref<boolean>
-  changeScrollMoving: (value: boolean) => void
   syncScrollTop: SyncScrollTop
   originScroll: OriginScroll
 }

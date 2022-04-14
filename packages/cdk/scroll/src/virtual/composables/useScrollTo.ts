@@ -21,7 +21,6 @@ export function useScrollTo(
   getKey: ComputedRef<GetKey>,
   heights: Map<VKey, number>,
   collectHeight: () => void,
-  setScrollVisible: (visible: boolean) => void,
   syncScrollTop: SyncScrollTop,
 ): VirtualScrollToFn {
   let refId: number
@@ -29,7 +28,6 @@ export function useScrollTo(
   return (option?: number | VirtualScrollToOptions) => {
     // When not argument provided, we think dev may want to show the scrollbar
     if (isNil(option)) {
-      setScrollVisible(true)
       return
     }
 

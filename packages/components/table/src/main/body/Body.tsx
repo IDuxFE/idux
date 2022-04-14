@@ -7,6 +7,7 @@
 
 import { type VNodeTypes, computed, defineComponent, inject } from 'vue'
 
+import { convertArray } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
 import { TABLE_TOKEN } from '../../token'
@@ -40,7 +41,7 @@ export default defineComponent({
           children.push(...slots.default())
         } else {
           data.forEach((item, rowIndex) => {
-            children.push(...renderBodyRow(item, rowIndex, tableSlots, expandable.value))
+            children.push(...convertArray(renderBodyRow(item, rowIndex, tableSlots, expandable.value)))
           })
         }
       } else {

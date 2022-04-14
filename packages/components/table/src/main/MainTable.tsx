@@ -184,7 +184,7 @@ export default defineComponent({
               dataSource={flattedData.value}
               fullHeight={fullHeight}
               height={(height || y) as number}
-              itemHeight={44}
+              itemHeight={47}
               itemKey="rowKey"
               itemRender={itemRender}
               contentRender={contentRender}
