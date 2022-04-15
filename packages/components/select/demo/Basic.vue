@@ -1,6 +1,6 @@
 <template>
   <IxSpace>
-    <IxSelect v-model:value="value" :dataSource="dataSource" @change="onChange"></IxSelect>
+    <IxSelect v-model:value="value" :dataSource="dataSource" :class="classes" @change="onChange"></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" disabled></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" clearable></IxSelect>
     <IxSelect v-model:value="value">
@@ -24,7 +24,13 @@ const dataSource: SelectData[] = [
 
 const value = ref('tom')
 
+const classes = ref('liuzj222')
+
 const onChange = (value: string, oldValue: string) => {
   console.log('selected change: ', value, oldValue)
 }
+
+setTimeout(() => {
+  classes.value = 'nzjnzj'
+}, 5000)
 </script>

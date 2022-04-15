@@ -58,7 +58,7 @@ subtitle: 文本域
 | `@textarea-disabled-color` | `@form-disabled-color` | - | - |
 | `@textarea-disabled-background-color` | `@form-disabled-background-color` | - | - |
 | `@textarea-count-bottom` | `1px` | - | - |
-| `@textarea-count-right` | `14px` | - | - |
+| `@textarea-count-right` | `8px` | - | - |
 | `@textarea-count-opacity` | `0.9` | - | - |
 | `@textarea-count-color` | `@textarea-placeholder-color` | - | - |
 <!--- insert less variable end  --->

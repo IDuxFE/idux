@@ -9,28 +9,36 @@
     }
 
     .@{menu-prefix}-item-group-label {
-      color: @menu-dark-color;
+      color: @menu-dark-group-label-color;
     }
 
+    .@{menu-prefix}-sub-label:hover:not(.@{menu-prefix}-sub-disabled) {
+      color: @menu-dark-highlight-color;
+      background-color: @menu-dark-highlight-background-color;
+    }
+    
     .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled),
     .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled) > .@{menu-prefix}-sub-label {
 
       &:hover,
       &:active {
+        color: @menu-dark-highlight-color;
         background-color: @menu-dark-highlight-background-color;
       }
 
       &:hover a,
       &:active a {
-        color: @menu-highlight-color;
+        color:@menu-dark-highlight-color;
       }
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
+      background: @menu-dark-highlight-background-color;
+      color: @menu-dark-highlight-color;
 
       a {
-        color: @menu-highlight-color;
+        color: @menu-dark-highlight-color;
       }
     }
 

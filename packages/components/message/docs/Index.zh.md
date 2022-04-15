@@ -100,8 +100,7 @@ export interface MessageRef {
 
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
-| `@message-padding` | `@spacing-sm` | - | - |
-| `@message-margin-bottom` | `@spacing-lg` | - | - |
+| `@message-margin` | `@spacing-sm` | - | - |
 | `@message-font-size` | `@font-size-md` | - | - |
 | `@message-line-height` | `@line-height-base` | - | - |
 | `@message-content-min-width` | `128px` | - | - |

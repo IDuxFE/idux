@@ -18,11 +18,11 @@ import {
   watch,
 } from 'vue'
 
-import { isFunction } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
-import { ɵHeader } from '@idux/components/_private/header'
+import { ɵHeader, type ɵHeaderProps } from '@idux/components/_private/header'
 import { type ModalConfig } from '@idux/components/config'
 
 import ModalBody from './ModalBody'
@@ -66,6 +66,7 @@ export default defineComponent({
     const wrapperClasses = computed(() => {
       const { wrapperClassName = '' } = props
       const prefixCls = mergedPrefixCls.value
+
       return {
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-centered`]: centered.value,
@@ -109,6 +110,17 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
+
+      const headerProps = isString(props.header) ? ({ title: props.header, size: 'md' } as ɵHeaderProps) : props.header
+
+      const okButtonProps: ModalProps['okButton'] = props.okButton?.size
+        ? props.okButton
+        : { size: 'md', ...props.okButton }
+
+      const cancelButtonProps: ModalProps['cancelButton'] = props.cancelButton?.size
+        ? props.cancelButton
+        : { size: 'md', ...props.cancelButton }
+
       return (
         <div
           v-show={mergedVisible.value}
@@ -142,7 +154,7 @@ export default defineComponent({
                   v-slots={slots}
                   closable={closable.value}
                   closeIcon={closeIcon.value}
-                  header={props.header}
+                  header={headerProps}
                   onClose={close}
                 />
                 <ModalBody></ModalBody>
@@ -150,13 +162,13 @@ export default defineComponent({
                   v-slots={slots}
                   class={`${prefixCls}-footer`}
                   cancel={cancel}
-                  cancelButton={props.cancelButton}
+                  cancelButton={cancelButtonProps}
                   cancelLoading={cancelLoading.value}
                   cancelText={cancelText.value}
                   cancelVisible={cancelVisible.value}
                   footer={props.footer}
                   ok={ok}
-                  okButton={props.okButton}
+                  okButton={okButtonProps}
                   okLoading={okLoading.value}
                   okText={okText.value}
                 ></ɵFooter>

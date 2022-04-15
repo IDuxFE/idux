@@ -36,23 +36,34 @@
     cursor: pointer;
     width: @notification-close-width;
     font-size: @notification-close-font-size;
+    color: @notification-close-color;
     top: @notification-close-top;
     right: @notification-close-right;
+
+    &:hover {
+      color: @notification-close-hover-color;
+    }
   }
 
   &-main {
     grid-area: main;
+    
+    &-with-content {
+      .@{notification-prefix}-title {
+        margin: @notification-title-margin;
+      }
+    }
   }
 
   &-title {
     font-size: @notification-title-font-size;
     line-height: @notification-title-line-height;
-    margin: @notification-title-margin;
   }
 
   &-content {
     font-size: @notification-content-font-size;
     color: @notification-content-color;
+    margin: @notification-content-margin;
   }
 
   &-footer {
@@ -69,6 +80,6 @@
 
   .notification-icon-color(info, @color-info);
   .notification-icon-color(success, @color-success);
-  .notification-icon-color( warning, @color-warning);
+  .notification-icon-color( warning, @color-warning-l10);
   .notification-icon-color(error, @color-error);
 }

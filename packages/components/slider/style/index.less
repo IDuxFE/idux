@@ -1,6 +1,6 @@
 .slider-rail() {
   position: absolute;
-  height: 4px;
+  height: @slider-height;
   border-radius: 2px;
   transition: background-color @transition-duration-slow;
 }
@@ -14,14 +14,17 @@
   cursor: pointer;
   touch-action: none;
 
-  &:hover &-rail {
-    background-color: @slider-rail-hover-background-color;
-  }
+  &:not(&-disabled) {
+    &:hover &-rail {
+      background-color: @slider-rail-hover-background-color;
+    }
 
-  &:hover &-track {
-    background-color: @slider-track-hover-background-color;
-  }
+    &:hover &-track {
+      background-color: @slider-track-hover-background-color;
+    }
 
+  }
+  
   &-rail {
     .slider-rail();
 
@@ -38,7 +41,7 @@
   &-step {
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: @slider-height;
     background: 0 0;
   }
 
@@ -119,16 +122,16 @@
     padding: 0 4px;
 
     & .@{slider-prefix}-rail {
-      width: 4px;
+      width: @slider-width;
       height: 100%;
     }
 
     & .@{slider-prefix}-track {
-      width: 4px;
+      width: @slider-width;
     }
 
     & .@{slider-prefix}-step {
-      width: 4px;
+      width: @slider-width;
       height: 100%;
     }
 
@@ -139,7 +142,7 @@
 
     & .@{slider-prefix}-dot {
       top: auto;
-      left: 2px;
+      left: calc(@slider-width / 2);
       margin-bottom: -4px;
     }
 
@@ -160,12 +163,12 @@
     cursor: not-allowed;
 
     & .@{slider-prefix}-track {
-      background-color: @slider-track-disabled-background-color !important;
+      background-color: @slider-track-disabled-background-color;
     }
 
     & .@{slider-prefix}-thumb {
       background-color: @slider-thumb-disabled-background-color;
-      border-color: @slider-thumb-disabled-border-color !important;
+      border-color: @slider-thumb-disabled-border-color;
       box-shadow: none;
       cursor: not-allowed;
     }
@@ -174,7 +177,7 @@
       cursor: not-allowed;
 
       &-active {
-        border-color: @slider-dot-disabled-active-border-color !important;
+        border-color: @slider-dot-disabled-active-border-color;
       }
     }
 

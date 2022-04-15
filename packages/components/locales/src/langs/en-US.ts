@@ -55,7 +55,7 @@ const enUS: Locale = {
     justOkText: 'OK',
   },
   pagination: {
-    itemsPerPage: '/ page',
+    itemsPerPage: 'each page',
     jumpTo: 'Go to',
     page: '',
     prev: 'Previous Page',

@@ -49,7 +49,9 @@
 
     > .@{header-prefix} {
       padding: @drawer-header-padding;
-      color: @drawer-title-color;
+      .@{header-prefix}-title {
+        font-size: @drawer-title-font-size;
+      }
     }
   }
 
@@ -60,7 +62,6 @@
   }
 
   &-footer {
-    min-height: @drawer-footer-min-height;
     padding: @drawer-footer-padding;
 
     .@{button-prefix} + .@{button-prefix} {

@@ -52,7 +52,7 @@
         display: table;
         width: @checkbox-tick-width;
         height: @checkbox-tick-height;
-        border: @checkbox-tick-border-width @checkbox-border-style @checkbox-border-color;
+        border: @checkbox-tick-border-width @checkbox-border-style @checkbox-tick-color;
         border-top: 0;
         border-left: 0;
         transform: rotate(45deg) scale(0) translate(-50%, -50%);
@@ -147,10 +147,11 @@
 
 .@{checkbox-prefix}-button {
   display: inline-block;
+  text-align: center;
   background-color: @checkbox-background-color;
   border: @checkbox-border-width @checkbox-border-style @checkbox-border-color;
   border-radius: @checkbox-border-radius;
-  transition: all @transition-duration-base @ease-in-out;;
+  transition: background-color @transition-duration-base @ease-in-out;
 
   .@{checkbox-prefix} {
 
@@ -180,7 +181,7 @@
     right: 0;
     border-top: 8px solid transparent;
     border-left: 8px solid transparent;
-    transition: all @transition-duration-base @ease-in-out;;
+    transition: all @transition-duration-base @ease-in-out;
   }
 
   &:not(.@{checkbox-prefix}-disabled):hover {
@@ -225,15 +226,15 @@
   }
 
   &.@{checkbox-prefix}-sm {
-    .checkbox-size(@checkbox-height-sm, @checkbox-font-size-sm, @checkbox-padding-horizontal-sm);
+    .checkbox-size(@checkbox-height-sm, @checkbox-min-width-sm, @checkbox-font-size-sm, @checkbox-padding-horizontal-sm);
   }
 
   &.@{checkbox-prefix}-md {
-    .checkbox-size(@checkbox-height-md, @checkbox-font-size-md, @checkbox-padding-horizontal-md);
+    .checkbox-size(@checkbox-height-md, @checkbox-min-width-md, @checkbox-font-size-md, @checkbox-padding-horizontal-md);
   }
 
   &.@{checkbox-prefix}-lg {
-    .checkbox-size(@checkbox-height-lg, @checkbox-font-size-lg, @checkbox-padding-horizontal-lg);
+    .checkbox-size(@checkbox-height-lg, @checkbox-min-width-lg, @checkbox-font-size-lg, @checkbox-padding-horizontal-lg);
   }
 }
 
@@ -250,8 +251,22 @@
       }
 
       &-button {
-        border-right-width: 0;
-        border-radius: 0;
+        &:not(:first-child) {
+          border-left: none;
+          border-radius: 0;
+          &::before {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            display: block;
+            box-sizing: content-box;
+            width: 1px;
+            height: 100%;
+            padding: 1px 0;
+            background-color: @checkbox-border-color;
+            content: "";
+          }
+        }
 
         &:first-child {
           border-radius: @checkbox-border-radius 0 0 @checkbox-border-radius;
@@ -259,27 +274,25 @@
 
         &:last-child {
           border-radius: 0 @checkbox-border-radius @checkbox-border-radius 0;
-          border-right-width: @checkbox-border-width;
         }
 
-        &:first-child:last-child {
-          border-radius: @checkbox-border-radius;
-        }
-
-        &:not(.@{checkbox-prefix}-disabled):hover {
-          & + .@{checkbox-prefix}-button {
-            border-left-color: @checkbox-hover-color;
+        &:hover:not(.@{checkbox-prefix}-disabled),
+        &.@{checkbox-prefix}-focused:not(.@{checkbox-prefix}-disabled),
+        &.@{checkbox-prefix}-checked:not(.@{checkbox-prefix}-disabled) {
+          border-color: @checkbox-active-color;
+          
+          &::before {
+            background: @checkbox-active-color;
           }
         }
 
-        &:not(.@{checkbox-prefix}-disabled).@{checkbox-prefix}-checked {
-          & + .@{checkbox-prefix}-button {
-            border-left-color: @checkbox-active-color;
-          }
+        &:hover:not(.@{checkbox-prefix}-disabled),
+        &.@{checkbox-prefix}-checked:not(.@{checkbox-prefix}-disabled) {
+          z-index: @zindex-l1-1;
+        }
 
-          &:hover + .@{checkbox-prefix}-button {
-            border-left-color: @checkbox-hover-color;
-          }
+        &.@{checkbox-prefix}-focused:not(.@{checkbox-prefix}-disabled) {
+          z-index: @zindex-l1-2;
         }
       }
     }

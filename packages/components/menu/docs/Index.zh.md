@@ -129,6 +129,8 @@ export interface MenuClickOptions {
 | `@menu-border-style` | `@border-style` | - | - |
 | `@menu-border-color` | `@border-color-split` | - | - |
 | `@menu-font-size` | `@font-size-md` | - | - |
+| `@menu-vertical-padding` | `4px 8px` | - | - |
+| `@menu-vertical-font-size` | `@font-size-md` | - | - |
 | `@menu-item-height` | `@height-lg` | - | - |
 | `@menu-item-padding-left` | `@spacing-md` | - | - |
 | `@menu-item-padding-right` | `@spacing-xl` | - | - |
@@ -149,6 +151,10 @@ export interface MenuClickOptions {
 | `@menu-dark-color` | `@text-color-dark` | - | - |
 | `@menu-dark-background-color` | `@background-color-component-dark` | - | - |
 | `@menu-dark-highlight-background-color` | `fade(@color-white, 6%)` | - | - |
+| `@menu-dark-highlight-color` | `@color-primary` | - | - |
+| `@menu-dark-group-label-color` | `@color-graphite-d10` | - | - |
 | `@menu-collapsed-font-size` | `@font-size-lg` | - | - |
 | `@menu-collapsed-width` | `64px` | - | - |
+| `@menu-sub-inline-font-size` | `@font-size-md` | - | - |
+| `@menu-icon-font-size` | `@font-size-lg` | - | - |
 <!--- insert less variable end  --->

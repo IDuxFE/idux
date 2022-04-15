@@ -107,6 +107,7 @@ export default defineComponent({
         popperEvents,
         attrs,
       )
+
       return (
         <>
           {trigger}

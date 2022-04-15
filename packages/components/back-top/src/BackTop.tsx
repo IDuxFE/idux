@@ -57,7 +57,7 @@ export default defineComponent({
       return (
         <Transition name={`${common.prefixCls}-fade`}>
           <div v-show={visible.value} class={mergedPrefixCls.value} onClick={handleClick}>
-            {slots.default ? slots.default() : <IxIcon name="vertical-align-top" />}
+            {slots.default ? slots.default() : <IxIcon name="arrow-up" />}
           </div>
         </Transition>
       )

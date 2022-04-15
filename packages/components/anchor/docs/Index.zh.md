@@ -50,13 +50,14 @@ subtitle: 锚点
 | `@anchor-color` | `@text-color` | - | - |
 | `@anchor-border-width` | `@border-width-md` | - | - |
 | `@anchor-border-color` | `@border-color` | - | - |
-| `@anchor-ink-ball-width` | `1px` | - | - |
+| `@anchor-ink-ball-width` | `2px` | - | - |
 | `@anchor-ink-ball-height` | `16px` | - | - |
 | `@anchor-ink-ball-radius` | `2px` | - | - |
-| `@anchor-ink-ball-border-width` | `@border-width-sm` | - | - |
-| `@anchor-ink-line-border-width` | `@border-width-md` | - | - |
+| `@anchor-ink-ball-background-color` | `@color-primary` | - | - |
 | `@anchor-link-margin` | `@spacing-md 0 @spacing-md @spacing-lg` | - | - |
 | `@anchor-link-font-size` | `@font-size-md` | - | - |
 | `@anchor-link-line-height` | `1` | - | - |
+| `@anchor-ink-line-width` | `1px` | - | - |
 | `@anchor-link-active-color` | `@color-primary` | - | - |
+| `@anchor-link-hover-color` | `@color-primary` | - | - |
 <!--- insert less variable end  --->

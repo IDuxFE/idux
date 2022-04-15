@@ -80,6 +80,14 @@ describe('Card', () => {
     expect(wrapper.classes()).not.toContain('ix-card-hoverable')
   })
 
+  test('shadow work', async () => {
+    const wrapper = CardMount()
+    expect(wrapper.classes()).toContain('ix-card-has-shadow')
+
+    await wrapper.setProps({ shadow: false })
+    expect(wrapper.classes()).not.toContain('ix-card-has-shadow')
+  })
+
   test('loading work', async () => {
     const wrapper = CardMount({ props: { loading: true } })
     expect(wrapper.find('.ix-card-loading').exists()).toBe(true)

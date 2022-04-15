@@ -41,6 +41,9 @@
 
     > .@{header-prefix} {
       padding: @modal-header-padding;
+      .@{header-prefix}-title {
+        font-size: @modal-header-title-font-size;
+      }
     }
   }
 
@@ -57,10 +60,21 @@
     }
 
     &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 100%;
       padding: @modal-body-content-padding;
       font-size: @modal-body-content-font-size;
       color: @modal-body-content-color;
+      &&-only-title {
+        align-items: center;
+        flex-direction: row;
+        justify-content: start;
+        .@{modal-prefix}-body-title {
+          margin-bottom: 0;
+        }
+      }
     }
 
     &-confirm,

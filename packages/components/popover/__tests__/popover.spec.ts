@@ -48,6 +48,7 @@ describe('Popover', () => {
       slots,
     })
 
+    expect(document.querySelector('.ix-popover-with-header')).toBeTruthy()
     expect(document.querySelector('.ix-popover-container')!.innerHTML).toMatchSnapshot()
   })
 

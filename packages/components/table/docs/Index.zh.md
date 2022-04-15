@@ -208,12 +208,18 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `@table-head-height-lg` | `@height-xxl` | - | - |
 | `@table-head-height-md` | `@height-xl` | - | - |
 | `@table-head-height-sm` | `@height-md` | - | - |
-| `@table-padding-vertical-lg` | `@spacing-lg` | - | - |
-| `@table-padding-horizontal-lg` | `@spacing-lg` | - | - |
-| `@table-padding-vertical-md` | `@spacing-md` | - | - |
-| `@table-padding-horizontal-md` | `@spacing-md` | - | - |
-| `@table-padding-vertical-sm` | `@spacing-sm` | - | - |
-| `@table-padding-horizontal-sm` | `@spacing-sm` | - | - |
+| `@table-padding-top-lg` | `@spacing-lg` | - | - |
+| `@table-padding-bottom-lg` | `@spacing-lg` | - | - |
+| `@table-padding-left-lg` | `@spacing-lg` | - | - |
+| `@table-padding-right-lg` | `@spacing-lg` | - | - |
+| `@table-padding-top-md` | `@spacing-md` | - | - |
+| `@table-padding-bottom-md` | `@spacing-md` | - | - |
+| `@table-padding-left-md` | `@spacing-md` | - | - |
+| `@table-padding-right-md` | `@spacing-md` | - | - |
+| `@table-padding-top-sm` | `@spacing-sm` | - | - |
+| `@table-padding-bottom-sm` | `@spacing-sm` | - | - |
+| `@table-padding-left-sm` | `@spacing-sm` | - | - |
+| `@table-padding-right-sm` | `@spacing-sm` | - | - |
 | `@table-font-size-lg` | `@font-size-lg` | - | - |
 | `@table-font-size-md` | `@font-size-md` | - | - |
 | `@table-font-size-sm` | `@font-size-sm` | - | - |
@@ -228,7 +234,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `@table-head-split-color` | `rgba(0, 0, 0, 0.06)` | - | - |
 | `@table-head-icon-color` | `@color-black` | - | - |
 | `@table-head-icon-active-color` | `@color-primary` | - | - |
-| `@table-head-icon-hover-backgroud-color` | `@color-graphite-l40` | - | - |
+| `@table-head-icon-hover-background-color` | `@color-graphite-l40` | - | - |
 | `@table-head-font-weight` | `@font-weight-lg` | - | - |
 | `@table-body-hover-background` | `@background-color-light` | - | - |
 | `@table-pagination-margin` | `@spacing-lg 0` | - | - |

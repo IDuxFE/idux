@@ -68,6 +68,7 @@ subtitle: 步骤条
 | `@stepper-item-icon-font-size-sm` | `@font-size-md` | - | - |
 | `@stepper-item-icon-margin-sm` | `0 8px 0 0` | - | - |
 | `@stepper-item-title-font-size-sm` | `@font-size-md` | - | - |
+| `@stepper-item-font-weight` | `500` | - | - |
 | `@stepper-item-description-font-size-sm` | `@font-size-sm` | - | - |
 | `@stepper-item-content-min-height-md` | `80px` | - | - |
 | `@stepper-item-content-min-height-sm` | `60px` | - | - |

@@ -46,7 +46,7 @@ order: 0
 | `@slider-dot-background-color` | `@color-white` | - | - |
 | `@slider-dot-border` | `2px solid @color-primary` | - | - |
 | `@slider-thumb-border` | `2px solid @color-primary` | - | - |
-| `@slider-rail-hover-background-color` | `#e1e1e1` | - | - |
+| `@slider-rail-hover-background-color` | `@color-graphite-l30` | - | - |
 | `@slider-track-hover-background-color` | `@color-primary` | - | - |
 | `@slider-thumb-hover-border-color` | `@color-primary` | - | - |
 | `@slider-thumb-focus-border-color` | `@color-primary` | - | - |
@@ -60,6 +60,8 @@ order: 0
 | `@slider-thumb-width` | `10px` | - | - |
 | `@slider-thumb-height` | `10px` | - | - |
 | `@slider-thumb-margin-top` | `-3px` | - | - |
-| `@slider-thumb-vertical-margin-left` | `-3px` | - | - |
+| `@slider-thumb-vertical-margin-left` | `-4px` | - | - |
 | `@slider-thumb-vertical-margin-top` | `-6px` | - | - |
+| `@slider-height` | `2px` | - | - |
+| `@slider-width` | `2px` | - | - |
 <!--- insert less variable end  --->

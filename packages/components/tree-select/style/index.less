@@ -51,14 +51,14 @@
     box-shadow: @tree-select-option-container-box-shadow;
     overflow: auto;
 
-    .@{tree-select-option-prefix}-group:not(:first-child) {
-      border-top: @tree-select-option-group-border;
-    }
-
     &-search-wrapper {
       display: flex;
       gap: 4px;
       margin-bottom: 8px;
+      .@{input-prefix}-suffix,
+      .@{input-prefix}-clear {
+        color: @select-icon-color;
+      }
     }
   }
 }

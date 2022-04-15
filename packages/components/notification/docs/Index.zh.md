@@ -124,6 +124,8 @@ export interface NotificationRef {
 | `@notification-icon-wrap-width` | `44px` | - | - |
 | `@notification-close-width` | `14px` | - | - |
 | `@notification-close-font-size` | `@font-size-sm` | - | - |
+| `@notification-close-color` | `@color-graphite-d20` | - | - |
+| `@notification-close-hover-color` | `@color-graphite-d20` | - | - |
 | `@notification-close-right` | `8px` | - | - |
 | `@notification-close-top` | `8px` | - | - |
 | `@notification-title-font-size` | `@font-size-lg` | - | - |
@@ -131,6 +133,7 @@ export interface NotificationRef {
 | `@notification-title-margin` | `0 16px 8px 0` | - | - |
 | `@notification-content-font-size` | `@font-size-md` | - | - |
 | `@notification-content-color` | `@color-graphite-d10` | - | - |
+| `@notification-content-margin` | `0 16px 0 0` | - | - |
 | `@notification-footer-margin` | `8px 0 0 0` | - | - |
 | `@notification-wrapper-zindex` | `@zindex-l4-1` | - | - |
 <!--- insert less variable end  --->

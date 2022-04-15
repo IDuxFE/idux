@@ -31,6 +31,7 @@ export const cardProps = {
   cover: IxPropTypes.oneOfType([String, IxPropTypes.object<CardCover>()]),
   header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
   hoverable: IxPropTypes.bool,
+  shadow: IxPropTypes.bool.def(true),
   loading: IxPropTypes.bool.def(false),
   size: IxPropTypes.oneOf<CardSize>(['sm', 'md', 'lg']),
   footer: IxPropTypes.array<CardButtonProps | VNode>(),

@@ -122,7 +122,6 @@ order: 0
 | `@tree-select-option-selected-color` | `@color-primary` | - | - |
 | `@tree-select-option-selected-background-color` | `tint(@color-primary, 90%)` | - | - |
 | `@tree-select-option-selected-font-weight` | `@font-weight-xl` | - | - |
-| `@tree-select-option-group-border` | `@border-width-sm @border-style @border-color` | - | - |
 | `@tree-select-option-container-zindex` | `@zindex-l4-3` | - | - |
 | `@tree-select-option-container-padding` | `@spacing-sm` | - | - |
 | `@tree-select-option-container-background-color` | `@background-color-component` | - | - |

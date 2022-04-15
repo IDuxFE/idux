@@ -38,7 +38,7 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { borderless = config.borderless, loading, size = config.size } = props
+      const { borderless = config.borderless, loading, size = config.size, shadow } = props
       const hasGridValue = hasGrid.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -46,6 +46,7 @@ export default defineComponent({
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-hoverable`]: !hasGridValue && hoverable.value,
         [`${prefixCls}-loading`]: loading,
+        [`${prefixCls}-has-shadow`]: shadow,
         [`${prefixCls}-has-grid`]: hasGridValue,
         [`${prefixCls}-${size}`]: true,
       })

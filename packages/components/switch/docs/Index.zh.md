@@ -49,7 +49,8 @@ order: 0
 | `@switch-color` | `@form-background-color` | - | - |
 | `@switch-background-color` | `@form-placeholder-color` | - | - |
 | `@switch-active-color` | `@form-active-color` | - | - |
-| `@switch-disabled-opacity` | `0.5` | - | - |
+| `@switch-active-disabled-color` | `@color-primary-l30` | - | - |
+| `@switch-disabled-color` | `@color-graphite-l30` | - | - |
 | `@switch-box-size-sm` | `12px` | - | - |
 | `@switch-box-size-md` | `20px` | - | - |
 | `@switch-box-size-lg` | `28px` | - | - |

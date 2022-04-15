@@ -6,8 +6,6 @@ subtitle: 文件上传
 order: 0
 ---
 
-
-
 ## API
 
 ### IxUpload
@@ -116,12 +114,18 @@ interface UploadRequestChangeOption {
 | `@upload-list-image-card-bg-color` | `@color-black` | - | - |
 | `@upload-list-image-card-icon-wrap-width` | `100%` | - | - |
 | `@upload-list-image-card-selector-font-size` | `24px` | - | - |
-| `@upload-list-image-card-selector-color-hover` | `#458FFF` | - | - |
+| `@upload-list-image-card-selector-color-hover` | `@color-primary-l10` | - | - |
 | `@upload-list-image-card-status-min-width` | `60px` | - | - |
 | `@upload-list-image-card-status-progress-margin` | `8px 0 0` | - | - |
 | `@upload-file-border-bottom` | `1px solid @color-graphite-l30` | - | - |
+| `@upload-file-height` | `32px` | - | - |
+| `@upload-file-font-size` | `@font-size-sm` | - | - |
 | `@upload-icon-wrap-max-width` | `120px` | - | - |
 | `@upload-icon-margin` | `0 0 0 16px` | - | - |
 | `@upload-icon-file-margin` | `0 8px 0 0` | - | - |
+| `@upload-icon-font-size` | `@font-size-lg` | - | - |
 | `@upload-tip-margin` | `8px 0 0` | - | - |
+| `@upload-color-error` | `@color-red-d10` | - | - |
+| `@upload-opr-height` | `20px` | - | - |
+| `@upload-opr-fail-text-margin` | `6px` | - | - |
 <!--- insert less variable end  --->

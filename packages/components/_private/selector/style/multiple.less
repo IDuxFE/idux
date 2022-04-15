@@ -31,10 +31,12 @@
     &-overflow {
       line-height: @select-item-line-height;
     }
+
   }
 
-  &&-with-suffix &-content,
-  &&-clearable &-content {
+  &.@{selector-prefix}-allow-input .@{selector-prefix}-overflow,
+  &.@{selector-prefix}-allow-input .@{selector-prefix}-input,
+  &.@{selector-prefix}-clearable .@{selector-prefix}-content {
     padding-right: @select-icon-font-size + @select-multiple-padding;
   }
 }
@@ -44,6 +46,10 @@
     &-content {
       flex-wrap: wrap;
       align-items: center;
+
+      .@{overflow-prefix}-item {
+        overflow: hidden;
+      }
     }
 
     &-item {
@@ -68,7 +74,7 @@
       }
 
       &-remove {
-        margin-left: @select-multiple-item-label-margin-left;
+        margin: @select-multiple-item-label-margin;
         color: @select-multiple-item-remove-icon-color;
         font-size: @select-multiple-item-remove-icon-font-size;
         line-height: inherit;

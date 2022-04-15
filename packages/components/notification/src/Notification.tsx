@@ -45,6 +45,18 @@ export default defineComponent({
     return () => {
       const iconNode = icon.value && getIconNode(icon.value)
       const closeIconNode = getIconNode(closeIcon.value)
+
+      const contentNode = getNode(props, slots, 'content')
+      const footerNode = getNode(props, slots, 'footer', {
+        visible: visible.value,
+        close,
+      })
+
+      let mainCls = `${comPrefix.value}-main`
+      if (contentNode) {
+        mainCls += ` ${comPrefix.value}-main-with-content`
+      }
+
       return (
         <div v-show={visible.value}>
           <div class={wrapCls.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
@@ -54,15 +66,12 @@ export default defineComponent({
             <span class={`${comPrefix.value}-close-icon`} onClick={close}>
               {closeIconNode}
             </span>
-            <div class={`${comPrefix.value}-main`}>
+            <div class={mainCls}>
               <div class={`${comPrefix.value}-title`}>{getNode(props, slots, 'title')}</div>
-              <div class={`${comPrefix.value}-content`}>{getNode(props, slots, 'content')}</div>
+              {contentNode && <div class={`${comPrefix.value}-content`}>{contentNode}</div>}
             </div>
             <div class={`${comPrefix.value}-footer`}>
-              {getNode(props, slots, 'footer', {
-                visible: visible.value,
-                close,
-              })}
+              {footerNode && <div class={`${comPrefix.value}-footer`}>{footerNode}</div>}
             </div>
           </div>
         </div>

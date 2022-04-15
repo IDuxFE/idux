@@ -62,6 +62,9 @@ subtitle: 单选框
 | `@radio-height-sm` | `@form-height-sm` | - | - |
 | `@radio-height-md` | `@form-height-md` | - | - |
 | `@radio-height-lg` | `@form-height-lg` | - | - |
+| `@radio-min-width-sm` | `@width-xs` | - | - |
+| `@radio-min-width-md` | `@width-sm` | - | - |
+| `@radio-min-width-lg` | `@width-md` | - | - |
 | `@radio-padding-horizontal-sm` | `@spacing-sm` | - | - |
 | `@radio-padding-horizontal-md` | `@spacing-md` | - | - |
 | `@radio-padding-horizontal-lg` | `@spacing-lg` | - | - |
@@ -76,6 +79,7 @@ subtitle: 单选框
 | `@radio-focus-color` | `@form-focus-color` | - | - |
 | `@radio-focus-box-shadow` | `@form-focus-box-shadow` | - | - |
 | `@radio-disabled-color` | `@form-disabled-color` | - | - |
+| `@radio-disabled-border-color` | `@form-disabled-border-color` | - | - |
 | `@radio-disabled-background-color` | `@form-disabled-background-color` | - | - |
 | `@radio-inner-zindex` | `@zindex-l1-1` | - | - |
 | `@radio-input-top` | `0.2em` | - | - |

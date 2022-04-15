@@ -207,9 +207,10 @@ const openModal = () => open({
 | `@modal-footer-padding` | `@spacing-sm @spacing-xl @spacing-lg` | - | - |
 | `@modal-footer-button-margin-left` | `@spacing-sm` | - | - |
 | `@modal-footer-min-height` | `64px` | - | - |
-| `@modal-body-title-font-size` | `@font-size-lg` | - | - |
+| `@modal-header-title-font-size` | `@font-size-lg` | - | - |
+| `@modal-body-title-font-size` | `@font-size-md` | - | - |
 | `@modal-body-title-font-weight` | `@font-weight-xl` | - | - |
-| `@modal-body-title-margin-bottom` | `@spacing-sm` | - | - |
+| `@modal-body-title-margin-bottom` | `4px` | - | - |
 | `@modal-body-title-color` | `@text-color` | - | - |
 | `@modal-body-content-font-size` | `@modal-font-size` | - | - |
 | `@modal-body-content-color` | `@text-color` | - | - |
@@ -221,7 +222,7 @@ const openModal = () => open({
 | `@modal-body-success-color` | `@color-success` | - | - |
 | `@modal-body-warning-color` | `@color-warning` | - | - |
 | `@modal-body-error-color` | `@color-error` | - | - |
-| `@modal-body-typed-padding` | `0 @spacing-sm @spacing-xl` | - | - |
+| `@modal-body-typed-padding` | `@spacing-sm @spacing-lg` | - | - |
 | `@modal-max-width-screen-sm` | `calc(100vw - 16px)` | - | - |
 | `@modal-margin-screen-sm` | `@spacing-sm auto` | - | - |
 <!--- insert less variable end  --->
