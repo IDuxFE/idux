@@ -1,11 +1,13 @@
-export function getThemesTemplate(): string {
-  return `@import '../index.less';
+export function getThemesTemplate(isPrivate: boolean): string {
+  return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';
 @import './default.variable.less';
+
+@import '../index.less';
 `
 }
 
-export function getThemesVariableTemplate(isPrivate: boolean): string {
-  return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';`
+export function getThemesVariableTemplate(): string {
+  return ``
 }
 
 export function getLessTemplate(compName: string, isPrivate: boolean): string {

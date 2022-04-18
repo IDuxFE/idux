@@ -5,15 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, type ComputedRef, type Ref, computed, onMounted, ref, watchEffect } from 'vue'
+import { type CSSProperties, type ComputedRef, type Ref, computed, onMounted, ref } from 'vue'
 
-import { useControlledProp, useState } from '@idux/cdk/utils'
+import { convertCssPixel, useControlledProp, useState } from '@idux/cdk/utils'
 import { type ɵOverlayInstance } from '@idux/components/_private/overlay'
 
 export interface OverlayStateContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties>
-  setOverlayWidth: (width: string) => void
+  updateOverlay: (rect: DOMRect) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
 }
@@ -24,18 +24,16 @@ export function useOverlayState(props: { open?: boolean; autofocus?: boolean }):
   const overlayStyle = computed(() => ({ width: overlayWidth.value }))
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
 
+  const updateOverlay = (rect: DOMRect) => {
+    setOverlayWidth(convertCssPixel(rect.width))
+    overlayOpened.value && overlayRef.value?.updatePopper()
+  }
+
   onMounted(() => {
     if (props.autofocus) {
       setOverlayOpened(true)
     }
-
-    watchEffect(() => {
-      const overlayInstance = overlayRef.value
-      if (overlayInstance && overlayWidth.value && overlayOpened.value) {
-        overlayInstance.updatePopper()
-      }
-    })
   })
 
-  return { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened }
+  return { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened }
 }

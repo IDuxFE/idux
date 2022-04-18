@@ -1,5 +1,5 @@
 <template>
-  <CdkVirtualScroll :dataSource="data" :height="height" itemKey="key" :itemHeight="20" :itemRender="itemRender">
+  <CdkVirtualScroll :dataSource="data" :height="height" getKey="key" :itemHeight="20" :itemRender="itemRender">
   </CdkVirtualScroll>
 
   <IxSpace>

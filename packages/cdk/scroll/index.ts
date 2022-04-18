@@ -22,7 +22,6 @@ export type {
   VirtualScrollPublicProps as VirtualScrollProps,
   VirtualContentRenderFn,
   VirtualItemRenderFn,
-  VirtualScrollToAlign,
   VirtualScrollToOptions,
   VirtualScrollToFn,
 } from './src/virtual/types'

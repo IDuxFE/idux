@@ -19,17 +19,18 @@ export type GetKey = (item: unknown) => VKey
 
 export function useGetKey(props: VirtualScrollProps): ComputedRef<GetKey> {
   return computed(() => {
-    const itemKey = props.itemKey
-    if (isString(itemKey)) {
+    // TODO: remove props.itemKey
+    const getKey = props.getKey || props.itemKey
+    if (isString(getKey)) {
       return (item: unknown) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const key = (item as any)[itemKey]
+        const key = (item as any)[getKey]
         if (__DEV__ && key === undefined) {
-          Logger.warn('cdk/scroll', 'Each item in data should have a unique `key` prop.')
+          Logger.warn('cdk/scroll', 'Each item in dataSource should have a unique `key` prop.')
         }
         return key
       }
     }
-    return itemKey
+    return getKey
   })
 }

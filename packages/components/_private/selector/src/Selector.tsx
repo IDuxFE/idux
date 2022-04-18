@@ -19,7 +19,7 @@ import {
 
 import { isString } from 'lodash-es'
 
-import { callEmit, convertCssPixel, offResize, onResize } from '@idux/cdk/utils'
+import { callEmit, offResize, onResize } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
@@ -127,15 +127,9 @@ export default defineComponent({
     })
 
     const elementRef = ref<HTMLDivElement>()
-    const updateInputWidth = () => {
-      const element = elementRef.value
-      if (element) {
-        callEmit(props.onWidthChange, convertCssPixel(element.getBoundingClientRect().width))
-      }
-    }
-
-    onMounted(() => onResize(elementRef.value!, updateInputWidth))
-    onBeforeUnmount(() => offResize(elementRef.value!, updateInputWidth))
+    const handleResize = () => callEmit(props.onResize, elementRef.value!.getBoundingClientRect())
+    onMounted(() => onResize(elementRef.value!, handleResize))
+    onBeforeUnmount(() => offResize(elementRef.value!, handleResize))
 
     return () => {
       const { multiple, disabled, readonly, opened, value, dataSource, maxLabel } = props

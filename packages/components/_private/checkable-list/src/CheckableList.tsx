@@ -10,7 +10,7 @@ import type { VirtualScrollInstance } from '@idux/cdk/scroll'
 import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
-import { VKey, callEmit } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import CheckableListItem from './CheckableListItem'
@@ -88,9 +88,9 @@ export default defineComponent({
             ref={virtualScrollRef}
             dataSource={data}
             fullHeight={fullHeight}
+            getKey={getRowKey}
             height={height as number}
             itemHeight={32}
-            itemKey={getRowKey as (item: unknown) => VKey}
             itemRender={({ item }) => renderListItem(item)}
             virtual
             onScroll={handleScroll}

@@ -42,10 +42,11 @@ export const selectorProps = {
   onCompositionEnd: [Function, Array] as PropType<MaybeArray<(evt: CompositionEvent) => void>>,
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onInputValueChange: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
-  onItemRemove: [Function, Array] as PropType<MaybeArray<(value: unknown) => void>>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onItemRemove: [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
   onOpenedChange: [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
+  onResize: [Function, Array] as PropType<MaybeArray<(rect: DOMRect) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
-  onWidthChange: [Function, Array] as PropType<MaybeArray<(width: string) => void>>,
 } as const
 
 export type SelectorProps = ExtractInnerPropTypes<typeof selectorProps>
