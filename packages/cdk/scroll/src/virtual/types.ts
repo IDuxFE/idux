@@ -5,28 +5,33 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const virtualListProps = {
-  contentRender: IxPropTypes.func<VirtualContentRenderFn>(),
-  dataSource: IxPropTypes.array().def(() => []),
-  fullHeight: IxPropTypes.bool.def(false),
-  height: IxPropTypes.number.def(0),
-  itemHeight: IxPropTypes.number.def(0),
-  itemKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: unknown) => VKey>()]).isRequired,
-  itemRender: IxPropTypes.func<VirtualItemRenderFn>(),
-  virtual: IxPropTypes.bool.def(true),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: any[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
-}
+  contentRender: { type: Function as PropType<VirtualContentRenderFn>, default: undefined },
+  dataSource: { type: Array, default: (): unknown[] => [] },
+  fullHeight: { type: Boolean, default: false },
+  getKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: undefined },
+  height: { type: Number, default: 0 },
+  itemHeight: { type: Number, default: 0 },
+  /**
+   * @deprecated
+   */
+  itemKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, required: true },
+  itemRender: { type: Function as PropType<VirtualItemRenderFn>, default: undefined },
+  virtual: { type: Boolean, default: true },
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: any[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+} as const
 
 export type VirtualScrollProps = ExtractInnerPropTypes<typeof virtualListProps>
-export type VirtualScrollPublicProps = ExtractPublicPropTypes<typeof virtualListProps>
+export type VirtualScrollPublicProps = Omit<ExtractPublicPropTypes<typeof virtualListProps>, 'itemKey'>
 export interface VirtualScrollBindings {
   scrollTo: VirtualScrollToFn
 }
@@ -36,19 +41,10 @@ export type VirtualScrollComponent = DefineComponent<
 >
 export type VirtualScrollInstance = InstanceType<DefineComponent<VirtualScrollProps, VirtualScrollBindings>>
 
-export type VirtualScrollToAlign = 'top' | 'bottom' | 'auto'
-export type VirtualScrollToOptions =
-  | {
-      key: VKey
-      align?: VirtualScrollToAlign
-      offset?: number
-    }
-  | {
-      index: number
-      align?: VirtualScrollToAlign
-      offset?: number
-    }
+export type VirtualScrollToOptions = { align?: 'top' | 'bottom' | 'auto'; offset?: number } & (
+  | { key: VKey }
+  | { index: number }
+)
 export type VirtualScrollToFn = (option?: number | VirtualScrollToOptions) => void
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type VirtualItemRenderFn<T = any> = (option: { item: T; index: number }) => VNodeChild
 export type VirtualContentRenderFn = (children: VNode[]) => VNodeChild

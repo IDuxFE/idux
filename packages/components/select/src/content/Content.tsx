@@ -84,9 +84,9 @@ export default defineComponent({
           <CdkVirtualScroll
             ref={virtualScrollRef}
             dataSource={options}
+            getKey="key"
             height={overlayHeight}
             itemHeight={overlayItemHeight}
-            itemKey="key"
             itemRender={itemRender}
             virtual={virtual}
             onScroll={onScroll}

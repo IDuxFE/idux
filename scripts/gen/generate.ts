@@ -176,13 +176,13 @@ class Generate {
 
     const tasks = [
       writeFile(`${this.dirPath}/__tests__/${lowerFirstCompName}.spec.ts`, getTestTemplate(compName)),
-      writeFile(`${this.dirPath}/src/${compName}.tsx`, getTsxTemplate(compName, lowerFirstCompName)),
+      writeFile(`${this.dirPath}/src/${compName}.tsx`, getTsxTemplate(compName, lowerFirstCompName, this.isPrivate)),
       writeFile(`${this.dirPath}/src/types.ts`, getTypesTemplate(compName, lowerFirstCompName)),
-      writeFile(`${this.dirPath}/style/themes/default.less`, getThemesTemplate()),
-      writeFile(`${this.dirPath}/style/themes/default.variable.less`, getThemesVariableTemplate(this.isPrivate)),
+      writeFile(`${this.dirPath}/style/themes/default.less`, getThemesTemplate(this.isPrivate)),
+      writeFile(`${this.dirPath}/style/themes/default.variable.less`, getThemesVariableTemplate()),
       writeFile(`${this.dirPath}/style/themes/default.ts`, getThemesIndexTemplate(category)),
       writeFile(`${this.dirPath}/style/index.less`, lessTemplate),
-      writeFile(`${this.dirPath}/index.ts`, getIndexTemplate(compName)),
+      writeFile(`${this.dirPath}/index.ts`, getIndexTemplate(compName, this.isPrivate)),
     ]
 
     if (!this.isPrivate) {
@@ -194,7 +194,7 @@ class Generate {
 
       const typesPath = resolve(this.packageRoot, 'types.d.ts')
       let typesContent = await readFile(typesPath, 'utf-8')
-      typesContent += `\nimport { Ix${compName} } from '@idux/${category}/${kebabCase(name)}'`
+      typesContent += `\nimport { ${compName}Component } from '@idux/${category}/${kebabCase(name)}'`
 
       tasks.push(writeFile(typesPath, typesContent))
     }

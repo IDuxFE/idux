@@ -183,9 +183,9 @@ export default defineComponent({
               style={contentStyle.value}
               dataSource={flattedData.value}
               fullHeight={fullHeight}
+              getKey="rowKey"
               height={(height || y) as number}
               itemHeight={47}
-              itemKey="rowKey"
               itemRender={itemRender}
               contentRender={contentRender}
               virtual

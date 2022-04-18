@@ -49,7 +49,7 @@ export default defineComponent({
 
     expose({ focus, blur, scrollTo })
 
-    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = useOverlayState(props)
+    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = useOverlayState(props)
 
     const accessor = useFormAccessor()
 
@@ -180,7 +180,7 @@ export default defineComponent({
         onItemRemove={handleItemRemove}
         onKeydown={handleKeyDown}
         onOpenedChange={setOverlayOpened}
-        onWidthChange={setOverlayWidth}
+        onResize={updateOverlay}
         onSearch={props.onSearch}
         {...attrs}
       />

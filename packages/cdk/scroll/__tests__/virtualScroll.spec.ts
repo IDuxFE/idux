@@ -15,7 +15,7 @@ const getData = (length: number, key = 'key') => {
 const defaultProps = {
   height: 200,
   itemHeight: 20,
-  itemKey: 'key',
+  getKey: 'key',
 } as const
 
 const defaultItemSlot = `
@@ -143,7 +143,7 @@ describe('VirtualScroll', () => {
       expect(wrapper.findAll('.virtual-item').length).toEqual(22)
     })
 
-    test('itemKey work', async () => {
+    test('getKey work', async () => {
       const wrapper = VirtualScrollMount({
         props: { dataSource: getData(20) },
         slots: { item: defaultItemSlot },
@@ -151,7 +151,7 @@ describe('VirtualScroll', () => {
 
       wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
 
-      await wrapper.setProps({ dataSource: getData(20, 'key'), itemKey: 'key' })
+      await wrapper.setProps({ dataSource: getData(20, 'key'), getKey: 'key' })
 
       wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
     })

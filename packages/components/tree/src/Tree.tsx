@@ -150,9 +150,9 @@ export default defineComponent({
           <CdkVirtualScroll
             ref={virtualScrollRef}
             dataSource={nodes}
+            getKey="key"
             height={height}
             itemHeight={28}
-            itemKey="key"
             itemRender={itemRender}
             virtual={virtual}
             onScroll={onScroll}

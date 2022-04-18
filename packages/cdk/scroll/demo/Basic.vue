@@ -5,7 +5,7 @@
       :dataSource="data"
       :height="200"
       :itemHeight="20"
-      itemKey="key"
+      getKey="key"
       @scroll="onScroll"
       @scrolledChange="onScrolledChange"
       @scrolledBottom="onScrolledBottom"

@@ -52,7 +52,7 @@ export default defineComponent({
       accessor,
       mergedNodeMap,
     )
-    const { overlayRef, overlayStyle, setOverlayWidth, overlayOpened, setOverlayOpened } = ɵUseOverlayState(props)
+    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = ɵUseOverlayState(props)
 
     const treeRef = ref<TreeInstance>()
     const scrollTo: VirtualScrollToFn = options => {
@@ -153,7 +153,7 @@ export default defineComponent({
         onItemRemove={handleItemRemove}
         //onKeydown={handleKeyDown}
         onOpenedChange={setOverlayOpened}
-        onWidthChange={setOverlayWidth}
+        onResize={updateOverlay}
         onSearch={props.onSearch}
         {...attrs}
       />
