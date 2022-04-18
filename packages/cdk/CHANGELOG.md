@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-18)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** turn to native scrollbar ([#847](https://github.com/IDuxFE/idux/issues/847)) ([95df1b9](https://github.com/IDuxFE/idux/commit/95df1b9e3b0d44b924fff8f81ebe7eef1a41b352))
+
+
+
+
+
 # [1.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-04-11)
 
 **Note:** Version bump only for package @idux/cdk
