@@ -1,0 +1,109 @@
+@import '../../../style/mixins/reset.less';
+@import '../../../style/mixins/borderless.less';
+@import '../../../style/mixins/placeholder.less';
+
+.trigger-size(@height, @vertical-padding, @horizontal-padding, @font-size) {
+  @icon-padding: @trigger-icon-margin-left + @trigger-icon-margin-right;
+
+  height: @height;
+  padding: @vertical-padding (@icon-padding + @font-size) @vertical-padding @horizontal-padding;
+  font-size: @font-size;
+}
+
+.@{trigger-prefix} {
+  .reset-component();
+
+  position: relative;
+  width: 100%;
+  line-height: @trigger-line-height;
+  color: @trigger-color;
+  border: @trigger-border-width @trigger-border-style @trigger-border-color;
+  border-radius: @trigger-border-radius;
+  background-color: @trigger-background-color;
+  cursor: pointer;
+  transition: all @transition-duration-base @ease-in-out;
+
+  @icon-padding: @trigger-icon-margin-left + @trigger-icon-margin-right;
+
+  &-sm {
+    .trigger-size(@trigger-height-sm, @trigger-padding-vertical-sm, @trigger-padding-horizontal-sm, @trigger-font-size-sm);
+  }
+
+  &-md {
+    .trigger-size(@trigger-height-md, @trigger-padding-vertical-md, @trigger-padding-horizontal-md, @trigger-font-size-md);
+  }
+
+  &-lg {
+    .trigger-size(@trigger-height-lg, @trigger-padding-vertical-lg, @trigger-padding-horizontal-lg, @trigger-font-size-lg);
+  }
+
+  &:hover:not(&-disabled):not(&-borderless) {
+    border-color: @trigger-hover-color;
+  }
+
+  &-opened:not(&-disabled):not(&-borderless),
+  &-focused:not(&-disabled):not(&-borderless) {
+    border-color: @trigger-active-color;
+    box-shadow: @trigger-active-box-shadow;
+  }
+
+  &-disabled {
+    color: @trigger-disabled-color;
+    background-color: @trigger-disabled-background-color;
+    cursor: not-allowed;
+  }
+
+  &-disabled input {
+    cursor: not-allowed;
+  }
+
+  &-borderless {
+    .borderless();
+  }
+
+  &-placeholder {
+    color: @trigger-placeholder-color;
+  }
+
+  &-suffix,
+  &-clear-icon {
+    position: absolute;
+    top: 0;
+    right: @trigger-icon-margin-right;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    transition: @transition-all-base;
+  }
+
+  &-suffix {
+    color: @trigger-icon-color;
+  }
+
+  &-clear-icon {
+    cursor: pointer;
+    color: @trigger-clear-icon-color;
+    background-color: @trigger-background-color;
+    opacity: 0;
+    &:hover {
+      color: @trigger-clear-icon-hover-color;
+    }
+  }
+
+  &:not(&-disabled):hover &-clear-icon {
+    opacity: 1;
+  }
+
+  & input {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    color: inherit;
+    font-size: inherit;
+    .placeholder(@trigger-placeholder-color);
+  }
+}

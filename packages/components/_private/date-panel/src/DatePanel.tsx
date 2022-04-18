@@ -50,7 +50,6 @@ export default defineComponent({
         <div class={`${prefixCls} ${prefixCls}-${activeType.value}`}>
           <PanelHeader />
           <PanelBody />
-          {slots.footer && <div class={`${prefixCls}-footer`}>{slots.footer()}</div>}
         </div>
       )
     }

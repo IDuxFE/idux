@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, toRaw, watch } from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, provide, watch } from 'vue'
 
-import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { callEmit } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormElement } from '@idux/components/utils'
 
+import { useControl } from './composables/useControl'
 import { useFormat } from './composables/useFormat'
-import { useInputState } from './composables/useInputState'
+import { useInputEnableStatus } from './composables/useInputEnableStatus'
+import { useKeyboardEvents } from './composables/useKeyboardEvents'
 import { useOverlayState } from './composables/useOverlayState'
-import { usePanelState } from './composables/usePanelState'
+import { usePickerState } from './composables/usePickerState'
 import Content from './content/Content'
 import { datePickerToken } from './token'
 import Trigger from './trigger/Trigger'
@@ -35,26 +35,19 @@ export default defineComponent({
     const config = useGlobalConfig('datePicker')
     const dateConfig = useDateConfig()
 
-    const focusMonitor = useSharedFocusMonitor()
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
 
     expose({ focus, blur })
 
-    const { overlayOpened, setOverlayOpened } = useOverlayState(props)
-    const accessor = useFormAccessor()
-    const format = useFormat(props, config)
-    const inputStateContext = useInputState(props, dateConfig, accessor, format)
-    const { inputValue } = inputStateContext
-    const { panelDate, setPanelDate } = usePanelState(props, dateConfig, accessor, format)
+    const inputEnableStatus = useInputEnableStatus(props, config)
+    const formatContext = useFormat(props, config)
+    const pickerStateContext = usePickerState(props, dateConfig, formatContext.formatRef)
 
-    const handlePanelCellClick = (date: Date) => {
-      const oldDate = toRaw(accessor.valueRef.value)
-      if (!oldDate || !dateConfig.isSame(date, dateConfig.convert(oldDate, format.value), props.type)) {
-        setOverlayOpened(false)
-        accessor.setValue(date)
-        callEmit(props.onChange, date, oldDate)
-      }
-    }
+    const { accessor, handleChange } = pickerStateContext
+
+    const controlContext = useControl(dateConfig, formatContext, inputEnableStatus, accessor.valueRef, handleChange)
+    const { overlayOpened, setOverlayOpened } = useOverlayState(props, controlContext)
+    const handleKeyDown = useKeyboardEvents(setOverlayOpened)
 
     provide(datePickerToken, {
       props,
@@ -63,55 +56,44 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       dateConfig,
-      focusMonitor,
       inputRef,
+      inputEnableStatus,
       overlayOpened,
       setOverlayOpened,
-      accessor,
-      format,
-      ...inputStateContext,
-      panelDate,
-      setPanelDate,
-      handlePanelCellClick,
+      handleKeyDown,
+      controlContext,
+      ...formatContext,
+      ...pickerStateContext,
     })
 
     watch(overlayOpened, opened => {
-      if (!opened && inputValue.value) {
-        // changeSelected(inputValue.value)
+      if (!opened) {
+        controlContext.init(true)
       }
 
-      opened ? focus() : blur()
-    })
-
-    const classes = computed(() => {
-      const { overlayClassName } = props
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
-        [`${prefixCls}-overlay`]: true,
-        [overlayClassName || '']: !!overlayClassName,
+      nextTick(() => {
+        opened ? focus() : blur()
       })
     })
 
     const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
+    const renderTrigger = () => <Trigger {...attrs}></Trigger>
+    const renderContent = () => <Content></Content>
+    const overlayProps = { triggerId: attrs.id, 'onUpdate:visible': setOverlayOpened }
 
-    return () => {
-      const renderTrigger = () => <Trigger {...attrs}></Trigger>
-      const renderContent = () => <Content></Content>
-      const overlayProps = { triggerId: attrs.id, 'onUpdate:visible': setOverlayOpened }
-      return (
-        <ɵOverlay
-          {...overlayProps}
-          visible={overlayOpened.value}
-          v-slots={{ default: renderTrigger, content: renderContent }}
-          class={classes.value}
-          clickOutside
-          disabled={accessor.disabled.value || props.readonly}
-          offset={defaultOffset}
-          placement="bottomStart"
-          target={target.value}
-          trigger="manual"
-        />
-      )
-    }
+    return () => (
+      <ɵOverlay
+        {...overlayProps}
+        visible={overlayOpened.value}
+        v-slots={{ default: renderTrigger, content: renderContent }}
+        class={normalizeClass(props.overlayClassName)}
+        clickOutside
+        disabled={accessor.disabled.value || props.readonly}
+        offset={defaultOffset}
+        placement="bottomStart"
+        target={target.value}
+        trigger="manual"
+      />
+    )
   },
 })

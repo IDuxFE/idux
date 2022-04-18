@@ -5,6 +5,7 @@
     <IxDatePicker v-model:value="monthValue" type="month" clearable></IxDatePicker>
     <IxDatePicker v-model:value="quarterValue" type="quarter" clearable></IxDatePicker>
     <IxDatePicker v-model:value="yearValue" type="year" clearable></IxDatePicker>
+    <IxDatePicker v-model:value="dateValue" type="datetime" clearable></IxDatePicker>
   </IxSpace>
 </template>
 

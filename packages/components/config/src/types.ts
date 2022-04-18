@@ -48,7 +48,6 @@ export interface GlobalConfig {
   checkbox: CheckboxConfig
   collapse: CollapseConfig
   datePicker: DatePickerConfig
-  dateRangePicker: DateRangePickerConfig
   divider: DividerConfig
   drawer: DrawerConfig
   dropdown: DropdownConfig
@@ -162,10 +161,6 @@ export interface DatePickerConfig {
   size: FormSize
   suffix: string
   target?: PortalTargetType
-}
-
-export interface DateRangePickerConfig {
-  separator: string | VNode
 }
 
 export interface DividerConfig {

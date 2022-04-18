@@ -26,7 +26,6 @@ export default defineComponent({
       config,
       format,
       dateConfig,
-      formContext,
       inputEnableStatus,
       mergedPrefixCls,
       overlayOpened,
@@ -40,7 +39,7 @@ export default defineComponent({
       setInputValue('')
     }
 
-    const inputProps = useCommonInputProps(props, config, formContext)
+    const inputProps = useCommonInputProps(props, config)
     const panelProps = useCommonPanelProps(props, config)
 
     const inputSlots = {

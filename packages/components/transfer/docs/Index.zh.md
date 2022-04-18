@@ -188,6 +188,7 @@ export interface TransferOperationsSlotParams {
 | `@transfer-list-border-color` | `@form-border-color` | - | - |
 | `@transfer-list-border-radius` | `2px` | - | - |
 | `@transfer-list-background-color` | `@form-background-color` | - | - |
+| `@transfer-font-size` | `@font-size-md` | - | - |
 | `@transfer-color` | `@text-color` | - | - |
 | `@transfer-disabled-color` | `@text-color-disabled` | - | - |
 | `@transfer-list-header-height` | `@height-lg` | - | - |
@@ -202,7 +203,9 @@ export interface TransferOperationsSlotParams {
 | `@transfer-operations-btn-gap` | `@spacing-sm` | - | - |
 | `@transer-search-width` | `110px` | - | - |
 | `@transfer-clear-icon-font-size` | `@font-size-md` | - | - |
-| `@transfer-icon-color` | `@color-graphite-d20` | - | - |
-| `@transfer-icon-hover-color` | `@color-primary` | - | - |
-| `@transfer-icon-active-color` | `@color-primary` | - | - |
+| `@transfer-clear-icon-color` | `@color-graphite-d20` | - | - |
+| `@transfer-clear-icon-hover-color` | `@color-primary` | - | - |
+| `@transfer-clear-icon-active-color` | `@color-primary` | - | - |
+| `@transfer-search-icon-font-size` | `@font-size-md` | - | - |
+| `@transfer-search-icon-color` | `@color-graphite` | - | - |
 <!--- insert less variable end  --->

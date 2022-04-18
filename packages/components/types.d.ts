@@ -16,7 +16,7 @@ import type { CardComponent, CardGridComponent } from '@idux/components/card'
 import type { CarouselComponent } from '@idux/components/carousel'
 import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
 import type { CollapseComponent, CollapsePanelComponent } from '@idux/components/collapse'
-import type { DatePickerComponent } from '@idux/components/date-picker'
+import type { DatePickerComponent, DateRangePickerComponent } from '@idux/components/date-picker'
 import type { DividerComponent } from '@idux/components/divider'
 import type { DrawerComponent, DrawerProviderComponent } from '@idux/components/drawer'
 import type { DropdownComponent } from '@idux/components/dropdown'
@@ -93,6 +93,7 @@ declare module 'vue' {
     IxCollapse: CollapseComponent
     IxCollapsePanel: CollapsePanelComponent
     IxDatePicker: DatePickerComponent
+    IxDateRangePicker: DateRangePickerComponent
     IxDivider: DividerComponent
     IxDrawer: DrawerComponent
     IxDrawerProvider: DrawerProviderComponent

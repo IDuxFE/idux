@@ -2,7 +2,7 @@
 title:
   zh: 高级格式
   en: Advanced format
-order: 5
+order: 4
 ---
 
 ## zh

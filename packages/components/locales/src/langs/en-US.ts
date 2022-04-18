@@ -33,6 +33,7 @@ const enUS: Locale = {
     monthPlaceholder: 'Select month',
     quarterPlaceholder: 'Select quarter',
     yearPlaceholder: 'Select year',
+    datetimePlaceholder: 'Select date time',
   },
   dateRangePicker: {
     datePlaceholder: ['Start date', 'End date'],
@@ -40,6 +41,10 @@ const enUS: Locale = {
     monthPlaceholder: ['Start month', 'End month'],
     quarterPlaceholder: ['Start quarter', 'End quarter'],
     yearPlaceholder: ['Start year', 'End year'],
+    datetimePlaceholder: ['Start date time', 'End date time'],
+    separator: 'To',
+    okText: 'OK',
+    cancelText: 'Cancel',
   },
   empty: {
     description: 'No Data',

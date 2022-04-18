@@ -102,6 +102,7 @@ order: 0
 | `@time-picker-overlay-width` | `200px` | - | - |
 | `@time-picker-overlay-padding` | `@spacing-sm` | - | - |
 | `@time-picker-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
+| `@time-picker-overlay-font-size` | `@font-size-md` | - | - |
 | `@time-picker-overlay-background-color` | `@form-background-color` | - | - |
 | `@time-picker-footer-padding` | `@spacing-sm 0` | - | - |
 | `@time-picker-footer-margin` | `0 @spacing-lg` | - | - |
@@ -111,7 +112,7 @@ order: 0
 | `@time-range-picker-overlay-gap-padding` | `5px 8px` | - | - |
 | `@time-range-picker-panel-border-width` | `@time-picker-border-width` | - | - |
 | `@time-range-picker-panel-border-style` | `@time-picker-border-style` | - | - |
-| `@time-range-picker-panel-border-color` | `@color-graphite-l30` | - | - |
+| `@time-range-picker-panel-border-color` | `@time-picker-border-color` | - | - |
 | `@time-range-picker-panel-border-radius` | `@time-picker-border-radius` | - | - |
 | `@time-picker-input-margin` | `@spacing-sm` | - | - |
 | `@time-picker-color` | `@form-color` | - | - |

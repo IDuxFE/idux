@@ -5,124 +5,60 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
+import { ɵTrigger } from '@idux/components/_private/trigger'
 import { FORM_TOKEN } from '@idux/components/form'
-import { IxIcon } from '@idux/components/icon'
 
+import { useTriggerProps } from '../composables/useTriggerProps'
 import { datePickerToken } from '../token'
 
 export default defineComponent({
   setup() {
+    const context = inject(datePickerToken)!
     const {
       props,
       slots,
       locale,
-      config,
+      controlContext: { inputValue, handleInput: _handleInput },
       mergedPrefixCls,
-      accessor,
-      format,
-      focusMonitor,
+      formatRef,
+      inputEnableStatus,
       inputRef,
-      inputValue,
-      isFocused,
-      handleFocus,
-      handleBlur,
-      handleInput,
-      handleClear,
-      overlayOpened,
-      setOverlayOpened,
-    } = inject(datePickerToken)!
+    } = context
     const formContext = inject(FORM_TOKEN, null)
 
     const placeholder = computed(() => props.placeholder ?? locale.datePicker[`${props.type}Placeholder`])
-    const inputSize = computed(() => Math.max(10, format.value.length) + 2)
-    const allowInput = computed(() => props.allowInput ?? config.allowInput)
-    const clearable = computed(() => !accessor.disabled.value && props.clearable && inputValue.value.length > 0)
+    const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
 
-    const suffix = computed(() => props.suffix ?? config.suffix)
+    const triggerProps = useTriggerProps(context, formContext)
 
-    const classes = computed(() => {
-      const { borderless = config.borderless, size = formContext?.size.value ?? config.size } = props
-      const disabled = accessor.disabled.value
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
-        [prefixCls]: true,
-        [`${prefixCls}-borderless`]: borderless,
-        [`${prefixCls}-clearable`]: clearable.value,
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-focused`]: isFocused.value,
-        [`${prefixCls}-opened`]: overlayOpened.value,
-        [`${prefixCls}-with-suffix`]: slots.suffix || suffix.value,
-        [`${prefixCls}-${size}`]: true,
-      })
-    })
-
-    const handleClick = () => {
-      const currOpened = overlayOpened.value
-      if (currOpened || accessor.disabled.value) {
-        return
-      }
-
-      setOverlayOpened(!currOpened)
+    const handleInput = (evt: Event) => {
+      _handleInput(evt)
+      callEmit(props.onInput, evt)
     }
-
-    const handleKeyDown = (evt: KeyboardEvent) => {
-      switch (evt.code) {
-        case 'Enter':
-          evt.preventDefault()
-          break
-        case 'Escape':
-          evt.preventDefault()
-          setOverlayOpened(false)
-          break
-      }
-    }
-
-    const triggerRef = ref<HTMLElement>()
-    onMounted(() => {
-      watch(focusMonitor.monitor(triggerRef.value!, true), evt => {
-        const { origin, event } = evt
-        if (event) {
-          if (origin) {
-            handleFocus(event)
-          } else {
-            handleBlur(event)
-          }
-        }
-      })
-    })
-
-    onBeforeUnmount(() => focusMonitor.stopMonitoring(triggerRef.value!))
 
     return () => {
-      const { readonly } = props
+      const { readonly, disabled } = triggerProps.value
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div ref={triggerRef} class={classes.value} onClick={handleClick} onKeydown={handleKeyDown}>
+        <ɵTrigger className={prefixCls} v-slots={slots} {...triggerProps.value}>
           <div class={`${prefixCls}-input`}>
             <input
-              ref={inputRef}
+              ref={inputEnableStatus.value.allowInput === true ? inputRef : undefined}
               class={`${prefixCls}-input-inner`}
               autocomplete="off"
-              disabled={accessor.disabled.value}
+              disabled={disabled}
               placeholder={placeholder.value}
-              readonly={readonly || allowInput.value !== true}
+              readonly={readonly}
               size={inputSize.value}
               value={inputValue.value}
               onInput={handleInput}
             />
-            <span class={`${prefixCls}-suffix`}>
-              <IxIcon name={suffix.value}></IxIcon>
-            </span>
-            {clearable.value && (
-              <span class={`${prefixCls}-clear`} onClick={handleClear}>
-                <IxIcon name="close-circle" />
-              </span>
-            )}
           </div>
-        </div>
+        </ɵTrigger>
       )
     }
   },

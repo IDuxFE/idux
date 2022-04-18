@@ -7,9 +7,7 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export interface FooterButtonProps extends ButtonProps {
   key?: VKey
@@ -17,17 +15,22 @@ export interface FooterButtonProps extends ButtonProps {
   onClick?: (evt: Event) => void
 }
 
+export const footerTypeDef = [Boolean, Array, Object] as PropType<boolean | FooterButtonProps[] | VNode>
+
 export const footerProps = {
-  cancel: IxPropTypes.func<(evt?: Event | unknown) => Promise<void>>(),
-  cancelButton: IxPropTypes.object<ButtonProps>(),
-  cancelLoading: IxPropTypes.bool,
-  cancelText: IxPropTypes.string,
-  cancelVisible: IxPropTypes.bool.def(true),
-  footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<FooterButtonProps>(), IxPropTypes.vNode]),
-  ok: IxPropTypes.func<(evt?: Event | unknown) => Promise<void>>(),
-  okButton: IxPropTypes.object<ButtonProps>(),
-  okLoading: IxPropTypes.bool,
-  okText: IxPropTypes.string,
+  cancel: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
+  cancelButton: Object as PropType<ButtonProps>,
+  cancelLoading: Boolean,
+  cancelText: String,
+  cancelVisible: {
+    type: Boolean,
+    default: true,
+  },
+  footer: footerTypeDef,
+  ok: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
+  okButton: Object as PropType<ButtonProps>,
+  okLoading: Boolean,
+  okText: String,
 }
 
 export type FooterProps = ExtractInnerPropTypes<typeof footerProps>
