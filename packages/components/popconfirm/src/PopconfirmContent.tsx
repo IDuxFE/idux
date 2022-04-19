@@ -21,11 +21,11 @@ export default defineComponent({
     const okText = computed(() => props.okText ?? locale.popconfirm.okText)
 
     const cancelButton = computed<PopconfirmButtonProps>(() => {
-      return { size: 'sm', ...props.cancelButton }
+      return { size: 'xs', ...props.cancelButton }
     })
 
     const okButton = computed<PopconfirmButtonProps>(() => {
-      return { size: 'sm', ...props.okButton }
+      return { size: 'xs', ...props.okButton }
     })
 
     return () => {

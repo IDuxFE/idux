@@ -14,7 +14,7 @@
   &-vertical,
   &-inline {
     width: 100%;
-    padding: 0.02px 0;
+    font-size: @menu-vertical-font-size;
     border-right: @menu-border-width @menu-border-style @menu-border-color;
 
     &.@{menu-prefix}-collapsed {
@@ -121,6 +121,11 @@
   &-sub {
     .@{menu-prefix}-inline {
       border-right: 0;
+      font-size: @menu-sub-inline-font-size;
     }
+  }
+
+  .@{icon-prefix} {
+    font-size: @menu-icon-font-size;
   }
 }

@@ -14,6 +14,10 @@
     border: none;
   }
 
+  &-has-shadow {
+    box-shadow: @card-box-shadow;
+  }
+
   &-hoverable {
     cursor: pointer;
     transition: @transition-all-base;
@@ -52,10 +56,6 @@
     margin-top: -@card-border-width;
     margin-right: -@card-border-width;
     margin-left: -@card-border-width;
-  }
-
-  > .@{idux-prefix}-header {
-    border-bottom: @card-border-width @card-border-style @card-border-color;
   }
 
   &-footer {
@@ -113,6 +113,14 @@
 
       &:hover {
         box-shadow: @card-box-shadow;
+      }
+    }
+  }
+
+  .@{idux-prefix}-header {
+    &-content {
+      > .@{idux-prefix}-header-suffix {
+        padding: 0;
       }
     }
   }

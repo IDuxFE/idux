@@ -70,9 +70,9 @@ subtitle: 按钮
 | `@button-border-size` | `@border-width-sm` | - | - |
 | `@button-border-radius` | `@border-radius-sm` | - | - |
 | `@button-shadow` | `0 2px 0 rgba(0, 0, 0, 0.015)` | - | - |
-| `@button-disable-color` | `@text-color-disabled` | - | - |
-| `@button-disable-background-color` | `@background-color-disabled` | - | - |
-| `@button-disable-border-color` | `@border-color` | - | - |
+| `@button-disable-color` | `@disabled-color` | - | - |
+| `@button-disable-background-color` | `@disabled-bg-color` | - | - |
+| `@button-disable-border` | `@disabled-border-color` | - | - |
 | `@button-primary` | `@color-white` | - | - |
 | `@button-primary-background-color` | `@color-primary` | - | - |
 | `@button-primary-border-color` | `@color-primary` | - | - |
@@ -81,6 +81,7 @@ subtitle: 按钮
 | `@button-primary-loading-border` | `@color-primary-l10` | - | - |
 | `@button-primary-text-shadow` | `0 -1px 0 rgba(0, 0, 0, 0.15)` | - | - |
 | `@button-primary-box-shadow` | `0 2px 0 rgba(0, 0, 0, 0.045)` | - | - |
+| `@button-loading-color` | `@color-graphite` | - | - |
 | `@button-default-color` | `@text-color` | - | - |
 | `@button-default-background-color` | `@background-color-component` | - | - |
 | `@button-default-border-color` | `@border-color` | - | - |
@@ -91,18 +92,19 @@ subtitle: 按钮
 | `@button-danger-active-color` | `@color-error-d10` | - | - |
 | `@button-danger-active-border-color` | `@color-error-d10` | - | - |
 | `@button-danger-background-color` | `@color-error` | - | - |
-| `@button-loading-color` | `@color-graphite` | - | - |
 | `@button-ghost-color` | `@background-color-component` | - | - |
 | `@button-ghost-background-color` | `transparent` | - | - |
 | `@button-ghost-hover-background-color` | `rgba(255,255,255,0.20)` | - | - |
 | `@button-ghost-disabled-background-color` | `rgba(255,255,255,0.40)` | - | - |
-| `@button-ghost-border-color` | `@background-color-component` | - | - |
+| `@button-ghost-border` | `@background-color-component` | - | - |
 | `@button-link-color` | `@color-primary` | - | - |
-| `@button-link-hover-color` | `@color-primary-l10` | - | - |
-| `@button-link-active-color` | `@color-primary-d10` | - | - |
 | `@button-link-hover-background-color` | `transparent` | - | - |
+| `@button-link-padding` | `0` | - | - |
 | `@button-text-color` | `@text-color` | - | - |
 | `@button-text-hover-color` | `@color-primary-l10` | - | - |
 | `@button-text-active-color` | `@color-primary-d10` | - | - |
-| `@button-text-hover-background-color` | `rgba(0, 0, 0, 0.12)` | - | - |
+| `@button-text-hover-background-color` | `transparent` | - | - |
+| `@button-icon-color` | `@color-graphite-d20` | - | - |
+| `@button-icon-font-size` | `@font-size-lg` | - | - |
+| `@button-icon-color` | `@color-graphite-d20` | - | - |
 <!--- insert less variable end  --->

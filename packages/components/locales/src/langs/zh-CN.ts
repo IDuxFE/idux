@@ -59,7 +59,7 @@ const zhCN: Locale = {
     okText: '确定',
   },
   pagination: {
-    itemsPerPage: '条/页',
+    itemsPerPage: '每页',
     jumpTo: '前往',
     page: '页',
     prev: '上一页',
@@ -67,7 +67,7 @@ const zhCN: Locale = {
     prev5: '向前 5 页',
     next5: '向后 5 页',
     totalPrefix: '共',
-    totalSuffix: '条',
+    totalSuffix: '项',
   },
   select: {
     limitMessage: '该选择器的值不能超过 ${0} 项',

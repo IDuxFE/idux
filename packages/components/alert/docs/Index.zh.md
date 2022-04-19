@@ -56,6 +56,7 @@ export interface AlertPagination {
 | `@alert-icon-margin-right-with-description` | `@spacing-lg` | - | - |
 | `@alert-title-font-size-with-description` | `@font-size-lg` | - | - |
 | `@alert-title-margin-bottom-with-description` | `@spacing-xs` | - | - |
-| `@alert-pagination-icon-padding` | `0 @spacing-xs` | - | - |
+| `@alert-pagination-text-padding` | `0 @spacing-xs` | - | - |
 | `@alert-action-margin-left` | `@spacing-lg` | - | - |
+| `@alert-icon-font-size` | `@font-size-lg` | - | - |
 <!--- insert less variable end  --->

@@ -58,6 +58,8 @@
     &-item {
       opacity: @carousel-icon-opacity;
       cursor: pointer;
+      line-height: @carousel-dot-vertical-width;
+      font-size: 0; // 消除幽灵高度，避免影响间距计算
 
       &:hover,
       &-active {

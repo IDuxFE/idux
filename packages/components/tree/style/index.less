@@ -3,6 +3,7 @@
 .@{tree-prefix} {
   .reset-component();
 
+  font-size: @tree-font-size;
   background-color: @tree-background-color;
   border-radius: @border-radius-sm;
   transition: background-color @transition-duration-base;
@@ -31,12 +32,13 @@
 
       &-expand {
         position: relative;
+        color: @tree-expand-icon-color;
 
         &-top-line {
           position: absolute;
           width: @tree-node-line-width;
-          height: (@tree-node-content-height / 2 - 2);
-          top: -5px;
+          height: (@tree-node-content-height / 2 - 4);
+          top: -6px;
           right: 50%;
           border-right: @tree-node-line-border;
         }
@@ -45,7 +47,7 @@
           position: absolute;
           width: (@tree-node-content-height / 4);
           height: (@tree-node-content-height / 2);
-          margin-left: 1px;
+          margin-left: 4px;
           border-bottom: @tree-node-line-border;
           content: ' ';
         }
@@ -56,10 +58,10 @@
 
           &::before {
             position: absolute;
-            top: (@tree-node-content-height - 2);
+            top: (@tree-node-content-height - 6);
             right: 50%;
             width: @tree-node-line-width;
-            height: (@tree-node-content-height / 2 - 2);
+            height: (@tree-node-content-height / 2 - 4);
             border-right: @tree-node-line-border;
             content: ' ';
           }
@@ -86,12 +88,17 @@
       }
     }
   }
+
 }
 
 .@{tree-node-prefix} {
   display: flex;
   align-items: center;
   padding: @tree-node-padding-vertical 0;
+
+  .@{icon-prefix} {
+    font-size: @tree-icon-font-size;
+  }
 
   &-indent {
 
@@ -107,6 +114,7 @@
     line-height: @tree-node-content-height;
     text-align: center;
     cursor: pointer;
+    margin-right: 4px;
 
     &-noop {
       cursor: default;
@@ -180,12 +188,16 @@
     }
   }
 
-  &-active &-content {
+  &-active:not(&-disabled) &-content {
     background-color: @tree-node-hover-background-color;
   }
 
-  &-selected &-content {
+  &-selected:not(&-disabled) &-content {
     background-color: @tree-node-selected-background-color;
+    color: @tree-node-selected-color ;
+    &:hover {
+      background-color: @tree-node-hover-background-color;
+    }
   }
 
   &-disabled &-content {

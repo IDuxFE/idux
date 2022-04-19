@@ -183,7 +183,7 @@ const openDrawer = () => open({
 | `@drawer-font-size` | `@font-size-md` | - | - |
 | `@drawer-line-height` | `@line-height-base` | - | - |
 | `@drawer-color` | `@text-color` | - | - |
-| `@drawer-title-color` | `@color-graphite-d50` | - | - |
+| `@drawer-title-font-size` | `@font-size-lg` | - | - |
 | `@drawer-background-color` | `@background-color-component` | - | - |
 | `@drawer-box-shadow-start` | `@shadow-right-lg` | - | - |
 | `@drawer-box-shadow-end` | `@shadow-left-lg` | - | - |
@@ -191,6 +191,5 @@ const openDrawer = () => open({
 | `@drawer-header-padding` | `@spacing-lg @spacing-xl @spacing-sm` | - | - |
 | `@drawer-body-padding` | `@spacing-sm @spacing-xl` | - | - |
 | `@drawer-footer-padding` | `@spacing-sm @spacing-xl @spacing-lg` | - | - |
-| `@drawer-footer-min-height` | `64px` | - | - |
 | `@drawer-footer-button-margin-left` | `@spacing-sm` | - | - |
 <!--- insert less variable end  --->

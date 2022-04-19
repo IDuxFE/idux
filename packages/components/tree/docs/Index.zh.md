@@ -116,18 +116,23 @@ export type TreeDropType = 'before' | 'inside' | 'after'
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@tree-node-prefix` | `~'@{tree-prefix}-node'` | - | - |
+| `@tree-font-size` | `@font-size-md` | - | - |
+| `@tree-icon-font-size` | `@font-size-lg` | - | - |
+| `@tree-icon-color` | `@color-graphite-d20` | - | - |
 | `@tree-background-color` | `@background-color-component` | - | - |
 | `@tree-background-color-focused` | `@background-color-selected-light` | - | - |
 | `@tree-box-shadow-size` | `2px` | - | - |
 | `@tree-box-shadow-color` | `@color-primary-l20` | - | - |
 | `@tree-node-disabled-color` | `@text-color-disabled` | - | - |
 | `@tree-node-hover-background-color` | `@color-graphite-l50` | - | - |
+| `@tree-node-selected-color` | `@color-graphite-d40` | - | - |
 | `@tree-node-selected-background-color` | `@color-graphite-l40` | - | - |
 | `@tree-node-line-width` | `1px` | - | - |
-| `@tree-node-line-border` | `1px dashed @border-color` | - | - |
-| `@tree-node-padding-vertical` | `(@spacing-xs / 2)` | - | - |
-| `@tree-node-checkbox-margin` | `0 @spacing-sm 0 @spacing-xs` | - | - |
+| `@tree-node-line-border` | `1px dashed @color-graphite` | - | - |
+| `@tree-node-padding-vertical` | `(@spacing-sm / 2)` | - | - |
+| `@tree-node-checkbox-margin` | `0 @spacing-xs 0 @spacing-xs` | - | - |
 | `@tree-node-content-height` | `@height-sm` | - | - |
 | `@tree-node-content-label-padding` | `0 @spacing-xs` | - | - |
 | `@tree-node-content-label-highlight-color` | `@color-primary` | - | - |
+| `@tree-expand-icon-color` | `@color-graphite` | - | - |
 <!--- insert less variable end  --->

@@ -59,7 +59,7 @@
       top: 50%;
       right: 0;
       width: 1px;
-      height: 1.6em;
+      height: @table-head-split-height;
       background-color: @table-head-split-color;
       transform: translateY(-50%);
       content: '';
@@ -159,6 +159,12 @@
     font-size: @table-expandable-icon-size;
     margin-right: @table-icon-margin;
     color: @table-expandable-icon-color;
+    outline: none;
+    cursor: pointer;
+
+    &-disabled {
+      cursor: unset;
+    }
   }
 
   // --------- Selectable ---------
@@ -242,14 +248,17 @@
   &-sortable-trigger,
   &-filterable-trigger {
     margin-left: @table-icon-margin;
-    padding: 8px 4px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 1px;
     color: @table-head-icon-color;
     transition: color @transition-duration-base, background @transition-duration-base;
     cursor: pointer;
 
     &:hover {
-      background-color: @table-head-icon-hover-backgroud-color;
+      background-color: @table-head-icon-hover-background-color;
     }
 
     &-active {

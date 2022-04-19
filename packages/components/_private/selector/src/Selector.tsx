@@ -71,6 +71,7 @@ export default defineComponent({
     const classes = computed(() => {
       const config = props.config
       const {
+        allowInput,
         className,
         borderless = config.borderless,
         multiple,
@@ -89,7 +90,7 @@ export default defineComponent({
         [`${prefixCls}-readonly`]: props.readonly,
         [`${prefixCls}-single`]: !multiple,
         [`${prefixCls}-searchable`]: mergedSearchable.value,
-        [`${prefixCls}-with-suffix`]: slots.suffix || mergedSuffix.value,
+        [`${prefixCls}-allow-input`]: allowInput || mergedSearchable.value,
         [`${prefixCls}-${size}`]: true,
       })
     })

@@ -102,7 +102,7 @@
 
       .@{input-prefix}-addon {
         .@{selector-prefix} {
-          margin: -@input-padding-vertical-sm -@input-padding-horizontal-sm;
+          margin: @input-addon-margin-with-selector-sm;
         }
       }
 
@@ -120,7 +120,7 @@
 
       .@{input-prefix}-addon {
         .@{selector-prefix} {
-          margin: -@input-padding-vertical-md -@input-padding-horizontal-md;
+          margin: @input-addon-margin-with-selector-md;
         }
       }
 
@@ -138,7 +138,7 @@
 
       .@{input-prefix}-addon {
         .@{selector-prefix} {
-          margin: -@input-padding-vertical-lg -@input-padding-horizontal-lg;
+          margin: @input-addon-margin-with-selector-lg;
         }
       }
 
@@ -188,6 +188,14 @@
         border: @input-border-width @input-border-style transparent;
         box-shadow: none;
       }
+
+      &-item-label {
+        width: 100%;
+      }
+
+      &-suffix {
+        right: 4px;
+      }
     }
   }
 
@@ -207,7 +215,8 @@
   &-prefix {
     display: inline-flex;
     align-items: center;
-    color: @input-placeholder-color;
+    color: @input-icon-color;
+    font-size: @input-icon-font-size;
   }
 
   &-prefix {
@@ -216,19 +225,21 @@
 
   &-suffix {
     margin-left: @input-wrapper-inner-margin;
+    cursor: pointer;
   }
 
   &-clear {
     position: absolute;
     z-index: 1;
+    font-size: @input-icon-font-size;
+    line-height: @input-clear-icon-line-height;
     cursor: pointer;
     opacity: 0;
-    color: @input-placeholder-color;
+    color: @input-icon-color;
     background-color: @input-background-color;
     transition: @transition-all-base;
-
-    &:hover {
-      color: @input-color;
+    :hover {
+      color: @input-icon-hover-color;
     }
   }
 
@@ -240,15 +251,15 @@
     }
 
     &.@{input-prefix}-sm .@{input-prefix}-clear {
-      right: @input-padding-horizontal-sm;
+      right: @input-padding-horizontal-sm - 4;
     }
 
     &.@{input-prefix}-md .@{input-prefix}-clear {
-      right: @input-padding-horizontal-md;
+      right: @input-padding-horizontal-md - 4;
     }
 
     &.@{input-prefix}-lg .@{input-prefix}-clear {
-      right: @input-padding-horizontal-lg;
+      right: @input-padding-horizontal-lg - 4;
     }
   }
 

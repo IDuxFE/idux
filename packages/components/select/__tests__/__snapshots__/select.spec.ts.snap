@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Select > multiple work > maxLabel responsive work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md\\">
+"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow\\">
@@ -38,7 +38,7 @@ exports[`Select > multiple work > maxLabel responsive work 1`] = `
 `;
 
 exports[`Select > multiple work > maxLabel responsive work 2`] = `
-"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md\\">
+"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow\\">
@@ -66,7 +66,7 @@ exports[`Select > multiple work > maxLabel responsive work 2`] = `
 `;
 
 exports[`Select > multiple work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-with-suffix ix-selector-md\\">
+"<div class=\\"ix-select ix-selector ix-selector-multiple ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow\\">
@@ -91,7 +91,7 @@ exports[`Select > multiple work > render work 1`] = `
 `;
 
 exports[`Select > single work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md\\">
+"<div class=\\"ix-select ix-selector ix-selector-single ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
@@ -107,7 +107,7 @@ exports[`Select > single work > render work 1`] = `
 `;
 
 exports[`Select > template work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-single ix-selector-with-suffix ix-selector-md\\">
+"<div class=\\"ix-select ix-selector ix-selector-single ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>

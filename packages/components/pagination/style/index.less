@@ -5,12 +5,24 @@
   .reset-component();
 
   font-size: @pagination-font-size;
+  display: flex;
 
   &-item,
   &-total,
   &-sizes,
   &-jumper {
     display: inline-block;
+  }
+
+  &-sizes {
+    display: inline-flex;
+    min-width: 104px;
+
+    &-select-wrapper {
+      flex: auto;
+      margin: 0 4px;
+      
+    }
   }
 
   &-item {
@@ -27,7 +39,7 @@
     }
 
     &-jumper {
-      .@{idux-prefix}-button {
+      .@{button-prefix} {
         display: none;
       }
 
@@ -36,7 +48,7 @@
       }
 
       &:hover {
-        .@{idux-prefix}-button {
+        .@{button-prefix} {
           display: inline-block;
         }
 
@@ -47,31 +59,46 @@
     }
 
     &-active {
-      .@{idux-prefix}-button {
+      .@{button-prefix} {
         color: @pagination-item-active-color;
         background-color: @pagination-item-active-background-color;
       }
 
-      .@{idux-prefix}-button.@{idux-prefix}-button-disabled {
+      .@{button-prefix}.@{button-prefix}-disabled {
         color: @pagination-item-disabled-color;
         background-color: @pagination-item-disabled-background-color;
       }
     }
+
+    &-button {
+      .@{button-prefix}:not(.@{button-prefix}-disabled) {
+        &:hover {
+          color: @pagination-item-button-hover-color;
+          background-color: @pagination-item-button-hover-background-color;
+        }
+        &:focus {
+          color: @pagination-item-button-active-color;
+        }
+      }
+    }
   }
 
-  &-item:not(&-item-active) {
-    .@{idux-prefix}-button:hover:not(.@{idux-prefix}-button-disabled) {
+  &-item:not(&-item-active):not(&-item-button) {
+    .@{button-prefix}:hover:not(.@{button-prefix}-disabled) {
+      color: @pagination-item-color;
       background-color: @pagination-item-hover-background-color;
     }
   }
 
   &-total {
     margin-right: @pagination-item-margin-right-md;
+    color: @pagination-total-color;
   }
 
   &-sizes,
   &-jumper {
     margin-left: @pagination-item-margin-right-md;
+    color: @pagination-sizes-color;
   }
 
   &-md {
@@ -80,6 +107,8 @@
 
   &-sm {
     .pagination-size(@pagination-item-height-sm, @pagination-item-input-width-sm, @pagination-item-margin-right-sm);
+
+    font-size: @pagination-font-size-sm;
 
     .@{button-prefix} {
       min-width: @pagination-item-spacing-sm;

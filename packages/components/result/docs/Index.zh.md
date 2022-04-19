@@ -38,15 +38,16 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | `@result-padding` | `@spacing-gutter * 6 @spacing-gutter * 4` | - | - |
 | `@result-text-align` | `center` | - | - |
 | `@result-icon-margin` | `@spacing-lg` | - | - |
-| `@result-icon-size` | `@font-size-md * 4` | - | - |
+| `@result-icon-size` | `@font-size-sm * 4` | - | - |
 | `@result-title-font-size` | `@font-size-2xl` | - | - |
 | `@result-title-color` | `@text-color` | - | - |
 | `@result-title-font-weight` | `@font-weight-md` | - | - |
-| `@result-title-line-height` | `1.8` | - | - |
-| `@result-subtitle-font-size` | `@font-size-md` | - | - |
+| `@result-title-line-height` | `32px` | - | - |
+| `@result-subtitle-font-size` | `@font-size-sm` | - | - |
 | `@result-subtitle-color` | `@color-graphite-d10` | - | - |
 | `@result-subtitle-font-weight` | `@font-weight-md` | - | - |
-| `@result-subtitle-line-height` | `1.6` | - | - |
+| `@result-subtitle-line-height` | `18px` | - | - |
+| `@result-subtitle-margin-top` | `@spacing-xs` | - | - |
 | `@result-extra-margin` | `@spacing-xl` | - | - |
 | `@result-extra-children-margin` | `@spacing-sm` | - | - |
 | `@result-content-margin` | `@spacing-xl` | - | - |

@@ -103,10 +103,10 @@
 
       &-box {
         background-color: @radio-disabled-background-color;
-        border-color: @radio-disabled-color;
+        border-color: @radio-disabled-border-color;
 
         &::after {
-          background-color: @radio-disabled-color;
+          background-color: @radio-disabled-border-color;
         }
       }
     }
@@ -115,6 +115,7 @@
 
 .@{radio-prefix}-button {
   display: inline-block;
+  text-align: center;
   background-color: @radio-background-color;
   border: @radio-border-width @radio-border-style @radio-border-color;
   border-radius: @radio-border-radius;
@@ -178,15 +179,15 @@
   }
 
   &.@{radio-prefix}-sm {
-    .radio-size(@radio-height-sm, @radio-font-size-sm, @radio-padding-horizontal-sm);
+    .radio-size(@radio-height-sm, @radio-min-width-sm, @radio-font-size-sm, @radio-padding-horizontal-sm);
   }
 
   &.@{radio-prefix}-md {
-    .radio-size(@radio-height-md, @radio-font-size-md, @radio-padding-horizontal-md);
+    .radio-size(@radio-height-md, @radio-min-width-md, @radio-font-size-md, @radio-padding-horizontal-md);
   }
 
   &.@{radio-prefix}-lg {
-    .radio-size(@radio-height-lg, @radio-font-size-lg, @radio-padding-horizontal-lg);
+    .radio-size(@radio-height-lg, @radio-min-width-lg, @radio-font-size-lg, @radio-padding-horizontal-lg);
   }
 }
 

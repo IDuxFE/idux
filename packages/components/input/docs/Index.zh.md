@@ -47,6 +47,9 @@ subtitle: 输入框
 | `@input-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
 | `@input-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
 | `@input-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |
+| `@input-addon-margin-with-selector-sm` | `-(@input-padding-vertical-sm + 1) -@input-padding-horizontal-sm` | - | - |
+| `@input-addon-margin-with-selector-md` | `-(@input-padding-vertical-md + 1) -@input-padding-horizontal-md` | - | - |
+| `@input-addon-margin-with-selector-lg` | `-(@input-padding-vertical-lg + 1) -@input-padding-horizontal-lg` | - | - |
 | `@input-border-width` | `@form-border-width` | - | - |
 | `@input-border-style` | `@form-border-style` | - | - |
 | `@input-border-color` | `@form-border-color` | - | - |
@@ -60,6 +63,10 @@ subtitle: 输入框
 | `@input-active-box-shadow` | `@form-active-box-shadow` | - | - |
 | `@input-disabled-color` | `@form-disabled-color` | - | - |
 | `@input-disabled-background-color` | `@form-disabled-background-color` | - | - |
+| `@input-icon-color` | `@form-icon-color` | - | - |
+| `@input-icon-hover-color` | `@form-icon-hover-color` | - | - |
+| `@input-icon-font-size` | `@font-size-lg` | - | - |
+| `@input-clear-icon-line-height` | `@font-size-xl` | - | - |
 | `@input-addon-background-color` | `@background-color-base` | - | - |
 | `@input-wrapper-inner-margin` | `@spacing-xs` | - | - |
 <!--- insert less variable end  --->

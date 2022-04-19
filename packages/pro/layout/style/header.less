@@ -4,7 +4,6 @@
   z-index: 2;
   height: @pro-layout-header-height;
   line-height: @pro-layout-header-height;
-  box-shadow: @pro-layout-header-box-shadow;
 
   &-fixed {
     position: sticky;
@@ -12,6 +11,8 @@
 
   &-logo {
     min-width: @pro-layout-header-logo-width;
+    height: @pro-layout-header-height;
+    line-height: @pro-layout-header-height;
   }
 
   &-content {
@@ -19,14 +20,31 @@
 
     .@{menu-prefix} {
       border: 0;
-    }
 
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub {
-      overflow: hidden;
-      border-radius: @pro-layout-header-item-radius;
-      margin: @pro-layout-header-item-margin;
-      padding: @pro-layout-header-item-padding;
+      &-horizontal {
+        .@{menu-prefix} {
+
+          &-sub-label {
+            overflow: hidden;
+            margin: @pro-layout-header-item-margin;
+            padding: 0;
+            border: 0;
+          }
+        }
+      }
+
+      &-item,
+      &-sub {
+        overflow: hidden;
+        margin: @pro-layout-header-item-margin;
+        padding: @pro-layout-header-item-padding;
+        &-horizontal {
+          padding: 0;
+          .@{menu-prefix}-sub-label {
+            padding: @pro-layout-header-item-padding;
+          }
+        }
+      }
     }
   }
 
@@ -35,14 +53,49 @@
   }
 
   &-light {
-    .pro-layout-theme-base-color('light');
-    .pro-layout-theme-menu('light');
-    .pro-layout-theme-menu-item-in-header('light');
+    .header-themes('light');
   }
 
   &-dark {
-    .pro-layout-theme-base-color('dark');
-    .pro-layout-theme-menu('dark');
-    .pro-layout-theme-menu-item-in-header('dark');
+    .header-themes('dark');
+  }
+
+  &-menu-overlay {
+
+    .@{menu-prefix} {
+      &-vertical {
+        font-size: @pro-layout-header-vertical-menu-item-font-size;
+        padding: 4px 8px;
+        display: flex;
+        border-radius: @border-radius-sm;
+
+        .@{menu-prefix}-item-group > .@{menu-prefix}-item-group-content {
+          .@{menu-prefix}-item {
+            padding: 0 12px;
+            margin: 0 4px;
+            border-radius: @border-radius-sm;
+          }
+        }
+
+        .@{menu-prefix} {
+          &-item {
+            height: @pro-layout-header-vertical-menu-item-line-height;
+            line-height: @pro-layout-header-vertical-menu-item-line-height;
+     
+
+            &-group-label {
+              padding-left: 16px;
+              font-size: @pro-layout-header-vertical-menu-item-font-size;
+              height: @pro-layout-header-vertical-menu-item-height;
+              line-height: @pro-layout-header-vertical-menu-item-height;
+            }
+          }
+        }
+      }
+    }
+
+    &-dark {
+      .header-overlay-themes('dark') 
+    }
   }
 }

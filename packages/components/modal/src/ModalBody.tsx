@@ -36,8 +36,10 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-body`
+      const defaultNode = slots.default?.()
+
       if (isDefault.value) {
-        return <div class={prefixCls}>{slots.default?.()}</div>
+        return <div class={prefixCls}>{defaultNode}</div>
       }
       const classes = `${prefixCls} ${prefixCls}-${props.type}`
       const iconNode = renderIcon(prefixCls, slots.icon, iconName.value)
@@ -45,9 +47,9 @@ export default defineComponent({
       return (
         <div class={classes}>
           {iconNode}
-          <div class={`${prefixCls}-content`}>
+          <div class={[`${prefixCls}-content`, defaultNode ? '' : `${prefixCls}-content-only-title`]}>
             {titleNode}
-            {slots.default?.()}
+            {defaultNode}
           </div>
         </div>
       )

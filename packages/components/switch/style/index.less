@@ -13,6 +13,7 @@
   background-color: @switch-background-color;
   border-radius: @switch-border-radius;
   transition: all @transition-duration-base @ease-in-out;
+  outline: none;
 
   &::after {
     position: absolute;
@@ -28,23 +29,26 @@
   &-loading-icon {
     position: absolute;
     z-index: 1;
-    color: @switch-background-color;
+    color: @switch-disabled-color;
   }
 
   &-checked {
     background-color: @switch-active-color;
 
     .@{switch-prefix}-loading-icon {
-      color: @switch-active-color;
+      color: @switch-active-disabled-color;
     }
   }
 
   &-loading,
   &-disabled {
-    opacity: @switch-disabled-opacity;
     cursor: not-allowed;
 
-    .@{switch-prefix} {
+    &.@{switch-prefix} {
+      background-color: @switch-disabled-color;
+      &-checked {
+        background-color: @switch-active-disabled-color;
+      }
 
       &::after {
         cursor: not-allowed;
@@ -54,10 +58,6 @@
 
   &-sm {
     .switch-size(@switch-height-sm, @switch-icon-font-size-sm, @switch-box-size-sm, @switch-box-size-padding, 0px, @switch-padding-horizontal-sm);
-
-    .@{switch-prefix}-loading-icon {
-      top: -1.5px;
-    }
   }
 
   &-md {

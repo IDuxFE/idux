@@ -20,6 +20,7 @@
   overflow: hidden;
   vertical-align: top;
   white-space: nowrap;
+  outline: none;
 
   &:first-child {
     padding-left: 0;
@@ -57,12 +58,13 @@
   }
 
   &-icon {
-    text-align: center;
-    border: @border-width-sm @border-style @stepper-item-wait-icon-color;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: @border-width-md @border-style @stepper-item-wait-icon-color;
     transition: background-color @transition-duration-base, border-color @transition-duration-base;
   }
 
-  &-icon,
   &-content {
     display: inline-block;
     vertical-align: top;
@@ -71,6 +73,7 @@
   &-title {
     position: relative;
     display: inline-block;
+    font-weight: @stepper-item-font-weight;
 
     &::after {
       display: block;

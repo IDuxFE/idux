@@ -124,11 +124,11 @@ export default defineComponent({
 | `@form-height-md` | `@height-md` | - | - |
 | `@form-height-lg` | `@height-lg` | - | - |
 | `@form-padding-horizontal-sm` | `@spacing-sm - 2px` | - | - |
-| `@form-padding-horizontal-md` | `@spacing-sm` | - | - |
+| `@form-padding-horizontal-md` | `@spacing-md` | - | - |
 | `@form-padding-horizontal-lg` | `@spacing-sm + 2px` | - | - |
-| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
-| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
-| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
+| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
+| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
+| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
 | `@form-border-width` | `@border-width-sm` | - | - |
 | `@form-border-style` | `@border-style` | - | - |
 | `@form-border-color` | `@border-color` | - | - |
@@ -137,6 +137,7 @@ export default defineComponent({
 | `@form-border-radius-lg` | `@border-radius-lg` | - | - |
 | `@form-color` | `@text-color` | - | - |
 | `@form-color-secondary` | `@text-color-secondary` | - | - |
+| `@form-tooltip-color` | `@text-color-secondary` | - | - |
 | `@form-background-color` | `@background-color-component` | - | - |
 | `@form-placeholder-color` | `@color-graphite` | - | - |
 | `@form-hover-color` | `@color-primary-l10` | - | - |
@@ -145,7 +146,10 @@ export default defineComponent({
 | `@form-focus-color` | `@color-primary-d10` | - | - |
 | `@form-focus-box-shadow` | `0 0 0 2px fade(@form-focus-color, 20%)` | - | - |
 | `@form-disabled-color` | `@text-color-disabled` | - | - |
+| `@form-disabled-border-color` | `@color-graphite-l20` | - | - |
 | `@form-disabled-background-color` | `@background-color-disabled` | - | - |
+| `@form-icon-color` | `@color-graphite-d20` | - | - |
+| `@form-icon-hover-color` | `@color-graphite-d20` | - | - |
 | `@form-item-valid-color` | `@color-success` | - | - |
 | `@form-item-validating-color` | `@color-pending` | - | - |
 | `@form-item-invalid-color` | `@color-error` | - | - |
@@ -159,4 +163,6 @@ export default defineComponent({
 | `@form-item-label-color` | `@color-black` | - | - |
 | `@form-item-label-colon-margin-right` | `8px` | - | - |
 | `@form-item-label-colon-margin-left` | `2px` | - | - |
+| `@form-item-label-margin-left` | `8px` | - | - |
+| `@form-item-label-before-content-left` | `-8px` | - | - |
 <!--- insert less variable end  --->

@@ -17,26 +17,31 @@ export default defineComponent({
 
     const sizeOptions = computed(() => {
       const { pageSizes = config.pageSizes } = props
-      const { itemsPerPage } = locale.pagination
       return pageSizes.map(size => {
         return {
           value: size,
-          label: `${size} ${itemsPerPage}`,
+          label: size,
         }
       })
     })
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-sizes`
+      const { itemsPerPage, totalSuffix } = locale.pagination
+
       return (
         <li class={prefixCls}>
-          <IxSelect
-            disabled={props.disabled}
-            options={sizeOptions.value}
-            size={size.value}
-            value={activeSize.value}
-            onChange={changePageSize}
-          />
+          {itemsPerPage}
+          <div class={`${prefixCls}-select-wrapper`}>
+            <IxSelect
+              disabled={props.disabled}
+              options={sizeOptions.value}
+              size={size.value}
+              value={activeSize.value}
+              onChange={changePageSize}
+            />
+          </div>
+          {totalSuffix}
         </li>
       )
     }

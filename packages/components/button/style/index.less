@@ -8,7 +8,8 @@
   .button-default();
 
   > span {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
   }
 
   &-primary {
@@ -123,9 +124,29 @@
     position: relative;
   }
 
-  > .@{icon-prefix} + span,
+  &:not(&-disabled):not(&-danger):not(&-primary):not(&-link):not(:hover):not(:focus):not(:active) {
+    .@{icon-prefix} {
+      color: @button-icon-color;
+    }
+  }
+
+  .@{icon-prefix} {
+    font-size: @button-icon-font-size;
+  }
+
+  > .@{icon-prefix} + span {
+    margin-left: @button-icon-margin-left;
+    margin-right: @button-icon-margin-left;
+  }
+
   > span + .@{icon-prefix} {
     margin-left: @button-icon-margin-left;
+    margin-right: -@button-icon-margin-left;
+  }
+
+  > span .@{icon-prefix} {
+    margin-left: @button-icon-margin-left;
+    margin-right: -@button-icon-margin-left;
   }
 
   &:empty {

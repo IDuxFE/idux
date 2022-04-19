@@ -23,7 +23,7 @@
     &::before {
       position: relative;
       display: block;
-      width: @anchor-ink-line-border-width;
+      width: @anchor-ink-line-width;
       height: 100%;
       margin: 0 auto;
       background-color: @anchor-border-color;
@@ -32,14 +32,11 @@
 
     &-ball {
       position: absolute;
-      left: 50%;
       display: none;
       width: @anchor-ink-ball-width;
       height: @anchor-ink-ball-height;
-      background-color: @anchor-background-color;
-      border: @anchor-ink-ball-border-width solid @anchor-link-active-color;
+      background-color: @anchor-ink-ball-background-color;
       border-radius: @anchor-ink-ball-radius;
-      transform: translateX(-50%);
       transition: top @transition-duration-base @ease-in-out;
 
       &-visible {
@@ -66,6 +63,10 @@
       text-decoration: none;
       transition: @transition-all-base;
 
+      &:hover {
+        color: @anchor-link-hover-color;
+      }
+      
       &-active {
         color: @anchor-link-active-color;
       }

@@ -31,6 +31,11 @@ const indexDiffMap = {
   next5: 5,
 } as const
 
+const buttonSizeTransformMap = {
+  md: 'sm',
+  sm: 'xs',
+} as const
+
 export default defineComponent({
   props: paginationItemProps,
   setup(props) {
@@ -50,9 +55,11 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item`
+      const { type } = props
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
+        [`${prefixCls}-button`]: type === 'next' || type === 'prev',
       }
     })
 
@@ -91,7 +98,11 @@ export default defineComponent({
       const active = isActive.value
       let original: VNodeTypes
       const icon = iconMap[type]
-      const commonButtonProps = { mode: 'text', size: 'sm', shape: 'circle' } as const
+      const commonButtonProps = {
+        mode: 'text',
+        size: buttonSizeTransformMap[paginationProps.size ?? config.size],
+        shape: 'circle',
+      } as const
       if (props.type === 'prev5' || type === 'next5') {
         original = (
           <span class={`${prefixCls}-jumper`}>

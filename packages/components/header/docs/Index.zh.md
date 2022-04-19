@@ -63,4 +63,5 @@ order: 0
 | `@header-suffix-font-size` | `@font-size-lg` | - | - |
 | `@header-suffix-font-size-sm` | `@font-size-md` | - | - |
 | `@header-description-color` | `@text-color` | - | - |
+| `@header-icon-font-size` | `@font-size-lg` | - | - |
 <!--- insert less variable end  --->

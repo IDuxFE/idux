@@ -26,6 +26,10 @@
 
     &&-has-scroll {
       padding: 0 @tabs-nav-pre-next-width;
+
+      > .@{icon-prefix} {
+        font-size: @tabs-icon-font-size;
+      }
     }
 
     .@{tabs-prefix} {
@@ -47,12 +51,16 @@
           white-space: nowrap;
           padding: @tabs-nav-tab-padding;
           background-color: @tabs-nav-background-color;
-          transition: all @transition-duration-base @ease-in-out;
+          transition: background-color @transition-duration-base @ease-in-out;
 
           &-label {
             display: flex;
             align-items: center;
             color: @tabs-nav-tab-text-color;
+
+            > .@{icon-prefix} {
+              font-size: @tabs-icon-font-size;
+            }
           }
           &-selected:not(&-disabled) {
             .@{tabs-prefix}-nav-tab-label {
@@ -69,6 +77,12 @@
             &:active {
               .@{tabs-prefix}-nav-tab-label {
                 color: @tabs-active-color;
+              }
+            }
+
+            &:not(&:hover):not(&:active):not(.@{tabs-prefix}-nav-tab-selected){
+              .@{icon-prefix} {
+                color: @tabs-icon-color;
               }
             }
           }
@@ -129,12 +143,12 @@
 
         &-pre-start,
         &-next-start {
-          border-right: 1px solid @tabs-nav-border-color;
+          border-right: 1px solid @tabs-nav-bottom-color;
         }
 
         &-pre-end,
         &-next-end {
-          border-left: 1px solid @tabs-nav-border-color;
+          border-left: 1px solid @tabs-nav-bottom-color;
         }
 
         &-pre-disabled,
@@ -149,7 +163,7 @@
           right: 0;
           bottom: 0;
           height: 1px;
-          background-color: @tabs-nav-border-color;
+          background-color: @tabs-nav-bottom-color;
         }
       }
     }
@@ -159,16 +173,20 @@
     .@{tabs-prefix}-nav {
       z-index: @zindex-l1-1;
 
+      &-wrapper {
+        font-size: @tabs-card-nav-font-size;
+      }
+
       &-tab {
-        border: 1px solid @tabs-nav-border-color;
         margin-right: 4px;
-        background-color: @tabs-card-nav-tab-background-color;
         border-radius: @tabs-border-radius @tabs-border-radius 0 0;
+        border-bottom: 1px solid @tabs-nav-border-color;
 
         &:last-child {
           margin-right: 0;
         }
         &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+          border: 1px solid @tabs-nav-border-color;
           border-bottom-color: @tabs-card-nav-tab-selected-background-color;
           background-color: @tabs-card-nav-tab-selected-background-color;
 
@@ -328,29 +346,36 @@
 
   &-segment {
     .@{tabs-prefix}-nav {
-      &-wrapper {
-        font-size: @tabs-segment-nav-font-size;
-      }
 
       &-tab {
         border: 1px solid @tabs-nav-border-color;
-        border-right: none;
         height: @tabs-segment-nav-height;
-        line-height: @tabs-segment-nav-height;
-        &:not(.@{tabs-prefix}-nav-tab-disabled) {
-          &:hover {
-            border-color: @tabs-selected-color;
-            & + .@{tabs-prefix}-nav-tab {
-              border-left-color: @tabs-selected-color;
-            }
+        
+        &:not(:first-child) {
+          border-left: none;
+          &::before {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            display: block;
+            box-sizing: content-box;
+            width: 1px;
+            height: 100%;
+            padding: 1px 0;
+            background-color: @tabs-nav-border-color;
+            content: "";
           }
         }
+
+        &:hover:not(.@{tabs-prefix}-nav-tab-disabled),
         &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          border-color: @color-primary;
-          & + .@{tabs-prefix}-nav-tab {
-            border-left-color: @color-primary;
+          border-color: @tabs-selected-color;
+          z-index: 1;
+          &::before {
+            background: @tabs-selected-color;
           }
         }
+
 
         &:first-child {
           border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
@@ -358,10 +383,6 @@
 
         &:last-child {
           border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
-          border-right: 1px solid @tabs-nav-border-color;
-          &.@{tabs-prefix}-nav-tab-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-            border-right-color: @color-primary;
-          }
         }
 
         &-disabled {
@@ -380,8 +401,14 @@
       .@{tabs-prefix}-nav-tab {
         &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
           background-color: @tabs-segment-nav-primary-active-background-color;
+
           .@{tabs-prefix}-nav-tab-label {
             color: @tabs-segment-nav-primary-active-text-color;
+          }
+          &:hover {
+            .@{tabs-prefix}-nav-tab-label {
+              color: @tabs-segment-nav-primary-active-text-color;
+            }
           }
         }
       }

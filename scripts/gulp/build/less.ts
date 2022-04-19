@@ -9,6 +9,10 @@ import LessPluginCleanCSS from 'less-plugin-clean-css'
 // @ts-ignore
 import NpmImportPlugin from 'less-plugin-npm-import'
 
+import { gulpConfig } from '../gulpConfig'
+
+const { themes } = gulpConfig.build
+
 async function compile(content: string, savePath: string, min: boolean, rootPath?: string): Promise<void> {
   const plugins: Less.Plugin[] = []
   if (min) {
@@ -67,32 +71,39 @@ export async function compileLess(targetDirname: string, distDirname: string, is
       for (const privateComponentName of readdirSync(path.resolve(targetDirname, componentDirname))) {
         const styleDirname = `${targetDirname}/${componentDirname}/${privateComponentName}/style`
         const outputDirname = `${distDirname}/${componentDirname}/${privateComponentName}/style`
-        await copyAndCompile(styleDirname, outputDirname, 'default')
+        for (const theme of themes) {
+          await copyAndCompile(styleDirname, outputDirname, theme)
+        }
       }
     } else {
       const styleDirname = `${targetDirname}/${componentDirname}/style`
       const outputDirname = `${distDirname}/${componentDirname}/style`
-      await copyAndCompile(styleDirname, outputDirname, 'default')
+      for (const theme of themes) {
+        await copyAndCompile(styleDirname, outputDirname, theme)
+      }
     }
   }
 
   if (!isCdk) {
     // Compile concentrated less file to CSS file.
     await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
-    await copyFile(`${targetDirname}/default.less`, `${distDirname}/default.less`)
-    const entryContent = `@import "${path.posix.join(distDirname, 'default.less')}";`
-    promiseList.push(compile(entryContent, path.join(distDirname, 'default.css'), false))
-    promiseList.push(compile(entryContent, path.join(distDirname, 'default.min.css'), true))
+    for (const theme of themes) {
+      await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
+      await copyFile(`${targetDirname}/${theme}.less`, `${distDirname}/${theme}.less`)
+      const entryContent = `@import "${path.posix.join(distDirname, theme + '.less')}";`
+      promiseList.push(compile(entryContent, path.join(distDirname, `${theme}.css`), false))
+      promiseList.push(compile(entryContent, path.join(distDirname, `${theme}.min.css`), true))
 
-    // Compile css file that doesn't have component-specific styles.
-    const lessPath = path.join(targetDirname, 'style/core', 'default.less')
-    const lessContent = await readFile(lessPath, { encoding: 'utf8' })
-    promiseList.push(compile(lessContent, path.join(distDirname, 'style/core', 'default.css'), false, lessPath))
-    promiseList.push(compile(lessContent, path.join(distDirname, 'style/core', 'default.min.css'), true, lessPath))
+      // Compile css file that doesn't have component-specific styles.
+      const lessPath = path.join(targetDirname, 'style/core', `${theme}.less`)
+      const lessContent = await readFile(lessPath, { encoding: 'utf8' })
+      promiseList.push(compile(lessContent, path.join(distDirname, 'style/core', `${theme}.css`), false, lessPath))
+      promiseList.push(compile(lessContent, path.join(distDirname, 'style/core', `${theme}.min.css`), true, lessPath))
 
-    const themePath = path.join(targetDirname, 'style/core', 'default.ts')
-    const themeContent = await readFile(themePath, { encoding: 'utf8' })
-    promiseList.push(...compileTheme(themeContent, path.join(distDirname, 'style/core'), 'default'))
+      const themePath = path.join(targetDirname, 'style/core', `${theme}.ts`)
+      const themeContent = await readFile(themePath, { encoding: 'utf8' })
+      promiseList.push(...compileTheme(themeContent, path.join(distDirname, 'style/core'), theme))
+    }
   }
 
   return Promise.all(promiseList).catch(e => console.log(e))

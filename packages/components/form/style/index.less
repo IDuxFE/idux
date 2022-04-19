@@ -47,6 +47,7 @@
       align-items: center;
       color: @form-item-label-color;
       font-size: @form-item-font-size;
+      margin-left: @form-item-label-margin-left;
     }
 
     &-colon > label::after {
@@ -58,6 +59,8 @@
 
     &-required > label::before {
       display: inline-block;
+      position: absolute;
+      left: @form-item-label-before-content-left;
       margin-right: @spacing-xs;
       color: @form-item-label-required-color;
       font-size: @form-item-font-size;

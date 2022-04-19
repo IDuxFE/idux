@@ -30,12 +30,17 @@ order: 0
 | --- | --- | --- | --- |
 | `@popover-zindex` | `@zindex-l4-2` | - | - |
 | `@popover-font-size` | `@font-size-md` | - | - |
-| `@popover-color` | `@color-graphite-d10` | - | - |
+| `@popover-color` | `@text-color` | - | - |
 | `@popover-background-color` | `@background-color-component` | - | - |
 | `@popover-border-radius` | `@border-radius-sm` | - | - |
-| `@popover-box-shadow` | `@shadow-bottom-sm` | - | - |
-| `@popover-wrapper-min-width` | `240px` | - | - |
-| `@popover-wrapper-padding` | `@spacing-sm @spacing-lg` | - | - |
+| `@popover-box-shadow` | `@shadow-bottom-md` | - | - |
+| `@popover-wrapper-min-width` | `192px` | - | - |
+| `@popover-wrapper-padding` | `@spacing-xs @spacing-sm` | - | - |
+| `@popover-wrapper-with-header-padding` | `@spacing-sm @spacing-sm @spacing-sm @spacing-md` | - | - |
 | `@popover-header-padding` | `0 0 @spacing-xs 0` | - | - |
-| `@popover-content-padding` | `0` | - | - |
+| `@popover-header-height` | `24px` | - | - |
+| `@popover-content-padding` | `@spacing-xs 0` | - | - |
+| `@popover-content-line-height` | `20px` | - | - |
+| `@popover-close-icon-hover-color` | `@color-primary-d10` | - | - |
+| `@popover-close-icon-active-color` | `@color-primary-l10` | - | - |
 <!--- insert less variable end  --->

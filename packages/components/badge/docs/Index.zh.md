@@ -33,7 +33,8 @@ cover:
 | 名称 | `default` | `dark` | 备注 |
 | --- | --- | --- | --- |
 | `@badge-zindex` | `@zindex-auto` | - | - |
-| `@badge-line-height` | `16px` | - | - |
+| `@badge-font-size` | `@font-size-sm` | - | - |
+| `@badge-line-height` | `14px` | - | - |
 | `@badge-size` | `16px` | - | - |
 | `@badge-color` | `@color-red` | - | - |
 | `@badge-padding` | `0 4px` | - | - |

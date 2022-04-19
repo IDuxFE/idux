@@ -6,13 +6,12 @@
   .reset-component();
 
   text-align: center;
-  padding: @message-padding;
+  margin: @message-margin;
   font-size: @font-size-md;
   line-height: @message-line-height;
 
   &-content {
     display: inline-flex;
-    align-items: center;
     min-width: @message-content-min-width;
     max-width: @message-content-max-width;
     padding: @message-content-padding-vertical @message-content-padding-horizontal;
@@ -24,7 +23,6 @@
     &-text {
       display: inline-block;
       text-align: left;
-      width: calc(100% - @font-size-lg - @message-icon-margin-right);
     }
 
     &-icon {
@@ -35,7 +33,7 @@
 
   .message-icon-color(info, @color-info);
   .message-icon-color(success, @color-success);
-  .message-icon-color( warning, @color-warning);
+  .message-icon-color( warning, @color-warning-l10);
   .message-icon-color(error, @color-error);
   .message-icon-color(loading, @color-primary);
 
