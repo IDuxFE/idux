@@ -106,6 +106,8 @@ export const defaultConfig: GlobalConfig = {
     labelAlign: 'end',
     layout: 'horizontal',
     size: 'md',
+    labelTooltipIcon: 'question-circle',
+    controlTooltipIcon: 'info-circle',
   },
   icon: {},
   input: {

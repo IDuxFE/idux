@@ -30,7 +30,13 @@ export default defineComponent({
     const colonless = computed(() => props.colonless ?? formProps?.colonless ?? config?.colonless)
     const labelAlign = computed(() => props.labelAlign ?? formProps?.labelAlign ?? config?.labelAlign)
     const labelColConfig = computed(() => normalizeColConfig(props.labelCol ?? formProps?.labelCol))
+    const labelTooltipIcon = computed(
+      () => props.labelTooltipIcon ?? formProps?.labelTooltipIcon ?? config?.labelTooltipIcon,
+    )
     const controlColConfig = computed(() => normalizeColConfig(props.controlCol ?? formProps?.controlCol))
+    const controlTooltipIcon = computed(
+      () => props.controlTooltipIcon ?? formProps?.controlTooltipIcon ?? config?.controlTooltipIcon,
+    )
     const { status, statusIcon, message } = useFormItem(props, formProps)
 
     const classes = computed(() => {
@@ -58,8 +64,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return (
         <IxRow class={classes.value}>
-          {renderLabel(props, slots, labelClasses, labelColConfig, prefixCls)}
-          {renderControl(props, slots, controlColConfig, statusIcon, message, prefixCls)}
+          {renderLabel(props, slots, labelClasses, labelColConfig, labelTooltipIcon, prefixCls)}
+          {renderControl(props, slots, controlColConfig, controlTooltipIcon, statusIcon, message, prefixCls)}
         </IxRow>
       )
     }
@@ -75,6 +81,7 @@ function renderLabel(
   slots: Slots,
   classes: ComputedRef<string>,
   labelColConfig: ComputedRef<ColProps | undefined>,
+  labelTooltipIcon: ComputedRef<string | undefined>,
   prefixCls: string,
 ) {
   const { label, labelFor, labelTooltip } = props
@@ -82,7 +89,7 @@ function renderLabel(
   if (!(label || labelSlot)) {
     return undefined
   }
-  const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip)
+  const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip, labelTooltipIcon.value)
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
       <label for={labelFor}>
@@ -97,12 +104,13 @@ function renderControl(
   props: FormItemProps,
   slots: Slots,
   controlColConfig: ComputedRef<ColProps | undefined>,
+  controlTooltipIcon: ComputedRef<string | undefined>,
   statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
   prefixCls: string,
 ) {
-  const { extra, extraMessage } = props
-  const { extra: extraSlot, extraMessage: extraMessageSlot } = slots
+  const { controlTooltip, extra, extraMessage } = props
+  const { controlTooltip: controlTooltipSlot, extra: extraSlot, extraMessage: extraMessageSlot } = slots
   if (__DEV__ && (extra || extraSlot)) {
     Logger.warn('components/form', '`extra` was deprecated, please use `extraMessage` instead.')
   }
@@ -114,11 +122,13 @@ function renderControl(
   const messageNode = message.value && <div class={`${prefixCls}-message`}>{message.value}</div>
   const extraNode = extraSlot ? extraSlot() : extraMessageSlot ? extraMessageSlot() : extra || extraMessage
   const extraWrapper = extraNode && <div class={`${prefixCls}-extra-message`}>{extraNode}</div>
+  const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
   return (
     <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
       <div class={`${prefixCls}-control-input`}>
         <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
         {statusNode}
+        {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
       </div>
       {messageNode}
       {extraWrapper}
@@ -126,14 +136,14 @@ function renderControl(
   )
 }
 
-function renderTooltip(slot: Slot | undefined, tooltip: string | undefined) {
+function renderTooltip(slot: Slot | undefined, tooltip: string | undefined, iconName: string | undefined) {
   if (slot) {
     return slot()
   }
   return (
     tooltip && (
       <IxTooltip title={tooltip}>
-        <IxIcon name="question-circle" />
+        <IxIcon name={iconName} />
       </IxTooltip>
     )
   )

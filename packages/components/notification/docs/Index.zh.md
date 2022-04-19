@@ -122,6 +122,10 @@ export interface NotificationRef {
 | `@notification-icon-margin` | `4px 8px 0 0` | - | - |
 | `@notification-icon-flex-direction` | `row` | - | - |
 | `@notification-icon-wrap-width` | `44px` | - | - |
+| `@notification-icon-info-color` | `@color-info-l10` | - | - |
+| `@notification-icon-success-color` | `@color-success` | - | - |
+| `@notification-icon-warning-color` | `@color-warning-l10` | - | - |
+| `@notification-icon-error-color` | `@color-error-l10` | - | - |
 | `@notification-close-width` | `14px` | - | - |
 | `@notification-close-font-size` | `@font-size-sm` | - | - |
 | `@notification-close-color` | `@color-graphite-d20` | - | - |

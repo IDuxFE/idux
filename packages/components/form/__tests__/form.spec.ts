@@ -114,6 +114,35 @@ describe('Form', () => {
       expect(items[2].find('.ix-form-item-control').classes()).toContain('ix-col-span-8')
     })
 
+    test('labelTooltipIcon and controlTooltipIcon work', async () => {
+      const wrapper = FormMount({
+        props: {
+          labelTooltipIcon: 'info',
+          controlTooltipIcon: 'info',
+        },
+        slots: {
+          default: () => [
+            h(
+              FormItem,
+              {
+                label: 'Username',
+                labelTooltip: 'labelTooltip',
+                labelTooltipIcon: 'up',
+                controlTooltip: 'controlTooltip',
+                controlTooltipIcon: 'up',
+              },
+              () => h(IxInput),
+            ),
+          ],
+        },
+      })
+
+      const items = wrapper.findAll('.ix-form-item')
+
+      expect(items[0].find('.ix-form-item-label .ix-icon').classes()).not.toContain('ix-icon-info')
+      expect(items[0].find('.ix-form-item-control-input .ix-icon').classes()).not.toContain('ix-icon-info')
+    })
+
     test('labelAlign work', async () => {
       const wrapper = FormMount({
         props: { labelAlign: 'start' },
@@ -275,6 +304,36 @@ describe('Form', () => {
       expect(wrapper.find('.ix-form-item-control').classes()).toContain('ix-col-span-5')
     })
 
+    test('controlTooltip work', async () => {
+      const wrapper = FormItemMount({
+        props: { controlTooltip: 'controlTooltip' },
+        slots: { default: () => h(IxInput) },
+      })
+
+      expect(wrapper.find('.ix-form-item-control-tooltip').exists()).toBe(true)
+    })
+
+    test('controlTooltip slot work', async () => {
+      const wrapper = FormItemMount({
+        slots: { default: () => h(IxInput), controlTooltip: () => 'controlTooltip slot' },
+      })
+
+      expect(wrapper.find('.ix-form-item-control-tooltip').exists()).toBe(true)
+    })
+
+    test('controlTooltipIcon work', async () => {
+      const wrapper = FormItemMount({
+        props: { controlTooltip: 'controlTooltip', controlTooltipIcon: 'info-circle' },
+        slots: { default: () => h(IxInput) },
+      })
+
+      expect(wrapper.find('.ix-form-item-control-tooltip .ix-icon-info-circle').exists()).toBe(true)
+
+      await wrapper.setProps({ controlTooltipIcon: 'up' })
+
+      expect(wrapper.find('.ix-form-item-control-tooltip .ix-icon-up').exists()).toBe(true)
+    })
+
     test('extraMessage work', async () => {
       let extraMessage = 'extraMessage'
       const wrapper = FormItemMount({
@@ -380,6 +439,19 @@ describe('Form', () => {
       })
 
       expect(wrapper.find('.ix-form-item-label-tooltip').exists()).toBe(true)
+    })
+
+    test('labelTooltipIcon work', async () => {
+      const wrapper = FormItemMount({
+        props: { label: 'Username', labelTooltip: 'labelTooltipIcon', labelTooltipIcon: 'info-circle' },
+        slots: { default: () => h(IxInput) },
+      })
+
+      expect(wrapper.find('.ix-form-item-label-tooltip .ix-icon-info-circle').exists()).toBe(true)
+
+      await wrapper.setProps({ labelTooltipIcon: 'up' })
+
+      expect(wrapper.find('.ix-form-item-label-tooltip .ix-icon-up').exists()).toBe(true)
     })
 
     test('required work', async () => {
