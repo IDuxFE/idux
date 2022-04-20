@@ -16,10 +16,8 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `header` | 列表头部 | `string \| slot` | - | - | - |
 | `footer` | 列表底部 | `string \| slot` | - | - | - |
-| `loadMore` | 加载更多 | `string \| slot` | 加载更多 | - | - |
 | `empty` | 空状态 | `string \| slot` | - | - | - |
 | `borderless` | 是否无边框 | `boolean` | true | ✅ | - |
-| `split` | 是否显示分割线 | `boolean` | true | - | - |
 | `loading` | 加载状态 | `boolean \| SpinProps` | false | - | SpinProps请参照 spin 组件 |
 | `size` | 大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | ✅ | - |
 | `grid` | grid 布局 | `ListGridProps` | - | - | 结合了IxRow, IxCol 的部分配置 |
@@ -37,7 +35,6 @@ order: 0
 | --- | --- | --- | --- |
 | header | 列表头部 | - | - |
 | footer | 列表底部 | - | - |
-| loadMore | 加载更多 | - | - |
 | empty | 空状态 | - | - |
 
 ### IxListItem

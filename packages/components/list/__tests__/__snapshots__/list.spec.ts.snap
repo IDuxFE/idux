@@ -1,43 +1,35 @@
 // Vitest Snapshot v1
 
 exports[`List > render work 1`] = `
-"<div class=\\"ix-list ix-list-md ix-list-border\\">
-  <!--v-if-->
+"<div class=\\"ix-list ix-list-split ix-list-md ix-list-border\\">
+  <!---->
   <div class=\\"ix-spin\\">
     <!---->
     <div class=\\"ix-spin-container\\">
       <div>
         <div class=\\"ix-list-item\\">
-          <div class=\\"ix-list-item-title\\"></div>
+          <!---->
           <div class=\\"ix-list-item-content\\">default</div>
-          <div class=\\"ix-list-item-extra\\"></div>
+          <!---->
         </div>
         <div class=\\"ix-list-item\\">
-          <div class=\\"ix-list-item-title\\"></div>
+          <!---->
           <div class=\\"ix-list-item-content\\">default</div>
-          <div class=\\"ix-list-item-extra\\"></div>
+          <!---->
         </div>
         <div class=\\"ix-list-item\\">
-          <div class=\\"ix-list-item-title\\"></div>
+          <!---->
           <div class=\\"ix-list-item-content\\">default</div>
-          <div class=\\"ix-list-item-extra\\"></div>
+          <!---->
         </div>
         <div class=\\"ix-list-item\\">
-          <div class=\\"ix-list-item-title\\"></div>
+          <!---->
           <div class=\\"ix-list-item-content\\">default</div>
-          <div class=\\"ix-list-item-extra\\"></div>
-        </div>
-      </div>
-      <div class=\\"ix-list-empty\\" style=\\"display: none;\\">
-        <div class=\\"ix-empty\\">
-          <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" aria-label=\\"empty\\"></i></div>
-          <div class=\\"ix-empty-description\\">暂无数据</div>
           <!---->
         </div>
       </div>
-      <!--v-if-->
     </div>
   </div>
-  <!--v-if-->
+  <!---->
 </div>"
 `;

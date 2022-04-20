@@ -6,15 +6,16 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { RowGutter, RowProps } from '@idux/components/grid'
+import type { RowProps } from '@idux/components/grid'
+import type { SpinProps } from '@idux/components/spin'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ListSize = 'sm' | 'md' | 'lg'
-export type ListLayout = 'horizontal' | 'vertical'
 export interface ListGridProps extends RowProps {
   column?: number
+  gutter?: number
   xs?: number
   sm?: number
   md?: number
@@ -25,11 +26,9 @@ export interface ListGridProps extends RowProps {
 export const listProps = {
   header: IxPropTypes.string,
   footer: IxPropTypes.string,
-  loadMore: IxPropTypes.string,
   empty: IxPropTypes.string,
   borderless: IxPropTypes.bool,
-  split: IxPropTypes.bool.def(true),
-  loading: IxPropTypes.bool.def(false),
+  loading: IxPropTypes.bool.def(false) || IxPropTypes.object<SpinProps>(),
   size: IxPropTypes.oneOf<ListSize>(['sm', 'md', 'lg']),
   grid: IxPropTypes.object<ListGridProps>(),
 }
@@ -49,18 +48,3 @@ export type ListItemProps = ExtractInnerPropTypes<typeof listItemProps>
 export type ListItemPublicProps = ExtractPublicPropTypes<typeof listItemProps>
 export type ListItemComponent = DefineComponent<Omit<HTMLAttributes, keyof ListItemPublicProps> & ListItemPublicProps>
 export type ListItemInstance = InstanceType<DefineComponent<ListItemProps>>
-
-export const listWrapProps = {
-  gutter: IxPropTypes.object<RowGutter>(),
-  isUseGrid: IxPropTypes.bool,
-}
-
-export type ListWrapProps = ExtractInnerPropTypes<typeof listWrapProps>
-export type ListWarpInstance = InstanceType<DefineComponent<ListWrapProps>>
-
-export const listItemWrapProps = {
-  grid: IxPropTypes.object<ListGridProps>(),
-}
-
-export type ListItemWrapProps = ExtractInnerPropTypes<typeof listItemWrapProps>
-export type ListItemWrapInstance = InstanceType<DefineComponent<ListItemWrapProps>>

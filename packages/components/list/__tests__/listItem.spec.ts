@@ -1,14 +1,28 @@
 import { MountingOptions, mount } from '@vue/test-utils'
+import { computed } from 'vue'
 
-import { renderWork } from '@tests'
-
-import IxListItem from '../src/ListItem.vue'
+import IxListItem from '../src/Item'
+import { listToken } from '../src/token'
 import { ListItemProps } from '../src/types'
 
-describe('ListItem', () => {
-  const ListItemMount = (options?: MountingOptions<Partial<ListItemProps>>) => mount(IxListItem, { ...options })
+const mountGlobalOpts = {
+  provide: {
+    [listToken as symbol]: {
+      props: {
+        grid: undefined,
+      },
+      // mergedPrefixCls: computed(() => `${common.prefixCls}-list`),
+      mergedPrefixCls: computed(() => `ix-list`),
+    },
+  },
+}
 
-  renderWork(IxListItem)
+describe('ListItem', () => {
+  const ListItemMount = (options?: MountingOptions<Partial<ListItemProps>>) =>
+    mount(IxListItem, {
+      ...(options as MountingOptions<ListItemProps>),
+      global: mountGlobalOpts,
+    })
 
   test('title', async () => {
     const wrapper = ListItemMount({ props: { title: 'item title 1' } })
