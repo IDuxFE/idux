@@ -70,10 +70,13 @@
     }
 
     &-tooltip {
-      color: @form-color-secondary;
       cursor: help;
       writing-mode: horizontal-tb;
       margin-inline-start: @spacing-xs;
+      .@{icon-prefix} {
+        font-size: @form-item-tooltip-icon-font-size;
+        color: @form-item-tooltip-icon-color;
+      }
     }
   }
 
@@ -90,6 +93,18 @@
       &-content {
         flex: auto;
         max-width: 100%;
+      }
+    }
+
+    &-tooltip {
+      position: absolute;
+      right: @form-item-control-tooltip-right;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: horizontal-tb;
+      .@{icon-prefix} {
+        font-size: @form-item-tooltip-icon-font-size;
+        color: @form-item-tooltip-icon-color;
       }
     }
   }

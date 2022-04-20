@@ -202,6 +202,8 @@ export interface FormConfig {
   labelAlign: FormLabelAlign
   layout: FormLayout
   size: FormSize
+  labelTooltipIcon: string
+  controlTooltipIcon: string
 }
 
 export interface IconConfig {

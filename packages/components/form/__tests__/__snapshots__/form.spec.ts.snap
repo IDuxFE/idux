@@ -10,6 +10,7 @@ exports[`Form > basic work > render work 1`] = `
       <div class=\\"ix-form-item-control-input\\">
         <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
         <!---->
+        <!---->
       </div>
       <!---->
       <!---->
@@ -22,6 +23,7 @@ exports[`Form > basic work > render work 1`] = `
     <div class=\\"ix-col ix-form-item-control\\">
       <div class=\\"ix-form-item-control-input\\">
         <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+        <!---->
         <!---->
       </div>
       <!---->
@@ -39,6 +41,7 @@ exports[`Form > basic work > render work 1`] = `
             <!---->
           </label></div>
         <!---->
+        <!---->
       </div>
       <!---->
       <!---->
@@ -49,6 +52,7 @@ exports[`Form > basic work > render work 1`] = `
     <div class=\\"ix-col ix-form-item-control\\">
       <div class=\\"ix-form-item-control-input\\">
         <div class=\\"ix-form-item-control-input-content\\"><button class=\\"ix-button ix-button-md\\" type=\\"button\\"><span>Click</span></button></div>
+        <!---->
         <!---->
       </div>
       <!---->
@@ -67,6 +71,7 @@ exports[`Form > item work > render work 1`] = `
     <div class=\\"ix-form-item-control-input\\">
       <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
       <!---->
+      <!---->
     </div>
     <!---->
     <!---->
@@ -83,6 +88,7 @@ exports[`Form > wrapper work > render work 1`] = `
     <div class=\\"ix-form-item-control-input\\">
       <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
       <!---->
+      <!---->
     </div>
     <!---->
     <!---->
@@ -95,6 +101,7 @@ exports[`Form > wrapper work > render work 1`] = `
   <div class=\\"ix-col ix-form-item-control\\">
     <div class=\\"ix-form-item-control-input\\">
       <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+      <!---->
       <!---->
     </div>
     <!---->
@@ -111,6 +118,7 @@ exports[`Form > wrapper work > render work 1`] = `
           <!---->
           <!---->
         </label></div>
+      <!---->
       <!---->
     </div>
     <!---->
