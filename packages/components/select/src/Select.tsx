@@ -49,7 +49,11 @@ export default defineComponent({
 
     expose({ focus, blur, scrollTo })
 
-    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = useOverlayState(props)
+    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = useOverlayState(
+      props,
+      config,
+      triggerRef,
+    )
 
     const accessor = useFormAccessor()
 
@@ -195,7 +199,7 @@ export default defineComponent({
         clickOutside: true,
         disabled: accessor.disabled.value || props.readonly,
         offset: defaultOffset,
-        placement: 'bottom',
+        placement: 'bottomStart',
         target: target.value,
         trigger: 'manual',
         triggerId: attrs.id,

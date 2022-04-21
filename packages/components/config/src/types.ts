@@ -343,6 +343,7 @@ export interface SelectConfig {
   childrenKey: string
   clearIcon: string
   labelKey: string
+  overlayMatchWidth: boolean
   size: FormSize
   suffix: string
   target?: PortalTargetType
@@ -468,12 +469,13 @@ export interface TreeConfig {
 
 export interface TreeSelectConfig {
   borderless: boolean
-  clearIcon: string
-  size: FormSize
-  suffix: string
   childrenKey: string
+  clearIcon: string
   labelKey: string
   nodeKey: string
+  overlayMatchWidth: boolean
+  size: FormSize
+  suffix: string
   target?: PortalTargetType
 }
 

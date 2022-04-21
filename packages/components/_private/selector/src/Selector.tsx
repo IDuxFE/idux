@@ -54,6 +54,10 @@ export default defineComponent({
       clearInput,
     } = useInputState(props)
 
+    const getBoundingClientRect = () => elementRef.value?.getBoundingClientRect()
+
+    expose({ focus, blur, clearInput, getBoundingClientRect })
+
     const mergedClearable = computed(() => {
       return !props.disabled && !props.readonly && props.clearable && props.value.length > 0
     })
@@ -110,8 +114,6 @@ export default defineComponent({
       evt.stopPropagation()
       callEmit(props.onClear, evt)
     }
-
-    expose({ focus, blur, clearInput })
 
     provide(selectorToken, {
       props,

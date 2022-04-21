@@ -55,6 +55,7 @@ export interface SelectorBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
   clearInput: () => void
+  getBoundingClientRect: () => DOMRect | undefined
 }
 export type SelectorComponent = DefineComponent<
   Omit<HTMLAttributes, keyof SelectorPublicProps> & SelectorPublicProps,

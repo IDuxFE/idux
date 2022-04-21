@@ -14,13 +14,13 @@ export const virtualListProps = {
   contentRender: { type: Function as PropType<VirtualContentRenderFn>, default: undefined },
   dataSource: { type: Array, default: (): unknown[] => [] },
   fullHeight: { type: Boolean, default: false },
-  getKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, required: true },
   height: { type: Number, default: 0 },
   itemHeight: { type: Number, default: 0 },
   /**
    * @deprecated
    */
-  itemKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, required: true },
+  itemKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: undefined },
   itemRender: { type: Function as PropType<VirtualItemRenderFn>, default: undefined },
   virtual: { type: Boolean, default: true },
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,

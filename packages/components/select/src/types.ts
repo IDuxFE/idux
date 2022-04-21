@@ -52,6 +52,7 @@ export const selectProps = {
    */
   options: { type: Array as PropType<SelectData[]>, default: undefined },
   overlayClassName: { type: String, default: undefined },
+  overlayMatchWidth: { type: Boolean, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
   readonly: { type: Boolean, default: false },
