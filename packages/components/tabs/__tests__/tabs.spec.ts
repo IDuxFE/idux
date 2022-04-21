@@ -48,6 +48,18 @@ describe('Tabs', () => {
     expect(onTabClick).toBeCalledTimes(1)
   })
 
+  test('no selectedKey work', async () => {
+    const wrapper = TabsMount()
+
+    expect(wrapper.findAll('.ix-tabs-nav-tab')[0].classes()).toContain('ix-tabs-nav-tab-selected')
+    expect(wrapper.findAll('.ix-tabs-pane')[0].text()).toBe('内容1')
+
+    await wrapper.setProps({ selectedKey: 'tab2' })
+
+    expect(wrapper.findAll('.ix-tabs-nav-tab')[0].classes()).not.toContain('ix-tabs-nav-tab-selected')
+    expect(wrapper.findAll('.ix-tabs-nav-tab')[1].classes()).toContain('ix-tabs-nav-tab-selected')
+  })
+
   test('type work', async () => {
     const wrapper = TabsMount()
 
@@ -135,24 +147,39 @@ describe('Tabs', () => {
   })
 
   describe('Tab', () => {
-    test('title work', async () => {
+    test('no key work', async () => {
       const wrapper = TabsMount({
         slots: {
-          default: () => h(Tab, {}, { title: () => '内容1' }),
+          default: () => [
+            h(Tab, { title: 'tab1' }, { default: () => '内容1' }),
+            h(Tab, { title: 'tab2' }, { default: () => '内容1' }),
+          ],
         },
       })
 
-      expect(wrapper.find('.ix-tabs-nav-tab').text()).toBe('内容1')
+      expect(wrapper.findAll('.ix-tabs-nav-tab')[0].classes()).toContain('ix-tabs-nav-tab-selected')
+      expect(wrapper.findAll('.ix-tabs-pane')[0].text()).toBe('内容1')
+    })
+
+    test('title work', async () => {
+      const wrapper = TabsMount({
+        slots: {
+          default: () => h(Tab, {}, { title: () => 'tab title' }),
+        },
+      })
+
+      expect(wrapper.find('.ix-tabs-nav-tab').text()).toBe('tab title')
     })
 
     test('disabled work', async () => {
       const wrapper = TabsMount({
         slots: {
-          default: () => h(Tab, { disabled: true }, { tab: () => '内容1' }),
+          default: () => h(Tab, { disabled: true }, { default: () => '内容1' }),
         },
       })
 
       expect(wrapper.find('.ix-tabs-nav-tab').classes()).toContain('ix-tabs-nav-tab-disabled')
+      expect(wrapper.findAll('.ix-tabs-pane').length).toBe(0)
     })
 
     test('forceRender work', async () => {
@@ -162,8 +189,8 @@ describe('Tabs', () => {
         },
         slots: {
           default: () => [
-            h(Tab, { key: 'tab1', forceRender: true }, { tab: () => '内容1' }),
-            h(Tab, { key: 'tab2' }, { tab: () => '内容2' }),
+            h(Tab, { key: 'tab1', forceRender: true }, { default: () => '内容1' }),
+            h(Tab, { key: 'tab2' }, { default: () => '内容2' }),
           ],
         },
       })

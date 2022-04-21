@@ -5,33 +5,31 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type TabsType = 'card' | 'line' | 'segment'
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end'
 export type TabsMode = 'default' | 'primary'
 
 export const tabsProps = {
-  selectedKey: IxPropTypes.oneOfType([String, Number]),
-  type: IxPropTypes.oneOf<TabsType>(['card', 'line', 'segment']).def('card'),
-  forceRender: IxPropTypes.bool.def(false),
-  placement: IxPropTypes.oneOf<TabsPlacement>(['top', 'bottom', 'start', 'end']).def('top'),
-  mode: IxPropTypes.oneOf<TabsMode>(['default', 'primary']).def('default'),
+  selectedKey: { type: [Number, String, Symbol] as PropType<VKey>, default: undefined },
+  type: { type: String as PropType<TabsType>, default: 'card' },
+  forceRender: { type: Boolean, default: false },
+  placement: { type: String as PropType<TabsPlacement>, default: 'top' },
+  mode: { type: String as PropType<TabsMode>, default: 'default' },
 
-  'onUpdate:selectedKey': IxPropTypes.emit<(selectedKey: string | number) => void>(),
-  onTabClick: IxPropTypes.emit<(key: string | number, evt: Event) => void>(),
-  onPreClick: IxPropTypes.emit<(evt: Event) => void>(),
-  onNextClick: IxPropTypes.emit<(evt: Event) => void>(),
-}
+  'onUpdate:selectedKey': [Function, Array] as PropType<MaybeArray<(selectedKey: VKey) => void>>,
+  onTabClick: [Function, Array] as PropType<MaybeArray<(key: VKey, evt: Event) => void>>,
+  onPreClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onNextClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+} as const
 
 export const tabProps = {
-  title: IxPropTypes.string,
-  forceRender: IxPropTypes.bool,
-  disabled: IxPropTypes.bool.def(false),
-}
+  title: { type: String, default: undefined },
+  forceRender: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: false },
+} as const
 
 export type TabsProps = ExtractInnerPropTypes<typeof tabsProps>
 export type TabsPublicProps = ExtractPublicPropTypes<typeof tabsProps>
@@ -46,6 +44,7 @@ export type TabInstance = InstanceType<DefineComponent<TabProps>>
 // private
 
 export const tabNavProps = {
-  title: IxPropTypes.string,
-  disabled: IxPropTypes.bool,
-}
+  defaultSelectedKey: { type: [Number, String, Symbol] as PropType<VKey>, default: undefined },
+  title: { type: String, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+} as const

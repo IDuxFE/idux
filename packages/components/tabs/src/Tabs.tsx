@@ -6,6 +6,7 @@
  */
 
 import type { TabProps, TabsProps } from './types'
+import type { VKey } from '@idux/cdk/utils'
 import type { IconInstance } from '@idux/components/icon'
 import type { ComputedRef, Ref, VNode } from 'vue'
 
@@ -23,7 +24,7 @@ import {
   withDirectives,
 } from 'vue'
 
-import { curry, throttle } from 'lodash-es'
+import { curry, isNil, throttle } from 'lodash-es'
 
 import { addClass, callEmit, flattenNode, offResize, onResize, removeClass, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -99,7 +100,7 @@ export default defineComponent({
     const navPreClasses = curryNavPreNextClasses('pre', preReached)
     const navNextClasses = curryNavPreNextClasses('next', nextReached)
 
-    const handleTabClick = (key: string | number, evt: Event) => {
+    const handleTabClick = (key: VKey, evt: Event) => {
       callEmit(props.onTabClick, key, evt)
       setSelectedKey(key)
     }
@@ -203,7 +204,17 @@ export default defineComponent({
     })
 
     return () => {
-      const tabVNodes = flattenTabVNodes(slots.default?.())
+      let defaultSelectedKey: VKey = 1
+
+      const tabVNodes = flattenTabVNodes(slots.default?.()).map((item, index) => {
+        if (isNil(item.key)) {
+          item.key = index + 1
+        } else if (index === 0) {
+          defaultSelectedKey = item.key
+        }
+        return item
+      })
+
       return (
         <div class={classes.value}>
           <div
@@ -224,7 +235,12 @@ export default defineComponent({
               {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 tabVNodes.map((vnode: any) => (
-                  <TabNav {...vnode.props} v-slots={{ title: vnode.children?.title }} />
+                  <TabNav
+                    {...vnode.props}
+                    key={vnode.key}
+                    defaultSelectedKey={defaultSelectedKey}
+                    v-slots={{ title: vnode.children?.title }}
+                  />
                 ))
               }
             </div>
@@ -238,7 +254,9 @@ export default defineComponent({
             {!isSegmentType.value && <div class={`${mergedPrefixCls.value}-nav-border`}></div>}
             {isLineType.value && <div class={`${mergedPrefixCls.value}-nav-bar`} ref={navBarElRef}></div>}
           </div>
-          <div class={`${mergedPrefixCls.value}-pane-wrapper`}>{filterTabVNodes(props, tabVNodes, selectedKey)}</div>
+          <div class={`${mergedPrefixCls.value}-pane-wrapper`}>
+            {filterTabVNodes(props, tabVNodes, selectedKey, defaultSelectedKey)}
+          </div>
         </div>
       )
     }
@@ -269,17 +287,16 @@ function flattenTabVNodes(tabVNodes: VNode[] | undefined): VNode[] {
 function filterTabVNodes(
   props: TabsProps,
   tabVNodes: VNode[],
-  selectedKey: ComputedRef<string | number | undefined>,
+  selectedKey: ComputedRef<VKey | undefined>,
+  defaultSelectedKey: VKey | undefined,
 ): VNode[] {
   const renderTabVNodes: VNode[] = []
   tabVNodes.forEach(vNode => {
     const { key } = vNode
-    const { forceRender } = vNode.props as TabProps
+    const { forceRender, disabled } = vNode.props as TabProps
+    const _disabled = !isNil(disabled)
     const useVShow = forceRender ?? props.forceRender
-    const show = selectedKey.value === key
-    if (vNode.key !== undefined) {
-      vNode.key = key!
-    }
+    const show = (selectedKey.value ?? defaultSelectedKey) === key && !_disabled
     if (useVShow) {
       renderTabVNodes.push(withDirectives(vNode, [[vShow, show]]))
     } else if (show) {
