@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.5",
   "command": {
     "publish": {
-      "allowBranch": ["main", "next"],
+      "allowBranch": ["main", "next", "hotfix"],
       "ignoreChanges": ["*.md", "**/__tests__/**", "**/demo/**", "**/docs/**"],
       "message": "docs(release): publish %s",
       "registry": "https://registry.npmjs.org",
