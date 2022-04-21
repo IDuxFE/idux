@@ -52,7 +52,11 @@ export default defineComponent({
       accessor,
       mergedNodeMap,
     )
-    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = ɵUseOverlayState(props)
+    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = ɵUseOverlayState(
+      props,
+      config,
+      triggerRef,
+    )
 
     const treeRef = ref<TreeInstance>()
     const scrollTo: VirtualScrollToFn = options => {
@@ -168,7 +172,7 @@ export default defineComponent({
         clickOutside: true,
         disabled: accessor.disabled.value || props.readonly,
         offset: defaultOffset,
-        placement: 'bottom',
+        placement: 'bottomStart',
         target: target.value,
         trigger: 'manual',
         triggerId: attrs.id,

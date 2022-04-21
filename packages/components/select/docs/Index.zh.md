@@ -33,6 +33,7 @@ order: 0
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
+| `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean` | `true` | ✅ | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
