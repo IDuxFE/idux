@@ -17,10 +17,11 @@ export default defineComponent({
   props: tabNavProps,
   setup(props, { slots }) {
     const key = useKey()
+
     const { selectedKey, selectedElRef, mergedPrefixCls, handleTabClick } = inject(tabsToken)!
 
     const selfElRef = ref<HTMLElement | null>(null)
-    const isSelected = computed(() => selectedKey.value === key)
+    const isSelected = computed(() => (selectedKey.value ?? props.defaultSelectedKey) === key)
     const prefixCls = computed(() => `${mergedPrefixCls.value}-nav`)
     const classes = computed(() => {
       return normalizeClass({

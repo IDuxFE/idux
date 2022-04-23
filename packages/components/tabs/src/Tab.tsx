@@ -14,7 +14,7 @@ export default defineComponent({
   __IDUX_TAB: true,
   name: 'IxTab',
   props: tabProps,
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const { mergedPrefixCls } = inject(tabsToken)!
 
     return () => {
