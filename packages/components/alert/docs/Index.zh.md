@@ -33,7 +33,7 @@ export interface AlertPagination {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@alert-success-color` | `@color-success-d10` | - | - |
 | `@alert-info-color` | `@color-info-d10` | - | - |
@@ -44,13 +44,13 @@ export interface AlertPagination {
 | `@alert-warning-background-color` | `@color-warning-l50` | - | - |
 | `@alert-error-background-color` | `@color-error-l50` | - | - |
 | `@alert-color` | `@text-color` | - | - |
-| `@alert-color-secondary` | `@text-color-secondary` | - | - |
+| `@alert-color-secondary` | `@text-color-secondary` | `@color-graphite-l10` | - |
 | `@alert-disabled-color` | `@disabled-color` | - | - |
-| `@alert-font-size` | `@font-size-md` | - | - |
-| `@alert-line-height` | `@line-height-base` | - | - |
+| `@alert-font-size` | `@font-size-md` | `@font-size-sm` | - |
+| `@alert-line-height` | `@line-height-base` | `@font-size-2xl` | - |
 | `@alert-border-radius` | `@border-radius-sm` | - | - |
 | `@alert-margin-bottom` | `@spacing-lg` | - | - |
-| `@alert-padding` | `@spacing-sm @spacing-lg` | - | - |
+| `@alert-padding` | `@spacing-sm @spacing-lg` | `@spacing-xs @spacing-lg` | - |
 | `@alert-icon-margin-right` | `@spacing-sm` | - | - |
 | `@alert-icon-font-size-with-description` | `@font-size-xl` | - | - |
 | `@alert-icon-margin-right-with-description` | `@spacing-lg` | - | - |

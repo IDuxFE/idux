@@ -40,13 +40,13 @@ subtitle: 按钮
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@button-zindex` | `@zindex-l1-1` | - | - |
 | `@button-font-weight` | `@font-weight-md` | - | - |
 | `@button-line-height` | `@line-height-base` | - | - |
-| `@button-height-xs` | `@height-sm` | - | - |
-| `@button-height-sm` | `@height-md` | - | - |
+| `@button-height-xs` | `@height-sm` | `24px` | - |
+| `@button-height-sm` | `@height-md` | `32px` | - |
 | `@button-height-md` | `@height-md` | - | - |
 | `@button-height-lg` | `@height-lg` | - | - |
 | `@button-height-xl` | `@height-xl` | - | - |
@@ -106,5 +106,4 @@ subtitle: 按钮
 | `@button-text-hover-background-color` | `transparent` | - | - |
 | `@button-icon-color` | `@color-graphite-d20` | - | - |
 | `@button-icon-font-size` | `@font-size-lg` | - | - |
-| `@button-icon-color` | `@color-graphite-d20` | - | - |
 <!--- insert less variable end  --->

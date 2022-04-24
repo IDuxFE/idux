@@ -56,7 +56,7 @@ export const statusColors = ['primary', 'info', 'pending', 'success', 'warning',
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@timeline-font-size` | `@font-size-sm` | - | - |
 | `@timeline-line-height` | `1.25` | - | - |

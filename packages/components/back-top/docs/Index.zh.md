@@ -27,7 +27,7 @@ subtitle: 回到顶部
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@back-top-zindex` | `@zindex-l2-base` | - | - |
 | `@back-top-height` | `60px` | - | - |
@@ -41,8 +41,8 @@ subtitle: 回到顶部
 | `@back-top-right-lg` | `@back-top-right-gutter * 2` | - | - |
 | `@back-top-right-xl` | `@back-top-right-gutter * 3` | - | - |
 | `@back-top-bottom` | `50px` | - | - |
-| `@back-top-color` | `@color-primary` | - | - |
-| `@back-top-hover-color` | `@color-primary-l30` | - | - |
+| `@back-top-color` | `@color-primary` | `@color-primary-l30` | - |
+| `@back-top-hover-color` | `@color-primary-l30` | `@color-primary` | - |
 | `@back-top-background-color` | `@color-white` | - | - |
 | `@back-top-background-hover-color` | `@color-white` | - | - |
 | `@back-top-box-shadow` | `0 2px 8px 0 rgba(30,35,43,0.12)` | - | - |

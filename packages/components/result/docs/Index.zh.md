@@ -33,7 +33,7 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@result-padding` | `@spacing-gutter * 6 @spacing-gutter * 4` | - | - |
 | `@result-text-align` | `center` | - | - |
@@ -54,7 +54,7 @@ type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 | `@result-content-padding` | `@spacing-xl @spacing-gutter * 5` | - | - |
 | `@result-content-background-color` | `@color-grey-l50` | - | - |
 | `@result-success` | `@color-success` | - | - |
-| `@result-warning` | `@color-warning` | - | - |
+| `@result-warning` | `@color-warning` | `@color-warning-l10` | - |
 | `@result-error` | `@color-error` | - | - |
 | `@result-info` | `@color-info` | - | - |
 <!--- insert less variable end  --->

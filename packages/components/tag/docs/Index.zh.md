@@ -46,10 +46,10 @@ export interface TagData extends Omit<TagProps, 'shape'> {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@tag-font-size` | `@font-size-md` | - | - |
-| `@tag-line-height` | `@line-height-base` | - | - |
+| `@tag-font-size` | `@font-size-md` | `@font-size-sm` | - |
+| `@tag-line-height` | `@line-height-base` | `1.3333` | - |
 | `@tag-rect-min-width` | `40px` | - | - |
 | `@tag-round-min-width` | `52px` | - | - |
 | `@tag-numeric-min-width` | `64px` | - | - |

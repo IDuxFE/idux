@@ -98,15 +98,15 @@ export interface MessageRef {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@message-margin` | `@spacing-sm` | - | - |
 | `@message-font-size` | `@font-size-md` | - | - |
-| `@message-line-height` | `@line-height-base` | - | - |
+| `@message-line-height` | `@line-height-base` | `24px` | - |
 | `@message-content-min-width` | `128px` | - | - |
 | `@message-content-max-width` | `480px` | - | - |
 | `@message-content-padding-horizontal` | `@spacing-lg` | - | - |
-| `@message-content-padding-vertical` | `(round((((@height-lg - @message-font-size * @message-line-height) / 2) * 10) / 10))` | - | - |
+| `@message-content-padding-vertical` | `(round((((@height-lg - @message-font-size * @message-line-height) / 2) * 10) / 10))` | `8px` | - |
 | `@message-content-bg-color` | `@background-color-component` | - | - |
 | `@message-content-border-radius` | `@border-radius-md` | - | - |
 | `@message-content-box-shadow` | `@shadow-bottom-md` | - | - |

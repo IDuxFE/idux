@@ -35,7 +35,7 @@ order: 0
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@switch-font-size` | `@form-font-size-xs` | - | - |
 | `@switch-line-height` | `@form-line-height` | - | - |
@@ -47,7 +47,7 @@ order: 0
 | `@switch-padding-horizontal-lg` | `@form-padding-horizontal-lg` | - | - |
 | `@switch-border-radius` | `@border-radius-full` | - | - |
 | `@switch-color` | `@form-background-color` | - | - |
-| `@switch-background-color` | `@form-placeholder-color` | - | - |
+| `@switch-background-color` | `@form-placeholder-color` | `@color-graphite-l10` | - |
 | `@switch-active-color` | `@form-active-color` | - | - |
 | `@switch-active-disabled-color` | `@color-primary-l30` | - | - |
 | `@switch-disabled-color` | `@color-graphite-l30` | - | - |

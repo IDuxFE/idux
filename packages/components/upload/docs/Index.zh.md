@@ -96,7 +96,7 @@ interface UploadRequestChangeOption {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@upload-list-margin` | `8px 0 0` | - | - |
 | `@upload-border-radius` | `2px` | - | - |
@@ -122,7 +122,7 @@ interface UploadRequestChangeOption {
 | `@upload-file-font-size` | `@font-size-sm` | - | - |
 | `@upload-icon-wrap-max-width` | `120px` | - | - |
 | `@upload-icon-margin` | `0 0 0 16px` | - | - |
-| `@upload-icon-file-margin` | `0 8px 0 0` | - | - |
+| `@upload-icon-file-margin` | `0 8px 0 0` | `2px 8px 0 0` | - |
 | `@upload-icon-font-size` | `@font-size-lg` | - | - |
 | `@upload-tip-margin` | `8px 0 0` | - | - |
 | `@upload-color-error` | `@color-red-d10` | - | - |

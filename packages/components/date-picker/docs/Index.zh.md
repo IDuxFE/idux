@@ -105,7 +105,7 @@ const defaultFormat = {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@date-picker-line-height` | `@form-line-height` | - | - |
 | `@date-picker-color` | `@form-color` | - | - |

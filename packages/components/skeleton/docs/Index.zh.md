@@ -30,7 +30,7 @@ order: 0
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@skeleton-margin-bottom` | `@spacing-sm` | - | - |
 | `@skeleton-loader-margin-bottom` | `@spacing-xs` | - | - |

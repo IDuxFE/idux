@@ -27,7 +27,7 @@ order: 0
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@avatar-size-sm` | `@height-sm` | - | - |
 | `@avatar-size-md` | `@height-md` | - | - |
