@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-24)
+
+
+### Bug Fixes
+
+* **comp: select:** sync width on opened ([#853](https://github.com/IDuxFE/idux/issues/853)) ([02d2769](https://github.com/IDuxFE/idux/commit/02d27690b0f4e324962510d8f7782ecc9931ebce))
+
+
+
+
+
 # [1.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-04-21)
 
 

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-24)
+
+
+### Bug Fixes
+
+* **comp: select:** sync width on opened ([#853](https://github.com/IDuxFE/idux/issues/853)) ([02d2769](https://github.com/IDuxFE/idux/commit/02d27690b0f4e324962510d8f7782ecc9931ebce))
+* **comp: select:** update overlay on selector resize ([#851](https://github.com/IDuxFE/idux/issues/851)) ([24f173e](https://github.com/IDuxFE/idux/commit/24f173e24495e6253e467511365635d2fbe99b53))
+
+
+### Features
+
+* **comp: all:** add seer themes ([#850](https://github.com/IDuxFE/idux/issues/850)) ([789a266](https://github.com/IDuxFE/idux/commit/789a266f117b34c61efd8d52f4c325e5f49c8622))
+* **comp: form:** add controlTooltip,controlTooltipIcon,labelTooltipIcon props ([#852](https://github.com/IDuxFE/idux/issues/852)) ([c3cd180](https://github.com/IDuxFE/idux/commit/c3cd180c452a062c299642e4ee23ddea49d8fe86))
+* **comp: tabs:** first tab is selected by default when no selectedKey ([#855](https://github.com/IDuxFE/idux/issues/855)) ([5c6ee77](https://github.com/IDuxFE/idux/commit/5c6ee777b886f6ffed2d20a89dcfe54d0a6594ba))
+
+
+
+
+
 # [1.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-04-21)
 
 
