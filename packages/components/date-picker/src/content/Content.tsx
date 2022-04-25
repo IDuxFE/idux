@@ -35,12 +35,16 @@ export default defineComponent({
         timeInputVaue,
         visiblePanel,
         panelValue,
+        dateInputFocused,
+        timeInputFocused,
         handleDateInput,
         handleTimeInput,
         handleDateInputClear,
         handleTimeInputClear,
         handleDateInputFocus,
         handleTimeInputFocus,
+        handleDateInputBlur,
+        handleTimeInputBlur,
         handleDatePanelChange,
         handleTimePanelChange,
       },
@@ -74,6 +78,14 @@ export default defineComponent({
       }
     }
 
+    const _handleDateInputClear = (evt: Event) => {
+      if (!inputEnableStatus.value.enableOverlayTimeInput) {
+        handleClear(evt)
+      }
+
+      handleDateInputClear()
+    }
+
     const renderInputs = (prefixCls: string) => {
       if (!inputEnableStatus.value.enableOverlayDateInput) {
         return
@@ -90,11 +102,13 @@ export default defineComponent({
             clearable={props.clearable ?? config.clearable}
             clearIcon={props.clearIcon ?? config.clearIcon}
             clearVisible={!!dateInputValue.value}
+            focused={dateInputFocused.value}
             placeholder={dateFormatRef.value}
             onInput={handleDateInput}
             onFocus={handleDateInputFocus}
+            onBlur={handleDateInputBlur}
             onKeydown={handleKeyDown}
-            onClear={inputEnableStatus.value.enableOverlayTimeInput ? handleDateInputClear : handleClear}
+            onClear={_handleDateInputClear}
           />
           {inputEnableStatus.value.enableOverlayTimeInput && (
             <ɵInput
@@ -106,8 +120,10 @@ export default defineComponent({
               clearIcon={props.clearIcon ?? config.clearIcon}
               clearVisible={!!timeInputVaue.value}
               placeholder={timeFormatRef.value}
+              focused={timeInputFocused.value}
               onInput={handleTimeInput}
               onFocus={handleTimeInputFocus}
+              onBlur={handleTimeInputBlur}
               onKeydown={handleKeyDown}
               onClear={handleTimeInputClear}
             />

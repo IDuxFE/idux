@@ -58,8 +58,12 @@ export default defineComponent({
     )
     const isStart = computed(() => startDate.value && dateConfig.isSame(startDate.value, cellDate.value, 'date'))
     const isEnd = computed(() => endDate.value && dateConfig.isSame(endDate.value, cellDate.value, 'date'))
-    const isToday = computed(
-      () => dayTypes.includes(activeType.value) && dateConfig.isSame(cellDate.value, dateConfig.now(), 'day'),
+    const isCurrent = computed(() =>
+      dateConfig.isSame(
+        cellDate.value,
+        dateConfig.now(),
+        dayTypes.includes(activeType.value) ? 'day' : activeType.value,
+      ),
     )
     const outView = computed(() => {
       const currType = activeType.value
@@ -89,6 +93,10 @@ export default defineComponent({
       )
     })
     const isInRange = computed(() => {
+      if (outView.value) {
+        return false
+      }
+
       const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
       const cellDateValue = dateConfig.startOf(cellDate.value, compareType).valueOf()
 
@@ -108,7 +116,7 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-selected`]: isSelected.value,
         [`${prefixCls}-in-range`]: isInRange.value,
-        [`${prefixCls}-today`]: isToday.value,
+        [`${prefixCls}-current`]: isCurrent.value,
         [`${prefixCls}-out-view`]: outView.value,
         [`${prefixCls}-start`]: isStart.value,
         [`${prefixCls}-end`]: isEnd.value,

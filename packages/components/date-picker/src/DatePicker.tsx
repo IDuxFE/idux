@@ -67,12 +67,14 @@ export default defineComponent({
     })
 
     watch(overlayOpened, opened => {
-      if (!opened) {
-        controlContext.init(true)
-      }
-
       nextTick(() => {
-        opened ? focus() : blur()
+        if (opened) {
+          focus()
+          inputRef.value?.dispatchEvent(new FocusEvent('focus'))
+        } else {
+          blur()
+          inputRef.value?.dispatchEvent(new FocusEvent('blur'))
+        }
       })
     })
 

@@ -44,7 +44,7 @@ export function useTriggerProps(
       clearable: !accessor.disabled.value && props.clearable && !!accessor.valueRef.value,
       clearIcon: props.clearIcon ?? config.clearIcon,
       disabled: accessor.disabled.value,
-      focused: isFocused.value || overlayOpened.value,
+      focused: isFocused.value,
       readonly: props.readonly || inputEnableStatus.value.enableInput === false,
       size: props.size ?? formContext?.size.value ?? config.size,
       suffix: props.suffix ?? config.suffix,

@@ -1,7 +1,6 @@
 @import '../../style/mixins/borderless.less';
 @import '../../style/mixins/placeholder.less';
 @import '../../style/mixins/reset.less';
-@import './input.less';
 @import './panel.less';
 
 .@{date-picker-prefix},
@@ -9,7 +8,10 @@
   display: inline-flex;
   width: 100%;
   line-height: @date-picker-line-height;
-  background-color: @date-picker-background-color;
+
+  &:not(.@{trigger-prefix}-disabled) {
+    color: @date-picker-color;
+  }
 
   &-input {
     width: 100%;
@@ -32,13 +34,21 @@
   }
 
   &-board {
-    &-inputs {
+    & &-inputs {
       display: flex;
       justify-content: center;
       margin-bottom: @date-picker-overlay-inputs-margin-bottom;
+      color: @date-picker-color;
+
+      & .@{input-prefix}-focused {
+        box-shadow: none;
+      }
     }
     & &-date-input {
       width: @date-picker-overlay-date-input-width;
+      input {
+        color: @date-picker-color;
+      }
     }
     & &-date-input:only-child {
       width: 100%;
@@ -46,6 +56,9 @@
     & &-time-input {
       width: @date-picker-overlay-time-input-width;
       margin-left: @date-picker-overlay-input-gap;
+      input {
+        color: @date-picker-color;
+      }
     }
 
     &-panel {
@@ -93,13 +106,14 @@
       display: flex;
       padding: @date-range-picker-overlay-content-padding;
     }
-    &-gap {
+    &-separator {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      width: @date-range-picker-overlay-gap-width;
-      padding: @date-range-picker-overlay-gap-padding;
+      width: @date-range-picker-overlay-separator-width;
+      padding: @date-range-picker-overlay-separator-padding;
       text-align: center;
+      font-size: @date-range-picker-overlay-separator-font-size;
       color: @date-picker-color;
     }
 

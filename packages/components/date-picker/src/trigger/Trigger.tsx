@@ -39,27 +39,35 @@ export default defineComponent({
       callEmit(props.onInput, evt)
     }
 
-    return () => {
+    const renderContent = (prefixCls: string) => {
       const { readonly, disabled } = triggerProps.value
-      const prefixCls = mergedPrefixCls.value
 
       return (
-        <ɵTrigger className={prefixCls} v-slots={slots} {...triggerProps.value}>
-          <div class={`${prefixCls}-input`}>
-            <input
-              ref={inputEnableStatus.value.allowInput === true ? inputRef : undefined}
-              class={`${prefixCls}-input-inner`}
-              autocomplete="off"
-              disabled={disabled}
-              placeholder={placeholder.value}
-              readonly={readonly}
-              size={inputSize.value}
-              value={inputValue.value}
-              onInput={handleInput}
-            />
-          </div>
-        </ɵTrigger>
+        <div class={`${prefixCls}-input`}>
+          <input
+            ref={inputEnableStatus.value.allowInput === true ? inputRef : undefined}
+            class={`${prefixCls}-input-inner`}
+            autocomplete="off"
+            disabled={disabled}
+            placeholder={placeholder.value}
+            readonly={readonly}
+            size={inputSize.value}
+            value={inputValue.value}
+            onInput={handleInput}
+          />
+        </div>
       )
+    }
+
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      const triggerSlots = {
+        default: () => renderContent(prefixCls),
+        suffix: slots.suffix,
+        clearIcon: slots.clearIcon,
+      }
+
+      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} />
     }
   },
 })

@@ -6,7 +6,6 @@
  */
 
 import type { DatePanelType } from '../types'
-import type { DateConfig } from '@idux/components/config'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
@@ -16,31 +15,13 @@ export interface MaxIndexContext {
   maxCellIndex: ComputedRef<number>
 }
 
-export function useMaxIndex(
-  activeType: ComputedRef<DatePanelType>,
-  dateConfig: DateConfig,
-  activeDate: ComputedRef<Date>,
-): MaxIndexContext {
+export function useMaxIndex(activeType: ComputedRef<DatePanelType>): MaxIndexContext {
   const maxRowIndex = computed(() => {
     const currType = activeType.value
-    const { weekStartsOn, get, startOf, endOf } = dateConfig
     switch (currType) {
       case 'date':
-      case 'week': {
-        const currDate = activeDate.value
-        const weekStarts = weekStartsOn()
-        let startDay = get(startOf(currDate, 'month'), 'day')
-        if (startDay > weekStarts) {
-          startDay = startDay - weekStarts
-        } else if (startDay < weekStarts) {
-          startDay = startDay - weekStarts + 7
-        } else {
-          startDay = 0
-        }
-        const endDate = get(endOf(currDate, 'month'), 'date')
-        // 起始天数 + 当月总天数 > 5 * 7, 那么就多显示一周
-        return startDay + endDate > 35 ? 6 : 5
-      }
+      case 'week':
+        return 6
       case 'month':
         return 4
       case 'quarter':

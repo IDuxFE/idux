@@ -82,28 +82,35 @@ export default defineComponent({
       const {
         dateInputValue,
         timeInputVaue,
+        dateInputFocused,
+        timeInputFocused,
         handleDateInput,
         handleTimeInput,
         handleDateInputClear,
         handleTimeInputClear,
         handleDateInputFocus,
         handleTimeInputFocus,
+        handleDateInputBlur,
+        handleTimeInputBlur,
         handleTimePanelChange,
       } = isFrom ? fromControl : toControl
 
       const inputs = enableOverlayDateInput && (
         <div class={`${prefixCls}-inputs`}>
           <ɵInput
-            ref={inputInstance}
+            ref={isFrom ? inputInstance : undefined}
             class={`${prefixCls}-date-input`}
             v-slots={slots}
             value={dateInputValue.value}
             size="sm"
             clearable={props.clearable ?? config.clearable}
             clearIcon={props.clearIcon ?? config.clearIcon}
+            clearVisible={!!dateInputValue.value}
+            focused={dateInputFocused.value}
             placeholder={dateFormatRef.value}
             onInput={handleDateInput}
             onFocus={handleDateInputFocus}
+            onBlur={handleDateInputBlur}
             onKeydown={handleKeyDown}
             onClear={handleDateInputClear}
           />
@@ -115,9 +122,12 @@ export default defineComponent({
               size="sm"
               clearable={props.clearable ?? config.clearable}
               clearIcon={props.clearIcon ?? config.clearIcon}
+              clearVisible={!!timeInputVaue.value}
+              focused={timeInputFocused.value}
               placeholder={timeFormatRef.value}
               onInput={handleTimeInput}
               onFocus={handleTimeInputFocus}
+              onBlur={handleTimeInputBlur}
               onKeydown={handleKeyDown}
               onClear={handleTimeInputClear}
             />
@@ -163,7 +173,9 @@ export default defineComponent({
       const children = [
         <div class={`${prefixCls}-content`} tabindex={-1} onMousedown={handleMouseDown}>
           {renderBoard(boardPrefixCls, true)}
-          <div class={`${prefixCls}-gap`}>{inputEnableStatus.value.enableOverlayDateInput && renderSeparator()}</div>
+          <div class={`${prefixCls}-separator`}>
+            {inputEnableStatus.value.enableOverlayDateInput && renderSeparator()}
+          </div>
           {renderBoard(boardPrefixCls, false)}
         </div>,
         <ɵFooter

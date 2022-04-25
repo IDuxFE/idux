@@ -27,7 +27,7 @@ export default defineComponent({
     const dateConfig = useDateConfig()
     const { activeType, setActiveType } = useActiveType(props)
     const { activeDate, setActiveDate, startActiveDate } = useActiveDate(props, dateConfig, activeType)
-    const { maxRowIndex, maxCellIndex } = useMaxIndex(activeType, dateConfig, activeDate)
+    const { maxRowIndex, maxCellIndex } = useMaxIndex(activeType)
 
     provide(datePanelToken, {
       props,

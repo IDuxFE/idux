@@ -28,7 +28,7 @@ export function useOverlayState(
   const changeOpenedState = (open: boolean) => {
     setOverlayOpened(open)
     if (!open) {
-      control.init()
+      control.init(true)
     }
   }
 

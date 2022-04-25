@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, watch } from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, provide, watch } from 'vue'
 
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
@@ -72,11 +72,15 @@ export default defineComponent({
     })
 
     watch(overlayOpened, opened => {
-      if (!opened) {
-        rangeControlContext.init(true)
-      }
-
-      opened ? focus() : blur()
+      nextTick(() => {
+        if (opened) {
+          focus()
+          inputRef.value?.dispatchEvent(new FocusEvent('focus'))
+        } else {
+          blur()
+          inputRef.value?.dispatchEvent(new FocusEvent('blur'))
+        }
+      })
     })
 
     watch(rangeControlContext.buffer, value => {
