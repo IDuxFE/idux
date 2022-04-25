@@ -137,7 +137,6 @@ export default defineComponent({
         onNodeContextmenu,
         onScroll,
         onScrolledBottom,
-        onSearchedChange,
         droppable,
         treeDisabled,
         loadChildren,
@@ -200,7 +199,6 @@ export default defineComponent({
           onLoaded={onLoaded}
           onCheckedChange={changeSelected}
           onSelectedChange={changeSelected}
-          onSearchedChange={onSearchedChange}
           onExpandedChange={handleExpandedChange}
           onScroll={onScroll}
           onScrolledBottom={onScrolledBottom}

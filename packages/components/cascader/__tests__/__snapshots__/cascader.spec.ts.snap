@@ -1,0 +1,41 @@
+// Vitest Snapshot v1
+
+exports[`Cascader > multiple work > render work 1`] = `
+"<div class=\\"ix-cascader ix-selector ix-selector-multiple ix-selector-opened ix-selector-md\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-overflow ix-selector-overflow\\">
+      <div class=\\"ix-overflow-item\\">
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Components/General/Button</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+      </div>
+      <div class=\\"ix-overflow-item\\">
+        <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Pro/Table</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
+      </div>
+      <!---->
+      <div class=\\"ix-overflow-item ix-overflow-suffix\\">
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+      </div>
+    </div>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
+</div>
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Cascader > single work > render work 1`] = `
+"<div class=\\"ix-cascader ix-selector ix-selector-opened ix-selector-single ix-selector-md\\">
+  <!---->
+  <div class=\\"ix-selector-content\\">
+    <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Components/General/Button</span>
+      <!---->
+    </div>
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+      <!---->
+    </div>
+    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  </div>
+</div>
+<!--teleport start-->
+<!--teleport end-->"
+`;

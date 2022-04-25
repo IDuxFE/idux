@@ -52,7 +52,6 @@ order: 0
 | `onExpand` | 点击展开图标时触发 | `(expanded: boolean, node: TreeNode) => void` | - | - | - |
 | `onExpandedChange` | 展开状态发生变化时触发 | `(expendedKeys: VKey[], expendedNodes: TreeNode[]) => void` | - | - | - |
 | `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: VKey[], node: TreeNode) => void` | - | - | - |
-| `onSearchedChange` | 搜索状态发生变化时调用 | `(searchedKeys: VKey[], searchedNodes: TreeNode[]) => void` | - | - | - |
 | `onSelect` | 选中状态发生变化时触发 | `(selected: boolean, node: TreeNode) => void` | - | - | - |
 | `onSelectedChange` | 选中状态发生变化时触发 | `(selectedKeys: VKey[], selectedNodes: TreeNode[]) => void` | - | - | - |
 | `onNodeClick` | 节点点击事件 | `(evt: Event, node: TreeNode) => void` | - | - | - |

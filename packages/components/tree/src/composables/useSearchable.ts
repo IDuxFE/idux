@@ -10,9 +10,7 @@ import type { MergedNode } from './useDataSource'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, ref, watch } from 'vue'
-
-import { callChange } from '../utils'
+import { computed, ref } from 'vue'
 
 const defaultSearchedKeys: VKey[] = []
 
@@ -42,8 +40,6 @@ export function useSearchable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
 
     return keys
   })
-
-  watch(searchedKeys, currKeys => callChange(mergedNodeMap, currKeys, props.onSearchedChange))
 
   return { searchedKeys, lastEffectiveSearchedKeys }
 }

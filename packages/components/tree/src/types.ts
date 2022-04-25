@@ -61,7 +61,6 @@ export const treeProps = {
   onExpand: IxPropTypes.emit<(expanded: boolean, node: TreeNode) => void>(),
   onExpandedChange: IxPropTypes.emit<(expendedKeys: VKey[], expendedNodes: TreeNode[]) => void>(),
   onLoaded: IxPropTypes.emit<(loadedKeys: VKey[], node: TreeNode) => void>(),
-  onSearchedChange: IxPropTypes.emit<(searchedKeys: VKey[], searchedNodes: TreeNode[]) => void>(),
   onSelect: IxPropTypes.emit<(selected: boolean, node: TreeNode) => void>(),
   onSelectedChange: IxPropTypes.emit<(selectedKeys: VKey[], selectedNodes: TreeNode[]) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),

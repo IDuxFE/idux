@@ -22,11 +22,13 @@ order: 0
 | `v-model:loadedKeys` | 已经加载完毕的节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
+| `autocomplete` | 设置选择器的 `autocomplete` | `string` | `off` | - | - |
 | `cascade` | 是否开启级联功能 | `boolean` | `false` | - | 仅在 `multiple` 和 `checkable` 为 `true` 时生效 |
-| `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | 仅在 `multiple` 为 `true` 时生效 |
 | `childrenKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`children`字段 | `string` | `children` | ✅ | - |
 | `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
+| `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
+| `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `dataSource` | 树型数据数组,参见[TreeSelectNode](#TreeSelectNode) | `TreeSelectNode[]` | `[]` | - | - |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
@@ -63,7 +65,6 @@ order: 0
 | `onExpand` | 点击展开图标时触发 | `(expanded: boolean, node: TreeSelectNode) => void` | - | - | - |
 | `onExpandedChange` | 展开状态发生变化时触发 | `(expendedKeys: VKey[], expendedNodes: TreeSelectNode[]) => void` | - | - | - |
 | `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: VKey[], node: TreeSelectNode) => void` | - | - | - |
-| `onSearchedChange` | 搜索状态发生变化时调用 | `(searchedKeys: VKey[], searchedNodes: TreeSelectNode[]) => void` | - | - | - |
 | `onSelect` | 选中状态发生变化时触发 | `(selected: boolean, node: TreeSelectNode) => void` | - | - | - |
 | `onNodeClick` | 节点点击事件 | `(evt: Event, node: TreeSelectNode) => void` | - | - | - |
 | `onNodeContextmenu` | 节点右击事件 | `(evt: Event, node: TreeSelectNode) => void` | - | - | - |

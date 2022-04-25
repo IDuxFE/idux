@@ -148,7 +148,7 @@ export default defineComponent({
           disabled: _disabled,
           prefixCls: itemPrefixCls,
           removable,
-          value,
+          value: value ?? key,
           label,
           onRemove: props.onItemRemove,
         }

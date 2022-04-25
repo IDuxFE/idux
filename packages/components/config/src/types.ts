@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { VKey } from '@idux/cdk'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { PortalTargetType } from '@idux/cdk/portal'
@@ -13,6 +14,7 @@ import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
+import type { CascaderData } from '@idux/components/cascader'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
@@ -45,6 +47,7 @@ export interface GlobalConfig {
   button: ButtonConfig
   card: CardConfig
   carousel: CarouselConfig
+  cascader: CascaderConfig
   checkbox: CheckboxConfig
   collapse: CollapseConfig
   datePicker: DatePickerConfig
@@ -139,6 +142,20 @@ export interface CarouselConfig {
   dotPlacement: DotPlacement
   showArrow: boolean
   trigger: DotTrigger
+}
+
+export interface CascaderConfig {
+  borderless: boolean
+  clearIcon: string
+  childrenKey: string
+  expandIcon: string
+  fullPath: boolean
+  getKey: string | ((data: CascaderData) => VKey)
+  labelKey: string
+  overlayContainer?: PortalTargetType
+  overlayMatchWidth: boolean
+  size: FormSize
+  suffix: string
 }
 
 export interface CheckboxConfig {

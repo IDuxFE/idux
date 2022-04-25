@@ -67,7 +67,7 @@ export default defineComponent({
       changeSelected,
       selectedOptions,
       handleClear,
-      handleItemRemove,
+      handleRemove,
     } = useSelectedState(props, accessor, mergedOptions, locale)
 
     const { activeIndex, activeOption, changeActive, scrollToActivated } = useActiveState(
@@ -89,6 +89,10 @@ export default defineComponent({
     }
 
     const handleBlur = () => accessor.markAsBlurred()
+    const handleItemRemove = (value: any) => {
+      focus()
+      handleRemove(value)
+    }
 
     provide(selectToken, {
       props,

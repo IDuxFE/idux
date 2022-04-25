@@ -47,7 +47,7 @@ export default defineComponent({
 
     const accessor = useFormAccessor()
     const { mergedNodeMap } = useMergeNodes(props, getNodeKey, config)
-    const { selectedValue, selectedNodes, changeSelected, handleItemRemove, handleClear } = useSelectedState(
+    const { selectedValue, selectedNodes, changeSelected, handleRemove, handleClear } = useSelectedState(
       props,
       accessor,
       mergedNodeMap,
@@ -89,6 +89,10 @@ export default defineComponent({
     }
 
     const handleBlur = () => accessor.markAsBlurred()
+    const handleItemRemove = (key: unknown) => {
+      focus()
+      handleRemove(key)
+    }
 
     provide(treeSelectToken, {
       props,
