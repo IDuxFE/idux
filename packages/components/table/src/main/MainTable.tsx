@@ -120,7 +120,7 @@ export default defineComponent({
       const width = scrollWidth.value
       const height = scrollHeight.value
       const overflowX = width ? 'auto' : undefined
-      const overflowY = props.virtual ? 'hidden' : height ? 'scroll' : width ? 'hidden' : undefined
+      const overflowY = props.virtual ? 'hidden' : height ? 'auto' : width ? 'hidden' : undefined
       const fullHeight = props.scroll?.fullHeight
       return { overflowX, overflowY, [fullHeight ? 'height' : 'maxHeight']: height }
     })
