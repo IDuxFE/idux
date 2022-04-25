@@ -338,7 +338,7 @@ export const defaultConfig: GlobalConfig = {
     clearIcon: 'close-circle',
     labelKey: 'label',
     nodeKey: 'key',
-    overlayMatchWidth: false,
+    overlayMatchWidth: true,
     size: 'md',
     suffix: 'down',
   },
