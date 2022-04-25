@@ -68,11 +68,12 @@ function renderLabel(
     return labelSlot({ node, searchValue, searched })
   }
   if (searched && label && searchValue) {
-    const index = label.indexOf(searchValue)
-    if (index > -1) {
-      const beforeLabel = label.substr(0, index)
-      const afterLabel = label.substr(index + searchValue.length)
-      const highlightLabel = <span class={`${prefixCls}-label-highlight`}>{searchValue}</span>
+    const startIndex = label.toUpperCase().indexOf(searchValue.toUpperCase())
+    if (startIndex > -1) {
+      const endIndex = startIndex + searchValue.length
+      const beforeLabel = label.substring(0, startIndex)
+      const afterLabel = label.substring(endIndex)
+      const highlightLabel = <span class={`${prefixCls}-label-highlight`}>{label.substring(startIndex, endIndex)}</span>
       return [beforeLabel, highlightLabel, afterLabel]
     }
   }

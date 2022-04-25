@@ -1,0 +1,96 @@
+@import '../../style/mixins/ellipsis.less';
+@import '../../style/mixins/reset.less';
+
+.@{cascader-prefix} {
+  &-option {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: @cascader-option-padding;
+    height: @cascader-option-height;
+    line-height: 1;
+    transition: background @transition-duration-base, color @transition-duration-base;
+    cursor: pointer;
+
+    &-disabled {
+      color: @cascader-option-disabled-color;
+      cursor: not-allowed;
+    }
+
+    &-active:not(&-disabled) {
+      background-color: @cascader-option-active-background-color;
+    }
+
+    &-expanded:not(&-disabled) {
+      color: @cascader-option-expanded-color;
+      background-color: @cascader-option-expanded-background-color;
+      font-weight: @cascader-option-expanded-font-weight;
+    }
+
+    &-leaf&-selected:not(&-disabled) {
+      color: @cascader-option-selected-color;
+      background-color: @cascader-option-selected-background-color;
+      font-weight: @cascader-option-selected-font-weight;
+    }
+
+    &-label {
+      .ellipsis();
+
+      flex: auto;
+
+      &-highlight {
+        color: @cascader-option-label-highlight-color;
+      }
+    }
+
+    .@{checkbox-prefix} + &-label {
+      margin-left: @cascader-option-label-margin-left;
+    }
+
+    &-expand-icon {
+      margin-left: @cascader-option-expanded-margin-left;
+      color: @cascader-option-expanded-icon-color;
+      font-size: @cascader-option-expanded-icon-font-size;
+    }
+
+    &-expand-icon&-disabled {
+      color: @cascader-option-disabled-color;
+    }
+  }
+
+  &-option-group {
+    flex-grow: 1;
+    min-width: @cascader-option-group-min-width;
+    min-height: @cascader-option-group-min-height;
+    border-right: @cascader-option-group-border;
+
+    &-empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-overlay {
+    .reset-scroll();
+
+    z-index: @cascader-overlay-zindex;
+    padding: @cascader-overlay-padding;
+    background-color: @cascader-overlay-background-color;
+    border-radius: @cascader-overlay-border-radius;
+    box-shadow: @cascader-overlay-box-shadow;
+
+    &-search-wrapper {
+      padding: @cascader-overlay-search-wrapper-padding;
+    }
+
+    &-content {
+      .reset-component();
+
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      overflow: auto;
+    }
+  }
+}

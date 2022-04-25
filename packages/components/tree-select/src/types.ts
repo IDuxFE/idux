@@ -88,9 +88,6 @@ export const treeSelectProps = {
   onNodeClick: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode) => void>>,
   onNodeContextmenu: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
-  onSearchedChange: [Function, Array] as PropType<
-    MaybeArray<(searchedKeys: VKey[], searchedNodes: TreeSelectNode[]) => void>
-  >,
   onSelect: [Function, Array] as PropType<MaybeArray<(selected: boolean, node: TreeSelectNode) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<

@@ -58,6 +58,18 @@ export const defaultConfig: GlobalConfig = {
     showArrow: false,
     trigger: 'click',
   },
+  cascader: {
+    borderless: false,
+    clearIcon: 'close-circle',
+    childrenKey: 'children',
+    expandIcon: 'right',
+    fullPath: true,
+    getKey: 'key',
+    labelKey: 'label',
+    overlayMatchWidth: false,
+    size: 'md',
+    suffix: 'down',
+  },
   checkbox: {
     size: 'md',
   },

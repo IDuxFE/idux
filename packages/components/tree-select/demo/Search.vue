@@ -8,21 +8,18 @@
       multiple
       :dataSource="treeData"
       :searchable="searchableValue"
-      :onSearchedChange="onSearchedChange"
     />
   </IxSpace>
 </template>
 
 <script setup lang="ts">
-import type { VKey } from '@idux/cdk/utils'
-import type { RadioOption } from '@idux/components/radio'
-import type { TreeSelectNode } from '@idux/components/tree-select'
+import type { RadioData } from '@idux/components/radio'
 
 import { ref } from 'vue'
 
 const searchableValue = ref(true)
 
-const options: RadioOption[] = [
+const options: RadioData[] = [
   { label: 'true', value: true },
   { label: 'overlay', value: 'overlay' },
   { label: 'false', value: false },
@@ -58,10 +55,6 @@ const treeData = [
     ],
   },
 ]
-
-const onSearchedChange = (searchedKeys: VKey[], searchedNodes: TreeSelectNode[]) => {
-  console.log('onSearchedChange', searchedKeys, searchedNodes)
-}
 </script>
 <style lang="less" scoped>
 .ix-space {

@@ -23,7 +23,7 @@ export interface SelectedStateContext {
   selectedValue: ComputedRef<any[]>
   selectedNodes: ComputedRef<any[]>
   changeSelected: (value: any[], nodes: TreeSelectNode[]) => void
-  handleItemRemove: (key: any) => void
+  handleRemove: (key: any) => void
   handleClear: (evt: MouseEvent) => void
 }
 
@@ -52,7 +52,7 @@ export function useSelectedState(
     setValue(value)
   }
 
-  const handleItemRemove = (key: any) => {
+  const handleRemove = (key: any) => {
     setValue(selectedValue.value.filter(item => key !== item))
   }
 
@@ -66,7 +66,7 @@ export function useSelectedState(
     selectedValue,
     selectedNodes,
     changeSelected,
-    handleItemRemove,
+    handleRemove,
     handleClear,
   }
 }

@@ -17,6 +17,7 @@ import { IxBreadcrumb, IxBreadcrumbItem } from '@idux/components/breadcrumb'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard, IxCardGrid } from '@idux/components/card'
 import { IxCarousel } from '@idux/components/carousel'
+import { IxCascader } from '@idux/components/cascader'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxComment } from '@idux/components/comment'
@@ -82,6 +83,7 @@ const components = [
   IxCard,
   IxCardGrid,
   IxCarousel,
+  IxCascader,
   IxComment,
   IxCheckbox,
   IxCheckboxGroup,
@@ -190,9 +192,11 @@ export * from '@idux/components/breadcrumb'
 export * from '@idux/components/button'
 export * from '@idux/components/card'
 export * from '@idux/components/carousel'
+export * from '@idux/components/cascader'
 export * from '@idux/components/checkbox'
 export * from '@idux/components/collapse'
 export * from '@idux/components/comment'
+export * from '@idux/components/config'
 export * from '@idux/components/date-picker'
 export * from '@idux/components/divider'
 export * from '@idux/components/drawer'
@@ -207,6 +211,7 @@ export * from '@idux/components/input'
 export * from '@idux/components/input-number'
 export * from '@idux/components/layout'
 export * from '@idux/components/list'
+export * from '@idux/components/locales'
 export * from '@idux/components/menu'
 export * from '@idux/components/message'
 export * from '@idux/components/modal'

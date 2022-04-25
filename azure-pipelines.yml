@@ -5,6 +5,8 @@
 
 trigger:
   - main
+  - next
+  - hotfix
 
 pool:
   vmImage: 'ubuntu-latest'

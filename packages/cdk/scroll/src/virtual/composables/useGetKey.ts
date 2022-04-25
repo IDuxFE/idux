@@ -31,6 +31,6 @@ export function useGetKey(props: VirtualScrollProps): ComputedRef<GetKey> {
         return key
       }
     }
-    return getKey
+    return getKey!
   })
 }

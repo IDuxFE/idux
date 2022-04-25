@@ -23,7 +23,7 @@ export interface SelectedStateContext {
   selectedLimit: ComputedRef<boolean>
   selectedLimitTitle: ComputedRef<string>
   changeSelected: (value: any) => void
-  handleItemRemove: (value: any) => void
+  handleRemove: (value: any) => void
   handleClear: (evt: MouseEvent) => void
 }
 
@@ -77,7 +77,7 @@ export function useSelectedState(
     }
   }
 
-  const handleItemRemove = (value: any) => {
+  const handleRemove = (value: any) => {
     const compareFn = props.compareWith ?? props.compareFn
     setValue(selectedValue.value.filter(item => !compareFn(value, item)))
   }
@@ -93,7 +93,7 @@ export function useSelectedState(
     selectedLimit,
     selectedLimitTitle,
     changeSelected,
-    handleItemRemove,
+    handleRemove,
     handleClear,
   }
 }

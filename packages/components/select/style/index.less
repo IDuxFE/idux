@@ -52,34 +52,16 @@
     box-shadow: @select-option-container-box-shadow;
     overflow: auto;
 
-    .@{select-option-prefix}-group:not(:first-child) {
+    &-search-wrapper {
+      padding: @select-overlay-input-padding;
+    }
+
+    .@{select-prefix}-option-group:not(:first-child) {
       border-top: @select-option-group-border;
     }
 
-    &-search-wrapper {
-      padding: @select-overlay-input-padding;
-      .@{input-prefix}-clear,
-      .@{input-prefix}-suffix {
-        color: @select-icon-color;
-      }
-    }
-
-    .@{select-option-prefix}-grouped {
+    .@{select-prefix}-option-grouped {
       padding-left: @select-option-grouped-padding-left;
-    }
-
-    &-multiple {
-      .@{select-option-prefix} {
-        
-        &-selected:not(&-disabled) {
-          background-color: @color-white;
-          color: @select-color;
-        }
-
-        &-active:not(&-disabled) {
-          background-color: @select-option-active-background-color;
-        }
-      }
     }
   }
 }
