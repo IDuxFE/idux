@@ -1,28 +1,23 @@
-import { flushPromises, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
-import { DoneCallback } from 'vitest'
 
-import List from '../src/List.vue'
-import ListItem from '../src/ListItem.vue'
+import ListItem from '../src/Item'
+import List from '../src/List'
 
 const TestComponent = {
   components: { List, ListItem },
   template: `
-  <List 
-    :size="size" 
-    :header="header" 
-    :footer="footer" 
-    :loadMore="loadMore" 
-    :split="split"
+  <List
+    :size="size"
+    :header="header"
+    :footer="footer"
+    :loadMore="loadMore"
     :loading="loading"
     :grid="grid"
     :borderless="borderless"
     @loadMore="handleLoadMore">
-    <ListItem>default</ListItem>
-    <ListItem>default</ListItem>
-    <ListItem>default</ListItem>
-    <ListItem>default</ListItem>
+    <ListItem v-for='item in items'>{{item}}</ListItem>
   </List>
   `,
   props: {
@@ -30,18 +25,16 @@ const TestComponent = {
     header: String,
     footer: String,
     loadMore: String,
-    split: Boolean,
     loading: Boolean,
     grid: Object,
     borderless: Boolean,
     handleLoadMore: Function,
   },
-}
-
-async function sleep(time: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, time)
-  })
+  data() {
+    return {
+      items: Array.from(new Array(4)).map(() => 'default'),
+    }
+  },
 }
 
 describe('List', () => {
@@ -77,33 +70,8 @@ describe('List', () => {
     expect(wrapper.find('.ix-list-footer').text()).toEqual('footer')
     expect(wrapper.find('.ix-list-footer').exists()).toBeTruthy()
   })
-  test('loadMore & spin', async () => {
-    const wrapper = mount(TestComponent)
-
-    expect(wrapper.find('.ix-list-loadMore').exists()).toBeFalsy()
-    await wrapper.setProps({
-      loadMore: '123',
-      handleLoadMore: async function (done: DoneCallback) {
-        await sleep(1000)
-        done()
-      },
-    })
-    expect(wrapper.find('.ix-list-loadMore').exists()).toBeTruthy()
-    const loadMoreEL = wrapper.element.querySelector('.ix-list-loadMore') as HTMLElement
-    const loadMoreBtn = loadMoreEL.querySelector('button') as HTMLElement
-    loadMoreBtn.click()
-    await flushPromises()
-    expect(wrapper.find('.ix-button-loading').exists()).toBeTruthy()
-    await sleep(1100)
-    expect(wrapper.find('.ix-button-loading').exists()).toBeFalsy()
-    await wrapper.setProps({ loading: true })
-    expect(wrapper.find('.ix-spin-spinner').exists()).toBeTruthy()
-  })
   test('split', async () => {
     const wrapper = mount(TestComponent)
-
-    expect(wrapper.classes()).not.toContain('ix-list-split')
-    await wrapper.setProps({ split: true })
     expect(wrapper.classes()).toContain('ix-list-split')
   })
   test('borderless', async () => {
@@ -114,6 +82,13 @@ describe('List', () => {
     expect(wrapper.classes()).not.toContain('ix-list-borderless')
     await wrapper.setProps({ borderless: '' })
     expect(wrapper.classes()).not.toContain('ix-list-borderless')
+  })
+
+  test('empty', async () => {
+    const wrapper = mount(TestComponent)
+    expect(wrapper.find('.ix-empty').exists()).toBeFalsy()
+    await wrapper.setData({ items: [] })
+    expect(wrapper.find('.ix-empty').exists()).toBeTruthy()
   })
 
   test('grid', async () => {

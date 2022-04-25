@@ -7,11 +7,11 @@
 
 import type { ListComponent, ListItemComponent } from './src/types'
 
-import List from './src/List.vue'
-import ListItem from './src/ListItem.vue'
+import ListItem from './src/Item'
+import List from './src/List'
 
-const IxList = List as unknown as ListComponent
 const IxListItem = ListItem as unknown as ListItemComponent
+const IxList = List as unknown as ListComponent
 
 export { IxList, IxListItem }
 
@@ -23,6 +23,5 @@ export type {
   ListItemComponent,
   ListItemPublicProps as ListItemProps,
   ListSize,
-  ListLayout,
   ListGridProps,
 } from './src/types'
