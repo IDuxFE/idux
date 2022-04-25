@@ -133,11 +133,11 @@ export function useRangeActiveDate(
 
   const handleFromActiveDateUpdate = (value: Date) => {
     setFromActiveDate(value)
-    setToActiveDate(calcValidActiveDate(value, toPanelValue.value, 'to'))
+    setToActiveDate(calcValidActiveDate(value, toActiveDate.value, 'to'))
   }
   const handleToActiveDateUpdate = (value: Date) => {
     setToActiveDate(value)
-    setFromActiveDate(calcValidActiveDate(fromPanelValue.value, value, 'from'))
+    setFromActiveDate(calcValidActiveDate(fromActiveDate.value, value, 'from'))
   }
 
   return {

@@ -69,18 +69,23 @@ export default defineComponent({
       )
     }
 
+    const renderContent = (prefixCls: string) => (
+      <div class={`${prefixCls}-input`}>
+        {renderSide(true)}
+        <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
+        {renderSide(false)}
+      </div>
+    )
+
     return () => {
       const prefixCls = mergedPrefixCls.value
+      const triggerSlots = {
+        default: () => renderContent(prefixCls),
+        suffix: slots.suffix,
+        clearIcon: slots.clearIcon,
+      }
 
-      return (
-        <ɵTrigger className={prefixCls} v-slots={slots} {...triggerProps.value}>
-          <div class={`${prefixCls}-input`}>
-            {renderSide(true)}
-            <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
-            {renderSide(false)}
-          </div>
-        </ɵTrigger>
-      )
+      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} />
     }
   },
 })

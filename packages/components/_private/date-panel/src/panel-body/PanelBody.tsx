@@ -27,7 +27,7 @@ export default defineComponent({
         const { key, label } = cell
         return (
           <th role="columnheader" key={key}>
-            {label}
+            <div class={`${prefixCls}-header-cell`}>{label}</div>
           </th>
         )
       })

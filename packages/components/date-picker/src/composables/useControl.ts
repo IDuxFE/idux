@@ -20,6 +20,8 @@ export interface PickerControlContext {
   dateInputValue: ComputedRef<string>
   timeInputVaue: ComputedRef<string>
   panelValue: ComputedRef<Date | undefined>
+  dateInputFocused: ComputedRef<boolean>
+  timeInputFocused: ComputedRef<boolean>
 
   visiblePanel: ComputedRef<'datePanel' | 'timePanel'>
   setVisiblePanel: (value: 'datePanel' | 'timePanel') => void
@@ -34,6 +36,8 @@ export interface PickerControlContext {
   handleTimePanelChange: (value: Date) => void
   handleDateInputFocus: () => void
   handleTimeInputFocus: () => void
+  handleDateInputBlur: () => void
+  handleTimeInputBlur: () => void
 }
 
 export function useControl(
@@ -50,6 +54,8 @@ export function useControl(
   const [timeInputVaue, setTimeInputValue] = useState<string>('')
   const [panelValue, setPanelValue] = useState<Date | undefined>(undefined)
   const [visiblePanel, setVisiblePanel] = useState<'datePanel' | 'timePanel'>('datePanel')
+  const [dateInputFocused, setDateInputFocused] = useState(false)
+  const [timeInputFocused, setTimeInputFocused] = useState(false)
 
   function initInputValue(currValue: Date | undefined, force = false) {
     if (!currValue) {
@@ -184,15 +190,25 @@ export function useControl(
 
   function handleDateInputFocus() {
     setVisiblePanel('datePanel')
+    setDateInputFocused(true)
   }
   function handleTimeInputFocus() {
     setVisiblePanel('timePanel')
+    setTimeInputFocused(true)
+  }
+  function handleDateInputBlur() {
+    setDateInputFocused(false)
+  }
+  function handleTimeInputBlur() {
+    setTimeInputFocused(false)
   }
 
   return {
     inputValue,
     dateInputValue,
     timeInputVaue,
+    dateInputFocused,
+    timeInputFocused,
     panelValue,
 
     visiblePanel,
@@ -208,5 +224,7 @@ export function useControl(
     handleTimePanelChange,
     handleDateInputFocus,
     handleTimeInputFocus,
+    handleDateInputBlur,
+    handleTimeInputBlur,
   }
 }

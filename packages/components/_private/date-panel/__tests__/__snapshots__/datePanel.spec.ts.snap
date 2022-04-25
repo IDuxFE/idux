@@ -9,13 +9,27 @@ exports[`DatePanel > date type disabledDate work 1`] = `
     <table role=\\"grid\\">
       <thead>
         <tr role=\\"row\\">
-          <th role=\\"columnheader\\">一</th>
-          <th role=\\"columnheader\\">二</th>
-          <th role=\\"columnheader\\">三</th>
-          <th role=\\"columnheader\\">四</th>
-          <th role=\\"columnheader\\">五</th>
-          <th role=\\"columnheader\\">六</th>
-          <th role=\\"columnheader\\">日</th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">一</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">二</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">三</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">四</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">五</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">六</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">日</div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -201,6 +215,43 @@ exports[`DatePanel > date type disabledDate work 1`] = `
           <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">31</div>
+            </div>
+          </td>
+        </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">1</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">2</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">3</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">4</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">5</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">6</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">7</div>
             </div>
           </td>
         </tr>
@@ -302,13 +353,27 @@ exports[`DatePanel > render work 1`] = `
     <table role=\\"grid\\">
       <thead>
         <tr role=\\"row\\">
-          <th role=\\"columnheader\\">一</th>
-          <th role=\\"columnheader\\">二</th>
-          <th role=\\"columnheader\\">三</th>
-          <th role=\\"columnheader\\">四</th>
-          <th role=\\"columnheader\\">五</th>
-          <th role=\\"columnheader\\">六</th>
-          <th role=\\"columnheader\\">日</th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">一</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">二</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">三</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">四</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">五</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">六</div>
+          </th>
+          <th role=\\"columnheader\\">
+            <div class=\\"ix-date-panel-body-header-cell\\">日</div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -497,6 +562,43 @@ exports[`DatePanel > render work 1`] = `
             </div>
           </td>
         </tr>
+        <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">1</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">2</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">3</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">4</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">5</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">6</div>
+            </div>
+          </td>
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+            <div class=\\"ix-date-panel-cell-inner\\">
+              <div class=\\"ix-date-panel-cell-trigger\\">7</div>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -530,7 +632,7 @@ exports[`DatePanel > year type disabledDate work 1`] = `
           </td>
         </tr>
         <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-current\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">2022</div>
             </div>

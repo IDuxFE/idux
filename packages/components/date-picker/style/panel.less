@@ -11,8 +11,6 @@
 
     &-header {
       display: flex;
-      font-size: @date-picker-panel-header-font-size;
-      font-weight: @date-picker-panel-header-font-weight;
       padding: @date-picker-panel-header-padding;
       line-height: @date-picker-panel-header-height - @date-picker-panel-border-width;
       border-bottom: @date-picker-panel-header-border-bottom;
@@ -25,6 +23,7 @@
 
       button {
         font-size: @date-picker-panel-header-button-font-size;
+        font-weight: @date-picker-panel-header-button-font-weight;
         transition: color @transition-duration-base;
 
         &:hover {
@@ -68,22 +67,21 @@
         overflow: hidden;
       }
 
-      thead {
-        background-color: @date-picker-panel-body-header-background-color;
-        border-bottom: @date-picker-panel-body-header-border-bottom;
-      }
-
       th,
       td {
         position: relative;
         z-index: 1;
       }
 
-      th {
-        font-weight: @date-picker-panel-body-header-font-weight;
+      &-header-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         min-width: @date-picker-panel-cell-width;
         height: @date-picker-panel-cell-height;
-        line-height: @date-picker-panel-cell-height;
+        margin-bottom: @date-picker-panel-body-header-margin-bottom;
+        font-weight: @date-picker-panel-body-header-font-weight;
+        background-color: @date-picker-panel-body-header-background-color;
       }
     }
 
@@ -96,6 +94,7 @@
     &-cell {
       padding: @date-picker-panel-cell-padding;
       color: @date-picker-panel-color;
+      overflow: hidden;
       cursor: pointer;
 
       &-out-view {
@@ -123,22 +122,10 @@
         transition: background @transition-duration-base, border @transition-duration-base;
       }
 
-      &-today {
-        position: relative;
-        &::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          margin: auto;
-          width: @date-picker-panel-cell-today-mark-width;
-          height: @date-picker-panel-cell-today-mark-height;
-          border: @date-picker-panel-border-width @date-picker-panel-border-style @date-picker-panel-cell-today-border-color;
-          border-radius: @date-picker-panel-cell-border-radius;
-          color: @date-picker-panel-cell-today-color;
-        }
+      &-current:not(&-selected) .@{date-panel-prefix}-cell-trigger {
+        border: @date-picker-panel-border-width @date-picker-panel-border-style
+          @date-picker-panel-cell-current-border-color;
+        color: @date-picker-panel-cell-current-color;
       }
 
       &-selected .@{date-panel-prefix}-cell-trigger {
@@ -184,20 +171,21 @@
       }
     }
     &-week {
-      .@{date-panel-prefix}-row {
+      .@{date-panel-prefix}-row:not(.@{date-panel-prefix}-week .@{date-panel-prefix}-row:hover)
+        .@{date-panel-prefix}-cell-selected {
         &:hover {
-          .@{date-panel-prefix}-cell-inner {
+          .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled) .@{date-panel-prefix}-cell-inner {
             border-radius: 0;
             background: @date-picker-panel-cell-hover-background-color;
             color: @date-picker-panel-cell-hover-color;
           }
-          .@{date-panel-prefix}-cell:first-child {
+          .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled):first-child {
             .@{date-panel-prefix}-cell-inner {
               border-top-left-radius: @date-picker-panel-cell-border-radius;
               border-bottom-left-radius: @date-picker-panel-cell-border-radius;
             }
           }
-          .@{date-panel-prefix}-cell:last-child {
+          .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled):last-child {
             .@{date-panel-prefix}-cell-inner {
               border-top-right-radius: @date-picker-panel-cell-border-radius;
               border-bottom-right-radius: @date-picker-panel-cell-border-radius;
@@ -209,7 +197,8 @@
 
     &-date,
     &-week {
-      .@{date-panel-prefix}-cell-selected {
+      .@{date-panel-prefix}-row:not(.@{date-panel-prefix}-week .@{date-panel-prefix}-row:hover)
+        .@{date-panel-prefix}-cell-selected {
         z-index: 0;
         .@{date-panel-prefix}-cell-trigger {
           color: @date-picker-panel-color-inverse;
@@ -263,7 +252,7 @@
         &-header {
           padding: @date-picker-panel-header-padding-lg;
         }
-        
+
         &-body {
           padding: @date-picker-panel-body-padding-lg;
         }

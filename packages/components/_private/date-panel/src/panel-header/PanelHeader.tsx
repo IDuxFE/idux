@@ -106,13 +106,20 @@ export default defineComponent({
   },
 })
 
+interface ContentAttrs {
+  key: string
+  label: string
+  title?: string
+  onClick?: (evt: Event) => void
+}
+
 function useContents(
   activeType: ComputedRef<DatePanelType>,
   activeDate: ComputedRef<Date>,
   locale: Locale,
   dateConfig: DateConfig,
   setActiveType: (type: DatePanelType) => void,
-) {
+): ComputedRef<ContentAttrs[]> {
   const handleClick = (evt: Event, type: DatePanelType) => {
     evt.stopPropagation()
     setActiveType(type)
