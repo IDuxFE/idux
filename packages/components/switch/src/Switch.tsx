@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, onMounted } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/utils'
 
 import { switchProps } from './types'
 
@@ -20,9 +19,10 @@ export default defineComponent({
   props: switchProps,
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
+    const config = useGlobalConfig('switch')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-switch`)
+    const mergedSize = useFormSize(props, config)
     const { elementRef, focus, blur } = useFormElement()
-    const formContext = inject(FORM_TOKEN, null)
 
     expose({ focus, blur })
 
@@ -48,17 +48,16 @@ export default defineComponent({
       accessor.markAsBlurred()
     }
 
-    const size = computed(() => props.size ?? formContext?.size.value)
     const classes = computed(() => {
       const { loading } = props
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-checked`]: isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-loading`]: loading,
-        [`${prefixCls}-${size.value}`]: true,
-      }
+        [`${prefixCls}-${mergedSize.value}`]: true,
+      })
     })
 
     onMounted(() => props.autofocus && focus())

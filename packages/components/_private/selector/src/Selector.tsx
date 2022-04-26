@@ -9,7 +9,6 @@ import {
   type VNodeChild,
   computed,
   defineComponent,
-  inject,
   normalizeClass,
   onBeforeUnmount,
   onMounted,
@@ -22,8 +21,8 @@ import { isString } from 'lodash-es'
 import { callEmit, offResize, onResize } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useFormSize } from '@idux/components/utils'
 
 import { useInputState } from './composables/useInputState'
 import Input from './contents/Input'
@@ -39,7 +38,6 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-selector`)
-    const formContext = inject(FORM_TOKEN, null)
     const {
       mirrorRef,
       inputRef,
@@ -65,6 +63,7 @@ export default defineComponent({
     const mergedSearchable = computed(() => {
       return !props.disabled && !props.readonly && props.searchable === true
     })
+    const mergedSize = useFormSize(props, props.config)
     const mergedSuffix = computed(() => {
       return props.suffix ?? (mergedSearchable.value && isFocused.value ? 'search' : props.config.suffix)
     })
@@ -74,13 +73,7 @@ export default defineComponent({
 
     const classes = computed(() => {
       const config = props.config
-      const {
-        allowInput,
-        className,
-        borderless = config.borderless,
-        multiple,
-        size = formContext?.size.value ?? config.size,
-      } = props
+      const { allowInput, className, borderless = config.borderless, multiple } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [className]: true,
@@ -95,7 +88,7 @@ export default defineComponent({
         [`${prefixCls}-single`]: !multiple,
         [`${prefixCls}-searchable`]: mergedSearchable.value,
         [`${prefixCls}-allow-input`]: allowInput || mergedSearchable.value,
-        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
 

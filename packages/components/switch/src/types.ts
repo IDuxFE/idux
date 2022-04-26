@@ -18,7 +18,7 @@ export const switchProps = {
   disabled: IxPropTypes.bool.def(false),
   labels: IxPropTypes.arrayOf(String).def(() => []),
   loading: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf(['sm', 'md', 'lg'] as const).def('md'),
+  size: IxPropTypes.oneOf(['sm', 'md', 'lg'] as const),
 
   // events
   'onUpdate:checked': IxPropTypes.emit<(checked: boolean) => void>(),

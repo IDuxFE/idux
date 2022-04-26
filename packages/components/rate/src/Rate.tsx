@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/utils'
 
 import RateItem from './RateItem'
 import { rateProps } from './types'
@@ -23,7 +22,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-rate`)
     const config = useGlobalConfig('rate')
-    const formContext = inject(FORM_TOKEN, null)
+    const mergedSize = useFormSize(props, config)
 
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
@@ -107,15 +106,14 @@ export default defineComponent({
       hoverValue.value = undefined
     }
 
-    const size = computed(() => props.size ?? formContext?.size.value ?? config.size)
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
-        [`${prefixCls}-${size.value}`]: true,
-      }
+        [`${prefixCls}-${mergedSize.value}`]: true,
+      })
     })
 
     return () => {

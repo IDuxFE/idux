@@ -5,11 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Ref, WatchStopHandle } from 'vue'
-
-import { onBeforeUnmount, ref, watch } from 'vue'
+import { ComputedRef, type Ref, type WatchStopHandle, computed, inject, onBeforeUnmount, ref, watch } from 'vue'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
+import { type ValueAccessor, useValueAccessor, useValueControl } from '@idux/cdk/forms'
+import { FORM_TOKEN, type FormSize, useFormItemRegister } from '@idux/components/form'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useFormAccessor<T = any>(valueKey?: string): ValueAccessor<T> {
+  const control = useValueControl()
+  const accessor = useValueAccessor({ control, valueKey })
+
+  useFormItemRegister(control)
+
+  return accessor
+}
 
 export interface FormElementContext<T> {
   elementRef: Ref<T | undefined>
@@ -73,4 +83,10 @@ export function useFormFocusMonitor<T extends HTMLElement = HTMLElement>(options
   const blur = () => focusMonitor.blurVia(elementRef.value)
 
   return { elementRef, focus, blur }
+}
+
+export function useFormSize(props: { size?: FormSize }, config: { size: FormSize }): ComputedRef<FormSize> {
+  const formContext = inject(FORM_TOKEN, null)
+
+  return computed(() => props.size ?? formContext?.size.value ?? config.size)
 }

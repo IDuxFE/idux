@@ -7,13 +7,12 @@
 
 import type { ɵInputInstance } from '@idux/components/_private/input'
 
-import { computed, defineComponent, inject, normalizeClass, onMounted, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted, ref } from 'vue'
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormFocusMonitor } from '@idux/components/utils'
+import { useFormFocusMonitor, useFormSize } from '@idux/components/utils'
 
 import { inputNumberProps } from './types'
 import { useInputNumber } from './useInputNumber'
@@ -40,9 +39,8 @@ export default defineComponent({
     const { elementRef, focus, blur } = useFormFocusMonitor<HTMLInputElement>({ handleBlur, handleFocus })
     expose({ focus, blur })
 
-    const formContext = inject(FORM_TOKEN, null)
     const mergedPrefixCls = computed(() => `${common.prefixCls}-input-number`)
-    const size = computed(() => props.size ?? formContext?.size.value ?? config.size)
+    const mergedSize = useFormSize(props, config)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -71,7 +69,7 @@ export default defineComponent({
           focused={isFocused.value}
           readonly={props.readonly}
           placeholder={props.placeholder}
-          size={size.value}
+          size={mergedSize.value}
           value={displayValue.value}
           onInput={handleInput}
           onKeydown={handleKeyDown}

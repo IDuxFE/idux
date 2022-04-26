@@ -7,11 +7,11 @@
 
 import type { ɵInputInstance } from '@idux/components/_private/input'
 
-import { computed, defineComponent, inject, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
+import { useFormSize } from '@idux/components/utils'
 
 import { inputProps } from './types'
 import { useInput } from './useInput'
@@ -21,8 +21,7 @@ export default defineComponent({
   props: inputProps,
   setup(props, { slots, expose }) {
     const config = useGlobalConfig('input')
-    const formContext = inject(FORM_TOKEN, null)
-    const size = computed(() => props.size ?? formContext?.size.value ?? config.size)
+    const mergedSize = useFormSize(props, config)
 
     const {
       elementRef,
@@ -66,7 +65,7 @@ export default defineComponent({
           disabled={accessor.disabled.value}
           focused={isFocused.value}
           prefix={prefix}
-          size={size.value}
+          size={mergedSize.value}
           suffix={suffix}
           onClear={handleClear}
           readonly={props.readonly}
