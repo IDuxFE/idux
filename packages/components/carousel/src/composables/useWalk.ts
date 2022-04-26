@@ -25,7 +25,7 @@ export const useWalk = (length: ComputedRef<number>, props: CarouselProps): Walk
 
   watch(activeIndex, (newVal: number, oldVal: number) => {
     if (newVal >= 1 && newVal <= length.value) {
-      callEmit(props.onChange, oldVal, newVal)
+      callEmit(props.onChange, newVal, oldVal)
     }
   })
 

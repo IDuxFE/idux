@@ -18,7 +18,7 @@ order: 0
 | `dotPlacement` | 面板指示点的位置 | `'top' \| 'start' \| 'bottom' \| 'end' \| 'none'` | `'bottom'` | ✅ | 为`'none'`时不显示面板指示点 |
 | `showArrow` | 是否显示`prev`、`next`按钮 | `boolean` | `false` | ✅ | - |
 | `trigger` | 面板指示点的触发方式 | `'click' \| 'hover'` | `'click'` | ✅ | - |
-| `onChange` | 面板切换时会触发的回调函数 | `(prevIndex: number, nextIndex: number) => void` | - | - | - |
+| `onChange` | 面板切换时会触发的回调函数 | `(nextIndex: number, prevIndex: number) => void` | - | - | - |
 
 #### CarouselSlots
 
