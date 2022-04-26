@@ -80,6 +80,7 @@ export interface GlobalConfig {
   spin: SpinConfig
   statistic: StatisticConfig
   stepper: StepperConfig
+  switch: SwitchConfig
   table: TableConfig
   tag: TagConfig
   tagGroup: TagGroupConfig
@@ -404,6 +405,10 @@ export interface StepperConfig {
   clickable: boolean
   labelPlacement: StepperLabelPlacement
   size: StepperSize
+}
+
+export interface SwitchConfig {
+  size: FormSize
 }
 
 export interface TableConfig {

@@ -256,6 +256,9 @@ export const defaultConfig: GlobalConfig = {
     labelPlacement: 'end',
     size: 'md',
   },
+  switch: {
+    size: 'md',
+  },
   table: {
     autoHeight: false,
     borderless: true,
