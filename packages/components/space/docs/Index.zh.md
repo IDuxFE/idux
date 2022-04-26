@@ -31,7 +31,7 @@ cover:
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@space-margin-sm` | `@spacing-sm` | - | - |
 | `@space-margin-md` | `@spacing-lg` | - | - |

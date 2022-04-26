@@ -55,10 +55,10 @@ cover:
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@checkbox-font-size-sm` | `@form-font-size-sm` | - | - |
-| `@checkbox-font-size-md` | `@form-font-size-md` | - | - |
+| `@checkbox-font-size-md` | `@form-font-size-md` | `@form-font-size-sm` | - |
 | `@checkbox-font-size-lg` | `@form-font-size-lg` | - | - |
 | `@checkbox-line-height` | `@form-line-height` | - | - |
 | `@checkbox-height-sm` | `@form-height-sm` | - | - |
@@ -76,12 +76,12 @@ cover:
 | `@checkbox-border-radius` | `@border-radius-sm` | - | - |
 | `@checkbox-color` | `@form-color` | - | - |
 | `@checkbox-background-color` | `@form-background-color` | - | - |
-| `@checkbox-hover-color` | `@form-hover-color` | - | - |
+| `@checkbox-hover-color` | `@form-hover-color` | `@form-active-color` | - |
 | `@checkbox-active-color` | `@form-active-color` | - | - |
-| `@checkbox-focus-color` | `@form-focus-color` | - | - |
+| `@checkbox-focus-color` | `@form-focus-color` | `@form-active-color` | - |
 | `@checkbox-disabled-color` | `@form-disabled-color` | - | - |
 | `@checkbox-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@checkbox-font-size` | `@font-size-md` | - | - |
+| `@checkbox-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@checkbox-inner-zindex` | `@zindex-l1-1` | - | - |
 | `@checkbox-box-size` | `16px` | - | - |
 | `@checkbox-box-border-radius` | `@border-radius-sm` | - | - |
@@ -91,6 +91,6 @@ cover:
 | `@checkbox-tick-width` | `(@checkbox-box-size / @font-size-base) * 5px` | - | - |
 | `@checkbox-tick-height` | `(@checkbox-box-size / @font-size-base) * 9px` | - | - |
 | `@checkbox-tick-border-width` | `@border-width-md` | - | - |
-| `@checkbox-label-padding` | `0 @spacing-sm` | - | - |
+| `@checkbox-label-padding` | `0 @spacing-sm` | `0 @spacing-xs` | - |
 | `@checkbox-group-item-margin-right` | `@spacing-sm` | - | - |
 <!--- insert less variable end  --->

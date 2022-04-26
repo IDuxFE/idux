@@ -1,11 +1,17 @@
-interface UpdateStyleVariableConfig {
+import type { Pattern } from 'fast-glob'
+
+export interface UpdateStyleVariableConfig {
   dirs: string[]
-  includes: string[]
-  excludes: string[]
+  targetDocs: string
+  sourcePattern: Pattern
+  includes?: string[]
+  excludes?: string[]
 }
 
 export default {
   dirs: ['components', 'pro'],
+  targetDocs: 'docs/Index.zh.md',
+  sourcePattern: 'style/themes/*.variable.less',
   excludes: [
     'components/_private',
     'components/config',

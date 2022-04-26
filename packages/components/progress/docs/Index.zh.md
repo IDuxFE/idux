@@ -55,11 +55,11 @@ cover:
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@progress-normal-background-color` | `@color-success` | - | - |
 | `@progress-success-background-color` | `@color-success` | - | - |
-| `@progress-exception-background-color` | `@color-error` | - | - |
+| `@progress-exception-background-color` | `@color-error` | `@color-red-l10` | - |
 | `@progress-active-background-color` | `@color-success` | - | - |
 | `@progress-trail-background-color` | `@color-graphite-l40` | - | - |
 | `@progress-text-width` | `36px` | - | - |

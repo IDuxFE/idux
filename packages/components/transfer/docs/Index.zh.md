@@ -181,14 +181,14 @@ export interface TransferOperationsSlotParams {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@transfer-list-width` | `260px` | - | - |
 | `@transfer-list-height` | `290px` | - | - |
-| `@transfer-list-border-color` | `@form-border-color` | - | - |
+| `@transfer-list-border-color` | `@form-border-color` | `@color-graphite-l30` | - |
 | `@transfer-list-border-radius` | `2px` | - | - |
 | `@transfer-list-background-color` | `@form-background-color` | - | - |
-| `@transfer-font-size` | `@font-size-md` | - | - |
+| `@transfer-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@transfer-color` | `@text-color` | - | - |
 | `@transfer-disabled-color` | `@text-color-disabled` | - | - |
 | `@transfer-list-header-height` | `@height-lg` | - | - |

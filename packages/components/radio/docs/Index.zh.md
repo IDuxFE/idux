@@ -53,10 +53,10 @@ subtitle: 单选框
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@radio-font-size-sm` | `@form-font-size-sm` | - | - |
-| `@radio-font-size-md` | `@form-font-size-md` | - | - |
+| `@radio-font-size-md` | `@form-font-size-md` | `@form-font-size-sm` | - |
 | `@radio-font-size-lg` | `@form-font-size-lg` | - | - |
 | `@radio-line-height` | `@form-line-height` | - | - |
 | `@radio-height-sm` | `@form-height-sm` | - | - |
@@ -74,9 +74,9 @@ subtitle: 单选框
 | `@radio-border-radius` | `@border-radius-sm` | - | - |
 | `@radio-color` | `@form-color` | - | - |
 | `@radio-background-color` | `@form-background-color` | - | - |
-| `@radio-hover-color` | `@form-hover-color` | - | - |
+| `@radio-hover-color` | `@form-hover-color` | `@form-active-color` | - |
 | `@radio-active-color` | `@form-active-color` | - | - |
-| `@radio-focus-color` | `@form-focus-color` | - | - |
+| `@radio-focus-color` | `@form-focus-color` | `@form-active-color` | - |
 | `@radio-focus-box-shadow` | `@form-focus-box-shadow` | - | - |
 | `@radio-disabled-color` | `@form-disabled-color` | - | - |
 | `@radio-disabled-border-color` | `@form-disabled-border-color` | - | - |

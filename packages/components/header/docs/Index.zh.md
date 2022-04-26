@@ -29,13 +29,13 @@ order: 0
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@header-line-height` | `@line-height-base` | - | - |
-| `@header-height-xl` | `@height-xl` | - | - |
-| `@header-height-lg` | `@height-xl` | - | - |
-| `@header-height-md` | `@height-lg` | - | - |
-| `@header-height-sm` | `@height-md` | - | - |
+| `@header-height-xl` | `@height-xl` | `@height-xl` | - |
+| `@header-height-lg` | `@height-xl` | `@height-xl` | - |
+| `@header-height-md` | `@height-lg` | `@height-xl` | - |
+| `@header-height-sm` | `@height-md` | `@height-md` | - |
 | `@header-font-size` | `@font-size-md` | - | - |
 | `@header-color` | `@text-color` | - | - |
 | `@header-background-color` | `@background-color-component` | - | - |
@@ -55,7 +55,7 @@ order: 0
 | `@header-title-font-size-xl` | `@font-size-3xl` | - | - |
 | `@header-title-font-size-lg` | `@font-size-2xl` | - | - |
 | `@header-title-font-size-md` | `@font-size-xl` | - | - |
-| `@header-title-font-size-sm` | `@font-size-lg` | - | - |
+| `@header-title-font-size-sm` | `@font-size-lg` | `@font-size-md` | - |
 | `@header-sub-title-color` | `@text-color-secondary` | - | - |
 | `@header-suffix-color` | `@text-color-secondary` | - | - |
 | `@header-suffix-padding` | `0 @spacing-xs 0 @spacing-sm` | - | - |

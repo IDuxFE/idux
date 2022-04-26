@@ -32,7 +32,7 @@ subtitle: 输入框
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@input-font-size-sm` | `@form-font-size-sm` | - | - |
 | `@input-font-size-md` | `@form-font-size-md` | - | - |
@@ -41,12 +41,12 @@ subtitle: 输入框
 | `@input-height-sm` | `@form-height-sm` | - | - |
 | `@input-height-md` | `@form-height-md` | - | - |
 | `@input-height-lg` | `@form-height-lg` | - | - |
-| `@input-padding-horizontal-sm` | `@form-padding-horizontal-sm` | - | - |
-| `@input-padding-horizontal-md` | `@form-padding-horizontal-md` | - | - |
-| `@input-padding-horizontal-lg` | `@form-padding-horizontal-lg` | - | - |
-| `@input-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
-| `@input-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
-| `@input-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |
+| `@input-padding-horizontal-sm` | `@form-padding-horizontal-sm` | `12px` | - |
+| `@input-padding-horizontal-md` | `@form-padding-horizontal-md` | `12px` | - |
+| `@input-padding-horizontal-lg` | `@form-padding-horizontal-lg` | `12px` | - |
+| `@input-padding-vertical-sm` | `@form-padding-vertical-sm` | `2px` | - |
+| `@input-padding-vertical-md` | `@form-padding-vertical-md` | `6px` | - |
+| `@input-padding-vertical-lg` | `@form-padding-vertical-lg` | `8px` | - |
 | `@input-addon-margin-with-selector-sm` | `-(@input-padding-vertical-sm + 1) -@input-padding-horizontal-sm` | - | - |
 | `@input-addon-margin-with-selector-md` | `-(@input-padding-vertical-md + 1) -@input-padding-horizontal-md` | - | - |
 | `@input-addon-margin-with-selector-lg` | `-(@input-padding-vertical-lg + 1) -@input-padding-horizontal-lg` | - | - |
@@ -66,7 +66,7 @@ subtitle: 输入框
 | `@input-icon-color` | `@form-icon-color` | - | - |
 | `@input-icon-hover-color` | `@form-icon-hover-color` | - | - |
 | `@input-icon-font-size` | `@font-size-lg` | - | - |
-| `@input-clear-icon-line-height` | `@font-size-xl` | - | - |
-| `@input-addon-background-color` | `@background-color-base` | - | - |
+| `@input-clear-icon-line-height` | `@font-size-xl` | `@font-size-lg + 2` | - |
+| `@input-addon-background-color` | `@background-color-base` | `@color-graphite-l50` | - |
 | `@input-wrapper-inner-margin` | `@spacing-xs` | - | - |
 <!--- insert less variable end  --->

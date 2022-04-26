@@ -60,7 +60,7 @@ interface SiderHover {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@pro-layout-height` | `100%` | - | - |
 | `@pro-layout-header-light-color` | `@text-color` | - | - |
@@ -81,13 +81,13 @@ interface SiderHover {
 | `@pro-layout-header-dark-active-box-shadow` | `inset 0 2px 0 0 @color-primary` | - | - |
 | `@pro-layout-header-dark-active-background-color` | `@color-graphite-d30` | - | - |
 | `@pro-layout-header-dark-box-shadow` | `none` | - | - |
-| `@pro-layout-header-height` | `@layout-header-height` | - | - |
+| `@pro-layout-header-height` | `@layout-header-height` | `44px` | - |
 | `@pro-layout-header-menu-item-line-height` | `@pro-layout-header-height - 2` | - | - |
-| `@pro-layout-header-logo-width` | `@pro-layout-sider-width - 24px` | - | - |
+| `@pro-layout-header-logo-width` | `@pro-layout-sider-width - 24px` | `@pro-layout-sider-width - 16px` | - |
 | `@pro-layout-header-extra-width` | `256px` | - | - |
-| `@pro-layout-header-item-radius` | `24px` | - | - |
-| `@pro-layout-header-item-margin` | `0 @spacing-xs` | - | - |
-| `@pro-layout-header-item-padding` | `0 @spacing-md` | - | - |
+| `@pro-layout-header-item-radius` | `24px` | `0` | - |
+| `@pro-layout-header-item-margin` | `0 @spacing-xs` | `0` | - |
+| `@pro-layout-header-item-padding` | `0 @spacing-md` | `0 20px` | - |
 | `@pro-layout-header-vertical-menu-item-font-size` | `@font-size-sm` | - | - |
 | `@pro-layout-header-vertical-menu-item-height` | `32px` | - | - |
 | `@pro-layout-header-vertical-menu-item-line-height` | `32px` | - | - |

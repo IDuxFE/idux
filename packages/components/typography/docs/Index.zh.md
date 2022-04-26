@@ -23,7 +23,7 @@ type TypographyConfig = TypographyType | TypographyOptions
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@typography-default-color` | `@text-color` | - | - |
 | `@typography-color-secondary` | `@text-color-secondary` | - | - |

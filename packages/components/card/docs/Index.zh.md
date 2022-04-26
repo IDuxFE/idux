@@ -54,9 +54,9 @@ export interface CardButtonProps extends ButtonProps {
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@card-padding-sm` | `@spacing-md` | - | - |
+| `@card-padding-sm` | `@spacing-md` | `@spacing-lg` | - |
 | `@card-padding-md` | `@spacing-lg` | - | - |
 | `@card-padding-lg` | `@spacing-xl` | - | - |
 | `@card-color` | `@text-color` | - | - |

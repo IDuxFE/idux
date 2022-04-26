@@ -32,7 +32,7 @@ subtitle: 文本域
 <!--- insert less variable begin  --->
 ## 主题变量
 
-| 名称 | `default` | `dark` | 备注 |
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@textarea-font-size-sm` | `@form-font-size-sm` | - | - |
 | `@textarea-font-size-md` | `@form-font-size-md` | - | - |
@@ -47,7 +47,7 @@ subtitle: 文本域
 | `@textarea-border-width` | `@form-border-width` | - | - |
 | `@textarea-border-style` | `@form-border-style` | - | - |
 | `@textarea-border-color` | `@form-border-color` | - | - |
-| `@textarea-border-radius` | `@border-radius-md` | - | - |
+| `@textarea-border-radius` | `@border-radius-md` | `@border-radius-sm` | - |
 | `@textarea-color` | `@form-color` | - | - |
 | `@textarea-color-secondary` | `@form-color-secondary` | - | - |
 | `@textarea-background-color` | `@form-background-color` | - | - |
