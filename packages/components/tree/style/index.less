@@ -95,6 +95,7 @@
   display: flex;
   align-items: center;
   padding: @tree-node-padding-vertical 0;
+  white-space: nowrap;
 
   .@{icon-prefix} {
     font-size: @tree-icon-font-size;
@@ -110,7 +111,7 @@
   }
 
   &-expand {
-    width: @tree-node-content-height;
+    padding: 0 calc(@tree-node-content-height / 4);
     line-height: @tree-node-content-height;
     text-align: center;
     cursor: pointer;
@@ -136,8 +137,8 @@
       position: relative;
       z-index: 1;
       display: inline-block;
-      width: 100%;
       height: 100%;
+      padding: 0 calc(@tree-node-content-height / 2);
 
       &::before {
         position: absolute;
