@@ -11,7 +11,7 @@
   line-height: @message-line-height;
 
   &-content {
-    display: inline-flex;
+    display: inline-block;
     min-width: @message-content-min-width;
     max-width: @message-content-max-width;
     padding: @message-content-padding-vertical @message-content-padding-horizontal;
@@ -20,12 +20,11 @@
     box-shadow: @message-content-box-shadow;
     pointer-events: all;
 
-    &-text {
-      display: inline-block;
-      text-align: left;
-    }
-
     &-icon {
+      display: inline-block;
+      position: relative;
+      top: 1px;
+      line-height: 0;
       margin-right: @message-icon-margin-right;
       font-size: @font-size-lg;
     }
