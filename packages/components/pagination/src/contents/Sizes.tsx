@@ -35,7 +35,7 @@ export default defineComponent({
           <div class={`${prefixCls}-select-wrapper`}>
             <IxSelect
               disabled={props.disabled}
-              options={sizeOptions.value}
+              dataSource={sizeOptions.value}
               size={size.value}
               value={activeSize.value}
               onChange={changePageSize}

@@ -306,7 +306,7 @@ describe('Form', () => {
 
     test('controlTooltip work', async () => {
       const wrapper = FormItemMount({
-        props: { controlTooltip: 'controlTooltip' },
+        props: { controlTooltip: 'controlTooltip', controlTooltipIcon: 'info' },
         slots: { default: () => h(IxInput) },
       })
 
@@ -425,7 +425,7 @@ describe('Form', () => {
 
     test('labelTooltip work', async () => {
       const wrapper = FormItemMount({
-        props: { label: 'Username', labelTooltip: 'labelTooltip' },
+        props: { label: 'Username', labelTooltip: 'labelTooltip', labelTooltipIcon: 'info' },
         slots: { default: () => h(IxInput) },
       })
 
