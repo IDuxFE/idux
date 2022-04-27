@@ -35,7 +35,6 @@ export default defineComponent({
       columnOffsetsWithScrollBar,
       isSticky,
       handleSort,
-      headColTag,
       activeSortable,
       filterByMap,
       setFilterBy,
@@ -109,7 +108,9 @@ export default defineComponent({
     }
 
     return () => {
-      const { type, additional, titleColSpan, titleRowSpan } = props.column as HeadColumn
+      const { column } = props
+
+      const { type, additional, titleColSpan, titleRowSpan } = column as HeadColumn
       const prefixCls = mergedPrefixCls.value
 
       let _title: string | undefined
@@ -120,7 +121,7 @@ export default defineComponent({
       } else if (type === 'selectable') {
         children = <SelectableTrigger />
       } else {
-        const { title, customTitle, ellipsis = tableProps.ellipsis, sortable, filterable } = props.column as HeadColumn
+        const { title, customTitle, ellipsis = tableProps.ellipsis, sortable, filterable } = column as HeadColumn
         children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
 
@@ -138,20 +139,22 @@ export default defineComponent({
         }
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const HeadColTag = headColTag.value as any
+      const customAdditionalFn = tableProps.customAdditional?.headCell
+      const customAdditional = customAdditionalFn ? customAdditionalFn({ column }) : undefined
+
       return (
-        <HeadColTag
+        <th
           class={classes.value}
           style={style.value}
           colSpan={titleColSpan === 1 ? undefined : titleColSpan}
           rowSpan={titleRowSpan === 1 ? undefined : titleRowSpan}
           title={_title}
           {...additional}
+          {...customAdditional}
           onClick={onClick}
         >
           {children}
-        </HeadColTag>
+        </th>
       )
     }
   },

@@ -16,7 +16,7 @@ import {
 } from '../../composables/useColumns'
 import { FlattedData } from '../../composables/useDataSource'
 import { TABLE_TOKEN } from '../../token'
-import { type TableBodyRowProps, type TableProps, tableBodyRowProps } from '../../types'
+import { type TableBodyRowProps, tableBodyRowProps } from '../../types'
 import BodyCell from './BodyCell'
 
 export default defineComponent({
@@ -34,7 +34,6 @@ export default defineComponent({
       indeterminateRowKeys,
       handleSelectChange,
       currentPageRowKeys,
-      bodyRowTag,
     } = inject(TABLE_TOKEN)!
 
     const { expandDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
@@ -50,50 +49,44 @@ export default defineComponent({
     const isSelected = computed(() => selectedRowKeys.value.includes(props.rowKey))
     const isIndeterminate = computed(() => indeterminateRowKeys.value.includes(props.rowKey))
 
-    const classes = useClasses(props, tableProps, isSelected, mergedPrefixCls)
+    const rowClassName = computed(() =>
+      tableProps.rowClassName ? tableProps.rowClassName(props.record, props.rowIndex) : undefined,
+    )
+    const classes = computed(() => {
+      const prefixCls = `${mergedPrefixCls.value}-row`
+      const { level, expanded } = props
+      const computeRowClassName = rowClassName.value
+      return normalizeClass({
+        [`${prefixCls}-level-${level}`]: !!level,
+        [`${prefixCls}-selected`]: isSelected.value,
+        [`${prefixCls}-expanded`]: expanded,
+        [computeRowClassName as string]: !!computeRowClassName,
+      })
+    })
+
     return () => {
-      const children = renderChildren(
-        props,
-        flattedColumns,
-        expandDisabled.value,
-        handleExpend,
-        isSelected,
-        isIndeterminate,
-        selectDisabled,
-        handleSelect,
-      )
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const BodyRowTag = bodyRowTag.value as any
+      const customAdditionalFn = tableProps.customAdditional?.bodyRow
+      const customAdditional = customAdditionalFn
+        ? customAdditionalFn({ record: props.record, rowIndex: props.rowIndex })
+        : undefined
+
       return (
-        <BodyRowTag class={classes.value} {...clickEvents.value}>
-          {children}
-        </BodyRowTag>
+        <tr class={classes.value} {...clickEvents.value} {...customAdditional}>
+          {renderChildren(
+            props,
+            flattedColumns,
+            expandDisabled.value,
+            handleExpend,
+            isSelected,
+            isIndeterminate,
+            selectDisabled,
+            handleSelect,
+          )}
+        </tr>
       )
     }
   },
 })
-
-function useClasses(
-  props: TableBodyRowProps,
-  tableProps: TableProps,
-  isSelected: ComputedRef<boolean>,
-  mergedPrefixCls: ComputedRef<string>,
-) {
-  const rowClassName = computed(() =>
-    tableProps.rowClassName ? tableProps.rowClassName(props.record, props.rowIndex) : undefined,
-  )
-  return computed(() => {
-    const prefixCls = `${mergedPrefixCls.value}-row`
-    const { level, expanded } = props
-    const computeRowClassName = rowClassName.value
-    return normalizeClass({
-      [`${prefixCls}-level-${level}`]: !!level,
-      [`${prefixCls}-selected`]: isSelected.value,
-      [`${prefixCls}-expanded`]: expanded,
-      [computeRowClassName as string]: !!computeRowClassName,
-    })
-  })
-}
 
 function useEvents(
   props: TableBodyRowProps,

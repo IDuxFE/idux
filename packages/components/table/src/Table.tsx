@@ -26,7 +26,6 @@ import { useSelectable } from './composables/useSelectable'
 import { useSortable } from './composables/useSortable'
 import { useSticky } from './composables/useSticky'
 import { useTableLayout } from './composables/useTableLayout'
-import { useTags } from './composables/useTags'
 import MainTable from './main/MainTable'
 import { renderFooter } from './other/Footer'
 import { renderPagination } from './other/Pagination'
@@ -43,8 +42,8 @@ export default defineComponent({
     const config = useGlobalConfig('table')
 
     const autoHeight = computed(() => props.autoHeight ?? config.autoHeight)
-    const tags = useTags(props)
-    const getRowKey = useGetRowKey(props, config)
+    const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
+    const mergedGetKey = useGetRowKey(props, config)
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, autoHeight, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
@@ -56,7 +55,8 @@ export default defineComponent({
 
     const dataContext = useDataSource(
       props,
-      getRowKey,
+      mergedChildrenKey,
+      mergedGetKey,
       sortableContext.activeSortable,
       filterableContext.activeFilters,
       expandableContext.expandedRowKeys,
@@ -66,12 +66,10 @@ export default defineComponent({
 
     const context = {
       props,
-      mergedPrefixCls,
       slots,
       config,
       locale,
-      ...tags,
-      getRowKey,
+      mergedPrefixCls,
       ...columnsContext,
       ...scrollContext,
       ...sortableContext,

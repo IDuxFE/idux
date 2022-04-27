@@ -14,16 +14,10 @@ import { TABLE_TOKEN, tableBodyToken } from '../../token'
 export default defineComponent({
   props: { isEmpty: Boolean },
   setup(props, { slots }) {
-    const { bodyRowTag, bodyColTag, mergedPrefixCls, flattedColumns, hasFixed, scrollWidth, scrollBarColumn } =
-      inject(TABLE_TOKEN)!
+    const { mergedPrefixCls, flattedColumns, hasFixed, scrollWidth, scrollBarColumn } = inject(TABLE_TOKEN)!
     const { mainTableWidth } = inject(tableBodyToken)!
     const columnCount = computed(() => flattedColumns.value.length)
     return () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const BodyRowTag = bodyRowTag.value as any
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const BodyColTag = bodyColTag.value as any
-
       let children: VNodeChild = slots.default!()
 
       if (props.isEmpty ? scrollWidth.value : hasFixed.value) {
@@ -43,9 +37,9 @@ export default defineComponent({
         )
       }
       return (
-        <BodyRowTag>
-          <BodyColTag colSpan={columnCount.value}>{children}</BodyColTag>
-        </BodyRowTag>
+        <tr>
+          <td colSpan={columnCount.value}>{children}</td>
+        </tr>
       )
     }
   },

@@ -414,7 +414,13 @@ export interface SwitchConfig {
 export interface TableConfig {
   autoHeight: boolean
   borderless: boolean
-  rowKey: string
+  childrenKey: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getKey: string | ((data: any) => VKey)
+  /**
+   * @deprecated please use `getKey` instead'
+   */
+  rowKey?: string
   size: TableSize
 
   extra: { icon: string }
@@ -426,8 +432,8 @@ export interface TableConfig {
 
 export interface TableColumnBaseConfig {
   align: TableColumnAlign
-  sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
   filterable: { multiple: boolean; footer: true }
+  sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
 }
 
 export interface TableColumnExpandableConfig {

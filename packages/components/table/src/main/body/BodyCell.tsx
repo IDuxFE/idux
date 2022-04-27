@@ -40,7 +40,6 @@ export default defineComponent({
       isSticky,
       expandable,
       selectable,
-      bodyColTag,
     } = inject(TABLE_TOKEN)!
     const dataValue = useDataValue(props)
 
@@ -87,26 +86,31 @@ export default defineComponent({
     }
 
     return () => {
-      const { type, additional } = props.column as BodyColumn
+      const { column } = props
+
+      const { type, additional } = column as BodyColumn
       let children: VNodeChild
       let title: string | undefined
 
       if (type === 'selectable') {
         children = renderSelectableChildren(props, selectable, handleClick)
       } else {
-        const { ellipsis = tableProps.ellipsis } = props.column
+        const { ellipsis = tableProps.ellipsis } = column
         const text = dataValue.value
         children = renderChildren(props, slots, dataValue.value)
         title = getColTitle(ellipsis, children, text)
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const BodyColTag = bodyColTag.value as any
+      const customAdditionalFn = tableProps.customAdditional?.bodyCell
+      const customAdditional = customAdditionalFn
+        ? customAdditionalFn({ column, record: props.record, rowIndex: props.rowIndex })
+        : undefined
+
       return (
-        <BodyColTag class={classes.value} style={style.value} title={title} {...additional}>
+        <td class={classes.value} style={style.value} title={title} {...additional} {...customAdditional}>
           {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
           {children}
-        </BodyColTag>
+        </td>
       )
     }
   },
@@ -157,7 +161,6 @@ function renderExpandableChildren(
 ) {
   const { icon, customIcon, indent } = expandable.value!
   const { record, expanded, level = 0, disabled } = props
-  const onExpand = props.handleExpend!
   const style = {
     marginLeft: indent ? convertCssPixel(level * indent) : undefined,
   }
@@ -174,7 +177,7 @@ function renderExpandableChildren(
   }
 
   return (
-    <button class={`${prefixCls}-expandable-trigger`} style={style} onClick={onExpand}>
+    <button class={`${prefixCls}-expandable-trigger`} style={style} onClick={props.handleExpend}>
       {iconNode}
     </button>
   )

@@ -7,11 +7,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type DefineComponent, FunctionalComponent, type HTMLAttributes, type VNodeChild, type VNodeTypes } from 'vue'
+import { type DefineComponent, FunctionalComponent, type HTMLAttributes, type PropType, type VNodeChild } from 'vue'
 
 import { type BreakpointKey } from '@idux/cdk/breakpoint'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, type MaybeArray, type VKey } from '@idux/cdk/utils'
 import { type EmptyProps } from '@idux/components/empty'
 import { type HeaderProps } from '@idux/components/header'
 import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
@@ -22,36 +22,45 @@ import { type TableColumnMerged, type TableColumnMergedExtra } from './composabl
 import { type FlattedData } from './composables/useDataSource'
 
 export const tableProps = {
-  expandedRowKeys: IxPropTypes.array<VKey>(),
-  selectedRowKeys: IxPropTypes.array<VKey>(),
-  autoHeight: IxPropTypes.bool,
-  borderless: IxPropTypes.bool,
-  childrenKey: IxPropTypes.string.def('children'),
-  columns: IxPropTypes.array<TableColumn<any>>().def(() => []),
-  dataSource: IxPropTypes.array().def(() => []),
-  ellipsis: IxPropTypes.bool.def(false),
-  empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object()]),
-  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
-  headless: IxPropTypes.bool,
-  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TablePagination>()]),
-  rowClassName: IxPropTypes.func<(record: unknown, rowIndex: number) => string>(),
-  rowKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(record: unknown) => number | string>()]),
-  scroll: IxPropTypes.object<TableScroll>(),
-  size: IxPropTypes.oneOf<TableSize>(['lg', 'md', 'sm']),
-  spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<SpinProps>()]),
-  sticky: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TableSticky>()]),
-  tableLayout: IxPropTypes.oneOf(['auto', 'fixed'] as const),
-  tags: IxPropTypes.object<TableTags>(),
-  virtual: IxPropTypes.bool.def(false),
+  expandedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  selectedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
+
+  autoHeight: { type: Boolean, default: undefined },
+  borderless: { type: Boolean, default: undefined },
+  childrenKey: { type: String, default: undefined },
+  columns: { type: Array as PropType<TableColumn[]>, default: () => [] },
+  customAdditional: { type: Object as PropType<TableCustomAdditional>, default: undefined },
+  dataSource: { type: Array as PropType<any[]>, default: () => [] },
+  ellipsis: { type: Boolean, default: false },
+  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
+  header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
+  headless: { type: Boolean, default: undefined },
+  pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
+  rowClassName: { type: Function as PropType<(record: any, rowIndex: number) => string>, default: undefined },
+  /**
+   * @deprecated please use `getKey` instead'
+   */
+  rowKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
+  scroll: { type: Object as PropType<TableScroll>, default: undefined },
+  size: { type: String as PropType<TableSize>, default: undefined },
+  spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
+  sticky: { type: [Boolean, Object] as PropType<boolean | TableSticky>, default: undefined },
+  tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
+  virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:expandedRowKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:selectedRowKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: any[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
-}
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: any[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+} as const
 
 export type TableProps = ExtractInnerPropTypes<typeof tableProps>
 export type TablePublicProps = ExtractPublicPropTypes<typeof tableProps>
@@ -74,6 +83,9 @@ export type TableColumn<T = any, V = any> =
   | TableColumnSelectable<T>
 
 export interface TableColumnCommon<T = any> {
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
   additional?: {
     class?: any
     style?: any
@@ -144,6 +156,13 @@ export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
   onSelectPageInvert?: (selectedRowKeys: VKey[]) => void
 }
 
+export interface TableCustomAdditional<T = any> {
+  bodyCell?: (data: { column: TableColumn<T>; record: T; rowIndex: number }) => Record<string, any> | undefined
+  bodyRow?: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined
+  headCell?: (data: { column: TableColumn<T> }) => Record<string, any> | undefined
+  headRow?: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined
+}
+
 export interface TablePagination extends PaginationProps {
   position?: TablePaginationPosition
 }
@@ -157,16 +176,6 @@ export interface TableScroll {
 }
 
 export type TableSize = 'lg' | 'md' | 'sm'
-
-export interface TableTags {
-  table?: VNodeTypes
-  head?: VNodeTypes
-  headRow?: VNodeTypes
-  headCol?: VNodeTypes
-  body?: VNodeTypes
-  bodyRow?: VNodeTypes
-  bodyCol?: VNodeTypes
-}
 
 export type TableColumnAlign = 'start' | 'center' | 'end'
 
@@ -195,71 +204,63 @@ export interface TableColumnFilterable<T = any> {
 }
 
 export interface TableSticky {
-  offsetHead?: number
-  offsetFoot?: number
+  offsetTop?: number
+  offsetBottom?: number
   offsetScroll?: number
   container?: Window | HTMLElement
 }
 
 /** private components */
 export const tableHeadRowProps = {
-  columns: IxPropTypes.array<TableColumnMergedExtra>().isRequired,
-}
+  columns: { type: Array as PropType<TableColumnMergedExtra[]>, required: true },
+} as const
 
 export type TableHeadRowProps = ExtractInnerPropTypes<typeof tableHeadRowProps>
 
 export const tableHeadCellProps = {
-  column: IxPropTypes.object<TableColumnMerged>().isRequired,
-}
+  column: { type: Object as PropType<TableColumnMerged>, required: true },
+} as const
 
 export type TableHeadCellProps = ExtractInnerPropTypes<typeof tableHeadCellProps>
 
 export const tableBodyRowProps = {
-  expanded: IxPropTypes.bool,
-  rowIndex: IxPropTypes.number.isRequired,
-  level: IxPropTypes.number,
-  record: IxPropTypes.any.isRequired,
-  rowData: IxPropTypes.object<FlattedData>().isRequired,
-  rowKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-}
+  expanded: { type: Boolean, default: undefined },
+  rowIndex: { type: Number, required: true },
+  level: { type: Number, default: undefined },
+  record: { type: Object as PropType<any>, required: true },
+  rowData: { type: Object as PropType<FlattedData>, required: true },
+  rowKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
+} as const
 
 export type TableBodyRowProps = ExtractInnerPropTypes<typeof tableBodyRowProps>
 
 export const tableBodyCellProps = {
-  column: IxPropTypes.object<TableColumnMerged>().isRequired,
-  colIndex: IxPropTypes.number.isRequired,
-  level: IxPropTypes.number,
-  record: IxPropTypes.any.isRequired,
-  rowIndex: IxPropTypes.number.isRequired,
-  disabled: IxPropTypes.bool,
-  expanded: IxPropTypes.bool,
-  handleExpend: IxPropTypes.func<() => void>(),
-  selected: IxPropTypes.bool,
-  indeterminate: IxPropTypes.bool,
-  handleSelect: IxPropTypes.func<() => void>(),
-}
+  column: { type: Object as PropType<TableColumnMerged>, required: true },
+  colIndex: { type: Number, required: true },
+  level: { type: Number, default: undefined },
+  record: { type: Object as PropType<any>, required: true },
+  rowIndex: { type: Number, required: true },
+  disabled: { type: Boolean, default: undefined },
+  expanded: { type: Boolean, default: undefined },
+  handleExpend: { type: Function as PropType<() => void>, default: undefined },
+  selected: { type: Boolean, default: undefined },
+  indeterminate: { type: Boolean, default: undefined },
+  handleSelect: { type: Function as PropType<() => void>, default: undefined },
+} as const
 
 export type TableBodyCellProps = ExtractInnerPropTypes<typeof tableBodyCellProps>
 
 export const tableMeasureCellProps = {
-  cellKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  changeColumnWidth: IxPropTypes.func<(key: VKey, width: number | false) => void>().isRequired,
-}
+  cellKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
+  changeColumnWidth: { type: Function as PropType<(key: VKey, width: number | false) => void>, required: true },
+} as const
 
 export type TableMeasureCellProps = ExtractInnerPropTypes<typeof tableMeasureCellProps>
 
 export const tableFilterableTriggerProps = {
-  activeFilterBy: IxPropTypes.array<VKey>().isRequired,
-  filterable: IxPropTypes.object<TableColumnFilterable>().isRequired,
-  onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
-}
+  activeFilterBy: { type: Array as PropType<VKey[]>, required: true },
+  filterable: { type: Object as PropType<TableColumnFilterable>, required: true },
+  onUpdateFilterBy: { type: Function as PropType<(filterBy: VKey[]) => void>, required: true },
+} as const
 
 export type TableFilterableTriggerProps = ExtractInnerPropTypes<typeof tableFilterableTriggerProps>
-
-export const tableSortableTriggerProps = {
-  activeFilterBy: IxPropTypes.array<VKey>().isRequired,
-  filterable: IxPropTypes.object<TableColumnFilterable>().isRequired,
-  onUpdateFilterBy: IxPropTypes.func<(filterBy: VKey[]) => void>().isRequired,
-}
-
-export type TableSortableTriggerProps = ExtractInnerPropTypes<typeof tableSortableTriggerProps>

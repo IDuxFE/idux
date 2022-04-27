@@ -16,16 +16,17 @@ import { type ActiveSortable } from './useSortable'
 
 export function useDataSource(
   props: TableProps,
-  getRowKey: ComputedRef<GetRowKey>,
+  mergedChildrenKey: ComputedRef<string>,
+  mergedGetKey: ComputedRef<GetRowKey>,
   activeSortable: ActiveSortable,
   activeFilters: ComputedRef<ActiveFilter[]>,
   expandedRowKeys: Ref<VKey[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {
   const mergedData = computed(() => {
-    const { dataSource, childrenKey } = props
-    const getKey = getRowKey.value
-    return dataSource.map(record => convertMergeData(record, getKey, childrenKey))
+    const childrenKey = mergedChildrenKey.value
+    const getKey = mergedGetKey.value
+    return props.dataSource.map(record => convertMergeData(record, getKey, childrenKey))
   })
 
   const mergedMap = computed(() => {
