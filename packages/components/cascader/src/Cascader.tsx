@@ -74,13 +74,21 @@ export default defineComponent({
       mergedDataMap,
     )
 
+    watch(overlayOpened, opened => {
+      opened && focus()
+      clearInput()
+    })
+
+    const handleOverlayClick = () => {
+      if (props.searchable !== 'overlay') {
+        focus()
+      }
+    }
+
     const handleBlur = () => accessor.markAsBlurred()
     const handleItemRemove = (key: VKey) => {
       focus()
       selectedStateContext.handleSelect(key)
-    }
-    const handleOverlayClick = () => {
-      overlayOpened.value && focus()
     }
 
     provide(cascaderToken, {
@@ -105,11 +113,6 @@ export default defineComponent({
       ...selectedStateContext,
       searchedData,
       ...expandableContext,
-    })
-
-    watch(overlayOpened, opened => {
-      opened ? focus() : blur()
-      clearInput()
     })
 
     const overlayClasses = computed(() => {

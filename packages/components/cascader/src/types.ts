@@ -28,6 +28,7 @@ export const cascaderProps = {
   childrenKey: { type: String, default: undefined },
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
+  customAdditional: { type: Object as PropType<CascaderCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<CascaderData[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
@@ -87,7 +88,15 @@ export type CascaderInstance = InstanceType<DefineComponent<CascaderProps, Casca
 
 export type CascaderStrategy = 'all' | 'parent' | 'child' | 'off'
 
+export type CascaderCustomAdditional = (options: {
+  data: CascaderData
+  index: number
+}) => Record<string, any> | undefined
+
 export interface CascaderData {
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
   additional?: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     class?: any

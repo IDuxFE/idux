@@ -4,7 +4,7 @@
     v-model:expandedKeys="expandedKeys"
     placeholder="单选"
     checkable
-    nodeKey="value"
+    getKey="value"
     labelKey="text"
     childrenKey="options"
     :dataSource="treeData"

@@ -17,6 +17,7 @@ import { type CascaderData } from '../types'
 export default defineComponent({
   props: {
     children: { type: Array as PropType<MergedData[]>, default: undefined },
+    index: { type: Number, required: true },
     isLeaf: { type: Boolean, required: true },
     label: { type: String, required: true },
     parentKey: { type: [String, Number, Symbol], default: undefined },
@@ -91,15 +92,22 @@ export default defineComponent({
 
       const searchValue = inputValue.value
       const mergedLabel = searchValue ? label : (rawData[mergedLabelKey.value] as string)
+      // 优先显示 selectedLimitTitle
+      const title = (!(disabled || selected) && selectedLimitTitle.value) || mergedLabel
+      const customAdditional = cascaderProps.customAdditional
+        ? cascaderProps.customAdditional({ data: rawData, index: props.index })
+        : undefined
+
       return (
         <div
           class={classes.value}
-          title={disabled || selected ? undefined : selectedLimitTitle.value}
+          title={title}
           onClick={disabled ? undefined : handleClick}
           onMouseenter={disabled ? undefined : handleMouseEnter}
           aria-label={label}
           aria-selected={selected}
           {...rawData.additional}
+          {...customAdditional}
         >
           {multiple && (
             <IxCheckbox

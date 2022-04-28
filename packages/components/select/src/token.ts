@@ -12,6 +12,7 @@ import type { OptionsContext } from './composables/useOptions'
 import type { SelectProps } from './types'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { VirtualScrollInstance } from '@idux/cdk/scroll'
+import type { VKey } from '@idux/cdk/utils'
 import type { SelectConfig } from '@idux/components/config'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
@@ -27,10 +28,10 @@ export interface SelectContext extends ActiveStateContext, OptionsContext {
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
   selectedValue: ComputedRef<any[]>
-
   selectedLimit: ComputedRef<boolean>
   selectedLimitTitle: ComputedRef<string>
-  handleOptionClick: (value: any) => void
+  changeSelected: (key: VKey) => void
+  handleOptionClick: () => void
 }
 
 export const selectToken: InjectionKey<SelectContext> = Symbol('selectToken')

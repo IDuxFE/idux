@@ -127,18 +127,26 @@ export default defineComponent({
           })
       }
 
+      const customAdditional = treeProps.customAdditional
+        ? treeProps.customAdditional({ node: rawNode, level })
+        : undefined
+
       return (
         <div
-          {...rawNode.additional}
           class={classes.value}
           aria-grabbed={dragging.value || undefined}
+          aria-label={label}
+          aria-selected={selected.value}
           draggable={mergedDraggable || undefined}
+          title={label}
           onDragstart={mergedDraggable ? onDragstart : undefined}
           onDragend={mergedDraggable ? onDragend : undefined}
           onDragenter={mergedDraggable ? onDragenter : undefined}
           onDragover={mergedDraggable ? onDragover : undefined}
           onDragleave={mergedDraggable ? onDragleave : undefined}
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
+          {...rawNode.additional}
+          {...customAdditional}
         >
           <Indent level={level} noopIdentUnitArr={noopIdentUnitArr} prefixCls={mergedPrefixCls.value} />
           {isLeaf && showLine ? (

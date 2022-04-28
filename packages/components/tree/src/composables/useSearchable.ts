@@ -5,31 +5,36 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeNode, TreeProps } from '../types'
-import type { MergedNode } from './useDataSource'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed, ref } from 'vue'
 
-import { computed, ref } from 'vue'
+import { NoopArray, type VKey } from '@idux/cdk/utils'
 
-const defaultSearchedKeys: VKey[] = []
+import { type TreeNode, type TreeProps } from '../types'
+import { type MergedNode } from './useDataSource'
 
 export interface SearchableContext {
   searchedKeys: ComputedRef<VKey[]>
   lastEffectiveSearchedKeys: Ref<VKey[]>
 }
 
-export function useSearchable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): SearchableContext {
+export function useSearchable(
+  props: TreeProps,
+  mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
+  mergedLabelKey: ComputedRef<string>,
+): SearchableContext {
   const lastEffectiveSearchedKeys = ref<VKey[]>([])
 
+  const mergedSearchFn = useSearchFn(props, mergedLabelKey)
+
   const searchedKeys = computed(() => {
-    const { searchValue, searchFn } = props
-    if (!searchValue && !searchFn) {
-      return defaultSearchedKeys
+    const { searchValue } = props
+    if (!searchValue) {
+      return NoopArray as unknown as VKey[]
     }
+    const searchFn = mergedSearchFn.value
     const keys: VKey[] = []
     mergedNodeMap.value.forEach(node => {
-      if (checkNodeIsMatched(node.rawNode, searchValue, searchFn)) {
+      if (searchFn(node.rawNode, searchValue)) {
         keys.push(node.key)
       }
     })
@@ -44,18 +49,15 @@ export function useSearchable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
   return { searchedKeys, lastEffectiveSearchedKeys }
 }
 
-function checkNodeIsMatched(
-  node: TreeNode,
-  searchValue: string | undefined,
-  searchFn: ((node: TreeNode, searchValue?: string) => boolean) | undefined,
-): boolean {
-  if (searchFn) {
-    return searchFn(node, searchValue)
-  }
+function useSearchFn(props: TreeProps, mergedLabelKey: ComputedRef<string>) {
+  return computed(() => {
+    return props.searchFn ?? getDefaultSearchFn(mergedLabelKey.value)
+  })
+}
 
-  if (!searchValue || !node.label) {
-    return false
+function getDefaultSearchFn(labelKey: string) {
+  return (data: TreeNode, searchValue: string) => {
+    const label = data[labelKey] as string | undefined
+    return label ? label.toLowerCase().includes(searchValue.toLowerCase()) : false
   }
-
-  return node.label.toLowerCase().includes(searchValue.toLowerCase())
 }

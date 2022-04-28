@@ -332,8 +332,10 @@ export const defaultConfig: GlobalConfig = {
   },
   tree: {
     blocked: false,
+    childrenKey: 'children',
     expandIcon: 'right',
-    nodeKey: 'key',
+    getKey: 'key',
+    labelKey: 'label',
     showLine: false,
   },
   treeSelect: {
@@ -341,7 +343,7 @@ export const defaultConfig: GlobalConfig = {
     childrenKey: 'children',
     clearIcon: 'close-circle',
     labelKey: 'label',
-    nodeKey: 'key',
+    getKey: 'key',
     overlayMatchWidth: true,
     size: 'md',
     suffix: 'down',

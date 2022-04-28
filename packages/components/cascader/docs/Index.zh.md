@@ -25,6 +25,7 @@ subtitle: 级联选择
 | `childrenKey` | 替代[CascaderData](#CascaderData)中的`children`字段 | `string` | `children` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
+| `customAdditional` | 自定义下拉选项的额外属性 | `CascaderCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[CascaderData](#CascaderData) | `CascaderData[]` | `[]` | - | - |
 | `disabled` | 禁用选择器 | `boolean` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
@@ -60,7 +61,6 @@ subtitle: 级联选择
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `additional` | 节点的扩展属性 | `object` | - | - | 可以用于设置节点的 `class`, `style` 或者其他属性 |
 | `children` | 子节点数据 | `CascaderData[]` | - | - | - |
 | `disabled` | 禁用节点 | `boolean` | - | - | - |
 | `isLeaf` | 设置为叶子节点 | `boolean` | - | - | 不为 `true` 且设置了 `loadChildren` 时会强制将其作为父节点  |

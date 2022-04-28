@@ -22,19 +22,21 @@ export interface TreeSelectContext {
   config: TreeSelectConfig
   mergedPrefixCls: ComputedRef<string>
   accessor: ValueAccessor
-  getNodeKey: ComputedRef<GetNodeKey>
-  expandedKeys: ComputedRef<any[]>
+  mergedChildrenKey: ComputedRef<string>
+  mergedGetKey: ComputedRef<GetNodeKey>
+  mergedLabelKey: ComputedRef<string>
+  expandedKeys: ComputedRef<VKey[]>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
   inputValue: ComputedRef<string>
   setInputValue: (value: string) => void
   treeRef: Ref<TreeInstance | undefined>
-  setExpandedKeys: (value: any[]) => void
+  setExpandedKeys: (keys: VKey[]) => void
   setExpandAll: (isAll: boolean) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
   handleNodeClick: () => void
-  selectedValue: ComputedRef<any[]>
-  changeSelected: (value: any[], nodes: TreeSelectNode[]) => void
+  selectedValue: ComputedRef<VKey[]>
+  changeSelected: (value: VKey[], nodes: TreeSelectNode[]) => void
 }
 
 export const treeSelectToken: InjectionKey<TreeSelectContext> = Symbol('treeSelectToken')

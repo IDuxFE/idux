@@ -35,7 +35,9 @@ export default defineComponent({
       let children: VNode
       if (dataSource.length > 0) {
         const { overlayHeight, overlayItemHeight, virtual } = cascaderProps
-        const itemRender: VirtualItemRenderFn<MergedData> = ({ item }) => <OverlayOption {...item} />
+        const itemRender: VirtualItemRenderFn<MergedData> = ({ item, index }) => (
+          <OverlayOption index={index} {...item} />
+        )
         children = (
           <CdkVirtualScroll
             dataSource={dataSource}

@@ -78,7 +78,7 @@ export default defineComponent({
         </div>,
       )
 
-      return overlayRender ? overlayRender(children) : <div>{children}</div>
+      return <div>{overlayRender ? overlayRender(children) : children}</div>
     }
   },
 })

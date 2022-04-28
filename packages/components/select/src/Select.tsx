@@ -12,7 +12,7 @@ import { computed, defineComponent, normalizeClass, provide, ref, watch } from '
 import { isNil } from 'lodash-es'
 
 import { type VirtualScrollInstance, type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { useState } from '@idux/cdk/utils'
+import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -82,10 +82,22 @@ export default defineComponent({
       scrollTo,
     )
 
-    const handleOptionClick = (value: any) => {
-      changeSelected(value)
-      if (props.multiple) {
+    watch(overlayOpened, opened => {
+      if (!opened && props.allowInput && inputValue.value) {
+        changeSelected(inputValue.value)
+      }
+      opened && focus()
+      clearInput()
+    })
+
+    const handleOverlayClick = () => {
+      if (props.searchable !== 'overlay') {
         focus()
+      }
+    }
+
+    const handleOptionClick = () => {
+      if (props.multiple) {
         clearInput()
       } else {
         setOverlayOpened(false)
@@ -93,7 +105,7 @@ export default defineComponent({
     }
 
     const handleBlur = () => accessor.markAsBlurred()
-    const handleItemRemove = (value: any) => {
+    const handleItemRemove = (value: VKey) => {
       focus()
       handleRemove(value)
     }
@@ -115,18 +127,11 @@ export default defineComponent({
       selectedValue,
       selectedLimit,
       selectedLimitTitle,
+      changeSelected,
       activeIndex,
       activeOption,
       changeActive,
       scrollToActivated,
-    })
-
-    watch(overlayOpened, opened => {
-      if (!opened && props.allowInput && inputValue.value) {
-        changeSelected(inputValue.value)
-      }
-      opened ? focus() : blur()
-      clearInput()
     })
 
     const overlayClasses = computed(() => {
@@ -207,7 +212,7 @@ export default defineComponent({
       />
     )
 
-    const renderContent = () => <Content />
+    const renderContent = () => <Content onClick={handleOverlayClick} />
 
     return () => {
       const overlayProps = {

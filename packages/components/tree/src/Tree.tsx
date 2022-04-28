@@ -48,13 +48,17 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
-    const getNodeKey = useGetNodeKey(props, config)
-    const { mergedNodes, mergedNodeMap } = useMergeNodes(props, getNodeKey)
-    const { searchedKeys, lastEffectiveSearchedKeys } = useSearchable(props, mergedNodeMap)
+    const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
+    const mergedGetKey = useGetNodeKey(props, config)
+    const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
+    const { mergedNodes, mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
+    const { searchedKeys, lastEffectiveSearchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
     const expandableContext = useExpandable(
       props,
       config,
-      getNodeKey,
+      mergedChildrenKey,
+      mergedGetKey,
+      mergedLabelKey,
       mergedNodeMap,
       searchedKeys,
       lastEffectiveSearchedKeys,
@@ -70,7 +74,7 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       mergedNodeMap,
-      getNodeKey,
+      mergedGetKey,
       searchedKeys,
       ...checkableContext,
       ...expandableContext,
