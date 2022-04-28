@@ -26,6 +26,7 @@ import type { NotificationPlacement, NotificationType } from '@idux/components/n
 import type { PaginationSize } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
+import type { SelectData } from '@idux/components/select'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperLabelPlacement, StepperSize } from '@idux/components/stepper'
@@ -362,12 +363,20 @@ export interface SelectConfig {
   borderless: boolean
   childrenKey: string
   clearIcon: string
+  getKey: string | ((data: SelectData) => VKey)
   labelKey: string
+  overlayContainer?: PortalTargetType
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
-  valueKey: string
+  /**
+   * @deprecated please use `getKey` instead'
+   */
+  valueKey?: string
 }
 
 export interface SkeletonConfig {

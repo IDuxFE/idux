@@ -16,7 +16,6 @@ import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VN
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const defaultCompareFn = (o1: any, o2: any) => o1 === o2
 
 export const selectProps = {
@@ -32,39 +31,51 @@ export const selectProps = {
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
   /**
-   * @deprecated
+   * @deprecated removed
    */
   compareWith: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: undefined },
+  /**
+   * @deprecated removed
+   */
   compareFn: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: defaultCompareFn },
+  customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
   disabled: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
   labelKey: { type: String, default: undefined },
   /**
-   * @deprecated
+   * @deprecated please use `maxLabel` instead'
    */
   maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   /**
-   * @deprecated
+   * @deprecated please use `dataSource` instead'
    */
   options: { type: Array as PropType<SelectData[]>, default: undefined },
   overlayClassName: { type: String, default: undefined },
+  overlayContainer: ɵPortalTargetDef,
   overlayMatchWidth: { type: Boolean, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   /**
-   * @deprecated
+   * @deprecated please use `searchFilter` instead'
    */
   searchFilter: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: undefined },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
   size: { type: String as PropType<FormSize>, default: undefined },
   suffix: { type: String, default: undefined },
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target: ɵPortalTargetDef,
+  /**
+   * @deprecated please use `getKey` instead'
+   */
   valueKey: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
 
@@ -73,7 +84,7 @@ export const selectProps = {
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(searchText: string) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
     MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>
@@ -88,7 +99,15 @@ export const selectProps = {
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
 export type SelectPublicProps = Omit<
   ExtractPublicPropTypes<typeof selectProps>,
-  'compareWith' | 'maxLabelCount' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight'
+  | 'compareWith'
+  | 'compareFn'
+  | 'maxLabelCount'
+  | 'options'
+  | 'searchFilter'
+  | 'overlayHeight'
+  | 'overlayItemHeight'
+  | 'target'
+  | 'valueKey'
 >
 export interface SelectBindings {
   blur: () => void
@@ -101,31 +120,48 @@ export type SelectComponent = DefineComponent<
 >
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export interface SelectCommonProps {
+export type SelectCustomAdditional = (options: { data: SelectData; index: number }) => Record<string, any> | undefined
+
+export interface SelectOptionProps {
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
   additional?: {
     class?: any
     style?: any
     [key: string]: unknown
   }
+
+  disabled?: boolean
   key?: VKey
   label?: string
-  [key: string]: any
-}
 
-export interface SelectOptionProps extends SelectCommonProps {
-  disabled?: boolean
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  value?: string | number | object
   customLabel?: string | ((data: SelectOptionProps) => VNodeChild)
+
+  [key: string]: any
 }
 export type SelectOptionPublicProps = Omit<SelectOptionProps, 'additional'>
 export type SelectOptionComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
 >
 
-export interface SelectOptionGroupProps extends SelectCommonProps {
+export interface SelectOptionGroupProps {
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
+  additional?: {
+    class?: any
+    style?: any
+    [key: string]: unknown
+  }
+
   children?: SelectOptionProps[]
+  key?: VKey
+  label?: string
+
   customLabel?: string | ((data: SelectOptionGroupProps) => VNodeChild)
+
+  [key: string]: any
 }
 export type SelectOptionGroupPublicProps = Omit<SelectOptionGroupProps, 'additional'>
 export type SelectOptionGroupComponent = FunctionalComponent<
@@ -134,7 +170,7 @@ export type SelectOptionGroupComponent = FunctionalComponent<
 
 export type SelectData = SelectOptionProps | SelectOptionGroupProps
 
-export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
+export type SelectSearchFn = (data: SelectData, searchText: string) => boolean
 
 // private
 export const selectorProps = {
@@ -147,14 +183,14 @@ export const optionProps = {
   disabled: Boolean,
   index: { type: Number, required: true },
   label: String,
-  type: String as PropType<'grouped' | 'group'>,
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
-  value: null,
+  parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
   label: String,
+  index: { type: Number, required: true },
   rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
 } as const
 export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

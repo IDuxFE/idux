@@ -28,7 +28,7 @@ const dataSource: SelectData[] = []
 
 for (let index = 0; index < 20; index++) {
   const prefix = index > 9 ? 'Responsive long label B' : 'Responsive long label A'
-  dataSource.push({ key: index, label: prefix + index, value: index, disabled: index % 5 === 0 })
+  dataSource.push({ key: index, label: prefix + index, disabled: index % 5 === 0 })
 }
 
 const value = ref([0, 1, 2, 3, 4])

@@ -16,9 +16,9 @@ import { IxInput } from '@idux/components/input'
 import { SelectData } from '@idux/components/select'
 
 const dataSource = ref<SelectData[]>([
-  { key: 1, label: 'Tom', value: 'tom' },
-  { key: 2, label: 'Jerry', value: 'jerry' },
-  { key: 3, label: 'Speike', value: 'speike' },
+  { key: 'tom', label: 'Tom' },
+  { key: 'jerry', label: 'Jerry' },
+  { key: 'speike', label: 'Speike' },
 ])
 
 const value = ref('tom')

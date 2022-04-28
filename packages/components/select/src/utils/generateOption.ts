@@ -7,9 +7,7 @@
 
 import type { MergedOption } from '../composables/useOptions'
 
-const keyPrefix = '__IDUX_SELECT_GENERATE_OPTION_KEY_'
-
 export function generateOption(value: string): MergedOption {
-  const rawData = { label: value, value }
-  return { key: keyPrefix + value, label: value, value, rawData }
+  const rawData = { key: value, label: value }
+  return { key: value, label: value, rawData }
 }

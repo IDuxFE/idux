@@ -15,14 +15,19 @@ import { optionGroupProps } from '../types'
 export default defineComponent({
   props: optionGroupProps,
   setup(props) {
-    const { slots, mergedPrefixCls } = inject(selectToken)!
+    const { props: selectProps, slots, mergedPrefixCls } = inject(selectToken)!
     return () => {
       const { label, rawData } = props
       const prefixCls = `${mergedPrefixCls.value}-option-group`
       const labelRender = rawData.customLabel ?? 'optionGroupLabel'
       const labelSlot = isString(labelRender) ? slots[labelRender] : labelRender
+
+      const customAdditional = selectProps.customAdditional
+        ? selectProps.customAdditional({ data: rawData, index: props.index })
+        : undefined
+
       return (
-        <div class={prefixCls} {...rawData.additional} aria-label={label}>
+        <div class={prefixCls} title={label} aria-label={label} {...rawData.additional} {...customAdditional}>
           <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawData) : label}</span>
         </div>
       )

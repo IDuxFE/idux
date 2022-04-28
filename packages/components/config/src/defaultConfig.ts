@@ -228,12 +228,12 @@ export const defaultConfig: GlobalConfig = {
   select: {
     borderless: false,
     childrenKey: 'children',
+    getKey: 'key',
     clearIcon: 'close-circle',
     labelKey: 'label',
     overlayMatchWidth: true,
     size: 'md',
     suffix: 'down',
-    valueKey: 'value',
   },
   skeleton: {
     animated: true,

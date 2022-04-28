@@ -123,7 +123,7 @@ describe('Select', () => {
     test('custom keys work', async () => {
       const dataSource = [
         {
-          key: 1,
+          name: 'manager',
           text: 'Manager',
           options: [
             { key: 11, text: 'Tom', name: 'tom' },
@@ -131,14 +131,14 @@ describe('Select', () => {
           ],
         },
         {
-          key: 2,
+          name: 'engineer',
           text: 'Engineer',
           options: [{ key: 21, text: 'Speike', name: 'speike' }],
         },
       ]
 
       const wrapper = SelectMount({
-        props: { value: 'tom', open: true, dataSource, childrenKey: 'options', labelKey: 'text', valueKey: 'name' },
+        props: { value: 'tom', open: true, dataSource, childrenKey: 'options', getKey: 'name', labelKey: 'text' },
       })
 
       expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
@@ -497,7 +497,7 @@ describe('Select', () => {
       options = wrapper.findAllComponents(Option)
 
       expect(options[4].find('.ix-checkbox').classes()).not.toContain('ix-checkbox-disabled')
-      expect(options[4].attributes('title')).toBe('')
+      expect(options[4].attributes('title')).toBe('A4')
     })
 
     test('maxLabel work', async () => {

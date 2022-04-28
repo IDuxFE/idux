@@ -63,7 +63,7 @@ export const tableProps = {
 } as const
 
 export type TableProps = ExtractInnerPropTypes<typeof tableProps>
-export type TablePublicProps = ExtractPublicPropTypes<typeof tableProps>
+export type TablePublicProps = Omit<ExtractPublicPropTypes<typeof tableProps>, 'rowClassName' | 'rowKey'>
 export interface TableBindings {
   scrollTo: VirtualScrollToFn
 }

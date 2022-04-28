@@ -24,10 +24,11 @@ order: 0
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
-| `compareFn` | 用于自定义判断两个 `option` 的值是否相同 | `(o1: any, o2: any) => boolean` | `(o1: any, o2: any) => o1 === o2` | - | 通常用于 `option` 的为对象的情况 |
+| `customAdditional` | 自定义下拉选项的额外属性 | `SelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `getKey` | 获取数据的唯一标识 | `string \| (data: SelectData) => VKey` | `key` | ✅ | 为了兼容之前的版本，默认值也会支持 `value` |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `maxLabel` | 最多显示多少个标签，响应式模式会对性能产生损耗 | `number \| 'responsive'` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
@@ -41,8 +42,7 @@ order: 0
 | `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
-| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
-| `valueKey` | 选项 value 的 key | `string` | `value` | ✅ | 仅在使用 `dataSource` 时有效 |
+| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - ||
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
@@ -54,34 +54,27 @@ order: 0
 ```ts
 export type SelectData = SelectOptionProps | SelectOptionGroupProps
 
+export type SelectCustomAdditional = (options: { data: SelectData; index: number }) => Record<string, any> | undefined
+
 export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 ```
 
-#### SelectCommonProps
-
-`SelectData` 的通用属性
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `key` | 唯一标识 | `VKey` | - | - | 不传时使用 `index` 代替 |
-| `additional` | 选项的扩展属性 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
-| `label` | 选项的文本 | `string` | - | - | - |
-
 #### SelectOptionProps
 
-继承自 `SelectCommonProps`
-
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识, 也是选项的值 | `VKey` | - | - | 可以通过 `getKey` 来指定其他值 |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `value` | option 的值 | `string \| number \| object` | - | - | - |
+| `label` | 选项的文本 | `string` | - | - | - |
 | `customLabel` | 自定义文本内容 | `string \| ((data: SelectOptionProps) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 #### SelectOptionGroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 可以通过 `getKey` 来指定其他值 |
 | `children` | 子选项 | `SelectOptionProps[]` | - | - | - |
+| `label` | 选项的文本 | `string` | - | - | - |
 | `customLabel` | 自定义文本内容 | `string \| ((data: SelectOptionGroupProps) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 #### SelectSlots
