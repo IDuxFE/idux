@@ -34,7 +34,7 @@ export function useActiveState(
     const compareFn = props.compareWith ?? props.compareFn
     const options = flattedOptions.value
     const currValue = selectedValue.value
-    const currIndex = options.findIndex(option => currValue.some(value => compareFn(option.value, value)))
+    const currIndex = options.findIndex(option => currValue.some(value => compareFn(option.key, value)))
     activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
 
     watchEffect(() => {
@@ -43,7 +43,7 @@ export function useActiveState(
       }
       const options = flattedOptions.value
       const searchValue = inputValue.value
-      const currIndex = options.findIndex(option => option.value === searchValue)
+      const currIndex = options.findIndex(option => option.key === searchValue)
       activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
     })
   })

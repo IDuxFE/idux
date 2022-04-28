@@ -8,10 +8,10 @@
     </template>
     <div class="layout-content">
       <IxSpace>
-        <div>whole: <IxSelect v-model:value="wholeTheme" :options="wholdThemeOptionss"></IxSelect></div>
+        <div>whole: <IxSelect v-model:value="wholeTheme" :dataSource="wholdThemeOptionss"></IxSelect></div>
         <template v-if="wholeTheme === 'separate'">
-          <div>header: <IxSelect v-model:value="separateTheme.header" :options="themesOptions"></IxSelect></div>
-          <div>sider: <IxSelect v-model:value="separateTheme.sider" :options="themesOptions"></IxSelect></div>
+          <div>header: <IxSelect v-model:value="separateTheme.header" :dataSource="themesOptions"></IxSelect></div>
+          <div>sider: <IxSelect v-model:value="separateTheme.sider" :dataSource="themesOptions"></IxSelect></div>
         </template>
       </IxSpace>
     </div>
@@ -26,10 +26,10 @@ import { type MenuData } from '@idux/components/menu'
 const activeKey = ref()
 const wholeTheme = ref('light')
 const themesOptions = [
-  { key: 'light', label: 'light', value: 'light' },
-  { key: 'dark', label: 'dark', value: 'dark' },
+  { key: 'light', label: 'light' },
+  { key: 'dark', label: 'dark' },
 ]
-const wholdThemeOptionss = [...themesOptions, { key: 'separate', label: 'separate', value: 'separate' }]
+const wholdThemeOptionss = [...themesOptions, { key: 'separate', label: 'separate' }]
 const separateTheme = reactive({
   header: 'light',
   sider: 'light',

@@ -31,8 +31,8 @@
         <IxInput id="phoneNumber" control="phoneNumber">
           <template #addonBefore>
             <IxSelect control="phoneNumberPrefix" style="width: 70px">
-              <IxSelectOption label="+86" value="+86"></IxSelectOption>
-              <IxSelectOption label="+87" value="+87"></IxSelectOption>
+              <IxSelectOption key="+86" label="+86"></IxSelectOption>
+              <IxSelectOption key="+87" label="+87"></IxSelectOption>
             </IxSelect>
           </template>
         </IxInput>

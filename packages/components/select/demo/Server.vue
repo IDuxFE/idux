@@ -8,7 +8,7 @@
     @change="onChange"
     @search="onSearch"
   >
-    <IxSelectOption v-for="option in dataSource" :key="option.login.uuid" :value="option.email">
+    <IxSelectOption v-for="option in dataSource" :key="option.login.uuid">
       {{ option.name.first }} {{ option.name.last }}
     </IxSelectOption>
   </IxSelect>

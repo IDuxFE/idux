@@ -1,5 +1,5 @@
 <template>
-  <IxSelect v-model:value="value" :dataSource="dataSource" childrenKey="options" labelKey="text" valueKey="name">
+  <IxSelect v-model:value="value" :dataSource="dataSource" childrenKey="options" getKey="name" labelKey="text">
   </IxSelect>
 </template>
 <script setup lang="ts">
@@ -9,17 +9,17 @@ import { SelectData } from '@idux/components/select'
 
 const dataSource: SelectData[] = [
   {
-    key: 1,
+    name: 'manager',
     text: 'Manager',
     options: [
-      { key: 11, text: 'Tom', name: 'tom' },
-      { key: 12, text: 'Jerry', name: 'jerry' },
+      { name: 'tom', text: 'Tom' },
+      { name: 'jerry', text: 'Jerry' },
     ],
   },
   {
-    key: 2,
+    name: 'engineer',
     text: 'Engineer',
-    options: [{ key: 21, text: 'Speike', name: 'speike' }],
+    options: [{ name: 'speike', text: 'Speike' }],
   },
 ]
 

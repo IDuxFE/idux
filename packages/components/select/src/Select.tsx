@@ -9,6 +9,8 @@
 
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { type VirtualScrollInstance, type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
@@ -17,6 +19,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { useFormAccessor } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
+import { useGetOptionKey } from './composables/useGetOptionKey'
 import { useFlattedOptions, useMergedOptions } from './composables/useOptions'
 import { useOverlayState } from './composables/useOverlayState'
 import { useSelectedState } from './composables/useSelectedState'
@@ -56,10 +59,11 @@ export default defineComponent({
     )
 
     const accessor = useFormAccessor()
-
-    const mergedOptions = useMergedOptions(props, slots, config)
-
-    const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue)
+    const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
+    const mergedGetKey = useGetOptionKey(props, config)
+    const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
+    const mergedOptions = useMergedOptions(props, slots, mergedChildrenKey, mergedGetKey, mergedLabelKey)
+    const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue, mergedLabelKey)
     const {
       selectedValue,
       selectedLimit,
@@ -135,7 +139,14 @@ export default defineComponent({
       })
     })
 
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
+    const target = computed(
+      () =>
+        props.target ??
+        props.overlayContainer ??
+        config.target ??
+        config.overlayContainer ??
+        `${mergedPrefixCls.value}-overlay-container`,
+    )
 
     const handleKeyDown = (evt: KeyboardEvent) => {
       switch (evt.code) {
@@ -147,11 +158,13 @@ export default defineComponent({
           evt.preventDefault()
           changeActive(activeIndex.value + 1, 1)
           break
-        case 'Enter':
+        case 'Enter': {
           evt.preventDefault()
-          changeSelected(activeOption.value?.value)
+          const key = activeOption.value?.key
+          !isNil(key) && changeSelected(key)
           props.multiple ? clearInput() : setOverlayOpened(false)
           break
+        }
         case 'Escape':
           evt.preventDefault()
           setOverlayOpened(false)

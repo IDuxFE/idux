@@ -18,8 +18,8 @@ import { SelectData } from '@idux/components/select'
 const dataSource: SelectData[] = []
 
 for (let index = 0; index < 9999; index++) {
-  const value = `${index.toString(36)}${index}`
-  dataSource.push({ key: index, label: value, value, disabled: index % 10 === 0 })
+  const key = `${index.toString(36)}${index}`
+  dataSource.push({ key, label: key, disabled: index % 10 === 0 })
 }
 
 const value = ref(['00', '11'])

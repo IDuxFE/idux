@@ -10,7 +10,7 @@
 import { type ComputedRef, computed, toRaw } from 'vue'
 
 import { type ValueAccessor } from '@idux/cdk/forms'
-import { callEmit, convertArray } from '@idux/cdk/utils'
+import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 import { type Locale } from '@idux/components/locales'
 
 import { type SelectProps } from '../types'
@@ -18,12 +18,12 @@ import { generateOption } from '../utils/generateOption'
 import { type MergedOption } from './useOptions'
 
 export interface SelectedStateContext {
-  selectedValue: ComputedRef<any[]>
+  selectedValue: ComputedRef<VKey[]>
   selectedOptions: ComputedRef<MergedOption[]>
   selectedLimit: ComputedRef<boolean>
   selectedLimitTitle: ComputedRef<string>
-  changeSelected: (value: any) => void
-  handleRemove: (value: any) => void
+  changeSelected: (key: VKey) => void
+  handleRemove: (key: VKey) => void
   handleClear: (evt: MouseEvent) => void
 }
 
@@ -38,7 +38,7 @@ export function useSelectedState(
     const compareFn = props.compareWith ?? props.compareFn
     const options = mergedOptions.value
     return selectedValue.value.map(
-      value => options.find(option => compareFn(option.value, value)) ?? generateOption(value),
+      value => options.find(option => compareFn(option.key, value)) ?? generateOption(value),
     )
   })
   const selectedLimit = computed(() => selectedValue.value.length >= props.multipleLimit)
@@ -49,7 +49,7 @@ export function useSelectedState(
     return locale.select.limitMessage.replace('${0}', `${props.multipleLimit}`)
   })
 
-  const setValue = (value: any[]) => {
+  const setValue = (value: VKey[]) => {
     const currValue = props.multiple ? value : value[0]
     const oldValue = toRaw(accessor.valueRef.value)
     if (currValue !== oldValue) {
@@ -58,14 +58,14 @@ export function useSelectedState(
     }
   }
 
-  const changeSelected = (value: any) => {
+  const changeSelected = (key: VKey) => {
     const compareFn = props.compareWith ?? props.compareFn
     const { multiple } = props
     const currValue = selectedValue.value
-    const targetIndex = currValue.findIndex(item => compareFn(item, value))
+    const targetIndex = currValue.findIndex(item => compareFn(item, key))
     const isSelected = targetIndex > -1
     if (!multiple) {
-      !isSelected && setValue([value])
+      !isSelected && setValue([key])
       return
     }
     if (isSelected) {
@@ -73,13 +73,13 @@ export function useSelectedState(
       return
     }
     if (!selectedLimit.value) {
-      setValue([...currValue, value])
+      setValue([...currValue, key])
     }
   }
 
-  const handleRemove = (value: any) => {
+  const handleRemove = (key: VKey) => {
     const compareFn = props.compareWith ?? props.compareFn
-    setValue(selectedValue.value.filter(item => !compareFn(value, item)))
+    setValue(selectedValue.value.filter(item => !compareFn(key, item)))
   }
 
   const handleClear = (evt: MouseEvent) => {

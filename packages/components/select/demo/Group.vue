@@ -2,12 +2,12 @@
   <IxSpace>
     <IxSelect v-model:value="value" :dataSource="dataSource"> </IxSelect>
     <IxSelect v-model:value="value">
-      <IxSelectOptionGroup key="1" label="Manager">
-        <IxSelectOption key="11" label="Tom" value="tom"></IxSelectOption>
-        <IxSelectOption key="12" label="Jerry" value="jerry"></IxSelectOption>
+      <IxSelectOptionGroup key="manager" label="Manager">
+        <IxSelectOption key="tom" label="Tom"></IxSelectOption>
+        <IxSelectOption key="jerry" label="Jerry"></IxSelectOption>
       </IxSelectOptionGroup>
-      <IxSelectOptionGroup key="2" label="Engineer">
-        <IxSelectOption key="21" label="Speike" value="speike"></IxSelectOption>
+      <IxSelectOptionGroup key="engineer" label="Engineer">
+        <IxSelectOption key="speike" label="Speike"></IxSelectOption>
       </IxSelectOptionGroup>
     </IxSelect>
   </IxSpace>
@@ -19,17 +19,17 @@ import { SelectData } from '@idux/components/select'
 
 const dataSource: SelectData[] = [
   {
-    key: 1,
+    key: 'manager',
     label: 'Manager',
     children: [
-      { key: 11, label: 'Tom', value: 'tom' },
-      { key: 12, label: 'Jerry', value: 'jerry' },
+      { key: 'tom', label: 'Tom' },
+      { key: 'jerry', label: 'Jerry' },
     ],
   },
   {
-    key: 2,
+    key: 'engineer',
     label: 'Engineer',
-    children: [{ key: 21, label: 'Speike', value: 'speike' }],
+    children: [{ key: 'speike', label: 'Speike' }],
   },
 ]
 

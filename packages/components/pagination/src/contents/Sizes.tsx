@@ -18,10 +18,7 @@ export default defineComponent({
     const sizeData = computed(() => {
       const { pageSizes = config.pageSizes } = props
       return pageSizes.map(size => {
-        return {
-          value: size,
-          label: size,
-        } as unknown as SelectData
+        return { key: size, label: size } as unknown as SelectData
       })
     })
 

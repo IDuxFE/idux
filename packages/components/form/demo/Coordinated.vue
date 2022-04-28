@@ -2,8 +2,8 @@
   <IxForm class="demo-form" :control="formGroup" labelCol="6">
     <IxFormItem label="Method" required message="Please select your contact method!">
       <IxSelect control="method">
-        <IxSelectOption label="E-mail" value="email"></IxSelectOption>
-        <IxSelectOption label="MobilePhone" value="mobilePhone"></IxSelectOption>
+        <IxSelectOption key="email" label="E-mail"></IxSelectOption>
+        <IxSelectOption key="mobilePhone" label="MobilePhone"></IxSelectOption>
       </IxSelect>
     </IxFormItem>
     <IxFormItem label="Contact" required :message="getContactMessage">

@@ -7,7 +7,10 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { IxCheckbox } from '@idux/components/checkbox'
+import { useKey } from '@idux/components/utils'
 
 import { selectToken } from '../token'
 import { optionProps } from '../types'
@@ -16,6 +19,7 @@ import { renderOptionLabel } from '../utils/renderOptionLabel'
 export default defineComponent({
   props: optionProps,
   setup(props) {
+    const key = useKey()
     const {
       props: selectProps,
       slots,
@@ -29,49 +33,53 @@ export default defineComponent({
     } = inject(selectToken)!
 
     const isActive = computed(() => {
-      const { value } = props
       const compareFn = selectProps.compareWith ?? selectProps.compareFn
-      const activeValue = activeOption.value?.value
-      return compareFn(activeValue, value)
+      const activeValue = activeOption.value?.key
+      return compareFn(activeValue, key)
     })
 
     const isSelected = computed(() => {
-      const { value } = props
       const compareFn = selectProps.compareWith ?? selectProps.compareFn
-      return selectedValue.value.some(item => compareFn(item, value))
+      return selectedValue.value.some(item => compareFn(item, key))
     })
 
     const classes = computed(() => {
-      const { disabled, type } = props
+      const { disabled, parentKey } = props
       const prefixCls = `${mergedPrefixCls.value}-option`
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
         [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-grouped`]: type === 'grouped',
+        [`${prefixCls}-grouped`]: !isNil(parentKey),
         [`${prefixCls}-selected`]: isSelected.value,
       }
     })
 
     const handleMouseEnter = () => changeActive(props.index, 0)
 
-    const handleClick = () => handleOptionClick(props.value)
+    const handleClick = () => handleOptionClick(key)
 
     return () => {
       const { disabled, label, rawData } = props
       const { multiple } = selectProps
       const selected = isSelected.value
       const prefixCls = `${mergedPrefixCls.value}-option`
+      // 优先显示 selectedLimitTitle
+      const title = (!(disabled || selected) && selectedLimitTitle.value) || label
+      const customAdditional = selectProps.customAdditional
+        ? selectProps.customAdditional({ data: rawData, index: props.index })
+        : undefined
 
       return (
         <div
           class={classes.value}
-          title={disabled || selected ? undefined : selectedLimitTitle.value}
+          title={title}
           onMouseenter={disabled ? undefined : handleMouseEnter}
           onClick={disabled ? undefined : handleClick}
           aria-label={label}
           aria-selected={selected}
           {...rawData.additional}
+          {...customAdditional}
         >
           {multiple && <IxCheckbox checked={selected} disabled={disabled || (!selected && selectedLimit.value)} />}
           <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData, label)}</span>

@@ -8,26 +8,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { SelectData, SelectProps, SelectSearchFn } from '../types'
-import type { SelectConfig } from '@idux/components/config'
 import type { ComputedRef, Ref, Slots, VNode } from 'vue'
 
 import { computed } from 'vue'
 
-import { isFunction, isSymbol } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 
 import { Logger, VKey, flattenNode } from '@idux/cdk/utils'
 
 import { optionGroupKey, optionKey } from '../option'
 import { generateOption } from '../utils/generateOption'
+import { GetKeyFn } from './useGetOptionKey'
 
 export interface MergedOption {
   key: VKey
   label?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value?: any
   disabled?: boolean
   rawData: SelectData
-  type?: 'group' | 'grouped'
+  type?: 'group'
   parentKey?: VKey
 }
 
@@ -36,14 +34,20 @@ export interface OptionsContext {
   flattedOptions: ComputedRef<MergedOption[]>
 }
 
-export function useMergedOptions(props: SelectProps, slots: Slots, config: SelectConfig): ComputedRef<MergedOption[]> {
+export function useMergedOptions(
+  props: SelectProps,
+  slots: Slots,
+  mergedChildrenKey: ComputedRef<string>,
+  mergedGetKey: ComputedRef<GetKeyFn>,
+  mergedLabelKey: ComputedRef<string>,
+): ComputedRef<MergedOption[]> {
   return computed(() => {
     const dataSource = props.options ?? props.dataSource
     if (dataSource) {
       if (__DEV__ && props.options) {
         Logger.warn('components/select', '`options` was deprecated, please use `dataSource` instead')
       }
-      return mergeOptions(props, config, dataSource)
+      return mergeOptions(dataSource, mergedChildrenKey.value, mergedGetKey.value, mergedLabelKey.value)
     } else {
       return convertOptions(slots.default?.())
     }
@@ -54,8 +58,9 @@ export function useFlattedOptions(
   props: SelectProps,
   mergedOptions: ComputedRef<MergedOption[]>,
   inputValue: Ref<string>,
+  mergedLabelKey: ComputedRef<string>,
 ): ComputedRef<MergedOption[]> {
-  const searchFilter = useSearchFilter(props)
+  const searchFilter = useSearchFn(props, mergedLabelKey)
 
   return computed(() => {
     const options = mergedOptions.value
@@ -76,36 +81,28 @@ export function useFlattedOptions(
   })
 }
 
-function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions: SelectData[]) {
-  const { childrenKey = config.childrenKey, labelKey = config.labelKey, valueKey = config.valueKey } = props
-
+function mergeOptions(originalOptions: SelectData[], childrenKey: string, getKeyFn: GetKeyFn, labelKey: string) {
   const mergedOptions: MergedOption[] = []
 
   originalOptions.forEach((item, index) => {
-    const { key } = item
     const label = item[labelKey]
     const children = item[childrenKey] as SelectData[]
 
     if (children && children.length > 0) {
-      const groupKey = key ?? index
+      const groupKey = getKeyFn(item) ?? item.key ?? index
       mergedOptions.push({ key: groupKey, label, type: 'group', rawData: item })
-      mergedOptions.push(
-        ...children.map((option, index) => {
-          const value = option[valueKey]
-          return {
-            key: option.key ?? `${isSymbol(groupKey) ? String(groupKey) : groupKey}-${value ?? index}`,
-            label: option[labelKey],
-            value: value,
-            disabled: option.disabled,
-            type: 'grouped',
-            parentKey: groupKey,
-            rawData: option,
-          } as MergedOption
-        }),
-      )
+
+      children.forEach(child => {
+        mergedOptions.push({
+          key: getKeyFn(child),
+          label: child[labelKey],
+          disabled: child.disabled,
+          parentKey: groupKey,
+          rawData: child,
+        })
+      })
     } else {
-      const value = item[valueKey]
-      mergedOptions.push({ key: key ?? index, disabled: item.disabled, label, value, rawData: item })
+      mergedOptions.push({ key: getKeyFn(item), disabled: item.disabled, label, rawData: item })
     }
   })
 
@@ -114,7 +111,7 @@ function mergeOptions(props: SelectProps, config: SelectConfig, originalOptions:
 
 const filterKeys = [optionKey, optionGroupKey]
 
-function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: boolean): MergedOption[] {
+function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey): MergedOption[] {
   const mergedOptions: Array<MergedOption> = []
 
   flattenNode(nodes, { key: filterKeys }).forEach((node, index) => {
@@ -130,22 +127,20 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
       const _disabled = disabled || disabled === ''
       const rawData = { key, disabled: _disabled, label, value, additional, customLabel: customLabel ?? customLabel2 }
       const option: MergedOption = {
-        key: key ?? `${isSymbol(parentKey) ? String(parentKey) : parentKey}-${value ?? index}`,
+        key: value ?? key,
         label,
-        value,
         disabled: _disabled,
         rawData,
         parentKey,
-        type: grouped ? 'grouped' : undefined,
       }
 
       mergedOptions.push(option)
     } else {
-      const { key, label, children, ...additional } = props
+      const { key = index, label, children, ...additional } = props
       const { label: customLabel, default: defaultSlot } = slots
-      const _children = children ?? convertOptions(defaultSlot?.(), key, true)
+      const _children = children ?? convertOptions(defaultSlot?.(), key)
       const rawData = { key, label, children: _children, additional, customLabel }
-      mergedOptions.push({ key: key ?? index, label, type: 'group', rawData })
+      mergedOptions.push({ key, label, type: 'group', rawData })
       mergedOptions.push(..._children)
     }
   })
@@ -153,14 +148,7 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey, grouped?: 
   return mergedOptions
 }
 
-const getDefaultSearchFn = (props: SelectProps): SelectSearchFn => {
-  return (option: SelectData, searchValue: string) => {
-    const filterField = props.labelKey ?? 'label'
-    return option[filterField]?.toLowerCase().includes(searchValue.toLowerCase()) ?? false
-  }
-}
-
-function useSearchFilter(props: SelectProps) {
+function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {
   return computed(() => {
     const searchFn = props.searchFilter ?? props.searchFn
     if (isFunction(searchFn)) {
@@ -169,7 +157,13 @@ function useSearchFilter(props: SelectProps) {
       }
       return searchFn
     }
-    // #750 配置了labelKey后过滤筛选不生效
-    return searchFn ? getDefaultSearchFn(props) : false
+    return searchFn ? getDefaultSearchFn(mergedLabelKey.value) : false
   })
+}
+
+function getDefaultSearchFn(labelKey: string): SelectSearchFn {
+  return (data: SelectData, searchValue: string) => {
+    const label = data[labelKey] as string | undefined
+    return label ? label.toLowerCase().includes(searchValue.toLowerCase()) : false
+  }
 }

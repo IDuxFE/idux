@@ -13,7 +13,7 @@ const dataSource: SelectData[] = []
 
 for (let index = 0; index < 20; index++) {
   const prefix = index > 9 ? 'B' : 'A'
-  dataSource.push({ key: index, label: prefix + index, value: index, disabled: index % 3 === 0 })
+  dataSource.push({ key: index, label: prefix + index, disabled: index % 3 === 0 })
 }
 
 const value = ref([0, 1])

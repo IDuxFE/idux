@@ -4,14 +4,14 @@
     <IxInput v-model:value="value">
       <template #addonBefore>
         <IxSelect v-model:value="addonBefore" style="width: 80px">
-          <IxSelectOption label="https://" value="https"></IxSelectOption>
-          <IxSelectOption label="http://" value="http"></IxSelectOption>
+          <IxSelectOption key="https" label="https://"></IxSelectOption>
+          <IxSelectOption key="http" label="http://"></IxSelectOption>
         </IxSelect>
       </template>
       <template #addonAfter>
         <IxSelect v-model:value="addonAfter" style="width: 60px">
-          <IxSelectOption label=".com" value="com"></IxSelectOption>
-          <IxSelectOption label=".cn" value="cn"></IxSelectOption>
+          <IxSelectOption key="com" label=".com"></IxSelectOption>
+          <IxSelectOption key="cn" label=".cn"></IxSelectOption>
         </IxSelect>
       </template>
     </IxInput>
