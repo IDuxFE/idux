@@ -55,14 +55,14 @@ exports[`Overflow > maxLabel responsive work 2`] = `
 `;
 
 exports[`Overflow > render work 1`] = `
-"<div class=\\"ix-overflow undefined-overflow\\">
+"<div class=\\"ix-overflow test-overflow\\">
   <!---->
   <!---->
 </div>"
 `;
 
 exports[`Overflow > render work 2`] = `
-"<div class=\\"ix-overflow undefined-overflow\\">
+"<div class=\\"ix-overflow test-overflow\\">
   <div class=\\"ix-overflow-item ix-overflow-rest\\" style=\\"display: none;\\">+ 0 ...</div>
   <!---->
 </div>"

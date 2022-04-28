@@ -33,11 +33,11 @@ describe('Overflow', () => {
   }
 
   renderWork<OverflowProps>(Overflow, {
-    props: { maxLabel: 4 },
+    props: { maxLabel: 4, getKey: () => 'key', prefixCls: 'test' },
   })
 
   renderWork<OverflowProps>(Overflow, {
-    props: { maxLabel: 'responsive' },
+    props: { maxLabel: 'responsive', getKey: () => 'key', prefixCls: 'test' },
   })
 
   test('maxLabel work', async () => {

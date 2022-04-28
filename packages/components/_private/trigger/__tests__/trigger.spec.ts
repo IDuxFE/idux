@@ -87,10 +87,10 @@ describe('Trigger', () => {
   })
 
   test('suffix work', async () => {
-    const wrapper = TriggerMount({ props: { suffix: 'suffix' } })
+    const wrapper = TriggerMount({ props: { suffix: 'info' } })
 
     expect(wrapper.find('.ix-trigger-suffix').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-icon-suffix').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-icon-info').exists()).toBeTruthy()
   })
 
   test('slot suffix work', async () => {

@@ -5,7 +5,7 @@ import { isShow, renderWork, scrollTarget, wait, waitRAF } from '@tests'
 
 import BackTop from '../src/BackTop'
 
-const warn = vi.spyOn(console, 'warn').mockImplementation()
+const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
 const backTopMount = (template: string, options = {}) =>
   mount(
