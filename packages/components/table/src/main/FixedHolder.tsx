@@ -38,11 +38,11 @@ export default defineComponent({
     })
     const style = computed<CSSProperties>(() => {
       const sticky = isSticky.value
-      const { offsetHead, offsetFoot } = mergedSticky.value
+      const { offsetTop, offsetBottom } = mergedSticky.value
       return {
         overflow: 'hidden',
-        top: sticky ? offsetHead : undefined,
-        bottom: sticky ? offsetFoot : undefined,
+        top: sticky ? offsetTop : undefined,
+        bottom: sticky ? offsetBottom : undefined,
       }
     })
 

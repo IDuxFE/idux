@@ -20,12 +20,12 @@ export default defineComponent({
     const {
       props,
       slots: tableSlots,
+      mergedPrefixCls,
       flattedData,
       expandable,
       scrollWidth,
       scrollHeight,
       isSticky,
-      bodyTag,
     } = inject(TABLE_TOKEN)!
 
     const showMeasure = computed(
@@ -33,9 +33,10 @@ export default defineComponent({
     )
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const children: VNodeChild[] = []
       if (tableSlots.alert) {
-        children.push(<BodyRowSingle>{tableSlots.alert()}</BodyRowSingle>)
+        children.push(<BodyRowSingle class={`${prefixCls}-alert-row`}>{tableSlots.alert()}</BodyRowSingle>)
       }
       const data = flattedData.value
       if (data.length > 0) {
@@ -48,18 +49,17 @@ export default defineComponent({
         }
       } else {
         children.push(
-          <BodyRowSingle isEmpty>
+          <BodyRowSingle class={`${prefixCls}-empty-row`} isEmpty>
             <ɵEmpty v-slots={tableSlots} empty={props.empty} />
           </BodyRowSingle>,
         )
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const BodyTag = bodyTag.value as any
+
       return (
-        <BodyTag>
+        <tbody>
           {showMeasure.value && <MeasureRow />}
           {children}
-        </BodyTag>
+        </tbody>
       )
     }
   },

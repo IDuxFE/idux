@@ -9,13 +9,11 @@ import type { ColumnsContext } from './composables/useColumns'
 import type { DataSourceContext } from './composables/useDataSource'
 import type { ExpandableContext } from './composables/useExpandable'
 import type { FilterableContext } from './composables/useFilterable'
-import type { GetRowKey } from './composables/useGetRowKey'
 import type { PaginationContext } from './composables/usePagination'
 import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
-import type { TagsContext } from './composables/useTags'
 import type { TableProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
@@ -31,14 +29,12 @@ export interface TableContext
     SelectableContext,
     SortableContext,
     FilterableContext,
-    StickyContext,
-    TagsContext {
+    StickyContext {
   props: TableProps
-  mergedPrefixCls: ComputedRef<string>
   slots: Slots
   config: TableConfig
   locale: Locale
-  getRowKey: ComputedRef<GetRowKey>
+  mergedPrefixCls: ComputedRef<string>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
 

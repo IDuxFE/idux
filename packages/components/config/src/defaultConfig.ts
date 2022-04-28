@@ -262,7 +262,8 @@ export const defaultConfig: GlobalConfig = {
   table: {
     autoHeight: false,
     borderless: true,
-    rowKey: 'key',
+    childrenKey: 'children',
+    getKey: 'key',
     size: 'md',
     extra: {
       icon: 'ellipsis',

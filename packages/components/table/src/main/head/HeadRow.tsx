@@ -14,14 +14,21 @@ import HeadCell from './HeadCell'
 export default defineComponent({
   props: tableHeadRowProps,
   setup(props) {
-    const { headRowTag } = inject(TABLE_TOKEN)!
+    const { props: tableProps } = inject(TABLE_TOKEN)!
+
     return () => {
-      const children = props.columns
-        .filter(column => column.titleColSpan !== 0)
-        .map(column => <HeadCell key={column.key} column={column}></HeadCell>)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const HeadRowTag = headRowTag.value as any
-      return <HeadRowTag>{children}</HeadRowTag>
+      const { columns } = props
+      const customAdditionalFn = tableProps.customAdditional?.headRow
+      const customAdditional = customAdditionalFn ? customAdditionalFn({ columns }) : undefined
+      return (
+        <tr {...customAdditional}>
+          {columns
+            .filter(column => column.titleColSpan !== 0)
+            .map(column => (
+              <HeadCell key={column.key} column={column} />
+            ))}
+        </tr>
+      )
     }
   },
 })

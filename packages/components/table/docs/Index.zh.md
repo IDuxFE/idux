@@ -18,20 +18,19 @@ order: 0
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `autoHeight` | 是否自适应高度 | `boolean` | `false` | ✅ | - |
 | `borderless` | 是否无边框 | `boolean` | `true` | ✅ | - |
-| `childrenKey` | 指定树形结构的 `key` | `string` | `children` | - | - |
-| `columns` | 表格列的配置描述, 参见[TableColumn](#TableColumn) | `TableColumn[]` | - | - | - |
+| `childrenKey` | 指定树形结构的 `key` | `string` | `children` | ✅ | - |
+| `columns` | 表格列的配置描述 | `TableColumn[]` | - | - |  参见[TableColumn](#TableColumn)  |
+| `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional[]` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
-| `rowClassName` | 表格行的类名 | `(record: T, rowIndex: number) => string` | - | - | - |
-| `rowKey` | 表格行 `key` 的取值 | `string \| record => string \| number` | `key` | - | - |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
 | `size` | 表格大小 | `'lg' \| 'md' \| 'sm'` | `md` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
-| `tags` | 覆盖默认的表格元素, 参见[TableTags](#TableTags) | `TableTags` | - | - | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.y` |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
@@ -141,6 +140,20 @@ export type TableColumn<T = any, V = any> =
 | `onChange` | 筛选规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于受控模式或服务端筛选 |
 | `customTrigger` | 自定义展开内容 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customMenu` | 自定义表头标题 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+
+#### TableCustomAdditional
+
+```ts
+export interface TableCustomAdditional<T = any> {
+  bodyCell: (data: { column: TableColumn<T>; record: T; rowIndex: number }) => Record<string, any> | undefined
+  bodyRow: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined
+  headCell: (data: { column: TableColumn<T> }) => Record<string, any> | undefined
+  headRow: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined
+}
+
+```
+
+参考示例：[斑马纹表格](#components-table-demo-CustomAdditional), 返回值可以是任意的原生 dom 属性或者事件。
 
 #### TablePagination
 

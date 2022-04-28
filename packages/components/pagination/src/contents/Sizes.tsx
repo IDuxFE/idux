@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { IxSelect } from '@idux/components/select'
+import { IxSelect, type SelectData } from '@idux/components/select'
 
 import { paginationToken } from '../token'
 
@@ -15,13 +15,13 @@ export default defineComponent({
   setup() {
     const { props, config, locale, mergedPrefixCls, size, activeSize, changePageSize } = inject(paginationToken)!
 
-    const sizeOptions = computed(() => {
+    const sizeData = computed(() => {
       const { pageSizes = config.pageSizes } = props
       return pageSizes.map(size => {
         return {
           value: size,
           label: size,
-        }
+        } as unknown as SelectData
       })
     })
 
@@ -35,7 +35,7 @@ export default defineComponent({
           <div class={`${prefixCls}-select-wrapper`}>
             <IxSelect
               disabled={props.disabled}
-              dataSource={sizeOptions.value}
+              dataSource={sizeData.value}
               size={size.value}
               value={activeSize.value}
               onChange={changePageSize}

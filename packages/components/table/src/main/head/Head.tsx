@@ -12,13 +12,16 @@ import HeadRow from './HeadRow'
 
 export default defineComponent({
   setup() {
-    const { mergedRows, headTag } = inject(TABLE_TOKEN)!
+    const { mergedRows } = inject(TABLE_TOKEN)!
 
     return () => {
-      const children = mergedRows.value.map((columns, rowIndex) => <HeadRow key={rowIndex} columns={columns} />)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const HeadTag = headTag.value as any
-      return <HeadTag>{children}</HeadTag>
+      return (
+        <thead>
+          {mergedRows.value.map((columns, rowIndex) => (
+            <HeadRow key={rowIndex} columns={columns} />
+          ))}
+        </thead>
+      )
     }
   },
 })

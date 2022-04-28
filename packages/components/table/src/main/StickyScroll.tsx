@@ -26,7 +26,8 @@ import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
   setup() {
-    const { mergedPrefixCls, scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft } = inject(TABLE_TOKEN)!
+    const { mergedPrefixCls, scrollBodyRef, handleScroll, mergedSticky, stickyScrollLeft, setStickyScrollLeft } =
+      inject(TABLE_TOKEN)!
 
     const isShow = ref(false)
     const isActive = ref(false)
@@ -47,7 +48,7 @@ export default defineComponent({
       }
       if (isShow.value) {
         const { clientWidth, scrollWidth, scrollLeft } = scrollBodyElement
-        stickyScrollLeft.value = (scrollLeft / scrollWidth) * clientWidth
+        setStickyScrollLeft((scrollLeft / scrollWidth) * clientWidth)
         bodyClientWidth.value = clientWidth
         bodyScrollWidth.value = scrollWidth
       }

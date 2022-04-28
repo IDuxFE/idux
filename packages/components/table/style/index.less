@@ -92,6 +92,15 @@
         background: @table-body-hover-background;
       }
     }
+
+    &.@{table-prefix}-alert-row,
+    &.@{table-prefix}-empty-row {
+      &:hover {
+        > td {
+          background: @table-background-color;
+        }
+      }
+    }
   }
 
   &-align {

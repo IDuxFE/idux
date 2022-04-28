@@ -53,7 +53,6 @@ export default defineComponent({
       scrollHeight,
       hasFixed,
       tableLayout,
-      tableTag,
     } = inject(TABLE_TOKEN)!
 
     const mainTableRef = ref<HTMLDivElement>()
@@ -130,6 +129,7 @@ export default defineComponent({
         tableLayout: tableLayout.value,
         width: scrollWidth.value,
         minWidth: scrollWidth.value ? '100%' : undefined,
+        height: '100%',
       }
     })
 
@@ -143,8 +143,6 @@ export default defineComponent({
     }
 
     return () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const TableTag = tableTag.value as any
       let children: VNodeTypes
 
       const prefixCls = mergedPrefixCls.value
@@ -163,11 +161,11 @@ export default defineComponent({
 
           const contentRender: VirtualContentRenderFn = children => {
             return (
-              <TableTag style={tableStyle.value}>
+              <table style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body>{children}</Body>
                 {false && <Foot></Foot>}
-              </TableTag>
+              </table>
             )
           }
           const { scroll, onScrolledBottom } = props
@@ -197,11 +195,11 @@ export default defineComponent({
         } else {
           tableBody = (
             <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
-              <TableTag style={tableStyle.value}>
+              <table style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
                 {false && <Foot></Foot>}
-              </TableTag>
+              </table>
             </div>
           )
         }
@@ -212,12 +210,12 @@ export default defineComponent({
       } else {
         children = (
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
-            <TableTag style={tableStyle.value}>
+            <table style={tableStyle.value}>
               <ColGroup></ColGroup>
               {!props.headless && <Head></Head>}
               <Body></Body>
               {false && <Foot></Foot>}
-            </TableTag>
+            </table>
           </div>
         )
       }

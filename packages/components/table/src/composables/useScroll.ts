@@ -16,10 +16,10 @@ import { type StickyContext } from './useSticky'
 export function useScroll(
   props: TableProps,
   autoHeight: ComputedRef<boolean>,
-  { isSticky, stickyScrollLeft }: StickyContext,
+  { isSticky, setStickyScrollLeft }: StickyContext,
 ): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
-    useScrollRef(stickyScrollLeft)
+    useScrollRef(setStickyScrollLeft)
 
   __DEV__ &&
     props.scroll?.x &&
@@ -77,7 +77,7 @@ export interface ScrollOptions {
   scrollLeft?: number
 }
 
-function useScrollRef(stickyScrollLeft: Ref<number>) {
+function useScrollRef(setStickyScrollLeft: (value: number) => void) {
   const scrollHeadRef = ref<HTMLDivElement>()
   const scrollBodyRef = ref<HTMLDivElement>()
   const scrollFootRef = ref<HTMLDivElement>()
@@ -88,7 +88,7 @@ function useScrollRef(stickyScrollLeft: Ref<number>) {
       return
     }
     const { clientWidth, scrollWidth } = scrollBodyElement
-    stickyScrollLeft.value = (scrollLeft / scrollWidth) * clientWidth || 0
+    setStickyScrollLeft((scrollLeft / scrollWidth) * clientWidth || 0)
   }
 
   const pingedStart = ref(false)
