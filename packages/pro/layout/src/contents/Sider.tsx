@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, inject, normalizeClass, watch } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, mergeProps, normalizeClass, watch } from 'vue'
 
 import { isObject } from 'lodash-es'
 
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
-import { IxMenu, type MenuClickOptions, MenuData, MenuProps } from '@idux/components/menu'
+import { IxMenu, type MenuClickOptions, type MenuData, type MenuProps } from '@idux/components/menu'
 
 import { proLayoutToken } from '../token'
 import { getTargetPaths } from '../utils/menu'
@@ -72,26 +72,31 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-sider`
 
-      const menuProps: MenuProps = {
-        overlayClassName: `${prefixCls}-menu-overlay`,
-        collapsed: collapsed.value,
-        dataSource: siderMenus.value,
-        expandedKeys: expandedKeys.value,
-        'onUpdate:expandedKeys': setExpandedKeys,
-        selectedKeys: menuSelectedKeys.value,
-        'onUpdate:selectedKeys': keys => setActiveKey(keys[0]),
-        mode: 'inline',
-        theme: theme.value,
-        onClick: onMenuClick,
-        ...props.siderMenu,
-      }
+      const menuProps = mergeProps(
+        {
+          overlayClassName: `${prefixCls}-menu-overlay`,
+          collapsed: collapsed.value,
+          dataSource: siderMenus.value,
+          expandedKeys: expandedKeys.value,
+          'onUpdate:expandedKeys': setExpandedKeys,
+          selectedKeys: menuSelectedKeys.value,
+          'onUpdate:selectedKeys': keys => setActiveKey(keys[0]),
+          mode: 'inline',
+          theme: theme.value,
+          onClick: onMenuClick,
+        } as MenuProps,
+        props.siderMenu!,
+      )
+
       const contentNode = slots.siderContent ? slots.siderContent(menuProps) : <IxMenu v-slots={slots} {...menuProps} />
 
-      const siderProps: LayoutSiderProps = {
-        collapsed: collapsed.value,
-        'onUpdate:collapsed': setCollapsed,
-        ...props.sider,
-      }
+      const siderProps = mergeProps(
+        {
+          collapsed: collapsed.value,
+          'onUpdate:collapsed': setCollapsed,
+        } as LayoutSiderProps,
+        props.sider!,
+      )
 
       return (
         <IxLayoutSider class={classes.value} {...siderProps} {...(siderHover.value.enable ? siderEvent : undefined)}>

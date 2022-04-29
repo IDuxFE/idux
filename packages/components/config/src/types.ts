@@ -19,7 +19,7 @@ import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
 import type { Locale } from '@idux/components/locales'
-import type { MenuTheme } from '@idux/components/menu'
+import type { MenuData, MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
 import type { ModalType } from '@idux/components/modal'
 import type { NotificationPlacement, NotificationType } from '@idux/components/notification'
@@ -206,8 +206,12 @@ export interface DropdownConfig {
   autoAdjust: boolean
   destroyOnHide: boolean
   offset: [number, number]
+  overlayContainer?: PortalTargetType
   placement: PopperPlacement
   showArrow: boolean
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
   trigger: PopperTrigger
 }
@@ -259,9 +263,14 @@ export interface ImageViewerConfig {
 }
 
 export interface MenuConfig {
+  getKey: string | ((data: MenuData) => VKey)
   indent: number
   offset: [number, number]
+  overlayContainer?: PortalTargetType
   suffix: string
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
   theme: MenuTheme
 }

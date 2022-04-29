@@ -76,9 +76,20 @@ export default defineComponent({
       const slotProps = iconSlot || labelSlot ? { ...props.data, selected: isSelected.value } : undefined
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
       const labelNode = labelSlot ? labelSlot(slotProps!) : label
-
+      const customAdditional = menuProps.customAdditional
+        ? menuProps.customAdditional({ data: props.data, index: props.index })
+        : undefined
       return (
-        <li class={classes.value} style={style.value} {...additional} onClick={disabled ? undefined : onClick}>
+        <li
+          class={classes.value}
+          style={style.value}
+          aria-label={label}
+          aria-selected={isSelected.value}
+          role="menuitem"
+          onClick={disabled ? undefined : onClick}
+          {...additional}
+          {...customAdditional}
+        >
           {iconNode}
           <span>{labelNode}</span>
         </li>

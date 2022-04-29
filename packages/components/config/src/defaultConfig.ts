@@ -145,6 +145,7 @@ export const defaultConfig: GlobalConfig = {
     zoom: [0.5, 2],
   },
   menu: {
+    getKey: 'key',
     indent: 24,
     offset: [0, 8],
     suffix: 'right',

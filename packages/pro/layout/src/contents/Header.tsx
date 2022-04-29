@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass } from 'vue'
+import { computed, defineComponent, inject, mergeProps, normalizeClass } from 'vue'
 
 import { isObject } from 'lodash-es'
 
@@ -60,14 +60,17 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-header`
 
-      const menuProps: MenuProps = {
-        overlayClassName: `${prefixCls}-menu-overlay`,
-        dataSource: headerMenus.value,
-        selectedKeys: menuSelectedKeys.value,
-        mode: 'horizontal',
-        theme: theme.value,
-        onClick: onMenuClick,
-      }
+      const menuProps = mergeProps(
+        {
+          overlayClassName: `${prefixCls}-menu-overlay`,
+          dataSource: headerMenus.value,
+          selectedKeys: menuSelectedKeys.value,
+          mode: 'horizontal',
+          theme: theme.value,
+          onClick: onMenuClick,
+        } as MenuProps,
+        props.headerMenu!,
+      )
 
       const contentNode = slots.headerContent ? (
         slots.headerContent(menuProps)

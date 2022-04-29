@@ -10,6 +10,7 @@ import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
+import { useGetKey } from '@idux/components/utils'
 
 import { useDataSource } from './composables/useDataSource'
 import { useExpanded } from './composables/useExpanded'
@@ -25,7 +26,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-menu`)
     const config = useGlobalConfig('menu')
-
+    const mergedGetKey = useGetKey(props, config, 'components/menu')
     const indent = computed(() => props.indent ?? config.indent)
     const mode = computed(() => props.mode)
 
@@ -44,6 +45,7 @@ export default defineComponent({
       slots,
       config,
       mergedPrefixCls,
+      mergedGetKey,
       indent,
       theme,
       expandedKeys,
@@ -66,7 +68,7 @@ export default defineComponent({
     const dateSource = useDataSource(props, slots)
 
     return () => {
-      return <ul class={classes.value}>{coverChildren(dateSource.value)}</ul>
+      return <ul class={classes.value}>{coverChildren(dateSource.value, mergedGetKey.value)}</ul>
     }
   },
 })

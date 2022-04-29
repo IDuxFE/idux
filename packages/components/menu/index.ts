@@ -32,5 +32,6 @@ export type {
   MenuMode,
   MenuTheme,
   MenuClickOptions,
+  MenuCustomAdditional,
   MenuData,
 } from './src/types'
