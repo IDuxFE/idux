@@ -14,9 +14,9 @@ const value2 = ref('beijing')
 const value3 = ref('beijing')
 
 const dataSource = [
-  { label: 'Beijing', value: 'beijing' },
-  { label: 'Shanghai', value: 'shanghai' },
-  { label: 'Guangzhou', value: 'guangzhou' },
-  { label: 'Shenzhen', value: 'shenzhen' },
+  { key: 'beijing', label: 'Beijing' },
+  { key: 'shanghai', label: 'Shanghai' },
+  { key: 'guangzhou', label: 'Guangzhou' },
+  { key: 'shenzhen', label: 'Shenzhen' },
 ]
 </script>

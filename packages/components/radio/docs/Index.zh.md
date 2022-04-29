@@ -21,7 +21,7 @@ subtitle: 单选框
 | `label` | 单选框的文本 | `string \| #default` | `false` | - | - |
 | `mode` | 按钮类型 | `'default' \| 'primary'`| `'default'` | - | 仅 `buttoned` 为 `true` 时生效  |
 | `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'`| `'md'` | ✅ | 仅 `buttoned` 为 `true` 时生效 |
-| `value` | 设置单选框的值，与 `IxRadioGroup` 配合使用 | `any`| - | - | - |
+| `value` | 设置单选框的值，与 `IxRadioGroup` 配合使用 | `any`| - | - | 不传时使用 `key` 作为 `value` |
 | `onChange` | 选中状态发生变化后的回调 | `(checked: boolean, oldChecked: boolean) => void`| - | - | - |
 | `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
@@ -49,6 +49,14 @@ subtitle: 单选框
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
 | `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(value: any, oldValue: any) => void`| - | - | - |
+
+```ts
+// key 与 value 二者必传其一。
+export interface RadioData extends RadioProps {
+  // 不传时使用 value 作为 key
+  key?: VKey
+}
+```
 
 <!--- insert less variable begin  --->
 ## 主题变量

@@ -56,6 +56,9 @@ export const checkboxGroupProps = {
   disabled: IxPropTypes.bool.def(false),
   gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
+  /**
+   * @deprecated please use `dataSource` instead'
+   */
   options: IxPropTypes.array<CheckboxData>(),
   size: IxPropTypes.oneOf(['sm', 'md', 'lg']).def('md'),
 
@@ -65,7 +68,7 @@ export const checkboxGroupProps = {
 }
 
 export type CheckboxGroupProps = ExtractInnerPropTypes<typeof checkboxGroupProps>
-export type CheckboxGroupPublicProps = ExtractPublicPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupPublicProps = Omit<ExtractPublicPropTypes<typeof checkboxGroupProps>, 'options'>
 export type CheckboxGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
 >

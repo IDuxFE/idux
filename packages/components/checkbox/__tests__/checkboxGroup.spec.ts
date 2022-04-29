@@ -7,9 +7,9 @@ import { CheckboxGroupProps } from '../src/types'
 
 describe('CheckboxGroup', () => {
   const defaultOptions = [
-    { label: 'option1', value: 'option1' },
-    { label: 'option2', value: 'option2' },
-    { label: 'option3', value: 'option3' },
+    { label: 'option1', key: 'option1' },
+    { label: 'option2', key: 'option2' },
+    { label: 'option3', key: 'option3' },
   ]
 
   const CheckboxGroupMount = (groupOptions?: MountingOptions<Partial<CheckboxGroupProps>>) => {
@@ -64,8 +64,8 @@ describe('CheckboxGroup', () => {
 
   test('dataSource work', async () => {
     let dataSource = [
-      { label: 'option1', value: 'option1' },
-      { label: 'option2', value: 'option2', disabled: true },
+      { label: 'option1', key: 'option1' },
+      { label: 'option2', key: 'option2', disabled: true },
     ]
     const wrapper = CheckboxGroupMount({ props: { dataSource } })
 
@@ -74,9 +74,9 @@ describe('CheckboxGroup', () => {
     expect(wrapper.findAll('.ix-checkbox-disabled').length).toBe(1)
 
     dataSource = [
-      { label: 'option1', value: 'option1' },
-      { label: 'option2', value: 'option2' },
-      { label: 'option3', value: 'option3' },
+      { label: 'option1', key: 'option1' },
+      { label: 'option2', key: 'option2' },
+      { label: 'option3', key: 'option3' },
     ]
 
     await wrapper.setProps({ dataSource })
@@ -86,9 +86,9 @@ describe('CheckboxGroup', () => {
 
   test('name work', async () => {
     const dataSource = [
-      { label: 'option1', value: 'option1', name: 'child' },
-      { label: 'option2', value: 'option2' },
-      { label: 'option3', value: 'option3' },
+      { label: 'option1', key: 'option1', name: 'child' },
+      { label: 'option2', key: 'option2' },
+      { label: 'option3', key: 'option3' },
     ]
     const wrapper = CheckboxGroupMount({
       props: {

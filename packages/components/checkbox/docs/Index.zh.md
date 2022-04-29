@@ -25,7 +25,7 @@ cover:
 | `label` | 勾选框的文本 | `string \| #default` | - | - | - |
 | `trueValue` | 选中时返回的值 |  `boolean \| string \| number`  | `true`| - | - |
 | `falseValue` | 不选中时返回的值 | `boolean \| string \| number` | `false`| - | - |
-| `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | - |
+| `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | 不传时使用 `key` 作为 `value` |
 | `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'` | - | `'md'` | 仅`buttoned`为`true`时生效 |
 | `onChange` | 选中状态发生变化后的回调 | `(newChecked: boolean \| string \| number, oldChecked: boolean \| string \| number) => void`| - | - | - |
 
@@ -51,6 +51,14 @@ cover:
 | `name` | 设置组内 `IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
 | `size` | 设置组内 `IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
 | `onChange` | 选中值发生变化后的回调 | `(newValue: any[], oldValue: any[]) => void`| - | - | - |
+
+```ts
+// key 与 value 二者必传其一。
+export interface CheckboxData extends CheckboxProps {
+  // 不传时使用 value 作为 key
+  key?: VKey
+}
+```
 
 <!--- insert less variable begin  --->
 ## 主题变量

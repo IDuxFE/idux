@@ -9,10 +9,10 @@ import { RadioGroupProps } from '../src/types'
 
 describe('RadioGroup', () => {
   const defaultDataSource = [
-    { label: 'Beijing', value: 'a' },
-    { label: 'Shanghai', value: 'b' },
-    { label: 'Guangzhou', value: 'c' },
-    { label: 'Shenzhen', value: 'd' },
+    { label: 'Beijing', key: 'a' },
+    { label: 'Shanghai', key: 'b' },
+    { label: 'Guangzhou', key: 'c' },
+    { label: 'Shenzhen', key: 'd' },
   ]
   const RadioGroupMount = (groupOptions?: MountingOptions<Partial<RadioGroupProps>>) => {
     const { props, ...rest } = groupOptions || {}
@@ -98,8 +98,8 @@ describe('RadioGroup', () => {
 
   test('dataSource work', async () => {
     let dataSource = [
-      { label: 'Beijing', value: 'a', disabled: true },
-      { label: 'Shanghai', value: 'b' },
+      { label: 'Beijing', key: 'a', disabled: true },
+      { label: 'Shanghai', key: 'b' },
     ]
     const wrapper = RadioGroupMount({ props: { dataSource } })
 
@@ -108,9 +108,9 @@ describe('RadioGroup', () => {
     expect(wrapper.findAll('.ix-radio').length).toBe(2)
 
     dataSource = [
-      { label: 'Beijing', value: 'a' },
-      { label: 'Shanghai', value: 'b' },
-      { label: 'Guangzhou', value: 'c' },
+      { label: 'Beijing', key: 'a' },
+      { label: 'Shanghai', key: 'b' },
+      { label: 'Guangzhou', key: 'c' },
     ]
 
     await wrapper.setProps({ dataSource })

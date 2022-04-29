@@ -5,25 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { RadioGroupContext } from './token'
-import type { RadioProps } from './types'
-import type { ComputedRef, Ref, StyleValue } from 'vue'
+import { type ComputedRef, type Ref, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
-import { computed, defineComponent, inject, normalizeClass, ref } from 'vue'
+import { isNil } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement, useKey } from '@idux/components/utils'
 
-import { radioGroupToken } from './token'
-import { radioProps } from './types'
+import { type RadioGroupContext, radioGroupToken } from './token'
+import { type RadioProps, radioProps } from './types'
 
 export default defineComponent({
   name: 'IxRadio',
   inheritAttrs: false,
   props: radioProps,
   setup(props, { attrs, expose, slots }) {
+    const key = useKey()
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-radio`)
     const config = useGlobalConfig('radio')
@@ -34,6 +33,14 @@ export default defineComponent({
     const formContext = inject(FORM_TOKEN, null)
     const radioGroup = inject(radioGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? radioGroup?.props.name)
+    const mergedValue = computed(() => {
+      const { value } = props
+      if (!isNil(value)) {
+        return value
+      }
+      // 当在 group 中使用时，不传 value 就使用 key 作为 value
+      return radioGroup ? key : undefined
+    })
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
     const size = computed(() => props.size ?? radioGroup?.props.size ?? formContext?.size.value ?? config.size)
     const mode = computed(() => props.mode ?? radioGroup?.props.mode ?? 'default')
@@ -41,6 +48,7 @@ export default defineComponent({
       props,
       radioGroup,
       elementRef,
+      mergedValue,
     )
     const classes = computed(() => {
       const buttoned = isButtoned.value
@@ -59,14 +67,14 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const { autofocus, value, label } = props
+      const { autofocus, label } = props
       const labelNode = slots.default?.() ?? label
       const labelWrapper = labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
       return (
         <label
           class={classes.value}
-          style={style as StyleValue}
+          style={style as string}
           role="radio"
           aria-checked={isChecked.value}
           aria-disabled={isDisabled.value}
@@ -77,15 +85,15 @@ export default defineComponent({
               type="radio"
               class={`${prefixCls}-input-inner`}
               aria-hidden
-              {...restAttrs}
               autofocus={autofocus}
               checked={isChecked.value}
               disabled={isDisabled.value}
               name={mergedName.value}
-              value={value}
+              value={mergedValue.value}
               onChange={handleChange}
               onBlur={handleBlur}
               onFocus={handleFocus}
+              {...restAttrs}
             />
             {isButtoned.value ? null : <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}></span>}
           </span>
@@ -100,6 +108,7 @@ const useRadio = (
   props: RadioProps,
   radioGroup: RadioGroupContext | null,
   elementRef: Ref<HTMLInputElement | undefined>,
+  mergedValue: ComputedRef<unknown>,
 ) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
@@ -114,7 +123,7 @@ const useRadio = (
 
   if (radioGroup) {
     const { accessor, props: groupProps } = radioGroup
-    isChecked = computed(() => accessor.valueRef.value === props.value)
+    isChecked = computed(() => accessor.valueRef.value === mergedValue.value)
     isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
@@ -124,7 +133,7 @@ const useRadio = (
     handleChange = (evt: Event) => {
       if (elementRef.value) {
         const checked = (evt.target as HTMLInputElement).checked
-        const value = props.value
+        const value = mergedValue.value
         const oldValue = accessor.valueRef.value
         accessor.setValue(value)
         // 为了保持受控模式下保持原生input状态和数据一致

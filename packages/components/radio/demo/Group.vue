@@ -10,10 +10,10 @@ import { RadioData } from '@idux/components/radio'
 const value = ref('beijing')
 
 const dataSource: RadioData[] = [
-  { label: 'Beijing', value: 'beijing' },
-  { label: 'Shanghai', value: 'shanghai' },
-  { label: 'Guangzhou', value: 'guangzhou' },
-  { label: 'Shenzhen', value: 'shenzhen' },
+  { key: 'beijing', label: 'Beijing' },
+  { key: 'shanghai', label: 'Shanghai' },
+  { key: 'guangzhou', label: 'Guangzhou' },
+  { key: 'shenzhen', label: 'Shenzhen' },
 ]
 
 const onChange = console.log
