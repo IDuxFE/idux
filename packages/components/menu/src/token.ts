@@ -8,6 +8,7 @@
 import type { MenuMode, MenuProps, MenuSubProps, MenuTheme } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { MenuConfig } from '@idux/components/config'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface MenuContext {
@@ -15,6 +16,7 @@ export interface MenuContext {
   slots: Slots
   config: MenuConfig
   mergedPrefixCls: ComputedRef<string>
+  mergedGetKey: ComputedRef<GetKeyFn>
   indent: ComputedRef<number>
   theme: ComputedRef<MenuTheme>
   expandedKeys: ComputedRef<VKey[]>
@@ -27,7 +29,7 @@ export interface MenuContext {
 export const menuToken: InjectionKey<MenuContext> = Symbol('menuToken')
 
 export interface MenuSubContext {
-  props: { data: MenuSubProps }
+  props: { data: MenuSubProps; index: number }
   key: VKey
   isExpanded: ComputedRef<boolean>
   isSelected: ComputedRef<boolean>

@@ -34,6 +34,7 @@ order: 0
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
+| `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean` | `true` | ✅ | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
@@ -42,7 +43,6 @@ order: 0
 | `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
-| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - ||
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |

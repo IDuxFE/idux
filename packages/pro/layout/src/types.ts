@@ -27,6 +27,10 @@ export const proLayoutProps = {
     type: [Boolean, Object] as PropType<boolean | { header: boolean; sider: boolean }>,
     default: false,
   },
+  headerMenu: {
+    type: Object as PropType<MenuProps>,
+    default: undefined,
+  },
   menus: {
     type: Array as PropType<MenuData[]>,
     default: (): MenuData[] => [],
@@ -41,7 +45,7 @@ export const proLayoutProps = {
   },
   siderMenu: {
     type: Object as PropType<MenuProps>,
-    default: (): MenuData[] => [],
+    default: undefined,
   },
   theme: {
     type: [String, Object] as PropType<MenuTheme | { header: MenuTheme; sider: MenuTheme }>,

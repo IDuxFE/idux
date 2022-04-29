@@ -2,15 +2,15 @@
 
 exports[`Menu > render work 1`] = `
 "<ul class=\\"ix-menu ix-menu-light ix-menu-vertical\\">
-  <li class=\\"ix-menu-item\\"><i class=\\"ix-icon ix-icon-home\\" role=\\"img\\" aria-label=\\"home\\"></i><span><a>Item 1</a></span></li>
-  <li class=\\"ix-menu-item\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i><span>Item 2</span></li>
-  <li class=\\"ix-menu-item ix-menu-item-disabled\\"><i class=\\"ix-icon ix-icon-appstore\\" role=\\"img\\" aria-label=\\"appstore\\"></i><span>Item 3</span></li>
+  <li class=\\"ix-menu-item\\" aria-selected=\\"false\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-home\\" role=\\"img\\" aria-label=\\"home\\"></i><span><a>Item 1</a></span></li>
+  <li class=\\"ix-menu-item\\" aria-label=\\"Item 2\\" aria-selected=\\"false\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i><span>Item 2</span></li>
+  <li class=\\"ix-menu-item ix-menu-item-disabled\\" aria-label=\\"Item 3\\" aria-selected=\\"false\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-appstore\\" role=\\"img\\" aria-label=\\"appstore\\"></i><span>Item 3</span></li>
   <li class=\\"ix-menu-divider\\"></li>
-  <li class=\\"ix-menu-sub ix-menu-sub-vertical\\">
+  <li class=\\"ix-menu-sub ix-menu-sub-vertical\\" aria-expanded=\\"false\\" aria-haspopup=\\"true\\" role=\\"menuitem\\">
     <div class=\\"ix-menu-sub-label\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Sub Menu 1</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
     <!---->
   </li>
-  <li class=\\"ix-menu-sub ix-menu-sub-disabled ix-menu-sub-vertical\\">
+  <li class=\\"ix-menu-sub ix-menu-sub-disabled ix-menu-sub-vertical\\" aria-expanded=\\"false\\" aria-haspopup=\\"true\\" role=\\"menuitem\\">
     <div class=\\"ix-menu-sub-label\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i><span>Menu Sub 4</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
     <!---->
   </li>

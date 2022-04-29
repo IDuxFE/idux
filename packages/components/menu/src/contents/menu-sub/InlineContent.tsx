@@ -15,7 +15,7 @@ import { coverChildren } from '../Utils'
 export default defineComponent({
   name: 'MenuSubInlineContent',
   setup() {
-    const { mergedPrefixCls } = inject(menuToken)!
+    const { mergedPrefixCls, mergedGetKey } = inject(menuToken)!
     const { props, isExpanded } = inject(menuSubToken)!
 
     const classes = computed(() => {
@@ -29,7 +29,7 @@ export default defineComponent({
       return (
         <ɵCollapseTransition appear>
           <ul v-show={isExpanded.value} class={classes.value}>
-            {coverChildren(props.data.children)}
+            {coverChildren(props.data.children, mergedGetKey.value)}
           </ul>
         </ɵCollapseTransition>
       )

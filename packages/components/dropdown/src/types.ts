@@ -20,8 +20,12 @@ export const dropdownProps = {
   disabled: IxPropTypes.bool.def(false),
   hideOnClick: IxPropTypes.bool.def(true),
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  overlayContainer: ɵPortalTargetDef,
   placement: ɵOverlayPlacementDef,
   showArrow: IxPropTypes.bool,
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target: ɵPortalTargetDef,
   trigger: ɵOverlayTriggerDef,
 
@@ -30,6 +34,6 @@ export const dropdownProps = {
 }
 
 export type DropdownProps = ExtractInnerPropTypes<typeof dropdownProps>
-export type DropdownPublicProps = ExtractPublicPropTypes<typeof dropdownProps>
+export type DropdownPublicProps = Omit<ExtractPublicPropTypes<typeof dropdownProps>, 'target'>
 export type DropdownComponent = DefineComponent<Omit<HTMLAttributes, keyof DropdownPublicProps> & DropdownPublicProps>
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>

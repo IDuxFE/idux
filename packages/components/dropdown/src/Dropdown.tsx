@@ -58,7 +58,12 @@ function useConfigProps(
       offset: props.offset ?? config.offset,
       placement: props.placement ?? config.placement,
       showArrow: props.showArrow ?? config.showArrow,
-      target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,
+      target:
+        props.target ??
+        props.overlayContainer ??
+        config.target ??
+        config.overlayContainer ??
+        `${mergedPrefixCls.value}-overlay-container`,
       trigger: trigger,
       ['onUpdate:visible']: setVisibility,
     }

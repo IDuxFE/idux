@@ -11,6 +11,7 @@ import { isString } from 'lodash-es'
 
 import { Logger } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
+import { type GetKeyFn } from '@idux/components/utils'
 
 import { type MenuData } from '../types'
 import MenuDivider from './MenuDivider'
@@ -18,22 +19,23 @@ import MenuItem from './MenuItem'
 import MenuItemGroup from './MenuItemGroup'
 import MenuSub from './menu-sub/MenuSub'
 
-export function coverChildren(data?: MenuData[]): VNode[] {
+export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn): VNode[] {
   if (!data || data.length === 0) {
     return []
   }
 
   const nodes: VNode[] = []
-  data.forEach(item => {
+  data.forEach((item, index) => {
     const { type } = item
+    const key = getKetFn(item)
     if (!type || type === 'item') {
-      nodes.push(<MenuItem key={item.key} data={item}></MenuItem>)
+      nodes.push(<MenuItem key={key} index={index} data={item}></MenuItem>)
     } else if (type === 'sub') {
-      nodes.push(<MenuSub key={item.key} data={item}></MenuSub>)
+      nodes.push(<MenuSub key={key} index={index} data={item}></MenuSub>)
     } else if (type === 'itemGroup') {
-      nodes.push(<MenuItemGroup key={item.key} data={item}></MenuItemGroup>)
+      nodes.push(<MenuItemGroup key={key} index={index} data={item}></MenuItemGroup>)
     } else if (type === 'divider') {
-      nodes.push(<MenuDivider key={item.key} {...item.additional}></MenuDivider>)
+      nodes.push(<MenuDivider key={key} index={index} data={item}></MenuDivider>)
     } else {
       __DEV__ && Logger.warn('components/menu', `type [${type}] not supported`)
     }

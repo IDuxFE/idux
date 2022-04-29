@@ -17,13 +17,15 @@ order: 0
 | `v-model:expandedKeys` | 当前展开的 `IxMenuSub` 的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:selectedKeys` | 当前选中的 `IxMenuItem` 的 `key` 数组 | `VKey[]` | - | - | - |
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
+| `customAdditional` | 自定义下拉选项的额外属性 | `MenuCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 菜单数据数组 | `MenuData[]` | - | - | 优先级高于 `default` 插槽 |
+| `getKey` | 获取数据的唯一标识 | `string \| (data: CascaderData) => VKey` | `key` | ✅ | - |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24` | ✅ | 仅支持 `inline` 模式 |
-| `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | `inline` 模式时无效 |
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
+| `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | `inline` 模式时无效 |
+| `overlayContainer` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
 | `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
-| `target` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
 | `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |
 | `onClick` | 点击菜单后的回调 | `(options: MenuClickOptions) => void` | - | - |
 
@@ -35,24 +37,15 @@ export interface MenuClickOptions {
   key: VKey
   type: 'item' | 'itemGroup' | 'sub'
 }
+
+export type MenuCustomAdditional = (options: { data: MenuData; index: number }) => Record<string, any> | undefined
 ```
-
-#### MenuCommonProps
-
-`MenuData` 的通用属性
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `type` | 菜单类型 | `'item' \| 'itemGroup' \| 'sub' \| 'divider'` | - | - | - |
-| `key` | 唯一标识 | `VKey` | - | - | 必传 |
-| `additional` | 菜单的额外配置 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
 
 #### MenuItemProps
 
-菜单项的配置，继承自 `MenuCommonProps`
-
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 必传, 可以通过 `getKey` 指定其他字段 |
 | `type` | 菜单类型 | `'item'` | `'item'` | - | - |
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
 | `icon` | 菜单图标| `string  \| VNode` | - | - |
@@ -62,10 +55,9 @@ export interface MenuClickOptions {
 
 #### MenuItemGroupProps
 
-菜单组的配置，继承自 `MenuCommonProps`
-
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 必传, 可以通过 `getKey` 指定其他字段 |
 | `type` | 菜单类型 | `'itemGroup'` | - | - | 必传 |
 | `children` | 子菜单数据 | `MenuData[]` | - | - | - |
 | `icon` | 菜单图标| `string \| VNode` | - | - |
@@ -75,10 +67,9 @@ export interface MenuClickOptions {
 
 #### MenuSubProps
 
-子菜单的配置，继承自 `MenuCommonProps`
-
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 必传, 可以通过 `getKey` 指定其他字段 |
 | `type` | 菜单类型 | `'sub'` | - | - | 必传 |
 | `children` | 子菜单数据 | `MenuData[]` | - | - | - |
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
@@ -94,9 +85,8 @@ export interface MenuClickOptions {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 唯一标识 | `VKey` | - | - | 必传, 可以通过 `getKey` 指定其他字段 |
 | `type` | 菜单类型 | `'divider'` | - | - | 必传 |
-| `key` | 唯一标识 | `VKey` | - | - | 必传 |
-| `additional` | 菜单的额外配置 | `object` | - | - | 可以传入 `class`, `style` 等原生 DOM 属性 |
 
 ### IxMenuItem
 

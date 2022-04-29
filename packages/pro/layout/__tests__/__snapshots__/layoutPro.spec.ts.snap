@@ -13,34 +13,34 @@ exports[`ProLayout > render work 1`] = `
     <!---->
     <div class=\\"ix-pro-layout-sider-content\\">
       <ul class=\\"ix-menu ix-menu-light ix-menu-inline\\">
-        <li class=\\"ix-menu-sub ix-menu-sub-expanded ix-menu-sub-selected ix-menu-sub-inline\\">
+        <li class=\\"ix-menu-sub ix-menu-sub-expanded ix-menu-sub-selected ix-menu-sub-inline\\" aria-expanded=\\"true\\" aria-haspopup=\\"false\\" role=\\"menuitem\\">
           <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 24px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Sub Menu 1</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(-90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
           <transition-stub>
             <ul class=\\"ix-menu-inline\\">
-              <li class=\\"ix-menu-item ix-menu-item-disabled\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 4</span></li>
-              <li class=\\"ix-menu-item ix-menu-item-selected\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 5</span></li>
+              <li class=\\"ix-menu-item ix-menu-item-disabled\\" style=\\"padding-left: 48px;\\" aria-label=\\"Item 4\\" aria-selected=\\"false\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 4</span></li>
+              <li class=\\"ix-menu-item ix-menu-item-selected\\" style=\\"padding-left: 48px;\\" aria-label=\\"Item 5\\" aria-selected=\\"true\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Item 5</span></li>
               <li class=\\"ix-menu-divider\\"></li>
-              <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+              <li class=\\"ix-menu-sub ix-menu-sub-inline\\" aria-expanded=\\"false\\" aria-haspopup=\\"false\\" role=\\"menuitem\\">
                 <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Menu Sub 2</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
                 <transition-stub>
                   <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
-                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\" aria-label=\\"Item 6\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                       <!----><span>Item 6</span>
                     </li>
-                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\" aria-label=\\"Item 7\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                       <!----><span>Item 7</span>
                     </li>
                   </ul>
                 </transition-stub>
               </li>
-              <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+              <li class=\\"ix-menu-sub ix-menu-sub-inline\\" aria-expanded=\\"false\\" aria-haspopup=\\"false\\" role=\\"menuitem\\">
                 <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 48px;\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Menu Sub 3</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
                 <transition-stub>
                   <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
-                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\" aria-label=\\"Item 8\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                       <!----><span>Item 8</span>
                     </li>
-                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\">
+                    <li class=\\"ix-menu-item\\" style=\\"padding-left: 72px;\\" aria-label=\\"Item 9\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                       <!----><span>Item 9</span>
                     </li>
                   </ul>
@@ -49,20 +49,20 @@ exports[`ProLayout > render work 1`] = `
             </ul>
           </transition-stub>
         </li>
-        <li class=\\"ix-menu-sub ix-menu-sub-inline\\">
+        <li class=\\"ix-menu-sub ix-menu-sub-inline\\" aria-expanded=\\"false\\" aria-haspopup=\\"false\\" role=\\"menuitem\\">
           <div class=\\"ix-menu-sub-label\\" style=\\"padding-left: 24px;\\"><i class=\\"ix-icon ix-icon-github\\" role=\\"img\\" aria-label=\\"github\\"></i><span>Menu Sub 4</span><span class=\\"ix-menu-sub-label-suffix\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span></div>
           <transition-stub>
             <ul class=\\"ix-menu-inline\\" style=\\"display: none;\\">
-              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\">
+              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\" aria-label=\\"Item 10\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                 <!----><span>Item 10</span>
               </li>
-              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\">
+              <li class=\\"ix-menu-item\\" style=\\"padding-left: 48px;\\" aria-label=\\"Item 11\\" aria-selected=\\"false\\" role=\\"menuitem\\">
                 <!----><span>Item 11</span>
               </li>
             </ul>
           </transition-stub>
         </li>
-        <li class=\\"ix-menu-item\\" style=\\"padding-left: 24px;\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i><span>Item 12</span></li>
+        <li class=\\"ix-menu-item\\" style=\\"padding-left: 24px;\\" aria-label=\\"Item 12\\" aria-selected=\\"false\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-mail\\" role=\\"img\\" aria-label=\\"mail\\"></i><span>Item 12</span></li>
       </ul>
     </div>
     <!---->

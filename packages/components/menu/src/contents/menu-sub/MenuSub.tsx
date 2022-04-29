@@ -55,7 +55,14 @@ export default defineComponent({
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
     const key = useKey()
-    const target = computed(() => menuProps.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
+    const target = computed(
+      () =>
+        menuProps.target ??
+        menuProps.overlayContainer ??
+        config.target ??
+        config.overlayContainer ??
+        `${mergedPrefixCls.value}-overlay-container`,
+    )
     const mode = useMode(menuProps, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
@@ -106,8 +113,9 @@ export default defineComponent({
 
     return () => {
       const { additional, disabled } = props.data
+      const isInline = mode.value === 'inline'
       let children: VNodeTypes
-      if (mode.value === 'inline') {
+      if (isInline) {
         children = [<Label></Label>, <InlineContent></InlineContent>]
       } else {
         const trigger = () => <Label></Label>
@@ -129,8 +137,18 @@ export default defineComponent({
           />
         )
       }
+      const customAdditional = menuProps.customAdditional
+        ? menuProps.customAdditional({ data: props.data, index: props.index })
+        : undefined
       return (
-        <li class={classes.value} {...additional}>
+        <li
+          class={classes.value}
+          aria-expanded={isExpanded.value}
+          aria-haspopup={!isInline}
+          role="menuitem"
+          {...additional}
+          {...customAdditional}
+        >
           {children}
         </li>
       )

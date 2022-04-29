@@ -26,7 +26,14 @@ export default defineComponent({
     provide(menuItemGroupToken, true)
 
     // menuContext must exist
-    const { props: menuProps, slots: menuSlots, mergedPrefixCls, indent, handleClick } = inject(menuToken)!
+    const {
+      props: menuProps,
+      slots: menuSlots,
+      mergedPrefixCls,
+      mergedGetKey,
+      indent,
+      handleClick,
+    } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, null)
 
@@ -57,13 +64,16 @@ export default defineComponent({
       const labelNode = labelSlot ? labelSlot(slotProps) : label
 
       const prefixCls = `${mergedPrefixCls.value}-item-group`
+      const customAdditional = menuProps.customAdditional
+        ? menuProps.customAdditional({ data: props.data, index: props.index })
+        : undefined
       return (
-        <li class={prefixCls} {...additional}>
+        <li class={prefixCls} aria-label={label} {...additional} {...customAdditional}>
           <div class={`${prefixCls}-label`} style={labelStyle.value} onClick={onClick}>
             {iconNode}
             <span>{labelNode}</span>
           </div>
-          <ul class={`${prefixCls}-content`}>{coverChildren(children)}</ul>
+          <ul class={`${prefixCls}-content`}>{coverChildren(children, mergedGetKey.value)}</ul>
         </li>
       )
     }
