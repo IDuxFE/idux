@@ -11,8 +11,7 @@ import { isFunction } from 'lodash-es'
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
 
-import { type CascaderData, type CascaderProps, CascaderSearchFn } from '../types'
-import { getChildrenKeys } from '../utils'
+import { type CascaderData, type CascaderProps, type CascaderSearchFn } from '../types'
 import { type MergedData } from './useDataSource'
 
 export interface SearchableContext {
@@ -45,10 +44,7 @@ export function useSearchable(
         if (_parentEnabled || data.isLeaf) {
           keySet.add(key)
         }
-        const childrenKeys = getChildrenKeys(data, true)
-        if (childrenKeys.length) {
-          childrenKeys.forEach(key => keySet.add(key))
-        }
+        processChildren(keySet, data, _parentEnabled)
       }
     })
     return [...keySet]
@@ -77,4 +73,22 @@ function getDefaultSearchFn(labelKey: string): CascaderSearchFn {
     const label = data[labelKey] as string | undefined
     return label ? label.toLowerCase().includes(searchValue.toLowerCase()) : false
   }
+}
+
+function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boolean) {
+  if (!data || !data.children) {
+    return
+  }
+
+  data.children.forEach(child => {
+    if (child.rawData.disabled || keySet.has(child.key)) {
+      return
+    }
+
+    if (parentEnabled || child.isLeaf) {
+      keySet.add(child.key)
+    }
+
+    processChildren(keySet, child, parentEnabled)
+  })
 }

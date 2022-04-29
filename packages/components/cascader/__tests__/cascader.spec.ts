@@ -125,7 +125,7 @@ const defaultMultipleValue = [
 ]
 const defaultExpandedKeys = ['components', 'general']
 
-describe.only('Cascader', () => {
+describe('Cascader', () => {
   describe('single work', () => {
     const CascaderMount = (options?: MountingOptions<Partial<CascaderProps>>) => {
       const { props, ...rest } = options || {}

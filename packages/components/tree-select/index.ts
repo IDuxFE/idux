@@ -13,4 +13,9 @@ const IxTreeSelect = TreeSelect as unknown as TreeSelectComponent
 
 export { IxTreeSelect }
 
-export type { TreeSelectInstance, TreeSelectPublicProps as TreeSelectProps, TreeSelectNode } from './src/types'
+export type {
+  TreeSelectInstance,
+  TreeSelectPublicProps as TreeSelectProps,
+  TreeSelectNode,
+  TreeSelectCustomAdditional,
+} from './src/types'

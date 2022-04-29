@@ -11,7 +11,13 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { TreeCheckStrategy, TreeDragDropOptions, TreeDroppable, TreeNode } from '@idux/components/tree'
+import type {
+  TreeCheckStrategy,
+  TreeCustomAdditional,
+  TreeDragDropOptions,
+  TreeDroppable,
+  TreeNode,
+} from '@idux/components/tree'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
@@ -33,32 +39,44 @@ export const treeSelectProps = {
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
   checkStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
+  customAdditional: { type: Object as PropType<TreeSelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
   draggable: { type: Boolean, default: false },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   expandIcon: { type: String, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode) => VKey)>, default: undefined },
   labelKey: { type: String, default: undefined },
   leafLineIcon: { type: String, default: undefined },
   loadChildren: { type: Function as PropType<(node: TreeSelectNode) => Promise<TreeSelectNode[]>>, default: undefined },
   /**
-   * @deprecated
+   * @deprecated please use `maxLabel` instead'
    */
   maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
+  /**
+   * @deprecated please use `getKey` instead'
+   */
   nodeKey: { type: [String, Function] as PropType<string | ((node: TreeSelectNode) => VKey)>, default: undefined },
   overlayClassName: { type: String, default: undefined },
+  overlayContainer: ɵPortalTargetDef,
   overlayMatchWidth: { type: Boolean, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
-  searchFn: { type: Function as PropType<(node: TreeSelectNode, searchValue?: string) => boolean>, default: undefined },
+  searchFn: {
+    type: [Boolean, Function] as PropType<boolean | ((node: TreeSelectNode, searchValue?: string) => boolean)>,
+    default: true,
+  },
   size: { type: String as PropType<FormSize>, default: undefined },
   showLine: { type: Boolean, default: undefined },
   suffix: { type: String, default: undefined },
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target: ɵPortalTargetDef,
   treeDisabled: {
     type: Function as PropType<(node: TreeSelectNode) => boolean | TreeSelectNodeDisabled>,
@@ -102,7 +120,7 @@ export const treeSelectProps = {
 export type TreeSelectProps = ExtractInnerPropTypes<typeof treeSelectProps>
 export type TreeSelectPublicProps = Omit<
   ExtractPublicPropTypes<typeof treeSelectProps>,
-  'maxLabelCount' | 'overlayHeight'
+  'maxLabelCount' | 'overlayHeight' | 'target' | 'nodeKey'
 >
 export interface TreeSelectBindings {
   focus: (options?: FocusOptions) => void
@@ -115,6 +133,8 @@ export type TreeSelectComponent = DefineComponent<
   TreeSelectBindings
 >
 export type TreeSelectInstance = InstanceType<DefineComponent<TreeSelectProps, TreeSelectBindings>>
+
+export type TreeSelectCustomAdditional = TreeCustomAdditional
 
 export type TreeSelectNode = TreeNode
 

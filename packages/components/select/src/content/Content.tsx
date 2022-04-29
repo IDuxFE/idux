@@ -98,7 +98,7 @@ export default defineComponent({
         children.push(<ɵEmpty v-slots={slots} empty={props.empty} />)
       }
 
-      return overlayRender ? overlayRender(children) : <div>{children}</div>
+      return <div>{overlayRender ? overlayRender(children) : children}</div>
     }
   },
 })

@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VKey } from '@idux/cdk'
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { PortalTargetType } from '@idux/cdk/portal'
+import type { VKey } from '@idux/cdk/utils'
 import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
@@ -33,6 +33,7 @@ import type { StepperLabelPlacement, StepperSize } from '@idux/components/steppe
 import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { VNode } from 'vue'
 
@@ -501,8 +502,14 @@ export interface TooltipConfig {
 
 export interface TreeConfig {
   blocked: boolean
+  childrenKey: string
   expandIcon: string
-  nodeKey: string
+  getKey: string | ((data: TreeNode) => VKey)
+  labelKey: string
+  /**
+   * @deprecated please use `labelKey` instead'
+   */
+  nodeKey?: string
   showLine: boolean
 }
 
@@ -510,11 +517,19 @@ export interface TreeSelectConfig {
   borderless: boolean
   childrenKey: string
   clearIcon: string
+  getKey: string | ((data: TreeNode) => VKey)
   labelKey: string
-  nodeKey: string
+  /**
+   * @deprecated please use `labelKey` instead'
+   */
+  nodeKey?: string
   overlayMatchWidth: boolean
+  overlayContainer?: PortalTargetType
   size: FormSize
   suffix: string
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
 }
 

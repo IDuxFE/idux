@@ -38,24 +38,6 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-selector`)
-    const {
-      mirrorRef,
-      inputRef,
-      inputValue,
-      isComposing,
-      isFocused,
-      blur,
-      focus,
-      handleCompositionStart,
-      handleCompositionEnd,
-      handleInput,
-      clearInput,
-    } = useInputState(props)
-
-    const getBoundingClientRect = () => elementRef.value?.getBoundingClientRect()
-
-    expose({ focus, blur, clearInput, getBoundingClientRect })
-
     const mergedClearable = computed(() => {
       return !props.disabled && !props.readonly && props.clearable && props.value.length > 0
     })
@@ -70,6 +52,24 @@ export default defineComponent({
     const showPlaceholder = computed(() => {
       return props.value.length === 0 && !isComposing.value && !inputValue.value
     })
+
+    const {
+      mirrorRef,
+      inputRef,
+      inputValue,
+      isComposing,
+      isFocused,
+      blur,
+      focus,
+      handleCompositionStart,
+      handleCompositionEnd,
+      handleInput,
+      clearInput,
+    } = useInputState(props, mergedSearchable)
+
+    const getBoundingClientRect = () => elementRef.value?.getBoundingClientRect()
+
+    expose({ focus, blur, clearInput, getBoundingClientRect })
 
     const classes = computed(() => {
       const config = props.config

@@ -5,11 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
 
@@ -25,19 +27,23 @@ export const treeProps = {
   blocked: IxPropTypes.bool,
   cascade: IxPropTypes.bool.def(false),
   checkable: IxPropTypes.bool.def(false),
-  childrenKey: IxPropTypes.string.def('children'),
+  childrenKey: IxPropTypes.string,
   checkStrategy: IxPropTypes.oneOf<CheckStrategy>(['all', 'parent', 'child']).def('all'),
+  customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
   dataSource: IxPropTypes.array<TreeNode>().def(() => []),
   disabled: IxPropTypes.func<(node: TreeNode) => boolean | TreeNodeDisabled>(),
   draggable: IxPropTypes.bool.def(false),
   droppable: IxPropTypes.func<TreeDroppable>(),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
   expandIcon: IxPropTypes.string,
+  getKey: { type: [String, Function] as PropType<string | ((data: TreeNode) => VKey)>, default: undefined },
   height: IxPropTypes.number,
-  labelKey: IxPropTypes.string.def('label'),
+  labelKey: IxPropTypes.string,
   leafLineIcon: IxPropTypes.string,
   loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),
-
+  /**
+   * @deprecated please use `getKey` instead'
+   */
   nodeKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(node: TreeNode) => VKey>()]),
   searchFn: IxPropTypes.func<(node: TreeNode, searchValue?: string) => boolean>(),
   searchValue: IxPropTypes.string,
@@ -75,7 +81,7 @@ export const treeProps = {
 }
 
 export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
-export type TreePublicProps = ExtractPublicPropTypes<typeof treeProps>
+export type TreePublicProps = Omit<ExtractPublicPropTypes<typeof treeProps>, 'nodeKey'>
 export interface TreeBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
@@ -85,11 +91,14 @@ export interface TreeBindings {
 export type TreeComponent = DefineComponent<Omit<HTMLAttributes, keyof TreePublicProps> & TreePublicProps, TreeBindings>
 export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>>
 
+export type TreeCustomAdditional = (options: { node: TreeNode; level: number }) => Record<string, any> | undefined
+
 export interface TreeNode {
+  /**
+   * @deprecated please use `customAdditional` instead'
+   */
   additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     class?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     style?: any
     [key: string]: unknown
   }

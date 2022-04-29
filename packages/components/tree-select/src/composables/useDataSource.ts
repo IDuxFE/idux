@@ -5,15 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeSelectNode, TreeSelectNodeDisabled, TreeSelectProps } from '../types'
-import type { GetNodeKey } from './useGetNodeKey'
-import type { VKey } from '@idux/cdk/utils'
-import type { TreeSelectConfig } from '@idux/components/config'
-import type { ComputedRef } from 'vue'
-
-import { computed } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { isBoolean } from 'lodash-es'
+
+import { type VKey } from '@idux/cdk/utils'
+
+import { type TreeSelectNode, type TreeSelectNodeDisabled, type TreeSelectProps } from '../types'
+import { type GetNodeKey } from './useGetNodeKey'
 
 export interface MergedNode {
   children?: MergedNode[]
@@ -30,14 +29,21 @@ export interface MergedNode {
 
 export function useMergeNodes(
   props: TreeSelectProps,
-  getNodeKey: ComputedRef<GetNodeKey>,
-  config: TreeSelectConfig,
+  mergedChildrenKey: ComputedRef<string>,
+  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedLabelKey: ComputedRef<string>,
 ): {
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
 } {
   const mergedNodeMap = computed(() => {
     const map = new Map<VKey, MergedNode>()
-    const nodes = convertMergeNodes(props, getNodeKey, props.dataSource, config)
+    const nodes = convertMergeNodes(
+      props,
+      props.dataSource,
+      mergedChildrenKey.value,
+      mergedGetKey.value,
+      mergedLabelKey.value,
+    )
     convertMergedNodeMap(nodes, map)
     return map
   })
@@ -47,26 +53,24 @@ export function useMergeNodes(
 
 export function convertMergeNodes(
   props: TreeSelectProps,
-  getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeSelectNode[],
-  config: TreeSelectConfig,
+  childrenKey: string,
+  getKey: GetNodeKey,
+  labelKey: string,
   parentKey?: VKey,
 ): MergedNode[] {
-  const getKey = getNodeKey.value
-
-  const { childrenKey = config.childrenKey, labelKey = config.labelKey, treeDisabled, loadChildren } = props
-
+  const { treeDisabled, loadChildren } = props
   return nodes.map(option =>
-    convertMergeNode(option, getKey, treeDisabled, childrenKey, labelKey, !!loadChildren, parentKey),
+    convertMergeNode(option, childrenKey, getKey, labelKey, treeDisabled, !!loadChildren, parentKey),
   )
 }
 
 function convertMergeNode(
   rawData: TreeSelectNode,
-  getKey: GetNodeKey,
-  disabled: ((node: TreeSelectNode) => boolean | TreeSelectNodeDisabled) | undefined,
   childrenKey: string,
+  getKey: GetNodeKey,
   labelKey: string,
+  disabled: ((node: TreeSelectNode) => boolean | TreeSelectNodeDisabled) | undefined,
   hasLoad: boolean,
   parentKey?: VKey,
 ): MergedNode {
@@ -75,7 +79,7 @@ function convertMergeNode(
   const subNodes = (rawData as Record<string, unknown>)[childrenKey] as TreeSelectNode[] | undefined
   const label = rawData[labelKey] as string
   const children = subNodes?.map(subNode =>
-    convertMergeNode(subNode, getKey, disabled, childrenKey, labelKey, hasLoad, key),
+    convertMergeNode(subNode, childrenKey, getKey, labelKey, disabled, hasLoad, key),
   )
   return {
     children,

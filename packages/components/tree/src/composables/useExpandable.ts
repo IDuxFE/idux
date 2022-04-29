@@ -28,7 +28,9 @@ export interface ExpandableContext {
 export function useExpandable(
   props: TreeProps,
   config: TreeConfig,
-  getNodeKey: ComputedRef<GetNodeKey>,
+  mergedChildrenKey: ComputedRef<string>,
+  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedLabelKey: ComputedRef<string>,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
   searchedKeys: ComputedRef<VKey[]>,
   lastEffectiveSearchedKeys: Ref<VKey[]>,
@@ -56,10 +58,11 @@ export function useExpandable(
   }
 
   const handleExpand = async (key: VKey, rawNode: TreeNode) => {
-    const { childrenKey, loadChildren } = props
+    const { loadChildren } = props
     if (loadingKeys.value.includes(key)) {
       return
     }
+    const childrenKey = mergedChildrenKey.value
     if (!(rawNode?.[childrenKey] as TreeNode[])?.length) {
       if (!loadChildren || loadingKeys.value.includes(key) || loadedKeys.value.includes(key)) {
         return
@@ -72,7 +75,15 @@ export function useExpandable(
       const currNode = nodeMap.get(key)!
       if (childrenNodes.length) {
         const level = currNode.level
-        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, key, level)
+        const mergedChildren = convertMergeNodes(
+          props,
+          childrenNodes,
+          childrenKey,
+          mergedGetKey.value,
+          mergedLabelKey.value,
+          key,
+          level,
+        )
         convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawNode[childrenKey] = childrenNodes
         currNode.children = mergedChildren

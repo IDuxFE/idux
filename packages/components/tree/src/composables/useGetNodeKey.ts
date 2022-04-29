@@ -18,9 +18,12 @@ import { Logger } from '@idux/cdk/utils'
 
 export type GetNodeKey = (rawNode: TreeNode) => VKey
 
+/**
+ * @deprecated please use `useGetKey` instead
+ */
 export function useGetNodeKey(props: TreeProps, config: TreeConfig): ComputedRef<GetNodeKey> {
   return computed(() => {
-    const nodeKey = props.nodeKey ?? config.nodeKey
+    const nodeKey = props.nodeKey ?? props.getKey ?? config.nodeKey ?? config.getKey
     if (isString(nodeKey)) {
       return (rawNode: TreeNode) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

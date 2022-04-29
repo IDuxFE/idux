@@ -27,6 +27,7 @@ export default defineComponent({
       selectedValue,
       selectedLimit,
       selectedLimitTitle,
+      changeSelected,
       handleOptionClick,
       activeOption,
       changeActive,
@@ -57,7 +58,10 @@ export default defineComponent({
 
     const handleMouseEnter = () => changeActive(props.index, 0)
 
-    const handleClick = () => handleOptionClick(key)
+    const handleClick = () => {
+      changeSelected(key)
+      handleOptionClick()
+    }
 
     return () => {
       const { disabled, label, rawData } = props

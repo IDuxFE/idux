@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type Ref, onMounted, ref } from 'vue'
+import { type ComputedRef, type Ref, onMounted, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useFormFocusMonitor } from '@idux/components/utils'
@@ -28,7 +28,7 @@ export interface InputStateContext {
   clearInput: () => void
 }
 
-export function useInputState(props: SelectorProps): InputStateContext {
+export function useInputState(props: SelectorProps, mergedSearchable: ComputedRef<boolean>): InputStateContext {
   const mirrorRef = ref<HTMLSpanElement>()
   const inputValue = ref('')
   const isComposing = ref(false)
@@ -73,17 +73,21 @@ export function useInputState(props: SelectorProps): InputStateContext {
 
   const handleInput = (evt: Event, emitInput = true) => {
     emitInput && callEmit(props.onInput, evt)
+
+    const inputEnabled = props.allowInput || mergedSearchable.value
+
     if (isComposing.value) {
-      syncMirrorWidth(evt)
+      inputEnabled && syncMirrorWidth(evt)
       return
     }
-    if (props.allowInput || props.searchable) {
+
+    if (inputEnabled) {
       const { value } = evt.target as HTMLInputElement
       if (value !== inputValue.value) {
         inputValue.value = value
         callEmit(props.onInputValueChange, value)
       }
-      callEmit(props.onSearch, value)
+      mergedSearchable.value && callEmit(props.onSearch, value)
       syncMirrorWidth()
     }
   }

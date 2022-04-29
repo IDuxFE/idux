@@ -20,10 +20,10 @@ import { callEmit, convertArray } from '@idux/cdk/utils'
 //import { generateOption } from '../utils/generateOption'
 
 export interface SelectedStateContext {
-  selectedValue: ComputedRef<any[]>
-  selectedNodes: ComputedRef<any[]>
-  changeSelected: (value: any[], nodes: TreeSelectNode[]) => void
-  handleRemove: (key: any) => void
+  selectedValue: ComputedRef<VKey[]>
+  selectedNodes: ComputedRef<MergedNode[]>
+  changeSelected: (value: VKey[], nodes: TreeSelectNode[]) => void
+  handleRemove: (key: VKey) => void
   handleClear: (evt: MouseEvent) => void
 }
 
@@ -35,10 +35,10 @@ export function useSelectedState(
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))
   const selectedNodes = computed(() => {
     const nodesMap = mergedNodeMap.value
-    return selectedValue.value.map(value => nodesMap.get(value)).filter(Boolean)
+    return selectedValue.value.map(value => nodesMap.get(value)!).filter(Boolean)
   })
 
-  const setValue = (value: any[]) => {
+  const setValue = (value: VKey[]) => {
     const currValue = props.multiple ? value : value[0]
 
     const oldValue = toRaw(accessor.valueRef.value)
@@ -48,11 +48,11 @@ export function useSelectedState(
     }
   }
 
-  const changeSelected = (value: any[]) => {
+  const changeSelected = (value: VKey[]) => {
     setValue(value)
   }
 
-  const handleRemove = (key: any) => {
+  const handleRemove = (key: VKey) => {
     setValue(selectedValue.value.filter(item => key !== item))
   }
 

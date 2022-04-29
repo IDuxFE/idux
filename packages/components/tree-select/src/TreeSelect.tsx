@@ -33,7 +33,9 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
     const config = useGlobalConfig('treeSelect')
-    const getNodeKey = useGetNodeKey(props, config)
+    const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
+    const mergedGetKey = useGetNodeKey(props, config)
+    const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
 
     const triggerRef = ref<ɵSelectorInstance>()
     const [inputValue, setInputValue] = useState('')
@@ -46,7 +48,7 @@ export default defineComponent({
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
     const accessor = useFormAccessor()
-    const { mergedNodeMap } = useMergeNodes(props, getNodeKey, config)
+    const { mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
     const { selectedValue, selectedNodes, changeSelected, handleRemove, handleClear } = useSelectedState(
       props,
       accessor,
@@ -79,9 +81,19 @@ export default defineComponent({
 
     expose({ focus, blur, scrollTo, setExpandAll })
 
+    watch(overlayOpened, opened => {
+      opened && focus()
+      clearInput()
+    })
+
+    const handleOverlayClick = () => {
+      if (props.searchable !== 'overlay') {
+        focus()
+      }
+    }
+
     const handleNodeClick = () => {
       if (props.multiple) {
-        focus()
         clearInput()
       } else {
         setOverlayOpened(false)
@@ -89,7 +101,7 @@ export default defineComponent({
     }
 
     const handleBlur = () => accessor.markAsBlurred()
-    const handleItemRemove = (key: unknown) => {
+    const handleItemRemove = (key: VKey) => {
       focus()
       handleRemove(key)
     }
@@ -99,7 +111,9 @@ export default defineComponent({
       slots,
       config,
       mergedPrefixCls,
-      getNodeKey,
+      mergedChildrenKey,
+      mergedGetKey,
+      mergedLabelKey,
       expandedKeys,
       mergedNodeMap,
       inputValue,
@@ -115,11 +129,6 @@ export default defineComponent({
       changeSelected,
     })
 
-    watch(overlayOpened, opened => {
-      opened ? focus() : blur()
-      clearInput()
-    })
-
     const overlayClasses = computed(() => {
       const { overlayClassName, multiple } = props
       const prefixCls = mergedPrefixCls.value
@@ -130,7 +139,14 @@ export default defineComponent({
       })
     })
 
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
+    const target = computed(
+      () =>
+        props.target ??
+        props.overlayContainer ??
+        config.target ??
+        config.overlayContainer ??
+        `${mergedPrefixCls.value}-overlay-container`,
+    )
 
     const renderTrigger = () => (
       <ɵSelector
@@ -167,7 +183,7 @@ export default defineComponent({
       />
     )
 
-    const renderContent = () => <Content />
+    const renderContent = () => <Content onClick={handleOverlayClick} />
 
     return () => {
       const overlayProps = {

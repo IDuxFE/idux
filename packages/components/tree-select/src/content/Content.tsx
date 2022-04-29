@@ -12,6 +12,8 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { computed, defineComponent, inject, ref } from 'vue'
 
+import { isFunction } from 'lodash-es'
+
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
@@ -26,8 +28,10 @@ export default defineComponent({
       config,
       props,
       slots: treeSelectSlots,
-      getNodeKey,
       mergedPrefixCls,
+      mergedChildrenKey,
+      mergedGetKey,
+      mergedLabelKey,
       mergedNodeMap,
       inputValue,
       setInputValue,
@@ -96,9 +100,17 @@ export default defineComponent({
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)
       if (childrenNodes.length && currNode) {
-        const mergedChildren = convertMergeNodes(props, getNodeKey, childrenNodes, config, key)
+        const childrenKey = mergedChildrenKey.value
+        const mergedChildren = convertMergeNodes(
+          props,
+          childrenNodes,
+          childrenKey,
+          mergedGetKey.value,
+          mergedLabelKey.value,
+          key,
+        )
         convertMergedNodeMap(mergedChildren, nodeMap)
-        currNode.rawData.children = childrenNodes
+        currNode.rawData[childrenKey] = childrenNodes
         currNode.children = mergedChildren
         setLoadedKeys(loadedKeys)
         callEmit(props.onLoaded, loadedKeys, node)
@@ -115,15 +127,13 @@ export default defineComponent({
     return () => {
       const {
         checkStrategy,
-        childrenKey,
+        customAdditional,
         dataSource,
         draggable,
         empty,
         expandIcon,
         multiple,
-        nodeKey,
         leafLineIcon,
-        labelKey,
         virtual,
         searchable,
         showLine,
@@ -146,6 +156,7 @@ export default defineComponent({
       } = props
 
       const prefixCls = mergedPrefixCls.value
+
       const treeSlots = {
         label: treeSelectSlots.treeLabel,
         prefix: treeSelectSlots.treePrefix,
@@ -161,12 +172,13 @@ export default defineComponent({
           v-slots={treeSlots}
           blocked
           checkedKeys={selectedValue.value}
+          customAdditional={customAdditional}
           expandedKeys={expandedKeys.value}
           loadedKeys={loadedKeys.value}
-          labelKey={labelKey ?? config.labelKey}
+          labelKey={mergedLabelKey.value}
           checkable={checkable.value}
           cascade={cascade.value}
-          childrenKey={childrenKey ?? config.childrenKey}
+          childrenKey={mergedChildrenKey.value}
           checkStrategy={checkStrategy}
           dataSource={dataSource}
           draggable={draggable}
@@ -174,15 +186,15 @@ export default defineComponent({
           disabled={treeDisabled}
           empty={empty}
           expandIcon={expandIcon}
+          getKey={mergedGetKey.value}
           height={overlayHeight}
-          nodeKey={nodeKey ?? config.nodeKey}
           loadChildren={loadChildren}
           leafLineIcon={leafLineIcon}
           virtual={virtual}
           selectable={multiple ? 'multiple' : true}
           selectedKeys={selectedValue.value}
-          searchValue={inputValue.value}
-          searchFn={searchFn}
+          searchValue={searchFn !== false ? inputValue.value : undefined}
+          searchFn={isFunction(searchFn) ? searchFn : undefined}
           showLine={showLine}
           onClick={handleClick}
           onCheck={handleCheck}
@@ -229,7 +241,7 @@ export default defineComponent({
         )
       }
 
-      return overlayRender ? overlayRender(children) : <div>{children}</div>
+      return <div>{overlayRender ? overlayRender(children) : children}</div>
     }
   },
 })

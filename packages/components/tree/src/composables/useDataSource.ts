@@ -34,12 +34,16 @@ export interface MergedNode {
 
 export function useMergeNodes(
   props: TreeProps,
-  getNodeKey: ComputedRef<GetNodeKey>,
+  mergedChildrenKey: ComputedRef<string>,
+  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedLabelKey: ComputedRef<string>,
 ): {
   mergedNodes: ComputedRef<MergedNode[]>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
 } {
-  const mergedNodes = computed(() => convertMergeNodes(props, getNodeKey, props.dataSource))
+  const mergedNodes = computed(() =>
+    convertMergeNodes(props, props.dataSource, mergedChildrenKey.value, mergedGetKey.value, mergedLabelKey.value),
+  )
 
   const mergedNodeMap = computed(() => {
     const map = new Map<VKey, MergedNode>()
@@ -67,23 +71,23 @@ export function useFlattedNodes(
 
 export function convertMergeNodes(
   props: TreeProps,
-  getNodeKey: ComputedRef<GetNodeKey>,
   nodes: TreeNode[],
+  childrenKey: string,
+  getKey: GetNodeKey,
+  labelKey: string,
   parentKey?: VKey,
   parentLevel?: number,
 ): MergedNode[] {
-  const getKey = getNodeKey.value
-
-  const { childrenKey, labelKey, disabled, loadChildren } = props
+  const { disabled, loadChildren } = props
 
   const level = isNil(parentLevel) ? -1 : parentLevel
   return nodes.map((node, index) =>
     convertMergeNode(
       node,
-      getKey,
-      disabled,
       childrenKey,
+      getKey,
       labelKey,
+      disabled,
       !!loadChildren,
       index === 0,
       index === nodes.length - 1,
@@ -95,10 +99,10 @@ export function convertMergeNodes(
 
 function convertMergeNode(
   rawNode: TreeNode,
-  getKey: GetNodeKey,
-  disabled: ((node: TreeNode) => boolean | TreeNodeDisabled) | undefined,
   childrenKey: string,
+  getKey: GetNodeKey,
   labelKey: string,
+  disabled: ((node: TreeNode) => boolean | TreeNodeDisabled) | undefined,
   hasLoad: boolean,
   isFirst: boolean,
   isLast: boolean,
@@ -115,10 +119,10 @@ function convertMergeNode(
   const children = subNodes?.map((subNode, index) =>
     convertMergeNode(
       subNode,
-      getKey,
-      disabled,
       childrenKey,
+      getKey,
       labelKey,
+      disabled,
       hasLoad,
       index === 0,
       index === subNodes.length - 1,

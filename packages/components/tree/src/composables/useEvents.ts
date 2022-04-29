@@ -6,7 +6,7 @@
  */
 
 import type { TreeProps } from '../types'
-import type { FlattedNode, MergedNode } from './useDataSource'
+import type { MergedNode } from './useDataSource'
 import type { ExpandableContext } from './useExpandable'
 import type { SelectableContext } from './useSelectable'
 import type { VKey } from '@idux/cdk/utils'
@@ -27,7 +27,7 @@ export interface EventsContext {
 export function useEvents(
   props: TreeProps,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
-  flattedNodes: ComputedRef<FlattedNode[]>,
+  flattedNodes: ComputedRef<MergedNode[]>,
   { expandedKeys, handleExpand }: ExpandableContext,
   { activeKey, handleSelect }: SelectableContext,
 ): EventsContext {
@@ -121,7 +121,7 @@ export function useEvents(
 
 function changeActiveKey(
   activeKey: Ref<VKey | undefined>,
-  flattedNodes: FlattedNode[],
+  flattedNodes: MergedNode[],
   start: number,
   end: number,
   isUp = false,
