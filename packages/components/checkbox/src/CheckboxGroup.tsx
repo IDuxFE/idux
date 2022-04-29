@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide } from 'vue'
+import { type VNodeChild, computed, defineComponent, normalizeClass, provide } from 'vue'
+
+import { isNil } from 'lodash-es'
 
 import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
@@ -29,7 +31,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-gap`]: gap != null,
+        [`${prefixCls}-with-gap`]: !isNil(gap),
       })
     })
 
@@ -44,7 +46,16 @@ export default defineComponent({
         Logger.warn('components/checkbox', '`options` was deprecated, please use `dataSource` instead')
       }
       const data = options ?? dataSource
-      const children = data ? data.map(item => <Checkbox {...item} />) : slots.default?.()
+
+      let children: VNodeChild[] | undefined
+      if (data) {
+        children = data.map(item => {
+          const { key, value } = item
+          return <Checkbox {...item} key={key ?? value} value={value ?? key} />
+        })
+      } else {
+        children = slots.default ? slots.default() : undefined
+      }
       return (
         <div class={classes.value} style={style.value}>
           {children}

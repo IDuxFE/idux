@@ -55,6 +55,9 @@ export const radioGroupProps = {
   gap: IxPropTypes.oneOfType([Number, String]),
   name: IxPropTypes.string,
   mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
+  /**
+   * @deprecated please use `dataSource` instead'
+   */
   options: IxPropTypes.array<RadioData>(),
   size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']).def('md'),
 
@@ -64,7 +67,7 @@ export const radioGroupProps = {
 }
 
 export type RadioGroupProps = ExtractInnerPropTypes<typeof radioGroupProps>
-export type RadioGroupPublicProps = ExtractPublicPropTypes<typeof radioGroupProps>
+export type RadioGroupPublicProps = Omit<ExtractPublicPropTypes<typeof radioGroupProps>, 'options'>
 export type RadioGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
 >

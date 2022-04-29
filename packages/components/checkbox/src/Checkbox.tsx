@@ -7,10 +7,12 @@
 
 import { type ComputedRef, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
-import { convertStringVNode, useFormAccessor, useFormElement } from '@idux/components/utils'
+import { convertStringVNode, useFormAccessor, useFormElement, useKey } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'
@@ -20,6 +22,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: checkboxProps,
   setup(props, { attrs, expose, slots }) {
+    const key = useKey()
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox`)
     const config = useGlobalConfig('checkbox')
@@ -30,11 +33,20 @@ export default defineComponent({
     const formContext = inject(FORM_TOKEN, null)
     const checkboxGroup = inject(checkboxGroupToken, null)
     const mergedName = computed(() => (attrs.name as string) ?? checkboxGroup?.props.name)
+    const mergedValue = computed(() => {
+      const { value } = props
+      if (!isNil(value)) {
+        return value
+      }
+      // 当在 group 中使用时，不传 value 就使用 key 作为 value
+      return checkboxGroup ? key : undefined
+    })
     const isButtoned = computed(() => props.buttoned ?? checkboxGroup?.props.buttoned ?? false)
     const size = computed(() => props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size)
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useCheckbox(
       props,
       checkboxGroup,
+      mergedValue,
     )
     const classes = computed(() => {
       const { indeterminate } = props
@@ -53,7 +65,7 @@ export default defineComponent({
     })
 
     return () => {
-      const { autofocus, value, label } = props
+      const { autofocus, label } = props
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
       const prefixCls = mergedPrefixCls.value
       const labelNode = convertStringVNode(slots.default, label)
@@ -71,15 +83,15 @@ export default defineComponent({
               type="checkbox"
               class={`${prefixCls}-input-inner`}
               aria-hidden
-              {...restAttrs}
               autofocus={autofocus}
               name={mergedName.value}
-              value={value}
+              value={mergedValue.value}
               checked={isChecked.value}
               disabled={isDisabled.value}
               onChange={handleChange}
               onBlur={handleBlur}
               onFocus={handleFocus}
+              {...restAttrs}
             />
             {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
           </span>
@@ -91,7 +103,11 @@ export default defineComponent({
   },
 })
 
-const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext | null) => {
+const useCheckbox = (
+  props: CheckboxProps,
+  checkboxGroup: CheckboxGroupContext | null,
+  mergedValue: ComputedRef<unknown>,
+) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
 
@@ -105,7 +121,7 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
 
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
-    isChecked = computed(() => (accessor.valueRef.value ?? []).includes(props.value ?? props.trueValue))
+    isChecked = computed(() => (accessor.valueRef.value || []).includes(mergedValue.value))
     isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
 
     handleBlur = (evt: FocusEvent) => {
@@ -116,11 +132,12 @@ const useCheckbox = (props: CheckboxProps, checkboxGroup: CheckboxGroupContext |
 
     handleChange = (evt: Event) => {
       const checked = (evt.target as HTMLInputElement).checked
-      const { trueValue, falseValue, value } = props
+      const { trueValue, falseValue } = props
+      const value = mergedValue.value
       const checkValue = checked ? trueValue : falseValue
       const oldCheckValue = !checked ? trueValue : falseValue
 
-      const oldValue = accessor.valueRef.value ?? []
+      const oldValue = accessor.valueRef.value || []
       const newValue = [...oldValue]
       const checkValueIndex = newValue.indexOf(value)
       if (checkValueIndex === -1) {
