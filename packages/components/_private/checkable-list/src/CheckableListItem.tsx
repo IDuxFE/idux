@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass } from 'vue'
+import { VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { checkableListContext } from './token'
 import { checkableListItemProps } from './types'
@@ -26,26 +27,6 @@ export default defineComponent({
       callEmit(props.onRemove)
     }
 
-    const renderLabel = (prefixCls: string) => {
-      const { checked, value, disabled, checkable } = props
-
-      if (checkable) {
-        return (
-          <IxCheckbox
-            class={`${prefixCls}-checkbox`}
-            v-slots={slots}
-            label={props.label}
-            value={value}
-            checked={checked}
-            disabled={disabled}
-            onChange={onCheckChange}
-          />
-        )
-      }
-
-      return <label class={`${prefixCls}-label`}>{slots.default?.() ?? props.label}</label>
-    }
-
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item`
 
@@ -58,14 +39,29 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-item`
 
-      return (
-        <li class={classes.value}>
-          {renderLabel(prefixCls)}
-          {props.removable && !props.disabled && (
-            <IxIcon class={`${prefixCls}-close-icon`} name="close" onClick={onRemove} />
-          )}
-        </li>
-      )
+      const children: VNodeChild[] = []
+      if (props.checkable) {
+        children.push(
+          <IxCheckbox
+            class={`${prefixCls}-checkbox`}
+            v-slots={slots}
+            label={props.label}
+            value={props.value}
+            checked={props.checked}
+            disabled={props.disabled}
+            onChange={onCheckChange}
+          />,
+        )
+      } else {
+        const labelNode = convertStringVNode(slots.default, props.label)
+        children.push(<label class={`${prefixCls}-label`}>{labelNode}</label>)
+      }
+
+      if (props.removable && !props.disabled) {
+        children.push(<IxIcon class={`${prefixCls}-close-icon`} name="close" onClick={onRemove} />)
+      }
+
+      return <li class={classes.value}>{children}</li>
     }
   },
 })

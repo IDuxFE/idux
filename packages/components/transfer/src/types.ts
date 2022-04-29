@@ -10,14 +10,11 @@ import type { TransferOperationsContext } from './composables/useTransferOperati
 import type { ConvertToSlotParams } from './utils'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { ɵCheckableListData } from '@idux/components/_private/checkable-list'
 import type { EmptyProps } from '@idux/components/empty'
 import type { PaginationProps } from '@idux/components/pagination'
-import type { ComputedRef, DefineComponent, HTMLAttributes, Slots, VNode } from 'vue'
+import type { ComputedRef, DefineComponent, HTMLAttributes, PropType, Slots, VNode } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
-
-export type TransferData = ɵCheckableListData
 
 export interface SeparatedData<T extends TransferData = TransferData> {
   sourceData: T[]
@@ -111,25 +108,25 @@ export type SearchFn<T extends TransferData = TransferData> = (
   searchValue: string,
 ) => boolean
 export const transferProps = {
-  dataSource: IxPropTypes.array<TransferData>().def(() => []),
   value: IxPropTypes.array<VKey>(),
   sourceSelectedKeys: IxPropTypes.array<VKey>(),
   targetSelectedKeys: IxPropTypes.array<VKey>(),
+
+  clearable: IxPropTypes.bool,
+  clearIcon: IxPropTypes.string,
+  customAdditional: { type: Object as PropType<TransferCustomAdditional>, default: undefined },
+  dataSource: IxPropTypes.array<TransferData>().def(() => []),
   disabled: IxPropTypes.bool.def(false),
+  empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object<EmptyProps>()]),
   getKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: TransferData) => number | string>()]),
-  virtual: IxPropTypes.bool.def(false),
+  mode: IxPropTypes.oneOf<TransferMode>(['default', 'immediate']).def('default'),
+  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TransferPaginationProps>()]),
   scroll: IxPropTypes.object<TransferScroll>(),
   searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
   searchFn: IxPropTypes.func<SearchFn>(),
-  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TransferPaginationProps>()]),
-
-  mode: IxPropTypes.oneOf<TransferMode>(['default', 'immediate']).def('default'),
-  showSelectAll: IxPropTypes.bool,
-
   spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
-  empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object<EmptyProps>()]),
+  showSelectAll: IxPropTypes.bool,
+  virtual: IxPropTypes.bool.def(false),
 
   //Events
   'onUpdate:value': IxPropTypes.emit<(keys: VKey[]) => void>(),
@@ -144,7 +141,7 @@ export const transferProps = {
   onScrolledChange:
     IxPropTypes.emit<(isSource: boolean, startIndex: number, endIndex: number, visibleData: unknown[]) => void>(),
   onScrolledBottom: IxPropTypes.emit<(isSource: boolean) => void>(),
-}
+} as const
 
 export const transferListProps = {
   isSource: IxPropTypes.bool.isRequired,
@@ -174,3 +171,16 @@ export type TransferComponent = DefineComponent<
   TransferApis
 >
 export type TransferInstance = InstanceType<DefineComponent<TransferProps, TransferApis>>
+
+export type TransferCustomAdditional = (options: {
+  data: TransferData
+  index: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}) => Record<string, any> | undefined
+
+export interface TransferData {
+  key?: VKey
+  label?: string
+  disabled?: boolean
+  [key: string]: unknown
+}

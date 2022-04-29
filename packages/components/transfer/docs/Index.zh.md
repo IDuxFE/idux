@@ -8,25 +8,6 @@ subtitle: 穿梭框
 
 ## API
 
-### 数据说明
-
-#### TransferData
-
-穿梭框源数据类型
-
-```ts
-export interface TransferData extends Record<VKey, any> {
-  key?: VKey
-  label?: string
-  disabled?: boolean
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-}
-```
-
 ### IxTransfer
 
 #### TransferProps
@@ -38,6 +19,7 @@ export interface TransferData extends Record<VKey, any> {
 | `v-model:targetSelectedKeys` | 目标数据列表勾选的keys | `VKey[]` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
+| `customAdditional` | 自定义选项的额外属性 | `TransferCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
 | `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
@@ -59,6 +41,13 @@ export interface TransferData extends Record<VKey, any> {
 | `onClear` | 已选数据清除的回调函数 | `(isSource: boolean) => void` | - | - | - |
 
 ```ts
+export interface TransferData {
+  key?: VKey
+  label?: string
+  disabled?: boolean
+  [key: string]: unknown
+}
+
 export interface TransferScroll {
   height?: string | number
   width?: string | number | { source?: string | number; target?: string | number }
