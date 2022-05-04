@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { isArray } from 'lodash-es'
 
 import { callEmit, useState } from '@idux/cdk/utils'
-import { useFormAccessor } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/form'
 
 type TimeValueProp = TimePickerProps['value']
 type TimeRangeValueProp = TimeRangePickerProps['value']

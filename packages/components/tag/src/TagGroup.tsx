@@ -10,8 +10,8 @@ import { computed, defineComponent } from 'vue'
 import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { IxTag } from '@idux/components/tag'
 
+import Tag from './Tag'
 import { tagGroupProps } from './types'
 
 export default defineComponent({
@@ -72,7 +72,7 @@ export default defineComponent({
             }
 
             return (
-              <IxTag
+              <Tag
                 key={key}
                 shape={props.shape}
                 color={tagData.color}
@@ -84,7 +84,7 @@ export default defineComponent({
                   default: () => tagData.label,
                   ...(props.closable && suffixSlot),
                 }}
-              </IxTag>
+              </Tag>
             )
           })}
         </div>

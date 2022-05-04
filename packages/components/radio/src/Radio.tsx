@@ -11,8 +11,8 @@ import { isNil } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
-import { useFormAccessor, useFormElement, useKey } from '@idux/components/utils'
+import { FORM_TOKEN, useFormAccessor, useFormElement } from '@idux/components/form'
+import { useKey } from '@idux/components/utils'
 
 import { type RadioGroupContext, radioGroupToken } from './token'
 import { type RadioProps, radioProps } from './types'

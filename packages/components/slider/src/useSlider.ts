@@ -12,7 +12,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
 import { Logger, callEmit, getMouseClientXY, isNumeric, off, on } from '@idux/cdk/utils'
-import { useFormAccessor, useFormElement } from '@idux/components/utils'
+import { useFormAccessor, useFormElement } from '@idux/components/form'
 
 import { sliderStartDirection } from './token'
 

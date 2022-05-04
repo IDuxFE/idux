@@ -12,9 +12,9 @@ import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/util
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormAccessor } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { type TreeInstance } from '@idux/components/tree'
-import { useFormAccessor } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
 import { useGetNodeKey } from './composables/useGetNodeKey'

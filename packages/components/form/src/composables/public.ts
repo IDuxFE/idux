@@ -8,8 +8,21 @@
 import { ComputedRef, type Ref, type WatchStopHandle, computed, inject, onBeforeUnmount, ref, watch } from 'vue'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { type ValueAccessor, useValueAccessor, useValueControl } from '@idux/cdk/forms'
-import { FORM_TOKEN, type FormSize, useFormItemRegister } from '@idux/components/form'
+import { type AbstractControl, type ValueAccessor, useValueAccessor, useValueControl } from '@idux/cdk/forms'
+import { useKey } from '@idux/components/utils'
+
+import { FORM_ITEM_TOKEN, FORM_TOKEN } from '../token'
+import { type FormSize } from '../types'
+
+export function useFormItemRegister(control: Ref<AbstractControl | undefined>): void {
+  const context = inject(FORM_ITEM_TOKEN, null)
+  if (context) {
+    const key = useKey()
+    const { registerControl, unregisterControl } = context
+    registerControl(key, control)
+    onBeforeUnmount(() => unregisterControl(key))
+  }
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useFormAccessor<T = any>(valueKey?: string): ValueAccessor<T> {

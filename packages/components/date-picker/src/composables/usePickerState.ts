@@ -14,7 +14,7 @@ import { type ComputedRef, toRaw } from 'vue'
 import { isArray } from 'lodash-es'
 
 import { callEmit, useState } from '@idux/cdk/utils'
-import { useFormAccessor } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/form'
 
 import { convertToDate, sortRangeValue } from '../utils'
 

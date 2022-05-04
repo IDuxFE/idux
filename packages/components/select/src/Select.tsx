@@ -16,7 +16,7 @@ import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/form'
 
 import { useActiveState } from './composables/useActiveState'
 import { useGetOptionKey } from './composables/useGetOptionKey'

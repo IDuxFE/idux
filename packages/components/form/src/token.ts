@@ -5,12 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type InjectionKey, type Ref, inject, onBeforeUnmount } from 'vue'
+import { type InjectionKey, type Ref } from 'vue'
 
 import { type AbstractControl } from '@idux/cdk/forms'
 import { type VKey } from '@idux/cdk/utils'
 import { type FormConfig } from '@idux/components/config'
-import { useKey } from '@idux/components/utils'
 
 import { type FormProps, type FormSize } from './types'
 
@@ -34,13 +33,3 @@ export interface FormItemContext {
 
 // public token
 export const FORM_ITEM_TOKEN: InjectionKey<FormItemContext> = Symbol('FORM_ITEM_TOKEN')
-
-export function useFormItemRegister(control: Ref<AbstractControl | undefined>): void {
-  const context = inject(FORM_ITEM_TOKEN, null)
-  if (context) {
-    const key = useKey()
-    const { registerControl, unregisterControl } = context
-    registerControl(key, control)
-    onBeforeUnmount(() => unregisterControl(key))
-  }
-}

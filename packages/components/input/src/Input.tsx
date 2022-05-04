@@ -11,7 +11,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormSize } from '@idux/components/utils'
+import { useFormSize } from '@idux/components/form'
 
 import { inputProps } from './types'
 import { useInput } from './useInput'

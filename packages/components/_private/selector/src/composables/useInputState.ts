@@ -10,7 +10,7 @@
 import { type ComputedRef, type Ref, onMounted, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { useFormFocusMonitor } from '@idux/components/utils'
+import { useFormFocusMonitor } from '@idux/components/form'
 
 import { type SelectorProps } from '../types'
 

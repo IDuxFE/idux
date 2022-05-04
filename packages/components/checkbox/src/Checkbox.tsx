@@ -11,8 +11,8 @@ import { isNil } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN } from '@idux/components/form'
-import { convertStringVNode, useFormAccessor, useFormElement, useKey } from '@idux/components/utils'
+import { FORM_TOKEN, useFormAccessor, useFormElement } from '@idux/components/form'
+import { convertStringVNode, useKey } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'

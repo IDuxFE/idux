@@ -11,7 +11,7 @@ import { isNil } from 'lodash-es'
 
 import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/form'
 
 import Checkbox from './Checkbox'
 import { checkboxGroupToken } from './token'
