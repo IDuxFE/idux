@@ -9,8 +9,8 @@ import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/utils'
 
 import RateItem from './RateItem'
 import { rateProps } from './types'

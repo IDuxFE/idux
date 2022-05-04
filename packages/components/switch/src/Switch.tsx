@@ -9,8 +9,8 @@ import { computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
-import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/utils'
 
 import { switchProps } from './types'
 

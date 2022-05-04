@@ -12,7 +12,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
 import { Logger, callEmit } from '@idux/cdk/utils'
-import { useFormAccessor } from '@idux/components/utils'
+import { useFormAccessor } from '@idux/components/form'
 
 export interface InputNumberBindings {
   displayValue: Ref<string>

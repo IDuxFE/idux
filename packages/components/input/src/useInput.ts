@@ -13,7 +13,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { useFormAccessor, useFormFocusMonitor } from '@idux/components/utils'
+import { useFormAccessor, useFormFocusMonitor } from '@idux/components/form'
 
 export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>

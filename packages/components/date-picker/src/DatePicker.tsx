@@ -9,7 +9,7 @@ import { computed, defineComponent, nextTick, normalizeClass, provide, watch } f
 
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
-import { useFormElement } from '@idux/components/utils'
+import { useFormElement } from '@idux/components/form'
 
 import { useControl } from './composables/useControl'
 import { useFormat } from './composables/useFormat'

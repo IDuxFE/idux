@@ -34,12 +34,15 @@
   "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
-    "@juggle/resize-observer": "^3.3.1",
-    "@popperjs/core": "^2.9.3",
-    "lodash-es": "^4.17.21",
+    "@juggle/resize-observer": "^3.3.0",
+    "@popperjs/core": "^2.9.0",
+    "lodash-es": "^4.17.0",
     "vue-types": "^3.0.0"
   },
+  "devDependencies": {
+    "vue": "^3.2.0"
+  },
   "peerDependencies": {
-    "vue": "^3.2.29"
+    "vue": "^3.2.0"
   }
 }

@@ -34,9 +34,12 @@
   "dependencies": {
     "@idux/cdk": "^1.0.0-beta.7",
     "@idux/components": "^1.0.0-beta.7",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.0"
+  },
+  "devDependencies": {
+    "vue": "^3.2.0"
   },
   "peerDependencies": {
-    "vue": "^3.2.29"
+    "vue": "^3.2.0"
   }
 }
