@@ -15,7 +15,7 @@ import { coverChildren } from '../Utils'
 export default defineComponent({
   name: 'MenuSubOverlayContent',
   setup() {
-    const { mergedPrefixCls, theme } = inject(menuToken)!
+    const { mergedPrefixCls, theme, mergedGetKey } = inject(menuToken)!
     const { props, handleMouseEvent } = inject(menuSubToken)!
     const dropdownContext = inject(ɵDropdownToken, null)
 
@@ -41,7 +41,7 @@ export default defineComponent({
 
     return () => (
       <ul class={classes.value} {...events.value}>
-        {coverChildren(props.data.children)}
+        {coverChildren(props.data.children, mergedGetKey.value)}
       </ul>
     )
   },
