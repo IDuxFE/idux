@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.8](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-05-05)
+
+
+### Bug Fixes
+
+* **comp: alert:** align icon with text ([#881](https://github.com/IDuxFE/idux/issues/881)) ([4b4f567](https://github.com/IDuxFE/idux/commit/4b4f567d4493765fe44acebf22cb5b4f94d51621))
+* **comp: menu:** menu cannot show ([#875](https://github.com/IDuxFE/idux/issues/875)) ([2eaf920](https://github.com/IDuxFE/idux/commit/2eaf9204a09f253b97837bb28bd78ed6e62d0124))
+* **comp: message:** align icon with text ([#865](https://github.com/IDuxFE/idux/issues/865)) ([07475d2](https://github.com/IDuxFE/idux/commit/07475d2284d007a6636bc6e65fde547f45369256))
+* **comp: tree:** the horizontal scroll bar does not appear ([#861](https://github.com/IDuxFE/idux/issues/861)) ([ac63edf](https://github.com/IDuxFE/idux/commit/ac63edf56009ffbb9154b1036ecc4b11949472c6))
+* **comp:carousel:** modify onChange params order ([#863](https://github.com/IDuxFE/idux/issues/863)) ([d08b9f3](https://github.com/IDuxFE/idux/commit/d08b9f34943d87fd956f7622fc6eb873396b2d04)), closes [#862](https://github.com/IDuxFE/idux/issues/862)
+* **comp:data-picker:** modify data-picker according to current desigin ([#859](https://github.com/IDuxFE/idux/issues/859)) ([7efdcb9](https://github.com/IDuxFE/idux/commit/7efdcb948cc2a2627ad35fe100633b6dde23e5f4))
+* **comp:table:** fix table column width measure problem when data load is delayed ([#860](https://github.com/IDuxFE/idux/issues/860)) ([1204300](https://github.com/IDuxFE/idux/commit/1204300c2f573902cab1d1e150a081b6c2574b85))
+
+
+### Features
+
+* **comp: cascader:** add cascader component ([#857](https://github.com/IDuxFE/idux/issues/857)) ([50fb584](https://github.com/IDuxFE/idux/commit/50fb584604bd9452f25649718f3340d1b40d10c8)), closes [#797](https://github.com/IDuxFE/idux/issues/797)
+* **comp: menu:** add customAdditional, getKey and overlayContainer ([#871](https://github.com/IDuxFE/idux/issues/871)) ([5064add](https://github.com/IDuxFE/idux/commit/5064addd4e359993a8a16943eb3cf1a9dbce340b))
+* **comp: select:** add customAdditional, getKey and overlayContainer ([#868](https://github.com/IDuxFE/idux/issues/868)) ([d10f5e0](https://github.com/IDuxFE/idux/commit/d10f5e069cd48c8b8cabec829566c8425b32fc08))
+* **comp: table:** add customAdditional to support cosutom row and cell ([#866](https://github.com/IDuxFE/idux/issues/866)) ([e79b55b](https://github.com/IDuxFE/idux/commit/e79b55bf7896534e98597e5b7e4bfaf2fc139a33))
+* **comp: transfer:** add customAdditional ([#872](https://github.com/IDuxFE/idux/issues/872)) ([84c4e61](https://github.com/IDuxFE/idux/commit/84c4e615c6df7e5239248d94bd4c237a65da680b))
+* **comp: tree-selct:** add customAdditional,getKey and overlayContainer ([#869](https://github.com/IDuxFE/idux/issues/869)) ([593f86f](https://github.com/IDuxFE/idux/commit/593f86fe3c49526e8fcc4352db0afdb986d9fd57))
+
+
+### BREAKING CHANGES
+
+* **comp: menu:** `dataSource.additional` was deprecated, please use `customAdditional` instead. `target` was deprecated, please use `overlayContainer` instead.
+* **comp: tree-selct:** `nodeKey` was deprecated, please use `getKey`
+instead. `target` was deprecated, please use `overlayContainer` instead. `dataSource.additional` was
+deprecated, please use `customAdditional` instead.
+* **comp: select:** `compareFn` was removed. `target` was deprecated, please use `overlayContainer`
+instead. `valueKey` was deprecated, please use `getKey` instead. `dataSource.additional` was
+deprecated, please use `customAdditional` instead.
+* **comp: table:** `tags`, `rowClassName` and `column.additional` are deprecated, please use `customAdditional` instead
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-24)
 
 
