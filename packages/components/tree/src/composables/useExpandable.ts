@@ -19,7 +19,7 @@ import { callChange, getParentKeys } from '../utils'
 import { convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 
 export interface ExpandableContext {
-  expandIcon: ComputedRef<string>
+  expandIcon: ComputedRef<string | string[]>
   expandedKeys: WritableComputedRef<VKey[]>
   handleExpand: (key: VKey, rawNode: TreeNode) => void
   loadingKeys: Ref<VKey[]>

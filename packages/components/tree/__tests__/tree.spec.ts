@@ -634,6 +634,16 @@ describe('Tree', () => {
 
     expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(false)
     expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-down').exists()).toBe(true)
+
+    await wrapper.setProps({ expandIcon: ['minus-square', 'plus-square'], expandedKeys: ['0'] })
+
+    const allNodes = wrapper.findAll('.ix-tree-node')
+
+    expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(false)
+    expect(wrapper.find('.ix-tree-node-expand').find('.ix-icon-down').exists()).toBe(false)
+
+    expect(allNodes[0].find('.ix-icon-minus-square').exists()).toBe(true)
+    expect(allNodes[1].find('.ix-icon-plus-square').exists()).toBe(true)
   })
 
   test('expandIcon slot work', async () => {

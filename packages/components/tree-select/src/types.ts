@@ -45,7 +45,7 @@ export const treeSelectProps = {
   draggable: { type: Boolean, default: false },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
-  expandIcon: { type: String, default: undefined },
+  expandIcon: { type: [String, Array] as PropType<string | string[]>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode) => VKey)>, default: undefined },
   labelKey: { type: String, default: undefined },
   leafLineIcon: { type: String, default: undefined },
