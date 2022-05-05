@@ -5,7 +5,7 @@ order: 12
 ---
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-63-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-67-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -75,7 +75,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/jiayinkong"><img src="https://avatars.githubusercontent.com/u/73403506?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jiayinkong</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=jiayinkong" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=jiayinkong" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/miomio-xiao"><img src="https://avatars.githubusercontent.com/u/19550383?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mio</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=miomio-xiao" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/unknownzjc"><img src="https://avatars.githubusercontent.com/u/17921090?v=4?s=100" width="100px;" alt=""/><br /><sub><b>unknown_</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=unknownzjc" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/manchixue"><img src="https://avatars.githubusercontent.com/u/31590999?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xuemanchi</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=manchixue" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=manchixue" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/xuemanchi"><img src="https://avatars.githubusercontent.com/u/31590999?v=4?s=100" width="100px;" alt=""/><br /><sub><b>xuemanchi</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=xuemanchi" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=xuemanchi" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/zymoplastic"><img src="https://avatars.githubusercontent.com/u/25114328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zymoplastic</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=zymoplastic" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=zymoplastic" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/typistZxd"><img src="https://avatars.githubusercontent.com/u/17819018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>东木</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=typistZxd" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=typistZxd" title="Documentation">📖</a></td>
   </tr>
@@ -96,6 +96,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/sjia0307"><img src="https://avatars.githubusercontent.com/u/70807981?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sjia</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=sjia0307" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=sjia0307" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/rhinonan"><img src="https://avatars.githubusercontent.com/u/9367487?v=4?s=100" width="100px;" alt=""/><br /><sub><b>卡猫司机</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=rhinonan" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=rhinonan" title="Documentation">📖</a></td>
     <td align="center"><a href="https://blog.he110.info/"><img src="https://avatars.githubusercontent.com/u/16161582?v=4?s=100" width="100px;" alt=""/><br /><sub><b>牡龙</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=He110te4m" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/hawtim"><img src="https://avatars.githubusercontent.com/u/11072796?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hawtim</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=hawtim" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=hawtim" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/thinkingOfBetty"><img src="https://avatars.githubusercontent.com/u/32190750?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Betty</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=thinkingOfBetty" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=thinkingOfBetty" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/qingshan-dev"><img src="https://avatars.githubusercontent.com/u/3405826?v=4?s=100" width="100px;" alt=""/><br /><sub><b>大鱼</b></sub></a><br /><a href="https://github.com/IDuxFE/idux/commits?author=qingshan-dev" title="Code">💻</a> <a href="https://github.com/IDuxFE/idux/commits?author=qingshan-dev" title="Documentation">📖</a></td>
   </tr>
 </table>
 
