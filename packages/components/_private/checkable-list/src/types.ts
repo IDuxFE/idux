@@ -7,22 +7,15 @@
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { IxPropTypes, type VKey } from '@idux/cdk/utils'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface CheckableListData extends Record<VKey, any> {
+export interface CheckableListData {
   key?: VKey
   label?: string
   disabled?: boolean
-  additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    class?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    style?: any
-    [key: string]: unknown
-  }
+  [key: string]: unknown
 }
 
 export interface CheckableListScroll {
@@ -35,6 +28,7 @@ export const checkableListProps = {
   checkable: IxPropTypes.bool.def(true),
   removable: IxPropTypes.bool.def(false),
   checked: IxPropTypes.func<(item: CheckableListData) => boolean>(),
+  customAdditional: { type: Object as PropType<CheckableListCustomAdditional>, default: undefined },
   disabled: IxPropTypes.func<(item: CheckableListData) => boolean>(),
   getRowKey: IxPropTypes.func<(item: CheckableListData) => VKey>(),
   virtual: IxPropTypes.bool,
@@ -69,3 +63,9 @@ export type CheckableListComponent = DefineComponent<
   CheckableListApi
 >
 export type CheckableListInstance = InstanceType<DefineComponent<CheckableListProps, CheckableListApi>>
+
+export type CheckableListCustomAdditional = (options: {
+  data: CheckableListData
+  index: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}) => Record<string, any> | undefined

@@ -76,8 +76,6 @@ export interface ProTransferTableProps {
   tableLayout?: 'auto' | 'fixed'
   ellipsis?: boolean
   borderless?: boolean
-  tags?: TableTags
-  rowClassName?: (record: unknown, rowIndex: number) => string
 }
 
 export interface ProTransferTreeProps {

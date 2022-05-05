@@ -5,11 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VirtualScrollInstance } from '@idux/cdk/scroll'
-
 import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
-import { CdkVirtualScroll } from '@idux/cdk/scroll'
+import { CdkVirtualScroll, type VirtualItemRenderFn, type VirtualScrollInstance } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -47,7 +45,7 @@ export default defineComponent({
       callEmit(props.onScrolledChange, startIndex, endIndex, visibleData)
     }
 
-    const renderListItem = (item: CheckableListData) => {
+    const renderListItem: VirtualItemRenderFn<CheckableListData> = ({ item, index }) => {
       const key = getRowKey(item)
       const onCheckChange = (checked: boolean) => {
         callEmit(props.onCheckChange, item, checked)
@@ -55,6 +53,8 @@ export default defineComponent({
       const onRemove = () => {
         callEmit(props.onRemove, item)
       }
+
+      const customAdditional = props.customAdditional ? props.customAdditional({ data: item, index }) : undefined
 
       return (
         <CheckableListItem
@@ -68,7 +68,8 @@ export default defineComponent({
           v-slots={{ default: slots.label && (() => slots.label?.(item)) }}
           onCheckChange={onCheckChange}
           onRemove={onRemove}
-          {...(item.additional ?? {})}
+          {...item.additional}
+          {...customAdditional}
         />
       )
     }
@@ -91,7 +92,7 @@ export default defineComponent({
             getKey={getRowKey}
             height={height as number}
             itemHeight={32}
-            itemRender={({ item }) => renderListItem(item)}
+            itemRender={renderListItem}
             virtual
             onScroll={handleScroll}
             onScrolledBottom={handleScrolledBottom}
@@ -102,7 +103,7 @@ export default defineComponent({
 
       return (
         <ul class={`${mergedPrefixCls.value}-inner`} onScroll={handleScroll}>
-          {data.map(item => renderListItem(item))}
+          {data.map((item, index) => renderListItem({ item, index }))}
         </ul>
       )
     }

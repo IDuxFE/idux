@@ -8,7 +8,7 @@
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
-import type { TableColumn, TableTags } from '@idux/components/table'
+import type { TableColumn } from '@idux/components/table'
 import type {
   SearchFn,
   TransferData,
@@ -32,8 +32,6 @@ export interface ProTransferTableProps {
   tableLayout?: 'auto' | 'fixed'
   ellipsis?: boolean
   borderless?: boolean
-  tags?: TableTags
-  rowClassName?: (record: unknown, rowIndex: number) => string
 }
 
 export interface ProTransferTreeProps {
