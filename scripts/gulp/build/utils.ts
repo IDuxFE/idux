@@ -23,6 +23,7 @@ interface Options {
   targetDirname: string
   distDirname: string
   packageName: string
+  minify?: boolean
 }
 
 const writePackageJson = (distDirname: string, packageName: string, compName: string) => {
@@ -62,7 +63,9 @@ export const buildPackage = (options: Options): TaskFunction => {
     const outputs = components.map(async compName => {
       const { output, ...inputOptions } = getRollupSingleOptions({ targetDirname, distDirname, packageName, compName })
       const bundle = await rollup(inputOptions)
-      await bundle.write(output as OutputOptions)
+      const outputs = Array.isArray(output) ? output : [output]
+      const writes = outputs.map(output => bundle.write(output!))
+      await Promise.all(writes)
       return writePackageJson(distDirname, packageName, compName)
     })
 
@@ -77,7 +80,9 @@ export const buildIndex = (options: Options): TaskFunction => {
   const buildIndex: TaskFunction = async done => {
     const { output, ...inputOptions } = getRollupSingleOptions(options)
     const bundle = await rollup(inputOptions)
-    await bundle.write(output as OutputOptions)
+    const outputs = Array.isArray(output) ? output : [output]
+    const writes = outputs.map(output => bundle.write(output!))
+    await Promise.all(writes)
     done()
   }
   return buildIndex
@@ -86,9 +91,11 @@ export const buildIndex = (options: Options): TaskFunction => {
 // rollup 打包 Index
 export const buildFullIndex = (options: Options): TaskFunction => {
   const buildIndex: TaskFunction = async done => {
-    const { output: fullOutput, ...inputFullOptions } = getRollupFullOptions(options)
-    const fullBundle = await rollup(inputFullOptions)
-    await fullBundle.write(fullOutput as OutputOptions)
+    const { output, ...inputOptions } = getRollupFullOptions(options)
+    const bundle = await rollup(inputOptions)
+    const outputs = Array.isArray(output) ? output : [output]
+    const writes = outputs.map(output => bundle.write(output!))
+    await Promise.all(writes)
     done()
   }
   return buildIndex
