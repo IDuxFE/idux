@@ -78,6 +78,9 @@ export const buildVersion = series(
 
 export const buildFullIndex = series(
   _buildFullIndex(cdkOptions),
+  _buildFullIndex({ ...cdkOptions, minify: true }),
   _buildFullIndex(componentsOptions),
+  _buildFullIndex({ ...componentsOptions, minify: true }),
   _buildFullIndex(proOptions),
+  _buildFullIndex({ ...proOptions, minify: true }),
 )

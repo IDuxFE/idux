@@ -14,8 +14,8 @@ interface Options extends TransformOptions {
 
 const defaultOptions: Options = {
   include: /\.(tsx?|jsx)$/,
-  exclude: /\.js$/,
-  target: 'es2015',
+  exclude: /\.(mjs?|js)$/,
+  target: 'es2018',
   minify: false,
   sourcemap: false,
   jsxFactory: 'h',
@@ -25,7 +25,7 @@ const defaultOptions: Options = {
 
 export const esbuildPlugin = (options?: Options): Plugin => {
   const { include, exclude, ...restOptions } = { ...defaultOptions, ...options }
-  const filter = createFilter(include || /\.(tsx?|jsx)$/, exclude || /\.js$/)
+  const filter = createFilter(include, exclude)
 
   const extensions = ['.ts', '.tsx']
   const resolveFile = (resolved: string, addIndex = false) => {
@@ -78,8 +78,8 @@ async function transformWithEsbuild(code: string, filename: string, options?: Tr
   // if the id ends with a valid ext, use it (e.g. vue blocks)
   // otherwise, cleanup the query before checking the ext
   const ext = extname(/\.\w+$/.test(filename) ? filename : cleanUrl(filename))
-
-  const loader = ext.slice(1) as Loader
+  const lastExt = ext.slice(1)
+  const loader = (lastExt === 'mjs' ? 'js' : lastExt) as Loader
 
   const transformOptions: TransformOptions = {
     loader,

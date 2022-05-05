@@ -16,10 +16,11 @@ interface Options {
   distDirname: string
   packageName: string
   compName?: string
+  minify?: boolean
 }
 
 export const getRollupSingleOptions = (options: Options): RollupOptions => {
-  const { targetDirname, distDirname, compName = '' } = options
+  const { targetDirname, distDirname, compName = '', minify = false } = options
   const externalDeps = [
     'vue',
     '@vue',
@@ -39,7 +40,7 @@ export const getRollupSingleOptions = (options: Options): RollupOptions => {
     replace({ __DEV__: "process.env.NODE_ENV !== 'production'", preventAssignment: true }),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
-    esbuildPlugin(),
+    esbuildPlugin({ minify }),
   ]
 
   return {
@@ -56,11 +57,7 @@ export const getRollupSingleOptions = (options: Options): RollupOptions => {
 }
 
 export const getRollupFullOptions = (options: Options): RollupOptions => {
-  const { targetDirname, distDirname, packageName } = options
-
-  const input = join(targetDirname, 'index.ts')
-  const outputFile = join(distDirname, 'index.full.js')
-  const outputName = `IDux${upperFirst(packageName)}`
+  const { targetDirname, distDirname, packageName, minify = false } = options
 
   const plugins = [
     alias({
@@ -79,7 +76,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     esbuildPlugin({
-      minify: true,
+      minify,
       define: {
         'process.env.NODE_ENV': JSON.stringify('production'),
       },
@@ -87,23 +84,29 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
   ]
 
   return {
-    input,
-    output: {
-      format: 'umd',
-      file: outputFile,
-      exports: 'named',
-      name: outputName,
-      globals: name => {
-        if (name === 'vue') {
-          return 'Vue'
-        }
-        if (name.startsWith('@idux')) {
-          const [, _packageName] = name.split('/')
-          return `IDux${upperFirst(_packageName)}`
-        }
-        return ''
+    input: join(targetDirname, 'index.ts'),
+    output: [
+      {
+        format: 'umd',
+        file: join(distDirname, `index.full${minify ? '.min' : ''}.js`),
+        exports: 'named',
+        name: `IDux${upperFirst(packageName)}`,
+        globals: name => {
+          if (name === 'vue') {
+            return 'Vue'
+          }
+          if (name.startsWith('@idux')) {
+            const [, _packageName] = name.split('/')
+            return `IDux${upperFirst(_packageName)}`
+          }
+          return ''
+        },
       },
-    },
+      {
+        format: 'esm',
+        file: join(distDirname, `index.full${minify ? '.min' : ''}.mjs`),
+      },
+    ],
     external: id => {
       return id === 'vue' || (id.startsWith('@idux') && !id.startsWith(`@idux/${packageName}`))
     },
