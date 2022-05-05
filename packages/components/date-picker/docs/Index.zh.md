@@ -109,8 +109,6 @@ const defaultFormat = {
 | --- | --- | --- | --- |
 | `@date-picker-line-height` | `@form-line-height` | - | - |
 | `@date-picker-color` | `@form-color` | - | - |
-| `@date-picker-background-color` | `@form-background-color` | - | - |
-| `@date-picker-disabled-background-color` | `@form-disabled-background-color` | - | - |
 | `@date-range-picker-trigger-separator-margin` | `@spacing-xl` | - | - |
 | `@date-picker-panel-font-size` | `@font-size-md` | - | - |
 | `@date-picker-panel-color` | `@text-color` | - | - |
@@ -126,16 +124,15 @@ const defaultFormat = {
 | `@date-picker-panel-header-padding` | `0 0 @spacing-xs 0` | - | - |
 | `@date-picker-panel-header-height` | `@height-md` | - | - |
 | `@date-picker-panel-header-item-padding` | `0 @spacing-xs` | - | - |
-| `@date-picker-panel-header-font-size` | `@font-size-md` | - | - |
-| `@date-picker-panel-header-font-weight` | `@font-weight-lg` | - | - |
 | `@date-picker-panel-header-border-bottom` | `none` | - | - |
 | `@date-picker-panel-header-button-font-size` | `@font-size-lg` | - | - |
+| `@date-picker-panel-header-button-font-weight` | `@font-weight-lg` | - | - |
 | `@date-picker-panel-header-content-spacing` | `@spacing-lg` | - | - |
 | `@date-picker-panel-header-padding-lg` | `0 0 @spacing-2xl` | - | - |
 | `@date-picker-panel-body-padding` | `0` | - | - |
 | `@date-picker-panel-body-padding-lg` | `0` | - | - |
 | `@date-picker-panel-body-font-size` | `@font-size-md` | - | - |
-| `@date-picker-panel-body-header-border-bottom` | `solid transparent @spacing-md` | - | - |
+| `@date-picker-panel-body-header-margin-bottom` | `@spacing-md` | - | - |
 | `@date-picker-panel-body-header-font-weight` | `@font-weight-md` | - | - |
 | `@date-picker-panel-body-header-background-color` | `@color-graphite-l50` | - | - |
 | `@date-picker-panel-cell-width` | `28px` | - | - |
@@ -151,13 +148,11 @@ const defaultFormat = {
 | `@date-picker-panel-cell-trigger-width-lg` | `52px` | - | - |
 | `@date-picker-panel-cell-trigger-height-lg` | `24px` | - | - |
 | `@date-picker-panel-cell-border-radius` | `@border-radius-full` | - | - |
-| `@date-picker-panel-cell-border-radius-lg` | `@border-radius-md` | - | - |
+| `@date-picker-panel-cell-border-radius-lg` | `@border-radius-sm` | - | - |
 | `@date-picker-panel-cell-hover-background-color` | `@color-graphite-l50` | - | - |
 | `@date-picker-panel-cell-hover-color` | `@color-primary` | - | - |
-| `@date-picker-panel-cell-today-mark-width` | `24px` | - | - |
-| `@date-picker-panel-cell-today-mark-height` | `24px` | - | - |
-| `@date-picker-panel-cell-today-border-color` | `@color-blue-l40` | - | - |
-| `@date-picker-panel-cell-today-color` | `@color-primary` | - | - |
+| `@date-picker-panel-cell-current-border-color` | `@color-blue-l40` | - | - |
+| `@date-picker-panel-cell-current-color` | `@color-primary` | - | - |
 | `@date-picker-overlay-footer-border-width` | `@form-border-width` | - | - |
 | `@date-picker-overlay-footer-border-style` | `@form-border-style` | - | - |
 | `@date-picker-overlay-footer-border-color` | `@form-border-color` | - | - |
@@ -174,8 +169,9 @@ const defaultFormat = {
 | `@date-picker-overlay-inputs-margin-bottom` | `@spacing-sm` | - | - |
 | `@date-range-picker-overlay-padding` | `@spacing-lg @spacing-lg 0 @spacing-lg` | - | - |
 | `@date-range-picker-overlay-content-padding` | `0 0 @spacing-sm 0` | - | - |
-| `@date-range-picker-overlay-gap-width` | `@spacing-2xl` | - | - |
-| `@date-range-picker-overlay-gap-padding` | `1px 0 0 0` | - | - |
+| `@date-range-picker-overlay-separator-width` | `@spacing-2xl` | - | - |
+| `@date-range-picker-overlay-separator-padding` | `1px 0 0 0` | - | - |
+| `@date-range-picker-overlay-separator-font-size` | `@font-size-md` | - | - |
 | `@date-range-picker-overlay-footer-border-width` | `@date-picker-overlay-footer-border-width` | - | - |
 | `@date-range-picker-overlay-footer-border-style` | `@date-picker-overlay-footer-border-style` | - | - |
 | `@date-range-picker-overlay-footer-border-color` | `@color-graphite-l30` | - | - |
@@ -186,5 +182,5 @@ const defaultFormat = {
 | `@date-range-picker-panel-border-width` | `@form-border-width` | - | - |
 | `@date-range-picker-panel-border-style` | `@form-border-style` | - | - |
 | `@date-range-picker-panel-border-color` | `@form-border-color` | - | - |
-| `@date-range-picker-panel-border-radius` | `2px` | - | - |
+| `@date-range-picker-panel-border-radius` | `@border-radius-sm` | - | - |
 <!--- insert less variable end  --->

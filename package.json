@@ -98,6 +98,7 @@
     "eslint-plugin-jsdoc": "^37.9.7",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
+    "fast-glob": "^3.2.11",
     "figlet": "^1.5.2",
     "fs-extra": "^10.1.0",
     "gulp": "^4.0.2",

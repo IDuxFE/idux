@@ -155,7 +155,7 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 | `@select-option-container-border-radius` | `@border-radius-sm` | - | - |
 | `@select-option-container-box-shadow` | `@shadow-bottom-md` | - | - |
 | `@select-overlay-input-padding` | `0 @spacing-md @spacing-sm` | - | - |
-| `@select-icon-font-size` | `@font-size-sm` | `@font-size-lg` | - |
+| `@select-icon-font-size` | `@font-size-lg` | - | - |
 | `@select-icon-margin-right` | `@spacing-xs` | `@spacing-sm` | - |
 | `@select-icon-color` | `@select-placeholder-color` | `@color-graphite-l20` | - |
 | `@select-icon-hover-color` | `@select-color-secondary` | `@color-primary` | - |
@@ -169,7 +169,7 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 | `@select-multiple-item-border` | `@select-multiple-item-border-width @border-style @border-color-split` | - | - |
 | `@select-multiple-item-border-radius` | `@select-border-radius` | `2px` | - |
 | `@select-multiple-item-label-margin` | `0 -@spacing-xs 0 @spacing-xs` | - | - |
-| `@select-multiple-item-remove-icon-font-size` | `@font-size-xs` | `@font-size-lg` | - |
+| `@select-multiple-item-remove-icon-font-size` | `@font-size-lg` | - | - |
 | `@select-multiple-item-remove-icon-color` | `@color-graphite` | `@color-graphite-d20` | - |
 | `@select-multiple-item-remove-icon-hover-color` | `@color-graphite-d10` | `@color-primary-l10` | - |
 | `@select-multiple-item-remove-icon-margin` | `0 0 0 @spacing-xs` | - | - |
