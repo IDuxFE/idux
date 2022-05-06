@@ -9,6 +9,8 @@ import type { VNodeTypes } from 'vue'
 
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
+import { isArray } from 'lodash-es'
+
 import { IxIcon } from '@idux/components/icon'
 
 import { treeToken } from '../token'
@@ -40,11 +42,19 @@ export default defineComponent({
       if (isLoading.value) {
         children = <IxIcon name="loading"></IxIcon>
       } else if (!props.isLeaf) {
+        const { expanded } = props
         if (slots.expandIcon) {
-          const { nodeKey: key, expanded, rawNode: node } = props
+          const { nodeKey: key, rawNode: node } = props
           children = slots.expandIcon({ key, expanded, node })
         } else {
-          children = <IxIcon name={expandIcon.value} rotate={props.expanded ? 90 : 0}></IxIcon>
+          const expandIconValue = expandIcon.value
+          const iconIsArray = isArray(expandIconValue)
+          children = (
+            <IxIcon
+              name={iconIsArray ? (expanded ? expandIconValue[0] : expandIconValue[1]) : expandIconValue}
+              rotate={expanded && !iconIsArray ? 90 : 0}
+            />
+          )
         }
       }
       return (

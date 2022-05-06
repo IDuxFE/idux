@@ -642,7 +642,28 @@ describe('TreeSelect', () => {
 
     test('expandIcon work', async () => {
       const wrapper = TreeSelectMount({
-        props: { open: true, expandIcon: 'up' },
+        props: {
+          open: true,
+          expandIcon: 'up',
+          dataSource: [
+            {
+              label: 'Node 0',
+              key: '0',
+              children: [
+                {
+                  label: 'Node 0-0',
+                  key: '0-0',
+                  children: [
+                    {
+                      label: 'Node 0-0-0',
+                      key: '0-0-0',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       })
 
       expect(wrapper.findComponent(Content).find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(true)
@@ -651,6 +672,16 @@ describe('TreeSelect', () => {
 
       expect(wrapper.findComponent(Content).find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(false)
       expect(wrapper.findComponent(Content).find('.ix-tree-node-expand').find('.ix-icon-down').exists()).toBe(true)
+
+      await wrapper.setProps({ expandIcon: ['minus-square', 'plus-square'], expandedKeys: ['0'] })
+
+      const allNodes = wrapper.findComponent(Content).findAll('.ix-tree-node')
+
+      expect(wrapper.findComponent(Content).find('.ix-tree-node-expand').find('.ix-icon-up').exists()).toBe(false)
+      expect(wrapper.findComponent(Content).find('.ix-tree-node-expand').find('.ix-icon-down').exists()).toBe(false)
+
+      expect(allNodes[0].find('.ix-icon-minus-square').exists()).toBe(true)
+      expect(allNodes[1].find('.ix-icon-plus-square').exists()).toBe(true)
     })
 
     test('expandIcon slot work', async () => {

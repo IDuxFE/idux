@@ -35,7 +35,7 @@ export const treeProps = {
   draggable: IxPropTypes.bool.def(false),
   droppable: IxPropTypes.func<TreeDroppable>(),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
-  expandIcon: IxPropTypes.string,
+  expandIcon: IxPropTypes.oneOfType([String, IxPropTypes.array<string>()]),
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode) => VKey)>, default: undefined },
   height: IxPropTypes.number,
   labelKey: IxPropTypes.string,
