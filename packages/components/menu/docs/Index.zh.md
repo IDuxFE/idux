@@ -19,7 +19,7 @@ order: 0
 | `collapsed` | 菜单收起状态 | `boolean` | `false` | - | - |
 | `customAdditional` | 自定义下拉选项的额外属性 | `MenuCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 菜单数据数组 | `MenuData[]` | - | - | 优先级高于 `default` 插槽 |
-| `getKey` | 获取数据的唯一标识 | `string \| (data: CascaderData) => VKey` | `key` | ✅ | - |
+| `getKey` | 获取数据的唯一标识 | `string \| (data: MenuData) => VKey` | `key` | ✅ | - |
 | `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24` | ✅ | 仅支持 `inline` 模式 |
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |

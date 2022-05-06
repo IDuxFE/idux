@@ -1,7 +1,6 @@
 <template>
   <IxSpace>
-    <IxSwitch v-model:checked="selectableColumn.multiple" checkedChildren="Checkbox" unCheckedChildren="Radio">
-    </IxSwitch>
+    <IxSwitch v-model:checked="selectableColumn.multiple" :labels="['Checkbox', 'Radio']"></IxSwitch>
     <IxRadioGroup v-model:value="selectableColumn.trigger">
       <IxRadio value="click">Click</IxRadio>
       <IxRadio value="dblclick">DblClick</IxRadio>

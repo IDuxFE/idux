@@ -50,7 +50,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                 class="ix-table-content"
               >
                 <table
-                  style="table-layout: auto; height: 100%;"
+                  style="table-layout: auto;"
                 >
                   <colgroup>
                     
@@ -1033,7 +1033,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                 class="ix-table-content"
               >
                 <table
-                  style="table-layout: auto; height: 100%;"
+                  style="table-layout: auto;"
                 >
                   <colgroup>
                     
