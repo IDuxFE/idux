@@ -422,10 +422,10 @@
       ]
     },
     {
-      "login": "manchixue",
+      "login": "xuemanchi",
       "name": "xuemanchi",
       "avatar_url": "https://avatars.githubusercontent.com/u/31590999?v=4",
-      "profile": "https://github.com/manchixue",
+      "profile": "https://github.com/xuemanchi",
       "contributions": [
         "code",
         "doc"
@@ -584,6 +584,36 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/16161582?v=4",
       "profile": "https://blog.he110.info/",
       "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "hawtim",
+      "name": "Hawtim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11072796?v=4",
+      "profile": "https://github.com/hawtim",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "thinkingOfBetty",
+      "name": "Betty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32190750?v=4",
+      "profile": "https://github.com/thinkingOfBetty",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "qingshan-dev",
+      "name": "大鱼",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3405826?v=4",
+      "profile": "https://github.com/qingshan-dev",
+      "contributions": [
+        "code",
         "doc"
       ]
     }
