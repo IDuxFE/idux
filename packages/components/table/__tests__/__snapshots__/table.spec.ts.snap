@@ -6,7 +6,7 @@ exports[`Table > basic work > render work 1`] = `
   <!---->
   <div class=\\"ix-table-container\\">
     <div class=\\"ix-table-content\\">
-      <table style=\\"table-layout: auto; height: 100%;\\">
+      <table style=\\"table-layout: auto;\\">
         <colgroup>
           <col class=\\"ix-table-col-expandable\\">
           <col class=\\"ix-table-col-selectable\\">
