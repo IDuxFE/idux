@@ -27,15 +27,20 @@ interface DocumentHandlerOptions {
 
 const documentHandlerMap = new Map<HTMLElement, DocumentHandlerOptions>()
 
-on(document, 'click', event => {
-  documentHandlerMap.forEach(({ exclude, handler }) => {
-    const target = event.target as Node
-    if (exclude.some(item => item === target || item.contains(target))) {
-      return
-    }
-    handler(event)
-  })
-})
+on(
+  document,
+  'click',
+  event => {
+    documentHandlerMap.forEach(({ exclude, handler }) => {
+      const target = event.target as Node
+      if (exclude.some(item => item === target || item.contains(target))) {
+        return
+      }
+      handler(event)
+    })
+  },
+  { capture: true },
+)
 
 function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
   const exclude: HTMLElement[] = [el]
