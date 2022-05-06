@@ -65,7 +65,6 @@ subtitle: 按钮
 | `@button-padding-md` | `@spacing-lg` | - | - |
 | `@button-padding-lg` | `@spacing-xl` | - | - |
 | `@button-padding-xl` | `@spacing-2xl` | - | - |
-| `@button-icon-margin-left` | `@spacing-xs` | - | - |
 | `@button-border-style` | `@border-style` | - | - |
 | `@button-border-size` | `@border-width-sm` | - | - |
 | `@button-border-radius` | `@border-radius-sm` | - | - |
@@ -94,8 +93,8 @@ subtitle: 按钮
 | `@button-danger-background-color` | `@color-error` | - | - |
 | `@button-ghost-color` | `@background-color-component` | - | - |
 | `@button-ghost-background-color` | `transparent` | - | - |
-| `@button-ghost-hover-background-color` | `rgba(255,255,255,0.20)` | - | - |
-| `@button-ghost-disabled-background-color` | `rgba(255,255,255,0.40)` | - | - |
+| `@button-ghost-hover-background-color` | `rgba(255, 255, 255, 0.2)` | - | - |
+| `@button-ghost-disabled-background-color` | `rgba(255, 255, 255, 0.4)` | - | - |
 | `@button-ghost-border` | `@background-color-component` | - | - |
 | `@button-link-color` | `@color-primary` | - | - |
 | `@button-link-hover-background-color` | `transparent` | - | - |
@@ -106,4 +105,5 @@ subtitle: 按钮
 | `@button-text-hover-background-color` | `transparent` | - | - |
 | `@button-icon-color` | `@color-graphite-d20` | - | - |
 | `@button-icon-font-size` | `@font-size-lg` | - | - |
+| `@button-icon-margin` | `0 @spacing-xs` | - | - |
 <!--- insert less variable end  --->

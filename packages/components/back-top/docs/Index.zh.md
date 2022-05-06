@@ -32,7 +32,7 @@ subtitle: 回到顶部
 | `@back-top-zindex` | `@zindex-l2-base` | - | - |
 | `@back-top-height` | `60px` | - | - |
 | `@back-top-width` | `60px` | - | - |
-| `@back-top-font-size` | `@font-size-3xl` | - | - |
+| `@back-top-font-size` | `@font-size-3xl` | `32px` | - |
 | `@back-top-border-radius` | `50%` | - | - |
 | `@back-top-right-gutter` | `15px` | - | - |
 | `@back-top-right-xs` | `(@back-top-right-gutter / 2)` | - | - |
