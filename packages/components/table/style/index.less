@@ -307,6 +307,15 @@
     }
   }
 
+  &-empty&-auto-height,
+  &-empty&-full-height {
+    .cdk-virtual-scroll-filler,
+    .cdk-virtual-scroll-content,
+    table {
+      height: 100%;
+    }
+  }
+
   &-sticky {
     &-holder {
       position: sticky;

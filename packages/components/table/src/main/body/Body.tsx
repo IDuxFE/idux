@@ -28,9 +28,7 @@ export default defineComponent({
       isSticky,
     } = inject(TABLE_TOKEN)!
 
-    const showMeasure = computed(
-      () => flattedData.value.length > 0 && (scrollWidth.value || scrollHeight.value || isSticky.value),
-    )
+    const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
 
     return () => {
       const prefixCls = mergedPrefixCls.value

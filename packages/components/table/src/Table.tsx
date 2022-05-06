@@ -85,13 +85,17 @@ export default defineComponent({
     provide(TABLE_TOKEN, context)
     expose({ scrollTo: scrollContext.scrollTo })
 
+    const { flattedData, filteredData } = dataContext
+
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { borderless = config.borderless, size = config.size } = props
+      const { borderless = config.borderless, size = config.size, scroll } = props
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-auto-height`]: autoHeight.value,
         [`${prefixCls}-borderless`]: borderless,
+        [`${prefixCls}-empty`]: flattedData.value.length === 0,
+        [`${prefixCls}-full-height`]: scroll?.fullHeight,
         [`${prefixCls}-${size}`]: true,
       })
     })
@@ -100,11 +104,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
-      const [paginationTop, paginationBottom] = renderPagination(
-        mergedPagination.value,
-        dataContext.filteredData.value,
-        prefixCls,
-      )
+      const [paginationTop, paginationBottom] = renderPagination(mergedPagination.value, filteredData.value, prefixCls)
       const children = [header, paginationTop, <MainTable />, paginationBottom, footer]
       const spinProps = convertSpinProps(props.spin)
       const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
