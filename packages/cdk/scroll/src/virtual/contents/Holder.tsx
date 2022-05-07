@@ -54,11 +54,12 @@ export default defineComponent({
     const contentStyle = computed<CSSProperties>(() => {
       const offset = scrollOffset.value
       if (offset === undefined) {
-        return { display: 'flex', flexDirection: 'column' }
+        return { display: 'flex', flexDirection: 'column', flexWrap: 'wrap' }
       }
       return {
         display: 'flex',
         flexDirection: 'column',
+        flexWrap: 'wrap',
         transform: `translateY(${offset}px)`,
         position: 'absolute',
         left: 0,

@@ -54,11 +54,15 @@
     &-search-wrapper {
       display: flex;
       gap: 4px;
-      margin-bottom: 8px;
+      padding: @tree-select-option-container-search-wrapper-padding;
       .@{input-prefix}-suffix,
       .@{input-prefix}-clear {
         color: @select-icon-color;
       }
+    }
+
+    .@{tree-prefix}-node {
+      padding: @tree-select-option-container-tree-node-padding;
     }
   }
 }
