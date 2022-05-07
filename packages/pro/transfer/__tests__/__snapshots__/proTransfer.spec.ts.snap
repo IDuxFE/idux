@@ -1346,7 +1346,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                 >
                   <div
                     class="cdk-virtual-scroll-content"
-                    style="display: flex; flex-direction: column;"
+                    style="display: flex; flex-direction: column; flex-wrap: wrap;"
                   >
                     
                     
@@ -3004,7 +3004,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                 >
                   <div
                     class="cdk-virtual-scroll-content"
-                    style="display: flex; flex-direction: column;"
+                    style="display: flex; flex-direction: column; flex-wrap: wrap;"
                   >
                     
                     
