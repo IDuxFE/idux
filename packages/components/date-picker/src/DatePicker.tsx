@@ -15,14 +15,13 @@ import { useControl } from './composables/useControl'
 import { useFormat } from './composables/useFormat'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useKeyboardEvents } from './composables/useKeyboardEvents'
+import { useOverlayProps } from './composables/useOverlayProps'
 import { useOverlayState } from './composables/useOverlayState'
 import { usePickerState } from './composables/usePickerState'
 import Content from './content/Content'
 import { datePickerToken } from './token'
 import Trigger from './trigger/Trigger'
 import { datePickerProps } from './types'
-
-const defaultOffset: [number, number] = [0, 8]
 
 export default defineComponent({
   name: 'IxDatePicker',
@@ -49,7 +48,7 @@ export default defineComponent({
     const { overlayOpened, setOverlayOpened } = useOverlayState(props, controlContext)
     const handleKeyDown = useKeyboardEvents(setOverlayOpened)
 
-    provide(datePickerToken, {
+    const context = {
       props,
       slots,
       locale,
@@ -64,7 +63,9 @@ export default defineComponent({
       controlContext,
       ...formatContext,
       ...pickerStateContext,
-    })
+    }
+
+    provide(datePickerToken, context)
 
     watch(overlayOpened, opened => {
       nextTick(() => {
@@ -78,23 +79,17 @@ export default defineComponent({
       })
     })
 
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
     const renderTrigger = () => <Trigger {...attrs}></Trigger>
     const renderContent = () => <Content></Content>
-    const overlayProps = { triggerId: attrs.id, 'onUpdate:visible': setOverlayOpened }
+    const overlayProps = useOverlayProps(context)
+    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
 
     return () => (
       <ɵOverlay
-        {...overlayProps}
-        visible={overlayOpened.value}
+        {...overlayProps.value}
+        class={overlayClass.value}
         v-slots={{ default: renderTrigger, content: renderContent }}
-        class={normalizeClass(props.overlayClassName)}
-        clickOutside
-        disabled={accessor.disabled.value || props.readonly}
-        offset={defaultOffset}
-        placement="bottomStart"
-        target={target.value}
-        trigger="manual"
+        triggerId={attrs.id}
       />
     )
   },

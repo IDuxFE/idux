@@ -5,38 +5,81 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+
+import { MaybeArray } from '@idux/cdk/utils'
 
 export const baseTimePanelProps = {
-  disabledHours: IxPropTypes.func<(selectedAmPm: string) => number[]>().def(() => []),
-  disabledMinutes: IxPropTypes.func<(selectedHour: number, selectedAmPm: string) => number[]>().def(() => []),
-  disabledSeconds: IxPropTypes.func<
-    (selectedHour: number, selectedMinute: number, selectedAmPm: string) => number[]
-  >().def(() => []),
+  disabledHours: {
+    type: Function as PropType<(selectedAmPm: string | undefined) => number[]>,
+    default: () => [],
+  },
+  disabledMinutes: {
+    type: Function as PropType<(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]>,
+    default: () => [],
+  },
+  disabledSeconds: {
+    type: Function as PropType<
+      (
+        selectedHour: number | undefined,
+        selectedMinute: number | undefined,
+        selectedAmPm: string | undefined,
+      ) => number[]
+    >,
+    default: () => [],
+  },
 
-  hideDisabledOptions: IxPropTypes.bool.def(false),
-  hourStep: IxPropTypes.number.def(1),
-  minuteStep: IxPropTypes.number.def(1),
-  secondStep: IxPropTypes.number.def(1),
+  hideDisabledOptions: {
+    type: Boolean,
+    default: false,
+  },
+  hourStep: {
+    type: Number,
+    default: 1,
+  },
+  minuteStep: {
+    type: Number,
+    default: 1,
+  },
+  secondStep: {
+    type: Number,
+    default: 1,
+  },
 }
 
 export const timePanelProps = {
   ...baseTimePanelProps,
 
-  value: IxPropTypes.object<Date>(),
-  defaultOpenValue: IxPropTypes.object<Date>(),
-  visible: IxPropTypes.bool,
-  hourEnabled: IxPropTypes.bool.def(true),
-  minuteEnabled: IxPropTypes.bool.def(true),
-  secondEnabled: IxPropTypes.bool.def(true),
-  use12Hours: IxPropTypes.bool.def(false),
+  value: Date,
+  activeValue: Date,
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+  hourEnabled: {
+    type: Boolean,
+    default: true,
+  },
+  minuteEnabled: {
+    type: Boolean,
+    default: true,
+  },
+  secondEnabled: {
+    type: Boolean,
+    default: true,
+  },
+  use12Hours: {
+    type: Boolean,
+    default: false,
+  },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: Date) => void>(),
-  onChange: IxPropTypes.emit<(value: Date) => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
 }
 
 export type TimePanelProps = ExtractInnerPropTypes<typeof timePanelProps>
@@ -53,21 +96,40 @@ export interface TimePanelCell {
 }
 
 export const timePanelColumnProps = {
-  selectedValue: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.string]).isRequired,
-  options: IxPropTypes.arrayOf(IxPropTypes.object<TimePanelCell>()).isRequired,
-  visible: IxPropTypes.bool,
+  selectedValue: [Number, String],
+  activeValue: {
+    type: [Number, String],
+    required: true,
+  },
+  options: {
+    type: Array as PropType<TimePanelCell[]>,
+    require: true,
+  },
+  visible: {
+    type: Boolean,
+    default: false,
+  },
 
   // events
-  onChange: IxPropTypes.emit<(value: number | string) => void>(),
+  onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
 }
 
 export const timePanelCellProps = {
-  disabled: IxPropTypes.bool.def(false),
-  selected: IxPropTypes.bool.def(false),
-  value: IxPropTypes.oneOfType([Number, String]).isRequired,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  selected: {
+    type: Boolean,
+    default: false,
+  },
+  value: {
+    type: [Number, String],
+    required: true,
+  },
 
   // events
-  onChange: IxPropTypes.emit<(value: number | string) => void>(),
+  onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
 }
 export type BaseTimePanelProps = ExtractInnerPropTypes<typeof baseTimePanelProps>
 export type TimePanelColumnProps = ExtractInnerPropTypes<typeof timePanelColumnProps>

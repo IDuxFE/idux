@@ -13,7 +13,7 @@ import { type ComputedRef, watch } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
-import { applyDateTime, convertToDate } from '../utils'
+import { applyDateTime, convertToDate, isSameDateTime } from '../utils'
 
 export interface PickerControlContext {
   inputValue: ComputedRef<string>
@@ -75,15 +75,10 @@ export function useControl(
       return
     }
 
-    const { isSame, parse, format } = dateConfig
+    const { parse, format } = dateConfig
     const parsedValue = parse(dateInputValue.value, dateFormatRef.value)
 
-    if (
-      force ||
-      !isSame(parsedValue, currValue, 'year') ||
-      !isSame(parsedValue, currValue, 'month') ||
-      !isSame(parsedValue, currValue, 'date')
-    ) {
+    if (force || !isSameDateTime(dateConfig, parsedValue, currValue, ['year', 'month', 'date'])) {
       setDateInputValue(format(currValue, dateFormatRef.value))
     }
   }
@@ -93,15 +88,10 @@ export function useControl(
       return
     }
 
-    const { parse, format, isSame } = dateConfig
+    const { parse, format } = dateConfig
     const parsedValue = parse(timeInputVaue.value, timeFormatRef.value)
 
-    if (
-      force ||
-      !isSame(parsedValue, currValue, 'hour') ||
-      !isSame(parsedValue, currValue, 'minute') ||
-      !isSame(parsedValue, currValue, 'second')
-    ) {
+    if (force || !isSameDateTime(dateConfig, parsedValue, currValue, ['hour', 'minute', 'second'])) {
       setTimeInputValue(format(currValue, timeFormatRef.value))
     }
   }

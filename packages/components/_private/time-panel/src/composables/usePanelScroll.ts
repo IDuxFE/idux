@@ -17,7 +17,7 @@ import { callEmit } from '@idux/cdk/utils'
 
 export interface PanelColumnScroll {
   adjustPanel: (selectedIndex: number, duration?: number) => void
-  scrollToSelected: (duration?: number) => void
+  scrollToActive: (duration?: number) => void
   handleScrollAdjust: () => void
   handleScroll: () => void
 }
@@ -28,6 +28,7 @@ export function usePanelScroll(
   mergedPrefixCls: ComputedRef<string>,
 ): PanelColumnScroll {
   let scrollHandlerLocked = false
+  let scrollHandlerLockedTmr: null | number = null
   let isScrolling = false
   let scrollTargetIndex: number | undefined
 
@@ -37,7 +38,7 @@ export function usePanelScroll(
 
   function adjustPanel(selectedIndex: number, duration = 200) {
     const target = listRef.value
-    if (!target || isScrolling || scrollHandlerLocked) {
+    if (!target || isScrolling) {
       return
     }
 
@@ -47,36 +48,42 @@ export function usePanelScroll(
     }
 
     scrollHandlerLocked = true
+
+    if (scrollHandlerLockedTmr) {
+      clearTimeout(scrollHandlerLockedTmr)
+    }
+
     scrollToTop({
       top,
       target,
       duration,
       callback: () => {
-        setTimeout(() => {
+        scrollHandlerLockedTmr = setTimeout(() => {
           scrollHandlerLocked = false
-        }, 100)
+          scrollHandlerLockedTmr = null
+        }, Math.max(duration, 200))
       },
     })
   }
 
-  function scrollToSelected(duration?: number) {
-    const selectedIndex = props.options.findIndex(item => item.value === props.selectedValue)
-    adjustPanel(selectedIndex, duration)
+  function scrollToActive(duration?: number) {
+    const activeIndex = props.options!.findIndex(item => item.value === props.activeValue)
+    adjustPanel(activeIndex, duration)
   }
 
   function handleScrollAdjust() {
-    isNil(scrollTargetIndex) || scrollTargetIndex < 0 ? scrollToSelected() : adjustPanel(scrollTargetIndex)
+    isNil(scrollTargetIndex) || scrollTargetIndex < 0 ? scrollToActive() : adjustPanel(scrollTargetIndex)
   }
 
   function handleScroll() {
     const target = listRef.value
-    if (!target || scrollHandlerLocked) {
+    if (!target || isScrolling || scrollHandlerLocked) {
       return
     }
 
     isScrolling = true
-    scrollTargetIndex = Math.min(Math.round(getScroll(target).scrollTop / getCellHeight()), props.options.length - 1)
-    const targetItem = props.options[scrollTargetIndex]
+    scrollTargetIndex = Math.min(Math.round(getScroll(target).scrollTop / getCellHeight()), props.options!.length - 1)
+    const targetItem = props.options![scrollTargetIndex]
     if (!targetItem.disabled) {
       callEmit(props.onChange, targetItem.value)
     }
@@ -87,23 +94,23 @@ export function usePanelScroll(
 
   watchEffect(() => {
     if (props.visible) {
-      nextTick(() => scrollToSelected(0))
+      nextTick(() => scrollToActive(0))
     }
   })
   watch(
-    () => props.selectedValue,
+    () => props.activeValue,
     value => {
-      const newScrollTargetIndex = props.options.findIndex(item => item.value === value)
+      const newScrollTargetIndex = props.options!.findIndex(item => item.value === value)
       if (scrollTargetIndex !== newScrollTargetIndex) {
         scrollTargetIndex = newScrollTargetIndex
-        !isScrolling && nextTick(scrollToSelected)
+        !isScrolling && nextTick(scrollToActive)
       }
     },
   )
 
   return {
     adjustPanel,
-    scrollToSelected,
+    scrollToActive,
     handleScrollAdjust,
     handleScroll,
   }

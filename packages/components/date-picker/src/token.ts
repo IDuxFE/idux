@@ -20,7 +20,7 @@ import type { DateConfig, DatePickerConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
 
-export interface DataPickerContext extends OverlayStateContext, FormatContext, PickerStateContext<DatePickerProps> {
+export interface DatePickerContext extends OverlayStateContext, FormatContext, PickerStateContext<DatePickerProps> {
   props: DatePickerProps
   slots: Slots
   locale: Locale
@@ -50,5 +50,5 @@ export interface DateRangePickerContext
   handleKeyDown: (evt: KeyboardEvent) => void
 }
 
-export const datePickerToken: InjectionKey<DataPickerContext> = Symbol('datePickerToken')
+export const datePickerToken: InjectionKey<DatePickerContext> = Symbol('datePickerToken')
 export const dateRangePickerToken: InjectionKey<DateRangePickerContext> = Symbol('dateRangePickerToken')

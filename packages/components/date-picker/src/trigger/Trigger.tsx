@@ -15,7 +15,8 @@ import { useTriggerProps } from '../composables/useTriggerProps'
 import { datePickerToken } from '../token'
 
 export default defineComponent({
-  setup() {
+  inheritAttrs: false,
+  setup(_, { attrs }) {
     const context = inject(datePickerToken)!
     const {
       props,
@@ -67,7 +68,7 @@ export default defineComponent({
         clearIcon: slots.clearIcon,
       }
 
-      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} />
+      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} {...attrs} />
     }
   },
 })

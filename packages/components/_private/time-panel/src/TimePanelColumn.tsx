@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, nextTick, ref } from 'vue'
+import { defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
@@ -19,34 +19,35 @@ export default defineComponent({
   setup(props) {
     const { mergedPrefixCls } = inject(timePanelContext)!
     const listRef = ref<HTMLElement | null>(null)
-    const { scrollToSelected, handleScroll, handleScrollAdjust } = usePanelScroll(props, listRef, mergedPrefixCls)
+    const { handleScroll, handleScrollAdjust } = usePanelScroll(props, listRef, mergedPrefixCls)
 
     function onChange(value: string | number) {
       callEmit(props.onChange, value)
-      nextTick(scrollToSelected)
     }
 
     return () => (
-      <ul
+      <div
         ref={listRef}
         class={`${mergedPrefixCls.value}-column`}
         onScroll={handleScroll}
-        onMousemove={handleScrollAdjust}
+        onMouseleave={handleScrollAdjust}
         onMouseenter={handleScrollAdjust}
       >
-        {props.options.map((item, index) => {
-          const { disabled, value } = item
-          return (
-            <PanelCell
-              key={index}
-              disabled={disabled}
-              selected={props.selectedValue === value}
-              value={value}
-              onChange={onChange}
-            />
-          )
-        })}
-      </ul>
+        <ul class={`${mergedPrefixCls.value}-column-inner`}>
+          {props.options!.map((item, index) => {
+            const { disabled, value } = item
+            return (
+              <PanelCell
+                key={index}
+                disabled={disabled}
+                selected={props.selectedValue === value}
+                value={value}
+                onChange={onChange}
+              />
+            )
+          })}
+        </ul>
+      </div>
     )
   },
 })

@@ -1,0 +1,41 @@
+.time-picker-trigger() {
+  display: inline-flex;
+  width: 100%;
+  line-height: @time-picker-line-height;
+  
+  &:not(.@{trigger-prefix}-disabled) {
+    color: @time-picker-color;
+  }
+
+  &-input {
+    display: flex;
+    align-items: center;
+    &-inner {
+      display: inline-block;
+      min-width: 0;
+    }
+  }
+
+
+  &-overlay {
+    z-index: @time-picker-overlay-zindex;
+    background-color: @time-picker-overlay-background-color;
+    box-shadow: @time-picker-overlay-box-shadow;
+  }
+}
+
+.time-picker-board() {
+  &-board {
+    .@{input-prefix}-focused {
+      box-shadow: none;
+    }
+
+    &-input {
+      margin-bottom: @time-picker-overlay-input-margin-bottom;
+      color: @time-picker-color;
+      input {
+        color: @time-picker-color;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import type { UpdateStyleVariableConfig } from './config'
 import type { Pattern } from 'fast-glob'
 
-import { join } from 'path'
+import { basename, join } from 'path'
 
 import fg from 'fast-glob'
 import { appendFile, lstatSync, readFile, readdir, writeFile } from 'fs-extra'
@@ -46,7 +46,7 @@ class UpdateStyleVariable {
   }
 
   private getTheme(themeFile: string) {
-    return themeFile.match(/.*\/(.*)\.variable.less$/)?.[1]
+    return basename(themeFile, '.variable.less')
   }
 
   private isRequired(dir: string, component: string, curDirPath: string, config: UpdateStyleVariableConfig) {

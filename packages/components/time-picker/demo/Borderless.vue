@@ -5,6 +5,6 @@
 </template>
 <style scoped lang="less">
 :deep(.ix-time-picker) {
-  width: 100px;
+  width: 110px;
 }
 </style>

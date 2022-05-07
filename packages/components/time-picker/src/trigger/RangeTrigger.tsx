@@ -7,126 +7,68 @@
 
 import { type ComputedRef, computed, defineComponent, inject } from 'vue'
 
-import { type DateConfig, useGlobalConfig } from '@idux/components/config'
+import { ɵTrigger } from '@idux/components/_private/trigger'
 
-import { type PickerControl } from '../composables/usePickerControl'
-import { useCommonTriggerProps } from '../composables/useProps'
-import { timeRangePickerContext, timeRangePickerControl } from '../tokens'
-import { timeRangePickerTriggerProps } from '../types'
-import BaseTrigger from './BaseTrigger'
+import { useTriggerProps } from '../composables/useTriggerProps'
+import { timeRangePickerContext } from '../tokens'
 
 export default defineComponent({
-  name: 'IxTimeRangePickerTrigger',
-  props: timeRangePickerTriggerProps,
-  setup(props) {
-    const common = useGlobalConfig('common')
-    const commonPrefixCls = computed(() => common.prefixCls)
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker-trigger`)
-
+  inheritAttrs: false,
+  setup(_, { attrs }) {
     const context = inject(timeRangePickerContext)!
     const {
       props: pickerProps,
       slots,
-      dateConfig,
       locale,
-      format,
+      mergedPrefixCls,
+      inputRef,
       inputEnableStatus,
-      setOverlayOpened,
       renderSeparator,
-      commonBindings: { isDisabled, handleClear },
+      rangeControlContext: { fromControl, toControl },
     } = context
 
-    const [fromPickerControl, toPickerControl] = inject(timeRangePickerControl)!
-    const handleClick = () => {
-      if (pickerProps.readonly) {
-        return
-      }
-
-      setOverlayOpened(true)
-    }
-
-    const placeholder: ComputedRef<[string, string]> = computed(() => [
+    const placeholders: ComputedRef<[string, string]> = computed(() => [
       pickerProps.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
       pickerProps.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
     ])
 
-    const triggerProps = useCommonTriggerProps(props, context)
-    const renderContent = () => {
-      const prefixCls = mergedPrefixCls.value
-      const enableInput = inputEnableStatus.value.enableExternalInput
-      const disabled = isDisabled.value || pickerProps.readonly
+    function renderSide(prefixCls: string, isFrom: boolean) {
+      const { inputValue, handleInput } = isFrom ? fromControl : toControl
+      const { disabled, readonly } = triggerProps.value
+      const placeholder = placeholders.value[isFrom ? 0 : 1]
 
       return (
-        <span class={`${prefixCls}-content`}>
-          <span class={`${prefixCls}-content-side`}>
-            {renderSide(
-              props.value?.[0],
-              format.value,
-              dateConfig,
-              fromPickerControl,
-              enableInput,
-              disabled,
-              placeholder.value[0],
-              commonPrefixCls.value,
-            )}
-          </span>
-          <span class={`${prefixCls}-content-separator`}>{renderSeparator()}</span>
-          <span class={`${prefixCls}-content-side`}>
-            {renderSide(
-              props.value?.[1],
-              format.value,
-              dateConfig,
-              toPickerControl,
-              enableInput,
-              disabled,
-              placeholder.value[1],
-              commonPrefixCls.value,
-            )}
-          </span>
-        </span>
+        <input
+          ref={isFrom && inputEnableStatus.value.enableExternalInput ? inputRef : undefined}
+          class={`${prefixCls}-input-inner`}
+          autocomplete="off"
+          disabled={disabled}
+          value={inputValue.value}
+          placeholder={placeholder}
+          readonly={readonly}
+          onInput={handleInput}
+        />
       )
     }
 
-    return () => (
-      <BaseTrigger {...triggerProps.value} v-slots={slots} onClick={handleClick} onClear={handleClear}>
-        {renderContent()}
-      </BaseTrigger>
+    const triggerProps = useTriggerProps(context)
+    const renderContent = (prefixCls: string) => (
+      <span class={`${prefixCls}-input`}>
+        {renderSide(prefixCls, true)}
+        <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
+        {renderSide(prefixCls, false)}
+      </span>
     )
+
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      const triggerSlots = {
+        default: () => renderContent(prefixCls),
+        suffix: slots.suffix,
+        clearIcon: slots.clearIcon,
+      }
+
+      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} {...attrs} />
+    }
   },
 })
-
-function renderSide(
-  value: Date | undefined,
-  format: string,
-  dateConfig: DateConfig,
-  pickerControl: PickerControl,
-  enableInput: boolean,
-  disabled: boolean,
-  placeholder: string,
-  prefixCls: string,
-) {
-  if (!enableInput) {
-    return value ? (
-      dateConfig.format(value, format)
-    ) : (
-      <span class={`${prefixCls}-time-picker-trigger-placeholder`}>{placeholder}</span>
-    )
-  }
-
-  const { inputValue, handleInputChange } = pickerControl
-  const onInput = (evt: Event) => {
-    const { value } = evt.target as HTMLInputElement
-    handleInputChange(value)
-  }
-
-  return (
-    <input
-      class={`${prefixCls}-time-picker-trigger-input`}
-      autocomplete="off"
-      disabled={disabled}
-      value={inputValue.value}
-      placeholder={placeholder}
-      onInput={onInput}
-    />
-  )
-}

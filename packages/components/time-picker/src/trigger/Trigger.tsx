@@ -5,80 +5,59 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, withKeys } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
-import { useGlobalConfig } from '@idux/components/config'
+import { ɵTrigger } from '@idux/components/_private/trigger'
 
-import { useCommonTriggerProps } from '../composables/useProps'
-import { timePickerContext, timePickerControl } from '../tokens'
-import { timePickerTriggerProps } from '../types'
-import BaseTrigger from './BaseTrigger'
+import { useTriggerProps } from '../composables/useTriggerProps'
+import { timePickerContext } from '../tokens'
 
 export default defineComponent({
-  name: 'IxTimePickerTrigger',
-  props: timePickerTriggerProps,
-  setup(props) {
-    const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker-trigger`)
-
+  inheritAttrs: false,
+  setup(_, { attrs }) {
     const context = inject(timePickerContext)!
     const {
       props: pickerProps,
       slots,
-      dateConfig,
       locale,
-      format,
+      mergedPrefixCls,
+      formatRef,
+      inputRef,
       inputEnableStatus,
-      setOverlayOpened,
-      commonBindings: { isDisabled, handleClear },
+      controlContext: { inputValue, handleInput },
     } = context
 
-    const { inputValue, handleInputChange } = inject(timePickerControl)!
-    const handleClick = () => {
-      if (pickerProps.readonly) {
-        return
-      }
-
-      setOverlayOpened(true)
-    }
-
     const placeholder = computed(() => pickerProps.placeholder ?? locale.timePicker.placeholder)
+    const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
 
-    const triggerProps = useCommonTriggerProps(props, context)
-    const renderContent = () => {
-      const prefixCls = mergedPrefixCls.value
-      if (inputEnableStatus.value.enableExternalInput) {
-        const onInput = (evt: Event) => {
-          const { value } = evt.target as HTMLInputElement
-          handleInputChange(value)
-        }
-        const onKeydown = withKeys(() => {
-          setOverlayOpened(false)
-        }, ['enter'])
-        return (
-          <input
-            class={`${prefixCls}-input`}
-            autocomplete="off"
-            disabled={isDisabled.value || pickerProps.readonly}
-            value={inputValue.value}
-            placeholder={placeholder.value}
-            onInput={onInput}
-            onKeydown={onKeydown}
-          />
-        )
-      }
+    const triggerProps = useTriggerProps(context)
+    const renderContent = (prefixCls: string) => {
+      const { readonly, disabled } = triggerProps.value
 
-      return props.value ? (
-        dateConfig.format(props.value, format.value)
-      ) : (
-        <span class={`${mergedPrefixCls.value}-placeholder`}>{placeholder.value}</span>
+      return (
+        <input
+          ref={inputEnableStatus.value.enableExternalInput ? inputRef : undefined}
+          class={`${prefixCls}-input`}
+          autocomplete="off"
+          disabled={disabled}
+          placeholder={placeholder.value}
+          readonly={readonly}
+          size={inputSize.value}
+          value={inputValue.value}
+          onInput={handleInput}
+        />
       )
     }
 
-    return () => (
-      <BaseTrigger {...triggerProps.value} v-slots={slots} onClick={handleClick} onClear={handleClear}>
-        {renderContent()}
-      </BaseTrigger>
-    )
+    return () => {
+      const prefixCls = mergedPrefixCls.value
+      const triggerSlots = {
+        default: () => renderContent(prefixCls),
+        suffix: slots.suffix,
+        clearIcon: slots.clearIcon,
+      }
+
+      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} {...attrs} />
+    }
   },
 })

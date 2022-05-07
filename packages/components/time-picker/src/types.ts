@@ -5,80 +5,109 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { IxPropTypes } from '@idux/cdk/utils'
+import { ɵFooterTypeDef } from '@idux/components/_private/footer'
 import { ɵbaseTimePanelProps } from '@idux/components/_private/time-panel'
 
-const basePickerProps = {
+const timePickerCommonProps = {
   ...ɵbaseTimePanelProps,
   // v-model
-  open: IxPropTypes.bool,
+  open: {
+    type: Boolean,
+    default: undefined,
+  },
   control: controlPropDef,
-
-  allowInput: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['overlay'])]),
-  autoSwap: IxPropTypes.bool.def(true),
-
-  autofocus: IxPropTypes.bool,
-  borderless: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
-  clearText: IxPropTypes.string,
-  format: IxPropTypes.string,
-  overlayClassName: IxPropTypes.string,
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
-  target: ɵPortalTargetDef,
+  allowInput: {
+    type: [Boolean, String] as PropType<boolean | 'overlay'>,
+    default: undefined,
+  },
+  autofocus: {
+    type: Boolean,
+    default: undefined,
+  },
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearable: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearIcon: String,
+  clearText: String,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  format: String,
+  overlayClassName: String,
+  overlayContainer: ɵPortalTargetDef,
+  overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
+  readonly: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  size: String as PropType<FormSize>,
+  suffix: String,
 
   // events
-  'onUpdate:open': IxPropTypes.emit<(isOpen: boolean) => void>(),
-  onClear: IxPropTypes.emit<(evt: MouseEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  'onUpdate:open': [Function, Array] as PropType<MaybeArray<(isOpen: boolean) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+}
+
+export type TimePickerCommonProps = ExtractInnerPropTypes<typeof timePickerCommonProps>
+export interface TimePickerCommonBindings {
+  blur: () => void
+  focus: (options?: FocusOptions) => void
 }
 
 export const timePickerProps = {
-  ...basePickerProps,
+  ...timePickerCommonProps,
 
   // v-model
-  value: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
+  value: [String, Date, Number] as PropType<string | Date | number>,
 
-  defaultOpenValue: IxPropTypes.oneOfType<number | string | Date>([Number, String, Date]),
-  disabled: IxPropTypes.bool.def(false),
-  placeholder: IxPropTypes.string,
-  readonly: IxPropTypes.bool.def(false),
+  defaultOpenValue: [String, Date, Number] as PropType<string | Date | number>,
+  footer: { type: ɵFooterTypeDef, default: false },
+  placeholder: String,
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: Date | undefined) => void>(),
-  onChange: IxPropTypes.emit<(value: Date | undefined) => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
+  onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
 }
 
 export type TimePickerProps = ExtractInnerPropTypes<typeof timePickerProps>
 export type TimePickerPublicProps = ExtractPublicPropTypes<typeof timePickerProps>
 export type TimePickerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof TimePickerPublicProps> & TimePickerPublicProps
+  Omit<HTMLAttributes, keyof TimePickerPublicProps> & TimePickerPublicProps,
+  TimePickerCommonBindings
 >
-export type TimePickerInstance = InstanceType<DefineComponent<TimePickerProps>>
+export type TimePickerInstance = InstanceType<DefineComponent<TimePickerProps, TimePickerCommonBindings>>
 
 export const timeRangePickerProps = {
-  ...basePickerProps,
+  ...timePickerCommonProps,
 
   // v-model
-  value: IxPropTypes.object<[number | string | Date | undefined, number | string | Date | undefined]>(),
-
-  defaultOpenValue: IxPropTypes.object<[number | string | Date | undefined, number | string | Date | undefined]>(),
-  disabled: IxPropTypes.bool.def(false),
-  placeholder: IxPropTypes.object<[string, string]>(),
-  readonly: IxPropTypes.bool.def(false),
-  separator: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
+  value: Array as PropType<(number | string | Date | undefined)[]>,
+  defaultOpenValue: Array as PropType<(number | string | Date)[]>,
+  footer: { type: ɵFooterTypeDef, default: true },
+  placeholder: Array as PropType<string[]>,
+  separator: [String, Object] as PropType<string | VNode>,
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: [Date | undefined, Date | undefined] | undefined) => void>(),
-  onChange: IxPropTypes.emit<(value: [Date | undefined, Date | undefined] | undefined) => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
+  onChange: [Function, Array] as PropType<
+    MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
+  >,
+  onInput: [Function, Array] as PropType<MaybeArray<(isFrom: boolean, evt: Event) => void>>,
 }
 
 export type TimeRangePickerProps = ExtractInnerPropTypes<typeof timeRangePickerProps>
@@ -87,29 +116,3 @@ export type TimeRangePickerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TimeRangePickerPublicProps> & TimeRangePickerPublicProps
 >
 export type TimeRangePickerInstance = InstanceType<DefineComponent<TimeRangePickerProps>>
-
-export const baseTriggerProps = {
-  borderless: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
-  disabled: IxPropTypes.bool.def(false),
-  readonly: IxPropTypes.bool.def(false),
-  focused: IxPropTypes.bool,
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onClick: IxPropTypes.emit<(evt: Event) => void>(),
-  onClear: IxPropTypes.emit<(evt: MouseEvent) => void>(),
-}
-export type BaseTriggerProps = ExtractInnerPropTypes<typeof baseTriggerProps>
-
-export const timePickerTriggerProps = {
-  value: IxPropTypes.object<Date>(),
-}
-export type TimePickerTriggerProps = ExtractInnerPropTypes<typeof timePickerTriggerProps>
-
-export const timeRangePickerTriggerProps = {
-  value: IxPropTypes.object<[Date | undefined, Date | undefined]>(),
-}
-export type TimeRangePickerTriggerProps = ExtractInnerPropTypes<typeof timeRangePickerTriggerProps>

@@ -309,15 +309,6 @@ export const defaultConfig: GlobalConfig = {
     allowInput: false,
     format: 'HH:mm:ss',
   },
-  timeRangePicker: {
-    borderless: false,
-    clearable: true,
-    clearIcon: 'close-circle',
-    size: 'md',
-    suffix: 'clock-circle',
-    allowInput: false,
-    format: 'HH:mm:ss',
-  },
   transfer: {
     getKey: 'key',
     clearable: true,

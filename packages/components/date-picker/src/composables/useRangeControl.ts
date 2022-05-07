@@ -13,7 +13,7 @@ import { type ComputedRef, computed, watch } from 'vue'
 
 import { convertArray, useState } from '@idux/cdk/utils'
 
-import { convertToDate, sortRangeValue } from '../utils'
+import { compareDateTime, convertToDate, sortRangeValue } from '../utils'
 import { type PickerControlContext, useControl } from './useControl'
 
 export interface PickerRangeControlContext {
@@ -45,7 +45,7 @@ export function useRangeControl(
   )
   const [bufferUpdated, setBufferUpdated] = useState(false)
   const handleBufferUpdate = (values: (string | number | Date | undefined)[] | undefined) => {
-    setBuffer(getRangeValue(dateConfig, values, formatRef.value))
+    setBuffer(sortRangeValue(dateConfig, getRangeValue(dateConfig, values, formatRef.value), 'date'))
     setBufferUpdated(true)
   }
 
@@ -65,19 +65,33 @@ export function useRangeControl(
 
   const panelValue = computed(() => {
     if (isSelecting.value) {
-      return sortRangeValue([...convertArray(selectingDate.value)])
+      return sortRangeValue(dateConfig, [...convertArray(selectingDate.value)], 'date')
     }
 
-    return sortRangeValue([...convertArray(buffer.value)])
+    return convertArray(buffer.value)
   })
 
   watch(valueRef, handleBufferUpdate)
 
+  const getValidBufferValue = (value: Date | undefined, isFrom: boolean) => {
+    if (isFrom) {
+      return compareDateTime(dateConfig, value, buffer.value?.[1], 'date') > 0
+        ? [value, value]
+        : [value, buffer.value?.[1]]
+    }
+
+    return compareDateTime(dateConfig, value, buffer.value?.[0], 'date') < 0
+      ? [value, value]
+      : [buffer.value?.[0], value]
+  }
+
   const fromControl = useControl(dateConfig, formatContext, inputEnableStatus, fromDateRef, value => {
-    handleBufferUpdate([value, buffer.value?.[1]])
+    setBuffer(getValidBufferValue(value, true))
+    setBufferUpdated(true)
   })
   const toControl = useControl(dateConfig, formatContext, inputEnableStatus, toDateRef, value => {
-    handleBufferUpdate([buffer.value?.[0], value])
+    setBuffer(getValidBufferValue(value, false))
+    setBufferUpdated(true)
   })
 
   watch(fromControl.visiblePanel, handleVisiblePanelUpdate)

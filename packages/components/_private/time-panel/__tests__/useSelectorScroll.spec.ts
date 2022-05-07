@@ -70,7 +70,9 @@ describe('usePanelScroll', () => {
     })
     const onChange = vi.fn()
     const props: TimePanelColumnProps = reactive({
+      visible: true,
       selectedValue: selectedValue ?? 1,
+      activeValue: selectedValue ?? 1,
       options,
       onChange,
     })
@@ -120,11 +122,11 @@ describe('usePanelScroll', () => {
     await wait(400)
     expect(wrapper.element.scrollTop).toBe(cellHeight)
 
-    props.selectedValue = 3
+    props.activeValue = 3
     await wait(400)
     expect(wrapper.element.scrollTop).toBe(2 * cellHeight)
 
-    props.selectedValue = 1
+    props.activeValue = 1
     await wait(400)
     expect(wrapper.element.scrollTop).toBe(0)
   })

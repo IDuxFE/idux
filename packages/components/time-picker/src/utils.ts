@@ -19,3 +19,17 @@ export function convertToDate(
 
   return dateConfig.convert(value, format)
 }
+
+export function sortRangeValue(values: (Date | undefined)[]): (Date | undefined)[] {
+  return values.sort((v1, v2) => {
+    if (!v1) {
+      return 1
+    }
+
+    if (!v2) {
+      return 0
+    }
+
+    return v1.valueOf() - v2.valueOf()
+  })
+}

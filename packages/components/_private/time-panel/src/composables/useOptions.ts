@@ -11,7 +11,7 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
 import { calculateValue, calculateViewHour, normalizeAmPm } from '../utils'
 
@@ -25,10 +25,13 @@ export function useOptions(
   amPmOptionsProps: ComputedRef<TimePanelColumnProps>
 } {
   const { get } = dateConfig
-  const defaultOpenValue = computed(() => props.defaultOpenValue ?? dateConfig.startOf(dateConfig.now(), 'date'))
-  const selectedValue = computed(() => props.value ?? defaultOpenValue.value)
-  const viewHours = computed(() => calculateViewHour(get(selectedValue.value, 'hour'), props.use12Hours))
-  const ampm = computed(() => normalizeAmPm(get(selectedValue.value, 'hour'), props.use12Hours))
+  const [activeValue, setActiveValue] = useControlledProp(props, 'activeValue', () => dateConfig.now())
+  const [selectedValue, setSelectedValue] = useControlledProp(props, 'value')
+
+  const viewHours = computed(
+    () => selectedValue.value && calculateViewHour(get(selectedValue.value, 'hour'), props.use12Hours),
+  )
+  const ampm = computed(() => selectedValue.value && normalizeAmPm(get(selectedValue.value, 'hour'), props.use12Hours))
 
   function getOptions(type: TimePanelColumnType): TimePanelCell[] {
     const getHourOptions = () => {
@@ -54,7 +57,11 @@ export function useOptions(
         return generateNumericOptions(
           60,
           props.secondStep,
-          props.disabledSeconds(viewHours.value, get(selectedValue.value, 'minute'), ampm.value),
+          props.disabledSeconds!(
+            viewHours.value,
+            selectedValue.value && get(selectedValue.value, 'minute'),
+            ampm.value,
+          ),
           props.hideDisabledOptions,
         )
       case 'minute':
@@ -71,34 +78,42 @@ export function useOptions(
     }
   }
 
-  const getHourValue = () => {
-    const value = ampm.value === 'pm' ? get(selectedValue.value, 'hour') % 12 : get(selectedValue.value, 'hour')
+  const getHourValue = (value: Date) => {
+    const hour = ampm.value === 'pm' ? get(value, 'hour') % 12 : get(value, 'hour')
 
     if (ampm.value) {
-      return value === 0 ? 12 : value
+      return hour === 0 ? 12 : hour
     }
 
-    return value
+    return hour
   }
 
-  function getSelectedValue(type: TimePanelColumnType) {
+  function getColumnValue(value: Date, type: TimePanelColumnType) {
     switch (type) {
       case 'AM/PM':
         return ampm.value
       case 'hour':
       default:
-        return getHourValue()
+        return getHourValue(value)
       case 'minute':
-        return get(selectedValue.value, 'minute')
+        return get(value, 'minute')
       case 'second':
-        return get(selectedValue.value, 'second')
+        return get(value, 'second')
     }
   }
 
   function getOnChange(type: TimePanelColumnType) {
     const onChange = (type: TimePanelColumnType, value: string | number) => {
-      const newValue = calculateValue(dateConfig, selectedValue.value, type, props.use12Hours, value)
-      callEmit(props['onUpdate:value'], newValue)
+      const newValue = calculateValue(
+        dateConfig,
+        selectedValue.value ?? activeValue.value,
+        type,
+        props.use12Hours,
+        value,
+      )
+
+      setSelectedValue(newValue)
+      setActiveValue(newValue)
       callEmit(props.onChange, newValue)
     }
 
@@ -106,11 +121,15 @@ export function useOptions(
   }
 
   const getProps = (type: TimePanelColumnType) => {
-    return computed(() => ({
-      selectedValue: getSelectedValue(type),
-      options: getOptions(type),
-      onChange: getOnChange(type),
-    }))
+    return computed(
+      () =>
+        ({
+          activeValue: getColumnValue(activeValue.value, type),
+          selectedValue: selectedValue.value && getColumnValue(selectedValue.value, type),
+          options: getOptions(type),
+          onChange: getOnChange(type),
+        } as TimePanelColumnProps),
+    )
   }
 
   return {

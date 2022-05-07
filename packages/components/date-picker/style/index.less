@@ -1,81 +1,22 @@
 @import '../../style/mixins/borderless.less';
 @import '../../style/mixins/placeholder.less';
 @import '../../style/mixins/reset.less';
+@import './mixin.less';
 @import './panel.less';
 
-.@{date-picker-prefix},
-.@{date-range-picker-prefix} {
-  display: inline-flex;
-  width: 100%;
-  line-height: @date-picker-line-height;
-
-  &:not(.@{trigger-prefix}-disabled) {
-    color: @date-picker-color;
-  }
-
-  &-input {
-    width: 100%;
-    &-inner {
-      display: inline-block;
-      width: 100%;
-      min-width: 0;
-    }
-  }
-
-  &-overlay {
-    z-index: @date-picker-overlay-zindex;
-    border-radius: @date-picker-overlay-border-radius;
-    box-shadow: @date-picker-overlay-box-shadow;
-    background-color: @date-picker-panel-background-color;
-
-    &-content {
-      outline: none;
-    }
-  }
-
-  &-board {
-    & &-inputs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: @date-picker-overlay-inputs-margin-bottom;
-      color: @date-picker-color;
-
-      & .@{input-prefix}-focused {
-        box-shadow: none;
-      }
-    }
-    & &-date-input {
-      width: @date-picker-overlay-date-input-width;
-      input {
-        color: @date-picker-color;
-      }
-    }
-    & &-date-input:only-child {
-      width: 100%;
-    }
-    & &-time-input {
-      width: @date-picker-overlay-time-input-width;
-      margin-left: @date-picker-overlay-input-gap;
-      input {
-        color: @date-picker-color;
-      }
-    }
-
-    &-panel {
-      max-height: @date-range-picker-panel-max-height;
-      .@{time-panel-prefix} {
-        height: @date-range-picker-panel-max-height;
-      }
-    }
-  }
-}
-
 .@{date-picker-prefix} {
+  .date-picker-trigger();
+  .date-picker-board();
+
   &-overlay {
     width: @date-picker-overlay-width;
     padding: @date-picker-overlay-padding;
 
     .date-picker-panel();
+
+    &-body {
+      padding: @date-picker-overlay-body-padding;
+    }
 
     &-footer {
       text-align: end;
@@ -91,6 +32,9 @@
 }
 
 .@{date-range-picker-prefix} {
+  .date-picker-trigger();
+  .date-picker-board();
+
   &-input {
     display: flex;
     align-items: center;
@@ -102,9 +46,10 @@
   &-overlay {
     padding: @date-range-picker-overlay-padding;
     .date-picker-panel();
-    &-content {
+
+    &-body {
       display: flex;
-      padding: @date-range-picker-overlay-content-padding;
+      padding: @date-range-picker-overlay-body-padding;
     }
     &-separator {
       display: flex;

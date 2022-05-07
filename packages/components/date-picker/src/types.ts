@@ -14,9 +14,13 @@ import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { ɵFooterTypeDef } from '@idux/components/_private/footer'
 
 export interface TimePanelOptions {
-  disabledHours?: (selectedAmPm: string) => number[]
-  disabledMinutes?: (selectedHour: number, selectedAmPm: string) => number[]
-  disabledSeconds?: (selectedHour: number, selectedMinute: number, selectedAmPm: string) => number[]
+  disabledHours?: (selectedAmPm: string | undefined) => number[]
+  disabledMinutes?: (selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]
+  disabledSeconds?: (
+    selectedHour: number | undefined,
+    selectedMinute: number | undefined,
+    selectedAmPm: string | undefined,
+  ) => number[]
   hideDisabledOptions?: boolean
   hourStep?: number
   minuteStep?: number
@@ -61,8 +65,7 @@ const datePickerCommonProps = {
   dateFormat: String,
   timeFormat: String,
   overlayClassName: String,
-  // overlayContainer: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
-  overlayContainer: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+  overlayContainer: ɵPortalTargetDef,
   overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
   readonly: {
     type: Boolean as PropType<boolean>,
@@ -74,7 +77,6 @@ const datePickerCommonProps = {
     type: String as PropType<DatePickerType>,
     default: 'date',
   },
-  target: ɵPortalTargetDef,
 
   // events
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(isOpen: boolean) => void>>,
