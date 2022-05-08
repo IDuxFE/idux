@@ -18,6 +18,7 @@ export type {
   TreeComponent,
   TreePublicProps as TreeProps,
   TreeNode,
+  TreeNodeDisabled,
   TreeCustomAdditional,
   TreeDroppable,
   TreeDroppableOptions,

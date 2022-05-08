@@ -21,6 +21,8 @@ import { convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 export interface ExpandableContext {
   expandIcon: ComputedRef<string | string[]>
   expandedKeys: WritableComputedRef<VKey[]>
+  expandAll: () => void
+  collapseAll: () => void
   handleExpand: (key: VKey, rawNode: TreeNode) => void
   loadingKeys: Ref<VKey[]>
 }
@@ -110,9 +112,27 @@ export function useExpandable(
     callChange(mergedNodeMap, newKeys, onExpandedChange)
   }
 
+  const expandAll = () => {
+    const expandAllKeys: VKey[] = []
+    const expendedAllNodes: TreeNode[] = []
+    mergedNodeMap.value.forEach(node => {
+      if (!node.isLeaf) {
+        expandAllKeys.push(node.key)
+        expendedAllNodes.push(node.rawNode)
+      }
+    })
+    callEmit(props.onExpandedChange, expandAllKeys, expendedAllNodes)
+    setExpandedKeys(expandAllKeys)
+  }
+
+  const collapseAll = () => {
+    callEmit(props.onExpandedChange, [], [])
+    setExpandedKeys([])
+  }
+
   if (searchedKeys.value.length) {
     setExpandWithSearch(searchedKeys.value)
   }
 
-  return { expandIcon, expandedKeys, handleExpand, loadingKeys }
+  return { expandIcon, expandedKeys, expandAll, collapseAll, handleExpand, loadingKeys }
 }

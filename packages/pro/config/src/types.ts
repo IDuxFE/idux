@@ -10,9 +10,15 @@ export interface CommonConfig {
   prefixCls: string
 }
 
+export interface ProTree {
+  clearIcon: string
+  expandIcon: string | string[]
+}
+
 export interface GlobalConfig {
   // Common
   common: CommonConfig
+  proTree: ProTree
 }
 
 export type GlobalConfigKey = keyof GlobalConfig
