@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
+
+
+### Bug Fixes
+
+* **cdk:click-outside:**  not working when click target has [@click](https://github.com/click).stop ([#887](https://github.com/IDuxFE/idux/issues/887)) ([a400cba](https://github.com/IDuxFE/idux/commit/a400cbace8fe1384acbec243d0ee415b31c7e49a))
+
+
+
+
+
 # [1.0.0-beta.8](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-05-05)
 
 

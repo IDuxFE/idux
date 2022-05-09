@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
+
+
+### Bug Fixes
+
+* **cdk:click-outside:**  not working when click target has [@click](https://github.com/click).stop ([#887](https://github.com/IDuxFE/idux/issues/887)) ([a400cba](https://github.com/IDuxFE/idux/commit/a400cbace8fe1384acbec243d0ee415b31c7e49a))
+* **comp: button:** update style with icon ([#885](https://github.com/IDuxFE/idux/issues/885)) ([1377fff](https://github.com/IDuxFE/idux/commit/1377fff56e30737889277de910f5f42d9b5a34f1))
+* **comp: table:** update style with empty data ([#888](https://github.com/IDuxFE/idux/issues/888)) ([44c67aa](https://github.com/IDuxFE/idux/commit/44c67aae3858157b32d918a5102e183b8eaac97d))
+* **comp:affix:** fix the problem of dynamic display ([#893](https://github.com/IDuxFE/idux/issues/893)) ([dbb69a5](https://github.com/IDuxFE/idux/commit/dbb69a571e8c035fbdfa56464fa66ec0dc090bab)), closes [#849](https://github.com/IDuxFE/idux/issues/849)
+* **comp:select:** value key of select is 'value' by default ([#892](https://github.com/IDuxFE/idux/issues/892)) ([582cd4a](https://github.com/IDuxFE/idux/commit/582cd4ae68dc281f8193f86a280835f58d2598a6))
+* **comp:time-picker,date-picker:** refactor code and fix z-index ([#886](https://github.com/IDuxFE/idux/issues/886)) ([8d2133b](https://github.com/IDuxFE/idux/commit/8d2133b860c105a7cfa78cdc6f967eeed1f6ed78))
+
+
+### Features
+
+* **comp: tree-select:** add expandAll and collapseAll methods ([#895](https://github.com/IDuxFE/idux/issues/895)) ([772e039](https://github.com/IDuxFE/idux/commit/772e03937069a076b5861235859497a7ffd0318b))
+* **comp: tree:** expandIcon add array type ([#883](https://github.com/IDuxFE/idux/issues/883)) ([1342e66](https://github.com/IDuxFE/idux/commit/1342e66f8fe6348ed37d0b90c422a0ff23f41cf7))
+* **pro: tree:** add pro tree component ([#891](https://github.com/IDuxFE/idux/issues/891)) ([ffd80de](https://github.com/IDuxFE/idux/commit/ffd80de694377309b65fb569bb91f24d6ba8d514))
+
+
+### BREAKING CHANGES
+
+* **comp: tree-select:** setExpandAll was deprecated, please use collapseAll and
+expandAll instead.
+
+
+
+
+
 # [1.0.0-beta.8](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-05-05)
 
 
