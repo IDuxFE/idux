@@ -40,11 +40,16 @@ export function normalizeOffset(offset: AffixOffset): Partial<AffixDirectionNumb
 /**
  * get target position based on container
  */
-export function getTargetRect(target: HTMLElement, container: HTMLElement | Window): AffixDirectionNumber {
+export function getTargetRect(target: HTMLElement, container: HTMLElement | Window): AffixDirectionNumber | null {
   const targetRect = target.getBoundingClientRect()
   const containerRect = isHTMLElement(container)
     ? container.getBoundingClientRect()
     : { top: 0, bottom: window.innerHeight, left: 0, right: window.innerWidth }
+
+  if (targetRect.width === 0 && targetRect.height === 0) {
+    return null
+  }
+
   return {
     top: targetRect.top - containerRect.top,
     left: targetRect.left - containerRect.left,
@@ -86,32 +91,39 @@ export function isDireSticky(
   return !isUndefined(offsetOption[dire]) && affixRect[dire] <= offsetOption[dire]!
 }
 
-export function isSticky(affixRect: AffixDirectionNumber, offsetOption: Partial<AffixDirectionNumber>): boolean {
-  return directions.some(dire => isDireSticky(dire, affixRect, offsetOption))
+export function isSticky(
+  target: HTMLElement,
+  container: HTMLElement | Window,
+  offsetOption: Partial<AffixDirectionNumber>,
+): boolean {
+  const targetRect = getTargetRect(target, container)
+  return !!targetRect && directions.some(dire => isDireSticky(dire, targetRect, offsetOption))
 }
 
-export function calcPosition(
-  affixRect: AffixDirectionNumber,
+export function calcStickyPosition(
+  target: HTMLElement,
+  container: HTMLElement | Window,
   offsetOption: Partial<AffixDirectionNumber>,
-  target: Window | HTMLElement,
 ): ContentStyle {
+  const targetRect = getTargetRect(target, container)
+  if (!targetRect) {
+    return {}
+  }
   const style: ContentStyle = {}
 
-  if (isSticky(affixRect, offsetOption)) {
-    style.position = target === window ? 'fixed' : 'absolute'
+  style.position = container === window ? 'fixed' : 'absolute'
 
-    const _directions: AffixDirection[] = [
-      isDireSticky('bottom', affixRect, offsetOption) ? 'bottom' : 'top',
-      isDireSticky('right', affixRect, offsetOption) ? 'right' : 'left',
-    ]
+  const _directions: AffixDirection[] = [
+    isDireSticky('bottom', targetRect, offsetOption) ? 'bottom' : 'top',
+    isDireSticky('right', targetRect, offsetOption) ? 'right' : 'left',
+  ]
 
-    _directions.forEach(dire => {
-      if (isDireSticky(dire, affixRect, offsetOption)) {
-        style[dire] = `${offsetOption[dire]! - (target === window ? 0 : affixRect[dire])}px`
-      } else {
-        style[dire] = `${target === window ? affixRect[dire] : 0}px`
-      }
-    })
-  }
+  _directions.forEach(dire => {
+    if (isDireSticky(dire, targetRect, offsetOption)) {
+      style[dire] = `${offsetOption[dire]! - (container === window ? 0 : targetRect[dire])}px`
+    } else {
+      style[dire] = `${container === window ? targetRect[dire] : 0}px`
+    }
+  })
   return style
 }

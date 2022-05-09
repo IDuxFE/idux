@@ -19,7 +19,14 @@ export const affixProps = {
   onChange: IxPropTypes.func<(value: boolean) => void>(),
 }
 
+export interface AffixBindings {
+  update: () => void
+}
+
 export type AffixProps = ExtractInnerPropTypes<typeof affixProps>
 export type AffixPublicProps = ExtractPublicPropTypes<typeof affixProps>
-export type AffixComponent = DefineComponent<Omit<HTMLAttributes, keyof AffixPublicProps> & AffixPublicProps>
-export type AffixInstance = InstanceType<DefineComponent<AffixProps>>
+export type AffixComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof AffixPublicProps> & AffixPublicProps,
+  AffixBindings
+>
+export type AffixInstance = InstanceType<DefineComponent<AffixProps, AffixBindings>>

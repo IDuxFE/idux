@@ -16,8 +16,7 @@ import { convertTarget } from '@idux/components/utils'
 
 import { affixProps } from './types'
 import {
-  calcPosition,
-  getTargetRect,
+  calcStickyPosition,
   getTargetSize,
   isSticky,
   normalizeOffset,
@@ -28,7 +27,7 @@ import {
 export default defineComponent({
   name: 'IxAffix',
   props: affixProps,
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-affix`)
     const contentStyle = ref<ContentStyle>({} as ContentStyle)
@@ -46,42 +45,48 @@ export default defineComponent({
     const throttleMeasure = throttleRAF(measure)
 
     function measure(event?: unknown) {
-      if (!affixRef.value || !targetRef.value) {
+      if (!affixRef.value || !targetRef.value || !contentRef.value) {
+        clearStyle()
         return
       }
-      const affixRect = getTargetRect(affixRef.value, targetRef.value)
-      isStickyRef.value = isSticky(affixRect, offset.value)
-      contentStyle.value = calcPosition(affixRect, offset.value, targetRef.value)
-      if (isStickyRef.value && contentRef.value) {
-        if (event && (event as Event).type === 'resize') {
-          clearStyle()
 
-          nextTick(() => {
-            measure()
-          })
+      isStickyRef.value = isSticky(affixRef.value, targetRef.value, offset.value)
 
-          return
-        }
+      if (!isStickyRef.value) {
+        clearStyle()
+        return
+      }
 
-        const { width, height } = getTargetSize(contentRef.value)
-        contentStyle.value = {
-          ...contentStyle.value,
-          width: `${width}px`,
-          height: `${height}px`,
-        }
-        affixStyle.value = {
-          width: `${width}px`,
-          height: `${height}px`,
-        }
-        if (targetRef.value !== window) {
-          affixStyle.value.position = 'relative'
-        }
+      // TODO:这里要优化一下，统一做事件判断
+      if (event && (event as Event).type === 'resize') {
+        clearStyle()
+        nextTick(measure)
+        return
+      }
+
+      const { width, height } = getTargetSize(contentRef.value)
+      contentStyle.value = {
+        ...calcStickyPosition(affixRef.value, targetRef.value, offset.value),
+        width: `${width}px`,
+        height: `${height}px`,
+      }
+      affixStyle.value = {
+        width: `${width}px`,
+        height: `${height}px`,
+      }
+      if (targetRef.value !== window) {
+        affixStyle.value.position = 'relative'
       }
     }
 
     function clearStyle() {
       affixStyle.value = {}
       contentStyle.value = {}
+    }
+
+    function initContainer() {
+      targetRef.value = convertTarget(props.target)
+      observeTarget(targetRef.value, throttleMeasure)
     }
 
     onMounted(() => {
@@ -106,10 +111,9 @@ export default defineComponent({
       },
     )
 
-    function initContainer() {
-      targetRef.value = convertTarget(props.target)
-      observeTarget(targetRef.value, throttleMeasure)
-    }
+    expose({
+      update: throttleMeasure,
+    })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
