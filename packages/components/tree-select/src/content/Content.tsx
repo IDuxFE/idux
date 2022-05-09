@@ -28,6 +28,7 @@ export default defineComponent({
       config,
       props,
       slots: treeSelectSlots,
+      locale,
       mergedPrefixCls,
       mergedChildrenKey,
       mergedGetKey,
@@ -38,7 +39,6 @@ export default defineComponent({
       treeRef,
       expandedKeys,
       setExpandedKeys,
-      setExpandAll,
       selectedValue,
       changeSelected,
       handleNodeClick,
@@ -89,7 +89,7 @@ export default defineComponent({
 
     const handleExpandAll = (evt: Event) => {
       const currStatus = expandAllBtnStatus.value
-      setExpandAll(!currStatus)
+      currStatus ? treeRef.value?.expandAll() : treeRef.value?.collapseAll()
       expandAllBtnStatus.value = !currStatus
       evt.stopPropagation()
     }
@@ -224,6 +224,7 @@ export default defineComponent({
           <div class={`${prefixCls}-overlay-search-wrapper`}>
             <IxButton
               size="md"
+              title={expandAllBtnStatus.value ? locale.treeSelect.expandAll : locale.treeSelect.collapseAll}
               icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
               onClick={handleExpandAll}
             />

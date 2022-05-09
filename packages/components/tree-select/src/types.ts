@@ -125,8 +125,9 @@ export type TreeSelectPublicProps = Omit<
 export interface TreeSelectBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
+  collapseAll: () => void
+  expandAll: () => void
   scrollTo: VirtualScrollToFn
-  setExpandAll: (isAll: boolean) => void
 }
 export type TreeSelectComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TreeSelectPublicProps> & TreeSelectPublicProps,

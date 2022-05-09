@@ -8,7 +8,7 @@
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
+import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -21,7 +21,7 @@ import { useGetNodeKey } from './composables/useGetNodeKey'
 import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { treeSelectToken } from './token'
-import { type TreeSelectNode, treeSelectProps } from './types'
+import { treeSelectProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
 
@@ -31,6 +31,7 @@ export default defineComponent({
   props: treeSelectProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
     const config = useGlobalConfig('treeSelect')
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
@@ -64,22 +65,14 @@ export default defineComponent({
     const scrollTo: VirtualScrollToFn = options => {
       treeRef.value?.scrollTo(options)
     }
-    const setExpandAll = (isAll: boolean) => {
-      const _expendedKeys: VKey[] = []
-      const _expendedNodes: TreeSelectNode[] = []
-      if (isAll) {
-        mergedNodeMap.value.forEach(node => {
-          if (!node.isLeaf) {
-            _expendedKeys.push(node.key)
-            _expendedNodes.push(node.rawData)
-          }
-        })
-      }
-      callEmit(props.onExpandedChange, _expendedKeys, _expendedNodes)
-      setExpandedKeys(_expendedKeys)
-    }
 
-    expose({ focus, blur, scrollTo, setExpandAll })
+    expose({
+      focus,
+      blur,
+      collapseAll: () => treeRef.value?.collapseAll(),
+      expandAll: () => treeRef.value?.expandAll(),
+      scrollTo,
+    })
 
     watch(overlayOpened, opened => {
       opened && focus()
@@ -110,6 +103,7 @@ export default defineComponent({
       props,
       slots,
       config,
+      locale,
       mergedPrefixCls,
       mergedChildrenKey,
       mergedGetKey,
@@ -121,7 +115,6 @@ export default defineComponent({
       treeRef,
       accessor,
       setExpandedKeys,
-      setExpandAll,
       overlayOpened,
       setOverlayOpened,
       handleNodeClick,

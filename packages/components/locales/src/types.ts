@@ -109,6 +109,11 @@ export interface TransferLocale {
   searchPlaceholder: [string, string]
 }
 
+export interface TreeSelectLocale {
+  expandAll: string
+  collapseAll: string
+}
+
 export interface UploadLocale {
   uploading: string
   error: string
@@ -133,6 +138,7 @@ export interface Locale {
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale
   transfer: TransferLocale
+  treeSelect: TreeSelectLocale
   upload: UploadLocale
 }
 
