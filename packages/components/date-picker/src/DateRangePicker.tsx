@@ -14,6 +14,7 @@ import { useFormElement } from '@idux/components/form'
 import { useFormat } from './composables/useFormat'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useRangeKeyboardEvents } from './composables/useKeyboardEvents'
+import { useOverlayProps } from './composables/useOverlayProps'
 import { useOverlayState } from './composables/useOverlayState'
 import { usePickerState } from './composables/usePickerState'
 import { useRangeControl } from './composables/useRangeControl'
@@ -21,8 +22,6 @@ import RangeContent from './content/RangeContent'
 import { dateRangePickerToken } from './token'
 import RangeTrigger from './trigger/RangeTrigger'
 import { dateRangePickerProps } from './types'
-
-const defaultOffset: [number, number] = [0, 8]
 
 export default defineComponent({
   name: 'IxDateRangePicker',
@@ -39,8 +38,6 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const showFooter = computed(() => !!props.footer || !!slots.footer)
-
     const inputEnableStatus = useInputEnableStatus(props, config)
     const formatContext = useFormat(props, config)
     const pickerStateContext = usePickerState(props, dateConfig, formatContext.formatRef)
@@ -49,11 +46,11 @@ export default defineComponent({
 
     const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, accessor.valueRef)
     const { overlayOpened, setOverlayOpened } = useOverlayState(props, rangeControlContext)
-    const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, showFooter, setOverlayOpened, handleChange)
+    const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, setOverlayOpened, handleChange)
 
     const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.dateRangePicker.separator
 
-    provide(dateRangePickerToken, {
+    const context = {
       props,
       slots,
       locale,
@@ -69,7 +66,9 @@ export default defineComponent({
       handleKeyDown,
       ...formatContext,
       ...pickerStateContext,
-    })
+    }
+
+    provide(dateRangePickerToken, context)
 
     watch(overlayOpened, opened => {
       nextTick(() => {
@@ -83,30 +82,18 @@ export default defineComponent({
       })
     })
 
-    watch(rangeControlContext.buffer, value => {
-      if (!showFooter.value) {
-        handleChange(value)
-      }
-    })
-
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-overlay-container`)
     const renderTrigger = () => <RangeTrigger {...attrs}></RangeTrigger>
     const renderContent = () => <RangeContent></RangeContent>
-    const overlayProps = { 'onUpdate:visible': setOverlayOpened }
+    const overlayProps = useOverlayProps(context)
+    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
 
     return () => {
       return (
         <ɵOverlay
-          {...overlayProps}
-          visible={overlayOpened.value}
+          {...overlayProps.value}
+          class={overlayClass.value}
           v-slots={{ default: renderTrigger, content: renderContent }}
-          class={normalizeClass(props.overlayClassName)}
-          clickOutside
-          disabled={accessor.disabled.value || props.readonly}
-          offset={defaultOffset}
-          placement="bottomStart"
-          target={target.value}
-          trigger="manual"
+          triggerId={attrs.id}
         />
       )
     }

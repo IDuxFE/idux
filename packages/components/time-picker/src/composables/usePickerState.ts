@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DatePickerProps, DateRangePickerProps } from '../types'
+import type { TimePickerProps, TimeRangePickerProps } from '../types'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { DateConfig } from '@idux/components/config'
 
@@ -18,11 +18,11 @@ import { useFormAccessor } from '@idux/components/form'
 
 import { convertToDate, sortRangeValue } from '../utils'
 
-type StateValueType<T extends DatePickerProps | DateRangePickerProps> = T extends DatePickerProps
+type StateValueType<T extends TimePickerProps | TimeRangePickerProps> = T extends TimePickerProps
   ? Date | undefined
   : (Date | undefined)[] | undefined
 
-export interface PickerStateContext<T extends DatePickerProps | DateRangePickerProps> {
+export interface PickerStateContext<T extends TimePickerProps | TimeRangePickerProps> {
   accessor: ValueAccessor<T['value']>
   isFocused: ComputedRef<boolean>
   handleChange: (value: StateValueType<T>) => void
@@ -31,7 +31,7 @@ export interface PickerStateContext<T extends DatePickerProps | DateRangePickerP
   handleBlur: (evt: FocusEvent) => void
 }
 
-export function usePickerState<T extends DatePickerProps | DateRangePickerProps>(
+export function usePickerState<T extends TimePickerProps | TimeRangePickerProps>(
   props: T,
   dateConfig: DateConfig,
   formatRef: ComputedRef<string>,
@@ -41,15 +41,16 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
   const [isFocused, setFocused] = useState(false)
 
   function handleChange(value: StateValueType<T>) {
-    const newValue = (isArray(value) ? sortRangeValue(dateConfig, value) : value) as StateValueType<T>
+    const newValue = (isArray(value) ? sortRangeValue(value) : value) as StateValueType<T>
     let oldValue = toRaw(accessor.valueRef.value) as StateValueType<T>
     oldValue = (
       isArray(oldValue)
         ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
         : convertToDate(dateConfig, oldValue, formatRef.value)
     ) as StateValueType<T>
+
     callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
-    accessor.setValue(value)
+    accessor.setValue(newValue)
   }
 
   function handleClear(evt: Event) {

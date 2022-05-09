@@ -88,7 +88,6 @@ export interface GlobalConfig {
   tagGroup: TagGroupConfig
   textarea: TextareaConfig
   timePicker: TimePickerConfig
-  timeRangePicker: TimeRangePickerConfig
   transfer: TransferConfig
   tooltip: TooltipConfig
   tree: TreeConfig
@@ -180,7 +179,7 @@ export interface DatePickerConfig {
   format?: Partial<Record<DatePickerType, string>>
   size: FormSize
   suffix: string
-  target?: PortalTargetType
+  overlayContainer?: PortalTargetType
 }
 
 export interface DividerConfig {
@@ -485,12 +484,10 @@ export interface TimePickerConfig {
   clearIcon: string
   size: FormSize
   suffix: string
-  target?: PortalTargetType
+  overlayContainer?: PortalTargetType
   allowInput: boolean | 'overlay'
   format: string
 }
-
-export type TimeRangePickerConfig = TimePickerConfig
 
 export interface TransferConfig {
   getKey: string

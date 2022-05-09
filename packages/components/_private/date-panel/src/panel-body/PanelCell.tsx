@@ -93,10 +93,6 @@ export default defineComponent({
       )
     })
     const isInRange = computed(() => {
-      if (outView.value) {
-        return false
-      }
-
       const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
       const cellDateValue = dateConfig.startOf(cellDate.value, compareType).valueOf()
 

@@ -26,11 +26,11 @@ order: 0
 | `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |
 | `format` | 展示的格式 | `string` | - | ✅ | 默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format) |
 | `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |
+| `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `'calendar'` | ✅ | - |
-| `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `type` | 设置选择器类型 | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year' \| 'datetime'` | `'date'` | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 | `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
@@ -79,9 +79,9 @@ const defaultFormat = {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `disabledHours` | 禁用部分小时选项 | `()=>number[]` | ``() => []`` | - | - |
-| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number)=>number[]` | `() => []` | - | - |
-| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number, selectedMinute: number)=>number[]` | `() => []` | - | - |
+| `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string | undefined) => number[]` | ``() => []`` | - | - |
+| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]` | `() => []` | - | - |
+| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: string | undefined)=>number[]` | `() => []` | - | - |
 | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
 | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
 | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
@@ -166,9 +166,10 @@ const defaultFormat = {
 | `@date-picker-overlay-time-input-width` | `96px` | - | - |
 | `@date-picker-overlay-input-gap` | `@spacing-xs` | - | - |
 | `@date-picker-overlay-padding` | `@spacing-lg @spacing-lg @spacing-lg @spacing-lg` | - | - |
+| `@date-picker-overlay-body-padding` | `0` | - | - |
 | `@date-picker-overlay-inputs-margin-bottom` | `@spacing-sm` | - | - |
 | `@date-range-picker-overlay-padding` | `@spacing-lg @spacing-lg 0 @spacing-lg` | - | - |
-| `@date-range-picker-overlay-content-padding` | `0 0 @spacing-sm 0` | - | - |
+| `@date-range-picker-overlay-body-padding` | `0 0 @spacing-sm 0` | - | - |
 | `@date-range-picker-overlay-separator-width` | `@spacing-2xl` | - | - |
 | `@date-range-picker-overlay-separator-padding` | `1px 0 0 0` | - | - |
 | `@date-range-picker-overlay-separator-font-size` | `@font-size-md` | - | - |

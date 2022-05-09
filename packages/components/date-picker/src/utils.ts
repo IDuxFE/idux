@@ -32,16 +32,42 @@ export function applyDateTime(
   return typesArray.reduce((date, type) => dateConfig.set(date, dateConfig.get(sourceDate, type), type), targetDate)
 }
 
-export function sortRangeValue(values: (Date | undefined)[]): (Date | undefined)[] {
-  return values.sort((v1, v2) => {
-    if (!v1) {
-      return 1
-    }
+export function isSameDateTime(
+  dateConfig: DateConfig,
+  sourceDate: Date,
+  targetDate: Date,
+  types: DateConfigType | TimeConfigType | (DateConfigType | TimeConfigType)[],
+): boolean {
+  const typesArray = convertArray(types)
 
-    if (!v2) {
-      return 0
-    }
+  return typesArray.every(type => dateConfig.get(sourceDate, type) === dateConfig.get(targetDate, type))
+}
 
+export function compareDateTime(
+  dateConfig: DateConfig,
+  v1: Date | undefined,
+  v2: Date | undefined,
+  type: DateConfigType | 'time' = 'time',
+): number {
+  if (!v1) {
+    return 1
+  }
+
+  if (!v2) {
+    return 0
+  }
+
+  if (type === 'time') {
     return v1.valueOf() - v2.valueOf()
-  })
+  }
+
+  return dateConfig.startOf(v1, type).valueOf() - dateConfig.startOf(v2, type).valueOf()
+}
+
+export function sortRangeValue(
+  dateConfig: DateConfig,
+  values: (Date | undefined)[],
+  type: DateConfigType | 'time' = 'time',
+): (Date | undefined)[] {
+  return values.sort((v1, v2) => compareDateTime(dateConfig, v1, v2, type))
 }

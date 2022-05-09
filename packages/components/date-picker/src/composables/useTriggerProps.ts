@@ -5,14 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DataPickerContext, DateRangePickerContext } from '../token'
+import type { DatePickerContext, DateRangePickerContext } from '../token'
 import type { ɵTriggerProps } from '@idux/components/_private/trigger'
 import type { FormContext } from '@idux/components/form'
 
 import { type ComputedRef, computed } from 'vue'
 
 export function useTriggerProps(
-  context: DataPickerContext | DateRangePickerContext,
+  context: DatePickerContext | DateRangePickerContext,
   formContext: FormContext | null,
 ): ComputedRef<ɵTriggerProps> {
   const {
@@ -41,7 +41,11 @@ export function useTriggerProps(
   return computed(() => {
     return {
       borderless: props.borderless,
-      clearable: !accessor.disabled.value && props.clearable && !!accessor.valueRef.value,
+      clearable:
+        !props.readonly &&
+        !accessor.disabled.value &&
+        (props.clearable ?? config.clearable) &&
+        !!accessor.valueRef.value,
       clearIcon: props.clearIcon ?? config.clearIcon,
       disabled: accessor.disabled.value,
       focused: isFocused.value,

@@ -59,6 +59,7 @@ export function useRangeActiveDate(
   props: DateRangePickerProps,
   valuesRef: ComputedRef<(Date | undefined)[] | undefined>,
   isSelecting: ComputedRef<boolean>,
+  overlayOpened: ComputedRef<boolean>,
   formatRef: ComputedRef<string>,
 ): RangeActiveDateContext {
   const { set, get } = dateConfig
@@ -66,6 +67,14 @@ export function useRangeActiveDate(
 
   const fromPanelValue = computed(() => valuesRef.value?.[0])
   const toPanelValue = computed(() => valuesRef.value?.[1])
+
+  const defaultOpenValue = computed(() => {
+    const convertedValues = sortRangeValue(dateConfig, [
+      ...convertArray(props.defaultOpenValue).map(v => convertToDate(dateConfig, v, formatRef.value)),
+    ])
+
+    return [convertedValues[0] ?? now, convertedValues[1]]
+  })
 
   const calcValidActiveDate = (from: Date | undefined, to: Date | undefined, type: 'from' | 'to') => {
     const viewType = viewTypeMap[props.type]
@@ -92,7 +101,7 @@ export function useRangeActiveDate(
             const fromViewYearValue = get(from, 'year')
             const toViewYearValue = get(to, 'year')
 
-            return fromViewValue < toViewValue || fromViewYearValue < toViewYearValue
+            return fromViewValue < toViewValue && fromViewYearValue <= toViewYearValue
           })()
     /* eslint-disable indent */
 
@@ -103,13 +112,36 @@ export function useRangeActiveDate(
     return valid ? to : getViewDate(from)
   }
 
-  const defaultOpenValue = computed(() => {
-    const convertedValues = sortRangeValue([
-      ...convertArray(props.defaultOpenValue).map(v => convertToDate(dateConfig, v, formatRef.value)),
-    ])
+  const initActiveDate = () => {
+    if (isSelecting.value) {
+      return
+    }
 
-    return [convertedValues[0] ?? now, convertedValues[1]]
-  })
+    const fromValue = valuesRef.value?.[0] ?? defaultOpenValue.value[0]!
+    const toValue = valuesRef.value?.[1] ?? defaultOpenValue.value[1]
+
+    const valueAlreadyInView = [fromValue, toValue].every(value => {
+      if (!value) {
+        return true
+      }
+
+      const yearValue = get(value, 'year')
+      if (viewTypeMap[props.type] === 'year') {
+        return [fromActiveDate, toActiveDate].map(activeDate => get(activeDate.value, 'year')).includes(yearValue)
+      }
+
+      const monthValue = get(value, 'month')
+      return [fromActiveDate, toActiveDate].some(
+        activeDate => yearValue === get(activeDate.value, 'year') && monthValue === get(activeDate.value, 'month'),
+      )
+    })
+    if (valueAlreadyInView) {
+      return
+    }
+
+    setFromActiveDate(fromValue)
+    setToActiveDate(calcValidActiveDate(fromValue, toValue, 'to'))
+  }
 
   const [fromActiveDate, setFromActiveDate] = useState(fromPanelValue.value ?? defaultOpenValue.value[0]!)
   const [toActiveDate, setToActiveDate] = useState(
@@ -119,16 +151,12 @@ export function useRangeActiveDate(
       'to',
     ),
   )
-  watch(valuesRef, value => {
-    if (isSelecting.value) {
-      return
+
+  watch(valuesRef, initActiveDate)
+  watch(overlayOpened, opened => {
+    if (!opened) {
+      initActiveDate()
     }
-
-    const from = value?.[0] ?? defaultOpenValue.value[0]!
-    const to = calcValidActiveDate(from, value?.[1] ?? defaultOpenValue.value[1], 'to')
-
-    setFromActiveDate(from)
-    setToActiveDate(to)
   })
 
   const handleFromActiveDateUpdate = (value: Date) => {

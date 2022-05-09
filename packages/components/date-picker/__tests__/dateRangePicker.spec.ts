@@ -253,6 +253,7 @@ describe('DateRangePicker', () => {
       .findComponent(RangeContent)
       .findAll('.ix-date-range-picker-board-time-input')
       .map(el => el.find('input'))
+
     await dateInputs[0].setValue('2021-11-22')
     await dateInputs[1].setValue('2021-12-25')
     await timeInputs[0].setValue('13:03:04')

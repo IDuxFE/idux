@@ -16,12 +16,18 @@
   ::-webkit-scrollbar-thumb {
     border-radius: @time-panel-scrollbar-thumb-border-radius;
     background-color: @time-panel-scrollbar-thumb-background-color;
+    border: 0;
+    padding: 0;
+    margin: 0;
   }
 
   ::-webkit-scrollbar-track {
     border-radius: 0;
     background: @time-panel-scrollbar-track-background;
     transition: @transition-all-base;
+    border: 0;
+    padding: 0;
+    margin: 0;
   }
 
   &::before {
@@ -33,16 +39,16 @@
     margin-top: -(@time-panel-cell-height / 2);
     height: @time-panel-cell-height;
     border-top: @time-panel-window-border-width @time-panel-window-border-style @time-panel-window-border-color;
-    border-bottom: @time-panel-window-border-width @time-panel-window-border-style
-      @time-panel-window-border-color;
+    border-bottom: @time-panel-window-border-width @time-panel-window-border-style @time-panel-window-border-color;
+    pointer-events: none;
   }
 
   &-column {
     position: relative;
+    z-index: 1;
     height: 100%;
-    margin: 0;
-    list-style-type: none;
-    overflow-y: hidden;
+    flex: 1;
+    overflow: hidden;
 
     &::before,
     &::after {
@@ -50,19 +56,58 @@
       display: block;
       width: 100%;
       height: calc(50% - (@time-panel-cell-height / 2));
+      flex-shrink: 0;
     }
 
+    &-inner {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      list-style-type: none;
+      height: auto;
+    }
 
     &:hover {
       overflow-y: scroll;
+
+      .@{time-panel-prefix}-column-inner {
+        right: -(@time-panel-scrollbar-width / 2);
+      }
+    }
+
+    &:first-child {
+      &:hover .@{time-panel-prefix}-column-inner {
+        right: 0;
+      }
+      .@{time-panel-prefix}-cell {
+        justify-content: flex-start;
+      }
+    }
+    &:last-child {
       margin-right: -@time-panel-scrollbar-width;
+      padding-right: @time-panel-scrollbar-width;
+
+      &:hover {
+        padding-right: 0;
+        padding-left: @time-panel-scrollbar-width;
+      }
+
+      .@{time-panel-prefix}-column-inner {
+        right: 0;
+      }
+
+      .@{time-panel-prefix}-cell {
+        justify-content: flex-end;
+      }
     }
   }
 
   &-cell {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: @time-panel-cell-height;
     margin: 0;
     cursor: pointer;

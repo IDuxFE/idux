@@ -27,11 +27,11 @@ export default defineComponent({
 
     const onClick = () => {
       if (!props.disabled && !props.selected) {
-        callEmit(props.onChange, props.value)
+        callEmit(props.onChange, props.value!)
       }
     }
 
-    const displayValue = computed(() => displayFormat(props.value))
+    const displayValue = computed(() => displayFormat(props.value!))
 
     return () => (
       <li class={classes.value} onClick={onClick}>
