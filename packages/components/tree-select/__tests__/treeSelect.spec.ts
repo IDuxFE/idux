@@ -738,5 +738,24 @@ describe('TreeSelect', () => {
 
       expect(wrapper.findAll('.ix-selector-item-label')[1].text()).toBe('1')
     })
+
+    test('expandAll and collapseAll work', async () => {
+      const onUpdateExpandedKeys = vi.fn()
+      const wrapper = TreeSelectMount({
+        props: {
+          open: true,
+          expandedKeys: ['0'],
+          'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        },
+      })
+
+      await wrapper.vm.collapseAll()
+
+      expect(onUpdateExpandedKeys).toBeCalledWith([])
+
+      await wrapper.vm.expandAll()
+
+      expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
+    })
   })
 })

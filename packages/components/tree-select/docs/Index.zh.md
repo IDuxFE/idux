@@ -106,9 +106,10 @@ order: 0
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `blur` | 失去焦点 | - | - |
+| `collapseAll` | 收起所有节点 | - | - |
+| `expandAll` | 展开所有节点 | - | - |
 | `focus` | 获取焦点 | - | - |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
-| `setExpandAll` | 控制树节点是否全部展开 | `(isAll: boolean) => void` | - |
 
 <!--- insert less variable begin  --->
 ## 主题变量

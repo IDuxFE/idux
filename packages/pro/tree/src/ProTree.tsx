@@ -73,10 +73,10 @@ export default defineComponent({
     }
 
     expose({
-      blur: treeRef.value?.blur,
-      collapseAll: treeRef.value?.collapseAll,
-      expandAll: treeRef.value?.expandAll,
-      focus: treeRef.value?.focus,
+      blur: () => treeRef.value?.blur(),
+      collapseAll: () => treeRef.value?.collapseAll(),
+      expandAll: () => treeRef.value?.expandAll(),
+      focus: () => treeRef.value?.focus(),
     })
 
     return () => {

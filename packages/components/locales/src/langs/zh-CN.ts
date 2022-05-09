@@ -102,6 +102,10 @@ const zhCN: Locale = {
     selected: '已选',
     searchPlaceholder: ['搜索关键字', '搜索关键字'],
   },
+  treeSelect: {
+    expandAll: '展开全部',
+    collapseAll: '收起全部',
+  },
   upload: {
     uploading: '正在上传...',
     error: '上传失败',

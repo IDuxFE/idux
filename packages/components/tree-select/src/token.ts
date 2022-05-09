@@ -13,6 +13,7 @@ import type { TreeSelectNode, TreeSelectProps } from './types'
 import type { ValueAccessor } from '@idux/cdk/forms'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeSelectConfig } from '@idux/components/config'
+import type { Locale } from '@idux/components/locales'
 import type { TreeInstance } from '@idux/components/tree'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
@@ -20,6 +21,7 @@ export interface TreeSelectContext {
   props: TreeSelectProps
   slots: Slots
   config: TreeSelectConfig
+  locale: Locale
   mergedPrefixCls: ComputedRef<string>
   accessor: ValueAccessor
   mergedChildrenKey: ComputedRef<string>
@@ -31,7 +33,6 @@ export interface TreeSelectContext {
   setInputValue: (value: string) => void
   treeRef: Ref<TreeInstance | undefined>
   setExpandedKeys: (keys: VKey[]) => void
-  setExpandAll: (isAll: boolean) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
   handleNodeClick: () => void

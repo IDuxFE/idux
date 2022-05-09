@@ -102,6 +102,10 @@ const enUS: Locale = {
     selected: 'Selected',
     searchPlaceholder: ['Key words', 'Key words'],
   },
+  treeSelect: {
+    expandAll: 'Expand all',
+    collapseAll: 'Collapse all',
+  },
   upload: {
     uploading: 'Uploading...',
     error: 'Upload error',
