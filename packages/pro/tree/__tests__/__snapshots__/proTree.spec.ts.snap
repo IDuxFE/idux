@@ -1,0 +1,19 @@
+// Vitest Snapshot v1
+
+exports[`ProTree > render work 1`] = `
+"<div class=\\"ix-pro-tree\\">
+  <div class=\\"ix-pro-tree-header-wrapper\\">
+    <!---->
+    <!---->
+  </div>
+  <div class=\\"ix-pro-tree-search-wrapper\\"><button class=\\"ix-button ix-button-icon-only ix-button-xs\\" type=\\"button\\" title=\\"收起全部\\"><i class=\\"ix-icon ix-icon-tree-unexpand\\" role=\\"img\\" aria-label=\\"tree-unexpand\\"></i></button><span class=\\"ix-input ix-input-sm ix-input-clearable ix-input-with-suffix\\"><!----><input class=\\"ix-input-inner\\"><span class=\\"ix-input-suffix\\"><i class=\\"ix-icon ix-icon-search\\" role=\\"img\\" aria-label=\\"search\\"></i></span><span class=\\"ix-input-clear\\"><i class=\\"ix-icon ix-icon-close-circle\\" role=\\"img\\" aria-label=\\"close-circle\\"></i></span></span></div>
+  <div class=\\"ix-tree ix-tree-blocked ix-tree-show-line\\" role=\\"tree\\">
+    <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
+    <div class=\\"ix-empty\\">
+      <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" aria-label=\\"empty\\"></i></div>
+      <div class=\\"ix-empty-description\\">暂无数据</div>
+      <!---->
+    </div>
+  </div>
+</div>"
+`;

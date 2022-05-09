@@ -346,6 +346,25 @@ describe('Tree', () => {
     expect(allNodes[1].classes()).toContain('ix-tree-node-expanded')
   })
 
+  test('expandAll and collapseAll work', async () => {
+    const onUpdateExpandedKeys = vi.fn()
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        expandedKeys: ['0'],
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+      },
+    })
+
+    await wrapper.vm.collapseAll()
+
+    expect(onUpdateExpandedKeys).toBeCalledWith([])
+
+    await wrapper.vm.expandAll()
+
+    expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
+  })
+
   test('v-model:selectedKeys work', async () => {
     const onUpdateSelectedKeys = vi.fn()
     const wrapper = TreeMount({
