@@ -147,6 +147,19 @@ describe('Select', () => {
       expect(optionsComps.length).toBe(3)
     })
 
+    test('config labelKey as "value"', async () => {
+      const dataSource = [
+        { key: 1, value: 'Tom' },
+        { key: 2, value: 'Jerry' },
+      ]
+
+      const wrapper = SelectMount({
+        props: { value: 2, open: true, dataSource, getKey: 'key', labelKey: 'value' },
+      })
+
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Jerry')
+    })
+
     test('clearable work', async () => {
       const onUpdateValue = vi.fn()
       const wrapper = SelectMount({ props: { clearable: true, 'onUpdate:value': onUpdateValue } })

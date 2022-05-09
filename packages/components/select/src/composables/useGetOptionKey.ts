@@ -24,8 +24,12 @@ export function useGetOptionKey(props: SelectProps, config: SelectConfig): Compu
     if (isString(getKey)) {
       return (record: unknown) => {
         // value 是为了兼容之前的版本
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const key = (record as any)['value'] ?? (record as any)[getKey]
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        let key = (record as any)[getKey]
+        if (props.labelKey !== 'value' && (record as any)['value']) {
+          key = (record as any)['value']
+        }
+        /* eslint-enable @typescript-eslint/no-explicit-any */
         if (__DEV__ && key === undefined) {
           Logger.warn('components/select', 'Each record in dataSource should have a unique `key` prop.')
         }
