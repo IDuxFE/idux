@@ -75,7 +75,7 @@ function renderNumericPrefix(prefixCls: string, number: number | undefined, styl
 
   return (
     <span class={`${prefixCls}-numeric-prefix`} style={style}>
-      {number}
+      {number > 9 ? '9+' : number}
     </span>
   )
 }

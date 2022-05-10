@@ -62,4 +62,9 @@ describe('Tag', () => {
     expect(wrapper.classes()).toContain('ix-tag-numeric')
     expect(wrapper.find('.ix-tag-numeric-prefix').text()).toBe('2')
   })
+
+  test('number exceeds 9 work', async () => {
+    const wrapper = TagMount({ props: { number: 10000 } })
+    expect(wrapper.find('.ix-tag-numeric-prefix').text()).toBe('9+')
+  })
 })
