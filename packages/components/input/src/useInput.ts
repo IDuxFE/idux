@@ -54,12 +54,27 @@ export function useInput(
     isFocused.value = false
     callEmit(props.onBlur, evt)
     accessor.markAsBlurred()
+
+    if (props.trim) {
+      setValue((evt.target as HTMLInputElement).value.trim())
+    }
   }
 
   const { elementRef, focus, blur } = useFormFocusMonitor<HTMLInputElement | HTMLTextAreaElement>({
     handleFocus,
     handleBlur,
   })
+
+  const setValue = (value: string) => {
+    const oldValue = toRaw(accessor.valueRef.value)
+    if (value !== oldValue) {
+      accessor.setValue(value)
+      callEmit(props.onChange, value, oldValue)
+
+      //controlled value , see: https://github.com/IDuxFE/idux/issues/495
+      nextTick(() => syncValue())
+    }
+  }
 
   const syncValue = () => {
     const element = elementRef.value
@@ -77,15 +92,8 @@ export function useInput(
     if (isComposing.value) {
       return
     }
-    const { value } = evt.target as HTMLInputElement
-    const oldValue = toRaw(accessor.valueRef.value)
-    if (value !== oldValue) {
-      accessor.setValue(value)
-      callEmit(props.onChange, value, oldValue)
 
-      //controlled value , see: https://github.com/IDuxFE/idux/issues/495
-      nextTick(() => syncValue())
-    }
+    setValue((evt.target as HTMLInputElement).value)
   }
 
   const handleCompositionStart = (evt: CompositionEvent) => {

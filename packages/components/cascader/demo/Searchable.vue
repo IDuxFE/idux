@@ -8,9 +8,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { CascaderData } from '@idux/components/cascader'
+import { type CascaderData } from '@idux/components/cascader'
+import { type RadioData } from '@idux/components/radio'
 
 const searchable = ref(true)
+
+const searchableData = [
+  { key: true, label: 'true' },
+  { key: 'overlay', label: 'overlay' },
+  { key: false, label: 'false' },
+] as RadioData[]
 
 const dataSource: CascaderData[] = [
   {
@@ -123,11 +130,5 @@ const dataSource: CascaderData[] = [
       },
     ],
   },
-]
-
-const searchableData = [
-  { label: 'true', value: true },
-  { label: 'overlay', value: 'overlay' },
-  { label: 'false', value: false },
 ]
 </script>

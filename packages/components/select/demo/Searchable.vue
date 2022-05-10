@@ -1,6 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxSpace> searchable:<IxRadioGroup v-model:value="searchableValue" :dataSource="searchableOptions" /></IxSpace>
+    <IxRadioGroup v-model:value="searchableValue" :dataSource="searchableData" />
     <IxSelect
       v-model:value="value"
       :dataSource="dataSource"
@@ -12,18 +12,18 @@
   </IxSpace>
 </template>
 <script setup lang="ts">
-import type { RadioData } from '@idux/components/radio'
-import type { SelectData } from '@idux/components/select'
-
 import { ref } from 'vue'
+
+import { type RadioData } from '@idux/components/radio'
+import { type SelectData } from '@idux/components/select'
 
 const searchableValue = ref(true)
 
-const searchableOptions: RadioData[] = [
-  { label: 'true', value: true },
-  { label: 'overlay', value: 'overlay' },
-  { label: 'false', value: false },
-]
+const searchableData = [
+  { key: true, label: 'true' },
+  { key: 'overlay', label: 'overlay' },
+  { key: false, label: 'false' },
+] as RadioData[]
 
 const dataSource: SelectData[] = [
   { key: 'tom', label: 'Tom' },

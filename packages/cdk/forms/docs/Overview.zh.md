@@ -27,7 +27,7 @@ import { AbstractControl, useValueAccessor, useValueControl } from '@idux/cdk/fo
 
 defineProps<{
   value?: string
-  control?: string | AbstractControl
+  control?: string | number | AbstractControl
   disabled?: boolean
 }>()
 
@@ -341,14 +341,17 @@ export declare abstract class AbstractControl<T = any> {
    * Sets a new value for the control.
    *
    * @param value The new value.
-   * @param options Configuration options that emits events when the value changes.
+   * @param options
    * * `dirty`: Marks it dirty, default is false.
    */
   abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean }): void;
   /**
    * The aggregate value of the control.
+   *
+   * @param options
+   * * `skipDisabled`: Ignore value of disabled control, default is false.
    */
-  abstract getValue(): T;
+  abstract getValue(options?: { skipDisabled?: boolean }): T;
   /**
    * Resets the control, marking it `unblurred` `pristine`, and setting the value to initialization value.
    */

@@ -6,8 +6,6 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
 
-import axios from 'axios'
-
 import { TableColumn, TablePagination } from '@idux/components/table'
 
 interface RandomUser {
@@ -60,12 +58,13 @@ const loading = ref(false)
 const fetchData = async (pageIndex: number, pageSize: number) => {
   loading.value = true
 
-  const params = { page: pageIndex, results: pageSize }
-  const { data } = await axios.get('https://randomuser.me/api', { params })
+  const { results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
+    res.json(),
+  )
 
   loading.value = false
 
-  dataSource.value = data.results
+  dataSource.value = results
 
   pagination.pageIndex = pageIndex
   pagination.pageSize = pageSize

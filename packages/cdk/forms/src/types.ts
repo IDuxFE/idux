@@ -40,9 +40,12 @@ export interface ValidatorOptions {
   disabled?: boolean
   name?: string
   trigger?: TriggerType
-  trim?: boolean
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
+  /**
+   * @deprecated
+   */
+  trim?: boolean
 }
 
 export type ValidateStatus = 'valid' | 'invalid' | 'validating'

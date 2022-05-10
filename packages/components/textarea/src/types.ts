@@ -6,18 +6,17 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, TextareaHTMLAttributes } from 'vue'
+import type { DefineComponent, PropType, TextareaHTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵCommonProps } from '@idux/components/input'
 
 export const textareaProps = {
   ...ɵCommonProps,
-  autoRows: IxPropTypes.oneOfType([Boolean, IxPropTypes.shape<TextareaAutoRows>({ minRows: Number, maxRows: Number })]),
-  computeCount: IxPropTypes.func<(value: string) => string>(),
-  maxCount: IxPropTypes.oneOfType([Number, String]),
-  resize: IxPropTypes.oneOf<TextareaResize>(['none', 'both', 'horizontal', 'vertical']),
-  showCount: IxPropTypes.bool,
+  autoRows: { type: [Boolean, Object] as PropType<boolean | TextareaAutoRows>, default: undefined },
+  computeCount: { type: Function as PropType<(value: string) => string>, default: undefined },
+  maxCount: { type: [Number, String], default: undefined },
+  resize: { type: String as PropType<TextareaResize>, default: undefined },
+  showCount: { type: Boolean, default: undefined },
 }
 
 export type TextareaProps = ExtractInnerPropTypes<typeof textareaProps>

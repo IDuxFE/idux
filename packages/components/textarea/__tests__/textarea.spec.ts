@@ -1,5 +1,4 @@
 import { MountingOptions, mount } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
 
 import { renderWork } from '@tests'
 
@@ -12,43 +11,37 @@ describe('Textarea', () => {
   renderWork(IxTextarea)
 
   test('v-model work', async () => {
-    const valueRef = ref('init value')
-    const wrapper = mount({
-      components: { IxTextarea },
-      template: `<IxTextarea v-model:value="valueRef" />`,
-      setup() {
-        return { valueRef }
-      },
-    })
+    const onUpdateValue = vi.fn()
+    const wrapper = TextareaMount({ props: { value: 'init value', 'onUpdate:value': onUpdateValue } })
     const textarea = wrapper.find('textarea')
 
     expect(textarea.element.value).toBe('init value')
 
-    await textarea.setValue('textarea setValue')
+    await textarea.setValue('input setValue')
 
-    expect(valueRef.value).toBe('textarea setValue')
+    expect(onUpdateValue).toBeCalledTimes(1)
+    expect(onUpdateValue).toBeCalledWith('input setValue')
 
-    valueRef.value = 'valueRef change'
+    await wrapper.setProps({ value: 'wrapper setProps' })
 
-    await nextTick()
-
-    expect(textarea.element.value).toBe('valueRef change')
+    expect(textarea.element.value).toBe('wrapper setProps')
 
     textarea.element.value = '使用拼音'
     await textarea.trigger('compositionstart')
 
     expect(wrapper.emitted()).toHaveProperty('compositionstart')
-    expect(valueRef.value).toBe('valueRef change')
+    expect(onUpdateValue).toBeCalledTimes(1)
 
     await textarea.trigger('input')
 
     expect(wrapper.emitted()).toHaveProperty('input')
-    expect(valueRef.value).toBe('valueRef change')
+    expect(onUpdateValue).toBeCalledTimes(1)
 
     await textarea.trigger('compositionend')
 
     expect(wrapper.emitted()).toHaveProperty('compositionend')
-    expect(valueRef.value).toBe('使用拼音')
+    expect(onUpdateValue).toBeCalledTimes(2)
+    expect(onUpdateValue).toBeCalledWith('使用拼音')
   })
 
   test('disabled work', async () => {

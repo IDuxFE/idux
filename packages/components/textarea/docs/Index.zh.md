@@ -27,6 +27,8 @@ subtitle: 文本域
 | `resize` | 缩放方向 | `none \| both \| horizontal \| vertical` | `vertical` | ✅ | 启用 `autoRows` 的时，仅 `none \| horizontal` 有效 |
 | `showCount` | 是否展示字符数 | `boolean` | `false` | ✅ | - |
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
+| `trim` | 失去焦点后自动去除前后空格  | `boolean` | `false` | - | - |
+| `onChange` | 值发生改变后的回调 | `(value: string, oldValue: string) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 
 <!--- insert less variable begin  --->

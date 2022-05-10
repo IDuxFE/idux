@@ -18,9 +18,9 @@ import { FormSize } from '@idux/components/form'
 import { SelectData } from '@idux/components/select'
 
 const dataSource: SelectData[] = [
-  { label: 'Tom', value: 'tom' },
-  { label: 'Jerry', value: 'jerry' },
-  { label: 'Speike', value: 'speike', disabled: true },
+  { key: 'tom', label: 'Tom' },
+  { key: 'jerry', label: 'Jerry' },
+  { key: 'speike', label: 'Speike', disabled: true },
 ]
 
 const size = ref<FormSize>('md')
