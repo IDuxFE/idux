@@ -27,6 +27,8 @@ subtitle: 输入框
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | - | - | - |
+| `trim` | 失去焦点后自动去除前后空格  | `boolean` | `false` | - | - |
+| `onChange` | 值发生改变后的回调 | `(value: string, oldValue: string) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 
 <!--- insert less variable begin  --->

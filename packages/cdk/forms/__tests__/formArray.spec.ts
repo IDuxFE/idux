@@ -138,6 +138,11 @@ describe('formArray.ts', () => {
       array.setValue([{ control: 'test1' }, { control: 'test2' }])
 
       expect(array.getValue()).toEqual([{ ...basicValue, control: 'test1' }])
+
+      array.get(0)!.disable()
+
+      expect(array.getValue()).toEqual([{ ...basicValue, control: 'test1' }])
+      expect(array.getValue({ skipDisabled: true })).toEqual([])
     })
 
     test('markAsBlurred and markAsUnblurred work', async () => {

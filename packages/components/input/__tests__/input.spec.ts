@@ -1,5 +1,5 @@
 import { MountingOptions, mount } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
+import { nextTick } from 'vue'
 
 import { renderWork } from '@tests'
 
@@ -12,42 +12,37 @@ describe('Input', () => {
   renderWork(IxInput)
 
   test('v-model work', async () => {
-    const valueRef = ref('init value')
-    const wrapper = mount({
-      components: { IxInput },
-      template: `<IxInput v-model:value="valueRef" />`,
-      setup() {
-        return { valueRef }
-      },
-    })
+    const onUpdateValue = vi.fn()
+    const wrapper = InputMount({ props: { value: 'init value', 'onUpdate:value': onUpdateValue } })
     const input = wrapper.find('input')
 
     expect(input.element.value).toBe('init value')
 
     await input.setValue('input setValue')
 
-    expect(valueRef.value).toBe('input setValue')
+    expect(onUpdateValue).toBeCalledTimes(1)
+    expect(onUpdateValue).toBeCalledWith('input setValue')
 
-    valueRef.value = 'valueRef change'
-    await nextTick()
+    await wrapper.setProps({ value: 'wrapper setProps' })
 
-    expect(input.element.value).toBe('valueRef change')
+    expect(input.element.value).toBe('wrapper setProps')
 
     input.element.value = '使用拼音'
     await input.trigger('compositionstart')
 
     expect(wrapper.emitted()).toHaveProperty('compositionstart')
-    expect(valueRef.value).toBe('valueRef change')
+    expect(onUpdateValue).toBeCalledTimes(1)
 
     await input.trigger('input')
 
     expect(wrapper.emitted()).toHaveProperty('input')
-    expect(valueRef.value).toBe('valueRef change')
+    expect(onUpdateValue).toBeCalledTimes(1)
 
     await input.trigger('compositionend')
 
     expect(wrapper.emitted()).toHaveProperty('compositionend')
-    expect(valueRef.value).toBe('使用拼音')
+    expect(onUpdateValue).toBeCalledTimes(2)
+    expect(onUpdateValue).toBeCalledWith('使用拼音')
   })
 
   test('controlled value work', async () => {

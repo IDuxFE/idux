@@ -98,6 +98,12 @@ describe('formGroup.ts', () => {
       group.setValue({ control: 'test1' })
 
       expect(group.getValue()).toEqual({ ...basicValue, control: 'test1' })
+
+      group.get('control')!.disable()
+
+      expect(group.getValue()).toEqual({ ...basicValue, control: 'test1' })
+      const { control, ...rest } = basicValue
+      expect(group.getValue({ skipDisabled: true })).toEqual(rest)
     })
 
     test('markAsBlurred and markAsUnblurred work', async () => {

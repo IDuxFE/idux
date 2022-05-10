@@ -146,6 +146,8 @@ export abstract class AbstractControl<T = any> {
   }
 
   /**
+   * @deprecated
+   *
    * Whether to remove the first and tail space
    * Possible value: true | false
    * Default value: false
@@ -188,15 +190,18 @@ export abstract class AbstractControl<T = any> {
    * Sets a new value for the control.
    *
    * @param value The new value.
-   * @param options Configuration options that emits events when the value changes.
+   * @param options
    * * `dirty`: Marks it dirty, default is false.
    */
   abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean }): void
 
   /**
    * The aggregate value of the control.
+   *
+   * @param options
+   * * `skipDisabled`: Ignore value of disabled control, default is false.
    */
-  abstract getValue(): T
+  abstract getValue(options?: { skipDisabled?: boolean }): T
 
   protected abstract _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void
 
@@ -219,7 +224,7 @@ export abstract class AbstractControl<T = any> {
    * Running validations manually, rather than automatically.
    */
   async validate(): Promise<ValidateErrors | undefined> {
-    if (this._controls.value) {
+    if (!this._disabled.value && this._controls.value) {
       const validates: Promise<ValidateErrors | undefined>[] = []
       this._forEachControls(control => validates.push(control.validate()))
       if (validates.length > 0) {
@@ -246,11 +251,12 @@ export abstract class AbstractControl<T = any> {
    */
   enable(): void {
     this._disabled.value = false
-    this._validate()
 
     if (this._controls.value) {
       this._forEachControls(control => control.enable())
     }
+
+    this._validate()
   }
 
   /**
@@ -596,9 +602,13 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
     })
   }
 
-  getValue(): T {
+  getValue(options: { skipDisabled?: boolean } = {}): T {
+    const { skipDisabled } = options
     const value = {} as T
     this._forEachControls((control, key) => {
+      if (skipDisabled && control.disabled.value) {
+        return
+      }
       value[key] = control.getValue()
     })
     return value
@@ -753,8 +763,11 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     })
   }
 
-  getValue(): T {
-    return this._controls.value.map(control => control.getValue()) as T
+  getValue(options: { skipDisabled?: boolean } = {}): T {
+    const { skipDisabled } = options
+    return this._controls.value
+      .filter(control => !skipDisabled || !control.disabled.value)
+      .map(control => control.getValue()) as T
   }
 
   protected _calculateInitValue(): T {

@@ -16,8 +16,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import axios from 'axios'
-
 interface RandomUser {
   gender: string
   email: string
@@ -42,10 +40,9 @@ const onSearch = async (searchValue: string) => {
   console.log('onSearch', searchValue)
   loading.value = true
 
-  const params = { name: searchValue, results: 20 }
-  const { data } = await axios.get('https://randomuser.me/api', { params })
+  const { results } = await fetch(`https://randomuser.me/api?name=${searchValue}&results=20`).then(res => res.json())
 
   loading.value = false
-  dataSource.value = data.results
+  dataSource.value = results
 }
 </script>
