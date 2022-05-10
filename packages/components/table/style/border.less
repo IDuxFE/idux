@@ -1,21 +1,29 @@
-.@{table-prefix}:not(.@{table-prefix}-borderless) {
-  > .@{table-prefix}-container {
-    > .@{table-prefix}-content {
-      border-left: @table-border-width @table-border-style @table-border-color;
+@table-border: @table-border-width @table-border-style @table-border-color;
 
-      table {
-        border-top: @table-border-width @table-border-style @table-border-color;
+.@{table-prefix}:not(.@{table-prefix}-borderless) {
+  > .@{header-prefix} {
+    border: @table-border;
+    border-bottom: 0;
+  }
+
+  > .@{table-prefix}-container {
+    > .@{table-prefix}-fixed-holder,
+    > .@{table-prefix}-content {
+      border-left: @table-border;
+
+      > table {
+        border-top: @table-border;
 
         > thead > tr > th,
         > tbody > tr > td,
         > tfoot > tr > th,
         > tfoot > tr > td {
-          border-right: @table-border-width @table-border-style @table-border-color;
+          border-right: @table-border;
         }
 
         > thead {
           > tr:not(:last-child) > th {
-            border-bottom: @table-border-width @table-border-style @table-border-color;
+            border-bottom: @table-border;
           }
 
           > tr > th {
@@ -29,10 +37,21 @@
         > tbody > tr,
         > tfoot > tr {
           > .@{table-prefix}-fix-end-first::after {
-            border-right: @table-border-width @table-border-style @table-border-color;
+            border-right: @table-border;
           }
         }
       }
     }
+
+    > .@{table-prefix}-fixed-holder + .@{table-prefix}-content {
+      > table {
+        border-top: none;
+      }
+    }
+  }
+
+  > .@{table-prefix}-footer {
+    border: @table-border;
+    border-top: 0;
   }
 }

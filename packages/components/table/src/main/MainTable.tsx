@@ -45,6 +45,7 @@ export default defineComponent({
       changeColumnWidth,
       flattedData,
       isSticky,
+      mergedSticky,
       scrollBodyRef,
       handleScroll,
       pingedStart,
@@ -147,8 +148,9 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       if (scrollHeight.value || isSticky.value) {
+        const { offsetTop } = mergedSticky.value
         const tableHead = !props.headless && (
-          <FixedHolder>
+          <FixedHolder offsetTop={offsetTop}>
             <Head></Head>
           </FixedHolder>
         )

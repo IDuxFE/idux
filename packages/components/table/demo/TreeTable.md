@@ -2,7 +2,7 @@
 title:
   zh: 树表格
   en: Tree table
-order: 80
+order: 21
 ---
 
 ## zh

@@ -105,7 +105,7 @@ export default defineComponent({
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
       const [paginationTop, paginationBottom] = renderPagination(mergedPagination.value, filteredData.value, prefixCls)
-      const children = [header, paginationTop, <MainTable />, paginationBottom, footer]
+      const children = [header, paginationTop, <MainTable />, footer, paginationBottom]
       const spinProps = convertSpinProps(props.spin)
       const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
       return <div class={classes.value}>{spinWrapper}</div>
