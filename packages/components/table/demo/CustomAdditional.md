@@ -2,7 +2,7 @@
 title:
   zh: 斑马纹表格
   en: Striped Table
-order: 1
+order: 63
 ---
 
 ## zh

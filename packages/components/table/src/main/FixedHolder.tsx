@@ -7,23 +7,19 @@
 
 import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 
-import { off, on } from '@idux/cdk/utils'
+import { convertCssPixel, off, on } from '@idux/cdk/utils'
 
 import { TABLE_TOKEN } from '../token'
 import ColGroup from './ColGroup'
 
 export default defineComponent({
-  setup(_, { slots }) {
-    const {
-      mergedPrefixCls,
-      scrollHeadRef,
-      handleScroll,
-      scrollWidth,
-      flattedData,
-      isSticky,
-      mergedSticky,
-      columnWidths,
-    } = inject(TABLE_TOKEN)!
+  props: {
+    offsetTop: { type: Number, default: undefined },
+    offsetBottom: { type: Number, default: undefined },
+  },
+  setup(props, { slots }) {
+    const { mergedPrefixCls, scrollHeadRef, handleScroll, scrollWidth, flattedData, isSticky, columnWidths } =
+      inject(TABLE_TOKEN)!
 
     useScrollEvents(scrollHeadRef, handleScroll)
 
@@ -38,11 +34,11 @@ export default defineComponent({
     })
     const style = computed<CSSProperties>(() => {
       const sticky = isSticky.value
-      const { offsetTop, offsetBottom } = mergedSticky.value
+      const { offsetTop, offsetBottom } = props
       return {
         overflow: 'hidden',
-        top: sticky ? offsetTop : undefined,
-        bottom: sticky ? offsetBottom : undefined,
+        top: sticky ? convertCssPixel(offsetTop) : undefined,
+        bottom: sticky ? convertCssPixel(offsetBottom) : undefined,
       }
     })
 
