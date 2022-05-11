@@ -509,7 +509,7 @@ export interface TooltipConfig {
 export interface TreeConfig {
   blocked: boolean
   childrenKey: string
-  expandIcon: string
+  expandIcon: string | [string, string]
   getKey: string | ((data: TreeNode) => VKey)
   labelKey: string
   /**

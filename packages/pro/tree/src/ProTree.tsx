@@ -13,6 +13,7 @@ import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
+import { IxDivider } from '@idux/components/divider'
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeInstance } from '@idux/components/tree'
 import { useGlobalConfig } from '@idux/pro/config'
@@ -25,10 +26,11 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('proTree')
+    const locale = useGlobalConfig('locale')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
-    const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
+    const mergedCollapseIcon = computed(() => props.collapseIcon ?? config.collapseIcon)
 
     const expandAllBtnStatus = ref(false)
     const treeRef = ref<TreeInstance>()
@@ -73,10 +75,8 @@ export default defineComponent({
     }
 
     expose({
-      blur: () => treeRef.value?.blur(),
       collapseAll: () => treeRef.value?.collapseAll(),
       expandAll: () => treeRef.value?.expandAll(),
-      focus: () => treeRef.value?.focus(),
     })
 
     return () => {
@@ -95,7 +95,7 @@ export default defineComponent({
         customAdditional: props.customAdditional,
         dataSource: props.dataSource,
         disabled: props.disabled,
-        expandIcon: expandIcon.value,
+        expandIcon: props.expandIcon,
         empty: props.empty,
         getKey: props.getKey,
         labelKey: props.labelKey,
@@ -143,13 +143,19 @@ export default defineComponent({
         <div class={classes.value} style={style.value}>
           <div class={`${prefixCls}-header-wrapper`}>
             <ɵHeader v-slots={slots} header={props.header} />
-            {!isNil(collapsed.value) && <IxIcon name={collapsed.value ? 'right' : 'left'} onClick={handleCollapsed} />}
+            {!isNil(collapsed.value) && (
+              <IxIcon
+                class={`${prefixCls}-collapsed-icon`}
+                name={collapsed.value ? mergedCollapseIcon.value[1] : mergedCollapseIcon.value[0]}
+                onClick={handleCollapsed}
+              />
+            )}
           </div>
-          {props.searchable && (
+          {props.searchable ? (
             <div class={`${prefixCls}-search-wrapper`}>
               <IxButton
                 size="xs"
-                title={expandAllBtnStatus.value ? '展开全部' : '收起全部'}
+                title={expandAllBtnStatus.value ? locale.proTree.expandAll : locale.proTree.collapseAll}
                 icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
                 onClick={handleExpandAll}
               />
@@ -165,6 +171,8 @@ export default defineComponent({
                 onClear={handleClear}
               />
             </div>
+          ) : (
+            !collapsed.value && <IxDivider />
           )}
           <IxTree ref={treeRef} v-slots={treeSlots} {...treeProps} />
         </div>

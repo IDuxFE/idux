@@ -30,10 +30,14 @@ export const proTreeProps = {
   customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
   collapsed: { type: Boolean, default: undefined },
   collapsedWidth: { type: Number, default: 44 },
+  collapseIcon: { type: Array as PropType<string[]>, default: undefined },
   dataSource: { type: Array as PropType<TreeNode[]>, default: undefined },
   disabled: { type: Function as PropType<(node: TreeNode) => boolean | TreeNodeDisabled>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
-  expandIcon: { type: [String, Array] as PropType<string | string[]>, default: undefined },
+  expandIcon: {
+    type: [String, Array] as PropType<string | [string, string]>,
+    default: ['minus-square', 'plus-square'],
+  },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode) => VKey)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   labelKey: { type: String, default: undefined },
@@ -82,7 +86,15 @@ export const proTreeProps = {
   'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
 } as const
 
+export interface ProTreeBindings {
+  expandAll: () => void
+  collapseAll: () => void
+}
+
 export type ProTreeProps = ExtractInnerPropTypes<typeof proTreeProps>
 export type ProTreePublicProps = ExtractPublicPropTypes<typeof proTreeProps>
-export type ProTreeComponent = DefineComponent<Omit<HTMLAttributes, keyof ProTreePublicProps> & ProTreePublicProps>
-export type ProTreeInstance = InstanceType<DefineComponent<ProTreeProps>>
+export type ProTreeComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ProTreePublicProps> & ProTreePublicProps,
+  ProTreeBindings
+>
+export type ProTreeInstance = InstanceType<DefineComponent<ProTreeProps, ProTreeBindings>>

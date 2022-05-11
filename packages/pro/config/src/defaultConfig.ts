@@ -7,14 +7,18 @@
 
 import type { CommonConfig, GlobalConfig, ProTree } from './types'
 
+import { zhCN } from '@idux/pro/locales'
+
 const common: CommonConfig = { prefixCls: 'ix-pro' }
 
 const proTree: ProTree = {
   clearIcon: 'close-circle',
-  expandIcon: ['minus-square', 'plus-square'],
+  collapseIcon: ['collapse', 'uncollapse'],
 }
 
 export const defaultConfig: GlobalConfig = {
   common,
+  locale: zhCN,
+
   proTree,
 }

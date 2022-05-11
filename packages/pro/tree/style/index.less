@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     gap: @pro-tree-header-search-wrapper-gap;
-    padding: @pro-tree-header-search-wrapper-padding;
+    padding: @pro-tree-header-search-wrapper-vertical-spacing @pro-tree-header-search-wrapper-horizontal-spacing;
   }
 
   &-search-wrapper {
@@ -43,6 +43,12 @@
     .@{header-prefix} {
       height: @pro-tree-header-wrapper-height;
       line-height: @pro-tree-header-wrapper-height;
+    }
+
+    & + .@{divider-prefix} {
+      margin: @pro-tree-divider-vertical-spacing @pro-tree-divider-horizontal-spacing;
+      width: calc(100% - @pro-tree-divider-horizontal-spacing * 2);
+      min-width: calc(100% - @pro-tree-divider-horizontal-spacing * 2);
     }
   }
 
