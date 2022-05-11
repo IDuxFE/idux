@@ -22,14 +22,16 @@ subtitle: 高级树型控件
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
 | `childrenKey` | 替代[TreeNode](#TreeNode)中的`children`字段 | `string` | `children` | - | - |
 | `cascaderStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
+| `clearIcon` | 设置搜索框清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `collapsedWidth` | 树收缩时的宽度 | `number` | `44` | - | - |
+| `collapseIcon` | 树展开收缩时的图标 | `[string, string]` | `['collapse', 'uncollapse']` | ✅ | [`展开时图标`,`未展开时图标`] |
 | `customAdditional` | 自定义节点的额外属性 | `TreeCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[TreeNode](#TreeNode) | `TreeNode[]` | `[]` | - | - |
 | `disabled` | 禁用节点的函数 | `(node: TreeNode) => boolean \| TreeNodeDisabled` | - | - | - |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `expandIcon` | 展开图标 | `string \| string[] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |
+| `expandIcon` | 树节点展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `['minus-square', 'plus-square']` | - | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `header` | 树的头部 | `string \| HeaderProps \| #header="{expanded, onClick}"` | - | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | - | - |
 | `labelKey` | 替代[TreeNode](#TreeNode)中的`label`字段 | `string` | `label` | - | - |
@@ -76,10 +78,8 @@ subtitle: 高级树型控件
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `blur` | 失去焦点 | - | - |
 | `collapseAll` | 收起所有节点 | - | - |
 | `expandAll` | 展开所有节点 | - | - |
-| `focus` | 获取焦点 | - | - |
 <!-- | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 | -->
 
 <!--- insert less variable begin  --->
@@ -90,11 +90,14 @@ subtitle: 高级树型控件
 | `@pro-tree-border` | `1px solid @color-graphite-l30` | - | - |
 | `@pro-tree-padding` | `4px 0 8px 0` | - | - |
 | `@pro-tree-header-search-wrapper-gap` | `4px` | - | - |
-| `@pro-tree-header-search-wrapper-padding` | `0 12px` | - | - |
+| `@pro-tree-header-search-wrapper-horizontal-spacing` | `12px` | - | - |
+| `@pro-tree-header-search-wrapper-vertical-spacing` | `0` | - | - |
 | `@pro-tree-search-wrapper-margin-bottom` | `8px` | - | - |
 | `@pro-tree-search-input-suffix-color` | `@color-graphite-l10` | - | - |
 | `@pro-tree-header-wrapper-icon-font-size` | `@font-size-lg` | - | - |
 | `@pro-tree-header-wrapper-icon-hover-color` | `@color-primary` | - | - |
 | `@pro-tree-header-wrapper-height` | `32px` | - | - |
-| `@pro-tree-node-padding` | `0 0 0 8px` | - | - |
+| `@pro-tree-divider-horizontal-spacing` | `@pro-tree-header-search-wrapper-horizontal-spacing` | - | - |
+| `@pro-tree-divider-vertical-spacing` | `8px` | - | - |
+| `@pro-tree-node-padding` | `0 0 0 8px` | `0 0 0 4px` | - |
 <!--- insert less variable end  --->

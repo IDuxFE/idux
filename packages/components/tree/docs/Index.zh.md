@@ -31,7 +31,7 @@ order: 0
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `expandIcon` | 展开图标 | `string \| string[] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |
+| `expandIcon` | 展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
 | `labelKey` | 替代[TreeNode](#TreeNode)中的`label`字段 | `string` | `label` | ✅ | -

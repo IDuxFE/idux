@@ -21,6 +21,7 @@ export default {
     'components/version',
     'components/node_modules',
     'pro/config',
+    'pro/locales',
     'pro/node_modules',
     'pro/style',
     'pro/version',

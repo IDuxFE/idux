@@ -28,4 +28,5 @@ ignore:
   - packages/site/node_modules
   - packages/cdk/forms/src/messages
   - packages/components/locales/src/langs
+  - packages/pro/locales/src/langs
   - packages/site/components.d.ts

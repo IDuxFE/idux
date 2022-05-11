@@ -841,14 +841,14 @@ describe('Tree', () => {
     expect(wrapper.findAll('.ix-tree-node').length).toBe(4)
   })
 
-  test('nodeKey work', async () => {
+  test('getKey work', async () => {
     const wrapper = TreeMount({
-      props: { nodeKey: 'label' },
+      props: { getKey: 'label' },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.setProps({ nodeKey: (node: TreeNode) => node.key })
+    await wrapper.setProps({ getKey: (node: TreeNode) => node.key })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
