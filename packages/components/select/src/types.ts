@@ -134,7 +134,7 @@ export interface SelectOptionProps {
 
   disabled?: boolean
   key?: VKey
-  label?: string
+  label?: string | number
 
   customLabel?: string | ((data: SelectOptionProps) => VNodeChild)
 
@@ -157,7 +157,7 @@ export interface SelectOptionGroupProps {
 
   children?: SelectOptionProps[]
   key?: VKey
-  label?: string
+  label?: string | number
 
   customLabel?: string | ((data: SelectOptionGroupProps) => VNodeChild)
 
@@ -182,14 +182,14 @@ export type SelectorProps = ExtractInnerPropTypes<typeof optionProps>
 export const optionProps = {
   disabled: Boolean,
   index: { type: Number, required: true },
-  label: String,
+  label: { type: [String, Number], required: true },
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
-  label: String,
+  label: { type: [String, Number], required: true },
   index: { type: Number, required: true },
   rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
 } as const

@@ -36,7 +36,7 @@ export const proTreeProps = {
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   expandIcon: {
     type: [String, Array] as PropType<string | [string, string]>,
-    default: ['minus-square', 'plus-square'],
+    default: () => ['minus-square', 'plus-square'],
   },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode) => VKey)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
