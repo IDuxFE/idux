@@ -9,20 +9,21 @@ import type { CheckableContext } from './composables/useCheckable'
 import type { MergedNode } from './composables/useDataSource'
 import type { DragDropContext } from './composables/useDragDrop'
 import type { ExpandableContext } from './composables/useExpandable'
-import type { GetNodeKey } from './composables/useGetNodeKey'
 import type { SelectableContext } from './composables/useSelectable'
 import type { TreeProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeConfig } from '@idux/components/config'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface TreeContext extends CheckableContext, DragDropContext, ExpandableContext, SelectableContext {
   props: TreeProps
   slots: Slots
   config: TreeConfig
+  flattedNodes: ComputedRef<MergedNode[]>
   mergedPrefixCls: ComputedRef<string>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
-  mergedGetKey: ComputedRef<GetNodeKey>
+  mergedGetKey: ComputedRef<GetKeyFn>
   searchedKeys: ComputedRef<VKey[]>
 }
 

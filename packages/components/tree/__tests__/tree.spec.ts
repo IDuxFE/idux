@@ -872,21 +872,35 @@ describe('Tree', () => {
 
   test('searchValue work', async () => {
     const wrapper = TreeMount({
-      props: { searchValue: 'node' },
+      props: {
+        dataSource: simpleDataSource,
+        searchValue: 'node',
+        expandedKeys: undefined,
+      },
     })
 
+    let allNodes = wrapper.findAll('.ix-tree-node')
+    expect(allNodes.length).toBe(4)
     expect(wrapper.html()).toMatchSnapshot()
+
     await wrapper.setProps({ searchValue: '0-0' })
 
+    allNodes = wrapper.findAll('.ix-tree-node')
+    expect(allNodes.length).toBe(2)
     expect(wrapper.html()).toMatchSnapshot()
 
     // not match
     await wrapper.setProps({ searchValue: '0-0-0-0' })
 
+    allNodes = wrapper.findAll('.ix-tree-node')
+    expect(allNodes.length).toBe(0)
     expect(wrapper.html()).toMatchSnapshot()
 
     // setValue = ''
     await wrapper.setProps({ searchValue: '' })
+
+    allNodes = wrapper.findAll('.ix-tree-node')
+    expect(allNodes.length).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

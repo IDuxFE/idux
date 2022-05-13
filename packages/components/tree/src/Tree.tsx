@@ -17,13 +17,13 @@ import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
+import { useGetKey } from '@idux/components/utils'
 
 import { useCheckable } from './composables/useCheckable'
 import { useFlattedNodes, useMergeNodes } from './composables/useDataSource'
 import { useDragDrop } from './composables/useDragDrop'
 import { useEvents } from './composables/useEvents'
 import { useExpandable } from './composables/useExpandable'
-import { useGetNodeKey } from './composables/useGetNodeKey'
 import { useSearchable } from './composables/useSearchable'
 import { useSelectable } from './composables/useSelectable'
 import TreeNode from './node/TreeNode'
@@ -49,10 +49,10 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
-    const mergedGetKey = useGetNodeKey(props, config)
+    const mergedGetKey = useGetKey(props, config, 'components/tree')
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
     const { mergedNodes, mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
-    const { searchedKeys, lastEffectiveSearchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
+    const { searchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
     const expandableContext = useExpandable(
       props,
       config,
@@ -61,9 +61,8 @@ export default defineComponent({
       mergedLabelKey,
       mergedNodeMap,
       searchedKeys,
-      lastEffectiveSearchedKeys,
     )
-    const flattedNodes = useFlattedNodes(mergedNodes, expandableContext)
+    const flattedNodes = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
     const checkableContext = useCheckable(props, mergedNodeMap)
     const dragDropContext = useDragDrop(props, expandableContext)
     const selectableContext = useSelectable(props, mergedNodeMap)
@@ -72,6 +71,7 @@ export default defineComponent({
       props,
       slots,
       config,
+      flattedNodes,
       mergedPrefixCls,
       mergedNodeMap,
       mergedGetKey,

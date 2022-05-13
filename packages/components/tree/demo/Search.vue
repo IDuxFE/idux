@@ -1,8 +1,8 @@
 <template>
-  <IxInput v-model:value="searchValue" placeholder="Search" suffix="search"></IxInput>
-  <br />
-  <br />
-  <IxTree :dataSource="treeData" :searchValue="searchValue"></IxTree>
+  <IxSpace vertical block>
+    <IxInput v-model:value="searchValue" placeholder="Search" suffix="search"></IxInput>
+    <IxTree :dataSource="treeData" :searchValue="searchValue"></IxTree>
+  </IxSpace>
 </template>
 
 <script setup lang="ts">

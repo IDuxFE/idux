@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, ref } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
 
@@ -14,7 +14,6 @@ import { type MergedNode } from './useDataSource'
 
 export interface SearchableContext {
   searchedKeys: ComputedRef<VKey[]>
-  lastEffectiveSearchedKeys: Ref<VKey[]>
 }
 
 export function useSearchable(
@@ -22,8 +21,6 @@ export function useSearchable(
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
   mergedLabelKey: ComputedRef<string>,
 ): SearchableContext {
-  const lastEffectiveSearchedKeys = ref<VKey[]>([])
-
   const mergedSearchFn = useSearchFn(props, mergedLabelKey)
 
   const searchedKeys = computed(() => {
@@ -39,14 +36,10 @@ export function useSearchable(
       }
     })
 
-    if (keys.length) {
-      lastEffectiveSearchedKeys.value = keys
-    }
-
     return keys
   })
 
-  return { searchedKeys, lastEffectiveSearchedKeys }
+  return { searchedKeys }
 }
 
 function useSearchFn(props: TreeProps, mergedLabelKey: ComputedRef<string>) {

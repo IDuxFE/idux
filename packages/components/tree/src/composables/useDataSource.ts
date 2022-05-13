@@ -7,8 +7,8 @@
 
 import type { TreeNode, TreeNodeDisabled, TreeProps } from '../types'
 import type { ExpandableContext } from './useExpandable'
-import type { GetNodeKey } from './useGetNodeKey'
 import type { VKey } from '@idux/cdk/utils'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
@@ -23,6 +23,7 @@ export interface MergedNode {
   isLast: boolean
   key: VKey
   expanded: boolean
+  hidden?: boolean
   level: number
   parentKey?: VKey
   rawNode: TreeNode
@@ -35,7 +36,7 @@ export interface MergedNode {
 export function useMergeNodes(
   props: TreeProps,
   mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedGetKey: ComputedRef<GetKeyFn>,
   mergedLabelKey: ComputedRef<string>,
 ): {
   mergedNodes: ComputedRef<MergedNode[]>
@@ -57,12 +58,21 @@ export function useMergeNodes(
 export function useFlattedNodes(
   mergedNodes: ComputedRef<MergedNode[]>,
   { expandedKeys }: ExpandableContext,
+  props: TreeProps,
+  searchedKeys: ComputedRef<VKey[]>,
 ): ComputedRef<MergedNode[]> {
   return computed(() => {
-    const _expandedKeysMap = new Map(expandedKeys.value.map((item, index) => [item, index]))
-    if (_expandedKeysMap.size > 0) {
-      const nodes = flatNode(mergedNodes.value, _expandedKeysMap)
+    const { searchValue } = props
+    const expandedKeysMap = new Map(expandedKeys.value.map((item, index) => [item, index]))
+    const searchedKeysMap = new Map(searchedKeys.value.map((item, index) => [item, index]))
+
+    if (expandedKeysMap.size || searchedKeysMap.size) {
+      const nodes = flatNode(mergedNodes.value, expandedKeysMap, searchedKeysMap)
       return nodes
+    }
+
+    if (searchValue && !searchedKeysMap.size) {
+      return []
     }
 
     return mergedNodes.value.map(item => ({ ...item, expanded: false, level: 0 }))
@@ -73,7 +83,7 @@ export function convertMergeNodes(
   props: TreeProps,
   nodes: TreeNode[],
   childrenKey: string,
-  getKey: GetNodeKey,
+  getKey: GetKeyFn,
   labelKey: string,
   parentKey?: VKey,
   parentLevel?: number,
@@ -100,7 +110,7 @@ export function convertMergeNodes(
 function convertMergeNode(
   rawNode: TreeNode,
   childrenKey: string,
-  getKey: GetNodeKey,
+  getKey: GetKeyFn,
   labelKey: string,
   disabled: ((node: TreeNode) => boolean | TreeNodeDisabled) | undefined,
   hasLoad: boolean,
@@ -177,11 +187,43 @@ export function convertMergedNodeMap(mergedNodes: MergedNode[], map: Map<VKey, M
   })
 }
 
+function hiddenIrrelevantNodes(mergedNodes: MergedNode[] = [], searchedKeysMap: Map<VKey, number>) {
+  const result: MergedNode[] = []
+  const mergedNodesLength = mergedNodes.length
+  mergedNodes.forEach((node, index) => {
+    // isFirst 和 isLast控制连接线，每次需要先复原，最后通过result里面的数据再重新设置
+    node.isFirst = index === 0
+    node.isLast = index === mergedNodesLength - 1
+    if (searchedKeysMap.has(node.key)) {
+      node.hidden = false
+      result.push(node)
+    } else {
+      node.hidden = true
+    }
+
+    const obj = hiddenIrrelevantNodes(node.children, searchedKeysMap)
+    if (obj.length > 0) {
+      node.hidden = false
+      result.push(node)
+    }
+  })
+
+  if (result.length) {
+    result[0].isFirst = true
+    result[result.length - 1].isLast = true
+  }
+
+  return result
+}
+
 // TODO: performance optimization
 // when virtual scrolling is enabled, this do not need to traverse all nodes
-function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>) {
+function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>, searchedKeysMap: Map<VKey, number>) {
   const flattedNodes: MergedNode[] = []
   const stack: MergedNode[] = []
+  if (searchedKeysMap.size) {
+    hiddenIrrelevantNodes(mergedNodes, searchedKeysMap)
+  }
 
   mergedNodes.forEach(node => {
     stack.push(node)
@@ -189,21 +231,20 @@ function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>)
     while (stack.length) {
       const _node = stack.pop()
       if (_node) {
-        const { children, key } = _node
+        const { children, key, hidden } = _node
 
         const expanded = expandedKeysMap.has(key)
         _node.expanded = expanded
 
-        flattedNodes.push(_node)
+        !hidden && flattedNodes.push(_node)
 
         if (children && expanded) {
           for (let i = children.length; i > 0; i--) {
-            stack.push(children[i - 1])
+            !children[i - 1].hidden && stack.push(children[i - 1])
           }
         }
       }
     }
   })
-
   return flattedNodes
 }
