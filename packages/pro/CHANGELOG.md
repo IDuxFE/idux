@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
+
+
+### Bug Fixes
+
+* **comp: select:** Add number to the type of label ([#901](https://github.com/IDuxFE/idux/issues/901)) ([5875e2d](https://github.com/IDuxFE/idux/commit/5875e2d9b64047c4375d7169e7d2f1d61c9a7bb2))
+
+
+### Features
+
+* **pro: tree:** add collapseIcon prop ([#900](https://github.com/IDuxFE/idux/issues/900)) ([e9bb42b](https://github.com/IDuxFE/idux/commit/e9bb42b18fc7c6fdd51b921387a1cd33a32557cf))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
 
 

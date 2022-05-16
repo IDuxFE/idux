@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
+
+
+### Bug Fixes
+
+* **comp: select:** Add number to the type of label ([#901](https://github.com/IDuxFE/idux/issues/901)) ([5875e2d](https://github.com/IDuxFE/idux/commit/5875e2d9b64047c4375d7169e7d2f1d61c9a7bb2))
+* **comp: table:** update style with sticky and bodered ([#898](https://github.com/IDuxFE/idux/issues/898)) ([ff75f3e](https://github.com/IDuxFE/idux/commit/ff75f3e3a24e886b44ff97431b3c2bb6542556b1))
+* **comp: tag:** if value of number over 9 and show '9+' ([#841](https://github.com/IDuxFE/idux/issues/841)) ([#896](https://github.com/IDuxFE/idux/issues/896)) ([645301c](https://github.com/IDuxFE/idux/commit/645301cb76198e0725489ec93d8b7ec40f205c1f))
+
+
+### Features
+
+* **cdk: forms:** getValud support skip disabled control ([#897](https://github.com/IDuxFE/idux/issues/897)) ([9ba3eca](https://github.com/IDuxFE/idux/commit/9ba3eca2bc23d2f78e04afa16e19ac859c75757c))
+* **pro: tree:** add collapseIcon prop ([#900](https://github.com/IDuxFE/idux/issues/900)) ([e9bb42b](https://github.com/IDuxFE/idux/commit/e9bb42b18fc7c6fdd51b921387a1cd33a32557cf))
+
+
+### BREAKING CHANGES
+
+* **cdk: forms:** `ValidatorOptions.trim` was deprecated, please use `trim` of `IxInput` or
+`IxTextarea` instead.
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
 
 

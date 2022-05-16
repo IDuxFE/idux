@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
+
+
+### Bug Fixes
+
+* **comp: table:** update style with sticky and bodered ([#898](https://github.com/IDuxFE/idux/issues/898)) ([ff75f3e](https://github.com/IDuxFE/idux/commit/ff75f3e3a24e886b44ff97431b3c2bb6542556b1))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
 
 **Note:** Version bump only for package @idux/site

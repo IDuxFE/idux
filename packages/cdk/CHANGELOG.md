@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
+
+
+### Features
+
+* **cdk: forms:** getValud support skip disabled control ([#897](https://github.com/IDuxFE/idux/issues/897)) ([9ba3eca](https://github.com/IDuxFE/idux/commit/9ba3eca2bc23d2f78e04afa16e19ac859c75757c))
+
+
+### BREAKING CHANGES
+
+* **cdk: forms:** `ValidatorOptions.trim` was deprecated, please use `trim` of `IxInput` or
+`IxTextarea` instead.
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-05-09)
 
 
