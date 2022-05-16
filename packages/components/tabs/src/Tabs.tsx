@@ -10,23 +10,12 @@ import type { VKey } from '@idux/cdk/utils'
 import type { IconInstance } from '@idux/components/icon'
 import type { ComputedRef, Ref, VNode } from 'vue'
 
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  normalizeClass,
-  onBeforeUnmount,
-  onMounted,
-  provide,
-  ref,
-  vShow,
-  watch,
-  withDirectives,
-} from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, provide, ref, vShow, watch, withDirectives } from 'vue'
 
 import { curry, isNil, throttle } from 'lodash-es'
 
-import { addClass, callEmit, flattenNode, offResize, onResize, removeClass, useControlledProp } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { addClass, callEmit, flattenNode, removeClass, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
@@ -188,13 +177,7 @@ export default defineComponent({
       }
     }, 10)
 
-    onMounted(() => {
-      onResize(navWrapperElRef.value as unknown as Element, onTabsResize)
-    })
-
-    onBeforeUnmount(() => {
-      offResize(navWrapperElRef.value as unknown as Element, onTabsResize)
-    })
+    useResizeObserver(navWrapperElRef, onTabsResize)
 
     provide(tabsToken, {
       selectedKey,

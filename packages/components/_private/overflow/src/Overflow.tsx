@@ -7,11 +7,12 @@
 
 import type { VKey } from '@idux/cdk/utils'
 
-import { Ref, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { Ref, computed, defineComponent, ref, watch } from 'vue'
 
 import { isNumber } from 'lodash-es'
 
-import { offResize, onResize, throwError } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { throwError } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import Item from './Item'
@@ -106,10 +107,7 @@ export default defineComponent({
       },
     )
 
-    onMounted(() => {
-      onResize(containerElRef.value, setContainerWidth)
-    })
-    onBeforeUnmount(() => offResize(containerElRef.value, setContainerWidth))
+    useResizeObserver(containerElRef, setContainerWidth)
 
     const itemSharedProps = {
       prefixCls: mergedPrefixCls.value,

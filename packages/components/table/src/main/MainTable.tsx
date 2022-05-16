@@ -22,8 +22,9 @@ import {
 
 import { isNumber } from 'lodash-es'
 
+import { offResize, onResize } from '@idux/cdk/resize'
 import { CdkVirtualScroll, type VirtualContentRenderFn, type VirtualItemRenderFn } from '@idux/cdk/scroll'
-import { Logger, type VKey, callEmit, convertElement, isVisibleElement, offResize, onResize } from '@idux/cdk/utils'
+import { Logger, type VKey, callEmit, convertElement, isVisibleElement } from '@idux/cdk/utils'
 
 import { type FlattedData } from '../composables/useDataSource'
 import { TABLE_TOKEN, tableBodyToken } from '../token'
