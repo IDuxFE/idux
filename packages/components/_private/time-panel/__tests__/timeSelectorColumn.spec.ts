@@ -52,12 +52,13 @@ describe('TimePanelColumn', () => {
     global: mountGlobalOpts,
     props: {
       selectedValue: 1,
+      activeValue: 1,
       options,
     },
   })
 
   test('selectedValue work', async () => {
-    const wrapper = TimePanelColumnMount({ props: { selectedValue: 1, options } })
+    const wrapper = TimePanelColumnMount({ props: { selectedValue: 1, activeValue: 1, options } })
 
     expect(findCellWithValue(wrapper, 1)?.props().selected).toBe(true)
 
@@ -68,7 +69,7 @@ describe('TimePanelColumn', () => {
 
   test('onChange work', async () => {
     const onChange = vi.fn()
-    const wrapper = TimePanelColumnMount({ props: { selectedValue: 1, options, onChange } })
+    const wrapper = TimePanelColumnMount({ props: { selectedValue: 1, activeValue: 1, options, onChange } })
 
     await findCellWithValue(wrapper, 3)?.trigger('click')
     expect(onChange).toBeCalledWith(3)

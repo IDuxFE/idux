@@ -118,11 +118,15 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-overlay`
+      const separatorClasses = {
+        [`${prefixCls}-separator`]: true,
+        [`${prefixCls}-separator-line`]: !inputEnableStatus.value.enableInternalInput,
+      }
 
       const children = [
         <div class={`${prefixCls}-body`} onMousedown={handleMouseDown}>
           {renderBoard(true)}
-          <div class={`${prefixCls}-separator`}>{renderSeparator()}</div>
+          <div class={separatorClasses}>{inputEnableStatus.value.enableInternalInput && renderSeparator()}</div>
           {renderBoard(false)}
         </div>,
         <ɵFooter

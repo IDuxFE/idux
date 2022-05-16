@@ -25,7 +25,8 @@ export default defineComponent({
       }
     })
 
-    const onClick = () => {
+    const onClick = (evt: MouseEvent) => {
+      evt.stopPropagation()
       if (!props.disabled && !props.selected) {
         callEmit(props.onChange, props.value!)
       }

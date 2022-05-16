@@ -10,6 +10,7 @@ import { defineComponent, inject, ref } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 
 import PanelCell from './TimePanelCell'
+import { useColumnEvents } from './composables/useColumnEvents'
 import { usePanelScroll } from './composables/usePanelScroll'
 import { timePanelContext } from './tokens'
 import { timePanelColumnProps } from './types'
@@ -25,15 +26,25 @@ export default defineComponent({
       callEmit(props.onChange, value)
     }
 
+    const { handleWheel, handleClick } = useColumnEvents(listRef)
+    const handleListWheel = (evt: WheelEvent) => {
+      evt.preventDefault()
+    }
+
     return () => (
       <div
-        ref={listRef}
         class={`${mergedPrefixCls.value}-column`}
-        onScroll={handleScroll}
         onMouseleave={handleScrollAdjust}
         onMouseenter={handleScrollAdjust}
+        onWheel={handleWheel}
+        onClick={handleClick}
       >
-        <ul class={`${mergedPrefixCls.value}-column-inner`}>
+        <ul
+          ref={listRef}
+          class={`${mergedPrefixCls.value}-column-inner`}
+          onScroll={handleScroll}
+          onWheel={handleListWheel}
+        >
           {props.options!.map((item, index) => {
             const { disabled, value } = item
             return (
