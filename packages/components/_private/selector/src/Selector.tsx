@@ -5,20 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  type VNodeChild,
-  computed,
-  defineComponent,
-  normalizeClass,
-  onBeforeUnmount,
-  onMounted,
-  provide,
-  ref,
-} from 'vue'
+import { type VNodeChild, computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { callEmit, offResize, onResize } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { callEmit } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormSize } from '@idux/components/form'
@@ -124,8 +116,7 @@ export default defineComponent({
 
     const elementRef = ref<HTMLDivElement>()
     const handleResize = () => callEmit(props.onResize, elementRef.value!.getBoundingClientRect())
-    onMounted(() => onResize(elementRef.value!, handleResize))
-    onBeforeUnmount(() => offResize(elementRef.value!, handleResize))
+    useResizeObserver(elementRef, handleResize)
 
     return () => {
       const { multiple, disabled, readonly, opened, value, dataSource, maxLabel } = props

@@ -10,12 +10,13 @@ import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { AvatarConfig } from '@idux/components/config'
 import type { CSSProperties, ComputedRef, Ref, Slot, VNode, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, isVNode, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, defineComponent, isVNode, onMounted, ref, watch, watchEffect } from 'vue'
 
 import { isNumber, isObject, isString } from 'lodash-es'
 
 import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { callEmit, convertCssPixel, hasSlot, offResize, onResize } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { callEmit, convertCssPixel, hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
@@ -173,21 +174,11 @@ const useSize = (props: AvatarProps, config: AvatarConfig) => {
     }
   }
 
-  onMounted(() => {
-    watch(
-      textRef,
-      (newEl, oldEl) => {
-        offResize(oldEl, calcTextSize)
-        onResize(newEl, calcTextSize)
-        calcTextSize()
-      },
-      { immediate: true },
-    )
+  useResizeObserver(textRef, calcTextSize)
 
+  onMounted(() => {
     watch(gap, () => calcTextSize(), { immediate: true })
   })
-
-  onBeforeUnmount(() => offResize(textRef.value, calcTextSize))
 
   return { avatarRef, textRef, size, calcTextSize, avatarStyle, textStyle }
 }

@@ -13,15 +13,22 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import type { InputModalityDetector } from './inputModalityDetector'
-import type { ComponentPublicInstance, ComputedRef, InjectionKey, Ref, WatchStopHandle } from 'vue'
-
-import { computed, inject, onScopeDispose, shallowRef, watchEffect } from 'vue'
+import {
+  type ComputedRef,
+  type InjectionKey,
+  type Ref,
+  type WatchStopHandle,
+  computed,
+  inject,
+  onScopeDispose,
+  shallowRef,
+  watchEffect,
+} from 'vue'
 
 import { _getEventTarget, _getShadowRoot, isBrowser, normalizePassiveListenerOptions } from '@idux/cdk/platform'
-import { convertElement, createSharedComposable } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, createSharedComposable } from '@idux/cdk/utils'
 
-import { TOUCH_BUFFER_MS, useSharedInputModalityDetector } from './inputModalityDetector'
+import { type InputModalityDetector, TOUCH_BUFFER_MS, useSharedInputModalityDetector } from './inputModalityDetector'
 
 export type FocusOrigin = 'touch' | 'mouse' | 'keyboard' | 'program' | null
 
@@ -65,13 +72,6 @@ type MonitoredElementInfo = {
   rootNode: HTMLElement | ShadowRoot | Document
 }
 
-type ElementType =
-  | Ref<ComponentPublicInstance | HTMLElement | null | undefined>
-  | ComponentPublicInstance
-  | HTMLElement
-  | null
-  | undefined
-
 /**
  * Event listener options that enable capturing and also
  * mark the listener as passive if the browser supports it.
@@ -108,14 +108,14 @@ export interface FocusMonitor {
    * @returns An observable that emits when the focus state of the element changes.
    *     When the element is blurred, null will be emitted.
    */
-  monitor(element: ElementType, checkChildren?: boolean): ComputedRef<FocusMonitorEvent>
+  monitor(element: MaybeElementRef, checkChildren?: boolean): ComputedRef<FocusMonitorEvent>
 
   /**
    * Stops monitoring an element and removes all focus classes.
    *
    * @param element The element to stop monitoring.
    */
-  stopMonitoring(element: ElementType): void
+  stopMonitoring(element: MaybeElementRef): void
 
   /**
    * Focuses the element via the specified focus origin.
@@ -124,14 +124,14 @@ export interface FocusMonitor {
    * @param origin Focus origin.
    * @param options Options that can be used to configure the focus behavior.
    */
-  focusVia(element: ElementType, origin: FocusOrigin, options?: FocusOptions): void
+  focusVia(element: MaybeElementRef, origin: FocusOrigin, options?: FocusOptions): void
 
   /**
    * Blur the element.
    *
    * @param element Element to blur.
    */
-  blurVia: (element: ElementType) => void
+  blurVia: (element: MaybeElementRef) => void
 }
 
 /** Monitors mouse and keyboard events to determine the cause of focus events. */
@@ -214,7 +214,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
    * @returns An observable that emits when the focus state of the element changes.
    *     When the element is blurred, null will be emitted.
    */
-  function monitor(element: ElementType, checkChildren = false): ComputedRef<FocusMonitorEvent> {
+  function monitor(element: MaybeElementRef, checkChildren = false): ComputedRef<FocusMonitorEvent> {
     const nativeElement = convertElement(element)
 
     // Do nothing if we're not on the browser platform or the passed in node isn't an element.
@@ -258,7 +258,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
    *
    * @param element The element to stop monitoring.
    */
-  function stopMonitoring(element: ElementType): void {
+  function stopMonitoring(element: MaybeElementRef): void {
     const nativeElement = convertElement(element)
     if (!nativeElement) {
       return
@@ -279,7 +279,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
    * @param origin Focus origin.
    * @param options Options that can be used to configure the focus behavior.
    */
-  function focusVia(element: ElementType, origin: FocusOrigin, options?: FocusOptions): void {
+  function focusVia(element: MaybeElementRef, origin: FocusOrigin, options?: FocusOptions): void {
     const nativeElement = convertElement(element)
     const focusedElement = _getDocument().activeElement
 
@@ -287,7 +287,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
     // which means that the focus classes won't be updated. If that's the case, update the classes
     // directly without waiting for an event.
     if (nativeElement === focusedElement) {
-      _getClosestElementsInfo(nativeElement).forEach(([currentElement, info]) =>
+      _getClosestElementsInfo(nativeElement!).forEach(([currentElement, info]) =>
         _originChanged(currentElement, origin, info),
       )
     } else {
@@ -305,7 +305,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
    *
    * @param element Element to blur.
    */
-  function blurVia(element: ElementType): void {
+  function blurVia(element: MaybeElementRef): void {
     const nativeElement = convertElement(element)
     if (!nativeElement) {
       return

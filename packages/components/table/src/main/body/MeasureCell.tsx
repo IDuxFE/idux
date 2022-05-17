@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { defineComponent, onBeforeUnmount, ref } from 'vue'
 
-import { offResize, onResize } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
 
 import { tableMeasureCellProps } from '../../types'
 
@@ -21,15 +21,10 @@ export default defineComponent({
       props.changeColumnWidth(props.cellKey, offsetWidth)
     }
 
-    onMounted(() => {
-      const element = cellRef.value!
-      props.changeColumnWidth(props.cellKey, element.offsetWidth)
-      onResize(element, handleResize)
-    })
+    useResizeObserver(cellRef, handleResize)
 
     onBeforeUnmount(() => {
       props.changeColumnWidth(props.cellKey, false)
-      offResize(cellRef.value, handleResize)
     })
 
     return () => (

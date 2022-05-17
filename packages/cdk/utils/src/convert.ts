@@ -39,17 +39,12 @@ export function convertCssPixel(value: unknown): string {
   return typeof value === 'string' ? value : `${value}px`
 }
 
-export function convertElement<T extends HTMLElement = HTMLElement>(element: Ref<T> | T): T
-export function convertElement<T extends HTMLElement = HTMLElement>(
-  element: Ref<ComponentPublicInstance> | ComponentPublicInstance,
-): T
-export function convertElement<T extends HTMLElement = HTMLElement>(
-  element: Ref<ComponentPublicInstance | T | null | undefined> | ComponentPublicInstance | T | null | undefined,
-): T | undefined
-export function convertElement(element: unknown): HTMLElement | undefined {
-  const elementOrInstance = unref(element)
-  if (!elementOrInstance) {
-    return undefined
-  }
-  return isHTMLElement(elementOrInstance) ? elementOrInstance : (elementOrInstance as ComponentPublicInstance).$el
+export type MaybeElement = ComponentPublicInstance | HTMLElement | null | undefined
+export type MaybeElementRef<T extends MaybeElement = MaybeElement> = Ref<T> | T
+
+export function convertElement<T extends MaybeElement>(
+  elementOrInstance: MaybeElementRef<T>,
+): T extends ComponentPublicInstance ? Exclude<MaybeElement, ComponentPublicInstance> : T | undefined {
+  const element = unref(elementOrInstance)
+  return isHTMLElement(element) ? element : element?.$el
 }

@@ -8,11 +8,12 @@
 import type { OriginScroll } from '../composables/useOriginScroll'
 import type { CSSProperties, Ref } from 'vue'
 
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, ref } from 'vue'
 
 import { throttle } from 'lodash-es'
 
-import { callEmit, cancelRAF, off, offResize, on, onResize, rAF } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { callEmit, cancelRAF, off, on, rAF } from '@idux/cdk/utils'
 
 import { virtualScrollToken } from '../token'
 
@@ -208,8 +209,7 @@ function useContentResize(collectHeights: () => void) {
   const contentRef = ref<HTMLDivElement>()
   const onContentResize = throttle(collectHeights, 16)
 
-  onMounted(() => onResize(contentRef.value, onContentResize))
-  onBeforeUnmount(() => offResize(contentRef.value, onContentResize))
+  useResizeObserver(contentRef, onContentResize)
 
   return { contentRef }
 }
