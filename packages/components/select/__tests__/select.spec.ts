@@ -391,6 +391,31 @@ describe('Select', () => {
       expect(wrapper.findAllComponents(Option).length).toBe(0)
     })
 
+    test('searchable with group work', async () => {
+      const wrapper = SelectMount({
+        props: {
+          open: true,
+          searchable: true,
+          dataSource: [
+            {
+              key: 'a',
+              label: 'a',
+              children: [{ label: 'b', key: 'b' }],
+            },
+          ],
+        },
+      })
+
+      const input = wrapper.find('input')
+      await input.setValue('a')
+
+      expect(wrapper.findComponent(Content).find('.ix-select-option-group').exists()).toBe(false)
+
+      await input.setValue('b')
+
+      expect(wrapper.findComponent(Content).find('.ix-select-option-group').exists()).toBe(true)
+    })
+
     test('size work', async () => {
       const wrapper = SelectMount({ props: { size: 'lg' } })
 

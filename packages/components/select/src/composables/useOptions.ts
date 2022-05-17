@@ -12,7 +12,7 @@ import type { ComputedRef, Ref, Slots, VNode } from 'vue'
 
 import { computed } from 'vue'
 
-import { isFunction } from 'lodash-es'
+import { isFunction, isNil } from 'lodash-es'
 
 import { Logger, VKey, flattenNode } from '@idux/cdk/utils'
 
@@ -70,6 +70,7 @@ export function useFlattedOptions(
     }
     const filter = searchFilter.value
     const filteredOptions = !filter ? options : options.filter(option => filter(option.rawData!, searchValue))
+
     const { allowInput } = props
     if (allowInput) {
       const matchedOption = filteredOptions.find(option => option.label === searchValue)
@@ -164,6 +165,13 @@ function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {
 function getDefaultSearchFn(labelKey: string): SelectSearchFn {
   return (data: SelectData, searchValue: string) => {
     const label = data[labelKey] as string | undefined
-    return label ? label.toLowerCase().includes(searchValue.toLowerCase()) : false
+    const { children } = data
+    const hasChildrenMatch = children ? children.some((item: SelectData) => matchRule(item.label, searchValue)) : false
+
+    return (matchRule(String(label), searchValue) && !children) || hasChildrenMatch
   }
+}
+
+function matchRule(srcString: string | number | undefined, targetString: string) {
+  return !isNil(srcString) && String(srcString).toLowerCase().includes(targetString.toLowerCase())
 }
