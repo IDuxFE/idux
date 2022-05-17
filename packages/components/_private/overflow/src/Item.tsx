@@ -5,9 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
-import { callEmit, offResize, onResize } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { callEmit } from '@idux/cdk/utils'
 
 import { overflowItemProps } from './types'
 
@@ -17,11 +18,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const itemElRef = ref<HTMLElement | undefined>()
     const handleResize = (entry: ResizeObserverEntry) => callEmit(props.onSizeChange, entry.target, props.itemKey ?? '')
-
-    onMounted(() => onResize(itemElRef.value, handleResize))
-    onBeforeUnmount(() => {
-      offResize(itemElRef.value, handleResize)
-    })
+    useResizeObserver(itemElRef, handleResize)
 
     return () => {
       return (
