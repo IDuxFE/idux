@@ -132,6 +132,23 @@
         box-shadow: @form-item-invalid-box-shadow;
       }
     }
+
+    // time/date-picker
+    .@{idux-prefix}-time-picker, 
+    .@{idux-prefix}-time-range-picker,
+    .@{idux-prefix}-date-picker, 
+    .@{idux-prefix}-date-range-picker {
+      &.@{idux-prefix}-trigger:not(.@{idux-prefix}-trigger-disabled),
+      &.@{idux-prefix}-trigger:hover:not(.@{idux-prefix}-trigger-disabled):not(.@{idux-prefix}-trigger-borderless){
+        border-color: @form-item-invalid-color;
+      }
+
+      &.@{idux-prefix}-trigger-focused{
+        border-color: @form-item-invalid-color;
+        box-shadow: @form-item-invalid-box-shadow;
+      }
+    }
+
   }
 
   // === Validating ===
