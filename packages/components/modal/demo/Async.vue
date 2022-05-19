@@ -1,27 +1,22 @@
 <template>
-  <IxSpace>
-    <IxButton @click="visible = !visible">Change visible</IxButton>
-    <IxButton mode="primary" @click="openModal">Open modal</IxButton>
-  </IxSpace>
+  <IxButton mode="primary" @click="showModal">Open Modal with async logic</IxButton>
   <IxModal v-model:visible="visible" title="This is title" type="confirm" @ok="onOk">
     <p>Some contents...</p>
   </IxModal>
 </template>
 
 <script setup lang="ts">
-import { h, ref } from 'vue'
-
-import { useModal } from '@idux/components/modal'
+import { ref } from 'vue'
 
 const visible = ref(false)
 const onOk = () =>
   new Promise(resolve => {
-    const isClose = Math.random() > 0.5
-    setTimeout(() => resolve(isClose), 1000)
+    setTimeout(() => {
+      resolve(true)
+    }, 1000)
   })
 
-const { confirm } = useModal()
-const content = h('p', 'Some contents...')
-
-const openModal = () => confirm({ title: 'This is title', content, onOk })
+const showModal = () => {
+  visible.value = true
+}
 </script>
