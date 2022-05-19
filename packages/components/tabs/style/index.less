@@ -170,104 +170,107 @@
   }
 
   &-card {
-    .@{tabs-prefix}-nav {
-      z-index: @zindex-l1-1;
-
-      &-wrapper {
-        font-size: @tabs-card-nav-font-size;
-      }
-
-      &-tab {
-        margin-right: 4px;
-        border-radius: @tabs-border-radius @tabs-border-radius 0 0;
-        border-bottom: 1px solid @tabs-nav-border-color;
-
-        &:last-child {
-          margin-right: 0;
-        }
-        &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          border: 1px solid @tabs-nav-border-color;
-          border-bottom-color: @tabs-card-nav-tab-selected-background-color;
-          background-color: @tabs-card-nav-tab-selected-background-color;
-
-          &::after {
-            content: ' ';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            height: 2px;
-            background-color: @tabs-selected-color;
+    > .@{tabs-prefix}-nav-wrapper {
+      font-size: @tabs-card-nav-font-size;
+      > .@{tabs-prefix}-nav {
+        z-index: @zindex-l1-1;
+        > .@{tabs-prefix}-nav-tab {
+            margin-right: 4px;
             border-radius: @tabs-border-radius @tabs-border-radius 0 0;
-          }
-        }
+            border-bottom: 1px solid @tabs-nav-border-color;
 
-        &-disabled {
-          &::after {
-            background-color: @tabs-disabled-color;
-          }
+            &:last-child {
+              margin-right: 0;
+            }
+            &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+              border: 1px solid @tabs-nav-border-color;
+              border-bottom-color: @tabs-card-nav-tab-selected-background-color;
+              background-color: @tabs-card-nav-tab-selected-background-color;
+
+              &::after {
+                content: ' ';
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                right: -1px;
+                height: 2px;
+                background-color: @tabs-selected-color;
+                border-radius: @tabs-border-radius @tabs-border-radius 0 0;
+              }
+            }
+
+            &-disabled {
+              &::after {
+                background-color: @tabs-disabled-color;
+              }
+            }
         }
       }
     }
   }
 
   &-line {
-    .@{tabs-prefix}-nav {
-      &-bar {
-        position: absolute;
-        background-color: @tabs-nav-bar-color;
-        transition: left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
-        bottom: 0;
-        height: @tabs-nav-bar-height;
-        border-radius: @tabs-border-radius @tabs-border-radius 0 0;
+    > .@{tabs-prefix}-nav-wrapper {
+      > .@{tabs-prefix}-nav {
+        &-bar {
+          position: absolute;
+          background-color: @tabs-nav-bar-color;
+          transition: left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
+          bottom: 0;
+          height: @tabs-nav-bar-height;
+          border-radius: @tabs-border-radius @tabs-border-radius 0 0;
+
+          &-disabled {
+            background-color: @tabs-disabled-color;
+          }
+        }
 
         &-disabled {
-          background-color: @tabs-disabled-color;
+          .@{tabs-prefix}-nav-tab-label {
+            color: @tabs-disabled-color;
+          }
         }
-      }
 
-      &-disabled {
-        .@{tabs-prefix}-nav-tab-label {
-          color: @tabs-disabled-color;
+        &-pre,
+        &-next {
+          border-bottom: none;
         }
-      }
-
-      &-pre,
-      &-next {
-        border-bottom: none;
       }
     }
     &.@{tabs-prefix} {
       &-nav-start,
       &-nav-end {
-        .@{tabs-prefix} {
+        > .@{tabs-prefix} {
+
           &-nav-wrapper {
             flex-wrap: wrap;
             &.@{tabs-prefix}-nav-wrapper-has-scroll {
               padding: @tabs-nav-pre-next-width 0;
             }
-          }
+            > .@{tabs-prefix}-nav {
+              transform: translateY(0);
+              flex-direction: column;
 
-          &-nav {
-            transform: translateY(0);
-            flex-direction: column;
+              &-bar {
+                width: @tabs-nav-bar-height;
+              }
 
-            &-bar {
-              width: @tabs-nav-bar-height;
+              &-border {
+                height: 100%;
+                width: 1px;
+              }
+
+              &-tab {
+                min-height: @tabs-nav-tab-height;
+              }
             }
+          }
+          
 
-            &-border {
+          &-pane-wrapper {
+            > .@{tabs-prefix}-pane {
               height: 100%;
-              width: 1px;
             }
-
-            &-tab {
-              min-height: @tabs-nav-tab-height;
-            }
-          }
-
-          &-pane {
-            height: 100%;
           }
         }
       }
@@ -277,8 +280,8 @@
           flex-direction: row;
         }
 
-        .@{tabs-prefix} {
-          &-nav {
+        > .@{tabs-prefix}-nav-wrapper {
+         > .@{tabs-prefix}-nav {
             &-bar {
               right: 0;
               border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
@@ -291,12 +294,14 @@
             &-tab {
               min-height: @tabs-nav-tab-height;
             }
-          }
 
-          &-pane-wrapper {
+          
+        }
+        }
+
+        > .@{tabs-prefix}-pane-wrapper {
             padding: 0 0 0 @tabs-pane-padding;
           }
-        }
       }
 
       &-nav-end {
@@ -304,7 +309,8 @@
           flex-direction: row-reverse;
         }
 
-        .@{tabs-prefix} {
+        > .@{tabs-prefix}-nav-wrapper {
+         >  .@{tabs-prefix} {
           &-nav {
             &-bar {
               left: 0;
@@ -324,10 +330,14 @@
             }
           }
 
-          &-pane-wrapper {
+          
+        }
+        }
+
+        > .@{tabs-prefix}-pane-wrapper {
             padding: 0 @tabs-pane-padding 0 0;
           }
-        }
+
       }
 
       &-nav-bottom {
@@ -335,7 +345,7 @@
           flex-direction: column-reverse;
         }
 
-        .@{tabs-prefix} {
+        > .@{tabs-prefix} {
           &-pane-wrapper {
             padding: 0 0 @tabs-pane-padding 0;
           }
@@ -345,9 +355,13 @@
   }
 
   &-segment {
-    .@{tabs-prefix}-nav {
 
-      &-tab {
+    > .@{tabs-prefix}-nav-wrapper {
+    > .@{tabs-prefix}-nav {
+
+      > .@{tabs-prefix} {
+
+      &-nav-tab {
         border: 1px solid @tabs-nav-border-color;
         height: @tabs-segment-nav-height;
         
@@ -389,6 +403,7 @@
           background-color: @tabs-segment-nav-disabled-background-color;
         }
       }
+    }
 
       &-pre,
       &-next {
@@ -397,17 +412,26 @@
         border-bottom: none;
       }
     }
-    &.@{tabs-prefix}-nav-primary {
-      .@{tabs-prefix}-nav-tab {
-        &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          background-color: @tabs-segment-nav-primary-active-background-color;
 
-          .@{tabs-prefix}-nav-tab-label {
-            color: @tabs-segment-nav-primary-active-text-color;
-          }
-          &:hover {
+  }
+
+
+    &.@{tabs-prefix}-nav-primary {
+
+      > .@{tabs-prefix}-nav-wrapper > {
+
+       .@{tabs-prefix}-nav >
+       .@{tabs-prefix}-nav-tab {
+          &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+            background-color: @tabs-segment-nav-primary-active-background-color;
+
             .@{tabs-prefix}-nav-tab-label {
               color: @tabs-segment-nav-primary-active-text-color;
+            }
+            &:hover {
+              .@{tabs-prefix}-nav-tab-label {
+                color: @tabs-segment-nav-primary-active-text-color;
+              }
             }
           }
         }
