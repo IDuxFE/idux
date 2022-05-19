@@ -110,7 +110,7 @@ function convertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
 }
 
 function sortData(mergedData: MergedData[], activeSorters: ActiveSorter[], expandedRowKeys: VKey[]) {
-  const sorters = activeSorters.filter(item => item.orderBy && item.sorter)
+  const sorters = activeSorters.filter(item => item.sorter)
   const sorterLength = sorters.length
 
   if (sorterLength === 0) {
@@ -135,13 +135,14 @@ function sortData(mergedData: MergedData[], activeSorters: ActiveSorter[], expan
 }
 
 function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], expandedRowKeys: VKey[]): MergedData[] {
-  if (activeFilters.length === 0) {
+  const filters = activeFilters.filter(item => item.filter)
+  if (filters.length === 0) {
     return mergedData
   }
 
   return mergedData
     .map(item => {
-      const valid = activeFilters.every(({ filter, filterBy }) => filter(filterBy, item.record))
+      const valid = filters.every(({ filter, filterBy }) => filter!(filterBy, item.record))
 
       const { rowKey, children } = item
       const isExpanded = expandedRowKeys.includes(rowKey)
@@ -152,7 +153,7 @@ function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], exp
           newItem = { ...item, children: newChildren }
         }
       }
-      return valid || (isExpanded && newItem.children) ? newItem : null
+      return valid || (isExpanded && newItem.children && newItem.children.length) ? newItem : null
     })
     .filter(item => item !== null) as MergedData[]
 }
