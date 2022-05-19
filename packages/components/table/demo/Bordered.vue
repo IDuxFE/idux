@@ -4,7 +4,7 @@
       <IxHeader title="Table Header" suffix="setting"></IxHeader>
     </template>
     <template #footer>
-      <spam>This is footer</spam>
+      <span>This is footer</span>
     </template>
   </IxTable>
 </template>

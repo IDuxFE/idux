@@ -7,7 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { TableColumn } from '@idux/components/table'
+import { reactive } from 'vue'
+
+import { TableColumn, TableColumnSortable } from '@idux/components/table'
 
 interface Data {
   key: number
@@ -17,11 +19,30 @@ interface Data {
   address: string
 }
 
+const ageSortable = reactive<TableColumnSortable<Data>>({
+  orderBy: 'ascend',
+  sorter: (curr, next) => curr.age - next.age,
+  onChange: currOrderBy => {
+    ageSortable.orderBy = currOrderBy
+    gradeSortable.orderBy = undefined
+  },
+})
+
+const gradeSortable = reactive<TableColumnSortable<Data>>({
+  orders: ['ascend', 'descend', 'ascend'],
+  sorter: (curr, next) => curr.grade - next.grade,
+  onChange: currOrderBy => {
+    ageSortable.orderBy = undefined
+    gradeSortable.orderBy = currOrderBy
+  },
+})
+
 const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
     sortable: {
+      multiple: 1,
       orders: ['descend'],
       sorter: (curr, next) => curr.name.charCodeAt(0) - next.name.charCodeAt(0),
     },
@@ -31,6 +52,7 @@ const columns: TableColumn<Data>[] = [
     title: 'Age',
     dataKey: 'age',
     sortable: {
+      multiple: 2,
       sorter: (curr, next) => curr.age - next.age,
     },
   },
@@ -38,6 +60,7 @@ const columns: TableColumn<Data>[] = [
     title: 'Grade',
     dataKey: 'grade',
     sortable: {
+      multiple: 3,
       orders: ['ascend', 'descend', 'ascend'],
       sorter: (curr, next) => curr.grade - next.grade,
     },
@@ -75,6 +98,34 @@ const data: Data[] = [
     name: 'Disabled User',
     age: 21,
     grade: 2,
+    address: 'Sidney No. 1 Lake Park',
+  },
+  {
+    key: 5,
+    name: 'John Brown',
+    age: 18,
+    grade: 2,
+    address: 'Sidney No. 1 Lake Park',
+  },
+  {
+    key: 6,
+    name: 'Jim Green',
+    age: 20,
+    grade: 1,
+    address: 'London No. 1 Lake Park',
+  },
+  {
+    key: 7,
+    name: 'Joe Black',
+    age: 19,
+    grade: 1,
+    address: 'Sidney No. 1 Lake Park',
+  },
+  {
+    key: 8,
+    name: 'Disabled User',
+    age: 21,
+    grade: 3,
     address: 'Sidney No. 1 Lake Park',
   },
 ]

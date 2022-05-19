@@ -20,6 +20,7 @@ import { type SpinProps } from '@idux/components/spin'
 
 import { type TableColumnMerged, type TableColumnMergedExtra } from './composables/useColumns'
 import { type FlattedData } from './composables/useDataSource'
+import { type ActiveSorter } from './composables/useSortable'
 
 export const tableProps = {
   expandedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -184,11 +185,12 @@ export type TableColumnFixed = 'start' | 'end'
 export type TableColumnSortOrder = 'ascend' | 'descend'
 
 export interface TableColumnSortable<T = any> {
+  multiple?: number
   nextTooltip?: boolean
   orderBy?: TableColumnSortOrder
   orders?: TableColumnSortOrder[]
   sorter?: (curr: T, next: T) => number
-  onChange?: (currOrderBy?: TableColumnSortOrder) => void
+  onChange?: (orderBy: TableColumnSortOrder | undefined, sorters: ActiveSorter[]) => void
 }
 
 export interface TableColumnFilterable<T = any> {
@@ -264,3 +266,10 @@ export const tableFilterableTriggerProps = {
 } as const
 
 export type TableFilterableTriggerProps = ExtractInnerPropTypes<typeof tableFilterableTriggerProps>
+
+export const tableSortableTriggerProps = {
+  activeOrderBy: { type: String as PropType<TableColumnSortOrder>, default: undefined },
+  sortable: { type: Object as PropType<TableColumnSortable>, required: true },
+} as const
+
+export type TableSortableTriggerProps = ExtractInnerPropTypes<typeof tableSortableTriggerProps>
