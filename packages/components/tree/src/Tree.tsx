@@ -14,7 +14,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
-import { callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -132,12 +132,17 @@ export default defineComponent({
       virtualScrollRef?.value?.scrollTo(option)
     }
 
+    const getNode = (key: VKey) => {
+      return mergedNodeMap.value.get(key)?.rawNode
+    }
+
     expose({
       focus,
       blur,
       expandAll: expandableContext.expandAll,
       collapseAll: expandableContext.collapseAll,
       scrollTo,
+      getNode,
     })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: MergedNode[]) => {

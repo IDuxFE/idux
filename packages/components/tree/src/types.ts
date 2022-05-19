@@ -88,6 +88,13 @@ export interface TreeBindings {
   collapseAll: () => void
   expandAll: () => void
   scrollTo: VirtualScrollToFn
+  /**
+   * get node by it's key
+   *
+   * @param key
+   * @returns node
+   */
+  getNode: (key: VKey) => TreeNode | undefined
 }
 export type TreeComponent = DefineComponent<Omit<HTMLAttributes, keyof TreePublicProps> & TreePublicProps, TreeBindings>
 export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>>

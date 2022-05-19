@@ -365,6 +365,23 @@ describe('Tree', () => {
     expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
   })
 
+  test('getNode work', async () => {
+    const onUpdateExpandedKeys = vi.fn()
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        expandedKeys: ['0'],
+        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+      },
+    })
+
+    expect(wrapper.vm.getNode('0')).toMatchObject(simpleDataSource[0])
+
+    expect(wrapper.vm.getNode('0-1')).toMatchObject(simpleDataSource[0].children[1])
+
+    expect(wrapper.vm.getNode('4')).toBe(undefined)
+  })
+
   test('v-model:selectedKeys work', async () => {
     const onUpdateSelectedKeys = vi.fn()
     const wrapper = TreeMount({

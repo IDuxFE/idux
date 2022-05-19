@@ -29,3 +29,4 @@ order: 0
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |
 | - | - | - | - |
+| `getNode` | gets the specified node | `(key: VKey) => TreeNode \| undefined` | |

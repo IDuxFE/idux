@@ -72,6 +72,7 @@ export default defineComponent({
       collapseAll: () => treeRef.value?.collapseAll(),
       expandAll: () => treeRef.value?.expandAll(),
       scrollTo,
+      getNode: (key: VKey) => treeRef.value?.getNode(key),
     })
 
     watch(overlayOpened, opened => {

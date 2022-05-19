@@ -89,6 +89,13 @@ export const proTreeProps = {
 export interface ProTreeBindings {
   expandAll: () => void
   collapseAll: () => void
+  /**
+   * get node by it's key
+   *
+   * @param key
+   * @returns node
+   */
+  getNode: (key: VKey) => TreeNode | undefined
 }
 
 export type ProTreeProps = ExtractInnerPropTypes<typeof proTreeProps>
