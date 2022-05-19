@@ -122,6 +122,7 @@ export type TableColumn<T = any, V = any> =
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `nextTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `false` | ✅ | - |
+| `multiple` | 排序优先级 | `number` | - | - | 设置后，支持多列排序 |
 | `orderBy` | 当前排序规则 | `'ascend' \| 'descend'` | - | - | - |
 | `orders` | 支持的排序方式 | `Array<'ascend' \| 'descend'>` | `['ascend', 'descend']` | ✅ | - |
 | `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |

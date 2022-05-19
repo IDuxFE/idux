@@ -12,13 +12,13 @@ import { type VKey } from '@idux/cdk/utils'
 import { type TablePagination, type TableProps } from '../types'
 import { type ActiveFilter } from './useFilterable'
 import { type GetRowKey } from './useGetRowKey'
-import { type ActiveSortable } from './useSortable'
+import { type ActiveSorter } from './useSortable'
 
 export function useDataSource(
   props: TableProps,
   mergedChildrenKey: ComputedRef<string>,
   mergedGetKey: ComputedRef<GetRowKey>,
-  activeSortable: ActiveSortable,
+  activeSorters: ComputedRef<ActiveSorter[]>,
   activeFilters: ComputedRef<ActiveFilter[]>,
   expandedRowKeys: Ref<VKey[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
@@ -36,7 +36,7 @@ export function useDataSource(
   })
 
   const filteredData = computed(() => filterData(mergedData.value, activeFilters.value, expandedRowKeys.value))
-  const sortedData = computed(() => sortData(filteredData.value, activeSortable, expandedRowKeys.value))
+  const sortedData = computed(() => sortData(filteredData.value, activeSorters.value, expandedRowKeys.value))
   const paginatedData = computed(() => {
     const pagination = mergedPagination.value
     const data = sortedData.value
@@ -109,21 +109,29 @@ function convertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
   })
 }
 
-function sortData(mergedData: MergedData[], activeSortable: ActiveSortable, expandedRowKeys: VKey[]) {
-  const { sorter, orderBy } = activeSortable
-  if (!sorter || !orderBy) {
+function sortData(mergedData: MergedData[], activeSorters: ActiveSorter[], expandedRowKeys: VKey[]) {
+  const sorters = activeSorters.filter(item => item.orderBy && item.sorter)
+  const sorterLength = sorters.length
+
+  if (sorterLength === 0) {
     return mergedData
   }
-
   const tempData = mergedData.slice()
-  const orderFlag = orderBy === 'ascend' ? 1 : -1
-
   tempData.forEach(item => {
     if (expandedRowKeys.includes(item.rowKey) && item.children && item.children.length > 0) {
-      item.children = sortData(item.children, activeSortable, expandedRowKeys)
+      item.children = sortData(item.children, activeSorters, expandedRowKeys)
     }
   })
-  return tempData.sort((curr, next) => orderFlag * sorter(curr.record, next.record))
+  return tempData.sort((curr, next) => {
+    for (let index = 0; index < sorterLength; index++) {
+      const { orderBy, sorter } = sorters[index]
+      const sorterResult = sorter!(curr.record, next.record)
+      if (sorterResult !== 0) {
+        return orderBy === 'ascend' ? sorterResult : -sorterResult
+      }
+    }
+    return 0
+  })
 }
 
 function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], expandedRowKeys: VKey[]): MergedData[] {

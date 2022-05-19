@@ -34,20 +34,21 @@ export default defineComponent({
       props: tableProps,
       slots,
       mergedPrefixCls,
-      activeSortable,
+      activeOrderByMap,
       fixedColumnKeys,
       columnOffsets,
       isSticky,
       expandable,
       selectable,
     } = inject(TABLE_TOKEN)!
+    const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
     const dataValue = useDataValue(props)
 
     const classes = computed(() => {
       const { key, fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes = {
-        [`${prefixCls}-sorted`]: activeSortable.key === key && !!activeSortable.orderBy,
+        [`${prefixCls}-sorted`]: !!activeSortOrderBy.value,
         [`${prefixCls}-align-${align}`]: !!align,
         [`${prefixCls}-ellipsis`]: ellipsis,
       }

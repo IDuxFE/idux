@@ -13,7 +13,12 @@ import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 
 import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
-import { type TableColumnFilterable, type TableColumnSortable, tableHeadCellProps } from '../../types'
+import {
+  type TableColumnFilterable,
+  type TableColumnSortOrder,
+  type TableColumnSortable,
+  tableHeadCellProps,
+} from '../../types'
 import { getColTitle } from '../../utils'
 import FilterableTrigger from './triggers/FilterableTrigger'
 import SelectableTrigger from './triggers/SelectableTrigger'
@@ -35,7 +40,7 @@ export default defineComponent({
       columnOffsetsWithScrollBar,
       isSticky,
       handleSort,
-      activeSortable,
+      activeOrderByMap,
       filterByMap,
       setFilterBy,
     } = inject(TABLE_TOKEN)!
@@ -90,9 +95,7 @@ export default defineComponent({
       }
     })
 
-    const activeSortOrderBy = computed(() =>
-      activeSortable.key === props.column.key && !!activeSortable.orderBy ? activeSortable.orderBy : undefined,
-    )
+    const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
     const activeFilterBy = computed(() => filterByMap[props.column.key])
     const onUpdateFilterBy = (filterBy: VKey[]) => {
       const { key, filterable } = props.column
@@ -176,7 +179,7 @@ function renderChildren(
 
 function renderTrigger(
   sortable: TableColumnSortable | undefined,
-  activeSortOrderBy: ComputedRef<'descend' | 'ascend' | undefined>,
+  activeSortOrderBy: ComputedRef<TableColumnSortOrder | undefined>,
   filterable: TableColumnFilterable | undefined,
   activeFilterBy: ComputedRef<VKey[]>,
   onUpdateFilterBy: (filterBy: VKey[]) => void,

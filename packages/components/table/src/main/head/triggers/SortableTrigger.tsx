@@ -15,10 +15,10 @@ import { type TableLocale } from '@idux/components/locales'
 import { IxTooltip } from '@idux/components/tooltip'
 
 import { TABLE_TOKEN } from '../../../token'
+import { tableSortableTriggerProps } from '../../../types'
 
 export default defineComponent({
-  // eslint-disable-next-line vue/require-prop-types
-  props: ['activeOrderBy', 'sortable'],
+  props: tableSortableTriggerProps,
   setup(props) {
     const { locale, mergedPrefixCls } = inject(TABLE_TOKEN)!
 

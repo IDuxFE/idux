@@ -57,7 +57,7 @@ export default defineComponent({
       props,
       mergedChildrenKey,
       mergedGetKey,
-      sortableContext.activeSortable,
+      sortableContext.activeSorters,
       filterableContext.activeFilters,
       expandableContext.expandedRowKeys,
       mergedPagination,
