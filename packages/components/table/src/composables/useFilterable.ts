@@ -7,35 +7,43 @@
 
 import { type ComputedRef, computed, reactive, watch } from 'vue'
 
-import { type VKey } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 
+import { type TableColumnFilterable } from '../types'
 import { type TableColumnMerged } from './useColumns'
-
-export interface ActiveFilter {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  filter: (currFilterBy: VKey[], record: any) => boolean
-  filterBy: VKey[]
-}
 
 export interface FilterableContext {
   activeFilters: ComputedRef<ActiveFilter[]>
-  filterByMap: Record<VKey, VKey[]>
-  setFilterBy: (key: VKey, filterBy: VKey[]) => void
+  activeFilterByMap: Record<VKey, VKey[]>
+  handleFilter: (key: VKey, filterable: TableColumnFilterable, filterBy: VKey[]) => void
+}
+
+export interface ActiveFilter {
+  key: VKey
+  filter?: (currFilterBy: VKey[], record: unknown) => boolean
+  filterBy: VKey[]
 }
 
 export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>): FilterableContext {
-  const filterByMap = reactive<Record<VKey, VKey[]>>({})
-  const setFilterBy = (key: VKey, filterBy: VKey[]) => {
-    filterByMap[key] = filterBy
-  }
+  const filterableColumns = computed(() => flattedColumns.value.filter(column => column.filterable))
+  const activeFilterByMap = reactive<Record<VKey, VKey[]>>({})
 
-  const filterableColumns = computed(() => flattedColumns.value.filter(column => !!column.filterable))
   watch(
     filterableColumns,
-    columns => {
-      columns.forEach(column => {
-        if (filterByMap[column.key] === undefined) {
-          filterByMap[column.key] = column.filterable?.filterBy || []
+    (currColumns, prevColumns) => {
+      currColumns.forEach(currColumn => {
+        const { key, filterable } = currColumn
+        const currFilterBy = filterable!.filterBy
+        if (currFilterBy || activeFilterByMap[key] === undefined) {
+          activeFilterByMap[key] = currFilterBy || []
+          return
+        }
+
+        // 受控模式
+        const prevColumn = prevColumns ? prevColumns.find(column => column.key === key) : undefined
+        const prevFilterBy = prevColumn?.filterable!.filterBy
+        if (prevFilterBy) {
+          activeFilterByMap[key] = []
         }
       })
     },
@@ -46,17 +54,24 @@ export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>):
     () =>
       filterableColumns.value
         .map(column => {
-          const filterable = column.filterable!
-          const filter = filterable.filter
-          const filterBy = filterable.filterBy || filterByMap[column.key]
-          return { filter, filterBy }
+          const { key, filterable } = column
+          const { filter, filterBy = activeFilterByMap[key] } = filterable!
+          return { key, filter, filterBy }
         })
         .filter(item => item.filter && item.filterBy.length > 0) as ActiveFilter[],
   )
 
+  const handleFilter = (activeKey: VKey, activeFilterable: TableColumnFilterable, filterBy: VKey[]) => {
+    const { onChange } = activeFilterable
+
+    activeFilterByMap[activeKey] = filterBy
+
+    callEmit(onChange, filterBy, activeFilters.value)
+  }
+
   return {
     activeFilters,
-    filterByMap,
-    setFilterBy,
+    activeFilterByMap,
+    handleFilter,
   }
 }

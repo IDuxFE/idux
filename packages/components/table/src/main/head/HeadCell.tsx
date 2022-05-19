@@ -9,7 +9,7 @@ import { ComputedRef, type Slots, type VNodeChild, computed, defineComponent, in
 
 import { isFunction, isString } from 'lodash-es'
 
-import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { type VKey, convertCssPixel } from '@idux/cdk/utils'
 
 import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
@@ -41,8 +41,8 @@ export default defineComponent({
       isSticky,
       handleSort,
       activeOrderByMap,
-      filterByMap,
-      setFilterBy,
+      activeFilterByMap,
+      handleFilter,
     } = inject(TABLE_TOKEN)!
 
     const classes = computed(() => {
@@ -96,11 +96,10 @@ export default defineComponent({
     })
 
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
-    const activeFilterBy = computed(() => filterByMap[props.column.key])
+    const activeFilterBy = computed(() => activeFilterByMap[props.column.key])
     const onUpdateFilterBy = (filterBy: VKey[]) => {
       const { key, filterable } = props.column
-      setFilterBy(key, filterBy)
-      callEmit(filterable?.onChange, filterBy)
+      handleFilter(key, filterable!, filterBy)
     }
 
     const onClick = () => {

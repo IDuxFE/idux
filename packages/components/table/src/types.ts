@@ -20,6 +20,7 @@ import { type SpinProps } from '@idux/components/spin'
 
 import { type TableColumnMerged, type TableColumnMergedExtra } from './composables/useColumns'
 import { type FlattedData } from './composables/useDataSource'
+import { type ActiveFilter } from './composables/useFilterable'
 import { type ActiveSorter } from './composables/useSortable'
 
 export const tableProps = {
@@ -194,12 +195,12 @@ export interface TableColumnSortable<T = any> {
 }
 
 export interface TableColumnFilterable<T = any> {
-  filter?: (currFilterBy: VKey[], record: T) => boolean
+  filter?: (filterBy: VKey[], record: T) => boolean
   filterBy?: VKey[]
   footer?: boolean
   menus: MenuData[]
   multiple?: boolean
-  onChange?: (currFilterBy: VKey[]) => void
+  onChange?: (filterBy: VKey[], filters: ActiveFilter[]) => void
 
   customTrigger?: string | (() => VNodeChild)
   customMenu?: string | (() => VNodeChild)
