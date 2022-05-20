@@ -209,4 +209,3 @@ function useEvents(
 
   return { handleWheel, handleTouchStart }
 }
-
