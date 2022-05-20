@@ -8,11 +8,11 @@
 import type { OriginScroll } from '../composables/useOriginScroll'
 import type { CSSProperties, Ref } from 'vue'
 
-import { computed, defineComponent, inject, onBeforeUnmount, ref } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { throttle } from 'lodash-es'
 
-import { useResizeObserver } from '@idux/cdk/resize'
+import { offResize, onResize } from '@idux/cdk/resize'
 import { callEmit, cancelRAF, off, on, rAF } from '@idux/cdk/utils'
 
 import { virtualScrollToken } from '../token'
@@ -78,7 +78,12 @@ export default defineComponent({
     }
 
     const { handleWheel, handleTouchStart } = useEvents(holderRef, syncScrollTop, originScroll)
-    const { contentRef } = useContentResize(collectHeights)
+
+    const contentRef = ref<HTMLDivElement>()
+    const onContentResize = throttle(collectHeights, 16)
+    // 这里不能用 useResizeObserver, 会有 test 爆栈警告, 具体原因后面再排查。
+    onMounted(() => onResize(contentRef.value, onContentResize))
+    onBeforeUnmount(() => offResize(contentRef.value, onContentResize))
 
     return () => {
       const virtual = useVirtual.value
@@ -203,13 +208,4 @@ function useEvents(
   })
 
   return { handleWheel, handleTouchStart }
-}
-
-function useContentResize(collectHeights: () => void) {
-  const contentRef = ref<HTMLDivElement>()
-  const onContentResize = throttle(collectHeights, 16)
-
-  useResizeObserver(contentRef, onContentResize)
-
-  return { contentRef }
 }
