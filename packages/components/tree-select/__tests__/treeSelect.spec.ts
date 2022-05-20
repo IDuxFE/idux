@@ -757,5 +757,23 @@ describe('TreeSelect', () => {
 
       expect(onUpdateExpandedKeys).toBeCalledWith(['0'])
     })
+
+    test('getNode work', async () => {
+      const onUpdateExpandedKeys = vi.fn()
+      const wrapper = TreeSelectMount({
+        props: {
+          open: true,
+          dataSource: defaultDataSource,
+          expandedKeys: ['0'],
+          'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        },
+      })
+
+      expect(wrapper.vm.getNode('0')).toMatchObject(defaultDataSource[0])
+
+      expect(wrapper.vm.getNode('0-1')).toMatchObject(defaultDataSource[0].children[1])
+
+      expect(wrapper.vm.getNode('4')).toBe(undefined)
+    })
   })
 })

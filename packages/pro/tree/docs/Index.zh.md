@@ -80,6 +80,7 @@ subtitle: 高级树型控件
 | --- | --- | --- | --- |
 | `collapseAll` | 收起所有节点 | - | - |
 | `expandAll` | 展开所有节点 | - | - |
+| `getNode` | 获取指定节点数据 | ` (key: VKey) => TreeNode \| undefined ` | |
 <!-- | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 | -->
 
 <!--- insert less variable begin  --->

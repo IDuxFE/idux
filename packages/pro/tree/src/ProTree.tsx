@@ -9,7 +9,7 @@ import { computed, defineComponent, normalizeClass, normalizeStyle, ref } from '
 
 import { isNil } from 'lodash-es'
 
-import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
@@ -77,6 +77,7 @@ export default defineComponent({
     expose({
       collapseAll: () => treeRef.value?.collapseAll(),
       expandAll: () => treeRef.value?.expandAll(),
+      getNode: (key: VKey) => treeRef.value?.getNode(key),
     })
 
     return () => {

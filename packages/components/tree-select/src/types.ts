@@ -128,6 +128,13 @@ export interface TreeSelectBindings {
   collapseAll: () => void
   expandAll: () => void
   scrollTo: VirtualScrollToFn
+  /**
+   * get node by it's key
+   *
+   * @param key
+   * @returns node
+   */
+  getNode: (key: VKey) => TreeNode | undefined
 }
 export type TreeSelectComponent = DefineComponent<
   Omit<HTMLAttributes, keyof TreeSelectPublicProps> & TreeSelectPublicProps,

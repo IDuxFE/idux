@@ -110,6 +110,7 @@ order: 0
 | `expandAll` | 展开所有节点 | - | - |
 | `focus` | 获取焦点 | - | - |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+| `getNode` | 获取指定节点数据 | ` (key: VKey) => TreeNode \| undefined ` | |
 
 <!--- insert less variable begin  --->
 ## 主题变量
