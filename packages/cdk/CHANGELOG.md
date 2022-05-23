@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.11](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-05-23)
+
+
+### Features
+
+* **cdk: resize:** add useResizeObserver and CdkResizeObserver ([#909](https://github.com/IDuxFE/idux/issues/909)) ([c20fe45](https://github.com/IDuxFE/idux/commit/c20fe45f94afd09d6a358030d2cc9b6f2124e4a3))
+
+
+
+
+
 # [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
 
 

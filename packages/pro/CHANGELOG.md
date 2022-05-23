@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.11](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-05-23)
+
+
+### Features
+
+* **comp: tree,tree-select,pro-tree:** add getNode method ([#910](https://github.com/IDuxFE/idux/issues/910)) ([#916](https://github.com/IDuxFE/idux/issues/916)) ([82c929d](https://github.com/IDuxFE/idux/commit/82c929d46b63af31e4cab25deab485c11b630fc9))
+
+
+
+
+
 # [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
 
 

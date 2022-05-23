@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.11](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-05-23)
+
+
+### Bug Fixes
+
+* **comp: select:** search error when group exists ([#908](https://github.com/IDuxFE/idux/issues/908)) ([ddbfc5e](https://github.com/IDuxFE/idux/commit/ddbfc5e5fd3ee24522f25633f74aeab33a23e200))
+* **comp: table:** controled filter works ([#919](https://github.com/IDuxFE/idux/issues/919)) ([fff5022](https://github.com/IDuxFE/idux/commit/fff502266cd1c66ece2f2b1310c9eb0f44c38a76))
+* **comp: tabs:** error style when nesting tabs ([#918](https://github.com/IDuxFE/idux/issues/918)) ([ee41c7a](https://github.com/IDuxFE/idux/commit/ee41c7a557b1e65245876be1e5839a91c8c0fdb0)), closes [#913](https://github.com/IDuxFE/idux/issues/913)
+* **comp:stepper:** padding problem of left&right ([#912](https://github.com/IDuxFE/idux/issues/912)) ([25a2aac](https://github.com/IDuxFE/idux/commit/25a2aac55e1a51d5fef2d1846d94134d74d43f45))
+
+
+### Features
+
+* **cdk: resize:** add useResizeObserver and CdkResizeObserver ([#909](https://github.com/IDuxFE/idux/issues/909)) ([c20fe45](https://github.com/IDuxFE/idux/commit/c20fe45f94afd09d6a358030d2cc9b6f2124e4a3))
+* **comp: table:** support multiple sort ([#917](https://github.com/IDuxFE/idux/issues/917)) ([a407920](https://github.com/IDuxFE/idux/commit/a4079202cdde6c5f635bda908cb333c98389675c)), closes [#915](https://github.com/IDuxFE/idux/issues/915)
+* **comp: tree,tree-select,pro-tree:** add getNode method ([#910](https://github.com/IDuxFE/idux/issues/910)) ([#916](https://github.com/IDuxFE/idux/issues/916)) ([82c929d](https://github.com/IDuxFE/idux/commit/82c929d46b63af31e4cab25deab485c11b630fc9))
+
+
+
+
+
 # [1.0.0-beta.10](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-05-16)
 
 
