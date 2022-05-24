@@ -59,6 +59,7 @@ import type { SkeletonComponent } from '@idux/components/skeleton'
 import type { SliderComponent } from '@idux/components/slider'
 import type { SpaceComponent } from '@idux/components/space'
 import type { SpinComponent } from '@idux/components/spin'
+import type { SplitAreaComponent, SplitPanelComponent } from '@idux/components/split-panel'
 import type { StatisticComponent } from '@idux/components/statistic'
 import type { StepperComponent, StepperItemComponent } from '@idux/components/stepper'
 import type { SwitchComponent } from '@idux/components/switch'
@@ -144,6 +145,8 @@ declare module 'vue' {
     IxSlider: SliderComponent
     IxSpace: SpaceComponent
     IxSpin: SpinComponent
+    IxSplitPanelComponent: SplitPanelComponent
+    IxSplitAreaComponent: SplitAreaComponent
     IxStatistic: StatisticComponent
     IxStepper: StepperComponent
     IxStepperItem: StepperItemComponent

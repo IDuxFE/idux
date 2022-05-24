@@ -51,6 +51,7 @@ import { IxSkeleton } from '@idux/components/skeleton'
 import { IxSlider } from '@idux/components/slider'
 import { IxSpace } from '@idux/components/space'
 import { IxSpin } from '@idux/components/spin'
+import { IxSplitArea, IxSplitPanel } from '@idux/components/split-panel'
 import { IxStatistic } from '@idux/components/statistic'
 import { IxStepper, IxStepperItem } from '@idux/components/stepper'
 import { IxSwitch } from '@idux/components/switch'
@@ -140,6 +141,8 @@ const components = [
   IxSlider,
   IxSpace,
   IxSpin,
+  IxSplitPanel,
+  IxSplitArea,
   IxStatistic,
   IxStepper,
   IxStepperItem,
@@ -228,6 +231,7 @@ export * from '@idux/components/skeleton'
 export * from '@idux/components/slider'
 export * from '@idux/components/space'
 export * from '@idux/components/spin'
+export * from '@idux/components/split-panel'
 export * from '@idux/components/statistic'
 export * from '@idux/components/stepper'
 export * from '@idux/components/switch'

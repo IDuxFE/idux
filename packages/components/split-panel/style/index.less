@@ -1,0 +1,17 @@
+@import '../../style/mixins/reset.less';
+
+.@{split-panel-prefix} {
+  .reset-component();
+
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-splitter {
+    cursor: ew-resize;
+  }
+}
