@@ -180,7 +180,7 @@ const install = (app: App): void => {
 const installer = { install, version }
 
 export default installer
-export { install, version }
+export { install }
 
 export * from '@idux/components/affix'
 export * from '@idux/components/alert'

@@ -2,6 +2,7 @@ import { resolve } from 'path'
 
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
+// eslint-disable-next-line import/no-unresolved
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
