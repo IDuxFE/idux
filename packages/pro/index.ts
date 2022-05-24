@@ -29,7 +29,7 @@ const install = (app: App): void => {
 const installer = { install, version }
 
 export default installer
-export { install }
+export { install, version }
 
 export * from '@idux/pro/layout'
 export * from '@idux/pro/transfer'

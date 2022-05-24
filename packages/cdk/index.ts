@@ -32,7 +32,7 @@ const install = (app: App): void => {
 const installer = { install, version }
 
 export default installer
-export { install }
+export { install, version }
 
 export * from '@idux/cdk/a11y'
 export * from '@idux/cdk/breakpoint'
