@@ -10,6 +10,8 @@ module.exports = {
   plugins: ['jsdoc', 'import'],
   extends: [
     'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
     'plugin:vue/vue3-recommended',
     '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
@@ -20,6 +22,18 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
       tsx: true,
+    },
+  },
+  settings: {
+    'import/resolver': {
+      'eslint-import-resolver-custom-alias': {
+        alias: {
+          '@idux': './packages',
+          '@tests': './tests',
+        },
+        extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx', '.vue', '.md'],
+        packages: ['packages/*'],
+      },
     },
   },
   globals: {
