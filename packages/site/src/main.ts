@@ -9,6 +9,7 @@ import App from './App.vue'
 // eslint-disable-next-line import/no-unassigned-import
 import './index.less'
 
+// eslint-disable-next-line import/no-unresolved
 import { routes } from './router'
 
 const router = createRouter({

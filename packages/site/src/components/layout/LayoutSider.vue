@@ -13,6 +13,7 @@
 import { computed, inject } from 'vue'
 
 import { appContextToken } from '../../context'
+// eslint-disable-next-line import/no-unresolved
 import { config } from '../../sideNav'
 
 const { breakpoints, lang, page, path } = inject(appContextToken)!

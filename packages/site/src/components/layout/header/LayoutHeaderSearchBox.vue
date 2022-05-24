@@ -20,6 +20,7 @@ import { computed, inject } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { appContextToken } from '../../../context'
+// eslint-disable-next-line import/no-unresolved
 import { config } from '../../../sideNav'
 
 const router = useRouter()

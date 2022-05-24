@@ -125,7 +125,7 @@
     "resolve-bin": "^1.0.0",
     "rollup": "^2.70.2",
     "rollup-plugin-typescript2": "^0.31.2",
-    "stylelint": "^14.7.1",
+    "stylelint": "^14.8.3",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",
     "svgo": "^2.8.0",

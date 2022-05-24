@@ -1,4 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { resolve } = require('path')
+
 const prettierConfig = require('./.prettierrc.js')
 
 module.exports = {
@@ -28,8 +29,8 @@ module.exports = {
     'import/resolver': {
       'eslint-import-resolver-custom-alias': {
         alias: {
-          '@idux': './packages',
-          '@tests': './tests',
+          '@idux': resolve(__dirname, './packages'),
+          '@tests': resolve(__dirname, './tests'),
         },
         extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx', '.vue', '.md'],
         packages: ['packages/*'],
