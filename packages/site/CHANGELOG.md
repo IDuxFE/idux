@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.12](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-24)
+
+
+### Bug Fixes
+
+* **comp:all,pro:all,cdk:all:** add eslint import check ([#922](https://github.com/IDuxFE/idux/issues/922)) ([8bbbec1](https://github.com/IDuxFE/idux/commit/8bbbec178a51ad5707791db5ceb49f0547c84f95))
+
+
+
+
+
 # [1.0.0-beta.11](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-05-23)
 
 **Note:** Version bump only for package @idux/site
