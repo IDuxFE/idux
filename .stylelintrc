@@ -6,6 +6,7 @@
     "at-rule-no-unknown": null,
     "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
     "rule-empty-line-before": null,
+    "no-duplicate-selectors": null,
     "no-empty-source": null,
     "no-invalid-double-slash-comments": null,
     "no-invalid-position-at-import-rule": null,

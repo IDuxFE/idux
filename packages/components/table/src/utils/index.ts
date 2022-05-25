@@ -5,11 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { type VNode, type VNodeChild } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { getFirstValidNode } from '@idux/cdk/utils'
+import { Logger, type VKey, convertArray, getFirstValidNode, uniqueId } from '@idux/cdk/utils'
+
+import { type TableColumn } from '../types'
 
 export function getColTitle(ellipsis: boolean, children: VNodeChild, title: string | undefined): string | undefined {
   if (!ellipsis) {
@@ -26,4 +30,28 @@ export function getColTitle(ellipsis: boolean, children: VNodeChild, title: stri
     }
   }
   return _title
+}
+
+export function getColumnKey(column: TableColumn): VKey {
+  if (column.key) {
+    return column.key
+  }
+  // @ts-ignore
+  if (column.dataKey && column.dataKey) {
+    // @ts-ignore
+    return convertArray(column.dataKey).join('-')
+  }
+  // @ts-ignore
+  if (column.type) {
+    // @ts-ignore
+    return `__IDUX_table_column_key_${column.type}`
+  }
+  __DEV__ &&
+    Logger.warn(
+      'components/table',
+      'Each column in table should have a unique `key`, `dataKey` or `type` prop.',
+      column,
+    )
+
+  return uniqueId('__IDUX_table_column_key_')
 }

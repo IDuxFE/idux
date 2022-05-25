@@ -93,6 +93,7 @@ export interface TableColumnCommon<T = any> {
     style?: any
     [key: string]: unknown
   }
+  key?: VKey
   align?: TableColumnAlign
   colSpan?: (record: T, rowIndex: number) => number
   rowSpan?: (record: T, rowIndex: number) => number
@@ -104,9 +105,7 @@ export interface TableColumnCommon<T = any> {
 
 export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> {
   dataKey?: VKey | VKey[]
-  editable?: boolean
   ellipsis?: boolean
-  key?: VKey
   sortable?: TableColumnSortable<T>
   filterable?: TableColumnFilterable<T>
   title?: string
@@ -120,23 +119,17 @@ export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> 
   customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }
 
-export interface TableColumnExpandable<T = any, V = any> extends TableColumnCommon<T> {
+export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase<T, V> {
   type: 'expandable'
-  dataKey?: VKey | VKey[]
   disabled?: (record: T) => boolean
-  editable?: boolean
-  ellipsis?: boolean
-  key?: VKey
+
   icon?: string
   indent?: number
-  title?: string
   trigger?: 'click' | 'dblclick'
 
   onChange?: (expendedRowKeys: VKey[]) => void
   onExpand?: (expanded: boolean, record: T) => void
 
-  customCell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  customTitle?: string | ((data: { title?: string }) => VNodeChild)
   customExpand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
   customIcon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
 }

@@ -32,7 +32,11 @@ export type {
   TableSize,
   TableColumnAlign,
   TableColumnFixed,
+  TableColumnFilterable,
   TableColumnSortable,
   TableColumnSortOrder,
-  TableColumnFilterable,
+  TableSticky,
 } from './src/types'
+
+// private
+export { getColumnKey as ɵGetColumnKey } from './src/utils'
