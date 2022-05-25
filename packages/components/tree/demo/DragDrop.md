@@ -1,6 +1,6 @@
 ---
 title:
-  zh: 拖拽
+  zh: 可拖拽
   en: Drag and drop
 order: 2
 ---

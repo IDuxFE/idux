@@ -8,7 +8,7 @@
 import type { TreeNode, TreeProps } from '../types'
 import type { MergedNode } from './useDataSource'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 import { computed, ref, watchEffect } from 'vue'
 
@@ -19,7 +19,7 @@ import { callChange } from '../utils'
 export interface SelectableContext {
   activeKey: Ref<VKey | undefined>
   activeNode: ComputedRef<MergedNode | undefined>
-  selectedKeys: WritableComputedRef<VKey[]>
+  selectedKeys: ComputedRef<VKey[]>
   handleSelect: (key: VKey) => void
 }
 

@@ -20,5 +20,6 @@ export type {
   TimePickerComponent,
   TimePickerPublicProps as TimePickerProps,
   TimeRangePickerInstance,
+  TimeRangePickerComponent,
   TimeRangePickerPublicProps as TimeRangePickerProps,
 } from './src/types'

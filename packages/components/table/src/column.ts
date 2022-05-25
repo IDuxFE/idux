@@ -9,7 +9,7 @@
 
 import { type TableColumnComponent } from './types'
 
-const tableColumnKey = '__IDUX_TABLE_COLUMN'
+const tableColumnKey = Symbol('IxTableColumn')
 
 const TableColumn = (() => {}) as TableColumnComponent
 

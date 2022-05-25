@@ -5,19 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeDropType, TreeDroppable, TreeProps } from '../types'
-import type { MergedNode } from './useDataSource'
-import type { ExpandableContext } from './useExpandable'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
-
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { type ComputedRef, type Ref, computed, onBeforeUnmount, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 
+import { type TreeDropType, type TreeDroppable, type TreeProps } from '../types'
 import { getChildrenKeys } from '../utils'
+import { type MergedNode } from './useDataSource'
+import { type ExpandableContext } from './useExpandable'
 
 export interface DragDropContext {
   dragKey: ComputedRef<VKey | undefined>
@@ -32,7 +29,7 @@ export interface DragDropContext {
   handleDrop: (evt: DragEvent, node: MergedNode) => void
 }
 
-export function useDragDrop(props: TreeProps, { expandedKeys }: ExpandableContext): DragDropContext {
+export function useDragDrop(props: TreeProps, { expandedKeys, setExpandedKeys }: ExpandableContext): DragDropContext {
   const dragNodeRef = ref<MergedNode>()
   const dragChildrenKeys = ref<VKey[]>()
 
@@ -85,7 +82,7 @@ export function useDragDrop(props: TreeProps, { expandedKeys }: ExpandableContex
     dragNodeRef.value = node
     dragChildrenKeys.value = getChildrenKeys(node)
 
-    delKey(expandedKeys, node.key)
+    delKey(node.key, expandedKeys.value, setExpandedKeys)
 
     window.addEventListener('dragend', handleWindowDragend)
 
@@ -109,7 +106,7 @@ export function useDragDrop(props: TreeProps, { expandedKeys }: ExpandableContex
       if (dragNode.key !== node.key) {
         dragTimer = setTimeout(() => {
           if (dragNodeRef.value && node.children?.length) {
-            addKey(expandedKeys, node.key)
+            addKey(node.key, expandedKeys.value, setExpandedKeys)
           }
           dragTimer = undefined
         }, 1000)
@@ -179,19 +176,19 @@ export function useDragDrop(props: TreeProps, { expandedKeys }: ExpandableContex
   }
 }
 
-function addKey(keysRef: WritableComputedRef<VKey[]>, key: VKey) {
-  const index = keysRef.value.indexOf(key)
+function addKey(key: VKey, keys: VKey[], setKeys: (keys: VKey[]) => void) {
+  const index = keys.indexOf(key)
   if (index === -1) {
-    keysRef.value = [...keysRef.value, key]
+    setKeys([...keys, key])
   }
 }
 
-function delKey(keysRef: WritableComputedRef<VKey[]>, key: VKey) {
-  const index = keysRef.value.indexOf(key)
+function delKey(key: VKey, keys: VKey[], setKeys: (keys: VKey[]) => void) {
+  const index = keys.indexOf(key)
   if (index !== -1) {
-    const tempKeys = [...keysRef.value]
+    const tempKeys = [...keys]
     tempKeys.splice(index, 1)
-    keysRef.value = tempKeys
+    setKeys(tempKeys)
   }
 }
 
@@ -211,13 +208,10 @@ async function calcDropType(
   const { top, height } = (evt.target as HTMLElement).getBoundingClientRect()
   const isTopHalf = clientY < top + height / 2
 
-  const dragRawNode = dragNode.rawNode
-  const dropRawNode = dropNode.rawNode
-
   let dropType: TreeDropType | boolean | undefined
 
   if (droppable) {
-    const dropOptions = { evt, isTopHalf, dragNode: dragRawNode, dropNode: dropRawNode }
+    const dropOptions = { evt, isTopHalf, dragNode: dragNode.rawNode, dropNode: dropNode.rawNode }
     dropType = await droppable(dropOptions)
   }
 

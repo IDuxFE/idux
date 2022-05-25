@@ -22,6 +22,7 @@ interface RandomUser {
 
 const columns: TableColumn<RandomUser>[] = [
   {
+    key: 'Name',
     title: 'Name',
     children: [
       {

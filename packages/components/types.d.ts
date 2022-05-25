@@ -66,7 +66,7 @@ import type { TableColumnComponent, TableComponent } from '@idux/components/tabl
 import type { TabComponent, TabsComponent } from '@idux/components/tabs'
 import type { TagComponent, TagGroupComponent } from '@idux/components/tag'
 import type { TextareaComponent } from '@idux/components/textarea'
-import type { TimePickerComponent } from '@idux/components/time-picker'
+import type { TimePickerComponent, TimeRangePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
 import type { TooltipComponent } from '@idux/components/tooltip'
 import type { TransferComponent } from '@idux/components/transfer'
@@ -158,6 +158,7 @@ declare module 'vue' {
     IxTimeline: TimelineComponent
     IxTimelineItem: TimelineItemComponent
     IxTimePicker: TimePickerComponent
+    IxTimeRangePicker: TimeRangePickerComponent
     IxTransfer: TransferComponent
     IxTooltip: TooltipComponent
     IxTree: TreeComponent

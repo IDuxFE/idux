@@ -5,22 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeNode, TreeProps } from '../types'
-import type { MergedNode } from './useDataSource'
-import type { GetNodeKey } from './useGetNodeKey'
-import type { TreeConfig } from '@idux/components/config'
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue'
-
-import { computed, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
 
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
+import { type TreeConfig } from '@idux/components/config'
 
+import { type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
-import { convertMergeNodes, convertMergedNodeMap } from './useDataSource'
+import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
+import { type GetNodeKey } from './useGetNodeKey'
 
 export interface ExpandableContext {
   expandIcon: ComputedRef<string | string[]>
-  expandedKeys: WritableComputedRef<VKey[]>
+  expandedKeys: ComputedRef<VKey[]>
+  setExpandedKeys: (value: VKey[]) => void
   expandAll: () => void
   collapseAll: () => void
   handleExpand: (key: VKey, rawNode: TreeNode) => void
@@ -134,5 +132,5 @@ export function useExpandable(
     setExpandWithSearch(searchedKeys.value)
   }
 
-  return { expandIcon, expandedKeys, expandAll, collapseAll, handleExpand, loadingKeys }
+  return { expandIcon, expandedKeys, setExpandedKeys, expandAll, collapseAll, handleExpand, loadingKeys }
 }

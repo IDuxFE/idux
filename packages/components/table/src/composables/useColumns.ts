@@ -10,7 +10,7 @@ import { type ComputedRef, type Slots, type VNode, computed, reactive, ref, watc
 import { isNil } from 'lodash-es'
 
 import { type BreakpointKey, useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { type VKey, convertArray, flattenNode } from '@idux/cdk/utils'
+import { type VKey, flattenNode } from '@idux/cdk/utils'
 import { type TableColumnBaseConfig, type TableColumnExpandableConfig, type TableConfig } from '@idux/components/config'
 
 import { tableColumnKey } from '../column'
@@ -23,6 +23,7 @@ import {
   type TableColumnSelectable,
   type TableProps,
 } from '../types'
+import { getColumnKey } from '../utils'
 
 export function useColumns(
   props: TableProps,
@@ -139,10 +140,10 @@ function mergeColumns(
 ): TableColumnMerged[] {
   return columns
     .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
-    .map((column, index) => convertColumn(column, breakpoints, baseConfig, expandableConfig, index))
+    .map(column => convertColumn(column, breakpoints, baseConfig, expandableConfig))
 }
 
-function convertColumns(nodes: VNode[] | undefined) {
+export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
   const columns: Array<TableColumn> = []
 
   flattenNode(nodes, { key: tableColumnKey }).forEach((node, index) => {
@@ -179,12 +180,11 @@ function convertColumn(
   breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
-  index: number,
 ): TableColumnMerged {
   const { align = baseConfig.align } = column
+  const key = getColumnKey(column)
 
   if ('type' in column) {
-    const key = `IDUX_TABLE_KEY_${column.type}`
     if (column.type === 'expandable') {
       const { icon = expandableConfig.icon } = column
       return { ...column, key, align, icon }
@@ -194,9 +194,8 @@ function convertColumn(
       return { ...column, key, align, multiple }
     }
   } else {
-    const { key, dataKey, sortable, filterable, children } = column
-    const _key = key ?? (convertArray(dataKey).join('-') || `'IDUX_TABLE_KEY_${index}`)
-    const newColumn = { ...column, key: _key, align }
+    const { sortable, filterable, children } = column
+    const newColumn = { ...column, key, align }
     if (sortable) {
       newColumn.sortable = { ...baseConfig.sortable, ...sortable }
     }
@@ -224,7 +223,7 @@ function useFlattedColumns(
     const columns = flattedColumns.value
     const lastColumn = columns[columns.length - 1]
     return {
-      key: 'IDUX_TABLE_KEY_scroll-bar',
+      key: '__IDUX_table_column_key_scroll-bar',
       type: 'scroll-bar',
       fixed: lastColumn && lastColumn.fixed,
       width: scrollBarSize,
