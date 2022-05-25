@@ -122,7 +122,9 @@ describe('Pagination', () => {
 
   test('simple work', async () => {
     const onUpdatePageIndex = vi.fn()
-    const wrapper = PaginationMount({ props: { total: 50, simple: true, 'onUpdate:pageIndex': onUpdatePageIndex } })
+    const wrapper = PaginationMount({
+      props: { total: 50, simple: true, showQuickJumper: true, 'onUpdate:pageIndex': onUpdatePageIndex },
+    })
 
     expect(wrapper.find('.ix-pagination-item-slash').exists()).toBeTruthy()
 
@@ -149,6 +151,10 @@ describe('Pagination', () => {
     await next.trigger('click')
 
     expect(onUpdatePageIndex).toBeCalledWith(5)
+
+    await wrapper.setProps({ showQuickJumper: false })
+
+    expect(wrapper.find('.ix-input').exists()).toBeFalsy()
   })
 
   test('size work', async () => {

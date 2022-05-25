@@ -75,12 +75,16 @@ export default defineComponent({
         children.push(<Item disabled={_activeIndex === 1} type="prev" />)
         children.push(
           <li class={`${prefixCls}-item`}>
-            <ɵInput
-              disabled={props.disabled}
-              size={size.value}
-              value={_activeIndex.toString()}
-              onKeydown={jumpToIndex}
-            />
+            {showQuickJumper.value ? (
+              <ɵInput
+                disabled={props.disabled}
+                size={size.value}
+                value={_activeIndex.toString()}
+                onKeydown={jumpToIndex}
+              />
+            ) : (
+              _activeIndex
+            )}
             <span class={`${prefixCls}-item-slash`}>/</span>
             <span>{_lastIndex}</span>
           </li>,
