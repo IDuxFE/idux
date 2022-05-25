@@ -17,7 +17,7 @@ exports[`Pagination > render work 2`] = `
 "<ul class=\\"ix-pagination ix-pagination-simple ix-pagination-md\\">
   <li class=\\"ix-pagination-total\\">共 50 项</li>
   <li class=\\"ix-pagination-item ix-pagination-item-button\\" title=\\"上一页\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></button></li>
-  <li class=\\"ix-pagination-item\\"><input class=\\"ix-input ix-input-md\\"><span class=\\"ix-pagination-item-slash\\">/</span><span>5</span></li>
+  <li class=\\"ix-pagination-item\\">1<span class=\\"ix-pagination-item-slash\\">/</span><span>5</span></li>
   <li class=\\"ix-pagination-item ix-pagination-item-button\\" title=\\"下一页\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button></li>
 </ul>"
 `;
