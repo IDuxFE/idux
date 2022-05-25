@@ -952,7 +952,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -965,7 +965,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -2892,7 +2892,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -2905,7 +2905,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >

@@ -5,16 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Transition, computed, defineComponent, normalizeClass } from 'vue'
+import { Transition, computed, defineComponent, normalizeClass, watchEffect } from 'vue'
 
-import { isObject } from 'lodash-es'
+import { isNil, isObject } from 'lodash-es'
 
-import { convertArray, flattenNode } from '@idux/cdk/utils'
+import { convertArray, flattenNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { IxPagination } from '@idux/components/pagination'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { useCloseable } from './composables/useCloseable'
-import { usePagination } from './composables/usePagination'
 import { alertProps } from './types'
 
 export default defineComponent({
@@ -25,6 +26,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-alert`)
 
     const config = useGlobalConfig('alert')
+    const [pageIndex, setPageIndex] = useState(1)
     const mergedIcon = computed(() => {
       if (props.icon !== undefined) {
         return props.icon
@@ -32,17 +34,18 @@ export default defineComponent({
       const iconConfig = config.icon
       return isObject(iconConfig) ? iconConfig[props.type] : iconConfig
     })
-    const titleChildren = computed(() => {
-      if (slots.default) {
-        return flattenNode(slots.default())
-      }
-      return convertArray(props.title)
-    })
-    const { pageIndex, pageText, isPagination, leftDisabled, rightDisabled, offsetPageIndex } = usePagination(
-      props,
-      titleChildren,
-    )
     const { closeable, visible, handleClose } = useCloseable(props, config)
+
+    const handlePageChange = (index: number) => {
+      setPageIndex(index)
+    }
+
+    watchEffect(() => {
+      const { pagination } = props
+      if (isObject(pagination) && !isNil(pagination.pageIndex)) {
+        setPageIndex(pagination.pageIndex)
+      }
+    })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -53,29 +56,16 @@ export default defineComponent({
       })
     })
 
-    const paginationLeftIconClass = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
-        [`${prefixCls}-pagination-icon`]: true,
-        [`${prefixCls}-pagination-disabled`]: leftDisabled.value,
-      })
-    })
-
-    const paginationRightIconClass = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
-        [`${prefixCls}-pagination-icon`]: true,
-        [`${prefixCls}-pagination-disabled`]: rightDisabled.value,
-      })
-    })
-
     return () => {
+      const { title, pagination } = props
+
       // TODO: TransitionGroup with pagination
-      const pagination = isPagination.value
-      const titleNodes = pagination ? titleChildren.value[pageIndex.value - 1] : titleChildren.value
+      const titleChildren = slots.default ? flattenNode(slots.default()) : convertArray(title)
+      const isPagination = pagination && titleChildren.length > 1
+      const titleNodes = isPagination ? titleChildren[pageIndex.value - 1] : titleChildren
 
       const iconNode = slots.icon ? slots.icon() : mergedIcon.value && <IxIcon name={mergedIcon.value} />
-      const descriptionNode = slots.description?.() ?? props.description
+      const descriptionNode = convertStringVNode(slots, props, 'description')
 
       const prefixCls = mergedPrefixCls.value
       return (
@@ -87,16 +77,17 @@ export default defineComponent({
                 <div class={`${prefixCls}-title`}>{titleNodes}</div>
                 {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
               </div>
-              {pagination && (
-                <div class={`${prefixCls}-pagination`}>
-                  <span class={paginationLeftIconClass.value} onClick={() => offsetPageIndex(-1)}>
-                    <IxIcon name="left" />
-                  </span>
-                  <span class={`${prefixCls}-pagination-text`}>{pageText.value}</span>
-                  <span class={paginationRightIconClass.value} onClick={() => offsetPageIndex(1)}>
-                    <IxIcon name="right" />
-                  </span>
-                </div>
+              {isPagination && (
+                <IxPagination
+                  class={`${prefixCls}-pagination`}
+                  total={titleChildren.length}
+                  simple
+                  pageIndex={pageIndex.value}
+                  showTotal={false}
+                  showQuickJumper={false}
+                  pageSize={1}
+                  onChange={handlePageChange}
+                />
               )}
               {closeable.value && (
                 <span class={`${prefixCls}-close-icon`} onClick={handleClose}>
