@@ -67,6 +67,7 @@ import { IxTreeSelect } from '@idux/components/tree-select'
 import { IxTypography } from '@idux/components/typography'
 import { IxUpload, IxUploadFiles } from '@idux/components/upload'
 import { version } from '@idux/components/version'
+import { IxWatermark } from '@idux/components/watermark'
 
 const components = [
   IxAffix,
@@ -161,6 +162,7 @@ const components = [
   IxTreeSelect,
   IxUpload,
   IxUploadFiles,
+  IxWatermark,
 ]
 
 const directives: Record<string, Directive> = {
@@ -244,3 +246,4 @@ export * from '@idux/components/tree-select'
 export * from '@idux/components/typography'
 export * from '@idux/components/upload'
 export * from '@idux/components/version'
+export * from '@idux/components/watermark'
