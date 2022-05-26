@@ -17,6 +17,6 @@ const pageSize = ref(20)
 
 const onChange = (index: number, size: number) => {
   pageIndex.value = index + 1
-  pageSize.value = size * 2
+  pageSize.value = size
 }
 </script>
