@@ -633,7 +633,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -646,7 +646,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -1732,7 +1732,7 @@ exports[`Transfer > empty slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -1745,7 +1745,7 @@ exports[`Transfer > empty slot work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -3426,7 +3426,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -3439,7 +3439,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -4335,7 +4335,7 @@ exports[`Transfer > label slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -4348,7 +4348,7 @@ exports[`Transfer > label slot work 1`] = `
         
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
         disabled=""
         type="button"
       >

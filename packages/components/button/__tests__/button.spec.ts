@@ -11,7 +11,12 @@ describe('Button', () => {
   renderWork(IxButton)
 
   test('mode work', async () => {
-    const wrapper = ButtonMount({ props: { mode: 'primary' } })
+    const wrapper = ButtonMount()
+
+    expect(wrapper.classes()).toContain('ix-button-default')
+    expect(wrapper.element.tagName).toEqual('BUTTON')
+
+    await wrapper.setProps({ mode: 'primary' })
 
     expect(wrapper.classes()).toContain('ix-button-primary')
     expect(wrapper.element.tagName).toEqual('BUTTON')

@@ -102,7 +102,7 @@ exports[`Transfer > render work 1`] = `
     <!---->
   </div>
   <div class=\\"ix-transfer-operations\\">
-    <div class=\\"ix-transfer-operations-inner\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right-double\\" role=\\"img\\" aria-label=\\"right-double\\"></i></button><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left-double\\" role=\\"img\\" aria-label=\\"left-double\\"></i></button></div>
+    <div class=\\"ix-transfer-operations-inner\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right-double\\" role=\\"img\\" aria-label=\\"right-double\\"></i></button><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-left-double\\" role=\\"img\\" aria-label=\\"left-double\\"></i></button></div>
   </div>
   <div class=\\"ix-transfer-list ix-transfer-list-target\\">
     <div class=\\"ix-transfer-list-header\\">

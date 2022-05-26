@@ -40,7 +40,7 @@ export default defineComponent({
         [`${prefixCls}-ghost`]: ghost,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-icon-only`]: !slots.default && (icon || loading),
-        [`${prefixCls}-${mode.value}`]: mode.value !== 'default',
+        [`${prefixCls}-${mode.value}`]: mode.value,
         [`${prefixCls}-${shape}`]: !!shape,
         [`${prefixCls}-${size.value}`]: true,
       })
