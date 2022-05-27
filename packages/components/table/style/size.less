@@ -20,8 +20,16 @@
       padding: (@padding-top / 2) @padding-right (@padding-bottom / 2) @padding-left;
     }
 
-    .@{table-prefix}-footer {
-      padding: @padding-top @padding-right @padding-bottom @padding-left;
+    .@{table-prefix} {
+
+      &-cell-triggers {
+        /* stylelint-disable function-no-unknown */
+        margin: 0 -(@padding-right / 2) 0 0;
+      }
+
+      &-footer {
+        padding: @padding-top @padding-right @padding-bottom @padding-left;
+      }
     }
 
     // TODO: Nest Table
