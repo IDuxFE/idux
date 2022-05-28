@@ -10,21 +10,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const spinning = ref(true)
-
-    const changeSpinning = () => (spinning.value = !spinning.value)
-
-    return {
-      spinning,
-      changeSpinning,
-    }
-  },
-})
+const spinning = ref(true)
+const changeSpinning = () => (spinning.value = !spinning.value)
 </script>
 <style lang="less" scoped>
 .content {

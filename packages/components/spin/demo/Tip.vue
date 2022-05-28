@@ -9,24 +9,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const tipAlignIsHorizontal = ref(true)
-
-    const tip = ref('数据加载中，请等待')
-    const tipAlign = computed(() => (tipAlignIsHorizontal.value ? 'horizontal' : 'vertical'))
-    const changeTipAlign = () => (tipAlignIsHorizontal.value = !tipAlignIsHorizontal.value)
-
-    return {
-      tip,
-      tipAlign,
-      changeTipAlign,
-    }
-  },
-})
+const tipAlignIsHorizontal = ref(true)
+const tip = ref('数据加载中，请等待')
+const tipAlign = computed(() => (tipAlignIsHorizontal.value ? 'horizontal' : 'vertical'))
+const changeTipAlign = () => (tipAlignIsHorizontal.value = !tipAlignIsHorizontal.value)
 </script>
 <style lang="less" scoped>
 .content {

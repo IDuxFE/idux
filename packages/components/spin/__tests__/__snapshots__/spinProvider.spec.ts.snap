@@ -1,0 +1,8 @@
+// Vitest Snapshot v1
+
+exports[`SpinProvider > basic > render work 1`] = `
+"<div class=\\"ix-spin ix-spin-provider\\">
+  <!---->
+  <div class=\\"ix-spin-container\\">This is a Spin</div>
+</div>"
+`;

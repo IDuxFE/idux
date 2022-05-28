@@ -1,7 +1,7 @@
 @import '../../style/mixins/reset.less';
 
-.spin-mask() {
-  position: absolute;
+.spin-mask(@position: absolute) {
+  position: @position;
   top: 0;
   left: 0;
   right: 0;
@@ -32,6 +32,31 @@
   .reset-component();
 
   position: relative;
+
+  &-provider-position {
+    user-select: none;
+    clear: both;
+    &-relative {
+      position: relative;
+    }
+    &-has-scroll {
+      >.@{spin-prefix} {
+        >.@{spin-prefix}-spinner {
+          position: sticky;
+          top: 50%;
+          left: 50%;
+        }
+      }
+    }
+    >.@{spin-prefix} {
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-color: hsl(0deg 0% 100% / 40%);
+    }
+  }
 
   &-spinner {
     .spin-mask();

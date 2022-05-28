@@ -5,12 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SpinComponent } from './src/types'
+import type { SpinComponent, SpinProviderComponent } from './src/types'
 
 import Spin from './src/Spin'
+import SpinProvider from './src/SpinProvider'
 
 const IxSpin = Spin as unknown as SpinComponent
+const IxSpinProvider = SpinProvider as unknown as SpinProviderComponent
 
-export { IxSpin }
+export { IxSpin, IxSpinProvider }
 
-export type { SpinInstance, SpinComponent, SpinPublicProps as SpinProps, SpinTipAlignType, SpinSize } from './src/types'
+export { useSpin } from './src/useSpin'
+
+export type {
+  SpinInstance,
+  SpinComponent,
+  SpinPublicProps as SpinProps,
+  SpinProviderInstance,
+  SpinProviderComponent,
+  SpinProviderOptions,
+  SpinProviderRef,
+  SpinTipAlignType,
+  SpinSize,
+} from './src/types'

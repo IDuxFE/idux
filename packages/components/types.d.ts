@@ -58,7 +58,7 @@ import type { SelectComponent, SelectOptionComponent, SelectOptionGroupComponent
 import type { SkeletonComponent } from '@idux/components/skeleton'
 import type { SliderComponent } from '@idux/components/slider'
 import type { SpaceComponent } from '@idux/components/space'
-import type { SpinComponent } from '@idux/components/spin'
+import type { SpinComponent, SpinProviderComponent } from '@idux/components/spin'
 import type { StatisticComponent } from '@idux/components/statistic'
 import type { StepperComponent, StepperItemComponent } from '@idux/components/stepper'
 import type { SwitchComponent } from '@idux/components/switch'
@@ -145,6 +145,7 @@ declare module 'vue' {
     IxSlider: SliderComponent
     IxSpace: SpaceComponent
     IxSpin: SpinComponent
+    IxSpinProvider: SpinProviderComponent
     IxStatistic: StatisticComponent
     IxStepper: StepperComponent
     IxStepperItem: StepperItemComponent

@@ -11,20 +11,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const tip = ref('数据加载中，请等待')
-    const size = ref('sm')
-
-    return {
-      tip,
-      size,
-    }
-  },
-})
+const tip = ref('数据加载中，请等待')
+const size = ref('sm')
 </script>
 <style lang="less" scoped>
 .content {

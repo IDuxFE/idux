@@ -50,7 +50,7 @@ import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/
 import { IxSkeleton } from '@idux/components/skeleton'
 import { IxSlider } from '@idux/components/slider'
 import { IxSpace } from '@idux/components/space'
-import { IxSpin } from '@idux/components/spin'
+import { IxSpin, IxSpinProvider } from '@idux/components/spin'
 import { IxStatistic } from '@idux/components/statistic'
 import { IxStepper, IxStepperItem } from '@idux/components/stepper'
 import { IxSwitch } from '@idux/components/switch'
@@ -141,6 +141,7 @@ const components = [
   IxSlider,
   IxSpace,
   IxSpin,
+  IxSpinProvider,
   IxStatistic,
   IxStepper,
   IxStepperItem,

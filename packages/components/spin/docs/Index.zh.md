@@ -19,7 +19,7 @@ cover:
 |`duration` | 动画时长 |  `number`  | `2` | - | 仅当使用默认loading或 提供 `icon` 配置时生效 |
 |`size` | 控制 icon 和 tip大小 |  `sm \| md \| lg`  | `sm` | ✅ | - |
 |`spinning` | 是否显示加载遮罩层 |`boolean`| `true` | - | - |
-|`ratate` | 是否显示旋转动画 |`boolean`| `true` | - | 仅当 `icon` 不空且没有 `icon` 插槽时生效 |
+|`rotate` | 是否显示旋转动画 |`boolean`| `true` | - | 仅当 `icon` 不空且没有 `icon` 插槽时生效 |
 | `icon`| 加载图标名称 | `string` | -| ✅ | - |
 | `tip`| 加载提示文字描述 |  `string`  | `''`| ✅ | - |
 | `tipAlign`| 文字描述与加载图标的排列方式 | `vertical \| horizontal` | `vertical`| ✅ | vertical：文字排列在图标下方；horizontal： 文字排列在图标同水平方向的后方 |
@@ -29,6 +29,23 @@ cover:
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 |`default` | 需要遮罩的内容区域 | - | - |
+
+### IxSpinProvider
+
+#### IxSpinProviderMethods
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `open`   | 打开 | `(tip?: string, options?: SpinProviderOptions) => void` | `target`不传，默认为`body` |
+| `update`  | 更新 | `(tip?: string, options?: SpinProviderOptions) => void` | 更新通过`open`创建的`spin` |
+| `close`  | 关闭 | `(target?: string \| HTMLElement \| (() => string \| HTMLElement)) => void` | 关闭通过`open`创建的`spin` |
+| `closeAll`  | 关闭全部 | `() => void` | - |
+
+```ts
+export type SpinProviderOptions = Partial<
+  Omit<SpinProps, 'spinning'> & { target?: string | HTMLElement | (() => string | HTMLElement) }
+>
+```
 
 <!--- insert less variable begin  --->
 ## 主题变量
