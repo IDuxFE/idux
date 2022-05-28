@@ -1,48 +1,48 @@
 'use strict'
-/* eslint-disable @typescript-eslint/no-var-requires */
-
+const { execSync } = require('child_process')
 const fs = require('fs')
 const path = require('path')
-const message = path.resolve(__dirname, '.git/COMMIT_EDITMSG')
 
-const scopes = ['release', 'packaging', 'scripts', 'changelog', 'cdk:*', 'comp:*', 'pro:*']
+const getScopes = (name, prefix) =>
+  fs
+    .readdirSync(path.resolve(__dirname, `packages/${name}`), { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => prefix + dirent.name)
 
-function parseMessage(message) {
-  const PATTERN = /^(\w+)(?:\(([^)]+)\))?: (.+)$/
-  const match = PATTERN.exec(message)
-  if (!match) {
-    return null
-  }
-  return {
-    type: match[1] || null,
-    scope: match[2] || null,
-  }
-}
+const scopes = [
+  'cdk:*',
+  'comp:*',
+  'pro:*',
+  ...getScopes('cdk', 'cdk:'),
+  ...getScopes('components', 'comp:'),
+  ...getScopes('pro', 'pro:'),
+  'scripts',
+  'packaging',
+  'release',
+  'changelog',
+]
 
-function getScopesRule() {
-  const messages = fs.readFileSync(message, { encoding: 'utf-8' })
-  const parsed = parseMessage(messages.split('\n')[0])
-  if (!parsed) {
-    return [2, 'always', scopes]
-  }
-  const { scope, type } = parsed
-  if (
-    scope &&
-    !scopes.includes(scope) &&
-    type !== 'release' &&
-    !/cdk:.+/.test(scope) &&
-    !/comp:.+/.test(scope) &&
-    !/pro:.+/.test(scope)
-  ) {
-    return [2, 'always', scopes]
-  } else {
-    return [2, 'always', []]
-  }
-}
+// precomputed scope
+const scopeMatch = execSync('git status --porcelain || true')
+  .toString()
+  .trim()
+  .split('\n')
+  .find(r => ~r.indexOf('M  packages'))
+  ?.replace(/(\/)/g, '%%')
+  ?.match(/(cdk|components|pro)%%((\w|-)*)/)
 
+const scopeComplete = scopeMatch?.[2] && `${scopeMatch[1].replace('components', 'comp')}:${scopeMatch[2]}`
+
+/** @type {import('cz-git').UserConfig} */
 module.exports = {
   extends: ['@commitlint/config-angular'],
   rules: {
-    'scope-enum': getScopesRule,
+    'scope-enum': [2, 'always', scopes],
+  },
+  prompt: {
+    defaultScope: scopeComplete,
+    customScopesAlign: !scopeComplete ? 'top' : 'bottom',
+    allowEmptyIssuePrefixs: false,
+    allowCustomIssuePrefixs: false,
   },
 }
