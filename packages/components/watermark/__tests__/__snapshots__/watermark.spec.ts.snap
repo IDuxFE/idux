@@ -1,0 +1,15 @@
+// Vitest Snapshot v1
+
+exports[`Watermark > xxx work 1`] = `
+"<div class=\\"ix-watermark\\">
+  <!---->
+  <div class=\\"ix-watermark-canvas\\" style=\\"z-index: 11; background-size: 332px; background-image: url();\\"></div>
+</div>"
+`;
+
+exports[`Watermark > xxx work 2`] = `
+"<div class=\\"ix-watermark\\" xxx=\\"Yyy\\">
+  <!---->
+  <div class=\\"ix-watermark-canvas\\" style=\\"z-index: 11; background-size: 332px; background-image: url();\\"></div>
+</div>"
+`;

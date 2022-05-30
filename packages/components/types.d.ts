@@ -72,6 +72,7 @@ import type { TooltipComponent } from '@idux/components/tooltip'
 import type { TransferComponent } from '@idux/components/transfer'
 import type { TreeComponent } from '@idux/components/tree'
 import type { UploadComponent, UploadFilesComponent } from '@idux/components/upload'
+import type { WatermarkComponent } from '@idux/components/watermark'
 
 declare module 'vue' {
   export interface GlobalComponents {
@@ -164,6 +165,7 @@ declare module 'vue' {
     IxTree: TreeComponent
     IxUpload: UploadComponent
     IxUploadFiles: UploadFilesComponent
+    IxWatermark: WatermarkComponent
   }
 }
 
