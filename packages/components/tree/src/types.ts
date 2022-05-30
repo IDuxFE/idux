@@ -159,7 +159,7 @@ export const treeNodeProps = {
   isLeaf: IxPropTypes.bool.isRequired,
   isFirst: IxPropTypes.bool.isRequired,
   isLast: IxPropTypes.bool.isRequired,
-  label: IxPropTypes.string.isRequired,
+  label: IxPropTypes.string,
   level: IxPropTypes.number.isRequired,
   rawNode: IxPropTypes.object<TreeNode>().isRequired,
   expanded: IxPropTypes.bool.isRequired,
@@ -187,7 +187,7 @@ export const treeNodeExpandProps = {
 export const treeNodeContentProps = {
   disabled: IxPropTypes.bool,
   nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  label: IxPropTypes.string.isRequired,
+  label: IxPropTypes.string,
   rawNode: IxPropTypes.object<TreeNode>().isRequired,
   selected: IxPropTypes.bool,
 }

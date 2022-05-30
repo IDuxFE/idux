@@ -1,0 +1,21 @@
+@import '../../style/mixins/reset.less';
+
+.@{pro-table-prefix} {
+  .reset-component();
+
+  &-layout-tool {
+
+    .@{tree-prefix} {
+      &-node {
+        &-content-suffix {
+          color: @color-primary;
+          visibility: hidden;
+        }
+
+        &:hover .@{tree-prefix}-node-content-suffix {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}

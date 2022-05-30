@@ -20,7 +20,7 @@ order: 0
 | `borderless` | 是否无边框 | `boolean` | `true` | ✅ | - |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | ✅ | - |
 | `columns` | 表格列的配置描述 | `TableColumn[]` | - | - |  参见[TableColumn](#TableColumn)  |
-| `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional[]` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
+| `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
@@ -47,30 +47,27 @@ export type TableColumn<T = any, V = any> =
   | TableColumnSelectable<T>
 ```
 
-##### TableColumnCommon
-
-列配置的公用属性。
+#### 通用配置。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `align` | 文本对齐方式 | `'start' \| 'center' \| 'end'` | `'start'` | ✅ | - |
 | `colSpan` | 计算列的 `colSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |
 | `fixed` | 是否固定 | `'start' \| 'end'` | - | - | - |
-| `responsive` | 响应式 breakpoint 配置列表 | `BreakpointKey[]` | - | - | - |
 | `rowSpan` | 计算列的 `rowSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |
 | `titleColSpan` | 设置表头的 `colSpan` | - | - | - | 为 `0` 时，不渲染 |
 | `width` | 列宽度 | `string \| number` | - | - | - |
 
 ##### TableColumnBase
 
-普通列配置的属性，继承 `TableColumnCommon` 。
+普通列配置的属性。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` 或者 `type` |
 | `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
 | `ellipsis` | 超过宽度将自动省略 | `boolean` | - | - | 优先级高于 `props` 中的 `ellipsis` |
-| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
 | `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
@@ -78,29 +75,24 @@ export type TableColumn<T = any, V = any> =
 
 ##### TableColumnExpandable
 
-可展开列配置的属性，继承 `TableColumnBase`
+可展开列配置的属性, 继承 `TableColumnBase`。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | 必填 |
-| `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 通常在树形表格时设置 |
+
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | 通常在树形表格时设置 |
-| `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey`，通常在树形表格时设置 |
 | `icon` | 展开按钮图标 | `string` | `'right'` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
-| `title` | 列头的文本 | `string` | - | - | 通常在树形表格时设置 |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \| number)[], expendedRecords: T[]) => void` | - | - | - |
 | `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |
-| `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
-| `customTitle` | 自定义表头标题 | `string \| ((data: { title?: string }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customExpand` | 自定义展开内容 | `string \| ((data: { record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
-| `customIcon` | 自定义表头标题 | `string \| ((data: { expanded: boolean; record: T }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customIcon` | 自定义展开图标 | `string \| ((data: { expanded: boolean; record: T }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 ##### TableColumnSelectable
 
-可选择列配置的属性，继承 `TableColumnCommon`
+可选择列配置的属性。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

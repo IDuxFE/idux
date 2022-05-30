@@ -5,20 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CommonConfig, GlobalConfig, ProTree } from './types'
-
 import { zhCN } from '@idux/pro/locales'
 
-const common: CommonConfig = { prefixCls: 'ix-pro' }
+import { type ProGlobalConfig } from './types'
 
-const proTree: ProTree = {
-  clearIcon: 'close-circle',
-  collapseIcon: ['collapse', 'uncollapse'],
-}
-
-export const defaultConfig: GlobalConfig = {
-  common,
+export const defaultConfig: ProGlobalConfig = {
+  common: { prefixCls: 'ix-pro' },
   locale: zhCN,
 
-  proTree,
+  table: {
+    columnIndexable: {
+      width: 40,
+      align: 'center',
+      customCell: ({ rowIndex }) => rowIndex,
+    },
+    toolbar: ['layout'],
+  },
+  tree: {
+    clearIcon: 'close-circle',
+    collapseIcon: ['collapse', 'uncollapse'],
+  },
 }
