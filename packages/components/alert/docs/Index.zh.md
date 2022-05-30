@@ -45,7 +45,6 @@ export interface AlertPagination {
 | `@alert-error-background-color` | `@color-error-l50` | - | - |
 | `@alert-color` | `@text-color` | - | - |
 | `@alert-color-secondary` | `@text-color-secondary` | `@color-graphite-l10` | - |
-| `@alert-disabled-color` | `@disabled-color` | - | - |
 | `@alert-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@alert-line-height` | `@line-height-base` | `@font-size-2xl` | - |
 | `@alert-border-radius` | `@border-radius-sm` | - | - |
@@ -56,7 +55,7 @@ export interface AlertPagination {
 | `@alert-icon-margin-right-with-description` | `@spacing-lg` | - | - |
 | `@alert-title-font-size-with-description` | `@font-size-lg` | - | - |
 | `@alert-title-margin-bottom-with-description` | `@spacing-xs` | - | - |
-| `@alert-pagination-text-padding` | `0 @spacing-xs` | - | - |
+| `@alert-pagination-text-margin` | `0 @spacing-xs` | `0 2px` | - |
 | `@alert-action-margin-left` | `@spacing-lg` | - | - |
 | `@alert-icon-font-size` | `@font-size-lg` | - | - |
 <!--- insert less variable end  --->
