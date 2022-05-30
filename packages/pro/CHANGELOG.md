@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.13](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-30)
+
+
+### Features
+
+* **pro: table:** add IxProTable and IxProTableLayoutTool ([#936](https://github.com/IDuxFE/idux/issues/936)) ([688627f](https://github.com/IDuxFE/idux/commit/688627f256ef124be37a9cedf63ce21f288a3747))
+
+
+
+
+
 # [1.0.0-beta.12](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-24)
 
 

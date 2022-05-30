@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.13](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-30)
+
+
+### Bug Fixes
+
+* **comp:all:** fix CI lint error ([#925](https://github.com/IDuxFE/idux/issues/925)) ([2aa0e91](https://github.com/IDuxFE/idux/commit/2aa0e91197177487ebd00cae08f92cc632cf482d))
+
+
+
+
+
 # [1.0.0-beta.12](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-24)
 
 

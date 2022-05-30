@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.13](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-30)
+
+
+### Bug Fixes
+
+* **comp: pagination:** pageSizes input width error ([#931](https://github.com/IDuxFE/idux/issues/931)) ([3e91b33](https://github.com/IDuxFE/idux/commit/3e91b33f980d7d9620b4d881d7b5935f9e3c16fc))
+* **comp: pagination:** Showquickjumper does not work in simple mode ([#928](https://github.com/IDuxFE/idux/issues/928)) ([2955e7f](https://github.com/IDuxFE/idux/commit/2955e7fbbfae89a64c5be5701ccf9db6e675a14c))
+* **comp: table:** auto height not works with spin ([#935](https://github.com/IDuxFE/idux/issues/935)) ([5b770a9](https://github.com/IDuxFE/idux/commit/5b770a9617f5f3f8368828d22c44be38a746dde4))
+* **comp: tree:** expand the node being hover, when dragging ([#927](https://github.com/IDuxFE/idux/issues/927)) ([ae8fdef](https://github.com/IDuxFE/idux/commit/ae8fdef5073f25d34c25e22c6a1fc2bf647544a5))
+* **comp:all:** fix CI lint error ([#925](https://github.com/IDuxFE/idux/issues/925)) ([2aa0e91](https://github.com/IDuxFE/idux/commit/2aa0e91197177487ebd00cae08f92cc632cf482d))
+
+
+### Features
+
+* **comp: tree:** Don't show irrelevant nodes during search ([#904](https://github.com/IDuxFE/idux/issues/904)) ([b176cda](https://github.com/IDuxFE/idux/commit/b176cda695ec268de4541026270e372db0769b2c))
+* **comp: watermark:** add watermark component ([#930](https://github.com/IDuxFE/idux/issues/930)) ([79b6435](https://github.com/IDuxFE/idux/commit/79b64352d607a3e7724fc312d522d352b64d76e5)), closes [#924](https://github.com/IDuxFE/idux/issues/924)
+* **pro: table:** add IxProTable and IxProTableLayoutTool ([#936](https://github.com/IDuxFE/idux/issues/936)) ([688627f](https://github.com/IDuxFE/idux/commit/688627f256ef124be37a9cedf63ce21f288a3747))
+
+
+
+
+
 # [1.0.0-beta.12](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-24)
 
 
