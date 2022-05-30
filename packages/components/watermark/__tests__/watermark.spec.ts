@@ -5,12 +5,13 @@ import { renderWork } from '@tests'
 import Watermark from '../src/Watermark'
 import { WatermarkProps } from '../src/types'
 
-describe('Watermark', () => {
+// jsDom 不支持 canvas
+describe.skip('Watermark', () => {
   const WatermarkMount = (options?: MountingOptions<Partial<WatermarkProps>>) =>
     mount(Watermark, { ...(options as MountingOptions<WatermarkProps>) })
 
   renderWork<WatermarkProps>(Watermark, {
-    props: {},
+    props: { content: 'Content' },
   })
 
   test('watermark work', async () => {
@@ -18,7 +19,7 @@ describe('Watermark', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.setProps({ xxx: 'Yyy' })
+    await wrapper.setProps({ content: 'Yyy' })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

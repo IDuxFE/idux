@@ -6,6 +6,8 @@ import chalk from 'chalk'
 import { textSync } from 'figlet'
 import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 import inquirer from 'inquirer'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { camelCase, kebabCase, lowerFirst, upperFirst } from 'lodash'
 import ora from 'ora'
 
