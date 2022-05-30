@@ -98,6 +98,9 @@ export interface TableColumnCommon<T = any> {
   colSpan?: (record: T, rowIndex: number) => number
   rowSpan?: (record: T, rowIndex: number) => number
   fixed?: TableColumnFixed
+  /**
+   * @deprecated
+   */
   responsive?: BreakpointKey[]
   titleColSpan?: number
   width?: string | number

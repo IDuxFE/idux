@@ -25,7 +25,7 @@ export default defineComponent({
   props: proTreeProps,
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
-    const config = useGlobalConfig('proTree')
+    const config = useGlobalConfig('tree')
     const locale = useGlobalConfig('locale')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
@@ -156,7 +156,7 @@ export default defineComponent({
             <div class={`${prefixCls}-search-wrapper`}>
               <IxButton
                 size="xs"
-                title={expandAllBtnStatus.value ? locale.proTree.expandAll : locale.proTree.collapseAll}
+                title={expandAllBtnStatus.value ? locale.tree.expandAll : locale.tree.collapseAll}
                 icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
                 onClick={handleExpandAll}
               />

@@ -5,20 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GlobalConfig, GlobalConfigKey } from './types'
-import type { App, Plugin } from 'vue'
-
-import { inject, provide, reactive } from 'vue'
+import { type App, type Plugin, inject, provide, reactive } from 'vue'
 
 import { cloneDeep, merge } from 'lodash-es'
 
 import { defaultConfig } from './defaultConfig'
+import { type ProGlobalConfig, type ProGlobalConfigKey } from './types'
 
-const tokens: [GlobalConfigKey, symbol][] = Object.keys(defaultConfig).map(key => [key as GlobalConfigKey, Symbol(key)])
-const tokenMap = new Map<GlobalConfigKey, symbol>(tokens)
+const tokens: [ProGlobalConfigKey, symbol][] = Object.keys(defaultConfig).map(key => [
+  key as ProGlobalConfigKey,
+  Symbol(key),
+])
+const tokenMap = new Map<ProGlobalConfigKey, symbol>(tokens)
 
 export type DeepPartialGlobalConfig = {
-  [K in GlobalConfigKey]?: Partial<GlobalConfig[K]>
+  [K in ProGlobalConfigKey]?: Partial<ProGlobalConfig[K]>
 }
 
 /**
@@ -28,7 +29,7 @@ export type DeepPartialGlobalConfig = {
  */
 export const createGlobalConfig = (config: DeepPartialGlobalConfig): Plugin => {
   const install = (app: App): void => {
-    const compNames = Object.keys(config) as GlobalConfigKey[]
+    const compNames = Object.keys(config) as ProGlobalConfigKey[]
     compNames.forEach(compName => {
       const token = tokenMap.get(compName)!
       const currConfig = defaultConfig[compName]
@@ -40,25 +41,25 @@ export const createGlobalConfig = (config: DeepPartialGlobalConfig): Plugin => {
   return { install }
 }
 
-export function useGlobalConfig<T extends GlobalConfigKey>(compName: T): Readonly<GlobalConfig[T]>
-export function useGlobalConfig<T extends GlobalConfigKey>(
+export function useGlobalConfig<T extends ProGlobalConfigKey>(compName: T): Readonly<ProGlobalConfig[T]>
+export function useGlobalConfig<T extends ProGlobalConfigKey>(
   compName: T,
-  config: Partial<GlobalConfig[T]>,
-): [Readonly<GlobalConfig[T]>, (config: Partial<GlobalConfig[T]>) => void]
-export function useGlobalConfig<T extends GlobalConfigKey>(
+  config: Partial<ProGlobalConfig[T]>,
+): [Readonly<ProGlobalConfig[T]>, (config: Partial<ProGlobalConfig[T]>) => void]
+export function useGlobalConfig<T extends ProGlobalConfigKey>(
   compName: T,
-  config?: Partial<GlobalConfig[T]>,
-): Readonly<GlobalConfig[T]> | [Readonly<GlobalConfig[T]>, (config: Partial<GlobalConfig[T]>) => void] {
+  config?: Partial<ProGlobalConfig[T]>,
+): Readonly<ProGlobalConfig[T]> | [Readonly<ProGlobalConfig[T]>, (config: Partial<ProGlobalConfig[T]>) => void] {
   const token = tokenMap.get(compName)!
-  const currConfig = inject<GlobalConfig[T]>(token, defaultConfig[compName])
+  const currConfig = inject<ProGlobalConfig[T]>(token, defaultConfig[compName])
 
   if (!config) {
-    return currConfig as Readonly<GlobalConfig[T]>
+    return currConfig as Readonly<ProGlobalConfig[T]>
   }
 
-  const cloneConfig = reactive(merge(cloneDeep(currConfig), config)) as GlobalConfig[T]
+  const cloneConfig = reactive(merge(cloneDeep(currConfig), config)) as ProGlobalConfig[T]
 
   provide(token, cloneConfig)
 
-  return [cloneConfig, (config: Partial<GlobalConfig[T]>) => merge(cloneConfig, config)]
+  return [cloneConfig, (config: Partial<ProGlobalConfig[T]>) => merge(cloneConfig, config)]
 }

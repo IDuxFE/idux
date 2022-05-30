@@ -185,14 +185,20 @@ function convertColumn(
   const key = getColumnKey(column)
 
   if ('type' in column) {
-    if (column.type === 'expandable') {
+    const { type } = column
+    if (type === 'expandable') {
       const { icon = expandableConfig.icon } = column
       return { ...column, key, align, icon }
-    } else {
+    }
+    if (type === 'selectable') {
       // The default value for `multiple` is true
       const multiple = column.multiple ?? true
       return { ...column, key, align, multiple }
     }
+    // for ProTable to support more type
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return { ...column, key, align }
   } else {
     const { sortable, filterable, children } = column
     const newColumn = { ...column, key, align }

@@ -5,24 +5,29 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Locale } from '@idux/pro/locales'
+import type { ProLocale } from '@idux/pro/locales'
+import type { ProTableColumnIndexable, ProTableToolbar } from '@idux/pro/table'
 
-// Common
-export interface CommonConfig {
+export interface ProGlobalConfig {
+  common: ProCommonConfig
+  locale: ProLocale
+
+  table: ProTableConfig
+  tree: ProTreeConfig
+}
+
+export type ProGlobalConfigKey = keyof ProGlobalConfig
+
+export interface ProCommonConfig {
   prefixCls: string
 }
 
-export interface ProTree {
+export interface ProTableConfig {
+  columnIndexable: Omit<ProTableColumnIndexable, 'type'>
+  toolbar: ProTableToolbar[]
+}
+
+export interface ProTreeConfig {
   clearIcon: string
   collapseIcon: [string, string]
 }
-
-export interface GlobalConfig {
-  // Common
-  common: CommonConfig
-  locale: Locale
-
-  proTree: ProTree
-}
-
-export type GlobalConfigKey = keyof GlobalConfig

@@ -18,6 +18,9 @@ export type SpaceSize = 'sm' | 'md' | 'lg'
 export const spaceProps = {
   align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline', 'stretch']),
   block: IxPropTypes.bool,
+  /**
+   * @deprecated please use `vertical` instead'
+   */
   direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']),
   justify: IxPropTypes.oneOf<SpaceJustify>(['start', 'center', 'end', 'space-around', 'space-between']),
   size: IxPropTypes.oneOfType([Number, String, IxPropTypes.array<string | number>()]),
@@ -28,6 +31,6 @@ export const spaceProps = {
 }
 
 export type SpaceProps = ExtractInnerPropTypes<typeof spaceProps>
-export type SpacePublicProps = ExtractPublicPropTypes<typeof spaceProps>
+export type SpacePublicProps = Omit<ExtractPublicPropTypes<typeof spaceProps>, 'direction'>
 export type SpaceComponent = DefineComponent<Omit<HTMLAttributes, keyof SpacePublicProps> & SpacePublicProps>
 export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>
