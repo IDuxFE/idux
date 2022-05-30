@@ -50,7 +50,7 @@ order: 0
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchFn` | 搜索函数 | `boolean | (node: TreeSelectNode, searchValue?: string) => boolean` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `searchable` | 是否开启搜索功能 | `boolean \| 'overlay'` | - | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
-| `showLine` | 是否显示连接线 | `boolean` | `false` | ✅ | - |
+| `showLine` | 是否显示连接线 | `boolean` | `false` | - | 此属性为`tree`的全局配置，修改其即可生效 |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `treeDisabled` | 树的禁用节点的函数 | 参考 [Tree](/components/tree/zh#API) | - | - | - |

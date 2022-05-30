@@ -5,6 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { MergedNode } from '../composables/useDataSource'
+import type { VKey } from '@idux/cdk/utils'
+
 import { computed, defineComponent, inject } from 'vue'
 
 import { useKey } from '@idux/components/utils'
@@ -23,8 +26,8 @@ export default defineComponent({
   setup(props) {
     const {
       props: treeProps,
+      flattedNodes,
       mergedPrefixCls,
-      mergedNodeMap,
       activeKey,
       selectedKeys,
       dragKey,
@@ -110,7 +113,10 @@ export default defineComponent({
     }
 
     return () => {
-      const nodeMap = mergedNodeMap.value
+      const nodeMap = new Map<VKey, MergedNode>()
+      flattedNodes.value.forEach(node => {
+        nodeMap.set(node.key, node)
+      })
 
       const { isLeaf, label, level, rawNode, expanded, checkDisabled, dragDisabled, dropDisabled, node } = props
       const { showLine, checkable, draggable } = treeProps

@@ -9,11 +9,11 @@ import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
 
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type TreeConfig } from '@idux/components/config'
+import { type GetKeyFn } from '@idux/components/utils'
 
 import { type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
 import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
-import { type GetNodeKey } from './useGetNodeKey'
 
 export interface ExpandableContext {
   expandIcon: ComputedRef<string | string[]>
@@ -29,11 +29,10 @@ export function useExpandable(
   props: TreeProps,
   config: TreeConfig,
   mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedGetKey: ComputedRef<GetKeyFn>,
   mergedLabelKey: ComputedRef<string>,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
   searchedKeys: ComputedRef<VKey[]>,
-  lastEffectiveSearchedKeys: Ref<VKey[]>,
 ): ExpandableContext {
   const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
@@ -42,7 +41,7 @@ export function useExpandable(
 
   watch(searchedKeys, currKeys => {
     const { searchValue } = props
-    setExpandWithSearch(!searchValue ? lastEffectiveSearchedKeys.value : currKeys)
+    setExpandWithSearch(!searchValue ? [] : currKeys)
   })
 
   const setExpandWithSearch = (searchedKeys: VKey[]) => {
