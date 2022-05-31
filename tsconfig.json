@@ -23,8 +23,10 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@idux": ["./packages"],
-      "@idux/*": ["./packages/*"],
+      "@idux/cdk/*": ["./packages/cdk/*"],
+      "@idux/components/*": ["./packages/components/*"],
+      "@idux/pro/*": ["./packages/pro/*"],
+      "@idux/site/*": ["./packages/site/*"],
       "@tests": ["./tests"],
       "@tests/*": ["./tests/*"]
     },

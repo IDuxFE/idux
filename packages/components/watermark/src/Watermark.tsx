@@ -7,7 +7,7 @@
 
 import { computed, defineComponent } from 'vue'
 
-import { useGlobalConfig } from '@idux/components'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { useCalcBase64 } from './composables/useCalcBase64'
 import { watermarkProps } from './types'

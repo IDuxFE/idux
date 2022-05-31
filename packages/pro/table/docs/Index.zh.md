@@ -65,7 +65,7 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `type` | 列类型 | `'expandable'` | - | - | 必填 |
+| `type` | 列类型 | `'indexable'` | - | - | 必填 |
 
 其他的所有属性都支持全局配置，其默认配置如下：
 

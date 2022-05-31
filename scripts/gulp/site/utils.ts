@@ -2,6 +2,8 @@
 import { join } from 'path'
 
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs-extra'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { kebabCase, lowerFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 

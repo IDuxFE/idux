@@ -5,6 +5,8 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { upperFirst } from 'lodash'
 import { RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
