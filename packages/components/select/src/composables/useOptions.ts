@@ -14,106 +14,59 @@ import { computed } from 'vue'
 
 import { isFunction, isNil } from 'lodash-es'
 
-import { Logger, VKey, flattenNode } from '@idux/cdk/utils'
+import { Logger, type VKey, flattenNode } from '@idux/cdk/utils'
 
 import { optionGroupKey, optionKey } from '../option'
 import { generateOption } from '../utils/generateOption'
 import { GetKeyFn } from './useGetOptionKey'
 
-export interface MergedOption {
+export interface FlattenedOption {
   key: VKey
-  label?: string
+  label: string
   disabled?: boolean
   rawData: SelectData
-  type?: 'group'
-  parentKey?: VKey
+  type: 'group' | 'item'
 }
 
-export interface OptionsContext {
-  mergedOptions: ComputedRef<MergedOption[]>
-  flattedOptions: ComputedRef<MergedOption[]>
-}
-
-export function useMergedOptions(
-  props: SelectProps,
-  slots: Slots,
-  mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetKeyFn>,
-  mergedLabelKey: ComputedRef<string>,
-): ComputedRef<MergedOption[]> {
+export function useConvertedOptions(props: SelectProps, slots: Slots): ComputedRef<SelectData[]> {
   return computed(() => {
     const dataSource = props.options ?? props.dataSource
     if (dataSource) {
       if (__DEV__ && props.options) {
         Logger.warn('components/select', '`options` was deprecated, please use `dataSource` instead')
       }
-      return mergeOptions(dataSource, mergedChildrenKey.value, mergedGetKey.value, mergedLabelKey.value)
-    } else {
-      return convertOptions(slots.default?.())
+      return dataSource
     }
+
+    return convertOptions(slots.default?.())
   })
 }
 
-export function useFlattedOptions(
-  props: SelectProps,
-  mergedOptions: ComputedRef<MergedOption[]>,
-  inputValue: Ref<string>,
-  mergedLabelKey: ComputedRef<string>,
-): ComputedRef<MergedOption[]> {
-  const searchFilter = useSearchFn(props, mergedLabelKey)
-
+export function useOptionKeyMap(options: ComputedRef<FlattenedOption[]>): ComputedRef<Map<VKey, FlattenedOption>> {
   return computed(() => {
-    const options = mergedOptions.value
-    const searchValue = inputValue.value
-    if (!searchValue) {
-      return options
-    }
-    const filter = searchFilter.value
-    const filteredOptions = !filter ? options : options.filter(option => filter(option.rawData!, searchValue))
+    const map = new Map<VKey, FlattenedOption>()
 
-    const { allowInput } = props
-    if (allowInput) {
-      const matchedOption = filteredOptions.find(option => option.label === searchValue)
-      if (!matchedOption) {
-        return [generateOption(searchValue), ...filteredOptions]
-      }
-    }
-    return filteredOptions
+    options.value.forEach(option => {
+      map.set(option.key, option)
+    })
+
+    return map
   })
 }
 
-function mergeOptions(originalOptions: SelectData[], childrenKey: string, getKeyFn: GetKeyFn, labelKey: string) {
-  const mergedOptions: MergedOption[] = []
-
-  originalOptions.forEach((item, index) => {
-    const label = item[labelKey]
-    const children = item[childrenKey] as SelectData[]
-
-    if (children && children.length > 0) {
-      const groupKey = getKeyFn(item) ?? item.key ?? index
-      mergedOptions.push({ key: groupKey, label, type: 'group', rawData: item })
-
-      children.forEach(child => {
-        mergedOptions.push({
-          key: getKeyFn(child),
-          label: child[labelKey],
-          disabled: child.disabled,
-          parentKey: groupKey,
-          rawData: child,
-        })
-      })
-    } else {
-      mergedOptions.push({ key: getKeyFn(item), disabled: item.disabled, label, rawData: item })
-    }
-  })
-
-  return mergedOptions
+export function useFlattenedOptions(
+  options: ComputedRef<SelectData[] | undefined>,
+  mergedChildrenKey: ComputedRef<string>,
+  getKey: ComputedRef<GetKeyFn>,
+  mergedLabelKey: ComputedRef<string>,
+): ComputedRef<FlattenedOption[]> {
+  return computed(() => flattenOptions(options.value, mergedChildrenKey.value, getKey.value, mergedLabelKey.value))
 }
 
 const filterKeys = [optionKey, optionGroupKey]
 
-function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey): MergedOption[] {
-  const mergedOptions: Array<MergedOption> = []
+function convertOptions(nodes: VNode[] | undefined): SelectData[] {
+  const convertedOptions: Array<SelectData> = []
 
   flattenNode(nodes, { key: filterKeys }).forEach((node, index) => {
     const type = node.type as any
@@ -124,29 +77,98 @@ function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey): MergedOpt
     if (isOption) {
       const { key, disabled, label, value, ...additional } = props
       const { label: customLabel, default: customLabel2 } = slots
-      // <IxSelectOption disabled /> => disabled = ''
       const _disabled = disabled || disabled === ''
-      const rawData = { key, disabled: _disabled, label, value, additional, customLabel: customLabel ?? customLabel2 }
-      const option: MergedOption = {
+      const option: SelectData = {
         key: value ?? key,
-        label,
         disabled: _disabled,
-        rawData,
-        parentKey,
+        label,
+        value,
+        additional,
+        customLabel: customLabel ?? customLabel2,
       }
 
-      mergedOptions.push(option)
+      convertedOptions.push(option)
     } else {
       const { key = index, label, children, ...additional } = props
       const { label: customLabel, default: defaultSlot } = slots
-      const _children = children ?? convertOptions(defaultSlot?.(), key)
-      const rawData = { key, label, children: _children, additional, customLabel }
-      mergedOptions.push({ key, label, type: 'group', rawData })
-      mergedOptions.push(..._children)
+      const _children = children ?? convertOptions(defaultSlot?.())
+
+      convertedOptions.push({ key, label, children: _children, additional, customLabel })
+    }
+  })
+
+  return convertedOptions
+}
+
+export function useFilteredOptions(
+  props: SelectProps,
+  options: ComputedRef<FlattenedOption[]>,
+  inputValue: Ref<string>,
+  mergedLabelKey: ComputedRef<string>,
+): ComputedRef<FlattenedOption[]> {
+  const searchFilter = useSearchFn(props, mergedLabelKey)
+
+  return computed(() => {
+    const _options = options.value
+    const searchValue = inputValue.value
+    if (!searchValue) {
+      return _options
+    }
+    const filter = searchFilter.value
+    const filteredOptions = filterOptions(_options, props.allowInput, searchValue, filter)
+
+    return filteredOptions
+  })
+}
+
+function filterOptions(
+  flattenedOptions: FlattenedOption[],
+  allowInput: boolean,
+  searchValue: string,
+  filter: false | SelectSearchFn,
+): FlattenedOption[] {
+  const filteredOptions = !filter
+    ? flattenedOptions
+    : flattenedOptions.filter(option => filter(option.rawData!, searchValue))
+
+  if (allowInput) {
+    const matchedOption = filteredOptions.find(option => option.label === searchValue)
+    if (!matchedOption) {
+      return [generateOption(searchValue), ...filteredOptions]
+    }
+  }
+  return filteredOptions
+}
+
+function flattenOptions(options: SelectData[] | undefined, childrenKey: string, getKeyFn: GetKeyFn, labelKey: string) {
+  const mergedOptions: FlattenedOption[] = []
+  const appendOption = (item: SelectData, index?: number) =>
+    mergedOptions.push(parseOption(item, item => getKeyFn(item) ?? index, childrenKey, labelKey))
+
+  options?.forEach((item, index) => {
+    const children = item[childrenKey] as SelectData[]
+
+    appendOption(item, index)
+
+    if (children && children.length > 0) {
+      children.forEach(child => {
+        appendOption(child)
+      })
     }
   })
 
   return mergedOptions
+}
+
+function parseOption(option: SelectData, getKey: GetKeyFn, childrenKey: string, labelKey: string): FlattenedOption {
+  const children = option[childrenKey] as SelectData[] | undefined
+  return {
+    key: getKey(option),
+    label: option[labelKey],
+    disabled: !!option.disabled,
+    type: children && children.length > 0 ? 'group' : 'item',
+    rawData: option,
+  }
 }
 
 function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {

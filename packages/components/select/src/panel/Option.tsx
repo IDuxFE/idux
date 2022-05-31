@@ -7,12 +7,13 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { isNil, toString } from 'lodash-es'
 
+import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { useKey } from '@idux/components/utils'
 
-import { selectToken } from '../token'
+import { selectPanelContext } from '../token'
 import { optionProps } from '../types'
 import { renderOptionLabel } from '../utils/renderOptionLabel'
 
@@ -21,28 +22,19 @@ export default defineComponent({
   setup(props) {
     const key = useKey()
     const {
-      props: selectProps,
+      props: selectPanelProps,
       slots,
       mergedPrefixCls,
-      selectedValue,
+      selectedKeys,
       selectedLimit,
       selectedLimitTitle,
-      changeSelected,
-      handleOptionClick,
-      activeOption,
-      changeActive,
-    } = inject(selectToken)!
+      activeValue,
+      setActiveIndex,
+    } = inject(selectPanelContext)!
 
-    const isActive = computed(() => {
-      const compareFn = selectProps.compareWith ?? selectProps.compareFn
-      const activeValue = activeOption.value?.key
-      return compareFn(activeValue, key)
-    })
+    const isActive = computed(() => activeValue.value === key)
 
-    const isSelected = computed(() => {
-      const compareFn = selectProps.compareWith ?? selectProps.compareFn
-      return selectedValue.value.some(item => compareFn(item, key))
-    })
+    const isSelected = computed(() => selectedKeys.value.some(selectedKey => selectedKey === key))
 
     const classes = computed(() => {
       const { disabled, parentKey } = props
@@ -56,22 +48,23 @@ export default defineComponent({
       }
     })
 
-    const handleMouseEnter = () => changeActive(props.index, 0)
+    const handleMouseEnter = () => setActiveIndex(props.index!)
 
-    const handleClick = () => {
-      changeSelected(key)
-      handleOptionClick()
+    const handleClick = (evt: MouseEvent) => {
+      callEmit(selectPanelProps.onOptionClick, props.rawData!, evt)
     }
 
     return () => {
       const { disabled, label, rawData } = props
-      const { multiple } = selectProps
+      const { multiple } = selectPanelProps
       const selected = isSelected.value
       const prefixCls = `${mergedPrefixCls.value}-option`
+      const _label = toString(label)
+
       // 优先显示 selectedLimitTitle
-      const title = (!(disabled || selected) && selectedLimitTitle.value) || label
-      const customAdditional = selectProps.customAdditional
-        ? selectProps.customAdditional({ data: rawData, index: props.index })
+      const title = (!(disabled || selected) && selectedLimitTitle.value) || _label
+      const customAdditional = selectPanelProps.customAdditional
+        ? selectPanelProps.customAdditional({ data: rawData!, index: props.index! })
         : undefined
 
       return (
@@ -80,13 +73,13 @@ export default defineComponent({
           title={title}
           onMouseenter={disabled ? undefined : handleMouseEnter}
           onClick={disabled ? undefined : handleClick}
-          aria-label={label}
+          aria-label={_label}
           aria-selected={selected}
-          {...rawData.additional}
+          {...rawData!.additional}
           {...customAdditional}
         >
           {multiple && <IxCheckbox checked={selected} disabled={disabled || (!selected && selectedLimit.value)} />}
-          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData, label)}</span>
+          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData!, _label)}</span>
         </div>
       )
     }

@@ -7,9 +7,9 @@ import { IxEmpty } from '@idux/components/empty'
 import { IxIcon } from '@idux/components/icon'
 
 import Select from '../src/Select'
-import Content from '../src/content/Content'
-import Option from '../src/content/Option'
 import { SelectOption as SelectOptionComponent, SelectOptionGroup as SelectOptionGroupComponent } from '../src/option'
+import Option from '../src/panel/Option'
+import Panel from '../src/panel/Panel'
 import { SelectData, SelectProps } from '../src/types'
 
 describe('Select', () => {
@@ -66,12 +66,12 @@ describe('Select', () => {
       const wrapper = SelectMount({ props: { open: true, 'onUpdate:open': onUpdateOpen } })
 
       expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
-      expect(wrapper.findComponent(Content).isVisible()).toBe(true)
+      expect(wrapper.findComponent(Panel).isVisible()).toBe(true)
 
       await wrapper.setProps({ open: false })
 
       expect(wrapper.find('.ix-selector-opened').exists()).toBe(false)
-      expect(wrapper.findComponent(Content).isVisible()).toBe(false)
+      expect(wrapper.findComponent(Panel).isVisible()).toBe(false)
 
       // TODO fix
       // await wrapper.find('.ix-selector').trigger('click')
@@ -107,7 +107,7 @@ describe('Select', () => {
       await flushPromises()
 
       expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
-      expect(wrapper.findComponent(Content).isVisible()).toBe(true)
+      expect(wrapper.findComponent(Panel).isVisible()).toBe(true)
     })
 
     test('borderless work', async () => {
@@ -197,17 +197,6 @@ describe('Select', () => {
       expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
     })
 
-    test('compareFn work', async () => {
-      const compareFn = (o1: string, o2: string) => !!o1 && !!o2 && o1.charAt(0) === o2.charAt(0)
-      const wrapper = SelectMount({ props: { value: 't', compareFn } })
-
-      expect(wrapper.find('.ix-selector-item').text()).toBe('Tom')
-
-      await wrapper.setProps({ value: 'j' })
-
-      expect(wrapper.find('.ix-selector-item').text()).toBe('Jerry')
-    })
-
     test('disabled work', async () => {
       const wrapper = SelectMount({ props: { disabled: true } })
 
@@ -256,12 +245,12 @@ describe('Select', () => {
       let emptyText = 'empty text'
       const wrapper = SelectMount({ props: { open: true, empty: emptyText, dataSource: [] } })
 
-      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
+      expect(wrapper.findComponent(Panel).find('.ix-empty-description').text()).toBe(emptyText)
 
       emptyText = 'empty text 2'
       await wrapper.setProps({ empty: { description: emptyText } })
 
-      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
+      expect(wrapper.findComponent(Panel).find('.ix-empty-description').text()).toBe(emptyText)
     })
 
     test('empty slot work', async () => {
@@ -270,7 +259,7 @@ describe('Select', () => {
         slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
       })
 
-      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe('empty slot')
+      expect(wrapper.findComponent(Panel).find('.ix-empty-description').text()).toBe('empty slot')
     })
 
     test('dataSource work', async () => {
@@ -297,9 +286,9 @@ describe('Select', () => {
       const overlayRender = (children: VNode[]) => {
         return [children, h('div', { class: 'custom-render-div' })]
       }
-      const wrapper = SelectMount({ props: { open: true, overlayRender } })
+      SelectMount({ props: { open: true, overlayRender } })
 
-      expect(wrapper.findComponent(Content).find('.custom-render-div').exists()).toBe(true)
+      expect(isElementVisible(document.querySelector('.custom-render-div'))).toBe(true)
     })
 
     test('placeholder work', async () => {
@@ -409,11 +398,11 @@ describe('Select', () => {
       const input = wrapper.find('input')
       await input.setValue('a')
 
-      expect(wrapper.findComponent(Content).find('.ix-select-option-group').exists()).toBe(false)
+      expect(wrapper.findComponent(Panel).find('.ix-select-option-group').exists()).toBe(false)
 
       await input.setValue('b')
 
-      expect(wrapper.findComponent(Content).find('.ix-select-option-group').exists()).toBe(true)
+      expect(wrapper.findComponent(Panel).find('.ix-select-option-group').exists()).toBe(true)
     })
 
     test('size work', async () => {
