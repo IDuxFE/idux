@@ -7,7 +7,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { offResize, onResize } from '@idux/cdk/resize'
 import { convertElement } from '@idux/cdk/utils'
-import { TextareaInstance } from '@idux/components'
+import { TextareaInstance } from '@idux/components/textarea'
 
 const textareaRef = ref<TextareaInstance>()
 const text = ref('')

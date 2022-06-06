@@ -5,9 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ComputedRef, EffectScope, Ref } from 'vue'
-
-import { computed, effectScope, onScopeDispose, ref, shallowRef, toRaw, watch } from 'vue'
+import {
+  type ComputedRef,
+  type EffectScope,
+  type Ref,
+  computed,
+  effectScope,
+  onScopeDispose,
+  ref,
+  shallowRef,
+  toRaw,
+  watch,
+} from 'vue'
 
 import { isFunction } from 'lodash-es'
 

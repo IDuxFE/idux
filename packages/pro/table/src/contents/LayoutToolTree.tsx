@@ -9,7 +9,8 @@ import { computed } from '@vue/reactivity'
 import { type PropType, defineComponent, inject } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
-import { IxDivider, IxIcon } from '@idux/components'
+import { IxDivider } from '@idux/components/divider'
+import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeDragDropOptions, type TreeProps } from '@idux/components/tree'
 import { useKey } from '@idux/components/utils'
 

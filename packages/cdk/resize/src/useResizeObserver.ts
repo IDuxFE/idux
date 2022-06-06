@@ -15,7 +15,7 @@ export function useResizeObserver(
   target: MaybeElementRef,
   listener: ResizeListener,
   options?: ResizeObserverOptions,
-): () => void {
+): { stop: () => void } {
   const stopWatch = watch(
     () => convertElement(target),
     (currElement, prevElement) => {
@@ -30,12 +30,12 @@ export function useResizeObserver(
     { immediate: true, flush: 'post' },
   )
 
-  const dispose = () => {
+  const stop = () => {
     offResize(convertElement(target), listener)
     stopWatch()
   }
 
-  onScopeDispose(dispose)
+  onScopeDispose(stop)
 
-  return dispose
+  return { stop }
 }

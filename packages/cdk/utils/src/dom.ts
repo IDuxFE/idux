@@ -9,22 +9,22 @@
 
 import { isString } from 'lodash-es'
 
-type ElType = HTMLElement | Document | Window
+export type EventTarget = HTMLElement | Document | Window | null | undefined
 
 export function on<K extends keyof HTMLElementEventMap>(
-  el: ElType | undefined,
+  el: EventTarget,
   type: K | undefined,
   listener: ((this: HTMLElement, ev: HTMLElementEventMap[K]) => any) | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void
 export function on(
-  el: ElType | undefined,
+  el: EventTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void
 export function on(
-  el: ElType | undefined,
+  el: EventTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | AddEventListenerOptions,
@@ -35,19 +35,19 @@ export function on(
 }
 
 export function off<K extends keyof HTMLElementEventMap>(
-  el: ElType | undefined,
+  el: EventTarget,
   type: K | undefined,
   listener: ((this: HTMLElement, ev: HTMLElementEventMap[K]) => any) | undefined,
   options?: boolean | EventListenerOptions,
 ): void
 export function off(
-  el: ElType | undefined,
+  el: EventTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | EventListenerOptions,
 ): void
 export function off(
-  el: ElType | undefined,
+  el: EventTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | EventListenerOptions,
@@ -137,19 +137,18 @@ export function isVisibleElement(element: HTMLElement | SVGElement | undefined):
   return isStyleVisible(element) && isAttributeVisible(element)
 }
 
-export function getMouseClientXY(ev: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
-  let clientX: number
-  let clientY: number
-  if (ev.type.startsWith('touch')) {
-    clientY = (ev as TouchEvent).touches[0].clientY
-    clientX = (ev as TouchEvent).touches[0].clientX
-  } else {
-    clientY = (ev as MouseEvent).clientY
-    clientX = (ev as MouseEvent).clientX
-  }
+/**
+ * Investigate if an event is a `TouchEvent`.
+ */
+export function isTouchEvent(evt: MouseEvent | TouchEvent): evt is TouchEvent {
+  return evt.type.startsWith('touch')
+}
 
-  return {
-    clientX,
-    clientY,
-  }
+export function getMouseEvent(evt: MouseEvent | TouchEvent): MouseEvent | Touch {
+  return isTouchEvent(evt) ? evt.touches[0] || evt.changedTouches[0] : evt
+}
+
+export function getMouseClientXY(evt: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
+  const { clientX, clientY } = getMouseEvent(evt)
+  return { clientX, clientY }
 }

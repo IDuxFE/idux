@@ -4,6 +4,7 @@ import { join } from 'path'
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs-extra'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import { kebabCase, lowerFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
@@ -34,7 +35,16 @@ export function initSite(): void {
   })
 
   const filterPackageName = ['site']
-  const filterComponentName = ['node_modules', 'config', 'style', 'locales', 'version', 'utils', '_private']
+  const filterComponentName = [
+    '_private',
+    'config',
+    // 'drag-drop', // 暂时不对外提供
+    'locales',
+    'node_modules',
+    'style',
+    'utils',
+    'version',
+  ]
   readdirSync(packageRoot).forEach(packageName => {
     if (filterPackageName.includes(packageName)) {
       return
