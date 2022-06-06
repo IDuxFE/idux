@@ -9,10 +9,11 @@
 
 import type { ResizeListener } from './utils'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const resizeObserverProps = {
   disabled: { type: Boolean, default: false },
+  is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
   options: { type: Object as PropType<ResizeObserverOptions>, default: undefined },
   onResize: [Function, Array] as PropType<MaybeArray<ResizeListener>>,
 } as const

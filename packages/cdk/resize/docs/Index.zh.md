@@ -6,7 +6,7 @@ title: Resize
 subtitle: 调整尺寸
 ---
 
-对 `[ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver)` 的进一步封装。
+对 [ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver) 的进一步封装。
 
 ## API
 
@@ -35,6 +35,7 @@ export function useResizeObserver(
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `disabled` | 是否禁用  | `boolean` | - | - | - |
+| `is` | 被观测的元素或者组件 | `string | Component` | `'div'` | - | - |
 | `options` | 传递给 `ResizeObserver` 的参数  | - | `ResizeObserverOptions` | - | 参见 [MDN:ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver/observe) |
 | `onResize` | 当元素尺寸改变时的回调  | - | `(entry: ResizeObserverEntry) => void` | - | - |
 

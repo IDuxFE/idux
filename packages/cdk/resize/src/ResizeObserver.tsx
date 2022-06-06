@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { cloneVNode, defineComponent, onBeforeUnmount, ref, watch } from 'vue'
+import { defineComponent, h, onBeforeUnmount, ref, watch } from 'vue'
 
-import { Logger, callEmit, getFirstValidNode } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 
 import { resizeObserverProps } from './types'
 import { useResizeObserver } from './useResizeObserver'
@@ -20,6 +20,7 @@ export default defineComponent({
     const handlerResize = (evt: ResizeObserverEntry) => callEmit(props.onResize, evt)
 
     let stopHandler: (() => void) | undefined
+
     const cleanup = () => {
       if (stopHandler) {
         stopHandler()
@@ -32,7 +33,7 @@ export default defineComponent({
       ([disabled, options, onResize]) => {
         cleanup()
         if (!disabled && onResize) {
-          stopHandler = useResizeObserver(elementRef, handlerResize, options)
+          stopHandler = useResizeObserver(elementRef, handlerResize, options).stop
         }
       },
       {
@@ -44,12 +45,8 @@ export default defineComponent({
     onBeforeUnmount(cleanup)
 
     return () => {
-      const targetNode = getFirstValidNode(slots.default?.())
-      if (!targetNode) {
-        __DEV__ && Logger.warn('cdk/resize', 'Child must is single rooted node')
-        return null
-      }
-      return cloneVNode(targetNode, { ref: elementRef }, true)
+      const tag = props.is as string
+      return h(tag, { ref: elementRef, class: 'cdk-resize-observer' }, slots)
     }
   },
 })

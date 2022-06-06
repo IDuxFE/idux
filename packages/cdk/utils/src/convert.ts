@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ComponentPublicInstance, Ref } from 'vue'
-
-import { unref } from 'vue'
+import { type ComponentPublicInstance, type Ref, unref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -39,8 +37,9 @@ export function convertCssPixel(value: unknown): string {
   return typeof value === 'string' ? value : `${value}px`
 }
 
+export type MaybeRef<T> = T | Ref<T>
 export type MaybeElement = ComponentPublicInstance | HTMLElement | null | undefined
-export type MaybeElementRef<T extends MaybeElement = MaybeElement> = Ref<T> | T
+export type MaybeElementRef<T extends MaybeElement = MaybeElement> = MaybeRef<T>
 
 export function convertElement<T extends MaybeElement>(
   elementOrInstance: MaybeElementRef<T>,
