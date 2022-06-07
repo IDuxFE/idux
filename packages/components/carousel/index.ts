@@ -17,6 +17,6 @@ export type {
   CarouselInstance,
   CarouselComponent,
   CarouselPublicProps as CarouselProps,
-  DotPlacement,
-  DotTrigger,
+  CarouselDotPlacement,
+  CarouselDotTrigger,
 } from './src/types'

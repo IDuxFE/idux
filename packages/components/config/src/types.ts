@@ -13,7 +13,7 @@ import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
-import type { DotPlacement, DotTrigger } from '@idux/components/carousel'
+import type { CarouselDotPlacement, CarouselDotTrigger } from '@idux/components/carousel'
 import type { CascaderData } from '@idux/components/cascader'
 import type { DatePickerType } from '@idux/components/date-picker/src/types'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
@@ -141,9 +141,9 @@ export interface CardConfig {
 
 export interface CarouselConfig {
   autoplayTime: number
-  dotPlacement: DotPlacement
+  dotPlacement: CarouselDotPlacement
   showArrow: boolean
-  trigger: DotTrigger
+  trigger: CarouselDotTrigger
 }
 
 export interface CascaderConfig {

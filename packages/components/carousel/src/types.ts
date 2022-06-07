@@ -5,29 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
-
-export type DotPlacement = 'top' | 'start' | 'bottom' | 'end' | 'none'
-const dotPlacement: DotPlacement[] = ['top', 'start', 'bottom', 'end', 'none']
-
-export type DotTrigger = 'click' | 'hover'
-const dotTrigger: DotTrigger[] = ['click', 'hover']
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const carouselProps = {
-  autoplayTime: IxPropTypes.number,
-  dotPlacement: IxPropTypes.oneOf<DotPlacement>(dotPlacement),
-  showArrow: IxPropTypes.bool,
-  trigger: IxPropTypes.oneOf<DotTrigger>(dotTrigger),
-  onChange: IxPropTypes.emit<(prevIndex: number, nextIndex: number) => void>(),
-}
+  autoplayTime: { type: Number, default: undefined },
+  dotPlacement: { type: String as PropType<CarouselDotPlacement>, default: undefined },
+  showArrow: { type: Boolean, default: undefined },
+  trigger: { type: String as PropType<CarouselDotTrigger>, default: undefined },
+  onChange: [Function, Array] as PropType<MaybeArray<(prevIndex: number, nextIndex: number) => void>>,
+} as const
 
 export interface CarouselBindings {
   next: () => void
   prev: () => void
-  goTo: (slideIndex: number) => void
+  goTo: (index: number) => void
 }
 
 export type CarouselProps = ExtractInnerPropTypes<typeof carouselProps>
@@ -37,3 +29,6 @@ export type CarouselComponent = DefineComponent<
   CarouselBindings
 >
 export type CarouselInstance = InstanceType<DefineComponent<CarouselProps, CarouselBindings>>
+
+export type CarouselDotPlacement = 'top' | 'start' | 'bottom' | 'end' | 'none'
+export type CarouselDotTrigger = 'click' | 'hover'

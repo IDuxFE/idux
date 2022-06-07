@@ -10,12 +10,19 @@ import { ComputedRef, onBeforeUnmount, watch } from 'vue'
 export const useAutoplay = (autoplayTime: ComputedRef<number>, next: () => void): void => {
   let timer: number | null = null
 
+  const cleanup = () => {
+    if (timer !== null) {
+      clearInterval(timer)
+      timer = null
+    }
+  }
+
   watch(
     autoplayTime,
     (newVal: number) => {
-      timer && window.clearInterval(timer)
+      cleanup()
       if (newVal) {
-        timer = window.setInterval(() => {
+        timer = setInterval(() => {
           next()
         }, newVal)
       }
@@ -23,9 +30,5 @@ export const useAutoplay = (autoplayTime: ComputedRef<number>, next: () => void)
     { immediate: true },
   )
 
-  onBeforeUnmount(() => {
-    if (timer !== null) {
-      window.clearInterval(timer)
-    }
-  })
+  onBeforeUnmount(cleanup)
 }

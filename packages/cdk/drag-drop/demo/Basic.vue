@@ -30,6 +30,7 @@ const { position } = useDraggable(elementRef, { onStart, onMove, onEnd })
   cursor: move;
   user-select: none;
   padding: 8px;
+  background-color: #fff;
   border: 1px solid #c3c3c3;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }

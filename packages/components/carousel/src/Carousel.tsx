@@ -98,16 +98,18 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const startVNode = cloneVNode(children.value[length.value - 1])
-      const endVNode = cloneVNode(children.value[0])
-      const slides = [startVNode, ...children.value, endVNode].map(slideItem => (
-        <div class={itemClass.value} style={slideItemStyle.value}>
+      const startVNode = children.value[length.value - 1]
+      const endVNode = children.value[0]
+      const clonedStartNode = cloneVNode(startVNode, { key: `${String(startVNode.key)}-start-cloned-key` })
+      const clonedEndNode = cloneVNode(endVNode, { key: `${String(endVNode.key)}-end-cloned-key` })
+      const slides = [clonedStartNode, ...children.value, clonedEndNode].map(slideItem => (
+        <div key={slideItem.key!} class={itemClass.value} style={slideItemStyle.value}>
           {slideItem}
         </div>
       ))
       const prevArrow = slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-circle" />
       const nextArrow = slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-circle" />
-      const dots = Array.from({ length: length.value }).map((_, index: number) => {
+      const dots = children.value.map((node, index: number) => {
         const isActive = index + 1 === activeIndex.value
         const itemClass = {
           [`${prefixCls}-dot-item`]: true,
@@ -119,7 +121,7 @@ export default defineComponent({
           <button class={`${prefixCls}-dot-item-default`}></button>
         )
         return (
-          <li class={itemClass} onClick={() => onClick(index)} onMouseenter={() => onMouseenter(index)}>
+          <li key={node.key!} class={itemClass} onClick={() => onClick(index)} onMouseenter={() => onMouseenter(index)}>
             {children}
           </li>
         )
@@ -132,10 +134,10 @@ export default defineComponent({
           </div>
           {showArrow.value && (
             <>
-              <div class={`${prefixCls}-arrow ${prefixCls}-arrow-prev`} onClick={prev}>
+              <div key="__arrow-prev" class={`${prefixCls}-arrow ${prefixCls}-arrow-prev`} onClick={prev}>
                 {prevArrow}
               </div>
-              <div class={`${prefixCls}-arrow ${prefixCls}-arrow-next`} onClick={next}>
+              <div key="__arrow-next" class={`${prefixCls}-arrow ${prefixCls}-arrow-next`} onClick={next}>
                 {nextArrow}
               </div>
             </>
