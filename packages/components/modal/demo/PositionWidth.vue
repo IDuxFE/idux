@@ -3,7 +3,7 @@
     <IxButton @click="visible = !visible">Change visible</IxButton>
     <IxButton mode="primary" @click="openModal">Open modal</IxButton>
   </IxSpace>
-  <IxModal v-model:visible="visible" header="This is title" :style="{ top: '200px' }" :width="400">
+  <IxModal v-model:visible="visible" header="This is title" :centered="false" :offset="800" :width="400">
     <p>Some contents...</p>
   </IxModal>
 </template>

@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CarouselProps } from '../types'
-
-import { ComputedRef, nextTick, watch } from 'vue'
+import { type ComputedRef, nextTick, watch } from 'vue'
 
 import { callEmit, useState } from '@idux/cdk/utils'
 
-interface WalkContext {
+import { type CarouselProps } from '../types'
+
+export interface WalkContext {
   goTo(slideIndex: number): void
   next(): void
   prev(): void
@@ -22,6 +22,8 @@ interface WalkContext {
 export const useWalk = (length: ComputedRef<number>, props: CarouselProps): WalkContext => {
   const [activeIndex, setActiveIndex] = useState(1)
   let running = false
+
+  watch(length, () => goTo(0))
 
   watch(activeIndex, (newVal: number, oldVal: number) => {
     if (newVal >= 1 && newVal <= length.value) {
