@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.14](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-06-07)
+
+
+### Bug Fixes
+
+* **comp:cascader:** the cloned node should have a unique key ([#940](https://github.com/IDuxFE/idux/issues/940)) ([45ece7b](https://github.com/IDuxFE/idux/commit/45ece7bd8e5c1b525e07c16b8a26cd300c568334))
+
+
+### Features
+
+* **cdk:drag-drop:** add useDraggable and CdkDraggable ([#939](https://github.com/IDuxFE/idux/issues/939)) ([7161d96](https://github.com/IDuxFE/idux/commit/7161d96e63a81bf7595f0cd5e03f31d77fd89273))
+
+
+
+
+
 # [1.0.0-beta.13](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-30)
 
 
