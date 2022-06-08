@@ -1,8 +1,8 @@
 ---
 title:
-  zh: 自定义 keys
-  en: Custom keys
-order: 6
+  zh: 自定义 key
+  en: Custom key
+order: 30
 ---
 
 ## zh

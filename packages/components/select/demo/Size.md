@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 05
 title:
   zh: 尺寸
   en: Sizes
