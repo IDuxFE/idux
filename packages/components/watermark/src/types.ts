@@ -21,7 +21,7 @@ export const watermarkProps = {
   /** 水印内容
    * * 多行文本时请以数组形式输入
    */
-  content: { type: String as PropType<string | string[]>, default: undefined, required: true },
+  content: { type: [String, Array] as PropType<string | string[]>, default: undefined, required: true },
   /** 水印旋转角度 */
   rotate: { type: Number, default: -22 },
   /** 水印`z-index` */
