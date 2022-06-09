@@ -69,9 +69,10 @@ export default defineComponent({
       const customAdditional = customAdditionalFn
         ? customAdditionalFn({ record: props.record, rowIndex: props.rowIndex })
         : undefined
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (tableProps.customTag?.bodyRow ?? 'tr') as any
       return (
-        <tr class={classes.value} {...clickEvents.value} {...customAdditional}>
+        <Tag class={classes.value} {...clickEvents.value} {...customAdditional}>
           {renderChildren(
             props,
             flattedColumns,
@@ -82,7 +83,7 @@ export default defineComponent({
             selectDisabled,
             handleSelect,
           )}
-        </tr>
+        </Tag>
       )
     }
   },

@@ -4,7 +4,6 @@
   .reset-component();
 
   &-layout-tool {
-
     .@{tree-prefix} {
       &-node {
         &-content-suffix {
@@ -16,6 +15,35 @@
           visibility: visible;
         }
       }
+    }
+  }
+}
+
+.cdk-resizable {
+  &-handler {
+    position: absolute;
+    user-select: none;
+    z-index: 9;
+
+    &-end {
+      width: 10px;
+      height: 100%;
+      top: 0;
+      right: -5px;
+    }
+  }
+
+  &-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    border-right: 1px dashed #d1d1d1;
+  }
+
+  &-handler {
+    &-end {
+      cursor: ew-resize;
     }
   }
 }

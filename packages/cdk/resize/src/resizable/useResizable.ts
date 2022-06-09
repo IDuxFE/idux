@@ -136,7 +136,7 @@ export function useResizable(
     if (!startPosition.value) {
       return
     }
-
+    setBodyCursor(_placement)
     resizing.value = true
 
     const { width: currWidth, height: currHeight } = calcSizeByEvent(_placement, evt)
@@ -158,7 +158,7 @@ export function useResizable(
     if (!startPosition.value) {
       return
     }
-
+    clearBodyCursor()
     resizing.value = false
 
     startPosition.value = undefined
@@ -174,6 +174,35 @@ export function useResizable(
   }
 }
 
-function ensureInBounds(value: number, boundValue: number): number {
+function ensureInBounds(value: number, boundValue: number) {
   return value < boundValue ? value : boundValue
+}
+
+function setBodyCursor(placement: ResizableHandlerPlacement) {
+  let cursor = ''
+  switch (placement) {
+    case 'top':
+    case 'bottom':
+      cursor = 'ns-resize'
+      break
+    case 'start':
+    case 'end':
+      cursor = 'ew-resize'
+      break
+    case 'topStart':
+    case 'bottomEnd':
+      cursor = 'nwse-resize'
+      break
+    case 'topEnd':
+    case 'bottomStart':
+      cursor = 'nesw-resize'
+      break
+  }
+  document.body.style.cursor = cursor
+  document.body.style.userSelect = 'none'
+}
+
+function clearBodyCursor() {
+  document.body.style.cursor = ''
+  document.body.style.userSelect = ''
 }

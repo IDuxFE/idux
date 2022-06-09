@@ -7,21 +7,19 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type DefineComponent, FunctionalComponent, type HTMLAttributes, type PropType, type VNodeChild } from 'vue'
-
-import { type BreakpointKey } from '@idux/cdk/breakpoint'
-import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, type MaybeArray, type VKey } from '@idux/cdk/utils'
-import { type EmptyProps } from '@idux/components/empty'
-import { type HeaderProps } from '@idux/components/header'
-import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
-import { type PaginationProps } from '@idux/components/pagination'
-import { type SpinProps } from '@idux/components/spin'
-
-import { type TableColumnMerged, type TableColumnMergedExtra } from './composables/useColumns'
-import { type FlattedData } from './composables/useDataSource'
-import { type ActiveFilter } from './composables/useFilterable'
-import { type ActiveSorter } from './composables/useSortable'
+import type { TableColumnMerged, TableColumnMergedExtra } from './composables/useColumns'
+import type { FlattedData } from './composables/useDataSource'
+import type { ActiveFilter } from './composables/useFilterable'
+import type { ActiveSorter } from './composables/useSortable'
+import type { BreakpointKey } from '@idux/cdk/breakpoint'
+import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { EmptyProps } from '@idux/components/empty'
+import type { HeaderProps } from '@idux/components/header'
+import type { MenuClickOptions, MenuData } from '@idux/components/menu'
+import type { PaginationProps } from '@idux/components/pagination'
+import type { SpinProps } from '@idux/components/spin'
+import type { Component, DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
 export const tableProps = {
   expandedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -32,6 +30,7 @@ export const tableProps = {
   childrenKey: { type: String, default: undefined },
   columns: { type: Array as PropType<TableColumn[]>, default: () => [] },
   customAdditional: { type: Object as PropType<TableCustomAdditional>, default: undefined },
+  customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
   ellipsis: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
@@ -159,6 +158,13 @@ export interface TableCustomAdditional<T = any> {
   bodyRow?: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined
   headCell?: (data: { column: TableColumn<T> }) => Record<string, any> | undefined
   headRow?: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined
+}
+
+export interface TableCustomTag {
+  bodyCell?: string | Component
+  bodyRow?: string | Component
+  headCell?: string | Component
+  headRow?: string | Component
 }
 
 export interface TablePagination extends PaginationProps {
