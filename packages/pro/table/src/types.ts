@@ -136,8 +136,8 @@ export type ProTableColumnLayoutConfig = {
 }
 
 export type ProTableColumnResizable = {
-  minWidth?: number | string
   maxWidth?: number | string
+  minWidth?: number | string
   resizable?: boolean
 }
 
