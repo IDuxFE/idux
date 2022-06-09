@@ -27,6 +27,7 @@ import type {
   TableColumnExpandable,
   TableColumnSelectable,
   TableCustomAdditional,
+  TableCustomTag,
   TablePagination,
   TableScroll,
   TableSize,
@@ -47,6 +48,7 @@ export const proTableProps = {
   childrenKey: { type: String, default: undefined },
   columns: { type: Array as PropType<ProTableColumn[]>, default: () => [] },
   customAdditional: { type: Object as PropType<TableCustomAdditional>, default: undefined },
+  customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
   editable: { type: Boolean, default: false },
   ellipsis: { type: Boolean, default: false },
@@ -134,8 +136,8 @@ export type ProTableColumnLayoutConfig = {
 }
 
 export type ProTableColumnResizable = {
-  minWidth?: number | string
   maxWidth?: number | string
+  minWidth?: number | string
   resizable?: boolean
 }
 

@@ -50,16 +50,23 @@ const columns: ProTableColumn<Data>[] = [
     dataKey: 'name',
     changeFixed: false,
     customCell: 'name',
+    resizable: true,
+    minWidth: 100,
   },
   {
     title: 'Age',
     dataKey: 'age',
     changeFixed: false,
+    resizable: true,
+    maxWidth: 120,
   },
   {
     title: 'Address',
     dataKey: 'address',
     changeFixed: false,
+    resizable: true,
+    maxWidth: 300,
+    minWidth: 150,
   },
   {
     title: 'Tags',

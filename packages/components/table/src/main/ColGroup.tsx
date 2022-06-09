@@ -59,7 +59,7 @@ function renderCol(
     [`${prefixCls}-selectable-with-dropdown`]: type === 'selectable' && mergedSelectableMenus.value.length > 0,
   })
 
-  const mergedWidth = width ?? column.width
+  const mergedWidth = column.width ?? width
   const style = mergedWidth ? { width: convertCssPixel(mergedWidth) } : undefined
   return <col key={column.key} class={className} style={style}></col>
 }

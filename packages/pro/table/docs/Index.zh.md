@@ -43,9 +43,19 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 | `changeVisible` | 是否可以改变列的显示状态 | `boolean` | - | - | 为 `false` 时，此列将不能调整显示状态，但依旧可以设置 `visible` |
 | `visible` | 是否显示此列 | `boolean` | - | - | 为 `false` 时，将不显示此列 |
 
+##### ProTableColumnResizable
+
+配置列的列宽调整相关设置。
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `maxWidth` | 列的最大宽度 | `number` | - | - | - |
+| `minWidth` | 列的最小宽度 | `number` | - | - | - |
+| `resizable` | 是否开启列宽调整 | `boolean` | `false` | - | - |
+
 ##### ProTableColumnBase
 
-普通列配置的属性，继承 `TableColumnBase, ProTableColumnLayoutConfig`
+普通列配置的属性，继承 `TableColumnBase, ProTableColumnLayoutConfig, ProTableColumnResizable`
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -57,7 +67,7 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 
 ##### ProTableColumnSelectable
 
-可选择列配置的属性，继承 `TableColumnSelectable, ProTableColumnLayoutConfig`
+可选择列配置的属性，继承 `TableColumnSelectable, ProTableColumnLayoutConfig, ProTableColumnResizable`
 
 ##### ProTableColumnIndexable
 

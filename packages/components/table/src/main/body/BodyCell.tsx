@@ -106,12 +106,13 @@ export default defineComponent({
       const customAdditional = customAdditionalFn
         ? customAdditionalFn({ column, record: props.record, rowIndex: props.rowIndex })
         : undefined
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (tableProps.customTag?.bodyCell ?? 'td') as any
       return (
-        <td class={classes.value} style={style.value} title={title} {...additional} {...customAdditional}>
+        <Tag class={classes.value} style={style.value} title={title} {...additional} {...customAdditional}>
           {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
           {children}
-        </td>
+        </Tag>
       )
     }
   },

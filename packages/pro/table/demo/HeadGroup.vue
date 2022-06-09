@@ -7,9 +7,6 @@
       <a style="margin-right: 8px">Invite {{ record.name }}</a>
       <a>Delete</a>
     </template>
-    <template #expand="{ record }">
-      <span>{{ record.description }}</span>
-    </template>
   </IxProTable>
 </template>
 
@@ -33,13 +30,7 @@ const columns: ProTableColumn<Data>[] = [
   {
     type: 'indexable',
     fixed: 'start',
-  },
-  {
-    type: 'expandable',
-    fixed: 'start',
     changeVisible: false,
-    onChange: expendedRowKeys => console.log(expendedRowKeys),
-    customExpand: 'expand',
   },
   {
     title: 'Name',

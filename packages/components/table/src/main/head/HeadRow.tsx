@@ -20,14 +20,16 @@ export default defineComponent({
       const { columns } = props
       const customAdditionalFn = tableProps.customAdditional?.headRow
       const customAdditional = customAdditionalFn ? customAdditionalFn({ columns }) : undefined
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (tableProps.customTag?.headRow ?? 'tr') as any
       return (
-        <tr {...customAdditional}>
+        <Tag {...customAdditional}>
           {columns
             .filter(column => column.titleColSpan !== 0)
             .map(column => (
               <HeadCell key={column.key} column={column} />
             ))}
-        </tr>
+        </Tag>
       )
     }
   },

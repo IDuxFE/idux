@@ -148,8 +148,8 @@ export default defineComponent({
 
       return (
         <div>
-          {title && <span class={`${mergedPrefixCls}-layout-tool-tree-title`}>{title}</span>}
-          <IxTree class={`${mergedPrefixCls}-layout-tool-tree`} {...treeProps} v-slots={treeSlots} />
+          {title && <span class={`${mergedPrefixCls.value}-layout-tool-tree-title`}>{title}</span>}
+          <IxTree class={`${mergedPrefixCls.value}-layout-tool-tree`} {...treeProps} v-slots={treeSlots} />
         </div>
       )
     }

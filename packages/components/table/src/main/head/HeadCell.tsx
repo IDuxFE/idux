@@ -143,9 +143,10 @@ export default defineComponent({
 
       const customAdditionalFn = tableProps.customAdditional?.headCell
       const customAdditional = customAdditionalFn ? customAdditionalFn({ column }) : undefined
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (tableProps.customTag?.headCell ?? 'th') as any
       return (
-        <th
+        <Tag
           class={classes.value}
           style={style.value}
           colSpan={titleColSpan === 1 ? undefined : titleColSpan}
@@ -156,7 +157,7 @@ export default defineComponent({
           onClick={onClick}
         >
           {children}
-        </th>
+        </Tag>
       )
     }
   },

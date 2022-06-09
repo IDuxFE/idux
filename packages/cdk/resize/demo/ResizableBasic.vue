@@ -88,31 +88,27 @@
     }
   }
 
-  &:not(.cdk-resizable-resizing) {
-    .cdk-resizable-handler {
-      &-top,
-      &-bottom {
-        cursor: ns-resize;
-      }
-      &-start,
-      &-end {
-        cursor: ew-resize;
-      }
-      &-topStart,
-      &-bottomEnd {
-        cursor: nwse-resize;
-      }
-      &-topEnd,
-      &-bottomStart {
-        cursor: nesw-resize;
-      }
+  &:not(&-resizing) &-handler {
+    &-top,
+    &-bottom {
+      cursor: ns-resize;
+    }
+    &-start,
+    &-end {
+      cursor: ew-resize;
+    }
+    &-topStart,
+    &-bottomEnd {
+      cursor: nwse-resize;
+    }
+    &-topEnd,
+    &-bottomStart {
+      cursor: nesw-resize;
     }
   }
 
-  &-disabled {
-    .cdk-resizable-handler {
-      pointer-events: none;
-    }
+  &-disabled &-handler {
+    pointer-events: none;
   }
 }
 </style>

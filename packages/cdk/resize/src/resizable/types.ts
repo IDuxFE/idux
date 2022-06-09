@@ -76,7 +76,7 @@ export type ResizableHandlerComponent = DefineComponent<
 >
 export type ResizableHandlerInstance = InstanceType<DefineComponent<ResizableHandlerProps>>
 
-export type ResizableOptions = Omit<ResizablePublicProps, 'disabled' | 'is'>
+export type ResizableOptions = Omit<ResizablePublicProps, 'disabled' | 'is' | 'handlers'>
 
 export type ResizableHandlerPlacement = typeof allHandlerPlacements[number]
 
