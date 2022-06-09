@@ -1,8 +1,8 @@
 ---
-order: 1
+order: 23
 title:
-  zh: 使用组件
-  en: Use component
+  zh: CdkResizeObserver
+  en: CdkResizeObserver
 ---
 
 ## zh

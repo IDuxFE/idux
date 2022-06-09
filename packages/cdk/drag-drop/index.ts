@@ -19,4 +19,7 @@ export type {
   DraggableInstance,
   DraggableComponent,
   DraggablePublicProps as DraggableProps,
+  DragPosition,
+  DraggableEvent,
+  DraggableOptions,
 } from './src/draggable/types'

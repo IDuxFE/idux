@@ -1,8 +1,8 @@
 ---
-order: 0
+order: 20
 title:
-  zh: 基本使用
-  en: Basic usage
+  zh: useResizeObserver
+  en: useResizeObserver
 ---
 
 ## zh
