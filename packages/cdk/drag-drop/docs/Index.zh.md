@@ -22,8 +22,8 @@ export function useDraggable(
   target: MaybeElementRef,
   options: DraggableOptions,
 ): {
+  dragging: ComputedRef<boolean>
   position: ComputedRef<DragPosition>
-  isDragging: ComputedRef<boolean>
   stop: () => void
 }
 

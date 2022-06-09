@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 25
 title:
   zh: 手动监听
   en: Manual listening

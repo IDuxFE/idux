@@ -5,12 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import { computed } from '@vue/reactivity'
 import { defineComponent, h, normalizeClass, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { draggableProps } from './types'
-import { type DragPosition, useDraggable } from './useDraggable'
+import { type DragPosition, draggableProps } from './types'
+import { useDraggable } from './useDraggable'
 
 export default defineComponent({
   name: 'CdkDraggable',
@@ -46,19 +47,23 @@ export default defineComponent({
 
     onBeforeUnmount(cleanup)
 
+    const classed = computed(() => {
+      const { dragging } = draggableResult.value
+      return normalizeClass({
+        'cdk-draggable': true,
+        'cdk-dragging': dragging.value,
+      })
+    })
+
     return () => {
       if (!draggableResult.value) {
         return null
       }
       const tag = props.is as string
-      const { isDragging, position } = draggableResult.value
-      const classes = normalizeClass({
-        'cdk-draggable': true,
-        'cdk-dragging': isDragging.value,
-      })
+      const { position } = draggableResult.value
       const { left, top } = position.value
       const style = `left:${left}px;top:${top}px;`
-      return h(tag, { ref: elementRef, class: classes, style }, slots)
+      return h(tag, { ref: elementRef, class: classed.value, style }, slots)
     }
   },
 })

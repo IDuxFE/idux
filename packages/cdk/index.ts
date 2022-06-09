@@ -10,11 +10,11 @@ import type { App, Directive } from 'vue'
 import { clickOutside } from '@idux/cdk/click-outside'
 import { CdkDraggable } from '@idux/cdk/drag-drop'
 import { CdkPortal } from '@idux/cdk/portal'
-import { CdkResizeObserver } from '@idux/cdk/resize'
+import { CdkResizable, CdkResizableHandler, CdkResizeObserver } from '@idux/cdk/resize'
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { version } from '@idux/cdk/version'
 
-const components = [CdkPortal, CdkDraggable, CdkResizeObserver, CdkVirtualScroll]
+const components = [CdkPortal, CdkDraggable, CdkResizable, CdkResizableHandler, CdkResizeObserver, CdkVirtualScroll]
 
 const directives: Record<string, Directive> = {
   clickOutside,

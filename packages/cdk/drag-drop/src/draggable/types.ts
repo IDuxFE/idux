@@ -7,7 +7,6 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { DraggableEvent } from './useDraggable'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
@@ -25,3 +24,18 @@ export type DraggableComponent = DefineComponent<
   Omit<HTMLAttributes, keyof DraggablePublicProps> & DraggablePublicProps
 >
 export type DraggableInstance = InstanceType<DefineComponent<DraggableProps>>
+
+export interface DragPosition {
+  left: number
+  top: number
+  offsetX: number
+  offsetY: number
+}
+
+export type DraggableEvent = (position: DragPosition, evt: PointerEvent) => void
+
+export interface DraggableOptions {
+  onStart?: DraggableEvent
+  onMove?: DraggableEvent
+  onEnd?: DraggableEvent
+}
