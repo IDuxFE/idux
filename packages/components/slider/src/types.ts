@@ -5,40 +5,42 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { PopperPlacement } from '@idux/cdk/popper'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { TooltipInstance } from '@idux/components/tooltip'
-import type { CSSProperties, DefineComponent, HTMLAttributes, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
-import { ɵOverlayPlacementDef } from '@idux/components/_private/overlay'
+import type { CSSProperties, DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 // slider
 export const sliderProps = {
-  value: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.arrayOf(IxPropTypes.number)]).def(0),
-  disabled: IxPropTypes.bool.def(false),
-  dots: IxPropTypes.bool.def(false),
-  keyboard: IxPropTypes.bool.def(true),
-  marks:
-    IxPropTypes.object<
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  value: { type: [Number, Array] as PropType<number | number[]>, default: undefined },
+
+  disabled: { type: Boolean, default: false },
+  dots: { type: Boolean, default: false },
+  keyboard: { type: Boolean, default: true },
+  marks: {
+    type: Object as PropType<
       Record<number, string | VNode | { style?: CSSProperties; label?: string | VNode } | (() => string | VNode)>
-    >(),
-  max: IxPropTypes.number.def(100),
-  min: IxPropTypes.number.def(0),
-  range: IxPropTypes.bool.def(false),
-  reverse: IxPropTypes.bool.def(false),
-  step: IxPropTypes.oneOfType<number | null>([IxPropTypes.number]).def(1),
-  tooltipFormatter: IxPropTypes.func<(value: number) => VNode | string | number>(),
-  tooltipPlacement: ɵOverlayPlacementDef,
-  tooltipVisible: IxPropTypes.bool,
-  vertical: IxPropTypes.bool.def(false),
+    >,
+    default: undefined,
+  },
+  max: { type: Number, default: 100 },
+  min: { type: Number, default: 0 },
+  range: { type: Boolean, default: false },
+  reverse: { type: Boolean, default: false },
+  step: { type: Number, default: 1 },
+  tooltipFormatter: { type: Function as PropType<(value: number) => VNode | string | number>, default: undefined },
+  tooltipPlacement: { type: String as PropType<PopperPlacement>, default: undefined },
+  tooltipVisible: { type: Boolean, default: undefined },
+  vertical: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: number | number[]) => void>(),
-  onChange: IxPropTypes.emit<(value: number | number[]) => void>(),
-  onInput: IxPropTypes.emit<(value: number | number[]) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-}
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: number | number[]) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(newValue: number | number[], oldVal: number | number[]) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+} as const
 
 export interface SliderBindings {
   focus: (options?: FocusOptions) => void
@@ -55,11 +57,11 @@ export type SliderInstance = InstanceType<DefineComponent<SliderProps, SliderBin
 
 // slider thumb
 export const sliderThumbProps = {
-  value: IxPropTypes.number,
+  value: { type: Number, default: undefined },
 
   // events
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 }
 
 export interface SliderThumbBindings {
@@ -80,7 +82,7 @@ export type SliderThumbInstance = InstanceType<DefineComponent<SliderThumbProps,
 
 // slider marks
 export const sliderMarksProps = {
-  onClickMark: IxPropTypes.emit<(evt: MouseEvent | TouchEvent, markValue: number) => void>(),
+  onClickMark: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent | TouchEvent, markValue: number) => void>>,
 }
 
 export type SliderMarksProps = ExtractInnerPropTypes<typeof sliderMarksProps>

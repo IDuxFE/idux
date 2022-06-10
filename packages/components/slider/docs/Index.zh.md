@@ -29,8 +29,7 @@ order: 0
 | `tooltipPlacement` | 设置 `tooltip` 显示位置 | `string` | `auto` | - | 参考 [Tooltip](/components/tooltip/) |
 | `tooltipVisible` | 设置 `tooltip` 显示状态 | `boolean` | - | - | `tooltip` 默认为 `hover` 和拖拽时显示，`tooltipVisible` 设置为 `true` 则始终显示，反之则始终不显示 |
 | `vertical` | 设置垂直状态 | `boolean` | `false` | - | - |
-| `onInput` | 拖动滑块时触发 | `(value: number) => void` | - | - | - |
-| `onChange` | `Slider` 的值改变后触发(`mouseup` 阶段触发) | `(value: number) => void` | - | - | - |
+| `onChange` | 值改变后的回调 | `(newValue: number | number[], oldVal: number | number[]) => void` | - | - | - |
 | `onFocus` | 获取焦点时触发的回调 | `(evt: FocusEvent) => void` | - | - | - |
 | `onBlur` | 失去焦点时触发的回调 | `(evt: FocusEvent) => void` | - | - | - |
 
