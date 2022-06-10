@@ -510,6 +510,7 @@ export interface TreeConfig {
   blocked: boolean
   childrenKey: string
   expandIcon: string | [string, string]
+  draggableIcon: string
   getKey: string | ((data: TreeNode) => VKey)
   labelKey: string
   /**

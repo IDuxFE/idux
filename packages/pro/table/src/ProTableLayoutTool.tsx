@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
@@ -20,7 +20,10 @@ import { ProTableColumn } from './types'
 export default defineComponent({
   name: 'IxProTableLayoutTool',
   setup(_, { slots }) {
-    const { locale, mergedPrefixCls, mergedColumns, resetColumns } = inject(proTableToken)!
+    const { locale, mergedPrefixCls, mergedColumnMap, mergedColumns, resetColumns } = inject(proTableToken)!
+
+    // 判断是否有子节点，处理tree展开节点样式
+    const hasChildren = computed(() => mergedColumns.value.length !== mergedColumnMap.value.size)
 
     // 只需要判断第一层的即可
     const hiddenColumns = computed(() => mergedColumns.value.filter(column => column.visible === false))
@@ -56,8 +59,13 @@ export default defineComponent({
           <IxIcon name="setting" />
         </span>
       )
+      const classes = normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-tree-without-children`]: !hasChildren.value,
+      })
+
       return (
-        <IxPopover v-slots={popoverSlots} class={prefixCls} placement="bottomEnd" trigger="click">
+        <IxPopover v-slots={popoverSlots} class={classes} placement="bottomEnd" trigger="click">
           {triggerNode}
         </IxPopover>
       )

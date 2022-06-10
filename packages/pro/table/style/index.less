@@ -4,6 +4,15 @@
   .reset-component();
 
   &-layout-tool {
+
+    &-tree-without-children {
+      .@{tree-prefix} {
+        &-node-expand-noop {
+          width: 0;
+        }
+      }
+    }
+
     .@{tree-prefix} {
       &-node {
         &-content-suffix {

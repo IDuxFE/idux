@@ -64,7 +64,7 @@ export default defineComponent({
     )
     const flattedNodes = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
     const checkableContext = useCheckable(props, mergedNodeMap)
-    const dragDropContext = useDragDrop(props, expandableContext)
+    const dragDropContext = useDragDrop(props, config, expandableContext)
     const selectableContext = useSelectable(props, mergedNodeMap)
 
     provide(treeToken, {
@@ -100,7 +100,7 @@ export default defineComponent({
       const { blocked = config.blocked, showLine = config.showLine } = props
       return {
         [prefixCls]: true,
-        [`${prefixCls}-active`]: activeKey.value !== undefined,
+        [`${prefixCls}-active`]: !isNil(activeKey.value),
         [`${prefixCls}-blocked`]: blocked,
         [`${prefixCls}-focused`]: focused.value,
         [`${prefixCls}-show-line`]: showLine,

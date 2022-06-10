@@ -12,6 +12,7 @@ import type {
   TreeCheckStrategy,
   TreeCustomAdditional,
   TreeDragDropOptions,
+  TreeDroppable,
   TreeNode,
   TreeNodeDisabled,
 } from '@idux/components/tree'
@@ -34,6 +35,9 @@ export const proTreeProps = {
   dataSource: { type: Array as PropType<TreeNode[]>, default: undefined },
   disabled: { type: Function as PropType<(node: TreeNode) => boolean | TreeNodeDisabled>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  draggable: { type: Boolean, default: false },
+  draggableIcon: { type: String, default: undefined },
+  droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   expandIcon: {
     type: [String, Array] as PropType<string | [string, string]>,
     default: () => ['minus-square', 'plus-square'],

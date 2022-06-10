@@ -951,4 +951,60 @@ describe('Tree', () => {
 
     expect(blurFn).toBeCalled()
   })
+
+  test('draggableIcon work', async () => {
+    const wrapper = TreeMount({
+      props: {
+        dataSource: [
+          {
+            label: 'Node 0',
+            key: '0',
+            children: [
+              {
+                label: 'Node 0-0',
+                key: '0-0',
+                disabled: { drag: true },
+              },
+              {
+                label: 'Node 0-1',
+                key: '0-1',
+              },
+              {
+                label: 'Node 0-2',
+                key: '0-2',
+              },
+            ],
+          },
+        ],
+        draggable: true,
+      },
+    })
+
+    let allDraggableIconNodes = wrapper.findAll('.ix-tree-node-draggable-icon .ix-icon-holder')
+    const allDraggableIconNoopNodes = wrapper.findAll('.ix-tree-node-draggable-icon-noop')
+    expect(allDraggableIconNodes.length).toBe(3)
+    expect(allDraggableIconNoopNodes.length).toBe(1)
+
+    await wrapper.setProps({
+      draggableIcon: 'setting',
+    })
+
+    allDraggableIconNodes = wrapper.findAll('.ix-tree-node-draggable-icon .ix-icon-setting')
+    expect(allDraggableIconNodes.length).toBe(3)
+  })
+
+  test('draggableIcon slots work', async () => {
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        draggable: true,
+      },
+      slots: {
+        draggableIcon: () => h(IxIcon, { name: 'setting' }),
+      },
+    })
+
+    const allDraggableIconNodes = wrapper.findAll('.ix-tree-node-draggable-icon .ix-icon-setting')
+    expect(allDraggableIconNodes.length).toBe(4)
+  })
 })

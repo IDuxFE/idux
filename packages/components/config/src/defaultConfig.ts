@@ -326,6 +326,7 @@ export const defaultConfig: GlobalConfig = {
     blocked: false,
     childrenKey: 'children',
     expandIcon: 'right',
+    draggableIcon: 'holder',
     getKey: 'key',
     labelKey: 'label',
     showLine: false,

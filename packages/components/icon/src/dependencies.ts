@@ -27,6 +27,7 @@ import {
   ExclamationCircle,
   ExclamationCircleFilled,
   FilterFilled,
+  Holder,
   InfoCircle,
   InfoCircleFilled,
   Left,
@@ -73,6 +74,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   ExclamationCircle, // Message Result Alert Notification
   ExclamationCircleFilled, // Modal Popconfirm
   FilterFilled, // Table
+  Holder, // tree
   InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
   Left, // date-panel

@@ -130,6 +130,7 @@ export default defineComponent({
         customAdditional,
         dataSource,
         draggable,
+        draggableIcon,
         empty,
         expandIcon,
         multiple,
@@ -164,6 +165,7 @@ export default defineComponent({
         leafLineIcon: treeSelectSlots.leafLineIcon,
         empty: treeSelectSlots.empty,
         expandIcon: treeSelectSlots.expandIcon,
+        draggableIcon: treeSelectSlots.draggableIcon,
       }
 
       const children = [
@@ -182,6 +184,7 @@ export default defineComponent({
           checkStrategy={checkStrategy}
           dataSource={dataSource}
           draggable={draggable}
+          draggableIcon={draggableIcon}
           droppable={droppable}
           disabled={treeDisabled}
           empty={empty}
