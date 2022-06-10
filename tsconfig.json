@@ -27,6 +27,7 @@
       "@idux/components/*": ["./packages/components/*"],
       "@idux/pro/*": ["./packages/pro/*"],
       "@idux/site/*": ["./packages/site/*"],
+      "@idux/*": ["./packages/*"],
       "@tests": ["./tests"],
       "@tests/*": ["./tests/*"]
     },

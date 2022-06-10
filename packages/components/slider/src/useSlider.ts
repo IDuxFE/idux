@@ -160,7 +160,6 @@ export function useSlider(props: SliderProps): SliderBindings {
 
   function handleMouseUpOnDocument() {
     stopDragging()
-    callEmit(props.onChange, toRaw(valuesRef.value))
   }
 
   function handleMouseUp() {
@@ -175,9 +174,11 @@ export function useSlider(props: SliderProps): SliderBindings {
     if (valuesRef.value[index] !== newValue) {
       const newValues = valuesRef.value.slice()
       newValues[index] = newValue
+      const oldVal = toRaw(accessor.valueRef.value)
       const modelValue = props.range ? newValues : newValues[0]
       accessor.setValue(modelValue)
-      isDragging.value ? callEmit(props.onInput, modelValue) : callEmit(props.onChange, modelValue)
+
+      callEmit(props.onChange, modelValue, oldVal)
 
       // sync position of thumb
       nextTick(() => setValues())
@@ -286,7 +287,7 @@ export function useSlider(props: SliderProps): SliderBindings {
       Logger.error('components/slider', `step(${props.step}) should be greater than 0.`)
     }
 
-    const { value: modelValue } = accessor.valueRef
+    const { value: modelValue = 0 } = accessor.valueRef
     let val: number[]
     if (props.range) {
       if (!Array.isArray(modelValue)) {
