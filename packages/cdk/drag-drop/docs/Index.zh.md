@@ -55,7 +55,7 @@ export interface DraggableOptions {
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `disabled` | 是否禁用  | `boolean` | - | - | - |
-| `is` | 拖拽的元素或者组件 | `string | Component` | `'div'` | - | - |
+| `is` | 拖拽的元素或者组件 | `string \| Component` | `'div'` | - | - |
 | `onStart` | 拖拽开始事件  | - | `DraggableEvent` | - | - |
 | `onMove` | 拖拽过程中事件  | - | `DraggableEvent` | - | - |
 | `onEnd` | 拖拽结束事件  | - | `DraggableEvent` | - | - |

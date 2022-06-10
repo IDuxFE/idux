@@ -74,7 +74,7 @@ export default defineComponent({
     return () => {
       const { editable, toolbar, customAdditional, customTag, ...restProps } = props
 
-      const mergedCustomAdditional: TableCustomAdditional = hasResizable.value
+      const mergedCustomAdditional: TableCustomAdditional | undefined = hasResizable.value
         ? {
             ...customAdditional,
             headCell: ({ column }) => {
@@ -83,7 +83,7 @@ export default defineComponent({
             },
           }
         : customAdditional
-      const mergedCustomTag: TableCustomTag = hasResizable.value
+      const mergedCustomTag: TableCustomTag | undefined = hasResizable.value
         ? {
             headCell: ResizableHeadCell,
             ...customAdditional,
