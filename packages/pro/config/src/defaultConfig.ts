@@ -15,7 +15,6 @@ export const defaultConfig: ProGlobalConfig = {
 
   table: {
     columnIndexable: {
-      width: 40,
       align: 'center',
       customCell: ({ rowIndex }) => rowIndex,
     },

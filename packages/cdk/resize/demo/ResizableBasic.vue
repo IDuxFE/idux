@@ -88,7 +88,7 @@
     }
   }
 
-  &:not(&-resizing) &-handler {
+  &-handler {
     &-top,
     &-bottom {
       cursor: ns-resize;

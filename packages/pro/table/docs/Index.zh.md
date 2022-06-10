@@ -83,7 +83,6 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 export const defaultConfig: ProGlobalConfig = {
   table: {
     columnIndexable: {
-      width: 40,
       align: 'center',
       customCell: ({ rowIndex }) => rowIndex,
     },

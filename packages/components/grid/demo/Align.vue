@@ -1,5 +1,5 @@
 <template>
-  <IxDivider position="left" dashed>Align start</IxDivider>
+  <IxDivider labelPlacement="start" dashed>Align start</IxDivider>
   <IxRow justify="space-between" align="start">
     <IxCol :span="4">
       <div class="height-80">col-4</div>
@@ -15,7 +15,7 @@
     </IxCol>
   </IxRow>
 
-  <IxDivider position="left" dashed>Align center</IxDivider>
+  <IxDivider labelPlacement="start" dashed>Align center</IxDivider>
   <IxRow justify="space-between" align="center">
     <IxCol :span="4">
       <div class="height-80">col-4</div>
@@ -31,7 +31,7 @@
     </IxCol>
   </IxRow>
 
-  <IxDivider position="left" dashed>Align end</IxDivider>
+  <IxDivider labelPlacement="start" dashed>Align end</IxDivider>
   <IxRow justify="space-between" align="end">
     <IxCol :span="4">
       <div class="height-80">col-4</div>
