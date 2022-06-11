@@ -33,6 +33,7 @@ order: 0
 | `dataSource` | 树型数据数组,参见[TreeSelectNode](#TreeSelectNode) | `TreeSelectNode[]` | `[]` | - | - |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
+| `draggableIcon` | 拖拽节点图标 | `string \| #draggableIcon` | `holder` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](/components/tree/zh#TreeDroppable) | `TreeDroppable` | - | - | - |
 | `empty` | 空数据时的内容 | `string \|` [EmptyProps](/components/empty/zh#EmptyProps) | - | - | - |
 | `expandIcon` | 树组件中的展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |

@@ -33,6 +33,7 @@ export const treeProps = {
   dataSource: IxPropTypes.array<TreeNode>().def(() => []),
   disabled: IxPropTypes.func<(node: TreeNode) => boolean | TreeNodeDisabled>(),
   draggable: IxPropTypes.bool.def(false),
+  draggableIcon: { type: String, default: undefined },
   droppable: IxPropTypes.func<TreeDroppable>(),
   empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },

@@ -43,6 +43,7 @@ export const treeSelectProps = {
   dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
   draggable: { type: Boolean, default: false },
+  draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },

@@ -10,6 +10,7 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
 
 import { treeToken } from '../token'
@@ -30,6 +31,8 @@ export default defineComponent({
       mergedPrefixCls,
       activeKey,
       selectedKeys,
+      slots,
+      draggableIcon,
       dragKey,
       dropKey,
       dropParentKey,
@@ -121,6 +124,7 @@ export default defineComponent({
       const { isLeaf, label, level, rawNode, expanded, checkDisabled, dragDisabled, dropDisabled, node } = props
       const { showLine, checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
+      const draggableIconNode = slots.draggableIcon?.() ?? <IxIcon name={draggableIcon.value} />
       const currNode = nodeMap.get(key)
       const noopIdentUnitArr: number[] = []
       if (treeProps.showLine) {
@@ -155,6 +159,11 @@ export default defineComponent({
           {...customAdditional}
         >
           <Indent level={level} noopIdentUnitArr={noopIdentUnitArr} prefixCls={mergedPrefixCls.value} />
+          {mergedDraggable ? (
+            <span class={`${mergedPrefixCls.value}-node-draggable-icon`}>{draggableIconNode}</span>
+          ) : (
+            draggable && <span class={`${mergedPrefixCls.value}-node-draggable-icon-noop`}></span>
+          )}
           {isLeaf && showLine ? (
             <LeafLine />
           ) : (

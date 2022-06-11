@@ -26,8 +26,13 @@
 
       &:hover {
         background-color: @tree-node-hover-background-color;
-        .@{tree-node-prefix}-content {
-          background-color: @tree-node-hover-background-color;
+        .@{tree-node-prefix} {
+          &-draggable-icon {
+            opacity: 1;
+          }
+          &-content {
+            background-color: @tree-node-hover-background-color;
+          }
         }
       }
 
@@ -128,6 +133,18 @@
     &-noop-unit,
     &-unit {
       display: inline-block;
+      width: @tree-node-content-height;
+    }
+  }
+
+  &-draggable-icon {
+    cursor: pointer;
+    opacity: .4;
+    text-align: center;
+    transition: opacity @transition-duration-base @ease-in-out;
+    width: @tree-node-content-height;
+
+    &-noop {
       width: @tree-node-content-height;
     }
   }

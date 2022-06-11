@@ -10,6 +10,7 @@ import { type ComputedRef, type Ref, computed, onBeforeUnmount, ref } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
+import { TreeConfig } from '@idux/components/config'
 
 import { type TreeDropType, type TreeDroppable, type TreeProps } from '../types'
 import { getChildrenKeys } from '../utils'
@@ -17,6 +18,7 @@ import { type MergedNode } from './useDataSource'
 import { type ExpandableContext } from './useExpandable'
 
 export interface DragDropContext {
+  draggableIcon: ComputedRef<string>
   dragKey: ComputedRef<VKey | undefined>
   dropKey: ComputedRef<VKey | undefined>
   dropParentKey: Ref<VKey | undefined>
@@ -29,7 +31,13 @@ export interface DragDropContext {
   handleDrop: (evt: DragEvent, node: MergedNode) => void
 }
 
-export function useDragDrop(props: TreeProps, { expandedKeys, setExpandedKeys }: ExpandableContext): DragDropContext {
+export function useDragDrop(
+  props: TreeProps,
+  config: TreeConfig,
+  { expandedKeys, setExpandedKeys }: ExpandableContext,
+): DragDropContext {
+  const draggableIcon = computed(() => props.draggableIcon ?? config.draggableIcon)
+
   const dragNodeRef = ref<MergedNode>()
   const dragChildrenKeys = ref<VKey[]>()
 
@@ -163,6 +171,7 @@ export function useDragDrop(props: TreeProps, { expandedKeys, setExpandedKeys }:
   }
 
   return {
+    draggableIcon,
     dragKey: computed(() => dragNodeRef.value?.key),
     dropKey: computed(() => dropNodeRef.value?.key),
     dropParentKey,
