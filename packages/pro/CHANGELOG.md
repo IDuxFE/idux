@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.15](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-06-13)
+
+
+### Features
+
+* **comp:tree*:** add draggableIcon prop ([#948](https://github.com/IDuxFE/idux/issues/948)) ([28b7031](https://github.com/IDuxFE/idux/commit/28b7031fe5325258d488abcf2c23cd611ecac802))
+* **pro:table:** support resizable column ([#945](https://github.com/IDuxFE/idux/issues/945)) ([47b90dd](https://github.com/IDuxFE/idux/commit/47b90ddf514e2cf67d76d074b594c414f70b7c33))
+
+
+
+
+
 # [1.0.0-beta.14](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-06-07)
 
 
