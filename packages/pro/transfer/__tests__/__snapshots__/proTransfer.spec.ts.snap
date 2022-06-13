@@ -46,6 +46,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <div
               class="ix-table-container"
             >
+              
               <div
                 class="ix-table-content"
               >
@@ -932,6 +933,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                   <!---->
                 </table>
               </div>
+              
             </div>
             <!---->
             <!---->
@@ -1029,6 +1031,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <div
               class="ix-table-container"
             >
+              
               <div
                 class="ix-table-content"
               >
@@ -1249,6 +1252,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                   <!---->
                 </table>
               </div>
+              
             </div>
             <!---->
             <!---->

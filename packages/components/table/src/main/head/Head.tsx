@@ -12,15 +12,20 @@ import HeadRow from './HeadRow'
 
 export default defineComponent({
   setup() {
-    const { mergedRows } = inject(TABLE_TOKEN)!
+    const { props: tableProps, mergedRows } = inject(TABLE_TOKEN)!
 
     return () => {
+      const rows = mergedRows.value
+      const customAdditionalFn = tableProps.customAdditional?.head
+      const customAdditional = customAdditionalFn ? customAdditionalFn({ rows }) : undefined
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (tableProps.customTag?.head ?? 'thead') as any
       return (
-        <thead>
-          {mergedRows.value.map((columns, rowIndex) => (
+        <Tag {...customAdditional}>
+          {rows.map((columns, rowIndex) => (
             <HeadRow key={rowIndex} columns={columns} />
           ))}
-        </thead>
+        </Tag>
       )
     }
   },

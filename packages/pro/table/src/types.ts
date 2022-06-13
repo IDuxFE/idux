@@ -37,7 +37,7 @@ import type { TextareaProps } from '@idux/components/textarea'
 import type { TimeRangePickerProps } from '@idux/components/time-picker'
 import type { TooltipProps } from '@idux/components/tooltip'
 import type { TreeSelectProps } from '@idux/components/tree-select'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
 export const proTableProps = {
   expandedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -56,13 +56,14 @@ export const proTableProps = {
   getKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
+  layoutTool: { type: Boolean, default: true },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   sticky: { type: [Boolean, Object] as PropType<boolean | TableSticky>, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
-  toolbar: { type: Array as PropType<Array<ProTableToolbar>>, default: undefined },
+  toolbar: { type: Array as PropType<Array<VNodeChild>>, default: undefined },
   virtual: { type: Boolean, default: false },
 
   // events
@@ -96,17 +97,17 @@ export type ProTableLayoutToolComponent = DefineComponent<
 >
 export type ProTableLayoutToolInstance = InstanceType<DefineComponent<ProTableLayoutToolProps>>
 
-export type ProTableColumn<T = any, V = any, CT = 'input'> =
-  | ProTableColumnBase<T, V, CT>
-  | ProTableColumnExpandable<T, V, CT>
+export type ProTableColumn<T = any, V = any, FT = 'input'> =
+  | ProTableColumnBase<T, V, FT>
+  | ProTableColumnExpandable<T, V, FT>
   | ProTableColumnSelectable<T>
   | ProTableColumnIndexable<T, V>
 
-export interface ProTableColumnBase<T = any, V = any, CT = 'input'>
+export interface ProTableColumnBase<T = any, V = any, FT = 'input'>
   extends TableColumnBase<T, V>,
     ProTableColumnResizable,
     ProTableColumnLayoutConfig,
-    ProTableColumnCellTypeWithProps<CT> {
+    ProTableColumnFieldTypeWithProps<FT> {
   copyable?: boolean
   editable?: boolean
   tooltip?: string | TooltipProps
@@ -115,9 +116,9 @@ export interface ProTableColumnBase<T = any, V = any, CT = 'input'>
   children?: ProTableColumn<T>[]
 }
 
-export interface ProTableColumnExpandable<T = any, V = any, CT = 'input'>
+export interface ProTableColumnExpandable<T = any, V = any, FT = 'input'>
   extends Omit<TableColumnExpandable<T, V>, keyof ProTableColumnBase>,
-    ProTableColumnBase<T, V, CT> {}
+    ProTableColumnBase<T, V, FT> {}
 
 export interface ProTableColumnSelectable<T = any>
   extends TableColumnSelectable<T>,
@@ -141,7 +142,7 @@ export type ProTableColumnResizable = {
   resizable?: boolean
 }
 
-export interface ProTableColumnCellProps {
+export interface ProTableColumnFieldProps {
   cascader: CascaderProps
   checkbox: CheckboxProps
   date: DatePickerProps
@@ -158,20 +159,11 @@ export interface ProTableColumnCellProps {
   treeSelect: TreeSelectProps
 }
 
-export type ProTableColumnCellType = keyof ProTableColumnCellProps
+export type ProTableColumnFieldType = keyof ProTableColumnFieldProps
 
-export type ProTableColumnCellTypeWithProps<CT> = {
-  cellType?: CT
-  format?: string
-  fieldProps?: CT extends ProTableColumnCellType ? ProTableColumnCellProps[CT] : Record<string, any>
+export type ProTableColumnFieldTypeWithProps<FT> = {
+  fieldType?: FT
+  fieldProps?: FT extends ProTableColumnFieldType ? ProTableColumnFieldProps[FT] : Record<string, any>
   fieldValidators?: ValidatorFn | ValidatorFn[] | ValidatorOptions
+  format?: string
 }
-
-export type ProTableToolbar =
-  | 'layout'
-  | {
-      key?: VKey
-      trigger: string | VNode
-      onClick?: () => void
-      [key: string]: unknown
-    }

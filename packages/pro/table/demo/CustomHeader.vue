@@ -1,12 +1,16 @@
 <template>
-  <IxProTable :columns="columns" :dataSource="data" :pagination="false">
+  <IxProTable :columns="columns" :dataSource="data" :layoutTool="false" :pagination="false">
     <template #header>
       <IxHeader title="Custom header">
         <template #suffix>
           <IxSpace align="center">
             <IxButton>Load</IxButton>
             <IxIcon name="reload"></IxIcon>
-            <IxProTableLayoutTool></IxProTableLayoutTool>
+            <IxProTableLayoutTool>
+              <span>
+                <IxIcon name="setting" />
+              </span>
+            </IxProTableLayoutTool>
           </IxSpace>
         </template>
       </IxHeader>

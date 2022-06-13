@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
+import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -113,14 +113,22 @@ export default defineComponent({
       const { column } = props
 
       const { type, additional, titleColSpan, titleRowSpan } = column as HeadColumn
-      const prefixCls = mergedPrefixCls.value
-
-      let _title: string | undefined
-      let children: VNodeChild | undefined
 
       if (type === 'scroll-bar') {
-        children = undefined
-      } else if (type === 'selectable') {
+        return (
+          <th
+            class={classes.value}
+            style={style.value}
+            colSpan={titleColSpan === 1 ? undefined : titleColSpan}
+            rowSpan={titleRowSpan === 1 ? undefined : titleRowSpan}
+            onClick={onClick}
+          ></th>
+        )
+      }
+      const prefixCls = mergedPrefixCls.value
+      let _title: string | undefined
+      let children: VNodeChild | undefined
+      if (type === 'selectable') {
         children = <SelectableTrigger />
       } else {
         const { title, customTitle, ellipsis = tableProps.ellipsis, sortable, filterable } = column as HeadColumn

@@ -156,6 +156,7 @@ export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
 export interface TableCustomAdditional<T = any> {
   bodyCell?: (data: { column: TableColumn<T>; record: T; rowIndex: number }) => Record<string, any> | undefined
   bodyRow?: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined
+  head?: (data: { rows: TableColumn<T>[][] }) => Record<string, any> | undefined
   headCell?: (data: { column: TableColumn<T> }) => Record<string, any> | undefined
   headRow?: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined
 }
@@ -163,6 +164,7 @@ export interface TableCustomAdditional<T = any> {
 export interface TableCustomTag {
   bodyCell?: string | Component
   bodyRow?: string | Component
+  head?: string | Component
   headCell?: string | Component
   headRow?: string | Component
 }
