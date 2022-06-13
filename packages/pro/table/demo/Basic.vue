@@ -20,8 +20,9 @@
 import { h } from 'vue'
 
 import { IxButton } from '@idux/components/button'
+import { IxIcon } from '@idux/components/icon'
 import { IxTag } from '@idux/components/tag'
-import { ProTableColumn, ProTableToolbar } from '@idux/pro/table'
+import { ProTableColumn } from '@idux/pro/table'
 
 interface Data {
   key: number
@@ -32,10 +33,9 @@ interface Data {
   description: string
 }
 
-const toolbar: ProTableToolbar[] = [
-  { key: 'load', trigger: h(IxButton, null, () => 'Load') },
-  { key: 'reload', trigger: 'reload', onClick: () => console.log('reload data'), title: 'reload' },
-  'layout',
+const toolbar = [
+  h(IxButton, null, () => 'Load'),
+  h(IxIcon, { name: 'reload', title: 'reload', onClick: () => console.log('reload data') }),
 ]
 
 const onColumnsChange = console.log

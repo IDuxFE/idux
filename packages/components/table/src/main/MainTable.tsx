@@ -7,7 +7,6 @@
 
 import {
   type CSSProperties,
-  type VNodeTypes,
   computed,
   defineComponent,
   inject,
@@ -144,19 +143,20 @@ export default defineComponent({
     }
 
     return () => {
-      let children: VNodeTypes
+      const children = slots.default ? slots.default() : []
 
       const prefixCls = mergedPrefixCls.value
 
       if (scrollHeight.value || isSticky.value) {
         const { offsetTop } = mergedSticky.value
-        const tableHead = !props.headless && (
-          <FixedHolder offsetTop={offsetTop}>
-            <Head></Head>
-          </FixedHolder>
-        )
+        if (!props.headless) {
+          children.push(
+            <FixedHolder offsetTop={offsetTop}>
+              <Head></Head>
+            </FixedHolder>,
+          )
+        }
 
-        let tableBody: VNodeTypes
         if (props.virtual && props.scroll) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
             renderBodyRow(item, index, slots, expandable.value)
@@ -177,7 +177,7 @@ export default defineComponent({
             !isNumber(height || y) &&
             Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
 
-          tableBody = (
+          children.push(
             <CdkVirtualScroll
               ref={scrollBodyRef}
               style={contentStyle.value}
@@ -192,25 +192,25 @@ export default defineComponent({
               onScroll={handleScroll}
               onScrolledBottom={onScrolledBottom}
               onScrolledChange={handleScrolledChange}
-            />
+            />,
           )
         } else {
-          tableBody = (
+          children.push(
             <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
               <table style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
                 {false && <Foot></Foot>}
               </table>
-            </div>
+            </div>,
           )
         }
 
-        const sticky = isSticky.value ? <StickyScroll></StickyScroll> : null
-
-        children = [tableHead, tableBody, sticky]
+        if (isSticky.value) {
+          children.push(<StickyScroll></StickyScroll>)
+        }
       } else {
-        children = (
+        children.push(
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
             <table style={tableStyle.value}>
               <ColGroup></ColGroup>
@@ -218,7 +218,7 @@ export default defineComponent({
               <Body></Body>
               {false && <Foot></Foot>}
             </table>
-          </div>
+          </div>,
         )
       }
 

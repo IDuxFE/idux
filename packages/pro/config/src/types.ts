@@ -6,7 +6,7 @@
  */
 
 import type { ProLocale } from '@idux/pro/locales'
-import type { ProTableColumnIndexable, ProTableToolbar } from '@idux/pro/table'
+import type { ProTableColumnIndexable } from '@idux/pro/table'
 
 export interface ProGlobalConfig {
   common: ProCommonConfig
@@ -24,7 +24,6 @@ export interface ProCommonConfig {
 
 export interface ProTableConfig {
   columnIndexable: Omit<ProTableColumnIndexable, 'type'>
-  toolbar: ProTableToolbar[]
 }
 
 export interface ProTreeConfig {

@@ -19,7 +19,8 @@ import { ProTableColumn } from './types'
 
 export default defineComponent({
   name: 'IxProTableLayoutTool',
-  setup(_, { slots }) {
+  inheritAttrs: false,
+  setup(_, { attrs, slots }) {
     const { locale, mergedPrefixCls, mergedColumnMap, mergedColumns, resetColumns } = inject(proTableToken)!
 
     // 判断是否有子节点，处理tree展开节点样式
@@ -53,10 +54,10 @@ export default defineComponent({
         content: () => <LayoutToolContent />,
       }
       const triggerNode = slots.default ? (
-        slots.default()
+        slots.default({ attrs })
       ) : (
-        <span class={`${prefixCls}-trigger`} title={locale.table.layout.title}>
-          <IxIcon name="setting" />
+        <span {...attrs} class={`${prefixCls}-trigger`} title={locale.table.layout.title}>
+          <IxIcon name="ellipsis" />
         </span>
       )
       const classes = normalizeClass({

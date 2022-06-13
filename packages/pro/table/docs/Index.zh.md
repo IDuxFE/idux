@@ -15,8 +15,9 @@ subtitle: 高级表格
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `columns` | 表格列的配置描述 | `ProTableColumn[]` | - | - |  参见[ProTableColumn](#ProTableColumn)  |
-| `toolbar` | 表格的工具栏 | `ProTableToolbar[] \| #toolbar` | `['layout']` | ✅ | - |
-| `onColumnsChange` | 表格列的配置发生改变后的回调 | `(columns: ProTableColumn[]) => void` | `['layout']` | ✅ | - |
+| `layoutTool` | 是否显示布局设置工具按钮 | `boolean` | `true` | - | 当设置为 `false` 时，你也可以使用 `IxProTableLayoutTool` 来自定义它的位置和展示形式 |
+| `toolbar` | 表格的工具栏 | `VNode[] \| #toolbar` | - | - | - |
+| `onColumnsChange` | 表格列的配置发生改变后的回调 | `(columns: ProTableColumn[]) => void` | - | - | - |
 
 更多属性请参考 [TableProps](/components/table/zh#TableProps).
 
