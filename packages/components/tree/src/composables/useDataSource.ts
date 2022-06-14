@@ -194,7 +194,7 @@ function hiddenIrrelevantNodes(mergedNodes: MergedNode[] = [], searchedKeysMap: 
     // isFirst 和 isLast控制连接线，每次需要先复原，最后通过result里面的数据再重新设置
     node.isFirst = index === 0
     node.isLast = index === mergedNodesLength - 1
-    if (searchedKeysMap.has(node.key)) {
+    if (searchedKeysMap.has(node.key) || searchedKeysMap.size == 0) {
       node.hidden = false
       result.push(node)
     } else {
@@ -221,9 +221,8 @@ function hiddenIrrelevantNodes(mergedNodes: MergedNode[] = [], searchedKeysMap: 
 function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>, searchedKeysMap: Map<VKey, number>) {
   const flattedNodes: MergedNode[] = []
   const stack: MergedNode[] = []
-  if (searchedKeysMap.size) {
-    hiddenIrrelevantNodes(mergedNodes, searchedKeysMap)
-  }
+
+  hiddenIrrelevantNodes(mergedNodes, searchedKeysMap)
 
   mergedNodes.forEach(node => {
     stack.push(node)

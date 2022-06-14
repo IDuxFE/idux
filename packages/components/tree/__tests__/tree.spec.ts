@@ -902,6 +902,12 @@ describe('Tree', () => {
     allNodes = wrapper.findAll('.ix-tree-node')
     expect(allNodes.length).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
+
+    await allNodes[0].find('.ix-tree-node-expand').trigger('click')
+
+    allNodes = wrapper.findAll('.ix-tree-node')
+    expect(allNodes.length).toBe(4)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   test('searchFn work', async () => {
