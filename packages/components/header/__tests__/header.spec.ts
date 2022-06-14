@@ -61,6 +61,13 @@ describe('Header', () => {
     expect(onPrefixClick).toBeCalledTimes(2)
   })
 
+  test('prefix is empty string work', async () => {
+    const wrapper = HeaderMount({
+      props: { prefix: '' },
+    })
+    expect(wrapper.find('.ix-header-prefix').exists()).toBe(false)
+  })
+
   test('prefix slot work', async () => {
     const wrapper = HeaderMount({
       props: { prefix: 'up' },
@@ -91,6 +98,13 @@ describe('Header', () => {
     await wrapper.find('.ix-header-suffix').trigger('click')
 
     expect(onSuffixClick).toBeCalledTimes(2)
+  })
+
+  test('suffix is empty string work', async () => {
+    const wrapper = HeaderMount({
+      props: { suffix: '' },
+    })
+    expect(wrapper.find('.ix-header-suffix').exists()).toBe(false)
   })
 
   test('suffix slot work', async () => {
