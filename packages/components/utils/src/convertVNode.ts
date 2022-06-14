@@ -47,7 +47,7 @@ export function convertIconVNode(
     return iconSlot(params)
   }
 
-  return isString(iconName) ? createVNode(IxIcon, { name: iconName }, null) : iconName
+  return isString(iconName) && iconName !== '' ? createVNode(IxIcon, { name: iconName }, null) : iconName
 }
 
 export function convertStringVNode(
