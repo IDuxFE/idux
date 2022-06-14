@@ -1,5 +1,5 @@
 // style dependencies
-import '@idux/components/style/core/default'
+
 import '@idux/components/_private/selector/style/themes/default'
 import '@idux/components/checkbox/style/themes/default'
 import '@idux/components/empty/style/themes/default'
