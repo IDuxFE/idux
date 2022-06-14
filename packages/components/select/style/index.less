@@ -24,7 +24,7 @@
     &-label {
       .ellipsis();
 
-      line-height: @select-line-height
+      line-height: @select-line-height;
     }
 
     .@{checkbox-prefix} + &-label {
@@ -43,13 +43,11 @@
     &-label {
       .ellipsis();
 
-      line-height: @select-line-height
+      line-height: @select-line-height;
     }
   }
 
   &-overlay {
-    .reset-scroll();
-
     z-index: @select-option-container-zindex;
     padding: @select-option-container-padding;
     background-color: @select-option-container-background-color;

@@ -55,12 +55,18 @@ node ./node_modules/@idux/components/bin icon
 // idux.ts
 import type { App } from "vue";
 
+// 如果不需要 reset 全局样式和滚动条样式，移除下面 2 行代码
+import "@idux/components/style/core/reset.default.css";
+import "@idux/components/style/core/reset-scroll.default.css";
+
+// 如果需要 css 按需加载，移除下面 2 行代码
+import "@idux/components/default.css";
+import "@idux/pro/default.css";
+
+// 如果需要 js 按需加载，移除下面 3 行代码
 import IduxCdk from "@idux/cdk";
 import IduxComponents from "@idux/components";
 import IduxPro from "@idux/pro";
-
-import "@idux/components/default.min.css";
-import "@idux/pro/default.min.css";
 
 import { createGlobalConfig } from "@idux/components/config";
 import {
@@ -73,7 +79,7 @@ import {
 addIconDefinitions(IDUX_ICON_DEPENDENCIES);
 
 // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
-// 注意：请确认图标的 svg 资源依旧被正确放入到 `public/idux-icons` 目录中
+// 注意：请确认图标的 svg 资源被正确放入到 `public/idux-icons` 目录中
 const loadIconDynamically = (iconName: string) => {
   return fetch(`/idux-icons/${iconName}.svg`).then((res) => res.text());
 };
@@ -165,7 +171,7 @@ export default {
     /* ... */
     Components({
       resolvers: [IduxResolver()],
-      // 可以通过指定 `importStyle` 来按需加载 css 代码
+      // 可以通过指定 `importStyle` 来按需加载 css 或 less 代码
       // 别忘了移除掉 idux.ts 中的样式导入代码
       // resolvers: [IduxResolver({ importStyle: 'css' })],
     }),

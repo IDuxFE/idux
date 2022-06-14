@@ -218,9 +218,9 @@ export const syncVersion = (distDirname: string): TaskFunction => {
   return syncVersion
 }
 
-export const buildStyle = (targetDirname: string, distDirname: string, isCdk: boolean): TaskFunction => {
+export const buildStyle = (targetDirname: string, distDirname: string, packageName: string): TaskFunction => {
   const buildStyle: TaskFunction = async done => {
-    await compileLess(targetDirname, distDirname, isCdk)
+    await compileLess(targetDirname, distDirname, packageName)
     done()
   }
   return buildStyle

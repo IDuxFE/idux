@@ -64,9 +64,9 @@ export const buildDeclaration = series(
 )
 
 export const buildStyle = series(
-  _buildStyle(cdkDirname, cdkDistDirname, true),
-  _buildStyle(componentsDirname, componentsDistDirname, false),
-  _buildStyle(proDirname, proDistDirname, false),
+  _buildStyle(cdkDirname, cdkDistDirname, 'cdk'),
+  _buildStyle(componentsDirname, componentsDistDirname, 'components'),
+  _buildStyle(proDirname, proDistDirname, 'pro'),
   complete('Style'),
 )
 
