@@ -29,26 +29,17 @@ export function useTransferOperations<T extends TransferData = TransferData>(
   transferDataContext: TransferDataContext<T>,
   transferSelectStateContext: TransferSelectStateContext,
 ): TransferOperationsContext {
-  const {
-    dataKeyMap,
-    sourceData,
-    targetData,
-    disabledSourceKeys,
-    disabledTargetKeys,
-    append,
-    remove,
-    clear,
-    getRowKey,
-  } = transferDataContext
+  const { dataKeyMap, sourceData, targetData, disabledSourceKeys, disabledTargetKeys, append, remove, clear, getKey } =
+    transferDataContext
   const { sourceSelectedKeys, targetSelectedKeys } = transferSelectStateContext
 
   const appendDisabled = computed(() => props.disabled || sourceSelectedKeys.value.length <= 0)
   const removeDisabled = computed(() => props.disabled || targetSelectedKeys.value.length <= 0)
   const appendAllDisabled = computed(
-    () => props.disabled || sourceData.value.every(item => disabledSourceKeys.value.has(getRowKey(item))),
+    () => props.disabled || sourceData.value.every(item => disabledSourceKeys.value.has(getKey.value(item))),
   )
   const clearDisabled = computed(
-    () => props.disabled || targetData.value.every(item => disabledTargetKeys.value.has(getRowKey(item))),
+    () => props.disabled || targetData.value.every(item => disabledTargetKeys.value.has(getKey.value(item))),
   )
 
   const triggerAppend = (keys?: VKey[]) => {

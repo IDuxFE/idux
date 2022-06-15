@@ -13,8 +13,7 @@ import type { PaginationProps } from '@idux/components/pagination'
 import { type ComputedRef, computed } from 'vue'
 
 import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
-
-import { type GetRowKey, useGetRowKey } from './useGetRowKey'
+import { type GetKeyFn, useGetKey } from '@idux/components/utils'
 
 export interface TransferDataContext<T extends TransferData = TransferData> {
   dataSource: ComputedRef<T[]>
@@ -35,7 +34,7 @@ export interface TransferDataContext<T extends TransferData = TransferData> {
   remove: (keys: VKey[]) => void
   clear: () => void
 
-  getRowKey: GetRowKey
+  getKey: ComputedRef<GetKeyFn>
 
   disabledKeys: ComputedRef<Set<VKey>>
   disabledSourceKeys: ComputedRef<Set<VKey>>
@@ -54,7 +53,7 @@ export function useTransferData<T extends TransferData = TransferData>(
   transferDataStrategies: TransferDataStrategies<T>,
   transferPaginationContext: TransferPaginationContext,
 ): TransferDataContext<T> {
-  const getRowKey = useGetRowKey(props, config)
+  const getKey = useGetKey(props, config, 'transfer')
   const {
     genDataKeys,
     genDataKeyMap,
@@ -66,7 +65,7 @@ export function useTransferData<T extends TransferData = TransferData>(
   } = transferDataStrategies
 
   const dataSource = computed(() => props.dataSource as T[])
-  const dataKeyMap = computed(() => genDataKeyMap(dataSource.value, getRowKey))
+  const dataKeyMap = computed(() => genDataKeyMap(dataSource.value, getKey.value))
 
   const [targetKeys, setTargetKeys] = useControlledProp(props, 'value', () => [])
   const [sourceSearchValue, setSourceSearchValue] = useState('')
@@ -80,13 +79,13 @@ export function useTransferData<T extends TransferData = TransferData>(
   }
 
   const separatedData = computed(() =>
-    separateDataSource(dataSource.value, dataKeyMap.value, targetKeySet.value, getRowKey),
+    separateDataSource(dataSource.value, dataKeyMap.value, targetKeySet.value, getKey.value),
   )
   const sourceData = computed(() => separatedData.value.sourceData)
   const targetData = computed(() => separatedData.value.targetData)
 
-  const sourceDataKeys = computed(() => genDataKeys(sourceData.value, getRowKey))
-  const targetDataKeys = computed(() => genDataKeys(targetData.value, getRowKey))
+  const sourceDataKeys = computed(() => genDataKeys(sourceData.value, getKey.value))
+  const targetDataKeys = computed(() => genDataKeys(targetData.value, getKey.value))
 
   const filteredDataSource = computed(() =>
     dataFilter(
@@ -121,19 +120,19 @@ export function useTransferData<T extends TransferData = TransferData>(
   )
 
   const append = (keys: VKey[]) => {
-    _append(keys, targetKeySet.value, getRowKey, handleChange)
+    _append(keys, targetKeySet.value, getKey.value, handleChange)
   }
   const remove = (keys: VKey[]) => {
-    _remove(keys, targetKeySet.value, getRowKey, handleChange)
+    _remove(keys, targetKeySet.value, getKey.value, handleChange)
   }
 
   const clear = () => {
     handleChange(Array.from(disabledTargetKeys.value))
   }
 
-  const disabledKeys = computed(() => genDisabledKeys(dataSource.value, getRowKey))
+  const disabledKeys = computed(() => genDisabledKeys(dataSource.value, getKey.value))
   const disabledTargetKeys = computed(() => {
-    const keys = genDisabledKeys(targetData.value, getRowKey)
+    const keys = genDisabledKeys(targetData.value, getKey.value)
 
     targetKeySet.value.forEach(key => {
       if (disabledKeys.value.has(key)) {
@@ -142,7 +141,7 @@ export function useTransferData<T extends TransferData = TransferData>(
     })
     return keys
   })
-  const disabledSourceKeys = computed(() => genDisabledKeys(sourceData.value, getRowKey))
+  const disabledSourceKeys = computed(() => genDisabledKeys(sourceData.value, getKey.value))
 
   return {
     dataSource,
@@ -163,7 +162,7 @@ export function useTransferData<T extends TransferData = TransferData>(
     remove,
     clear,
 
-    getRowKey,
+    getKey,
 
     disabledKeys,
     disabledSourceKeys,

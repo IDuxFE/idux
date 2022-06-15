@@ -7,14 +7,14 @@
 
 import { computed, defineComponent, inject, normalizeStyle } from 'vue'
 
-import { convertCssPixel } from '@idux/cdk/utils'
+import { type VKey, convertCssPixel } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 
 import { useTransferTreeProps } from '../composables/useTransferTreeProps'
 import { proTransferContext } from '../token'
-import { type TransferData, proTransferTreeContentProps } from '../types'
+import { type TreeTransferData, proTransferTreeContentProps } from '../types'
 import { genFlattenedTreeKeys } from '../utils'
 import { renderRemoveIcon } from './RenderRemovableLabel'
 
@@ -35,7 +35,7 @@ export default defineComponent({
     const proTransferTreeCls = computed(() => `${mergedPrefixCls.value}-tree-content`)
 
     const transferBindings = inject(props.isSource ? TRANSFER_SOURCE_TOKEN : TRANSFER_TARGET_TOKEN)!
-    const { disabledKeys, getRowKey, triggerRemove } = transferBindings
+    const { disabledKeys, getKey, triggerRemove } = transferBindings
     const treeProps = useTransferTreeProps(
       proTransferProps,
       transferBindings,
@@ -45,12 +45,12 @@ export default defineComponent({
       props.isSource,
     )
 
-    const renderTreeRemovableSuffix = ({ node }: { node: TransferData }) => {
+    const renderTreeRemovableSuffix = ({ node }: { node: TreeTransferData<VKey> }) => {
       const prefixCls = proTransferTreeCls.value
-      const key = getRowKey(node)
+      const key = getKey.value(node)
 
       const onClick = () => {
-        triggerRemove(genFlattenedTreeKeys([node], childrenKey.value, getRowKey))
+        triggerRemove(genFlattenedTreeKeys([node], childrenKey.value, getKey.value))
       }
 
       return (

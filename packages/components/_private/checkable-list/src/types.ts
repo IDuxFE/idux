@@ -6,10 +6,8 @@
  */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { IxPropTypes, type VKey } from '@idux/cdk/utils'
 
 export interface CheckableListData {
   key?: VKey
@@ -24,31 +22,58 @@ export interface CheckableListScroll {
 }
 
 export const checkableListProps = {
-  dataSource: IxPropTypes.array<CheckableListData>(),
-  checkable: IxPropTypes.bool.def(true),
-  removable: IxPropTypes.bool.def(false),
-  checked: IxPropTypes.func<(item: CheckableListData) => boolean>(),
+  dataSource: Array as PropType<CheckableListData[]>,
+  checkable: {
+    type: Boolean,
+    default: true,
+  },
+  removable: {
+    type: Boolean,
+    default: false,
+  },
+  checked: Function as PropType<(item: CheckableListData) => boolean>,
   customAdditional: { type: Object as PropType<CheckableListCustomAdditional>, default: undefined },
-  disabled: IxPropTypes.func<(item: CheckableListData) => boolean>(),
-  getRowKey: IxPropTypes.func<(item: CheckableListData) => VKey>(),
-  virtual: IxPropTypes.bool,
-  scroll: IxPropTypes.object<CheckableListScroll>(),
-  onCheckChange: IxPropTypes.emit<(item: CheckableListData, checked: boolean) => void>(),
-  onRemove: IxPropTypes.emit<(item: CheckableListData) => void>(),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleData: unknown[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
+  disabled: Function as PropType<(item: CheckableListData) => boolean>,
+  getKey: Function as PropType<(item: CheckableListData) => VKey>,
+  labelKey: String,
+  virtual: {
+    type: Boolean,
+    default: false,
+  },
+  scroll: Object as PropType<CheckableListScroll>,
+  onCheckChange: [Function, Array] as PropType<MaybeArray<(item: CheckableListData, checked: boolean) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<(item: CheckableListData) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: unknown[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export const checkableListItemProps = {
-  checked: IxPropTypes.bool.def(false),
-  checkable: IxPropTypes.bool.def(true),
-  removable: IxPropTypes.bool.def(false),
-  disabled: IxPropTypes.bool.def(false),
-  label: IxPropTypes.string,
-  value: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  onCheckChange: IxPropTypes.emit<(checked: boolean) => void>(),
-  onRemove: IxPropTypes.emit<() => void>(),
+  checked: {
+    type: Boolean,
+    default: false,
+  },
+  checkable: {
+    type: Boolean,
+    default: true,
+  },
+  removable: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  label: String,
+  value: {
+    type: [String, Number, Symbol],
+    required: true,
+  },
+  onCheckChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export interface CheckableListApi {

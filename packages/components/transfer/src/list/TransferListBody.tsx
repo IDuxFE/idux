@@ -24,7 +24,7 @@ export default defineComponent({
       mergedPrefixCls,
       sourceCheckableListRef,
       targetCheckableListRef,
-      getRowKey,
+      getKey,
     } = inject(transferContext)!
 
     const transferBindings = props.isSource ? inject(TRANSFER_SOURCE_TOKEN)! : inject(TRANSFER_TARGET_TOKEN)!
@@ -61,14 +61,14 @@ export default defineComponent({
       }
 
       const onCheckChange = (item: TransferData, checked: boolean) => {
-        const key = getRowKey(item)
+        const key = getKey.value(item)
         const _checkedKeys = new Set(selectedKeySet.value)
         checked ? _checkedKeys.add(key) : _checkedKeys.delete(key)
         handleSelectChange(_checkedKeys)
       }
 
       const onRemove = (item: TransferData) => {
-        const key = getRowKey(item)
+        const key = getKey.value(item)
         triggerRemove([key])
       }
 
@@ -76,9 +76,9 @@ export default defineComponent({
         <ɵCheckableList
           ref={checkableListRef}
           dataSource={checkListData.value}
-          getRowKey={getRowKey}
-          checked={item => selectedKeySet.value.has(getRowKey(item))}
-          disabled={item => transferProps.disabled || disabledDataSourceKeys.value.has(getRowKey(item))}
+          getKey={getKey.value}
+          checked={item => selectedKeySet.value.has(getKey.value(item))}
+          disabled={item => transferProps.disabled || disabledDataSourceKeys.value.has(getKey.value(item))}
           checkable={props.isSource || transferProps.mode === 'default'}
           removable={!props.isSource && transferProps.mode === 'immediate'}
           virtual={transferProps.virtual}

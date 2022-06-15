@@ -24,7 +24,7 @@ export function useTransferTableProps(
   mergedPrefixCls: ComputedRef<string>,
   isSource: boolean,
 ): ComputedRef<TableProps> {
-  const { paginatedData, paginatedDataSource, selectedKeys, getRowKey } = transferBindings
+  const { paginatedData, paginatedDataSource, selectedKeys, getKey } = transferBindings
 
   return computed<TableProps>(() => {
     const columns = isSource ? props.tableProps?.sourceColumns : props.tableProps?.targetColumns
@@ -46,7 +46,7 @@ export function useTransferTableProps(
       pagination: false,
       selectedRowKeys: selectedKeys.value,
       virtual: props.virtual,
-      rowKey: getRowKey as (record: unknown) => number | string,
+      rowKey: getKey.value as (record: unknown) => number | string,
       onScroll: evt => {
         callEmit(props.onScroll, isSource, evt)
       },
@@ -68,14 +68,14 @@ function convertTableColumns(
   slots: Slots,
   isSource: boolean,
 ): TableColumn[] {
-  const { handleSelectChange, getRowKey, triggerRemove, disabledDataSourceKeys } = transferBindings
+  const { handleSelectChange, getKey, triggerRemove, disabledDataSourceKeys } = transferBindings
 
   const convertedColumns = (columns && [...columns]) ?? []
   const selectableColumnIdx = convertedColumns.findIndex(col => 'type' in col && col.type === 'selectable')
 
   const defaultSelectableColumn: TableColumnSelectable = {
     type: 'selectable',
-    disabled: record => disabledDataSourceKeys.value.has(getRowKey(record)) || !!props.disabled,
+    disabled: record => disabledDataSourceKeys.value.has(getKey.value(record)) || !!props.disabled,
     multiple: true,
     trigger: 'click',
     onChange: selectedKeys => handleSelectChange(selectedKeys),
@@ -99,7 +99,7 @@ function convertTableColumns(
     if ('type' in lastCol) {
       convertedColumns.push({
         customCell: ({ record }) => {
-          const key = getRowKey(record)
+          const key = getKey.value(record)
           return renderRemovableLabel(
             key,
             disabledDataSourceKeys.value.has(key),
@@ -127,7 +127,7 @@ function convertTableColumns(
       convertedColumns.splice(convertedColumns.length - 1, 1, {
         ...lastCol,
         customCell: data => {
-          const key = getRowKey(data.record)
+          const key = getKey.value(data.record)
           return renderRemovableLabel(
             key,
             disabledDataSourceKeys.value.has(key),

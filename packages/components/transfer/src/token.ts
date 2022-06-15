@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GetRowKey } from './composables/useGetRowKey'
 import type { TransferOperationsContext } from './composables/useTransferOperations'
 import type { TransferBindings, TransferDataStrategiesConfig, TransferProps, TransferSlots } from './types'
 import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
 import type { TransferConfig } from '@idux/components/config'
 import type { TransferLocale } from '@idux/components/locales'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 interface TransferContext {
@@ -22,7 +22,7 @@ interface TransferContext {
   sourceCheckableListRef: Ref<ɵCheckableListInstance | undefined>
   targetCheckableListRef: Ref<ɵCheckableListInstance | undefined>
   showSelectAll: ComputedRef<boolean>
-  getRowKey: GetRowKey
+  getKey: ComputedRef<GetKeyFn>
 }
 
 export const transferContext: InjectionKey<TransferContext> = Symbol('transferContext')
