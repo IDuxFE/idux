@@ -37,6 +37,10 @@
     &::after {
       right: 0;
     }
+
+    .cdk-virtual-scroll-holder {
+      overflow-y: scroll !important;
+    }
   }
 
   table {
@@ -235,7 +239,7 @@
   // --------- Filterable ---------
 
   &-filterable-trigger {
-    font-size: 12px;
+    font-size: @table-filterable-trigger-font-size;
 
     &-footer {
       border-top: @table-border-width @table-border-style @table-border-color;
@@ -293,7 +297,7 @@
 
     .@{spin-prefix} {
       height: 100%;
-      
+
       &-container {
         display: flex;
         flex-direction: column;
