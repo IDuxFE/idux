@@ -103,7 +103,7 @@ export default defineComponent({
               readonly={props.readonly}
               focused={inputFocused.value}
               placeholder={placeholder}
-              onChange={handleInput}
+              onInput={handleInput}
               onClear={handleInputClear}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
