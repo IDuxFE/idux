@@ -16,7 +16,6 @@ import {
   provide,
   ref,
   watch,
-  watchEffect,
 } from 'vue'
 
 import { isNumber } from 'lodash-es'
@@ -91,14 +90,7 @@ export default defineComponent({
         }
       })
 
-      watchEffect(() => {
-        const element = mainTableRef.value
-        if (scrollWidth.value) {
-          onResize(element, handleWrapperResize)
-        } else {
-          offResize(element, handleWrapperResize)
-        }
-      })
+      onResize(mainTableRef.value, handleWrapperResize)
     })
 
     onBeforeUnmount(() => offResize(mainTableRef.value, handleWrapperResize))
