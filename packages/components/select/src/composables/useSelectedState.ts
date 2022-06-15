@@ -7,21 +7,19 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { SelectProps } from '../types'
+import type { FlattenedOption } from './useOptions'
+import type { ValueAccessor } from '@idux/cdk/forms'
+
 import { type ComputedRef, computed, toRaw } from 'vue'
 
-import { type ValueAccessor } from '@idux/cdk/forms'
 import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
-import { type Locale } from '@idux/components/locales'
 
-import { type SelectProps } from '../types'
 import { generateOption } from '../utils/generateOption'
-import { type MergedOption } from './useOptions'
 
 export interface SelectedStateContext {
   selectedValue: ComputedRef<VKey[]>
-  selectedOptions: ComputedRef<MergedOption[]>
-  selectedLimit: ComputedRef<boolean>
-  selectedLimitTitle: ComputedRef<string>
+  selectedOptions: ComputedRef<FlattenedOption[]>
   changeSelected: (key: VKey) => void
   handleRemove: (key: VKey) => void
   handleClear: (evt: MouseEvent) => void
@@ -30,26 +28,15 @@ export interface SelectedStateContext {
 export function useSelectedState(
   props: SelectProps,
   accessor: ValueAccessor,
-  mergedOptions: ComputedRef<MergedOption[]>,
-  locale: Locale,
+  optionKeyMap: ComputedRef<Map<VKey, FlattenedOption>>,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.valueRef.value))
-  const selectedOptions = computed(() => {
-    const compareFn = props.compareWith ?? props.compareFn
-    const options = mergedOptions.value
-    return selectedValue.value.map(
-      value => options.find(option => compareFn(option.key, value)) ?? generateOption(value),
-    )
-  })
-  const selectedLimit = computed(() => selectedValue.value.length >= props.multipleLimit)
-  const selectedLimitTitle = computed(() => {
-    if (!selectedLimit.value) {
-      return ''
-    }
-    return locale.select.limitMessage.replace('${0}', `${props.multipleLimit}`)
-  })
 
-  const setValue = (value: VKey[]) => {
+  const selectedOptions = computed(() =>
+    selectedValue.value.map(value => optionKeyMap.value.get(value) ?? generateOption(value)),
+  )
+
+  const setSelectedValue = (value: VKey[]) => {
     const currValue = props.multiple ? value : value[0]
     const oldValue = toRaw(accessor.valueRef.value)
     if (currValue !== oldValue) {
@@ -59,39 +46,38 @@ export function useSelectedState(
   }
 
   const changeSelected = (key: VKey) => {
-    const compareFn = props.compareWith ?? props.compareFn
-    const { multiple } = props
+    const multiple = !!props.multiple
     const currValue = selectedValue.value
-    const targetIndex = currValue.findIndex(item => compareFn(item, key))
+    const targetIndex = currValue.findIndex(item => item === key)
     const isSelected = targetIndex > -1
     if (!multiple) {
-      !isSelected && setValue([key])
+      !isSelected && setSelectedValue([key])
       return
     }
     if (isSelected) {
-      setValue(currValue.filter((_, index) => targetIndex !== index))
+      setSelectedValue(currValue.filter((_, index) => targetIndex !== index))
       return
     }
-    if (!selectedLimit.value) {
-      setValue([...currValue, key])
+
+    if (selectedValue.value.length < props.multipleLimit) {
+      setSelectedValue([...currValue, key])
     }
+
+    setSelectedValue([...currValue, key])
   }
 
   const handleRemove = (key: VKey) => {
-    const compareFn = props.compareWith ?? props.compareFn
-    setValue(selectedValue.value.filter(item => !compareFn(key, item)))
+    setSelectedValue(selectedValue.value.filter(item => key !== item))
   }
 
   const handleClear = (evt: MouseEvent) => {
-    setValue([])
+    setSelectedValue([])
     callEmit(props.onClear, evt)
   }
 
   return {
     selectedValue,
     selectedOptions,
-    selectedLimit,
-    selectedLimitTitle,
     changeSelected,
     handleRemove,
     handleClear,

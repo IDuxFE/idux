@@ -54,7 +54,12 @@ import type { ProgressComponent } from '@idux/components/progress'
 import type { RadioComponent, RadioGroupComponent } from '@idux/components/radio'
 import type { RateComponent } from '@idux/components/rate'
 import type { ResultComponent } from '@idux/components/result'
-import type { SelectComponent, SelectOptionComponent, SelectOptionGroupComponent } from '@idux/components/select'
+import type {
+  SelectComponent,
+  SelectOptionComponent,
+  SelectOptionGroupComponent,
+  SelectPanelComponent,
+} from '@idux/components/select'
 import type { SkeletonComponent } from '@idux/components/skeleton'
 import type { SliderComponent } from '@idux/components/slider'
 import type { SpaceComponent } from '@idux/components/space'
@@ -139,6 +144,7 @@ declare module 'vue' {
     IxResult: ResultComponent
     IxRow: RowComponent
     IxSelect: SelectComponent
+    IxSelectPanel: SelectPanelComponent
     IxSelectOption: SelectOptionComponent
     IxSelectOptionGroup: SelectOptionGroupComponent
     IxSkeleton: SkeletonComponent

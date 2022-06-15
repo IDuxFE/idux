@@ -95,6 +95,32 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 | `focus` | 获取焦点 | - | - |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
 
+### IxSelectPanel
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `activeValue` | 当前处于激活状态的Key | `VKey` | - | 用于配合搜索和键盘操作 |
+| `selectedKeys` | 当前选中的 option 的值 | `any \| any[]` | - | - | 当 `multiple=true` 时，`value` 为数组，使用 `control` 时，此配置无效 |
+| `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
+| `customAdditional` | 自定义下拉选项的额外属性 | `SelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
+| `dataSource` | 选项数据源 | `SelectData[]` | - | - | IxSelectPanel仅支持使用dataSource，不支持通过插槽配置 |
+| `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `getKey` | 获取数据的唯一标识 | `string \| (data: SelectData) => VKey` | `key` | ✅ | 为了兼容之前的版本，默认值也会支持 `value` |
+| `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
+| `multiple` | 多选模式 | `boolean` | `false` | - | - |
+| `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
+| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
+| `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
+
+#### SelectPanelMethods
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `changeActiveIndex` | 切换当前处于激活状态的选项 | `(offset: 0 | 1 | -1) => void` | 用于配合键盘操作 |
+| `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+
 ### IxSelectOption
 
 在 `template` 中设置 `SelectOptionProps`。

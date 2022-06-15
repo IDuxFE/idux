@@ -16,11 +16,37 @@ import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VN
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 
-const defaultCompareFn = (o1: any, o2: any) => o1 === o2
+export const selectPanelProps = {
+  activeValue: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
+  selectedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  childrenKey: { type: String, default: undefined },
+
+  customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
+  dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
+  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
+  labelKey: { type: String, default: undefined },
+  multiple: { type: Boolean, default: false },
+  multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
+  virtual: { type: Boolean, default: false },
+
+  // events
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: VKey) => void>>,
+  onOptionClick: [Function, Array] as PropType<MaybeArray<(option: SelectData, evt: MouseEvent) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+
+  // private
+  _virtualScrollHeight: { type: Number, default: 256 },
+  _virtualScrollItemHeight: { type: Number, default: 32 },
+} as const
 
 export const selectProps = {
   control: controlPropDef,
-  value: { type: null, default: undefined },
+  value: { type: [String, Number, Symbol, Array] as PropType<MaybeArray<VKey>>, default: undefined },
   open: { type: Boolean, default: undefined },
 
   allowInput: { type: Boolean, default: false },
@@ -30,14 +56,6 @@ export const selectProps = {
   childrenKey: { type: String, default: undefined },
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
-  /**
-   * @deprecated removed
-   */
-  compareWith: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: undefined },
-  /**
-   * @deprecated removed
-   */
-  compareFn: { type: Function as PropType<(o1: any, o2: any) => boolean>, default: defaultCompareFn },
   customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
   disabled: { type: Boolean, default: false },
@@ -63,7 +81,7 @@ export const selectProps = {
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   /**
-   * @deprecated please use `searchFilter` instead'
+   * @deprecated please use `searchFn` instead'
    */
   searchFilter: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: undefined },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
@@ -80,9 +98,11 @@ export const selectProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: VKey | VKey[] | undefined) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
-  onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
+  onChange: [Function, Array] as PropType<
+    MaybeArray<(value: VKey | VKey[] | undefined, oldValue: VKey | VKey[] | undefined) => void>
+  >,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(searchText: string) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
@@ -96,18 +116,25 @@ export const selectProps = {
   overlayItemHeight: { type: Number, default: 32 },
 } as const
 
+export type SelectPanelProps = ExtractInnerPropTypes<typeof selectPanelProps>
+export type SelectPanelPublicProps = Omit<
+  ExtractPublicPropTypes<typeof selectPanelProps>,
+  '_virtualScrollHeight' | '_virtualScrollItemHeight'
+>
+export interface SelectPanelBindings {
+  scrollTo: VirtualScrollToFn
+  changeActiveIndex: (offset: number) => void
+}
+export type SelectPanelComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof SelectPanelPublicProps> & SelectPanelPublicProps,
+  SelectPanelBindings
+>
+export type SelectPanelInstance = InstanceType<DefineComponent<SelectPanelProps, SelectPanelBindings>>
+
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
 export type SelectPublicProps = Omit<
   ExtractPublicPropTypes<typeof selectProps>,
-  | 'compareWith'
-  | 'compareFn'
-  | 'maxLabelCount'
-  | 'options'
-  | 'searchFilter'
-  | 'overlayHeight'
-  | 'overlayItemHeight'
-  | 'target'
-  | 'valueKey'
+  'maxLabelCount' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight' | 'target' | 'valueKey'
 >
 export interface SelectBindings {
   blur: () => void
@@ -172,25 +199,21 @@ export type SelectData = SelectOptionProps | SelectOptionGroupProps
 
 export type SelectSearchFn = (data: SelectData, searchText: string) => boolean
 
-// private
-export const selectorProps = {
-  clearable: Boolean,
-  suffix: String,
-}
-export type SelectorProps = ExtractInnerPropTypes<typeof optionProps>
-
 export const optionProps = {
-  disabled: Boolean,
-  index: { type: Number, required: true },
-  label: { type: [String, Number], required: true },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  index: { type: Number as PropType<number>, required: true },
+  label: { type: [String, Number] as PropType<string | number>, required: true },
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
-  label: { type: [String, Number], required: true },
-  index: { type: Number, required: true },
+  label: { type: [String, Number] as PropType<string | number>, required: true },
+  index: { type: Number as PropType<number>, required: true },
   rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
 } as const
 export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

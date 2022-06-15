@@ -5,9 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedOption } from '../composables/useOptions'
+import type { FlattenedOption } from '../composables/useOptions'
+import type { SelectData } from '../types'
 
-export function generateOption(value: string): MergedOption {
+export function generateOption(value: string): FlattenedOption {
   const rawData = { key: value, label: value }
-  return { key: value, label: value, rawData }
+  return { key: value, label: value, type: 'item', rawData }
+}
+
+export function generateRawOption(value: string): SelectData {
+  return { key: value, label: value }
 }

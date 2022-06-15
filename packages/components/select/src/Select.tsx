@@ -7,25 +7,27 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
+import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 
-import { isNil } from 'lodash-es'
+import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
-import { type VirtualScrollInstance, type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { type VKey, useState } from '@idux/cdk/utils'
+import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
-import { useGlobalConfig } from '@idux/components/config'
+import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormAccessor } from '@idux/components/form'
 
 import { useActiveState } from './composables/useActiveState'
-import { useGetOptionKey } from './composables/useGetOptionKey'
-import { useFlattedOptions, useMergedOptions } from './composables/useOptions'
+import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
+import { useKeyboardEvents } from './composables/useKeyboardEvents'
+import { useConvertedOptions, useFilteredOptions, useFlattenedOptions, useOptionKeyMap } from './composables/useOptions'
 import { useOverlayState } from './composables/useOverlayState'
+import { usePanelProps } from './composables/usePanelProps'
 import { useSelectedState } from './composables/useSelectedState'
-import Content from './content/Content'
-import { selectToken } from './token'
-import { selectProps } from './types'
+import Panel from './panel/Panel'
+import { SELECT_PANEL_DATA_TOKEN } from './token'
+import { SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
 
@@ -37,18 +39,19 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
-    const locale = useGlobalConfig('locale')
 
     const triggerRef = ref<ɵSelectorInstance>()
-    const [inputValue, setInputValue] = useState('')
     const focus = () => triggerRef.value?.focus()
     const blur = () => triggerRef.value?.blur()
+
+    const panelRef = ref<SelectPanelInstance>()
+    const scrollTo: VirtualScrollToFn = (...params) => panelRef.value?.scrollTo(...params)
+    const changeActiveIndex = (offset: number) => panelRef.value?.changeActiveIndex(offset)
+
+    const [inputValue, setInputValue] = useState('')
     const clearInput = () => {
       props.searchable === 'overlay' ? setInputValue('') : triggerRef.value?.clearInput()
     }
-
-    const virtualScrollRef = ref<VirtualScrollInstance>()
-    const scrollTo: VirtualScrollToFn = options => virtualScrollRef.value?.scrollTo(options)
 
     expose({ focus, blur, scrollTo })
 
@@ -59,27 +62,27 @@ export default defineComponent({
     )
 
     const accessor = useFormAccessor()
-    const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
-    const mergedGetKey = useGetOptionKey(props, config)
-    const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
-    const mergedOptions = useMergedOptions(props, slots, mergedChildrenKey, mergedGetKey, mergedLabelKey)
-    const flattedOptions = useFlattedOptions(props, mergedOptions, inputValue, mergedLabelKey)
-    const {
-      selectedValue,
-      selectedLimit,
-      selectedLimitTitle,
-      changeSelected,
-      selectedOptions,
-      handleClear,
-      handleRemove,
-    } = useSelectedState(props, accessor, mergedOptions, locale)
 
-    const { activeIndex, activeOption, changeActive, scrollToActivated } = useActiveState(
+    const getKey = useGetOptionKey(props, config)
+    const { options, optionKeyMap } = useSelectOptions(props, config, slots, getKey, inputValue)
+
+    provide(SELECT_PANEL_DATA_TOKEN, { flattenedOptions: options })
+
+    const { selectedValue, selectedOptions, changeSelected, handleClear, handleRemove } = useSelectedState(
       props,
-      flattedOptions,
-      selectedValue,
-      inputValue,
-      scrollTo,
+      accessor,
+      optionKeyMap,
+    )
+
+    const { activeValue, setActiveValue } = useActiveState(props, inputValue)
+
+    const handleKeyDown = useKeyboardEvents(
+      computed(() => !!props.multiple),
+      activeValue,
+      changeActiveIndex,
+      changeSelected,
+      clearInput,
+      setOverlayOpened,
     )
 
     watch(overlayOpened, opened => {
@@ -90,13 +93,8 @@ export default defineComponent({
       clearInput()
     })
 
-    const handleOverlayClick = () => {
-      if (props.searchable !== 'overlay') {
-        focus()
-      }
-    }
-
-    const handleOptionClick = () => {
+    const handleOptionClick = (option: SelectData) => {
+      changeSelected(getKey.value(option))
       if (props.multiple) {
         clearInput()
       } else {
@@ -110,30 +108,7 @@ export default defineComponent({
       handleRemove(value)
     }
 
-    provide(selectToken, {
-      props,
-      slots,
-      config,
-      mergedPrefixCls,
-      virtualScrollRef,
-      accessor,
-      inputValue,
-      setInputValue,
-      overlayOpened,
-      setOverlayOpened,
-      mergedOptions,
-      flattedOptions,
-      handleOptionClick,
-      selectedValue,
-      selectedLimit,
-      selectedLimitTitle,
-      changeSelected,
-      activeIndex,
-      activeOption,
-      changeActive,
-      scrollToActivated,
-    })
-
+    const panelProps = usePanelProps(props, selectedValue, activeValue, setActiveValue, handleOptionClick)
     const overlayClasses = computed(() => {
       const { overlayClassName, multiple } = props
       const prefixCls = mergedPrefixCls.value
@@ -152,30 +127,6 @@ export default defineComponent({
         config.overlayContainer ??
         `${mergedPrefixCls.value}-overlay-container`,
     )
-
-    const handleKeyDown = (evt: KeyboardEvent) => {
-      switch (evt.code) {
-        case 'ArrowUp':
-          evt.preventDefault()
-          changeActive(activeIndex.value - 1, -1)
-          break
-        case 'ArrowDown':
-          evt.preventDefault()
-          changeActive(activeIndex.value + 1, 1)
-          break
-        case 'Enter': {
-          evt.preventDefault()
-          const key = activeOption.value?.key
-          !isNil(key) && changeSelected(key)
-          props.multiple ? clearInput() : setOverlayOpened(false)
-          break
-        }
-        case 'Escape':
-          evt.preventDefault()
-          setOverlayOpened(false)
-          break
-      }
-    }
 
     const renderTrigger = () => (
       <ɵSelector
@@ -212,7 +163,34 @@ export default defineComponent({
       />
     )
 
-    const renderContent = () => <Content onClick={handleOverlayClick} />
+    const renderContent = () => {
+      const children = [<Panel ref={panelRef} v-slots={slots} {...panelProps.value} />]
+      const { searchable, overlayRender } = props
+
+      if (searchable === 'overlay') {
+        const value = inputValue.value
+        const clearIcon = props.clearIcon ?? config.clearIcon
+        const handleSearchInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+        const handleSearchClear = () => setInputValue('')
+
+        children.unshift(
+          <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
+            <ɵInput
+              clearable
+              clearIcon={clearIcon}
+              clearVisible={!!value}
+              size="sm"
+              suffix="search"
+              value={value}
+              onClear={handleSearchClear}
+              onInput={handleSearchInput}
+            />
+          </div>,
+        )
+      }
+
+      return <div>{overlayRender ? overlayRender(children) : children}</div>
+    }
 
     return () => {
       const overlayProps = {
@@ -235,3 +213,22 @@ export default defineComponent({
     }
   },
 })
+
+function useSelectOptions(
+  props: SelectProps,
+  config: SelectConfig,
+  slots: Slots,
+  getKey: ComputedRef<GetKeyFn>,
+  inputValue: ComputedRef<string>,
+) {
+  const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
+  const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
+
+  const convertedOptions = useConvertedOptions(props, slots)
+  const flattenedOptions = useFlattenedOptions(convertedOptions, mergedChildrenKey, getKey, mergedLabelKey)
+  const filteredOptions = useFilteredOptions(props, flattenedOptions, inputValue, mergedLabelKey)
+
+  const optionKeyMap = useOptionKeyMap(filteredOptions)
+
+  return { options: filteredOptions, optionKeyMap }
+}

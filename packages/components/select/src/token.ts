@@ -7,31 +7,25 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ActiveStateContext } from './composables/useActiveState'
-import type { OptionsContext } from './composables/useOptions'
-import type { SelectProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { VirtualScrollInstance } from '@idux/cdk/scroll'
+import type { FlattenedOption } from './composables/useOptions'
+import type { PanelActiveStateContext } from './composables/usePanelActiveState'
+import type { SelectPanelProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
-import type { SelectConfig } from '@idux/components/config'
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
-export interface SelectContext extends ActiveStateContext, OptionsContext {
-  props: SelectProps
-  slots: Slots
-  config: SelectConfig
-  mergedPrefixCls: ComputedRef<string>
-  accessor: ValueAccessor
-  virtualScrollRef: Ref<VirtualScrollInstance | undefined>
-  inputValue: ComputedRef<string>
-  setInputValue: (value: string) => void
-  overlayOpened: ComputedRef<boolean>
-  setOverlayOpened: (open: boolean) => void
-  selectedValue: ComputedRef<any[]>
-  selectedLimit: ComputedRef<boolean>
-  selectedLimitTitle: ComputedRef<string>
-  changeSelected: (key: VKey) => void
-  handleOptionClick: () => void
+export interface SelectPanelDataContext {
+  flattenedOptions: ComputedRef<FlattenedOption[]>
 }
 
-export const selectToken: InjectionKey<SelectContext> = Symbol('selectToken')
+export interface SelectPanelContext extends PanelActiveStateContext {
+  props: SelectPanelProps
+  slots: Slots
+  mergedPrefixCls: ComputedRef<string>
+  flattenedOptions: ComputedRef<FlattenedOption[]>
+  selectedKeys: ComputedRef<VKey[]>
+  selectedLimit: ComputedRef<boolean>
+  selectedLimitTitle: ComputedRef<string>
+}
+
+export const SELECT_PANEL_DATA_TOKEN: InjectionKey<SelectPanelDataContext> = Symbol('SELECT_PANEL_DATA_TOKEN')
+export const selectPanelContext: InjectionKey<SelectPanelContext> = Symbol('selectPanelContext')

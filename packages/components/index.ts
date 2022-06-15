@@ -46,7 +46,7 @@ import { IxProgress } from '@idux/components/progress'
 import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxResult } from '@idux/components/result'
-import { IxSelect, IxSelectOption, IxSelectOptionGroup } from '@idux/components/select'
+import { IxSelect, IxSelectOption, IxSelectOptionGroup, IxSelectPanel } from '@idux/components/select'
 import { IxSkeleton } from '@idux/components/skeleton'
 import { IxSlider } from '@idux/components/slider'
 import { IxSpace } from '@idux/components/space'
@@ -135,6 +135,7 @@ const components = [
   IxRate,
   IxResult,
   IxSelect,
+  IxSelectPanel,
   IxSelectOption,
   IxSelectOptionGroup,
   IxSkeleton,

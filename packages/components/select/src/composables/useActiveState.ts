@@ -5,85 +5,33 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { SelectProps } from '../types'
-import type { MergedOption } from './useOptions'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ComputedRef, Ref } from 'vue'
 
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { type ComputedRef, watchEffect } from 'vue'
+
+import { useState } from '@idux/cdk/utils'
 
 export interface ActiveStateContext {
-  activeIndex: Ref<number>
-  activeOption: Ref<MergedOption | undefined>
-  changeActive: (index: number, offset: 0 | 1 | -1) => void
-  scrollToActivated: () => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  activeValue: ComputedRef<any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setActiveValue: (value: any) => void
 }
 
-export function useActiveState(
-  props: SelectProps,
-  flattedOptions: ComputedRef<MergedOption[]>,
-  selectedValue: Ref<any[]>,
-  inputValue: Ref<string>,
-  scrollTo: VirtualScrollToFn,
-): ActiveStateContext {
-  const activeIndex = ref(0)
+export function useActiveState(props: SelectProps, inputValue: ComputedRef<string>): ActiveStateContext {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [activeValue, setActiveValue] = useState<any>(undefined)
 
-  onMounted(() => {
-    const compareFn = props.compareWith ?? props.compareFn
-    const options = flattedOptions.value
-    const currValue = selectedValue.value
-    const currIndex = options.findIndex(option => currValue.some(value => compareFn(option.key, value)))
-    activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
+  watchEffect(() => {
+    if (!props.allowInput || !inputValue.value) {
+      return
+    }
 
-    watchEffect(() => {
-      if (!props.allowInput || !inputValue.value) {
-        return
-      }
-      const options = flattedOptions.value
-      const searchValue = inputValue.value
-      const currIndex = options.findIndex(option => option.key === searchValue)
-      activeIndex.value = getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1)
-    })
+    setActiveValue(inputValue.value)
   })
 
-  const activeOption = computed(() => flattedOptions.value[activeIndex.value])
-
-  const changeActive = (currIndex: number, offset: 0 | 1 | -1) => {
-    const enabledIndex = getEnabledActiveIndex(flattedOptions.value, currIndex, offset)
-
-    if (enabledIndex !== activeIndex.value) {
-      activeIndex.value = enabledIndex
-      if (offset !== 0) {
-        scrollToActivated()
-      }
-    }
-  }
-
-  const scrollToActivated = () => {
-    scrollTo({ index: activeIndex.value })
-  }
-
   return {
-    activeIndex,
-    activeOption,
-    changeActive,
-    scrollToActivated,
+    activeValue,
+    setActiveValue,
   }
-}
-
-function getEnabledActiveIndex(options: MergedOption[], currIndex: number, offset: 0 | 1 | -1) {
-  const length = options.length
-
-  for (let index = 0; index < length; index++) {
-    const current = (currIndex + index * offset + length) % length
-
-    const { type, disabled } = options[current]
-    if (type !== 'group' && !disabled) {
-      return current
-    }
-  }
-
-  return -1
 }

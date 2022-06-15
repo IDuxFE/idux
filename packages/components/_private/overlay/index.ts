@@ -18,4 +18,8 @@ export {
   overlayDelayDef as ɵOverlayDelayDef,
 } from './src/types'
 
-export type { OverlayInstance as ɵOverlayInstance, OverlayPublicProps as ɵOverlayProps } from './src/types'
+export type {
+  OverlayComponent as ɵOverlayComponent,
+  OverlayInstance as ɵOverlayInstance,
+  OverlayPublicProps as ɵOverlayProps,
+} from './src/types'
