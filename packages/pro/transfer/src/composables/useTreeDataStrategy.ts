@@ -53,8 +53,11 @@ export function useTreeDataStrategies<C extends VKey>(
       }
 
       if (item[childrenKey.value]) {
-        keys = genDisabledKeys(item[childrenKey.value], getRowKey, keys)
-        if (item[childrenKey.value].every((child: TreeTransferData<C>) => keys.has(getRowKey(child)))) {
+        keys = genDisabledKeys(item[childrenKey.value]!, getRowKey, keys)
+        if (
+          item[childrenKey.value]!.length > 0 &&
+          item[childrenKey.value]!.every((child: TreeTransferData<C>) => keys.has(getRowKey(child)))
+        ) {
           keys.add(key)
         }
       }

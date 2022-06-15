@@ -70,7 +70,7 @@ export default defineComponent({
       sourceCheckableListRef,
       targetCheckableListRef,
       showSelectAll,
-      getRowKey: transferDataContext.getRowKey,
+      getKey: transferDataContext.getKey,
     })
     provide(TRANSFER_SOURCE_TOKEN, sourceBindings)
     provide(TRANSFER_TARGET_TOKEN, targetBindings)

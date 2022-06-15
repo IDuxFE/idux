@@ -21,6 +21,7 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkable-list`)
+    const labelKey = computed(() => props.labelKey ?? 'label')
     const virtualScrollRef = ref<VirtualScrollInstance>()
 
     provide(checkableListContext, {
@@ -33,7 +34,7 @@ export default defineComponent({
 
     expose(checkableListApi)
 
-    const getRowKey = (item: CheckableListData) => (props.getRowKey?.(item) ?? item.key)!
+    const getKey = (item: CheckableListData) => (props.getKey?.(item) ?? item.key)!
 
     const handleScroll = (evt: Event) => {
       callEmit(props.onScroll, evt)
@@ -46,7 +47,7 @@ export default defineComponent({
     }
 
     const renderListItem: VirtualItemRenderFn<CheckableListData> = ({ item, index }) => {
-      const key = getRowKey(item)
+      const key = getKey(item)
       const onCheckChange = (checked: boolean) => {
         callEmit(props.onCheckChange, item, checked)
       }
@@ -60,7 +61,7 @@ export default defineComponent({
         <CheckableListItem
           key={key}
           value={key!}
-          label={item.label}
+          label={item[labelKey.value] as string}
           checked={!!props.checked?.(item)}
           disabled={!!props.disabled?.(item)}
           checkable={props.checkable}
@@ -89,7 +90,7 @@ export default defineComponent({
             ref={virtualScrollRef}
             dataSource={data}
             fullHeight={fullHeight}
-            getKey={getRowKey}
+            getKey={getKey}
             height={height as number}
             itemHeight={32}
             itemRender={renderListItem}

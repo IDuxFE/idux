@@ -20,29 +20,29 @@ function createDefaultStrategies<T extends TransferData = TransferData>(): Trans
   })
 
   return {
-    genDataKeys: (data, getRowKey) => {
-      return new Set(data.map(data => getRowKey(data)))
+    genDataKeys: (data, getKey) => {
+      return new Set(data.map(data => getKey(data)))
     },
-    genDataKeyMap: (dataSource, getRowKey) => {
+    genDataKeyMap: (dataSource, getKey) => {
       const dataKeyMap = new Map()
 
       dataSource.forEach(item => {
-        dataKeyMap.set(getRowKey(item), item)
+        dataKeyMap.set(getKey(item), item)
       })
 
       return dataKeyMap
     },
-    genDisabledKeys: (data, getRowKey) => {
+    genDisabledKeys: (data, getKey) => {
       const keys = new Set<VKey>()
       data.forEach(item => {
         if (item.disabled) {
-          keys.add(getRowKey(item))
+          keys.add(getKey(item))
         }
       })
       return keys
     },
-    separateDataSource: (dataSource, dataKeyMap, selectedKeySet, getRowKey) => {
-      const sourceData = dataSource.filter(data => !selectedKeySet.has(getRowKey(data)))
+    separateDataSource: (dataSource, dataKeyMap, selectedKeySet, getKey) => {
+      const sourceData = dataSource.filter(data => !selectedKeySet.has(getKey(data)))
       const targetData: T[] = []
 
       selectedKeySet.forEach(key => {

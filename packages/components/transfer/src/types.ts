@@ -5,34 +5,32 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GetRowKey } from './composables/useGetRowKey'
 import type { TransferOperationsContext } from './composables/useTransferOperations'
 import type { ConvertToSlotParams } from './utils'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { PaginationProps } from '@idux/components/pagination'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, DefineComponent, HTMLAttributes, PropType, Slots, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export interface SeparatedData<T extends TransferData = TransferData> {
   sourceData: T[]
   targetData: T[]
 }
 export interface TransferDataStrategiesConfig<T extends TransferData = TransferData> {
-  genDataKeys?: (data: T[], getRowKey: GetRowKey) => Set<VKey>
-  genDataKeyMap?: (dataSource: T[], getRowKey: GetRowKey) => Map<VKey, T>
-  genDisabledKeys?: (data: T[], getRowKey: GetRowKey) => Set<VKey>
+  genDataKeys?: (data: T[], getKey: GetKeyFn) => Set<VKey>
+  genDataKeyMap?: (dataSource: T[], getKey: GetKeyFn) => Map<VKey, T>
+  genDisabledKeys?: (data: T[], getKey: GetKeyFn) => Set<VKey>
   separateDataSource?: (
     dataSource: T[],
     dataKeyMap: Map<VKey, T>,
     selectedKeySet: Set<VKey>,
-    getRowKey: GetRowKey,
+    getKey: GetKeyFn,
   ) => SeparatedData<T>
   dataFilter?: (data: T[], searchValue: string, searchFn: (item: T, searchValue: string) => boolean) => T[]
-  append?: (keys: VKey[], selectedKeySet: Set<VKey>, getRowKey: GetRowKey, handleChange: (keys: VKey[]) => void) => void
-  remove?: (keys: VKey[], selectedKeySet: Set<VKey>, getRowKey: GetRowKey, handleChange: (keys: VKey[]) => void) => void
+  append?: (keys: VKey[], selectedKeySet: Set<VKey>, getKey: GetKeyFn, handleChange: (keys: VKey[]) => void) => void
+  remove?: (keys: VKey[], selectedKeySet: Set<VKey>, getKey: GetKeyFn, handleChange: (keys: VKey[]) => void) => void
 }
 export type TransferDataStrategies<T extends TransferData = TransferData> = Required<TransferDataStrategiesConfig<T>>
 
@@ -61,7 +59,7 @@ export interface TransferBindings<T extends TransferData = TransferData> {
 
   triggerAppend: (keys: VKey[]) => void
   triggerRemove: (keys: VKey[]) => void
-  getRowKey: GetRowKey
+  getKey: ComputedRef<GetKeyFn>
   handleSelectChange: (keys: Set<VKey> | VKey[]) => void
   selectAll: (selected?: boolean) => void
 
@@ -108,56 +106,102 @@ export type SearchFn<T extends TransferData = TransferData> = (
   searchValue: string,
 ) => boolean
 export const transferProps = {
-  value: IxPropTypes.array<VKey>(),
-  sourceSelectedKeys: IxPropTypes.array<VKey>(),
-  targetSelectedKeys: IxPropTypes.array<VKey>(),
+  value: Array as PropType<VKey[]>,
+  sourceSelectedKeys: Array as PropType<VKey[]>,
+  targetSelectedKeys: Array as PropType<VKey[]>,
 
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
+  clearable: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearIcon: String,
   customAdditional: { type: Object as PropType<TransferCustomAdditional>, default: undefined },
-  dataSource: IxPropTypes.array<TransferData>().def(() => []),
-  disabled: IxPropTypes.bool.def(false),
-  empty: IxPropTypes.oneOfType<string | EmptyProps>([String, IxPropTypes.object<EmptyProps>()]),
-  getKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(item: TransferData) => number | string>()]),
-  mode: IxPropTypes.oneOf<TransferMode>(['default', 'immediate']).def('default'),
-  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<TransferPaginationProps>()]),
-  scroll: IxPropTypes.object<TransferScroll>(),
-  searchable: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
-  searchFn: IxPropTypes.func<SearchFn>(),
-  spin: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<{ source: boolean; target: boolean }>()]),
-  showSelectAll: IxPropTypes.bool,
-  virtual: IxPropTypes.bool.def(false),
+  dataSource: {
+    type: Array as PropType<TransferData[]>,
+    default: (): TransferData[] => [],
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  empty: [String, Object] as PropType<string | EmptyProps>,
+  getKey: [String, Function] as PropType<string | ((item: TransferData) => number | string)>,
+  mode: {
+    type: String as PropType<TransferMode>,
+    default: 'default',
+  },
+  pagination: {
+    type: [Boolean, Object] as PropType<boolean | TransferPaginationProps>,
+    default: undefined,
+  },
+  scroll: Object as PropType<TransferScroll>,
+  searchable: {
+    type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
+    default: undefined,
+  },
+  searchFn: Function as PropType<SearchFn>,
+  spin: {
+    type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
+    default: undefined,
+  },
+  showSelectAll: {
+    type: Boolean,
+    default: undefined,
+  },
+  virtual: {
+    type: Boolean,
+    default: false,
+  },
 
   //Events
-  'onUpdate:value': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:sourceSelectedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:targetSelectedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  onChange: IxPropTypes.emit<(keys: VKey[], oldKeys: VKey[]) => void>(),
-  onSearch: IxPropTypes.emit<(isSource: boolean, searchValue: string) => void>(),
-  onSelectAll: IxPropTypes.emit<(isSource: boolean, selectAll: boolean) => void>(),
-  onClear: IxPropTypes.emit<() => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(keys: VKey[], oldKeys: VKey[]) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(isSource: boolean, searchValue: string) => void>>,
+  onSelectAll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, selectAll: boolean) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
 
-  onScroll: IxPropTypes.emit<(isSource: boolean, evt: Event) => void>(),
-  onScrolledChange:
-    IxPropTypes.emit<(isSource: boolean, startIndex: number, endIndex: number, visibleData: unknown[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<(isSource: boolean) => void>(),
+  onScroll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(isSource: boolean, startIndex: number, endIndex: number, visibleData: unknown[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<(isSource: boolean) => void>>,
 } as const
 
 export const transferListProps = {
-  isSource: IxPropTypes.bool.isRequired,
+  isSource: {
+    type: Boolean,
+    required: true,
+  },
 }
 export const transferListBodyProps = transferListProps
 export const transferListHeaderProps = transferListProps
 export const transferListFooterProps = transferListProps
 
 export const transferListItemProps = {
-  checked: IxPropTypes.bool.def(false),
-  checkable: IxPropTypes.bool.isRequired,
-  removable: IxPropTypes.bool.isRequired,
-  disabled: IxPropTypes.bool.def(false),
-  value: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  onChange: IxPropTypes.emit<(value: boolean) => void>(),
-  onRemove: IxPropTypes.emit<() => void>(),
+  checked: {
+    type: Boolean,
+    default: false,
+  },
+  checkable: {
+    type: Boolean,
+    required: true,
+  },
+  removable: {
+    type: Boolean,
+    required: true,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  value: {
+    type: [String, Number, Symbol],
+    required: true,
+  },
+  onChange: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export interface TransferApis {

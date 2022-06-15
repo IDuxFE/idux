@@ -32,7 +32,7 @@ export function useTransferTreeProps(
     selectedKeySet,
     disabledKeys,
     disabledDataSourceKeys,
-    getRowKey,
+    getKey,
     handleSelectChange,
   } = transferBindings
   const { sourceExpandedKeys, targetExpandedKeys, handleSourceExpandedChange, handleTargetExpandedChange } =
@@ -45,7 +45,10 @@ export function useTransferTreeProps(
     const tempKeySet = new Set(selectedKeySet.value)
 
     selectedKeys.value.forEach(key => {
-      if (dataKeyMap.value.get(key)?.[childrenKey.value] && dataKeyMap.value.get(key)?.[childrenKey.value].length > 0) {
+      if (
+        dataKeyMap.value.get(key)?.[childrenKey.value] &&
+        (dataKeyMap.value.get(key)?.[childrenKey.value] as TransferData[]).length > 0
+      ) {
         return
       }
 
@@ -57,7 +60,11 @@ export function useTransferTreeProps(
         }
 
         const item = dataKeyMap.value.get(currentKey)!
-        if (item[childrenKey.value].some((child: TransferData) => !tempKeySet.has(getRowKey(child)))) {
+        if (
+          (item[childrenKey.value] as TransferData[]).some(
+            (child: TransferData) => !tempKeySet.has(getKey.value(child)),
+          )
+        ) {
           tempKeySet.delete(currentKey)
         }
       }
@@ -76,11 +83,11 @@ export function useTransferTreeProps(
       checkedKeys: checkedKeys.value,
       checkStrategy: 'all',
       dataSource: treeDataSource.value,
-      disabled: node => _disabledKeys.value.has(getRowKey(node as TransferData)) || !!props.disabled,
+      disabled: node => _disabledKeys.value.has(getKey.value(node as TransferData)) || !!props.disabled,
       draggable: false,
       expandedKeys: isSource ? sourceExpandedKeys.value : targetExpandedKeys.value,
       height: isNumber(props.scroll?.height) ? props.scroll?.height : undefined,
-      nodeKey: getRowKey as (node: TreeNode) => VKey,
+      getKey: getKey.value as (node: TreeNode) => VKey,
       selectable: true,
       virtual: props.virtual,
       'onUpdate:checkedKeys': handleSelectChange,

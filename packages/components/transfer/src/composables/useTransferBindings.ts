@@ -46,7 +46,7 @@ export function useTransferBindings<T extends TransferData = TransferData>(
     setSourceSearchValue,
     targetSearchValue,
     setTargetSearchValue,
-    getRowKey,
+    getKey,
   } = transferDataContext
   const {
     sourceSelectedKeys,
@@ -74,7 +74,7 @@ export function useTransferBindings<T extends TransferData = TransferData>(
     showSelectAll,
     triggerAppend,
     triggerRemove,
-    getRowKey,
+    getKey,
   }
 
   return {

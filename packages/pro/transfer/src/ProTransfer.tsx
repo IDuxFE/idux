@@ -13,7 +13,12 @@ import { computed, defineComponent, provide, ref } from 'vue'
 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig as useComponentGlobalConfig } from '@idux/components/config'
-import { IxTransfer, TRANSFER_DATA_STRATEGIES, type TransferListSlotParams } from '@idux/components/transfer'
+import {
+  IxTransfer,
+  TRANSFER_DATA_STRATEGIES,
+  type TransferDataStrategiesConfig,
+  type TransferListSlotParams,
+} from '@idux/components/transfer'
 import { useGlobalConfig } from '@idux/pro/config'
 
 import { useTreeDataStrategies } from './composables/useTreeDataStrategy'
@@ -22,7 +27,7 @@ import ProTransferList from './content/ProTransferList'
 import ProTransferTable from './content/ProTransferTable'
 import ProTransferTree from './content/ProTransferTree'
 import { type ProTransferContext, proTransferContext } from './token'
-import { type ProTransferApis, type TreeTransferData, proTransferProps } from './types'
+import { type ProTransferApis, type TransferData, type TreeTransferData, proTransferProps } from './types'
 
 export default defineComponent({
   name: 'IxProTransfer',
@@ -54,7 +59,7 @@ export default defineComponent({
         dataKeyMap: _dataKeyMap,
         parentKeyMap,
         dataStrategies,
-      } = useTreeDataStrategies(childrenKey, props.defaultTargetData)
+      } = useTreeDataStrategies(childrenKey, props.defaultTargetData as TreeTransferData<VKey>[] | undefined)
       const expandedKeysContext = useTreeExpandedKeys(props, targetKeys, parentKeyMap)
 
       dataKeyMap = _dataKeyMap
@@ -65,7 +70,7 @@ export default defineComponent({
         parentKeyMap,
       }
 
-      provide(TRANSFER_DATA_STRATEGIES, dataStrategies)
+      provide(TRANSFER_DATA_STRATEGIES, dataStrategies as unknown as TransferDataStrategiesConfig<TransferData>)
     }
 
     provide(proTransferContext, context)
@@ -92,14 +97,14 @@ export default defineComponent({
       let count = 0
       if (isSource) {
         dataKeyMap.forEach((item, key) => {
-          if (!targetKeySet.value.has(key) && (!item[childrenKey.value] || item[childrenKey.value].length <= 0)) {
+          if (!targetKeySet.value.has(key) && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
             ++count
           }
         })
       } else {
         targetKeys.value?.forEach(key => {
           const item = dataKeyMap.get(key)
-          if (item && (!item[childrenKey.value] || item[childrenKey.value].length <= 0)) {
+          if (item && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
             ++count
           }
         })

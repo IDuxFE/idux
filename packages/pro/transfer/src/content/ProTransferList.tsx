@@ -7,13 +7,13 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵCheckableList } from '@idux/components/_private/checkable-list'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
 
 import { proTransferContext } from '../token'
-import { type TransferData, proTransferListContentProps } from '../types'
+import { type TreeTransferData, proTransferListContentProps } from '../types'
 import { flattenTree } from '../utils'
 
 export default defineComponent({
@@ -34,19 +34,19 @@ export default defineComponent({
       paginatedDataSource,
       selectedKeySet,
       handleSelectChange,
-      getRowKey,
+      getKey,
       triggerRemove,
     } = transferBindings
 
-    const onCheckChange = (item: TransferData, checked: boolean) => {
-      const key = getRowKey(item)
+    const onCheckChange = (item: TreeTransferData, checked: boolean) => {
+      const key = getKey.value(item)
       const _checkedKeys = new Set(selectedKeySet.value)
       checked ? _checkedKeys.add(key) : _checkedKeys.delete(key)
       handleSelectChange(_checkedKeys)
     }
 
-    const onRemove = (item: TransferData) => {
-      const key = getRowKey(item)
+    const onRemove = (item: TreeTransferData) => {
+      const key = getKey.value(item)
       triggerRemove([key])
     }
 
@@ -64,7 +64,9 @@ export default defineComponent({
       const data =
         props.isSource && proTransferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value
 
-      return proTransferProps.type === 'tree' ? flattenTree(data, childrenKey.value, true) : data
+      return proTransferProps.type === 'tree'
+        ? flattenTree(data as TreeTransferData<VKey>[], childrenKey.value, true)
+        : data
     })
 
     return () => {
@@ -82,9 +84,10 @@ export default defineComponent({
         <ɵCheckableList
           ref={contentRef}
           dataSource={dataSource.value}
-          getRowKey={getRowKey}
-          checked={item => selectedKeySet.value.has(getRowKey(item))}
-          disabled={item => proTransferProps.disabled || disabledKeys.value.has(getRowKey(item))}
+          getKey={getKey.value}
+          labelKey={proTransferProps.treeProps?.labelKey}
+          checked={item => selectedKeySet.value.has(getKey.value(item))}
+          disabled={item => proTransferProps.disabled || disabledKeys.value.has(getKey.value(item))}
           checkable={props.isSource || proTransferProps.mode === 'default'}
           removable={!props.isSource && proTransferProps.mode === 'immediate'}
           virtual={proTransferProps.virtual}
