@@ -5,16 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { OriginScroll } from '../composables/useOriginScroll'
-import type { CSSProperties, Ref } from 'vue'
-
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { throttle } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
 import { callEmit, cancelRAF, off, on, rAF } from '@idux/cdk/utils'
 
+import { type OriginScroll } from '../composables/useOriginScroll'
 import { virtualScrollToken } from '../token'
 
 export default defineComponent({
@@ -40,8 +38,6 @@ export default defineComponent({
       }
       return {
         [fullHeight ? 'height' : 'maxHeight']: height + 'px',
-        overflow: 'auto',
-        overflowAnchor: 'none',
       }
     })
 
@@ -49,18 +45,15 @@ export default defineComponent({
       if (scrollOffset.value === undefined) {
         return undefined
       }
-      return { height: `${scrollHeight.value}px`, position: 'relative' }
+      return { height: `${scrollHeight.value}px` }
     })
 
-    const contentStyle = computed<CSSProperties>(() => {
+    const contentStyle = computed<CSSProperties | undefined>(() => {
       const offset = scrollOffset.value
       if (offset === undefined) {
-        return { display: 'flex', flexDirection: 'column', flexWrap: 'wrap' }
+        return undefined
       }
       return {
-        display: 'flex',
-        flexDirection: 'column',
-        flexWrap: 'wrap',
         transform: `translateY(${offset}px)`,
         position: 'absolute',
         left: 0,

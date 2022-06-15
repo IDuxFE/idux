@@ -18,7 +18,7 @@ export interface BlockScrollStrategyOptions {
 const defaultClassName = 'cdk-scroll-block'
 
 const cacheStrategy = new Map<number, BlockScrollStrategyOptions>()
-const cacheStyle = new Map<HTMLElement, { width: string; overflow: string; overflowX: string; overflowY: string }>()
+const cacheStyle = new Map<HTMLElement, string>()
 
 let uuid = 0
 
@@ -50,17 +50,9 @@ export class BlockScrollStrategy implements ScrollStrategy {
 
     if (!Array.from(cacheStrategy.values()).some(item => item.target === target)) {
       const scrollBarSize = getScrollBarSize(target === document.documentElement ? undefined : target)
-      cacheStyle.set(target, {
-        width: target.style.width,
-        overflow: target.style.overflow,
-        overflowX: target.style.overflowX,
-        overflowY: target.style.overflowY,
-      })
+      cacheStyle.set(target, target.style.width)
 
       target.style.width = scrollBarSize !== 0 ? `calc(100% - ${scrollBarSize}px)` : ''
-      target.style.overflow = 'hidden'
-      target.style.overflowX = 'hidden'
-      target.style.overflowY = 'hidden'
     }
 
     this.addClassName()
@@ -83,13 +75,7 @@ export class BlockScrollStrategy implements ScrollStrategy {
     }
 
     if (!strategyArray.some(item => item.target === target)) {
-      const style = cacheStyle.get(target)!
-
-      target.style.width = style.width
-      target.style.overflow = style.overflow
-      target.style.overflowX = style.overflowX
-      target.style.overflowY = style.overflowY
-
+      target.style.width = cacheStyle.get(target)!
       cacheStyle.delete(target)
     }
   }
