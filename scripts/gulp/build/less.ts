@@ -69,8 +69,20 @@ export async function compileLess(
   }
 
   for (const componentDirname of readdirSync(targetDirname)) {
-    // handler private components
-    if (componentDirname === '_private') {
+    // handler cdk
+    if (packageName === 'cdk') {
+      const styleDirname = `${targetDirname}/${componentDirname}/style`
+      const outputDirname = `${distDirname}/${componentDirname}/style`
+      if (await pathExists(styleDirname)) {
+        // Copy style files for each component.
+        await copy(styleDirname, outputDirname)
+        const lessPath = `${styleDirname}/index.less`
+        const lessContent = await readFile(lessPath, { encoding: 'utf8' })
+        promiseList.push(compile(lessContent, path.join(outputDirname, `index.css`), false, lessPath))
+      }
+
+      // handler private components
+    } else if (componentDirname === '_private') {
       for (const privateComponentName of readdirSync(path.resolve(targetDirname, componentDirname))) {
         const styleDirname = `${targetDirname}/${componentDirname}/${privateComponentName}/style`
         const outputDirname = `${distDirname}/${componentDirname}/${privateComponentName}/style`
@@ -87,7 +99,12 @@ export async function compileLess(
     }
   }
 
-  if (packageName !== 'cdk') {
+  if (packageName === 'cdk') {
+    await copyFile(`${targetDirname}/index.less`, `${distDirname}/index.less`)
+    const entryContent = `@import "${path.posix.join(distDirname, 'index.less')}";`
+    promiseList.push(compile(entryContent, path.join(distDirname, `index.css`), false))
+    promiseList.push(compile(entryContent, path.join(distDirname, `index.min.css`), true))
+  } else {
     // Compile concentrated less file to CSS file.
     await copy(path.resolve(targetDirname, 'style'), path.resolve(distDirname, 'style'))
     for (const theme of themes) {

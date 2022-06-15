@@ -23,8 +23,8 @@
     "lint:fix": "npm-run-all -p ls-lint eslint:fix stylelint:fix markdownlint:fix",
     "eslint": "eslint ./packages --ext .vue,.js,.ts,.tsx",
     "eslint:fix": "eslint --fix ./packages  --ext .vue,.js,.ts,.tsx",
-    "stylelint": "stylelint \"./packages/components/**/*.less\"",
-    "stylelint:fix": "stylelint --fix \"./packages/components/**/*.less\"",
+    "stylelint": "stylelint \"./packages/{cdk,components,pro}/**/*.less\"",
+    "stylelint:fix": "stylelint --fix \"./packages/{cdk,components,pro}/**/*.less\"",
     "markdownlint": "markdownlint \"./packages/{cdk,components,pro}/**/*.md\"",
     "markdownlint:fix": "markdownlint --fix \"./packages/{cdk,components,pro}/**/*.md\"",
     "ls-lint": "ls-lint"

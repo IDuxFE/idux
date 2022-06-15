@@ -85,7 +85,7 @@ export default defineComponent({
       })
 
       return (
-        <div class="cdk-virtual-scroll" style={{ position: 'relative' }}>
+        <div class="cdk-virtual-scroll">
           <Holder>{children}</Holder>
         </div>
       )

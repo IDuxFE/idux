@@ -55,6 +55,9 @@ node ./node_modules/@idux/components/bin icon
 // idux.ts
 import type { App } from "vue";
 
+// 导入 cdk 样式，注意是 `index`, 因为 cdk 不会区分主题
+import "@idux/cdk/index.css";
+
 // 如果不需要 reset 全局样式和滚动条样式，移除下面 2 行代码
 import "@idux/components/style/core/reset.default.css";
 import "@idux/components/style/core/reset-scroll.default.css";

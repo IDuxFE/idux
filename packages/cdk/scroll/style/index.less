@@ -1,0 +1,21 @@
+.cdk-virtual-scroll {
+  position: relative;
+
+  &-holder {
+    overflow: auto;
+    overflow-anchor: none;
+  }
+
+  &-filler {
+    position: relative;
+  }
+
+  &-content {
+    display: flex;
+    flex-flow: column wrap;
+  }
+}
+
+.cdk-scroll-block {
+  overflow: hidden;
+}
