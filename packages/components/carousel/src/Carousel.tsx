@@ -118,7 +118,7 @@ export default defineComponent({
         const children = slots.dot ? (
           slots.dot({ index, isActive })
         ) : (
-          <button class={`${prefixCls}-dot-item-default`}></button>
+          <button class={`${prefixCls}-dot-item-default`} type="button"></button>
         )
         return (
           <li key={node.key!} class={itemClass} onClick={() => onClick(index)} onMouseenter={() => onMouseenter(index)}>

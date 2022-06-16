@@ -39,7 +39,7 @@ exports[`Table > basic work > render work 1`] = `
         <tbody>
           <!---->
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
             <td class=\\"ix-table-align-start\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -65,7 +65,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -93,7 +93,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -121,7 +121,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
             <td class=\\"ix-table-align-start\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -147,7 +147,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -175,7 +175,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -203,7 +203,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
             <td class=\\"ix-table-align-start\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -229,7 +229,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -257,7 +257,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\">
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
             <td class=\\"ix-table-align-start\\">
@@ -285,7 +285,7 @@ exports[`Table > basic work > render work 1`] = `
             </td>
           </tr>
           <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
             <td class=\\"ix-table-align-start\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
