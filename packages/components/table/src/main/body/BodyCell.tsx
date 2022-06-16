@@ -179,7 +179,7 @@ function renderExpandableChildren(
   }
 
   return (
-    <button class={`${prefixCls}-expandable-trigger`} style={style} onClick={props.handleExpend}>
+    <button class={`${prefixCls}-expandable-trigger`} style={style} type="button" onClick={props.handleExpend}>
       {iconNode}
     </button>
   )

@@ -18,8 +18,8 @@ exports[`Carousel > render work 1`] = `
   </div>
   <!---->
   <ul class=\\"ix-carousel-dot ix-carousel-dot-bottom\\">
-    <li class=\\"ix-carousel-dot-item ix-carousel-dot-item-active\\"><button class=\\"ix-carousel-dot-item-default\\"></button></li>
-    <li class=\\"ix-carousel-dot-item\\"><button class=\\"ix-carousel-dot-item-default\\"></button></li>
+    <li class=\\"ix-carousel-dot-item ix-carousel-dot-item-active\\"><button class=\\"ix-carousel-dot-item-default\\" type=\\"button\\"></button></li>
+    <li class=\\"ix-carousel-dot-item\\"><button class=\\"ix-carousel-dot-item-default\\" type=\\"button\\"></button></li>
   </ul>
 </div>"
 `;
