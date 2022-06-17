@@ -15,14 +15,14 @@ export default defineComponent({
   props: ['column', 'onResizeEnd'],
   setup(props, { slots }) {
     const elementRef = ref<HTMLDivElement>()
-    const onEnd: ResizableEvent = position => {
+    const onResizeEnd: ResizableEvent = position => {
       callEmit(props.onResizeEnd, props.column.key, position.width)
     }
 
     const resizableOptions = reactive<ResizableOptions>({
       maxWidth: props.column.maxWidth,
       minWidth: props.column.minWidth,
-      onEnd,
+      onResizeEnd,
     })
 
     const { resizing, position } = useResizable(elementRef, resizableOptions)

@@ -6,13 +6,12 @@
  */
 
 import type { ResizableHandlerPlacement } from './types'
-import type { DragPosition } from '@idux/cdk/drag-drop'
 import type { InjectionKey } from 'vue'
 
 export interface ResizableContext {
-  handleStart: (placement: ResizableHandlerPlacement, position: DragPosition, evt: PointerEvent) => void
-  handleMove: (placement: ResizableHandlerPlacement, position: DragPosition, evt: PointerEvent) => void
-  handleEnd: (placement: ResizableHandlerPlacement, position: DragPosition, evt: PointerEvent) => void
+  handleResizeStart: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
+  handleResizing: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
+  handleResizeEnd: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
 }
 
 export const resizableToken: InjectionKey<ResizableContext> = Symbol('resizable')

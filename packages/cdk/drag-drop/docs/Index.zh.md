@@ -1,9 +1,9 @@
 ---
 category: cdk
-type: 
+type:
 order: 0
 title: DragDrop
-subtitle: 拖拽
+subtitle: 拖放
 ---
 
 ## API
@@ -12,19 +12,23 @@ subtitle: 拖拽
 
 ```ts
 /**
- * 使一个元素可以被拖拽
- * 
- * @param target 目标元素，可以是一个 Ref 或 组件实例
- * @param options 拖拽的配置
- * @returns 返回一个用于停止监听的函数, 和当前的拖拽状态
+ * 让一个元素可以被拖拽
+ *
+ * @param source 可拖拽的元素
+ * @param options 选项
+ * @param context 默认挂载window为上下文管理载点
  */
 export function useDraggable(
-  target: MaybeElementRef,
-  options: DraggableOptions,
-): {
-  dragging: ComputedRef<boolean>
-  position: ComputedRef<DragPosition>
-  stop: () => void
+  source: MaybeElementRef,
+  options?: DraggableOptions,
+  context?: DnDContext,
+): { 
+  // 当前是否可以放置到目标
+  canDrop: ComputedRef<boolean>;
+  // 当前是否正在拖拽
+  isDragging: ComputedRef<boolean>
+  // 当前拖动中的位置信息
+  currPosition: ComputedRef<DragPosition>;
 }
 
 export interface DragPosition {
@@ -38,24 +42,59 @@ export interface DragPosition {
   offsetY: number
 }
 
-export type DraggableEvent = (position: DragPosition, evt: PointerEvent) => void
+export type DnDEvent = (evt: DragEvent, position?: DragPosition) => void
 
 export interface DraggableOptions {
-  onStart?: DraggableEvent
-  onMove?: DraggableEvent
-  onEnd?: DraggableEvent
+  // 指定元素可拖拽的范围，高级定义请使用useDroppable,同时置此选项为null
+  boundary?: BoundaryType
+  // 允许元素自由拖放
+  free?: boolean
+  onDragStart?: DnDEvent
+  onDrag?: DnDEvent
+  onDragEnd?: DnDEvent
+}
+```
+
+### useDroppable
+
+```ts
+/**
+ * 将一个元素置为可放置区域
+ *
+ * @param target 区域元素
+ * @param options 选项
+ * @param context 默认挂载window为上下文管理载点
+ */
+export function useDroppable(
+  target: MaybeElementRef,
+  options?: DroppableOptions,
+  context?: DnDContext,
+): {
+  /**
+   * 连接拖拽源和放置目标
+   * @param source
+   */
+  connect: (source: MaybeElementRef) => void
 }
 
+export interface DroppableOptions {
+  onDragEnter?: (evt: DragEvent) => void
+  onDragOver?: (evt: DragEvent) => void
+  onDragLeave?: (evt: DragEvent) => void
+  onDrop?: (evt: DragEvent) => void
+}
 ```
 
 ### CdkDraggable
 
 #### DraggableProps
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `disabled` | 是否禁用  | `boolean` | - | - | - |
-| `is` | 拖拽的元素或者组件 | `string \| Component` | `'div'` | - | - |
-| `onStart` | 拖拽开始事件  | - | `DraggableEvent` | - | - |
-| `onMove` | 拖拽过程中事件  | - | `DraggableEvent` | - | - |
-| `onEnd` | 拖拽结束事件  | - | `DraggableEvent` | - | - |
+| 名称            | 说明        | 类型           | 默认值         | 全局配置 | 备注                           |
+|---------------|-----------|--------------|-------------| --- |------------------------------|
+| `boundary`    | 指定可拖放区域   | `BoundaryType` | `parent`    | -| 需要使用`useDropabble()`时，请置`null` |
+| `disabled`    | 是否禁用      | `boolean`    | -           | -| -                            |
+| `free`        | 是否自由拖放    | `boolean`    | -           | -| -                            |
+| `is`          | 拖拽的元素或者组件 | `string \| Component` | `'div'`  | -                            |
+| `onDragStart` | 拖拽开始事件    | `DnDEvent`   | -           | -        | -                            |
+| `onDrag`      | 拖拽过程中事件   | `DnDEvent`   | -           | -        | -                            |
+| `onDragEnd`   | 拖拽结束事件    | `DnDEvent`   | -           | -        | -                            |
