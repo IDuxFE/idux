@@ -42,7 +42,7 @@ export default defineComponent({
       return normalizeClass({
         'cdk-draggable': true,
         'cdk-draggable-disabled': props.disabled,
-        'cdk-dragging': dragging.value,
+        'cdk-draggable-dragging': dragging.value,
       })
     })
 
