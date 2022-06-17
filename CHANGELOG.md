@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.16](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-17)
+
+
+### Bug Fixes
+
+* **cdk:resize:** performance problem ([#963](https://github.com/IDuxFE/idux/issues/963)) ([52e2eb8](https://github.com/IDuxFE/idux/commit/52e2eb8029d78c2fd5273727cef46f5e402b6785))
+* **comp:button:** danger mode style error ([#957](https://github.com/IDuxFE/idux/issues/957)) ([6fef486](https://github.com/IDuxFE/idux/commit/6fef486cd8527835ef9d61eec55497c10cbe2464)), closes [#955](https://github.com/IDuxFE/idux/issues/955)
+* **comp:header:** prefix or suffix is empty str, expect no render vnode ([#954](https://github.com/IDuxFE/idux/issues/954)) ([f9fb28b](https://github.com/IDuxFE/idux/commit/f9fb28b27e2187c0d09bc76c1e28f09d08d03067))
+* **comp:modal:** fix loading stop before hide ([#961](https://github.com/IDuxFE/idux/issues/961)) ([8f3f696](https://github.com/IDuxFE/idux/commit/8f3f696268e85cdf3eb6bf3a58e47740fd47c5cf))
+* **comp:table:** calculate the scroll postion when container resize ([#956](https://github.com/IDuxFE/idux/issues/956)) ([5fffb9b](https://github.com/IDuxFE/idux/commit/5fffb9b74f448c90d9478e26aaf1cbdf8a322a00))
+* **comp:table:** set expandable trigger button type ([#962](https://github.com/IDuxFE/idux/issues/962)) ([a59b764](https://github.com/IDuxFE/idux/commit/a59b7641306a1d4d64d02a170bcc148adbb53c33))
+* **comp:time-picker:** fix time range input ([#959](https://github.com/IDuxFE/idux/issues/959)) ([56bd1b2](https://github.com/IDuxFE/idux/commit/56bd1b28d01c6ad4b234e0cd59ed4455a018c75e))
+* **comp:tree:** data display error after search clearing ([#952](https://github.com/IDuxFE/idux/issues/952)) ([2f502f6](https://github.com/IDuxFE/idux/commit/2f502f6ec4375d0e01bad4725531ae0e4ceafeee))
+* **pro:transfer:** fix flat tree transfer render when labelKey provided ([#958](https://github.com/IDuxFE/idux/issues/958)) ([8319ac0](https://github.com/IDuxFE/idux/commit/8319ac00e34fe10e5fa7bab888ae2792b71f2150))
+
+
+### Features
+
+* **comp:select:** extract IxSelectPanel component ([#938](https://github.com/IDuxFE/idux/issues/938)) ([3724675](https://github.com/IDuxFE/idux/commit/3724675812d47fb1bcebc486ad8f3ab2a8704ad9))
+
+
+### BREAKING CHANGES
+
+* **pro:transfer:** TransferBindings provide getKey as ComputedRef instead of getRowKey
+
+
+
+
+
 # [1.0.0-beta.15](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-06-13)
 
 

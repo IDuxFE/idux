@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.16](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-17)
+
+
+### Bug Fixes
+
+* **cdk:resize:** performance problem ([#963](https://github.com/IDuxFE/idux/issues/963)) ([52e2eb8](https://github.com/IDuxFE/idux/commit/52e2eb8029d78c2fd5273727cef46f5e402b6785))
+
+
+
+
+
 # [1.0.0-beta.15](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-06-13)
 
 
