@@ -7,7 +7,6 @@
 
 import { type ComputedRef, computed, provide, ref, toRaw } from 'vue'
 
-import { type DragPosition } from '@idux/cdk/drag-drop'
 import { type MaybeElementRef, callEmit, convertElement } from '@idux/cdk/utils'
 
 import { resizableToken } from './token'
@@ -77,17 +76,17 @@ export function useResizable(
     height: number,
     ratio: number,
   ): { width: number; height: number } => {
-    const { bounds = 'parent', minWidth = 8, minHeight = 8 } = options
+    const { boundary = 'parent', minWidth = 8, minHeight = 8 } = options
     let boundWidth = Infinity
     let boundHeight = Infinity
-    if (bounds === 'window' || bounds === window) {
+    if (boundary === 'window' || boundary === window) {
       if (typeof window !== 'undefined') {
         boundWidth = window.innerWidth
         boundHeight = window.innerHeight
       }
     } else {
       const parent =
-        bounds === 'parent' ? convertElement(target)?.parentElement : convertElement(bounds as MaybeElementRef)
+        boundary === 'parent' ? convertElement(target)?.parentElement : convertElement(boundary as MaybeElementRef)
       if (parent && parent instanceof HTMLElement) {
         const parentRect = parent.getBoundingClientRect()
         boundWidth = parentRect.width
@@ -122,17 +121,16 @@ export function useResizable(
     return { width: newWidth, height: newHeight }
   }
 
-  const handleStart = (_placement: ResizableHandlerPlacement, _position: DragPosition, evt: PointerEvent) => {
+  const handleResizeStart = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
     const { width, height, left, top } = convertElement(target)!.getBoundingClientRect()
     const { clientX, clientY } = evt
 
     startPosition.value = { width, height, left, top, clientX, clientY }
     const position = { width, height, offsetWidth: 0, offsetHeight: 0 }
-
-    callEmit(options.onStart, position, evt)
+    callEmit(options.onResizeStart, position, evt)
   }
 
-  const handleMove = (_placement: ResizableHandlerPlacement, _position: DragPosition, evt: PointerEvent) => {
+  const handleResizing = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
     if (!startPosition.value) {
       return
     }
@@ -150,11 +148,10 @@ export function useResizable(
       offsetHeight: newHeight - height,
     }
     currPosition.value = position
-
-    callEmit(options.onMove, position, evt)
+    callEmit(options.onResizing, position, evt)
   }
 
-  const handleEnd = (_placement: ResizableHandlerPlacement, _position: DragPosition, evt: PointerEvent) => {
+  const handleResizeEnd = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
     if (!startPosition.value) {
       return
     }
@@ -162,11 +159,10 @@ export function useResizable(
     resizing.value = false
 
     startPosition.value = undefined
-
-    callEmit(options.onEnd, toRaw(currPosition.value), evt)
+    callEmit(options.onResizeEnd, toRaw(currPosition.value), evt)
   }
 
-  provide(resizableToken, { handleStart, handleMove, handleEnd })
+  provide(resizableToken, { handleResizeStart, handleResizing, handleResizeEnd })
 
   return {
     resizing: computed(() => resizing.value),

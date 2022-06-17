@@ -14,19 +14,19 @@ subtitle: 调整尺寸
 
 #### ResizableProps
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `bounds` | 可调整尺寸的边界范围  | `'parent' \| 'window' \| Window \| MaybeElementRef` | `parent` | - | - |
-| `disabled` | 是否禁用  | `boolean` | `false` | - | - |
-| `handlers` | 定义拖拽手柄的位置  | `ResizableHandlerPlacement[]` | `allHandlerPlacements` | - | - |
-| `is` | 可以调整尺寸的元素或者组件 | `string \| Component` | `'div'` | - | - |
-| `maxHeight` | 可调整的最大高度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
-| `maxWidth` | 可调整的最大宽度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
-| `minHeight` | 可调整的最小高度  | `number` | `8` | - | - |
-| `minWidth` | 可调整的最小宽度  | `number` | `8` | - | - |
-| `onStart` | 拖拽开始事件  | - | `ResizableEvent` | - | - |
-| `onMove` | 拖拽过程中事件  | - | `ResizableEvent` | - | - |
-| `onEnd` | 拖拽结束事件  | - | `ResizableEvent` | - | - |
+| 名称            | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+|---------------| --- | --- | --- | --- | --- |
+| `boundary`    | 可调整尺寸的边界范围  | `'parent' \| 'window' \| Window \| MaybeElementRef` | `parent` | - | - |
+| `disabled`    | 是否禁用  | `boolean` | `false` | - | - |
+| `handlers`    | 定义拖拽手柄的位置  | `ResizableHandlerPlacement[]` | `allHandlerPlacements` | - | - |
+| `is`          | 可以调整尺寸的元素或者组件 | `string \| Component` | `'div'`  | -                            | -   |
+| `maxHeight`   | 可调整的最大高度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
+| `maxWidth`    | 可调整的最大宽度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
+| `minHeight`   | 可调整的最小高度  | `number` | `8` | - | - |
+| `minWidth`    | 可调整的最小宽度  | `number` | `8` | - | - |
+| `onDragStart` | 拖拽开始事件  | - | `ResizableEvent` | - | - |
+| `onDrag`      | 拖拽过程中事件  | - | `ResizableEvent` | - | - |
+| `onDragEnd`   | 拖拽结束事件  | - | `ResizableEvent` | - | - |
 
 ```ts
 const allHandlerPlacements = ['top', 'bottom', 'start', 'end', 'topStart', 'topEnd', 'bottomStart', 'bottomEnd'] as const
@@ -49,9 +49,9 @@ export type ResizableEvent = (position: ResizePosition, evt: PointerEvent) => vo
 
 #### ResizableHandlerProps
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `placement` | 手柄的位置  | `ResizableHandlerPlacement` | `bottomEnd` | - | 同时也决定了可以调整的方向 |
+| 名称          | 说明 | 类型  | 默认值 | 全局配置 | 备注               |
+|-------------| --- | --- | --- | --- |------------------|
+| `placement` | 手柄的位置  | `ResizableHandlerPlacement` | `bottomEnd` | - | 同时也决定了可以调整的方向    |
 
 ### CdkResizeObserver
 
@@ -59,12 +59,12 @@ export type ResizableEvent = (position: ResizePosition, evt: PointerEvent) => vo
 
 #### ResizeObserverProps
 
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
+| 名称 | 说明 | 类型       | 默认值 | 全局配置 | 备注 |
+| --- | --- |----------| --- | --- | --- |
 | `disabled` | 是否禁用  | `boolean` | - | - | - |
-| `is` | 被观测的元素或者组件 | `string | Component` | `'div'` | - | - |
-| `options` | 传递给 `ResizeObserver` 的参数  | - | `ResizeObserverOptions` | - | 参见 [MDN:ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver/observe) |
-| `onResize` | 当元素尺寸改变时的回调  | - | `(entry: ResizeObserverEntry) => void` | - | - |
+| `is` | 被观测的元素或者组件 | `string \| Component` | `'div'` | - |
+| `options` | 传递给 `ResizeObserver` 的参数  | -        | `ResizeObserverOptions` | - | 参见 [MDN:ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver/observe) |
+| `onResize` | 当元素尺寸改变时的回调  | -        | `(entry: ResizeObserverEntry) => void` | - | - |
 
 ### useResizeObserver
 

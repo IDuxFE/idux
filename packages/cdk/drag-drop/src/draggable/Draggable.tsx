@@ -5,38 +5,54 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed } from '@vue/reactivity'
+import type { DragPosition } from '../types'
+
 import { defineComponent, h, normalizeClass, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { type DragPosition, draggableProps } from './types'
-import { useDraggable } from './useDraggable'
+import { useDraggable } from '../composables/useDraggable'
+import { draggableProps } from './types'
+
+const classes = () =>
+  normalizeClass({
+    'cdk-draggable': true,
+  })
+const style = {
+  width: 'fit-content',
+  height: 'fit-content',
+}
 
 export default defineComponent({
   name: 'CdkDraggable',
   props: draggableProps,
   setup(props, { slots }) {
     const elementRef = ref()
-    const onStart = (position: DragPosition, evt: PointerEvent) => callEmit(props.onStart, position, evt)
-    const onMove = (position: DragPosition, evt: PointerEvent) => callEmit(props.onMove, position, evt)
-    const onEnd = (position: DragPosition, evt: PointerEvent) => callEmit(props.onEnd, position, evt)
+
+    const onDragStart = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDragStart, evt, position)
+    const onDrag = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDrag, evt, position)
+    const onDragEnd = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDragEnd, evt, position)
 
     const draggableResult = shallowRef()
 
     const cleanup = () => {
       if (draggableResult.value) {
-        draggableResult.value.stop()
         draggableResult.value = undefined
       }
     }
 
     watch(
-      [() => props.disabled],
-      ([disabled]) => {
+      [() => props.disabled, () => props.free, () => props.boundary],
+      ([disabled, free, boundary]) => {
         cleanup()
         if (!disabled) {
-          draggableResult.value = useDraggable(elementRef, { onStart, onMove, onEnd })
+          draggableResult.value = useDraggable(elementRef, {
+            onDragStart,
+            onDrag,
+            onDragEnd,
+            free,
+            boundary,
+          })
         }
       },
       {
@@ -47,23 +63,12 @@ export default defineComponent({
 
     onBeforeUnmount(cleanup)
 
-    const classed = computed(() => {
-      const { dragging } = draggableResult.value
-      return normalizeClass({
-        'cdk-draggable': true,
-        'cdk-dragging': dragging.value,
-      })
-    })
-
     return () => {
       if (!draggableResult.value) {
         return null
       }
       const tag = props.is as string
-      const { position } = draggableResult.value
-      const { left, top } = position.value
-      const style = `left:${left}px;top:${top}px;`
-      return h(tag, { ref: elementRef, class: classed.value, style }, slots)
+      return h(tag, { ref: elementRef, class: classes(), style }, slots)
     }
   },
 })

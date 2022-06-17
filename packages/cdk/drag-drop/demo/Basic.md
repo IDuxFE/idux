@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh: 基本使用
+  zh: 自由拖拽
   en: Basic usage
 ---
 

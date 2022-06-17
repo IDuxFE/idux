@@ -5,8 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, MaybeElementRef } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
+
+import { BoundaryType } from '@idux/cdk/drag-drop'
 
 const allHandlerPlacements = [
   'top',
@@ -25,7 +27,7 @@ export const resizableProps = {
    *
    * @default 'parent'
    */
-  bounds: { type: [String, Object] as PropType<'parent' | 'window' | Window | MaybeElementRef>, default: 'parent' },
+  boundary: { type: [String, Object] as PropType<BoundaryType>, default: 'parent' },
   disabled: { type: Boolean, default: false },
   handlers: { type: Array as PropType<ResizableHandlerPlacement[]>, default: () => allHandlerPlacements },
   is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
@@ -53,9 +55,9 @@ export const resizableProps = {
    * @default 8
    */
   minWidth: { type: Number, default: 8 },
-  onStart: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
-  onMove: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
-  onEnd: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
+  onResizeStart: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
+  onResizing: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
+  onResizeEnd: [Function, Array] as PropType<MaybeArray<ResizableEvent>>,
 } as const
 
 export type ResizableProps = ExtractInnerPropTypes<typeof resizableProps>

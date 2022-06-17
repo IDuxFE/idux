@@ -38,6 +38,7 @@ export { install }
 export * from '@idux/cdk/a11y'
 export * from '@idux/cdk/breakpoint'
 export * from '@idux/cdk/click-outside'
+export * from '@idux/cdk/drag-drop'
 export * from '@idux/cdk/clipboard'
 export * from '@idux/cdk/forms'
 export * from '@idux/cdk/platform'
