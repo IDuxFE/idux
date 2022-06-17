@@ -5,10 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { BoundaryType } from '@idux/cdk/drag-drop'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { BoundaryType } from '@idux/cdk/drag-drop'
 
 const allHandlerPlacements = [
   'top',
@@ -29,8 +28,10 @@ export const resizableProps = {
    */
   boundary: { type: [String, Object] as PropType<BoundaryType>, default: 'parent' },
   disabled: { type: Boolean, default: false },
+  free: { type: Boolean, default: false },
   handlers: { type: Array as PropType<ResizableHandlerPlacement[]>, default: () => allHandlerPlacements },
   is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
+
   /**
    * Maximum height of resizable element
    *

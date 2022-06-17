@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, h, reactive, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 
 import { CdkResizableHandler, type ResizableEvent, type ResizableOptions, useResizable } from '@idux/cdk/resize'
 import { callEmit } from '@idux/cdk/utils'
@@ -28,19 +28,21 @@ export default defineComponent({
     const { resizing, position } = useResizable(elementRef, resizableOptions)
 
     return () => {
-      const children = slots.default ? slots.default() : []
       if (!props.column.resizable) {
-        return h('th', null, children)
+        return <th>{slots.default?.()}</th>
       }
 
-      children.push(<CdkResizableHandler placement="end" />)
-
+      const children = [<CdkResizableHandler placement="end" />]
       if (resizing.value) {
         const { width, height } = position.value
         children.push(<div class="cdk-resizable-preview" style={`width:${width}px;height:${height}px`}></div>)
       }
-
-      return h('th', { ref: elementRef }, children)
+      return (
+        <th ref={elementRef}>
+          {slots.default?.()}
+          {children}
+        </th>
+      )
     }
   },
 })

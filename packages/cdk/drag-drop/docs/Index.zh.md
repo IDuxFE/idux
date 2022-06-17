@@ -26,9 +26,9 @@ export function useDraggable(
   // 当前是否可以放置到目标
   canDrop: ComputedRef<boolean>;
   // 当前是否正在拖拽
-  isDragging: ComputedRef<boolean>
+  dragging: ComputedRef<boolean>
   // 当前拖动中的位置信息
-  currPosition: ComputedRef<DragPosition>;
+  position: ComputedRef<DragPosition>;
 }
 
 export interface DragPosition {
