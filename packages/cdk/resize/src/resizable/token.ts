@@ -10,8 +10,6 @@ import type { InjectionKey } from 'vue'
 
 export interface ResizableContext {
   handleResizeStart: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
-  handleResizing: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
-  handleResizeEnd: (placement: ResizableHandlerPlacement, evt: PointerEvent) => void
 }
 
 export const resizableToken: InjectionKey<ResizableContext> = Symbol('resizable')

@@ -35,7 +35,11 @@ export function useDraggable(
   source: MaybeElementRef,
   options?: DraggableOptions,
   context?: DnDContext,
-): { canDrop: ComputedRef<boolean>; currPosition: ComputedRef<DragPosition>; isDragging: ComputedRef<boolean> } {
+): {
+  canDrop: ComputedRef<boolean>
+  dragging: ComputedRef<boolean>
+  position: ComputedRef<DragPosition>
+} {
   context = initContext(context)
   let firstPosition: DragEvent | null = null
 
@@ -132,8 +136,8 @@ export function useDraggable(
   onScopeDispose(stop)
 
   return {
-    isDragging: computed(() => context!.state.isDragging.value),
-    canDrop: computed(() => context!.state.isDragging.value),
-    currPosition: computed(() => context!.state.currPosition.value),
+    canDrop: computed(() => context!.state.canDrop.value),
+    dragging: computed(() => context!.state.isDragging.value),
+    position: computed(() => context!.state.currPosition.value),
   }
 }

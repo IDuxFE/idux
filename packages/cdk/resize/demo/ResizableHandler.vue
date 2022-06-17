@@ -1,6 +1,14 @@
 <template>
   <div class="resizable-container">
-    <CdkResizable class="resizable-box" :handlers="[]" :maxWidth="600" :maxHeight="200" :minWidth="120" :minHeight="40">
+    <CdkResizable
+      class="resizable-box"
+      free
+      :handlers="[]"
+      :maxWidth="600"
+      :maxHeight="200"
+      :minWidth="120"
+      :minHeight="40"
+    >
       CdkResizable!
       <CdkResizableHandler placement="end">
         <div class="handler-end">

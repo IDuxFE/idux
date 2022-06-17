@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-// export { useDragDropContext, type DragDropContext } from './src/composables/useDragDropContext' // exclude inner map
 export * from './src/composables/useDraggable'
 export * from './src/composables/useDroppable'
 

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, computed, defineComponent, h, normalizeClass, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
 import ResizableHandler from './ResizableHandler'
 import { resizableProps } from './types'
@@ -27,24 +27,24 @@ export default defineComponent({
       })
     })
 
-    const style = computed<CSSProperties>(() => {
-      const { width, height } = position.value
-      return {
-        position: 'relative',
-        width: `${width}px`,
-        height: `${height}px`,
+    const style = computed(() => {
+      if (!props.free) {
+        return undefined
       }
+      const { width, height } = position.value
+      return `width: ${width}px;height: ${height}px`
     })
 
     return () => {
-      const { disabled, handlers, is: tag } = props
-      const children = slots.default ? slots.default() : []
-
-      handlers.forEach(placement => {
-        children.push(<ResizableHandler key={placement} placement={placement} disabled={disabled} />)
-      })
-
-      return h(tag as string, { ref: elementRef, class: classes.value, style: style.value }, children)
+      const { handlers, is: Tag } = props
+      return (
+        <Tag ref={elementRef} class={classes.value} style={style.value}>
+          {slots.default?.()}
+          {handlers.map(placement => (
+            <ResizableHandler key={placement} placement={placement} />
+          ))}
+        </Tag>
+      )
     }
   },
 })

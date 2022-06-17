@@ -7,7 +7,7 @@
 
 import { type ComputedRef, computed, provide, ref, toRaw } from 'vue'
 
-import { type MaybeElementRef, callEmit, convertElement } from '@idux/cdk/utils'
+import { type MaybeElementRef, callEmit, convertElement, useEventListener } from '@idux/cdk/utils'
 
 import { resizableToken } from './token'
 import { type ResizableHandlerPlacement, type ResizableOptions, type ResizePosition } from './types'
@@ -18,8 +18,10 @@ export function useResizable(
 ): {
   resizing: ComputedRef<boolean>
   position: ComputedRef<ResizePosition>
+  stop: () => void
 } {
   const resizing = ref(false)
+  const activePlacement = ref<ResizableHandlerPlacement>()
   const startPosition = ref<{
     width: number
     height: number
@@ -121,24 +123,25 @@ export function useResizable(
     return { width: newWidth, height: newHeight }
   }
 
-  const handleResizeStart = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
+  const handleResizeStart = (placement: ResizableHandlerPlacement, evt: PointerEvent) => {
+    activePlacement.value = placement
     const { width, height, left, top } = convertElement(target)!.getBoundingClientRect()
     const { clientX, clientY } = evt
-
     startPosition.value = { width, height, left, top, clientX, clientY }
     const position = { width, height, offsetWidth: 0, offsetHeight: 0 }
     callEmit(options.onResizeStart, position, evt)
   }
 
-  const handleResizing = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
-    if (!startPosition.value) {
+  const handleResizing = (evt: PointerEvent) => {
+    const currPlacement = activePlacement.value
+    if (!startPosition.value || !currPlacement) {
       return
     }
-    setBodyCursor(_placement)
+    setBodyCursor(currPlacement)
     resizing.value = true
 
-    const { width: currWidth, height: currHeight } = calcSizeByEvent(_placement, evt)
-    const { width: newWidth, height: newHeight } = calcSizeByBounds(_placement, currWidth, currHeight, -1)
+    const { width: currWidth, height: currHeight } = calcSizeByEvent(currPlacement, evt)
+    const { width: newWidth, height: newHeight } = calcSizeByBounds(currPlacement, currWidth, currHeight, -1)
     const { width, height } = startPosition.value
 
     const position = {
@@ -151,22 +154,31 @@ export function useResizable(
     callEmit(options.onResizing, position, evt)
   }
 
-  const handleResizeEnd = (_placement: ResizableHandlerPlacement, evt: PointerEvent) => {
+  const handleResizeEnd = (evt: PointerEvent) => {
     if (!startPosition.value) {
       return
     }
     clearBodyCursor()
     resizing.value = false
-
+    activePlacement.value = undefined
     startPosition.value = undefined
     callEmit(options.onResizeEnd, toRaw(currPosition.value), evt)
   }
 
-  provide(resizableToken, { handleResizeStart, handleResizing, handleResizeEnd })
+  const { stop: stopPointermove } = useEventListener(document, 'pointermove', handleResizing, true)
+  const { stop: stopPointerup } = useEventListener(document, 'pointerup', handleResizeEnd, true)
+
+  const stop = () => {
+    stopPointermove()
+    stopPointerup()
+  }
+
+  provide(resizableToken, { handleResizeStart })
 
   return {
     resizing: computed(() => resizing.value),
     position: computed(() => currPosition.value),
+    stop,
   }
 }
 

@@ -1,3 +1,14 @@
-.cdk-draggable.cdk-draggable {
-  cursor: move;
+.cdk-draggable {
+
+  &[draggable] {
+    cursor: move;
+
+    > * {
+      cursor: move;
+    }
+  }
+
+  &-disabled {
+    pointer-events: none;
+  }
 }
