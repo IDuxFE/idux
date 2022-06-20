@@ -1,7 +1,7 @@
 import { MountingOptions, mount } from '@vue/test-utils'
 import { h } from 'vue'
 
-import { renderWork } from '@tests'
+import { renderWork, wait } from '@tests'
 
 import Tab from '../src/Tab'
 import Tabs from '../src/Tabs'
@@ -200,6 +200,38 @@ describe('Tabs', () => {
       await wrapper.setProps({ selectedKey: 'tab2' })
 
       expect(wrapper.findAll('.ix-tabs-pane').length).toBe(2)
+    })
+
+    test('onBeforeLeave work', async () => {
+      const onUpdateSelectedKey = vi.fn()
+      const wrapper = TabsMount({
+        props: {
+          selectedKey: 'tab3',
+          'onUpdate:selectedKey': onUpdateSelectedKey,
+          onBeforeLeave: key => {
+            switch (key) {
+              case 'tab1':
+                return false
+              case 'tab2':
+                return new Promise(resolve => {
+                  setTimeout(() => {
+                    resolve(true)
+                  }, 1000)
+                }) as Promise<boolean>
+              default:
+                return true
+            }
+          },
+        },
+      })
+
+      const tabs = wrapper.findAll('.ix-tabs-nav-tab')
+      await tabs[0].trigger('click')
+      expect(onUpdateSelectedKey).toBeCalledTimes(0)
+      await tabs[1].trigger('click')
+      expect(onUpdateSelectedKey).toBeCalledTimes(0)
+      await wait(1000)
+      expect(onUpdateSelectedKey).toBeCalledWith('tab2')
     })
   })
 })

@@ -24,6 +24,7 @@ order: 0
 | `onTabClick` | 标签被点击的回调 | `(key: VKey, evt: Event) => void`| - | - | - |
 | `onPreClick` | 滚动状态下，Pre按钮被点击的回调 | `(evt: Event) => void`| - | - | - |
 | `onNextClick` | 滚动状态下，Next按钮被点击的回调 | `(evt: Event) => void`| - | - | - |
+| `onBeforeLeave` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止切换 | `(key: VKey, oldKey?: VKey) => boolean \| Promise<boolean>`| - | - | - |
 
 #### IxTabProps
 
