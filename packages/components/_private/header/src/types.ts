@@ -12,5 +12,6 @@ export interface HeaderProps {
   closable?: boolean
   closeIcon?: string | VNode
   header?: string | IxHeaderProps
+  size?: 'xl' | 'lg' | 'md' | 'sm'
   onClose?: (evt: Event) => void
 }

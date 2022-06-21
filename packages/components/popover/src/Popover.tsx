@@ -69,6 +69,7 @@ const renderContent = (
   if (slots.header || props.header) {
     children.push(
       <ɵHeader
+        size="sm"
         closable={props.closable}
         closeIcon={closeIcon.value}
         header={props.header ?? props.title}

@@ -15,8 +15,6 @@ export interface FooterButtonProps extends ButtonProps {
   onClick?: (evt: Event) => void
 }
 
-export const footerTypeDef = [Boolean, Array, Object] as PropType<boolean | FooterButtonProps[] | VNode>
-
 export const footerProps = {
   cancel: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
   cancelButton: Object as PropType<ButtonProps>,
@@ -26,7 +24,7 @@ export const footerProps = {
     type: Boolean,
     default: true,
   },
-  footer: footerTypeDef,
+  footer: [Boolean, Array, Object] as PropType<boolean | FooterButtonProps[] | VNode>,
   ok: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
   okButton: Object as PropType<ButtonProps>,
   okLoading: Boolean,
