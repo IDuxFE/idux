@@ -6,12 +6,12 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { ɵFooterTypeDef } from '@idux/components/_private/footer'
 import { ɵbaseTimePanelProps } from '@idux/components/_private/time-panel'
 
 const timePickerCommonProps = {
@@ -75,7 +75,7 @@ export const timePickerProps = {
   value: [String, Date, Number] as PropType<string | Date | number>,
 
   defaultOpenValue: [String, Date, Number] as PropType<string | Date | number>,
-  footer: { type: ɵFooterTypeDef, default: false },
+  footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: false },
   placeholder: String,
 
   // events
@@ -98,7 +98,7 @@ export const timeRangePickerProps = {
   // v-model
   value: Array as PropType<(number | string | Date | undefined)[]>,
   defaultOpenValue: Array as PropType<(number | string | Date)[]>,
-  footer: { type: ɵFooterTypeDef, default: true },
+  footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: true },
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
 

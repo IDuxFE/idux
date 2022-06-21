@@ -253,7 +253,7 @@ describe('Table', () => {
       await wrapper.setProps({ header })
 
       expect(wrapper.find('.ix-header').text()).toBe(header)
-      expect(wrapper.find('.ix-header').classes()).toContain('ix-header-sm')
+      expect(wrapper.find('.ix-header').classes()).toContain('ix-header-md')
 
       header = { title: 'This is header2', size: 'lg' }
       await wrapper.setProps({ header })

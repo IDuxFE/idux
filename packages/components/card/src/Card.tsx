@@ -57,7 +57,7 @@ export default defineComponent({
       return (
         <div class={classes.value}>
           {renderCover(props, slots, prefixCls)}
-          <ɵHeader v-slots={slots} header={props.header} />
+          <ɵHeader v-slots={slots} size="sm" header={props.header} />
           {renderBody(props, children, hasGrid, prefixCls)}
           {renderFooter(props, slots, prefixCls)}
         </div>

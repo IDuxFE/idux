@@ -21,11 +21,11 @@ import {
   watch,
 } from 'vue'
 
-import { isFunction, isString } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
-import { ɵHeader, type ɵHeaderProps } from '@idux/components/_private/header'
+import { ɵHeader } from '@idux/components/_private/header'
 
 import { DRAWER_TOKEN, drawerToken } from './token'
 
@@ -124,8 +124,6 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
 
-      const headerProps = isString(props.header) ? ({ title: props.header, size: 'md' } as ɵHeaderProps) : props.header
-
       return (
         <Transition
           name={transitionName.value}
@@ -158,7 +156,7 @@ export default defineComponent({
                     v-slots={slots}
                     closable={closable.value}
                     closeIcon={closeIcon.value}
-                    header={headerProps}
+                    header={props.header}
                     onClose={close}
                   />
                   <div class={`${prefixCls}-body`}>{slots.default?.()}</div>

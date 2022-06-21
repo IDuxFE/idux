@@ -28,11 +28,9 @@ const Header: FunctionalComponent<HeaderProps> = (props, { slots }) => {
   return <IxHeader {...headerProps} v-slots={headerSlots}></IxHeader>
 }
 
-const defaultSize = 'sm'
-
 function convertProps(props: HeaderProps) {
-  const { closable, closeIcon, header, onClose } = props
-  const headerProps = isString(header) ? { size: defaultSize, title: header } : { size: defaultSize, ...header }
+  const { closable, closeIcon, header, size, onClose } = props
+  const headerProps = isString(header) ? { title: header, size } : { size, ...header }
   if (closable) {
     headerProps.suffix = headerProps.suffix ?? closeIcon
     if (onClose) {

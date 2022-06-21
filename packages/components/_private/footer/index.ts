@@ -10,5 +10,4 @@ import Footer from './src/Footer'
 const ɵFooter = Footer
 
 export { ɵFooter }
-export { footerTypeDef as ɵFooterTypeDef } from './src/types'
 export type { FooterProps as ɵFooterProps, FooterButtonProps as ɵFooterButtonProps } from './src/types'

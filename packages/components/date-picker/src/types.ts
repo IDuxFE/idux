@@ -6,12 +6,12 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { ɵFooterTypeDef } from '@idux/components/_private/footer'
 
 export interface TimePanelOptions {
   disabledHours?: (selectedAmPm: string | undefined) => number[]
@@ -96,7 +96,7 @@ export const datePickerProps = {
 
   value: [String, Date, Number],
   defaultOpenValue: [String, Date, Number],
-  footer: { type: ɵFooterTypeDef, default: false },
+  footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: false },
   placeholder: String,
   timePanelOptions: Object as PropType<TimePanelOptions>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
@@ -117,7 +117,7 @@ export const dateRangePickerProps = {
 
   value: Array as PropType<(number | string | Date | undefined)[]>,
   defaultOpenValue: Array as PropType<(number | string | Date)[]>,
-  footer: { type: ɵFooterTypeDef, default: true },
+  footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: true },
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
   timePanelOptions: [Object, Array] as PropType<TimePanelOptions | TimePanelOptions[]>,
