@@ -244,7 +244,8 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `@table-body-hover-background` | `@background-color-light` | `@color-graphite-l50` | - |
 | `@table-pagination-margin` | `@spacing-lg 0` | - | - |
 | `@table-icon-margin` | `@spacing-xs` | - | - |
-| `@table-expandable-icon-size` | `@font-size-md` | - | - |
+| `@table-filterable-trigger-font-size` | `@font-size-md` | `@font-size-sm` | - |
+| `@table-expandable-icon-size` | `@font-size-lg` | `@font-size-md` | - |
 | `@table-expandable-icon-color` | `@color-black` | `@color-graphite` | - |
 | `@table-sticky-scroll-bar-background` | `fade(#000, 35%)` | - | - |
 | `@table-sticky-scroll-bar-radius` | `4px` | - | - |
