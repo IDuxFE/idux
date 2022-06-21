@@ -1,7 +1,8 @@
 .sider-themes(@theme) {
 
   @menu-theme: ~'@{menu-prefix}-@{theme}';
-  
+
+  color: ~'@{pro-layout-sider-@{theme}-color}';
   border-right: ~'@{pro-layout-sider-@{theme}-border-right}';
   background-color: ~'@{pro-layout-sider-@{theme}-background-color}';
 
@@ -21,6 +22,10 @@
         &-sub-label,
         &-item {
           color: ~'@{pro-layout-sider-@{theme}-color}';
+
+          a {
+            color: ~'@{pro-layout-sider-@{theme}-color}';
+          }
         }
 
         &-item:not(&-item-disabled):not(&-item-selected):hover {
@@ -32,6 +37,10 @@
           background-color:~'@{pro-layout-sider-@{theme}-active-background-color}'!important;
           &::after {
             opacity: 0;
+          }
+
+          a {
+            color: ~'@{pro-layout-sider-@{theme}-active-color}';
           }
         }
 
@@ -61,22 +70,12 @@
       }
     }
   }
-
-  ::-webkit-scrollbar-thumb {
-      padding: 0;
-      background-color: ~'@{pro-layout-sider-@{theme}-thumb-background-color}';
-      border: 3px solid ~'@{pro-layout-sider-@{theme}-thumb-color}';
-  }
-
-  ::-webkit-scrollbar-track {
-      border-radius: 0;
-      background-color: ~'@{pro-layout-sider-@{theme}-track-background-color}';
-  }
 }
 
 .header-themes(@theme) {
   @menu-theme: ~'@{menu-prefix}-@{theme}';
   
+  color: ~'@{pro-layout-header-@{theme}-color}';
   background-color: ~'@{pro-layout-header-@{theme}-background-color}';
   box-shadow: ~'@{pro-layout-header-@{theme}-box-shadow}';
 
@@ -91,17 +90,31 @@
           color: ~'@{pro-layout-header-@{theme}-color}';
           border-bottom: none;
 
+          a {
+            color: ~'@{pro-layout-header-@{theme}-color}';
+          }
+
           &:hover:not(.@{menu-prefix}-item-selected):not(.@{menu-prefix}-item-disabled) {
             color: ~'@{pro-layout-header-@{theme}-hover-color}';
             box-shadow: ~'@{pro-layout-header-@{theme}-active-box-shadow}';
             background-color: ~'@{pro-layout-header-@{theme}-hover-background-color}';
             background-image: ~'@{pro-layout-header-@{theme}-hover-background-image}';
+            border-bottom: none;
+
+            a {
+              color: ~'@{pro-layout-header-@{theme}-hover-color}';
+            }
           }
 
           &.@{menu-prefix}-item-selected:not(.@{menu-prefix}-item-disabled) {
             color: ~'@{pro-layout-header-@{theme}-active-color}';
             box-shadow: ~'@{pro-layout-header-@{theme}-active-box-shadow}';
             background-color: ~'@{pro-layout-header-@{theme}-active-background-color}';
+
+            
+            a {
+              color: ~'@{pro-layout-header-@{theme}-active-color}';
+            }
           }
         }
 
