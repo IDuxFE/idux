@@ -12,7 +12,7 @@ export interface TabsContext {
   selectedKey: Ref<VKey | undefined>
   selectedElRef: Ref<HTMLElement | null>
   mergedPrefixCls: ComputedRef<string>
-  handleTabClick: (key: VKey, evt: Event) => void
+  handleTabClick: (key: VKey, evt: Event) => Promise<void>
 }
 
 export const tabsToken: InjectionKey<TabsContext> = Symbol('tabsToken')

@@ -23,6 +23,7 @@ export const tabsProps = {
   onTabClick: [Function, Array] as PropType<MaybeArray<(key: VKey, evt: Event) => void>>,
   onPreClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onNextClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onBeforeLeave: [Function, Array] as PropType<MaybeArray<(key: VKey, oldKey?: VKey) => boolean | Promise<boolean>>>,
 } as const
 
 export const tabProps = {

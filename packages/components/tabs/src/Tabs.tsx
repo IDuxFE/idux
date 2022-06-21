@@ -12,7 +12,7 @@ import type { ComputedRef, Ref, VNode } from 'vue'
 
 import { computed, defineComponent, nextTick, normalizeClass, provide, ref, vShow, watch, withDirectives } from 'vue'
 
-import { curry, isNil, throttle } from 'lodash-es'
+import { curry, isNil } from 'lodash-es'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { addClass, callEmit, flattenNode, removeClass, useControlledProp } from '@idux/cdk/utils'
@@ -89,9 +89,13 @@ export default defineComponent({
     const navPreClasses = curryNavPreNextClasses('pre', preReached)
     const navNextClasses = curryNavPreNextClasses('next', nextReached)
 
-    const handleTabClick = (key: VKey, evt: Event) => {
-      callEmit(props.onTabClick, key, evt)
-      setSelectedKey(key)
+    const handleTabClick = async (key: VKey, evt: Event) => {
+      const leaveResult = callEmit(props.onBeforeLeave, key, selectedKey.value)
+      const result = await leaveResult
+      if (result !== false) {
+        callEmit(props.onTabClick, key, evt)
+        setSelectedKey(key)
+      }
     }
 
     const updateNavBarStyle = () => {
@@ -162,7 +166,7 @@ export default defineComponent({
       updateNavBarStyle()
     })
 
-    const onTabsResize = throttle(() => {
+    const onTabsResize = () => {
       syncNavRelatedElSize()
       if (hasScroll.value) {
         //存在滚动状态时，因为会增加前进、后退两个按钮，所以需要重新获取navWrapper宽度
@@ -175,7 +179,7 @@ export default defineComponent({
       } else {
         updateNavBarStyle()
       }
-    }, 10)
+    }
 
     useResizeObserver(navWrapperElRef, onTabsResize)
 
