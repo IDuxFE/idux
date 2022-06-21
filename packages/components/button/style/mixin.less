@@ -1,10 +1,14 @@
 @button-danger-border-color: color(~`colorPalette('@{button-danger-background-color}', 10) `);
 
-.button-size(@height; @font-size; @spacing-horizontal; @border-radius) {
+.button-size(@height; @font-size; @spacing-horizontal; @border-radius; @icon-font-size) {
   height: @height;
   padding: 0 @spacing-horizontal;
   font-size: @font-size;
   border-radius: @border-radius;
+
+   .@{icon-prefix} {
+    font-size: @icon-font-size;
+  }
 }
 
 .button-disabled(@color: @button-disable-color; @background: @button-disable-background-color; @border: @button-disable-border) {
@@ -115,6 +119,7 @@
 .button() {
   position: relative;
   display: inline-flex;
+  vertical-align: bottom;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
@@ -140,31 +145,31 @@
   }
 
   &-xs {
-    .button-size(@button-height-xs; @button-font-size-xs; @button-padding-xs; @button-border-radius);
+    .button-size(@button-height-xs; @button-font-size-xs; @button-padding-xs; @button-border-radius; @button-icon-font-size-xs);
 
     min-width: @button-min-width-xs;
   }
 
   &-sm {
-    .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius);
+    .button-size(@button-height-sm; @button-font-size-sm; @button-padding-sm; @button-border-radius; @button-icon-font-size-sm);
 
     min-width: @button-min-width-sm;
   }
 
   &-md {
-    .button-size(@button-height-md; @button-font-size-md; @button-padding-md; @button-border-radius);
+    .button-size(@button-height-md; @button-font-size-md; @button-padding-md; @button-border-radius; @button-icon-font-size-md);
 
     min-width: @button-min-width-md;
   }
 
   &-lg {
-    .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius);
+    .button-size(@button-height-lg; @button-font-size-lg; @button-padding-lg; @button-border-radius; @button-icon-font-size-lg);
 
     min-width: @button-min-width-lg;
   }
 
   &-xl {
-    .button-size(@button-height-xl; @button-font-size-xl; @button-padding-xl; @button-border-radius);
+    .button-size(@button-height-xl; @button-font-size-xl; @button-padding-xl; @button-border-radius; @button-icon-font-size-xl);
 
     min-width: @button-min-width-xl;
   }
@@ -315,21 +320,21 @@
 }
 
 .button-round(@buttonPrefix) {
-  .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
+  .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md; @button-icon-font-size-md);
   &.@{buttonPrefix}-xs {
-    .button-size(@button-height-xs; @button-font-size-xs; @button-height-xs / 2; @button-height-xs);
+    .button-size(@button-height-xs; @button-font-size-xs; @button-height-xs / 2; @button-height-xs; @button-icon-font-size-xs);
   }
   &.@{buttonPrefix}-sm {
-    .button-size(@button-height-sm; @button-font-size-sm; @button-height-sm / 2; @button-height-sm);
+    .button-size(@button-height-sm; @button-font-size-sm; @button-height-sm / 2; @button-height-sm; @button-icon-font-size-sm);
   }
   &.@{buttonPrefix}-md {
-    .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md);
+    .button-size(@button-height-md; @button-font-size-md; @button-height-md / 2; @button-height-md; @button-icon-font-size-md);
   }
   &.@{buttonPrefix}-lg {
-    .button-size(@button-height-lg; @button-font-size-lg; @button-height-lg / 2; @button-height-lg);
+    .button-size(@button-height-lg; @button-font-size-lg; @button-height-lg / 2; @button-height-lg; @button-icon-font-size-lg);
   }
   &.@{buttonPrefix}-xl {
-    .button-size(@button-height-xl; @button-font-size-xl; @button-height-xl / 2; @button-height-xl);
+    .button-size(@button-height-xl; @button-font-size-xl; @button-height-xl / 2; @button-height-xl; @button-icon-font-size-xl);
   }
 }
 

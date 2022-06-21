@@ -104,6 +104,10 @@ subtitle: 按钮
 | `@button-text-active-color` | `@color-primary-d10` | - | - |
 | `@button-text-hover-background-color` | `transparent` | - | - |
 | `@button-icon-color` | `@color-graphite-d20` | - | - |
-| `@button-icon-font-size` | `@font-size-lg` | - | - |
+| `@button-icon-font-size-xs` | `@font-size-xs` | `@font-size-lg` | - |
+| `@button-icon-font-size-sm` | `@font-size-sm` | `@font-size-lg` | - |
+| `@button-icon-font-size-md` | `@font-size-md` | `@font-size-lg` | - |
+| `@button-icon-font-size-lg` | `@font-size-md` | `@font-size-lg` | - |
+| `@button-icon-font-size-xl` | `@font-size-lg` | `@font-size-lg` | - |
 | `@button-icon-margin` | `0 @spacing-xs` | - | - |
 <!--- insert less variable end  --->
