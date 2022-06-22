@@ -45,7 +45,10 @@ export default defineComponent({
     const { accessor, handleChange } = pickerStateContext
 
     const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, accessor.valueRef)
-    const { overlayOpened, setOverlayOpened } = useOverlayState(props, rangeControlContext)
+    const { overlayOpened, overlayVisible, onAfterLeave, setOverlayOpened } = useOverlayState(
+      props,
+      rangeControlContext,
+    )
     const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, setOverlayOpened, handleChange)
 
     const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.dateRangePicker.separator
@@ -60,6 +63,8 @@ export default defineComponent({
       inputRef,
       inputEnableStatus,
       overlayOpened,
+      overlayVisible,
+      onAfterLeave,
       setOverlayOpened,
       rangeControlContext,
       renderSeparator,

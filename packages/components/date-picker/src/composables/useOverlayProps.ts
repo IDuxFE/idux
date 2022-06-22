@@ -13,7 +13,7 @@ import { type ComputedRef, computed } from 'vue'
 const defaultOffset: [number, number] = [0, 8]
 export function useOverlayProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵOverlayProps> {
   return computed(() => {
-    const { props, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened } = context
+    const { props, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
     return {
       clickOutside: true,
       disabled: accessor.disabled.value || props.readonly,
@@ -24,6 +24,7 @@ export function useOverlayProps(context: DatePickerContext | DateRangePickerCont
       trigger: 'manual',
       visible: overlayOpened.value,
       'onUpdate:visible': setOverlayOpened,
+      onAfterLeave,
     }
   })
 }

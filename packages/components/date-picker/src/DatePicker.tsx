@@ -45,7 +45,7 @@ export default defineComponent({
     const { accessor, handleChange } = pickerStateContext
 
     const controlContext = useControl(dateConfig, formatContext, inputEnableStatus, accessor.valueRef, handleChange)
-    const { overlayOpened, setOverlayOpened } = useOverlayState(props, controlContext)
+    const { overlayOpened, overlayVisible, onAfterLeave, setOverlayOpened } = useOverlayState(props, controlContext)
     const handleKeyDown = useKeyboardEvents(setOverlayOpened)
 
     const context = {
@@ -58,6 +58,8 @@ export default defineComponent({
       inputRef,
       inputEnableStatus,
       overlayOpened,
+      overlayVisible,
+      onAfterLeave,
       setOverlayOpened,
       handleKeyDown,
       controlContext,

@@ -145,43 +145,31 @@ describe('DatePicker', () => {
     expect(onUpdateValue).toBeCalledWith(newDate)
   })
 
-  test('defaultOpenValue work', async () => {
-    const wrapper = DatePickerMount({
-      props: {
-        value: undefined,
-        defaultOpenValue: new Date('2021-10-11'),
-      },
-    })
-
-    const headerContentBtns = wrapper.findComponent(DatePanel).find('.ix-date-panel-header-content').findAll('button')
-    expect(headerContentBtns.some(btn => btn.text().indexOf('2021') > -1)).toBeTruthy()
-    expect(headerContentBtns.some(btn => btn.text().indexOf('10') > -1)).toBeTruthy()
-  })
-
   test('datetime panel switch work', async () => {
     const wrapper = DatePickerMount({
       props: {
         type: 'datetime',
         value: new Date('2021-10-11'),
+        allowInput: true,
       },
     })
 
     expect(wrapper.findComponent(DatePanel).isVisible()).toBeTruthy()
     expect(wrapper.findComponent(TimePanel).isVisible()).toBeFalsy()
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-time-input').trigger('focus')
+    await wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-time-input').trigger('focus')
     expect(wrapper.findComponent(DatePanel).isVisible()).toBeFalsy()
     expect(wrapper.findComponent(TimePanel).isVisible()).toBeTruthy()
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-date-input').trigger('focus')
+    await wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-date-input').trigger('focus')
     expect(wrapper.findComponent(DatePanel).isVisible()).toBeTruthy()
     expect(wrapper.findComponent(TimePanel).isVisible()).toBeFalsy()
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-time-input').trigger('input')
+    await wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-time-input').trigger('input')
     expect(wrapper.findComponent(DatePanel).isVisible()).toBeFalsy()
     expect(wrapper.findComponent(TimePanel).isVisible()).toBeTruthy()
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-date-input').trigger('input')
+    await wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-date-input').trigger('input')
     expect(wrapper.findComponent(DatePanel).isVisible()).toBeTruthy()
     expect(wrapper.findComponent(TimePanel).isVisible()).toBeFalsy()
   })
@@ -198,7 +186,7 @@ describe('DatePicker', () => {
       },
     })
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-time-input').trigger('focus')
+    await wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-time-input').trigger('focus')
 
     const timePanel = wrapper.findComponent(TimePanel) as VueWrapper<ɵTimePanelInstance>
 
@@ -234,14 +222,22 @@ describe('DatePicker', () => {
       },
     })
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-date-input').find('input').setValue('2021-11-22')
+    await wrapper
+      .findComponent(Content)
+      .find('.ix-date-picker-overlay-inputs-date-input')
+      .find('input')
+      .setValue('2021-11-22')
     expect(onUpdateValue).toBeCalledWith(new Date('2021-11-22 00:00:00'))
     expect(onChange).toBeCalledWith(new Date('2021-11-22 00:00:00'), new Date('2021-10-11 00:00:00'))
 
     onUpdateValue.mockClear()
     onChange.mockClear()
 
-    await wrapper.findComponent(Content).find('.ix-date-picker-board-time-input').find('input').setValue('13:03:04')
+    await wrapper
+      .findComponent(Content)
+      .find('.ix-date-picker-overlay-inputs-time-input')
+      .find('input')
+      .setValue('13:03:04')
     expect(onUpdateValue).toBeCalledWith(new Date('2021-10-11 13:03:04'))
     expect(onChange).toBeCalledWith(new Date('2021-10-11 13:03:04'), new Date('2021-10-11 00:00:00'))
 
@@ -265,11 +261,11 @@ describe('DatePicker', () => {
     })
 
     expect(wrapper.find('.ix-date-picker').find('input').element.value).toBe('2021-10-11 13/03/04')
-    expect(wrapper.findComponent(Content).find('.ix-date-picker-board-date-input').find('input').element.value).toBe(
-      '2021年10月11日',
-    )
-    expect(wrapper.findComponent(Content).find('.ix-date-picker-board-time-input').find('input').element.value).toBe(
-      '13时03分04秒',
-    )
+    expect(
+      wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-date-input').find('input').element.value,
+    ).toBe('2021年10月11日')
+    expect(
+      wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-time-input').find('input').element.value,
+    ).toBe('13时03分04秒')
   })
 })

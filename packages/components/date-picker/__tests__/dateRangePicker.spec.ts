@@ -181,23 +181,6 @@ describe('DateRangePicker', () => {
     expect(onUpdateValue).toBeCalledWith([newFromDate, newToDate])
   })
 
-  test('defaultOpenValue work', async () => {
-    const wrapper = DateRangePickerMount({
-      props: {
-        value: undefined,
-        defaultOpenValue: [new Date('2021-10-11 00:00:00'), new Date('2021-11-11 00:00:00')],
-      },
-    })
-
-    const [fromDatePanel, toDatePanel] = wrapper.findAllComponents(DatePanel)
-    const fromHeaderContentBtns = fromDatePanel.find('.ix-date-panel-header-content').findAll('button')
-    const toHeaderContentBtns = toDatePanel.find('.ix-date-panel-header-content').findAll('button')
-    expect(fromHeaderContentBtns.some(btn => btn.text().indexOf('2021') > -1)).toBeTruthy()
-    expect(fromHeaderContentBtns.some(btn => btn.text().indexOf('10') > -1)).toBeTruthy()
-    expect(toHeaderContentBtns.some(btn => btn.text().indexOf('2021') > -1)).toBeTruthy()
-    expect(toHeaderContentBtns.some(btn => btn.text().indexOf('11') > -1)).toBeTruthy()
-  })
-
   test('datetime time select work', async () => {
     const onChange = vi.fn()
     const onUpdateValue = vi.fn()
@@ -210,7 +193,10 @@ describe('DateRangePicker', () => {
       },
     })
 
-    await wrapper.findComponent(RangeContent).findAll('.ix-date-range-picker-board-time-input')[0].trigger('focus')
+    await wrapper
+      .findComponent(RangeContent)
+      .findAll('.ix-date-range-picker-overlay-inputs-time-input')[0]
+      .trigger('focus')
 
     const fromTimePanel = wrapper.findAllComponents(TimePanel)[0] as unknown as VueWrapper<ɵTimePanelInstance>
     const toTimePanel = wrapper.findAllComponents(TimePanel)[1] as unknown as VueWrapper<ɵTimePanelInstance>
@@ -247,11 +233,11 @@ describe('DateRangePicker', () => {
 
     const dateInputs = wrapper
       .findComponent(RangeContent)
-      .findAll('.ix-date-range-picker-board-date-input')
+      .findAll('.ix-date-range-picker-overlay-inputs-date-input')
       .map(el => el.find('input'))
     const timeInputs = wrapper
       .findComponent(RangeContent)
-      .findAll('.ix-date-range-picker-board-time-input')
+      .findAll('.ix-date-range-picker-overlay-inputs-time-input')
       .map(el => el.find('input'))
 
     await dateInputs[0].setValue('2021-11-22')

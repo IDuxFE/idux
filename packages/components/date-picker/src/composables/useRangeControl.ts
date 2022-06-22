@@ -18,8 +18,6 @@ import { type PickerControlContext, useControl } from './useControl'
 
 export interface PickerRangeControlContext {
   buffer: ComputedRef<(Date | undefined)[] | undefined>
-  panelValue: ComputedRef<(Date | undefined)[] | undefined>
-  isSelecting: ComputedRef<boolean>
   bufferUpdated: ComputedRef<boolean>
 
   visiblePanel: ComputedRef<'datePanel' | 'timePanel'>
@@ -29,8 +27,7 @@ export interface PickerRangeControlContext {
   toControl: PickerControlContext
 
   init: (force?: boolean) => void
-  handleDatePanelCellClick: (value: Date) => void
-  handleDatePanelCellMouseenter: (value: Date) => void
+  handlePanelChange: (value: Date[] | undefined) => void
 }
 
 export function useRangeControl(
@@ -49,8 +46,6 @@ export function useRangeControl(
     setBufferUpdated(true)
   }
 
-  const [selectingDate, setSelectingDate] = useState<(Date | undefined)[] | undefined>(buffer.value)
-  const [isSelecting, setIsSelecting] = useState<boolean>(false)
   const [visiblePanel, setVisiblePanel] = useState<'datePanel' | 'timePanel'>('datePanel')
 
   const handleVisiblePanelUpdate = (value: 'datePanel' | 'timePanel') => {
@@ -62,14 +57,6 @@ export function useRangeControl(
   const rangeValueRef = computed(() => convertArray(buffer.value))
   const fromDateRef = computed(() => rangeValueRef.value[0])
   const toDateRef = computed(() => rangeValueRef.value[1])
-
-  const panelValue = computed(() => {
-    if (isSelecting.value) {
-      return sortRangeValue(dateConfig, [...convertArray(selectingDate.value)], 'date')
-    }
-
-    return convertArray(buffer.value)
-  })
 
   watch(valueRef, handleBufferUpdate)
 
@@ -99,34 +86,13 @@ export function useRangeControl(
 
   const init = (force = false) => {
     handleBufferUpdate(valueRef.value)
-    handleVisiblePanelUpdate('datePanel')
     setBufferUpdated(false)
     fromControl.init(force)
     toControl.init(force)
   }
 
-  const handleDatePanelCellClick = (value: Date) => {
-    if (!isSelecting.value) {
-      setIsSelecting(true)
-      setSelectingDate([value, undefined])
-    } else {
-      setIsSelecting(false)
-      handleBufferUpdate([selectingDate.value?.[0], value])
-    }
-  }
-
-  const handleDatePanelCellMouseenter = (value: Date) => {
-    if (!isSelecting.value) {
-      return
-    }
-
-    setSelectingDate([selectingDate.value?.[0], value])
-  }
-
   return {
     buffer,
-    panelValue,
-    isSelecting,
     bufferUpdated,
 
     visiblePanel,
@@ -136,8 +102,7 @@ export function useRangeControl(
     toControl,
 
     init,
-    handleDatePanelCellClick,
-    handleDatePanelCellMouseenter,
+    handlePanelChange: handleBufferUpdate,
   }
 }
 

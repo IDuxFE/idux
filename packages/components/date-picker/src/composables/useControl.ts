@@ -18,7 +18,7 @@ import { applyDateTime, convertToDate, isSameDateTime } from '../utils'
 export interface PickerControlContext {
   inputValue: ComputedRef<string>
   dateInputValue: ComputedRef<string>
-  timeInputVaue: ComputedRef<string>
+  timeInputValue: ComputedRef<string>
   panelValue: ComputedRef<Date | undefined>
   dateInputFocused: ComputedRef<boolean>
   timeInputFocused: ComputedRef<boolean>
@@ -32,8 +32,7 @@ export interface PickerControlContext {
   handleTimeInput: (evt: Event) => void
   handleDateInputClear: () => void
   handleTimeInputClear: () => void
-  handleDatePanelChange: (value: Date) => void
-  handleTimePanelChange: (value: Date) => void
+  handlePanelChange: (value: Date | undefined) => void
   handleDateInputFocus: () => void
   handleTimeInputFocus: () => void
   handleDateInputBlur: () => void
@@ -51,7 +50,7 @@ export function useControl(
 
   const [inputValue, setInputValue] = useState<string>('')
   const [dateInputValue, setDateInputValue] = useState<string>('')
-  const [timeInputVaue, setTimeInputValue] = useState<string>('')
+  const [timeInputValue, setTimeInputValue] = useState<string>('')
   const [panelValue, setPanelValue] = useState<Date | undefined>(undefined)
   const [visiblePanel, setVisiblePanel] = useState<'datePanel' | 'timePanel'>('datePanel')
   const [dateInputFocused, setDateInputFocused] = useState(false)
@@ -89,7 +88,7 @@ export function useControl(
     }
 
     const { parse, format } = dateConfig
-    const parsedValue = parse(timeInputVaue.value, timeFormatRef.value)
+    const parsedValue = parse(timeInputValue.value, timeFormatRef.value)
 
     if (force || !isSameDateTime(dateConfig, parsedValue, currValue, ['hour', 'minute', 'second'])) {
       setTimeInputValue(format(currValue, timeFormatRef.value))
@@ -167,15 +166,8 @@ export function useControl(
     setTimeInputValue('')
   }
 
-  function handleDatePanelChange(value: Date) {
-    handleChange(
-      panelValue.value ? applyDateTime(dateConfig, panelValue.value, value, ['hour', 'minute', 'second']) : value,
-    )
-  }
-  function handleTimePanelChange(value: Date) {
-    handleChange(
-      panelValue.value ? applyDateTime(dateConfig, panelValue.value, value, ['year', 'month', 'date']) : value,
-    )
+  function handlePanelChange(value: Date | undefined) {
+    handleChange(value)
   }
 
   function handleDateInputFocus() {
@@ -196,7 +188,7 @@ export function useControl(
   return {
     inputValue,
     dateInputValue,
-    timeInputVaue,
+    timeInputValue,
     dateInputFocused,
     timeInputFocused,
     panelValue,
@@ -210,8 +202,7 @@ export function useControl(
     handleTimeInput,
     handleDateInputClear,
     handleTimeInputClear,
-    handleDatePanelChange,
-    handleTimePanelChange,
+    handlePanelChange,
     handleDateInputFocus,
     handleTimeInputFocus,
     handleDateInputBlur,
