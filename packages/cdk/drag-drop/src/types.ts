@@ -19,7 +19,16 @@ export interface DragPosition {
 export type DnDEvent = (evt: DragEvent, position?: DragPosition) => void
 export type DnDElement = HTMLElement | Window | EventTarget
 export type DnDElementType = 'source' | 'target'
-export type DnDEventName = 'drag' | 'dragstart' | 'dragend' | 'dragenter' | 'dragover' | 'dragleave' | 'drop'
+export type DnDEventName =
+  | 'drag'
+  | 'dragstart'
+  | 'dragend'
+  | 'dragenter'
+  | 'dragover'
+  | 'dragleave'
+  | 'drop'
+  | 'pointerdown'
+  | 'pointerup'
 export type BoundaryType = 'parent' | 'window' | Window | MaybeElementRef | null
 
 export interface DnDState {

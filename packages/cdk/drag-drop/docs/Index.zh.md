@@ -29,6 +29,10 @@ export function useDraggable(
   dragging: ComputedRef<boolean>
   // 当前拖动中的位置信息
   position: ComputedRef<DragPosition>;
+  //重置拖拽
+  reset:()=>void;
+  // 取消可拖拽设置
+  stop: () => void;
 }
 
 export interface DragPosition {
@@ -49,6 +53,8 @@ export interface DraggableOptions {
   boundary?: BoundaryType
   // 允许元素自由拖放
   free?: boolean
+  // 拖拽把手 除此元素外的区域将不再触发拖动
+  handle?: MaybeElementRef
   onDragStart?: DnDEvent
   onDrag?: DnDEvent
   onDragEnd?: DnDEvent
@@ -75,6 +81,10 @@ export function useDroppable(
    * @param source
    */
   connect: (source: MaybeElementRef) => void
+  /**
+   * 取消连接拖拽源和放置目标
+   */
+  stop:()=>void
 }
 
 export interface DroppableOptions {

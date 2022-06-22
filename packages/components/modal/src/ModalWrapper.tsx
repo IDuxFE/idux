@@ -14,12 +14,14 @@ import {
   inject,
   onBeforeUnmount,
   onMounted,
+  onUnmounted,
   ref,
   watch,
 } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
+import { useDraggable } from '@idux/cdk/drag-drop'
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
@@ -46,7 +48,10 @@ export default defineComponent({
       okLoading,
     } = inject(modalToken)!
     const { close, cancel, ok } = inject(MODAL_TOKEN)!
-    const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex } = useConfig(props, config)
+    const { centered, closable, closeIcon, closeOnEsc, draggable, width, mask, maskClosable, zIndex } = useConfig(
+      props,
+      config,
+    )
 
     const cancelVisible = computed(() => props.type === 'default' || props.type === 'confirm')
 
@@ -85,6 +90,7 @@ export default defineComponent({
     })
 
     const wrapperRef = ref<HTMLDivElement>()
+    const headerRef = ref<HTMLDivElement>()
     const modalRef = ref<HTMLDivElement>()
     const sentinelStartRef = ref<HTMLDivElement>()
     const sentinelEndRef = ref<HTMLDivElement>()
@@ -94,6 +100,7 @@ export default defineComponent({
       mask,
       maskClosable,
       closeOnEsc,
+      draggable,
       sentinelStartRef,
       sentinelEndRef,
     )
@@ -105,8 +112,25 @@ export default defineComponent({
       animatedVisible,
       modalTransformOrigin,
     )
+    const resetDraggableRef = ref<() => void>(() => {})
 
-    onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, mask))
+    onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, mask, resetDraggableRef))
+
+    const stopWatch = watch(
+      () => draggable,
+      draggable => {
+        if (draggable) {
+          const { reset } = useDraggable(modalRef, { handle: headerRef, free: true })
+          resetDraggableRef.value = reset
+        }
+      },
+      { immediate: true },
+    )
+
+    onUnmounted(() => {
+      stopWatch()
+      resetDraggableRef.value = () => {}
+    })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
@@ -141,6 +165,7 @@ export default defineComponent({
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               <div class={`${prefixCls}-content`}>
                 <ɵHeader
+                  ref={headerRef}
                   v-slots={slots}
                   closable={closable.value}
                   closeIcon={closeIcon.value}
@@ -177,12 +202,13 @@ function useConfig(props: ModalProps, config: ModalConfig) {
   const closable = computed(() => props.closable ?? config.closable)
   const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
+  const draggable = computed(() => props.draggable)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
   const width = computed(() => convertCssPixel(props.width ?? config.width))
   const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-  return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex }
+  return { centered, closable, closeIcon, closeOnEsc, draggable, width, mask, maskClosable, zIndex }
 }
 
 function watchVisibleChange(
@@ -190,8 +216,10 @@ function watchVisibleChange(
   wrapperRef: Ref<HTMLDivElement | undefined>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   mask: ComputedRef<boolean>,
+  resetDraggableRef: Ref<() => void>,
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null
+
   watch(
     () => props.visible,
     visible => {
@@ -202,6 +230,7 @@ function watchVisibleChange(
           lastOutSideActiveElement = activeElement as HTMLElement
           sentinelStartRef.value?.focus()
         }
+        resetDraggableRef.value?.()
       } else {
         if (mask.value) {
           lastOutSideActiveElement?.focus?.()
@@ -218,6 +247,7 @@ function useEvent(
   mask: ComputedRef<boolean>,
   maskClosable: ComputedRef<boolean>,
   closeOnEsc: ComputedRef<boolean>,
+  draggable: ComputedRef<boolean>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   sentinelEndRef: Ref<HTMLDivElement | undefined>,
 ) {
@@ -232,7 +262,7 @@ function useEvent(
   }
 
   const onWrapperClick = (evt: MouseEvent) => {
-    if (evt.target === evt.currentTarget && !mouseDown && mask.value && maskClosable.value) {
+    if (evt.target === evt.currentTarget && (!mouseDown || draggable.value) && mask.value && maskClosable.value) {
       close(evt)
     }
   }

@@ -13,11 +13,23 @@ import { ComputedRef, computed, onScopeDispose, toRaw, watch } from 'vue'
 import { type MaybeElementRef, convertElement, useEventListener } from '@idux/cdk/utils'
 
 import { initContext } from '../utils'
-import { useDragFree } from './useDragFree'
+import { withDragFree } from './withDragFree'
+import { withDragHandle } from './withDragHandle'
 
 export interface DraggableOptions {
+  /**
+   * 作为限制拖拽范围的元素，需自定义droppable时需指定为空
+   */
   boundary?: BoundaryType
+  /**
+   * 指定是否可以拖拽
+   */
   free?: boolean
+  /**
+   * 拖拽把手
+   */
+  handle?: MaybeElementRef
+
   onDragStart?: DnDEvent
   onDrag?: DnDEvent
   onDragEnd?: DnDEvent
@@ -39,6 +51,8 @@ export function useDraggable(
   canDrop: ComputedRef<boolean>
   dragging: ComputedRef<boolean>
   position: ComputedRef<DragPosition>
+  reset: () => void
+  stop: () => void
 } {
   context = initContext(context)
   let firstPosition: DragEvent | null = null
@@ -60,19 +74,33 @@ export function useDraggable(
 
     // free drag-drop
     if (options?.free) {
-      useDragFree(source, context!)
+      withDragFree(source, context!)
     }
+
+    // drag-handle
+    if (options?.handle) {
+      withDragHandle(source, options.handle, context!)
+    }
+
     installBoundary()
+
     sourceElement.setAttribute('draggable', 'true')
-    sourceElement.classList.add('cdk-draggable')
+
+    !options?.handle && sourceElement.classList.add('cdk-draggable')
   }
 
   const offDraggable = (sourceElement: HTMLElement) => {
     context!.registry.off(sourceElement, 'source')
 
     sourceElement.setAttribute('draggable', 'false')
-    sourceElement.classList.remove('cdk-draggable')
+
+    if (options?.handle) {
+      convertElement(options.handle)?.classList.remove('cdk-draggable-handle')
+    } else {
+      sourceElement.classList.remove('cdk-draggable')
+    }
   }
+
   const installBoundary = () => {
     // avoid repeated install listeners
     const boundaryElement = getBoundaryElement.value
@@ -90,10 +118,12 @@ export function useDraggable(
     context!.registry.exec(source, 'source', 'dragstart', [evt])
     options?.onDragStart?.(evt, toRaw(context!.state.currPosition.value))
   }
+
   const onDrag = (evt: DragEvent) => {
     context!.registry.exec(source, 'source', 'drag', [evt])
     options?.onDrag?.(evt, toRaw(context!.state.currPosition.value))
   }
+
   const onDragEnd = (evt: DragEvent) => {
     const diffOffset = diff(firstPosition || evt, evt)
     // sync status
@@ -105,13 +135,24 @@ export function useDraggable(
     context!.registry.exec(source, 'source', 'dragend', [evt])
     options?.onDragEnd?.(evt, toRaw(context!.state.currPosition.value))
   }
+
   const diff = (oldT: DragEvent, newT: DragEvent) => {
     return {
       // fix scroll offset bug
+      // TODO: the calc way has scale problem
       offsetLeft: newT.pageX - oldT.pageX,
       offsetTop: newT.pageY - oldT.pageY,
     }
   }
+
+  const onPointerDown = (evt: MouseEvent) => {
+    context!.registry.exec(source, 'source', 'pointerdown', [evt as DragEvent])
+  }
+
+  const onPointerUp = (evt: MouseEvent) => {
+    context!.registry.exec(source, 'source', 'pointerup', [evt as DragEvent])
+  }
+
   const stopWatch = watch(
     [() => convertElement(source), () => options?.free, () => options?.boundary, () => context],
     ([currSourceEl], [prevSourceEl]) => {
@@ -124,14 +165,28 @@ export function useDraggable(
     },
   )
 
+  const reset = () => {
+    firstPosition = null
+    if (options?.free) {
+      convertElement(source)!.style.transform = ''
+    }
+  }
+
+  const { stop: stopDragStart } = useEventListener(source, 'dragstart', onDragStart)
+  const { stop: stopDrag } = useEventListener(source, 'drag', onDrag)
+  const { stop: stopDragEnd } = useEventListener(source, 'dragend', onDragEnd)
+  const { stop: stopPointerDown } = useEventListener(source, 'pointerdown', onPointerDown)
+  const { stop: stopPointerUp } = useEventListener(source, 'pointerup', onPointerUp)
+
   const stop = () => {
     offDraggable(convertElement(source)!)
     stopWatch()
+    stopDragStart()
+    stopDrag()
+    stopDragEnd()
+    stopPointerDown()
+    stopPointerUp()
   }
-
-  useEventListener(source, 'dragstart', onDragStart)
-  useEventListener(source, 'drag', onDrag)
-  useEventListener(source, 'dragend', onDragEnd)
 
   onScopeDispose(stop)
 
@@ -139,5 +194,7 @@ export function useDraggable(
     canDrop: computed(() => context!.state.canDrop.value),
     dragging: computed(() => context!.state.isDragging.value),
     position: computed(() => context!.state.currPosition.value),
+    reset,
+    stop,
   }
 }

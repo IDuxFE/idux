@@ -34,6 +34,7 @@ export function useDroppable(
   context?: DnDContext,
 ): {
   connect: (source: MaybeElementRef) => void
+  stop: () => void
 } {
   context = initContext(context)
 
@@ -77,12 +78,6 @@ export function useDroppable(
     { immediate: true, flush: 'post' },
   )
 
-  const stop = () => {
-    offDroppable(convertElement(target)!)
-    stopWatch()
-    stopConnectWatch()
-  }
-
   const onDragEnter = (evt: DragEvent) => {
     context?.registry.exec(target, 'target', 'dragenter', [evt])
     options?.onDragEnter?.(evt, toRaw(context!.state.currPosition.value))
@@ -103,14 +98,25 @@ export function useDroppable(
     options?.onDrop?.(evt, toRaw(context!.state.currPosition.value))
   }
 
-  useEventListener(target, 'dragenter', onDragEnter)
-  useEventListener(target, 'dragover', onDragOver)
-  useEventListener(target, 'dragleave', onDragLeave)
-  useEventListener(target, 'drop', onDrop)
+  const { stop: stopDragEnter } = useEventListener(target, 'dragenter', onDragEnter)
+  const { stop: stopDragOver } = useEventListener(target, 'dragover', onDragOver)
+  const { stop: stopDragLeave } = useEventListener(target, 'dragleave', onDragLeave)
+  const { stop: stopDrop } = useEventListener(target, 'drop', onDrop)
+
+  const stop = () => {
+    offDroppable(convertElement(target)!)
+    stopWatch()
+    stopConnectWatch()
+    stopDragEnter()
+    stopDragOver()
+    stopDragLeave()
+    stopDrop()
+  }
 
   onScopeDispose(stop)
 
   return {
     connect,
+    stop,
   }
 }

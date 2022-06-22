@@ -9,7 +9,7 @@ import { type MaybeElementRef, convertElement } from '@idux/cdk/utils'
 
 import { type DnDContext } from './useDragDropContext'
 
-export function useDragFree(target: MaybeElementRef, context: DnDContext): void {
+export function withDragFree(target: MaybeElementRef, context: DnDContext): void {
   const sourceElement = convertElement(target)!
 
   context.registry.on(sourceElement, 'source', 'dragend', (evt: DragEvent) => {
