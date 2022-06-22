@@ -54,6 +54,7 @@ export const modalProps = {
   width: IxPropTypes.oneOfType([String, Number]),
   wrapperClassName: IxPropTypes.string,
   zIndex: IxPropTypes.number,
+  draggable: { type: Boolean, default: false },
 
   // events
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),

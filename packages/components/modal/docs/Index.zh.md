@@ -22,6 +22,7 @@ order: 0
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon='{onClose}'` | `close` | ✅ | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
+| `draggable` | 是否支持拖放 | `boolean` | `false` | - | - |
 | `footer` | 自定义底部按钮 | `boolean \| ModalButtonProps[] \| VNode \| #footer` | `true` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |
 | `header` | 对话框标题 | `string \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
 | `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
