@@ -1,7 +1,7 @@
 .cdk-resizable {
   position: relative;
   
-  &-handler {
+  &-handle {
     position: absolute;
     user-select: none;
     z-index: 9;
@@ -67,7 +67,7 @@
     }
   }
 
-  &-handler {
+  &-handle {
     &-top,
     &-bottom {
       cursor: ns-resize;
@@ -86,7 +86,7 @@
     }
   }
 
-  &-disabled &-handler {
+  &-disabled &-handle {
     pointer-events: none;
   }
 }

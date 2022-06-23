@@ -7,7 +7,7 @@
 
 import type { DraggableComponent } from '@idux/cdk/drag-drop'
 import type { PortalComponent } from '@idux/cdk/portal'
-import type { ResizableComponent, ResizableHandlerComponent, ResizeObserverComponent } from '@idux/cdk/resize'
+import type { ResizableComponent, ResizableHandleComponent, ResizeObserverComponent } from '@idux/cdk/resize'
 import type { VirtualScrollComponent } from '@idux/cdk/scroll'
 
 declare module 'vue' {
@@ -15,7 +15,7 @@ declare module 'vue' {
     CdkDraggable: DraggableComponent
     CdkPortal: PortalComponent
     CdkResizable: ResizableComponent
-    CdkResizableHandler: ResizableHandlerComponent
+    CdkResizableHandle: ResizableHandleComponent
     CdkResizeObserver: ResizeObserverComponent
     CdkVirtualScroll: VirtualScrollComponent
   }

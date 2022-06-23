@@ -10,14 +10,14 @@
       :minHeight="40"
     >
       CdkResizable!
-      <CdkResizableHandler placement="end">
-        <div class="handler-end">
-          <IxIcon class="handler-end-icon" name="holder" />
+      <CdkResizableHandle placement="end">
+        <div class="handle-end">
+          <IxIcon class="handle-end-icon" name="holder" />
         </div>
-      </CdkResizableHandler>
-      <CdkResizableHandler placement="bottomEnd">
-        <IxIcon class="handler-bottom-end-icon" name="caret-up-filled" :rotate="135" />
-      </CdkResizableHandler>
+      </CdkResizableHandle>
+      <CdkResizableHandle placement="bottomEnd">
+        <IxIcon class="handle-bottom-end-icon" name="caret-up-filled" :rotate="135" />
+      </CdkResizableHandle>
     </CdkResizable>
   </div>
 </template>
@@ -38,7 +38,7 @@
   border: 1px solid #ddd;
 }
 
-.handler-end {
+.handle-end {
   height: 100%;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
   }
 }
 
-.handler-bottom-end-icon {
+.handle-bottom-end-icon {
   position: absolute;
   top: 0;
   left: 0;

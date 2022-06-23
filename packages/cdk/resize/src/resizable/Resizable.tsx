@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
-import ResizableHandler from './ResizableHandler'
+import ResizableHandle from './ResizableHandle'
 import { resizableProps } from './types'
 import { useResizable } from './useResizable'
 
@@ -41,7 +41,7 @@ export default defineComponent({
         <Tag ref={elementRef} class={classes.value} style={style.value}>
           {slots.default?.()}
           {handlers.map(placement => (
-            <ResizableHandler key={placement} placement={placement} />
+            <ResizableHandle key={placement} placement={placement} />
           ))}
         </Tag>
       )

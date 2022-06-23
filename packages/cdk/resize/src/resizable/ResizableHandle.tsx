@@ -8,18 +8,18 @@
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { resizableToken } from './token'
-import { resizableHandlerProps } from './types'
+import { resizableHandleProps } from './types'
 
 export default defineComponent({
-  name: 'CdkResizableHandler',
-  props: resizableHandlerProps,
+  name: 'CdkResizableHandle',
+  props: resizableHandleProps,
   setup(props, { slots }) {
     const { handleResizeStart } = inject(resizableToken)!
 
     const onPointerDown = (evt: PointerEvent) => handleResizeStart(props.placement, evt)
 
     const classes = computed(() => {
-      const prefixCls = 'cdk-resizable-handler'
+      const prefixCls = 'cdk-resizable-handle'
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${props.placement}`]: true,

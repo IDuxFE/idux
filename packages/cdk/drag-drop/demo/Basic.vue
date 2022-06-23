@@ -1,5 +1,5 @@
 <template>
-  <div id="testBlock" ref="contextRef">
+  <div ref="contextRef" class="test-block">
     <!-- use composition api-->
     <IxButton ref="dragRef1">局部拖放</IxButton>
     <IxButton ref="dragRef2">全屏拖放</IxButton>
@@ -21,10 +21,12 @@ const dragRef2 = ref()
 useDraggable(dragRef1, { free: true })
 useDraggable(dragRef2, { free: true, boundary: document.documentElement })
 </script>
-<style>
-#testBlock {
+
+<style scoped lang="less">
+.test-block {
   width: 400px;
   height: 200px;
+  padding: 30px;
   border: 1px dashed;
 }
 </style>

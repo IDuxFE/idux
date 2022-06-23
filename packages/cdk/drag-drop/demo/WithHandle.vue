@@ -1,7 +1,6 @@
 <template>
-  <div ref="dragRef" :style="{ border: '1px dashed gray' }">
-    <IxButton ref="dragHandleRef">局部拖放</IxButton>
-    通过把柄拖动整体
+  <div ref="dragRef" class="test-block">
+    <IxButton ref="dragHandleRef">通过把柄拖动</IxButton>
   </div>
 </template>
 
@@ -15,3 +14,12 @@ const dragHandleRef = ref(null)
 
 useDraggable(dragRef, { handle: dragHandleRef, free: true })
 </script>
+
+<style scoped lang="less">
+.test-block {
+  width: 180px;
+  height: 100px;
+  padding: 30px;
+  border: 1px dashed;
+}
+</style>

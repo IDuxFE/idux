@@ -1,9 +1,7 @@
 <template>
-  <IxRow>
-    <div ref="targetRef1" class="testBlock" />
-    <div ref="targetRef2" class="testBlock" />
-    <div ref="targetRef3" class="testBlock" />
-  </IxRow>
+  <div ref="targetRef1" class="test-block"> </div>
+  <div ref="targetRef2" class="test-block"> </div>
+  <div ref="targetRef3" class="test-block"> </div>
   <br />
   <IxButton ref="dragRef">局部拖放</IxButton>
 </template>
@@ -22,10 +20,12 @@ useDroppable(targetRef1).connect(dragRef)
 useDroppable(targetRef2).connect(dragRef)
 useDroppable(targetRef3).connect(dragRef)
 </script>
-<style>
-.testBlock {
-  flex: 1;
+
+<style scoped lang="less">
+.test-block {
+  display: inline-block;
   margin-right: 10px;
+  width: 200px;
   height: 200px;
   border: 1px dashed;
 }

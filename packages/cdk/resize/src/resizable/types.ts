@@ -9,16 +9,7 @@ import type { BoundaryType } from '@idux/cdk/drag-drop'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-const allHandlerPlacements = [
-  'top',
-  'bottom',
-  'start',
-  'end',
-  'topStart',
-  'topEnd',
-  'bottomStart',
-  'bottomEnd',
-] as const
+const allHandlePlacements = ['top', 'bottom', 'start', 'end', 'topStart', 'topEnd', 'bottomStart', 'bottomEnd'] as const
 
 export const resizableProps = {
   /**
@@ -29,7 +20,7 @@ export const resizableProps = {
   boundary: { type: [String, Object] as PropType<BoundaryType>, default: 'parent' },
   disabled: { type: Boolean, default: false },
   free: { type: Boolean, default: false },
-  handlers: { type: Array as PropType<ResizableHandlerPlacement[]>, default: () => allHandlerPlacements },
+  handlers: { type: Array as PropType<ResizableHandlePlacement[]>, default: () => allHandlePlacements },
   is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
 
   /**
@@ -68,20 +59,20 @@ export type ResizableComponent = DefineComponent<
 >
 export type ResizableInstance = InstanceType<DefineComponent<ResizableProps>>
 
-export const resizableHandlerProps = {
-  placement: { type: String as PropType<ResizableHandlerPlacement>, default: 'bottomEnd' },
+export const resizableHandleProps = {
+  placement: { type: String as PropType<ResizableHandlePlacement>, default: 'bottomEnd' },
 } as const
 
-export type ResizableHandlerProps = ExtractInnerPropTypes<typeof resizableHandlerProps>
-export type ResizableHandlerPublicProps = ExtractPublicPropTypes<typeof resizableHandlerProps>
-export type ResizableHandlerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof ResizableHandlerPublicProps> & ResizableHandlerPublicProps
+export type ResizableHandleProps = ExtractInnerPropTypes<typeof resizableHandleProps>
+export type ResizableHandlePublicProps = ExtractPublicPropTypes<typeof resizableHandleProps>
+export type ResizableHandleComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof ResizableHandlePublicProps> & ResizableHandlePublicProps
 >
-export type ResizableHandlerInstance = InstanceType<DefineComponent<ResizableHandlerProps>>
+export type ResizableHandleInstance = InstanceType<DefineComponent<ResizableHandleProps>>
 
 export type ResizableOptions = Omit<ResizablePublicProps, 'disabled' | 'is' | 'handlers'>
 
-export type ResizableHandlerPlacement = typeof allHandlerPlacements[number]
+export type ResizableHandlePlacement = typeof allHandlePlacements[number]
 
 export interface ResizePosition {
   width: number
