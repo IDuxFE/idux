@@ -30,11 +30,22 @@ export interface ProTreeLocale {
   collapseAll: string
 }
 
+export interface ProSearchLocale {
+  keyword: string
+  ok: string
+  cancel: string
+  selectAll: string
+  placeholder: string
+  switchToTimePanel: string
+  switchToDatePanel: string
+}
+
 export interface ProLocale {
   type: ProLocaleType
 
   table: ProTableLocale
   tree: ProTreeLocale
+  search: ProSearchLocale
 }
 
 export type ProLocaleType = 'zh-CN' | 'en-US'

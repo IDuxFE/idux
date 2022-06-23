@@ -34,6 +34,15 @@ const zhCN: ProLocale = {
     expandAll: '展开全部',
     collapseAll: '收起全部',
   },
+  search: {
+    keyword: '关键字',
+    ok: '确定',
+    cancel: '取消',
+    selectAll: '全选',
+    placeholder: '点击选择筛选条件, 按回车键确认',
+    switchToDatePanel: '切换日期选择',
+    switchToTimePanel: '切换时间选择',
+  },
 }
 
 export default zhCN

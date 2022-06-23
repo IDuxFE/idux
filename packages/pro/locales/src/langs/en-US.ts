@@ -34,6 +34,15 @@ const enUS: ProLocale = {
     expandAll: 'Expand all',
     collapseAll: 'Collapse all',
   },
+  search: {
+    keyword: 'Keyword',
+    ok: 'Ok',
+    cancel: 'Cancel',
+    selectAll: 'Select All',
+    placeholder: 'Click To select search options, press Enter to confirm',
+    switchToDatePanel: 'Switch To Date',
+    switchToTimePanel: 'Switch To Time',
+  },
 }
 
 export default enUS
