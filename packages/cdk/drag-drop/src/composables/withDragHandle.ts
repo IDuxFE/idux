@@ -14,7 +14,7 @@ export const withDragHandle = (source: MaybeElementRef, handle: MaybeElementRef,
   const sourceEl = convertElement(source)!
   const handleEl = convertElement(handle)!
 
-  handleEl.classList?.add('cdk-draggable-handle')
+  handleEl.classList?.add('cdk-draggable-handler')
 
   context.registry.on(sourceEl, 'source', 'pointerdown', e => {
     dragTarget = e.target as HTMLElement

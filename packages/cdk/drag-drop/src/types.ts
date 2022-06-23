@@ -29,7 +29,7 @@ export type DnDEventName =
   | 'drop'
   | 'pointerdown'
   | 'pointerup'
-export type BoundaryType = 'parent' | 'window' | Window | MaybeElementRef | null
+export type BoundaryType = 'parent' | Window | MaybeElementRef | null
 
 export interface DnDState {
   canDrop: ComputedRef<boolean>
