@@ -12,7 +12,7 @@ import { useDraggable } from '../src/composables/useDraggable'
 const dragRef = ref(null)
 const dragHandleRef = ref(null)
 
-useDraggable(dragRef, { handler: dragHandleRef, free: true })
+useDraggable(dragRef, { handle: dragHandleRef, free: true })
 </script>
 
 <style scoped lang="less">

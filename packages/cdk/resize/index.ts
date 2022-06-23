@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ResizableComponent, ResizableHandlerComponent } from './src/resizable/types'
+import type { ResizableComponent, ResizableHandleComponent } from './src/resizable/types'
 import type { ResizeObserverComponent } from './src/resize-observer/types'
 
 import Resizable from './src/resizable/Resizable'
-import ResizableHandler from './src/resizable/ResizableHandler'
+import ResizableHandle from './src/resizable/ResizableHandle'
 import ResizeObserver from './src/resize-observer/ResizeObserver'
 
 const CdkResizable = Resizable as unknown as ResizableComponent
-const CdkResizableHandler = ResizableHandler as unknown as ResizableHandlerComponent
+const CdkResizableHandle = ResizableHandle as unknown as ResizableHandleComponent
 const CdkResizeObserver = ResizeObserver as unknown as ResizeObserverComponent
 
-export { CdkResizable, CdkResizableHandler, CdkResizeObserver }
+export { CdkResizable, CdkResizableHandle, CdkResizeObserver }
 
 export * from './src/resizable/useResizable'
 export * from './src/resize-observer/useResizeObserver'
@@ -26,11 +26,11 @@ export type {
   ResizableInstance,
   ResizableComponent,
   ResizablePublicProps as ResizableProps,
-  ResizableHandlerInstance,
-  ResizableHandlerComponent,
-  ResizableHandlerPublicProps as ResizableHandlerProps,
+  ResizableHandleInstance,
+  ResizableHandleComponent,
+  ResizableHandlePublicProps as ResizableHandleProps,
   ResizableOptions,
-  ResizableHandlerPlacement,
+  ResizableHandlePlacement,
   ResizePosition,
   ResizableEvent,
 } from './src/resizable/types'

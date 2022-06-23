@@ -2,7 +2,7 @@
 order: 5
 title:
   zh: 自定义手柄
-  en: Custom handler
+  en: Custom handle
 ---
 
 ## zh
@@ -11,4 +11,4 @@ title:
 
 ## en
 
-Customize style of handler。
+Customize style of handle。

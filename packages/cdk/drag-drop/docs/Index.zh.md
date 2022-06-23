@@ -54,7 +54,7 @@ export interface DraggableOptions {
   // 允许元素自由拖放
   free?: boolean
   // 拖拽把手 除此元素外的区域将不再触发拖动
-  handler?: MaybeElementRef
+  handle?: MaybeElementRef
   onDragStart?: DnDEvent
   onDrag?: DnDEvent
   onDragEnd?: DnDEvent

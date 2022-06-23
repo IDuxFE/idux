@@ -19,7 +19,7 @@ subtitle: 调整尺寸
 | `boundary`    | 可调整尺寸的边界范围  | `'parent' \| 'window' \| Window \| MaybeElementRef` | `parent` | - | - |
 | `disabled`    | 是否禁用  | `boolean` | `false` | - | - |
 | `free`        | 是否自由调整    | `boolean`  | -  | - | 自动设置 `style` |
-| `handlers`    | 定义拖拽手柄的位置  | `ResizableHandlerPlacement[]` | `allHandlerPlacements` | - | - |
+| `handles`    | 定义拖拽手柄的位置  | `ResizableHandlePlacement[]` | `allHandlePlacements` | - | - |
 | `is`          | 可以调整尺寸的元素或者组件 | `string \| Component` | `'div'`  | -                            | -   |
 | `maxHeight`   | 可调整的最大高度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
 | `maxWidth`    | 可调整的最大宽度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
@@ -30,9 +30,9 @@ subtitle: 调整尺寸
 | `onDragEnd`   | 拖拽结束事件  | - | `ResizableEvent` | - | - |
 
 ```ts
-const allHandlerPlacements = ['top', 'bottom', 'start', 'end', 'topStart', 'topEnd', 'bottomStart', 'bottomEnd'] as const
+const allHandlePlacements = ['top', 'bottom', 'start', 'end', 'topStart', 'topEnd', 'bottomStart', 'bottomEnd'] as const
 
-export type ResizableHandlerPlacement = typeof allHandlerPlacements[number]
+export type ResizableHandlePlacement = typeof allHandlePlacements[number]
 
 export interface ResizePosition {
   width: number
@@ -44,15 +44,15 @@ export interface ResizePosition {
 export type ResizableEvent = (position: ResizePosition, evt: PointerEvent) => void
 ```
 
-### CdkResizableHandler
+### CdkResizableHandle
 
 定义调整手柄及位置。
 
-#### ResizableHandlerProps
+#### ResizableHandleProps
 
 | 名称          | 说明 | 类型  | 默认值 | 全局配置 | 备注               |
 |-------------| --- | --- | --- | --- |------------------|
-| `placement` | 手柄的位置  | `ResizableHandlerPlacement` | `bottomEnd` | - | 同时也决定了可以调整的方向    |
+| `placement` | 手柄的位置  | `ResizableHandlePlacement` | `bottomEnd` | - | 同时也决定了可以调整的方向    |
 
 ### CdkResizeObserver
 

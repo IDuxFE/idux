@@ -10,7 +10,7 @@ import { type ComputedRef, computed, provide, ref, toRaw } from 'vue'
 import { type MaybeElementRef, callEmit, convertElement, useEventListener } from '@idux/cdk/utils'
 
 import { resizableToken } from './token'
-import { type ResizableHandlerPlacement, type ResizableOptions, type ResizePosition } from './types'
+import { type ResizableHandlePlacement, type ResizableOptions, type ResizePosition } from './types'
 
 export function useResizable(
   target: MaybeElementRef,
@@ -21,7 +21,7 @@ export function useResizable(
   stop: () => void
 } {
   const resizing = ref(false)
-  const activePlacement = ref<ResizableHandlerPlacement>()
+  const activePlacement = ref<ResizableHandlePlacement>()
   const startPosition = ref<{
     width: number
     height: number
@@ -33,7 +33,7 @@ export function useResizable(
   const currPosition = ref({} as ResizePosition)
 
   const calcSizeByEvent = (
-    _placement: ResizableHandlerPlacement,
+    _placement: ResizableHandlePlacement,
     evt: PointerEvent,
   ): { width: number; height: number } => {
     const { width, height, top, left, clientX, clientY } = startPosition.value!
@@ -73,7 +73,7 @@ export function useResizable(
   }
 
   const calcSizeByBounds = (
-    _placement: ResizableHandlerPlacement,
+    _placement: ResizableHandlePlacement,
     width: number,
     height: number,
     ratio: number,
@@ -81,7 +81,7 @@ export function useResizable(
     const { boundary = 'parent', minWidth = 8, minHeight = 8 } = options
     let boundWidth = Infinity
     let boundHeight = Infinity
-    if (boundary === 'window' || boundary === window) {
+    if (boundary === window) {
       if (typeof window !== 'undefined') {
         boundWidth = window.innerWidth
         boundHeight = window.innerHeight
@@ -123,7 +123,7 @@ export function useResizable(
     return { width: newWidth, height: newHeight }
   }
 
-  const handleResizeStart = (placement: ResizableHandlerPlacement, evt: PointerEvent) => {
+  const handleResizeStart = (placement: ResizableHandlePlacement, evt: PointerEvent) => {
     activePlacement.value = placement
     const { width, height, left, top } = convertElement(target)!.getBoundingClientRect()
     const { clientX, clientY } = evt
@@ -186,7 +186,7 @@ function ensureInBounds(value: number, boundValue: number) {
   return value < boundValue ? value : boundValue
 }
 
-function setBodyCursor(placement: ResizableHandlerPlacement) {
+function setBodyCursor(placement: ResizableHandlePlacement) {
   let cursor = ''
   switch (placement) {
     case 'top':

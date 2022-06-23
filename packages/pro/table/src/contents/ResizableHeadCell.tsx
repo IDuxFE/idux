@@ -7,7 +7,7 @@
 
 import { defineComponent, reactive, ref } from 'vue'
 
-import { CdkResizableHandler, type ResizableEvent, type ResizableOptions, useResizable } from '@idux/cdk/resize'
+import { CdkResizableHandle, type ResizableEvent, type ResizableOptions, useResizable } from '@idux/cdk/resize'
 import { callEmit } from '@idux/cdk/utils'
 
 export default defineComponent({
@@ -32,7 +32,7 @@ export default defineComponent({
         return <th>{slots.default?.()}</th>
       }
 
-      const children = [<CdkResizableHandler placement="end" />]
+      const children = [<CdkResizableHandle placement="end" />]
       if (resizing.value) {
         const { width, height } = position.value
         children.push(<div class="cdk-resizable-preview" style={`width:${width}px;height:${height}px`}></div>)

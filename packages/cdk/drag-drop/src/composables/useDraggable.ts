@@ -28,7 +28,7 @@ export interface DraggableOptions {
   /**
    * 拖拽把手
    */
-  handler?: MaybeElementRef
+  handle?: MaybeElementRef
 
   onDragStart?: DnDEvent
   onDrag?: DnDEvent
@@ -78,8 +78,8 @@ export function useDraggable(
     }
 
     // drag-handle
-    if (options?.handler) {
-      withDragHandle(source, options.handler, context!)
+    if (options?.handle) {
+      withDragHandle(source, options.handle, context!)
     }
 
     installBoundary()
@@ -94,7 +94,7 @@ export function useDraggable(
     sourceElement.setAttribute('draggable', 'false')
 
     sourceElement.classList.remove('cdk-draggable')
-    convertElement(options?.handler)?.classList.remove('cdk-draggable-handler')
+    convertElement(options?.handle)?.classList.remove('cdk-draggable-handle')
   }
 
   const installBoundary = () => {
