@@ -8,32 +8,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
-import { IxPropTypes } from '@idux/cdk/utils'
+import { MaybeArray } from '@idux/cdk/utils'
 import { FormSize } from '@idux/components/form'
 
 export const checkboxProps = {
   control: controlPropDef,
-  checked: IxPropTypes.oneOfType([String, Number, Boolean]),
+  checked: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: undefined },
 
-  autofocus: IxPropTypes.bool.def(false),
-  buttoned: IxPropTypes.bool,
-  disabled: IxPropTypes.bool,
-  indeterminate: IxPropTypes.bool.def(false),
-  label: IxPropTypes.string,
-  trueValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(true),
-  falseValue: IxPropTypes.oneOfType([String, Number, Boolean]).def(false),
-  value: IxPropTypes.any,
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
+  autofocus: { type: Boolean, default: false },
+  buttoned: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+  indeterminate: { type: Boolean, default: false },
+  label: { type: String, default: undefined },
+  trueValue: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: true },
+  falseValue: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: false },
+  value: { type: null, default: undefined },
+  size: { type: String as PropType<FormSize>, default: undefined },
 
   // events
-  'onUpdate:checked': IxPropTypes.emit<(checked: CheckValue) => void>(),
-  onChange: IxPropTypes.emit<(newChecked: CheckValue, oldChecked: CheckValue) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-}
+  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: CheckValue) => void>> },
+  onChange: {
+    type: [Function, Array] as PropType<MaybeArray<(newChecked: CheckValue, oldChecked: CheckValue) => void>>,
+  },
+  onBlur: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
+  onFocus: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
+} as const
 
 export type CheckboxProps = ExtractInnerPropTypes<typeof checkboxProps>
 export type CheckboxPublicProps = ExtractPublicPropTypes<typeof checkboxProps>
@@ -49,23 +51,24 @@ export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, Check
 
 export const checkboxGroupProps = {
   control: controlPropDef,
-  value: IxPropTypes.array(),
+  value: { type: Array, default: undefined },
 
-  buttoned: IxPropTypes.bool.def(false),
-  dataSource: IxPropTypes.array<CheckboxData>(),
-  disabled: IxPropTypes.bool.def(false),
-  gap: IxPropTypes.oneOfType([Number, String]),
-  name: IxPropTypes.string,
+  buttoned: { type: Boolean, default: false },
+  dataSource: { type: Array as PropType<CheckboxData[]> },
+  disabled: { type: Boolean, default: false },
+  gap: { type: [Number, String] as PropType<number | string>, default: undefined },
+  name: { type: String, default: undefined },
   /**
    * @deprecated please use `dataSource` instead'
    */
-  options: IxPropTypes.array<CheckboxData>(),
-  size: IxPropTypes.oneOf(['sm', 'md', 'lg']).def('md'),
+  options: { type: Array as PropType<CheckboxData[]> },
+  size: { type: String as PropType<FormSize>, default: 'md' },
+  vertical: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: any[]) => void>(),
-  onChange: IxPropTypes.emit<(newValue: any[], oldValue: any[]) => void>(),
-}
+  'onUpdate:value': { type: [Function, Array] as PropType<MaybeArray<(value: any) => void>> },
+  onChange: { type: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>> },
+} as const
 
 export type CheckboxGroupProps = ExtractInnerPropTypes<typeof checkboxGroupProps>
 export type CheckboxGroupPublicProps = Omit<ExtractPublicPropTypes<typeof checkboxGroupProps>, 'options'>
