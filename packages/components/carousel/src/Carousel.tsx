@@ -5,144 +5,193 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { cloneVNode, computed, defineComponent, normalizeClass, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, onBeforeUpdate, provide, ref } from 'vue'
 
-import { flattenNode } from '@idux/cdk/utils'
+import { convertElement, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import { useAutoplay } from './composables/useAutoplay'
-import { useWalk } from './composables/useWalk'
+import { useStrategy } from './composables/useStrategy'
+import Dot from './contents/Dot'
+import Slider from './contents/Slider'
+import { carouselToken } from './token'
 import { carouselProps } from './types'
 
 export default defineComponent({
   name: 'IxCarousel',
   props: carouselProps,
   setup(props, { slots, expose }) {
-    const carouselRef = ref<HTMLDivElement | null>(null)
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-carousel`)
     const config = useGlobalConfig('carousel')
-    const autoplayTime = computed(() => props.autoplayTime ?? config.autoplayTime)
-    const dotPlacement = computed(() => props.dotPlacement ?? config.dotPlacement)
-    const showArrow = computed(() => props.showArrow ?? config.showArrow)
-    const trigger = computed(() => props.trigger ?? config.trigger)
-    const children = computed(() => flattenNode(slots.default?.()))
-    const length = computed(() => children.value.length)
-    const vertical = computed(() => dotPlacement.value === 'start' || dotPlacement.value === 'end')
-    const itemClass = computed(() => `${mergedPrefixCls.value}-slide-item`)
-    const size = computed(() => {
-      const carousel = carouselRef.value
-      return {
-        width: carousel?.offsetWidth ?? 0,
-        height: carousel?.querySelector<HTMLElement>(`.${itemClass.value}`)?.offsetHeight ?? 0,
-      }
-    })
-    const total = computed(() => length.value + 2)
 
-    const slidesStyle = computed(() => {
-      const index = activeIndex.value % total.value
-      const offset = vertical.value
-        ? { top: `-${size.value.height * index}px` }
-        : { left: `-${size.value.width * index}px` }
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-carousel`)
 
-      return {
-        width: `${total.value * size.value.width}px`,
-        ...offset,
+    const mergedDotPlacement = computed(() => props.dotPlacement ?? config.dotPlacement)
+    const mergedShowArrow = computed(() => props.showArrow ?? config.showArrow)
+    const mergedTrigger = computed(() => props.trigger ?? config.trigger)
+    const mergedVertical = computed(() => mergedDotPlacement.value === 'start' || mergedDotPlacement.value === 'end')
+
+    const mergedChildren = computed(() => flattenNode(slots.default?.()))
+    const mergedLength = computed(() => mergedChildren.value.length)
+
+    const carouselRef = ref<HTMLDivElement>()
+    const slidersRef = ref<HTMLDivElement>()
+    const sliderTrackRef = ref<HTMLDivElement>()
+    const sliderRefs = ref<HTMLDivElement[]>([])
+
+    const setRef = (instance: HTMLDivElement | null, index: number) => {
+      if (instance) {
+        sliderRefs.value[index] = instance
       }
-    })
-    const slideItemStyle = computed(() => {
-      return {
-        width: `${size.value.width}px`,
-        height: '100%',
-      }
+    }
+
+    onBeforeUpdate(() => (sliderRefs.value = []))
+
+    const { activeIndex, runningIndex, unitHeight, unitWidth, goTo, next, prev } = useStrategy(
+      props,
+      carouselRef,
+      sliderTrackRef,
+      sliderRefs,
+      mergedVertical,
+      mergedLength,
+    )
+    const { startAutoplay, cleanAutoplay } = useAutoplay(props, config, activeIndex, goTo)
+
+    expose({ goTo, next, prev })
+
+    provide(carouselToken, {
+      slots,
+      mergedPrefixCls,
+      mergedTrigger,
+      unitHeight,
+      unitWidth,
+      goTo,
+      cleanAutoplay,
     })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-vertical`]: vertical.value,
-        [`${prefixCls}-horizontal`]: !vertical.value,
+        [`${prefixCls}-horizontal`]: !mergedVertical.value,
+        [`${prefixCls}-vertical`]: mergedVertical.value,
       })
     })
-    const slidesClass = computed(() => {
+
+    const slidersStyle = computed(() => {
+      const height = unitHeight.value
+      return height > 0 ? `height: ${height}px;` : undefined
+    })
+
+    const sliderTrackStyle = computed(() => {
+      const width = unitWidth.value
+      const height = unitHeight.value
+      const length = mergedLength.value
+      if (width <= 0 || height <= 0 || length <= 0) {
+        return undefined
+      }
+      if (mergedVertical.value) {
+        return `width: ${width}px;height: ${height * length}px;`
+      }
+      return `width: ${width * length}px;height: ${height}px;`
+    })
+
+    const dotsClasses = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [`${prefixCls}-slides`]: true,
-      })
-    })
-    const dotClass = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
-        [`${prefixCls}-dot`]: true,
-        [`${prefixCls}-dot-${dotPlacement.value}`]: true,
+        [`${prefixCls}-dots`]: true,
+        [`${prefixCls}-dots-${mergedDotPlacement.value}`]: true,
       })
     })
 
-    const { goTo, next, prev, onTransitionend, activeIndex } = useWalk(length, props)
-    expose({ goTo, next, prev })
-
-    useAutoplay(autoplayTime, next)
-
-    const onClick = (slideIndex: number) => {
-      if (trigger.value === 'click') {
-        goTo(slideIndex)
+    const handleKeydown = (evt: KeyboardEvent) => {
+      switch (evt.code) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          next()
+          break
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          prev()
+          break
       }
     }
-    const onMouseenter = (slideIndex: number) => {
-      if (trigger.value === 'hover') {
-        goTo(slideIndex)
+
+    const onTransitionend = () => {
+      const sliderTrackElement = sliderTrackRef.value!
+      sliderTrackElement.style.transition = ''
+      sliderRefs.value.forEach(slider => {
+        const element = convertElement(slider)
+        if (element) {
+          element.style.top = ''
+          element.style.left = ''
+        }
+      })
+      const currIndex = runningIndex.value
+      if (mergedVertical.value) {
+        sliderTrackElement.style.transform = `translate3d(0, ${-currIndex * unitHeight.value}px, 0)`
+      } else {
+        sliderTrackElement.style.transform = `translate3d(${-currIndex * unitWidth.value}px,0 , 0)`
       }
+      activeIndex.value = currIndex
+      runningIndex.value = -1
+      startAutoplay()
     }
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const startVNode = children.value[length.value - 1]
-      const endVNode = children.value[0]
-      const clonedStartNode = cloneVNode(startVNode, { key: `${String(startVNode.key)}-start-cloned-key` })
-      const clonedEndNode = cloneVNode(endVNode, { key: `${String(endVNode.key)}-end-cloned-key` })
-      const slides = [clonedStartNode, ...children.value, clonedEndNode].map(slideItem => (
-        <div key={slideItem.key!} class={itemClass.value} style={slideItemStyle.value}>
-          {slideItem}
-        </div>
-      ))
-      const prevArrow = slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-circle" />
-      const nextArrow = slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-circle" />
-      const dots = children.value.map((node, index: number) => {
-        const isActive = index + 1 === activeIndex.value
-        const itemClass = {
-          [`${prefixCls}-dot-item`]: true,
-          [`${prefixCls}-dot-item-active`]: isActive,
-        }
-        const children = slots.dot ? (
-          slots.dot({ index, isActive })
-        ) : (
-          <button class={`${prefixCls}-dot-item-default`} type="button"></button>
-        )
-        return (
-          <li key={node.key!} class={itemClass} onClick={() => onClick(index)} onMouseenter={() => onMouseenter(index)}>
-            {children}
-          </li>
-        )
-      })
-
+      const children = mergedChildren.value
+      const currActiveIndex = activeIndex.value
+      const currRunningIndex = runningIndex.value
       return (
-        <div ref={carouselRef} class={classes.value} style={{ height: `${size.value.height}px` }}>
-          <div class={slidesClass.value} style={slidesStyle.value} onTransitionend={onTransitionend}>
-            {slides}
+        <div ref={carouselRef} class={classes.value}>
+          <div
+            ref={slidersRef}
+            class={`${prefixCls}-sliders`}
+            style={slidersStyle.value}
+            tabindex="-1"
+            onKeydown={handleKeydown}
+          >
+            <div
+              ref={sliderTrackRef}
+              class={`${prefixCls}-slider-track`}
+              style={sliderTrackStyle.value}
+              onTransitionend={onTransitionend}
+            >
+              {children.map((node, index) => (
+                <Slider
+                  ref={instance => setRef(instance, index)}
+                  key={node.key!}
+                  isActive={index === currActiveIndex}
+                  index={index}
+                >
+                  {node}
+                </Slider>
+              ))}
+            </div>
           </div>
-          {showArrow.value && (
+          {mergedShowArrow.value && (
             <>
               <div key="__arrow-prev" class={`${prefixCls}-arrow ${prefixCls}-arrow-prev`} onClick={prev}>
-                {prevArrow}
+                {slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-circle" />}
               </div>
               <div key="__arrow-next" class={`${prefixCls}-arrow ${prefixCls}-arrow-next`} onClick={next}>
-                {nextArrow}
+                {slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-circle" />}
               </div>
             </>
           )}
-          {dotPlacement.value !== 'none' && <ul class={dotClass.value}>{dots}</ul>}
+          {mergedDotPlacement.value !== 'none' && (
+            <ul class={dotsClasses.value}>
+              {children.map((node, index) => (
+                <Dot
+                  key={node.key!}
+                  isActive={currRunningIndex !== -1 ? index === currRunningIndex : index === currActiveIndex}
+                  index={index}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       )
     }

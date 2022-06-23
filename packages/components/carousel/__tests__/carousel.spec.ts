@@ -32,11 +32,11 @@ describe('Carousel', () => {
     expect(wrapper.findAll('.ix-carousel-arrow').length).toBe(2)
 
     await wrapper.find('.ix-carousel-arrow-next').trigger('click')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
     expect(onChange).toHaveBeenCalledTimes(1)
 
     await wrapper.find('.ix-carousel-arrow-prev').trigger('click')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
     expect(onChange).toHaveBeenCalledTimes(2)
 
     await wrapper.setProps({ showArrow: false })
@@ -46,12 +46,12 @@ describe('Carousel', () => {
   test('prop dotPlacement work', async () => {
     const wrapper = CarouselMount({ props: { dotPlacement: 'none' } })
 
-    expect(wrapper.find('.ix-carousel-dot').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-carousel-dots').exists()).toBeFalsy()
 
     const placements = ['bottom', 'top', 'start', 'end']
     for (const placement of placements) {
       await wrapper.setProps({ dotPlacement: placement })
-      expect(wrapper.find('.ix-carousel-dot').classes()).toContain(`ix-carousel-dot-${placement}`)
+      expect(wrapper.find('.ix-carousel-dots').classes()).toContain(`ix-carousel-dots-${placement}`)
 
       if (['bottom', 'top'].includes(placement)) {
         expect(wrapper.find('.ix-carousel').classes()).toContain('ix-carousel-horizontal')
@@ -64,37 +64,37 @@ describe('Carousel', () => {
   test('prop autoplayTime work', async () => {
     const wrapper = CarouselMount({ props: { autoplayTime: 100 } })
 
-    expect(wrapper.findAll('.ix-carousel-dot-item')[0].classes()).toContain('ix-carousel-dot-item-active')
+    expect(wrapper.findAll('.ix-carousel-dot')[0].classes()).toContain('ix-carousel-dot-active')
 
     await sleep(100)
-    expect(wrapper.findAll('.ix-carousel-dot-item')[0].classes()).not.toContain('ix-carousel-dot-item-active')
-    expect(wrapper.findAll('.ix-carousel-dot-item')[1].classes()).toContain('ix-carousel-dot-item-active')
+    expect(wrapper.findAll('.ix-carousel-dot')[0].classes()).not.toContain('ix-carousel-dot-active')
+    expect(wrapper.findAll('.ix-carousel-dot')[1].classes()).toContain('ix-carousel-dot-active')
 
     await wrapper.setProps({ autoplayTime: 0 })
     await sleep(100)
-    expect(wrapper.findAll('.ix-carousel-dot-item')[1].classes()).toContain('ix-carousel-dot-item-active')
+    expect(wrapper.findAll('.ix-carousel-dot')[1].classes()).toContain('ix-carousel-dot-active')
   })
 
   test('prop trigger work', async () => {
     const onChange = vi.fn()
     const wrapper = CarouselMount({ props: { onChange } })
 
-    await wrapper.findAll('.ix-carousel-dot-item')[2].trigger('click')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
-    expect(wrapper.findAll('.ix-carousel-dot-item')[2].classes()).toContain('ix-carousel-dot-item-active')
+    await wrapper.findAll('.ix-carousel-dot')[2].trigger('click')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
+    expect(wrapper.findAll('.ix-carousel-dot')[2].classes()).toContain('ix-carousel-dot-active')
     expect(onChange).toHaveBeenCalledTimes(1)
 
     await wrapper.setProps({
       trigger: 'hover',
     })
-    await wrapper.find('.ix-carousel-dot-item').trigger('mouseenter')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
-    expect(wrapper.find('.ix-carousel-dot-item').classes()).toContain('ix-carousel-dot-item-active')
+    await wrapper.find('.ix-carousel-dot').trigger('mouseenter')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
+    expect(wrapper.find('.ix-carousel-dot').classes()).toContain('ix-carousel-dot-active')
     expect(onChange).toHaveBeenCalledTimes(2)
 
-    await wrapper.findAll('.ix-carousel-dot-item')[1].trigger('mouseenter')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
-    expect(wrapper.findAll('.ix-carousel-dot-item')[1].classes()).toContain('ix-carousel-dot-item-active')
+    await wrapper.findAll('.ix-carousel-dot')[1].trigger('mouseenter')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
+    expect(wrapper.findAll('.ix-carousel-dot')[1].classes()).toContain('ix-carousel-dot-active')
     expect(onChange).toHaveBeenCalledTimes(3)
   })
 
@@ -127,7 +127,7 @@ describe('Carousel', () => {
     expect(wrapper.findAll('.custom-dot').length === 2).toBeTruthy()
 
     await wrapper.findAll('.custom-dot')[1].trigger('click')
-    await wrapper.find('.ix-carousel-slides').trigger('transitionend')
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
     expect(onChange).toHaveBeenCalledTimes(1)
   })
 })

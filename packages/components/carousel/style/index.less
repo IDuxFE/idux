@@ -1,20 +1,71 @@
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
+@import '../../style/mixins/clearfix.less';
 
 .@{carousel-prefix} {
   .reset-component();
 
-  width: 100%;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
-  &-slides {
-    transition: @transition-all-base;
+  &-sliders {
     position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+    }
   }
 
-  &-horizontal &-slide-item {
-    float: left;
+  &-slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    outline: none;
+    overflow: hidden;
+    pointer-events: none;
+
+    img {
+      display: block;
+    }
+
+    input.@{radio-prefix}-input,
+    input.@{checkbox-prefix}-input {
+      visibility: hidden;
+    }
+
+    &-active {
+      pointer-events: auto;
+
+      input.@{radio-prefix}-input,
+      input.@{checkbox-prefix}-input {
+        visibility: visible;
+      }
+    }
+
+    // fix Carousel content height not match parent node
+    // when children is empty node
+    > div > div {
+      vertical-align: bottom;
+    }
+  }
+
+
+  &-vertical &-slider {
+    height: auto;
   }
 
   &-arrow {
@@ -22,8 +73,9 @@
     color: @carousel-arrow-color;
     opacity: @carousel-icon-opacity;
     cursor: pointer;
-
-    .carousel-vertical-center();
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 
     &:hover {
       opacity: @carousel-icon-hover-opacity;
@@ -38,51 +90,8 @@
     }
   }
 
-  &-horizontal &-dot {
-    .carousel-horizontal-center();
-  }
-
-  &-vertical &-dot {
-    flex-direction: column;
-    .carousel-vertical-center();
-
-    .@{carousel-prefix}-dot-item-default {
-      width: @carousel-dot-vertical-width;
-      height: @carousel-dot-vertical-height;
-    }
-  }
-
-  &-dot {
+  &-dots {
     display: flex;
-
-    &-item {
-      opacity: @carousel-icon-opacity;
-      cursor: pointer;
-      line-height: @carousel-dot-vertical-width;
-      font-size: 0; // 消除幽灵高度，避免影响间距计算
-
-      &:hover,
-      &-active {
-        opacity: @carousel-icon-active-opacity;
-      }
-
-      &-default {
-        width: @carousel-dot-horizontal-width;
-        height: @carousel-dot-horizontal-height;
-        border-radius: @carousel-dot-border-radius;
-        background-color: @carousel-dot-background-color;
-        outline: none;
-        border-style: none;
-      }
-    }
-
-    .@{carousel-prefix}-vertical &-item + &-item {
-      margin-top: @carousel-dot-gap;
-    }
-
-    .@{carousel-prefix}-horizontal &-item + &-item {
-      margin-left: @carousel-dot-gap;
-    }
 
     &-start {
       left: @carousel-dot-spacing;
@@ -99,5 +108,54 @@
     &-bottom {
       bottom: @carousel-dot-spacing;
     }
+  }
+
+  &-dot {
+    opacity: @carousel-icon-opacity;
+    cursor: pointer;
+    line-height: @carousel-dot-vertical-width;
+    font-size: 0; // 消除幽灵高度，避免影响间距计算
+
+    &:hover,
+    &-active {
+      opacity: @carousel-icon-active-opacity;
+    }
+
+    > button {
+      width: @carousel-dot-horizontal-width;
+      height: @carousel-dot-horizontal-height;
+      border-radius: @carousel-dot-border-radius;
+      background-color: @carousel-dot-background-color;
+      outline: none;
+      border-style: none;
+    }
+  }
+
+  &-horizontal &-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-vertical &-dots {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+  }
+
+  &-vertical &-dot {
+    > button {
+      width: @carousel-dot-vertical-width;
+      height: @carousel-dot-vertical-height;
+    }
+  }
+
+  &-horizontal &-dot + &-dot {
+    margin-left: @carousel-dot-gap;
+  }
+
+  &-vertical &-dot + &-dot {
+    margin-top: @carousel-dot-gap;
   }
 }

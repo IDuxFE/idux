@@ -5,30 +5,47 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, onBeforeUnmount, watch } from 'vue'
+import { type Ref, computed, onBeforeUnmount, onMounted, watch } from 'vue'
 
-export const useAutoplay = (autoplayTime: ComputedRef<number>, next: () => void): void => {
+import { type CarouselConfig } from '@idux/components/config'
+
+import { type CarouselProps } from '../types'
+
+export function useAutoplay(
+  props: CarouselProps,
+  config: CarouselConfig,
+  activeIndex: Ref<number>,
+  goTo: (index: number) => void,
+): {
+  startAutoplay: () => void
+  cleanAutoplay: () => void
+} {
+  const mergedAutoplayTime = computed(() => props.autoplayTime ?? config.autoplayTime)
+
   let timer: number | null = null
 
-  const cleanup = () => {
+  const cleanAutoplay = () => {
     if (timer !== null) {
       clearInterval(timer)
       timer = null
     }
   }
 
-  watch(
-    autoplayTime,
-    (newVal: number) => {
-      cleanup()
-      if (newVal) {
-        timer = setInterval(() => {
-          next()
-        }, newVal)
-      }
-    },
-    { immediate: true },
-  )
+  const startAutoplay = () => {
+    cleanAutoplay()
+    const autoplayTime = mergedAutoplayTime.value
+    if (autoplayTime > 0) {
+      timer = setTimeout(() => {
+        goTo(activeIndex.value + 1)
+      }, mergedAutoplayTime.value)
+    }
+  }
 
-  onBeforeUnmount(cleanup)
+  onMounted(() => {
+    watch(mergedAutoplayTime, startAutoplay, { immediate: true })
+  })
+
+  onBeforeUnmount(cleanAutoplay)
+
+  return { startAutoplay, cleanAutoplay }
 }
