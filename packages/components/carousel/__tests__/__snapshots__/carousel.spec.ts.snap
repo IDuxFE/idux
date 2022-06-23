@@ -1,25 +1,21 @@
 // Vitest Snapshot v1
 
 exports[`Carousel > render work 1`] = `
-"<div class=\\"ix-carousel ix-carousel-horizontal\\" style=\\"height: 0px;\\">
-  <div class=\\"ix-carousel-slides\\" style=\\"width: 0px; left: -0px;\\">
-    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
-      <div>card2</div>
-    </div>
-    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
-      <div>card1</div>
-    </div>
-    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
-      <div>card2</div>
-    </div>
-    <div class=\\"ix-carousel-slide-item\\" style=\\"width: 0px; height: 100%;\\">
-      <div>card1</div>
+"<div class=\\"ix-carousel ix-carousel-horizontal\\">
+  <div class=\\"ix-carousel-sliders\\" tabindex=\\"-1\\">
+    <div class=\\"ix-carousel-slider-track\\">
+      <div class=\\"ix-carousel-slider ix-carousel-slider-active\\">
+        <div>card1</div>
+      </div>
+      <div class=\\"ix-carousel-slider\\">
+        <div>card2</div>
+      </div>
     </div>
   </div>
   <!---->
-  <ul class=\\"ix-carousel-dot ix-carousel-dot-bottom\\">
-    <li class=\\"ix-carousel-dot-item ix-carousel-dot-item-active\\"><button class=\\"ix-carousel-dot-item-default\\" type=\\"button\\"></button></li>
-    <li class=\\"ix-carousel-dot-item\\"><button class=\\"ix-carousel-dot-item-default\\" type=\\"button\\"></button></li>
+  <ul class=\\"ix-carousel-dots ix-carousel-dots-bottom\\">
+    <li class=\\"ix-carousel-dot ix-carousel-dot-active\\"><button type=\\"button\\"></button></li>
+    <li class=\\"ix-carousel-dot\\"><button type=\\"button\\"></button></li>
   </ul>
 </div>"
 `;
