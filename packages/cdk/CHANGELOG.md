@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
+
+
+### Features
+
+* **comp:modal:** add draggable props ([#905](https://github.com/IDuxFE/idux/issues/905)) ([#966](https://github.com/IDuxFE/idux/issues/966)) ([d81b99f](https://github.com/IDuxFE/idux/commit/d81b99fa3b67b153301acd78d759cc32485b6b16))
+
+
+
+
+
 # [1.0.0-beta.16](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-17)
 
 

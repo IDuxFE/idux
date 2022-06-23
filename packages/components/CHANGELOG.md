@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
+
+
+### Bug Fixes
+
+* **comp:button:** style error ([#968](https://github.com/IDuxFE/idux/issues/968)) ([9db8c9f](https://github.com/IDuxFE/idux/commit/9db8c9f59bb8d6953d8748f97841897a71b8537b))
+* **comp:menu:** update hover style ([#967](https://github.com/IDuxFE/idux/issues/967)) ([4bda54b](https://github.com/IDuxFE/idux/commit/4bda54be6adbad21da0e11c133cf8318f59450db))
+* **comp:modal:** the default header size should be 'md' ([#969](https://github.com/IDuxFE/idux/issues/969)) ([437a6ce](https://github.com/IDuxFE/idux/commit/437a6ce664c6ddd1a370c395f836d7efcde54cdd))
+
+
+### Features
+
+* **comp:checkbox,comp:radio:** add group vertical props ([#975](https://github.com/IDuxFE/idux/issues/975)) ([d0710d6](https://github.com/IDuxFE/idux/commit/d0710d68e3766d7936b21ac0ae0685bb43d2b4a6))
+* **comp:modal:** add draggable props ([#905](https://github.com/IDuxFE/idux/issues/905)) ([#966](https://github.com/IDuxFE/idux/issues/966)) ([d81b99f](https://github.com/IDuxFE/idux/commit/d81b99fa3b67b153301acd78d759cc32485b6b16))
+* **comp:tabs:** add onBeforeLeave prop ([#965](https://github.com/IDuxFE/idux/issues/965)) ([9a792e3](https://github.com/IDuxFE/idux/commit/9a792e34df4cea07b96ab595a4e67943ee6faa50))
+
+
+
+
+
 # [1.0.0-beta.16](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-17)
 
 

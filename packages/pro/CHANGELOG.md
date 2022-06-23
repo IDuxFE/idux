@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
+
+
+### Bug Fixes
+
+* **comp:menu:** update hover style ([#967](https://github.com/IDuxFE/idux/issues/967)) ([4bda54b](https://github.com/IDuxFE/idux/commit/4bda54be6adbad21da0e11c133cf8318f59450db))
+
+
+
+
+
 # [1.0.0-beta.16](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-17)
 
 
