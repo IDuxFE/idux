@@ -12,6 +12,7 @@ import { isNil } from 'lodash-es'
 import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormAccessor } from '@idux/components/form'
+import { IxSpace } from '@idux/components/space'
 
 import Radio from './Radio'
 import { radioGroupToken } from './token'
@@ -43,7 +44,7 @@ export default defineComponent({
     })
 
     return () => {
-      const { options, dataSource } = props
+      const { options, dataSource, vertical } = props
       if (options) {
         Logger.warn('components/radio', '`options` was deprecated, please use `dataSource` instead')
       }
@@ -59,7 +60,7 @@ export default defineComponent({
       }
       return (
         <div class={classes.value} style={style.value}>
-          {children}
+          {vertical ? <IxSpace vertical={true}>{children}</IxSpace> : children}
         </div>
       )
     }

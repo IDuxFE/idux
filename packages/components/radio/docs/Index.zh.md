@@ -48,6 +48,7 @@ subtitle: 单选框
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
 | `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
+| `vertical` | 设置组内排列方向 | `boolean` | - | - | 默认为水平排列方向，可设`true`为垂直排列 |
 | `onChange` | 选中值发生变化后的回调 | `(value: any, oldValue: any) => void`| - | - | - |
 
 ```ts

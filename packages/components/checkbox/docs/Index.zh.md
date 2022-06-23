@@ -50,6 +50,7 @@ cover:
 | `gap` | 设置组内 `IxCheckbox` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置组内 `IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
 | `size` | 设置组内 `IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
+| `vertical` | 设置组内排列方向 | `boolean` | - | - | 默认为水平排列方向，可设`true`为垂直排列 |
 | `onChange` | 选中值发生变化后的回调 | `(newValue: any[], oldValue: any[]) => void`| - | - | - |
 
 ```ts

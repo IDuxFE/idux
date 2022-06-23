@@ -1,14 +1,12 @@
 <template>
-  <IxRadioGroup v-model:value="value">
-    <IxSpace vertical>
-      <IxRadio value="a">A</IxRadio>
-      <IxRadio value="b">B</IxRadio>
-      <IxRadio value="c">C</IxRadio>
-      <IxRadio value="d">
-        More...
-        <IxInput v-if="value === 'd'" v-model:value="moreValue" style="width: 100px; margin-left: 16px"></IxInput>
-      </IxRadio>
-    </IxSpace>
+  <IxRadioGroup v-model:value="value" vertical>
+    <IxRadio value="a">A</IxRadio>
+    <IxRadio value="b">B</IxRadio>
+    <IxRadio value="c">C</IxRadio>
+    <IxRadio value="d">
+      More...
+      <IxInput v-if="value === 'd'" v-model:value="moreValue" style="width: 100px; margin-left: 16px"></IxInput>
+    </IxRadio>
   </IxRadioGroup>
 </template>
 

@@ -7,31 +7,31 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
 import { controlPropDef } from '@idux/cdk/forms'
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, MaybeArray, type VKey } from '@idux/cdk/utils'
 import { type FormSize } from '@idux/components/form'
 
 export const radioProps = {
   control: controlPropDef,
-  checked: IxPropTypes.bool,
+  checked: { type: Boolean, default: undefined },
 
-  autofocus: IxPropTypes.bool.def(false),
-  buttoned: IxPropTypes.bool,
+  autofocus: { type: Boolean, default: false },
+  buttoned: { type: Boolean, default: undefined },
 
-  disabled: IxPropTypes.bool,
-  label: IxPropTypes.string,
-  mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  value: IxPropTypes.any,
+  disabled: { type: Boolean, default: undefined },
+  label: { type: String, default: undefined },
+  mode: { type: String as PropType<RadioMode>, default: undefined },
+  size: { type: String as PropType<FormSize>, default: undefined },
+  value: { type: null, default: undefined },
 
   // events
-  'onUpdate:checked': IxPropTypes.emit<(checked: boolean) => void>(),
-  onChange: IxPropTypes.emit<(checked: boolean, oldChecked: boolean) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-}
+  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>> },
+  onChange: { type: [Function, Array] as PropType<MaybeArray<(checked: boolean, oldChecked: boolean) => void>> },
+  onBlur: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
+  onFocus: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
+} as const
 
 export type RadioProps = ExtractInnerPropTypes<typeof radioProps>
 export type RadioPublicProps = ExtractPublicPropTypes<typeof radioProps>
@@ -47,24 +47,25 @@ export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindin
 
 export const radioGroupProps = {
   control: controlPropDef,
-  value: IxPropTypes.any,
+  value: { type: null, default: undefined },
 
-  buttoned: IxPropTypes.bool.def(false),
-  dataSource: IxPropTypes.array<RadioData>(),
-  disabled: IxPropTypes.bool.def(false),
-  gap: IxPropTypes.oneOfType([Number, String]),
-  name: IxPropTypes.string,
-  mode: IxPropTypes.oneOf<RadioMode>(['default', 'primary']),
+  buttoned: { type: Boolean, default: false },
+  dataSource: { type: Array as PropType<RadioData[]> },
+  disabled: { type: Boolean, default: false },
+  gap: { type: [Number, String] as PropType<number | string>, default: undefined },
+  name: { type: String, default: undefined },
+  mode: { type: String as PropType<RadioMode>, default: undefined },
   /**
    * @deprecated please use `dataSource` instead'
    */
-  options: IxPropTypes.array<RadioData>(),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']).def('md'),
+  options: { type: Array as PropType<RadioData[]> },
+  size: { type: String as PropType<FormSize>, default: 'md' },
+  vertical: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: any) => void>(),
-  onChange: IxPropTypes.emit<(value: any, oldValue: any) => void>(),
-}
+  'onUpdate:value': { type: [Function, Array] as PropType<MaybeArray<(value: any) => void>> },
+  onChange: { type: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>> },
+} as const
 
 export type RadioGroupProps = ExtractInnerPropTypes<typeof radioGroupProps>
 export type RadioGroupPublicProps = Omit<ExtractPublicPropTypes<typeof radioGroupProps>, 'options'>
