@@ -11,6 +11,8 @@ import type { ComputedRef, WritableComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
 import { callChange, getChildrenKeys, getParentKeys } from '../utils'
@@ -58,13 +60,13 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
     const nodeMap = mergedNodeMap.value
     _checkedKeys.forEach(key => {
       const { parentKey } = nodeMap.get(key) || {}
-      if (parentKey) {
+      if (!isNil(parentKey)) {
         let parent = nodeMap.get(parentKey)
         if (parent && !_checkedKeys.includes(parent.key)) {
           if (!disabledKeys.includes(parentKey)) {
             indeterminateKeySet.add(parentKey)
           }
-          while (parent?.parentKey) {
+          while (parent && !isNil(parent.parentKey)) {
             if (!disabledKeys.includes(parent.parentKey)) {
               indeterminateKeySet.add(parent.parentKey)
             }
@@ -131,7 +133,7 @@ function setParentChecked(
   disabledKeys: VKey[],
 ) {
   let parentSelected = true
-  while (parentSelected && currNode?.parentKey) {
+  while (parentSelected && currNode && !isNil(currNode.parentKey)) {
     const parent = dataMap.get(currNode.parentKey)
     if (parent && !disabledKeys.includes(currNode.parentKey)) {
       parentSelected = parent.children!.every(item => disabledKeys.includes(item.key) || tempKeys.includes(item.key))
@@ -189,7 +191,7 @@ function findAllCheckedKeys(dataMap: Map<VKey, MergedNode>, checkedKys: VKey[], 
     const parentKey = currNode?.parentKey
     const childrenKeys = getChildrenKeys(currNode, disabledKeys)
     res = res.concat(childrenKeys)
-    if (parentKey && lastParentKey !== parentKey) {
+    if (!isNil(parentKey) && lastParentKey !== parentKey) {
       setParentChecked(dataMap, currNode, res, disabledKeys)
       lastParentKey = parentKey
     }
