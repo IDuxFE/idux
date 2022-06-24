@@ -1,7 +1,7 @@
 <template>
   <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" :type="type">
     <template #itemLabel="item">
-      <router-link :to="item.key">{{ item.label }}</router-link>
+      <router-link to="#pro-layout-demo-Type">{{ item.label }}</router-link>
     </template>
     <template #logo>
       <div class="logo">Logo</div>

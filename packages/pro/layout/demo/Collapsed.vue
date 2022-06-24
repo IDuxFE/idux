@@ -8,7 +8,7 @@
     :style="{ height: '300px' }"
   >
     <template #itemLabel="item">
-      <router-link :to="item.key">{{ item.label }}</router-link>
+      <router-link to="#pro-layout-demo-Type">{{ item.label }}</router-link>
     </template>
     <template #headerExtra>
       <IxProLayoutSiderTrigger></IxProLayoutSiderTrigger>

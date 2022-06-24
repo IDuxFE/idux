@@ -2,7 +2,7 @@
   <div class="wrapper">
     <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" type="both" :fixed="fixed">
       <template #itemLabel="item">
-        <router-link :to="item.key">{{ item.label }}</router-link>
+        <router-link to="#pro-layout-demo-Fixed">{{ item.label }}</router-link>
       </template>
       <template #logo>
         <div class="logo">Logo</div>
