@@ -228,7 +228,7 @@ function useSelectOptions(
   const flattenedOptions = useFlattenedOptions(convertedOptions, mergedChildrenKey, getKey, mergedLabelKey)
   const filteredOptions = useFilteredOptions(props, flattenedOptions, inputValue, mergedLabelKey)
 
-  const optionKeyMap = useOptionKeyMap(filteredOptions)
+  const optionKeyMap = useOptionKeyMap(flattenedOptions)
 
   return { options: filteredOptions, optionKeyMap }
 }
