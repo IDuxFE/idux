@@ -10,6 +10,8 @@ import type { TreeNode } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { callEmit } from '@idux/cdk/utils'
 
 export function callChange(
@@ -48,7 +50,7 @@ export function getParentKeys(
   disabledKeys?: VKey[],
 ): VKey[] {
   const keys: VKey[] = []
-  while (currNode?.parentKey) {
+  while (currNode && !isNil(currNode.parentKey)) {
     const { parentKey } = currNode
     if (!disabledKeys?.includes(currNode.parentKey)) {
       keys.push(parentKey)
