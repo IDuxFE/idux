@@ -6,16 +6,17 @@
  */
 
 import type { CardProps } from './types'
-import type { ComputedRef, Slots, VNode, VNodeTypes } from 'vue'
 
-import { computed, defineComponent, isVNode, normalizeClass, provide } from 'vue'
+import { ComputedRef, Slots, VNode, VNodeTypes, computed, defineComponent, isVNode, normalizeClass, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxCol, IxRow } from '@idux/components/grid'
+import { IxIcon } from '@idux/components/icon'
 
 import { cardToken } from './token'
 import { cardProps } from './types'
@@ -37,8 +38,22 @@ export default defineComponent({
       return children.value.some(node => node.type && (node.type as any).name === 'IxCardGrid')
     })
 
+    const [selected, setSelected] = useControlledProp(props, 'selected', false)
+    const isDisabled = computed(() => props.disabled)
+    const isSelectable = computed(() => props.selectable)
+    const handleClick = () => {
+      if (isDisabled.value || !isSelectable.value) {
+        return
+      }
+
+      const newSelected = !selected.value
+      setSelected(newSelected)
+      callEmit(props.onSelectedChange, newSelected)
+    }
+
     const classes = computed(() => {
       const { borderless = config.borderless, loading, size = config.size, shadow } = props
+
       const hasGridValue = hasGrid.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -49,22 +64,40 @@ export default defineComponent({
         [`${prefixCls}-has-shadow`]: shadow,
         [`${prefixCls}-has-grid`]: hasGridValue,
         [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-selectable`]: isSelectable.value,
+        [`${prefixCls}-selected`]: isSelectable.value && selected.value,
+        [`${prefixCls}-disabled`]: isDisabled.value,
       })
     })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
-        <div class={classes.value}>
+        <div class={classes.value} onClick={handleClick}>
           {renderCover(props, slots, prefixCls)}
           <ɵHeader v-slots={slots} size="sm" header={props.header} />
           {renderBody(props, children, hasGrid, prefixCls)}
           {renderFooter(props, slots, prefixCls)}
+          {renderCornerMark(props, prefixCls)}
         </div>
       )
     }
   },
 })
+
+const renderCornerMark = (props: CardProps, prefixCls: string) => {
+  const isSelectable = computed(() => props.selectable ?? false)
+  if (!isSelectable.value) {
+    return undefined
+  }
+
+  return (
+    <div class={`${prefixCls}-mark-wrap`}>
+      <div class={`${prefixCls}-mark`}></div>
+      <IxIcon name="success" class={`${prefixCls}-mark-icon`} color="white" />
+    </div>
+  )
+}
 
 const renderCover = (props: CardProps, slots: Slots, prefixCls: string) => {
   let coverNode: VNodeTypes | undefined

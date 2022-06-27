@@ -35,6 +35,13 @@ export const cardProps = {
   loading: IxPropTypes.bool.def(false),
   size: IxPropTypes.oneOf<CardSize>(['sm', 'md', 'lg']),
   footer: IxPropTypes.array<CardButtonProps | VNode>(),
+  disabled: IxPropTypes.bool.def(false),
+  selected: IxPropTypes.bool.def(false),
+  selectable: IxPropTypes.bool.def(false),
+
+  // event
+  'onUpdate:selected': IxPropTypes.emit<(selected: boolean) => void>(),
+  onSelectedChange: IxPropTypes.emit<(selected: boolean) => void>(),
 }
 
 export type CardProps = ExtractInnerPropTypes<typeof cardProps>

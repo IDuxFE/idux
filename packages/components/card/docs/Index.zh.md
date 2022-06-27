@@ -22,6 +22,10 @@ order: 0
 | `loading` | 是否加载中状态 | `boolean` | `false` | - | 当卡片内容还在加载中时，显示占位图 |
 | `size` | 设置卡片大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `footer` | 自定义底部按钮 | `CardButtonProps[] \| #footer` | - | - | - |
+| `selectable` | 是否开启可选中配置 | `boolean` | `false` | - | - | - |
+| `v-model:selected` | 指定当前卡片是否选中  | `boolean` | `false` | - | - | - |
+| `disabled` | 是否禁用当前卡片 | `boolean` | `false` | - | - | - |
+| `onSelectedChange` | 选中状态发生变化后的回调  | `(selected: boolean) => void` | - | - | - | - |
 
 ```ts
 export interface CardCover {
@@ -75,4 +79,11 @@ export interface CardButtonProps extends ButtonProps {
 | `@card-loading-background-size` | `600%` | - | - |
 | `@card-loading-transition-duration` | `2s` | - | - |
 | `@card-grid-width` | `25%` | - | - |
+| `@card-border-color-selectable` | `@color-graphite-l20` | - | -|
+| `@card-border-color-selectable-selected` | `@color-primary` | - | -|
+| `@card-border-color-selectable-hover` | `@color-primary-l10` | - | -|
+| `@card-icon-color` | `@color-graphite-l30` | - | -|
+| `@card-icon-width` | `@font-size-xl` | - | -|
+| `@card-icon-height` | `@font-size-lg` | - | -|
+| `@card-box-shadow-selectable` | `0 2px 8px 0 rgba(30, 35, 43, 0.12)` | - | -|
 <!--- insert less variable end  --->

@@ -88,6 +88,48 @@ describe('Card', () => {
     expect(wrapper.classes()).not.toContain('ix-card-has-shadow')
   })
 
+  test('disabled work', async () => {
+    const wrapper = CardMount({ props: { disabled: true } })
+    expect(wrapper.classes()).toContain('ix-card-disabled')
+
+    await wrapper.setProps({ disabled: false })
+    expect(wrapper.classes()).not.toContain('ix-card-disabled')
+  })
+
+  test('selectable work', async () => {
+    const wrapper = CardMount({ props: { selectable: true } })
+    expect(wrapper.classes()).toContain('ix-card-selectable')
+
+    await wrapper.setProps({ selectable: false })
+    expect(wrapper.classes()).not.toContain('ix-card-selectable')
+  })
+
+  test('v-model:selected work', async () => {
+    const onUpdateSelected = vi.fn()
+    const wrapper = CardMount({ props: { selectable: true, selected: true, 'onUpdate:selected': onUpdateSelected } })
+    expect(wrapper.classes()).toContain('ix-card-selected')
+
+    await wrapper.setProps({ selected: false })
+    expect(wrapper.classes()).not.toContain('ix-card-selected')
+
+    await wrapper.trigger('click')
+    expect(onUpdateSelected).toBeCalledWith(true)
+  })
+
+  test('onChange work', async () => {
+    const handleSelected = vi.fn()
+    const wrapper = CardMount({
+      props: {
+        onSelectedChange: handleSelected,
+        selectable: true,
+        selected: false,
+      },
+    })
+
+    await wrapper.trigger('click')
+    expect(handleSelected).toBeCalledWith(true)
+  })
+
   test('loading work', async () => {
     const wrapper = CardMount({ props: { loading: true } })
     expect(wrapper.find('.ix-card-loading').exists()).toBe(true)
