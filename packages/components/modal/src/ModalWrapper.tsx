@@ -121,7 +121,7 @@ export default defineComponent({
           draggableResult.value = undefined
         }
         if (draggable) {
-          draggableResult.value = useDraggable(contentRef, { handler: headerRef, free: true, boundary: window })
+          draggableResult.value = useDraggable(contentRef, { handle: headerRef, free: true, boundary: window })
         }
       },
       { immediate: true },

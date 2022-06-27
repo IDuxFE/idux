@@ -26,7 +26,7 @@ export function useAutoplay(
 
   const cleanAutoplay = () => {
     if (timer !== null) {
-      clearInterval(timer)
+      clearTimeout(timer)
       timer = null
     }
   }
