@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
+
+
+### Bug Fixes
+
+* **pro:layout:** update the scroll style on the dark theme ([#982](https://github.com/IDuxFE/idux/issues/982)) ([756c38b](https://github.com/IDuxFE/idux/commit/756c38b8b85f8733260a15d2be95297fb4b831c0))
+
+
+
+
+
 # [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
 
 

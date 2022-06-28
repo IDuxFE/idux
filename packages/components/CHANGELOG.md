@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
+
+
+### Bug Fixes
+
+* **comp:carousel:** after click the same dot repeatedly, will not work ([#986](https://github.com/IDuxFE/idux/issues/986)) ([33e136e](https://github.com/IDuxFE/idux/commit/33e136e68f5af082f1f1d768c944d92bcc58d053))
+* **comp:carousel:** stop onTransitionend from bubbling ([#984](https://github.com/IDuxFE/idux/issues/984)) ([f2c8347](https://github.com/IDuxFE/idux/commit/f2c8347ad60105d864ca3b0728e0a9025c0d1b11))
+* **comp:select:** fix selected options display when filtered ([#977](https://github.com/IDuxFE/idux/issues/977)) ([ddd67e3](https://github.com/IDuxFE/idux/commit/ddd67e3284b6575701e642da5e359f9c4e58431e))
+* **comp:tree:** node cannot be checked when its key is 0(Number type) ([#978](https://github.com/IDuxFE/idux/issues/978)) ([5497f20](https://github.com/IDuxFE/idux/commit/5497f20473637166f7ab5a394705267efdd8e7c3))
+* **pro:layout:** update the scroll style on the dark theme ([#982](https://github.com/IDuxFE/idux/issues/982)) ([756c38b](https://github.com/IDuxFE/idux/commit/756c38b8b85f8733260a15d2be95297fb4b831c0))
+
+
+### Features
+
+* **comp:card:** add selection state and disabled state ([#983](https://github.com/IDuxFE/idux/issues/983)) ([a263497](https://github.com/IDuxFE/idux/commit/a2634970ea8738fc736be99673b0a7432ec217e3)), closes [#972](https://github.com/IDuxFE/idux/issues/972)
+
+
+
+
+
 # [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
 
 

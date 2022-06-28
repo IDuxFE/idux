@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
+
+
+### Bug Fixes
+
+* **cdk:portal:** remove targetHashMap ([#980](https://github.com/IDuxFE/idux/issues/980)) ([5f1e637](https://github.com/IDuxFE/idux/commit/5f1e6377a28e870223cdb03440581633877afcbb))
+
+
+
+
+
 # [1.0.0-beta.17](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-06-23)
 
 
