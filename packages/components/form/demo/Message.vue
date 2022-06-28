@@ -47,13 +47,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { AbstractControl, ValidateErrors, Validators, enUSMessages, useFormGroup, zhCNMessages } from '@idux/cdk/forms'
+import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
 
 Validators.setMessages({
-  required: '必填项/Input is required',
-  email: { 'zh-CN': zhCNMessages.email, 'en-US': enUSMessages.email },
-  minLength: { 'zh-CN': zhCNMessages.minLength, 'en-US': enUSMessages.minLength },
-  maxLength: { 'zh-CN': zhCNMessages.maxLength, 'en-US': enUSMessages.maxLength },
+  required: (_err, _control) => '必填项/Input is required',
   passwordRequired: {
     'zh-CN': '请确认你的密码',
     'en-US': 'Please confirm your password',

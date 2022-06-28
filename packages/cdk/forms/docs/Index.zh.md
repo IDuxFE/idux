@@ -90,6 +90,7 @@ export function useFormControl<T>(
 | --- | --- | --- | --- | --- |
 | `disabled` | 默认禁用当前控件 | `boolean` | - | - |
 | `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
+| `example` | 控件的示例 | `string` | - | 通常用于自定义提示信息 |
 | `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
@@ -105,8 +106,10 @@ export function useFormControl<T>(
 | `email` | 验证表单控件的值是否为 `email` | - | - | 验证失败返回 `{ email: { message: '', actual: value } }`|
 | `min()` | 验证表单控件的值大于或等于指定的数字 | `number` | - | 验证失败返回 `{ min: { message: '', min, actual: value } }`|
 | `max()` | 验证表单控件的值小于或等于指定的数字 | `number` | - | 验证失败返回 `{ max: { message: '', min, actual: value } }`|
-| `minLength()` | 验证表单控件的值的长度大于或等于指定的数字 | `number` | - | 验证失败返回 `{ minLength: { message: '', minLength, actual: value.length } }`|
-| `maxLength()` | 验证表单控件的值的长度小于或等于指定的数字 | `number` | - | 验证失败返回 `{ maxLength: { message: '', maxLength, actual: value.length } }`|
+| `range()` | 验证表单控件的值的范围 | `number, number` | - | 验证失败返回 `{ range: { message: '', min, max, actual: value } }`|
+| `minLength()` | 验证表单控件的值的长度大于或等于指定的数字 | `number` | - | 验证失败返回 `{ minLength: { message: '', minLength, actual: value.length, isArray } }`|
+| `maxLength()` | 验证表单控件的值的长度小于或等于指定的数字 | `number` | - | 验证失败返回 `{ maxLength: { message: '', maxLength, actual: value.length, isArray } }`|
+| `rangeLength()` | 验证表单控件的值的长度范围 | `number, number` | - | 验证失败返回 `{ rangeLength: { message: '', minLength, maxLength, actual: value.length, isArray } }`|
 | `pattern()` | 验证表单控件的值匹配一个正则表达式 | `string \| RegExp` | - | 验证失败返回 `{ pattern: { message: '', pattern, actual: value } }`|
 | `setMessages()` | 设置验证失败的提示信息 | `ValidateMessages` | - | 每次设置的 `messages` 会跟之前的进行合并, 默认的提示信息为 `zhCNMessages` |
 

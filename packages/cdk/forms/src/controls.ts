@@ -157,6 +157,7 @@ export abstract class AbstractControl<T = any> {
   }
 
   name?: string
+  example?: string
 
   protected _controls: Ref<any>
   protected _valueRef!: Ref<T>
@@ -443,6 +444,7 @@ export abstract class AbstractControl<T = any> {
     let disabled = false
     if (isOptions(validatorOrOptions)) {
       this.name = validatorOrOptions.name
+      this.example = validatorOrOptions.example
       this._trigger = validatorOrOptions.trigger ?? this._trigger
       this._trim = validatorOrOptions.trim ?? this._trim
       this._validators = toValidator(validatorOrOptions.validators)
