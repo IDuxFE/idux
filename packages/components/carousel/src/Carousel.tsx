@@ -119,6 +119,9 @@ export default defineComponent({
     }
 
     const onTransitionend = () => {
+      if (runningIndex.value === -1) {
+        return
+      }
       const sliderTrackElement = sliderTrackRef.value!
       sliderTrackElement.style.transition = ''
       sliderRefs.value.forEach(slider => {
