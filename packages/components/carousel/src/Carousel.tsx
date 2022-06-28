@@ -46,7 +46,9 @@ export default defineComponent({
       }
     }
 
-    onBeforeUpdate(() => (sliderRefs.value = []))
+    onBeforeUpdate(() => {
+      sliderRefs.value = []
+    })
 
     const { activeIndex, runningIndex, unitHeight, unitWidth, goTo, next, prev } = useStrategy(
       props,
@@ -119,7 +121,8 @@ export default defineComponent({
     }
 
     const onTransitionend = () => {
-      if (runningIndex.value === -1) {
+      const currRunningIndex = runningIndex.value
+      if (currRunningIndex === -1) {
         return
       }
       const sliderTrackElement = sliderTrackRef.value!
@@ -131,13 +134,13 @@ export default defineComponent({
           element.style.left = ''
         }
       })
-      const currIndex = runningIndex.value
+
       if (mergedVertical.value) {
-        sliderTrackElement.style.transform = `translate3d(0, ${-currIndex * unitHeight.value}px, 0)`
+        sliderTrackElement.style.transform = `translate3d(0, ${-currRunningIndex * unitHeight.value}px, 0)`
       } else {
-        sliderTrackElement.style.transform = `translate3d(${-currIndex * unitWidth.value}px,0 , 0)`
+        sliderTrackElement.style.transform = `translate3d(${-currRunningIndex * unitWidth.value}px,0 , 0)`
       }
-      activeIndex.value = currIndex
+      activeIndex.value = currRunningIndex
       runningIndex.value = -1
       startAutoplay()
     }

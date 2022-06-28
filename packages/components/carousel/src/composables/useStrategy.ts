@@ -64,10 +64,15 @@ export function useStrategy(
   //             this will not track dependencies used in the slot.
   //             Invoke the slot function inside the render function instead.
   onMounted(() => {
-    watch(mergedLength, () => {
-      goTo(0)
-      layout()
-    })
+    watch(
+      mergedLength,
+      () => {
+        layout()
+        runningIndex.value = -1
+        goTo(0)
+      },
+      { flush: 'post' },
+    )
   })
 
   const goTo = (nextIndex: number) => {
@@ -75,43 +80,48 @@ export function useStrategy(
     const sliderTrackElement = sliderTrackRef.value
     const firstSliderElement = convertElement(sliderRefs.value[0])
     const lastSliderElement = convertElement(sliderRefs.value[length - 1])
-    if (!sliderTrackElement || !firstSliderElement || !lastSliderElement) {
+
+    if (
+      length <= 1 ||
+      runningIndex.value !== -1 ||
+      nextIndex === activeIndex.value ||
+      !sliderTrackElement ||
+      !firstSliderElement ||
+      !lastSliderElement
+    ) {
       return
     }
 
-    if (length > 1 && runningIndex.value === -1) {
-      const currIndex = activeIndex.value
-      const { from, to } = getBoundary(currIndex, nextIndex, length)
-      runningIndex.value = to
-      sliderTrackElement.style.transition = `transform 0.5s ease`
+    const { from, to } = getBoundary(activeIndex.value, nextIndex, length)
+    runningIndex.value = to
+    sliderTrackElement.style.transition = `transform 0.5s ease`
 
-      const needToAdjust = length > 2 && nextIndex !== to
-      if (mergedVertical.value) {
-        if (needToAdjust) {
-          if (to < from) {
-            firstSliderElement.style.top = `${length * unitHeight.value}px`
-            lastSliderElement.style.top = ''
-          } else {
-            firstSliderElement.style.top = ''
-            lastSliderElement.style.top = `${-length * unitHeight.value}px`
-          }
-          sliderTrackElement.style.transform = `translate3d(0, ${-nextIndex * unitHeight.value}px, 0)`
+    const needToAdjust = length > 2 && nextIndex !== to
+    if (mergedVertical.value) {
+      if (needToAdjust) {
+        if (to < from) {
+          firstSliderElement.style.top = `${length * unitHeight.value}px`
+          lastSliderElement.style.top = ''
         } else {
-          sliderTrackElement.style.transform = `translate3d(0, ${-to * unitHeight.value}px, 0)`
+          firstSliderElement.style.top = ''
+          lastSliderElement.style.top = `${-length * unitHeight.value}px`
         }
+        sliderTrackElement.style.transform = `translate3d(0, ${-nextIndex * unitHeight.value}px, 0)`
       } else {
-        if (needToAdjust) {
-          if (to < from) {
-            firstSliderElement.style.left = `${length * unitWidth.value}px`
-            lastSliderElement.style.left = ''
-          } else {
-            firstSliderElement.style.left = ''
-            lastSliderElement.style.left = `${-length * unitWidth.value}px`
-          }
-          sliderTrackElement.style.transform = `translate3d(${-nextIndex * unitWidth.value}px, 0, 0)`
+        sliderTrackElement.style.transform = `translate3d(0, ${-to * unitHeight.value}px, 0)`
+      }
+    } else {
+      if (needToAdjust) {
+        if (to < from) {
+          firstSliderElement.style.left = `${length * unitWidth.value}px`
+          lastSliderElement.style.left = ''
         } else {
-          sliderTrackElement.style.transform = `translate3d(${-to * unitWidth.value}px, 0, 0)`
+          firstSliderElement.style.left = ''
+          lastSliderElement.style.left = `${-length * unitWidth.value}px`
         }
+        sliderTrackElement.style.transform = `translate3d(${-nextIndex * unitWidth.value}px, 0, 0)`
+      } else {
+        sliderTrackElement.style.transform = `translate3d(${-to * unitWidth.value}px, 0, 0)`
       }
     }
   }
