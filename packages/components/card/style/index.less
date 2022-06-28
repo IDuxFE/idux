@@ -117,6 +117,80 @@
     }
   }
 
+  &-selectable {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: @card-border-width @card-border-style @card-border-color-selectable;
+    box-shadow: none;
+
+    &:hover {
+      border: @card-border-width @card-border-style @card-border-color-selectable-hover;
+      box-shadow: @card-box-shadow-selectable;
+
+      .@{card-prefix}-mark{
+        border-color: @card-border-color-selectable @card-border-color-selectable transparent transparent;
+      }
+    }
+  }
+
+  &-mark-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: @card-icon-width;
+    height: @card-icon-height;
+  }
+
+  &-mark {
+    width: 0;
+    height: 0;
+    border-style: @card-border-style;
+    border-width: (@card-icon-height / 2) (@card-icon-width / 2);
+    border-color: @card-icon-color @card-icon-color transparent transparent;
+    border-radius: 0 @card-border-width 0;
+  }
+
+  &-mark-icon {
+    font-size: @font-size-xl;
+    position: absolute;
+    top: -6px;
+    right: -4px;
+  }
+
+  &-selected {
+    border: @card-border-width @card-border-style @color-primary;
+    box-shadow: @card-box-shadow-selectable;
+
+    .@{card-prefix}-mark {
+      border-color: @color-primary @color-primary transparent transparent;
+    }
+
+    &:hover {
+      border: @card-border-width @card-border-style @color-primary;
+      box-shadow: @card-box-shadow-selectable;
+
+      .@{card-prefix}-mark {
+        border-color: @color-primary @color-primary transparent transparent;
+      }
+    }
+  }
+
+  &-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    &.@{card-prefix}-selectable:hover {
+      border: @card-border-width @card-border-style @card-border-color-selectable;
+      box-shadow: none;
+    }
+
+    &.@{card-prefix}-selected:hover {
+      border: @card-border-width @card-border-style @color-primary;
+      box-shadow: @card-box-shadow-selectable;
+    }
+  }
+
   .@{idux-prefix}-header {
     &-content {
       > .@{idux-prefix}-header-suffix {

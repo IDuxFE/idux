@@ -8,5 +8,6 @@ exports[`Card > render work 1`] = `
     <p>Some Content</p>
   </div>
   <!---->
+  <!---->
 </div>"
 `;

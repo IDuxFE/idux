@@ -16,6 +16,7 @@ exports[`CardGrid > hoverable work 1`] = `
     </div>
   </div>
   <!---->
+  <!---->
 </div>"
 `;
 
@@ -35,6 +36,7 @@ exports[`CardGrid > hoverable2 work 1`] = `
     </div>
   </div>
   <!---->
+  <!---->
 </div>"
 `;
 
@@ -53,6 +55,7 @@ exports[`CardGrid > render work 1`] = `
       <div class=\\"ix-col ix-card-grid\\">Content</div>
     </div>
   </div>
+  <!---->
   <!---->
 </div>"
 `;
