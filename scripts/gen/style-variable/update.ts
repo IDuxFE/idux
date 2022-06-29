@@ -92,7 +92,7 @@ ${variablesEntries
     const themeValue = exitThemes
       .map(theme => {
         const value = variable[1][theme]
-        return value ? `\`${value}\`` : '-'
+        return value ? `\`${value.replace(/[\r\n]/g, '')}\`` : '-'
       })
       .join(' | ')
     return `| \`${variable[0]}\` | ${themeValue} | - |

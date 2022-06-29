@@ -75,7 +75,7 @@ interface SiderHover {
 | `@pro-layout-header-light-box-shadow` | `inset 0 -1px 0 0 @color-graphite-l30` | - | - |
 | `@pro-layout-header-dark-color` | `@color-white` | - | - |
 | `@pro-layout-header-dark-hover-color` | `@color-white` | - | - |
-| `@pro-layout-header-dark-hover-background-image` | `linear-gradient(180deg, rgba(28,110,255,0.10) 0%, rgba(28,110,255,0.00) 100%)` | - | - |
+| `@pro-layout-header-dark-hover-background-image` | `linear-gradient(  180deg,  rgba(28, 110, 255, 0.1) 0%,  rgba(28, 110, 255, 0) 100%)` | - | - |
 | `@pro-layout-header-dark-background-color` | `@color-graphite-d40` | - | - |
 | `@pro-layout-header-dark-hover-background-color` | `@color-graphite-d40` | - | - |
 | `@pro-layout-header-dark-active-color` | `@color-white` | - | - |
@@ -86,9 +86,8 @@ interface SiderHover {
 | `@pro-layout-header-menu-item-line-height` | `@pro-layout-header-height - 2` | - | - |
 | `@pro-layout-header-logo-width` | `@pro-layout-sider-width - 24px` | `@pro-layout-sider-width - 16px` | - |
 | `@pro-layout-header-extra-width` | `256px` | - | - |
-| `@pro-layout-header-item-radius` | `24px` | `0` | - |
-| `@pro-layout-header-item-margin` | `0 @spacing-xs` | `0` | - |
-| `@pro-layout-header-item-padding` | `0 @spacing-md` | `0 20px` | - |
+| `@pro-layout-header-item-margin` | `0` | - | - |
+| `@pro-layout-header-item-padding` | `0 @spacing-lg` | `0 20px` | - |
 | `@pro-layout-header-vertical-menu-item-font-size` | `@font-size-sm` | - | - |
 | `@pro-layout-header-vertical-menu-item-height` | `32px` | - | - |
 | `@pro-layout-header-vertical-menu-item-line-height` | `32px` | - | - |
@@ -103,9 +102,6 @@ interface SiderHover {
 | `@pro-layout-sider-light-collapsed-active-color` | `@color-primary` | - | - |
 | `@pro-layout-sider-light-collapsed-active-background-color` | `@color-primary-l50` | - | - |
 | `@pro-layout-sider-light-icon-color` | `@color-graphite` | - | - |
-| `@pro-layout-sider-light-thumb-background-color` | `@color-graphite-l30` | - | - |
-| `@pro-layout-sider-light-thumb-color` | `@color-graphite-l50` | - | - |
-| `@pro-layout-sider-light-track-background-color` | `@color-graphite-l50` | - | - |
 | `@pro-layout-sider-light-border-right` | `1px solid @color-graphite-l30` | - | - |
 | `@pro-layout-sider-light-divider-color` | `@color-white` | - | - |
 | `@pro-layout-sider-dark-color` | `@color-graphite-l10` | - | - |
@@ -119,9 +115,6 @@ interface SiderHover {
 | `@pro-layout-sider-dark-collapsed-active-color` | `@color-white` | - | - |
 | `@pro-layout-sider-dark-collapsed-active-background-color` | `@color-primary` | - | - |
 | `@pro-layout-sider-dark-icon-color` | `@color-graphite` | - | - |
-| `@pro-layout-sider-dark-thumb-background-color` | `@color-graphite-d10` | - | - |
-| `@pro-layout-sider-dark-thumb-color` | `@color-graphite-d40` | - | - |
-| `@pro-layout-sider-dark-track-background-color` | `@color-graphite-d40` | - | - |
 | `@pro-layout-sider-dark-border-right` | `none` | - | - |
 | `@pro-layout-sider-dark-divider-color` | `@color-graphite-d30` | - | - |
 | `@pro-layout-sider-width` | `@layout-sider-width` | - | - |
