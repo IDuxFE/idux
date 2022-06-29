@@ -9,6 +9,7 @@ import { resolve } from 'path'
 
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
+// eslint-disable-next-line import/no-unresolved
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -35,10 +36,12 @@ export default defineConfig({
       enabled: true,
       reporter: ['json', 'lcov', 'text', 'cobertura'],
       excludeNodeModules: true,
-      include: ['packages/**/*'],
+      include: ['packages/**/src/*.{ts,tsx}'],
       exclude: [],
     },
     reporters: ['default'],
+    // 如果要测试单目录，可以修改这个配置
+    include: ['packages/**/__tests__/*.spec.{ts,tsx}'],
   },
 
   define: {

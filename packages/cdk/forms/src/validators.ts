@@ -103,7 +103,13 @@ export class Validators {
       if (isEmpty(value) || !hasLength(value) || value.length >= minLength) {
         return undefined
       }
-      return { minLength: Validators.getError('minLength', control, { minLength, actual: value.length }) }
+      return {
+        minLength: Validators.getError('minLength', control, {
+          minLength,
+          actual: value.length,
+          isArray: isArray(value),
+        }),
+      }
     }
   }
 
@@ -112,7 +118,13 @@ export class Validators {
       if (isEmpty(value) || !hasLength(value) || value.length <= maxLength) {
         return undefined
       }
-      return { maxLength: Validators.getError('maxLength', control, { maxLength, actual: value.length }) }
+      return {
+        maxLength: Validators.getError('maxLength', control, {
+          maxLength,
+          actual: value.length,
+          isArray: isArray(value),
+        }),
+      }
     }
   }
 

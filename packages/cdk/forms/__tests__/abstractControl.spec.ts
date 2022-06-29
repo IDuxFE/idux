@@ -79,7 +79,12 @@ describe('abstractControl.ts', () => {
 
       expect(await control.validate()).toEqual({
         email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
-        minLength: { actual: 4, minLength: 5, message: zhCNMessages.minLength({ actual: 4, minLength: 5 }, control) },
+        minLength: {
+          actual: 4,
+          isArray: false,
+          minLength: 5,
+          message: zhCNMessages.minLength({ actual: 4, isArray: false, minLength: 5 }, control),
+        },
       })
     })
 
