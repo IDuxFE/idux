@@ -5,16 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, onMounted, onUpdated, ref } from 'vue'
+import { defineComponent, inject, onMounted, ref } from 'vue'
 
-import { ɵDatePanel } from '@idux/components/_private/date-panel'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵInput, type ɵInputInstance } from '@idux/components/_private/input'
-import { ɵTimePanel } from '@idux/components/_private/time-panel'
 
-import { useActiveDate } from '../composables/useActiveDate'
 import { useInputProps } from '../composables/useInputProps'
 import { useTimePanelProps } from '../composables/useTimePanelProps'
+import Panel from '../panel/Panel'
 import { datePickerToken } from '../token'
 
 export default defineComponent({
@@ -22,18 +20,15 @@ export default defineComponent({
     const context = inject(datePickerToken)!
     const {
       props,
-      dateConfig,
       mergedPrefixCls,
-      formatRef,
       dateFormatRef,
       timeFormatRef,
       slots,
-      overlayOpened,
       inputEnableStatus,
       inputRef,
       controlContext: {
         dateInputValue,
-        timeInputVaue,
+        timeInputValue,
         visiblePanel,
         panelValue,
         dateInputFocused,
@@ -46,36 +41,41 @@ export default defineComponent({
         handleTimeInputFocus,
         handleDateInputBlur,
         handleTimeInputBlur,
-        handleDatePanelChange,
-        handleTimePanelChange,
+        handlePanelChange,
       },
+      overlayVisible,
       setOverlayOpened,
       handleKeyDown,
       handleClear,
     } = context
 
-    const { activeDate, setActiveDate } = useActiveDate(dateConfig, props, panelValue, formatRef)
-
     const inputInstance = ref<ɵInputInstance>()
-    const setInputRef = () => {
+    onMounted(() => {
+      if (inputEnableStatus.value.allowInput !== 'overlay') {
+        return
+      }
+
+      inputRef.value = inputInstance.value?.getInputElement()
+    })
+
+    const _handleDateInputFocus = (evt: FocusEvent) => {
+      handleDateInputFocus()
       if (inputEnableStatus.value.allowInput === 'overlay') {
-        inputRef.value = inputInstance.value?.getInputElement()
+        inputRef.value = evt.target as HTMLInputElement
       }
     }
-    onMounted(setInputRef)
-    onUpdated(setInputRef)
+    const _handleTimeInputFocus = (evt: FocusEvent) => {
+      handleTimeInputFocus()
+      if (inputEnableStatus.value.allowInput === 'overlay') {
+        inputRef.value = evt.target as HTMLInputElement
+      }
+    }
 
-    const handleDatePanelCellClick = (value: Date) => {
-      handleDatePanelChange(value)
+    const _handlePanelChange = (value: Date | undefined) => {
+      handlePanelChange(value)
 
       if (!inputEnableStatus.value.enableOverlayTimeInput) {
         setOverlayOpened(false)
-      }
-    }
-
-    const handleMouseDown = (e: MouseEvent) => {
-      if (!(e.target instanceof HTMLInputElement)) {
-        e.preventDefault()
       }
     }
 
@@ -96,18 +96,19 @@ export default defineComponent({
       }
 
       return (
-        <div class={`${prefixCls}-inputs`} onMousedown={handleMouseDown}>
+        <div class={prefixCls}>
           <ɵInput
             ref={inputInstance}
             {...inputProps.value}
             class={`${prefixCls}-date-input`}
             v-slots={slots}
             value={dateInputValue.value}
-            clearVisible={!!dateInputValue.value}
+            clearVisible={!!dateInputValue.value && !!inputEnableStatus.value.allowInput}
             focused={dateInputFocused.value}
             placeholder={dateFormatRef.value}
+            readonly={!inputEnableStatus.value.allowInput}
             onInput={handleDateInput}
-            onFocus={handleDateInputFocus}
+            onFocus={_handleDateInputFocus}
             onBlur={handleDateInputBlur}
             onKeydown={handleKeyDown}
             onClear={_handleDateInputClear}
@@ -117,12 +118,13 @@ export default defineComponent({
               {...inputProps.value}
               class={`${prefixCls}-time-input`}
               v-slots={slots}
-              value={timeInputVaue.value}
-              clearVisible={!!timeInputVaue.value}
-              placeholder={timeFormatRef.value}
+              value={timeInputValue.value}
+              clearVisible={!!timeInputValue.value && !!inputEnableStatus.value.allowInput}
               focused={timeInputFocused.value}
+              placeholder={timeFormatRef.value}
+              readonly={!inputEnableStatus.value.allowInput}
               onInput={handleTimeInput}
-              onFocus={handleTimeInputFocus}
+              onFocus={_handleTimeInputFocus}
               onBlur={handleTimeInputBlur}
               onKeydown={handleKeyDown}
               onClear={handleTimeInputClear}
@@ -134,42 +136,27 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-overlay`
-      const boardPrefixCls = `${mergedPrefixCls.value}-board`
-      const datePanelType = props.type === 'datetime' ? 'date' : props.type
+      const inputsCls = `${prefixCls}-inputs`
 
-      const datePanelProps = {
+      const paneProps = {
         cellTooltip: props.cellTooltip,
         disabledDate: props.disabledDate,
-        type: datePanelType,
         value: panelValue.value,
-        visible: overlayOpened.value,
-        activeDate: activeDate.value,
-        onCellClick: handleDatePanelCellClick,
-        'onUpdate:activeDate': setActiveDate,
-      }
-      const _timePanelProps = {
-        ...timePanelProps.value,
-        activeValue: activeDate.value,
-        value: panelValue.value,
-        visible: visiblePanel.value === 'timePanel',
-        onChange: handleTimePanelChange,
-        'onUpdate:activeValue': setActiveDate,
+        type: props.type,
+        timePanelOptions: timePanelProps.value,
+        visible: overlayVisible.value && visiblePanel.value,
+        onChange: _handlePanelChange,
       }
 
       const children = [
-        <div class={`${prefixCls}-body ${boardPrefixCls}`} tabindex={-1} onMousedown={handleMouseDown}>
-          {renderInputs(boardPrefixCls)}
-          <div class={`${boardPrefixCls}-panel`} tabindex={-1}>
-            <ɵDatePanel v-show={visiblePanel.value === 'datePanel'} v-slots={slots} {...datePanelProps} />
-            {inputEnableStatus.value.enableOverlayTimeInput && (
-              <ɵTimePanel v-show={visiblePanel.value === 'timePanel'} {..._timePanelProps} />
-            )}
-          </div>
+        <div class={`${prefixCls}-body`} tabindex={-1}>
+          {renderInputs(inputsCls)}
+          <Panel v-slots={slots} {...paneProps} />
         </div>,
         <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer} />,
       ]
 
-      return props.overlayRender ? props.overlayRender(children) : <div onMousedown={handleMouseDown}>{children}</div>
+      return props.overlayRender ? props.overlayRender(children) : <div>{children}</div>
     }
   },
 })

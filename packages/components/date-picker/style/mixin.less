@@ -20,7 +20,7 @@
     z-index: @date-picker-overlay-zindex;
     border-radius: @date-picker-overlay-border-radius;
     box-shadow: @date-picker-overlay-box-shadow;
-    background-color: @date-picker-panel-background-color;
+    background-color: @date-panel-background-color;
 
     &-body {
       outline: none;
@@ -28,37 +28,29 @@
   }
 }
 
-.date-picker-board() {
-  &-board {
-    & &-inputs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: @date-picker-overlay-inputs-margin-bottom;
-      
-      input {
-        color: @date-picker-color;
-      }
-
-      .@{input-prefix}-focused {
-        box-shadow: none;
-      }
+.date-picker-inputs() {
+  & &-inputs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: @date-picker-overlay-inputs-margin-bottom;
+    
+    input {
+      color: @date-picker-color;
     }
-    & &-date-input {
+
+    .@{input-prefix}-focused {
+      box-shadow: none;
+    }
+
+    &-date-input {
       width: @date-picker-overlay-date-input-width;
     }
-    & &-date-input:only-child {
+    &-date-input:only-child {
       width: 100%;
     }
-    & &-time-input {
+    &-time-input {
       width: @date-picker-overlay-time-input-width;
       margin-left: @date-picker-overlay-input-gap;
-    }
-
-    &-panel {
-      max-height: @date-range-picker-panel-max-height;
-      .@{time-panel-prefix} {
-        height: @date-range-picker-panel-max-height;
-      }
     }
   }
 }

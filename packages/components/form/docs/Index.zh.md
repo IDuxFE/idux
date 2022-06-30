@@ -130,9 +130,9 @@ export default defineComponent({
 | `@form-padding-horizontal-sm` | `@spacing-sm - 2px` | - | - |
 | `@form-padding-horizontal-md` | `@spacing-md` | - | - |
 | `@form-padding-horizontal-lg` | `@spacing-sm + 2px` | - | - |
-| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
-| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
-| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
+| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
+| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
+| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
 | `@form-border-width` | `@border-width-sm` | - | - |
 | `@form-border-style` | `@border-style` | - | - |
 | `@form-border-color` | `@border-color` | - | - |

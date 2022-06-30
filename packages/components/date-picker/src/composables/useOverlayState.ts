@@ -10,13 +10,15 @@ import type { PickerControlContext } from './useControl'
 import type { PickerRangeControlContext } from './useRangeControl'
 import type { ComputedRef } from 'vue'
 
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
+import { useControlledProp, useState } from '@idux/cdk/utils'
 
 export interface OverlayStateContext {
   overlayOpened: ComputedRef<boolean>
+  overlayVisible: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
+  onAfterLeave: () => void
 }
 
 export function useOverlayState(
@@ -24,6 +26,16 @@ export function useOverlayState(
   control: PickerControlContext | PickerRangeControlContext,
 ): OverlayStateContext {
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
+  const [overlayVisible, setOverlayVisible] = useState(false)
+  watch(
+    overlayOpened,
+    open => {
+      if (open) {
+        setOverlayVisible(true)
+      }
+    },
+    { immediate: true },
+  )
 
   const changeOpenedState = (open: boolean) => {
     setOverlayOpened(open)
@@ -32,11 +44,17 @@ export function useOverlayState(
     }
   }
 
+  const onAfterLeave = () => {
+    if (!overlayOpened.value) {
+      setOverlayVisible(false)
+    }
+  }
+
   onMounted(() => {
     if (props.autofocus) {
-      setOverlayOpened(true)
+      changeOpenedState(true)
     }
   })
 
-  return { overlayOpened, setOverlayOpened: changeOpenedState }
+  return { overlayOpened, overlayVisible, setOverlayOpened: changeOpenedState, onAfterLeave }
 }

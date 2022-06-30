@@ -13,7 +13,7 @@ import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } fro
 import { controlPropDef } from '@idux/cdk/forms'
 import { ɵPortalTargetDef } from '@idux/cdk/portal'
 
-export interface TimePanelOptions {
+export interface PickerTimePanelOptions {
   disabledHours?: (selectedAmPm: string | undefined) => number[]
   disabledMinutes?: (selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]
   disabledSeconds?: (
@@ -25,6 +25,9 @@ export interface TimePanelOptions {
   hourStep?: number
   minuteStep?: number
   secondStep?: number
+}
+
+export interface TimePanelOptions extends PickerTimePanelOptions {
   hourEnabled?: boolean
   minuteEnabled?: boolean
   secondEnabled?: boolean
@@ -95,10 +98,9 @@ export const datePickerProps = {
   ...datePickerCommonProps,
 
   value: [String, Date, Number],
-  defaultOpenValue: [String, Date, Number],
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: false },
   placeholder: String,
-  timePanelOptions: Object as PropType<TimePanelOptions>,
+  timePanelOptions: Object as PropType<PickerTimePanelOptions>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
@@ -116,11 +118,10 @@ export const dateRangePickerProps = {
   ...datePickerCommonProps,
 
   value: Array as PropType<(number | string | Date | undefined)[]>,
-  defaultOpenValue: Array as PropType<(number | string | Date)[]>,
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: true },
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
-  timePanelOptions: [Object, Array] as PropType<TimePanelOptions | TimePanelOptions[]>,
+  timePanelOptions: [Object, Array] as PropType<PickerTimePanelOptions | PickerTimePanelOptions[]>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
   onChange: [Function, Array] as PropType<
     MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
@@ -137,3 +138,53 @@ export type DateRangePickerComponent = DefineComponent<
 export type DateRangePickerInstance = InstanceType<DefineComponent<DateRangePickerProps, DatePickerCommonBindings>>
 
 export type DatePickerType = 'date' | 'week' | 'month' | 'quarter' | 'year' | 'datetime'
+
+export const datePanelProps = {
+  activeValue: Date as PropType<Date | undefined>,
+  cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
+  disabledDate: Function as PropType<(date: Date) => boolean>,
+  value: Date as PropType<Date>,
+  type: {
+    type: String as PropType<DatePickerType>,
+    default: 'date',
+  },
+  timePanelOptions: {
+    type: Object as PropType<TimePanelOptions>,
+    default: () => ({}),
+  },
+  visible: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+
+  onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(date: Date | undefined) => void>>,
+} as const
+export type DatePanelProps = ExtractInnerPropTypes<typeof datePanelProps>
+export type DatePanelPublicProps = ExtractPublicPropTypes<typeof datePanelProps>
+export type DatePanelComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof DatePanelPublicProps> & DatePanelPublicProps
+>
+export type DatePanelInstance = InstanceType<DefineComponent<DatePanelProps>>
+
+export const dateRangePanelProps = {
+  activeValue: Array as PropType<Date[] | undefined>,
+  cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
+  disabledDate: Function as PropType<(date: Date) => boolean>,
+  value: Array as PropType<Date[] | undefined>,
+  type: {
+    type: String as PropType<DatePickerType>,
+    default: 'date',
+  },
+  timePanelOptions: {
+    type: Array as PropType<TimePanelOptions[]>,
+    default: () => [],
+  },
+  visible: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+
+  onChange: [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(date: Date[] | undefined) => void>>,
+} as const
+export type DateRangePanelProps = ExtractInnerPropTypes<typeof dateRangePanelProps>
+export type DateRangePanelPublicProps = ExtractPublicPropTypes<typeof dateRangePanelProps>
+export type DateRangePanelComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof DateRangePanelPublicProps> & DateRangePanelPublicProps
+>
+export type DateRangePanelInstance = InstanceType<DefineComponent<DateRangePanelProps>>

@@ -6,13 +6,11 @@
 
 .@{date-picker-prefix} {
   .date-picker-trigger();
-  .date-picker-board();
 
   &-overlay {
     width: @date-picker-overlay-width;
     padding: @date-picker-overlay-padding;
-
-    .date-picker-panel();
+    .date-picker-inputs();
 
     &-body {
       padding: @date-picker-overlay-body-padding;
@@ -31,9 +29,18 @@
   }
 }
 
+.@{date-picker-prefix}-panel {
+  width: @date-picker-panel-width;
+  max-height: @date-picker-panel-max-height;
+  .@{time-panel-prefix} {
+    height: @date-picker-panel-max-height;
+  }
+
+  .date-picker-panel();
+}
+
 .@{date-range-picker-prefix} {
   .date-picker-trigger();
-  .date-picker-board();
 
   &-input {
     display: flex;
@@ -45,21 +52,24 @@
 
   &-overlay {
     padding: @date-range-picker-overlay-padding;
-    .date-picker-panel();
+    .date-picker-inputs();
 
     &-body {
-      display: flex;
       padding: @date-range-picker-overlay-body-padding;
     }
     &-separator {
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      flex-shrink: 0;
       width: @date-range-picker-overlay-separator-width;
       padding: @date-range-picker-overlay-separator-padding;
       text-align: center;
       font-size: @date-range-picker-overlay-separator-font-size;
       color: @date-picker-color;
+    }
+    &-inputs-side {
+      width: 100%;
     }
 
     &-footer {
@@ -73,14 +83,28 @@
       }
     }
   }
+}
 
-  &-board {
-    width: @date-range-picker-panel-width;
-
-    &-panel .@{time-panel-prefix} {
-      border: @date-range-picker-panel-border-width @date-range-picker-panel-border-style
-        @date-range-picker-panel-border-color;
-      border-radius: @date-range-picker-panel-border-radius;
-    }
+.@{date-range-picker-prefix}-panel {
+  max-height: @date-range-picker-panel-max-height;
+  .@{time-panel-prefix} {
+    height: @date-range-picker-panel-max-height;
   }
+
+  border: @date-range-picker-panel-border-width @date-range-picker-panel-border-style
+    @date-range-picker-panel-border-color;
+  border-radius: @date-range-picker-panel-border-radius;
+  display: flex;
+
+  &-side {
+    width: @date-range-picker-panel-width;
+  }
+
+  &-separator {
+    width: @date-range-picker-panel-separator-width;
+    margin: @date-range-picker-panel-separator-margin;
+    background-color: @date-range-picker-panel-separator-color;
+  }
+
+  .date-picker-panel();
 }

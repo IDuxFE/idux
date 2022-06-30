@@ -20,7 +20,7 @@ export function useRangeKeyboardEvents(
   setOverlayOpened: (opened: boolean) => void,
   handleChange: (value: (Date | undefined)[] | undefined) => void,
 ): (evt: KeyboardEvent) => void {
-  const { isSelecting, bufferUpdated, buffer } = rangeControl
+  const { bufferUpdated, buffer } = rangeControl
   return (evt: KeyboardEvent) => {
     switch (evt.code) {
       case 'Escape':
@@ -28,7 +28,7 @@ export function useRangeKeyboardEvents(
         break
 
       case 'Enter':
-        if (!isSelecting.value && bufferUpdated.value) {
+        if (bufferUpdated.value) {
           handleChange(buffer.value)
         }
         setOverlayOpened(false)

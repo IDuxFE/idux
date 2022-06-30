@@ -4,17 +4,17 @@
     flex-direction: column;
     text-align: center;
     width: 100%;
-    font-size: @date-picker-panel-font-size;
-    background: @date-picker-panel-background-color;
+    font-size: @date-panel-font-size;
+    background: @date-panel-background-color;
 
     // ======================= Header =======================
 
     &-header {
       display: flex;
-      padding: @date-picker-panel-header-padding;
-      line-height: @date-picker-panel-header-height - @date-picker-panel-border-width;
-      border-bottom: @date-picker-panel-header-border-bottom;
-      color: @date-picker-panel-color;
+      padding: @date-panel-header-padding;
+      line-height: @date-panel-header-height - @date-panel-border-width;
+      border-bottom: @date-panel-header-border-bottom;
+      color: @date-panel-color;
       transition: color @transition-duration-base;
 
       > * {
@@ -22,14 +22,14 @@
       }
 
       button {
-        font-size: @date-picker-panel-header-button-font-size;
-        font-weight: @date-picker-panel-header-button-font-weight;
+        font-size: @date-panel-header-button-font-size;
+        font-weight: @date-panel-header-button-font-weight;
         transition: color @transition-duration-base;
         background-color: transparent;
         border-style: none;
 
         &:hover {
-          color: @date-picker-panel-active-color;
+          color: @date-panel-active-color;
         }
       }
 
@@ -40,7 +40,7 @@
         position: relative;
         display: inline-block;
         visibility: hidden;
-        padding: @date-picker-panel-header-item-padding;
+        padding: @date-panel-header-item-padding;
 
         &.visible {
           visibility: visible;
@@ -51,7 +51,7 @@
         flex: auto;
 
         button:not(:first-child) {
-          margin-left: @date-picker-panel-header-content-spacing;
+          margin-left: @date-panel-header-content-spacing;
         }
       }
     }
@@ -59,8 +59,8 @@
     // ======================= Body =======================
 
     &-body {
-      padding: @date-picker-panel-body-padding;
-      font-size: @date-picker-panel-body-font-size;
+      padding: @date-panel-body-padding;
+      font-size: @date-panel-body-font-size;
 
       table {
         width: 100%;
@@ -79,11 +79,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-width: @date-picker-panel-cell-width;
-        height: @date-picker-panel-cell-height;
-        margin-bottom: @date-picker-panel-body-header-margin-bottom;
-        font-weight: @date-picker-panel-body-header-font-weight;
-        background-color: @date-picker-panel-body-header-background-color;
+        min-width: @date-panel-cell-width;
+        height: @date-panel-cell-height;
+        margin-bottom: @date-panel-body-header-margin-bottom;
+        font-weight: @date-panel-body-header-font-weight;
+        background-color: @date-panel-body-header-background-color;
       }
     }
 
@@ -94,50 +94,50 @@
       padding-bottom: 0;
     }
     &-cell {
-      padding: @date-picker-panel-cell-padding;
-      color: @date-picker-panel-color;
+      padding: @date-panel-cell-padding;
+      color: @date-panel-color;
       overflow: hidden;
       cursor: pointer;
 
       &-out-view {
-        color: @date-picker-panel-disabled-color;
+        color: @date-panel-disabled-color;
       }
 
       &-inner {
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: @date-picker-panel-cell-width;
-        height: @date-picker-panel-cell-height;
-        line-height: @date-picker-panel-cell-height;
-        padding: @date-picker-panel-cell-inner-padding;
-        border-radius: @date-picker-panel-cell-border-radius;
+        min-width: @date-panel-cell-width;
+        height: @date-panel-cell-height;
+        line-height: @date-panel-cell-height;
+        padding: @date-panel-cell-inner-padding;
+        border-radius: @date-panel-cell-border-radius;
       }
 
       &-trigger {
-        width: @date-picker-panel-cell-trigger-width;
-        height: @date-picker-panel-cell-trigger-height;
+        width: @date-panel-cell-trigger-width;
+        height: @date-panel-cell-trigger-height;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: @date-picker-panel-cell-border-radius;
+        border-radius: @date-panel-cell-border-radius;
         transition: background @transition-duration-base, border @transition-duration-base;
       }
 
       &-current:not(&-selected) .@{date-panel-prefix}-cell-trigger {
-        border: @date-picker-panel-border-width @date-picker-panel-border-style
-          @date-picker-panel-cell-current-border-color;
-        color: @date-picker-panel-cell-current-color;
+        border: @date-panel-border-width @date-panel-border-style
+          @date-panel-cell-current-border-color;
+        color: @date-panel-cell-current-color;
       }
 
       &-selected .@{date-panel-prefix}-cell-trigger {
-        color: @date-picker-panel-color-inverse;
-        background: @date-picker-panel-active-color;
+        color: @date-panel-color-inverse;
+        background: @date-panel-active-color;
       }
 
       &-in-range {
         .@{date-panel-prefix}-cell-inner {
-          background: @date-picker-panel-in-range-color;
+          background: @date-panel-in-range-color;
           border-radius: 0;
         }
         &:not(.@{date-panel-prefix}-cell-selected) .@{date-panel-prefix}-cell-inner {
@@ -146,18 +146,18 @@
       }
 
       &-disabled {
-        color: @date-picker-panel-disabled-color;
+        color: @date-panel-disabled-color;
         cursor: not-allowed;
 
         .@{date-panel-prefix}-cell-inner {
           border-radius: 0;
-          background: @date-picker-panel-disabled-background-color;
+          background: @date-panel-disabled-background-color;
         }
       }
 
       &-disabled&-today {
         .@{date-panel-prefix}-cell-trigger {
-          border-color: @date-picker-panel-disabled-color;
+          border-color: @date-panel-disabled-color;
         }
       }
     }
@@ -166,8 +166,8 @@
       .@{date-panel-prefix}-cell {
         &:hover:not(&-selected):not(&-disabled) {
           .@{date-panel-prefix}-cell-trigger {
-            background: @date-picker-panel-cell-hover-background-color;
-            color: @date-picker-panel-cell-hover-color;
+            background: @date-panel-cell-hover-background-color;
+            color: @date-panel-cell-hover-color;
           }
         }
       }
@@ -178,19 +178,19 @@
         &:hover {
           .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled) .@{date-panel-prefix}-cell-inner {
             border-radius: 0;
-            background: @date-picker-panel-cell-hover-background-color;
-            color: @date-picker-panel-cell-hover-color;
+            background: @date-panel-cell-hover-background-color;
+            color: @date-panel-cell-hover-color;
           }
           .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled):first-child {
             .@{date-panel-prefix}-cell-inner {
-              border-top-left-radius: @date-picker-panel-cell-border-radius;
-              border-bottom-left-radius: @date-picker-panel-cell-border-radius;
+              border-top-left-radius: @date-panel-cell-border-radius;
+              border-bottom-left-radius: @date-panel-cell-border-radius;
             }
           }
           .@{date-panel-prefix}-cell:not(.@{date-panel-prefix}-cell-disabled):last-child {
             .@{date-panel-prefix}-cell-inner {
-              border-top-right-radius: @date-picker-panel-cell-border-radius;
-              border-bottom-right-radius: @date-picker-panel-cell-border-radius;
+              border-top-right-radius: @date-panel-cell-border-radius;
+              border-bottom-right-radius: @date-panel-cell-border-radius;
             }
           }
         }
@@ -203,12 +203,12 @@
         .@{date-panel-prefix}-cell-selected {
         z-index: 0;
         .@{date-panel-prefix}-cell-trigger {
-          color: @date-picker-panel-color-inverse;
-          background: @date-picker-panel-active-color;
+          color: @date-panel-color-inverse;
+          background: @date-panel-active-color;
         }
         &.@{date-panel-prefix}-cell-in-range {
-          @edge-bg-width: @date-picker-panel-cell-width * 1.5;
-          @translate-x: @edge-bg-width * 0.5 - @date-picker-panel-cell-width * 0.5;
+          @edge-bg-width: @date-panel-cell-width * 1.5;
+          @translate-x: @edge-bg-width * 0.5 - @date-panel-cell-width * 0.5;
 
           &.@{date-panel-prefix}-cell-start .@{date-panel-prefix}-cell-inner,
           &.@{date-panel-prefix}-cell-end .@{date-panel-prefix}-cell-inner {
@@ -216,9 +216,9 @@
             &::before {
               z-index: 0;
               position: absolute;
-              background: @date-picker-panel-in-range-color;
-              width: @date-picker-panel-cell-width * 1.5;
-              height: @date-picker-panel-cell-height;
+              background: @date-panel-in-range-color;
+              width: @date-panel-cell-width * 1.5;
+              height: @date-panel-cell-height;
               content: '';
             }
             .@{date-panel-prefix}-cell-trigger {
@@ -228,17 +228,17 @@
           }
           &.@{date-panel-prefix}-cell-start .@{date-panel-prefix}-cell-inner::before {
             transform: ~'translateX(@{translate-x})';
-            border-top-left-radius: @date-picker-panel-cell-border-radius;
-            border-bottom-left-radius: @date-picker-panel-cell-border-radius;
+            border-top-left-radius: @date-panel-cell-border-radius;
+            border-bottom-left-radius: @date-panel-cell-border-radius;
           }
           &.@{date-panel-prefix}-cell-end .@{date-panel-prefix}-cell-inner::before {
             transform: ~'translateX(-@{translate-x})';
-            border-top-right-radius: @date-picker-panel-cell-border-radius;
-            border-bottom-right-radius: @date-picker-panel-cell-border-radius;
+            border-top-right-radius: @date-panel-cell-border-radius;
+            border-bottom-right-radius: @date-panel-cell-border-radius;
           }
           &.@{date-panel-prefix}-cell-start.@{date-panel-prefix}-cell-end {
             .@{date-panel-prefix}-cell-inner::before {
-              width: @date-picker-panel-cell-width;
+              width: @date-panel-cell-width;
               transform: none;
             }
           }
@@ -251,15 +251,15 @@
     &-month {
       .@{date-panel-prefix} {
         &-header {
-          padding: @date-picker-panel-header-padding-lg;
+          padding: @date-panel-header-padding-lg;
         }
 
         &-body {
-          padding: @date-picker-panel-body-padding-lg;
+          padding: @date-panel-body-padding-lg;
         }
 
         &-cell {
-          padding: @date-picker-panel-cell-padding-lg;
+          padding: @date-panel-cell-padding-lg;
 
           &:first-child .@{date-panel-prefix}-cell-inner {
             justify-content: flex-start;
@@ -269,32 +269,32 @@
           }
 
           &-inner {
-            min-width: @date-picker-panel-cell-width-lg;
-            height: @date-picker-panel-cell-height-lg;
-            padding: @date-picker-panel-cell-inner-padding-lg;
-            border-radius: @date-picker-panel-cell-border-radius-lg;
+            min-width: @date-panel-cell-width-lg;
+            height: @date-panel-cell-height-lg;
+            padding: @date-panel-cell-inner-padding-lg;
+            border-radius: @date-panel-cell-border-radius-lg;
           }
           &-trigger {
-            width: @date-picker-panel-cell-trigger-width-lg;
-            height: @date-picker-panel-cell-trigger-height-lg;
-            border-radius: @date-picker-panel-cell-border-radius-lg;
+            width: @date-panel-cell-trigger-width-lg;
+            height: @date-panel-cell-trigger-height-lg;
+            border-radius: @date-panel-cell-border-radius-lg;
           }
 
           &-selected {
             &.@{date-panel-prefix}-cell-in-range {
               &.@{date-panel-prefix}-cell-start .@{date-panel-prefix}-cell-inner {
-                border-top-left-radius: @date-picker-panel-cell-border-radius-lg;
-                border-bottom-left-radius: @date-picker-panel-cell-border-radius-lg;
+                border-top-left-radius: @date-panel-cell-border-radius-lg;
+                border-bottom-left-radius: @date-panel-cell-border-radius-lg;
               }
               &.@{date-panel-prefix}-cell-end .@{date-panel-prefix}-cell-inner {
-                border-top-right-radius: @date-picker-panel-cell-border-radius-lg;
-                border-bottom-right-radius: @date-picker-panel-cell-border-radius-lg;
+                border-top-right-radius: @date-panel-cell-border-radius-lg;
+                border-bottom-right-radius: @date-panel-cell-border-radius-lg;
               }
             }
           }
           &-in-range {
             .@{date-panel-prefix}-cell-inner {
-              background: @date-picker-panel-in-range-color;
+              background: @date-panel-in-range-color;
               border-radius: 0;
             }
           }

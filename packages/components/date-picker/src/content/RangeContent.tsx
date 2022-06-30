@@ -5,16 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, onMounted, onUpdated, ref } from 'vue'
+import { defineComponent, inject, onMounted, ref } from 'vue'
 
-import { ɵDatePanel } from '@idux/components/_private/date-panel'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵInput, type ɵInputInstance } from '@idux/components/_private/input'
-import { ɵTimePanel } from '@idux/components/_private/time-panel'
 
-import { useRangeActiveDate } from '../composables/useActiveDate'
 import { useInputProps } from '../composables/useInputProps'
 import { useRangeTimePanelProps } from '../composables/useTimePanelProps'
+import RangePanel from '../panel/RangePanel'
 import { dateRangePickerToken } from '../token'
 
 export default defineComponent({
@@ -22,46 +20,27 @@ export default defineComponent({
     const context = inject(dateRangePickerToken)!
     const {
       props,
-      dateConfig,
       locale,
       slots,
-      overlayOpened,
-      formatRef,
       dateFormatRef,
       timeFormatRef,
-      rangeControlContext: {
-        buffer,
-        panelValue,
-        visiblePanel,
-        isSelecting,
-        fromControl,
-        toControl,
-        handleDatePanelCellClick,
-        handleDatePanelCellMouseenter,
-      },
+      rangeControlContext: { buffer, visiblePanel, fromControl, toControl, handlePanelChange },
       mergedPrefixCls,
       inputEnableStatus,
       inputRef,
       handleChange,
       handleKeyDown,
+      overlayVisible,
       renderSeparator,
       setOverlayOpened,
     } = context
 
-    const { fromActiveDate, toActiveDate, setFromActiveDate, setToActiveDate } = useRangeActiveDate(
-      dateConfig,
-      props,
-      panelValue,
-      isSelecting,
-      overlayOpened,
-      formatRef,
-    )
-
     const inputInstance = ref<ɵInputInstance>()
     onMounted(() => {
-      inputRef.value = inputInstance.value?.getInputElement()
-    })
-    onUpdated(() => {
+      if (inputEnableStatus.value.allowInput !== 'overlay') {
+        return
+      }
+
       inputRef.value = inputInstance.value?.getInputElement()
     })
 
@@ -79,13 +58,12 @@ export default defineComponent({
     const inputProps = useInputProps(context)
     const timePanelProps = useRangeTimePanelProps(props, timeFormatRef)
 
-    const renderBoard = (isFrom: boolean) => {
-      const { enableOverlayDateInput, enableOverlayTimeInput } = inputEnableStatus.value
-      const boardPrefixCls = `${mergedPrefixCls.value}-board`
+    const renderInputsSide = (prefixCls: string, isFrom: boolean) => {
+      const { enableOverlayTimeInput } = inputEnableStatus.value
 
       const {
         dateInputValue,
-        timeInputVaue,
+        timeInputValue,
         dateInputFocused,
         timeInputFocused,
         handleDateInput,
@@ -96,22 +74,35 @@ export default defineComponent({
         handleTimeInputFocus,
         handleDateInputBlur,
         handleTimeInputBlur,
-        handleTimePanelChange,
       } = isFrom ? fromControl : toControl
 
-      const inputs = enableOverlayDateInput && (
-        <div class={`${boardPrefixCls}-inputs`}>
+      const _handleDateInputFocus = (evt: FocusEvent) => {
+        handleDateInputFocus()
+        if (inputEnableStatus.value.allowInput === 'overlay') {
+          inputRef.value = evt.target as HTMLInputElement
+        }
+      }
+      const _handleTimeInputFocus = (evt: FocusEvent) => {
+        handleTimeInputFocus()
+        if (inputEnableStatus.value.allowInput === 'overlay') {
+          inputRef.value = evt.target as HTMLInputElement
+        }
+      }
+
+      return (
+        <div class={`${prefixCls}-side`}>
           <ɵInput
             ref={isFrom ? inputInstance : undefined}
             {...inputProps.value}
-            class={`${boardPrefixCls}-date-input`}
+            class={`${prefixCls}-date-input`}
             v-slots={slots}
             value={dateInputValue.value}
-            clearVisible={!!dateInputValue.value}
+            clearVisible={!!dateInputValue.value && !!inputEnableStatus.value.allowInput}
             focused={dateInputFocused.value}
             placeholder={dateFormatRef.value}
+            readonly={!inputEnableStatus.value.allowInput}
             onInput={handleDateInput}
-            onFocus={handleDateInputFocus}
+            onFocus={_handleDateInputFocus}
             onBlur={handleDateInputBlur}
             onKeydown={handleKeyDown}
             onClear={handleDateInputClear}
@@ -119,14 +110,15 @@ export default defineComponent({
           {enableOverlayTimeInput && (
             <ɵInput
               {...inputProps.value}
-              class={`${boardPrefixCls}-time-input`}
+              class={`${prefixCls}-time-input`}
               v-slots={slots}
-              value={timeInputVaue.value}
-              clearVisible={!!timeInputVaue.value}
+              value={timeInputValue.value}
+              clearVisible={!!timeInputValue.value && !!inputEnableStatus.value.allowInput}
               focused={timeInputFocused.value}
               placeholder={timeFormatRef.value}
+              readonly={!inputEnableStatus.value.allowInput}
               onInput={handleTimeInput}
-              onFocus={handleTimeInputFocus}
+              onFocus={_handleTimeInputFocus}
               onBlur={handleTimeInputBlur}
               onKeydown={handleKeyDown}
               onClear={handleTimeInputClear}
@@ -134,52 +126,39 @@ export default defineComponent({
           )}
         </div>
       )
-
-      const timeValue = panelValue.value?.[isFrom ? 0 : 1]
-      const activeDate = isFrom ? fromActiveDate.value : toActiveDate.value
-      const datePanelProps = {
-        cellTooltip: props.cellTooltip,
-        disabledDate: props.disabledDate,
-        type: props.type === 'datetime' ? 'date' : props.type,
-        value: panelValue.value,
-        visible: overlayOpened.value,
-        activeDate,
-        onCellClick: handleDatePanelCellClick,
-        onCellMouseenter: handleDatePanelCellMouseenter,
-        'onUpdate:activeDate': isFrom ? setFromActiveDate : setToActiveDate,
-      }
-      const _timePanelProps = {
-        ...timePanelProps.value[isFrom ? 0 : 1],
-        activeValue: timeValue ?? activeDate,
-        value: timeValue,
-        visible: visiblePanel.value === 'timePanel',
-        onChange: handleTimePanelChange,
-        'onUpdate:activeValue': isFrom ? setFromActiveDate : setToActiveDate,
-      }
-
-      return (
-        <div class={boardPrefixCls}>
-          {inputs}
-          <div class={`${boardPrefixCls}-panel`}>
-            <ɵDatePanel v-show={visiblePanel.value !== 'timePanel'} v-slots={slots} {...datePanelProps} />
-            {inputEnableStatus.value.enableOverlayTimeInput && (
-              <ɵTimePanel v-show={visiblePanel.value === 'timePanel'} {..._timePanelProps} />
-            )}
-          </div>
-        </div>
-      )
     }
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-overlay`
+      const inputsCls = `${prefixCls}-inputs`
+
+      const panelProps = {
+        value: buffer.value as Date[],
+        cellTooltip: props.cellTooltip,
+        disabledDate: props.disabledDate,
+        type: props.type,
+        timePanelOptions: timePanelProps.value,
+        visible: overlayVisible.value && visiblePanel.value,
+        onChange: handlePanelChange,
+      }
+
+      const panelSlots = {
+        cell: slots.cell,
+        separator: inputEnableStatus.value.enableOverlayDateInput
+          ? () => <div class={`${prefixCls}-separator`}></div>
+          : undefined,
+      }
 
       const children = [
         <div class={`${prefixCls}-body`} tabindex={-1} onMousedown={handleMouseDown}>
-          {renderBoard(true)}
-          <div class={`${prefixCls}-separator`}>
-            {inputEnableStatus.value.enableOverlayDateInput && renderSeparator()}
-          </div>
-          {renderBoard(false)}
+          {inputEnableStatus.value.enableOverlayDateInput && (
+            <div class={inputsCls}>
+              {renderInputsSide(inputsCls, true)}
+              <div class={`${prefixCls}-separator`}>{renderSeparator()}</div>
+              {renderInputsSide(inputsCls, false)}
+            </div>
+          )}
+          <RangePanel v-slots={panelSlots} {...panelProps} />
         </div>,
         <ɵFooter
           v-slots={slots}
