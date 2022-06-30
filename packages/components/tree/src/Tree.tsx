@@ -51,6 +51,8 @@ export default defineComponent({
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/tree')
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
+    const mergedShowLine = computed(() => props.showLine ?? config.showLine)
+    const mergedBlocked = computed(() => props.blocked ?? config.blocked)
     const { mergedNodes, mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
     const { searchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
     const expandableContext = useExpandable(
@@ -75,6 +77,7 @@ export default defineComponent({
       mergedPrefixCls,
       mergedNodeMap,
       mergedGetKey,
+      mergedShowLine,
       searchedKeys,
       ...checkableContext,
       ...expandableContext,
@@ -97,13 +100,12 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { blocked = config.blocked, showLine = config.showLine } = props
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: !isNil(activeKey.value),
-        [`${prefixCls}-blocked`]: blocked,
+        [`${prefixCls}-blocked`]: mergedBlocked.value,
         [`${prefixCls}-focused`]: focused.value,
-        [`${prefixCls}-show-line`]: showLine,
+        [`${prefixCls}-show-line`]: mergedShowLine.value,
       }
     })
 
