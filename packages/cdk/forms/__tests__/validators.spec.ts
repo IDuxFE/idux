@@ -1,4 +1,5 @@
 import { FormControl } from '../src/controls'
+import { enUSMessages } from '../src/messages/en-US'
 import { zhCNMessages } from '../src/messages/zh-CN'
 import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from '../src/types'
 import { Validators } from '../src/validators'
@@ -86,6 +87,25 @@ describe('validators.ts', () => {
     expect(maxOne('2', control)).toEqual(errorMessage('2'))
   })
 
+  test('range work', () => {
+    const range3To9 = Validators.range(3, 9)
+
+    expect(range3To9('', control)).toBeUndefined()
+    expect(range3To9(undefined, control)).toBeUndefined()
+    expect(range3To9('test', control)).toBeUndefined()
+    expect(range3To9('3', control)).toBeUndefined()
+    expect(range3To9(3, control)).toBeUndefined()
+    expect(range3To9(9, control)).toBeUndefined()
+
+    const errorMessage = (actual: unknown) => ({
+      range: { actual, min: 3, max: 9, message: zhCNMessages.range({ actual, min: 3, max: 9 }, control) },
+    })
+    expect(range3To9(2, control)).toEqual(errorMessage(2))
+    expect(range3To9('2', control)).toEqual(errorMessage('2'))
+    expect(range3To9(10, control)).toEqual(errorMessage(10))
+    expect(range3To9('10', control)).toEqual(errorMessage('10'))
+  })
+
   test('minLength work', () => {
     const minLengthTwo = Validators.minLength(2)
 
@@ -98,11 +118,16 @@ describe('validators.ts', () => {
     expect(minLengthTwo([1, 2], control)).toBeUndefined()
     expect(minLengthTwo([1, 2, 3], control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      minLength: { actual, minLength: 2, message: zhCNMessages.minLength({ actual, minLength: 2 }, control) },
+    const errorMessage = (actual: unknown, isArray: boolean) => ({
+      minLength: {
+        actual,
+        isArray,
+        minLength: 2,
+        message: zhCNMessages.minLength({ actual, isArray, minLength: 2 }, control),
+      },
     })
-    expect(minLengthTwo('t', control)).toEqual(errorMessage(1))
-    expect(minLengthTwo([1], control)).toEqual(errorMessage(1))
+    expect(minLengthTwo('t', control)).toEqual(errorMessage(1, false))
+    expect(minLengthTwo([1], control)).toEqual(errorMessage(1, true))
   })
 
   test('maxLength work', () => {
@@ -117,11 +142,41 @@ describe('validators.ts', () => {
     expect(maxLengthTwo([1, 2], control)).toBeUndefined()
     expect(maxLengthTwo([1], control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      maxLength: { actual, maxLength: 2, message: zhCNMessages.maxLength({ actual, maxLength: 2 }, control) },
+    const errorMessage = (actual: unknown, isArray: boolean) => ({
+      maxLength: {
+        actual,
+        isArray,
+        maxLength: 2,
+        message: zhCNMessages.maxLength({ actual, isArray, maxLength: 2 }, control),
+      },
     })
-    expect(maxLengthTwo('test', control)).toEqual(errorMessage(4))
-    expect(maxLengthTwo([1, 2, 3], control)).toEqual(errorMessage(3))
+    expect(maxLengthTwo('test', control)).toEqual(errorMessage(4, false))
+    expect(maxLengthTwo([1, 2, 3], control)).toEqual(errorMessage(3, true))
+  })
+
+  test('rangeLength work', () => {
+    const rangeLength2To5 = Validators.rangeLength(2, 5)
+
+    expect(rangeLength2To5('', control)).toBeUndefined()
+    expect(rangeLength2To5(1, control)).toBeUndefined()
+    expect(rangeLength2To5(undefined, control)).toBeUndefined()
+    expect(rangeLength2To5('te', control)).toBeUndefined()
+    expect(rangeLength2To5('test1', control)).toBeUndefined()
+    expect(rangeLength2To5([], control)).toBeUndefined()
+    expect(rangeLength2To5([1, 2], control)).toBeUndefined()
+    expect(rangeLength2To5([1, 2, 3, 4, 5], control)).toBeUndefined()
+
+    const errorMessage = (actual: unknown, isArray: boolean) => ({
+      rangeLength: {
+        actual,
+        isArray,
+        minLength: 2,
+        maxLength: 5,
+        message: zhCNMessages.rangeLength({ actual, isArray, minLength: 2, maxLength: 5 }, control),
+      },
+    })
+    expect(rangeLength2To5('t', control)).toEqual(errorMessage(1, false))
+    expect(rangeLength2To5([1, 2, 3, 4, 5, 6], control)).toEqual(errorMessage(6, true))
   })
 
   test('pattern work', () => {
@@ -226,7 +281,18 @@ describe('validators.ts', () => {
     expect(errors).toEqual({ a: message1 })
   })
 
-  test('setMessages work', () => {
+  test('setMessages enUSMessages work', () => {
+    const { setMessages, required, requiredTrue } = Validators
+
+    setMessages(enUSMessages)
+
+    expect(required('', control)).toEqual({ required: { message: enUSMessages.required({}, control) } })
+    expect(requiredTrue(false, control)).toEqual({
+      requiredTrue: { message: enUSMessages.requiredTrue({ actual: false }, control), actual: false },
+    })
+  })
+
+  test('setMessages custom messages work', () => {
     const { setMessages, required, requiredTrue } = Validators
 
     const messages: ValidateMessages = { required: 'please input', requiredTrue: 'invalid input' }

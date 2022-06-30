@@ -15,39 +15,43 @@ const defaultName = '此项'
 
 export const zhCNMessages = {
   default: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name
-    return `${name || ''}验证失败`
+    return `${control.name ?? ''}验证失败`
   },
   required: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}必填`
+    const { name = defaultName, example } = control
+    return `请输入${name}${example ? ', 例: ' + example : ''}`
   },
   requiredTrue: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
+    const { name = defaultName } = control
     return `${name}必须为 'true'`
   },
   email: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}不是一个有效的邮箱地址`
+    const { example } = control
+    return `请输入正确的邮箱格式${example ? ', 例: ' + example : ''}`
   },
-  min: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}不能小于 ${err.min}`
+  min: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    return `请输入一个不小于 ${err.min} 的数字`
   },
-  max: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}不能大于 ${err.max}`
+  max: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    return `请输入一个不大于 ${err.max} 的数字`
   },
-  minLength: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}的长度不能小于 ${err.minLength}, 当前长度为 ${err.actual}`
+  range: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    return `请输入一个 ${err.min - 1}-${err.max + 1} 之间的数字`
   },
-  maxLength: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}的长度不能大于 ${err.maxLength}, 当前长度为 ${err.actual}`
+  minLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    const { minLength, isArray } = err
+    return isArray ? `请至少选择 ${minLength} 项` : `请至少输入 ${minLength} 个字符`
   },
-  pattern: (err: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
-    const name = control.name || defaultName
-    return `${name}不能匹配 '${err.pattern}'`
+  maxLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    const { maxLength, isArray } = err
+    return isArray ? `请至多选择 ${maxLength} 项` : `请至多输入 ${maxLength} 个字符`
+  },
+  rangeLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
+    const { minLength, maxLength, isArray } = err
+    return isArray ? `请选择 ${minLength}-${maxLength} 项` : `请输入 ${minLength}-${maxLength} 个字符`
+  },
+  pattern: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
+    const { example } = control
+    return `请输入正确的格式${example ? ', 例: ' + example : ''}`
   },
 }

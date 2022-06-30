@@ -89,12 +89,27 @@ export class Validators {
     }
   }
 
+  static range(min: number, max: number): ValidatorFn {
+    return (value: any, control: AbstractControl): { range: ValidateError } | undefined => {
+      if (isEmpty(value) || !isNumeric(value) || (Number(value) >= min && Number(value) <= max)) {
+        return undefined
+      }
+      return { range: Validators.getError('range', control, { min, max, actual: value }) }
+    }
+  }
+
   static minLength(minLength: number): ValidatorFn {
     return (value: any, control: AbstractControl): { minLength: ValidateError } | undefined => {
       if (isEmpty(value) || !hasLength(value) || value.length >= minLength) {
         return undefined
       }
-      return { minLength: Validators.getError('minLength', control, { minLength, actual: value.length }) }
+      return {
+        minLength: Validators.getError('minLength', control, {
+          minLength,
+          actual: value.length,
+          isArray: isArray(value),
+        }),
+      }
     }
   }
 
@@ -103,7 +118,29 @@ export class Validators {
       if (isEmpty(value) || !hasLength(value) || value.length <= maxLength) {
         return undefined
       }
-      return { maxLength: Validators.getError('maxLength', control, { maxLength, actual: value.length }) }
+      return {
+        maxLength: Validators.getError('maxLength', control, {
+          maxLength,
+          actual: value.length,
+          isArray: isArray(value),
+        }),
+      }
+    }
+  }
+
+  static rangeLength(minLength: number, maxLength: number): ValidatorFn {
+    return (value: any, control: AbstractControl): { rangeLength: ValidateError } | undefined => {
+      if (isEmpty(value) || !hasLength(value) || (value.length >= minLength && value.length <= maxLength)) {
+        return undefined
+      }
+      return {
+        rangeLength: Validators.getError('rangeLength', control, {
+          minLength,
+          maxLength,
+          actual: value.length,
+          isArray: isArray(value),
+        }),
+      }
     }
   }
 

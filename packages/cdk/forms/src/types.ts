@@ -39,6 +39,7 @@ export type TriggerType = 'change' | 'blur' | 'submit'
 export interface ValidatorOptions {
   disabled?: boolean
   name?: string
+  example?: string
   trigger?: TriggerType
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
