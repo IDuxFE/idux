@@ -29,6 +29,7 @@ export default defineComponent({
       props: treeProps,
       flattedNodes,
       mergedPrefixCls,
+      mergedShowLine,
       activeKey,
       selectedKeys,
       slots,
@@ -48,8 +49,8 @@ export default defineComponent({
     const key = useKey()
 
     const isActive = computed(() => activeKey.value === key)
-    const isLast = computed(() => treeProps.showLine && props.isLast)
-    const hasTopLine = computed(() => treeProps.showLine && !props.isLeaf && props.level !== 0 && props.isFirst)
+    const isLast = computed(() => mergedShowLine.value && props.isLast)
+    const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && props.level !== 0 && props.isFirst)
     const selected = computed(() => selectedKeys.value.includes(key))
     const disabled = computed(() => props.selectDisabled || !treeProps.selectable)
 
@@ -122,12 +123,12 @@ export default defineComponent({
       })
 
       const { isLeaf, label, level, rawNode, expanded, checkDisabled, dragDisabled, dropDisabled, node } = props
-      const { showLine, checkable, draggable } = treeProps
+      const { checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
       const draggableIconNode = slots.draggableIcon?.() ?? <IxIcon name={draggableIcon.value} />
       const currNode = nodeMap.get(key)
       const noopIdentUnitArr: number[] = []
-      if (treeProps.showLine) {
+      if (mergedShowLine.value) {
         getParentKeys(nodeMap, currNode)
           .reverse()
           .forEach((parentKey, index) => {
@@ -164,7 +165,7 @@ export default defineComponent({
           ) : (
             draggable && <span class={`${mergedPrefixCls.value}-node-draggable-icon-noop`}></span>
           )}
-          {isLeaf && showLine ? (
+          {isLeaf && mergedShowLine.value ? (
             <LeafLine />
           ) : (
             <Expand expanded={expanded} hasTopLine={hasTopLine.value} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
