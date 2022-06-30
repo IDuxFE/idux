@@ -54,8 +54,8 @@ export const tableProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
     MaybeArray<(startIndex: number, endIndex: number, visibleData: any[]) => void>
@@ -78,10 +78,10 @@ export type TableColumnComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof TableColumnBase | keyof TableColumnExpandable | keyof TableColumnSelectable> & TableColumn
 >
 
-export type TableColumn<T = any, V = any> =
-  | TableColumnBase<T, V>
-  | TableColumnExpandable<T, V>
-  | TableColumnSelectable<T>
+export type TableColumn<T = any, K = VKey> =
+  | TableColumnBase<T, K>
+  | TableColumnExpandable<T, K>
+  | TableColumnSelectable<T, K>
 
 export interface TableColumnCommon<T = any> {
   /**
@@ -105,23 +105,23 @@ export interface TableColumnCommon<T = any> {
   width?: string | number
 }
 
-export interface TableColumnBase<T = any, V = any> extends TableColumnCommon<T> {
+export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T> {
   dataKey?: VKey | VKey[]
   ellipsis?: boolean
   sortable?: TableColumnSortable<T>
   filterable?: TableColumnFilterable<T>
   title?: string
-  children?: TableColumn<T>[]
+  children?: TableColumn<T, K>[]
 
   /**
    * @deprecated please use `customCell` instead'
    */
-  customRender?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
-  customCell?: string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)
+  customRender?: string | ((data: { value: any; record: T; rowIndex: number }) => VNodeChild)
+  customCell?: string | ((data: { value: any; record: T; rowIndex: number }) => VNodeChild)
   customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }
 
-export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase<T, V> {
+export interface TableColumnExpandable<T = any, K = VKey> extends TableColumnBase<T, K> {
   type: 'expandable'
   disabled?: (record: T) => boolean
 
@@ -129,14 +129,14 @@ export interface TableColumnExpandable<T = any, V = any> extends TableColumnBase
   indent?: number
   trigger?: 'click' | 'dblclick'
 
-  onChange?: (expendedRowKeys: VKey[]) => void
+  onChange?: (expendedRowKeys: K[]) => void
   onExpand?: (expanded: boolean, record: T) => void
 
   customExpand?: string | ((data: { record: T; rowIndex: number }) => VNodeChild)
-  customIcon?: string | ((data: { expanded: boolean; record: T }) => VNodeChild)
+  customIcon?: string | ((data: { record: T; expanded: boolean }) => VNodeChild)
 }
 
-export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
+export interface TableColumnSelectable<T = any, K = VKey> extends TableColumnCommon<T> {
   type: 'selectable'
 
   disabled?: (record: T) => boolean
@@ -144,21 +144,21 @@ export interface TableColumnSelectable<T = any> extends TableColumnCommon<T> {
   menus?: ('all' | 'invert' | 'none' | 'pageInvert' | MenuData)[]
   trigger?: 'click' | 'dblclick'
 
-  onChange?: (selectedRowKeys: VKey[], selectedRows: T[]) => void
-  onMenuClick?: (options: MenuClickOptions, currentPageRowKeys: VKey[]) => void
+  onChange?: (selectedRowKeys: K[], selectedRows: T[]) => void
+  onMenuClick?: <MK = VKey>(options: MenuClickOptions<MK>, currentPageRowKeys: K[]) => void
   onSelect?: (selected: boolean, record: T) => void
-  onSelectAll?: (selectedRowKeys: VKey[]) => void
-  onSelectInvert?: (selectedRowKeys: VKey[]) => void
+  onSelectAll?: (selectedRowKeys: K[]) => void
+  onSelectInvert?: (selectedRowKeys: K[]) => void
   onSelectNone?: () => void
-  onSelectPageInvert?: (selectedRowKeys: VKey[]) => void
+  onSelectPageInvert?: (selectedRowKeys: K[]) => void
 }
 
-export interface TableCustomAdditional<T = any> {
-  bodyCell?: (data: { column: TableColumn<T>; record: T; rowIndex: number }) => Record<string, any> | undefined
+export interface TableCustomAdditional<T = any, K = VKey> {
+  bodyCell?: (data: { column: TableColumn<T, K>; record: T; rowIndex: number }) => Record<string, any> | undefined
   bodyRow?: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined
-  head?: (data: { rows: TableColumn<T>[][] }) => Record<string, any> | undefined
-  headCell?: (data: { column: TableColumn<T> }) => Record<string, any> | undefined
-  headRow?: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined
+  head?: (data: { rows: TableColumn<T, K>[][] }) => Record<string, any> | undefined
+  headCell?: (data: { column: TableColumn<T, K> }) => Record<string, any> | undefined
+  headRow?: (data: { columns: TableColumn<T, K>[] }) => Record<string, any> | undefined
 }
 
 export interface TableCustomTag {
@@ -199,12 +199,12 @@ export interface TableColumnSortable<T = any> {
 }
 
 export interface TableColumnFilterable<T = any> {
-  filter?: (filterBy: VKey[], record: T) => boolean
+  filter?: <K = VKey>(filterBy: K[], record: T) => boolean
   filterBy?: VKey[]
   footer?: boolean
   menus: MenuData[]
   multiple?: boolean
-  onChange?: (filterBy: VKey[], filters: ActiveFilter[]) => void
+  onChange?: <K = VKey>(filterBy: K[], filters: ActiveFilter[]) => void
 
   customTrigger?: string | (() => VNodeChild)
   customMenu?: string | (() => VNodeChild)

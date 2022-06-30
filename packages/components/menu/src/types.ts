@@ -7,24 +7,18 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-  type DefineComponent,
-  type FunctionalComponent,
-  type HTMLAttributes,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-} from 'vue'
+import type { PortalTargetType } from '@idux/cdk/portal'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
+import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
 
-export interface MenuClickOptions {
+export interface MenuClickOptions<K = VKey> {
   event: Event
-  key: VKey
+  key: K
   type: 'item' | 'itemGroup' | 'sub'
 }
 
@@ -35,23 +29,29 @@ export const menuProps = {
   collapsed: IxPropTypes.bool.def(false),
   customAdditional: { type: Object as PropType<MenuCustomAdditional>, default: undefined },
   dataSource: IxPropTypes.array<MenuData>(),
-  getKey: { type: [String, Function] as PropType<string | ((data: MenuData) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | (<K = VKey>(data: MenuData<K>) => K)>, default: undefined },
   indent: IxPropTypes.number,
   mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
   multiple: IxPropTypes.bool.def(false),
   overlayClassName: IxPropTypes.string,
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   selectable: IxPropTypes.bool.def(true),
   /**
    * @deprecated please use `overlayContainer` instead'
    */
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
-  'onUpdate:selectedKeys': IxPropTypes.emit<(selectedKeys: VKey[]) => void>(),
-  onClick: IxPropTypes.emit<(options: MenuClickOptions) => void>(),
+  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(expandedKeys: K[]) => void>(),
+  'onUpdate:selectedKeys': IxPropTypes.emit<<K = VKey>(selectedKeys: K[]) => void>(),
+  onClick: IxPropTypes.emit<<K = VKey>(options: MenuClickOptions<K>) => void>(),
 }
 
 export type MenuProps = ExtractInnerPropTypes<typeof menuProps>
@@ -64,8 +64,8 @@ export interface MenuItemSlots {
   label?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
 }
 
-export interface MenuItemProps {
-  key?: VKey
+export interface MenuItemProps<K = VKey> {
+  key?: K
   type?: 'item'
   disabled?: boolean
   icon?: string | VNode
@@ -74,8 +74,8 @@ export interface MenuItemProps {
    * @deprecated please use `customIcon` and `customLabel` instead'
    */
   slots?: MenuItemSlots
-  customIcon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
-  customLabel?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
+  customIcon?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
+  customLabel?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
 
   /**
    * @deprecated please use `customAdditional` instead'
@@ -97,18 +97,18 @@ export interface MenuItemGroupSlots {
   label?: string | ((data: MenuItemGroupProps) => VNodeChild)
 }
 
-export interface MenuItemGroupProps {
+export interface MenuItemGroupProps<K = VKey> {
   type: 'itemGroup'
-  key?: VKey
-  children?: MenuData[]
+  key?: K
+  children?: MenuData<K>[]
   icon?: string | VNode
   label?: string
   /**
    * @deprecated please use `customIcon` and `customLabel` instead'
    */
   slots?: MenuItemGroupSlots
-  customIcon?: string | ((data: MenuItemGroupProps) => VNodeChild)
-  customLabel?: string | ((data: MenuItemGroupProps) => VNodeChild)
+  customIcon?: string | ((data: MenuItemGroupProps<K>) => VNodeChild)
+  customLabel?: string | ((data: MenuItemGroupProps<K>) => VNodeChild)
 
   /**
    * @deprecated please use `customAdditional` instead'
@@ -131,10 +131,10 @@ export interface MenuSubSlots {
   suffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
 }
 
-export interface MenuSubProps {
+export interface MenuSubProps<K = VKey> {
   type: 'sub'
-  key?: VKey
-  children?: MenuData[]
+  key?: K
+  children?: MenuData<K>[]
   disabled?: boolean
   icon?: string | VNode
   label?: string
@@ -144,9 +144,9 @@ export interface MenuSubProps {
    * @deprecated please use `customIcon`, `customLabel` and `customSuffix` instead'
    */
   slots?: MenuSubSlots
-  customIcon?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  customLabel?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  customSuffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
+  customIcon?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
+  customLabel?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
+  customSuffix?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
 
   /**
    * @deprecated please use `customAdditional` instead'
@@ -161,9 +161,9 @@ export interface MenuSubProps {
 export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional' | 'slots'>
 export type MenuSubComponent = FunctionalComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
 
-export interface MenuDividerProps {
+export interface MenuDividerProps<K = VKey> {
   type: 'divider'
-  key?: VKey
+  key?: K
   /**
    * @deprecated please use `customAdditional` instead'
    */
@@ -176,9 +176,12 @@ export interface MenuDividerProps {
 
 export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>
 
-export type MenuData = MenuItemProps | MenuItemGroupProps | MenuSubProps | MenuDividerProps
+export type MenuData<K = VKey> = MenuItemProps<K> | MenuItemGroupProps<K> | MenuSubProps<K> | MenuDividerProps<K>
 
-export type MenuCustomAdditional = (options: { data: MenuData; index: number }) => Record<string, any> | undefined
+export type MenuCustomAdditional = <K = VKey>(options: {
+  data: MenuData<K>
+  index: number
+}) => Record<string, any> | undefined
 
 // private
 export const menuItemProps = {

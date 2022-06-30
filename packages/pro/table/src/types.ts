@@ -67,8 +67,8 @@ export const proTableProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
   onColumnsChange: [Function, Array] as PropType<MaybeArray<(columns: ProTableColumn[]) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
@@ -97,14 +97,14 @@ export type ProTableLayoutToolComponent = DefineComponent<
 >
 export type ProTableLayoutToolInstance = InstanceType<DefineComponent<ProTableLayoutToolProps>>
 
-export type ProTableColumn<T = any, V = any, FT = 'input'> =
-  | ProTableColumnBase<T, V, FT>
-  | ProTableColumnExpandable<T, V, FT>
+export type ProTableColumn<T = any, K = VKey, FT = 'input'> =
+  | ProTableColumnBase<T, K, FT>
+  | ProTableColumnExpandable<T, K, FT>
   | ProTableColumnSelectable<T>
-  | ProTableColumnIndexable<T, V>
+  | ProTableColumnIndexable<T, K>
 
-export interface ProTableColumnBase<T = any, V = any, FT = 'input'>
-  extends TableColumnBase<T, V>,
+export interface ProTableColumnBase<T = any, K = VKey, FT = 'input'>
+  extends TableColumnBase<T, K>,
     ProTableColumnResizable,
     ProTableColumnLayoutConfig,
     ProTableColumnFieldTypeWithProps<FT> {
@@ -116,16 +116,16 @@ export interface ProTableColumnBase<T = any, V = any, FT = 'input'>
   children?: ProTableColumn<T>[]
 }
 
-export interface ProTableColumnExpandable<T = any, V = any, FT = 'input'>
-  extends Omit<TableColumnExpandable<T, V>, keyof ProTableColumnBase>,
-    ProTableColumnBase<T, V, FT> {}
+export interface ProTableColumnExpandable<T = any, K = VKey, FT = 'input'>
+  extends Omit<TableColumnExpandable<T, K>, keyof ProTableColumnBase>,
+    ProTableColumnBase<T, K, FT> {}
 
 export interface ProTableColumnSelectable<T = any>
   extends TableColumnSelectable<T>,
     ProTableColumnResizable,
     ProTableColumnLayoutConfig {}
 
-export interface ProTableColumnIndexable<T = any, V = never> extends ProTableColumnBase<T, V> {
+export interface ProTableColumnIndexable<T = any, K = VKey> extends ProTableColumnBase<T, K> {
   type: 'indexable'
 }
 

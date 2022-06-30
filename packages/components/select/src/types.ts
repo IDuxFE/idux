@@ -7,14 +7,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
-
-import { controlPropDef } from '@idux/cdk/forms'
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 
 export const selectPanelProps = {
   activeValue: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
@@ -31,11 +30,11 @@ export const selectPanelProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: VKey) => void>>,
-  onOptionClick: [Function, Array] as PropType<MaybeArray<(option: SelectData, evt: MouseEvent) => void>>,
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<<K = VKey>(value: K) => void>>,
+  onOptionClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(option: SelectData<K>, evt: MouseEvent) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
-    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>
+    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleData: SelectData<K>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
@@ -45,7 +44,7 @@ export const selectPanelProps = {
 } as const
 
 export const selectProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: [String, Number, Symbol, Array] as PropType<MaybeArray<VKey>>, default: undefined },
   open: { type: Boolean, default: undefined },
 
@@ -74,7 +73,10 @@ export const selectProps = {
    */
   options: { type: Array as PropType<SelectData[]>, default: undefined },
   overlayClassName: { type: String, default: undefined },
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   overlayMatchWidth: { type: Boolean, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
@@ -90,7 +92,10 @@ export const selectProps = {
   /**
    * @deprecated please use `overlayContainer` instead'
    */
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   /**
    * @deprecated please use `getKey` instead'
    */
@@ -98,16 +103,16 @@ export const selectProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: VKey | VKey[] | undefined) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<<K = VKey | VKey[]>(value: K | undefined) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onChange: [Function, Array] as PropType<
-    MaybeArray<(value: VKey | VKey[] | undefined, oldValue: VKey | VKey[] | undefined) => void>
+    MaybeArray<<K = VKey | VKey[]>(value: K | undefined, oldValue: K | undefined) => void>
   >,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(searchText: string) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
-    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData[]) => void>
+    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleData: SelectData<K>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
@@ -147,9 +152,12 @@ export type SelectComponent = DefineComponent<
 >
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export type SelectCustomAdditional = (options: { data: SelectData; index: number }) => Record<string, any> | undefined
+export type SelectCustomAdditional = <K = VKey>(options: {
+  data: SelectData<K>
+  index: number
+}) => Record<string, any> | undefined
 
-export interface SelectOptionProps {
+export interface SelectOptionProps<K = VKey> {
   /**
    * @deprecated please use `customAdditional` instead'
    */
@@ -160,10 +168,10 @@ export interface SelectOptionProps {
   }
 
   disabled?: boolean
-  key?: VKey
+  key?: K
   label?: string | number
 
-  customLabel?: string | ((data: SelectOptionProps) => VNodeChild)
+  customLabel?: string | ((data: SelectOptionProps<K>) => VNodeChild)
 
   [key: string]: any
 }
@@ -172,7 +180,7 @@ export type SelectOptionComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
 >
 
-export interface SelectOptionGroupProps {
+export interface SelectOptionGroupProps<K = VKey> {
   /**
    * @deprecated please use `customAdditional` instead'
    */
@@ -182,11 +190,11 @@ export interface SelectOptionGroupProps {
     [key: string]: unknown
   }
 
-  children?: SelectOptionProps[]
-  key?: VKey
+  children?: SelectOptionProps<K>[]
+  key?: K
   label?: string | number
 
-  customLabel?: string | ((data: SelectOptionGroupProps) => VNodeChild)
+  customLabel?: string | ((data: SelectOptionGroupProps<K>) => VNodeChild)
 
   [key: string]: any
 }
@@ -195,9 +203,9 @@ export type SelectOptionGroupComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof SelectOptionGroupPublicProps> & SelectOptionGroupPublicProps
 >
 
-export type SelectData = SelectOptionProps | SelectOptionGroupProps
+export type SelectData<K = VKey> = SelectOptionProps<K> | SelectOptionGroupProps<K>
 
-export type SelectSearchFn = (data: SelectData, searchText: string) => boolean
+export type SelectSearchFn = <K = VKey>(data: SelectData<K>, searchText: string) => boolean
 
 export const optionProps = {
   disabled: {

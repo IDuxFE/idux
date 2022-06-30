@@ -53,37 +53,38 @@ export const treeProps = {
   virtual: IxPropTypes.bool.def(false),
 
   // events
-  'onUpdate:checkedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:expandedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:loadedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  'onUpdate:selectedKeys': IxPropTypes.emit<(keys: VKey[]) => void>(),
-  onCheck: IxPropTypes.emit<(checked: boolean, node: TreeNode) => void>(),
-  onCheckedChange: IxPropTypes.emit<(checkedKeys: VKey[], checkedNodes: TreeNode[]) => void>(),
-  onDragstart: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragend: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragenter: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragleave: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDragover: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onDrop: IxPropTypes.emit<(options: TreeDragDropOptions) => void>(),
-  onExpand: IxPropTypes.emit<(expanded: boolean, node: TreeNode) => void>(),
-  onExpandedChange: IxPropTypes.emit<(expendedKeys: VKey[], expendedNodes: TreeNode[]) => void>(),
-  onLoaded: IxPropTypes.emit<(loadedKeys: VKey[], node: TreeNode) => void>(),
-  onSelect: IxPropTypes.emit<(selected: boolean, node: TreeNode) => void>(),
-  onSelectedChange: IxPropTypes.emit<(selectedKeys: VKey[], selectedNodes: TreeNode[]) => void>(),
+  'onUpdate:checkedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
+  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
+  'onUpdate:loadedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
+  'onUpdate:selectedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
+  onCheck: IxPropTypes.emit<<K = VKey>(checked: boolean, node: TreeNode<K>) => void>(),
+  onCheckedChange: IxPropTypes.emit<<K = VKey>(checkedKeys: K[], checkedNodes: TreeNode<K>[]) => void>(),
+  onDragstart: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onDragend: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onDragenter: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onDragleave: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onDragover: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onDrop: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
+  onExpand: IxPropTypes.emit<<K = VKey>(expanded: boolean, node: TreeNode<K>) => void>(),
+  onExpandedChange: IxPropTypes.emit<<K = VKey>(expendedKeys: K[], expendedNodes: TreeNode<K>[]) => void>(),
+  onLoaded: IxPropTypes.emit<<K = VKey>(loadedKeys: K[], node: TreeNode<K>) => void>(),
+  onSelect: IxPropTypes.emit<<K = VKey>(selected: boolean, node: TreeNode<K>) => void>(),
+  onSelectedChange: IxPropTypes.emit<<K = VKey>(selectedKeys: K[], selectedNodes: TreeNode<K>[]) => void>(),
   onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
   onKeydown: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
   onKeyup: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
-  onNodeClick: IxPropTypes.emit<(evt: Event, node: TreeNode) => void>(),
-  onNodeContextmenu: IxPropTypes.emit<(evt: Event, node: TreeNode) => void>(),
+  onNodeClick: IxPropTypes.emit<<K = VKey>(evt: Event, node: TreeNode<K>) => void>(),
+  onNodeContextmenu: IxPropTypes.emit<<K = VKey>(evt: Event, node: TreeNode<K>) => void>(),
   onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange: IxPropTypes.emit<(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void>(),
+  onScrolledChange:
+    IxPropTypes.emit<<K = VKey>(startIndex: number, endIndex: number, visibleNodes: TreeNode<K>[]) => void>(),
   onScrolledBottom: IxPropTypes.emit<() => void>(),
 }
 
 export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
 export type TreePublicProps = Omit<ExtractPublicPropTypes<typeof treeProps>, 'nodeKey'>
-export interface TreeBindings {
+export interface TreeBindings<K = VKey> {
   focus: (options?: FocusOptions) => void
   blur: () => void
   collapseAll: () => void
@@ -95,14 +96,17 @@ export interface TreeBindings {
    * @param key
    * @returns node
    */
-  getNode: (key: VKey) => TreeNode | undefined
+  getNode: (key: K) => TreeNode<K> | undefined
 }
 export type TreeComponent = DefineComponent<Omit<HTMLAttributes, keyof TreePublicProps> & TreePublicProps, TreeBindings>
 export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>>
 
-export type TreeCustomAdditional = (options: { node: TreeNode; level: number }) => Record<string, any> | undefined
+export type TreeCustomAdditional = <K = VKey>(options: {
+  node: TreeNode<K>
+  level: number
+}) => Record<string, any> | undefined
 
-export interface TreeNode {
+export interface TreeNode<K = VKey> {
   /**
    * @deprecated please use `customAdditional` instead'
    */
@@ -111,10 +115,10 @@ export interface TreeNode {
     style?: any
     [key: string]: unknown
   }
-  children?: TreeNode[]
+  children?: TreeNode<K>[]
   disabled?: boolean | TreeNodeDisabled
   isLeaf?: boolean
-  key?: VKey
+  key?: K
   label?: string
   prefix?: string
   suffix?: string
@@ -128,22 +132,24 @@ export interface TreeNodeDisabled {
   select?: boolean
 }
 
-export type TreeDroppable = (options: TreeDroppableOptions) => TreeDropType | boolean | Promise<TreeDropType | boolean>
+export type TreeDroppable = <K = VKey>(
+  options: TreeDroppableOptions<K>,
+) => TreeDropType | boolean | Promise<TreeDropType | boolean>
 
-export interface TreeDroppableOptions {
+export interface TreeDroppableOptions<K = VKey> {
   evt: DragEvent
-  dragNode: TreeNode
-  dropNode: TreeNode
+  dragNode: TreeNode<K>
+  dropNode: TreeNode<K>
   isTopHalf: boolean
 }
 
 export type TreeDropType = 'before' | 'inside' | 'after'
 
-export interface TreeDragDropOptions {
+export interface TreeDragDropOptions<K = VKey> {
   evt: DragEvent
-  node: TreeNode
-  dragNode?: TreeNode
-  dropNode?: TreeNode
+  node: TreeNode<K>
+  dragNode?: TreeNode<K>
+  dropNode?: TreeNode<K>
   dropType?: TreeDropType
 }
 

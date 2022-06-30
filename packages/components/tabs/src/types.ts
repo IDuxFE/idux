@@ -19,11 +19,13 @@ export const tabsProps = {
   placement: { type: String as PropType<TabsPlacement>, default: 'top' },
   mode: { type: String as PropType<TabsMode>, default: 'default' },
 
-  'onUpdate:selectedKey': [Function, Array] as PropType<MaybeArray<(selectedKey: VKey) => void>>,
-  onTabClick: [Function, Array] as PropType<MaybeArray<(key: VKey, evt: Event) => void>>,
+  'onUpdate:selectedKey': [Function, Array] as PropType<MaybeArray<<K = VKey>(selectedKey: K) => void>>,
+  onTabClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(key: K, evt: Event) => void>>,
   onPreClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onNextClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onBeforeLeave: [Function, Array] as PropType<MaybeArray<(key: VKey, oldKey?: VKey) => boolean | Promise<boolean>>>,
+  onBeforeLeave: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(key: K, oldKey?: K) => boolean | Promise<boolean>>
+  >,
 } as const
 
 export const tabProps = {

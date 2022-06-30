@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { ɵbaseTimePanelProps } from '@idux/components/_private/time-panel'
 
 const timePickerCommonProps = {
@@ -21,7 +21,7 @@ const timePickerCommonProps = {
     type: Boolean,
     default: undefined,
   },
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   allowInput: {
     type: [Boolean, String] as PropType<boolean | 'overlay'>,
     default: undefined,
@@ -46,7 +46,10 @@ const timePickerCommonProps = {
   },
   format: String,
   overlayClassName: String,
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
   readonly: {
     type: Boolean as PropType<boolean>,

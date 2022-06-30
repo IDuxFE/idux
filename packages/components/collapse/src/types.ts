@@ -19,7 +19,7 @@ export const collapseProps = {
   ghost: IxPropTypes.bool,
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<(expandedKeys: VKey[]) => void>(),
+  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(expandedKeys: K[]) => void>(),
 }
 
 export type CollapseProps = ExtractInnerPropTypes<typeof collapseProps>

@@ -18,19 +18,19 @@ export interface SeparatedData<T extends TransferData = TransferData> {
   sourceData: T[]
   targetData: T[]
 }
-export interface TransferDataStrategiesConfig<T extends TransferData = TransferData> {
-  genDataKeys?: (data: T[], getKey: GetKeyFn) => Set<VKey>
-  genDataKeyMap?: (dataSource: T[], getKey: GetKeyFn) => Map<VKey, T>
-  genDisabledKeys?: (data: T[], getKey: GetKeyFn) => Set<VKey>
+export interface TransferDataStrategiesConfig<T extends TransferData = TransferData, K = VKey> {
+  genDataKeys?: (data: T[], getKey: GetKeyFn) => Set<K>
+  genDataKeyMap?: (dataSource: T[], getKey: GetKeyFn) => Map<K, T>
+  genDisabledKeys?: (data: T[], getKey: GetKeyFn) => Set<K>
   separateDataSource?: (
     dataSource: T[],
-    dataKeyMap: Map<VKey, T>,
-    selectedKeySet: Set<VKey>,
+    dataKeyMap: Map<K, T>,
+    selectedKeySet: Set<K>,
     getKey: GetKeyFn,
   ) => SeparatedData<T>
   dataFilter?: (data: T[], searchValue: string, searchFn: (item: T, searchValue: string) => boolean) => T[]
-  append?: (keys: VKey[], selectedKeySet: Set<VKey>, getKey: GetKeyFn, handleChange: (keys: VKey[]) => void) => void
-  remove?: (keys: VKey[], selectedKeySet: Set<VKey>, getKey: GetKeyFn, handleChange: (keys: VKey[]) => void) => void
+  append?: (keys: K[], selectedKeySet: Set<K>, getKey: GetKeyFn, handleChange: (keys: K[]) => void) => void
+  remove?: (keys: K[], selectedKeySet: Set<K>, getKey: GetKeyFn, handleChange: (keys: K[]) => void) => void
 }
 export type TransferDataStrategies<T extends TransferData = TransferData> = Required<TransferDataStrategiesConfig<T>>
 
@@ -57,10 +57,10 @@ export interface TransferBindings<T extends TransferData = TransferData> {
 
   pagination: ComputedRef<PaginationProps | undefined>
 
-  triggerAppend: (keys: VKey[]) => void
-  triggerRemove: (keys: VKey[]) => void
+  triggerAppend: <K = VKey>(keys: K[]) => void
+  triggerRemove: <K = VKey>(keys: K[]) => void
   getKey: ComputedRef<GetKeyFn>
-  handleSelectChange: (keys: Set<VKey> | VKey[]) => void
+  handleSelectChange: <K = Set<VKey> | VKey[]>(keys: K) => void
   selectAll: (selected?: boolean) => void
 
   searchValue: ComputedRef<string>
@@ -154,10 +154,10 @@ export const transferProps = {
   },
 
   //Events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  onChange: [Function, Array] as PropType<MaybeArray<(keys: VKey[], oldKeys: VKey[]) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[], oldKeys: K[]) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(isSource: boolean, searchValue: string) => void>>,
   onSelectAll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, selectAll: boolean) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
@@ -222,8 +222,8 @@ export type TransferCustomAdditional = (options: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }) => Record<string, any> | undefined
 
-export interface TransferData {
-  key?: VKey
+export interface TransferData<K = VKey> {
+  key?: K
   label?: string
   disabled?: boolean
   [key: string]: unknown

@@ -5,28 +5,28 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
 
 export type DrawerButtonProps = ɵFooterButtonProps
 
-export interface DrawerOptions extends DrawerPublicProps {
-  key?: VKey
+export interface DrawerOptions<K = VKey> extends DrawerPublicProps {
+  key?: K
   content?: string | VNode
   contentProps?: Record<string, unknown> | VNodeProps
-  onDestroy?: (key: VKey) => void
+  onDestroy?: (key: K) => void
 }
-export interface DrawerRef extends DrawerBindings {
-  key: VKey
-  update: (options: DrawerOptions) => void
+export interface DrawerRef<K = VKey> extends DrawerBindings {
+  key: K
+  update: (options: DrawerOptions<K>) => void
   destroy: () => void
 }
 
@@ -44,7 +44,10 @@ export const drawerProps = {
   offset: IxPropTypes.oneOfType([String, Number]).def(0),
   placement: IxPropTypes.oneOf<DrawerPlacement>(['top', 'bottom', 'start', 'end']).def('end'),
   scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   width: IxPropTypes.oneOfType([String, Number]),
   wrapperClassName: IxPropTypes.string,
   zIndex: IxPropTypes.number,
@@ -69,10 +72,10 @@ export type DrawerComponent = DefineComponent<
 >
 export type DrawerInstance = InstanceType<DefineComponent<DrawerProps, DrawerBindings>>
 
-export interface DrawerProviderRef {
+export interface DrawerProviderRef<K = VKey> {
   open: (options: DrawerOptions) => DrawerRef
-  update: (key: VKey, options: DrawerOptions) => void
-  destroy: (key: VKey | VKey[]) => void
+  update: (key: K, options: DrawerOptions) => void
+  destroy: (key: K | K[]) => void
   destroyAll: () => void
 }
 export type DrawerProviderComponent = DefineComponent<HTMLAttributes, DrawerProviderRef>

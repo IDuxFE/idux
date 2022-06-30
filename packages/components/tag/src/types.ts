@@ -24,8 +24,8 @@ export type TagPublicProps = ExtractPublicPropTypes<typeof tagProps>
 export type TagComponent = DefineComponent<Omit<HTMLAttributes, keyof TagPublicProps> & TagPublicProps>
 export type TagInstance = InstanceType<DefineComponent<TagProps>>
 
-export interface TagData extends Omit<TagProps, 'shape'> {
-  key?: VKey
+export interface TagData<K = VKey> extends Omit<TagProps, 'shape'> {
+  key?: K
   label?: string
 }
 
@@ -38,9 +38,9 @@ export const tagGroupProps = {
   gap: IxPropTypes.oneOfType([Number, String]),
   wrap: IxPropTypes.bool,
   shape: IxPropTypes.oneOf<TagShape>(['rect', 'round']),
-  'onUpdate:activeKeys': IxPropTypes.emit<(activeKeys: VKey[]) => void>(),
-  onClick: IxPropTypes.emit<(key: VKey, evt: MouseEvent) => void>(),
-  onClose: IxPropTypes.emit<(key: VKey, evt: MouseEvent) => void>(),
+  'onUpdate:activeKeys': IxPropTypes.emit<<K = VKey>(activeKeys: K[]) => void>(),
+  onClick: IxPropTypes.emit<<K = VKey>(key: K, evt: MouseEvent) => void>(),
+  onClose: IxPropTypes.emit<<K = VKey>(key: K, evt: MouseEvent) => void>(),
 }
 
 export type TagGroupProps = ExtractInnerPropTypes<typeof tagGroupProps>

@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 import type { VueTypeDef } from 'vue-types'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
@@ -20,13 +20,19 @@ export const dropdownProps = {
   disabled: IxPropTypes.bool.def(false),
   hideOnClick: IxPropTypes.bool.def(true),
   offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   placement: ɵOverlayPlacementDef,
   showArrow: IxPropTypes.bool,
   /**
    * @deprecated please use `overlayContainer` instead'
    */
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   trigger: ɵOverlayTriggerDef,
 
   // events

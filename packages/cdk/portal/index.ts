@@ -13,6 +13,5 @@ const CdkPortal = Portal as unknown as PortalComponent
 
 export { CdkPortal }
 export { convertTarget as convertPortalTarget } from './src/convertTarget'
-export { portalTargetDef as ɵPortalTargetDef } from './src/types'
 
 export type { PortalInstance, PortalComponent, PortalPublicProps as PortalProps, PortalTargetType } from './src/types'

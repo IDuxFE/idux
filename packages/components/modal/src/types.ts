@@ -5,27 +5,27 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeProps } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
 export type ModalButtonProps = ɵFooterButtonProps
-export interface ModalOptions extends ModalPublicProps {
-  key?: VKey
+export interface ModalOptions<K = VKey> extends ModalPublicProps {
+  key?: K
   content?: string | VNode
   contentProps?: Record<string, unknown> | VNodeProps
-  onDestroy?: (key: VKey) => void
+  onDestroy?: (key: K) => void
 }
-export interface ModalRef extends ModalBindings {
-  key: VKey
-  update: (options: ModalOptions) => void
+export interface ModalRef<K = VKey> extends ModalBindings {
+  key: K
+  update: (options: ModalOptions<K>) => void
   destroy: () => void
 }
 
@@ -48,7 +48,10 @@ export const modalProps = {
   okButton: IxPropTypes.object<ButtonProps>(),
   okText: IxPropTypes.string,
   scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
   type: IxPropTypes.oneOf<ModalType>(['default', 'confirm', 'info', 'success', 'warning', 'error']).def('default'),
   width: IxPropTypes.oneOfType([String, Number]),
@@ -80,15 +83,15 @@ export type ModalComponent = DefineComponent<
 >
 export type ModalInstance = InstanceType<DefineComponent<ModalProps, ModalBindings>>
 
-export interface ModalProviderRef {
-  open: (options: ModalOptions) => ModalRef
-  confirm: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  info: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  success: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  warning: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  error: (options: Omit<ModalOptions, 'type'>) => ModalRef
-  update: (key: VKey, options: ModalOptions) => void
-  destroy: (key: VKey | VKey[]) => void
+export interface ModalProviderRef<K = VKey> {
+  open: (options: ModalOptions<K>) => ModalRef<K>
+  confirm: (options: Omit<ModalOptions<K>, 'type'>) => ModalRef<K>
+  info: (options: Omit<ModalOptions<K>, 'type'>) => ModalRef<K>
+  success: (options: Omit<ModalOptions<K>, 'type'>) => ModalRef<K>
+  warning: (options: Omit<ModalOptions<K>, 'type'>) => ModalRef<K>
+  error: (options: Omit<ModalOptions<K>, 'type'>) => ModalRef<K>
+  update: (key: K, options: ModalOptions<K>) => void
+  destroy: (key: K | K[]) => void
   destroyAll: () => void
 }
 export type ModalProviderComponent = DefineComponent<HTMLAttributes, ModalProviderRef>

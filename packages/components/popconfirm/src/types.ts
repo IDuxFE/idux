@@ -25,8 +25,8 @@ export const popconfirmProps = {
   onCancel: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
   onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
 }
-export interface PopconfirmButtonProps extends ButtonProps {
-  key?: VKey
+export interface PopconfirmButtonProps<K = VKey> extends ButtonProps {
+  key?: K
   text?: string | VNode
   onClick?: (evt: Event) => void
 }
