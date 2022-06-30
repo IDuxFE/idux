@@ -5,22 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
-export interface MessageOptions extends MessagePublicProps {
-  key?: VKey
+export interface MessageOptions<K = VKey> extends MessagePublicProps {
+  key?: K
   content?: string | VNode
-  onDestroy?: (key: VKey) => void
+  onDestroy?: (key: K) => void
 }
-export interface MessageRef {
-  key: VKey
-  update: (options: MessageOptions) => void
+export interface MessageRef<K = VKey> {
+  key: K
+  update: (options: MessageOptions<K>) => void
   destroy: () => void
 }
 
@@ -44,17 +44,20 @@ export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 export const messageProviderProps = {
   maxCount: IxPropTypes.number,
   top: IxPropTypes.oneOfType([String, Number]),
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
 }
-export interface MessageProviderRef {
-  open: (options: MessageOptions) => MessageRef
-  info: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  success: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  warning: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  error: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  loading: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  update: (key: string, options: MessageOptions) => void
-  destroy: (key: string | string[]) => void
+export interface MessageProviderRef<K = VKey> {
+  open: (options: MessageOptions<K>) => MessageRef
+  info: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  success: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  warning: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  error: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  loading: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  update: (key: K, options: MessageOptions<K>) => void
+  destroy: (key: K | K[]) => void
   destroyAll: () => void
 }
 

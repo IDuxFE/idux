@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
-
-import { controlPropDef } from '@idux/cdk/forms'
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 
 export interface PickerTimePanelOptions {
   disabledHours?: (selectedAmPm: string | undefined) => number[]
@@ -35,7 +34,7 @@ export interface TimePanelOptions extends PickerTimePanelOptions {
 }
 
 const datePickerCommonProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
   open: {
     type: Boolean,
@@ -68,7 +67,10 @@ const datePickerCommonProps = {
   dateFormat: String,
   timeFormat: String,
   overlayClassName: String,
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
   readonly: {
     type: Boolean as PropType<boolean>,

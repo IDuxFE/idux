@@ -5,15 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AbstractControl } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export const switchProps = {
   checked: IxPropTypes.bool,
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   autofocus: IxPropTypes.bool.def(false),
   disabled: IxPropTypes.bool.def(false),
   labels: IxPropTypes.arrayOf(String).def(() => []),

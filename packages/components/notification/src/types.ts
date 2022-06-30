@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+import type { ButtonProps } from '@idux/components/button'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
-import { ButtonProps } from '@idux/components/button'
 
 // 挑出部分必填的属性
 type PickRequire<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>> & Required<Pick<T, U>>
 
-export interface NotificationButtonProps extends ButtonProps {
-  key?: VKey
+export interface NotificationButtonProps<K = VKey> extends ButtonProps {
+  key?: K
   text?: string | VNode
   onClick?: (evt: Event) => void
 }
@@ -52,7 +52,10 @@ export const notificationProps = {
 export const notificationProviderProps = {
   offset: IxPropTypes.oneOfType<string | number | (number | string)[]>([String, Number, Array]),
   maxCount: IxPropTypes.number,
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
 }
 
 export type NotificationType = typeof notificationType[number]
@@ -66,25 +69,25 @@ export type NotificationComponent = DefineComponent<
 export type NotificationInstance = InstanceType<DefineComponent<NotificationProps>>
 
 // 通过useNotification的配置
-export interface NotificationOptions extends PickRequire<NotificationProps, 'title' | 'content'> {
-  onDestroy?: (key: VKey) => void
+export interface NotificationOptions<K = VKey> extends PickRequire<NotificationProps, 'title' | 'content'> {
+  onDestroy?: (key: K) => void
 }
 export type NotificationPlacementMap = Record<NotificationPlacement, NotificationOptions[]>
 
-export interface NotificationProviderRef {
-  open: (options: NotificationOptions) => NotificationRef
-  info: (options: Omit<NotificationOptions, 'type'>) => NotificationRef
-  success: (options: Omit<NotificationOptions, 'type'>) => NotificationRef
-  warning: (options: Omit<NotificationOptions, 'type'>) => NotificationRef
-  error: (options: Omit<NotificationOptions, 'type'>) => NotificationRef
-  update: (key: VKey, options: Partial<Omit<NotificationOptions, 'key'>>) => void
-  destroy: (key: VKey | VKey[]) => void
+export interface NotificationProviderRef<K = VKey> {
+  open: (options: NotificationOptions<K>) => NotificationRef<K>
+  info: (options: Omit<NotificationOptions<K>, 'type'>) => NotificationRef<K>
+  success: (options: Omit<NotificationOptions<K>, 'type'>) => NotificationRef<K>
+  warning: (options: Omit<NotificationOptions<K>, 'type'>) => NotificationRef<K>
+  error: (options: Omit<NotificationOptions<K>, 'type'>) => NotificationRef<K>
+  update: (key: K, options: Partial<Omit<NotificationOptions<K>, 'key'>>) => void
+  destroy: (key: K | K[]) => void
   destroyAll: () => void
 }
 
-export interface NotificationRef {
-  key: VKey
-  update: (options: Partial<NotificationOptions>) => void
+export interface NotificationRef<K = VKey> {
+  key: K
+  update: (options: Partial<NotificationOptions<K>>) => void
   destroy: () => void
 }
 

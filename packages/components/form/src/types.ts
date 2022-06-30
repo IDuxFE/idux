@@ -8,15 +8,14 @@
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { ColProps } from '@idux/components/grid'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 const colProp = IxPropTypes.oneOfType([Number, String, IxPropTypes.object<ColProps>()])
 
 export const formProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   colonless: IxPropTypes.bool,
   controlCol: colProp,
   controlTooltipIcon: IxPropTypes.string,
@@ -42,7 +41,7 @@ export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
   colonless: IxPropTypes.bool,
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   controlCol: colProp,
   controlTooltip: IxPropTypes.string,
   controlTooltipIcon: IxPropTypes.string,
@@ -71,7 +70,7 @@ export type FormItemComponent = DefineComponent<Omit<HTMLAttributes, keyof FormI
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
 }
 
 export type FormWrapperProps = ExtractInnerPropTypes<typeof formWrapperProps>

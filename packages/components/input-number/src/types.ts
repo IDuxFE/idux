@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AbstractControl } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type InputNumberButtonPosition = 'inner' | 'outer'
 
 export const inputNumberProps = {
   value: IxPropTypes.oneOfType<number | null>([IxPropTypes.number]),
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   disabled: IxPropTypes.bool.def(false),
   keyboard: IxPropTypes.bool,
   max: IxPropTypes.number.def(Infinity),

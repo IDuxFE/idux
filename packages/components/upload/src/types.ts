@@ -26,8 +26,8 @@ export interface UploadRequestError extends Error {
   method?: UploadRequestMethod
   url?: string
 }
-export interface UploadFile {
-  key: VKey
+export interface UploadFile<K = VKey> {
+  key: K
   name: string
   raw?: File
   status?: UploadFileStatus
@@ -50,8 +50,8 @@ export interface UploadRequestOption<T = unknown> {
   requestMethod: UploadRequestMethod
   requestData?: DataType
 }
-export interface UploadRequestChangeOption {
-  file: UploadFile
+export interface UploadRequestChangeOption<K = VKey> {
+  file: UploadFile<K>
   status: UploadRequestStatus
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   response?: any
@@ -78,11 +78,12 @@ export const uploadProps = {
   ]),
   requestHeaders: IxPropTypes.object<UploadRequestHeader>(),
   requestMethod: IxPropTypes.oneOf(['POST', 'PUT', 'PATCH', 'post', 'put', 'patch']),
-  'onUpdate:files': IxPropTypes.emit<(fileList: UploadFile[]) => void>(),
+  'onUpdate:files': IxPropTypes.emit<<K = VKey>(fileList: UploadFile<K>[]) => void>(),
   onSelect: IxPropTypes.emit<(file: File[]) => boolean | File[] | Promise<boolean | File[]>>(),
-  onBeforeUpload: IxPropTypes.emit<(file: UploadFile) => boolean | UploadFile | Promise<boolean | UploadFile>>(),
-  onFileStatusChange: IxPropTypes.emit<(file: UploadFile) => void>(),
-  onRequestChange: IxPropTypes.emit<(option: UploadRequestChangeOption) => void>(),
+  onBeforeUpload:
+    IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => boolean | UploadFile<K> | Promise<boolean | UploadFile<K>>>(),
+  onFileStatusChange: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
+  onRequestChange: IxPropTypes.emit<<K = VKey>(option: UploadRequestChangeOption<K>) => void>(),
 }
 export type UploadProps = ExtractInnerPropTypes<typeof uploadProps>
 export type UploadPublicProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -92,10 +93,10 @@ export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 export const uploadFilesProps = {
   type: IxPropTypes.oneOf<UploadFilesType>(['text', 'image', 'imageCard']),
   icon: IxPropTypes.object<Partial<Record<UploadIconType, string | VNode>>>(),
-  onDownload: IxPropTypes.emit<(file: UploadFile) => void>(),
-  onPreview: IxPropTypes.emit<(file: UploadFile) => void>(),
-  onRemove: IxPropTypes.emit<(file: UploadFile) => boolean | Promise<boolean>>(),
-  onRetry: IxPropTypes.emit<(file: UploadFile) => void>(),
+  onDownload: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
+  onPreview: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
+  onRemove: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => boolean | Promise<boolean>>(),
+  onRetry: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
 }
 export type UploadFilesProps = ExtractInnerPropTypes<typeof uploadFilesProps>
 export type UploadFilesPublicProps = ExtractPublicPropTypes<typeof uploadFilesProps>

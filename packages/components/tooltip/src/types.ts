@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
@@ -18,7 +18,10 @@ export const tooltipProps = {
   destroyOnHide: IxPropTypes.bool,
   delay: ɵOverlayDelayDef,
   placement: ɵOverlayPlacementDef,
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   title: IxPropTypes.string,
   trigger: ɵOverlayTriggerDef,
   zIndex: IxPropTypes.number,

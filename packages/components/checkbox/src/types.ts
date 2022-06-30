@@ -7,31 +7,29 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
-import { MaybeArray } from '@idux/cdk/utils'
-import { FormSize } from '@idux/components/form'
-
 export const checkboxProps = {
-  control: controlPropDef,
-  checked: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: undefined },
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  checked: { type: [String, Number, Boolean] as PropType<CheckValue>, default: undefined },
 
   autofocus: { type: Boolean, default: false },
   buttoned: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
   indeterminate: { type: Boolean, default: false },
   label: { type: String, default: undefined },
-  trueValue: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: true },
-  falseValue: { type: [String, Number, Boolean] as PropType<string | number | boolean>, default: false },
+  trueValue: { type: [String, Number, Boolean] as PropType<CheckValue>, default: true },
+  falseValue: { type: [String, Number, Boolean] as PropType<CheckValue>, default: false },
   value: { type: null, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
 
   // events
-  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: CheckValue) => void>> },
+  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<<K = CheckValue>(checked: K) => void>> },
   onChange: {
-    type: [Function, Array] as PropType<MaybeArray<(newChecked: CheckValue, oldChecked: CheckValue) => void>>,
+    type: [Function, Array] as PropType<MaybeArray<<K = CheckValue>(newChecked: K, oldChecked: K) => void>>,
   },
   onBlur: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
   onFocus: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
@@ -50,7 +48,7 @@ export type CheckboxComponent = DefineComponent<
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: Array, default: undefined },
 
   buttoned: { type: Boolean, default: false },
@@ -78,6 +76,6 @@ export type CheckboxGroupComponent = DefineComponent<
 export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>
 
 export type CheckValue = string | number | boolean
-export interface CheckboxData extends CheckboxPublicProps {
-  key?: VKey
+export interface CheckboxData<K = VKey> extends CheckboxPublicProps {
+  key?: K
 }

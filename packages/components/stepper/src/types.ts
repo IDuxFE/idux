@@ -22,7 +22,7 @@ export const stepperProps = {
   status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']).def('process'),
   vertical: IxPropTypes.bool.def(false),
 
-  'onUpdate:activeKey': IxPropTypes.emit<(key: VKey) => void>(),
+  'onUpdate:activeKey': IxPropTypes.emit<<K = VKey>(key: K) => void>(),
 }
 
 export type StepperProps = ExtractInnerPropTypes<typeof stepperProps>

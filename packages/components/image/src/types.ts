@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
 import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ImageStatus = 'loading' | 'loaded' | 'failed'
@@ -24,7 +24,10 @@ export const imageViewerProps = {
   images: IxPropTypes.array<string>().def([]),
   zoom: IxPropTypes.custom<number[]>(zoomValidator.validator, zoomValidator.msg),
   loop: IxPropTypes.bool,
-  target: ɵPortalTargetDef,
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   maskClosable: IxPropTypes.bool,
 
   'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),

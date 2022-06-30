@@ -7,14 +7,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { AbstractControl } from '@idux/cdk/forms'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
 import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, MaybeArray, type VKey } from '@idux/cdk/utils'
 import { type FormSize } from '@idux/components/form'
 
 export const radioProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   checked: { type: Boolean, default: undefined },
 
   autofocus: { type: Boolean, default: false },
@@ -46,7 +46,7 @@ export type RadioComponent = DefineComponent<
 export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindings>>
 
 export const radioGroupProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: null, default: undefined },
 
   buttoned: { type: Boolean, default: false },
@@ -75,6 +75,6 @@ export type RadioGroupComponent = DefineComponent<
 export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
 
 export type RadioMode = 'default' | 'primary'
-export interface RadioData extends RadioPublicProps {
-  key?: VKey
+export interface RadioData<K = VKey> extends RadioPublicProps {
+  key?: K
 }

@@ -7,16 +7,15 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { AbstractControl } from '@idux/cdk/forms'
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
-import { controlPropDef } from '@idux/cdk/forms'
-import { ɵPortalTargetDef } from '@idux/cdk/portal'
-
 export const cascaderProps = {
-  control: controlPropDef,
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: null, default: undefined },
   expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
   loadedKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -42,7 +41,10 @@ export const cascaderProps = {
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   overlayClassName: { type: String, default: undefined },
-  overlayContainer: ɵPortalTargetDef,
+  overlayContainer: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   overlayMatchWidth: { type: Boolean, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
@@ -56,14 +58,16 @@ export const cascaderProps = {
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
-  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
-  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: VKey[]) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, data: CascaderData) => void>>,
-  onExpandedChange: [Function, Array] as PropType<MaybeArray<(expendedKeys: VKey[], data: CascaderData[]) => void>>,
-  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: VKey[], data: CascaderData) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<<K = VKey>(expanded: boolean, data: CascaderData<K>) => void>>,
+  onExpandedChange: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(expendedKeys: K[], data: CascaderData<K>[]) => void>
+  >,
+  onLoaded: [Function, Array] as PropType<MaybeArray<<K = VKey>(loadedKeys: K[], data: CascaderData<K>) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
 
   // private
@@ -88,12 +92,12 @@ export type CascaderInstance = InstanceType<DefineComponent<CascaderProps, Casca
 
 export type CascaderStrategy = 'all' | 'parent' | 'child' | 'off'
 
-export type CascaderCustomAdditional = (options: {
-  data: CascaderData
+export type CascaderCustomAdditional = <K = VKey>(options: {
+  data: CascaderData<K>
   index: number
 }) => Record<string, any> | undefined
 
-export interface CascaderData {
+export interface CascaderData<K = VKey> {
   /**
    * @deprecated please use `customAdditional` instead'
    */
@@ -104,14 +108,14 @@ export interface CascaderData {
     style?: any
     [key: string]: unknown
   }
-  children?: CascaderData[]
+  children?: CascaderData<K>[]
   disabled?: boolean
   isLeaf?: boolean
-  key?: VKey
+  key?: K
   label?: string
   [key: string]: unknown
 }
 
 export type CascaderExpandTrigger = 'click' | 'hover'
 
-export type CascaderSearchFn = (data: CascaderData, searchValue: string) => boolean
+export type CascaderSearchFn = <K = VKey>(data: CascaderData<K>, searchValue: string) => boolean

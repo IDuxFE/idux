@@ -6,20 +6,15 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
-
-export const portalTargetDef = IxPropTypes.oneOfType([
-  String,
-  HTMLElement,
-  IxPropTypes.func<() => string | HTMLElement>(),
-])
+import type { DefineComponent, PropType } from 'vue'
 
 export const portalProps = {
-  disabled: IxPropTypes.bool,
-  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]).isRequired,
-  load: IxPropTypes.bool.def(true),
+  disabled: { type: Boolean, default: undefined },
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    required: true,
+  },
+  load: { type: Boolean, default: true },
 }
 
 export type PortalProps = ExtractInnerPropTypes<typeof portalProps>

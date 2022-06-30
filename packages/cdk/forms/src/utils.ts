@@ -18,6 +18,9 @@ import { Logger, NoopFunction, callEmit } from '@idux/cdk/utils'
 
 import { isAbstractControl } from './typeof'
 
+/**
+ * @deprecated
+ */
 export const controlPropDef = [String, Number, Object] as PropType<string | number | AbstractControl>
 
 export const FORMS_CONTROL_TOKEN: InjectionKey<ShallowRef<AbstractControl>> = Symbol('cdk-forms-control')
