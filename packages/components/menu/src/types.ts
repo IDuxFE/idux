@@ -8,10 +8,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
@@ -23,22 +21,34 @@ export interface MenuClickOptions<K = VKey> {
 }
 
 export const menuProps = {
-  expandedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
-  selectedKeys: IxPropTypes.arrayOf(IxPropTypes.oneOfType([String, Number, Symbol])),
+  expandedKeys: Array as PropType<VKey[]>,
+  selectedKeys: Array as PropType<VKey[]>,
 
-  collapsed: IxPropTypes.bool.def(false),
+  collapsed: {
+    type: Boolean,
+    default: false,
+  },
   customAdditional: { type: Object as PropType<MenuCustomAdditional>, default: undefined },
-  dataSource: IxPropTypes.array<MenuData>(),
+  dataSource: Array as PropType<MenuData[]>,
   getKey: { type: [String, Function] as PropType<string | (<K = VKey>(data: MenuData<K>) => K)>, default: undefined },
-  indent: IxPropTypes.number,
-  mode: IxPropTypes.oneOf<MenuMode>(['vertical', 'horizontal', 'inline']).def('vertical'),
-  multiple: IxPropTypes.bool.def(false),
-  overlayClassName: IxPropTypes.string,
+  indent: Number,
+  mode: {
+    type: String as PropType<MenuMode>,
+    default: 'vertical',
+  },
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  overlayClassName: String,
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  selectable: IxPropTypes.bool.def(true),
+  selectable: {
+    type: Boolean,
+    default: true,
+  },
   /**
    * @deprecated please use `overlayContainer` instead'
    */
@@ -46,12 +56,12 @@ export const menuProps = {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  theme: IxPropTypes.oneOf<MenuTheme>(['light', 'dark']),
+  theme: String as PropType<MenuTheme>,
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(expandedKeys: K[]) => void>(),
-  'onUpdate:selectedKeys': IxPropTypes.emit<<K = VKey>(selectedKeys: K[]) => void>(),
-  onClick: IxPropTypes.emit<<K = VKey>(options: MenuClickOptions<K>) => void>(),
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(expandedKeys: K[]) => void>>,
+  'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(selectedKeys: K[]) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: MenuClickOptions<K>) => void>>,
 }
 
 export type MenuProps = ExtractInnerPropTypes<typeof menuProps>
@@ -185,16 +195,25 @@ export type MenuCustomAdditional = <K = VKey>(options: {
 
 // private
 export const menuItemProps = {
-  data: IxPropTypes.object<MenuItemProps>().isRequired,
+  data: {
+    type: Object as PropType<MenuItemProps>,
+    required: true,
+  },
   index: { type: Number, required: true },
 } as const
 
 export const menuItemGroupProps = {
-  data: IxPropTypes.object<MenuItemGroupProps>().isRequired,
+  data: {
+    type: Object as PropType<MenuItemGroupProps>,
+    required: true,
+  },
   index: { type: Number, required: true },
 } as const
 
 export const menuSubProps = {
-  data: IxPropTypes.object<MenuSubProps>().isRequired,
+  data: {
+    type: Object as PropType<MenuSubProps>,
+    required: true,
+  },
   index: { type: Number, required: true },
 } as const

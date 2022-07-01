@@ -6,32 +6,50 @@
  */
 
 import type { AbstractControl } from '@idux/cdk/forms'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type InputNumberButtonPosition = 'inner' | 'outer'
 
 export const inputNumberProps = {
-  value: IxPropTypes.oneOfType<number | null>([IxPropTypes.number]),
+  value: [Number, null] as PropType<number | null>,
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-  disabled: IxPropTypes.bool.def(false),
-  keyboard: IxPropTypes.bool,
-  max: IxPropTypes.number.def(Infinity),
-  min: IxPropTypes.number.def(-Infinity),
-  placeholder: IxPropTypes.string,
-  precision: IxPropTypes.number,
-  readonly: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  step: IxPropTypes.number.def(1),
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  keyboard: {
+    type: Boolean,
+    default: undefined,
+  },
+  max: {
+    type: Number,
+    default: Infinity,
+  },
+  min: {
+    type: Number,
+    default: -Infinity,
+  },
+  placeholder: String,
+  precision: Number,
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+  size: String as PropType<FormSize>,
+  step: {
+    type: Number,
+    default: 1,
+  },
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: number | null) => void>(),
-  onChange: IxPropTypes.emit<(value: number | null, oldValue: number | null | undefined) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: number | null) => void>>,
+  onChange: [Function, Array] as PropType<
+    MaybeArray<(value: number | null, oldValue: number | null | undefined) => void>
+  >,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 }
 
 export type InputNumberProps = ExtractInnerPropTypes<typeof inputNumberProps>

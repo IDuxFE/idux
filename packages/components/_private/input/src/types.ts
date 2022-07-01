@@ -7,23 +7,36 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, InputHTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, InputHTMLAttributes, PropType } from 'vue'
 
 export const inputProps = {
-  addonAfter: IxPropTypes.string,
-  addonBefore: IxPropTypes.string,
-  borderless: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
-  clearIcon: IxPropTypes.string,
-  clearVisible: IxPropTypes.bool,
-  disabled: IxPropTypes.bool,
-  focused: IxPropTypes.bool,
-  prefix: IxPropTypes.string,
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
-  suffix: IxPropTypes.string,
-  onClear: IxPropTypes.func<(evt: MouseEvent) => void>(),
+  addonAfter: String,
+  addonBefore: String,
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearable: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearIcon: String,
+  clearVisible: {
+    type: Boolean,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  focused: {
+    type: Boolean,
+    default: undefined,
+  },
+  prefix: String,
+  size: String as PropType<FormSize>,
+  suffix: String,
+  onClear: Function as PropType<(evt: MouseEvent) => void>,
 }
 
 export type InputProps = ExtractInnerPropTypes<typeof inputProps>

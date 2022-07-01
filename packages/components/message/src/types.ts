@@ -6,10 +6,8 @@
  */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
@@ -25,15 +23,24 @@ export interface MessageRef<K = VKey> {
 }
 
 export const messageProps = {
-  visible: IxPropTypes.bool,
-  destroyOnHover: IxPropTypes.bool,
-  duration: IxPropTypes.number,
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  type: IxPropTypes.oneOf<MessageType>(['info', 'success', 'warning', 'error', 'loading']).def('info'),
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHover: {
+    type: Boolean,
+    default: undefined,
+  },
+  duration: Number,
+  icon: [String, Object] as PropType<string | VNode>,
+  type: {
+    type: String as PropType<MessageType>,
+    default: 'info',
+  },
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onClose: IxPropTypes.emit<(evt?: Event) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event) => void>>,
 }
 
 export type MessageProps = ExtractInnerPropTypes<typeof messageProps>
@@ -42,8 +49,8 @@ export type MessageComponent = DefineComponent<Omit<HTMLAttributes, keyof Messag
 export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 
 export const messageProviderProps = {
-  maxCount: IxPropTypes.number,
-  top: IxPropTypes.oneOfType([String, Number]),
+  maxCount: Number,
+  top: [String, Number],
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,

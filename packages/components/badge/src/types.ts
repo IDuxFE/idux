@@ -8,14 +8,21 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const backTopProps = {
-  count: IxPropTypes.oneOfType([Number, String]).def(0),
-  showZero: IxPropTypes.bool,
-  overflowCount: IxPropTypes.number,
-  dot: IxPropTypes.bool,
-  color: IxPropTypes.string,
+  count: {
+    type: [String, Number],
+    default: 0,
+  },
+  showZero: {
+    type: Boolean,
+    default: undefined,
+  },
+  overflowCount: Number,
+  dot: {
+    type: Boolean,
+    default: undefined,
+  },
+  color: String,
 }
 
 export type BadgeProps = ExtractInnerPropTypes<typeof backTopProps>

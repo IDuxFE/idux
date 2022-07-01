@@ -6,32 +6,24 @@
  */
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export type AvatarShape = 'circle' | 'square'
 export type AvatarSize = number | 'lg' | 'md' | 'sm'
 
-const sizeProp = IxPropTypes.oneOfType<AvatarSize | Partial<Record<BreakpointKey, number>>>([
-  Number,
-  IxPropTypes.oneOf(['lg', 'md', 'sm'] as const),
-  IxPropTypes.object<Record<BreakpointKey, number>>(),
-])
-
 export const avatarProps = {
-  alt: IxPropTypes.string,
-  gap: IxPropTypes.number,
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  shape: IxPropTypes.oneOf<AvatarShape>(['circle', 'square']),
-  size: sizeProp,
-  src: IxPropTypes.string,
-  srcset: IxPropTypes.string,
-  text: IxPropTypes.string,
+  alt: String,
+  gap: Number,
+  icon: [String, Object] as PropType<string | VNode>,
+  shape: String as PropType<AvatarShape>,
+  size: [Number, String, Object] as PropType<number | AvatarSize | Record<BreakpointKey, number>>,
+  src: String,
+  srcset: String,
+  text: String,
 
   // events
-  onError: IxPropTypes.emit<(evt: Event) => boolean | void>(),
+  onError: [Function, Array] as PropType<MaybeArray<(evt: Event) => boolean | void>>,
 }
 
 export type AvatarProps = ExtractInnerPropTypes<typeof avatarProps>

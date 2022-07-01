@@ -6,28 +6,36 @@
  */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
 export const tooltipProps = {
-  visible: IxPropTypes.bool,
-  autoAdjust: IxPropTypes.bool,
-  destroyOnHide: IxPropTypes.bool,
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  autoAdjust: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHide: {
+    type: Boolean,
+    default: undefined,
+  },
   delay: ɵOverlayDelayDef,
   placement: ɵOverlayPlacementDef,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  title: IxPropTypes.string,
+  title: String,
   trigger: ɵOverlayTriggerDef,
-  zIndex: IxPropTypes.number,
+  zIndex: Number,
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
 }
 
 export type TooltipProps = ExtractInnerPropTypes<typeof tooltipProps>

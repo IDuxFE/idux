@@ -5,24 +5,39 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type DefineComponent, type HTMLAttributes } from 'vue'
+import { type DefineComponent, type HTMLAttributes, PropType } from 'vue'
 
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes, type VKey } from '@idux/cdk/utils'
+import {
+  type ExtractInnerPropTypes,
+  type ExtractPublicPropTypes,
+  IxPropTypes,
+  MaybeArray,
+  type VKey,
+} from '@idux/cdk/utils'
 
 export type StepperLabelPlacement = 'end' | 'bottom'
 export type StepperSize = 'md' | 'sm'
 export type StepperStatus = 'process' | 'finish' | 'wait' | 'error'
 
 export const stepperProps = {
-  activeKey: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
-  clickable: IxPropTypes.bool,
-  labelPlacement: IxPropTypes.oneOf<StepperLabelPlacement>(['end', 'bottom']),
+  activeKey: [String, Number, Symbol] as PropType<VKey>,
+  clickable: {
+    type: Boolean,
+    default: undefined,
+  },
+  labelPlacement: String as PropType<StepperLabelPlacement>,
   percent: IxPropTypes.range(0, 100),
-  size: IxPropTypes.oneOf<StepperSize>(['md', 'sm']),
-  status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']).def('process'),
-  vertical: IxPropTypes.bool.def(false),
+  size: String as PropType<StepperSize>,
+  status: {
+    type: String as PropType<StepperStatus>,
+    default: 'process',
+  },
+  vertical: {
+    type: Boolean,
+    default: false,
+  },
 
-  'onUpdate:activeKey': IxPropTypes.emit<<K = VKey>(key: K) => void>(),
+  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<<K = VKey>(key: K) => void>>,
 }
 
 export type StepperProps = ExtractInnerPropTypes<typeof stepperProps>
@@ -31,11 +46,14 @@ export type StepperComponent = DefineComponent<Omit<HTMLAttributes, keyof Steppe
 export type StepperInstance = InstanceType<DefineComponent<StepperProps>>
 
 export const stepperItemProps = {
-  description: IxPropTypes.string,
-  disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
-  title: IxPropTypes.string,
-  status: IxPropTypes.oneOf<StepperStatus>(['process', 'finish', 'wait', 'error']),
+  description: String,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  icon: String,
+  title: String,
+  status: String as PropType<StepperStatus>,
 }
 
 export type StepperItemProps = ExtractInnerPropTypes<typeof stepperItemProps>

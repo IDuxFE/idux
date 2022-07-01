@@ -5,21 +5,31 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const alertProps = {
-  closable: IxPropTypes.bool,
-  closeIcon: IxPropTypes.string.def('close'),
-  description: IxPropTypes.string,
-  icon: IxPropTypes.string,
-  title: IxPropTypes.oneOfType([String, IxPropTypes.arrayOf(String)]),
-  pagination: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<AlertPagination>()]).def(false),
-  type: IxPropTypes.oneOf<AlertType>(['success', 'info', 'warning', 'error']).def('info'),
-  onBeforeClose: IxPropTypes.emit<() => void | boolean | Promise<boolean>>(),
-  onClose: IxPropTypes.emit<() => void>(),
+  closable: {
+    type: Boolean,
+    default: undefined,
+  },
+  closeIcon: {
+    type: String,
+    default: 'close',
+  },
+  description: String,
+  icon: String,
+  title: [String, Array] as PropType<string | string[]>,
+  pagination: {
+    type: [Boolean, Object] as PropType<boolean | AlertPagination>,
+    default: false,
+  },
+  type: {
+    type: String as PropType<AlertType>,
+    default: 'info',
+  },
+  onBeforeClose: [Function, Array] as PropType<MaybeArray<() => void | boolean | Promise<boolean>>>,
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export type AlertProps = ExtractInnerPropTypes<typeof alertProps>

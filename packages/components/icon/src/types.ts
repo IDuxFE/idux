@@ -8,14 +8,18 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const iconProps = {
-  name: IxPropTypes.string,
-  iconfont: IxPropTypes.bool.def(false),
-  rotate: IxPropTypes.oneOfType([Boolean, Number, String]),
-  color: IxPropTypes.string,
-  size: IxPropTypes.oneOfType([String, Number]),
+  name: String,
+  iconfont: {
+    type: Boolean,
+    default: false,
+  },
+  rotate: {
+    type: [Boolean, Number, String],
+    default: undefined,
+  },
+  color: String,
+  size: [String, Number],
 }
 
 export type IconProps = ExtractInnerPropTypes<typeof iconProps>

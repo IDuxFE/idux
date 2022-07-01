@@ -6,11 +6,9 @@
  */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 // 挑出部分必填的属性
 type PickRequire<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>> & Required<Pick<T, U>>
@@ -29,29 +27,31 @@ export interface SlotProps {
 export const notificationType = ['info', 'success', 'warning', 'error'] as const
 export const notificationPlacement = ['topStart', 'topEnd', 'bottomStart', 'bottomEnd'] as const
 export const notificationProps = {
-  visible: IxPropTypes.bool,
-  destroyOnHover: IxPropTypes.bool,
-  duration: IxPropTypes.number,
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  type: IxPropTypes.oneOf<NotificationType>(['info', 'success', 'warning', 'error']),
-  key: IxPropTypes.oneOfType<VKey>([String, Number, Symbol]),
-  title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  content: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  footer: IxPropTypes.oneOfType<string | NotificationButtonProps[] | VNode>([
-    IxPropTypes.array(),
-    IxPropTypes.vNode,
-    String,
-  ]),
-  placement: IxPropTypes.oneOf<NotificationPlacement>(['topStart', 'topEnd', 'bottomStart', 'bottomEnd']),
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHover: {
+    type: Boolean,
+    default: undefined,
+  },
+  duration: Number,
+  icon: [String, Object] as PropType<string | VNode>,
+  closeIcon: [String, Object] as PropType<string | VNode>,
+  type: String as PropType<NotificationType>,
+  key: [String, Number, Symbol] as PropType<VKey>,
+  title: [String, Object] as PropType<string | VNode>,
+  content: [String, Object] as PropType<string | VNode>,
+  footer: [String, Array, Object] as PropType<string | NotificationButtonProps[] | VNode>,
+  placement: String as PropType<NotificationPlacement>,
 
   // event
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onClose: IxPropTypes.emit<(evt?: Event) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event) => void>>,
 }
 export const notificationProviderProps = {
-  offset: IxPropTypes.oneOfType<string | number | (number | string)[]>([String, Number, Array]),
-  maxCount: IxPropTypes.number,
+  offset: [String, Number, Array] as PropType<string | number | (number | string)[]>,
+  maxCount: Number,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,

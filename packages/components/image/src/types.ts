@@ -6,7 +6,7 @@
  */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { IxPropTypes } from '@idux/cdk/utils'
@@ -19,27 +19,45 @@ const zoomValidator = {
 }
 
 export const imageViewerProps = {
-  visible: IxPropTypes.bool,
-  activeIndex: IxPropTypes.number,
-  images: IxPropTypes.array<string>().def([]),
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  activeIndex: Number,
+  images: {
+    type: Array as PropType<string[]>,
+    default: (): string[] => [],
+  },
   zoom: IxPropTypes.custom<number[]>(zoomValidator.validator, zoomValidator.msg),
-  loop: IxPropTypes.bool,
+  loop: {
+    type: Boolean,
+    default: undefined,
+  },
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  maskClosable: IxPropTypes.bool,
+  maskClosable: {
+    type: Boolean,
+    default: undefined,
+  },
 
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  'onUpdate:activeIndex': IxPropTypes.emit<(curIndex: number) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  'onUpdate:activeIndex': [Function, Array] as PropType<MaybeArray<(curIndex: number) => void>>,
 }
 
 export const imageProps = {
-  src: IxPropTypes.string.isRequired,
-  preview: IxPropTypes.bool,
-  imageViewer: IxPropTypes.shape<ImageViewerProps>({ ...imageViewerProps, images: IxPropTypes.array<string>() }),
-  onLoad: IxPropTypes.emit<(e: Event) => void>(),
-  onError: IxPropTypes.emit<(e: Event) => void>(),
+  src: {
+    type: String,
+    required: true,
+  },
+  preview: {
+    type: Boolean,
+    default: undefined,
+  },
+  imageViewer: Object as PropType<ImageViewerProps>,
+  onLoad: [Function, Array] as PropType<MaybeArray<(e: Event) => void>>,
+  onError: [Function, Array] as PropType<MaybeArray<(e: Event) => void>>,
 }
 
 export type ImageProps = ExtractInnerPropTypes<typeof imageProps>

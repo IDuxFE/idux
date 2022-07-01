@@ -6,17 +6,15 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export type ResultStatus = 'success' | 'error' | 'info' | 'warning'
 
 export const resultProps = {
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  status: IxPropTypes.oneOf<ResultStatus>(['success', 'error', 'info', 'warning']),
-  subtitle: IxPropTypes.string,
-  title: IxPropTypes.string,
+  icon: [String, Object] as PropType<string | VNode>,
+  status: String as PropType<ResultStatus>,
+  subtitle: String,
+  title: String,
 }
 
 export type ResultProps = ExtractInnerPropTypes<typeof resultProps>

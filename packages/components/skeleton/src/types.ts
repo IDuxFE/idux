@@ -6,19 +6,29 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 type SkeletonType = 'text' | 'rect' | 'round' | 'circle'
 
 export const skeletonProps = {
-  animated: IxPropTypes.bool,
-  loading: IxPropTypes.bool.def(true),
-  type: IxPropTypes.oneOf<SkeletonType>(['round', 'circle', 'text', 'rect']).def('text'),
-  width: IxPropTypes.oneOfType([String, Number]),
-  height: IxPropTypes.oneOfType([String, Number]),
-  repeat: IxPropTypes.number.def(1),
+  animated: {
+    type: Boolean,
+    default: undefined,
+  },
+  loading: {
+    type: Boolean,
+    default: true,
+  },
+  type: {
+    type: String as PropType<SkeletonType>,
+    default: 'text',
+  },
+  width: [String, Number],
+  height: [String, Number],
+  repeat: {
+    type: Number,
+    default: 1,
+  },
 }
 
 export type SkeletonProps = ExtractInnerPropTypes<typeof skeletonProps>

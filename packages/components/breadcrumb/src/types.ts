@@ -8,10 +8,11 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const breadcrumbProps = {
-  separator: IxPropTypes.string.def('/'),
+  separator: {
+    type: String,
+    default: '/',
+  },
 }
 
 export type BreadcrumbProps = ExtractInnerPropTypes<typeof breadcrumbProps>
@@ -22,7 +23,7 @@ export type BreadcrumbComponent = DefineComponent<
 export type BreadcrumbInstance = InstanceType<DefineComponent<BreadcrumbProps>>
 
 export const breadcrumbItemProps = {
-  separator: IxPropTypes.string,
+  separator: String,
 }
 
 export type BreadcrumbItemProps = ExtractInnerPropTypes<typeof breadcrumbItemProps>

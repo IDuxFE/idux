@@ -6,9 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type SpaceAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
 export type SpaceJustify = 'start' | 'center' | 'end' | 'space-around' | 'space-between'
@@ -16,18 +14,27 @@ export type SpaceDirection = 'vertical' | 'horizontal'
 export type SpaceSize = 'sm' | 'md' | 'lg'
 
 export const spaceProps = {
-  align: IxPropTypes.oneOf<SpaceAlign>(['start', 'center', 'end', 'baseline', 'stretch']),
-  block: IxPropTypes.bool,
+  align: String as PropType<SpaceAlign>,
+  block: {
+    type: Boolean,
+    default: undefined,
+  },
   /**
    * @deprecated please use `vertical` instead'
    */
-  direction: IxPropTypes.oneOf<SpaceDirection>(['vertical', 'horizontal']),
-  justify: IxPropTypes.oneOf<SpaceJustify>(['start', 'center', 'end', 'space-around', 'space-between']),
-  size: IxPropTypes.oneOfType([Number, String, IxPropTypes.array<string | number>()]),
-  split: IxPropTypes.string,
-  separator: IxPropTypes.string,
-  vertical: IxPropTypes.bool,
-  wrap: IxPropTypes.bool,
+  direction: String as PropType<SpaceDirection>,
+  justify: String as PropType<SpaceJustify>,
+  size: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  split: String,
+  separator: String,
+  vertical: {
+    type: Boolean,
+    default: undefined,
+  },
+  wrap: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export type SpaceProps = ExtractInnerPropTypes<typeof spaceProps>

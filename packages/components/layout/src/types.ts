@@ -6,10 +6,8 @@
  */
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const layoutProps = {}
 
@@ -46,11 +44,14 @@ export type LayoutFooterComponent = DefineComponent<
 export type LayoutFooterInstance = InstanceType<DefineComponent<LayoutFooterProps>>
 
 export const layoutSiderProps = {
-  collapsed: IxPropTypes.bool,
-  breakpoint: IxPropTypes.oneOf<BreakpointKey>(['xs', 'sm', 'md', 'lg', 'xl']),
+  collapsed: {
+    type: Boolean,
+    default: undefined,
+  },
+  breakpoint: String as PropType<BreakpointKey>,
 
   // events
-  'onUpdate:collapsed': IxPropTypes.emit<(collapsed: boolean) => void>(),
+  'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
 }
 
 export type LayoutSiderProps = ExtractInnerPropTypes<typeof layoutSiderProps>
