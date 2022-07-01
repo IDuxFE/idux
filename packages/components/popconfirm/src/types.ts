@@ -5,25 +5,30 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵTooltipProps } from '@idux/components/tooltip'
 
 export const popconfirmProps = {
   ...ɵTooltipProps,
-  cancelButton: IxPropTypes.object<ButtonProps>(),
-  cancelText: IxPropTypes.string,
-  okButton: IxPropTypes.object<ButtonProps>(),
-  okText: IxPropTypes.string,
-  icon: IxPropTypes.string.def('exclamation-circle-filled'),
-  footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<PopconfirmButtonProps>(), IxPropTypes.vNode]).def(true),
+  cancelButton: Object as PropType<ButtonProps>,
+  cancelText: String,
+  okButton: Object as PropType<ButtonProps>,
+  okText: String,
+  icon: {
+    type: String,
+    default: 'exclamation-circle-filled',
+  },
+  footer: {
+    type: [Boolean, Array, Object] as PropType<boolean | PopconfirmButtonProps[] | VNode>,
+    default: true,
+  },
 
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onCancel: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
-  onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onCancel: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
+  onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
 }
 export interface PopconfirmButtonProps<K = VKey> extends ButtonProps {
   key?: K

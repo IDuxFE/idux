@@ -6,53 +6,58 @@
  */
 
 import type { PopperOptions, PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-import type { VueTypeDef } from 'vue-types'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
-export const overlayPlacementDef = IxPropTypes.oneOf<PopperPlacement>([
-  'topStart',
-  'top',
-  'topEnd',
-  'rightStart',
-  'right',
-  'rightEnd',
-  'bottomStart',
-  'bottom',
-  'bottomEnd',
-  'leftStart',
-  'left',
-  'leftEnd',
-])
-export const overlayTriggerDef = IxPropTypes.oneOf<PopperTrigger>(['click', 'hover', 'focus', 'contextmenu', 'manual'])
-export const overlayDelayDef = IxPropTypes.oneOfType<number | [number | null, number | null]>([
-  Number,
-  IxPropTypes.array() as unknown as VueTypeDef<[number | null, number | null]>,
-])
+export const overlayPlacementDef = String as PropType<PopperPlacement>
+export const overlayTriggerDef = String as PropType<PopperTrigger>
+export const overlayDelayDef = [Number, Array] as PropType<number | [number | null, number | null]>
 
 export const overlayProps = {
-  visible: IxPropTypes.bool,
-  allowEnter: IxPropTypes.bool,
-  autoAdjust: IxPropTypes.bool,
-  clickOutside: IxPropTypes.bool,
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  allowEnter: {
+    type: Boolean,
+    default: undefined,
+  },
+  autoAdjust: {
+    type: Boolean,
+    default: undefined,
+  },
+  clickOutside: {
+    type: Boolean,
+    default: undefined,
+  },
   delay: overlayDelayDef,
-  destroyOnHide: IxPropTypes.bool,
-  disabled: IxPropTypes.bool,
-  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  destroyOnHide: {
+    type: Boolean,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  offset: Array as unknown as PropType<[number, number]>,
   placement: overlayPlacementDef,
-  showArrow: IxPropTypes.bool,
-  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]).isRequired,
-  transitionName: IxPropTypes.string,
+  showArrow: {
+    type: Boolean,
+    default: undefined,
+  },
+  target: {
+    type: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+    required: true,
+  },
+  transitionName: String,
   trigger: overlayTriggerDef,
   triggerId: { type: null, default: undefined },
-  zIndex: IxPropTypes.number,
+  zIndex: Number,
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  'onUpdate:placement': IxPropTypes.emit<(placement: PopperPlacement) => void>(),
-  onAfterLeave: IxPropTypes.emit<() => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  'onUpdate:placement': [Function, Array] as PropType<MaybeArray<(placement: PopperPlacement) => void>>,
+  onAfterLeave: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export interface OverlayBindings {

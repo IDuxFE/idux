@@ -8,12 +8,19 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const loadingProps = {
-  strokeWidth: IxPropTypes.number.def(4),
-  radius: IxPropTypes.number.def(14),
-  duration: IxPropTypes.number.def(2),
+  strokeWidth: {
+    type: Number,
+    default: 4,
+  },
+  radius: {
+    type: Number,
+    default: 14,
+  },
+  duration: {
+    type: Number,
+    default: 2,
+  },
 }
 
 export type LoadingProps = ExtractInnerPropTypes<typeof loadingProps>

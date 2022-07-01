@@ -6,26 +6,42 @@
  */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-import type { VueTypeDef } from 'vue-types'
 
-import { IxPropTypes } from '@idux/cdk/utils'
 import { ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
 export const dropdownProps = {
-  visible: IxPropTypes.bool,
-  autoAdjust: IxPropTypes.bool,
-  destroyOnHide: IxPropTypes.bool,
-  disabled: IxPropTypes.bool.def(false),
-  hideOnClick: IxPropTypes.bool.def(true),
-  offset: IxPropTypes.array() as unknown as VueTypeDef<[number, number]>,
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  autoAdjust: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHide: {
+    type: Boolean,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  hideOnClick: {
+    type: Boolean,
+    default: true,
+  },
+  offset: Array as unknown as PropType<[number, number]>,
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
   placement: ɵOverlayPlacementDef,
-  showArrow: IxPropTypes.bool,
+  showArrow: {
+    type: Boolean,
+    default: undefined,
+  },
   /**
    * @deprecated please use `overlayContainer` instead'
    */
@@ -36,7 +52,7 @@ export const dropdownProps = {
   trigger: ɵOverlayTriggerDef,
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
 }
 
 export type DropdownProps = ExtractInnerPropTypes<typeof dropdownProps>

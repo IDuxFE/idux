@@ -6,25 +6,38 @@
  */
 
 import type { AbstractControl } from '@idux/cdk/forms'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const switchProps = {
-  checked: IxPropTypes.bool,
+  checked: {
+    type: Boolean,
+    default: undefined,
+  },
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-  autofocus: IxPropTypes.bool.def(false),
-  disabled: IxPropTypes.bool.def(false),
-  labels: IxPropTypes.arrayOf(String).def(() => []),
-  loading: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf(['sm', 'md', 'lg'] as const),
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  labels: {
+    type: Array as PropType<string[]>,
+    default: (): string[] => [],
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  size: String as PropType<'sm' | 'md' | 'lg'>,
 
   // events
-  'onUpdate:checked': IxPropTypes.emit<(checked: boolean) => void>(),
-  onChange: IxPropTypes.emit<(checked: boolean) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
+  'onUpdate:checked': [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 }
 
 export type SwitchProps = ExtractInnerPropTypes<typeof switchProps>

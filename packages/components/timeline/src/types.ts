@@ -6,19 +6,29 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type TimelinePlacement = 'start' | 'alternate' | 'end'
 export type TimelineItemPlacement = 'start' | 'end'
 
 export const timelineProps = {
-  pending: IxPropTypes.oneOfType([String, Boolean]).def(false),
-  pendingDot: IxPropTypes.string,
-  reverse: IxPropTypes.bool.def(false),
-  placement: IxPropTypes.oneOf<TimelinePlacement>(['start', 'alternate', 'end']).def('end'),
-  both: IxPropTypes.bool.def(true),
+  pending: {
+    type: [String, Boolean],
+    default: false,
+  },
+  pendingDot: String,
+  reverse: {
+    type: Boolean,
+    default: false,
+  },
+  placement: {
+    type: String as PropType<TimelinePlacement>,
+    default: 'end',
+  },
+  both: {
+    type: Boolean,
+    default: true,
+  },
 }
 
 export type TimelineProps = ExtractInnerPropTypes<typeof timelineProps>
@@ -27,10 +37,13 @@ export type TimelineComponent = DefineComponent<Omit<HTMLAttributes, keyof Timel
 export type TimelineInstance = InstanceType<DefineComponent<TimelineProps>>
 
 export const timelineItemProps = {
-  color: IxPropTypes.string.def('primary'),
-  dot: IxPropTypes.string,
-  label: IxPropTypes.string,
-  placement: IxPropTypes.oneOf<TimelineItemPlacement>(['start', 'end']),
+  color: {
+    type: String,
+    default: 'primary',
+  },
+  dot: String,
+  label: String,
+  placement: String as PropType<TimelineItemPlacement>,
 }
 
 export type TimelineItemProps = ExtractInnerPropTypes<typeof timelineItemProps>

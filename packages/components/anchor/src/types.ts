@@ -5,22 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const anchorProps = {
-  affix: IxPropTypes.bool.def(true),
-  bounds: IxPropTypes.number,
-  hideLinkBall: IxPropTypes.bool,
-  offsetTop: IxPropTypes.number,
-  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
-  targetOffset: IxPropTypes.number,
+  affix: {
+    type: Boolean,
+    default: true,
+  },
+  bounds: Number,
+  hideLinkBall: {
+    type: Boolean,
+    default: undefined,
+  },
+  offsetTop: Number,
+  target: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+  targetOffset: Number,
 
   // events
-  onChange: IxPropTypes.emit<(activeLink: string) => void>(),
-  onClick: IxPropTypes.emit<(evt: MouseEvent, link: AnchorLinkProps) => void>(),
+  onChange: [Function, Array] as PropType<MaybeArray<(activeLink: string) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent, link: AnchorLinkProps) => void>>,
 }
 
 export type AnchorProps = ExtractInnerPropTypes<typeof anchorProps>
@@ -29,8 +33,11 @@ export type AnchorComponent = DefineComponent<Omit<HTMLAttributes, keyof AnchorP
 export type AnchorInstance = InstanceType<DefineComponent<AnchorProps>>
 
 export const linkProps = {
-  href: IxPropTypes.string.isRequired,
-  title: IxPropTypes.string,
+  href: {
+    type: String,
+    required: true,
+  },
+  title: String,
 }
 
 export type AnchorLinkProps = ExtractInnerPropTypes<typeof linkProps>

@@ -10,22 +10,29 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/ut
 import type { ColProps } from '@idux/components/grid'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
-const colProp = IxPropTypes.oneOfType([Number, String, IxPropTypes.object<ColProps>()])
+const colProp = [Number, String, Object] as PropType<number | string | ColProps>
 
 export const formProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-  colonless: IxPropTypes.bool,
+  colonless: {
+    type: Boolean,
+    default: undefined,
+  },
   controlCol: colProp,
-  controlTooltipIcon: IxPropTypes.string,
-  hasFeedback: IxPropTypes.bool,
-  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
+  controlTooltipIcon: String,
+  hasFeedback: {
+    type: Boolean,
+    default: undefined,
+  },
+  labelAlign: String as PropType<FormLabelAlign>,
   labelCol: colProp,
-  labelTooltipIcon: IxPropTypes.string,
-  layout: IxPropTypes.oneOf<FormLayout>(['horizontal', 'vertical', 'inline']),
-  size: IxPropTypes.oneOf<FormSize>(['lg', 'md', 'sm']),
-  statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]).def(false),
+  labelTooltipIcon: String,
+  layout: String as PropType<FormLayout>,
+  size: String as PropType<FormSize>,
+  statusIcon: {
+    type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
+    default: false,
+  },
 }
 
 export type FormProps = ExtractInnerPropTypes<typeof formProps>
@@ -40,28 +47,38 @@ export type FormValidateMessage = Partial<Record<ValidateStatus, string | ((cont
 export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
-  colonless: IxPropTypes.bool,
+  colonless: {
+    type: Boolean,
+    default: undefined,
+  },
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   controlCol: colProp,
-  controlTooltip: IxPropTypes.string,
-  controlTooltipIcon: IxPropTypes.string,
-  hasFeedback: IxPropTypes.bool,
-  extra: IxPropTypes.string,
-  extraMessage: IxPropTypes.string,
-  label: IxPropTypes.string,
-  labelAlign: IxPropTypes.oneOf<FormLabelAlign>(['start', 'end']),
+  controlTooltip: String,
+  controlTooltipIcon: String,
+  hasFeedback: {
+    type: Boolean,
+    default: undefined,
+  },
+  extra: String,
+  extraMessage: String,
+  label: String,
+  labelAlign: String as PropType<FormLabelAlign>,
   labelCol: colProp,
-  labelFor: IxPropTypes.string,
-  labelTooltip: IxPropTypes.string,
-  labelTooltipIcon: IxPropTypes.string,
-  required: IxPropTypes.bool.def(false),
-  message: IxPropTypes.oneOfType([
-    String,
-    IxPropTypes.func<(control: AbstractControl) => string>(),
-    IxPropTypes.object<FormValidateMessage>(),
-  ]),
-  status: IxPropTypes.oneOf<ValidateStatus>(['valid', 'invalid', 'validating']),
-  statusIcon: IxPropTypes.oneOfType([Boolean, IxPropTypes.object<Record<ValidateStatus, string>>()]),
+  labelFor: String,
+  labelTooltip: String,
+  labelTooltipIcon: String,
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  message: [String, Function, Object] as PropType<
+    string | ((control: AbstractControl) => string) | FormValidateMessage
+  >,
+  status: String as PropType<ValidateStatus>,
+  statusIcon: {
+    type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
+    default: undefined,
+  },
 }
 
 export type FormItemProps = ExtractInnerPropTypes<typeof formItemProps>

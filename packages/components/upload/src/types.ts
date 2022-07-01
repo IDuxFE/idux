@@ -5,11 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ProgressProps } from '@idux/components/progress'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 type DataType = Record<string, unknown>
 export type UploadRequestHeader = Record<string, string>
@@ -60,30 +58,49 @@ export interface UploadRequestChangeOption<K = VKey> {
 }
 
 export const uploadProps = {
-  files: IxPropTypes.array<UploadFile>().isRequired,
-  accept: IxPropTypes.string,
-  action: IxPropTypes.oneOfType([String, IxPropTypes.func<(file: UploadFile) => Promise<string>>()]).isRequired,
-  dragable: IxPropTypes.bool,
-  directory: IxPropTypes.bool,
-  disabled: IxPropTypes.bool,
-  maxCount: IxPropTypes.number,
-  multiple: IxPropTypes.bool,
-  progress: IxPropTypes.object<ProgressProps>(),
-  name: IxPropTypes.string,
-  customRequest: IxPropTypes.func<(option: UploadRequestOption) => { abort: () => void }>(),
-  withCredentials: IxPropTypes.bool,
-  requestData: IxPropTypes.oneOfType<DataType | ((file: UploadFile) => DataType | Promise<DataType>)>([
-    Object,
-    IxPropTypes.func<(file: UploadFile) => DataType | Promise<DataType>>(),
-  ]),
-  requestHeaders: IxPropTypes.object<UploadRequestHeader>(),
-  requestMethod: IxPropTypes.oneOf(['POST', 'PUT', 'PATCH', 'post', 'put', 'patch']),
-  'onUpdate:files': IxPropTypes.emit<<K = VKey>(fileList: UploadFile<K>[]) => void>(),
-  onSelect: IxPropTypes.emit<(file: File[]) => boolean | File[] | Promise<boolean | File[]>>(),
-  onBeforeUpload:
-    IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => boolean | UploadFile<K> | Promise<boolean | UploadFile<K>>>(),
-  onFileStatusChange: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
-  onRequestChange: IxPropTypes.emit<<K = VKey>(option: UploadRequestChangeOption<K>) => void>(),
+  files: {
+    type: Array as PropType<UploadFile[]>,
+    required: true,
+  },
+  accept: String,
+  action: {
+    type: [String, Function] as PropType<(file: UploadFile) => Promise<string>>,
+    required: true,
+  },
+  dragable: {
+    type: Boolean,
+    default: undefined,
+  },
+  directory: {
+    type: Boolean,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  maxCount: Number,
+  multiple: {
+    type: Boolean,
+    default: undefined,
+  },
+  progress: Object as PropType<ProgressProps>,
+  name: String,
+  customRequest: Function as PropType<(option: UploadRequestOption) => { abort: () => void }>,
+  withCredentials: {
+    type: Boolean,
+    default: undefined,
+  },
+  requestData: [Object, Function] as PropType<DataType | ((file: UploadFile) => DataType | Promise<DataType>)>,
+  requestHeaders: Object as PropType<UploadRequestHeader>,
+  requestMethod: String as PropType<'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'>,
+  'onUpdate:files': [Function, Array] as PropType<MaybeArray<<K = VKey>(fileList: UploadFile<K>[]) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(file: File[]) => boolean | File[] | Promise<boolean | File[]>>>,
+  onBeforeUpload: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(file: UploadFile<K>) => boolean | UploadFile<K> | Promise<boolean | UploadFile<K>>>
+  >,
+  onFileStatusChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
+  onRequestChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(option: UploadRequestChangeOption<K>) => void>>,
 }
 export type UploadProps = ExtractInnerPropTypes<typeof uploadProps>
 export type UploadPublicProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -91,12 +108,12 @@ export type UploadComponent = DefineComponent<Omit<HTMLAttributes, keyof UploadP
 export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 
 export const uploadFilesProps = {
-  type: IxPropTypes.oneOf<UploadFilesType>(['text', 'image', 'imageCard']),
-  icon: IxPropTypes.object<Partial<Record<UploadIconType, string | VNode>>>(),
-  onDownload: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
-  onPreview: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
-  onRemove: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => boolean | Promise<boolean>>(),
-  onRetry: IxPropTypes.emit<<K = VKey>(file: UploadFile<K>) => void>(),
+  type: String as PropType<UploadFilesType>,
+  icon: Object as PropType<Partial<Record<UploadIconType, string | VNode>>>,
+  onDownload: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
+  onPreview: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => boolean | Promise<boolean>>>,
+  onRetry: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
 }
 export type UploadFilesProps = ExtractInnerPropTypes<typeof uploadFilesProps>
 export type UploadFilesPublicProps = ExtractPublicPropTypes<typeof uploadFilesProps>

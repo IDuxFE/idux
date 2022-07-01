@@ -6,23 +6,27 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type SpinTipAlignType = 'horizontal' | 'vertical'
 export type SpinSize = 'lg' | 'md' | 'sm'
 
 export const spinProps = {
-  strokeWidth: IxPropTypes.number,
-  radius: IxPropTypes.number,
-  duration: IxPropTypes.number,
-  spinning: IxPropTypes.bool.def(true),
-  rotate: IxPropTypes.bool.def(true),
-  icon: IxPropTypes.string,
-  tip: IxPropTypes.string,
-  tipAlign: IxPropTypes.oneOf(['horizontal', 'vertical'] as const),
-  size: IxPropTypes.oneOf(['lg', 'md', 'sm'] as const),
+  strokeWidth: Number,
+  radius: Number,
+  duration: Number,
+  spinning: {
+    type: Boolean,
+    default: true,
+  },
+  rotate: {
+    type: Boolean,
+    default: true,
+  },
+  icon: String,
+  tip: String,
+  tipAlign: String as PropType<'horizontal' | 'vertical'>,
+  size: String as PropType<'lg' | 'md' | 'sm'>,
 }
 
 export type SpinProps = ExtractInnerPropTypes<typeof spinProps>

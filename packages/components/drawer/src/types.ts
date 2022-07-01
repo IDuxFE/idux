@@ -7,12 +7,10 @@
 
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
 
@@ -31,33 +29,59 @@ export interface DrawerRef<K = VKey> extends DrawerBindings {
 }
 
 export const drawerProps = {
-  visible: IxPropTypes.bool,
-  closable: IxPropTypes.bool,
-  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  closeOnEsc: IxPropTypes.bool,
-  destroyOnHide: IxPropTypes.bool.def(false),
-  footer: IxPropTypes.oneOfType([IxPropTypes.array<DrawerButtonProps>(), IxPropTypes.vNode]),
-  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
-  height: IxPropTypes.oneOfType([String, Number]),
-  mask: IxPropTypes.bool,
-  maskClosable: IxPropTypes.bool,
-  offset: IxPropTypes.oneOfType([String, Number]).def(0),
-  placement: IxPropTypes.oneOf<DrawerPlacement>(['top', 'bottom', 'start', 'end']).def('end'),
-  scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  closable: {
+    type: Boolean,
+    default: undefined,
+  },
+  closeIcon: [String, Object] as PropType<string | VNode>,
+  closeOnEsc: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHide: {
+    type: Boolean,
+    default: false,
+  },
+  footer: [Array, Object] as PropType<DrawerButtonProps[] | VNode>,
+  header: [String, Object] as PropType<string | HeaderProps>,
+  height: [String, Number],
+  mask: {
+    type: Boolean,
+    default: undefined,
+  },
+  maskClosable: {
+    type: Boolean,
+    default: undefined,
+  },
+  offset: {
+    type: [String, Number],
+    default: 0,
+  },
+  placement: {
+    type: String as PropType<DrawerPlacement>,
+    default: 'end',
+  },
+  scrollStrategy: Object as PropType<ScrollStrategy>,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  width: IxPropTypes.oneOfType([String, Number]),
-  wrapperClassName: IxPropTypes.string,
-  zIndex: IxPropTypes.number,
+  width: [String, Number],
+  wrapperClassName: String,
+  zIndex: Number,
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onAfterOpen: IxPropTypes.emit<() => void>(),
-  onAfterClose: IxPropTypes.emit<() => void>(),
-  onBeforeClose: IxPropTypes.emit<(evt?: Event | unknown) => void | boolean | Promise<boolean>>(),
-  onClose: IxPropTypes.emit<(evt?: Event | unknown) => void>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onAfterOpen: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onAfterClose: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onBeforeClose: [Function, Array] as PropType<
+    MaybeArray<(evt?: Event | unknown) => void | boolean | Promise<boolean>>
+  >,
+  onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => void>>,
 }
 
 export type DrawerProps = ExtractInnerPropTypes<typeof drawerProps>

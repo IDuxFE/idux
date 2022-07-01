@@ -8,9 +8,7 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { RowProps } from '@idux/components/grid'
 import type { SpinProps } from '@idux/components/spin'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ListSize = 'sm' | 'md' | 'lg'
 export interface ListGridProps extends RowProps {
@@ -24,13 +22,19 @@ export interface ListGridProps extends RowProps {
 }
 
 export const listProps = {
-  header: IxPropTypes.string,
-  footer: IxPropTypes.string,
-  empty: IxPropTypes.string,
-  borderless: IxPropTypes.bool,
-  loading: IxPropTypes.bool.def(false) || IxPropTypes.object<SpinProps>(),
-  size: IxPropTypes.oneOf<ListSize>(['sm', 'md', 'lg']),
-  grid: IxPropTypes.object<ListGridProps>(),
+  header: String,
+  footer: String,
+  empty: String,
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  loading: {
+    type: [Boolean, Object] as PropType<boolean | SpinProps>,
+    default: false,
+  },
+  size: String as PropType<ListSize>,
+  grid: Object as PropType<ListGridProps>,
 }
 
 export type ListProps = ExtractInnerPropTypes<typeof listProps>
@@ -39,9 +43,9 @@ export type ListComponent = DefineComponent<Omit<HTMLAttributes, keyof ListPubli
 export type ListInstance = InstanceType<DefineComponent<ListProps>>
 
 export const listItemProps = {
-  title: IxPropTypes.string,
-  content: IxPropTypes.string,
-  extra: IxPropTypes.string,
+  title: String,
+  content: String,
+  extra: String,
 }
 
 export type ListItemProps = ExtractInnerPropTypes<typeof listItemProps>

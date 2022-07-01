@@ -5,28 +5,38 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const rateProps = {
-  value: IxPropTypes.oneOfType([Number, String]),
-  allowHalf: IxPropTypes.bool,
-  clearable: IxPropTypes.bool,
-  count: IxPropTypes.oneOfType([Number, String]),
-  disabled: IxPropTypes.bool.def(false),
-  icon: IxPropTypes.string,
-  tooltips: IxPropTypes.arrayOf(String).def(() => []),
-  size: IxPropTypes.oneOf<FormSize>(['sm', 'md', 'lg']),
+  value: [Number, String],
+  allowHalf: {
+    type: Boolean,
+    default: undefined,
+  },
+  clearable: {
+    type: Boolean,
+    default: undefined,
+  },
+  count: [Number, String],
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  icon: String,
+  tooltips: {
+    type: Array as PropType<string[]>,
+    default: (): string[] => [],
+  },
+  size: String as PropType<FormSize>,
 
   // events
-  'onUpdate:value': IxPropTypes.emit<(value: number) => void>(),
-  onChange: IxPropTypes.emit<(value: number) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onKeyDown: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: number) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: number) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onKeyDown: [Function, Array] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
 }
 
 export type RateProps = ExtractInnerPropTypes<typeof rateProps>
@@ -40,15 +50,39 @@ export type RateInstance = InstanceType<DefineComponent<RateProps, RateBindings>
 
 // private
 export const rateItemProps = {
-  count: IxPropTypes.number.isRequired,
-  disabled: IxPropTypes.bool.isRequired,
-  focused: IxPropTypes.bool.isRequired,
-  index: IxPropTypes.number.isRequired,
-  prefixCls: IxPropTypes.string.isRequired,
-  tooltip: IxPropTypes.string,
-  value: IxPropTypes.number.isRequired,
+  count: {
+    type: Number,
+    required: true,
+  },
+  disabled: {
+    type: Boolean,
+    required: true,
+  },
+  focused: {
+    type: Boolean,
+    required: true,
+  },
+  index: {
+    type: Number,
+    required: true,
+  },
+  prefixCls: {
+    type: String,
+    required: true,
+  },
+  tooltip: String,
+  value: {
+    type: Number,
+    required: true,
+  },
 
   // events
-  onClick: IxPropTypes.func<(evt: MouseEvent, element: HTMLElement, index: number) => void>().isRequired,
-  onMouseMove: IxPropTypes.func<(evt: MouseEvent, element: HTMLElement, index: number) => void>().isRequired,
+  onClick: {
+    type: Function as PropType<(evt: MouseEvent, element: HTMLElement, index: number) => void>,
+    required: true,
+  },
+  onMouseMove: {
+    type: Function as PropType<(evt: MouseEvent, element: HTMLElement, index: number) => void>,
+    required: true,
+  },
 }

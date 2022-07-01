@@ -6,9 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
 export type ButtonShape = 'circle' | 'round'
@@ -16,16 +14,34 @@ export type ButtonSize = 'lg' | 'xl' | 'md' | 'sm' | 'xs'
 export type ButtonType = 'button' | 'submit' | 'reset'
 
 export const buttonProps = {
-  mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
-  danger: IxPropTypes.bool,
-  ghost: IxPropTypes.bool,
-  disabled: IxPropTypes.bool,
-  loading: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'xl', 'md', 'sm', 'xs']),
-  shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
-  block: IxPropTypes.bool,
-  icon: IxPropTypes.string,
-  type: IxPropTypes.oneOf<ButtonType>(['button', 'submit', 'reset']).def('button'),
+  mode: String as PropType<ButtonMode>,
+  danger: {
+    type: Boolean,
+    default: undefined,
+  },
+  ghost: {
+    type: Boolean,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  loading: {
+    type: Boolean,
+    default: undefined,
+  },
+  size: String as PropType<ButtonSize>,
+  shape: String as PropType<ButtonShape>,
+  block: {
+    type: Boolean,
+    default: undefined,
+  },
+  icon: String,
+  type: {
+    type: String as PropType<ButtonType>,
+    default: 'button',
+  },
 }
 
 export type ButtonProps = ExtractInnerPropTypes<typeof buttonProps>
@@ -36,9 +52,9 @@ export type ButtonComponent = DefineComponent<
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
-  mode: IxPropTypes.oneOf<ButtonMode>(['primary', 'default', 'dashed', 'text', 'link']),
-  size: IxPropTypes.oneOf<ButtonSize>(['lg', 'xl', 'md', 'sm', 'xs']),
-  shape: IxPropTypes.oneOf<ButtonShape>(['circle', 'round']),
+  mode: String as PropType<ButtonMode>,
+  size: String as PropType<ButtonSize>,
+  shape: String as PropType<ButtonShape>,
 }
 
 export type ButtonGroupProps = ExtractInnerPropTypes<typeof buttonGroupProps>

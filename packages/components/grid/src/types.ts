@@ -5,25 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type DefineComponent, type HTMLAttributes } from 'vue'
+import { type DefineComponent, type HTMLAttributes, PropType } from 'vue'
 
 import { type BreakpointKey } from '@idux/cdk/breakpoint'
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, IxPropTypes } from '@idux/cdk/utils'
+import { type ExtractInnerPropTypes, type ExtractPublicPropTypes } from '@idux/cdk/utils'
 
 export type RowAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
 export type RowJustify = 'start' | 'center' | 'end' | 'space-around' | 'space-between'
 export type RowGutter = number | string | Array<number | string> | Partial<Record<BreakpointKey, number | string>>
 
 export const rowProps = {
-  align: IxPropTypes.oneOf<RowAlign>(['start', 'center', 'end', 'baseline', 'stretch']),
-  justify: IxPropTypes.oneOf<RowJustify>(['start', 'end', 'center', 'space-around', 'space-between']),
-  gutter: IxPropTypes.oneOfType([
-    Number,
-    String,
-    IxPropTypes.array<number | string>(),
-    IxPropTypes.object<Partial<Record<BreakpointKey, number | string>>>(),
-  ]).def(0),
-  wrap: IxPropTypes.bool,
+  align: String as PropType<RowAlign>,
+  justify: String as PropType<RowJustify>,
+  gutter: [Number, String, Array, Object] as PropType<RowGutter>,
+  wrap: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export type RowProps = ExtractInnerPropTypes<typeof rowProps>
@@ -39,9 +37,9 @@ export interface ColBreakpointConfig {
   pull?: number | string
 }
 
-const singleProp = IxPropTypes.oneOfType([Number, String])
+const singleProp = [Number, String]
 
-const breakpointConfig = IxPropTypes.oneOfType([Number, String, IxPropTypes.object<ColBreakpointConfig>()])
+const breakpointConfig = [Number, String, Object] as PropType<number | string | ColBreakpointConfig>
 
 export const colProps = {
   flex: singleProp,

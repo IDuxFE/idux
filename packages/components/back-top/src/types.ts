@@ -5,17 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const backTopProps = {
-  target: IxPropTypes.oneOfType([String, HTMLElement, IxPropTypes.func<() => string | HTMLElement>()]),
-  duration: IxPropTypes.number,
-  visibilityHeight: IxPropTypes.number,
+  target: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+  duration: Number,
+  visibilityHeight: Number,
 
-  onClick: IxPropTypes.emit<(evt: MouseEvent) => void>(),
+  onClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
 }
 
 export type BackTopProps = ExtractInnerPropTypes<typeof backTopProps>

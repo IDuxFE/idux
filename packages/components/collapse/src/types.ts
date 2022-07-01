@@ -5,21 +5,28 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const collapseProps = {
-  expandedKeys: IxPropTypes.array<VKey>(),
-  accordion: IxPropTypes.bool,
-  borderless: IxPropTypes.bool,
-  expandIcon: IxPropTypes.string,
-  ghost: IxPropTypes.bool,
+  expandedKeys: Array as PropType<VKey[]>,
+  accordion: {
+    type: Boolean,
+    default: undefined,
+  },
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  expandIcon: String,
+  ghost: {
+    type: Boolean,
+    default: undefined,
+  },
 
   // events
-  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(expandedKeys: K[]) => void>(),
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(expandedKeys: K[]) => void>>,
 }
 
 export type CollapseProps = ExtractInnerPropTypes<typeof collapseProps>
@@ -28,8 +35,11 @@ export type CollapseComponent = DefineComponent<Omit<HTMLAttributes, keyof Colla
 export type CollapseInstance = InstanceType<DefineComponent<CollapseProps>>
 
 export const collapsePanelProps = {
-  disabled: IxPropTypes.bool.def(false),
-  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  header: [String, Object] as PropType<string | HeaderProps>,
 }
 
 export type CollapsePanelProps = ExtractInnerPropTypes<typeof collapsePanelProps>

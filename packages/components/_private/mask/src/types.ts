@@ -8,13 +8,20 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export const maskProps = {
-  mask: IxPropTypes.bool.def(true),
-  transitionName: IxPropTypes.string.def('ix-fade'),
-  visible: IxPropTypes.bool.def(true),
-  zIndex: IxPropTypes.number,
+  mask: {
+    type: Boolean,
+    default: true,
+  },
+  transitionName: {
+    type: String,
+    default: 'ix-fade',
+  },
+  visible: {
+    type: Boolean,
+    default: true,
+  },
+  zIndex: Number,
 }
 
 export type MaskProps = ExtractInnerPropTypes<typeof maskProps>

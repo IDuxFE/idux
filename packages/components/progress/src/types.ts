@@ -6,9 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode, VNodeChild } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export type ProgressSize = 'sm' | 'md' | 'lg'
 export type ProgressFormat = (percent: number, successPercent?: number) => VNodeChild
@@ -37,21 +35,33 @@ export interface ProgressIcons {
 export const progressStatus = ['normal', 'success', 'exception', 'active'] as const
 
 export const progressProps = {
-  type: IxPropTypes.oneOf<ProgressType>(['line', 'circle', 'dashboard']).def('line'),
-  format: IxPropTypes.func<ProgressFormat>(),
-  percent: IxPropTypes.oneOfType([String, Number]).def(0),
-  status: IxPropTypes.oneOf<ProgressStatus>(['normal', 'success', 'exception', 'active']),
-  hideInfo: IxPropTypes.bool.def(false),
-  success: IxPropTypes.object<ProgressSuccess>(),
-  trailColor: IxPropTypes.string,
-  strokeColor: IxPropTypes.oneOfType([String, IxPropTypes.object<ProgressGradient>()]),
-  strokeLinecap: IxPropTypes.oneOf<ProgressStrokeLinecap>(['round', 'square']),
-  strokeWidth: IxPropTypes.oneOfType([String, Number]),
-  gapDegree: IxPropTypes.oneOfType([String, Number]),
-  gapPosition: IxPropTypes.oneOf<ProgressGapPositionType>(['top', 'bottom', 'left', 'right']),
-  width: IxPropTypes.oneOfType([String, Number]).def(132),
-  size: IxPropTypes.oneOf<ProgressSize>(['sm', 'md', 'lg']),
-  icons: IxPropTypes.object<ProgressIcons>(),
+  type: {
+    type: String as PropType<ProgressType>,
+    default: 'line',
+  },
+  format: Function as PropType<ProgressFormat>,
+  percent: {
+    type: [String, Number],
+    default: 0,
+  },
+  status: String as PropType<ProgressStatus>,
+  hideInfo: {
+    type: Boolean,
+    default: false,
+  },
+  success: Object as PropType<ProgressSuccess>,
+  trailColor: String,
+  strokeColor: [String, Object] as PropType<string | ProgressGradient>,
+  strokeLinecap: String as PropType<ProgressStrokeLinecap>,
+  strokeWidth: [String, Number],
+  gapDegree: [String, Number],
+  gapPosition: String as PropType<ProgressGapPositionType>,
+  width: {
+    type: [String, Number],
+    default: 132,
+  },
+  size: String as PropType<ProgressSize>,
+  icons: Object as PropType<ProgressIcons>,
 }
 
 export type ProgressProps = ExtractInnerPropTypes<typeof progressProps>

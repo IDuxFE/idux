@@ -5,18 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type TagShape = 'round' | 'rect'
 
 export const tagProps = {
-  color: IxPropTypes.string,
-  icon: IxPropTypes.string,
-  number: IxPropTypes.number,
-  shape: IxPropTypes.oneOf<TagShape>(['round', 'rect']),
+  color: String,
+  icon: String,
+  number: Number,
+  shape: String as PropType<TagShape>,
 }
 
 export type TagProps = ExtractInnerPropTypes<typeof tagProps>
@@ -30,17 +28,32 @@ export interface TagData<K = VKey> extends Omit<TagProps, 'shape'> {
 }
 
 export const tagGroupProps = {
-  activeKeys: IxPropTypes.array<VKey>().def(() => []),
-  clickable: IxPropTypes.bool.def(false),
-  closable: IxPropTypes.bool.def(false),
-  closeIcon: IxPropTypes.string.def('close'),
-  dataSource: IxPropTypes.array<TagData>(),
-  gap: IxPropTypes.oneOfType([Number, String]),
-  wrap: IxPropTypes.bool,
-  shape: IxPropTypes.oneOf<TagShape>(['rect', 'round']),
-  'onUpdate:activeKeys': IxPropTypes.emit<<K = VKey>(activeKeys: K[]) => void>(),
-  onClick: IxPropTypes.emit<<K = VKey>(key: K, evt: MouseEvent) => void>(),
-  onClose: IxPropTypes.emit<<K = VKey>(key: K, evt: MouseEvent) => void>(),
+  activeKeys: {
+    type: Array as PropType<VKey[]>,
+    default: (): VKey[] => [],
+  },
+  clickable: {
+    type: Boolean,
+    default: false,
+  },
+  closable: {
+    type: Boolean,
+    default: false,
+  },
+  closeIcon: {
+    type: String,
+    default: 'close',
+  },
+  dataSource: Array as PropType<TagData[]>,
+  gap: [Number, String],
+  wrap: {
+    type: Boolean,
+    default: undefined,
+  },
+  shape: String as PropType<TagShape>,
+  'onUpdate:activeKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(activeKeys: K[]) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
+  onClose: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
 }
 
 export type TagGroupProps = ExtractInnerPropTypes<typeof tagGroupProps>

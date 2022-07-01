@@ -5,10 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export type PaginationSize = 'sm' | 'md'
 export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
@@ -21,22 +19,43 @@ export interface PaginationItemRenderOptions {
 }
 
 export const paginationProps = {
-  pageIndex: IxPropTypes.number,
-  pageSize: IxPropTypes.number,
-  disabled: IxPropTypes.bool.def(false),
-  pageSizes: IxPropTypes.arrayOf(Number),
-  showQuickJumper: IxPropTypes.bool,
-  showSizeChanger: IxPropTypes.bool,
-  showTitle: IxPropTypes.bool,
-  showTotal: IxPropTypes.bool,
-  simple: IxPropTypes.bool,
-  size: IxPropTypes.oneOf<PaginationSize>(['sm', 'md']),
-  total: IxPropTypes.number.def(0),
+  pageIndex: Number,
+  pageSize: Number,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  pageSizes: Array as PropType<number[]>,
+  showQuickJumper: {
+    type: Boolean,
+    default: undefined,
+  },
+  showSizeChanger: {
+    type: Boolean,
+    default: undefined,
+  },
+  showTitle: {
+    type: Boolean,
+    default: undefined,
+  },
+  showTotal: {
+    type: Boolean,
+    default: undefined,
+  },
+  simple: {
+    type: Boolean,
+    default: undefined,
+  },
+  size: String as PropType<PaginationSize>,
+  total: {
+    type: Number,
+    default: 0,
+  },
 
   // events
-  'onUpdate:pageIndex': IxPropTypes.emit<(pageIndex: number) => void>(),
-  'onUpdate:pageSize': IxPropTypes.emit<(pageSize: number) => void>(),
-  onChange: IxPropTypes.emit<(pageIndex: number, pageSize: number) => void>(),
+  'onUpdate:pageIndex': [Function, Array] as PropType<MaybeArray<(pageIndex: number) => void>>,
+  'onUpdate:pageSize': [Function, Array] as PropType<MaybeArray<(pageSize: number) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(pageIndex: number, pageSize: number) => void>>,
 }
 
 export type PaginationProps = ExtractInnerPropTypes<typeof paginationProps>
@@ -47,9 +66,15 @@ export type PaginationComponent = DefineComponent<
 export type PaginationInstance = InstanceType<DefineComponent<PaginationProps>>
 
 export const paginationItemProps = {
-  disabled: IxPropTypes.bool,
-  index: IxPropTypes.number,
-  type: IxPropTypes.oneOf<PaginationItemType>(['page', 'prev', 'next', 'prev5', 'next5']).isRequired,
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  index: Number,
+  type: {
+    type: String as PropType<PaginationItemType>,
+    required: true,
+  },
 }
 
 export type PaginationItemProps = ExtractInnerPropTypes<typeof paginationItemProps>

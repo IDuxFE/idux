@@ -7,13 +7,11 @@
 
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
 export type ModalButtonProps = ɵFooterButtonProps
@@ -30,43 +28,78 @@ export interface ModalRef<K = VKey> extends ModalBindings {
 }
 
 export const modalProps = {
-  visible: IxPropTypes.bool,
-  cancelButton: IxPropTypes.object<ButtonProps>(),
-  cancelText: IxPropTypes.string,
-  centered: IxPropTypes.bool,
-  closable: IxPropTypes.bool,
-  closeIcon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  closeOnEsc: IxPropTypes.bool,
-  destroyOnHide: IxPropTypes.bool.def(false),
-  footer: IxPropTypes.oneOfType([Boolean, IxPropTypes.array<ModalButtonProps>(), IxPropTypes.vNode]).def(true),
-  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
-  icon: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  mask: IxPropTypes.bool,
-  maskClosable: IxPropTypes.bool,
-  animatable: IxPropTypes.bool.def(true),
-  offset: IxPropTypes.oneOfType([String, Number]).def(128),
-  okButton: IxPropTypes.object<ButtonProps>(),
-  okText: IxPropTypes.string,
-  scrollStrategy: IxPropTypes.object<ScrollStrategy>(),
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  cancelButton: Object as PropType<ButtonProps>,
+  cancelText: String,
+  centered: {
+    type: Boolean,
+    default: undefined,
+  },
+  closable: {
+    type: Boolean,
+    default: undefined,
+  },
+  closeIcon: [String, Object] as PropType<string | VNode>,
+  closeOnEsc: {
+    type: Boolean,
+    default: undefined,
+  },
+  destroyOnHide: {
+    type: Boolean,
+    default: false,
+  },
+  footer: {
+    type: [Boolean, Array, Object] as PropType<boolean | ModalButtonProps[] | VNode>,
+    default: true,
+  },
+  header: [String, Object] as PropType<string | HeaderProps>,
+  icon: [String, Object] as PropType<string | VNode>,
+  mask: {
+    type: Boolean,
+    default: undefined,
+  },
+  maskClosable: {
+    type: Boolean,
+    default: undefined,
+  },
+  animatable: {
+    type: Boolean,
+    default: true,
+  },
+  offset: {
+    type: [String, Number],
+    default: 128,
+  },
+  okButton: Object as PropType<ButtonProps>,
+  okText: String,
+  scrollStrategy: Object as PropType<ScrollStrategy>,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  title: IxPropTypes.oneOfType([String, IxPropTypes.vNode]),
-  type: IxPropTypes.oneOf<ModalType>(['default', 'confirm', 'info', 'success', 'warning', 'error']).def('default'),
-  width: IxPropTypes.oneOfType([String, Number]),
-  wrapperClassName: IxPropTypes.string,
-  zIndex: IxPropTypes.number,
+  title: [String, Object] as PropType<string | VNode>,
+  type: {
+    type: String as PropType<ModalType>,
+    default: 'default',
+  },
+  width: [String, Number],
+  wrapperClassName: String,
+  zIndex: Number,
   draggable: { type: Boolean, default: false },
 
   // events
-  'onUpdate:visible': IxPropTypes.emit<(visible: boolean) => void>(),
-  onAfterOpen: IxPropTypes.emit<() => void>(),
-  onAfterClose: IxPropTypes.emit<() => void>(),
-  onBeforeClose: IxPropTypes.emit<(evt?: Event | unknown) => void | boolean | Promise<boolean>>(),
-  onClose: IxPropTypes.emit<(evt?: Event | unknown) => void>(),
-  onCancel: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
-  onOk: IxPropTypes.emit<(evt?: Event | unknown) => unknown>(),
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onAfterOpen: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onAfterClose: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onBeforeClose: [Function, Array] as PropType<
+    MaybeArray<(evt?: Event | unknown) => void | boolean | Promise<boolean>>
+  >,
+  onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => void>>,
+  onCancel: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
+  onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
 }
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>

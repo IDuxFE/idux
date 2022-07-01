@@ -5,12 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes, VNode } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export type CardSize = 'sm' | 'md' | 'lg'
 export interface CardCover {
@@ -27,21 +25,42 @@ export interface CardButtonProps extends ButtonProps {
 }
 
 export const cardProps = {
-  borderless: IxPropTypes.bool,
-  cover: IxPropTypes.oneOfType([String, IxPropTypes.object<CardCover>()]),
-  header: IxPropTypes.oneOfType([String, IxPropTypes.object<HeaderProps>()]),
-  hoverable: IxPropTypes.bool,
-  shadow: IxPropTypes.bool.def(true),
-  loading: IxPropTypes.bool.def(false),
-  size: IxPropTypes.oneOf<CardSize>(['sm', 'md', 'lg']),
-  footer: IxPropTypes.array<CardButtonProps | VNode>(),
-  disabled: IxPropTypes.bool.def(false),
-  selected: IxPropTypes.bool.def(false),
-  selectable: IxPropTypes.bool.def(false),
+  borderless: {
+    type: Boolean,
+    default: undefined,
+  },
+  cover: [String, Object] as PropType<string | CardCover>,
+  header: [String, Object] as PropType<string | HeaderProps>,
+  hoverable: {
+    type: Boolean,
+    default: undefined,
+  },
+  shadow: {
+    type: Boolean,
+    default: true,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  size: String as PropType<CardSize>,
+  footer: Array as PropType<(CardButtonProps | VNode)[]>,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  selected: {
+    type: Boolean,
+    default: false,
+  },
+  selectable: {
+    type: Boolean,
+    default: false,
+  },
 
   // event
-  'onUpdate:selected': IxPropTypes.emit<(selected: boolean) => void>(),
-  onSelectedChange: IxPropTypes.emit<(selected: boolean) => void>(),
+  'onUpdate:selected': [Function, Array] as PropType<MaybeArray<(selected: boolean) => void>>,
+  onSelectedChange: [Function, Array] as PropType<MaybeArray<(selected: boolean) => void>>,
 }
 
 export type CardProps = ExtractInnerPropTypes<typeof cardProps>
@@ -50,7 +69,10 @@ export type CardComponent = DefineComponent<Omit<HTMLAttributes, keyof CardPubli
 export type CardInstance = InstanceType<DefineComponent<CardProps>>
 
 export const cardGridProps = {
-  hoverable: IxPropTypes.bool,
+  hoverable: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export type CardGridProps = ExtractInnerPropTypes<typeof cardGridProps>

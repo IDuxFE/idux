@@ -6,9 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
-
-import { IxPropTypes, vKeyPropDef } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SafeAny = any
@@ -19,18 +17,40 @@ export interface ItemData {
 }
 
 export const overflowItemProps = {
-  prefixCls: IxPropTypes.string.isRequired,
-  display: IxPropTypes.bool.def(true),
-  itemKey: vKeyPropDef.isRequired,
-  data: IxPropTypes.object<ItemData>(),
-  onSizeChange: IxPropTypes.func<(itemEl: Element, key?: VKey) => void>(),
+  prefixCls: {
+    type: String,
+    required: true,
+  },
+  display: {
+    type: Boolean,
+    default: true,
+  },
+  itemKey: {
+    type: [Number, String, Symbol] as PropType<VKey>,
+    required: true,
+  },
+  data: Object as PropType<ItemData>,
+  onSizeChange: Function as PropType<(itemEl: Element, key?: VKey) => void>,
 }
 
 export const overflowProps = {
-  maxLabel: IxPropTypes.oneOfType([IxPropTypes.number, IxPropTypes.oneOf(['responsive'])]).def(Number.MAX_SAFE_INTEGER),
-  getKey: IxPropTypes.func<(item: SafeAny) => VKey>().isRequired,
-  prefixCls: IxPropTypes.string.isRequired,
-  dataSource: IxPropTypes.array().def(() => []),
+  maxLabel: {
+    type: [Number, String] as PropType<number | 'responsive'>,
+    default: Number.MAX_SAFE_INTEGER,
+  },
+  getKey: {
+    type: Function as PropType<(item: SafeAny) => VKey>,
+    required: true,
+  },
+  prefixCls: {
+    type: String,
+    required: true,
+  },
+  dataSource: {
+    type: Array,
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    default: () => [],
+  },
 }
 
 export type OverflowProps = ExtractInnerPropTypes<typeof overflowProps>

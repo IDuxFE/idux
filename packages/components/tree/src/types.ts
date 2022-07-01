@@ -9,77 +9,109 @@
 
 import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { IxPropTypes } from '@idux/cdk/utils'
 
 export type CheckStrategy = 'all' | 'parent' | 'child'
 
 export const treeProps = {
-  checkedKeys: IxPropTypes.array<VKey>(),
-  expandedKeys: IxPropTypes.array<VKey>(),
-  indeterminateKeys: IxPropTypes.array<VKey>(),
-  loadedKeys: IxPropTypes.array<VKey>(),
-  selectedKeys: IxPropTypes.array<VKey>(),
+  checkedKeys: Array as PropType<VKey[]>,
+  expandedKeys: Array as PropType<VKey[]>,
+  indeterminateKeys: Array as PropType<VKey[]>,
+  loadedKeys: Array as PropType<VKey[]>,
+  selectedKeys: Array as PropType<VKey[]>,
 
-  blocked: IxPropTypes.bool,
-  cascade: IxPropTypes.bool.def(false),
-  checkable: IxPropTypes.bool.def(false),
-  childrenKey: IxPropTypes.string,
-  checkStrategy: IxPropTypes.oneOf<CheckStrategy>(['all', 'parent', 'child']).def('all'),
+  blocked: {
+    type: Boolean,
+    default: undefined,
+  },
+  cascade: {
+    type: Boolean,
+    default: false,
+  },
+  checkable: {
+    type: Boolean,
+    default: false,
+  },
+  childrenKey: String,
+  checkStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all',
+  },
   customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
-  dataSource: IxPropTypes.array<TreeNode>().def(() => []),
-  disabled: IxPropTypes.func<(node: TreeNode) => boolean | TreeNodeDisabled>(),
-  draggable: IxPropTypes.bool.def(false),
+  dataSource: {
+    type: Array as PropType<TreeNode[]>,
+    default: (): TreeNode[] => [],
+  },
+  disabled: Function as PropType<(node: TreeNode) => boolean | TreeNodeDisabled>,
+  draggable: {
+    type: Boolean,
+    default: false,
+  },
   draggableIcon: { type: String, default: undefined },
-  droppable: IxPropTypes.func<TreeDroppable>(),
-  empty: IxPropTypes.oneOfType([String, IxPropTypes.object<EmptyProps>()]),
+  droppable: Function as PropType<TreeDroppable>,
+  empty: [String, Object] as PropType<string | EmptyProps>,
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode) => VKey)>, default: undefined },
-  height: IxPropTypes.number,
-  labelKey: IxPropTypes.string,
-  leafLineIcon: IxPropTypes.string,
-  loadChildren: IxPropTypes.func<(node: TreeNode) => Promise<TreeNode[]>>(),
+  height: Number,
+  labelKey: String,
+  leafLineIcon: String,
+  loadChildren: Function as PropType<(node: TreeNode) => Promise<TreeNode[]>>,
   /**
    * @deprecated please use `getKey` instead'
    */
-  nodeKey: IxPropTypes.oneOfType([String, IxPropTypes.func<(node: TreeNode) => VKey>()]),
-  searchFn: IxPropTypes.func<(node: TreeNode, searchValue?: string) => boolean>(),
-  searchValue: IxPropTypes.string,
-  selectable: IxPropTypes.oneOfType([Boolean, IxPropTypes.oneOf(['multiple'])]).def(true),
-  showLine: IxPropTypes.bool,
-  virtual: IxPropTypes.bool.def(false),
+  nodeKey: [String, Function] as PropType<string | ((node: TreeNode) => VKey)>,
+  searchFn: Function as PropType<(node: TreeNode, searchValue?: string) => boolean>,
+  searchValue: String,
+  selectable: {
+    type: [Boolean, String] as PropType<boolean | 'multiple'>,
+    default: true,
+  },
+  showLine: {
+    type: Boolean,
+    default: undefined,
+  },
+  virtual: {
+    type: Boolean,
+    default: false,
+  },
 
   // events
-  'onUpdate:checkedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
-  'onUpdate:expandedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
-  'onUpdate:loadedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
-  'onUpdate:selectedKeys': IxPropTypes.emit<<K = VKey>(keys: K[]) => void>(),
-  onCheck: IxPropTypes.emit<<K = VKey>(checked: boolean, node: TreeNode<K>) => void>(),
-  onCheckedChange: IxPropTypes.emit<<K = VKey>(checkedKeys: K[], checkedNodes: TreeNode<K>[]) => void>(),
-  onDragstart: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onDragend: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onDragenter: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onDragleave: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onDragover: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onDrop: IxPropTypes.emit<<K = VKey>(options: TreeDragDropOptions<K>) => void>(),
-  onExpand: IxPropTypes.emit<<K = VKey>(expanded: boolean, node: TreeNode<K>) => void>(),
-  onExpandedChange: IxPropTypes.emit<<K = VKey>(expendedKeys: K[], expendedNodes: TreeNode<K>[]) => void>(),
-  onLoaded: IxPropTypes.emit<<K = VKey>(loadedKeys: K[], node: TreeNode<K>) => void>(),
-  onSelect: IxPropTypes.emit<<K = VKey>(selected: boolean, node: TreeNode<K>) => void>(),
-  onSelectedChange: IxPropTypes.emit<<K = VKey>(selectedKeys: K[], selectedNodes: TreeNode<K>[]) => void>(),
-  onFocus: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onBlur: IxPropTypes.emit<(evt: FocusEvent) => void>(),
-  onKeydown: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
-  onKeyup: IxPropTypes.emit<(evt: KeyboardEvent) => void>(),
-  onNodeClick: IxPropTypes.emit<<K = VKey>(evt: Event, node: TreeNode<K>) => void>(),
-  onNodeContextmenu: IxPropTypes.emit<<K = VKey>(evt: Event, node: TreeNode<K>) => void>(),
-  onScroll: IxPropTypes.emit<(evt: Event) => void>(),
-  onScrolledChange:
-    IxPropTypes.emit<<K = VKey>(startIndex: number, endIndex: number, visibleNodes: TreeNode<K>[]) => void>(),
-  onScrolledBottom: IxPropTypes.emit<() => void>(),
+  'onUpdate:checkedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  onCheck: [Function, Array] as PropType<MaybeArray<<K = VKey>(checked: boolean, node: TreeNode<K>) => void>>,
+  onCheckedChange: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(checkedKeys: K[], checkedNodes: TreeNode<K>[]) => void>
+  >,
+  onDragstart: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onDragend: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onDragenter: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onDragleave: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onDragover: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<<K = VKey>(expanded: boolean, node: TreeNode<K>) => void>>,
+  onExpandedChange: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(expendedKeys: K[], expendedNodes: TreeNode<K>[]) => void>
+  >,
+  onLoaded: [Function, Array] as PropType<MaybeArray<<K = VKey>(loadedKeys: K[], node: TreeNode<K>) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<<K = VKey>(selected: boolean, node: TreeNode<K>) => void>>,
+  onSelectedChange: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(selectedKeys: K[], selectedNodes: TreeNode<K>[]) => void>
+  >,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onKeydown: [Function, Array] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
+  onKeyup: [Function, Array] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
+  onNodeClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(evt: Event, node: TreeNode<K>) => void>>,
+  onNodeContextmenu: [Function, Array] as PropType<MaybeArray<<K = VKey>(evt: Event, node: TreeNode<K>) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleNodes: TreeNode<K>[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 
 export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
@@ -155,46 +187,118 @@ export interface TreeDragDropOptions<K = VKey> {
 
 // private
 export const motionTreeNodeProps = {
-  expanded: IxPropTypes.bool,
-  expandedNodes: IxPropTypes.array<MergedNode>(),
-  node: IxPropTypes.object<MergedNode>(),
-  prefixCls: IxPropTypes.string.isRequired,
+  expanded: {
+    type: Boolean,
+    default: undefined,
+  },
+  expandedNodes: Array as PropType<MergedNode[]>,
+  node: Object as PropType<MergedNode>,
+  prefixCls: {
+    type: String,
+    required: true,
+  },
 }
 
 export const treeNodeProps = {
-  node: IxPropTypes.object<MergedNode>().isRequired,
-  isLeaf: IxPropTypes.bool.isRequired,
-  isFirst: IxPropTypes.bool.isRequired,
-  isLast: IxPropTypes.bool.isRequired,
-  label: IxPropTypes.string,
-  level: IxPropTypes.number.isRequired,
-  rawNode: IxPropTypes.object<TreeNode>().isRequired,
-  expanded: IxPropTypes.bool.isRequired,
-  children: IxPropTypes.array<MergedNode>(),
-  parentKey: IxPropTypes.oneOfType([String, Number, Symbol]),
-  checkDisabled: IxPropTypes.bool,
-  dragDisabled: IxPropTypes.bool,
-  dropDisabled: IxPropTypes.bool,
-  selectDisabled: IxPropTypes.bool,
+  node: {
+    type: Object as PropType<MergedNode>,
+    required: true,
+  },
+  isLeaf: {
+    type: Boolean,
+    required: true,
+  },
+  isFirst: {
+    type: Boolean,
+    required: true,
+  },
+  isLast: {
+    type: Boolean,
+    required: true,
+  },
+  label: String,
+  level: {
+    type: Number,
+    required: true,
+  },
+  rawNode: {
+    type: Object as PropType<TreeNode>,
+    required: true,
+  },
+  expanded: {
+    type: Boolean,
+    required: true,
+  },
+  children: Array as PropType<MergedNode[]>,
+  parentKey: [String, Number, Symbol] as PropType<VKey>,
+  checkDisabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  dragDisabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  dropDisabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  selectDisabled: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export const treeNodeCheckboxProps = {
-  node: IxPropTypes.object<MergedNode>().isRequired,
-  checkDisabled: IxPropTypes.bool,
+  node: {
+    type: Object as PropType<MergedNode>,
+    required: true,
+  },
+  checkDisabled: {
+    type: Boolean,
+    default: undefined,
+  },
 }
 
 export const treeNodeExpandProps = {
-  expanded: IxPropTypes.bool.isRequired,
-  hasTopLine: IxPropTypes.bool,
-  isLeaf: IxPropTypes.bool,
-  nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  rawNode: IxPropTypes.object<TreeNode>().isRequired,
+  expanded: {
+    type: Boolean,
+    required: true,
+  },
+  hasTopLine: {
+    type: Boolean,
+    default: undefined,
+  },
+  isLeaf: {
+    type: Boolean,
+    default: undefined,
+  },
+  nodeKey: {
+    type: [String, Number, Symbol] as PropType<VKey>,
+    required: true,
+  },
+  rawNode: {
+    type: Object as PropType<TreeNode>,
+    required: true,
+  },
 }
 
 export const treeNodeContentProps = {
-  disabled: IxPropTypes.bool,
-  nodeKey: IxPropTypes.oneOfType([String, Number, Symbol]).isRequired,
-  label: IxPropTypes.string,
-  rawNode: IxPropTypes.object<TreeNode>().isRequired,
-  selected: IxPropTypes.bool,
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  nodeKey: {
+    type: [String, Number, Symbol] as PropType<VKey>,
+    required: true,
+  },
+  label: String,
+  rawNode: {
+    type: Object as PropType<TreeNode>,
+    required: true,
+  },
+  selected: {
+    type: Boolean,
+    default: undefined,
+  },
 }
