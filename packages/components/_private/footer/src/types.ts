@@ -29,7 +29,7 @@ export const footerProps = {
   okButton: Object as PropType<ButtonProps>,
   okLoading: Boolean,
   okText: String,
-}
+} as const
 
 export type FooterProps = ExtractInnerPropTypes<typeof footerProps>
 export type FooterPublicProps = ExtractPublicPropTypes<typeof footerProps>

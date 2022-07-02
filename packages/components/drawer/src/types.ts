@@ -48,7 +48,7 @@ export const drawerProps = {
   },
   footer: [Array, Object] as PropType<DrawerButtonProps[] | VNode>,
   header: [String, Object] as PropType<string | HeaderProps>,
-  height: [String, Number],
+  height: [String, Number] as PropType<string | number>,
   mask: {
     type: Boolean,
     default: undefined,
@@ -58,7 +58,7 @@ export const drawerProps = {
     default: undefined,
   },
   offset: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: 0,
   },
   placement: {
@@ -70,7 +70,7 @@ export const drawerProps = {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-  width: [String, Number],
+  width: [String, Number] as PropType<string | number>,
   wrapperClassName: String,
   zIndex: Number,
 
@@ -82,7 +82,7 @@ export const drawerProps = {
     MaybeArray<(evt?: Event | unknown) => void | boolean | Promise<boolean>>
   >,
   onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => void>>,
-}
+} as const
 
 export type DrawerProps = ExtractInnerPropTypes<typeof drawerProps>
 export type DrawerPublicProps = ExtractPublicPropTypes<typeof drawerProps>

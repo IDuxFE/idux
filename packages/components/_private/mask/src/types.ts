@@ -22,7 +22,7 @@ export const maskProps = {
     default: true,
   },
   zIndex: Number,
-}
+} as const
 
 export type MaskProps = ExtractInnerPropTypes<typeof maskProps>
 export type MaskPublicProps = ExtractPublicPropTypes<typeof maskProps>

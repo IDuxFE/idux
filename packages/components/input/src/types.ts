@@ -33,7 +33,7 @@ export const commonProps = {
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export type CommonProps = ExtractInnerPropTypes<typeof commonProps>
 
@@ -44,7 +44,7 @@ export const inputProps = {
   borderless: { type: Boolean, default: undefined },
   prefix: { type: String, default: undefined },
   suffix: { type: String, default: undefined },
-}
+} as const
 
 export type InputProps = ExtractInnerPropTypes<typeof inputProps>
 export type InputPublicProps = ExtractPublicPropTypes<typeof inputProps>

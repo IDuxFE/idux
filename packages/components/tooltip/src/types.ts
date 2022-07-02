@@ -36,7 +36,7 @@ export const tooltipProps = {
 
   // events
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
-}
+} as const
 
 export type TooltipProps = ExtractInnerPropTypes<typeof tooltipProps>
 export type TooltipPublicProps = ExtractPublicPropTypes<typeof tooltipProps>

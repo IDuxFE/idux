@@ -20,7 +20,7 @@ export const popoverProps = {
   closeIcon: [String, Object] as PropType<string | VNode>,
   header: [String, Object] as PropType<string | HeaderProps>,
   content: String,
-}
+} as const
 
 export type PopoverProps = ExtractInnerPropTypes<typeof popoverProps>
 export type PopoverPublicProps = ExtractPublicPropTypes<typeof popoverProps>

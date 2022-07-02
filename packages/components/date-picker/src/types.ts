@@ -88,7 +88,7 @@ const datePickerCommonProps = {
   onClear: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export type DatePickerCommonProps = ExtractInnerPropTypes<typeof datePickerCommonProps>
 export interface DatePickerCommonBindings {
@@ -106,7 +106,7 @@ export const datePickerProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-}
+} as const
 
 export type DatePickerProps = ExtractInnerPropTypes<typeof datePickerProps>
 export type DatePickerPublicProps = ExtractPublicPropTypes<typeof datePickerProps>
@@ -129,7 +129,7 @@ export const dateRangePickerProps = {
     MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
   >,
   onInput: [Function, Array] as PropType<MaybeArray<(isFrom: boolean, evt: Event) => void>>,
-}
+} as const
 
 export type DateRangePickerProps = ExtractInnerPropTypes<typeof dateRangePickerProps>
 export type DateRangePickerPublicProps = ExtractPublicPropTypes<typeof dateRangePickerProps>

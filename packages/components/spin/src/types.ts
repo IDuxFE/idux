@@ -27,7 +27,7 @@ export const spinProps = {
   tip: String,
   tipAlign: String as PropType<'horizontal' | 'vertical'>,
   size: String as PropType<'lg' | 'md' | 'sm'>,
-}
+} as const
 
 export type SpinProps = ExtractInnerPropTypes<typeof spinProps>
 export type SpinPublicProps = ExtractPublicPropTypes<typeof spinProps>

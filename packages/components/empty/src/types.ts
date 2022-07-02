@@ -12,7 +12,7 @@ export const emptyProps = {
   description: String,
   icon: [String, Object] as PropType<string | VNode>,
   image: [String, Object] as PropType<string | VNode>,
-}
+} as const
 
 export type EmptyProps = ExtractInnerPropTypes<typeof emptyProps>
 export type EmptyPublicProps = ExtractPublicPropTypes<typeof emptyProps>

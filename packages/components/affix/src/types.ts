@@ -18,7 +18,7 @@ export const affixProps = {
   },
   target: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
   onChange: Function as PropType<(value: boolean) => void>,
-}
+} as const
 
 export interface AffixBindings {
   update: () => void

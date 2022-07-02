@@ -28,7 +28,7 @@ export const commentProps = {
     type: String,
     default: undefined,
   },
-}
+} as const
 
 export type CommentProps = ExtractInnerPropTypes<typeof commentProps>
 export type CommentPublicProps = ExtractPublicPropTypes<typeof commentProps>

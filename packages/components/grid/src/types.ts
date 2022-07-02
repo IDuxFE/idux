@@ -22,7 +22,7 @@ export const rowProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const
 
 export type RowProps = ExtractInnerPropTypes<typeof rowProps>
 export type RowPublicProps = ExtractPublicPropTypes<typeof rowProps>
@@ -37,7 +37,7 @@ export interface ColBreakpointConfig {
   pull?: number | string
 }
 
-const singleProp = [Number, String]
+const singleProp = [Number, String] as PropType<number | string>
 
 const breakpointConfig = [Number, String, Object] as PropType<number | string | ColBreakpointConfig>
 
@@ -53,7 +53,7 @@ export const colProps = {
   md: breakpointConfig,
   lg: breakpointConfig,
   xl: breakpointConfig,
-}
+} as const
 
 export type ColProps = ExtractInnerPropTypes<typeof colProps>
 export type ColPublicProps = ExtractPublicPropTypes<typeof colProps>

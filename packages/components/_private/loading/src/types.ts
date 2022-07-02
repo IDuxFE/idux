@@ -21,7 +21,7 @@ export const loadingProps = {
     type: Number,
     default: 2,
   },
-}
+} as const
 
 export type LoadingProps = ExtractInnerPropTypes<typeof loadingProps>
 export type LoadingPublicProps = ExtractPublicPropTypes<typeof loadingProps>

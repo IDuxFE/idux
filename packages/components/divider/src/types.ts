@@ -27,7 +27,7 @@ export const dividerProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const
 
 export type DividerProps = ExtractInnerPropTypes<typeof dividerProps>
 export type DividerPublicProps = ExtractPublicPropTypes<typeof dividerProps>

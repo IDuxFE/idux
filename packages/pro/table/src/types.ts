@@ -88,7 +88,7 @@ export type ProTableComponent = DefineComponent<
 >
 export type ProTableInstance = InstanceType<DefineComponent<ProTableProps, ProTableBindings>>
 
-export const proTableLayoutToolProps = {}
+export const proTableLayoutToolProps = {} as const
 
 export type ProTableLayoutToolProps = ExtractInnerPropTypes<typeof proTableLayoutToolProps>
 export type ProTableLayoutToolPublicProps = ExtractPublicPropTypes<typeof proTableLayoutToolProps>

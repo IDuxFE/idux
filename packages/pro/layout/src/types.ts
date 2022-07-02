@@ -74,7 +74,7 @@ export const proLayoutSiderTriggerProps = {
     type: [String, Array] as PropType<string | Array<string | VNode>>,
     default: undefined,
   },
-}
+} as const
 
 export type ProLayoutSiderTriggerProps = ExtractInnerPropTypes<typeof proLayoutSiderTriggerProps>
 export type ProLayoutSiderTriggerPublicProps = ExtractPublicPropTypes<typeof proLayoutSiderTriggerProps>

@@ -25,7 +25,7 @@ export const anchorProps = {
   // events
   onChange: [Function, Array] as PropType<MaybeArray<(activeLink: string) => void>>,
   onClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent, link: AnchorLinkProps) => void>>,
-}
+} as const
 
 export type AnchorProps = ExtractInnerPropTypes<typeof anchorProps>
 export type AnchorPublicProps = ExtractPublicPropTypes<typeof anchorProps>
@@ -38,7 +38,7 @@ export const linkProps = {
     required: true,
   },
   title: String,
-}
+} as const
 
 export type AnchorLinkProps = ExtractInnerPropTypes<typeof linkProps>
 export type AnchorLinkPublicProps = ExtractPublicPropTypes<typeof linkProps>

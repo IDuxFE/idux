@@ -112,7 +112,7 @@ export const treeProps = {
     MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleNodes: TreeNode<K>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
 export type TreePublicProps = Omit<ExtractPublicPropTypes<typeof treeProps>, 'nodeKey'>
@@ -197,7 +197,7 @@ export const motionTreeNodeProps = {
     type: String,
     required: true,
   },
-}
+} as const
 
 export const treeNodeProps = {
   node: {
@@ -247,7 +247,7 @@ export const treeNodeProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const
 
 export const treeNodeCheckboxProps = {
   node: {
@@ -258,7 +258,7 @@ export const treeNodeCheckboxProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const
 
 export const treeNodeExpandProps = {
   expanded: {
@@ -281,7 +281,7 @@ export const treeNodeExpandProps = {
     type: Object as PropType<TreeNode>,
     required: true,
   },
-}
+} as const
 
 export const treeNodeContentProps = {
   disabled: {
@@ -301,4 +301,4 @@ export const treeNodeContentProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const

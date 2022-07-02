@@ -70,7 +70,7 @@ export const modalProps = {
     default: true,
   },
   offset: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: 128,
   },
   okButton: Object as PropType<ButtonProps>,
@@ -85,7 +85,7 @@ export const modalProps = {
     type: String as PropType<ModalType>,
     default: 'default',
   },
-  width: [String, Number],
+  width: [String, Number] as PropType<string | number>,
   wrapperClassName: String,
   zIndex: Number,
   draggable: { type: Boolean, default: false },
@@ -100,7 +100,7 @@ export const modalProps = {
   onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => void>>,
   onCancel: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
   onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
-}
+} as const
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>
 export type ModalPublicProps = ExtractPublicPropTypes<typeof modalProps>

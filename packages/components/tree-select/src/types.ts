@@ -162,5 +162,6 @@ export interface TreeSelectNodeDisabled {
 export const treeSelectorProps = {
   clearable: Boolean,
   suffix: String,
-}
+} as const
+
 export type TreeSelectorProps = ExtractInnerPropTypes<typeof treeSelectorProps>

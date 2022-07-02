@@ -10,7 +10,7 @@ import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const rateProps = {
-  value: [Number, String],
+  value: [Number, String] as PropType<number | string>,
   allowHalf: {
     type: Boolean,
     default: undefined,
@@ -19,7 +19,7 @@ export const rateProps = {
     type: Boolean,
     default: undefined,
   },
-  count: [Number, String],
+  count: [Number, String] as PropType<number | string>,
   disabled: {
     type: Boolean,
     default: false,
@@ -37,7 +37,7 @@ export const rateProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onKeyDown: [Function, Array] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
-}
+} as const
 
 export type RateProps = ExtractInnerPropTypes<typeof rateProps>
 export type RatePublicProps = ExtractPublicPropTypes<typeof rateProps>
@@ -85,4 +85,4 @@ export const rateItemProps = {
     type: Function as PropType<(evt: MouseEvent, element: HTMLElement, index: number) => void>,
     required: true,
   },
-}
+} as const

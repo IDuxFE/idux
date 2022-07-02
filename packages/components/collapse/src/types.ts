@@ -27,7 +27,7 @@ export const collapseProps = {
 
   // events
   'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(expandedKeys: K[]) => void>>,
-}
+} as const
 
 export type CollapseProps = ExtractInnerPropTypes<typeof collapseProps>
 export type CollapsePublicProps = ExtractPublicPropTypes<typeof collapseProps>
@@ -40,7 +40,7 @@ export const collapsePanelProps = {
     default: false,
   },
   header: [String, Object] as PropType<string | HeaderProps>,
-}
+} as const
 
 export type CollapsePanelProps = ExtractInnerPropTypes<typeof collapsePanelProps>
 export type CollapsePanelPublicProps = ExtractPublicPropTypes<typeof collapsePanelProps>

@@ -17,10 +17,10 @@ export const statisticProps = {
   suffix: String,
   title: String,
   value: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: '',
   },
-}
+} as const
 
 export type StatisticProps = ExtractInnerPropTypes<typeof statisticProps>
 export type StatisticPublicProps = ExtractPublicPropTypes<typeof statisticProps>

@@ -29,7 +29,7 @@ export default defineComponent({
     const accessor = useFormAccessor<boolean>('checked')
 
     const isChecked = computed(() => accessor.valueRef.value)
-    const isDisabled = computed(() => props.disabled ?? accessor.disabled.value)
+    const isDisabled = computed(() => accessor.disabled.value)
 
     const handleClick = () => {
       if (isDisabled.value || props.loading) {

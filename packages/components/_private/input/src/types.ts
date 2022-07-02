@@ -37,7 +37,7 @@ export const inputProps = {
   size: String as PropType<FormSize>,
   suffix: String,
   onClear: Function as PropType<(evt: MouseEvent) => void>,
-}
+} as const
 
 export type InputProps = ExtractInnerPropTypes<typeof inputProps>
 export type InputPublicProps = ExtractPublicPropTypes<typeof inputProps>

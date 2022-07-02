@@ -58,7 +58,7 @@ export const overlayProps = {
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   'onUpdate:placement': [Function, Array] as PropType<MaybeArray<(placement: PopperPlacement) => void>>,
   onAfterLeave: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export interface OverlayBindings {
   updatePopper: (options?: Partial<PopperOptions>) => void

@@ -48,7 +48,7 @@ export const baseTimePanelProps = {
     type: Number,
     default: 1,
   },
-}
+} as const
 
 export const timePanelProps = {
   ...baseTimePanelProps,
@@ -80,7 +80,7 @@ export const timePanelProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
   'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date) => void>>,
-}
+} as const
 
 export type TimePanelProps = ExtractInnerPropTypes<typeof timePanelProps>
 export type TimePanelPublicProps = ExtractPublicPropTypes<typeof timePanelProps>
@@ -96,9 +96,9 @@ export interface TimePanelCell {
 }
 
 export const timePanelColumnProps = {
-  selectedValue: [Number, String],
+  selectedValue: [String, Number] as PropType<string | number>,
   activeValue: {
-    type: [Number, String],
+    type: [String, Number] as PropType<string | number>,
     required: true,
   },
   options: {
@@ -112,7 +112,7 @@ export const timePanelColumnProps = {
 
   // events
   onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
-}
+} as const
 
 export const timePanelCellProps = {
   disabled: {
@@ -124,13 +124,14 @@ export const timePanelCellProps = {
     default: false,
   },
   value: {
-    type: [Number, String],
+    type: [String, Number] as PropType<string | number>,
     required: true,
   },
 
   // events
   onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
-}
+} as const
+
 export type BaseTimePanelProps = ExtractInnerPropTypes<typeof baseTimePanelProps>
 export type TimePanelColumnProps = ExtractInnerPropTypes<typeof timePanelColumnProps>
 export type TimePanelCellProps = ExtractInnerPropTypes<typeof timePanelCellProps>

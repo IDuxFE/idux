@@ -56,7 +56,7 @@ export const paginationProps = {
   'onUpdate:pageIndex': [Function, Array] as PropType<MaybeArray<(pageIndex: number) => void>>,
   'onUpdate:pageSize': [Function, Array] as PropType<MaybeArray<(pageSize: number) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(pageIndex: number, pageSize: number) => void>>,
-}
+} as const
 
 export type PaginationProps = ExtractInnerPropTypes<typeof paginationProps>
 export type PaginationPublicProps = ExtractPublicPropTypes<typeof paginationProps>
@@ -75,6 +75,6 @@ export const paginationItemProps = {
     type: String as PropType<PaginationItemType>,
     required: true,
   },
-}
+} as const
 
 export type PaginationItemProps = ExtractInnerPropTypes<typeof paginationItemProps>

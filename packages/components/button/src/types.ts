@@ -42,7 +42,7 @@ export const buttonProps = {
     type: String as PropType<ButtonType>,
     default: 'button',
   },
-}
+} as const
 
 export type ButtonProps = ExtractInnerPropTypes<typeof buttonProps>
 export type ButtonPublicProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -55,7 +55,7 @@ export const buttonGroupProps = {
   mode: String as PropType<ButtonMode>,
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,
-}
+} as const
 
 export type ButtonGroupProps = ExtractInnerPropTypes<typeof buttonGroupProps>
 export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps>

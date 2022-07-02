@@ -14,10 +14,10 @@ export const textareaProps = {
   ...ɵCommonProps,
   autoRows: { type: [Boolean, Object] as PropType<boolean | TextareaAutoRows>, default: undefined },
   computeCount: { type: Function as PropType<(value: string) => string>, default: undefined },
-  maxCount: { type: [Number, String], default: undefined },
+  maxCount: { type: [Number, String] as PropType<number | string>, default: undefined },
   resize: { type: String as PropType<TextareaResize>, default: undefined },
   showCount: { type: Boolean, default: undefined },
-}
+} as const
 
 export type TextareaProps = ExtractInnerPropTypes<typeof textareaProps>
 export type TextareaPublicProps = ExtractPublicPropTypes<typeof textareaProps>
