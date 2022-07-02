@@ -20,7 +20,7 @@ import { useInputNumber } from './useInputNumber'
 export default defineComponent({
   name: 'IxInputNumber',
   props: inputNumberProps,
-  setup(props, { expose }) {
+  setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('inputNumber')
     const {
@@ -28,6 +28,8 @@ export default defineComponent({
       nowValue,
       isIllegal,
       isDisabled,
+      isDisabledDec,
+      isDisabledInc,
       isFocused,
       handleInput,
       handleFocus,
@@ -55,6 +57,46 @@ export default defineComponent({
       elementRef.value = inputRef.value!.getInputElement()
     })
 
+    const handleFocusAtClick = () => {
+      if (!isDisabled.value) {
+        focus()
+      }
+    }
+
+    const handleIncrease = () => {
+      handleInc()
+      handleFocusAtClick()
+    }
+
+    const handleDecrease = () => {
+      handleDec()
+      handleFocusAtClick()
+    }
+
+    const vSlots = computed(() => {
+      return {
+        ...slots,
+        prefix: () => (
+          <span
+            class={['ix-input-number-increase', isDisabledInc.value ? 'ix-input-number-increase--disabled' : '']}
+            role="button"
+            onClick={handleIncrease}
+          >
+            <IxIcon name="up" />
+          </span>
+        ),
+        suffix: () => (
+          <span
+            class={['ix-input-number-decrease', isDisabledDec.value ? 'ix-input-number-decrease--disabled' : '']}
+            role="button"
+            onClick={handleDecrease}
+          >
+            <IxIcon name="down" />
+          </span>
+        ),
+      }
+    })
+
     return () => {
       return (
         <ɵInput
@@ -73,18 +115,7 @@ export default defineComponent({
           value={displayValue.value}
           onInput={handleInput}
           onKeydown={handleKeyDown}
-          v-slots={{
-            addonBefore: () => (
-              <span class="ix-input-number-decrease" role="button" onClick={handleDec}>
-                <IxIcon name="minus" />
-              </span>
-            ),
-            addonAfter: () => (
-              <span class="ix-input-number-increase" role="button" onClick={handleInc}>
-                <IxIcon name="plus" />
-              </span>
-            ),
-          }}
+          v-slots={vSlots.value}
         />
       )
     }

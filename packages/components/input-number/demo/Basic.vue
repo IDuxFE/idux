@@ -1,12 +1,27 @@
 <template>
-  <IxInputNumber
-    v-model:value="value"
-    :max="10"
-    :min="1"
-    @change="handleChange"
-    @blur="onBlur"
-    @focus="onFocus"
-  ></IxInputNumber>
+  <IxSpace vertical>
+    <IxInputNumber
+      v-model:value="value"
+      :max="10"
+      :min="1"
+      @change="handleChange"
+      @blur="onBlur"
+      @focus="onFocus"
+    ></IxInputNumber>
+
+    <IxInputNumber
+      v-model:value="value"
+      style="width: 200px"
+      :max="10"
+      :min="1"
+      @change="handleChange"
+      @blur="onBlur"
+      @focus="onFocus"
+    >
+      <template #addonBefore>倒计时</template>
+      <template #addonAfter>天</template>
+    </IxInputNumber>
+  </IxSpace>
 </template>
 
 <script setup lang="ts">
