@@ -6,19 +6,14 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { RowProps } from '@idux/components/grid'
+import type { ColProps, RowProps } from '@idux/components/grid'
 import type { SpinProps } from '@idux/components/spin'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ListSize = 'sm' | 'md' | 'lg'
-export interface ListGridProps extends RowProps {
+export type ColPropsType = Partial<Pick<ColProps, 'xs' | 'sm' | 'md' | 'lg' | 'xl'>>
+export interface ListGridProps extends RowProps, ColPropsType {
   column?: number
-  gutter?: number
-  xs?: number
-  sm?: number
-  md?: number
-  lg?: number
-  xl?: number
 }
 
 export const listProps = {
