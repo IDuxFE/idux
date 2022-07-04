@@ -1,46 +1,9 @@
 @import '../../style/mixins/reset.less';
 
 .@{input-number-prefix} {
-
-  &-decrease:hover,
-  &-increase:hover {
+  &-decrease:hover:not(&-decrease--disabled),
+  &-increase:hover:not(&-increase--disabled) {
     color: @input-number-button-hover-color;
-  }
-
-  & .@{input-prefix}-addon {
-    padding: 0 !important;
-    background-color: @input-number-button-background-color;
-  }
-
-  & .@{input-prefix}-inner {
-    text-align: center;
-  }
-
-  &.@{input-prefix}-sm {
-    width: @input-number-width-sm;
-
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-sm;
-    }
-  }
-
-  &.@{input-prefix}-md {
-    width: @input-number-width-md;
-
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-md;
-    }
-  }
-
-  &.@{input-prefix}-lg {
-    width: @input-number-width-lg;
-
-    .@{input-number-prefix}-decrease,
-    .@{input-number-prefix}-increase {
-      width: @input-number-height-lg;
-    }
   }
 
   &.@{input-prefix}-disabled {
@@ -62,9 +25,44 @@
 
   &-decrease,
   &-increase {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    height: 50%;
+    width: 24px;
+    user-select: none;
+    background-color: transparent;
+    &--disabled {
+      cursor: not-allowed;
+      color: @input-number-disabled-color;
+    }
   }
+
+  &-increase {
+    top: 1px;
+  }
+
+  &-decrease {
+    top: 50%;
+    bottom: 1px;
+  }
+  
+  .@{idux-prefix}-input-inner {
+    padding-right: 18px !important;
+  }
+
+  .@{idux-prefix}-input-suffix {
+    margin-left: 0;
+  }
+
+  .@{idux-prefix}-input-wrapper{
+    .@{idux-prefix}-input-inner {
+      padding-right: 12px !important;
+      min-width: 24px;
+    }
+  }
+
 }

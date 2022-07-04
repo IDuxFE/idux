@@ -20,6 +20,8 @@ export interface InputNumberBindings {
   isDisabled: ComputedRef<boolean>
   isFocused: Ref<boolean>
   nowValue: ComputedRef<number | undefined>
+  isDisabledDec: Ref<boolean>
+  isDisabledInc: Ref<boolean>
 
   handleKeyDown: (evt: KeyboardEvent) => void
   handleDec: () => void
@@ -37,6 +39,8 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   const nowValue = computed(() => accessor.valueRef.value ?? undefined)
   const isKeyboard = computed(() => props.keyboard ?? config.keyboard)
   const isDisabled = computed(() => accessor?.disabled.value)
+  const isDisabledDec = computed(() => props.readonly || (!!nowValue.value && nowValue.value <= props.min))
+  const isDisabledInc = computed(() => props.readonly || (!!nowValue.value && nowValue.value >= props.max))
 
   const precision = computed(() => {
     const stepPrecision = getPrecision(props.step)
@@ -195,6 +199,8 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     displayValue,
     isIllegal,
     isDisabled,
+    isDisabledDec,
+    isDisabledInc,
     isFocused,
     nowValue,
     handleKeyDown,
