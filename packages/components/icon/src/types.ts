@@ -6,7 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const iconProps = {
   name: String,
@@ -15,12 +15,12 @@ export const iconProps = {
     default: false,
   },
   rotate: {
-    type: [Boolean, Number, String],
+    type: [Boolean, Number, String] as PropType<boolean | string | number>,
     default: undefined,
   },
   color: String,
-  size: [String, Number],
-}
+  size: [String, Number] as PropType<string | number>,
+} as const
 
 export type IconProps = ExtractInnerPropTypes<typeof iconProps>
 export type IconPublicProps = ExtractPublicPropTypes<typeof iconProps>

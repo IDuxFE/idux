@@ -30,7 +30,7 @@ export const alertProps = {
   },
   onBeforeClose: [Function, Array] as PropType<MaybeArray<() => void | boolean | Promise<boolean>>>,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export type AlertProps = ExtractInnerPropTypes<typeof alertProps>
 export type AlertPublicProps = ExtractPublicPropTypes<typeof alertProps>

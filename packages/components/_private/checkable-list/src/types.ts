@@ -48,7 +48,7 @@ export const checkableListProps = {
     MaybeArray<(startIndex: number, endIndex: number, visibleData: unknown[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export const checkableListItemProps = {
   checked: {
@@ -69,12 +69,12 @@ export const checkableListItemProps = {
   },
   label: String,
   value: {
-    type: [String, Number, Symbol],
+    type: [String, Number, Symbol] as PropType<VKey>,
     required: true,
   },
   onCheckChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
   onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export interface CheckableListApi {
   scrollTo: VirtualScrollToFn

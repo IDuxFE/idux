@@ -13,7 +13,7 @@ export const breadcrumbProps = {
     type: String,
     default: '/',
   },
-}
+} as const
 
 export type BreadcrumbProps = ExtractInnerPropTypes<typeof breadcrumbProps>
 export type BreadcrumbPublicProps = ExtractPublicPropTypes<typeof breadcrumbProps>
@@ -24,7 +24,7 @@ export type BreadcrumbInstance = InstanceType<DefineComponent<BreadcrumbProps>>
 
 export const breadcrumbItemProps = {
   separator: String,
-}
+} as const
 
 export type BreadcrumbItemProps = ExtractInnerPropTypes<typeof breadcrumbItemProps>
 export type BreadcrumbItemPublicProps = ExtractPublicPropTypes<typeof breadcrumbItemProps>

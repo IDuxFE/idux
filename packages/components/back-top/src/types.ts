@@ -14,7 +14,7 @@ export const backTopProps = {
   visibilityHeight: Number,
 
   onClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
-}
+} as const
 
 export type BackTopProps = ExtractInnerPropTypes<typeof backTopProps>
 export type BackTopPublicProps = ExtractPublicPropTypes<typeof backTopProps>

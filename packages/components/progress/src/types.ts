@@ -41,7 +41,7 @@ export const progressProps = {
   },
   format: Function as PropType<ProgressFormat>,
   percent: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: 0,
   },
   status: String as PropType<ProgressStatus>,
@@ -53,16 +53,16 @@ export const progressProps = {
   trailColor: String,
   strokeColor: [String, Object] as PropType<string | ProgressGradient>,
   strokeLinecap: String as PropType<ProgressStrokeLinecap>,
-  strokeWidth: [String, Number],
-  gapDegree: [String, Number],
+  strokeWidth: [String, Number] as PropType<string | number>,
+  gapDegree: [String, Number] as PropType<string | number>,
   gapPosition: String as PropType<ProgressGapPositionType>,
   width: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: 132,
   },
   size: String as PropType<ProgressSize>,
   icons: Object as PropType<ProgressIcons>,
-}
+} as const
 
 export type ProgressProps = ExtractInnerPropTypes<typeof progressProps>
 export type ProgressPublicProps = ExtractPublicPropTypes<typeof progressProps>

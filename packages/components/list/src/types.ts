@@ -35,7 +35,7 @@ export const listProps = {
   },
   size: String as PropType<ListSize>,
   grid: Object as PropType<ListGridProps>,
-}
+} as const
 
 export type ListProps = ExtractInnerPropTypes<typeof listProps>
 export type ListPublicProps = ExtractPublicPropTypes<typeof listProps>

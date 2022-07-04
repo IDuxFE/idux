@@ -23,13 +23,13 @@ export const skeletonProps = {
     type: String as PropType<SkeletonType>,
     default: 'text',
   },
-  width: [String, Number],
-  height: [String, Number],
+  width: [String, Number] as PropType<string | number>,
+  height: [String, Number] as PropType<string | number>,
   repeat: {
     type: Number,
     default: 1,
   },
-}
+} as const
 
 export type SkeletonProps = ExtractInnerPropTypes<typeof skeletonProps>
 export type SkeletonPublicProps = ExtractPublicPropTypes<typeof skeletonProps>

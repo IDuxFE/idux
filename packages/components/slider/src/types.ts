@@ -62,7 +62,7 @@ export const sliderThumbProps = {
   // events
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export interface SliderThumbBindings {
   tooltipRef: TooltipInstance
@@ -83,7 +83,7 @@ export type SliderThumbInstance = InstanceType<DefineComponent<SliderThumbProps,
 // slider marks
 export const sliderMarksProps = {
   onClickMark: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent | TouchEvent, markValue: number) => void>>,
-}
+} as const
 
 export type SliderMarksProps = ExtractInnerPropTypes<typeof sliderMarksProps>
 export type SliderMarksPublicProps = ExtractPublicPropTypes<typeof sliderMarksProps>

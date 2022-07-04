@@ -29,7 +29,7 @@ export const datePanelProps = {
   onCellClick: [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
   onCellMouseenter: [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
   'onUpdate:activeDate': [Function, Array] as PropType<MaybeArray<(date: Date) => void>>,
-}
+} as const
 
 export type DatePanelProps = ExtractInnerPropTypes<typeof datePanelProps>
 export type DatePanelPublicProps = ExtractPublicPropTypes<typeof datePanelProps>
@@ -46,7 +46,7 @@ export const panelRowProps = {
     type: Number,
     required: true,
   },
-}
+} as const
 
 export const panelCellProps = {
   rowIndex: {
@@ -57,4 +57,4 @@ export const panelCellProps = {
     type: Number,
     required: true,
   },
-}
+} as const

@@ -101,7 +101,8 @@ export const uploadProps = {
   >,
   onFileStatusChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
   onRequestChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(option: UploadRequestChangeOption<K>) => void>>,
-}
+} as const
+
 export type UploadProps = ExtractInnerPropTypes<typeof uploadProps>
 export type UploadPublicProps = ExtractPublicPropTypes<typeof uploadProps>
 export type UploadComponent = DefineComponent<Omit<HTMLAttributes, keyof UploadPublicProps> & UploadPublicProps>
@@ -114,7 +115,8 @@ export const uploadFilesProps = {
   onPreview: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
   onRemove: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => boolean | Promise<boolean>>>,
   onRetry: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
-}
+} as const
+
 export type UploadFilesProps = ExtractInnerPropTypes<typeof uploadFilesProps>
 export type UploadFilesPublicProps = ExtractPublicPropTypes<typeof uploadFilesProps>
 export type UploadFilesComponent = DefineComponent<

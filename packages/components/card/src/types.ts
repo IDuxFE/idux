@@ -61,7 +61,7 @@ export const cardProps = {
   // event
   'onUpdate:selected': [Function, Array] as PropType<MaybeArray<(selected: boolean) => void>>,
   onSelectedChange: [Function, Array] as PropType<MaybeArray<(selected: boolean) => void>>,
-}
+} as const
 
 export type CardProps = ExtractInnerPropTypes<typeof cardProps>
 export type CardPublicProps = ExtractPublicPropTypes<typeof cardProps>
@@ -73,7 +73,7 @@ export const cardGridProps = {
     type: Boolean,
     default: undefined,
   },
-}
+} as const
 
 export type CardGridProps = ExtractInnerPropTypes<typeof cardGridProps>
 export type CardGridPublicProps = ExtractPublicPropTypes<typeof cardGridProps>

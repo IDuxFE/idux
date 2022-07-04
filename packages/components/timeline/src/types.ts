@@ -29,7 +29,7 @@ export const timelineProps = {
     type: Boolean,
     default: true,
   },
-}
+} as const
 
 export type TimelineProps = ExtractInnerPropTypes<typeof timelineProps>
 export type TimelinePublicProps = ExtractPublicPropTypes<typeof timelineProps>
@@ -44,7 +44,7 @@ export const timelineItemProps = {
   dot: String,
   label: String,
   placement: String as PropType<TimelineItemPlacement>,
-}
+} as const
 
 export type TimelineItemProps = ExtractInnerPropTypes<typeof timelineItemProps>
 export type TimelineItemPublicProps = ExtractPublicPropTypes<typeof timelineItemProps>

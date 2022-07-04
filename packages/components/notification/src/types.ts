@@ -48,7 +48,8 @@ export const notificationProps = {
   // event
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event) => void>>,
-}
+} as const
+
 export const notificationProviderProps = {
   offset: [String, Number, Array] as PropType<string | number | (number | string)[]>,
   maxCount: Number,
@@ -56,7 +57,7 @@ export const notificationProviderProps = {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-}
+} as const
 
 export type NotificationType = typeof notificationType[number]
 export type NotificationPlacement = typeof notificationPlacement[number]

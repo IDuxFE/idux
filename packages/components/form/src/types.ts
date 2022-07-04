@@ -33,7 +33,7 @@ export const formProps = {
     type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
     default: false,
   },
-}
+} as const
 
 export type FormProps = ExtractInnerPropTypes<typeof formProps>
 export type FormPublicProps = ExtractPublicPropTypes<typeof formProps>
@@ -79,7 +79,7 @@ export const formItemProps = {
     type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
     default: undefined,
   },
-}
+} as const
 
 export type FormItemProps = ExtractInnerPropTypes<typeof formItemProps>
 export type FormItemPublicProps = ExtractPublicPropTypes<typeof formItemProps>
@@ -88,7 +88,7 @@ export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-}
+} as const
 
 export type FormWrapperProps = ExtractInnerPropTypes<typeof formWrapperProps>
 export type FormWrapperPublicProps = ExtractPublicPropTypes<typeof formWrapperProps>

@@ -38,7 +38,7 @@ export const switchProps = {
   onChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export type SwitchProps = ExtractInnerPropTypes<typeof switchProps>
 export type SwitchPublicProps = ExtractPublicPropTypes<typeof switchProps>

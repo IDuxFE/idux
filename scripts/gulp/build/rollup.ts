@@ -23,16 +23,7 @@ interface Options {
 
 export const getRollupSingleOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, compName = '', minify = false } = options
-  const externalDeps = [
-    'vue',
-    '@vue',
-    '@idux',
-    '@juggle/resize-observer',
-    '@popperjs/core',
-    'date-fns',
-    'lodash-es',
-    'vue-types',
-  ]
+  const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es']
 
   const input = join(targetDirname, compName, 'index.ts')
   const outputFile = join(distDirname, compName, 'index.js')
@@ -118,16 +109,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
 
 export const getRollupDeclarationOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, packageName } = options
-  const externalDeps = [
-    'vue',
-    '@vue',
-    '@idux',
-    '@juggle/resize-observer',
-    '@popperjs/core',
-    'date-fns',
-    'lodash-es',
-    'vue-types',
-  ]
+  const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es']
 
   const input = join(targetDirname, 'index.ts')
   const outputFile = join(distDirname, packageName, 'temp.js')

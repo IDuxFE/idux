@@ -22,7 +22,7 @@ export const collapseTransitionProps = {
   },
   onAfterEnter: [Function, Array] as PropType<MaybeArray<() => void>>,
   onAfterLeave: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export type CollapseTransitionProps = ExtractInnerPropTypes<typeof collapseTransitionProps>
 export type CollapseTransitionPublicProps = ExtractPublicPropTypes<typeof collapseTransitionProps>

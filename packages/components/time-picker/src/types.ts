@@ -63,7 +63,7 @@ const timePickerCommonProps = {
   onClear: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export type TimePickerCommonProps = ExtractInnerPropTypes<typeof timePickerCommonProps>
 export interface TimePickerCommonBindings {
@@ -85,7 +85,7 @@ export const timePickerProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-}
+} as const
 
 export type TimePickerProps = ExtractInnerPropTypes<typeof timePickerProps>
 export type TimePickerPublicProps = ExtractPublicPropTypes<typeof timePickerProps>
@@ -111,7 +111,7 @@ export const timeRangePickerProps = {
     MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
   >,
   onInput: [Function, Array] as PropType<MaybeArray<(isFrom: boolean, evt: Event) => void>>,
-}
+} as const
 
 export type TimeRangePickerProps = ExtractInnerPropTypes<typeof timeRangePickerProps>
 export type TimeRangePickerPublicProps = ExtractPublicPropTypes<typeof timeRangePickerProps>

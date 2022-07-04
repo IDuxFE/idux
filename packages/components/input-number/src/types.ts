@@ -50,7 +50,7 @@ export const inputNumberProps = {
   >,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-}
+} as const
 
 export type InputNumberProps = ExtractInnerPropTypes<typeof inputNumberProps>
 export type InputNumberPublicProps = ExtractPublicPropTypes<typeof inputNumberProps>

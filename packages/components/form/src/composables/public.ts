@@ -24,6 +24,13 @@ export function useFormItemRegister(control: Ref<AbstractControl | undefined>): 
   }
 }
 
+/**
+ * 使用 valueAccessor 接管 value 以及 disabled 状态的控制
+ * 同时在 IxFormItem 中注册 control， 可以与 IxFormItem 同步状态
+ *
+ * @param valueKey - props 中表是 value 的字段名
+ * @returns
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useFormAccessor<T = any>(valueKey?: string): ValueAccessor<T> {
   const control = useValueControl()

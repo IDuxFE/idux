@@ -24,7 +24,7 @@ export const avatarProps = {
 
   // events
   onError: [Function, Array] as PropType<MaybeArray<(evt: Event) => boolean | void>>,
-}
+} as const
 
 export type AvatarProps = ExtractInnerPropTypes<typeof avatarProps>
 export type AvatarPublicProps = ExtractPublicPropTypes<typeof avatarProps>

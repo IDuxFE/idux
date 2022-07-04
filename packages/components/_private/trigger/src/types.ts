@@ -25,7 +25,7 @@ export const triggerProps = {
   onFocus: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onKeyDown: [Array, Function] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
-}
+} as const
 
 export type TriggerProps = ExtractInnerPropTypes<typeof triggerProps>
 export type TriggerPublicProps = ExtractPublicPropTypes<typeof triggerProps>

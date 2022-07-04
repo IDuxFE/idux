@@ -9,14 +9,14 @@ import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-export const layoutProps = {}
+export const layoutProps = {} as const
 
 export type LayoutProps = ExtractInnerPropTypes<typeof layoutProps>
 export type LayoutPublicProps = ExtractPublicPropTypes<typeof layoutProps>
 export type LayoutComponent = DefineComponent<Omit<HTMLAttributes, keyof LayoutPublicProps> & LayoutPublicProps>
 export type LayoutInstance = InstanceType<DefineComponent<LayoutProps>>
 
-export const layoutHeaderProps = {}
+export const layoutHeaderProps = {} as const
 
 export type LayoutHeaderProps = ExtractInnerPropTypes<typeof layoutHeaderProps>
 export type LayoutHeaderPublicProps = ExtractPublicPropTypes<typeof layoutHeaderProps>
@@ -25,7 +25,7 @@ export type LayoutHeaderComponent = DefineComponent<
 >
 export type LayoutHeaderInstance = InstanceType<DefineComponent<LayoutHeaderProps>>
 
-export const layoutContentProps = {}
+export const layoutContentProps = {} as const
 
 export type LayoutContentProps = ExtractInnerPropTypes<typeof layoutContentProps>
 export type LayoutContentPublicProps = ExtractPublicPropTypes<typeof layoutContentProps>
@@ -34,7 +34,7 @@ export type LayoutContentComponent = DefineComponent<
 >
 export type LayoutContentInstance = InstanceType<DefineComponent<LayoutContentProps>>
 
-export const layoutFooterProps = {}
+export const layoutFooterProps = {} as const
 
 export type LayoutFooterProps = ExtractInnerPropTypes<typeof layoutFooterProps>
 export type LayoutFooterPublicProps = ExtractPublicPropTypes<typeof layoutFooterProps>
@@ -52,7 +52,7 @@ export const layoutSiderProps = {
 
   // events
   'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
-}
+} as const
 
 export type LayoutSiderProps = ExtractInnerPropTypes<typeof layoutSiderProps>
 export type LayoutSiderPublicProps = ExtractPublicPropTypes<typeof layoutSiderProps>

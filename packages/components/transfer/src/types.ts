@@ -202,7 +202,7 @@ export const transferListItemProps = {
   },
   onChange: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
   onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
-}
+} as const
 
 export interface TransferApis {
   scrollTo: (isSource: boolean, ...params: Parameters<VirtualScrollToFn>) => ReturnType<VirtualScrollToFn>

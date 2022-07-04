@@ -29,7 +29,7 @@ export const popconfirmProps = {
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   onCancel: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
   onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
-}
+} as const
 export interface PopconfirmButtonProps<K = VKey> extends ButtonProps {
   key?: K
   text?: string | VNode

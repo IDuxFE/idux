@@ -8,26 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { IfAny } from '@vue/shared'
-import type { Prop, VNode } from 'vue'
-import type { VueTypeDef, VueTypeValidableDef } from 'vue-types'
-import type { InferType, VueProp, Prop as VueTypeProp } from 'vue-types/dist/types'
-
-import { isVNode } from 'vue'
-
-import {
-  array,
-  arrayOf,
-  custom,
-  func,
-  instanceOf,
-  object,
-  objectOf,
-  oneOf,
-  oneOfType,
-  shape,
-  toType,
-  toValidableType,
-} from 'vue-types'
+import type { Prop } from 'vue'
 
 export type MaybeArray<T> = T | T[]
 
@@ -79,131 +60,6 @@ export type ExtractInnerPropTypes<O> = {
   [K in keyof Pick<O, InnerOptionalKeys<O>>]?: InferPropType<O[K]>
 }
 
-/**
- * @deprecated
- */
-export class IxPropTypes {
-  static get any(): VueTypeValidableDef<any> {
-    return toValidableType('any', { default: undefined })
-  }
-
-  static get bool(): VueTypeValidableDef<boolean> {
-    return toValidableType('boolean', {
-      type: Boolean,
-      default: undefined,
-    })
-  }
-
-  static get string(): VueTypeValidableDef<string> {
-    return toValidableType('string', {
-      type: String,
-      default: undefined,
-    })
-  }
-  static get number(): VueTypeValidableDef<number> {
-    return toValidableType('number', {
-      type: Number,
-      default: undefined,
-    })
-  }
-  static get integer(): VueTypeValidableDef<number> {
-    return toValidableType('integer', {
-      type: Number,
-      validator(value) {
-        return Number.isInteger(value)
-      },
-      default: undefined,
-    })
-  }
-  static get symbol(): VueTypeDef<symbol> {
-    return toType<symbol>('symbol', {
-      validator(value) {
-        return typeof value === 'symbol'
-      },
-      default: undefined,
-    })
-  }
-
-  static custom = custom
-  static instanceOf = instanceOf
-  static arrayOf = arrayOf
-  static objectOf = objectOf
-  static shape = shape
-
-  static object<T>(): VueTypeValidableDef<T> {
-    return object<T>()
-  }
-
-  static func<T extends (...args: any[]) => any>(): VueTypeValidableDef<T> {
-    return func<T>()
-  }
-
-  static array<T>(): VueTypeValidableDef<T[]> {
-    return array<T>()
-  }
-
-  static oneOfType<T>(arr: Array<VueProp<T> | VueTypeProp<T>>): VueTypeDef<T>
-  static oneOfType<U extends VueProp<any> | VueTypeProp<any>, V = InferType<U>>(arr: U[]): VueTypeDef<V>
-  static oneOfType<U extends VueProp<any> | VueTypeProp<any>, V = InferType<U>>(arr: U[]): VueTypeDef<V> {
-    const type = oneOfType<U, V>(arr)
-    type.default = undefined
-    return type
-  }
-
-  static oneOf<T>(arr: T[]): VueTypeDef<T>
-  static oneOf<T extends readonly any[]>(arr: T): VueTypeDef<T[number]>
-  static oneOf(arr: any[]): VueTypeDef<unknown> {
-    return oneOf(arr)
-  }
-
-  static get vNode(): VueTypeValidableDef<VNode> {
-    return toValidableType('vNode', {
-      type: Object,
-      validator: (value: unknown) => isVNode(value),
-    }) as VueTypeValidableDef<VNode>
-  }
-
-  // define a custom validator that accepts configuration parameters
-  static maxLength(max: number): VueTypeValidableDef<string> {
-    return toValidableType('maxLength', {
-      type: String,
-      validator: (value: string) => value.length <= max,
-    })
-  }
-
-  static minLength(min: number): VueTypeValidableDef<string> {
-    return toValidableType('minLength', {
-      type: String,
-      validator: (value: string) => value.length >= min,
-    })
-  }
-
-  static max(max: number): VueTypeValidableDef<number> {
-    return toValidableType('max', {
-      type: Number,
-      validator: (value: number) => value <= max,
-    })
-  }
-
-  static min(min: number): VueTypeValidableDef<number> {
-    return toValidableType('min', {
-      type: Number,
-      validator: (value: number) => value >= min,
-    })
-  }
-
-  static range(min: number, max: number): VueTypeValidableDef<number> {
-    return toValidableType('range', {
-      type: Number,
-      validator: (value: number) => value >= min && value <= max,
-    })
-  }
-
-  static emit<T extends (...args: any[]) => any>(): VueTypeDef<T | T[]> {
-    return oneOfType([func<T>(), array<T>()])
-  }
-}
-
 export function callEmit<T extends (...args: any[]) => any>(
   funcs: T[] | T | undefined,
   ...args: Parameters<T>
@@ -219,5 +75,3 @@ export function callEmit<T extends (...args: any[]) => any>(
 }
 
 export type VKey = string | number | symbol
-
-export const vKeyPropDef = IxPropTypes.oneOfType([String, Number, Symbol])

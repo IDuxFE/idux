@@ -31,7 +31,7 @@ export const overflowItemProps = {
   },
   data: Object as PropType<ItemData>,
   onSizeChange: Function as PropType<(itemEl: Element, key?: VKey) => void>,
-}
+} as const
 
 export const overflowProps = {
   maxLabel: {
@@ -51,7 +51,7 @@ export const overflowProps = {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     default: () => [],
   },
-}
+} as const
 
 export type OverflowProps = ExtractInnerPropTypes<typeof overflowProps>
 export type OverflowItemProps = ExtractInnerPropTypes<typeof overflowItemProps>

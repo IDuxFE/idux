@@ -15,7 +15,7 @@ export const portalProps = {
     required: true,
   },
   load: { type: Boolean, default: true },
-}
+} as const
 
 export type PortalProps = ExtractInnerPropTypes<typeof portalProps>
 export type PortalPublicProps = ExtractPublicPropTypes<typeof portalProps>

@@ -25,7 +25,7 @@ export const headerProps = {
   // events
   onPrefixClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
   onSuffixClick: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
-}
+} as const
 
 export type HeaderProps = ExtractInnerPropTypes<typeof headerProps>
 export type HeaderPublicProps = ExtractPublicPropTypes<typeof headerProps>

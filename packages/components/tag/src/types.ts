@@ -15,7 +15,7 @@ export const tagProps = {
   icon: String,
   number: Number,
   shape: String as PropType<TagShape>,
-}
+} as const
 
 export type TagProps = ExtractInnerPropTypes<typeof tagProps>
 export type TagPublicProps = ExtractPublicPropTypes<typeof tagProps>
@@ -45,7 +45,7 @@ export const tagGroupProps = {
     default: 'close',
   },
   dataSource: Array as PropType<TagData[]>,
-  gap: [Number, String],
+  gap: [Number, String] as PropType<number | string>,
   wrap: {
     type: Boolean,
     default: undefined,
@@ -54,7 +54,7 @@ export const tagGroupProps = {
   'onUpdate:activeKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(activeKeys: K[]) => void>>,
   onClick: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
   onClose: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
-}
+} as const
 
 export type TagGroupProps = ExtractInnerPropTypes<typeof tagGroupProps>
 export type TagGroupPublicProps = ExtractPublicPropTypes<typeof tagGroupProps>

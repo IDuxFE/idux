@@ -5,15 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type DefineComponent, type HTMLAttributes, PropType } from 'vue'
-
-import {
-  type ExtractInnerPropTypes,
-  type ExtractPublicPropTypes,
-  IxPropTypes,
-  MaybeArray,
-  type VKey,
-} from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type StepperLabelPlacement = 'end' | 'bottom'
 export type StepperSize = 'md' | 'sm'
@@ -26,7 +19,10 @@ export const stepperProps = {
     default: undefined,
   },
   labelPlacement: String as PropType<StepperLabelPlacement>,
-  percent: IxPropTypes.range(0, 100),
+  percent: {
+    type: Number,
+    validator: (value: number) => value >= 0 && value <= 100,
+  },
   size: String as PropType<StepperSize>,
   status: {
     type: String as PropType<StepperStatus>,
@@ -38,7 +34,7 @@ export const stepperProps = {
   },
 
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<<K = VKey>(key: K) => void>>,
-}
+} as const
 
 export type StepperProps = ExtractInnerPropTypes<typeof stepperProps>
 export type StepperPublicProps = ExtractPublicPropTypes<typeof stepperProps>
@@ -54,7 +50,7 @@ export const stepperItemProps = {
   icon: String,
   title: String,
   status: String as PropType<StepperStatus>,
-}
+} as const
 
 export type StepperItemProps = ExtractInnerPropTypes<typeof stepperItemProps>
 export type StepperItemPublicProps = ExtractPublicPropTypes<typeof stepperItemProps>

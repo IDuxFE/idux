@@ -217,6 +217,7 @@ export const optionProps = {
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const
+
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
@@ -224,4 +225,5 @@ export const optionGroupProps = {
   index: { type: Number as PropType<number>, required: true },
   rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
 } as const
+
 export type OptionGroupProps = ExtractInnerPropTypes<typeof optionGroupProps>

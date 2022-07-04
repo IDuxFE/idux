@@ -53,7 +53,7 @@ export const dropdownProps = {
 
   // events
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
-}
+} as const
 
 export type DropdownProps = ExtractInnerPropTypes<typeof dropdownProps>
 export type DropdownPublicProps = Omit<ExtractPublicPropTypes<typeof dropdownProps>, 'target'>

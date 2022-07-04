@@ -9,14 +9,7 @@ import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { IxPropTypes } from '@idux/cdk/utils'
-
 export type ImageStatus = 'loading' | 'loaded' | 'failed'
-
-const zoomValidator = {
-  validator: (val: number[]) => val.length === 2,
-  msg: 'zoom only accepts the length of the array is 2',
-}
 
 export const imageViewerProps = {
   visible: {
@@ -28,7 +21,10 @@ export const imageViewerProps = {
     type: Array as PropType<string[]>,
     default: (): string[] => [],
   },
-  zoom: IxPropTypes.custom<number[]>(zoomValidator.validator, zoomValidator.msg),
+  zoom: {
+    type: Array as PropType<number[]>,
+    validator: (val: number[]) => val.length === 2,
+  },
   loop: {
     type: Boolean,
     default: undefined,
@@ -44,7 +40,7 @@ export const imageViewerProps = {
 
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   'onUpdate:activeIndex': [Function, Array] as PropType<MaybeArray<(curIndex: number) => void>>,
-}
+} as const
 
 export const imageProps = {
   src: {
@@ -58,7 +54,7 @@ export const imageProps = {
   imageViewer: Object as PropType<ImageViewerProps>,
   onLoad: [Function, Array] as PropType<MaybeArray<(e: Event) => void>>,
   onError: [Function, Array] as PropType<MaybeArray<(e: Event) => void>>,
-}
+} as const
 
 export type ImageProps = ExtractInnerPropTypes<typeof imageProps>
 export type ImagePublicProps = ExtractPublicPropTypes<typeof imageProps>

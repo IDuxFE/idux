@@ -6,11 +6,11 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const backTopProps = {
   count: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: 0,
   },
   showZero: {
@@ -23,7 +23,7 @@ export const backTopProps = {
     default: undefined,
   },
   color: String,
-}
+} as const
 
 export type BadgeProps = ExtractInnerPropTypes<typeof backTopProps>
 export type BadgePublicProps = ExtractPublicPropTypes<typeof backTopProps>

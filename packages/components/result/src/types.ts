@@ -15,7 +15,7 @@ export const resultProps = {
   status: String as PropType<ResultStatus>,
   subtitle: String,
   title: String,
-}
+} as const
 
 export type ResultProps = ExtractInnerPropTypes<typeof resultProps>
 export type ResultPublicProps = ExtractPublicPropTypes<typeof resultProps>

@@ -118,21 +118,21 @@ export const proTransferTableContentProps = {
     type: Boolean as PropType<boolean>,
     default: true,
   },
-}
+} as const
 
 export const proTransferTreeContentProps = {
   isSource: {
     type: Boolean as PropType<boolean>,
     default: true,
   },
-}
+} as const
 
 export const proTransferListContentProps = {
   isSource: {
     type: Boolean as PropType<boolean>,
     default: true,
   },
-}
+} as const
 
 export interface ProTransferApis {
   scrollTo: (isSource: boolean, ...params: Parameters<VirtualScrollToFn>) => ReturnType<VirtualScrollToFn>

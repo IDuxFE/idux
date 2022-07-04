@@ -77,7 +77,7 @@ order: 0
 import { PropType, computed, defineComponent } from 'vue'
 
 import { AbstractControl, useValueAccessor } from '@idux/cdk/forms'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormAccessor, useFormItemRegister } from '@idux/components/form'
 
 export default defineComponent({
   name: 'CustomInput',
@@ -88,10 +88,12 @@ export default defineComponent({
   },
   setup(_) {
     // 使用 valueAccessor 接管 props.value 的控制
-    const control = useValueControl()
-    const accessor = useValueAccessor({ control })
+    //const control = useValueControl()
+    //const accessor = useValueAccessor({ control })
     // 在 IxFormItem 中注册 control
-    useFormItemRegister(control)
+    //useFormItemRegister(control)
+    // 就是上面 3 行代码的简化版本, 但是 controlKey 必须为 'control'
+    const accessor = useFormAccessor()
 
     // 输入框绑定的值
     const valueRef = computed(() => accessor.valueRef.value)
@@ -130,9 +132,16 @@ export default defineComponent({
 | `@form-padding-horizontal-sm` | `@spacing-sm - 2px` | - | - |
 | `@form-padding-horizontal-md` | `@spacing-md` | - | - |
 | `@form-padding-horizontal-lg` | `@spacing-sm + 2px` | - | - |
-| `@form-padding-vertical-sm` | `max(  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,  0)` | - | - |
-| `@form-padding-vertical-md` | `max(  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,  2px)` | - | - |
-| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -  @form-border-width` | - | - |
+| `@form-padding-vertical-sm` | `max(
+  (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,
+  0
+)` | - | - |
+| `@form-padding-vertical-md` | `max(
+  (round(((@form-height-md - @form-font-size-md * @form-line-height) / 2) * 10) / 10) - @form-border-width,
+  2px
+)` | - | - |
+| `@form-padding-vertical-lg` | `(ceil(((@form-height-lg - @form-font-size-lg * @form-line-height) / 2) * 10) / 10) -
+  @form-border-width` | - | - |
 | `@form-border-width` | `@border-width-sm` | - | - |
 | `@form-border-style` | `@border-style` | - | - |
 | `@form-border-color` | `@border-color` | - | - |

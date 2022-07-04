@@ -41,7 +41,7 @@ export const messageProps = {
   // events
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event) => void>>,
-}
+} as const
 
 export type MessageProps = ExtractInnerPropTypes<typeof messageProps>
 export type MessagePublicProps = ExtractPublicPropTypes<typeof messageProps>
@@ -50,12 +50,12 @@ export type MessageInstance = InstanceType<DefineComponent<MessageProps>>
 
 export const messageProviderProps = {
   maxCount: Number,
-  top: [String, Number],
+  top: [String, Number] as PropType<string | number>,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
-}
+} as const
 export interface MessageProviderRef<K = VKey> {
   open: (options: MessageOptions<K>) => MessageRef
   info: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
