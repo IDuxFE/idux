@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
+
+
+### Bug Fixes
+
+* **comp:list:** remove the gutter of ListGridProps and extends RowProps ([#995](https://github.com/IDuxFE/idux/issues/995)) ([9c316d4](https://github.com/IDuxFE/idux/commit/9c316d45561086fd3a121c75359cc802d815dcca))
+* **comp:tree:** style error after global showline is configured to true ([#991](https://github.com/IDuxFE/idux/issues/991)) ([310360a](https://github.com/IDuxFE/idux/commit/310360a4718fb4449322ee4061c204eae53f59ed))
+* **pro:transfer:** fix overflowed text style ([#996](https://github.com/IDuxFE/idux/issues/996)) ([ef26025](https://github.com/IDuxFE/idux/commit/ef260251c6eb79100a4234370f144edfc5a13baa))
+
+
+### Features
+
+* **cdk:forms:** add validator: range, rangeLength and update messages ([#987](https://github.com/IDuxFE/idux/issues/987)) ([d52f864](https://github.com/IDuxFE/idux/commit/d52f8640ae18b5fbc0e8ac6e2b51d07846bc7920))
+* **comp:date-picker:** add DatePickerPanel & DateRangePickerPanel ([#964](https://github.com/IDuxFE/idux/issues/964)) ([2a343c1](https://github.com/IDuxFE/idux/commit/2a343c16faf328595678b41f0ae7d6aabea883c7))
+* **comp:input-number:** replace old control ([#970](https://github.com/IDuxFE/idux/issues/970)) ([#994](https://github.com/IDuxFE/idux/issues/994)) ([1fad46a](https://github.com/IDuxFE/idux/commit/1fad46ae281538d93508444bd92d3d7e4b4824c9))
+
+
+
+
+
 # [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
+
+
+### Features
+
+* **cdk:forms:** add validator: range, rangeLength and update messages ([#987](https://github.com/IDuxFE/idux/issues/987)) ([d52f864](https://github.com/IDuxFE/idux/commit/d52f8640ae18b5fbc0e8ac6e2b51d07846bc7920))
+
+
+
+
+
 # [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
 
 

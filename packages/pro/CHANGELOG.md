@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
+
+
+### Bug Fixes
+
+* **pro:transfer:** fix overflowed text style ([#996](https://github.com/IDuxFE/idux/issues/996)) ([ef26025](https://github.com/IDuxFE/idux/commit/ef260251c6eb79100a4234370f144edfc5a13baa))
+
+
+### Features
+
+* **pro:search:** add ProSearch component ([#989](https://github.com/IDuxFE/idux/issues/989)) ([ed16c45](https://github.com/IDuxFE/idux/commit/ed16c45a147d0e38b43b60cd91ae0561b7a3535d))
+
+
+
+
+
 # [1.0.0-beta.18](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-06-28)
 
 
