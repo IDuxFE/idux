@@ -7,6 +7,7 @@
     height: auto;
     min-width: @pro-transfer-list-min-width;
     min-height: @pro-transfer-list-min-height;
+    background-color: @pro-transfer-list-background-color;
   }
 
   &-empty-wrapper {
@@ -17,7 +18,8 @@
     justify-content: center;
   }
 
-  &-table-content, &-tree-content {
+  &-table-content,
+  &-tree-content {
     &-close-icon {
       margin-left: auto;
       cursor: pointer;
@@ -41,10 +43,27 @@
     }
     &-close-icon {
       padding: @pro-transfer-table-close-icon-padding;
+      flex-shrink: 0;
     }
   }
 
   &-tree-content {
+    &-removable {
+      .@{tree-node-prefix}-content-suffix {
+        position: sticky;
+        right: 0;
+        background: linear-gradient(to right, transparent, @pro-transfer-list-background-color 30%);
+      }
+      .@{tree-node-prefix}:hover {
+        background-color: @pro-transfer-list-item-hover-color;
+        .@{tree-node-prefix}-content-suffix {
+          background: linear-gradient(to right, transparent, @pro-transfer-list-item-hover-color 30%);
+        }
+      }
+    }
+    .@{tree-node-prefix} {
+      transition: none;
+    }
     &-close-icon {
       padding: @pro-transfer-tree-close-icon-padding;
     }

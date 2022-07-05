@@ -58,7 +58,11 @@ export default defineComponent({
       }
 
       if (props.removable && !props.disabled) {
-        children.push(<IxIcon class={`${prefixCls}-close-icon`} name="close" onClick={onRemove} />)
+        children.push(
+          <div class={`${prefixCls}-close-icon`} onClick={onRemove}>
+            <IxIcon name="close" />
+          </div>,
+        )
       }
 
       return <li class={classes.value}>{children}</li>

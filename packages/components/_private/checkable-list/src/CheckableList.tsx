@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, normalizeStyle, provide, ref } from 'vue'
 
 import { CdkVirtualScroll, type VirtualItemRenderFn, type VirtualScrollInstance } from '@idux/cdk/scroll'
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import CheckableListItem from './CheckableListItem'
@@ -103,9 +103,7 @@ export default defineComponent({
       }
 
       return (
-        <ul class={`${mergedPrefixCls.value}-inner`} onScroll={handleScroll}>
-          {data.map((item, index) => renderListItem({ item, index }))}
-        </ul>
+        <ul class={`${mergedPrefixCls.value}-inner`}>{data.map((item, index) => renderListItem({ item, index }))}</ul>
       )
     }
 
@@ -117,9 +115,23 @@ export default defineComponent({
         [`${prefixCls}-virtual`]: !!props.virtual,
       })
     })
+    const style = computed(() => {
+      const scroll = props.scroll
+
+      return (
+        scroll &&
+        normalizeStyle({
+          [scroll.fullHeight ? 'height' : 'maxHeight']: convertCssPixel(scroll.height),
+        })
+      )
+    })
 
     return () => {
-      return <div class={classes.value}>{renderBody()}</div>
+      return (
+        <div class={classes.value} style={style.value} onScroll={handleScroll}>
+          {renderBody()}
+        </div>
+      )
     }
   },
 })

@@ -75,17 +75,24 @@ export default defineComponent({
     return () => {
       const dataSource = treeProps.value.dataSource
       const prefixCls = proTransferTreeCls.value
+      const showRemovableSuffix = proTransferProps.mode === 'immediate' && !props.isSource
 
       const treeSlots = {
         prefix: slots.prefix,
         label: slots.label,
-        suffix: proTransferProps.mode === 'immediate' && !props.isSource ? renderTreeRemovableSuffix : slots.suffix,
+        suffix: showRemovableSuffix ? renderTreeRemovableSuffix : slots.suffix,
       }
 
       if (dataSource && dataSource.length > 0) {
         const contentRef = props.isSource ? sourceContentRef : targetContentRef
         return (
-          <IxTree ref={contentRef} class={prefixCls} style={treeStyle.value} v-slots={treeSlots} {...treeProps.value} />
+          <IxTree
+            ref={contentRef}
+            class={[prefixCls, showRemovableSuffix && `${prefixCls}-removable`]}
+            style={treeStyle.value}
+            v-slots={treeSlots}
+            {...treeProps.value}
+          />
         )
       }
 

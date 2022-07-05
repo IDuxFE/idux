@@ -3,17 +3,16 @@
 .@{checkable-list-prefix} {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
+  background-color: @checkable-list-background-color;
 
   &.@{checkable-list-prefix}-virtual {
     height: auto;
   }
 
   &-inner {
-    height: 100%;
     display: flex;
-    flex-direction: column;
-    overflow: auto;
+    flex-flow: column wrap;
     flex-shrink: 0;
   }
 
@@ -25,6 +24,8 @@
     padding: @checkable-list-item-padding;
     line-height: @checkable-list-item-line-height;
     font-size: @checkable-list-item-font-size;
+    flex-shrink: 0;
+    white-space: nowrap;
 
     &-disabled {
       color: @checkable-list-disabled-color;
@@ -39,9 +40,17 @@
     }
 
     &-close-icon {
+      position: sticky;
+      right: 0;
+      display: flex;
+      align-items: center;
+      align-self: stretch;
       margin-left: auto;
+      padding: @checkable-list-close-icon-padding;
+      background: linear-gradient(to right, transparent, @checkable-list-background-color 30%);
       font-size: @checkable-list-close-icon-font-size;
       color: @checkable-list-close-icon-color;
+      
       &:hover {
         color: @checkable-list-close-icon-hover-color;
       }
@@ -51,6 +60,13 @@
       }
 
       cursor: pointer;
+    }
+
+    &:hover {
+      background-color: @checkable-list-item-hover-color;
+      .@{checkable-list-prefix}-item-close-icon {
+        background: linear-gradient(to right, transparent, @checkable-list-item-hover-color 50%);
+      }
     }
   }
 }
