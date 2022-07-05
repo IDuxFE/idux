@@ -8,6 +8,7 @@
 import type { App, Directive } from 'vue'
 
 import { IxProLayout, IxProLayoutSiderTrigger } from '@idux/pro/layout'
+import { IxProSearch } from '@idux/pro/search'
 import { IxProTable, IxProTableLayoutTool } from '@idux/pro/table'
 import { IxProTransfer } from '@idux/pro/transfer'
 import { IxProTree } from '@idux/pro/tree'
@@ -15,7 +16,15 @@ import { version } from '@idux/pro/version'
 
 const directives: Record<string, Directive> = {}
 
-const components = [IxProLayout, IxProLayoutSiderTrigger, IxProTable, IxProTableLayoutTool, IxProTransfer, IxProTree]
+const components = [
+  IxProLayout,
+  IxProLayoutSiderTrigger,
+  IxProTable,
+  IxProTableLayoutTool,
+  IxProTransfer,
+  IxProTree,
+  IxProSearch,
+]
 
 const install = (app: App): void => {
   components.forEach(component => {
@@ -36,4 +45,5 @@ export * from '@idux/pro/layout'
 export * from '@idux/pro/table'
 export * from '@idux/pro/transfer'
 export * from '@idux/pro/tree'
+export * from '@idux/pro/search'
 export * from '@idux/pro/version'

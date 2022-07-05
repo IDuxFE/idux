@@ -23,4 +23,9 @@ export const defaultConfig: ProGlobalConfig = {
     clearIcon: 'close-circle',
     collapseIcon: ['collapse', 'uncollapse'],
   },
+  search: {
+    clearable: true,
+    clearIcon: 'close-circle',
+    searchIcon: 'search',
+  },
 }

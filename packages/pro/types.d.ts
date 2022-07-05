@@ -6,6 +6,7 @@
  */
 
 import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from '@idux/pro/layout'
+import type { ProSearchComponent } from '@idux/pro/search'
 import type { ProTableComponent, ProTableLayoutToolComponent } from '@idux/pro/table'
 import type { ProTransferComponent } from '@idux/pro/transfer'
 import type { ProTreeComponent } from '@idux/pro/tree'
@@ -18,6 +19,7 @@ declare module 'vue' {
     IxProTableLayoutTool: ProTableLayoutToolComponent
     IxProTransfer: ProTransferComponent
     IxProTree: ProTreeComponent
+    IxProSearch: ProSearchComponent
   }
 }
 
