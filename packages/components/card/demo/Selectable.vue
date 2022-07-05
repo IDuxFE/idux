@@ -4,7 +4,7 @@
       <div>Selected: {{ selected1 }}</div>
       <IxCard
         v-model:selected="selected1"
-        :header="{ title: 'Selectable', extra: 'setting' }"
+        :header="{ title: 'Selectable', suffix: 'setting' }"
         size="lg"
         selectable
         @selectedChange="logSelected"
@@ -18,7 +18,7 @@
       <div>Selected: {{ selected2 }}</div>
       <IxCard
         v-model:selected="selected1"
-        :header="{ title: 'Disabled and selected', extra: 'setting' }"
+        :header="{ title: 'Disabled and selected', suffix: 'setting' }"
         selectable
         disabled
       >
@@ -31,7 +31,7 @@
       <div>Selected: {{ selected3 }}</div>
       <IxCard
         v-model:selected="selected1"
-        :header="{ title: 'Disable and unselected', extra: 'setting' }"
+        :header="{ title: 'Disable and unselected', suffix: 'setting' }"
         selectable
         disabled
       >
@@ -49,7 +49,7 @@ const selected1 = ref(true)
 const selected2 = ref(true)
 const selected3 = ref(false)
 
-const logSelected = selected => {
+const logSelected = (selected: boolean) => {
   console.log(`selected is ${selected}`)
 }
 </script>

@@ -7,7 +7,7 @@
 
 import type { CardProps } from './types'
 
-import { ComputedRef, Slots, VNode, VNodeTypes, computed, defineComponent, isVNode, normalizeClass, provide } from 'vue'
+import { Slots, VNode, VNodeTypes, computed, defineComponent, isVNode, normalizeClass, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -32,12 +32,6 @@ export default defineComponent({
 
     provide(cardToken, { hoverable })
 
-    const children = computed(() => slots.default?.() || [])
-    const hasGrid = computed(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return children.value.some(node => node.type && (node.type as any).name === 'IxCardGrid')
-    })
-
     const [selected, setSelected] = useControlledProp(props, 'selected', false)
     const isDisabled = computed(() => props.disabled)
     const isSelectable = computed(() => props.selectable)
@@ -51,29 +45,28 @@ export default defineComponent({
       callEmit(props.onSelectedChange, newSelected)
     }
 
-    const classes = computed(() => {
+    return () => {
+      const prefixCls = mergedPrefixCls.value
       const { borderless = config.borderless, loading, size = config.size, shadow } = props
 
-      const hasGridValue = hasGrid.value
-      const prefixCls = mergedPrefixCls.value
-      return normalizeClass({
+      const children = slots.default?.() ?? []
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const hasGrid = children.some(node => node.type && (node.type as any).name === 'IxCardGrid')
+
+      const classes = normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
-        [`${prefixCls}-hoverable`]: !hasGridValue && hoverable.value,
+        [`${prefixCls}-hoverable`]: !hasGrid && hoverable.value,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-has-shadow`]: shadow,
-        [`${prefixCls}-has-grid`]: hasGridValue,
+        [`${prefixCls}-has-grid`]: hasGrid,
         [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-selectable`]: isSelectable.value,
         [`${prefixCls}-selected`]: isSelectable.value && selected.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
       })
-    })
-
-    return () => {
-      const prefixCls = mergedPrefixCls.value
       return (
-        <div class={classes.value} onClick={handleClick}>
+        <div class={classes} onClick={handleClick}>
           {renderCover(props, slots, prefixCls)}
           <ɵHeader v-slots={slots} size="sm" header={props.header} />
           {renderBody(props, children, hasGrid, prefixCls)}
@@ -111,17 +104,12 @@ const renderCover = (props: CardProps, slots: Slots, prefixCls: string) => {
   return coverNode ? <div class={`${prefixCls}-cover`}>{coverNode}</div> : undefined
 }
 
-const renderBody = (
-  props: CardProps,
-  children: ComputedRef<VNode[]>,
-  hasGrid: ComputedRef<boolean>,
-  prefixCls: string,
-) => {
+const renderBody = (props: CardProps, children: VNode[], hasGrid: boolean, prefixCls: string) => {
   let bodyNode: VNodeTypes | undefined
   if (props.loading) {
     bodyNode = renderLoading(prefixCls)
-  } else if (children.value.length) {
-    bodyNode = hasGrid.value ? <IxRow>{children.value}</IxRow> : children.value
+  } else if (children.length) {
+    bodyNode = hasGrid ? <IxRow>{children}</IxRow> : children
   }
   return bodyNode ? <div class={`${prefixCls}-body`}>{bodyNode}</div> : undefined
 }
