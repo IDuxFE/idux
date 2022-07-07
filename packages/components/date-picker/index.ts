@@ -37,4 +37,5 @@ export type {
   DateRangePanelInstance,
   DateRangePanelComponent,
   DateRangePanelPublicProps as DateRangePanelProps,
+  DatePickerType,
 } from './src/types'

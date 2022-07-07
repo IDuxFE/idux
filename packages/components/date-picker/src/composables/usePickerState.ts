@@ -48,8 +48,8 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
         ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
         : convertToDate(dateConfig, oldValue, formatRef.value)
     ) as StateValueType<T>
-    callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
     accessor.setValue(value)
+    callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
   }
 
   function handleClear(evt: Event) {
@@ -60,9 +60,9 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
         : convertToDate(dateConfig, oldValue, formatRef.value)
     ) as StateValueType<T>
 
+    accessor.setValue(undefined)
     callEmit(props.onClear, evt as MouseEvent)
     callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, undefined, oldValue)
-    accessor.setValue(undefined)
   }
 
   function handleFocus(evt: FocusEvent) {
@@ -71,8 +71,8 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
   }
 
   function handleBlur(evt: FocusEvent) {
-    callEmit(props.onBlur, evt)
     accessor.markAsBlurred()
+    callEmit(props.onBlur, evt)
     setFocused(false)
   }
 
