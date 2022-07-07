@@ -36,13 +36,15 @@ export default defineComponent({
 
     const isSelected = computed(() => selectedKeys.value.some(selectedKey => selectedKey === key))
 
+    const isDisabled = computed(() => props.disabled || (!isSelected.value && selectedLimit.value))
+
     const classes = computed(() => {
-      const { disabled, parentKey } = props
+      const { parentKey } = props
       const prefixCls = `${mergedPrefixCls.value}-option`
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
-        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-grouped`]: !isNil(parentKey),
         [`${prefixCls}-selected`]: isSelected.value,
       }
@@ -55,14 +57,15 @@ export default defineComponent({
     }
 
     return () => {
-      const { disabled, label, rawData } = props
+      const { label, rawData } = props
       const { multiple } = selectPanelProps
       const selected = isSelected.value
+      const disabled = isDisabled.value
       const prefixCls = `${mergedPrefixCls.value}-option`
       const _label = toString(label)
 
       // 优先显示 selectedLimitTitle
-      const title = (!(disabled || selected) && selectedLimitTitle.value) || _label
+      const title = (disabled && selectedLimitTitle.value) || _label
       const customAdditional = selectPanelProps.customAdditional
         ? selectPanelProps.customAdditional({ data: rawData!, index: props.index! })
         : undefined
@@ -78,7 +81,7 @@ export default defineComponent({
           {...rawData!.additional}
           {...customAdditional}
         >
-          {multiple && <IxCheckbox checked={selected} disabled={disabled || (!selected && selectedLimit.value)} />}
+          {multiple && <IxCheckbox checked={selected} disabled={disabled} />}
           <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData!, _label)}</span>
         </div>
       )

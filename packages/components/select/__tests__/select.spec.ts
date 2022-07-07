@@ -510,8 +510,9 @@ describe('Select', () => {
     })
 
     test('multipleLimit work', async () => {
+      const onChange = vi.fn()
       const wrapper = SelectMount({
-        props: { open: true, value: [0, 1, 2, 3], multipleLimit: 4 },
+        props: { open: true, value: [0, 1, 2, 3], multipleLimit: 4, onChange },
       })
 
       let options = wrapper.findAllComponents(Option)
@@ -519,12 +520,20 @@ describe('Select', () => {
       expect(options[4].find('.ix-checkbox').classes()).toContain('ix-checkbox-disabled')
       expect(options[4].attributes('title')).toBe('该选择器的值不能超过 4 项')
 
+      await options[4].trigger('click')
+
+      expect(onChange).not.toBeCalled()
+
       await wrapper.setProps({ multipleLimit: 5 })
 
       options = wrapper.findAllComponents(Option)
 
       expect(options[4].find('.ix-checkbox').classes()).not.toContain('ix-checkbox-disabled')
       expect(options[4].attributes('title')).toBe('A4')
+
+      await options[4].trigger('click')
+
+      expect(onChange).toBeCalled()
     })
 
     test('maxLabel work', async () => {
