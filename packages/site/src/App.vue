@@ -1,8 +1,8 @@
 <template>
   <IxDrawerProvider ref="drawerProviderRef">
     <IxModalProvider ref="modalProviderRef">
-      <IxNotificationProvider>
-        <IxMessageProvider>
+      <IxNotificationProvider ref="notificationProviderRef">
+        <IxMessageProvider ref="messageProviderRef">
           <div class="root-wrapper">
             <LayoutHeader></LayoutHeader>
             <div v-if="page !== 'home'" class="main-wrapper">
@@ -63,17 +63,23 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { DrawerProviderInstance } from '@idux/components/drawer'
+import { MessageProviderInstance } from '@idux/components/message'
 import { ModalProviderInstance } from '@idux/components/modal'
+import { NotificationProviderInstance } from '@idux/components/notification'
 
 import { AppContext, appContextToken } from './context'
 
 const drawerProviderRef = ref<DrawerProviderInstance>()
 const modalProviderRef = ref<ModalProviderInstance>()
+const notificationProviderRef = ref<NotificationProviderInstance>()
+const messageProviderRef = ref<MessageProviderInstance>()
 
 const router = useRouter()
 router.afterEach(() => {
   drawerProviderRef.value?.destroyAll()
   modalProviderRef.value?.destroyAll()
+  notificationProviderRef.value?.destroyAll()
+  messageProviderRef.value?.destroyAll()
 })
 
 const route = useRoute()

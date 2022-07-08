@@ -103,7 +103,7 @@ export default defineComponent({
       }
       const mergedCustomTag: TableCustomTag = {
         headCell: resizable ? ResizableHeadCell : undefined,
-        ...customAdditional,
+        ...customTag,
       }
 
       return (

@@ -24,5 +24,6 @@ export type {
   NotificationPlacement,
   NotificationRef,
   NotificationProviderRef,
+  NotificationProviderInstance,
   NotificationProviderComponent,
 } from './src/types'
