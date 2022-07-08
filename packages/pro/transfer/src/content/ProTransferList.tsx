@@ -80,6 +80,10 @@ export default defineComponent({
 
       const contentRef = props.isSource ? sourceContentRef : targetContentRef
 
+      const listSlots = {
+        label: slots.label && ((item: TreeTransferData) => slots.label?.({ item, isSource: props.isSource })),
+      }
+
       return (
         <ɵCheckableList
           ref={contentRef}
@@ -92,7 +96,7 @@ export default defineComponent({
           removable={!props.isSource && proTransferProps.mode === 'immediate'}
           virtual={proTransferProps.virtual}
           scroll={proTransferProps.scroll}
-          v-slots={{ label: slots.label }}
+          v-slots={listSlots}
           onCheckChange={onCheckChange}
           onRemove={onRemove}
           onScroll={handleScroll}

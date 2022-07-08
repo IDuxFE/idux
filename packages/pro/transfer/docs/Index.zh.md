@@ -99,6 +99,7 @@ export interface ProTransferTreeProps {
 | `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | 详情参考基础穿梭框组件 |
 | `headerSuffix` | 穿梭框列表头部后缀 | `{ isSource: boolean }` | 详情参考基础穿梭框组件  |
 | `operations` | 穿梭框列表底部 | `TransferOperationsContext` | 详情参考基础穿梭框组件  |
+| `label` | 树穿梭框label | `{ item: TransferData, isSource: boolean }` | 仅在 `type` 为 `'tree'` 下生效 |
 | `prefix` | 树节点前缀图标 | `string` | - | 仅在 `type` 为 `'tree'` 下生效  |
 | `suffix` | 树节点后缀图标 | `string` | - | 仅在 `type` 为 `'tree'` 下生效 |
 

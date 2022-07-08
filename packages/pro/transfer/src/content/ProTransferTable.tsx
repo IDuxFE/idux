@@ -43,7 +43,7 @@ export default defineComponent({
 
       if (dataSource && dataSource.length > 0) {
         const contentRef = props.isSource ? sourceContentRef : targetContentRef
-        return <IxTable ref={contentRef} class={prefixCls} {...tableProps.value} />
+        return <IxTable ref={contentRef} v-slots={slots} class={prefixCls} {...tableProps.value} />
       }
 
       return (

@@ -74,12 +74,12 @@ export interface TransferPaginationProps {
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `clearIcon` | 清除按钮 | - | - |
-| `default` | 穿梭框列表主体 | `TransferBindings & { isSource: boolean }` | - |
+| `default` | 穿梭框列表主体 | `TransferListSlotParams` | - |
 | `empty` | 穿梭框列表空状态 | `EmptyProps` | 仅在使用默认列表时生效 |
-| `footer` | 穿梭框列表底部 | `TransferBindings & { isSource: boolean }` | - |
+| `footer` | 穿梭框列表底部 | `TransferListSlotParams` | - |
 | `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | - |
 | `headerSuffix` | 穿梭框列表头部后缀 | `{ isSource: boolean }` | - |
-| `label` | 穿梭框列表label | `TransferData` | 仅在使用默认列表时生效 |
+| `label` | 穿梭框列表label | `{ item: TransferData, isSource: boolean }` | 仅在使用默认列表时生效 |
 | `operations` | 穿梭框操作按钮区域 | `TransferOperationsContext` | - |
 
 ```ts

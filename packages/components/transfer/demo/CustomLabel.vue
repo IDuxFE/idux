@@ -1,6 +1,6 @@
 <template>
   <IxTransfer v-model:value="selectedKeys" :data-source="dataSource" :disabled="disabled">
-    <template #label="item">
+    <template #label="{ item }">
       <span style="display: flex; align-items: center">
         <span style="margin-right: 8px">{{ item.label }}</span>
         <IxIcon name="desktop" />

@@ -79,7 +79,9 @@ export default defineComponent({
 
       const treeSlots = {
         prefix: slots.prefix,
-        label: slots.label,
+        label:
+          slots.label &&
+          ((params: { node: TreeTransferData }) => slots.label?.({ item: params.node, isSource: props.isSource })),
         suffix: showRemovableSuffix ? renderTreeRemovableSuffix : slots.suffix,
       }
 
