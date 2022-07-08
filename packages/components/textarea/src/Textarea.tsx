@@ -42,8 +42,6 @@ export default defineComponent({
       handleInput,
       handleCompositionStart,
       handleCompositionEnd,
-      handleFocus,
-      handleBlur,
       handleClear,
       syncValue,
     } = ɵUseInput(props, config)
@@ -95,8 +93,6 @@ export default defineComponent({
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
           />
           {renderSuffix(clearable.value, slots.clearIcon, clearIcon.value, clearVisible.value, handleClear, prefixCls)}
         </span>
