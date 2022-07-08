@@ -56,14 +56,37 @@ export function useRangeActiveValue(
   const { set, get } = dateConfig
   const now = dateConfig.now()
 
+  const viewType = computed(() => viewTypeMap[props.type])
+  const viewSpan = computed(() => (props.type === 'year' ? 12 : 1))
+
   const fromPanelValue = computed(() => panelValue.value?.[0])
   const toPanelValue = computed(() => panelValue.value?.[1])
 
+  // check if the panel view value provided by params is valid
+  const checkActiveDateValid = (from: Date | undefined, to: Date | undefined) => {
+    if (!from || !to) {
+      return false
+    }
+
+    const fromViewValue = get(from, viewType.value)
+    const toViewValue = get(to, viewType.value)
+
+    /* eslint-disable indent */
+    return props.type === 'year'
+      ? fromViewValue < toViewValue - viewSpan.value
+      : (() => {
+          const fromViewYearValue = get(from, 'year')
+          const toViewYearValue = get(to, 'year')
+
+          return fromViewValue < toViewValue && fromViewYearValue <= toViewYearValue
+        })()
+    /* eslint-enable indent */
+  }
+
+  // calculate valid active date based on given `from` and `to` active panel view value
   const calcValidActiveDate = (from: Date | undefined, to: Date | undefined, type: 'from' | 'to') => {
-    const viewType = viewTypeMap[props.type]
-    const viewSpan = props.type === 'year' ? 12 : 1
     const getViewDate = (value: Date) =>
-      set(value, get(value, viewType) + (type === 'from' ? -viewSpan : viewSpan), viewType)
+      set(value, get(value, viewType.value) + (type === 'from' ? -viewSpan.value : viewSpan.value), viewType.value)
 
     if (!from) {
       return type === 'from' ? now : getViewDate(now)
@@ -73,21 +96,7 @@ export function useRangeActiveValue(
       return type === 'from' ? from : getViewDate(from)
     }
 
-    const fromViewValue = get(from, viewType)
-    const toViewValue = get(to, viewType)
-
-    /* eslint-disable indent */
-    const valid =
-      props.type === 'year'
-        ? fromViewValue < toViewValue - viewSpan
-        : (() => {
-            const fromViewYearValue = get(from, 'year')
-            const toViewYearValue = get(to, 'year')
-
-            return fromViewValue < toViewValue && fromViewYearValue <= toViewYearValue
-          })()
-    /* eslint-disable indent */
-
+    const valid = checkActiveDateValid(from, to)
     if (type === 'from') {
       return valid ? from : getViewDate(to)
     }
@@ -118,7 +127,9 @@ export function useRangeActiveValue(
         activeDate => yearValue === get(activeDate.value, 'year') && monthValue === get(activeDate.value, 'month'),
       )
     })
-    if (valueAlreadyInView) {
+
+    // no need to reset panel view when current range is covered within panel view and panel view is valid
+    if (valueAlreadyInView && checkActiveDateValid(fromActiveValue.value, toActiveValue.value)) {
       return
     }
 
@@ -132,8 +143,8 @@ export function useRangeActiveValue(
   const fromActiveValue = computed(() => activeValue.value[0])
   const toActiveValue = computed(() => activeValue.value[1])
 
-  watch(panelValue, initActiveDate)
-  watch(() => props.visible, initActiveDate)
+  // reset panel active value when value, picker type, or visible state changes
+  watch([panelValue, () => props.visible, () => props.type], initActiveDate)
 
   const handleFromActiveValueUpdate = (value: Date) => {
     setActiveValue([value, calcValidActiveDate(value, toActiveValue.value, 'to')])
