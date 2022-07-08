@@ -66,6 +66,9 @@ export default defineComponent({
 
     const handleClick = () => {
       if (props.isLeaf) {
+        if (!isSelected.value && selectedLimit.value) {
+          return
+        }
         handleSelect(key)
         setOverlayOpened(false)
       } else {
