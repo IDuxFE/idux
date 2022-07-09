@@ -73,8 +73,8 @@ export default defineComponent({
       handleFocusAtClick()
     }
 
-    const vSlots = computed(() => {
-      return {
+    return () => {
+      const vSlots = {
         ...slots,
         prefix: () => (
           <span
@@ -95,9 +95,6 @@ export default defineComponent({
           </span>
         ),
       }
-    })
-
-    return () => {
       return (
         <ɵInput
           class={classes.value}
@@ -115,7 +112,7 @@ export default defineComponent({
           value={displayValue.value}
           onInput={handleInput}
           onKeydown={handleKeyDown}
-          v-slots={vSlots.value}
+          v-slots={vSlots}
         />
       )
     }

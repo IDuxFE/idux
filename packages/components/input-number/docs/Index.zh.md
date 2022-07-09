@@ -18,6 +18,8 @@ order: 0
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `number` | - | - | 使用 `control` 时，此配置无效 |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `addonAfter` | 设置后缀 | `string \| #addonAfter` | - | - | - |
+| `addonBefore` | 设置前缀 | `string \| #addonBefore` | - | - | - |
 | `disabled` | 禁用 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `keyboard` | 启用键盘行为 | `boolean` | `true` | ✅ | - |
 | `max` | 最大值 | `number` | `Infinity` | - | - |
@@ -36,12 +38,9 @@ order: 0
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@input-number-height-sm` | `@input-height-sm` | - | - |
-| `@input-number-height-md` | `@input-height-md` | - | - |
-| `@input-number-height-lg` | `@input-height-lg` | - | - |
-| `@input-number-width-sm` | `120px` | - | - |
-| `@input-number-width-md` | `160px` | - | - |
-| `@input-number-width-lg` | `192px` | - | - |
+| `@input-number-width-sm` | `12px` | - | - |
+| `@input-number-width-md` | `24px` | - | - |
+| `@input-number-width-lg` | `24px` | - | - |
 | `@input-number-button-hover-color` | `@input-active-color` | - | - |
 | `@input-number-error` | `@color-error` | - | - |
 | `@input-number-disabled-color` | `@input-disabled-color` | - | - |
