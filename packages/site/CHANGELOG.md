@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
+
+
+### Bug Fixes
+
+* **pro:table:** not working with customAdditional ([#1004](https://github.com/IDuxFE/idux/issues/1004)) ([036a691](https://github.com/IDuxFE/idux/commit/036a6914c171600244f7b158b9574e9bc6a9ba88))
+
+
+
+
+
 # [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
 
 **Note:** Version bump only for package @idux/site

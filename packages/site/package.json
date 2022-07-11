@@ -1,6 +1,6 @@
 {
   "name": "@idux/site",
-  "version": "1.0.0-beta.19",
+  "version": "1.0.0-beta.20",
   "private": true,
   "description": "A website for @idux",
   "license": "MIT",
@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@idux/cdk": "^1.0.0-beta.19",
-    "@idux/components": "^1.0.0-beta.19",
-    "@idux/pro": "^1.0.0-beta.19",
+    "@idux/components": "^1.0.0-beta.20",
+    "@idux/pro": "^1.0.0-beta.20",
     "codesandbox": "^2.2.3",
     "lodash-es": "^4.17.21",
     "vue": "^3.2.29",

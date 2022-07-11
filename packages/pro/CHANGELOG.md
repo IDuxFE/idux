@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
+
+
+### Bug Fixes
+
+* **pro:table:** not working with customAdditional ([#1004](https://github.com/IDuxFE/idux/issues/1004)) ([036a691](https://github.com/IDuxFE/idux/commit/036a6914c171600244f7b158b9574e9bc6a9ba88))
+
+
+### Features
+
+* **comp:transfer:** label slot renders source and target seperately ([#1006](https://github.com/IDuxFE/idux/issues/1006)) ([604e8d9](https://github.com/IDuxFE/idux/commit/604e8d99044e61839dade0e1cc752c751587ce3e))
+
+
+### BREAKING CHANGES
+
+* **comp:transfer:** label slot params change to { item, isSource }
+
+
+
+
+
 # [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
 
 

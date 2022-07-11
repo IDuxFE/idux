@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
+
+
+### Bug Fixes
+
+* **comp:card:** hoisted vnode cannot be hot updated in dev mode ([#997](https://github.com/IDuxFE/idux/issues/997)) ([9576f58](https://github.com/IDuxFE/idux/commit/9576f58a92efa1db7e3f1a4a9297ff9febeabbbe))
+* **comp:date-picker:** fix panel view display error when type changes ([#1003](https://github.com/IDuxFE/idux/issues/1003)) ([12af8ee](https://github.com/IDuxFE/idux/commit/12af8ee80d1ebe46672f0799c7ee0c14bcb8fde7))
+* **comp:input-number:** update control style ([#1007](https://github.com/IDuxFE/idux/issues/1007)) ([ce081ba](https://github.com/IDuxFE/idux/commit/ce081ba1db92a7d5653c31d0a22918dbf9ee4aa3))
+* **comp:select:** when over multiplelimit, the option can still be selected ([#1001](https://github.com/IDuxFE/idux/issues/1001)) ([41da36a](https://github.com/IDuxFE/idux/commit/41da36a7055a0aef9534d9b15cbac33f6ec34216)), closes [#1000](https://github.com/IDuxFE/idux/issues/1000)
+* **comp:textarea:** [@focus](https://github.com/focus) and [@blur](https://github.com/blur) will be triggered twice ([#1002](https://github.com/IDuxFE/idux/issues/1002)) ([f65ed17](https://github.com/IDuxFE/idux/commit/f65ed176ae4921c10971b0a610aa7c05ff60e538))
+* **pro:table:** not working with customAdditional ([#1004](https://github.com/IDuxFE/idux/issues/1004)) ([036a691](https://github.com/IDuxFE/idux/commit/036a6914c171600244f7b158b9574e9bc6a9ba88))
+
+
+### Features
+
+* **comp:alert:** add onAfterClose ([#1008](https://github.com/IDuxFE/idux/issues/1008)) ([2c0e301](https://github.com/IDuxFE/idux/commit/2c0e30181c0d814d1c50fce0452d463a58d1c6bb))
+* **comp:transfer:** label slot renders source and target seperately ([#1006](https://github.com/IDuxFE/idux/issues/1006)) ([604e8d9](https://github.com/IDuxFE/idux/commit/604e8d99044e61839dade0e1cc752c751587ce3e))
+
+
+### BREAKING CHANGES
+
+* **comp:transfer:** label slot params change to { item, isSource }
+
+
+
+
+
 # [1.0.0-beta.19](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-05)
 
 
