@@ -72,7 +72,7 @@ export function useExpandable(
       loadingKeys.value.splice(loadingKeys.value.indexOf(key), 1)
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)!
-      if (childrenNodes.length) {
+      if (childrenNodes?.length) {
         const level = currNode.level
         const mergedChildren = convertMergeNodes(
           props,

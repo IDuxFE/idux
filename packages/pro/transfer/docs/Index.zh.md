@@ -84,6 +84,7 @@ export interface ProTransferTreeProps {
   expandIcon?: string
   labelKey?: string
   leafLineIcon?: string
+  loadChildren?: <C extends VKey = VKey>(node: TreeTransferData<C>) => TreeTransferData<C>[]
   onExpand?: MaybeArray<(expanded: boolean, node: TreeNode) => void>
   onExpandedChange?: MaybeArray<(expendedKeys: VKey[], expendedNodes: TreeNode[]) => void>
 }

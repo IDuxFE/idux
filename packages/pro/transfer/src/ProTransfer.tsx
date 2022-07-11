@@ -9,7 +9,7 @@ import type { ɵCheckableListInstance } from '@idux/components/_private/checkabl
 import type { TableInstance } from '@idux/components/table'
 import type { TreeInstance } from '@idux/components/tree'
 
-import { computed, defineComponent, provide, ref } from 'vue'
+import { type ComputedRef, computed, defineComponent, provide, ref } from 'vue'
 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig as useComponentGlobalConfig } from '@idux/components/config'
@@ -19,15 +19,23 @@ import {
   type TransferDataStrategiesConfig,
   type TransferListSlotParams,
 } from '@idux/components/transfer'
+import { useGetKey } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 
+import { useTransferData } from './composables/useTransferData'
 import { useTreeDataStrategies } from './composables/useTreeDataStrategy'
-import { useTreeExpandedKeys } from './composables/useTreeExpandedKeys'
+import { type TreeExpandedKeysContext, useTreeExpandedKeys } from './composables/useTreeExpandedKeys'
 import ProTransferList from './content/ProTransferList'
 import ProTransferTable from './content/ProTransferTable'
 import ProTransferTree from './content/ProTransferTree'
 import { type ProTransferContext, proTransferContext } from './token'
-import { type ProTransferApis, type TransferData, type TreeTransferData, proTransferProps } from './types'
+import {
+  type ProTransferApis,
+  type ProTransferProps,
+  type TransferData,
+  type TreeTransferData,
+  proTransferProps,
+} from './types'
 
 export default defineComponent({
   name: 'IxProTransfer',
@@ -35,7 +43,11 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-transfer`)
+
+    const transferConfig = useComponentGlobalConfig('transfer')
     const transferLocale = useComponentGlobalConfig('locale').transfer
+
+    const getKey = useGetKey(props, transferConfig, 'ProTransfer')
 
     const [targetKeys, setTargetKeys] = useControlledProp(props, 'value')
     const targetKeySet = computed(() => new Set(targetKeys.value))
@@ -44,33 +56,30 @@ export default defineComponent({
     const sourceContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
     const targetContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
 
-    let context: ProTransferContext = {
+    const { dataKeyMap, parentKeyMap, expandedKeysContext } = useTreeContext(props, childrenKey, targetKeys)
+    const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
+      props,
+      getKey,
+      childrenKey,
+      targetKeySet,
+      setTargetKeys,
+      expandedKeysContext?.sourceExpandedKeys,
+      expandedKeysContext?.targetExpandedKeys,
+      expandedKeysContext?.handleSourceExpandedChange,
+      expandedKeysContext?.handleTargetExpandedChange,
+    )
+
+    const context: ProTransferContext = {
       props,
       slots,
       childrenKey,
       mergedPrefixCls,
       sourceContentRef,
       targetContentRef,
-    }
-    let dataKeyMap: Map<VKey, TreeTransferData<VKey>>
-
-    if (props.type === 'tree') {
-      const {
-        dataKeyMap: _dataKeyMap,
-        parentKeyMap,
-        dataStrategies,
-      } = useTreeDataStrategies(childrenKey, props.defaultTargetData as TreeTransferData<VKey>[] | undefined)
-      const expandedKeysContext = useTreeExpandedKeys(props, targetKeys, parentKeyMap)
-
-      dataKeyMap = _dataKeyMap
-
-      context = {
-        ...context,
-        expandedKeysContext,
-        parentKeyMap,
-      }
-
-      provide(TRANSFER_DATA_STRATEGIES, dataStrategies as unknown as TransferDataStrategiesConfig<TransferData>)
+      parentKeyMap,
+      loadSourceChildren,
+      loadTargetChildren,
+      expandedKeysContext,
     }
 
     provide(proTransferContext, context)
@@ -96,14 +105,14 @@ export default defineComponent({
 
       let count = 0
       if (isSource) {
-        dataKeyMap.forEach((item, key) => {
+        dataKeyMap?.forEach((item, key) => {
           if (!targetKeySet.value.has(key) && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
             ++count
           }
         })
       } else {
         targetKeys.value?.forEach(key => {
-          const item = dataKeyMap.get(key)
+          const item = dataKeyMap?.get(key)
           if (item && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
             ++count
           }
@@ -121,7 +130,7 @@ export default defineComponent({
 
     return () => {
       const transferProps = {
-        dataSource: props.dataSource,
+        dataSource: dataSource.value,
         value: targetKeys.value,
         sourceSelectedKeys: props.sourceSelectedKeys,
         targetSelectedKeys: props.targetSelectedKeys,
@@ -136,8 +145,8 @@ export default defineComponent({
         pagination: props.pagination,
         mode: props.mode,
         spin: props.spin,
-        getKey: props.getKey,
-        'onUpdate:value': setTargetKeys,
+        getKey: getKey.value,
+        'onUpdate:value': setTargetKeys as <K = VKey>(keys: K[]) => void,
         'onUpdate:sourceSelectedKeys': props['onUpdate:sourceSelectedKeys'],
         'onUpdate:targetSelectedKeys': props['onUpdate:targetSelectedKeys'],
         onChange: props.onChange,
@@ -157,3 +166,31 @@ export default defineComponent({
     }
   },
 })
+
+function useTreeContext(
+  props: ProTransferProps,
+  childrenKey: ComputedRef<string>,
+  targetKeys: ComputedRef<VKey[] | undefined>,
+): {
+  dataKeyMap?: Map<VKey, TreeTransferData<VKey>>
+  expandedKeysContext?: TreeExpandedKeysContext
+  parentKeyMap?: Map<VKey, VKey | undefined>
+} {
+  if (props.type !== 'tree') {
+    return {}
+  }
+
+  const { dataKeyMap, parentKeyMap, dataStrategies } = useTreeDataStrategies(
+    childrenKey,
+    props.defaultTargetData as TreeTransferData<VKey>[] | undefined,
+  )
+  const expandedKeysContext = useTreeExpandedKeys(props, targetKeys, parentKeyMap)
+
+  provide(TRANSFER_DATA_STRATEGIES, dataStrategies as unknown as TransferDataStrategiesConfig<TransferData>)
+
+  return {
+    dataKeyMap,
+    expandedKeysContext,
+    parentKeyMap,
+  }
+}

@@ -41,6 +41,7 @@ export interface ProTransferTreeProps {
   expandIcon?: string
   labelKey?: string
   leafLineIcon?: string
+  loadChildren?: <C extends VKey = VKey>(node: TreeTransferData<C>) => TreeTransferData<C>[]
   onExpand?: MaybeArray<<K = VKey>(expanded: boolean, node: TreeNode<K>) => void>
   onExpandedChange?: MaybeArray<<K = VKey>(expendedKeys: K[], expendedNodes: TreeNode<K>[]) => void>
 }
@@ -82,7 +83,7 @@ export const proTransferProps = {
     default: 'default',
   },
   spin: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
-  getKey: [String, Function] as PropType<string | ((item: TransferData) => number | string)>,
+  getKey: [String, Function] as PropType<string | ((item: TransferData) => VKey)>,
   scroll: Object as PropType<TransferScroll>,
 
   tableProps: Object as PropType<ProTransferTableProps>,
