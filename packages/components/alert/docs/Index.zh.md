@@ -22,6 +22,7 @@ subtitle: 警告提示
 | `title` | 信息提示内容 | `string \| string[] \| #default` | - | - |- |
 | `onBeforeClose` | 关闭提示前会触发的回调函数 | `() => boolean \| Promise<boolean>` | - | - | - |
 | `onClose` | 关闭提示会触发的回调函数 | `() => void` | - | - | - |
+| `onAfterClose` | 关闭提示后触发的回调函数 | `() => void` | - | - | 动画结束 |
 
 ```ts
 export interface AlertPagination {
