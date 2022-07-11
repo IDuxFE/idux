@@ -9,7 +9,7 @@ import { Transition, computed, defineComponent, normalizeClass, watchEffect } fr
 
 import { isNil, isObject } from 'lodash-es'
 
-import { convertArray, flattenNode, useState } from '@idux/cdk/utils'
+import { callEmit, convertArray, flattenNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxPagination } from '@idux/components/pagination'
@@ -56,6 +56,8 @@ export default defineComponent({
       })
     })
 
+    const handleAfterLeave = () => callEmit(props.onAfterClose)
+
     return () => {
       const { title, pagination } = props
 
@@ -69,7 +71,7 @@ export default defineComponent({
 
       const prefixCls = mergedPrefixCls.value
       return (
-        <Transition name={prefixCls}>
+        <Transition name={prefixCls} onAfterLeave={handleAfterLeave}>
           {visible.value && (
             <div class={classes.value}>
               {iconNode && <span class={`${prefixCls}-icon`}>{iconNode}</span>}

@@ -57,20 +57,14 @@ export default defineComponent({
       elementRef.value = inputRef.value!.getInputElement()
     })
 
-    const handleFocusAtClick = () => {
-      if (!isDisabled.value) {
-        focus()
-      }
-    }
-
-    const handleIncrease = () => {
+    const handleIncrease = (evt: MouseEvent) => {
+      evt.stopPropagation()
       handleInc()
-      handleFocusAtClick()
     }
 
-    const handleDecrease = () => {
+    const handleDecrease = (evt: MouseEvent) => {
+      evt.stopPropagation()
       handleDec()
-      handleFocusAtClick()
     }
 
     return () => {

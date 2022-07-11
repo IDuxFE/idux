@@ -28,6 +28,7 @@ export const alertProps = {
     type: String as PropType<AlertType>,
     default: 'info',
   },
+  onAfterClose: [Function, Array] as PropType<MaybeArray<() => void>>,
   onBeforeClose: [Function, Array] as PropType<MaybeArray<() => void | boolean | Promise<boolean>>>,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
 } as const
