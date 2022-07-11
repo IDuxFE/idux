@@ -20,8 +20,8 @@ export interface InputNumberBindings {
   isDisabled: ComputedRef<boolean>
   isFocused: Ref<boolean>
   nowValue: ComputedRef<number | undefined>
-  isDisabledDec: Ref<boolean>
-  isDisabledInc: Ref<boolean>
+  isDisabledDec: ComputedRef<boolean>
+  isDisabledInc: ComputedRef<boolean>
 
   handleKeyDown: (evt: KeyboardEvent) => void
   handleDec: () => void

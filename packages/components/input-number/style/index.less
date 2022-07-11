@@ -23,6 +23,31 @@
     }
   }
 
+  
+  &.@{input-prefix}-sm {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-width-sm;
+      font-size: @font-size-sm;
+    }
+  }
+
+  &.@{input-prefix}-md {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-width-md;
+      font-size: @font-size-md;
+    }
+  }
+
+  &.@{input-prefix}-lg {
+    .@{input-number-prefix}-decrease,
+    .@{input-number-prefix}-increase {
+      width: @input-number-width-lg;
+      font-size: @font-size-lg;
+    }
+  }
+
   &-decrease,
   &-increase {
     display: flex;
@@ -32,9 +57,12 @@
     z-index: 1;
     right: 0;
     height: 50%;
-    width: 24px;
     user-select: none;
     background-color: transparent;
+    overflow: hidden;
+    .@{idux-prefix}-icon {
+      position: absolute;
+    }
     &--disabled {
       cursor: not-allowed;
       color: @input-number-disabled-color;
@@ -42,26 +70,34 @@
   }
 
   &-increase {
-    top: 1px;
+    top: 0;
+    .@{idux-prefix}-icon {
+      top: 20%;
+    }
   }
 
   &-decrease {
     top: 50%;
-    bottom: 1px;
+    bottom: 0;
+    .@{idux-prefix}-icon {
+      top: -20%;
+    }
   }
   
   .@{idux-prefix}-input-inner {
-    padding-right: 18px !important;
+    padding-right: 18px;
   }
 
   .@{idux-prefix}-input-suffix {
     margin-left: 0;
   }
 
-  .@{idux-prefix}-input-wrapper{
-    .@{idux-prefix}-input-inner {
-      padding-right: 12px !important;
-      min-width: 24px;
+  &.@{idux-prefix}-input-with-addon-before.@{idux-prefix}-input-with-addon-after{
+    .@{idux-prefix}-input-wrapper{
+      .@{idux-prefix}-input-inner {
+        padding-right: 12px;
+        min-width: 24px;
+      }
     }
   }
 
