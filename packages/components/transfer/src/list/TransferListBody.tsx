@@ -72,6 +72,10 @@ export default defineComponent({
         triggerRemove([key])
       }
 
+      const listSlots = {
+        label: slots.label && ((item: TransferData) => slots.label?.({ item, isSource: props.isSource })),
+      }
+
       return (
         <ɵCheckableList
           ref={checkableListRef}
@@ -83,7 +87,7 @@ export default defineComponent({
           removable={!props.isSource && transferProps.mode === 'immediate'}
           virtual={transferProps.virtual}
           scroll={transferProps.scroll}
-          v-slots={{ label: slots.label }}
+          v-slots={listSlots}
           onCheckChange={onCheckChange}
           onRemove={onRemove}
           onScroll={handleScroll}

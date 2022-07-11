@@ -81,7 +81,7 @@ export interface TransferSlots<T extends TransferData = TransferData> extends Sl
   headerLabel?: (params: { data: T[]; isSource: boolean }) => VNode[]
   headerSuffix?: (params: { isSource: boolean }) => VNode[]
   operations?: (operations: TransferOperationsSlotParams) => VNode[]
-  label?: (item: T) => VNode[]
+  label?: (params: { item: T; isSource: boolean }) => VNode[]
   empty?: (params: EmptyProps) => VNode[]
   clearIcon?: () => VNode[]
 }

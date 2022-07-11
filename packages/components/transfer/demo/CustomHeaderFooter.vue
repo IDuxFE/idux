@@ -1,7 +1,14 @@
 <template>
-  <IxTransfer v-model:value="targetKeys" :data-source="dataSource" :disabled="disabled" show-list-footer>
-    <template #headerLabel>
-      <span> Custom header </span>
+  <IxTransfer
+    v-model:value="targetKeys"
+    :data-source="dataSource"
+    mode="immediate"
+    :disabled="disabled"
+    show-list-footer
+  >
+    <template #headerLabel="{ data, isSource }">
+      <span v-if="isSource"> Custom header ({{ data.length }}) </span>
+      <span v-else> Target ({{ data.length }}) </span>
     </template>
     <template #headerSuffix>
       <IxIcon name="plus" :onClick="handleSuffixClick" />
