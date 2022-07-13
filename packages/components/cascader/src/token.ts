@@ -13,7 +13,7 @@ import type { ExpandableContext } from './composables/useExpandable'
 import type { SearchableContext } from './composables/useSearchable'
 import type { SelectedStateContext } from './composables/useSelectedState'
 import type { CascaderProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { CascaderConfig } from '@idux/components/config'
 import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
@@ -34,7 +34,7 @@ export interface CascaderContext
   mergedExpandIcon: ComputedRef<string>
   mergedFullPath: ComputedRef<boolean>
   mergedLabelKey: ComputedRef<string>
-  accessor: ValueAccessor
+  accessor: FormAccessor
   inputValue: ComputedRef<string>
   setInputValue: (value: string) => void
   overlayOpened: ComputedRef<boolean>

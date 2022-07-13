@@ -7,11 +7,12 @@
 
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { useGetKey } from '@idux/components/utils'
 
@@ -54,7 +55,8 @@ export default defineComponent({
 
     const { overlayRef, updateOverlay, overlayOpened, setOverlayOpened } = ɵUseOverlayState(props, config, triggerRef)
 
-    const accessor = useFormAccessor()
+    const { accessor, control } = useAccessorAndControl()
+    useFormItemRegister(control)
 
     const { mergedData, mergedDataMap } = useDataSource(
       props,
@@ -143,7 +145,7 @@ export default defineComponent({
         clearIcon={props.clearIcon}
         config={config}
         dataSource={selectedStateContext.selectedData.value}
-        disabled={accessor.disabled.value}
+        disabled={accessor.disabled}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
@@ -171,7 +173,7 @@ export default defineComponent({
       const overlayProps = {
         class: overlayClasses.value,
         clickOutside: true,
-        disabled: accessor.disabled.value || props.readonly,
+        disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
         target: target.value,

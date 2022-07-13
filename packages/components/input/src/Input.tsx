@@ -62,7 +62,7 @@ export default defineComponent({
           clearable={clearable.value}
           clearIcon={clearIcon.value}
           clearVisible={clearVisible.value}
-          disabled={accessor.disabled.value}
+          disabled={accessor.disabled}
           focused={isFocused.value}
           prefix={prefix}
           size={mergedSize.value}

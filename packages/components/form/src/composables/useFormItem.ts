@@ -18,7 +18,7 @@ import {
 
 import { isFunction, isObject, isString } from 'lodash-es'
 
-import { type AbstractControl, type ValidateStatus, useValueControl } from '@idux/cdk/forms'
+import { type AbstractControl, type ValidateStatus, useControl as useSelfControl } from '@idux/cdk/forms'
 import { Logger, type VKey } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type Locale } from '@idux/components/locales'
@@ -66,7 +66,7 @@ function useControl() {
 
   provide(FORM_ITEM_TOKEN, { registerControl, unregisterControl })
 
-  const selfControl = useValueControl()
+  const selfControl = useSelfControl()
 
   const control = shallowRef<AbstractControl>()
 

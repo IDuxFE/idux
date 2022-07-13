@@ -5,18 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TextareaProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { TextareaConfig } from '@idux/components/config'
-import type { Ref, Slot, StyleValue } from 'vue'
+import { type Ref, type Slot, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
-import { computed, defineComponent, normalizeClass, onMounted } from 'vue'
-
-import { useGlobalConfig } from '@idux/components/config'
+import { type FormAccessor } from '@idux/cdk/forms'
+import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { ɵUseInput } from '@idux/components/input'
 
-import { textareaProps } from './types'
+import { type TextareaProps, textareaProps } from './types'
 import { useAutoRows } from './useAutoRows'
 
 export default defineComponent({
@@ -57,7 +53,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
-        [`${prefixCls}-disabled`]: accessor.disabled.value,
+        [`${prefixCls}-disabled`]: accessor.disabled,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-with-count`]: showCount,
         [`${prefixCls}-${size}`]: true,
@@ -88,7 +84,7 @@ export default defineComponent({
             ref={elementRef}
             class={`${prefixCls}-inner`}
             style={textareaStyle.value}
-            disabled={accessor.disabled.value}
+            disabled={accessor.disabled}
             readonly={props.readonly}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
@@ -101,14 +97,14 @@ export default defineComponent({
   },
 })
 
-function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: ValueAccessor) {
+function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: FormAccessor) {
   return computed(() => {
     const showCount = props.showCount ?? config.showCount
     const computeCount = props.computeCount ?? config.computeCount
     const maxCount = props.maxCount ?? config.maxCount
     let dataCount = ''
     if (showCount) {
-      const value = accessor.valueRef.value ?? ''
+      const value = accessor.value ?? ''
       dataCount = value.length
       if (computeCount) {
         dataCount = computeCount(value)

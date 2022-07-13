@@ -5,15 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FormatContext } from './useFormat'
-import type { InputEnableStatus } from './useInputEnableStatus'
-import type { DateConfig } from '@idux/components/config'
-
-import { type ComputedRef, watch } from 'vue'
+import { type ComputedRef, type Ref, watch } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
+import { type DateConfig } from '@idux/components/config'
 
 import { applyDateTime, convertToDate, isSameDateTime } from '../utils'
+import { type FormatContext } from './useFormat'
+import { type InputEnableStatus } from './useInputEnableStatus'
 
 export interface PickerControlContext {
   inputValue: ComputedRef<string>
@@ -43,7 +42,7 @@ export function useControl(
   dateConfig: DateConfig,
   formatContext: FormatContext,
   inputEnableStatus: ComputedRef<InputEnableStatus>,
-  valueRef: ComputedRef<string | number | Date | undefined>,
+  valueRef: Ref<string | number | Date | undefined>,
   handleChange: (value: Date | undefined) => void,
 ): PickerControlContext {
   const { formatRef, dateFormatRef, timeFormatRef } = formatContext

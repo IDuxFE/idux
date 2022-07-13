@@ -7,14 +7,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { DatePickerProps } from '../types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { DateConfig } from '@idux/components/config'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, toRaw, watch } from 'vue'
 
-import { toRaw, watch } from 'vue'
-
+import { type FormAccessor } from '@idux/cdk/forms'
 import { callEmit, useState } from '@idux/cdk/utils'
+import { type DateConfig } from '@idux/components/config'
+
+import { type DatePickerProps } from '../types'
 
 export interface InputStateContext {
   inputValue: Ref<string>
@@ -28,28 +27,29 @@ export interface InputStateContext {
 export function useInputState(
   props: DatePickerProps,
   dateConfig: DateConfig,
-  accessor: ValueAccessor,
+  accessor: FormAccessor,
   formatRef: ComputedRef<string>,
 ): InputStateContext {
-  const initValue = accessor.valueRef.value
+  const initValue = accessor.value
   const formatText = formatRef.value
-  const initText = initValue
-    ? dateConfig.format(dateConfig.convert(accessor.valueRef.value, formatText), formatText)
-    : ''
+  const initText = initValue ? dateConfig.format(dateConfig.convert(initValue, formatText), formatText) : ''
   const [inputValue, setInputValue] = useState(initText)
   const [isFocused, setFocused] = useState(false)
 
-  watch(accessor.valueRef, value => {
-    if (!value) {
-      setInputValue('')
-      return
-    }
-    const formatText = formatRef.value
-    const newValue = dateConfig.format(dateConfig.convert(value, formatText), formatText)
-    if (newValue !== inputValue.value) {
-      setInputValue(newValue)
-    }
-  })
+  watch(
+    () => accessor.value,
+    value => {
+      if (!value) {
+        setInputValue('')
+        return
+      }
+      const formatText = formatRef.value
+      const newValue = dateConfig.format(dateConfig.convert(value, formatText), formatText)
+      if (newValue !== inputValue.value) {
+        setInputValue(newValue)
+      }
+    },
+  )
 
   const handleInput = (evt: Event) => {
     callEmit(props.onInput, evt)
@@ -64,26 +64,26 @@ export function useInputState(
     if (!isValid(currDate) || format(currDate, formatText) != value) {
       return
     }
-    const oldDate = toRaw(accessor.valueRef.value)
+    const oldDate = toRaw(accessor.value)
     accessor.setValue(currDate)
     callEmit(props.onChange, currDate, oldDate)
   }
 
   const handleFocus = (evt: FocusEvent) => {
-    callEmit(props.onFocus, evt)
     setFocused(true)
+    callEmit(props.onFocus, evt)
   }
 
   const handleBlur = (evt: FocusEvent) => {
-    callEmit(props.onBlur, evt)
-    accessor.markAsBlurred()
     setFocused(false)
+    accessor.markAsBlurred()
+    callEmit(props.onBlur, evt)
   }
 
   const handleClear = (evt: MouseEvent) => {
-    callEmit(props.onClear, evt)
     evt.stopPropagation()
     accessor.setValue(undefined)
+    callEmit(props.onClear, evt)
   }
 
   return {

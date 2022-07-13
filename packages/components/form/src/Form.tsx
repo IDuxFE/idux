@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { FORMS_CONTROL_TOKEN, useValueControl } from '@idux/cdk/forms'
+import { FORMS_CONTROL_TOKEN, useControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { FORM_TOKEN, formToken } from './token'
@@ -17,7 +17,7 @@ export default defineComponent({
   name: 'IxForm',
   props: formProps,
   setup(props, { slots }) {
-    const control = useValueControl()
+    const control = useControl()
     provide(FORMS_CONTROL_TOKEN, control)
 
     const common = useGlobalConfig('common')

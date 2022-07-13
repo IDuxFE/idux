@@ -54,13 +54,21 @@ order: 0
 
 ### IxFormWrapper
 
-用于嵌套表单时, 简于子组件的 `control` 路径
+用于嵌套表单时, 简化子组件的 `control` 路径
 
 #### FormWrapperProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
+
+### useFormItemRegister
+
+表单组件注册 control, 配合 `useAccessorAndControl` 使用
+
+```ts
+function useFormItemRegister(control: ShallowRef<AbstractControl | undefined>): void
+```
 
 ## FAQ
 
@@ -70,48 +78,36 @@ order: 0
 
 ```html
 <template>
-  <input :value="valueRef" :disabled="isDisabled" @blur="onBlur" @change="onChange" />
+  <input class="custom-input" :value="accessor.value" :disabled="accessor.disabled" @blur="onBlur" @input="onInput" />
 </template>
 
-<script lang="ts">
-import { PropType, computed, defineComponent } from 'vue'
+<script setup lang="ts">
 
-import { AbstractControl, useValueAccessor } from '@idux/cdk/forms'
-import { useFormAccessor, useFormItemRegister } from '@idux/components/form'
+import { useAccessorAndControl } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
 
-export default defineComponent({
-  name: 'CustomInput',
-  props: {
-    value: String,
-    control: { type: [String, Object] as PropType<string | AbstractControl> },
-    disabled: Boolean,
-  },
-  setup(_) {
-    // 使用 valueAccessor 接管 props.value 的控制
-    //const control = useValueControl()
-    //const accessor = useValueAccessor({ control })
-    // 在 IxFormItem 中注册 control
-    //useFormItemRegister(control)
-    // 就是上面 3 行代码的简化版本, 但是 controlKey 必须为 'control'
-    const accessor = useFormAccessor()
+defineProps<{
+  control?: string | number | (string | number)[] | object
+  disabled?: boolean
+  value?: string
+}>()
 
-    // 输入框绑定的值
-    const valueRef = computed(() => accessor.valueRef.value)
-    // 输入框禁用状态
-    const isDisabled = computed(() => accessor.disabled.value)
-    // 输入框 blur 状态
-    const onBlur = () => {
-      accessor.markAsBlurred()
-    }
-    // 输入框值发生变更后的回调
-    const onChange = (evt: Event) => {
-      const { value } = evt.target as HTMLInputElement
-      accessor.setValue(value)
-    }
+// useAccessorAndControl 内部对 props 中的 control, disabled, value 进行了处理
+const { accessor, control: controlRef } = useAccessorAndControl()
 
-    return { valueRef, isDisabled, onBlur, onChange }
-  },
-})
+// 在 FormItem 组件中注册 control, 让 FormItem 获取控件的验证状态
+useFormItemRegister(controlRef)
+
+// 表单 blur 状态
+const onBlur = () => {
+  accessor.markAsBlurred()
+}
+
+// 表单值发生变更后的回调
+const onInput = (evt: Event) => {
+  const { value } = evt.target as HTMLInputElement
+  accessor.setValue(value)
+}
 </script>
 ```
 

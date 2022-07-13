@@ -5,16 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FormatContext } from './useFormat'
-import type { InputEnableStatus } from './useInputEnableStatus'
-import type { DateConfig } from '@idux/components/config'
-
-import { type ComputedRef, computed, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, watch } from 'vue'
 
 import { convertArray, useState } from '@idux/cdk/utils'
+import { type DateConfig } from '@idux/components/config'
 
 import { compareDateTime, convertToDate, sortRangeValue } from '../utils'
 import { type PickerControlContext, useControl } from './useControl'
+import { type FormatContext } from './useFormat'
+import { type InputEnableStatus } from './useInputEnableStatus'
 
 export interface PickerRangeControlContext {
   buffer: ComputedRef<(Date | undefined)[] | undefined>
@@ -34,7 +33,7 @@ export function useRangeControl(
   dateConfig: DateConfig,
   formatContext: FormatContext,
   inputEnableStatus: ComputedRef<InputEnableStatus>,
-  valueRef: ComputedRef<(string | number | Date | undefined)[] | undefined>,
+  valueRef: Ref<(string | number | Date)[] | undefined>,
 ): PickerRangeControlContext {
   const { formatRef } = formatContext
   const [buffer, setBuffer] = useState<(Date | undefined)[] | undefined>(

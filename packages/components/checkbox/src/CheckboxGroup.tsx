@@ -9,9 +9,10 @@ import { type VNodeChild, computed, defineComponent, normalizeClass, provide } f
 
 import { isNil } from 'lodash-es'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
 
 import Checkbox from './Checkbox'
@@ -24,7 +25,8 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox-group`)
-    const accessor = useFormAccessor()
+    const { accessor, control } = useAccessorAndControl()
+    useFormItemRegister(control)
     provide(checkboxGroupToken, { props, accessor })
 
     const classes = computed(() => {

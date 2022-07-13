@@ -19,7 +19,7 @@ export function useInputProps(context: TimePickerContext | TimeRangePickerContex
       borderless: false,
       clearable: props.clearable ?? config.clearable,
       clearIcon: props.clearIcon ?? config.clearIcon,
-      disabled: accessor.disabled.value,
+      disabled: accessor.disabled,
       size: 'sm',
     }
   })

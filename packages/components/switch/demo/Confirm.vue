@@ -1,15 +1,21 @@
 <template>
   <IxPopconfirm v-model:visible="visible" :title="tempChecked ? '确定开启？' : '确定禁用？'" @ok="onOk">
     <span>
-      <IxSwitch :checked="isChecked" :disabled="isDisabled" @blur="onBlur" @change="onChange" @click="onClick" />
+      <IxSwitch
+        :checked="accessor.value"
+        :disabled="accessor.disabled"
+        @blur="onBlur"
+        @change="onChange"
+        @click="onClick"
+      />
     </span>
   </IxPopconfirm>
 </template>
 <script setup lang="ts">
-import { PropType, computed, ref } from 'vue'
+import { PropType, ref } from 'vue'
 
-import { AbstractControl } from '@idux/cdk/forms'
-import { useFormAccessor } from '@idux/components/form'
+import { AbstractControl, useAccessorAndControl } from '@idux/cdk/forms'
+import { useFormItemRegister } from '@idux/components/form'
 
 const props = defineProps({
   checked: {
@@ -30,9 +36,8 @@ const props = defineProps({
   },
 })
 
-const accessor = useFormAccessor<boolean>('checked')
-const isChecked = computed(() => !!accessor.valueRef.value)
-const isDisabled = computed(() => accessor.disabled.value)
+const { accessor, control: controlRef } = useAccessorAndControl({ valueKey: 'checked' })
+useFormItemRegister(controlRef)
 
 const visible = ref(false)
 const tempChecked = ref(false)

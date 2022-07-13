@@ -29,7 +29,7 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
 
   const handleClick = () => {
     const currOpened = overlayOpened.value
-    if (currOpened || accessor.disabled.value) {
+    if (currOpened || accessor.disabled) {
       return
     }
 
@@ -38,10 +38,9 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
 
   return computed(() => ({
     borderless: props.borderless,
-    clearable:
-      !props.readonly && !accessor.disabled.value && (props.clearable ?? config.clearable) && !!accessor.valueRef.value,
+    clearable: !props.readonly && !accessor.disabled && (props.clearable ?? config.clearable) && !!accessor.value,
     clearIcon: props.clearIcon ?? config.clearIcon,
-    disabled: accessor.disabled.value,
+    disabled: accessor.disabled,
     focused: isFocused.value,
     readonly: props.readonly || !inputEnableStatus.value.enableExternalInput,
     size: props.size ?? formContext?.size.value ?? config.size,

@@ -11,8 +11,9 @@ import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { Logger, callEmit } from '@idux/cdk/utils'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 
 export interface InputNumberBindings {
   displayValue: Ref<string>
@@ -32,13 +33,14 @@ export interface InputNumberBindings {
 }
 
 export function useInputNumber(props: InputNumberProps, config: InputNumberConfig): InputNumberBindings {
-  const accessor = useFormAccessor<number | null | undefined>()
+  const { accessor, control } = useAccessorAndControl<number | null>()
+  useFormItemRegister(control)
 
   const displayValue = ref('')
   const isIllegal = ref(true)
-  const nowValue = computed(() => accessor.valueRef.value ?? undefined)
+  const nowValue = computed(() => accessor.value ?? undefined)
   const isKeyboard = computed(() => props.keyboard ?? config.keyboard)
-  const isDisabled = computed(() => accessor?.disabled.value)
+  const isDisabled = computed(() => accessor.disabled)
   const isDisabledDec = computed(() => props.readonly || (!!nowValue.value && nowValue.value <= props.min))
   const isDisabledInc = computed(() => props.readonly || (!!nowValue.value && nowValue.value >= props.max))
 
@@ -53,14 +55,14 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
       }
       return props.precision
     }
-    return Math.max(getPrecision(accessor.valueRef.value), stepPrecision)
+    return Math.max(getPrecision(accessor.value), stepPrecision)
   })
 
   const disabledDec = computed(() => getIncValueFormAccessor(-props.step) < props.min)
   const disabledInc = computed(() => getIncValueFormAccessor(props.step) > props.max)
 
   function getIncValueFormAccessor(step: number) {
-    const { value } = accessor.valueRef
+    const { value } = accessor
     let newVal = step
     if (typeof value === 'number' && !Number.isNaN(value)) {
       // Use the toFixed func to ensure numerical accuracy.
@@ -71,7 +73,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   }
 
   function updateDisplayValueFromAccessor() {
-    const { value } = accessor.valueRef
+    const { value } = accessor
     if (value === null || value === undefined) {
       displayValue.value = ''
     } else if (Number.isNaN(value)) {
@@ -103,13 +105,13 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   }
 
   function updateModelValue(newVal: number | null) {
-    const oldVal = toRaw(accessor.valueRef.value)
+    const oldVal = toRaw(accessor.value)
     if (newVal !== oldVal) {
       accessor.setValue(newVal)
       callEmit(props.onChange, newVal, oldVal)
 
       nextTick(() => {
-        if (newVal !== accessor.valueRef.value) {
+        if (newVal !== accessor.value) {
           updateDisplayValueFromAccessor()
         }
       })
@@ -176,8 +178,8 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   function handleBlur(evt: FocusEvent) {
     isFocused.value = false
     updateModelValueFromDisplayValue()
-    callEmit(props.onBlur, evt)
     accessor.markAsBlurred()
+    callEmit(props.onBlur, evt)
   }
 
   watch(
@@ -193,7 +195,11 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     { immediate: true },
   )
 
-  watch(accessor.valueRef, () => updateDisplayValueFromAccessor(), { immediate: true })
+  watch(
+    () => accessor.value,
+    () => updateDisplayValueFromAccessor(),
+    { immediate: true },
+  )
 
   return {
     displayValue,

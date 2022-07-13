@@ -9,9 +9,10 @@ import { type ComputedRef, type Ref, computed, defineComponent, inject, normaliz
 
 import { isNil } from 'lodash-es'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormAccessor, useFormElement } from '@idux/components/form'
+import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
 import { useKey } from '@idux/components/utils'
 
 import { type RadioGroupContext, radioGroupToken } from './token'
@@ -123,18 +124,18 @@ const useRadio = (
 
   if (radioGroup) {
     const { accessor, props: groupProps } = radioGroup
-    isChecked = computed(() => accessor.valueRef.value === mergedValue.value)
-    isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
+    isChecked = computed(() => accessor.value === mergedValue.value)
+    isDisabled = computed(() => accessor.disabled || !!props.disabled)
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
     handleChange = (evt: Event) => {
       if (elementRef.value) {
         const checked = (evt.target as HTMLInputElement).checked
         const value = mergedValue.value
-        const oldValue = accessor.valueRef.value
+        const oldValue = accessor.value
         accessor.setValue(value)
         // 为了保持受控模式下保持原生input状态和数据一致
         elementRef.value.checked = false
@@ -143,13 +144,14 @@ const useRadio = (
       }
     }
   } else {
-    const accessor = useFormAccessor<boolean>('checked')
-    isChecked = computed(() => !!accessor.valueRef.value)
-    isDisabled = computed(() => accessor.disabled.value)
+    const { accessor, control } = useAccessorAndControl({ valueKey: 'checked' })
+    useFormItemRegister(control)
+    isChecked = computed(() => !!accessor.value)
+    isDisabled = computed(() => accessor.disabled)
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
     handleChange = (evt: Event) => {
       if (elementRef.value) {

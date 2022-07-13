@@ -1,30 +1,24 @@
 <template>
-  <input class="custom-input" :value="valueRef" :disabled="isDisabled" @blur="onBlur" @input="onInput" />
+  <input class="custom-input" :value="accessor.value" :disabled="accessor.disabled" @blur="onBlur" @input="onInput" />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
-import { useValueAccessor, useValueControl } from '@idux/cdk/forms'
+import { useAccessorAndControl } from '@idux/cdk/forms'
 
 defineProps<{
-  value?: string
-  control?: string | object
+  control?: string | number | (string | number)[] | object
   disabled?: boolean
+  value?: string
 }>()
 
-// 使用 valueAccessor 接管 props.value 的控制
-const control = useValueControl()
-const accessor = useValueAccessor({ control })
+// useAccessorAndControl 内部对 props 中的 control, disabled, value 进行了处理
+const { accessor } = useAccessorAndControl()
 
-// 表单绑定的值
-const valueRef = computed(() => accessor.valueRef.value)
-// 表单禁用状态
-const isDisabled = computed(() => accessor.disabled.value)
 // 表单 blur 状态
 const onBlur = () => {
   accessor.markAsBlurred()
 }
+
 // 表单值发生变更后的回调
 const onInput = (evt: Event) => {
   const { value } = evt.target as HTMLInputElement

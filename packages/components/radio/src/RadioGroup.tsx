@@ -9,9 +9,10 @@ import { type VNodeChild, computed, defineComponent, normalizeClass, provide } f
 
 import { isNil } from 'lodash-es'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { Logger, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
 
 import Radio from './Radio'
@@ -22,7 +23,8 @@ export default defineComponent({
   name: 'IxRadioGroup',
   props: radioGroupProps,
   setup(props, { slots }) {
-    const accessor = useFormAccessor()
+    const { accessor, control } = useAccessorAndControl()
+    useFormItemRegister(control)
 
     provide(radioGroupToken, { props, accessor })
 
