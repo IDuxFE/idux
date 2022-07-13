@@ -7,12 +7,13 @@
 
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { type TreeInstance } from '@idux/components/tree'
 
@@ -48,7 +49,9 @@ export default defineComponent({
 
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
-    const accessor = useFormAccessor()
+    const { accessor, control } = useAccessorAndControl()
+    useFormItemRegister(control)
+
     const { mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
     const { selectedValue, selectedNodes, changeSelected, handleRemove, handleClear } = useSelectedState(
       props,
@@ -155,7 +158,7 @@ export default defineComponent({
         clearIcon={props.clearIcon}
         config={config}
         dataSource={selectedNodes.value}
-        disabled={accessor.disabled.value}
+        disabled={accessor.disabled}
         maxLabel={props.maxLabelCount ?? props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
@@ -184,7 +187,7 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
-        disabled: accessor.disabled.value || props.readonly,
+        disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
         target: target.value,

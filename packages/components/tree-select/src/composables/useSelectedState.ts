@@ -7,15 +7,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { TreeSelectNode, TreeSelectProps } from '../types'
-import type { MergedNode } from './useDataSource'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef } from 'vue'
+import { type ComputedRef, computed, toRaw } from 'vue'
 
-import { computed, toRaw } from 'vue'
+import { type FormAccessor } from '@idux/cdk/forms'
+import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
-import { callEmit, convertArray } from '@idux/cdk/utils'
+import { type TreeSelectNode, type TreeSelectProps } from '../types'
+import { type MergedNode } from './useDataSource'
 
 //import { generateOption } from '../utils/generateOption'
 
@@ -29,10 +27,10 @@ export interface SelectedStateContext {
 
 export function useSelectedState(
   props: TreeSelectProps,
-  accessor: ValueAccessor,
+  accessor: FormAccessor,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
 ): SelectedStateContext {
-  const selectedValue = computed(() => convertArray(accessor.valueRef.value))
+  const selectedValue = computed(() => convertArray(accessor.value))
   const selectedNodes = computed(() => {
     const nodesMap = mergedNodeMap.value
     return selectedValue.value.map(value => nodesMap.get(value)!).filter(Boolean)
@@ -41,7 +39,7 @@ export function useSelectedState(
   const setValue = (value: VKey[]) => {
     const currValue = props.multiple ? value : value[0]
 
-    const oldValue = toRaw(accessor.valueRef.value)
+    const oldValue = toRaw(accessor.value)
     if (currValue !== oldValue) {
       accessor.setValue(currValue)
       callEmit(props.onChange, currValue, oldValue)

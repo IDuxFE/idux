@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, nextTick, normalizeClass, provide, watch } from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, provide, toRef, watch } from 'vue'
 
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
@@ -44,7 +44,7 @@ export default defineComponent({
 
     const { accessor, handleChange } = pickerStateContext
 
-    const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, accessor.valueRef)
+    const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, toRef(accessor, 'value'))
     const { overlayOpened, overlayVisible, onAfterLeave, setOverlayOpened } = useOverlayState(
       props,
       rangeControlContext,

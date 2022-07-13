@@ -5,17 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TimePickerProps, TimeRangePickerProps } from '../types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { DateConfig } from '@idux/components/config'
-
 import { type ComputedRef, toRaw } from 'vue'
 
 import { isArray } from 'lodash-es'
 
+import { type FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit, useState } from '@idux/cdk/utils'
-import { useFormAccessor } from '@idux/components/form'
+import { type DateConfig } from '@idux/components/config'
+import { useFormItemRegister } from '@idux/components/form'
 
+import { type TimePickerProps, type TimeRangePickerProps } from '../types'
 import { convertToDate, sortRangeValue } from '../utils'
 
 type StateValueType<T extends TimePickerProps | TimeRangePickerProps> = T extends TimePickerProps
@@ -23,10 +22,10 @@ type StateValueType<T extends TimePickerProps | TimeRangePickerProps> = T extend
   : (Date | undefined)[] | undefined
 
 export interface PickerStateContext<T extends TimePickerProps | TimeRangePickerProps> {
-  accessor: ValueAccessor<T['value']>
+  accessor: FormAccessor<T['value']>
   isFocused: ComputedRef<boolean>
   handleChange: (value: StateValueType<T>) => void
-  handleClear: (evt: Event) => void
+  handleClear: (evt: MouseEvent) => void
   handleFocus: (evt: FocusEvent) => void
   handleBlur: (evt: FocusEvent) => void
 }
@@ -36,45 +35,38 @@ export function usePickerState<T extends TimePickerProps | TimeRangePickerProps>
   dateConfig: DateConfig,
   formatRef: ComputedRef<string>,
 ): PickerStateContext<T> {
-  const accessor = useFormAccessor<T['value']>()
+  const { accessor, control } = useAccessorAndControl<T['value']>()
+  useFormItemRegister(control)
 
   const [isFocused, setFocused] = useState(false)
 
   function handleChange(value: StateValueType<T>) {
     const newValue = (isArray(value) ? sortRangeValue(value) : value) as StateValueType<T>
-    let oldValue = toRaw(accessor.valueRef.value) as StateValueType<T>
+    let oldValue = toRaw(accessor.value) as StateValueType<T>
     oldValue = (
       isArray(oldValue)
         ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
         : convertToDate(dateConfig, oldValue, formatRef.value)
     ) as StateValueType<T>
 
-    callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
     accessor.setValue(newValue)
+    callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
   }
 
-  function handleClear(evt: Event) {
-    let oldValue = toRaw(accessor.valueRef.value) as StateValueType<T>
-    oldValue = (
-      isArray(oldValue)
-        ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
-        : convertToDate(dateConfig, oldValue, formatRef.value)
-    ) as StateValueType<T>
-
-    callEmit(props.onClear, evt as MouseEvent)
-    callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, undefined, oldValue)
-    accessor.setValue(undefined)
+  function handleClear(evt: MouseEvent) {
+    handleChange(undefined)
+    callEmit(props.onClear, evt)
   }
 
   function handleFocus(evt: FocusEvent) {
-    callEmit(props.onFocus, evt)
     setFocused(true)
+    callEmit(props.onFocus, evt)
   }
 
   function handleBlur(evt: FocusEvent) {
-    callEmit(props.onBlur, evt)
-    accessor.markAsBlurred()
     setFocused(false)
+    accessor.markAsBlurred()
+    callEmit(props.onBlur, evt)
   }
 
   return {

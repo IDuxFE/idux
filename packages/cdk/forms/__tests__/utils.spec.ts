@@ -1,22 +1,20 @@
 import { DOMWrapper, flushPromises, mount } from '@vue/test-utils'
-import { computed, provide } from 'vue'
+import { provide } from 'vue'
 
 import { Validators } from '..'
 import { FormGroup } from '../src/controls'
 import { useFormGroup } from '../src/useForms'
-import { FORMS_CONTROL_TOKEN, useValueAccessor, useValueControl } from '../src/utils'
+import { FORMS_CONTROL_TOKEN, useAccessorAndControl, useControl } from '../src/utils'
 
 const InputComponent = {
-  template: `<input :value="valueRef" @input="onInput" @blur="onBlur" />`,
-  props: ['value', 'control'],
+  template: `<input :value="accessor.value" :disabled="accessor.disabled" @input="onInput" @blur="onBlur" />`,
+  props: ['value', 'control', 'disabled'],
   emits: ['update:value'],
   setup() {
-    const control = useValueControl()
-    const accessor = useValueAccessor({ control })
-    const valueRef = computed(() => accessor.valueRef.value)
+    const { accessor } = useAccessorAndControl()
     const onInput = (evt: Event) => accessor.setValue((evt.target as HTMLInputElement).value)
     const onBlur = () => accessor.markAsBlurred()
-    return { valueRef, onInput, onBlur }
+    return { accessor, onInput, onBlur }
   },
 }
 
@@ -24,7 +22,7 @@ const FormComponent = {
   template: `<form><slot /></form>`,
   props: ['control'],
   setup() {
-    const control = useValueControl()
+    const control = useControl()
     provide(FORMS_CONTROL_TOKEN, control)
   },
 }

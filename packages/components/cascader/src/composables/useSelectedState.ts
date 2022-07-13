@@ -9,7 +9,7 @@ import { type ComputedRef, computed, toRaw } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { type ValueAccessor } from '@idux/cdk/forms'
+import { type FormAccessor } from '@idux/cdk/forms'
 import { NoopArray, type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -30,13 +30,13 @@ export interface SelectedStateContext {
 
 export function useSelectedState(
   props: CascaderProps,
-  accessor: ValueAccessor,
+  accessor: FormAccessor,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
   mergedFullPath: ComputedRef<boolean>,
 ): SelectedStateContext {
   const locale = useGlobalConfig('locale')
   const selectedKeys = computed(() => {
-    const tempKeys = convertArray(accessor.valueRef.value)
+    const tempKeys = convertArray(accessor.value)
     if (!mergedFullPath.value) {
       return tempKeys
     }
@@ -107,7 +107,7 @@ export function useSelectedState(
       }
     }
 
-    const oldValue = toRaw(accessor.valueRef.value)
+    const oldValue = toRaw(accessor.value)
     if (currValue !== oldValue) {
       accessor.setValue(currValue)
       callEmit(props.onChange, currValue, oldValue)

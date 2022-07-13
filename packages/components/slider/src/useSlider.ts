@@ -5,16 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SliderContext } from './token'
-import type { SliderProps, SliderThumbInstance } from './types'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { computed, nextTick, ref, toRaw, watch } from 'vue'
-
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { Logger, callEmit, getMouseClientXY, isNumeric, off, on } from '@idux/cdk/utils'
-import { useFormAccessor, useFormElement } from '@idux/components/form'
+import { useFormElement, useFormItemRegister } from '@idux/components/form'
 
-import { sliderStartDirection } from './token'
+import { type SliderContext, sliderStartDirection } from './token'
+import { type SliderProps, type SliderThumbInstance } from './types'
 
 export type Nullable<T> = T | null
 
@@ -36,14 +34,16 @@ export interface SliderBindings {
 
 export function useSlider(props: SliderProps): SliderBindings {
   const { elementRef, focus, blur } = useFormElement<HTMLElement>()
-  const accessor = useFormAccessor<number | number[]>()
+
+  const { accessor, control } = useAccessorAndControl<number | number[]>()
+  useFormItemRegister(control)
 
   const valuesRef = ref<number[]>([props.min, props.min])
   const thumbListRef = ref<SliderThumbInstance[]>([])
   const activeIndex = ref<number>(-1)
   const railRef = ref<Nullable<HTMLElement>>(null)
   const isDragging = ref(false)
-  const isDisabled = computed(() => accessor?.disabled.value)
+  const isDisabled = computed(() => accessor.disabled)
 
   const precision = computed(() => {
     const precisions = [props.min, props.max, props.step].map(num => {
@@ -174,7 +174,7 @@ export function useSlider(props: SliderProps): SliderBindings {
     if (valuesRef.value[index] !== newValue) {
       const newValues = valuesRef.value.slice()
       newValues[index] = newValue
-      const oldVal = toRaw(accessor.valueRef.value)
+      const oldVal = toRaw(accessor.value)
       const modelValue = props.range ? newValues : newValues[0]
       accessor.setValue(modelValue)
 
@@ -258,7 +258,7 @@ export function useSlider(props: SliderProps): SliderBindings {
   }
 
   watch(
-    accessor.valueRef,
+    () => accessor.value,
     (val, oldVal) => {
       if (isDragging.value || (Array.isArray(val) && Array.isArray(oldVal) && val.every((v, i) => v === oldVal[i]))) {
         return
@@ -287,7 +287,7 @@ export function useSlider(props: SliderProps): SliderBindings {
       Logger.error('components/slider', `step(${props.step}) should be greater than 0.`)
     }
 
-    const { value: modelValue = 0 } = accessor.valueRef
+    const { value: modelValue = 0 } = accessor
     let val: number[]
     if (props.range) {
       if (!Array.isArray(modelValue)) {

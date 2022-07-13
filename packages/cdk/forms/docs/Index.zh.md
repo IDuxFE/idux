@@ -115,70 +115,58 @@ export function useFormControl<T>(
 
 更多默认的提示信息，参见 [messages](https://github.com/IDuxFE/idux/tree/main/packages/cdk/forms/src/messages)
 
-### useValueControl
+### useAccessorAndControl
 
-> 创建 AbstractControl，会通过 inject 从父组件中获取。
+> 构建 `accessor`, 来接管表单控件 `props` 的 `control` 和 `value`, `disabled` 状态的优先级关系。
+> 当 `control` 存在时，`value` 和 `disabled` 无效，以 `control` 的状态为准。
 
 ```ts
-export function useValueControl<T>(options?: ValueControlOptions): ShallowRef<AbstractControl<T> | undefined>
-
-export interface ValueControlOptions {
-  /**
-   * 通过 props 获取 control 的 key
-   */
-  controlKey?: string
+export function useAccessorAndControl<T = any>(options?: FormAccessorOptions): {
+    accessor: FormAccessor<T>;
+    control: ShallowRef<AbstractControl<T> | undefined>;
 }
-```
 
-### useValueAccessor
+export function useAccessor<T = any>(control: ShallowRef<AbstractControl<T> | undefined>, valueKey?: string, disabledKey?: string): FormAccessor<T>
 
-> 创建 ValueAccessor，用户处理 props 中 `value` 和 `control` 的优先级关系。
+export function useControl<T = any>(controlKey?: string): ShallowRef<AbstractControl<T> | undefined>
 
-```ts
-export function useValueAccessor<T>(options: ValueAccessorOptions): ValueAccessor<T>
-
-export interface ValueAccessorOptions<T> {
+export interface FormAccessorOptions {
   /**
-   * 通过 props 获取 control 的 key
+   * props 中 control 的 key
+   *
+   * @default 'control'
    */
-  control: ShallowRef<AbstractControl<T> | undefined>
+  controlKey: string
   /**
-   * 通过 props 获取 value 的 key
+   * props 中 value 的 key
+   *
+   * @default 'value'
    */
   valueKey?: string
   /**
-   * 通过 props 获取 disabled 的 key
+   * props 中 disabled 的 key
+   *
+   * @default 'disabled'
    */
   disabledKey?: string
 }
 
-export interface ValueAccessor<T> {
+export interface FormAccessor<T = any> {
   /**
-   * 响应式的控件值
+   * 控件的值
    */
-  valueRef: ComputedRef<T>
+  value: T
   /**
-   * 响应式的控件禁用状态
+   * 禁用状态
    */
-  disabled: ComputedRef<boolean>
+  disabled: boolean
   /**
-   * 将控件设置为失去焦点状态
+   * 将控件设置为 blurred 状态
    */
   markAsBlurred: () => void
   /**
-   * 修改控件的值
+   * 设置控件的值
    */
   setValue: (value: T) => void
 }
-
 ```
-
-## FAQ
-
-### 更多的使用示例和场景？
-
-参见 [@idux/components/form](https://idux.site/components/form/zh)
-
-### 更多的使用细节和文档？
-
-参见 [@angular/forms](https://angular.cn/guide/forms-overview)

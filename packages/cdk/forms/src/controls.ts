@@ -7,23 +7,32 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type {
-  AsyncValidatorFn,
-  TriggerType,
-  ValidateError,
-  ValidateErrors,
-  ValidateStatus,
-  ValidatorFn,
-  ValidatorOptions,
-} from './types'
-import type { ComputedRef, Ref, WatchCallback, WatchOptions, WatchStopHandle } from 'vue'
-
-import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  type WatchCallback,
+  type WatchOptions,
+  type WatchStopHandle,
+  computed,
+  ref,
+  shallowRef,
+  watch,
+  watchEffect,
+} from 'vue'
 
 import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
 
 import { hasOwnProperty } from '@idux/cdk/utils'
 
+import {
+  type AsyncValidatorFn,
+  type TriggerType,
+  type ValidateError,
+  type ValidateErrors,
+  type ValidateStatus,
+  type ValidatorFn,
+  type ValidatorOptions,
+} from './types'
 import { Validators } from './validators'
 
 type IsNullable<T, K> = undefined extends T ? K : never
@@ -215,7 +224,15 @@ export abstract class AbstractControl<T = any> {
     if (this._controls.value) {
       this._forEachControls(control => control.reset())
     } else {
-      this._valueRef.value = this._calculateInitValue()
+      const currValue = this._valueRef.value
+      const initValue = this._calculateInitValue()
+      if (currValue !== initValue) {
+        this._valueRef.value = initValue
+      } else {
+        // There are cases where the value does not change but the validator changes,
+        // so manual validation is required here
+        this._validate()
+      }
       this.markAsUnblurred()
       this.markAsPristine()
     }

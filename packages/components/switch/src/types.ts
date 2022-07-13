@@ -10,27 +10,12 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const switchProps = {
-  checked: {
-    type: Boolean,
-    default: undefined,
-  },
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-  autofocus: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  labels: {
-    type: Array as PropType<string[]>,
-    default: (): string[] => [],
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+  checked: { type: Boolean, default: undefined },
+  control: [String, Number, Object] as PropType<string | number | AbstractControl>,
+  autofocus: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
+  labels: { type: Array as PropType<string[]>, default: () => [] },
+  loading: { type: Boolean, default: false },
   size: String as PropType<'sm' | 'md' | 'lg'>,
 
   // events

@@ -17,7 +17,7 @@ export function useOverlayProps(context: TimePickerContext | TimeRangePickerCont
     const { props, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened } = context
     return {
       clickOutside: true,
-      disabled: accessor.disabled.value || props.readonly,
+      disabled: accessor.disabled || props.readonly,
       offset: defaultOffset,
       placement: 'bottomStart',
       transitionName: 'ix-fade',

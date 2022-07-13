@@ -6,18 +6,18 @@
  */
 
 import type { CommonProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
 import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
 
+import { FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
-import { useFormAccessor, useFormFocusMonitor } from '@idux/components/form'
+import { useFormFocusMonitor, useFormItemRegister } from '@idux/components/form'
 
 export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
-  accessor: ValueAccessor
+  accessor: FormAccessor
   clearIcon: ComputedRef<string>
   clearVisible: ComputedRef<boolean>
   clearable: ComputedRef<boolean>
@@ -39,11 +39,15 @@ export function useInput(
   props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): InputContext<HTMLInputElement | HTMLTextAreaElement> {
-  const accessor = useFormAccessor()
+  // const control = useValueControl()
+  // const accessor = useValueAccessor({ control })
+  // useFormItemRegister(control)
+  const { accessor, control } = useAccessorAndControl()
+  useFormItemRegister(control)
 
   const clearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-  const clearVisible = computed(() => !accessor.disabled.value && !props.readonly && !!accessor.valueRef.value)
+  const clearVisible = computed(() => !accessor.disabled && !props.readonly && !!accessor.value)
 
   const isFocused = ref(false)
   const handleFocus = (evt: FocusEvent) => {
@@ -52,8 +56,8 @@ export function useInput(
   }
   const handleBlur = (evt: FocusEvent) => {
     isFocused.value = false
-    callEmit(props.onBlur, evt)
     accessor.markAsBlurred()
+    callEmit(props.onBlur, evt)
 
     if (props.trim) {
       setValue((evt.target as HTMLInputElement).value.trim())
@@ -66,7 +70,7 @@ export function useInput(
   })
 
   const setValue = (value: string) => {
-    const oldValue = toRaw(accessor.valueRef.value)
+    const oldValue = toRaw(accessor.value)
     if (value !== oldValue) {
       accessor.setValue(value)
       callEmit(props.onChange, value, oldValue)
@@ -78,13 +82,16 @@ export function useInput(
 
   const syncValue = () => {
     const element = elementRef.value
-    const value = accessor.valueRef.value ?? ''
+    const value = accessor.value ?? ''
     if (element && element.value !== value) {
       element.value = value
     }
   }
 
-  watch(accessor.valueRef, () => syncValue())
+  watch(
+    () => accessor.value,
+    () => syncValue(),
+  )
 
   const isComposing = ref(false)
   const handleInput = (evt: Event, emitInput = true) => {
@@ -109,8 +116,8 @@ export function useInput(
   }
 
   const handleClear = (evt: MouseEvent) => {
-    callEmit(props.onClear, evt)
     accessor.setValue('')
+    callEmit(props.onClear, evt)
   }
 
   return {

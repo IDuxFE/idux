@@ -16,7 +16,7 @@ export function useOverlayProps(context: DatePickerContext | DateRangePickerCont
     const { props, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
     return {
       clickOutside: true,
-      disabled: accessor.disabled.value || props.readonly,
+      disabled: accessor.disabled || props.readonly,
       offset: defaultOffset,
       placement: 'bottomStart',
       transitionName: 'ix-fade',

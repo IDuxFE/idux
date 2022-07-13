@@ -5,16 +5,16 @@
 <script setup lang="ts">
 import { provide } from 'vue'
 
-import { FORMS_CONTROL_TOKEN, useValueControl } from '@idux/cdk/forms'
+import { FORMS_CONTROL_TOKEN, useControl } from '@idux/cdk/forms'
 
 defineProps<{
-  control?: string | object
+  control?: string | number | (string | number)[] | object
 }>()
 
-// 使用 valueControl 接管 props.control 的控制
-const control = useValueControl()
+// 通过 props.control 拿到真正的 control(AbstractControl)
+const control = useControl()
 
-// 注入父 control, 以便子组件通过 key 获取对应的子 control
+// 注入 control, 以便子组件通过 key 获取对应的子 control
 provide(FORMS_CONTROL_TOKEN, control)
 </script>
 

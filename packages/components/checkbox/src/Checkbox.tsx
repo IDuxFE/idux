@@ -9,9 +9,10 @@ import { type ComputedRef, computed, defineComponent, inject, normalizeClass, re
 
 import { isNil } from 'lodash-es'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormAccessor, useFormElement } from '@idux/components/form'
+import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
 import { convertStringVNode, useKey } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
@@ -121,13 +122,13 @@ const useCheckbox = (
 
   if (checkboxGroup) {
     const { props: groupProps, accessor } = checkboxGroup
-    isChecked = computed(() => (accessor.valueRef.value || []).includes(mergedValue.value))
-    isDisabled = computed(() => accessor.disabled.value || !!props.disabled)
+    isChecked = computed(() => (accessor.value || []).includes(mergedValue.value))
+    isDisabled = computed(() => accessor.disabled || !!props.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
 
     handleChange = (evt: Event) => {
@@ -137,7 +138,7 @@ const useCheckbox = (
       const checkValue = checked ? trueValue : falseValue
       const oldCheckValue = !checked ? trueValue : falseValue
 
-      const oldValue = accessor.valueRef.value || []
+      const oldValue = accessor.value || []
       const newValue = [...oldValue]
       const checkValueIndex = newValue.indexOf(value)
       if (checkValueIndex === -1) {
@@ -151,15 +152,16 @@ const useCheckbox = (
       callEmit(groupProps.onChange, newValue, oldValue)
     }
   } else {
-    const accessor = useFormAccessor<CheckValue>('checked')
+    const { accessor, control } = useAccessorAndControl<CheckValue>({ valueKey: 'checked' })
+    useFormItemRegister(control)
 
-    isChecked = computed(() => accessor.valueRef.value === props.trueValue)
-    isDisabled = computed(() => accessor.disabled.value)
+    isChecked = computed(() => accessor.value === props.trueValue)
+    isDisabled = computed(() => accessor.disabled)
 
     handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
 
     handleChange = (evt: Event) => {

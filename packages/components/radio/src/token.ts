@@ -6,12 +6,12 @@
  */
 
 import type { RadioGroupProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { InjectionKey } from 'vue'
 
 export interface RadioGroupContext {
   props: RadioGroupProps
-  accessor: ValueAccessor
+  accessor: FormAccessor
 }
 
 export const radioGroupToken: InjectionKey<RadioGroupContext> = Symbol('radioGroupToken')

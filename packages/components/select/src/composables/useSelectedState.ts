@@ -7,15 +7,14 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { SelectProps } from '../types'
-import type { FlattenedOption } from './useOptions'
-import type { ValueAccessor } from '@idux/cdk/forms'
-
 import { type ComputedRef, computed, toRaw } from 'vue'
 
+import { type FormAccessor } from '@idux/cdk/forms'
 import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
+import { type SelectProps } from '../types'
 import { generateOption } from '../utils/generateOption'
+import { type FlattenedOption } from './useOptions'
 
 export interface SelectedStateContext {
   selectedValue: ComputedRef<VKey[]>
@@ -27,10 +26,10 @@ export interface SelectedStateContext {
 
 export function useSelectedState(
   props: SelectProps,
-  accessor: ValueAccessor,
+  accessor: FormAccessor,
   optionKeyMap: ComputedRef<Map<VKey, FlattenedOption>>,
 ): SelectedStateContext {
-  const selectedValue = computed(() => convertArray(accessor.valueRef.value))
+  const selectedValue = computed(() => convertArray(accessor.value))
 
   const selectedOptions = computed(() =>
     selectedValue.value.map(value => optionKeyMap.value.get(value) ?? generateOption(value)),
@@ -38,7 +37,7 @@ export function useSelectedState(
 
   const setSelectedValue = (value: VKey[]) => {
     const currValue = props.multiple ? value : value[0]
-    const oldValue = toRaw(accessor.valueRef.value)
+    const oldValue = toRaw(accessor.value)
     if (currValue !== oldValue) {
       accessor.setValue(currValue)
       callEmit(props.onChange, currValue, oldValue)

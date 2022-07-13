@@ -1,5 +1,5 @@
 <template>
-  <IxRadioGroup v-model:value="value" :dataSource="dataSource" @Change="onChange"> </IxRadioGroup>
+  <IxRadioGroup v-model:value="value" :dataSource="dataSource" @change="onChange"> </IxRadioGroup>
 </template>
 
 <script setup lang="ts">

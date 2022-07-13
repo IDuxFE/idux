@@ -7,16 +7,16 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-
 import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
+import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor } from '@idux/components/form'
+import { useFormItemRegister } from '@idux/components/form'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -27,7 +27,7 @@ import { usePanelProps } from './composables/usePanelProps'
 import { useSelectedState } from './composables/useSelectedState'
 import Panel from './panel/Panel'
 import { SELECT_PANEL_DATA_TOKEN } from './token'
-import { SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
+import { type SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
 
 const defaultOffset: [number, number] = [0, 8]
 
@@ -61,7 +61,8 @@ export default defineComponent({
       triggerRef,
     )
 
-    const accessor = useFormAccessor()
+    const { accessor, control } = useAccessorAndControl()
+    useFormItemRegister(control)
 
     const getKey = useGetOptionKey(props, config)
     const { options, optionKeyMap } = useSelectOptions(props, config, slots, getKey, inputValue)
@@ -141,7 +142,7 @@ export default defineComponent({
         clearIcon={props.clearIcon}
         config={config}
         dataSource={selectedOptions.value}
-        disabled={accessor.disabled.value}
+        disabled={accessor.disabled}
         maxLabel={props.maxLabelCount ?? props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
@@ -197,7 +198,7 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
-        disabled: accessor.disabled.value || props.readonly,
+        disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
         target: target.value,

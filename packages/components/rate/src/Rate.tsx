@@ -7,9 +7,10 @@
 
 import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/form'
+import { useFormElement, useFormItemRegister, useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import RateItem from './RateItem'
@@ -27,20 +28,21 @@ export default defineComponent({
     const { elementRef, focus, blur } = useFormElement()
     expose({ focus, blur })
 
-    const accessor = useFormAccessor<number>()
+    const { accessor, control } = useAccessorAndControl<number>()
+    useFormItemRegister(control)
 
     const countRef = computed(() => convertNumber(props.count ?? config.count))
     const iconRef = computed(() => props.icon ?? config.icon)
     const allowHalfRef = computed(() => props.allowHalf ?? config.allowHalf)
     const clearableRef = computed(() => props.clearable ?? config.clearable)
-    const isDisabled = computed(() => accessor.disabled.value)
+    const isDisabled = computed(() => accessor.disabled)
     const isFocused = ref(false)
 
     const hoverValue = ref<number>()
 
     const changeValue = (value: number) => {
-      callEmit(props.onChange, value)
       accessor.setValue(value)
+      callEmit(props.onChange, value)
     }
 
     const calcValue = (evt: MouseEvent, element: HTMLElement, index: number) => {
@@ -54,7 +56,7 @@ export default defineComponent({
     }
 
     const handleItemClick = (evt: MouseEvent, element: HTMLElement, index: number) => {
-      const currValue = accessor.valueRef.value
+      const currValue = accessor.value
       const newValue = calcValue(evt, element, index)
       const isClear = clearableRef.value && currValue === newValue
 
@@ -73,12 +75,12 @@ export default defineComponent({
 
     const handleBlur = (evt: FocusEvent) => {
       isFocused.value = false
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
 
     const handleKeyDown = (evt: KeyboardEvent) => {
-      const currValue = accessor.valueRef.value
+      const currValue = accessor.value
       const currCount = countRef.value
       const currAllowHalf = allowHalfRef.value
       const eventCode = evt.code
@@ -120,7 +122,7 @@ export default defineComponent({
       const count = countRef.value
       const disabled = isDisabled.value
       const focused = isFocused.value
-      const itemValue = convertNumber(hoverValue.value ?? accessor.valueRef.value)
+      const itemValue = convertNumber(hoverValue.value ?? accessor.value)
       const itemPrefixCls = `${mergedPrefixCls.value}-item`
 
       const { tooltips } = props

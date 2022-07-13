@@ -8,7 +8,6 @@
 import {
   type ComputedRef,
   type EffectScope,
-  type Ref,
   computed,
   effectScope,
   onScopeDispose,
@@ -71,22 +70,21 @@ export function useControlledProp<T, K extends keyof T>(
   key: K,
   defaultOrFactory?: T[K] | (() => T[K]),
 ): [ComputedRef<T[K]>, (value: T[K]) => void] {
-  const tempProp = ref(props[key]) as Ref<T[K]>
+  const defaultValue = props[key] ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)
+  const tempProp = shallowRef(defaultValue)
 
   watch(
     () => props[key],
     value => (tempProp.value = value),
   )
 
-  const state = computed(
-    () => props[key] ?? tempProp.value ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!,
-  )
+  const state = computed(() => props[key] ?? tempProp.value!)
 
   const setState = (value: T[K]) => {
     if (value !== toRaw(state.value)) {
       tempProp.value = value
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callEmit((props as any)[`onUpdate:${key}`], value)
+      callEmit((props as any)[`onUpdate:${key as string}`], value)
     }
   }
 

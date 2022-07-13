@@ -10,7 +10,7 @@
 import type { MergedNode } from './composables/useDataSource'
 import type { GetNodeKey } from './composables/useGetNodeKey'
 import type { TreeSelectNode, TreeSelectProps } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeSelectConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
@@ -23,7 +23,7 @@ export interface TreeSelectContext {
   config: TreeSelectConfig
   locale: Locale
   mergedPrefixCls: ComputedRef<string>
-  accessor: ValueAccessor
+  accessor: FormAccessor
   mergedChildrenKey: ComputedRef<string>
   mergedGetKey: ComputedRef<GetNodeKey>
   mergedLabelKey: ComputedRef<string>

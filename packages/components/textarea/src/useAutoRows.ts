@@ -5,16 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TextareaAutoRows } from './types'
-import type { ValueAccessor } from '@idux/cdk/forms'
-import type { ComputedRef, Ref } from 'vue'
-
-import { nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
+import { type ComputedRef, type Ref, nextTick, onMounted, onUnmounted, watch, watchEffect } from 'vue'
 
 import { isNumber, isObject, throttle } from 'lodash-es'
 
+import { type FormAccessor } from '@idux/cdk/forms'
 import { isFirefox } from '@idux/cdk/platform'
 import { off, on, rAF } from '@idux/cdk/utils'
+
+import { type TextareaAutoRows } from './types'
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return isObject(value) && isNumber(value.minRows) && isNumber(value.maxRows)
@@ -23,7 +22,7 @@ const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
 export function useAutoRows(
   textareaRef: Ref<HTMLTextAreaElement | undefined>,
   autoRows: ComputedRef<boolean | TextareaAutoRows>,
-  accessor: ValueAccessor,
+  accessor: FormAccessor,
 ): void {
   let enabled = false
   let minRows: number | null = null
@@ -206,7 +205,7 @@ export function useAutoRows(
     })
 
     watch(
-      () => accessor.valueRef.value,
+      () => accessor.value,
       () => resizeToFitContent(),
     )
 

@@ -7,9 +7,10 @@
 
 import { computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
+import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormAccessor, useFormElement, useFormSize } from '@idux/components/form'
+import { useFormElement, useFormItemRegister, useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import { switchProps } from './types'
@@ -26,17 +27,20 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const accessor = useFormAccessor<boolean>('checked')
+    const { accessor, control } = useAccessorAndControl<boolean>({ valueKey: 'checked' })
+    useFormItemRegister(control)
 
-    const isChecked = computed(() => accessor.valueRef.value)
-    const isDisabled = computed(() => accessor.disabled.value)
+    const isChecked = computed(() => accessor.value)
+    const isDisabled = computed(() => accessor.disabled)
 
     const handleClick = () => {
       if (isDisabled.value || props.loading) {
         return
       }
-      callEmit(props.onChange, !isChecked.value)
-      accessor.setValue(!isChecked.value)
+      const oldValue = accessor.value
+      const newValue = !oldValue
+      accessor.setValue(newValue)
+      callEmit(props.onChange, newValue, oldValue)
     }
 
     const handleFocus = (evt: FocusEvent) => {
@@ -44,8 +48,8 @@ export default defineComponent({
     }
 
     const handleBlur = (evt: FocusEvent) => {
-      callEmit(props.onBlur, evt)
       accessor.markAsBlurred()
+      callEmit(props.onBlur, evt)
     }
 
     const classes = computed(() => {

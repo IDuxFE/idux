@@ -5,7 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, type Ref, type WatchStopHandle, computed, inject, onBeforeUnmount, ref, watch } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  type ShallowRef,
+  type WatchStopHandle,
+  computed,
+  inject,
+  onBeforeUnmount,
+  ref,
+  watch,
+} from 'vue'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { type AbstractControl, type ValueAccessor, useValueAccessor, useValueControl } from '@idux/cdk/forms'
@@ -14,7 +24,7 @@ import { useKey } from '@idux/components/utils'
 import { FORM_ITEM_TOKEN, FORM_TOKEN } from '../token'
 import { type FormSize } from '../types'
 
-export function useFormItemRegister(control: Ref<AbstractControl | undefined>): void {
+export function useFormItemRegister(control: ShallowRef<AbstractControl | undefined>): void {
   const context = inject(FORM_ITEM_TOKEN, null)
   if (context) {
     const key = useKey()
@@ -25,11 +35,7 @@ export function useFormItemRegister(control: Ref<AbstractControl | undefined>): 
 }
 
 /**
- * 使用 valueAccessor 接管 value 以及 disabled 状态的控制
- * 同时在 IxFormItem 中注册 control， 可以与 IxFormItem 同步状态
- *
- * @param valueKey - props 中表是 value 的字段名
- * @returns
+ * @deprecated 使用 useAccessorAndControl + useFormItemRegister 替代
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useFormAccessor<T = any>(valueKey?: string): ValueAccessor<T> {

@@ -99,7 +99,7 @@ export interface DatePickerCommonBindings {
 export const datePickerProps = {
   ...datePickerCommonProps,
 
-  value: [String, Date, Number],
+  value: [String, Date, Number] as PropType<string | number | Date>,
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: false },
   placeholder: String,
   timePanelOptions: Object as PropType<PickerTimePanelOptions>,
@@ -119,7 +119,7 @@ export type DatePickerInstance = InstanceType<DefineComponent<DatePickerProps, D
 export const dateRangePickerProps = {
   ...datePickerCommonProps,
 
-  value: Array as PropType<(number | string | Date | undefined)[]>,
+  value: Array as PropType<(number | string | Date)[]>,
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: true },
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
