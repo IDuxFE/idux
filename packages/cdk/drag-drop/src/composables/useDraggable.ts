@@ -111,6 +111,8 @@ export function useDraggable(
     if (!firstPosition) {
       firstPosition = evt
     }
+
+    convertElement(source)?.classList.add('cdk-dragging')
     context!.registry.exec(source, 'source', 'dragstart', [evt])
     options?.onDragStart?.(evt, toRaw(context!.state.currPosition.value))
   }
@@ -128,6 +130,7 @@ export function useDraggable(
       offsetY: diffOffset.offsetTop,
     })
 
+    convertElement(source)?.classList.remove('cdk-dragging')
     context!.registry.exec(source, 'source', 'dragend', [evt])
     options?.onDragEnd?.(evt, toRaw(context!.state.currPosition.value))
   }
