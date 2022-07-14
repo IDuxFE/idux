@@ -102,22 +102,22 @@ export function useOptions(
     }
   }
 
-  function getOnChange(type: TimePanelColumnType) {
-    const onChange = (type: TimePanelColumnType, value: string | number) => {
+  function getOnActiveChange(type: TimePanelColumnType) {
+    const onActiveChange = (type: TimePanelColumnType, cell: TimePanelCell) => {
       const newValue = calculateValue(
         dateConfig,
         selectedValue.value ?? activeValue.value,
         type,
         props.use12Hours,
-        value,
+        cell.value,
       )
 
-      setSelectedValue(newValue)
+      !cell.disabled && setSelectedValue(newValue)
       setActiveValue(newValue)
       callEmit(props.onChange, newValue)
     }
 
-    return (value: string | number) => onChange(type, value)
+    return (cell: TimePanelCell) => onActiveChange(type, cell)
   }
 
   const getProps = (type: TimePanelColumnType) => {
@@ -127,7 +127,7 @@ export function useOptions(
           activeValue: getColumnValue(activeValue.value, type),
           selectedValue: selectedValue.value && getColumnValue(selectedValue.value, type),
           options: getOptions(type),
-          onChange: getOnChange(type),
+          onActiveChange: getOnActiveChange(type),
         } as TimePanelColumnProps),
     )
   }

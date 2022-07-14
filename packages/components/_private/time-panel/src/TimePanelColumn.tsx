@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, ref } from 'vue'
+import { defineComponent, inject, nextTick, ref, watch, watchEffect } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
@@ -13,23 +13,51 @@ import PanelCell from './TimePanelCell'
 import { useColumnEvents } from './composables/useColumnEvents'
 import { usePanelScroll } from './composables/usePanelScroll'
 import { timePanelContext } from './tokens'
-import { timePanelColumnProps } from './types'
+import { type TimePanelCell, type TimePanelColumnProps, timePanelColumnProps } from './types'
 
 export default defineComponent({
   props: timePanelColumnProps,
-  setup(props) {
+  setup(props: TimePanelColumnProps) {
     const { mergedPrefixCls } = inject(timePanelContext)!
-    const listRef = ref<HTMLElement | null>(null)
-    const { handleScroll, handleScrollAdjust } = usePanelScroll(props, listRef, mergedPrefixCls)
+    const listRef = ref<HTMLElement | undefined>(undefined)
+    const { scrollToActive, getTargetByScrollTop, frameRunning } = usePanelScroll(props, listRef, mergedPrefixCls)
 
-    function onChange(value: string | number) {
-      callEmit(props.onChange, value)
+    function onActive(cell: TimePanelCell) {
+      callEmit(props.onActiveChange, cell)
+    }
+    function handleScrollAdjust() {
+      scrollToActive()
     }
 
-    const { handleWheel, handleClick } = useColumnEvents(listRef)
+    const {
+      handleWheel,
+      handleClick,
+      handleScroll: _handleScroll,
+    } = useColumnEvents(props, listRef, getTargetByScrollTop, frameRunning)
     const handleListWheel = (evt: WheelEvent) => {
       evt.preventDefault()
     }
+
+    let isScrolling = false
+    const handleScroll = () => {
+      isScrolling = true
+      _handleScroll()
+      nextTick(() => {
+        isScrolling = false
+      })
+    }
+
+    watchEffect(() => {
+      if (props.visible) {
+        nextTick(() => scrollToActive(0))
+      }
+    })
+    watch(
+      () => props.activeValue,
+      () => {
+        !isScrolling && nextTick(scrollToActive)
+      },
+    )
 
     return () => (
       <div
@@ -53,7 +81,7 @@ export default defineComponent({
                 disabled={disabled}
                 selected={props.selectedValue === value}
                 value={value}
-                onChange={onChange}
+                onActive={onActive}
               />
             )
           })}

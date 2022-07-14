@@ -5,60 +5,47 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Ref } from 'vue'
+import type { TimePanelCell, TimePanelColumnProps } from '../types'
 
-import { scrollToTop } from '@idux/cdk/scroll'
-import { cancelRAF, rAF } from '@idux/cdk/utils'
+import { type Ref, computed } from 'vue'
+
+import { callEmit } from '@idux/cdk/utils'
 
 export interface ColumnEventHandlers {
   handleWheel: (evt: WheelEvent) => void
   handleClick: (evt: MouseEvent) => void
+  handleScroll: () => void
 }
 
-export function useColumnEvents(listRef: Ref<HTMLElement | null>): ColumnEventHandlers {
-  let preTop = 0
-  let wheelOffset = 0
-  let rafId: number
-  let locked = false
+export function useColumnEvents(
+  props: TimePanelColumnProps,
+  listRef: Ref<HTMLElement | undefined>,
+  getTargetByScrollTop: () => TimePanelCell | undefined,
+  frameRunning: Ref<boolean>,
+): ColumnEventHandlers {
+  const activeIndex = computed(() => props.options?.findIndex(option => option.value === props.activeValue) ?? -1)
 
   const handleWheel = (evt: WheelEvent) => {
-    if (evt.shiftKey || !listRef.value) {
-      return
-    }
-
     evt.preventDefault()
-
-    cancelRAF(rafId)
-
-    const { deltaY } = evt
-    wheelOffset += deltaY
-
-    if (locked) {
+    if (evt.shiftKey || !listRef.value || !props.options || activeIndex.value >= props.options.length) {
       return
     }
 
-    rafId = rAF(() => {
-      if (!listRef.value) {
-        return
-      }
+    const target = props.options?.[activeIndex.value + (evt.deltaY > 0 ? 1 : -1)]
+    if (target) {
+      callEmit(props.onActiveChange, target)
+    }
+  }
 
-      if (!preTop) {
-        preTop = listRef.value.scrollTop
-      }
+  const handleScroll = () => {
+    if (frameRunning.value) {
+      return
+    }
 
-      locked = true
-
-      scrollToTop({
-        target: listRef.value,
-        top: preTop + wheelOffset,
-        duration: 100,
-        callback() {
-          preTop = listRef.value?.scrollTop ?? 0
-          wheelOffset = 0
-          locked = false
-        },
-      })
-    })
+    const target = getTargetByScrollTop()
+    if (target) {
+      callEmit(props.onActiveChange, target)
+    }
   }
 
   const handleClick = (evt: MouseEvent) => {
@@ -83,5 +70,6 @@ export function useColumnEvents(listRef: Ref<HTMLElement | null>): ColumnEventHa
   return {
     handleWheel,
     handleClick,
+    handleScroll,
   }
 }
