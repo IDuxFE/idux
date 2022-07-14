@@ -5,40 +5,34 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TimePanelColumnProps } from '../types'
-import type { ComputedRef, Ref } from 'vue'
+import type { TimePanelCell, TimePanelColumnProps } from '../types'
 
-import { nextTick, watch, watchEffect } from 'vue'
+import { type ComputedRef, type Ref, ref } from 'vue'
 
-import { isNil } from 'lodash-es'
-
-import { getScroll, scrollToTop } from '@idux/cdk/scroll'
-import { callEmit } from '@idux/cdk/utils'
+import { getScroll } from '@idux/cdk/scroll'
+import { cancelRAF, easeInOutCubic, rAF } from '@idux/cdk/utils'
 
 export interface PanelColumnScroll {
   adjustPanel: (selectedIndex: number, duration?: number) => void
   scrollToActive: (duration?: number) => void
-  handleScrollAdjust: () => void
-  handleScroll: () => void
+  getTargetByScrollTop: () => TimePanelCell | undefined
+  frameRunning: Ref<boolean>
 }
 
 export function usePanelScroll(
   props: TimePanelColumnProps,
-  listRef: Ref<HTMLElement | null>,
+  listRef: Ref<HTMLElement | undefined>,
   mergedPrefixCls: ComputedRef<string>,
 ): PanelColumnScroll {
-  let scrollHandlerLocked = false
-  let scrollHandlerLockedTmr: null | number = null
-  let isScrolling = false
-  let scrollTargetIndex: number | undefined
+  const { frameRunning, scrollTo } = useScrollTo(listRef)
 
-  function getCellHeight() {
+  const getCellHeight = () => {
     return listRef.value?.querySelector<HTMLLIElement>(`li.${mergedPrefixCls.value}-cell`)?.offsetHeight ?? 0
   }
 
-  function adjustPanel(selectedIndex: number, duration = 200) {
+  const adjustPanel = (selectedIndex: number, duration = 200) => {
     const target = listRef.value
-    if (!target || isScrolling) {
+    if (!target) {
       return
     }
 
@@ -47,71 +41,100 @@ export function usePanelScroll(
       return
     }
 
-    scrollHandlerLocked = true
-
-    if (scrollHandlerLockedTmr) {
-      clearTimeout(scrollHandlerLockedTmr)
-    }
-
-    scrollToTop({
-      top,
-      target,
-      duration,
-      callback: () => {
-        scrollHandlerLockedTmr = setTimeout(() => {
-          scrollHandlerLocked = false
-          scrollHandlerLockedTmr = null
-        }, Math.max(duration, 200))
-      },
-    })
+    scrollTo(top, duration)
   }
 
-  function scrollToActive(duration?: number) {
+  const scrollToActive = (duration?: number) => {
     const activeIndex = props.options!.findIndex(item => item.value === props.activeValue)
     adjustPanel(activeIndex, duration)
   }
 
-  function handleScrollAdjust() {
-    isNil(scrollTargetIndex) || scrollTargetIndex < 0 ? scrollToActive() : adjustPanel(scrollTargetIndex)
-  }
-
-  function handleScroll() {
+  const getTargetByScrollTop = () => {
     const target = listRef.value
-    if (!target || isScrolling || scrollHandlerLocked) {
+    if (!target) {
       return
     }
 
-    isScrolling = true
-    scrollTargetIndex = Math.min(Math.round(getScroll(target).scrollTop / getCellHeight()), props.options!.length - 1)
-    const targetItem = props.options![scrollTargetIndex]
-    if (!targetItem.disabled) {
-      callEmit(props.onChange, targetItem.value)
-    }
-    nextTick(() => {
-      isScrolling = false
-    })
+    const scrollTargetIndex = Math.min(
+      Math.round(getScroll(target).scrollTop / getCellHeight()),
+      props.options!.length - 1,
+    )
+    return props.options![scrollTargetIndex]
   }
-
-  watchEffect(() => {
-    if (props.visible) {
-      nextTick(() => scrollToActive(0))
-    }
-  })
-  watch(
-    () => props.activeValue,
-    value => {
-      const newScrollTargetIndex = props.options!.findIndex(item => item.value === value)
-      if (scrollTargetIndex !== newScrollTargetIndex) {
-        scrollTargetIndex = newScrollTargetIndex
-        !isScrolling && nextTick(scrollToActive)
-      }
-    },
-  )
 
   return {
     adjustPanel,
     scrollToActive,
-    handleScrollAdjust,
-    handleScroll,
+    getTargetByScrollTop,
+    frameRunning,
+  }
+}
+
+interface ScrollToContext {
+  frameRunning: Ref<boolean>
+  scrollTo: (top: number, duration?: number) => void
+}
+
+function useScrollTo(target: Ref<HTMLElement | undefined>): ScrollToContext {
+  const frameRunning = ref(false)
+  let rafId: number
+
+  let currentTop: number
+  let currentScrollTop: number
+  let currentDuration: number
+  let currentStartTime: number
+
+  const frameFunc = (time: number) => {
+    if (!target.value) {
+      return
+    }
+
+    const elapsed = time > currentDuration ? currentDuration : time
+    const amountOfChange = currentTop! - currentScrollTop
+    const nextScrollTop = easeInOutCubic(elapsed, currentScrollTop, amountOfChange, currentDuration)
+
+    target.value.scrollTop = nextScrollTop
+  }
+
+  const execFrame = () => {
+    cancelRAF(rafId)
+    rafId = rAF(() => {
+      frameRunning.value = true
+      const time = Date.now() - currentStartTime
+      frameFunc(time)
+
+      if (time < currentDuration) {
+        execFrame()
+      } else {
+        currentTop = 0
+        currentDuration = 0
+        currentStartTime = 0
+
+        rAF(() => {
+          frameRunning.value = false
+        })
+      }
+    })
+  }
+
+  const scrollTo = (top: number, duration = 100) => {
+    if (!target.value) {
+      return
+    }
+
+    currentDuration = duration
+    currentTop = top
+    currentScrollTop = getScroll(target.value).scrollTop
+
+    if (!frameRunning.value) {
+      currentStartTime = Date.now()
+    }
+
+    execFrame()
+  }
+
+  return {
+    frameRunning,
+    scrollTo,
   }
 }

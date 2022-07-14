@@ -10,11 +10,11 @@ import { computed, defineComponent, inject } from 'vue'
 import { callEmit, isNumeric } from '@idux/cdk/utils'
 
 import { timePanelContext } from './tokens'
-import { timePanelCellProps } from './types'
+import { type TimePanelCellProps, timePanelCellProps } from './types'
 
 export default defineComponent({
   props: timePanelCellProps,
-  setup(props) {
+  setup(props: TimePanelCellProps) {
     const { mergedPrefixCls } = inject(timePanelContext)!
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-cell`
@@ -28,7 +28,7 @@ export default defineComponent({
     const onClick = (evt: MouseEvent) => {
       evt.stopPropagation()
       if (!props.disabled && !props.selected) {
-        callEmit(props.onChange, props.value!)
+        callEmit(props.onActive, { value: props.value, disabled: props.disabled })
       }
     }
 

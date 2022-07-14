@@ -10,7 +10,7 @@ import { TimePanelCellProps } from '../src/types'
 const mountGlobalOpts = {
   provide: {
     [timePanelContext as symbol]: {
-      mergedPrefixCls: computed(() => 'ix-time-Panel'),
+      mergedPrefixCls: computed(() => 'ix-time-panel'),
     },
   },
 }
@@ -31,28 +31,28 @@ describe('TimePanelCell', () => {
     },
   })
 
-  test('onChange work', async () => {
-    const onChange = vi.fn()
-    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: false, onChange } })
+  test('onActive work', async () => {
+    const onActive = vi.fn()
+    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: false, onActive } })
     wrapper.trigger('click')
 
-    expect(onChange).toBeCalledWith('cell')
+    expect(onActive).toBeCalledWith({ value: 'cell', disabled: false })
   })
   test('disabled', async () => {
-    const onChange = vi.fn()
-    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: true, selected: false, onChange } })
+    const onActive = vi.fn()
+    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: true, selected: false, onActive } })
     wrapper.trigger('click')
 
-    expect(wrapper.element.classList.contains('ix-time-Panel-cell')).toBeTruthy()
-    expect(onChange).not.toBeCalled()
+    expect(wrapper.element.classList.contains('ix-time-panel-cell')).toBeTruthy()
+    expect(onActive).not.toBeCalled()
   })
 
   test('selected', async () => {
-    const onChange = vi.fn()
-    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: true, onChange } })
+    const onActive = vi.fn()
+    const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: true, onActive } })
     wrapper.trigger('click')
 
-    expect(wrapper.element.classList.contains('ix-time-Panel-cell')).toBeTruthy()
-    expect(onChange).not.toBeCalled()
+    expect(wrapper.element.classList.contains('ix-time-panel-cell')).toBeTruthy()
+    expect(onActive).not.toBeCalled()
   })
 })

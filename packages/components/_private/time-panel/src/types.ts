@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
@@ -111,7 +109,7 @@ export const timePanelColumnProps = {
   },
 
   // events
-  onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
+  onActiveChange: [Function, Array] as PropType<MaybeArray<(cell: TimePanelCell) => void>>,
 } as const
 
 export const timePanelCellProps = {
@@ -129,7 +127,7 @@ export const timePanelCellProps = {
   },
 
   // events
-  onChange: [Function, Array] as PropType<MaybeArray<(value: number | string) => void>>,
+  onActive: [Function, Array] as PropType<MaybeArray<(cell: TimePanelCell) => void>>,
 } as const
 
 export type BaseTimePanelProps = ExtractInnerPropTypes<typeof baseTimePanelProps>
