@@ -20,7 +20,7 @@ describe('formGroup.ts', () => {
     let group: FormGroup<BasicGroup>
 
     beforeEach(() => {
-      group = new FormGroup<BasicGroup>({
+      group = new FormGroup({
         control: new FormControl(''),
         array: new FormArray([new FormControl(''), new FormControl('')]),
         group: new FormGroup({

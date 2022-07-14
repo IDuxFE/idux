@@ -20,13 +20,14 @@ import {
   shallowReactive,
   shallowRef,
   toRaw,
+  unref,
   watch,
   watchEffect,
 } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { Logger, NoopFunction, callEmit } from '@idux/cdk/utils'
+import { Logger, type MaybeRef, NoopFunction, callEmit } from '@idux/cdk/utils'
 
 import { type AbstractControl, type ControlPathType } from './controls'
 import { isAbstractControl } from './typeof'
@@ -81,7 +82,7 @@ export interface FormAccessor<T = any> {
 }
 
 export function useAccessor<T = any>(
-  control: ShallowRef<AbstractControl<T> | undefined>,
+  control: MaybeRef<AbstractControl<T> | undefined>,
   valueKey = 'value',
   disabledKey = 'disabled',
 ): FormAccessor<T> {
@@ -102,7 +103,7 @@ export function useAccessor<T = any>(
   onScopeDispose(cleanWatch)
 
   watch(
-    control,
+    () => unref(control),
     currControl => {
       cleanWatch()
 

@@ -41,6 +41,11 @@ describe('formControl.ts', () => {
 
       expect(control.getValue()).toEqual('')
       expect(control.dirty.value).toEqual(true)
+
+      control.setValue('test', { blur: true })
+
+      expect(control.getValue()).toEqual('test')
+      expect(control.blurred.value).toEqual(true)
     })
 
     test('markAsBlurred and markAsUnblurred work', () => {

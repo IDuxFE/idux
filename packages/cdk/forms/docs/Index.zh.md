@@ -117,8 +117,9 @@ export function useFormControl<T>(
 
 ### useAccessorAndControl
 
-> 构建 `accessor`, 来接管表单控件 `props` 的 `control` 和 `value`, `disabled` 状态的优先级关系。
-> 当 `control` 存在时，`value` 和 `disabled` 无效，以 `control` 的状态为准。
+用于处理表单控件 `props` 的 `control` 和 `value`, `disabled` 的优先级关系，`control` 存在时， `value` 和 `disabled` 失效。
+
+创建一个响应式对象 `FormAccessor`，它接管了组件 `value` 和 `disabled` 控制，用法也同 `props` 一致。
 
 ```ts
 export function useAccessorAndControl<T = any>(options?: FormAccessorOptions): {
@@ -126,7 +127,7 @@ export function useAccessorAndControl<T = any>(options?: FormAccessorOptions): {
     control: ShallowRef<AbstractControl<T> | undefined>;
 }
 
-export function useAccessor<T = any>(control: ShallowRef<AbstractControl<T> | undefined>, valueKey?: string, disabledKey?: string): FormAccessor<T>
+export function useAccessor<T = any>(control: MaybeRef<AbstractControl<T> | undefined>, valueKey?: string, disabledKey?: string): FormAccessor<T>
 
 export function useControl<T = any>(controlKey?: string): ShallowRef<AbstractControl<T> | undefined>
 

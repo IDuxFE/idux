@@ -83,7 +83,7 @@ describe('formArray.ts', () => {
       expect(array.length.value).toEqual(1)
       expect(array.getValue()).toEqual([basicValue])
 
-      const group = array.at(0)
+      const group = array.at(0)!
       array.removeAt(0)
       expect(array.length.value).toEqual(0)
       expect(array.getValue()).toEqual([])
