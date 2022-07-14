@@ -6,6 +6,12 @@ import { FormGroup } from '../src/controls'
 import { useFormGroup } from '../src/useForms'
 import { FORMS_CONTROL_TOKEN, useAccessorAndControl, useControl } from '../src/utils'
 
+interface BasicGroup {
+  name: string
+  age: string
+  email: string
+}
+
 const InputComponent = {
   template: `<input :value="accessor.value" :disabled="accessor.disabled" @input="onInput" @blur="onBlur" />`,
   props: ['value', 'control', 'disabled'],
@@ -27,7 +33,7 @@ const FormComponent = {
   },
 }
 
-const MountForm = (group: FormGroup) => {
+const MountForm = (group: FormGroup<BasicGroup>) => {
   return mount({
     components: { FormComponent, InputComponent },
     template: `
@@ -44,7 +50,7 @@ const MountForm = (group: FormGroup) => {
 }
 
 describe('utils.ts', () => {
-  let group: FormGroup
+  let group: FormGroup<BasicGroup>
 
   test('basic work', async () => {
     const { required, min, max, email } = Validators
@@ -82,7 +88,7 @@ describe('utils.ts', () => {
     group = useFormGroup({
       age: ['18', [required, min(1), max(99)]],
       email: ['', [email]],
-    })
+    }) as unknown as FormGroup<BasicGroup>
     const wrapper = MountForm(group)
     const nameInput = wrapper.find('#name') as DOMWrapper<HTMLInputElement>
 

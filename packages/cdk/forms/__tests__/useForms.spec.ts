@@ -1,6 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 
-import { useFormArray, useFormGroup } from '../src/useForms'
+import { useFormArray, useFormControl, useFormGroup } from '../src/useForms'
 import { Validators } from '../src/validators'
 
 interface BasicGroup {
@@ -20,7 +20,7 @@ describe('useForms.ts', () => {
       control1: ['', Validators.required],
       control2: [undefined, { trigger: 'blur', validators: Validators.required }],
       array: useFormArray([[''], [1]]),
-      group: useFormGroup({ control: [''] }),
+      group: useFormGroup({ control: useFormControl<string | number>('') }),
     })
 
     expect(group.getValue()).toEqual(basicValue)

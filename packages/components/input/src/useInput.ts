@@ -39,9 +39,6 @@ export function useInput(
   props: CommonProps,
   config: InputConfig | TextareaConfig,
 ): InputContext<HTMLInputElement | HTMLTextAreaElement> {
-  // const control = useValueControl()
-  // const accessor = useValueAccessor({ control })
-  // useFormItemRegister(control)
   const { accessor, control } = useAccessorAndControl()
   useFormItemRegister(control)
 

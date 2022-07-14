@@ -10,6 +10,7 @@
 import {
   type ComputedRef,
   type Ref,
+  type ShallowRef,
   type WatchCallback,
   type WatchOptions,
   type WatchStopHandle,
@@ -168,11 +169,11 @@ export abstract class AbstractControl<T = any> {
   name?: string
   example?: string
 
-  protected _controls: Ref<any>
-  protected _valueRef!: Ref<T>
+  protected _controls: ShallowRef<any>
+  protected _valueRef!: ShallowRef<T>
   protected _status!: Ref<ValidateStatus>
   protected _controlsStatus!: Ref<ValidateStatus>
-  protected _errors!: Ref<ValidateErrors | undefined>
+  protected _errors!: ShallowRef<ValidateErrors | undefined>
   protected _disabled!: Ref<boolean>
   protected _blurred = ref(false)
   protected _dirty = ref(false)
@@ -202,8 +203,9 @@ export abstract class AbstractControl<T = any> {
    * @param value The new value.
    * @param options
    * * `dirty`: Marks it dirty, default is false.
+   * * `blur`: Marks it blurred, default is false.
    */
-  abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean }): void
+  abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean; blur?: boolean }): void
 
   /**
    * The aggregate value of the control.
@@ -286,6 +288,7 @@ export abstract class AbstractControl<T = any> {
     } else {
       this._blurred.value = true
     }
+
     if (this.trigger === 'blur') {
       this._validate()
     }
@@ -561,10 +564,13 @@ export class FormControl<T = any> extends AbstractControl<T> {
     this._watchStatus()
   }
 
-  setValue(value: T, options: { dirty?: boolean } = {}): void {
+  setValue(value: T, options: { dirty?: boolean; blur?: boolean } = {}): void {
     this._valueRef.value = value
     if (options.dirty) {
       this.markAsDirty()
+    }
+    if (options.blur) {
+      this.markAsBlurred()
     }
   }
 
@@ -594,9 +600,9 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 }
 
-export class FormGroup<T extends Record<string, any> = Record<string, any>> extends AbstractControl<T> {
+export class FormGroup<T extends object = object> extends AbstractControl<T> {
   readonly controls!: ComputedRef<GroupControls<T>>
-  protected _controls!: Ref<GroupControls<T>>
+  protected _controls!: ShallowRef<GroupControls<T>>
 
   constructor(
     /**
@@ -615,9 +621,13 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
     this._watchDirty()
   }
 
-  setValue(value: Partial<T>, options: { dirty?: boolean } = {}): void {
-    Object.keys(value).forEach(key => {
-      this._controls.value[key].setValue((value as any)[key], options)
+  setValue(value: Partial<T>, options?: { dirty?: boolean; blur?: boolean }): void {
+    const controls = this._controls.value
+    ;(Object.keys(value) as Array<keyof T>).forEach(key => {
+      const control = controls[key]
+      if (control) {
+        control.setValue(value[key]!, options)
+      }
     })
   }
 
@@ -628,7 +638,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
       if (skipDisabled && control.disabled.value) {
         return
       }
-      value[key] = control.getValue()
+      value[key] = control.getValue(options)
     })
     return value
   }
@@ -639,7 +649,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
 
   protected _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void {
     const controls = this._controls.value
-    Object.keys(controls).forEach(key => cb(controls[key], key))
+    ;(Object.keys(controls) as Array<keyof T>).forEach(key => cb(controls[key], key))
   }
 
   /**
@@ -748,7 +758,7 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> exte
 
 export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
   readonly controls!: ComputedRef<AbstractControl<ArrayElement<T>>[]>
-  protected _controls!: Ref<AbstractControl<ArrayElement<T>>[]>
+  protected _controls!: ShallowRef<AbstractControl<ArrayElement<T>>[]>
 
   /**
    * Length of the control array.
@@ -774,10 +784,11 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     this._watchDirty()
   }
 
-  setValue(value: Partial<ArrayElement<T>>[], options: { dirty?: boolean } = {}): void {
+  setValue(value: Partial<ArrayElement<T>>[], options?: { dirty?: boolean; blur?: boolean }): void {
     value.forEach((item, index) => {
-      if (this.at(index)) {
-        this.at(index).setValue(item, options)
+      const control = this.at(index)
+      if (control) {
+        control.setValue(item, options)
       }
     })
   }
@@ -786,7 +797,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     const { skipDisabled } = options
     return this._controls.value
       .filter(control => !skipDisabled || !control.disabled.value)
-      .map(control => control.getValue()) as T
+      .map(control => control.getValue(options)) as T
   }
 
   protected _calculateInitValue(): T {
@@ -802,7 +813,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    *
    * @param index Index in the array to retrieve the control
    */
-  at(index: number): AbstractControl<ArrayElement<T>> {
+  at(index: number): AbstractControl<ArrayElement<T>> | undefined {
     return this._controls.value[index]
   }
 
