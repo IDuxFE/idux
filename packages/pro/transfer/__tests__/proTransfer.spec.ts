@@ -266,6 +266,84 @@ describe('ProTransfer', () => {
     expect(targetList.findAll('.ix-checkable-list-item').length).toBe(1)
   })
 
+  test('loadChildren work', async () => {
+    const onChange = vi.fn()
+    const loadChildren = (node: Data) => {
+      const depth = node.key.split('-').length
+      if (depth > 2) {
+        return
+      }
+
+      return Array.from(new Array(5)).map((_, index) => ({
+        key: `${node.key}-${index + 1}`,
+        disabled: false,
+        label: `${node.label}-${index + 1}`,
+        children: [],
+        isLeaf: depth >= 2,
+      }))
+    }
+    const wrapper = proTreeTransferMount({
+      props: {
+        dataSource: [
+          {
+            key: '1',
+            disabled: false,
+            label: 'Selection-1',
+            children: [],
+          },
+          {
+            key: '2',
+            disabled: false,
+            label: 'Selection-2',
+            children: [],
+          },
+        ],
+        treeProps: { loadChildren },
+        sourceExpandedKeys: ['1', '1-1', '2', '2-1'],
+        targetExpandedKeys: ['1', '1-1', '2', '2-1'],
+        onChange,
+      },
+    })
+
+    const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
+
+    const [sourceTree] = wrapper.findAll('.ix-tree')
+    expect(sourceTree.findAll('.ix-tree-node').length).toBe(2)
+
+    const sourceNodes = sourceTree.findAll('.ix-tree-node')
+    await sourceNodes[0].find('.ix-tree-node-expand').trigger('click')
+    await sourceNodes[1].find('.ix-tree-node-expand').trigger('click')
+    expect(sourceTree.findAll('.ix-tree-node').length).toBe(12)
+
+    await sourceTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
+    await appendTrigger.trigger('click')
+
+    const [, targetTree] = wrapper.findAll('.ix-tree')
+
+    expect(sourceTree.findAll('.ix-tree-node').length).toBe(6)
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(6)
+    expect(onChange).toBeCalledWith(['1', '1-1', '1-2', '1-3', '1-4', '1-5'], [])
+
+    onChange.mockClear()
+
+    await targetTree.findAll('.ix-tree-node')[1].find('.ix-tree-node-expand').trigger('click')
+    expect(sourceTree.findAll('.ix-tree-node').length).toBe(6)
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(11)
+    expect(onChange).toBeCalledWith(
+      ['1', '1-1', '1-2', '1-3', '1-4', '1-5', '1-1-1', '1-1-2', '1-1-3', '1-1-4', '1-1-5'],
+      ['1', '1-1', '1-2', '1-3', '1-4', '1-5'],
+    )
+
+    await targetTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
+    await removeTrigger.trigger('click')
+    expect(sourceTree.findAll('.ix-tree-node').length).toBe(17)
+    expect(wrapper.findAll('.ix-tree')[1]).toBeUndefined()
+    expect(onChange).toBeCalledWith(
+      [],
+      ['1', '1-1', '1-2', '1-3', '1-4', '1-5', '1-1-1', '1-1-2', '1-1-3', '1-1-4', '1-1-5'],
+    )
+  })
+
   test('table custom label work', async () => {
     const sourceColumns: TableColumn[] = [
       {

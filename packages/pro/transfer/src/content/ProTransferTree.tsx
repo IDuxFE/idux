@@ -27,6 +27,8 @@ export default defineComponent({
       mergedPrefixCls,
       expandedKeysContext,
       childrenKey,
+      loadSourceChildren,
+      loadTargetChildren,
       parentKeyMap,
       sourceContentRef,
       targetContentRef,
@@ -42,6 +44,7 @@ export default defineComponent({
       expandedKeysContext!,
       parentKeyMap!,
       childrenKey,
+      props.isSource ? loadSourceChildren! : loadTargetChildren!,
       props.isSource,
     )
 

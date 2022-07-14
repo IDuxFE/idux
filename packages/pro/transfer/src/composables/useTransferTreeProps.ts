@@ -6,6 +6,7 @@
  */
 
 import type { ProTransferProps, TransferData } from '../types'
+import type { TransferTreeLoadChildren } from './useTransferData'
 import type { TreeExpandedKeysContext } from './useTreeExpandedKeys'
 import type { TransferBindings } from '@idux/components/transfer'
 import type { TreeNode, TreeProps } from '@idux/components/tree'
@@ -22,6 +23,7 @@ export function useTransferTreeProps(
   expandedKeysContext: TreeExpandedKeysContext,
   parentKeyMap: Map<VKey, VKey | undefined>,
   childrenKey: ComputedRef<string>,
+  loadChildren: TransferTreeLoadChildren,
   isSource: boolean,
 ): ComputedRef<TreeProps> {
   const {
@@ -88,10 +90,13 @@ export function useTransferTreeProps(
       expandedKeys: isSource ? sourceExpandedKeys.value : targetExpandedKeys.value,
       height: isNumber(props.scroll?.height) ? props.scroll?.height : undefined,
       getKey: getKey.value as (node: TreeNode) => VKey,
+      loadChildren: loadChildren.value,
       selectable: true,
       virtual: props.virtual,
       'onUpdate:checkedKeys': handleSelectChange,
-      'onUpdate:expandedKeys': isSource ? handleSourceExpandedChange : handleTargetExpandedChange,
+      'onUpdate:expandedKeys': (isSource ? handleSourceExpandedChange : handleTargetExpandedChange) as <K = VKey>(
+        keys: K[],
+      ) => void,
       onScroll: evt => {
         callEmit(props.onScroll, isSource, evt)
       },

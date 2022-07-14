@@ -125,7 +125,7 @@ export const transferProps = {
     default: false,
   },
   empty: [String, Object] as PropType<string | EmptyProps>,
-  getKey: [String, Function] as PropType<string | ((item: TransferData) => number | string)>,
+  getKey: [String, Function] as PropType<string | ((item: TransferData) => VKey)>,
   mode: {
     type: String as PropType<TransferMode>,
     default: 'default',
