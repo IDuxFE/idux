@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { PortalTargetType } from '@idux/cdk/portal'
-import type { VKey } from '@idux/cdk/utils'
 import type { AlertType } from '@idux/components/alert'
 import type { AvatarShape, AvatarSize } from '@idux/components/avatar'
 import type { ButtonSize } from '@idux/components/button'
@@ -152,7 +153,7 @@ export interface CascaderConfig {
   childrenKey: string
   expandIcon: string
   fullPath: boolean
-  getKey: string | ((data: CascaderData) => VKey)
+  getKey: string | ((data: CascaderData<any>) => any)
   labelKey: string
   overlayContainer?: PortalTargetType
   overlayMatchWidth: boolean
@@ -262,7 +263,7 @@ export interface ImageViewerConfig {
 }
 
 export interface MenuConfig {
-  getKey: string | ((data: MenuData) => VKey)
+  getKey: string | ((data: MenuData<any>) => any)
   indent: number
   offset: [number, number]
   overlayContainer?: PortalTargetType
@@ -372,7 +373,7 @@ export interface SelectConfig {
   borderless: boolean
   childrenKey: string
   clearIcon: string
-  getKey: string | ((data: SelectData) => VKey)
+  getKey: string | ((data: SelectData<any>) => any)
   labelKey: string
   overlayContainer?: PortalTargetType
   overlayMatchWidth: boolean
@@ -433,8 +434,7 @@ export interface TableConfig {
   autoHeight: boolean
   borderless: boolean
   childrenKey: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getKey: string | ((data: any) => VKey)
+  getKey: string | ((data: any) => any)
   /**
    * @deprecated please use `getKey` instead'
    */
@@ -511,7 +511,7 @@ export interface TreeConfig {
   childrenKey: string
   expandIcon: string | [string, string]
   draggableIcon: string
-  getKey: string | ((data: TreeNode) => VKey)
+  getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
   /**
    * @deprecated please use `labelKey` instead'
@@ -524,7 +524,7 @@ export interface TreeSelectConfig {
   borderless: boolean
   childrenKey: string
   clearIcon: string
-  getKey: string | ((data: TreeNode) => VKey)
+  getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
   /**
    * @deprecated please use `labelKey` instead'

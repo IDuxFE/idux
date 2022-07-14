@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
@@ -26,7 +28,6 @@ export type TreeTransferData<C extends VKey = 'children'> = TransferData & {
   [key in C]?: TreeTransferData<C>[]
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ProTransferTableProps<T = any, K = VKey> {
   sourceColumns: TableColumn<T, K>[]
   targetColumns: TableColumn<T, K>[]
@@ -41,9 +42,9 @@ export interface ProTransferTreeProps {
   expandIcon?: string
   labelKey?: string
   leafLineIcon?: string
-  loadChildren?: <C extends VKey = VKey>(node: TreeTransferData<C>) => TreeTransferData<C>[]
-  onExpand?: MaybeArray<<K = VKey>(expanded: boolean, node: TreeNode<K>) => void>
-  onExpandedChange?: MaybeArray<<K = VKey>(expendedKeys: K[], expendedNodes: TreeNode<K>[]) => void>
+  loadChildren?: (node: TreeTransferData<any>) => TreeTransferData<any>[]
+  onExpand?: MaybeArray<(expanded: boolean, node: TreeNode<any>) => void>
+  onExpandedChange?: MaybeArray<(expendedKeys: any[], expendedNodes: TreeNode<any>[]) => void>
 }
 
 export const proTransferProps = {
@@ -83,7 +84,7 @@ export const proTransferProps = {
     default: 'default',
   },
   spin: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
-  getKey: [String, Function] as PropType<string | ((item: TransferData) => VKey)>,
+  getKey: [String, Function] as PropType<string | ((item: TransferData<any>) => any)>,
   scroll: Object as PropType<TransferScroll>,
 
   tableProps: Object as PropType<ProTransferTableProps>,
@@ -98,12 +99,12 @@ export const proTransferProps = {
   targetExpandedKeys: Array as PropType<VKey[]>,
 
   //Events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:sourceExpandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:targetExpandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  onChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[], oldKeys: K[]) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:sourceExpandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:targetExpandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(keys: any[], oldKeys: any[]) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(isSource: boolean, searchValue: string) => void>>,
   onSelectAll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, selectAll: boolean) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,

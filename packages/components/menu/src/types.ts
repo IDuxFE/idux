@@ -30,7 +30,10 @@ export const menuProps = {
   },
   customAdditional: { type: Object as PropType<MenuCustomAdditional>, default: undefined },
   dataSource: Array as PropType<MenuData[]>,
-  getKey: { type: [String, Function] as PropType<string | (<K = VKey>(data: MenuData<K>) => K)>, default: undefined },
+  getKey: {
+    type: [String, Function] as PropType<string | ((data: MenuData<any>) => any)>,
+    default: undefined,
+  },
   indent: Number,
   mode: {
     type: String as PropType<MenuMode>,
@@ -59,9 +62,9 @@ export const menuProps = {
   theme: String as PropType<MenuTheme>,
 
   // events
-  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(expandedKeys: K[]) => void>>,
-  'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(selectedKeys: K[]) => void>>,
-  onClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: MenuClickOptions<K>) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(expandedKeys: any[]) => void>>,
+  'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<(selectedKeys: any[]) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions<any>) => void>>,
 }
 
 export type MenuProps = ExtractInnerPropTypes<typeof menuProps>
@@ -188,10 +191,7 @@ export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>
 
 export type MenuData<K = VKey> = MenuItemProps<K> | MenuItemGroupProps<K> | MenuSubProps<K> | MenuDividerProps<K>
 
-export type MenuCustomAdditional = <K = VKey>(options: {
-  data: MenuData<K>
-  index: number
-}) => Record<string, any> | undefined
+export type MenuCustomAdditional = (options: { data: MenuData<any>; index: number }) => Record<string, any> | undefined
 
 // private
 export const menuItemProps = {

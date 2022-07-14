@@ -53,7 +53,7 @@ export const proTableProps = {
   editable: { type: Boolean, default: false },
   ellipsis: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
-  getKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
   layoutTool: { type: Boolean, default: true },
@@ -67,8 +67,8 @@ export const proTableProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   onColumnsChange: [Function, Array] as PropType<MaybeArray<(columns: ProTableColumn[]) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<

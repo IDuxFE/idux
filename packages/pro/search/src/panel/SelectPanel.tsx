@@ -146,8 +146,8 @@ export default defineComponent({
         getKey: 'key',
         labelKey: 'label',
         selectedKeys: props.value,
-        onOptionClick: handleOptionClick as <K = VKey>(option: SelectData<K>) => void,
-        'onUpdate:activeValue': setActiveValue as <K = VKey>(value: K) => void,
+        onOptionClick: handleOptionClick,
+        'onUpdate:activeValue': setActiveValue,
       }
       return (
         <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>

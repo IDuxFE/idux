@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
@@ -51,9 +53,9 @@ export const tagGroupProps = {
     default: undefined,
   },
   shape: String as PropType<TagShape>,
-  'onUpdate:activeKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(activeKeys: K[]) => void>>,
-  onClick: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
-  onClose: [Function, Array] as PropType<MaybeArray<(key: K, evt: MouseEvent) => void>>,
+  'onUpdate:activeKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  onClick: [Function, Array] as PropType<MaybeArray<(key: any, evt: MouseEvent) => void>>,
+  onClose: [Function, Array] as PropType<MaybeArray<(key: any, evt: MouseEvent) => void>>,
 } as const
 
 export type TagGroupProps = ExtractInnerPropTypes<typeof tagGroupProps>

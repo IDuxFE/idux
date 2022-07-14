@@ -29,12 +29,12 @@ export const tableProps = {
   borderless: { type: Boolean, default: undefined },
   childrenKey: { type: String, default: undefined },
   columns: { type: Array as PropType<TableColumn[]>, default: () => [] },
-  customAdditional: { type: Object as PropType<TableCustomAdditional>, default: undefined },
+  customAdditional: { type: Object as PropType<TableCustomAdditional<any, any>>, default: undefined },
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
   ellipsis: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
-  getKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
@@ -54,8 +54,8 @@ export const tableProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:selectedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
     MaybeArray<(startIndex: number, endIndex: number, visibleData: any[]) => void>
@@ -199,12 +199,12 @@ export interface TableColumnSortable<T = any> {
 }
 
 export interface TableColumnFilterable<T = any> {
-  filter?: <K = VKey>(filterBy: K[], record: T) => boolean
+  filter?: (filterBy: any[], record: T) => boolean
   filterBy?: VKey[]
   footer?: boolean
   menus: MenuData[]
   multiple?: boolean
-  onChange?: <K = VKey>(filterBy: K[], filters: ActiveFilter[]) => void
+  onChange?: (filterBy: any[], filters: ActiveFilter[]) => void
 
   customTrigger?: string | (() => VNodeChild)
   customMenu?: string | (() => VNodeChild)
