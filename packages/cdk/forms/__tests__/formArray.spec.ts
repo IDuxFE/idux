@@ -25,7 +25,7 @@ const basicValue = { control: '', array: ['', ''], group: { control: '' } }
 
 describe('formArray.ts', () => {
   describe('basic work', () => {
-    let array: FormArray<BasicGroup[]>
+    let array: FormArray<BasicGroup>
 
     beforeEach(() => {
       array = new FormArray([newFormGroup()])
@@ -192,7 +192,7 @@ describe('formArray.ts', () => {
   })
 
   describe('trigger work', () => {
-    let array: FormArray<BasicGroup[]>
+    let array: FormArray<BasicGroup>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _validator = (value: any) => {
       return value[0].control === 'test' ? undefined : ({ test: {} } as ValidateErrors)
@@ -305,7 +305,7 @@ describe('formArray.ts', () => {
   })
 
   describe('disabled work', () => {
-    let array: FormArray<BasicGroup[]>
+    let array: FormArray<BasicGroup>
 
     test('default disabled work', async () => {
       array = new FormArray(

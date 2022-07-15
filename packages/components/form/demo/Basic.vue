@@ -28,34 +28,28 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import { Validators, useFormGroup } from '@idux/cdk/forms'
 
-export default defineComponent({
-  setup() {
-    const { required, minLength, maxLength } = Validators
+const { required, minLength, maxLength } = Validators
 
-    const formGroup = useFormGroup({
-      username: ['', required],
-      password: ['', [required, minLength(6), maxLength(18)]],
-      remember: [true],
-    })
-
-    const login = () => {
-      if (formGroup.valid.value) {
-        console.log('login', formGroup.getValue())
-      } else {
-        formGroup.markAsDirty()
-      }
-    }
-
-    const passwordVisible = ref(false)
-
-    return { formGroup, login, passwordVisible }
-  },
+const formGroup = useFormGroup({
+  username: ['', required],
+  password: ['', [required, minLength(6), maxLength(18)]],
+  remember: [true],
 })
+
+const login = () => {
+  if (formGroup.valid.value) {
+    console.log('login', formGroup.getValue())
+  } else {
+    formGroup.markAsDirty()
+  }
+}
+
+const passwordVisible = ref(false)
 </script>
 
 <style lang="less" scoped>

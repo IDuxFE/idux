@@ -25,7 +25,7 @@
     <IxFormItem label="Website">
       <IxInput control="website"> </IxInput>
     </IxFormItem>
-    <IxFormItem label="Captcha" required extra="We must make sure that your are a human.">
+    <IxFormItem label="Captcha" required description="We must make sure that your are a human.">
       <IxRow gutter="8">
         <IxCol span="12">
           <IxInput control="captcha"> </IxInput>
@@ -50,7 +50,8 @@ import { defineComponent } from 'vue'
 import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
 
 Validators.setMessages({
-  required: (_err, _control) => '必填项/Input is required',
+  required: '必填项/Input is required',
+  mobilePhone: (_err, _control) => '手机号码格式不正确/Mobile phone number is not valid',
   passwordRequired: {
     'zh-CN': '请确认你的密码',
     'en-US': 'Please confirm your password',
@@ -58,10 +59,6 @@ Validators.setMessages({
   passwordConfirm: {
     'zh-CN': '两次密码输入不一致',
     'en-US': 'Two passwords that you enter is inconsistent',
-  },
-  mobilePhone: {
-    'zh-CN': '手机号码格式不正确',
-    'en-US': 'Mobile phone number is not valid',
   },
 })
 

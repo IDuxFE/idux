@@ -42,7 +42,7 @@
       labelFor="captcha"
       required
       message="Please input the captcha you got!"
-      extra="We must make sure that your are a human."
+      description="We must make sure that your are a human."
     >
       <IxRow gutter="8">
         <IxCol span="12">
@@ -65,9 +65,7 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
 
 const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
@@ -79,51 +77,45 @@ const confirmPasswordValidator = (value: string, control: AbstractControl): Vali
   return undefined
 }
 
-export default defineComponent({
-  setup() {
-    const labelCol = { sm: 8, xs: 24 }
-    const controlCol = { sm: 16, xs: 24 }
-    const noLabelControlCol = { sm: { offset: 8, span: 16 }, xs: 24 }
+const labelCol = { sm: 8, xs: 24 }
+const controlCol = { sm: 16, xs: 24 }
+const noLabelControlCol = { sm: { offset: 8, span: 16 }, xs: 24 }
 
-    const { required, email } = Validators
+const { required, email } = Validators
 
-    const formGroup = useFormGroup({
-      email: ['', [required, email]],
-      password: ['', required],
-      confirmPassword: ['', [required, confirmPasswordValidator]],
-      nickname: ['', required],
-      phoneNumberPrefix: ['+86', required],
-      phoneNumber: ['', required],
-      website: [''],
-      time: [Date.now(), required],
-      captcha: ['', { validators: [required], disabled: true }],
-      agree: [false],
-    })
-
-    const passwordControl = formGroup.get('password')
-    const confirmPasswordControl = formGroup.get('confirmPassword')
-    passwordControl.watchValue(() => confirmPasswordControl.validate())
-
-    const captchaControl = formGroup.get('captcha')
-    const agreeControl = formGroup.get('agree')
-
-    agreeControl.watchValue(value => {
-      value ? captchaControl.enable() : captchaControl.disable()
-    })
-
-    const register = () => {
-      if (formGroup.valid.value) {
-        console.log('register', formGroup.getValue())
-      } else {
-        formGroup.markAsDirty()
-      }
-    }
-
-    const getCaptcha = () => console.log('getCaptcha')
-
-    return { labelCol, controlCol, noLabelControlCol, formGroup, register, getCaptcha }
-  },
+const formGroup = useFormGroup({
+  email: ['', [required, email]],
+  password: ['', required],
+  confirmPassword: ['', [required, confirmPasswordValidator]],
+  nickname: ['', required],
+  phoneNumberPrefix: ['+86', required],
+  phoneNumber: ['', required],
+  website: [''],
+  time: [Date.now(), required],
+  captcha: ['', { validators: [required], disabled: true }],
+  agree: [false],
 })
+
+const passwordControl = formGroup.get('password')
+const confirmPasswordControl = formGroup.get('confirmPassword')
+passwordControl.watchValue(() => confirmPasswordControl.validate())
+
+const captchaControl = formGroup.get('captcha')
+const agreeControl = formGroup.get('agree')
+
+agreeControl.watchValue(value => {
+  value ? captchaControl.enable() : captchaControl.disable()
+})
+
+const register = () => {
+  if (formGroup.valid.value) {
+    console.log('register', formGroup.getValue())
+  } else {
+    formGroup.markAsDirty()
+  }
+}
+
+const getCaptcha = () => console.log('getCaptcha')
 </script>
 
 <style lang="less" scoped>

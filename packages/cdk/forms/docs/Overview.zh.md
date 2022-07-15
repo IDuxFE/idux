@@ -108,7 +108,7 @@ const address = useFormGroup({
   zip: [''],
 })
 
-const remarks = useFormArray<string[]>([['remark0'], ['remark1'], ['remark2']])
+const remarks = useFormArray([['remark0'], ['remark1'], ['remark2']])
 
 const formGroup = useFormGroup({
   name: ['tom', required],

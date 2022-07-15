@@ -39,51 +39,41 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import { Validators, useFormGroup } from '@idux/cdk/forms'
 
-interface Name {
-  firstName: string
-  lastName: string
-}
+const { required } = Validators
 
-interface Address {
-  city: string
-  street: string
-  zip?: number
-}
+// const nameGroup = useFormGroup({
+//   firstName: ['', required],
+//   lastName: ['', required],
+// })
 
-export default defineComponent({
-  setup() {
-    const { required } = Validators
+// const addressGroup = useFormGroup({
+//   city: ['', required],
+//   street: ['', required],
+//   zip: [''],
+// })
 
-    const nameGroup = useFormGroup<Name>({
-      firstName: ['', required],
-      lastName: ['', required],
-    })
-
-    const addressGroup = useFormGroup<Address>({
-      city: ['', required],
-      street: ['', required],
-      zip: [undefined],
-    })
-
-    const formGroup = useFormGroup({
-      name: nameGroup,
-      address: addressGroup,
-    })
-
-    const onSubmit = () => {
-      if (formGroup.valid.value) {
-        console.log('submit', formGroup.getValue())
-      } else {
-        formGroup.markAsDirty()
-      }
-    }
-
-    return { formGroup, onSubmit }
+const formGroup = useFormGroup({
+  // name: nameGroup,
+  // address: addressGroup,
+  name: {
+    firstName: ['', required],
+    lastName: ['', required],
+  },
+  address: {
+    city: ['', required],
+    street: ['', required],
+    zip: [''],
   },
 })
+
+const onSubmit = () => {
+  if (formGroup.valid.value) {
+    console.log('submit', formGroup.getValue())
+  } else {
+    formGroup.markAsDirty()
+  }
+}
 </script>

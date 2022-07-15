@@ -18,9 +18,7 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts">
 import { AbstractControl, Validators, useFormGroup } from '@idux/cdk/forms'
 
 const mobilePhoneValidator = (value: string) => {
@@ -30,58 +28,52 @@ const mobilePhoneValidator = (value: string) => {
   return { mobilePhone: { message: 'Mobile phone number is not valid!' } }
 }
 
-export default defineComponent({
-  setup() {
-    const { required, email } = Validators
+const { required, email } = Validators
 
-    const formGroup = useFormGroup({
-      method: ['email', required],
-      contact: ['', [required, email]],
-      subscribe: [true],
-    })
-
-    const methodControl = formGroup.get<string>('method')!
-    const contactControl = formGroup.get<string>('contact')!
-    const subscribeControl = formGroup.get<boolean>('subscribe')!
-
-    methodControl.watchValue(value => {
-      if (value === 'mobilePhone') {
-        subscribeControl.disable()
-        subscribeControl.setValue(false)
-        contactControl.setValidator([required, mobilePhoneValidator])
-      } else {
-        subscribeControl.enable()
-        subscribeControl.setValue(true)
-        contactControl.setValidator([required, email])
-      }
-
-      contactControl.reset()
-    })
-
-    const getContactMessage = (control: AbstractControl) => {
-      if (control.hasError('required')) {
-        return 'Please input your contact number!'
-      }
-      if (control.hasError('email')) {
-        return 'The input is not valid email!'
-      }
-      if (control.hasError('mobilePhone')) {
-        return control.getError('mobilePhone')!.message as string
-      }
-      return ''
-    }
-
-    const onSubmit = () => {
-      if (formGroup.valid.value) {
-        console.log('submit', formGroup.getValue())
-      } else {
-        formGroup.markAsDirty()
-      }
-    }
-
-    return { formGroup, getContactMessage, onSubmit }
-  },
+const formGroup = useFormGroup({
+  method: ['email', required],
+  contact: ['', [required, email]],
+  subscribe: [true],
 })
+
+const methodControl = formGroup.get('method')
+const contactControl = formGroup.get('contact')
+const subscribeControl = formGroup.get('subscribe')
+
+methodControl.watchValue(value => {
+  if (value === 'mobilePhone') {
+    subscribeControl.disable()
+    subscribeControl.setValue(false)
+    contactControl.setValidator([required, mobilePhoneValidator])
+  } else {
+    subscribeControl.enable()
+    subscribeControl.setValue(true)
+    contactControl.setValidator([required, email])
+  }
+
+  contactControl.reset()
+})
+
+const getContactMessage = (control: AbstractControl) => {
+  if (control.hasError('required')) {
+    return 'Please input your contact number!'
+  }
+  if (control.hasError('email')) {
+    return 'The input is not valid email!'
+  }
+  if (control.hasError('mobilePhone')) {
+    return control.getError('mobilePhone')!.message as string
+  }
+  return ''
+}
+
+const onSubmit = () => {
+  if (formGroup.valid.value) {
+    console.log('submit', formGroup.getValue())
+  } else {
+    formGroup.markAsDirty()
+  }
+}
 </script>
 
 <style lang="less" scoped>

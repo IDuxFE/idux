@@ -120,7 +120,10 @@ function useStatusIcon(
 
     const icon = props.hasFeedback ?? props.statusIcon ?? formProps?.hasFeedback ?? formProps?.statusIcon
     if (__DEV__ && (props.hasFeedback || formProps?.hasFeedback)) {
-      Logger.warn('components/form', '`hasFeedback` was deprecated, please use `statusIcon` instead.')
+      Logger.warn('components/form', '`hasFeedback` was deprecated.')
+    }
+    if (__DEV__ && (props.statusIcon || formProps?.statusIcon)) {
+      Logger.warn('components/form', '`statusIcon` was deprecated.')
     }
     if (!icon) {
       return undefined

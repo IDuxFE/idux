@@ -22,19 +22,17 @@ import CustomInput from './CustomInput.vue'
 
 const { required, min, max, email } = Validators
 
-const address = useFormGroup({
-  city: ['', required],
-  street: ['', required],
-  zip: [''],
-})
-
-const remarks = useFormArray<string[]>([['remark0'], ['remark1'], ['remark2']])
+const remarks = useFormArray([['remark0'], ['remark1'], ['remark2']])
 
 const formGroup = useFormGroup({
   name: ['tom', required],
   age: [18, [required, min(1), max(30)]],
   email: ['', [email]],
-  address: address,
+  address: {
+    city: ['', required],
+    street: ['', required],
+    zip: [''],
+  },
   remarks: remarks,
 })
 

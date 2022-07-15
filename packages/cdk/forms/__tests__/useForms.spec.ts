@@ -6,21 +6,36 @@ import { Validators } from '../src/validators'
 interface BasicGroup {
   control1: string
   control2?: number
-  array: (string | number)[]
-  group: {
+  array1: (string | number)[]
+  array2: { control: string }[]
+  group1: {
+    control: string | number
+  }
+  group2: {
     control: string | number
   }
 }
 
-const basicValue: BasicGroup = { control1: '', control2: undefined, array: ['', 1], group: { control: '' } }
+const basicValue: BasicGroup = {
+  control1: '',
+  control2: undefined,
+  array1: ['', 1],
+  array2: [{ control: '0' }, { control: '1' }],
+  group1: { control: 1 },
+  group2: { control: '2' },
+}
 
 describe('useForms.ts', () => {
   test('basic work', async () => {
     const group = useFormGroup<BasicGroup>({
       control1: ['', Validators.required],
       control2: [undefined, { trigger: 'blur', validators: Validators.required }],
-      array: useFormArray([[''], [1]]),
-      group: useFormGroup({ control: useFormControl<string | number>('') }),
+      array1: useFormArray<string | number>([[''], [1]]),
+      array2: useFormArray([{ control: ['0'] }, { control: ['1'] }]),
+      group1: useFormGroup({ control: useFormControl<string | number>(1) }),
+      group2: {
+        control: ['2'],
+      },
     })
 
     expect(group.getValue()).toEqual(basicValue)

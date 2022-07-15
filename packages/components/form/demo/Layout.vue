@@ -19,16 +19,12 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const layout = ref('horizontal')
+import { FormLayout } from '@idux/components/form'
 
-    return { layout }
-  },
-})
+const layout = ref<FormLayout>('horizontal')
 </script>
 
 <style lang="less" scoped>
