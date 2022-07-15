@@ -7,7 +7,7 @@
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { ColProps } from '@idux/components/grid'
+import type { ColProps, RowProps } from '@idux/components/grid'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 const colProp = [Number, String, Object] as PropType<number | string | ColProps>
@@ -49,7 +49,6 @@ export type FormInstance = InstanceType<DefineComponent<FormProps>>
 export type FormColType = number | string | ColProps
 export type FormLabelAlign = 'start' | 'end'
 export type FormLayout = 'horizontal' | 'vertical' | `inline`
-export type FormValidateMessage = Partial<Record<ValidateStatus, string | ((control: AbstractControl) => string)>>
 export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
@@ -77,19 +76,17 @@ export const formItemProps = {
    * @deprecated Use `description` instead.
    */
   extraMessage: String,
-  label: String,
+  label: [String, Number] as PropType<string | number>,
   labelAlign: String as PropType<FormLabelAlign>,
   labelCol: colProp,
-  labelFor: String,
+  labelFor: [String, Number] as PropType<string | number>,
   labelTooltip: String,
   labelTooltipIcon: String,
   required: {
     type: Boolean,
     default: false,
   },
-  message: [String, Function, Object] as PropType<
-    string | ((control: AbstractControl) => string) | FormValidateMessage
-  >,
+  message: [String, Function, Object] as PropType<string | ((control: AbstractControl) => string)>,
   status: String as PropType<ValidateStatus>,
   /**
    * @deprecated
@@ -105,7 +102,9 @@ export type FormItemPublicProps = Omit<
   ExtractPublicPropTypes<typeof formItemProps>,
   'extra' | 'extraMessage' | 'hasFeedback' | 'statusIcon'
 >
-export type FormItemComponent = DefineComponent<Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps>
+export type FormItemComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps & RowProps
+>
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
