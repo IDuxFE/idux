@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ProgressProps } from '@idux/components/progress'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
@@ -64,7 +66,7 @@ export const uploadProps = {
   },
   accept: String,
   action: {
-    type: [String, Function] as PropType<(file: UploadFile) => Promise<string>>,
+    type: [String, Function] as PropType<(file: UploadFile<any>) => Promise<string>>,
     required: true,
   },
   dragable: {
@@ -86,7 +88,7 @@ export const uploadProps = {
   },
   progress: Object as PropType<ProgressProps>,
   name: String,
-  customRequest: Function as PropType<(option: UploadRequestOption) => { abort: () => void }>,
+  customRequest: Function as PropType<(option: UploadRequestOption<any>) => { abort: () => void }>,
   withCredentials: {
     type: Boolean,
     default: undefined,
@@ -94,13 +96,13 @@ export const uploadProps = {
   requestData: [Object, Function] as PropType<DataType | ((file: UploadFile) => DataType | Promise<DataType>)>,
   requestHeaders: Object as PropType<UploadRequestHeader>,
   requestMethod: String as PropType<'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'>,
-  'onUpdate:files': [Function, Array] as PropType<MaybeArray<<K = VKey>(fileList: UploadFile<K>[]) => void>>,
+  'onUpdate:files': [Function, Array] as PropType<MaybeArray<(fileList: UploadFile<any>[]) => void>>,
   onSelect: [Function, Array] as PropType<MaybeArray<(file: File[]) => boolean | File[] | Promise<boolean | File[]>>>,
   onBeforeUpload: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(file: UploadFile<K>) => boolean | UploadFile<K> | Promise<boolean | UploadFile<K>>>
+    MaybeArray<(file: UploadFile<any>) => boolean | UploadFile<any> | Promise<boolean | UploadFile<any>>>
   >,
-  onFileStatusChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
-  onRequestChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(option: UploadRequestChangeOption<K>) => void>>,
+  onFileStatusChange: [Function, Array] as PropType<MaybeArray<(file: UploadFile<any>) => void>>,
+  onRequestChange: [Function, Array] as PropType<MaybeArray<(option: UploadRequestChangeOption<any>) => void>>,
 } as const
 
 export type UploadProps = ExtractInnerPropTypes<typeof uploadProps>
@@ -111,10 +113,10 @@ export type UploadInstance = InstanceType<DefineComponent<UploadProps>>
 export const uploadFilesProps = {
   type: String as PropType<UploadFilesType>,
   icon: Object as PropType<Partial<Record<UploadIconType, string | VNode>>>,
-  onDownload: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
-  onPreview: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
-  onRemove: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => boolean | Promise<boolean>>>,
-  onRetry: [Function, Array] as PropType<MaybeArray<<K = VKey>(file: UploadFile<K>) => void>>,
+  onDownload: [Function, Array] as PropType<MaybeArray<(file: UploadFile<any>) => void>>,
+  onPreview: [Function, Array] as PropType<MaybeArray<(file: UploadFile<any>) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<(file: UploadFile<any>) => boolean | Promise<boolean>>>,
+  onRetry: [Function, Array] as PropType<MaybeArray<(file: UploadFile<any>) => void>>,
 } as const
 
 export type UploadFilesProps = ExtractInnerPropTypes<typeof uploadFilesProps>

@@ -8,12 +8,11 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SafeAny = any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export interface ItemData {
   key: VKey
-  [propName: string]: SafeAny
+  [prop: string]: any
 }
 
 export const overflowItemProps = {
@@ -39,7 +38,7 @@ export const overflowProps = {
     default: Number.MAX_SAFE_INTEGER,
   },
   getKey: {
-    type: Function as PropType<(item: SafeAny) => VKey>,
+    type: Function as PropType<(item: ItemData) => any>,
     required: true,
   },
   prefixCls: {

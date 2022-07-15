@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { TransferOperationsContext } from './composables/useTransferOperations'
 import type { ConvertToSlotParams } from './utils'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
@@ -125,7 +127,7 @@ export const transferProps = {
     default: false,
   },
   empty: [String, Object] as PropType<string | EmptyProps>,
-  getKey: [String, Function] as PropType<string | ((item: TransferData) => VKey)>,
+  getKey: [String, Function] as PropType<string | ((item: TransferData<any>) => any)>,
   mode: {
     type: String as PropType<TransferMode>,
     default: 'default',
@@ -154,10 +156,10 @@ export const transferProps = {
   },
 
   //Events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  onChange: [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[], oldKeys: K[]) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(keys: any[], oldKeys: any[]) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(isSource: boolean, searchValue: string) => void>>,
   onSelectAll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, selectAll: boolean) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,

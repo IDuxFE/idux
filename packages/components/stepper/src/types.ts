@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
@@ -33,7 +35,7 @@ export const stepperProps = {
     default: false,
   },
 
-  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<<K = VKey>(key: K) => void>>,
+  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(key: any) => void>>,
 } as const
 
 export type StepperProps = ExtractInnerPropTypes<typeof stepperProps>

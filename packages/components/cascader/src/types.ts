@@ -34,9 +34,12 @@ export const cascaderProps = {
   expandIcon: { type: String, default: undefined },
   expandTrigger: { type: String as PropType<CascaderExpandTrigger>, default: 'click' },
   fullPath: { type: Boolean, default: undefined },
-  getKey: { type: [String, Function] as PropType<string | ((data: CascaderData) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: CascaderData<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
-  loadChildren: { type: Function as PropType<(data: CascaderData) => Promise<CascaderData[]>>, default: undefined },
+  loadChildren: {
+    type: Function as PropType<(data: CascaderData<any>) => Promise<CascaderData<any>[]>>,
+    default: undefined,
+  },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
@@ -58,16 +61,14 @@ export const cascaderProps = {
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
-  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onExpand: [Function, Array] as PropType<MaybeArray<<K = VKey>(expanded: boolean, data: CascaderData<K>) => void>>,
-  onExpandedChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(expendedKeys: K[], data: CascaderData<K>[]) => void>
-  >,
-  onLoaded: [Function, Array] as PropType<MaybeArray<<K = VKey>(loadedKeys: K[], data: CascaderData<K>) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, data: CascaderData) => void>>,
+  onExpandedChange: [Function, Array] as PropType<MaybeArray<(expendedKeys: any[], data: CascaderData[]) => void>>,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], data: CascaderData) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
 
   // private
@@ -92,8 +93,8 @@ export type CascaderInstance = InstanceType<DefineComponent<CascaderProps, Casca
 
 export type CascaderStrategy = 'all' | 'parent' | 'child' | 'off'
 
-export type CascaderCustomAdditional = <K = VKey>(options: {
-  data: CascaderData<K>
+export type CascaderCustomAdditional = (options: {
+  data: CascaderData<any>
   index: number
 }) => Record<string, any> | undefined
 
@@ -118,4 +119,4 @@ export interface CascaderData<K = VKey> {
 
 export type CascaderExpandTrigger = 'click' | 'hover'
 
-export type CascaderSearchFn = <K = VKey>(data: CascaderData<K>, searchValue: string) => boolean
+export type CascaderSearchFn = (data: CascaderData<any>, searchValue: string) => boolean

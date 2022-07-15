@@ -23,18 +23,18 @@ export const selectPanelProps = {
   customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
-  getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: SelectData<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<<K = VKey>(value: K) => void>>,
-  onOptionClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(option: SelectData<K>, evt: MouseEvent) => void>>,
+  'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  onOptionClick: [Function, Array] as PropType<MaybeArray<(option: SelectData<any>, evt: MouseEvent) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleData: SelectData<K>[]) => void>
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData<any>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
@@ -103,16 +103,14 @@ export const selectProps = {
   virtual: { type: Boolean, default: false },
 
   // events
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<<K = VKey | VKey[]>(value: K | undefined) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
-  onChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey | VKey[]>(value: K | undefined, oldValue: K | undefined) => void>
-  >,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(searchText: string) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleData: SelectData<K>[]) => void>
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData<any>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
@@ -152,8 +150,8 @@ export type SelectComponent = DefineComponent<
 >
 export type SelectInstance = InstanceType<DefineComponent<SelectProps, SelectBindings>>
 
-export type SelectCustomAdditional = <K = VKey>(options: {
-  data: SelectData<K>
+export type SelectCustomAdditional = (options: {
+  data: SelectData<any>
   index: number
 }) => Record<string, any> | undefined
 
@@ -205,7 +203,7 @@ export type SelectOptionGroupComponent = FunctionalComponent<
 
 export type SelectData<K = VKey> = SelectOptionProps<K> | SelectOptionGroupProps<K>
 
-export type SelectSearchFn = <K = VKey>(data: SelectData<K>, searchText: string) => boolean
+export type SelectSearchFn = (data: SelectData<any>, searchText: string) => boolean
 
 export const optionProps = {
   disabled: {

@@ -146,7 +146,7 @@ export default defineComponent({
         mode: props.mode,
         spin: props.spin,
         getKey: getKey.value,
-        'onUpdate:value': setTargetKeys as <K = VKey>(keys: K[]) => void,
+        'onUpdate:value': setTargetKeys,
         'onUpdate:sourceSelectedKeys': props['onUpdate:sourceSelectedKeys'],
         'onUpdate:targetSelectedKeys': props['onUpdate:targetSelectedKeys'],
         onChange: props.onChange,

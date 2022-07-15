@@ -94,9 +94,7 @@ export function useTransferTreeProps(
       selectable: true,
       virtual: props.virtual,
       'onUpdate:checkedKeys': handleSelectChange,
-      'onUpdate:expandedKeys': (isSource ? handleSourceExpandedChange : handleTargetExpandedChange) as <K = VKey>(
-        keys: K[],
-      ) => void,
+      'onUpdate:expandedKeys': isSource ? handleSourceExpandedChange : handleTargetExpandedChange,
       onScroll: evt => {
         callEmit(props.onScroll, isSource, evt)
       },

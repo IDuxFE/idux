@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { LayoutSiderProps } from '@idux/components/layout'
 import type { MenuClickOptions, MenuData, MenuProps, MenuTheme } from '@idux/components/menu'
@@ -57,9 +59,9 @@ export const proLayoutProps = {
   },
 
   // event
-  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<<K = VKey>(activeKey: K | null) => void>>,
+  'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(activeKey: any | null) => void>>,
   'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
-  onMenuClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: MenuClickOptions<K>) => void>>,
+  onMenuClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions<any>) => void>>,
 } as const
 
 export type ProLayoutProps = ExtractInnerPropTypes<typeof proLayoutProps>

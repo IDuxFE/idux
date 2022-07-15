@@ -46,10 +46,13 @@ export const treeSelectProps = {
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
-  getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode) => VKey)>, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
   leafLineIcon: { type: String, default: undefined },
-  loadChildren: { type: Function as PropType<(node: TreeSelectNode) => Promise<TreeSelectNode[]>>, default: undefined },
+  loadChildren: {
+    type: Function as PropType<(node: TreeSelectNode<any>) => Promise<TreeSelectNode<any>[]>>,
+    default: undefined,
+  },
   /**
    * @deprecated please use `maxLabel` instead'
    */
@@ -85,7 +88,7 @@ export const treeSelectProps = {
     default: undefined,
   },
   treeDisabled: {
-    type: Function as PropType<(node: TreeSelectNode) => boolean | TreeSelectNodeDisabled>,
+    type: Function as PropType<(node: TreeSelectNode<any>) => boolean | TreeSelectNodeDisabled>,
     default: undefined,
   },
   virtual: { type: Boolean, default: false },
@@ -93,29 +96,29 @@ export const treeSelectProps = {
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
-  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(keys: K[]) => void>>,
-  onCheck: [Function, Array] as PropType<MaybeArray<<K = VKey>(checked: boolean, node: TreeSelectNode<K>) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  onCheck: [Function, Array] as PropType<MaybeArray<(checked: boolean, node: TreeSelectNode<any>) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onDragstart: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onDragend: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onDragenter: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onDragleave: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onDragover: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onDrop: [Function, Array] as PropType<MaybeArray<<K = VKey>(options: TreeDragDropOptions<K>) => void>>,
-  onExpand: [Function, Array] as PropType<MaybeArray<<K = VKey>(expanded: boolean, node: TreeSelectNode<K>) => void>>,
+  onDragstart: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragend: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragenter: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragleave: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragover: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, node: TreeSelectNode<any>) => void>>,
   onExpandedChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(expendedKeys: K[], expendedNodes: TreeSelectNode<K>[]) => void>
+    MaybeArray<(expendedKeys: any[], expendedNodes: TreeSelectNode<any>[]) => void>
   >,
-  onLoaded: [Function, Array] as PropType<MaybeArray<<K = VKey>(loadedKeys: K[], node: TreeSelectNode<K>) => void>>,
-  onNodeClick: [Function, Array] as PropType<MaybeArray<<K = VKey>(evt: Event, node: TreeSelectNode<K>) => void>>,
-  onNodeContextmenu: [Function, Array] as PropType<MaybeArray<<K = VKey>(evt: Event, node: TreeSelectNode<K>) => void>>,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], node: TreeSelectNode<any>) => void>>,
+  onNodeClick: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode<any>) => void>>,
+  onNodeContextmenu: [Function, Array] as PropType<MaybeArray<(evt: Event, node: TreeSelectNode<any>) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
-  onSelect: [Function, Array] as PropType<MaybeArray<<K = VKey>(selected: boolean, node: TreeSelectNode<K>) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(selected: boolean, node: TreeSelectNode<any>) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<
-    MaybeArray<<K = VKey>(startIndex: number, endIndex: number, visibleData: TreeSelectNode<K>[]) => void>
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: TreeSelectNode<any>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 

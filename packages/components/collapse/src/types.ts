@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
@@ -26,7 +28,7 @@ export const collapseProps = {
   },
 
   // events
-  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<<K = VKey>(expandedKeys: K[]) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(expandedKeys: any[]) => void>>,
 } as const
 
 export type CollapseProps = ExtractInnerPropTypes<typeof collapseProps>
