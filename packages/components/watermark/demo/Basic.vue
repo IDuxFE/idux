@@ -1,5 +1,5 @@
 <template>
-  <IxWatermark density="mid" :content="['@iDux', '2022.5.25 14:00']">
+  <IxWatermark :content="['@iDux', '2022.5.25 14:00']">
     <article v-typography>
       <h1 v-typography>深圳</h1>
       <p v-typography>

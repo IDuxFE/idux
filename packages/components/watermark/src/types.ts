@@ -35,6 +35,8 @@ export const watermarkProps = {
    * * `high` 高密度
    */
   density: { type: String as PropType<WatermarkDensityType>, default: 'low' },
+  /** 禁用水印 */
+  disabled: { type: Boolean, default: false },
   /** 水印宽度 */
   width: { type: Number, default: 120 },
   /** 水印高度 */
@@ -43,8 +45,7 @@ export const watermarkProps = {
   fontColor: { type: String, default: 'rgba(0,0,0,.15)' },
   /** 字体大小 */
   fontSize: { type: Number, default: 16 },
-  /** 禁用水印 */
-  disabled: { type: Boolean, default: false },
+
   /**
    * 可控制字体粗细、字体类别等细节
    *
@@ -54,6 +55,9 @@ export const watermarkProps = {
    * * 但请注意尽量使用`px`作为字体大小单位，同时fontSize的定义优先级高于font
    */
   font: { type: String, default: '16px sans-serif' },
+
+  /** 前端层面的防水印篡改 */
+  strict: { type: Boolean, default: true },
 
   /**
    * @private
@@ -68,8 +72,6 @@ export const watermarkProps = {
   offsetLeft: { type: Number, default: undefined },
   /** 上偏移量 默认根据水印间距居中处理*/
   offsetTop: { type: Number, default: undefined },
-  /** todo 一定程度上的防水印篡改 */
-  strict: { type: Boolean, default: false },
 } as const
 
 export type WatermarkProps = ExtractInnerPropTypes<typeof watermarkProps>

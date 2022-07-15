@@ -1,11 +1,5 @@
 <template>
-  <IxWatermark
-    type="image"
-    :width="80"
-    :height="80"
-    :opacity="0.3"
-    content="https://idux.site/icons/comp-properties-1.png"
-  >
+  <IxWatermark type="image" :width="80" :height="80" :opacity="0.3" content="/favicon.ico">
     <div style="height: 500px"></div>
   </IxWatermark>
 </template>
