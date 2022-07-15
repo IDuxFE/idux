@@ -27,7 +27,6 @@ import { hasOwnProperty } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
-  type TriggerType,
   type ValidateError,
   type ValidateErrors,
   type ValidateStatus,
@@ -151,7 +150,7 @@ export abstract class AbstractControl<T = any> {
    * Possible values: `'change'` | `'blur'` | `'submit'`
    * Default value: `'change'`
    */
-  get trigger(): TriggerType {
+  get trigger(): 'change' | 'blur' | 'submit' {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
@@ -181,7 +180,7 @@ export abstract class AbstractControl<T = any> {
   private _validators: ValidatorFn | undefined
   private _asyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
-  private _trigger?: TriggerType
+  private _trigger?: 'change' | 'blur' | 'submit'
   private _trim?: boolean
 
   constructor(
@@ -205,7 +204,10 @@ export abstract class AbstractControl<T = any> {
    * * `dirty`: Marks it dirty, default is false.
    * * `blur`: Marks it blurred, default is false.
    */
-  abstract setValue(value: T | Partial<T>, options?: { dirty?: boolean; blur?: boolean }): void
+  abstract setValue(
+    value: T | Partial<T> | Partial<ArrayElement<T>>[],
+    options?: { dirty?: boolean; blur?: boolean },
+  ): void
 
   /**
    * The aggregate value of the control.
@@ -756,9 +758,9 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
   }
 }
 
-export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
-  readonly controls!: ComputedRef<AbstractControl<ArrayElement<T>>[]>
-  protected _controls!: ShallowRef<AbstractControl<ArrayElement<T>>[]>
+export class FormArray<T = any> extends AbstractControl<T[]> {
+  readonly controls!: ComputedRef<AbstractControl<T>[]>
+  protected _controls!: ShallowRef<AbstractControl<T>[]>
 
   /**
    * Length of the control array.
@@ -769,7 +771,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     /**
      * An array of child controls. Each child control is given an index where it is registered.
      */
-    controls: AbstractControl<ArrayElement<T>>[],
+    controls: AbstractControl<T>[],
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
@@ -784,27 +786,27 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
     this._watchDirty()
   }
 
-  setValue(value: Partial<ArrayElement<T>>[], options?: { dirty?: boolean; blur?: boolean }): void {
+  setValue(value: T extends object ? Partial<T>[] : T[], options?: { dirty?: boolean; blur?: boolean }): void {
     value.forEach((item, index) => {
       const control = this.at(index)
       if (control) {
-        control.setValue(item, options)
+        control.setValue(item!, options)
       }
     })
   }
 
-  getValue(options: { skipDisabled?: boolean } = {}): T {
+  getValue(options: { skipDisabled?: boolean } = {}): T[] {
     const { skipDisabled } = options
     return this._controls.value
       .filter(control => !skipDisabled || !control.disabled.value)
-      .map(control => control.getValue(options)) as T
+      .map(control => control.getValue(options))
   }
 
-  protected _calculateInitValue(): T {
+  protected _calculateInitValue(): T[] {
     return this.getValue()
   }
 
-  protected _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void {
+  protected _forEachControls(cb: (v: AbstractControl, k: number) => void): void {
     this._controls.value.forEach(cb)
   }
 
@@ -813,7 +815,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    *
    * @param index Index in the array to retrieve the control
    */
-  at(index: number): AbstractControl<ArrayElement<T>> | undefined {
+  at(index: number): AbstractControl<T> | undefined {
     return this._controls.value[index]
   }
 
@@ -822,7 +824,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    *
    * @param control Form control to be inserted
    */
-  push(control: AbstractControl<ArrayElement<T>>): void {
+  push(control: AbstractControl<T>): void {
     control.setParent(this as AbstractControl)
     this._controls.value = [...this._controls.value, control]
   }
@@ -833,7 +835,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param index Index in the array to insert the control
    * @param control Form control to be inserted
    */
-  insert(index: number, control: AbstractControl<ArrayElement<T>>): void {
+  insert(index: number, control: AbstractControl<T>): void {
     control.setParent(this as AbstractControl)
     const controls = [...this._controls.value]
     controls.splice(index, 0, control)
@@ -857,7 +859,7 @@ export class FormArray<T extends any[] = any[]> extends AbstractControl<T> {
    * @param index Index in the array to replace the control
    * @param control The `AbstractControl` control to replace the existing control
    */
-  setControl(index: number, control: AbstractControl<ArrayElement<T>>): void {
+  setControl(index: number, control: AbstractControl<T>): void {
     control.setParent(this as AbstractControl)
     const controls = [...this._controls.value]
     controls.splice(index, 1, control)

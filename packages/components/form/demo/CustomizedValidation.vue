@@ -18,8 +18,10 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref, watch } from 'vue'
+<script setup lang="ts">
+import { reactive, ref, watch } from 'vue'
+
+import { ValidateStatus } from '@idux/cdk/forms'
 
 interface FormValue {
   valid?: string
@@ -28,32 +30,26 @@ interface FormValue {
   dynamic?: string
 }
 
-export default defineComponent({
-  setup() {
-    const formValue = reactive<FormValue>({})
-    watch(formValue, value => console.log('formValue', value), { deep: true })
+const formValue = reactive<FormValue>({})
+watch(formValue, value => console.log('formValue', value), { deep: true })
 
-    const status = ref('valid')
-    const messageMap = {
-      valid: 'This is valid field!',
-      validating: 'This is validating field!',
-      invalid: 'This is invalid field!',
-    }
+const status = ref<ValidateStatus>('valid')
+const messageMap = {
+  valid: 'This is valid field!',
+  validating: 'This is validating field!',
+  invalid: 'This is invalid field!',
+}
 
-    const changeStatus = () => {
-      const currStatus = status.value
-      if (currStatus === 'valid') {
-        status.value = 'validating'
-      } else if (currStatus === 'validating') {
-        status.value = 'invalid'
-      } else {
-        status.value = 'valid'
-      }
-    }
-
-    return { formValue, status, messageMap, changeStatus }
-  },
-})
+const changeStatus = () => {
+  const currStatus = status.value
+  if (currStatus === 'valid') {
+    status.value = 'validating'
+  } else if (currStatus === 'validating') {
+    status.value = 'invalid'
+  } else {
+    status.value = 'valid'
+  }
+}
 </script>
 
 <style lang="less" scoped>

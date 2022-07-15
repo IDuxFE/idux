@@ -145,9 +145,9 @@ describe('formGroup.ts', () => {
       expect(group.get('control')).toEqual(control)
       expect(group.get('array')).toEqual(array)
       expect(group.get('group')).toEqual(groupChild)
-      expect(group.get('group.control')).toEqual((groupChild as FormGroup<{ control: string }>).controls.value.control)
-      expect(group.get(['array', 0])).toEqual((array as FormArray<string[]>).controls.value[0])
-      expect(group.get('array')!.get(0)).toEqual((array as FormArray<string[]>).controls.value[0])
+      expect(group.get('group.control')).toEqual(groupChild.controls.value.control)
+      expect(group.get(['array', 0])).toEqual(array.controls.value[0])
+      expect(group.get('array')!.get(0)).toEqual(array.controls.value[0])
 
       expect(group.get(undefined as never)).toBeUndefined()
       expect(group.get('')).toBeUndefined()

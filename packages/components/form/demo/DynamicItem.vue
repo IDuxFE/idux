@@ -13,7 +13,7 @@
         <IxIcon name="minus-circle" @click="removeGroupItem(key)"></IxIcon>
       </IxFormItem>
     </template>
-    <template v-for="(control, index) in arrayControl.controls.value" :key="control.uid">
+    <template v-for="(control, index) in formArray.controls.value" :key="control.uid">
       <IxFormItem :label="'Array-' + control.uid">
         <IxInput :control="control"></IxInput>
         <IxIcon name="minus-circle" @click="removeArrayItem(index)"></IxIcon>
@@ -22,51 +22,39 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { useFormArray, useFormControl, useFormGroup } from '@idux/cdk/forms'
 
-import { FormArray, useFormArray, useFormControl, useFormGroup } from '@idux/cdk/forms'
+interface FormValue {
+  array: string[]
+  [key: string]: any
+}
 
-export default defineComponent({
-  setup() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formGroup = useFormGroup<any>({
-      array: useFormArray([]),
-    })
+const formArray = useFormArray([['']])
 
-    const arrayControl = formGroup.get('array') as FormArray<string[]>
-
-    let uid = 0
-    const addGroupItem = () => {
-      const itemKey = `Group-${uid++}`
-      formGroup.addControl(itemKey, useFormControl())
-    }
-
-    const removeGroupItem = (key: string) => {
-      formGroup.removeControl(key)
-    }
-
-    const addArrayItem = () => {
-      arrayControl.push(useFormControl())
-    }
-
-    const removeArrayItem = (index: number) => {
-      arrayControl.removeAt(index)
-    }
-
-    const onSubmit = () => console.log('submit', formGroup.getValue())
-
-    return {
-      formGroup,
-      arrayControl,
-      addGroupItem,
-      removeGroupItem,
-      addArrayItem,
-      removeArrayItem,
-      onSubmit,
-    }
-  },
+const formGroup = useFormGroup<FormValue>({
+  array: formArray,
 })
+
+let uid = 0
+const addGroupItem = () => {
+  const itemKey = `Group-${uid++}`
+  formGroup.addControl(itemKey, useFormControl())
+}
+
+const removeGroupItem = (key: string) => {
+  formGroup.removeControl(key)
+}
+
+const addArrayItem = () => {
+  formArray.push(useFormControl(''))
+}
+
+const removeArrayItem = (index: number) => {
+  formArray.removeAt(index)
+}
+
+const onSubmit = () => console.log('submit', formGroup.getValue())
 </script>
 
 <style lang="less" scoped>

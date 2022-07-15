@@ -334,29 +334,29 @@ describe('Form', () => {
       expect(wrapper.find('.ix-form-item-control-tooltip .ix-icon-up').exists()).toBe(true)
     })
 
-    test('extraMessage work', async () => {
-      let extraMessage = 'extraMessage'
+    test('description work', async () => {
+      let description = 'extraMessage'
       const wrapper = FormItemMount({
-        props: { label: 'Username', extraMessage },
+        props: { label: 'Username', description },
         slots: { default: () => h(IxInput) },
       })
 
-      expect(wrapper.find('.ix-form-item-extra-message').text()).toBe(extraMessage)
+      expect(wrapper.find('.ix-form-item-description').text()).toBe(description)
 
-      extraMessage = 'extraMessage2'
-      await wrapper.setProps({ extraMessage })
+      description = 'extraMessage2'
+      await wrapper.setProps({ description })
 
-      expect(wrapper.find('.ix-form-item-extra-message').text()).toBe(extraMessage)
+      expect(wrapper.find('.ix-form-item-description').text()).toBe(description)
     })
 
     test('extraMessage slot work', async () => {
-      const extraMessage = 'extraMessage'
+      const description = 'extraMessage'
       const wrapper = FormItemMount({
-        props: { label: 'Username', extraMessage },
-        slots: { default: () => h(IxInput), extraMessage: () => 'extraMessage slot' },
+        props: { label: 'Username', description },
+        slots: { default: () => h(IxInput), description: () => 'description slot' },
       })
 
-      expect(wrapper.find('.ix-form-item-extra-message').text()).toBe('extraMessage slot')
+      expect(wrapper.find('.ix-form-item-description').text()).toBe('description slot')
     })
 
     test('label work', async () => {

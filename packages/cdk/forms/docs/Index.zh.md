@@ -22,19 +22,19 @@ export function useFormGroup<T>(
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
 | `config` | 控件组配置项 | `GroupConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `key` |
+| `validatorOptions` | 控件组验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | 只针对当前控件组的值进行验证 |
-| `validatorOptions` | 控件组验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 
 ```ts
 type ControlConfig<T> =
   | [T]
+  | [T, ValidatorOptions]
   | [T, ValidatorFn | ValidatorFn[]]
   | [T, ValidatorFn | ValidatorFn[], AsyncValidatorFn | AsyncValidatorFn[]]
-  | [T, ValidatorOptions]
 
 type GroupConfig<T> = {
-  [K in keyof T]: ControlConfig<T[K]> | AbstractControl<T[K]> | FormGroup<T[K]>
+  [K in keyof T]: ControlConfig<T[K]> | GroupConfig<T[K]> | AbstractControl<T[K]>
 }
 ```
 
@@ -54,12 +54,12 @@ export function useFormArray<T>(
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
 | `config` | 控件数组配置项 | `ArrayConfig<T>` | - | 每个子控件的 `key` 就是配置项的 `index` |
+| `validatorOptions` | 控件数组验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | 只针对当前控件数组的值进行验证 |
-| `validatorOptions` | 控件数组验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 
 ```ts
-type ArrayConfig<T> = Array<AbstractControl<ArrayElement<T>> | ControlConfig<ArrayElement<T>> | ArrayElement<T>>
+type ArrayConfig<T> = Array<ControlConfig<T> | GroupConfig<T> | AbstractControl<T>>
 ```
 
 ### useFormControl
@@ -78,9 +78,9 @@ export function useFormControl<T>(
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
 | `initValue` | 控件初始值 | `any` | - | - |
+| `validatorOptions` | 控件验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
-| `validatorOptions` | 控件验证配置项 | `ValidatorOptions` | - | 参见[ValidatorOptions](#ValidatorOptions) |
 
 ### ValidatorOptions
 

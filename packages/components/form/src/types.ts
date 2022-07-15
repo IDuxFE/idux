@@ -20,6 +20,9 @@ export const formProps = {
   },
   controlCol: colProp,
   controlTooltipIcon: String,
+  /**
+   * @deprecated
+   */
   hasFeedback: {
     type: Boolean,
     default: undefined,
@@ -29,6 +32,9 @@ export const formProps = {
   labelTooltipIcon: String,
   layout: String as PropType<FormLayout>,
   size: String as PropType<FormSize>,
+  /**
+   * @deprecated
+   */
   statusIcon: {
     type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
     default: false,
@@ -36,7 +42,7 @@ export const formProps = {
 } as const
 
 export type FormProps = ExtractInnerPropTypes<typeof formProps>
-export type FormPublicProps = ExtractPublicPropTypes<typeof formProps>
+export type FormPublicProps = Omit<ExtractPublicPropTypes<typeof formProps>, 'hasFeedback' | 'statusIcon'>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
@@ -55,11 +61,21 @@ export const formItemProps = {
   controlCol: colProp,
   controlTooltip: String,
   controlTooltipIcon: String,
+  description: String,
+  /**
+   * @deprecated
+   */
   hasFeedback: {
     type: Boolean,
     default: undefined,
   },
+  /**
+   * @deprecated Use `description` instead.
+   */
   extra: String,
+  /**
+   * @deprecated Use `description` instead.
+   */
   extraMessage: String,
   label: String,
   labelAlign: String as PropType<FormLabelAlign>,
@@ -75,6 +91,9 @@ export const formItemProps = {
     string | ((control: AbstractControl) => string) | FormValidateMessage
   >,
   status: String as PropType<ValidateStatus>,
+  /**
+   * @deprecated
+   */
   statusIcon: {
     type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
     default: undefined,
@@ -82,7 +101,10 @@ export const formItemProps = {
 } as const
 
 export type FormItemProps = ExtractInnerPropTypes<typeof formItemProps>
-export type FormItemPublicProps = ExtractPublicPropTypes<typeof formItemProps>
+export type FormItemPublicProps = Omit<
+  ExtractPublicPropTypes<typeof formItemProps>,
+  'extra' | 'extraMessage' | 'hasFeedback' | 'statusIcon'
+>
 export type FormItemComponent = DefineComponent<Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps>
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 

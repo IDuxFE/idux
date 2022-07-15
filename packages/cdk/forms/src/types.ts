@@ -34,13 +34,11 @@ export interface AsyncValidatorFn {
   (value: any, control: AbstractControl): Promise<ValidateErrors | undefined>
 }
 
-export type TriggerType = 'change' | 'blur' | 'submit'
-
 export interface ValidatorOptions {
   disabled?: boolean
   name?: string
   example?: string
-  trigger?: TriggerType
+  trigger?: 'change' | 'blur' | 'submit'
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
   /**

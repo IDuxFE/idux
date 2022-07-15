@@ -109,10 +109,18 @@ function renderControl(
   message: ComputedRef<string | undefined>,
   prefixCls: string,
 ) {
-  const { controlTooltip, extra, extraMessage } = props
-  const { controlTooltip: controlTooltipSlot, extra: extraSlot, extraMessage: extraMessageSlot } = slots
+  const { controlTooltip, description, extra, extraMessage } = props
+  const {
+    controlTooltip: controlTooltipSlot,
+    extra: extraSlot,
+    extraMessage: extraMessageSlot,
+    description: descriptionSlot,
+  } = slots
   if (__DEV__ && (extra || extraSlot)) {
-    Logger.warn('components/form', '`extra` was deprecated, please use `extraMessage` instead.')
+    Logger.warn('components/form', '`extra` was deprecated, please use `description` instead.')
+  }
+  if (__DEV__ && (extraMessage || extraMessageSlot)) {
+    Logger.warn('components/form', '`extraMessage` was deprecated, please use `description` instead.')
   }
   const statusNode = statusIcon.value && (
     <span class={`${prefixCls}-status-icon`}>
@@ -120,8 +128,9 @@ function renderControl(
     </span>
   )
   const messageNode = message.value && <div class={`${prefixCls}-message`}>{message.value}</div>
-  const extraNode = extraSlot ? extraSlot() : extraMessageSlot ? extraMessageSlot() : extra || extraMessage
-  const extraWrapper = extraNode && <div class={`${prefixCls}-extra-message`}>{extraNode}</div>
+  const _descriptionSlot = extraSlot || extraMessageSlot || descriptionSlot
+  const descriptionNode = _descriptionSlot ? _descriptionSlot() : extra || extraMessage || description
+  const descriptionWrapper = descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>
   const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
   return (
     <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
@@ -131,7 +140,7 @@ function renderControl(
         {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
       </div>
       {messageNode}
-      {extraWrapper}
+      {descriptionWrapper}
     </IxCol>
   )
 }

@@ -19,28 +19,22 @@
   </IxForm>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import { useFormControl, useFormGroup } from '@idux/cdk/forms'
 
-export default defineComponent({
-  setup() {
-    const controlLength = 12
-    const showMore = ref(false)
-    const formGroup = useFormGroup({})
+const controlLength = 12
+const showMore = ref(false)
+const formGroup = useFormGroup<Record<string, unknown>>({})
 
-    for (let index = 1; index <= controlLength; index++) {
-      const control = useFormControl()
-      formGroup.addControl(`field${index}`, control)
-    }
+for (let index = 1; index <= controlLength; index++) {
+  const control = useFormControl()
+  formGroup.addControl(`field${index}`, control)
+}
 
-    const onSearch = () => console.log('search', formGroup.getValue())
-    const onClear = () => formGroup.reset()
-
-    return { controlLength, showMore, formGroup, onSearch, onClear }
-  },
-})
+const onSearch = () => console.log('search', formGroup.getValue())
+const onClear = () => formGroup.reset()
 </script>
 
 <style lang="less" scoped>
