@@ -1,0 +1,6 @@
+// Vitest Snapshot v1
+
+exports[`LoadingBarProvider > render work 1`] = `
+"<!--teleport start-->
+<!--teleport end-->&lt;button&gt;ok&lt;/button&gt;"
+`;

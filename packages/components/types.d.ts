@@ -42,6 +42,7 @@ import type {
   LayoutSiderComponent,
 } from '@idux/components/layout'
 import type { ListComponent, ListItemComponent } from '@idux/components/list'
+import type { LoadingBarProviderComponent } from '@idux/components/loading-bar'
 import type {
   MenuComponent,
   MenuDividerComponent,
@@ -137,6 +138,7 @@ declare module 'vue' {
     IxMenuSub: MenuSubComponent
     IxMessage: MessageComponent
     IxMessageProvider: MessageProviderComponent
+    IxLoadingBarProvider: LoadingBarProviderComponent
     IxModal: ModalComponent
     IxModalProvider: ModalProviderComponent
     IxNotification: NotificationComponent
