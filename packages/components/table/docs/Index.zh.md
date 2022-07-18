@@ -168,6 +168,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+| `alert` | 表格提示 | - | - |
 | `footer` | 表格尾部 | - | - |
 | `header` | 表格头部 | - | - |
 | `summary` | 表格总结栏 | - | - |
