@@ -7,6 +7,7 @@ import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import { upperFirst } from 'lodash'
 import { RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
@@ -21,9 +22,10 @@ interface Options {
   minify?: boolean
 }
 
+const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es', 'ajv']
+
 export const getRollupSingleOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, compName = '', minify = false } = options
-  const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es']
 
   const input = join(targetDirname, compName, 'index.ts')
   const outputFile = join(distDirname, compName, 'index.js')
@@ -88,6 +90,12 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
           if (name === 'vue') {
             return 'Vue'
           }
+          if (name === 'ajv') {
+            return 'Ajv'
+          }
+          if (name === 'ajv-formats') {
+            return 'AjvFormats'
+          }
           if (name.startsWith('@idux')) {
             const [, _packageName] = name.split('/')
             return `IDux${upperFirst(_packageName)}`
@@ -101,7 +109,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
       },
     ],
     external: id => {
-      return id === 'vue' || (id.startsWith('@idux') && !id.startsWith(`@idux/${packageName}`))
+      return id === 'vue' || id.startsWith('ajv') || (id.startsWith('@idux') && !id.startsWith(`@idux/${packageName}`))
     },
     plugins,
   }
@@ -109,7 +117,6 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
 
 export const getRollupDeclarationOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, packageName } = options
-  const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es']
 
   const input = join(targetDirname, 'index.ts')
   const outputFile = join(distDirname, packageName, 'temp.js')

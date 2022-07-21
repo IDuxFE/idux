@@ -18,6 +18,7 @@ export const defaultConfig: ProGlobalConfig = {
     ajvOptions: {
       allErrors: true,
       loopEnum: 50,
+      code: { esm: true },
     },
     autoId: true,
     autoLabelFor: true,
