@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
+
+
+### Features
+
+* **pro:form:** add ProForm component ([#1028](https://github.com/IDuxFE/idux/issues/1028)) ([a385711](https://github.com/IDuxFE/idux/commit/a3857116b88009a9c92d2a29d0a1dd0d4b016956)), closes [#981](https://github.com/IDuxFE/idux/issues/981)
+* **pro:transfer:** add tree loadChildren support ([#1009](https://github.com/IDuxFE/idux/issues/1009)) ([9d43fb2](https://github.com/IDuxFE/idux/commit/9d43fb217e50cbff761de2c82ade417b27c8f66b))
+
+
+
+
+
 # [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
 
 

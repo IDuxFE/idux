@@ -1,6 +1,6 @@
 {
   "name": "@idux/site",
-  "version": "1.0.0-beta.20",
+  "version": "1.0.0-beta.21",
   "private": true,
   "description": "A website for @idux",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@idux/cdk": "^1.0.0-beta.19",
-    "@idux/components": "^1.0.0-beta.20",
-    "@idux/pro": "^1.0.0-beta.20",
+    "@idux/cdk": "^1.0.0-beta.21",
+    "@idux/components": "^1.0.0-beta.21",
+    "@idux/pro": "^1.0.0-beta.21",
     "codesandbox": "^2.2.3",
     "lodash-es": "^4.17.21",
     "vue": "^3.2.29",
