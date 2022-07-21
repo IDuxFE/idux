@@ -14,7 +14,7 @@ const ParentComponent = {
   components: { ChildComponent },
   template: `<ChildComponent />`,
   setup() {
-    const [, changeConfig] = useGlobalConfig('form', true)
+    const [, changeConfig] = useGlobalConfig('form', {})
     return { changeConfig }
   },
 }

@@ -13,6 +13,7 @@ import type {
   AsyncValidatorFn,
   ValidateError,
   ValidateErrors,
+  ValidateMessage,
   ValidateMessageFn,
   ValidateMessages,
   ValidatorFn,
@@ -33,6 +34,10 @@ export class Validators {
 
   static setMessages(messages: ValidateMessages): void {
     Validators.messages = { ...Validators.messages, ...messages }
+  }
+
+  static getMessage(key: string): ValidateMessage | undefined {
+    return Validators.messages[key]
   }
 
   static getError(
@@ -207,7 +212,7 @@ export class Validators {
 
 /** checks whether string or array is empty */
 function isEmpty(val: any): boolean {
-  return isNil(val) || (val.length === 0 && (isString(val) || isArray(val)))
+  return isNil(val) || ((isString(val) || isArray(val)) && val.length === 0)
 }
 
 /** checks whether variable has length props */

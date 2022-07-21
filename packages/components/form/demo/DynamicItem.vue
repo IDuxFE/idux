@@ -27,7 +27,7 @@ import { useFormArray, useFormControl, useFormGroup } from '@idux/cdk/forms'
 
 interface FormValue {
   array: string[]
-  [key: string]: any
+  [key: string]: unknown
 }
 
 const formArray = useFormArray([['']])

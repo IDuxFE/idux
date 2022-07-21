@@ -27,9 +27,9 @@ export const checkboxProps = {
   size: { type: String as PropType<FormSize>, default: undefined },
 
   // events
-  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<<K = CheckValue>(checked: K) => void>> },
+  'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: any) => void>> },
   onChange: {
-    type: [Function, Array] as PropType<MaybeArray<<K = CheckValue>(newChecked: K, oldChecked: K) => void>>,
+    type: [Function, Array] as PropType<MaybeArray<(newChecked: any, oldChecked: any) => void>>,
   },
   onBlur: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },
   onFocus: { type: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>> },

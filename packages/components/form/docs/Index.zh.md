@@ -47,7 +47,7 @@ order: 0
 | `labelTooltip` | 配置表单文本的提示信息 | `string \| #labelTooltip` | - | - | 通常用于对表单本文的解释说名 |
 | `labelTooltipIcon` | 配置表单文本的提示信息icon | `string` | - | -| - |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |
-| `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string \| FormValidateMessage` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
+| `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
 | `status` | 手动指定表单项的校验状态 | `valid \| invalid \| validating` | - | - | - |
 
 ### IxFormWrapper

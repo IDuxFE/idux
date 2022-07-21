@@ -115,6 +115,7 @@ function renderControl(
     extra: extraSlot,
     extraMessage: extraMessageSlot,
     description: descriptionSlot,
+    message: messageSlot,
   } = slots
   if (__DEV__ && (extra || extraSlot)) {
     Logger.warn('components/form', '`extra` was deprecated, please use `description` instead.')
@@ -127,11 +128,10 @@ function renderControl(
       <IxIcon name={statusIcon.value} />
     </span>
   )
-  const messageNode = message.value && <div class={`${prefixCls}-message`}>{message.value}</div>
+  const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
+  const messageNode = messageSlot ? messageSlot(message.value) : message.value
   const _descriptionSlot = extraSlot || extraMessageSlot || descriptionSlot
   const descriptionNode = _descriptionSlot ? _descriptionSlot() : extra || extraMessage || description
-  const descriptionWrapper = descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>
-  const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
   return (
     <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
       <div class={`${prefixCls}-control-input`}>
@@ -139,8 +139,8 @@ function renderControl(
         {statusNode}
         {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
       </div>
-      {messageNode}
-      {descriptionWrapper}
+      {message.value && <div class={`${prefixCls}-message`}>{messageNode}</div>}
+      {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
     </IxCol>
   )
 }

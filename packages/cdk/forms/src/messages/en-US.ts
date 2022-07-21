@@ -37,7 +37,7 @@ export const enUSMessages = {
     return `Please enter a number no greater than ${err.max}`
   },
   range: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `Please enter a number between ${err.min - 1}-${err.max + 1}`
+    return `Please enter a number between ${err.min}-${err.max}`
   },
   minLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     const { minLength, isArray } = err
