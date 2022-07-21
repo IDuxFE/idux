@@ -74,7 +74,8 @@ async function appendChild(props: IconProps, config: IconConfig, rootElement: HT
     const svgElement = iconfont
       ? await loadSvgElementFormScript(name)
       : await loadSVGElement(name, config.loadIconDynamically)
-    if (svgElement) {
+    // TODO: refactor this
+    if (svgElement && name === props.name) {
       rootElement.appendChild(svgElement)
     }
   }
