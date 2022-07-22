@@ -33,7 +33,7 @@ export default defineComponent({
   props: segmentProps,
   setup(props: SegmentProps) {
     const context = inject(proSearchContext)!
-    const { mergedPrefixCls, commonOverlayProps, activeSegment } = context
+    const { mergedPrefixCls, commonOverlayProps, activeSegment, searchStates } = context
     const overlayRef = ref<ɵOverlayInstance>()
     const inputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
@@ -67,9 +67,14 @@ export default defineComponent({
     ])
 
     const updateOverlay = () => {
-      nextTick(() => isActive.value && overlayRef.value?.updatePopper())
+      nextTick(() => {
+        if (isActive.value) {
+          overlayRef.value?.updatePopper()
+          inputRef.value?.focus()
+        }
+      })
     }
-    watch(inputStyle, triggerOverlayUpdate)
+    watch([inputStyle, () => searchStates.value.length], triggerOverlayUpdate)
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-segment`
