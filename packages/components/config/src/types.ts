@@ -16,9 +16,10 @@ import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { CarouselDotPlacement, CarouselDotTrigger } from '@idux/components/carousel'
 import type { CascaderData } from '@idux/components/cascader'
-import type { DatePickerType } from '@idux/components/date-picker/src/types'
+import type { DatePickerType } from '@idux/components/date-picker'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
+import type { LoadingBarAnimation } from '@idux/components/loading-bar'
 import type { Locale } from '@idux/components/locales'
 import type { MenuData, MenuTheme } from '@idux/components/menu'
 import type { MessageType } from '@idux/components/message'
@@ -63,6 +64,7 @@ export interface GlobalConfig {
   input: InputConfig
   inputNumber: InputNumberConfig
   list: ListConfig
+  loadingBar: LoadingBarConfig
   image: ImageConfig
   imageViewer: ImageViewerConfig
   menu: MenuConfig
@@ -249,6 +251,11 @@ export interface InputNumberConfig {
 export interface ListConfig {
   size: ListSize
   borderless: boolean
+}
+
+export interface LoadingBarConfig {
+  mask: boolean
+  animation: LoadingBarAnimation
 }
 
 export interface ImageConfig {

@@ -136,6 +136,23 @@ export const defaultConfig: GlobalConfig = {
     size: 'md',
     borderless: true,
   },
+  loadingBar: {
+    mask: false,
+    animation: {
+      loading: {
+        duration: 3000,
+        progress: 80,
+      },
+      finish: {
+        duration: 300,
+        progress: 100,
+      },
+      error: {
+        duration: 400,
+        progress: 100,
+      },
+    },
+  },
   image: {
     preview: true,
   },

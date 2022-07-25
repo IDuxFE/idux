@@ -35,6 +35,7 @@ import { IxInput } from '@idux/components/input'
 import { IxInputNumber } from '@idux/components/input-number'
 import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
 import { IxList, IxListItem } from '@idux/components/list'
+import { IxLoadingBarProvider } from '@idux/components/loading-bar'
 import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
 import { IxMessage, IxMessageProvider } from '@idux/components/message'
 import { IxModal, IxModalProvider } from '@idux/components/modal'
@@ -117,6 +118,7 @@ const components = [
   IxLayoutSider,
   IxList,
   IxListItem,
+  IxLoadingBarProvider,
   IxMenu,
   IxMenuDivider,
   IxMenuItem,
@@ -216,6 +218,7 @@ export * from '@idux/components/input'
 export * from '@idux/components/input-number'
 export * from '@idux/components/layout'
 export * from '@idux/components/list'
+export * from '@idux/components/loading-bar'
 export * from '@idux/components/locales'
 export * from '@idux/components/menu'
 export * from '@idux/components/message'
