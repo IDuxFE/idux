@@ -29,4 +29,12 @@ useDraggable(dragRef2, { free: true, boundary: document.documentElement })
   padding: 30px;
   border: 1px dashed;
 }
+
+.cdk-draggable {
+  cursor: move;
+
+  > * {
+    cursor: move;
+  }
+}
 </style>

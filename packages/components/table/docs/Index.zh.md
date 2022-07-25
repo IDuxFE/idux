@@ -80,7 +80,6 @@ export type TableColumn<T = any, V = any> =
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | 必填 |
-
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
 | `icon` | 展开按钮图标 | `string` | `'right'` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
@@ -168,6 +167,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+| `alert` | 表格提示 | - | - |
 | `footer` | 表格尾部 | - | - |
 | `header` | 表格头部 | - | - |
 | `summary` | 表格总结栏 | - | - |

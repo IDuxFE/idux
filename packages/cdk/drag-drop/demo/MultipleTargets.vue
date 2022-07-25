@@ -29,4 +29,12 @@ useDroppable(targetRef3).connect(dragRef)
   height: 200px;
   border: 1px dashed;
 }
+
+.cdk-draggable {
+  cursor: move;
+
+  > * {
+    cursor: move;
+  }
+}
 </style>

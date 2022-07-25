@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
+
+
+### Bug Fixes
+
+* **comp:icon:** name changes in a short time, multiple SVG are rendered ([#1029](https://github.com/IDuxFE/idux/issues/1029)) ([6403dbf](https://github.com/IDuxFE/idux/commit/6403dbfa02f6680c8e4b448aeab6f04734b2497d))
+
+
+### Features
+
+* **cdk:forms:** add useuseAccessorAndControl, useAccessor, useControl ([#1012](https://github.com/IDuxFE/idux/issues/1012)) ([6f4d3af](https://github.com/IDuxFE/idux/commit/6f4d3af9717b6747633a827e0d1c06a00094bced))
+* **cdk:forms:** setValue of AbstractControl supports triggering blur ([#1018](https://github.com/IDuxFE/idux/issues/1018)) ([8d38177](https://github.com/IDuxFE/idux/commit/8d38177d77c2564965756a3c6d8ebbb0446b057c))
+* **cdk:forms:** useFormGroup support nested objects ([#1021](https://github.com/IDuxFE/idux/issues/1021)) ([bdb96df](https://github.com/IDuxFE/idux/commit/bdb96df2bb243bd98e302f0d1b779c9094c3f74a))
+* **pro:form:** add ProForm component ([#1028](https://github.com/IDuxFE/idux/issues/1028)) ([a385711](https://github.com/IDuxFE/idux/commit/a3857116b88009a9c92d2a29d0a1dd0d4b016956)), closes [#981](https://github.com/IDuxFE/idux/issues/981)
+* **pro:transfer:** add tree loadChildren support ([#1009](https://github.com/IDuxFE/idux/issues/1009)) ([9d43fb2](https://github.com/IDuxFE/idux/commit/9d43fb217e50cbff761de2c82ade417b27c8f66b))
+
+
+### BREAKING CHANGES
+
+* **cdk:forms:** `useValueControl` and `useValueAccessor` was deprecated
+
+
+
+
+
 # [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
 
 

@@ -49,9 +49,9 @@ type InferPropType<T> = [T] extends [null]
   : T
 
 export type ExtractPublicPropTypes<O> = {
-  [K in keyof Pick<O, PublicRequiredKeys<O>>]: InferPropType<O[K]>
+  -readonly [K in keyof Pick<O, PublicRequiredKeys<O>>]: InferPropType<O[K]>
 } & {
-  [K in keyof Pick<O, PublicOptionalKeys<O>>]?: InferPropType<O[K]>
+  -readonly [K in keyof Pick<O, PublicOptionalKeys<O>>]?: InferPropType<O[K]>
 }
 
 export type ExtractInnerPropTypes<O> = {

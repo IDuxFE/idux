@@ -1,13 +1,7 @@
 <template>
   <IxPopconfirm v-model:visible="visible" :title="tempChecked ? '确定开启？' : '确定禁用？'" @ok="onOk">
     <span>
-      <IxSwitch
-        :checked="accessor.value"
-        :disabled="accessor.disabled"
-        @blur="onBlur"
-        @change="onChange"
-        @click="onClick"
-      />
+      <IxSwitch :checked="accessor.value" :disabled="accessor.disabled" @blur="onBlur" @change="onChange" />
     </span>
   </IxPopconfirm>
 </template>
@@ -38,6 +32,9 @@ const props = defineProps({
 
 const { accessor, control: controlRef } = useAccessorAndControl({ valueKey: 'checked' })
 useFormItemRegister(controlRef)
+// 这里为了演示效果，需要手动设置一个初始值
+// 如果是二次封装组件，务必删除下面这行代码
+accessor.setValue(true)
 
 const visible = ref(false)
 const tempChecked = ref(false)
@@ -48,20 +45,13 @@ const onOk = () => {
 
 const onChange = (currValue: boolean) => {
   const { mode } = props
-  if ((mode === 'checked' && currValue) || (mode === 'unchecked' && !currValue)) {
-    visible.value = true
-  }
-  if (mode === 'none' || (mode === 'checked' && !currValue) || (mode === 'unchecked' && currValue)) {
+  const showPopconfirm = mode === 'all' || (mode === 'checked' && currValue) || (mode === 'unchecked' && !currValue)
+  if (!showPopconfirm) {
     accessor.setValue(currValue)
   } else {
     tempChecked.value = currValue
   }
-}
-
-const onClick = (evt: MouseEvent) => {
-  if (props.mode !== 'all') {
-    evt.stopPropagation()
-  }
+  visible.value = showPopconfirm
 }
 
 const onBlur = () => {

@@ -210,6 +210,7 @@ function watchVisibleChange(
   wrapperRef: Ref<HTMLDivElement | undefined>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
   mask: ComputedRef<boolean>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   draggableResult: Ref<any>,
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null

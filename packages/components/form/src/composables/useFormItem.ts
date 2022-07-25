@@ -140,6 +140,9 @@ function useMessage(
   status: ComputedRef<ValidateStatus | undefined>,
 ) {
   const locale = useGlobalConfig('locale')
+  /**
+   * @deprecated
+   */
   const messages = computed(() => {
     const message = props.message
     return isString(message) || isFunction(message) ? { invalid: message } : message || {}

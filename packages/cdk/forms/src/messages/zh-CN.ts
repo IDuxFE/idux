@@ -30,13 +30,13 @@ export const zhCNMessages = {
     return `请输入正确的邮箱格式${example ? ', 例: ' + example : ''}`
   },
   min: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `请输入一个不小于 ${err.min} 的数字`
+    return `请输入不小于 ${err.min} 的数字`
   },
   max: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `请输入一个不大于 ${err.max} 的数字`
+    return `请输入不大于 ${err.max} 的数字`
   },
   range: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `请输入一个 ${err.min - 1}-${err.max + 1} 之间的数字`
+    return `请输入 ${err.min}-${err.max} 之间的数字`
   },
   minLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     const { minLength, isArray } = err

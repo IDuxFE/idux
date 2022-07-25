@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
+
+**Note:** Version bump only for package @idux/site
+
+
+
+
+
 # [1.0.0-beta.20](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-07-11)
 
 
