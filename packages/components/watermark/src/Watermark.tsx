@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import { CSSProperties, computed, defineComponent, ref, watch } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 
+import { useAntiTamper } from './composables/useAntiTamper'
 import { useCalcBase64 } from './composables/useCalcBase64'
 import { watermarkProps } from './types'
 import { calcDensity } from './utils'
@@ -22,22 +23,45 @@ export default defineComponent({
     const densityData = computed(() => calcDensity(props))
     const backgroundSize = computed(() => `${densityData.value.gapHorizontal + densityData.value.width}px`)
 
+    const wrapperRef = ref<HTMLElement>()
+    const canvasRef = ref<HTMLCanvasElement>()
     const base64Ref = useCalcBase64(props, densityData)
 
-    const canvasStyle = computed(() => {
+    watch(
+      [() => props.strict, () => base64Ref.value],
+      ([strict, base64]) => {
+        if (strict && base64 !== '') {
+          useAntiTamper(wrapperRef, canvasRef)
+        }
+      },
+      {
+        immediate: true,
+        flush: 'post',
+      },
+    )
+
+    const canvasStyle = computed<CSSProperties>(() => {
       return {
         zIndex: props.zIndex,
         backgroundSize: backgroundSize.value,
         backgroundImage: `url(${base64Ref.value})`,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        backgroundRepeat: 'repeat',
       }
     })
+
     return () => {
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div class={`${prefixCls}`}>
+        <div ref={wrapperRef} class={prefixCls}>
           {slots.default?.()}
-          <div class={`${prefixCls}-canvas`} style={canvasStyle.value} />
+          <div ref={canvasRef} style={canvasStyle.value} />
         </div>
       )
     }
