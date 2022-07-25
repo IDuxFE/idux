@@ -34,7 +34,7 @@ title: 介绍
 
 ## 🖥 支持环境
 
-- Vue `^3.0.0` [![vue-next](https://img.shields.io/npm/v/vue/next.svg)](https://www.npmjs.com/package/vue/v/next)
+- Vue `^3.0.0` <a href="https://www.npmjs.com/package/vue/v/next"><img src="https://img.shields.io/npm/v/vue/next.svg" alt="npm@next_v3.2.36" align="center"/></a>
 
 | <img src="https://cdn.jsdelivr.net/npm/@browser-logos/edge/edge_32x32.png" alt="Edge"/><br />Edge | <img src="https://cdn.jsdelivr.net/npm/@browser-logos/chrome/chrome_32x32.png" alt="Chrome"/><br />Chrome | <img src="https://cdn.jsdelivr.net/npm/@browser-logos/firefox/firefox_32x32.png" alt="Firefox"/><br />Firefox | <img src="https://cdn.jsdelivr.net/npm/@browser-logos/safari/safari_32x32.png" alt="Safari"/><br />Safari | <img src="https://cdn.jsdelivr.net/npm/@browser-logos/electron/electron_32x32.png" alt="Electron"/><br />Electron |
 | --------- | --------- | --------- | --------- | --------- |
