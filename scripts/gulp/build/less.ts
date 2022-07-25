@@ -13,7 +13,7 @@ import { gulpConfig } from '../gulpConfig'
 
 const { themes } = gulpConfig.build
 
-async function compile(content: string, savePath: string, min: boolean, rootPath?: string): Promise<void> {
+export async function compile(content: string, savePath: string, min: boolean, rootPath?: string): Promise<void> {
   const plugins: Less.Plugin[] = []
   if (min) {
     plugins.push(new LessPluginCleanCSS({ advanced: true }))
