@@ -7,11 +7,16 @@
 
   display: flex;
   font-size: @pro-search-font-size;
+  height: @pro-search-min-height;
+  overflow: visible;
 
   &-input-container {
     position: relative;
+    z-index: @pro-search-content-z-index;
     flex: auto;
+    align-self: flex-start;
     width: 0;
+    min-height: 100%;
     padding-right: @pro-search-clear-icon-margin-right + @pro-search-clear-icon-width;
     margin-right: -@pro-search-border-width;
     border: @pro-search-border-width @pro-search-border-style @pro-search-border-color;
@@ -22,14 +27,12 @@
     color: @pro-search-color;
   }
 
-  @content-height: @pro-search-min-height - @pro-search-border-width * 2;
   &-input-content {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     height: auto;
     padding: @pro-search-content-padding-vertical @pro-search-content-padding-horizontal;
-    min-height: @content-height;
     margin-left: -@pro-search-item-tag-margin-left;
     margin-bottom: -@pro-search-item-tag-margin-bottom;
   }
