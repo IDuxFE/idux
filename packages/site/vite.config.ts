@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
 import { mdPlugin } from './plugins/mdPlugin'
+import { themePlugin } from './plugins/themePlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
 
 export default defineConfig(({ command }) => {
@@ -22,6 +23,12 @@ export default defineConfig(({ command }) => {
         dts: true,
       }),
       transformIndexPlugin(),
+      themePlugin({
+        themes: [
+          { key: 'default', label: 'Default' },
+          { key: 'seer', label: 'Seer' },
+        ],
+      }),
     ],
     resolve: {
       alias: [

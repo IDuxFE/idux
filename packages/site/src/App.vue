@@ -32,6 +32,7 @@
                     <LayoutFooter></LayoutFooter>
                   </IxCol>
                 </IxRow>
+                <GlobalTheme />
               </div>
               <template v-else>
                 <router-view></router-view>

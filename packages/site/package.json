@@ -17,5 +17,9 @@
     "lodash-es": "^4.17.21",
     "vue": "^3.2.29",
     "vue-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/rimraf": "^3.0.2",
+    "rimraf": "^3.0.2"
   }
 }
