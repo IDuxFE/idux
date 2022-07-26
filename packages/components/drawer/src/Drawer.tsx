@@ -9,11 +9,11 @@ import type { DrawerProps } from './types'
 import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { ComputedRef, Ref } from 'vue'
 
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, toRef, watch } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
-import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { callEmit, useControlledProp, useZIndex } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -30,9 +30,9 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-drawer`)
     const config = useGlobalConfig('drawer')
     const mask = computed(() => props.mask ?? config.mask)
-    const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'zIndex'), visible)
 
     const { open, close } = useTrigger(props, setVisible)
     const { level, levelAction, push, pull } = useLevel(visible)
@@ -46,6 +46,7 @@ export default defineComponent({
       visible,
       animatedVisible,
       mergedVisible,
+      currentZIndex,
       level,
       levelAction,
       push,
@@ -69,7 +70,7 @@ export default defineComponent({
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
             visible={visible.value}
-            zIndex={zIndex.value}
+            zIndex={currentZIndex.value}
           />
           <DrawerWrapper {...attrs}></DrawerWrapper>
         </CdkPortal>

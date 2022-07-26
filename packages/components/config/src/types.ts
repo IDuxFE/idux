@@ -102,6 +102,7 @@ export interface GlobalConfig {
 export type GlobalConfigKey = keyof GlobalConfig
 export interface CommonConfig {
   prefixCls: string
+  zIndex: number
 }
 
 export interface AlertConfig {
@@ -201,7 +202,6 @@ export interface DrawerConfig {
   maskClosable: boolean
   target?: PortalTargetType
   width: string | number
-  zIndex?: number
 }
 
 export interface DropdownConfig {
@@ -301,7 +301,6 @@ export interface ModalConfig {
   maskClosable: boolean
   target?: PortalTargetType
   width: string | number
-  zIndex?: number
 }
 
 export interface NotificationConfig {

@@ -5,11 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import {
+  type ComputedRef,
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  watch,
+} from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
+import { useZIndex } from '@idux/cdk/utils/src/zIndex'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -27,8 +38,8 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('modal')
     const mask = computed(() => props.mask ?? config.mask)
-    const zIndex = computed(() => props.zIndex ?? config.zIndex)
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'zIndex'), visible)
 
     const { cancelLoading, okLoading, open, close, cancel, ok } = useTrigger(props, setVisible)
 
@@ -44,6 +55,7 @@ export default defineComponent({
       mergedVisible,
       cancelLoading,
       okLoading,
+      currentZIndex,
     })
 
     const apis = { open, close, cancel, ok }
@@ -64,7 +76,7 @@ export default defineComponent({
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
             visible={visible.value}
-            zIndex={zIndex.value}
+            zIndex={currentZIndex.value}
           />
           <ModalWrapper {...attrs}></ModalWrapper>
         </CdkPortal>

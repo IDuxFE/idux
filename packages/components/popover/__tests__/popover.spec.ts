@@ -37,6 +37,7 @@ describe('Popover', () => {
   test('header props work', async () => {
     PopoverWrapper({
       props: {
+        zIndex: 2022,
         visible: true,
         header: {
           title: 'Title',

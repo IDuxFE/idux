@@ -45,9 +45,10 @@ export default defineComponent({
       mergedVisible,
       cancelLoading,
       okLoading,
+      currentZIndex,
     } = inject(modalToken)!
     const { close, cancel, ok } = inject(MODAL_TOKEN)!
-    const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex } = useConfig(props, config)
+    const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable } = useConfig(props, config)
 
     const cancelVisible = computed(() => props.type === 'default' || props.type === 'confirm')
 
@@ -77,7 +78,7 @@ export default defineComponent({
     })
 
     const wrapperStyle = computed(() => {
-      return { zIndex: zIndex.value }
+      return { zIndex: currentZIndex.value }
     })
 
     const modalTransformOrigin = ref<string>()
@@ -200,9 +201,8 @@ function useConfig(props: ModalProps, config: ModalConfig) {
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
   const width = computed(() => convertCssPixel(props.width ?? config.width))
-  const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-  return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable, zIndex }
+  return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable }
 }
 
 function watchVisibleChange(
