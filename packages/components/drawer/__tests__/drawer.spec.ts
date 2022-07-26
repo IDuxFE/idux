@@ -102,13 +102,13 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    await drawerWrapper.find('.ix-drawer-wrapper').trigger('keydown', { code: 'Escape' })
+    await drawerWrapper.trigger('keydown', { code: 'Escape' })
 
     expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(true)
 
     await wrapper.setProps({ closeOnEsc: true })
 
-    await drawerWrapper.find('.ix-drawer-wrapper').trigger('keydown', { code: 'Escape' })
+    await drawerWrapper.trigger('keydown', { code: 'Escape' })
 
     expect(onUpdateVisible).toBeCalledWith(false)
   })
@@ -223,12 +223,12 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    await drawerWrapper.find('.ix-drawer-wrapper').trigger('click')
+    await drawerWrapper.trigger('click')
 
     expect(drawerWrapper.find('.ix-drawer').isVisible()).toBe(true)
 
     await wrapper.setProps({ maskClosable: true })
-    await drawerWrapper.find('.ix-drawer-wrapper').trigger('click')
+    await drawerWrapper.trigger('click')
 
     expect(onUpdateVisible).toBeCalledWith(false)
   })
@@ -250,11 +250,11 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { placement: 'start' } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    expect(drawerWrapper.find('.ix-drawer-wrapper').classes()).toContain('ix-drawer-start')
+    expect(drawerWrapper.classes()).toContain('ix-drawer-start')
 
     await wrapper.setProps({ placement: 'top' })
 
-    expect(drawerWrapper.find('.ix-drawer-wrapper').classes()).toContain('ix-drawer-top')
+    expect(drawerWrapper.classes()).toContain('ix-drawer-top')
   })
 
   test('target work', async () => {
@@ -292,13 +292,13 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { wrapperClassName } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    expect(drawerWrapper.find('.ix-drawer-wrapper').classes()).toContain(wrapperClassName)
+    expect(drawerWrapper.classes()).toContain(wrapperClassName)
 
     wrapperClassName = 'test-container2'
 
     await wrapper.setProps({ wrapperClassName })
 
-    expect(drawerWrapper.find('.ix-drawer-wrapper').classes()).toContain(wrapperClassName)
+    expect(drawerWrapper.classes()).toContain(wrapperClassName)
   })
 
   test('zIndex work', async () => {
