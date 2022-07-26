@@ -182,5 +182,10 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['dist', 'packages/site/src/router.ts', 'packages/site/src/sideNav.ts'],
+  ignorePatterns: [
+    'dist',
+    'packages/site/src/router.ts',
+    'packages/site/src/sideNav.ts',
+    'packages/site/src/components/global/themeConfig.ts',
+  ],
 }

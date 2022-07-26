@@ -23,11 +23,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
-    const { overlayRef, updatePopper, overlayProps, visible, setVisible } = ɵUseTooltipOverlay(
-      props,
-      config,
-      mergedPrefixCls,
-    )
+    const { overlayRef, updatePopper, overlayProps, setVisible } = ɵUseTooltipOverlay(props, config, mergedPrefixCls)
 
     expose({ updatePopper })
 
@@ -40,7 +36,6 @@ export default defineComponent({
           ref={overlayRef}
           class={prefixCls}
           {...overlayProps.value}
-          visible={visible.value}
           v-slots={{
             default: slots.default,
             content: () => renderContent(props, slots, closeIcon, setVisible, prefixCls),

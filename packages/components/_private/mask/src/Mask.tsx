@@ -23,9 +23,8 @@ export default defineComponent({
       if (!mask) {
         return null
       }
-
       return (
-        <Transition appear name={transitionName}>
+        <Transition appear name={transitionName ?? `${common.prefixCls}-fade`}>
           <div v-show={visible} class={mergedPrefixCls.value} style={{ zIndex }}></div>
         </Transition>
       )

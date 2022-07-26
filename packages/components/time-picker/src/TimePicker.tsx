@@ -49,6 +49,7 @@ export default defineComponent({
       props,
       slots,
       dateConfig,
+      common,
       locale,
       config,
       mergedPrefixCls,
