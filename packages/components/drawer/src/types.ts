@@ -33,6 +33,10 @@ export const drawerProps = {
     type: Boolean,
     default: undefined,
   },
+  animatable: {
+    type: Boolean,
+    default: true,
+  },
   closable: {
     type: Boolean,
     default: undefined,

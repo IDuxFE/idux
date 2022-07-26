@@ -41,8 +41,18 @@ const defaultDistance = 160
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
-    const { props, slots, common, config, mergedPrefixCls, visible, animatedVisible, level, levelAction } =
-      inject(drawerToken)!
+    const {
+      props,
+      slots,
+      common,
+      config,
+      mergedPrefixCls,
+      visible,
+      animatedVisible,
+      mergedVisible,
+      level,
+      levelAction,
+    } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
     const { closable, closeIcon, closeOnEsc, mask, maskClosable, zIndex } = useConfig(props, config)
 
@@ -125,48 +135,47 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <Transition
-          name={transitionName.value}
-          appear
-          onEnter={onEnter}
-          onAfterEnter={onAfterEnter}
-          onAfterLeave={onAfterLeave}
+        <div
+          v-show={mergedVisible.value}
+          ref={wrapperRef}
+          class={wrapperClasses.value}
+          style={wrapperStyle.value}
+          tabindex={-1}
+          onClick={onWrapperClick}
+          onKeydown={onWrapperKeydown}
         >
-          <div
-            v-show={visible.value}
-            ref={wrapperRef}
-            class={wrapperClasses.value}
-            style={wrapperStyle.value}
-            tabindex={-1}
-            onClick={onWrapperClick}
-            onKeydown={onWrapperKeydown}
+          <Transition
+            name={props.animatable ? transitionName.value : undefined}
+            appear
+            onEnter={onEnter}
+            onAfterEnter={onAfterEnter}
+            onAfterLeave={onAfterLeave}
           >
-            <Transition name={transitionName.value}>
-              <div
-                role="document"
-                class={prefixCls}
-                style={contentStyle.value}
-                onMousedown={onContentMousedown}
-                onMouseup={onContentMouseup}
-                {...attrs}
-              >
-                <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
-                <div class={`${prefixCls}-content`}>
-                  <ɵHeader
-                    v-slots={slots}
-                    closable={closable.value}
-                    closeIcon={closeIcon.value}
-                    header={props.header}
-                    onClose={close}
-                  />
-                  <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
-                  <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
-                </div>
-                <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+            <div
+              v-show={visible.value}
+              role="document"
+              class={prefixCls}
+              style={contentStyle.value}
+              onMousedown={onContentMousedown}
+              onMouseup={onContentMouseup}
+              {...attrs}
+            >
+              <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+              <div class={`${prefixCls}-content`}>
+                <ɵHeader
+                  v-slots={slots}
+                  closable={closable.value}
+                  closeIcon={closeIcon.value}
+                  header={props.header}
+                  onClose={close}
+                />
+                <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
+                <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
               </div>
-            </Transition>
-          </div>
-        </Transition>
+              <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+            </div>
+          </Transition>
+        </div>
       )
     }
   },

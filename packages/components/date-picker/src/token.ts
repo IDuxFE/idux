@@ -16,13 +16,14 @@ import type { OverlayStateContext } from './composables/useOverlayState'
 import type { PickerStateContext } from './composables/usePickerState'
 import type { PickerRangeControlContext } from './composables/useRangeControl'
 import type { DatePickerProps, DateRangePickerProps } from './types'
-import type { DateConfig, DatePickerConfig } from '@idux/components/config'
+import type { CommonConfig, DateConfig, DatePickerConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
 
 export interface DatePickerContext extends OverlayStateContext, FormatContext, PickerStateContext<DatePickerProps> {
   props: DatePickerProps
   slots: Slots
+  common: CommonConfig
   locale: Locale
   config: DatePickerConfig
   mergedPrefixCls: ComputedRef<string>
@@ -39,6 +40,7 @@ export interface DateRangePickerContext
     PickerStateContext<DateRangePickerProps> {
   props: DateRangePickerProps
   slots: Slots
+  common: CommonConfig
   locale: Locale
   config: DatePickerConfig
   mergedPrefixCls: ComputedRef<string>

@@ -1,15 +1,15 @@
 @import '../variable/animation.less';
 
 .fade-motion(@className, @duration: @transition-duration-base) {
-  .ix-@{className}-enter-active,
-  .ix-@{className}-leave-active {
+  .@{idux-prefix}-@{className}-enter-active,
+  .@{idux-prefix}-@{className}-leave-active {
     transition-property: opacity;
     transition-duration: @duration;
     transition-timing-function: linear;
   }
 
-  .ix-@{className}-enter-from,
-  .ix-@{className}-leave-to {
+  .@{idux-prefix}-@{className}-enter-from,
+  .@{idux-prefix}-@{className}-leave-to {
     opacity: 0;
   }
 }

@@ -13,13 +13,13 @@ import { type ComputedRef, computed } from 'vue'
 const defaultOffset: [number, number] = [0, 8]
 export function useOverlayProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵOverlayProps> {
   return computed(() => {
-    const { props, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
+    const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
     return {
       clickOutside: true,
       disabled: accessor.disabled || props.readonly,
       offset: defaultOffset,
       placement: 'bottomStart',
-      transitionName: 'ix-fade',
+      transitionName: `${common.prefixCls}-fade`,
       target: props.overlayContainer ?? config.overlayContainer ?? `${mergedPrefixCls.value}-overlay-container`,
       trigger: 'manual',
       visible: overlayOpened.value,

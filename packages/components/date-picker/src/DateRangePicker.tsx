@@ -56,6 +56,7 @@ export default defineComponent({
     const context = {
       props,
       slots,
+      common,
       locale,
       config,
       mergedPrefixCls,

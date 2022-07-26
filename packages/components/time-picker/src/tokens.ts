@@ -11,7 +11,7 @@ import type { OverlayStateContext } from './composables/useOverlayState'
 import type { PickerStateContext } from './composables/usePickerState'
 import type { PickerRangeControlContext } from './composables/useRangeControl'
 import type { TimePickerProps, TimeRangePickerProps } from './types'
-import type { DateConfig, TimePickerConfig } from '@idux/components/config'
+import type { CommonConfig, DateConfig, TimePickerConfig } from '@idux/components/config'
 import type { FormContext } from '@idux/components/form'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
@@ -22,6 +22,7 @@ interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps>
   props: T
   slots: Slots
   dateConfig: DateConfig
+  common: CommonConfig
   locale: Locale
   config: TimePickerConfig
   inputRef: Ref<HTMLInputElement | undefined>

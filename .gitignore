@@ -17,12 +17,14 @@ pnpm-lock.yaml
 /packages/site/public/icon-svg
 /packages/site/src/router.ts
 /packages/site/src/sideNav.ts
+/packages/site/src/styles/themes/index.less
 /packages/site/components.d.ts
 
 # old site files
 /public/icon-svg
 /site/docs/router.ts
 /site/docs/sideNav.ts
+
 
 /site/docs/public
 /site/docs/src
