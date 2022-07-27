@@ -12,7 +12,7 @@ import { type ComputedRef, computed, watch } from 'vue'
 
 import { callEmit, convertArray, useState } from '@idux/cdk/utils'
 
-import { sortRangeValue } from '../utils'
+import { applyDateTime, sortRangeValue } from '../utils'
 
 export interface RangePanelStateContext {
   panelValue: ComputedRef<(Date | undefined)[] | undefined>
@@ -49,8 +49,16 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
       setIsSelecting(true)
       setSelectingDate([value, undefined])
     } else {
+      const propsValue = convertArray(props.value)
+
       setIsSelecting(false)
-      handleChange([selectingDate.value?.[0], value])
+      handleChange(
+        [selectingDate.value?.[0], value].map((dateValue, index) =>
+          propsValue[index]
+            ? applyDateTime(dateConfig, propsValue[index], dateValue!, ['hour', 'minute', 'second'])
+            : dateValue,
+        ),
+      )
     }
   }
 

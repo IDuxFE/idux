@@ -8,13 +8,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { DatePickerProps, DateRangePickerProps } from '../types'
-import type { ComputedRef } from 'vue'
 
-import { computed } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
-import { type DatePickerConfig, useGlobalConfig } from '@idux/components/config'
+import { type DatePickerConfig } from '@idux/components/config'
 
-export interface FormatContext {
+interface TimePanelEnabledStatus {
+  hourEnabled: ComputedRef<boolean>
+  hourUse12Hours: ComputedRef<boolean>
+  minuteEnabled: ComputedRef<boolean>
+  secondEnabled: ComputedRef<boolean>
+  use12Hours: ComputedRef<boolean>
+}
+
+export interface FormatContext extends Omit<TimePanelEnabledStatus, 'hourUse12Hours'> {
   formatRef: ComputedRef<string>
   dateFormatRef: ComputedRef<string>
   timeFormatRef: ComputedRef<string>
@@ -30,11 +37,15 @@ const defaultFormat = {
 } as const
 
 export function useFormat(props: DatePickerProps | DateRangePickerProps, config: DatePickerConfig): FormatContext {
-  const timePickerConfig = useGlobalConfig('timePicker')
   const formatRef = computed(() => {
     const type = props.type
     return props.format ?? config.format?.[type] ?? defaultFormat[type]
   })
+
+  const { hourEnabled, hourUse12Hours, minuteEnabled, secondEnabled, use12Hours } = useTimePanelEnabledStatus(
+    props,
+    formatRef,
+  )
 
   const dateFormatRef = computed(() => {
     if (props.type !== 'datetime') {
@@ -45,12 +56,41 @@ export function useFormat(props: DatePickerProps | DateRangePickerProps, config:
   })
 
   const timeFormatRef = computed(() => {
-    return props.timeFormat ?? timePickerConfig.format
+    if (props.timeFormat) {
+      return props.timeFormat
+    }
+
+    const hourFormat = hourEnabled.value && (hourUse12Hours.value ? 'hh' : 'HH')
+    const timeFormatBase = [hourFormat, minuteEnabled.value && 'mm', secondEnabled.value && 'ss']
+      .filter(Boolean)
+      .join(':')
+
+    return use12Hours.value ? `${timeFormatBase} a` : timeFormatBase
   })
 
   return {
     formatRef,
     dateFormatRef,
     timeFormatRef,
+
+    hourEnabled,
+    minuteEnabled,
+    secondEnabled,
+    use12Hours,
+  }
+}
+
+function useTimePanelEnabledStatus(
+  props: DatePickerProps | DateRangePickerProps,
+  formatRef: ComputedRef<string>,
+): TimePanelEnabledStatus {
+  const _formatRef = computed(() => props.timeFormat ?? formatRef.value)
+
+  return {
+    hourEnabled: computed(() => /[hH]/.test(_formatRef.value)),
+    hourUse12Hours: computed(() => /h/.test(_formatRef.value)),
+    minuteEnabled: computed(() => /m/.test(_formatRef.value)),
+    secondEnabled: computed(() => /s/.test(_formatRef.value)),
+    use12Hours: computed(() => /[aA]/.test(_formatRef.value)),
   }
 }

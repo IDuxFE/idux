@@ -14,27 +14,48 @@ import { isArray } from 'lodash-es'
 
 export function useTimePanelProps(
   props: DatePickerProps,
-  timeFormatRef: ComputedRef<string>,
+  hourEnabled: ComputedRef<boolean>,
+  minuteEnabled: ComputedRef<boolean>,
+  secondEnabled: ComputedRef<boolean>,
+  use12Hours: ComputedRef<boolean>,
 ): ComputedRef<ɵTimePanelProps> {
-  return computed(() => getTimePanelProps(props.timePanelOptions ?? {}, timeFormatRef))
+  return computed(() => ({
+    ...getTimePanelProps(props.timePanelOptions ?? {}),
+    hourEnabled: hourEnabled.value,
+    minuteEnabled: minuteEnabled.value,
+    secondEnabled: secondEnabled.value,
+    use12Hours: use12Hours.value,
+  }))
 }
 
 export function useRangeTimePanelProps(
   props: DateRangePickerProps,
-  timeFormatRef: ComputedRef<string>,
+  hourEnabled: ComputedRef<boolean>,
+  minuteEnabled: ComputedRef<boolean>,
+  secondEnabled: ComputedRef<boolean>,
+  use12Hours: ComputedRef<boolean>,
 ): ComputedRef<ɵTimePanelProps[]> {
   const getOptions = (isFrom: boolean) =>
     (isArray(props.timePanelOptions) ? props.timePanelOptions[isFrom ? 0 : 1] : props.timePanelOptions) ?? {}
 
-  const rangeTimePanelProps = computed(() => [
-    getTimePanelProps(getOptions(true), timeFormatRef),
-    getTimePanelProps(getOptions(false), timeFormatRef),
-  ])
+  const rangeTimePanelProps = computed(() => {
+    const enabledStatus = {
+      hourEnabled: hourEnabled.value,
+      minuteEnabled: minuteEnabled.value,
+      secondEnabled: secondEnabled.value,
+      use12Hours: use12Hours.value,
+    }
+
+    return [
+      { ...getTimePanelProps(getOptions(true)), ...enabledStatus },
+      { ...getTimePanelProps(getOptions(false)), ...enabledStatus },
+    ]
+  })
 
   return rangeTimePanelProps
 }
 
-function getTimePanelProps(timePanelOptions: TimePanelOptions, timeFormatRef: ComputedRef<string>): ɵTimePanelProps {
+function getTimePanelProps(timePanelOptions: TimePanelOptions): ɵTimePanelProps {
   const { disabledHours, disabledMinutes, disabledSeconds, hideDisabledOptions, hourStep, minuteStep, secondStep } =
     timePanelOptions
 
@@ -46,9 +67,5 @@ function getTimePanelProps(timePanelOptions: TimePanelOptions, timeFormatRef: Co
     hourStep,
     minuteStep,
     secondStep,
-    hourEnabled: /[hH]/.test(timeFormatRef.value),
-    minuteEnabled: /m/.test(timeFormatRef.value),
-    secondEnabled: /s/.test(timeFormatRef.value),
-    use12Hours: /[aA]/.test(timeFormatRef.value),
   }
 }

@@ -24,6 +24,10 @@ export default defineComponent({
       slots,
       dateFormatRef,
       timeFormatRef,
+      hourEnabled,
+      minuteEnabled,
+      secondEnabled,
+      use12Hours,
       rangeControlContext: { buffer, visiblePanel, fromControl, toControl, handlePanelChange },
       mergedPrefixCls,
       inputEnableStatus,
@@ -56,7 +60,7 @@ export default defineComponent({
     }
 
     const inputProps = useInputProps(context)
-    const timePanelProps = useRangeTimePanelProps(props, timeFormatRef)
+    const timePanelProps = useRangeTimePanelProps(props, hourEnabled, minuteEnabled, secondEnabled, use12Hours)
 
     const renderInputsSide = (prefixCls: string, isFrom: boolean) => {
       const { enableOverlayTimeInput } = inputEnableStatus.value
