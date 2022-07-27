@@ -5,7 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
+import {
+  type CSSProperties,
+  type ComputedRef,
+  type Slots,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+} from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -63,7 +72,7 @@ export default defineComponent({
         [`${prefixCls}-cell-sortable`]: !!sortable,
         [`${prefixCls}-align-${align}`]: !hasChildren && !!align,
         [`${prefixCls}-align-center`]: hasChildren,
-        [`${prefixCls}-ellipsis`]: ellipsis,
+        [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
@@ -79,7 +88,7 @@ export default defineComponent({
       return normalizeClass(classes)
     })
 
-    const style = computed(() => {
+    const style = computed<CSSProperties | undefined>(() => {
       const { fixed, colStart, colEnd } = props.column as HeadColumn
       if (!fixed) {
         return

@@ -32,7 +32,7 @@ export const tableProps = {
   customAdditional: { type: Object as PropType<TableCustomAdditional<any, any>>, default: undefined },
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
-  ellipsis: { type: Boolean, default: false },
+  ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean }>, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
@@ -107,7 +107,7 @@ export interface TableColumnCommon<T = any> {
 
 export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T> {
   dataKey?: VKey | VKey[]
-  ellipsis?: boolean
+  ellipsis?: boolean | { title?: boolean }
   sortable?: TableColumnSortable<T>
   filterable?: TableColumnFilterable<T>
   title?: string
