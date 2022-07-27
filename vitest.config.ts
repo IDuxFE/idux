@@ -34,7 +34,7 @@ export default defineConfig({
     setupFiles: [resolve(__dirname, './tests/setup.ts')],
     coverage: {
       enabled: true,
-      reporter: ['json', 'lcov', 'text', 'cobertura'],
+      reporter: ['json', 'lcov', 'cobertura'],
       excludeNodeModules: true,
       include: ['packages/**/src/*.{ts,tsx}'],
       exclude: [],

@@ -46,7 +46,7 @@ export function useColumns(
   )
   const fixedColumnKeys = useFixedColumnKeys(flattedColumnsWithScrollBar)
   const hasEllipsis = computed(
-    () => props.ellipsis || flattedColumns.value.some(column => (column as TableColumnBase).ellipsis),
+    () => !!props.ellipsis || flattedColumns.value.some(column => (column as TableColumnBase).ellipsis),
   )
   const hasFixed = computed(() => flattedColumns.value.some(column => column.fixed))
 

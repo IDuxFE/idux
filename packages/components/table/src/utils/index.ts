@@ -9,14 +9,18 @@
 
 import { type VNode, type VNodeChild } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isObject, isString } from 'lodash-es'
 
 import { Logger, type VKey, convertArray, getFirstValidNode, uniqueId } from '@idux/cdk/utils'
 
 import { type TableColumn } from '../types'
 
-export function getColTitle(ellipsis: boolean, children: VNodeChild, title: string | undefined): string | undefined {
-  if (!ellipsis) {
+export function getColTitle(
+  ellipsis: boolean | { title?: boolean },
+  children: VNodeChild,
+  title: string | undefined,
+): string | undefined {
+  if (!ellipsis || (isObject(ellipsis) && !ellipsis.title)) {
     return undefined
   }
 

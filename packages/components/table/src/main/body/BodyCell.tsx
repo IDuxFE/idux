@@ -50,7 +50,7 @@ export default defineComponent({
       let classes = {
         [`${prefixCls}-sorted`]: !!activeSortOrderBy.value,
         [`${prefixCls}-align-${align}`]: !!align,
-        [`${prefixCls}-ellipsis`]: ellipsis,
+        [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value

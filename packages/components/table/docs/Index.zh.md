@@ -22,7 +22,7 @@ order: 0
 | `columns` | 表格列的配置描述 | `TableColumn[]` | - | - |  参见[TableColumn](#TableColumn)  |
 | `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | `false` | - | - |
+| `ellipsis` | 超过宽度将自动省略 | `boolean \| { title: boolean }` | `false` | - | `title` 为 `false` 时, 不显示原生的 `title` |
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
