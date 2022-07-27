@@ -18,6 +18,7 @@ export interface DrawerContext {
   visible: ComputedRef<boolean>
   animatedVisible: Ref<boolean | undefined>
   mergedVisible: ComputedRef<boolean>
+  currentZIndex: ComputedRef<number>
   level: Ref<number>
   levelAction: Ref<'push' | 'pull' | undefined>
   push: () => void

@@ -22,6 +22,7 @@ export interface ModalContext {
   mergedVisible: ComputedRef<boolean>
   cancelLoading: Ref<boolean>
   okLoading: Ref<boolean>
+  currentZIndex: ComputedRef<number>
 }
 
 export const modalToken: InjectionKey<ModalContext> = Symbol('modalToken')

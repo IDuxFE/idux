@@ -7,15 +7,18 @@
 
 import type { OverlayProps } from './types'
 import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
-import type { ComputedRef, Ref, VNode } from 'vue'
 
 import {
+  type ComputedRef,
+  type Ref,
   Transition,
+  type VNode,
   cloneVNode,
   computed,
   defineComponent,
   onBeforeUnmount,
   onMounted,
+  toRef,
   vShow,
   watch,
   withDirectives,
@@ -24,7 +27,7 @@ import {
 import { clickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode, useZIndex } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { overlayProps } from './types'
@@ -52,6 +55,8 @@ export default defineComponent({
       hide,
       destroy,
     } = usePopper({ ...popperOptions.value, visible: props.visible })
+
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'zIndex'), visibility)
 
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
@@ -101,6 +106,7 @@ export default defineComponent({
         props,
         mergedPrefixCls,
         visibility,
+        currentZIndex,
         contentNode!,
         arrowRef,
         popperRef,
@@ -133,6 +139,7 @@ function renderContent(
   props: OverlayProps,
   mergedPrefixCls: ComputedRef<string>,
   visibility: ComputedRef<boolean>,
+  currentZIndex: ComputedRef<number>,
   contentNode: VNode[],
   arrowRef: Ref<PopperElement | null>,
   popperRef: Ref<PopperElement | null>,
@@ -143,9 +150,9 @@ function renderContent(
     return null
   }
   const prefixCls = mergedPrefixCls.value
-  const { triggerId, zIndex } = props
+  const { triggerId } = props
   const overlayId = triggerId != null ? `overlay-${triggerId}` : undefined
-  const style = zIndex != null ? `z-index: ${zIndex}` : undefined
+  const style = currentZIndex.value ? `z-index: ${currentZIndex.value}` : undefined
   const overlay = (
     <div ref={popperRef} id={overlayId} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>
       {contentNode}

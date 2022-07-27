@@ -50,11 +50,12 @@ export default defineComponent({
       visible,
       animatedVisible,
       mergedVisible,
+      currentZIndex,
       level,
       levelAction,
     } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
-    const { closable, closeIcon, closeOnEsc, mask, maskClosable, zIndex } = useConfig(props, config)
+    const { closable, closeIcon, closeOnEsc, mask, maskClosable } = useConfig(props, config)
 
     const transitionName = computed(() => `${common.prefixCls}-${drawerTransitionMap[props.placement]}`)
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
@@ -105,7 +106,7 @@ export default defineComponent({
 
     const wrapperStyle = computed(() => {
       const placement = mask.value ? undefined : placementStyle.value
-      return { zIndex: zIndex.value, transform: transformStyle.value, ...placement }
+      return { zIndex: currentZIndex.value, transform: transformStyle.value, ...placement }
     })
 
     const contentStyle = computed(() => {
@@ -187,9 +188,8 @@ function useConfig(props: DrawerProps, config: DrawerConfig) {
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
-  const zIndex = computed(() => props.zIndex ?? config.zIndex)
 
-  return { closable, closeIcon, closeOnEsc, mask, maskClosable, zIndex }
+  return { closable, closeIcon, closeOnEsc, mask, maskClosable }
 }
 
 function watchVisibleChange(

@@ -13,6 +13,7 @@ import { type GlobalConfig } from './types'
 export const defaultConfig: GlobalConfig = {
   common: {
     prefixCls: 'ix',
+    zIndex: 1000,
   },
   locale: zhCN,
 
