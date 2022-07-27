@@ -9,6 +9,7 @@
     :style="{ height: '400px' }"
     :checkable="true"
     :dataSource="treeData"
+    :onSearch="onSearch"
   >
     <template #header>
       <IxHeader size="sm">
@@ -26,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const treeData = [
   {
@@ -118,6 +119,16 @@ const handleDelete = (evt: Event) => {
 
 const handleAdd = () => {
   console.log('add')
+}
+
+const onSearch = (searchVal: string) => {
+  console.log('searchVal', searchVal)
+  if (searchVal === '') {
+    // 处理每次搜索清空后选项全部收缩问题
+    nextTick(() => {
+      expandedKeys.value = ['0', '0-1']
+    })
+  }
 }
 </script>
 

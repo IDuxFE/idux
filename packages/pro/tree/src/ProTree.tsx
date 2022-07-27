@@ -65,8 +65,9 @@ export default defineComponent({
     }
 
     const handleInput = (evt: Event) => {
-      setSearchValue((evt.target as HTMLInputElement).value)
-      callEmit(props.onSearch, searchValue.value)
+      const inputValue = (evt.target as HTMLInputElement).value
+      setSearchValue(inputValue)
+      callEmit(props.onSearch, inputValue)
     }
 
     const handleClear = (evt: Event) => {
