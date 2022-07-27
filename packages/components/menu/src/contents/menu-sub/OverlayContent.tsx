@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'MenuSubOverlayContent',
   setup() {
     const { mergedPrefixCls, theme, mergedGetKey } = inject(menuToken)!
-    const { props, handleMouseEvent } = inject(menuSubToken)!
+    const { props, isExpanded, handleMouseEvent } = inject(menuSubToken)!
     const dropdownContext = inject(ɵDropdownToken, null)
 
     const classes = computed(() => {
@@ -30,7 +30,7 @@ export default defineComponent({
     })
 
     const events = computed(() => {
-      if (props.data.disabled) {
+      if (props.data.disabled || !isExpanded.value) {
         return undefined
       }
       return {

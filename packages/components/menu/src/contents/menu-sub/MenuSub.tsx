@@ -71,6 +71,7 @@ export default defineComponent({
 
     const handleItemClick = () => {
       if (!props.data.disabled && mode.value !== 'inline' && !menuProps.multiple) {
+        handleMouseEvent(false)
         handleExpand(key, false)
       }
     }
@@ -122,7 +123,6 @@ export default defineComponent({
         const content = () => <OverlayContent></OverlayContent>
         children = (
           <ɵOverlay
-            visible={isExpanded.value}
             v-slots={{ default: trigger, content: content }}
             class={overlayClasses.value}
             autoAdjust
@@ -134,6 +134,7 @@ export default defineComponent({
             target={target.value}
             transitionName={mergedTransitionName.value}
             trigger="manual"
+            visible={isExpanded.value}
           />
         )
       }
