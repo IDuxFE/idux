@@ -408,12 +408,18 @@ describe('ProTree', () => {
     expect(wrapper.find('.ix-icon-uncollapse').exists()).toBe(false)
   })
 
-  test('searchValue work', async () => {
+  test('searchValue.sync work', async () => {
+    const onSearch = vi.fn()
+    const onUpdateSearch = vi.fn()
     const wrapper = ProTreeMount({
       props: {
         searchValue: 'Node 0-0',
+        onSearch,
+        'onUpdate:searchValue': onUpdateSearch,
       },
     })
+
+    const input = wrapper.find('.ix-pro-tree-search-wrapper .ix-input-inner')
 
     const allNodes = wrapper.findAll('.ix-tree-node')
 
@@ -424,6 +430,11 @@ describe('ProTree', () => {
     })
 
     expect(allNodes[1].find('.ix-tree-node-content-label-highlight').exists()).toBe(false)
+
+    await input.setValue('search text')
+
+    expect(onSearch).toBeCalledWith('search text')
+    expect(onUpdateSearch).toBeCalledWith('search text')
   })
 
   test('expandAll and collapseAll work', async () => {

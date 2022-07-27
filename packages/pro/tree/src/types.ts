@@ -92,6 +92,7 @@ export const proTreeProps = {
   'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:searchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
 } as const
 
 export interface ProTreeBindings<K = VKey> {
