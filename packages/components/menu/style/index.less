@@ -14,6 +14,8 @@
   &-vertical,
   &-inline {
     width: 100%;
+    // https://github.com/IDuxFE/idux/issues/1013
+    padding: 0.02px 0;
     font-size: @menu-vertical-font-size;
     border-right: @menu-border-width @menu-border-style @menu-border-color;
 
@@ -27,7 +29,6 @@
     }
 
     .@{menu-prefix}-item {
-
       &::after {
         position: absolute;
         top: 0;
@@ -41,7 +42,6 @@
       }
 
       &-selected {
-
         &::after {
           transform: scaleY(1);
           opacity: 1;
