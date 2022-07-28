@@ -5,7 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, type Slot, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
+import {
+  type Ref,
+  type Slot,
+  type StyleValue,
+  computed,
+  defineComponent,
+  normalizeClass,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
@@ -23,6 +33,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-textarea`)
     const config = useGlobalConfig('textarea')
+    const isScroll = ref(false)
 
     const {
       elementRef,
@@ -74,6 +85,19 @@ export default defineComponent({
 
     useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
 
+    watch(
+      () => accessor.value,
+      () => {
+        if (clearable.value) {
+          if (elementRef.value?.scrollHeight !== elementRef.value?.clientHeight) {
+            isScroll.value = true
+          } else {
+            isScroll.value = false
+          }
+        }
+      },
+    )
+
     return () => {
       const { class: className, style, ...rest } = attrs
       const prefixCls = mergedPrefixCls.value
@@ -90,7 +114,15 @@ export default defineComponent({
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
           />
-          {renderSuffix(clearable.value, slots.clearIcon, clearIcon.value, clearVisible.value, handleClear, prefixCls)}
+          {renderSuffix(
+            clearable.value,
+            slots.clearIcon,
+            clearIcon.value,
+            clearVisible.value,
+            handleClear,
+            prefixCls,
+            isScroll.value,
+          )}
         </span>
       )
     }
@@ -123,6 +155,7 @@ function renderSuffix(
   clearVisible: boolean,
   onClear: (evt: MouseEvent) => void,
   prefixCls: string,
+  isScroll: boolean,
 ) {
   if (!isClearable) {
     return null
@@ -131,6 +164,9 @@ function renderSuffix(
   let classes = `${prefixCls}-suffix`
   if (!clearVisible) {
     classes += ` ${prefixCls}-suffix-hidden`
+  }
+  if (isScroll) {
+    classes += ` ${prefixCls}-suffix-scroll`
   }
 
   return (
