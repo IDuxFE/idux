@@ -14,9 +14,8 @@ import type {
 } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { CommonConfig, NotificationConfig } from '@idux/components/config'
-import type { ComputedRef, Ref } from 'vue'
 
-import { TransitionGroup, computed, defineComponent, provide, ref } from 'vue'
+import { ComputedRef, Ref, TransitionGroup, cloneVNode, computed, defineComponent, isVNode, provide, ref } from 'vue'
 
 import { isArray, isUndefined, pickBy } from 'lodash-es'
 
@@ -57,9 +56,15 @@ export default defineComponent({
     return () => {
       const getChild = (notifications: NotificationOptions[]) => {
         return notifications.map(item => {
-          const { key, visible = true } = item
+          const { key, visible = true, content, contentProps, ...restProps } = item
           const onClose = () => destroy(key!)
-          return <Notification {...item} onClose={onClose} visible={visible}></Notification>
+          const mergedProps = { key, visible, onClose }
+          const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
+          return (
+            <Notification {...mergedProps} {...restProps}>
+              {contentNode}
+            </Notification>
+          )
         })
       }
 

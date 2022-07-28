@@ -8,7 +8,7 @@
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
 
 // 挑出部分必填的属性
 type PickRequire<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>> & Required<Pick<T, U>>
@@ -71,6 +71,7 @@ export type NotificationInstance = InstanceType<DefineComponent<NotificationProp
 
 // 通过useNotification的配置
 export interface NotificationOptions<K = VKey> extends PickRequire<NotificationProps, 'title' | 'content'> {
+  contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: K) => void
 }
 export type NotificationPlacementMap = Record<NotificationPlacement, NotificationOptions[]>
