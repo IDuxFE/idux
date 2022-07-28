@@ -23,6 +23,10 @@ export default defineComponent({
       mergedPrefixCls,
       dateFormatRef,
       timeFormatRef,
+      hourEnabled,
+      minuteEnabled,
+      secondEnabled,
+      use12Hours,
       slots,
       inputEnableStatus,
       inputRef,
@@ -79,7 +83,7 @@ export default defineComponent({
       }
     }
 
-    const _handleDateInputClear = (evt: Event) => {
+    const _handleDateInputClear = (evt: MouseEvent) => {
       if (!inputEnableStatus.value.enableOverlayTimeInput) {
         handleClear(evt)
       }
@@ -88,7 +92,7 @@ export default defineComponent({
     }
 
     const inputProps = useInputProps(context)
-    const timePanelProps = useTimePanelProps(props, timeFormatRef)
+    const timePanelProps = useTimePanelProps(props, hourEnabled, minuteEnabled, secondEnabled, use12Hours)
 
     const renderInputs = (prefixCls: string) => {
       if (!inputEnableStatus.value.enableOverlayDateInput) {
