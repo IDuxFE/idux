@@ -13,9 +13,10 @@ import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide,
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy } from '@idux/cdk/scroll'
-import { callEmit, useControlledProp, useZIndex } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
+import { useZIndex } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
