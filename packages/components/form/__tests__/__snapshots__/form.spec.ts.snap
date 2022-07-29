@@ -12,8 +12,11 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
         <!---->
       </div>
-      <!---->
-      <!---->
+      <div class=\\"ix-form-item-message\\">
+        <transition-stub>
+          <!---->
+        </transition-stub>
+      </div>
     </div>
   </div>
   <div class=\\"ix-row ix-form-item\\">
@@ -26,8 +29,11 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
         <!---->
       </div>
-      <!---->
-      <!---->
+      <div class=\\"ix-form-item-message\\">
+        <transition-stub>
+          <!---->
+        </transition-stub>
+      </div>
     </div>
   </div>
   <div class=\\"ix-row ix-form-item\\">
@@ -43,8 +49,11 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
         <!---->
       </div>
-      <!---->
-      <!---->
+      <div class=\\"ix-form-item-message\\">
+        <transition-stub>
+          <!---->
+        </transition-stub>
+      </div>
     </div>
   </div>
   <div class=\\"ix-row ix-form-item\\">
@@ -55,8 +64,11 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
         <!---->
       </div>
-      <!---->
-      <!---->
+      <div class=\\"ix-form-item-message\\">
+        <transition-stub>
+          <!---->
+        </transition-stub>
+      </div>
     </div>
   </div>
 </form>"
@@ -73,8 +85,11 @@ exports[`Form > item work > render work 1`] = `
       <!---->
       <!---->
     </div>
-    <!---->
-    <!---->
+    <div class=\\"ix-form-item-message\\">
+      <transition-stub>
+        <!---->
+      </transition-stub>
+    </div>
   </div>
 </div>"
 `;
@@ -90,8 +105,11 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
       <!---->
     </div>
-    <!---->
-    <!---->
+    <div class=\\"ix-form-item-message\\">
+      <transition-stub>
+        <!---->
+      </transition-stub>
+    </div>
   </div>
 </div>
 <div class=\\"ix-row ix-form-item\\">
@@ -104,8 +122,11 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
       <!---->
     </div>
-    <!---->
-    <!---->
+    <div class=\\"ix-form-item-message\\">
+      <transition-stub>
+        <!---->
+      </transition-stub>
+    </div>
   </div>
 </div>
 <div class=\\"ix-row ix-form-item\\">
@@ -121,8 +142,11 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
       <!---->
     </div>
-    <!---->
-    <!---->
+    <div class=\\"ix-form-item-message\\">
+      <transition-stub>
+        <!---->
+      </transition-stub>
+    </div>
   </div>
 </div>"
 `;

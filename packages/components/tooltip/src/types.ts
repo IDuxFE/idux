@@ -25,6 +25,7 @@ export const tooltipProps = {
     default: undefined,
   },
   delay: ɵOverlayDelayDef,
+  offset: Array as unknown as PropType<[number, number]>,
   placement: ɵOverlayPlacementDef,
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,

@@ -92,16 +92,24 @@ export default defineComponent({
     }
 
     return () => {
-      const triggerNode = getFirstValidNode(slots.default?.())
-      if (!triggerNode) {
+      const triggerNodes = slots.default?.()
+      const triggerNode = getFirstValidNode(triggerNodes)
+      if (!triggerNode || triggerNodes!.length > 1) {
         __DEV__ && Logger.warn('components/overlay', 'Trigger must is single rooted node')
         return null
       }
+      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, handleClickOutside)
       const contentNode = slots.content?.()
       if (!getFirstValidNode(contentNode)) {
-        return triggerNode
+        // 避免没有 content 时, trigger 被重新创建
+        return (
+          <>
+            {trigger}
+            <CdkPortal target={props.target} load={false}></CdkPortal>
+          </>
+        )
       }
-      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, handleClickOutside)
+
       const content = renderContent(
         props,
         mergedPrefixCls,
@@ -141,8 +149,8 @@ function renderContent(
   visibility: ComputedRef<boolean>,
   currentZIndex: ComputedRef<number>,
   contentNode: VNode[],
-  arrowRef: Ref<PopperElement | null>,
-  popperRef: Ref<PopperElement | null>,
+  arrowRef: Ref<PopperElement | undefined>,
+  popperRef: Ref<PopperElement | undefined>,
   popperEvents: ComputedRef<PopperEvents>,
   attrs: Record<string, unknown>,
 ) {

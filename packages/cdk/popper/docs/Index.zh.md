@@ -48,11 +48,11 @@ export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manua
 | `destroy` | 销毁浮层 | `(): void` | - | - | - |
 | `visibility` | 浮层显示状态 | `ComputedRef<boolean>` | -| - | - |
 | `placement` | 浮层位置 | `ComputedRef<PopperPlacement>` | - | - | - |
-| `triggerRef` | 浮层的触发元素 | `Ref<TE \| null>` | - | - |
+| `triggerRef` | 浮层的触发元素 | `Ref<TE \| undefined>` | - | - |
 | `triggerEvents` | 浮层触发元素的事件 | `ComputedRef<PopperTriggerEvents>` | - | - | 需要手动绑定到触发元素上 |
-| `popperRef` | 浮层的容器元素 | `Ref<TE \| null>` | - | - |
+| `popperRef` | 浮层的容器元素 | `Ref<TE \| undefined>` | - | - |
 | `popperEvents` | 浮层容器容器的事件 | `ComputedRef<PopperEvents>` | - | - | 需要手动绑定到浮层容器元素上 |
-| `arrowRef` | 浮层的箭头元素 | `Ref<HTMLElement \| null>` | - | - | - |
+| `arrowRef` | 浮层的箭头元素 | `Ref<HTMLElement \| undefined>` | - | - | - |
 
 ```ts
 

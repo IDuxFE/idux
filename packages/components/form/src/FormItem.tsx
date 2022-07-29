@@ -5,15 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Slot, type Slots, computed, defineComponent, inject, normalizeClass } from 'vue'
+import {
+  type ComputedRef,
+  type Slot,
+  type Slots,
+  Transition,
+  VNodeChild,
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+} from 'vue'
 
-import { isNumber, isString } from 'lodash-es'
+import { isBoolean, isNumber, isString } from 'lodash-es'
 
+import { ValidateStatus } from '@idux/cdk/forms'
 import { Logger } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
+import { CommonConfig, useGlobalConfig } from '@idux/components/config'
 import { type ColProps, IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
-import { IxTooltip } from '@idux/components/tooltip'
+import { IxTooltip, TooltipProps } from '@idux/components/tooltip'
 
 import { useFormItem } from './composables/useFormItem'
 import { formToken } from './token'
@@ -37,6 +48,8 @@ export default defineComponent({
     const controlTooltipIcon = computed(
       () => props.controlTooltipIcon ?? formProps?.controlTooltipIcon ?? config?.controlTooltipIcon,
     )
+    const mergedMessageTooltip = computed(() => props.messageTooltip ?? formProps?.messageTooltip)
+
     const { status, statusIcon, message } = useFormItem(props, formProps)
 
     const classes = computed(() => {
@@ -44,7 +57,6 @@ export default defineComponent({
       const currStatus = status.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-message`]: !!message.value,
         [`${prefixCls}-with-status-icon`]: !!statusIcon.value,
         [`${prefixCls}-${currStatus}`]: !!currStatus,
       })
@@ -65,7 +77,18 @@ export default defineComponent({
       return (
         <IxRow class={classes.value}>
           {renderLabel(props, slots, labelClasses, labelColConfig, labelTooltipIcon, prefixCls)}
-          {renderControl(props, slots, controlColConfig, controlTooltipIcon, statusIcon, message, prefixCls)}
+          {renderControl(
+            props,
+            slots,
+            common,
+            controlColConfig,
+            controlTooltipIcon,
+            status,
+            statusIcon,
+            message,
+            mergedMessageTooltip,
+            prefixCls,
+          )}
         </IxRow>
       )
     }
@@ -92,7 +115,7 @@ function renderLabel(
   const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip, labelTooltipIcon.value)
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
-      <label for={labelFor}>
+      <label for={labelFor as string}>
         {labelSlot ? labelSlot() : label}
         {tooltipNode && <span class={`${prefixCls}-label-tooltip`}>{tooltipNode}</span>}
       </label>
@@ -100,13 +123,17 @@ function renderLabel(
   )
 }
 
+// TODO: refactor
 function renderControl(
   props: FormItemProps,
   slots: Slots,
+  common: CommonConfig,
   controlColConfig: ComputedRef<ColProps | undefined>,
   controlTooltipIcon: ComputedRef<string | undefined>,
+  status: ComputedRef<ValidateStatus | undefined>,
   statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
+  mergedMessageTooltip: ComputedRef<boolean | TooltipProps | undefined>,
   prefixCls: string,
 ) {
   const { controlTooltip, description, extra, extraMessage } = props
@@ -123,26 +150,71 @@ function renderControl(
   if (__DEV__ && (extraMessage || extraMessageSlot)) {
     Logger.warn('components/form', '`extraMessage` was deprecated, please use `description` instead.')
   }
-  const statusNode = statusIcon.value && (
-    <span class={`${prefixCls}-status-icon`}>
-      <IxIcon name={statusIcon.value} />
-    </span>
-  )
+
   const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
-  const messageNode = messageSlot ? messageSlot(message.value) : message.value
+  const inputNode = (
+    <div class={`${prefixCls}-control-input`}>
+      <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
+      {statusIcon.value && (
+        <span class={`${prefixCls}-status-icon`}>
+          <IxIcon name={statusIcon.value} />
+        </span>
+      )}
+      {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
+    </div>
+  )
+  const tooltipProps = convertTooltipProps(mergedMessageTooltip.value, message.value, prefixCls)
+
   const _descriptionSlot = extraSlot || extraMessageSlot || descriptionSlot
   const descriptionNode = _descriptionSlot ? _descriptionSlot() : extra || extraMessage || description
+
+  const children: VNodeChild[] = []
+  if (tooltipProps) {
+    const tooltipSlots = {
+      default: () => inputNode,
+      title: messageSlot,
+    }
+    children.push(<IxTooltip v-slots={tooltipSlots} {...tooltipProps} />)
+  } else {
+    children.push(inputNode)
+    const messageNode = messageSlot ? messageSlot() : message.value
+    if (!descriptionNode || messageNode) {
+      children.push(
+        <div class={`${prefixCls}-message`}>
+          <Transition name={`${common.prefixCls}-fade-down`}>
+            {messageNode && <div class={`${prefixCls}-message-${status.value}`}>{messageNode}</div>}
+          </Transition>
+        </div>,
+      )
+    }
+  }
+
+  if (descriptionNode) {
+    children.push(<div class={`${prefixCls}-description`}>{descriptionNode}</div>)
+  }
+
   return (
     <IxCol class={`${prefixCls}-control`} {...controlColConfig.value}>
-      <div class={`${prefixCls}-control-input`}>
-        <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
-        {statusNode}
-        {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
-      </div>
-      {message.value && <div class={`${prefixCls}-message`}>{messageNode}</div>}
-      {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
+      {children}
     </IxCol>
   )
+}
+
+function convertTooltipProps(
+  messageTooltip: boolean | TooltipProps | undefined,
+  title: string | undefined,
+  prefixCls: string,
+): (TooltipProps & { class: string }) | undefined {
+  if (!messageTooltip) {
+    return undefined
+  }
+  const tooltipProps: TooltipProps & { class: string } = {
+    class: `${prefixCls}-message-tooltip`,
+    offset: [0, 6],
+    placement: 'bottomStart',
+    title,
+  }
+  return isBoolean(messageTooltip) ? tooltipProps : { ...tooltipProps, ...messageTooltip }
 }
 
 function renderTooltip(slot: Slot | undefined, tooltip: string | undefined, iconName: string | undefined) {

@@ -8,6 +8,7 @@
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { ColProps, RowProps } from '@idux/components/grid'
+import type { TooltipProps } from '@idux/components/tooltip'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 const colProp = [Number, String, Object] as PropType<number | string | ColProps>
@@ -31,6 +32,7 @@ export const formProps = {
   labelCol: colProp,
   labelTooltipIcon: String,
   layout: String as PropType<FormLayout>,
+  messageTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps>, default: false },
   size: String as PropType<FormSize>,
   /**
    * @deprecated
@@ -45,11 +47,6 @@ export type FormProps = ExtractInnerPropTypes<typeof formProps>
 export type FormPublicProps = Omit<ExtractPublicPropTypes<typeof formProps>, 'hasFeedback' | 'statusIcon'>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
-
-export type FormColType = number | string | ColProps
-export type FormLabelAlign = 'start' | 'end'
-export type FormLayout = 'horizontal' | 'vertical' | `inline`
-export type FormSize = 'sm' | 'md' | 'lg'
 
 export const formItemProps = {
   colonless: {
@@ -86,7 +83,10 @@ export const formItemProps = {
     type: Boolean,
     default: false,
   },
-  message: [String, Function, Object] as PropType<string | ((control: AbstractControl) => string)>,
+  message: [String, Function, Object] as PropType<
+    string | ((control?: AbstractControl) => string) | Partial<Record<ValidateStatus, string>>
+  >,
+  messageTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps>, default: undefined },
   status: String as PropType<ValidateStatus>,
   /**
    * @deprecated
@@ -117,3 +117,8 @@ export type FormWrapperComponent = DefineComponent<
   Omit<HTMLAttributes, keyof FormWrapperPublicProps> & FormWrapperPublicProps
 >
 export type FormWrapperInstance = InstanceType<DefineComponent<FormItemProps>>
+
+export type FormColType = number | string | ColProps
+export type FormLabelAlign = 'start' | 'end'
+export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormSize = 'sm' | 'md' | 'lg'

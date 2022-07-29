@@ -42,7 +42,7 @@ export function useTooltipOverlay(
       clickOutside: trigger === 'click' || trigger === 'contextmenu',
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
-      offset: defaultOffset,
+      offset: props.offset ?? defaultOffset,
       showArrow: true,
       placement: props.placement ?? config.placement,
       target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,

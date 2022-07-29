@@ -6,20 +6,15 @@
  */
 
 import type { PopperEvents, PopperOptions, PopperPlacement, PopperTriggerEvents } from './types'
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef } from 'vue'
 
 import { computed, reactive, ref, watch } from 'vue'
 
 import { NoopFunction, NoopObject } from '@idux/cdk/utils'
 
-export function useElement<T>(): Ref<T | null> {
-  const element: Ref<T | null> = ref(null)
-  return element
-}
-
 const defaultDelay = 0
 
-export function useState(options: PopperOptions): Required<PopperOptions> {
+export function useReactiveOptions(options: PopperOptions): Required<PopperOptions> {
   const {
     allowEnter = true,
     autoAdjust = true,
