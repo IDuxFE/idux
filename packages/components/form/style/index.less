@@ -1,4 +1,6 @@
 @import '../../style/mixins/reset.less';
+@import '../../style/motion/fade.less';
+
 @import './mixin.less';
 @import './status.less';
 @import './layout.less';
@@ -22,11 +24,13 @@
 .@{form-item-prefix} {
   .reset-component();
 
-  margin-bottom: @form-item-margin-bottom;
-  vertical-align: top;
+  &-message-tooltip.@{tooltip-prefix} {
+    background-color: fade(@form-item-invalid-color, 80%);
+    color: @color-white;
 
-  &-with-message {
-    margin-bottom: 0;
+    .@{overlay-prefix}-arrow {
+      color: fade(@form-item-invalid-color, 80%);
+    }
   }
 
   &-label {
@@ -118,8 +122,5 @@
     color: @form-color-secondary;
     font-size: @form-item-font-size;
     line-height: @form-line-height;
-    transition: color @transition-duration-base @ease-in-out;
-
-    .form-message-extra-distance((@form-item-margin-bottom - @form-item-font-height) / 2);
   }
 }

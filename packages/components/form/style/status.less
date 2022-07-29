@@ -1,4 +1,5 @@
 .@{form-item-prefix} {
+   // TODO: Deprecated
   &-status-icon {
     position: absolute;
     top: 50%;
@@ -15,6 +16,7 @@
     pointer-events: none;
   }
 
+  // TODO: Deprecated
   &-with-status-icon {
     // input
     .@{idux-prefix}-input {
@@ -27,11 +29,7 @@
   }
 
   // === invalid ===
-  &-invalid {
-    .@{form-item-prefix}-message {
-      color: @form-item-invalid-color;
-    }
-
+  &-invalid > &-control {
     .@{form-item-prefix}-status-icon {
       color: @form-item-invalid-color;
     }
@@ -150,26 +148,30 @@
     }
   }
 
-  // === Validating ===
-  &-validating {
-    .@{form-item-prefix}-message {
-      color: @form-item-validating-color;
-    }
+  &-message-invalid {
+    color: @form-item-invalid-color;
+  }
 
+  // === Validating ===
+  &-validating > &-control {
     .@{form-item-prefix}-status-icon {
       display: inline-block;
       color: @form-item-validating-color;
     }
   }
 
-  // === valid ===
-  &-valid {
-    .@{form-item-prefix}-message {
-      color: @form-item-valid-color;
-    }
+  &-message-validating {
+    color: @form-item-validating-color;
+  }
 
+  // === valid ===
+  &-valid > &-control {
     .@{form-item-prefix}-status-icon {
       color: @form-item-valid-color;
     }
+  }
+
+  &-message-valid {
+    color: @form-item-valid-color;
   }
 }

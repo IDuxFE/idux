@@ -5,12 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperElement, PopperInstance, PopperOptions } from './types'
-import type { Instance } from '@popperjs/core'
+import { type WatchStopHandle, ref, watch } from 'vue'
 
-import { WatchStopHandle, watch } from 'vue'
-
-import { createPopper } from '@popperjs/core'
+import { type Instance, createPopper } from '@popperjs/core'
 import { isEqual } from 'lodash-es'
 
 import { convertElement } from '@idux/cdk/utils'
@@ -18,14 +15,14 @@ import { convertElement } from '@idux/cdk/utils'
 import {
   useBaseOptions,
   useDelay,
-  useElement,
   usePlacement,
   usePopperEvents,
-  useState,
+  useReactiveOptions,
   useTimer,
   useTriggerEvents,
   useVisibility,
 } from './hooks'
+import { type PopperElement, type PopperInstance, type PopperOptions } from './types'
 import { convertOptions } from './utils'
 
 export function usePopper<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement>(
@@ -33,11 +30,11 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
 ): PopperInstance<TE, PE> {
   let popperInstance: Instance | null = null
 
-  const triggerRef = useElement<TE>()
-  const popperRef = useElement<PE>()
-  const arrowRef = useElement<HTMLElement>()
+  const triggerRef = ref<TE>()
+  const popperRef = ref<PE>()
+  const arrowRef = ref<HTMLElement>()
 
-  const state = useState(options)
+  const state = useReactiveOptions(options)
   const baseOptions = useBaseOptions(state)
   const visibility = useVisibility(state)
   const { placement, updatePlacement } = usePlacement(state)
@@ -126,11 +123,15 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
     }
   })
 
-  watch([baseOptions, arrowRef], ([currBaseOptions, arrowElement]) => {
-    popperInstance?.setOptions(
-      convertOptions(currBaseOptions, { arrowElement: convertElement(arrowElement), updatePlacement }),
-    )
-  })
+  watch(
+    [baseOptions, arrowRef],
+    ([currBaseOptions, arrowElement]) => {
+      popperInstance?.setOptions(
+        convertOptions(currBaseOptions, { arrowElement: convertElement(arrowElement), updatePlacement }),
+      )
+    },
+    { flush: 'post' },
+  )
 
   return {
     visibility,

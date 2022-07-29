@@ -43,12 +43,3 @@
     min-height: @form-height;
   }
 }
-
-.form-message-extra-distance(@distance) when (@distance >= 0) {
-  padding-top: floor(@distance);
-}
-
-.form-message-extra-distance(@distance) when (@distance < 0) {
-  margin-top: ceil(@distance);
-  margin-bottom: ceil(@distance);
-}

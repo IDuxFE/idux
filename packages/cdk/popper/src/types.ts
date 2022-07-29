@@ -136,7 +136,7 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * The truth DOM node of the trigger.
    * The caller needs to bind the variable to the view.
    */
-  triggerRef: Ref<TE | null>
+  triggerRef: Ref<TE | undefined>
   /**
    * Manually bind to the event on the trigger.
    */
@@ -145,7 +145,7 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * The truth DOM node of the popper.
    * The caller needs to bind the variable to the view.
    */
-  popperRef: Ref<PE | null>
+  popperRef: Ref<PE | undefined>
   /**
    * Manually bind to events on the popper.
    */
@@ -154,5 +154,5 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * The truth DOM node of the arrow.
    * The caller needs to bind the variable to the view.
    */
-  arrowRef: Ref<HTMLElement | null>
+  arrowRef: Ref<HTMLElement | undefined>
 }

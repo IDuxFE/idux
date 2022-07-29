@@ -1,12 +1,12 @@
 <template>
   <IxForm class="demo-form" labelCol="6">
-    <IxFormItem label="Valid" status="valid" :message="messageMap.valid">
+    <IxFormItem label="Valid" status="valid" :message="messageMap">
       <IxInput v-model:value="formValue.valid"></IxInput>
     </IxFormItem>
-    <IxFormItem label="Validating" status="validating" :message="messageMap.validating">
+    <IxFormItem label="Validating" status="validating" :message="messageMap">
       <IxInput v-model:value="formValue.validating"></IxInput>
     </IxFormItem>
-    <IxFormItem label="Invalid" status="invalid" :message="messageMap.invalid">
+    <IxFormItem label="Invalid" status="invalid" :message="messageMap">
       <IxInput v-model:value="formValue.invalid"></IxInput>
     </IxFormItem>
     <IxFormItem label="Dynamic" :status="status" :message="getMessage">

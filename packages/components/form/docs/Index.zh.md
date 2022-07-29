@@ -22,6 +22,7 @@ order: 0
 | `labelCol` | 配置 `IxFormItem` 的 `labelCol` 默认值 | `number \| ColProps` | - | - | - |
 | `labelTooltipIcon` | 配置表单文本的提示信息icon | `string` | `'question-circle'` | ✅ | - |
 | `layout` | 表单布局 | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | ✅ | - |
+| `messageTooltip` | 以 tooltip 的形式提示错误信息 | `boolean \| TooltipProps` | `false` | - | - |
 | `size` | 表单大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 
 ### IxFormItem
@@ -48,6 +49,7 @@ order: 0
 | `labelTooltipIcon` | 配置表单文本的提示信息icon | `string` | - | -| - |
 | `required` | 必填样式设置 | `boolean` | `false` | - | 仅控制样式 |
 | `message` | 手动指定表单项的校验提示 | `string \| (control?: AbstractControl) => string` | - | - | 传入 `string` 时，为 `invalid` 状态的提示 |
+| `messageTooltip` | 以 tooltip 的形式提示错误信息 | `boolean \| TooltipProps` | `false` | - | - |
 | `status` | 手动指定表单项的校验状态 | `valid \| invalid \| validating` | - | - | - |
 
 ### IxFormWrapper

@@ -93,9 +93,9 @@ function useStatus(props: FormItemProps, control: Ref<AbstractControl | undefine
     if (!currControl) {
       return undefined
     }
-    const { trigger, dirty, blurred } = currControl
+    const { trigger, dirty, blurred, status } = currControl
     if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
-      return currControl.status.value
+      return status.value
     }
     return undefined
   })
@@ -140,29 +140,29 @@ function useMessage(
   status: ComputedRef<ValidateStatus | undefined>,
 ) {
   const locale = useGlobalConfig('locale')
-  /**
-   * @deprecated
-   */
-  const messages = computed(() => {
-    const message = props.message
-    return isString(message) || isFunction(message) ? { invalid: message } : message || {}
-  })
+
   return computed(() => {
     const currStatus = status.value
     if (!currStatus) {
       return undefined
     }
 
-    const currMessage = messages.value[currStatus]
+    const currMessage = props.message
     if (currMessage) {
-      return isString(currMessage) ? currMessage : currMessage(control.value!)
+      if (isFunction(currMessage)) {
+        return currMessage(control.value)
+      }
+      if (isObject(currMessage)) {
+        return currMessage[currStatus]
+      }
+      return currStatus === 'invalid' ? currMessage : undefined
     }
 
-    return getMessage(control, locale)
+    return getMessageByControl(control, locale)
   })
 }
 
-function getMessage(control: Ref<AbstractControl | undefined>, locale: Locale) {
+function getMessageByControl(control: Ref<AbstractControl | undefined>, locale: Locale) {
   const currControl = control.value
   if (!currControl) {
     return undefined
@@ -180,11 +180,10 @@ function getMessage(control: Ref<AbstractControl | undefined>, locale: Locale) {
         return message(rest, currControl)
       }
 
-      const currMessage = message[locale.type]
-      if (isString(currMessage)) {
-        return currMessage
+      const i18nMessage = message[locale.type]
+      if (i18nMessage) {
+        return isFunction(i18nMessage) ? i18nMessage(rest, currControl) : i18nMessage
       }
-      return currMessage(rest, currControl)
     }
   }
   return undefined

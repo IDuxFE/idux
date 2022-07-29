@@ -16,3 +16,25 @@
 
 .fade-motion(fade);
 .fade-motion(fade-fast, @transition-duration-fast);
+
+.@{idux-prefix}-fade-down {
+  &-enter-active{
+    transition: opacity @transition-duration-fast @ease-in-out, transform @transition-duration-fast @ease-in-out;
+  }
+
+  &-leave-active {
+    transition: opacity @transition-duration-fast @ease-in-out, transform @transition-duration-fast @ease-in-out;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  &-enter-to,
+  &-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
