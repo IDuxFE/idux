@@ -474,33 +474,33 @@ describe('Form', () => {
         slots: { default: () => h(IxInput) },
       })
 
-      expect(wrapper.find('.ix-form-item-message').exists()).toBe(false)
+      expect(wrapper.find('.ix-form-item-message-valid').exists()).toBe(false)
 
       await wrapper.setProps({ status: 'valid' })
 
-      expect(wrapper.find('.ix-form-item-message').exists()).toBe(false)
+      expect(wrapper.find('.ix-form-item-message-valid').exists()).toBe(false)
 
       await wrapper.setProps({ status: 'invalid' })
 
-      expect(wrapper.find('.ix-form-item-message').text()).toBe(message)
+      expect(wrapper.find('.ix-form-item-message-invalid').text()).toBe(message)
 
       message = 'message2'
       await wrapper.setProps({ message })
 
-      expect(wrapper.find('.ix-form-item-message').text()).toBe(message)
+      expect(wrapper.find('.ix-form-item-message-invalid').text()).toBe(message)
 
       message = { valid: 'valid message', invalid: 'invalid message', validating: 'validating message' }
       await wrapper.setProps({ message })
 
-      expect(wrapper.find('.ix-form-item-message').text()).toBe(message.invalid)
+      expect(wrapper.find('.ix-form-item-message-invalid').text()).toBe(message.invalid)
 
       await wrapper.setProps({ status: 'valid' })
 
-      expect(wrapper.find('.ix-form-item-message').text()).toBe(message.valid)
+      expect(wrapper.find('.ix-form-item-message-valid').text()).toBe(message.valid)
 
       await wrapper.setProps({ status: 'validating' })
 
-      expect(wrapper.find('.ix-form-item-message').text()).toBe(message.validating)
+      expect(wrapper.find('.ix-form-item-message-validating').text()).toBe(message.validating)
     })
 
     test('status work', async () => {
