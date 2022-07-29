@@ -27,8 +27,9 @@ import {
 import { clickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode, useZIndex } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useZIndex } from '@idux/components/utils'
 
 import { overlayProps } from './types'
 
@@ -92,9 +93,8 @@ export default defineComponent({
     }
 
     return () => {
-      const triggerNodes = slots.default?.()
-      const triggerNode = getFirstValidNode(triggerNodes)
-      if (!triggerNode || triggerNodes!.length > 1) {
+      const triggerNode = getFirstValidNode(slots.default?.())
+      if (!triggerNode) {
         __DEV__ && Logger.warn('components/overlay', 'Trigger must is single rooted node')
         return null
       }

@@ -20,9 +20,9 @@ import {
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
-import { useZIndex } from '@idux/cdk/utils/src/zIndex'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
+import { useZIndex } from '@idux/components/utils'
 
 import ModalWrapper from './ModalWrapper'
 import { MODAL_TOKEN, modalToken } from './token'
