@@ -104,6 +104,31 @@ export interface NotificationRef {
 }
 ```
 
+### 拿到 content 实例的引用
+
+当 content 为 VNode 时，可以通过 contentProps 传入一个 ref 引用。
+
+```html
+<template>
+  <IxButton @click="openNotification">Open</IxButton>
+</template>
+
+<script setup lang="ts">
+import { h, ref } from 'vue'
+import { useNotification } from '@idux/components/notification'
+
+const { open } = useNotification()
+
+const contentRef = ref()
+
+const openNotification = () => open({ 
+  title: 'Basic Notification', 
+  content: h('div', 'Some contents...'),
+  contentProps: { ref: contentRef }
+})
+</script>
+```
+
 <!--- insert less variable begin  --->
 ## 主题变量
 
