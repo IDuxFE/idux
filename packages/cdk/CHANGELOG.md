@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.0](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.21...v1.0.0-rc.0) (2022-07-29)
+
+
+### Features
+
+* **cdk:utils:** add zIndex manager ([#1015](https://github.com/IDuxFE/idux/issues/1015)) ([03e6aa5](https://github.com/IDuxFE/idux/commit/03e6aa50de21277528ca890e7f16b0cb5762c6b8)), closes [#998](https://github.com/IDuxFE/idux/issues/998)
+* **comp:form:** support for displaying message in tooltip ([#1047](https://github.com/IDuxFE/idux/issues/1047)) ([67222d1](https://github.com/IDuxFE/idux/commit/67222d1dbeaae688e51fe7ee68d45bdf9646ee01))
+
+
+
+
+
 # [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
 
 

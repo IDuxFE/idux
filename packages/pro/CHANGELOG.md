@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.0](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.21...v1.0.0-rc.0) (2022-07-29)
+
+
+### Bug Fixes
+
+* **pro:search:** fix overflowed style to be overlap with elements below，fix overlay position update on item deleted ([#1030](https://github.com/IDuxFE/idux/issues/1030)) ([a6190aa](https://github.com/IDuxFE/idux/commit/a6190aa660446bddc07b8a6a8119b10ab77c9e83))
+* **pro:tree:** onSearch cannot get the latest searchValue value ([#1043](https://github.com/IDuxFE/idux/issues/1043)) ([29adb34](https://github.com/IDuxFE/idux/commit/29adb34bfd2c362504b8d77d7a75e8e9b793d6bb))
+
+
+### Features
+
+* **comp:table:** ellipsis supports hidden the title ([#1044](https://github.com/IDuxFE/idux/issues/1044)) ([70a6d4a](https://github.com/IDuxFE/idux/commit/70a6d4a338dfb6bb3d7b1bbcf537bcd1fad4e0ab)), closes [#1035](https://github.com/IDuxFE/idux/issues/1035)
+
+
+
+
+
 # [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
 
 

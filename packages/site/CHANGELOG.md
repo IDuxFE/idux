@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.0](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.21...v1.0.0-rc.0) (2022-07-29)
+
+
+### Features
+
+* **comp:loading-bar:** add LoadingBar component ([#971](https://github.com/IDuxFE/idux/issues/971)) ([#1023](https://github.com/IDuxFE/idux/issues/1023)) ([f948786](https://github.com/IDuxFE/idux/commit/f9487866fb7b10186097fd2714416cce5f430343))
+* **scripts:** add dynamic theme vite-plugin ([#1034](https://github.com/IDuxFE/idux/issues/1034)) ([556a4df](https://github.com/IDuxFE/idux/commit/556a4dfcfe87729dbe92e49e2ed691b8cc459fe6))
+
+
+
+
+
 # [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
 
 **Note:** Version bump only for package @idux/site

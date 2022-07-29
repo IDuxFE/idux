@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.0](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.21...v1.0.0-rc.0) (2022-07-29)
+
+
+### Bug Fixes
+
+* **comp:form:** repair the form-item-input-content centering ([#1032](https://github.com/IDuxFE/idux/issues/1032)) ([785abb5](https://github.com/IDuxFE/idux/commit/785abb5e1d0886a1c58b98055016a0808025b912)), closes [IDuxFE#1019](https://github.com/IDuxFE/issues/1019) [#1019](https://github.com/IDuxFE/idux/issues/1019)
+* **comp:menu:** hover event cannot be triggered when animating ([#1041](https://github.com/IDuxFE/idux/issues/1041)) ([7582c6c](https://github.com/IDuxFE/idux/commit/7582c6cd31781aec690ce2926e32151bd5ed0670)), closes [#1013](https://github.com/IDuxFE/idux/issues/1013)
+* **pro:search:** fix overflowed style to be overlap with elements below，fix overlay position update on item deleted ([#1030](https://github.com/IDuxFE/idux/issues/1030)) ([a6190aa](https://github.com/IDuxFE/idux/commit/a6190aa660446bddc07b8a6a8119b10ab77c9e83))
+* **pro:tree:** onSearch cannot get the latest searchValue value ([#1043](https://github.com/IDuxFE/idux/issues/1043)) ([29adb34](https://github.com/IDuxFE/idux/commit/29adb34bfd2c362504b8d77d7a75e8e9b793d6bb))
+
+
+### Features
+
+* **cdk:utils:** add zIndex manager ([#1015](https://github.com/IDuxFE/idux/issues/1015)) ([03e6aa5](https://github.com/IDuxFE/idux/commit/03e6aa50de21277528ca890e7f16b0cb5762c6b8)), closes [#998](https://github.com/IDuxFE/idux/issues/998)
+* **comp:date-picker:** timeFormat is now infered from format by default ([#1045](https://github.com/IDuxFE/idux/issues/1045)) ([0bb2f8e](https://github.com/IDuxFE/idux/commit/0bb2f8e3cf008cf6c8ff59a2ee403836f549bd87))
+* **comp:form:** support for displaying message in tooltip ([#1047](https://github.com/IDuxFE/idux/issues/1047)) ([67222d1](https://github.com/IDuxFE/idux/commit/67222d1dbeaae688e51fe7ee68d45bdf9646ee01))
+* **comp:loading-bar:** add LoadingBar component ([#971](https://github.com/IDuxFE/idux/issues/971)) ([#1023](https://github.com/IDuxFE/idux/issues/1023)) ([f948786](https://github.com/IDuxFE/idux/commit/f9487866fb7b10186097fd2714416cce5f430343))
+* **comp:notification:** support contentProps ([#1014](https://github.com/IDuxFE/idux/issues/1014)) ([#1046](https://github.com/IDuxFE/idux/issues/1046)) ([0057697](https://github.com/IDuxFE/idux/commit/005769777a0a5eda0e9f87922fa51f1a4a3847ea))
+* **comp:table:** ellipsis supports hidden the title ([#1044](https://github.com/IDuxFE/idux/issues/1044)) ([70a6d4a](https://github.com/IDuxFE/idux/commit/70a6d4a338dfb6bb3d7b1bbcf537bcd1fad4e0ab)), closes [#1035](https://github.com/IDuxFE/idux/issues/1035)
+* **comp:watermark:** add anti-tamper feature ([#1022](https://github.com/IDuxFE/idux/issues/1022)) ([c301d95](https://github.com/IDuxFE/idux/commit/c301d95f460e76c6b1cc66bdcd04a51b335bb62e))
+* **scripts:** add dynamic theme vite-plugin ([#1034](https://github.com/IDuxFE/idux/issues/1034)) ([556a4df](https://github.com/IDuxFE/idux/commit/556a4dfcfe87729dbe92e49e2ed691b8cc459fe6))
+
+
+
+
+
 # [1.0.0-beta.21](https://github.com/IDuxFE/idux/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-07-21)
 
 
