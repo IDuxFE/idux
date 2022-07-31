@@ -148,7 +148,7 @@ function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: Fo
   })
 }
 
-function renderSuffix(
+export function renderSuffix(
   isClearable: boolean,
   clearIconSlot: Slot | undefined,
   clearIcon: string,
@@ -156,7 +156,7 @@ function renderSuffix(
   onClear: (evt: MouseEvent) => void,
   prefixCls: string,
   isScroll: boolean,
-) {
+): JSX.Element | null {
   if (!isClearable) {
     return null
   }

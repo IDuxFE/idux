@@ -2,7 +2,7 @@ import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import IxTextarea from '../src/Textarea'
+import IxTextarea, { renderSuffix } from '../src/Textarea'
 import { TextareaProps } from '../src/types'
 
 describe('Textarea', () => {
@@ -98,6 +98,7 @@ describe('Textarea', () => {
   test('clearable work', async () => {
     const onClear = vi.fn()
     const wrapper = TextareaMount({ props: { clearable: true, onClear } })
+    const renderSuffixFn = vi.fn(renderSuffix)
 
     expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
     expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(true)
@@ -109,6 +110,10 @@ describe('Textarea', () => {
     await wrapper.setProps({ value: 'value' })
 
     expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(false)
+
+    const res = (renderSuffixFn(true, undefined, '', true, onClear, '', true)?.props as { class: '' }).class
+
+    expect(res).toBe('-suffix -suffix-scroll')
 
     await wrapper.setProps({ disabled: true })
 
