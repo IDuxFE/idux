@@ -171,7 +171,7 @@ export default defineComponent({
             <Expand expanded={expanded} hasTopLine={hasTopLine.value} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
           )}
           {checkable && <Checkbox checkDisabled={checkDisabled} node={node} />}
-          <Content disabled={disabled.value} nodeKey={key} label={label} rawNode={rawNode} selected={selected.value} />
+          <Content disabled={disabled.value} node={node} nodeKey={key} label={label} selected={selected.value} />
         </div>
       )
     }

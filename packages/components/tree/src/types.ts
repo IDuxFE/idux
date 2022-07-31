@@ -39,6 +39,10 @@ export const treeProps = {
     type: String as PropType<CheckStrategy>,
     default: 'all',
   },
+  checkOnClick: {
+    type: Boolean,
+    default: false,
+  },
   customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
   dataSource: {
     type: Array as PropType<TreeNode[]>,
@@ -285,15 +289,15 @@ export const treeNodeContentProps = {
     type: Boolean,
     default: undefined,
   },
+  node: {
+    type: Object as PropType<MergedNode>,
+    required: true,
+  },
   nodeKey: {
     type: [String, Number, Symbol] as PropType<VKey>,
     required: true,
   },
   label: String,
-  rawNode: {
-    type: Object as PropType<TreeNode>,
-    required: true,
-  },
   selected: {
     type: Boolean,
     default: undefined,

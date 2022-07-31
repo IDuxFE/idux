@@ -93,6 +93,7 @@ export default defineComponent({
         cascade: true,
         childrenKey: props.childrenKey,
         checkable: props.checkable,
+        checkOnClick: props.checkOnClick,
         checkStrategy: props.cascaderStrategy,
         customAdditional: props.customAdditional,
         dataSource: props.dataSource,

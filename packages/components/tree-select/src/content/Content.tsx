@@ -8,13 +8,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { TreeSelectNode } from '../types'
-import type { VKey } from '@idux/cdk/utils'
 
 import { computed, defineComponent, inject, ref } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
-import { callEmit, useControlledProp } from '@idux/cdk/utils'
+import { NoopFunction, VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
 import { IxTree } from '@idux/components/tree'
@@ -48,6 +47,9 @@ export default defineComponent({
 
     const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
     const expandAllBtnStatus = ref(false)
+
+    const mergedCheckable = computed(() => props.multiple && props.checkable)
+    const mergedCascade = computed(() => mergedCheckable.value && props.cascade)
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: any[]) => {
       const { onScrolledChange } = props
@@ -121,9 +123,6 @@ export default defineComponent({
     const handleInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
     const handleClear = () => setInputValue('')
 
-    const checkable = computed(() => props.multiple && props.checkable)
-    const cascade = computed(() => checkable.value && props.cascade)
-
     return () => {
       const {
         checkStrategy,
@@ -173,13 +172,14 @@ export default defineComponent({
           ref={treeRef}
           v-slots={treeSlots}
           blocked
+          checkOnClick
           checkedKeys={selectedValue.value}
           customAdditional={customAdditional}
           expandedKeys={expandedKeys.value}
           loadedKeys={loadedKeys.value}
           labelKey={mergedLabelKey.value}
-          checkable={checkable.value}
-          cascade={cascade.value}
+          checkable={mergedCheckable.value}
+          cascade={mergedCascade.value}
           childrenKey={mergedChildrenKey.value}
           checkStrategy={checkStrategy}
           dataSource={dataSource}
@@ -213,7 +213,7 @@ export default defineComponent({
           onSelect={handleSelect}
           onLoaded={onLoaded}
           onCheckedChange={changeSelected}
-          onSelectedChange={changeSelected}
+          onSelectedChange={!mergedCheckable.value ? changeSelected : NoopFunction}
           onExpandedChange={handleExpandedChange}
           onScroll={onScroll}
           onScrolledBottom={onScrolledBottom}

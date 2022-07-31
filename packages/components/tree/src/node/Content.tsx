@@ -19,23 +19,33 @@ import { treeNodeContentProps } from '../types'
 export default defineComponent({
   props: treeNodeContentProps,
   setup(props) {
-    const { props: treeProps, mergedPrefixCls, slots, handleSelect, searchedKeys } = inject(treeToken)!
+    const {
+      props: treeProps,
+      mergedPrefixCls,
+      mergedCheckOnClick,
+      slots,
+      handleSelect,
+      handleCheck,
+      searchedKeys,
+    } = inject(treeToken)!
 
     const searched = computed(() => searchedKeys.value.includes(props.nodeKey))
 
     const onClick = (evt: Event) => {
       if (!props.disabled) {
         handleSelect(props.nodeKey)
+        mergedCheckOnClick.value && handleCheck(props.node)
       }
-      callEmit(treeProps.onNodeClick, evt, props.rawNode)
+      callEmit(treeProps.onNodeClick, evt, props.node.rawNode)
     }
 
     const onContextmenu = (evt: Event) => {
-      callEmit(treeProps.onNodeContextmenu, evt, props.rawNode)
+      callEmit(treeProps.onNodeContextmenu, evt, props.node.rawNode)
     }
 
     return () => {
-      const { nodeKey, label, rawNode, selected } = props
+      const { nodeKey, label, node, selected } = props
+      const { rawNode } = node
       const { prefix, suffix } = rawNode
 
       const iconProps = { key: nodeKey, selected, node: rawNode }
