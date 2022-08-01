@@ -44,6 +44,18 @@
       cursor: pointer;
     }
   }
+
+  .@{table-prefix}-container {
+    .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-content {
+      table > thead > tr:first-child {
+        th:last-child {
+          .@{table-prefix}-sortable-trigger {
+            margin-right: 12px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .cdk-resizable {
