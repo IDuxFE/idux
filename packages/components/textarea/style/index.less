@@ -65,18 +65,22 @@
     }
   }
 
-  &-suffix {
+  &-clear {
     position: absolute;
-    color: @textarea-placeholder-color;
-    transition: color @transition-duration-base;
+    z-index: 1;
     cursor: pointer;
+    opacity: 0;
+    color: @textarea-placeholder-color;
+    transition: @transition-all-base;
 
     &:hover {
       color: @textarea-color-secondary;
     }
+  }
 
-    &-hidden {
-      visibility: hidden;
+  &-clearable {
+    .@{textarea-prefix}-clear.visible {
+      opacity: 1;
     }
   }
 

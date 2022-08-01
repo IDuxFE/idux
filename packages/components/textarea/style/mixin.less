@@ -3,9 +3,15 @@
   .@{textarea-prefix}-inner {
     padding: @padding-vertical @padding-horizontal;
   }
-  .@{textarea-prefix}-suffix {
+  .@{textarea-prefix}-clear {
     top: @padding-vertical;
     right: @padding-horizontal;
+  }
+
+  &.@{textarea-prefix}-clearable {
+    .@{textarea-prefix}-inner {
+      padding-right: @padding-horizontal + @font-size;
+    }
   }
 }
 

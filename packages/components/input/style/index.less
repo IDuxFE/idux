@@ -236,30 +236,20 @@
     cursor: pointer;
     opacity: 0;
     color: @input-icon-color;
-    background-color: @input-background-color;
     transition: @transition-all-base;
-    :hover {
+
+    &:hover {
       color: @input-icon-hover-color;
     }
   }
 
   &-clearable {
-    &:hover {
-      .@{input-prefix}-clear.visible {
-        opacity: 1;
-      }
+    .@{input-prefix}-clear.visible {
+      opacity: 1;
     }
 
-    &.@{input-prefix}-sm .@{input-prefix}-clear {
-      right: @input-padding-horizontal-sm - 4;
-    }
-
-    &.@{input-prefix}-md .@{input-prefix}-clear {
-      right: @input-padding-horizontal-md - 4;
-    }
-
-    &.@{input-prefix}-lg .@{input-prefix}-clear {
-      right: @input-padding-horizontal-lg - 4;
+    .@{input-prefix}-inner {
+      padding-right: @input-icon-font-size + 2;
     }
   }
 

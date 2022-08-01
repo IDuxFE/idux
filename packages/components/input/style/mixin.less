@@ -16,6 +16,12 @@
 .input-size(@font-size; @padding-vertical; @padding-horizontal;) {
   font-size: @font-size;
   padding: @padding-vertical (@padding-horizontal - 4) @padding-vertical @padding-horizontal;
+
+  &.@{input-prefix}-clearable {
+    .@{input-prefix}-clear {
+      right: @padding-horizontal - 4;
+    }
+  }
 }
 
 .input-hover(@color: @input-hover-color) {
