@@ -99,28 +99,29 @@ describe('Textarea', () => {
     const onClear = vi.fn()
     const wrapper = TextareaMount({ props: { clearable: true, onClear } })
 
-    expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(true)
-    expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('ix-textarea-clearable')
+    expect(wrapper.find('.ix-textarea-clear').classes()).not.toContain('visible')
 
-    await wrapper.find('.ix-icon-close-circle').trigger('click')
+    await wrapper.find('.ix-textarea-clear').trigger('click')
 
     expect(onClear).toBeCalled()
 
     await wrapper.setProps({ value: 'value' })
 
-    expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(false)
+    expect(wrapper.find('.ix-textarea-clear').classes()).toContain('visible')
 
     await wrapper.setProps({ disabled: true })
 
-    expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(true)
+    expect(wrapper.find('.ix-textarea-clear').classes()).not.toContain('visible')
 
     await wrapper.setProps({ disabled: false, readonly: true })
 
-    expect(wrapper.find('.ix-textarea-suffix-hidden').exists()).toBe(true)
+    expect(wrapper.find('.ix-textarea-clear').classes()).not.toContain('visible')
 
     await wrapper.setProps({ clearable: false })
 
-    expect(wrapper.find('.ix-icon-close-circle').exists()).toBe(false)
+    expect(wrapper.classes()).not.toContain('ix-textarea-clearable')
+    expect(wrapper.find('.ix-textarea-clear').exists()).toBe(false)
   })
 
   test('resize and autoRows work', async () => {

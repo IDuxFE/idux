@@ -13,13 +13,9 @@
     }
 
     &-input {
-      right: @select-padding-horizontal;
+      right: @select-padding-horizontal + @selector-font-size;
       left: @select-padding-horizontal;
     }
-  }
-
-  &.@{selector-prefix}-show-suffix &-input {
-    right: @select-padding-horizontal + @selector-font-size;
   }
 }
 
@@ -36,11 +32,6 @@
     &-item {
       position: relative;
     }
-  }
-
-  &.@{selector-prefix}-with-suffix .@{selector-prefix}-item,
-  &.@{selector-prefix}-with-suffix .@{selector-prefix}-placeholder {
-    padding-right: @select-icon-font-size;
   }
 
   &.@{selector-prefix}-opened .@{selector-prefix}-item {

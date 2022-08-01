@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, type Slot, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
+import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
@@ -53,6 +53,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
+        [`${prefixCls}-clearable`]: clearable.value,
         [`${prefixCls}-disabled`]: accessor.disabled,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-with-count`]: showCount,
@@ -90,7 +91,14 @@ export default defineComponent({
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
           />
-          {renderSuffix(clearable.value, slots.clearIcon, clearIcon.value, clearVisible.value, handleClear, prefixCls)}
+          {clearable.value && (
+            <span
+              class={normalizeClass([`${prefixCls}-clear`, clearVisible.value ? 'visible' : ''])}
+              onClick={handleClear}
+            >
+              {slots.clearIcon ? slots.clearIcon() : <IxIcon name={clearIcon.value}></IxIcon>}
+            </span>
+          )}
         </span>
       )
     }
@@ -114,28 +122,4 @@ function useDataCount(props: TextareaProps, config: TextareaConfig, accessor: Fo
     }
     return dataCount
   })
-}
-
-function renderSuffix(
-  isClearable: boolean,
-  clearIconSlot: Slot | undefined,
-  clearIcon: string,
-  clearVisible: boolean,
-  onClear: (evt: MouseEvent) => void,
-  prefixCls: string,
-) {
-  if (!isClearable) {
-    return null
-  }
-
-  let classes = `${prefixCls}-suffix`
-  if (!clearVisible) {
-    classes += ` ${prefixCls}-suffix-hidden`
-  }
-
-  return (
-    <span class={classes} onClick={onClear}>
-      {clearIconSlot ? clearIconSlot() : <IxIcon name={clearIcon}></IxIcon>}
-    </span>
-  )
 }
