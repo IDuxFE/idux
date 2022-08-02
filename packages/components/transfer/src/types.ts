@@ -122,6 +122,7 @@ export const transferProps = {
     type: Array as PropType<TransferData[]>,
     default: (): TransferData[] => [],
   },
+  defaultTargetData: Array as PropType<TransferData[]>,
   disabled: {
     type: Boolean,
     default: false,

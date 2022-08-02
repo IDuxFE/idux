@@ -53,7 +53,9 @@ export function useTransferData<T extends TransferData = TransferData>(
   transferDataStrategies: TransferDataStrategies<T>,
   transferPaginationContext: TransferPaginationContext,
 ): TransferDataContext<T> {
-  const getKey = useGetKey(props, config, 'transfer')
+  const _getKey = useGetKey(props, config, 'transfer')
+  const getKey = computed(() => (data: T) => _getKey.value(data) ?? data.key)
+
   const {
     genDataKeys,
     genDataKeyMap,
