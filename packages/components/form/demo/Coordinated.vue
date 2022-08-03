@@ -44,11 +44,11 @@ methodControl.watchValue(value => {
   if (value === 'mobilePhone') {
     subscribeControl.disable()
     subscribeControl.setValue(false)
-    contactControl.setValidator([required, mobilePhoneValidator])
+    contactControl.setValidators([required, mobilePhoneValidator])
   } else {
     subscribeControl.enable()
     subscribeControl.setValue(true)
-    contactControl.setValidator([required, email])
+    contactControl.setValidators([required, email])
   }
 
   contactControl.reset()

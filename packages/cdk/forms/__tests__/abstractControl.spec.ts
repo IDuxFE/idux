@@ -68,13 +68,13 @@ describe('abstractControl.ts', () => {
       expect(control.trigger).toEqual('change')
     })
 
-    test('setValidator work', async () => {
+    test('setValidators work', async () => {
       const { required, minLength, email } = Validators
-      control.setValidator(required)
+      control.setValidators(required)
 
       expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
 
-      control.setValidator([email, minLength(5)])
+      control.setValidators([email, minLength(5)])
       control.setValue('test')
 
       expect(await control.validate()).toEqual({
@@ -88,7 +88,7 @@ describe('abstractControl.ts', () => {
       })
     })
 
-    test('setAsyncValidator work', async () => {
+    test('setAsyncValidators work', async () => {
       const _asyncValidator = (key: string, error: unknown): AsyncValidatorFn => {
         return (_: unknown) => {
           return Promise.resolve({ [key]: error } as ValidateErrors)
@@ -97,11 +97,11 @@ describe('abstractControl.ts', () => {
       const message1 = { message: 1 }
       const message2 = { message: 2 }
 
-      control.setAsyncValidator(_asyncValidator('a', message1))
+      control.setAsyncValidators(_asyncValidator('a', message1))
 
       expect(await control.validate()).toEqual({ a: message1 })
 
-      control.setAsyncValidator([_asyncValidator('a', message1), _asyncValidator('b', message2)])
+      control.setAsyncValidators([_asyncValidator('a', message1), _asyncValidator('b', message2)])
 
       expect(await control.validate()).toEqual({ a: message1, b: message2 })
     })
@@ -172,7 +172,7 @@ describe('abstractControl.ts', () => {
       const log = vi.fn()
       const stop = control.watchStatus(value => log(value))
 
-      control.setValidator(Validators.required)
+      control.setValidators(Validators.required)
       control.setValue('')
       await flushPromises()
 

@@ -33,7 +33,7 @@ import {
   type ValidatorFn,
   type ValidatorOptions,
 } from './types'
-import { Validators } from './validators'
+import { Validators, addValidators, hasValidator, removeValidators } from './validators'
 
 type IsNullable<T, K> = undefined extends T ? K : never
 
@@ -177,8 +177,10 @@ export abstract class AbstractControl<T = any> {
   protected _blurred = ref(false)
   protected _dirty = ref(false)
 
-  private _validators: ValidatorFn | undefined
-  private _asyncValidators: AsyncValidatorFn | undefined
+  private _validators: ValidatorFn | ValidatorFn[] | undefined
+  private _composedValidators: ValidatorFn | undefined
+  private _asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | undefined
+  private _composedAsyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
   private _trigger?: 'change' | 'blur' | 'submit'
   private _trim?: boolean
@@ -330,23 +332,122 @@ export abstract class AbstractControl<T = any> {
   }
 
   /**
-   * Sets the new sync validator for the form control, it overwrites existing sync validators.
-   * If you want to clear all sync validators, you can pass in a undefined.
+   * @deprecated please use `setValidators` instead.
    */
   setValidator(newValidator?: ValidatorFn | ValidatorFn[]): void {
-    this._validators = toValidator(newValidator)
+    this.setValidators(newValidator)
+  }
+
+  /**
+   * Sets the new sync validator for the form control, it overwrites existing sync validators.
+   *
+   * If you want to clear all sync validators, you can pass in a undefined.
+   */
+  setValidators(newValidators?: ValidatorFn | ValidatorFn[]): void {
+    this._validators = newValidators
+    this._composedValidators = toValidator(newValidators)
+  }
+
+  /**
+   * @deprecated please use `setAsyncValidators` instead.
+   */
+  setAsyncValidator(newAsyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    this.setAsyncValidators(newAsyncValidator)
   }
 
   /**
    * Sets the new async validator for the form control, it overwrites existing async validators.
+   *
    * If you want to clear all async validators, you can pass in a undefined.
    */
-  setAsyncValidator(newAsyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | undefined): void {
-    this._asyncValidators = toAsyncValidator(newAsyncValidator)
+  setAsyncValidators(newAsyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    this._asyncValidators = newAsyncValidators
+    this._composedAsyncValidators = toAsyncValidator(newAsyncValidators)
   }
 
   /**
-   * Retrieves a child control given the control's name or path.
+   * Add a synchronous validator or validators to this control, without affecting other validators.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   */
+  addValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    this.setValidators(addValidators(validators, this._validators))
+  }
+
+  /**
+   * Add an asynchronous validator or validators to this control, without affecting other
+   * validators.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   */
+  addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    this.setAsyncValidators(addValidators(validators, this._asyncValidators))
+  }
+
+  /**
+   * Remove a synchronous validator from this control, without affecting other validators.
+   * Validators are compared by function reference; you must pass a reference to the exact same
+   * validator function as the one that was originally set. If a provided validator is not found,
+   * it is ignored.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   */
+  removeValidators(validators: ValidatorFn | ValidatorFn[]): void {
+    this.setValidators(removeValidators(validators, this._validators))
+  }
+
+  /**
+   * Remove an asynchronous validator from this control, without affecting other validators.
+   * Validators are compared by function reference; you must pass a reference to the exact same
+   * validator function as the one that was originally set. If a provided validator is not found, it
+   * is ignored.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   */
+  removeAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    this.setAsyncValidators(removeValidators(validators, this._asyncValidators))
+  }
+
+  /**
+   * Empties out the synchronous validators.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   *
+   */
+  clearValidators(): void {
+    this.setValidators(undefined)
+  }
+
+  /**
+   * Empties out the async validators.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
+   *
+   */
+  clearAsyncValidators(): void {
+    this.setAsyncValidators(undefined)
+  }
+
+  /**
+   * Check whether a synchronous validator function is present on this control. The provided
+   * validator must be a reference to the exact same function that was provided.
+   *
+   */
+  hasValidator(validator: ValidatorFn): boolean {
+    return hasValidator(this._validators, validator)
+  }
+
+  /**
+   * Check whether an asynchronous validator function is present on this control. The provided
+   * validator must be a reference to the exact same function that was provided.
+   *
+   */
+  hasAsyncValidator(validator: AsyncValidatorFn): boolean {
+    return hasValidator(this._asyncValidators, validator)
+  }
+
+  /**
+   * Retrieves a child control given the control's key or path.
    *
    * @param path A dot-delimited string or array of string/number values that define the path to the
    * control.
@@ -369,13 +470,13 @@ export abstract class AbstractControl<T = any> {
     let controlToFind: AbstractControl | undefined = this
     // Not using Array.reduce here due to a Chrome 80 bug
     // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-    path.forEach((name: string | number) => {
+    path.forEach((key: string | number) => {
       if (controlToFind instanceof FormGroup) {
         const controls = controlToFind.controls.value
         // eslint-disable-next-line no-prototype-builtins
-        controlToFind = controls.hasOwnProperty(name) ? controls[name] : undefined
+        controlToFind = controls.hasOwnProperty(key) ? controls[key] : undefined
       } else if (controlToFind instanceof FormArray) {
-        controlToFind = controlToFind.at(<number>name)
+        controlToFind = controlToFind.at(<number>key)
       } else {
         controlToFind = undefined
       }
@@ -408,14 +509,13 @@ export abstract class AbstractControl<T = any> {
    * @param errorCode The code of the error to check
    * @param path A list of control names that designates how to move from the current control
    * to the control that should be queried for errors.
-   *
    */
   hasError(errorCode: string, path?: ControlPathType): boolean {
     return !!this.getError(errorCode, path)
   }
 
   /**
-   * @param parent Sets the parent of the control
+   * Sets the parent of the control
    */
   setParent(parent: AbstractControl): void {
     this._parent = parent
@@ -445,14 +545,16 @@ export abstract class AbstractControl<T = any> {
     let newErrors = undefined
     if (!this._disabled.value) {
       let value = undefined
-      if (this._validators) {
+      if (this._composedValidators) {
         value = this.getValue()
-        newErrors = this._validators(value, this)
+        newErrors = this._composedValidators(value, this)
       }
-      if (isNil(newErrors) && this._asyncValidators) {
-        value = this._validators ? value : this.getValue()
+      if (isNil(newErrors) && this._composedAsyncValidators) {
+        if (!this._composedValidators) {
+          value = this.getValue()
+        }
         this._status.value = 'validating'
-        newErrors = await this._asyncValidators(value, this)
+        newErrors = await this._composedAsyncValidators(value, this)
       }
     }
     this.setErrors(newErrors)
@@ -469,8 +571,8 @@ export abstract class AbstractControl<T = any> {
       this.example = validatorOrOptions.example
       this._trigger = validatorOrOptions.trigger ?? this._trigger
       this._trim = validatorOrOptions.trim ?? this._trim
-      this._validators = toValidator(validatorOrOptions.validators)
-      this._asyncValidators = toAsyncValidator(validatorOrOptions.asyncValidators)
+      this.setValidators(validatorOrOptions.validators)
+      this.setAsyncValidators(validatorOrOptions.asyncValidators)
       if (validatorOrOptions.disabled) {
         disabled = true
         const controls = this._controls.value
@@ -481,8 +583,8 @@ export abstract class AbstractControl<T = any> {
         }
       }
     } else {
-      this._validators = toValidator(validatorOrOptions)
-      this._asyncValidators = toAsyncValidator(asyncValidator)
+      this.setValidators(validatorOrOptions)
+      this.setAsyncValidators(asyncValidator)
     }
     this._disabled = ref(disabled)
   }
@@ -517,9 +619,9 @@ export abstract class AbstractControl<T = any> {
     let controlsStatus: ValidateStatus = 'valid'
 
     if (!disabled) {
-      if (this._validators) {
+      if (this._composedValidators) {
         value = this.getValue()
-        errors = this._validators(value, this)
+        errors = this._composedValidators(value, this)
       }
 
       if (errors) {
@@ -542,10 +644,10 @@ export abstract class AbstractControl<T = any> {
     this._status = ref(status)
     this._controlsStatus = ref(controlsStatus)
 
-    if (!disabled && status === 'valid' && controlsStatus === 'valid' && this._asyncValidators) {
+    if (!disabled && status === 'valid' && controlsStatus === 'valid' && this._composedAsyncValidators) {
       value = this._validators ? value : this.getValue()
       this._status.value = 'validating'
-      this._asyncValidators(value, this).then(asyncErrors => {
+      this._composedAsyncValidators(value, this).then(asyncErrors => {
         this._errors.value = asyncErrors
         this._status.value = asyncErrors ? 'invalid' : 'valid'
       })
@@ -608,7 +710,7 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
 
   constructor(
     /**
-     * A collection of child controls. The key for each child is the name under which it is registered.
+     * A collection of child controls, it's an object.
      */
     controls: GroupControls<T>,
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
@@ -657,40 +759,40 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
   /**
    * Add a control to this form group.
    *
-   * @param name The control name to add to the collection
-   * @param control Provides the control for the given name
+   * @param key The control's key to add to the collection
+   * @param control Provides the control for the given key
    */
-  addControl<K extends OptionalKeys<T>>(name: K, control: AbstractControl<T[K]>): void {
+  addControl<K extends OptionalKeys<T>>(key: K, control: AbstractControl<T[K]>): void {
     const controls = { ...this._controls.value }
-    if (hasOwnProperty(controls, name as string)) {
+    if (hasOwnProperty(controls, key as string)) {
       return
     }
     control.setParent(this)
-    controls[name] = control
+    controls[key] = control
     this._controls.value = controls
   }
 
   /**
    * Remove a control from this form group.
    *
-   * @param name The control name to remove from the collection
+   * @param key The control's key to remove from the collection
    */
-  removeControl<K extends OptionalKeys<T>>(name: K): void {
+  removeControl<K extends OptionalKeys<T>>(key: K): void {
     const controls = { ...this._controls.value }
-    delete controls[name]
+    delete controls[key]
     this._controls.value = controls
   }
 
   /**
    * Replace an existing control.
    *
-   * @param name The control name to replace in the collection
-   * @param control Provides the control for the given name
+   * @param key The control's key to replace in the collection
+   * @param control Provides the control for the given key
    */
-  setControl<K extends keyof T>(name: K, control: AbstractControl<T[K]>): void {
+  setControl<K extends keyof T>(key: K, control: AbstractControl<T[K]>): void {
     control.setParent(this)
     const controls = { ...this._controls.value }
-    controls[name] = control
+    controls[key] = control
     this._controls.value = controls
   }
 
@@ -811,7 +913,7 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
   }
 
   /**
-   * Get the `AbstractControl` at the given `index` in the array.
+   * Get the control at the given `index` in the array.
    *
    * @param index Index in the array to retrieve the control
    */
@@ -820,7 +922,7 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
   }
 
   /**
-   * Insert a new `AbstractControl` at the end of the array.
+   * Insert a new control at the end of the array.
    *
    * @param control Form control to be inserted
    */
@@ -830,7 +932,7 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
   }
 
   /**
-   * Insert a new `AbstractControl` at the given `index` in the array.
+   * Insert a new control at the given `index` in the array.
    *
    * @param index Index in the array to insert the control
    * @param control Form control to be inserted
@@ -857,7 +959,7 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
    * Replace an existing control.
    *
    * @param index Index in the array to replace the control
-   * @param control The `AbstractControl` control to replace the existing control
+   * @param control The control to replace the existing control
    */
   setControl(index: number, control: AbstractControl<T>): void {
     control.setParent(this as AbstractControl)

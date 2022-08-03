@@ -21,7 +21,7 @@ import type {
 
 import { isArray, isFunction, isNil, isNumber, isString } from 'lodash-es'
 
-import { isNumeric } from '@idux/cdk/utils'
+import { convertArray, isNumeric } from '@idux/cdk/utils'
 
 import { zhCNMessages } from './messages/zh-CN'
 
@@ -240,4 +240,35 @@ function mergeMessages(validateErrors: (ValidateErrors | undefined)[]): Validate
   })
 
   return Object.keys(res).length === 0 ? undefined : res
+}
+
+/**
+ * Determines whether a validator or validators array has a given validator.
+ */
+export function hasValidator<T extends ValidatorFn | AsyncValidatorFn>(
+  validators: T | T[] | undefined,
+  validator: T | undefined,
+): boolean {
+  return Array.isArray(validators) ? validators.includes(validator!) : validators === validator
+}
+
+export function addValidators<T extends ValidatorFn | AsyncValidatorFn>(
+  validators: T | T[],
+  currentValidators: T | T[] | undefined,
+): T[] {
+  const current = convertArray(currentValidators)
+  const validatorsToAdd = convertArray(validators)
+  validatorsToAdd.forEach((v: T) => {
+    if (!hasValidator(current, v)) {
+      current.push(v)
+    }
+  })
+  return current
+}
+
+export function removeValidators<T extends ValidatorFn | AsyncValidatorFn>(
+  validators: T | T[],
+  currentValidators: T | T[] | undefined,
+): T[] {
+  return convertArray(currentValidators).filter(v => !hasValidator(validators, v))
 }
