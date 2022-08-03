@@ -174,7 +174,7 @@ describe('formArray.ts', () => {
 
       const _validator = (_: unknown) => ({ test: {} } as ValidateErrors)
 
-      array.setValidator(_validator)
+      array.setValidators(_validator)
 
       expect(await array.validate()).toEqual({ test: {} })
     })

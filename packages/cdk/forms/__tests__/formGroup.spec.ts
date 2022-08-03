@@ -135,7 +135,7 @@ describe('formGroup.ts', () => {
 
       const _validator = (_: unknown) => ({ test: {} })
 
-      group.setValidator(_validator)
+      group.setValidators(_validator)
 
       expect(await group.validate()).toEqual({ test: {} })
     })
@@ -185,7 +185,7 @@ describe('formGroup.ts', () => {
       expect(group.hasError('required', 'control')).toEqual(false)
       expect(group.hasError('test')).toEqual(false)
 
-      group.setValidator(_validator)
+      group.setValidators(_validator)
       group.setValue({ control: '1234' })
       await flushPromises()
 
