@@ -14,7 +14,8 @@ subtitle: 复合搜索
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `v-model:value` | 复合选中的搜索值 | - | - | ✅ | - |
+| `v-model:value` | 选中的搜索值 | - | - | - | - |
+| `v-model:errors` | 校验错误 | `{ index: number, message: string }` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| VNode \| #clearIcon` | `close-circle` | ✅ | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
@@ -24,7 +25,7 @@ subtitle: 复合搜索
 | `onChange` | 搜索条件改变之后的回调 | `(value: searchValue[] \| undefined, oldValue: searchValue[] \| undefined) => void` | - | - | - |
 | `onClear` | 清除搜索条件的回调 | `() => void` | - | - | - |
 | `onItemRemove` | 搜索条件删除时的回调 | `(item: SearchValue) => void` | - | - | - |
-| `onItemInvalid` | 搜索条件不合法时触发的回调 | `(item: InvalidSearchValue) => void` | - | - | - |
+| `onItemConfirm` | 搜索条件不合法时触发的回调 | `(item: SearchItemConfirmContext) => void` | - | - | - |
 | `onSearch` | 搜索按钮触发的回调 | `(value: searchValue[] \| undefined) => void` | - | - | - |
 
 #### ProSearchSlots
@@ -40,10 +41,11 @@ interface SearchValue<V = unknown> {
   value: V // 搜索值
   operator?: string // 搜索操作符
 }
-interface InvalidSearchValue<V = unknown> extends Partial<SearchValue<V>> {
+interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> {
   nameInput?: string // 搜索字段名称输入
   operatorInput?: string // 操作符输入
   valueInput?: string // 值输入
+  removed: boolean // 是否被移除
 }
 ```
 
@@ -64,6 +66,7 @@ interface InvalidSearchValue<V = unknown> extends Partial<SearchValue<V>> {
 | `defaultOperator` | 默认的操作符 | `string` | - | - | 提供时，会自动填入默认的操作符 |
 | `defaultValue` | 默认值 | - | - | - | 提供时，会自动填入默认值 |
 | `inputClassName` | 输入框class | `string` | - | - | 用于自定义输入框样式 |
+| `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |
 
 #### InputSearchField
 

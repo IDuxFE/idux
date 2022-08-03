@@ -19,10 +19,16 @@ export interface SearchValue<V = unknown> {
   operator?: string
 }
 
-export interface InvalidSearchValue<V = unknown> extends Partial<SearchValue<V>> {
+export interface SearchItemError {
+  index: number
+  message?: string
+}
+
+export interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> {
   nameInput?: string
   operatorInput?: string
   valueInput?: string
+  removed: boolean
 }
 
 export interface PanelRenderContext<V = unknown> {
@@ -49,18 +55,19 @@ export type InputParser<V = unknown> = (input: string) => V | null
 export interface SearchItem {
   key: VKey
   optionKey?: VKey
+  error?: SearchItemError
   segments: Segment[]
 }
 
-interface SearchFieldBase {
+interface SearchFieldBase<V = unknown> {
   key: VKey
   label: string
   multiple?: boolean
   operators?: string[]
   defaultOperator?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  defaultValue?: any
+  defaultValue?: V
   inputClassName?: string
+  validator?: (value: SearchValue<V>) => Omit<SearchItemError, 'index'> | undefined
 }
 
 export type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & SelectData
@@ -68,7 +75,7 @@ export type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & Sele
 export const searchDataTypes = ['select', 'input', 'datePicker', 'dateRangePicker', 'custom'] as const
 export type SearchDataTypes = typeof searchDataTypes[number]
 
-export interface SelectSearchField extends SearchFieldBase {
+export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
   type: 'select'
   fieldConfig: {
     dataSource: SelectPanelData[]
@@ -81,14 +88,14 @@ export interface SelectSearchField extends SearchFieldBase {
   }
 }
 
-export interface InputSearchField extends SearchFieldBase {
+export interface InputSearchField extends SearchFieldBase<string> {
   type: 'input'
   fieldConfig: {
     trim?: boolean
   }
 }
 
-export interface DatePickerSearchField extends SearchFieldBase {
+export interface DatePickerSearchField extends SearchFieldBase<Date> {
   type: 'datePicker'
   fieldConfig: {
     format?: string
@@ -99,7 +106,7 @@ export interface DatePickerSearchField extends SearchFieldBase {
   }
 }
 
-export interface DateRangePickerSearchField extends SearchFieldBase {
+export interface DateRangePickerSearchField extends SearchFieldBase<Date[]> {
   type: 'dateRangePicker'
   fieldConfig: {
     format?: string
@@ -140,6 +147,7 @@ export const proSearchProps = {
     type: Boolean,
     default: false,
   },
+  errors: Array as PropType<SearchItemError[]>,
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
@@ -149,13 +157,14 @@ export const proSearchProps = {
 
   //events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: SearchValue[] | undefined) => void>>,
+  'onUpdate:errors': [Function, Array] as PropType<MaybeArray<(errors: SearchItemError[] | undefined) => void>>,
   onChange: [Function, Array] as PropType<
     MaybeArray<(value: SearchValue[] | undefined, oldValue: SearchValue[] | undefined) => void>
   >,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
   onItemRemove: [Array, Function] as PropType<MaybeArray<(item: SearchValue) => void>>,
   onSearch: [Array, Function] as PropType<MaybeArray<(value: SearchValue[] | undefined) => void>>,
-  onItemInvalid: [Array, Function] as PropType<MaybeArray<(item: InvalidSearchValue) => void>>,
+  onItemConfirm: [Array, Function] as PropType<MaybeArray<(item: SearchItemConfirmContext) => void>>,
 } as const
 
 export type ProSearchProps = ExtractInnerPropTypes<typeof proSearchProps>
@@ -170,6 +179,7 @@ export const searchItemProps = {
     type: Object as PropType<SearchItem>,
     required: true,
   },
+  error: Object as PropType<SearchItemError>,
   tagOnly: {
     type: Boolean,
     default: false,

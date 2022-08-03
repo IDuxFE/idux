@@ -20,6 +20,5 @@ export function createInputSegment(prefixCls: string, searchField: InputSearchFi
     defaultValue,
     parse: input => input,
     format: value => (trim ? value?.trim() : value) ?? '',
-    panel: null,
   }
 }

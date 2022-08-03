@@ -18,6 +18,7 @@ import { useGlobalConfig } from '@idux/pro/config'
 import { useActiveSegment } from './composables/useActiveSegment'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
 import { useSearchItems } from './composables/useSearchItem'
+import { useSearchItemErrors } from './composables/useSearchItemErrors'
 import { tempSearchStateKey, useSearchStates } from './composables/useSearchStates'
 import { useSearchValues } from './composables/useSearchValues'
 import SearchItemComp from './searchItem/SearchItem'
@@ -37,7 +38,15 @@ export default defineComponent({
 
     const { searchValues, searchValueEmpty, setSearchValues } = useSearchValues(props)
     const searchStateContext = useSearchStates(props, dateConfig, searchValues, setSearchValues)
-    const searchItems = useSearchItems(props, slots, mergedPrefixCls, searchStateContext.searchStates, dateConfig)
+    const errors = useSearchItemErrors(props, searchValues)
+    const searchItems = useSearchItems(
+      props,
+      slots,
+      mergedPrefixCls,
+      searchStateContext.searchStates,
+      errors,
+      dateConfig,
+    )
     const activeSegmentContext = useActiveSegment(props, searchItems, searchStateContext.tempSearchStateAvailable)
     const commonOverlayProps = useCommonOverlayProps(mergedPrefixCls, props, config)
 

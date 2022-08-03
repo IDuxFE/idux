@@ -7,7 +7,7 @@
 
 import type { PanelRenderContext, Segment, SelectPanelData, SelectSearchField } from '../types'
 
-import { toString } from 'lodash-es'
+import { isNil, toString } from 'lodash-es'
 
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
@@ -96,7 +96,7 @@ function parseInput(input: string, searchField: SelectSearchField): VKey | VKey[
 
 function formatValue(value: VKey | VKey[] | undefined, searchField: SelectSearchField): string {
   const { dataSource, separator } = searchField.fieldConfig
-  if (!value) {
+  if (isNil(value)) {
     return ''
   }
 

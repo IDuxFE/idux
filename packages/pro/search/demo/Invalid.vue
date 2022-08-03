@@ -1,20 +1,21 @@
 <template>
   <IxProSearch
     v-model:value="searchValues"
+    v-model:errors="errors"
     style="width: 100%"
     :searchFields="searchFields"
     :onChange="onChange"
     :onSearch="onSearch"
-    :onItemInvalid="onInvalid"
   ></IxProSearch>
 </template>
 
 <script setup lang="ts">
-import type { InvalidSearchValue, SearchField, SearchValue } from '@idux/pro/search'
+import type { SearchField, SearchItemError, SearchValue } from '@idux/pro/search'
 
 import { ref } from 'vue'
 
 const searchValues = ref<SearchValue[]>([])
+const errors = ref<SearchItemError[]>([])
 const searchFields: SearchField[] = [
   {
     key: 'keyword',
@@ -24,73 +25,34 @@ const searchFields: SearchField[] = [
     fieldConfig: {
       trim: true,
     },
-  },
-  {
-    type: 'select',
-    label: 'Level',
-    key: 'level',
-    operators: ['=', '!='],
-    defaultOperator: '=',
-    fieldConfig: {
-      multiple: false,
-      searchable: true,
-      dataSource: [
-        {
-          key: 'level1',
-          label: 'Level 1',
-        },
-        {
-          key: 'level2',
-          label: 'Level 2',
-        },
-        {
-          key: 'level3',
-          label: 'Level 3',
-        },
-      ],
-    },
-  },
-  {
-    type: 'select',
-    label: 'Security State',
-    key: 'security_state',
-    fieldConfig: {
-      multiple: true,
-      searchable: true,
-      dataSource: [
-        {
-          key: 'fatal',
-          label: 'fatal',
-        },
-        {
-          key: 'high',
-          label: 'high',
-        },
-        {
-          key: 'mediumn',
-          label: 'mediumn',
-        },
-        {
-          key: 'low',
-          label: 'low',
-        },
-      ],
+    validator(searchValue) {
+      if (/[?^<>/+\-=]/.test(searchValue.value)) {
+        return { message: "keyword mustn't contain ?^<>+-=" }
+      }
+
+      return
     },
   },
   {
     type: 'datePicker',
-    label: 'Date',
+    label: 'Creation Time',
     key: 'date',
+    operators: ['=', '>', '<'],
     fieldConfig: {
       type: 'datetime',
     },
-  },
-  {
-    type: 'dateRangePicker',
-    label: 'Date Range',
-    key: 'date_range',
-    fieldConfig: {
-      type: 'datetime',
+    validator(searchValue) {
+      const { operator, value } = searchValue
+      const currentYear = new Date().getFullYear()
+      if ((operator === '>' || operator === '=') && value.getFullYear() > currentYear) {
+        return { message: `cannot select date after year ${currentYear}` }
+      }
+
+      if ((operator === '<' || operator === '=') && value.getFullYear() < 2000) {
+        return { message: `cannot select date before year 2000` }
+      }
+
+      return
     },
   },
 ]
@@ -100,12 +62,6 @@ const onChange = (value: SearchValue[] | undefined, oldValue: SearchValue[] | un
 }
 const onSearch = () => {
   console.log('onSearch')
-}
-const onInvalid = (value: InvalidSearchValue) => {
-  searchValues.value.push({
-    key: 'keyword',
-    value: (value.nameInput ?? '') + (value.operatorInput ?? '') + (value.valueInput ?? ''),
-  })
 }
 </script>
 
