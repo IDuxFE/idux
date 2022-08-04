@@ -25,6 +25,7 @@ export interface TreeContext extends CheckableContext, DragDropContext, Expandab
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
   mergedGetKey: ComputedRef<GetKeyFn>
   mergedShowLine: ComputedRef<boolean>
+  mergedCheckOnClick: ComputedRef<boolean>
   searchedKeys: ComputedRef<VKey[]>
 }
 

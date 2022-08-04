@@ -27,6 +27,10 @@ export const proTreeProps = {
   selectedKeys: { type: Array as PropType<VKey[]>, default: undefined },
 
   checkable: { type: Boolean, default: false },
+  checkOnClick: {
+    type: Boolean,
+    default: false,
+  },
   childrenKey: { type: String, default: undefined },
   cascaderStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
   clearIcon: { type: String, default: undefined },

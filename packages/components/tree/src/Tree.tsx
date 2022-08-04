@@ -53,6 +53,7 @@ export default defineComponent({
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
     const mergedShowLine = computed(() => props.showLine ?? config.showLine)
     const mergedBlocked = computed(() => props.blocked ?? config.blocked)
+    const mergedCheckOnClick = computed(() => props.checkable && props.checkOnClick)
     const { mergedNodes, mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
     const { searchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
     const expandableContext = useExpandable(
@@ -78,6 +79,7 @@ export default defineComponent({
       mergedNodeMap,
       mergedGetKey,
       mergedShowLine,
+      mergedCheckOnClick,
       searchedKeys,
       ...checkableContext,
       ...expandableContext,

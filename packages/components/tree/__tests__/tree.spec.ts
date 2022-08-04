@@ -486,6 +486,31 @@ describe('Tree', () => {
     expect(wrapper.find('.ix-checkbox').exists()).toBe(false)
   })
 
+  test('checkOnClick work', async () => {
+    const onUpdateCheckedKeys = vi.fn()
+    const wrapper = TreeMount({
+      props: {
+        checkable: true,
+        checkOnClick: true,
+        'onUpdate:checkedKeys': onUpdateCheckedKeys,
+      },
+    })
+
+    const allNodes = wrapper.findAll('.ix-tree-node-content')
+
+    await allNodes[0].trigger('click')
+
+    expect(onUpdateCheckedKeys).toBeCalled()
+
+    await wrapper.setProps({
+      checkable: false,
+    })
+
+    await allNodes[0].trigger('click')
+
+    expect(onUpdateCheckedKeys).toBeCalledTimes(1)
+  })
+
   test('childrenKey work', async () => {
     const dataSource: TreeNode[] = [
       {
