@@ -13,7 +13,9 @@ import { VKey } from '@idux/cdk/utils'
 
 import { TRANSFER_DATA_STRATEGIES } from '../token'
 
-function createDefaultStrategies<T extends TransferData = TransferData>(): TransferDataStrategies<T> {
+function createDefaultStrategies<T extends TransferData = TransferData>(
+  defaultTargetData: T[] | undefined,
+): TransferDataStrategies<T> {
   const cachedDataKeyMap: Map<VKey, T> = new Map()
   onUnmounted(() => {
     cachedDataKeyMap.clear()
@@ -46,7 +48,8 @@ function createDefaultStrategies<T extends TransferData = TransferData>(): Trans
       const targetData: T[] = []
 
       selectedKeySet.forEach(key => {
-        const data = dataKeyMap.get(key) ?? cachedDataKeyMap.get(key)
+        const data =
+          dataKeyMap.get(key) ?? cachedDataKeyMap.get(key) ?? defaultTargetData?.find(data => getKey(data) === key)
         if (data && !cachedDataKeyMap.has(key)) {
           cachedDataKeyMap.set(key, data)
         }
@@ -96,9 +99,11 @@ function createDefaultStrategies<T extends TransferData = TransferData>(): Trans
   }
 }
 
-export function useTransferDataStrategies<T extends TransferData = TransferData>(): TransferDataStrategies<T> {
+export function useTransferDataStrategies<T extends TransferData = TransferData>(
+  defaultTargetData: T[] | undefined,
+): TransferDataStrategies<T> {
   const strategies = inject<TransferDataStrategies<T> | null>(TRANSFER_DATA_STRATEGIES, null)
-  const defaultStrategies = createDefaultStrategies<T>()
+  const defaultStrategies = createDefaultStrategies<T>(defaultTargetData)
 
   return strategies
     ? { ...(defaultStrategies as TransferDataStrategies<T>), ...strategies }

@@ -131,6 +131,7 @@ export default defineComponent({
     return () => {
       const transferProps = {
         dataSource: dataSource.value,
+        defaultTargetData: props.defaultTargetData,
         value: targetKeys.value,
         sourceSelectedKeys: props.sourceSelectedKeys,
         targetSelectedKeys: props.targetSelectedKeys,

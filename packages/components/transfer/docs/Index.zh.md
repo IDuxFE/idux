@@ -21,6 +21,7 @@ subtitle: 穿梭框
 | `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
 | `customAdditional` | 自定义选项的额外属性 | `TransferCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
+| `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
 | `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
 | `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
