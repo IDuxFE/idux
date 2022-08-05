@@ -203,8 +203,8 @@ export abstract class AbstractControl<T = any> {
    *
    * @param value The new value.
    * @param options
-   * * `dirty`: Marks it dirty, default is false.
-   * * `blur`: Marks it blurred, default is false.
+   * * `dirty`: Marks it dirty, default is `false`.
+   * * `blur`: Marks it blurred, default is `false`.
    */
   abstract setValue(
     value: T | Partial<T> | Partial<ArrayElement<T>>[],
@@ -215,7 +215,7 @@ export abstract class AbstractControl<T = any> {
    * The aggregate value of the control.
    *
    * @param options
-   * * `skipDisabled`: Ignore value of disabled control, default is false.
+   * * `skipDisabled`: Ignore value of disabled control, default is `false`.
    */
   abstract getValue(options?: { skipDisabled?: boolean }): T
 

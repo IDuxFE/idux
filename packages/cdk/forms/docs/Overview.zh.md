@@ -31,7 +31,10 @@ defineProps<{
 }>()
 
 // useAccessorAndControl 内部对 props 中的 control, disabled, value 进行了处理
-const { accessor } = useAccessorAndControl()
+const { accessor, control: controlRef } = useAccessorAndControl()
+
+// 还可以在 FormItem 组件中注册 control, 让 FormItem 获取控件的验证状态
+// useFormItemRegister(controlRef)
 
 // 表单 blur 状态
 const onBlur = () => accessor.markAsBlurred()

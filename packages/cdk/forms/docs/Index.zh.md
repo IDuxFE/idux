@@ -167,10 +167,17 @@ export interface FormAccessor<T = any> {
   markAsBlurred: () => void
   /**
    * 设置控件的值
+   *
+   * @param value 新的值
+   * @param options
+   * * `dirty`: 是否让控件变成 `dirty` 状态, 默认值为 `true`.
+   * * `blur`: 是否让控件变成 `blurred` 状态, 默认值为 `false`.
    */
-  setValue: (value: T) => void
+  setValue: (value: T, options: { dirty?: boolean; blur?: boolean }) => void
 }
 ```
+
+特别需要注意的是: `FormAccessor` 中的 `setValue` 的第二个参数中的 `dirty` 默认为 `true`, 与 `AbstractControl` 的 `setValue` 不一致。
 
 ### AbstractControl
 

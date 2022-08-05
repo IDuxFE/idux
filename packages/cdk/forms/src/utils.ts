@@ -77,8 +77,19 @@ export function useControl<T = any>(controlKey = 'control'): ShallowRef<Abstract
 export interface FormAccessor<T = any> {
   value: T
   disabled: boolean
+  /**
+   * Marks the control as `blurred`.
+   */
   markAsBlurred: () => void
-  setValue: (value: T) => void
+  /**
+   * Sets a new value for the control.
+   *
+   * @param value The new value.
+   * @param options
+   * * `dirty`: Marks it dirty, default is `true`.
+   * * `blur`: Marks it blurred, default is `false`.
+   */
+  setValue: (value: T, options: { dirty?: boolean; blur?: boolean }) => void
 }
 
 export function useAccessor<T = any>(
@@ -112,7 +123,7 @@ export function useAccessor<T = any>(
           accessor.value = currControl.valueRef.value
           accessor.disabled = currControl.disabled.value
         })
-        accessor.setValue = value => currControl.setValue(value, { dirty: true })
+        accessor.setValue = (value, options) => currControl.setValue(value, { dirty: true, ...options })
         accessor.markAsBlurred = () => currControl.markAsBlurred()
       } else {
         const tempRef = shallowRef(props[valueKey])
