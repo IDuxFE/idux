@@ -63,6 +63,7 @@ export const treeSelectProps = {
    * @deprecated please use `getKey` instead'
    */
   nodeKey: { type: [String, Function] as PropType<string | ((node: TreeSelectNode) => VKey)>, default: undefined },
+  offset: Array as unknown as PropType<[number, number]>,
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,

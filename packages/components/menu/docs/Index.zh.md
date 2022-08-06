@@ -75,7 +75,7 @@ export type MenuCustomAdditional = (options: { data: MenuData; index: number }) 
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
 | `icon` | 菜单图标| `string \| VNode` | - | - |
 | `label` | 菜单文本 | `string`  | - | - |
-| `offset` | 浮层偏移量 | `[number, number]` | `[0, 8]` | ✅ | `inline` 模式时无效 |
+| `offset` | 浮层偏移量 | `[number, number]` | `[0, 4]` | ✅ | `inline` 模式时无效 |
 | `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
 | `customIcon` | 自定义图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subIcon'` | - | 类型为 `string` 时，对应插槽名 |
 | `customLabel` | 自定义文本 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subLabel'` | - | 类型为 `string` 时，对应插槽名 |

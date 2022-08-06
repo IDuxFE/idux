@@ -19,6 +19,6 @@ export function useCommonOverlayProps(
   return computed(() => ({
     target: props.overlayContainer || config.overlayContainer || `${mergedPrefixCls.value}-overlay-container`,
     placement: 'bottomStart',
-    offset: [0, 8],
+    offset: [0, 4],
   }))
 }

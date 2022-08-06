@@ -14,8 +14,6 @@ import { computed, ref } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 
-const defaultOffset: [number, number] = [0, 12]
-
 export interface TooltipOverlayContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   updatePopper: () => void | undefined
@@ -42,7 +40,7 @@ export function useTooltipOverlay(
       clickOutside: trigger === 'click' || trigger === 'contextmenu',
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
-      offset: props.offset ?? defaultOffset,
+      offset: props.offset ?? config.offset,
       showArrow: true,
       placement: props.placement ?? config.placement,
       target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,

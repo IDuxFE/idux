@@ -332,6 +332,7 @@ export interface PopconfirmConfig {
   placement: PopperPlacement
   target?: PortalTargetType
   trigger: PopperTrigger
+  offset: [number, number]
 }
 
 export interface PopoverConfig {
@@ -343,6 +344,7 @@ export interface PopoverConfig {
   showArrow: boolean
   trigger: PopperTrigger
   closeIcon: string
+  offset: [number, number]
 }
 
 export interface ProgressConfig {
@@ -381,6 +383,7 @@ export interface SelectConfig {
   clearIcon: string
   getKey: string | ((data: SelectData<any>) => any)
   labelKey: string
+  offset: [number, number]
   overlayContainer?: PortalTargetType
   overlayMatchWidth: boolean
   size: FormSize
@@ -508,6 +511,7 @@ export interface TooltipConfig {
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
   placement: PopperPlacement
+  offset: [number, number]
   target?: PortalTargetType
   trigger: PopperTrigger
 }
@@ -536,6 +540,7 @@ export interface TreeSelectConfig {
    * @deprecated please use `labelKey` instead'
    */
   nodeKey?: string
+  offset: [number, number]
   overlayMatchWidth: boolean
   overlayContainer?: PortalTargetType
   size: FormSize

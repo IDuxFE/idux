@@ -68,6 +68,7 @@ export const selectProps = {
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
+  offset: Array as unknown as PropType<[number, number]>,
   /**
    * @deprecated please use `dataSource` instead'
    */

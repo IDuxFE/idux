@@ -25,7 +25,7 @@ import OverlayContent from './contents/OverlayContent'
 import { cascaderToken } from './token'
 import { cascaderProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 
 export default defineComponent({
   name: 'IxCascader',

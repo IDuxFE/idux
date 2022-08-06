@@ -10,7 +10,7 @@ import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 
 import { type ComputedRef, computed } from 'vue'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 export function useOverlayProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵOverlayProps> {
   return computed(() => {
     const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
