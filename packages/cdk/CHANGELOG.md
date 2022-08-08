@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* **cdk:forms:** the second argument to setValue is optional ([#1061](https://github.com/IDuxFE/idux/issues/1061)) ([6756bf7](https://github.com/IDuxFE/idux/commit/6756bf7757a439bb0594c52c381de60d62cd9b48))
+
+
+### Features
+
+* **cdk:forms:** abstractControl support add or remove the validators ([#1055](https://github.com/IDuxFE/idux/issues/1055)) ([60f9796](https://github.com/IDuxFE/idux/commit/60f9796e2dce0a5d3356113fe42e0e3907a0ba6c)), closes [#1037](https://github.com/IDuxFE/idux/issues/1037)
+* **cdk:forms:** formAccessor's setValue supports setting dirty and blur ([#1059](https://github.com/IDuxFE/idux/issues/1059)) ([dc40ed9](https://github.com/IDuxFE/idux/commit/dc40ed945e592b8afeccaa44ba31d64369958421))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.0...v1.0.0-rc.1) (2022-07-29)
 
 **Note:** Version bump only for package @idux/cdk

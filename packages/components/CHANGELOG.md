@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* **comp:*:** update style of suffix icon ([#1053](https://github.com/IDuxFE/idux/issues/1053)) ([3496d08](https://github.com/IDuxFE/idux/commit/3496d08c008d81a3a33e230c48d5a1c267074402)), closes [#1005](https://github.com/IDuxFE/idux/issues/1005)
+* **comp:transfer:** removing items absent from datasource works now ([#1054](https://github.com/IDuxFE/idux/issues/1054)) ([1abf7e9](https://github.com/IDuxFE/idux/commit/1abf7e9a7b9077fefd6fdd24eae67e9e5bcb1d3b))
+
+
+### Features
+
+* **cdk:forms:** abstractControl support add or remove the validators ([#1055](https://github.com/IDuxFE/idux/issues/1055)) ([60f9796](https://github.com/IDuxFE/idux/commit/60f9796e2dce0a5d3356113fe42e0e3907a0ba6c)), closes [#1037](https://github.com/IDuxFE/idux/issues/1037)
+* **comp:tree:** add checkOnClick prop ([#1052](https://github.com/IDuxFE/idux/issues/1052)) ([5aa4be4](https://github.com/IDuxFE/idux/commit/5aa4be4328c38f5a06a6f5df084c355da993bca5))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.0...v1.0.0-rc.1) (2022-07-29)
 
 **Note:** Version bump only for package @idux/components

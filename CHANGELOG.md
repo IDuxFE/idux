@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* **cdk:forms:** the second argument to setValue is optional ([#1061](https://github.com/IDuxFE/idux/issues/1061)) ([6756bf7](https://github.com/IDuxFE/idux/commit/6756bf7757a439bb0594c52c381de60d62cd9b48))
+* **comp:*:** update style of suffix icon ([#1053](https://github.com/IDuxFE/idux/issues/1053)) ([3496d08](https://github.com/IDuxFE/idux/commit/3496d08c008d81a3a33e230c48d5a1c267074402)), closes [#1005](https://github.com/IDuxFE/idux/issues/1005)
+* **comp:table:** fix layout tool conflicts ([#1051](https://github.com/IDuxFE/idux/issues/1051)) ([07d6719](https://github.com/IDuxFE/idux/commit/07d6719223f624c0688ef58fa30471cd5c6d21ca))
+* **comp:transfer:** removing items absent from datasource works now ([#1054](https://github.com/IDuxFE/idux/issues/1054)) ([1abf7e9](https://github.com/IDuxFE/idux/commit/1abf7e9a7b9077fefd6fdd24eae67e9e5bcb1d3b))
+
+
+### Features
+
+* **cdk:forms:** abstractControl support add or remove the validators ([#1055](https://github.com/IDuxFE/idux/issues/1055)) ([60f9796](https://github.com/IDuxFE/idux/commit/60f9796e2dce0a5d3356113fe42e0e3907a0ba6c)), closes [#1037](https://github.com/IDuxFE/idux/issues/1037)
+* **cdk:forms:** formAccessor's setValue supports setting dirty and blur ([#1059](https://github.com/IDuxFE/idux/issues/1059)) ([dc40ed9](https://github.com/IDuxFE/idux/commit/dc40ed945e592b8afeccaa44ba31d64369958421))
+* **comp:tree:** add checkOnClick prop ([#1052](https://github.com/IDuxFE/idux/issues/1052)) ([5aa4be4](https://github.com/IDuxFE/idux/commit/5aa4be4328c38f5a06a6f5df084c355da993bca5))
+* **pro:search:** add validate function ([#1056](https://github.com/IDuxFE/idux/issues/1056)) ([79c2d09](https://github.com/IDuxFE/idux/commit/79c2d09f207948a636c403b04c1d1a85617c3557))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.0...v1.0.0-rc.1) (2022-07-29)
 
 **Note:** Version bump only for package idux
