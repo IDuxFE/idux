@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProSearchProps, SearchField, SearchItem } from '../types'
+import type { ProSearchProps, SearchField, SearchItem, SearchItemError } from '../types'
 import type { SearchState } from './useSearchStates'
 import type { DateConfig } from '@idux/components/config'
 
@@ -24,6 +24,7 @@ export function useSearchItems(
   slots: Slots,
   mergedPrefixCls: ComputedRef<string>,
   searchStates: ComputedRef<SearchState[]>,
+  searchItemErrors: ComputedRef<SearchItemError[] | undefined>,
   dateConfig: DateConfig,
 ): ComputedRef<SearchItem[]> {
   const searchStatesKeys = computed(() => new Set(searchStates.value?.map(state => state.fieldKey)))
@@ -40,6 +41,7 @@ export function useSearchItems(
       return {
         key: searchState.key,
         optionKey: searchState.fieldKey,
+        error: searchItemErrors.value?.find(error => error.index === searchState.index),
         segments: searchState.segmentValues
           .map(segmentValue => {
             if (segmentValue.name === 'name') {

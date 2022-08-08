@@ -80,19 +80,24 @@ export function useSegmentStates(
   }
   const confirmSearchItem = () => {
     const key = props.searchItem!.key
-    if (validateSearchState(key)) {
-      updateSearchState(key)
-    } else {
-      const valueName = searchDataTypes.find(name => !!segmentStates.value[name])
+    const validateRes = validateSearchState(key)
+
+    if (!validateRes) {
       removeSearchState(key)
-      callEmit(proSearchProps.onItemInvalid, {
-        ...convertStateToValue(key),
-        nameInput: segmentStates.value.name?.input,
-        operatorInput: segmentStates.value.operator?.input,
-        valueInput: valueName && segmentStates.value[valueName]?.input,
-      })
       initTempSearchState()
+    } else {
+      updateSearchState(key)
     }
+
+    const valueName = searchDataTypes.find(name => !!segmentStates.value[name])
+
+    callEmit(proSearchProps.onItemConfirm, {
+      ...convertStateToValue(key),
+      nameInput: segmentStates.value.name?.input,
+      operatorInput: segmentStates.value.operator?.input,
+      valueInput: valueName && segmentStates.value[valueName]?.input,
+      removed: !validateRes,
+    })
 
     if (key !== tempSearchStateKey) {
       setFakeActive()

@@ -7,6 +7,8 @@
 
 import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 
+import { IxTooltip } from '@idux/components/tooltip'
+
 import { tempSearchStateKey } from '../composables/useSearchStates'
 import { useSegmentOverlayUpdate } from '../composables/useSegmentOverlayUpdate'
 import { useSegmentStates } from '../composables/useSegmentStates'
@@ -58,6 +60,7 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls.value]: true,
         [`${prefixCls.value}-tag`]: !isActive.value,
+        [`${prefixCls.value}-invalid`]: !!props.searchItem?.error,
       })
     })
 
@@ -133,13 +136,24 @@ export default defineComponent({
         }
       }
 
-      return (
+      const itemNode = (
         <span
           class={classes.value}
           v-show={(isActive.value && !proSearchProps.disabled) || props.searchItem?.key !== tempSearchStateKey}
         >
           {children}
         </span>
+      )
+
+      const message = props.searchItem?.error?.message
+      if (isActive.value || !message) {
+        return itemNode
+      }
+
+      return (
+        <IxTooltip class={`${prefixCls.value}-invalid-tooltip`} title={message} placement="topStart" offset={[0, 15]}>
+          {itemNode}
+        </IxTooltip>
       )
     }
   },

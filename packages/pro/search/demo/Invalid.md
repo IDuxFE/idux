@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-使用 `onItemInvalid` 事件处理非法搜索项。
+通过 `searchField.validator` 校验搜索项。
 
 ## en
 
-Handle invalid search value via `onItemInvalid` event.
+validate search value via `searchField.validator`.

@@ -27,6 +27,7 @@ export interface SegmentValue {
 }
 export interface SearchState {
   key: VKey
+  index?: number
   fieldKey?: VKey
   segmentValues: SegmentValue[]
 }
@@ -100,7 +101,7 @@ export function useSearchStates(
     return { searchState: searchStates.value[index], index }
   }
 
-  function _convertStateToValue(state: SearchState) {
+  function _convertStateToValue<V>(state: SearchState) {
     const operatorSegment = state.segmentValues.find(value => value.name === 'operator')
     const contentSegment = state.segmentValues.find(value => searchDataTypes.includes(value.name as SearchDataTypes))
 
@@ -109,7 +110,7 @@ export function useSearchStates(
       name: props.searchFields?.find(field => field.key === state.fieldKey)?.label,
       operator: operatorSegment?.value as string,
       value: toRaw(contentSegment?.value),
-    } as SearchValue
+    } as SearchValue<V>
   }
 
   function setSegmentValue(searchState: SearchState, name: string, value: unknown) {
@@ -132,10 +133,24 @@ export function useSearchStates(
     }
   }
 
+  function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>, existed?: boolean) {
+    if (!searchState.fieldKey) {
+      return false
+    }
+
+    const searchField = props.searchFields?.find(field => field.key === searchState.fieldKey)
+
+    const count = dataKeyCountMap.get(searchState.fieldKey)
+    if (count && count > (existed ? 1 : 0)) {
+      return !!searchField?.multiple
+    }
+
+    return searchState.segmentValues.every(segmentValue => !isNil(segmentValue.value))
+  }
+
   const validateSearchState = (key: VKey) => {
     const { searchState } = getSearchStateByKey(key)
-
-    return checkSearchStateValid(searchState, props.searchFields, fieldKeyCountMap.value, key !== tempSearchStateKey)
+    return checkSearchStateValid(searchState, fieldKeyCountMap.value, key !== tempSearchStateKey)
   }
 
   const convertStateToValue = (key: VKey) => {
@@ -152,23 +167,23 @@ export function useSearchStates(
     const dataKeyCountMap = new Map<VKey, number>()
 
     searchStates.value = (
-      searchValues.value?.map(searchValue => {
+      searchValues.value?.map((searchValue, index) => {
         const fieldKey = searchValue.key
-        const searchData = props.searchFields?.find(field => field.key === fieldKey)
-        if (!searchData) {
+        const searchField = props.searchFields?.find(field => field.key === fieldKey)
+        if (!searchField) {
           return
         }
 
-        const segmentValues = generateSegmentValues(searchData, searchValue, dateConfig)
-        const index = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
-        const key = getKey(fieldKey, index)
+        const segmentValues = generateSegmentValues(searchField, searchValue, dateConfig)
+        const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
+        const key = getKey(fieldKey, count)
 
-        const searchState = { key, fieldKey, segmentValues }
-        if (!checkSearchStateValid(searchState, props.searchFields, dataKeyCountMap)) {
+        const searchState = { key, index, fieldKey, segmentValues } as SearchState
+        if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
           return
         }
 
-        dataKeyCountMap.set(fieldKey, index + 1)
+        dataKeyCountMap.set(fieldKey, count + 1)
         return searchState
       }) ?? []
     ).filter(Boolean) as SearchState[]
@@ -182,17 +197,7 @@ export function useSearchStates(
           return
         }
 
-        const operatorSegmentValue = state.segmentValues.find(value => value.name === 'operator')
-        const contentSegmentValue = state.segmentValues.find(value =>
-          searchDataTypes.includes(value.name as SearchDataTypes),
-        )
-
-        return {
-          key: state.fieldKey,
-          name: props.searchFields?.find(fileld => fileld.key === state.fieldKey)?.label,
-          operator: operatorSegmentValue?.value,
-          value: toRaw(contentSegmentValue?.value),
-        }
+        return _convertStateToValue(state)
       })
       .filter(Boolean) as SearchValue[]
 
@@ -319,26 +324,4 @@ function generateSegmentValues(
       },
   ].filter(Boolean) as SegmentValue[]
   /* eslint-enable indent */
-}
-
-function checkSearchStateValid(
-  searchState: SearchState,
-  searchFields: SearchField[] | undefined,
-  dataKeyCountMap: Map<VKey, number>,
-  existed?: boolean,
-) {
-  if (!searchState.fieldKey) {
-    return false
-  }
-
-  if (searchState.segmentValues.some(segmentValue => isNil(segmentValue.value))) {
-    return false
-  }
-
-  const count = dataKeyCountMap.get(searchState.fieldKey)
-  if (count && count > (existed ? 1 : 0)) {
-    return !!searchFields?.find(field => field.key === searchState.fieldKey)?.multiple
-  }
-
-  return true
 }

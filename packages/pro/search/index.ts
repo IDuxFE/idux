@@ -19,5 +19,6 @@ export type {
   ProSearchPublicProps as ProSearchProps,
   SearchField,
   SearchValue,
-  InvalidSearchValue,
+  SearchItemError,
+  SearchItemConfirmContext,
 } from './src/types'
