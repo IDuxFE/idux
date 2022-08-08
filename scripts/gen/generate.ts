@@ -8,10 +8,12 @@ import { mkdir, pathExistsSync, readFile, writeFile } from 'fs-extra'
 import inquirer from 'inquirer'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import { camelCase, kebabCase, lowerFirst, upperFirst } from 'lodash'
 import ora from 'ora'
 
 import {
+  getAPITemplate,
   getCdkTestTemplate,
   getCdkUseTemplate,
   getDemoTemplate,
@@ -156,6 +158,10 @@ class Generate {
     return Promise.all([
       writeFile(resolve(this.dirPath, 'docs', 'Index.zh.md'), getDocsTemplate(category, compName, type)),
       writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), getDocsTemplate(category, compName, type, true)),
+      writeFile(resolve(this.dirPath, 'docs', 'Api.zh.md'), getAPITemplate(category, compName)),
+      writeFile(resolve(this.dirPath, 'docs', 'Api.en.md'), getAPITemplate(category, compName, true)),
+      writeFile(resolve(this.dirPath, 'docs', 'Theme.zh.md'), ''),
+      writeFile(resolve(this.dirPath, 'docs', 'Theme.en.md'), ''),
       writeFile(resolve(this.dirPath, 'docs', 'Design.zh.md'), getDesignTemplate()),
       writeFile(resolve(this.dirPath, 'docs', 'Design.en.md'), getDesignTemplate(true)),
       writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), getDemoTemplate()),

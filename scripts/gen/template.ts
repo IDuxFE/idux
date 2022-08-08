@@ -34,7 +34,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 
 
 export const ${camelCaseName}Props = {
-  
+
 } as const
 
 export type ${upperFirstName}Props = ExtractInnerPropTypes<typeof ${camelCaseName}Props>
@@ -122,16 +122,8 @@ describe('use${compName}.ts', () => {
 `
 }
 
-export function getDocsTemplate(moduleName: string, compName: string, type = '', isEn = false): string {
-  const [enType, zhType] = type.split('_')
+export function getAPITemplate(moduleName: string, compName: string, isEn = false): string {
   return `---
-category: ${moduleName}
-type: ${isEn ? enType || '' : zhType || ''}
-order: 0
-title: ${compName}
-subtitle:
----
-
 ## API
 
 ### Ix${compName}
@@ -157,6 +149,19 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
 | --- | --- | --- | --- |
 | - | - | - | - |
+`
+}
+
+export function getDocsTemplate(moduleName: string, compName: string, type = '', isEn = false): string {
+  const [enType, zhType] = type.split('_')
+  return `---
+category: ${moduleName}
+type: ${isEn ? enType || '' : zhType || ''}
+order: 0
+title: ${compName}
+subtitle:
+---
+
 `
 }
 

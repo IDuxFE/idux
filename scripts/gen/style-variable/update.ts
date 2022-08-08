@@ -9,8 +9,6 @@ import { appendFile, lstatSync, readFile, readdir, writeFile } from 'fs-extra'
 import config from './config'
 
 const packageRoot = join(__dirname, '../../../packages')
-const insertBeginFlag = `<!--- insert less variable begin  --->`
-const insertEndFlag = `<!--- insert less variable end  --->`
 
 class UpdateStyleVariable {
   public async start(config: UpdateStyleVariableConfig) {
@@ -23,7 +21,7 @@ class UpdateStyleVariable {
         const lessVariables = await this.getLessVariable(themeFiles)
         const themes = themeFiles.map(themeFile => this.getTheme(themeFile))
         const template = this.getDocsTemplate(lessVariables, themes)
-        this.appendVariable(this.getComponentDocsPath(curDirPath, component, config.targetDocs), template)
+        await this.appendVariable(this.getComponentDocsPath(curDirPath, component, config.targetDocs), template)
       }
     }
   }
@@ -82,8 +80,7 @@ class UpdateStyleVariable {
       return ''
     }
 
-    return `${insertBeginFlag}
-## 主题变量
+    return `## 主题变量
 
 | 名称 | ${exitThemes.join(' | ')} | 备注 |
 | --- | --- | --- | --- |
@@ -98,8 +95,9 @@ ${variablesEntries
     return `| \`${variable[0]}\` | ${themeValue} | - |
 `
   })
-  .join('')}${insertEndFlag}`
+  .join('')}`
   }
+
   /* eslint-enable */
 
   private file2Obj(fileContent: string) {
@@ -111,9 +109,8 @@ ${variablesEntries
   }
 
   private async appendVariable(target: string, template: string) {
-    let targetContent = await readFile(target, 'utf-8')
-    if (targetContent.includes(insertBeginFlag)) {
-      targetContent = targetContent.replace(new RegExp(`${insertBeginFlag}(.|\\s)*?${insertEndFlag}`), template) // 匹配原有的内容进行替换
+    const targetContent = await readFile(target, 'utf-8')
+    if (!targetContent.length) {
       writeFile(target, targetContent, 'utf-8')
     } else {
       template.trim() && appendFile(target, `\n${template}`)
