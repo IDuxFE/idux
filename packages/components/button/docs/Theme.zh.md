@@ -1,0 +1,72 @@
+## 主题变量
+
+| 名称 | default | seer | 备注 |
+| --- | --- | --- | --- |
+| `@button-zindex` | `@zindex-l1-1` | - | - |
+| `@button-font-weight` | `@font-weight-md` | - | - |
+| `@button-line-height` | `@line-height-base` | - | - |
+| `@button-height-xs` | `@height-sm` | `24px` | - |
+| `@button-height-sm` | `@height-md` | `32px` | - |
+| `@button-height-md` | `@height-md` | - | - |
+| `@button-height-lg` | `@height-lg` | - | - |
+| `@button-height-xl` | `@height-xl` | - | - |
+| `@button-min-width-xs` | `@width-xs` | - | - |
+| `@button-min-width-sm` | `@width-sm` | - | - |
+| `@button-min-width-md` | `@width-md` | - | - |
+| `@button-min-width-lg` | `@width-lg` | - | - |
+| `@button-min-width-xl` | `@width-xl` | - | - |
+| `@button-font-size-xs` | `@font-size-xs` | - | - |
+| `@button-font-size-sm` | `@font-size-sm` | - | - |
+| `@button-font-size-md` | `@font-size-md` | - | - |
+| `@button-font-size-lg` | `@font-size-md` | - | - |
+| `@button-font-size-xl` | `@font-size-lg` | - | - |
+| `@button-padding-xs` | `@spacing-sm` | - | - |
+| `@button-padding-sm` | `@spacing-md` | - | - |
+| `@button-padding-md` | `@spacing-lg` | - | - |
+| `@button-padding-lg` | `@spacing-xl` | - | - |
+| `@button-padding-xl` | `@spacing-2xl` | - | - |
+| `@button-border-style` | `@border-style` | - | - |
+| `@button-border-size` | `@border-width-sm` | - | - |
+| `@button-border-radius` | `@border-radius-sm` | - | - |
+| `@button-shadow` | `0 2px 0 rgba(0, 0, 0, 0.015)` | - | - |
+| `@button-disable-color` | `@disabled-color` | - | - |
+| `@button-disable-background-color` | `@disabled-bg-color` | - | - |
+| `@button-disable-border` | `@disabled-border-color` | - | - |
+| `@button-primary` | `@color-white` | - | - |
+| `@button-primary-background-color` | `@color-primary` | - | - |
+| `@button-primary-border-color` | `@color-primary` | - | - |
+| `@button-primary-loading-color` | `@color-white` | - | - |
+| `@button-primary-loading-background-color` | `@color-primary-l10` | - | - |
+| `@button-primary-loading-border` | `@color-primary-l10` | - | - |
+| `@button-primary-text-shadow` | `0 -1px 0 rgba(0, 0, 0, 0.15)` | - | - |
+| `@button-primary-box-shadow` | `0 2px 0 rgba(0, 0, 0, 0.045)` | - | - |
+| `@button-loading-color` | `@color-graphite` | - | - |
+| `@button-default-color` | `@text-color` | - | - |
+| `@button-default-background-color` | `@background-color-component` | - | - |
+| `@button-default-border-color` | `@border-color` | - | - |
+| `@button-danger-color` | `@color-error` | - | - |
+| `@button-danger-border-color` | `@color-error` | - | - |
+| `@button-danger-hover-color` | `@color-error-l10` | - | - |
+| `@button-danger-hover-border-color` | `@color-error-l10` | - | - |
+| `@button-danger-active-color` | `@color-error-d10` | - | - |
+| `@button-danger-active-border-color` | `@color-error-d10` | - | - |
+| `@button-danger-background-color` | `@color-error` | - | - |
+| `@button-ghost-color` | `@background-color-component` | - | - |
+| `@button-ghost-background-color` | `transparent` | - | - |
+| `@button-ghost-hover-background-color` | `rgba(255, 255, 255, 0.2)` | - | - |
+| `@button-ghost-disabled-background-color` | `rgba(255, 255, 255, 0.4)` | - | - |
+| `@button-ghost-border` | `@background-color-component` | - | - |
+| `@button-link-color` | `@color-primary` | - | - |
+| `@button-link-hover-background-color` | `transparent` | - | - |
+| `@button-link-padding` | `0` | - | - |
+| `@button-text-color` | `@text-color` | - | - |
+| `@button-text-hover-color` | `@color-primary-l10` | - | - |
+| `@button-text-active-color` | `@color-primary-d10` | - | - |
+| `@button-text-hover-background-color` | `transparent` | - | - |
+| `@button-icon-color` | `@color-graphite-d20` | - | - |
+| `@button-icon-font-size-xs` | `@font-size-xs` | `@font-size-lg` | - |
+| `@button-icon-font-size-sm` | `@font-size-sm` | `@font-size-lg` | - |
+| `@button-icon-font-size-md` | `@font-size-md` | `@font-size-lg` | - |
+| `@button-icon-font-size-lg` | `@font-size-md` | `@font-size-lg` | - |
+| `@button-icon-font-size-xl` | `@font-size-lg` | `@font-size-lg` | - |
+| `@button-icon-margin` | `0 @spacing-xs` | - | - |

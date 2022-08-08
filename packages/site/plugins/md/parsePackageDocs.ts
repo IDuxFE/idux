@@ -11,17 +11,22 @@ import { getComponentScript, getExampleTemplate } from './template'
 import { generateDocsToc, nonBindAble, withoutSuffix } from './utils'
 
 const _remark = remark()
+const indexFlag = 'Index'
 
 export function parsePackageDocs(id: string, raw: string): string {
   const [filename, docsDirname, componentName, moduleName, packageName] = id.split('/').reverse()
   const docsPath = `${packageName}/${moduleName}/${componentName}/${docsDirname}/${filename}`
   const [, language] = filename.split('.')
-  const designDocPath = id.replace(/Index/g, 'Design')
+  const apiDocPath = id.replace(indexFlag, 'Api')
+  const apiRaw = existsSync(apiDocPath) ? readFileSync(apiDocPath, { encoding: 'utf-8' }) : ''
+  const themePath = id.replace(indexFlag, 'Theme')
+  const themeRaw = existsSync(themePath) ? readFileSync(themePath, { encoding: 'utf-8' }) : ''
+  const designDocPath = id.replace(indexFlag, 'Design')
   const designRaw = existsSync(designDocPath) ? readFileSync(designDocPath, { encoding: 'utf-8' }) : ''
-  const overviewDocPath = id.replace(/Index/g, 'Overview')
+  const overviewDocPath = id.replace(indexFlag, 'Overview')
   const overviewRaw = existsSync(overviewDocPath) ? readFileSync(overviewDocPath, { encoding: 'utf-8' }) : ''
 
-  const { __content: indexContent, ...indexMeta } = loadFront(raw)
+  const { __content: indexContent, ...indexMeta } = loadFront(raw + apiRaw + themeRaw)
   const { __content: designContent, ...designMeta } = loadFront(designRaw)
   const { __content: overviewContent, ...overviewMeta } = loadFront(overviewRaw)
   const title = generateTitle({ ...(indexMeta as Omit<TitleMeta, 'path'>), path: docsPath })
