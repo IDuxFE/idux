@@ -89,7 +89,7 @@ export interface FormAccessor<T = any> {
    * * `dirty`: Marks it dirty, default is `true`.
    * * `blur`: Marks it blurred, default is `false`.
    */
-  setValue: (value: T, options: { dirty?: boolean; blur?: boolean }) => void
+  setValue: (value: T, options?: { dirty?: boolean; blur?: boolean }) => void
 }
 
 export function useAccessor<T = any>(
