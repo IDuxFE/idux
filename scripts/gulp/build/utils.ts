@@ -1,10 +1,11 @@
 import { join } from 'path'
 
 // import { Extractor, ExtractorConfig } from '@microsoft/api-extractor'
-import { copy, copyFile, readJSON, readdir, statSync, writeFile } from 'fs-extra'
+import { copy, copyFile, readJSON, readdir, statSync, writeFile, writeJson } from 'fs-extra'
 import { TaskFunction } from 'gulp'
 import { OutputOptions, rollup } from 'rollup'
 
+import { filterComponents, mergeExtraAPIs, parseComponentInfo, processAPIs } from './apiParse'
 import { compileLess } from './less'
 import { getRollupDeclarationOptions, getRollupFullOptions, getRollupSingleOptions } from './rollup'
 
@@ -224,4 +225,18 @@ export const buildStyle = (targetDirname: string, distDirname: string, packageNa
     done()
   }
   return buildStyle
+}
+
+export const buildApiJson = (options: Options): TaskFunction => {
+  const { distDirname, targetDirname } = options
+  const buildApiJson: TaskFunction = async done => {
+    const components = filterComponents(await readdir(targetDirname), targetDirname)
+    const componentsApi = processAPIs(await Promise.all(components.map(comp => parseComponentInfo(comp))))
+
+    mergeExtraAPIs(componentsApi, join(targetDirname, 'api.extra.json'))
+    writeJson(join(distDirname, 'api.json'), componentsApi)
+
+    done()
+  }
+  return buildApiJson
 }
