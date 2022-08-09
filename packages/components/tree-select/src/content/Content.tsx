@@ -196,6 +196,7 @@ export default defineComponent({
           virtual={virtual}
           selectable={multiple ? 'multiple' : true}
           selectedKeys={selectedValue.value}
+          selectedClearable={false}
           searchValue={searchFn !== false ? inputValue.value : undefined}
           searchFn={isFunction(searchFn) ? searchFn : undefined}
           showLine={showLine}

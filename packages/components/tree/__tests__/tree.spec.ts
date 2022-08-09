@@ -462,6 +462,28 @@ describe('Tree', () => {
     expect(allNodes[1].classes()).toContain('ix-tree-node-selected')
   })
 
+  test('selectedClearable work', async () => {
+    const onUpdateSelectedKeys = vi.fn()
+    const wrapper = TreeMount({
+      props: {
+        dataSource: simpleDataSource,
+        selectable: true,
+        selectedKeys: ['0'],
+        checkable: false,
+        'onUpdate:selectedKeys': onUpdateSelectedKeys,
+        selectedClearable: true,
+      },
+    })
+
+    const allNodes = wrapper.findAll('.ix-tree-node')
+    await allNodes[0].find('.ix-tree-node-content').trigger('click')
+    expect(onUpdateSelectedKeys).toBeCalledWith([])
+
+    await wrapper.setProps({ selectedClearable: false, selectedKeys: ['0'] })
+    await allNodes[0].find('.ix-tree-node-content').trigger('click')
+    expect(onUpdateSelectedKeys).toBeCalledWith(['0'])
+  })
+
   test('blocked work', async () => {
     const wrapper = TreeMount({
       props: { blocked: true },
