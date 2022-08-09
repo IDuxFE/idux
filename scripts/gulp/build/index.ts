@@ -9,6 +9,7 @@ import {
   buildDeclaration as _buildDeclaration,
   buildFullIndex as _buildFullIndex,
   buildStyle as _buildStyle,
+  buildApiJson,
   buildIndex,
   buildPackage,
   complete,
@@ -43,7 +44,12 @@ const proOptions = {
   packageName: 'pro',
 }
 
-export const buildCdk = series(buildPackage(cdkOptions), buildIndex(cdkOptions), complete('CDK'))
+export const buildCdk = series(
+  buildPackage(cdkOptions),
+  buildIndex(cdkOptions),
+  buildApiJson(cdkOptions),
+  complete('CDK'),
+)
 export const buildComponents = series(
   buildPackage(componentsOptions),
   async () => {
@@ -51,9 +57,15 @@ export const buildComponents = series(
     await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/svg'))
   },
   buildIndex(componentsOptions),
+  buildApiJson(componentsOptions),
   complete('Components'),
 )
-export const buildPro = series(buildPackage(proOptions), buildIndex(proOptions), complete('Pro'))
+export const buildPro = series(
+  buildPackage(proOptions),
+  buildIndex(proOptions),
+  buildApiJson(proOptions),
+  complete('Pro'),
+)
 
 const declarationDirname = join(distDirname, 'packages')
 export const buildDeclaration = series(
