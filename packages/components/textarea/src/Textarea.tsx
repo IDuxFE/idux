@@ -5,15 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
+import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
+import { useAutoRows } from '@idux/cdk/textarea'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { ɵUseInput } from '@idux/components/input'
 
 import { type TextareaProps, textareaProps } from './types'
-import { useAutoRows } from './useAutoRows'
 
 export default defineComponent({
   name: 'IxTextarea',
@@ -73,7 +73,8 @@ export default defineComponent({
     })
     const textareaStyle = computed(() => ({ resize: resize.value }))
 
-    useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
+    const { resizeToFitContent } = useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows)
+    watch(() => accessor.value, resizeToFitContent)
 
     return () => {
       const { class: className, style, ...rest } = attrs

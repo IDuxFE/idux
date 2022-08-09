@@ -10,6 +10,11 @@
 import { isString } from 'lodash-es'
 
 export type EventTarget = HTMLElement | Document | Window | null | undefined
+export interface BoxSizingData {
+  boxSizing: string
+  paddingSize: number
+  borderSize: number
+}
 
 export function on<K extends keyof HTMLElementEventMap>(
   el: EventTarget,
@@ -151,4 +156,14 @@ export function getMouseEvent(evt: MouseEvent | TouchEvent): MouseEvent | Touch 
 export function getMouseClientXY(evt: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
   const { clientX, clientY } = getMouseEvent(evt)
   return { clientX, clientY }
+}
+
+export function getBoxSizingData(node: HTMLElement): BoxSizingData {
+  const { boxSizing, paddingBottom, paddingTop, borderBottom, borderTop } = window.getComputedStyle(node)
+
+  return {
+    boxSizing,
+    paddingSize: parseFloat(paddingBottom) + parseFloat(paddingTop),
+    borderSize: parseFloat(borderBottom) + parseFloat(borderTop),
+  }
 }
