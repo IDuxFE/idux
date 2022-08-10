@@ -52,7 +52,7 @@ export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
     if (isMultiple.value) {
       selected ? tempKeys.splice(index, 1) : tempKeys.push(key)
     } else {
-      tempKeys = selected ? [] : [key]
+      tempKeys = selected && props.selectedClearable ? [] : [key]
     }
 
     handleChange(selected, currNode.rawNode, tempKeys)
@@ -60,7 +60,8 @@ export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
 
   const handleChange = (selected: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
     const { onSelect, onSelectedChange } = props
-    callEmit(onSelect, !selected, rawNode)
+    const realSelected = newKeys.includes(rawNode.key ?? '') ? true : !selected
+    callEmit(onSelect, realSelected, rawNode)
     setSelectedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onSelectedChange)
   }
