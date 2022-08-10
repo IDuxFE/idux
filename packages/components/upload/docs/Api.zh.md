@@ -39,7 +39,7 @@
 | `onRemove`     | 点击移除文件时的回调，返回boolean表示是否允许移除，支持Promise | `(file: UploadFile) => boolean \| Promise<boolean>` | `() => true` | -  | - |
 | `onRetry`      | 点击重新上传时的回调 | `(file: UploadFile) => void` | - | - | - |
 
-#### IxUploadSlots
+#### UploadSlots
 
 | 名称       | 说明                     | 参数类型                                 | 备注 |
 | ---------- | ------------------------ | ---------------------------------------- | ---- |

@@ -14,6 +14,8 @@
 
 ### IxCollapsePanel
 
+#### CollapsePanelProps
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `key` | 唯一标识符 | `string \| number` | `uid` | - | - |

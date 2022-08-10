@@ -13,7 +13,7 @@
 | `title`            | 数值的标题       | string \| v-slot                | -      |||
 | `value`            | 数值内容         | string \| number                | -      |||
 
-### StatisticSlots
+#### StatisticSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |

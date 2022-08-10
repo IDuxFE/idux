@@ -1,0 +1,678 @@
+{
+  "DatePicker": {
+    "zh": {
+      "props": {
+        "v-model:open": {
+          "description": "日期面板是否展开",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "control": {
+          "description": "控件控制器\n >配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh)",
+          "default": "-",
+          "type": "`string | number | AbstractControl`",
+          "globalConfig": "-"
+        },
+        "cellTooltip": {
+          "description": "日期节点的tooltip",
+          "default": "void`",
+          "type": "`(cell: { value: Date, disabled: boolean }) => string",
+          "globalConfig": "-"
+        },
+        "allowInput": {
+          "description": "允许输入模式\n >`'overlay'` 时在浮层内输入",
+          "default": "`false`",
+          "type": "`boolean | 'overlay'`",
+          "globalConfig": "-"
+        },
+        "autofocus": {
+          "description": "默认获取焦点",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "borderless": {
+          "description": "是否无边框",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "clearable": {
+          "description": "是否显示清除图标",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "clearIcon": {
+          "description": "清除按钮图标",
+          "default": "`'close-circle'`",
+          "type": "`string | #clearIcon`",
+          "globalConfig": "✅"
+        },
+        "disabled": {
+          "description": "是否禁用状态\n >使用 `control` 时，此配置无效",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "disabledDate": {
+          "description": "不可选择的日期",
+          "default": "-",
+          "type": "`(date: Date) => boolean`",
+          "globalConfig": "-"
+        },
+        "format": {
+          "description": "展示的格式\n >默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format)",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "timeFormat": {
+          "description": "`'datetime'`下的时间格式\n >全局配置同`TimePicker`的format, 仅在`'datetime'`类型下生效，可用于配置时间面板的列显示，参考[TimePicker](/components/time-picker/zh)",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "dateFormat": {
+          "description": "`'datetime'`下的日期格式\n >全局配置同`DatePicker`的`'date'`类型format, 仅在`'datetime'`类型下生效",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "overlayClassName": {
+          "description": "日期面板的 `class`",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "-"
+        },
+        "overlayContainer": {
+          "description": "自定义浮层容器节点",
+          "default": "-",
+          "type": "`string | HTMLElement | () => string | HTMLElement`",
+          "globalConfig": "✅"
+        },
+        "overlayRender": {
+          "description": "自定义日期面板内容的渲染",
+          "default": "-",
+          "type": "`(children:VNode[]) => VNodeChild`",
+          "globalConfig": "-"
+        },
+        "readonly": {
+          "description": "只读模式",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "size": {
+          "description": "设置选择器大小",
+          "default": "`md`",
+          "type": "`'sm' | 'md' | 'lg'`",
+          "globalConfig": "✅"
+        },
+        "suffix": {
+          "description": "设置后缀图标",
+          "default": "`'calendar'`",
+          "type": "`string | #suffix`",
+          "globalConfig": "✅"
+        },
+        "type": {
+          "description": "设置选择器类型",
+          "default": "`'date'`",
+          "type": "`'date' | 'week' | 'month' | 'quarter' | 'year' | 'datetime'`",
+          "globalConfig": "-"
+        },
+        "onClear": {
+          "description": "清除图标被点击后的回调",
+          "default": "-",
+          "type": "`(evt: MouseEvent) => void`",
+          "globalConfig": "-"
+        },
+        "onFocus": {
+          "description": "获取焦点后的回调",
+          "default": "-",
+          "type": "`(evt: FocusEvent) => void`",
+          "globalConfig": "-"
+        },
+        "onBlur": {
+          "description": "失去焦点后的回调",
+          "default": "-",
+          "type": "`(evt: FocusEvent) => void`",
+          "globalConfig": "-"
+        }
+      },
+      "slots": {
+        "footer": {
+          "description": "自定义日期面板中的页脚",
+          "default": "",
+          "type": "-",
+          "globalConfig": ""
+        },
+        "cell": {
+          "description": "自定义日期面板中的单元格\n >`{date: Date}`",
+          "default": "",
+          "type": "`{date: Date}`",
+          "globalConfig": ""
+        }
+      },
+      "raw": "#### DatePickerProps\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `v-model:value` | 当前选中的日期 | `number \\| string \\| Date` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`，使用 `control` 时，此配置无效  |\n| `footer` | 自定义底部按钮 | `boolean \\| ButtonProps[] \\| VNode \\| #footer` | `false` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |\n| `placeholder` | 选择框默认文本 | `string \\| #placeholder` | - | - | 可以通过国际化配置默认值 |\n| `timePanelOptions` | 时间选择面板配置 | `PickerTimePanelOptions` | - | - | 仅在 `type='datetime'` 时生效 |\n| `onChange` | 值改变后的回调 | `(value: Date, oldValue: Date) => void` | - | - | - |\n| `onInput` | 输入后的回调 | `(evt: Event) => void` | - | - | - |\n\n### 共同的 API\n\n以下 `Props` 为 `IxDatePicker`、`IxDateRangePicker` 共享的属性。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `v-model:open` | 日期面板是否展开 | `boolean` | - | - | - |\n| `control` | 控件控制器 | `string \\| number \\| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |\n| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |\n| `allowInput` | 允许输入模式 | `boolean \\| 'overlay'` | `false` | - | `'overlay'` 时在浮层内输入 |\n| `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |\n| `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |\n| `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |\n| `clearIcon` | 清除按钮图标 |`string \\| #clearIcon` | `'close-circle'` | ✅ | - |\n| `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |\n| `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |\n| `format` | 展示的格式 | `string` | - | ✅ | 默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format) |\n| `timeFormat` | `'datetime'`下的时间格式 | `string` | - | ✅ | 全局配置同`TimePicker`的format, 仅在`'datetime'`类型下生效，可用于配置时间面板的列显示，参考[TimePicker](/components/time-picker/zh) |\n| `dateFormat` | `'datetime'`下的日期格式 | `string` | - | ✅ | 全局配置同`DatePicker`的`'date'`类型format, 仅在`'datetime'`类型下生效 |\n| `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |\n| `overlayContainer` | 自定义浮层容器节点 | `string \\| HTMLElement \\| () => string \\| HTMLElement` | - | ✅ | - |\n| `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |\n| `readonly` | 只读模式 | `boolean` | - | - | - |\n| `size` | 设置选择器大小 | `'sm' \\| 'md' \\| 'lg'` | `md` | ✅ | - |\n| `suffix` | 设置后缀图标 | `string \\| #suffix` | `'calendar'` | ✅ | - |\n| `type` | 设置选择器类型 | `'date' \\| 'week' \\| 'month' \\| 'quarter' \\| 'year' \\| 'datetime'` | `'date'` | - | - |\n| `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |\n| `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |\n| `onBlur` | 失去焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |\n\n```ts\nconst defaultFormat = {\n  date: 'yyyy-MM-dd',\n  week: 'RRRR-II',\n  month: 'yyyy-MM',\n  quarter: \"yyyy-'Q'Q\",\n  year: 'yyyy',\n  datetime: 'yyyy-MM-dd HH:mm:ss',\n}\n```\n\n以下 `Slots` 为 `IxDatePicker`、`IxDateRangePicker` 共享的插槽。\n\n| 名称 | 说明 | 参数类型 | 备注 |\n| --- | --- | --- | --- |\n| `footer` | 自定义日期面板中的页脚 | - | - |\n| `cell` | 自定义日期面板中的单元格 | `{date: Date}` | - |\n\n以下 `Methods` 为 `IxDatePicker`、`IxDateRangePicker` 共享的方法。\n\n| 名称 | 说明 | 参数类型 | 备注 |\n| --- | --- | --- | --- |\n| `blur` | 移除焦点 | `(options?: FocusOptions) => void` | - |\n| `focus` | 获取焦点 | `() => void` | - |\n\n"
+    }
+  },
+  "DateRangePicker": {
+    "zh": {
+      "props": {
+        "v-model:open": {
+          "description": "日期面板是否展开",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "control": {
+          "description": "控件控制器\n >配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh)",
+          "default": "-",
+          "type": "`string | number | AbstractControl`",
+          "globalConfig": "-"
+        },
+        "cellTooltip": {
+          "description": "日期节点的tooltip",
+          "default": "void`",
+          "type": "`(cell: { value: Date, disabled: boolean }) => string",
+          "globalConfig": "-"
+        },
+        "allowInput": {
+          "description": "允许输入模式\n >`'overlay'` 时在浮层内输入",
+          "default": "`false`",
+          "type": "`boolean | 'overlay'`",
+          "globalConfig": "-"
+        },
+        "autofocus": {
+          "description": "默认获取焦点",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "borderless": {
+          "description": "是否无边框",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "clearable": {
+          "description": "是否显示清除图标",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "clearIcon": {
+          "description": "清除按钮图标",
+          "default": "`'close-circle'`",
+          "type": "`string | #clearIcon`",
+          "globalConfig": "✅"
+        },
+        "disabled": {
+          "description": "是否禁用状态\n >使用 `control` 时，此配置无效",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "disabledDate": {
+          "description": "不可选择的日期",
+          "default": "-",
+          "type": "`(date: Date) => boolean`",
+          "globalConfig": "-"
+        },
+        "format": {
+          "description": "展示的格式\n >默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format)",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "timeFormat": {
+          "description": "`'datetime'`下的时间格式\n >全局配置同`TimePicker`的format, 仅在`'datetime'`类型下生效，可用于配置时间面板的列显示，参考[TimePicker](/components/time-picker/zh)",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "dateFormat": {
+          "description": "`'datetime'`下的日期格式\n >全局配置同`DatePicker`的`'date'`类型format, 仅在`'datetime'`类型下生效",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "overlayClassName": {
+          "description": "日期面板的 `class`",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "-"
+        },
+        "overlayContainer": {
+          "description": "自定义浮层容器节点",
+          "default": "-",
+          "type": "`string | HTMLElement | () => string | HTMLElement`",
+          "globalConfig": "✅"
+        },
+        "overlayRender": {
+          "description": "自定义日期面板内容的渲染",
+          "default": "-",
+          "type": "`(children:VNode[]) => VNodeChild`",
+          "globalConfig": "-"
+        },
+        "readonly": {
+          "description": "只读模式",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "size": {
+          "description": "设置选择器大小",
+          "default": "`md`",
+          "type": "`'sm' | 'md' | 'lg'`",
+          "globalConfig": "✅"
+        },
+        "suffix": {
+          "description": "设置后缀图标",
+          "default": "`'calendar'`",
+          "type": "`string | #suffix`",
+          "globalConfig": "✅"
+        },
+        "type": {
+          "description": "设置选择器类型",
+          "default": "`'date'`",
+          "type": "`'date' | 'week' | 'month' | 'quarter' | 'year' | 'datetime'`",
+          "globalConfig": "-"
+        },
+        "onClear": {
+          "description": "清除图标被点击后的回调",
+          "default": "-",
+          "type": "`(evt: MouseEvent) => void`",
+          "globalConfig": "-"
+        },
+        "onFocus": {
+          "description": "获取焦点后的回调",
+          "default": "-",
+          "type": "`(evt: FocusEvent) => void`",
+          "globalConfig": "-"
+        },
+        "onBlur": {
+          "description": "失去焦点后的回调",
+          "default": "-",
+          "type": "`(evt: FocusEvent) => void`",
+          "globalConfig": "-"
+        }
+      },
+      "slots": {
+        "footer": {
+          "description": "自定义日期面板中的页脚",
+          "default": "",
+          "type": "-",
+          "globalConfig": ""
+        },
+        "cell": {
+          "description": "自定义日期面板中的单元格\n >`{date: Date}`",
+          "default": "",
+          "type": "`{date: Date}`",
+          "globalConfig": ""
+        }
+      },
+      "raw": "#### DateRangePickerProps\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `v-model:value` | 当前选中的日期 | `Array<number \\| string \\| Date>` | - | - | 如果传入 `string` 类型，会根据 `format` 解析成 `Date`，使用 `control` 时，此配置无效 |\n| `footer` | 自定义底部按钮 | `boolean \\| ButtonProps[] \\| VNode \\| #footer` | `false` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |\n| `placeholder` | 选择框默认文本 | `string[] \\| #placeholder=placement:'start'\\|'end'` | - | - | 默认使用 `i18n` 配置 |\n| `separator` | 自定义分隔符图标 | `string \\| VNode \\| #separator` | - | ✅ | - |\n| `timePanelOptions` | 时间选择面板配置 | `PickerTimePanelOptions \\| PickerTimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |\n| `onChange` | 值改变后的回调 | `(value: Date[], oldValue: Date[]) => void` | - | - | - |\n| `onInput` | 输入后的回调 | `(isFrom: boolean, evt: Event) => void` | - | - | - |\n\n ### 共同的 API\n\n以下 `Props` 为 `IxDatePicker`、`IxDateRangePicker` 共享的属性。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `v-model:open` | 日期面板是否展开 | `boolean` | - | - | - |\n| `control` | 控件控制器 | `string \\| number \\| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |\n| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |\n| `allowInput` | 允许输入模式 | `boolean \\| 'overlay'` | `false` | - | `'overlay'` 时在浮层内输入 |\n| `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |\n| `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |\n| `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |\n| `clearIcon` | 清除按钮图标 |`string \\| #clearIcon` | `'close-circle'` | ✅ | - |\n| `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |\n| `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |\n| `format` | 展示的格式 | `string` | - | ✅ | 默认值参见 `defaultFormat`, 更多用法参考[date-fns](https://date-fns.org/v2.27.0/docs/format) |\n| `timeFormat` | `'datetime'`下的时间格式 | `string` | - | ✅ | 全局配置同`TimePicker`的format, 仅在`'datetime'`类型下生效，可用于配置时间面板的列显示，参考[TimePicker](/components/time-picker/zh) |\n| `dateFormat` | `'datetime'`下的日期格式 | `string` | - | ✅ | 全局配置同`DatePicker`的`'date'`类型format, 仅在`'datetime'`类型下生效 |\n| `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |\n| `overlayContainer` | 自定义浮层容器节点 | `string \\| HTMLElement \\| () => string \\| HTMLElement` | - | ✅ | - |\n| `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |\n| `readonly` | 只读模式 | `boolean` | - | - | - |\n| `size` | 设置选择器大小 | `'sm' \\| 'md' \\| 'lg'` | `md` | ✅ | - |\n| `suffix` | 设置后缀图标 | `string \\| #suffix` | `'calendar'` | ✅ | - |\n| `type` | 设置选择器类型 | `'date' \\| 'week' \\| 'month' \\| 'quarter' \\| 'year' \\| 'datetime'` | `'date'` | - | - |\n| `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |\n| `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |\n| `onBlur` | 失去焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |\n\n```ts\nconst defaultFormat = {\n  date: 'yyyy-MM-dd',\n  week: 'RRRR-II',\n  month: 'yyyy-MM',\n  quarter: \"yyyy-'Q'Q\",\n  year: 'yyyy',\n  datetime: 'yyyy-MM-dd HH:mm:ss',\n}\n```\n\n以下 `Slots` 为 `IxDatePicker`、`IxDateRangePicker` 共享的插槽。\n\n| 名称 | 说明 | 参数类型 | 备注 |\n| --- | --- | --- | --- |\n| `footer` | 自定义日期面板中的页脚 | - | - |\n| `cell` | 自定义日期面板中的单元格 | `{date: Date}` | - |\n\n以下 `Methods` 为 `IxDatePicker`、`IxDateRangePicker` 共享的方法。\n\n| 名称 | 说明 | 参数类型 | 备注 |\n| --- | --- | --- | --- |\n| `blur` | 移除焦点 | `(options?: FocusOptions) => void` | - |\n| `focus` | 获取焦点 | `() => void` | - |\n\n"
+    }
+  },
+  "TableColumn": {
+    "zh": {
+      "props": {
+        "align": {
+          "description": "文本对齐方式",
+          "default": "`'start'`",
+          "type": "`'start' | 'center' | 'end'`",
+          "globalConfig": "✅"
+        },
+        "colSpan": {
+          "description": "计算列的 `colSpan`\n >返回为 `0` 时，不渲染, 通常用于列合并",
+          "default": "-",
+          "type": "`(record: T, rowIndex: number) => number`",
+          "globalConfig": "-"
+        },
+        "fixed": {
+          "description": "是否固定",
+          "default": "-",
+          "type": "`'start' | 'end'`",
+          "globalConfig": "-"
+        },
+        "rowSpan": {
+          "description": "计算列的 `rowSpan`\n >返回为 `0` 时，不渲染, 通常用于行合并",
+          "default": "-",
+          "type": "`(record: T, rowIndex: number) => number`",
+          "globalConfig": "-"
+        },
+        "titleColSpan": {
+          "description": "设置表头的 `colSpan`\n >为 `0` 时，不渲染",
+          "default": "-",
+          "type": "-",
+          "globalConfig": "-"
+        },
+        "width": {
+          "description": "列宽度",
+          "default": "-",
+          "type": "`string | number`",
+          "globalConfig": "-"
+        },
+        "key": {
+          "description": "表格列 `key` 的取值\n >默认为 `dataKey` 或者 `type`",
+          "default": "-",
+          "type": "`string | number`",
+          "globalConfig": "-"
+        },
+        "children": {
+          "description": "子列的配置项\n >用于设置分组表头",
+          "default": "-",
+          "type": "`TableColumnBase[]`",
+          "globalConfig": "-"
+        },
+        "dataKey": {
+          "description": "数据在数据项中对应的路径\n >支持通过数组查询嵌套路径",
+          "default": "-",
+          "type": "`string | string[]`",
+          "globalConfig": "-"
+        },
+        "ellipsis": {
+          "description": "超过宽度将自动省略\n >优先级高于 `props` 中的 `ellipsis`",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "sortable": {
+          "description": "是否可排序, 参见[TableColumnSortable](#TableColumnSortable)",
+          "default": "-",
+          "type": "`TableColumnSortable`",
+          "globalConfig": "-"
+        },
+        "title": {
+          "description": "列头的文本",
+          "default": "-",
+          "type": "`string`",
+          "globalConfig": "-"
+        },
+        "customCell": {
+          "description": "自定义单元格内容\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)`",
+          "globalConfig": "-"
+        },
+        "customTitle": {
+          "description": "自定义表头标题\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | ((data: { title?: string }) => VNodeChild)`",
+          "globalConfig": "-"
+        },
+        "icon": {
+          "description": "展开按钮图标",
+          "default": "`'right'`",
+          "type": "`string`",
+          "globalConfig": "✅"
+        },
+        "indent": {
+          "description": "展示树形数据时，每层缩进的宽度",
+          "default": "`12`",
+          "type": "`number`",
+          "globalConfig": "-"
+        },
+        "onExpand": {
+          "description": "点击展开图标，或通过 `trigger` 触发",
+          "default": "-",
+          "type": "`(expanded: boolean, record: T) => void`",
+          "globalConfig": "-"
+        },
+        "customExpand": {
+          "description": "自定义展开内容\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | ((data: { record: T; rowIndex: number }) => VNodeChild)`",
+          "globalConfig": "-"
+        },
+        "customIcon": {
+          "description": "自定义展开图标\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | ((data: { expanded: boolean; record: T }) => VNodeChild)`",
+          "globalConfig": "-"
+        },
+        "type": {
+          "description": "列类型\n >必填",
+          "default": "-",
+          "type": "`'selectable' | 'expandable' | 'filterable' | 'sortable'` ",
+          "globalConfig": "-"
+        },
+        "disabled": {
+          "description": "* `type=Expandable` 设置是否允许行展开 \n * `type=Selectable` 设置是否允许行选择",
+          "default": "-",
+          "type": "(record:T) => boolean | `(record: T, rowIndex: number) => boolean`",
+          "globalConfig": "-"
+        },
+        "trigger": {
+          "description": "* `type=Expandable` 不通过图标，触发行展开的方式 \n * `type=Selectable` 不通过点击选择框，触发行选择的方式",
+          "default": "-",
+          "type": "`'click' | 'doubleClick'`",
+          "globalConfig": "-"
+        },
+        "onMenuClick": {
+          "description": "点击下拉菜单时触发\n >如果点击时预设的值, 则不会触发该回调（例如：`all`, 那么触发的是 `onSelectAll`）",
+          "default": "-",
+          "type": "`(options: MenuClickOptions, currentPageRowKeys: VKey[]) => void`",
+          "globalConfig": "-"
+        },
+        "onSelect": {
+          "description": "点击选择框，或通过 `trigger` 触发",
+          "default": "-",
+          "type": "`(selected: boolean, record: T) => void`",
+          "globalConfig": "-"
+        },
+        "onSelectAll": {
+          "description": "点击全选所有时触发",
+          "default": "-",
+          "type": "`(selectedRowKeys: (string | number)[]) => void`",
+          "globalConfig": "-"
+        },
+        "onSelectInvert": {
+          "description": "点击反选所有时触发",
+          "default": "-",
+          "type": "`(selectedRowKeys: (string | number)[]) => void`",
+          "globalConfig": "-"
+        },
+        "onSelectNone": {
+          "description": "点击清空所有时触发",
+          "default": "-",
+          "type": "`() => void`",
+          "globalConfig": "-"
+        },
+        "onSelectPageInvert": {
+          "description": "点击反选当页所有时触发",
+          "default": "-",
+          "type": "`() => void`",
+          "globalConfig": "-"
+        },
+        "nextTooltip": {
+          "description": "是否显示下一次排序的 `tooltip` 提示",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "orderBy": {
+          "description": "当前排序规则",
+          "default": "-",
+          "type": "`'ascend' | 'descend'`",
+          "globalConfig": "-"
+        },
+        "orders": {
+          "description": "支持的排序方式",
+          "default": "`['ascend', 'descend']`",
+          "type": "`Array<'ascend' | 'descend'>`",
+          "globalConfig": "✅"
+        },
+        "sorter": {
+          "description": "本地模式下，排序的运行函数\n >参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)",
+          "default": "-",
+          "type": "`(curr: T, next: T) => number`",
+          "globalConfig": "-"
+        },
+        "filter": {
+          "description": "本地模式下的筛选函数",
+          "default": "-",
+          "type": "`(currFilterBy: VKey[], record: T) => boolean`",
+          "globalConfig": "-"
+        },
+        "filterBy": {
+          "description": "当前激活的筛选项",
+          "default": "-",
+          "type": "`VKey[]`",
+          "globalConfig": "-"
+        },
+        "footer": {
+          "description": "是否显示页脚",
+          "default": "`false`",
+          "type": "`boolean`",
+          "globalConfig": "✅"
+        },
+        "menus": {
+          "description": "* `type=Filterable`删选菜单 \n * `type=Selectable` 自定义列头下拉菜单",
+          "default": "-",
+          "type": "`MenuData[]` | `('all' | 'invert' | 'none' | 'pageInvert' | MenuData)[]`",
+          "globalConfig": "-"
+        },
+        "multiple": {
+          "description": "* `type=Sortable` 排序优先级,设置后，支持多列排序 \n *`type=Filterable` 是否支持多选\n",
+          "default": "- | `true`",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        },
+        "onChange": {
+          "description": "* `type=Expandable` 展开状态发生变化时触发\n  * `type=Selectable` 选中状态发生变化时触发\n * `type=Sortable` 排序规则改变后的回调\n > 通常用于受控模式或服务端排序 \n * `type=Filterable` 筛选规则改变后的回调\n >通常用于受控模式或服务端筛选",
+          "default": "-",
+          "type": "`(expendedRowKeys: (string | number)[], expendedRecords: T[]) => void` | `(selectedRowKeys: (string | number)[], selectedRecords: T[]) => void` | `(currOrderBy?: TableColumnSortOrder) => void` | `(currFilterBy: any[]) => void`",
+          "globalConfig": "-"
+        },
+        "customTrigger": {
+          "description": "自定义展开内容\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | () => VNodeChild)`",
+          "globalConfig": "-"
+        },
+        "customMenu": {
+          "description": "自定义表头标题\n >类型为 `string` 时，对应插槽名",
+          "default": "-",
+          "type": "`string | () => VNodeChild)`",
+          "globalConfig": "-"
+        }
+      },
+      "raw": "#### TableColumn\n\n表格列的配置描述，`T` 为 `dataSource` 的数据类型, `V` 为对应列的值类型。\n\n```ts\nexport type TableColumn<T = any, V = any> =\n  | TableColumnBase<T, V>\n  | TableColumnExpandable<T, V>\n  | TableColumnSelectable<T>\n```\n\n#### 通用配置。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `align` | 文本对齐方式 | `'start' \\| 'center' \\| 'end'` | `'start'` | ✅ | - |\n| `colSpan` | 计算列的 `colSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |\n| `fixed` | 是否固定 | `'start' \\| 'end'` | - | - | - |\n| `rowSpan` | 计算列的 `rowSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |\n| `titleColSpan` | 设置表头的 `colSpan` | - | - | - | 为 `0` 时，不渲染 |\n| `width` | 列宽度 | `string \\| number` | - | - | - |\n\n##### TableColumnBase\n\n普通列配置的属性。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `key` | 表格列 `key` 的取值 | `string \\| number` | - | - | 默认为 `dataKey` 或者 `type` |\n| `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |\n| `dataKey` | 数据在数据项中对应的路径 | `string \\| string[]` | - | - | 支持通过数组查询嵌套路径 |\n| `ellipsis` | 超过宽度将自动省略 | `boolean` | - | - | 优先级高于 `props` 中的 `ellipsis` |\n| `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |\n| `title` | 列头的文本 | `string` | - | - | - |\n| `customCell` | 自定义单元格内容 | `string \\| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n| `customTitle` | 自定义表头标题 | `string \\| ((data: { title?: string }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n\n##### TableColumnExpandable\n\n可展开列配置的属性, 继承 `TableColumnBase`。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `type` | 列类型 | `'expandable'` | - | - | 必填 |\n| `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |\n| `icon` | 展开按钮图标 | `string` | `'right'` | ✅ | - |\n| `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |\n| `trigger` | 不通过图标，触发行展开的方式 | `'click' \\| 'doubleClick'` | - | - | - |\n| `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \\| number)[], expendedRecords: T[]) => void` | - | - | - |\n| `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |\n| `customExpand` | 自定义展开内容 | `string \\| ((data: { record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n| `customIcon` | 自定义展开图标 | `string \\| ((data: { expanded: boolean; record: T }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n\n##### TableColumnSelectable\n\n可选择列配置的属性。\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `type` | 列类型 | `'selectable'` | - | - | 必填 |\n| `disabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |\n| `multiple` | 是否支持多选 | `boolean` | `true` | - | - |\n| `menus` | 自定义列头下拉菜单 | `('all' \\| 'invert' \\| 'none' \\| 'pageInvert' \\| MenuData)[]` | - | - | - |\n| `trigger` | 不通过点击选择框，触发行选择的方式 | `'click' \\| 'doubleClick'` | - | - | - |\n| `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string \\| number)[], selectedRecords: T[]) => void` | - | - | - |\n| `onMenuClick` | 点击下拉菜单时触发 | `(options: MenuClickOptions, currentPageRowKeys: VKey[]) => void` | - | - | 如果点击时预设的值, 则不会触发该回调（例如：`all`, 那么触发的是 `onSelectAll`） |\n| `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected: boolean, record: T) => void` | - | - | - |\n| `onSelectAll` | 点击全选所有时触发 | `(selectedRowKeys: (string \\| number)[]) => void` | - | - | - |\n| `onSelectInvert` | 点击反选所有时触发 | `(selectedRowKeys: (string \\| number)[]) => void` | - | - | - |\n| `onSelectNone` | 点击清空所有时触发 | `() => void` | - | - | - |\n| `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | - |\n\n##### TableColumnSortable\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `nextTooltip` | 是否显示下一次排序的 `tooltip` 提示 | `boolean` | `false` | ✅ | - |\n| `multiple` | 排序优先级 | `number` | - | - | 设置后，支持多列排序 |\n| `orderBy` | 当前排序规则 | `'ascend' \\| 'descend'` | - | - | - |\n| `orders` | 支持的排序方式 | `Array<'ascend' \\| 'descend'>` | `['ascend', 'descend']` | ✅ | - |\n| `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |\n| `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于受控模式或服务端排序 |\n\n##### TableColumnFilterable\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `filter` | 本地模式下的筛选函数 | `(currFilterBy: VKey[], record: T) => boolean` | - | - | - |\n| `filterBy` | 当前激活的筛选项 | `VKey[]` | - | - | - |\n| `footer` | 是否显示页脚 | `boolean` | `false` | ✅ | - |\n| `menus` | 删选菜单 | `MenuData[]` | - | - | - |\n| `multiple` | 是否支持多选 | `boolean` | `true` | - | - |\n| `onChange` | 筛选规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于受控模式或服务端筛选 |\n| `customTrigger` | 自定义展开内容 | `string \\| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n| `customMenu` | 自定义表头标题 | `string \\| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |\n\n#### TableCustomAdditional\n\n```ts\nexport interface TableCustomAdditional<T = any> {\n  bodyCell: (data: { column: TableColumn<T>; record: T; rowIndex: number }) => Record<string, any> | undefined\n  bodyRow: (data: { record: T; rowIndex: number }) => Record<string, any> | undefined\n  headCell: (data: { column: TableColumn<T> }) => Record<string, any> | undefined\n  headRow: (data: { columns: TableColumn<T>[] }) => Record<string, any> | undefined\n}\n\n```\n\n参考示例：[斑马纹表格](#components-table-demo-CustomAdditional), 返回值可以是任意的原生 dom 属性或者事件。\n\n",
+      "path": "components/table/TableColumn"
+    }
+  },
+  "TableScroll": {
+    "zh": {
+      "props": {
+        "width": {
+          "description": "设置横向滚动，用于指定滚动区域的宽\n >可以设置为像素值，百分比， `max-content` 和 `auto`",
+          "default": "-",
+          "type": "`string | number`",
+          "globalConfig": "-"
+        },
+        "height": {
+          "description": "设置纵向滚动，用于指定滚动区域的高\n >可以设置为像素值,当开启虚拟滚动时，必须为 `number`",
+          "default": "-",
+          "type": "`string | number`",
+          "globalConfig": "-"
+        },
+        "fullHeight": {
+          "description": "是否使用 `height` 设置滚动区域高度\n >为 `true` 时使用 `height`, 否则使用 `max-height` 设置滚动区域的高度",
+          "default": "-",
+          "type": "`boolean`",
+          "globalConfig": "-"
+        }
+      },
+      "raw": "#### TableScroll\n\n| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |\n| --- | --- | --- | --- | --- | --- |\n| `width` | 设置横向滚动，用于指定滚动区域的宽 | `string \\| number` | - | - | 可以设置为像素值，百分比， `max-content` 和 `auto` |\n| `height` | 设置纵向滚动，用于指定滚动区域的高 | `string \\| number` | - | - | 可以设置为像素值,当开启虚拟滚动时，必须为 `number` |\n| `fullHeight` | 是否使用 `height` 设置滚动区域高度 | `boolean` | - | - | 为 `true` 时使用 `height`, 否则使用 `max-height` 设置滚动区域的高度 |\n\n",
+      "path": "components/table/TableScroll"
+    }
+  },
+  "Layout": {
+    "zh": {
+      "raw": "布局容器, 其内可放置 `IxLayoutContent`, `IxLayoutFooter`, `IxLayoutHeader` 和 `IxLayoutSider` 等组件。",
+      "path": "components/layout/IxLayout"
+    }
+  },
+  "LayoutContent": {
+    "zh": {
+      "raw": "内容部分，自带默认样式及基本功能，其下可嵌套任何元素，只能放在 `IxLayout` 中。      ",
+      "path": "components/layout/IxLayoutContent"
+    }
+  },
+  "LayoutFooter": {
+    "zh": {
+      "raw": "内容部分，自带默认样式及基本功能，其下可嵌套任何元素，只能放在 `IxLayout` 中。",
+      "path": "components/layout/IxLayoutFooter"
+    }
+  },
+  "LayoutHeader": {
+    "zh": {
+      "raw": "顶部布局，自带默认样式，其下可嵌套任何元素，只能放在 `IxLayout` 中。",
+      "path": "components/layout/IxLayoutHeader"
+    }
+  },
+  "Menu": {
+    "zh": {
+      "slots": {
+        "itemIcon": {
+          "description": "自定义图标",
+          "default": "",
+          "type": "`string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)`",
+          "globalConfig": ""
+        },
+        "itemLabel": {
+          "description": "自定义文本",
+          "default": "",
+          "type": "`string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)`",
+          "globalConfig": ""
+        }
+      }
+    }
+  },
+  "MenuItemGroup": {
+    "zh": {
+      "slots": {
+        "itemGroupIcon": {
+          "description": "自定义图标",
+          "default": "",
+          "type": "`string | ((data: MenuItemGroupProps) => VNodeChild)`",
+          "globalConfig": ""
+        },
+        "itemGroupLabel": {
+          "description": "自定义文本",
+          "default": "",
+          "type": "`string | ((data: MenuItemGroupProps) => VNodeChild)`",
+          "globalConfig": ""
+        }
+      }
+    }
+  },
+  "MenuSub": {
+    "zh": {
+      "slots": {
+        "subIcon": {
+          "description": "自定义图标",
+          "default": "",
+          "type": "`string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)`",
+          "globalConfig": ""
+        },
+        "subLabel": {
+          "description": "自定义文本",
+          "default": "",
+          "type": "`string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)`",
+          "globalConfig": ""
+        },
+        "subSuffix": {
+          "description": "自定义后缀图标",
+          "default": "",
+          "type": "`string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)`",
+          "globalConfig": "-"
+        }
+      }
+    }
+  }
+}

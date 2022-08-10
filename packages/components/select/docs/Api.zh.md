@@ -89,6 +89,8 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 
 ### IxSelectPanel
 
+#### SelectPanelProps
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `activeValue` | 当前处于激活状态的Key | `VKey` | - | 用于配合搜索和键盘操作 |

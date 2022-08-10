@@ -1,6 +1,6 @@
 ## API
 
-### ix-time-picker
+### IxTimePicker
 
 #### TimePickerProps
 

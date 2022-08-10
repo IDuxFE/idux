@@ -1,20 +1,20 @@
 ## API
 
-### IxLayoutPro
+### IxProLayout
 
-#### LayoutProProps
+#### ProLayoutProps
 
 | Name | Description | Type | Default | Global Config | Remark |
 | --- | --- | --- | --- | --- | --- |
 | - | - | - | - | ✅ | - |
 
-#### LayoutProSlots
+#### ProLayoutSlots
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |
 | - | - | - | - |
 
-#### LayoutProMethods
+#### ProLayoutMethods
 
 | Name | Description | Parameter Type | Remark |
 | --- | --- | --- | --- |

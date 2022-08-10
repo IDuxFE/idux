@@ -2,7 +2,7 @@
 
 ### IxProLayout
 
-### ProLayoutProps
+#### ProLayoutProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -19,7 +19,7 @@
 | `type` | 布局类型 | `'header' \| 'sider' \| 'both' \| 'mixin'` | `mixin` | - | 参见示例：[布局类型](#pro-layout-demo-Type) |
 | `onMenuClick` | 点击菜单回调 | `(options: MenuClickOptions) => void`| - | -  | - |
 
-### ProLayoutSlots
+#### ProLayoutSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
