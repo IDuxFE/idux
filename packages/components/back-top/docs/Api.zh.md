@@ -2,7 +2,7 @@
 
 ### IxBackTop
 
-#### Props
+#### BackTopProps
 
 | 参数 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | -- | -- | -- | --  | -- | -- |
@@ -11,7 +11,7 @@
 | `visibilityHeight` | 滚动高度达到此参数值才出现 | `number` | `400`  |  ✅  | - |
 | `onClick` | 点击回调事件 | `(evt: MouseEvent) => void` | - | - | - |
 
-#### Slots
+#### BackTopSlots
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |

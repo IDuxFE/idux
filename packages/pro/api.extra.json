@@ -1,0 +1,7 @@
+{
+  "$extends": {
+    "Form": { "ProForm": ["props"] },
+    "Menu": { "ProLayout": ["slots"] },
+    "Table": { "ProTable": ["props", "slots"] }
+  }
+}

@@ -30,7 +30,7 @@
 
 ### IxCheckboxGroup
 
-#### GroupProps
+#### CheckboxGroupProps
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
