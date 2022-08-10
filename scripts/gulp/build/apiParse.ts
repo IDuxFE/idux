@@ -1,15 +1,14 @@
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 
-import { existsSync, readJSONSync, statSync } from 'fs-extra'
+import { existsSync, readJSON, readJSONSync, statSync } from 'fs-extra'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import { merge } from 'lodash'
+import { forIn, merge, omit, pick } from 'lodash'
 import { Lexer, marked } from 'marked'
 
 const filtered = ['_private', 'node_modules', 'style', 'version', 'locales', 'utils', 'config']
-const validAPIName = /^[^\s|FAQ|use]\w+$/m
 const pureCompName = /(?:Ix|Props|Slots)/
 const langs = ['zh', 'en']
 
@@ -28,7 +27,7 @@ export const parseComponentInfo = async (componentWithLang: string[]): Promise<C
   const result: ComponentItem[] = []
   const lang = componentWithLang[0]
   const pathSplit = componentWithLang[1].split('/')
-  const topPath = `${pathSplit[pathSplit.length - 4]}/${pathSplit[pathSplit.length - 3]}`
+  const topPath = `${pathSplit[pathSplit.length - 4]}/${pathSplit[pathSplit.length - 3]}/${lang}`
   const content = (await readFile(componentWithLang[1])).toString()
   const tokens = Lexer.lex(content)
 
@@ -50,7 +49,7 @@ export const parseComponentInfo = async (componentWithLang: string[]): Promise<C
     if (result.length) {
       const startName = result[result.length - 1].name!.trim()
       result[result.length - 1].raw = extractTokensRaw(startName, sectionName)
-      result[result.length - 1].path = `${topPath}/${startName}`
+      result[result.length - 1].path = `${topPath}#${startName}`
     }
 
     if (level.length > 0 || overview !== '') {
@@ -90,7 +89,7 @@ export const parseComponentInfo = async (componentWithLang: string[]): Promise<C
           data.default = row[3].text
           break
         case 4:
-          data.description = row[1].text + newLineWrapper(row[3].text) + newLineWrapper(row[2].text)
+          data.description = row[1].text + newLineWrapper(row[3].text)
           break
       }
       return data
@@ -175,12 +174,11 @@ export const processAPIs = (components: ComponentItem[][]): JSONType => {
   const apis: JSONType = {}
   components
     .flatMap(item => item)
-    .filter(item => validAPIName.test(item.name ?? ''))
     .map(item => TypeMapper(item))
     .filter(item => item.type)
     .forEach(item => {
       makeSureObject(apis, item)
-      const component = apis[item.name][item.lang!]
+      const component = apis[item.name!][item.lang!]
       const current = component[item.type!]
       if (!component.raw) {
         component.raw = ''
@@ -240,6 +238,33 @@ const TypeMapper = (item: ComponentItem) => {
     name: item.name!.replace(pureCompName, ''),
     type: item.type ?? item.name?.endsWith('Props') ? 'props' : item.name?.endsWith('Slots') ? 'slots' : undefined,
   }
+}
+/**
+ *  some pro components depend on the properties of normal components
+ */
+export const migrateToProAPIs = async (proApis: JSONType, distPath: string): Promise<void> => {
+  const bindingsFlag = '$extends'
+  const bindings = pick(proApis, bindingsFlag)[bindingsFlag]
+  const components = await readJSON(distPath)
+
+  forIn(bindings, (component: JSONType, name: string) => {
+    forIn(component, (attrs: Array<string>, proName: string) => {
+      for (const attrName of attrs) {
+        langs
+          .filter(lang => components[name][lang])
+          .forEach(lang => {
+            if (!proApis[proName][lang][attrName]) {
+              proApis[proName][lang][attrName] = components[name][lang][attrName]
+            } else {
+              merge(proApis[proName][lang][attrName], components[name][lang][attrName])
+            }
+          })
+      }
+    })
+  })
+
+  // Maintaining purity
+  omit(proApis, bindingsFlag)
 }
 
 type ComponentElement = {
