@@ -26,4 +26,16 @@ const router = createRouter({
   routes,
 })
 
+// fix: vscode link policy
+router.beforeEach(router => {
+  const redirectedFrom = router.redirectedFrom
+  if (
+    redirectedFrom &&
+    redirectedFrom.path.indexOf('%23') &&
+    router.fullPath.replace('#', '%23') !== redirectedFrom.path
+  ) {
+    return redirectedFrom.fullPath.replace('%23', '#')
+  }
+})
+
 createApp(App).use(router).use(IduxInstall).mount('#app')
