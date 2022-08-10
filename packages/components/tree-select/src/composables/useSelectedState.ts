@@ -47,6 +47,9 @@ export function useSelectedState(
   }
 
   const changeSelected = (value: VKey[]) => {
+    if (!props.multiple && !value.length) {
+      return
+    }
     setValue(value)
   }
 

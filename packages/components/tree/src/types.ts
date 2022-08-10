@@ -72,10 +72,6 @@ export const treeProps = {
     type: [Boolean, String] as PropType<boolean | 'multiple'>,
     default: true,
   },
-  selectedClearable: {
-    type: Boolean,
-    default: true,
-  },
   showLine: {
     type: Boolean,
     default: undefined,

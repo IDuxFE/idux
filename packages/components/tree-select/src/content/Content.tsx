@@ -74,7 +74,10 @@ export default defineComponent({
 
     const handleSelect = (selected: boolean, node: TreeSelectNode) => {
       const { onSelect } = props
-      callEmit(onSelect, selected, node)
+
+      if (!props.multiple && selectedValue.value?.[0] !== node.key) {
+        callEmit(onSelect, selected, node)
+      }
       handleNodeClick()
     }
 
@@ -196,7 +199,6 @@ export default defineComponent({
           virtual={virtual}
           selectable={multiple ? 'multiple' : true}
           selectedKeys={selectedValue.value}
-          selectedClearable={false}
           searchValue={searchFn !== false ? inputValue.value : undefined}
           searchFn={isFunction(searchFn) ? searchFn : undefined}
           showLine={showLine}

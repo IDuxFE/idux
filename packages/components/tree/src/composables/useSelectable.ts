@@ -52,7 +52,7 @@ export function useSelectable(props: TreeProps, mergedNodeMap: ComputedRef<Map<V
     if (isMultiple.value) {
       selected ? tempKeys.splice(index, 1) : tempKeys.push(key)
     } else {
-      tempKeys = selected && props.selectedClearable ? [] : [key]
+      tempKeys = selected ? [] : [key]
     }
 
     handleChange(selected, currNode.rawNode, tempKeys)
