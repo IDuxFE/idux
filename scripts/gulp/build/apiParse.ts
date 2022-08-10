@@ -49,7 +49,7 @@ export const parseComponentInfo = async (componentWithLang: string[]): Promise<C
     if (result.length) {
       const startName = result[result.length - 1].name!.trim()
       result[result.length - 1].raw = extractTokensRaw(startName, sectionName)
-      result[result.length - 1].path = `${topPath}#${startName}`
+      result[result.length - 1].path = `${topPath}`
     }
 
     if (level.length > 0 || overview !== '') {
@@ -107,7 +107,7 @@ export const parseComponentInfo = async (componentWithLang: string[]): Promise<C
     let start = tokens.findIndex(token => token.type === 'heading' && token.text === startToken)
     const end = tokens.findIndex(token => token.type === 'heading' && token.text === endToken)
     let raw = ''
-    raw += `${tokens[start].raw}`
+    raw += `${tokens[start].raw.trim()}  [$(link-external)](${topPath}#${startToken}) \n\n`
     while (++start < end) {
       const cur = tokens[start]
       if (cur.type === 'heading') {
