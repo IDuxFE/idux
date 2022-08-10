@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// eslint-disable-next-line vue/prefer-import-from-vue
 import { toRawType } from '@vue/shared'
 
 import { isFunction, isObject } from 'lodash-es'

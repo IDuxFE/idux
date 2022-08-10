@@ -5,8 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed } from '@vue/reactivity'
-import { type PropType, defineComponent, inject } from 'vue'
+import { type PropType, computed, defineComponent, inject } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
 import { IxDivider } from '@idux/components/divider'

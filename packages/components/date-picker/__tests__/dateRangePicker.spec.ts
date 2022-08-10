@@ -231,14 +231,8 @@ describe('DateRangePicker', () => {
       },
     })
 
-    const dateInputs = wrapper
-      .findComponent(RangeContent)
-      .findAll('.ix-date-range-picker-overlay-inputs-date-input')
-      .map(el => el.find('input'))
-    const timeInputs = wrapper
-      .findComponent(RangeContent)
-      .findAll('.ix-date-range-picker-overlay-inputs-time-input')
-      .map(el => el.find('input'))
+    const dateInputs = wrapper.findComponent(RangeContent).findAll('.ix-date-range-picker-overlay-inputs-date-input')
+    const timeInputs = wrapper.findComponent(RangeContent).findAll('.ix-date-range-picker-overlay-inputs-time-input')
 
     await dateInputs[0].setValue('2021-11-22')
     await dateInputs[1].setValue('2021-12-25')

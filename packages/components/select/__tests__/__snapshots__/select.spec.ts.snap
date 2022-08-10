@@ -33,8 +33,7 @@ exports[`Select > multiple work > maxLabel responsive work 1`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`Select > multiple work > maxLabel responsive work 2`] = `
@@ -61,8 +60,7 @@ exports[`Select > multiple work > maxLabel responsive work 2`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`Select > multiple work > render work 1`] = `
@@ -86,8 +84,7 @@ exports[`Select > multiple work > render work 1`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`Select > single work > render work 1`] = `
@@ -102,8 +99,7 @@ exports[`Select > single work > render work 1`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`Select > template work > render work 1`] = `
@@ -118,6 +114,5 @@ exports[`Select > template work > render work 1`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;

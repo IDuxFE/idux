@@ -5,8 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed } from '@vue/reactivity'
-import { type PropType, type VNode, defineComponent, inject, normalizeClass } from 'vue'
+import { type PropType, type VNode, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { ɵEmpty } from '@idux/components/_private/empty'

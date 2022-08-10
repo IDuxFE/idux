@@ -35,13 +35,12 @@ export default defineConfig({
     coverage: {
       enabled: true,
       reporter: ['json', 'lcov', 'cobertura'],
-      excludeNodeModules: true,
       include: ['packages/**/src/*.{ts,tsx}'],
       exclude: [],
     },
     reporters: ['default'],
     // 如果要测试单目录，可以修改这个配置
-    include: ['packages/**/__tests__/*.spec.{ts,tsx}'],
+    include: ['**/__tests__/*.spec.{ts,tsx}'],
   },
 
   define: {

@@ -224,8 +224,7 @@ describe('DatePicker', () => {
 
     await wrapper
       .findComponent(Content)
-      .find('.ix-date-picker-overlay-inputs-date-input')
-      .find('input')
+      .find<HTMLInputElement>('.ix-date-picker-overlay-inputs-date-input')
       .setValue('2021-11-22')
     expect(onUpdateValue).toBeCalledWith(new Date('2021-11-22 00:00:00'))
     expect(onChange).toBeCalledWith(new Date('2021-11-22 00:00:00'), new Date('2021-10-11 00:00:00'))
@@ -235,8 +234,7 @@ describe('DatePicker', () => {
 
     await wrapper
       .findComponent(Content)
-      .find('.ix-date-picker-overlay-inputs-time-input')
-      .find('input')
+      .find<HTMLInputElement>('.ix-date-picker-overlay-inputs-time-input')
       .setValue('13:03:04')
     expect(onUpdateValue).toBeCalledWith(new Date('2021-10-11 13:03:04'))
     expect(onChange).toBeCalledWith(new Date('2021-10-11 13:03:04'), new Date('2021-10-11 00:00:00'))
@@ -262,10 +260,10 @@ describe('DatePicker', () => {
 
     expect(wrapper.find('.ix-date-picker').find('input').element.value).toBe('2021-10-11 13/03/04')
     expect(
-      wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-date-input').find('input').element.value,
+      wrapper.findComponent(Content).find<HTMLInputElement>('.ix-date-picker-overlay-inputs-date-input').element.value,
     ).toBe('2021年10月11日')
     expect(
-      wrapper.findComponent(Content).find('.ix-date-picker-overlay-inputs-time-input').find('input').element.value,
+      wrapper.findComponent(Content).find<HTMLInputElement>('.ix-date-picker-overlay-inputs-time-input').element.value,
     ).toBe('13时03分04秒')
   })
 })
