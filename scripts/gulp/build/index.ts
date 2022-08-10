@@ -63,7 +63,7 @@ export const buildComponents = series(
 export const buildPro = series(
   buildPackage(proOptions),
   buildIndex(proOptions),
-  buildApiJson(proOptions),
+  buildApiJson(proOptions, true),
   complete('Pro'),
 )
 

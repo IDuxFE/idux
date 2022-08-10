@@ -5,7 +5,7 @@ import { copy, copyFile, readJSON, readdir, statSync, writeFile, writeJson } fro
 import { TaskFunction } from 'gulp'
 import { OutputOptions, rollup } from 'rollup'
 
-import { filterComponents, mergeExtraAPIs, parseComponentInfo, processAPIs } from './apiParse'
+import { filterComponents, mergeExtraAPIs, migrateToProAPIs, parseComponentInfo, processAPIs } from './apiParse'
 import { compileLess } from './less'
 import { getRollupDeclarationOptions, getRollupFullOptions, getRollupSingleOptions } from './rollup'
 
@@ -227,15 +227,17 @@ export const buildStyle = (targetDirname: string, distDirname: string, packageNa
   return buildStyle
 }
 
-export const buildApiJson = (options: Options): TaskFunction => {
+export const buildApiJson = (options: Options, pro?: boolean): TaskFunction => {
   const { distDirname, targetDirname } = options
+
   const buildApiJson: TaskFunction = async done => {
     const components = filterComponents(await readdir(targetDirname), targetDirname)
     const componentsApi = processAPIs(await Promise.all(components.map(comp => parseComponentInfo(comp))))
 
     mergeExtraAPIs(componentsApi, join(targetDirname, 'api.extra.json'))
-    writeJson(join(distDirname, 'api.json'), componentsApi)
+    pro && migrateToProAPIs(componentsApi, join(distDirname.replace('pro', 'components'), 'api.json'))
 
+    await writeJson(join(distDirname, 'api.json'), componentsApi)
     done()
   }
   return buildApiJson
