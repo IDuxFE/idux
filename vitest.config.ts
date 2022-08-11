@@ -13,8 +13,6 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  root: resolve(__dirname, './packages'),
-
   plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), vueJsxPlugin({ enableObjectSlots: false })],
 
   resolve: {
@@ -35,7 +33,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       reporter: ['json', 'lcov', 'cobertura'],
-      include: ['packages/**/src/*.{ts,tsx}'],
+      include: ['**/src/*.{ts,tsx}'],
       exclude: [],
     },
     reporters: ['default'],
