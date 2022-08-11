@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// eslint-disable-next-line vue/prefer-import-from-vue
 import type { IfAny } from '@vue/shared'
 import type { Prop } from 'vue'
 

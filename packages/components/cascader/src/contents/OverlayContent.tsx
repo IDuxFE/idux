@@ -7,8 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { computed } from '@vue/reactivity'
-import { type VNode, defineComponent, inject } from 'vue'
+import { type VNode, computed, defineComponent, inject } from 'vue'
 
 import { ɵInput } from '@idux/components/_private/input'
 

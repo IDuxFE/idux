@@ -123,8 +123,7 @@ describe('use${compName}.ts', () => {
 }
 
 export function getAPITemplate(moduleName: string, compName: string, isEn = false): string {
-  return `---
-## API
+  return `## API
 
 ### Ix${compName}
 
@@ -147,6 +146,23 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 #### ${compName}Methods
 
 ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明 | 参数类型 | 备注 |'}
+| --- | --- | --- | --- |
+| - | - | - | - |
+`
+}
+
+export function getThemeTemplate(isEn = false): string {
+  if (isEn) {
+    return `## Theme variables
+
+| name | default | seer | mark |
+| --- | --- | --- | --- |
+| - | - | - | - |
+`
+  }
+  return `## 主题变量
+
+| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | - | - | - | - |
 `

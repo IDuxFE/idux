@@ -23,6 +23,7 @@ import {
   getIndexTemplate,
   getLessTemplate,
   getTestTemplate,
+  getThemeTemplate,
   getThemesIndexTemplate,
   getThemesTemplate,
   getThemesVariableTemplate,
@@ -160,8 +161,8 @@ class Generate {
       writeFile(resolve(this.dirPath, 'docs', 'Index.en.md'), getDocsTemplate(category, compName, type, true)),
       writeFile(resolve(this.dirPath, 'docs', 'Api.zh.md'), getAPITemplate(category, compName)),
       writeFile(resolve(this.dirPath, 'docs', 'Api.en.md'), getAPITemplate(category, compName, true)),
-      writeFile(resolve(this.dirPath, 'docs', 'Theme.zh.md'), ''),
-      writeFile(resolve(this.dirPath, 'docs', 'Theme.en.md'), ''),
+      writeFile(resolve(this.dirPath, 'docs', 'Theme.zh.md'), getThemeTemplate()),
+      writeFile(resolve(this.dirPath, 'docs', 'Theme.en.md'), getThemeTemplate(true)),
       writeFile(resolve(this.dirPath, 'docs', 'Design.zh.md'), getDesignTemplate()),
       writeFile(resolve(this.dirPath, 'docs', 'Design.en.md'), getDesignTemplate(true)),
       writeFile(resolve(this.dirPath, 'demo', 'Basic.md'), getDemoTemplate()),
@@ -196,13 +197,16 @@ class Generate {
     if (!this.isPrivate) {
       const currIndexPath = resolve(this.packageRoot, 'index.ts')
       let currIndexContent = await readFile(currIndexPath, 'utf-8')
-      currIndexContent += `\nimport { Ix${compName} } from '@idux/${category}/${kebabCase(name)}'`
+      currIndexContent += `
+import { Ix${compName} } from '@idux/${category}/${kebabCase(name)}'
+export * from '@idux/${category}/${kebabCase(name)}'
+`
 
       tasks.push(writeFile(currIndexPath, currIndexContent))
 
       const typesPath = resolve(this.packageRoot, 'types.d.ts')
       let typesContent = await readFile(typesPath, 'utf-8')
-      typesContent += `\nimport { ${compName}Component } from '@idux/${category}/${kebabCase(name)}'`
+      typesContent += `\nimport type { ${compName}Component } from '@idux/${category}/${kebabCase(name)}'\n`
 
       tasks.push(writeFile(typesPath, typesContent))
     }

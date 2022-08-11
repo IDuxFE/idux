@@ -63,8 +63,7 @@ exports[`TreeSelect > single work > searchFn work 1`] = `
     </div>
     <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`TreeSelect > single work > searchFn work 2`] = `
@@ -81,8 +80,7 @@ exports[`TreeSelect > single work > searchFn work 2`] = `
           <path d=\\"m294.784 411.776 208.192 208.192a12.8 12.8 0 0 0 18.048 0l208.192-208.192a12.8 12.8 0 0 1 18.112 0l27.136 27.2a12.8 12.8 0 0 1 0 18.048l-253.44 253.44a12.8 12.8 0 0 1-18.048 0l-253.44-253.44a12.8 12.8 0 0 1 0-18.048l27.136-27.2a12.8 12.8 0 0 1 18.112 0z\\"></path>
         </svg></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`TreeSelect > single work > searchFn work 3`] = `
@@ -99,8 +97,7 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
           <path d=\\"m294.784 411.776 208.192 208.192a12.8 12.8 0 0 0 18.048 0l208.192-208.192a12.8 12.8 0 0 1 18.112 0l27.136 27.2a12.8 12.8 0 0 1 0 18.048l-253.44 253.44a12.8 12.8 0 0 1-18.048 0l-253.44-253.44a12.8 12.8 0 0 1 0-18.048l27.136-27.2a12.8 12.8 0 0 1 18.112 0z\\"></path>
         </svg></i></div>
   </div>
-</div>
-<!---->"
+</div>"
 `;
 
 exports[`TreeSelect > single work > searchable work 1`] = `

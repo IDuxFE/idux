@@ -5,6 +5,5 @@ exports[`DateRangePicker > render work 1`] = `
   <div class=\\"ix-date-range-picker-input\\"><input class=\\"ix-date-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"开始日期\\" readonly=\\"\\" size=\\"12\\"><span class=\\"ix-date-range-picker-input-separator\\">至</span><input class=\\"ix-date-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"结束日期\\" readonly=\\"\\" size=\\"12\\"></div>
   <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-calendar\\" role=\\"img\\" aria-label=\\"calendar\\"></i></div>
   <!---->
-</div>
-<!---->"
+</div>"
 `;

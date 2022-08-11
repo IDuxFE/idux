@@ -847,9 +847,7 @@ describe('Tree', () => {
     expect(allNodes.length).toBe(4)
     expect(allNodes[0].find('.ix-tree-node-expand').find('.ix-icon-loading').exists()).toBe(false)
     expect(allNodes[0].find('.ix-tree-node-expand').find('.ix-icon-right').exists()).toBe(true)
-    expect(
-      allNodes[1].find('.ix-tree-node').find('.ix-tree-node-indent').findAll('.ix-tree-node-indent-unit').length,
-    ).toBe(1)
+    expect(allNodes[1].find('.ix-tree-node-indent').findAll('.ix-tree-node-indent-unit').length).toBe(1)
   })
 
   test('loadedKeys work', async () => {

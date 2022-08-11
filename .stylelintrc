@@ -4,13 +4,15 @@
   "rules": {
     "keyframes-name-pattern": null,
     "at-rule-no-unknown": null,
+    "function-no-unknown": null,
     "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
     "rule-empty-line-before": null,
     "no-duplicate-selectors": null,
     "no-empty-source": null,
     "no-invalid-double-slash-comments": null,
     "no-invalid-position-at-import-rule": null,
-    "font-family-no-missing-generic-family-keyword": null
+    "font-family-no-missing-generic-family-keyword": null,
+    "selector-not-notation": null
   },
   "ignoreFiles": [
     "dist/**/*.less",

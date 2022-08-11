@@ -5,6 +5,5 @@ exports[`DatePicker > render work 1`] = `
   <div class=\\"ix-date-picker-input\\"><input class=\\"ix-date-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"请选择日期\\" readonly=\\"\\" size=\\"12\\"></div>
   <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-calendar\\" role=\\"img\\" aria-label=\\"calendar\\"></i></div>
   <!---->
-</div>
-<!---->"
+</div>"
 `;

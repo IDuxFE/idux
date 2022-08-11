@@ -1,6 +1,6 @@
 import { BlockScrollStrategy } from '../src/strategy/blockScrollStrategy'
 
-describe('blockScrollStrategy.ts', () => {
+describe.skip('blockScrollStrategy.ts', () => {
   const defaultClassName = 'cdk-scroll-block'
   let blockScrollStrategy: BlockScrollStrategy
 
@@ -14,7 +14,7 @@ describe('blockScrollStrategy.ts', () => {
     }
   })
 
-  it.skip('enable and disable work', () => {
+  it('enable and disable work', () => {
     blockScrollStrategy.enable()
 
     expect(document.documentElement.className).toBe(defaultClassName)
@@ -24,7 +24,7 @@ describe('blockScrollStrategy.ts', () => {
     expect(document.documentElement.className).toBe('')
   })
 
-  it.skip('className work', () => {
+  it('className work', () => {
     const testClassName = 'test-block'
     const scrollLocker1 = new BlockScrollStrategy({ className: testClassName })
 
@@ -44,7 +44,7 @@ describe('blockScrollStrategy.ts', () => {
     expect(document.documentElement.className).toBe('')
   })
 
-  it.skip('multiple enable and disable work', () => {
+  it('multiple enable and disable work', () => {
     blockScrollStrategy.enable()
     blockScrollStrategy.enable()
 
@@ -59,7 +59,7 @@ describe('blockScrollStrategy.ts', () => {
     expect(document.documentElement.className).toBe('')
   })
 
-  it.skip('multiple instance work', () => {
+  it('multiple instance work', () => {
     const scrollLocker1 = new BlockScrollStrategy()
     const scrollLocker2 = new BlockScrollStrategy()
 

@@ -13,8 +13,6 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  root: resolve(__dirname, './packages'),
-
   plugins: [vuePlugin({ include: [/\.vue$/, /\.md$/] }), vueJsxPlugin({ enableObjectSlots: false })],
 
   resolve: {
@@ -35,13 +33,12 @@ export default defineConfig({
     coverage: {
       enabled: true,
       reporter: ['json', 'lcov', 'cobertura'],
-      excludeNodeModules: true,
-      include: ['packages/**/src/*.{ts,tsx}'],
+      include: ['**/src/*.{ts,tsx}'],
       exclude: [],
     },
     reporters: ['default'],
     // 如果要测试单目录，可以修改这个配置
-    include: ['packages/**/__tests__/*.spec.{ts,tsx}'],
+    include: ['**/__tests__/*.spec.{ts,tsx}'],
   },
 
   define: {
