@@ -39,7 +39,7 @@ export default defineComponent({
       handleCompositionEnd,
       handleClear,
       syncValue,
-    } = useInput(props, config)
+    } = useInput<HTMLInputElement>(props, config)
 
     expose({ focus, blur })
 

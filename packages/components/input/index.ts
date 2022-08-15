@@ -17,3 +17,4 @@ export type { InputInstance, InputComponent, InputPublicProps as InputProps } fr
 
 export { commonProps as ɵCommonProps } from './src/types'
 export { useInput as ɵUseInput } from './src/useInput'
+export type { InputContext as ɵInputContext } from './src/useInput'

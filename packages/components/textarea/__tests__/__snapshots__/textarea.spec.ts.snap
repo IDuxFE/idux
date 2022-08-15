@@ -2,10 +2,10 @@
 
 exports[`Textarea > render work 1`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: vertical;\\"></textarea><!----></span>"`;
 
-exports[`Textarea > resize and autoRows work 1`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!----></span>"`;
+exports[`Textarea > resize and autoRows work 1`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none; height: 0px; overflow: hidden;\\"></textarea><!----></span>"`;
 
-exports[`Textarea > resize and autoRows work 2`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!----></span>"`;
+exports[`Textarea > resize and autoRows work 2`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none; height: 0px; overflow: hidden;\\"></textarea><!----></span>"`;
 
-exports[`Textarea > resize and autoRows work 3`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!----></span>"`;
+exports[`Textarea > resize and autoRows work 3`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none; height: 0px; overflow: hidden; max-height: -12px;\\"></textarea><!----></span>"`;
 
-exports[`Textarea > resize and autoRows work 4`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none;\\"></textarea><!----></span>"`;
+exports[`Textarea > resize and autoRows work 4`] = `"<span class=\\"ix-textarea ix-textarea-md\\" data-count=\\"\\"><textarea class=\\"ix-textarea-inner\\" style=\\"resize: none; height: 0px; overflow: hidden; max-height: -12px;\\"></textarea><!----></span>"`;

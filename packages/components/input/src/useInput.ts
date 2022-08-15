@@ -6,7 +6,6 @@
  */
 
 import type { CommonProps } from './types'
-import type { InputConfig, TextareaConfig } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
 import { computed, nextTick, ref, toRaw, watch } from 'vue'
@@ -22,6 +21,7 @@ export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> 
   clearVisible: ComputedRef<boolean>
   clearable: ComputedRef<boolean>
   isFocused: Ref<boolean>
+  isComposing: Ref<boolean>
 
   focus: (options?: FocusOptions) => void
   blur: () => void
@@ -35,10 +35,10 @@ export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> 
   syncValue: () => void
 }
 
-export function useInput(
+export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement | HTMLTextAreaElement>(
   props: CommonProps,
-  config: InputConfig | TextareaConfig,
-): InputContext<HTMLInputElement | HTMLTextAreaElement> {
+  config: { clearable: boolean; clearIcon: string },
+): InputContext<T> {
   const { accessor, control } = useAccessorAndControl()
   useFormItemRegister(control)
 
@@ -57,11 +57,11 @@ export function useInput(
     callEmit(props.onBlur, evt)
 
     if (props.trim) {
-      setValue((evt.target as HTMLInputElement).value.trim())
+      setValue((evt.target as T).value.trim())
     }
   }
 
-  const { elementRef, focus, blur } = useFormFocusMonitor<HTMLInputElement | HTMLTextAreaElement>({
+  const { elementRef, focus, blur } = useFormFocusMonitor<T>({
     handleFocus,
     handleBlur,
   })
@@ -97,7 +97,7 @@ export function useInput(
       return
     }
 
-    setValue((evt.target as HTMLInputElement).value)
+    setValue((evt.target as T).value)
   }
 
   const handleCompositionStart = (evt: CompositionEvent) => {
@@ -124,6 +124,7 @@ export function useInput(
     clearIcon,
     clearVisible,
     isFocused,
+    isComposing,
 
     focus,
     blur,

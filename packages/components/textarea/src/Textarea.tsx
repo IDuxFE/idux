@@ -5,15 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted } from 'vue'
+import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { ɵUseInput } from '@idux/components/input'
 
+import { useAutoRows } from './composables/useAutoRows'
 import { type TextareaProps, textareaProps } from './types'
-import { useAutoRows } from './useAutoRows'
 
 export default defineComponent({
   name: 'IxTextarea',
@@ -31,6 +31,7 @@ export default defineComponent({
       clearIcon,
       clearVisible,
       isFocused,
+      isComposing,
 
       focus,
       blur,
@@ -43,10 +44,6 @@ export default defineComponent({
     } = ɵUseInput(props, config)
 
     expose({ focus, blur })
-
-    onMounted(() => {
-      syncValue()
-    })
 
     const classes = computed(() => {
       const { showCount = config.showCount, size = config.size } = props
@@ -73,7 +70,18 @@ export default defineComponent({
     })
     const textareaStyle = computed(() => ({ resize: resize.value }))
 
-    useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows, accessor)
+    const { resizeToFitContent } = useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows)
+    onMounted(() => {
+      syncValue()
+      watch(() => accessor.value, resizeToFitContent, { immediate: true })
+    })
+
+    const _handleInput = (evt: Event) => {
+      handleInput(evt)
+      if (isComposing.value) {
+        resizeToFitContent()
+      }
+    }
 
     return () => {
       const { class: className, style, ...rest } = attrs
@@ -87,7 +95,7 @@ export default defineComponent({
             style={textareaStyle.value}
             disabled={accessor.disabled}
             readonly={props.readonly}
-            onInput={handleInput}
+            onInput={_handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
           />
