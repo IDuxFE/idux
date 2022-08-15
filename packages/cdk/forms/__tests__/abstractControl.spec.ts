@@ -68,14 +68,26 @@ describe('abstractControl.ts', () => {
       expect(control.trigger).toEqual('change')
     })
 
-    test('setValidators work', async () => {
-      const { required, minLength, email } = Validators
+    test('validators changes work', async () => {
+      const { required, email, minLength, maxLength } = Validators
+      const minLength5 = minLength(5)
+      const maxLength10 = maxLength(10)
+
+      // setValidators start
       control.setValidators(required)
 
       expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
 
-      control.setValidators([email, minLength(5)])
+      control.setValidators([email])
       control.setValue('test')
+
+      expect(await control.validate()).toEqual({
+        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
+      })
+      // setValidators end
+
+      // addValidators start
+      control.addValidators(minLength5)
 
       expect(await control.validate()).toEqual({
         email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
@@ -86,27 +98,107 @@ describe('abstractControl.ts', () => {
           message: zhCNMessages.minLength({ actual: 4, isArray: false, minLength: 5 }, control),
         },
       })
+
+      control.addValidators([maxLength10])
+      control.setValue('test@idux.com')
+
+      expect(await control.validate()).toEqual({
+        maxLength: {
+          actual: 13,
+          isArray: false,
+          maxLength: 10,
+          message: zhCNMessages.maxLength({ actual: 13, isArray: false, maxLength: 10 }, control),
+        },
+      })
+      // addValidators end
+
+      // removeValidators start
+      control.removeValidators([maxLength10])
+
+      expect(await control.validate()).toEqual(undefined)
+
+      control.removeValidators(minLength5)
+      control.setValue('test')
+
+      expect(await control.validate()).toEqual({
+        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
+      })
+      // removeValidators end
+
+      // hasValidator start
+      expect(control.hasValidator(email)).toEqual(true)
+      // hasValidator end
+
+      // clearValidators start
+      control.clearValidators()
+      expect(await control.validate()).toEqual(undefined)
+      // clearValidators end
     })
 
-    test('setAsyncValidators work', async () => {
-      const _asyncValidator = (key: string, error: unknown): AsyncValidatorFn => {
+    test('asyncValidators changes work', async () => {
+      const getAsyncValidator = (key: string, error: unknown): AsyncValidatorFn => {
         return (_: unknown) => {
           return Promise.resolve({ [key]: error } as ValidateErrors)
         }
       }
       const message1 = { message: 1 }
       const message2 = { message: 2 }
+      const message3 = { message: 3 }
+      const message4 = { message: 4 }
 
-      control.setAsyncValidators(_asyncValidator('a', message1))
+      const asyncValidator1 = getAsyncValidator('message1', message1)
+      const asyncValidator2 = getAsyncValidator('message2', message2)
+      const asyncValidator3 = getAsyncValidator('message3', message3)
+      const asyncValidator4 = getAsyncValidator('message4', message4)
 
-      expect(await control.validate()).toEqual({ a: message1 })
+      // setAsyncValidators start
+      control.setAsyncValidators(asyncValidator1)
 
-      control.setAsyncValidators([_asyncValidator('a', message1), _asyncValidator('b', message2)])
+      expect(await control.validate()).toEqual({ message1: message1 })
 
-      expect(await control.validate()).toEqual({ a: message1, b: message2 })
+      control.setAsyncValidators([asyncValidator2])
+
+      expect(await control.validate()).toEqual({ message2: message2 })
+
+      // setAsyncValidators end
+
+      // addAsyncValidators start
+      control.addAsyncValidators(asyncValidator3)
+
+      expect(await control.validate()).toEqual({ message2: message2, message3: message3 })
+
+      control.addAsyncValidators([asyncValidator4])
+
+      expect(await control.validate()).toEqual({
+        message2: message2,
+        message3: message3,
+        message4: message4,
+      })
+      // addAsyncValidators end
+
+      // removeAsyncValidators start
+      control.removeAsyncValidators([asyncValidator4])
+
+      expect(await control.validate()).toEqual({ message2: message2, message3: message3 })
+
+      control.removeAsyncValidators(asyncValidator3)
+
+      expect(await control.validate()).toEqual({
+        message2: message2,
+      })
+      // removeAsyncValidators end
+
+      // hasAsyncValidator start
+      expect(control.hasAsyncValidator(asyncValidator2)).toEqual(true)
+      // hasAsyncValidator end
+
+      // clearAsyncValidators start
+      control.clearAsyncValidators()
+      expect(await control.validate()).toEqual(undefined)
+      // clearAsyncValidators end
     })
 
-    test('setErrors, getError and hasError work', () => {
+    test('setErrors, getError, hasError and clearErrors work', () => {
       expect(control.errors.value).toBeUndefined()
       expect(control.getError('required')).toBeUndefined()
       expect(control.hasError('required')).toEqual(false)
@@ -121,6 +213,11 @@ describe('abstractControl.ts', () => {
 
       expect(control.hasError('required')).toEqual(true)
       expect(control.hasError('max')).toEqual(false)
+
+      control.clearErrors()
+
+      expect(control.hasError('required')).toEqual(false)
+      expect(control.errors.value).toEqual(undefined)
     })
 
     test('setParent work', () => {

@@ -156,6 +156,12 @@ describe('formGroup.ts', () => {
       expect(group.get(['array', 2])).toBeUndefined()
       expect(group.get('group.control.test')).toBeUndefined()
     })
+
+    test('setErrors with path work', async () => {
+      group.setErrors({ test: {} }, 'control')
+
+      expect(group.get('control').hasError('test')).toEqual(true)
+    })
   })
 
   describe('trigger work', () => {
