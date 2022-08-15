@@ -486,9 +486,24 @@ export abstract class AbstractControl<T = any> {
 
   /**
    * Sets errors on a form control when running validations manually, rather than automatically.
+   *
+   * If you want to clear errors, you can pass in a undefined.
+   *
    */
-  setErrors(errors?: ValidateErrors): void {
-    this._errors.value = errors
+  setErrors(errors?: ValidateErrors, path?: ControlPathType): void {
+    if (!isNil(path)) {
+      this.get(path)?.setErrors(errors)
+    } else {
+      this._errors.value = errors
+    }
+  }
+
+  /**
+   * Empties out the errors.
+   *
+   */
+  clearErrors(path?: ControlPathType): void {
+    this.setErrors(undefined, path)
   }
 
   /**
