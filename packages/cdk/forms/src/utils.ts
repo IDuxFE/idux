@@ -22,7 +22,6 @@ import {
   toRaw,
   unref,
   watch,
-  watchEffect,
 } from 'vue'
 
 import { isNil } from 'lodash-es'
@@ -97,55 +96,91 @@ export function useAccessor<T = any>(
   valueKey = 'value',
   disabledKey = 'disabled',
 ): FormAccessor<T> {
-  const { props } = getCurrentInstance()!
   const accessor = reactive({} as FormAccessor)
-  let watchStop: WatchStopHandle | undefined
+
+  const { props } = getCurrentInstance()!
+
+  let valueStop: WatchStopHandle | undefined
+  let disabledStop: WatchStopHandle | undefined
   let tempValueWatchStop: WatchStopHandle | undefined
+
   const cleanWatch = () => {
-    if (watchStop) {
-      watchStop()
-      watchStop = undefined
+    if (valueStop) {
+      valueStop()
+      valueStop = undefined
+    }
+    if (disabledStop) {
+      disabledStop()
+      disabledStop = undefined
     }
     if (tempValueWatchStop) {
       tempValueWatchStop()
       tempValueWatchStop = undefined
     }
   }
-  onScopeDispose(cleanWatch)
+
+  const generateAccessorByControl = (currControl: AbstractControl<T>) => {
+    valueStop = watch(
+      currControl.valueRef,
+      value => {
+        accessor.value = value
+      },
+      { immediate: true },
+    )
+    disabledStop = watch(
+      currControl.disabled,
+      disabled => {
+        accessor.disabled = disabled
+      },
+      { immediate: true },
+    )
+    accessor.setValue = (value, options) => currControl.setValue(value, { dirty: true, ...options })
+    accessor.markAsBlurred = () => currControl.markAsBlurred()
+  }
+
+  const generateAccessorByProps = () => {
+    const tempRef = shallowRef(props[valueKey])
+    tempValueWatchStop = watch(
+      () => props[valueKey],
+      value => (tempRef.value = value),
+    )
+    valueStop = watch(
+      () => props[valueKey] ?? tempRef.value,
+      value => {
+        accessor.value = value
+      },
+      { immediate: true },
+    )
+    disabledStop = watch(
+      () => props[disabledKey] as boolean,
+      disabled => {
+        accessor.disabled = disabled
+      },
+      { immediate: true },
+    )
+    accessor.setValue = value => {
+      if (value != toRaw(accessor.value)) {
+        tempRef.value = value
+        callEmit((props as any)[`onUpdate:${valueKey}`], value)
+      }
+    }
+    accessor.markAsBlurred = NoopFunction
+  }
 
   watch(
     () => unref(control),
     currControl => {
       cleanWatch()
-
       if (currControl) {
-        watchStop = watchEffect(() => {
-          accessor.value = currControl.valueRef.value
-          accessor.disabled = currControl.disabled.value
-        })
-        accessor.setValue = (value, options) => currControl.setValue(value, { dirty: true, ...options })
-        accessor.markAsBlurred = () => currControl.markAsBlurred()
+        generateAccessorByControl(currControl)
       } else {
-        const tempRef = shallowRef(props[valueKey])
-        tempValueWatchStop = watch(
-          () => props[valueKey],
-          value => (tempRef.value = value),
-        )
-        watchStop = watchEffect(() => {
-          accessor.value = props[valueKey] ?? tempRef.value
-          accessor.disabled = props[disabledKey] as boolean
-        })
-        accessor.setValue = value => {
-          if (value != toRaw(accessor.value)) {
-            tempRef.value = value
-            callEmit((props as any)[`onUpdate:${valueKey}`], value)
-          }
-        }
-        accessor.markAsBlurred = NoopFunction
+        generateAccessorByProps()
       }
     },
     { immediate: true },
   )
+
+  onScopeDispose(cleanWatch)
 
   return accessor
 }
