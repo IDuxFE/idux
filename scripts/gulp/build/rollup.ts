@@ -9,7 +9,7 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import { upperFirst } from 'lodash'
-import { RollupOptions } from 'rollup'
+import { Plugin, RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
 
 import { esbuildPlugin } from './esbuild'
@@ -36,7 +36,7 @@ export const getRollupSingleOptions = (options: Options): RollupOptions => {
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     esbuildPlugin({ minify }),
-  ]
+  ] as Plugin[]
 
   return {
     input,
@@ -76,7 +76,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
         'process.env.NODE_ENV': JSON.stringify('production'),
       },
     }),
-  ]
+  ] as Plugin[]
 
   return {
     input: join(targetDirname, 'index.ts'),
@@ -134,7 +134,7 @@ export const getRollupDeclarationOptions = (options: Options): RollupOptions => 
       },
       abortOnError: false,
     }),
-  ]
+  ] as Plugin[]
 
   return {
     input,
