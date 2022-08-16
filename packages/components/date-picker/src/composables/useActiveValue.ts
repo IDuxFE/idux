@@ -78,7 +78,11 @@ export function useRangeActiveValue(
           const fromViewYearValue = get(from, 'year')
           const toViewYearValue = get(to, 'year')
 
-          return fromViewValue < toViewValue && fromViewYearValue <= toViewYearValue
+          if (fromViewYearValue > toViewYearValue) {
+            return false
+          }
+
+          return fromViewYearValue < toViewYearValue || fromViewValue < toViewValue
         })()
     /* eslint-enable indent */
   }
