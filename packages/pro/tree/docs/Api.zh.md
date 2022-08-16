@@ -13,6 +13,7 @@
 | `v-model:collapsed` | 树是否收缩 | `boolean` | - | - | 不设置时没有收缩展开功能 |
 | `v-model:searchValue` | 用于搜索的值 | `string` | - | - | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
+| `checkOnClick` | 是否允许点击节点进行勾选 | `boolean` | `false` | - | 仅在`checkable`为`true`时生效 |
 | `childrenKey` | 替代[TreeNode](#TreeNode)中的`children`字段 | `string` | `children` | - | - |
 | `cascaderStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `clearIcon` | 设置搜索框清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
