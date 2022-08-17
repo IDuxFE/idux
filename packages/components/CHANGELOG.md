@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.3](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-08-17)
+
+
+### Bug Fixes
+
+* **comp:date-picker:** fix date picker active value validation ([#1076](https://github.com/IDuxFE/idux/issues/1076)) ([e07eb87](https://github.com/IDuxFE/idux/commit/e07eb871c66cc560205c2785129ae30daf26ec79))
+* **comp:table:** bordered not work with spin ([#1079](https://github.com/IDuxFE/idux/issues/1079)) ([924c5bf](https://github.com/IDuxFE/idux/commit/924c5bf3fe06bcc54c221b53a33d20a37543c4cd))
+* **comp:tree-select:** do not deselect when reclicked ([#1065](https://github.com/IDuxFE/idux/issues/1065)) ([8c670d0](https://github.com/IDuxFE/idux/commit/8c670d020c061b6af54dbd03be3cde759586da27))
+* **comp:tree-select:** do not deselect when reclicked ([#1070](https://github.com/IDuxFE/idux/issues/1070)) ([1a11051](https://github.com/IDuxFE/idux/commit/1a11051a0335d69ee71613acde6aa8b8c754fa69))
+
+
+### Features
+
+* **pro:textarea:** add IxProTextarea compoent ([#1074](https://github.com/IDuxFE/idux/issues/1074)) ([e4ae522](https://github.com/IDuxFE/idux/commit/e4ae522dd7bc454646ca3f5841b735b1c2fbfde7))
+
+
+
+
+
 # [1.0.0-rc.2](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-08-08)
 
 
