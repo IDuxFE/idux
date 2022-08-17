@@ -55,7 +55,7 @@ export function useAjvValidator(props: ProFormProps, config: ProFormConfig): Sch
       if (ignoreKeywords.length) {
         errors = errors.filter(err => !ignoreKeywords.includes(err.keyword))
       }
-      console.log('errors', errors)
+
       if (errors.length) {
         const error =
           getError(errors, schema, value) || Validators.getError('schema', control, { actual: value, errors, schema })

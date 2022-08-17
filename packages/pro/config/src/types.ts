@@ -8,9 +8,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { PortalTargetType } from '@idux/cdk/portal'
+import type { FormSize } from '@idux/components/form'
 import type { ProFormSchemaFormatter } from '@idux/pro/form'
 import type { ProLocale } from '@idux/pro/locales'
 import type { ProTableColumnIndexable } from '@idux/pro/table'
+import type { TextareaResize } from '@idux/pro/textarea'
 import type { Options as AjvOptions } from 'ajv'
 import type { Component, VNode } from 'vue'
 
@@ -21,6 +23,7 @@ export interface ProGlobalConfig {
   form: ProFormConfig
   table: ProTableConfig
   tree: ProTreeConfig
+  textarea: ProTextareaConfig
   search: ProSearchConfig
 }
 
@@ -80,4 +83,14 @@ export interface ProSearchConfig {
   clearIcon: string | VNode
   searchIcon: string | VNode
   overlayContainer?: PortalTargetType
+}
+
+export interface ProTextareaConfig {
+  clearable: boolean
+  clearIcon: string
+  computeCount?: (value: string) => string
+  maxCount?: number | string
+  resize: TextareaResize
+  size: FormSize
+  showCount: boolean
 }

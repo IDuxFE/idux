@@ -1,0 +1,178 @@
+@import '../../style/mixins/reset.less';
+
+.@{pro-textarea-prefix} {
+  .reset-component();
+
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  line-height: @pro-textarea-line-height;
+  border: @pro-textarea-border-width @pro-textarea-border-style @pro-textarea-border-color;
+  border-radius: @pro-textarea-border-radius;
+  transition: all @transition-duration-base @ease-in-out, height 0s, width 0s;
+  cursor: text;
+  overflow: hidden;
+
+  &-sm {
+    .textarea-size(@pro-textarea-font-size-sm, @pro-textarea-padding-vertical-sm, @pro-textarea-padding-horizontal-sm);
+  }
+
+  &-md {
+    .textarea-size(@pro-textarea-font-size-md, @pro-textarea-padding-vertical-md, @pro-textarea-padding-horizontal-md);
+  }
+
+  &-lg {
+    .textarea-size(@pro-textarea-font-size-lg, @pro-textarea-padding-vertical-lg, @pro-textarea-padding-horizontal-lg);
+  }
+
+  &-scroll-holder {
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+  }
+  &-inner {
+    display: flex;
+    width: 100%;
+  }
+
+  &-index-column-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: @pro-textarea-index-column-min-width;
+    height: 100%;
+    background-color: @pro-textarea-index-column-background-color;
+    cursor: default;
+  }
+  &-index-column {
+    align-self: stretch;
+    min-width: @pro-textarea-index-column-min-width;
+    color: @pro-textarea-index-column-color;
+    background-color: @pro-textarea-index-column-background-color;
+    z-index: 2;
+    cursor: default;
+
+    &-cell {
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      padding-left: @pro-textarea-index-column-padding-horizontal;
+      padding-right: @pro-textarea-index-column-padding-horizontal;
+
+      &-error {
+        background-color: @pro-textarea-index-column-cell-error-background-color;
+      }
+    }
+  }
+
+  &-count {
+    position: absolute;
+    bottom: @textarea-count-bottom;
+    right: @textarea-count-right;
+    text-align: right;
+    color: @textarea-count-color;
+    background-color: #fff;
+    opacity: @textarea-count-opacity;
+    z-index: 3;
+  }
+
+  &:not(&-disabled):hover {
+    border-color: @pro-textarea-hover-color;
+  }
+  &-focused {
+    border-color: @pro-textarea-active-color;
+    box-shadow: @pro-textarea-active-box-shadow;
+  }
+  &-disabled {
+    color: @pro-textarea-disabled-color;
+    background-color: @pro-textarea-disabled-background-color;
+    .@{pro-textarea-prefix}-content {
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
+
+  &-clear {
+    position: absolute;
+    z-index: 3;
+    cursor: pointer;
+    opacity: 0;
+    color: @pro-textarea-placeholder-color;
+    transition: @transition-all-base;
+
+    &:hover {
+      color: @pro-textarea-color-secondary;
+    }
+  }
+
+  &-clearable {
+    .@{pro-textarea-prefix}-clear.visible {
+      opacity: 1;
+    }
+  }
+
+  &-content {
+    position: relative;
+    flex: auto;
+    color: @pro-textarea-color;
+    background-color: @pro-textarea-background-color;
+    cursor: text;
+
+    &-textarea {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      border: 0;
+      outline: 0;
+      width: 100%;
+      resize: none;
+
+      &[disabled] {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &-error-line {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: @pro-textarea-error-line-background-color;
+    &-trigger {
+      position: absolute;
+      left: 12px;
+      top: 0;
+      width: 30px;
+      height: 0;
+      background: transparent;
+    }
+    &-tooltip {
+      color: @pro-textarea-error-line-tooltip-color;
+      background-color: @pro-textarea-error-line-tooltip-background-color;
+
+      .@{overlay-prefix}-arrow {
+        color: @pro-textarea-error-line-tooltip-background-color;
+      }
+    }
+  }
+}
+
+.textarea-size(@font-size, @padding-vertical, @padding-horizontal) {
+  font-size: @font-size;
+  .@{pro-textarea-prefix}-content-textarea {
+    padding: @padding-vertical @padding-horizontal;
+  }
+  .@{pro-textarea-prefix}-clear {
+    top: @padding-vertical;
+    right: @padding-horizontal;
+  }
+
+  &.@{pro-textarea-prefix}-clearable {
+    .@{pro-textarea-prefix}-content-textarea {
+      padding-right: @padding-horizontal + @font-size;
+    }
+  }
+}

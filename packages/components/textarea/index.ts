@@ -13,6 +13,11 @@ const IxTextarea = Textarea as unknown as TextareaComponent
 
 export { IxTextarea }
 
+export { getBoxSizingData as ɵGetBoxSizingData } from './src/utils/getBoxSizingData'
+export { measureTextarea as ɵMeasureTextarea } from './src/utils/measureTextarea'
+export { useLineHeight as ɵUseLineHeight } from './src/composables/useLineHeight'
+export { useAutoRows as ɵUseAutoRows } from './src/composables/useAutoRows'
+
 export type {
   TextareaInstance,
   TextareaComponent,
@@ -20,3 +25,4 @@ export type {
   TextareaAutoRows,
   TextareaResize,
 } from './src/types'
+export type { BoxSizingData as ɵBoxSizingData } from './src/utils/getBoxSizingData'

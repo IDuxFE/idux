@@ -38,6 +38,13 @@ export const defaultConfig: ProGlobalConfig = {
     clearIcon: 'close-circle',
     collapseIcon: ['collapse', 'uncollapse'],
   },
+  textarea: {
+    clearable: false,
+    clearIcon: 'close-circle',
+    resize: 'none',
+    size: 'md',
+    showCount: false,
+  },
   search: {
     clearable: true,
     clearIcon: 'close-circle',
