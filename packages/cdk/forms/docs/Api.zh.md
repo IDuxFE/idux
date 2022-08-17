@@ -159,9 +159,388 @@ export interface FormAccessor<T = any> {
    * 将控件设置为 blurred 状态
    */
   markAsBlurred: () => void
-  /**
+ /**
    * 设置控件的值
+   *
+   * @param value 新的值
+   * @param options
+   * * `dirty`: 是否让控件变成 `dirty` 状态, 默认值为 `true`.
+   * * `blur`: 是否让控件变成 `blurred` 状态, 默认值为 `false`.
    */
-  setValue: (value: T) => void
+  setValue: (value: T, options: { dirty?: boolean; blur?: boolean }) => void
+}
+```
+
+特别需要注意的是: `FormAccessor` 中的 `setValue` 的第二个参数中的 `dirty` 默认为 `true`, 与 `AbstractControl` 的 `setValue` 不一致。
+
+### AbstractControl
+
+```ts
+export abstract class AbstractControl<T = any> {
+    /**
+     * control 的唯一 id
+     */
+    readonly uid: number;
+    /**
+     * 子控件的集合
+     */
+    readonly controls: ComputedRef<any>;
+    /**
+     * 控件的 ref 值
+     */
+    readonly valueRef: ComputedRef<T>;
+    /**
+     * 控件的验证状态，有三种可能的验证状态值:
+     * * **valid**: 此控件已通过所有验证
+     * * **invalid**: 此控件至少有一个验证失败
+     * * **validating**: 此控件正在执行验证
+     */
+    readonly status: ComputedRef<ValidateStatus>;
+    /**
+     * 包含验证失败所产生的任何错误的对象，如果没有错误则为 `undefined`
+     */
+    readonly errors: ComputedRef<ValidateErrors | undefined>;
+    /**
+     * 此控件是否验证通过
+     */
+    readonly valid: ComputedRef<boolean>;
+    /**
+     * 此控件是否验证失败
+     */
+    readonly invalid: ComputedRef<boolean>;
+    /**
+     * 此控件是否正在验证中
+     */
+    readonly validating: ComputedRef<boolean>;
+    /**
+     * 此控件是否被禁用
+     */
+    readonly disabled: ComputedRef<boolean>;
+    /**
+     * 此控件是否已经触发 blur 事件
+     */
+    readonly blurred: ComputedRef<boolean>;
+    /**
+     * 此控件是否尚未触发 blur 事件
+     */
+    readonly unblurred: ComputedRef<boolean>;
+    /**
+     * 如果用户在 UI 中更改了控件的值，则该控件是 `dirty`
+     */
+    readonly dirty: ComputedRef<boolean>;
+    /**
+     * 如果用户在 UI 中尚未更改控件的值，则该控件是 `pristine`
+     */
+    readonly pristine: ComputedRef<boolean>;
+    /**
+     * 此控件的父级控制器, 如果不存在则为 `undefined`
+     */
+    get parent(): AbstractControl | undefined;
+    /**
+     * 此控件的顶层控制器,, 如果不存上层控制器在则为自身
+     */
+    get root(): AbstractControl<T>;
+    /**
+     * 此控件触发验证的时机
+     * 可选值: `'change'` | `'blur'` | `'submit'`
+     * 默认值: `'change'`
+     */
+    get trigger(): 'change' | 'blur' | 'submit';
+    /**
+     * 此控件的名称，通常用于验证提示信息
+     */
+    name?: string;
+    /**
+     * 此控件的示例，通常用于验证提示信息
+     */
+    example?: string;
+    constructor(
+      controls?: GroupControls<T> | AbstractControl<ArrayElement<T>>[], 
+      validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions, 
+      asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[], initValue?: T
+    );
+    /**
+     * 设置控件的新值。
+     *
+     * @param value 新值
+     * @param options
+     * * `dirty`: 是否将其标记为 `dirty`, 默认为 `false`
+     * * `blur`: 是否将其标记为 `blurred`, 默认为 `false`
+     */
+    abstract setValue(value: T | Partial<T> | Partial<ArrayElement<T>>[], options?: {
+        dirty?: boolean;
+        blur?: boolean;
+    }): void;
+    /**
+     * 控件的聚合值。
+     *
+     * @param options
+     * * `skipDisabled`: 是否忽略禁用控件的值，默认为 `false`
+     */
+    abstract getValue(options?: {
+        skipDisabled?: boolean;
+    }): T;
+    /**
+     * 重置控件，将其标记为 `unblurred` 和 `pristine`, 并将值设置为初始化的值
+     */
+    reset(): void;
+    /**
+     * 手动运行验证
+     */
+    validate(): Promise<ValidateErrors | undefined>;
+    /**
+     * 禁用此控制器
+     */
+    disable(): void;
+    /**
+     * 启用此控制器
+     */
+    enable(): void;
+    /**
+     * 将控件标记为 `blurred`
+     */
+    markAsBlurred(): void;
+    /**
+     * 将控件标记为 `unblurred`.
+     */
+    markAsUnblurred(): void;
+    /**
+     * 将控件标记为  `dirty`.
+     */
+    markAsDirty(): void;
+    /**
+     * 将控件标记为  `pristine`.
+     */
+    markAsPristine(): void;
+    /**
+     * 为控件设置新的同步验证器，它将覆盖现有的同步验证器
+     * 
+     * 如果你想清除所有同步验证器，你可以传入 `undefined`
+     */
+    setValidators(newValidators?: ValidatorFn | ValidatorFn[]): void;
+    /**
+     * 为控件设置新的异步验证器，它将覆盖现有的异步验证器
+     * 
+     * 如果你想清除所有异步验证器，你可以传入 `undefined`
+     */
+    setAsyncValidators(newAsyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]): void;
+    /**
+     * 向此控件添加一个或多个同步验证器，但不影响其他验证器
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     */
+    addValidators(validators: ValidatorFn | ValidatorFn[]): void;
+    /**
+     * 向此控件添加一个或多个异步验证器，但不影响其他验证器
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     */
+    addAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void;
+    /**
+     * 从此控件中删除同步验证器，但不影响其他验证器
+     * 通过函数引用比较验证器, 必须传递对完全相同的函数引用
+     * 如果没有找到提供的验证器，它将被忽略
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     */
+    removeValidators(validators: ValidatorFn | ValidatorFn[]): void;
+    /**
+     * 从此控件中删除异步验证器，但不影响其他验证器
+     * 通过函数引用比较验证器, 必须传递对完全相同的函数引用
+     * 如果没有找到提供的验证器，它将被忽略
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     */
+    removeAsyncValidators(validators: AsyncValidatorFn | AsyncValidatorFn[]): void;
+    /**
+     * 清空同步验证器
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     *
+     */
+    clearValidators(): void;
+    /**
+     * 清空异步验证器
+     *
+     * 当您在运行时添加或删除验证器时，您必须调用 `validate()` 以使新的验证生效
+     *
+     */
+    clearAsyncValidators(): void;
+    /**
+     * 检查此控件上是否有同步验证器函数
+     * 所提供的验证器必须是对所提供的完全相同函数的引用
+     *
+     */
+    hasValidator(validator: ValidatorFn): boolean;
+    /**
+     * 检查此控件上是否有异步验证器函数
+     * 所提供的验证器必须是对所提供的完全相同函数的引用
+     *
+     */
+    hasAsyncValidator(validator: AsyncValidatorFn): boolean;
+    /**
+     * 获取给定控件名称或路径的子控件
+     *
+     * @param path 子控件的路径，可以是字符串或者数字，也可以是由 `.` 分割的字符串，还可以是一个数组
+     */
+    get<K extends OptionalKeys<T>>(path: K): AbstractControl<T[K]> | undefined;
+    get<K extends keyof T>(path: K): AbstractControl<T[K]>;
+    get<TK = any>(path: ControlPathType): AbstractControl<TK> | undefined;
+    /**
+     * 手动设置表单控件上的错误
+     */
+    setErrors(errors?: ValidateErrors): void;
+    /**
+     * 获取给定路径的控件的错误数据
+     *
+     * @param errorCode 要检查的错误代码，例如：`required`, `email`
+     * @param path 子控件的路径, 不传则为当前控件
+     */
+    getError(errorCode: string, path?: ControlPathType): ValidateError | undefined;
+    /**
+     * 给定路径的控件是否存在错误
+     *
+     * @param errorCode 要检查的错误代码，例如：`required`, `email`
+     * @param path 子控件的路径, 不传则为当前控件
+     */
+    hasError(errorCode: string, path?: ControlPathType): boolean;
+    /**
+     * 设置控件的父类
+     */
+    setParent(parent: AbstractControl): void;
+    /**
+     * 监听此控件的值的变化
+     *
+     * @param cb 值改变时的回调
+     * @param options 监听参数
+     */
+    watchValue(cb: WatchCallback<T, T | undefined>, options?: WatchOptions): WatchStopHandle;
+    /**
+     * 监听此控件的验证状态的变化
+     *
+     * @param cb 状态改变时的回调
+     * @param options 监听参数
+     */
+    watchStatus(cb: WatchCallback<ValidateStatus, ValidateStatus | undefined>, options?: WatchOptions): WatchStopHandle;
+}
+```
+
+### FormControl
+
+```ts
+export class FormControl<T = any> extends AbstractControl<T> {
+    readonly controls: ComputedRef<undefined>;
+    constructor(
+      _initValue?: T | undefined,
+      validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+      asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]
+    );
+    setValue(value: T, options?: {
+        dirty?: boolean;
+        blur?: boolean;
+    }): void;
+    getValue(): T;
+}
+```
+
+### FormGroup
+
+```ts
+export class FormGroup<T extends object = object> extends AbstractControl<T> {
+    readonly controls: ComputedRef<GroupControls<T>>;
+    constructor(
+      /**
+       * 子控件的集合，它的键就是子控件注册时的 `key`
+       */
+      controls: GroupControls<T>,
+      validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+      asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]
+    );
+    setValue(value: Partial<T>, options?: {
+        dirty?: boolean;
+        blur?: boolean;
+    }): void;
+    getValue(options?: {
+        skipDisabled?: boolean;
+    }): T;
+    /**
+     * 向此控件组添加子控件
+     *
+     * @param key 被添加控件的键
+     * @param control 被添加的控件
+     */
+    addControl<K extends OptionalKeys<T>>(key: K, control: AbstractControl<T[K]>): void;
+    /**
+     * 从此控件组中删除子控件
+     *
+     * @param key 被删除控件的键
+     */
+    removeControl<K extends OptionalKeys<T>>(key: K): void;
+    /**
+     * 替换现有的控件
+     *
+     * @param key 替换控件的键
+     * @param control 替换的控件
+     */
+    setControl<K extends keyof T>(key: K, control: AbstractControl<T[K]>): void;
+}
+```
+
+### FormArray
+
+```ts
+export class FormArray<T = any> extends AbstractControl<T[]> {
+    readonly controls: ComputedRef<AbstractControl<T>[]>;
+    /**
+     * 子控件数组的长度
+     */
+    readonly length: ComputedRef<number>;
+    constructor(
+      /**
+       * 子控件的数组，每个子控件都有一个被注册的 `index`
+       */
+      controls: AbstractControl<T>[],
+      validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
+      asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]
+    );
+    setValue(value: T extends object ? Partial<T>[] : T[], options?: {
+        dirty?: boolean;
+        blur?: boolean;
+    }): void;
+    getValue(options?: {
+        skipDisabled?: boolean;
+    }): T[];
+    /**
+     * 通过的 `index` 获取子控件
+     *
+     * @param index 子控件的下标
+     */
+    at(index: number): AbstractControl<T> | undefined;
+    /**
+     * 在数组末尾插入一个新的子控件
+     *
+     * @param control 添加的子控件
+     */
+    push(control: AbstractControl<T>): void;
+    /**
+     * 在数组中给定的 `index` 处插入一个新的子控件
+     *
+     * @param index 插入控件的下标
+     * @param control 插入的子控件
+     */
+    insert(index: number, control: AbstractControl<T>): void;
+    /**
+     * 删除数组中给定 `index` 处的子控件。
+     *
+     * @param index 删除控件的下标
+     */
+    removeAt(index: number): void;
+    /**
+     * 替换数组中给定 `index` 处现有的子控件
+     *
+     * @param index 替换控件的下标
+     * @param control 替换的控件
+     */
+    setControl(index: number, control: AbstractControl<T>): void;
 }
 ```
