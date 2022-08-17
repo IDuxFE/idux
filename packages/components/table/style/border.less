@@ -1,6 +1,7 @@
 @table-border: @table-border-width @table-border-style @table-border-color;
 
-.@{table-prefix}:not(.@{table-prefix}-borderless) {
+.@{table-prefix}:not(.@{table-prefix}-borderless),
+.@{table-prefix}:not(.@{table-prefix}-borderless) > .@{spin-prefix} > .@{spin-prefix}-container {
   > .@{header-prefix} {
     border: @table-border;
     border-bottom: 0;
