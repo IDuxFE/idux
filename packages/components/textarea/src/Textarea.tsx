@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, type StyleValue, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
+import { type StyleValue, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
@@ -41,7 +41,7 @@ export default defineComponent({
       handleCompositionEnd,
       handleClear,
       syncValue,
-    } = ɵUseInput(props, config)
+    } = ɵUseInput<HTMLTextAreaElement>(props, config)
 
     expose({ focus, blur })
 
@@ -70,7 +70,7 @@ export default defineComponent({
     })
     const textareaStyle = computed(() => ({ resize: resize.value }))
 
-    const { resizeToFitContent } = useAutoRows(elementRef as Ref<HTMLTextAreaElement>, autoRows)
+    const { resizeToFitContent } = useAutoRows(elementRef, autoRows)
     onMounted(() => {
       syncValue()
       watch(() => accessor.value, resizeToFitContent, { immediate: true })
