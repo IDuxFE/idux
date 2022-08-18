@@ -180,7 +180,7 @@ export function useAutoRows(
 
   function reset() {
     if (initialHeight !== undefined) {
-      textareaRef.value!.style.height = initialHeight
+      textareaRef.value && (textareaRef.value.style.height = initialHeight)
     }
   }
 
@@ -192,9 +192,14 @@ export function useAutoRows(
   }, 16)
 
   onMounted(() => {
-    initialHeight = textareaRef.value!.style.height
-
     const watchStopHandlers = [
+      watch(
+        textareaRef,
+        () => {
+          textareaRef.value && (initialHeight = textareaRef.value.style.height)
+        },
+        { immediate: true },
+      ),
       watch(
         autoRows,
         () => {
