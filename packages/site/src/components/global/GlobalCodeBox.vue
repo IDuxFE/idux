@@ -11,6 +11,7 @@
           </div>
           <div class="global-code-box-actions">
             <IxSpace>
+              <GlobalPlayground :code="code" />
               <GlobalCodeSandbox :code="code" />
               <IxTooltip :title="lang === 'zh' ? '在 GitHub 上编辑此示例' : 'Edit this demo on GitHub'">
                 <a :href="editHref" class="global-code-box-edit" target="_blank" rel="noopener noreferrer">
