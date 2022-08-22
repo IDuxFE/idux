@@ -86,6 +86,8 @@ describe('formControl.ts', () => {
 
       control = new FormControl('test', { validators: Validators.required, asyncValidators: _asyncValidator })
 
+      await flushPromises()
+
       expect(control.hasError('required')).toEqual(false)
       expect(control.hasError('async')).toEqual(false)
 
