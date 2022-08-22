@@ -44,8 +44,11 @@ export default defineComponent({
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
     const dataValue = useDataValue(props)
 
+    const isFixStartLast = computed(() => fixedColumnKeys.value.lastStartKey === props.column.key)
+    const isFixEndFirst = computed(() => fixedColumnKeys.value.firstEndKey === props.column.key)
+
     const classes = computed(() => {
-      const { key, fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
+      const { fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes = {
         [`${prefixCls}-sorted`]: !!activeSortOrderBy.value,
@@ -53,13 +56,12 @@ export default defineComponent({
         [`${prefixCls}-ellipsis`]: !!ellipsis,
       }
       if (fixed) {
-        const { lastStartKey, firstEndKey } = fixedColumnKeys.value
         classes = {
           ...classes,
           [`${prefixCls}-fix-start`]: fixed === 'start',
-          [`${prefixCls}-fix-start-last`]: lastStartKey === key,
+          [`${prefixCls}-fix-start-last`]: isFixStartLast.value,
           [`${prefixCls}-fix-end`]: fixed === 'end',
-          [`${prefixCls}-fix-end-first`]: firstEndKey === key,
+          [`${prefixCls}-fix-end-first`]: isFixEndFirst.value,
           [`${prefixCls}-fix-sticky`]: isSticky.value,
         }
       }
@@ -100,6 +102,12 @@ export default defineComponent({
         const text = dataValue.value
         children = renderChildren(props, slots, dataValue.value)
         title = getColTitle(ellipsis, children, text)
+      }
+
+      // see: https://github.com/IDuxFE/idux/issues/1081
+      const { fixed, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
+      if (fixed && ellipsis && (isFixStartLast.value || isFixEndFirst.value)) {
+        children = <span class={`${mergedPrefixCls.value}-cell-content`}>{children}</span>
       }
 
       const customAdditionalFn = tableProps.customAdditional?.bodyCell
