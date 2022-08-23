@@ -37,7 +37,7 @@ export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> 
 
 export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement | HTMLTextAreaElement>(
   props: CommonProps,
-  config: { clearable: boolean; clearIcon: string },
+  config: { clearable: boolean; clearIcon: string; trim: boolean },
 ): InputContext<T> {
   const { accessor, control } = useAccessorAndControl()
   useFormItemRegister(control)
@@ -45,6 +45,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
   const clearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
   const clearVisible = computed(() => !accessor.disabled && !props.readonly && !!accessor.value)
+  const mergedTrim = computed(() => props.trim ?? config.trim)
 
   const isFocused = ref(false)
   const handleFocus = (evt: FocusEvent) => {
@@ -56,7 +57,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
     accessor.markAsBlurred()
     callEmit(props.onBlur, evt)
 
-    if (props.trim) {
+    if (mergedTrim.value) {
       setValue((evt.target as T).value.trim())
     }
   }

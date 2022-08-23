@@ -22,7 +22,7 @@ export const commonProps = {
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   size: { type: String as PropType<FormSize>, default: undefined },
-  trim: { type: Boolean, default: false },
+  trim: { type: Boolean, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
