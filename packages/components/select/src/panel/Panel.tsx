@@ -113,7 +113,7 @@ export default defineComponent({
 })
 
 function useSelectPanelData(props: SelectPanelProps, config: SelectConfig) {
-  const dataContext = inject(SELECT_PANEL_DATA_TOKEN)
+  const dataContext = inject(SELECT_PANEL_DATA_TOKEN, null)
 
   if (dataContext) {
     return dataContext.flattenedOptions

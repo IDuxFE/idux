@@ -27,5 +27,4 @@ export type {
   ProTableColumnExpandable,
   ProTableColumnSelectable,
   ProTableColumnIndexable,
-  ProTableToolbar,
 } from './src/types'
