@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.4](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-08-23)
+
+
+### Bug Fixes
+
+* **comp:form:** the content of form-item is block ([#1019](https://github.com/IDuxFE/idux/issues/1019)) ([#1088](https://github.com/IDuxFE/idux/issues/1088)) ([aef12af](https://github.com/IDuxFE/idux/commit/aef12af2072b6a2303747c5bac563b1182e6031f))
+* **comp:table:** the fixed column not work with ellipsis ([#1081](https://github.com/IDuxFE/idux/issues/1081)) ([#1084](https://github.com/IDuxFE/idux/issues/1084)) ([c6f3ea0](https://github.com/IDuxFE/idux/commit/c6f3ea0d8ba018394b407dd58aa3db16dd3a9957))
+* **pro:textarea:** fix index column cell align-items ([#1085](https://github.com/IDuxFE/idux/issues/1085)) ([f8a58fc](https://github.com/IDuxFE/idux/commit/f8a58fc91d27cff297e49bbbb92876d8f0bfe1e0))
+* **pro:textarea:** textarea el shouldn't show scrollbar ([#1080](https://github.com/IDuxFE/idux/issues/1080)) ([de7cc60](https://github.com/IDuxFE/idux/commit/de7cc60305b94cce1d490f6e1edbb3a2bc95a73a))
+
+
+### Features
+
+* **comp:input:** the trim supports global configuration ([#1089](https://github.com/IDuxFE/idux/issues/1089)) ([efe2f8d](https://github.com/IDuxFE/idux/commit/efe2f8df70663558862d0d502057e857ac15a1ed)), closes [#1086](https://github.com/IDuxFE/idux/issues/1086) [#1087](https://github.com/IDuxFE/idux/issues/1087)
+
+
+
+
+
 # [1.0.0-rc.3](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-08-17)
 
 
