@@ -241,6 +241,7 @@ export interface InputConfig {
   clearable: boolean
   clearIcon: string
   size: FormSize
+  trim: boolean
 }
 
 export interface InputNumberConfig {
@@ -482,6 +483,7 @@ export interface TextareaConfig {
   resize: TextareaResize
   size: FormSize
   showCount: boolean
+  trim: boolean
 }
 
 export interface TimePickerConfig {

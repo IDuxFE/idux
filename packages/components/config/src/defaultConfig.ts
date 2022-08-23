@@ -128,6 +128,7 @@ export const defaultConfig: GlobalConfig = {
     clearable: false,
     clearIcon: 'close-circle',
     size: 'md',
+    trim: false,
   },
   inputNumber: {
     keyboard: true,
@@ -317,6 +318,7 @@ export const defaultConfig: GlobalConfig = {
     resize: 'vertical',
     showCount: false,
     size: 'md',
+    trim: false,
   },
   timePicker: {
     borderless: false,
