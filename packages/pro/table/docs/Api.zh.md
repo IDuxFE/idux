@@ -85,4 +85,8 @@ export const defaultConfig: ProGlobalConfig = {
 
 ### IxProTableLayoutTool
 
-表格布局设置组件，通常在自定义 `header` 的时候设置它, 参见 [自定义头部](#pro-table-demo-CustomHeader).
+表格布局设置组件，大部分情况下，你都不需要使用它。
+
+只有当你设置了 `layoutTool='false'` 时，并需要在表格的其他位置来控制表格的布局时使用。
+
+例如: 在自定义 `header` 的时候设置它, 参见 [自定义头部](#pro-table-demo-CustomHeader).

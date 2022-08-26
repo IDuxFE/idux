@@ -28,7 +28,14 @@ export default defineComponent({
 
     // 只需要判断第一层的即可
     const hiddenColumns = computed(() => mergedColumns.value.filter(column => column.visible === false))
-    const handleCheckAll = (checked: boolean) => loopColumns(mergedColumns.value, column => (column.visible = checked))
+
+    const handleCheckAll = (checked: boolean) =>
+      loopColumns(mergedColumns.value, column => {
+        // undefined or true
+        if (column.changeVisible !== false) {
+          column.visible = checked
+        }
+      })
 
     const renderHeader = () => {
       const settingLength = mergedColumns.value.length

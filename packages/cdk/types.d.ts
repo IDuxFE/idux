@@ -23,7 +23,7 @@ declare module 'vue' {
   }
 
   export interface GlobalDirectives {
-    VClickOutside: ClickOutsideDirective
+    vClickOutside: ClickOutsideDirective
   }
 }
 
