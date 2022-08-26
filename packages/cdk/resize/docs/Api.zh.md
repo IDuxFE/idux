@@ -12,7 +12,7 @@
 | `disabled`    | 是否禁用  | `boolean` | `false` | - | - |
 | `free`        | 是否自由调整    | `boolean`  | -  | - | 自动设置 `style` |
 | `handles`    | 定义拖拽手柄的位置  | `ResizableHandlePlacement[]` | `allHandlePlacements` | - | - |
-| `is`          | 可以调整尺寸的元素或者组件 | `string \| Component` | `'div'`  | -                            | -   |
+| `is`          | 可以调整尺寸的元素或者组件 | `string \| Component` | `'div'` | -  | - |
 | `maxHeight`   | 可调整的最大高度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
 | `maxWidth`    | 可调整的最大宽度  | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
 | `minHeight`   | 可调整的最小高度  | `number` | `8` | - | - |

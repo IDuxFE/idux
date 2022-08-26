@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
 
-import { clickOutside } from '../src/useClickOutside'
+import { vClickOutside } from '../src/vClickOutside'
 
-describe('useClickOutside.ts', () => {
+describe('vClickOutside.ts', () => {
   beforeEach(() => {
     vi.spyOn(console, 'log').mockClear()
     vi.spyOn(console, 'warn').mockClear()
@@ -11,7 +11,7 @@ describe('useClickOutside.ts', () => {
   })
 
   const testComponent = {
-    directives: { clickOutside },
+    directives: { clickOutside: vClickOutside },
     setup() {
       const log = () => {
         console.log('log')
