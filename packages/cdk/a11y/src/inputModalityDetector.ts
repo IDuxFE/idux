@@ -15,10 +15,10 @@
 
 import type { InjectionKey, Ref } from 'vue'
 
-import { customRef, inject, onScopeDispose, ref } from 'vue'
+import { customRef, inject, ref } from 'vue'
 
 import { _getEventTarget, isBrowser, normalizePassiveListenerOptions } from '@idux/cdk/platform'
-import { createSharedComposable } from '@idux/cdk/utils'
+import { createSharedComposable, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { isFakeMousedownFromScreenReader, isFakeTouchstartFromScreenReader } from './fakeEventDetection'
 
@@ -208,7 +208,7 @@ export function useInputModalityDetector(options?: InputModalityDetectorOptions)
     document.addEventListener('touchstart', _onTouchstart, modalityEventListenerOptions)
   }
 
-  onScopeDispose(() => {
+  tryOnScopeDispose(() => {
     if (isBrowser) {
       document.removeEventListener('keydown', _onKeydown, modalityEventListenerOptions)
       document.removeEventListener('mousedown', _onMousedown, modalityEventListenerOptions)

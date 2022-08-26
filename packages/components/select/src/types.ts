@@ -206,12 +206,9 @@ export type SelectData<K = VKey> = SelectOptionProps<K> | SelectOptionGroupProps
 export type SelectSearchFn = (data: SelectData<any>, searchText: string) => boolean
 
 export const optionProps = {
-  disabled: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
-  index: { type: Number as PropType<number>, required: true },
-  label: { type: [String, Number] as PropType<string | number>, required: true },
+  disabled: { type: Boolean, default: false },
+  index: { type: Number, required: true },
+  label: { type: [String, Number] as PropType<string | number>, default: undefined },
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const
@@ -219,8 +216,8 @@ export const optionProps = {
 export type OptionProps = ExtractInnerPropTypes<typeof optionProps>
 
 export const optionGroupProps = {
-  label: { type: [String, Number] as PropType<string | number>, required: true },
-  index: { type: Number as PropType<number>, required: true },
+  label: { type: [String, Number] as PropType<string | number>, default: undefined },
+  index: { type: Number, required: true },
   rawData: { type: Object as PropType<SelectOptionGroupProps>, required: true },
 } as const
 

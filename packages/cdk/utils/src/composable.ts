@@ -5,21 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  type ComputedRef,
-  type EffectScope,
-  computed,
-  effectScope,
-  onScopeDispose,
-  ref,
-  shallowRef,
-  toRaw,
-  watch,
-} from 'vue'
+import { type ComputedRef, type EffectScope, computed, effectScope, ref, shallowRef, toRaw, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
 import { callEmit } from './props'
+import { tryOnScopeDispose } from './tryOnScopeDispose'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createSharedComposable<T extends (...args: any[]) => ReturnType<T>>(composable: T): T {
@@ -40,7 +31,7 @@ export function createSharedComposable<T extends (...args: any[]) => ReturnType<
       scope = effectScope(true)
       state = scope.run(() => composable(...args))
     }
-    onScopeDispose(dispose)
+    tryOnScopeDispose(dispose)
     return state
   }) as T
 }

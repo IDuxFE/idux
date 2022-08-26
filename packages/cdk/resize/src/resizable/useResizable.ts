@@ -165,12 +165,12 @@ export function useResizable(
     callEmit(options.onResizeEnd, toRaw(currPosition.value), evt)
   }
 
-  const { stop: stopPointermove } = useEventListener(document, 'pointermove', handleResizing, true)
-  const { stop: stopPointerup } = useEventListener(document, 'pointerup', handleResizeEnd, true)
-
+  const listenerStops = [
+    useEventListener(document, 'pointermove', handleResizing, true),
+    useEventListener(document, 'pointerup', handleResizeEnd, true),
+  ]
   const stop = () => {
-    stopPointermove()
-    stopPointerup()
+    listenerStops.forEach(listenerStop => listenerStop())
   }
 
   provide(resizableToken, { handleResizeStart })

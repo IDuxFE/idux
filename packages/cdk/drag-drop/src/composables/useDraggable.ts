@@ -8,9 +8,9 @@
 import type { BoundaryType, DnDEvent, DragPosition } from '../types'
 import type { DnDContext } from './useDragDropContext'
 
-import { ComputedRef, computed, onScopeDispose, toRaw, watch } from 'vue'
+import { type ComputedRef, computed, toRaw, watch } from 'vue'
 
-import { type MaybeElementRef, convertElement, useEventListener } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
 import { initContext } from '../utils'
 import { withDragFree } from './withDragFree'
@@ -168,23 +168,21 @@ export function useDraggable(
     }
   }
 
-  const { stop: stopDragStart } = useEventListener(source, 'dragstart', onDragStart)
-  const { stop: stopDrag } = useEventListener(source, 'drag', onDrag)
-  const { stop: stopDragEnd } = useEventListener(source, 'dragend', onDragEnd)
-  const { stop: stopPointerDown } = useEventListener(source, 'pointerdown', onPointerDown)
-  const { stop: stopPointerUp } = useEventListener(source, 'pointerup', onPointerUp)
+  const listenerStops = [
+    useEventListener(source, 'dragstart', onDragStart),
+    useEventListener(source, 'drag', onDrag),
+    useEventListener(source, 'dragend', onDragEnd),
+    useEventListener(source, 'pointerdown', onPointerDown),
+    useEventListener(source, 'pointerup', onPointerUp),
+  ]
 
   const stop = () => {
     offDraggable(convertElement(source)!)
     stopWatch()
-    stopDragStart()
-    stopDrag()
-    stopDragEnd()
-    stopPointerDown()
-    stopPointerUp()
+    listenerStops.forEach(listenerStop => listenerStop())
   }
 
-  onScopeDispose(stop)
+  tryOnScopeDispose(stop)
 
   return {
     canDrop: computed(() => context!.state.canDrop.value),
