@@ -9,7 +9,7 @@ import { computed, defineComponent, nextTick, normalizeClass, provide, watch, wi
 
 import { isFunction, isString } from 'lodash-es'
 
-import { clickOutside } from '@idux/cdk/click-outside'
+import { vClickOutside } from '@idux/cdk/click-outside'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useDateConfig } from '@idux/components/config'
@@ -176,7 +176,7 @@ export default defineComponent({
                   <span class={`${prefixCls}-placeholder`}>{placeholder.value}</span>
                 )}
               </div>,
-              [[clickOutside, handleClickOutside]],
+              [[vClickOutside, handleClickOutside]],
             )}
             {!searchValueEmpty.value && clearable.value && !props.disabled && (
               <div class={`${prefixCls}-clear-icon`} onClick={clearSearchState}>

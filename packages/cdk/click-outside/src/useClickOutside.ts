@@ -5,64 +5,95 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ObjectDirective } from 'vue'
+import { ref } from 'vue'
 
-import { isFunction, isObject } from 'lodash-es'
+import {
+  type MaybeElementRef,
+  NoopFunction,
+  convertElement,
+  tryOnScopeDispose,
+  useEventListener,
+} from '@idux/cdk/utils'
 
-import { NoopFunction, on } from '@idux/cdk/utils'
+import { type ClickOutsideHandler, type ClickOutsideOptions } from './types'
 
-interface ClickOutsideOptions {
-  exclude: (HTMLElement | null)[]
-  handler: ClickOutsideHandler
-}
+/**
+ * Listen for clicks outside of an element.
+ *
+ * @param target
+ * @param handler
+ * @param options
+ * @returns
+ */
+export function useClickOutside(
+  target: MaybeElementRef,
+  handler: ClickOutsideHandler,
+  options?: ClickOutsideOptions,
+): () => void {
+  const { container = window, exclude = [] } = options || {}
 
-type ClickOutsideHandler = (event: Event) => void
-
-export type ClickOutsideBinding = ClickOutsideHandler | ClickOutsideOptions
-
-interface DocumentHandlerOptions {
-  exclude: HTMLElement[]
-  handler: ClickOutsideHandler
-}
-
-const documentHandlerMap = new Map<HTMLElement, DocumentHandlerOptions>()
-
-on(
-  document,
-  'click',
-  event => {
-    documentHandlerMap.forEach(({ exclude, handler }) => {
-      const target = event.target as Node
-      if (exclude.some(item => item === target || item.contains(target))) {
-        return
-      }
-      handler(event)
-    })
-  },
-  { capture: true },
-)
-
-function createHandler(el: HTMLElement, binding: ClickOutsideBinding): void {
-  const exclude: HTMLElement[] = [el]
-  let handler: ClickOutsideHandler = NoopFunction
-  if (isFunction(binding)) {
-    handler = binding
-  } else if (isObject(binding)) {
-    exclude.push(...(binding.exclude.filter(Boolean) as HTMLElement[]))
-    handler = binding.handler
+  if (!container) {
+    return NoopFunction
   }
 
-  documentHandlerMap.set(el, { exclude, handler })
-}
+  const shouldListen = ref(true)
 
-export const clickOutside: ObjectDirective<HTMLElement, ClickOutsideBinding> = {
-  mounted(el, binding) {
-    createHandler(el, binding.value)
-  },
-  updated(el, binding) {
-    createHandler(el, binding.value)
-  },
-  unmounted(el) {
-    documentHandlerMap.delete(el)
-  },
+  let fallback: number
+
+  const listener = (evt: MouseEvent) => {
+    clearTimeout(fallback)
+
+    const targetElement = convertElement(target)
+    if (!targetElement || !shouldListen.value) {
+      return
+    }
+
+    const eventTarget = evt.target
+    const composedPath = evt.composedPath()
+    if (
+      targetElement === eventTarget ||
+      composedPath.includes(targetElement) ||
+      exclude.some(item => {
+        const element = convertElement(item)
+        return element && (element === eventTarget || composedPath.includes(element))
+      })
+    ) {
+      return
+    }
+
+    handler(evt)
+  }
+
+  const listenerStops = [
+    useEventListener(container, 'click', listener, { passive: true, capture: true }),
+    useEventListener(
+      container,
+      'pointerdown',
+      evt => {
+        const targetElement = convertElement(target)
+        shouldListen.value = !!targetElement && !evt.composedPath().includes(targetElement)
+      },
+      { passive: true },
+    ),
+    useEventListener(
+      container,
+      'pointerup',
+      evt => {
+        if (evt.button === 0) {
+          const path = evt.composedPath()
+          evt.composedPath = () => path
+          fallback = setTimeout(() => listener(evt), 50)
+        }
+      },
+      { passive: true },
+    ),
+  ]
+
+  const stop = () => {
+    listenerStops.forEach(listenerStop => listenerStop())
+  }
+
+  tryOnScopeDispose(stop)
+
+  return stop
 }

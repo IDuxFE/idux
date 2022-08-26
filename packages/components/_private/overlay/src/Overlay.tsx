@@ -24,7 +24,7 @@ import {
   withDirectives,
 } from 'vue'
 
-import { clickOutside } from '@idux/cdk/click-outside'
+import { vClickOutside } from '@idux/cdk/click-outside'
 import { usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
 import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
@@ -179,7 +179,7 @@ function renderTrigger(
 ) {
   const element = cloneVNode(triggerNode, extraProps, true)
   if (props.clickOutside) {
-    return withDirectives(element, [[clickOutside, handleClickOutside]])
+    return withDirectives(element, [[vClickOutside, handleClickOutside]])
   }
   return element
 }
