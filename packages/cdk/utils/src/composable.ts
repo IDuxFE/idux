@@ -63,22 +63,22 @@ export function useControlledProp<T, K extends keyof T>(props: T, key: K): [Comp
 export function useControlledProp<T, K extends keyof T>(
   props: T,
   key: K,
-  defaultOrFactory: T[K] | (() => T[K]),
+  defaultOrFactory: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
 ): [ComputedRef<Exclude<T[K], undefined>>, (value: Exclude<T[K], undefined>) => void]
 export function useControlledProp<T, K extends keyof T>(
   props: T,
   key: K,
-  defaultOrFactory?: T[K] | (() => T[K]),
+  defaultOrFactory?: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
 ): [ComputedRef<T[K]>, (value: T[K]) => void] {
-  const defaultValue = props[key] ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)
-  const tempProp = shallowRef(defaultValue)
+  const defaultValue = (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!
+  const tempProp = shallowRef(props[key])
 
   watch(
     () => props[key],
     value => (tempProp.value = value),
   )
 
-  const state = computed(() => props[key] ?? tempProp.value!)
+  const state = computed(() => props[key] ?? tempProp.value ?? defaultValue)
 
   const setState = (value: T[K]) => {
     if (value !== toRaw(state.value)) {
