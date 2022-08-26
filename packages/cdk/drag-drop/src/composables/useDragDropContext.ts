@@ -7,9 +7,9 @@
 
 import type { DnDElement, DnDState } from '../types'
 
-import { onScopeDispose, watch } from 'vue'
+import { watch } from 'vue'
 
-import { MaybeElementRef, convertElement, useEventListener } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
 import { DnDRegistry } from '../registry'
 import { State } from '../state'
@@ -77,7 +77,7 @@ export function useDragDropContext(root: MaybeElementRef): DnDContext {
     _dnDContextMap.delete(rootElement)
   }
 
-  const clenUp = () => {
+  const cleanup = () => {
     stopWatch()
     teardown(convertElement(root)!)
   }
@@ -125,7 +125,7 @@ export function useDragDropContext(root: MaybeElementRef): DnDContext {
   useEventListener(root, 'dragover', onDrag)
   useEventListener(root, 'dragend', onDragEnd)
 
-  onScopeDispose(() => clenUp())
+  tryOnScopeDispose(cleanup)
 
   return {
     sources: registry.sources,

@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { onScopeDispose, watch } from 'vue'
+import { watch } from 'vue'
 
-import { type MaybeElementRef, convertElement } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { type ResizeListener, offResize, onResize } from './utils'
 
@@ -35,7 +35,7 @@ export function useResizeObserver(
     stopWatch()
   }
 
-  onScopeDispose(stop)
+  tryOnScopeDispose(stop)
 
   return { stop }
 }

@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComponentPublicInstance, onScopeDispose, watch } from 'vue'
+import { type ComponentPublicInstance, watch } from 'vue'
 
-import { MaybeElementRef, MaybeRef, convertElement } from './convert'
+import { type MaybeElementRef, type MaybeRef, convertElement } from './convert'
 import { off, on } from './dom'
+import { tryOnScopeDispose } from './tryOnScopeDispose'
 
 export type EventListenerTarget = MaybeRef<HTMLElement | Document | Window | ComponentPublicInstance | null | undefined>
 
@@ -18,19 +19,19 @@ export function useEventListener<K extends keyof HTMLElementEventMap>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   listener: ((this: HTMLElement, ev: HTMLElementEventMap[K]) => any) | undefined,
   options?: boolean | AddEventListenerOptions,
-): { stop: () => void }
+): () => void
 export function useEventListener(
   target: EventListenerTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | AddEventListenerOptions,
-): { stop: () => void }
+): () => void
 export function useEventListener(
   target: EventListenerTarget,
   type: string | undefined,
   listener: EventListenerOrEventListenerObject | undefined,
   options?: boolean | AddEventListenerOptions,
-): { stop: () => void } {
+): () => void {
   const stopWatch = watch(
     () => convertElement(target as unknown as MaybeElementRef),
     (currElement, prevElement) => {
@@ -45,7 +46,7 @@ export function useEventListener(
     stopWatch()
   }
 
-  onScopeDispose(stop)
+  tryOnScopeDispose(stop)
 
-  return { stop }
+  return stop
 }

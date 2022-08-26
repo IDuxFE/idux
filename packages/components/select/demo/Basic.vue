@@ -3,11 +3,11 @@
     <IxSelect v-model:value="value" :dataSource="dataSource" @change="onChange"></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" disabled></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" clearable></IxSelect>
-    <IxSelect v-model:value="value">
-      <IxSelectOption v-for="option in dataSource" :key="option.key" :value="option.value" :disabled="option.disabled">
+    <IxSelect v-model:value="value" :dataSource="dataSource">
+      <template #optionLabel="label">
         <IxIcon name="star"></IxIcon>
-        <span style="margin-left: 8px">{{ option.label }}</span>
-      </IxSelectOption>
+        <span style="margin-left: 8px">{{ label }}</span>
+      </template>
     </IxSelect>
   </IxSpace>
 </template>

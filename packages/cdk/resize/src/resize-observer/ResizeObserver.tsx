@@ -17,29 +17,25 @@ export default defineComponent({
   props: resizeObserverProps,
   setup(props, { slots }) {
     const elementRef = ref()
-    const handlerResize = (evt: ResizeObserverEntry) => callEmit(props.onResize, evt)
+    const handler = (evt: ResizeObserverEntry) => callEmit(props.onResize, evt)
 
-    let stopHandler: (() => void) | undefined
-
+    let stop: (() => void) | undefined
     const cleanup = () => {
-      if (stopHandler) {
-        stopHandler()
-        stopHandler = undefined
+      if (stop) {
+        stop()
+        stop = undefined
       }
     }
 
     watch(
-      [() => props.disabled, () => props.options, () => props.onResize],
-      ([disabled, options, onResize]) => {
+      [() => props.disabled, () => props.options],
+      ([disabled, options]) => {
         cleanup()
-        if (!disabled && onResize) {
-          stopHandler = useResizeObserver(elementRef, handlerResize, options).stop
+        if (!disabled) {
+          stop = useResizeObserver(elementRef, handler, options).stop
         }
       },
-      {
-        immediate: true,
-        flush: 'post',
-      },
+      { immediate: true, flush: 'post' },
     )
 
     onBeforeUnmount(cleanup)

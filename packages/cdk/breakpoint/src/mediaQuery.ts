@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, Ref, computed, onScopeDispose, ref } from 'vue'
+import { ComputedRef, Ref, computed, ref } from 'vue'
 
-import { convertArray } from '@idux/cdk/utils'
+import { convertArray, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { matchMedia } from './mediaMatcher'
 
@@ -37,7 +37,7 @@ const _queries = new Map<string, Query>()
 export function useMediaQuery(value: string | string[]): ComputedRef<MediaQueryState> {
   const queries = splitQueries(value).map(query => registerQuery(query))
 
-  onScopeDispose(() => {
+  tryOnScopeDispose(() => {
     queries.forEach(query => {
       query.destroy()
       _queries.delete(query.media)

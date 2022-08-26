@@ -15,7 +15,6 @@ import {
   computed,
   getCurrentInstance,
   inject,
-  onScopeDispose,
   reactive,
   shallowReactive,
   shallowRef,
@@ -26,7 +25,7 @@ import {
 
 import { isNil } from 'lodash-es'
 
-import { Logger, type MaybeRef, NoopFunction, callEmit } from '@idux/cdk/utils'
+import { Logger, type MaybeRef, NoopFunction, callEmit, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { type AbstractControl, type ControlPathType } from './controls'
 import { isAbstractControl } from './typeof'
@@ -45,7 +44,7 @@ export function useControl<T = any>(controlKey = 'control'): ShallowRef<Abstract
       watchStop = undefined
     }
   }
-  onScopeDispose(cleanWatch)
+  tryOnScopeDispose(cleanWatch)
 
   watch(
     [() => props[controlKey], parentControl],
@@ -180,7 +179,7 @@ export function useAccessor<T = any>(
     { immediate: true },
   )
 
-  onScopeDispose(cleanWatch)
+  tryOnScopeDispose(cleanWatch)
 
   return accessor
 }

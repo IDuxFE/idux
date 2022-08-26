@@ -20,13 +20,12 @@ import {
   type WatchStopHandle,
   computed,
   inject,
-  onScopeDispose,
   shallowRef,
   watchEffect,
 } from 'vue'
 
 import { _getEventTarget, _getShadowRoot, isBrowser, normalizePassiveListenerOptions } from '@idux/cdk/platform'
-import { type MaybeElementRef, convertElement, createSharedComposable } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, createSharedComposable, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { type InputModalityDetector, TOUCH_BUFFER_MS, useSharedInputModalityDetector } from './inputModalityDetector'
 
@@ -564,7 +563,7 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
     return results
   }
 
-  onScopeDispose(() => _elementInfo.forEach((_info, element) => stopMonitoring(element)))
+  tryOnScopeDispose(() => _elementInfo.forEach((_info, element) => stopMonitoring(element)))
 
   return { monitor, stopMonitoring, focusVia, blurVia }
 }

@@ -7,9 +7,9 @@
 
 import type { DnDEvent } from '../types'
 
-import { onScopeDispose, toRaw, watch } from 'vue'
+import { toRaw, watch } from 'vue'
 
-import { type MaybeElementRef, convertElement, useEventListener } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
 import { initContext } from '../utils'
 import { type DnDContext } from './useDragDropContext'
@@ -98,22 +98,21 @@ export function useDroppable(
     options?.onDrop?.(evt, toRaw(context!.state.currPosition.value))
   }
 
-  const { stop: stopDragEnter } = useEventListener(target, 'dragenter', onDragEnter)
-  const { stop: stopDragOver } = useEventListener(target, 'dragover', onDragOver)
-  const { stop: stopDragLeave } = useEventListener(target, 'dragleave', onDragLeave)
-  const { stop: stopDrop } = useEventListener(target, 'drop', onDrop)
+  const listenerStops = [
+    useEventListener(target, 'dragenter', onDragEnter),
+    useEventListener(target, 'dragover', onDragOver),
+    useEventListener(target, 'dragleave', onDragLeave),
+    useEventListener(target, 'drop', onDrop),
+  ]
 
   const stop = () => {
     offDroppable(convertElement(target)!)
     stopWatch()
     stopConnectWatch()
-    stopDragEnter()
-    stopDragOver()
-    stopDragLeave()
-    stopDrop()
+    listenerStops.forEach(listenerStop => listenerStop())
   }
 
-  onScopeDispose(stop)
+  tryOnScopeDispose(stop)
 
   return {
     connect,
