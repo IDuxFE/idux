@@ -40,18 +40,14 @@ export function usePanelActiveState(
   const activeIndex = ref(0)
   const setActiveIndex = (index: number) => {
     activeIndex.value = index
-    setActiveValue(flattenedOptions.value[index]?.key)
+    const key = flattenedOptions.value[index]?.key
+    key !== activeValue.value && setActiveValue(flattenedOptions.value[index]?.key)
   }
 
-  watch(
-    () => props.activeValue,
-    value => {
-      const targetIndex = value ? keyIndexMap.value.get(value) ?? -1 : -1
-      const enabledIndex = getEnabledActiveIndex(flattenedOptions.value, targetIndex === -1 ? 0 : targetIndex, 1)
-
-      enabledIndex !== activeIndex.value && setActiveIndex(enabledIndex)
-    },
-  )
+  watch([() => props.activeValue, flattenedOptions], ([value, options]) => {
+    const targetIndex = value ? keyIndexMap.value.get(value) ?? -1 : -1
+    setActiveIndex(getEnabledActiveIndex(options, targetIndex === -1 ? 0 : targetIndex, 1))
+  })
 
   const scrollToActivated = () => {
     scrollTo({ index: activeIndex.value })
