@@ -201,8 +201,9 @@ export function useSearchStates(
       })
       .filter(Boolean) as SearchValue[]
 
-    callEmit(props.onChange, newSearchValues, toRaw(searchValues.value))
+    const oldeSearchValue = toRaw(searchValues.value)
     setSearchValues(newSearchValues)
+    callEmit(props.onChange, newSearchValues, oldeSearchValue)
   }
 
   const updateSegmentValue = (value: unknown, name: string, key: VKey) => {
