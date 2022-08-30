@@ -66,7 +66,7 @@ export const uploadProps = {
   },
   accept: String,
   action: {
-    type: [String, Function] as PropType<(file: UploadFile<any>) => Promise<string>>,
+    type: [String, Function] as PropType<string | ((file: UploadFile<any>) => Promise<string>)>,
     required: true,
   },
   dragable: {
