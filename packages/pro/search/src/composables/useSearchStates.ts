@@ -246,12 +246,12 @@ export function useSearchStates(
     }
 
     const stateIndex = searchStates.value.findIndex(state => state.key === key)
-    const searchValue = searchValues.value?.find(value => value.key === key)
 
     if (stateIndex < 0) {
       return
     }
 
+    const searchValue = _convertStateToValue(searchStates.value[stateIndex])
     searchStates.value.splice(stateIndex, 1)
     callEmit(props.onItemRemove, searchValue!)
     updateSearchValue()
