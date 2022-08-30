@@ -11,9 +11,10 @@ import { computed, defineComponent, provide, ref } from 'vue'
 
 import { isString } from 'lodash-es'
 
+import { type VirtualScrollToOptions } from '@idux/cdk/scroll'
 import { IxHeader } from '@idux/components/header'
 import { IxSpace } from '@idux/components/space'
-import { IxTable, type TableCustomAdditional, type TableCustomTag } from '@idux/components/table'
+import { IxTable, type TableCustomAdditional, type TableCustomTag, type TableInstance } from '@idux/components/table'
 import { useGlobalConfig } from '@idux/pro/config'
 
 import ProTableLayoutTool from './ProTableLayoutTool'
@@ -26,7 +27,7 @@ import { proTableProps } from './types'
 export default defineComponent({
   name: 'IxProTable',
   props: proTableProps,
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('table')
     const locale = useGlobalConfig('locale')
@@ -42,6 +43,11 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       ...columnsContext,
+    })
+
+    const tableRef = ref<TableInstance>()
+    expose({
+      scrollTo: (option?: number | VirtualScrollToOptions) => tableRef.value?.scrollTo(option),
     })
 
     const headElementRef = ref<HTMLElement>()
@@ -108,6 +114,7 @@ export default defineComponent({
 
       return (
         <IxTable
+          ref={tableRef}
           v-slots={{ ...slots, header: renderHeader, default: renderLayoutTool }}
           {...restProps}
           class={mergedPrefixCls.value}

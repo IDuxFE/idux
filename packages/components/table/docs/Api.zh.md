@@ -95,10 +95,10 @@ export type TableColumn<T = any, V = any> =
 | `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string \| number)[], selectedRecords: T[]) => void` | - | - | - |
 | `onMenuClick` | 点击下拉菜单时触发 | `(options: MenuClickOptions, currentPageRowKeys: VKey[]) => void` | - | - | 如果点击时预设的值, 则不会触发该回调（例如：`all`, 那么触发的是 `onSelectAll`） |
 | `onSelect` | 点击选择框，或通过 `trigger` 触发 | `(selected: boolean, record: T) => void` | - | - | - |
-| `onSelectAll` | 点击全选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | - |
-| `onSelectInvert` | 点击反选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | - |
-| `onSelectNone` | 点击清空所有时触发 | `() => void` | - | - | - |
-| `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | - |
+| `onSelectAll` | 点击全选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | 配置 `menus= ['all']` 时生效 |
+| `onSelectInvert` | 点击反选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | 配置 `menus= ['invert']` 时生效 |
+| `onSelectNone` | 点击清空所有时触发 | `() => void` | - | - | 配置 `menus= ['none']` 时生效 |
+| `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | 配置 `menus= ['pageInvert']` 时生效 |
 
 ##### TableColumnSortable
 
