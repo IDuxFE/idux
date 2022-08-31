@@ -35,7 +35,7 @@ exports[`Pagination > render work 3`] = `
   <li class=\\"ix-pagination-item\\" title=\\"50\\"><button class=\\"ix-button ix-button-text ix-button-circle ix-button-sm\\" type=\\"button\\"><span>50</span></button></li>
   <li class=\\"ix-pagination-item ix-pagination-item-button\\" title=\\"下一页\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-circle ix-button-sm\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></button></li>
   <li class=\\"ix-pagination-sizes\\">每页<div class=\\"ix-pagination-sizes-select-wrapper\\">
-      <div class=\\"ix-select ix-selector ix-selector-single ix-selector-md\\">
+      <div class=\\"ix-select ix-selector ix-selector-single ix-selector-sm\\">
         <!---->
         <div class=\\"ix-selector-content\\">
           <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">10</span>
@@ -49,6 +49,6 @@ exports[`Pagination > render work 3`] = `
       </div>
       <!---->
     </div>项</li>
-  <li class=\\"ix-pagination-jumper\\">前往<input class=\\"ix-input ix-input-md\\">页</li>
+  <li class=\\"ix-pagination-jumper\\">前往<input class=\\"ix-input ix-input-sm\\">页</li>
 </ul>"
 `;

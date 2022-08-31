@@ -1,5 +1,12 @@
 <template>
-  <IxInputNumber v-model:value="containerHeight" :min="200" :max="600" :step="100"></IxInputNumber>
+  <IxInputNumber
+    v-model:value="containerHeight"
+    style="width: 120px; margin-bottom: 8px"
+    :min="200"
+    :max="800"
+    :step="100"
+  ></IxInputNumber>
+
   <div :style="{ height: `${containerHeight}px` }">
     <IxTable :columns="columns" :dataSource="data" autoHeight :scroll="scroll">
       <template #name="{ value }">
@@ -17,7 +24,7 @@ import { ref } from 'vue'
 
 import { TableColumn, TableScroll } from '@idux/components/table'
 
-const containerHeight = ref(300)
+const containerHeight = ref(400)
 
 interface Data {
   key: number
