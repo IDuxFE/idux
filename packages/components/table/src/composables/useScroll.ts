@@ -35,7 +35,7 @@ export function useScroll(
     if (!mergedAutoHeight.value) {
       scrollWithAutoHeight.value = false
     } else {
-      scrollWithAutoHeight.value = entry.target.scrollHeight > entry.target.clientHeight
+      scrollWithAutoHeight.value = props.virtual || entry.target.scrollHeight > entry.target.clientHeight
     }
   })
 

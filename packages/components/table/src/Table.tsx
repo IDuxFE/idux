@@ -74,6 +74,7 @@ export default defineComponent({
       mergedPrefixCls,
       mergedEmptyCell,
       mergedSize,
+      mergedAutoHeight,
       ...columnsContext,
       ...scrollContext,
       ...sortableContext,
