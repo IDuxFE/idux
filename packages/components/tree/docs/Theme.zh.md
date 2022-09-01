@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@tree-node-prefix` | `~'@{tree-prefix}-node'` | - | - |
 | `@tree-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@tree-icon-font-size` | `@font-size-lg` | - | - |
 | `@tree-icon-color` | `@color-graphite-d20` | - | - |

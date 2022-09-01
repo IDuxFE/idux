@@ -10,7 +10,7 @@ export interface UpdateStyleVariableConfig {
 
 export default {
   dirs: ['components', 'pro'],
-  targetDocs: 'docs/Index.zh.md',
+  targetDocs: 'docs/Theme.zh.md',
   sourcePattern: 'style/themes/*.variable.less',
   excludes: [
     'components/_private',

@@ -2,7 +2,7 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@input-number-width-sm` | `12px` | - | - |
+| `@input-number-width-sm` | `20px` | - | - |
 | `@input-number-width-md` | `24px` | - | - |
 | `@input-number-width-lg` | `24px` | - | - |
 | `@input-number-button-hover-color` | `@input-active-color` | - | - |
