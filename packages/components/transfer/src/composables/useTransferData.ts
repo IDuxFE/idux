@@ -76,8 +76,9 @@ export function useTransferData<T extends TransferData = TransferData>(
   const targetKeySet = computed(() => new Set(targetKeys.value))
 
   const handleChange = (keys: VKey[]) => {
-    callEmit(props.onChange, keys, targetKeys.value)
+    const oldKeys = targetKeys.value
     setTargetKeys(keys)
+    callEmit(props.onChange, keys, oldKeys)
   }
 
   const separatedData = computed(() =>
