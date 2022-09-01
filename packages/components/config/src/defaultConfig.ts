@@ -340,6 +340,7 @@ export const defaultConfig: GlobalConfig = {
     trigger: 'hover',
   },
   tree: {
+    autoHeight: false,
     blocked: false,
     childrenKey: 'children',
     expandIcon: 'right',

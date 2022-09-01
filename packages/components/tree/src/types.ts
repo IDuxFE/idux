@@ -11,11 +11,15 @@ import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
-import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, StyleValue } from 'vue'
 
 export type CheckStrategy = 'all' | 'parent' | 'child'
 
 export const treeProps = {
+  autoHeight: {
+    type: Boolean,
+    default: undefined,
+  },
   checkedKeys: Array as PropType<VKey[]>,
   expandedKeys: Array as PropType<VKey[]>,
   indeterminateKeys: Array as PropType<VKey[]>,
@@ -123,8 +127,8 @@ export type TreePublicProps = Omit<ExtractPublicPropTypes<typeof treeProps>, 'no
 export interface TreeBindings<K = VKey> {
   focus: (options?: FocusOptions) => void
   blur: () => void
-  collapseAll: () => void
   expandAll: () => void
+  collapseAll: () => void
   scrollTo: VirtualScrollToFn
   /**
    * get node by it's key
@@ -144,8 +148,9 @@ export interface TreeNode<K = VKey> {
    * @deprecated please use `customAdditional` instead'
    */
   additional?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     class?: any
-    style?: any
+    style?: StyleValue
     [key: string]: unknown
   }
   children?: TreeNode<K>[]

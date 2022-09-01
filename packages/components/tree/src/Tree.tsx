@@ -48,6 +48,8 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
+
+    const autoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/tree')
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
@@ -106,6 +108,8 @@ export default defineComponent({
         [prefixCls]: true,
         [`${prefixCls}-active`]: !isNil(activeKey.value),
         [`${prefixCls}-blocked`]: mergedBlocked.value,
+        [`${prefixCls}-virtual`]: props.virtual,
+        [`${prefixCls}-auto-height`]: autoHeight.value,
         [`${prefixCls}-focused`]: focused.value,
         [`${prefixCls}-show-line`]: mergedShowLine.value,
       }
@@ -165,19 +169,28 @@ export default defineComponent({
       if (nodes.length > 0) {
         const itemRender: VirtualItemRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
         const { height, virtual, onScroll, onScrolledBottom } = props
-        children = (
+        children = virtual ? (
           <CdkVirtualScroll
             ref={virtualScrollRef}
+            class={`${mergedPrefixCls.value}-content`}
             dataSource={nodes}
             getKey="key"
-            height={height}
+            height={autoHeight.value ? '100%' : height}
             itemHeight={28}
             itemRender={itemRender}
-            virtual={virtual}
+            virtual
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}
             onScrolledChange={handleScrolledChange}
           />
+        ) : (
+          <div class={`${mergedPrefixCls.value}-content`}>
+            <div class={`${mergedPrefixCls.value}-content-inner`}>
+              {nodes.map(item => (
+                <TreeNode node={item} {...item}></TreeNode>
+              ))}
+            </div>
+          </div>
         )
       } else {
         children = <ɵEmpty v-slots={slots} empty={props.empty} />
