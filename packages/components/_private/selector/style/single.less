@@ -6,15 +6,14 @@
       font-size: @selector-font-size;
     }
 
+    &-item {
+      left: @select-padding-horizontal;
+    }
+
     &-item,
     &-placeholder,
     &-input-inner {
       line-height: @selector-height - 2 * @select-border-width;
-    }
-
-    &-input {
-      right: @select-padding-horizontal + @selector-font-size;
-      left: @select-padding-horizontal;
     }
   }
 }
@@ -23,14 +22,17 @@
   .@{selector-prefix} {
     &-content {
       width: 100%;
+      display: flex;
     }
 
     &-input {
-      position: absolute;
+      flex: auto;
+      width: 0;
+      margin-right: (@select-icon-font-size / 2) + @select-icon-margin-right;
     }
 
     &-item {
-      position: relative;
+      position: absolute;
     }
   }
 
