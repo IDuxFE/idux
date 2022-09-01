@@ -53,6 +53,7 @@ export function useSelectedState(
       !isSelected && setSelectedValue([key])
       return
     }
+
     if (isSelected) {
       setSelectedValue(currValue.filter((_, index) => targetIndex !== index))
       return
@@ -61,8 +62,6 @@ export function useSelectedState(
     if (selectedValue.value.length < props.multipleLimit) {
       setSelectedValue([...currValue, key])
     }
-
-    setSelectedValue([...currValue, key])
   }
 
   const handleRemove = (key: VKey) => {
