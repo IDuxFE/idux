@@ -9,7 +9,6 @@
     :pagination="pagination"
     :spin="spin"
     :searchable="{ source: true, target: false }"
-    :scroll="{ height: 300, fullHeight: true }"
     :on-search="handleSearchChange"
   />
 </template>

@@ -1,13 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxProTransfer
-      ref="transferRef"
-      v-model:value="targetKeys"
-      type="tree"
-      virtual
-      :data-source="dataSource"
-      :scroll="{ height: 300, fullHeight: true }"
-    />
+    <IxProTransfer ref="transferRef" v-model:value="targetKeys" type="tree" virtual :data-source="dataSource" />
     <IxSpace>
       <IxButton :onClick="handleSourceScrollTo">SourceScrollTo</IxButton>
       <IxInputNumber v-model:value="sourceScrollToIdx" />

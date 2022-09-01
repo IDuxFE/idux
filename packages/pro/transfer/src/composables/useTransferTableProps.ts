@@ -28,17 +28,21 @@ export function useTransferTableProps(
 
   return computed<TableProps>(() => {
     const columns = isSource ? props.tableProps?.sourceColumns : props.tableProps?.targetColumns
-    const scroll = props.scroll && {
-      height: props.scroll.height,
-      fullHeight: props.scroll.fullHeight,
-      width: '100%',
-    }
+    /* eslint-disable indent */
+    const scroll = props.scroll?.height
+      ? {
+          height: props.scroll.height,
+          fullHeight: props.scroll.fullHeight,
+        }
+      : undefined
+    /* eslint-disable indent */
 
     const customTableProps = { ...(props.tableProps ?? {}) }
     delete customTableProps.sourceColumns
     delete customTableProps.targetColumns
 
     return {
+      autoHeight: !scroll,
       ...customTableProps,
       dataSource: isSource && props.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
       columns: convertTableColumns(columns, mergedPrefixCls, transferBindings, props, slots, isSource),

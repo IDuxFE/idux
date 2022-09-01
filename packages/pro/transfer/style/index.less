@@ -40,10 +40,15 @@
       display: inline-flex;
       width: 100%;
       align-items: center;
+      line-height: @checkbox-line-height;
     }
     &-close-icon {
       padding: @pro-transfer-table-close-icon-padding;
       flex-shrink: 0;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
     }
   }
 
