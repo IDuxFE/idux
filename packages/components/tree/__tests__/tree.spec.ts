@@ -916,20 +916,20 @@ describe('Tree', () => {
     await wrapper.setProps({ searchValue: '0-0-0-0' })
 
     allNodes = wrapper.findAll('.ix-tree-node')
-    expect(allNodes.length).toBe(0)
+    expect(allNodes.length).toBe(4)
     expect(wrapper.html()).toMatchSnapshot()
 
     // setValue = ''
     await wrapper.setProps({ searchValue: '' })
 
     allNodes = wrapper.findAll('.ix-tree-node')
-    expect(allNodes.length).toBe(1)
+    expect(allNodes.length).toBe(4)
     expect(wrapper.html()).toMatchSnapshot()
 
     await allNodes[0].find('.ix-tree-node-expand').trigger('click')
 
     allNodes = wrapper.findAll('.ix-tree-node')
-    expect(allNodes.length).toBe(4)
+    expect(allNodes.length).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
