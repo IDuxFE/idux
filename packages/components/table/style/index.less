@@ -56,7 +56,6 @@
     font-weight: @table-head-font-weight;
     line-height: @table-head-line-height;
     overflow-wrap: break-word;
-    border-bottom: @table-border-width @table-border-style @table-border-color;
 
     &:not(:last-child)::before {
       position: absolute;
@@ -70,19 +69,12 @@
     }
   }
 
-  thead > tr:not(:last-child) > th {
-    &[colspan] {
-      border-bottom: 0;
-    }
-  }
-
   thead > tr > th[colspan]:not([colspan='1']) {
     text-align: center;
   }
 
   td {
     position: relative;
-    border-bottom: @table-border-width @table-border-style @table-border-color;
     line-height: @table-body-line-height;
     overflow-wrap: break-word;
     transition: background @transition-duration-base;
@@ -146,7 +138,7 @@
   &-pagination {
     display: flex;
     flex-wrap: wrap;
-    margin: @table-pagination-margin;
+    padding: 12px 0;
 
     > * {
       flex: none;
@@ -247,7 +239,6 @@
     font-size: @table-filterable-trigger-font-size;
 
     &-footer {
-      border-top: @table-border-width @table-border-style @table-border-color;
       padding: 8px 16px;
       text-align: right;
 
@@ -351,7 +342,6 @@
       display: flex;
       align-items: center;
       background: lighten(@border-color, 80%);
-      border-top: 1px solid @border-color;
       opacity: 0.6;
 
       &:hover {

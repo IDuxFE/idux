@@ -7,6 +7,7 @@
 
 import { type ComputedRef, type Ref, computed, onBeforeUnmount, ref } from 'vue'
 
+import { useResizeObserver } from '@idux/cdk/resize'
 import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize } from '@idux/cdk/scroll'
 import { Logger, convertCssPixel, convertElement } from '@idux/cdk/utils'
 
@@ -15,7 +16,7 @@ import { type StickyContext } from './useSticky'
 
 export function useScroll(
   props: TableProps,
-  autoHeight: ComputedRef<boolean>,
+  mergedAutoHeight: ComputedRef<boolean>,
   { isSticky, setStickyScrollLeft }: StickyContext,
 ): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
@@ -29,9 +30,18 @@ export function useScroll(
     props.scroll?.y &&
     Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
 
+  const scrollWithAutoHeight = ref(mergedAutoHeight.value)
+  useResizeObserver(scrollBodyRef, entry => {
+    if (!mergedAutoHeight.value) {
+      scrollWithAutoHeight.value = false
+    } else {
+      scrollWithAutoHeight.value = entry.target.scrollHeight > entry.target.clientHeight
+    }
+  })
+
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
   const scrollHeight = computed(
-    () => convertCssPixel(props.scroll?.height || props.scroll?.y) || (autoHeight.value ? 'auto' : ''),
+    () => convertCssPixel(props.scroll?.height || props.scroll?.y) || (scrollWithAutoHeight.value ? 'auto' : ''),
   )
 
   const scrollBarSize = computed(() => getScrollBarSize(convertElement(scrollBodyRef)))
