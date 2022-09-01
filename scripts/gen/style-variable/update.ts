@@ -4,7 +4,7 @@ import type { Pattern } from 'fast-glob'
 import { basename, join } from 'path'
 
 import fg from 'fast-glob'
-import { appendFile, lstatSync, readFile, readdir, writeFile } from 'fs-extra'
+import { lstatSync, readFile, readdir, writeFile } from 'fs-extra'
 
 import config from './config'
 
@@ -77,7 +77,11 @@ class UpdateStyleVariable {
     )
     const exitThemes = themes.filter(theme => theme) as string[]
     if (Object.keys(variablesEntries).length === 0) {
-      return ''
+      return `## 主题变量
+
+| 名称 | ${exitThemes.join(' | ')} | 备注 |
+| --- | --- | --- | --- |
+`
     }
 
     return `## 主题变量
@@ -109,12 +113,13 @@ ${variablesEntries
   }
 
   private async appendVariable(target: string, template: string) {
-    const targetContent = await readFile(target, 'utf-8')
-    if (!targetContent.length) {
-      writeFile(target, targetContent, 'utf-8')
-    } else {
-      template.trim() && appendFile(target, `\n${template}`)
-    }
+    writeFile(target, `${template.trim()}\n`, 'utf-8')
+    // const targetContent = await readFile(target, 'utf-8')
+    // if (!targetContent.length) {
+    //   writeFile(target, targetContent, 'utf-8')
+    // } else {
+    //   template.trim() && appendFile(target, `\n${template}`)
+    // }
   }
 }
 

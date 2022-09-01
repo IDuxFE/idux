@@ -2,16 +2,15 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@pagination-font-size` | `@font-size-md` | - | - |
+| `@pagination-font-size-md` | `@font-size-md` | - | - |
 | `@pagination-font-size-sm` | `@font-size-sm` | - | - |
 | `@pagination-item-icon-font-size` | `@font-size-sm` | - | - |
-| `@pagination-item-height-md` | `@height-md` | - | - |
-| `@pagination-item-height-sm` | `@height-sm` | `24px` | - |
-| `@pagination-item-margin-right-md` | `@spacing-sm` | - | - |
-| `@pagination-item-margin-right-sm` | `@spacing-xs` | - | - |
+| `@pagination-item-size-md` | `32px` | - | - |
+| `@pagination-item-size-sm` | `24px` | - | - |
+| `@pagination-item-padding-md` | `4px` | - | - |
+| `@pagination-item-padding-sm` | `0` | - | - |
 | `@pagination-item-input-width-md` | `48px` | - | - |
 | `@pagination-item-input-width-sm` | `40px` | - | - |
-| `@pagination-item-spacing-sm` | `20px` | `24px` | - |
 | `@pagination-item-active-color` | `@button-primary` | `@color-primary` | - |
 | `@pagination-item-active-background-color` | `@button-primary-background-color` | `@color-primary-l50` | - |
 | `@pagination-item-color` | `@color-graphite-d40` | - | - |
