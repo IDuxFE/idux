@@ -45,7 +45,6 @@ export default defineComponent({
       config,
       locale,
       mergedPrefixCls,
-      size,
       activeIndex,
       activeSize,
       lastIndex,
@@ -76,12 +75,7 @@ export default defineComponent({
         children.push(
           <li class={`${prefixCls}-item`}>
             {showQuickJumper.value ? (
-              <ɵInput
-                disabled={props.disabled}
-                size={size.value}
-                value={_activeIndex.toString()}
-                onKeydown={jumpToIndex}
-              />
+              <ɵInput disabled={props.disabled} size="sm" value={_activeIndex.toString()} onKeydown={jumpToIndex} />
             ) : (
               _activeIndex
             )}

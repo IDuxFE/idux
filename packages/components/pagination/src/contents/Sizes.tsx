@@ -13,7 +13,7 @@ import { paginationToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, config, locale, mergedPrefixCls, size, activeSize, changePageSize } = inject(paginationToken)!
+    const { props, config, locale, mergedPrefixCls, activeSize, changePageSize } = inject(paginationToken)!
 
     const sizeData = computed(() => {
       const { pageSizes = config.pageSizes } = props
@@ -33,7 +33,7 @@ export default defineComponent({
             <IxSelect
               disabled={props.disabled}
               dataSource={sizeData.value}
-              size={size.value}
+              size="sm"
               value={activeSize.value}
               onChange={changePageSize}
             />

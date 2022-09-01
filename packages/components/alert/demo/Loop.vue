@@ -2,7 +2,7 @@
   <IxAlert :pagination="pagination" @mouseenter="stopTimer" @mouseleave="startTimer">
     <div v-for="(item, index) in titles" :key="index">
       {{ item }}
-      <IxButton mode="link" size="sm">{{ index === 0 ? '查看详情' : '忽略' }}</IxButton>
+      <IxButton mode="link" size="xs">{{ index === 0 ? '查看详情' : '忽略' }}</IxButton>
     </div>
   </IxAlert>
 </template>

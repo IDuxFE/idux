@@ -1,25 +1,25 @@
-.pagination-size(@height, @width, @margin) {
-  .@{pagination-prefix}-item,
-  .@{pagination-prefix}-total,
-  .@{pagination-prefix}-sizes,
-  .@{pagination-prefix}-jumper {
-    height: @height;
-    line-height: @height;
-  }
+.pagination-size(@font-size, @item-size, @item-padding) {
+  font-size: @font-size;
+  @item-button-size: @item-size - @item-padding * 2;
 
-  .@{pagination-prefix}-item,
-  .@{pagination-prefix}-jumper {
-    .@{idux-prefix}-input {
-      width: @width;
+  .@{pagination-prefix}-item {
+    padding: @item-padding;
+
+    .@{button-prefix} {
+      min-width: @item-button-size;
+      height: @item-button-size;
+      line-height: @item-button-size;
+    }
+
+    .@{button-prefix}.@{button-prefix}-icon-only {
+      width: @item-button-size;
     }
   }
 
-  .@{pagination-prefix}-jumper .@{idux-prefix}-input {
-    margin: 0 (@margin / 2);
-  }
-
-  .@{pagination-prefix}-item {
-    margin-right: @margin;
-    margin-left: 0
+  .@{pagination-prefix}-total,
+  .@{pagination-prefix}-sizes,
+  .@{pagination-prefix}-jumper {
+    height: @item-size;
+    line-height: @item-size;
   }
 }
