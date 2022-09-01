@@ -101,7 +101,7 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
 `;
 
 exports[`TreeSelect > single work > searchable work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-opened ix-selector-single ix-selector-searchable ix-selector-allow-input ix-selector-md\\">
+"<div class=\\"ix-tree-select ix-selector ix-selector-opened ix-selector-single ix-selector-searchable ix-selector-md\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
