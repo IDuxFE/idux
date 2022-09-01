@@ -35,11 +35,12 @@ export function useScrollPlacement(
   holderRef: Ref<HTMLElement | undefined>,
   scrollTop: Ref<number>,
   scrollHeight: Ref<number>,
+  containerHeight: Ref<number>,
   changeScrollTop: (value: number) => void,
 ): ScrollPlacementContext {
   const maxScrollHeight = computed(() => {
     const height = scrollHeight.value
-    return height > 0 ? Math.max(height - props.height, 0) : NaN
+    return height > 0 ? Math.max(height - containerHeight.value, 0) : NaN
   })
 
   const scrolledTop = computed(() => scrollTop.value <= 0)

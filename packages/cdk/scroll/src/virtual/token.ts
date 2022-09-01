@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { OriginScroll } from './composables/useOriginScroll'
 import type { SyncScrollTop } from './composables/useScrollPlacement'
 import type { VirtualScrollProps } from './types'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
@@ -21,7 +20,6 @@ export interface VirtualScrollContext {
   scrollHeight: Ref<number>
   scrollOffset: Ref<number | undefined>
   syncScrollTop: SyncScrollTop
-  originScroll: OriginScroll
 }
 
 export const virtualScrollToken: InjectionKey<VirtualScrollContext> = Symbol('virtualScrollToken')

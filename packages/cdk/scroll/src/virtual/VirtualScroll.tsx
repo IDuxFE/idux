@@ -9,9 +9,9 @@ import { type ComponentPublicInstance, computed, defineComponent, provide, ref, 
 
 import { callEmit, useState } from '@idux/cdk/utils'
 
+import { useContainerHeight } from './composables/useContainerHeight'
 import { useGetKey } from './composables/useGetKey'
 import { useHeights } from './composables/useHeights'
-import { useOriginScroll } from './composables/useOriginScroll'
 import { useScrollPlacement } from './composables/useScrollPlacement'
 import { useScrollState } from './composables/useScrollState'
 import { useScrollTo } from './composables/useScrollTo'
@@ -24,12 +24,15 @@ export default defineComponent({
   name: 'CdkVirtualScroll',
   props: virtualListProps,
   setup(props, { expose, slots }) {
-    const useVirtual = computed(() => props.virtual && props.height > 0 && props.itemHeight > 0)
+    const useVirtual = computed(() => props.virtual && props.itemHeight > 0)
     const getKey = useGetKey(props)
     const { heights, collectHeights, heightsUpdateMark, setItem } = useHeights()
 
+    const containerRef = ref<HTMLElement>()
     const holderRef = ref<HTMLElement>()
     const fillerRef = ref<HTMLElement>()
+
+    const containerHeight = useContainerHeight(props, containerRef)
 
     const [scrollTop, changeScrollTop] = useState(0)
     const { scrollHeight, scrollOffset, startIndex, endIndex } = useScrollState(
@@ -38,18 +41,19 @@ export default defineComponent({
       useVirtual,
       getKey,
       scrollTop,
+      containerHeight,
       heightsUpdateMark,
       heights,
     )
 
-    const { scrolledTop, scrolledBottom, syncScrollTop } = useScrollPlacement(
+    const { syncScrollTop } = useScrollPlacement(
       props,
       holderRef,
       scrollTop,
       scrollHeight,
+      containerHeight,
       changeScrollTop,
     )
-    const originScroll = useOriginScroll(scrolledTop, scrolledBottom)
 
     provide(virtualScrollToken, {
       props,
@@ -62,7 +66,6 @@ export default defineComponent({
       scrollHeight,
       scrollOffset,
       syncScrollTop,
-      originScroll,
     })
 
     const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, syncScrollTop)
@@ -85,7 +88,7 @@ export default defineComponent({
       })
 
       return (
-        <div class="cdk-virtual-scroll">
+        <div ref={containerRef} class="cdk-virtual-scroll" style={{ position: 'relative' }}>
           <Holder>{children}</Holder>
         </div>
       )

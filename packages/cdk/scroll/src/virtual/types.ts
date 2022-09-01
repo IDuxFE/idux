@@ -15,7 +15,7 @@ export const virtualListProps = {
   dataSource: { type: Array, default: (): unknown[] => [] },
   fullHeight: { type: Boolean, default: false },
   getKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: 'key' },
-  height: { type: Number, default: 0 },
+  height: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 0 },
   itemHeight: { type: Number, default: 0 },
   /**
    * @deprecated
