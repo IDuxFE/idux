@@ -89,6 +89,7 @@ export default defineComponent({
         selectedKeys: props.selectedKeys,
         loadedKeys: props.loadedKeys,
 
+        autoHeight: true,
         blocked: true,
         cascade: true,
         childrenKey: props.childrenKey,
