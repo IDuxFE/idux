@@ -37,7 +37,6 @@
 | `@table-head-icon-hover-background-color` | `@color-graphite-l40` | - | - |
 | `@table-head-font-weight` | `@font-weight-lg` | `@font-weight-md` | - |
 | `@table-body-hover-background` | `@background-color-light` | `@color-graphite-l50` | - |
-| `@table-pagination-margin` | `@spacing-lg 0` | - | - |
 | `@table-icon-margin` | `@spacing-xs` | - | - |
 | `@table-filterable-trigger-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@table-expandable-icon-size` | `@font-size-lg` | `@font-size-md` | - |

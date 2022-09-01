@@ -41,11 +41,11 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('table')
 
-    const autoHeight = computed(() => props.autoHeight ?? config.autoHeight)
+    const mergedAutoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetRowKey(props, config)
     const stickyContext = useSticky(props)
-    const scrollContext = useScroll(props, autoHeight, stickyContext)
+    const scrollContext = useScroll(props, mergedAutoHeight, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
     const sortableContext = useSortable(columnsContext.flattedColumns)
     const filterableContext = useFilterable(columnsContext.flattedColumns)
@@ -92,7 +92,7 @@ export default defineComponent({
       const { borderless = config.borderless, size = config.size, scroll } = props
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-auto-height`]: autoHeight.value,
+        [`${prefixCls}-auto-height`]: mergedAutoHeight.value,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-empty`]: flattedData.value.length === 0,
         [`${prefixCls}-full-height`]: scroll?.fullHeight,
