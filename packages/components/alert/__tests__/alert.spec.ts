@@ -107,5 +107,18 @@ describe('Alert', () => {
 
     await wrapper.findAll('button')[0].trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
+
+    const onChange = vi.fn()
+
+    await wrapper.setProps({
+      pagination: {
+        pageIndex: 2,
+        onChange,
+      },
+    })
+    expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
+
+    await wrapper.findAll('button')[0].trigger('click')
+    expect(onChange).toBeCalledWith(1)
   })
 })

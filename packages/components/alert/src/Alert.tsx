@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Transition, computed, defineComponent, normalizeClass, watchEffect } from 'vue'
+import { Transition, computed, defineComponent, normalizeClass, watch } from 'vue'
 
 import { isNil, isObject } from 'lodash-es'
 
@@ -40,11 +40,22 @@ export default defineComponent({
       setPageIndex(index)
     }
 
-    watchEffect(() => {
+    watch(
+      () => props.pagination,
+      pagination => {
+        if (isObject(pagination) && !isNil(pagination.pageIndex)) {
+          setPageIndex(pagination.pageIndex)
+        }
+      },
+      {
+        deep: true,
+        immediate: true,
+      },
+    )
+
+    watch(pageIndex, index => {
       const { pagination } = props
-      if (isObject(pagination) && !isNil(pagination.pageIndex)) {
-        setPageIndex(pagination.pageIndex)
-      }
+      isObject(pagination) && callEmit(pagination.onChange, index)
     })
 
     const classes = computed(() => {
