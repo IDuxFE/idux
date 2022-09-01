@@ -79,17 +79,40 @@ export default defineComponent({
         [`${prefixCls}-readonly`]: props.readonly,
         [`${prefixCls}-single`]: !multiple,
         [`${prefixCls}-searchable`]: mergedSearchable.value,
-        [`${prefixCls}-allow-input`]: allowInput || mergedSearchable.value,
+        [`${prefixCls}-allow-input`]: allowInput,
         [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
 
     const handleClick = () => {
-      const { disabled, opened, readonly } = props
-      if (disabled || readonly || (opened && mergedSearchable.value)) {
+      const { allowInput, disabled, opened, readonly, onOpenedChange } = props
+      if (disabled || readonly || (opened && (mergedSearchable.value || allowInput))) {
         return
       }
-      callEmit(props.onOpenedChange, !opened)
+
+      callEmit(onOpenedChange, !opened)
+    }
+    const handleContentMouseDown = (evt: MouseEvent) => {
+      if (evt.target instanceof HTMLInputElement) {
+        return
+      }
+
+      const { disabled, readonly } = props
+      if (disabled || readonly || isFocused.value) {
+        evt.preventDefault()
+      }
+    }
+    const handleSuffixMouseDown = (evt: MouseEvent) => {
+      evt.preventDefault()
+    }
+    const handleSuffixClick = (evt: MouseEvent) => {
+      const { disabled, readonly, opened, onOpenedChange } = props
+      if (disabled || readonly) {
+        return
+      }
+
+      evt.stopPropagation()
+      callEmit(onOpenedChange, !opened)
     }
 
     const handleClear = (evt: MouseEvent) => {
@@ -193,7 +216,12 @@ export default defineComponent({
       const suffixNode = slots.suffix ? slots.suffix(suffixProps) : <IxIcon {...suffixProps} />
       suffixNode &&
         children.push(
-          <div key="__suffix" class={`${prefixCls}-suffix`}>
+          <div
+            key="__suffix"
+            class={`${prefixCls}-suffix`}
+            onClick={handleSuffixClick}
+            onMousedown={handleSuffixMouseDown}
+          >
             {suffixNode}
           </div>,
         )
@@ -213,7 +241,9 @@ export default defineComponent({
               {value.join(', ')}
             </span>
           )}
-          <div class={`${prefixCls}-content`}>{children}</div>
+          <div class={`${prefixCls}-content`} onMousedown={handleContentMouseDown}>
+            {children}
+          </div>
         </div>
       )
     }
