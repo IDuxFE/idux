@@ -104,6 +104,7 @@ export default defineComponent({
         expandIcon: props.expandIcon,
         empty: props.empty,
         getKey: props.getKey,
+        height: props.height,
         labelKey: props.labelKey,
         leafLineIcon: props.leafLineIcon,
         showLine: props.showLine,

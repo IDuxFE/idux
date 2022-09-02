@@ -7,6 +7,7 @@
     class="demo-pro-tree"
     placeholder="搜索"
     :style="{ height: '400px' }"
+    :height="321"
     :checkable="true"
     :dataSource="treeData"
     :onSearch="onSearch"
