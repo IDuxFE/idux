@@ -19,6 +19,7 @@ import {
   Close,
   CloseCircle,
   CloseCircleFilled,
+  Collapse,
   DoubleLeft,
   DoubleRight,
   Down,
@@ -48,6 +49,7 @@ import {
   StarFilled,
   TreeExpand,
   TreeUnexpand,
+  Uncollapse,
   User,
   VerticalAlignTop,
   ZoomIn,
@@ -66,6 +68,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Close, // Stepper Modal Drawer Image Message Alert Transfer
   CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
   CloseCircleFilled, // Modal FormItem
+  Collapse, // Pro Tree
   DoubleLeft, // Pagination
   DoubleRight, // Pagination
   Down, // Select Table
@@ -94,6 +97,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Search, // Select Transfer
   StarFilled, // Rate
   User, // Avatar
+  Uncollapse, // Pro Tree
   TreeExpand, // TreeSelect
   TreeUnexpand, // TreeSelect
   VerticalAlignTop, // BackTop
