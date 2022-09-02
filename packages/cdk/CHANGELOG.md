@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
+
+
+### Bug Fixes
+
+* **cdk:utils:** fix useControlledProp defaultValue behavior ([#1090](https://github.com/IDuxFE/idux/issues/1090)) ([0ac224c](https://github.com/IDuxFE/idux/commit/0ac224ccb2d9053f4c4889d5c0e0317dbfb5a0d9))
+
+
+### Features
+
+* **cdk:click-outside:** add component and composition API usages ([#1092](https://github.com/IDuxFE/idux/issues/1092)) ([9e65136](https://github.com/IDuxFE/idux/commit/9e65136deb399cef7bfdf8da8802a716786e8fac))
+* **pro:table:** support scrollTo ([#1093](https://github.com/IDuxFE/idux/issues/1093)) ([023f57a](https://github.com/IDuxFE/idux/commit/023f57a916478534def7629b664ac182e2e9e339))
+
+
+
+
+
 # [1.0.0-rc.3](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-08-17)
 
 

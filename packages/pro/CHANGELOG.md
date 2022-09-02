@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
+
+
+### Bug Fixes
+
+* **comp:table:** sync design ([#1111](https://github.com/IDuxFE/idux/issues/1111)) ([c59d4de](https://github.com/IDuxFE/idux/commit/c59d4de028a039f7ad3a934a042a6b0ac84937b3))
+* **pro:search:** onChange triggered timing ([#1097](https://github.com/IDuxFE/idux/issues/1097)) ([32cd2bd](https://github.com/IDuxFE/idux/commit/32cd2bd956371f43abae1c3e1a000657c4371495))
+* **pro:search:** onItemRemove should emit searchValue ([#1094](https://github.com/IDuxFE/idux/issues/1094)) ([5fc5ea1](https://github.com/IDuxFE/idux/commit/5fc5ea123cfed7c32030f13e15f2cabdd15341e9))
+* **pro:tree:** add height prop supports, update proTree header height and container padding ([#1112](https://github.com/IDuxFE/idux/issues/1112)) ([69fa736](https://github.com/IDuxFE/idux/commit/69fa736ae4bbd6d63e032353c3046cc1f29ff1a0))
+
+
+### Features
+
+* **cdk:click-outside:** add component and composition API usages ([#1092](https://github.com/IDuxFE/idux/issues/1092)) ([9e65136](https://github.com/IDuxFE/idux/commit/9e65136deb399cef7bfdf8da8802a716786e8fac))
+* **comp:table:** sync design ([#1107](https://github.com/IDuxFE/idux/issues/1107)) ([b40fcb3](https://github.com/IDuxFE/idux/commit/b40fcb37141a8f19b46d4e85242c617d393b6cba))
+* **pro:table:** support scrollTo ([#1093](https://github.com/IDuxFE/idux/issues/1093)) ([023f57a](https://github.com/IDuxFE/idux/commit/023f57a916478534def7629b664ac182e2e9e339))
+
+
+
+
+
 # [1.0.0-rc.4](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-08-23)
 
 

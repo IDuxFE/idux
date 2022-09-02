@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
+
+
+### Bug Fixes
+
+* **cdk:utils:** fix useControlledProp defaultValue behavior ([#1090](https://github.com/IDuxFE/idux/issues/1090)) ([0ac224c](https://github.com/IDuxFE/idux/commit/0ac224ccb2d9053f4c4889d5c0e0317dbfb5a0d9))
+
+
+
+
+
 # [1.0.0-rc.4](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-08-23)
 
 **Note:** Version bump only for package @idux/site

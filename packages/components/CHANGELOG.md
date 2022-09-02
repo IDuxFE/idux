@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
+
+
+### Bug Fixes
+
+* **comp:alert:** cannot change pagination.pageindex through button ([#1102](https://github.com/IDuxFE/idux/issues/1102)) ([1669639](https://github.com/IDuxFE/idux/commit/166963934e77d913f5fd603fc5c47750d3af1876))
+* **comp:input:** the clear icon should cover the suffix icon ([#1103](https://github.com/IDuxFE/idux/issues/1103)) ([18f8795](https://github.com/IDuxFE/idux/commit/18f8795fea766a07a65b8726424bb0539c9d243d))
+* **comp:pagination:** sync design ([#1101](https://github.com/IDuxFE/idux/issues/1101)) ([44de517](https://github.com/IDuxFE/idux/commit/44de517f9e2d21639a1d8060c804aadfbfaf8d6d))
+* **comp:select:** fix searchable select input focus error ([#1109](https://github.com/IDuxFE/idux/issues/1109)) ([f78d3ea](https://github.com/IDuxFE/idux/commit/f78d3ea7158be31b871b91a3ed6eb7a534f94274))
+* **comp:select:** fix select height error when empty ([#1105](https://github.com/IDuxFE/idux/issues/1105)) ([c0ea8aa](https://github.com/IDuxFE/idux/commit/c0ea8aa21dff096fc489ba4e497f034708182f10))
+* **comp:select:** fix select height error with size 'sm' ([#1110](https://github.com/IDuxFE/idux/issues/1110)) ([aba2e4f](https://github.com/IDuxFE/idux/commit/aba2e4fd95ea1e87e95497c606ce300907e144f6))
+* **comp:select:** multipleLimit not work ([#1108](https://github.com/IDuxFE/idux/issues/1108)) ([41327d9](https://github.com/IDuxFE/idux/commit/41327d9ffcc2ccaef9276628fe063b95e2e3376a))
+* **comp:table:** sync design ([#1111](https://github.com/IDuxFE/idux/issues/1111)) ([c59d4de](https://github.com/IDuxFE/idux/commit/c59d4de028a039f7ad3a934a042a6b0ac84937b3))
+* **comp:tree:** expanded keys no longer clears after search is cleared ([#1100](https://github.com/IDuxFE/idux/issues/1100)) ([79d23ea](https://github.com/IDuxFE/idux/commit/79d23ead356996c54c49e195532dfb88d7dfc4b0))
+* **comp:tree:** fix tree unit tests ([#1106](https://github.com/IDuxFE/idux/issues/1106)) ([8507a51](https://github.com/IDuxFE/idux/commit/8507a518cd5f1d8c25b837d76f53f7e35dcd1cd9))
+* **comp:upload:** action's type is wrong ([#1095](https://github.com/IDuxFE/idux/issues/1095)) ([06c02b6](https://github.com/IDuxFE/idux/commit/06c02b6919299d826687e305f6c96746fae6bac3))
+* **pro:search:** onChange triggered timing ([#1097](https://github.com/IDuxFE/idux/issues/1097)) ([32cd2bd](https://github.com/IDuxFE/idux/commit/32cd2bd956371f43abae1c3e1a000657c4371495))
+
+
+### Features
+
+* **cdk:click-outside:** add component and composition API usages ([#1092](https://github.com/IDuxFE/idux/issues/1092)) ([9e65136](https://github.com/IDuxFE/idux/commit/9e65136deb399cef7bfdf8da8802a716786e8fac))
+* **comp:select:** set first option active on search and options change ([#1096](https://github.com/IDuxFE/idux/issues/1096)) ([5aa2d82](https://github.com/IDuxFE/idux/commit/5aa2d823f0cc777883e337b96df35242a8fd4224))
+* **comp:table:** sync design ([#1107](https://github.com/IDuxFE/idux/issues/1107)) ([b40fcb3](https://github.com/IDuxFE/idux/commit/b40fcb37141a8f19b46d4e85242c617d393b6cba))
+* **pro:table:** support scrollTo ([#1093](https://github.com/IDuxFE/idux/issues/1093)) ([023f57a](https://github.com/IDuxFE/idux/commit/023f57a916478534def7629b664ac182e2e9e339))
+
+
+
+
+
 # [1.0.0-rc.4](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-08-23)
 
 
