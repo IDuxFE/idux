@@ -50,6 +50,7 @@ export const proTreeProps = {
   },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode<any>) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
+  height: Number,
   labelKey: { type: String, default: undefined },
   leafLineIcon: { type: String, default: undefined },
   loadChildren: { type: Function as PropType<(node: TreeNode<any>) => Promise<TreeNode<any>[]>>, default: undefined },

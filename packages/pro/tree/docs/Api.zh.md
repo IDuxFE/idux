@@ -28,6 +28,7 @@
 | `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
 | `expandIcon` | 树节点展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `['minus-square', 'plus-square']` | - | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `header` | 树的头部 | `string \| HeaderProps \| #header="{expanded, onClick}"` | - | - | - |
+| `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | - | - |
 | `labelKey` | 替代[TreeNode](#TreeNode)中的`label`字段 | `string` | `label` | - | - |
 | `leafLineIcon` | 叶子节点的图标，用于替换默认的连接线 | `string \| #leafLineIcon` | - | - | 仅在 `showLine` 时生效 |
