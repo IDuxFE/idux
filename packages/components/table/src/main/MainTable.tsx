@@ -34,6 +34,8 @@ import { renderBodyRow } from './body/RenderBodyRow'
 import Head from './head/Head'
 import Foot from './tfoot/Foot'
 
+const virtualItemHeightMap = { sm: 32, md: 40, lg: 56 } as const
+
 export default defineComponent({
   setup() {
     const {
@@ -41,6 +43,7 @@ export default defineComponent({
       slots,
       expandable,
       mergedPrefixCls,
+      mergedSize,
       changeColumnWidth,
       flattedData,
       isSticky,
@@ -177,7 +180,7 @@ export default defineComponent({
               fullHeight={fullHeight}
               getKey="rowKey"
               height={(height || y) as number}
-              itemHeight={47}
+              itemHeight={virtualItemHeightMap[mergedSize.value]}
               itemRender={itemRender}
               contentRender={contentRender}
               virtual

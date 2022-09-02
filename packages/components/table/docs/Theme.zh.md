@@ -3,8 +3,6 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@table-color` | `@text-color` | - | - |
-| `@table-head-line-height` | `@line-height-base` | `1` | - |
-| `@table-body-line-height` | `@line-height-base` | `1.084` | - |
 | `@table-head-height-lg` | `@height-xxl` | `@height-lg` | - |
 | `@table-head-height-md` | `@height-xl` | `@height-md` | - |
 | `@table-head-height-sm` | `@height-md` | `@height-sm` | - |

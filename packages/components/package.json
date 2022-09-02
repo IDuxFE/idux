@@ -34,7 +34,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^1.0.0-rc.3",
+    "@idux/cdk": "1.0.0-rc.3",
     "date-fns": "^2.27.0",
     "lodash-es": "^4.17.0"
   },

@@ -54,7 +54,6 @@
     color: @table-head-color;
     background-color: @table-head-background-color;
     font-weight: @table-head-font-weight;
-    line-height: @table-head-line-height;
     overflow-wrap: break-word;
 
     &:not(:last-child)::before {
@@ -62,7 +61,6 @@
       top: 50%;
       right: 0;
       width: 1px;
-      height: @table-head-split-height;
       background-color: @table-head-split-color;
       transform: translateY(-50%);
       content: '';
@@ -75,7 +73,6 @@
 
   td {
     position: relative;
-    line-height: @table-body-line-height;
     overflow-wrap: break-word;
     transition: background @transition-duration-base;
 
@@ -85,7 +82,7 @@
   tr {
     &:hover {
       > td {
-        background: @table-body-hover-background;
+        background: @table-hover-background;
       }
     }
 
@@ -219,7 +216,7 @@
     transition: background @transition-duration-base;
 
     &:hover {
-      background: @table-body-hover-background;
+      background: @table-hover-background;
     }
   }
 

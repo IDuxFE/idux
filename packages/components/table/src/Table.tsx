@@ -44,6 +44,7 @@ export default defineComponent({
     const mergedAutoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetRowKey(props, config)
+    const mergedSize = computed(() => props.size ?? config.size)
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, mergedAutoHeight, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
@@ -70,6 +71,7 @@ export default defineComponent({
       config,
       locale,
       mergedPrefixCls,
+      mergedSize,
       ...columnsContext,
       ...scrollContext,
       ...sortableContext,
@@ -89,14 +91,14 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { borderless = config.borderless, size = config.size, scroll } = props
+      const { borderless = config.borderless, scroll } = props
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-auto-height`]: mergedAutoHeight.value,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-empty`]: flattedData.value.length === 0,
         [`${prefixCls}-full-height`]: scroll?.fullHeight,
-        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
 
