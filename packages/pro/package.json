@@ -32,8 +32,8 @@
   "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
-    "@idux/cdk": "^1.0.0-rc.3",
-    "@idux/components": "^1.0.0-rc.4",
+    "@idux/cdk": "1.0.0-rc.3",
+    "@idux/components": "1.0.0-rc.4",
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.0-rc.0",
     "lodash-es": "^4.17.0"

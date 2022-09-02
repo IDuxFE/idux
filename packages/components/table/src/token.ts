@@ -14,7 +14,7 @@ import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
-import type { TableProps } from './types'
+import type { TableProps, TableSize } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
@@ -35,6 +35,7 @@ export interface TableContext
   config: TableConfig
   locale: Locale
   mergedPrefixCls: ComputedRef<string>
+  mergedSize: ComputedRef<TableSize>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
 

@@ -1,34 +1,38 @@
-.table-size(@size, @head-height, @padding-top, @padding-right, @padding-bottom, @padding-left, @font-size) {
+.table-size(@size, @font-size, @head-height, @body-height, @padding-right, @padding-left) {
+  @body-padding-v: ((@body-height - @table-border-width - @font-size * @line-height-base) / 2);
+
   .@{table-prefix}-@{size} {
-    font-size: @font-size;
+    .@{table-prefix}& {
+      font-size: @font-size;
+    }
 
     th {
       padding: 0 @padding-right 0 @padding-left;
-      height: @head-height;
+      height: @head-height - @table-border-width;
+      line-height: @head-height - @table-border-width;
 
       .@{table-prefix}-sortable-trigger,
       .@{table-prefix}-filterable-trigger {
-        height: @head-height;
+        height: @head-height - @table-border-width;
+      }
+
+      &:not(:last-child)::before {
+        height: (@head-height / 2);
       }
     }
 
     td {
-      padding: @padding-top @padding-right @padding-bottom @padding-left;
+      padding: @body-padding-v @padding-right @body-padding-v @padding-left;
+      height: @body-height;
     }
 
     .@{header-prefix} {
-      padding: (@padding-top / 2) @padding-right (@padding-bottom / 2) @padding-left;
+      padding: 0 @padding-right 0 @padding-left;
     }
 
     .@{table-prefix} {
-
-      &-cell-triggers {
-        /* stylelint-disable function-no-unknown */
-        margin: 0 -(@padding-right / 2) 0 0;
-      }
-
       &-footer {
-        padding: @padding-top @padding-right @padding-bottom @padding-left;
+        padding: @body-padding-v @padding-right @body-padding-v @padding-left;
       }
     }
 
@@ -36,6 +40,6 @@
   }
 }
 
-.table-size(~'lg', @table-head-height-lg, @table-padding-top-lg, @table-padding-right-lg, @table-padding-bottom-lg, @table-padding-left-lg, @table-font-size-lg);
-.table-size(~'md', @table-head-height-md, @table-padding-top-md, @table-padding-right-md, @table-padding-bottom-md, @table-padding-left-md, @table-font-size-md);
-.table-size(~'sm', @table-head-height-sm, @table-padding-top-sm, @table-padding-right-sm, @table-padding-bottom-sm, @table-padding-left-sm, @table-font-size-sm);
+.table-size(~'lg', @table-font-size-lg, @table-head-height-lg, @table-height-lg, @table-padding-right-lg, @table-padding-left-lg);
+.table-size(~'md', @table-font-size-md, @table-head-height-md, @table-height-md, @table-padding-right-md, @table-padding-left-md);
+.table-size(~'sm', @table-font-size-sm, @table-head-height-sm, @table-height-sm, @table-padding-right-sm, @table-padding-left-sm);

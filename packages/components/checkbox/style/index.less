@@ -4,12 +4,11 @@
 .@{checkbox-prefix} {
   .reset-component();
 
-  position: relative;
-  display: inline-flex;
-  align-items: center;
   font-size: @checkbox-font-size;
-  line-height: @checkbox-line-height;
   color: @checkbox-color;
+  display: inline-flex;
+  align-items: baseline;
+  line-height: unset;
   cursor: pointer;
 
   &:not(&-button)::after {
@@ -21,8 +20,11 @@
 
   &-input {
     position: relative;
-    display: inline-block;
+    top: 0.2em;
     line-height: 1;
+    white-space: nowrap;
+    outline: none;
+    cursor: pointer;
 
     &-inner {
       position: absolute;
@@ -43,7 +45,7 @@
       background-color: @checkbox-background-color;
       border: @checkbox-border-width @checkbox-border-style @checkbox-border-color;
       border-radius: @checkbox-box-border-radius;
-      transition: all @transition-duration-base @ease-in-out;;
+      transition: all @transition-duration-base @ease-in-out;
 
       &::after {
         position: absolute;
@@ -56,7 +58,7 @@
         border-top: 0;
         border-left: 0;
         transform: rotate(45deg) scale(0) translate(-50%, -50%);
-        transition: all @transition-duration-base @ease-in-out;;
+        transition: all @transition-duration-base @ease-in-out;
         opacity: 0;
         content: ' ';
       }
@@ -69,9 +71,7 @@
 
   &-checked {
     .@{checkbox-prefix} {
-
       &-input {
-
         &-box {
           background-color: @checkbox-active-color;
           border-color: @checkbox-active-color;
@@ -87,7 +87,6 @@
 
   &-indeterminate {
     .@{checkbox-prefix} {
-
       &-input-box {
         background-color: @checkbox-active-color;
         border-color: @checkbox-active-color;
@@ -119,7 +118,6 @@
     color: @checkbox-disabled-color;
 
     .@{checkbox-prefix}-input {
-
       &-inner {
         cursor: not-allowed;
       }
@@ -136,7 +134,6 @@
 
     &.@{checkbox-prefix}-indeterminate {
       .@{checkbox-prefix}-input-box {
-
         &::after {
           background-color: @checkbox-disabled-color;
         }
@@ -154,7 +151,6 @@
   transition: background-color @transition-duration-base @ease-in-out;
 
   .@{checkbox-prefix} {
-
     &-input {
       position: absolute;
       top: 0;
@@ -245,7 +241,6 @@
 
   &:not(&-with-gap) {
     .@{checkbox-prefix} {
-
       &:not(&-button):not(:last-child) {
         margin-right: @checkbox-group-item-margin-right;
       }
@@ -264,7 +259,7 @@
             height: 100%;
             padding: 1px 0;
             background-color: @checkbox-border-color;
-            content: "";
+            content: '';
           }
         }
 
@@ -280,7 +275,7 @@
         &.@{checkbox-prefix}-focused:not(.@{checkbox-prefix}-disabled),
         &.@{checkbox-prefix}-checked:not(.@{checkbox-prefix}-disabled) {
           border-color: @checkbox-active-color;
-          
+
           &::before {
             background: @checkbox-active-color;
           }
