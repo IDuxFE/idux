@@ -61,6 +61,7 @@ export interface PopconfirmLocale {
 
 export interface PaginationLocale {
   itemsPerPage: string
+  itemsSuffix: string
   jumpTo: string
   page: string
   prev: string

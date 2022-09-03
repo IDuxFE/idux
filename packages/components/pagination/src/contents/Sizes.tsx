@@ -24,7 +24,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-sizes`
-      const { itemsPerPage, totalSuffix } = locale.pagination
+      const { itemsPerPage, itemsSuffix } = locale.pagination
 
       return (
         <li class={prefixCls}>
@@ -38,7 +38,7 @@ export default defineComponent({
               onChange={changePageSize}
             />
           </div>
-          {totalSuffix}
+          {itemsSuffix}
         </li>
       )
     }
