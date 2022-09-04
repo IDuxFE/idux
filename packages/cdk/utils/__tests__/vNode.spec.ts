@@ -23,6 +23,16 @@ describe('vNode.ts', () => {
     expect(getFirstValidNode(arrayValue as VNodeChild)).toBeUndefined()
     expect(getFirstValidNode(vNode as VNodeChild)).toBeUndefined()
 
+    vNode.type = Comment
+    const textvNode: FakeVNode = {
+      type: Text,
+    }
+    const startCommentNodeArrayValue: FakeVNode[] = [vNode, textvNode]
+    expect(getFirstValidNode(startCommentNodeArrayValue as VNodeChild, 0)).toEqual(textvNode)
+    expect(getFirstValidNode(vNode as VNodeChild, 0)).toBeUndefined()
+    expect(getFirstValidNode(startCommentNodeArrayValue as VNodeChild, 1)).toEqual(textvNode)
+    expect(getFirstValidNode(vNode as VNodeChild, 1)).toBeUndefined()
+
     vNode.type = Fragment
     expect(getFirstValidNode(arrayValue as VNodeChild, 0)).toBeUndefined()
     expect(getFirstValidNode(vNode as VNodeChild, 0)).toBeUndefined()

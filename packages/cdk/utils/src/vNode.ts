@@ -37,13 +37,14 @@ function getChildren(node: VNode, depth: number): VNode | undefined {
  * @param maxDepth depth to be searched, default is 3
  */
 export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
-  if (isNil(nodes) || (Array.isArray(nodes) && !nodes.length)) {
+  const targetNodes = Array.isArray(nodes) ? nodes.filter(item => !isComment(item)) : nodes
+  if (isNil(targetNodes) || (Array.isArray(targetNodes) && !targetNodes.length)) {
     return
   }
-  if (Array.isArray(nodes) && nodes.length > 0) {
-    return getChildren(nodes[0] as VNode, maxDepth)
+  if (Array.isArray(targetNodes) && targetNodes.length > 0) {
+    return getChildren(targetNodes[0] as VNode, maxDepth)
   }
-  return getChildren(nodes as VNode, maxDepth)
+  return getChildren(targetNodes as VNode, maxDepth)
 }
 
 /**
