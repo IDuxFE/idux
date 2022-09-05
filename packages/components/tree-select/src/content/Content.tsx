@@ -123,7 +123,11 @@ export default defineComponent({
     }
 
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-    const handleInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const handleInput = (evt: Event) => {
+      const { value } = evt.target as HTMLInputElement
+      setInputValue(value)
+      props.searchable && callEmit(props.onSearch, value)
+    }
     const handleClear = () => setInputValue('')
 
     return () => {

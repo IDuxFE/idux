@@ -11,7 +11,7 @@ import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, pro
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
@@ -171,7 +171,11 @@ export default defineComponent({
       if (searchable === 'overlay') {
         const value = inputValue.value
         const clearIcon = props.clearIcon ?? config.clearIcon
-        const handleSearchInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+        const handleSearchInput = (evt: Event) => {
+          const { value } = evt.target as HTMLInputElement
+          setInputValue(value)
+          props.searchable && callEmit(props.onSearch, value)
+        }
         const handleSearchClear = () => setInputValue('')
 
         children.unshift(

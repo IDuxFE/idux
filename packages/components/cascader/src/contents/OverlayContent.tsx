@@ -9,6 +9,7 @@
 
 import { type VNode, computed, defineComponent, inject } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 
 import { cascaderToken } from '../token'
@@ -40,7 +41,11 @@ export default defineComponent({
       return dataSource
     })
 
-    const handleInput = (evt: Event) => setInputValue((evt.target as HTMLInputElement).value)
+    const handleInput = (evt: Event) => {
+      const { value } = evt.target as HTMLInputElement
+      setInputValue(value)
+      props.searchable && callEmit(props.onSearch, value)
+    }
     const handleClear = () => setInputValue('')
 
     return () => {
