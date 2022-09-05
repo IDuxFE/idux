@@ -26,7 +26,7 @@ export function createSelectSegment(
   searchField: SelectSearchField,
 ): Segment<VKey | VKey[] | undefined> {
   const {
-    fieldConfig: { dataSource, separator, searchable, searchFn, multiple, virtual },
+    fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual },
     defaultValue,
     inputClassName,
   } = searchField
@@ -67,6 +67,7 @@ export function createSelectSegment(
         multiple={multiple}
         virtual={virtual}
         setOnKeyDown={setOnKeyDown}
+        showSelectAll={showSelectAll}
         onChange={handleChange}
         onSelectAll={handleSelectAll}
         onConfirm={ok}

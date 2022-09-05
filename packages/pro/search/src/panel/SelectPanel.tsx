@@ -24,7 +24,6 @@ import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/
 
 import { proSearchContext } from '../token'
 import { SearchSelectPanelProps, searchSelectPanelProps } from '../types'
-import { findDataSourceItem } from '../utils/selectData'
 
 export default defineComponent({
   props: searchSelectPanelProps,
@@ -38,26 +37,6 @@ export default defineComponent({
       value => {
         const key = value?.[value.length - 1]
         key && setActiveValue(key)
-      },
-    )
-    watch(
-      () => props.dataSource,
-      dataSource => {
-        if (activeValue.value && findDataSourceItem(dataSource!, option => option.key === activeValue.value)) {
-          return
-        }
-
-        const firstItem = dataSource?.[0]
-        if (!firstItem) {
-          setActiveValue(undefined)
-          return
-        }
-
-        if (firstItem.children && firstItem.children.length > 0) {
-          setActiveValue(firstItem.children[0].key)
-        } else {
-          setActiveValue(firstItem.key)
-        }
       },
     )
 
@@ -102,7 +81,7 @@ export default defineComponent({
     })
 
     const renderSelectAll = () => {
-      if (!props.multiple) {
+      if (!props.multiple || !props.showSelectAll) {
         return
       }
 

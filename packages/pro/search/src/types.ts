@@ -82,6 +82,7 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     multiple?: boolean
     searchable?: boolean
     separator?: string
+    showSelectAll?: boolean
     virtual?: boolean
     searchFn?: (data: SelectPanelData, searchText: string) => boolean
     overlayItemWidth?: number
@@ -206,6 +207,7 @@ export const searchSelectPanelProps = {
   value: { type: Array as PropType<VKey[]>, default: undefined },
   dataSource: { type: Array as PropType<SelectPanelData[]>, default: undefined },
   multiple: { type: Boolean, default: false },
+  showSelectAll: { type: Boolean, default: true },
   allSelected: Boolean,
   virtual: { type: Boolean, default: false },
   onChange: Function as PropType<(value: VKey[]) => void>,
