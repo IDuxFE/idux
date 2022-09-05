@@ -8,6 +8,10 @@
     &-content {
       padding: @select-padding-vertical @select-multiple-padding;
       font-size: @select-font-size;
+
+      .@{overflow-prefix}-item {
+        max-width: calc(100% - @select-icon-font-size);
+      }
     }
 
     &-item {
@@ -31,7 +35,6 @@
     &-overflow {
       line-height: @select-item-line-height;
     }
-
   }
 
   &.@{selector-prefix}-searchable .@{selector-prefix}-overflow,
