@@ -51,9 +51,10 @@ export default defineComponent({
       const { fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes = {
-        [`${prefixCls}-sorted`]: !!activeSortOrderBy.value,
-        [`${prefixCls}-align-${align}`]: !!align,
-        [`${prefixCls}-ellipsis`]: !!ellipsis,
+        [`${prefixCls}-cell`]: true,
+        [`${prefixCls}-cell-sorted`]: !!activeSortOrderBy.value,
+        [`${prefixCls}-cell-align-${align}`]: !!align && align != 'start',
+        [`${prefixCls}-cell-ellipsis`]: !!ellipsis,
       }
       if (fixed) {
         classes = {

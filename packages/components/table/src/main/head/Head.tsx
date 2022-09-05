@@ -12,7 +12,7 @@ import HeadRow from './HeadRow'
 
 export default defineComponent({
   setup() {
-    const { props: tableProps, mergedRows } = inject(TABLE_TOKEN)!
+    const { props: tableProps, mergedRows, mergedPrefixCls } = inject(TABLE_TOKEN)!
 
     return () => {
       const rows = mergedRows.value
@@ -21,7 +21,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.head ?? 'thead') as any
       return (
-        <Tag {...customAdditional}>
+        <Tag class={`${mergedPrefixCls.value}-thead`} {...customAdditional}>
           {rows.map((columns, rowIndex) => (
             <HeadRow key={rowIndex} columns={columns} />
           ))}

@@ -67,12 +67,13 @@ export default defineComponent({
       } = props.column as HeadColumn
       const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean | undefined> = {
+        [`${prefixCls}-cell`]: true,
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-filterable`]: !!filterable,
         [`${prefixCls}-cell-sortable`]: !!sortable,
-        [`${prefixCls}-align-${align}`]: !hasChildren && !!align,
-        [`${prefixCls}-align-center`]: hasChildren,
-        [`${prefixCls}-ellipsis`]: !!ellipsis,
+        [`${prefixCls}-cell-align-center`]: hasChildren,
+        [`${prefixCls}-cell-align-end`]: !hasChildren && align === 'end',
+        [`${prefixCls}-cell-ellipsis`]: !!ellipsis,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value

@@ -6,7 +6,7 @@ exports[`Table > basic work > render work 1`] = `
   <!---->
   <div class=\\"ix-table-container\\">
     <div class=\\"ix-table-content\\">
-      <table style=\\"table-layout: auto;\\">
+      <table class=\\"ix-table-table\\" style=\\"table-layout: auto;\\">
         <colgroup>
           <col class=\\"ix-table-col-expandable\\">
           <col class=\\"ix-table-col-selectable\\">
@@ -16,12 +16,12 @@ exports[`Table > basic work > render work 1`] = `
           <col class=\\"\\">
           <col class=\\"\\">
         </colgroup>
-        <thead>
-          <tr>
-            <th class=\\"ix-table-cell-expandable ix-table-align-start\\">
+        <thead class=\\"ix-table-thead\\">
+          <tr class=\\"ix-table-row\\">
+            <th class=\\"ix-table-cell ix-table-cell-expandable\\">
               <!---->
             </th>
-            <th class=\\"ix-table-cell-selectable ix-table-align-start\\">
+            <th class=\\"ix-table-cell ix-table-cell-selectable\\">
               <div class=\\"ix-table-selectable\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                   <!---->
                   <!---->
@@ -29,284 +29,284 @@ exports[`Table > basic work > render work 1`] = `
                 <!---->
               </div>
             </th>
-            <th class=\\"ix-table-align-start\\">Name</th>
-            <th class=\\"ix-table-align-start\\">Age</th>
-            <th class=\\"ix-table-align-start\\">Address</th>
-            <th class=\\"ix-table-align-start\\">Tags</th>
-            <th class=\\"ix-table-align-start\\">Action</th>
+            <th class=\\"ix-table-cell\\">Name</th>
+            <th class=\\"ix-table-cell\\">Age</th>
+            <th class=\\"ix-table-cell\\">Address</th>
+            <th class=\\"ix-table-cell\\">Tags</th>
+            <th class=\\"ix-table-cell\\">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class=\\"ix-table-tbody\\">
           <!---->
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 0
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->18
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 0
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 1
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->19
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 1
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 2
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->20
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 2
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 3
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->21
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 3
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 4
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->22
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 4
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 5
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->23
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 5
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 6
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->24
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 6
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 7
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->25
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 7
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
               </button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 8
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->26
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 8
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>
-          <tr class=\\"\\">
-            <td class=\\"ix-table-align-start\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
-            <td class=\\"ix-table-align-start\\">
+          <tr class=\\"ix-table-row\\">
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
                 <!---->
               </label>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->Edrward 9
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->27
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!---->London Park no. 9
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><span class=\\"ix-tag ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
               <!----></span><span class=\\"ix-tag ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-align-start\\">
+            <td class=\\"ix-table-cell\\">
               <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
             </td>
           </tr>

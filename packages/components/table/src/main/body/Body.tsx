@@ -54,7 +54,7 @@ export default defineComponent({
       }
 
       return (
-        <tbody>
+        <tbody class={`${mergedPrefixCls.value}-tbody`}>
           {showMeasure.value && <MeasureRow />}
           {children}
         </tbody>

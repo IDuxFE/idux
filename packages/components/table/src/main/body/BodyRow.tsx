@@ -57,6 +57,7 @@ export default defineComponent({
       const { level, expanded } = props
       const computeRowClassName = rowClassName.value
       return normalizeClass({
+        [`${prefixCls}`]: true,
         [`${prefixCls}-level-${level}`]: !!level,
         [`${prefixCls}-selected`]: isSelected.value,
         [`${prefixCls}-expanded`]: expanded,
