@@ -20,7 +20,7 @@ export const isFragment = (node: VNodeChild): boolean => (node as VNode).type ==
 export const isTemplate = (node: VNodeChild): boolean => (node as VNode).type === TEMPLATE
 export const isText = (node: VNodeChild): boolean => (node as VNode).type === Text
 
-function getChildren(node: VNode, depth: number): VNode | undefined {
+function getValidNode(node: VNode, depth: number): VNode | undefined {
   if (isComment(node)) {
     return
   }
@@ -37,14 +37,7 @@ function getChildren(node: VNode, depth: number): VNode | undefined {
  * @param maxDepth depth to be searched, default is 3
  */
 export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
-  const targetNodes = Array.isArray(nodes) ? nodes.filter(item => !isComment(item)) : nodes
-  if (isNil(targetNodes) || (Array.isArray(targetNodes) && !targetNodes.length)) {
-    return
-  }
-  if (Array.isArray(targetNodes) && targetNodes.length > 0) {
-    return getChildren(targetNodes[0] as VNode, maxDepth)
-  }
-  return getChildren(targetNodes as VNode, maxDepth)
+  return (convertArray(nodes) as VNode[]).find(node => getValidNode(node, maxDepth))
 }
 
 /**
