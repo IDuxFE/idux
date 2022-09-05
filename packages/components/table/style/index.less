@@ -51,10 +51,11 @@
 
   th {
     position: relative;
+    text-align: start;
+    overflow-wrap: break-word;
     color: @table-head-color;
     background-color: @table-head-background-color;
     font-weight: @table-head-font-weight;
-    overflow-wrap: break-word;
 
     &:not(:last-child)::before {
       position: absolute;
@@ -73,6 +74,7 @@
 
   td {
     position: relative;
+    text-align: start;
     overflow-wrap: break-word;
     transition: background @transition-duration-base;
 
@@ -96,11 +98,7 @@
     }
   }
 
-  &-align {
-    &-start {
-      text-align: start;
-    }
-
+  &-cell-align {
     &-center {
       text-align: center;
     }
@@ -110,7 +108,7 @@
     }
   }
 
-  &-ellipsis {
+  &-cell-ellipsis {
     .ellipsis();
 
     .@{table-prefix}-cell-title {
@@ -312,6 +310,10 @@
 
       &-fixed-holder {
         flex-shrink: 0;
+      }
+
+      &-empty-row {
+        height: 100%;
       }
     }
   }

@@ -14,7 +14,7 @@ import HeadCell from './HeadCell'
 export default defineComponent({
   props: tableHeadRowProps,
   setup(props) {
-    const { props: tableProps } = inject(TABLE_TOKEN)!
+    const { props: tableProps, mergedPrefixCls } = inject(TABLE_TOKEN)!
 
     return () => {
       const { columns } = props
@@ -23,7 +23,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.headRow ?? 'tr') as any
       return (
-        <Tag {...customAdditional}>
+        <Tag class={`${mergedPrefixCls.value}-row`} {...customAdditional}>
           {columns
             .filter(column => column.titleColSpan !== 0)
             .map(column => (

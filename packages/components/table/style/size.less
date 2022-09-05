@@ -1,19 +1,17 @@
 .table-size(@size, @font-size, @head-height, @body-height, @padding-right, @padding-left) {
-  @body-padding-v: ((@body-height - @table-border-width - @font-size * @line-height-base) / 2);
-
   .@{table-prefix}-@{size} {
     .@{table-prefix}& {
       font-size: @font-size;
     }
 
     th {
-      padding: 0 @padding-right 0 @padding-left;
-      height: @head-height - @table-border-width;
-      line-height: @head-height - @table-border-width;
+      padding-left: @padding-left;
+      padding-right: @padding-right;
+      height: @head-height;
 
       .@{table-prefix}-sortable-trigger,
       .@{table-prefix}-filterable-trigger {
-        height: @head-height - @table-border-width;
+        height: @head-height;
       }
 
       &:not(:last-child)::before {
@@ -22,17 +20,21 @@
     }
 
     td {
-      padding: @body-padding-v @padding-right @body-padding-v @padding-left;
       height: @body-height;
+      padding-left: @padding-left;
+      padding-right: @padding-right;
     }
 
     .@{header-prefix} {
-      padding: 0 @padding-right 0 @padding-left;
+      padding-left: @padding-left;
+      padding-right: @padding-right;
     }
 
     .@{table-prefix} {
       &-footer {
-        padding: @body-padding-v @padding-right @body-padding-v @padding-left;
+        height: @body-height;
+        padding-left: @padding-left;
+        padding-right: @padding-right;
       }
     }
 

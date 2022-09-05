@@ -181,27 +181,27 @@ describe('Table', () => {
     test('ellipsis work', async () => {
       const wrapper = TableMount({ props: { ellipsis: true } })
 
-      expect(wrapper.find('thead').find('th').classes()).toContain('ix-table-ellipsis')
-      expect(wrapper.find('tbody').find('td').classes()).toContain('ix-table-ellipsis')
+      expect(wrapper.find('thead').find('th').classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').find('td').classes()).toContain('ix-table-cell-ellipsis')
 
       await wrapper.setProps({ ellipsis: false })
 
-      expect(wrapper.find('thead').find('th').classes()).not.toContain('ix-table-ellipsis')
-      expect(wrapper.find('tbody').find('td').classes()).not.toContain('ix-table-ellipsis')
+      expect(wrapper.find('thead').find('th').classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').find('td').classes()).not.toContain('ix-table-cell-ellipsis')
     })
 
     test('ellipsis with title work', async () => {
       const wrapper = TableMount({ props: { ellipsis: { title: false } } })
 
-      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-ellipsis')
-      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-cell-ellipsis')
       expect(wrapper.find('thead').findAll('th')[2].attributes('title')).toBe(undefined)
       expect(wrapper.find('tbody').findAll('td')[2].attributes('title')).toBe(undefined)
 
       await wrapper.setProps({ ellipsis: { title: true } })
 
-      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-ellipsis')
-      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-cell-ellipsis')
       expect(wrapper.find('thead').findAll('th')[2].attributes('title')).not.toBe(undefined)
       expect(wrapper.find('tbody').findAll('td')[2].attributes('title')).not.toBe(undefined)
     })
@@ -221,21 +221,21 @@ describe('Table', () => {
       const ths = wrapper.find('thead').find('tr').findAll('th')
       const tds = wrapper.find('tbody').find('tr').findAll('td')
 
-      expect(ths[0].classes()).toContain('ix-table-ellipsis')
-      expect(ths[1].classes()).not.toContain('ix-table-ellipsis')
-      expect(ths[2].classes()).toContain('ix-table-ellipsis')
-      expect(tds[0].classes()).toContain('ix-table-ellipsis')
-      expect(tds[1].classes()).not.toContain('ix-table-ellipsis')
-      expect(tds[2].classes()).toContain('ix-table-ellipsis')
+      expect(ths[0].classes()).toContain('ix-table-cell-ellipsis')
+      expect(ths[1].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(ths[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(tds[0].classes()).toContain('ix-table-cell-ellipsis')
+      expect(tds[1].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(tds[2].classes()).toContain('ix-table-cell-ellipsis')
 
       await wrapper.setProps({ ellipsis: false })
 
-      expect(ths[0].classes()).toContain('ix-table-ellipsis')
-      expect(ths[1].classes()).not.toContain('ix-table-ellipsis')
-      expect(ths[2].classes()).not.toContain('ix-table-ellipsis')
-      expect(tds[0].classes()).toContain('ix-table-ellipsis')
-      expect(tds[1].classes()).not.toContain('ix-table-ellipsis')
-      expect(tds[2].classes()).not.toContain('ix-table-ellipsis')
+      expect(ths[0].classes()).toContain('ix-table-cell-ellipsis')
+      expect(ths[1].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(ths[2].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(tds[0].classes()).toContain('ix-table-cell-ellipsis')
+      expect(tds[1].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(tds[2].classes()).not.toContain('ix-table-cell-ellipsis')
     })
 
     test('empty work', async () => {
