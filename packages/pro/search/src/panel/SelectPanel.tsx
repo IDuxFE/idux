@@ -23,10 +23,10 @@ import { IxCheckbox } from '@idux/components/checkbox'
 import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/components/select'
 
 import { proSearchContext } from '../token'
-import { SearchSelectPanelProps, searchSelectPanelProps } from '../types'
+import { type ProSearchSelectPanelProps, proSearchSelectPanelProps } from '../types'
 
 export default defineComponent({
-  props: searchSelectPanelProps,
+  props: proSearchSelectPanelProps,
   setup(props) {
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
     const [activeValue, setActiveValue] = useState<VKey | undefined>(undefined)
@@ -67,8 +67,8 @@ export default defineComponent({
     const handleCancel = () => {
       props.onCancel?.()
     }
-    const handleSelectAllChange = () => {
-      props.onSelectAll?.(!props.allSelected)
+    const handleSelectAllClick = () => {
+      props.onSelectAllClick?.()
     }
 
     const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, changeSelected, handleConfirm)
@@ -92,7 +92,7 @@ export default defineComponent({
           title={locale.selectAll}
           aria-label={locale.selectAll}
           aria-selected={props.allSelected}
-          onClick={handleSelectAllChange}
+          onClick={handleSelectAllClick}
         >
           <IxCheckbox checked={props.allSelected} indeterminate={partiallySelected.value} />
           <span class={`${prefixCls}-label`}>{locale.selectAll}</span>
@@ -140,7 +140,7 @@ export default defineComponent({
 })
 
 function useOnKeyDown(
-  props: SearchSelectPanelProps,
+  props: ProSearchSelectPanelProps,
   panelRef: Ref<SelectPanelInstance | undefined>,
   activeValue: ComputedRef<VKey | undefined>,
   changeSelected: (key: VKey) => void,

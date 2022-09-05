@@ -14,7 +14,6 @@ import {
   inject,
   nextTick,
   normalizeClass,
-  normalizeStyle,
   onBeforeUnmount,
   onMounted,
   ref,
@@ -37,7 +36,15 @@ export default defineComponent({
     const overlayRef = ref<ɵOverlayInstance>()
     const inputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
-    const [overlayOpened, setOverlayOpened] = useState(false)
+    const [overlayOpened, _setOverlayOpened] = useState(false)
+    const setOverlayOpened = (opened: boolean) => {
+      if (overlayOpened.value === opened) {
+        return
+      }
+
+      _setOverlayOpened(opened)
+      props.segment.onVisibleChange?.(opened)
+    }
 
     const {
       triggerOverlayUpdate,
@@ -55,12 +62,10 @@ export default defineComponent({
     )
 
     const inputWidth = useInputWidth(measureSpanRef)
-    const inputStyle = computed(() => {
-      return normalizeStyle({
-        minWidth: props.disabled ? '0' : undefined,
-        width: convertCssPixel(inputWidth.value),
-      })
-    })
+    const inputStyle = computed(() => ({
+      minWidth: props.disabled ? '0' : undefined,
+      width: convertCssPixel(inputWidth.value),
+    }))
     const inputClasses = computed(() => [
       `${mergedPrefixCls.value}-segment-input`,
       ...convertArray(props.segment.inputClassName),
@@ -106,6 +111,16 @@ export default defineComponent({
         },
         { immediate: true },
       )
+      watch(
+        inputStyle,
+        style => {
+          inputRef.value &&
+            Object.entries(style).forEach(([key, value]) => {
+              inputRef.value!.style[key as keyof typeof style] = value ?? ''
+            })
+        },
+        { immediate: true },
+      )
       registerOverlayUpdate(updateOverlay)
     })
     onBeforeUnmount(() => {
@@ -140,7 +155,6 @@ export default defineComponent({
       <input
         ref={inputRef}
         class={inputClasses.value}
-        style={inputStyle.value}
         value={props.input ?? ''}
         disabled={props.disabled}
         onInput={handleInput}
@@ -151,15 +165,20 @@ export default defineComponent({
         onKeydown={handleKeyDown}
       ></input>
     )
+
+    /* eslint-disable indent */
     const renderContent = () =>
-      props.segment.panelRenderer?.({
-        input: props.input ?? '',
-        value: props.value,
-        cancel: handleCancel,
-        ok: handleConfirm,
-        setValue: handleChange,
-        setOnKeyDown: setPanelOnKeyDown,
-      })
+      overlayOpened.value
+        ? props.segment.panelRenderer?.({
+            input: props.input ?? '',
+            value: props.value,
+            cancel: handleCancel,
+            ok: handleConfirm,
+            setValue: handleChange,
+            setOnKeyDown: setPanelOnKeyDown,
+          })
+        : undefined
+    /* eslint-enable indent */
 
     return () => {
       const { panelRenderer } = props.segment

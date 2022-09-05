@@ -29,13 +29,14 @@ export function createSelectSegment(
     fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual },
     defaultValue,
     inputClassName,
+    onPanelVisibleChange,
   } = searchField
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
     const { input, value, setValue, ok, cancel, setOnKeyDown } = context
-
     const panelValue = convertArray(value)
     const keys = getSelectDataSourceKeys(dataSource)
+    const selectableKeys = getSelectDataSourceKeys(filterDataSource(dataSource, option => !option.disabled))
     const lastInputPart = input
       .trim()
       .split(separator ?? defaultSeparator)
@@ -55,21 +56,21 @@ export function createSelectSegment(
         setValue(value.length > 0 ? value : undefined)
       }
     }
-    const handleSelectAll = (selectAll: boolean) => {
-      setValue(selectAll ? keys : [])
+    const handleSelectAll = () => {
+      setValue(selectableKeys.length !== panelValue.length ? selectableKeys : [])
     }
 
     return (
       <SelectPanel
         value={panelValue}
-        allSelected={keys.length <= panelValue.length}
+        allSelected={panelValue.length > 0 && keys.length <= panelValue.length}
         dataSource={panelDataSource}
         multiple={multiple}
         virtual={virtual}
         setOnKeyDown={setOnKeyDown}
         showSelectAll={showSelectAll}
         onChange={handleChange}
-        onSelectAll={handleSelectAll}
+        onSelectAllClick={handleSelectAll}
         onConfirm={ok}
         onCancel={cancel}
       />
@@ -83,6 +84,7 @@ export function createSelectSegment(
     parse: input => parseInput(input, searchField),
     format: value => formatValue(value, searchField),
     panelRenderer,
+    onVisibleChange: onPanelVisibleChange,
   }
 }
 
