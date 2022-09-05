@@ -60,6 +60,7 @@ const zhCN: Locale = {
   },
   pagination: {
     itemsPerPage: '每页',
+    itemsSuffix: '项',
     jumpTo: '前往',
     page: '页',
     prev: '上一页',
