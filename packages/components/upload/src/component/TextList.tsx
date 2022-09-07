@@ -55,7 +55,10 @@ function renderItem(
   fileOperation: FileOperation,
   locale: Locale,
 ) {
-  const fileClasses = normalizeClass([`${cpmClasses.value}-file`, `${cpmClasses.value}-file-${file.status}`])
+  const fileClasses = normalizeClass({
+    [`${cpmClasses.value}-file`]: true,
+    [`${cpmClasses.value}-file-${file.status}`]: !!file.status,
+  })
   const fileNameClasses = normalizeClass([`${cpmClasses.value}-name`, `${cpmClasses.value}-name-pointer`])
   const errorTipNode = renderIcon('exclamation-circle', { class: `${cpmClasses.value}-icon-error` })
   const { retryNode, downloadNode, removeNode } = renderOprIcon(file, icons, cpmClasses, fileOperation, locale)
