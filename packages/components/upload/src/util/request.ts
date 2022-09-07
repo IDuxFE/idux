@@ -16,15 +16,23 @@ type UploadReturnType = {
   abort: () => void
 }
 
-function getError(option: UploadRequestOption, xhr: XMLHttpRequest) {
-  let msg: string
-  if (xhr.response) {
-    msg = `${xhr.response.error || xhr.response}`
-  } else if (xhr.responseText) {
-    msg = `${xhr.responseText}`
-  } else {
-    msg = `fail to ${option.requestMethod} ${option.action} ${xhr.status}`
+function getErrorMsg(option: UploadRequestOption, xhr: XMLHttpRequest) {
+  const errorMap = new Map<(option: UploadRequestOption, xhr: XMLHttpRequest) => boolean, string>([])
+    .set((option, xhr) => !!xhr.response, `${xhr.response?.error || xhr.response}`)
+    .set((option, xhr) => !!xhr.responseText, `${xhr.responseText}`)
+    .set(option => !option.action, 'action not found.')
+    .set(() => true, `fail to ${option.requestMethod} ${option.action} ${xhr.status}`)
+
+  for (const [testFn, errorMsg] of errorMap) {
+    if (testFn(option, xhr)) {
+      return errorMsg
+    }
   }
+  return ''
+}
+
+function getError(option: UploadRequestOption, xhr: XMLHttpRequest) {
+  const msg = getErrorMsg(option, xhr)
   const err = new Error(msg) as UploadRequestError
   err.status = xhr.status
   err.method = option.requestMethod
@@ -45,7 +53,7 @@ function getBody(xhr: XMLHttpRequest) {
   }
 }
 
-export default function upload(option: UploadRequestOption): UploadReturnType {
+export default function upload(option: UploadRequestOption): UploadReturnType | null {
   const xhr = new XMLHttpRequest()
 
   if (option.onProgress && xhr.upload) {
@@ -87,6 +95,10 @@ export default function upload(option: UploadRequestOption): UploadReturnType {
     return option.onSuccess?.(getBody(xhr))
   }
 
+  if (!option.action) {
+    option.onError?.(getError(option, xhr))
+    return null
+  }
   xhr.open(option.requestMethod, option.action, true)
 
   if (option.withCredentials && 'withCredentials' in xhr) {
