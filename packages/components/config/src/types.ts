@@ -102,7 +102,8 @@ export interface GlobalConfig {
 export type GlobalConfigKey = keyof GlobalConfig
 export interface CommonConfig {
   prefixCls: string
-  zIndex: number
+  overlayContainer?: PortalTargetType
+  overlayZIndex: number
 }
 
 export interface AlertConfig {
@@ -197,9 +198,13 @@ export interface DrawerConfig {
   closable: boolean
   closeIcon: string
   closeOnEsc: boolean
+  container?: PortalTargetType
   height: string | number
   mask: boolean
   maskClosable: boolean
+  /**
+   * @deprecated please use `container` instead'
+   */
   target?: PortalTargetType
   width: string | number
 }
@@ -255,8 +260,9 @@ export interface ListConfig {
 }
 
 export interface LoadingBarConfig {
-  mask: boolean
   animation: LoadingBarAnimation
+  container?: PortalTargetType
+  mask: boolean
 }
 
 export interface ImageConfig {
@@ -264,10 +270,14 @@ export interface ImageConfig {
 }
 
 export interface ImageViewerConfig {
+  container?: PortalTargetType
   loop: boolean
   maskClosable: boolean
-  zoom: number[]
+  /**
+   * @deprecated please use `container` instead'
+   */
   target?: PortalTargetType
+  zoom: number[]
 }
 
 export interface MenuConfig {
@@ -284,10 +294,14 @@ export interface MenuConfig {
 }
 
 export interface MessageConfig {
+  container?: PortalTargetType
   destroyOnHover: boolean
   duration: number
   icon: Partial<Record<MessageType, string | VNode>>
   maxCount: number
+  /**
+   * @deprecated please use `container` instead'
+   */
   target?: PortalTargetType
   top?: number | string
 }
@@ -297,14 +311,19 @@ export interface ModalConfig {
   closable: boolean
   closeIcon: string
   closeOnEsc: boolean
+  container?: PortalTargetType
   icon?: Partial<Record<ModalType, string | VNode>>
   mask: boolean
   maskClosable: boolean
+  /**
+   * @deprecated please use `container` instead'
+   */
   target?: PortalTargetType
   width: string | number
 }
 
 export interface NotificationConfig {
+  container?: PortalTargetType
   destroyOnHover: boolean
   duration: number
   icon?: Partial<Record<NotificationType, string | VNode>>
@@ -312,6 +331,9 @@ export interface NotificationConfig {
   maxCount: number
   offset: number | string | (string | number)[]
   placement: NotificationPlacement
+  /**
+   * @deprecated please use `container` instead'
+   */
   target?: PortalTargetType
 }
 
@@ -330,7 +352,11 @@ export interface PopconfirmConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
+  overlayContainer?: PortalTargetType
   placement: PopperPlacement
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
   trigger: PopperTrigger
 }
@@ -339,7 +365,11 @@ export interface PopoverConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
+  overlayContainer?: PortalTargetType
   placement: PopperPlacement
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
   showArrow: boolean
   trigger: PopperTrigger
@@ -509,7 +539,11 @@ export interface TooltipConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
+  overlayContainer?: PortalTargetType
   placement: PopperPlacement
+  /**
+   * @deprecated please use `overlayContainer` instead'
+   */
   target?: PortalTargetType
   trigger: PopperTrigger
 }
@@ -538,8 +572,8 @@ export interface TreeSelectConfig {
    * @deprecated please use `labelKey` instead'
    */
   nodeKey?: string
-  overlayMatchWidth: boolean
   overlayContainer?: PortalTargetType
+  overlayMatchWidth: boolean
   size: FormSize
   suffix: string
   /**

@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@back-top-zindex` | `@zindex-l2-base` | - | - |
 | `@back-top-height` | `60px` | - | - |
 | `@back-top-width` | `60px` | - | - |
 | `@back-top-font-size` | `@font-size-3xl` | `32px` | - |
@@ -18,4 +17,4 @@
 | `@back-top-hover-color` | `@color-primary-l30` | `@color-primary` | - |
 | `@back-top-background-color` | `@color-white` | - | - |
 | `@back-top-background-hover-color` | `@color-white` | - | - |
-| `@back-top-box-shadow` | `0 2px 8px 0 rgba(30,35,43,0.12)` | - | - |
+| `@back-top-box-shadow` | `0 2px 8px 0 rgba(30, 35, 43, 0.12)` | - | - |

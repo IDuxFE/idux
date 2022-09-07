@@ -7,13 +7,12 @@
   right: 0;
   bottom: 0;
   user-select: none;
-};
+}
 
 .spin-size(@size) {
   &-@{size} {
     size: 1em;
     .@{spin-prefix}-spinner {
-
       @spin-size: 'spin-icon-size-@{size}';
       @font-size: 'spin-font-size-@{size}';
 
@@ -36,7 +35,7 @@
   &-spinner {
     .spin-mask();
 
-    z-index: @spin-zindex;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +92,6 @@
 }
 
 @keyframes icon-spinning {
-
   100% {
     transform: rotate(360deg);
   }

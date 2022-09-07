@@ -47,10 +47,15 @@ export const modalProps = {
     type: Boolean,
     default: undefined,
   },
+  container: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   destroyOnHide: {
     type: Boolean,
     default: false,
   },
+  draggable: { type: Boolean, default: false },
   footer: {
     type: [Boolean, Array, Object] as PropType<boolean | ModalButtonProps[] | VNode>,
     default: true,
@@ -76,6 +81,9 @@ export const modalProps = {
   okButton: Object as PropType<ButtonProps>,
   okText: String,
   scrollStrategy: Object as PropType<ScrollStrategy>,
+  /**
+   * @deprecated please use `container` instead'
+   */
   target: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
@@ -86,9 +94,11 @@ export const modalProps = {
     default: 'default',
   },
   width: [String, Number] as PropType<string | number>,
+  /**
+   * @deprecated please use `overlayClassName` instead'
+   */
   wrapperClassName: String,
   zIndex: Number,
-  draggable: { type: Boolean, default: false },
 
   // events
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
@@ -103,7 +113,7 @@ export const modalProps = {
 } as const
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>
-export type ModalPublicProps = ExtractPublicPropTypes<typeof modalProps>
+export type ModalPublicProps = Omit<ExtractPublicPropTypes<typeof modalProps>, 'target' | 'wrapperClassName'>
 export interface ModalBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>

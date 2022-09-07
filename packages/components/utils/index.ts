@@ -8,5 +8,6 @@
 export * from './src/colors'
 export * from './src/convertTarget'
 export * from './src/convertVNode'
+export * from './src/portalTarget'
 export * from './src/useKey'
 export * from './src/zIndex'

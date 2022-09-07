@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@popover-zindex` | `@zindex-l4-2` | - | - |
 | `@popover-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@popover-color` | `@text-color` | `@color-graphite-d10` | - |
 | `@popover-background-color` | `@background-color-component` | - | - |

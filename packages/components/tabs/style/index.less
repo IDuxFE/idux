@@ -80,7 +80,7 @@
               }
             }
 
-            &:not(&:hover):not(&:active):not(.@{tabs-prefix}-nav-tab-selected){
+            &:not(&:hover):not(&:active):not(.@{tabs-prefix}-nav-tab-selected) {
               .@{icon-prefix} {
                 color: @tabs-icon-color;
               }
@@ -97,7 +97,7 @@
         &-pre,
         &-next {
           position: absolute;
-          z-index: @zindex-l1-2;
+          z-index: 2;
           background-color: @color-white;
           border-bottom: 1px solid @tabs-nav-border-color;
           cursor: pointer;
@@ -173,37 +173,37 @@
     > .@{tabs-prefix}-nav-wrapper {
       font-size: @tabs-card-nav-font-size;
       > .@{tabs-prefix}-nav {
-        z-index: @zindex-l1-1;
+        z-index: 1;
         > .@{tabs-prefix}-nav-tab {
-            margin-right: 4px;
-            border-radius: @tabs-border-radius @tabs-border-radius 0 0;
-            border-bottom: 1px solid @tabs-nav-border-color;
+          margin-right: 4px;
+          border-radius: @tabs-border-radius @tabs-border-radius 0 0;
+          border-bottom: 1px solid @tabs-nav-border-color;
 
-            &:last-child {
-              margin-right: 0;
-            }
-            &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-              border: 1px solid @tabs-nav-border-color;
-              border-bottom-color: @tabs-card-nav-tab-selected-background-color;
-              background-color: @tabs-card-nav-tab-selected-background-color;
+          &:last-child {
+            margin-right: 0;
+          }
+          &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+            border: 1px solid @tabs-nav-border-color;
+            border-bottom-color: @tabs-card-nav-tab-selected-background-color;
+            background-color: @tabs-card-nav-tab-selected-background-color;
 
-              &::after {
-                content: ' ';
-                position: absolute;
-                top: -1px;
-                left: -1px;
-                right: -1px;
-                height: 2px;
-                background-color: @tabs-selected-color;
-                border-radius: @tabs-border-radius @tabs-border-radius 0 0;
-              }
+            &::after {
+              content: ' ';
+              position: absolute;
+              top: -1px;
+              left: -1px;
+              right: -1px;
+              height: 2px;
+              background-color: @tabs-selected-color;
+              border-radius: @tabs-border-radius @tabs-border-radius 0 0;
             }
+          }
 
-            &-disabled {
-              &::after {
-                background-color: @tabs-disabled-color;
-              }
+          &-disabled {
+            &::after {
+              background-color: @tabs-disabled-color;
             }
+          }
         }
       }
     }
@@ -241,7 +241,6 @@
       &-nav-start,
       &-nav-end {
         > .@{tabs-prefix} {
-
           &-nav-wrapper {
             flex-wrap: wrap;
             &.@{tabs-prefix}-nav-wrapper-has-scroll {
@@ -265,7 +264,6 @@
               }
             }
           }
-          
 
           &-pane-wrapper {
             > .@{tabs-prefix}-pane {
@@ -281,7 +279,7 @@
         }
 
         > .@{tabs-prefix}-nav-wrapper {
-         > .@{tabs-prefix}-nav {
+          > .@{tabs-prefix}-nav {
             &-bar {
               right: 0;
               border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
@@ -294,14 +292,12 @@
             &-tab {
               min-height: @tabs-nav-tab-height;
             }
-
-          
-        }
+          }
         }
 
         > .@{tabs-prefix}-pane-wrapper {
-            padding: 0 0 0 @tabs-pane-padding;
-          }
+          padding: 0 0 0 @tabs-pane-padding;
+        }
       }
 
       &-nav-end {
@@ -310,34 +306,31 @@
         }
 
         > .@{tabs-prefix}-nav-wrapper {
-         >  .@{tabs-prefix} {
-          &-nav {
-            &-bar {
-              left: 0;
-              width: @tabs-nav-bar-height;
-              border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
-            }
+          > .@{tabs-prefix} {
+            &-nav {
+              &-bar {
+                left: 0;
+                width: @tabs-nav-bar-height;
+                border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
+              }
 
-            &-border {
-              height: 100%;
-              left: 0;
-              width: 1px;
-              background-color: @tabs-nav-border-color;
-            }
+              &-border {
+                height: 100%;
+                left: 0;
+                width: 1px;
+                background-color: @tabs-nav-border-color;
+              }
 
-            &-tab {
-              min-height: @tabs-nav-tab-height;
+              &-tab {
+                min-height: @tabs-nav-tab-height;
+              }
             }
           }
-
-          
-        }
         }
 
         > .@{tabs-prefix}-pane-wrapper {
-            padding: 0 @tabs-pane-padding 0 0;
-          }
-
+          padding: 0 @tabs-pane-padding 0 0;
+        }
       }
 
       &-nav-bottom {
@@ -355,73 +348,64 @@
   }
 
   &-segment {
-
     > .@{tabs-prefix}-nav-wrapper {
-    > .@{tabs-prefix}-nav {
+      > .@{tabs-prefix}-nav {
+        > .@{tabs-prefix} {
+          &-nav-tab {
+            border: 1px solid @tabs-nav-border-color;
+            height: @tabs-segment-nav-height;
 
-      > .@{tabs-prefix} {
+            &:not(:first-child) {
+              border-left: none;
+              &::before {
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                display: block;
+                box-sizing: content-box;
+                width: 1px;
+                height: 100%;
+                padding: 1px 0;
+                background-color: @tabs-nav-border-color;
+                content: '';
+              }
+            }
 
-      &-nav-tab {
-        border: 1px solid @tabs-nav-border-color;
-        height: @tabs-segment-nav-height;
-        
-        &:not(:first-child) {
-          border-left: none;
-          &::before {
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            display: block;
-            box-sizing: content-box;
-            width: 1px;
-            height: 100%;
-            padding: 1px 0;
-            background-color: @tabs-nav-border-color;
-            content: "";
+            &:hover:not(.@{tabs-prefix}-nav-tab-disabled),
+            &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+              border-color: @tabs-selected-color;
+              z-index: 1;
+              &::before {
+                background: @tabs-selected-color;
+              }
+            }
+
+            &:first-child {
+              border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
+            }
+
+            &:last-child {
+              border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
+            }
+
+            &-disabled {
+              background-color: @tabs-segment-nav-disabled-background-color;
+            }
           }
         }
 
-        &:hover:not(.@{tabs-prefix}-nav-tab-disabled),
-        &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-          border-color: @tabs-selected-color;
-          z-index: 1;
-          &::before {
-            background: @tabs-selected-color;
-          }
-        }
-
-
-        &:first-child {
-          border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
-        }
-
-        &:last-child {
-          border-radius: 0 @tabs-border-radius @tabs-border-radius 0;
-        }
-
-        &-disabled {
-          background-color: @tabs-segment-nav-disabled-background-color;
+        &-pre,
+        &-next {
+          height: @tabs-segment-nav-height;
+          line-height: @tabs-segment-nav-height;
+          border-bottom: none;
         }
       }
     }
-
-      &-pre,
-      &-next {
-        height: @tabs-segment-nav-height;
-        line-height: @tabs-segment-nav-height;
-        border-bottom: none;
-      }
-    }
-
-  }
-
 
     &.@{tabs-prefix}-nav-primary {
-
       > .@{tabs-prefix}-nav-wrapper > {
-
-       .@{tabs-prefix}-nav >
-       .@{tabs-prefix}-nav-tab {
+        .@{tabs-prefix}-nav > .@{tabs-prefix}-nav-tab {
           &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
             background-color: @tabs-segment-nav-primary-active-background-color;
 

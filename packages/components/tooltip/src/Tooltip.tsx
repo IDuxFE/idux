@@ -21,9 +21,9 @@ export default defineComponent({
   props: tooltipProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-tooltip`)
     const config = useGlobalConfig('tooltip')
-    const { overlayRef, updatePopper, overlayProps } = useTooltipOverlay(props, config, mergedPrefixCls)
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tooltip`)
+    const { overlayRef, updatePopper, overlayProps } = useTooltipOverlay(props, config, common, mergedPrefixCls)
     expose({ updatePopper })
 
     return () => {

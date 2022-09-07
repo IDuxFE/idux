@@ -16,6 +16,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { type TreeInstance } from '@idux/components/tree'
+import { useOverlayContainer } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
 import { useGetNodeKey } from './composables/useGetNodeKey'
@@ -33,8 +34,9 @@ export default defineComponent({
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
     const locale = useGlobalConfig('locale')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
     const config = useGlobalConfig('treeSelect')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
+    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetNodeKey(props, config)
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
@@ -136,15 +138,6 @@ export default defineComponent({
       })
     })
 
-    const target = computed(
-      () =>
-        props.target ??
-        props.overlayContainer ??
-        config.target ??
-        config.overlayContainer ??
-        `${mergedPrefixCls.value}-overlay-container`,
-    )
-
     const renderTrigger = () => (
       <ɵSelector
         ref={triggerRef}
@@ -187,10 +180,10 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
+        container: mergedOverlayContainer.value,
         disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
-        target: target.value,
         trigger: 'manual',
         triggerId: attrs.id,
         visible: overlayOpened.value,

@@ -5,8 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { DefineComponent } from 'vue'
+import type { DefineComponent, PropType } from 'vue'
 
 export const STATUS_TYPE = ['loading', 'finish', 'error'] as const
 
@@ -17,6 +18,10 @@ export interface LoadingBarOptions {
 }
 
 export const loadingBarProviderProps = {
+  container: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   mask: {
     type: Boolean,
     default: false,

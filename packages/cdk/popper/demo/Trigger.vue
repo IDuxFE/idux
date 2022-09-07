@@ -6,7 +6,7 @@
     <IxButton ref="contextmenuTriggerRef" v-bind="contextmenuTriggerEvents">Contextmenu</IxButton>
     <IxButton ref="manualTriggerRef" @click="manualUpdate({ visible: !manualVisibility })">Manual</IxButton>
   </IxSpace>
-  <CdkPortal target="ix-popper">
+  <CdkPortal target=".ix-popper-container">
     <div v-if="hoverVisibility" ref="hoverPopperRef" class="popper popper-hover" v-bind="hoverPopperEvents">Hover</div>
     <div v-if="focusVisibility" ref="focusPopperRef" class="popper popper-focus">Focus</div>
     <div v-if="clickVisibility" ref="clickPopperRef" class="popper popper-click">Click</div>

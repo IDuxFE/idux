@@ -23,13 +23,13 @@ export default defineComponent({
   props: popconfirmProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-popconfirm`)
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('popconfirm')
-
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-popconfirm`)
     const { overlayRef, updatePopper, visible, setVisible, overlayProps } = ɵUseTooltipOverlay(
       props,
       config,
+      common,
       mergedPrefixCls,
     )
 

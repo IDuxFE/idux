@@ -1,6 +1,6 @@
 <template>
   <IxButton ref="triggerRef" v-bind="triggerEvents">Hover</IxButton>
-  <CdkPortal target="ix-overlay">
+  <CdkPortal target=".ix-popper-container">
     <div v-if="visibility" ref="popperRef" v-bind="popperEvents" class="popper">Popper Element</div>
   </CdkPortal>
   <br />

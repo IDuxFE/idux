@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, provide, toRef } from 'vue'
+import { computed, defineComponent, provide, toRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { type DropdownConfig, useGlobalConfig } from '@idux/components/config'
+import { useOverlayContainer } from '@idux/components/utils'
 
 import { dropdownToken } from './token'
 import { type DropdownProps, dropdownProps } from './types'
@@ -21,10 +22,13 @@ export default defineComponent({
   props: dropdownProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
     const config = useGlobalConfig('dropdown')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
+    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
+
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = useConfigProps(props, config, mergedPrefixCls, setVisibility)
+    const configProps = useConfigProps(props, config, setVisibility)
+
     provide(dropdownToken, { hideOnClick: toRef(props, 'hideOnClick'), setVisibility })
 
     return () => {
@@ -33,6 +37,7 @@ export default defineComponent({
           visible={visibility.value}
           v-slots={{ default: slots.default, content: slots.overlay }}
           class={mergedPrefixCls.value}
+          container={mergedOverlayContainer.value}
           delay={defaultDelay}
           disabled={props.disabled}
           transitionName={`${common.prefixCls}-fade`}
@@ -43,12 +48,7 @@ export default defineComponent({
   },
 })
 
-function useConfigProps(
-  props: DropdownProps,
-  config: DropdownConfig,
-  mergedPrefixCls: ComputedRef<string>,
-  setVisibility: (value: boolean) => void,
-) {
+function useConfigProps(props: DropdownProps, config: DropdownConfig, setVisibility: (value: boolean) => void) {
   return computed(() => {
     const trigger = props.trigger ?? config.trigger
     return {
@@ -58,12 +58,6 @@ function useConfigProps(
       offset: props.offset ?? config.offset,
       placement: props.placement ?? config.placement,
       showArrow: props.showArrow ?? config.showArrow,
-      target:
-        props.target ??
-        props.overlayContainer ??
-        config.target ??
-        config.overlayContainer ??
-        `${mergedPrefixCls.value}-overlay-container`,
       trigger: trigger,
       ['onUpdate:visible']: setVisibility,
     }

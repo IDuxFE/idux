@@ -13,7 +13,7 @@ describe('Tooltip', () => {
   const slots = { default: () => h('div', { id: 'trigger' }, 'trigger') }
 
   afterEach(() => {
-    document.querySelector('.ix-tooltip-container')!.innerHTML = ''
+    document.querySelector('.ix-tooltip-overlay-container')!.innerHTML = ''
   })
 
   renderWork<TooltipProps>(IxTooltip, {

@@ -33,7 +33,7 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      z-index: @checkbox-inner-zindex;
+      z-index: 1;
       cursor: pointer;
     }
 
@@ -283,11 +283,11 @@
 
         &:hover:not(.@{checkbox-prefix}-disabled),
         &.@{checkbox-prefix}-checked:not(.@{checkbox-prefix}-disabled) {
-          z-index: @zindex-l1-1;
+          z-index: 1;
         }
 
         &.@{checkbox-prefix}-focused:not(.@{checkbox-prefix}-disabled) {
-          z-index: @zindex-l1-2;
+          z-index: 2;
         }
       }
     }

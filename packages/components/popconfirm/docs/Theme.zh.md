@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@popconfirm-zindex` | `@zindex-l4-2` | - | - |
 | `@popconfirm-font-size` | `@font-size-md` | - | - |
 | `@popconfirm-color` | `@text-color` | - | - |
 | `@popconfirm-background-color` | `@background-color-component` | - | - |
@@ -15,5 +14,5 @@
 | `@popconfirm-title-height` | `32px` | - | - |
 | `@popconfirm-title-icon-color` | `@color-warning` | `@color-warning-l10` | - |
 | `@popconfirm-title-icon-margin-right` | `@spacing-sm` | - | - |
-| `@popconfirm-footer-padding` | `@spacing-sm 0  0 0` | - | - |
+| `@popconfirm-footer-padding` | `@spacing-sm 0 0 0` | - | - |
 | `@popconfirm-footer-button-margin-left` | `@spacing-sm` | - | - |

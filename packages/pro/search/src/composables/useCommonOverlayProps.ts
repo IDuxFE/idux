@@ -17,7 +17,7 @@ export function useCommonOverlayProps(
   config: ProSearchConfig,
 ): ComputedRef<ɵOverlayProps> {
   return computed(() => ({
-    target: props.overlayContainer || config.overlayContainer || `${mergedPrefixCls.value}-overlay-container`,
+    container: props.overlayContainer || config.overlayContainer || `.${mergedPrefixCls.value}-overlay-container`,
     placement: 'bottomStart',
     offset: [0, 8],
   }))

@@ -1,12 +1,30 @@
-<template>
-  <CdkPortal target="ix-container" :load="load">
-    <div>Portal</div>
-  </CdkPortal>
-  <IxButton @click="load = !load">Load</IxButton>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const load = ref(false)
+const open = ref(false)
 </script>
+
+<template>
+  <IxButton @click="open = !open">Open Modal</IxButton>
+  <CdkPortal target=".portal-load-demo-container" :load="open">
+    <div v-if="open" class="portal-modal portal-modal-lazy-load">
+      <p>Hello modal!</p>
+      <IxButton @click="open = false">Close</IxButton>
+    </div>
+  </CdkPortal>
+</template>
+
+<style scoped>
+.portal-modal {
+  position: fixed;
+  z-index: 1000;
+  top: 30%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  padding: 48px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+</style>

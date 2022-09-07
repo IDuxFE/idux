@@ -20,7 +20,6 @@
 | `@cascader-option-group-min-width` | `120px` | - | - |
 | `@cascader-option-group-min-height` | `180px` | - | - |
 | `@cascader-option-group-border` | `@border-width-sm solid @border-color-split` | - | - |
-| `@cascader-overlay-zindex` | `@select-option-container-zindex` | - | - |
 | `@cascader-overlay-padding` | `@select-option-container-padding` | - | - |
 | `@cascader-overlay-background-color` | `@select-option-container-background-color` | - | - |
 | `@cascader-overlay-border-radius` | `@select-option-container-border-radius` | - | - |

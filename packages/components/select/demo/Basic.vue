@@ -4,7 +4,7 @@
     <IxSelect v-model:value="value" :dataSource="dataSource" disabled></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" clearable></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource">
-      <template #optionLabel="label">
+      <template #optionLabel="{ label }">
         <IxIcon name="star"></IxIcon>
         <span style="margin-left: 8px">{{ label }}</span>
       </template>

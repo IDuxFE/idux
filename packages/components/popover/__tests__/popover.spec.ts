@@ -13,7 +13,7 @@ describe('Popover', () => {
   const slots = { default: () => h('div', { id: 'trigger' }, 'trigger') }
 
   afterEach(() => {
-    document.querySelector('.ix-popover-container')!.innerHTML = ''
+    document.querySelector('.ix-popover-overlay-container')!.innerHTML = ''
   })
 
   renderWork<PopoverProps>(IxPopover, {
@@ -50,7 +50,7 @@ describe('Popover', () => {
     })
 
     expect(document.querySelector('.ix-popover-with-header')).toBeTruthy()
-    expect(document.querySelector('.ix-popover-container')!.innerHTML).toMatchSnapshot()
+    expect(document.querySelector('.ix-popover-overlay-container')!.innerHTML).toMatchSnapshot()
   })
 
   test('header slot work', async () => {

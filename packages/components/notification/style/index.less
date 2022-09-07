@@ -47,7 +47,7 @@
 
   &-main {
     grid-area: main;
-    
+
     &-with-content {
       .@{notification-prefix}-title {
         margin: @notification-title-margin;
@@ -75,7 +75,7 @@
 
   &-wrapper {
     position: fixed;
-    z-index: @notification-wrapper-zindex;
+    z-index: 9998;
   }
 
   .notification-icon-color(info, @notification-icon-info-color);

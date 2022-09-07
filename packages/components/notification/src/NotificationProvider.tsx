@@ -22,6 +22,7 @@ import { isArray, isUndefined, pickBy } from 'lodash-es'
 import { CdkPortal } from '@idux/cdk/portal'
 import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { usePortalTarget } from '@idux/components/utils'
 
 import Notification from './Notification'
 import { notificationProviderToken } from './token'
@@ -40,8 +41,10 @@ export default defineComponent({
   props: notificationProviderProps,
   setup(props, { slots, expose }) {
     const commonCfg = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${commonCfg.prefixCls}-notification`)
     const config = useGlobalConfig('notification')
+    const mergedPrefixCls = computed(() => `${commonCfg.prefixCls}-notification`)
+    const mergedPortalTarget = usePortalTarget(props, config, commonCfg, mergedPrefixCls)
+
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { notifications, loadContainer, open, info, success, warning, error, update, destroy, destroyAll } =
       useNotification(maxCount)
@@ -50,8 +53,6 @@ export default defineComponent({
 
     provide(notificationProviderToken, apis)
     expose(apis)
-
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       const getChild = (notifications: NotificationOptions[]) => {
@@ -90,7 +91,7 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target={target.value} load={loadContainer.value}>
+          <CdkPortal target={mergedPortalTarget.value} load={loadContainer.value}>
             {placementGroup}
           </CdkPortal>
         </>

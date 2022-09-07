@@ -27,7 +27,6 @@
 | `@checkbox-disabled-color` | `@form-disabled-color` | - | - |
 | `@checkbox-disabled-background-color` | `@form-disabled-background-color` | - | - |
 | `@checkbox-font-size` | `@font-size-md` | `@font-size-sm` | - |
-| `@checkbox-inner-zindex` | `@zindex-l1-1` | - | - |
 | `@checkbox-box-size` | `16px` | - | - |
 | `@checkbox-box-border-radius` | `@border-radius-sm` | - | - |
 | `@checkbox-indeterminate-width` | `8px` | - | - |

@@ -32,4 +32,3 @@
 | `@notification-content-color` | `@color-graphite-d10` | - | - |
 | `@notification-content-margin` | `0 16px 0 0` | - | - |
 | `@notification-footer-margin` | `8px 0 0 0` | - | - |
-| `@notification-wrapper-zindex` | `@zindex-l5-1` | - | - |

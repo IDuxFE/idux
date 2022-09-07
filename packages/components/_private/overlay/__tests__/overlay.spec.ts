@@ -12,7 +12,7 @@ describe('Overlay', () => {
   const OverlayMount = (options?: MountingOptions<Partial<OverlayProps>>) => {
     const { props, ...rest } = options || {}
     return mount(Overlay, {
-      props: { target: 'ix-overlay-container', ...props },
+      props: { container: 'ix-overlay-container', ...props },
       ...rest,
     } as MountingOptions<OverlayProps>)
   }
@@ -26,7 +26,7 @@ describe('Overlay', () => {
     document.querySelector('.ix-overlay-container')!.innerHTML = ''
   })
 
-  renderWork<OverlayProps>(Overlay, { props: { target: 'ix-overlay-container', visible: true }, slots })
+  renderWork<OverlayProps>(Overlay, { props: { container: 'ix-overlay-container', visible: true }, slots })
 
   test('visible work', async () => {
     const onUpdateVisible = vi.fn()
@@ -79,27 +79,27 @@ describe('Overlay', () => {
     expect(document.querySelector('.ix-overlay-arrow')).not.toBeNull()
   })
 
-  test('target work', async () => {
+  test('container work', async () => {
     const wrapper = OverlayMount({
-      props: { target: 'ix-test-container', visible: true },
+      props: { container: 'ix-test-container', visible: true },
       slots,
     })
 
     expect(document.querySelector('.ix-test-container')).not.toBeNull()
 
-    const target = document.createElement('div')
-    target.classList.add('.ix-test-container2')
-    document.body.appendChild(target)
+    const container = document.createElement('div')
+    container.classList.add('.ix-test-container2')
+    document.body.appendChild(container)
 
-    await wrapper.setProps({ target })
+    await wrapper.setProps({ container })
 
-    expect(target.querySelector('.ix-overlay')).not.toBeNull()
+    expect(container.querySelector('.ix-overlay')).not.toBeNull()
   })
 
   test('zIndex work', async () => {
     let zIndex = 1001
     const wrapper = OverlayMount({
-      props: { target: 'ix-test-container', visible: true, zIndex },
+      props: { container: 'ix-test-container', visible: true, zIndex },
       slots,
     })
 

@@ -10,8 +10,8 @@
 | `autoAdjust` | 浮层被遮挡时自动调整位置 | `boolean` | `true` | ✅ | - |
 | `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
 | `delay` | 浮层显示隐藏延时 | `number \| [number, number]` | `100` | ✅ | - |
+| `overlayContainer` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
-| `target` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `title` | 浮层的标题 | `string \| #title` | - | - | - |
 | `trigger` | 浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |
 

@@ -9,7 +9,7 @@
   right: 0;
   height: @loading-bar-height;
   width: 100%;
-  z-index: @zindex-l5-1 + 1;
+  z-index: 10000;
   transition: none;
 
   &.@{loading-bar-prefix}--loading,
@@ -21,6 +21,6 @@
     background: @color-error;
   }
   &-mask {
-    z-index: @zindex-l5-1;
+    z-index: 9999;
   }
 }

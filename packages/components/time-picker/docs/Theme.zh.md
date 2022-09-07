@@ -5,7 +5,6 @@
 | `@time-picker-color` | `@form-color` | - | - |
 | `@time-picker-line-height` | `@form-line-height` | - | - |
 | `@time-range-picker-trigger-separator-margin` | `@spacing-xl` | - | - |
-| `@time-picker-overlay-zindex` | `@zindex-l4-3` | - | - |
 | `@time-picker-overlay-width` | `200px` | - | - |
 | `@time-picker-overlay-padding` | `@spacing-sm @spacing-sm 0 @spacing-sm` | - | - |
 | `@time-picker-overlay-body-padding` | `0 0 @spacing-sm 0` | - | - |

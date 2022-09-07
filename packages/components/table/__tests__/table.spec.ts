@@ -158,7 +158,8 @@ describe('Table', () => {
       expect(onUpdateSelectedRowKeys).toBeCalledWith([2])
     })
 
-    test('autoHeight work', async () => {
+    // TODO: Error: Not implemented: window.computedStyle(elt, pseudoElt)
+    test.skip('autoHeight work', async () => {
       const wrapper = TableMount({ props: { autoHeight: true } })
 
       expect(wrapper.classes()).toContain('ix-table-auto-height')

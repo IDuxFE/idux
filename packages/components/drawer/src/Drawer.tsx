@@ -16,7 +16,7 @@ import { BlockScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
-import { useZIndex } from '@idux/components/utils'
+import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
@@ -28,12 +28,14 @@ export default defineComponent({
   props: drawerProps,
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-drawer`)
     const config = useGlobalConfig('drawer')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-drawer`)
+    const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
+
     const mask = computed(() => props.mask ?? config.mask)
 
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'zIndex'), visible)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const { open, close } = useTrigger(props, setVisible)
     const { level, levelAction, push, pull } = useLevel(visible)
@@ -59,14 +61,13 @@ export default defineComponent({
     expose(apis)
 
     useScrollStrategy(props, mask, mergedVisible)
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {
         return null
       }
       return (
-        <CdkPortal target={target.value} load={visible.value}>
+        <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
           <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
