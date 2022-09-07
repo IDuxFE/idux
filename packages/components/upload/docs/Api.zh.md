@@ -53,7 +53,7 @@ interface UploadFile {
   key: VKey // 唯一标识
   name: string // 文件名
   raw?: File
-  status?: 'selected' | 'uploading' | 'error' | 'success' | 'abort' // 当前状态
+  status?: 'selected' | 'cancel' | 'uploading' | 'error' | 'success' | 'abort' // 当前状态
   error?: UploadRequestError // 详细的报错信息，比如请求失败时
   errorTip?: string // 小i报错提示文本
   thumbUrl?: string  // 缩略图链接

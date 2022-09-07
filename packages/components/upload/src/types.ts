@@ -15,7 +15,7 @@ type DataType = Record<string, unknown>
 export type UploadRequestHeader = Record<string, string>
 export type UploadRequestMethod = 'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'
 export type UploadRequestStatus = 'loadstart' | 'progress' | 'abort' | 'error' | 'loadend'
-export type UploadFileStatus = 'selected' | 'uploading' | 'error' | 'success' | 'abort'
+export type UploadFileStatus = 'selected' | 'cancel' | 'uploading' | 'error' | 'success' | 'abort'
 export type UploadFilesType = 'text' | 'image' | 'imageCard'
 export type UploadIconType = 'file' | 'preview' | 'download' | 'remove' | 'retry'
 export interface UploadProgressEvent extends ProgressEvent {
