@@ -62,15 +62,15 @@ export default defineComponent({
       }
     })
 
-    const scrollBarClasses = computed(() => {
+    const thumbClasses = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
-        [`${prefixCls}-sticky-scroll-bar`]: true,
-        [`${prefixCls}-sticky-scroll-bar-active`]: isActive.value,
+        [`${prefixCls}-sticky-scrollbar-thumb`]: true,
+        [`${prefixCls}-sticky-scrollbar-thumb-active`]: isActive.value,
       }
     })
 
-    const scrollBarStyle = computed<CSSProperties>(() => {
+    const thumbStyle = computed<CSSProperties>(() => {
       return {
         width: `${scrollBarWidth.value}px`,
         transform: `translate3d(${stickyScrollLeft.value}px, 0, 0)`,
@@ -164,8 +164,8 @@ export default defineComponent({
       }
 
       return (
-        <div class={`${mergedPrefixCls.value}-sticky-scroll`} style={style.value}>
-          <div class={scrollBarClasses.value} style={scrollBarStyle.value} onMousedown={handleMouseDown} />
+        <div class={`${mergedPrefixCls.value}-sticky-scrollbar`} style={style.value}>
+          <div class={thumbClasses.value} style={thumbStyle.value} onMousedown={handleMouseDown} />
         </div>
       )
     }

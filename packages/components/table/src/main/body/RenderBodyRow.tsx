@@ -20,16 +20,22 @@ export function renderBodyRow(
   rowIndex: number,
   slots: Slots,
   expandable: TableColumnMergedExpandable | undefined,
+  prefixCls: string,
 ): VNodeChild {
   const { expanded, level, record, rowKey } = item
   const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex, rowKey }
   const rowNode = <BodyRow {...rowProps} />
 
-  const expandedNode = expanded && renderExpandedContext(rowProps, slots, expandable)
+  const expandedNode = expanded && renderExpandedContext(rowProps, slots, expandable, prefixCls)
   return expandedNode ? [rowNode, expandedNode] : rowNode
 }
 
-function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandable: TableColumnExpandable | undefined) {
+function renderExpandedContext(
+  props: TableBodyRowProps,
+  slots: Slots,
+  expandable: TableColumnExpandable | undefined,
+  prefixCls: string,
+) {
   const { customExpand } = expandable || {}
   const { record, rowIndex } = props
   let expandedContext: VNodeChild
@@ -38,5 +44,5 @@ function renderExpandedContext(props: TableBodyRowProps, slots: Slots, expandabl
   } else if (isString(customExpand) && slots[customExpand]) {
     expandedContext = slots[customExpand]!({ record, rowIndex })
   }
-  return expandedContext && <BodyRowSingle>{expandedContext}</BodyRowSingle>
+  return expandedContext && <BodyRowSingle class={`${prefixCls}-expanded-row`}>{expandedContext}</BodyRowSingle>
 }

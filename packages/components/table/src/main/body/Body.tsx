@@ -42,7 +42,7 @@ export default defineComponent({
           children.push(...slots.default())
         } else {
           data.forEach((item, rowIndex) => {
-            children.push(...convertArray(renderBodyRow(item, rowIndex, tableSlots, expandable.value)))
+            children.push(...convertArray(renderBodyRow(item, rowIndex, tableSlots, expandable.value, prefixCls)))
           })
         }
       } else {

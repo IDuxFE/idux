@@ -17,7 +17,7 @@ import { type StickyContext } from './useSticky'
 export function useScroll(
   props: TableProps,
   mergedAutoHeight: ComputedRef<boolean>,
-  { isSticky, setStickyScrollLeft }: StickyContext,
+  { setStickyScrollLeft }: StickyContext,
 ): ScrollContext {
   const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
     useScrollRef(setStickyScrollLeft)
@@ -45,7 +45,7 @@ export function useScroll(
   )
 
   const scrollBarSize = computed(() => getScrollBarSize(convertElement(scrollBodyRef)))
-  const scrollBarSizeOnFixedHolder = computed(() => (isSticky.value ? 0 : scrollHeight.value ? scrollBarSize.value : 0))
+  const scrollBarSizeOnFixedHolder = computed(() => (scrollHeight.value ? scrollBarSize.value : 0))
 
   const scrollTo: VirtualScrollToFn = options => {
     if (props.virtual) {

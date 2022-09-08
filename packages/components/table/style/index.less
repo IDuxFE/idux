@@ -11,12 +11,12 @@
   .reset-component();
   .clearfix();
 
-  color: @table-color;
   max-width: 100%;
+  color: @table-color;
+  background-color: @table-background-color;
 
   &-container {
     position: relative;
-    background-color: @table-background-color;
 
     &::before,
     &::after {
@@ -84,7 +84,7 @@
   tr {
     &:hover {
       > td {
-        background: @table-hover-background;
+        background: @table-hover-background-color;
       }
     }
 
@@ -162,7 +162,7 @@
     width: @table-expandable-icon-size;
     height: @table-expandable-icon-size;
     font-size: @table-expandable-icon-size;
-    margin-right: @table-icon-margin;
+    margin-right: @spacing-xs;
     color: @table-expandable-icon-color;
     background-color: transparent;
     border-style: none;
@@ -190,7 +190,7 @@
       align-items: center;
 
       &-trigger {
-        margin-left: @table-icon-margin;
+        margin-left: @spacing-xs;
         color: @table-head-icon-color;
         cursor: pointer;
       }
@@ -214,7 +214,7 @@
     transition: background @transition-duration-base;
 
     &:hover {
-      background: @table-hover-background;
+      background: @table-hover-background-color;
     }
   }
 
@@ -222,6 +222,7 @@
     display: inline-flex;
     flex-direction: column;
     font-size: 10px;
+    padding: 0 4px;
 
     .@{icon-prefix} + .@{icon-prefix} {
       margin-top: -0.2em;
@@ -231,7 +232,8 @@
   // --------- Filterable ---------
 
   &-filterable-trigger {
-    font-size: @table-filterable-trigger-font-size;
+    font-size: 16px;
+    padding: 0 1px;
 
     &-footer {
       padding: 8px 16px;
@@ -253,12 +255,11 @@
 
   &-sortable-trigger,
   &-filterable-trigger {
-    margin-left: @table-icon-margin;
-    padding: 0 4px;
     display: flex;
+    margin: 0 -@spacing-sm 0 @spacing-xs;
     align-items: center;
     justify-content: center;
-    border-radius: 1px;
+    border-radius: @border-radius-sm;
     color: @table-head-icon-color;
     transition: color @transition-duration-base, background @transition-duration-base;
     cursor: pointer;
@@ -311,10 +312,6 @@
       &-fixed-holder {
         flex-shrink: 0;
       }
-
-      &-empty-row {
-        height: 100%;
-      }
     }
   }
 
@@ -334,27 +331,32 @@
       background-color: @background-color-component;
     }
 
-    &-scroll {
+    &-scrollbar {
       position: sticky;
       bottom: 0;
       z-index: 3;
-      display: flex;
-      align-items: center;
-      background: lighten(@border-color, 80%);
-      opacity: 0.6;
+      background-color: @scrollbar-track-background-color;
+      border-radius: @scrollbar-track-border-radius;
+      box-shadow: @scrollbar-track-box-shadow;
 
       &:hover {
         transform-origin: center bottom;
       }
 
-      &-bar {
-        height: 8px;
-        background-color: @table-sticky-scroll-bar-background;
-        border-radius: @table-sticky-scroll-bar-radius;
+      &-thumb {
+        height: @scrollbar-height;
+        background-clip: padding-box;
+        background-color: @scrollbar-thumb-background-color;
+        border: @scrollbar-thumb-border solid transparent;
+        border-radius: @scrollbar-thumb-border-radius;
+        box-shadow: @scrollbar-thumb-box-shadow;
 
-        &:hover,
-        &-active {
-          background-color: fade(@table-sticky-scroll-bar-background, 80%);
+        &:hover {
+          background-color: @scrollbar-thumb-hover-background-color;
+        }
+
+        &&-active {
+          background-color: @scrollbar-thumb-active-background-color;
         }
       }
     }
