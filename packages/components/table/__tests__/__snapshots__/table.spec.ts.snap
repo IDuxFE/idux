@@ -39,7 +39,7 @@ exports[`Table > basic work > render work 1`] = `
         <tbody class=\\"ix-table-tbody\\">
           <!---->
           <tr class=\\"ix-table-row\\">
-            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -61,13 +61,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 0</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -89,13 +89,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 1</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -117,11 +117,11 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 2</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
-            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -143,13 +143,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 3</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -171,13 +171,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 4</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -199,11 +199,11 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 5</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
-            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -225,13 +225,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 6</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -253,13 +253,13 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 7</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\">
                 <!---->
-              </button><a></a></td>
+              </button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -281,11 +281,11 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 8</a><a>Delete</a>
             </td>
           </tr>
           <tr class=\\"ix-table-row\\">
-            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a></a></td>
+            <td class=\\"ix-table-cell\\"><button class=\\"ix-table-expandable-trigger\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><a>expandable</a></td>
             <td class=\\"ix-table-cell\\">
               <!----><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
                 <!---->
@@ -307,7 +307,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\">
-              <!----><a style=\\"margin-right: 8px;\\"></a><a></a>
+              <!----><a style=\\"margin-right: 8px;\\">Invite Edrward 9</a><a>Delete</a>
             </td>
           </tr>
         </tbody>

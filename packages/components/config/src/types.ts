@@ -32,12 +32,18 @@ import type { SelectData } from '@idux/components/select'
 import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperLabelPlacement, StepperSize } from '@idux/components/stepper'
-import type { TableColumnAlign, TableColumnSortOrder, TablePaginationPosition, TableSize } from '@idux/components/table'
+import type {
+  TableColumnAlign,
+  TableColumnSortOrder,
+  TableEmptyCellOptions,
+  TablePaginationPosition,
+  TableSize,
+} from '@idux/components/table'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
-import type { VNode } from 'vue'
+import type { VNode, VNodeChild } from 'vue'
 
 export interface GlobalConfig {
   common: CommonConfig
@@ -478,7 +484,8 @@ export interface TableConfig {
   rowKey?: string
   size: TableSize
 
-  extra: { icon: string }
+  emptyCell?: string | ((options: TableEmptyCellOptions) => VNodeChild)
+
   pagination: { position: TablePaginationPosition } & Partial<PaginationConfig>
 
   columnBase: TableColumnBaseConfig

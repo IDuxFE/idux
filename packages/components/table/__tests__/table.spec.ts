@@ -1,5 +1,5 @@
 import { MountingOptions, mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { VNodeChild, h } from 'vue'
 
 import { renderWork } from '@tests'
 
@@ -8,7 +8,7 @@ import { HeaderProps, IxHeader } from '@idux/components/header'
 import { IxTag } from '@idux/components/tag'
 
 import Table from '../src/Table'
-import { TableColumn, TableProps } from '../src/types'
+import { TableColumn, TableEmptyCellOptions, TableProps } from '../src/types'
 
 interface Data {
   key: number
@@ -24,7 +24,7 @@ const columns: TableColumn<Data>[] = [
     type: 'expandable',
     disabled: record => !record.description,
     customExpand: 'expand',
-    customCell: 'name',
+    customCell: 'expandable',
   },
   {
     type: 'selectable',
@@ -84,12 +84,12 @@ interface CellOption {
 }
 
 const defaultSlots = {
-  name: ({ value }: CellOption) => h('a', null, () => value),
+  expandable: () => h('a', null, 'expandable'),
   action: ({ record }: CellOption) => [
-    h('a', { style: 'margin-right: 8px' }, () => `Invite ${record.name}`),
-    h('a', null, () => 'Delete'),
+    h('a', { style: 'margin-right: 8px' }, `Invite ${record.name}`),
+    h('a', null, 'Delete'),
   ],
-  expand: ({ record }: CellOption) => h('span', null, () => record.description),
+  expand: ({ record }: CellOption) => h('span', null, record.description),
 }
 
 describe('Table', () => {
@@ -258,6 +258,45 @@ describe('Table', () => {
       })
 
       expect(wrapper.find('tbody').find('.ix-empty-description').text()).toBe('empty slot')
+    })
+
+    test('emptyCell work', async () => {
+      let emptyCell: string | ((option: TableEmptyCellOptions) => VNodeChild) = '-'
+      const wrapper = TableMount({
+        props: {
+          emptyCell,
+          columns: [{ dataKey: 'unknown' }, { type: 'testType', dataKey: 'unknown' }, ...columns] as TableColumn[],
+        },
+      })
+
+      const tds = wrapper.find('tbody').find('tr').findAll('td')
+
+      expect(tds[0].text()).toBe(emptyCell)
+      expect(tds[1].text()).toBe('')
+
+      emptyCell = ({ rowIndex }) => rowIndex
+      await wrapper.setProps({ emptyCell })
+
+      expect(tds[0].text()).toBe('0')
+      expect(tds[1].text()).toBe('')
+    })
+
+    test('emptyCell slot work', async () => {
+      const emptyCell = '-'
+      const wrapper = TableMount({
+        props: {
+          emptyCell,
+          columns: [{ dataKey: 'unknown' }, { type: 'testType', dataKey: 'unknown' }, ...columns] as TableColumn[],
+        },
+        slots: {
+          emptyCell: ({ rowIndex }: TableEmptyCellOptions) => rowIndex,
+        },
+      })
+
+      const tds = wrapper.find('tbody').find('tr').findAll('td')
+
+      expect(tds[0].text()).toBe('0')
+      expect(tds[1].text()).toBe('')
     })
 
     test('header work', async () => {
