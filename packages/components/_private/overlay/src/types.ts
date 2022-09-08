@@ -30,6 +30,10 @@ export const overlayProps = {
     type: Boolean,
     default: undefined,
   },
+  container: {
+    type: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+    required: true,
+  },
   delay: overlayDelayDef,
   destroyOnHide: {
     type: Boolean,
@@ -44,10 +48,6 @@ export const overlayProps = {
   showArrow: {
     type: Boolean,
     default: undefined,
-  },
-  target: {
-    type: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
-    required: true,
   },
   transitionName: String,
   trigger: overlayTriggerDef,

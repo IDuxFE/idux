@@ -15,7 +15,6 @@
 | `@message-icon-size` | `@font-size-lg` | - | - |
 | `@message-icon-margin-right` | `@spacing-sm` | - | - |
 | `@message-wrapper-top` | `15%` | - | - |
-| `@message-wrapper-zindex` | `@zindex-l5-1` | - | - |
 | `@message-icon-info-color` | `@color-info-l10` | - | - |
 | `@message-icon-success-color` | `@color-success` | - | - |
 | `@message-icon-warning-color` | `@color-warning-l10` | - | - |

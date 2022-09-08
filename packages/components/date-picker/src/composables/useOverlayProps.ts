@@ -5,22 +5,25 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DatePickerContext, DateRangePickerContext } from '../token'
-import type { ɵOverlayProps } from '@idux/components/_private/overlay'
-
 import { type ComputedRef, computed } from 'vue'
+
+import { type ɵOverlayProps } from '@idux/components/_private/overlay'
+import { useOverlayContainer } from '@idux/components/utils'
+
+import { type DatePickerContext, type DateRangePickerContext } from '../token'
 
 const defaultOffset: [number, number] = [0, 8]
 export function useOverlayProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵOverlayProps> {
+  const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
+  const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
   return computed(() => {
-    const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
     return {
       clickOutside: true,
+      container: mergedOverlayContainer.value,
       disabled: accessor.disabled || props.readonly,
       offset: defaultOffset,
       placement: 'bottomStart',
       transitionName: `${common.prefixCls}-fade`,
-      target: props.overlayContainer ?? config.overlayContainer ?? `${mergedPrefixCls.value}-overlay-container`,
       trigger: 'manual',
       visible: overlayOpened.value,
       'onUpdate:visible': setOverlayOpened,

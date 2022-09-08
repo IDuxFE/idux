@@ -11,6 +11,7 @@ import { CdkPortal } from '@idux/cdk/portal'
 import { cancelRAF, rAF } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { LoadingBarConfig, useGlobalConfig } from '@idux/components/config'
+import { usePortalTarget } from '@idux/components/utils'
 
 import { loadingBarProviderToken } from './token'
 import {
@@ -27,8 +28,9 @@ export default defineComponent({
   props: loadingBarProviderProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-loading-bar`)
     const config = useGlobalConfig('loadingBar')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-loading-bar`)
+    const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
     const { start, finish, error, status, visible, progress, mask } = useLoadingBarProvider(props, config)
 
@@ -47,8 +49,8 @@ export default defineComponent({
     return () => {
       return (
         <>
-          <CdkPortal target={`${mergedPrefixCls.value}-container`}>
-            <ɵMask class={`${mergedPrefixCls.value}-mask`} visible={visible.value && mask.value} />
+          <CdkPortal target={mergedPortalTarget.value}>
+            <ɵMask class={`${mergedPrefixCls.value}-mask`} mask={mask.value} visible={visible.value} />
             <Transition appear name={`${common.prefixCls}-move-up`}>
               <div v-show={visible.value} class={classes.value} style={{ maxWidth: `${progress.value}%` }} />
             </Transition>

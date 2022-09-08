@@ -16,7 +16,7 @@ describe('Portal', () => {
   })
 
   test('render work', () => {
-    const wrapper = PortalMount({ props: { target: 'render-container' } })
+    const wrapper = PortalMount({ props: { target: '.render-container' } })
     expect(document.body.querySelector('.render-container')!.querySelector('#content')).toBeDefined()
 
     expect(() => {
@@ -26,7 +26,7 @@ describe('Portal', () => {
   })
 
   test('disabled work', async () => {
-    const wrapper = PortalMount({ props: { target: 'disabled-container', disabled: true } })
+    const wrapper = PortalMount({ props: { target: '.disabled-container', disabled: true } })
     const container = document.body.querySelector('.disabled-container')!
     expect(container.querySelector('#content')).toBeNull()
 
@@ -36,7 +36,7 @@ describe('Portal', () => {
   })
 
   test('target work', async () => {
-    const wrapper = PortalMount({ props: { target: 'target-container1' } })
+    const wrapper = PortalMount({ props: { target: '.target-container1' } })
     const container1 = document.body.querySelector('.target-container1')!
     expect(container1.querySelector('#content')).not.toBeNull()
 
@@ -56,14 +56,24 @@ describe('Portal', () => {
     expect(container1.querySelector('#content')).toBeNull()
     expect(container2.querySelector('#content')).toBeNull()
     expect(container3.querySelector('#content')).not.toBeNull()
+
+    const container4 = document.createElement('div')
+    container4.id = 'target-container4'
+    document.body.appendChild(container4)
+
+    await wrapper.setProps({ target: '#target-container4' })
+    expect(container1.querySelector('#content')).toBeNull()
+    expect(container2.querySelector('#content')).toBeNull()
+    expect(container3.querySelector('#content')).toBeNull()
+    expect(container4.querySelector('#content')).not.toBeNull()
   })
 
   test('load work', async () => {
-    const wrapper = PortalMount({ props: { target: 'test-container', load: false } })
-    expect(document.body.querySelector('.test-container')).toBeNull()
+    const wrapper = PortalMount({ props: { target: '.load-container', load: false } })
+    expect(document.body.querySelector('.load-container')).toBeNull()
 
     await wrapper.setProps({ load: true })
 
-    expect(document.body.querySelector('.test-container')).not.toBeNull()
+    expect(document.body.querySelector('.load-container')).not.toBeNull()
   })
 })

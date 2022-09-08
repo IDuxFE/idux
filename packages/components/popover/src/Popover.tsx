@@ -21,9 +21,14 @@ export default defineComponent({
   props: popoverProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const config = useGlobalConfig('popover')
-    const { overlayRef, updatePopper, overlayProps, setVisible } = ɵUseTooltipOverlay(props, config, mergedPrefixCls)
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
+    const { overlayRef, updatePopper, overlayProps, setVisible } = ɵUseTooltipOverlay(
+      props,
+      config,
+      common,
+      mergedPrefixCls,
+    )
 
     expose({ updatePopper })
 

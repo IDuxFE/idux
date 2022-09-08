@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@button-zindex` | `@zindex-l1-1` | - | - |
 | `@button-font-weight` | `@font-weight-md` | - | - |
 | `@button-line-height` | `@line-height-base` | - | - |
 | `@button-height-xs` | `@height-sm` | `24px` | - |

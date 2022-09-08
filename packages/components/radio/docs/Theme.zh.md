@@ -28,7 +28,6 @@
 | `@radio-disabled-color` | `@form-disabled-color` | - | - |
 | `@radio-disabled-border-color` | `@form-disabled-border-color` | - | - |
 | `@radio-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@radio-inner-zindex` | `@zindex-l1-1` | - | - |
 | `@radio-input-top` | `0.2em` | - | - |
 | `@radio-box-size` | `16px` | - | - |
 | `@radio-box-border-radius` | `@border-radius-full` | - | - |

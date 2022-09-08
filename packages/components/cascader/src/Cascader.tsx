@@ -14,7 +14,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
-import { useGetKey } from '@idux/components/utils'
+import { useGetKey, useOverlayContainer } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { useDataSource } from './composables/useDataSource'
@@ -33,8 +33,9 @@ export default defineComponent({
   props: cascaderProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-cascader`)
     const config = useGlobalConfig('cascader')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-cascader`)
+    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
@@ -128,10 +129,6 @@ export default defineComponent({
       })
     })
 
-    const target = computed(
-      () => props.overlayContainer || config.overlayContainer || `${mergedPrefixCls.value}-overlay-container`,
-    )
-
     const renderTrigger = () => (
       <ɵSelector
         ref={triggerRef}
@@ -173,10 +170,10 @@ export default defineComponent({
       const overlayProps = {
         class: overlayClasses.value,
         clickOutside: true,
+        container: mergedOverlayContainer.value,
         disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
-        target: target.value,
         trigger: 'manual',
         triggerId: attrs.id,
         visible: overlayOpened.value,

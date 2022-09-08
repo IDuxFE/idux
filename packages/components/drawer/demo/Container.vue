@@ -1,10 +1,10 @@
 <template>
-  <div ref="target" class="drawer-target">
+  <div ref="container" class="drawer-container">
     <p>Render in this</p>
     <IxButton @click="changeVisible"> Open </IxButton>
   </div>
 
-  <IxDrawer v-model:visible="visible" header="Basic Drawer" :target="target" :width="200">
+  <IxDrawer v-model:visible="visible" header="Basic Drawer" :container="container" :width="200">
     <p>Some contents...</p>
     <p>Some contents...</p>
     <p>Some contents...</p>
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const target = ref<HTMLDivElement>()
+const container = ref<HTMLDivElement>()
 const visible = ref(false)
 
 const changeVisible = () => {
@@ -23,7 +23,7 @@ const changeVisible = () => {
 </script>
 
 <style scoped lang="less">
-.drawer-target {
+.drawer-container {
   position: relative;
   height: 200px;
   padding: 48px;

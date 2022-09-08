@@ -14,6 +14,7 @@ import { TransitionGroup, computed, defineComponent, provide, ref } from 'vue'
 import { CdkPortal } from '@idux/cdk/portal'
 import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { usePortalTarget } from '@idux/components/utils'
 
 import Message from './Message'
 import { messageProviderToken } from './token'
@@ -25,8 +26,10 @@ export default defineComponent({
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const config = useGlobalConfig('message')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
+    const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
+
     const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
     const { messages, loadContainer, open, info, success, warning, error, loading, update, destroy, destroyAll } =
@@ -36,8 +39,6 @@ export default defineComponent({
 
     provide(messageProviderToken, apis)
     expose(apis)
-
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     return () => {
       const child = messages.value.map(item => {
@@ -55,7 +56,7 @@ export default defineComponent({
       return (
         <>
           {slots.default?.()}
-          <CdkPortal target={target.value} load={loadContainer.value}>
+          <CdkPortal target={mergedPortalTarget.value} load={loadContainer.value}>
             <TransitionGroup
               tag="div"
               appear

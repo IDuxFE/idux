@@ -26,9 +26,6 @@ describe('LoadingBarProvider', () => {
     const loadingBarEl = document.querySelector('.ix-loading-bar') as HTMLElement
     expect(loadingBarEl).not.toBeNull()
     expect(window.getComputedStyle(loadingBarEl).display).toBe('none')
-
-    const maskEl = document.querySelector('.ix-loading-bar-mask') as HTMLElement
-    expect(maskEl).not.toBeNull()
   })
 
   test('start', async () => {

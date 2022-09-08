@@ -5,14 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Ref } from 'vue'
-
-import { Transition, computed, defineComponent, onBeforeUnmount, onMounted, watch } from 'vue'
+import { Ref, Transition, computed, defineComponent, onBeforeUnmount, onMounted, toRef, watch } from 'vue'
 
 import { isFirefox } from '@idux/cdk/platform'
 import { CdkPortal } from '@idux/cdk/portal'
 import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import { useImgStyleOpr, useImgSwitch, useOprList } from './composables/useOpr'
 import OprIcon from './contents/OprIcon'
@@ -30,13 +29,14 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('imageViewer')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-image-viewer`)
+    const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
     const [visible, setVisible] = useControlledProp(props, 'visible', false)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const zoom = computed(() => props.zoom ?? config.zoom)
     const loop = computed(() => props.loop ?? config.loop)
     const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
-    const target = computed(() => props.target ?? config.target ?? `${mergedPrefixCls.value}-container`)
 
     const { transformStyle, scaleDisabled, rotateHandle, scaleHandle, resetTransform } = useImgStyleOpr(zoom)
     const { activeIndex, switchDisabled, switchVisible, goHandle } = useImgSwitch(props, loop)
@@ -69,15 +69,17 @@ export default defineComponent({
       visible$$ && resetTransform()
     })
 
+    const style = computed(() => `z-index: ${currentZIndex.value}`)
+
     return () => {
       const prefixCls = mergedPrefixCls.value
       const curImgSrc = props.images[activeIndex.value]
 
       return (
-        <CdkPortal target={target.value} load={visible.value}>
+        <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
           <Transition name={`${common.prefixCls}-zoom-big-fast`} appear>
             {visible.value && (
-              <div class={prefixCls}>
+              <div class={prefixCls} style={style.value}>
                 <div class={`${prefixCls}-opr`}>
                   {oprList.value
                     .filter(item => item.visible)

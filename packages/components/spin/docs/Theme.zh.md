@@ -2,7 +2,6 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@spin-zindex` | `@zindex-l2-base` | - | - |
 | `@spin-tip-color` | `@color-primary` | - | - |
 | `@spin-icon-color` | `@color-primary` | - | - |
 | `@spin-font-size-sm` | `@font-size-sm` | - | - |

@@ -109,7 +109,7 @@
     right: -1px;
     bottom: -1px;
     left: -1px;
-    z-index: @button-zindex;
+    z-index: 1;
     display: none;
     background: @button-default-background-color;
     border-radius: inherit;
@@ -147,7 +147,7 @@
   align-items: center;
 
   .@{button-prefix} {
-    z-index: @zindex-auto;
+    z-index: auto;
     border-radius: 0;
 
     &:first-child {
@@ -176,7 +176,7 @@
 
 .button-group-item(@active-color;@hover-color) {
   &:hover {
-    z-index: @button-zindex;
+    z-index: 1;
     + .@{button-prefix} {
       border-left-color: @hover-color;
     }
@@ -184,7 +184,7 @@
 
   &:active,
   &:focus {
-    z-index: @button-zindex;
+    z-index: 1;
     + .@{button-prefix} {
       border-left-color: @active-color;
     }

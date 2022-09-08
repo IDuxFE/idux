@@ -17,6 +17,10 @@ export const imageViewerProps = {
     default: undefined,
   },
   activeIndex: Number,
+  container: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
   images: {
     type: Array as PropType<string[]>,
     default: (): string[] => [],
@@ -29,14 +33,18 @@ export const imageViewerProps = {
     type: Boolean,
     default: undefined,
   },
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   maskClosable: {
     type: Boolean,
     default: undefined,
   },
+  /**
+   * @deprecated please use `container` instead'
+   */
+  target: {
+    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    default: undefined,
+  },
+  zIndex: Number,
 
   'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
   'onUpdate:activeIndex': [Function, Array] as PropType<MaybeArray<(curIndex: number) => void>>,
@@ -62,7 +70,7 @@ export type ImageComponent = DefineComponent<Omit<HTMLAttributes, keyof ImagePub
 export type ImageInstance = InstanceType<DefineComponent<ImageProps>>
 
 export type ImageViewerProps = ExtractInnerPropTypes<typeof imageViewerProps>
-export type ImageViewerPublicProps = ExtractPublicPropTypes<typeof imageViewerProps>
+export type ImageViewerPublicProps = Omit<ExtractPublicPropTypes<typeof imageViewerProps>, 'target'>
 export type ImageViewerComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ImageViewerPublicProps> & ImageViewerPublicProps
 >

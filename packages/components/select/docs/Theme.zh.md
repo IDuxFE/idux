@@ -43,7 +43,6 @@
 | `@select-option-group-margin` | `0 @spacing-md` | `0 @spacing-md` | - |
 | `@select-option-group-padding-left` | `0` | `0` | - |
 | `@select-option-grouped-padding-left` | `@spacing-xl` | - | - |
-| `@select-option-container-zindex` | `@zindex-l4-3` | - | - |
 | `@select-option-container-padding` | `@spacing-sm 0` | `@spacing-xs 0` | - |
 | `@select-option-container-background-color` | `@background-color-component` | - | - |
 | `@select-option-container-border-radius` | `@border-radius-sm` | - | - |

@@ -7,12 +7,12 @@
 
 import type { TooltipProps } from './types'
 import type { ɵOverlayInstance, ɵOverlayProps } from '@idux/components/_private/overlay'
-import type { TooltipConfig } from '@idux/components/config'
-import type { ComputedRef, Ref } from 'vue'
+import type { CommonConfig, TooltipConfig } from '@idux/components/config'
 
-import { computed, ref } from 'vue'
+import { ComputedRef, Ref, computed, ref, toRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
+import { useOverlayContainer, useZIndex } from '@idux/components/utils'
 
 const defaultOffset: [number, number] = [0, 12]
 
@@ -27,12 +27,17 @@ export interface TooltipOverlayContext {
 export function useTooltipOverlay(
   props: TooltipProps,
   config: TooltipConfig,
+  common: CommonConfig,
   mergedPrefixCls: ComputedRef<string>,
 ): TooltipOverlayContext {
   const overlayRef = ref<ɵOverlayInstance>()
   const updatePopper = () => overlayRef.value?.updatePopper()
 
+  const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
+
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
+  const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
+
   const overlayProps = computed(() => {
     const trigger = props.trigger ?? config.trigger
     return {
@@ -40,14 +45,14 @@ export function useTooltipOverlay(
       ['onUpdate:visible']: setVisible,
       autoAdjust: props.autoAdjust ?? config.autoAdjust,
       clickOutside: trigger === 'click' || trigger === 'contextmenu',
+      container: mergedOverlayContainer.value,
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
       offset: props.offset ?? defaultOffset,
       showArrow: true,
       placement: props.placement ?? config.placement,
-      target: props.target ?? config.target ?? `${mergedPrefixCls.value}-container`,
       trigger: trigger,
-      zIndex: props.zIndex,
+      zIndex: currentZIndex.value,
     }
   })
   return { overlayRef, updatePopper, visible, setVisible, overlayProps }

@@ -4,7 +4,7 @@
 .@{dropdown-prefix} {
   .reset-component();
 
-  z-index: @dropdown-overlay-zindex;
+  z-index: 1000;
   min-width: @dropdown-overlay-min-width;
   background-color: @dropdown-overlay-background-color;
   border-radius: @dropdown-overlay-border-radius;
@@ -21,14 +21,12 @@
 
 .@{menu-prefix} {
   border-radius: @dropdown-overlay-border-radius;
-  
+
   &&-dropdown {
     &.@{menu-prefix}-vertical,
     &.@{menu-prefix}-inline {
       .@{menu-prefix}-item {
-
         &-selected {
-
           &::after {
             transform: scaleY(0);
             opacity: 0;
@@ -40,7 +38,6 @@
     &.@{menu-prefix}-horizontal {
       .@{menu-prefix}-item,
       .@{menu-prefix}-sub {
-
         &:hover,
         &-expanded,
         &-selected {

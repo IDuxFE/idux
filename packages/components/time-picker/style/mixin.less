@@ -2,7 +2,7 @@
   display: inline-flex;
   width: 100%;
   line-height: @time-picker-line-height;
-  
+
   &:not(.@{trigger-prefix}-disabled) {
     color: @time-picker-color;
   }
@@ -16,9 +16,8 @@
     }
   }
 
-
   &-overlay {
-    z-index: @time-picker-overlay-zindex;
+    z-index: 1000;
     background-color: @time-picker-overlay-background-color;
     box-shadow: @time-picker-overlay-box-shadow;
   }

@@ -27,7 +27,7 @@ describe('Popconfirm', () => {
   const slots = { default: () => h('div', { id: 'trigger' }, 'trigger') }
 
   afterEach(() => {
-    document.querySelector('.ix-popconfirm-container')!.innerHTML = ''
+    document.querySelector('.ix-popconfirm-overlay-container')!.innerHTML = ''
   })
 
   renderWork<PopconfirmProps>(Popconfirm, {

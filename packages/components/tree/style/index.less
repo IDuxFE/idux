@@ -44,10 +44,8 @@
 
   &-show-line {
     .@{tree-node-prefix} {
-
       &-last {
         .@{tree-node-prefix}-leaf-line {
-
           &::before {
             bottom: 50%;
           }
@@ -79,13 +77,12 @@
 
       &:not(&-expanded):not(&-last) {
         .@{tree-node-prefix}-expand {
-
           &::before {
             position: absolute;
             top: (@tree-node-content-height - 6);
             right: 50%;
             height: (@tree-node-content-height / 2 - 4);
-            z-index: @zindex-l1-1;
+            z-index: 1;
             .vertical-line();
 
             content: ' ';
@@ -114,7 +111,6 @@
       }
     }
   }
-
 }
 
 .@{tree-node-prefix} {
@@ -129,7 +125,6 @@
   }
 
   &-indent {
-
     &-noop-unit,
     &-unit {
       display: inline-block;
@@ -139,7 +134,7 @@
 
   &-draggable-icon {
     cursor: pointer;
-    opacity: .4;
+    opacity: 0.4;
     text-align: center;
     transition: opacity @transition-duration-base @ease-in-out;
     width: @tree-node-content-height;
@@ -236,7 +231,7 @@
 
   &-selected:not(&-disabled) &-content {
     background-color: @tree-node-selected-background-color;
-    color: @tree-node-selected-color ;
+    color: @tree-node-selected-color;
     &:hover {
       background-color: @tree-node-hover-background-color;
     }

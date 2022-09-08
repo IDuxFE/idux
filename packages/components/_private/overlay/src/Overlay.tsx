@@ -57,7 +57,7 @@ export default defineComponent({
       destroy,
     } = usePopper({ ...popperOptions.value, visible: props.visible })
 
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'zIndex'), visibility)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
 
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
@@ -105,7 +105,7 @@ export default defineComponent({
         return (
           <>
             {trigger}
-            <CdkPortal target={props.target} load={false}></CdkPortal>
+            <CdkPortal target={props.container} load={false}></CdkPortal>
           </>
         )
       }
@@ -125,7 +125,7 @@ export default defineComponent({
       return (
         <>
           {trigger}
-          <CdkPortal target={props.target} load={visibility.value}>
+          <CdkPortal target={props.container} load={visibility.value}>
             <Transition appear name={props.transitionName} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>

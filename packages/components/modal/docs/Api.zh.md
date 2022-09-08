@@ -13,6 +13,7 @@
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon='{onClose}'` | `close` | ✅ | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
+| `container` | 自定义对话框挂载的容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
 | `draggable` | 是否支持拖放 | `boolean` | `false` | - | - |
 | `footer` | 自定义底部按钮 | `boolean \| ModalButtonProps[] \| VNode \| #footer` | `true` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |
@@ -24,12 +25,10 @@
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
-| `target` | 自定义对话框容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `title` | 对话框次标题 | `string  \| VNode \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
 | `width` | 对话框宽度 | `string \| number` | `520` | ✅ | - |
-| `wrapperClassName` | 对话框外层容器类名 | `string` | - | - | - |
-| `zIndex` | 设置对话框的 `z-index` | `number` | `1000` | ✅ | - |
+| `zIndex` | 设置对话框的 `z-index` | `number` | - | - | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
 | `onAfterClose` | 关闭后的回调 | `() => void` | - | - | - |
 | `onBeforeClose` | 蒙层关闭前的回调 | `(evt?: Event \| unknown) => void \| boolean \| Promise<boolean>` | - | - | 返回 `false` 的时候，将阻止关闭 |

@@ -23,7 +23,7 @@ import { debounce } from 'lodash-es'
 import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
-import { useKey } from '@idux/components/utils'
+import { useKey, useOverlayContainer } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../../composables/usePaddingLeft'
 import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
@@ -55,14 +55,7 @@ export default defineComponent({
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
     const key = useKey()
-    const target = computed(
-      () =>
-        menuProps.target ??
-        menuProps.overlayContainer ??
-        config.target ??
-        config.overlayContainer ??
-        `${mergedPrefixCls.value}-overlay-container`,
-    )
+    const mergedOverlayContainer = useOverlayContainer(menuProps, config, common, mergedPrefixCls)
     const mode = useMode(menuProps, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
@@ -126,12 +119,12 @@ export default defineComponent({
             v-slots={{ default: trigger, content: content }}
             class={overlayClasses.value}
             autoAdjust
+            container={mergedOverlayContainer.value}
             destroyOnHide={false}
             delay={defaultDelay}
             disabled={disabled}
             offset={offset.value}
             placement={placement.value}
-            target={target.value}
             transitionName={mergedTransitionName.value}
             trigger="manual"
             visible={isExpanded.value}

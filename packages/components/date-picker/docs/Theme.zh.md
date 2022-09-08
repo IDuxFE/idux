@@ -53,7 +53,6 @@
 | `@date-picker-overlay-footer-border-color` | `@form-border-color` | - | - |
 | `@date-picker-overlay-footer-padding` | `@spacing-sm @spacing-lg` | - | - |
 | `@date-picker-overlay-footer-button-margin-left` | `@spacing-sm` | - | - |
-| `@date-picker-overlay-zindex` | `@zindex-l4-3` | - | - |
 | `@date-picker-overlay-width` | `252px` | - | - |
 | `@date-picker-overlay-border-radius` | `@border-radius-sm` | - | - |
 | `@date-picker-overlay-box-shadow` | `@shadow-bottom-md` | - | - |

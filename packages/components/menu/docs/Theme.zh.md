@@ -5,7 +5,7 @@
 | `@menu-text-color` | `@text-color` | - | - |
 | `@menu-background-color` | `@background-color-component` | - | - |
 | `@menu-highlight-color` | `@color-primary` | - | - |
-| `@menu-highlight-background-color` | `~colorPalette('@{color-primary}', -50)` | - | - |
+| `@menu-highlight-background-color` | `~colorPalette('@{color-primary}', -50) ` | - | - |
 | `@menu-disabled-color` | `@disabled-color` | - | - |
 | `@menu-disabled-background-color` | `transparent` | - | - |
 | `@menu-border-width` | `@border-width-sm` | - | - |
@@ -26,7 +26,6 @@
 | `@menu-item-horizontal-padding` | `0 @spacing-xs` | - | - |
 | `@menu-item-divider-margin` | `@spacing-xs` | - | - |
 | `@menu-sub-suffix-icon-right` | `8px` | - | - |
-| `@menu-overlay-zindex` | `@zindex-l4-3` | - | - |
 | `@menu-overlay-min-width` | `128px` | - | - |
 | `@menu-overlay-border-radius` | `@border-radius-md` | `@border-radius-sm` | - |
 | `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |

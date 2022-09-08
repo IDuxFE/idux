@@ -17,6 +17,7 @@ import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
+import { useOverlayContainer } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -37,8 +38,9 @@ export default defineComponent({
   props: selectProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
+    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
     const triggerRef = ref<ɵSelectorInstance>()
     const focus = () => triggerRef.value?.focus()
@@ -120,15 +122,6 @@ export default defineComponent({
       })
     })
 
-    const target = computed(
-      () =>
-        props.target ??
-        props.overlayContainer ??
-        config.target ??
-        config.overlayContainer ??
-        `${mergedPrefixCls.value}-overlay-container`,
-    )
-
     const renderTrigger = () => (
       <ɵSelector
         ref={triggerRef}
@@ -202,10 +195,10 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
+        container: mergedOverlayContainer.value,
         disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
-        target: target.value,
         trigger: 'manual',
         triggerId: attrs.id,
         visible: overlayOpened.value,
