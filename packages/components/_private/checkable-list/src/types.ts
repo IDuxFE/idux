@@ -32,7 +32,7 @@ export const checkableListProps = {
     default: false,
   },
   checked: Function as PropType<(item: CheckableListData) => boolean>,
-  customAdditional: { type: Object as PropType<CheckableListCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<CheckableListCustomAdditional>, default: undefined },
   disabled: Function as PropType<(item: CheckableListData) => boolean>,
   getKey: Function as PropType<(item: CheckableListData) => VKey>,
   labelKey: String,

@@ -20,7 +20,7 @@ export const selectPanelProps = {
   selectedKeys: { type: Array as PropType<VKey[]>, default: undefined },
   childrenKey: { type: String, default: undefined },
 
-  customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData<any>) => any)>, default: undefined },

@@ -43,7 +43,7 @@ export const treeProps = {
     type: Boolean,
     default: false,
   },
-  customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<TreeCustomAdditional>, default: undefined },
   dataSource: {
     type: Array as PropType<TreeNode[]>,
     default: (): TreeNode[] => [],
