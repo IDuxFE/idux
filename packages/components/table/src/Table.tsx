@@ -44,6 +44,7 @@ export default defineComponent({
     const mergedAutoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetRowKey(props, config)
+    const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, mergedAutoHeight, stickyContext)
@@ -71,6 +72,7 @@ export default defineComponent({
       config,
       locale,
       mergedPrefixCls,
+      mergedEmptyCell,
       mergedSize,
       ...columnsContext,
       ...scrollContext,

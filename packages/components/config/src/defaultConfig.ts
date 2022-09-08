@@ -285,9 +285,6 @@ export const defaultConfig: GlobalConfig = {
     childrenKey: 'children',
     getKey: 'key',
     size: 'md',
-    extra: {
-      icon: 'ellipsis',
-    },
     pagination: {
       position: 'bottomEnd',
     },

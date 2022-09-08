@@ -7,7 +7,7 @@
 
 import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { isFunction, isString } from 'lodash-es'
+import { isFunction, isNil, isString } from 'lodash-es'
 
 import { Logger, convertArray, convertCssPixel } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
@@ -34,6 +34,7 @@ export default defineComponent({
       props: tableProps,
       slots,
       mergedPrefixCls,
+      mergedEmptyCell,
       activeOrderByMap,
       fixedColumnKeys,
       columnOffsets,
@@ -101,8 +102,16 @@ export default defineComponent({
       } else {
         const { ellipsis = tableProps.ellipsis } = column
         const text = dataValue.value
-        children = renderChildren(props, slots, dataValue.value)
+        children = renderChildren(props, slots, text)
         title = getColTitle(ellipsis, children, text)
+
+        // emptyCell 仅支持普通列
+        if (!type && isNil(children)) {
+          const emptyCellRender = slots.emptyCell || mergedEmptyCell.value
+          children = isFunction(emptyCellRender)
+            ? emptyCellRender({ column, record: props.record, rowIndex: props.rowIndex })
+            : emptyCellRender
+        }
       }
 
       // see: https://github.com/IDuxFE/idux/issues/1081
