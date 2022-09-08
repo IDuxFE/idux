@@ -1,12 +1,19 @@
-.table-size(@size, @font-size, @head-height, @body-height, @padding-right, @padding-left) {
+.table-size(@size, @font-size, @head-height, @body-height, @padding) {
   .@{table-prefix}-@{size} {
     .@{table-prefix}& {
       font-size: @font-size;
+      line-height: @font-size + 8;
     }
 
-    th {
-      padding-left: @padding-left;
-      padding-right: @padding-right;
+    .@{header-prefix},
+    .@{table-prefix}-cell,
+    .@{table-prefix}-alert-row > td,
+    .@{table-prefix}-expanded-row > td,
+    .@{table-prefix}-footer {
+      padding: 0 @padding;
+    }
+
+    th.@{table-prefix}-cell {
       height: @head-height;
 
       .@{table-prefix}-sortable-trigger,
@@ -19,29 +26,17 @@
       }
     }
 
-    td {
+    td.@{table-prefix}-cell,
+    .@{table-prefix}-alert-row > td,
+    .@{table-prefix}-expanded-row > td,
+    .@{table-prefix}-footer {
       height: @body-height;
-      padding-left: @padding-left;
-      padding-right: @padding-right;
-    }
-
-    .@{header-prefix} {
-      padding-left: @padding-left;
-      padding-right: @padding-right;
-    }
-
-    .@{table-prefix} {
-      &-footer {
-        height: @body-height;
-        padding-left: @padding-left;
-        padding-right: @padding-right;
-      }
     }
 
     // TODO: Nest Table
   }
 }
 
-.table-size(~'lg', @table-font-size-lg, @table-head-height-lg, @table-height-lg, @table-padding-right-lg, @table-padding-left-lg);
-.table-size(~'md', @table-font-size-md, @table-head-height-md, @table-height-md, @table-padding-right-md, @table-padding-left-md);
-.table-size(~'sm', @table-font-size-sm, @table-head-height-sm, @table-height-sm, @table-padding-right-sm, @table-padding-left-sm);
+.table-size(~'lg', @table-font-size-lg, @table-head-row-height-lg, @table-body-row-height-lg, @spacing-lg);
+.table-size(~'md', @table-font-size-md, @table-head-row-height-md, @table-body-row-height-md, @spacing-md);
+.table-size(~'sm', @table-font-size-sm, @table-head-row-height-sm, @table-body-row-height-sm, @spacing-sm);

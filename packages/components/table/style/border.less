@@ -1,4 +1,4 @@
-@table-border: @table-border-width @table-border-style @table-border-color;
+@table-border: @border-width-sm @border-style @table-border-color;
 
 .@{table-prefix} {
   th {
@@ -7,7 +7,7 @@
 
   thead > tr:not(:last-child) > th {
     &[colspan] {
-      border-bottom: 0;
+      border-bottom: none;
     }
   }
 
@@ -36,18 +36,15 @@
 .@{table-prefix}:not(.@{table-prefix}-borderless) > .@{spin-prefix} > .@{spin-prefix}-container {
   > .@{header-prefix} {
     border: @table-border;
-    border-bottom: 0;
+    border-bottom: none;
   }
 
   > .@{table-prefix}-container {
     > .@{table-prefix}-fixed-holder,
     > .@{table-prefix}-content {
-      border-left: @table-border;
-      border-right: @table-border;
-      border-bottom: @table-border;
-      > table {
-        border-top: @table-border;
+      border: @table-border;
 
+      > table {
         > thead > tr > th:not(:last-child),
         > tbody > tr > td:not(:last-child),
         > tfoot > tr > th:not(:last-child),
@@ -81,21 +78,23 @@
       }
     }
 
+    > .@{table-prefix}-fixed-holder {
+      border-bottom: none;
+    }
+
     > .@{table-prefix}-fixed-holder + .@{table-prefix}-content {
-      > table {
-        border-top: none;
-      }
+      border-top: none;
     }
   }
 
   > .@{table-prefix}-footer {
     border: @table-border;
-    border-top: 0;
+    border-top: none;
   }
 
   > .@{table-prefix}-pagination {
     border: @table-border;
-    border-top: 0;
+    border-top: none;
     padding: 4px 8px 3px;
   }
 }
@@ -105,11 +104,13 @@
   > .@{table-prefix}-container:not(.@{table-prefix}-scroll-vertical) {
     > .@{table-prefix}-fixed-holder,
     > .@{table-prefix}-content {
-      border-bottom: @table-border;
-
       > table {
         > tbody > tr:last-child > td {
           border-bottom: @table-border;
+        }
+
+        > tbody > tr.@{table-prefix}-empty-row > td {
+          border-bottom: none;
         }
       }
     }

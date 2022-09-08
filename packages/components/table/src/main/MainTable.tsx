@@ -154,7 +154,7 @@ export default defineComponent({
 
         if (props.virtual && props.scroll) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
-            renderBodyRow(item, index, slots, expandable.value)
+            renderBodyRow(item, index, slots, expandable.value, prefixCls)
 
           const contentRender: VirtualContentRenderFn = children => {
             return (
