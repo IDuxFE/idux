@@ -27,7 +27,7 @@ export const cascaderProps = {
   childrenKey: { type: String, default: undefined },
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
-  customAdditional: { type: Object as PropType<CascaderCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<CascaderCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<CascaderData[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },

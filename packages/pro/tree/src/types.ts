@@ -34,7 +34,7 @@ export const proTreeProps = {
   childrenKey: { type: String, default: undefined },
   cascaderStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
   clearIcon: { type: String, default: undefined },
-  customAdditional: { type: Object as PropType<TreeCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<TreeCustomAdditional>, default: undefined },
   collapsed: { type: Boolean, default: undefined },
   collapsedWidth: { type: Number, default: 44 },
   collapseIcon: { type: Array as PropType<string[]>, default: undefined },

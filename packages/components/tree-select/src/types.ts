@@ -38,7 +38,7 @@ export const treeSelectProps = {
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
   checkStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
-  customAdditional: { type: Object as PropType<TreeSelectCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<TreeSelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
   draggable: { type: Boolean, default: false },

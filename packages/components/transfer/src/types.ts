@@ -117,7 +117,7 @@ export const transferProps = {
     default: undefined,
   },
   clearIcon: String,
-  customAdditional: { type: Object as PropType<TransferCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<TransferCustomAdditional>, default: undefined },
   dataSource: {
     type: Array as PropType<TransferData[]>,
     default: (): TransferData[] => [],

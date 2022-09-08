@@ -28,7 +28,7 @@ export const menuProps = {
     type: Boolean,
     default: false,
   },
-  customAdditional: { type: Object as PropType<MenuCustomAdditional>, default: undefined },
+  customAdditional: { type: Function as PropType<MenuCustomAdditional>, default: undefined },
   dataSource: Array as PropType<MenuData[]>,
   getKey: {
     type: [String, Function] as PropType<string | ((data: MenuData<any>) => any)>,
