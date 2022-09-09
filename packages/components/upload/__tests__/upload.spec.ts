@@ -430,7 +430,8 @@ describe('Upload hooks', () => {
   test('onFileStatusChange work', async () => {
     let hasStatus = false
     const onFileStatusChange = vi.fn(
-      (file: UploadFile) => (hasStatus = ['selected', 'uploading', 'error', 'success', 'abort'].includes(file.status!)),
+      (file: UploadFile) =>
+        (hasStatus = ['selected', 'cancel', 'uploading', 'error', 'success', 'abort'].includes(file.status!)),
     )
     const wrapper = uploadMount({ props: { onFileStatusChange } })
     const fileSelect = getTestFiles()

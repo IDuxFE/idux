@@ -71,6 +71,8 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
       await upload(file)
     } else if (typeof before === 'object') {
       await upload(before)
+    } else {
+      setFileStatus(file, 'cancel', props.onFileStatusChange)
     }
   }
 
