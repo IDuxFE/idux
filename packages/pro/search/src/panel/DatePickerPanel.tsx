@@ -17,10 +17,10 @@ import {
 } from '@idux/components/date-picker'
 
 import { proSearchContext } from '../token'
-import { searchDatePickerPanelProps } from '../types'
+import { proSearchDatePanelProps } from '../types'
 
 export default defineComponent({
-  props: searchDatePickerPanelProps,
+  props: proSearchDatePanelProps,
   setup(props) {
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
     const [visiblePanel, setVisiblePanel] = useState<DatePanelProps['visible']>('datePanel')

@@ -29,6 +29,7 @@ export function createDatePickerSegment(
     fieldConfig: { type, cellTooltip, disabledDate, timePanelOptions },
     defaultValue,
     inputClassName,
+    onPanelVisibleChange,
   } = searchField
 
   const panelRenderer = (context: PanelRenderContext<Date | undefined>) => {
@@ -56,6 +57,7 @@ export function createDatePickerSegment(
     parse: input => parseInput(input, dateConfig, searchField),
     format: value => formatValue(value, dateConfig, searchField),
     panelRenderer,
+    onVisibleChange: onPanelVisibleChange,
   }
 }
 

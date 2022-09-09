@@ -15,6 +15,7 @@ export function createCustomSegment(prefixCls: string, searchField: CustomSearch
     fieldConfig: { parse, format, customPanel },
     defaultValue,
     inputClassName,
+    onPanelVisibleChange,
   } = searchField
   const panelRenderer = getPanelRenderer(customPanel, slots)
 
@@ -26,6 +27,7 @@ export function createCustomSegment(prefixCls: string, searchField: CustomSearch
     parse,
     format,
     panelRenderer,
+    onVisibleChange: onPanelVisibleChange,
   }
   /* eslint-enable indent */
 }

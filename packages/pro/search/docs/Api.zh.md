@@ -87,6 +87,7 @@ SelectSearchFieldConfig
 | `searchable` | 是否支持筛选 | `boolean` | false | - | 默认不支持 |
 | `searchFn` | 搜索函数 | `(data: SelectPanelData, searchText: string) => boolean` | - | - | 默认模糊匹配 |
 | `separator` | 多选分隔符 | `string` | `'|'` | - | - |
+| `showSelectAll` | 是否支持全选 | `boolean` | `true` | - | - |
 | `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
 | `overlayItemWidth` | 选项宽度 | `number` | - | - | - |
 

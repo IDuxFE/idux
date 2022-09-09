@@ -47,6 +47,7 @@ export interface Segment<V = unknown> {
   format: InputFormater<V>
   parse: InputParser<V>
   panelRenderer?: (context: PanelRenderContext<V>) => VNodeChild
+  onVisibleChange?: (visible: boolean) => void
 }
 
 export type InputFormater<V = unknown> = (value: V) => string
@@ -68,6 +69,7 @@ interface SearchFieldBase<V = unknown> {
   defaultValue?: V
   inputClassName?: string
   validator?: (value: SearchValue<V>) => Omit<SearchItemError, 'index'> | undefined
+  onPanelVisibleChange?: (visible: boolean) => void
 }
 
 export type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & SelectData
@@ -82,6 +84,7 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     multiple?: boolean
     searchable?: boolean
     separator?: string
+    showSelectAll?: boolean
     virtual?: boolean
     searchFn?: (data: SelectPanelData, searchText: string) => boolean
     overlayItemWidth?: number
@@ -202,21 +205,23 @@ export const segmentProps = {
 } as const
 export type SegmentProps = ExtractInnerPropTypes<typeof segmentProps>
 
-export const searchSelectPanelProps = {
+export const proSearchSelectPanelProps = {
   value: { type: Array as PropType<VKey[]>, default: undefined },
   dataSource: { type: Array as PropType<SelectPanelData[]>, default: undefined },
   multiple: { type: Boolean, default: false },
+  showSelectAll: { type: Boolean, default: true },
   allSelected: Boolean,
   virtual: { type: Boolean, default: false },
-  onChange: Function as PropType<(value: VKey[]) => void>,
-  onSelectAll: Function as PropType<(selectAll: boolean) => void>,
   setOnKeyDown: Function as PropType<(onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void>,
+
+  onChange: Function as PropType<(value: VKey[]) => void>,
+  onSelectAllClick: Function as PropType<() => void>,
   onConfirm: Function as PropType<() => void>,
   onCancel: Function as PropType<() => void>,
 } as const
-export type SearchSelectPanelProps = ExtractInnerPropTypes<typeof searchSelectPanelProps>
+export type ProSearchSelectPanelProps = ExtractInnerPropTypes<typeof proSearchSelectPanelProps>
 
-export const searchDatePickerPanelProps = {
+export const proSearchDatePanelProps = {
   panelType: {
     type: String as PropType<'datePicker' | 'dateRangePicker'>,
     required: true,
@@ -236,4 +241,4 @@ export const searchDatePickerPanelProps = {
   onConfirm: Function as PropType<() => void>,
   onCancel: Function as PropType<() => void>,
 } as const
-export type SearchDatePickerPanelProps = ExtractInnerPropTypes<typeof searchDatePickerPanelProps>
+export type ProSearchDatePanelProps = ExtractInnerPropTypes<typeof proSearchDatePanelProps>
