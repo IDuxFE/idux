@@ -5,65 +5,75 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DnDElement, DragPosition } from './types'
+import type { DnDBackendType, DnDEventType, DnDPosition } from './types'
 
-import { ComputedRef, computed, ref } from 'vue'
+export class DnDState {
+  prevPos: DnDPosition = { x: 0, y: 0 }
+  startTransform: DnDPosition = { x: 0, y: 0 }
+  activeTransform: DnDPosition = { x: 0, y: 0 }
 
-type InnerState = {
-  init: (evt: DragEvent) => void
-  canDrop: ComputedRef<boolean>
-  draggingElement: ComputedRef<HTMLElement | Window | EventTarget>
-  currPosition: ComputedRef<DragPosition>
-  resetState: () => void
-  update: (evt: DragEvent) => void
-  updatePosition: (evt: DragEvent, position: DragPosition) => void
-  isDragging: ComputedRef<boolean>
-  updateDrop: (result: boolean) => void
-}
+  isNative = false
+  dragging = false
+  canDrop = false
 
-/**
- * context inner state
- *
- */
-export function State(): InnerState {
-  const draggingElement = ref<DnDElement>()
-  const currentPosition = ref<DragPosition>()
-  const canDrop = ref(false)
-
-  const resetState = () => {
-    draggingElement.value = undefined
-    currentPosition.value = undefined
-    canDrop.value = false
-  }
-  const updateDrop = (result: boolean) => {
-    canDrop.value = result
-  }
-  const init = (evt: DragEvent) => {
-    draggingElement.value = evt.target as DnDElement
-  }
-  const update = (evt: DragEvent) => {
-    updatePosition(evt, {
-      offsetX: evt.offsetX,
-      offsetY: evt.offsetY,
-    })
-  }
-  const updatePosition = (evt: DragEvent, position: DragPosition) => {
-    currentPosition.value = {
-      left: evt.clientX,
-      top: evt.clientY,
-      ...position,
+  constructor(backend: DnDBackendType = 'native', oldTransform?: DnDPosition) {
+    this.isNative = backend === 'native'
+    if (oldTransform) {
+      this.activeTransform = oldTransform
     }
   }
 
-  return {
-    isDragging: computed(() => draggingElement.value !== undefined),
-    canDrop: computed(() => canDrop.value),
-    draggingElement: computed(() => draggingElement.value!),
-    currPosition: computed(() => currentPosition.value!),
-    updatePosition,
-    updateDrop,
-    resetState,
-    update,
-    init,
+  start(evt: DnDEventType): void {
+    const event = this.wrapperEvent(evt)
+
+    this.prevPos = {
+      x: event.pageX || event.clientX,
+      y: event.pageY || event.clientY,
+    }
+    this.startTransform = this.activeTransform
+    this.dragging = true
+  }
+
+  updatePosition(evt: DnDEventType): void {
+    if (this.isNative && !this.canDrop) {
+      // restore original position when dragging to restricted area
+      this.activeTransform = this.startTransform
+      return
+    }
+
+    const event = this.wrapperEvent(evt)
+    const cursorPos = {
+      x: event.pageX || event.clientX,
+      y: event.pageY || event.clientY,
+    }
+
+    const position = {
+      x: cursorPos.x - this.prevPos.x,
+      y: cursorPos.y - this.prevPos.y,
+    }
+
+    this.prevPos = {
+      x: cursorPos.x,
+      y: cursorPos.y,
+    }
+
+    this.activeTransform = {
+      x: this.activeTransform.x + position.x,
+      y: this.activeTransform.y + position.y,
+    }
+  }
+
+  end(): void {
+    this.dragging = false
+    this.canDrop = false
+  }
+
+  reset(): void {
+    this.activeTransform = { x: 0, y: 0 }
+    this.end()
+  }
+
+  wrapperEvent(evt: DnDEventType): MouseEvent | Touch {
+    return 'touches' in evt ? evt.touches[0] : evt
   }
 }

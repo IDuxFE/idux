@@ -10,7 +10,7 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { Component, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-import { BoundaryType, DnDEvent } from '../types'
+import { BoundaryType, DnDBackendType, DnDEvent } from '../types'
 
 export const draggableProps = {
   /**
@@ -37,6 +37,13 @@ export const draggableProps = {
    * @default div
    */
   is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
+
+  /**
+   * 拖拽底层实现
+   * * `native`: using html5 drag-drop api
+   * * `pointer`: using mouse/touch position to simulate
+   */
+  backend: { type: String as PropType<DnDBackendType>, default: 'native' },
 
   onDragStart: [Function, Array] as PropType<MaybeArray<DnDEvent>>,
   onDrag: [Function, Array] as PropType<MaybeArray<DnDEvent>>,

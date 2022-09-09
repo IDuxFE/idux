@@ -5,12 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { DnDEventType, DnDPosition } from '../types'
+
 import { computed, defineComponent, normalizeClass, reactive, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
 import { useDraggable } from '../composables/useDraggable'
-import { type DragPosition } from '../types'
 import { draggableProps } from './types'
 
 const style = {
@@ -24,13 +25,14 @@ export default defineComponent({
   setup(props, { slots }) {
     const elementRef = ref()
 
-    const onDragStart = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDragStart, evt, position)
-    const onDrag = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDrag, evt, position)
-    const onDragEnd = (evt: DragEvent, position?: DragPosition) => callEmit(props.onDragEnd, evt, position)
+    const onDragStart = (evt: DnDEventType, position?: DnDPosition) => callEmit(props.onDragStart, evt, position)
+    const onDrag = (evt: DnDEventType, position?: DnDPosition) => callEmit(props.onDrag, evt, position)
+    const onDragEnd = (evt: DnDEventType, position?: DnDPosition) => callEmit(props.onDragEnd, evt, position)
 
     const draggableOptions = reactive({
       boundary: props.boundary,
       free: props.free,
+      backend: props.backend,
       onDragStart,
       onDrag,
       onDragEnd,
