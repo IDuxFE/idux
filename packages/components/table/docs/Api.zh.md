@@ -16,7 +16,7 @@
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `ellipsis` | 超过宽度将自动省略 | `boolean \| { title: boolean }` | `false` | - | `title` 为 `false` 时, 不显示原生的 `title` |
 | `empty` | `dataSource` 为空时默认渲染的内容 | `string \| EmptyProps \| #empty` | - | - | - |
-| `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列 |
+| `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列，且数据为 `undefined \| null \| ''` 时生效 |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
@@ -28,6 +28,14 @@
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
+
+```ts
+export interface TableEmptyCellOptions<T = any, K = VKey> {
+  column: TableColumn<T, K>
+  record: T
+  rowIndex: number
+}
+```
 
 #### TableColumn
 

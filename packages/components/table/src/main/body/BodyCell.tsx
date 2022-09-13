@@ -106,7 +106,7 @@ export default defineComponent({
         title = getColTitle(ellipsis, children, text)
 
         // emptyCell 仅支持普通列
-        if (!type && isNil(children)) {
+        if (!type && (isNil(children) || children === '')) {
           const emptyCellRender = slots.emptyCell || mergedEmptyCell.value
           children = isFunction(emptyCellRender)
             ? emptyCellRender({ column, record: props.record, rowIndex: props.rowIndex })
