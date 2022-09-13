@@ -7,7 +7,7 @@
 
 import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
 
-import { computed, defineComponent, provide, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -76,16 +76,20 @@ export default defineComponent({
     provide(TRANSFER_TARGET_TOKEN, targetBindings)
     provide(TRANSFER_OPERATIONS_TOKEN, transferOperationsContext)
 
-    return () => {
+    const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-fit-content`]: !!props.scroll?.height,
+      })
+    })
 
-      return (
-        <div class={prefixCls}>
-          <TransferList isSource={true} />
-          <TransferOperations />
-          <TransferList isSource={false} />
-        </div>
-      )
-    }
+    return () => (
+      <div class={classes.value}>
+        <TransferList isSource={true} />
+        <TransferOperations />
+        <TransferList isSource={false} />
+      </div>
+    )
   },
 })

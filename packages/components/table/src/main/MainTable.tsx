@@ -44,6 +44,7 @@ export default defineComponent({
       expandable,
       mergedPrefixCls,
       mergedSize,
+      mergedAutoHeight,
       changeColumnWidth,
       flattedData,
       isSticky,
@@ -152,7 +153,7 @@ export default defineComponent({
           )
         }
 
-        if (props.virtual && props.scroll) {
+        if (props.virtual && (props.scroll || mergedAutoHeight.value)) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
             renderBodyRow(item, index, slots, expandable.value, prefixCls)
 
@@ -166,10 +167,9 @@ export default defineComponent({
             )
           }
           const { scroll, onScrolledBottom } = props
-          const { height, y, fullHeight } = scroll
 
           __DEV__ &&
-            !isNumber(height || y) &&
+            !isNumber(scroll?.height || scroll?.y) &&
             Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
 
           children.push(
@@ -177,9 +177,9 @@ export default defineComponent({
               ref={scrollBodyRef}
               style={contentStyle.value}
               dataSource={flattedData.value}
-              fullHeight={fullHeight}
+              fullHeight={scroll?.fullHeight}
               getKey="rowKey"
-              height={(height || y) as number}
+              height={mergedAutoHeight.value ? '100%' : ((scroll?.height || scroll?.y) as number)}
               itemHeight={virtualItemHeightMap[mergedSize.value]}
               itemRender={itemRender}
               contentRender={contentRender}

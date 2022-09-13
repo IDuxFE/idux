@@ -2,9 +2,9 @@
   <IxProTransfer
     v-model:value="targetKeys"
     type="table"
+    :scroll="{ width: { source: 500 } }"
     :data-source="dataSource"
     :table-props="tableProps"
-    :scroll="{ height: 300, width: { source: 600 }, fullHeight: true }"
   />
 </template>
 

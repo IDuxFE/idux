@@ -35,6 +35,7 @@ export interface TableContext
   config: TableConfig
   locale: Locale
   mergedPrefixCls: ComputedRef<string>
+  mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>
   mergedSize: ComputedRef<TableSize>
   tableLayout: ComputedRef<'auto' | 'fixed'>

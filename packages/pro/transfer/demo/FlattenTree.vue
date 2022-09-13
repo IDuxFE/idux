@@ -1,12 +1,5 @@
 <template>
-  <IxProTransfer
-    v-model:value="targetKeys"
-    type="tree"
-    mode="immediate"
-    :data-source="dataSource"
-    flat-target-data
-    :scroll="{ height: 300, fullHeight: true }"
-  />
+  <IxProTransfer v-model:value="targetKeys" type="tree" mode="immediate" :data-source="dataSource" flat-target-data />
 </template>
 
 <script setup lang="ts">

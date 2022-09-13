@@ -1,11 +1,5 @@
 <template>
-  <IxProTransfer
-    v-model:value="targetKeys"
-    type="tree"
-    pagination
-    :data-source="dataSource"
-    :scroll="{ height: 300, fullHeight: true }"
-  />
+  <IxProTransfer v-model:value="targetKeys" type="tree" pagination :data-source="dataSource" />
 </template>
 
 <script setup lang="ts">

@@ -28,7 +28,6 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${props.isSource ? 'source' : 'target'}`]: true,
-        [`${prefixCls}-virtual`]: transferProps.virtual && transferProps.scroll,
         [`${prefixCls}-disabled`]: transferProps.disabled,
       })
     })

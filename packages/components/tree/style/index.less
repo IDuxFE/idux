@@ -12,6 +12,22 @@
     background-color: @tree-background-color-focused;
   }
 
+  &-auto-height {
+    height: 100%;
+
+    .@{tree-prefix}-content {
+      height: 100%;
+    }
+  }
+
+  &:not(&-virtual) &-content {
+    overflow: auto;
+  }
+  &-content-inner {
+    display: flex;
+    flex-flow: column wrap;
+  }
+
   &-blocked {
     .@{tree-node-prefix} {
       transition: background-color @transition-duration-base;

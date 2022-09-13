@@ -76,7 +76,10 @@ export function useTransferTreeProps(
   })
 
   return computed<TreeProps>(() => {
+    const height = isNumber(props.scroll?.height) ? props.scroll?.height : undefined
+
     return {
+      autoHeight: !height,
       ...(props.treeProps ?? {}),
       blocked: true,
       cascade: true,
@@ -88,7 +91,7 @@ export function useTransferTreeProps(
       disabled: node => _disabledKeys.value.has(getKey.value(node as TransferData)) || !!props.disabled,
       draggable: false,
       expandedKeys: isSource ? sourceExpandedKeys.value : targetExpandedKeys.value,
-      height: isNumber(props.scroll?.height) ? props.scroll?.height : undefined,
+      height,
       getKey: getKey.value as (node: TreeNode) => VKey,
       loadChildren: loadChildren.value,
       selectable: true,

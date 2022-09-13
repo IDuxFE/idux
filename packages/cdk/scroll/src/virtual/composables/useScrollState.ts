@@ -25,6 +25,7 @@ export function useScrollState(
   useVirtual: ComputedRef<boolean>,
   getKey: ComputedRef<GetKey>,
   scrollTop: Ref<number>,
+  containerHeight: ComputedRef<number>,
   heightUpdatedMark: Ref<number>,
   heights: Map<VKey, number>,
 ): ScrollStateContext {
@@ -34,15 +35,7 @@ export function useScrollState(
   const endIndex = ref(0)
 
   watch(
-    [
-      useVirtual,
-      () => props.dataSource,
-      () => props.itemHeight,
-      () => props.height,
-      getKey,
-      scrollTop,
-      heightUpdatedMark,
-    ],
+    [useVirtual, () => props.dataSource, () => props.itemHeight, containerHeight, getKey, scrollTop, heightUpdatedMark],
     ([virtual, dataSource, itemHeight, height, getKey, scrollTop]) => {
       const {
         scrollHeight: totalHeight,
@@ -73,7 +66,7 @@ function calcState(
 ) {
   const dataLength = dataSource.length
   // Always use virtual scroll bar in avoid shaking
-  if (!virtual || dataLength === 0 || itemHeight * dataLength <= height) {
+  if (!virtual || dataLength === 0 || (!virtual && itemHeight * dataLength <= height)) {
     return { scrollHeight: virtual ? fillerRef.value?.offsetHeight ?? 0 : 0, start: 0, end: dataLength - 1 }
   }
 

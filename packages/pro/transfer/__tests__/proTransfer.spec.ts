@@ -131,24 +131,54 @@ describe('ProTransfer', () => {
     const [sourceTable, targetTable] = wrapper.findAll('.ix-table')
     const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
 
-    expect(sourceTable.find('tbody').findAll('tr').length).toBe(16)
-    expect(targetTable.find('tbody').findAll('tr').length).toBe(4)
+    expect(sourceTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(16)
+    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(4)
 
     await wrapper.setProps({ value: [0, 1, 2, 3, 4] })
 
-    expect(sourceTable.find('tbody').findAll('tr').length).toBe(15)
-    expect(targetTable.find('tbody').findAll('tr').length).toBe(5)
+    expect(sourceTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(15)
+    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(5)
 
-    await sourceTable.find('tbody').findAll('tr')[0].find('.ix-checkbox').find('input').setValue(true)
-    await sourceTable.find('tbody').findAll('tr')[1].find('.ix-checkbox').find('input').setValue(true)
-    await sourceTable.find('tbody').findAll('tr')[2].find('.ix-checkbox').find('input').setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[0]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[1]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[2]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
 
     await appendTrigger.trigger('click')
     expect(onChange).toBeCalledWith([0, 1, 2, 3, 4, 5, 7], [0, 1, 2, 3, 4])
 
-    await targetTable.find('tbody').findAll('tr')[0].find('.ix-checkbox').find('input').setValue(true)
-    await targetTable.find('tbody').findAll('tr')[1].find('.ix-checkbox').find('input').setValue(true)
-    await targetTable.find('tbody').findAll('tr')[2].find('.ix-checkbox').find('input').setValue(true)
+    await targetTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[0]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await targetTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[1]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await targetTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[2]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
     await removeTrigger.trigger('click')
     expect(onChange).toBeCalledWith([1, 3, 4], [0, 1, 2, 3, 4])
   })
@@ -185,27 +215,51 @@ describe('ProTransfer', () => {
     const wrapper = ProTableTransferMount({ props: { mode: 'immediate' } })
     const [sourceTable] = wrapper.findAll('.ix-table')
 
-    await sourceTable.find('tbody').findAll('tr')[0].find('.ix-checkbox').find('input').setValue(true)
-    await sourceTable.find('tbody').findAll('tr')[1].find('.ix-checkbox').find('input').setValue(true)
-    await sourceTable.find('tbody').findAll('tr')[2].find('.ix-checkbox').find('input').setValue(true)
-    await sourceTable.find('tbody').findAll('tr')[3].find('.ix-checkbox').find('input').setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[0]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[1]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[2]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
+    await sourceTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[3]
+      .find('.ix-checkbox')
+      .find('input')
+      .setValue(true)
 
     const [, targetTable] = wrapper.findAll('.ix-table')
 
-    expect(targetTable.find('tbody').findAll('tr').length).toBe(3)
+    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(3)
     expect(
-      targetTable.find('tbody').find('tr').find('.ix-pro-transfer-table-content-removable-label').exists(),
+      targetTable
+        .find('tbody')
+        .find('tr:not(.ix-table-measure-row)')
+        .find('.ix-pro-transfer-table-content-removable-label')
+        .exists(),
     ).toBeTruthy()
 
     await Promise.all(
       targetTable
         .find('tbody')
-        .findAll('tr')
+        .findAll('tr:not(.ix-table-measure-row)')
         .slice(0, 2)
         .map(tr => tr.find('.ix-pro-transfer-table-content-close-icon').trigger('click')),
     )
 
-    expect(targetTable.find('tbody').findAll('tr').length).toBe(2)
+    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(2)
   })
 
   test('tree immediate work', async () => {
@@ -382,7 +436,7 @@ describe('ProTransfer', () => {
     const label = wrapper
       .findAll('.ix-table')[1]
       .find('tbody')
-      .find('tr')
+      .find('tr:not(.ix-table-measure-row)')
       .find('.ix-pro-transfer-table-content-removable-label')
     expect(label.text()).toContain('transfer custom Cell test')
     expect(label.find('.ix-pro-transfer-table-content-close-icon').exists()).toBe(true)
@@ -429,7 +483,7 @@ describe('ProTransfer', () => {
     const label = wrapper
       .findAll('.ix-table')[1]
       .find('tbody')
-      .find('tr')
+      .find('tr:not(.ix-table-measure-row)')
       .find('.ix-pro-transfer-table-content-removable-label')
     expect(label.text()).toContain('transfer custom Cell test')
     expect(label.find('.ix-pro-transfer-table-content-close-icon').exists()).toBe(true)

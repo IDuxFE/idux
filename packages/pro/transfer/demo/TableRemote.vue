@@ -8,7 +8,7 @@
     :searchValue="searchValue"
     :pagination="pagination"
     :spin="spin"
-    :scroll="{ height: 300, width: { source: 600 }, fullHeight: true }"
+    :scroll="{ width: { source: 600 } }"
     :searchable="{ source: true, target: false }"
     :on-search="handleSearchChange"
   >

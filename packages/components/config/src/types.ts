@@ -556,6 +556,7 @@ export interface TooltipConfig {
 }
 
 export interface TreeConfig {
+  autoHeight: boolean
   blocked: boolean
   childrenKey: string
   expandIcon: string | [string, string]

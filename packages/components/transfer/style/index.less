@@ -3,10 +3,15 @@
 .@{transfer-prefix} {
   .reset-component();
 
+  height: @transfer-height;
   display: flex;
   align-items: stretch;
   font-size: @transfer-font-size;
   color: @transfer-color;
+
+  &-fit-content {
+    height: auto;
+  }
 
   &-operations {
     min-width: @transfer-operations-min-width;

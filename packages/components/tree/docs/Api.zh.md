@@ -10,6 +10,7 @@
 | `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:loadedKeys` | 已经加载完毕的节点的 `key` | `VKey[]` | - | - | - |
 | `v-model:selectedKeys` | 选中节点的 `key` 数组 | `VKey[]` | - | - | - |
+| `autoHeight` | 是否自适应高度 | `boolean` | `false` | ✅ | - |
 | `blocked` | 节点整行撑开 | `boolean` | `false` | ✅ | - |
 | `cascade` | 是否开启级联功能 | `boolean` | `false` | - | - |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |

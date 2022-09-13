@@ -5,7 +5,7 @@
     mode="immediate"
     :data-source="dataSource"
     :table-props="tableProps"
-    :scroll="{ height: 300, width: { source: 600 }, fullHeight: true }"
+    :scroll="{ width: { source: 600 } }"
   />
 </template>
 
