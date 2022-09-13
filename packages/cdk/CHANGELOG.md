@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.6](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-09-13)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** scrollTop error caused by miscalculation ([#1120](https://github.com/IDuxFE/idux/issues/1120)) ([f16c97b](https://github.com/IDuxFE/idux/commit/f16c97b6c5bb353e8b50503108d835d0aea16d15))
+* **comp: overlay:** first vnode is comment node ([#1116](https://github.com/IDuxFE/idux/issues/1116)) ([d0d1e8e](https://github.com/IDuxFE/idux/commit/d0d1e8e9ed7134a602820d72efb98118770a680c))
+* **comp:select:** onSearch not work with searchable='overlay' ([#1118](https://github.com/IDuxFE/idux/issues/1118)) ([96aa237](https://github.com/IDuxFE/idux/commit/96aa2373fa930c6ce6a70275878f9c62262df44b))
+
+
+### Features
+
+* **cdk:scroll, comp:transfer, pro:transfer:** add autoHeight support for virtualScroll, refactor transfer style ([#920](https://github.com/IDuxFE/idux/issues/920)) ([5eb8553](https://github.com/IDuxFE/idux/commit/5eb855344addd3c3627ca902add2ca0f8b62881f))
+* **comp:*:** container is supported for all overlay related components ([#1122](https://github.com/IDuxFE/idux/issues/1122)) ([fe92709](https://github.com/IDuxFE/idux/commit/fe92709b6121ad1733429dbd03510f542336ff4d))
+
+
+
+
+
 # [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
 
 

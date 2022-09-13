@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.6](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-09-13)
+
+
+### Bug Fixes
+
+* **comp:locales,pro:locales:** update the english locale for all components ([#1115](https://github.com/IDuxFE/idux/issues/1115)) ([6e18697](https://github.com/IDuxFE/idux/commit/6e18697ff12f66fa3e5714cfe7f8055e6236b1e1))
+* **comp:table:** sync design and add class to all table elements ([#1117](https://github.com/IDuxFE/idux/issues/1117)) ([474c91c](https://github.com/IDuxFE/idux/commit/474c91c5463a611e6a8972834dcd566e45e60466))
+* **pro:search:**  error when deleting previsous item with backspace ([#1130](https://github.com/IDuxFE/idux/issues/1130)) ([670033c](https://github.com/IDuxFE/idux/commit/670033cafcfa187e57fa533da55d5c19bf9096d2))
+* **pro:tree:** collapse icon style error ([#1114](https://github.com/IDuxFE/idux/issues/1114)) ([af647b0](https://github.com/IDuxFE/idux/commit/af647b0cefb2758b09a0da6f6cfce2832d5d9b1a))
+
+
+### Features
+
+* **cdk:scroll, comp:transfer, pro:transfer:** add autoHeight support for virtualScroll, refactor transfer style ([#920](https://github.com/IDuxFE/idux/issues/920)) ([5eb8553](https://github.com/IDuxFE/idux/commit/5eb855344addd3c3627ca902add2ca0f8b62881f))
+* **comp:*:** container is supported for all overlay related components ([#1122](https://github.com/IDuxFE/idux/issues/1122)) ([fe92709](https://github.com/IDuxFE/idux/commit/fe92709b6121ad1733429dbd03510f542336ff4d))
+
+
+
+
+
 # [1.0.0-rc.5](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-09-02)
 
 
