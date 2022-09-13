@@ -11,50 +11,50 @@
 import type { AbstractControl } from '../controls'
 import type { ValidateError } from '../types'
 
-const defaultName = 'The input'
+const defaultName = 'This field'
 
 export const enUSMessages = {
   default: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const name = control.name
-    return name ? `Validation error on field ${name}` : 'Validation error'
+    return name ? `${name}: Verification failed.` : 'Verification failed.'
   },
   required: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const { name = defaultName, example } = control
-    return `Please enter ${name}${example ? ', for example: ' + example : ''}`
+    return `${name} is required.${example ? ' Example: ' + example : ''}`
   },
   requiredTrue: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const { name = defaultName } = control
-    return `${name} is must be 'true'`
+    return `${name} must be "true".`
   },
   email: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const { example } = control
-    return `Please enter your email address${example ? ', for example: ' + example : ''}`
+    return `Must be a valid email address.${example ? '. Example: ' + example : ''}`
   },
   min: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `Please enter a number not less than ${err.min}`
+    return `Must be a number greater than or equal to ${err.min}`
   },
   max: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `Please enter a number no greater than ${err.max}`
+    return `Must be a number less than or equal to ${err.max}.`
   },
   range: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `Please enter a number between ${err.min}-${err.max}`
+    return `Must be a number ranging from ${err.min} to ${err.max}.`
   },
   minLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     const { minLength, isArray } = err
-    return isArray ? `Please select at least ${minLength} items` : `Please enter at least ${minLength} characters`
+    return isArray ? `Please select at least ${minLength} entries.` : `Must contain at least ${minLength} characters.`
   },
   maxLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     const { maxLength, isArray } = err
-    return isArray ? `Please select at most ${maxLength} items` : `Please enter at most ${maxLength} characters`
+    return isArray ? `Cannot exceed ${maxLength} entries.` : `Cannot exceed ${maxLength} characters.`
   },
   rangeLength: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     const { minLength, maxLength, isArray } = err
     return isArray
-      ? `Please select ${minLength}-${maxLength} items`
-      : `Please enter ${minLength}-${maxLength} characters`
+      ? `Please select ${minLength}-${maxLength} entries.`
+      : `Must be ${minLength}-${maxLength} characters long.`
   },
   pattern: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const { example } = control
-    return `Please enter the correct pattern${example ? ', for example: ' + example : ''}`
+    return `Must be a valid value.${example ? ' Example: ' + example : ''}`
   },
 }
