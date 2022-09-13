@@ -207,12 +207,20 @@ export function useAutoRows(
         },
         { immediate: true },
       ),
-      watch(minRows, () => {
-        setMinHeight()
-      }),
-      watch(maxRows, () => {
-        setMaxHeight()
-      }),
+      watch(
+        minRows,
+        () => {
+          setMinHeight()
+        },
+        { immediate: true },
+      ),
+      watch(
+        maxRows,
+        () => {
+          setMaxHeight()
+        },
+        { immediate: true },
+      ),
     ]
     const { stop: stopResizeObserver } = useResizeObserver(textareaRef, onResize)
     stopWatch = () => {
