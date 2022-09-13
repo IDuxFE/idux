@@ -262,7 +262,7 @@ function useInputEvents(
     const currentStateIndex = searchStates.value.findIndex(state => state.key === props.itemKey)
     const previousState = searchStates.value[currentStateIndex - 1]
 
-    if (previousState.key) {
+    if (previousState?.key) {
       removeSearchState(previousState.key)
     }
   }
