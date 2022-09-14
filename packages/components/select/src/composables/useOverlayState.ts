@@ -14,7 +14,7 @@ import { type ɵSelectorInstance } from '@idux/components/_private/selector'
 export interface OverlayStateContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties>
-  updateOverlay: (rect: DOMRect) => void
+  updateOverlay: (rect?: DOMRect) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
 }
@@ -36,10 +36,14 @@ export function useOverlayState(
   })
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
 
-  const updateOverlay = (rect: DOMRect) => {
-    const { width } = rect
-    if (width > 0) {
-      setOverlayWidth(convertCssPixel(width))
+  const updateOverlay = (rect?: DOMRect) => {
+    if (rect) {
+      const { width } = rect
+      if (width > 0) {
+        setOverlayWidth(convertCssPixel(width))
+        overlayOpened.value && overlayRef.value?.updatePopper()
+      }
+    } else {
       overlayOpened.value && overlayRef.value?.updatePopper()
     }
   }

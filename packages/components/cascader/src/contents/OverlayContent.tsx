@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type VNode, computed, defineComponent, inject } from 'vue'
+import { type VNode, computed, defineComponent, inject, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
@@ -27,6 +27,7 @@ export default defineComponent({
       expandedKeys,
       inputValue,
       setInputValue,
+      updateOverlay,
     } = inject(cascaderToken)!
 
     const contentData = computed(() => {
@@ -39,6 +40,10 @@ export default defineComponent({
         }
       })
       return dataSource
+    })
+
+    watch([() => contentData.value.length, inputValue], () => {
+      updateOverlay()
     })
 
     const handleInput = (evt: Event) => {

@@ -29,8 +29,6 @@ export type ClickOutsideHandler = (evt: MouseEvent) => void
 
 ### useClickOutside
 
-对 [ResizeObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver) 的进一步封装。
-
 ```ts
 /**
  * 为除了特定元素外添加全局点击事件
