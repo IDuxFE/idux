@@ -333,7 +333,7 @@ exports[`Tree > getKey work 2`] = `
 exports[`Tree > height and virtual work 1`] = `
 "<div class=\\"ix-tree ix-tree-active ix-tree-virtual\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
-  <div class=\\"cdk-virtual-scroll ix-tree-content\\" style=\\"position: relative;\\">
+  <div class=\\"cdk-virtual-scroll ix-tree-content\\">
     <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px;\\">
       <div class=\\"cdk-virtual-scroll-filler\\" style=\\"height: 308px;\\">
         <div class=\\"cdk-virtual-scroll-content\\" style=\\"transform: translateY(0px); position: absolute; left: 0px; right: 0px; top: 0px;\\">
