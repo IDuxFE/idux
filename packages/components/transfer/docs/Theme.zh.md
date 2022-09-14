@@ -2,8 +2,8 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
+| `@transfer-height` | `290px` | - | - |
 | `@transfer-list-width` | `260px` | - | - |
-| `@transfer-list-height` | `290px` | - | - |
 | `@transfer-list-border-color` | `@form-border-color` | `@color-graphite-l30` | - |
 | `@transfer-list-border-radius` | `2px` | - | - |
 | `@transfer-list-background-color` | `@form-background-color` | - | - |
@@ -11,9 +11,9 @@
 | `@transfer-color` | `@text-color` | - | - |
 | `@transfer-disabled-color` | `@text-color-disabled` | - | - |
 | `@transfer-list-header-height` | `@height-lg` | - | - |
-| `@transfer-list-header-suffix-margin-left` | `@spacing-md` | - | - |
+| `@transfer-list-header-suffix-margin-left` | `@spacing-md` | `@spacing-sm` | - |
 | `@transfer-list-footer-height` | `@height-lg` | - | - |
-| `@transfer-list-header-padding` | `0 @spacing-md` | - | - |
+| `@transfer-list-header-padding` | `0 @spacing-md` | `0 @spacing-sm 0 @spacing-md` | - |
 | `@transfer-list-footer-padding` | `0 @spacing-sm` | - | - |
 | `@transfer-operations-min-width` | `@spacing-xs` | - | - |
 | `@transfer-operations-padding` | `@spacing-sm` | - | - |

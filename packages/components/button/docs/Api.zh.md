@@ -17,7 +17,7 @@
 | `loading` | 设置加载中状态 | `boolean` |  - | - |- |
 | `mode` | 设置按钮种类 | `'primary' \| 'default' \| 'dashed' \| 'text' \| 'link'` | `'default'` | - |- |
 | `shape` | 设置按钮形状 | `'circle' \| 'round'` | - | - |- |
-| `size` | 设置按钮大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | - |- |
+| `size` | 设置按钮大小 | `'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs'` | `'md'` | - |- |
 | `type` | 原生 `button` 的 `type` 属性 | `'button' \| 'submit' \| 'reset'` | `'button'` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
 
 ### IxButtonGroup

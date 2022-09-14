@@ -30,13 +30,18 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-
+      const iconNode = slots.icon ? slots.icon() : props.icon ? <IxIcon name={props.icon}></IxIcon> : undefined
+      const titleNode = slots.title ? slots.title() : props.title
+      const contentNode = slots.content ? slots.content() : props.content
       return (
         <div class={`${prefixCls}-wrapper`}>
-          <div class={`${prefixCls}-title`}>
-            {slots.icon ? slots.icon() : <IxIcon name={props.icon}></IxIcon>}
-            <span>{slots.title ? slots.title() : props.title}</span>
-          </div>
+          {(iconNode || titleNode) && (
+            <div class={`${prefixCls}-title`}>
+              {iconNode}
+              <span>{titleNode}</span>
+            </div>
+          )}
+          {contentNode && <div class={`${prefixCls}-content`}>{contentNode}</div>}
           <ɵFooter
             v-slots={slots}
             class={`${prefixCls}-footer`}
