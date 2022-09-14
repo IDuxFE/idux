@@ -50,11 +50,6 @@ export default defineComponent({
     const activeSegmentContext = useActiveSegment(props, searchItems, searchStateContext.tempSearchStateAvailable)
     const commonOverlayProps = useCommonOverlayProps(mergedPrefixCls, props, config)
 
-    const overlayContainer = computed(() => {
-      const target = commonOverlayProps.value.target
-      return isFunction(target) ? target() : target
-    })
-
     const { initSearchStates, updateSearchState, clearSearchState, tempSearchState } = searchStateContext
     const { activeSegment, setInactive, setTempActive } = activeSegmentContext
 
@@ -101,6 +96,13 @@ export default defineComponent({
       evt.preventDefault()
       setTempSegmentActive()
     }
+
+    const getContainerEl = () => {
+      const containerProp = commonOverlayProps.value.container
+      const container = isFunction(containerProp) ? containerProp() : containerProp
+
+      return isString(container) ? document.querySelector(container) : container
+    }
     const handleClickOutside = (evt: MouseEvent) => {
       if (!activeSegment.value) {
         previousActiveSegmentName = undefined
@@ -108,11 +110,9 @@ export default defineComponent({
       }
 
       const paths = evt.composedPath()
-      const target = overlayContainer.value
+      const container = getContainerEl()
 
-      if (
-        paths.some(path => (isString(target) ? (path as HTMLElement).classList?.contains(target) : path === target))
-      ) {
+      if (container && paths.includes(container)) {
         return
       }
 
