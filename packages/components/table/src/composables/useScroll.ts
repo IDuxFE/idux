@@ -19,7 +19,7 @@ export function useScroll(
   mergedAutoHeight: ComputedRef<boolean>,
   { setStickyScrollLeft }: StickyContext,
 ): ScrollContext {
-  const { scrollHeadRef, scrollBodyRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
+  const { scrollHeadRef, scrollBodyRef, scrollContentRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
     useScrollRef(setStickyScrollLeft)
 
   __DEV__ &&
@@ -31,13 +31,16 @@ export function useScroll(
     Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
 
   const scrollWithAutoHeight = ref(mergedAutoHeight.value)
-  useResizeObserver(scrollBodyRef, entry => {
-    if (!mergedAutoHeight.value) {
+  const calcScrollWithAutoHeight = () => {
+    const bodyEl = convertElement(scrollBodyRef.value)
+    if (!mergedAutoHeight.value || !bodyEl) {
       scrollWithAutoHeight.value = false
     } else {
-      scrollWithAutoHeight.value = props.virtual || entry.target.scrollHeight > entry.target.clientHeight
+      scrollWithAutoHeight.value = props.virtual || bodyEl.scrollHeight > bodyEl.clientHeight
     }
-  })
+  }
+  useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight)
+  useResizeObserver(scrollContentRef, calcScrollWithAutoHeight)
 
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
   const scrollHeight = computed(
@@ -56,6 +59,7 @@ export function useScroll(
   return {
     scrollHeadRef,
     scrollBodyRef,
+    scrollContentRef,
     scrollFootRef,
     handleScroll,
     scrollTo,
@@ -71,6 +75,7 @@ export function useScroll(
 export interface ScrollContext {
   scrollHeadRef: Ref<HTMLDivElement | undefined>
   scrollBodyRef: Ref<HTMLDivElement | undefined>
+  scrollContentRef: Ref<HTMLTableElement | undefined>
   scrollFootRef: Ref<HTMLDivElement | undefined>
   handleScroll: (evt?: Event, scrollLeft?: number) => void
   scrollTo: VirtualScrollToFn
@@ -90,6 +95,7 @@ export interface ScrollOptions {
 function useScrollRef(setStickyScrollLeft: (value: number) => void) {
   const scrollHeadRef = ref<HTMLDivElement>()
   const scrollBodyRef = ref<HTMLDivElement>()
+  const scrollContentRef = ref<HTMLTableElement>()
   const scrollFootRef = ref<HTMLDivElement>()
 
   const changeStickyScrollLeft = (scrollLeft: number) => {
@@ -159,6 +165,7 @@ function useScrollRef(setStickyScrollLeft: (value: number) => void) {
   return {
     scrollHeadRef,
     scrollBodyRef,
+    scrollContentRef,
     scrollFootRef,
     handleScroll,
     pingedStart,

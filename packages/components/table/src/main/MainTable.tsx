@@ -50,6 +50,7 @@ export default defineComponent({
       isSticky,
       mergedSticky,
       scrollBodyRef,
+      scrollContentRef,
       handleScroll,
       pingedStart,
       pingedEnd,
@@ -159,7 +160,7 @@ export default defineComponent({
 
           const contentRender: VirtualContentRenderFn = children => {
             return (
-              <table class={`${prefixCls}-table`} style={tableStyle.value}>
+              <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body>{children}</Body>
                 {false && <Foot></Foot>}
@@ -192,7 +193,7 @@ export default defineComponent({
         } else {
           children.push(
             <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
-              <table class={`${prefixCls}-table`} style={tableStyle.value}>
+              <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
                 <ColGroup></ColGroup>
                 <Body></Body>
                 {false && <Foot></Foot>}
@@ -207,7 +208,7 @@ export default defineComponent({
       } else {
         children.push(
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
-            <table class={`${prefixCls}-table`} style={tableStyle.value}>
+            <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
               <ColGroup></ColGroup>
               {!props.headless && <Head></Head>}
               <Body></Body>
