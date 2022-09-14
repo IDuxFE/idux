@@ -112,7 +112,7 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
   /**
    * Update popper.
    */
-  update(options: Partial<PopperOptions>): void
+  update(options?: Partial<PopperOptions>): void
   /**
    * Force update popper
    */

@@ -39,6 +39,7 @@ export interface CascaderContext
   setInputValue: (value: string) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
+  updateOverlay: () => void
 }
 
 export const cascaderToken: InjectionKey<CascaderContext> = Symbol('cascaderToken')

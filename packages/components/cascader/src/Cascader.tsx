@@ -111,6 +111,7 @@ export default defineComponent({
       setInputValue,
       overlayOpened,
       setOverlayOpened,
+      updateOverlay,
       mergedData,
       mergedDataMap,
       ...activeStateContext,
