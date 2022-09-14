@@ -79,6 +79,7 @@ export type TransferSlot<T extends TransferData = TransferData> = (
 
 export interface TransferSlots<T extends TransferData = TransferData> extends Slots {
   default?: TransferSlot<T>
+  header?: TransferSlot<T>
   footer?: TransferSlot<T>
   headerLabel?: (params: { data: T[]; isSource: boolean }) => VNode[]
   headerSuffix?: (params: { isSource: boolean }) => VNode[]
@@ -111,6 +112,8 @@ export const transferProps = {
   value: Array as PropType<VKey[]>,
   sourceSelectedKeys: Array as PropType<VKey[]>,
   targetSelectedKeys: Array as PropType<VKey[]>,
+  sourceSearchValue: String,
+  targetSearchValue: String,
 
   clearable: {
     type: Boolean,
@@ -160,6 +163,8 @@ export const transferProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   'onUpdate:sourceSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
   'onUpdate:targetSelectedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:sourceSearchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+  'onUpdate:targetSearchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(keys: any[], oldKeys: any[]) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(isSource: boolean, searchValue: string) => void>>,
   onSelectAll: [Function, Array] as PropType<MaybeArray<(isSource: boolean, selectAll: boolean) => void>>,

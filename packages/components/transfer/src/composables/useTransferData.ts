@@ -12,7 +12,7 @@ import type { PaginationProps } from '@idux/components/pagination'
 
 import { type ComputedRef, computed } from 'vue'
 
-import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type GetKeyFn, useGetKey } from '@idux/components/utils'
 
 export interface TransferDataContext<T extends TransferData = TransferData> {
@@ -70,8 +70,8 @@ export function useTransferData<T extends TransferData = TransferData>(
   const dataKeyMap = computed(() => genDataKeyMap(dataSource.value, getKey.value))
 
   const [targetKeys, setTargetKeys] = useControlledProp(props, 'value', () => [])
-  const [sourceSearchValue, setSourceSearchValue] = useState('')
-  const [targetSearchValue, setTargetSearchValue] = useState('')
+  const [sourceSearchValue, setSourceSearchValue] = useControlledProp(props, 'sourceSearchValue', '')
+  const [targetSearchValue, setTargetSearchValue] = useControlledProp(props, 'targetSearchValue', '')
 
   const targetKeySet = computed(() => new Set(targetKeys.value))
 

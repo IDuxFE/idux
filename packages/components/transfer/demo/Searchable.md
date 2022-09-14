@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 20
 title:
   zh: 可搜索
   en: Searchable
@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-通过设置 `searchable`, `searchFn`、`searchValue` 来控制穿梭框数据的搜索
+通过设置 `searchable`, `searchFn` 来控制穿梭框数据的搜索
 
 ## en
 
-Control search functionality of transfer via props `searchable`, `searchFn`, `searchValue`
+Control search functionality of transfer via props `searchable`, `searchFn`.

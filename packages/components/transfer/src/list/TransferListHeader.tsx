@@ -16,6 +16,7 @@ import { IxIcon } from '@idux/components/icon'
 
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from '../token'
 import { transferListHeaderProps } from '../types'
+import { convertToSlotParams } from '../utils'
 
 export default defineComponent({
   props: transferListHeaderProps,
@@ -42,6 +43,9 @@ export default defineComponent({
       const element = inputRef.value?.getInputElement()
       if (element && element.value !== searchValue.value) {
         element.value = searchValue.value
+      }
+      if (searchInputValue.value !== searchValue.value) {
+        setSearchInputValue(searchValue.value)
       }
     }
     onMounted(() => {
@@ -141,6 +145,10 @@ export default defineComponent({
     }
 
     const renderHeader = (prefixCls: string) => {
+      if (slots.header) {
+        return slots.header({ ...convertToSlotParams(transferBindings), isSource: props.isSource })
+      }
+
       return (
         <div class={`${prefixCls}-inner`}>
           {renderCheckAll(prefixCls)}

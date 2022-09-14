@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 60
 title:
   zh: 自定义label
   en: Custom label

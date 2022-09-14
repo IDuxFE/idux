@@ -6,8 +6,13 @@
     :disabled="disabled"
     show-list-footer
   >
-    <template #header> Custom header </template>
-    <template #footer> Custom footer </template>
+    <template #headerLabel="{ data, isSource }">
+      <span v-if="isSource"> Custom header ({{ data.length }}) </span>
+      <span v-else> Target ({{ data.length }}) </span>
+    </template>
+    <template #headerSuffix>
+      <IxIcon name="plus" :onClick="handleSuffixClick" />
+    </template>
   </IxTransfer>
 </template>
 
@@ -30,4 +35,8 @@ const dataSource: Data[] = Array.from(new Array(20)).map((_, idx) => ({
 }))
 
 const disabled = ref(false)
+
+const handleSuffixClick = (evt: Event) => {
+  console.log(evt)
+}
 </script>
