@@ -17,6 +17,7 @@ export const popconfirmProps = {
   cancelText: String,
   okButton: Object as PropType<ButtonProps>,
   okText: String,
+  content: String,
   icon: {
     type: String,
     default: 'exclamation-circle-filled',

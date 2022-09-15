@@ -1,8 +1,10 @@
 <template>
   <IxRadioGroup v-model:value="size">
+    <IxRadio value="xs">Extra Small</IxRadio>
     <IxRadio value="sm">Small</IxRadio>
     <IxRadio value="md">Medium</IxRadio>
     <IxRadio value="lg">Large</IxRadio>
+    <IxRadio value="xl">Extra Large</IxRadio>
   </IxRadioGroup>
 
   <br />
