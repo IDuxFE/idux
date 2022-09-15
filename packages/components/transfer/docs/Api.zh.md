@@ -9,6 +9,8 @@
 | `v-model:value` | 已选数据数组 | `VKey[]` | - | - | - |
 | `v-model:sourceSelectedKeys` | 源数据列表勾选的keys | `VKey[]` | - | - | - |
 | `v-model:targetSelectedKeys` | 目标数据列表勾选的keys | `VKey[]` | - | - | - |
+| `v-model:sourceSearchValue` | 源数据列表搜索值 | `string` | - | - | - |
+| `v-model:targetSearchValue` | 目标数据列表搜索值 | `string` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
 | `customAdditional` | 自定义选项的额外属性 | `TransferCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
@@ -69,6 +71,7 @@ export interface TransferPaginationProps {
 | `clearIcon` | 清除按钮 | - | - |
 | `default` | 穿梭框列表主体 | `TransferListSlotParams` | - |
 | `empty` | 穿梭框列表空状态 | `EmptyProps` | 仅在使用默认列表时生效 |
+| `header` | 穿梭框列表头部 | `TransferListSlotParams` | - |
 | `footer` | 穿梭框列表底部 | `TransferListSlotParams` | - |
 | `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | - |
 | `headerSuffix` | 穿梭框列表头部后缀 | `{ isSource: boolean }` | - |

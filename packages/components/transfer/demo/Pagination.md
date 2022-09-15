@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 30
 title:
   zh: 分页
   en: Pagination

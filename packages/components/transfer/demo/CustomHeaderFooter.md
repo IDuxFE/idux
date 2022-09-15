@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 70
 title:
   zh: 自定义header、footer
   en: Custom header and footer
@@ -7,7 +7,7 @@ title:
 
 ## zh
 
-通过 `headerLabel`, `headerSuffix` 和 `footer` 插槽自定义 header 和 footer。
+通过 `header` 和 `footer` 插槽自定义 header 和 footer。
 
 ## en
 
