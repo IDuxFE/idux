@@ -66,7 +66,7 @@ function calcState(
 ) {
   const dataLength = dataSource.length
   // Always use virtual scroll bar in avoid shaking
-  if (!virtual || dataLength === 0 || (!virtual && itemHeight * dataLength <= height)) {
+  if (!virtual || dataLength === 0 || itemHeight * dataLength <= height) {
     return { scrollHeight: virtual ? fillerRef.value?.offsetHeight ?? 0 : 0, start: 0, end: dataLength - 1 }
   }
 
