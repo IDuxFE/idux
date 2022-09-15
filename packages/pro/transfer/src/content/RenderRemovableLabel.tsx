@@ -13,6 +13,7 @@ import { IxIcon } from '@idux/components/icon'
 export function renderRemovableLabel(
   key: VKey,
   disabled: boolean,
+  ellipsis: boolean,
   defaultSlot: Slot | null,
   triggerRemove: (keys: VKey[]) => void,
   prefixCls: string,
@@ -20,9 +21,14 @@ export function renderRemovableLabel(
   const onClick = () => {
     triggerRemove([key])
   }
+
+  const classes = {
+    [`${prefixCls}-removable-label`]: true,
+    [`${prefixCls}-removable-label-ellipsis`]: !!ellipsis,
+  }
   return (
-    <span class={`${prefixCls}-removable-label`}>
-      {defaultSlot?.()}
+    <span class={classes}>
+      <span class={`${prefixCls}-removable-label-text`}>{defaultSlot?.()}</span>
       {!disabled && renderRemoveIcon(prefixCls, onClick)}
     </span>
   )

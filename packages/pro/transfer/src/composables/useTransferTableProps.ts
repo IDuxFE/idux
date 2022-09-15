@@ -107,6 +107,7 @@ function convertTableColumns(
           return renderRemovableLabel(
             key,
             disabledDataSourceKeys.value.has(key),
+            false,
             null,
             triggerRemove,
             mergedPrefixCls.value,
@@ -114,7 +115,7 @@ function convertTableColumns(
         },
       })
     } else {
-      const originalCustomCell = lastCol.customCell
+      const { customCell: originalCustomCell, ellipsis } = lastCol
       //eslint-disable-next-line @typescript-eslint/no-explicit-any
       const renderLabel = (data: { value: any; record: any; rowIndex: number }) => {
         if (!originalCustomCell) {
@@ -135,6 +136,7 @@ function convertTableColumns(
           return renderRemovableLabel(
             key,
             disabledDataSourceKeys.value.has(key),
+            !!ellipsis,
             () => renderLabel(data),
             triggerRemove,
             mergedPrefixCls.value,
