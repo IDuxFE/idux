@@ -8,22 +8,22 @@
 import { computed, defineComponent, inject } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { ɵCheckableList } from '@idux/components/_private/checkable-list'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
+import TransferList from '../list/List'
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from '../token'
-import { type TransferData, transferListBodyProps } from '../types'
+import { type TransferData, transferBodyProps } from '../types'
 import { convertToSlotParams } from '../utils'
 
 export default defineComponent({
-  props: transferListBodyProps,
+  props: transferBodyProps,
   setup(props) {
     const {
       props: transferProps,
       slots,
       mergedPrefixCls,
-      sourceCheckableListRef,
-      targetCheckableListRef,
+      sourceTransferListRef,
+      targetTransferListRef,
       getKey,
     } = inject(transferContext)!
 
@@ -32,7 +32,7 @@ export default defineComponent({
       transferBindings
     const { triggerRemove } = inject(TRANSFER_OPERATIONS_TOKEN)!
 
-    const checkableListRef = props.isSource ? sourceCheckableListRef : targetCheckableListRef
+    const transferListRef = props.isSource ? sourceTransferListRef : targetTransferListRef
 
     const handleScroll = (evt: Event) => {
       callEmit(transferProps.onScroll, props.isSource, evt)
@@ -77,8 +77,8 @@ export default defineComponent({
       }
 
       return (
-        <ɵCheckableList
-          ref={checkableListRef}
+        <TransferList
+          ref={transferListRef}
           dataSource={checkListData.value}
           getKey={getKey.value}
           checked={item => selectedKeySet.value.has(getKey.value(item))}
@@ -106,8 +106,8 @@ export default defineComponent({
     }
 
     return () => {
-      const prefixCls = `${mergedPrefixCls.value}-list-body`
-      return <div class={`${mergedPrefixCls.value}-list-body`}>{renderBody(prefixCls)}</div>
+      const prefixCls = `${mergedPrefixCls.value}-body`
+      return <div class={`${mergedPrefixCls.value}-body`}>{renderBody(prefixCls)}</div>
     }
   },
 })

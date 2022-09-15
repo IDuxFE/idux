@@ -12,11 +12,11 @@ import { isArray } from 'lodash-es'
 import { IxPagination } from '@idux/components/pagination'
 
 import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from '../token'
-import { transferListFooterProps } from '../types'
+import { transferFooterProps } from '../types'
 import { convertToSlotParams } from '../utils'
 
 export default defineComponent({
-  props: transferListFooterProps,
+  props: transferFooterProps,
   setup(props) {
     const { slots, props: transferProps, mergedPrefixCls } = inject(transferContext)!
     const transferBindings = props.isSource ? inject(TRANSFER_SOURCE_TOKEN)! : inject(TRANSFER_TARGET_TOKEN)!
@@ -45,7 +45,7 @@ export default defineComponent({
     }
 
     return () => {
-      const prefixCls = `${mergedPrefixCls.value}-list-footer`
+      const prefixCls = `${mergedPrefixCls.value}-footer`
 
       const children = renderFooter(prefixCls)
 

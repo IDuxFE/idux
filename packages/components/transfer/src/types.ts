@@ -177,41 +177,15 @@ export const transferProps = {
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<(isSource: boolean) => void>>,
 } as const
 
-export const transferListProps = {
+export const transferContentProps = {
   isSource: {
     type: Boolean,
     required: true,
   },
 }
-export const transferListBodyProps = transferListProps
-export const transferListHeaderProps = transferListProps
-export const transferListFooterProps = transferListProps
-
-export const transferListItemProps = {
-  checked: {
-    type: Boolean,
-    default: false,
-  },
-  checkable: {
-    type: Boolean,
-    required: true,
-  },
-  removable: {
-    type: Boolean,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  value: {
-    type: [String, Number, Symbol],
-    required: true,
-  },
-  onChange: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
-  onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
-} as const
-
+export const transferBodyProps = transferContentProps
+export const transferHeaderProps = transferContentProps
+export const transferFooterProps = transferContentProps
 export interface TransferApis {
   scrollTo: (isSource: boolean, ...params: Parameters<VirtualScrollToFn>) => ReturnType<VirtualScrollToFn>
 }
@@ -236,3 +210,76 @@ export interface TransferData<K = VKey> {
   disabled?: boolean
   [key: string]: unknown
 }
+
+export interface TransferListScroll {
+  height?: string | number
+  fullHeight?: boolean
+}
+
+export const transferListProps = {
+  dataSource: Array as PropType<TransferData[]>,
+  checkable: {
+    type: Boolean,
+    default: true,
+  },
+  removable: {
+    type: Boolean,
+    default: false,
+  },
+  checked: Function as PropType<(item: TransferData) => boolean>,
+  customAdditional: { type: Function as PropType<TransferCustomAdditional>, default: undefined },
+  disabled: Function as PropType<(item: TransferData) => boolean>,
+  getKey: Function as PropType<(item: TransferData) => VKey>,
+  labelKey: String,
+  virtual: {
+    type: Boolean,
+    default: false,
+  },
+  scroll: Object as PropType<TransferScroll>,
+  onCheckChange: [Function, Array] as PropType<MaybeArray<(item: TransferData, checked: boolean) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<(item: TransferData) => void>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onScrolledChange: [Function, Array] as PropType<
+    MaybeArray<(startIndex: number, endIndex: number, visibleData: unknown[]) => void>
+  >,
+  onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+} as const
+
+export const transferListItemProps = {
+  checked: {
+    type: Boolean,
+    default: false,
+  },
+  checkable: {
+    type: Boolean,
+    default: true,
+  },
+  removable: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  label: String,
+  value: {
+    type: [String, Number, Symbol] as PropType<VKey>,
+    required: true,
+  },
+  onCheckChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
+  onRemove: [Function, Array] as PropType<MaybeArray<() => void>>,
+} as const
+
+export interface TransferListApi {
+  scrollTo: VirtualScrollToFn
+}
+
+export type TransferListProps = ExtractInnerPropTypes<typeof transferListProps>
+export type TransferListItemProps = ExtractInnerPropTypes<typeof transferListItemProps>
+export type TransferListPublicProps = ExtractPublicPropTypes<typeof transferListProps>
+export type TransferListComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof TransferListPublicProps> & TransferListPublicProps,
+  TransferListApi
+>
+export type TransferListInstance = InstanceType<DefineComponent<TransferListProps, TransferListApi>>

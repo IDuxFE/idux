@@ -2,18 +2,17 @@ import type { TableColumn } from '@idux/components/table'
 
 import { MountingOptions, mount } from '@vue/test-utils'
 
-import { ɵCheckableList } from '@idux/components/_private/checkable-list'
 import { IxButton } from '@idux/components/button'
+import { IxTransferList } from '@idux/components/transfer'
 import TransferOperations from '@idux/components/transfer/src/TransferOperations'
 
 import ProTransfer from '../src/ProTransfer'
-import { ProTransferProps } from '../src/types'
+import { ProTransferProps, TreeTransferData } from '../src/types'
 
-interface Data {
+interface Data extends TreeTransferData<'children'> {
   key: string
   label: string
   disabled?: boolean
-  children?: Data[]
 }
 
 const createData = (idx: number): Data => ({
@@ -287,20 +286,20 @@ describe('ProTransfer', () => {
     await sourceTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
     await appendTrigger.trigger('click')
 
-    const targetList = wrapper.findComponent(ɵCheckableList)
+    const targetList = wrapper.findComponent(IxTransferList)
 
-    expect(targetList.findAll('.ix-checkable-list-item').length).toBe(3)
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(3)
 
     await Promise.all(
       targetList
-        .findAll('.ix-checkable-list-item')
+        .findAll('.ix-transfer-list-item')
         .slice(0, 2)
         .map(item => item.find('input').setValue(true)),
     )
 
     await removeTrigger.trigger('click')
 
-    expect(targetList.findAll('.ix-checkable-list-item').length).toBe(1)
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(1)
   })
 
   test('flatTargetData and immediate work', async () => {
@@ -310,14 +309,14 @@ describe('ProTransfer', () => {
 
     await sourceTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
 
-    const targetList = wrapper.findComponent(ɵCheckableList)
+    const targetList = wrapper.findComponent(IxTransferList)
 
-    expect(targetList.findAll('.ix-checkable-list-item').length).toBe(3)
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(3)
 
-    await targetList.findAll('.ix-checkable-list-item')[0].find('.ix-checkable-list-item-close-icon').trigger('click')
-    await targetList.findAll('.ix-checkable-list-item')[1].find('.ix-checkable-list-item-close-icon').trigger('click')
+    await targetList.findAll('.ix-transfer-list-item')[0].find('.ix-transfer-list-item-close-icon').trigger('click')
+    await targetList.findAll('.ix-transfer-list-item')[1].find('.ix-transfer-list-item-close-icon').trigger('click')
 
-    expect(targetList.findAll('.ix-checkable-list-item').length).toBe(1)
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(1)
   })
 
   test('loadChildren work', async () => {

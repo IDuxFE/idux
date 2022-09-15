@@ -1,10 +1,9 @@
 import { MountingOptions, mount } from '@vue/test-utils'
 import { h } from 'vue'
 
-import CheckableListItem from '@idux/components/_private/checkable-list/src/CheckableListItem'
-
 import Transfer from '../src/Transfer'
-import TransferList from '../src/list/TransferList'
+import TransferContent from '../src/content/Content'
+import TransferListItem from '../src/list/ListItem'
 import { TransferListSlotParams, TransferOperationsSlotParams, TransferProps } from '../src/types'
 
 const mockedDataSource = Array.from(new Array(20)).map((_, idx) => ({
@@ -179,7 +178,7 @@ describe('Transfer', () => {
 
     expect(wrapper.element).toMatchSnapshot()
     expect(
-      wrapper.findAllComponents(CheckableListItem).every(item => item.find('.custom-label-slot-test').exists()),
+      wrapper.findAllComponents(TransferListItem).every(item => item.find('.custom-label-slot-test').exists()),
     ).toBeTruthy()
   })
 
@@ -219,7 +218,7 @@ describe('Transfer', () => {
     })
 
     expect(wrapper.element).toMatchSnapshot()
-    expect(wrapper.findAllComponents(TransferList)[1].find('.custom-empty-slot-test').exists()).toBeTruthy()
+    expect(wrapper.findAllComponents(TransferContent)[1].find('.custom-empty-slot-test').exists()).toBeTruthy()
   })
 
   test('clearIcon slot work', async () => {
@@ -231,6 +230,6 @@ describe('Transfer', () => {
     })
 
     expect(wrapper.element).toMatchSnapshot()
-    expect(wrapper.findAllComponents(TransferList)[1].find('.custom-clear-icon-slot-test').exists()).toBeTruthy()
+    expect(wrapper.findAllComponents(TransferContent)[1].find('.custom-clear-icon-slot-test').exists()).toBeTruthy()
   })
 })

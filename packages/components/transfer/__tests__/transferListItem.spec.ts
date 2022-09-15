@@ -5,23 +5,23 @@ import { renderWork } from '@tests'
 
 import { IxCheckbox } from '@idux/components/checkbox'
 
-import CheckableListItem from '../src/CheckableListItem'
-import { checkableListContext } from '../src/token'
-import { CheckableListItemProps } from '../src/types'
+import TransferListItem from '../src/list/ListItem'
+import { transferListContext } from '../src/token'
+import { TransferListItemProps } from '../src/types'
 
 const mountGlobalOpts = {
   provide: {
-    [checkableListContext as symbol]: {
-      mergedPrefixCls: computed(() => 'ix-checkable-list'),
+    [transferListContext as symbol]: {
+      mergedPrefixCls: computed(() => 'ix-transfer-list'),
     },
   },
 }
 
-describe('CheckableListItem', () => {
-  const CheckableListItemMount = (options?: MountingOptions<Partial<CheckableListItemProps>>) =>
-    mount(CheckableListItem, { ...(options as MountingOptions<CheckableListItemProps>), global: mountGlobalOpts })
+describe('TransferListItem', () => {
+  const CheckableListItemMount = (options?: MountingOptions<Partial<TransferListItemProps>>) =>
+    mount(TransferListItem, { ...(options as MountingOptions<TransferListItemProps>), global: mountGlobalOpts })
 
-  renderWork<CheckableListItemProps>(CheckableListItem, {
+  renderWork<TransferListItemProps>(TransferListItem, {
     props: {
       value: '1',
       label: 'Option-1',
@@ -65,13 +65,13 @@ describe('CheckableListItem', () => {
       },
     })
 
-    const removeTrigger = wrapper.find('.ix-checkable-list-item-close-icon')
+    const removeTrigger = wrapper.find('.ix-transfer-list-item-close-icon')
     expect(removeTrigger.exists()).toBeTruthy()
     await removeTrigger.trigger('click')
     expect(onRemove).toBeCalled()
 
     await wrapper.setProps({ removable: false })
-    expect(wrapper.find('.ix-checkable-list-item-close-icon').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-transfer-list-item-close-icon').exists()).toBeFalsy()
   })
 
   test('disabled work', async () => {
@@ -87,16 +87,16 @@ describe('CheckableListItem', () => {
       },
     })
 
-    expect(wrapper.classes()).toContain('ix-checkable-list-item-disabled')
-    expect(wrapper.find('.ix-checkable-list-item-close-icon').exists()).toBeFalsy()
+    expect(wrapper.classes()).toContain('ix-transfer-list-item-disabled')
+    expect(wrapper.find('.ix-transfer-list-item-close-icon').exists()).toBeFalsy()
     await wrapper.findComponent(IxCheckbox).find('input').setValue(true)
     expect(onCheckChange).not.toBeCalled()
 
     await wrapper.findComponent(IxCheckbox).find('input').setValue(false)
 
     await wrapper.setProps({ disabled: false })
-    expect(wrapper.classes()).not.toContain('ix-checkable-list-item-disabled')
-    expect(wrapper.find('.ix-checkable-list-item-close-icon').exists()).toBeTruthy()
+    expect(wrapper.classes()).not.toContain('ix-transfer-list-item-disabled')
+    expect(wrapper.find('.ix-transfer-list-item-close-icon').exists()).toBeTruthy()
     await wrapper.findComponent(IxCheckbox).find('input').setValue(true)
     expect(onCheckChange).toBeCalledWith(true)
   })

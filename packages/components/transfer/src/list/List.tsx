@@ -11,30 +11,30 @@ import { CdkVirtualScroll, type VirtualItemRenderFn, type VirtualScrollInstance 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
-import CheckableListItem from './CheckableListItem'
-import { checkableListContext } from './token'
-import { type CheckableListApi, type CheckableListData, checkableListProps } from './types'
+import { transferListContext } from '../token'
+import { type TransferData, type TransferListApi, transferListProps } from '../types'
+import ListItem from './ListItem'
 
 export default defineComponent({
-  name: 'ɵCheckableList',
-  props: checkableListProps,
+  name: 'IxTransferList',
+  props: transferListProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
-    const mergedPrefixCls = computed(() => `${common.prefixCls}-checkable-list`)
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-transfer-list`)
     const labelKey = computed(() => props.labelKey ?? 'label')
     const virtualScrollRef = ref<VirtualScrollInstance>()
 
-    provide(checkableListContext, {
+    provide(transferListContext, {
       mergedPrefixCls,
     })
 
-    const checkableListApi: CheckableListApi = {
+    const transferListApi: TransferListApi = {
       scrollTo: (...params) => virtualScrollRef.value?.scrollTo(...params),
     }
 
-    expose(checkableListApi)
+    expose(transferListApi)
 
-    const getKey = (item: CheckableListData) => (props.getKey?.(item) ?? item.key)!
+    const getKey = (item: TransferData) => (props.getKey?.(item) ?? item.key)!
 
     const handleScroll = (evt: Event) => {
       callEmit(props.onScroll, evt)
@@ -46,7 +46,7 @@ export default defineComponent({
       callEmit(props.onScrolledChange, startIndex, endIndex, visibleData)
     }
 
-    const renderListItem: VirtualItemRenderFn<CheckableListData> = ({ item, index }) => {
+    const renderListItem: VirtualItemRenderFn<TransferData> = ({ item, index }) => {
       const key = getKey(item)
       const onCheckChange = (checked: boolean) => {
         callEmit(props.onCheckChange, item, checked)
@@ -58,7 +58,7 @@ export default defineComponent({
       const customAdditional = props.customAdditional ? props.customAdditional({ data: item, index }) : undefined
 
       return (
-        <CheckableListItem
+        <ListItem
           key={key}
           value={key!}
           label={item[labelKey.value] as string}
@@ -69,7 +69,7 @@ export default defineComponent({
           v-slots={{ default: slots.label && (() => slots.label?.(item)) }}
           onCheckChange={onCheckChange}
           onRemove={onRemove}
-          {...item.additional}
+          {...(item.additional ?? {})}
           {...customAdditional}
         />
       )
@@ -83,15 +83,14 @@ export default defineComponent({
         return
       }
 
-      if (virtual && scroll) {
-        const { height, fullHeight } = scroll
+      if (virtual) {
         return (
           <CdkVirtualScroll
             ref={virtualScrollRef}
             dataSource={data}
-            fullHeight={fullHeight}
+            fullHeight={!!scroll?.fullHeight}
             getKey={getKey}
-            height={height as number}
+            height={(scroll?.height as number) ?? '100%'}
             itemHeight={32}
             itemRender={renderListItem}
             virtual

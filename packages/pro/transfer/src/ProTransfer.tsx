@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
 import type { TableInstance } from '@idux/components/table'
 import type { TreeInstance } from '@idux/components/tree'
 
@@ -17,6 +16,7 @@ import {
   IxTransfer,
   TRANSFER_DATA_STRATEGIES,
   type TransferDataStrategiesConfig,
+  type TransferListInstance,
   type TransferListSlotParams,
 } from '@idux/components/transfer'
 import { useGetKey } from '@idux/components/utils'
@@ -53,8 +53,8 @@ export default defineComponent({
     const targetKeySet = computed(() => new Set(targetKeys.value))
     const childrenKey = computed(() => props.treeProps?.childrenKey ?? 'children')
 
-    const sourceContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
-    const targetContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
+    const sourceContentRef = ref<TransferListInstance | TableInstance | TreeInstance>()
+    const targetContentRef = ref<TransferListInstance | TableInstance | TreeInstance>()
 
     const { dataKeyMap, parentKeyMap, expandedKeysContext } = useTreeContext(props, childrenKey, targetKeys)
     const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
@@ -157,9 +157,10 @@ export default defineComponent({
       }
       const transferSlots = {
         default: renderTransferListBody,
+        header: slots.header,
+        footer: slots.footer,
         headerLabel: props.type === 'tree' ? renderTranferTreeHeaderLabel : slots.headerLabel,
         headerSuffix: slots.headerSuffix,
-        footer: slots.footer,
         clearIcon: slots.clearIcon,
         operations: slots.operations,
       }

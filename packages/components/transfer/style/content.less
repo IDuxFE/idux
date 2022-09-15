@@ -1,0 +1,115 @@
+.@{transfer-prefix}-content {
+  width: @transfer-content-width;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border: 1px solid @transfer-border-color;
+  border-radius: @transfer-border-radius;
+  color: @transfer-color;
+  background-color: @transfer-background-color;
+
+  &-disabled {
+    opacity: 0.6;
+  }
+
+  & .@{spin-prefix} {
+    height: 100%;
+
+    &-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.@{transfer-prefix}-header {
+  width: 100%;
+  height: @transfer-header-height;
+  padding: @transfer-header-padding;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid @transfer-border-color;
+
+  &-check-all + &-label {
+    margin-left: @spacing-xs;
+  }
+
+  &-inner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &-search-input {
+    width: @transer-search-width;
+    margin-left: auto;
+  }
+  &-search-icon {
+    font-size: @transfer-search-icon-font-size;
+    color: @transfer-search-icon-color;
+    cursor: pointer;
+  }
+  &-clear-icon {
+    margin-left: auto;
+    font-size: @transfer-clear-icon-font-size;
+    color: @transfer-clear-icon-color;
+    &:hover:not(&-disabled) {
+      color: @transfer-clear-icon-hover-color;
+    }
+    &:focus:not(&-disabled),
+    &:active:not(&-disabled) {
+      color: @transfer-clear-icon-active-color;
+    }
+
+    cursor: pointer;
+
+    &-disabled {
+      color: @transfer-disabled-color;
+      cursor: not-allowed;
+    }
+  }
+
+  &-suffix {
+    margin-left: auto;
+  }
+  &-clear-icon + &-suffix,
+  &-search-input + &-suffix {
+    margin-left: @transfer-header-suffix-margin-left;
+  }
+}
+
+.@{transfer-prefix}-body {
+  width: 100%;
+  flex: auto;
+  overflow: hidden;
+
+  &-empty-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.@{transfer-prefix}-footer {
+  width: 100%;
+  height: @transfer-footer-height;
+  padding: @transfer-footer-padding;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-top: 1px solid @transfer-border-color;
+
+  &-inner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

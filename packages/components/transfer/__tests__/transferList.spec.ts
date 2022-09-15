@@ -5,9 +5,9 @@ import { renderWork } from '@tests'
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
 import { IxCheckbox } from '@idux/components/checkbox'
 
-import CheckableList from '../src/CheckableList'
-import CheckableListItem from '../src/CheckableListItem'
-import { CheckableListProps } from '../src/types'
+import TransferList from '../src/list/List'
+import TransferListItem from '../src/list/ListItem'
+import { TransferListProps } from '../src/types'
 
 const mockedDataSource = Array.from(new Array(20)).map((_, idx) => ({
   key: idx,
@@ -15,10 +15,10 @@ const mockedDataSource = Array.from(new Array(20)).map((_, idx) => ({
 }))
 
 describe('CheckableList', () => {
-  const CheckableListMount = (options?: MountingOptions<Partial<CheckableListProps>>) =>
-    mount(CheckableList, { ...(options as MountingOptions<CheckableListProps>) })
+  const CheckableListMount = (options?: MountingOptions<Partial<TransferListProps>>) =>
+    mount(TransferList, { ...(options as MountingOptions<TransferListProps>) })
 
-  renderWork<CheckableListProps>(CheckableList, {
+  renderWork<TransferListProps>(TransferList, {
     props: { dataSource: mockedDataSource },
   })
 
@@ -29,13 +29,13 @@ describe('CheckableList', () => {
 
     expect(
       wrapper
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [1, 2, 3, 4].includes(item.props().value))
         .every(item => item.props().checked === true),
     ).toBeTruthy()
     expect(
       wrapper
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => ![1, 2, 3, 4].includes(item.props().value))
         .every(item => item.props().checked === false),
     ).toBeTruthy()
@@ -48,13 +48,13 @@ describe('CheckableList', () => {
 
     expect(
       wrapper
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [1, 2, 3, 4].includes(item.props().value))
         .every(item => item.props().disabled === true),
     ).toBeTruthy()
     expect(
       wrapper
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => ![1, 2, 3, 4].includes(item.props().value))
         .every(item => item.props().disabled === false),
     ).toBeTruthy()
@@ -65,7 +65,7 @@ describe('CheckableList', () => {
       props: { dataSource: mockedDataSource, virtual: true, scroll: { height: 100, fullHeight: true } },
     })
 
-    expect(wrapper.classes()).toContain('ix-checkable-list-virtual')
+    expect(wrapper.classes()).toContain('ix-transfer-list-virtual')
     expect(wrapper.findComponent(CdkVirtualScroll).exists()).toBeTruthy()
   })
 
@@ -76,7 +76,7 @@ describe('CheckableList', () => {
     })
 
     await wrapper
-      .findAllComponents(CheckableListItem)
+      .findAllComponents(TransferListItem)
       .find(item => item.props().value === 3)
       ?.findComponent(IxCheckbox)
       .find('input')
@@ -91,9 +91,9 @@ describe('CheckableList', () => {
     })
 
     await wrapper
-      .findAllComponents(CheckableListItem)
+      .findAllComponents(TransferListItem)
       .find(item => item.props().value === 3)
-      ?.find('.ix-checkable-list-item-close-icon')
+      ?.find('.ix-transfer-list-item-close-icon')
       .trigger('click')
     expect(onRemove).toBeCalledWith({ key: 3, label: 'Option-3' })
   })

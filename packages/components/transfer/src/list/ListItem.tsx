@@ -12,13 +12,13 @@ import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 import { convertStringVNode } from '@idux/components/utils'
 
-import { checkableListContext } from './token'
-import { checkableListItemProps } from './types'
+import { transferListContext } from '../token'
+import { transferListItemProps } from '../types'
 
 export default defineComponent({
-  props: checkableListItemProps,
+  props: transferListItemProps,
   setup(props, { slots }) {
-    const { mergedPrefixCls } = inject(checkableListContext)!
+    const { mergedPrefixCls } = inject(transferListContext)!
 
     const onCheckChange = (value: number | boolean | string) => {
       callEmit(props.onCheckChange, !!value)
