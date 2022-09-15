@@ -63,7 +63,7 @@ export default defineComponent({
       const triggerNode = slots.default ? (
         slots.default({ attrs })
       ) : (
-        <span {...attrs} class={`${prefixCls}-trigger`} title={locale.table.layout.title}>
+        <span class={`${prefixCls}-trigger`} {...attrs}>
           <IxIcon name="ellipsis" />
         </span>
       )

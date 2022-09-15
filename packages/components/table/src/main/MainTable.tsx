@@ -18,7 +18,7 @@ import {
   watch,
 } from 'vue'
 
-import { isNumber } from 'lodash-es'
+import { debounce, isNumber } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
 import { CdkVirtualScroll, type VirtualContentRenderFn, type VirtualItemRenderFn } from '@idux/cdk/scroll'
@@ -45,6 +45,7 @@ export default defineComponent({
       mergedPrefixCls,
       mergedSize,
       mergedAutoHeight,
+      columnWidths,
       changeColumnWidth,
       flattedData,
       isSticky,
@@ -81,7 +82,6 @@ export default defineComponent({
     const handleWrapperResize = (evt: ResizeObserverEntry) => {
       const { offsetWidth } = evt.target as HTMLDivElement
       if (offsetWidth !== mainTableWidth.value) {
-        triggerScroll()
         mainTableWidth.value = offsetWidth
       }
     }
@@ -94,6 +94,15 @@ export default defineComponent({
           triggerScroll()
         }
       })
+
+      // see https://github.com/IDuxFE/idux/issues/1140
+      const handlerColumnWidthsChange = () => {
+        const currScrollLeft = convertElement(scrollBodyRef)?.scrollLeft
+        if (currScrollLeft === 0) {
+          triggerScroll()
+        }
+      }
+      watch(columnWidths, debounce(handlerColumnWidthsChange, 16))
 
       onResize(mainTableRef.value, handleWrapperResize)
     })
