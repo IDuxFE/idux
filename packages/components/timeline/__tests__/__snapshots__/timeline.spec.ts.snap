@@ -295,7 +295,7 @@ exports[`Timeline > pending work 3`] = `
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg viewBox=\\"64 64 896 896\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
             <path d=\\"m527.424 64.32 3.712.064a448 448 0 0 1 430.912 432.32v2.368a12.8 12.8 0 0 1-12.8 13.056h-38.336a12.8 12.8 0 0 1-12.8-13.632A384 384 0 0 0 528.64 128.384h-1.792a12.8 12.8 0 0 1-12.608-12.8V77.12a12.8 12.8 0 0 1 13.12-12.8z\\"></path>
           </svg></i></div>
     </div>
