@@ -1,4 +1,5 @@
 @import '../../style/mixins/reset.less';
+@import '../../../components/style/mixins/ellipsis.less';
 
 .@{pro-transfer-prefix} {
   .reset-component();
@@ -41,6 +42,10 @@
       width: 100%;
       align-items: center;
       line-height: @checkbox-line-height;
+
+      &-ellipsis &-text {
+        .ellipsis();
+      }
     }
     &-close-icon {
       padding: @pro-transfer-table-close-icon-padding;
