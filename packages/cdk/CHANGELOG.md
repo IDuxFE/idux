@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
+
+
+### Bug Fixes
+
+* **comp:cascader:** update overlay position after edging ([#1135](https://github.com/IDuxFE/idux/issues/1135)) ([ef352a8](https://github.com/IDuxFE/idux/commit/ef352a87aa8d5f9ac833bb4c2e7c85b428aa76eb))
+
+
+### Features
+
+* **cdk:forms:** standardize English words for form verification ([#1132](https://github.com/IDuxFE/idux/issues/1132)) ([37fe693](https://github.com/IDuxFE/idux/commit/37fe693a6d644bb22dac220799a8f59ce0f0eac8))
+
+
+
+
+
 # [1.0.0-rc.6](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-09-13)
 
 

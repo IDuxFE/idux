@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
+
+
+### Bug Fixes
+
+* **comp:table:** trigger scroll when column widths changes ([#1142](https://github.com/IDuxFE/idux/issues/1142)) ([ee57728](https://github.com/IDuxFE/idux/commit/ee577283b55b4d256a64626282f095a4ac857443)), closes [#1140](https://github.com/IDuxFE/idux/issues/1140)
+* **pro:search:** clickside should exclude overlay container ([#1137](https://github.com/IDuxFE/idux/issues/1137)) ([bd2d1b9](https://github.com/IDuxFE/idux/commit/bd2d1b91c0b84804c167d2b9ff5c124ad1747664))
+* **pro:table:** pining the position of the layout tool ([#1147](https://github.com/IDuxFE/idux/issues/1147)) ([d0b82d5](https://github.com/IDuxFE/idux/commit/d0b82d595a4cf3fb30f78956d5375fc7113a5efc))
+* **pro:transfer:** remove icon isn't displayed ([#1144](https://github.com/IDuxFE/idux/issues/1144)) ([9fe89d6](https://github.com/IDuxFE/idux/commit/9fe89d67b355e26177eea41156eeb5c350893c15))
+
+
+### Features
+
+* **comp:popconfirm:** support custom content ([#1138](https://github.com/IDuxFE/idux/issues/1138)) ([50a1d00](https://github.com/IDuxFE/idux/commit/50a1d0098cbee73a9304222072229fbd2d456486))
+* **pro:search:** add container zIndex support ([#1145](https://github.com/IDuxFE/idux/issues/1145)) ([ceda7be](https://github.com/IDuxFE/idux/commit/ceda7be8e078064e6d0813eefbcb2586796753df))
+
+
+
+
+
 # [1.0.0-rc.6](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-09-13)
 
 

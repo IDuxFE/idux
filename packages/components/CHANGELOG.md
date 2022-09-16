@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
+
+
+### Bug Fixes
+
+* **comp:cascader:** update overlay position after edging ([#1135](https://github.com/IDuxFE/idux/issues/1135)) ([ef352a8](https://github.com/IDuxFE/idux/commit/ef352a87aa8d5f9ac833bb4c2e7c85b428aa76eb))
+* **comp:icon:** update viewBox of all icons ([#1146](https://github.com/IDuxFE/idux/issues/1146)) ([140aaac](https://github.com/IDuxFE/idux/commit/140aaacf9f14d9396939ab62f0ba702b8c418777))
+* **comp:table:** autoHeight not working when data changes ([#1136](https://github.com/IDuxFE/idux/issues/1136)) ([121b612](https://github.com/IDuxFE/idux/commit/121b61263389b60f70cd371a503fc2769e5aa219))
+* **comp:table:** trigger scroll when column widths changes ([#1142](https://github.com/IDuxFE/idux/issues/1142)) ([ee57728](https://github.com/IDuxFE/idux/commit/ee577283b55b4d256a64626282f095a4ac857443)), closes [#1140](https://github.com/IDuxFE/idux/issues/1140)
+
+
+### Features
+
+* **comp:popconfirm:** support custom content ([#1138](https://github.com/IDuxFE/idux/issues/1138)) ([50a1d00](https://github.com/IDuxFE/idux/commit/50a1d0098cbee73a9304222072229fbd2d456486))
+* **comp:transfer:** add controlled searchValue support ([#1141](https://github.com/IDuxFE/idux/issues/1141)) ([ba9fe6b](https://github.com/IDuxFE/idux/commit/ba9fe6b1e07981d601f6d5eda77da1ef05887c18))
+
+
+
+
+
 # [1.0.0-rc.6](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-09-13)
 
 
