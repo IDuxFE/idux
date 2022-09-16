@@ -33,26 +33,36 @@
   .@{table-prefix}-container {
     .@{pro-table-prefix}-layout-tool-trigger {
       position: absolute;
-      right: 2px;
-      font-size: 16px;
-      line-height: 1;
+      right: 0;
+      padding: 0 @spacing-md;
+      font-size: @font-size-lg;
       z-index: 3;
       color: @table-head-color;
       background-color: @table-head-background-color;
       cursor: pointer;
     }
-  }
 
-  .@{table-prefix}-container {
     .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-content {
       table > thead > tr:first-child {
         th:last-child {
           .@{table-prefix}-sortable-trigger {
-            margin-right: 12px;
+            margin-right: 40px;
           }
         }
       }
     }
+  }
+
+  &.@{table-prefix}-lg .@{table-prefix}-container .@{pro-table-prefix}-layout-tool-trigger {
+    line-height: @table-head-row-height-lg - 1px;
+  }
+
+  &.@{table-prefix}-md .@{table-prefix}-container .@{pro-table-prefix}-layout-tool-trigger {
+    line-height: @table-head-row-height-md - 1px;
+  }
+
+  &.@{table-prefix}-sm .@{table-prefix}-container .@{pro-table-prefix}-layout-tool-trigger {
+    line-height: @table-head-row-height-sm - 1px;
   }
 }
 
