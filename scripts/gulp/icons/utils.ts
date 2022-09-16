@@ -3,6 +3,7 @@ import { join } from 'path'
 import { copy, existsSync, readFile, readdir, writeFile } from 'fs-extra'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import { camelCase, upperFirst } from 'lodash'
 import { OptimizeOptions, OptimizedSvg, optimize } from 'svgo'
 
