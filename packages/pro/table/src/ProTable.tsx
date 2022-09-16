@@ -50,21 +50,11 @@ export default defineComponent({
       scrollTo: (option?: number | VirtualScrollToOptions) => tableRef.value?.scrollTo(option),
     })
 
-    const headElementRef = ref<HTMLElement>()
-    const layoutToolStyle = computed(() => {
-      const headElement = headElementRef.value
-      if (!headElement) {
-        return { display: 'none' }
-      }
-      const { height } = headElement.getBoundingClientRect()
-      return { marginTop: `${(height - 16) / 2}px` }
-    })
-
     const renderLayoutTool = () => {
       if (!props.layoutTool) {
         return null
       }
-      return <ProTableLayoutTool style={layoutToolStyle.value} />
+      return <ProTableLayoutTool />
     }
 
     const renderToolbar = () => {
@@ -101,10 +91,6 @@ export default defineComponent({
         headCell: ({ column }) => {
           const additionalProps = customAdditional?.headCell ? customAdditional.headCell({ column }) : undefined
           return resizable ? { ...additionalProps, column, onResizeEnd } : additionalProps
-        },
-        head: ({ rows }) => {
-          const additionalProps = customAdditional?.head ? customAdditional.head({ rows }) : undefined
-          return { ...additionalProps, ref: headElementRef }
         },
       }
       const mergedCustomTag: TableCustomTag = {
