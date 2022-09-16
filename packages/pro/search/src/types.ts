@@ -157,6 +157,7 @@ export const proSearchProps = {
   },
   placeholder: String,
   searchFields: Array as PropType<SearchField[]>,
+  zIndex: Number,
 
   //events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: SearchValue[] | undefined) => void>>,

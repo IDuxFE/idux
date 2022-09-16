@@ -5,14 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, nextTick, normalizeClass, provide, watch, withDirectives } from 'vue'
+import {
+  computed,
+  defineComponent,
+  nextTick,
+  normalizeClass,
+  normalizeStyle,
+  provide,
+  ref,
+  toRef,
+  watch,
+  withDirectives,
+} from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
 import { vClickOutside } from '@idux/cdk/click-outside'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
-import { useDateConfig } from '@idux/components/config'
+import { useGlobalConfig as useComponentGlobalConfig, useDateConfig } from '@idux/components/config'
+import { useZIndex } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 
 import { useActiveSegment } from './composables/useActiveSegment'
@@ -31,6 +43,7 @@ export default defineComponent({
   props: proSearchProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const componentCommon = useComponentGlobalConfig('common')
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('search')
     const dateConfig = useDateConfig()
@@ -49,6 +62,7 @@ export default defineComponent({
     )
     const activeSegmentContext = useActiveSegment(props, searchItems, searchStateContext.tempSearchStateAvailable)
     const commonOverlayProps = useCommonOverlayProps(mergedPrefixCls, props, config)
+    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), ref(true))
 
     const { initSearchStates, updateSearchState, clearSearchState, tempSearchState } = searchStateContext
     const { activeSegment, setInactive, setTempActive } = activeSegmentContext
@@ -74,6 +88,11 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: !!props.disabled,
       })
     })
+    const containerStyle = computed(() =>
+      normalizeStyle({
+        zIndex: currentZIndex.value,
+      }),
+    )
 
     let previousActiveSegmentName: string | undefined
     const setTempSegmentActive = () => {
@@ -156,7 +175,7 @@ export default defineComponent({
 
       return (
         <div class={classes.value}>
-          <div class={`${prefixCls}-input-container`}>
+          <div class={`${prefixCls}-input-container`} style={containerStyle.value}>
             {withDirectives(
               <div class={`${prefixCls}-input-content`} onClick={handleProSearchClick}>
                 <ɵOverflow
