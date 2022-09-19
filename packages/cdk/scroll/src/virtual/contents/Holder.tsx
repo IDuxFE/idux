@@ -10,7 +10,6 @@ import { type CSSProperties, computed, defineComponent, inject, onBeforeUnmount,
 import { isString, throttle } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
-import { callEmit } from '@idux/cdk/utils'
 
 import { virtualScrollToken } from '../token'
 
@@ -24,8 +23,7 @@ export default defineComponent({
       collectHeights,
       scrollHeight,
       scrollOffset,
-      scrollTop,
-      syncScrollTop,
+      handleScroll,
     } = inject(virtualScrollToken)!
 
     const style = computed<CSSProperties | undefined>(() => {
@@ -67,14 +65,6 @@ export default defineComponent({
         top: 0,
       }
     })
-
-    const handleScroll = (evt: Event) => {
-      const { scrollTop: newScrollTop } = evt.currentTarget as Element
-      if (newScrollTop !== scrollTop.value) {
-        syncScrollTop(newScrollTop)
-      }
-      callEmit(props.onScroll, evt)
-    }
 
     const contentRef = ref<HTMLDivElement>()
     const onContentResize = throttle(collectHeights, 16)

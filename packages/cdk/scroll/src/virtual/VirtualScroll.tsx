@@ -46,7 +46,7 @@ export default defineComponent({
       heights,
     )
 
-    const { syncScrollTop } = useScrollPlacement(
+    const { syncScrollTop, handleScroll } = useScrollPlacement(
       props,
       holderRef,
       scrollTop,
@@ -66,6 +66,7 @@ export default defineComponent({
       scrollHeight,
       scrollOffset,
       syncScrollTop,
+      handleScroll,
     })
 
     const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, syncScrollTop)

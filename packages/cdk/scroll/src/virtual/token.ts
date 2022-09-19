@@ -20,6 +20,7 @@ export interface VirtualScrollContext {
   scrollHeight: Ref<number>
   scrollOffset: Ref<number | undefined>
   syncScrollTop: SyncScrollTop
+  handleScroll: (evt: Event) => void
 }
 
 export const virtualScrollToken: InjectionKey<VirtualScrollContext> = Symbol('virtualScrollToken')

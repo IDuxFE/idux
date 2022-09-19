@@ -36,7 +36,7 @@ export function useScrollTo(
     const { dataSource, itemHeight } = props
 
     if (typeof option === 'number') {
-      syncScrollTop(option)
+      syncScrollTop(option, true)
     } else if (typeof option === 'object') {
       const { align, offset = 0 } = option
       let index: number
@@ -102,7 +102,7 @@ export function useScrollTo(
           }
 
           if (targetTop !== null && targetTop !== holderElement.scrollTop) {
-            syncScrollTop(targetTop)
+            syncScrollTop(targetTop, true)
           }
         }
 

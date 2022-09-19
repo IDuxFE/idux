@@ -6,20 +6,19 @@
  */
 
 import type { VirtualScrollProps } from '../types'
-import type { ComputedRef, Ref } from 'vue'
+import type { Ref } from 'vue'
 
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 
-export type SyncScrollTop = (newTop: number | ((prev: number) => number)) => void
+export type SyncScrollTop = (newTop: number | ((prev: number) => number), setHolderScrollTop?: boolean) => void
 
 export interface ScrollPlacementContext {
-  scrolledTop: ComputedRef<boolean>
-  scrolledBottom: ComputedRef<boolean>
   syncScrollTop: SyncScrollTop
+  handleScroll: (evt: Event) => void
 }
 
 const keepInRange = (maxScrollHeight: number, newScrollTop: number) => {
@@ -43,24 +42,27 @@ export function useScrollPlacement(
     return height > 0 ? Math.max(height - containerHeight.value, 0) : NaN
   })
 
-  const scrolledTop = computed(() => scrollTop.value <= 0)
-  const scrolledBottom = computed(() => scrollTop.value >= maxScrollHeight.value)
-
-  watchEffect(() => {
-    if (scrolledBottom.value) {
-      callEmit(props.onScrolledBottom)
-    }
-  })
-
-  const syncScrollTop = (newTop: number | ((prev: number) => number)) => {
+  const syncScrollTop = (newTop: number | ((prev: number) => number), setHolderScrollTop?: boolean) => {
     const value = isFunction(newTop) ? newTop(scrollTop.value) : newTop
     const alignedTop = keepInRange(maxScrollHeight.value, value)
     const holderElement = holderRef.value
-    if (holderElement) {
+    if (holderElement && setHolderScrollTop) {
       holderElement.scrollTop = alignedTop
     }
     changeScrollTop(alignedTop)
   }
 
-  return { scrolledTop, scrolledBottom, syncScrollTop }
+  const handleScroll = (evt: Event) => {
+    const { scrollTop: newScrollTop } = evt.currentTarget as Element
+    if (newScrollTop !== scrollTop.value) {
+      syncScrollTop(newScrollTop)
+    }
+    callEmit(props.onScroll, evt)
+
+    if (newScrollTop >= maxScrollHeight.value) {
+      callEmit(props.onScrolledBottom)
+    }
+  }
+
+  return { syncScrollTop, handleScroll }
 }
