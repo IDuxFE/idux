@@ -10,7 +10,7 @@
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
-import type { TableColumn } from '@idux/components/table'
+import type { TableColumn, TableProps } from '@idux/components/table'
 import type {
   SearchFn,
   TransferData,
@@ -18,7 +18,7 @@ import type {
   TransferPaginationProps,
   TransferScroll,
 } from '@idux/components/transfer'
-import type { TreeNode } from '@idux/components/tree'
+import type { TreeProps } from '@idux/components/tree'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ProTransferTypes = 'table' | 'tree'
@@ -28,24 +28,22 @@ export type TreeTransferData<C extends VKey = 'children'> = TransferData & {
   [key in C]?: TreeTransferData<C>[]
 }
 
-export interface ProTransferTableProps<T = any, K = VKey> {
+export type ProTransferTableProps<T = any, K = VKey> = {
   sourceColumns: TableColumn<T, K>[]
   targetColumns: TableColumn<T, K>[]
-  tableLayout?: 'auto' | 'fixed'
-  ellipsis?: boolean
-  borderless?: boolean
-}
+} & Pick<TableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
 
-export interface ProTransferTreeProps {
-  showLine?: boolean
-  childrenKey?: string
-  expandIcon?: string
-  labelKey?: string
-  leafLineIcon?: string
-  loadChildren?: (node: TreeTransferData<any>) => TreeTransferData<any>[]
-  onExpand?: MaybeArray<(expanded: boolean, node: TreeNode<any>) => void>
-  onExpandedChange?: MaybeArray<(expendedKeys: any[], expendedNodes: TreeNode<any>[]) => void>
-}
+export type ProTransferTreeProps = Pick<
+  TreeProps,
+  | 'showLine'
+  | 'childrenKey'
+  | 'expandIcon'
+  | 'labelKey'
+  | 'leafLineIcon'
+  | 'loadChildren'
+  | 'onExpand'
+  | 'onExpandedChange'
+>
 
 export const proTransferProps = {
   type: {
