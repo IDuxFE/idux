@@ -103,7 +103,7 @@ const onSearch = () => {
 }
 const onItemConfirm = (context: SearchItemConfirmContext) => {
   const { removed, nameInput, operatorInput, valueInput } = context
-  if (removed) {
+  if (!removed) {
     return
   }
 

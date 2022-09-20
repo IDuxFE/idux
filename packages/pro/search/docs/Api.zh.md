@@ -19,6 +19,15 @@
 | `onItemRemove` | 搜索条件删除时的回调 | `(item: SearchValue) => void` | - | - | - |
 | `onItemConfirm` | 搜索条件不合法时触发的回调 | `(item: SearchItemConfirmContext) => void` | - | - | - |
 | `onSearch` | 搜索按钮触发的回调 | `(value: searchValue[] \| undefined) => void` | - | - | - |
+| `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
+| `onBlur` | 失去焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
+
+#### ProSearchMethods
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `blur` | 移除焦点 | - | - |
+| `focus` | 获取焦点 | `(options?: FocusOptions) => void` | - |
 
 #### ProSearchSlots
 

@@ -7,7 +7,7 @@
 
 import type { ProSearchProps, SearchItem, Segment } from '../types'
 
-import { type ComputedRef, computed } from 'vue'
+import { type ComputedRef, type Ref, computed } from 'vue'
 
 import { type VKey, useState } from '@idux/cdk/utils'
 
@@ -17,8 +17,7 @@ export interface ActiveSegmentContext {
   activeSegment: ComputedRef<ActiveSegment | undefined>
   setActiveSegment: (segment: ActiveSegment | undefined) => void
   changeActive: (offset: number, crossItem?: boolean) => void
-  setFakeActive: () => void
-  setInactive: () => void
+  setInactive: (blur?: boolean) => void
   setTempActive: (name?: string) => void
 }
 export interface ActiveSegment {
@@ -27,10 +26,9 @@ export interface ActiveSegment {
 }
 type FlattenedSegment = Segment & { itemKey: VKey }
 
-const fakeItemKey = Symbol('fake')
-
 export function useActiveSegment(
   props: ProSearchProps,
+  elementRef: Ref<HTMLElement | undefined>,
   searchItems: ComputedRef<SearchItem[] | undefined>,
   tempSearchStateAvailable: ComputedRef<boolean>,
 ): ActiveSegmentContext {
@@ -53,7 +51,7 @@ export function useActiveSegment(
   }
 
   const changeActive = (offset: number, crossItem = false) => {
-    if (!activeSegment.value || activeSegment.value.itemKey === fakeItemKey) {
+    if (!activeSegment.value) {
       return
     }
 
@@ -81,20 +79,17 @@ export function useActiveSegment(
     /* eslint-enable indent */
   }
 
-  const setFakeActive = () => {
-    setActiveSegment({
-      itemKey: fakeItemKey,
-      name: '',
-    })
-  }
-
-  const setInactive = () => {
+  const setInactive = (blur?: boolean) => {
     setActiveSegment(undefined)
+
+    if (!blur) {
+      elementRef.value?.focus()
+    }
   }
 
   const setTempActive = (name?: string) => {
     if (!tempSearchStateAvailable.value) {
-      setFakeActive()
+      setInactive()
     } else {
       setActiveSegment({
         itemKey: tempSearchStateKey,
@@ -107,7 +102,6 @@ export function useActiveSegment(
     activeSegment: mergedActiveSegment,
     setActiveSegment: updateActiveSegment,
     changeActive,
-    setFakeActive,
     setInactive,
     setTempActive,
   }

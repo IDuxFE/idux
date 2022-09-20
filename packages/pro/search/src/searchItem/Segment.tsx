@@ -34,7 +34,7 @@ export default defineComponent({
     const context = inject(proSearchContext)!
     const { mergedPrefixCls, commonOverlayProps, activeSegment, searchStates } = context
     const overlayRef = ref<ɵOverlayInstance>()
-    const inputRef = ref<HTMLInputElement>()
+    const segmentInputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
     const [overlayOpened, _setOverlayOpened] = useState(false)
     const setOverlayOpened = (opened: boolean) => {
@@ -75,7 +75,6 @@ export default defineComponent({
       nextTick(() => {
         if (isActive.value) {
           overlayRef.value?.updatePopper()
-          inputRef.value?.focus()
         }
       })
     }
@@ -96,7 +95,9 @@ export default defineComponent({
         isActive,
         (active, preActive) => {
           if (active) {
-            nextTick(() => inputRef.value?.focus())
+            nextTick(() => {
+              segmentInputRef.value?.focus()
+            })
             setOverlayOpened(true)
             nextTick(() => {
               if (!props.value && props.segment.defaultValue) {
@@ -105,7 +106,6 @@ export default defineComponent({
               }
             })
           } else if (preActive) {
-            nextTick(() => inputRef.value?.blur())
             setOverlayOpened(false)
           }
         },
@@ -114,9 +114,9 @@ export default defineComponent({
       watch(
         inputStyle,
         style => {
-          inputRef.value &&
+          segmentInputRef.value &&
             Object.entries(style).forEach(([key, value]) => {
-              inputRef.value!.style[key as keyof typeof style] = value ?? ''
+              segmentInputRef.value!.style[key as keyof typeof style] = value ?? ''
             })
         },
         { immediate: true },
@@ -143,7 +143,7 @@ export default defineComponent({
       handleInput,
       handleCompositionStart,
       handleCompositionEnd,
-      handleClick,
+      handleMouseDown,
       handleFocus,
       handleKeyDown,
       setPanelOnKeyDown,
@@ -153,7 +153,7 @@ export default defineComponent({
 
     const renderTrigger = () => (
       <input
-        ref={inputRef}
+        ref={segmentInputRef}
         class={inputClasses.value}
         value={props.input ?? ''}
         disabled={props.disabled}
@@ -161,7 +161,7 @@ export default defineComponent({
         onCompositionstart={handleCompositionStart}
         onCompositionend={handleCompositionEnd}
         onFocus={handleFocus}
-        onClick={handleClick}
+        onMousedown={handleMouseDown}
         onKeydown={handleKeyDown}
       ></input>
     )
@@ -234,7 +234,7 @@ interface InputEventHandlers {
   handleInput: (evt: Event) => void
   handleCompositionStart: () => void
   handleCompositionEnd: (evt: CompositionEvent) => void
-  handleClick: (evt: Event) => void
+  handleMouseDown: (evt: MouseEvent) => void
   handleFocus: () => void
   handleKeyDown: (evt: KeyboardEvent) => void
   setPanelOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void
@@ -287,7 +287,7 @@ function useInputEvents(
     setOverlayOpened(true)
     setCurrentAsActive()
   }
-  const handleClick = (evt: Event) => {
+  const handleMouseDown = (evt: Event) => {
     evt.stopPropagation()
 
     setOverlayOpened(true)
@@ -325,7 +325,7 @@ function useInputEvents(
     handleCompositionStart,
     handleCompositionEnd,
     handleFocus,
-    handleClick,
+    handleMouseDown,
     handleKeyDown,
     setPanelOnKeyDown,
   }

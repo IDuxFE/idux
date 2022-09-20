@@ -75,11 +75,12 @@ export default defineComponent({
       removeSearchState(props.searchItem!.key)
     }
 
-    const handleTagSegmentClick = (evt: Event, name: string) => {
-      evt.stopPropagation()
+    const handleTagSegmentMouseDown = (evt: Event, name: string) => {
       if (proSearchProps.disabled) {
         return
       }
+      evt.preventDefault()
+      evt.stopPropagation()
 
       setSegmentActive(name)
 
@@ -94,7 +95,10 @@ export default defineComponent({
       return [
         <span class={`${prefixCls.value}-tag-segments`} title={content}>
           {segmentRenderDatas.value.map(data => (
-            <span class={`${prefixCls.value}-tag-segment`} onClick={evt => handleTagSegmentClick(evt, data.name)}>
+            <span
+              class={`${prefixCls.value}-tag-segment`}
+              onMousedown={evt => handleTagSegmentMouseDown(evt, data.name)}
+            >
               {data.input}
             </span>
           ))}

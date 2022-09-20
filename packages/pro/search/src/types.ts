@@ -166,17 +166,25 @@ export const proSearchProps = {
     MaybeArray<(value: SearchValue[] | undefined, oldValue: SearchValue[] | undefined) => void>
   >,
   onClear: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onItemRemove: [Array, Function] as PropType<MaybeArray<(item: SearchValue) => void>>,
   onSearch: [Array, Function] as PropType<MaybeArray<(value: SearchValue[] | undefined) => void>>,
   onItemConfirm: [Array, Function] as PropType<MaybeArray<(item: SearchItemConfirmContext) => void>>,
 } as const
 
+export interface ProSearchBindings {
+  focus: (options?: FocusOptions) => void
+  blur: () => void
+}
+
 export type ProSearchProps = ExtractInnerPropTypes<typeof proSearchProps>
 export type ProSearchPublicProps = ExtractPublicPropTypes<typeof proSearchProps>
 export type ProSearchComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof ProSearchPublicProps> & ProSearchPublicProps
+  Omit<HTMLAttributes, keyof ProSearchPublicProps> & ProSearchPublicProps,
+  ProSearchBindings
 >
-export type ProSearchInstance = InstanceType<DefineComponent<ProSearchProps>>
+export type ProSearchInstance = InstanceType<DefineComponent<ProSearchProps, ProSearchBindings>>
 
 export const searchItemProps = {
   searchItem: {
