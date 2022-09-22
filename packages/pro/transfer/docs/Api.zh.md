@@ -62,24 +62,22 @@ export interface TransferPaginationProps {
   onChange?: (isSource: boolean, pageIndex: number, pageSize: number) => void
 }
 
-export interface ProTransferTableProps {
-  sourceColumns: TableColumn[]
-  targetColumns: TableColumn[]
-  tableLayout?: 'auto' | 'fixed'
-  ellipsis?: boolean
-  borderless?: boolean
-}
+export type ProTransferTableProps<T = any, K = VKey> = {
+  sourceColumns: TableColumn<T, K>[]
+  targetColumns: TableColumn<T, K>[]
+} & Pick<TableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
 
-export interface ProTransferTreeProps {
-  showLine?: boolean
-  childrenKey?: string
-  expandIcon?: string
-  labelKey?: string
-  leafLineIcon?: string
-  loadChildren?: <C extends VKey = VKey>(node: TreeTransferData<C>) => TreeTransferData<C>[]
-  onExpand?: MaybeArray<(expanded: boolean, node: TreeNode) => void>
-  onExpandedChange?: MaybeArray<(expendedKeys: VKey[], expendedNodes: TreeNode[]) => void>
-}
+export type ProTransferTreeProps = Pick<
+  TreeProps,
+  | 'showLine'
+  | 'childrenKey'
+  | 'expandIcon'
+  | 'labelKey'
+  | 'leafLineIcon'
+  | 'loadChildren'
+  | 'onExpand'
+  | 'onExpandedChange'
+>
 ```
 
 #### ProTransferSlots
