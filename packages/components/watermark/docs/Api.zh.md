@@ -13,6 +13,7 @@
 | `fontColor`   | 字体颜色 | `string` | `rgba(0,0,0,.15)` | - | - |
 | `fontSize`    | 字体大小     | `number`                          | `16`              | - | 优先级高于`font`配置，但`font`配置时需注意必须包含CSS `fontSize`属性 |
 | `opacity` | 水印透明度   | `number`               | `1`               | - | 默认透明度已由fontColor控制 |
+| `renderFn` | 自定义canvas绘制函数   | `(ctx: CanvasRenderingContext2D) => void`               | `undefined`               | - |自定义canvas，用于支持保密的暗水印方案等<br>*函数将执行在组件canvas绘制结束处<br>* 可通过`ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)`清除组件绘制内容 |
 | `rotate` | 水印旋转角度 | `number` | `-22`             | - | 单位：度 |
 | `strict` | 防篡改 | `boolean` | `true` | - | - |
 | `type` | 水印类型 | `'text' \| 'image'`          | `'text'` | - | 不同的类型需要的`content`数据不同 |

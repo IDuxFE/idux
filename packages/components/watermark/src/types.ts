@@ -60,6 +60,13 @@ export const watermarkProps = {
   strict: { type: Boolean, default: true },
 
   /**
+   * 自定义canvas，用于支持保密的暗水印方案等
+   * * 函数将执行在组件canvas绘制结束处
+   * * 可通过`ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)`清除组件绘制内容
+   */
+  renderFn: Function as PropType<(ctx: CanvasRenderingContext2D) => void>,
+
+  /**
    * @private
    */
   /** 水平方向的水印间距 */
