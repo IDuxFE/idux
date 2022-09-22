@@ -184,7 +184,7 @@ module.exports = {
   },
   ignorePatterns: [
     'dist',
-    'packages/site/components.ts',
+    'packages/site/components.d.ts',
     'packages/site/src/router.ts',
     'packages/site/src/sideNav.ts',
     'packages/site/src/components/global/themeConfig.ts',

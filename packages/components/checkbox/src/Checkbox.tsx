@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable vue/no-ref-as-operand */
+
 import { type ComputedRef, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { isNil } from 'lodash-es'

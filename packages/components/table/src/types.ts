@@ -155,6 +155,16 @@ export interface TableColumnSelectable<T = any, K = VKey> extends TableColumnCom
   onSelectInvert?: (selectedRowKeys: K[]) => void
   onSelectNone?: () => void
   onSelectPageInvert?: (selectedRowKeys: K[]) => void
+
+  customCell?:
+    | string
+    | ((data: {
+        checked: boolean
+        disabled: boolean
+        indeterminate?: boolean
+        onChange: () => void
+        onClick: () => void
+      }) => VNodeChild)
 }
 
 export interface TableCustomAdditional<T = any, K = VKey> {
