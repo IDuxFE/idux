@@ -79,7 +79,7 @@ export function useTransferTreeProps(
     const height = isNumber(props.scroll?.height) ? props.scroll?.height : undefined
 
     return {
-      autoHeight: !height,
+      autoHeight: !height || !props.virtual,
       ...(props.treeProps ?? {}),
       blocked: true,
       cascade: true,
