@@ -98,7 +98,7 @@ export default defineComponent({
       let title: string | undefined
 
       if (type === 'selectable') {
-        children = renderSelectableChildren(props, selectable, handleClick)
+        children = renderSelectableChildren(props, slots, selectable, handleClick)
       } else {
         const { ellipsis = tableProps.ellipsis } = column
         const text = dataValue.value
@@ -205,16 +205,18 @@ function renderExpandableChildren(
 
 function renderSelectableChildren(
   props: TableBodyCellProps,
+  slots: Slots,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   onClick: (evt: Event) => void,
 ) {
   const { selected: checked, indeterminate, disabled, handleSelect: onChange } = props
-  const { multiple } = selectable.value!
+  const { multiple, customCell } = selectable.value!
+  const customRender = isString(customCell) ? slots[customCell] : customCell
   if (multiple) {
     const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
-    return <IxCheckbox {...checkboxProps}></IxCheckbox>
+    return customRender ? customRender(checkboxProps) : <IxCheckbox {...checkboxProps}></IxCheckbox>
   } else {
     const radioProps = { checked, disabled, onChange, onClick }
-    return <IxRadio {...radioProps}></IxRadio>
+    return customRender ? customRender(radioProps) : <IxRadio {...radioProps}></IxRadio>
   }
 }

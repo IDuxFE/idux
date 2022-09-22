@@ -108,6 +108,7 @@ export type TableColumn<T = any, V = any> =
 | `onSelectInvert` | 点击反选所有时触发 | `(selectedRowKeys: (string \| number)[]) => void` | - | - | 配置 `menus= ['invert']` 时生效 |
 | `onSelectNone` | 点击清空所有时触发 | `() => void` | - | - | 配置 `menus= ['none']` 时生效 |
 | `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | 配置 `menus= ['pageInvert']` 时生效 |
+| `customCell` | 自定义单元格内容 | `string \| ((data: { checked: boolean;  disabled: boolean;  indeterminate?: boolean, onChange: () => void,  onClick: () => void }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 ##### TableColumnSortable
 

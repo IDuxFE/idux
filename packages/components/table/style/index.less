@@ -50,9 +50,6 @@
   }
 
   th {
-    position: relative;
-    text-align: start;
-    overflow-wrap: break-word;
     color: @table-head-color;
     background-color: @table-head-background-color;
     font-weight: @table-head-font-weight;
@@ -73,9 +70,6 @@
   }
 
   td {
-    position: relative;
-    text-align: start;
-    overflow-wrap: break-word;
     transition: background @transition-duration-base;
 
     // TODO: Nest Table
@@ -96,6 +90,12 @@
         }
       }
     }
+  }
+
+  &-cell {
+    position: relative;
+    text-align: start;
+    overflow-wrap: break-word;
   }
 
   &-cell-align {
