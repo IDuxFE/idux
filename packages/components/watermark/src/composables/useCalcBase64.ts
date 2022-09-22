@@ -75,6 +75,9 @@ export function useCalcBase64(props: WatermarkProps, densityData: ComputedRef<De
             // single
             ctx.fillText(content, 0, 0)
           }
+
+          props.renderFn?.(ctx)
+
           base64Ref.value = canvas.toDataURL()
         }
       } else {

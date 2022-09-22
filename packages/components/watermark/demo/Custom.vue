@@ -7,7 +7,14 @@
     fontColor="#1c6eff"
     :fontSize="24"
     :offsetLeft="10"
+    :renderFn="canvasDebugger"
   >
     <div style="height: 500px"></div>
   </IxWatermark>
 </template>
+
+<script setup lang="ts">
+const canvasDebugger = (ctx: CanvasRenderingContext2D) => {
+  console.log(ctx.lineWidth)
+}
+</script>
