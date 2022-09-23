@@ -5,22 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  normalizeClass,
-  normalizeStyle,
-  provide,
-  ref,
-  toRef,
-  watch,
-  withDirectives,
-} from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, normalizeStyle, provide, ref, toRef, watch } from 'vue'
 
-import { isFunction, isString } from 'lodash-es'
-
-import { vClickOutside } from '@idux/cdk/click-outside'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useGlobalConfig as useComponentGlobalConfig, useDateConfig } from '@idux/components/config'
@@ -29,9 +15,10 @@ import { useGlobalConfig } from '@idux/pro/config'
 
 import { useActiveSegment } from './composables/useActiveSegment'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
+import { useFocusedState } from './composables/useFocusedState'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
-import { tempSearchStateKey, useSearchStates } from './composables/useSearchStates'
+import { useSearchStates } from './composables/useSearchStates'
 import { useSearchValues } from './composables/useSearchValues'
 import SearchItemComp from './searchItem/SearchItem'
 import { proSearchContext } from './token'
@@ -41,7 +28,7 @@ import { renderIcon } from './utils/RenderIcon'
 export default defineComponent({
   name: 'IxProSearch',
   props: proSearchProps,
-  setup(props, { slots }) {
+  setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
     const componentCommon = useComponentGlobalConfig('common')
     const locale = useGlobalConfig('locale')
@@ -60,12 +47,26 @@ export default defineComponent({
       errors,
       dateConfig,
     )
-    const activeSegmentContext = useActiveSegment(props, searchItems, searchStateContext.tempSearchStateAvailable)
+    const elementRef = ref<HTMLElement | undefined>()
+
+    const activeSegmentContext = useActiveSegment(
+      props,
+      elementRef,
+      searchItems,
+      searchStateContext.tempSearchStateAvailable,
+    )
     const commonOverlayProps = useCommonOverlayProps(mergedPrefixCls, props, config)
+    const { focused, focus, blur } = useFocusedState(
+      props,
+      elementRef,
+      commonOverlayProps,
+      searchStateContext,
+      activeSegmentContext,
+    )
     const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), ref(true))
 
-    const { initSearchStates, updateSearchState, clearSearchState, tempSearchState } = searchStateContext
-    const { activeSegment, setInactive, setTempActive } = activeSegmentContext
+    const { initSearchStates, clearSearchState } = searchStateContext
+    const { activeSegment } = activeSegmentContext
 
     watch(
       () => props.value,
@@ -84,7 +85,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-focused`]: !!activeSegment.value,
+        [`${prefixCls}-focused`]: focused.value,
         [`${prefixCls}-disabled`]: !!props.disabled,
       })
     })
@@ -94,58 +95,8 @@ export default defineComponent({
       }),
     )
 
-    let previousActiveSegmentName: string | undefined
-    const setTempSegmentActive = () => {
-      let name = previousActiveSegmentName
+    expose({ focus, blur })
 
-      if (!name) {
-        name = tempSearchState.segmentValues[0]?.name ?? 'name'
-        for (let idx = tempSearchState.segmentValues.length - 1; idx > -1; idx--) {
-          if (tempSearchState.segmentValues[idx].value) {
-            name = tempSearchState.segmentValues[idx].name
-            break
-          }
-        }
-      }
-
-      setTempActive(name)
-    }
-
-    const handleProSearchClick = (evt: Event) => {
-      evt.preventDefault()
-      setTempSegmentActive()
-    }
-
-    const getContainerEl = () => {
-      const containerProp = commonOverlayProps.value.container
-      const container = isFunction(containerProp) ? containerProp() : containerProp
-
-      return isString(container) ? document.querySelector(container) : container
-    }
-    const handleClickOutside = (evt: MouseEvent) => {
-      if (!activeSegment.value) {
-        previousActiveSegmentName = undefined
-        return
-      }
-
-      const paths = evt.composedPath()
-      const container = getContainerEl()
-
-      if (container && paths.includes(container)) {
-        return
-      }
-
-      const { itemKey, name } = activeSegment.value
-
-      if (itemKey === tempSearchStateKey) {
-        previousActiveSegmentName = name
-      } else {
-        previousActiveSegmentName = undefined
-        updateSearchState(itemKey)
-      }
-
-      setInactive()
-    }
     const handleSearchBtnClick = () => {
       callEmit(props.onSearch, searchValues.value)
     }
@@ -164,7 +115,7 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
 
-      const overfloweSlots = {
+      const overflowSlots = {
         item: (item: SearchItem) => <SearchItemComp key={item.key} tagOnly={true} searchItem={item} />,
         rest: (rest: SearchItem[]) => (
           <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
@@ -174,29 +125,26 @@ export default defineComponent({
       }
 
       return (
-        <div class={classes.value}>
+        <div ref={elementRef} class={classes.value} tabindex={(attrs.tabIndex as number) ?? 0}>
           <div class={`${prefixCls}-input-container`} style={containerStyle.value}>
-            {withDirectives(
-              <div class={`${prefixCls}-input-content`} onClick={handleProSearchClick}>
-                <ɵOverflow
-                  v-show={!activeSegment.value}
-                  v-slots={overfloweSlots}
-                  prefixCls={prefixCls}
-                  dataSource={searchItems.value}
-                  getKey={item => item.key}
-                  maxLabel={props.maxLabel}
-                />
-                <div class={`${prefixCls}-search-item-container`} v-show={activeSegment.value}>
-                  {searchItems.value?.map(item => (
-                    <SearchItemComp key={item.key} searchItem={item} />
-                  ))}
-                </div>
-                {searchValueEmpty.value && !activeSegment.value && (
-                  <span class={`${prefixCls}-placeholder`}>{placeholder.value}</span>
-                )}
-              </div>,
-              [[vClickOutside, handleClickOutside]],
-            )}
+            <div class={`${prefixCls}-input-content`}>
+              <ɵOverflow
+                v-show={!activeSegment.value}
+                v-slots={overflowSlots}
+                prefixCls={prefixCls}
+                dataSource={searchItems.value}
+                getKey={item => item.key}
+                maxLabel={props.maxLabel}
+              />
+              <div class={`${prefixCls}-search-item-container`} v-show={activeSegment.value}>
+                {searchItems.value?.map(item => (
+                  <SearchItemComp key={item.key} searchItem={item} />
+                ))}
+              </div>
+              {searchValueEmpty.value && !activeSegment.value && (
+                <span class={`${prefixCls}-placeholder`}>{placeholder.value}</span>
+              )}
+            </div>
             {!searchValueEmpty.value && clearable.value && !props.disabled && (
               <div class={`${prefixCls}-clear-icon`} onClick={clearSearchState}>
                 {renderIcon(clearIcon.value, slots.clearIcon)}

@@ -37,7 +37,7 @@ export function useSegmentStates(
     convertStateToValue,
     initTempSearchState,
     changeActive,
-    setFakeActive,
+    setInactive,
     setTempActive,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
@@ -100,7 +100,7 @@ export function useSegmentStates(
     })
 
     if (key !== tempSearchStateKey) {
-      setFakeActive()
+      setInactive()
     } else {
       setTempActive()
     }
@@ -128,7 +128,7 @@ export function useSegmentStates(
     if (!segmentStates.value[name].value) {
       changeActive(-1, true)
     } else if (props.searchItem?.key !== tempSearchStateKey) {
-      setFakeActive()
+      setInactive()
     }
   }
 
