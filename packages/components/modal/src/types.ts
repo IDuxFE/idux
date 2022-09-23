@@ -43,6 +43,10 @@ export const modalProps = {
     default: undefined,
   },
   closeIcon: [String, Object] as PropType<string | VNode>,
+  closeOnDeactivated: {
+    type: Boolean,
+    default: true,
+  },
   closeOnEsc: {
     type: Boolean,
     default: undefined,

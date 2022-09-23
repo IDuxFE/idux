@@ -20,6 +20,10 @@ export const tooltipProps = {
     type: Boolean,
     default: undefined,
   },
+  closeOnDeactivated: {
+    type: Boolean,
+    default: true,
+  },
   destroyOnHide: {
     type: Boolean,
     default: undefined,
