@@ -5,14 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TooltipProps } from './types'
-import type { ɵOverlayInstance, ɵOverlayProps } from '@idux/components/_private/overlay'
-import type { CommonConfig, TooltipConfig } from '@idux/components/config'
-
-import { ComputedRef, Ref, computed, ref, toRef } from 'vue'
+import { type ComputedRef, type Ref, computed, onDeactivated, ref, toRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
+import { type ɵOverlayInstance, type ɵOverlayProps } from '@idux/components/_private/overlay'
+import { type CommonConfig, type TooltipConfig } from '@idux/components/config'
 import { useOverlayContainer, useZIndex } from '@idux/components/utils'
+
+import { type TooltipProps } from './types'
 
 const defaultOffset: [number, number] = [0, 12]
 
@@ -37,6 +37,12 @@ export function useTooltipOverlay(
 
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
   const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
+
+  onDeactivated(() => {
+    if (visible.value && props.closeOnDeactivated) {
+      setVisible(false)
+    }
+  })
 
   const overlayProps = computed(() => {
     const trigger = props.trigger ?? config.trigger

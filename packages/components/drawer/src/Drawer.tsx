@@ -5,14 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DrawerProps } from './types'
-import type { ScrollStrategy } from '@idux/cdk/scroll'
-import type { ComputedRef, Ref } from 'vue'
-
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide, ref, toRef, watch } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  computed,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onDeactivated,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  watch,
+} from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { BlockScrollStrategy } from '@idux/cdk/scroll'
+import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
@@ -20,7 +29,7 @@ import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
-import { drawerProps } from './types'
+import { type DrawerProps, drawerProps } from './types'
 
 export default defineComponent({
   name: 'IxDrawer',
@@ -92,6 +101,12 @@ function useVisible(props: DrawerProps) {
       return currVisible
     }
     return currAnimatedVisible
+  })
+
+  onDeactivated(() => {
+    if (mergedVisible.value && props.closeOnDeactivated) {
+      setVisible(false)
+    }
   })
 
   return { visible, setVisible, animatedVisible, mergedVisible }

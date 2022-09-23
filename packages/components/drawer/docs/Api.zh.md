@@ -9,6 +9,7 @@
 | `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon` | `close` | ✅ | - |
+| `closeOnDeactivated` | 是否在 [onDeactivated](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 时关闭 | `boolean` | `true` | - | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `container` | 自定义抽屉挂载的容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |

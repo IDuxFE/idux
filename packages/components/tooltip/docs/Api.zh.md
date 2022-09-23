@@ -8,6 +8,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `v-model:visible` | 是否显隐 | `boolean` | - | - | - |
 | `autoAdjust` | 浮层被遮挡时自动调整位置 | `boolean` | `true` | ✅ | - |
+| `closeOnDeactivated` | 是否在 [onDeactivated](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 时关闭 | `boolean` | `true` | - | - |
 | `destroyOnHide` | 隐藏时是否销毁浮层 | `boolean` | `false` | ✅ | - |
 | `delay` | 浮层显示隐藏延时 | `number \| [number, number]` | `100` | ✅ | - |
 | `overlayContainer` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |

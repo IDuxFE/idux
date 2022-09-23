@@ -10,6 +10,7 @@ import {
   computed,
   defineComponent,
   onBeforeUnmount,
+  onDeactivated,
   onMounted,
   provide,
   ref,
@@ -88,7 +89,6 @@ export default defineComponent({
 
 function useVisible(props: ModalProps) {
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
-
   const animatedVisible = ref<boolean>()
 
   const mergedVisible = computed(() => {
@@ -98,6 +98,12 @@ function useVisible(props: ModalProps) {
       return currVisible
     }
     return currAnimatedVisible
+  })
+
+  onDeactivated(() => {
+    if (mergedVisible.value && props.closeOnDeactivated) {
+      setVisible(false)
+    }
   })
 
   return { visible, setVisible, animatedVisible, mergedVisible }
