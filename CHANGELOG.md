@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** virtual scroll scrolledBottom event ([#1148](https://github.com/IDuxFE/idux/issues/1148)) ([64f1e07](https://github.com/IDuxFE/idux/commit/64f1e07c6d6c907ebcab3bf8b5444b86e4740f8f))
+* **pro:transfer:** modify treeProps and tableProps type ([#1149](https://github.com/IDuxFE/idux/issues/1149)) ([93509fd](https://github.com/IDuxFE/idux/commit/93509fda2c539064173b16620fae60600419c25e))
+* **pro:transfer:** transfer tree should show scrollbar ([#1156](https://github.com/IDuxFE/idux/issues/1156)) ([fc16803](https://github.com/IDuxFE/idux/commit/fc16803aad4a571343fb7fbcbf4ed95015fe9a54))
+
+
+### Features
+
+* **comp:table:** the selectable column supports custom cell ([#1153](https://github.com/IDuxFE/idux/issues/1153)) ([787f3f1](https://github.com/IDuxFE/idux/commit/787f3f16a211a881946ff59f33ebcdaae6b5ca9c))
+* **comp:tooltip:** supports closeOnDeactivated ([#1158](https://github.com/IDuxFE/idux/issues/1158)) ([38c8e03](https://github.com/IDuxFE/idux/commit/38c8e0315ed74bf240a69c26d8062b65e1d4dd8d))
+* **comp:watermark:** add custom props for canvas ([#1154](https://github.com/IDuxFE/idux/issues/1154)) ([16c9df3](https://github.com/IDuxFE/idux/commit/16c9df37e0915944eed5d7914bfe27091c81e870))
+* **pro:search:** add focus and blur support ([#1151](https://github.com/IDuxFE/idux/issues/1151)) ([da8d6db](https://github.com/IDuxFE/idux/commit/da8d6db1b11ee75dd7a1989a5fc99cfe5bb771a6))
+* **pro:table:** layout tool supports setting size and searching ([#1157](https://github.com/IDuxFE/idux/issues/1157)) ([667a392](https://github.com/IDuxFE/idux/commit/667a392b19c4d054412c2992e4939832281df162))
+
+
+
+
+
 # [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
 
 

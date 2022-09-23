@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** virtual scroll scrolledBottom event ([#1148](https://github.com/IDuxFE/idux/issues/1148)) ([64f1e07](https://github.com/IDuxFE/idux/commit/64f1e07c6d6c907ebcab3bf8b5444b86e4740f8f))
+
+
+
+
+
 # [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
 
 

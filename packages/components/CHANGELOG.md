@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
+
+
+### Features
+
+* **comp:table:** the selectable column supports custom cell ([#1153](https://github.com/IDuxFE/idux/issues/1153)) ([787f3f1](https://github.com/IDuxFE/idux/commit/787f3f16a211a881946ff59f33ebcdaae6b5ca9c))
+* **comp:tooltip:** supports closeOnDeactivated ([#1158](https://github.com/IDuxFE/idux/issues/1158)) ([38c8e03](https://github.com/IDuxFE/idux/commit/38c8e0315ed74bf240a69c26d8062b65e1d4dd8d))
+* **comp:watermark:** add custom props for canvas ([#1154](https://github.com/IDuxFE/idux/issues/1154)) ([16c9df3](https://github.com/IDuxFE/idux/commit/16c9df37e0915944eed5d7914bfe27091c81e870))
+* **pro:table:** layout tool supports setting size and searching ([#1157](https://github.com/IDuxFE/idux/issues/1157)) ([667a392](https://github.com/IDuxFE/idux/commit/667a392b19c4d054412c2992e4939832281df162))
+
+
+
+
+
 # [1.0.0-rc.7](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-09-16)
 
 
