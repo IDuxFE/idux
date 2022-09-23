@@ -56,7 +56,7 @@ export const proTableProps = {
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
-  layoutTool: { type: Boolean, default: true },
+  layoutTool: { type: [Boolean, Object] as PropType<boolean | ProTableLayoutToolPublicProps>, default: true },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },
@@ -88,7 +88,13 @@ export type ProTableComponent = DefineComponent<
 >
 export type ProTableInstance = InstanceType<DefineComponent<ProTableProps, ProTableBindings>>
 
-export const proTableLayoutToolProps = {} as const
+export const proTableLayoutToolProps = {
+  placeholder: { type: String, default: undefined },
+  searchable: { type: Boolean, default: undefined },
+  searchValue: { type: String, default: undefined },
+
+  'onUpdate:searchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+} as const
 
 export type ProTableLayoutToolProps = ExtractInnerPropTypes<typeof proTableLayoutToolProps>
 export type ProTableLayoutToolPublicProps = ExtractPublicPropTypes<typeof proTableLayoutToolProps>

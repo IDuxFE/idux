@@ -7,7 +7,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `columns` | 表格列的配置描述 | `ProTableColumn[]` | - | - |  参见[ProTableColumn](#ProTableColumn)  |
-| `layoutTool` | 是否显示布局设置工具按钮 | `boolean` | `true` | - | 当设置为 `false` 时，你也可以使用 `IxProTableLayoutTool` 来自定义它的位置和展示形式 |
+| `layoutTool` | 是否显示布局设置工具按钮 | `boolean \| ProTableLayoutToolProps` | `true` | - | 当设置为 `false` 时，你也可以使用 `IxProTableLayoutTool` 来自定义它的位置和展示形式 |
 | `toolbar` | 表格的工具栏 | `VNode[] \| #toolbar` | - | - | - |
 | `onColumnsChange` | 表格列的配置发生改变后的回调 | `(columns: ProTableColumn[]) => void` | - | - | - |
 
@@ -90,3 +90,11 @@ export const defaultConfig: ProGlobalConfig = {
 只有当你设置了 `layoutTool='false'` 时，并需要在表格的其他位置来控制表格的布局时使用。
 
 例如: 在自定义 `header` 的时候设置它, 参见 [自定义头部](#pro-table-demo-CustomHeader).
+
+#### ProTableLayoutToolProps
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `v-model:searchValue` | 搜索的文本 | `string` | - | - | - |
+| `placeholder` | 搜索框的占位符 | `string` | ✅ | - | 通过 locale 全局配置 |
+| `searchable` | 是否开启搜索功能 | `boolean` | ✅ | - | - |

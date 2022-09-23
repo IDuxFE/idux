@@ -11,6 +11,7 @@ export interface ProTableLocale {
     sm: string
     md: string
     lg: string
+    placeholder: string
     all: string
     reset: string
     indexable: string

@@ -8,7 +8,6 @@
 import { type PropType, computed, defineComponent, inject } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
-import { IxDivider } from '@idux/components/divider'
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeDragDropOptions, type TreeProps } from '@idux/components/tree'
 import { useKey } from '@idux/components/utils'
@@ -20,6 +19,7 @@ import { getColumnTitle, loopColumns } from '../utils'
 export default defineComponent({
   props: {
     columns: { type: Array as PropType<ProTableColumn[]>, required: true },
+    searchValue: { type: String, default: undefined },
     title: { type: String, default: undefined },
     onDrop: { type: Function, required: true },
     onFixedChange: { type: Function, required: true },
@@ -28,7 +28,6 @@ export default defineComponent({
     const key = useKey()
     const { locale, mergedPrefixCls, mergedColumnMap } = inject(proTableToken)!
 
-    const dataSource = computed(() => props.columns)
     const checkedKeys = computed(() => getCheckedKeys(props.columns))
 
     const onCheck = (checked: boolean, column: ProTableColumn) => {
@@ -59,20 +58,19 @@ export default defineComponent({
       }
 
       const columns = getDropColumns(props.columns, dragKey, dropKey, dropType)
-      props.onDrop(key, columns)
+      props.onDrop!(key, columns)
     }
 
     const onFixedChange = (fixed: 'start' | 'end' | undefined, column: ProTableColumn) => {
       column.fixed = fixed
-      loopColumns(column.children!, child => {
+      loopColumns(column.children, child => {
         child.fixed = fixed
       })
-      props.onFixedChange()
+      props.onFixedChange!()
     }
 
     return () => {
-      const { title } = props
-
+      const { columns, searchValue, title } = props
       const { startPin, endPin, noPin } = locale.table.layout
 
       const treeProps: TreeProps = {
@@ -81,11 +79,13 @@ export default defineComponent({
         checkable: true,
         checkedKeys: checkedKeys.value,
         draggable: true,
-        dataSource: dataSource.value,
+        dataSource: columns,
         disabled: disableColumn,
+        empty: '',
         childrenKey: 'children',
         getKey: 'key',
         labelKey: 'title',
+        searchValue,
         onCheck,
         onDrop,
       }
@@ -100,16 +100,10 @@ export default defineComponent({
           const { fixed } = node
           if (fixed === 'start') {
             return [
+              <IxIcon name="vertical-align-center" title={noPin} onClick={() => onFixedChange(undefined, node)} />,
               <IxIcon
                 name="vertical-align-top"
                 rotate={180}
-                title={noPin}
-                onClick={() => onFixedChange(undefined, node)}
-              />,
-              <IxDivider vertical />,
-              <IxIcon
-                name="vertical-align-top"
-                rotate={90}
                 title={endPin}
                 onClick={() => onFixedChange('end', node)}
               />,
@@ -117,38 +111,23 @@ export default defineComponent({
           }
           if (fixed === 'end') {
             return [
-              <IxIcon
-                name="vertical-align-top"
-                rotate={-90}
-                title={startPin}
-                onClick={() => onFixedChange('start', node)}
-              />,
-              <IxDivider vertical />,
-              <IxIcon
-                name="vertical-align-top"
-                rotate={0}
-                title={noPin}
-                onClick={() => onFixedChange(undefined, node)}
-              />,
+              <IxIcon name="vertical-align-top" title={startPin} onClick={() => onFixedChange('start', node)} />,
+              <IxIcon name="vertical-align-center" title={noPin} onClick={() => onFixedChange(undefined, node)} />,
             ]
           }
           return [
-            <IxIcon
-              name="vertical-align-top"
-              rotate={-90}
-              title={startPin}
-              onClick={() => onFixedChange('start', node)}
-            />,
-            <IxDivider vertical />,
-            <IxIcon name="vertical-align-top" rotate={90} title={endPin} onClick={() => onFixedChange('end', node)} />,
+            <IxIcon name="vertical-align-top" title={startPin} onClick={() => onFixedChange('start', node)} />,
+            <IxIcon name="vertical-align-top" rotate={180} title={endPin} onClick={() => onFixedChange('end', node)} />,
           ]
         },
       }
 
+      const prefixCls = `${mergedPrefixCls.value}-layout-tool-tree`
+
       return (
-        <div>
-          {title && <span class={`${mergedPrefixCls.value}-layout-tool-tree-title`}>{title}</span>}
-          <IxTree class={`${mergedPrefixCls.value}-layout-tool-tree`} {...treeProps} v-slots={treeSlots} />
+        <div class={prefixCls}>
+          {title && <div class={`${prefixCls}-title`}>{title}</div>}
+          <IxTree {...treeProps} v-slots={treeSlots} />
         </div>
       )
     }

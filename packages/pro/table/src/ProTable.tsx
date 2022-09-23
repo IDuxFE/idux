@@ -7,11 +7,13 @@
 
 /* eslint-disable indent */
 
-import { computed, defineComponent, provide, ref } from 'vue'
+import { computed, defineComponent, provide, ref, watch } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { type VirtualScrollToOptions } from '@idux/cdk/scroll'
+import { useState } from '@idux/cdk/utils'
+import { useGlobalConfig as useComponentsGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
 import { IxSpace } from '@idux/components/space'
 import { IxTable, type TableCustomAdditional, type TableCustomTag, type TableInstance } from '@idux/components/table'
@@ -30,11 +32,15 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('table')
+    const baseConfig = useComponentsGlobalConfig('table')
     const locale = useGlobalConfig('locale')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-table`)
     const columnsContext = useColumns(props, config)
     const { hasResizable, onResizeEnd } = useResizable(columnsContext)
+    const mergedConfigSize = computed(() => props.size ?? baseConfig.size)
+    const [mergedSize, setMergedSize] = useState(mergedConfigSize.value)
+    watch(() => mergedConfigSize.value, setMergedSize)
 
     provide(proTableToken, {
       props,
@@ -42,6 +48,8 @@ export default defineComponent({
       config,
       locale,
       mergedPrefixCls,
+      mergedSize,
+      setMergedSize,
       ...columnsContext,
     })
 
@@ -107,6 +115,7 @@ export default defineComponent({
           columns={columnsContext.displayColumns.value}
           customAdditional={mergedCustomAdditional}
           customTag={mergedCustomTag}
+          size={mergedSize.value}
         />
       )
     }

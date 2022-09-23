@@ -17,6 +17,8 @@ export interface ProTableContext extends ColumnsContext {
   config: ProTableConfig
   locale: ProLocale
   mergedPrefixCls: ComputedRef<string>
+  mergedSize: ComputedRef<'lg' | 'md' | 'sm'>
+  setMergedSize: (value: 'lg' | 'md' | 'sm') => void
 }
 
 export const proTableToken: InjectionKey<ProTableContext> = Symbol('proTableToken')

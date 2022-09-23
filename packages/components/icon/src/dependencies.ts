@@ -31,6 +31,9 @@ import {
   Holder,
   InfoCircle,
   InfoCircleFilled,
+  LayoutCompact,
+  LayoutLarge,
+  LayoutMedium,
   Left,
   LeftDouble,
   Loading,
@@ -51,6 +54,7 @@ import {
   TreeUnexpand,
   Uncollapse,
   User,
+  VerticalAlignCenter,
   VerticalAlignTop,
   ZoomIn,
   ZoomOut,
@@ -80,6 +84,9 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Holder, // tree
   InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
+  LayoutCompact, // ProTable
+  LayoutLarge, // ProTable
+  LayoutMedium, // ProTable
   Left, // date-panel
   LeftDouble, // Transfer
   Loading, // Message Button Spin FormItem Switch Timeline Tree
@@ -100,6 +107,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Uncollapse, // Pro Tree
   TreeExpand, // TreeSelect
   TreeUnexpand, // TreeSelect
+  VerticalAlignCenter, // ProTable
   VerticalAlignTop, // BackTop
   ZoomIn, // Image
   ZoomOut, // Image

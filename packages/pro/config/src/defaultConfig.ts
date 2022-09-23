@@ -33,6 +33,9 @@ export const defaultConfig: ProGlobalConfig = {
       align: 'center',
       customCell: ({ rowIndex }) => rowIndex,
     },
+    layoutTool: {
+      searchable: false,
+    },
   },
   tree: {
     clearIcon: 'close-circle',

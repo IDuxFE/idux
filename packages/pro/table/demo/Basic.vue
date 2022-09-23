@@ -3,6 +3,7 @@
     :columns="columns"
     :dataSource="data"
     header="Pro Table"
+    :layoutTool="{ searchable: true }"
     :toolbar="toolbar"
     @columnsChange="onColumnsChange"
   >

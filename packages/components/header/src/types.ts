@@ -7,7 +7,7 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { AvatarProps } from '@idux/components/avatar'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
 export type HeaderSize = 'xl' | 'lg' | 'md' | 'sm'
 
@@ -15,11 +15,11 @@ export const headerProps = {
   avatar: { type: [String, Object] as PropType<string | AvatarProps>, default: undefined },
   description: { type: String, default: undefined },
   disabled: { type: Boolean, default: false },
-  prefix: { type: [String, Object] as PropType<string | VNode>, default: undefined },
+  prefix: { type: [String, Object] as PropType<string | VNodeChild>, default: undefined },
   size: { type: String as PropType<HeaderSize>, default: 'md' },
   showBar: { type: Boolean, default: false },
   subTitle: { type: String, default: undefined },
-  suffix: { type: [String, Object] as PropType<string | VNode>, default: undefined },
+  suffix: { type: [String, Object] as PropType<string | VNodeChild>, default: undefined },
   title: { type: String, default: undefined },
 
   // events

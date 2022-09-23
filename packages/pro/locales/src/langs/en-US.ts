@@ -17,6 +17,7 @@ const enUS: ProLocale = {
       sm: 'Compact',
       md: 'Medium',
       lg: 'Expanded',
+      placeholder: 'Search keywords',
       all: 'Select All',
       reset: 'Restore',
       indexable: 'No.',
