@@ -57,7 +57,7 @@ export function createSelectSegment(
       }
     }
     const handleSelectAll = () => {
-      setValue(selectableKeys.length !== panelValue.length ? selectableKeys : [])
+      setValue(selectableKeys.length !== panelValue.length ? selectableKeys : undefined)
     }
 
     return (
