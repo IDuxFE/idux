@@ -10,7 +10,7 @@ import { type ComputedRef, toRaw } from 'vue'
 import { isArray } from 'lodash-es'
 
 import { type FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
-import { callEmit, useState } from '@idux/cdk/utils'
+import { callEmit, convertArray, useState } from '@idux/cdk/utils'
 import { type DateConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 
@@ -42,13 +42,18 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
 
   function handleChange(value: StateValueType<T>) {
     const newValue = (isArray(value) ? sortRangeValue(dateConfig, value) : value) as StateValueType<T>
+
+    if (convertArray(newValue).some(v => props.disabledDate?.(v))) {
+      return
+    }
+
     let oldValue = toRaw(accessor.value) as StateValueType<T>
     oldValue = (
       isArray(oldValue)
         ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
         : convertToDate(dateConfig, oldValue, formatRef.value)
     ) as StateValueType<T>
-    accessor.setValue(value as T['value'])
+    accessor.setValue(newValue as T['value'])
     callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
   }
 

@@ -7,12 +7,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import type { InputStateContext } from './composables/useInputState'
 import type { PickerControlContext } from './composables/useControl'
 import type { FormatContext } from './composables/useFormat'
 import type { InputEnableStatus } from './composables/useInputEnableStatus'
 import type { OverlayStateContext } from './composables/useOverlayState'
-// import type { PanelStateContext } from './composables/usePanelState'
 import type { PickerStateContext } from './composables/usePickerState'
 import type { PickerRangeControlContext } from './composables/useRangeControl'
 import type { DatePickerProps, DateRangePickerProps } from './types'
