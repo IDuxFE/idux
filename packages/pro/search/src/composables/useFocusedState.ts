@@ -31,12 +31,18 @@ export function useFocusedState(
   searchStateContext: SearchStateContext,
   activeSegmentContext: ActiveSegmentContext,
 ): FocusEventContext {
-  const { updateSearchState, tempSearchState } = searchStateContext
+  const { tempSearchState, searchStates } = searchStateContext
   const { activeSegment, setInactive, setTempActive } = activeSegmentContext
   const [focused, setFocused] = useState(false)
 
   const { setTempSegmentActive, setPrevActiveSegmentName } = manageTempSegmentActive(tempSearchState, setTempActive)
   const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive)
+
+  watch([activeSegment, searchStates], ([segment]) => {
+    if (!segment && focused.value) {
+      setTempSegmentActive()
+    }
+  })
 
   const _handleBlur = (evt: FocusEvent) => {
     handleBlur(evt, () => {
@@ -44,11 +50,6 @@ export function useFocusedState(
       setPrevActiveSegmentName(
         activeSegment.value?.itemKey === tempSearchStateKey ? activeSegment.value.name : undefined,
       )
-
-      // if currently active segment is in an exsisted search value, update the search value
-      if (activeSegment.value && activeSegment.value.itemKey !== tempSearchStateKey) {
-        updateSearchState(activeSegment.value.itemKey)
-      }
     })
   }
 
@@ -150,11 +151,11 @@ function useFocusHandlers(
       return
     }
 
+    cb?.()
+
     setInactive(true)
     setFocused(false)
     callEmit(props.onBlur, evt)
-
-    cb?.()
   }
 
   const handleFocus = (evt: FocusEvent, cb?: () => void) => {
@@ -167,10 +168,10 @@ function useFocusHandlers(
       return
     }
 
+    cb?.()
+
     setFocused(true)
     callEmit(props.onFocus, evt)
-
-    cb?.()
   }
 
   return {

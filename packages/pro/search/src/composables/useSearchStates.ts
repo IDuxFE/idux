@@ -38,9 +38,9 @@ export interface SearchStateContext {
   tempSearchStateAvailable: ComputedRef<boolean>
   initSearchStates: () => void
   initTempSearchState: () => void
-  getSearchStateByKey: (key: VKey) => { searchState: SearchState; index: number }
-  validateSearchState: (key: VKey) => boolean
-  convertStateToValue: (key: VKey) => SearchValue
+  getSearchStateByKey: (key: VKey) => SearchState | undefined
+  validateSearchState: (key: VKey) => boolean | undefined
+  convertStateToValue: (key: VKey) => SearchValue | undefined
   updateSegmentValue: (value: unknown, name: string, key: VKey) => void
   updateSearchState: (key: VKey) => void
   removeSearchState: (key: VKey) => void
@@ -94,11 +94,10 @@ export function useSearchStates(
 
   function getSearchStateByKey(key: VKey) {
     if (key === tempSearchStateKey) {
-      return { searchState: tempSearchState, index: -1 }
+      return tempSearchState
     }
 
-    const index = searchStates.value.findIndex(value => value.key === key)
-    return { searchState: searchStates.value[index], index }
+    return searchStates.value.find(value => value.key === key)
   }
 
   function _convertStateToValue<V>(state: SearchState) {
@@ -126,10 +125,8 @@ export function useSearchStates(
       searchState.fieldKey = value as VKey
       const searchValue = searchValues.value?.find(value => value.key === searchState.key)
       const searchFields = props.searchFields?.find(field => field.key === searchState.fieldKey)
-      const segmentValues = generateSegmentValues(searchFields, searchValue, dateConfig)
-      segmentValues.shift()
 
-      searchState.segmentValues = [searchState.segmentValues[0], ...segmentValues]
+      searchState.segmentValues = generateSegmentValues(searchFields, searchValue, dateConfig)
     }
   }
 
@@ -149,13 +146,13 @@ export function useSearchStates(
   }
 
   const validateSearchState = (key: VKey) => {
-    const { searchState } = getSearchStateByKey(key)
-    return checkSearchStateValid(searchState, fieldKeyCountMap.value, key !== tempSearchStateKey)
+    const searchState = getSearchStateByKey(key)
+    return searchState && checkSearchStateValid(searchState, fieldKeyCountMap.value, key !== tempSearchStateKey)
   }
 
   const convertStateToValue = (key: VKey) => {
-    const { searchState } = getSearchStateByKey(key)
-    return _convertStateToValue(searchState)
+    const searchState = getSearchStateByKey(key)
+    return searchState ? _convertStateToValue(searchState) : undefined
   }
 
   const initTempSearchState = () => {
@@ -211,7 +208,7 @@ export function useSearchStates(
       return
     }
 
-    const { searchState } = getSearchStateByKey(key)
+    const searchState = getSearchStateByKey(key)
     if (!searchState) {
       return
     }
@@ -223,7 +220,7 @@ export function useSearchStates(
       return
     }
 
-    const { searchState } = getSearchStateByKey(key)
+    const searchState = getSearchStateByKey(key)
 
     if (!searchState) {
       return

@@ -11,12 +11,13 @@ import { type Ref, ref, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { tempSearchStateKey } from '../composables/useSearchStates'
-import { type ProSearchProps, type SearchItemProps, searchDataTypes } from '../types'
+import { SearchState, tempSearchStateKey } from '../composables/useSearchStates'
+import { type ProSearchProps, type SearchItemProps, Segment, searchDataTypes } from '../types'
 
 type SegmentStates = Record<string, { input: string; value: unknown; index: number }>
 export interface SegmentStatesContext {
   segmentStates: Ref<SegmentStates>
+  initSegmentStates: () => void
   handleSegmentInput: (name: string, input: string) => void
   handleSegmentChange: (name: string, value: unknown) => void
   handleSegmentConfirm: (name: string, confirmItem?: boolean) => void
@@ -38,24 +39,40 @@ export function useSegmentStates(
     initTempSearchState,
     changeActive,
     setInactive,
-    setTempActive,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
 
+  const _genInitSegmentState = (segment: Segment, searchState: SearchState, index: number) => {
+    const name = segment.name
+    const segmentValue = searchState?.segmentValues.find(value => value.name === name)
+    return {
+      input: segment.format(segmentValue?.value) ?? '',
+      value: segmentValue?.value,
+      index: index,
+    }
+  }
+
+  // reset temp segment states
   const initSegmentStates = () => {
-    const states = {} as SegmentStates
-    props.searchItem!.segments.forEach((segment, index) => {
-      const { searchState } = getSearchStateByKey(props.searchItem!.key)
-      const segmentValue = searchState.segmentValues.find(value => value.name === segment.name)
+    segmentStates.value = props.searchItem!.segments.reduce((states, segment, index) => {
+      states[segment.name] = _genInitSegmentState(segment, getSearchStateByKey(props.searchItem!.key)!, index)
+      return states
+    }, {} as SegmentStates)
+  }
 
-      states[segment.name] = {
-        input: segment.format(segmentValue?.value) ?? '',
-        value: segmentValue?.value,
-        index,
-      }
-    })
+  // reset certain segment state indentified by name
+  const initSegmentState = (name: string) => {
+    const segmentState = segmentStates.value[name]
+    if (!segmentState) {
+      return
+    }
 
-    segmentStates.value = states
+    const segment = props.searchItem!.segments[segmentState.index]
+    segmentStates.value[name] = _genInitSegmentState(
+      segment,
+      getSearchStateByKey(props.searchItem!.key)!,
+      segmentState.index,
+    )
   }
   watch(() => props.searchItem?.segments, initSegmentStates, { immediate: true })
 
@@ -99,11 +116,7 @@ export function useSegmentStates(
       removed: !validateRes,
     })
 
-    if (key !== tempSearchStateKey) {
-      setInactive()
-    } else {
-      setTempActive()
-    }
+    setInactive()
   }
 
   const handleSegmentConfirm = (name: string, confirmItem?: boolean) => {
@@ -114,6 +127,8 @@ export function useSegmentStates(
     const { value, index } = segmentState
     updateSegmentValue(value, name, props.searchItem!.key)
 
+    // only confirm searchItem when the last segment is confirmed
+    // if the last segment is searchItem name, confirm the searchItem only when no searchField is selected
     if (
       index === props.searchItem!.segments.length - 1 &&
       confirmItem &&
@@ -125,6 +140,9 @@ export function useSegmentStates(
     }
   }
   const handleSegmentCancel = (name: string) => {
+    // init the canceled segment state
+    initSegmentState(name)
+
     if (!segmentStates.value[name].value) {
       changeActive(-1, true)
     } else if (props.searchItem?.key !== tempSearchStateKey) {
@@ -134,6 +152,7 @@ export function useSegmentStates(
 
   return {
     segmentStates,
+    initSegmentStates,
     handleSegmentInput: setSegmentInput,
     handleSegmentChange: setSegmentValue,
     handleSegmentConfirm,
