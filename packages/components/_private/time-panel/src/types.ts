@@ -10,22 +10,20 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { MaybeArray } from '@idux/cdk/utils'
 
+export type AmPm = 'am' | 'pm'
+
 export const baseTimePanelProps = {
   disabledHours: {
-    type: Function as PropType<(selectedAmPm: string | undefined) => number[]>,
+    type: Function as PropType<(selectedAmPm: AmPm | undefined) => number[]>,
     default: () => [],
   },
   disabledMinutes: {
-    type: Function as PropType<(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]>,
+    type: Function as PropType<(selectedHour: number | undefined, selectedAmPm: AmPm | undefined) => number[]>,
     default: () => [],
   },
   disabledSeconds: {
     type: Function as PropType<
-      (
-        selectedHour: number | undefined,
-        selectedMinute: number | undefined,
-        selectedAmPm: string | undefined,
-      ) => number[]
+      (selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: AmPm | undefined) => number[]
     >,
     default: () => [],
   },
@@ -89,7 +87,7 @@ export type TimePanelInstance = InstanceType<DefineComponent<TimePanelProps>>
 
 // private
 export interface TimePanelCell {
-  value: number | string
+  value: number | 'am' | 'pm'
   disabled: boolean
 }
 

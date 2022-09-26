@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TimePickerProps, TimeRangePickerProps } from '../types'
 import type { ɵBaseTimePanelProps } from '@idux/components/_private/time-panel'
 
 import { type ComputedRef, computed } from 'vue'
 
-import { TimePickerContext, TimeRangePickerContext } from '../tokens'
+import { checkAmPmCapital, checkHourEnabled, checkMinuteEnabled, checkSecondEnabled, checkUse12Hours } from '../utils'
 
 export interface CommonPanelProps extends ɵBaseTimePanelProps {
   hourEnabled: boolean
@@ -19,21 +20,14 @@ export interface CommonPanelProps extends ɵBaseTimePanelProps {
   amPmCapital: boolean
 }
 
-export function usePanelProps(context: TimePickerContext | TimeRangePickerContext): ComputedRef<CommonPanelProps> {
+export function usePanelProps(
+  props: TimePickerProps | TimeRangePickerProps,
+  formatRef: ComputedRef<string>,
+): ComputedRef<CommonPanelProps> {
   return computed(() => {
-    const { props, config } = context
-    const {
-      disabledHours,
-      disabledMinutes,
-      disabledSeconds,
-      format,
-      hideDisabledOptions,
-      hourStep,
-      minuteStep,
-      secondStep,
-    } = props
-
-    const _format = format ?? config.format
+    const { disabledHours, disabledMinutes, disabledSeconds, hideDisabledOptions, hourStep, minuteStep, secondStep } =
+      props
+    const format = formatRef.value
 
     return {
       disabledHours,
@@ -43,11 +37,11 @@ export function usePanelProps(context: TimePickerContext | TimeRangePickerContex
       hourStep,
       minuteStep,
       secondStep,
-      hourEnabled: /[hH]/.test(_format),
-      minuteEnabled: /m/.test(_format),
-      secondEnabled: /s/.test(_format),
-      use12Hours: /[aA]/.test(_format),
-      amPmCapital: /A/.test(_format),
+      hourEnabled: checkHourEnabled(format),
+      minuteEnabled: checkMinuteEnabled(format),
+      secondEnabled: checkSecondEnabled(format),
+      use12Hours: checkUse12Hours(format),
+      amPmCapital: checkAmPmCapital(format),
     }
   })
 }

@@ -12,6 +12,7 @@ import TimePanel from './src/TimePanel'
 const ɵTimePanel = TimePanel as unknown as TimePanelComponent
 
 export { ɵTimePanel }
+export { normalizeAmPm as ɵNormalizeAmPm, calculateViewHour as ɵCalculateViewHour } from './src/utils'
 
 export type {
   TimePanelInstance as ɵTimePanelInstance,
