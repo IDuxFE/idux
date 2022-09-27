@@ -1,5 +1,12 @@
 <template>
-  <IxTable :columns="columns" :dataSource="dataSource" :rowKey="getRowKey" :pagination="pagination" :spin="loading">
+  <IxTable
+    :columns="columns"
+    :dataSource="dataSource"
+    :getKey="getRowKey"
+    :pagination="pagination"
+    :spin="loading"
+    @pageChange="setPagination"
+  >
   </IxTable>
 </template>
 
@@ -7,6 +14,39 @@
 import { onMounted, reactive, ref } from 'vue'
 
 import { TableColumn, TablePagination } from '@idux/components/table'
+
+const pagination = reactive<TablePagination>({
+  showSizeChanger: true,
+})
+
+const setPagination = (pageIndex: number, pageSize: number) => {
+  // 如果修改了 pageSize, 应该把 pageIndex 重置为 1
+  if (pagination.pageSize !== pageSize) {
+    pagination.pageIndex = 1
+    pagination.pageSize = pageSize
+  } else {
+    pagination.pageIndex = pageIndex
+  }
+
+  fetchData(pagination.pageIndex, pagination.pageSize)
+}
+
+const loading = ref(false)
+
+const fetchData = async (pageIndex: number, pageSize: number) => {
+  loading.value = true
+
+  const { results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
+    res.json(),
+  )
+
+  dataSource.value = results
+  pagination.total = 200 // mock the total data here
+
+  loading.value = false
+}
+
+onMounted(() => setPagination(1, 10))
 
 interface RandomUser {
   gender: string
@@ -48,29 +88,4 @@ const columns: TableColumn<RandomUser>[] = [
 const dataSource = ref<RandomUser[]>([])
 
 const getRowKey = (record: RandomUser) => record.login.uuid
-
-const pagination = reactive<TablePagination>({
-  showSizeChanger: true,
-  onChange: (pageIndex, pageSize) => fetchData(pageIndex, pageSize),
-})
-
-const loading = ref(false)
-
-const fetchData = async (pageIndex: number, pageSize: number) => {
-  loading.value = true
-
-  const { results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
-    res.json(),
-  )
-
-  loading.value = false
-
-  dataSource.value = results
-
-  pagination.pageIndex = pageIndex
-  pagination.pageSize = pageSize
-  pagination.total = 200 // mock the total data here
-}
-
-onMounted(() => fetchData(1, 10))
 </script>

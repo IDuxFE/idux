@@ -5,21 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, ref, watchEffect } from 'vue'
+import { type ComputedRef, computed, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { type TableConfig, useGlobalConfig } from '@idux/components/config'
 
-import { type TablePagination, type TableProps } from '../types'
+import { type TablePagination, type TableProps, type TableSize } from '../types'
 
 export interface PaginationContext {
   mergedPagination: ComputedRef<TablePagination | null>
 }
 
-export function usePagination(props: TableProps, config: TableConfig): PaginationContext {
+export function usePagination(
+  props: TableProps,
+  config: TableConfig,
+  mergedSize: ComputedRef<TableSize>,
+): PaginationContext {
   const paginationConfig = useGlobalConfig('pagination')
-  const pageIndex = ref<number>()
-  const pageSize = ref<number>()
 
   const tempPagination = computed(() => {
     const { pagination } = props
@@ -29,23 +31,18 @@ export function usePagination(props: TableProps, config: TableConfig): Paginatio
     return pagination === true ? {} : pagination
   })
 
-  watchEffect(() => {
-    const pagination = tempPagination.value
-    pageIndex.value = pagination?.pageIndex ?? 1
-    pageSize.value = pagination?.pageSize ?? config.pagination.pageSize ?? paginationConfig.pageSize
-  })
+  const tempIndex = ref<number>(tempPagination.value?.pageIndex ?? 1)
+  const tempSize = ref<number>(
+    tempPagination.value?.pageSize ?? config.pagination.pageSize ?? paginationConfig.pageSize,
+  )
 
-  const handlePageIndexChange = (index: number) => {
-    pageIndex.value = index
-    callEmit(tempPagination.value?.['onUpdate:pageIndex'], index)
+  const handlePageChange = (pageIndex: number, pageSize: number) => {
+    tempIndex.value = pageIndex
+    tempSize.value = pageSize
+    callEmit(tempPagination.value?.onChange, pageIndex, pageSize)
   }
 
-  const handlePageSizeChange = (size: number) => {
-    pageSize.value = size
-    callEmit(tempPagination.value?.['onUpdate:pageSize'], size)
-  }
-
-  const mergedPagination = computed(() => {
+  const mergedPagination = computed<TablePagination | null>(() => {
     const pagination = tempPagination.value
     if (pagination === null) {
       return null
@@ -53,10 +50,10 @@ export function usePagination(props: TableProps, config: TableConfig): Paginatio
     return {
       ...config.pagination,
       ...pagination,
-      pageIndex: pageIndex.value,
-      pageSize: pageSize.value,
-      'onUpdate:pageIndex': handlePageIndexChange,
-      'onUpdate:pageSize': handlePageSizeChange,
+      pageIndex: pagination.pageIndex ?? tempIndex.value,
+      pageSize: pagination.pageSize ?? tempSize.value,
+      size: mergedSize.value === 'sm' ? 'sm' : 'md',
+      onChange: handlePageChange,
     }
   })
 
