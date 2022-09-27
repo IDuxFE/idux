@@ -33,3 +33,19 @@ export function sortRangeValue(values: (Date | undefined)[]): (Date | undefined)
     return v1.valueOf() - v2.valueOf()
   })
 }
+
+export function checkHourEnabled(format: string): boolean {
+  return /[hH]/.test(format)
+}
+export function checkMinuteEnabled(format: string): boolean {
+  return /m/.test(format)
+}
+export function checkSecondEnabled(format: string): boolean {
+  return /s/.test(format)
+}
+export function checkUse12Hours(format: string): boolean {
+  return /[aA]/.test(format)
+}
+export function checkAmPmCapital(format: string): boolean {
+  return /A/.test(format)
+}

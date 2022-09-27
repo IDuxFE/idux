@@ -20,9 +20,9 @@
  | `clearIcon` | 清除按钮图标 |`string \| #clearIcon` | `close-circle` | ✅ | - |
  | `clearText` | hover到clearIcon上，显示的title |`string` | clear | ✅ | - |
  | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
- | `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string | undefined) => number[]` | ``() => []`` | - | - |
- | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]` | `() => []` | - | - |
- | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: string | undefined)=>number[]` | `() => []` | - | - |
+ | `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: 'am' \| 'pm' \| undefined) => number[]` | ``() => []`` | - | - |
+ | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: 'am' \| 'pm' \| undefined) => number[]` | `() => []` | - | - |
+ | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number \| undefined, selectedAmPm: 'am' \| 'pm' | undefined)=>number[]` | `() => []` | - | - |
  | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
  | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
  | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |

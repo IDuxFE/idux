@@ -10,12 +10,13 @@ import { type ComputedRef, toRaw } from 'vue'
 import { isArray } from 'lodash-es'
 
 import { type FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
-import { callEmit, useState } from '@idux/cdk/utils'
+import { callEmit, convertArray, useState } from '@idux/cdk/utils'
+import { ɵCalculateViewHour, ɵNormalizeAmPm } from '@idux/components/_private/time-panel'
 import { type DateConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 
 import { type TimePickerProps, type TimeRangePickerProps } from '../types'
-import { convertToDate, sortRangeValue } from '../utils'
+import { checkUse12Hours, convertToDate, sortRangeValue } from '../utils'
 
 type StateValueType<T extends TimePickerProps | TimeRangePickerProps> = T extends TimePickerProps
   ? Date | undefined
@@ -40,8 +41,32 @@ export function usePickerState<T extends TimePickerProps | TimeRangePickerProps>
 
   const [isFocused, setFocused] = useState(false)
 
+  const checkValueDisabled = (value: StateValueType<T>) => {
+    const { get } = dateConfig
+    const use12Hours = checkUse12Hours(formatRef.value)
+
+    return convertArray(value).some(v => {
+      const _hour = get(v, 'hour')
+      const amPm = ɵNormalizeAmPm(_hour, use12Hours)
+      const hour = ɵCalculateViewHour(_hour, !!use12Hours)
+      const minute = get(v, 'minute')
+      const second = get(v, 'second')
+
+      return (
+        props.disabledHours(amPm).includes(hour) ||
+        props.disabledMinutes(hour, amPm).includes(minute) ||
+        props.disabledSeconds(hour, minute, amPm).includes(second)
+      )
+    })
+  }
+
   function handleChange(value: StateValueType<T>) {
     const newValue = (isArray(value) ? sortRangeValue(value) : value) as StateValueType<T>
+
+    if (checkValueDisabled(newValue)) {
+      return
+    }
+
     let oldValue = toRaw(accessor.value) as StateValueType<T>
     oldValue = (
       isArray(oldValue)

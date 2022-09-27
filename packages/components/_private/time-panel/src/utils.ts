@@ -8,9 +8,9 @@
 import type { TimePanelColumnType } from './types'
 import type { DateConfig } from '@idux/components/config'
 
-export function normalizeAmPm(hour: number, is12Hours = false): 'am' | 'pm' | '' {
+export function normalizeAmPm(hour: number, is12Hours = false): 'am' | 'pm' | undefined {
   if (!is12Hours) {
-    return ''
+    return
   }
 
   return hour >= 12 ? 'pm' : 'am'
@@ -26,9 +26,9 @@ export function calculateViewHour(hour: number, is12Hours: boolean): number {
   return hour
 }
 
-export function getHourValue(hour: number, ampm?: string): number {
+export function getHourValue(hour: number, ampm?: 'am' | 'pm' | ''): number {
   if (ampm) {
-    ampm = ampm.toLowerCase()
+    ampm = ampm.toLowerCase() as 'am' | 'pm' | ''
     if (ampm === 'am') {
       hour >= 12 && (hour -= 12)
     }
@@ -45,7 +45,7 @@ export function calculateValue(
   dateNow: Date,
   type: TimePanelColumnType,
   is12Hours: boolean,
-  value: number | string,
+  value: number | 'am' | 'pm' | '',
 ): Date {
   const { get, set } = dateConfig
   const selectNumber = Number(value)
@@ -59,6 +59,6 @@ export function calculateValue(
     case 'second':
       return set(newDate, selectNumber, 'second')
     case 'AM/PM':
-      return set(newDate, getHourValue(get(newDate, 'hour'), value.toString()), 'hour')
+      return set(newDate, getHourValue(get(newDate, 'hour'), value.toString() as 'am' | 'pm' | ''), 'hour')
   }
 }

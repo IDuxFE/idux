@@ -52,7 +52,7 @@ export default defineComponent({
     onUpdated(setInputRef)
 
     const inputProps = useInputProps(context)
-    const panelProps = usePanelProps(context)
+    const panelProps = usePanelProps(props, formatRef)
 
     const { activeValue, setActiveValue } = useActiveValue(props, dateConfig, formatRef, panelValue)
 
