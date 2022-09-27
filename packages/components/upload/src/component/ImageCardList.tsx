@@ -66,7 +66,10 @@ function renderItem(
   locale: Locale,
   getThumbNode: UseThumb['getThumbNode'],
 ) {
-  const fileClasses = normalizeClass([`${cpmClasses.value}-file`, `${cpmClasses.value}-file-${file.status}`])
+  const fileClasses = normalizeClass({
+    [`${cpmClasses.value}-file`]: true,
+    [`${cpmClasses.value}-file-${file.status}`]: !!file.status,
+  })
   const uploadStatusNode = renderUploadStatus(uploadProps, file, locale, cpmClasses)
   const thumbNode = getThumbNode(file)
   const { retryNode, downloadNode, removeNode, previewNode } = renderOprIcon(
