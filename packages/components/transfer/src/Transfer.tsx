@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
-
 import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
@@ -19,9 +17,9 @@ import { useTransferData } from './composables/useTransferData'
 import { useTransferDataStrategies } from './composables/useTransferDataStrategies'
 import { useTransferOperations } from './composables/useTransferOperations'
 import { useTransferSelectState } from './composables/useTransferSelectState'
-import TransferList from './list/TransferList'
+import TransferList from './content/Content'
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from './token'
-import { type TransferApis, transferProps } from './types'
+import { type TransferApis, type TransferListInstance, transferProps } from './types'
 
 export default defineComponent({
   name: 'IxTransfer',
@@ -51,12 +49,12 @@ export default defineComponent({
       targetSearchable,
     )
 
-    const sourceCheckableListRef = ref<ɵCheckableListInstance>()
-    const targetCheckableListRef = ref<ɵCheckableListInstance>()
+    const sourceTransferListRef = ref<TransferListInstance>()
+    const targetTransferListRef = ref<TransferListInstance>()
 
     const transferApi: TransferApis = {
       scrollTo: (isSource, ...params) =>
-        (isSource ? sourceCheckableListRef : targetCheckableListRef).value?.scrollTo(...params),
+        (isSource ? sourceTransferListRef : targetTransferListRef).value?.scrollTo(...params),
     }
 
     expose(transferApi)
@@ -67,8 +65,8 @@ export default defineComponent({
       locale,
       config,
       mergedPrefixCls,
-      sourceCheckableListRef,
-      targetCheckableListRef,
+      sourceTransferListRef,
+      targetTransferListRef,
       showSelectAll,
       getKey: transferDataContext.getKey,
     })

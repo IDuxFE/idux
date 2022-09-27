@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import type { TransferInstance } from '@idux/components/transfer'
+import type { TransferData, TransferInstance } from '@idux/components/transfer'
 
 import { ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   value: number
   label: string

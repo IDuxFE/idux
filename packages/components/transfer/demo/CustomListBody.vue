@@ -4,6 +4,7 @@
     class="transer-demo-custom-transfer-body__transfer"
     :data-source="dataSource"
     :disabled="disabled"
+    :scroll="{ height: 300, fullHeight: true }"
     :show-select-all="false"
   >
     <template #default="params">
@@ -11,7 +12,6 @@
         :selected-row-keys="params.selectedKeys"
         :columns="getColumns(params)"
         :data-source="params.paginatedData"
-        :scroll="{ height: 300, fullHeight: true }"
         :pagination="params.pagination"
       />
     </template>
@@ -20,12 +20,13 @@
 </template>
 
 <script setup lang="ts">
+import type { TransferData, TransferListSlotParams } from '@idux/components/transfer'
+
 import { ref } from 'vue'
 
 import { TableColumn, TableColumnSelectable } from '@idux/components/table'
-import { TransferListSlotParams } from '@idux/components/transfer'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   disabled: boolean
   name: string
@@ -82,10 +83,10 @@ const disabled = ref(false)
 </script>
 <style lang="less">
 .transer-demo-custom-transfer-body__transfer {
-  .ix-transfer-list {
+  .ix-transfer-content {
     height: auto;
   }
-  .ix-transfer-list-source {
+  .ix-transfer-content-source {
     width: 500px;
   }
 }

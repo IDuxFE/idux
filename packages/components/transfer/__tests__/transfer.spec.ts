@@ -2,7 +2,6 @@ import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
-import CheckableListItem from '@idux/components/_private/checkable-list/src/CheckableListItem'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
@@ -10,8 +9,9 @@ import { IxSpin } from '@idux/components/spin'
 
 import Transfer from '../src/Transfer'
 import TransferOperations from '../src/TransferOperations'
-import TransferList from '../src/list/TransferList'
-import TransferListHeader from '../src/list/TransferListHeader'
+import TransferContent from '../src/content/Content'
+import TransferHeader from '../src/content/Header'
+import TransferListItem from '../src/list/ListItem'
 import { TransferProps } from '../src/types'
 
 const mockedDataSource = Array.from(new Array(20)).map((_, idx) => ({
@@ -33,39 +33,33 @@ describe('Transfer', () => {
   test('dataSource work', async () => {
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource } })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(20)
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(0)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(20)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(0)
   })
 
   test('v-model:value work', async () => {
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource, value: [1] } })
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
-    expect(sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 1) > -1).toBeFalsy()
-    expect(
-      targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 1) > -1,
-    ).toBeTruthy()
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
+    expect(sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 1) > -1).toBeFalsy()
+    expect(targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 1) > -1).toBeTruthy()
 
     await wrapper.setProps({ value: [2] })
-    expect(
-      sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 1) > -1,
-    ).toBeTruthy()
-    expect(targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 1) > -1).toBeFalsy()
-    expect(sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 2) > -1).toBeFalsy()
-    expect(
-      targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === 2) > -1,
-    ).toBeTruthy()
+    expect(sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 1) > -1).toBeTruthy()
+    expect(targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 1) > -1).toBeFalsy()
+    expect(sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 2) > -1).toBeFalsy()
+    expect(targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === 2) > -1).toBeTruthy()
   })
 
   test('transfer work', async () => {
     const onChange = vi.fn()
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource, onChange } })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
     const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
     await Promise.all(
       sourceList
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [1, 2, 3, 4, 5, 6].includes(item.props().value))
         .map(item => item.findComponent(IxCheckbox).find('input').setValue(true)),
     )
@@ -74,28 +68,28 @@ describe('Transfer', () => {
     expect(onChange).toBeCalledWith([2, 3, 4, 5], [])
     expect(
       [2, 3, 4, 5].some(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
     expect(
       [2, 3, 4, 5].every(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
     expect(
       [1, 6].every(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
     expect(
       [1, 6].some(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
 
     await Promise.all(
       targetList
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [3, 4].includes(item.props().value))
         .map(item => item.findComponent(IxCheckbox).find('input').setValue(true)),
     )
@@ -104,29 +98,29 @@ describe('Transfer', () => {
     expect(onChange).toBeCalledWith([2, 5], [2, 3, 4, 5])
     expect(
       [2, 5].some(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
     expect(
       [1, 3, 4, 6].some(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
     expect(
       [2, 5].every(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
     expect(
       [1, 3, 4, 6].every(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
 
     onChange.mockClear()
     await Promise.all(
       sourceList
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [13, 14].includes(item.props().value))
         .map(item => item.findComponent(IxCheckbox).find('input').setValue(true)),
     )
@@ -136,12 +130,12 @@ describe('Transfer', () => {
     expect(onChange).not.toBeCalled()
     expect(
       [13, 14].every(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
     expect(
       [13, 14].some(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
 
@@ -149,7 +143,7 @@ describe('Transfer', () => {
     await wrapper.setProps({ disabled: false })
     await Promise.all(
       targetList
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => [2, 5].includes(item.props().value))
         .map(item => item.findComponent(IxCheckbox).find('input').setValue(true)),
     )
@@ -159,12 +153,12 @@ describe('Transfer', () => {
     expect(onChange).not.toBeCalled()
     expect(
       [2, 5].every(
-        value => targetList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeTruthy()
     expect(
       [2, 5].some(
-        value => sourceList.findAllComponents(CheckableListItem).findIndex(item => item.props().value === value) > -1,
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
       ),
     ).toBeFalsy()
   })
@@ -173,9 +167,9 @@ describe('Transfer', () => {
     const onSelectAll = vi.fn()
     const wrapper = TransferMount({ props: { dataSource: mockedDataSource, onSelectAll } })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
-    const sourceSelectAll = sourceList.findComponent(TransferListHeader).findComponent(IxCheckbox)
-    const targetSelectAll = targetList.findComponent(TransferListHeader).findComponent(IxCheckbox)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
+    const sourceSelectAll = sourceList.findComponent(TransferHeader).findComponent(IxCheckbox)
+    const targetSelectAll = targetList.findComponent(TransferHeader).findComponent(IxCheckbox)
     const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
 
     await wrapper.setProps({ disabled: true })
@@ -184,7 +178,7 @@ describe('Transfer', () => {
     await appendTrigger.trigger('click')
 
     expect(onSelectAll).not.toBeCalled()
-    expect(targetList.findAllComponents(CheckableListItem).map(item => item.props().value)).toEqual([])
+    expect(targetList.findAllComponents(TransferListItem).map(item => item.props().value)).toEqual([])
 
     await sourceSelectAll.find('input').setValue(false)
     await wrapper.setProps({ disabled: false })
@@ -196,7 +190,7 @@ describe('Transfer', () => {
     await sourceSelectAll.find('input').setValue(true)
     await appendTrigger.trigger('click')
 
-    expect(sourceList.findAllComponents(CheckableListItem).map(item => item.props().value)).toEqual([1, 6, 12, 16])
+    expect(sourceList.findAllComponents(TransferListItem).map(item => item.props().value)).toEqual([1, 6, 12, 16])
 
     onSelectAll.mockClear()
     await wrapper.setProps({ disabled: true })
@@ -205,7 +199,7 @@ describe('Transfer', () => {
     await removeTrigger.trigger('click')
 
     expect(onSelectAll).not.toBeCalled()
-    expect(sourceList.findAllComponents(CheckableListItem).map(item => item.props().value)).toEqual([1, 6, 12, 16])
+    expect(sourceList.findAllComponents(TransferListItem).map(item => item.props().value)).toEqual([1, 6, 12, 16])
 
     await targetSelectAll.find('input').setValue(false)
     await wrapper.setProps({ disabled: false })
@@ -217,7 +211,7 @@ describe('Transfer', () => {
     await targetSelectAll.find('input').setValue(true)
     await removeTrigger.trigger('click')
 
-    expect(targetList.findAllComponents(CheckableListItem).map(item => item.props().value)).toEqual([])
+    expect(targetList.findAllComponents(TransferListItem).map(item => item.props().value)).toEqual([])
   })
 
   test('clear work', async () => {
@@ -226,18 +220,18 @@ describe('Transfer', () => {
     const wrapper = TransferMount({
       props: { dataSource: mockedDataSource, value: [2, 3, 4, 5], disabled: true, onClear, 'onUpdate:value': onChange },
     })
-    const clearBtn = wrapper.find('.ix-transfer-list-header-clear-icon')
+    const clearBtn = wrapper.find('.ix-transfer-header-clear-icon')
 
     await clearBtn.trigger('click')
     expect(onClear).not.toBeCalled()
     expect(onChange).not.toBeCalled()
-    expect(clearBtn.classes()).toContain('ix-transfer-list-header-clear-icon-disabled')
+    expect(clearBtn.classes()).toContain('ix-transfer-header-clear-icon-disabled')
 
     await wrapper.setProps({ disabled: false })
     await clearBtn.trigger('click')
     expect(onClear).toBeCalled()
     expect(onChange).toBeCalledWith([])
-    expect(clearBtn.classes()).not.toContain('ix-transfer-list-header-clear-icon-disabled')
+    expect(clearBtn.classes()).not.toContain('ix-transfer-header-clear-icon-disabled')
   })
 
   test('clearable work', async () => {
@@ -245,11 +239,11 @@ describe('Transfer', () => {
       props: { dataSource: mockedDataSource, clearable: false },
     })
 
-    expect(wrapper.find('.ix-transfer-list-header-clear-icon').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-transfer-header-clear-icon').exists()).toBeFalsy()
 
     await wrapper.setProps({ clearable: true })
 
-    expect(wrapper.find('.ix-transfer-list-header-clear-icon').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-transfer-header-clear-icon').exists()).toBeTruthy()
   })
 
   test('clearIcon work', async () => {
@@ -257,7 +251,7 @@ describe('Transfer', () => {
       props: { dataSource: mockedDataSource, clearIcon: 'up' },
     })
 
-    expect(wrapper.find('.ix-transfer-list-header-clear-icon').find('.ix-icon-up').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-transfer-header-clear-icon').find('.ix-icon-up').exists()).toBeTruthy()
   })
 
   test('pagination work', async () => {
@@ -274,10 +268,10 @@ describe('Transfer', () => {
       },
     })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
 
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(25)
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(25)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(25)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(25)
 
     await wrapper.setProps({
       pagination: {
@@ -286,8 +280,8 @@ describe('Transfer', () => {
       },
     })
 
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(10)
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(10)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(10)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(10)
 
     await wrapper.setProps({
       pagination: {
@@ -296,8 +290,8 @@ describe('Transfer', () => {
       },
     })
 
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(5)
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(5)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(5)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(5)
 
     await wrapper.setProps({
       pagination: {
@@ -306,8 +300,8 @@ describe('Transfer', () => {
       },
     })
 
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(20)
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(20)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(20)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(20)
 
     await wrapper.setProps({
       pagination: {
@@ -362,19 +356,19 @@ describe('Transfer', () => {
       },
     })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
 
     const sourceSearchInput = sourceList.findComponent(ɵInput).find('input')
     await sourceSearchInput.setValue('9')
     await sourceSearchInput.trigger('keydown.enter')
     expect(onSearch).toBeCalledWith(true, '9')
-    expect(sourceList.findAllComponents(CheckableListItem).length).toBe(2)
+    expect(sourceList.findAllComponents(TransferListItem).length).toBe(2)
 
     const targetSearchInput = targetList.findComponent(ɵInput).find('input')
     await targetSearchInput.setValue('2')
     await targetSearchInput.trigger('keydown.enter')
     expect(onSearch).toBeCalledWith(false, '2')
-    expect(targetList.findAllComponents(CheckableListItem).length).toBe(1)
+    expect(targetList.findAllComponents(TransferListItem).length).toBe(1)
   })
 
   test('immediate work', async () => {
@@ -383,10 +377,10 @@ describe('Transfer', () => {
       props: { dataSource: mockedDataSource, mode: 'immediate', 'onUpdate:value': onChange },
     })
 
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
     const triggerSelect = (num: number, checked: boolean) =>
       sourceList
-        .findAllComponents(CheckableListItem)
+        .findAllComponents(TransferListItem)
         .filter(item => item.props().value === num)[0]
         .findComponent(IxCheckbox)
         .find('input')
@@ -405,16 +399,16 @@ describe('Transfer', () => {
     expect(onChange).toBeCalledWith([3])
 
     await targetList
-      .findAllComponents(CheckableListItem)
+      .findAllComponents(TransferListItem)
       .filter(item => item.props().value === 3)[0]
-      .find('.ix-checkable-list-item-close-icon')
+      .find('.ix-transfer-list-item-close-icon')
       .trigger('click')
     expect(onChange).toBeCalledWith([])
   })
 
   test('spin work', async () => {
     const wrapper = TransferMount({ props: { spin: true } })
-    const [sourceList, targetList] = wrapper.findAllComponents(TransferList)
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
 
     expect(sourceList.findComponent(IxSpin).exists()).toBeTruthy()
     expect(targetList.findComponent(IxSpin).exists()).toBeTruthy()

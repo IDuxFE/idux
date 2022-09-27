@@ -6,8 +6,13 @@
  */
 
 import type { TransferOperationsContext } from './composables/useTransferOperations'
-import type { TransferBindings, TransferDataStrategiesConfig, TransferProps, TransferSlots } from './types'
-import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
+import type {
+  TransferBindings,
+  TransferDataStrategiesConfig,
+  TransferListInstance,
+  TransferProps,
+  TransferSlots,
+} from './types'
 import type { TransferConfig } from '@idux/components/config'
 import type { TransferLocale } from '@idux/components/locales'
 import type { GetKeyFn } from '@idux/components/utils'
@@ -19,13 +24,18 @@ interface TransferContext {
   slots: TransferSlots
   config: TransferConfig
   locale: TransferLocale
-  sourceCheckableListRef: Ref<ɵCheckableListInstance | undefined>
-  targetCheckableListRef: Ref<ɵCheckableListInstance | undefined>
+  sourceTransferListRef: Ref<TransferListInstance | undefined>
+  targetTransferListRef: Ref<TransferListInstance | undefined>
   showSelectAll: ComputedRef<boolean>
   getKey: ComputedRef<GetKeyFn>
 }
 
+export interface TransferListContext {
+  mergedPrefixCls: ComputedRef<string>
+}
+
 export const transferContext: InjectionKey<TransferContext> = Symbol('transferContext')
+export const transferListContext: InjectionKey<TransferListContext> = Symbol('transferListContext')
 
 // public token
 export const TRANSFER_SOURCE_TOKEN: InjectionKey<TransferBindings> = Symbol('TRANSFER_SOURCE_TOKEN')

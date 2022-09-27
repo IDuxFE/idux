@@ -5,18 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferComponent } from './src/types'
+import type { TransferComponent, TransferListComponent } from './src/types'
 
 import Transfer from './src/Transfer'
+import TransferList from './src/list/List'
 
 const IxTransfer = Transfer as unknown as TransferComponent
+const IxTransferList = TransferList as unknown as TransferListComponent
 
-export { IxTransfer }
+export { IxTransfer, IxTransferList }
 
 export type {
   TransferInstance,
   TransferComponent,
   TransferPublicProps as TransferProps,
+  TransferListInstance,
+  TransferListComponent,
+  TransferListPublicProps as TransferListProps,
   TransferListSlotParams,
   TransferOperationsSlotParams,
   TransferData,

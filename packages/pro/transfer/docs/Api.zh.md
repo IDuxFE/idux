@@ -86,6 +86,7 @@ export type ProTransferTreeProps = Pick<
 | --- | --- | --- | --- |
 | `clearIcon` | 清除按钮 | - | - |
 | `empty` | 穿梭框列表空状态 | `EmptyProps` | 详情参考基础穿梭框组件 |
+| `header` | 穿梭框列表头部 | `TransferBindings & { isSource: boolean }` | 详情参考基础穿梭框组件  |
 | `footer` | 穿梭框列表底部 | `TransferBindings & { isSource: boolean }` | 详情参考基础穿梭框组件  |
 | `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | 详情参考基础穿梭框组件 |
 | `headerSuffix` | 穿梭框列表头部后缀 | `{ isSource: boolean }` | 详情参考基础穿梭框组件  |

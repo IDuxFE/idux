@@ -5,7 +5,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
   class="ix-transfer ix-pro-transfer"
 >
   <div
-    class="ix-transfer-list ix-transfer-list-source"
+    class="ix-transfer-content ix-transfer-content-source"
   >
     <div
       class="ix-spin"
@@ -17,14 +17,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
         
         
         <div
-          class="ix-transfer-list-header"
+          class="ix-transfer-header"
         >
           <div
-            class="ix-transfer-list-header-inner"
+            class="ix-transfer-header-inner"
           >
             <!---->
             <span
-              class="ix-transfer-list-header-label"
+              class="ix-transfer-header-label"
             >
               待选 (16)
             </span>
@@ -34,7 +34,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
           </div>
         </div>
         <div
-          class="ix-transfer-list-body"
+          class="ix-transfer-body"
         >
           
           <div
@@ -1060,7 +1060,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
     </div>
   </div>
   <div
-    class="ix-transfer-list ix-transfer-list-target"
+    class="ix-transfer-content ix-transfer-content-target"
   >
     <div
       class="ix-spin"
@@ -1072,20 +1072,20 @@ exports[`ProTransfer > table transfer render work 1`] = `
         
         
         <div
-          class="ix-transfer-list-header"
+          class="ix-transfer-header"
         >
           <div
-            class="ix-transfer-list-header-inner"
+            class="ix-transfer-header-inner"
           >
             <!---->
             <span
-              class="ix-transfer-list-header-label"
+              class="ix-transfer-header-label"
             >
               已选 (4)
             </span>
             <!---->
             <span
-              class="ix-transfer-list-header-clear-icon"
+              class="ix-transfer-header-clear-icon"
             >
               <i
                 aria-label="clear"
@@ -1097,7 +1097,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
           </div>
         </div>
         <div
-          class="ix-transfer-list-body"
+          class="ix-transfer-body"
         >
           
           <div
@@ -1406,7 +1406,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
   class="ix-transfer ix-pro-transfer"
 >
   <div
-    class="ix-transfer-list ix-transfer-list-source"
+    class="ix-transfer-content ix-transfer-content-source"
   >
     <div
       class="ix-spin"
@@ -1418,15 +1418,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
         
         
         <div
-          class="ix-transfer-list-header"
+          class="ix-transfer-header"
         >
           <div
-            class="ix-transfer-list-header-inner"
+            class="ix-transfer-header-inner"
           >
             <label
               aria-checked="false"
               aria-disabled="false"
-              class="ix-checkbox ix-transfer-list-header-check-all"
+              class="ix-checkbox ix-transfer-header-check-all"
               role="checkbox"
             >
               <span
@@ -1445,7 +1445,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               <!---->
             </label>
             <span
-              class="ix-transfer-list-header-label"
+              class="ix-transfer-header-label"
             >
               
               待选 (18)
@@ -1457,7 +1457,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
           </div>
         </div>
         <div
-          class="ix-transfer-list-body"
+          class="ix-transfer-body"
         >
           
           <div
@@ -3071,7 +3071,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
     </div>
   </div>
   <div
-    class="ix-transfer-list ix-transfer-list-target"
+    class="ix-transfer-content ix-transfer-content-target"
   >
     <div
       class="ix-spin"
@@ -3083,15 +3083,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
         
         
         <div
-          class="ix-transfer-list-header"
+          class="ix-transfer-header"
         >
           <div
-            class="ix-transfer-list-header-inner"
+            class="ix-transfer-header-inner"
           >
             <label
               aria-checked="false"
               aria-disabled="false"
-              class="ix-checkbox ix-transfer-list-header-check-all"
+              class="ix-checkbox ix-transfer-header-check-all"
               role="checkbox"
             >
               <span
@@ -3110,7 +3110,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               <!---->
             </label>
             <span
-              class="ix-transfer-list-header-label"
+              class="ix-transfer-header-label"
             >
               
               已选 (2)
@@ -3118,7 +3118,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
             </span>
             <!---->
             <span
-              class="ix-transfer-list-header-clear-icon"
+              class="ix-transfer-header-clear-icon"
             >
               <i
                 aria-label="clear"
@@ -3130,7 +3130,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
           </div>
         </div>
         <div
-          class="ix-transfer-list-body"
+          class="ix-transfer-body"
         >
           
           <div

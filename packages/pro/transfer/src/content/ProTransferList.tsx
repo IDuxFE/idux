@@ -8,9 +8,8 @@
 import { computed, defineComponent, inject } from 'vue'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
-import { ɵCheckableList } from '@idux/components/_private/checkable-list'
 import { ɵEmpty } from '@idux/components/_private/empty'
-import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
+import { IxTransferList, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
 
 import { proTransferContext } from '../token'
 import { type TreeTransferData, proTransferListContentProps } from '../types'
@@ -85,7 +84,7 @@ export default defineComponent({
       }
 
       return (
-        <ɵCheckableList
+        <IxTransferList
           ref={contentRef}
           dataSource={dataSource.value}
           getKey={getKey.value}

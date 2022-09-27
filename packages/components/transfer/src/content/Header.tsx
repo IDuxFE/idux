@@ -15,11 +15,11 @@ import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from '../token'
-import { transferListHeaderProps } from '../types'
+import { transferHeaderProps } from '../types'
 import { convertToSlotParams } from '../utils'
 
 export default defineComponent({
-  props: transferListHeaderProps,
+  props: transferHeaderProps,
   setup(props) {
     const { props: transferProps, slots, config, locale, mergedPrefixCls } = inject(transferContext)!
     const transferBindings = props.isSource ? inject(TRANSFER_SOURCE_TOKEN)! : inject(TRANSFER_TARGET_TOKEN)!
@@ -161,7 +161,7 @@ export default defineComponent({
     }
 
     return () => {
-      const prefixCls = `${mergedPrefixCls.value}-list-header`
+      const prefixCls = `${mergedPrefixCls.value}-header`
 
       const children = renderHeader(prefixCls)
 

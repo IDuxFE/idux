@@ -43,9 +43,11 @@
 </template>
 
 <script setup lang="ts">
+import type { TransferData } from '@idux/components/transfer'
+
 import { ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   value: number
   label: string

@@ -13,18 +13,18 @@ import { convertCssPixel } from '@idux/cdk/utils'
 import { IxSpin, type SpinProps } from '@idux/components/spin'
 
 import { transferContext } from '../token'
-import { transferListProps } from '../types'
-import TransferListBody from './TransferListBody'
-import TransferListFooter from './TransferListFooter'
-import TransferListHeader from './TransferListHeader'
+import { transferContentProps } from '../types'
+import Body from './Body'
+import Footer from './Footer'
+import Header from './Header'
 
 export default defineComponent({
-  props: transferListProps,
+  props: transferContentProps,
   setup(props) {
     const { props: transferProps, mergedPrefixCls } = inject(transferContext)!
 
     const classes = computed(() => {
-      const prefixCls = `${mergedPrefixCls.value}-list`
+      const prefixCls = `${mergedPrefixCls.value}-content`
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${props.isSource ? 'source' : 'target'}`]: true,
@@ -64,9 +64,9 @@ export default defineComponent({
 
     return () => {
       const children = [
-        <TransferListHeader isSource={props.isSource} />,
-        <TransferListBody isSource={props.isSource} />,
-        <TransferListFooter isSource={props.isSource} />,
+        <Header isSource={props.isSource} />,
+        <Body isSource={props.isSource} />,
+        <Footer isSource={props.isSource} />,
       ]
       return (
         <div class={classes.value} style={style.value}>
