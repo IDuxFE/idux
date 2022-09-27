@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, provide, watch } from 'vue'
 
 import { IxTooltip } from '@idux/components/tooltip'
 
@@ -34,7 +34,7 @@ export default defineComponent({
 
     const segmentStateContext = useSegmentStates(props, proSearchProps, context)
     const segmentOverlayUpdateContext = useSegmentOverlayUpdate()
-    const { segmentStates } = segmentStateContext
+    const { segmentStates, initSegmentStates } = segmentStateContext
 
     provide(searchItemContext, {
       ...segmentStateContext,
@@ -55,6 +55,11 @@ export default defineComponent({
     })
 
     const isActive = computed(() => activeSegment.value?.itemKey === props.searchItem!.key)
+    watch(isActive, active => {
+      if (!active) {
+        initSegmentStates()
+      }
+    })
 
     const classes = computed(() => {
       return normalizeClass({
@@ -79,8 +84,6 @@ export default defineComponent({
       if (proSearchProps.disabled) {
         return
       }
-      evt.preventDefault()
-      evt.stopPropagation()
 
       setSegmentActive(name)
 
@@ -144,6 +147,7 @@ export default defineComponent({
         <span
           class={classes.value}
           v-show={(isActive.value && !proSearchProps.disabled) || props.searchItem?.key !== tempSearchStateKey}
+          onMousedown={evt => evt.preventDefault()}
         >
           {children}
         </span>

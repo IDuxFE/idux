@@ -94,20 +94,18 @@ export default defineComponent({
       stopActiveSegmentWatch = watch(
         isActive,
         (active, preActive) => {
-          if (active) {
-            nextTick(() => {
+          nextTick(() => {
+            if (active) {
               segmentInputRef.value?.focus()
-            })
-            setOverlayOpened(true)
-            nextTick(() => {
+              setOverlayOpened(true)
               if (!props.value && props.segment.defaultValue) {
                 handleSegmentChange(props.segment.name, props.segment.defaultValue)
                 handleSegmentConfirm(props.segment.name, false)
               }
-            })
-          } else if (preActive) {
-            setOverlayOpened(false)
-          }
+            } else if (preActive) {
+              setOverlayOpened(false)
+            }
+          })
         },
         { immediate: true },
       )

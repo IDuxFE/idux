@@ -82,6 +82,8 @@ export function useActiveSegment(
   const setInactive = (blur?: boolean) => {
     setActiveSegment(undefined)
 
+    // when no segment is active the component will lose focus
+    // so set the container element focused if we do not intend to blur the component
     if (!blur) {
       elementRef.value?.focus()
     }
