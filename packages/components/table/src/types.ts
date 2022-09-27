@@ -41,7 +41,7 @@ export const tableProps = {
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
-  pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
+  pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: true },
   /**
    * @deprecated please use `customAdditional` instead'
    */

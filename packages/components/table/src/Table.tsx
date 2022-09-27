@@ -53,7 +53,7 @@ export default defineComponent({
     const filterableContext = useFilterable(columnsContext.flattedColumns)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
     const tableLayout = useTableLayout(props, columnsContext, scrollContext, stickyContext.isSticky)
-    const { mergedPagination } = usePagination(props, config)
+    const { mergedPagination } = usePagination(props, config, mergedSize)
 
     const dataContext = useDataSource(
       props,
