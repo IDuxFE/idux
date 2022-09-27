@@ -59,6 +59,7 @@ export const proTableProps = {
   layoutTool: { type: [Boolean, Object] as PropType<boolean | ProTableLayoutToolPublicProps>, default: true },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: undefined },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
+  scrollToTopOnChange: { type: Boolean, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   sticky: { type: [Boolean, Object] as PropType<boolean | TableSticky>, default: undefined },

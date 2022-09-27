@@ -285,6 +285,7 @@ export const defaultConfig: GlobalConfig = {
     childrenKey: 'children',
     getKey: 'key',
     size: 'md',
+    scrollToTopOnChange: true,
     pagination: {
       position: 'bottomEnd',
     },

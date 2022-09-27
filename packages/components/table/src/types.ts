@@ -54,6 +54,7 @@ export const tableProps = {
   size: { type: String as PropType<TableSize>, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   sticky: { type: [Boolean, Object] as PropType<boolean | TableSticky>, default: undefined },
+  scrollToTopOnChange: { type: Boolean, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
   virtual: { type: Boolean, default: false },
 
