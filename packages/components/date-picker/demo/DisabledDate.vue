@@ -1,6 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxDatePicker :disabledDate="disabledDate" :cellTooltip="cellTooltip"></IxDatePicker>
+    <IxDatePicker :disabledDate="disabledDate" allowInput :cellTooltip="cellTooltip"></IxDatePicker>
   </IxSpace>
 </template>
 
