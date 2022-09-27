@@ -13,7 +13,7 @@ import { ref } from 'vue'
 
 import { isFunction, isUndefined } from 'lodash-es'
 
-import { callEmit, throwError } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { getTargetFile, getTargetFileIndex, setFileStatus } from '../util/fileHandle'
@@ -165,14 +165,9 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
 }
 
 async function getAction(props: UploadProps, file: UploadFile) {
-  if (!props.action) {
-    throwError('components/upload', 'action not found.')
-  }
-  const action = isFunction(props.action) ? await props.action(file) : props.action
-  return action
+  return isFunction(props.action) ? await props.action(file) : props.action
 }
 
 async function getRequestData(props: UploadProps, file: UploadFile) {
-  const requestData = isFunction(props.requestData) ? await props.requestData(file) : props.requestData ?? {}
-  return requestData
+  return isFunction(props.requestData) ? await props.requestData(file) : props.requestData ?? {}
 }

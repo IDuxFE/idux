@@ -62,12 +62,12 @@ export interface UploadRequestChangeOption<K = VKey> {
 export const uploadProps = {
   files: {
     type: Array as PropType<UploadFile[]>,
-    required: true,
+    default: [],
   },
   accept: String,
   action: {
     type: [String, Function] as PropType<string | ((file: UploadFile<any>) => Promise<string>)>,
-    required: true,
+    default: undefined,
   },
   dragable: {
     type: Boolean,
