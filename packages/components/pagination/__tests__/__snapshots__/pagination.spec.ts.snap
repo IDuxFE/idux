@@ -41,7 +41,7 @@ exports[`Pagination > render work 3`] = `
           <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">10</span>
             <!---->
           </div>
-          <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\">
+          <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
             <!---->
           </div>
           <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
