@@ -44,8 +44,15 @@ export function useTransferSelectState(
   const sourceSelectedKeySet = computed(() => new Set(sourceSelectedKeys.value))
   const targetSelectedKeySet = computed(() => new Set(targetSelectedKeys.value))
 
-  const { dataKeyMap, sourceDataKeys, targetDataKeys, disabledKeys, disabledSourceKeys, disabledTargetKeys } =
-    transferDataContext
+  const {
+    dataKeyMap,
+    sourceDataKeys,
+    targetDataKeys,
+    targetKeySet,
+    disabledKeys,
+    disabledSourceKeys,
+    disabledTargetKeys,
+  } = transferDataContext
 
   const sourceDataCount = computed(() =>
     props.mode === 'immediate' ? dataKeyMap.value.size : sourceDataKeys.value.size,
@@ -72,7 +79,7 @@ export function useTransferSelectState(
   })
 
   watch(
-    [sourceCheckableDataCount, dataKeyMap, disabledKeys, targetDataKeys],
+    [sourceCheckableDataCount, dataKeyMap, disabledKeys, targetKeySet],
     (_, [, , , prevSelectedKeys]) => {
       const tempKeys = new Set(sourceSelectedKeys.value)
 
@@ -82,19 +89,19 @@ export function useTransferSelectState(
           return
         }
 
-        if (props.mode === 'default' && targetDataKeys.value.has(key)) {
+        if (props.mode === 'default' && targetKeySet.value.has(key)) {
           tempKeys.delete(key)
         }
       })
 
       if (props.mode === 'immediate') {
-        targetDataKeys.value.forEach(key => {
+        targetKeySet.value.forEach(key => {
           if (dataKeyMap.value.has(key)) {
             tempKeys.add(key)
           }
         })
         prevSelectedKeys?.forEach(key => {
-          if (!targetDataKeys.value.has(key)) {
+          if (!targetKeySet.value.has(key)) {
             tempKeys.delete(key)
           }
         })
@@ -208,7 +215,7 @@ function transferBySelectionChange(
   currentCheckedKeys: Set<VKey>,
   transferDataContext: TransferDataContext,
 ) {
-  const { append, remove } = transferDataContext
+  const { changeTargetKeys } = transferDataContext
   const appendedKeys: VKey[] = []
   const removedKeys: VKey[] = []
 
@@ -224,11 +231,5 @@ function transferBySelectionChange(
     }
   }
 
-  if (appendedKeys.length > 0) {
-    append(appendedKeys)
-  }
-
-  if (removedKeys.length > 0) {
-    remove(removedKeys)
-  }
+  changeTargetKeys(removedKeys, appendedKeys)
 }

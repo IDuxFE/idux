@@ -5,11 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProTransferProps } from '../types'
+import type { ProTransferProps, TreeTransferData } from '../types'
+import type { GetKeyFn } from '@idux/components/utils'
 
 import { type ComputedRef, computed, watch } from 'vue'
 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
+
+import { traverseTree } from '../utils'
 
 export interface TreeExpandedKeysContext {
   sourceExpandedKeys: ComputedRef<VKey[]>
@@ -18,10 +21,13 @@ export interface TreeExpandedKeysContext {
   handleTargetExpandedChange: (keys: VKey[]) => void
 }
 
-export function useTreeExpandedKeys(
+export function useTreeExpandedKeys<C extends VKey>(
   props: ProTransferProps,
+  childrenKey: ComputedRef<C>,
+  getKey: ComputedRef<GetKeyFn>,
   targetKeys: ComputedRef<VKey[] | undefined>,
   parentKeyMap: Map<VKey, VKey | undefined>,
+  dataKeyMap: Map<VKey, TreeTransferData<C>>,
 ): TreeExpandedKeysContext {
   const [sourceExpandedKeys, setSourceExpandedKeys] = useControlledProp(props, 'sourceExpandedKeys', () => [])
   const [targetExpandedKeys, setTargetExpandedKeys] = useControlledProp(props, 'targetExpandedKeys', () => [])
@@ -29,14 +35,32 @@ export function useTreeExpandedKeys(
   const sourceExpandedKeySet = computed(() => new Set(sourceExpandedKeys.value))
   const targetExpandedKeySet = computed(() => new Set(targetExpandedKeys.value))
 
-  const syncSelectedExpandedState = (key: VKey, expandedKeysSource: Set<VKey>, expandedKeysTarget: Set<VKey>) => {
+  const syncSelectedExpandedState = (
+    key: VKey,
+    expandedKeysSource: Set<VKey>,
+    expandedKeysTarget: Set<VKey>,
+    remove = false,
+  ) => {
+    const processExpandedKey = (key: VKey) => {
+      if (expandedKeysSource.has(key)) {
+        !expandedKeysTarget.has(key) && expandedKeysTarget.add(key)
+      }
+    }
+
     let currentKey: VKey | undefined = key
     while (currentKey) {
-      if (expandedKeysSource.has(currentKey) && !expandedKeysTarget.has(currentKey)) {
-        expandedKeysTarget.add(currentKey)
-      }
+      processExpandedKey(currentKey)
       currentKey = parentKeyMap.get(currentKey)
     }
+
+    const children = dataKeyMap.get(key)?.[childrenKey.value]
+    if (children) {
+      traverseTree(children, childrenKey.value, item => {
+        processExpandedKey(getKey.value(item))
+      })
+    }
+
+    remove && expandedKeysSource.delete(key)
   }
 
   watch(targetKeys, (keys, oldKeys) => {
@@ -45,17 +69,16 @@ export function useTreeExpandedKeys(
 
     const newTargetExpandedKeySet = new Set<VKey>(targetExpandedKeySet.value)
     const newSourceExpandedKeySet = new Set<VKey>(sourceExpandedKeySet.value)
-    newKeys?.forEach(key => {
-      syncSelectedExpandedState(key, sourceExpandedKeySet.value, newTargetExpandedKeySet)
-    })
+
     deletedKeys?.forEach(key => {
-      syncSelectedExpandedState(key, targetExpandedKeySet.value, newSourceExpandedKeySet)
+      syncSelectedExpandedState(key, newTargetExpandedKeySet, newSourceExpandedKeySet, true)
+    })
+    newKeys?.forEach(key => {
+      syncSelectedExpandedState(key, newSourceExpandedKeySet, newTargetExpandedKeySet, props.mode !== 'immediate')
     })
 
-    newTargetExpandedKeySet.size !== targetExpandedKeySet.value.size &&
-      setTargetExpandedKeys(Array.from(newTargetExpandedKeySet))
-    newSourceExpandedKeySet.size !== sourceExpandedKeySet.value.size &&
-      setSourceExpandedKeys(Array.from(newSourceExpandedKeySet))
+    setTargetExpandedKeys(Array.from(newTargetExpandedKeySet))
+    setSourceExpandedKeys(Array.from(newSourceExpandedKeySet))
   })
 
   return {

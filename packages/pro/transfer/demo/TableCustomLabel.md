@@ -2,7 +2,7 @@
 title:
   zh: 表格穿梭框自定义表格列渲染
   en: Customize Table Transfer Column Render
-order: 11
+order: 110
 ---
 
 ## zh

@@ -77,7 +77,9 @@ export type ProTransferTreeProps = Pick<
   | 'loadChildren'
   | 'onExpand'
   | 'onExpandedChange'
->
+> & {
+  cascaderStrategy: TreeProps['checkStrategy']
+}
 ```
 
 #### ProTransferSlots

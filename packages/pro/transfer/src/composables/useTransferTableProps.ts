@@ -5,15 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProTransferProps } from '../types'
+import type { ProTransferProps, TransferData } from '../types'
 import type { TableColumn, TableColumnSelectable, TableProps } from '@idux/components/table'
+import type { TransferBindings } from '@idux/components/transfer'
 
 import { type ComputedRef, type Slots, computed } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
-import { type TransferBindings } from '@idux/components/transfer'
 
 import { renderRemovableLabel } from '../content/RenderRemovableLabel'
 
@@ -90,7 +90,7 @@ function convertTableColumns(
       convertedColumns.unshift(defaultSelectableColumn)
     } else {
       convertedColumns[selectableColumnIdx] = {
-        ...convertedColumns[selectableColumnIdx],
+        ...(convertedColumns[selectableColumnIdx] as TableColumnSelectable),
         ...defaultSelectableColumn,
       }
     }
@@ -102,7 +102,7 @@ function convertTableColumns(
     const lastCol = convertedColumns[convertedColumns.length - 1]
     if ('type' in lastCol) {
       convertedColumns.push({
-        customCell: ({ record }) => {
+        customCell: ({ record }: { record: TransferData }) => {
           const key = getKey.value(record)
           return renderRemovableLabel(
             key,
@@ -131,7 +131,8 @@ function convertTableColumns(
 
       convertedColumns.splice(convertedColumns.length - 1, 1, {
         ...lastCol,
-        customCell: data => {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        customCell: (data: { value: any; record: any; rowIndex: number }) => {
           const key = getKey.value(data.record)
           return renderRemovableLabel(
             key,

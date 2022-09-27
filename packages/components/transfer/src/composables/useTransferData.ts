@@ -30,8 +30,7 @@ export interface TransferDataContext<T extends TransferData = TransferData> {
   paginatedTargetData: ComputedRef<T[]>
   targetKeys: ComputedRef<VKey[]>
   targetKeySet: ComputedRef<Set<VKey>>
-  append: (keys: VKey[]) => void
-  remove: (keys: VKey[]) => void
+  changeTargetKeys: (removedKeys: VKey[], appendedKeys: VKey[]) => void
   clear: () => void
 
   getKey: ComputedRef<GetKeyFn>
@@ -122,11 +121,16 @@ export function useTransferData<T extends TransferData = TransferData>(
     getPaginatedData(filteredTargetData.value, transferPaginationContext.targetPagination.value),
   )
 
-  const append = (keys: VKey[]) => {
-    _append(keys, targetKeySet.value, getKey.value, handleChange)
-  }
-  const remove = (keys: VKey[]) => {
-    _remove(keys, targetKeySet.value, getKey.value, handleChange)
+  const changeTargetKeys = (removedKeys: VKey[], appendedKeys: VKey[]) => {
+    let newKeys = targetKeys.value
+    if (removedKeys.length > 0) {
+      newKeys = _remove(removedKeys, newKeys, getKey.value)
+    }
+    if (appendedKeys.length > 0) {
+      newKeys = _append(appendedKeys, newKeys, getKey.value)
+    }
+
+    handleChange(newKeys)
   }
 
   const clear = () => {
@@ -161,8 +165,7 @@ export function useTransferData<T extends TransferData = TransferData>(
     paginatedTargetData,
     targetKeys,
     targetKeySet,
-    append,
-    remove,
+    changeTargetKeys,
     clear,
 
     getKey,

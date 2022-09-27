@@ -31,8 +31,8 @@ export interface TransferDataStrategiesConfig<T extends TransferData = TransferD
     getKey: GetKeyFn,
   ) => SeparatedData<T>
   dataFilter?: (data: T[], searchValue: string, searchFn: (item: T, searchValue: string) => boolean) => T[]
-  append?: (keys: K[], selectedKeySet: Set<K>, getKey: GetKeyFn, handleChange: (keys: K[]) => void) => void
-  remove?: (keys: K[], selectedKeySet: Set<K>, getKey: GetKeyFn, handleChange: (keys: K[]) => void) => void
+  append?: (keys: K[], selectedKeys: K[], getKey: GetKeyFn) => K[]
+  remove?: (keys: K[], selectedKeys: K[], getKey: GetKeyFn) => K[]
 }
 export type TransferDataStrategies<T extends TransferData = TransferData> = Required<TransferDataStrategiesConfig<T>>
 
@@ -59,10 +59,10 @@ export interface TransferBindings<T extends TransferData = TransferData> {
 
   pagination: ComputedRef<PaginationProps | undefined>
 
-  triggerAppend: <K = VKey>(keys: K[]) => void
-  triggerRemove: <K = VKey>(keys: K[]) => void
+  triggerAppend: (keys: VKey[]) => void
+  triggerRemove: (keys: VKey[]) => void
   getKey: ComputedRef<GetKeyFn>
-  handleSelectChange: <K = Set<VKey> | VKey[]>(keys: K) => void
+  handleSelectChange: (keys: Set<VKey> | VKey[]) => void
   selectAll: (selected?: boolean) => void
 
   searchValue: ComputedRef<string>

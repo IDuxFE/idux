@@ -13,62 +13,71 @@ import { isArray, isNil } from 'lodash-es'
 export function traverseTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
-  fn: (item: TreeTransferData<C>, parent: TreeTransferData<C> | undefined) => void,
-  parent?: TreeTransferData<C>,
+  fn: (item: TreeTransferData<C>, parents: TreeTransferData<C>[]) => void,
 ): void {
-  data.forEach(item => {
-    fn(item, parent)
-    if (item[childrenKey]) {
-      traverseTree(item[childrenKey]!, childrenKey, fn, item)
-    }
-  })
+  const traverse = (_data: TreeTransferData<C>[], parents: TreeTransferData<C>[]) => {
+    _data.forEach(item => {
+      fn(item, parents)
+      if (item[childrenKey]) {
+        traverse(item[childrenKey]!, [item, ...parents])
+      }
+    })
+  }
+
+  traverse(data, [])
 }
 
 export function mapTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
-  fn: (item: TreeTransferData<C>, parent: TreeTransferData<C> | undefined) => TreeTransferData<C>,
-  parent?: TreeTransferData<C>,
+  fn: (item: TreeTransferData<C>, parents: TreeTransferData<C>[]) => TreeTransferData<C>,
 ): TreeTransferData<C>[] {
-  return data.map(item => {
-    const mappedItem = fn(item, parent)
-    if (item[childrenKey]) {
-      const mappedChildren = mapTree(item[childrenKey]!, childrenKey, fn, item)
-      mappedItem[childrenKey] = mappedChildren as TreeTransferData<C>[C]
-    }
+  const map = (_data: TreeTransferData<C>[], parents: TreeTransferData<C>[]) => {
+    return _data.map(item => {
+      const mappedItem = fn(item, parents)
+      if (item[childrenKey]) {
+        const mappedChildren = map(item[childrenKey]!, [item, ...parents])
+        mappedItem[childrenKey] = mappedChildren as TreeTransferData<C>[C]
+      }
 
-    return mappedItem
-  })
+      return mappedItem
+    })
+  }
+  return map(data, [])
 }
 
 export function filterTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
-  fn: (item: TreeTransferData<C>) => boolean,
+  fn: (item: TreeTransferData<C>, parents: TreeTransferData<C>[]) => boolean,
   filterStrategy: 'and' | 'or' = 'or',
 ): TreeTransferData<C>[] {
-  return data
-    .map(item => {
-      let children: TreeTransferData<C>[] | undefined
+  const _filter = (_data: TreeTransferData<C>[], parents: TreeTransferData<C>[]): TreeTransferData<C>[] => {
+    return _data
+      .map(item => {
+        let children: TreeTransferData<C>[] | undefined
 
-      if (isArray(item[childrenKey])) {
-        children = filterTree(item[childrenKey]!, childrenKey, fn, filterStrategy)
-      }
-
-      let itemValid = fn(item)
-      itemValid =
-        filterStrategy === 'and'
-          ? !!(children && children.length > 0) && itemValid
-          : !!(children && children.length > 0) || itemValid
-
-      return (
-        itemValid && {
-          ...item,
-          [childrenKey]: item[childrenKey] && children,
+        if (isArray(item[childrenKey])) {
+          children = _filter(item[childrenKey]!, [item, ...parents])
         }
-      )
-    })
-    .filter(item => !!item) as TreeTransferData<C>[]
+
+        let itemValid = fn(item, parents)
+        itemValid =
+          filterStrategy === 'and'
+            ? !!(children && children.length > 0) && itemValid
+            : !!(children && children.length > 0) || itemValid
+
+        return (
+          itemValid && {
+            ...item,
+            [childrenKey]: item[childrenKey] && children,
+          }
+        )
+      })
+      .filter(Boolean) as TreeTransferData<C>[]
+  }
+
+  return _filter(data, [])
 }
 
 export function combineTrees<C extends VKey>(

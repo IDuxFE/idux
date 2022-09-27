@@ -29,8 +29,16 @@ export function useTransferOperations<T extends TransferData = TransferData>(
   transferDataContext: TransferDataContext<T>,
   transferSelectStateContext: TransferSelectStateContext,
 ): TransferOperationsContext {
-  const { dataKeyMap, sourceData, targetData, disabledSourceKeys, disabledTargetKeys, append, remove, clear, getKey } =
-    transferDataContext
+  const {
+    dataKeyMap,
+    sourceData,
+    targetData,
+    disabledSourceKeys,
+    disabledTargetKeys,
+    changeTargetKeys,
+    clear,
+    getKey,
+  } = transferDataContext
   const { sourceSelectedKeys, targetSelectedKeys } = transferSelectStateContext
 
   const appendDisabled = computed(() => props.disabled || sourceSelectedKeys.value.length <= 0)
@@ -47,7 +55,10 @@ export function useTransferOperations<T extends TransferData = TransferData>(
       return
     }
 
-    append((keys ?? Array.from(sourceSelectedKeys.value)).filter(key => !disabledSourceKeys.value.has(key)))
+    changeTargetKeys(
+      [],
+      (keys ?? Array.from(sourceSelectedKeys.value)).filter(key => !disabledSourceKeys.value.has(key)),
+    )
   }
 
   const triggerRemove = (keys?: VKey[]) => {
@@ -55,7 +66,10 @@ export function useTransferOperations<T extends TransferData = TransferData>(
       return
     }
 
-    remove((keys ?? Array.from(targetSelectedKeys.value)).filter(key => !disabledTargetKeys.value.has(key)))
+    changeTargetKeys(
+      (keys ?? Array.from(targetSelectedKeys.value)).filter(key => !disabledTargetKeys.value.has(key)),
+      [],
+    )
   }
 
   const triggerAppendAll = () => {
@@ -63,7 +77,10 @@ export function useTransferOperations<T extends TransferData = TransferData>(
       return
     }
 
-    append(Array.from(dataKeyMap.value.keys()).filter(key => !disabledSourceKeys.value.has(key)))
+    changeTargetKeys(
+      [],
+      Array.from(dataKeyMap.value.keys()).filter(key => !disabledSourceKeys.value.has(key)),
+    )
   }
 
   const triggerClear = () => {

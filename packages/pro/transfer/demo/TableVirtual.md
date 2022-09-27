@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 70
 title:
   zh: 表格穿梭框虚拟滚动
   en: Table transfer virtual scroll

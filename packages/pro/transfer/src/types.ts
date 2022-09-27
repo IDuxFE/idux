@@ -43,7 +43,9 @@ export type ProTransferTreeProps = Pick<
   | 'loadChildren'
   | 'onExpand'
   | 'onExpandedChange'
->
+> & {
+  cascaderStrategy: TreeProps['checkStrategy']
+}
 
 export const proTransferProps = {
   type: {
