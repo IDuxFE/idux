@@ -9,7 +9,7 @@ import type { TextareaAutoRows } from '../types'
 
 import { type ComputedRef, type Ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 
-import { isNumber, isObject, throttle } from 'lodash-es'
+import { isBoolean, isNumber, isObject, throttle } from 'lodash-es'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { rAF } from '@idux/cdk/utils'
@@ -26,7 +26,7 @@ export interface AutoRowsContext {
 
 const isAutoRowsObject = (value: unknown): value is TextareaAutoRows => {
   return (
-    isObject(value) && isNumber((value as TextareaAutoRows).minRows) && isNumber((value as TextareaAutoRows).maxRows)
+    isObject(value) && (isNumber((value as TextareaAutoRows).minRows) || isNumber((value as TextareaAutoRows).maxRows))
   )
 }
 
@@ -43,15 +43,15 @@ export function useAutoRows(
 ): AutoRowsContext {
   /** Keep track of the previous textarea value to avoid resizing when the value hasn't changed. */
   let previousValue: string | undefined
-  let previousMinRows: number | null = null
+  let previousMinRows: number | undefined
   let initialHeight: string | undefined
   let isFunctioning = false
   let currentOverflow: string | undefined
   let cachedPlaceholderHeight: number | undefined
 
-  const enabled = computed(() => isAutoRowsObject(autoRows.value) || !!autoRows.value)
-  const minRows = computed(() => (isAutoRowsObject(autoRows.value) ? autoRows.value.minRows : null))
-  const maxRows = computed(() => (isAutoRowsObject(autoRows.value) ? autoRows.value.maxRows : null))
+  const enabled = computed(() => isAutoRowsObject(autoRows.value) || (isBoolean(autoRows.value) && !!autoRows.value))
+  const minRows = computed(() => (isAutoRowsObject(autoRows.value) ? autoRows.value.minRows : undefined))
+  const maxRows = computed(() => (isAutoRowsObject(autoRows.value) ? autoRows.value.maxRows : undefined))
   const cachedLineHeight = useLineHeight(textareaRef)
   const boxSizingData = computed(() => {
     if (!textareaRef.value) {

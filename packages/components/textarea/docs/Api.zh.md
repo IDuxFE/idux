@@ -10,7 +10,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | 使用 `control` 时，此配置无效 |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `autoRows` | 是否显示自适应 `rows` | `boolean \| { minRows: number, maxRows: number }` | `false` | ✅ | - |
+| `autoRows` | 是否显示自适应 `rows` | `boolean \| { minRows?: number, maxRows?: number }` | `false` | ✅ | - |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `computeCount` | 自定义计算字符数的函数 | `(value: string) => string` | - | ✅ | 优先级高于 `maxCount` |
