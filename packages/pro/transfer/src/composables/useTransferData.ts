@@ -89,7 +89,7 @@ export function useTransferData<C extends VKey>(
     }
 
     return async (node: TreeNode<VKey>, isSource: boolean) => {
-      const loadedData = await _loadChildren(node as TreeTransferData)
+      const loadedData = (await _loadChildren(node as TreeTransferData<C>)) as TreeTransferData<C>[]
       const key = getKey.value(node)
 
       if (!loadedData || loadedData.length <= 0) {

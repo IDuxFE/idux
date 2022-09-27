@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 30
 title:
   zh: 树穿梭框分页
   en: Tree transfer pagination

@@ -74,27 +74,23 @@ function createDefaultStrategies<T extends TransferData = TransferData>(
 
       return data.filter(item => searchFn(item, searchValue))
     },
-    append: (keys, selectedKeySet, _, handleChange) => {
+    append: (keys, selectedKeySet) => {
       const newKeys = new Set(selectedKeySet)
 
       keys.forEach(key => {
         newKeys.add(key)
       })
 
-      if (newKeys.size !== selectedKeySet.size) {
-        handleChange(Array.from(newKeys))
-      }
+      return Array.from(newKeys)
     },
-    remove: (keys, selectedKeySet, _, handleChange) => {
+    remove: (keys, selectedKeySet) => {
       const newKeys = new Set(selectedKeySet)
 
       keys.forEach(key => {
         newKeys.delete(key)
       })
 
-      if (newKeys.size !== selectedKeySet.size) {
-        handleChange(Array.from(newKeys))
-      }
+      return Array.from(newKeys)
     },
   }
 }

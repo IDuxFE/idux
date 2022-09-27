@@ -8,6 +8,7 @@
 import type { ɵCheckableListInstance } from '@idux/components/_private/checkable-list'
 import type { TableInstance } from '@idux/components/table'
 import type { TreeInstance } from '@idux/components/tree'
+import type { GetKeyFn } from '@idux/components/utils'
 
 import { type ComputedRef, computed, defineComponent, provide, ref } from 'vue'
 
@@ -56,7 +57,7 @@ export default defineComponent({
     const sourceContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
     const targetContentRef = ref<ɵCheckableListInstance | TableInstance | TreeInstance>()
 
-    const { dataKeyMap, parentKeyMap, expandedKeysContext } = useTreeContext(props, childrenKey, targetKeys)
+    const { dataKeyMap, parentKeyMap, expandedKeysContext } = useTreeContext(props, childrenKey, getKey, targetKeys)
     const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
       props,
       getKey,
@@ -171,6 +172,7 @@ export default defineComponent({
 function useTreeContext(
   props: ProTransferProps,
   childrenKey: ComputedRef<string>,
+  getKey: ComputedRef<GetKeyFn>,
   targetKeys: ComputedRef<VKey[] | undefined>,
 ): {
   dataKeyMap?: Map<VKey, TreeTransferData<VKey>>
@@ -184,8 +186,9 @@ function useTreeContext(
   const { dataKeyMap, parentKeyMap, dataStrategies } = useTreeDataStrategies(
     childrenKey,
     props.defaultTargetData as TreeTransferData<VKey>[] | undefined,
+    props.treeProps?.cascaderStrategy,
   )
-  const expandedKeysContext = useTreeExpandedKeys(props, targetKeys, parentKeyMap)
+  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeys, parentKeyMap, dataKeyMap)
 
   provide(TRANSFER_DATA_STRATEGIES, dataStrategies as unknown as TransferDataStrategiesConfig<TransferData>)
 

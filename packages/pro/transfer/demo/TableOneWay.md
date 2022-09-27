@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 40
 title:
   zh: 单向表格穿梭框
   en: One-wayed tree transfer

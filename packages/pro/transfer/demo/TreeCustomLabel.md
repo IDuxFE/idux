@@ -1,5 +1,5 @@
 ---
-order: 12
+order: 120
 title:
   zh: 树穿梭框自定义标签渲染
   en: Customize Tree Transfer Label Render

@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 20
 title:
   zh: 表格穿梭框分页
   en: Table transfer pagination
