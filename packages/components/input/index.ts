@@ -15,6 +15,6 @@ export { IxInput }
 
 export type { InputInstance, InputComponent, InputPublicProps as InputProps } from './src/types'
 
-export { commonProps as ɵCommonProps } from './src/types'
+export { inputCommonProps as ɵInputCommonProps } from './src/types'
 export { useInput as ɵUseInput } from './src/useInput'
 export type { InputContext as ɵInputContext } from './src/useInput'

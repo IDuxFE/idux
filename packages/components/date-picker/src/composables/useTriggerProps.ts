@@ -7,18 +7,16 @@
 
 import type { DatePickerContext, DateRangePickerContext } from '../token'
 import type { ɵTriggerProps } from '@idux/components/_private/trigger'
-import type { FormContext } from '@idux/components/form'
 
 import { type ComputedRef, computed } from 'vue'
 
-export function useTriggerProps(
-  context: DatePickerContext | DateRangePickerContext,
-  formContext: FormContext | null,
-): ComputedRef<ɵTriggerProps> {
+export function useTriggerProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵTriggerProps> {
   const {
     props,
     config,
     accessor,
+    mergedSize,
+    mergedStatus,
     isFocused,
     handleFocus,
     handleBlur,
@@ -46,7 +44,8 @@ export function useTriggerProps(
       disabled: accessor.disabled,
       focused: isFocused.value,
       readonly: props.readonly || inputEnableStatus.value.enableInput === false,
-      size: props.size ?? formContext?.size.value ?? config.size,
+      size: mergedSize.value,
+      status: mergedStatus.value,
       suffix: props.suffix ?? config.suffix,
       onClick: handleClick,
       onClear: handleClear,

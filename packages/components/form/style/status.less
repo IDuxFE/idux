@@ -1,136 +1,6 @@
 .@{form-item-prefix} {
-   // TODO: Deprecated
-  &-status-icon {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    z-index: 1;
-    width: @form-height-md;
-    height: 20px;
-    margin-top: -10px;
-    font-size: @form-font-size-md;
-    line-height: 20px;
-    text-align: center;
-    visibility: visible;
-    animation: zoomIn 0.3s @ease-out-back;
-    pointer-events: none;
-  }
-
-  // TODO: Deprecated
-  &-with-status-icon {
-    // input
-    .@{idux-prefix}-input {
-      padding-right: 24px;
-
-      .@{idux-prefix}-input-suffix {
-        padding-right: 18px;
-      }
-    }
-  }
-
   // === invalid ===
   &-invalid > &-control {
-    .@{form-item-prefix}-status-icon {
-      color: @form-item-invalid-color;
-    }
-
-    // === input ===
-    .@{idux-prefix}-input:not(.@{idux-prefix}-input-disabled) {
-      border-color: @form-item-invalid-color;
-
-      &:hover {
-        border-color: @form-item-invalid-color;
-      }
-
-      .@{idux-prefix}-input-wrapper,
-      .@{idux-prefix}-input-inner {
-        border-color: @form-item-invalid-color;
-
-        &:hover {
-          border-color: @form-item-invalid-color;
-        }
-      }
-
-      .@{idux-prefix}-input-suffix,
-      .@{idux-prefix}-input-prefix {
-        color: @form-item-invalid-color;
-
-        &:hover {
-          color: @form-item-invalid-color;
-        }
-      }
-
-      &:focus,
-      &.@{idux-prefix}-input-focused {
-        border-color: @form-item-invalid-color;
-        box-shadow: @form-item-invalid-box-shadow;
-
-        .@{idux-prefix}-input-wrapper,
-        .@{idux-prefix}-input-inner {
-          box-shadow: none;
-        }
-      }
-
-      .@{idux-prefix}-input-addon {
-        color: @form-item-invalid-color;
-        border-color: @form-item-invalid-color;
-
-        .@{selector-prefix} {
-          &:hover &-content,
-          &-content {
-            border-color: transparent;
-          }
-
-          &&-active &-content {
-            border-color: transparent;
-            // todo remove
-            box-shadow: none;
-          }
-        }
-      }
-    }
-
-    // select
-    .@{selector-prefix}:not(.@{selector-prefix}-disabled) {
-      &:hover .@{selector-prefix}-content,
-      .@{selector-prefix}-content {
-        border-color: @form-item-invalid-color;
-      }
-
-      &.@{selector-prefix}-active .@{selector-prefix}-content {
-        border-color: @form-item-invalid-color;
-        box-shadow: @form-item-invalid-box-shadow;
-      }
-    }
-
-    // textarea
-    .@{idux-prefix}-textarea:not(.@{idux-prefix}-textarea-disabled) {
-      &::after {
-        color: @form-item-invalid-color;
-      }
-
-      .@{idux-prefix}-textarea-inner {
-        border-color: @form-item-invalid-color;
-
-        &:hover {
-          border-color: @form-item-invalid-color;
-        }
-      }
-
-      .@{idux-prefix}-textarea-suffix {
-        color: @form-item-invalid-color;
-
-        &:hover {
-          color: @form-item-invalid-color;
-        }
-      }
-
-      &.@{idux-prefix}-textarea-focused .@{idux-prefix}-textarea-inner {
-        border-color: @form-item-invalid-color;
-        box-shadow: @form-item-invalid-box-shadow;
-      }
-    }
-
     // time/date-picker
     .@{idux-prefix}-time-picker,
     .@{idux-prefix}-time-range-picker,
@@ -153,24 +23,11 @@
   }
 
   // === Validating ===
-  &-validating > &-control {
-    .@{form-item-prefix}-status-icon {
-      display: inline-block;
-      color: @form-item-validating-color;
-    }
-  }
-
   &-message-validating {
     color: @form-item-validating-color;
   }
 
   // === valid ===
-  &-valid > &-control {
-    .@{form-item-prefix}-status-icon {
-      color: @form-item-valid-color;
-    }
-  }
-
   &-message-valid {
     color: @form-item-valid-color;
   }

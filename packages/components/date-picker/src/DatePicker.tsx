@@ -40,7 +40,7 @@ export default defineComponent({
 
     const inputEnableStatus = useInputEnableStatus(props, config)
     const formatContext = useFormat(props, config)
-    const pickerStateContext = usePickerState(props, dateConfig, formatContext.formatRef)
+    const pickerStateContext = usePickerState(props, config, dateConfig, formatContext.formatRef)
 
     const { accessor, handleChange } = pickerStateContext
 

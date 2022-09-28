@@ -24,6 +24,7 @@ export {
   useFormElement,
   useFormFocusMonitor,
   useFormSize,
+  useFormStatus,
 } from './src/composables/public'
 
 export type {

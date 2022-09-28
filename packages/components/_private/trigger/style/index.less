@@ -107,4 +107,18 @@
     font-size: inherit;
     .placeholder(@trigger-placeholder-color);
   }
+
+  // form status
+  &&-invalid {
+    border-color: @form-item-invalid-color;
+
+    &:hover {
+      border-color: @form-item-invalid-color;
+    }
+
+    &.@{idux-prefix}-trigger-focused {
+      border-color: @form-item-invalid-color;
+      box-shadow: @form-item-invalid-box-shadow;
+    }
+  }
 }

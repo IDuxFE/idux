@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { AbstractControl } from '@idux/cdk/forms'
+import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
@@ -77,6 +77,7 @@ const datePickerCommonProps = {
     default: false,
   },
   size: String as PropType<FormSize>,
+  status: String as PropType<ValidateStatus>,
   suffix: String,
   type: {
     type: String as PropType<DatePickerType>,

@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AbstractControl } from '@idux/cdk/forms'
+import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
@@ -79,6 +79,7 @@ export const treeSelectProps = {
   },
   size: { type: String as PropType<FormSize>, default: undefined },
   showLine: { type: Boolean, default: undefined },
+  status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
   /**
    * @deprecated please use `overlayContainer` instead'

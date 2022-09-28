@@ -19,6 +19,7 @@
 | `prefix` | 设置前缀图标 | `string \| #prefix` | - | - | - |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
+| `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | - | - | - |
 | `trim` | 失去焦点后自动去除前后空格  | `boolean` | `false` | ✅ | - |
 | `onChange` | 值发生改变后的回调 | `(value: string, oldValue: string) => void` | - | - | - |

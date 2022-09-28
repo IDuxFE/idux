@@ -26,11 +26,12 @@ export default defineComponent({
     expose({ getInputElement })
 
     const classes = computed(() => {
-      const { borderless, clearable, disabled, focused, size, addonAfter, addonBefore, prefix, suffix } = props
+      const { borderless, clearable, disabled, focused, size, status, addonAfter, addonBefore, prefix, suffix } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${status}`]: !!status,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: clearable,
         [`${prefixCls}-disabled`]: disabled,

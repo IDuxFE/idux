@@ -11,7 +11,6 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormSize } from '@idux/components/form'
 
 import { inputProps } from './types'
 import { useInput } from './useInput'
@@ -21,11 +20,12 @@ export default defineComponent({
   props: inputProps,
   setup(props, { slots, expose }) {
     const config = useGlobalConfig('input')
-    const mergedSize = useFormSize(props, config)
 
     const {
       elementRef,
       accessor,
+      mergedSize,
+      mergedStatus,
       clearable,
       clearIcon,
       clearVisible,
@@ -66,6 +66,7 @@ export default defineComponent({
           focused={isFocused.value}
           prefix={prefix}
           size={mergedSize.value}
+          status={mergedStatus.value}
           suffix={suffix}
           onClear={handleClear}
           readonly={props.readonly}

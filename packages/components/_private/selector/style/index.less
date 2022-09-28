@@ -101,12 +101,24 @@
     .borderless();
   }
 
-  &-searchable &-content
-  &-allow-input &-content {
+  &-searchable &-content &-allow-input &-content {
     cursor: text;
 
     .@{selector-prefix}-input-inner {
       cursor: auto;
+    }
+  }
+
+  // form status
+  &&-invalid {
+    &:hover .@{selector-prefix}-content,
+    .@{selector-prefix}-content {
+      border-color: @form-item-invalid-color;
+    }
+
+    &.@{selector-prefix}-active .@{selector-prefix}-content {
+      border-color: @form-item-invalid-color;
+      box-shadow: @form-item-invalid-box-shadow;
     }
   }
 }

@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { type FormSize } from '@idux/components/form'
 
 export const selectorProps = {
   allowInput: { type: Boolean, required: true },
@@ -32,6 +32,7 @@ export const selectorProps = {
   readonly: { type: Boolean, required: true },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, required: true },
   size: { type: String as PropType<FormSize>, default: undefined },
+  status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
   value: { type: Array, required: true },
 

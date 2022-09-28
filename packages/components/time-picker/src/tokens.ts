@@ -12,7 +12,6 @@ import type { PickerStateContext } from './composables/usePickerState'
 import type { PickerRangeControlContext } from './composables/useRangeControl'
 import type { TimePickerProps, TimeRangePickerProps } from './types'
 import type { CommonConfig, DateConfig, TimePickerConfig } from '@idux/components/config'
-import type { FormContext } from '@idux/components/form'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
 
@@ -28,7 +27,6 @@ interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps>
   inputRef: Ref<HTMLInputElement | undefined>
   mergedPrefixCls: ComputedRef<string>
   formatRef: ComputedRef<string>
-  formContext: FormContext | null
   inputEnableStatus: ComputedRef<InputEnableStatus>
   handleKeyDown: (evt: KeyboardEvent) => void
 }

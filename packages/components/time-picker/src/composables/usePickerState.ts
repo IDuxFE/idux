@@ -9,11 +9,11 @@ import { type ComputedRef, toRaw } from 'vue'
 
 import { isArray } from 'lodash-es'
 
-import { type FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
+import { type FormAccessor, type ValidateStatus, useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit, convertArray, useState } from '@idux/cdk/utils'
 import { ɵCalculateViewHour, ɵNormalizeAmPm } from '@idux/components/_private/time-panel'
 import { type DateConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { type FormSize, useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 
 import { type TimePickerProps, type TimeRangePickerProps } from '../types'
 import { checkUse12Hours, convertToDate, sortRangeValue } from '../utils'
@@ -24,6 +24,8 @@ type StateValueType<T extends TimePickerProps | TimeRangePickerProps> = T extend
 
 export interface PickerStateContext<T extends TimePickerProps | TimeRangePickerProps> {
   accessor: FormAccessor<T['value']>
+  mergedSize: ComputedRef<FormSize>
+  mergedStatus: ComputedRef<ValidateStatus | undefined>
   isFocused: ComputedRef<boolean>
   handleChange: (value: StateValueType<T>) => void
   handleClear: (evt: MouseEvent) => void
@@ -33,11 +35,14 @@ export interface PickerStateContext<T extends TimePickerProps | TimeRangePickerP
 
 export function usePickerState<T extends TimePickerProps | TimeRangePickerProps>(
   props: T,
+  config: { size: FormSize },
   dateConfig: DateConfig,
   formatRef: ComputedRef<string>,
 ): PickerStateContext<T> {
   const { accessor, control } = useAccessorAndControl<T['value']>()
   useFormItemRegister(control)
+  const mergedSize = useFormSize(props, config)
+  const mergedStatus = useFormStatus(props, control)
 
   const [isFocused, setFocused] = useState(false)
 
@@ -96,6 +101,8 @@ export function usePickerState<T extends TimePickerProps | TimeRangePickerProps>
 
   return {
     accessor,
+    mergedSize,
+    mergedStatus,
     isFocused,
     handleChange,
     handleClear,
