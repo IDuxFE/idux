@@ -5,27 +5,34 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed } from 'vue'
 
-import { computed } from 'vue'
+import { useState } from '@idux/cdk/utils'
 
 export interface Offset {
   selectedElOffset: ComputedRef<number>
+  syncSelectedElOffset: () => void
 }
 
 export function useSelectedElOffset(
   isHorizontal: ComputedRef<boolean>,
+  navPreNextSize: ComputedRef<number>,
   selectedElRef: Ref<HTMLElement | null>,
 ): Offset {
-  const selectedElOffset = computed(() => {
-    if (isHorizontal.value) {
-      return selectedElRef.value?.offsetLeft ?? 0
-    } else {
-      return selectedElRef.value?.offsetTop ?? 0
-    }
-  })
+  const [selectedLeft, setSelectedLeft] = useState(0)
+  const [selectedTop, setSelectedTop] = useState(0)
+
+  const selectedElOffset = computed(
+    () => (isHorizontal.value ? selectedLeft.value : selectedTop.value) + navPreNextSize.value,
+  )
+
+  const syncSelectedElOffset = () => {
+    setSelectedLeft(selectedElRef.value?.offsetLeft ?? 0)
+    setSelectedTop(selectedElRef.value?.offsetTop ?? 0)
+  }
 
   return {
     selectedElOffset,
+    syncSelectedElOffset,
   }
 }
