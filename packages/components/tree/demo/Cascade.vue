@@ -3,9 +3,8 @@
     v-model:checkedKeys="checkedKeys"
     v-model:expandedKeys="expandedKeys"
     v-model:selectedKeys="selectedKeys"
-    cascade
     checkable
-    checkStrategy="parent"
+    cascaderStrategy="parent"
     :dataSource="treeData"
     @check="onCheck"
     @expand="onExpand"

@@ -5,22 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeTransferData } from '../types'
-import type { VKey } from '@idux/cdk/utils'
-import type { TransferDataStrategiesConfig } from '@idux/components/transfer'
-import type { TreeCheckStrategy } from '@idux/components/tree'
-import type { GetKeyFn } from '@idux/components/utils'
-
 import { type ComputedRef, type Ref, onUnmounted, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
+import { type VKey } from '@idux/cdk/utils'
+import { type CascaderStrategy } from '@idux/components/cascader'
+import { type TransferDataStrategiesConfig } from '@idux/components/transfer'
+import { type GetKeyFn } from '@idux/components/utils'
+
+import { type TreeTransferData } from '../types'
 import { combineTrees, filterTree, genFlattenedTreeKeys, traverseTree } from '../utils'
 
 export function useTreeDataStrategies<C extends VKey>(
   childrenKey: ComputedRef<C>,
   defaultTreeData: TreeTransferData<C>[] | undefined,
-  checkStrategy: TreeCheckStrategy = 'all',
+  cascaderStrategy: CascaderStrategy = 'all',
 ): {
   dataKeyMap: Map<VKey, TreeTransferData<C>>
   parentKeyMap: Map<VKey, VKey | undefined>
@@ -98,7 +98,7 @@ export function useTreeDataStrategies<C extends VKey>(
 
         return filterTree(data, childrenKey.value, item => searchFn(item, searchValue), 'or')
       },
-      ...createStrategy(childrenKey, cachedTargetData, parentKeyMap, dataKeyMap, checkStrategy),
+      ...createStrategy(childrenKey, cachedTargetData, parentKeyMap, dataKeyMap, cascaderStrategy),
     },
   }
 }
@@ -122,13 +122,14 @@ function createStrategy<C extends VKey>(
   cachedTargetData: Ref<TreeTransferData<C>[]>,
   parentKeyMap: Map<VKey, VKey | undefined>,
   dataKeyMap: Map<VKey, TreeTransferData<C>>,
-  checkStrategy: TreeCheckStrategy,
+  cascaderStrategy: CascaderStrategy,
 ) {
-  switch (checkStrategy) {
+  switch (cascaderStrategy) {
     case 'parent':
       return createParentStrategy(childrenKey, cachedTargetData, dataKeyMap)
     case 'child':
       return createChildStrategy(childrenKey, cachedTargetData, parentKeyMap)
+    // TODO: support 'off'
     case 'all':
     default:
       return createAllStrategy(childrenKey, cachedTargetData, parentKeyMap)
@@ -232,16 +233,16 @@ function createParentStrategy<C extends VKey>(
 function createSeparateDataSourceFn<C extends VKey>(
   childrenKey: ComputedRef<C>,
   cachedTargetData: Ref<TreeTransferData<C>[]>,
-  checkStrategy: TreeCheckStrategy,
+  cascaderStrategy: CascaderStrategy,
 ): Exclude<TransferDataStrategiesConfig<TreeTransferData<C>>['separateDataSource'], undefined> {
   const getFilterFn = (
     selectedKeySet: Set<VKey>,
     getKey: GetKeyFn,
   ): ((data: TreeTransferData<C>[], isSource: boolean) => TreeTransferData<C>[]) => {
-    // under checkStrategy `parent`, selected child nodes are not in selectedKeys
+    // under cascaderStrategy `parent`, selected child nodes are not in selectedKeys
     // so we consider the item is selected when its parent exists in selectedKeys
     const filterFn: (item: TreeTransferData<C>, parent: TreeTransferData<C>[], isSource: boolean) => boolean =
-      checkStrategy === 'all' || checkStrategy === 'child'
+      cascaderStrategy === 'all' || cascaderStrategy === 'child'
         ? (item, _, isSource) => selectedKeySet.has(getKey(item)) !== isSource
         : (item, parent, isSource) => [item, ...parent].map(getKey).some(key => selectedKeySet.has(key)) !== isSource
 

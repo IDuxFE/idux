@@ -9,6 +9,7 @@
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { TableColumn, TableProps } from '@idux/components/table'
 import type {
@@ -44,7 +45,7 @@ export type ProTransferTreeProps = Pick<
   | 'onExpand'
   | 'onExpandedChange'
 > & {
-  cascaderStrategy: TreeProps['checkStrategy']
+  cascaderStrategy: CascaderStrategy
 }
 
 export const proTransferProps = {

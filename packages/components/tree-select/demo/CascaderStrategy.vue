@@ -1,28 +1,26 @@
 <template>
   <IxSpace vertical>
-    checkStrategy：
-    <IxRadioGroup v-model:value="checkStrategy">
-      <IxRadio value="all">all</IxRadio>
-      <IxRadio value="parent">parent</IxRadio>
-      <IxRadio value="child">child</IxRadio>
+    <IxRadioGroup v-model:value="cascaderStrategy">
+      <IxRadio value="all">All</IxRadio>
+      <IxRadio value="parent">Parent</IxRadio>
+      <IxRadio value="child">Child</IxRadio>
+      <IxRadio value="off">Off</IxRadio>
     </IxRadioGroup>
     <IxTreeSelect
       v-model:value="value"
       v-model:expandedKeys="expandedKeys"
-      placeholder="勾选策略"
       cascade
-      checkable
       multiple
+      :cascaderStrategy="cascaderStrategy"
       :dataSource="treeData"
-      :checkStrategy="checkStrategy"
     />
   </IxSpace>
 </template>
 
 <script setup lang="ts">
-import type { TreeCheckStrategy } from '@idux/components/tree'
-
 import { ref } from 'vue'
+
+import { CascaderStrategy } from '@idux/components/cascader'
 
 const treeData = [
   {
@@ -57,7 +55,7 @@ const treeData = [
 
 const value = ref(['0-0'])
 const expandedKeys = ref(['0'])
-const checkStrategy = ref<TreeCheckStrategy>('parent')
+const cascaderStrategy = ref<CascaderStrategy>('parent')
 </script>
 <style lang="less" scoped>
 .ix-space {

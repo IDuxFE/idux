@@ -49,7 +49,12 @@ export default defineComponent({
     const expandAllBtnStatus = ref(false)
 
     const mergedCheckable = computed(() => props.multiple && props.checkable)
-    const mergedCascade = computed(() => mergedCheckable.value && props.cascade)
+    const mergedCascaderStrategy = computed(() => {
+      if (!mergedCheckable.value) {
+        return 'off'
+      }
+      return props.cascade ? props.checkStrategy : props.cascaderStrategy
+    })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: any[]) => {
       const { onScrolledChange } = props
@@ -132,7 +137,6 @@ export default defineComponent({
 
     return () => {
       const {
-        checkStrategy,
         customAdditional,
         dataSource,
         draggable,
@@ -186,9 +190,8 @@ export default defineComponent({
           loadedKeys={loadedKeys.value}
           labelKey={mergedLabelKey.value}
           checkable={mergedCheckable.value}
-          cascade={mergedCascade.value}
+          cascaderStrategy={mergedCascaderStrategy.value}
           childrenKey={mergedChildrenKey.value}
-          checkStrategy={checkStrategy}
           dataSource={dataSource}
           draggable={draggable}
           draggableIcon={draggableIcon}

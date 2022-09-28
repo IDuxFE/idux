@@ -11,6 +11,7 @@ import type { AbstractControl } from '@idux/cdk/forms'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
 import type {
@@ -33,10 +34,27 @@ export const treeSelectProps = {
   autofocus: { type: Boolean, default: false },
   borderless: { type: Boolean, default: undefined },
   childrenKey: { type: String, default: undefined },
+  cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
+  /**
+   * @deprecated please use `cascaderStrategy` instead'
+   *
+   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
+   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
+   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
+   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
+   */
   cascade: { type: Boolean, default: false },
   checkable: { type: Boolean, default: false },
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
+  /**
+   * @deprecated please use `cascaderStrategy` instead'
+   *
+   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
+   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
+   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
+   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
+   */
   checkStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
   customAdditional: { type: Function as PropType<TreeSelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },

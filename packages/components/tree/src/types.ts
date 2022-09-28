@@ -10,6 +10,7 @@
 import type { MergedNode } from './composables/useDataSource'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { DefineComponent, HTMLAttributes, PropType, StyleValue } from 'vue'
 
@@ -30,6 +31,15 @@ export const treeProps = {
     type: Boolean,
     default: undefined,
   },
+  cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
+  /**
+   * @deprecated please use `cascaderStrategy` instead'
+   *
+   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
+   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
+   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
+   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
+   */
   cascade: {
     type: Boolean,
     default: false,
@@ -39,6 +49,14 @@ export const treeProps = {
     default: false,
   },
   childrenKey: String,
+  /**
+   * @deprecated please use `cascaderStrategy` instead'
+   *
+   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
+   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
+   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
+   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
+   */
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all',

@@ -9,7 +9,7 @@ import { computed, defineComponent, normalizeClass, provide, ref, watch } from '
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
+import { Logger, type VKey, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -174,6 +174,14 @@ export default defineComponent({
     )
 
     const renderContent = () => <Content onClick={handleOverlayClick} />
+
+    if (__DEV__) {
+      props.cascade &&
+        Logger.warn(
+          'components/tree',
+          '`cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
+        )
+    }
 
     return () => {
       const overlayProps = {
