@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Cascader > multiple work > render work 1`] = `
-"<div class=\\"ix-cascader ix-selector ix-selector-multiple ix-selector-opened ix-selector-md\\">
+"<div class=\\"ix-cascader ix-selector ix-selector-md ix-selector-multiple ix-selector-opened\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow\\">
@@ -24,7 +24,7 @@ exports[`Cascader > multiple work > render work 1`] = `
 `;
 
 exports[`Cascader > single work > render work 1`] = `
-"<div class=\\"ix-cascader ix-selector ix-selector-opened ix-selector-single ix-selector-md\\">
+"<div class=\\"ix-cascader ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Components/General/Button</span>

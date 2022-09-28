@@ -87,6 +87,19 @@
     box-shadow: @select-active-box-shadow;
   }
 
+  &-borderless &-content {
+    .borderless();
+  }
+
+  &-searchable &-content,
+  &-allow-input &-content {
+    cursor: text;
+
+    .@{selector-prefix}-input-inner {
+      cursor: auto;
+    }
+  }
+
   &-disabled &-content {
     color: @select-disabled-color;
     background-color: @select-disabled-background-color;
@@ -94,18 +107,6 @@
 
     .@{selector-prefix}-input-inner {
       cursor: not-allowed;
-    }
-  }
-
-  &-borderless &-content {
-    .borderless();
-  }
-
-  &-searchable &-content &-allow-input &-content {
-    cursor: text;
-
-    .@{selector-prefix}-input-inner {
-      cursor: auto;
     }
   }
 
