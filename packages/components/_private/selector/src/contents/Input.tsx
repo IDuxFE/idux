@@ -18,17 +18,21 @@ export default defineComponent({
       mirrorRef,
       inputRef,
       inputValue,
+      isFocused,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
     } = inject(selectorToken)!
 
+    const inputReadonly = computed(
+      () => props.readonly || !isFocused.value || !(props.allowInput || mergedSearchable.value),
+    )
     const innerStyle = computed(() => {
-      return { opacity: props.allowInput || mergedSearchable.value ? undefined : 0 }
+      return { opacity: inputReadonly.value ? 0 : undefined }
     })
 
     return () => {
-      const { autocomplete, autofocus, disabled, multiple, readonly } = props
+      const { autocomplete, autofocus, disabled, multiple } = props
       const prefixCls = `${mergedPrefixCls.value}-input`
       return (
         <div class={prefixCls}>
@@ -39,7 +43,7 @@ export default defineComponent({
             autocomplete={autocomplete}
             autofocus={autofocus}
             disabled={disabled}
-            readonly={readonly}
+            readonly={inputReadonly.value}
             value={inputValue.value}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}

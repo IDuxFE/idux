@@ -132,6 +132,7 @@ export default defineComponent({
       inputRef,
       inputValue,
       isComposing,
+      isFocused,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
