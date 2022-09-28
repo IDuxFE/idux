@@ -21,6 +21,7 @@
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
+| `scrollToTopOnChange` | 是否在表格的分页、筛选、排序信息改变后滚动到顶部 | `boolean` | `true` | ✅ | - |
 | `size` | 表格大小 | `'lg' \| 'md' \| 'sm'` | `md` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |

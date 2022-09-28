@@ -483,6 +483,7 @@ export interface TableConfig {
    */
   rowKey?: string
   size: TableSize
+  scrollToTopOnChange?: boolean
 
   emptyCell?: string | ((options: TableEmptyCellOptions) => VNodeChild)
 

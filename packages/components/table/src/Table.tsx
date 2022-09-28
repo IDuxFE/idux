@@ -22,6 +22,7 @@ import { useFilterable } from './composables/useFilterable'
 import { useGetRowKey } from './composables/useGetRowKey'
 import { usePagination } from './composables/usePagination'
 import { useScroll } from './composables/useScroll'
+import { useScrollOnChange } from './composables/useScrollOnChange'
 import { useSelectable } from './composables/useSelectable'
 import { useSortable } from './composables/useSortable'
 import { useSticky } from './composables/useSticky'
@@ -46,6 +47,8 @@ export default defineComponent({
     const mergedGetKey = useGetRowKey(props, config)
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
+    const { mergedPagination } = usePagination(props, config, mergedSize)
+
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, mergedAutoHeight, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
@@ -53,18 +56,22 @@ export default defineComponent({
     const filterableContext = useFilterable(columnsContext.flattedColumns)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
     const tableLayout = useTableLayout(props, columnsContext, scrollContext, stickyContext.isSticky)
-    const { mergedPagination } = usePagination(props, config, mergedSize)
+
+    const { activeSorters } = sortableContext
+    const { activeFilters } = filterableContext
 
     const dataContext = useDataSource(
       props,
       mergedChildrenKey,
       mergedGetKey,
-      sortableContext.activeSorters,
-      filterableContext.activeFilters,
+      activeSorters,
+      activeFilters,
       expandableContext.expandedRowKeys,
       mergedPagination,
     )
     const selectableContext = useSelectable(props, locale, columnsContext.flattedColumns, dataContext)
+
+    useScrollOnChange(props, config, scrollContext.scrollBodyRef, mergedPagination, activeSorters, activeFilters)
 
     const context = {
       props,
