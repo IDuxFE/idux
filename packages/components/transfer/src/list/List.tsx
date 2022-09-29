@@ -29,7 +29,7 @@ export default defineComponent({
     })
 
     const transferListApi: TransferListApi = {
-      scrollTo: (...params) => virtualScrollRef.value?.scrollTo(...params),
+      scrollTo: option => virtualScrollRef.value?.scrollTo(option),
     }
 
     expose(transferListApi)

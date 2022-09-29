@@ -10,40 +10,27 @@ import type { ActiveFilter } from './useFilterable'
 import type { ActiveSorter } from './useSortable'
 import type { TableConfig } from '@idux/components/config'
 
-import { type ComputedRef, type Ref, type WatchStopHandle, computed, watch } from 'vue'
+import { type ComputedRef, type WatchStopHandle, computed, watch } from 'vue'
 
-import { type VirtualScrollInstance, scrollToTop } from '@idux/cdk/scroll'
+import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 
 export function useScrollOnChange(
   props: TableProps,
   config: TableConfig,
-  scrollBodyRef: Ref<HTMLElement | VirtualScrollInstance | undefined>,
   mergedPagination: ComputedRef<TablePagination | null>,
   activeSorters: ComputedRef<ActiveSorter[]>,
   activeFilters: ComputedRef<ActiveFilter[]>,
+  scrollTo: VirtualScrollToFn,
 ): void {
   const mergedScrollToTopOnChange = computed(() => props.scrollToTopOnChange ?? config.scrollToTopOnChange)
 
-  let stopOnChangeWatch: WatchStopHandle | undefined
-  const startOnChangeWatch = () => {
-    stopOnChangeWatch = watch(
+  const startOnChangeWatch = () =>
+    watch(
       [() => mergedPagination.value?.pageIndex, () => mergedPagination.value?.pageSize, activeSorters, activeFilters],
-      () => {
-        if (!scrollBodyRef.value) {
-          return
-        }
-
-        if (props.virtual) {
-          ;(scrollBodyRef.value as VirtualScrollInstance).scrollTo(0)
-        } else {
-          scrollToTop({
-            target: scrollBodyRef.value as HTMLElement,
-            top: 0,
-          })
-        }
-      },
+      () => scrollTo(0),
     )
-  }
+
+  let stopOnChangeWatch: WatchStopHandle | undefined
 
   watch(
     mergedScrollToTopOnChange,
@@ -51,7 +38,7 @@ export function useScrollOnChange(
       stopOnChangeWatch?.()
 
       if (scrollToTopOnChange) {
-        startOnChangeWatch()
+        stopOnChangeWatch = startOnChangeWatch()
       }
     },
     { immediate: true },

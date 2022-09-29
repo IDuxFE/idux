@@ -142,7 +142,7 @@ export default defineComponent({
       inputRef?.value?.blur()
     }
     const scrollTo = (option?: number | VirtualScrollToOptions) => {
-      virtualScrollRef?.value?.scrollTo(option)
+      virtualScrollRef.value?.scrollTo(option)
     }
 
     const getNode = (key: VKey) => {

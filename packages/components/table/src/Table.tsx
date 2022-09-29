@@ -71,7 +71,7 @@ export default defineComponent({
     )
     const selectableContext = useSelectable(props, locale, columnsContext.flattedColumns, dataContext)
 
-    useScrollOnChange(props, config, scrollContext.scrollBodyRef, mergedPagination, activeSorters, activeFilters)
+    useScrollOnChange(props, config, mergedPagination, activeSorters, activeFilters, scrollContext.scrollTo)
 
     const context = {
       props,
