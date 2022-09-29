@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, InputHTMLAttributes, PropType } from 'vue'
@@ -35,6 +36,7 @@ export const inputProps = {
   },
   prefix: String,
   size: String as PropType<FormSize>,
+  status: String as PropType<ValidateStatus>,
   suffix: String,
   onClear: Function as PropType<(evt: MouseEvent) => void>,
 } as const

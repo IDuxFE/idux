@@ -18,7 +18,7 @@
 | `trueValue` | 选中时返回的值 |  `boolean \| string \| number`  | `true`| - | - |
 | `falseValue` | 不选中时返回的值 | `boolean \| string \| number` | `false`| - | - |
 | `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | 不传时使用 `key` 作为 `value` |
-| `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'` | - | `'md'` | 仅`buttoned`为`true`时生效 |
+| `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'` | `md` | - | 仅`buttoned`为`true`时生效 |
 | `onChange` | 选中状态发生变化后的回调 | `(newChecked: boolean \| string \| number, oldChecked: boolean \| string \| number) => void`| - | - | - |
 
 #### CheckboxMethods
@@ -41,7 +41,7 @@
 | `disabled` | 设置组内 `IxCheckbox` 的 `disabled` 属性 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `gap` | 设置组内 `IxCheckbox` 的间隔 | `number \| string` | - | - | - |
 | `name` | 设置组内 `IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
-| `size` | 设置组内 `IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
+| `size` | 设置组内 `IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| - | - | - |
 | `vertical` | 设置组内排列方向 | `boolean` | - | - | 默认为水平排列方向，可设`true`为垂直排列 |
 | `onChange` | 选中值发生变化后的回调 | `(newValue: any[], oldValue: any[]) => void`| - | - | - |
 

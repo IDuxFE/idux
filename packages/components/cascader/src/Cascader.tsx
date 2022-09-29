@@ -12,7 +12,7 @@ import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { useGetKey, useOverlayContainer } from '@idux/components/utils'
 
@@ -58,6 +58,8 @@ export default defineComponent({
 
     const { accessor, control } = useAccessorAndControl()
     useFormItemRegister(control)
+    const mergedSize = useFormSize(props, config)
+    const mergedStatus = useFormStatus(props, control)
 
     const { mergedData, mergedDataMap } = useDataSource(
       props,
@@ -150,7 +152,8 @@ export default defineComponent({
         placeholder={props.placeholder}
         readonly={props.readonly}
         searchable={props.searchable}
-        size={props.size}
+        size={mergedSize.value}
+        status={mergedStatus.value}
         suffix={props.suffix}
         value={selectedStateContext.selectedKeys.value}
         onBlur={handleBlur}

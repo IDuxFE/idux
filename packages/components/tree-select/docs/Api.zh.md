@@ -43,6 +43,7 @@
 | `searchable` | 是否开启搜索功能 | `boolean \| 'overlay'` | - | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
 | `showLine` | 是否显示连接线 | `boolean` | `false` | - | 此属性为`tree`的全局配置，修改其即可生效 |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
+| `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `treeDisabled` | 树的禁用节点的函数 | 参考 [Tree](/components/tree/zh#API) | - | - | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |

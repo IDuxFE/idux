@@ -224,34 +224,6 @@ describe('Form', () => {
 
       expect(wrapper.classes()).toContain('ix-form-lg')
     })
-
-    test('statusIcon work', async () => {
-      const wrapper = FormMount({
-        props: { statusIcon: true },
-        slots: {
-          default: () => [
-            h(FormItem, { label: 'Username', status: 'valid' }, () => h(IxInput)),
-            h(FormItem, { label: 'Password', status: 'invalid' }, () => h(IxInput)),
-            h(FormItem, { label: 'Remember', status: 'validating' }, () => h(IxCheckbox)),
-          ],
-        },
-      })
-
-      const items = wrapper.findAll('.ix-form-item')
-
-      expect(items[0].classes()).toContain('ix-form-item-with-status-icon')
-      expect(items[0].find('.ix-form-item-status-icon').find('.ix-icon-check-circle-filled').exists()).toBe(true)
-      expect(items[1].classes()).toContain('ix-form-item-with-status-icon')
-      expect(items[1].find('.ix-form-item-status-icon').find('.ix-icon-close-circle-filled').exists()).toBe(true)
-      expect(items[2].classes()).toContain('ix-form-item-with-status-icon')
-      expect(items[2].find('.ix-form-item-status-icon').find('.ix-icon-loading').exists()).toBe(true)
-
-      await wrapper.setProps({ statusIcon: { valid: 'up', invalid: 'down' } })
-
-      expect(items[0].find('.ix-form-item-status-icon').find('.ix-icon-up').exists()).toBe(true)
-      expect(items[1].find('.ix-form-item-status-icon').find('.ix-icon-down').exists()).toBe(true)
-      expect(items[2].find('.ix-form-item-status-icon').find('.ix-icon-loading').exists()).toBe(true)
-    })
   })
 
   describe('item work', () => {
@@ -518,29 +490,6 @@ describe('Form', () => {
       await wrapper.setProps({ status: 'validating' })
 
       expect(wrapper.classes()).toContain('ix-form-item-validating')
-    })
-
-    test('statusIcon work', async () => {
-      const wrapper = FormItemMount({
-        props: { statusIcon: true },
-        slots: { default: () => h(IxInput) },
-      })
-
-      expect(wrapper.classes()).not.toContain('ix-form-item-with-status-icon')
-
-      await wrapper.setProps({ status: 'valid' })
-
-      expect(wrapper.classes()).toContain('ix-form-item-with-status-icon')
-
-      expect(wrapper.find('.ix-form-item-status-icon').find('.ix-icon-check-circle-filled').exists()).toBe(true)
-
-      await wrapper.setProps({ statusIcon: { valid: 'up', invalid: 'down' } })
-
-      expect(wrapper.find('.ix-form-item-status-icon').find('.ix-icon-up').exists()).toBe(true)
-
-      await wrapper.setProps({ status: 'invalid' })
-
-      expect(wrapper.find('.ix-form-item-status-icon').find('.ix-icon-down').exists()).toBe(true)
     })
   })
 

@@ -15,11 +15,11 @@
  | `readonly` | 只读状态 |`boolean` |`false` | - | - |
  | `clearable` | 是否展示清除按钮 |`boolean` |`true` | ✅ | - |
  | `borderless` | 是否为无边框 |`boolean` |`false` | ✅ | - |
- | `suffix` | 后缀图标 |`string \| #suffix` | `clock-circle` | ✅ | - |
- | `target` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
  | `clearIcon` | 清除按钮图标 |`string \| #clearIcon` | `close-circle` | ✅ | - |
  | `clearText` | hover到clearIcon上，显示的title |`string` | clear | ✅ | - |
  | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
+ | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
+ | `suffix` | 后缀图标 |`string \| #suffix` | `clock-circle` | ✅ | - |
  | `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: 'am' \| 'pm' \| undefined) => number[]` | ``() => []`` | - | - |
  | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: 'am' \| 'pm' \| undefined) => number[]` | `() => []` | - | - |
  | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number \| undefined, selectedAmPm: 'am' \| 'pm' | undefined)=>number[]` | `() => []` | - | - |
@@ -29,6 +29,7 @@
  | `secondStep` | 秒选项的间隔 | `number` | `1` | - | - |
  | `defaultOpenValue` | 打开面板时默认高亮的值 | `Date \| string \| number` | - | - | 如果value不为空，则高亮value的值 |
  | `overlayClassName` | 浮层的类名 |`string` | - | - | - |
+ | `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
  | `onChange` | 时间选择回调函数 |`(value: Date \| undefined) => void` | - | - | - |
  | `onClear` | 清除事件回调函数 |`(evt: MouseEvent) => void` | - | - | - |
  | `onFocus` | focus事件回调函数 |`(evt: FocusEvent) => void` | - | - | - |
@@ -48,10 +49,11 @@
  | `separator` | 分隔符 |`string \| VNode \| #separator` | 至 | - | - |
  | `clearable` | 是否展示清除按钮 |`boolean` |`true` | ✅ | - |
  | `borderless` | 是否为无边框 |`boolean` |`false` | ✅ | - |
- | `suffix` | 后缀图标 |`string \| #suffix` | `clock-circle` | ✅ | - |
  | `clearIcon` | 清除按钮图标 |`string \| #clearIcon` | `close-circle` | ✅ | - |
- | `clearText` | hover到clearIcon上，显示的title |`string` | clear | ✅ | - |
+ | `clearText` | hover到clearIcon上，显示的title |`string` | `clear` | ✅ | - |
  | `size` | 尺寸大小 | `lg \| md \| sm` | `md` | ✅ | - |
+ | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
+ | `suffix` | 后缀图标 |`string \| #suffix` | `clock-circle` | ✅ | - |
  | `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string | undefined) => number[]` | ``() => []`` | - | - |
  | `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]` | `() => []` | - | - |
  | `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: string | undefined)=>number[]` | `() => []` | - | - |

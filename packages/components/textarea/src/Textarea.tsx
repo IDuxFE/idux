@@ -27,6 +27,8 @@ export default defineComponent({
     const {
       elementRef,
       accessor,
+      mergedSize,
+      mergedStatus,
       clearable,
       clearIcon,
       clearVisible,
@@ -46,15 +48,17 @@ export default defineComponent({
     expose({ focus, blur })
 
     const classes = computed(() => {
-      const { showCount = config.showCount, size = config.size } = props
+      const { showCount = config.showCount } = props
+      const status = mergedStatus.value
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
+        [`${prefixCls}-${status}`]: !!status,
         [`${prefixCls}-clearable`]: clearable.value,
         [`${prefixCls}-disabled`]: accessor.disabled,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-with-count`]: showCount,
-        [`${prefixCls}-${size}`]: true,
       }
       return normalizeClass([classes, attrs.class])
     })

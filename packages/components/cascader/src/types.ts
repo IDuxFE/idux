@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AbstractControl } from '@idux/cdk/forms'
+import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
@@ -55,6 +55,7 @@ export const cascaderProps = {
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   searchFn: { type: [Boolean, Function] as PropType<boolean | CascaderSearchFn>, default: true },
   size: { type: String as PropType<FormSize>, default: undefined },
+  status: String as PropType<ValidateStatus>,
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   suffix: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },

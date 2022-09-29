@@ -50,14 +50,13 @@ export default defineComponent({
     )
     const mergedMessageTooltip = computed(() => props.messageTooltip ?? formProps?.messageTooltip)
 
-    const { status, statusIcon, message } = useFormItem(props, formProps)
+    const { status, message } = useFormItem(props)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       const currStatus = status.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-status-icon`]: !!statusIcon.value,
         [`${prefixCls}-${currStatus}`]: !!currStatus,
       })
     })
@@ -84,7 +83,6 @@ export default defineComponent({
             controlColConfig,
             controlTooltipIcon,
             status,
-            statusIcon,
             message,
             mergedMessageTooltip,
             prefixCls,
@@ -131,7 +129,6 @@ function renderControl(
   controlColConfig: ComputedRef<ColProps | undefined>,
   controlTooltipIcon: ComputedRef<string | undefined>,
   status: ComputedRef<ValidateStatus | undefined>,
-  statusIcon: ComputedRef<string | undefined>,
   message: ComputedRef<string | undefined>,
   mergedMessageTooltip: ComputedRef<boolean | TooltipProps | undefined>,
   prefixCls: string,
@@ -155,11 +152,6 @@ function renderControl(
   const inputNode = (
     <div class={`${prefixCls}-control-input`}>
       <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
-      {statusIcon.value && (
-        <span class={`${prefixCls}-status-icon`}>
-          <IxIcon name={statusIcon.value} />
-        </span>
-      )}
       {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
     </div>
   )

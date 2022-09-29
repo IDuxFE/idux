@@ -18,7 +18,13 @@ import {
 } from 'vue'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { type AbstractControl, type ValueAccessor, useValueAccessor, useValueControl } from '@idux/cdk/forms'
+import {
+  type AbstractControl,
+  ValidateStatus,
+  type ValueAccessor,
+  useValueAccessor,
+  useValueControl,
+} from '@idux/cdk/forms'
 import { useKey } from '@idux/components/utils'
 
 import { FORM_ITEM_TOKEN, FORM_TOKEN } from '../token'
@@ -115,4 +121,24 @@ export function useFormSize(props: { size?: FormSize }, config: { size: FormSize
   const formContext = inject(FORM_TOKEN, null)
 
   return computed(() => props.size ?? formContext?.size.value ?? config.size)
+}
+
+export function useFormStatus(
+  props: { status?: ValidateStatus },
+  control: Ref<AbstractControl | undefined>,
+): ComputedRef<ValidateStatus | undefined> {
+  return computed(() => {
+    if (props.status) {
+      return props.status
+    }
+    const currControl = control.value
+    if (!currControl || currControl.disabled.value) {
+      return undefined
+    }
+    const { trigger, dirty, blurred, status } = currControl
+    if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
+      return status.value
+    }
+    return undefined
+  })
 }

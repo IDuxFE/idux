@@ -19,28 +19,24 @@ import {
 import { isFunction, isObject, isString } from 'lodash-es'
 
 import { type AbstractControl, type ValidateStatus, useControl as useSelfControl } from '@idux/cdk/forms'
-import { Logger, type VKey } from '@idux/cdk/utils'
+import { type VKey } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type Locale } from '@idux/components/locales'
 
 import { FORM_ITEM_TOKEN } from '../token'
-import { type FormItemProps, type FormProps } from '../types'
+import { type FormItemProps } from '../types'
+import { useFormStatus } from './public'
 
-export function useFormItem(
-  props: FormItemProps,
-  formProps: FormProps | undefined,
-): {
+export function useFormItem(props: FormItemProps): {
   status: ComputedRef<ValidateStatus | undefined>
-  statusIcon: ComputedRef<string | undefined>
   message: ComputedRef<string | undefined>
 } {
   const control = useControl()
 
-  const status = useStatus(props, control)
-  const statusIcon = useStatusIcon(props, formProps, status)
+  const status = useFormStatus(props, control)
   const message = useMessage(props, control, status)
 
-  return { status, statusIcon, message }
+  return { status, message }
 }
 
 function useControl() {
@@ -82,56 +78,6 @@ function useControl() {
   )
 
   return control
-}
-
-function useStatus(props: FormItemProps, control: Ref<AbstractControl | undefined>) {
-  return computed(() => {
-    if (props.status) {
-      return props.status
-    }
-    const currControl = control.value
-    if (!currControl) {
-      return undefined
-    }
-    const { trigger, dirty, blurred, status } = currControl
-    if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
-      return status.value
-    }
-    return undefined
-  })
-}
-
-const defaultIconMap = {
-  invalid: 'close-circle-filled',
-  validating: 'loading',
-  valid: 'check-circle-filled',
-} as const
-
-function useStatusIcon(
-  props: FormItemProps,
-  formProps: FormProps | undefined,
-  status: ComputedRef<ValidateStatus | undefined>,
-) {
-  return computed(() => {
-    const currStatus = status.value
-    if (!currStatus) {
-      return undefined
-    }
-
-    const icon = props.hasFeedback ?? props.statusIcon ?? formProps?.hasFeedback ?? formProps?.statusIcon
-    if (__DEV__ && (props.hasFeedback || formProps?.hasFeedback)) {
-      Logger.warn('components/form', '`hasFeedback` was deprecated.')
-    }
-    if (__DEV__ && (props.statusIcon || formProps?.statusIcon)) {
-      Logger.warn('components/form', '`statusIcon` was deprecated.')
-    }
-    if (!icon) {
-      return undefined
-    }
-
-    const iconMap = isObject(icon) ? { ...defaultIconMap, ...icon } : defaultIconMap
-    return iconMap[currStatus]
-  })
 }
 
 function useMessage(

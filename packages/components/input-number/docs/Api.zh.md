@@ -20,6 +20,7 @@
 | `precision` | 数值精度 | `number` | - | - | - |
 | `readonly` | 只读 | `boolean` | `false` | - | - |
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
+| `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `step` | 步进 | `number` | `1` | - | - |
 | `onChange` | 值发生改变时触发的回调 | `(value: number \| null, oldValue: number \| null \| undefined) => void` | - | - | - |
 | `onFocus` | 获取焦点时触发的回调 | `(evt: FocusEvent) => void` | - | - | - |

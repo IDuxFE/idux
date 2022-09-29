@@ -5,18 +5,25 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CommonProps } from './types'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { computed, nextTick, ref, toRaw, watch } from 'vue'
-
-import { FormAccessor, useAccessorAndControl } from '@idux/cdk/forms'
+import { type FormAccessor, type ValidateStatus, useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
-import { useFormFocusMonitor, useFormItemRegister } from '@idux/components/form'
+import {
+  type FormSize,
+  useFormFocusMonitor,
+  useFormItemRegister,
+  useFormSize,
+  useFormStatus,
+} from '@idux/components/form'
+
+import { type InputCommonProps } from './types'
 
 export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> {
   elementRef: Ref<T | undefined>
   accessor: FormAccessor
+  mergedSize: ComputedRef<FormSize | undefined>
+  mergedStatus: ComputedRef<ValidateStatus | undefined>
   clearIcon: ComputedRef<string>
   clearVisible: ComputedRef<boolean>
   clearable: ComputedRef<boolean>
@@ -36,11 +43,13 @@ export interface InputContext<T extends HTMLInputElement | HTMLTextAreaElement> 
 }
 
 export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement | HTMLTextAreaElement>(
-  props: CommonProps,
-  config: { clearable: boolean; clearIcon: string; trim: boolean },
+  props: InputCommonProps,
+  config: { clearable: boolean; clearIcon: string; size: FormSize; trim: boolean },
 ): InputContext<T> {
   const { accessor, control } = useAccessorAndControl()
   useFormItemRegister(control)
+  const mergedSize = useFormSize(props, config)
+  const mergedStatus = useFormStatus(props, control)
 
   const clearable = computed(() => props.clearable ?? config.clearable)
   const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
@@ -121,6 +130,8 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
   return {
     elementRef,
     accessor,
+    mergedSize,
+    mergedStatus,
     clearable,
     clearIcon,
     clearVisible,

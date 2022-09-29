@@ -14,10 +14,10 @@ export interface TextareaError {
   message?: string
 }
 
-import { ɵCommonProps } from '@idux/components/input'
+import { ɵInputCommonProps } from '@idux/components/input'
 
 export const proTextareaProps = {
-  ...ɵCommonProps,
+  ...ɵInputCommonProps,
   computeCount: { type: Function as PropType<(value: string) => string>, default: undefined },
   errors: Array as PropType<TextareaError[]>,
   maxCount: { type: [Number, String] as PropType<number | string>, default: undefined },

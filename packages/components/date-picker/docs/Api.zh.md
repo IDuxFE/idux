@@ -24,6 +24,7 @@
 | `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
+| `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `'calendar'` | ✅ | - |
 | `type` | 设置选择器类型 | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year' \| 'datetime'` | `'date'` | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |

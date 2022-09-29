@@ -94,4 +94,32 @@
     opacity: @textarea-count-opacity;
     content: attr(data-count);
   }
+
+  // form status
+  &&-invalid {
+    &::after {
+      color: @form-item-invalid-color;
+    }
+
+    .@{textarea-prefix}-inner {
+      border-color: @form-item-invalid-color;
+
+      &:hover {
+        border-color: @form-item-invalid-color;
+      }
+    }
+
+    .@{textarea-prefix}-suffix {
+      color: @form-item-invalid-color;
+
+      &:hover {
+        color: @form-item-invalid-color;
+      }
+    }
+
+    &.@{textarea-prefix}-focused .@{textarea-prefix}-inner {
+      border-color: @form-item-invalid-color;
+      box-shadow: @form-item-invalid-box-shadow;
+    }
+  }
 }

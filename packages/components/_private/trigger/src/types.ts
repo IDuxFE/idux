@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ValidateStatus } from '@idux/cdk/forms'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
-
-import { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 
 export const triggerProps = {
   borderless: Boolean as PropType<boolean>,
@@ -19,6 +19,7 @@ export const triggerProps = {
   focused: Boolean as PropType<boolean>,
   readonly: Boolean as PropType<boolean>,
   size: String as PropType<FormSize>,
+  status: String as PropType<ValidateStatus>,
   suffix: String as PropType<string>,
   onClick: [Array, Function] as PropType<MaybeArray<(evt: Event) => void>>,
   onClear: [Array, Function] as PropType<MaybeArray<(evt: MouseEvent) => void>>,

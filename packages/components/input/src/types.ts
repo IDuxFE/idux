@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { AbstractControl } from '@idux/cdk/forms'
+import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, InputHTMLAttributes, PropType } from 'vue'
@@ -13,7 +13,7 @@ import type { DefineComponent, InputHTMLAttributes, PropType } from 'vue'
 export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
 export type TextareaAutoRows = { minRows: number; maxRows: number }
 
-export const commonProps = {
+export const inputCommonProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: String, default: undefined },
 
@@ -22,6 +22,7 @@ export const commonProps = {
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   size: { type: String as PropType<FormSize>, default: undefined },
+  status: String as PropType<ValidateStatus>,
   trim: { type: Boolean, default: undefined },
 
   // events
@@ -35,10 +36,10 @@ export const commonProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 } as const
 
-export type CommonProps = ExtractInnerPropTypes<typeof commonProps>
+export type InputCommonProps = ExtractInnerPropTypes<typeof inputCommonProps>
 
 export const inputProps = {
-  ...commonProps,
+  ...inputCommonProps,
   addonAfter: { type: String, default: undefined },
   addonBefore: { type: String, default: undefined },
   borderless: { type: Boolean, default: undefined },

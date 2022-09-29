@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { AbstractControl } from '@idux/cdk/forms'
+import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
@@ -88,6 +88,7 @@ export const selectProps = {
   searchFilter: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: undefined },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
   size: { type: String as PropType<FormSize>, default: undefined },
+  status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
   /**
    * @deprecated please use `overlayContainer` instead'

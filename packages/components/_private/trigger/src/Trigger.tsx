@@ -20,8 +20,6 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-trigger`)
 
-    const isDisabled = computed(() => props.disabled)
-
     const focusMonitor = useSharedFocusMonitor()
     const triggerRef = ref<HTMLElement>()
     onMounted(() => {
@@ -41,19 +39,21 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
+      const { className, size, status, borderless, disabled, focused, readonly } = props
       return normalizeClass({
-        [`${props.className}`]: !!props.className,
+        [`${className}`]: !!className,
         [prefixCls]: true,
-        [`${prefixCls}-disabled`]: isDisabled.value,
-        [`${prefixCls}-borderless`]: props.borderless,
-        [`${prefixCls}-readonly`]: props.readonly,
-        [`${prefixCls}-focused`]: props.focused,
-        [`${prefixCls}-${props.size}`]: props.size,
+        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${status}`]: !!status,
+        [`${prefixCls}-borderless`]: borderless,
+        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-focused`]: focused,
+        [`${prefixCls}-readonly`]: readonly,
       })
     })
 
     const handleClick = (evt: Event) => {
-      if (isDisabled.value) {
+      if (props.disabled) {
         return
       }
 
@@ -61,7 +61,7 @@ export default defineComponent({
     }
 
     const handleKeyDown = (evt: KeyboardEvent) => {
-      if (isDisabled.value) {
+      if (props.disabled) {
         return
       }
 
@@ -69,7 +69,7 @@ export default defineComponent({
     }
 
     const handleClear = (evt: MouseEvent) => {
-      if (isDisabled.value) {
+      if (props.disabled) {
         return
       }
 
@@ -88,7 +88,7 @@ export default defineComponent({
       )
     }
     const renderClearIcon = () => {
-      if (!props.clearable || isDisabled.value || (!props.clearIcon && !slots.clearIcon)) {
+      if (!props.clearable || props.disabled || (!props.clearIcon && !slots.clearIcon)) {
         return null
       }
 

@@ -8,10 +8,10 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, PropType, TextareaHTMLAttributes } from 'vue'
 
-import { ɵCommonProps } from '@idux/components/input'
+import { ɵInputCommonProps } from '@idux/components/input'
 
 export const textareaProps = {
-  ...ɵCommonProps,
+  ...ɵInputCommonProps,
   autoRows: { type: [Boolean, Object] as PropType<boolean | TextareaAutoRows>, default: undefined },
   computeCount: { type: Function as PropType<(value: string) => string>, default: undefined },
   maxCount: { type: [Number, String] as PropType<number | string>, default: undefined },

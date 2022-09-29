@@ -267,4 +267,60 @@
       box-shadow: none;
     }
   }
+
+  // form status
+  &&-invalid {
+    border-color: @form-item-invalid-color;
+
+    &:hover {
+      border-color: @form-item-invalid-color;
+    }
+
+    .@{idux-prefix}-input-wrapper,
+    .@{idux-prefix}-input-inner {
+      border-color: @form-item-invalid-color;
+
+      &:hover {
+        border-color: @form-item-invalid-color;
+      }
+    }
+
+    .@{idux-prefix}-input-suffix,
+    .@{idux-prefix}-input-prefix {
+      color: @form-item-invalid-color;
+
+      &:hover {
+        color: @form-item-invalid-color;
+      }
+    }
+
+    &:focus,
+    &.@{idux-prefix}-input-focused {
+      border-color: @form-item-invalid-color;
+      box-shadow: @form-item-invalid-box-shadow;
+
+      .@{idux-prefix}-input-wrapper,
+      .@{idux-prefix}-input-inner {
+        box-shadow: none;
+      }
+    }
+
+    .@{idux-prefix}-input-addon {
+      color: @form-item-invalid-color;
+      border-color: @form-item-invalid-color;
+
+      .@{selector-prefix} {
+        &:hover &-content,
+        &-content {
+          border-color: transparent;
+        }
+
+        &&-active &-content {
+          border-color: transparent;
+          // todo remove
+          box-shadow: none;
+        }
+      }
+    }
+  }
 }

@@ -16,7 +16,7 @@ import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister } from '@idux/components/form'
+import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { useOverlayContainer } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
@@ -65,6 +65,8 @@ export default defineComponent({
 
     const { accessor, control } = useAccessorAndControl()
     useFormItemRegister(control)
+    const mergedSize = useFormSize(props, config)
+    const mergedStatus = useFormStatus(props, control)
 
     const getKey = useGetOptionKey(props, config)
     const { options, optionKeyMap } = useSelectOptions(props, config, slots, getKey, inputValue)
@@ -142,7 +144,8 @@ export default defineComponent({
         placeholder={props.placeholder}
         readonly={props.readonly}
         searchable={props.searchable}
-        size={props.size}
+        size={mergedSize.value}
+        status={mergedStatus.value}
         suffix={props.suffix}
         value={selectedValue.value}
         onBlur={handleBlur}

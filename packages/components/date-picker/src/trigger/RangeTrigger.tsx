@@ -9,7 +9,6 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
-import { FORM_TOKEN } from '@idux/components/form'
 
 import { useTriggerProps } from '../composables/useTriggerProps'
 import { dateRangePickerToken } from '../token'
@@ -29,14 +28,13 @@ export default defineComponent({
       inputEnableStatus,
       renderSeparator,
     } = context
-    const formContext = inject(FORM_TOKEN, null)
 
     const placeholders = computed(() => [
       props.placeholder?.[0] ?? locale.dateRangePicker[`${props.type}Placeholder`][0],
       props.placeholder?.[1] ?? locale.dateRangePicker[`${props.type}Placeholder`][1],
     ])
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
-    const triggerProps = useTriggerProps(context, formContext)
+    const triggerProps = useTriggerProps(context)
 
     const handleFromInput = (evt: Event) => {
       fromControl.handleInput(evt)

@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, nextTick, normalizeClass, provide, toRef, watch } from 'vue'
+import { computed, defineComponent, nextTick, normalizeClass, provide, toRef, watch } from 'vue'
 
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
-import { FORM_TOKEN, useFormElement } from '@idux/components/form'
+import { useFormElement } from '@idux/components/form'
 
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useRangeKeyboardEvents } from './composables/useKeyboardEvents'
@@ -37,14 +37,12 @@ export default defineComponent({
 
     const formatRef = computed(() => props.format ?? config.format)
 
-    const pickerState = usePickerState(props, dateConfig, formatRef)
+    const pickerState = usePickerState(props, config, dateConfig, formatRef)
     const { accessor, handleChange } = pickerState
 
     const rangePickerControl = useRangePickerControl(dateConfig, formatRef, toRef(accessor, 'value'))
     const { overlayOpened, setOverlayOpened } = useOverlayState(props, rangePickerControl)
     const inputEnableStatus = useInputEnableStatus(props, config)
-
-    const formContext = inject(FORM_TOKEN, null)
 
     const handleKeyDown = useRangeKeyboardEvents(rangePickerControl, setOverlayOpened, handleChange)
 
@@ -59,7 +57,6 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       formatRef,
-      formContext,
       handleKeyDown,
       inputRef,
       inputEnableStatus,

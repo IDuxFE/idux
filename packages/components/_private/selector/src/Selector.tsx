@@ -65,11 +65,14 @@ export default defineComponent({
 
     const classes = computed(() => {
       const config = props.config
-      const { allowInput, className, borderless = config.borderless, multiple } = props
+      const { allowInput, className, borderless = config.borderless, multiple, status } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [className]: true,
         [prefixCls]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
+        [`${prefixCls}-${status}`]: !!status,
+        [`${prefixCls}-allow-input`]: allowInput,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: mergedClearable.value,
         [`${prefixCls}-disabled`]: props.disabled,
@@ -77,10 +80,8 @@ export default defineComponent({
         [`${prefixCls}-multiple`]: multiple,
         [`${prefixCls}-opened`]: props.opened,
         [`${prefixCls}-readonly`]: props.readonly,
-        [`${prefixCls}-single`]: !multiple,
         [`${prefixCls}-searchable`]: mergedSearchable.value,
-        [`${prefixCls}-allow-input`]: allowInput,
-        [`${prefixCls}-${mergedSize.value}`]: true,
+        [`${prefixCls}-single`]: !multiple,
       })
     })
 
