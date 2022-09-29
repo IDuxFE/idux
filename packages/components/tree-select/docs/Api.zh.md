@@ -13,10 +13,9 @@
 | `v-model:open` | 下拉菜单是否展开 | `boolean` | - | - | - |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `autocomplete` | 设置选择器的 `autocomplete` | `string` | `off` | - | - |
-| `cascade` | 是否开启级联功能 | `boolean` | `false` | - | 仅在 `multiple` 和 `checkable` 为 `true` 时生效 |
+| `cascaderStrategy` | 设置级联策略 | `'all' \| 'parent' \| 'child'` | `'off'` | `'off'` | 仅在 `multiple` 和 `checkable` 为 `true` 时生效, 具体用法参见 [级联策略](#components-tree-select-demo-CascaderStrategy) |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | 仅在 `multiple` 为 `true` 时生效 |
 | `childrenKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`children`字段 | `string` | `children` | ✅ | - |
-| `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | - | - |
 | `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `customAdditional` | 自定义下拉菜单的节点的额外属性 | `TreeSelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |

@@ -78,7 +78,7 @@ export type ProTransferTreeProps = Pick<
   | 'onExpand'
   | 'onExpandedChange'
 > & {
-  cascaderStrategy: TreeProps['checkStrategy']
+  cascaderStrategy: CascaderStrategy
 }
 ```
 

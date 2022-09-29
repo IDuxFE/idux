@@ -91,11 +91,10 @@ export default defineComponent({
 
         autoHeight: true,
         blocked: true,
-        cascade: true,
         childrenKey: props.childrenKey,
         checkable: props.checkable,
         checkOnClick: props.checkOnClick,
-        checkStrategy: props.cascaderStrategy,
+        cascaderStrategy: props.cascaderStrategy,
         customAdditional: props.customAdditional,
         dataSource: props.dataSource,
         disabled: props.disabled,

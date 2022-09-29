@@ -12,10 +12,9 @@
 | `v-model:selectedKeys` | 选中节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `autoHeight` | 是否自适应高度 | `boolean` | `false` | ✅ | - |
 | `blocked` | 节点整行撑开 | `boolean` | `false` | ✅ | - |
-| `cascade` | 是否开启级联功能 | `boolean` | `false` | - | - |
+| `cascaderStrategy` | 设置级联策略 | `'all' \| 'parent' \| 'child'` | `'off'` | `off` | 具体用法参见 [级联策略](#components-tree-demo-CascaderStrategy) |
 | `checkable` | 是否显示选择框 | `boolean` | `false` | - | - |
 | `checkOnClick` | 是否允许点击节点进行勾选 | `boolean` | `false` | - | 仅在`checkable`为`true`时生效 |
-| `checkStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `childrenKey` | 替代[TreeNode](#TreeNode)中的`children`字段 | `string` | `children` | ✅ | - |
 | `customAdditional` | 自定义节点的额外属性 | `TreeCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[TreeNode](#TreeNode) | `TreeNode[]` | `[]` | - | - |
