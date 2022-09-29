@@ -46,6 +46,13 @@ export default defineComponent({
       })
     })
 
+    const handleLinkClick = (evt: MouseEvent) => {
+      if (props.disabled || props.loading) {
+        evt.preventDefault()
+        evt.stopImmediatePropagation()
+      }
+    }
+
     return () => {
       const { disabled, loading, icon, type } = props
 
@@ -62,7 +69,11 @@ export default defineComponent({
       }
 
       if (mode.value === 'link') {
-        return <a class={classes.value}>{children}</a>
+        return (
+          <a class={classes.value} onClick={handleLinkClick}>
+            {children}
+          </a>
+        )
       }
       return (
         <button class={classes.value} disabled={disabled || loading} type={type}>

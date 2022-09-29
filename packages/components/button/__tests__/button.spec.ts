@@ -62,6 +62,20 @@ describe('Button', () => {
     expect(wrapper.classes()).toContain('ix-button-disabled')
   })
 
+  test('disabled with link mode work', async () => {
+    const onClick = vi.fn()
+    const wrapper = ButtonMount({ props: { mode: 'link', disabled: true, onClick } })
+
+    await wrapper.trigger('click')
+
+    expect(onClick).not.toBeCalled()
+
+    await wrapper.setProps({ disabled: false })
+    await wrapper.trigger('click')
+
+    expect(onClick).toBeCalled()
+  })
+
   test('loading work', async () => {
     const wrapper = ButtonMount({ props: { icon: 'up', loading: true } })
 
