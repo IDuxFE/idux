@@ -50,6 +50,7 @@ export default defineComponent({
       flattedData,
       isSticky,
       mergedSticky,
+      virtualScrollRef,
       scrollBodyRef,
       scrollContentRef,
       handleScroll,
@@ -184,7 +185,7 @@ export default defineComponent({
 
           children.push(
             <CdkVirtualScroll
-              ref={scrollBodyRef}
+              ref={virtualScrollRef}
               style={contentStyle.value}
               dataSource={flattedData.value}
               fullHeight={scroll?.fullHeight}

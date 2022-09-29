@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, onBeforeUnmount, ref } from 'vue'
+import { type ComputedRef, type Ref, computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
-import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize } from '@idux/cdk/scroll'
+import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize, scrollToTop } from '@idux/cdk/scroll'
 import { Logger, convertCssPixel, convertElement } from '@idux/cdk/utils'
 
 import { type TableProps } from '../types'
@@ -19,8 +19,25 @@ export function useScroll(
   mergedAutoHeight: ComputedRef<boolean>,
   { setStickyScrollLeft }: StickyContext,
 ): ScrollContext {
-  const { scrollHeadRef, scrollBodyRef, scrollContentRef, scrollFootRef, handleScroll, pingedStart, pingedEnd } =
-    useScrollRef(setStickyScrollLeft)
+  const virtualScrollRef = ref<VirtualScrollInstance | undefined>()
+  const scrollHeadRef = ref<HTMLDivElement>()
+  const scrollBodyRef = ref<HTMLDivElement>()
+  const scrollContentRef = ref<HTMLDivElement>()
+  const scrollFootRef = ref<HTMLDivElement>()
+
+  watch(virtualScrollRef, instance => {
+    if (instance) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      scrollBodyRef.value = (instance as any).holderRef.value
+    }
+  })
+
+  const { handleScroll, pingedStart, pingedEnd } = useScrollRef(
+    scrollHeadRef,
+    scrollBodyRef,
+    scrollFootRef,
+    setStickyScrollLeft,
+  )
 
   __DEV__ &&
     props.scroll?.x &&
@@ -30,33 +47,34 @@ export function useScroll(
     props.scroll?.y &&
     Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
 
-  const scrollWithAutoHeight = ref(mergedAutoHeight.value)
-  const calcScrollWithAutoHeight = () => {
-    const bodyEl = convertElement(scrollBodyRef.value)
-    if (!mergedAutoHeight.value || !bodyEl) {
-      scrollWithAutoHeight.value = false
-    } else {
-      scrollWithAutoHeight.value = props.virtual || bodyEl.scrollHeight > bodyEl.clientHeight
-    }
-  }
-  useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight)
-  useResizeObserver(scrollContentRef, calcScrollWithAutoHeight)
-
+  const scrollWithAutoHeight = useScrollWithAutoHeight(props, mergedAutoHeight, scrollBodyRef, scrollContentRef)
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
-  const scrollHeight = computed(
-    () => convertCssPixel(props.scroll?.height || props.scroll?.y) || (scrollWithAutoHeight.value ? 'auto' : ''),
-  )
+  const scrollHeight = computed(() => {
+    let height = convertCssPixel(props.scroll?.height || props.scroll?.y)
+    if (!height && mergedAutoHeight.value && (props.virtual || scrollWithAutoHeight.value)) {
+      height = 'auto'
+    }
+    return height
+  })
 
   const scrollBarSize = computed(() => getScrollBarSize(convertElement(scrollBodyRef)))
   const scrollBarSizeOnFixedHolder = computed(() => (scrollHeight.value ? scrollBarSize.value : 0))
 
   const scrollTo: VirtualScrollToFn = options => {
     if (props.virtual) {
-      return (scrollBodyRef.value as unknown as VirtualScrollInstance)?.scrollTo(options)
+      virtualScrollRef.value?.scrollTo(options)
+    } else {
+      if (typeof options === 'number') {
+        scrollToTop({ target: convertElement(scrollBodyRef), top: options, duration: 200 })
+      } else {
+        __DEV__ &&
+          Logger.warn('components/table', 'the scrollTo argument must be a number, when virtual is not enabled.')
+      }
     }
   }
 
   return {
+    virtualScrollRef,
     scrollHeadRef,
     scrollBodyRef,
     scrollContentRef,
@@ -73,9 +91,10 @@ export function useScroll(
 }
 
 export interface ScrollContext {
+  virtualScrollRef: Ref<VirtualScrollInstance | undefined>
   scrollHeadRef: Ref<HTMLDivElement | undefined>
   scrollBodyRef: Ref<HTMLDivElement | undefined>
-  scrollContentRef: Ref<HTMLTableElement | undefined>
+  scrollContentRef: Ref<HTMLDivElement | undefined>
   scrollFootRef: Ref<HTMLDivElement | undefined>
   handleScroll: (evt?: Event, scrollLeft?: number) => void
   scrollTo: VirtualScrollToFn
@@ -92,25 +111,14 @@ export interface ScrollOptions {
   scrollLeft?: number
 }
 
-function useScrollRef(setStickyScrollLeft: (value: number) => void) {
-  const scrollHeadRef = ref<HTMLDivElement>()
-  const scrollBodyRef = ref<HTMLDivElement>()
-  const scrollContentRef = ref<HTMLTableElement>()
-  const scrollFootRef = ref<HTMLDivElement>()
-
-  const changeStickyScrollLeft = (scrollLeft: number) => {
-    const scrollBodyElement = convertElement(scrollBodyRef)
-    if (!scrollBodyElement) {
-      return
-    }
-    const { clientWidth, scrollWidth } = scrollBodyElement
-    setStickyScrollLeft((scrollLeft / scrollWidth) * clientWidth || 0)
-  }
-
+function useScrollRef(
+  scrollHeadRef: Ref<HTMLDivElement | undefined>,
+  scrollBodyRef: Ref<HTMLDivElement | undefined>,
+  scrollFootRef: Ref<HTMLDivElement | undefined>,
+  setStickyScrollLeft: (value: number) => void,
+) {
   const pingedStart = ref(false)
   const pingedEnd = ref(false)
-
-  const lockedScrollTargetRef = ref<HTMLElement>()
 
   let timeout: number | undefined
 
@@ -120,6 +128,10 @@ function useScrollRef(setStickyScrollLeft: (value: number) => void) {
       timeout = undefined
     }
   }
+
+  onBeforeUnmount(() => clearTimer())
+
+  const lockedScrollTargetRef = ref<HTMLElement>()
 
   const lockScrollTarget = (target: HTMLElement | undefined) => {
     lockedScrollTargetRef.value = target
@@ -131,8 +143,6 @@ function useScrollRef(setStickyScrollLeft: (value: number) => void) {
     }, 100)
   }
 
-  onBeforeUnmount(() => clearTimer())
-
   const forceScroll = (scrollLeft: number, target: HTMLElement | undefined) => {
     if (!target) {
       return
@@ -140,6 +150,15 @@ function useScrollRef(setStickyScrollLeft: (value: number) => void) {
     if (target.scrollLeft !== scrollLeft) {
       target.scrollLeft = scrollLeft
     }
+  }
+
+  const changeStickyScrollLeft = (scrollLeft: number) => {
+    const scrollBodyElement = convertElement(scrollBodyRef)
+    if (!scrollBodyElement) {
+      return
+    }
+    const { clientWidth, scrollWidth } = scrollBodyElement
+    setStickyScrollLeft((scrollLeft / scrollWidth) * clientWidth || 0)
   }
 
   const handleScroll = (evt?: Event, scrollLeft?: number) => {
@@ -162,13 +181,47 @@ function useScrollRef(setStickyScrollLeft: (value: number) => void) {
     }
   }
 
-  return {
-    scrollHeadRef,
-    scrollBodyRef,
-    scrollContentRef,
-    scrollFootRef,
-    handleScroll,
-    pingedStart,
-    pingedEnd,
+  return { handleScroll, pingedStart, pingedEnd }
+}
+
+// 针对非虚拟滚动场景，需要判断 scrollHeight 和 clientHeight
+function useScrollWithAutoHeight(
+  props: TableProps,
+  mergedAutoHeight: ComputedRef<boolean>,
+  scrollBodyRef: Ref<HTMLDivElement | undefined>,
+  scrollContentRef: Ref<HTMLDivElement | undefined>,
+) {
+  const scrollWithAutoHeight = ref(true)
+
+  const calcScrollWithAutoHeight = () => {
+    const bodyEl = convertElement(scrollBodyRef.value)
+    if (!bodyEl) {
+      scrollWithAutoHeight.value = false
+    } else {
+      scrollWithAutoHeight.value = bodyEl.scrollHeight > bodyEl.clientHeight
+    }
   }
+
+  let stopResizeObservers: Array<() => void> = []
+  const stopHandler = () => stopResizeObservers.forEach(stop => stop())
+
+  onMounted(() => {
+    watch(
+      [mergedAutoHeight, () => props.virtual],
+      ([autoHeight, virtual]) => {
+        stopHandler()
+        if (autoHeight && !virtual) {
+          stopResizeObservers = [
+            useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight).stop,
+            useResizeObserver(scrollContentRef, calcScrollWithAutoHeight).stop,
+          ]
+        }
+      },
+      { immediate: true },
+    )
+  })
+
+  onBeforeUnmount(() => stopHandler())
+
+  return scrollWithAutoHeight
 }

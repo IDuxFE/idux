@@ -70,7 +70,7 @@ export default defineComponent({
     })
 
     const scrollTo = useScrollTo(props, holderRef, getKey, heights, collectHeights, syncScrollTop)
-    expose({ scrollTo })
+    expose({ scrollTo, holderRef })
 
     const mergedData = computed(() => props.dataSource.slice(startIndex.value, endIndex.value + 1))
     watch(mergedData, data => callEmit(props.onScrolledChange, startIndex.value, endIndex.value, data))

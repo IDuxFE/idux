@@ -179,7 +179,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
+| `scrollTo` | 滚动到指定高度或位置 | `(option?: number \| VirtualScrollToOptions) => void` | `VirtualScrollToOptions` 参数仅 `virtual` 模式下可用 |
 
 ### IxTableColumn
 

@@ -10,6 +10,7 @@ import { type CSSProperties, computed, defineComponent, inject, onBeforeUnmount,
 import { isString, throttle } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
+import { convertCssPixel } from '@idux/cdk/utils'
 
 import { virtualScrollToken } from '../token'
 
@@ -28,7 +29,7 @@ export default defineComponent({
 
     const style = computed<CSSProperties | undefined>(() => {
       const { height, fullHeight } = props
-      if (!height) {
+      if (!height || height <= 0) {
         return undefined
       }
 
@@ -36,13 +37,7 @@ export default defineComponent({
         return { height }
       }
 
-      /* eslint-disable indent */
-      return height <= 0
-        ? undefined
-        : {
-            [fullHeight ? 'height' : 'maxHeight']: height + 'px',
-          }
-      /* eslint-enable indent */
+      return { [fullHeight ? 'height' : 'maxHeight']: convertCssPixel(height) }
     })
 
     const fillerStyle = computed<CSSProperties | undefined>(() => {
