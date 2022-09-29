@@ -5,13 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ɵInputInstance } from '@idux/components/_private/input'
-
 import { computed, defineComponent, normalizeClass, onMounted, ref } from 'vue'
 
-import { ɵInput } from '@idux/components/_private/input'
+import { ɵInput, type ɵInputInstance } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
-import { useFormFocusMonitor, useFormSize } from '@idux/components/form'
+import { useFormFocusMonitor } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import { inputNumberProps } from './types'
@@ -24,6 +22,8 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('inputNumber')
     const {
+      mergedSize,
+      mergedStatus,
       displayValue,
       nowValue,
       isIllegal,
@@ -42,7 +42,6 @@ export default defineComponent({
     expose({ focus, blur })
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-input-number`)
-    const mergedSize = useFormSize(props, config)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -103,6 +102,7 @@ export default defineComponent({
           readonly={props.readonly}
           placeholder={props.placeholder}
           size={mergedSize.value}
+          status={mergedStatus.value}
           value={displayValue.value}
           onInput={handleInput}
           onKeydown={handleKeyDown}

@@ -60,7 +60,7 @@ export const checkboxGroupProps = {
    * @deprecated please use `dataSource` instead'
    */
   options: { type: Array as PropType<CheckboxData[]> },
-  size: { type: String as PropType<FormSize>, default: 'md' },
+  size: { type: String as PropType<FormSize>, default: undefined },
   vertical: { type: Boolean, default: false },
 
   // events

@@ -5,17 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { InputNumberProps } from './types'
-import type { InputNumberConfig } from '@idux/components/config'
-import type { ComputedRef, Ref } from 'vue'
+import { type ComputedRef, type Ref, computed, nextTick, ref, toRaw, watch } from 'vue'
 
-import { computed, nextTick, ref, toRaw, watch } from 'vue'
-
-import { useAccessorAndControl } from '@idux/cdk/forms'
+import { type ValidateStatus, useAccessorAndControl } from '@idux/cdk/forms'
 import { Logger, callEmit } from '@idux/cdk/utils'
-import { useFormItemRegister } from '@idux/components/form'
+import { type InputNumberConfig } from '@idux/components/config'
+import { type FormSize, useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
+
+import { type InputNumberProps } from './types'
 
 export interface InputNumberBindings {
+  mergedSize: ComputedRef<FormSize | undefined>
+  mergedStatus: ComputedRef<ValidateStatus | undefined>
   displayValue: Ref<string>
   isIllegal: Ref<boolean>
   isDisabled: ComputedRef<boolean>
@@ -35,6 +36,8 @@ export interface InputNumberBindings {
 export function useInputNumber(props: InputNumberProps, config: InputNumberConfig): InputNumberBindings {
   const { accessor, control } = useAccessorAndControl<number | null>()
   useFormItemRegister(control)
+  const mergedSize = useFormSize(props, config)
+  const mergedStatus = useFormStatus(props, control)
 
   const displayValue = ref('')
   const isIllegal = ref(true)
@@ -202,6 +205,8 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   )
 
   return {
+    mergedSize,
+    mergedStatus,
     displayValue,
     isIllegal,
     isDisabled,
