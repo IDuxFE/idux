@@ -19,11 +19,13 @@ export interface ExtraOptions {
 export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOptions): Options {
   const { placement, strategy, onFirstUpdate, modifiers, offset, autoAdjust } = baseOptions
   const { arrowElement, updatePlacement } = extraOptions
+
   return {
     placement: kebabCase(placement) as Placement,
     strategy,
     onFirstUpdate,
     modifiers: [
+      { name: 'hide', enabled: true },
       { name: 'offset', options: { offset } },
       { name: 'flip', enabled: autoAdjust, options: { padding: 4 } },
       { name: 'arrow', enabled: !!arrowElement, options: { element: arrowElement, padding: 4 } },
