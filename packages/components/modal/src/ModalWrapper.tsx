@@ -20,7 +20,7 @@ import {
 
 import { isFunction } from 'lodash-es'
 
-import { useDraggable } from '@idux/cdk/drag-drop'
+import { type DnDBackendType, useDraggable } from '@idux/cdk/drag-drop'
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
@@ -131,7 +131,12 @@ export default defineComponent({
           draggableResult.value = undefined
         }
         if (draggable) {
-          draggableResult.value = useDraggable(contentRef, { handle: headerRef, free: true, boundary: window })
+          draggableResult.value = useDraggable(contentRef, {
+            handle: headerRef,
+            free: true,
+            boundary: window,
+            backend: !props.draggable ? (props.draggable as unknown as DnDBackendType) : 'pointer',
+          })
         }
       },
       { immediate: true },
