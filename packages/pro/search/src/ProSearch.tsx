@@ -100,6 +100,15 @@ export default defineComponent({
     const handleSearchBtnClick = () => {
       callEmit(props.onSearch, searchValues.value)
     }
+    const handleClearBtnClick = () => {
+      clearSearchState()
+    }
+    const handleSearchBtnMouseDown = (evt: MouseEvent) => {
+      evt.preventDefault()
+    }
+    const handleClearBtnMouseDown = (evt: MouseEvent) => {
+      evt.preventDefault()
+    }
 
     provide(proSearchContext, {
       props,
@@ -146,12 +155,20 @@ export default defineComponent({
               )}
             </div>
             {!searchValueEmpty.value && clearable.value && !props.disabled && (
-              <div class={`${prefixCls}-clear-icon`} onClick={clearSearchState}>
+              <div
+                class={`${prefixCls}-clear-icon`}
+                onMousedown={handleClearBtnMouseDown}
+                onClick={handleClearBtnClick}
+              >
                 {renderIcon(clearIcon.value, slots.clearIcon)}
               </div>
             )}
           </div>
-          <div class={`${prefixCls}-search-button`} onClick={handleSearchBtnClick}>
+          <div
+            class={`${prefixCls}-search-button`}
+            onMousedown={handleSearchBtnMouseDown}
+            onClick={handleSearchBtnClick}
+          >
             {renderIcon(searchIcon.value, slots.searchIcon)}
           </div>
         </div>
