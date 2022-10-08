@@ -12,7 +12,13 @@ import { isObject } from 'lodash-es'
 
 import { Logger, addClass, removeClass } from '@idux/cdk/utils'
 
+/**
+ * @deprecated
+ */
 const typography: FunctionDirective<HTMLElement, TypographyProps> = (el, binding) => {
+  if (__DEV__) {
+    Logger.warn('components/typography', 'the `typography` was deprecated.')
+  }
   const className: string[] = ['ix-typography']
   const { value, oldValue } = binding
 

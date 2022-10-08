@@ -33,11 +33,6 @@ export default defineComponent({
         vertical,
       } = props
 
-      __DEV__ &&
-        position &&
-        Logger.warn('components/divider', '`position` was deprecated, please use `labelPlacement` instead')
-      __DEV__ && type && Logger.warn('components/divider', '`type` was deprecated, please use `vertical` instead')
-
       const withLabel = !!label || !!slots.default
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -51,6 +46,12 @@ export default defineComponent({
         [`${prefixCls}-with-label-${position || labelPlacement}`]: withLabel,
       })
     })
+
+    if (__DEV__) {
+      props.position &&
+        Logger.warn('components/divider', 'the `position` was deprecated, please use `labelPlacement` instead.')
+      props.type && Logger.warn('components/divider', 'the `type` was deprecated, please use `vertical` instead.')
+    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value

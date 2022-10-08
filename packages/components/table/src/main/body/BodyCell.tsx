@@ -9,7 +9,7 @@ import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponen
 
 import { isFunction, isNil, isString } from 'lodash-es'
 
-import { Logger, convertArray, convertCssPixel } from '@idux/cdk/utils'
+import { convertArray, convertCssPixel } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
 import { IxRadio } from '@idux/components/radio'
@@ -160,9 +160,6 @@ function useDataValue(props: TableBodyCellProps) {
 function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) {
   const { record, rowIndex, column } = props
   const { customRender, customCell } = column
-  if (__DEV__ && customRender) {
-    Logger.warn('components/table', '`customRender` was deprecated, please use `customCell` instead')
-  }
 
   const cellRender = customRender ?? customCell
   if (isFunction(cellRender)) {

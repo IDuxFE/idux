@@ -23,7 +23,7 @@ import {
 
 import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
 
-import { hasOwnProperty } from '@idux/cdk/utils'
+import { Logger, hasOwnProperty } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
@@ -196,6 +196,12 @@ export abstract class AbstractControl<T = any> {
     this._forEachControls(control => control.setParent(this))
     this._convertOptions(validatorOrOptions, asyncValidator)
     this._init()
+
+    if (__DEV__) {
+      if (isOptions(validatorOrOptions) && validatorOrOptions.trim) {
+        Logger.warn('cdk/forms', 'the `trim` of validatorOptions was deprecated.')
+      }
+    }
   }
 
   /**
@@ -335,6 +341,9 @@ export abstract class AbstractControl<T = any> {
    * @deprecated please use `setValidators` instead.
    */
   setValidator(newValidator?: ValidatorFn | ValidatorFn[]): void {
+    if (__DEV__) {
+      Logger.warn('cdk/forms', 'the `setValidator` was deprecated, please use `setValidators` instead.')
+    }
     this.setValidators(newValidator)
   }
 
@@ -352,6 +361,9 @@ export abstract class AbstractControl<T = any> {
    * @deprecated please use `setAsyncValidators` instead.
    */
   setAsyncValidator(newAsyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): void {
+    if (__DEV__) {
+      Logger.warn('cdk/forms', 'the `setAsyncValidator` was deprecated, please use `setAsyncValidators` instead.')
+    }
     this.setAsyncValidators(newAsyncValidator)
   }
 

@@ -25,6 +25,7 @@ import {
   useValueAccessor,
   useValueControl,
 } from '@idux/cdk/forms'
+import { Logger } from '@idux/cdk/utils'
 import { useKey } from '@idux/components/utils'
 
 import { FORM_ITEM_TOKEN, FORM_TOKEN } from '../token'
@@ -45,6 +46,12 @@ export function useFormItemRegister(control: ShallowRef<AbstractControl | undefi
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useFormAccessor<T = any>(valueKey?: string): ValueAccessor<T> {
+  if (__DEV__) {
+    Logger.warn(
+      'components/form',
+      'the `useFormAccessor` was deprecated, please use `useAccessorAndControl` + `useFormItemRegister` instead.',
+    )
+  }
   const control = useValueControl()
   const accessor = useValueAccessor({ control, valueKey })
 

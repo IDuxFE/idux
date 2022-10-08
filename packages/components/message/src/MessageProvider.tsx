@@ -5,20 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MessageOptions, MessageRef } from './types'
-import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, VNode } from 'vue'
-
-import { TransitionGroup, computed, defineComponent, provide, ref } from 'vue'
+import { type ComputedRef, TransitionGroup, type VNode, computed, defineComponent, provide, ref } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
+import { Logger, VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
 import Message from './Message'
 import { messageProviderToken } from './token'
-import { messageProviderProps } from './types'
+import { type MessageOptions, type MessageRef, messageProviderProps } from './types'
 
 export default defineComponent({
   name: 'IxMessageProvider',
@@ -39,6 +35,12 @@ export default defineComponent({
 
     provide(messageProviderToken, apis)
     expose(apis)
+
+    if (__DEV__) {
+      if (props.target) {
+        Logger.warn('components/message', 'the `target` was deprecated, please use `container` instead.')
+      }
+    }
 
     return () => {
       const child = messages.value.map(item => {

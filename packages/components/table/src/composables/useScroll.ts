@@ -39,14 +39,6 @@ export function useScroll(
     setStickyScrollLeft,
   )
 
-  __DEV__ &&
-    props.scroll?.x &&
-    Logger.warn('components/table', '`scroll.x` was deprecated, please use `scroll.width` instead')
-
-  __DEV__ &&
-    props.scroll?.y &&
-    Logger.warn('components/table', '`scroll.y` was deprecated, please use `scroll.height` instead')
-
   const scrollWithAutoHeight = useScrollWithAutoHeight(props, mergedAutoHeight, scrollBodyRef, scrollContentRef)
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
   const scrollHeight = computed(() => {

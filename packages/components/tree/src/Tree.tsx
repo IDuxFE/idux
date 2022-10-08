@@ -171,8 +171,17 @@ export default defineComponent({
       props.cascade &&
         Logger.warn(
           'components/tree',
-          '`cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
+          'the `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
         )
+      if (props.nodeKey) {
+        Logger.warn('components/tree', 'the `nodeKey` are deprecated, please use `getKey` instead.')
+      }
+      if (props.dataSource?.some(data => data.additional)) {
+        Logger.warn(
+          'components/tree',
+          'the `additional` of TreeNode was deprecated, please use `customAdditional` instead.',
+        )
+      }
     }
 
     return () => {

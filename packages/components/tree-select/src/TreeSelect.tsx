@@ -181,9 +181,24 @@ export default defineComponent({
     if (__DEV__) {
       props.cascade &&
         Logger.warn(
-          'components/tree',
-          '`cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
+          'components/tree-select',
+          'the `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
         )
+      if (props.maxLabelCount) {
+        Logger.warn('components/tree-select', 'the `maxLabelCount` are deprecated, please use `maxLabel` instead.')
+      }
+      if (props.nodeKey) {
+        Logger.warn('components/tree-select', 'the `nodeKey` are deprecated, please use `getKey` instead.')
+      }
+      if (props.target) {
+        Logger.warn('components/tree-select', 'the `target` are deprecated, please use `overlayContainer` instead.')
+      }
+      if (props.dataSource?.some(data => data.additional)) {
+        Logger.warn(
+          'components/tree-select',
+          'the `additional` of TreeNode was deprecated, please use `customAdditional` instead.',
+        )
+      }
     }
 
     return () => {

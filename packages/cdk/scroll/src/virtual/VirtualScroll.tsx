@@ -7,7 +7,7 @@
 
 import { type ComponentPublicInstance, computed, defineComponent, provide, ref, watch } from 'vue'
 
-import { callEmit, useState } from '@idux/cdk/utils'
+import { Logger, callEmit, useState } from '@idux/cdk/utils'
 
 import { useContainerHeight } from './composables/useContainerHeight'
 import { useGetKey } from './composables/useGetKey'
@@ -75,6 +75,11 @@ export default defineComponent({
     const mergedData = computed(() => props.dataSource.slice(startIndex.value, endIndex.value + 1))
     watch(mergedData, data => callEmit(props.onScrolledChange, startIndex.value, endIndex.value, data))
 
+    if (__DEV__) {
+      if (props.itemKey) {
+        Logger.warn('cdk/scroll', 'the `itemKey` of VirtualScrollProps was deprecated, please use `getKey` instead.')
+      }
+    }
     return () => {
       const getKeyFn = getKey.value
       const start = startIndex.value
