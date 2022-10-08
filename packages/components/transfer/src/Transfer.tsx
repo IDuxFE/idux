@@ -32,10 +32,10 @@ export default defineComponent({
 
     const showSelectAll = computed(() => props.showSelectAll ?? config.showSelectAll)
     const { source: sourceSearchable, target: targetSearchable } = useSearchable(props, config)
-    const transferDataStrategies = useTransferDataStrategies(props.defaultTargetData)
+    const transferDataStrategies = useTransferDataStrategies(props)
     const transferPaginationContext = usePagination(props)
     const transferDataContext = useTransferData(props, config, transferDataStrategies, transferPaginationContext)
-    const transferSelectStateContext = useTransferSelectState(props, transferDataContext)
+    const transferSelectStateContext = useTransferSelectState(props, transferDataContext, transferDataStrategies)
     const transferOperationsContext = useTransferOperations(props, transferDataContext, transferSelectStateContext)
 
     const { sourceBindings, targetBindings } = useTransferBindings(

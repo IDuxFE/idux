@@ -258,7 +258,7 @@ describe('ProTransfer', () => {
         .map(tr => tr.find('.ix-pro-transfer-table-content-close-icon').trigger('click')),
     )
 
-    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(2)
+    expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(1)
   })
 
   test('tree immediate work', async () => {

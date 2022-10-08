@@ -7,24 +7,26 @@
 
 import type { TransferTreeLoadChildren } from './composables/useTransferData'
 import type { TreeExpandedKeysContext } from './composables/useTreeExpandedKeys'
-import type { ProTransferProps } from './types'
-import type { VKey } from '@idux/cdk/utils'
-import type { TableInstance } from '@idux/components/table'
-import type { TransferListInstance } from '@idux/components/transfer'
-import type { TreeInstance } from '@idux/components/tree'
+import type { ProTransferProps, TransferContentInstance } from './types'
+import type { CascaderStrategy } from '@idux/components/cascader'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface ProTransferContext {
   props: ProTransferProps
   slots: Slots
   mergedPrefixCls: ComputedRef<string>
+  getKey: ComputedRef<GetKeyFn>
+  sourceContentRef: Ref<TransferContentInstance | undefined>
+  targetContentRef: Ref<TransferContentInstance | undefined>
+}
+export interface TreeTransferContext {
+  cascaderStrategy: ComputedRef<CascaderStrategy>
   childrenKey: ComputedRef<string>
-  loadSourceChildren?: TransferTreeLoadChildren
-  loadTargetChildren?: TransferTreeLoadChildren
-  expandedKeysContext?: TreeExpandedKeysContext
-  parentKeyMap?: Map<VKey, VKey | undefined>
-  sourceContentRef: Ref<TransferListInstance | TableInstance | TreeInstance | undefined>
-  targetContentRef: Ref<TransferListInstance | TableInstance | TreeInstance | undefined>
+  loadSourceChildren: TransferTreeLoadChildren
+  loadTargetChildren: TransferTreeLoadChildren
+  expandedKeysContext: TreeExpandedKeysContext
 }
 
 export const proTransferContext: InjectionKey<ProTransferContext> = Symbol('proTransferContext')
+export const treeTransferContext: InjectionKey<TreeTransferContext> = Symbol('treeTransferContext')

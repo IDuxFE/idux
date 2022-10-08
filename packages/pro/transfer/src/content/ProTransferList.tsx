@@ -7,13 +7,12 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { type VKey, callEmit } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { IxTransferList, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
 
 import { proTransferContext } from '../token'
 import { type TreeTransferData, proTransferListContentProps } from '../types'
-import { flattenTree } from '../utils'
 
 export default defineComponent({
   props: proTransferListContentProps,
@@ -22,7 +21,6 @@ export default defineComponent({
       props: proTransferProps,
       slots,
       mergedPrefixCls,
-      childrenKey,
       sourceContentRef,
       targetContentRef,
     } = inject(proTransferContext)!
@@ -59,14 +57,9 @@ export default defineComponent({
       callEmit(proTransferProps.onScrolledChange, props.isSource, startIndex, endIndex, visibleData)
     }
 
-    const dataSource = computed(() => {
-      const data =
-        props.isSource && proTransferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value
-
-      return proTransferProps.type === 'tree'
-        ? flattenTree(data as TreeTransferData<VKey>[], childrenKey.value, true)
-        : data
-    })
+    const dataSource = computed(() =>
+      props.isSource && proTransferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
+    )
 
     return () => {
       if (!dataSource.value || dataSource.value.length <= 0) {

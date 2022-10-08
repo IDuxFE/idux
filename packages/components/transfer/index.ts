@@ -27,15 +27,10 @@ export type {
   TransferData,
   TransferPaginationProps,
   TransferBindings,
-  TransferDataStrategiesConfig,
+  TransferDataStrategyProp,
   TransferMode,
   TransferScroll,
   SearchFn,
 } from './src/types'
 
-export {
-  TRANSFER_DATA_STRATEGIES,
-  TRANSFER_SOURCE_TOKEN,
-  TRANSFER_TARGET_TOKEN,
-  TRANSFER_OPERATIONS_TOKEN,
-} from './src/token'
+export { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, TRANSFER_OPERATIONS_TOKEN } from './src/token'

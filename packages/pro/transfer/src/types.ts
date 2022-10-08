@@ -48,6 +48,10 @@ export type ProTransferTreeProps = Pick<
   cascaderStrategy: CascaderStrategy
 }
 
+export interface TransferContentInstance {
+  scrollTo?: VirtualScrollToFn
+}
+
 export const proTransferProps = {
   type: {
     type: String as PropType<ProTransferTypes>,
@@ -93,7 +97,7 @@ export const proTransferProps = {
 
   defaultTargetData: Array as PropType<TransferData[]>,
   flatTargetData: {
-    type: Boolean as PropType<boolean>,
+    type: Boolean as PropType<boolean | 'all'>,
     default: false,
   },
   sourceExpandedKeys: Array as PropType<VKey[]>,
