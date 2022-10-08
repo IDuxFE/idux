@@ -25,6 +25,9 @@ export class DnDState {
 
   start(evt: DnDEventType): void {
     const event = this.wrapperEvent(evt)
+    if (!event) {
+      return
+    }
 
     this.prevPos = {
       x: event.pageX || event.clientX,
@@ -42,6 +45,10 @@ export class DnDState {
     }
 
     const event = this.wrapperEvent(evt)
+    if (!event) {
+      return
+    }
+
     const cursorPos = {
       x: event.pageX || event.clientX,
       y: event.pageY || event.clientY,

@@ -39,7 +39,7 @@ export const withDragHandle = (source: MaybeElementRef, handle: MaybeElementRef,
 
     registry.on(sourceEl, 'dragstart', e => preventNotHandle(dragTarget!, e))
   } else {
-    registry.on(sourceEl, 'mousemove', e => preventNotHandle(e.target as HTMLElement, e))
-    registry.on(sourceEl, 'touchmove', e => preventNotHandle(e.target as HTMLElement, e))
+    registry.on(sourceEl, 'mousedown', e => preventNotHandle(e.target as HTMLElement, e))
+    registry.on(sourceEl, 'touchstart', e => preventNotHandle(e.target as HTMLElement, e))
   }
 }
