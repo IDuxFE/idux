@@ -71,7 +71,7 @@ export default defineComponent({
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-filterable`]: !!filterable,
         [`${prefixCls}-cell-sortable`]: !!sortable,
-        [`${prefixCls}-cell-align-center`]: hasChildren,
+        [`${prefixCls}-cell-align-center`]: hasChildren || align === 'center',
         [`${prefixCls}-cell-align-end`]: !hasChildren && align === 'end',
         [`${prefixCls}-cell-ellipsis`]: !!ellipsis,
       }
